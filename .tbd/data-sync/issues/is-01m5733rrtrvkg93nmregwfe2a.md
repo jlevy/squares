@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: s(n) < ⌈√n⌉ at 18 counts from n = 509 to 156
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: lane-new
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:34.680Z
-updated_at: 2026-10-20T01:12:25.531Z
+updated_at: 2026-10-21T08:43:35.947Z
 started_at: 2026-10-18T13:04:20.646Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/666
@@ -44,3 +44,5 @@ Your report of 17 October 2026 covers nineteen rational packing certificates bey
 Stage 2 still needs a bounded source-custody plan for the factual inputs and digest-only material, plus comparison with earlier reports and classical constructions. Stage 3 registration remains pending. This intake has not replayed these certificates.
 
 2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).
+
+2026-10-21 c-lane-686-fix (coordinator session_014ZKp7R): issue 686 (think-9vjn, PR #711) reports below #666 at 9 of its counts, 464, 603, 654, 706, 760, 817, 875, 935, 998, as the 20 October ledger (packing/campaign/issue-intake/upper-bounds-20261020/) records. Once #711 merges, this import's rows at those counts enter already superseded, in a chain that ends at muglich-issue686-2026-10-19; #686's notes in result-requests.yaml name this bead (review A4 of #711).

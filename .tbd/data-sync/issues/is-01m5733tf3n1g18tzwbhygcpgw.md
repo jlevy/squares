@@ -5,7 +5,7 @@ title: "Import franciscouzo: 204-993: registration request (#670)"
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: lane-new
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.418Z
-updated_at: 2026-10-19T20:54:22.338Z
+updated_at: 2026-10-21T08:43:36.895Z
 started_at: 2026-10-18T13:04:20.664Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/670
@@ -42,3 +42,5 @@ Your report of 17 October 2026 lists 73 improved upper bounds at 204 to 993 from
 The source-level inventory is recorded. Stage 2 still needs bounded custody of the exact issue-linked inputs and a suitable data carrier; root and best-directory certificates cannot be substituted by count alone. Stage 3 also needs the report-order and classical-construction comparisons, preserving source, seed and deletion credits. No certificate replay or registration is claimed by this inventory.
 
 2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).
+
+2026-10-21 c-lane-686-fix (coordinator session_014ZKp7R): issue 686 (think-9vjn, PR #711) reports below #670 at 47 of its counts, 330, 339, 378-379, 417-419, 421-422, 459-463, 503, 505, 548, 551, 553, 598, 600, 647, 650-651, 700-703, 756-758, 811-813, 868-871, 927-930, 989-993, as the 20 October ledger (packing/campaign/issue-intake/upper-bounds-20261020/) records. Once #711 merges, this import's rows at those counts enter already superseded, in a chain that ends at muglich-issue686-2026-10-19; #686's notes in result-requests.yaml name this bead (review A4 of #711).

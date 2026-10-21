@@ -5,7 +5,7 @@ title: "Import franciscouzo: 227, 229, 330-996: registration request (#672)"
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: lane-new
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.866Z
-updated_at: 2026-10-19T20:54:27.120Z
+updated_at: 2026-10-21T08:43:37.862Z
 started_at: 2026-10-18T12:53:37.251Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/672
@@ -156,3 +156,5 @@ Bounded follow-up, owned by this bead and the existing intake lanes:
 Evidence commands: `gh issue view 670|672|675 --repo jlevy/squares --json body,comments`; read-only `gh api repos/franciscouzo/square-packing/contents/<source-or-metadata>?ref=<pin>` for the files above; `gh api repos/franciscouzo/square-packing/git/trees/<pin>?recursive=1` for selected Git blob/size metadata; historical jlevy verifier contents at its fixed commit. All successful metadata reads and arithmetic checks above completed without source execution. Tests run: none, by the read-only/no-replay brief. No source-level geometric blocker was found in the centre checker; CM1 blocks transferring existing receipts to 13 tighter root claims, and CM2 limits the first route's standalone evidence.
 
 2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).
+
+2026-10-21 c-lane-686-fix (coordinator session_014ZKp7R): issue 686 (think-9vjn, PR #711) reports below #672 at 33 of its counts, 330, 461, 652, 704, 755-759, 811-817, 868-869, 871-874, 929-930, 932-935, 990-991, 994-996, as the 20 October ledger (packing/campaign/issue-intake/upper-bounds-20261020/) records. Once #711 merges, this import's rows at those counts enter already superseded, in a chain that ends at muglich-issue686-2026-10-19; #686's notes in result-requests.yaml name this bead (review A4 of #711).
