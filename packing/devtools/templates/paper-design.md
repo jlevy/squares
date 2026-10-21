@@ -2840,8 +2840,15 @@ News articles and their homepage previews also use ordinary profile links.
 The colophon’s **Profiles** link and each profile’s breadcrumb navigate back to the
 directory. Each profile has one complete article at `profiles/ID.html`; the directory,
 credited names in tables and records, and the standalone profile use that address.
-A marked public-name credit in a result or case can open the same article in
+A public-name credit in a result or case can open the same article in
 `#pop-contributor`, whose **Open profile** action reaches the complete page.
+`contributor-popover.js` knows a credit by its address, a same-site link to
+`profiles/ID.html` other than the directory, so a credit’s link carries nothing beyond
+its `href`: a marker on each name cost the results table about 16 KB when it was
+measured on 2026-10-20. The directory’s list and the News container each declare their
+names plain with one `data-contributor-plain` attribute.
+The script leaves alone a link inside one, the panel’s own **Open profile** action, a
+link to the page it is on, and a link that downloads or names a target.
 The panel has the standard 36rem ceiling, shared padding, close target, viewport height
 limit, scrim and scrolling of a compact article popover.
 It retains the page opener across case/result/profile replacements.

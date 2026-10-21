@@ -969,7 +969,11 @@ def news_card(anchor: str, day_text: str, body: str) -> str:
 def render_news(
     document: Document, *, limit: int | None = None, entry_ids: set[str] | None = None
 ) -> str:
-    """Complete canonical cards, optionally selected by ID and limited for a preview."""
+    """Complete canonical cards, optionally selected by ID and limited for a preview.
+
+    Their names are plain profile links (`data-contributor-plain`): News navigates to a
+    profile rather than opening it in the profile popover (`paper-design.md`).
+    """
     validate(document)
     if limit is not None and limit < 1:
         raise ValueError("a News preview needs at least one item")
@@ -984,7 +988,7 @@ def render_news(
         news_filters({topic for entry in entries for topic in entry.get("topics", [])})
         if limit is None
         else "",
-        '<div class="site-news sans-text" data-news>',
+        '<div class="site-news sans-text" data-news data-contributor-plain>',
     ]
     seen_dates: set[str] = set()
     for entry in entries:

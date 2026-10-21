@@ -66,8 +66,7 @@ def test_live_manifest_and_literal_result_credits() -> None:
         CreditOrigin("packing/resources/bibliography.yaml", "[Stromquist 2003]", "/authors/0"),
         "Stromquist",
     )
-    assert 'href="profiles/walter-stromquist.html" data-contributor' in stromquist
-    assert ">Stromquist</a>" in stromquist
+    assert '<a href="profiles/walter-stromquist.html">Stromquist</a>' in stromquist
 
 
 @pytest.fixture
@@ -203,7 +202,7 @@ def test_reconcile_requires_review_for_each_new_source_occurrence(
             (),
         )
         assert text_content(render_credit(origin, label, registry=registry)) == label
-        assert "data-contributor" not in render_credit(origin, label, registry=registry)
+        assert "profiles/" not in render_credit(origin, label, registry=registry)
         proposal = next(row for row in report["unresolved"] if row["origin"] == asdict(origin))
         assert proposal["candidate_ids"] == candidate_ids
 
@@ -291,7 +290,7 @@ def test_unknown_and_conflicting_duplicate_credit_remain_plain() -> None:
     resolved = result_credit_html(
         {"attribution": {"source_keys": ["[Stromquist 2003]", "[Stromquist 2003]"]}}, sources
     )
-    assert resolved.count("data-contributor") == 1
+    assert resolved.count('href="profiles/walter-stromquist.html"') == 1
     assert text_content(resolved) == "Stromquist"
 
 
@@ -301,7 +300,7 @@ def test_unresolved_disposition_never_uses_candidate_aliases() -> None:
     unresolved = replace(item, disposition="unresolved", contributor_id=None, evidence=())
     plain_registry = replace(registry, by_origin={item.origin: (unresolved,)})
     output = render_credit(item.origin, item.expected_text, registry=plain_registry)
-    assert "data-contributor" not in output
+    assert "profiles/" not in output
     assert text_content(output) == item.expected_text
 
 

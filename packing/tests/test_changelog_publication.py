@@ -78,7 +78,13 @@ def test_news_links_named_contributors_directly_to_their_profiles(
     for name, identifier in published_profiles:
         assert f'<a href="profiles/{identifier}.html">{html.escape(name)}</a>' in history
     assert "wand125\N{RIGHT SINGLE QUOTATION MARK}s" not in history
-    assert not re.search(r"<a\b[^>]*\bdata-contributor=", history)
+    # The names stay plain links: the News container declares its profile links plain
+    # once, and every one of them lies inside it.
+    plain = history.index('<div class="site-news sans-text" data-news data-contributor-plain>')
+    assert all(
+        history.index(f'<a href="profiles/{identifier}.html">') > plain
+        for _name, identifier in published_profiles
+    )
 
 
 def test_a_yaml_only_history_change_selects_and_deploys_news() -> None:

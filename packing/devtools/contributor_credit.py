@@ -40,7 +40,7 @@ def render_credit(
         if item.disposition == "resolved":
             identifier = html.escape(item.contributor_id or "", quote=True)
             href = html.escape(f"{prefix}{PROFILES_DIR}/{identifier}.html", quote=True)
-            label = f'<a href="{href}" data-contributor="">{label}</a>'
+            label = f'<a href="{href}">{label}</a>'
         pieces.append(label)
         offset = item.end
     pieces.append(html.escape(text[offset:]))

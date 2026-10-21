@@ -436,7 +436,6 @@ def test_contributor_links_resolve_for_each_reader_surface() -> None:
             "Hiroaki Hosono</a>\N{RIGHT SINGLE QUOTATION MARK}s"
         ) in site
         assert repo_url("packing/contributors/README.md") in site
-        assert "data-contributor" not in site
 
 
 def test_contributor_links_retain_the_repository_target_in_details() -> None:

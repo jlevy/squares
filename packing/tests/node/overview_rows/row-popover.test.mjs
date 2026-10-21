@@ -333,6 +333,7 @@ function page(protocol = "https:", scripts = []) {
     body,
     head,
     baseURI: "https://example.test/squares/index.html",
+    URL: "https://example.test/squares/index.html",
     /** @type {StandInElement | null} */
     activeElement: body,
     /**
@@ -416,10 +417,7 @@ function page(protocol = "https:", scripts = []) {
     const target = `pop-${key}`;
     const trigger = new StandInElement("button", { class: "site-row-open", popovertarget: target });
     const link = new StandInElement("a", { href: `records/${key}` });
-    const name = new StandInElement("a", {
-      href: "profiles/hiroaki-hosono.html",
-      "data-contributor": "",
-    });
+    const name = new StandInElement("a", { href: "profiles/hiroaki-hosono.html" });
     const text = new StandInElement("td");
     const attributes = { id: key, "data-row-popover": target, ...more };
     const element = new StandInElement("tr", attributes, [
@@ -497,18 +495,22 @@ function page(protocol = "https:", scripts = []) {
       new StandInElement("div", { "data-contributor-body": "" }),
     ],
   );
-  const heldName = new StandInElement("a", {
-    href: "profiles/walter-stromquist.html",
-    "data-contributor": "",
-  });
+  const heldName = new StandInElement("a", { href: "profiles/walter-stromquist.html" });
   const downloaded = new StandInElement("a", {
     href: "profiles/walter-stromquist.html",
-    "data-contributor": "",
     download: "",
   });
   const aside = new StandInElement("template");
   aside.content = new StandInElement("fragment", {}, [heldName, downloaded]);
-  body.append(contributorPopover, aside);
+  // Profile addresses the overlay leaves plain: a name in a container that declares its
+  // names plain, as News does, the directory, and a profile on another site.
+  const plainName = new StandInElement("a", { href: "profiles/walter-stromquist.html" });
+  const plain = new StandInElement("div", { "data-contributor-plain": "" }, [plainName]);
+  const directory = new StandInElement("a", { href: "profiles/index.html" });
+  const elsewhere = new StandInElement("a", {
+    href: "https://elsewhere.test/squares/profiles/walter-stromquist.html",
+  });
+  body.append(contributorPopover, aside, plain, directory, elsewhere);
 
   /** What the site serves, by address; an address it lacks is a 404. */
   const served = new Map([
@@ -586,6 +588,9 @@ function page(protocol = "https:", scripts = []) {
     scrolled,
     heldName,
     downloaded,
+    plainName,
+    directory,
+    elsewhere,
     first,
     second,
     orphan,
@@ -1128,20 +1133,35 @@ void test("a link out of a panel still closes it and follows, and a modified cli
 });
 
 void test("each name link the profile overlay enhances says it opens a dialog", async () => {
-  const { fire, first, second, fetched, served, markup, element, heldName, downloaded, settled } =
-    page("https:", [CONTRIBUTOR_SOURCE]);
+  const {
+    fire,
+    first,
+    second,
+    fetched,
+    served,
+    markup,
+    element,
+    heldName,
+    downloaded,
+    plainName,
+    directory,
+    elsewhere,
+    settled,
+  } = page("https:", [CONTRIBUTOR_SOURCE]);
+  // A name is known by its address alone: no page marks it.
   for (const name of [first.name, second.name, fetched.name, heldName]) {
     assert.equal(name.getAttribute("aria-haspopup"), "dialog");
   }
   // A link that downloads is not enhanced, so it is not announced as opening one.
   assert.equal(downloaded.getAttribute("aria-haspopup"), null);
-  // Nor is any link that was not a name.
-  assert.equal(first.link.getAttribute("aria-haspopup"), null);
+  // Nor is any link that was not a name, a name its container keeps plain, the
+  // directory, or a profile address on another site.
+  for (const link of [first.link, plainName, directory, elsewhere]) {
+    assert.equal(link.getAttribute("aria-haspopup"), null);
+  }
   // A name in an article the loader clones later is announced as it lands.
   served.set("result/t-004.html", "credited");
-  markup.set("credited", () => [
-    element("a", { href: "../profiles/evan-daniel.html", "data-contributor": "" }),
-  ]);
+  markup.set("credited", () => [element("a", { href: "../profiles/evan-daniel.html" })]);
   fire(fetched.text, "click");
   await settled();
   const landed = fetched.body.querySelector("a");

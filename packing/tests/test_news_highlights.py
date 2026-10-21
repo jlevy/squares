@@ -159,6 +159,9 @@ def test_homepage_and_archive_link_preferred_names_directly_to_reviewed_profiles
         ),
     }
     for rendered in (news_highlights.render(document), render_changelog.render_news(document)):
+        # The names stay plain links, since their container says so once and the profile
+        # popover leaves every profile link inside it alone.
+        assert '<div class="site-news sans-text" data-news data-contributor-plain>' in rendered
         cards = _cards(rendered)
         for identifier, people in expected.items():
             card = cards[identifier]
@@ -167,7 +170,6 @@ def test_homepage_and_archive_link_preferred_names_directly_to_reviewed_profiles
                     f'<a href="profiles/{profile_id}.html">{html.escape(preferred_name)}</a>'
                     in card
                 )
-            assert "data-contributor" not in card
 
 
 @pytest.mark.parametrize("suffix", ["", "?plain=1&view=full#accounts"])

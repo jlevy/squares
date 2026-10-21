@@ -1,8 +1,10 @@
 // Ordinary contributor links read their canonical page; unmodified presses enhance
-// them with the same article in one accessible popover. Each link it enhances says so
-// with `aria-haspopup="dialog"`, set here rather than written into every page: on the
-// links in the page and in its held templates at start-up, and on those in every
-// article the shared loader clones later (`siteArticles.prepare`).
+// them with the same article in one accessible popover. A contributor link is known by
+// its address, a profile on this site (`profiles/ID.html`), so no page writes a marker
+// on each name. Each link it enhances says so with `aria-haspopup="dialog"`, set here
+// rather than written into every page: on the links in the page and in its held
+// templates at start-up, and on those in every article the shared loader clones later
+// (`siteArticles.prepare`).
 (() => {
   const popover = document.querySelector("[data-contributor-popover]");
   const body = popover?.querySelector("[data-contributor-body]");
@@ -21,19 +23,58 @@
   let origin = null;
   let latest = 0;
 
+  /** The last step of a profile's path; the directory, `profiles/index.html`, is none. */
+  const PROFILE = /\/profiles\/([a-z0-9-]+)\.html$/;
   /**
-   * Whether a press on `link` opens the popover rather than following the link.
+   * Where a profile link stays a plain link: inside a container that declares its
+   * profile links plain (the News and the profile directory), and the panel's own
+   * **Open profile** action, which reaches the complete page.
+   */
+  const PLAIN = "[data-contributor-plain], [data-contributor-open]";
+  const site = new URL(document.baseURI).origin;
+
+  /**
+   * Whether a press on `link` opens the popover rather than following the link: a link
+   * to a profile on this site that neither downloads nor names another target.
    * @param {Element | null} link
    * @returns {link is HTMLAnchorElement}
    */
-  const enhanced = (link) =>
-    link instanceof HTMLAnchorElement &&
-    !link.hasAttribute("download") &&
-    (link.target === "" || link.target === "_self");
+  const enhanced = (link) => {
+    if (
+      !(link instanceof HTMLAnchorElement) ||
+      link.hasAttribute("download") ||
+      !(link.target === "" || link.target === "_self") ||
+      link.closest(PLAIN) !== null
+    ) {
+      return false;
+    }
+    /** @type {URL} */
+    let url;
+    try {
+      // Against the page, since a held template's own document has no base address.
+      url = new URL(link.getAttribute("href") ?? "", document.baseURI);
+    } catch {
+      return false;
+    }
+    const id = PROFILE.exec(url.pathname)?.[1];
+    if (
+      id === undefined ||
+      id === "index" ||
+      !/^https?:$/.test(url.protocol) ||
+      url.origin !== site
+    ) {
+      return false;
+    }
+    // A link to the page itself, such as a profile's own in-page anchors, stays one.
+    const page = new URL(document.URL);
+    page.hash = "";
+    url.hash = "";
+    return url.href !== page.href;
+  };
 
   /** @param {ParentNode} root */
   const announce = (root) => {
-    for (const link of root.querySelectorAll("a[data-contributor][href]")) {
+    for (const link of root.querySelectorAll("a[href]")) {
       if (enhanced(link)) {
         link.setAttribute("aria-haspopup", "dialog");
       }
@@ -52,7 +93,7 @@
   document.addEventListener(
     "click",
     (event) => {
-      const link = articles.clickTarget(event)?.closest("a[data-contributor][href]") ?? null;
+      const link = articles.clickTarget(event)?.closest("a[href]") ?? null;
       if (!enhanced(link)) {
         return;
       }

@@ -211,7 +211,7 @@ def test_visual_math_compaction_keeps_html_tree_and_foreign_xml(
         "<span title=' class=\"mord\"'>literal class spelling</span>"
         + foreign
         + self_closing
-        + '<a href="../profiles/manasseh-ahmed.html" data-contributor="">Ahmed</a>'
+        + '<a href="../profiles/manasseh-ahmed.html">Ahmed</a>'
     )
     compact = render_case_pages.compact_visual_math_classes(
         source, all_html_classes=all_html_classes
@@ -244,7 +244,7 @@ def test_a_records_links_are_written_from_its_own_directory(
     record = _record(records, 11)
     assert 'href="../atlas.html#n-11"' in record
     assert 'href="../results.html#t-018"' in record
-    assert 'href="../profiles/walter-trump.html" data-contributor' in record
+    assert '<a href="../profiles/walter-trump.html">' in record
     assert 'href="10.html" rel="prev" data-case-step="10"' in record
     assert 'href="12.html" rel="next" data-case-step="12"' in record
     assert "data-case-index" not in record

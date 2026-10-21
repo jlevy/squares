@@ -486,7 +486,8 @@ def contributor_pages() -> list[Page]:
         "<p>People whose work the square-packing record cites or credits, paper authors "
         "and project contributors alike. Each profile records public identity evidence "
         "and links to reviewed credits.</p>"
-        '<nav aria-label="Profiles"><ul>'
+        # The directory's names navigate; they never open the profile popover.
+        '<nav aria-label="Profiles" data-contributor-plain><ul>'
         + "".join(
             f'<li><a href="{contributor.profile_path}">'
             f"{html.escape(contributor.display_name)}</a></li>"
