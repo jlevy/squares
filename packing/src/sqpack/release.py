@@ -88,6 +88,15 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.10",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
+            "integrated exact replay and its stage 4 review, and adopt it as the house "
+            "best packing at 227 and 260 with Evan Daniel's regularized views."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.9",
         first_published="October 21, 2026",
         result_scope=(
@@ -1125,6 +1134,17 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.9",
+        version="v0.8.10",
+        impact="patch",
+        reason=(
+            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
+            "integrated exact replay and its stage 4 review, and adopt it as the house "
+            "best packing at 227 and 260 with Evan Daniel's regularized views."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.8.8",
@@ -5922,7 +5942,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "f555a0f9"
+PUBLICATION_REVISION = "21739d26"
 
 
 def data_pathspec() -> tuple[str, ...]:
