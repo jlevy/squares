@@ -10281,8 +10281,11 @@ issues:
       19 October 2026 in evand-n271-2026-10-17, replayed on this repository's two exact routes,
       registered as T-219, reviewed by the 19 October stage 4 review and raised to V3/C3; the case
       at 271 adopted it as its house and its drawing was regularized in the same pull request.
-      Claude assistance disclosed.
-    read_through: '2026-10-17T04:30:51Z'
+      Claude assistance disclosed. The author's comment of 20 October 2026 (issuecomment-6302892909)
+      says the packing is a different local minimum from #561's and asks to be named its finder,
+      with Couzo's #561 packing and the SQUISH design it continues credited as its start, which
+      the case at 271 now does.
+    read_through: '2026-10-20T22:09:33Z'
     results:
     - key: n271
       claim: >-
@@ -10298,14 +10301,29 @@ issues:
         Chaoweeraprasit's SQUISH packing it refines (Chaoweeraprasit as finder, Couzo and Daniel as
         improvers), held until the author says whether the reading he gave on issue 673 applies here,
         where the issue calls the packing both a refinement of #561 and a different local minimum
-      state: queued
+      state: done
       bead: think-8o5j
       note: >-
-        The case at 271 already gives this credit. It is held, not pending work, because the
-        follow-up of 20 October (issuecomment-6294848615) asks him which reading he means; under the
-        #673 reading a different local minimum would make him the finder and the credit would be
-        taken up again. That is why the follow-up says nothing he asked for is queued and still keeps
-        the issue open. A final comment closes it once he answers or leaves the credit as it is.
+        Done on 19 October 2026, when the case at 271 first gave this credit, and held after the
+        follow-up of 20 October (issuecomment-6294848615) asked him which reading he means. His
+        comment of 20 October at 22:09Z (issuecomment-6302892909) answers it: the packing is a
+        different local minimum, and the #673 reading applies. On 21 October 2026 the ask below
+        replaced this one, so this credit is no longer given.
+    - what: >-
+        List Evan Daniel as the finder of the packing at 271, and credit Francisco Couzo's #561
+        packing and Nate Chaoweeraprasit's SQUISH design it continues as its start, as at 146, 236
+        and 308 (issuecomment-6302892909).
+      state: done
+      bead: think-8o5j
+      note: >-
+        Applied on 21 October 2026 under the credit rule that the source says who did what
+        (epistemics.md, Parallel Projects and Their Credit), as at 146, 155, 236 and 308: the case
+        record at 271 names Evan Daniel as finder with no improvers, and its credit sentence names
+        Couzo's #561 packing and the SQUISH packing it continues as the search's start. The
+        record's own measurement is unchanged: three squares move beyond a tenth of #561's packing,
+        so in the record's sense it is #561's arrangement continued (RV-2 of the 19 October
+        review). The register's credit line, Daniel after Couzo, Chaoweeraprasit, Levy, already
+        names the start.
     beads:
     - think-8o5j
     answer_bead: think-8o5j
@@ -10331,15 +10349,30 @@ issues:
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/664#issuecomment-6261557347
+      outdated:
+      - 'The case names Nate Chaoweeraprasit (itsnaka) as the finder, with Francisco Couzo and you
+        as improvers; since the author''s comment of 20 October (issuecomment-6302892909) the case
+        at 271 names Evan Daniel as the finder, with no improvers, and its credit sentence names
+        Couzo''s #561 packing and the SQUISH packing it continues as the search''s start'
     close_when: >-
       The certificate is registered on main and replayed here, the case at 271 has adopted it and
       regularized its drawing, and the author has been told the id, rungs and adoption.
     notes: >-
-      The source calls the packing a refinement of #561's, not a new construction, and also a
-      different local minimum; the case credits it as the issue asks, to Nate Chaoweeraprasit's
-      SQUISH packing improved by Francisco Couzo and Evan Daniel. Under issue 673's rule a different
-      local minimum would make Daniel the finder; the follow-up of 20 October asks him which he
-      means, and the queued ask holds the issue open for his answer.
+      The issue called the packing a refinement of #561's, not a new construction, and also a
+      different local minimum, and the case first credited it as the issue asked, to Nate
+      Chaoweeraprasit's SQUISH packing improved by Francisco Couzo and Evan Daniel. The follow-up of
+      20 October asked which he meant. His comment of 20 October at 22:09Z
+      (issuecomment-6302892909) says the wording contradicted itself and he meant a different local
+      minimum: the exact sides (16.948947733713657... against 16.948992356451205...) and contact
+      graphs differ, his numerical second-order test finds each a local minimum, strict modulo 54
+      and 56 flat motions, and the packing came 90 seconds into his basin explorer's test run over
+      52 counts, from #561's packing by one tilt swap of two neighbouring squares and a re-polish.
+      It asks for the #673 reading here, which this change applies at 271. It also says that from
+      now on his requests use "refinement" only for the same local minimum up to rattlers, reached
+      by shrink-only moves, and "a new packing found from X" otherwise, and that he will say so
+      where that differs from the record's tenth rule. That is his usage, not a request; the record
+      keeps its own rule. Nothing he asked for is queued, so the issue is closeable once a final
+      comment reports the credit from main.
   - number: 666
     title: 's(n) < ⌈√n⌉ at 18 counts from n = 509 to 1568, and s(464) ≤ 21.98881: registration request'
     author: JoostdeWinter
@@ -10602,7 +10635,7 @@ issues:
       repository's two exact routes, reviewed by the 19 October stage 4 review and raised to V3/C3
       on 19 October 2026; the case at 155 adopted it as its house and its drawing was regularized in
       the same pull request.
-    read_through: '2026-10-17T14:49:46Z'
+    read_through: '2026-10-20T22:09:34Z'
     results:
       - key: n155
         claim: s(155) <= 12.952260944651, rounded upward; exact certificate side is authoritative.
@@ -10669,7 +10702,14 @@ issues:
       MIT-licensed 59326b86291b76c39d843f3f156e8f25fa0f6e3f; the claim date remains 2026-10-17. The
       issue and s155_ex2_prior.json credit Daniil Ostashev's T-149 as the search start, while
       s155_ex2_regularized.json says by: [Francisco Couzo], as the same field of Daniel's 236 and
-      271 views does; the record follows the issue. Under issue 673's reading the start is what the
+      271 views does; the record follows the issue. The author's comment of 20 October at 22:09Z
+      (issuecomment-6302893217) answers the question RV-7 of the 19 October review put: the field
+      was a bug in his tooling, which took it from the record holder at that count in his 5
+      October batch instead of from the packing drawn, fixed in search/packer/candidate.py at
+      a435c97. He names the affected views, tt_n154 (#552), tt2_n146 (#606, which says David W.
+      Cantrell), s155_ex2 (#669), s236_bm3c (#659), s271_ex1 (#664) and s154_sw (#694), and asks
+      that the field there be read as no credit at all and the issues' credit lines as what he
+      asks for, as the record already does; no credit changes on it. Under issue 673's reading the start is what the
       search was based on, so the case at 155 names Evan Daniel as the finder. The same-side display
       certificate is not a second bound; numerical local-minimum diagnostics remain source
       assertions.
@@ -11742,7 +11782,7 @@ issues:
       raised to V3/C3 on 19 October 2026; the case at 229 adopted the update (T-199) as its house,
       the first adoption at 229, and its drawing was regularized in the same pull request. Each
       certifies only an upper bound and credits Couzo #672 after de Winter #668 as the start.
-    read_through: '2026-10-18T01:36:21Z'
+    read_through: '2026-10-20T22:09:35Z'
     results:
       - key: n229
         claim: s(229) <= 15.650163254859, rounded upward; exact certificate side is authoritative.
@@ -11844,7 +11884,16 @@ issues:
       earlier reply''s V0/C0 statement and the review it called pending, and closed the issue; it also said
       the source''s checkers did not run here, which the correction of 20 October
       (issuecomment-6296071486) withdrew. Couzo''s #672, the stated start, is not retained here; its
-      import is think-2vjc.'
+      import is think-2vjc. The author''s comment of 20 October at 22:09Z (issuecomment-6302893583)
+      answers the final reply''s two questions from the review and asks nothing: the update''s
+      clearances were not loosened on purpose, since its input is his polisher''s output, which stops
+      near 1e-13, and his corner-slip descent found it not first-order jammed but realised no
+      decrease, so it went to the dilation as it was, while the opening''s input had been through
+      that descent first; and exactsolve.py cannot certify the 229 packing with his current tools,
+      since the corner-corner MILP predicts a first-order descent of about 2.2e-7 that neither that
+      descent nor a second-order fixed-line NLP (60 rounds, with kicks) realises, so the dilation
+      is what he has for 229. He adds that the predicted descent may mean a slightly smaller side
+      exists nearby, which he has not found. No record changes on it.'
   - number: 675
     title: '204-998: registration request'
     author: franciscouzo
@@ -13241,6 +13290,108 @@ issues:
       - result: n260
       corrects:
       - https://github.com/jlevy/squares/issues/678#issuecomment-6257122870
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6306311833
+      date: '2026-10-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+        id: T-223
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n260
+        id: T-223
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n204
+        id: E-couzo-678-certificate-report
+      - result: n260
+        id: E-couzo-678-certificate-report
+      - result: n330
+      - result: n343
+      - result: n418
+      - result: n420
+      - result: n421
+      - result: n422
+      - result: n455
+      - result: n456
+      - result: n458
+      - result: n459
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n464
+      - result: n497
+      - result: n499
+      - result: n501
+      - result: n502
+      - result: n505
+      - result: n507
+      - result: n545
+      - result: n546
+      - result: n548
+      - result: n549
+      - result: n553
+      - result: n554
+      - result: n555
+      - result: n592
+      - result: n593
+      - result: n597
+      - result: n598
+      - result: n600
+      - result: n601
+      - result: n602
+      - result: n641
+      - result: n642
+      - result: n650
+      - result: n652
+      - result: n653
+      - result: n654
+      - result: n693
+      - result: n700
+      - result: n701
+      - result: n703
+      - result: n704
+      - result: n705
+      - result: n706
+      - result: n749
+      - result: n751
+      - result: n752
+      - result: n753
+      - result: n754
+      - result: n755
+      - result: n760
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n808
+      - result: n815
+      - result: n863
+      - result: n865
+      - result: n867
+      - result: n868
+      - result: n870
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n919
+      - result: n924
+      - result: n926
+      - result: n927
+      - result: n928
+      - result: n930
+      - result: n933
+      - result: n934
+      - result: n984
+      - result: n987
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n994
+      - result: n998
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -14244,7 +14395,8 @@ issues:
     title: 's(308) ≤ 17.997149121271: registration request'
     author: evand
     opened: '2026-10-19'
-    state: open
+    state: closed
+    closed: '2026-10-21'
     kind: result-report
     triage: done
     summary: >-
@@ -14256,8 +14408,8 @@ issues:
       Retained on 20 October 2026 in evand-n308-2026-10-19, replayed on this repository's two exact
       routes, registered as T-221, reviewed by the 20 October stage 4 review, which measured it as
       another arrangement of the two-wedge design, and raised to V3/C3; the case at 308 adopted it
-      as its house, 1.12e-3 below T-174, and its drawing was regularized in the same pull request.
-      Claude assistance disclosed.
+      as its house best packing, 1.12e-3 below T-174, and its drawing was regularized in the same
+      pull request. Claude assistance disclosed.
     read_through: '2026-10-19T22:44:19Z'
     results:
     - key: n308
@@ -14283,22 +14435,53 @@ issues:
         Kevin Fang's two-wedge design in a search started from Nate Chaoweeraprasit's n = 307
         packing, with Daniel as the finder in the structured fields; T-221's claim and its
         bibliography key (Daniel after Chaoweeraprasit) name the start too. Fang stays named in
-        the credit sentence, as the earlier house's named him, and out of the structured fields;
-        whether he belongs there, for this house as for the earlier one, is the owner's decision
-        under think-a95t.
+        the credit sentence, as the earlier house best packing's credit named him, and out of the
+        structured fields; whether he belongs there, for this house best packing as for the
+        earlier one, is the owner's decision under think-a95t.
     beads:
     - think-h8jm
     answer_bead: think-h8jm
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/689#issuecomment-6304566871
+      date: '2026-10-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n308
+        id: T-221
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n308
+        id: E-evand-689-n308-report
+      - result: n308
+        id: E-evand-689-n308-exact-feasibility
     close_when: >-
       The certificate is registered on main and replayed here, the stage 4 review has been mapped,
       the case at 308 has adopted it and regularized its drawing with the requested credit, and the
       author has been told the id, rungs and adoption.
+    notes: >-
+      The final reply, posted at 2026-10-21T00:02:07Z (issuecomment-6304566871), reported T-221 at
+      V3/C3, confirmed, significance S3, with its evidence entries E-evand-689-n308-report and
+      E-evand-689-n308-exact-feasibility, its adoption as the house best packing at 308 and its
+      regularized drawing, and said that nothing asked for is queued; the issue closed at
+      2026-10-21T00:02Z. It puts two questions to the author, neither bearing on the bound: whether
+      the certificate rows of the five free squares of s308_d308.json (6, 56, 57, 85 and 86), which
+      s308_d308.exact.txt prints at 17 significant digits or fewer, as it does squares 1 and 65 at
+      exact half-integer centres, were rationalized from their binary64 values rather than from an
+      80-digit solve; and at what precision the stationarity (frozen_max_stationarity 2.98e-74 at
+      dps 80) and the strictness modulo 47 flat motions (least eigenvalue counted as zero
+      -1.04e-16) were decided. The review's first question, on the view's "by": [] field, it
+      leaves answered by the author's comment on #669 of 20 October (issuecomment-6302893217). It
+      also says that whether Kevin Fang belongs in the structured credit at 308 is the owner's open
+      decision (think-a95t), and that search/packer/dgen.py, which the issue names, entered the
+      source at a435c97, after the pin.
   - number: 694
     title: 's(154) ≤ 12.921100940762: registration request'
     author: evand
     opened: '2026-10-20'
-    state: open
+    state: closed
+    closed: '2026-10-21'
     kind: result-report
     triage: done
     summary: >-
@@ -14309,9 +14492,9 @@ issues:
       Couzo's #586 packing, found from Daniil Ostashev's s(156) packing. Retained on 20 October
       2026 in evand-n154-sweep-2026-10-20, replayed on this repository's two exact routes,
       registered as T-222, reviewed by the 20 October stage 4 review, which measured it as #586's
-      arrangement continued, and raised to V3/C3; the case at 154 adopted it as its house, 1.06e-4
-      below T-186, and its drawing was regularized in the same pull request. Claude assistance
-      disclosed.
+      arrangement continued, and raised to V3/C3; the case at 154 adopted it as its house best
+      packing, 1.06e-4 below T-186, and its drawing was regularized in the same pull request. Claude
+      assistance disclosed.
     read_through: '2026-10-20T03:56:43Z'
     results:
     - key: n154
@@ -14344,11 +14527,110 @@ issues:
     beads:
     - think-115j
     answer_bead: think-115j
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/694#issuecomment-6304567382
+      date: '2026-10-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n154
+        id: T-222
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n154
+        id: E-evand-694-n154-report
+      - result: n154
+        id: E-evand-694-n154-exact-feasibility
     close_when: >-
       The certificate is registered on main and replayed here, the stage 4 review has been mapped,
       the case at 154 has adopted it and regularized its drawing with the requested credit, and the
       author has been told the id, rungs and adoption.
+    notes: >-
+      The final reply, posted at 2026-10-21T00:02:09Z (issuecomment-6304567382), reported T-222 at
+      V3/C3, confirmed, significance S3, with its evidence entries E-evand-694-n154-report and
+      E-evand-694-n154-exact-feasibility, its adoption as the house best packing at 154 and its
+      regularized drawing, and said that nothing asked for is queued; the issue closed at
+      2026-10-21T00:02Z. It puts two questions to the author, neither bearing on the bound: whether
+      the certificate rows of the nine free squares of s154_sw.json (0, 17, 21, 22, 23, 27, 58, 127
+      and 152), among the 33 rows s154_sw.exact.txt prints at 17 significant digits or fewer, the
+      other 24 at exact half-integer centres, were rationalized from their binary64 values rather
+      than from an 80-digit solve; and at what precision the stationarity (frozen_max_stationarity
+      2.72e-75 at dps 80) and the second-order test (51 eigenvalues counted as zero, the least
+      -1.54e-16, and one negative, -0.0282, in a direction involving square 56 blocked only to first
+      order by weakly active contacts) were decided, and whether a descent along that direction was
+      tried at second order or the status is left open on purpose. The review's first question, on
+      the view's "by": ["Francisco Couzo"] field, it leaves answered by the author's comment on #669
+      of 20 October (issuecomment-6302893217), which names s154_sw among the affected views and asks
+      that the field be read as no credit. It also says that search/packer/dgen.py, which the issue
+      and commit message name, entered the source at a435c97, after the pin.
+  - number: 702
+    title: 's(343) ≤ 18.977682482405: registration request'
+    author: evand
+    opened: '2026-10-20'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(343) <= 18.977682482405, the exact rational side
+      18977682482404124568634475670459/10^30 of evand/square-packing 88385ab,
+      search/packer/candidates/s343_sw.cert, rounded up at 12 places, with a regularized view at the
+      same side; a different local minimum from Francisco Couzo's #678 packing, found by a
+      population search over his stored near-record 343 packings, in Kevin Fang's two-wedge family
+      (#484), which it credits as the construction, as #489 did. 343 is beyond the n <= 324 case
+      corpus. Triaged read-only on 21 October 2026; nothing is retained or replayed yet. Claude
+      assistance disclosed.
+    read_through: '2026-10-20T22:09:31Z'
+    results:
+    - key: n343
+      claim: >-
+        s(343) <= 18977682482404124568634475670459/1000000000000000000000000000000 =
+        18.977682482404124568634475670459, the side of s343_sw.cert (SHA-256 18415455...), by a
+        packing the source calls a different local minimum from #678's.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register entry. Custody at
+        the pin, the two-route replay and the row remain on the import bead, which waits for #701's
+        row at 343 to reach main.
+      queued: true
+      bead: think-wuxt
+      blocked_on:
+      - jlevy/squares#701
+    asks:
+    - what: >-
+        Credit Evan Daniel as the finder of the packing at 343, and Kevin Fang's two-wedge design
+        (#484) as its construction, as at #489's 343.
+      state: queued
+      bead: think-wuxt
+      note: Taken up with the beyond-horizon row, whose source's credit line carries it.
+    beads:
+    - think-wuxt
+    answer_bead: think-wuxt
+    replies: []
+    close_when: >-
+      The certificate is retained at its pin and replayed here, its beyond-horizon row is on main
+      with the requested credit, and the author has been told the row's standing; a count beyond
+      the case corpus takes no register entry, and optimality is outside this request.
+    notes: >-
+      Triage of 21 October 2026 (think-wuxt), read-only. The source is evand/square-packing at
+      88385abc95ab25d520302282d1946cbb07bc9cf3, committed 2026-10-20T21:47:03Z and the repository's
+      head when read; s343_sw.cert and s343_sw_regularized.cert, fetched at the pin into scratch,
+      have the SHA-256 digests the issue prints (18415455... and f9a14775...), and the header side
+      rounds up at 12 places to the issue's print. The commit adds nine s343_sw files and eight
+      s270_sw files; s(270) <= 16.928162252197 is #703's report and its own import. The view's
+      report s343_sw_regularized.json says "by": ["Evan Daniel"], and s343_sw_prior.json names
+      #678 and the watched franciscouzo/square-packing@7b6c87e as the prior record. On main
+      (4851d8193) the current row at 343 is #489's, evand-record-hunt3-2026-10-10, at
+      18.978232523635611279730512106023, verified; the certificate is 5.500412e-4 below it,
+      exactly. Open PR #701 supersedes that row with Couzo's #678 at 18.978232204823, reported;
+      the certificate is 5.497224e-4 below that print, decided whatever the print rounds. Both are
+      upper bounds reported in order, #678 before #702, each below the last, so the owner's rule of
+      14 October records both; the import runs the report-order ledger once #701 has merged. The
+      replay is the maintained two-route kernel of devtools.evand_arrangement_reports, a positive
+      and two controls, as #489's 343 row had: about 45 route CPU seconds, scaled from #689's
+      receipt at 308 (35.66 seconds over 3 jobs) by (343/308)^2. The KKT, local-minimum and MILP
+      statements are numerical source evidence and are not registered. The acknowledgement, drafted
+      in think-wuxt, posts after the pull request that carries this triage merges.
   - number: 703
     title: 's(270) ≤ 16.928162252197: registration request'
     author: evand

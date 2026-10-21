@@ -643,10 +643,10 @@ RESULTS: dict[str, Prose] = {
             "refinement of Francisco Couzo’s #561 packing of Nate Chaoweeraprasit’s SQUISH "
             "design and asks that both be credited. Measured here, it pairs one to one with "
             "#561’s packing, three squares beyond a tenth: Couzo’s arrangement continued, not "
-            "a refinement in this record’s sense (T-219). The credit is the one the issue "
-            "asks for, so Nate Chaoweeraprasit stays the finder, with Couzo and Daniel after "
-            "him; at 236, whose issue asks that the composition it started from be credited "
-            "for the construction, Daniel is the finder."
+            "a refinement in this record’s sense (T-219). The author’s comment of 20 October "
+            "on the issue says he meant a different local minimum and asks to be named its "
+            "finder, with #561’s packing and the SQUISH design it continues as its start, as "
+            "at 146, 236 and 308; the case credits it so."
         ),
     ),
     "T-220": Prose(
@@ -711,7 +711,8 @@ RESULTS: dict[str, Prose] = {
             "it a different KKT point in #586’s family. Measured here square by square, it "
             "pairs one to one with #586’s packing under a quarter turn, three squares beyond "
             "a tenth, at most 0.204: Couzo’s arrangement continued, not a refinement in this "
-            "record’s sense, as at 271 (T-222). Ostashev’s packing lies within a tenth of it "
+            "record’s sense (T-222), as Daniel’s packing at 271 (T-219) continues Couzo’s "
+            "#561 arrangement. Ostashev’s packing lies within a tenth of it "
             "at only 94 of its 156 squares, so his credit as the start rests on the source’s "
             "account of the search, and Couzo’s on the measured arrangement."
         ),
@@ -1200,13 +1201,15 @@ CREDITS: dict[int, Credit] = {
     ),
     # Evan Daniel's tilt-swap from the register's witness (T-186's tightening of issue 561's
     # packing): issue 561's arrangement continued, three squares beyond a tenth (RV-2 of the
-    # 19 October review), which issue 664 calls a refinement of Couzo's packing of SQUISH's
-    # and asks both be credited.
+    # 19 October review), which issue 664 first called a refinement of Couzo's packing of
+    # SQUISH's. The author's comment of 20 October (issuecomment-6302892909) says he meant a
+    # different local minimum and asks to be the finder, with both credited as the start,
+    # the issue 673 reading, as at 146, 236 and 308.
     271: Credit(
-        (SQUISH,),
-        (COUZO, DANIEL),
-        "Evan Daniel’s continuation of Francisco Couzo’s arrangement of Nate "
-        "Chaoweeraprasit’s SQUISH packing",
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from a search started from Francisco Couzo’s arrangement "
+        "of Nate Chaoweeraprasit’s SQUISH packing",
     ),
     # T-174's regularization of T-151's packing, as T-171 re-solved it, measured one to
     # one, no square moved beyond 1.5e-4 (the 14 October review of PR 574).
