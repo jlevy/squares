@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.11",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Record Evan Daniel's s(343) certificate of issue 702 as the current "
+            "beyond-horizon row at 343, superseding issue 678's row there."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.10",
         first_published="October 21, 2026",
         result_scope=(
@@ -1142,6 +1150,16 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.8.10",
+        version="v0.8.11",
+        impact="patch",
+        reason=(
+            "Record Evan Daniel's s(343) certificate of issue 702 as the current "
+            "beyond-horizon row at 343, superseding issue 678's row there."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.8.9",
         version="v0.8.10",
         impact="patch",
@@ -1826,6 +1844,28 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site v0.8.11 cut for #702's beyond-horizon row at 343 regenerated the "
+            "five claim documents, and each of the 22 changed lines differs from main "
+            "d640ad8f only in its source-link revision, d798819c to 7d4d8146. The "
+            "explainer links those documents rather than inlining them, so its HTML and "
+            "Markdown are unchanged by them and it keeps v0.4.13. This is a "
+            "source-reviewed disposition, as think-9v1i's was for v0.8.7."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=(
@@ -5877,7 +5917,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "d798819c"
+PUBLICATION_REVISION = "7d4d8146"
 
 
 def data_pathspec() -> tuple[str, ...]:
