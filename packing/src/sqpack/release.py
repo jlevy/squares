@@ -92,8 +92,9 @@ PUBLICATION_HISTORY = (
         first_published="October 21, 2026",
         result_scope=(
             "Register Evan Daniel's solved and regularized views at 204, 227, 229 and 260 "
-            "(T-225, V0/C0), record the #668 and #702 replies, and announce T-196's and "
-            "T-223's adoptions in the News."
+            "(T-225, V0/C0); record the #668 and #702 replies, #678's stage 7 reply and "
+            "#668's follow-up; enter #715 at triage; correct the overview's Couzo and de "
+            "Winter cards; and announce T-196's and T-223's adoptions in the News."
         ),
     ),
     PublicationHistoryEntry(
@@ -1212,8 +1213,9 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         impact="patch",
         reason=(
             "Register Evan Daniel's solved and regularized views at 204, 227, 229 and 260 "
-            "(T-225, V0/C0), record the #668 and #702 replies, and announce T-196's and "
-            "T-223's adoptions in the News."
+            "(T-225, V0/C0); record the #668 and #702 replies, #678's stage 7 reply and "
+            "#668's follow-up; enter #715 at triage; correct the overview's Couzo and de "
+            "Winter cards; and announce T-196's and T-223's adoptions in the News."
         ),
     ),
     ReleaseImpactDecision(
