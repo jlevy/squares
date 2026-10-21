@@ -6315,6 +6315,29 @@ sources:
     3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
     stage; current cases and earlier source ownership remain unchanged.
 
+- id: evand-n270-sweep-2026-10-20
+  title: Evan Daniel's n270 certificate at 88385ab, issue703
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/88385abc95ab25d520302282d1946cbb07bc9cf3
+  local: resources/web/evand-n270-sweep-2026-10-20/
+  source_key: '[Daniel n270 sweep 2026-10-20]'
+  scope:
+    n_values:
+    - 270
+  reviewed: '2026-10-21'
+  source_date: '2026-10-20'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n270-sweep-2026-10-20/acquisition/claims.json
+  evidence:
+  - E-evand-703-n270-report
+  notes: The 1 complete certificate is retained as the source wrote them, admitted only where its exact
+    side equals, or rounds up to, the side its source prints. T-224 records the in-horizon report. All
+    3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
+    stage; current cases and earlier source ownership remain unchanged.
+
 - id: wand125-fine-net-n38-65775-2026-10-16
   title: Wand125 reported n38 fine-net lower bound (#446)
   role: source-repository

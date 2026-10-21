@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-20'
+last_reviewed: '2026-10-21'
 results:
   - id: T-001
     kind: lower-bound
@@ -30414,6 +30414,87 @@ results:
           names.
         verdict: accepted
         covers: [T-221, T-222]
+
+  - id: T-224
+    kind: upper-bound
+    registered: '2026-10-21'
+    landed: '2026-10-21'
+    headline: >-
+      Daniel's smaller n270 packing, a new local minimum found from Chaoweeraprasit's, certified exactly
+    claim: 'One complete rational source certificate reports a finite upper-bound improvement at the exact
+      side it states: s(270) <= 16.928162252196750114897964982713. Complete native feasibility outcomes
+      are retained separately; the selected standing case is unchanged pending independent review and record
+      review.
+
+
+      The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py
+      (polygon intersection), accept the certificate. The source reports a KKT local minimum strict modulo
+      23 exact flat motions and not isolated, 263 corner-corner contacts with no corner-corner MILP descent,
+      1 rattler and 67 tilted squares, and calls it a different local minimum from the register''s packing
+      (#500''s, improved in PR #574): the exact sides differ by 3.47e-5, the matched contact graphs share
+      514 pairs with 49 only in each, no load-bearing tilt angle is shared, and under its matching the largest
+      square move is 0.391, with 17 squares moving by more than 0.1. Those are numerical evidence at 80
+      digits, as the source says, not proofs. No source program ran here.
+
+
+      Credit Evan Daniel (https://github.com/evand/square-packing), whose basin explorer started from the
+      register''s s(270) packing, Nate Chaoweeraprasit''s (itsnaka''s) #500 packing (T-151), stored non-record
+      descendants of it, and reached this packing in a near-record sweep over them; the issue asks that
+      #500''s packing be credited as the ultimate start, and calls this a new packing, a different local
+      minimum from that packing as PingYou Ltd improved it in PR #574 (T-174). The search, the checks and
+      the request were done with Claude (Claude Code) under Evan Daniel''s direction.'
+    scope:
+      n_values:
+      - 270
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        A smaller finite construction side at n = 270, 3.47e-05 below the case ceiling and every
+        report there, by a packing the source reports as a different local minimum from the
+        register's packing, found from Chaoweeraprasit's #500 packing; no lower bound or optimum.
+        Draft at intake; the stage 4 review confirms or changes it.
+      scored: '2026-10-21'
+      by: think-a9jp Evan Daniel import
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel n270 sweep 2026-10-20]'
+      published: '2026-10-20'
+    evidence:
+    - E-evand-703-n270-report
+    artifacts:
+    - packing/resources/web/evand-n270-sweep-2026-10-20/README.md
+    - packing/resources/web/evand-n270-sweep-2026-10-20/acquisition/claims.json
+    - packing/resources/web/evand-n270-sweep-2026-10-20/source/search/packer/candidates/s270_sw.cert
+    - packing/resources/web/evand-n270-sweep-2026-10-20/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    notes: 'A separate complete repository replay is retained for n = 270: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 217890 pair decisions;
+      summed over the 3 jobs, the receipt records 26.65 route CPU seconds and 30.4 job wall seconds, the
+      longest job 10.99 seconds. Every positive clears every wall by at least 5.00e-21 and every pair by
+      at least 9.99e-21.
+
+
+      At n = 270 the certificate is below the case''s ceiling (Nate Chaoweeraprasit, improved by PingYou
+      Ltd, T-174) by 3.47e-05; below T-151 (#500) (Nate Chaoweeraprasit (itsnaka)) by 3.47e-05; below Mishapolk
+      70a033f (Mykhailo Polkovskyi (Mishapolk)) by 3.47e-05; below #593 (Mykhailo Polkovskyi (Mishapolk))
+      by 3.47e-05; below #573 (Mykhailo Polkovskyi (Mishapolk)) by 1.61e-03; below T-140 (#488) (Francisco
+      Couzo) by 1.61e-03; below T-138 (#470) (Mykhailo Polkovskyi (Mishapolk)) by 8.56e-03; below T-136
+      (#481) (Nate Chaoweeraprasit (itsnaka)) by 1.62e-03; below T-134 (#476) (Francisco Couzo) by 8.56e-03;
+      below T-130 (#460) (Francisco Couzo) by 8.56e-03; below T-119 (#399) (Evan Daniel) by 9.64e-03; below
+      T-098 (#375) (Evan Daniel, at Francisco Couzo''s packing) by 9.65e-03; below T-056 (Francisco Couzo)
+      by 9.65e-03; smallest: this certificate.
+
+
+      The source''s own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.'
+    next_rung: Independently review the retained replay, then adopt at 270.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

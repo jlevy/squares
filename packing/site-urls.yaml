@@ -4970,7 +4970,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-21'
   status: live
 - path: cases/271.html
   canonical: cases/271.html
@@ -17197,6 +17197,33 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md
     - packing/resources/web/evand-n308-2026-10-19/review/review-2026-10-20/README.md
+- path: result/t-224.html
+  canonical: result/t-224.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-21'
+  lastmod: '2026-10-21'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 270
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n270 sweep 2026-10-20]'
+      published: '2026-10-20'
+    builds_on: null
+    evidence:
+    - E-evand-703-n270-report
+    artifacts:
+    - packing/resources/web/evand-n270-sweep-2026-10-20/README.md
+    - packing/resources/web/evand-n270-sweep-2026-10-20/acquisition/claims.json
+    - packing/resources/web/evand-n270-sweep-2026-10-20/source/search/packer/candidates/s270_sw.cert
+    - packing/resources/web/evand-n270-sweep-2026-10-20/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page

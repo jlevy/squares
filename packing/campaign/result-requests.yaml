@@ -14099,3 +14099,63 @@ issues:
       The certificate is registered on main and replayed here, the stage 4 review has been mapped,
       the case at 154 has adopted it and regularized its drawing with the requested credit, and the
       author has been told the id, rungs and adoption.
+  - number: 703
+    title: 's(270) ≤ 16.928162252197: registration request'
+    author: evand
+    opened: '2026-10-20'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(270) <= 16.928162252197, the exact rational side
+      16928162252196750114897964982713/10^30 of evand/square-packing 88385ab,
+      search/packer/candidates/s270_sw.cert, rounded up at 12 places, with a regularized view at
+      the same side; a different local minimum from the register's packing (Nate Chaoweeraprasit's
+      #500 packing, improved by PingYou Ltd in PR #574), found by a near-record sweep of his basin
+      explorer over stored non-record descendants of #500's packing. Retained on 21 October 2026 in
+      evand-n270-sweep-2026-10-20, certified on this repository's two exact routes with both
+      controls, and registered as T-224 at V0/C0, 3.47e-5 below the case at 270 (T-174); the stage 4
+      review and adoption follow. Claude assistance disclosed.
+    read_through: '2026-10-20T22:09:32Z'
+    results:
+    - key: n270
+      claim: >-
+        s(270) <= 16928162252196750114897964982713/1000000000000000000000000000000 =
+        16.928162252196750114897964982713, the side of s270_sw.cert (SHA-256 a01114af...), by a
+        packing the source calls a different local minimum from the register's, not a refinement.
+      source: body
+      bead: think-a9jp
+      register:
+      - T-224
+      evidence:
+      - E-evand-703-n270-report
+    asks:
+    - what: >-
+        Credit Nate Chaoweeraprasit's (itsnaka's) #500 packing, the register's s(270) packing before
+        PingYou Ltd's PR #574 certificate of it, as the ultimate start of the packing at 270.
+      state: queued
+      bead: think-a9jp
+      note: >-
+        T-224's claim, its bibliography key [Daniel n270 sweep 2026-10-20] (Daniel after
+        Chaoweeraprasit) and the packet README's Lineage section already name it. The case at 270 is
+        the adoption writer's record, so its credit fields and prose move when the house best
+        packing does, after the stage 4 review; until then the case keeps T-174's credit.
+    beads:
+    - think-a9jp
+    answer_bead: think-a9jp
+    replies: []
+    close_when: >-
+      The certificate is registered on main and replayed here, the stage 4 review has been mapped,
+      the case at 270 has adopted it and regularized its drawing with the requested credit, and the
+      author has been told the id, rungs and adoption.
+    notes: >-
+      Triage of 21 October 2026 (think-a9jp). The source is evand/square-packing at
+      88385abc95ab25d520302282d1946cbb07bc9cf3, committed 2026-10-20T21:47:03Z and the repository's
+      head when read; the commit also adds #702's s343_sw files, which are that issue's import. The
+      issue has no comments. The certificate is below every report at 270 the record holds or has
+      pending: the case's T-174 and T-151 (#500), Mishapolk's 70a033f and #593 by 3.47e-5, #573
+      and T-140 (#488) by 1.61e-3, T-136 (#481) by 1.62e-3, T-134, T-130 and T-138 by 8.56e-3, and
+      T-119, T-098 and T-056 by 9.6e-3; no other open report through #703 states a bound at 270,
+      so the report-order rule records it. The result is numbered T-224 because open PR #701
+      registers #678 as T-223 and is expected to merge first; until it does this branch's register
+      skips T-223.

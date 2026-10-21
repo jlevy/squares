@@ -137,7 +137,7 @@
   ],
   "register": {
     "title": "Evan Daniel's n270 certificate at 88385ab, issue703",
-    "headline": "Daniel's smaller n270 packing, a new local minimum found from Chaoweeraprasit's #500 packing, certified exactly",
+    "headline": "Daniel's smaller n270 packing, a new local minimum found from Chaoweeraprasit's, certified exactly",
     "significance": 3,
     "source_checks": "The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept the certificate. The source reports a KKT local minimum strict modulo 23 exact flat motions and not isolated, 263 corner-corner contacts with no corner-corner MILP descent, 1 rattler and 67 tilted squares, and calls it a different local minimum from the register's packing (#500's, improved in PR #574): the exact sides differ by 3.47e-5, the matched contact graphs share 514 pairs with 49 only in each, no load-bearing tilt angle is shared, and under its matching the largest square move is 0.391, with 17 squares moving by more than 0.1. Those are numerical evidence at 80 digits, as the source says, not proofs. No source program ran here.",
     "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose basin explorer started from the register's s(270) packing, Nate Chaoweeraprasit's (itsnaka's) #500 packing (T-151), stored non-record descendants of it, and reached this packing in a near-record sweep over them; the issue asks that #500's packing be credited as the ultimate start, and calls this a new packing, a different local minimum from that packing as PingYou Ltd improved it in PR #574 (T-174). The search, the checks and the request were done with Claude (Claude Code) under Evan Daniel's direction.",
