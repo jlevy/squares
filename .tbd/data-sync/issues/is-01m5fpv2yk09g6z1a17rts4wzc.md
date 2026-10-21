@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 39
+version: 42
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -40,14 +40,16 @@ child_order_hints:
   - is-01m5g022qevmw4aefxb2w4nn62
   - is-01m5g0dept4r1ejr31gnkr77kt
   - is-01m5g28824ts9q4byp8ezh6sxf
+  - is-01m5g2wfw0xf50d000t9mn6wbv
+  - is-01m5g3da86sky65p89agbvcpfs
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T20:25:42.722Z
+updated_at: 2026-10-21T20:45:57.382Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-PR #578 final integration head is c3e8f1cc0965a5e4f65d3bed086994977fe35edb. This preserves integration commit 7b566ae73 and adds only generated explainer URL lastmod dates matching October 21. Hosted CI found this drift; local URL registry now has 1,143 rows and zero failures, and 15 date tests pass in 4.01s. Astra reviewed the correction without findings. Preview crawl files refreshed. Working tree clean. All earlier local validation and rebuilt-preview receipts are in PR body and the active plan. New hosted CI and explicit Deferred checkpoint are running; watch final-pr-checks-c3e8-watch.log in /Volumes/spud-ext2/agent-scratch/about-profiles-20261020. Keep draft until all final-head checks pass. No merge or deployment. Completed scoped beads closed; population/PDF inspection, historical registrations and other explicit followups remain open.
+Final integration head e2925e726ef3ed4916b7845aac8be21f3e74f073 pushed to PR #578. Includes c3e8f1cc generated URL date correction and measured mobile title fix. Main preserved at origin/main 7eeab1f5e. External checkout /Volumes/spud-ext2/worktrees/squares-profiles-final-20261021 is clean. Preview server99187 serves site-integrated-reviewed on127.0.0.1:8790 with all224result pages and updated immutable assets. T037 mobile CLS0.001994 across3runs per theme; desktop0.000622, no unreadable math. All224title text/MathML preserved;18focused tests,16finalCSS tests,16peer scenarios pass. Full rollup/footer selection30pass45.61s; final browser floor29.46s;2176documentation checks pass. Astra final review has no findings. Reopened think-uwd6 because historical child0ltn remains open;6054beads validate without error. LatestPRbody contains full local receipts and deferred scope. Hosted Packing/Pages and explicit Deferred checkpoint running on e2925e726; watch final-pr-checks-e292-watch.log in usual scratch. Earlier setup timeout and superseded-run cancellations are not final-head acceptance. Keep draft until exact-head CI is green; do not merge or deploy.
