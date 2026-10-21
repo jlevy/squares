@@ -117,7 +117,7 @@ and [attribution policy](../../../../attribution.md) own these rules.
 | `think-5q5y` | Canonical names and SVG navigation geometry regressions |
 
 The reviewed preview is <http://127.0.0.1:8790/profiles/index.html>, served from
-`/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-merged-3ae236a16`. It
+`/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-final-e3e33171b`. It
 includes all 75 profiles, separate Results, Records and Credits, credit significance
 breakdowns, Accounts and Resources columns, and muted parenthetical tallies.
 The complete merged build includes all four PDFs.
@@ -130,9 +130,11 @@ The URL registry has 1,144 rows with zero failures.
 The latest merge passes all 52 record-validation and 68 edit checks, plus 54
 identity/tally/coverage and 20 classifier/T-196 tests.
 All 69 selected post-merge push-gate steps pass in 952.59 seconds; hosted acceptance
-remains pending.
-The sourced integration environment includes the project interpreter and
-tools on PATH.
+remains pending. Final preview commit `e3e33171b` also corrects the adopted T-196
+resource description and removes repeated source validation from project-tally test
+assertions. All 16 tests pass locally in 36.79 seconds, with the three formerly slow
+calls at 0.12, 0.06 and 0.04 seconds; the existing runtime guard remains unchanged.
+The sourced integration environment includes the project interpreter and tools on PATH.
 
 Local focused checks passed: 88 profile, naming, resource, tally and GitHub-reference
 tests in 91.16 seconds; 62 release/component/impact tests in 17.93 seconds; and 19
