@@ -13627,6 +13627,11 @@ issues:
       - result: n998
       corrects:
       - https://github.com/jlevy/squares/issues/678#issuecomment-6306311833
+      outdated:
+      - >-
+        that reviewing the author's n260 float-conversion, search-chain, packing-identity and
+        analytic-optimum statements was still queued; since #716 that ask is done, on the 20
+        October review's mapping of the issue's assertions
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -13677,7 +13682,9 @@ issues:
       and at 260 from T-196 in the pass of 21 October, with T-186 and T-196 kept as history;
       48 beyond-horizon rows superseded by issue 686 and the row at 343 by issue 702, 34 still
       current; and the review's three questions for the author. Both asks stay queued, so the
-      issue stays open.
+      issue stays open. Its statement that the second ask was still queued is outdated since
+      #716, which marks that ask done (review A3 of #716); the follow-up that says so is posted
+      after #716 merges.
   - number: 680
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand
