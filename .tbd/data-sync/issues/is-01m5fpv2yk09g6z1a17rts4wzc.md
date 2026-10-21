@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 32
+version: 33
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -40,11 +40,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T19:11:23.645Z
+updated_at: 2026-10-21T19:30:36.495Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Stable 75-profile integration committed with normal hooks at a7b61b25a; Accounts/Resources and muted significance tallies live at 8790. Complete site build and all four PDFs passed; profile URI targets valid. Results remain all 213 primary-authored IDs and Credits 701 person/result pairs. User clarified Records includes all result families, strict numerical improvements, optimality proofs and formalizations. Shared classifier and renderer integration in progress under think-lekx; explicit unresolved priority/family scope shown as review pending. Frits Gobel full display name and Lewis X account fixed under think-x43w; formalization already in schema and Results/News tags. Lewis support roles/resource membership follow-up underway. Fresh origin/main 7eeab1f5e adds Evan Daniel n343 beyond-horizon source and snapshot selection; merge after current checkpoint, then reconcile new source joins and release history. Final integrated build, push gate, hosted CI, PR update and handoff remain pending. Historical result registrations and full 146-PDF inspection remain separate tracked work. Do not merge PR or deploy.
+Merged origin/main 7eeab1f5e at e0365923894e; data pin committed6d4c0de4d; reviewed renderer wording84cf9cd28. Shared all-family Records classification and UI complete:75profiles,213 authored Results,114 current Records,701 person/result Credits. Structured census1435resolved/78nonperson/7unresolved plus10manual origins. Astra bounded senior review found no blockers. Formalization remains one canonical kind across model/schema/filters. Full push gate has two isolated failures: unused test binding fixed, documentation map fixed and passed; full type rerun and reachable behavioral tests running. Complete merged site/PDF build finished; worker auditing and promoting preview. Final push/CI/PR update/handoff pending. New registrations,146-PDF complete inspection and family frontier comparison remain separately tracked. Do not merge PR or deploy.
