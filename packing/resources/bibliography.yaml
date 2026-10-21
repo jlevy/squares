@@ -3056,19 +3056,14 @@ sources:
     lineage: independent
     credit: Muglich after Couzo, de Winter, Fang, Daniel
     note: >-
-      Darius Muglich's issue 686 reports 100 upper bounds for n = 328 to 998, one exact
-      rational certificate each, in the issue's attachment
-      01-squares-100-certificates-and-poses.zip, published 2026-10-19T20:43:04Z and pinned
-      by its address and SHA-256 6b711d6e80c9828497ba09d44673ee490c00ccae51b80587ec591d940722a874;
-      there is no commit or DOI. The source says these are not 100 independent structures:
-      many are deletions, borders, crops or refinements of other holders' packings,
-      Francisco Couzo's most often, found with Evan Daniel's solver from public seeds,
-      and compared with Couzo's, de Winter's and Fang's published bounds. The per-case
-      provenance that credits each construction's seeds and sources is retained beside
-      derived facts in web/muglich-issue686-2026-10-19/; the archive's bytes are pinned by
-      digest and not retained. The author granted CC BY 4.0 for his contributions on 20
-      October 2026. OpenAI Codex assistance disclosed. Upper bounds only; no priority,
-      rigidity or optimality claim.
+      Darius Muglich's issue 686: 100 upper bounds for n = 328 to 998, one exact rational
+      certificate each, in the issue's attachment, published 2026-10-19T20:43:04Z and
+      pinned by address and SHA-256, with no commit or DOI. Not 100 independent
+      structures: many are deletions, borders, crops or refinements of other holders'
+      packings, Couzo's most often, found with Daniel's solver. Derived facts and the
+      per-case provenance are retained in web/muglich-issue686-2026-10-19/, not the
+      archive's bytes. CC BY 4.0 granted 20 October 2026; OpenAI Codex assistance
+      disclosed. Upper bounds only.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono
