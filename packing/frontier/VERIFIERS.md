@@ -2663,7 +2663,7 @@ Decides everything the re-weighted s(12) certificate rests on but coverage, in i
 
 **devtools.audit_s12_v11_certificate** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Decides everything squarepacker's v1.1 s(12) certificate rests on but coverage, in integers and Fraction: its bytes, the header and side, a one-to-one match of its points to Daniel's dilated within the stated rounding, positivity, containment, D4 invariance and orbits, the total below 12, the corner points, and the source's two controls rebuilt byte for byte.
+Decides everything Ryu's v1.1 s(12) certificate rests on but coverage, in integers and Fraction: its bytes, the header and side, a one-to-one match of its points to Daniel's dilated within the stated rounding, positivity, containment, D4 invariance and orbits, the total below 12, the corner points, and the source's two controls rebuilt byte for byte.
 
 - Source: [`packing/devtools/audit_s12_v11_certificate.py`](../../packing/devtools/audit_s12_v11_certificate.py)
 - Versions run: this repository's commits, which Git holds
