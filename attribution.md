@@ -259,7 +259,9 @@ its authors; prerequisite sources and “after” credits do not establish prima
 authorship. Raw occurrence counts remain diagnostics of the attribution census.
 
 Records are the current registered contributions within a person’s authored Results,
-counted once per result ID. Every result kind is eligible, including optimality proofs,
+counted once per result ID. Verified and reported bound frontiers remain separate;
+inclusion does not imply independent verification or a globally strongest result across
+evidence lanes. Every result kind is eligible, including optimality proofs,
 formalizations, simplifications and structural results.
 This does not imply a global ranking of methods or proofs.
 Numerical bounds need an owned current contribution; merely matching a bound or

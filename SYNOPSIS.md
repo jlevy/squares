@@ -687,6 +687,8 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Profile Coverage and Result-Intake Boundaries, 21 October 2026](docs/project/reviews/review-2026-10-21-profile-coverage.md) | dated review record | record | retained | — |
+| [Project PDF Credit Coverage, 21 October 2026](packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md) | dated review record | record | retained | — |
 | [Attribution Policy](attribution.md) | artifact and naming conventions | definitive | maintained | — |
 | [Person Profiles](packing/contributors/README.md) | component scope and use | current | maintained | — |
 | [Feature: Contributor Profiles and Linked Result Credits](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md) | implementation plan | current | transient | — |

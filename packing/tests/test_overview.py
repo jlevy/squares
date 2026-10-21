@@ -2640,7 +2640,8 @@ def test_the_nav_has_one_explanations_entry_for_the_papers_and_film() -> None:
         r'<a data-page="(\w+)"(?: aria-current="page")? href="([^"]+)"([^>]*)>(.*?)</a>', nav
     )
     entries = [
-        (key, href, "GitHub" if key == "github" else label) for key, href, attrs, label in links
+        (key, href, "GitHub" if key == "github" else label)
+        for key, href, _attrs, label in links
     ]
     assert entries == NAV_ENTRIES
     assert 'class="site-nav-icon"' in nav
