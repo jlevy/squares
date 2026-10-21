@@ -88,11 +88,16 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.13",
+        first_published="October 21, 2026",
+        result_scope="Name the 20 October review in the lineages at 154 and 308.",
+    ),
+    PublicationHistoryEntry(
         version="v0.8.12",
         first_published="October 21, 2026",
         result_scope=(
-            "Record Evan Daniel's s(343) certificate of issue 702 as the current "
-            "beyond-horizon row at 343, superseding issue 678's row there."
+            "Record Darius Muglich's 100 reported upper bounds at 328 to 998 (#686) as "
+            "beyond-horizon rows, superseding the rows they beat, with the issue's card."
         ),
     ),
     PublicationHistoryEntry(
@@ -682,7 +687,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "58f12aaa99ce9bcc0ada6b73b99fb92fac270bb3"
+DATA_REVISION = "a577f632b604c8b8a34b8946e6f47d28f3c0f036"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1159,12 +1164,19 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.8.12",
+        version="v0.8.13",
+        impact="patch",
+        reason="Name the 20 October review in the lineages at 154 and 308.",
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.8.11",
         version="v0.8.12",
         impact="patch",
         reason=(
-            "Record Evan Daniel's s(343) certificate of issue 702 as the current "
-            "beyond-horizon row at 343, superseding issue 678's row there."
+            "Record Darius Muglich's 100 reported upper bounds at 328 to 998 (#686) as "
+            "beyond-horizon rows, superseding the rows they beat, with the issue's card."
         ),
     ),
     ReleaseImpactDecision(
@@ -1865,49 +1877,73 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
-        components=("paper:n11-lower-bounds-explainer",),
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
         paths=(
+            "packing/campaign/result-requests.yaml",
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
             "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
             "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/n-154.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered at 1bcbe222 and with main 2e6d528d's copies of these paths: 68 "
+            "byte-identical files, no PDF."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/frontier/source-coverage.yaml",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
-        ),
-        reason=(
-            "The site v0.8.12 cut for #702's beyond-horizon row at 343 regenerated the "
-            "five claim documents, and each of the 22 changed lines differs from main "
-            "9dda9224 only in its source-link revision, fbb3d573 to 107e1ca4. The "
-            "explainer links those documents rather than inlining them, so its HTML and "
-            "Markdown are unchanged by them and it keeps v0.4.13. This is a "
-            "source-reviewed disposition, as think-9v1i's was for v0.8.7."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=("paper:square-packing-methods-survey",),
-        paths=(
-            "packing/campaign/result-requests.yaml",
-            "packing/frontier/source-coverage.yaml",
-        ),
-        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
             "papers/square-packing-methods-survey.html",
             "papers/square-packing-methods-survey.md",
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "For the #702 import of 21 October (Evan Daniel's s(343) beyond-horizon row, "
-            "evand-n343-sweep-2026-10-20, superseding #678's row at 343) against main "
-            "9dda9224: result requests and source coverage are citation targets whose "
-            "existence the producer checks, not inlined text, and every cited path exists "
-            "at both revisions; the #702 request, the n343 coverage source and its row are "
-            "not cited by the survey. Rendered at link revision f52abebc into an empty "
-            "site directory, once from this branch's tree and once with main's copies of "
-            "the two changed inputs: render_packing_methods leaves the 42 files it writes "
-            "byte-identical between the trees. No PDF was printed; it prints from that "
-            "HTML. Retain v0.2.3."
+            "Issue 686's import against main 9dda9224. The v0.8.12 cut changed only the "
+            "claim documents' link revision, fbb3d573 to 45f1918d, and the explainer links "
+            "them. The survey cites the requests and coverage records without inlining "
+            "them; the snapshot prune and issue 686's card reach no paper. With main's "
+            "copies of the other four inputs, the four renderers write 68 byte-identical "
+            "files at link revision 255049cb, and after review A's record edits the "
+            "survey's HTML and Markdown again at 8fd21bb6. Retain v0.4.13, v0.1.7, v0.1.0 "
+            "and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
@@ -6007,7 +6043,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "107e1ca4"
+PUBLICATION_REVISION = "902c92d9"
 
 
 def data_pathspec() -> tuple[str, ...]:

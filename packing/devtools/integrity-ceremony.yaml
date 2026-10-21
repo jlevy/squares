@@ -44,6 +44,16 @@ allowlist:
       digest is compared with the one the packet pinned, so the bound it states is bound
       to the retained bytes. The retained certificates are read from Git and compared
       with nothing; their custody is acquire_source --check's.
+  - path: packing/devtools/muglich_686_import.py
+    kind: download
+    boundary: >-
+      `derive` reads a local copy of issue 686's attachment,
+      01-squares-100-certificates-and-poses.zip, which no Git revision names: an issue
+      attachment has no commit, and the packet keeps derived facts rather than the
+      archive's bytes. The copy is held to the SHA-256 the issue states and the size
+      triage measured before any member is read. The facts and provenance record it
+      writes are this repository's files, identified by Git and path, and compared with
+      nothing.
   - path: packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
     kind: download
     boundary: >-

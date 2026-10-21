@@ -2502,6 +2502,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/jlevy/squares/issues/686",
+        "100 Certified Larger-Count Square Packings",
+        "Darius Muglich",
+        (
+            "Exact rational upper-bound certificates for n = 328 to 998, in an archive"
+            " attached to the issue."
+        ),
+    ),
+    (
         "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/",
         "Proposing a Better Lower Bound for n = 17 Square Packing",
         "Sam Burns",
