@@ -5,7 +5,7 @@ title: "Import Evan Daniel: s(343) <= 18.977682482405 (#702)"
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T00:50:40.249Z
-updated_at: 2026-10-21T17:43:15.072Z
+updated_at: 2026-10-21T19:02:16.421Z
 started_at: 2026-10-21T05:27:59.180Z
 ---
 Stage 1 triage of jlevy/squares#702 (Evan Daniel, opened 2026-10-20T22:09:31Z), read-only, 21 October 2026, lane c-lane-records-1021. Nothing retained, imported or replayed.
@@ -63,3 +63,6 @@ Stages 2 and 3 are on draft PR #712 (https://github.com/jlevy/squares/pull/712),
 
 2026-10-21 c-triage-sweep-1021b (read-only triage of the 21 October sweep): the sweep read "main (4851d8193) holds the current row at 343 ... (Daniel, #489)" as a wait on #489, closed 12 October. What this bead waits on is PR #712's merge (draft, head cae58cb2, review A posted 21 October), which itself waits on the owner's snapshot-cap decision; #711 merged at 09:16Z. When #712 merges, post the #702 reply drafted in replies-new/702.draft.md from main and close. The sweep's evand item for 88385ab (the s343 files) clears when #712's packet lands; no intake-watch read is needed for it.
 blocked_on: jlevy/squares#712
+
+2026-10-21 coord-intake-1021b: #712 merged 19:01:27Z as 7eeab1f5e. Stage 7 for #702 delegated to c-lane-702-answer (deploy check, reply from main); the reply is recorded under #702 replies in the next records change.
+blocked_on: none
