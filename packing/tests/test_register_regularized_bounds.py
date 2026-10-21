@@ -130,11 +130,29 @@ def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
     it is, and the view's dated paragraph and section say it held until that day. At n = 204
     issue 562's packing (T-162) was adopted so on 15 October 2026, and at n = 29 PR #622's
     certificate (T-195) on 17 October 2026, the first adoption under the house rule. At
-    n = 229 Evan Daniel's dilation certificate (T-199) was adopted on 19 October 2026."""
-    assert [n for n in registered.committed() if registered.readopted(n)] == [29, 204, 229, 264]
+    n = 229 Evan Daniel's dilation certificate (T-199) was adopted on 19 October 2026, and
+    at n = 260 Francisco Couzo's issue-678 certificate (T-223) on 20 October 2026, each the
+    first adoption at its count, from the catalogue's packing T-155's view had certified."""
+    assert [n for n in registered.committed() if registered.readopted(n)] == [
+        29,
+        204,
+        229,
+        260,
+        264,
+    ]
     assert registered.readopted_by(229, "T-155")
     text = (registered.FRONTIER / "n-229.md").read_text(encoding="utf-8")
     assert registered.apply_case(229, text) == text
+    assert registered.readopted_by(260, "T-155")
+    assert not registered.readopted_by(260, "T-156")
+    text = (registered.FRONTIER / "n-260.md").read_text(encoding="utf-8")
+    assert registered.apply_case(260, text) == text
+    flat260 = _flat(260)
+    assert (
+        "the verified upper bound until 20 October 2026 (T-155), which the record printed as "
+        "$16.65685424949239$" in flat260
+    )
+    assert "which the record still prints" not in flat260
     assert registered.readopted_by(204, "T-155")
     text = (registered.FRONTIER / "n-204.md").read_text(encoding="utf-8")
     assert registered.apply_case(204, text) == text
