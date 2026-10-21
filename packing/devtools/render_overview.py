@@ -1538,6 +1538,7 @@ def about_page() -> Page:
 def results_page() -> Page:
     """Every registered result, one row each at its own id, sortable and filterable."""
     from devtools import overview_data, overview_sections  # noqa: PLC0415
+    from devtools.render_case_pages import compact_visual_math_classes  # noqa: PLC0415
 
     overview = overview_data.load()
     values = {
@@ -1571,7 +1572,7 @@ def results_page() -> Page:
     markdown = fill(
         RESULTS_ARTICLE.read_text(encoding="utf-8"), values, where=RESULTS_ARTICLE.name
     )
-    return kpress_page(
+    page = kpress_page(
         markdown,
         name=RESULTS_META.path,
         current="results",
@@ -1582,6 +1583,8 @@ def results_page() -> Page:
         page_styles=(RESULTS_CSS,),
         page_scripts=(TABLE_SCRIPT, POPOVER_SCRIPT, ROW_POPOVER_SCRIPT),
     )
+
+    return page._replace(html=compact_visual_math_classes(page.html, profile_links=True))
 
 
 def papers_page() -> Page:

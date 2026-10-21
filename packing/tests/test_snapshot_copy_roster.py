@@ -95,7 +95,9 @@ def test_contributor_seed_evidence_survives_archive_pruning() -> None:
         for path in declared
         if controls.in_pruned_roots(path, frozenset(controls.LINKED_PRUNE_ROOTS))
     }
-    assert declared <= set(controls.snapshot_copy_targets())
+    # Unpruned dependencies arrive through the ordinary tree walk; only archive
+    # dependencies need the separate rescue roster asserted above.
+    assert declared <= set(controls.snapshot_source_paths())
     assert any(path.name == "LICENSE" for path in declared)
     assert any(path.name == "CITATION.cff" for path in declared)
     assert controls.ROOT / "resources" not in controls.snapshot_copy_targets()

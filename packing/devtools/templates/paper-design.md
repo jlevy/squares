@@ -2894,9 +2894,10 @@ Their content role is primary; an account handle is not muted metadata.
 Evidence and breadcrumb metadata may retain the secondary text role.
 
 The profile directory at `profiles/` is a native table: full real or public **Name**,
-**Years active**, **Results**, **Credits**, **Resources**, and **Accounts**. It sorts by
-the shared evidenced surname key, falling back to the public handle when no surname is
-established. The directory name contains only the full real or public name.
+**Years active**, **Results**, **Records**, **Credits**, **Resources**, and
+**Accounts**. It sorts by the shared evidenced surname key, falling back to the public
+handle when no surname is established.
+The directory name contains only the full real or public name.
 Additional handles appear on the individual profile, while account usernames remain in
 the Accounts column.
 The Accounts column contains public GitHub, X and Substack account profiles.
@@ -2904,6 +2905,11 @@ Personal and publication websites belong in Resources, alongside project reposit
 displayed as domains or owner/repo labels with shared icons.
 These website resources derive from the existing evidenced profile links rather than
 duplicate stored records.
+The Name column reserves 16rem so most full names stay on one line.
+Accounts and Resources retain 12rem minimum widths without reserving percentages that
+would squeeze names.
+Resource addresses wrap at normal URL boundaries, with an emergency break for a segment
+too long to fit. Icons stay beside the first line.
 
 The directory introduction totals people, distinct primary results, credited
 person/result pairs and unique linked resources.

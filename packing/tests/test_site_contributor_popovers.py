@@ -307,7 +307,10 @@ def test_generated_profile_uses_shared_roles_without_overflow(
             assert note["size"] == pytest.approx(styles["note"]["size"])
             assert note["family"] == styles["note"]["family"]
             assert note["weight"] == styles["note"]["weight"]
-            assert note["color"] == styles["note"]["color"]
+            expected_color = (
+                styles["foreground"] if note["primary"] else styles["note"]["color"]
+            )
+            assert note["color"] == expected_color
             assert note["wrap"] != "anywhere"
         assert all(term["weight"] == styles["medium"] for term in styles["terms"])
         assert styles["headings"]
@@ -329,6 +332,9 @@ def test_generated_profile_uses_shared_roles_without_overflow(
         else:
             assert styles["body"]["family"] != styles["note"]["family"]
         assert styles["overflow"] == []
+        for bounds in styles["wideBounds"]:
+            assert bounds["left"] >= 0
+            assert bounds["right"] <= width
         assert styles["pageWidth"] <= width
         shots = Path(os.environ.get("SQPACK_CONTRIBUTOR_DESIGN_SHOTS", str(tmp_path)))
         shots.mkdir(parents=True, exist_ok=True)

@@ -145,16 +145,36 @@ def test_gear_aligns_with_the_navigation_labels_visible_ink(
             page.goto(path.as_uri(), wait_until="load")
             page.locator(".site-headroom").wait_for(state="attached")
             items = page.evaluate(NAVIGATION)
+            about = next(item for item in items if item["label"] == "about")
             github = next(item for item in items if item["label"] == "github")
             gear = next(item for item in items if item["label"] == "site-theme")
+            github_icon = (
+                page.get_by_role("link", name="GitHub", exact=True)
+                .locator("svg")
+                .bounding_box()
+            )
+            assert github_icon is not None, name
+            github_center = github_icon["y"] + github_icon["height"] / 2
+            assert github_center == pytest.approx(github["capCenter"], abs=0.75), (
+                name,
+                items,
+            )
+            assert github_icon["height"] == pytest.approx(
+                2 * (gear["iconBottom"] - gear["iconCenter"]), abs=0.05
+            ), name
             assert gear["iconCenter"] == pytest.approx(gear["inkCenter"], abs=0.75), (
                 name,
                 items,
             )
             # The button can wrap onto its own line at 320px. Its own text baseline
             # still defines the same optical alignment as a label on that line.
+            if abs(gear["baseline"] - about["baseline"]) < 0.75:
+                assert gear["iconCenter"] == pytest.approx(about["inkCenter"], abs=0.75)
+            # GitHub is an SVG with no text ink; its visible center follows the gear.
             if abs(gear["baseline"] - github["baseline"]) < 0.75:
-                assert gear["iconCenter"] == pytest.approx(github["inkCenter"], abs=0.75)
+                assert gear["iconCenter"] == pytest.approx(github_center, abs=0.75)
+            assert github["width"] >= 24, (name, github)
+            assert github["bottom"] - github["top"] >= 24, (name, github)
             assert gear["buttonWidth"] >= 24, (name, gear)
             assert gear["buttonHeight"] >= 24, (name, gear)
         finally:

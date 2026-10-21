@@ -17,7 +17,7 @@ from functools import cache
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, override
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
 from sqpack.contributors import PROFILES_DIR, record_metadata
 
@@ -495,12 +495,65 @@ def link_prose(
     return "".join(parser.parts)
 
 
+class _ProfileTargets(HTMLParser):
+    """Check profile destinations in every HTML context, including compact attributes."""
+
+    def __init__(self, root: Path, page: Path, people: Mapping[str, ProfileName]) -> None:
+        super().__init__()
+        self.root = root.resolve()
+        self.page = page.resolve()
+        self.people = people
+        self.broken: dict[str, str] = {}
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        address = dict(attrs).get("href")
+        if tag != "a" or not address:
+            return
+        parsed = urlsplit(address)
+        if parsed.netloc:
+            if parsed.scheme != "https" or parsed.netloc != "jlevy.github.io":
+                return
+            path = unquote(parsed.path)
+            if not path.startswith("/squares/"):
+                if "/profiles/" in path:
+                    self.broken[address] = "outside canonical project path"
+                return
+            path = path.removeprefix("/squares/")
+            target = (self.root / path).resolve()
+        elif parsed.scheme:
+            return
+        else:
+            path = unquote(parsed.path)
+            if path.startswith("/"):
+                if not path.startswith("/squares/"):
+                    if "/profiles/" in path:
+                        self.broken[address] = "outside canonical project path"
+                    return
+                path = path.removeprefix("/squares/")
+                target = (self.root / path).resolve()
+            else:
+                target = (self.page.parent / path).resolve()
+        if not re.search(r"(?:^|/)profiles/[^/]+\.html$", path) and not (
+            self.page.parent == self.root / PROFILES_DIR
+            and "/" not in path
+            and path.endswith(".html")
+        ):
+            return
+        identifier = Path(path).stem
+        expected = self.root / PROFILES_DIR / (identifier + ".html")
+        if identifier not in self.people and identifier != "index":
+            self.broken[address] = "unknown profile"
+        elif target != expected or not target.is_file():
+            self.broken[address] = f"does not resolve to {PROFILES_DIR}/{identifier}.html"
+
+
 def audit_site(root: Path) -> dict[str, Any]:
     """Report remaining full-name prose by surface, including retained table credits."""
     index = public_index()
     surfaces = sorted(root.rglob("*.html"))
     remaining = {}
     label_mismatches = {}
+    broken_profile_links = {}
     contexts: dict[str, dict[str, dict[str, int]]] = {}
     for path in surfaces:
         if not path.is_file():
@@ -511,8 +564,14 @@ def audit_site(root: Path) -> dict[str, Any]:
             current_profile=path.stem if path.parent.name == "profiles" else None,
             audit=True,
         )
-        parser.feed(path.read_text(encoding="utf-8"))
+        source = path.read_text(encoding="utf-8")
+        parser.feed(source)
         parser.close()
+        targets = _ProfileTargets(root, path, index.people)
+        targets.feed(source)
+        targets.close()
+        if targets.broken:
+            broken_profile_links[path.relative_to(root).as_posix()] = targets.broken
         if parser.label_mismatches:
             label_mismatches[path.relative_to(root).as_posix()] = dict(parser.label_mismatches)
         if parser.unlinked:
@@ -533,6 +592,7 @@ def audit_site(root: Path) -> dict[str, Any]:
         "remaining_full_names": remaining,
         "ambiguous_full_names": sorted(index.ambiguous_names),
         "profile_link_label_mismatches": label_mismatches,
+        "broken_profile_links": broken_profile_links,
     }
 
 

@@ -84,7 +84,10 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     assert drawn.startswith(
         '<div class="site-case-note"><span class="site-card-label">Regularized drawing</span>'
     )
-    assert "Regularized by the Squares Project with Evan Daniel" in drawn
+    assert (
+        "Regularized by the Squares Project with "
+        '<a href="profiles/evan-daniel.html">Daniel</a>' in drawn
+    )
     assert "retry rung force-kkt" in drawn
     assert "a pure regularization, which proves no new bound, so not a result" in drawn
 
@@ -112,8 +115,9 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     # claims no new bound (PR #585, review B1).
     earlier = regularization(cases[28])
     assert "Regularized by the Squares Project" in earlier
-    assert "registered in T-155, and the same side was first certified by Evan Daniel" in (
-        earlier
+    assert (
+        "registered in T-155, and the same side was first certified by "
+        '<a href="profiles/evan-daniel.html">Daniel</a>' in earlier
     )
     assert "(T-101), so it proves no new bound" in earlier
     assert "the upper bound it proves" not in earlier

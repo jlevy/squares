@@ -1854,7 +1854,19 @@ def root_files() -> tuple[Path, ...]:
 # over 228 MiB, the growth being T-223's records. Raise to 229 MiB, the least whole MiB
 # above it, with unchanged selection and the oversized pre-clone refusal: 843,802 bytes
 # of headroom. Three portable workers are bounded at 687 MiB.
-SNAPSHOT_MAX_BYTES = 229 * 1024 * 1024
+#
+# 2026-10-21, the completed profile identity review (think-4m6m):
+# `--audit-snapshot` reads 263,907,248 bytes. The newly declared primary-byline
+# dependency `resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf`
+# contributes 25,831,878 bytes: it is a complete volume scan, with the byline on
+# PDF pages 287 and 296. Without this one dependency the same selection reads
+# 238,075,370 bytes, below the former 229 MiB cap. The profile loader requires the
+# named archive, so retain the complete private file rather than omitting or
+# excerpting it. Its full PDF credit census remains pending; copied custody does
+# not certify inspection. Raise to 252 MiB, the least whole MiB above this measured
+# surface, with 333,904 bytes of headroom and unchanged source selection and
+# pre-clone oversized refusal. Three portable workers remain bounded at 756 MiB.
+SNAPSHOT_MAX_BYTES = 252 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

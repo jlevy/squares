@@ -396,8 +396,14 @@ def test_the_pages_render_self_contained_with_a_toc(
 
 def test_no_relative_repository_link_survives(pages: dict[str, render_overview.Page]) -> None:
     from devtools.render_case_pages import case_url  # noqa: PLC0415
+    from devtools.render_contributors import page_paths  # noqa: PLC0415
 
-    served = {"./", *render_overview.SITE_PAGES, *(case_url(n) for n in range(1, 325))}
+    served = {
+        "./",
+        *render_overview.SITE_PAGES,
+        *page_paths(),
+        *(case_url(n) for n in range(1, 325)),
+    }
     for name, page in pages.items():
         article = re.search(r"<article\b.*?</article>", page.html, re.DOTALL)
         assert article is not None

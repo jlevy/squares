@@ -291,3 +291,41 @@ def test_standalone_paper_prose_links_keep_footnote_citations_unchanged() -> Non
         '<p><a href="../profiles/alice.html">Example</a>\u2019s theorem.</p>'
     )
     assert linked.endswith(citations)
+
+
+def test_profile_target_audit_resolves_links_from_the_containing_page(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    index = profile_index(
+        {
+            "alice": {"display_name": "Alice Example", "surname": "Example"},
+            "bob": {"display_name": "Bob Known", "surname": "Known"},
+        }
+    )
+    monkeypatch.setattr("devtools.profile_links.public_index", lambda: index)
+    (tmp_path / "profiles").mkdir()
+    (tmp_path / "cases").mkdir()
+    (tmp_path / "profiles/alice.html").write_text('<a href="alice.html#sources">Example</a>')
+    (tmp_path / "index.html").write_text('<a href="profiles/alice.html">Example</a>')
+    (tmp_path / "cases/11.html").write_text(
+        "<table><tr><td><a href=profiles/alice.html>Example</a></td></tr></table>"
+        '<a href="../profiles/alice.html?view=credits#sources">Example</a>'
+        '<a href="https://jlevy.github.io/squares/profiles/alice.html">Example</a>'
+        '<a href="../profiles/missing.html">Missing</a>'
+        '<a href="https://jlevy.github.io/profiles/alice.html">Example</a>'
+        '<a href="/squares/profiles/alice.html">Example</a>'
+        '<a href="/profiles/alice.html">Example</a>'
+        '<a href="https://jlevy.github.io/squares/profiles/bob.html">Known</a>'
+        '<a href="https://other.example/profiles/alice.html">External source</a>'
+    )
+    assert audit_site(tmp_path)["broken_profile_links"] == {
+        "cases/11.html": {
+            "profiles/alice.html": "does not resolve to profiles/alice.html",
+            "../profiles/missing.html": "unknown profile",
+            "https://jlevy.github.io/profiles/alice.html": "outside canonical project path",
+            "/profiles/alice.html": "outside canonical project path",
+            "https://jlevy.github.io/squares/profiles/bob.html": (
+                "does not resolve to profiles/bob.html"
+            ),
+        }
+    }

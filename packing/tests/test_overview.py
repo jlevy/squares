@@ -35,6 +35,8 @@ from devtools import (
     site_urls,
 )
 from devtools.check_results import scope_values
+from devtools.github_references import parse_github_reference
+from devtools.profile_links import link_prose
 from devtools.render_n11_lower_bounds_explainer import COMPOSITE_ASSETS, OVERVIEW_FILM_POSTER
 from devtools.render_n11_lower_bounds_explainer import MARKDOWN as EXPLAINER_ARTICLE
 from devtools.render_n11_lower_bounds_explainer import PUBLICATION_STYLE as EXPLAINER_STYLE
@@ -46,6 +48,7 @@ from devtools.repo_links import (
     repo_url,
 )
 from devtools.result_credit import OTHERS, source_lineage
+from devtools.site_icons import github_reference_icon
 from sqpack.yamlio import safe_load
 from tests import site_renders
 
@@ -619,9 +622,11 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
     assert Counter(href for href, _, _ in cards) == Counter(paper.href for paper in entries)
     assert 'id="reading-and-research"' not in about
     assert "PAGE_CARDS" not in render_overview.ABOUT_ARTICLE.read_text(encoding="utf-8")
-    assert re.findall(r'<a class="site-card site-card-link" href="([^"]+)"', about) == [
-        overview_sections.PROFILES_DIRECTORY
-    ]
+    assert re.findall(r'<a class="site-card site-card-link" href="([^"]+)"', about) == []
+    assert (
+        f'<a class="site-action" href="{overview_sections.PROFILES_DIRECTORY}">All Profiles'
+        in about
+    )
     for page in (about, papers):
         assert (
             re.search(
@@ -1708,13 +1713,74 @@ def test_each_card_size_is_a_column_of_its_own_grid() -> None:
     assert '[data-card-size="medium"]' not in css
 
 
-#: A card, as its opening tag's size and everything after its caps label: the headline,
-#: the note and a direct card's address.
-_CARD_ELEMENT = re.compile(
-    r'<(button|a|div)\b[^>]*class="site-card[ "][^>]*data-card-size="([^"]*)"[^>]*>'
-    r'.*?(?:<span class="site-card-value">|<h3[^>]*>)(.*?)</(?:button|a)>',
-    re.DOTALL,
-)
+class _CardContents(HTMLParser):
+    """Read sized cards' headline, note and address across independent child links."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.cards: list[tuple[str, str]] = []
+        self.stack: list[str] = []
+        self.size: str | None = None
+        self.card_depth = 0
+        self.capture_depth = 0
+        self.parts: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        classes = set((attributes.get("class") or "").split())
+        if tag not in {
+            "area",
+            "base",
+            "br",
+            "col",
+            "embed",
+            "hr",
+            "img",
+            "input",
+            "link",
+            "meta",
+            "param",
+            "source",
+            "track",
+            "wbr",
+        }:
+            self.stack.append(tag)
+        if "site-card" in classes:
+            assert self.size is None, "cards do not nest"
+            self.size = attributes["data-card-size"]
+            self.card_depth = len(self.stack)
+            self.parts = []
+        if (
+            self.size is not None
+            and not self.capture_depth
+            and (
+                tag == "h3"
+                or classes.intersection({"site-card-value", "site-card-note", "site-card-url"})
+            )
+        ):
+            self.capture_depth = len(self.stack)
+        if self.capture_depth:
+            token = self.get_starttag_text()
+            assert token is not None
+            self.parts.append(token)
+
+    def handle_endtag(self, tag: str) -> None:
+        if not self.stack or self.stack[-1] != tag:
+            return
+        depth = len(self.stack)
+        if self.capture_depth:
+            self.parts.append(f"</{tag}>")
+            if depth == self.capture_depth:
+                self.capture_depth = 0
+                self.parts.append(" ")
+        if self.size is not None and depth == self.card_depth:
+            self.cards.append((self.size, "".join(self.parts)))
+            self.size = None
+        self.stack.pop()
+
+    def handle_data(self, data: str) -> None:
+        if self.capture_depth:
+            self.parts.append(html.escape(data))
 
 
 def _card_sections(page: str, about: str, papers: str) -> dict[str, list[tuple[str, str]]]:
@@ -1727,10 +1793,13 @@ def _card_sections(page: str, about: str, papers: str) -> dict[str, list[tuple[s
     frames = [*paper_frames, projects, *about_frames]
     names = ("tutorial", "papers", "atlas", "projects", "documents")
     assert len(frames) == len(names)
-    return {
-        name: [(size, text) for _, size, text in _CARD_ELEMENT.findall(frame)]
-        for name, frame in zip(names, frames, strict=True)
-    }
+    sections = {}
+    for name, frame in zip(names, frames, strict=True):
+        reader = _CardContents()
+        reader.feed(frame)
+        reader.close()
+        sections[name] = reader.cards
+    return sections
 
 
 def test_every_card_names_one_of_three_sizes(page: str, about: str, papers: str) -> None:
@@ -2572,9 +2641,15 @@ def test_other_project_cards_are_links_showing_their_address(
             re.DOTALL,
         )
         assert source is not None, url
-        address = url.removeprefix("https://").rstrip("/")
-        assert html.escape(address) in source[1].replace("<wbr>", ""), url
-        assert closed(overview_sections.link_icon(url)) in closed(source[1]), url
+        if reference := parse_github_reference(url):
+            assert f'<span class="site-card-url-text">#{reference.number}</span>' in source[1]
+            icon = github_reference_icon(reference.kind, class_name="site-link-icon")
+            assert closed(icon) in closed(source[1]), url
+            assert f"{reference.repository}#{reference.number}" in source[0], url
+        else:
+            address = url.removeprefix("https://").rstrip("/")
+            assert html.escape(address) in source[1].replace("<wbr>", ""), url
+            assert closed(overview_sections.link_icon(url)) in closed(source[1]), url
     assert closed(overview_sections.GITHUB_MARK) in closed(section)
     assert closed(overview_sections.WEB_MARK) in closed(section)
     assert "popovertarget" not in section
@@ -2905,7 +2980,7 @@ def test_every_site_page_carries_the_same_bar(
     else:
         # A page in a directory of its own, the case records', reaches the root from it.
         page, root = rendered(name), "../" * name.count("/")
-    partial = render_overview.SITE_NAV.read_text(encoding="utf-8").replace("{{ROOT}}", "")
+    partial = render_overview.nav_html("")
     assert _the_bar(page, root=root) == SITE_NAV_BLOCK.findall(partial)[0]
 
 
@@ -4145,43 +4220,45 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     ]
     assert [_rendered_text(item) for item in items] == [
         _markdown_text(
-            "Levy began the Squares Project in August 2026 with new lower bounds "
+            "Joshua Levy began the Squares Project in August 2026 with new lower bounds "
             "for $n = 11, 17, 18, 19, 20$ and other low values."
         ),
-        _markdown_text("Overbeck\u2019s certified lower bound of $31/8$ for eleven squares."),
-        "Ahmed\u2019s proof of optimality for eleven squares.",
         _markdown_text(
-            "Independently, Daniel has proved the optimality of an infinite family, "
+            "Marc Leonard Overbeck\u2019s certified lower bound of $31/8$ for eleven squares."
+        ),
+        "Manasseh Ahmed\u2019s proof of optimality for eleven squares.",
+        _markdown_text(
+            "Independently, Evan Daniel has proved the optimality of an infinite family, "
             r"$s(k^2 - 3) = k$ for every $k \ge 6$, along with exact values at "
             "21, 32, 45 and 60 squares."
         ),
         (
-            "Overbeck\u2019s candidate proof for seventeen squares, "
+            "Marc Leonard Overbeck\u2019s candidate proof for seventeen squares, "
             "reported and unverified here (V0/C1)."
         ),
         (
-            "Fitzharding\u2019s Lean proof report for seventeen squares, "
+            "Oscar Fitzharding\u2019s Lean proof report for seventeen squares, "
             "also unverified here (V0/C1)."
         ),
     ]
     text = _rendered_text(narrative)
     for claim in (
         "Work on the square packing problem has exploded",
-        "Levy",
-        "Overbeck",
-        "Ahmed",
-        "Daniel",
-        "Fitzharding",
+        "Joshua Levy",
+        "Marc Leonard Overbeck",
+        "Manasseh Ahmed",
+        "Evan Daniel",
+        "Oscar Fitzharding",
         "Independently",
         "AI-assisted verification",
     ):
         assert claim in text, claim
     founder = '<a href="https://x.com/ojoshe" target="_blank" rel="noopener noreferrer">'
     for address, label in (
-        ("profiles/joshua-levy.html", "Levy"),
-        ("profiles/marc-leonard-overbeck.html", "Overbeck"),
-        ("profiles/manasseh-ahmed.html", "Ahmed"),
-        ("profiles/evan-daniel.html", "Daniel"),
+        ("profiles/joshua-levy.html", "Joshua Levy"),
+        ("profiles/marc-leonard-overbeck.html", "Marc Leonard Overbeck"),
+        ("profiles/manasseh-ahmed.html", "Manasseh Ahmed"),
+        ("profiles/evan-daniel.html", "Evan Daniel"),
         ("papers/n11-lower-bounds-explainer.html", "new lower bounds"),
         ("papers/n11-threshold-bound-review.html", "certified lower bound of $31/8$"),
         ("papers/n11-optimality-review.html", "proof of optimality"),
@@ -4268,7 +4345,9 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert "data-news-entry=" not in about
     assert '<a id="news"></a>' in about
     following = about.split(heading, 1)[1].lstrip()
-    assert following.startswith("<p>Work on the square packing problem")
+    assert following.startswith(
+        '<div class="site-profile-full-names">\n<p>Work on the square packing problem'
+    )
     assert "Work on the square packing problem has exploded" not in page
     assert page.count('id="the-squares-project"') == 0
     assert 'href="about.html"' in page
@@ -4908,7 +4987,7 @@ def test_a_table_of_results_is_one_flat_list_newest_first(
             opening = f'<td class="site-col-credit" data-value="{html.escape(result.credit)}">'
             assert opening in row, result.id
             cell = row.split(opening, 1)[1].split("</td>", 1)[0]
-            assert _rendered_text(cell) == result.credit, result.id
+            assert _rendered_text(cell) == _rendered_text(result.credit_html), result.id
             assert Counter(re.findall(r'href="([^"]+)"', cell)) == Counter(
                 re.findall(r'href="([^"]+)"', result.credit_html)
             ), result.id
@@ -4916,7 +4995,8 @@ def test_a_table_of_results_is_one_flat_list_newest_first(
                 quiet = re.search(r'<span class="site-cell-quiet">(.*?)</span>', cell)
                 assert quiet is not None, result.id
                 assert (
-                    _rendered_text(quiet[1]) == "after " + result.credit.partition(" after ")[2]
+                    _rendered_text(quiet[1])
+                    == "after " + _rendered_text(result.credit_html).partition(" after ")[2]
                 )
         source = "ours" if result.ours else "others"
         assert f'data-source="{source}"' in _row(table, result.id), result.id
@@ -5944,13 +6024,16 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
         assert preview.count(f'href="{overview_sections.result_fragment(result.id)}"') == 1
         assert ">Open Result Record</a>" in preview, result.id
         assert (
-            overview_sections.prose_html(
-                result.record["claim"], between='</p><p class="site-result-claim">'
+            link_prose(
+                overview_sections.prose_html(
+                    result.record["claim"], between='</p><p class="site-result-claim">'
+                )
             )
             in full
         ), result.id
         assert (
-            overview_sections.prose_html(result.record["significance"]["rationale"]) in full
+            link_prose(overview_sections.prose_html(result.record["significance"]["rationale"]))
+            in full
         ), result.id
         for link in result.records:
             assert f'href="{html.escape(link.url, quote=True)}"' in full, result.id
@@ -5971,7 +6054,9 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
             assert f"<dt>{label}</dt>" not in preview, result.id
             if result.record.get(key):
                 assert f"<dt>{label}</dt>" in full, result.id
-                assert overview_sections.prose_html(result.record[key]) in full, result.id
+                assert link_prose(overview_sections.prose_html(result.record[key])) in full, (
+                    result.id
+                )
 
 
 #: What the two pages that list results may weigh. The result overviews are 4.9 MB

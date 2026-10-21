@@ -11,6 +11,7 @@ from fractions import Fraction
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Literal
+from urllib.parse import urljoin, urlsplit
 
 import pytest
 
@@ -24,6 +25,7 @@ from devtools import (
 from devtools import render_frontier_page as frontier_page
 from devtools import render_research_tables as tables
 from devtools.overview_data import math_html
+from devtools.profile_links import link_prose
 from devtools.render_overview import assert_fetches_only_assets
 from devtools.repo_links import DEFAULT_BRANCH, REPO_URL, hash_pinned_links
 from sqpack.probes import probe
@@ -244,7 +246,21 @@ def test_a_records_links_are_written_from_its_own_directory(
     record = _record(records, 11)
     assert 'href="../atlas.html#n-11"' in record
     assert 'href="../results.html#t-018"' in record
-    assert '<a href="../profiles/walter-trump.html">' in record
+    parsed = _HtmlEvents()
+    parsed.feed(record)
+    assert ("a", {"href": "../profiles/walter-trump.html"}) in parsed.elements
+    for name, page in records.items():
+        links = _HtmlEvents()
+        links.feed(page)
+        for tag, attributes in links.elements:
+            href = attributes.get("href")
+            if tag != "a" or not href or "profiles/" not in href:
+                continue
+            parts = urlsplit(href)
+            if parts.scheme or parts.netloc:
+                continue
+            target = urlsplit(urljoin("https://example.test/" + name, href)).path
+            assert target.startswith("/profiles/"), (name, href, target)
     assert 'href="10.html" rel="prev" data-case-step="10"' in record
     assert 'href="12.html" rel="next" data-case-step="12"' in record
     assert "data-case-index" not in record
@@ -458,12 +474,15 @@ def test_a_regularized_default_draws_its_view_and_keeps_the_house_as_published()
     disclosure = head.index('<details class="site-case-published"><summary>As published')
     assert figure < head.index(view) < disclosure < head.index(house)
     assert disclosure < head.index('class="site-case-title"')
-    assert html.escape(default_drawings.credit_line(n)) in head[:disclosure]
+    assert link_prose(html.escape(default_drawings.credit_line(n))) in head[:disclosure]
+    assert 'href="profiles/evan-daniel.html">Daniel</a>' in head[:disclosure]
     published = head[disclosure:]
     assert '<figure class="site-case-figure site-case-published-figure">' in published
     assert "The packing as published, " in published
     upper = cases[n]["reported_upper_bound"]
-    assert frontier_page.credit(upper.get("found_by"), upper.get("found_year")) in published
+    assert (
+        frontier_page.credit(upper.get("found_by"), upper.get("found_year"), n=n) in published
+    )
     assert published.count("<svg ") == 1
     for other in [*kept[:1], plain]:
         head = render_case_pages.record_head(cases[other], first=1, last=324)
@@ -673,7 +692,10 @@ def test_case_291_typesets_the_general_bound_and_retains_the_exact_ceiling(
     assert 'id="the-verified-upper-bound-is-a-ceiling"' in record
     assert "<mn>17.53553390593273762200422181052425</mn>" in record
     assert "17.53553390593274" in record
-    assert "Trevor Green" in record
+    assert re.search(
+        r'href=(?:"\.\./profiles/trevor-green\.html"|\.\./profiles/trevor-green\.html)>Green</a>',
+        record,
+    )
     assert "Source-reported only; no verification promotion." in record
     # n = 290 took the same exact side on 13 October 2026 (T-156); n = 150 still holds
     # Evan Daniel's certificate side rounded up (T-101), short enough to set as a fraction.

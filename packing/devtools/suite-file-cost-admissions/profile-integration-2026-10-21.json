@@ -1,0 +1,95 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 121,
+  "seconds": 26.173,
+  "files": [
+    {
+      "file": "packing/tests/test_github_references.py",
+      "tests": 21,
+      "seconds": 0.006
+    },
+    {
+      "file": "packing/tests/test_profile_coverage.py",
+      "tests": 5,
+      "seconds": 0.046
+    },
+    {
+      "file": "packing/tests/test_profile_links.py",
+      "tests": 13,
+      "seconds": 2.033
+    },
+    {
+      "file": "packing/tests/test_profile_records.py",
+      "tests": 10,
+      "seconds": 0.517
+    },
+    {
+      "file": "packing/tests/test_record_presentation.py",
+      "tests": 3,
+      "seconds": 0.001
+    },
+    {
+      "file": "packing/tests/test_site_contributor_popovers.py",
+      "tests": 38,
+      "seconds": 21.085
+    },
+    {
+      "file": "packing/tests/test_site_tallies.py",
+      "tests": 31,
+      "seconds": 2.485
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_github_references.py",
+      "packing/tests/test_profile_coverage.py",
+      "packing/tests/test_profile_links.py",
+      "packing/tests/test_profile_records.py",
+      "packing/tests/test_record_presentation.py",
+      "packing/tests/test_site_contributor_popovers.py",
+      "packing/tests/test_site_tallies.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_github_references.py": 21,
+      "packing/tests/test_profile_coverage.py": 5,
+      "packing/tests/test_profile_links.py": 13,
+      "packing/tests/test_profile_records.py": 10,
+      "packing/tests/test_record_presentation.py": 3,
+      "packing/tests/test_site_contributor_popovers.py": 38,
+      "packing/tests/test_site_tallies.py": 31
+    },
+    "deselected_tests": 0
+  }
+}

@@ -26,6 +26,7 @@ from devtools import (
     build_known_best_atlas,
     check_published_site,
     paper_links,
+    render_contributors,
     render_n11_lower_bounds_explainer,
     render_overview,
 )
@@ -1106,6 +1107,7 @@ def test_every_relative_link_in_the_page_names_a_file_the_deploy_serves(page: st
         f"{PAPERS_DIR}/{PDF_OUTPUT.name}",
         *(asset.name for asset in COMPOSITE_ASSETS),
         *SITE_PAGES,
+        *render_contributors.page_paths(),
         *(page.removesuffix("index.html") or "./" for page in SITE_PAGES),
         # The series' other papers, which the page links (`devtools.paper_links`).
         *(render_overview.paper_path(slug) for slug in paper_links.PAPER_SLUGS),

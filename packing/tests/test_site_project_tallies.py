@@ -297,8 +297,17 @@ def _cards(page: str) -> list[tuple[str, str]]:
     for body in section.split('<div class="site-card site-card-footed"')[1:]:
         heading = re.search(r'<a class="site-card-link site-card-heading" href="([^"]+)"', body)
         assert heading is not None
-        tally = re.search(r'<span class="site-project-tally">(.*?)</span>', body)
-        cards.append((heading[1], tally[1] if tally else ""))
+        tally = re.search(r'<span class="site-project-tally">', body)
+        foot = ""
+        if tally is not None:
+            depth = 1
+            for span in re.finditer(r"</?span\b[^>]*>", body[tally.end() :]):
+                depth += -1 if span[0].startswith("</") else 1
+                if depth == 0:
+                    foot = body[tally.end() : tally.end() + span.start()]
+                    break
+            assert depth == 0, "unterminated project tally"
+        cards.append((heading[1], foot))
     return cards
 
 
@@ -370,10 +379,12 @@ def test_each_card_ends_with_its_tally_linked_to_its_results(
             expected += f" (at S{counts[0][0]})"
         elif counts:
             expected += f" ({', '.join(f'{n} at S{level}' for level, n in counts)})"
-        expected += " · " + record_presentation.record_tally(
-            [result.id for result in own], measures
+        records = record_presentation.record_tally(
+            [result.id for result in own], measures, blank_zero=True
         )
-        if associations is not None:
+        if records:
+            expected += " · " + records
+        if associations:
             expected += " · " + site_tallies.render_tally(
                 site_tallies.tally_credits(associations, measures, LEVELS), noun="credit"
             )

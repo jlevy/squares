@@ -2626,9 +2626,10 @@ def project_tally(url: str, tally: ProjectTally) -> str:
         + render_tally(
             tally_credits(associations, measures, significance_levels()), noun="credit"
         )
-        if associations is not None
+        if associations
         else ""
     )
+    records_markup = record_tally(tally.results, measures, blank_zero=True)
     return (
         '<span class="site-credit-tally">'
         + render_tally(
@@ -2636,8 +2637,7 @@ def project_tally(url: str, tally: ProjectTally) -> str:
             total_href=results_filter_url(slug) if tally.results else None,
             level_hrefs={level: results_filter_url(slug, level) for level, _ in tally.counts},
         )
-        + " · "
-        + record_tally(tally.results, measures)
+        + (" · " + records_markup if records_markup else "")
         + credit_markup
         + "</span>"
     )

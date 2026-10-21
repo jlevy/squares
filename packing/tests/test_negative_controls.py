@@ -272,15 +272,26 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
         "devtools/regularize_axis_components.py",
     ):
         assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
-    assert SNAPSHOT_MAX_BYTES == 229 * 1024 * 1024
+    assert SNAPSHOT_MAX_BYTES == 252 * 1024 * 1024
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
-def test_profile_evidence_and_inspected_pdf_survive_bounded_workers(
+@pytest.mark.parametrize(
+    ("identifier", "filename", "receipt_status"),
+    [
+        ("f-gobel", "gobel-1979-geometrical-packing-and-covering-problems.pdf", "inspected"),
+        ("s-el-moumni", "el-moumni-1999-optimal-packings-unit-squares.pdf", "pending"),
+    ],
+)
+def test_profile_evidence_and_pdf_receipts_survive_bounded_workers(
     control_snapshot: tuple[Path, set[Path]],
+    identifier: str,
+    filename: str,
+    receipt_status: str,
 ) -> None:
+    """Keep full private evidence without turning a pending census into an inspection."""
     tree, copied_targets = control_snapshot
-    source = ROOT / "resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf"
+    source = ROOT / "resources/papers" / filename
     relative = source.relative_to(controls.REPO)
     private = tree / relative
     payload = source.read_bytes()
@@ -291,11 +302,11 @@ def test_profile_evidence_and_inspected_pdf_survive_bounded_workers(
     profiles = load_contributors(tree / HERE / PEOPLE_DIR, repo=tree)
     assert any(
         evidence.archive_path == relative.as_posix()
-        for evidence in profiles.by_id["f-gobel"].sources
+        for evidence in profiles.by_id[identifier].sources
     )
     occurrences = load_occurrences(repo=tree, profiles=profiles)
     assert any(
-        receipt.path == relative.as_posix() and receipt.status == "inspected"
+        receipt.path == relative.as_posix() and receipt.status == receipt_status
         for receipt in occurrences.inspections
     )
     try:
@@ -551,7 +562,7 @@ def test_the_snapshot_byte_report_enforces_the_exact_capacity_boundary(
     assert controls.main(["--source-bytes"]) == int(offset > 0)
     report = json.loads(capsys.readouterr().out)
     assert report["source_bytes"] == measured
-    assert report["cap_bytes"] == 229 * 1024 * 1024
+    assert report["cap_bytes"] == 252 * 1024 * 1024
     assert report["headroom_bytes"] == -offset
 
 

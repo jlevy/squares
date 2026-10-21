@@ -188,6 +188,12 @@ DECLARED_CONSUMERS = {
         "checks that fresh ceiling verification does not redate a historical construction "
         "or imply optimality; upper, lower and optimality contribution roles remain distinct"
     ),
+    "packing/tests/test_profile_records.py": (
+        "the proof-family admission fixture supplies an exact verified ceiling for a "
+        "synthetic case; upper or grid evidence alone cannot admit an optimality proof. "
+        "The fixture separately requires the result's own lower-lane support and that "
+        "lane's proved case status, never treating the ceiling alone as s(n)"
+    ),
     "packing/tests/test_result_status.py": (
         "uses a case's exact certified ceiling as the reported side of a synthetic tied "
         "result, confirming that equality is no strict improvement; the ceiling is "

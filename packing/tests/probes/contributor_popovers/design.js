@@ -29,6 +29,9 @@ async (selector) => {
   reference.style.fontWeight = "var(--site-font-weight-sans-light)";
   reference.style.color = "var(--site-support-color)";
   const note = read(reference);
+  reference.style.color = "var(--kpress-doc-text)";
+  const foreground = read(reference).color;
+  reference.style.color = "var(--site-support-color)";
   reference.style.fontWeight = "var(--site-font-weight-sans-medium)";
   const medium = read(reference).weight;
   const panel = article.closest("[data-contributor-popover]");
@@ -50,10 +53,24 @@ async (selector) => {
   const panelBox = panel?.getBoundingClientRect();
   const overflow = [article, ...article.querySelectorAll("*")]
     .filter((node) => node instanceof HTMLElement && node.getClientRects().length > 0)
+    .filter((node) => {
+      const style = getComputedStyle(node);
+      return !(
+        node.matches(".kpress-math-semantic") &&
+        style.position === "absolute" &&
+        style.overflow === "hidden" &&
+        style.clipPath === "inset(50%)"
+      );
+    })
+    .filter(
+      (node) =>
+        !(node.matches("article.site-contributor, section") && node.querySelector(".site-wide")),
+    )
     .filter((node) => node.scrollWidth > node.clientWidth + 1)
     .map((node) => node.className || node.tagName);
   return {
     note,
+    foreground,
     medium,
     section,
     headline,
@@ -67,9 +84,18 @@ async (selector) => {
           ".site-contributor-identity dd, .site-contributor-links li, " +
           ".site-contributor-credits li, .site-contributor-sources > ol > li",
       ),
-      read,
+      (node) => ({
+        ...read(node),
+        primary: node.matches(
+          ".site-contributor-identity dd, .site-contributor-links li, .site-contributor-credits li",
+        ),
+      }),
     ),
     overflow,
+    wideBounds: Array.from(article.querySelectorAll(".site-wide"), (node) => {
+      const rect = node.getBoundingClientRect();
+      return { left: rect.left, right: rect.right };
+    }),
     pageWidth: document.documentElement.scrollWidth,
     left: panelBox ? box.left - panelBox.left : null,
     right: panelBox ? panelBox.right - box.right : null,

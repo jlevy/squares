@@ -105,6 +105,7 @@ name: Certificate page
       - packing/frontier/n-011.md
       - packing/atlas/known-best/composite-figure.json
       - packing/atlas/known-best/bound-citations.json
+      - packing/atlas/known-best/credit-attributions.json
       - packing/atlas/known-best/rendering/**
       - packing/atlas/known-best/regularized/index.json
       - packing/atlas/known-best/default-drawings.json

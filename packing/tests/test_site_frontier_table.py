@@ -251,7 +251,7 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
         long_name = laid[width]["rows"][ROWS.index("n-88")]["cells"][
             column("Best known packing")
         ]
-        assert "Nate Chaoweeraprasit (itsnaka) 2026" in long_name["notes"], width
+        assert "Chaoweeraprasit 2026" in long_name["notes"], width
         assert long_name["broken"] == [], width
 
 

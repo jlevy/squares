@@ -64,6 +64,26 @@ class _HtmlEvents(HTMLParser):
         self.events.append(("text", data))
 
 
+def _short_person_names(text: str) -> str:
+    """Expected compact labels in the fixed record examples exercised below."""
+    for full_name, surname in (
+        ("Marc Leonard Overbeck", "Overbeck"),
+        ("Joshua Levy", "Levy"),
+        ("Francisco Couzo", "Couzo"),
+        ("Evan Daniel", "Daniel"),
+        ("Kevin Fang", "Fang"),
+        ("Mykhailo Polkovskyi", "Polkovskyi"),
+        ("Daniil Ostashev", "Ostashev"),
+        ("Mira", "Mira-acc"),
+    ):
+        text = re.sub(rf"(?<![\w-]){re.escape(full_name)}(?![\w-])", surname, text)
+    return text
+
+
+def _without_person_links(text: str) -> str:
+    return re.sub(r'<a href="profiles/[a-z0-9-]+\.html">([^<]*)</a>', r"\1", text)
+
+
 @pytest.fixture(scope="module")
 def overview() -> overview_data.Overview:
     return site_renders.overview()
@@ -150,11 +170,8 @@ def test_the_head_states_the_result_as_the_site_does(
         f'<p class="site-result-claim">{overview_data.tex_bounds(paragraph)}</p>'
         for paragraph in paragraphs
     )
-    # Person links preserve the exact authored claim and prepared mathematics.
-    without_person_links = re.sub(
-        r'<a href="profiles/[a-z0-9-]+\.html">([^<]*)</a>', r"\1", head
-    )
-    assert claim in without_person_links
+    # Compact person labels change names only; preserve the rest of the claim and math.
+    assert _short_person_names(claim) in _without_person_links(head)
     assert head.count('<p class="site-result-claim">') == len(paragraphs)
     assert "kpress-math" in claim
     assert overview_sections.status_chips(result) in head
@@ -184,7 +201,9 @@ def test_the_head_states_the_result_as_the_site_does(
     meta = head.split('<p class="site-result-meta">', 1)[1].split("</p>", 1)[0]
     assert meta.startswith(f'{dated} <span class="site-date-kind">{kind}</span> \u00b7 ')
     assert overview_sections.date_cell(result) in meta
-    assert result.credit in html.unescape(re.sub(r"<[^>]+>", "", meta))
+    assert html.unescape(re.sub(r"<[^>]+>", "", result.credit_html)) in html.unescape(
+        re.sub(r"<[^>]+>", "", meta)
+    )
     assert "Significance" in head
     assert f'data-novelty="{result.novelty}"' in head
 
@@ -409,7 +428,8 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     _assert_case_values(cases, overview, body)
     assert 'rowspan="' in body
     for paragraph in register_prose.paragraphs(result.record["claim"]):
-        assert f'<p class="site-result-claim">{overview_data.tex_bounds(paragraph)}</p>' in body
+        expected = f'<p class="site-result-claim">{overview_data.tex_bounds(paragraph)}</p>'
+        assert _short_person_names(expected) in _without_person_links(body)
     unfinished = result.record.get("unfinished_confirmations") or []
     # T-124's one unfinished confirmation, an audit and an independent Lean build, is
     # unpriced, and its page says so under the next rung.
@@ -433,8 +453,12 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     ]
     for member in members:
         step = body.split(f'data-step="{member.id.lower()}"', 1)[1].split("</li>", 1)[0]
-        assert overview_data.tex_bounds(member.summary) in step
-        assert member.credit in html.unescape(re.sub(r"<[^>]+>", "", step))
+        assert _short_person_names(
+            overview_data.tex_bounds(member.summary)
+        ) in _without_person_links(step)
+        assert html.unescape(re.sub(r"<[^>]+>", "", member.credit_html)) in html.unescape(
+            re.sub(r"<[^>]+>", "", step)
+        )
         shared = [n for n in result_overview.scope(member) if n in cases]
         if len(shared) <= result_overview.CASES_NAMED:
             label = "case " if len(shared) == 1 else "cases "
@@ -492,7 +516,7 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
 def test_every_result_page_keeps_its_registered_byte_budget(
     overview: overview_data.Overview, record_property: Callable[[str, object], None]
 ) -> None:
-    """The complete result table keeps every registered row and linked literal credit."""
+    """The complete result table keeps every row and its linked compact credit."""
     page = site_renders.page("results.html")
     row = next(row for row in site_urls.load_registry() if row.path == page.name)
     # The table's measured exception (`site_urls.PAGE_BUDGET_EXCEPTIONS`) keeps every row
@@ -505,8 +529,19 @@ def test_every_result_page_keeps_its_registered_byte_budget(
     ]
     for result in overview.results:
         output = page.html.split(f'<tr id="{result.id.lower()}"', 1)[1].split("</tr>", 1)[0]
-        assert result.credit in html.unescape(re.sub(r"<[^>]+>", "", output))
-        assert Counter(HREF.findall(result.credit_html)) <= Counter(HREF.findall(output))
+        credit_text = html.unescape(re.sub(r"<[^>]+>", "", result.credit_html))
+        assert credit_text in html.unescape(re.sub(r"<[^>]+>", "", output))
+        expected_credit_links = Counter(
+            attrs["href"]
+            for tag, attrs in _HtmlEvents(result.credit_html).elements
+            if tag == "a" and "href" in attrs
+        )
+        rendered_links = Counter(
+            attrs["href"]
+            for tag, attrs in _HtmlEvents(output).elements
+            if tag == "a" and "href" in attrs
+        )
+        assert expected_credit_links <= rendered_links
 
 
 def test_complete_broad_result_page_keeps_its_registered_byte_budget(
@@ -703,7 +738,9 @@ def test_the_chain_is_every_result_on_the_case_oldest_first(
         dated = overview_sections.date_cell(other)
         assert f'<p class="site-result-step-head">{dated} <a href=' in step
         assert not re.search(r'class="site-date-kind">\w+</span> [\d-]+', step)
-        assert overview_data.tex_bounds(other.summary) in step
+        assert _short_person_names(
+            overview_data.tex_bounds(other.summary)
+        ) in _without_person_links(step)
         # Where the result stands here as it does as a whole, its marks name only the
         # results that supersede it on these cases (`result_overview.supersessions_on`).
         shared = sorted(cases & set(result_overview.scope(other)))
@@ -715,7 +752,9 @@ def test_the_chain_is_every_result_on_the_case_oldest_first(
         )
         assert overview_sections.kind_and_status(shown) in step
         assert f"packing/frontier/results.yaml?plain=1#L{lines[other.id]}" in step
-        assert other.credit in html.unescape(re.sub(r"<[^>]+>", "", step))
+        assert html.unescape(re.sub(r"<[^>]+>", "", other.credit_html)) in html.unescape(
+            re.sub(r"<[^>]+>", "", step)
+        )
         for key in (other.record.get("attribution") or {}).get("source_keys") or []:
             assert html.escape(key.strip("[]")) in step
 

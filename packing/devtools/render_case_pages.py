@@ -1492,9 +1492,7 @@ def case_records(*, only: tuple[int, ...] | None = None) -> list[Page]:
                 ),
             ),
         )
-        # Linked case 17 measured 500,020 bytes against its 500,000-byte ceiling.
-        # Safe profile href tokens retain every link without a new budget exception.
-        record = compact_visual_math_classes(records[n], profile_links=True)
+        record = records[n]
         record = re.sub(
             r'<p class="site-case-title"([^>]*)>(.*?)</p>',
             r'<h1 class="site-case-title" id="case-title"\1>\2</h1>',
@@ -1502,5 +1500,10 @@ def case_records(*, only: tuple[int, ...] | None = None) -> list[Page]:
             count=1,
             flags=re.DOTALL,
         )
-        pages.append(static_content_page(record, meta=meta, current="atlas"))
+        page = static_content_page(record, meta=meta, current="atlas")
+        # Compact only after the page's quoted root links have been rebased to cases/.
+        # Optional href quotes retain every link within the case-page byte ceiling.
+        pages.append(
+            page._replace(html=compact_visual_math_classes(page.html, profile_links=True))
+        )
     return pages

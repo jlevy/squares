@@ -117,6 +117,10 @@
 .kpress .site-profile-table tbody td {
   padding: 0;
 }
+.kpress .site-profile-table :is(th, td):first-child {
+  inline-size: 16rem;
+  min-inline-size: 16rem;
+}
 .kpress .site-profile-table td > a,
 .kpress .site-profile-table .site-profile-empty {
   display: block;
@@ -189,11 +193,13 @@
 }
 
 .kpress .site-profile-table td.site-profile-links {
-  inline-size: 30%;
   min-inline-size: 12rem;
 }
 
 .kpress .site-profile-table td.site-profile-resources {
-  inline-size: 25%;
   min-inline-size: 12rem;
+}
+
+.site-profile-resources .site-contributor-links-compact span {
+  overflow-wrap: break-word;
 }

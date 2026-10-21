@@ -107,14 +107,20 @@ and [attribution policy](../../../../attribution.md) own these rules.
 | `think-x43w` | Frits Göbel display name and Lewis account evidence |
 | `think-q4t4` | Formalization contributor roles, resource membership and own-support years |
 | `think-65yl` | Seven reviewed credit joins for the upstream Daniel n343 source |
+| `think-4m6m` | Bounded worker evidence, measured test costs and integrated validation fixes |
+| `think-98c5` | Linked-name result assertions and exact terminology anchors |
+| `think-5q5y` | Canonical names and SVG navigation geometry regressions |
 
 The reviewed preview is <http://127.0.0.1:8790/profiles/index.html>, served from
 `/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-integrated-reviewed`. It
 includes all 75 profiles, separate Results, Records and Credits, credit significance
 breakdowns, Accounts and Resources columns, and muted parenthetical tallies.
 The complete merged build includes all four PDFs.
-All 7,293 publication checks pass; the PDFs contain 7, 8, 8 and 25 valid profile
-annotations. The authored-name audit covers 692 pages with zero label mismatches.
+All 7,294 publication checks pass; the PDFs contain 7, 8, 8 and 25 valid profile
+annotations. The profile audit covers 692 pages with zero label mismatches or broken
+profile destinations.
+The directory reserves 16rem for full names and lets resource addresses wrap at normal
+boundaries, with a fallback for long segments.
 The sourced integration environment includes the project interpreter and tools on PATH.
 
 Local focused checks passed: 88 profile, naming, resource, tally and GitHub-reference
@@ -129,7 +135,26 @@ joins, activity years and revised attribution model with no blocker.
 The additional Records classification and renderer have passed independent Astra review.
 The integrated push gate exposed an unused test binding and two missing document-map
 entries; both are corrected.
-The full type rerun passed in 229.2 seconds; reachable behavioral tests remain pending.
+The full type rerun passed in 229.2 seconds.
+The complete integrated gate passed all 68 non-behavioral checks; its behavioral run
+finished with 17,266 passing tests, 76 failures, 62 skips and one expected failure in
+1,193.64 seconds. The focused rerun covered all 76 original failure selectors (77 cases
+after the PDF-custody test gained a second source): 76 passed in 166.02 seconds, and the
+remaining quoted-attribute test parser was corrected and passed in 8.05 seconds.
+The three navigation/table modules passed all 53 tests in 72.97 seconds; the browser
+floor passed in 31.32 seconds.
+Astra reviewed the final changes without findings.
+Hosted checks on the pushed integration revision remain required before readiness.
+Corrections preserve attribution, page budgets and geometry checks; they also fix nested
+case-page profile URLs by rebasing links before optional quote compaction.
+The served-page audit now resolves every profile destination from its containing page,
+including unquoted HTML attributes.
+The seven new test modules passed 121 tests in 27.50 seconds; their measured costs are
+retained without changing existing weights or the unknown-cost threshold.
+The snapshot budget includes the retained El Moumni volume and preserves its pending
+full-inspection status.
+A measured 252 MiB bound replaces the insufficient 229 MiB bound; no source evidence is
+excluded to meet it.
 The PDF link regression passed after Markdown formatting; the repaired PDF was rebuilt
 and its seven profile annotations verified before preview promotion.
 The full push gate and final hosted checks are recorded in PR #578 and `think-zpfo`;
