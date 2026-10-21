@@ -1,0 +1,23 @@
+2026-10-20T22:41:38Z
+sides: T-196 16.64577880418138 seed 16.64577878606174 #678 16.645753250544956
+axis-aligned counts: T-196 194 seed 194 #678 199
+seed(14a9af8) vs T-196: side diff -1.812e-08; best symmetry id: 49/260 within 1e-08 (centre) and 1e-6 deg (axes)
+   largest centre displacements: 4.57e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01
+   displacement buckets: <1e-8: 49  1e-8..1e-4: 191  1e-4..1e-2: 0  >1e-2: 20
+seed(14a9af8) vs T-196: side diff -1.812e-08; best symmetry id: 226/260 within 2e-08 (centre) and 1e-6 deg (axes)
+   largest centre displacements: 4.57e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01
+   displacement buckets: <1e-8: 49  1e-8..1e-4: 191  1e-4..1e-2: 0  >1e-2: 20
+seed(14a9af8) vs T-196: side diff -1.812e-08; best symmetry id: 240/260 within 1e-07 (centre) and 1e-6 deg (axes)
+   largest centre displacements: 4.57e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01, 4.24e-01
+   displacement buckets: <1e-8: 49  1e-8..1e-4: 191  1e-4..1e-2: 0  >1e-2: 20
+#678 n260 vs seed(14a9af8): side diff -2.554e-05; best symmetry rot90: 4/260 within 1e-08 (centre) and 1e-6 deg (axes)
+   largest centre displacements: 6.46e-01, 6.46e-01, 6.46e-01, 6.46e-01, 6.46e-01, 6.46e-01, 6.46e-01, 6.46e-01
+   displacement buckets: <1e-8: 4  1e-8..1e-4: 12  1e-4..1e-2: 7  >1e-2: 237
+#678 n260 vs seed(14a9af8): side diff -2.554e-05; best symmetry diag: 162/260 within 0.0001 (centre) and 1e-6 deg (axes)
+   largest centre displacements: 6.04e-01, 6.00e-01, 5.83e-01, 4.40e-01, 4.19e-01, 4.18e-01, 4.15e-01, 4.12e-01
+   displacement buckets: <1e-8: 3  1e-8..1e-4: 159  1e-4..1e-2: 43  >1e-2: 55
+#678 n260 vs T-196: side diff -2.555e-05; best symmetry diag: 162/260 within 0.0001 (centre) and 1e-6 deg (axes)
+   largest centre displacements: 5.88e-01, 5.47e-01, 5.05e-01, 4.40e-01, 4.19e-01, 4.18e-01, 4.15e-01, 3.23e-01
+   displacement buckets: <1e-8: 3  1e-8..1e-4: 159  1e-4..1e-2: 43  >1e-2: 55
+exit 0
+2026-10-20T22:41:40Z

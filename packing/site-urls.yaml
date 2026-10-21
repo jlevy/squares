@@ -17244,7 +17244,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-20'
-  lastmod: '2026-10-20'
+  lastmod: '2026-10-21'
   status: live
   identity:
     kind: upper-bound
@@ -17260,12 +17260,43 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-678-certificate-report
+    - E-couzo-678-filtered-exact-feasibility
+    - E-couzo-678-source-checker-replay
+    - E-couzo-678-review-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-issue678-2026-10-18/README.md
     - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert
     - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert
     - packing/campaign/issue-intake/upper-bounds-20261019/README.md
     - packing/devtools/couzo_678_replay.py
+    - docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+  amendments:
+  - date: '2026-10-21'
+    reason: 'The 20 October review accepts the filtered exact replay: the result rises to V3/C3 and
+      cites its three confirming evidence entries (E-couzo-678-filtered-exact-feasibility, E-couzo-678-source-checker-replay
+      and E-couzo-678-review-exact-feasibility), with the review among its artifacts, and the adoptions
+      of 20 and 21 October 2026 make it the house best packing at 204 and 260; the bound, scope and
+      attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 204
+        - 260
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue 678 2026-10-18]'
+        published: '2026-10-18'
+      builds_on: null
+      evidence:
+      - E-couzo-678-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-issue678-2026-10-18/README.md
+      - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert
+      - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert
+      - packing/campaign/issue-intake/upper-bounds-20261019/README.md
+      - packing/devtools/couzo_678_replay.py
 - path: result/t-224.html
   canonical: result/t-224.html
   kind: result

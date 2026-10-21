@@ -29,9 +29,14 @@ reads them from it once `acquire_source --check` holds the packet, and decides e
   each with its known answer: square 2 replaced by square 1 (overlap); square 1 moved
   ``S + 2`` to the right (wall); the side lowered by the least top or right clearance plus
   ``10^-18`` (wall, by ``10^-18``); square 1 enlarged by ``10^-12`` about its centre (not a
-  unit square); and the candidate pair with the least ``|dy|``, at most ``1/2``, given equal
+  unit square); the candidate pair with the least ``|dy|``, at most ``1/2``, given equal
   ``x`` (one coordinate changed), so the centres are within ``1/2`` and the inscribed open
-  discs of radius ``1/2`` share a point (overlap). Every mutant must be refused by both.
+  discs of radius ``1/2`` share a point (overlap); and the near-contact pair: the candidate
+  pair with the least separating gap, whose second square is translated by the exact
+  vector between the pair's closest points, into contact, and then ``10^-30`` of the
+  centre distance further towards the first (overlap, at the ``10^-11`` to ``10^-13``
+  scale of the least gaps, where a binary64 checker with a tolerance would accept it;
+  RF-2 of the 20 October review). Every mutant must be refused by both.
 
 ``claims-record`` writes ``acquisition/beyond-horizon-claims.json``, the record of the 83
 rows beyond the case corpus (``n > 324``) that ``check_source_coverage`` reads the
@@ -41,7 +46,12 @@ retained certificates, which ``check`` holds it to.
 
 ``exhaustive`` runs the maintained two-route kernel of ``devtools.evand_arrangement_reports``
 (every pair, no filter) on chosen counts, as a cross-check of the filtered decision and a
-price for the complete all-pairs replay. ``source-checker`` runs the source's own checker,
+price for the complete all-pairs replay. ``house-jobs`` runs that kernel's three jobs, a
+positive, a duplicate square and a square outside the container, at the two counts of the
+case corpus, 204 and 260, each in its own child process (``decide-job``), and keeps them in
+``receipts/house-jobs.json.xz``: the native results `devtools.upper_bound_houses` builds
+and holds each count's house best packing witness to, as it does every import's.
+``source-checker`` runs the source's own checker,
 ``verify_bound_certificate.py``, unchanged from its retained copy in a ``python -I`` child
 process, on the 83 certificates, the two derived packings and the four controls the
 certificate format can state. ``check`` reads the receipts back against the packet and the
@@ -51,6 +61,7 @@ From ``packing/``, with the project interpreter::
 
     python -m devtools.couzo_678_replay filtered [--pinned CHECKOUT] [--workers 2]
     python -m devtools.couzo_678_replay exhaustive --n 204 546 ... [--workers 2]
+    python -m devtools.couzo_678_replay house-jobs --jobs-dir SCRATCH [--workers 2]
     python -m devtools.couzo_678_replay source-checker --scratch DIR
     python -m devtools.couzo_678_replay claims-record
     python -m devtools.couzo_678_replay check [--replay]
@@ -67,6 +78,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import math
 import platform
 import re
 import subprocess
@@ -86,8 +98,11 @@ from devtools import acquire_source
 from devtools import check_rational_witness_independent as independent
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
+
+# A module import, read when a record is written: upper_bound_reports imports this
+# module for T-223's house reader, so neither may read the other at import time.
+from devtools import upper_bound_reports as reports
 from devtools.retained_data import read_retained_bytes
-from devtools.upper_bound_reports import BEYOND_FORMAT, DISPLAY_PLACES, HORIZON
 from sqpack.retained_json import dumps as retained_dumps
 from sqpack.verify import check_unit_squares, separated
 from sqpack.witness import materialize_exact_witness
@@ -108,6 +123,22 @@ GOEBEL_PROGRAM = ROOT / (
     "resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
 )
 GOEBEL_FORMAT = "couzo-678-goebel-comparison-v1"
+#: The kernel's three jobs at the counts of the case corpus, which a house best packing's
+#: witness is built from and held to (`devtools.upper_bound_houses`).
+HOUSE_JOBS = RECEIPTS / "house-jobs.json.xz"
+HOUSE_FORMAT = "couzo-678-house-jobs-v1"
+HOUSE_COUNTS = (204, 260)
+#: The issue's prints at those counts. A house best packing's inputs are read in checkouts
+#: that carry no campaign record (the sweeps job's), so its reader holds each side to the
+#: print here, and `check` holds this table to the issue's rows.
+HOUSE_PRINTED = {204: "14.808642841982", 260: "16.645753250545"}
+SOURCE_KEY = "[Couzo issue 678 2026-10-18]"
+WITNESS_PREFIX = "W-couzo-678-n"
+CLAIM_LIMITATIONS = (
+    "Complete issue 678 rational centre/half-angle certificate at 7b6c87e, converted "
+    "exactly from the retained source. Finite construction feasibility only; no KKT, "
+    "local minimum, rigidity, novelty, priority or global optimality claim."
+)
 #: The beyond-horizon record. Its format, the corpus ``HORIZON`` and the 16 places its
 #: ``ceiling`` rounds up to are ``upper_bound_reports``', which writes every such record.
 #: ``check_source_coverage.load_claims`` reads its ``results`` by shape and does not
@@ -129,12 +160,17 @@ SOURCE_FORMAT = "couzo-678-source-checker-replay-v1"
 FILTER_RADIUS_SQUARED = Fraction(2)
 WALL_SLACK = Fraction(1, 10**18)
 ENLARGEMENT = Fraction(1, 10**12)
+#: The near-contact control's push past contact, as a fraction of the pair's centre
+#: distance, as `check_half_angle_area`'s pair control pushes (RD-2 of the 10 October
+#: review): far below binary64 resolution at these sides.
+PAIR_PUSH = Fraction(1, 10**30)
 CONTROLS = (
     "duplicate-square",
     "square-outside-container",
     "side-below-least-clearance",
     "square-enlarged",
     "one-coordinate-overlap",
+    "near-contact-overlap",
 )
 #: The controls the certificate format states, which the source's checker is given.
 SOURCE_CONTROLS = (
@@ -448,6 +484,68 @@ def overlap_pair(cert: legacy.Certificate) -> tuple[int, int]:
     return left, right
 
 
+def near_contact_pair(cert: legacy.Certificate) -> tuple[int, int]:
+    """The candidate pair with the least separating gap, ties to the first pair.
+
+    The gap is `check_rational_witness_independent.pair_gap` over the kernel's corners,
+    the quantity the receipt's ``least_pair_gap`` reports; a touching pair has gap 0.
+    """
+    centres = [(pose.x, pose.y) for pose in cert.poses]
+    squares = legacy.corner_squares(cert)
+    pairs = candidate_pairs(centres)
+    _require(pairs, "no candidate pair")
+    return min(
+        pairs, key=lambda pair: (independent.pair_gap(squares[pair[0]], squares[pair[1]]), pair)
+    )
+
+
+def _segment_closest(point: Point, start: Point, end: Point) -> Point:
+    """The point of the segment ``[start, end]`` nearest ``point``, exactly."""
+    ex, ey = end[0] - start[0], end[1] - start[1]
+    along = ((point[0] - start[0]) * ex + (point[1] - start[1]) * ey) / (ex * ex + ey * ey)
+    along = min(max(along, Fraction(0)), Fraction(1))
+    return (start[0] + along * ex, start[1] + along * ey)
+
+
+def closest_points(
+    left: Sequence[Point], right: Sequence[Point]
+) -> tuple[Fraction, Point, Point]:
+    """The least squared distance between two convex polygons whose interiors are disjoint,
+    and points ``p`` of ``left`` and ``q`` of ``right`` at that distance, exactly.
+
+    Between two such polygons the distance is attained at a vertex of one and a point of an
+    edge of the other, so every vertex is projected onto every edge of the other polygon.
+    """
+    best: tuple[Fraction, Point, Point] | None = None
+    for own, other, flip in ((left, right, False), (right, left, True)):
+        for vertex in own:
+            for index, start in enumerate(other):
+                nearest = _segment_closest(vertex, start, other[(index + 1) % len(other)])
+                dx, dy = nearest[0] - vertex[0], nearest[1] - vertex[1]
+                squared = dx * dx + dy * dy
+                p, q = (nearest, vertex) if flip else (vertex, nearest)
+                if best is None or squared < best[0]:
+                    best = (squared, p, q)
+    _require(best is not None, "a polygon has no vertex")
+    assert best is not None
+    return best
+
+
+def near_contact_translation(cert: legacy.Certificate) -> tuple[int, int, Point, Fraction]:
+    """The near-contact control's pair, its second square's translation and the squared
+    distance it closes: into contact along the closest points' vector, then ``PAIR_PUSH``
+    of the centre distance towards the first square."""
+    left, right = near_contact_pair(cert)
+    squares = legacy.corner_squares(cert)
+    squared, p, q = closest_points(squares[left], squares[right])
+    first, second = cert.poses[left], cert.poses[right]
+    shift = (
+        p[0] - q[0] + PAIR_PUSH * (first.x - second.x),
+        p[1] - q[1] + PAIR_PUSH * (first.y - second.y),
+    )
+    return left, right, shift, squared
+
+
 def mutant_certificate(cert: legacy.Certificate, control: str) -> legacy.Certificate:
     """The control as a certificate, for the four the ``n S`` / ``x y t`` format states."""
     poses = list(cert.poses)
@@ -461,6 +559,9 @@ def mutant_certificate(cert: legacy.Certificate, control: str) -> legacy.Certifi
     elif control == "one-coordinate-overlap":
         left, right = overlap_pair(cert)
         poses[right] = replace(poses[right], x=poses[left].x)
+    elif control == "near-contact-overlap":
+        _left, right, (dx, dy), _squared = near_contact_translation(cert)
+        poses[right] = replace(poses[right], x=poses[right].x + dx, y=poses[right].y + dy)
     else:
         raise ReplayError(f"{control}: not a certificate control")
     return replace(cert, poses=tuple(poses))
@@ -490,16 +591,20 @@ def decide_controls(cert: legacy.Certificate) -> list[dict[str, Any]]:
     rows = []
     for control in CONTROLS:
         result = decide(control_geometry(cert, control))
-        rows.append(
-            {
-                "control": control,
-                "refused_by_sqpack": not result["sqpack"]["passed"],
-                "refused_by_independent": not result["independent"]["passed"],
-                "candidate_pairs": result["candidate_pairs"],
-                "sqpack_failures": result["sqpack"]["failures"][:3],
-                "independent_failures": result["independent"]["failures"][:3],
-            }
-        )
+        row: dict[str, Any] = {
+            "control": control,
+            "refused_by_sqpack": not result["sqpack"]["passed"],
+            "refused_by_independent": not result["independent"]["passed"],
+            "candidate_pairs": result["candidate_pairs"],
+            "sqpack_failures": result["sqpack"]["failures"][:3],
+            "independent_failures": result["independent"]["failures"][:3],
+        }
+        if control == "near-contact-overlap":
+            left, right, _shift, squared = near_contact_translation(cert)
+            # The pair, and the Euclidean distance its translation closed before the push.
+            row["pair"] = [left + 1, right + 1]
+            row["closed_distance"] = f"{math.sqrt(squared):.3e}"
+        rows.append(row)
     return rows
 
 
@@ -552,7 +657,11 @@ def source_manifest_rows(checkout: Path, rows: Sequence[Claim]) -> dict[str, Any
                 "manifest_digest_matches": entry["certificate_sha256"] == digests.get(own),
                 "manifest_bound_ceiling_12": legacy.ceiling_decimal(own_side, PLACES),
                 "credit": entry.get("credit", ""),
-                "source_strict_valid": entry.get("strict_verification", {}).get("valid"),
+                # The manifest's verdict on its own file at the count, which at 545 and
+                # 641 is another file than the row's (RF-3 of the 20 October review).
+                "manifest_entry_strict_valid": entry.get("strict_verification", {}).get(
+                    "valid"
+                ),
             }
         )
     return {"manifest_sha256": digests[path], "rows": results}
@@ -690,6 +799,68 @@ def price(results: Sequence[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def house_certificate(n: int) -> legacy.Certificate:
+    """The certificate of a count of the case corpus, its bytes held to the pinned digest.
+
+    `certificate` reads a row after `custody` has admitted the whole packet; a house best
+    packing's inputs are admitted one by one (`devtools.upper_bound_houses`), so this holds
+    the one file it reads to the digest the packet's manifest pins for it.
+    """
+    path = house_path(n)
+    digests = manifest()
+    raw = (SOURCE / path).read_bytes()
+    _require(
+        hashlib.sha256(raw).hexdigest() == digests.get(path),
+        f"n={n}: the retained certificate differs from its pinned digest",
+    )
+    cert = legacy.parse(raw.decode("utf-8"), expected_n=n)
+    _require(rounds_up_to(cert.side, HOUSE_PRINTED[n]), f"n={n}: the print does not round up")
+    return cert
+
+
+def house_path(n: int) -> str:
+    """The upstream path of a count of the case corpus, which no row deletes from."""
+    _require(n in HOUSE_COUNTS, f"n={n}: not a count of the case corpus")
+    return f"certificates/best/n{n}.cert"
+
+
+def house_jobs(directory: Path, workers: int) -> dict[str, Any]:
+    """The kernel's three jobs at each count of the case corpus, each in a child process."""
+    custody()
+    directory.mkdir(parents=True, exist_ok=True)
+    facts = {n: house_certificate(n) for n in HOUSE_COUNTS}
+    positives = kernel.certify_receipt(
+        "devtools.couzo_678_replay",
+        facts,
+        directory,
+        HOUSE_JOBS,
+        workers=workers,
+        timeout=kernel.JOB_TIMEOUT,
+        receipt_format=HOUSE_FORMAT,
+        witness_prefix=WITNESS_PREFIX,
+        claim_limitations=CLAIM_LIMITATIONS,
+    )
+    return {
+        str(n): {
+            "pairs_tested": row["independent"]["pairs_tested"],
+            "least_pair_gap": row["independent"]["minimum_best_pair_gap"],
+            "cpu_seconds": row["cpu_seconds"],
+        }
+        for n, row in positives.items()
+    }
+
+
+def house_job_positives(*, replay: bool = False) -> dict[int, Any]:
+    """Admit the house jobs' receipt, and with `replay` decide its jobs again."""
+    facts = {n: house_certificate(n) for n in HOUSE_COUNTS}
+    record = kernel.read_xz(HOUSE_JOBS)
+    profile = {"witness_prefix": WITNESS_PREFIX, "claim_limitations": CLAIM_LIMITATIONS}
+    positives = kernel.validate_receipt(record, facts, receipt_format=HOUSE_FORMAT, **profile)
+    if replay:
+        kernel.replay_receipt(record, facts, HOUSE_COUNTS, **profile)
+    return positives
+
+
 def _write_certificate(cert: legacy.Certificate, path: Path) -> None:
     path.write_text(legacy.serialize(cert), encoding="utf-8")
 
@@ -796,7 +967,7 @@ def beyond_horizon_claims() -> dict[str, Any]:
     digests = manifest()
     results = []
     for row in claims():
-        if row.n <= HORIZON:
+        if row.n <= reports.HORIZON:
             continue
         side = certificate(row, digests).side
         _require(rounds_up_to(side, row.printed), f"n={row.n}: the print does not round up")
@@ -805,18 +976,18 @@ def beyond_horizon_claims() -> dict[str, Any]:
                 "n": row.n,
                 "offered_side": row.printed,
                 "exact_side": legacy.literal(side),
-                "ceiling": legacy.ceiling_decimal(side, DISPLAY_PLACES),
+                "ceiling": legacy.ceiling_decimal(side, reports.DISPLAY_PLACES),
                 "certificate": row.path,
                 "deleted": row.deleted,
                 "first_committed": COMMITTED,
             }
         )
     return {
-        "format": BEYOND_FORMAT,
+        "format": reports.BEYOND_FORMAT,
         "issue": ISSUE_URL,
         "source": SOURCE_URL,
         "revision": PIN,
-        "horizon": HORIZON,
+        "horizon": reports.HORIZON,
         "results": results,
     }
 
@@ -856,7 +1027,7 @@ def check(*, replay: bool) -> list[str]:
         if [control["control"] for control in kept.get("controls", [])] != (
             [] if row.deleted else list(CONTROLS)
         ):
-            problems.append(f"n={row.n}: the controls are not the declared five")
+            problems.append(f"n={row.n}: the controls are not the declared six")
         problems.extend(
             f"n={row.n}: {control['control']} was accepted"
             for control in kept.get("controls", [])
@@ -866,6 +1037,25 @@ def check(*, replay: bool) -> list[str]:
             problems.append(f"n={row.n}: the replay differs from the receipt")
     if receipt["summary"] != summary(stored):
         problems.append("the summary does not match the rows")
+    by_issue = {row.n: row for row in rows}
+    for n in HOUSE_COUNTS:
+        row = by_issue[n]
+        if (row.printed, row.path, row.deleted) != (HOUSE_PRINTED[n], house_path(n), 0):
+            problems.append(f"n={n}: the house table differs from the issue's row")
+    try:
+        positives = house_job_positives(replay=replay)
+    except (kernel.ReportError, OSError, ValueError) as error:
+        problems.append(f"the house jobs' receipt does not hold: {error}")
+    else:
+        by_n = {row["n"]: row for row in stored}
+        for n, job in positives.items():
+            filtered = by_n[n]["decision"]["independent"]
+            for key, mine in (
+                ("minimum_best_pair_gap", "least_pair_gap"),
+                ("minimum_containment_clearance", "least_wall_clearance"),
+            ):
+                if Fraction(job["independent"][key]) != Fraction(filtered[mine]):
+                    problems.append(f"n={n}: the house job's {key} is not the filtered one")
     if not BEYOND.is_file() or json.loads(BEYOND.read_text(encoding="utf-8")) != (
         beyond_horizon_claims()
     ):
@@ -918,6 +1108,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     sample = commands.add_parser("exhaustive")
     sample.add_argument("--n", type=int, nargs="+", required=True)
     sample.add_argument("--workers", type=int, default=2)
+    jobs = commands.add_parser("house-jobs")
+    jobs.add_argument("--jobs-dir", type=Path, required=True)
+    jobs.add_argument("--workers", type=int, default=2)
+    child = commands.add_parser("decide-job")
+    child.add_argument("--n", type=int, required=True)
+    child.add_argument("--control", choices=kernel.JOBS, required=True)
+    child.add_argument("--output", type=Path, required=True)
     own = commands.add_parser("source-checker")
     own.add_argument("--scratch", type=Path, required=True)
     commands.add_parser("goebel")
@@ -928,10 +1125,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     actions: dict[str, Callable[[], Any]] = {
         "filtered": lambda: filtered(args.pinned, args.workers)["summary"],
         "exhaustive": lambda: exhaustive(args.n, args.workers)["price"],
+        "house-jobs": lambda: house_jobs(args.jobs_dir, args.workers),
         "source-checker": lambda: len(source(args.scratch)["rows"]),
         "goebel": goebel,
         "claims-record": claims_record,
     }
+    if args.command == "decide-job":
+        kernel.decide_job(
+            house_certificate(args.n),
+            args.control,
+            args.output,
+            witness_prefix=WITNESS_PREFIX,
+            claim_limitations=CLAIM_LIMITATIONS,
+        )
+        return 0
     if args.command == "check":
         problems = check(replay=args.replay)
         for problem in problems:

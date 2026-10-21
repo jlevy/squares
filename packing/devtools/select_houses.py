@@ -199,7 +199,10 @@ class Pending:
 #: why (`STAGING_REASONS`); an adoption waits with its regularization runs, never apart
 #: from them (`default_drawings.deferral_problems`). The pull request that adopts a count
 #: takes it off, as the adoption of 19 October 2026 (think-jh4w) took 183 off once it
-#: adopted Evan Daniel's original certificate there (T-220).
+#: adopted Evan Daniel's original certificate there (T-220). A smaller validated packing
+#: takes a staged count off too: the adoption of 20 October 2026 (think-xu4d) took 204
+#: from T-193 to Francisco Couzo's issue 678 (T-223), below T-193's algebraic side there by
+#: 2.04e-5, which leaves T-193 three houses below T-186, at 175, 232 and 302.
 PENDING_ADOPTION: dict[int, Pending] = {
     **{
         n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER)
@@ -208,8 +211,7 @@ PENDING_ADOPTION: dict[int, Pending] = {
     **{
         n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
         for n in (
-            88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301,
-            302,
+            88, 102, 123, 126, 175, 199, 232, 258, 259, 266, 267, 292, 295, 301, 302,
         )
     },
 }  # fmt: skip
@@ -247,13 +249,17 @@ REVIEW_639 = "docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md"
 #: waits on `bead`. `--check` fails once the item names anything else, so the entry goes
 #: with the correction, and `deferrals` holds the bead open while it stands. Unlike
 #: `PENDING_ADOPTION`, an entry here outlives the staging: the pull request that takes a
-#: count off that list cannot write the uncorrected credit.
+#: count off that list cannot write the uncorrected credit. An entry goes where T-193 will
+#: not be the house: at 204 Francisco Couzo's issue 678 (T-223) is below it, adopted on 20
+#: October 2026, so T-193's item there no longer waits on an adoption, and `--check`
+#: refuses an entry whose count another result houses. The item itself, Polkovskyi's
+#: T-186 named where the review measured T-162, stays think-8ido's to correct.
 CORRECTIONS_OWED: dict[int, Correction] = {
     n: Correction(result="T-193", named=named, measured=measured, bead=RE1_BEAD,
                   measured_in=REVIEW_639)
     for n, named, measured in (
         (88, "T-174", "T-127"), (126, "T-174", "T-139"), (175, "T-186", "T-158"),
-        (199, "T-174", "T-127"), (204, "T-186", "T-162"), (232, "T-186", "T-158"),
+        (199, "T-174", "T-127"), (232, "T-186", "T-158"),
         (266, "T-174", "T-119"), (292, "T-174", "T-146"), (301, "T-174", "T-098"),
     )
 }  # fmt: skip

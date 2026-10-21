@@ -1,0 +1,4 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+OK: 85 rows verified, every control refused
+549.53user 0.81system 11:26.88elapsed 80%CPU (0avgtext+0avgdata 88196maxresident)k
+7392inputs+36288outputs (17major+30066minor)pagefaults 0swaps

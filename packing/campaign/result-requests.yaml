@@ -12632,8 +12632,10 @@ issues:
       the exact rational certificate side is authoritative. Imported on 20 October 2026: the
       83 certificates are retained in the couzo-issue678-2026-10-18 packet, whose filtered
       exact replay decided all 85 rows on two routes with every control refused, and the 19
-      October ledger records every row in report order. T-223 registers 204 and 260 at
-      V0/C0, pending adoption; the 83 beyond the corpus are dated beyond-horizon rows.
+      October ledger records every row in report order. T-223 registers 204 and 260, at
+      V3/C3 since the stage 4 review of 20 October; the case at 204 adopted it as its house
+      best packing that day, and the case at 260 on 21 October, from T-196, which #704 had
+      adopted there on 20 October. The 83 beyond the corpus are dated beyond-horizon rows.
     read_through: '2026-10-19T15:31:25Z'
     results:
     - key: n204
@@ -12643,6 +12645,9 @@ issues:
       - T-223
       evidence:
       - E-couzo-678-certificate-report
+      - E-couzo-678-filtered-exact-feasibility
+      - E-couzo-678-source-checker-replay
+      - E-couzo-678-review-exact-feasibility
     - key: n260
       claim: s(260) <= 16.645753250545, rounded upward; exact certificate side is authoritative.
       source: body
@@ -12650,6 +12655,9 @@ issues:
       - T-223
       evidence:
       - E-couzo-678-certificate-report
+      - E-couzo-678-filtered-exact-feasibility
+      - E-couzo-678-source-checker-replay
+      - E-couzo-678-review-exact-feasibility
     - key: n330
       claim: s(330) <= 18.692697855726, rounded upward; exact certificate side is authoritative.
       source: body
@@ -13487,14 +13495,18 @@ issues:
       certificates, 8,107,636 bytes as the packet's README lists them path by path with each
       SHA-256, were retained with the source's MIT-licensed checker in
       resources/web/couzo-issue678-2026-10-18 at 7b6c87e, and all 85 rows were decided there
-      exactly by devtools.couzo_678_replay, with five controls per certificate. On 2026-10-20
+      exactly by devtools.couzo_678_replay, then with five controls per certificate. On 2026-10-20
       campaign/issue-intake/upper-bounds-20261019 walked them in report order against the
       record at main d588ad987 and issues 666, 670, 672 and 675, recording all 85; T-223
       registered 204 and 260 at V0/C0, pending adoption, and the couzo-issue678-2026-10-18
       source took the 83 beyond the corpus as dated rows, superseding the rows that stood at 60
-      of those counts. The mapped mathematical review, the replay's evidence entries and the
-      adoption at 204 and 260 are stage 4 work on think-xu4d; the full-kernel all-pairs replay
-      is held on think-fpnd. Coordinate with think-pvav for issue 675.
+      of those counts. Stage 4 on think-xu4d, the same day, mapped the review
+      (docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md, accepted with five
+      non-blocking findings), added the near-contact control (six per certificate, 498 in all,
+      every one refused), entered the confirming evidence, raised T-223 to V3/C3 and adopted
+      the house best packings at 204 and 260 with both strong generators run on each. The
+      full-kernel all-pairs replay beyond the corpus is held on think-fpnd. Coordinate with
+      think-pvav for issue 675.
   - number: 680
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand

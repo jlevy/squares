@@ -18,7 +18,10 @@ the negative controls copy them into every private worker (`COPY_SEPARATELY`), s
 check that runs there reads its own inputs, never a link back into the primary checkout.
 Every house's packet is read through its declaration (`packet_source`): the adoption of
 17 October 2026 moved the last counts of `T-128` and `T-130`, whose packets carried
-readers of their own, to `T-174`.
+readers of their own, to `T-174`. Issue 678's packet (`T-223`) carries no import
+declaration: its replay module reads it, and `couzo_678_source` reads its two counts of
+the case corpus through that module, the certificate bound to its pinned digest and the
+kernel's three jobs kept in the packet's own receipt (`couzo_678_replay house-jobs`).
 
 **No geometry runs in a check.** `check_houses` admits the inputs and compares the
 retained witness with the one they rebuild; `build_witness`, which writes a house, also
@@ -55,6 +58,7 @@ from functools import cache
 from pathlib import Path, PurePosixPath
 from typing import Any, NamedTuple, cast
 
+from devtools import couzo_678_replay as couzo_678
 from devtools import evand_arrangement_reports as kernel
 from devtools import retained_data
 from devtools import squish_second_update_house_links as house
@@ -125,6 +129,10 @@ class Source:
     inputs: Callable[[Sequence[int]], tuple[Path, ...]]
     witness_prefix: str
     claim_limitations: str
+    #: The one retained file a count's certificate is read from, and the receipt of its
+    #: three jobs, which the custody check mutates (`_mutants`).
+    stored: Callable[[int], Path]
+    receipt: Callable[[int], Path]
 
 
 # --------------------------------------------------------------------- generic packets
@@ -292,6 +300,71 @@ def packet_source(result: str, name: str) -> Source:
         inputs=lambda numbers: _packet_inputs(packet, numbers),
         witness_prefix=declaration["witness_prefix"],
         claim_limitations=declaration["claim_limitations"],
+        stored=lambda n: _stored(packet, n),
+        receipt=lambda n: _receipt(packet, n),
+    )
+
+
+def _couzo_678_path(n: int) -> Path:
+    _require(n in couzo_678.HOUSE_COUNTS, f"n={n}: issue 678 houses only 204 and 260")
+    return couzo_678.SOURCE / couzo_678.house_path(n)
+
+
+def _couzo_678_origin(n: int) -> Origin:
+    path = couzo_678.PACKET / reports.acquire_source.RECORD
+    reports.ensure_private(path)
+    record = json.loads(path.read_text(encoding="utf-8"))
+    stored = _couzo_678_path(n)
+    return Origin(
+        key=couzo_678.SOURCE_KEY,
+        path=stored,
+        url=(
+            f"{couzo_678.SOURCE_URL}/blob/{couzo_678.PIN}/"
+            f"{stored.relative_to(couzo_678.SOURCE).as_posix()}"
+        ),
+        revision=couzo_678.PIN,
+        retrieved=str(record["retrieved_at_utc"])[:10],
+        author="Francisco Couzo",
+        licence_status=NO_LICENCE,
+        raw_asset_retained=True,
+        retention_policy=RAW_RETENTION,
+    )
+
+
+def _couzo_678_jobs(n: int, certificate: legacy.Certificate) -> Mapping[str, Any]:
+    _require(n == certificate.n, f"n={n}: the certificate is another count's")
+    return _validated_jobs(
+        receipt_cases(couzo_678.HOUSE_JOBS, couzo_678.HOUSE_FORMAT),
+        certificate,
+        witness_prefix=couzo_678.WITNESS_PREFIX,
+        claim_limitations=couzo_678.CLAIM_LIMITATIONS,
+    )
+
+
+def couzo_678_source() -> Source:
+    """Issue 678's certificates at 204 and 260 (T-223), read through its replay module.
+
+    The packet carries no import declaration. Each certificate is read once its bytes
+    equal the digest the packet's manifest pins (`couzo_678_replay.house_certificate`),
+    and its jobs from the packet's own receipt of the kernel's three jobs.
+    """
+    return Source(
+        result="T-223",
+        key=couzo_678.SOURCE_KEY,
+        packet=couzo_678.PACKET,
+        certificate=couzo_678.house_certificate,
+        jobs=_couzo_678_jobs,
+        origin=_couzo_678_origin,
+        inputs=lambda numbers: (
+            couzo_678.PACKET / reports.acquire_source.RECORD,
+            couzo_678.MANIFEST,
+            *(_couzo_678_path(n) for n in numbers),
+            couzo_678.HOUSE_JOBS,
+        ),
+        witness_prefix=couzo_678.WITNESS_PREFIX,
+        claim_limitations=couzo_678.CLAIM_LIMITATIONS,
+        stored=_couzo_678_path,
+        receipt=lambda _n: couzo_678.HOUSE_JOBS,
     )
 
 
@@ -317,6 +390,7 @@ def _sources() -> dict[str, Source]:
         packet_source("T-220", "evand-n183-subgrid-2026-10-19"),
         packet_source("T-221", "evand-n308-2026-10-19"),
         packet_source("T-222", "evand-n154-sweep-2026-10-20"),
+        couzo_678_source(),
         packet_source("T-224", "evand-n270-sweep-2026-10-20"),
     ]
     found = {source.result: source for source in sources}
@@ -344,9 +418,10 @@ def _sources() -> dict[str, Source]:
 #: certificate (T-195) at 29. The pass of 19 October 2026 adopted Evan Daniel's
 #: certificates of issues 669 (T-197), 674 (T-199), 659 (T-218), 664 (T-219) and 680
 #: (T-220) at 155, 229, 236, 271 and 183, and the pass of 20 October 2026 his certificates
-#: of issues 694 (T-222) and 689 (T-221) at 154 and 308, and Joost de Winter's
-#: certificates of issue 668 (T-196) at 227 and 260. The pass of 21 October 2026 adopted
-#: Evan Daniel's certificate of issue 703 (T-224) at 270.
+#: of issues 694 (T-222) and 689 (T-221) at 154 and 308, Francisco Couzo's certificate of
+#: issue 678 (T-223) at 204 and Joost de Winter's certificates of issue 668 (T-196) at 227
+#: and 260. The pass of 21 October 2026 adopted Evan Daniel's certificate of issue 703
+#: (T-224) at 270 and Couzo's of issue 678 (T-223) at 260, which replaced T-196 there.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -378,7 +453,7 @@ ADOPTED: dict[int, str] = {
     181: "T-174",
     182: "T-174",
     183: "T-220",
-    204: "T-186",
+    204: "T-223",
     206: "T-174",
     207: "T-173",
     208: "T-174",
@@ -397,7 +472,7 @@ ADOPTED: dict[int, str] = {
     241: "T-182",
     258: "T-146",
     259: "T-136",
-    260: "T-196",
+    260: "T-223",
     261: "T-174",
     263: "T-174",
     264: "T-186",
@@ -457,13 +532,16 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: at 183 from the case's trivial 14 x 14 grid, which no pass had adopted before. The pass
 #: of 20 October 2026 adopted Evan Daniel's certificates after the 20 October review: issue
 #: 694 (T-222) at 154 from T-186, continuing Francisco Couzo's #586 arrangement, and issue
-#: 689 (T-221) at 308 from T-174, another arrangement of the two-wedge design; and Joost de
-#: Winter's certificates of issue 668 (T-196), after their own 20 October review, at 227 and
-#: 260 from the case records' own (the Kingbird catalogue's packings, verified by T-155's
-#: exact ceilings), which no pass had adopted before; at 229 T-199 stays. The pass of
-#: 21 October 2026 adopted Evan Daniel's certificate of issue 703 (T-224) after the 21
-#: October review, at 270 from T-174: another arrangement of the design of Nate
-#: Chaoweeraprasit's #500 packing, which T-174 refines, found from that packing.
+#: 689 (T-221) at 308 from T-174, another arrangement of the two-wedge design; after their
+#: own reviews of that day, Couzo's certificate of issue 678 (T-223) at 204 from T-186,
+#: below T-193's algebraic side as well, and Joost de Winter's certificates of issue 668
+#: (T-196) at 227 and 260 from the case records' own (the Kingbird catalogue's packings,
+#: verified by T-155's exact ceilings), which no pass had adopted before; at 229 T-199
+#: stays. The pass of 21 October 2026 adopted Evan Daniel's certificate of issue 703
+#: (T-224) after the 21 October review, at 270 from T-174: another arrangement of the
+#: design of Nate Chaoweeraprasit's #500 packing, which T-174 refines, found from that
+#: packing; and, once #704 had landed, Couzo's certificate of issue 678 (T-223) at 260
+#: from T-196, 2.56e-05 below it, so that 260 moved twice in two days.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -536,8 +614,8 @@ LATER_PASSES: dict[str, frozenset[int]] = {
         }
     ),
     "2026-10-19": frozenset({155, 183, 229, 236, 271}),
-    "2026-10-20": frozenset({154, 227, 260, 308}),
-    "2026-10-21": frozenset({270}),
+    "2026-10-20": frozenset({154, 204, 227, 260, 308}),
+    "2026-10-21": frozenset({260, 270}),
 }
 
 
@@ -801,16 +879,19 @@ def linked_house_problem(path: str, *, repository: Path) -> str | None:
 #: Where the custody run's receipt is kept: one record for every adopted packet.
 CUSTODY_RECEIPT = ROOT / "devtools/house-custody-2026-10-11.json"
 CUSTODY_FORMAT = "AdoptedHouseCustody/v1"
-#: The worker's deadline: it admits all 70 house best packings and refuses 42 mutations,
-#: two for each of the twenty-one results (23.33 s in the worker on 21 October 2026,
-#: after the merge of main 7eeab1f5e, at a load average of about four; 21.69 s after the
-#: merge of main 51ac9d7ee, at about one; 23.62 s on main after the adoption at 270, at
-#: about four; 25.76 s on 20 October 2026, after the adoptions at 154 and 308 and at 227
-#: and 260, at about nine; 20.55 s after the adoption at 154 and 308 alone, with 7.76 s
-#: of setup, and 24.0 s after the merge with main that morning, with 14.25 s; earlier
-#: readings: 59.18 s for 67 of them on 19 October at a load average of about seven,
-#: 28.36 s for 65 on 17 October at about five, and 48.95 s for 52 on 16 October at about
-#: ten).
+#: The worker's deadline: it admits all 70 house best packings and refuses 44 mutations,
+#: two for each of the twenty-two results (22.8 s in the worker on 21 October 2026, with
+#: 9.78 s of setup at a load average of about six, after the merge of main 970e89de8 and
+#: the adoption at 260 that day; 23.84 s for 69 on this branch after the merge of main
+#: 51ac9d7ee, at a load average of about six; 23.33 s for 70 on #704's branch after the
+#: merge of main 7eeab1f5e, at about four; 21.69 s there after the merge of main 51ac9d7ee,
+#: at about one; 23.62 s on main after the adoption at 270, at about four; 25.76 s on 20
+#: October 2026, after the adoptions at 154 and 308 and at 227 and 260, at about nine;
+#: 32.08 s that day after the adoption at 204 and 260 on this branch, at about seventeen;
+#: 20.55 s after the adoption at 154 and 308 alone, with 7.76 s of setup, and 24.0 s after
+#: the merge with main that morning, with 14.25 s; earlier readings: 59.18 s for 67 of them
+#: on 19 October at a load average of about seven, 28.36 s for 65 on 17 October at about
+#: five, and 48.95 s for 52 on 16 October at about ten).
 CUSTODY_TIMEOUT = 120
 
 
@@ -840,12 +921,12 @@ def _mutants(n: int) -> list[tuple[str, Path, Callable[[bytes], bytes]]]:
 
     return [
         ("outside-control verdict", receipt_of(n), verdict),
-        ("certificate bytes", _stored(source.packet, n), lambda raw: raw + b"\n"),
+        ("certificate bytes", source.stored(n), lambda raw: raw + b"\n"),
     ]
 
 
 def receipt_of(n: int) -> Path:
-    return _receipt(source_for(n).packet, n)
+    return source_for(n).receipt(n)
 
 
 def worker_custody() -> dict[str, Any]:
