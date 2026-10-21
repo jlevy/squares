@@ -86,16 +86,7 @@ class PublicationHistoryEntry(NamedTuple):
 #:
 #: Reproduce with `gh api "repos/jlevy/squares/deployments?environment=github-pages"` and,
 #: for each deployment's commit, what the page it built stated.
-# The leading entry is proposed for PR #578; confirm its date at first deployment.
 PUBLICATION_HISTORY = (
-    PublicationHistoryEntry(
-        version="v0.9.0",
-        first_published="October 21, 2026",
-        result_scope=(
-            "Add person profiles and reviewed credit links, with direct profile "
-            "navigation and shared article popovers for complete case and result records."
-        ),
-    ),
     PublicationHistoryEntry(
         version="v0.8.7",
         first_published="October 20, 2026",
@@ -872,7 +863,7 @@ EXPLAINER_REVISED = "October 13, 2026"
 OPTIMALITY_REVIEW_HISTORY = (
     PublicationHistoryEntry(
         version="v0.1.8",
-        first_published="October 21, 2026",
+        first_published="October 20, 2026",
         result_scope=(
             "Correct Manasseh Ahmed's name and credit Hiroaki Hosono's checker and "
             "formalization reports by name."
@@ -997,7 +988,7 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 THRESHOLD_REVIEW_HISTORY = (
     PublicationHistoryEntry(
         version="v0.1.1",
-        first_published="October 21, 2026",
+        first_published="October 20, 2026",
         result_scope="Credit Hiroaki Hosono's checker and retained tools by name.",
     ),
     PublicationHistoryEntry(
@@ -1125,16 +1116,6 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
-    ReleaseImpactDecision(
-        component="site",
-        previous_version="v0.8.7",
-        version="v0.9.0",
-        impact="minor",
-        reason=(
-            "Add person profiles and reviewed credit links, with direct profile "
-            "navigation and shared article popovers for complete case and result records."
-        ),
-    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.8.6",
@@ -4249,17 +4230,19 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         outputs=("papers/n11-lower-bounds-explainer.md",),
         reason=(
-            "Compared with main 4851d8193ddb1c7939a26029fc1ce17444ee4eed, the exact "
-            "candidate scope is the 30 paths above. The explainer manuscript and producer "
-            "are byte-identical to main, and its n11 bound-citation entry is unchanged; "
-            "the other 62 changed entries are Hosono credit renames that do not enter the "
-            "article. Main's explainer v0.4.11 history and October 13 article revision "
-            "remain current. Changed standalone case/result serialization, News/profile "
-            "navigation and sibling-paper metadata do not revise this paper content. The "
-            "n29 adoption-writer repair reproduces retained historical wording. The v0.9.0 "
-            "site cut regenerates the five claim documents, which differ from main only in "
-            "source-link revisions. This is a source review against main; no baseline "
-            "paper render, PDF rebuild or rendered byte-identity comparison is claimed."
+            "Compared with actual main e0319ffd1c96986e0260083db7d3f3411f3bb4ef after "
+            "PR 671 and PR 407 landed, the exact candidate scope is the 30 paths above. "
+            "The explainer manuscript and producer are byte-identical to main, and its "
+            "n11 bound-citation entry is unchanged; other counts and source-specific "
+            "credit links do not enter the article. The inherited register count, "
+            "explainer v0.4.8 history and October 13 article revision remain current. "
+            "Changed standalone case/result serialization, News/profile navigation and "
+            "sibling-paper metadata do not revise this paper content. The n29 "
+            "adoption-writer repair reproduces retained historical wording. This is a "
+            "fresh source review against actual main; no baseline paper render, PDF "
+            "rebuild or byte-identity comparison of rendered output is claimed. The "
+            "five claim documents are regenerated with the selected edition source pin; "
+            "exact comparison confirms only source-link revision replacements."
         ),
     ),
     ReleaseNoPublicChange(
@@ -4295,7 +4278,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/frontier/n-102.md",
             "packing/frontier/n-103.md",
             "packing/frontier/n-105.md",
-            "packing/frontier/n-108.md",
             "packing/frontier/n-126.md",
             "packing/frontier/n-127.md",
             "packing/frontier/n-129.md",
@@ -4321,16 +4303,18 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         outputs=("papers/square-packing-methods-survey.md",),
         reason=(
-            "Compared with main 4851d8193ddb1c7939a26029fc1ce17444ee4eed, the exact "
-            "candidate scope is the 53 paths above. The methods manuscript, producer and "
-            "every passive figure input are byte-identical to main, including the n29 "
-            "certificate drawing. Changed frontier/source-coverage prose and case credits, "
-            "including n108's Hosono credit for its fine-net lower bound, are cited by "
-            "link rather than incorporated; shared News, profile and standalone "
-            "case/result helpers do not enter the paper article. The n29 writer repair "
-            "preserves retained historical facts. Its v0.2.3 content edition remains "
-            "current. This is a source review against main; no baseline paper render, PDF "
-            "rebuild or rendered byte-identity comparison is claimed."
+            "Compared with actual main e0319ffd1c96986e0260083db7d3f3411f3bb4ef after "
+            "PR 671 and PR 407 landed, the exact candidate scope is the 52 paths above. "
+            "The methods manuscript, producer and every passive figure input are "
+            "byte-identical to main, including the n29 certificate drawing. Changed "
+            "frontier/source-coverage prose is cited by link rather than incorporated; "
+            "shared News, profile and standalone case/result helpers do not enter the "
+            "paper article. The n29 writer repair and the exact later n108 adoption "
+            "projection preserve retained historical facts. Its v0.2.3 content edition "
+            "remains current. This is a fresh source review against actual main; the "
+            "earlier comparison at d167d4b86 does not qualify this integration. No "
+            "baseline paper render, PDF rebuild or rendered byte-identity comparison is "
+            "claimed."
         ),
     ),
     ReleaseNoPublicChange(
@@ -5693,7 +5677,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "fff9f405"
+PUBLICATION_REVISION = "9cd35d1e"
 
 
 def data_pathspec() -> tuple[str, ...]:
