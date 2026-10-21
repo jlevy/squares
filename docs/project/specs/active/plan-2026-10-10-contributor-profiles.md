@@ -129,8 +129,10 @@ boundaries, with a fallback for long segments.
 The URL registry has 1,144 rows with zero failures.
 The latest merge passes all 52 record-validation and 68 edit checks, plus 54
 identity/tally/coverage and 20 classifier/T-196 tests.
-The post-merge push gate and hosted acceptance remain pending.
-The sourced integration environment includes the project interpreter and tools on PATH.
+All 69 selected post-merge push-gate steps pass in 952.59 seconds; hosted acceptance
+remains pending.
+The sourced integration environment includes the project interpreter and
+tools on PATH.
 
 Local focused checks passed: 88 profile, naming, resource, tally and GitHub-reference
 tests in 91.16 seconds; 62 release/component/impact tests in 17.93 seconds; and 19
