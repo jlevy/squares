@@ -349,6 +349,7 @@
     "packing/tests/test_motion_lab_shell.py": 10.691,
     "packing/tests/test_motion_lab_snap.py": 0.01,
     "packing/tests/test_motion_lab_trace.py": 2.041,
+    "packing/tests/test_muglich_686_import.py": 2.625,
     "packing/tests/test_multi_owner_domains.py": 11.018,
     "packing/tests/test_n050_exact.py": 0.338,
     "packing/tests/test_n050_exact_independent.py": 0.072,
@@ -1044,6 +1045,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-703-2026-10-21.json",
           "provenance": {},
           "tests": 5
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_muglich_686_import.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/muglich-686-import-2026-10-21.json",
+          "provenance": {},
+          "tests": 8
         }
       ]
     },
