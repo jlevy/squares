@@ -10658,6 +10658,34 @@ issues:
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/668#issuecomment-6261558114
+      outdated:
+      - 'T-196 now reads V3/C3, confirmed, and it is the house best packing at 227 and 260; since
+        #706 merged on 21 October T-223 is the house at 260, from T-196 in the pass of 21 October,
+        and T-196 stays the house at 227 and is retained at 260 as history'
+      - 'At 260, Francisco Couzo''s #678 certificate is registered as T-223 at V0/C0; since #706
+        merged on 21 October T-223 is at V3/C3, confirmed, and is the house best packing there'
+    - url: https://github.com/jlevy/squares/issues/668#issuecomment-6328043878
+      date: '2026-10-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n227
+        id: T-196
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n229
+        id: T-196
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n260
+        id: T-196
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/668#issuecomment-6326251307
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10674,7 +10702,7 @@ issues:
       actual main merge order; no reply is posted. Separate mathematical review and source-replay owners
       retain Stage 4 integration and any adoption. The separately returned full exact review and completed
       source replay/controls are pending separate descendant PRs; this registration adopts neither receipt
-      nor rung. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here. On 20 October 2026 the replay was re-run here and integrated (E-de-winter-668-upper-exact-feasibility, think-8xr0) and T-196 raised to V3/C3; the 20 October review (think-455r) accepted it the same day, and the cases at 227 and 260 adopted it with both strong regularizers'' runs. The final reply, posted at 2026-10-21T20:50:03Z (issuecomment-6326251307) after #704 merged and its Pages deployment of 970e89de8 (run 39671549053, deployment 7236813599, site v0.8.15) was checked, reported T-196 at V3/C3, confirmed, on the two maintained exact routes and the 20 October review''s own route, an independent re-implementation, and said that no run of the source''s verify_all.py or its three checkers is in the record. It reported the adoption at 227 and 260 with the same-side regularized drawings and the catalogue sides withdrawn as conjectured optima, T-199 kept as the house at 229, T-223 registered at V0/C0 2.56e-05 below T-196 at 260, and #672''s unregistered smaller print at 227; it passed on the review''s two questions for the author and said that nothing asked for is queued. The issue closed at 2026-10-21T20:50Z.'
+      nor rung. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here. On 20 October 2026 the replay was re-run here and integrated (E-de-winter-668-upper-exact-feasibility, think-8xr0) and T-196 raised to V3/C3; the 20 October review (think-455r) accepted it the same day, and the cases at 227 and 260 adopted it with both strong regularizers'' runs. The final reply, posted at 2026-10-21T20:50:03Z (issuecomment-6326251307) after #704 merged and its Pages deployment of 970e89de8 (run 39671549053, deployment 7236813599, site v0.8.15) was checked, reported T-196 at V3/C3, confirmed, on the two maintained exact routes and the 20 October review''s own route, an independent re-implementation, and said that no run of the source''s verify_all.py or its three checkers is in the record. It reported the adoption at 227 and 260 with the same-side regularized drawings and the catalogue sides withdrawn as conjectured optima, T-199 kept as the house at 229, T-223 registered at V0/C0 2.56e-05 below T-196 at 260, and #672''s unregistered smaller print at 227; it passed on the review''s two questions for the author and said that nothing asked for is queued. The issue closed at 2026-10-21T20:50Z. A follow-up, posted at 2026-10-21T22:34:28Z (issuecomment-6328043878) after #706 merged and its Pages deployment of bb0c24e9f (run 39685599146, site v0.8.16) was checked, as the final reply had promised, reported that T-223 replaced T-196 as the house at 260 in the pass of 21 October, 2.56e-05 below, with T-196 unchanged at V3/C3 and retained at 260 as history, the house at 227, and T-199 the house at 229; the issue stays closed.'
   - number: 669
     title: 's(155) ≤ 12.952260944651: registration request'
     author: evand
@@ -13337,13 +13365,19 @@ issues:
     - what: Review the author's n260 float-conversion, search-chain, packing-identity and analytic-optimum
         assertions (https://github.com/jlevy/squares/issues/678#issuecomment-6269517369) separately from
         seed custody.
-      state: queued
+      state: done
       bead: think-xu4d
       note: The comment reports that its importer's float conversion of the 14a9af8 seed reproduces the seed's
         SHA-256, a three-job search chain to the n260 certificate, 240 of 260 squares coinciding with
         de Winter's df90e58d packing after a 180-degree rotation, and that the seed is the analytic optimum
-        of that packing. These remain source-reported assertions; neither the custody check nor the public
-        acknowledgement establishes geometry, identity, conversion correctness or an optimum.
+        of that packing. The 20 October review (docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md,
+        The Issue's Assertions, Mapped) reviews all four apart from seed custody. The identity is checked
+        there and holds at 1e-7 (240 of 260 squares within 1e-7 of T-196 after the half turn, 49 within
+        1e-8; the other 20 are axis-aligned wall squares displaced by 0.42 to 0.46), and its question 2
+        asks the author about 1e-8. The float conversion and the search chain stay asserted but
+        unverified, since the importer, the converted seed and the intermediate files are not retained;
+        the analytic optimum stays asserted but unverified, since no route here decides a contact
+        graph's optimality. Nothing further is queued for this ask.
     beads:
     - think-xu4d
     - think-fpnd
@@ -13468,6 +13502,131 @@ issues:
       - result: n992
       - result: n994
       - result: n998
+      outdated:
+      - 'Both case pages keep their house best packing until stage 4 review and adoption; since
+        #706 merged on 21 October T-223 is the house best packing at 204, from T-186 in the pass
+        of 20 October, and at 260, from T-196 in the pass of 21 October'
+      - 'T-196, Joost de Winter''s #668 certificate, which is registered and pending adoption;
+        #704 adopted T-196 at 260 on 20 October, and #706 replaced it there with T-223 on 21
+        October, keeping T-196 as history'
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6328042744
+      date: '2026-10-21'
+      by: jlevy
+      kind: confirmation
+      reported:
+      - result: n204
+        id: T-223
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n204
+        id: E-couzo-678-filtered-exact-feasibility
+        status: confirmed
+      - result: n204
+        id: E-couzo-678-source-checker-replay
+        status: confirmed
+      - result: n204
+        id: E-couzo-678-review-exact-feasibility
+        status: confirmed
+      - result: n260
+        id: T-223
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n260
+        id: E-couzo-678-filtered-exact-feasibility
+        status: confirmed
+      - result: n260
+        id: E-couzo-678-source-checker-replay
+        status: confirmed
+      - result: n260
+        id: E-couzo-678-review-exact-feasibility
+        status: confirmed
+      - result: n330
+      - result: n343
+      - result: n418
+      - result: n420
+      - result: n421
+      - result: n422
+      - result: n455
+      - result: n456
+      - result: n458
+      - result: n459
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n464
+      - result: n497
+      - result: n499
+      - result: n501
+      - result: n502
+      - result: n505
+      - result: n507
+      - result: n545
+      - result: n546
+      - result: n548
+      - result: n549
+      - result: n553
+      - result: n554
+      - result: n555
+      - result: n592
+      - result: n593
+      - result: n597
+      - result: n598
+      - result: n600
+      - result: n601
+      - result: n602
+      - result: n641
+      - result: n642
+      - result: n650
+      - result: n652
+      - result: n653
+      - result: n654
+      - result: n693
+      - result: n700
+      - result: n701
+      - result: n703
+      - result: n704
+      - result: n705
+      - result: n706
+      - result: n749
+      - result: n751
+      - result: n752
+      - result: n753
+      - result: n754
+      - result: n755
+      - result: n760
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n808
+      - result: n815
+      - result: n863
+      - result: n865
+      - result: n867
+      - result: n868
+      - result: n870
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n919
+      - result: n924
+      - result: n926
+      - result: n927
+      - result: n928
+      - result: n930
+      - result: n933
+      - result: n934
+      - result: n984
+      - result: n987
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n994
+      - result: n998
+      corrects:
+      - https://github.com/jlevy/squares/issues/678#issuecomment-6306311833
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -13508,6 +13667,17 @@ issues:
       T-196, which #704 had adopted there, and both strong generators ran on each count. The
       full-kernel all-pairs replay beyond the corpus is held on think-fpnd. Coordinate with
       think-pvav for issue 675.
+      The stage 7 reply, posted at 2026-10-21T22:34:23Z (issuecomment-6328042744) after #706 merged
+      and its Pages deployment of bb0c24e9f (run 39685599146, deployment 7238755784, site
+      v0.8.16) was checked, reported T-223 at V3/C3, confirmed, on the filtered replay's two
+      routes with six controls a certificate, the all-pairs kernel, the source's own checker
+      re-run unchanged and the review's checker, re-implemented sharing named components. It
+      reported the review's five findings, RF-4 needing no change because the 19 October
+      ledger decides report order; the adoption at 204 from T-186 in the pass of 20 October
+      and at 260 from T-196 in the pass of 21 October, with T-186 and T-196 kept as history;
+      48 beyond-horizon rows superseded by issue 686 and the row at 343 by issue 702, 34 still
+      current; and the review's three questions for the author. Both asks stay queued, so the
+      issue stays open.
   - number: 680
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand
@@ -14719,3 +14889,30 @@ issues:
       the bound: whether his matching in s270_sw_vs_prior.json pairs squares 269, 48, 23, 15, 3, 2
       and 216 differently from the identity on the certificates, or whether its 0.391 is the
       regularized views' displacement rather than the certificates'.
+  - number: 715
+    title: '328-9913: registration request'
+    author: franciscouzo
+    opened: '2026-10-21'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      Francisco Couzo asks, as a follow-up to #678, that 1285 improved upper bounds from n = 328 to
+      9913 be registered, 173 below 1024 and 1112 above it, from
+      franciscouzo/square-packing at 6b7391de820fd01f3ff6984e4a081e8c86845588, each side
+      rounded upward at twelve places with the exact certificate header authoritative; the
+      rows include native and browser refinements and their square-tiling, repeated L-border
+      and deletion consequences.
+    read_through: '2026-10-21T20:55:57Z'
+    results: []
+    beads:
+    - think-cyal
+    answer_bead: think-cyal
+    replies: []
+    close_when: >-
+      Every claim has a reviewed disposition on main, pending validation has a priced owner,
+      any changed house is regularized in its adoption, and the author has received a reply
+      verified against main and the deployed site.
+    notes: >-
+      Entered on 21 October 2026 at stage 0 with triage pending, so the record holds the issue;
+      think-cyal owns its read-only stage 1 triage and import. Nothing is imported here.
