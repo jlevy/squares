@@ -30785,8 +30785,8 @@ results:
       Credit the packings to their finders, as the source's lists name them: Francisco
       Couzo's at 204 (#678, T-223, which his source credits to Mykhailo Polkovskyi's
       construction), 227 (#672, his refinement of Joost de Winter's #668 packing, T-196)
-      and 260 (#678, T-223, Joost de Winter's #668 packing as Couzo seeded it from Evan
-      Daniel's exact-form certificate), and Evan Daniel's own at 229 (#674, T-199, from
+      and 260 (#678, T-223, his arrangement from a search seeded with Evan Daniel's
+      exact-form certificate of Joost de Winter's #668 packing), and Evan Daniel's own at 229 (#674, T-199, from
       Couzo's #672 packing, which refines de Winter's). Evan Daniel
       (https://github.com/evand/square-packing) refreshed each packing from his store,
       solved it to the exact side stated (at 229 after a polish), regularized it for
@@ -30804,10 +30804,14 @@ results:
         227, Daniel's #674 at 229), 1.76e-11 to 1.39e-9 below that packing's certificate
         and regularized for display: a citable detail of each case that moves no theorem,
         S2 as T-146 is. At 227 the drop of 1.71e-4 below T-196 is #672's (think-2vjc), not
-        this entry's. No lower bound or optimum. Draft at intake; the stage 4 review
-        confirms or changes it.
+        this entry's. No lower bound or optimum. Drafted at intake and confirmed by review
+        A of #716; the stage 4 review may still change it.
       scored: '2026-10-21'
-      by: think-ql4v Evan Daniel import (the views lane of 21 October)
+      by: >-
+        review A of #716, the pull request's reviewer c-review-716-A
+        (https://github.com/jlevy/squares/pull/716#issuecomment-6328806725), confirming the
+        draft S2 of think-ql4v (the views lane of 21 October); not the lane that reviews the
+        mathematics, whose stage 4 review is still owed
     novelty: previously-published
     attribution:
       source_keys: ['[Daniel regularized lists 2026-10-20]']
@@ -30864,7 +30868,7 @@ results:
           one_to_one: false
           moved: 41
           max_move: 0.643
-          max_turn_deg: 0
+          max_turn_deg: 1.3e-07
     evidence: [E-evand-regularized-1020-certificate-report]
     artifacts:
       - packing/resources/web/evand-regularized-2026-10-20/README.md
@@ -30904,7 +30908,7 @@ results:
       2.52e-11; below T-196 (#668) by 2.56e-05.
 
       It is the smallest report at each count, and each side lies below the verified upper
-      bound at n + 1 (14.82445114612409 at 205, 15.60460147572967 at 228, 15.68292682926830
+      bound at n + 1 (14.82445114612409 at 205, 15.60460147572968 at 228, 15.68292682926830
       at 230, 16.67877987534291 at 261). No registered certificate states any of the four
       sides, so no item names first_certified_in. The 21 October ledger (upper-bounds-20261021) records each in
       report order, a refinement of the packing named, after #672 at 227.
@@ -30917,7 +30921,7 @@ results:
       whose packing #672 refines, and the credit names #672, which think-2vjc imports. At
       229 and 260 nearest centres pair the squares one to one under no symmetry, and an
       optimal assignment gives the moves listed; at 260, 207 of 260 squares lie within
-      1e-9 of T-223's and none turns.
+      1e-9 of T-223's and none turns by 1e-6 degrees, the largest by 1.3e-7.
 
       Since #704 and #706 merged on 21 October, the houses are T-223 at 204 and 260, T-196
       at 227 and T-199 at 229, each a member of the ledger's frozen start, and the
@@ -30938,13 +30942,28 @@ results:
       1.9e-11 at 229 to 1.39e-9 at 204 against the packing it solves, and each lies below
       the verified bound at the next count. Both strong generators run on each re-housed
       count in the adoption's pull request.
+
+      The adoption at 227 waits for think-2vjc's registration of #672, after which the
+      item's of names that result: as recorded it names T-196, so an adoption would credit
+      de Winter's packing and leave out Couzo's refinement, the whole 1.71e-4 (review A2 of
+      #716). From this entry's C3 on, a test requires select_houses.CORRECTIONS_OWED to hold
+      227 while the item names T-196, and adopt_houses refuses the count until it is
+      repointed.
     unfinished_confirmations:
       - what: >-
           Enter the retained two-route replay at 204, 227, 229 and 260 as confirming
           evidence, with the mapped stage 4 review of the four certificates and of the
-          identity measurement.
+          identity measurement, and add the sharp controls the replay lacks, each with a
+          contact pushed 1e-30 into overlap, since its two controls are gross (the evidence
+          atom's limitations).
         rung: C3
         link: think-ql4v
+      - what: >-
+          Repoint the 227 item's of from T-196 to #672's result once think-2vjc registers
+          it; until then the adoption at 227 waits, held by select_houses.CORRECTIONS_OWED
+          from this entry's C3 on (review A2 of #716).
+        rung: C3
+        link: think-2vjc
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

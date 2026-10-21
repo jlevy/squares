@@ -8,7 +8,8 @@ it, as the stage 4 review of 19 October asked of the imports before it (RV-1 of
 docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md): how each
 side was made from the solved side its JSON prints, that each is below every report at its
 count and below the verified bound at the next count, that the house reader rebuilds it,
-and what the identity measurement found at 227. Every test reads the retained packet and
+what the identity measurement found at 227, and that the adoption there waits for #672's
+registration (review A2 of #716). Every test reads the retained packet and
 the records only; none needs the network.
 """
 
@@ -22,7 +23,10 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
+import pytest
+
 from devtools import check_source_coverage as coverage
+from devtools import select_houses
 from devtools import upper_bound_reports as reports
 
 PACKET = "evand-regularized-2026-10-20"
@@ -113,3 +117,31 @@ def test_the_227_view_is_measured_as_672s_packing_solved_lower() -> None:
     # #672's packing moves no square beyond a tenth from de Winter's: it refines it.
     refines = pairs[227, "#672", "T-196 (#668)"]
     assert refines["assignment"]["moved_beyond"]["1e-1"] == 0
+
+
+#: The bead that imports #672, after which T-225's item at 227 names that result.
+REGISTERS_672 = "think-2vjc"
+
+
+def test_the_227_adoption_waits_for_672s_registration(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Review A2 of #716: the view at 227 is #672's packing, which no entry registers yet,
+    so the item names T-196, whose packing #672 refines, and an adoption would credit de
+    Winter's packing and leave out Couzo's refinement. From T-225's confirmation on,
+    `select_houses.CORRECTIONS_OWED` must hold 227 while the item names T-196, and that
+    entry makes `adopt_houses.plan` refuse the count until think-2vjc repoints it."""
+    entry = next(e for e in select_houses.load_results() if e["id"] == "T-225")
+    owed = select_houses.CORRECTIONS_OWED.get(227)
+    if select_houses.regularized(entry, 227) == "T-196" and select_houses.eligible(entry):
+        assert owed is not None, "hold 227 in CORRECTIONS_OWED (review A2 of #716)"
+        assert (owed.result, owed.named, owed.bead) == ("T-225", "T-196", REGISTERS_672)
+    # The hold refuses the house it names: the entry the confirming pull request adds.
+    house = select_houses.Candidate(
+        result="T-225", n=227, side=SIDES[227], source_key=KEY, published="2026-10-20",
+        report_evidence=(), confirming_evidence=(), regularizes="T-196",
+    )  # fmt: skip
+    hold = select_houses.Correction(
+        result="T-225", named="T-196", measured="#672's packing", bead=REGISTERS_672,
+        measured_in=f"packing/resources/web/{PACKET}/measure/identity.json",
+    )  # fmt: skip
+    monkeypatch.setitem(select_houses.CORRECTIONS_OWED, 227, hold)
+    assert select_houses.owed_correction(227, house) == hold

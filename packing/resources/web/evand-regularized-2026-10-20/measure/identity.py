@@ -23,7 +23,8 @@ largest turn. Exact sides and their differences are exact.
 
 Usage, from packing/ with the project interpreter:
     python resources/web/evand-regularized-2026-10-20/measure/identity.py \
-        --couzo-672 N227_CERT --out resources/web/evand-regularized-2026-10-20/measure/identity.json
+        --couzo-672 N227_CERT \
+        --out resources/web/evand-regularized-2026-10-20/measure/identity.json
 """
 
 from __future__ import annotations
@@ -155,25 +156,43 @@ def main(argv: list[str] | None = None) -> int:
             "side": str(p672[0]),
         },
         "pairs": [
-            {"n": 204, "view": "evand 0075967", "against": "T-223 (#678)",
-             **measure(views[204], t223[204])},
-            {"n": 227, "view": "evand 0075967", "against": "#672",
-             **measure(views[227], p672)},
-            {"n": 227, "view": "evand 0075967", "against": "T-196 (#668)",
-             **measure(views[227], t196[227])},
-            {"n": 227, "view": "#672", "against": "T-196 (#668)",
-             **measure(p672, t196[227])},
-            {"n": 229, "view": "evand 0075967", "against": "T-199 (#674 update)",
-             **measure(views[229], t199)},
-            {"n": 260, "view": "evand 0075967", "against": "T-223 (#678)",
-             **measure(views[260], t223[260])},
-            {"n": 260, "view": "evand 0075967", "against": "T-196 (#668)",
-             **measure(views[260], t196[260])},
+            {
+                "n": 204,
+                "view": "evand 0075967",
+                "against": "T-223 (#678)",
+                **measure(views[204], t223[204]),
+            },
+            {"n": 227, "view": "evand 0075967", "against": "#672", **measure(views[227], p672)},
+            {
+                "n": 227,
+                "view": "evand 0075967",
+                "against": "T-196 (#668)",
+                **measure(views[227], t196[227]),
+            },
+            {"n": 227, "view": "#672", "against": "T-196 (#668)", **measure(p672, t196[227])},
+            {
+                "n": 229,
+                "view": "evand 0075967",
+                "against": "T-199 (#674 update)",
+                **measure(views[229], t199),
+            },
+            {
+                "n": 260,
+                "view": "evand 0075967",
+                "against": "T-223 (#678)",
+                **measure(views[260], t223[260]),
+            },
+            {
+                "n": 260,
+                "view": "evand 0075967",
+                "against": "T-196 (#668)",
+                **measure(views[260], t196[260]),
+            },
         ],
     }
     text = json.dumps(result, indent=1) + "\n"
     args.out.write_text(text, encoding="utf-8")
-    print(text, end="")
+    sys.stdout.write(text)
     return 0
 
 

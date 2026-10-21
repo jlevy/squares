@@ -146,7 +146,7 @@ and $1.757785 \times 10^{-11}$ below #672’s exact side at 227.
 At every count the certificate is the smallest side the record holds or has pending.
 Each side also lies below the verified upper bound at the next count, so each bound is
 new by the monotonicity test $s(n) \le s(n + 1)$: 14.82445114612409 at 205,
-15.60460147572967 at 228, 15.68292682926830 at 230 and 16.67877987534291 at 261.
+15.60460147572968 at 228, 15.68292682926830 at 230 and 16.67877987534291 at 261.
 No registered certificate states any of the four sides.
 Two pull requests merged on 21 October moved these houses before this import’s
 adoption: #704 adopted T-196 at 227 and 260, and #706 T-223 at 204 and 260. #706’s own runs of Evan Daniel’s
@@ -172,7 +172,7 @@ not. It is a measurement, and decides nothing:
 | 227 | #672 | $1.76 \times 10^{-11}$ | one to one, half turn | 60, 33, 16, 3 | 0.168 | 2.54° |
 | 227 | T-196 (#668) | $1.71 \times 10^{-4}$ | one to one | 227, 226, 58, 3 | 0.208 | 5.84° |
 | 229 | T-199 (#674 update) | $1.91 \times 10^{-11}$ | none one to one | 165, 134, 112, 13 | 0.650 | 0.055° |
-| 260 | T-223 (#678) | $2.51 \times 10^{-11}$ | none one to one | 53, 53, 41, 20 | 0.643 | below $10^{-6}$° |
+| 260 | T-223 (#678) | $2.51 \times 10^{-11}$ | none one to one | 53, 53, 41, 20 | 0.643 | $1.294 \times 10^{-7}$° |
 | 260 | T-196 (#668) | $2.56 \times 10^{-5}$ | none one to one | 260, 254, 79, 21 | 0.646 | 24.5° |
 
 At 227 the view is #672’s packing: 194 of its 227 squares lie within $10^{-6}$ of
@@ -186,7 +186,7 @@ certificate is `certificates/n227.cert` at
 `65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17`; no packet retains
 it (think-2vjc owns #672’s import), and the program reads a copy fetched at that commit
 and refuses any other bytes.
-At 260, 207 of the 260 squares lie within $10^{-9}$ of T-223’s and none turns; the 53
+At 260, 207 of the 260 squares lie within $10^{-9}$ of T-223’s and none turns by $10^{-6}$ degrees, the largest by $1.294 \times 10^{-7}$; the 53
 that move slide, as the method log says the regularization does. At 204 and 229 the
 slides are larger, and at 229 large enough that nearest centres pair the squares one to
 one under no symmetry. So each view differs from the credited certificate pose by pose,
