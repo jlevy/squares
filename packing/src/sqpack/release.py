@@ -657,7 +657,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "abdb7ea9d53879b8ad76a8fdefffe8f08e93975b"
+DATA_REVISION = "f5916b64ec373d992a7ff04880373cb968b6fdcd"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1794,6 +1794,29 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For issue 686's import against main a5bdb96a: result requests and source "
+            "coverage are citation targets whose existence the producer checks, not "
+            "inlined text, and both cited paths exist at both revisions; #686's request "
+            "changes, the muglich-issue686-2026-10-19 coverage source with its 100 "
+            "beyond-horizon rows and the 88 rows it supersedes are not cited by the "
+            "survey. Rendered at link revision f5916b64, once from this branch's tree and "
+            "once with main's copies of the two changed inputs: render_packing_methods "
+            "leaves the 42 files of the site tree byte-identical between the trees. No "
+            "PDF was printed; it prints from that HTML. Retain v0.2.3."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=("packing/campaign/result-requests.yaml",),
