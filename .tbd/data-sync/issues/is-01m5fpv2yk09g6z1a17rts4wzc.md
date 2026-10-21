@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 29
+version: 32
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -35,14 +35,16 @@ child_order_hints:
   - is-01m5fw9z474w84hemxsff4a9zs
   - is-01m5fwdhgyd3ar79bqwyy46jt8
   - is-01m5fwv4cnnm68c35kmfne4wce
+  - is-01m5fxpvywfbye3f5gksgzsvzt
+  - is-01m5fy05g8n1q6rksv7pntnrxe
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T18:51:10.100Z
+updated_at: 2026-10-21T19:11:23.645Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Owner confirmed new historical result registrations separate from this PR and requested stabilization with all remaining work tracked. Frozen identity batch75profiles, structuredcensus1428resolved78nonperson7unresolved plus10manualorigins; primarymodel213distinctresults701credits. Live8790correctedintermediate now shows credit significance. Latest Accounts/resource URL split and muted parenthetical tallies implemented/tested, previewrefreshpending. New Results/Records semantics think-lekx under canonicalhistory review; user clarification pending bound-only versusallauthored andties. Final fullbuild/PDFs/gate/CI/PRhandoff pending; do not merge/deploy.
+Stable 75-profile integration committed with normal hooks at a7b61b25a; Accounts/Resources and muted significance tallies live at 8790. Complete site build and all four PDFs passed; profile URI targets valid. Results remain all 213 primary-authored IDs and Credits 701 person/result pairs. User clarified Records includes all result families, strict numerical improvements, optimality proofs and formalizations. Shared classifier and renderer integration in progress under think-lekx; explicit unresolved priority/family scope shown as review pending. Frits Gobel full display name and Lewis X account fixed under think-x43w; formalization already in schema and Results/News tags. Lewis support roles/resource membership follow-up underway. Fresh origin/main 7eeab1f5e adds Evan Daniel n343 beyond-horizon source and snapshot selection; merge after current checkpoint, then reconcile new source joins and release history. Final integrated build, push gate, hosted CI, PR update and handoff remain pending. Historical result registrations and full 146-PDF inspection remain separate tracked work. Do not merge PR or deploy.
