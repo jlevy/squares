@@ -14075,6 +14075,90 @@ occurrences:
     the Joshua Levy identity established by LICENSE and the retained ojoshe receipt;
     project credit does not imply sole personal authorship.
 - origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Muglich issue 686 2026-10-19]'
+    field: /authors/0
+  expected_text: Muglich
+  start: 0
+  end: 7
+  label: Muglich
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Muglich issue 686 2026-10-19]'
+    field: /credit
+  expected_text: Muglich after Couzo, de Winter, Fang, Daniel
+  start: 0
+  end: 7
+  label: Muglich
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Muglich issue 686 2026-10-19]'
+    field: /credit
+  expected_text: Muglich after Couzo, de Winter, Fang, Daniel
+  start: 14
+  end: 19
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: Reviewed packing/resources/bibliography.yaml [[Muglich issue 686 2026-10-19]]
+    /credit span 14:19. The specific franciscouzo certificate/refinement lineage matches
+    retained acquisition metadata naming Francisco Couzo. Keep packing finder and
+    refinement roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Muglich issue 686 2026-10-19]'
+    field: /credit
+  expected_text: Muglich after Couzo, de Winter, Fang, Daniel
+  start: 21
+  end: 30
+  label: de Winter
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Muglich issue 686 2026-10-19]'
+    field: /credit
+  expected_text: Muglich after Couzo, de Winter, Fang, Daniel
+  start: 32
+  end: 36
+  label: Fang
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Muglich issue 686 2026-10-19]'
+    field: /credit
+  expected_text: Muglich after Couzo, de Winter, Fang, Daniel
+  start: 38
+  end: 44
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/resources/bibliography.yaml [[Muglich issue 686 2026-10-19]]
+    /credit span 38:44. The specific evand/square-packing certificate, fq solver or
+    regularizer matches the repository whose retained licence names Evan Daniel. Keep
+    finder, improver and solver roles distinct.
+- origin:
     path: packing/frontier/results.yaml
     record_key: T-001
     field: /builds_on/credit/0
