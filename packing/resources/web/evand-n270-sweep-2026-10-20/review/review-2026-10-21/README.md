@@ -14,6 +14,14 @@ and the small outputs byte for byte, the two largest JSON outputs compressed wit
 (`xz -dc` gives the original bytes), and the lane’s four `*.time` files joined in
 `outputs/timings.txt`. The decompressed receipt and the upstream copies the lane had
 beside them are left out, since the packet keeps both.
+So the `review708/` that the review’s Programs Run Here section names is this directory,
+retained here as the review’s finding A5 asked.
+PR #708 first said so in a clause it inserted into the review’s own sentence; review B4
+of #708 asked for the reviewer’s text back, so the review is kept as its reviewer wrote
+it and the note is here.
+The review’s [erratum of 21 October 2026](../../../../../../docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md)
+corrects one word in it: the view is the certificate under a quarter turn of the box, not
+a reflection, as `out-view.json`’s `"symmetry": 1` records.
 
 | Certificate | Packet | Entry | n |
 | --- | --- | --- | --- |

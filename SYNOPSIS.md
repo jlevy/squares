@@ -686,6 +686,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Erratum: the 21 October Review of Evan Daniel’s Import at 270](docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Upper-Bound Import at 270 (#703, T-224, PR #708)](docs/project/reviews/review-2026-10-21-upper-bound-import-703.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Upper-Bound Imports of 19 and 20 October (#689, #694)](docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Upper-Bound Imports of 16 to 18 October (#659, #664, #669, #674)](docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) | dated review record | record | retained | — |
