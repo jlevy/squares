@@ -257,6 +257,7 @@ SECTION_CARD_SIZES: dict[str, CardSize] = {
     "pages": "medium",
     "atlas": "medium",
     "projects": "medium",
+    "profiles": "medium",
     "documents": "small",
 }
 
@@ -1938,6 +1939,28 @@ def document_cards() -> str:
                 size=SECTION_CARD_SIZES["documents"],
             )
             for (path, label, note), page in zip(DOCUMENTS, DOCUMENT_PAGES, strict=True)
+        ]
+    )
+
+
+#: The directory of person profiles, which About's profiles card opens.
+PROFILES_DIRECTORY = "profiles/index.html"
+
+
+def profiles_block() -> str:
+    """About's card for the person profiles: one link to their directory that says whom
+    the profiles cover, and names nobody, so it never needs editing when one is added."""
+    return _cards(
+        [
+            link_card(
+                PROFILES_DIRECTORY,
+                "Profiles",
+                "Notable Contributors",
+                "We track notable contributors to the Squares Project, and keep profiles of "
+                "other people who have results.",
+                new_tab=False,
+                size=SECTION_CARD_SIZES["profiles"],
+            )
         ]
     )
 

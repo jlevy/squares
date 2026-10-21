@@ -32,6 +32,10 @@ This project now independently tabulates all known new results and does
 certificates behind them, to encourage open collaboration on open questions and
 formalizations of current proofs.
 
+<h1 id="profiles" class="site-title">Profiles</h1>
+
+{{PROFILES_BLOCK}}
+
 <h1 id="report-your-results" class="site-title">Report Your Results!<a id="contribute-your-results"></a></h1>
 
 {{REPORT_RESULTS}}

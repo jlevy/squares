@@ -1497,6 +1497,7 @@ def about_page() -> Page:
         ABOUT_ARTICLE,
         {
             "REPORT_RESULTS": report_results(),
+            "PROFILES_BLOCK": overview_sections.profiles_block(),
             "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
             "NEWS_LEGACY_ANCHORS": render_changelog.legacy_news_anchors(
                 render_changelog.load()

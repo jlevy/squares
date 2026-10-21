@@ -589,8 +589,9 @@ def _page_card_parts(page: str, href: str) -> tuple[str, str]:
 
 def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> None:
     """Explanations holds four standalone papers and both tutorials once each.
-    Their titles and descriptions are preserved. About holds the project story
-    and documents; survey and workbench cards do not belong to these pages."""
+    Their titles and descriptions are preserved. About holds the project story, one
+    profiles card and the documents; survey and workbench cards do not belong to these
+    pages."""
     cards = _page_cards(papers)
     entries = overview_sections.PAPERS
     assert [paper.href for paper in entries] == [
@@ -617,7 +618,9 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
     assert Counter(href for href, _, _ in cards) == Counter(paper.href for paper in entries)
     assert 'id="reading-and-research"' not in about
     assert "PAGE_CARDS" not in render_overview.ABOUT_ARTICLE.read_text(encoding="utf-8")
-    assert not re.findall(r'<a class="site-card site-card-link"', about)
+    assert re.findall(r'<a class="site-card site-card-link" href="([^"]+)"', about) == [
+        overview_sections.PROFILES_DIRECTORY
+    ]
     for page in (about, papers):
         assert (
             re.search(
@@ -1570,6 +1573,19 @@ def test_the_big_tables_have_no_outer_border(
         assert all("site-table" in classes.split() for classes in tables), (name, tables)
 
 
+def test_about_has_one_profiles_card_that_opens_the_directory(about: str) -> None:
+    """About's Profiles section is one card, a same-tab link to the profiles directory,
+    that says whom the profiles cover and names no one."""
+    section = about[about.index('id="profiles"') : about.index('id="report-your-results"')]
+    assert re.findall(r'<a [^>]*href="([^"]+)"', section) == ["profiles/index.html"]
+    card = 'class="site-card site-card-link" href="profiles/index.html" data-go="page"'
+    assert card in section
+    assert 'target="_blank"' not in section
+    assert "We track notable contributors to the Squares Project" in section
+    assert "other people who have results" in section
+    assert not re.search(r"profiles/(?!index\.html)[a-z0-9-]+\.html", section)
+
+
 def test_every_card_grid_sits_in_a_frame_it_can_measure(about: str, papers: str) -> None:
     """Each About/Papers card grid is directly inside its measurable frame."""
     pages = about + papers
@@ -1704,14 +1720,14 @@ _CARD_ELEMENT = re.compile(
 
 
 def _card_sections(page: str, about: str, papers: str) -> dict[str, list[tuple[str, str]]]:
-    """Homepage projects, About documents, and Papers reading/media cards."""
+    """Homepage projects, About profiles and documents, and Papers reading/media cards."""
     about_frames = about.split('<div class="site-cards-frame')[1:]
     paper_frames = papers.split('<div class="site-cards-frame')[1:]
-    assert len(about_frames) == 1
+    assert len(about_frames) == 2
     assert len(paper_frames) == 3
     projects = page.split('id="other-square-packing-projects"', 1)[1]
-    frames = [*paper_frames, projects, about_frames[0]]
-    names = ("tutorial", "papers", "atlas", "projects", "documents")
+    frames = [*paper_frames, projects, *about_frames]
+    names = ("tutorial", "papers", "atlas", "projects", "profiles", "documents")
     assert len(frames) == len(names)
     return {
         name: [(size, text) for _, size, text in _CARD_ELEMENT.findall(frame)]
@@ -1733,6 +1749,7 @@ def test_every_card_names_one_of_three_sizes(page: str, about: str, papers: str)
         len(overview_sections.PAPERS) - 2,
         len(overview_sections.PDF_CARD_SPECS),
         len(overview_sections.project_urls()),
+        1,
         len(overview_sections.DOCUMENTS),
     ]
     declared_sizes = {
@@ -1747,6 +1764,7 @@ def test_every_card_names_one_of_three_sizes(page: str, about: str, papers: str)
         "pages": "medium",
         "atlas": "medium",
         "projects": "medium",
+        "profiles": "medium",
         "documents": "small",
     }
 
@@ -4231,6 +4249,7 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert about.count(heading) == 1
     assert re.findall(r'<h1\b[^>]*\bid="([^"]+)"', about) == [
         "the-squares-project",
+        "profiles",
         "report-your-results",
         "squares-project-documentation",
     ]
