@@ -3,17 +3,21 @@ type: is
 id: is-01m5fabgy98ffjkatr3ggrh4xg
 title: "Snapshot: extend UNREAD_WORKER_OUTPUTS with 223 unread historical outputs (option b, unchanged cap)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
-delegate: c-lane-snapshot-prune
+version: 8
+delegate: coord-intake-1021b
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T13:28:04.297Z
-updated_at: 2026-10-21T14:57:23.518Z
+updated_at: 2026-10-21T17:48:55.921Z
 started_at: 2026-10-21T13:28:09.142Z
+closed_at: 2026-10-21T17:48:55.920Z
+close_reason: "PR #714 merged 2026-10-21T17:48:41Z as 018d1cce9 (head 658d15231): 220 unread historical outputs leave mutation workers under the unchanged 222 MiB cap; --source-bytes 229,891,295. Senior review A (issuecomment-6322362841) found no reader in what workers run; A1-A3 fixed in 658d15231. B2 (39 on-request tools), B1, the cap and the stub-rescue lever stay listed in the PR for the owner."
+resolution: null
+duplicate_of: null
 ---
 main 51ac9d7ee reads 232,783,862 B, 10 under the 222 MiB cap; #712 (+17,031), #704 (+139,378) and #706 (+167,357) cannot land. Read-only analysis (scratchpad/snapshot-analysis.md, set C in snap/data-final.txt) finds 223 historical outputs in packing/campaign and packing/benchmarks (2,974,471 B) that no control reads, the class UNREAD_WORKER_OUTPUTS already covers. Extend it under the unchanged cap with the traced evidence the #464/#692 entries record (all 174 controls fire mutated; the 50 distinct commands print the same unmutated output with and without them), and a dated comment. Not in scope: the 39 on-request tools (a new family, the owner's assent), the atlas-print fonts (read by test_emission_precision), and the cap.
 
