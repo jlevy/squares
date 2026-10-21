@@ -5,7 +5,7 @@ title: Populate key contributor profiles and reconcile the complete credit censu
 kind: feature
 status: in_progress
 priority: 2
-version: 11
+version: 15
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: codex@spud10
 labels: []
@@ -17,10 +17,14 @@ child_order_hints:
   - is-01m4kw2x9b3x1yjhv992kc314r
   - is-01m4kyr9j6ag6y81s8h4z5tq7v
   - is-01m4kys7tgatz55q3jfz70bmav
+  - is-01m5fw2tw8crkd37tdacr0dma2
+  - is-01m5fw2vrsww4x3bw6psje3xpe
+  - is-01m5fw2w83mhh1b71h2vk3xqrk
+  - is-01m5fw3a1b560vf0k74vz7tgt9
 hold: null
 hold_until: null
 created_at: 2026-10-10T18:12:41.260Z
-updated_at: 2026-10-13T08:00:21.809Z
+updated_at: 2026-10-21T18:38:09.450Z
 started_at: 2026-10-10T21:34:22.411Z
 ---
 Phase 1: reusable inventory of every result/archive/PDF/site credit occurrence, explicit identity review and disjoint subagent profile batches, reviewed bios/handles with provenance. Account for every occurrence; retain unresolved identities and non-person credits explicitly.
