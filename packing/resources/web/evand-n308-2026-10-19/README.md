@@ -56,6 +56,10 @@ restarts; no file of that name is in the tree at the pin or at the head `1d2bb82
 
 The regularized view’s report, `s308_d308_regularized.json`, says `"by": []`, unlike the
 n155, n236 and n271 views’ reports, which said `"by": ["Francisco Couzo"]`.
+[The author’s comment on #669 of 20 October 2026](https://github.com/jlevy/squares/issues/669#issuecomment-6302893217)
+explains the field: his regularizer took it from the record holder at that count in his 5
+October batch instead of from the packing drawn, a bug fixed at `a435c97`, and he asks
+that it be read as no credit. He does not name this view among those affected.
 
 ## Exact Replay
 
