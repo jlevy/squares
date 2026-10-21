@@ -24313,6 +24313,119 @@ occurrences:
   contributor_id: rc-vaughan
   note: The retained 1978 title page names this author. The publication join does
     not register a new mathematical result.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n343 sweep 2026-10-20]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  contributor_id: evan-daniel
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed source-specific identity against the retained n343 intake and existing profile
+    evidence; raw source label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n343 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  contributor_id: evan-daniel
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed source-specific identity against the retained n343 intake and existing profile
+    evidence; raw source label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n343 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+  start: 13
+  end: 17
+  label: Fang
+  role: prerequisite
+  disposition: resolved
+  contributor_id: kevin-fang
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed source-specific identity against the retained n343 intake and existing profile
+    evidence; raw source label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n343 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+  start: 19
+  end: 27
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  contributor_id: mz-arslanov
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed source-specific identity against the retained n343 intake and existing profile
+    evidence; raw source label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n343 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+  start: 29
+  end: 37
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  contributor_id: sa-mustafin
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed source-specific identity against the retained n343 intake and existing profile
+    evidence; raw source label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n343 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+  start: 39
+  end: 51
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  contributor_id: zk-shangitbayev
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed source-specific identity against the retained n343 intake and existing profile
+    evidence; raw source label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n343 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+  start: 53
+  end: 57
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  contributor_id: joshua-levy
+  evidence:
+  - daniel-343-credit
+  - primary-byline
+  - bibliography
+  note: Reviewed source-specific identity against the retained n343 intake and existing profile
+    evidence; raw source label, span and role retained.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

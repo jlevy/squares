@@ -44,7 +44,7 @@ Earlier dated receipts below are historical, including their counts, environment
 preview ports.
 
 The frozen identity batch contains 75 profiles.
-The structured census reports 1,428 resolved spans, 78 non-person spans and seven
+The structured census reports 1,435 resolved spans, 78 non-person spans and seven
 unresolved spans; ten manual origins are reported separately.
 The primary-authorship model yields 213 distinct registered results and 701 non-primary
 person/result credits.
@@ -101,6 +101,7 @@ and [attribution policy](../../../../attribution.md) own these rules.
 | `think-lekx` | All authored Results and current Records across every result kind |
 | `think-x43w` | Frits Göbel display name and Lewis account evidence |
 | `think-q4t4` | Formalization contributor roles, resource membership and own-support years |
+| `think-65yl` | Seven reviewed credit joins for the upstream Daniel n343 source |
 
 The live intermediate preview is <http://127.0.0.1:8790/profiles/index.html>, served
 from

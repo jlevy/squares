@@ -28,6 +28,10 @@ contributor:
       archive_path: packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/announcement/tweet-2107513739222380935.json
       url: https://x.com/ojoshe/status/2107513739222380935
       locator: 'user.name is Joshua Levy, user.screen_name is ojoshe, and user.id_str is 2246453394.'
+    - id: daniel-343-credit
+      archive_path: packing/resources/web/evand-n343-sweep-2026-10-20/source/CREDITS.md
+      url: https://github.com/evand/square-packing/blob/88385abc95ab25d520302282d1946cbb07bc9cf3/CREDITS.md
+      locator: 'Parallel 2026 work explicitly names Joshua Levy (jlevy), the Squares Project; this source supplies the personal identity behind the new Daniel n343 credit, unlike generic collective-project labels.'
   provenance:
     - field: /surname
       sources: [primary-byline, bibliography]

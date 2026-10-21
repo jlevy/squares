@@ -97,6 +97,14 @@ PUBLICATION_HISTORY = (
         ),
     ),
     PublicationHistoryEntry(
+        version="v0.8.14",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Record Evan Daniel's s(343) certificate of issue 702 as the current "
+            "beyond-horizon row at 343, superseding issue 678's row there."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.13",
         first_published="October 21, 2026",
         result_scope="Name the 20 October review in the lineages at 154 and 308.",
@@ -696,7 +704,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "31c0c38af35ae0c6024c9668d3fbbf079b54e29a"
+DATA_REVISION = "446b0b0df850c8409a6803961865b0fd005155d8"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1231,12 +1239,22 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ),
     ReleaseImpactDecision(
         component="site",
-        previous_version="v0.8.13",
+        previous_version="v0.8.14",
         version="v0.9.0",
         impact="minor",
         reason=(
             "Add person profiles and reviewed credit links, with direct profile "
             "navigation and shared article popovers for complete case and result records."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.13",
+        version="v0.8.14",
+        impact="patch",
+        reason=(
+            "Record Evan Daniel's s(343) certificate of issue 702 as the current "
+            "beyond-horizon row at 343, superseding issue 678's row there."
         ),
     ),
     ReleaseImpactDecision(
@@ -1973,6 +1991,46 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The v0.8.14 cut for #702 moved the claim documents' link revision, 902c92d9 "
+            "to 642464f8, in 22 lines. Rendered into empty site directories from this "
+            "tree and with main 51ac9d7e's copies of the five: 54 byte-identical files. "
+            "Retain v0.4.13."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the #702 import (Evan Daniel's s(343) beyond-horizon row, superseding "
+            "#678's row at 343) against main 51ac9d7e: the survey cites neither the #702 "
+            "request nor the n343 source. Rendered at link revision 869bcac0 into an empty "
+            "site directory, from this tree and with main's copies of the two inputs: "
+            "render_packing_methods writes 42 byte-identical files. No PDF printed; it "
+            "prints from that HTML. Retain v0.2.3."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
@@ -6004,6 +6062,36 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "source-reviewed disposition; the render comparison above predates the cut."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+            "site",
+        ),
+        paths=("packing/devtools/run_negative_controls.py",),
+        outputs=(
+            "development.html",
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The runner's `UNREAD_WORKER_OUTPUTS` gains 220 historical files that mutation "
+            "workers no longer copy, and the snapshot log gains an entry (think-bl1p). The "
+            "import path is the one recorded for think-b6ir: the runner enters the "
+            "builders' import closure only through `upper_bound_houses.custody`, and no "
+            "builder calls it or reads which files a worker copies. No render was taken, "
+            "and every component keeps its version."
+        ),
+    ),
 )
 
 
@@ -6140,7 +6228,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "63918bf3"
+PUBLICATION_REVISION = "642464f8"
 
 
 def data_pathspec() -> tuple[str, ...]:

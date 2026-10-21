@@ -1,0 +1,71 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/702",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n343 sweep 2026-10-20]",
+  "report_evidence": "E-evand-702-n343-report",
+  "receipt_format": "evand-702-exact-replay-v1",
+  "witness_prefix": "W-evand-702-n",
+  "claim_limitations": "Complete 88385ab rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-21",
+  "read_at_main": "d640ad8fbf8a637ab0a5edb95d7911a2353a2c08",
+  "certificates": [
+    {
+      "n": 343,
+      "path": "search/packer/candidates/s343_sw.cert",
+      "format": "evand-cert",
+      "offered": "18.977682482405",
+      "first_committed": "2026-10-20T21:47:03Z",
+      "same_packing": []
+    }
+  ],
+  "requested": [
+    343
+  ],
+  "replayed": [
+    343
+  ],
+  "houses": [],
+  "pending": [
+    {
+      "n": 343,
+      "report": "fang-two-wedge-certificates-2026-10-10",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Kevin Fang",
+      "reader": "[Fang two-wedge certificates 2026-10-10]"
+    },
+    {
+      "n": 343,
+      "report": "evand-record-hunt3-2026-10-10",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Evan Daniel",
+      "reader": "[Daniel record hunt 3 2026-10-10]"
+    },
+    {
+      "n": 343,
+      "report": "couzo-issue678-2026-10-18",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo",
+      "printed": "18.978232204823",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's n343 certificate at 88385ab, issue702",
+    "headline": "Exact rational certificate at 343, beyond the case corpus, from Evan Daniel's near-record sweep in Kevin Fang's two-wedge design",
+    "significance": 2,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept the certificate, standard library only; they share an author and the certificate format, and their geometry tests differ. The source reports a KKT local minimum strict modulo 82 exact flat motions and not isolated, 203 corner-corner contacts with no corner-corner MILP descent, and 11 rattlers, and calls it a different local minimum from Francisco Couzo's #678 packing: the exact sides differ by 5.50e-4, the matched contact graphs share 602 pairs with 100 only in this packing and 109 only in #678's, no load-bearing tilt angle is shared, and under its matching the largest square move is 0.242, with 12 squares moving by more than 0.1. Those are numerical evidence at 80 digits, as the source says, not proofs. No source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose basin explorer found the packing in a near-record sweep over the non-record 343s stored by his 10 October Hunt 3 (#489), which grew from Kevin Fang's #484 344 less one square; a corner-slip descent then lowered it before the exact solver certified it. The issue credits Fang's two-wedge family (#484), in the Arslanov-Mustafin-Shangitbayev design, as the construction, as #489 did, and calls the packing a different local minimum from Francisco Couzo's #678. The search, the checks and the request were done with Claude (Claude Code) under Evan Daniel's direction.",
+    "next_rung": "Record 343 as a beyond-horizon row that supersedes couzo-issue678-2026-10-18's there, in report order: #678 reached this repository before #702, and this side is below its print and below every earlier row at 343. 343 is beyond the case corpus, so no register entry records it. Final exact-head CI remains required.",
+    "bead": "think-wuxt",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy",
+      "short_credit": "Daniel after Fang et al.",
+      "note": "One complete exact certificate at 88385abc95ab25d520302282d1946cbb07bc9cf3, beyond the case corpus, s(343) <= 18977682482404124568634475670459/10^30, found by the author's basin explorer in a near-record sweep over non-record 343s his Hunt 3 stored from Kevin Fang's #484 two-wedge 344 less one square, then lowered by a corner-slip descent; the issue credits Fang's two-wedge family as the construction and calls it a different local minimum from Couzo's #678 packing. A same-side regularized view and the source's comparison with #678's packing are retained beside it. MIT-licensed; Claude assistance disclosed. KKT and local-minimum statements are the author's numerical evidence; no local or global optimality claim."
+    }
+  }
+}

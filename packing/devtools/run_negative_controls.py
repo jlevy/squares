@@ -235,6 +235,28 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # with this note, the snapshot measured 229,442,770 bytes, 195,374 under that cap. At
 # #692's head, after #688 raised the cap to 221 MiB, it read 231,475,393 bytes, 259,903
 # under it.
+# 2026-10-21, think-bl1p: main 51ac9d7ee read 232,783,862 bytes, 10 under the unchanged
+# 222 MiB cap, with #712, #704 and #706 waiting behind it. Answered by option (b), as
+# #464 and #692 were: 220 historical files join this list, 2,906,231 bytes. They are the
+# 18 and 19 October intake passes' raw API dumps, inventories and sweep and records
+# transcripts with the 14 October review's printed outputs (23 files, 1,812,785 bytes),
+# the series' launch and execution manifests, exit and timing stamps, producer logs and
+# superseded run files (148, 985,912), Session 105--185 receipts and logs (26, 69,221),
+# X-048's route-review receipts (15, 28,444) and three benchmark outputs (8, 9,869).
+# `--audit-snapshot --prune-candidate` finds no registered mention and no inline or
+# result rescue for any of them, and no ledger-checked `pipeline_changes` or
+# `closeout.changes` path names one. Kept on those grounds: session-186's validation
+# disposition (a closeout path), the series' top-level `results/*.jsonl` (the
+# basin-events step globs them), and each experiment's descriptor, README and
+# mechanical summary. Kept because `tests/test_negative_controls.py` pins them in
+# workers: exp-140's canonical cover, whose stdout twin left on 2026-10-07, and Session
+# 105's four source identities. With the 220 left out, all 174 controls fire at `-j 2`,
+# and each of the 50 distinct commands, run unmutated in a worker with them and in one
+# without them, prints the same output apart from wall times and the runner-preflight
+# lease timestamp; the four already red (the full suite, `validate_schemas`, the
+# operating-rules append script and `test_change_scoped_selection`) are red
+# identically. Left out, with this note and its release record, the snapshot measures
+# 229,891,287 bytes, 2,892,585 under the cap.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
@@ -260,6 +282,232 @@ UNREAD_WORKER_OUTPUTS = frozenset(
         ROOT / "atlas/rendering/free-quench-n1-trace.json",
         ROOT / "cases/regularized_drawings/think-ip1p-2026-10-19/review-229"
         "/grid-slack-adopt-2026-10-19-n155-271-grid-deg05.svg",
+        # 2026-10-21 (think-bl1p): 220 historical files, by the note above.
+        *(
+            ROOT / "benchmarks" / relative
+            for relative in (
+                "n17-bb-native/results-2026-10-05.jsonl",
+                "results/author-checker-profile-2026-10-02/attribution/raw",
+                "validation-efficiency/local-admissions",
+            )
+        ),
+        ROOT / "campaign/explorations/X048-route-review/receipts",
+        *(
+            ROOT / "campaign/agent-sessions" / relative
+            for relative in (
+                "session-105-validation/pivot-control-48a4544f.jsonl",
+                "session-105-validation/reducible-control-48a4544f.jsonl",
+                *(
+                    f"session-153-{name}"
+                    for name in (
+                        "hosted-full.json",
+                        "integrated-push.json",
+                        "native-pilot.json",
+                        "native-pilot-batch256.json",
+                        "native-pilot-batch512.json",
+                        "native-pilot-batch512.rows.jsonl",
+                        "native-pilot-two-workers.json",
+                        "native-pilot-two-workers.rows.jsonl",
+                        "snapshot-readme-controls.jsonl",
+                        "snapshot-synopsis-control.jsonl",
+                    )
+                ),
+                "session-163-push-interrupted.log",
+                "session-164-pool-phase-initial.log",
+                "session-164-pool-phase-passed.log",
+                "session-164-publication-initial.log",
+                "session-164-validation",
+                *(
+                    f"session-165-validation/restamp-{part}.txt"
+                    for part in (
+                        "command",
+                        "ended",
+                        "exit",
+                        "host-load",
+                        "provenance",
+                        "started",
+                    )
+                ),
+                "session-185-frozen-full-checkpoint.json",
+            )
+        ),
+        *(
+            ROOT / "campaign/issue-intake" / relative
+            for relative in (
+                *(
+                    f"intake-20261018/{name}"
+                    for name in (
+                        "432-final-reply.json",
+                        "bounded-four-head-refresh-20261018.json",
+                        "claim-inventory.json",
+                        "open-issues.json",
+                        "pr-667.json",
+                        "records-before-doc-map-fix.txt",
+                        "records-bootstrap-attempt.txt",
+                        "release-impact-pending.txt",
+                        "source-commit-files.json",
+                        "source-commits.json",
+                        "sweep-closing.txt",
+                        "sweep-initial.txt",
+                    )
+                ),
+                *(
+                    f"intake-20261019/{name}"
+                    for name in (
+                        "603-comment.json",
+                        "couzo-source-inventory.json",
+                        "evand-source-inventory.json",
+                        "fang-source-inventory.json",
+                        "sweep-closing-offline.txt",
+                        "sweep-closing-raw.txt",
+                        "sweep-initial.txt",
+                    )
+                ),
+                *(
+                    f"upper-bounds-20261014/review/{name}-output.txt"
+                    for name in ("bug_demos", "compare_geometry", "recompute")
+                ),
+                "upper-bounds-20261014/review/recompute-rerun.txt",
+            )
+        ),
+        *(
+            SESSION184_RESULTS / relative
+            for relative in (
+                "bc-047-n29-refinement.json",
+                "bc-063-n5-rigidity-evidence.json",
+                "bc-066-n29-elimination-wall.json",
+                "bc-070-n29-solution-count.json",
+                "bc-198-class-program-register.txt",
+                "bc-200-run-191-50.log",
+                "bc-200-run-77-20.log",
+                "bc-202-n26-138-25.json",
+                "bc-211-run-a-n13-399-100.json",
+                "bc-211-run-a-n13-399-100.log",
+                "bc-211-run-c-control-n12-99-25.json",
+                "bc-211-run-c-control-n12-99-25.log",
+                "exp-046-h-044-chunk-expressibility-verdict.json",
+                "exp-056-h-052-n17-sequential-larger-prefix.progress.json",
+                "exp-211-h213-animate-kinetics.json",
+                *(
+                    f"agenda-030/{name}"
+                    for name in (
+                        "bc-293-measure-four-bound-96-25.json",
+                        "bc-293-measure-priced-96-25.json",
+                        "pr127-rounded-counterexample.json",
+                        "pr127-segment-replay.json",
+                        "pr127-unit-control.json",
+                    )
+                ),
+                *(
+                    f"agenda-032/exp-{number}-{part}"
+                    for number in (136, 137, 139, 140, 141, 142, 143, 144)
+                    for part in (
+                        "exit.txt",
+                        "launch-head.txt",
+                        "launch-status.txt",
+                        "launched-at.txt",
+                        "process.log",
+                    )
+                ),
+                *(
+                    f"agenda-032/{name}"
+                    for name in (
+                        "exp-137-stdout.json",
+                        "exp-139-exact-full-net-residual.json",
+                        "exp-139-stdout.jsonl",
+                        "exp-141-corner-dual-salvage-audit.json",
+                        "exp-141-stdout.jsonl",
+                        "four-owner-five-dot.png",
+                        "unrun-independent-audit/test_check_five_dot_cover.py.txt",
+                    )
+                ),
+                "agenda-036",
+                *(
+                    f"agenda-038/{name}"
+                    for name in (
+                        "n12-3969-1000-t017-grid4-windows7-run.json",
+                        "n12-397-100-t017-grid4-windows7-run.json",
+                        "n17-23-5-t019-grid4-windows8-run.json",
+                        "n17-461-100-t019-auto-windows5-run.json",
+                        "n18-4675-1000-t027-auto-windows5-certificate.json",
+                        "n18-4675-1000-t027-auto-windows5-run.json",
+                        "n19-241-50-t020-auto-windows6-run.json",
+                        "n19-481-100-t020-auto-windows6-run.json",
+                        "n20-971-200-t021-auto-windows6-run.json",
+                        "n20-973-200-t021-grid4-windows7-2400-run.json",
+                        "n20-973-200-t021-grid4-windows7-run.json",
+                        "n21-97-20-t021-auto-windows6-run.json",
+                    )
+                ),
+                *(
+                    f"{experiment}/producer.log"
+                    for experiment in (
+                        "exp-121-h-110-fixed-p12-escape",
+                        "exp-122-diamond-conditional-cover-screen",
+                        "exp-123-near45-localization",
+                        "exp-124-full-square-compatibility-screen",
+                        "exp-125-h124-complete-residual-cover/axis",
+                        "exp-125-h124-complete-residual-cover/diagonal",
+                        "exp-126-h099-complete-graph-candidate",
+                        "exp-127-h124-collision-augmented-axis-cover",
+                    )
+                ),
+                "exp-128-h099-seven-row-support-ceiling/verification.log",
+                "exp-206-projection-search",
+                *(
+                    f"exp-237-n17-polynomial-root/run-001/{name}"
+                    for name in (
+                        "checker-exit.txt",
+                        "checker-timing.log",
+                        "producer-exit.txt",
+                        "producer-timing.log",
+                    )
+                ),
+                "exp-240-n17-mixed-capacity-census/run-001/started-at.txt",
+                "exp-241-n17-closed-cell-symmetry/run-001/host-load.txt",
+                "exp-241-n17-closed-cell-symmetry/run-001/started-at.txt",
+                "exp-245-n17-catalogue-polynomial/audit/primes_and_digits.out.txt",
+                "exp-245-n17-catalogue-polynomial/audit/recheck.out.txt",
+                *(
+                    f"{experiment}/{name}"
+                    for experiment in (
+                        "exp-294-stages-exact-replay",
+                        "exp-295-two-center-children",
+                        "exp-300-one-round-direct-regional-propagation",
+                        "exp-301-one-round-fixed-core-regional-propagation",
+                        "exp-303-normalized-contact-rank-filter",
+                        "exp-304-n11-envelope-windows",
+                        "exp-305-case-preserving-owned-propagation",
+                        "exp-306-n11-envelope-representation",
+                        "exp-307-owned-core-guarded-clause",
+                        "exp-308-n11-corner-cardinality",
+                        "exp-309-subpattern-relevance",
+                        "exp-310-bb-header-preflight",
+                        "exp-311-c2-full-replay",
+                        "exp-312-saved-pose-incircles",
+                        "exp-313-incircle-projection-redundancy",
+                        "exp-314-incircle-disk-projection",
+                    )
+                    for name in ("execution-manifest.json", "launch.json")
+                ),
+                "exp-298-coverage-y-prefilter/phase-execution-reconciled.json",
+                "exp-302-two-child-collective-propagation/launch.json",
+                "exp-306-n11-envelope-representation/phase-reconciliation.json",
+                "exp-309-subpattern-relevance/inputs",
+                *(
+                    f"exp-311-c2-full-replay/acquisition-{name}"
+                    for name in (
+                        "execution-manifest.json",
+                        "launch.json",
+                        "mechanical-summary.json",
+                        "phase-execution.json",
+                        "receipt.json",
+                        "supervision.json",
+                    )
+                ),
+                "exp-315-shared-centre-endpoint/execution-manifest.json",
+            )
+        ),
     }
 )
 PRUNE = frozenset(

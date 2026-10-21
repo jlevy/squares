@@ -3118,6 +3118,23 @@ sources:
       title page credits K. F. Roth and R. C. Vaughan; archived as papers/roth-vaughan-1978-inefficiency-packing-squares.pdf.
       Original published work underlying the later Ryu citations; this bibliography entry does
       not register a new mathematical result.
+  - key: '[Daniel n343 sweep 2026-10-20]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-20'
+    lineage: builds-on-project
+    credit: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+    short_credit: Daniel after Fang et al.
+    note: 'One complete exact certificate at 88385abc95ab25d520302282d1946cbb07bc9cf3, beyond the case corpus,
+      s(343) <= 18977682482404124568634475670459/10^30, found by the author''s basin explorer in a near-record
+      sweep over non-record 343s his Hunt 3 stored from Kevin Fang''s #484 two-wedge 344 less one square,
+      then lowered by a corner-slip descent; the issue credits Fang''s two-wedge family as the construction
+      and calls it a different local minimum from Couzo''s #678 packing. A same-side regularized view and
+      the source''s comparison with #678''s packing are retained beside it. MIT-licensed; Claude assistance
+      disclosed. KKT and local-minimum statements are the author''s numerical evidence; no local or global
+      optimality claim.'
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono
