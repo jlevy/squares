@@ -1757,6 +1757,63 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=(
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For the #703 lane of 21 October (T-224 at n = 270) against main 4851d819: "
+            "both reviews read results.yaml only through paper_figures.ladder_records, "
+            "which selects the n11 ladder rungs LADDER_RUNGS names and holds them to "
+            "LADDER_DIGEST; T-224 is an added entry outside that ladder, and no ladder row "
+            "changes. upper_bound_reports.py gains only one house reader, which these "
+            "producers do not call. Rendered at link revision 9cd35d1e, once from this "
+            "branch's tree and once with main's copies of the four changed inputs "
+            "(upper_bound_reports.py, results.yaml, result-requests.yaml and "
+            "source-coverage.yaml): render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
+            "files they write byte-identical between the trees. No PDF was printed; each "
+            "prints from that HTML. Retain v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the #703 lane of 21 October (T-224 at n = 270) against main 4851d819: "
+            "result requests, source coverage and results are citation targets whose "
+            "existence the producer checks, not inlined text, and every cited path exists "
+            "at both revisions; the added #703 request, the coverage entry and T-224 are "
+            "not cited by the survey. The house reader upper_bound_reports.py gains does "
+            "not enter its output. Rendered at link revision 9cd35d1e, once from this "
+            "branch's tree and once with main's copies of the four changed inputs "
+            "(upper_bound_reports.py, results.yaml, result-requests.yaml and "
+            "source-coverage.yaml): render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
+            "files they write byte-identical between the trees. No PDF was printed; it "
+            "prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
