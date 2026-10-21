@@ -4394,7 +4394,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-20'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -17238,6 +17238,34 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md
     - packing/resources/web/evand-n308-2026-10-19/review/review-2026-10-20/README.md
+- path: result/t-223.html
+  canonical: result/t-223.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-20'
+  lastmod: '2026-10-20'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 204
+      - 260
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo issue 678 2026-10-18]'
+      published: '2026-10-18'
+    builds_on: null
+    evidence:
+    - E-couzo-678-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-issue678-2026-10-18/README.md
+    - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert
+    - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert
+    - packing/campaign/issue-intake/upper-bounds-20261019/README.md
+    - packing/devtools/couzo_678_replay.py
 - path: results.html
   canonical: results.html
   kind: page

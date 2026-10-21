@@ -1753,6 +1753,42 @@ def _fine_net_lower_projection(
     return _flat(body.replace(current, prior, 1))
 
 
+#: Registrations pending adoption entered at an adopted count after its last pass, keyed by
+#: the count and the result that pass adopted: the evidence id, the resource key and the
+#: heading of the paragraph each adds. T-223 at 204 (#701, review A6) cites its report the
+#: way T-197 cited its own at 155 while T-149 stood there. A registration writes none of
+#: the adoption writer's lanes, so it is checked exactly and projected out; once a later
+#: pass adopts at the count, the key no longer matches and that pass's replay reads the
+#: three as prior state.
+LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {
+    (204, "T-186"): (
+        "E-couzo-678-certificate-report",
+        "[Couzo issue 678 2026-10-18]",
+        "**Reported certificate pending adoption, 2026-10-18.**",
+    ),
+}
+
+
+def _later_pending_projection(
+    key: tuple[int, str], held: dict[str, Any], committed: str
+) -> str:
+    """Check a later pending registration's three additions, then project them out.
+
+    Its evidence id and resource close their lists, and its paragraph is one paragraph of
+    the body; the record is returned without the paragraph, `held` without the two.
+    """
+    evidence, resource, heading = LATER_PENDING_REPORTS[key]
+    assert held["evidence"][-1] == evidence, f"n={key[0]}: {evidence} closes the evidence"
+    held["evidence"] = held["evidence"][:-1]
+    assert held["resources"][-1]["key"] == resource, f"n={key[0]}: {resource} closes them"
+    held["resources"] = held["resources"][:-1]
+    _, front, body = committed.split("---\n", 2)
+    assert body.count(heading) == 1, f"n={key[0]}: one pending paragraph"
+    start = body.index(heading)
+    end = body.index("\n\n", start) + 2
+    return f"---\n{front}---\n{body[:start]}{body[end:]}"
+
+
 def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     replayed: list[adopt.Move],
 ) -> None:
@@ -1767,7 +1803,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     raises the reported lower lane, adds its evidence, resource and paragraph, and moves
     `source_reviewed` no earlier. The later fine-net lower adoptions, n108's of 18 October
     and n68's and n84's of 19 October, are checked explicitly and projected out before
-    this historical upper-layer comparison.
+    this historical upper-layer comparison, as is a registration pending adoption entered
+    after the count's last pass (`LATER_PENDING_REPORTS`).
     """
     assert [move.n for move in replayed] == sorted(houses.ADOPTED)
     for move in replayed:
@@ -1778,6 +1815,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         # pass, including 15 October, which read records it had already raised.
         written = closed_form.replay(move.n, adopt.rewrite(move))
         held, wrote = _front(committed), _front(written)
+        if (move.n, move.house.result) in LATER_PENDING_REPORTS:
+            committed = _later_pending_projection((move.n, move.house.result), held, committed)
         historical_body = _body(committed)
         if move.n == 108:
             historical_body = _n108_later_lower_projection(held, wrote, historical_body)

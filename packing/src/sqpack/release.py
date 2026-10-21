@@ -91,9 +91,8 @@ PUBLICATION_HISTORY = (
         version="v0.8.8",
         first_published="October 21, 2026",
         result_scope=(
-            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
-            "integrated exact replay and its stage 4 review, and adopt it as the house "
-            "best packing at 227 and 260 with Evan Daniel's regularized views."
+            "Register Francisco Couzo's reported n204 and n260 certificates (T-223) at "
+            "V0/C0, pending review and adoption, and his 83 beyond-horizon rows."
         ),
     ),
     PublicationHistoryEntry(
@@ -746,6 +745,13 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.12",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Update the registered result count after the n204 and n260 registration (T-223)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.11",
         first_published="October 20, 2026",
         result_scope=(
@@ -1116,9 +1122,17 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.8.8",
         impact="patch",
         reason=(
-            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
-            "integrated exact replay and its stage 4 review, and adopt it as the house "
-            "best packing at 227 and 260 with Evan Daniel's regularized views."
+            "Register Francisco Couzo's reported n204 and n260 certificates (T-223) at "
+            "V0/C0, pending review and adoption, and his 83 beyond-horizon rows."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.11",
+        version="v0.4.12",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the n204 and n260 registration (T-223)."
         ),
     ),
     ReleaseImpactDecision(
@@ -1810,7 +1824,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.8.7): #705 changes none of these inputs but the five claim documents, "
             "which the v0.8.8 cut regenerates and which differ from main's only in their "
             "source-link revision, 9cd35d1e to fe6f350d. "
-            "Retain v0.4.11."
+            "Re-taken by source review after the merge of main e7de85ff6 (#701, site "
+            "v0.8.8, explainer v0.4.12): of these inputs #701 changes the five claim "
+            "documents, which the v0.8.9 cut regenerates and which differ from main's only "
+            "in their source-link revision, and results.yaml, where its T-223 is in both "
+            "trees and this branch's edits, T-196's and T-223's note on the house best "
+            "packing at 260, still change neither count. "
+            "Retain v0.4.12."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1852,7 +1872,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "showed on the branch's earlier head. No PDF was printed; each prints from "
             "that HTML. "
             "Re-taken by source review after the merge of main 4851d8193 (#705, site "
-            "v0.8.7), which changes none of these inputs. "
+            "v0.8.7), which changes none of these inputs, and after the merge of main "
+            "e7de85ff6 (#701, site v0.8.8), which adds T-223 to results.yaml outside the "
+            "n11 ladder; this branch edits only T-223's notes there. "
             "Retain v0.1.7 and v0.1.0."
         ),
     ),
@@ -1894,8 +1916,92 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "showed on the branch's earlier head. No PDF was printed; each prints from "
             "that HTML. "
             "Re-taken by source review after the merge of main 4851d8193 (#705, site "
-            "v0.8.7), which changes none of these inputs. "
+            "v0.8.7), which changes none of these inputs, and after the merge of main "
+            "e7de85ff6 (#701, site v0.8.8), whose T-223, #678 request and coverage rows "
+            "the survey does not cite either. "
             "Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/result_status.py",),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For PR #701's review A (finding A5): unfinished_sentence now adds its full "
+            "stop only where an unfinished confirmation's `what` lacks one, so RESULTS.md "
+            "and the result pages no longer print 'review.. Not priced.' for T-196 and "
+            "T-223. None of the three papers prints an unfinished confirmation. Rendered "
+            "at link revision 6051ebbe, once with this branch's result_status.py and once "
+            "with the 6051ebbe copy loaded in its place: render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
+            "files of the site tree byte-identical between the two. No PDF was printed; "
+            "each prints from that HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=("packing/frontier/results.yaml",),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For issue 678's registration (T-223 at n = 204 and 260) against main "
+            "f8d54772: both reviews read results.yaml only through "
+            "paper_figures.ladder_records, which selects the n11 ladder rungs LADDER_RUNGS "
+            "names and holds them to LADDER_DIGEST; T-223 is an added entry outside that "
+            "ladder, and no ladder row changes. Rendered at link revision f5349276, once "
+            "from this branch's tree and once with main's copies of the three changed "
+            "inputs (results.yaml, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods leave the 50 files of the site tree byte-identical "
+            "between the trees. No PDF was printed; each prints from that HTML. Retain "
+            "v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For issue 678's registration (T-223 at n = 204 and 260) against main "
+            "f8d54772: result requests, source coverage and results are citation targets "
+            "whose existence the producer checks, not inlined text, and every cited path "
+            "exists at both revisions; the #678 and #686 request changes, the "
+            "couzo-issue678-2026-10-18 coverage source with its 83 beyond-horizon rows "
+            "and the 60 rows it supersedes, and T-223 are not cited by the survey. "
+            "Rendered at link revision f5349276, once from this branch's tree and once "
+            "with main's copies of the three changed inputs (results.yaml, "
+            "result-requests.yaml and source-coverage.yaml): render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
+            "files of the site tree byte-identical between the trees. No PDF was printed; "
+            "it prints from that HTML. Retain v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
@@ -5680,7 +5786,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "fe6f350d"
+PUBLICATION_REVISION = "ec95f0b8"
 
 
 def data_pathspec() -> tuple[str, ...]:

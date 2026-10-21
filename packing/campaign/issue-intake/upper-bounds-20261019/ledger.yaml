@@ -1,0 +1,868 @@
+format: intake-ledger-v1
+read_at_main: d588ad987bd8de53361d087b8961a7f2bf157c41
+read_on: '2026-10-20'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes: []
+reports:
+- report: '#666'
+  url: https://github.com/jlevy/squares/issues/666
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-10-17T07:06:07Z'
+  bead: think-3m10
+  claims:
+  - n: 464
+    printed: '21.988813022694'
+    rounding: up
+  - n: 555
+    printed: '23.993653790591'
+    rounding: up
+  - n: 654
+    printed: '25.996103908965'
+    rounding: up
+  - n: 706
+    printed: '26.998712100405'
+    rounding: up
+  - n: 760
+    printed: '27.995949340329'
+    rounding: up
+  - n: 998
+    printed: '31.998349747355'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#670'
+  url: https://github.com/jlevy/squares/issues/670
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-17T18:05:06Z'
+  bead: think-f28n
+  claims:
+  - n: 204
+    printed: '14.808644417690'
+    rounding: up
+  - n: 330
+    printed: '18.701641583454'
+    rounding: up
+  - n: 418
+    printed: '20.945240141353'
+    rounding: up
+  - n: 421
+    printed: '20.982817421775'
+    rounding: up
+  - n: 422
+    printed: '20.984021832955'
+    rounding: up
+  - n: 458
+    printed: '21.942505611689'
+    rounding: up
+  - n: 459
+    printed: '21.943735551416'
+    rounding: up
+  - n: 461
+    printed: '21.972483922352'
+    rounding: up
+  - n: 462
+    printed: '21.980759715480'
+    rounding: up
+  - n: 463
+    printed: '21.984021832955'
+    rounding: up
+  - n: 501
+    printed: '22.933763683699'
+    rounding: up
+  - n: 505
+    printed: '22.972317735354'
+    rounding: up
+  - n: 546
+    printed: '23.933763683699'
+    rounding: up
+  - n: 548
+    printed: '23.957558542543'
+    rounding: up
+  - n: 553
+    printed: '23.981588093282'
+    rounding: up
+  - n: 598
+    printed: '24.962916747309'
+    rounding: up
+  - n: 600
+    printed: '24.981585347399'
+    rounding: up
+  - n: 650
+    printed: '25.982429027496'
+    rounding: up
+  - n: 700
+    printed: '26.972996848621'
+    rounding: up
+  - n: 701
+    printed: '26.975561031531'
+    rounding: up
+  - n: 703
+    printed: '26.987493360751'
+    rounding: up
+  - n: 749
+    printed: '27.925883089331'
+    rounding: up
+  - n: 753
+    printed: '27.937423518013'
+    rounding: up
+  - n: 754
+    printed: '27.937423518013'
+    rounding: up
+  - n: 804
+    printed: '28.917335789888'
+    rounding: up
+  - n: 805
+    printed: '28.921843659464'
+    rounding: up
+  - n: 806
+    printed: '28.921843662228'
+    rounding: up
+  - n: 863
+    printed: '29.921843659464'
+    rounding: up
+  - n: 867
+    printed: '29.950265025802'
+    rounding: up
+  - n: 868
+    printed: '29.982204111182'
+    rounding: up
+  - n: 870
+    printed: '29.985969207342'
+    rounding: up
+  - n: 926
+    printed: '30.949634321517'
+    rounding: up
+  - n: 927
+    printed: '30.976993727283'
+    rounding: up
+  - n: 928
+    printed: '30.976993727283'
+    rounding: up
+  - n: 930
+    printed: '30.982052182975'
+    rounding: up
+  - n: 987
+    printed: '31.949634321517'
+    rounding: up
+  - n: 989
+    printed: '31.976993727283'
+    rounding: up
+  - n: 990
+    printed: '31.978848462737'
+    rounding: up
+  - n: 991
+    printed: '31.982052182975'
+    rounding: up
+  - n: 992
+    printed: '31.985130163599'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#672'
+  url: https://github.com/jlevy/squares/issues/672
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-17T20:48:34Z'
+  bead: think-2vjc
+  claims:
+  - n: 330
+    printed: '18.692698795114'
+    rounding: up
+  - n: 461
+    printed: '21.971645445094'
+    rounding: up
+  - n: 507
+    printed: '22.973703609857'
+    rounding: up
+  - n: 652
+    printed: '25.994469543497'
+    rounding: up
+  - n: 653
+    printed: '25.994469543497'
+    rounding: up
+  - n: 704
+    printed: '26.994469543497'
+    rounding: up
+  - n: 749
+    printed: '27.924010906540'
+    rounding: up
+  - n: 753
+    printed: '27.936842811648'
+    rounding: up
+  - n: 755
+    printed: '27.951635349895'
+    rounding: up
+  - n: 804
+    printed: '28.915928305844'
+    rounding: up
+  - n: 805
+    printed: '28.916476090926'
+    rounding: up
+  - n: 815
+    printed: '28.995946384109'
+    rounding: up
+  - n: 865
+    printed: '29.932742598598'
+    rounding: up
+  - n: 868
+    printed: '29.982119729132'
+    rounding: up
+  - n: 872
+    printed: '29.995946384118'
+    rounding: up
+  - n: 873
+    printed: '29.998242686046'
+    rounding: up
+  - n: 874
+    printed: '29.998242686046'
+    rounding: up
+  - n: 924
+    printed: '30.932742598607'
+    rounding: up
+  - n: 930
+    printed: '30.982010362324'
+    rounding: up
+  - n: 933
+    printed: '30.995336946282'
+    rounding: up
+  - n: 934
+    printed: '30.995336946282'
+    rounding: up
+  - n: 990
+    printed: '31.978235012084'
+    rounding: up
+  - n: 991
+    printed: '31.982010362324'
+    rounding: up
+  - n: 994
+    printed: '31.995336946282'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#675'
+  url: https://github.com/jlevy/squares/issues/675
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-18T06:02:11Z'
+  bead: think-pvav
+  claims:
+  - n: 204
+    printed: '14.808644367227'
+    rounding: up
+  - n: 421
+    printed: '20.982817268367'
+    rounding: up
+  - n: 422
+    printed: '20.983607310148'
+    rounding: up
+  - n: 458
+    printed: '21.942423483273'
+    rounding: up
+  - n: 459
+    printed: '21.942423483273'
+    rounding: up
+  - n: 461
+    printed: '21.971616092121'
+    rounding: up
+  - n: 462
+    printed: '21.980489088007'
+    rounding: up
+  - n: 463
+    printed: '21.983605908182'
+    rounding: up
+  - n: 464
+    printed: '21.988035588879'
+    rounding: up
+  - n: 502
+    printed: '22.942402035201'
+    rounding: up
+  - n: 545
+    printed: '23.889722420681'
+    rounding: up
+  - n: 546
+    printed: '23.889722420681'
+    rounding: up
+  - n: 548
+    printed: '23.957455469976'
+    rounding: up
+  - n: 549
+    printed: '23.957455469976'
+    rounding: up
+  - n: 554
+    printed: '23.993580713561'
+    rounding: up
+  - n: 592
+    printed: '24.889722420681'
+    rounding: up
+  - n: 593
+    printed: '24.889722420681'
+    rounding: up
+  - n: 598
+    printed: '24.962908839930'
+    rounding: up
+  - n: 602
+    printed: '24.993580715986'
+    rounding: up
+  - n: 641
+    printed: '25.889564291814'
+    rounding: up
+  - n: 642
+    printed: '25.889722420681'
+    rounding: up
+  - n: 650
+    printed: '25.982428402604'
+    rounding: up
+  - n: 652
+    printed: '25.994256215430'
+    rounding: up
+  - n: 654
+    printed: '25.995905846673'
+    rounding: up
+  - n: 693
+    printed: '26.889722420681'
+    rounding: up
+  - n: 700
+    printed: '26.972954520906'
+    rounding: up
+  - n: 701
+    printed: '26.975560060840'
+    rounding: up
+  - n: 705
+    printed: '26.995905846673'
+    rounding: up
+  - n: 706
+    printed: '26.998639495676'
+    rounding: up
+  - n: 753
+    printed: '27.935538484638'
+    rounding: up
+  - n: 755
+    printed: '27.951593396552'
+    rounding: up
+  - n: 760
+    printed: '27.995946706541'
+    rounding: up
+  - n: 804
+    printed: '28.911312576594'
+    rounding: up
+  - n: 805
+    printed: '28.911312576594'
+    rounding: up
+  - n: 806
+    printed: '28.921462680479'
+    rounding: up
+  - n: 863
+    printed: '29.921462677966'
+    rounding: up
+  - n: 865
+    printed: '29.932623425046'
+    rounding: up
+  - n: 867
+    printed: '29.950105216770'
+    rounding: up
+  - n: 868
+    printed: '29.981359990606'
+    rounding: up
+  - n: 870
+    printed: '29.985524292952'
+    rounding: up
+  - n: 872
+    printed: '29.995946381399'
+    rounding: up
+  - n: 873
+    printed: '29.998171180951'
+    rounding: up
+  - n: 874
+    printed: '29.998171180951'
+    rounding: up
+  - n: 919
+    printed: '30.849232404954'
+    rounding: up
+  - n: 924
+    printed: '30.932577553094'
+    rounding: up
+  - n: 927
+    printed: '30.976949083864'
+    rounding: up
+  - n: 928
+    printed: '30.976949083864'
+    rounding: up
+  - n: 930
+    printed: '30.981543197185'
+    rounding: up
+  - n: 933
+    printed: '30.995293256848'
+    rounding: up
+  - n: 989
+    printed: '31.976125363479'
+    rounding: up
+  - n: 990
+    printed: '31.978044872634'
+    rounding: up
+  - n: 991
+    printed: '31.981535631408'
+    rounding: up
+  - n: 992
+    printed: '31.984841090107'
+    rounding: up
+  - n: 994
+    printed: '31.993865896560'
+    rounding: up
+  - n: 998
+    printed: '31.998301912120'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#678'
+  url: https://github.com/jlevy/squares/issues/678
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-18T23:23:19Z'
+  bead: think-xu4d
+  claims:
+  - n: 204
+    printed: '14.808642841982'
+    rounding: up
+    exact: 141654921219558922887849/9565692327860000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert
+  - n: 260
+    printed: '16.645753250545'
+    rounding: up
+    exact: 146417594016514621500994169/8796093022208000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert
+  - n: 330
+    printed: '18.692697855726'
+    rounding: up
+    exact: 113221739722648438210032020640199355331561848333508472147968359837/6057003681144415878549723310562973222604706398543500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n330.cert
+  - n: 343
+    printed: '18.978232204823'
+    rounding: up
+    exact: 41733573967670534550712079/2199023255552000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n343.cert
+  - n: 418
+    printed: '20.942828529884'
+    rounding: up
+    exact: 13813114520996435515348391/659562986025800000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n418.cert
+  - n: 420
+    printed: '20.974164562587'
+    rounding: up
+    exact: 11530668909725607012607454401/549755813888000000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n420.cert
+  - n: 421
+    printed: '20.981525640927'
+    rounding: up
+    exact: 9454944225312236312351/450631874303232000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n421.cert
+  - n: 422
+    printed: '20.983607201006'
+    rounding: up
+    exact: 1455846724442536653097027/69380193333620000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n422.cert
+  - n: 455
+    printed: '21.882183551471'
+    rounding: up
+    exact: 11613822913094702166651186369837112541339805344903709711505338807121/530743327592378557828056055307433275923785578280560500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n455.cert
+  - n: 456
+    printed: '21.882183551471'
+    rounding: up
+    exact: 11613822913094702166651186369837112541339805344903709711505338807121/530743327592378557828056055307433275923785578280560500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n456.cert
+  - n: 458
+    printed: '21.903778442820'
+    rounding: up
+    exact: 103271142430408315808123966273/4714763834011500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n458.cert
+  - n: 459
+    printed: '21.942365250364'
+    rounding: up
+    exact: 288953132032662784399822541/13168732209846000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n459.cert
+  - n: 461
+    printed: '21.971318847922'
+    rounding: up
+    exact: 387404913591862772612304831/17632301286662000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n461.cert
+  - n: 462
+    printed: '21.974888792980'
+    rounding: up
+    exact: 6773935020274494888788160981941387073272792360721409179670848147887/308257988656512000559144353082579886565120005591443500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n462.cert
+  - n: 463
+    printed: '21.983603993953'
+    rounding: up
+    exact: 53187317556573267909093233/2419408463289500000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n463.cert
+  - n: 464
+    printed: '21.987753655547'
+    rounding: up
+    exact: 47104680556102362366188977/2142314367080400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n464.cert
+  - n: 497
+    printed: '22.823104027272'
+    rounding: up
+    exact: 10604780551957862523857841706101294449354660587471393697/464651107022350000000000004646511070223500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n497.cert
+  - n: 499
+    printed: '22.882183551471'
+    rounding: up
+    exact: 12144566240687080724479242425144545817263590923184270211505338807121/530743327592378557828056055307433275923785578280560500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n499.cert
+  - n: 501
+    printed: '22.903778442820'
+    rounding: up
+    exact: 107985906264419815808123966273/4714763834011500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n501.cert
+  - n: 502
+    printed: '22.942219237446'
+    rounding: up
+    exact: 73375074239719933215451563617/3198255298683500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n502.cert
+  - n: 505
+    printed: '22.971592368271'
+    rounding: up
+    exact: 390014776214344036642092409/16978134121562000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n505.cert
+  - n: 507
+    printed: '22.973697163680'
+    rounding: up
+    exact: 371501636248864330898312771/16170737935738000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n507.cert
+  - n: 545
+    printed: '23.889010439304'
+    rounding: up
+    exact: 69133786818820995616987673399/2893957746574500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n546.cert
+    note: The issue links n546.cert and deletes 1 square; the exact side is that certificate's
+      header side, decided for the 545-square packing by devtools.couzo_678_replay.
+  - n: 546
+    printed: '23.889010439304'
+    rounding: up
+    exact: 69133786818820995616987673399/2893957746574500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n546.cert
+  - n: 548
+    printed: '23.956345132949'
+    rounding: up
+    exact: 114614263684737829966954527/4784296730101000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n548.cert
+  - n: 549
+    printed: '23.956345132949'
+    rounding: up
+    exact: 114614263684737829966954527/4784296730101000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n549.cert
+  - n: 553
+    printed: '23.980727660940'
+    rounding: up
+    exact: 330867999963168070753914221/13797246048630000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n553.cert
+  - n: 554
+    printed: '23.993524047733'
+    rounding: up
+    exact: 29957208392643458654477273/1248553915341750000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n554.cert
+  - n: 555
+    printed: '23.993580713561'
+    rounding: up
+    exact: 59969683811616225277280141453/2499405342101500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n555.cert
+  - n: 592
+    printed: '24.888988759404'
+    rounding: up
+    exact: 62018407569647026606549901/2491801019686500000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n592.cert
+  - n: 593
+    printed: '24.888988761769'
+    rounding: up
+    exact: 729473716291826462201657/29309094205240000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n593.cert
+  - n: 597
+    printed: '24.961502766154'
+    rounding: up
+    exact: 864076787732322991281275702394604108327695296435857391/34616376899550000000000000346163768995500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n597.cert
+  - n: 598
+    printed: '24.961502766154'
+    rounding: up
+    exact: 864076787732322991281275702394604108327695296435857391/34616376899550000000000000346163768995500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n598.cert
+  - n: 600
+    printed: '24.980727660940'
+    rounding: up
+    exact: 344665246011798070753914221/13797246048630000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n600.cert
+  - n: 601
+    printed: '24.987983019378'
+    rounding: up
+    exact: 94857473669459061350004809/3796123664559000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n601.cert
+  - n: 602
+    printed: '24.993580713561'
+    rounding: up
+    exact: 62469089153717725277280141453/2499405342101500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n602.cert
+  - n: 641
+    printed: '25.881306220594'
+    rounding: up
+    exact: 211634000271625690136501/8177098886270000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n642.cert
+    note: The issue links n642.cert and deletes 1 square; the exact side is that certificate's
+      header side, decided for the 641-square packing by devtools.couzo_678_replay.
+  - n: 642
+    printed: '25.881306220594'
+    rounding: up
+    exact: 211634000271625690136501/8177098886270000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n642.cert
+  - n: 650
+    printed: '25.982275449119'
+    rounding: up
+    exact: 2280457272851981914225568100133372934628063337158435778851/87769728918387538506346452289183875385054687550000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n650.cert
+  - n: 652
+    printed: '25.994256214773'
+    rounding: up
+    exact: 85276484423977395894907527/3280589516368400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n652.cert
+  - n: 653
+    printed: '25.994414202392'
+    rounding: up
+    exact: 11432464269102226596178819/439804651110400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n653.cert
+  - n: 654
+    printed: '25.995888235804'
+    rounding: up
+    exact: 37190567371787759934687289/1430632684463000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n654.cert
+  - n: 693
+    printed: '26.881306218365'
+    rounding: up
+    exact: 25643542933732395884371741/953954496311400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n693.cert
+  - n: 700
+    printed: '26.972679052192'
+    rounding: up
+    exact: 88178769692360709581284193/3269188408082800000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n700.cert
+  - n: 701
+    printed: '26.975549413717'
+    rounding: up
+    exact: 45227148295358750937455487195191517129617901047118246817/1676597855403158989706327058554031589896895610800000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n701.cert
+  - n: 703
+    printed: '26.987459573204'
+    rounding: up
+    exact: 437011695505241818556083163/16193139421658000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n703.cert
+  - n: 704
+    printed: '26.994256369878'
+    rounding: up
+    exact: 19314801785150565220404030516166606494258682818400213266350370122441/715515238519535387040157057155152385195353870401570500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n704.cert
+  - n: 705
+    printed: '26.994256369878'
+    rounding: up
+    exact: 19314801785150565220404030516166606494258682818400213266350370122441/715515238519535387040157057155152385195353870401570500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n705.cert
+  - n: 706
+    printed: '26.998542133963'
+    rounding: up
+    exact: 480169432109887384418765839/17785013343586000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n706.cert
+  - n: 749
+    printed: '27.911194713730'
+    rounding: up
+    exact: 381054512896696402122993103/13652389903226000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n749.cert
+  - n: 751
+    printed: '27.932448900769'
+    rounding: up
+    exact: 236577160764683107543166473/8469617597982000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n751.cert
+  - n: 752
+    printed: '27.932449886404'
+    rounding: up
+    exact: 421440969626533353106895129/15087862730998000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n752.cert
+  - n: 753
+    printed: '27.932449886404'
+    rounding: up
+    exact: 421440969626533353106895129/15087862730998000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n753.cert
+  - n: 754
+    printed: '27.937423317053'
+    rounding: up
+    exact: 4316336754917293658081177/154500173689340000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n754.cert
+  - n: 755
+    printed: '27.951504031492'
+    rounding: up
+    exact: 3933597709824004547166323/140729375614000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n755.cert
+  - n: 760
+    printed: '27.995022162160'
+    rounding: up
+    exact: 408551784921914958055273607/14593729647914000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n760.cert
+  - n: 804
+    printed: '28.909246527138'
+    rounding: up
+    exact: 63572105413660373082158047/2199023255552000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n804.cert
+  - n: 805
+    printed: '28.909665866810'
+    rounding: up
+    exact: 93831992673017586296472033/3245696200894000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n805.cert
+  - n: 806
+    printed: '28.919759255285'
+    rounding: up
+    exact: 285582814168308707807545489/9875006622544000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n806.cert
+  - n: 808
+    printed: '28.932449886404'
+    rounding: up
+    exact: 436528832357531353106895129/15087862730998000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n808.cert
+  - n: 815
+    printed: '28.995022162160'
+    rounding: up
+    exact: 423145514569828958055273607/14593729647914000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n815.cert
+  - n: 863
+    printed: '29.916419307447'
+    rounding: up
+    exact: 1809921773859061641086563003892727007491319546955850769433/60499278180946296693698842389219105854172288800000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n863.cert
+  - n: 865
+    printed: '29.932449886402'
+    rounding: up
+    exact: 53303799351630122996258149/1780803093429600000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n865.cert
+  - n: 867
+    printed: '29.949688481977'
+    rounding: up
+    exact: 5366107054571286936341061/179170713505100000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n867.cert
+  - n: 868
+    printed: '29.977390686090'
+    rounding: up
+    exact: 30247929636250191793737254293704089479425184258098756259148135079/1009024766464609415396446688288085879705867359570750000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n868.cert
+  - n: 870
+    printed: '29.985424855417'
+    rounding: up
+    exact: 569844129880617840092664377/19004037215690000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n870.cert
+  - n: 872
+    printed: '29.995022162160'
+    rounding: up
+    exact: 437739244217742958055273607/14593729647914000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n872.cert
+  - n: 873
+    printed: '29.996375057644'
+    rounding: up
+    exact: 7994231915393978258329036847/266506599548500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n873.cert
+  - n: 874
+    printed: '29.996375057644'
+    rounding: up
+    exact: 7994231915393978258329036847/266506599548500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n874.cert
+  - n: 919
+    printed: '30.844931419278'
+    rounding: up
+    exact: 864661025727630835135511065428595720536154663263906724077/28032515747051716344709415879606303792312035250000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n919.cert
+  - n: 924
+    printed: '30.932449886402'
+    rounding: up
+    exact: 55084602445059722996258149/1780803093429600000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n924.cert
+  - n: 926
+    printed: '30.945612117331'
+    rounding: up
+    exact: 13632288045967101442390912029221694158771714423909119017092957760307/440524103846455947589615354405241038464559475896153500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n926.cert
+  - n: 927
+    printed: '30.975475685281'
+    rounding: up
+    exact: 5359120778692586109044077/173011734610400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n927.cert
+  - n: 928
+    printed: '30.975475685281'
+    rounding: up
+    exact: 5359120778692586109044077/173011734610400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n928.cert
+  - n: 930
+    printed: '30.981535303483'
+    rounding: up
+    exact: 1736814282936541035718218174281693331700158943/56059658306904912963727545840450000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n930.cert
+  - n: 933
+    printed: '30.994238714880'
+    rounding: up
+    exact: 2582001843628252193177508571086959793551938625910812411/83305864273050000000000000833058642730500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n933.cert
+  - n: 934
+    printed: '30.995302140806'
+    rounding: up
+    exact: 477270092108137375032834445242897935059/15398142916626460185708337200000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n934.cert
+  - n: 984
+    printed: '31.914115712696'
+    rounding: up
+    exact: 804052269778040862116024294578609968294032525438906813/25194251879527660723063004805056061781500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n984.cert
+  - n: 987
+    printed: '31.944662519483'
+    rounding: up
+    exact: 26994297027873650953999340393/845033094696500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n987.cert
+  - n: 989
+    printed: '31.975475685281'
+    rounding: up
+    exact: 5532132513302986109044077/173011734610400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n989.cert
+  - n: 990
+    printed: '31.977918827720'
+    rounding: up
+    exact: 26483250524894255077476223/828173048645600000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n990.cert
+  - n: 991
+    printed: '31.981485095638'
+    rounding: up
+    exact: 21764275997591341977925564563748088250864091082220368664289053577/680527371774864816966350006805273717748648169663500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n991.cert
+  - n: 992
+    printed: '31.984796372085'
+    rounding: up
+    exact: 509869336469208928345926277/15940990542438000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n992.cert
+  - n: 994
+    printed: '31.993645614627'
+    rounding: up
+    exact: 568303250996569540247122001/17763003874018000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n994.cert
+  - n: 998
+    printed: '31.998301106112'
+    rounding: up
+    exact: 483967895313445843095602251/15124799710726000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n998.cert
+  note: 'Each exact side is the linked certificate''s header, retained in the couzo-issue678-2026-10-18
+    packet and decided over Q with every control refused (receipts/filtered-exact-replay.json).
+    A ledger verdict is report order only: it registers nothing, and the claims stay unregistered
+    pending Stage 3, an independent mathematical review and the all-pairs replay.'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

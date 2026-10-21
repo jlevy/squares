@@ -40693,3 +40693,122 @@ evidence:
       text because the inherited #671 version differs. The case lanes and house moved to this
       certificate in the adoption of 2026-10-19, which ran both strong generators on its
       witness.'
+  - id: E-couzo-678-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+        - 204
+        - 260
+        - 330
+        - 343
+        - 418
+        - 420
+        - 421
+        - 422
+        - 455
+        - 456
+        - 458
+        - 459
+        - 461
+        - 462
+        - 463
+        - 464
+        - 497
+        - 499
+        - 501
+        - 502
+        - 505
+        - 507
+        - 545
+        - 546
+        - 548
+        - 549
+        - 553
+        - 554
+        - 555
+        - 592
+        - 593
+        - 597
+        - 598
+        - 600
+        - 601
+        - 602
+        - 641
+        - 642
+        - 650
+        - 652
+        - 653
+        - 654
+        - 693
+        - 700
+        - 701
+        - 703
+        - 704
+        - 705
+        - 706
+        - 749
+        - 751
+        - 752
+        - 753
+        - 754
+        - 755
+        - 760
+        - 804
+        - 805
+        - 806
+        - 808
+        - 815
+        - 863
+        - 865
+        - 867
+        - 868
+        - 870
+        - 872
+        - 873
+        - 874
+        - 919
+        - 924
+        - 926
+        - 927
+        - 928
+        - 930
+        - 933
+        - 934
+        - 984
+        - 987
+        - 989
+        - 990
+        - 991
+        - 992
+        - 994
+        - 998
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 678 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-19'
+    limitations: >-
+      This atom records the source author's report, issue 678, of 85 upper bounds for n =
+      204 to 998 by 83 exact rational certificates at 7b6c87e; 545 and 641 are the 546 and
+      642 certificates less one square. Each printed side is its certificate's header side
+      rounded up at 12 places. The packet's filtered exact replay
+      (receipts/filtered-exact-replay.json, devtools.couzo_678_replay) decided all 85 rows
+      on two routes, the sqpack.verify predicates and the independent rational corner
+      checker's, over the 140,866 of 21,393,271 pairs whose centres are closer than sqrt 2,
+      an exactly justified filter, and every wall; all 415 controls were refused by both,
+      in 90.8 positive CPU seconds. The source's checker, run unchanged from its retained
+      copy, accepts all 85 and refuses all 332 controls it can state. That replay and the
+      19 October mathematical review on think-xu4d are not entered as confirming evidence
+      here: the mapped review and the replay's evidence entries are stage 4 work on
+      think-xu4d, and the full-kernel all-pairs replay is held on think-fpnd. The two
+      routes share certificate parsing, half-angle conversion, the pair filter and
+      Fraction arithmetic. The certificates at 204 and 260 are T-223's; the 83 beyond the
+      case corpus are dated rows of the couzo-issue678-2026-10-18 source. No arrangement
+      identity, local minimum, optimum or credit statement of the source's manifest is
+      established.
