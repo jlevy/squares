@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 42
+version: 43
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -45,11 +45,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T20:45:57.382Z
+updated_at: 2026-10-21T20:57:33.757Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Final integration head e2925e726ef3ed4916b7845aac8be21f3e74f073 pushed to PR #578. Includes c3e8f1cc generated URL date correction and measured mobile title fix. Main preserved at origin/main 7eeab1f5e. External checkout /Volumes/spud-ext2/worktrees/squares-profiles-final-20261021 is clean. Preview server99187 serves site-integrated-reviewed on127.0.0.1:8790 with all224result pages and updated immutable assets. T037 mobile CLS0.001994 across3runs per theme; desktop0.000622, no unreadable math. All224title text/MathML preserved;18focused tests,16finalCSS tests,16peer scenarios pass. Full rollup/footer selection30pass45.61s; final browser floor29.46s;2176documentation checks pass. Astra final review has no findings. Reopened think-uwd6 because historical child0ltn remains open;6054beads validate without error. LatestPRbody contains full local receipts and deferred scope. Hosted Packing/Pages and explicit Deferred checkpoint running on e2925e726; watch final-pr-checks-e292-watch.log in usual scratch. Earlier setup timeout and superseded-run cancellations are not final-head acceptance. Keep draft until exact-head CI is green; do not merge or deploy.
+Latest continuation: origin/main970e89de8 (#704, T-196 adoption and site v0.8.15) landed during hosted checks. Merged in e9149e2a2, then repinned DATA_REVISION in3ae236a16. Both commits local, not yet pushed. Three conflicts resolved preserving proposed v0.9.0 and upstream v0.8.15 history; RESULTS regenerated; exact n227/n260 occurrence joins now point to Joost de Winter. Astra reviewed merge boundaries with no findings. Counts unchanged75profiles/213primaryResults/701Credits/114authoredRecords (116globalcurrent). URLregistry1144rows0failures; sourcecoverage324cases580facts0divergences;20classifier/T196 and54identity/tally tests pass. Records52steps68.61s and edit68steps317.1s pass. Pushgate sincee2925e726 is running5305 with1800s cap, log latest-main-push-gate.log. Fullfreshpreview build98370 writes site-merged-3ae236a16, preserving live site-integrated-reviewed untilauditspass. Latestremotehead e2925e726 is conflicted against main; no Packing/Pages started for it, supersededdeferredrun39672860595 canceled. Next: finishgate/build, updateplan/PRbody, pushlocalmerge/pin, runexactheadCI+deferredcheckpoint, markreadyonlywhenallgreen. No merge/deploy.
