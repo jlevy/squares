@@ -21194,16 +21194,19 @@ occurrences:
     path: packing/frontier/n-227.md
     record_key: '227'
     field: /reported_upper_bound/found_by/0
-  expected_text: David Ellsworth
+  expected_text: Joost de Winter
   start: 0
   end: 15
-  label: David Ellsworth
+  label: Joost de Winter
   role: construction-finder
   disposition: resolved
   evidence:
-  - catalogue-credits
-  - catalogue-byline
-  contributor_id: david-ellsworth
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed after upstream PR 704 adoption of T-196 from [de Winter upper
+    bounds 2026-10-17]; the adopted case finder names the existing Joost de Winter
+    identity. Source text and construction-finder role are retained.
 - origin:
     path: packing/frontier/n-227.md
     record_key: '227'
@@ -22159,16 +22162,19 @@ occurrences:
     path: packing/frontier/n-260.md
     record_key: '260'
     field: /reported_upper_bound/found_by/0
-  expected_text: David Ellsworth
+  expected_text: Joost de Winter
   start: 0
   end: 15
-  label: David Ellsworth
+  label: Joost de Winter
   role: construction-finder
   disposition: resolved
   evidence:
-  - catalogue-credits
-  - catalogue-byline
-  contributor_id: david-ellsworth
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed after upstream PR 704 adoption of T-196 from [de Winter upper
+    bounds 2026-10-17]; the adopted case finder names the existing Joost de Winter
+    identity. Source text and construction-finder role are retained.
 - origin:
     path: packing/frontier/n-260.md
     record_key: '260'

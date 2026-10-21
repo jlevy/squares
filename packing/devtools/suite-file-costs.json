@@ -709,6 +709,7 @@
     "packing/tests/test_upper_bound_reports_606_70a033f.py": 26.528,
     "packing/tests/test_upper_bound_reports_607.py": 19.846,
     "packing/tests/test_upper_bound_reports_622.py": 0.963,
+    "packing/tests/test_upper_bound_reports_668.py": 0.827,
     "packing/tests/test_upper_bound_reports_689_694.py": 0.828,
     "packing/tests/test_upper_bound_reports_703.py": 1.257,
     "packing/tests/test_upper_bound_reports_fang_direct.py": 2.594,
@@ -1038,6 +1039,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/couzo-678-replay-2026-10-20.json",
           "provenance": {},
           "tests": 9
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_668.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-668-2026-10-20.json",
+          "provenance": {},
+          "tests": 10
         }
       ]
     },

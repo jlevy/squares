@@ -81,7 +81,9 @@ lanes have changed since that pass, before writing any record: reconciling those
 writers' evidence and prose needs an explicit merge rather than a historical replay.
 A record changes this way when the register gains a confirmed certificate at its count.
 For an opening-only wording correction, ``--refresh-openings`` leaves all other bytes
-alone, including evidence and prose a later lower-bound writer has added. ``--n`` limits
+alone, including evidence and prose a later lower-bound writer has added. Both refreshes
+also bring each adopted count's selected override reason in the coverage register to
+what the writer writes now (`override_reason`), which ``--check`` holds. ``--n`` limits
 either refresh to the records it names, so a writer change at a few counts is applied
 without replaying a record whose later layer the full refresh refuses.
 
@@ -180,6 +182,9 @@ class Prose:
     #: record writes instead, where the review decided the certificate on an exact route of
     #: its own that no verifier entry names (T-224, A5 of the 21 October review).
     third_route: bool | str = True
+    #: How the certificate states each square. T-196's states a rational centre and the
+    #: rotation's cosine and sine, which the adapter turns into a half-angle tangent.
+    squares: str = "a rational centre and the tangent of its half-angle"
 
 
 #: Each adopted result, as its register entry and its review describe it.
@@ -671,6 +676,25 @@ RESULTS: dict[str, Prose] = {
         ),
         third_route=False,
     ),
+    "T-196": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#668](https://github.com/jlevy/squares/issues/668)",
+        producer_route=False,
+        ai=(
+            "The issue says the search, numerical optimization, rational certificates, "
+            "checkers and figures were made with OpenAI Codex agents under Joost de Winter’s "
+            "direction, and that Claude (Anthropic) replayed the checkers and prepared the "
+            "repository for publication."
+        ),
+        lineage=(
+            "The issue says the search started from this repository’s catalogue, whose "
+            "credits for the former packings apply, and built asymmetric Young-corner fills "
+            "around slipped tilted ribbons, then restored the supports and angles; the three "
+            "counts are one construction family, and the 229-square packing descends from the "
+            "260-square one. None of this lineage is measured here (T-196)."
+        ),
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
     "T-221": Prose(
         author="Evan Daniel",
         reported="on [jlevy/squares#689](https://github.com/jlevy/squares/issues/689)",
@@ -752,6 +776,7 @@ XU = "Ryan Xu"
 SQUISH = "Nate Chaoweeraprasit (itsnaka)"
 COUZO = "Francisco Couzo"
 DANIEL = "Evan Daniel"
+DE_WINTER = "Joost de Winter"
 PINGYOU = "PingYou Ltd"
 OSTASHEV = "Daniil Ostashev"
 BARNETT = "Robert Barnett"
@@ -1075,6 +1100,9 @@ CREDITS: dict[int, Credit] = {
         (COUZO,),
         "Francisco Couzo’s further arrangement of Daniil Ostashev’s n = 211 design",
     ),
+    # Joost de Winter's packing of issue 668 (T-196), from a search the issue says started
+    # from this repository's catalogue; no identity with the catalogue's packing is measured.
+    227: Credit((DE_WINTER,), (), "Joost de Winter’s packing"),
     # T-174's regularization of T-128's packing, 46 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
     228: Credit(
@@ -1147,6 +1175,8 @@ CREDITS: dict[int, Credit] = {
     ),
     258: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH", via="Mishapolk"),
     259: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
+    # Joost de Winter's packing of issue 668 (T-196), as at 227.
+    260: Credit((DE_WINTER,), (), "Joost de Winter’s packing"),
     # T-174's regularization of T-169's re-solve, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
     261: Credit(
@@ -1999,7 +2029,7 @@ def section(move: Move) -> str:
         (
             f"{credit.phrase[0].upper()}{credit.phrase[1:]}, reported {prose.reported}, "
             f"{side} ({house.result}). The certificate gives a rational side and, for each "
-            f"of the {n} unit squares, a rational centre and the tangent of its half-angle; "
+            f"of the {n} unit squares, {prose.squares}; "
             f"the [retained packet](../resources/web/{packet}/README.md) holds it with the "
             "complete native jobs that decided it."
         ),
@@ -2628,6 +2658,51 @@ ABOVE_HOUSE = re.compile(
 ADOPTED_ON_DAY = re.compile(r"\badopted on (\d{4}-\d{2}-\d{2}) \(T-\d+\)")
 
 
+def override_reason(n: int, result: str) -> str:
+    """The selected override's reason at a count adopted for `result`.
+
+    It says the smallest validated side, since the register may hold a smaller one not yet
+    validated: T-223 at V0/C0, below the house best packings at 204 and 260 (review B1 of
+    #704). Until that review it said "the smallest exact side the register holds"."""
+    return (
+        f"The smallest validated exact side the register holds at this count, confirmed at "
+        f"V3/C3 by a replay here and an accepted review, adopted on {houses.adopted_on(n)} "
+        f"({result})."
+    )
+
+
+def reworded(text: str, counts: Collection[int] | None = None) -> tuple[str, list[int]]:
+    """The coverage register with each adopted count's selected override giving the reason
+    `override_reason` writes now, and the counts whose reason that changes.
+
+    `counts`, where given, limits it to those counts. An override at another source than
+    the count's house is left as it is, for `check` to report."""
+    data = safe_load(text)
+    sources = {str(source["id"]): source for source in data["sources"]}
+    changed = []
+    for entry in data["selected_overrides"]:
+        n = int(entry["n"])
+        result = houses.ADOPTED.get(n)
+        if result is None or (counts is not None and n not in counts):
+            continue
+        if sources[str(entry["source_id"])]["source_key"] != houses.source_for(n).key:
+            continue
+        reason = override_reason(n, result)
+        if entry.get("reason") != reason:
+            entry["reason"] = reason
+            changed.append(n)
+    if not changed:
+        return text, []
+    start, end = _section_span(text, "selected_overrides")
+    dumped = yaml.safe_dump(
+        {"selected_overrides": data["selected_overrides"]},
+        sort_keys=False,
+        allow_unicode=True,
+        width=WIDTH,
+    )
+    return text[:start] + dumped + text[end:], changed
+
+
 def coverage(moves: Sequence[Move], text: str) -> str:
     """The coverage register with each moved count's selection and supersessions."""
     data = safe_load(text)
@@ -2639,11 +2714,7 @@ def coverage(moves: Sequence[Move], text: str) -> str:
         old = overrides.get(n)
         if old is not None and old["source_id"] == new:
             continue
-        reason = (
-            f"The smallest exact side the register holds at this count, confirmed at V3/C3 "
-            f"by a replay here and an accepted review, adopted on {houses.adopted_on(n)} "
-            f"({house.result})."
-        )
+        reason = override_reason(n, house.result)
         # Every report the earlier house beat, a catalogue baseline's included, is beaten
         # by the new one, which is smaller still. A row that an earlier adoption wrote for
         # the house it displaced names the house that is smaller; that is now this one.
@@ -3142,7 +3213,9 @@ def refresh(
 
     `counts`, where given, limits the refresh to those records: a writer change at a few
     counts is applied without replaying a count whose later lower layer the full refresh
-    refuses, as n = 108's fine-net lower bound is (review A1 of #692)."""
+    refuses, as n = 108's fine-net lower bound is (review A1 of #692). Both refreshes also
+    bring each adopted count's selected override reason in the coverage register to
+    `override_reason`, which no later writer edits (review B1 of #704)."""
     changed = []
     updates: list[tuple[Path, str]] = []
     for move in replay_plan():
@@ -3166,12 +3239,16 @@ def refresh(
             if _flat(text) != _flat(committed):
                 changed.append(n)
                 updates.append((path, text))
+    covered, reasons = reworded(COVERAGE.read_text(encoding="utf-8"), counts)
+    if reasons:
+        changed.extend(reasons)
+        updates.append((COVERAGE, covered))
     # Plan every record before the first write: a refused later layer must leave the
     # whole batch intact, including earlier records with legitimate pending changes.
     if write:
         for path, text in updates:
             _write(path, text)
-    return sorted(changed)
+    return sorted(set(changed))
 
 
 def adopt_case(n: int, existing: str, generated: str) -> str:
@@ -3258,6 +3335,11 @@ def check() -> list[str]:
         override = overrides.get(n)
         if override is None or sources[override["source_id"]]["source_key"] != source.key:
             problems.append(f"n={n}: the coverage register does not select {source.key}")
+        elif override.get("reason") != override_reason(n, result):
+            problems.append(
+                f"n={n}: the selected override's reason is not what the writer writes "
+                "(`--refresh-openings` rewrites it)"
+            )
     for n in held_counts():
         text = select_houses.case_path(n).read_text(encoding="utf-8")
         if _flat(held_note(n, text)) != _flat(text):
@@ -3501,7 +3583,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     mode.add_argument(
         "--refresh-openings",
         action="store_true",
-        help="refresh only current adoption paragraphs, retaining all other writers' bytes",
+        help=(
+            "refresh only current adoption paragraphs and override reasons, retaining all "
+            "other writers' bytes"
+        ),
     )
     parser.add_argument(
         "--n",

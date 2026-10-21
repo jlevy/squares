@@ -1328,8 +1328,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # The houses as the 17 October passes left them: the adoption of 19 October 2026 moved
     # 155, 236 and 271 to Evan Daniel's certificates and first adopted 229 and 183 (T-220,
     # think-jh4w), the adoption of 20 October 2026 moved 154 and 308 to his issue-694 and
-    # issue-689 certificates (T-222, T-221), and the adoption of 21 October 2026 moved 270
-    # to his issue-703 certificate (T-224), after this receipt was retained.
+    # issue-689 certificates (T-222, T-221) and first adopted 227 and 260 (T-196), and the
+    # adoption of 21 October 2026 moved 270 to his issue-703 certificate (T-224), after this
+    # receipt was retained.
     later = {
         155: "T-197",
         183: "T-220",
@@ -1338,6 +1339,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         271: "T-219",
         154: "T-222",
         308: "T-221",
+        227: "T-196",
+        260: "T-196",
         270: "T-224",
     }
     before = {
@@ -1349,8 +1352,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         308: "T-174",
         270: "T-174",
     }
-    del before[229]
-    del before[183]
+    for n in (183, 227, 229, 260):
+        del before[n]
     assert "183" not in historical["houses"]
     assert {n: houses.ADOPTED[n] for n in later} == later
     assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
@@ -1802,12 +1805,18 @@ def _fine_net_lower_projection(
 #: Registrations pending adoption entered at an adopted count after its last pass, keyed by
 #: the count and the result that pass adopted: the evidence id, the resource key and the
 #: heading of the paragraph each adds. T-223 at 204 (#701, review A6) cites its report the
-#: way T-197 cited its own at 155 while T-149 stood there. A registration writes none of
-#: the adoption writer's lanes, so it is checked exactly and projected out; once a later
-#: pass adopts at the count, the key no longer matches and that pass's replay reads the
-#: three as prior state.
+#: way T-197 cited its own at 155 while T-149 stood there, and at 260 it reached `main`
+#: before T-196's adoption of 20 October 2026 did (#704), so the same three follow that
+#: pass's record there. A registration writes none of the adoption writer's lanes, so it
+#: is checked exactly and projected out; once a later pass adopts at the count, the key no
+#: longer matches and that pass's replay reads the three as prior state.
 LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {
     (204, "T-186"): (
+        "E-couzo-678-certificate-report",
+        "[Couzo issue 678 2026-10-18]",
+        "**Reported certificate pending adoption, 2026-10-18.**",
+    ),
+    (260, "T-196"): (
         "E-couzo-678-certificate-report",
         "[Couzo issue 678 2026-10-18]",
         "**Reported certificate pending adoption, 2026-10-18.**",
@@ -2098,6 +2107,7 @@ def test_an_opening_only_refresh_keeps_later_lower_bound_evidence_and_prose(
     path.write_text(old_before + marker + " Stale opening.\n\n" + old_after.split("\n\n", 1)[1])
     monkeypatch.setattr(adopt, "replay_plan", lambda: [move])
     monkeypatch.setattr(select, "case_path", lambda _n: path)
+    monkeypatch.setattr(adopt, "COVERAGE", _coverage_copy(tmp_path))
     assert adopt.main(["--refresh-openings"]) == 0
     refreshed = path.read_text()
     assert _front(refreshed) == _front(committed)
@@ -2152,6 +2162,7 @@ def test_a_refresh_limited_to_named_counts_leaves_the_others_unread(
     monkeypatch.setattr(adopt, "replay_plan", lambda: moves)
     monkeypatch.setattr(adopt, "held_counts", lambda: [108])
     monkeypatch.setattr(select, "case_path", lambda n: tmp_path / f"n-{n:03d}.md")
+    monkeypatch.setattr(adopt, "COVERAGE", _coverage_copy(tmp_path))
     assert adopt.main(["--refresh", "--n", "29"]) == 0
     assert "Stale opening." not in paths[29].read_text()
     assert _flat(adopt.opening(moves[0])) in _flat(paths[29].read_text())
@@ -2160,12 +2171,56 @@ def test_a_refresh_limited_to_named_counts_leaves_the_others_unread(
         adopt.main(["--check", "--n", "29"])
 
 
+def _coverage_copy(directory: Path) -> Path:
+    """A copy of the coverage register, so that a refresh under test writes no real file."""
+    path = directory / "source-coverage.yaml"
+    path.write_bytes(adopt.COVERAGE.read_bytes())
+    return path
+
+
+def test_a_refresh_brings_each_override_reason_to_the_writers_and_check_holds_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """An adopted count's selected override says the smallest validated side, since T-223
+    at V0/C0 lies below the house best packing at 260 (review B1 of #704). A reason in the
+    earlier wording fails `--check`, and a refresh rewrites it with the writer's dump."""
+    committed = adopt.COVERAGE.read_text(encoding="utf-8")
+    reason = adopt.override_reason(260, houses.ADOPTED[260])
+    assert reason.startswith("The smallest validated exact side the register holds")
+    (entry,) = [e for e in safe_load(committed)["selected_overrides"] if e["n"] == 260]
+    assert entry["reason"] == reason
+    earlier = ("smallest validated exact", "smallest exact")
+    head, tail = committed.split("\n- n: 260\n", 1)
+    stale = head + "\n- n: 260\n" + tail.replace(*earlier, 1)
+    (entry,) = [e for e in safe_load(stale)["selected_overrides"] if e["n"] == 260]
+    assert entry["reason"] == reason.replace(*earlier)
+    path = _coverage_copy(tmp_path)
+    path.write_text(stale, encoding="utf-8")
+    monkeypatch.setattr(adopt, "COVERAGE", path)
+    assert [problem for problem in adopt.check() if "reason" in problem] == [
+        (
+            "n=260: the selected override's reason is not what the writer writes "
+            "(`--refresh-openings` rewrites it)"
+        )
+    ]
+    assert adopt.reworded(stale, counts=[227]) == (stale, [])
+    assert adopt.reworded(stale) == (committed, [260])
+    monkeypatch.setattr(adopt, "replay_plan", list)
+    monkeypatch.setattr(adopt, "held_counts", list)
+    assert adopt.main(["--refresh-openings"]) == 0
+    assert path.read_text(encoding="utf-8") == committed
+    assert adopt.check() == []
+
+
 def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
     """The intake of 18 October 2026 wrote a fixed-form "pending adoption" paragraph for
     each report it registered at V0/C0; the adoption that moves the house marks it, and a
     sentence after it naming a report pending adoption, as history (review A1 of #692).
     155 is marked by hand (`HAND_MARKED`); 229 is the writer's, and so are 227 and 260,
-    whose de Winter reports are still pending."""
+    which the pass of 20 October 2026 adopted (T-196); the dated sentences after the
+    paragraph there, on the replay and Couzo's later reports, are in the past tense. A
+    registration still pending adoption that reached a count after its pass is projected out
+    first (`LATER_PENDING_REPORTS`): T-223's paragraph at 260 is current, not stale."""
     stale = (
         "Reported certificate pending adoption",
         "This V0/C0 registration leaves both case upper lanes",
@@ -2191,11 +2246,15 @@ def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
     )
     assert "which the record still prints" not in body229
     for n in (227, 260):
-        committed = select.case_path(n).read_text(encoding="utf-8")
-        marked = _flat(adopt.pending_history(committed, "3 November 2026"))
-        assert not [words for words in stale if words in marked], n
-        assert f"Joost de Winter reported a {n}-square certificate" in marked, n
-        assert "until the house adoption of 3 November 2026" in marked, n
+        text = select.case_path(n).read_text(encoding="utf-8")
+        if (n, "T-196") in LATER_PENDING_REPORTS:
+            text = _later_pending_projection((n, "T-196"), _front(text), text)
+        body = _flat(text.split("---\n", 2)[2])
+        assert not [words for words in stale if words in body], n
+        opening = f"**Reported certificate, 2026-10-17.** Joost de Winter reported a {n}-square"
+        assert opening in body, n
+        assert history.replace("19 October", "20 October") in body, n
+        assert "which raised T-196 to V3/C3" in body, n
 
 
 def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
@@ -2217,12 +2276,12 @@ def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
-    """The replaced displays differ at 29, 132 and 229. Their opening, section and history
-    note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of #665).
-    At 29 the catalogue print orders nothing; at 132 the reported exact side agrees with
-    the verified side, but its display differs from the verified display. 308's did too
-    when T-174 replaced T-141 on 17 October 2026; the adoption of 20 October 2026 replays
-    it from T-174's record, whose two lanes agree."""
+    """The replaced displays differ at 29, 132, 227, 229 and 260. Their opening, section and
+    history note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of
+    #665). At 29 the catalogue print orders nothing; at 132 the reported exact side agrees
+    with the verified side, but its display differs from the verified display. 308's did
+    too when T-174 replaced T-141 on 17 October 2026; the adoption of 20 October 2026
+    replays it from T-174's record, whose two lanes agree."""
     differing = {
         29: (
             Fraction(
@@ -2254,6 +2313,24 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
             "T-155",
             "[Kingbird]",
             "lies `6.69e-03` above the new side",
+        ),
+        # The first adoptions at 227 and 260 (20 October 2026, T-196): the catalogue's
+        # prints of 17/2 + 5 sqrt(2) and 11 + 4 sqrt(2) above T-155's exact ceilings.
+        227: (
+            Fraction("19463834764831844055010554526310613/1250000000000000000000000000000000"),
+            "15.57106781186547",
+            "15.57106781186548",
+            "T-155",
+            "[Kingbird]",
+            "lies `7.27e-03` above the new side",
+        ),
+        260: (
+            Fraction("416421356237309504880168872421/25000000000000000000000000000"),
+            "16.65685424949238",
+            "16.65685424949239",
+            "T-155",
+            "[Kingbird]",
+            "lies `1.11e-02` above the new side",
         ),
     }
     for n, (expected, printed, verified_display, result, source, relation) in differing.items():
