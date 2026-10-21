@@ -13,6 +13,36 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ### 2026-10-21
 
+<a id="changelog-entry-couzo-two-hundred-four-and-two-sixty-adopted"></a>
+
+#### Couzo’s Smaller Packings of 204 and 260 Squares Adopted
+
+Significance S3: T-223 is an S3 finite case result: a new arrangement at each count, 2.04e-05 below the ceiling at 204 and 2.56e-05 below T-196 at 260, each with more than a dozen squares beyond a tenth of the packing it replaces. It brings no new technique and claims no optimality.
+
+Couzo’s exact rational packings of 204 and 260 unit squares, the two in the case
+corpus among issue 678’s 85 bounds, are confirmed at V3/C3 and are now the house
+packings at both counts. At 204 the packing lies about $2.04 \times 10^{-5}$ below
+the earlier ceiling; at 260 it lies about $2.56 \times 10^{-5}$ below de Winter’s
+packing, adopted there the day before. The 83 bounds beyond 324 are kept as dated
+rows of the source.
+
+- This project’s filtered exact replay decided both certificates on two routes that
+  share the parser, the half-angle map, the pair filter and rational arithmetic, and
+  refused six controls of each, one of them $10^{-30}$ past exact contact. The
+  maintained all-pairs kernel decided every pair at both counts, the source’s own
+  checker accepted both, and a separately prompted mathematical review, with a
+  checker sharing only rational arithmetic, agreed at every number.
+- Each is a new arrangement: 14 of 204 squares lie beyond a tenth of the earlier
+  packing at 204, and 24 of 260 beyond a tenth of de Winter’s at 260. The source
+  credits Polkovskyi’s construction at 204, and at 260 de Winter’s packing, which it
+  seeded from Daniel’s exact form.
+- The case at 204 draws a regularized view made here at the same side; at 260 the
+  stronger views wait for the owner’s review. Daniel’s solved, regularized views of
+  both packings lie a little lower still and are registered separately (T-225),
+  pending review. No optimality, rigidity or priority is claimed.
+
+PRs and supporting records: [\#706](https://github.com/jlevy/squares/pull/706) · [The case record at 204](packing/frontier/n-204.md) · [The case record at 260](packing/frontier/n-260.md) · [Retained certificates and verification limits](packing/resources/web/couzo-issue678-2026-10-18/README.md) · [Mathematical review of 20 October](docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) · [Couzo’s registration request](https://github.com/jlevy/squares/issues/678).
+
 <a id="changelog-entry-de-winter-two-twenty-seven-and-two-sixty-adopted"></a>
 
 #### De Winter’s Smaller Packings of 227 and 260 Squares Adopted
