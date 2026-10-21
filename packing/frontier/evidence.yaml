@@ -40993,8 +40993,13 @@ evidence:
       The review's own checker, with readers of its own and no code of the packet's routes or
       the source's; it shares Fraction with them, and its author read every route before
       writing it, so it is not clean-room. Its least clearances and gaps equal the
-      independent route's to every digit at 204 and 260. No controls of its own; the receipt's
-      are the packet's. Finite feasibility only.
+      independent route's to every digit at 204 and 260. Given the packet's duplicate-square
+      and near-contact-overlap mutants of n204.cert (couzo_678_replay.mutant_certificate),
+      with --only 204 --all-pairs 204, it refuses both: exit 1, one overlapping pair by
+      separating axes and by exact area, (1, 2) and (115, 124), about 2 s each
+      (test_couzo_678_replay.py, test_the_review_checker_refuses_the_packet_mutants; review A2
+      of #706). The receipt's other controls were decided by the packet's routes, not by this
+      checker. Finite feasibility only.
     source_reviewed: '2026-10-20'
   - id: E-muglich-686-certificate-report
     claim: upper-bound

@@ -2197,6 +2197,21 @@ def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
     assert "Until separate Stage 4 review and adoption" not in body204
 
 
+def test_each_count_of_one_result_states_its_own_lineage() -> None:
+    """T-223's two counts have different seeds and measurements, so each record states its
+    own (`Prose.lineage_at`, review A4 of #706): 204 the review's measurement against
+    T-186's packing, 260 the 20 October review's against de Winter's seed."""
+    assert set(adopt.RESULTS["T-223"].lineage_at or {}) == {204, 260}
+    body204 = _flat(select.case_path(204).read_text(encoding="utf-8"))
+    body260 = _flat(select.case_path(260).read_text(encoding="utf-8"))
+    assert "credits Mykhailo Polkovskyi’s construction as the seed at 204." in body204
+    assert "87 of the 204 squares lie within 10⁻⁴" in body204
+    assert "162 of the 260 squares" not in body204
+    assert "credits Joost de Winter’s #668 packing as the seed at 260" in body260
+    assert "162 of the 260 squares lie within 10⁻⁴" in body260
+    assert "seed at 204" not in body260
+
+
 def test_the_pending_paragraph_of_the_house_best_packing_form_becomes_history() -> None:
     """The intake of 20 October 2026 (#701) wrote its pending paragraph with the house best
     packing in a sentence of its own and the rung it registered at; `pending_history` reads
@@ -2232,6 +2247,39 @@ def test_the_pending_paragraph_of_the_house_best_packing_form_becomes_history() 
         "Until the adoption of 3 November 2026, both case upper lanes, the house best packing "
         "and its drawing stayed as they were. ## Next" in marked
     )
+    assert "stay as they were" not in marked
+    # #704's intake names the house best packing in parentheses, as it wrote T-223's
+    # paragraph at 260 at d11fb67f2, wrapped as written there (review A1 of #706).
+    named = (
+        "**Reported certificate pending adoption, 2026-10-18.** Francisco Couzo reports a\n"
+        "260-square certificate at container side $16.645753250545$, rounded upward from the\n"
+        "[retained exact certificate](../resources/web/couzo-issue678-2026-10-18/README.md), "
+        "in\n"
+        "issue #678. It reached this repository after Joost de Winter’s certificate, which "
+        "the\n"
+        "source credits for the construction, and its side is $2.56 \\times 10^{-5}$ below "
+        "his.\n"
+        "The exact rational side is registered at V0/C0 in [the result register](RESULTS.md).\n"
+        "Until separate Stage 4 review and adoption, both case upper lanes, the house best\n"
+        "packing (Joost de Winter’s T-196) and its drawing stay as they were, and the "
+        "rigidity\n"
+        "and arrangement notes below describe that packing.\n\n"
+        "**House adoption, 20 October 2026.** Joost de Winter’s packing (T-196) is now "
+        "this\n"
+    )
+    marked = _flat(adopt.pending_history(named, "22 October 2026"))
+    assert marked.startswith(
+        "**Reported certificate, 2026-10-18.** Francisco Couzo reported a 260-square "
+        "certificate"
+    )
+    assert "Before its review, the exact rational side was registered at V0/C0 in" in marked
+    assert (
+        "Until the adoption of 22 October 2026, both case upper lanes, the house best packing "
+        "(Joost de Winter’s T-196) and its drawing stayed as they were, and the rigidity and "
+        "arrangement notes below described that packing. **House adoption, 20 October 2026.**"
+        in marked
+    )
+    assert "Until separate Stage 4" not in marked
     assert "stay as they were" not in marked
 
 

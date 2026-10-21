@@ -178,6 +178,10 @@ class Prose:
     #: What the source says of where the packing came from and what was measured of it
     #: here, where its review asked the record to say so (T-160's RD-1, RD-5 and RD-7).
     lineage: str = ""
+    #: Each count's own lineage paragraph, where one result's counts have different starts
+    #: and measurements (T-223: Polkovskyi's construction at 204, de Winter's #668 packing at
+    #: 260; review A4 of #706); `lineage` stands for a count this does not name.
+    lineage_at: Mapping[int, str] | None = None
     #: Whether `devtools.check_half_angle_area`, the third exact route, decided the
     #: certificate too. T-220's replay ran the two maintained routes only, so its record
     #: says no third route decided it rather than that one did. A string is the clause the
@@ -740,17 +744,27 @@ RESULTS: dict[str, Prose] = {
             "for both routes, through one parser, half-angle map and pair filter; the "
             "source’s own checker, run unchanged from its retained copy, accepted it too."
         ),
-        lineage=(
-            "The source’s manifest credits Mykhailo Polkovskyi’s construction as the seed at "
-            "204, and Joost de Winter’s #668 packing at 260, through Evan Daniel’s exact-form "
-            "certificate of it in "
-            "[`evand/square-packing`](https://github.com/evand/square-packing), which the "
-            "issue’s comment of 19 October names and the intake retained. Measured here "
-            "under the box’s symmetries, 162 of the 260 "
-            "squares lie within 10⁻⁴ of a square of that seed and 55 moved by more than "
-            "10⁻²: not a refinement of the seed in place. The seed at 204 is the source’s "
-            "account and is not measured here (T-223)."
-        ),
+        lineage_at={
+            204: (
+                "The source’s manifest credits Mykhailo Polkovskyi’s construction as the seed "
+                "at 204. Measured by review A of #706 under the box’s symmetries against "
+                "T-186’s packing, the house best packing here before this adoption and the "
+                "record’s packing of Polkovskyi’s refinement, 87 of the 204 squares lie within "
+                "10⁻⁴ of a square of it with the same axes and 44 moved by more than 10⁻², 14 "
+                "of them beyond a tenth: not a refinement of that packing in place "
+                "([the review programs](../resources/web/couzo-issue678-2026-10-18/review/"
+                "README.md), T-223)."
+            ),
+            260: (
+                "The source’s manifest credits Joost de Winter’s #668 packing as the seed at "
+                "260, through Evan Daniel’s exact-form certificate of it in "
+                "[`evand/square-packing`](https://github.com/evand/square-packing), which the "
+                "issue’s comment of 19 October names and the intake retained. Measured here "
+                "under the box’s symmetries, 162 of the 260 squares lie within 10⁻⁴ of a "
+                "square of that seed and 55 moved by more than 10⁻²: not a refinement of the "
+                "seed in place (T-223)."
+            ),
+        },
         confirmation="re-implemented, sharing the producer’s components",
     ),
     "T-224": Prose(
@@ -2050,8 +2064,9 @@ def section(move: Move) -> str:
         )
     if prose.ai:
         paragraphs.append(prose.ai)
-    if prose.lineage:
-        paragraphs.append(prose.lineage)
+    lineage = (prose.lineage_at or {}).get(move.n, prose.lineage)
+    if lineage:
+        paragraphs.append(lineage)
     earlier = set(_earlier(move.packing))
     held = set(move.selection.held)
     others = [
@@ -2474,10 +2489,11 @@ def pending_history(text: str, until: str) -> str:
     notes below described that house; from the intake of 20 October 2026 it says the same
     of the house best packing, in a sentence of its own (#701 at n = 260), and that the
     side is registered at V0/C0; where no rigidity or arrangement note follows, that
-    sentence ends at the drawing (#701's A6 at n = 204). An adoption at the count moves all
-    of them, whichever certificate it adopts, so the paragraph says what held until then,
-    and a sentence after it that calls a report pending adoption says until when (review A1
-    of #692: n = 155 and 229 adopted the very reports their paragraphs named, on 19 October
+    sentence ends at the drawing (#701's A6 at n = 204), and #704's names the house best
+    packing in parentheses (T-196 at 260). An adoption at the count moves all of them,
+    whichever certificate it adopts, so the paragraph says what held until then, and a
+    sentence after it that calls a report pending adoption says until when (review A1 of
+    #692: n = 155 and 229 adopted the very reports their paragraphs named, on 19 October
     2026).
     """
 
@@ -2500,17 +2516,20 @@ def pending_history(text: str, until: str) -> str:
             "Before its review, the exact rational side was registered at V0/C0",
             block,
         )
+        # The house best packing may be named in parentheses, as #704's intake named T-196's
+        # at 260 (review A1 of #706); the past form keeps the name.
         block = re.sub(
             r"\bUntil\s+separate\s+Stage\s+4\s+review\s+and\s+adoption,\s+both\s+case\s+upper"
-            r"\s+lanes,\s+the\s+house\s+best\s+packing\s+and\s+its\s+drawing\s+stay\s+as\s+they"
-            r"\s+were(,\s+and\s+the\s+rigidity\s+and\s+arrangement\s+notes\s+below\s+describe"
-            r"\s+that\s+packing)?\.",
+            r"\s+lanes,\s+the\s+house\s+best\s+packing(\s+\([^)]*\))?\s+and\s+its\s+drawing\s+stay"
+            r"\s+as\s+they\s+were(,\s+and\s+the\s+rigidity\s+and\s+arrangement\s+notes\s+below"
+            r"\s+describe\s+that\s+packing)?\.",
             lambda match: (
-                f"Until the adoption of {until}, both case upper lanes, the house best packing "
-                "and its drawing stayed as they were"
+                f"Until the adoption of {until}, both case upper lanes, the house best packing"
+                + (f" {' '.join(match.group(1).split())}" if match.group(1) else "")
+                + " and its drawing stayed as they were"
                 + (
                     ", and the rigidity and arrangement notes below described that packing"
-                    if match.group(1)
+                    if match.group(2)
                     else ""
                 )
                 + "."

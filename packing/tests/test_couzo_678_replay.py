@@ -11,9 +11,14 @@ receipts to the issue's table and the packet's manifest.
 
 from __future__ import annotations
 
+import json
+import subprocess
+import sys
 from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
+
+import pytest
 
 from devtools import acquire_source, upper_bound_reports
 from devtools import couzo_678_replay as replay
@@ -125,6 +130,61 @@ def test_the_source_checker_refuses_a_duplicate_square(tmp_path: Path) -> None:
     outcome = replay.source_run(mutant)
     assert outcome["exit"] == 1
     assert outcome["valid"] is False
+
+
+#: The review's own checker, which accepted 204 and 260 (`outputs/out-204-260.json`).
+REVIEW_CHECKER = replay.PACKET / "review/programs/review_678_check.py"
+
+
+@pytest.mark.parametrize(
+    ("control", "pair"), [("duplicate-square", [1, 2]), ("near-contact-overlap", [115, 124])]
+)
+def test_the_review_checker_refuses_the_packet_mutants(
+    tmp_path: Path, control: str, pair: list[int]
+) -> None:
+    """Stage 4's two mutated certificates, refused by the review's checker too, which the
+    confirming entry E-couzo-678-review-exact-feasibility cites (review A2 of #706).
+
+    The checker reads `certificates/best/n204.cert` under the source root it is given, so
+    the mutant takes that place in a scratch root, and it decides every pair at 204: one
+    pair overlaps by separating axes and by exact area, and the row is refused.
+    """
+    rows = replay.claims()
+    cert = replay.certificate(rows[N204], replay.manifest())
+    best = tmp_path / "source/certificates/best"
+    best.mkdir(parents=True)
+    (best / "n204.cert").write_text(
+        replay.legacy.serialize(replay.mutant_certificate(cert, control)), encoding="utf-8"
+    )
+    out = tmp_path / "out.json"
+    shown = subprocess.run(
+        (
+            sys.executable,
+            "-I",
+            str(REVIEW_CHECKER),
+            str(tmp_path / "source"),
+            str(replay.ISSUE),
+            str(replay.FILTERED),
+            str(out),
+            "--only",
+            "204",
+            "--all-pairs",
+            "204",
+            "--workers",
+            "1",
+        ),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=600,
+    )
+    assert shown.returncode == 1, shown.stderr
+    (row,) = json.loads(out.read_text(encoding="utf-8"))["rows"]
+    assert row["n"] == 204
+    assert row["all_pairs"] is True
+    assert row["passed"] is False
+    assert (row["sat_overlaps"], row["area_overlaps"]) == (1, 1)
+    assert row["least_pair"] == pair
 
 
 def test_the_committed_receipts_hold() -> None:

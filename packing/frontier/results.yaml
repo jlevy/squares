@@ -30462,13 +30462,24 @@ results:
     confirmation: C3
     significance:
       score: 3
-      rationale: Two smaller finite construction sides in the case corpus, 2.04e-05 below the case
-        ceiling at 204, below T-193's algebraic side there too, and 2.56e-05 below T-196 at 260,
-        from a release that also moves 83 counts beyond it; no lower bound or optimum.
-      scored: '2026-10-20'
-      by: c-lane-678 issue 678 registration draft (think-xu4d), kept at stage 4; the 20 October
-        review (docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) states no
-        significance score
+      rationale: >-
+        A new arrangement at each count. At 204 it is 2.04e-05 below the case ceiling and
+        T-193's algebraic side, with 14 of 204 squares beyond a tenth of T-186's packing (87
+        within 1e-04): the scale of T-224 at 270 (3.47e-05, 15 squares, S3), well above
+        T-188's 9.29e-06 at 211 (five squares, S2). At 260 it is 2.56e-05 below T-196, from
+        a search seeded with T-196's exact form, but 24 squares lie beyond a tenth of it, so
+        not a same-arrangement step like T-199's 1.32e-05 at 229 (S2); T-196's own S3, for
+        moving 260 below 11 + 4 sqrt 2, is not inherited. Either count alone carries S3, as
+        T-220, T-221 and T-222 do at single counts; no lower bound or optimum.
+      scored: '2026-10-21'
+      by: >-
+        review A of #706, the pull request's reviewer c-review-706-A
+        (https://github.com/jlevy/squares/pull/706#issuecomment-6325257697), confirming the
+        draft S3 of the c-lane-678 registration (think-xu4d); not the lane that reviewed
+        the mathematics, whose 20 October review
+        (docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) states no score.
+        Its measurements are identity_204.py and identity_260_tenth.py in the packet's
+        review/programs/
     novelty: previously-published
     attribution:
       source_keys:
