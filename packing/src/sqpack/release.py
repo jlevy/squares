@@ -1865,6 +1865,93 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/run_negative_controls.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site v0.8.12 cut for issue 686's beyond-horizon rows regenerated the five "
+            "claim documents, and each of the 22 changed lines differs from main 9dda9224 only "
+            "in its source-link revision, fbb3d573 to 45f1918d; the explainer links those "
+            "documents rather than inlining them. run_negative_controls.py changes only the "
+            "worker snapshot's prune list and its comment, and overview_sections.py adds only "
+            "issue 686's card to Other Square Packing Projects, which no paper draws. Rendered "
+            "at link revision 255049cb, once from this branch's tree and once with main's "
+            "copies of the four changed inputs (result-requests.yaml, source-coverage.yaml, "
+            "run_negative_controls.py and overview_sections.py): render_n11_optimality_review, "
+            "render_n11_threshold_bound_review, render_packing_methods and "
+            "render_n11_lower_bounds_explainer write 68 files, byte-identical between the "
+            "trees. No PDF was printed; each prints from that HTML. Retain v0.4.13."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=(
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/run_negative_controls.py",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For issue 686's import against main 9dda9224: run_negative_controls.py changes "
+            "only the worker snapshot's prune list and its comment, and overview_sections.py "
+            "adds only issue 686's card to Other Square Packing Projects, which no paper "
+            "draws. Rendered at link revision 255049cb, once from this branch's tree and once "
+            "with main's copies of the four changed inputs (result-requests.yaml, "
+            "source-coverage.yaml, run_negative_controls.py and overview_sections.py): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review, "
+            "render_packing_methods and render_n11_lower_bounds_explainer write 68 files, "
+            "byte-identical between the trees. No PDF was printed; each prints from that HTML. "
+            "Retain v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For issue 686's import against main 9dda9224: result requests and source coverage "
+            "are citation targets whose existence the producer checks, not inlined text, and "
+            "both cited paths exist at both revisions; #686's request changes, the "
+            "muglich-issue686-2026-10-19 coverage source with its 100 beyond-horizon rows and "
+            "the 88 rows it supersedes are not cited by the survey. run_negative_controls.py "
+            "changes only the worker snapshot's prune list and its comment, and "
+            "overview_sections.py adds only issue 686's card to Other Square Packing Projects, "
+            "which no paper draws. Rendered at link revision 255049cb, once from this branch's "
+            "tree and once with main's copies of the four changed inputs "
+            "(result-requests.yaml, source-coverage.yaml, run_negative_controls.py and "
+            "overview_sections.py): render_n11_optimality_review, "
+            "render_n11_threshold_bound_review, render_packing_methods and "
+            "render_n11_lower_bounds_explainer write 68 files, byte-identical between the "
+            "trees. No PDF was printed; each prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
