@@ -2896,8 +2896,11 @@ sources:
       and same-side regularized certificates, both standalone exact checkers and the
       numerical reports are retained in web/evand-n155-explorer-2026-10-17/. The issue
       explicitly credits Daniil Ostashev's T-149 packing as the search start; the
-      regularized JSON instead carries by: [Francisco Couzo]. That discrepancy remains
-      unresolved, with both source statements preserved. Claude assistance is disclosed;
+      regularized JSON instead carries by: [Francisco Couzo]. The author's comment on
+      issue 669 of 20 October 2026 resolves it: the field was a bug in his tooling, which
+      took it from the record holder at that count in his 5 October batch, fixed at
+      a435c97, and is to be read as no credit; both source statements stay preserved.
+      Claude assistance is disclosed;
       the KKT and local-minimum diagnostics are numerical source assertions. This entry
       records T-197 in packing/frontier/results.yaml at V0/C0, pending adoption.
       Separate returned mathematical review and completed source replay/controls await

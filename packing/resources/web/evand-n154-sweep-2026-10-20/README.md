@@ -61,7 +61,13 @@ chose the restarts; no file of that name is in the tree at the pin.
 The regularized view’s report, `s154_sw_regularized.json`, says
 `"by": ["Francisco Couzo"]`, as the n155, n236 and n271 views’ reports do; the issue
 credits Couzo’s #586 arrangement as a start, and the field is retained as the source
-wrote it. The question put to the author on #669 about that field is still open.
+wrote it. The author answered the question put to him on #669 about that field in
+[his comment of 20 October](https://github.com/jlevy/squares/issues/669#issuecomment-6302893217):
+it was a bug in his tooling, which took the field from the record holder at that count
+in his 5 October batch instead of from the packing drawn, fixed in
+`search/packer/candidate.py` at `a435c97`, after this pin. He names `s154_sw` among the
+affected views and asks that the field there be read as no credit at all, the issue’s
+credit line being what he asks for.
 
 ## Exact Replay
 

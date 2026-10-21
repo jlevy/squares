@@ -21392,14 +21392,20 @@ occurrences:
     path: packing/frontier/n-271.md
     record_key: '271'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
+  expected_text: Evan Daniel
   start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
+  end: 11
+  label: Evan Daniel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/frontier/n-271.md [271] /reported_upper_bound/found_by/0
+    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
 - origin:
     path: packing/frontier/n-271.md
     record_key: '271'
@@ -21417,42 +21423,6 @@ occurrences:
   note: Reviewed packing/frontier/n-271.md [271] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-271.md
-    record_key: '271'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Francisco Couzo
-  start: 0
-  end: 15
-  label: Francisco Couzo
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - primary-byline
-  - bibliography
-  contributor_id: francisco-couzo
-  note: Reviewed packing/frontier/n-271.md [271] /reported_upper_bound/improved_by/0
-    span 0:15. The specific franciscouzo certificate/refinement lineage matches retained
-    acquisition metadata naming Francisco Couzo. Keep packing finder and refinement
-    roles distinct.
-- origin:
-    path: packing/frontier/n-271.md
-    record_key: '271'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  note: Reviewed packing/frontier/n-271.md [271] /reported_upper_bound/improved_by/1
-    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
-    matches the repository whose retained licence names Evan Daniel. Keep finder,
-    improver and solver roles distinct.
-  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-272.md
     record_key: '272'
