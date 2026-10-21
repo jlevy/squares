@@ -3,9 +3,9 @@ type: is
 id: is-01m59ggdhn90twqzdjzncykhxz
 title: "Validate #680 n183: both source certificates, exact replay and sensitive controls"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: lane-680
 labels:
   - validation
@@ -15,8 +15,12 @@ parent_id: is-01m59few7wa6j6yrnw49hjap7r
 hold: null
 hold_until: null
 created_at: 2026-10-19T07:20:09.521Z
-updated_at: 2026-10-19T20:39:59.159Z
+updated_at: 2026-10-21T01:53:12.545Z
 started_at: 2026-10-19T07:45:06.037Z
+closed_at: 2026-10-21T01:53:12.545Z
+close_reason: "Done in #687 (T-220 V3/C3): primary replay retained and the independent review accepted; recorded on main."
+resolution: null
+duplicate_of: null
 ---
 Stage 4 replay for #680, separate from Stage 1–3 source registration.
 

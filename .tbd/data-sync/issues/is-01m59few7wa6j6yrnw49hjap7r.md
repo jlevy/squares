@@ -3,9 +3,9 @@ type: is
 id: is-01m59few7wa6j6yrnw49hjap7r
 title: "Import Evan Daniel: s(183) below side 14 (#680)"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 14
+version: 15
 delegate: lane-680
 labels:
   - result-import
@@ -19,10 +19,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T07:01:50.456Z
-updated_at: 2026-10-20T21:42:20.651Z
+updated_at: 2026-10-21T01:53:14.265Z
 started_at: 2026-10-19T07:02:24.366Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-21T01:53:14.265Z
+close_reason: "#680 closed: T-220 at V3/C3 registered and adopted (#687), final reply and follow-up recorded (#700); #701 (e7de85ff6) disposed the leftover evand watch-entry items, so no deferral names this bead."
 resolution: null
 duplicate_of: null
 ---

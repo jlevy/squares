@@ -3,9 +3,9 @@ type: is
 id: is-01m59ggem2mepwpnj7xa04vzgm
 title: "Review #680 n183 mathematics independently from retained source"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 5
+version: 6
 delegate: lane-680
 labels:
   - validation
@@ -15,8 +15,12 @@ parent_id: is-01m59few7wa6j6yrnw49hjap7r
 hold: null
 hold_until: null
 created_at: 2026-10-19T07:20:10.625Z
-updated_at: 2026-10-19T20:40:00.849Z
+updated_at: 2026-10-21T01:53:13.469Z
 started_at: 2026-10-19T07:22:37.005Z
+closed_at: 2026-10-21T01:53:13.469Z
+close_reason: "Done in #687 (T-220 V3/C3): primary replay retained and the independent review accepted; recorded on main."
+resolution: null
+duplicate_of: null
 ---
 Independent mathematical review for #680's finite upper-bound claim, started at retained-source intake and kept separate from the replay lane.
 
