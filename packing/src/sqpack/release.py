@@ -1953,6 +1953,39 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The registration of Evan Daniel's regularized views (T-225), the #668 and "
+            "#702 replies, the texts after #704 and #706 and T-196's and T-223's News, "
+            "against main bb0c24e9, after merging it. Rendered at link revision 818f10bd "
+            "into empty site directories, twice from this tree and twice with main's copies "
+            "of these five inputs: render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write their HTML "
+            "and Markdown byte-identical across all four renders; only the explainer, which "
+            "counts the register, differs, and it takes v0.4.14. No PDF was printed; each "
+            "prints from that HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
