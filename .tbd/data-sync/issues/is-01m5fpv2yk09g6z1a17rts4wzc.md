@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 14
+version: 15
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -25,7 +25,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T17:44:16.528Z
+updated_at: 2026-10-21T17:46:38.516Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
+
+## Notes
+
+Final Astra source review accepted shared tallies/resources, years-active partial-date support, reviewed issue/PR references scoped to credited entries, seven evidenced bio edits, build dependencies and import boundaries. Focused renderer checks and fresh complete preview build underway; full push gate, PR push/CI and final review handoff still required. Do not mark complete or claim current 8790 preview updated until rebuilt output is verified.
