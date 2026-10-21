@@ -30,6 +30,8 @@ documents:
   - {path: packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/upper-bounds-20261018/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-20261018/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261019/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261019/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/upper-bounds-20261020/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-20261020/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}

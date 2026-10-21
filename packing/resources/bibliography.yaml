@@ -84,7 +84,7 @@ sources:
       The public derivative has not had a fresh full geometric replay according to
       docs/PUBLICATION.md. Retained intake: web/n11-optimality-2026-09-29/.
   - key: '[Ahmed 11SquaresFormalized 2026]'
-    authors: [Ahmed, ctjlewis, Hosono, Gurevitch, Julian-JJ, Guzhou0806]
+    authors: [Ahmed, Lewis, Hosono, Gurevitch, Julian-JJ, Guzhou0806]
     year: 2026
     venue: GitHub
     short_venue: Web
@@ -96,7 +96,7 @@ sources:
       formalization of T-060's optimality proof. Manasseh Ahmed, who posts on X as
       @ManassehA06, announced on 6 October 2026 that it "has been formalized in lean thanks
       to Astra and Claude", thanking Joshua Levy (@ojoshe), Marc Leonard Overbeck (@kleddamag), Hiroaki Hosono (@wand_125), Guzhou0806
-      and ctjlewis "for aiding in the process"; the post, the author's own and 1/n of a
+      and Lewis (ctjlewis) "for aiding in the process"; the post, the author's own and 1/n of a
       thread, links this project's n = 11 page as its image credit and does not name the
       repository. Joshua Levy quoted it that day
       (https://x.com/ojoshe/status/2107513739222380935), calling it "a Lean formalization
@@ -104,7 +104,7 @@ sources:
       @guzhou0806 and others"; both posts are retained in the intake's
       receipts/announcement/. Authors as read from ACKNOWLEDGEMENTS.md: Manasseh Ahmed (published as Queuingtheorydotcom; the underlying
       computer-assisted proof, and the formalization's development and integration),
-      EvolvingPrograms and ctjlewis (verification infrastructure and the complete replay),
+      EvolvingPrograms and Lewis (listed as ctjlewis; verification infrastructure and the complete replay),
       Hosono (listed as @wand125; n11-optimality-lean, certificate checkers, generated proofs), Benjamin
       Gurevitch (T03), Julian-JJ (running the proof on an HPC cluster) and Guzhou0806
       (proof, transport and verification work); it credits jlevy/squares for the exact
@@ -492,7 +492,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-02'
-    credit: squarepacker after Daniel
+    credit: Ryu after Daniel
     lineage: independent
     note: >-
       squarepacker/s12-lower-bound at 8c53049025b94bb589ed25a90203f0a34c2945e4
@@ -512,7 +512,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-05'
-    credit: squarepacker after Roth, Vaughan
+    credit: Ryu after Roth, Vaughan
     lineage: independent
     note: >-
       squarepacker/k2-minus-c at 25f645e8fcadb3c2768f4da42d80e977fb1a508d
@@ -538,7 +538,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-06'
-    credit: squarepacker after Roth, Vaughan
+    credit: Ryu after Roth, Vaughan
     lineage: independent
     note: >-
       Sungjoon Ryu's version 1.2 of Packing k^2 - c unit squares, immutable tag
@@ -586,7 +586,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-05'
-    credit: squarepacker after Daniel, Levy
+    credit: Ryu after Daniel, Levy
     lineage: builds-on-project
     note: >-
       squarepacker/s12-lower-bound release v1.1 at 7a96bec36bc6811c3715ef581598f22ff9b7ba3a
@@ -2970,6 +2970,28 @@ sources:
       and a different local minimum. A same-side regularized view and the source''s comparison with #561
       are retained beside it. MIT-licensed; Claude assistance disclosed. KKT and local-minimum statements
       are the author''s numerical evidence; no local or global optimality claim.'
+  - key: '[Couzo issue 678 2026-10-18]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-18'
+    lineage: builds-on-project
+    credit: Couzo after de Winter, Polkovskyi, Daniel, Fang, PingYou Ltd, Levy
+    short_credit: Couzo after de Winter et al.
+    note: >-
+      Francisco Couzo's issue 678 reports 85 upper bounds for n = 204 to 998 by 83 exact
+      rational certificates first committed at 7b6c87e129cf80b5ff9847b90b47fd30b4563c54
+      on 18 October 2026, after the c6da0fc pin of issue 675; 545 and 641 delete one
+      square from the 546 and 642 certificates. The 83 certificates are retained as
+      factual data with the source's checker, Evan Daniel's MIT-licensed verifier as
+      modified by Couzo with Codex, in web/couzo-issue678-2026-10-18/; prose, the index
+      and the provenance manifest are hash-pinned. The manifest keeps seed and
+      construction credits, among them Joost de Winter, Mykhailo Polkovskyi, Evan Daniel,
+      Kevin Fang and PingYou Ltd. The source checks with this project's verification
+      code and Daniel's checker; that lineage is not independent. T-223 registers 204
+      and 260 at V0/C0, pending adoption, and the 83 beyond the corpus are beyond-horizon
+      rows; the packet's exact replay is Stage 4 evidence pending a mapped mathematical
+      review.
   - key: '[Daniel n308 2026-10-19]'
     authors:
     - Daniel

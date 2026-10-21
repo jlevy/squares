@@ -5479,8 +5479,8 @@ results:
       imported (bead think-8spq). Its author, Ahmed, who posts on X as
       @ManassehA06, announced that day that the optimality "has been formalized in lean
       thanks to Astra and Claude", thanking Joshua Levy, Overbeck, Hosono (@wand_125), Guzhou0806 and
-      ctjlewis; the retained first post of the thread does not name the repository. Its
-      acknowledgements credit Ahmed, EvolvingPrograms and ctjlewis, Hosono (as @wand125),
+      Lewis (ctjlewis); the retained first post of the thread does not name the repository. Its
+      acknowledgements credit Ahmed, EvolvingPrograms and Lewis (as ctjlewis), Hosono (as @wand125),
       Benjamin Gurevitch, Julian-JJ and Guzhou0806.
 
       Joshua Levy [quoted the announcement](https://x.com/ojoshe/status/2107513739222380935)
@@ -7618,13 +7618,13 @@ results:
       The certificate is Daniel's 1,736-point weighted certificate of T-049 with every
       coordinate and the container multiplied by 7902/7901 and the weights unchanged,
       total 11.9738036 < 12. The rescaling and its verification on the finer angle net
-      are squarepacker's; the certificate and the verifier that decides it are Daniel's.
+      are Ryu's; the certificate and the verifier that decides it are Daniel's.
       Every closed unit square in [0, 31360/7901]^2, at every angle, captures weight at
       least one, decided over the rational angle net 2 arctan(k/24000) with a per-bin
       shrink of 1/(cos d + sin d). The nets N = 6000 and 12000 refuse it, which a pass at
       one net does not need: each net's test is a complete sufficient condition.
 
-      It was replayed here on 2 October 2026 by Daniel's verifier and by squarepacker's
+      It was replayed here on 2 October 2026 by Daniel's verifier and by Ryu's
       own indep_check.cpp at N = 24000, least captured weight 10000056/10^7 at bin 0 in
       both, as the source records, and decided completely by this repository's native
       parent-core interval branch and bound over all 9,942 rows, which shares nothing
@@ -7658,7 +7658,7 @@ results:
     composition: >-
       Primary at n = 12: one certificate, no monotonicity. Two entries whose methods
       differ decide it: the producer's two arrangement sweeps, Daniel's verify and
-      squarepacker's indep_check.cpp (exact-algebraic, replayed here, one method in two
+      Ryu's indep_check.cpp (exact-algebraic, replayed here, one method in two
       implementations), and this repository's directed-rounding interval coverage of
       every row (interval-certified); that is C3, with the two methods shown beside the
       rung. All three rest on the certificate, the counting theorem and the shrink lemma
@@ -7671,7 +7671,7 @@ results:
         relation: project
         date: '2026-10-02'
         scope: >-
-          squarepacker's s(12) >= 31360/7901: the exact identity with Daniel's certificate
+          Ryu's s(12) >= 31360/7901: the exact identity with Daniel's certificate
           times 7902/7901, the reduction, the angle-net shrink lemma and admissible centre
           box, why refusals at N = 6000 and 12000 and a pass at 24000 are consistent, a
           line-by-line read of indep_check.cpp, the three checkers' trust boundaries, the
@@ -7734,7 +7734,7 @@ results:
     claim: >-
       s(12) >= 15680000/3949423 = 3.97020020..., by re-weighting Evan Daniel's 1,736 points.
       It raises the verified lower bound by 33774720/31204391123, about 0.0010824, over
-      squarepacker's s(12) >= 31360/7901 (T-078), and leaves a gap of 117692/3949423, about
+      Ryu's s(12) >= 31360/7901 (T-078), and leaves a gap of 117692/3949423, about
       0.0298, to the grid's 4.
 
       The certificate keeps the points of Daniel's s(12) certificate (T-049), every
@@ -7752,7 +7752,7 @@ results:
       s(12) > 15680000/3949423. Both checkers refuse two mutated certificates.
 
       This project's re-weighting, after Evan Daniel's certificate and verifier (T-049),
-      whose method is Burns's and Massaccesi's, and after squarepacker's rescaling of that
+      whose method is Burns's and Massaccesi's, and after Ryu's rescaling of that
       certificate (T-078), which showed a finer net leaves room for a larger container. The
       same work rescaled Daniel's certificate whole to s(12) >= 1568000/395039, which this
       bound implies.
@@ -7828,17 +7828,17 @@ results:
       oversight record. Rung 5 needs a proof-assistant formalization reviewed by human
       experts; Daniel's Lean pose-box-tree checker, which kernel-checks T-049's certificate,
       could in principle take this one. The same 1,736 points carried the bound further:
-      the LP total was 0.024 below 12 at this side, and squarepacker's re-weighting of them
+      the LP total was 0.024 below 12 at this side, and Ryu's re-weighting of them
       reached 7943/2000 (T-095). The exact value remains open; the conjecture is s(12) = 4.
     notes: >-
       Registered from lane RV's review (think-4srr) of lane BB's write-up. The review's
       finding F1, that lane BB's first-party check was a 1,034-row sample, is resolved by
       the complete native run this entry cites; F2 to F5 are notes on the write-up, the
       verifier's header comment and the native reader, none bearing on the bound.
-      Supersedes T-078 at n = 12. squarepacker's rescaling is credited in the claim and not
+      Supersedes T-078 at n = 12. Ryu's rescaling is credited in the claim and not
       in builds_on: the registered certificate rests on Daniel's points and verifier, and
       the Route A rescaling it implies is not separately registered.
-      Superseded as the verified lower bound on 2026-10-05 by squarepacker's v1.1 (T-095),
+      Superseded as the verified lower bound on 2026-10-05 by Ryu's v1.1 (T-095),
       which keeps these points and this recipe at a larger side; stays true as stated.
 
   - id: T-080
@@ -9696,7 +9696,7 @@ results:
       source's log; and independently re-implemented by this repository's parent-core
       interval branch and bound over all 39,765 rows, which shares no code with the sweep
       or with the search that made the weights and gives the strict s(12) > 7943/2000.
-      squarepacker's own indep_check.cpp, replayed here at N = 96000 and 192000 with the
+      Ryu's own indep_check.cpp, replayed here at N = 96000 and 192000 with the
       source's minimum, is the producer's evidence: the search stopped when its
       range-restricted copy found no violation. All three refuse the source's two altered
       certificates.
@@ -9734,7 +9734,7 @@ results:
       every row (interval-certified), which shares no code with it or with the search that
       made the weights; that is C3, with two methods shown beside the rung.
 
-      squarepacker's indep_check.cpp, replayed here too, is a second implementation of
+      Ryu's indep_check.cpp, replayed here too, is a second implementation of
       the sweep's method and the producer's own, and its range-restricted copy was the
       search's stopping rule, so it is producer evidence, reproduced with the producer's code, and confirms nothing beyond the other two (review F3). The exact audit of the file is a premise check and decides
       nothing. All rest on the certificate, the counting step and the shrink lemma on the
@@ -9753,7 +9753,7 @@ results:
         relation: project
         date: '2026-10-05'
         scope: >-
-          squarepacker's v1.1 certificate for s(12) >= 7943/2000, pinned at 7a96bec3: the argument from certificate to bound with every hypothesis of Daniel's verify, indep_check.cpp and the native parent-core route; the producer's logs and controls cross-read; container, dilation, advance, gap, heaviest orbit, row positions and slip thresholds re-derived by hand; the trust boundaries and the search's fitting to two checkers; the source's account of why it stops near 3.9715 and its clarification of #309; credit, licence, AI statement and dates; significance. Reading only: no computation ran in the review lane, whose tool permissions refused it (its F1).
+          Ryu's v1.1 certificate for s(12) >= 7943/2000, pinned at 7a96bec3: the argument from certificate to bound with every hypothesis of Daniel's verify, indep_check.cpp and the native parent-core route; the producer's logs and controls cross-read; container, dilation, advance, gap, heaviest orbit, row positions and slip thresholds re-derived by hand; the trust boundaries and the search's fitting to two checkers; the source's account of why it stops near 3.9715 and its clarification of #309; credit, licence, AI statement and dates; significance. Reading only: no computation ran in the review lane, whose tool permissions refused it (its F1).
         verdict: accepted
         covers: [T-095]
     artifacts:
@@ -28436,7 +28436,7 @@ results:
 
       This raises the verified and reported lower lanes from 851/100 to 853/100. The
       bound is confirmed by a re-implementation sharing components with the
-      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      producer's checker, sqverify-proof-net, which is Hosono's adaptation of this
       repository's sqverify_fast crate: the two share the crate apart from their
       declared-net readers. The exact audits check premises and saved poses, not
       coverage between poses; no independent full implementation, second method,
@@ -28470,7 +28470,7 @@ results:
       published: '2026-10-16'
     composition: >-
       One source certificate and one complete maintained native replay, C3. The replay
-      shares components with the producer's checker, wand125's adaptation of this
+      shares components with the producer's checker, Hosono's adaptation of this
       repository's sqverify_fast crate, apart from the declared-net readers. The
       separate exact premise and saved-point audits the case record cites supply no
       universal decision or higher rung.
@@ -28556,7 +28556,7 @@ results:
 
       This raises the verified and reported lower lanes from 9411/1000 to 3769/400.
       The bound is confirmed by a re-implementation sharing components with the
-      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      producer's checker, sqverify-proof-net, which is Hosono's adaptation of this
       repository's sqverify_fast crate: the two share the crate apart from their
       declared-net readers. The exact audits check premises and saved poses, not
       coverage between poses; no independent full implementation, second method,
@@ -28590,7 +28590,7 @@ results:
       published: '2026-10-16'
     composition: >-
       One source certificate and one complete maintained native replay, C3. The replay
-      shares components with the producer's checker, wand125's adaptation of this
+      shares components with the producer's checker, Hosono's adaptation of this
       repository's sqverify_fast crate, apart from the declared-net readers. The
       separate exact premise and saved-point audits the case record cites supply no
       universal decision or higher rung.
@@ -28675,7 +28675,7 @@ results:
 
       This raises the verified and reported lower lanes from 473/50 to 379/40. The
       bound is confirmed by a re-implementation sharing components with the
-      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      producer's checker, sqverify-proof-net, which is Hosono's adaptation of this
       repository's sqverify_fast crate: the two share the crate apart from their
       declared-net readers. The exact audits check premises and saved poses, not
       coverage between poses; no independent full implementation, second method,
@@ -28709,7 +28709,7 @@ results:
       published: '2026-10-16'
     composition: >-
       One source certificate and one complete maintained native replay, C3. The replay
-      shares components with the producer's checker, wand125's adaptation of this
+      shares components with the producer's checker, Hosono's adaptation of this
       repository's sqverify_fast crate, apart from the declared-net readers. The
       separate exact premise and saved-point audits the case record cites supply no
       universal decision or higher rung.
@@ -29419,7 +29419,7 @@ results:
       mass scaled by 197/200 refused at 32 sampled directions.
 
       The value is above the reported lower bound at n = 106, T-180's
-      10.403976649170..., wand125's closed form (jlevy/squares#600), by 0.0990, and
+      10.403976649170..., Hosono's closed form (jlevy/squares#600), by 0.0990, and
       above the verified one, 10.3107084351... (Karakuş's strip bound, T-083 and
       T-084), by 0.1923; the bundle's own README compares it with the latter.
 
@@ -29527,7 +29527,7 @@ results:
       mass scaled by 197/200 refused at 32 sampled directions.
 
       The value is above the reported lower bound at n = 107, T-180's
-      10.436790394042..., wand125's closed form (jlevy/squares#600), by 0.1432, and
+      10.436790394042..., Hosono's closed form (jlevy/squares#600), by 0.1432, and
       above the verified one, 10.3615414616... (Karakuş's strip bound, T-083 and
       T-084), by 0.2185; the bundle's own README compares it with the latter.
 
@@ -29783,7 +29783,7 @@ results:
       mass scaled by 197/200 refused at 32 sampled directions.
 
       The value is above the reported lower bound at n = 110, T-180's
-      10.600000000000..., wand125's closed form (jlevy/squares#600), by 0.1300, and
+      10.600000000000..., Hosono's closed form (jlevy/squares#600), by 0.1300, and
       above the verified one, 10.5124921972... (Karakuş's strip bound, T-083 and
       T-084), by 0.2175; the bundle's own README compares it with the latter.
 
@@ -30412,6 +30412,86 @@ results:
           names.
         verdict: accepted
         covers: [T-221, T-222]
+
+  - id: T-223
+    kind: upper-bound
+    registered: '2026-10-20'
+    landed: '2026-10-21'
+    headline: Couzo's smaller packings at 204 and 260, the two in the corpus of issue 678's 85 bounds
+    claim: >-
+      Two complete rational source certificates report finite upper-bound improvements at the exact
+      sides they state: s(204) <= 141654921219558922887849/9565692327860000000000;
+      s(260) <= 146417594016514621500994169/8796093022208000000000000.
+
+      Issue 678 reports 85 upper bounds for n = 204 to 998 by 83 exact rational certificates in
+      Francisco Couzo's square-packing repository (https://github.com/franciscouzo/square-packing),
+      committed on 18 October 2026, each printed side its certificate's header side rounded up at
+      12 places. This entry registers the two in the case corpus; the 83 beyond it are dated
+      beyond-horizon rows of the couzo-issue678-2026-10-18 source.
+
+      The source credits Mykhailo Polkovskyi's construction at 204, and Joost de Winter's (issue 668) at 260, seeded from Evan
+      Daniel's exact-form certificate of it, published on 17 October 2026 in his square-packing
+      repository (https://github.com/evand/square-packing). The source checks its certificates
+      with this project's verification code and Daniel's checker as modified by Couzo with Codex.
+      No arrangement identity, local minimum or optimum is established.
+    scope:
+      n_values:
+        - 204
+        - 260
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: Two smaller finite construction sides in the case corpus, 2.04e-05 below the case
+        ceiling at 204 and 2.56e-05 below the pending T-196 at 260, from a release that also moves
+        83 counts beyond it; no lower bound or optimum. Draft at intake; the stage 4 review confirms
+        or changes it.
+      scored: '2026-10-20'
+      by: c-lane-678 issue 678 registration draft (think-xu4d); the stage 4 review confirms or
+        changes it
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[Couzo issue 678 2026-10-18]'
+      published: '2026-10-18'
+    evidence:
+      - E-couzo-678-certificate-report
+    artifacts:
+      - packing/resources/web/couzo-issue678-2026-10-18/README.md
+      - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert
+      - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert
+      - packing/campaign/issue-intake/upper-bounds-20261019/README.md
+      - packing/devtools/couzo_678_replay.py
+    controls:
+      - packing/tests/test_couzo_678_replay.py
+    notes: |-
+      Registered as a reported finite upper bound at stage 3. Both case upper lanes and the
+      house best packings remain unchanged; each claim is pending adoption. The packet's filtered exact
+      replay decided both rows on two routes, the sqpack.verify predicates and the independent
+      rational corner checker's, over every pair whose centres are closer than sqrt 2 and every
+      wall, and refused all five controls of each; at both counts the all-pairs kernel decided
+      every pair and agreed exactly with its least gap and wall clearance. The 19 October
+      mathematical review on think-xu4d accepted that replay with three Low findings. Neither is
+      entered as confirming evidence, so the declared rungs follow only the reported evidence.
+
+      At 204 the certificate is below the case's ceiling (Daniil Ostashev, improved by PingYou
+      Ltd and Mishapolk, T-186) by 2.04e-05, and below Couzo's earlier #670 and #675 prints,
+      which are not yet in the register. At 260 it is below T-196 (#668), pending adoption, by
+      2.56e-05, and below the case's ceiling (T-155) by 1.11e-02; it reached this repository
+      after T-196 and does not rewrite it. The 19 October ledger records both in report order.
+
+      The two routes share certificate parsing, half-angle conversion, the pair filter and
+      Fraction arithmetic. No two independent methods, human oversight or optimality is claimed.
+    next_rung: C3 needs the packet's filtered exact replay and all-pairs sample entered as confirming
+      evidence, with the two routes in verifiers.yaml and a mapped mathematical review (stage 4,
+      think-xu4d); adoption at 204 and 260 follows, with both strong generators in the same pull
+      request.
+    unfinished_confirmations:
+      - what: Enter the packet's filtered exact replay at 204 and 260 and its all-pairs sample as
+          confirming evidence, with the two routes in verifiers.yaml and the mapped review document
+          of the 19 October mathematical review.
+        rung: C3
+        link: think-xu4d
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

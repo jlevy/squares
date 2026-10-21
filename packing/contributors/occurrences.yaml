@@ -152,10 +152,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed 11SquaresFormalized 2026]'
     field: /authors/1
-  expected_text: ctjlewis
+  expected_text: Lewis
   start: 0
-  end: 8
-  label: ctjlewis
+  end: 5
+  label: Lewis
   role: source-author
   disposition: unresolved
   evidence: []
@@ -1739,28 +1739,32 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker s12 2026]'
     field: /credit
-  expected_text: squarepacker after Daniel
+  expected_text: Ryu after Daniel
   start: 0
-  end: 12
-  label: squarepacker
+  end: 3
+  label: Ryu
   role: credited-contributor
   disposition: resolved
   evidence:
   - primary-byline
   contributor_id: ryu-sungjoon
+  note: Reviewed packing/resources/bibliography.yaml [[squarepacker s12 2026]] /credit
+    span 0:3.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker s12 2026]'
     field: /credit
-  expected_text: squarepacker after Daniel
-  start: 19
-  end: 25
+  expected_text: Ryu after Daniel
+  start: 10
+  end: 16
   label: Daniel
   role: prerequisite
   disposition: resolved
   evidence:
   - repository-license
   contributor_id: evan-daniel
+  note: Reviewed packing/resources/bibliography.yaml [[squarepacker s12 2026]] /credit
+    span 10:16.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker k2-minus-c 2026]'
@@ -1778,22 +1782,24 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker k2-minus-c 2026]'
     field: /credit
-  expected_text: squarepacker after Roth, Vaughan
+  expected_text: Ryu after Roth, Vaughan
   start: 0
-  end: 12
-  label: squarepacker
+  end: 3
+  label: Ryu
   role: credited-contributor
   disposition: resolved
   evidence:
   - primary-byline
   contributor_id: ryu-sungjoon
+  note: Reviewed packing/resources/bibliography.yaml [[squarepacker k2-minus-c 2026]]
+    /credit span 0:3.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker k2-minus-c 2026]'
     field: /credit
-  expected_text: squarepacker after Roth, Vaughan
-  start: 19
-  end: 23
+  expected_text: Ryu after Roth, Vaughan
+  start: 10
+  end: 14
   label: Roth
   role: prerequisite
   disposition: unresolved
@@ -1803,9 +1809,9 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker k2-minus-c 2026]'
     field: /credit
-  expected_text: squarepacker after Roth, Vaughan
-  start: 25
-  end: 32
+  expected_text: Ryu after Roth, Vaughan
+  start: 16
+  end: 23
   label: Vaughan
   role: prerequisite
   disposition: unresolved
@@ -1828,22 +1834,24 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker k2-minus-c v1.2 2026]'
     field: /credit
-  expected_text: squarepacker after Roth, Vaughan
+  expected_text: Ryu after Roth, Vaughan
   start: 0
-  end: 12
-  label: squarepacker
+  end: 3
+  label: Ryu
   role: credited-contributor
   disposition: resolved
   evidence:
   - primary-byline
   contributor_id: ryu-sungjoon
+  note: Reviewed packing/resources/bibliography.yaml [[squarepacker k2-minus-c v1.2
+    2026]] /credit span 0:3.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker k2-minus-c v1.2 2026]'
     field: /credit
-  expected_text: squarepacker after Roth, Vaughan
-  start: 19
-  end: 23
+  expected_text: Ryu after Roth, Vaughan
+  start: 10
+  end: 14
   label: Roth
   role: prerequisite
   disposition: unresolved
@@ -1853,9 +1861,9 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker k2-minus-c v1.2 2026]'
     field: /credit
-  expected_text: squarepacker after Roth, Vaughan
-  start: 25
-  end: 32
+  expected_text: Ryu after Roth, Vaughan
+  start: 16
+  end: 23
   label: Vaughan
   role: prerequisite
   disposition: unresolved
@@ -1878,41 +1886,47 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker s12 2026-10-05]'
     field: /credit
-  expected_text: squarepacker after Daniel, Levy
+  expected_text: Ryu after Daniel, Levy
   start: 0
-  end: 12
-  label: squarepacker
+  end: 3
+  label: Ryu
   role: credited-contributor
   disposition: resolved
   evidence:
   - primary-byline
   contributor_id: ryu-sungjoon
+  note: Reviewed packing/resources/bibliography.yaml [[squarepacker s12 2026-10-05]]
+    /credit span 0:3.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker s12 2026-10-05]'
     field: /credit
-  expected_text: squarepacker after Daniel, Levy
-  start: 19
-  end: 25
+  expected_text: Ryu after Daniel, Levy
+  start: 10
+  end: 16
   label: Daniel
   role: prerequisite
   disposition: resolved
   evidence:
   - repository-license
   contributor_id: evan-daniel
+  note: Reviewed packing/resources/bibliography.yaml [[squarepacker s12 2026-10-05]]
+    /credit span 10:16.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker s12 2026-10-05]'
     field: /credit
-  expected_text: squarepacker after Daniel, Levy
-  start: 27
-  end: 31
+  expected_text: Ryu after Daniel, Levy
+  start: 18
+  end: 22
   label: Levy
   role: prerequisite
   disposition: resolved
   evidence:
   - primary-byline
   contributor_id: joshua-levy
+  note: Reviewed packing/resources/bibliography.yaml [[squarepacker s12 2026-10-05]]
+    /credit span 18:22.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kleddamag n11 2026]'
@@ -13875,6 +13889,126 @@ occurrences:
     project credit does not imply sole personal authorship.
   contributor_id: joshua-levy
 - origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 678 2026-10-18]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: Reviewed packing/resources/bibliography.yaml [[Couzo issue 678 2026-10-18]]
+    /authors/0 span 0:5. The specific franciscouzo certificate/refinement lineage
+    matches retained acquisition metadata naming Francisco Couzo. Keep packing finder
+    and refinement roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 678 2026-10-18]'
+    field: /credit
+  expected_text: Couzo after de Winter, Polkovskyi, Daniel, Fang, PingYou Ltd, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: Reviewed packing/resources/bibliography.yaml [[Couzo issue 678 2026-10-18]]
+    /credit span 0:5. The specific franciscouzo certificate/refinement lineage matches
+    retained acquisition metadata naming Francisco Couzo. Keep packing finder and
+    refinement roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 678 2026-10-18]'
+    field: /credit
+  expected_text: Couzo after de Winter, Polkovskyi, Daniel, Fang, PingYou Ltd, Levy
+  start: 12
+  end: 21
+  label: de Winter
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 678 2026-10-18]'
+    field: /credit
+  expected_text: Couzo after de Winter, Polkovskyi, Daniel, Fang, PingYou Ltd, Levy
+  start: 23
+  end: 33
+  label: Polkovskyi
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 678 2026-10-18]'
+    field: /credit
+  expected_text: Couzo after de Winter, Polkovskyi, Daniel, Fang, PingYou Ltd, Levy
+  start: 35
+  end: 41
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/resources/bibliography.yaml [[Couzo issue 678 2026-10-18]]
+    /credit span 35:41. The specific evand/square-packing certificate, fq solver or
+    regularizer matches the repository whose retained licence names Evan Daniel. Keep
+    finder, improver and solver roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 678 2026-10-18]'
+    field: /credit
+  expected_text: Couzo after de Winter, Polkovskyi, Daniel, Fang, PingYou Ltd, Levy
+  start: 43
+  end: 47
+  label: Fang
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 678 2026-10-18]'
+    field: /credit
+  expected_text: Couzo after de Winter, Polkovskyi, Daniel, Fang, PingYou Ltd, Levy
+  start: 49
+  end: 60
+  label: PingYou Ltd
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 678 2026-10-18]'
+    field: /credit
+  expected_text: Couzo after de Winter, Polkovskyi, Daniel, Fang, PingYou Ltd, Levy
+  start: 62
+  end: 66
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed packing/resources/bibliography.yaml [[Couzo issue 678 2026-10-18]]
+    /credit span 62:66. The specific first-party jlevy/squares method or source is
+    the Joshua Levy identity established by LICENSE and the retained ojoshe receipt;
+    project credit does not imply sole personal authorship.
+- origin:
     path: packing/frontier/results.yaml
     record_key: T-001
     field: /builds_on/credit/0
@@ -14470,15 +14604,17 @@ occurrences:
     path: packing/frontier/n-012.md
     record_key: '12'
     field: /reported_lower_bound/proved_by/0
-  expected_text: squarepacker (Ryu Sungjoon)
+  expected_text: Ryu Sungjoon
   start: 0
-  end: 27
-  label: squarepacker (Ryu Sungjoon)
+  end: 12
+  label: Ryu Sungjoon
   role: lower-bound-prover
   disposition: resolved
   evidence:
   - primary-byline
   contributor_id: ryu-sungjoon
+  note: Reviewed packing/frontier/n-012.md [12] /reported_lower_bound/proved_by/0
+    span 0:12.
 - origin:
     path: packing/frontier/n-013.md
     record_key: '13'

@@ -11448,13 +11448,13 @@ evidence:
       four-core Linux host. Daniel's verify, built by cargo 1.97.0 from the retained
       sources (main.rs blob 0e8035a3, the same at 7d6f46d9, which the source names), at
       N = 24000 on two threads: VERIFIED, least 10000056/10^7 at bin 0, 982 CPU-s, every printed line equal to the source's log (a first run was killed by a container restart and rerun whole).
-      squarepacker's indep_check.cpp, built by g++ 13.3.0 -O2, at N = 24000: VERIFIED,
+      Ryu's indep_check.cpp, built by g++ 13.3.0 -O2, at N = 24000: VERIFIED,
       least 10000056/10^7 at bin 0, 67.7 CPU-s, every printed line equal to the source's
       log; at N = 6000 and 12000 it refuses with the source's values, and verify refuses
       at the same values over bin windows. The overflow-checked build of verify and the
       N = 48000 and 96000 runs were not repeated. Both are arrangement sweeps of one
       angle-net method and both are the producer's code (Daniel's verifier, which the
-      source used, and squarepacker's own checker), so this entry supports V3/C3 by
+      source used, and Ryu's own checker), so this entry supports V3/C3 by
       itself; the method-distinct decision is
       E-n012-squarepacker-31360-7901-native-parent-core. Two mutated certificates (side
       31360/7900; every weight lowered by 57/10^7) are refused by both
@@ -11498,7 +11498,7 @@ evidence:
       audit_record: docs/project/reviews/review-2026-09-22-native-n11-parent-core.md
     limitations: >-
       The complete native run of 2026-10-02 accepted all 9,942 rows at the one-unit threshold with 89,403,350 boxes, zero stalls, no exhausted budget and no refutation: 1,810 rows on clean commit 119d1bab, the rest resumed from that journal on clean commit 44cf3444 with the tool unchanged after a container restart (2,856 CPU-s for the resumed part). The coverage decision is this repository's interval branch and bound
-      over centre boxes, which shares no code with Daniel's verify or squarepacker's
+      over centre boxes, which shares no code with Daniel's verify or Ryu's
       indep_check.cpp; with E-n012-squarepacker-31360-7901-source-replay it gives two
       complete methods, shown beside C3. All three rest on the certificate, the counting
       theorem and the shrink lemma on the same net: the native rows are Daniel's bins and
@@ -11522,7 +11522,7 @@ evidence:
     novelty_basis:
       corpus: >-
         T-049 (Evan Daniel's s(12) >= 15680/3951 and its retained evand packet), T-078
-        (squarepacker's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
+        (Ryu's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
         archived literature behind the n = 12 case record.
       searched: '2026-10-02, for the 2 October review of this certificate'
       novel_object: >-
@@ -11572,7 +11572,7 @@ evidence:
     novelty_basis:
       corpus: >-
         T-049 (Evan Daniel's s(12) >= 15680/3951 and its retained evand packet), T-078
-        (squarepacker's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
+        (Ryu's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
         archived literature behind the n = 12 case record.
       searched: '2026-10-02, for the 2 October review of this certificate'
       novel_object: >-
@@ -11630,7 +11630,7 @@ evidence:
     novelty_basis:
       corpus: >-
         T-049 (Evan Daniel's s(12) >= 15680/3951 and its retained evand packet), T-078
-        (squarepacker's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
+        (Ryu's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
         archived literature behind the n = 12 case record.
       searched: '2026-10-02, for the 2 October review of this certificate'
       novel_object: >-
@@ -11693,7 +11693,7 @@ evidence:
     novelty_basis:
       corpus: >-
         T-049 (Evan Daniel's s(12) >= 15680/3951 and its retained evand packet), T-078
-        (squarepacker's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
+        (Ryu's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
         archived literature behind the n = 12 case record.
       searched: '2026-10-02, for the 2 October review of this certificate'
       novel_object: >-
@@ -11815,7 +11815,7 @@ evidence:
       retained sources with overflow checks (binary 60279b2c, the digest of a second build
       and of the T-079 review's), at N = 96000 on two threads at nice 10, no VERIFY_BINS:
       VERIFIED over all 39,765 bins, least 10000050/10^7 at bin 0, every printed line equal
-      to the source's log, 4,671 s wall and 3,439 CPU-s. squarepacker's indep_check.cpp
+      to the source's log, 4,671 s wall and 3,439 CPU-s. Ryu's indep_check.cpp
       (21527e8d, unchanged since v1.0), built by g++ 13.3.0 -O2 (binary e7748f8b, as for
       T-078), at N = 96000 and 192000 over [0, 90] degrees with no symmetry assumed: VERIFIED
       at both, least 10000050/10^7 at bin 0, every printed line equal to the source's logs,
@@ -11873,7 +11873,7 @@ evidence:
       PASS_COMPLETE, all 39,765 rows certified at the one-unit threshold, 340,090,115
       boxes, no stall, no exhausted budget, no refutation, 16,344 s wall and 12,980 CPU-s.
       The coverage decision is this repository's interval branch and bound over centre
-      boxes, which shares no code with Daniel's verify, with squarepacker's indep_check.cpp
+      boxes, which shares no code with Daniel's verify, with Ryu's indep_check.cpp
       or with the search that made the weights, which matters here because the search
       stopped on indep_check's verdict and took its rows from verify's cells; with
       E-n012-squarepacker-7943-2000-source-replay it gives two complete methods, shown
@@ -32847,7 +32847,7 @@ evidence:
       n40-new-supports-6718-20261011 names (n40-6718.zip, 196,420 bytes, SHA-256 e6e49590...),
       reported in the comment of 2026-10-11T07:39:30Z on jlevy/squares#485, claims s(40) >
       3359/500 = 6.718, unrestricted rotations, strict. It rests on a new rational density
-      (SHA-256 984fcd3a...): 685 positive D4 rectangle orbits, 522 rows of wand125's rect_n40_L67
+      (SHA-256 984fcd3a...): 685 positive D4 rectangle orbits, 522 rows of Hosono's rect_n40_L67
       pool (71011d03..., pinned by digest and not copied) and 163 generated outside it, mass
       3999/100, and on the statement that every closed square of side 3350/3359 inside
       [0, 67/10]^2 captures mass at least 4999/5000, so that 40 squares capture more than the mass
@@ -32867,7 +32867,7 @@ evidence:
       9005397816695287/2^53 and the axis minimum 1001486431423867090847280653/10^27 over
       10,843,849 vertices, and the release's separate dual EXACT_DUAL_CODE_DISTINCT_CHECKED for
       OBSTRUCTION.md, which bears on no bound. Its label REPLAYED_SAME_KERNEL means its two runs
-      are the same kernel on two compilers. wand125's comment of 2026-10-11T17:14:50Z (edited
+      are the same kernel on two compilers. Hosono's comment of 2026-10-11T17:14:50Z (edited
       2026-10-12T02:19Z) reports a third run of the entry point (1,552 s at six workers) and his
       own continuous-angle verifier, now published at wand125/square-packing f30cc2cf (think-xzob),
       with no receipts. No packing, optimality or priority claim. This is the public-claim entry;
@@ -32894,7 +32894,7 @@ evidence:
         first-party decides the continuous cover, so the confirmation is reproduced with the
         producer's code (GN-4); the kernel contract held at the new parameters (GN-5);
         OBSTRUCTION.md is a statement about a family, replayed and registered nowhere (GN-6);
-        wand125's sqverify_continuous is published and unretained, and a replay of it would move
+        Hosono's sqverify_continuous is published and unretained, and a replay of it would move
         the confirmation's mark and not the rung (GN-7); the release's tests were not run here
         (GN-8). The complete 43-slab run is E-n040-guzhou-new-supports-kernel-replay.
     source_reviewed: '2026-10-12'
@@ -39875,7 +39875,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n68_L853:
+        and L, lemma D for format M's per-bin domain), applied to Hosono's mixed_n68_L853:
         no 68 unit squares pack in a square of side 853/100, so s(68) >= 853/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -40084,7 +40084,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hosono's
         mixed_n84_L94225: no 84 unit squares pack in a square of side 3769/400, so s(84) >=
         3769/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -40291,7 +40291,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n85_L9475:
+        and L, lemma D for format M's per-bin domain), applied to Hosono's mixed_n85_L9475:
         no 85 unit squares pack in a square of side 379/40, so s(85) >= 379/40.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -40575,3 +40575,122 @@ evidence:
       text because the inherited #671 version differs. The case lanes and house moved to this
       certificate in the adoption of 2026-10-19, which ran both strong generators on its
       witness.'
+  - id: E-couzo-678-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+        - 204
+        - 260
+        - 330
+        - 343
+        - 418
+        - 420
+        - 421
+        - 422
+        - 455
+        - 456
+        - 458
+        - 459
+        - 461
+        - 462
+        - 463
+        - 464
+        - 497
+        - 499
+        - 501
+        - 502
+        - 505
+        - 507
+        - 545
+        - 546
+        - 548
+        - 549
+        - 553
+        - 554
+        - 555
+        - 592
+        - 593
+        - 597
+        - 598
+        - 600
+        - 601
+        - 602
+        - 641
+        - 642
+        - 650
+        - 652
+        - 653
+        - 654
+        - 693
+        - 700
+        - 701
+        - 703
+        - 704
+        - 705
+        - 706
+        - 749
+        - 751
+        - 752
+        - 753
+        - 754
+        - 755
+        - 760
+        - 804
+        - 805
+        - 806
+        - 808
+        - 815
+        - 863
+        - 865
+        - 867
+        - 868
+        - 870
+        - 872
+        - 873
+        - 874
+        - 919
+        - 924
+        - 926
+        - 927
+        - 928
+        - 930
+        - 933
+        - 934
+        - 984
+        - 987
+        - 989
+        - 990
+        - 991
+        - 992
+        - 994
+        - 998
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 678 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-19'
+    limitations: >-
+      This atom records the source author's report, issue 678, of 85 upper bounds for n =
+      204 to 998 by 83 exact rational certificates at 7b6c87e; 545 and 641 are the 546 and
+      642 certificates less one square. Each printed side is its certificate's header side
+      rounded up at 12 places. The packet's filtered exact replay
+      (receipts/filtered-exact-replay.json, devtools.couzo_678_replay) decided all 85 rows
+      on two routes, the sqpack.verify predicates and the independent rational corner
+      checker's, over the 140,866 of 21,393,271 pairs whose centres are closer than sqrt 2,
+      an exactly justified filter, and every wall; all 415 controls were refused by both,
+      in 90.8 positive CPU seconds. The source's checker, run unchanged from its retained
+      copy, accepts all 85 and refuses all 332 controls it can state. That replay and the
+      19 October mathematical review on think-xu4d are not entered as confirming evidence
+      here: the mapped review and the replay's evidence entries are stage 4 work on
+      think-xu4d, and the full-kernel all-pairs replay is held on think-fpnd. The two
+      routes share certificate parsing, half-angle conversion, the pair filter and
+      Fraction arithmetic. The certificates at 204 and 260 are T-223's; the 83 beyond the
+      case corpus are dated rows of the couzo-issue678-2026-10-18 source. No arrangement
+      identity, local minimum, optimum or credit statement of the source's manifest is
+      established.

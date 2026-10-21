@@ -1260,7 +1260,7 @@ def test_the_star_marks_recent_results_whoever_proved_them() -> None:
     assert lines[12]["recent"]
     # squarepacker's re-weighting of Daniel's points since 5 October 2026 (T-095), after
     # this project's (T-079), which named the project; the credit names Levy for Route B.
-    assert lines[12]["text"] == "squarepacker after Daniel, Levy 2026, GitHub"
+    assert lines[12]["text"] == "Ryu after Daniel, Levy 2026, GitHub"
     assert lines[18]["recent"]
     assert lines[18]["text"] == "Hosono after Tokoharu, Levy et al. 2026, GitHub"
     assert all(line["recent"] for line in lines.values() if line and line["basis"] == "project")

@@ -2659,7 +2659,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Decides everything squarepacker's v1.1 s(12) certificate rests on but coverage, in
+      Decides everything Ryu's v1.1 s(12) certificate rests on but coverage, in
       integers and Fraction: its bytes, the header and side, a one-to-one match of its
       points to Daniel's dilated within the stated rounding, positivity, containment, D4
       invariance and orbits, the total below 12, the corner points, and the source's two

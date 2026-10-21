@@ -415,7 +415,7 @@ REPLAY_RULES: tuple[Rule, ...] = (
         runs(("V-wand125-verify-portable-py", "V-audit-wand125-point-and-mixed"), PRODUCER),
     ),
     (
-        "Daniel's s12 verify and squarepacker's indep_check.cpp",
+        "Daniel's s12 verify and Ryu's indep_check.cpp",
         _in_replay(r"indep_check"),
         runs(("V-evand-angle-net-verify", "V-squarepacker-indep-check-cpp"), PRODUCER),
     ),
