@@ -94,6 +94,7 @@ from strif import atomic_output_file
 
 from devtools import acquire_source, retained_data
 from devtools import check_source_coverage as coverage_check
+from devtools import couzo_678_replay as couzo_678
 from devtools import couzo_followup_reports as couzo_followup
 from devtools import couzo_refinement_reports as couzo_451
 from devtools import decimal_pose_margins as decimal_poses
@@ -1381,6 +1382,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Daniel n183 subgrid 2026-10-19]": _import("evand-n183-subgrid-2026-10-19"),
     "[Daniel n308 2026-10-19]": _import("evand-n308-2026-10-19"),
     "[Daniel n154 sweep 2026-10-20]": _import("evand-n154-sweep-2026-10-20"),
+    # T-223: issue 678's packet has no import declaration; its replay module reads its two
+    # counts of the case corpus, each certificate held to the digest its manifest pins.
+    "[Couzo issue 678 2026-10-18]": lambda n: couzo_678.house_certificate(n).side,
     "[de Winter upper bounds 2026-10-17]": _import(
         "de-winter-upper-bounds-227-229-260-2026-10-17"
     ),

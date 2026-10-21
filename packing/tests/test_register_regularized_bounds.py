@@ -132,7 +132,8 @@ def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
     certificate (T-195) on 17 October 2026, the first adoption under the house rule. At
     n = 229 Evan Daniel's dilation certificate (T-199) was adopted on 19 October 2026, and
     at n = 227 and 260 Joost de Winter's certificates (T-196) on 20 October 2026, each the
-    first adoption at its count, from the catalogue's packing T-155's view had certified."""
+    first adoption at its count, from the catalogue's packing T-155's view had certified; at
+    260 Francisco Couzo's issue-678 certificate (T-223) replaced T-196 on 21 October 2026."""
     assert [n for n in registered.committed() if registered.readopted(n)] == [
         29,
         204,

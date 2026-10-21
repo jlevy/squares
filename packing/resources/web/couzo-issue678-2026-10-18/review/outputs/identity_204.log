@@ -1,0 +1,5 @@
+2026-10-21T20:01Z
+side diff -2.039e-05; best symmetry id: 87/204 within 1e-4 (centre, same axes)
+buckets <1e-8: 35  1e-8..1e-4: 59  1e-4..1e-2: 66  >1e-2: 44  max: 8.087e-01
+beyond 0.1: 14
+axis-aligned: #678 128 T-186 144

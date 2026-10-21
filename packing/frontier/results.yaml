@@ -30480,36 +30480,57 @@ results:
     landed: '2026-10-21'
     headline: Couzo's smaller packings at 204 and 260, the two in the corpus of issue 678's 85 bounds
     claim: >-
-      Two complete rational source certificates report finite upper-bound improvements at the exact
+      Two complete rational source certificates prove finite upper bounds at the exact
       sides they state: s(204) <= 141654921219558922887849/9565692327860000000000;
       s(260) <= 146417594016514621500994169/8796093022208000000000000.
 
-      Issue 678 reports 85 upper bounds for n = 204 to 998 by 83 exact rational certificates in
-      Francisco Couzo's square-packing repository (https://github.com/franciscouzo/square-packing),
-      committed on 18 October 2026, each printed side its certificate's header side rounded up at
-      12 places. This entry registers the two in the case corpus; the 83 beyond it are dated
-      beyond-horizon rows of the couzo-issue678-2026-10-18 source.
+      Issue 678 reports 85 upper bounds for n = 204 to 998 by 83 exact rational certificates
+      in Francisco Couzo's square-packing repository
+      (https://github.com/franciscouzo/square-packing), committed on 18 October 2026, each
+      printed side its certificate's header side rounded up at 12 places. This entry
+      registers the two in the case corpus; the 83 beyond it are dated beyond-horizon rows of
+      the couzo-issue678-2026-10-18 source.
 
-      The source credits Mykhailo Polkovskyi's construction at 204, and Joost de Winter's (issue 668) at 260, seeded from Evan
-      Daniel's exact-form certificate of it, published on 17 October 2026 in his square-packing
-      repository (https://github.com/evand/square-packing). The source checks its certificates
-      with this project's verification code and Daniel's checker as modified by Couzo with Codex.
-      No arrangement identity, local minimum or optimum is established.
+      Both were confirmed here, re-implemented sharing named components: the packet's
+      filtered exact replay decided each on two routes that share the certificate parser,
+      the half-angle map, the sqrt-2 pair filter and Fraction arithmetic, one of them
+      sqpack.verify's predicates, the corner verifier the source reports running. The
+      maintained all-pairs kernel decided every pair at both counts, the source's own checker
+      accepted both, and the 20 October review's checker, sharing only Fraction, agreed at
+      every number. The review found no blocking defect.
+
+      The source credits Mykhailo Polkovskyi's construction at 204, and Joost de Winter's
+      (issue 668) at 260, seeded from Evan Daniel's exact-form certificate of it, published
+      on 17 October 2026 in his square-packing repository (https://github.com/evand/square-packing).
+      The source checks its certificates with this project's verification code and Daniel's
+      checker as modified by Couzo with Codex. No arrangement identity, local minimum or
+      optimum is established.
     scope:
       n_values:
         - 204
         - 260
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
-      rationale: Two smaller finite construction sides in the case corpus, 2.04e-05 below the case
-        ceiling at 204 and 2.56e-05 below the pending T-196 at 260, from a release that also moves
-        83 counts beyond it; no lower bound or optimum. Draft at intake; the stage 4 review confirms
-        or changes it.
-      scored: '2026-10-20'
-      by: c-lane-678 issue 678 registration draft (think-xu4d); the stage 4 review confirms or
-        changes it
+      rationale: >-
+        A new arrangement at each count. At 204 it is 2.04e-05 below the case ceiling and
+        T-193's algebraic side, with 14 of 204 squares beyond a tenth of T-186's packing (87
+        within 1e-04): the scale of T-224 at 270 (3.47e-05, 15 squares, S3), well above
+        T-188's 9.29e-06 at 211 (five squares, S2). At 260 it is 2.56e-05 below T-196, from
+        a search seeded with T-196's exact form, but 24 squares lie beyond a tenth of it, so
+        not a same-arrangement step like T-199's 1.32e-05 at 229 (S2); T-196's own S3, for
+        moving 260 below 11 + 4 sqrt 2, is not inherited. Either count alone carries S3, as
+        T-220, T-221 and T-222 do at single counts; no lower bound or optimum.
+      scored: '2026-10-21'
+      by: >-
+        review A of #706, the pull request's reviewer c-review-706-A
+        (https://github.com/jlevy/squares/pull/706#issuecomment-6325257697), confirming the
+        draft S3 of the c-lane-678 registration (think-xu4d); not the lane that reviewed
+        the mathematics, whose 20 October review
+        (docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) states no score.
+        Its measurements are identity_204.py and identity_260_tenth.py in the packet's
+        review/programs/
     novelty: previously-published
     attribution:
       source_keys:
@@ -30517,43 +30538,60 @@ results:
       published: '2026-10-18'
     evidence:
       - E-couzo-678-certificate-report
+      - E-couzo-678-filtered-exact-feasibility
+      - E-couzo-678-source-checker-replay
+      - E-couzo-678-review-exact-feasibility
     artifacts:
       - packing/resources/web/couzo-issue678-2026-10-18/README.md
       - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert
       - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert
       - packing/campaign/issue-intake/upper-bounds-20261019/README.md
       - packing/devtools/couzo_678_replay.py
+      - docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
     controls:
       - packing/tests/test_couzo_678_replay.py
     notes: |-
-      Registered as a reported finite upper bound at stage 3. Both case upper lanes and the
-      house best packings remain unchanged; each claim is pending adoption. The packet's filtered exact
-      replay decided both rows on two routes, the sqpack.verify predicates and the independent
-      rational corner checker's, over every pair whose centres are closer than sqrt 2 and every
-      wall, and refused all five controls of each; at both counts the all-pairs kernel decided
-      every pair and agreed exactly with its least gap and wall clearance. The 19 October
-      mathematical review on think-xu4d accepted that replay with three Low findings. Neither is
-      entered as confirming evidence, so the declared rungs follow only the reported evidence.
+      The packet's filtered exact replay decided both rows on two routes, the sqpack.verify
+      predicates and the independent rational corner checker's, over every pair whose centres
+      are closer than sqrt 2 and every wall, and refused all six controls of each, the
+      near-contact pair 10^-30 past exact contact among them (RF-2 of the 20 October review).
+      At 204 the least pair gap is 5.56e-11 and at 260 1.24e-12, and each certificate touches a
+      wall. The maintained all-pairs kernel's three jobs at each count, 20,706 and 33,670 pairs,
+      agree exactly with those margins (receipts/house-jobs.json.xz).
 
       At 204 the certificate is below the case's ceiling (Daniil Ostashev, improved by PingYou
-      Ltd and Mishapolk, T-186) by 2.04e-05, and below Couzo's earlier #670 and #675 prints,
-      which are not yet in the register. At 260 it is below T-196 (#668), the house best packing
-      there since 20 October 2026, by 2.56e-05, and below the earlier ceiling (T-155) by
-      1.11e-02; it reached this repository after T-196 and does not rewrite it. The 19 October
-      ledger records both in report order.
+      Ltd and Mishapolk, T-186) by 2.04e-05, below T-193's algebraic side by the same to 60
+      digits, and below Couzo's earlier #670 and #675 prints, which are not yet in the register.
+      At 260 it is below T-196 (#668), the house best packing there from 20 October 2026 until
+      this result's adoption on 21 October 2026, by 2.56e-05, and below the earlier ceiling
+      (T-155) and the Kingbird catalogue's 11 + 4 sqrt 2 by 1.11e-02; it reached this repository
+      after T-196 and does not rewrite it. The 19 October ledger records both in report order.
 
-      The two routes share certificate parsing, half-angle conversion, the pair filter and
-      Fraction arithmetic. No two independent methods, human oversight or optimality is claimed.
-    next_rung: C3 needs the packet's filtered exact replay and all-pairs sample entered as confirming
-      evidence, with the two routes in verifiers.yaml and a mapped mathematical review (stage 4,
-      think-xu4d); adoption at 204 and 260 follows, with both strong generators in the same pull
-      request.
-    unfinished_confirmations:
-      - what: Enter the packet's filtered exact replay at 204 and 260 and its all-pairs sample as
-          confirming evidence, with the two routes in verifiers.yaml and the mapped review document
-          of the 19 October mathematical review.
-        rung: C3
-        link: think-xu4d
+      V3 and C3 rest on the 20 October review and the replays it reproduced
+      (E-couzo-678-filtered-exact-feasibility). The case at 204 adopted its certificate as the
+      house best packing on 20 October 2026, and the case at 260 on 21 October 2026, from
+      T-196, which #704 had adopted there on 20 October; both strong generators ran on each
+      count's witness. No two independent methods, human oversight or optimality is claimed.
+    next_rung: None for the bound. V4 and C4 need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record; one AI review, of 20 October, is
+      retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong tier, maximum reasoning), the stage 4 review lane of the 19
+          October intake (c-review-678-fable), prompted separately from the import lane that
+          built the packet and its replay
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-20'
+        scope: >-
+          Finite feasibility of issue 678's 85 rows: the packet's receipts replayed, a checker
+          written for the review on all 85 rows with every pair at seven counts and exact
+          clipping area at every near pair, each route's trust boundary, the controls, and the
+          n260 seed's identity against T-196 measured.
+        verdict: accepted
+        covers: [T-223]
 
   - id: T-224
     kind: upper-bound
@@ -31372,19 +31410,18 @@ regularized_drawings:
         max_turn_deg: 1.61089
       view: packing/atlas/known-best/regularized/n-199-regularized.yaml.gz
     - n: 204
-      of: T-186
+      of: T-223
       by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
-      changes: {re_angled: 12}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 42
-        max_move: 0.1742247
-        max_turn_deg: 0.449052
+        moved: 36
+        max_move: 0.4415537
+        max_turn_deg: 0.0880405
       view: packing/atlas/known-best/regularized/n-204-regularized.yaml.gz
     - n: 206
       of: T-174
@@ -31650,18 +31687,16 @@ regularized_drawings:
         max_turn_deg: 0.403258
       view: packing/atlas/known-best/regularized/n-259-regularized.yaml.gz
     - n: 260
-      of: T-196
+      of: T-223
       by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      method: regularize_axis_components/2
       side: same
-      changes: {re_angled: 2}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 20
-        max_move: 0.4565619
+        moved: 28
+        max_move: 0.2981851
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-260-regularized.yaml.gz
     - n: 261

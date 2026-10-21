@@ -399,6 +399,23 @@ _README_IP1P = (
     "October 2026 (think-ip1p), beside the runs' receipt, blocks and reports"
 )
 
+#: Both generators on the two witnesses of Francisco Couzo's issue-678 certificates
+#: (T-223, think-xu4d), which the adoption of 20 October 2026 drew at 204 and that of 21
+#: October 2026 at 260, after #704's T-196: Evan Daniel's regularizer and grid-slack at
+#: 0.5, 1 and 5 degrees on 204 and 260. The selection drew grid-slack's
+#: 0.5-degree view at 204 and decided 260 (`SETTLED`). Their receipt, run blocks, reports
+#: and the selection's report are in packing/cases/regularized_drawings/think-xu4d-2026-10-20/.
+_RUNXU4D = (
+    ("evand-regularize", "evand-regularize-adopt-2026-10-20-n204-260-evand"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-20-n204-260-grid-deg05"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-20-n204-260-grid-deg1"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-20-n204-260-grid-deg5"),
+)
+_README_XU4D = (
+    "packing/cases/regularized_drawings/think-xu4d-2026-10-20/README.md, the selection of 20 "
+    "October 2026 (think-xu4d), beside the runs' receipt, blocks and reports"
+)
+
 #: The counts whose drawing is not regularized and not regular as published, settled on
 #: purpose: each named with the witness it was settled on, so a new witness makes the
 #: count `pending` again. Written from the evidence the audit of 15 October 2026 found
@@ -881,6 +898,23 @@ SETTLED: dict[int, Settled] = {
         _LEFTOVERS,
         _T146,
         _README_LEFTOVERS,
+    ),
+    260: Settled(
+        DECIDED,
+        "[Couzo issue 678 2026-10-18]",
+        "resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert",
+        "7b6c87e129cf80b5ff9847b90b47fd30b4563c54",
+        "146417594016514621500994169/8796093022208000000000000",
+        _RUNXU4D,
+        "Evan Daniel's same-side view and grid-slack's views at 0.5, 1 and 5 degrees each "
+        "improve on the axis tool's view on light and uneven squares and both totals, but "
+        "some squares' contact counts fall while no total does (29 for his view, 2 for "
+        "grid-slack's), so the selection sends each to the owner's review at row 7 and the "
+        "axis tool's view stays drawn until a review record admits one; his solved view, "
+        "2.51e-11 below the witness's side, is a register candidate (row 3), not drawn",
+        _README_XU4D,
+        "think-fltj: the owner's row-7 review of the strong views at 260, admitted or "
+        "declined in a review record",
     ),
     263: Settled(
         DECIDED,
