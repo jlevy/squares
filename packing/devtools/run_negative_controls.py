@@ -280,7 +280,7 @@ UNREAD_WORKER_OUTPUTS = frozenset(
         ROOT / "atlas/rendering/free-quench-n1-trace.json",
         ROOT / "cases/regularized_drawings/think-ip1p-2026-10-19/review-229"
         "/grid-slack-adopt-2026-10-19-n155-271-grid-deg05.svg",
-        # 2026-10-21 (think-bl1p): 223 historical files, by the note above.
+        # 2026-10-21 (think-bl1p): 220 historical files, by the note above.
         *(
             ROOT / "benchmarks" / relative
             for relative in (
@@ -446,10 +446,10 @@ UNREAD_WORKER_OUTPUTS = frozenset(
                         "exp-124-full-square-compatibility-screen",
                         "exp-125-h124-complete-residual-cover/axis",
                         "exp-125-h124-complete-residual-cover/diagonal",
+                        "exp-126-h099-complete-graph-candidate",
                         "exp-127-h124-collision-augmented-axis-cover",
                     )
                 ),
-                "exp-126-h099-complete-graph-candidate",
                 "exp-128-h099-seven-row-support-ceiling/verification.log",
                 "exp-206-projection-search",
                 *(
