@@ -91,9 +91,9 @@ PUBLICATION_HISTORY = (
         version="v0.8.9",
         first_published="October 21, 2026",
         result_scope=(
-            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
-            "integrated exact replay and its stage 4 review, and adopt it as the house "
-            "best packing at 227 and 260 with Evan Daniel's regularized views."
+            "Credit Evan Daniel as finder at 271 as issue 664 asks, cite his answer on "
+            "the regularized views' by field, and correct T-221's tilt count and the "
+            "house best packing wording at 154 and 308."
         ),
     ),
     PublicationHistoryEntry(
@@ -657,7 +657,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "9c7d934529c15fc6867e1ef5c68e891680021990"
+DATA_REVISION = "abdb7ea9d53879b8ad76a8fdefffe8f08e93975b"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1131,9 +1131,9 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.8.9",
         impact="patch",
         reason=(
-            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
-            "integrated exact replay and its stage 4 review, and adopt it as the house "
-            "best packing at 227 and 260 with Evan Daniel's regularized views."
+            "Credit Evan Daniel as finder at 271 as issue 664 asks, cite his answer on "
+            "the regularized views' by field, and correct T-221's tilt count and the "
+            "house best packing wording at 154 and 308."
         ),
     ),
     ReleaseImpactDecision(
@@ -1860,6 +1860,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "its 70 reasons in source-coverage.yaml, which the explainer does not read; "
             "and comments in upper_bound_houses and run_negative_controls, which no "
             "producer loads. "
+            "Re-taken by source review after the merge of main 6b825f441 (#707, site "
+            "v0.8.9): of these inputs #707 changes the five claim documents, which the "
+            "v0.8.10 cut regenerates and which differ from main's only in their "
+            "source-link revision; results.yaml, where T-197's, T-219's, T-221's and "
+            "T-222's prose leaves both counts at 223 entries and 32 novel ones; "
+            "adopt_houses.py, which the explainer does not load; and "
+            "bound-citations.json at 271 only. "
             "Retain v0.4.12."
         ),
     ),
@@ -1914,6 +1921,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "override reason, check and refresh in adopt_houses, and comments in "
             "upper_bound_houses and run_negative_controls, none of which these "
             "producers call. "
+            "Re-taken by source review after the merge of main 6b825f441 (#707, site "
+            "v0.8.9), whose results.yaml prose is outside the n11 ladder and whose "
+            "adopt_houses.py prose these producers do not call. "
             "Retain v0.1.7 and v0.1.0."
         ),
     ),
@@ -1968,7 +1978,84 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and the house writer's reason, check and refresh in adopt_houses and "
             "comments in upper_bound_houses and run_negative_controls, which do not "
             "enter its output. "
+            "Re-taken by source review after the merge of main 6b825f441 (#707, site "
+            "v0.8.9), whose result-requests.yaml entries, results.yaml prose and "
+            "adopt_houses.py prose the survey does not cite. "
             "Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main e7de85ff for the records lane of 21 "
+            "October (think-8z7k, #664's credit at 271, #669's by-field answer). The site "
+            "v0.8.9 cut regenerated the five claim documents, and each of the 22 changed "
+            "lines differs from main only in its source-link revision, ec95f0b8 to "
+            "f555a0f9; the explainer links them rather than inlining them. results.yaml "
+            "changes only T-197's, T-219's, T-221's and T-222's prose, adopt_houses.py "
+            "only the 271 credit and T-219's and T-222's prose, and bound-citations.json "
+            "only the 271 upper citation's text; the register's counts and the n11 "
+            "citation the explainer reads are unchanged. Rendered at the branch head "
+            "db61aefd, once from its tree and once with main's results.yaml, "
+            "adopt_houses.py, n-154.md, result-requests.yaml and bound-citations.json: its "
+            "HTML and Markdown and the files it writes at the site root are byte-identical. "
+            "A pair of renders at 7d67be1f differed only in where the browser math "
+            "preparation serializes an empty style attribute on two math spans, as in the "
+            "#446 disposition. It keeps v0.4.11; no PDF was printed, and it prints from "
+            "that HTML."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/n-154.md",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main e7de85ff for the records lane of 21 "
+            "October (think-8z7k, #664's credit at 271, #669's by-field answer, #689 and "
+            "#694 closed, #702 triaged). results.yaml changes only T-197's, T-219's, "
+            "T-221's and T-222's prose, outside the n11 ladder rungs paper_figures reads; "
+            "adopt_houses.py only the 271 credit and T-219's and T-222's prose; n-154.md "
+            "one sentence of T-222's section; and result-requests.yaml only the #664, #669, "
+            "#674, #678, #689, #694 and #702 entries. Rendered with "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods at link revision e7de85ff, at the branch head "
+            "db61aefd, once from its tree and once with main's "
+            "copies of those four inputs and bound-citations.json: the files the three "
+            "write are byte-identical. No PDF was printed; each prints from that HTML. "
+            "Retain v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
@@ -5835,7 +5922,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "18d7696a"
+PUBLICATION_REVISION = "f555a0f9"
 
 
 def data_pathspec() -> tuple[str, ...]:

@@ -27715,9 +27715,12 @@ results:
       issue says, and lists no regularization.
 
       The three regularized views' reports, at 155, 236 and 271, each carry "by":
-      ["Francisco Couzo"]; read alike, that is the source regularizer's field, not a
-      credit, and the review asks the author (RV-7). This entry follows the issue and the
-      prior-record file, which credit Ostashev's packing as the start.
+      ["Francisco Couzo"]; the review asked the author what that field means (RV-7). His
+      comment on issue 669 of 20 October answers that it was a bug in his tooling, which
+      took the field from the record holder at that count in his 5 October batch instead
+      of from the packing drawn, since fixed, and asks that it be read as no credit.
+      This entry follows the issue and the prior-record file, which credit Ostashev's
+      packing as the start.
 
       The source's own checkers were not run here. The two maintained routes share
       certificate parsing, half-angle conversion, Fraction arithmetic and the
@@ -30045,6 +30048,11 @@ results:
       21-group regularized view at the same side; KKT and local-minimum statements are
       numerical evidence, not proofs. The issue says the work was done with Claude (Claude
       Code) under Evan Daniel's direction.
+
+      His comment on the issue of 20 October says the two wordings contradicted each
+      other and he meant a different local minimum, found from #561's packing, and asks to
+      be named its finder with #561's packing and the SQUISH packing it continues as its
+      start.
     scope: {n_values: [271]}
     verification: V3
     confirmation: C3
@@ -30230,8 +30238,8 @@ results:
       that #481's s(307) packing be credited as the ultimate start, places the packing in
       the family of Kevin Fang's #484 and Daniel's #489, mirrored, and says it is not a
       refinement of #489 and descends from neither. Measured here pose by pose, the
-      packing is another arrangement of the two-wedge design the case's earlier house
-      holds, found from #481's 307 as the source describes.
+      packing is another arrangement of the two-wedge design the case's earlier house best
+      packing holds, found from #481's 307 as the source describes.
 
       The author reports that his two exact checkers accept the certificate and its
       29-group regularized view at the same side, and a KKT local minimum strict modulo 47
@@ -30246,9 +30254,9 @@ results:
       score: 3
       rationale: >-
         Another arrangement of the two-wedge design at 308, 1.12e-03 below the case and
-        every report there, to a new KKT point with 15 squares moved beyond a tenth and
-        eight fewer tilted squares, as T-218 at 236 is; well above T-188's 9.29e-06 (S2);
-        no lower bound or optimum.
+        every report there, to a new KKT point with 15 squares moved beyond a tenth of
+        #489's packing and 102 tilted squares against its 112, as T-218 at 236 is; well
+        above T-188's 9.29e-06 (S2); no lower bound or optimum.
       scored: '2026-10-20'
       by: >-
         the 20 October review
@@ -30308,10 +30316,10 @@ results:
 
       V3 and C3 rest on the 20 October review and the replay it reproduced
       (E-evand-689-n308-exact-feasibility). The case at 308 adopted this certificate as
-      its house on 20 October 2026, from T-174, which stays retained as history, and both
-      strong generators decided the new witness in the same pull request: grid-slack's
-      half-degree view is drawn. Whether Kevin Fang's construction belongs in the
-      structured credit at 308 is the owner's open decision (think-a95t).
+      its house best packing on 20 October 2026, from T-174, which stays retained as
+      history, and both strong generators decided the new witness in the same pull
+      request: grid-slack's half-degree view is drawn. Whether Kevin Fang's construction
+      belongs in the structured credit at 308 is the owner's open decision (think-a95t).
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a
       distinct reviewer and a retained human oversight record; one AI review, of 20
@@ -30437,9 +30445,9 @@ results:
 
       V3 and C3 rest on the 20 October review and the replay it reproduced
       (E-evand-694-n154-exact-feasibility). The case at 154 adopted this certificate as
-      its house on 20 October 2026, from T-186, which stays retained as history, and both
-      strong generators decided the new witness in the same pull request: Evan Daniel's
-      same-side view is drawn.
+      its house best packing on 20 October 2026, from T-186, which stays retained as
+      history, and both strong generators decided the new witness in the same pull
+      request: Evan Daniel's same-side view is drawn.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a
       distinct reviewer and a retained human oversight record; one AI review, of 20
