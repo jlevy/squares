@@ -110,7 +110,7 @@ its print otherwise.
 [acquisition/beyond-horizon-claims.json](acquisition/beyond-horizon-claims.json) is the
 record `check_source_coverage` reads the beyond-horizon row against.
 
-| Row at 343 | Holder | Disposition on `main` | This certificate is below it by |
+| Row at 343 | Holder | Disposition on `main` `d640ad8fb` | This certificate is below it by |
 | --- | --- | --- | --- |
 | `couzo-issue678-2026-10-18` (#678), its print 18.978232204823 | Francisco Couzo | current, reported | $5.497224 \times 10^{-4}$ |
 | `evand-record-hunt3-2026-10-10` (#489) | Evan Daniel | superseded by #678’s | $5.500412 \times 10^{-4}$ |
@@ -124,8 +124,10 @@ $41733573967670534550712079/2199023255552 \cdot 10^{-12} = 18.9782322048224771\l
 which is $5.497224 \times 10^{-4}$ above this one.
 The margin below #489’s row is exact, $0.000550041231486711096036435564$.
 
-The certificate is below every row the source register holds at 343, and no other open
-report through #703 states a bound at 343.
+The certificate is below every row the source register held at 343 at that commit, and
+no other open report through #703 states a bound at 343. That includes Darius Muglich’s
+#686, which reached this repository between #678 and #702: its 100 counts run from 328
+to 998 and skip 343.
 Francisco Couzo’s #678 reached this repository on 18 October, before #702, and each is
 below the row before it, so the owner’s rule of 14 October records both, in report order
 ([result-import.md, Several Reports at One Count](../../../campaign/result-import.md#several-reports-at-one-count)).
