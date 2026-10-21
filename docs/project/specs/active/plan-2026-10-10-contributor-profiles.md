@@ -54,7 +54,12 @@ result kind, including optimality proofs and formalizations.
 Bound records require strict improvements; matching an existing bound alone does not
 qualify. Family-specific currentness is implemented in `profile_records.py` and must not
 be inferred from bound standing for non-bound results.
-The classifier passed ten focused tests; renderer integration is being verified.
+The classifier passed ten focused tests.
+The directory and profile renderers show 114 current authored Records, with unresolved
+priority or scope identified separately.
+Astra reviewed the model and renderer boundaries without a blocker.
+Formalization uses the existing result kind in the ontology, schema and filters;
+`proves_kind` preserves the distinction from the original result.
 Family-currentness work remains under `think-e953` and `think-kqi1`. The seven remaining
 spans have explicit identity or collective-credit exceptions under `think-0v9j`; no new
 mathematical result is registered in this PR. All 146 inventoried PDFs still await
@@ -103,14 +108,13 @@ and [attribution policy](../../../../attribution.md) own these rules.
 | `think-q4t4` | Formalization contributor roles, resource membership and own-support years |
 | `think-65yl` | Seven reviewed credit joins for the upstream Daniel n343 source |
 
-The live intermediate preview is <http://127.0.0.1:8790/profiles/index.html>, served
-from
-`/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-integrated-corrected`. It
-includes all 75 profiles, corrected result/credit semantics, credit significance
+The reviewed preview is <http://127.0.0.1:8790/profiles/index.html>, served from
+`/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-integrated-reviewed`. It
+includes all 75 profiles, separate Results, Records and Credits, credit significance
 breakdowns, Accounts and Resources columns, and muted parenthetical tallies.
-Records integration remains pending.
-The complete rebuild, including all four PDFs, has completed; the final preview refresh
-and the integrated upstream build remain pending.
+The complete merged build includes all four PDFs.
+All 7,293 publication checks pass; the PDFs contain 7, 8, 8 and 25 valid profile
+annotations. The authored-name audit covers 692 pages with zero label mismatches.
 The sourced integration environment includes the project interpreter and tools on PATH.
 
 Local focused checks passed: 88 profile, naming, resource, tally and GitHub-reference
@@ -122,7 +126,12 @@ previous profiles and disjoint result/credit invariants.
 New PDF-profile records passed 92 contributor tests; full integration acceptance remains
 pending. Astra reviewed the biography sources, build inputs, release decisions, identity
 joins, activity years and revised attribution model with no blocker.
-The additional Records classification is under separate review.
+The additional Records classification and renderer have passed independent Astra review.
+The integrated push gate exposed an unused test binding and two missing document-map
+entries; both are corrected.
+The full type rerun passed in 229.2 seconds; reachable behavioral tests remain pending.
+The PDF link regression passed after Markdown formatting; the repaired PDF was rebuilt
+and its seven profile annotations verified before preview promotion.
 The full push gate and final hosted checks are recorded in PR #578 and `think-zpfo`;
 these focused receipts do not stand in for that acceptance.
 
