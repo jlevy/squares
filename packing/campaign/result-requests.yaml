@@ -14220,6 +14220,13 @@ issues:
         muglich-issue686-2026-10-19 are on main'
       - 'a row is listed as reported until that replay lands, and as verified once it has; the
         replay landed with #711, and every row stays reported until a stage 4 review'
+    - url: https://github.com/jlevy/squares/issues/686#issuecomment-6312842218
+      date: '2026-10-21'
+      by: jlevy
+      kind: final
+      reported: []
+      corrects:
+      - https://github.com/jlevy/squares/issues/686#issuecomment-6301482971
     close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
       corpus take no register entry, and optimality is outside this request.
     notes: >-
@@ -14273,7 +14280,8 @@ issues:
       #666, #670, #672 and #675, pending triage, report 9, 47, 33 and 54 of these counts, 11
       of those 12 among them, each above #686, so their rows there will enter superseded;
       their beads (think-3m10, think-f28n, think-2vjc, think-pvav) were told on 21 October
-      2026.
+      2026. The final reply (issuecomment-6312842218) gives all 100 rows on main as reported,
+      corrects the acknowledgement and leaves the credit ask queued.
   - number: 689
     title: 's(308) ≤ 17.997149121271: registration request'
     author: evand
