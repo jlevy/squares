@@ -14605,8 +14605,10 @@ issues:
       same side; a different local minimum from Francisco Couzo's #678 packing, found by a
       population search over his stored near-record 343 packings, in Kevin Fang's two-wedge family
       (#484), which it credits as the construction, as #489 did. 343 is beyond the n <= 324 case
-      corpus. Triaged read-only on 21 October 2026; nothing is retained or replayed yet. Claude
-      assistance disclosed.
+      corpus. Triaged read-only on 21 October 2026; retained the same day in
+      evand-n343-sweep-2026-10-20, replayed on this repository's two exact routes with its
+      controls, and recorded as the current beyond-horizon row at 343, superseding #678's row
+      there in report order. Claude assistance disclosed.
     read_through: '2026-10-20T22:09:31Z'
     results:
     - key: n343
@@ -14616,17 +14618,21 @@ issues:
         packing the source calls a different local minimum from #678's.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register entry. Custody at
-        the pin, the two-route replay and the row remain on the import bead.
-      queued: true
+        Beyond the n <= 324 corpus: the current row at 343 of the evand-n343-sweep-2026-10-20
+        source, which supersedes couzo-issue678-2026-10-18's row there.
+      queued: false
       bead: think-wuxt
     asks:
     - what: >-
         Credit Evan Daniel as the finder of the packing at 343, and Kevin Fang's two-wedge design
         (#484) as its construction, as at #489's 343.
-      state: queued
+      state: done
       bead: think-wuxt
-      note: Taken up with the beyond-horizon row, whose source's credit line carries it.
+      note: >-
+        The row's source, evand-n343-sweep-2026-10-20, cites the bibliography key [Daniel n343
+        sweep 2026-10-20], credit line Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy,
+        whose note names Evan Daniel's explorer as the finder and Fang's #484 two-wedge family as
+        the construction; the source's notes and the packet README's Lineage section say the same.
     beads:
     - think-wuxt
     answer_bead: think-wuxt
@@ -14665,6 +14671,18 @@ issues:
       carried this triage to main, reports the check of the two digests and the side, the row's
       standing and the three queued steps: custody at the pin, the two-route replay with its
       controls, and the beyond-horizon row with the credit the issue asks for.
+      The import of 21 October 2026 (think-wuxt) retained the nine s343_sw files at the pin in
+      evand-n343-sweep-2026-10-20, both certificate digests equal to the issue's, with the two
+      checkers, the solver and the explorer pinned against the n183 packet's identical copies and
+      the packer log, dgen.py and descend.py by digest only. upper_bound_reports certify ran the
+      positive, a duplicate-square and an outside-container control through both maintained
+      routes: the positive accepted and both controls refused on both, 351,918 pair decisions in
+      51.74 route CPU seconds; check --replay decided the receipt again. claims.json compares the
+      side with every row at 343: 5.497224e-4 below #678's print, 5.500412e-4 below #489's exact
+      side and 1.722105e-2 below #484's. The row is at assurance reported, with the report
+      evidence E-evand-702-n343-report, as #596's rows were; no stage 4 review is owed for a
+      beyond-horizon row, and none is registered. The KKT, local-minimum and MILP statements are
+      not recorded.
   - number: 703
     title: 's(270) ≤ 16.928162252197: registration request'
     author: evand
