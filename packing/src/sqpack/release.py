@@ -1898,6 +1898,25 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main 6b825f44 for the records lane of 21 "
+            "October that records the replies posted on #664, #669 and #702 after #707 "
+            "merged. result-requests.yaml changes only those three entries: three replies "
+            "recorded, #664 closed, #702's blocked_on on #701 and its wait dropped, and "
+            "each entry's notes brought up to date. Rendered with render_packing_methods "
+            "at link revision 6b825f44, at the branch head 8ab7d264, once from its tree "
+            "and once with main's result-requests.yaml: all 42 files it writes are "
+            "byte-identical. No PDF was printed; it prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/atlas/known-best/bound-citations.json",

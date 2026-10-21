@@ -10269,7 +10269,8 @@ issues:
     title: 's(271) ≤ 16.948947733714: registration request'
     author: evand
     opened: '2026-10-17'
-    state: open
+    state: closed
+    closed: '2026-10-21'
     kind: result-report
     triage: done
     summary: >-
@@ -10354,6 +10355,18 @@ issues:
         as improvers; since the author''s comment of 20 October (issuecomment-6302892909) the case
         at 271 names Evan Daniel as the finder, with no improvers, and its credit sentence names
         Couzo''s #561 packing and the SQUISH packing it continues as the search''s start'
+    - url: https://github.com/jlevy/squares/issues/664#issuecomment-6307196644
+      date: '2026-10-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n271
+        id: T-219
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/664#issuecomment-6294848615
     close_when: >-
       The certificate is registered on main and replayed here, the case at 271 has adopted it and
       regularized its drawing, and the author has been told the id, rungs and adoption.
@@ -10371,8 +10384,9 @@ issues:
       now on his requests use "refinement" only for the same local minimum up to rattlers, reached
       by shrink-only moves, and "a new packing found from X" otherwise, and that he will say so
       where that differs from the record's tenth rule. That is his usage, not a request; the record
-      keeps its own rule. Nothing he asked for is queued, so the issue is closeable once a final
-      comment reports the credit from main.
+      keeps its own rule. Nothing he asked for is queued. #707's commit closed the issue on 21
+      October 2026 at 03:05Z, and the final comment of 21 October (issuecomment-6307196644)
+      reported the credit from main and replaced the 20 October follow-up's statement of it.
   - number: 666
     title: 's(n) < ⌈√n⌉ at 18 counts from n = 509 to 1568, and s(464) ≤ 21.98881: registration request'
     author: JoostdeWinter
@@ -10694,6 +10708,16 @@ issues:
         confirmation: C3
       corrects:
       - https://github.com/jlevy/squares/issues/669#issuecomment-6294848994
+    - url: https://github.com/jlevy/squares/issues/669#issuecomment-6307196781
+      date: '2026-10-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n155
+        id: T-197
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10709,8 +10733,11 @@ issues:
       a435c97. He names the affected views, tt_n154 (#552), tt2_n146 (#606, which says David W.
       Cantrell), s155_ex2 (#669), s236_bm3c (#659), s271_ex1 (#664) and s154_sw (#694), and asks
       that the field there be read as no credit at all and the issues' credit lines as what he
-      asks for, as the record already does; no credit changes on it. Under issue 673's reading the start is what the
-      search was based on, so the case at 155 names Evan Daniel as the finder. The same-side display
+      asks for, as the record already does; no credit changes on it. The follow-up of 21 October
+      (issuecomment-6307196781) named the places the record cites the answer, among them the
+      packets of four of the six views; the packets of tt_n154 (evand-n154-2026-10-12) and
+      tt2_n146 (evand-n146-2026-10-14) cite it since #709. Under issue 673's reading the start
+      is what the search was based on, so the case at 155 names Evan Daniel as the finder. The same-side display
       certificate is not a second bound; numerical local-minimum diagnostics remain source
       assertions.
   - number: 670
@@ -14590,12 +14617,9 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register entry. Custody at
-        the pin, the two-route replay and the row remain on the import bead, which waits for #701's
-        row at 343 to reach main.
+        the pin, the two-route replay and the row remain on the import bead.
       queued: true
       bead: think-wuxt
-      blocked_on:
-      - jlevy/squares#701
     asks:
     - what: >-
         Credit Evan Daniel as the finder of the packing at 343, and Kevin Fang's two-wedge design
@@ -14606,7 +14630,13 @@ issues:
     beads:
     - think-wuxt
     answer_bead: think-wuxt
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/702#issuecomment-6307196962
+      date: '2026-10-21'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n343
     close_when: >-
       The certificate is retained at its pin and replayed here, its beyond-horizon row is on main
       with the requested credit, and the author has been told the row's standing; a count beyond
@@ -14622,15 +14652,19 @@ issues:
       #678 and the watched franciscouzo/square-packing@7b6c87e as the prior record. On main
       (4851d8193) the current row at 343 is #489's, evand-record-hunt3-2026-10-10, at
       18.978232523635611279730512106023, verified; the certificate is 5.500412e-4 below it,
-      exactly. Open PR #701 supersedes that row with Couzo's #678 at 18.978232204823, reported;
-      the certificate is 5.497224e-4 below that print, decided whatever the print rounds. Both are
-      upper bounds reported in order, #678 before #702, each below the last, so the owner's rule of
-      14 October records both; the import runs the report-order ledger once #701 has merged. The
+      exactly. PR #701, since merged, superseded that row with Couzo's #678 at 18.978232204823,
+      reported; the certificate is 5.497224e-4 below that print, decided whatever the print rounds.
+      Both are upper bounds reported in order, #678 before #702, each below the last, so the
+      owner's rule of 14 October records both; the import runs the report-order ledger. The
       replay is the maintained two-route kernel of devtools.evand_arrangement_reports, a positive
       and two controls, as #489's 343 row had: about 45 route CPU seconds, scaled from #689's
       receipt at 308 (35.66 seconds over 3 jobs) by (343/308)^2. The KKT, local-minimum and MILP
-      statements are numerical source evidence and are not registered. The acknowledgement, drafted
-      in think-wuxt, posts after the pull request that carries this triage merges.
+      statements are numerical source evidence and are not registered. #701 merged on 21 October
+      2026, so main's current row at 343 is #678's print, and #489's row is listed as superseded
+      by it. The acknowledgement of 21 October (issuecomment-6307196962), posted after #707
+      carried this triage to main, reports the check of the two digests and the side, the row's
+      standing and the three queued steps: custody at the pin, the two-route replay with its
+      controls, and the beyond-horizon row with the credit the issue asks for.
   - number: 703
     title: 's(270) ≤ 16.928162252197: registration request'
     author: evand
