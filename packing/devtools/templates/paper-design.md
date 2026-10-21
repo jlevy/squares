@@ -1408,13 +1408,15 @@ contributor articles use their component sheets and the same text tokens.
   These links sit beside the project link in the card’s structure, never inside it, and
   remain in the same tab.
   Cards share the result-and-credit tally component with profiles.
-  Mixed significance levels read “6 results (3 at S4, 3 at S3), 12 credits”; one level
-  reads “1 result at S5, 2 credits”.
-  The level breakdown runs highest first and omits empty levels.
-  Results are distinct registered IDs; credits are reviewed attribution spans scoped to
-  that project’s sources and results, not its authors’ global counts.
-  The total links to the results table filtered to the project’s results and each count
-  to the same table at that level (**Result filters**, **Preset-only controls**, below).
+  Mixed significance levels read “6 results (3 at S4, 3 at S3), 12 credits (2 at S4, 10
+  at S3)”; a single occupied level reads “1 result (at S5), 2 credits (at S4)”. The
+  level breakdown runs highest first and omits empty levels.
+  Results are distinct registered IDs with reviewed primary authorship.
+  Credits count distinct person/result pairs received for the project’s explicitly
+  linked work, excluding acknowledgments given by the project and its authors’ unrelated
+  work. The Results total links to the table filtered to the project’s primary results
+  and each significance count to the same table at that level (**Result filters**,
+  **Preset-only controls**, below).
 
 - **Card heroes.** Any card, popover or direct, may be headed by a small picture
   (`hero=` on `card()` and `link_card()`, drawn by `card_hero`). The hero runs edge to
@@ -2878,37 +2880,65 @@ Generic website links inline the same Lucide `external-link` glyph used by KPres
 reader-control icon system, so standalone pages need no sprite dependency.
 The table keeps account usernames visible beside the marks and adapts spacing and
 wrapping, not icon shape or link semantics.
+Account marks use a compact shared icon-size token, also used by the navigation GitHub
+mark and settings gear.
+Navigation replaces the GitHub text with the shared mark and retains an accessible
+GitHub label; control hit areas remain independent of glyph size.
+The directory uses the shared wide-table bleed on larger screens.
+Account labels have room to read; if a long username wraps, its icon aligns with the
+first line. Narrow screens retain the standard table scrolling treatment without
+page-level overflow.
 Profile handles, account links, resource descriptions and credited work use the normal
 document foreground in each theme.
 Their content role is primary; an account handle is not muted metadata.
 Evidence and breadcrumb metadata may retain the secondary text role.
 
 The profile directory at `profiles/` is a native table: full real or public **Name**,
-**Years active**, **Results and credits**, **Resources**, and **Links**. It sorts by the
-shared evidenced surname key, falling back to the public handle when no surname is
-established. Meaningful additional handles appear in parentheses after the directory
-name, using the same exclusions as the profile’s Handles section.
-The directory introduction totals people, distinct contributed results, reviewed credits
-and unique linked resources.
+**Years active**, **Results**, **Credits**, **Resources**, and **Accounts**. It sorts by
+the shared evidenced surname key, falling back to the public handle when no surname is
+established. The directory name contains only the full real or public name.
+Additional handles appear on the individual profile, while account usernames remain in
+the Accounts column.
+The Accounts column contains public GitHub, X and Substack account profiles.
+Personal and publication websites belong in Resources, alongside project repositories,
+displayed as domains or owner/repo labels with shared icons.
+These website resources derive from the existing evidenced profile links rather than
+duplicate stored records.
+
+The directory introduction totals people, distinct primary results, credited
+person/result pairs and unique linked resources.
 Shared results and resources count once across the directory, while each person retains
 their own counts in the table.
-Years active uses the earliest and latest years among the person’s reviewed result
-dates, following the shared result-date precedence.
-Equal endpoints render as one year (“2026”); different endpoints render as a range
-(“1998–2026”). Without a dated result, no activity year is inferred from a biography,
-resource, import or account.
-Results and credits are separate quantities.
-Results count distinct registered IDs reached through reviewed attribution joins;
-credits count unique resolved attribution spans, including their recorded roles.
-Repeated result citations do not inflate the result count.
+Years active uses evidenced dates of the person’s own authored or established work,
+including original publications without a dedicated registered result.
+A later result citing that work does not extend the original author’s activity range.
+Import dates, archive capture dates and undated catalogue ownership are not activity
+evidence. Equal endpoints render as one year (“2003”); different endpoints render as a
+range. Unknown years stay blank.
+
+Results and Credits occupy separate directory columns.
+A zero result or credit count leaves its cell blank.
+Both nonzero columns use the shared significance breakdown.
+[Attribution Policy](../../../attribution.md) defines the two disjoint per-person
+buckets: Results are primary-authored results; Credits are results that explicitly
+credit the person in another role.
+Each person counts once per result in the appropriate bucket, even when the source
+repeats their name.
+Both significance tallies use the score of the result being reported.
+An S5 result by A crediting B and C gives A one S5 result and B and C one S5 credit
+each. Global credits count unique person/result pairs, not unique result IDs or raw
+occurrence spans.
+
 Case credits alone do not establish authorship of every result for that case, and owning
 a resource does not establish authorship of its contents.
-`site_tallies` owns counting and shared wording.
-A single occupied significance level reads “1 result at S5” or “3 results at S4”; mixed
-levels read “12 results (1 at S5, 2 at S4, 9 at S3), 73 credits”.
+Raw reviewed span counts remain census diagnostics.
+`site_tallies` owns the joins, counting and shared wording.
+A single occupied level reads “1 result (at S5)” or “1 credit (at S5)”; mixed levels
+read “12 results (1 at S5, 2 at S4, 9 at S3)” and the same pattern for credits.
 Profile and table variants change layout only.
-A project card’s credits are scoped to its source keys and results, not its owner’s
-global count. Zero reviewed credits means no resolved joins in this record, not no
+Project cards scope both tallies to the project’s reported results and evidenced credit
+associations, not its owner’s global count.
+Zero reviewed credits means no established associations in this record, not no
 contribution. Inline prose links keep the short surname-or-handle naming policy;
 directory names remain full so people can be identified while browsing.
 About’s narrative introduction also keeps full public names on its profile links;
@@ -2924,10 +2954,11 @@ The table’s native name anchor goes directly to the person’s profile.
 Its shared result-and-credit tally links to the reviewed work on that profile;
 significance counts are plain text when no corresponding filter exists.
 Resource and account links remain separate keyboard stops because they lead to distinct
-destinations. Positive resource counts link to the profile’s **Resources** section; zero
-has no dead fragment link.
-Compact **Links** icons open the person’s public accounts and websites.
-Their accessible names and titles distinguish the platform, account and person.
+destinations. Resource addresses link to their actual websites or repositories; avoid
+empty fragment links when no resources are known.
+Compact **Accounts** links show platform icons and usernames for public account
+profiles. Website and repository addresses appear under **Resources** with appropriate
+icons. Their accessible names and titles distinguish the platform, account and person.
 The scoped directory script extends the pointer hit area to blank row space while
 preserving account links, controls, modifiers and text selection.
 It adds no popover or replacement table semantics; native links work without JavaScript.
@@ -2935,6 +2966,7 @@ The table retains shared KPress spacing, numeric alignment and horizontal overfl
 small screens. It includes cited paper authors as well as the project’s contributors, so
 its visible text says **Profiles** in the title, heading, table label and colophon link.
 The directory and profile pages keep **About** active in the shared navigation.
+The account links precede the Years active and Handles fields on individual profiles.
 Their breadcrumbs link to About’s `#profiles` section; each profile also links to the
 full directory. News articles and their homepage previews also use ordinary profile
 links. The colophon’s **Profiles** link and each profile’s breadcrumb navigate back to

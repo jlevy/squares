@@ -206,6 +206,17 @@ profile or source packet.
 | Ryu Sungjoon / squarepacker | Recorded 2026-10-20, applying the handle rule above. One person, credited by name: `Ryu`, his family name, in compact credits, and `Ryu Sungjoon` on his profile and in unlinked prose. `squarepacker`, the GitHub account that publishes his repositories, is his handle: an alias, not a second author. Bibliography keys, identifiers, packet paths, URLs, repository names, quotations and archived text keep the handle. | The Credits section of his [s(12) edition’s README](packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/README.md) reads “Author: Ryu Sungjoon (@squarepacker)”; its [Zenodo record](packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/zenodo-23157015.json) lists the creator as “Ryu, Sungjoon”; his preprints print the name given name first, “Sungjoon Ryu”; [profile](packing/contributors/people/ryu-sungjoon.md). Credits that still print `squarepacker` are migration work. | `think-m7il` |
 | Historical first-party atlas/PDF lines | Migrate project-as-person credit to the preferred person name from the generating records. Do not edit archived third-party sources. | The existing `Squares Project (Levy)` display is a migration target, not the naming rule for new work. Rebuild and review affected figures and PDF credits together. | `think-vix3`, `think-jn87` |
 
+| Collective-project labels rendered as Levy | Reviewed 2026-10-21. The `/credit` occurrences in `[Fitzharding n19 Lean 2026]`, `[PingYou PR 622 certificate 2026-10-15]` and `[de Winter upper bounds 2026-10-17]` remain unresolved personal joins. Their retained notes identify collective project/catalogue credit, despite the compact printed label. | Preserve the original credit and review the specific source before counting it as Joshua Levy’s personal credit. The person-name display policy does not itself prove the credited role. | `think-sb9n`, `think-nd1y` |
+| S. El Moumni / Said El Moumni | Reviewed 2026-10-21. One person: the paper prints `S. El Moumni`, while Friedman’s published survey explicitly names Said El Moumni and cites that same 1999 paper. Keep the stable `s-el-moumni` profile ID and retain the initial spelling as an alias. | The retained DS7 Introduction and reference [12] support the expanded name and the exact case joins; the expansion does not come from guessing an initial. | `think-8wj0`, `think-eigy` |
+| hmbelvedere / UnitSquare Project | Reviewed 2026-10-21. Preserve the printed catalogue credit, but do not create a person profile until human identity is evidenced. | The retained catalogue uses `hmbelvedere`, while the associated page identifies UnitSquare Project as an organization. A missing GitHub account does not settle whether the credited identity is a person. | `think-2ccx` |
+
+| PingYou Ltd / BuddenPing | Reviewed 2026-10-21. PingYou Ltd is corporate attribution,
+not a person. BuddenPing identifies a submission account whose human operator has not
+been established. | The retained PingYou source packet requests corporate credit for its
+agentic offering. Keep corporate spans non-person and the account’s personal identity
+unresolved; do not infer an employee or founder.
+| `think-eigy` |
+
 An exception needs a named scope, reason, supporting evidence, owner and review
 condition in this section.
 It does not establish a new default.
@@ -226,6 +237,33 @@ The
 [contributor plan](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md)
 tracks population and renderer coverage, and the
 [intake runbook](packing/campaign/result-import.md) applies this policy to new results.
+
+## Results, Credits and Activity Years
+
+Project-card credits mean credits received for that project’s work, scoped by reviewed
+project-source links and profile identities.
+They do not count acknowledgments given by the project or the author’s unrelated work.
+A shared source packet does not make every packet author a primary author of each
+result; reviewed result-specific roles take precedence.
+
+Count primary authorship separately from other reported credit.
+For each person and result, primary authors belong in Results; people explicitly
+credited in other roles belong in Credits.
+The buckets are disjoint, and repeated mentions count once.
+An S5 result by A crediting B and C gives A one S5 result and B and C one S5 credit
+each. Both breakdowns use the reported result’s significance.
+A directory-wide credit total counts person/result pairs, while its result total counts
+distinct results.
+Reviewed source-author joins in a result’s primary attribution identify
+its authors; prerequisite sources and “after” credits do not establish primary
+authorship. Raw occurrence counts remain diagnostics of the attribution census.
+
+Activity years describe evidenced dates of a person’s own authored or established work,
+including original publications outside the result register.
+Later reuse or citation never extends the original author’s range.
+Use explicit publication or contribution dates supported by the records; do not infer
+activity from archive capture, import, account ownership or an undated maintained
+catalogue. Leave uncertain years blank.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

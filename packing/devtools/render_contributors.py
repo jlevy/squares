@@ -35,9 +35,16 @@ from devtools.render_overview import (
 from devtools.repo_links import repo_url
 from devtools.result_credit import PROJECT_AUTHOR_ORIGIN, credit_sources, is_first_party
 from devtools.site_icons import account_icon
-from devtools.site_resources import Resource, resources_for_profile
+from devtools.site_resources import Resource, profile_resources
 from devtools.site_resources import resources as resource_records
-from devtools.site_tallies import person_credit_stats, render_tally, tally_results, years_active
+from devtools.site_tallies import (
+    person_activity_years,
+    person_credit_stats,
+    render_tally,
+    tally_credits,
+    tally_results,
+    years_active,
+)
 from sqpack.contributor_occurrences import MANIFEST as OCCURRENCES_MANIFEST
 from sqpack.contributors import (
     PEOPLE_DIR,
@@ -304,46 +311,76 @@ def _credited_work(
             roles.setdefault(occurrence.role, {})[occurrence.label] = None
             if source is not None:
                 sources[source] = None
-    lines = [
+    stats = person_credit_stats(identifier, occurrences, results)
+    primary_ids, credit_ids = set(stats.results), set(stats.credited_results)
+    ordered = sorted(credited, key=lambda result_id: (len(result_id), result_id))
+    primary_lines = [
         _result_line(by_id[result_id], *credited[result_id])
-        # In register order: `T-` and a zero-padded number, which may grow a digit.
-        for result_id in sorted(credited, key=lambda result_id: (len(result_id), result_id))
+        for result_id in ordered
+        if result_id in primary_ids and not (authored and is_first_party(by_id[result_id]))
     ]
-    counts = {"result": len(credited), "case": 0, "source": 0, "other record": 0}
+    credit_lines = [
+        _result_line(by_id[result_id], *credited[result_id])
+        for result_id in ordered
+        if result_id in credit_ids
+    ]
+    other_lines = [
+        _result_line(by_id[result_id], *credited[result_id])
+        for result_id in ordered
+        if result_id not in primary_ids | credit_ids
+    ]
     for (target, path, key, role, original_label), label in sorted(
         rows.items(), key=lambda row: not row[0][0].startswith("cases/")
     ):
         match = re.fullmatch(r"cases/(\d+)\.html", target)
         case = f' data-case="{match[1]}"' if match else ""
-        counts["case" if match else "source" if path == BIBLIOGRAPHY else "other record"] += 1
         references = contribution_references((key,), ()) if path == BIBLIOGRAPHY else ""
-        lines.append(
+        other_lines.append(
             f'<li><a href="{html.escape(target)}"{case}>{html.escape(label)}</a>: '
             f"{_role(role)} — {html.escape(original_label)}{references}</li>"
         )
-    if not (lines or authored):
+    authored = list(dict.fromkeys(authored))
+    if not (primary_lines or credit_lines or other_lines or authored):
         return CreditedWork((), 0)
-    pieces = ['<section id="credited-work"><h2>Credited work</h2>']
-    first_party_ids = tuple(str(record["id"]) for record in results if is_first_party(record))
-    first_party = len(first_party_ids)
-    pieces.extend(
-        '<ul class="site-contributor-credits">'
-        f'<li><a href="{RESULTS_PAGE}">The register\u2019s '
-        f"{html.escape(_plural(first_party, 'first-party result'))}</a>: "
-        f"{_role(occurrence.role)} — {html.escape(occurrence.label)}"
-        f"{contribution_references((), first_party_ids)}</li></ul>"
-        for occurrence in dict.fromkeys(authored)
+    pieces = []
+    if primary_lines or authored:
+        pieces.append('<section id="results"><h2>Results</h2>')
+        first_party_ids = tuple(
+            str(record["id"]) for record in results if is_first_party(record)
+        )
+        pieces.extend(
+            '<ul class="site-contributor-credits">'
+            f'<li><a href="{RESULTS_PAGE}">The register\u2019s '
+            f"{html.escape(_plural(len(first_party_ids), 'first-party result'))}</a>: "
+            f"{_role(occurrence.role)} — {html.escape(occurrence.label)}"
+            f"{contribution_references((), first_party_ids)}</li></ul>"
+            for occurrence in authored
+        )
+        pieces.extend(_work_listing(primary_lines, "Results"))
+        pieces.append("</section>")
+    if credit_lines:
+        pieces.append('<section id="credited-work"><h2>Credited work</h2>')
+        pieces.extend(_work_listing(credit_lines, "Credits"))
+        pieces.append("</section>")
+    if other_lines:
+        pieces.append('<section id="other-reviewed-records"><h2>Other reviewed records</h2>')
+        pieces.extend(_work_listing(other_lines, "Reviewed records"))
+        pieces.append("</section>")
+    return CreditedWork(
+        tuple(pieces), len(primary_lines) + len(credit_lines) + len(other_lines) + len(authored)
     )
-    if lines:
-        fold = len(lines) > _FOLD
-        if fold:
-            summary = ", ".join(_plural(count, noun) for noun, count in counts.items() if count)
-            pieces.append(f"<details open><summary>Reviewed work: {summary}</summary>")
-        pieces.extend(('<ul class="site-contributor-credits">', *lines, "</ul>"))
-        if fold:
-            pieces.append("</details>")
-    pieces.append("</section>")
-    return CreditedWork(tuple(pieces), len(lines) + len(dict.fromkeys(authored)))
+
+
+def _work_listing(lines: Sequence[str], label: str) -> list[str]:
+    if not lines:
+        return []
+    parts = []
+    if len(lines) > _FOLD:
+        parts.append(f"<details open><summary>{label}: {len(lines)}</summary>")
+    parts.extend(('<ul class="site-contributor-credits">', *lines, "</ul>"))
+    if len(lines) > _FOLD:
+        parts.append("</details>")
+    return parts
 
 
 #: What the identity evidence prints for a record value that is not plain text.
@@ -430,23 +467,42 @@ def _related_news() -> dict[str, list[tuple[str, str, str]]]:
     return news_by_profile(news_entries(load()))
 
 
+@dataclass(frozen=True)
+class _PublicLink:
+    kind: str
+    url: str
+    label: str
+    description: str
+
+
 def account_links(contributor: Contributor, *, compact: bool = False) -> str:
-    """The same public account destinations and icons in profiles and directory rows."""
-    if not contributor.links:
-        return ""
-    variant = " site-contributor-links-compact" if compact else ""
-    pieces = [f'<ul class="site-contributor-links{variant}" aria-label="Public websites">']
+    """Public provider accounts; personal/publication websites belong to Resources."""
+    links = []
     for link in contributor.links:
-        label = link.handle or link.url.removeprefix("https://").removeprefix(
-            "http://"
-        ).removesuffix("/")
+        if link.kind in {"personal", "publication"}:
+            continue
+        label = link.handle or urlsplit(link.url).netloc
         if link.kind == "twitter" and link.handle:
             label = "@" + link.handle
-        accessible = f"{_LINK_LABELS[link.kind]}: {label}"
+        links.append(
+            _PublicLink(link.kind, link.url, label, f"{_LINK_LABELS[link.kind]}: {label}")
+        )
+    return _public_links(contributor, links, compact=compact, label="Public accounts")
+
+
+def _public_links(
+    contributor: Contributor, links: Sequence[_PublicLink], *, compact: bool, label: str
+) -> str:
+    """Shared named external-link icons for public accounts and resource addresses."""
+    if not links:
+        return ""
+    variant = " site-contributor-links-compact" if compact else ""
+    pieces = [f'<ul class="site-contributor-links{variant}" aria-label="{label}">']
+    for link in links:
+        accessible = link.description
         if compact:
             accessible += f" ({contributor.real_name or contributor.display_name})"
-        shown = (urlsplit(link.url).hostname or label) if compact and not link.handle else label
-        visible = f"<span>{html.escape(shown)}</span>"
+        visible = f"<span>{html.escape(link.label)}</span>"
         pieces.append(
             f'<li><a href="{html.escape(link.url)}" aria-label="{html.escape(accessible)}" '
             f'title="{html.escape(accessible)}">{account_icon(link.kind)}{visible}</a></li>'
@@ -459,7 +515,7 @@ def resource_list(identifier: str, records: Sequence[Resource] | None = None) ->
     """Reuse homepage resource cards, preserving their sources, attribution and tally."""
     from devtools.overview_sections import resource_cards  # noqa: PLC0415
 
-    linked = resources_for_profile(identifier, records)
+    linked = profile_resources(identifier, records)
     if not linked:
         return ""
     return (
@@ -469,13 +525,22 @@ def resource_list(identifier: str, records: Sequence[Resource] | None = None) ->
     )
 
 
-def _resource_count(person: Contributor, target: str, name: str) -> str:
-    count = len(resources_for_profile(person.id))
-    return (
-        f'<a href="{target}#resources" aria-label="{count} resources for {name}">{count}</a>'
-        if count
-        else '<span class="site-profile-empty">0</span>'
+def resource_links(person: Contributor) -> str:
+    """Visible exact resource addresses, using the same external-link component."""
+    links = tuple(
+        _PublicLink(
+            "github" if urlsplit(record.url).hostname == "github.com" else "personal",
+            record.url,
+            (
+                "/".join(urlsplit(record.url).path.strip("/").split("/")[:2])
+                if urlsplit(record.url).hostname == "github.com"
+                else urlsplit(record.url).netloc
+            ),
+            f"Resource: {record.title} ({record.url})",
+        )
+        for record in profile_resources(person.id)
     )
+    return _public_links(person, links, compact=True, label="Resources")
 
 
 def _profile_measures(records: Sequence[Mapping[str, Any]]) -> dict[str, tuple[int, str]]:
@@ -492,13 +557,26 @@ def _profile_measures(records: Sequence[Mapping[str, Any]]) -> dict[str, tuple[i
     }
 
 
+@cache
+def _activity_documents() -> tuple[dict[str, Mapping[str, Any]], dict[str, Mapping[str, Any]]]:
+    bibliography = load_yaml((REPO / BIBLIOGRAPHY).read_text())["sources"]
+    sources = {str(source["key"]): source for source in bibliography}
+    cases = {
+        path.relative_to(REPO).as_posix(): load_yaml(path.read_text().split("---\n")[1])[
+            "packing"
+        ]
+        for path in (PACKING / "frontier").glob("n-*.md")
+    }
+    return sources, cases
+
+
 def profile_years(
     identifier: str,
     occurrences: Sequence[CreditOccurrence],
     records: Sequence[Mapping[str, Any]],
 ) -> str | None:
-    stats = person_credit_stats(identifier, occurrences, records)
-    return years_active(stats.results, _profile_measures(records))
+    sources, cases = _activity_documents()
+    return years_active(person_activity_years(identifier, occurrences, sources, cases, records))
 
 
 def profile_summary(
@@ -510,13 +588,27 @@ def profile_summary(
 ) -> str:
     """Union result and resource identities across the published people; never sum overlaps."""
     records = _register_results() if results is None else results
-    stats = [person_credit_stats(person.id, occurrences, records) for person in contributors]
-    result_ids = {identifier for item in stats for identifier in item.results}
+    stats = {
+        person.id: person_credit_stats(person.id, occurrences, records)
+        for person in contributors
+    }
+    result_ids = {identifier for item in stats.values() for identifier in item.results}
+    credit_pairs = {
+        (identifier, result_id)
+        for identifier, item in stats.items()
+        for result_id in item.credited_results
+    }
     identifiers = {person.id for person in contributors}
     resources = resource_records() if resources is None else resources
     resource_urls = {
         record.url for record in resources if identifiers.intersection(record.profile_ids)
     }
+    resource_urls.update(
+        link.url
+        for person in contributors
+        for link in person.links
+        if link.kind in {"personal", "publication"}
+    )
     people = f"{len(contributors)} " + ("person" if len(contributors) == 1 else "people")
     return (
         '<p class="site-profile-summary">'
@@ -524,7 +616,7 @@ def profile_summary(
             (
                 people,
                 _plural(len(result_ids), "result"),
-                _plural(sum(item.credits for item in stats), "credit"),
+                _plural(len(credit_pairs), "credit"),
                 _plural(len(resource_urls), "resource"),
             )
         )
@@ -567,39 +659,55 @@ def profile_table(
     *,
     results: Sequence[Mapping[str, Any]] | None = None,
 ) -> str:
-    """Full public names and the shared distinct-result/reviewed-span component."""
+    """Full public names with separate primary-result and nonprimary-credit tallies."""
     records = _register_results() if results is None else results
     rows = []
     for person in contributors:
         name = html.escape(person.real_name or person.display_name)
-        handles = _visible_handles(person)
-        label = (
-            name + " (" + ", ".join(html.escape(handle) for handle in handles) + ")"
-            if handles
-            else name
-        )
+        label = name
         target = html.escape(person.profile_path)
         years = profile_years(person.id, occurrences, records)
-        tally = profile_tally(
-            person.id,
-            occurrences,
-            target=person.profile_path + "#credited-work",
-            results=results,
+        stats = person_credit_stats(person.id, occurrences, records)
+        tally = (
+            '<span class="site-credit-tally">'
+            + render_tally(
+                tally_results(stats.results, _profile_measures(records), (5, 4, 3, 2, 1)),
+                total_href=person.profile_path + "#results",
+            )
+            + "</span>"
+            if stats.results
+            else ""
+        )
+        credit_cell_markup = (
+            '<span class="site-credit-tally">'
+            + render_tally(
+                tally_credits(
+                    ((person.id, result_id) for result_id in stats.credited_results),
+                    _profile_measures(records),
+                    (5, 4, 3, 2, 1),
+                ),
+                noun="credit",
+                total_href=person.profile_path + "#credited-work",
+            )
+            + "</span>"
+            if stats.credited_results
+            else ""
         )
         rows.append(
             f'<tr><td><a href="{target}">{label}</a></td>'
-            f'<td class="site-profile-years">{html.escape(years) if years else "—"}</td>'
+            f'<td class="site-profile-years">{html.escape(years) if years else ""}</td>'
             f'<td class="site-profile-stats">{tally}</td>'
-            f'<td class="num">{_resource_count(person, target, name)}</td>'
+            f'<td class="site-profile-credits">{credit_cell_markup}</td>'
+            f'<td class="site-profile-resources">{resource_links(person)}</td>'
             f'<td class="site-profile-links">{account_links(person, compact=True)}</td></tr>'
         )
     return (
-        '<div class="site-table-wrap">'
+        '<div class="site-table-wrap site-wide">'
         '<table class="kpress-table site-table site-profile-table" data-contributor-plain '
         'aria-label="Profiles"><thead><tr><th scope="col">Name</th>'
         '<th scope="col">Years active</th>'
-        '<th scope="col">Results and credits</th>'
-        '<th scope="col" class="num">Resources</th><th scope="col">Links</th>'
+        '<th scope="col">Results</th><th scope="col">Credits</th>'
+        '<th scope="col">Resources</th><th scope="col">Accounts</th>'
         "</tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>"
     )
 
@@ -653,18 +761,27 @@ def profile_tally(
     identifier: str,
     occurrences: Sequence[CreditOccurrence],
     *,
-    target: str = "#credited-work",
+    target: str = "",
     results: Sequence[Mapping[str, Any]] | None = None,
 ) -> str:
-    """The shared distinct-result and reviewed-span component on a profile or table."""
+    """The shared primary-result and nonprimary-credit significance components."""
     records = _register_results() if results is None else results
     stats = person_credit_stats(identifier, occurrences, records)
     measures = _profile_measures(records)
-    tally = tally_results(stats.results, measures, (5, 4, 3, 2, 1))
+    authored = tally_results(stats.results, measures, (5, 4, 3, 2, 1))
+    credited = tally_credits(
+        ((identifier, result_id) for result_id in stats.credited_results),
+        measures,
+        (5, 4, 3, 2, 1),
+    )
     return (
         '<span class="site-credit-tally">'
+        + render_tally(authored, total_href=target + "#results" if authored.results else None)
+        + " · "
         + render_tally(
-            tally, total_href=target if tally.results else None, credit_count=stats.credits
+            credited,
+            noun="credit",
+            total_href=target + "#credited-work" if credited.associations else None,
         )
         + "</span>"
     )
@@ -699,12 +816,12 @@ def contributor_article(
             + ", ".join(html.escape(alias) for alias in handles)
             + "</dd>"
         )
-    if identity:
-        pieces.append('<dl class="site-contributor-identity">' + "".join(identity) + "</dl>")
     if contributor.bio:
         biography = _bio(contributor.bio, current_profile=contributor.id)
         pieces.append(f'<p class="site-contributor-bio">{biography}</p>')
     pieces.append(account_links(contributor))
+    if identity:
+        pieces.append('<dl class="site-contributor-identity">' + "".join(identity) + "</dl>")
     pieces.append(resource_list(contributor.id))
     pieces.append("<p>" + profile_tally(contributor.id, occurrences, results=results) + "</p>")
     work = credited_work(contributor.id, occurrences, results=records).parts
@@ -798,10 +915,13 @@ def contributor_pages() -> list[Page]:
         '<a href="about.html#profiles">About</a></nav><h1>Profiles</h1>'
         "<p>People whose work the square-packing record cites or credits, paper authors "
         "and project contributors alike. Each profile records public identity evidence "
-        "and links to reviewed credits. Results count distinct registered results reached "
-        "by reviewed credits; credits count distinct reviewed attribution spans. "
-        "Years active covers the dated reviewed results recorded here. "
-        "Links open public accounts and websites; Resources lists the cited "
+        "and links to reviewed credits. Results count distinct registered results by their "
+        "reviewed primary authors. "
+        "Credits count distinct results that credit a person\u2019s prior work, excluding "
+        "their authored results. Years active covers dated original work and explicit "
+        "discovery or proof records, excluding later reuse and import dates. "
+        "Accounts open public account profiles; Resources lists personal and publication "
+        "websites and the cited "
         "external work shown on the homepage.</p>"
         + profile_summary(contributors, occurrences)
         + profile_table(contributors, occurrences)

@@ -191,10 +191,51 @@ sources:
       The page's own header: "SVG, high-precision, and other updates by David
       Ellsworth, based on original compiled by Erich Friedman"
       (web/kingbird-squares-in-squares.md, lines 10-11). A maintained page, so no year.
+  - key: '[Arslanov et al.]'
+    authors: [Arslanov, Mustafin, Shangitbayev]
+    year: 2021
+    venue: 'Electron. J. Combin. 28(4), #P4.22'
+    dated: '2021-11-05'
+    note: >-
+      The retained title page in papers/arslanov-improved-packings-n-n-1.raw.md names
+      M.Z. Arslanov, S.A. Mustafin and Z.K. Shangitbayev, in that order, and states
+      Published: Nov 5, 2021. The archive index uses this existing citation key.
+      DOI 10.37236/8586. This author/date record does not register or independently
+      validate the paper's mathematical claims.
   - key: '[Nagamochi 2005]'
     authors: [Nagamochi]
     year: 2005
     venue: 'Electron. J. Combin. 12, #R37'
+  - key: '[Gensane 2004]'
+    authors: [Gensane]
+    year: 2004
+    venue: 'Electron. J. Combin. 11, #R33'
+    note: >-
+      The retained paper's opening byline names Th. Gensane and its publication line
+      gives 27 May 2004, in papers/gensane-2004-dense-packings-equal-spheres-cube.raw.md.
+      The archive index's sphere-packing paper row confirms the author, year and venue.
+  - key: '[Gensane–Ryckelynck 2005]'
+    authors: [Gensane, Ryckelynck]
+    year: 2005
+    venue: 'Discrete Comput. Geom. 34, 97–109'
+  - key: '[MacIver 2026 n17]'
+    authors: [MacIver]
+    year: 2026
+    venue: Author-hosted manuscript
+    dated: '2026-08-08'
+    note: >-
+      The title page names David R. MacIver and prints 8 August 2026, as retained in
+      web/maciver-square-packing-2026-09-07/maciver-2026-seventeen-unit-squares-lower-bound.raw.md
+      and the packet's Papers and Dates table. The manuscript discloses AI assistance
+      and incomplete human review; its date is not the later archive or repository date.
+  - key: '[Schadt n=29 repository]'
+    authors: [Schadt]
+    year: 2025
+    venue: GitHub
+    note: >-
+      The retained repository README's Results table credits its New Solution to
+      Thomas Schadt (2025), in web/schadt-s29-2025/README.md. The archive index identifies
+      the repository as BalthasarStrauss/Squares-packing_S-29-_New-Record.
   - key: '[Stromquist 2003]'
     authors: [Stromquist]
     year: 2003
@@ -3066,6 +3107,17 @@ sources:
       per-case provenance are retained in web/muglich-issue686-2026-10-19/, not the
       archive's bytes. CC BY 4.0 granted 20 October 2026; OpenAI Codex assistance
       disclosed. Upper bounds only.
+  - key: '[Roth–Vaughan 1978]'
+    authors:
+    - Roth
+    - Vaughan
+    year: 1978
+    venue: J. Combin. Theory Ser. A 24
+    lineage: independent
+    note: Inefficiency in Packing Squares with Unit Squares, pages 170–186. The retained PDF
+      title page credits K. F. Roth and R. C. Vaughan; archived as papers/roth-vaughan-1978-inefficiency-packing-squares.pdf.
+      Original published work underlying the later Ryu citations; this bibliography entry does
+      not register a new mathematical result.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono

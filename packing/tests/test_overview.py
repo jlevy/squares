@@ -2636,10 +2636,16 @@ def test_the_nav_has_one_explanations_entry_for_the_papers_and_film() -> None:
     """Papers, the film and the tutorial share one top-level Explanations destination.
     The former papers key remains an alias for callers rendering legacy pages."""
     nav = render_overview.nav_html("papers")
-    entries = re.findall(
-        r'<a data-page="(\w+)"(?: aria-current="page")? href="([^"]+)">([^<]+)</a>', nav
+    links = re.findall(
+        r'<a data-page="(\w+)"(?: aria-current="page")? href="([^"]+)"([^>]*)>(.*?)</a>', nav
     )
+    entries = [
+        (key, href, "GitHub" if key == "github" else label) for key, href, attrs, label in links
+    ]
     assert entries == NAV_ENTRIES
+    assert 'class="site-nav-icon"' in nav
+    assert 'title="GitHub"' in nav
+    assert 'aria-label="GitHub"' in nav
     assert (
         '<a data-page="explanations" aria-current="page" href="papers.html">Explanations</a>'
         in nav
@@ -5044,10 +5050,11 @@ def test_the_gear_sits_level_with_the_tab_text() -> None:
     wrapper = _rule(css, ".site-theme")
     assert "align-self: baseline;" in wrapper
     assert "display: flex;" in wrapper
-    icon = _rule(css, ".site-theme-button svg")
-    assert "block-size: 1.05rem;" in icon
-    assert "inline-size: 1.05rem;" in icon
-    assert "vertical-align: calc((1cap - 1.05rem) / 2);" in icon
+    icon = _rule(css, ".site-nav-icon,\n.site-theme-button svg")
+    assert "--site-icon-size: 0.85em;" in css
+    assert "block-size: var(--site-icon-size);" in icon
+    assert "inline-size: var(--site-icon-size);" in icon
+    assert "vertical-align: calc((1cap - var(--site-icon-size)) / 2);" in icon
     assert "--site-gear-drop" not in css
 
 

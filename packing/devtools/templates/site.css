@@ -980,9 +980,9 @@ body {
   min-inline-size: 0;
 }
 .kpress .site-card .site-link-icon {
-  block-size: 1em;
+  block-size: var(--site-icon-size);
   flex: none;
-  inline-size: 1em;
+  inline-size: var(--site-icon-size);
   translate: 0 0.15em;
 }
 
@@ -3736,4 +3736,10 @@ html[data-site-atlas-view="triangle"]
 .kpress .site-table td.site-col-credit,
 .site-col-credit .site-cell-quiet {
   color: var(--kpress-doc-text);
+}
+
+/* Significance is secondary to the result/credit total on every shared tally. */
+.kpress .site-tally-levels,
+.kpress .site-tally-levels a {
+  color: var(--site-support-color);
 }

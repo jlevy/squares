@@ -275,11 +275,18 @@ def _attributed(overview: overview_data.Overview, url: str) -> list[overview_dat
             if venue and entry.get("venue") == venue
         }
     )
-    return [
-        result
-        for result in overview.results
-        if keys & set((result.record.get("attribution") or {}).get("source_keys") or ())
-    ]
+    authors = next(
+        (record.profile_ids for record in site_resources.resources() if record.url == url), ()
+    )
+    ids = set(
+        site_tallies.project_primary_results(
+            authors,
+            keys,
+            load_occurrences().occurrences,
+            [result.record for result in overview.results],
+        )
+    )
+    return [result for result in overview.results if result.id in ids]
 
 
 def _cards(page: str) -> list[tuple[str, str]]:
@@ -343,18 +350,30 @@ def test_each_card_ends_with_its_tally_linked_to_its_results(
         slug = overview_sections.project_slug(url)
         total = f"{len(own)} result" + ("" if len(own) == 1 else "s")
         counts = [(level, levels.count(level)) for level in LEVELS if level in levels]
-        reviewed = site_tallies.project_credit_count(
+        authors = next(
+            (record.profile_ids for record in site_resources.resources() if record.url == url),
+            (),
+        )
+        associations = site_tallies.project_credit_associations(
+            authors,
             overview_sections.project_source_keys()[url],
-            [result.id for result in own],
             load_occurrences().occurrences,
+            [result.record for result in overview.results],
         )
         expected = total
         if len(counts) == 1:
-            expected += f" at S{counts[0][0]}"
+            expected += f" (at S{counts[0][0]})"
         elif counts:
             expected += f" ({', '.join(f'{n} at S{level}' for level, n in counts)})"
-        expected += f", {reviewed} credit" + ("" if reviewed == 1 else "s")
-        assert re.sub(r"<[^>]+>", "", foot) == expected, url
+        if associations is not None:
+            measures = {
+                result.id: (overview_sections.significance(result), result.dated[1])
+                for result in overview.results
+            }
+            expected += " · " + site_tallies.render_tally(
+                site_tallies.tally_credits(associations, measures, LEVELS), noun="credit"
+            )
+        assert re.sub(r"<[^>]+>", "", foot) == re.sub(r"<[^>]+>", "", expected), url
         links = re.findall(r'<a href="([^"]+)">([^<]+)</a>', foot)
         if own:
             with_tally += 1
@@ -580,3 +599,23 @@ def test_following_a_cards_links_shows_the_rows_they_count(
         (str(level), False),
         ("", True),
     ]
+
+
+def test_profile_resources_add_only_evidenced_websites_and_keep_exact_urls() -> None:
+    metadata = {
+        "alex": {
+            "display_name": "Alex One",
+            "links": [
+                {"kind": "github", "url": "https://github.com/alex", "handle": "alex"},
+                {"kind": "personal", "url": "https://alex.example/?one=1"},
+                {"kind": "publication", "url": "https://journal.example/paper#page2"},
+            ],
+        }
+    }
+    records = site_resources.profile_resources("alex", (), metadata=metadata)
+    assert [record.url for record in records] == [
+        "https://alex.example/?one=1",
+        "https://journal.example/paper#page2",
+    ]
+    assert all(record.profile_ids == ("alex",) for record in records)
+    assert site_resources.profile_resources("alex", records, metadata=metadata) == records

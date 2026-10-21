@@ -6,13 +6,14 @@ Only the curated byline establishes a person/resource relationship.
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from functools import cache
-from typing import Literal
+from typing import Any, Literal
 from urllib.parse import urlsplit
 
 from devtools.profile_links import ProfileIndex, named_profile_ids, public_index
+from sqpack.contributors import record_metadata
 
 #: The other public square-packing projects on GitHub that the research frontier cites:
 #: each repository's home, its author as the record credits them (the GitHub handle
@@ -452,3 +453,36 @@ def resources_for_profile(
     return tuple(
         {record.url: record for record in selected if identifier in record.profile_ids}.values()
     )
+
+
+@cache
+def _resource_metadata() -> dict[str, dict[str, Any]]:
+    return record_metadata()
+
+
+def profile_resources(
+    identifier: str,
+    records: Sequence[Resource] | None = None,
+    *,
+    metadata: Mapping[str, Mapping[str, Any]] | None = None,
+) -> tuple[Resource, ...]:
+    """Curated work and evidenced personal/publication websites, each exact URL once."""
+    selected = resources_for_profile(identifier, records)
+    person = (_resource_metadata() if metadata is None else metadata).get(identifier, {})
+    combined = {record.url: record for record in selected}
+    for link in person.get("links", ()):
+        if link["kind"] not in {"personal", "publication"}:
+            continue
+        url = str(link["url"])
+        combined.setdefault(
+            url,
+            Resource(
+                url,
+                "Personal website" if link["kind"] == "personal" else "Publication website",
+                "",
+                person["display_name"],
+                (identifier,),
+                "website",
+            ),
+        )
+    return tuple(combined.values())

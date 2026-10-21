@@ -67,6 +67,7 @@ from devtools.build_bound_citations import RECENT_SINCE
 from devtools.build_composite_figure_data import load_record as load_figure_record
 from devtools.measure_net_coarsening import largest_admissible_side
 from devtools.migrate_math import plain
+from devtools.profile_links import link_prose
 from devtools.render_overview import (
     N11_LOWER_BOUNDS_EXPLAINER,
     PAPER_TYPE_CSS,
@@ -2658,7 +2659,7 @@ def shell_substitutions(static: Path, shared: dict[str, str], body: str) -> dict
         # the site's goes on no paper.
         "COLOPHON": colophon_lines(edition=""),
         **shared,
-        "BODY_HTML": body,
+        "BODY_HTML": link_prose(body, prefix=SITE_ROOT),
     }
 
 
@@ -2932,6 +2933,8 @@ RENDER_INPUTS = (
     EXPLAINER_SCRIPTS,
     # The front of the paper is written by the component both papers share.
     PACKING / "devtools" / "paper_front.py",
+    PACKING / "devtools/profile_links.py",
+    PACKING / "contributors/people",
     PACKING / "devtools" / "prepare_n11_lower_bounds_explainer_math.py",
     PACKING / "devtools" / "measure_net_coarsening.py",
     PACKING / "devtools" / "build_composite_figure_data.py",

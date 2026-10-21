@@ -75,15 +75,18 @@
   content: none;
 }
 .kpress .site-contributor-links a {
-  align-items: center;
+  align-items: flex-start;
   color: inherit;
   display: inline-flex;
   gap: 0.4em;
 }
 .site-account-icon {
-  block-size: 1em;
+  block-size: var(--site-icon-size);
   flex: none;
-  inline-size: 1em;
+  inline-size: var(--site-icon-size);
+}
+.site-contributor-links .site-account-icon {
+  margin-block-start: calc((1lh - var(--site-icon-size)) / 2);
 }
 .site-contributor-news time {
   white-space: nowrap;
@@ -126,6 +129,8 @@
 }
 .kpress .site-profile-table td.site-profile-years,
 .kpress .site-profile-table td.site-profile-stats,
+.kpress .site-profile-table td.site-profile-credits,
+.kpress .site-profile-table td.site-profile-resources,
 .kpress .site-profile-table td.site-profile-links {
   min-inline-size: 6rem;
   padding: 0.55rem 0.5rem;
@@ -145,7 +150,7 @@
 .site-contributor-links-compact span {
   overflow-wrap: anywhere;
 }
-.site-profile-stats .site-credit-tally {
+:is(.site-profile-stats, .site-profile-credits) .site-credit-tally {
   display: block;
   min-inline-size: 8rem;
 }
@@ -180,4 +185,14 @@
     > .site-contributor-breadcrumb {
     margin-block: 0 2rem;
   }
+}
+
+.kpress .site-profile-table td.site-profile-links {
+  inline-size: 30%;
+  min-inline-size: 12rem;
+}
+
+.kpress .site-profile-table td.site-profile-resources {
+  inline-size: 25%;
+  min-inline-size: 12rem;
 }

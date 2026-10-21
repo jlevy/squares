@@ -64,6 +64,7 @@ from urllib.parse import quote
 
 from devtools import repo_links
 from devtools.repo_links import repo_url
+from devtools.site_icons import account_icon
 from sqpack.contributors import PROFILES_DIR
 from sqpack.release import PUBLICATION_EDITION, PUBLICATION_HISTORY
 
@@ -909,7 +910,9 @@ def assert_fetches_only_assets(name: str, page: str) -> None:
 def nav_html(current: str, *, root: str = "") -> str:
     """The navigation bar, with the current page marked."""
     nav = SITE_NAV.read_text(encoding="utf-8")
-    nav = nav.replace("{{ROOT}}", root)
+    nav = nav.replace("{{ROOT}}", root).replace(
+        "{{GITHUB_ICON}}", account_icon("github", class_name="site-nav-icon")
+    )
     if not current:
         return nav
     # Existing paper renderers and film callers share the Explanations destination.

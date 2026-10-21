@@ -873,9 +873,12 @@ in Memo III (private communication, September 2026). His suggestion prompted a
     degree-eight polynomial defining its side length.
     The [rendering]({{BEST_RENDER_URL}}) is the project’s own.
     Stromquist’s [Memo III]({{PRIOR_MEMO_URL}}), pp.
-    2–4, credits Mats Gustafsson and Magnus Thulin with the same construction, reported
-    by Gardner in November 1980; the research archive records their independent
-    rediscovery.
+    2–4, credits
+    [Mats Gustafsson](https://jlevy.github.io/squares/profiles/mats-gustafsson.html) and
+    [Magnus Thulin](https://jlevy.github.io/squares/profiles/magnus-thulin.html) with
+    the same construction, reported by
+    [Gardner](https://jlevy.github.io/squares/profiles/martin-gardner.html) in November
+    1980; the research archive records their independent rediscovery.
 
 [^other-results]: The [result register]({{RESULTS_URL}}) records $s(12) \ge 3.96$
     (`T-017`), $s(17) \ge 4.59$ (`T-019`), and $s(19) \ge 4.80$ (`T-020`), each

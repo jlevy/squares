@@ -278,3 +278,16 @@ def test_generated_profile_label_audit_keeps_protected_contexts_separate(
         + '<a href="https://other.example/profiles/alice.html">Alice Example</a>'
     )
     assert audit_site(tmp_path)["profile_link_label_mismatches"] == {"index.html": {"alice": 1}}
+
+
+def test_standalone_paper_prose_links_keep_footnote_citations_unchanged() -> None:
+    index = profile_index({"alice": {"display_name": "Alice Example", "surname": "Example"}})
+    citations = (
+        '<section class="kpress-footnotes"><p>Alice Example, <em>A theorem</em>.</p></section>'
+    )
+    source = "<p>Alice Example\u2019s theorem.</p>" + citations
+    linked = link_prose(source, prefix="../", index=index)
+    assert linked.startswith(
+        '<p><a href="../profiles/alice.html">Example</a>\u2019s theorem.</p>'
+    )
+    assert linked.endswith(citations)

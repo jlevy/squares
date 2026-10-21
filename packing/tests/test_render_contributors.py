@@ -43,9 +43,13 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     assert "<h1>Profiles</h1>" in index
     assert 'class="kpress-table site-table site-profile-table"' in index
     assert '<th scope="col">Name</th>' in index
-    assert '<th scope="col">Results and credits</th>' in index
-    assert '<th scope="col" class="num">Resources</th><th scope="col">Links</th>' in index
-    assert "credits count distinct reviewed attribution spans" in index
+    assert '<th scope="col">Results</th><th scope="col">Credits</th>' in index
+    assert '<th scope="col">Resources</th><th scope="col">Accounts</th>' in index
+    assert '<div class="site-table-wrap site-wide">' in index
+    assert (
+        "Results count distinct registered results by their reviewed primary authors" in index
+    )
+    assert "Credits count distinct results that credit a person" in index
     assert "<title>Profiles" in index
     assert 'rel="canonical" href="https://jlevy.github.io/squares/profiles/"' in index
     # The directory names cited authors as well as contributors, and calls none of them
@@ -201,7 +205,7 @@ def test_credits_link_cases_and_results_preserving_roles_without_duplicates() ->
     )
     result = replace(
         case,
-        origin=CreditOrigin("packing/frontier/results.yaml", "T-051", "/credit"),
+        origin=CreditOrigin("packing/frontier/results.yaml", "T-051", "/builds_on/credit/0"),
         role="proof",
     )
     rendered = render_contributors.contributor_article(contributor, (case, case, result))
@@ -214,7 +218,7 @@ def test_credits_link_cases_and_results_preserving_roles_without_duplicates() ->
     )
     assert ">Full Public Name</a>" in directory
     assert 'class="site-credit-tally"' in directory
-    assert ", 2 credits</span>" in directory
+    assert '>1 credit</a> <span class="site-tally-levels">(at S' in directory
     assert "<details open>" not in rendered
     long_credits = tuple(
         replace(
@@ -224,7 +228,7 @@ def test_credits_link_cases_and_results_preserving_roles_without_duplicates() ->
         for number in range(1, 14)
     )
     expanded = render_contributors.contributor_article(contributor, long_credits)
-    assert "<details open><summary>Reviewed work: 13 results</summary>" in expanded
+    assert "<details open><summary>Credits: 13</summary>" in expanded
 
 
 def test_separate_bibliography_credits_and_identifier_evidence_are_preserved() -> None:
@@ -413,8 +417,8 @@ def test_profile_presents_selected_names_accounts_and_existing_news(
     directory = render_contributors.profile_table(
         [ahmed, registry.by_id["nate-chaoweeraprasit"]], ()
     )
-    assert "Manasseh Ahmed (MathCompSciFTW, Square Packing Fan)</a>" in directory
-    assert "Nate Chaoweeraprasit (natcha)</a>" in directory
+    assert "Manasseh Ahmed</a>" in directory
+    assert "Nate Chaoweeraprasit</a>" in directory
     ryu = render_contributors.contributor_article(
         replace(
             registry.by_id["ryu-sungjoon"],
@@ -459,21 +463,21 @@ def test_accounts_share_destinations_and_icons_in_profiles_and_compact_rows() ->
     )
     full = render_contributors.account_links(person)
     compact = render_contributors.account_links(person, compact=True)
-    assert full.count('class="site-account-icon"') == len(person.links)
-    assert compact.count('class="site-account-icon"') == len(person.links)
+    assert full.count('class="site-account-icon"') == 2
+    assert compact.count('class="site-account-icon"') == 2
     assert "<span>evand</span>" in full
     assert "<span>@evand</span>" in full
     assert "<span>evand</span>" in compact
     assert "<span>@evand</span>" in compact
-    assert "<span>example.org</span>" in compact
-    for link in person.links:
+    assert "example.org" not in compact
+    for link in person.links[:2]:
         target = link.url.replace("&", "&amp;")
         assert f'href="{target}"' in full
         assert f'href="{target}"' in compact
     assert 'aria-label="GitHub: evand (Evan Daniel)"' in compact
     assert 'title="Twitter / X: @evand (Evan Daniel)"' in compact
-    assert 'aria-label="Personal website:' in compact
-    assert 'aria-label="Publication website:' in compact
+    assert 'aria-label="Personal website:' not in compact
+    assert 'aria-label="Publication website:' not in compact
     assert "data-person" not in compact
     assert render_contributors.account_links(replace(person, links=()), compact=True) == ""
 
@@ -576,9 +580,13 @@ def test_a_source_credit_lists_under_each_result_naming_it_with_its_roles(
     article = render_contributors.contributor_article(
         contributor, (author, credit, credit, again, unnamed, other), results=REGISTER
     )
-    section = article.split('<section id="credited-work"><h2>Credited work</h2>', 1)[1].split(
-        "</section>", 1
-    )[0]
+    assert '<section id="results"><h2>Results</h2>' in article
+    assert '<section id="other-reviewed-records">' in article
+    section = "".join(
+        render_contributors.credited_work(
+            contributor.id, (author, credit, credit, again, unnamed, other), results=REGISTER
+        ).parts
+    )
     lines = re.findall(r"<li>.*?</li>", section)
     assert lines == [
         (
@@ -722,7 +730,7 @@ def test_directory_summary_unions_work_and_years_exclude_import_dates() -> None:
     summary = render_contributors.profile_summary(
         people, (first, first, second, case), results=records, resources=(resource, resource)
     )
-    assert "2 people · 1 result · 3 credits · 1 resource" in summary
+    assert "2 people · 1 result · 0 credits · 1 resource" in summary
     assert render_contributors.profile_years(people[0].id, (first,), records) is None
 
 
@@ -765,3 +773,13 @@ def test_credit_thread_references_stay_with_the_result_they_document(
     assert "#8" not in second
     assert "https://github.com/example/work/issues/7#issuecomment-1" in first
     assert '<span class="site-contributor-references">' in first
+
+
+def test_directory_unknown_years_and_zero_work_cells_are_blank() -> None:
+    person = load_contributors().by_id["manasseh-ahmed"]
+    table = render_contributors.profile_table((person,), (), results=())
+    assert '<td class="site-profile-years"></td>' in table
+    assert '<td class="site-profile-stats"></td>' in table
+    assert '<td class="site-profile-credits"></td>' in table
+    assert "0 results" not in table
+    assert "0 credits" not in table

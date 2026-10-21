@@ -791,7 +791,16 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            form, 9b459da65 and 97e4069d5) went live
 #:                                            on October 1 and 2, so the substantive
 #:                                            day is the one recorded
+#: The leading entry is proposed for PR #578; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.14",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Link reviewed oversight credits and article names to person profiles with "
+            "consistent surname labels."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.13",
         first_published="October 21, 2026",
@@ -936,7 +945,7 @@ OPTIMALITY_REVIEW_HISTORY = (
         first_published="October 21, 2026",
         result_scope=(
             "Correct Manasseh Ahmed's name and credit Hiroaki Hosono's checker and "
-            "formalization reports by name."
+            "formalization reports by name; link reviewed article names to person profiles."
         ),
     ),
     PublicationHistoryEntry(
@@ -1059,7 +1068,10 @@ THRESHOLD_REVIEW_HISTORY = (
     PublicationHistoryEntry(
         version="v0.1.1",
         first_published="October 21, 2026",
-        result_scope="Credit Hiroaki Hosono's checker and retained tools by name.",
+        result_scope=(
+            "Credit Hiroaki Hosono's checker and retained tools by name; "
+            "link reviewed names in the article to person profiles."
+        ),
     ),
     PublicationHistoryEntry(
         version="v0.1.0",
@@ -1090,7 +1102,16 @@ THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 
 #: The standalone tutorial on finding and verifying record packings. Its version and
 #: dates belong to the paper, independently of the site and n = 11 series.
+#: The leading entry is proposed for PR #578; confirm its date at first deployment.
 PACKING_METHODS_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.2.4",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Link reviewed oversight credits and article names to person profiles with "
+            "consistent surname labels."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.2.3",
         first_published="October 17, 2026",
@@ -1186,6 +1207,28 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.13",
+        version="v0.4.14",
+        impact="patch",
+        reason=(
+            "Link the oversight credit to Joshua Levy's profile and use the reviewed "
+            "surname label in the HTML and Markdown fronts, also used for PDF output; "
+            "link reviewed article names to profiles."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:square-packing-methods-survey",
+        previous_version="v0.2.3",
+        version="v0.2.4",
+        impact="patch",
+        reason=(
+            "Link the oversight credit to Joshua Levy's profile and use the reviewed "
+            "surname label in the HTML and Markdown fronts, also used for PDF output; "
+            "link reviewed article names to profiles."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.8.13",
@@ -1482,7 +1525,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         impact="patch",
         reason=(
             "Correct Manasseh Ahmed's name and credit Hiroaki Hosono's checker and "
-            "formalization reports by name."
+            "formalization reports by name; link reviewed article names to person profiles."
         ),
     ),
     ReleaseImpactDecision(
@@ -1490,7 +1533,10 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         previous_version="v0.1.0",
         version="v0.1.1",
         impact="patch",
-        reason="Credit Hiroaki Hosono's checker and retained tools by name.",
+        reason=(
+            "Credit Hiroaki Hosono's checker and retained tools by name; "
+            "link reviewed names in the article to person profiles."
+        ),
     ),
     ReleaseImpactDecision(
         component="site",
@@ -4732,126 +4778,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "GitHub source-link revision substitutions. Mathematical statements, "
             "certificate inputs and paper content are unchanged. No paper PDF was "
             "rebuilt or compared for byte identity."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=("paper:n11-lower-bounds-explainer",),
-        paths=(
-            "packing/atlas/known-best/bound-citations.json",
-            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
-            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
-            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
-            "packing/devtools/adopt_houses.py",
-            "packing/devtools/apply_closed_form.py",
-            "packing/devtools/contributor_credit.py",
-            "packing/devtools/overview_data.py",
-            "packing/devtools/overview_sections.py",
-            "packing/devtools/register_gupta_reports.py",
-            "packing/devtools/register_ryxu_reports.py",
-            "packing/devtools/render_case_pages.py",
-            "packing/devtools/render_changelog.py",
-            "packing/devtools/render_contributors.py",
-            "packing/devtools/render_frontier_page.py",
-            "packing/devtools/render_n11_optimality_review.py",
-            "packing/devtools/render_overview.py",
-            "packing/devtools/result_credit.py",
-            "packing/devtools/result_overview.py",
-            "packing/devtools/run_negative_controls.py",
-            "packing/devtools/site_documents.py",
-            "packing/devtools/site_urls.py",
-            "packing/devtools/state_ai_assistance.py",
-            "packing/devtools/validate_schemas.py",
-            "packing/frontier/results.yaml",
-            "packing/src/sqpack/cli/validate.py",
-            "packing/src/sqpack/contributor_occurrences.py",
-            "packing/src/sqpack/contributors.py",
-        ),
-        outputs=("papers/n11-lower-bounds-explainer.md",),
-        reason=(
-            "Compared with main 51ac9d7ee, the exact candidate scope is the 30 paths "
-            "above. The explainer manuscript and producer are byte-identical to main, and "
-            "its n11 bound-citation entry is unchanged; the other 63 changed entries are "
-            "Hosono and Ryu credit renames that do not enter the article. Main's explainer "
-            "v0.4.13 history and October 13 article revision remain current. Changed "
-            "standalone case/result serialization, News/profile navigation and "
-            "sibling-paper metadata do not revise this paper content. The n29 "
-            "adoption-writer repair reproduces retained historical wording. The v0.9.0 "
-            "site cut regenerates the five claim documents, which differ from main only in "
-            "source-link revisions. This is a source review against main; no baseline "
-            "paper render, PDF rebuild or rendered byte-identity comparison is claimed."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=("paper:square-packing-methods-survey",),
-        paths=(
-            "packing/devtools/adopt_houses.py",
-            "packing/devtools/apply_closed_form.py",
-            "packing/devtools/contributor_credit.py",
-            "packing/devtools/overview_data.py",
-            "packing/devtools/overview_sections.py",
-            "packing/devtools/register_gupta_reports.py",
-            "packing/devtools/register_ryxu_reports.py",
-            "packing/devtools/render_case_pages.py",
-            "packing/devtools/render_changelog.py",
-            "packing/devtools/render_contributors.py",
-            "packing/devtools/render_frontier_page.py",
-            "packing/devtools/render_n11_optimality_review.py",
-            "packing/devtools/render_overview.py",
-            "packing/devtools/result_credit.py",
-            "packing/devtools/result_overview.py",
-            "packing/devtools/run_negative_controls.py",
-            "packing/devtools/site_documents.py",
-            "packing/devtools/site_urls.py",
-            "packing/devtools/state_ai_assistance.py",
-            "packing/devtools/validate_schemas.py",
-            "packing/frontier/README.md",
-            "packing/frontier/n-029.md",
-            "packing/frontier/n-051.md",
-            "packing/frontier/n-070.md",
-            "packing/frontier/n-084.md",
-            "packing/frontier/n-086.md",
-            "packing/frontier/n-088.md",
-            "packing/frontier/n-102.md",
-            "packing/frontier/n-103.md",
-            "packing/frontier/n-105.md",
-            "packing/frontier/n-108.md",
-            "packing/frontier/n-126.md",
-            "packing/frontier/n-127.md",
-            "packing/frontier/n-129.md",
-            "packing/frontier/n-130.md",
-            "packing/frontier/n-131.md",
-            "packing/frontier/n-153.md",
-            "packing/frontier/n-154.md",
-            "packing/frontier/n-175.md",
-            "packing/frontier/n-179.md",
-            "packing/frontier/n-180.md",
-            "packing/frontier/n-207.md",
-            "packing/frontier/n-208.md",
-            "packing/frontier/n-209.md",
-            "packing/frontier/n-236.md",
-            "packing/frontier/n-237.md",
-            "packing/frontier/n-238.md",
-            "packing/frontier/n-239.md",
-            "packing/frontier/n-261.md",
-            "packing/frontier/n-267.md",
-            "packing/frontier/n-295.md",
-            "packing/frontier/results.yaml",
-            "packing/frontier/source-coverage.yaml",
-        ),
-        outputs=("papers/square-packing-methods-survey.md",),
-        reason=(
-            "Compared with main 51ac9d7ee, the exact candidate scope is the 53 paths "
-            "above. The methods manuscript, producer and every passive figure input are "
-            "byte-identical to main, including the n29 certificate drawing. Changed "
-            "frontier/source-coverage prose and case credits, including n108's Hosono "
-            "credit for its fine-net lower bound, are cited by link rather than "
-            "incorporated; shared News, profile and standalone case/result helpers do not "
-            "enter the paper article. The n29 writer repair preserves retained historical "
-            "facts. Its v0.2.3 content edition remains current. This is a source review "
-            "against main; no baseline paper render, PDF rebuild or rendered "
-            "byte-identity comparison is claimed."
         ),
     ),
     ReleaseNoPublicChange(

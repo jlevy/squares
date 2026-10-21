@@ -23,7 +23,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from devtools import overview_data, overview_sections, render_overview
+from devtools import overview_data, overview_sections, profile_links, render_overview
 from devtools.overview_data import EN_DASH
 from devtools.overview_sections import (
     ADDED_DAYS,
@@ -49,11 +49,8 @@ WEEK = re.compile(
 #: One day's disclosure in the seven days: its date, whether it starts open, the rest.
 DAY = re.compile(r'<details data-day="(\d{4}-\d{2}-\d{2})"( open)?>(.*?)</details>', re.DOTALL)
 #: One finder's line: the project its name links to, if any, the name, and the rest.
-LINE = re.compile(
-    r'<li><span class="site-rollup-who">(?:<a href="([^"]+)"[^>]*>)?([^<]+)(?:</a>)?</span>'
-    r"(.*?)</li>",
-    re.DOTALL,
-)
+LINE = re.compile(r'<li><span class="site-rollup-who">()(.*?)</span> (.*?)</li>', re.DOTALL)
+
 #: One result's link in a line, with its attributes, and what it says to a screen
 #: reader past its id when it has been superseded.
 ID_LINK = re.compile(
@@ -67,10 +64,11 @@ ID_LINK = re.compile(
 #: been superseded.
 ENTRY = re.compile(
     r'<li( class="site-rollup-superseded")?><a href="#(t-\d{3})"( title="Superseded")?>'
-    r"(T-\d{3})</a> ([^<]*)<small>([^<]*) · (V\d) (C\d) (<b>S\d</b>|S\d) · "
-    r'(?:<a href="([^"]+)" target="_blank" rel="noopener noreferrer">)?([^<]+)(?:</a>)?'
-    r"( · superseded)?</small></li>"
+    r"(T-\d{3})</a> (.*?)<small>([^<]*) · (V\d) (C\d) (<b>S\d</b>|S\d) · "
+    r"()(.*?)( · superseded)?</small></li>",
+    re.DOTALL,
 )
+
 #: A day's link to its own rows: the day it filters on and how many it says it shows.
 DAY_LINK = re.compile(
     r'<p><a href="results\.html\?added=(\d{4}-\d{2}-\d{2})#all-results">'
@@ -229,6 +227,38 @@ def test_each_day_lists_exactly_the_entries_that_arrived_on_it(
         assert f"· {count} result{'' if count == 1 else 's'}</span>" in body, day
 
 
+def _assert_finder(
+    markup: str, own: list[overview_data.Result] | tuple[overview_data.Result, ...]
+) -> None:
+    """Retain the reviewed joins; a conflicting grouping must not choose one identity."""
+    finders = {credit_finder(result.credit) for result in own}
+    assert len(finders) == 1
+    finder = next(iter(finders))
+    reviewed = {
+        credit_finder(result.credit_html or html.escape(result.credit)) for result in own
+    }
+    if len(reviewed) != 1:
+        assert markup == html.escape(finder)
+        return
+    expected = next(iter(reviewed))
+    if '<a href="profiles/' in expected:
+        assert markup == f"<span data-contributor-plain>{expected}</span>"
+        assert 'target="_blank"' not in markup
+        return
+    assert html.unescape(re.sub(r"<[^>]*>", "", markup)) == finder
+    held = Counter(slug for result in own for slug in overview_sections.result_projects(result))
+    links = re.findall(r'href="([^"]+)"', markup)
+    if not held:
+        assert not links
+    else:
+        addresses = {
+            overview_sections.project_slug(url): url for url in overview_sections.project_urls()
+        }
+        most = max(held.values())
+        assert len(links) == 1
+        assert links[0] in {addresses[slug] for slug, count in held.items() if count == most}
+
+
 def test_a_day_entry_says_what_the_row_says(
     added: str, results: str, overview: overview_data.Overview
 ) -> None:
@@ -239,9 +269,6 @@ def test_a_day_entry_says_what_the_row_says(
     none does; and it is muted and its id titled exactly where it is superseded. The
     entries of a day run from the highest S rung, then by id."""
     by_id = {result.id.lower(): result for result in overview.results}
-    addresses = {
-        overview_sections.project_slug(url): url for url in overview_sections.project_urls()
-    }
     for _, _, body in DAY.findall(added):
         entries = ENTRY.findall(body)
         keys = []
@@ -263,7 +290,9 @@ def test_a_day_entry_says_what_the_row_says(
             record = result.record
             assert label.lower() == anchor
             assert f'<tr id="{anchor}"' in results
-            assert html.unescape(headline) == overview_sections.plain_text(result.summary)
+            assert headline == profile_links.link_prose(
+                html.escape(overview_sections.plain_text(result.summary), quote=False)
+            )
             if len(result.scope) <= overview_sections.ADDED_CASES:
                 assert html.unescape(cases) == f"n = {result.scope}", anchor
             else:
@@ -272,9 +301,8 @@ def test_a_day_entry_says_what_the_row_says(
             level = overview_sections.significance(result)
             bold = level > ROLLUP_FLOOR
             assert score == (f"<b>S{level}</b>" if bold else f"S{level}"), anchor
-            assert html.unescape(name) == credit_finder(result.credit), anchor
-            projects = overview_sections.result_projects(result)
-            assert href == (addresses[projects[0]] if projects else ""), anchor
+            _assert_finder(name, (result,))
+            assert not href
             superseded = overview_sections.is_superseded(result)
             assert bool(muted) == bool(title) == bool(note) == superseded, anchor
             keys.append((-level, result.id))
@@ -387,25 +415,15 @@ def test_a_line_credits_its_finder_and_links_the_project_holding_most_of_it(
     finder has one line a week. The name links to a listed project the record attributes
     the most of the line's results to, and is plain where no listed project holds any."""
     by_id = {result.id.lower(): result for result in overview.results}
-    addresses = {
-        overview_sections.project_slug(url): url for url in overview_sections.project_urls()
-    }
     for week, _, body in WEEK.findall(rollup):
         lines = LINE.findall(body)
-        names = [html.unescape(name) for _, name, _ in lines]
+        names = [html.unescape(re.sub(r"<[^>]*>", "", name)) for _, name, _ in lines]
         assert len(names) == len(set(names)), week
         for href, name, rest in lines:
             own = [by_id[anchor] for anchor, *_ in ID_LINK.findall(rest)]
             assert own, (week, name)
-            assert {credit_finder(result.credit) for result in own} == {html.unescape(name)}
-            held = Counter(
-                slug for result in own for slug in overview_sections.result_projects(result)
-            )
-            if not held:
-                assert not href, (week, name)
-                continue
-            most = max(held.values())
-            assert href in {addresses[slug] for slug, count in held.items() if count == most}
+            _assert_finder(name, own)
+            assert not href
 
 
 def test_superseded_results_are_muted_and_the_most_significant_carry_their_rung(
@@ -468,7 +486,7 @@ def _entry(
     }
     if not record["landed"]:
         del record["landed"]
-    return dataclasses.replace(base, record=record, credit=credit)
+    return dataclasses.replace(base, record=record, credit=credit, credit_html="")
 
 
 def test_days_group_by_arrival_and_not_by_registration_or_publication(
@@ -616,3 +634,43 @@ def test_a_kind_is_counted_in_words() -> None:
     assert overview_sections.kind_phrase(made) == (
         "1 lower bound, 2 optimality results and 1 case exclusion result"
     )
+
+
+def test_compound_finders_use_reviewed_people_and_conflicting_joins_stay_plain() -> None:
+    base = overview_data.Result(
+        record={},
+        group="",
+        credit="Guzhou0806, Mira after Levy",
+        ours=False,
+        credit_html=(
+            '<a href="profiles/guzhou0806.html">Guzhou0806</a>, '
+            '<a href="profiles/mira.html">Mira-acc</a> after '
+            '<a href="profiles/joshua-levy.html">Levy</a>'
+        ),
+    )
+    shown = overview_sections.credit_link(
+        "Guzhou0806, Mira", ("https://example.org/repo",), results=(base,)
+    )
+    assert "profiles/guzhou0806.html" in shown
+    assert "profiles/mira.html" in shown
+    assert "joshua-levy" not in shown
+    assert "https://example.org/repo" not in shown
+    conflicting = dataclasses.replace(base, credit_html="Guzhou0806, Mira after Levy")
+    assert (
+        overview_sections.credit_link(
+            "Guzhou0806, Mira", ("https://example.org/repo",), results=(base, conflicting)
+        )
+        == "Guzhou0806, Mira"
+    )
+
+
+def test_unresolved_source_credit_does_not_gain_an_alias_identity_in_a_summary() -> None:
+    result = overview_data.Result(
+        record={}, group="", credit="Mira", ours=False, credit_html="Mira"
+    )
+    shown = overview_sections.credit_link(
+        "Mira", ("https://example.org/work",), results=(result,)
+    )
+    assert 'href="https://example.org/work"' in shown
+    assert ">Mira</a>" in shown
+    assert "profiles/" not in shown

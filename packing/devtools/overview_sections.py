@@ -79,8 +79,10 @@ from devtools.site_tallies import (
     ResultTally as ProjectTally,
 )
 from devtools.site_tallies import (
-    project_credit_count,
+    project_credit_associations,
+    project_primary_results,
     render_tally,
+    tally_credits,
     tally_results,
 )
 from devtools.site_topics import topic_chip, topic_label
@@ -1433,8 +1435,21 @@ def external_link(url: str, text: str) -> str:
     return f'<a href="{_esc(url)}" target="_blank" rel="noopener noreferrer">{text}</a>'
 
 
-def credit_link(finder: str, projects: Sequence[str]) -> str:
-    """Prefer the exact reviewed personal identity, otherwise the cited project."""
+def credit_link(finder: str, projects: Sequence[str], *, results: Sequence[Result] = ()) -> str:
+    """Prefer the reviewed finder joins, otherwise an exact identity or cited project."""
+    if results:
+        reviewed = {
+            credit_finder(result.credit_html or _esc(result.credit)) for result in results
+        }
+        # Identical words do not authorize choosing between different reviewed joins.
+        if len(reviewed) != 1:
+            return _esc(finder)
+        linked = next(iter(reviewed))
+        if '<a href="profiles/' in linked:
+            return f"<span data-contributor-plain>{linked}</span>"
+        # A source-addressed unresolved credit stays unresolved in its summary too.
+        name = _esc(finder)
+        return external_link(projects[0], name) if projects else name
     linked = project_author(finder).removeprefix("By ")
     if '<a href="profiles/' in linked:
         return f"<span data-contributor-plain>{linked}</span>"
@@ -1445,7 +1460,8 @@ def credit_link(finder: str, projects: Sequence[str]) -> str:
 def rollup_who(credit: RollupCredit) -> str:
     """A line's credit (`credit_link`), linked to the project holding most of its
     results, in the medium weight that opens the line."""
-    return f'<span class="site-rollup-who">{credit_link(credit.finder, credit.projects)}</span>'
+    linked = credit_link(credit.finder, credit.projects, results=credit.results)
+    return f'<span class="site-rollup-who">{linked}</span>'
 
 
 #: What a muted id in the weekly lines says to a screen reader, which the grey cannot.
@@ -1552,7 +1568,9 @@ def added_entry(result: Result) -> str:
     title = ' title="Superseded"' if superseded else ""
     headline = link_prose(html.escape(plain_text(result.summary), quote=False))
     rungs = f"{_esc(record['verification'])} {_esc(record['confirmation'])} {score}"
-    who = credit_link(credit_finder(result.credit), finder_projects((result,)))
+    who = credit_link(
+        credit_finder(result.credit), finder_projects((result,)), results=(result,)
+    )
     note = " · superseded" if superseded else ""
     return (
         f'<li{mark}><a href="#{_esc(result.id.lower())}"{title}>{_esc(result.id)}</a> '
@@ -2352,7 +2370,7 @@ def link_card(
 #: of weighted certificates is two repositories under one key, Guzhou0806's R012 and
 #: Mira's measure; Guzhou0806's is listed here, so the result registered from the packet
 #: counts for it. The key of Burns's and Massaccesi's n = 17 bound names both authors
-#: and both posts, so its results count for each.
+#: and both posts; reviewed roles separate Massaccesi's Results from Burns's Credits.
 PROJECT_EXTRA_KEYS: dict[str, tuple[str, ...]] = {
     "https://github.com/Guzhou0806/n17-square-packing": (
         "[n17 weighted certificates 2026-09-20]",
@@ -2410,8 +2428,8 @@ def source_repository(url: str) -> str:
 def project_source_keys() -> dict[str, frozenset[str]]:
     """Each listed project's bibliography keys: those the source-coverage register gives
     the sources at its address, those `PROJECT_EXTRA_KEYS` adds, and every key whose
-    venue is the project's in `SOURCE_VENUES`. A result is a project's where its
-    `attribution.source_keys` names one of them."""
+    venue is the project's in `SOURCE_VENUES`. These keys establish source scope;
+    reviewed person roles separately decide primary Results and received Credits."""
     coverage = safe_load(SOURCE_COVERAGE.read_text(encoding="utf-8"))["sources"]
     bibliography = safe_load(BIBLIOGRAPHY.read_text(encoding="utf-8"))["sources"]
     keys: dict[str, set[str]] = {
@@ -2427,13 +2445,23 @@ def project_source_keys() -> dict[str, frozenset[str]]:
     return {url: frozenset(found) for url, found in keys.items()}
 
 
+@cache
+def _project_primary_ids() -> dict[str, frozenset[str]]:
+    records, _ = _tally_records()
+    authors = {resource.url: resource.profile_ids for resource in resources()}
+    occurrences = occurrence_registry().occurrences
+    return {
+        url: frozenset(
+            project_primary_results(authors.get(url, ()), keys, occurrences, records)
+        )
+        for url, keys in project_source_keys().items()
+    }
+
+
 def result_projects(result: Result) -> tuple[str, ...]:
-    """The slugs of the listed projects a result is attributed to, in the list's order.
-    A result attributed to sources of several projects is each one's; this project's
-    results, and a result by others whose source no listed project holds, are none's."""
-    cited = set((result.record.get("attribution") or {}).get("source_keys") or ())
+    """Projects whose identified authors primarily authored this registered result."""
     return tuple(
-        project_slug(url) for url, keys in project_source_keys().items() if cited & keys
+        project_slug(url) for url, ids in _project_primary_ids().items() if result.id in ids
     )
 
 
@@ -2518,10 +2546,23 @@ def headline_html(url: str) -> str:
 
 
 def _tallied(urls: Sequence[str], overview: Overview) -> dict[str, ProjectTally]:
-    """Each of `urls`'s tally over the register, by its address."""
-    slugs = {project_slug(url): url for url in urls}
-    tallies = project_tallies(list(slugs), cited_results(overview), significance_levels())
-    return {url: tallies[slug] for slug, url in slugs.items()}
+    """Each project's reviewed primary results, with the shared significance ordering."""
+    authors = {resource.url: resource.profile_ids for resource in resources()}
+    records = tuple(result.record for result in overview.results)
+    measures = {
+        result.id: (significance(result), result.dated[1]) for result in overview.results
+    }
+    occurrences = occurrence_registry().occurrences
+    return {
+        url: tally_results(
+            project_primary_results(
+                authors.get(url, ()), project_source_keys().get(url, ()), occurrences, records
+            ),
+            measures,
+            significance_levels(),
+        )
+        for url in urls
+    }
 
 
 def ranked_projects(overview: Overview) -> list[tuple[str, ProjectTally]]:
@@ -2552,11 +2593,40 @@ def results_filter_url(project: str, level: int | None = None) -> str:
     return f"{RESULTS_PAGE}?project={project}{exact}"
 
 
+@cache
+def _tally_records() -> tuple[tuple[Mapping[str, Any], ...], dict[str, tuple[int, str]]]:
+    records = tuple(safe_load((FRONTIER / "results.yaml").read_text())["results"])
+    measures = {
+        str(record["id"]): (
+            int(record["significance"]["score"]),
+            str(
+                (record.get("attribution") or {}).get("published")
+                or record.get("established")
+                or record["registered"]
+            ),
+        )
+        for record in records
+    }
+    return records, measures
+
+
 def project_tally(url: str, tally: ProjectTally) -> str:
-    """The shared result/credit component, scoped to this project's explicit sources."""
+    """The shared result/credit components scoped to this project's explicit sources."""
     slug = project_slug(url)
-    credit_count = project_credit_count(
-        project_source_keys().get(url, ()), tally.results, occurrence_registry().occurrences
+    records, measures = _tally_records()
+    authors = next(
+        (resource.profile_ids for resource in resources() if resource.url == url), ()
+    )
+    associations = project_credit_associations(
+        authors, project_source_keys().get(url, ()), occurrence_registry().occurrences, records
+    )
+    credit_markup = (
+        " · "
+        + render_tally(
+            tally_credits(associations, measures, significance_levels()), noun="credit"
+        )
+        if associations is not None
+        else ""
     )
     return (
         '<span class="site-credit-tally">'
@@ -2564,8 +2634,8 @@ def project_tally(url: str, tally: ProjectTally) -> str:
             tally,
             total_href=results_filter_url(slug) if tally.results else None,
             level_hrefs={level: results_filter_url(slug, level) for level, _ in tally.counts},
-            credit_count=credit_count,
         )
+        + credit_markup
         + "</span>"
     )
 
@@ -2626,7 +2696,11 @@ def resource_cards(
     )
     return _cards(
         [
-            resource_card(record, tallies[record.url], current_profile=current_profile)
+            resource_card(
+                record,
+                tallies.get(record.url, ProjectTally((), (), "")),
+                current_profile=current_profile,
+            )
             for record in records
         ]
     )

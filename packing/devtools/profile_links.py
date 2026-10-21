@@ -329,7 +329,13 @@ class _Prose(HTMLParser):
                 {"kpress-math", "katex"}.intersection(classes)
             )
             if not self.audit:
-                blocked = blocked or tag in _HEADINGS or "site-contributor-sources" in classes
+                blocked = (
+                    blocked
+                    or tag in _HEADINGS
+                    or bool(
+                        {"site-contributor-sources", "kpress-footnotes"}.intersection(classes)
+                    )
+                )
             if self.anchor is not None and tag != "a" and blocked:
                 self.anchor_protected = True
             self.stack.append((tag, blocked, frozenset(classes)))
@@ -423,6 +429,8 @@ class _Prose(HTMLParser):
                     context = "heading"
                 elif "site-contributor-sources" in classes:
                     context = "profile source evidence"
+                elif "kpress-footnotes" in classes:
+                    context = "paper source citations"
                 elif "site-case-prose" in classes:
                     context = "case narrative"
                 elif "site-case-result-summary" in classes:

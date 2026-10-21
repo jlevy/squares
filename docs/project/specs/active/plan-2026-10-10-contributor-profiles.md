@@ -7,8 +7,9 @@
 **Status:** Data-model spike, initial population, website and `/profiles/` URLs
 implemented; continued from [PR #490](https://github.com/jlevy/squares/pull/490) in
 [PR #578](https://github.com/jlevy/squares/pull/578), under final integration and review
-on 2026-10-21. The current integration bead is `think-zpfo`; dated validation receipts
-below apply only to the revisions they name.
+on 2026-10-21. The current integration bead is `think-zpfo`; coverage expansion and
+final validation are still in progress.
+Dated validation receipts below apply only to the revisions they name.
 
 **Workflow:** W7 pipeline improvement, entered through `tbd shortcut new-plan-spec`.
 
@@ -23,7 +24,9 @@ Include historical contributors, current contributors, paper authors, and people
 acknowledged for methods or prior work.
 Each record has structured identity and public links in softschema YAML frontmatter.
 Its optional Markdown body is one biographical paragraph of at most five sentences.
-The website presents the same content as a popover and a complete standalone page.
+The website publishes complete standalone profiles at `/profiles/<id>.html`. Directory
+rows, project bylines and narrative links navigate directly; designated case/result
+credit links may retain the existing contextual overlay enhancement.
 
 Convert credited names into profile links wherever the website presents them, including
 main results tables, result histories, case pages, paper credits and project cards.
@@ -40,18 +43,24 @@ before build or test commands.
 Earlier dated receipts below are historical, including their counts, environments and
 preview ports.
 
-The current census has 45 profiles and 1,503 structured occurrences: 1,163 resolved, 334
-unresolved and 6 non-person.
-One additional reviewed project-author occurrence makes 1,504 total manifest rows.
-All 146 inventoried PDFs still await complete credit inspection; this presentation slice
-does not close `think-m7il`.
+The frozen identity batch contains 75 profiles.
+The structured census reports 1,428 resolved spans, 78 non-person spans and seven
+unresolved spans; ten manual origins are reported separately.
+The primary-authorship model yields 213 distinct registered results and 701 non-primary
+person/result credits.
+These totals precede the requested historically-best-known Results/current Records
+classification (`think-lekx`), which is still under design review.
+The seven remaining spans have explicit identity or collective-credit exceptions under
+`think-0v9j`; no new mathematical result is registered in this PR. All 146 inventoried
+PDFs still await complete credit inspection; this presentation slice does not close
+`think-m7il`.
 
-Home and About lead to the directory, which shows full names, meaningful additional
-handles, distinct results by significance, separate credits, resources and public
-accounts. Profile resources share homepage cards, with the source address directly
-beneath the author byline.
-Recorded GitHub issue and pull-request references retain their source or registration
-role. The
+Home and About lead to the directory, which shows full names, distinct results by
+significance, separate credits, resources and public accounts.
+Additional handles stay on individual profiles, keeping directory names compact.
+Profile resources share homepage cards, with the source address directly beneath the
+author byline. Recorded GitHub issue and pull-request references retain their source or
+registration role. The
 [presentation contract](../../../../packing/devtools/templates/paper-design.md#person-profiles)
 and [attribution policy](../../../../attribution.md) own these rules.
 
@@ -68,11 +77,89 @@ and [attribution policy](../../../../attribution.md) own these rules.
 | `think-1ofm` | Directory people, distinct results, credits and unique resource totals |
 | `think-uyag` | Evidenced years and source links in existing biographies |
 | `think-vdsd` | Lower-level-only breadcrumbs, nearer navigation and clear of titles |
+| `think-f3cl` | Paper release decisions for visible profile-credit changes |
+| `think-d0zr` | Wide table, separate Results/Credits, blank zero cells, first-line icons |
+| `think-etb6` | Shared nav GitHub mark and harmonious icon sizing |
+| `think-gjxb` | Original-work activity years, excluding later citations |
+| `think-94ky` | Primary results versus per-result credits, both by significance |
+| `think-sb9n` | Evidenced author joins and historical authored sources |
+| `think-uwd6` | Bidirectional profile coverage, significant results and PDF credits |
+| `think-8wj0` | Generated PDF proof/formalization figure credits and person profiles |
+| `think-2ccx` | Nine construction-finder profiles printed in PDF figure credits |
+| `think-nd1y` | Significant-result identities and missing-authored-work review |
+| `think-eigy` | Remaining clear person labels across all significance levels |
+| `think-0ltn` | Dated historical contribution evidence not represented by existing records |
+| `think-noql` | SoftSchema references, derived-data rules and agent maintenance guide |
+| `think-cq58` | Reconcile this plan, phases, acceptance and current receipts |
+| `think-mthi` | Accounts-only column and visible website/repository Resources |
+| `think-njfb` | Parenthesized single-level tallies and muted significance detail |
+| `think-lekx` | Historically best-known Results and currently best-known Records |
 
-Final integration validation and publication remain open under `think-zpfo` until its
-receipt is recorded.
-The next reviewer should review PR #578; merging and deployment remain separate from
-this handoff.
+The live intermediate preview is <http://127.0.0.1:8790/profiles/index.html>, served
+from
+`/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-integrated-corrected`. It
+includes the corrected result/credit semantics and credit significance breakdowns, but
+predates the final 75-profile data batch and latest Accounts/Resources/Records changes.
+The definitive complete build, including all four PDFs, remains pending.
+The sourced integration environment includes the project interpreter and tools on PATH.
+
+Local focused checks passed: 88 profile, naming, resource, tally and GitHub-reference
+tests in 91.16 seconds; 62 release/component/impact tests in 17.93 seconds; and 19
+result-rollup tests in 10.35 seconds.
+Those checks predate the activity-year and primary-authorship corrections; the revised
+models passed 29 focused tests, including the reviewed historical year sets for all 45
+previous profiles and disjoint result/credit invariants.
+New PDF-profile records passed 92 contributor tests; full integration acceptance remains
+pending.
+Astra reviewed the biography sources, build inputs and release decisions, and is
+has accepted the revised attribution model with no blocker.
+The full push gate and final hosted checks are recorded in PR #578 and `think-zpfo`;
+these focused receipts do not stand in for that acceptance.
+
+Visible oversight credit labels and links require proposed paper successors: explainer
+`v0.4.14` and methods survey `v0.2.4`. The site remains the proposed `v0.9.0` batch.
+Confirm all proposed edition dates at first deployment.
+The next reviewer should review PR #578, starting with the final checks and diff;
+merging and deployment remain separate from this handoff.
+
+## Remaining Integration Phases
+
+| Phase | Work and acceptance | Owner beads | State |
+| --- | --- | --- | --- |
+| Attribution correction | Disjoint primary results and non-primary credits, significance tallies, original-work activity years; all-profile regression and independent review | `think-94ky`, `think-gjxb`, `think-sb9n` | Model and renderer implemented; final rebuild/checks pending |
+| Coverage completion | Every existing profile’s evidenced work reconciled; significant-result authors and PDF credits audited; missing joins, profiles and result records explicitly distinguished | `think-uwd6`, `think-m7il` | In progress; no complete-archive claim |
+| Contract and plan reconciliation | Document canonical references, semantic checks and update procedure; reconcile current requirements and historical receipts | `think-noql`, `think-cq58` | In progress |
+| Website acceptance | Rebuild all affected pages, verify table/card/link destinations and responsive presentation, run integrated gates | `think-zpfo`, presentation beads above | Pending corrected model and coverage fixes |
+| Review handoff | Commit, integrate latest main/PR head, push PR #578, wait for hosted checks and publish final receipts | `think-zpfo` | Pending; do not merge or deploy |
+
+The implementation phases below describe the original delivery sequence.
+Dated review and handoff sections preserve their historical evidence; this section and
+Current Integration define the next work.
+The canonical model maintenance guide is
+[Person Profiles](../../../../packing/contributors/README.md).
+
+### Explicit Follow-ups Outside This PR
+
+The owner confirmed that this PR completes profile links and stabilizes the website; new
+historical result registrations are separate intake work.
+
+| Bead | Remaining work |
+| --- | --- |
+| `think-m7il` | Full archive population and all 146 PDF full-credit inspections |
+| `think-0v9j` | Seven unresolved spans: collective Levy credits, BuddenPing, a seed-data clause and hmbelvedere |
+| `think-jtp4` | Historical original-claim intake for Gensane/Ryckelynck, Stromquist and Arslanov |
+| `think-mdb2` | Profile projection of existing non-T/source-claim ledgers, including beyond-horizon records and historical Schadt work |
+| `think-o3j2` | MacIver reported lower-bound intake with missing-certificate limitations |
+| `think-0ltn` | Dated historical contributions lacking a canonical date-bearing record |
+| `think-wwav` | Accessible profile anchors in generated atlas SVG/PDF credit paragraphs |
+| `think-j13b` | Previously tracked mobile performance diagnosis |
+
+Generated atlas credit text currently has no profile anchors: reviewed figure identity
+joins establish evidence, not SVG or PDF link annotations.
+The publication footnote and normal HTML name links are separate supported surfaces.
+See the [coverage review](../../reviews/review-2026-10-21-profile-coverage.md) and
+[PDF credit audit](../../../../packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md)
+for source evidence and dispositions.
 
 ## Goals and Scope
 
@@ -81,7 +168,8 @@ this handoff.
 - Include historical and current credit occurrences, starting with key contributors
   visible on the site and credited on retained PDFs, then reconcile the full archive.
 - Source identity matches, biography facts and account ownership; omit unknown values.
-- Make ordinary links work without JavaScript and enhance them with accessible popovers.
+- Keep directory and narrative navigation ordinary links that work without JavaScript.
+  Preserve contextual enhancements only on designated case/result credit surfaces.
 - Use sub-agents for extraction, profile authoring and mechanical updates, with disjoint
   assignments and independent identity review.
 
@@ -173,13 +261,18 @@ The shared design guide owns layout; this plan owns rollout and coverage.
 
 Home and About share a brief invitation and the standard **All Profiles** action,
 without name previews.
-The directory is a surname-sorted table of full real/public names, a shared
-result/credit tally, public account icons with visible usernames or domains, and
+The directory is a surname-sorted table of full real/public names, a shared separate
+Results and Credits columns, public account icons with visible usernames or domains, and
 cited-resource counts linking to each profile’s Resources section.
-Result counts are distinct registered IDs reached through reviewed source attribution;
-credits are unique reviewed manifest spans.
-The same tally renderer serves project cards and profile pages, retaining project scope
-and displaying one occupied significance level as “3 results at S4.” The typed
+Results count distinct registered IDs with reviewed primary authorship.
+Credits count distinct results explicitly crediting the person in a non-primary role,
+once per person and result.
+Both use the reported result’s significance.
+Source packets containing several authors’ work require the reviewed result-specific
+credit roles; packet authorship alone does not establish primary authorship of every
+result.
+The same tally renderer serves project cards and profile pages, retaining project
+scope and displaying one occupied significance level as “3 results (at S4).” The typed
 `site_resources` projection derives resource relationships from the existing curated
 homepage inventories and explicit bylines; person records store no second list.
 Credits and Resources remain separate counts.
@@ -248,7 +341,7 @@ without a heading or duplicate YAML biography field.
 Consumers render it as content and never extract structured facts from it.
 Phase 2 renders only inline Markdown within that paragraph, disables or escapes raw
 HTML, and applies the same HTTP(S)-only URL policy to biography links as to structured
-links. Test that policy in both standalone pages and injected popovers.
+links. Test that policy in standalone pages and any retained contextual overlays.
 The loader exposes it separately and strips only the exact footer.
 Validate the single-paragraph shape; review the five-sentence maximum editorially
 because initials and abbreviations defeat naive punctuation counting.
@@ -317,31 +410,20 @@ Do not replace names globally in HTML. Third-party PDFs retain their bytes; link
 authors through archive metadata and HTML. Regenerated first-party PDFs can use profile
 hyperlinks while preserving credit text and layout.
 
-### One page, two ways to read it
+### Routes and navigation
 
-Publish a complete static page at `contributors/<id>.html`, with canonical metadata,
-breadcrumb, sitemap entry and an index linking every published profile.
-Popovers fetch that same page and extract `article.site-contributor`; no second
-biography renderer.
-Reuse request caching, stale-request guards, rebasing, asset loading,
-failure fallback and focus restoration from case/result overlays.
+Publish a complete static page at `profiles/<id>.html`, with canonical metadata,
+lower-level breadcrumb, sitemap entry and a directory linking every published profile.
+Home and About contain a short invitation and **All Profiles** button, without names.
+Directory rows, account links and resource bylines use ordinary navigation.
+Retired published contributor URLs retain the existing URL-history redirects.
 
-Preserve modified clicks, keyboard access and no-JavaScript navigation.
-A person link inside a case/result overlay replaces the active overlay while retaining a
-valid return-focus target.
-Escape closes the active overlay; failed fetches navigate normally.
-Avoid host-ID collisions from injected headings/fragments.
-Existing prepared-math asset paths assume one directory below the site root, which the
-proposed route satisfies.
-
-A shared article loader owns same-site fetches, inert parsing, relative URL rebasing,
-prepared assets and a pristine cached article; each consumer receives a clone.
-Controllers own request generation and visibility, invalidate pending requests when
-closed or replaced, and scope injected IDs and their fragment/ARIA references.
-Contributor links inside an active overlay are handled before its ordinary anchor-close
-handler and preserve the original visible page opener for focus restoration.
-Static case, result and profile pages include the same enhancement scripts as the
-overview.
+The shared profile article remains usable by designated case/result credit overlays; it
+is not a second biography renderer.
+Those optional consumers retain the shared article loader’s same-site fetch, cached
+pristine article, URL rebasing, scoped IDs, stale-request guards, normal-navigation
+fallback and focus restoration.
+Do not add an overlay to the directory or narrative links.
 
 ## Implementation Plan
 
@@ -389,9 +471,10 @@ Owner: `think-9yli`; page generation: `think-s3wj`; browser behavior: `think-0d3
 Implementation proceeds beside the initial population batch, with publication acceptance
 depending on its reviewed mappings.
 
-Implement standalone pages/index and shared popovers, then the full name-link surface
-matrix. Once the occurrence and renderer APIs are fixed, delegate page/overlay work,
-mechanical credit conversion and content review to disjoint lanes.
+Implement standalone pages/index and the full name-link surface matrix, retaining
+contextual overlays only on the designated existing credit surfaces.
+Once the occurrence and renderer APIs are fixed, delegate page/overlay work, mechanical
+credit conversion and content review to disjoint lanes.
 One integrator owns shared generators, route registration, build declarations and output
 regeneration.
 

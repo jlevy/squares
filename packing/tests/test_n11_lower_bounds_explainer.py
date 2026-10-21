@@ -1340,3 +1340,17 @@ def test_reader_facing_version_references_follow_release_metadata() -> None:
     development = (REPO / "development.md").read_text()
     assert "PUBLICATION_HISTORY" in development
     assert "EXPLAINER_HISTORY" in development
+
+
+def test_authored_trump_footnote_links_evidenced_independent_contributors(page: str) -> None:
+    footnotes = page.split('class="kpress-footnotes"', 1)[1]
+    for identifier, label in (
+        ("mats-gustafsson", "Mats Gustafsson"),
+        ("magnus-thulin", "Magnus Thulin"),
+        ("martin-gardner", "Gardner"),
+    ):
+        assert re.search(
+            rf'href="https://jlevy.github.io/squares/profiles/{identifier}\.html"[^>]*>{label}</a>',
+            footnotes,
+        )
+    assert "November 1980" in footnotes

@@ -157,9 +157,13 @@ occurrences:
   end: 5
   label: Lewis
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - formalization-acknowledgment
+  - public-profile
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: ctjlewis
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed 11SquaresFormalized 2026]'
@@ -186,9 +190,13 @@ occurrences:
   end: 9
   label: Gurevitch
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - formalization-acknowledgment
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: benjamin-gurevitch
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed 11SquaresFormalized 2026]'
@@ -198,9 +206,12 @@ occurrences:
   end: 9
   label: Julian-JJ
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - formalization-acknowledgment
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: julian-jj
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ahmed 11SquaresFormalized 2026]'
@@ -371,9 +382,13 @@ occurrences:
   end: 5
   label: Bašić
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: bojan-basic
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Basic-Slivkova 2018]'
@@ -383,9 +398,13 @@ occurrences:
   end: 8
   label: Slivková
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: anna-slivkova
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Trump 2023]'
@@ -473,9 +492,13 @@ occurrences:
   end: 7
   label: Karakuş
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: hakan-karakus
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kearney–Shiu 2002]'
@@ -1692,9 +1715,12 @@ occurrences:
   end: 29
   label: de Winter
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[evand exact optima 2026-10-05]'
@@ -1802,9 +1828,13 @@ occurrences:
   end: 14
   label: Roth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: kf-roth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker k2-minus-c 2026]'
@@ -1814,9 +1844,13 @@ occurrences:
   end: 23
   label: Vaughan
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: rc-vaughan
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker k2-minus-c v1.2 2026]'
@@ -1854,9 +1888,13 @@ occurrences:
   end: 14
   label: Roth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: kf-roth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker k2-minus-c v1.2 2026]'
@@ -1866,9 +1904,13 @@ occurrences:
   end: 23
   label: Vaughan
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: rc-vaughan
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker s12 2026-10-05]'
@@ -2021,9 +2063,12 @@ occurrences:
   end: 7
   label: Ke Wang
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: ke-wang
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
@@ -2033,9 +2078,12 @@ occurrences:
   end: 6
   label: Can Li
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: can-li
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
@@ -2045,9 +2093,12 @@ occurrences:
   end: 4
   label: Wang
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: ke-wang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
@@ -2057,9 +2108,12 @@ occurrences:
   end: 8
   label: Li
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: can-li
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
@@ -5611,9 +5665,12 @@ occurrences:
   end: 9
   label: de Winter
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter n211 2026-09-16]'
@@ -5623,9 +5680,12 @@ occurrences:
   end: 9
   label: de Winter
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[griffcass square-packing 2026-09-23]'
@@ -5635,9 +5695,12 @@ occurrences:
   end: 6
   label: Casson
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: griffin-casson
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[griffcass square-packing 2026-09-23]'
@@ -5647,9 +5710,12 @@ occurrences:
   end: 6
   label: Casson
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: griffin-casson
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[griffcass square-packing 2026-09-23]'
@@ -5726,9 +5792,13 @@ occurrences:
   end: 37
   label: Cantrell
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ellsworth n69 2026-09-24]'
@@ -5738,9 +5808,12 @@ occurrences:
   end: 45
   label: Schadt
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ellsworth n69 2026-09-24]'
@@ -5750,9 +5823,13 @@ occurrences:
   end: 54
   label: Morandi
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: maurizio-morandi
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n83 2026-09-24]'
@@ -5762,9 +5839,13 @@ occurrences:
   end: 5
   label: Chang
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: allen-chang
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n83 2026-09-24]'
@@ -5788,9 +5869,13 @@ occurrences:
   end: 5
   label: Chang
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: allen-chang
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n83 2026-09-24]'
@@ -5814,9 +5899,13 @@ occurrences:
   end: 31
   label: Cantrell
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n83 2026-09-24]'
@@ -5826,9 +5915,13 @@ occurrences:
   end: 38
   label: Hajba
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: karoly-hajba
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n83 2026-09-24]'
@@ -5838,9 +5931,13 @@ occurrences:
   end: 48
   label: Stenlund
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: evert-stenlund
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n83 2026-09-24]'
@@ -5864,9 +5961,13 @@ occurrences:
   end: 5
   label: Chang
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: allen-chang
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n87 2026-09-24]'
@@ -5876,9 +5977,13 @@ occurrences:
   end: 5
   label: Chang
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: allen-chang
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n87 2026-09-24]'
@@ -5902,9 +6007,13 @@ occurrences:
   end: 31
   label: Cantrell
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n87 2026-09-24]'
@@ -5914,9 +6023,12 @@ occurrences:
   end: 39
   label: Schadt
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n87 2026-09-24]'
@@ -5926,9 +6038,13 @@ occurrences:
   end: 46
   label: Hajba
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: karoly-hajba
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n87 2026-09-24]'
@@ -5938,9 +6054,13 @@ occurrences:
   end: 59
   label: DeVincentis
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: joe-devincentis
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[chelokot Nagamochi counterexample 2026]'
@@ -5950,9 +6070,13 @@ occurrences:
   end: 8
   label: chelokot
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - public-profile
+  - source-packet
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: andrey-vlasenko
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[chelokot Nagamochi counterexample 2026]'
@@ -5962,9 +6086,13 @@ occurrences:
   end: 8
   label: chelokot
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - public-profile
+  - source-packet
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: andrey-vlasenko
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH ten packings 2026-10-07]'
@@ -6189,9 +6317,12 @@ occurrences:
   end: 8
   label: Rehwaldt
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: seth-rehwaldt
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt Couzo refinements 2026-10-07]'
@@ -6201,9 +6332,12 @@ occurrences:
   end: 8
   label: Rehwaldt
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: seth-rehwaldt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt Couzo refinements 2026-10-07]'
@@ -6239,9 +6373,12 @@ occurrences:
   end: 8
   label: Rehwaldt
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: seth-rehwaldt
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt n68 refinement 2026-10-07]'
@@ -6251,9 +6388,12 @@ occurrences:
   end: 8
   label: Rehwaldt
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: seth-rehwaldt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt n68 refinement 2026-10-07]'
@@ -6375,9 +6515,13 @@ occurrences:
   end: 42
   label: Stead
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: tej-stead
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Gupta rational refinements 2026-10-08]'
@@ -6387,9 +6531,12 @@ occurrences:
   end: 5
   label: Gupta
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Gupta rational refinements 2026-10-08]'
@@ -6399,9 +6546,12 @@ occurrences:
   end: 5
   label: Gupta
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Gupta rational refinements 2026-10-08]'
@@ -6439,9 +6589,12 @@ occurrences:
   end: 8
   label: Rehwaldt
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: seth-rehwaldt
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt n68 exact-root report v1.2]'
@@ -6451,9 +6604,12 @@ occurrences:
   end: 8
   label: Rehwaldt
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: seth-rehwaldt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt n68 exact-root report v1.2]'
@@ -6598,9 +6754,12 @@ occurrences:
   end: 38
   label: Gupta
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact refinements 2026-10-08]'
@@ -7019,9 +7178,13 @@ occurrences:
   end: 13
   label: Bui
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: hong-duc-bui
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[squarepacker k2-minus-c-upper v1.1 2026]'
@@ -7067,9 +7230,13 @@ occurrences:
   end: 13
   label: Bui
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: hong-duc-bui
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 fine-net n29 2026-10-10]'
@@ -7328,9 +7495,12 @@ occurrences:
   end: 21
   label: Mishapolk
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact certificates 2026-10-09]'
@@ -7357,9 +7527,12 @@ occurrences:
   end: 45
   label: Gupta
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact certificates 2026-10-09]'
@@ -7439,9 +7612,12 @@ occurrences:
   end: 4
   label: Fang
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang two-wedge certificates 2026-10-10]'
@@ -7451,9 +7627,12 @@ occurrences:
   end: 4
   label: Fang
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang two-wedge certificates 2026-10-10]'
@@ -7463,9 +7642,13 @@ occurrences:
   end: 19
   label: Arslanov
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: mz-arslanov
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang two-wedge certificates 2026-10-10]'
@@ -7475,9 +7658,13 @@ occurrences:
   end: 29
   label: Mustafin
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: sa-mustafin
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang two-wedge certificates 2026-10-10]'
@@ -7487,9 +7674,13 @@ occurrences:
   end: 43
   label: Shangitbayev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: zk-shangitbayev
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang two-wedge certificates 2026-10-10]'
@@ -7515,9 +7706,13 @@ occurrences:
   end: 61
   label: Stead
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: tej-stead
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH third request 2026-10-09]'
@@ -7593,9 +7788,13 @@ occurrences:
   end: 39
   label: Goebel
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: f-gobel
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH third request 2026-10-09]'
@@ -7606,9 +7805,12 @@ occurrences:
   end: 47
   label: Schadt
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH third request 2026-10-09]'
@@ -7634,9 +7836,13 @@ occurrences:
   end: 65
   label: Hajba
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: karoly-hajba
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH third request 2026-10-09]'
@@ -7665,9 +7871,12 @@ occurrences:
   end: 7
   label: Deleeuw
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: eric-deleeuw
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Deleeuw n70 refinement 2026-10-10]'
@@ -7677,9 +7886,12 @@ occurrences:
   end: 7
   label: Deleeuw
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: eric-deleeuw
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Deleeuw n70 refinement 2026-10-10]'
@@ -7721,9 +7933,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk decimal poses 2026-10-09]'
@@ -7734,9 +7949,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk decimal poses 2026-10-09]'
@@ -7747,9 +7965,13 @@ occurrences:
   end: 24
   label: Stenlund
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: evert-stenlund
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk decimal poses 2026-10-09]'
@@ -7979,9 +8201,12 @@ occurrences:
   end: 38
   label: Mishapolk
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-10]'
@@ -8093,9 +8318,12 @@ occurrences:
   end: 17
   label: Fang
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel record hunt 3 2026-10-10]'
@@ -8105,9 +8333,13 @@ occurrences:
   end: 27
   label: Arslanov
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: mz-arslanov
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel record hunt 3 2026-10-10]'
@@ -8117,9 +8349,13 @@ occurrences:
   end: 37
   label: Mustafin
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: sa-mustafin
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel record hunt 3 2026-10-10]'
@@ -8129,9 +8365,13 @@ occurrences:
   end: 51
   label: Shangitbayev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: zk-shangitbayev
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel record hunt 3 2026-10-10]'
@@ -8732,9 +8972,12 @@ occurrences:
   end: 43
   label: Mishapolk
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel regularized lists 2026-10-10]'
@@ -8762,9 +9005,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: source-author
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n207 certificate 2026-10-11]'
@@ -8774,9 +9019,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: credited-contributor
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n207 certificate 2026-10-11]'
@@ -8836,9 +9083,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: source-author
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n153 certificate 2026-10-11]'
@@ -8848,9 +9097,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: credited-contributor
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n153 certificate 2026-10-11]'
@@ -8910,9 +9161,12 @@ occurrences:
   end: 8
   label: Ostashev
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-11]'
@@ -8922,9 +9176,12 @@ occurrences:
   end: 8
   label: Ostashev
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-11]'
@@ -8934,9 +9191,13 @@ occurrences:
   end: 23
   label: Nakajima
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: yohei-nakajima
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-11]'
@@ -8978,9 +9239,12 @@ occurrences:
   end: 7
   label: Barnett
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: robert-barnett
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Barnett refinements 2026-10-11]'
@@ -8990,9 +9254,12 @@ occurrences:
   end: 7
   label: Barnett
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: robert-barnett
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Barnett refinements 2026-10-11]'
@@ -9100,9 +9367,12 @@ occurrences:
   end: 34
   label: Gupta
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH fourth request 2026-10-11]'
@@ -9214,9 +9484,12 @@ occurrences:
   end: 33
   label: Fang
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-11]'
@@ -9380,9 +9653,13 @@ occurrences:
   end: 50
   label: Maaz
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: muhammad-maaz
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fitzharding n17 Lean 2026]'
@@ -9487,9 +9764,12 @@ occurrences:
   end: 8
   label: Ostashev
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-12]'
@@ -9500,9 +9780,12 @@ occurrences:
   end: 8
   label: Ostashev
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-12]'
@@ -9513,9 +9796,13 @@ occurrences:
   end: 23
   label: Nakajima
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: yohei-nakajima
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-12]'
@@ -9544,9 +9831,12 @@ occurrences:
   end: 42
   label: Schadt
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-12]'
@@ -9575,9 +9865,12 @@ occurrences:
   end: 63
   label: de Winter
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-12]'
@@ -9644,9 +9937,12 @@ occurrences:
   end: 5
   label: Calle
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: rio-calle
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Calle n102 2026-10-12]'
@@ -9656,9 +9952,12 @@ occurrences:
   end: 5
   label: Calle
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: rio-calle
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Calle n102 2026-10-12]'
@@ -9776,9 +10075,13 @@ occurrences:
   end: 7
   label: Summins
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: e-summins
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[ry-xu square packing 2026]'
@@ -9806,9 +10109,12 @@ occurrences:
   end: 4
   label: Fang
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang direct certificates 2026-10-13]'
@@ -9818,9 +10124,12 @@ occurrences:
   end: 4
   label: Fang
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang direct certificates 2026-10-13]'
@@ -9830,9 +10139,13 @@ occurrences:
   end: 19
   label: Arslanov
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: mz-arslanov
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang direct certificates 2026-10-13]'
@@ -9842,9 +10155,13 @@ occurrences:
   end: 29
   label: Mustafin
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: sa-mustafin
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang direct certificates 2026-10-13]'
@@ -9854,9 +10171,13 @@ occurrences:
   end: 43
   label: Shangitbayev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: zk-shangitbayev
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang direct certificates 2026-10-13]'
@@ -9902,9 +10223,12 @@ occurrences:
   end: 4
   label: Fang
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess theorem 2026-10-13]'
@@ -9915,9 +10239,12 @@ occurrences:
   end: 4
   label: Fang
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess theorem 2026-10-13]'
@@ -9928,9 +10255,13 @@ occurrences:
   end: 19
   label: Arslanov
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: mz-arslanov
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess theorem 2026-10-13]'
@@ -9941,9 +10272,13 @@ occurrences:
   end: 29
   label: Mustafin
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: sa-mustafin
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess theorem 2026-10-13]'
@@ -9954,9 +10289,13 @@ occurrences:
   end: 43
   label: Shangitbayev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: zk-shangitbayev
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess theorem 2026-10-13]'
@@ -9985,9 +10324,13 @@ occurrences:
   end: 61
   label: Stead
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: tej-stead
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess theorem 2026-10-13]'
@@ -9998,9 +10341,12 @@ occurrences:
   end: 72
   label: de Winter
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess theorem 2026-10-13]'
@@ -10365,9 +10711,12 @@ occurrences:
   end: 5
   label: Greff
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: benjamin-greff
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[bengreff s76 certificate 2026-10-14]'
@@ -10377,9 +10726,12 @@ occurrences:
   end: 5
   label: Greff
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: benjamin-greff
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[bengreff s76 certificate 2026-10-14]'
@@ -10494,9 +10846,12 @@ occurrences:
   end: 20
   label: Ostashev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-12]'
@@ -10521,9 +10876,12 @@ occurrences:
   end: 43
   label: Fang
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-12]'
@@ -10586,9 +10944,12 @@ occurrences:
   end: 8
   label: Ostashev
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev compositions 2026-10-12]'
@@ -10598,9 +10959,12 @@ occurrences:
   end: 8
   label: Ostashev
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev compositions 2026-10-12]'
@@ -10610,9 +10974,13 @@ occurrences:
   end: 23
   label: Nakajima
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: yohei-nakajima
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev compositions 2026-10-12]'
@@ -10691,9 +11059,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: source-author
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n302 certificate 2026-10-12]'
@@ -10703,9 +11073,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: credited-contributor
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n302 certificate 2026-10-12]'
@@ -10823,9 +11195,12 @@ occurrences:
   end: 28
   label: Ostashev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
@@ -10837,7 +11212,9 @@ occurrences:
   role: prerequisite
   disposition: unresolved
   evidence: []
-  note: Identity review pending.
+  note: Public operator handle retained as printed. The PingYou Ltd corporate attribution
+    does not establish whether BuddenPing names an individual or identify a human
+    behind it; identity review remains tracked in think-0v9j.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
@@ -10847,9 +11224,12 @@ occurrences:
   end: 46
   label: Fang
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
@@ -10894,9 +11274,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: source-author
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n153 refinement 2026-10-12]'
@@ -10906,9 +11288,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: credited-contributor
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n153 refinement 2026-10-12]'
@@ -10972,9 +11356,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: source-author
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n207 refinement 2026-10-12]'
@@ -10984,9 +11370,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: credited-contributor
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n207 refinement 2026-10-12]'
@@ -11050,9 +11438,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: source-author
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n146 refinement 2026-10-12]'
@@ -11062,9 +11452,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: credited-contributor
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n146 refinement 2026-10-12]'
@@ -11092,9 +11484,12 @@ occurrences:
   end: 29
   label: Barnett
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: robert-barnett
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n146 refinement 2026-10-12]'
@@ -11140,9 +11535,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: source-author
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n261 refinement 2026-10-12]'
@@ -11152,9 +11549,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: credited-contributor
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n261 refinement 2026-10-12]'
@@ -11182,9 +11581,12 @@ occurrences:
   end: 29
   label: Barnett
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: robert-barnett
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n261 refinement 2026-10-12]'
@@ -11230,9 +11632,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: source-author
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n105 refinement 2026-10-12]'
@@ -11242,9 +11646,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: credited-contributor
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n105 refinement 2026-10-12]'
@@ -11326,9 +11732,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: source-author
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n272 refinement 2026-10-12]'
@@ -11338,9 +11746,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: credited-contributor
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n272 refinement 2026-10-12]'
@@ -11455,9 +11865,12 @@ occurrences:
   end: 28
   label: Ostashev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
@@ -11467,9 +11880,12 @@ occurrences:
   end: 34
   label: Fang
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
@@ -11515,9 +11931,12 @@ occurrences:
   end: 10
   label: Polkovskyi
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk exact certificates 2026-10-12]'
@@ -11527,9 +11946,12 @@ occurrences:
   end: 10
   label: Polkovskyi
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk exact certificates 2026-10-12]'
@@ -11590,9 +12012,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: source-author
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -11603,9 +12027,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: credited-contributor
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -11691,9 +12117,12 @@ occurrences:
   end: 58
   label: Barnett
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: robert-barnett
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -11723,9 +12152,12 @@ occurrences:
   end: 75
   label: Ostashev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -11752,9 +12184,12 @@ occurrences:
   end: 99
   label: Gupta
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -11765,9 +12200,12 @@ occurrences:
   end: 105
   label: Fang
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -11778,9 +12216,12 @@ occurrences:
   end: 117
   label: Polkovskyi
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -11809,9 +12250,12 @@ occurrences:
   end: 8
   label: Ostashev
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
@@ -11821,9 +12265,12 @@ occurrences:
   end: 8
   label: Ostashev
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
@@ -11833,9 +12280,13 @@ occurrences:
   end: 23
   label: Nakajima
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: yohei-nakajima
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
@@ -11863,9 +12314,12 @@ occurrences:
   end: 42
   label: de Winter
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
@@ -11929,9 +12383,12 @@ occurrences:
   end: 10
   label: Polkovskyi
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -11942,9 +12399,12 @@ occurrences:
   end: 10
   label: Polkovskyi
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -12027,9 +12487,12 @@ occurrences:
   end: 63
   label: Barnett
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: robert-barnett
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -12059,9 +12522,12 @@ occurrences:
   end: 80
   label: Ostashev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -12090,9 +12556,12 @@ occurrences:
   end: 97
   label: Fang
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -12159,9 +12628,12 @@ occurrences:
   end: 21
   label: Ostashev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel compositions 2026-10-13]'
@@ -12172,9 +12644,11 @@ occurrences:
   end: 34
   label: PingYou Ltd
   role: prerequisite
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel compositions 2026-10-13]'
@@ -12185,9 +12659,12 @@ occurrences:
   end: 43
   label: Barnett
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: robert-barnett
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel compositions 2026-10-13]'
@@ -12198,9 +12675,12 @@ occurrences:
   end: 51
   label: Schadt
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel compositions 2026-10-13]'
@@ -12383,9 +12863,12 @@ occurrences:
   end: 10
   label: Polkovskyi
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk KKT refinements 2026-10-14]'
@@ -12395,9 +12878,12 @@ occurrences:
   end: 10
   label: Polkovskyi
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk KKT refinements 2026-10-14]'
@@ -12407,9 +12893,12 @@ occurrences:
   end: 25
   label: Ostashev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk KKT refinements 2026-10-14]'
@@ -12437,9 +12926,11 @@ occurrences:
   end: 45
   label: PingYou Ltd
   role: prerequisite
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk KKT refinements 2026-10-14]'
@@ -12557,9 +13048,12 @@ occurrences:
   end: 20
   label: Ostashev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo verified bounds 2026-10-14]'
@@ -12641,9 +13135,12 @@ occurrences:
   end: 22
   label: Polkovskyi
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-14]'
@@ -12653,9 +13150,12 @@ occurrences:
   end: 28
   label: Fang
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-14]'
@@ -12754,9 +13254,12 @@ occurrences:
   end: 22
   label: Polkovskyi
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n237 2026-10-15]'
@@ -12817,9 +13320,12 @@ occurrences:
   end: 5
   label: Greff
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: benjamin-greff
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[bengreff s95 certificate 2026-10-15]'
@@ -12829,9 +13335,12 @@ occurrences:
   end: 5
   label: Greff
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: benjamin-greff
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[bengreff s95 certificate 2026-10-15]'
@@ -13036,9 +13545,12 @@ occurrences:
   end: 42
   label: Ostashev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel exact current records 2026-10-16]'
@@ -13068,9 +13580,11 @@ occurrences:
   end: 62
   label: PingYou Ltd
   role: prerequisite
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel exact current records 2026-10-16]'
@@ -13081,9 +13595,12 @@ occurrences:
   end: 69
   label: Gupta
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel exact current records 2026-10-16]'
@@ -13094,9 +13611,12 @@ occurrences:
   end: 81
   label: Polkovskyi
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel exact current records 2026-10-16]'
@@ -13190,9 +13710,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: source-author
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 622 certificate 2026-10-15]'
@@ -13202,9 +13724,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: credited-contributor
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 622 certificate 2026-10-15]'
@@ -13214,9 +13738,12 @@ occurrences:
   end: 24
   label: Schadt
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 622 certificate 2026-10-15]'
@@ -13276,9 +13803,12 @@ occurrences:
   end: 9
   label: de Winter
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed author byline matches the retained source intake and bibliography identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter upper bounds 2026-10-17]'
@@ -13288,9 +13818,12 @@ occurrences:
   end: 9
   label: de Winter
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter upper bounds 2026-10-17]'
@@ -13350,9 +13883,12 @@ occurrences:
   end: 21
   label: Ostashev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n155 explorer 2026-10-17]'
@@ -13434,9 +13970,12 @@ occurrences:
   end: 29
   label: de Winter
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n229 dilation 2026-10-17]'
@@ -13518,9 +14057,12 @@ occurrences:
   end: 29
   label: de Winter
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n229 dilation update 2026-10-18]'
@@ -13969,9 +14511,12 @@ occurrences:
   end: 28
   label: Ostashev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n154 sweep 2026-10-20]'
@@ -14035,9 +14580,12 @@ occurrences:
   end: 21
   label: de Winter
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 678 2026-10-18]'
@@ -14047,9 +14595,12 @@ occurrences:
   end: 33
   label: Polkovskyi
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 678 2026-10-18]'
@@ -14077,9 +14628,12 @@ occurrences:
   end: 47
   label: Fang
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 678 2026-10-18]'
@@ -14089,9 +14643,11 @@ occurrences:
   end: 60
   label: PingYou Ltd
   role: prerequisite
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 678 2026-10-18]'
@@ -14236,9 +14792,12 @@ occurrences:
   end: 30
   label: de Winter
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Muglich issue 686 2026-10-19]'
@@ -14248,9 +14807,12 @@ occurrences:
   end: 36
   label: Fang
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Muglich issue 686 2026-10-19]'
@@ -14718,9 +15280,13 @@ occurrences:
   end: 11
   label: Frits Göbel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: f-gobel
 - origin:
     path: packing/frontier/n-005.md
     record_key: '5'
@@ -14730,9 +15296,13 @@ occurrences:
   end: 11
   label: Frits Göbel
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: f-gobel
 - origin:
     path: packing/frontier/n-006.md
     record_key: '6'
@@ -14794,9 +15364,13 @@ occurrences:
   end: 14
   label: Said El Moumni
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  - primary-byline
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: s-el-moumni
 - origin:
     path: packing/frontier/n-008.md
     record_key: '8'
@@ -14806,9 +15380,13 @@ occurrences:
   end: 14
   label: Said El Moumni
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  - primary-byline
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: s-el-moumni
 - origin:
     path: packing/frontier/n-010.md
     record_key: '10'
@@ -14818,9 +15396,13 @@ occurrences:
   end: 11
   label: Frits Göbel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: f-gobel
 - origin:
     path: packing/frontier/n-010.md
     record_key: '10'
@@ -14924,9 +15506,13 @@ occurrences:
   end: 14
   label: Said El Moumni
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  - primary-byline
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: s-el-moumni
 - origin:
     path: packing/frontier/n-017.md
     record_key: '17'
@@ -14967,9 +15553,13 @@ occurrences:
   end: 17
   label: Pertti Hämäläinen
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: pertti-hamalainen
 - origin:
     path: packing/frontier/n-018.md
     record_key: '18'
@@ -14996,9 +15586,13 @@ occurrences:
   end: 17
   label: Robert Wainwright
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: robert-wainwright
 - origin:
     path: packing/frontier/n-019.md
     record_key: '19'
@@ -15163,9 +15757,13 @@ occurrences:
   end: 11
   label: Frits Göbel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: f-gobel
 - origin:
     path: packing/frontier/n-027.md
     record_key: '27'
@@ -15223,9 +15821,12 @@ occurrences:
   end: 13
   label: Thomas Schadt
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-029.md
     record_key: '29'
@@ -15266,9 +15867,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-030.md
     record_key: '30'
@@ -15403,9 +16006,13 @@ occurrences:
   end: 17
   label: David W. Cantrell
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/frontier/n-037.md
     record_key: '37'
@@ -15432,9 +16039,13 @@ occurrences:
   end: 11
   label: Frits Göbel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: f-gobel
 - origin:
     path: packing/frontier/n-038.md
     record_key: '38'
@@ -15461,9 +16072,12 @@ occurrences:
   end: 13
   label: Thomas Schadt
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-039.md
     record_key: '39'
@@ -15490,9 +16104,13 @@ occurrences:
   end: 11
   label: Frits Göbel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: f-gobel
 - origin:
     path: packing/frontier/n-040.md
     record_key: '40'
@@ -15515,9 +16133,12 @@ occurrences:
   end: 13
   label: Thomas Schadt
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-041.md
     record_key: '41'
@@ -15660,9 +16281,12 @@ occurrences:
   end: 13
   label: Thomas Schadt
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-050.md
     record_key: '50'
@@ -15723,9 +16347,13 @@ occurrences:
   end: 11
   label: Frits Göbel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: f-gobel
 - origin:
     path: packing/frontier/n-052.md
     record_key: '52'
@@ -15752,9 +16380,13 @@ occurrences:
   end: 17
   label: David W. Cantrell
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/frontier/n-053.md
     record_key: '53'
@@ -15764,9 +16396,13 @@ occurrences:
   end: 17
   label: David W. Cantrell
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/frontier/n-053.md
     record_key: '53'
@@ -15807,9 +16443,13 @@ occurrences:
   end: 17
   label: David W. Cantrell
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/frontier/n-054.md
     record_key: '54'
@@ -15819,9 +16459,13 @@ occurrences:
   end: 15
   label: Joe DeVincentis
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: joe-devincentis
 - origin:
     path: packing/frontier/n-054.md
     record_key: '54'
@@ -15848,9 +16492,12 @@ occurrences:
   end: 13
   label: Thomas Schadt
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-055.md
     record_key: '55'
@@ -16011,9 +16658,13 @@ occurrences:
   end: 11
   label: Frits Göbel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: f-gobel
 - origin:
     path: packing/frontier/n-065.md
     record_key: '65'
@@ -16040,9 +16691,13 @@ occurrences:
   end: 14
   label: Evert Stenlund
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: evert-stenlund
 - origin:
     path: packing/frontier/n-066.md
     record_key: '66'
@@ -16069,9 +16724,13 @@ occurrences:
   end: 14
   label: Evert Stenlund
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: evert-stenlund
 - origin:
     path: packing/frontier/n-067.md
     record_key: '67'
@@ -16111,9 +16770,12 @@ occurrences:
   end: 13
   label: Seth Rehwaldt
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: seth-rehwaldt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-068.md
     record_key: '68'
@@ -16140,9 +16802,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-069.md
     record_key: '69'
@@ -16152,9 +16816,13 @@ occurrences:
   end: 16
   label: Maurizio Morandi
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: maurizio-morandi
 - origin:
     path: packing/frontier/n-069.md
     record_key: '69'
@@ -16164,9 +16832,13 @@ occurrences:
   end: 17
   label: David W. Cantrell
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/frontier/n-069.md
     record_key: '69'
@@ -16271,9 +16943,12 @@ occurrences:
   end: 13
   label: Thomas Schadt
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-071.md
     record_key: '71'
@@ -16441,9 +17116,13 @@ occurrences:
   end: 11
   label: Frits Göbel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: f-gobel
 - origin:
     path: packing/frontier/n-082.md
     record_key: '82'
@@ -16470,9 +17149,13 @@ occurrences:
   end: 12
   label: Károly Hajba
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: karoly-hajba
 - origin:
     path: packing/frontier/n-083.md
     record_key: '83'
@@ -16482,9 +17165,13 @@ occurrences:
   end: 17
   label: David W. Cantrell
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/frontier/n-083.md
     record_key: '83'
@@ -16494,9 +17181,13 @@ occurrences:
   end: 11
   label: Allen Chang
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: allen-chang
 - origin:
     path: packing/frontier/n-083.md
     record_key: '83'
@@ -16589,9 +17280,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-085.md
     record_key: '85'
@@ -16683,9 +17376,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-087.md
     record_key: '87'
@@ -16709,9 +17404,13 @@ occurrences:
   end: 17
   label: David W. Cantrell
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/frontier/n-087.md
     record_key: '87'
@@ -16735,9 +17434,13 @@ occurrences:
   end: 11
   label: Allen Chang
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: allen-chang
 - origin:
     path: packing/frontier/n-087.md
     record_key: '87'
@@ -16779,9 +17482,12 @@ occurrences:
   end: 15
   label: Siddharth Gupta
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-088.md
     record_key: '88'
@@ -16808,9 +17514,13 @@ occurrences:
   end: 14
   label: Evert Stenlund
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: evert-stenlund
 - origin:
     path: packing/frontier/n-089.md
     record_key: '89'
@@ -17094,9 +17804,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-103.md
     record_key: '103'
@@ -17124,9 +17837,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-104.md
     record_key: '104'
@@ -17205,9 +17920,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-106.md
     record_key: '106'
@@ -17260,9 +17977,13 @@ occurrences:
   end: 12
   label: Károly Hajba
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: karoly-hajba
 - origin:
     path: packing/frontier/n-107.md
     record_key: '107'
@@ -17344,9 +18065,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-109.md
     record_key: '109'
@@ -17416,9 +18139,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-111.md
     record_key: '111'
@@ -17582,9 +18307,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-123.md
     record_key: '123'
@@ -17611,9 +18339,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-123.md
     record_key: '123'
@@ -17641,9 +18372,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-125.md
     record_key: '125'
@@ -17653,9 +18387,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-126.md
     record_key: '126'
@@ -17769,9 +18506,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-128.md
     record_key: '128'
@@ -17809,9 +18548,13 @@ occurrences:
   end: 17
   label: David W. Cantrell
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/frontier/n-128.md
     record_key: '128'
@@ -17838,9 +18581,12 @@ occurrences:
   end: 15
   label: Daniil Ostashev
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-129.md
     record_key: '129'
@@ -17867,9 +18613,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-129.md
     record_key: '129'
@@ -17879,9 +18627,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-130.md
     record_key: '130'
@@ -17906,9 +18657,12 @@ occurrences:
   end: 15
   label: Siddharth Gupta
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-130.md
     record_key: '130'
@@ -17935,9 +18689,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-131.md
     record_key: '131'
@@ -17979,9 +18735,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-132.md
     record_key: '132'
@@ -18026,9 +18784,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-133.md
     record_key: '133'
@@ -18209,9 +18969,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-146.md
     record_key: '146'
@@ -18239,9 +19002,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-147.md
     record_key: '147'
@@ -18251,9 +19017,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-148.md
     record_key: '148'
@@ -18263,9 +19032,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-149.md
     record_key: '149'
@@ -18337,9 +19109,13 @@ occurrences:
   end: 17
   label: David W. Cantrell
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/frontier/n-151.md
     record_key: '151'
@@ -18409,9 +19185,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-finder
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-153.md
     record_key: '153'
@@ -18438,9 +19216,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-154.md
     record_key: '154'
@@ -18538,9 +19319,12 @@ occurrences:
   end: 15
   label: Daniil Ostashev
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-156.md
     record_key: '156'
@@ -18585,9 +19369,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-156.md
     record_key: '156'
@@ -18597,9 +19383,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-157.md
     record_key: '157'
@@ -18797,9 +19586,13 @@ occurrences:
   end: 12
   label: Károly Hajba
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: karoly-hajba
 - origin:
     path: packing/frontier/n-170.md
     record_key: '170'
@@ -18809,9 +19602,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-171.md
     record_key: '171'
@@ -18835,9 +19631,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-172.md
     record_key: '172'
@@ -18873,9 +19672,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-172.md
     record_key: '172'
@@ -18885,9 +19687,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-173.md
     record_key: '173'
@@ -18931,9 +19735,12 @@ occurrences:
   end: 15
   label: Daniil Ostashev
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-175.md
     record_key: '175'
@@ -18960,9 +19767,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-175.md
     record_key: '175'
@@ -18972,9 +19781,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-176.md
     record_key: '176'
@@ -19001,9 +19813,12 @@ occurrences:
   end: 15
   label: Daniil Ostashev
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-176.md
     record_key: '176'
@@ -19013,9 +19828,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-176.md
     record_key: '176'
@@ -19025,9 +19842,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-177.md
     record_key: '177'
@@ -19112,9 +19932,12 @@ occurrences:
   end: 15
   label: Siddharth Gupta
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-179.md
     record_key: '179'
@@ -19141,9 +19964,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-180.md
     record_key: '180'
@@ -19168,9 +19993,12 @@ occurrences:
   end: 15
   label: Siddharth Gupta
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-180.md
     record_key: '180'
@@ -19215,9 +20043,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-181.md
     record_key: '181'
@@ -19259,9 +20089,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-182.md
     record_key: '182'
@@ -19314,9 +20146,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-183.md
     record_key: '183'
@@ -19549,9 +20383,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-198.md
     record_key: '198'
@@ -19561,9 +20398,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-199.md
     record_key: '199'
@@ -19588,9 +20428,12 @@ occurrences:
   end: 15
   label: Siddharth Gupta
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-199.md
     record_key: '199'
@@ -19600,9 +20443,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-200.md
     record_key: '200'
@@ -19612,9 +20458,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-201.md
     record_key: '201'
@@ -19706,9 +20555,12 @@ occurrences:
   end: 15
   label: Daniil Ostashev
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-204.md
     record_key: '204'
@@ -19718,9 +20570,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-204.md
     record_key: '204'
@@ -19730,9 +20584,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-205.md
     record_key: '205'
@@ -19830,9 +20687,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-207.md
     record_key: '207'
@@ -19842,9 +20701,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-finder
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-207.md
     record_key: '207'
@@ -19871,9 +20732,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-208.md
     record_key: '208'
@@ -19898,9 +20762,12 @@ occurrences:
   end: 15
   label: Siddharth Gupta
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-208.md
     record_key: '208'
@@ -19927,9 +20794,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-209.md
     record_key: '209'
@@ -19989,9 +20858,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-210.md
     record_key: '210'
@@ -20044,9 +20915,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-211.md
     record_key: '211'
@@ -20056,9 +20929,12 @@ occurrences:
   end: 15
   label: Daniil Ostashev
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-211.md
     record_key: '211'
@@ -20308,9 +21184,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-227.md
     record_key: '227'
@@ -20334,9 +21213,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-228.md
     record_key: '228'
@@ -20359,9 +21241,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-228.md
     record_key: '228'
@@ -20371,9 +21256,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-229.md
     record_key: '229'
@@ -20383,9 +21270,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-229.md
     record_key: '229'
@@ -20478,9 +21368,12 @@ occurrences:
   end: 15
   label: Daniil Ostashev
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-232.md
     record_key: '232'
@@ -20490,9 +21383,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-232.md
     record_key: '232'
@@ -20502,9 +21397,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-233.md
     record_key: '233'
@@ -20590,9 +21488,13 @@ occurrences:
   end: 17
   label: David W. Cantrell
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/frontier/n-235.md
     record_key: '235'
@@ -20704,9 +21606,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-238.md
     record_key: '238'
@@ -20748,9 +21653,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-239.md
     record_key: '239'
@@ -20792,9 +21699,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-240.md
     record_key: '240'
@@ -20847,9 +21756,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-241.md
     record_key: '241'
@@ -20859,9 +21770,12 @@ occurrences:
   end: 15
   label: Daniil Ostashev
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-241.md
     record_key: '241'
@@ -21142,9 +22056,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-258.md
     record_key: '258'
@@ -21169,9 +22086,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-258.md
     record_key: '258'
@@ -21181,9 +22101,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-258.md
     record_key: '258'
@@ -21226,9 +22149,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-260.md
     record_key: '260'
@@ -21252,9 +22178,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-261.md
     record_key: '261'
@@ -21298,9 +22227,12 @@ occurrences:
   end: 14
   label: Robert Barnett
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: robert-barnett
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-261.md
     record_key: '261'
@@ -21310,9 +22242,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-262.md
     record_key: '262'
@@ -21389,9 +22323,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-264.md
     record_key: '264'
@@ -21418,9 +22354,12 @@ occurrences:
   end: 15
   label: Daniil Ostashev
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-264.md
     record_key: '264'
@@ -21430,9 +22369,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-264.md
     record_key: '264'
@@ -21442,9 +22383,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-265.md
     record_key: '265'
@@ -21596,9 +22540,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-269.md
     record_key: '269'
@@ -21653,9 +22599,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-270.md
     record_key: '270'
@@ -21767,9 +22715,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-273.md
     record_key: '273'
@@ -21822,9 +22772,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-274.md
     record_key: '274'
@@ -22073,9 +23025,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-291.md
     record_key: '291'
@@ -22085,9 +23040,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-292.md
     record_key: '292'
@@ -22130,9 +23088,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-293.md
     record_key: '293'
@@ -22156,9 +23117,13 @@ occurrences:
   end: 17
   label: David W. Cantrell
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: david-w-cantrell
 - origin:
     path: packing/frontier/n-293.md
     record_key: '293'
@@ -22168,9 +23133,12 @@ occurrences:
   end: 12
   label: Trevor Green
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - survey-credit
+  note: Reviewed 2026-10-21 against the named profile sources; the printed source
+    text and credit role are retained.
+  contributor_id: trevor-green
 - origin:
     path: packing/frontier/n-294.md
     record_key: '294'
@@ -22309,9 +23277,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-298.md
     record_key: '298'
@@ -22443,9 +23413,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-finder
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-302.md
     record_key: '302'
@@ -22490,9 +23462,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-303.md
     record_key: '303'
@@ -22502,9 +23477,12 @@ occurrences:
   end: 15
   label: Daniil Ostashev
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-303.md
     record_key: '303'
@@ -22531,9 +23509,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-303.md
     record_key: '303'
@@ -22543,9 +23523,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-304.md
     record_key: '304'
@@ -22555,9 +23538,12 @@ occurrences:
   end: 15
   label: Daniil Ostashev
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-304.md
     record_key: '304'
@@ -22584,9 +23570,12 @@ occurrences:
   end: 9
   label: Mishapolk
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
 - origin:
     path: packing/frontier/n-305.md
     record_key: '305'
@@ -22646,9 +23635,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-306.md
     record_key: '306'
@@ -22688,9 +23679,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-307.md
     record_key: '307'
@@ -22732,9 +23725,11 @@ occurrences:
   end: 11
   label: PingYou Ltd
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-308.md
     record_key: '308'
@@ -23022,6 +24017,302 @@ occurrences:
   contributor_id: joshua-levy
   evidence:
   - primary-byline
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Gensane 2004]'
+    field: /authors/0
+  expected_text: Gensane
+  start: 0
+  end: 7
+  label: Gensane
+  role: source-author
+  disposition: resolved
+  evidence:
+  - spheres-byline
+  - archive-index
+  contributor_id: thierry-gensane
+  note: The retained 2004 sphere-packing paper byline and archive index identify Thierry Gensane.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Gensane–Ryckelynck 2005]'
+    field: /authors/0
+  expected_text: Gensane
+  start: 0
+  end: 7
+  label: Gensane
+  role: source-author
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - archive-index
+  contributor_id: thierry-gensane
+  note: The retained 2005 paper byline and archive index identify Thierry Gensane.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Gensane–Ryckelynck 2005]'
+    field: /authors/1
+  expected_text: Ryckelynck
+  start: 0
+  end: 10
+  label: Ryckelynck
+  role: source-author
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - archive-index
+  contributor_id: philippe-ryckelynck
+  note: The retained 2005 paper byline and archive index identify Philippe Ryckelynck.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[MacIver 2026 n17]'
+    field: /authors/0
+  expected_text: MacIver
+  start: 0
+  end: 7
+  label: MacIver
+  role: source-author
+  disposition: resolved
+  evidence:
+  - title-page
+  - packet
+  contributor_id: david-r-maciver
+  note: The retained seventeen-square manuscript title page names David R. MacIver and prints 8 August 2026.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Schadt n=29 repository]'
+    field: /authors/0
+  expected_text: Schadt
+  start: 0
+  end: 6
+  label: Schadt
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: The retained repository Results table credits the New Solution to Thomas Schadt (2025).
+- origin:
+    path: packing/atlas/known-best/credit-attributions.json
+    record_key: $
+    field: /lower_bounds/contributors/12/name
+  expected_text: Vlasenko
+  start: 0
+  end: 8
+  label: Vlasenko
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - public-profile
+  - atlas-credit
+  contributor_id: andrey-vlasenko
+  note: Reviewed source of the explainer Figure 2 credit block (PDF page 6). This
+    identity join preserves the figure credit and does not assert primary result authorship.
+- origin:
+    path: packing/atlas/known-best/credit-attributions.json
+    record_key: $
+    field: /lower_bounds/contributors/17/name
+  expected_text: Karakuş
+  start: 0
+  end: 7
+  label: Karakuş
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - atlas-credit
+  contributor_id: hakan-karakus
+  note: Reviewed source of the explainer Figure 2 credit block (PDF page 6). This
+    identity join preserves the figure credit and does not assert primary result authorship.
+- origin:
+    path: packing/atlas/known-best/credit-attributions.json
+    record_key: $
+    field: /optimality/contributors/3/name
+  expected_text: El Moumni
+  start: 0
+  end: 9
+  label: El Moumni
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - atlas-credit
+  contributor_id: s-el-moumni
+  note: Reviewed source of the explainer Figure 2 credit block (PDF page 6). This
+    identity join preserves the figure credit and does not assert primary result authorship.
+- origin:
+    path: packing/atlas/known-best/credit-attributions.json
+    record_key: $
+    field: /optimality/contributors/7/name
+  expected_text: Vlasenko
+  start: 0
+  end: 8
+  label: Vlasenko
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - public-profile
+  - atlas-credit
+  contributor_id: andrey-vlasenko
+  note: Reviewed source of the explainer Figure 2 credit block (PDF page 6). This
+    identity join preserves the figure credit and does not assert primary result authorship.
+- origin:
+    path: packing/atlas/known-best/credit-attributions.json
+    record_key: $
+    field: /optimality/contributors/12/name
+  expected_text: Karakuş
+  start: 0
+  end: 7
+  label: Karakuş
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - atlas-credit
+  contributor_id: hakan-karakus
+  note: Reviewed source of the explainer Figure 2 credit block (PDF page 6). This
+    identity join preserves the figure credit and does not assert primary result authorship.
+- origin:
+    path: packing/atlas/known-best/credit-attributions.json
+    record_key: $
+    field: /optimality/contributors/13/name
+  expected_text: Gurevitch
+  start: 0
+  end: 9
+  label: Gurevitch
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - formalization-acknowledgment
+  - bibliography
+  contributor_id: benjamin-gurevitch
+  note: Reviewed source of the explainer Figure 2 credit block (PDF page 6). This
+    identity join preserves the figure credit and does not assert primary result authorship.
+- origin:
+    path: packing/atlas/known-best/credit-attributions.json
+    record_key: $
+    field: /optimality/contributors/15/name
+  expected_text: Lewis
+  start: 0
+  end: 5
+  label: Lewis
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - formalization-acknowledgment
+  - public-profile
+  contributor_id: ctjlewis
+  note: Reviewed source of the explainer Figure 2 credit block (PDF page 6). This
+    identity join preserves the figure credit and does not assert primary result authorship.
+- origin:
+    path: packing/atlas/known-best/credit-attributions.json
+    record_key: $
+    field: /optimality/contributors/16/name
+  expected_text: Julian-JJ
+  start: 0
+  end: 9
+  label: Julian-JJ
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - formalization-acknowledgment
+  contributor_id: julian-jj
+  note: Reviewed source of the explainer Figure 2 credit block (PDF page 6). This
+    identity join preserves the figure credit and does not assert primary result authorship.
+- origin:
+    path: packing/atlas/known-best/credit-attributions.json
+    record_key: $
+    field: /optimality/contributors/17/name
+  expected_text: EvolvingPrograms
+  start: 0
+  end: 16
+  label: EvolvingPrograms
+  role: credited-contributor
+  disposition: non-person
+  evidence: []
+  note: The atlas source explicitly records entity_kind organization, corroborated
+    by the public GitHub API type Organization on 2026-10-21. This is the organization
+    credit printed in explainer Figure 2, not an alias of Lewis.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Arslanov et al.]'
+    field: /authors/0
+  expected_text: Arslanov
+  start: 0
+  end: 8
+  label: Arslanov
+  role: source-author
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: The retained 2021 paper byline supports this bibliography author. This source
+    join does not register a new mathematical result.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Arslanov et al.]'
+    field: /authors/1
+  expected_text: Mustafin
+  start: 0
+  end: 8
+  label: Mustafin
+  role: source-author
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: The retained 2021 paper byline supports this bibliography author. This source
+    join does not register a new mathematical result.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Arslanov et al.]'
+    field: /authors/2
+  expected_text: Shangitbayev
+  start: 0
+  end: 12
+  label: Shangitbayev
+  role: source-author
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: The retained 2021 paper byline supports this bibliography author. This source
+    join does not register a new mathematical result.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Roth–Vaughan 1978]'
+    field: /authors/0
+  expected_text: Roth
+  start: 0
+  end: 4
+  label: Roth
+  role: source-author
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: kf-roth
+  note: The retained 1978 title page names this author. The publication join does
+    not register a new mathematical result.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Roth–Vaughan 1978]'
+    field: /authors/1
+  expected_text: Vaughan
+  start: 0
+  end: 7
+  label: Vaughan
+  role: source-author
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: rc-vaughan
+  note: The retained 1978 title page names this author. The publication join does
+    not register a new mathematical result.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
