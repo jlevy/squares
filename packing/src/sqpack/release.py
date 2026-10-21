@@ -665,7 +665,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "c5889931aedf86b447973e579b0d135354d5a148"
+DATA_REVISION = "437c64b9ba9c53ef510b491e135a006963000486"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1826,6 +1826,29 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For issue 686's import against main d640ad8f: result requests and source "
+            "coverage are citation targets whose existence the producer checks, not "
+            "inlined text, and both cited paths exist at both revisions; #686's request "
+            "changes, the muglich-issue686-2026-10-19 coverage source with its 100 "
+            "beyond-horizon rows and the 88 rows it supersedes are not cited by the "
+            "survey. Rendered at link revision 4d65740c, once from this branch's tree and "
+            "once with main's copies of the two changed inputs: render_packing_methods "
+            "leaves the 42 files of the site tree byte-identical between the trees. No "
+            "PDF was printed; it prints from that HTML. Retain v0.2.3."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
         paths=(
