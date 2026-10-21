@@ -5,7 +5,7 @@ title: "Import Evan Daniel: s(343) <= 18.977682482405 (#702)"
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T00:50:40.249Z
-updated_at: 2026-10-21T19:28:06.205Z
+updated_at: 2026-10-21T19:34:56.337Z
 started_at: 2026-10-21T05:27:59.180Z
 ---
 Stage 1 triage of jlevy/squares#702 (Evan Daniel, opened 2026-10-20T22:09:31Z), read-only, 21 October 2026, lane c-lane-records-1021. Nothing retained, imported or replayed.
@@ -65,7 +65,9 @@ Stages 2 and 3 are on draft PR #712 (https://github.com/jlevy/squares/pull/712),
 blocked_on: jlevy/squares#712
 
 2026-10-21 coord-intake-1021b: #712 merged 19:01:27Z as 7eeab1f5e. Stage 7 for #702 delegated to c-lane-702-answer (deploy check, reply from main); the reply is recorded under #702 replies in the next records change.
-blocked_on: none
 
 2026-10-21 19:26 coord-intake-1021b: final reply posted https://github.com/jlevy/squares/issues/702#issuecomment-6324620374 after the deploy of 7eeab1f5e (Pages run 39657972902, deployment 7234854916; check_published_site 4759/4761, the 2 failures the host missing chromium_headless_shell-1234); #702 closed as completed. Remaining: record the reply under #702 replies in result-requests.yaml (state closed, kind final) in the next records change; the tested YAML is in the coordinator scratchpad replies/702.md. Close this bead when that lands.
+blocked_on: none
+
+2026-10-21 19:45 coord-intake-1021b: check_published_site --commit 7eeab1f5e re-run with the pinned chromium_headless_shell-1234 (scratchpad pw): 4769 of 4769 checks passed, so the deployment is fully verified.
 blocked_on: none
