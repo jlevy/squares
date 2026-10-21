@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 33
+version: 34
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -40,11 +40,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T19:30:36.495Z
+updated_at: 2026-10-21T19:41:24.515Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Merged origin/main 7eeab1f5e at e0365923894e; data pin committed6d4c0de4d; reviewed renderer wording84cf9cd28. Shared all-family Records classification and UI complete:75profiles,213 authored Results,114 current Records,701 person/result Credits. Structured census1435resolved/78nonperson/7unresolved plus10manual origins. Astra bounded senior review found no blockers. Formalization remains one canonical kind across model/schema/filters. Full push gate has two isolated failures: unused test binding fixed, documentation map fixed and passed; full type rerun and reachable behavioral tests running. Complete merged site/PDF build finished; worker auditing and promoting preview. Final push/CI/PR update/handoff pending. New registrations,146-PDF complete inspection and family frontier comparison remain separately tracked. Do not merge PR or deploy.
+Final preview live in Arc from site-integrated-reviewed;7293publication checks,1143URL rows and692-page name audit pass; fourPDFs have7/8/8/25 valid profile annotations after title-free footnote fix15cbd2742. Plan committed d4770d02b. Formalization confirmed in existing ontology/schema/shared kind filters. First push gate:66of69steps pass; type binding and doc map failures fixed and reruns pass; behavioral suite timed out900s without verdict. Rerunning final whole gate with explicit1800s cap and retained artifacts (dynamic reachable step cannot be selected alone). Log profiles-final-push-rerun.log in external scratch; session17337. Read-only data agent monitors diagnostics. Push, hosted CI and PR handoff pending; no merge/deployment. All historical population/registration and family-frontier followups remain separate.
