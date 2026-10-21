@@ -43,13 +43,15 @@ PRINTED_DIGESTS = {
 LITERAL = re.compile(r"-?\d+(?:/[1-9]\d*)?")
 #: Each row the source register held at 343 when the issue was read, with the exact
 #: margin `claims.json` records below it: #678's print, which stood, then #489's exact
-#: side and #484's, which it and #489 had superseded.
+#: side, which #678 had superseded, and #484's, which #489 had.
 MARGINS = {
     "couzo-issue678-2026-10-18": Fraction(549722418875431365524329541, 10**30),
     "evand-record-hunt3-2026-10-10": Fraction(137510307871677774009108891, 25 * 10**28),
+    "fang-two-wedge-certificates-2026-10-10": Fraction(
+        666206980387357549497215734802998628885949191983887537, 2**85 * 10**30
+    ),
 }
-FANG = "fang-two-wedge-certificates-2026-10-10"
-#: The source this import supersedes at 343, and the row it adds.
+#: The source this import supersedes at 343.
 SUPERSEDED = "couzo-issue678-2026-10-18"
 COVERAGE = reports.REPO / "packing/frontier/source-coverage.yaml"
 
@@ -99,7 +101,7 @@ def test_the_certificate_is_below_every_row_at_343_by_the_margins_the_records_st
     assert row["grid_side"] == "19"
     assert row["smallest"] == reports.THIS
     pending = {other["report"]: other for other in row["pending"]}
-    assert set(pending) == {*MARGINS, FANG}
+    assert set(pending) == set(MARGINS)
     assert {other["relation"] for other in pending.values()} == {"below"}
     for report, margin in MARGINS.items():
         assert Fraction(pending[report]["difference"]) == margin
