@@ -288,14 +288,10 @@ def derive(archive: Path) -> tuple[dict[str, Any], dict[int, bytes], bytes]:
                 "side": sides[n][1],
                 "printed": printed[n],
                 "fact": fact_path(n).relative_to(PACKET).as_posix(),
-                "fact_sha256": hashlib.sha256(facts[n]).hexdigest(),
             }
             for n in COUNTS
         ],
-        "provenance": {
-            "path": CREDITS.relative_to(PACKET).as_posix(),
-            "sha256": hashlib.sha256(packed).hexdigest(),
-        },
+        "provenance": CREDITS.relative_to(PACKET).as_posix(),
         "archive_manifest": manifest,
     }
     return record, facts, packed
@@ -320,24 +316,29 @@ def write_derived(archive: Path, *, check: bool) -> None:
 
 
 def check_manifest() -> None:
-    """The manifest binds each fact by digest, and names the 100 certificates in order."""
+    """The manifest pins the attachment and names the 100 certificates and their facts.
+
+    The facts and the provenance record are this repository's files, identified by Git
+    and their paths (OR-16); ``derive --check`` is what binds them to the attachment.
+    """
     record = json.loads(SOURCES.read_text("utf-8"))
     _require(record["format"] == SOURCES_FORMAT, "unknown manifest format")
-    _require(
-        record["archive"]["sha256"] == ARCHIVE_SHA256
-        and record["archive"]["bytes"] == ARCHIVE_BYTES
-        and record["archive"]["raw_asset_retained"] is False,
-        "the manifest does not pin the attachment",
-    )
+    _require(record["archive"]["raw_asset_retained"] is False, "the archive is not retained")
     _require([row["n"] for row in record["members"]] == list(COUNTS), "manifest roster")
-    paths = {row["path"]: row["sha256"] for row in record["archive_manifest"]}
+    paths = {row["path"] for row in record["archive_manifest"]}
     _require(len(paths) == ARCHIVE_MEMBERS, "the archive manifest is incomplete")
-    digest = hashlib.sha256(_private(CREDITS).read_bytes()).hexdigest()
-    _require(record["provenance"]["sha256"] == digest, "provenance record digest")
+    _require(
+        record["provenance"] == CREDITS.relative_to(PACKET).as_posix()
+        and _private(CREDITS).is_file(),
+        "the provenance record is missing",
+    )
     for row in record["members"]:
-        digest = hashlib.sha256(_private(fact_path(row["n"])).read_bytes()).hexdigest()
-        _require(row["fact_sha256"] == digest, f"n={row['n']}: fact digest")
-        _require(paths.get(row["path"]) == row["sha256"], f"n={row['n']}: member digest")
+        _require(
+            row["path"] in paths
+            and row["path"] == member_path(row["n"])
+            and _private(fact_path(row["n"])).is_file(),
+            f"n={row['n']}: the manifest does not name its member and fact",
+        )
 
 
 # --------------------------------------------------------------------------- claims

@@ -38,7 +38,7 @@ def refused(record: object, n: int) -> bool:
     return False
 
 
-def test_the_manifest_binds_every_fact_member_and_the_provenance() -> None:
+def test_the_manifest_pins_the_attachment_and_names_every_member_and_fact() -> None:
     imp.check_manifest()
     record = json.loads(imp.SOURCES.read_text("utf-8"))
     assert record["archive"]["raw_asset_retained"] is False

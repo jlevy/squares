@@ -49,7 +49,7 @@ This packet retains:
   `t = tan(theta/2)`, in Evan Daniel’s certificate format’s order
 - [`acquisition/sources.json`](acquisition/sources.json): the two addresses, the size
   and SHA-256 of the archive, `raw_asset_retained: false`, each certificate’s member
-  path, size, SHA-256, exact side, the issue’s print and its fact’s digest, and the
+  path, size, SHA-256, exact side, the issue’s print and its fact’s path, and the
   path, size and SHA-256 of all 808 archive members
 - [`acquisition/provenance.json.gz`](acquisition/provenance.json.gz): the 100 per-case
   `provenance.json` records, read as JSON and kept as attribution metadata, each with
