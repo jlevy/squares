@@ -1797,6 +1797,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
+            "packing/atlas/known-best/bound-citations.json",
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
@@ -1810,18 +1811,22 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-lower-bounds-explainer.md",
         ),
         reason=(
-            "Reviewed October 21, 2026 against main 4851d819 for the records lane of 21 "
+            "Reviewed October 21, 2026 against main e7de85ff for the records lane of 21 "
             "October (think-8z7k, #664's credit at 271, #669's by-field answer). The site "
-            "v0.8.8 cut regenerated the five claim documents, and each of the 22 changed "
-            "lines differs from main only in its source-link revision, 9cd35d1e to "
-            "047d935e; the explainer links them rather than inlining them. results.yaml "
-            "changes only T-197's, T-219's, T-221's and T-222's prose, and adopt_houses.py "
-            "only the 271 credit and T-219's and T-222's prose; the register's counts the "
-            "explainer reads are unchanged. Rendered at the branch head 8aa19f64, once from "
-            "its tree and once with main's results.yaml, adopt_houses.py, n-154.md and "
-            "result-requests.yaml: its HTML and Markdown and the files it writes at the "
-            "site root are byte-identical. It keeps v0.4.11; no PDF was printed, and it "
-            "prints from that HTML."
+            "v0.8.9 cut regenerated the five claim documents, and each of the 22 changed "
+            "lines differs from main only in its source-link revision, ec95f0b8 to "
+            "f555a0f9; the explainer links them rather than inlining them. results.yaml "
+            "changes only T-197's, T-219's, T-221's and T-222's prose, adopt_houses.py "
+            "only the 271 credit and T-219's and T-222's prose, and bound-citations.json "
+            "only the 271 upper citation's text; the register's counts and the n11 "
+            "citation the explainer reads are unchanged. Rendered at the branch head "
+            "7d67be1f, once from its tree and once with main's results.yaml, "
+            "adopt_houses.py, n-154.md, result-requests.yaml and bound-citations.json: its "
+            "Markdown and the files it writes at the site root are byte-identical, and its "
+            "HTML, the same length, differs only in where the browser math preparation "
+            "serializes an empty style attribute on two math spans, as in the #446 "
+            "disposition; an earlier pair of renders at 8aa19f64 was byte-identical. It "
+            "keeps v0.4.11; no PDF was printed, and it prints from that HTML."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1848,7 +1853,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "Reviewed October 21, 2026 against main 4851d819 for the records lane of 21 "
+            "Reviewed October 21, 2026 against main e7de85ff for the records lane of 21 "
             "October (think-8z7k, #664's credit at 271, #669's by-field answer, #689 and "
             "#694 closed, #702 triaged). results.yaml changes only T-197's, T-219's, "
             "T-221's and T-222's prose, outside the n11 ladder rungs paper_figures reads; "
@@ -1856,10 +1861,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "one sentence of T-222's section; and result-requests.yaml only the #664, #669, "
             "#674, #689, #694 and #702 entries. Rendered with render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods at link revision "
-            "4851d819, at the branch head 8aa19f64, once from its tree and once with main's "
-            "copies of those four inputs: with the explainer's, all 68 files written are "
-            "byte-identical. No PDF was printed; each prints from that HTML. Retain v0.1.7, "
-            "v0.1.0 and v0.2.3."
+            "e7de85ff, at the branch head 7d67be1f, once from its tree and once with main's "
+            "copies of those four inputs and bound-citations.json: the files the three "
+            "write are byte-identical. No PDF was printed; each prints from that HTML. "
+            "Retain v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
