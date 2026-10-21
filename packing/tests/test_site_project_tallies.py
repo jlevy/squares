@@ -22,7 +22,8 @@ import html
 import itertools
 import os
 import re
-from collections.abc import Iterator
+from collections.abc import Iterator, Mapping
+from dataclasses import dataclass
 from datetime import datetime, time
 from html.parser import HTMLParser
 from pathlib import Path
@@ -42,7 +43,7 @@ from devtools import (
 )
 from devtools.overview_sections import Cited, ProjectTally, project_order, project_tallies
 from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
-from sqpack.contributor_occurrences import load_occurrences
+from sqpack.contributor_occurrences import CreditOccurrence, load_occurrences
 from sqpack.probes import probe
 from sqpack.yamlio import safe_load
 from tests import site_renders
@@ -255,39 +256,85 @@ def page() -> str:
     return site_renders.html("index.html")
 
 
-def _attributed(overview: overview_data.Overview, url: str) -> list[overview_data.Result]:
+@pytest.fixture(scope="module")
+def results_page() -> str:
+    return site_renders.html(render_overview.RESULTS_PAGE)
+
+
+@dataclass(frozen=True)
+class _ProjectInputs:
+    coverage: tuple[Mapping[str, Any], ...]
+    bibliography: tuple[Mapping[str, Any], ...]
+    occurrences: tuple[CreditOccurrence, ...]
+    resources: tuple[site_resources.Resource, ...]
+
+
+@pytest.fixture(scope="module")
+def project_inputs() -> _ProjectInputs:
+    """Validate the unchanged raw records once, then reuse them across every project.
+
+    Keep these inputs separate from the production source-key map so the oracle still
+    derives each project's coverage independently. The low-level loader stays uncached
+    for tests that mutate source records or load another repository.
+    """
+    coverage = safe_load(overview_sections.SOURCE_COVERAGE.read_text(encoding="utf-8"))
+    bibliography = safe_load(overview_data.BIBLIOGRAPHY.read_text(encoding="utf-8"))
+    return _ProjectInputs(
+        tuple(coverage["sources"]),
+        tuple(bibliography["sources"]),
+        load_occurrences().occurrences,
+        site_resources.resources(),
+    )
+
+
+def _attributed(
+    overview: overview_data.Overview, url: str, inputs: _ProjectInputs
+) -> list[overview_data.Result]:
     """A project's results, read from the register here and not through the mapping the
     page uses: those whose attribution names a key the coverage register gives a source
     at the project's address, a key `PROJECT_EXTRA_KEYS` adds, or a key the bibliography
     files under the project's venue in `SOURCE_VENUES`."""
-    coverage = safe_load(overview_sections.SOURCE_COVERAGE.read_text(encoding="utf-8"))
-    bibliography = safe_load(overview_data.BIBLIOGRAPHY.read_text(encoding="utf-8"))
     venue = overview_sections.SOURCE_VENUES.get(url)
     keys = (
         {
             source["source_key"]
-            for source in coverage["sources"]
+            for source in inputs.coverage
             if re.sub(r"/tree/.*", "", source["url"]).rstrip("/") == url.rstrip("/")
         }
         | set(overview_sections.PROJECT_EXTRA_KEYS.get(url, ()))
         | {
             entry["key"]
-            for entry in bibliography["sources"]
+            for entry in inputs.bibliography
             if venue and entry.get("venue") == venue
         }
     )
-    authors = next(
-        (record.profile_ids for record in site_resources.resources() if record.url == url), ()
-    )
+    authors = next((record.profile_ids for record in inputs.resources if record.url == url), ())
     ids = set(
         site_tallies.project_primary_results(
             authors,
             keys,
-            load_occurrences().occurrences,
+            inputs.occurrences,
             [result.record for result in overview.results],
         )
     )
     return [result for result in overview.results if result.id in ids]
+
+
+def test_project_oracle_reuses_inputs_without_reloading_source_records(
+    overview: overview_data.Overview,
+    project_inputs: _ProjectInputs,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def unexpected_reload(*_args: object, **_kwargs: object) -> None:
+        pytest.fail("project oracle must reuse its validated module inputs")
+
+    monkeypatch.setattr(f"{__name__}.load_occurrences", unexpected_reload)
+    monkeypatch.setattr(f"{__name__}.safe_load", unexpected_reload)
+    attributed = {
+        url: _attributed(overview, url, project_inputs)
+        for url in overview_sections.project_urls()
+    }
+    assert any(attributed.values())
 
 
 def _cards(page: str) -> list[tuple[str, str]]:
@@ -312,7 +359,7 @@ def _cards(page: str) -> list[tuple[str, str]]:
 
 
 def test_the_page_lists_the_projects_in_the_functions_order(
-    page: str, overview: overview_data.Overview
+    page: str, overview: overview_data.Overview, project_inputs: _ProjectInputs
 ) -> None:
     """The rendered order is the catalogues as `CATALOGUE_SITES` writes them, then
     `ranked_projects`, computed from the register; the lists in the source keep no
@@ -328,7 +375,7 @@ def test_the_page_lists_the_projects_in_the_functions_order(
     assert {*catalogues, *(url for url, _ in ranked)} == set(overview_sections.project_urls())
     keys = []
     for url, _ in ranked:
-        own = _attributed(overview, url)
+        own = _attributed(overview, url, project_inputs)
         levels = [overview_sections.significance(result) for result in own]
         newest = max((result.dated[1] for result in own), default="")
         keys.append((tuple(levels.count(level) for level in LEVELS), newest))
@@ -350,30 +397,30 @@ def test_the_page_lists_the_projects_in_the_functions_order(
 
 
 def test_each_card_ends_with_its_tally_linked_to_its_results(
-    page: str, overview: overview_data.Overview
+    page: str, overview: overview_data.Overview, project_inputs: _ProjectInputs
 ) -> None:
     """One shared component counts distinct registered results and scoped reviewed credits."""
     with_tally = 0
+    measures = {
+        result.id: (overview_sections.significance(result), result.dated[1])
+        for result in overview.results
+    }
     for url, foot in _cards(page):
-        own = _attributed(overview, url)
+        own = _attributed(overview, url, project_inputs)
         levels = [overview_sections.significance(result) for result in own]
         slug = overview_sections.project_slug(url)
         total = f"{len(own)} result" + ("" if len(own) == 1 else "s")
         counts = [(level, levels.count(level)) for level in LEVELS if level in levels]
         authors = next(
-            (record.profile_ids for record in site_resources.resources() if record.url == url),
+            (record.profile_ids for record in project_inputs.resources if record.url == url),
             (),
         )
         associations = site_tallies.project_credit_associations(
             authors,
             overview_sections.project_source_keys()[url],
-            load_occurrences().occurrences,
+            project_inputs.occurrences,
             [result.record for result in overview.results],
         )
-        measures = {
-            result.id: (overview_sections.significance(result), result.dated[1])
-            for result in overview.results
-        }
         expected = total
         if len(counts) == 1:
             expected += f" (at S{counts[0][0]})"
@@ -408,13 +455,13 @@ def test_each_card_ends_with_its_tally_linked_to_its_results(
 
 
 def test_a_tally_link_selects_exactly_its_projects_rows(
-    overview: overview_data.Overview,
+    overview: overview_data.Overview, project_inputs: _ProjectInputs, results_page: str
 ) -> None:
     """A row carries the slugs of the listed projects it is attributed to, and the
     Project preset holds a row to one of them, so the rows a tally's link shows are the
     results it counts. The results page's defaults hide no row, so the link needs to
     clear nothing; and every slug is distinct and is a choice of the Project control."""
-    results = site_renders.html(render_overview.RESULTS_PAGE)
+    results = results_page
     facets = dict(re.findall(r'<tr id="(t-\d+)"[^>]*\sdata-project="([^"]*)"', results))
     assert len(facets) == len(overview.results)
     slugs = [overview_sections.project_slug(url) for url in overview_sections.project_urls()]
@@ -423,7 +470,9 @@ def test_a_tally_link_selects_exactly_its_projects_rows(
         slug = overview_sections.project_slug(url)
         assert re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug), slug
         rows = sorted(row for row, listed in facets.items() if slug in listed.split())
-        assert rows == sorted(result.id.lower() for result in _attributed(overview, url)), url
+        assert rows == sorted(
+            result.id.lower() for result in _attributed(overview, url, project_inputs)
+        ), url
         name = html.escape(overview_sections.project_name(url))
         assert f'<option value="{slug}">{name}</option>' in results
     assert overview_sections.FilterDefaults() == overview_sections.RESULTS_DEFAULTS

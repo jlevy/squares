@@ -201,8 +201,8 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://github.com/JoostdeWinter/square-packing",
         "Joost de Winter",
         (
-            "Reported exact rational certificates for 227, 229 and 260 squares,"
-            " pending adoption (T-196)."
+            "Exact rational certificates for 227, 229 and 260 squares,"
+            " independently replayed and reviewed here; adopted at 227 and 260 (T-196)."
         ),
     ),
     (
