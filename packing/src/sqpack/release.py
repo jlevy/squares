@@ -1775,6 +1775,29 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For issue 686's import against main e7de85ff: result requests and source "
+            "coverage are citation targets whose existence the producer checks, not "
+            "inlined text, and both cited paths exist at both revisions; #686's request "
+            "changes, the muglich-issue686-2026-10-19 coverage source with its 100 "
+            "beyond-horizon rows and the 88 rows it supersedes are not cited by the "
+            "survey. Rendered at link revision b7283e48, once from this branch's tree and "
+            "once with main's copies of the two changed inputs: render_packing_methods "
+            "leaves the 42 files of the site tree byte-identical between the trees. No "
+            "PDF was printed; it prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
