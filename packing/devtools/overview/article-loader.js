@@ -7,6 +7,8 @@
   const mathStyles = new Map();
   /** @type {WeakMap<HTMLElement, HTMLElement>} */
   const origins = new WeakMap();
+  /** @type {((article: HTMLElement) => void)[]} what a controller adds to every clone */
+  const preparers = [];
   let serial = 0;
   let generation = 0;
 
@@ -66,6 +68,42 @@
     }
   };
 
+  /** Attributes whose value is an address the clone follows or loads. */
+  const ADDRESSES = ["href", "src", "xlink:href", "action", "formaction"];
+
+  /**
+   * Leave a parsed article nothing that runs once it is cloned into the live document:
+   * no script, event handler attribute, `srcdoc` or `javascript:` address. Relative
+   * `href` and `src` values are resolved against the response. The pages are this site's
+   * own, generated with their text escaped, so this is defence in depth over them rather
+   * than a sanitizer for foreign markup.
+   * @param {HTMLElement} article @param {string} responseUrl
+   */
+  const inert = (article, responseUrl) => {
+    for (const script of article.querySelectorAll("script")) {
+      script.remove();
+    }
+    for (const node of [article, ...article.querySelectorAll("*")]) {
+      for (const { name } of Array.from(node.attributes)) {
+        const lower = name.toLowerCase();
+        if (lower.startsWith("on") || lower === "srcdoc") {
+          node.removeAttribute(name);
+          continue;
+        }
+        const value = ADDRESSES.includes(lower) ? node.getAttribute(name)?.trim() : undefined;
+        if (value === undefined || value.startsWith("#")) {
+          continue;
+        }
+        const address = new URL(value, responseUrl);
+        if (address.protocol === "javascript:") {
+          node.removeAttribute(name);
+        } else if (lower === "href" || lower === "src") {
+          node.setAttribute(name, address.href);
+        }
+      }
+    }
+  };
+
   /** @param {string} url @param {string} selector @returns {Promise<SiteLoadedArticle>} */
   const fetchArticle = async (url, selector) => {
     const response = await fetch(url, { credentials: "same-origin", mode: "same-origin" });
@@ -79,18 +117,7 @@
     if (!(article instanceof HTMLElement)) {
       throw new Error(`${url} holds no ${selector} article`);
     }
-    for (const script of article.querySelectorAll("script")) {
-      script.remove();
-    }
-    for (const node of article.querySelectorAll("[href], [src]")) {
-      for (const name of ["href", "src"]) {
-        const value = node.getAttribute(name)?.trim();
-        if (value === undefined || value.startsWith("#")) {
-          continue;
-        }
-        node.setAttribute(name, new URL(value, responseUrl).href);
-      }
-    }
+    inert(article, responseUrl);
     await loadMathStyles(parsed.content, responseUrl);
     article.remove();
     return { article, responseUrl };
@@ -171,6 +198,9 @@
     const held = await pending;
     const article = /** @type {HTMLElement} */ (held.article.cloneNode(true));
     scopeIds(article, held.responseUrl);
+    for (const prepare of preparers) {
+      prepare(article);
+    }
     return { article, responseUrl: held.responseUrl };
   };
 
@@ -180,8 +210,24 @@
     return popover instanceof HTMLElement ? origins.get(popover) || opener : opener;
   };
 
+  /** @param {MouseEvent} event @returns {Element | null} */
+  const clickTarget = (event) =>
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey ||
+    !(event.target instanceof Element)
+      ? null
+      : event.target;
+
   globalThis.siteArticles = {
     loadArticle,
+    prepare: (step) => {
+      preparers.push(step);
+    },
+    clickTarget,
     returnFocus,
     setReturnFocus: (popover, opener) => origins.set(popover, returnFocus(opener)),
     beginRequest: () => ++generation,

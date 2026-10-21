@@ -1,5 +1,8 @@
 // Ordinary contributor links read their canonical page; unmodified presses enhance
-// them with the same article in one accessible popover.
+// them with the same article in one accessible popover. Each link it enhances says so
+// with `aria-haspopup="dialog"`, set here rather than written into every page: on the
+// links in the page and in its held templates at start-up, and on those in every
+// article the shared loader clones later (`siteArticles.prepare`).
 (() => {
   const popover = document.querySelector("[data-contributor-popover]");
   const body = popover?.querySelector("[data-contributor-body]");
@@ -18,27 +21,39 @@
   let origin = null;
   let latest = 0;
 
+  /**
+   * Whether a press on `link` opens the popover rather than following the link.
+   * @param {Element | null} link
+   * @returns {link is HTMLAnchorElement}
+   */
+  const enhanced = (link) =>
+    link instanceof HTMLAnchorElement &&
+    !link.hasAttribute("download") &&
+    (link.target === "" || link.target === "_self");
+
+  /** @param {ParentNode} root */
+  const announce = (root) => {
+    for (const link of root.querySelectorAll("a[data-contributor][href]")) {
+      if (enhanced(link)) {
+        link.setAttribute("aria-haspopup", "dialog");
+      }
+    }
+    for (const held of root.querySelectorAll("template")) {
+      announce(held.content);
+    }
+  };
+  // A page read from a file cannot fetch the article, so its links stay plain links.
+  if (/^https?:$/.test(location.protocol)) {
+    announce(document);
+    articles.prepare(announce);
+  }
+
   // Capture before the source case/result panel's ordinary-link close listener.
   document.addEventListener(
     "click",
     (event) => {
-      if (
-        event.defaultPrevented ||
-        event.button !== 0 ||
-        event.metaKey ||
-        event.ctrlKey ||
-        event.shiftKey ||
-        event.altKey ||
-        !(event.target instanceof Element)
-      ) {
-        return;
-      }
-      const link = event.target.closest("a[data-contributor][href]");
-      if (
-        !(link instanceof HTMLAnchorElement) ||
-        link.hasAttribute("download") ||
-        (link.target !== "" && link.target !== "_self")
-      ) {
+      const link = articles.clickTarget(event)?.closest("a[data-contributor][href]") ?? null;
+      if (!enhanced(link)) {
         return;
       }
       event.preventDefault();

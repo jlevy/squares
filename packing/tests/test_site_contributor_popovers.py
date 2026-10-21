@@ -92,11 +92,19 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
         'data-contributor="evan-daniel">Evan Daniel</a><a id="case-link" '
         'href="cases/11.html" data-case="11">Case 11</a><table><tbody>'
         '<tr id="result-row" data-row-popover="pop-result"><td>Result details</td></tr>'
+        # A row naming a person, as a results table's credit cell does.
+        '<tr id="named-row" data-row-popover="pop-named"><td>Named result</td><td>'
+        '<a id="row-name" href="profiles/evan-daniel.html" data-contributor="evan-daniel">'
+        "Evan Daniel</a></td></tr>"
         '</tbody></table><button id="native-opener" popovertarget="pop-native">'
         'Open native panel</button><div id="pop-native" class="site-popover" '
         'popover="auto">Native panel content</div>'
         '<div id="pop-result" class="site-popover" popover="auto">'
         '<button class="site-popover-close" popovertarget="pop-result" '
+        'popovertargetaction="hide">Close</button><div data-row-pop-src="result/test.html">'
+        '<a href="result/test.html">Read result</a></div></div>'
+        '<div id="pop-named" class="site-popover" popover="auto">'
+        '<button class="site-popover-close" popovertarget="pop-named" '
         'popovertargetaction="hide">Close</button><div data-row-pop-src="result/test.html">'
         '<a href="result/test.html">Read result</a></div></div>'
         + render_case_pages.case_popover()
@@ -221,6 +229,8 @@ def test_profile_content_scoped_links_and_focus(
         page.on("request", lambda request: requests.append(request.url))
         page.goto(served)
         link = page.locator("#profile-link")
+        # The script names each link it enhances as opening a dialog; the HTML does not.
+        site_browser.api().expect(link).to_have_attribute("aria-haspopup", "dialog")
         link.focus()
         page.keyboard.press("Enter")
         panel = page.locator("#pop-contributor")
@@ -247,6 +257,8 @@ def test_profile_content_scoped_links_and_focus(
         )
         article.locator('a:has-text("Biography")').click()
         assert panel.is_visible()
+        # The scoped target is this load's alone, so the address keeps no fragment for it.
+        assert page.url == served
         layout = page.evaluate(LAYOUT)
         assert layout["duplicateIds"] == []
         assert layout["left"] >= 0
@@ -364,8 +376,11 @@ def test_overlay_replacement_retains_page_focus(browser: Any, served: str, opene
         origin = page.locator("#case-link" if opener == "case" else "#result-row")
         origin.click()
         source = page.locator("#pop-case" if opener == "case" else "#pop-result")
-        source.locator('a[data-contributor="walter-stromquist"]').wait_for()
-        source.locator('a[data-contributor="walter-stromquist"]').click()
+        name = source.locator('a[data-contributor="walter-stromquist"]')
+        name.wait_for()
+        # A name in an article cloned after start-up is announced as a dialog opener too.
+        site_browser.api().expect(name).to_have_attribute("aria-haspopup", "dialog")
+        name.click()
         profile = page.locator("#pop-contributor")
         profile.locator("article.site-contributor").wait_for(state="visible")
         assert not source.is_visible()
@@ -377,9 +392,28 @@ def test_overlay_replacement_retains_page_focus(browser: Any, served: str, opene
         site_browser.api().expect(origin).to_be_focused()
 
 
+def test_pressing_a_name_in_a_row_fetches_only_the_profile(browser: Any, served: str) -> None:
+    """A name in a row is the name's link, not the row: pressing it opens the profile
+    and starts no fetch of the row's whole result page beside it."""
+    with _page(browser) as page:
+        requests: list[str] = []
+        page.on("request", lambda request: requests.append(request.url))
+        page.goto(served)
+        page.locator("#row-name").click()
+        page.locator("#pop-contributor article.site-contributor").wait_for(state="visible")
+        assert f"{served}profiles/evan-daniel.html" in requests
+        assert f"{served}result/test.html" not in requests
+        assert not page.locator("#pop-named").is_visible()
+        page.keyboard.press("Escape")
+        page.locator("#named-row td").first.click()
+        page.locator("#pop-named article.site-result").wait_for(state="visible")
+        assert requests.count(f"{served}result/test.html") == 1
+
+
 def test_native_navigation_and_modified_clicks(browser: Any, served: str) -> None:
     with _page(browser, java_script_enabled=False) as page:
         page.goto(served)
+        assert page.locator("#profile-link").get_attribute("aria-haspopup") is None
         page.locator("#profile-link").click()
         page.wait_for_url(f"{served}profiles/walter-stromquist.html")
         assert (
