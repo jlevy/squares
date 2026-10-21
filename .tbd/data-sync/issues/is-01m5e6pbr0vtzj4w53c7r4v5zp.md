@@ -3,14 +3,22 @@ type: is
 id: is-01m5e6pbr0vtzj4w53c7r4v5zp
 title: "Register candidates at 227 and 260: Evan Daniel's solved views below T-196 (review B6 of #704)"
 kind: task
-status: open
+status: closed
 priority: 3
-version: 2
+version: 4
+delegate: coord-intake-1021b
 labels:
   - regularization
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-10-21T03:04:50.688Z
-updated_at: 2026-10-21T03:04:59.347Z
+updated_at: 2026-10-21T19:49:28.692Z
+started_at: 2026-10-21T19:49:12.533Z
+closed_at: 2026-10-21T19:49:28.692Z
+close_reason: "Duplicate of think-o4y3 (both record #704 review B6's register candidates at 227 and 260); o4y3 carries the disposition."
+resolution: null
+duplicate_of: null
 ---
 Register candidates (regularization policy, decision table row 3) from the adoption of T-196 (#668, PR #704, think-qdcc) at 227 and 260, recorded here as review B6 of #704 asked. Not registered and not admitted.
 
