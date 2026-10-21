@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 36
+version: 37
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -42,11 +42,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T19:53:36.211Z
+updated_at: 2026-10-21T20:20:04.917Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Final preview live in Arc from site-integrated-reviewed;7293publication checks,1143URL rows and692-page name audit pass; fourPDFs have7/8/8/25 valid profile annotations after title-free footnote fix15cbd2742. Plan committed d4770d02b. Formalization confirmed in existing ontology/schema/shared kind filters. First push gate:66of69steps pass; type binding and doc map failures fixed and reruns pass; behavioral suite timed out900s without verdict. Rerunning final whole gate with explicit1800s cap and retained artifacts (dynamic reachable step cannot be selected alone). Log profiles-final-push-rerun.log in external scratch; session17337. Read-only data agent monitors diagnostics. Push, hosted CI and PR handoff pending; no merge/deployment. All historical population/registration and family-frontier followups remain separate.
+PR #578 updated to 7b566ae73, non-force push preserving prior PR work and origin/main 7eeab1f5e. Clean external worktree: /Volumes/spud-ext2/worktrees/squares-profiles-final-20261021. Source /Volumes/spud-ext2/agent-scratch/about-profiles-20261020/integration-env.sh for checks. Preview rebuilt and reopened in Arc at http://127.0.0.1:8790/profiles/index.html?review=7b566ae73. Publication checks: 7,294 passed. Resolved profile destination/name audit: 692 pages, zero broken links or label mismatches. All four PDF annotations valid (7/8/8/25). Broad gate: 68 non-behavioral steps passed; behavioral run 17,266 passed, 76 failed, 62 skipped, one xfail in 1,193.64s. Every original failure fixed and rerun: combined 77 cases (one renamed test gained a second PDF case) yielded 76 passes; final quoted-attribute parser assertion then passed in 8.05s. All 53 UI module tests passed, final browser floor passed, 121 new-module tests passed and supplied measured costs without threshold changes. Astra reviewed final source and test changes with no findings. Plan and PR body current. Hosted Packing, Pages and explicit Deferred checkpoint 39669160885 now running on this exact head; watch receipt final-pr-checks-watch.log. Keep draft until all hosted checks pass. No merge or deployment. Historical PDF inspection, result registrations and unresolved family-frontier followups remain separate.
