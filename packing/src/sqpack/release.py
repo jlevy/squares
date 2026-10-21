@@ -1847,6 +1847,30 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the #702 import of 21 October (Evan Daniel's s(343) beyond-horizon row, "
+            "evand-n343-sweep-2026-10-20, superseding #678's row at 343) against main "
+            "9dda9224: result requests and source coverage are citation targets whose "
+            "existence the producer checks, not inlined text, and every cited path exists "
+            "at both revisions; the #702 request, the n343 coverage source and its row are "
+            "not cited by the survey. Rendered at link revision f52abebc into an empty "
+            "site directory, once from this branch's tree and once with main's copies of "
+            "the two changed inputs: render_packing_methods leaves the 42 files it writes "
+            "byte-identical between the trees. No PDF was printed; it prints from that "
+            "HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
