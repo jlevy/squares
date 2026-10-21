@@ -199,8 +199,9 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     assert set(NEXT_CANDIDATES) < held_counts
     # 50 until the adoption of 19 October 2026 moved 155 and 236 to Evan Daniel's
     # certificates (T-197, T-218), below T-174's, so the hold decides neither; 47 since
-    # the adoption of 20 October 2026 moved 308 to his issue-689 certificate (T-221).
-    assert len(held_counts) == 47
+    # the adoption of 20 October 2026 moved 308 to his issue-689 certificate (T-221), and
+    # 46 since the adoption of 21 October 2026 moved 270 to his issue-703 one (T-224).
+    assert len(held_counts) == 46
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) == (
         set(select.PENDING_ADOPTION) | previous_t174
@@ -208,6 +209,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
         29: "T-195",
         155: "T-197",
+        270: "T-224",
         308: "T-221",
     }
 
@@ -1259,8 +1261,8 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     and its algebraic ones, and T-193's (#658), for the writer's bead and the writer.
     The adoption of 17 October 2026 (think-3mry) took 37 rational counts off; twelve
     others are staged for T-193, the adoption of 19 October 2026 took 236 to issue 659's
-    certificate and 155 to issue 669's, and the adoption of 20 October 2026 took 308 to
-    issue 689's."""
+    certificate and 155 to issue 669's, the adoption of 20 October 2026 took 308 to issue
+    689's, and the adoption of 21 October 2026 took 270 to issue 703's."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
         algebraic = n in (70, 153, 207) or pending.house == "T-193"
@@ -1274,7 +1276,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert adopted == {
         n for n in houses.LATER_PASSES["2026-10-17"] if houses.ADOPTED[n] == "T-174"
     }
-    assert len(adopted) == 35
+    assert len(adopted) == 34
     assert not adopted & set(select.PENDING_ADOPTION)
 
 
@@ -1325,9 +1327,10 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert "29" not in historical["houses"]
     # The houses as the 17 October passes left them: the adoption of 19 October 2026 moved
     # 155, 236 and 271 to Evan Daniel's certificates and first adopted 229 and 183 (T-220,
-    # think-jh4w), and the adoption of 20 October 2026 moved 154 and 308 to his issue-694
-    # and issue-689 certificates (T-222, T-221) and first adopted 227 and 260 (T-196), after
-    # this receipt was retained.
+    # think-jh4w), the adoption of 20 October 2026 moved 154 and 308 to his issue-694 and
+    # issue-689 certificates (T-222, T-221) and first adopted 227 and 260 (T-196), and the
+    # adoption of 21 October 2026 moved 270 to his issue-703 certificate (T-224), after this
+    # receipt was retained.
     later = {
         155: "T-197",
         183: "T-220",
@@ -1338,6 +1341,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         308: "T-221",
         227: "T-196",
         260: "T-196",
+        270: "T-224",
     }
     before = {
         **houses.ADOPTED,
@@ -1346,6 +1350,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         236: "T-146",
         271: "T-186",
         308: "T-174",
+        270: "T-174",
     }
     for n in (183, 227, 229, 260):
         del before[n]
@@ -1353,7 +1358,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert {n: houses.ADOPTED[n] for n in later} == later
     assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
-        set(houses.numbers_of("T-174")) | {155, 308}
+        set(houses.numbers_of("T-174")) | {155, 270, 308}
     )
 
 

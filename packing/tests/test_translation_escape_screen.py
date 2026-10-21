@@ -102,7 +102,9 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: 20 October 2026 moved it at its four: 154 left, 308 stayed off it, and 227 and 260
 #: joined. De Winter's certificates there (T-196) keep at least 1e-9 from every wall and
 #: every pair, between the screen's 1e-10 and 1e-8, so every square moves at the two tighter
-#: tolerances and 26 and 11 at the two looser.
+#: tolerances and 26 and 11 at the two looser. The adoption of 21 October 2026 moved it at
+#: its one: 270 left, its exact certificate's least margins being 1e-20 and above every
+#: tolerance.
 #: Re-screening the adopted
 #: counts with the screen's own `--update --n` rebuilds the retained screen byte for byte.
 GOLDEN_UNSTABLE = {
@@ -157,7 +159,6 @@ GOLDEN_UNSTABLE = {
         266,
         267,
         269,
-        270,
         273,
         297,
         301,
