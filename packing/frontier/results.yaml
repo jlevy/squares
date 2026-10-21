@@ -30849,8 +30849,9 @@ results:
       job 7.07 seconds. Every positive clears every wall by at least 5.00e-21 and every
       pair by at least 9.99e-21.
 
-      At n = 204 the certificate is below the case's ceiling (Daniil Ostashev, improved by
-      PingYou Ltd and Mishapolk, T-186) by 2.04e-05; below T-223 (#678) (Francisco Couzo)
+      In the packet's frozen comparison, read before #704 merged: at n = 204 the
+      certificate is below the case's ceiling (Daniil Ostashev, improved by PingYou Ltd
+      and Mishapolk, T-186) by 2.04e-05; below T-223 (#678) (Francisco Couzo)
       by 1.39e-09; below #675 (Francisco Couzo) by 1.53e-06; below #670 (Francisco Couzo)
       by 1.58e-06.
 
@@ -30879,12 +30880,14 @@ results:
       optimal assignment gives the moves listed; at 260, 207 of 260 squares lie within
       1e-9 of T-223's and none turns.
 
-      The case records are unchanged: #704 adopts T-196 at 227 and 260 and #706 adopts
-      T-223 at 204 and 260, and this entry's adoption at all four counts follows them,
-      with both strong generators on each re-housed count. #706's own runs of Evan
-      Daniel's regularizer on T-223's witnesses found solved views at the margins stated
-      here at 204 and 260, listed there as register candidates. The source's own checkers
-      were not run here. The two maintained routes, the sqpack rational witness verifier
+      Since #704 merged on 21 October, T-196 is the house best packing at 227 and 260, and
+      the certificate lies below it there by 1.71e-04 and 2.56e-05. This entry leaves the
+      case records unchanged: #706 adopts T-223 at 204 and 260, and this entry's adoption
+      at all four counts follows it, with both strong generators on each re-housed count.
+      #706's own runs of Evan Daniel's regularizer on T-223's witnesses found solved views
+      at the margins stated here at 204 and 260, listed there as register candidates.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack rational witness verifier
       and the independent rational corner checker, share certificate parsing, half-angle
       conversion, Fraction arithmetic and the separating-axis method. No two independent
       methods, human oversight or optimality is claimed.
@@ -30893,7 +30896,8 @@ results:
       each count: each side lies below every value the record holds or has pending, by
       1.9e-11 at 229 to 1.39e-9 at 204 against the packing it solves, and each lies below
       the verified bound at the next count. Both strong generators run on each re-housed
-      count in the adoption's pull request, after #704 and #706 adopt T-196 and T-223.
+      count in the adoption's pull request, after #706 adopts T-223 (#704 adopted T-196 at
+      227 and 260 on 21 October).
     unfinished_confirmations:
       - what: >-
           Enter the retained two-route replay at 204, 227, 229 and 260 as confirming
