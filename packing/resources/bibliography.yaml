@@ -2855,8 +2855,9 @@ sources:
       since the 20 October review
       (docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md) and the
       replay on both maintained exact routes; no run of the source's own checkers is in
-      the record. On 21 October (#704) T-196 became the house best packing at 227 and
-      260; T-199 stays the house at 229.
+      the record. T-196 became the house at 227 and 260 in the pass of 20 October
+      (#704); T-223 replaced it at 260 on 21 October (#706); T-199 stays the house at
+      229.
   - key: '[Daniel n183 subgrid 2026-10-19]'
     authors: [Daniel]
     year: 2026

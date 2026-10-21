@@ -2359,7 +2359,8 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Joost de Winter",
         (
             "Exact rational certificates for 227, 229 and 260 squares, replayed and"
-            " reviewed here (T-196); the house best packings at 227 and 260."
+            " reviewed here (T-196); the house best packing at 227, and at 260 until"
+            " T-223 replaced it on 21 October."
         ),
     ),
     (
