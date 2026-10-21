@@ -2851,10 +2851,12 @@ sources:
       web/de-winter-upper-bounds-227-229-260-2026-10-17/. The issue credits the public
       jlevy/squares catalogue as the search start and preserves its prior-packing credits.
       It discloses Codex agents under the author's direction and subsequent Claude
-      replay. Stage 3 registers these claims as T-196 in packing/frontier/results.yaml,
-      V0/C0 and pending adoption. The separately completed mathematical review and
-      source replay with controls await descendant integration; this entry adopts no
-      confirmation, and both case upper lanes and houses remain unchanged.
+      replay. T-196 registers these claims in packing/frontier/results.yaml, at V3/C3
+      since the 20 October review
+      (docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md) and the
+      replay on both maintained exact routes; no run of the source's own checkers is in
+      the record. On 21 October (#704) T-196 became the house best packing at 227 and
+      260; T-199 stays the house at 229.
   - key: '[Daniel n183 subgrid 2026-10-19]'
     authors: [Daniel]
     year: 2026
