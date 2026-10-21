@@ -24,7 +24,13 @@ contributor:
       locator: Title, Provenance table, and Credit, as the source states it.
     - id: repository-writeups
       archive_path: packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/README.md
-      locator: Readable write-ups and the Square Packing Atlas link in the opening paragraphs.
+      locator: 'Readable write-ups for s(11), s(12), s(13), s(21), s(32) and s(45) and the Square Packing Atlas link in the opening paragraphs; the Results list, with each certificate’s date and Lean status.'
+    - id: repository-credits
+      archive_path: packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/CREDITS.md
+      locator: 'Provenance of this work: “Produced by Claude (Anthropic) in a single session under human direction” and “Nothing here has been peer reviewed.”'
+    - id: regularized-lists
+      archive_path: packing/resources/web/evand-regularized-2026-10-10/README.md
+      locator: 'Opening paragraph: display-regularized drawings of the record packings for n = 1 to 324, added in 346c6ed (2026-10-10T18:05:38Z), with exact rational certificates under search/regularize/lists/certs/.'
     - id: bibliography
       archive_path: packing/resources/bibliography.yaml
       locator: credited_names maps Evan Daniel to Daniel.
@@ -41,10 +47,18 @@ contributor:
       sources: [intake-credit]
     - field: /links/1
       sources: [repository-writeups]
-  bio_sources: [intake-credit, repository-writeups]
+  bio_sources: [intake-credit, repository-writeups, repository-credits, regularized-lists]
 ---
-Evan Daniel’s square-packing repository contains exact lower-bound certificates for unit
-squares and accompanying write-ups.
+Evan Daniel, evand on GitHub, proves lower bounds for packings of unit squares in a
+square with exact weighted covers, beginning with s(12) ≥ 15680/3951 in August 2026. In
+September 2026 he added proofs of s(21) = 5, s(32) = 6 and s(45) = 7, and a proof of
+Wolfram Bentz’s s(13) = 4 without case analysis; the proofs for 13 and 32 are also
+checked in full in Lean.
+His repository’s credits say this work was produced by Claude (Anthropic) in a single
+session under human direction and that none of it has been peer reviewed.
+The repository also holds the Square Packing Atlas, an explorer for the record packings,
+and in October 2026 he added regularized drawings of the record packings for 1 to 324
+squares, with exact rational certificates.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

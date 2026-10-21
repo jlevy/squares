@@ -31,7 +31,8 @@ contributor:
       locator: 'Decisions and Exceptions, the Manasseh Ahmed row: the owner’s confirmation that @ManassehA06, Queuingtheorydotcom and Manasseh Ahmed are one person, credited by his real name.'
     - id: n17-credits
       archive_path: packing/resources/web/kleddamag-n17-candidate-2026-10-12/README.md
-      locator: 'Source and Credit, the Human credit row: the n = 17 edition’s CREDITS.md credits “Manasseh Ahmed’s 11SquaresOptimal” for the proof shape.'
+      url: https://github.com/Kleddamag/the-seventeenth-square-candidate/blob/653b9589d0f8a152f01adc56b1d48ba53d49abc3/CREDITS.md
+      locator: 'CREDITS.md of the n = 17 edition at 653b958, line 28: “Manasseh Ahmed (github.com/Queuingtheorydotcom), 11SquaresOptimal (github.com/Queuingtheorydotcom/11SquaresOptimal): the proof shape”. The packet keeps no upstream bytes; its acquisition/upstream-subtree.sha256 binds the file at SHA-256 fab3b10b36da9842d0f6168ff7b080da50449028d1d116d62995326a5eeda9c8, and its Source and Credit table summarizes the credit in the Human credit row.'
     - id: primary-byline
       archive_path: packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ACKNOWLEDGEMENTS.md
       locator: 'Acknowledgements names @Queuingtheorydotcom for the underlying proof and integration; bibliography explicitly identifies its Ahmed attribution.'
@@ -59,7 +60,7 @@ contributor:
     - field: /aliases/1
       sources: [intake-identity]
     - field: /aliases/2
-      sources: [primary-byline]
+      sources: [primary-byline, n17-credits]
     - field: /aliases/3
       sources: [announcement-account]
     - field: /aliases/4
@@ -73,7 +74,7 @@ contributor:
     - field: /aliases/8
       sources: [intake-identity, earlier-announcement-account]
     - field: /links/0
-      sources: [primary-byline, intake-identity]
+      sources: [primary-byline, intake-identity, n17-credits]
     - field: /links/1
       sources: [announcement-account, intake-identity]
 ---

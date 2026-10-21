@@ -52,8 +52,8 @@ contributor:
   bio_sources: [packet, github-profile]
 ---
 Ryan Xu publishes as ry-xu on GitHub.
-In October 2026 he reported 25 new packings of unit squares in issue #432, from 51 to
-295 squares, with exact rational certificates from his square_packing repository.
+In October 2026 he reported 25 packings of unit squares in issue #432, from 51 to 295
+squares, with exact rational certificates from his square_packing repository.
 The source describes an LLM-assisted search and certificate workflow.
 
 <!-- This document follows common-doc-guidelines.md.

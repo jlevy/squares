@@ -19,7 +19,7 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 Significance S3: T-220 is an S3 finite case result, the first packing of 183 squares below the side-14 grid, from an established certificate kind and replay route. It brings no new technique and claims no optimality.
 
-Daniel packs 183 unit squares in a square of side
+[Evan Daniel](packing/contributors/people/evan-daniel.md) packs 183 unit squares in a square of side
 $13999580178736252502081470897571/10^{30} < 14$, about $4.20 \times 10^{-4}$ below
 the trivial $14 \times 14$ grid. It is the first packing of 183 squares below side 14
 in this register. T-220 is confirmed at V3/C3 and is now the house at 183.
@@ -32,7 +32,7 @@ in this register. T-220 is confirmed at V3/C3 and is now the house at 183.
 - The case draws a regularized view made here with Daniel’s regularizer at the same
   side. It is a drawing, not a second bound. The source’s own regularized
   certificate and its two checkers did not run here.
-- Credit Daniel, after Couzo’s 182-square packing. The source’s KKT, flat-motion
+- Credit Daniel, after [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s 182-square packing. The source’s KKT, flat-motion
   and local-minimum statements are numerical evidence that was not checked here, and
   no optimality, rigidity or priority is claimed.
 
@@ -921,7 +921,7 @@ PRs and supporting records: [\#458](https://github.com/jlevy/squares/pull/458) �
 
 Significance S4: Two reported infinite families strengthen asymptotic packing-deficiency bounds; their geometric assumptions remain under review.
 
-Ryu reports quarter-power and cube-root lower bounds for the deficiency of packings of
+[Ryu Sungjoon](packing/contributors/people/ryu-sungjoon.md) reports quarter-power and cube-root lower bounds for the deficiency of packings of
 closed, pairwise-disjoint unit squares in an integer-sided square. The project retains the
 papers and a review of their geometric arguments and numerical constants.
 

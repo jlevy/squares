@@ -17,12 +17,9 @@ contributor:
     - id: spheres-byline
       archive_path: packing/resources/papers/gensane-2004-dense-packings-equal-spheres-cube.raw.md
       locator: 'Opening byline, “Th. Gensane”, Laboratoire de Mathématiques Pures et Appliquées Joseph Liouville, Calais; Electron. J. Combin. 11 (2004), #R33; the abstract.'
-    - id: picture-credits
-      archive_path: packing/resources/web/known-best-packings/receipts/kingbird-2026-10-05-pictures.json
-      locator: 'The n = 17 credits read from the catalogue SVG: “First high-precision analytic solution by Thierry Gensane and Philippe Ryckelynck before May 19, 2004.”'
     - id: catalogue-credits
       archive_path: packing/resources/web/kingbird-squares-in-squares-compared.md
-      locator: 'Entries 18 and 29: “Alternative found by” and “Found by Thierry Gensane and Philippe Ryckelynck in April 2004, using a computer program they wrote.”'
+      locator: 'Entries 18 and 29: “Alternative found by” and “Found by Thierry Gensane and Philippe Ryckelynck in April 2004, using a computer program they wrote.” In entry 29 the next, better packing is “Found by Thomas Schadt in December 2025”.'
     - id: archive-index
       archive_path: packing/resources/README.md
       locator: 'Papers table: the key [Gensane–Ryckelynck 2005], under which the frontier records cite the paper, with authors “T. Gensane, P. Ryckelynck”; and the key [Gensane 2004].'
@@ -33,19 +30,18 @@ contributor:
       sources: [paper-byline]
     - field: /aliases/0
       sources: [paper-byline, archive-index]
-  bio_sources: [paper-byline, spheres-byline, picture-credits, catalogue-credits]
+  bio_sources: [paper-byline, spheres-byline, catalogue-credits]
 ---
-Thierry Gensane, of the Université du Littoral in Calais, wrote “Improved Dense Packings
-of Congruent Squares in a Square” with Philippe Ryckelynck, published in 2005 in
+In 2004 Thierry Gensane published an adaptation of the billiard algorithm to dense
+packings of equal spheres in a cube, adding systematic perturbations to improve its
+convergence. In 2005 he and Philippe Ryckelynck, both then at the Université du Littoral
+in Calais, published “Improved Dense Packings of Congruent Squares in a Square” in
 Discrete & Computational Geometry.
-Their inflation algorithm, similar to the billiard approach to packing disks and
-spheres, found better packings of 29 and 37 squares and an alternative optimal packing
-of 18 squares; the catalogue dates their packing of 29 squares to April 2004 and credits
-it to a program they wrote.
-For 17 squares they gave the first high-precision analytic solution of John Bidwell’s
-packing, from a system of four polynomial equations.
-His 2004 paper on dense packings of equal spheres in a cube adds systematic
-perturbations to the billiard algorithm.
+In it they derived an algorithm for squares, similar to the billiard approach, from the
+maximal inflation of a configuration, and with it found an alternative to the best known
+packing of 18 squares and two packings of 29 squares better than John Bidwell’s. The
+Squares in Squares catalogue dates their packing of 29 squares to April 2004; Thomas
+Schadt found a better one in December 2025.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

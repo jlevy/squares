@@ -11,8 +11,12 @@ Those documents reference this policy rather than maintain separate naming rules
 
 ## People, Projects and Assistance
 
-Credit the person responsible for a contribution, using their preferred public name or
-the handle under which they publish.
+Credit the person responsible for a contribution by name, and a compact credit line by
+surname: `Xu`, not the handle `ry-xu` (the owner, 2026-10-14: “use Ryan Xu real name or
+surname Xu not the handle for regular credits”). A handle stands in a credit only for an
+author whose sources give no other name.
+Everywhere else a handle is an identifier and stays as it is: in a source key, a path, a
+URL or a repository name.
 A verified handle and a person’s name identify one contributor, not two authors.
 Do not infer a real name, merge accounts from similar spellings, or expand a pseudonym
 without evidence.
@@ -145,6 +149,7 @@ profile or source packet.
 | Marc Leonard Overbeck / Kleddamag | Recorded 2026-10-13. One person, credited by name: `Overbeck` in compact credits, `Marc Leonard Overbeck` on his profile and at first prose mentions. `Kleddamag` on GitHub and `@kleddamag` on X are his handles, linked from the profile; they are aliases, not a second author. Identifiers, URLs, quotations and archived text keep the handle. | The owner’s instruction of 12 and 13 October 2026, and the `CITATION.cff` and README of his [12 October edition](https://github.com/Kleddamag/the-seventeenth-square-candidate/tree/653b9589d0f8a152f01adc56b1d48ba53d49abc3); [profile](packing/contributors/people/marc-leonard-overbeck.md). The profile joins both the `Kleddamag` labels still in the record and the `Overbeck` labels that replace them. | `think-ugbi` |
 | Hiroaki Hosono / wand125 | Recorded 2026-10-13. One person, credited by name: `Hosono` in compact credits, `Hiroaki Hosono` on his profile and at first prose mentions. `wand125` on GitHub and `@wand_125` on X are his handles, linked from the profile; they are aliases, not a second author. Bibliography keys, identifiers, URLs, quotations and archived text keep the handle. | The owner’s instruction of 13 October 2026; the commit authorship his retained packets record and his GitHub profile’s name; [profile](packing/contributors/people/hiroaki-hosono.md). | `think-m7il` |
 | Ryan Xu / ry-xu | Recorded 2026-10-14. One person, credited by name: `Xu` in compact credits, `Ryan Xu` on his profile, in case-record finder lists and at first prose mentions. `ry-xu` on GitHub and `@small_LM` on X are his handles, linked from the profile; they are aliases, not a second author. Bibliography keys, identifiers, module names, packet paths, URLs, the `author` field that names the account filing an issue, quotations, archived text and dated reviews keep the handle. | The owner’s instruction of 14 October 2026; the GitHub account `ry-xu` gives the name Ryan Xu and links the X account; [profile](packing/contributors/people/ryan-xu.md). | `think-g2ga` |
+| Ryu Sungjoon / squarepacker | Recorded 2026-10-20, applying the handle rule above. One person, credited by name: `Ryu`, his family name, in compact credits, and `Ryu Sungjoon` on his profile and at first prose mentions. `squarepacker`, the GitHub account that publishes his repositories, is his handle: an alias, not a second author. Bibliography keys, identifiers, packet paths, URLs, repository names, quotations and archived text keep the handle. | The Credits section of his [s(12) edition’s README](packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/README.md) reads “Author: Ryu Sungjoon (@squarepacker)”; its [Zenodo record](packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/zenodo-23157015.json) lists the creator as “Ryu, Sungjoon”; his preprints print the name given name first, “Sungjoon Ryu”; [profile](packing/contributors/people/ryu-sungjoon.md). Credits that still print `squarepacker` are migration work. | `think-m7il` |
 | Historical first-party atlas/PDF lines | Migrate project-as-person credit to the preferred person name from the generating records. Do not edit archived third-party sources. | The existing `Squares Project (Levy)` display is a migration target, not the naming rule for new work. Rebuild and review affected figures and PDF credits together. | `think-vix3`, `think-jn87` |
 
 An exception needs a named scope, reason, supporting evidence, owner and review

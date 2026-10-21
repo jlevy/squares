@@ -19,7 +19,7 @@ contributor:
       locator: 'The n = 17 credits read from the catalogue SVG: “First high-precision analytic solution by Thierry Gensane and Philippe Ryckelynck before May 19, 2004.”'
     - id: catalogue-credits
       archive_path: packing/resources/web/kingbird-squares-in-squares-compared.md
-      locator: 'Entries 18 and 29: “Alternative found by” and “Found by Thierry Gensane and Philippe Ryckelynck in April 2004, using a computer program they wrote.”'
+      locator: 'Entries 18, 29 and 37: “Alternative found by” and “Found by Thierry Gensane and Philippe Ryckelynck in April 2004, using a computer program they wrote”; entry 37, “Improved by Thierry Gensane and Philippe Ryckelynck in April 2004, using a computer program they wrote, but didn''t set a record”, beside the better packing “Improved by David W. Cantrell in September 2002”.'
     - id: archive-index
       archive_path: packing/resources/README.md
       locator: 'Papers table: the key [Gensane–Ryckelynck 2005], under which the frontier records cite the paper, with authors “T. Gensane, P. Ryckelynck”.'
@@ -32,15 +32,15 @@ contributor:
       sources: [paper-byline, archive-index]
   bio_sources: [paper-byline, picture-credits, catalogue-credits]
 ---
-Philippe Ryckelynck, of the Université du Littoral in Calais, wrote “Improved Dense
-Packings of Congruent Squares in a Square” with Thierry Gensane, published in 2005 in
+Philippe Ryckelynck was at the Université du Littoral in Calais in 2005, when he and
+Thierry Gensane published “Improved Dense Packings of Congruent Squares in a Square” in
 Discrete & Computational Geometry.
-Their inflation algorithm, similar to the billiard approach to packing disks and
-spheres, found better packings of 29 and 37 squares and an alternative optimal packing
-of 18 squares; the catalogue dates their packing of 29 squares to April 2004 and credits
-it to a program they wrote.
-For 17 squares they gave the first high-precision analytic solution of John Bidwell’s
-packing, from a system of four polynomial equations.
+For 17 squares the two authors gave the first high-precision analytic solution of John
+Bidwell’s packing, solving a system of four polynomial equations to 20 digits.
+The Squares in Squares catalogue says they found their packings of 18, 29 and 37 squares
+in April 2004, using a computer program they wrote.
+Their packing of 37 squares improved Erich Friedman’s of 1997 but did not set a record,
+since David W. Cantrell had found a better one in 2002.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

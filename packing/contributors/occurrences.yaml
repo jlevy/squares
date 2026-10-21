@@ -79,8 +79,8 @@ occurrences:
   role: source-author
   disposition: resolved
   evidence:
-  - primary-byline
-  - bibliography
+  - owner-confirmation
+  - n17-credits
   contributor_id: manasseh-ahmed
 - origin:
     path: packing/resources/bibliography.yaml
@@ -145,8 +145,8 @@ occurrences:
   role: source-author
   disposition: resolved
   evidence:
-  - primary-byline
-  - bibliography
+  - owner-confirmation
+  - n17-credits
   contributor_id: manasseh-ahmed
 - origin:
     path: packing/resources/bibliography.yaml
@@ -225,8 +225,8 @@ occurrences:
   role: credited-contributor
   disposition: resolved
   evidence:
-  - primary-byline
-  - bibliography
+  - owner-confirmation
+  - n17-credits
   contributor_id: manasseh-ahmed
 - origin:
     path: packing/resources/bibliography.yaml
@@ -14275,8 +14275,8 @@ occurrences:
   role: prerequisite
   disposition: resolved
   evidence:
-  - primary-byline
-  - bibliography
+  - owner-confirmation
+  - n17-credits
   contributor_id: manasseh-ahmed
 - origin:
     path: packing/frontier/results.yaml
@@ -14463,8 +14463,8 @@ occurrences:
   role: lower-bound-prover
   disposition: resolved
   evidence:
-  - primary-byline
-  - bibliography
+  - owner-confirmation
+  - n17-credits
   contributor_id: manasseh-ahmed
 - origin:
     path: packing/frontier/n-012.md
