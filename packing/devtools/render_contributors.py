@@ -367,7 +367,7 @@ def _credited_work(
     if current_ids or pending:
         pieces.append('<section id="records"><h2>Records</h2>')
         pieces.append(
-            "<p>Currently leading registered contributions in their recorded family "
+            "<p>Current registered contributions in their recorded family "
             "and scope. A result counts once when any of its facets remains current.</p>"
         )
         fallback = ({item.role: {item.label: None} for item in authored}, {})
@@ -967,7 +967,7 @@ def contributor_pages() -> list[Page]:
         "<p>People whose work the square-packing record cites or credits, paper authors "
         "and project contributors alike. Each profile records public identity evidence "
         "and links to reviewed credits. Results count distinct registered results by their "
-        "reviewed primary authors. Records are currently leading registered contributions "
+        "reviewed primary authors. Records are current registered contributions "
         "in their recorded family and scope. Review pending marks comparisons that remain "
         "unclassified, including alongside a supported positive count. "
         "Credits count distinct results that credit a person\u2019s prior work, excluding "

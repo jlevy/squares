@@ -35,11 +35,12 @@ author of the citing result.
 
 After the final manifest handoff, the audit loads **75 profiles**, with **213 distinct
 registered results** having reviewed primary profile authorship and **701 nonprimary
-person/result credit associations**. The structured census has 1,428 resolved spans, 78
-non-person spans and seven unresolved spans, separately from the ten manual origins
-reported below. The seven unresolved spans are four distinct labels: three
-collective-project `Levy` mentions, one `BuddenPing` account, one
-`register seed data from Levy` clause and two `hmbelvedere` mentions.
+person/result credit associations**. The structured census has 1,435 resolved spans, 78
+non-person spans and seven unresolved spans.
+Together with ten manual-origin spans, these account for all 1,530 manifest occurrences.
+The seven unresolved spans are four distinct labels: three collective-project `Levy`
+mentions, one `BuddenPing` account, one `register seed data from Levy` clause and two
+`hmbelvedere` mentions.
 Their retained scope or identity uncertainty is explicit; no clear personal label in the
 audited structured fields remains without a reviewed profile join.
 
@@ -48,6 +49,15 @@ origins. The broad PDF/prose inspection backlog remains separate from these stru
 identity dispositions.
 Counts are reproducible from the command above rather than embedded as assertions in
 source records or tests.
+
+The closing receipt includes upstream `7eeab1f5e`: all 178 branch bibliography sources
+were preserved and Evan Daniel’s n343 source added as source 179. Seven exact new
+bibliography spans were reviewed and resolved, preserving prior spans, raw credit text,
+roles and inspection receipts.
+The retained credits explicitly name Joshua Levy, supporting that source-specific
+identity join. The n343 work remains an existing beyond-horizon source claim; it adds no
+T result and does not change the profile tallies.
+The integration is tracked by `think-65yl`.
 
 ## Identity dispositions
 
