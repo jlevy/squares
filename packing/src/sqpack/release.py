@@ -1916,8 +1916,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_lower_bounds_explainer write 68 files, byte-identical between the "
             "trees. The explainer's first render from the merge's tree wrote one math "
             "span's empty style attribute before its data attributes; two more renders of "
-            "that tree match main's copies byte for byte. No PDF was printed; each prints "
-            "from that HTML. Retain v0.4.13, v0.1.7, v0.1.0 and v0.2.3."
+            "that tree match main's copies byte for byte. Rendered the same way again at "
+            "646b99b6, after review A's edits to adopt_houses.py (per-count lineage) and "
+            "results.yaml (T-223's confirmed significance): 68 files byte-identical, the "
+            "explainer's first render again writing that one span's attribute first and its "
+            "second matching. No PDF was printed; each prints from that HTML. Retain v0.4.13, "
+            "v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
