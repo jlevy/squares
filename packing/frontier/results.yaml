@@ -30576,10 +30576,12 @@ results:
       9.99e-21; the 21 October review measured the least wall clearance as exactly
       1/(2*10^20), at square 15 against the near wall, and the least pair gap as
       9.999999999999989e-21, at squares 41 and 56 along a face normal, as the source's
-      KKT point scaled by 1 + 1e-20 gives. The receipt is
-      receipts/exact-certification.json.xz in evand-n270-sweep-2026-10-20, and
-      test_upper_bound_reports_703.py holds the issue's digests, the side's construction,
-      the margin below T-174, the replay's clearances and the certificate's literal forms.
+      KKT point scaled by 1 + 1e-20 gives.
+
+      The receipt is receipts/exact-certification.json.xz in evand-n270-sweep-2026-10-20,
+      and test_upper_bound_reports_703.py holds the issue's digests, the side's
+      construction, the margin below T-174, the replay's clearances and the certificate's
+      literal forms.
 
       The receipt's two controls are gross, a duplicated square (gap -1) and a square
       moved the side and 2 outside: they show that both routes refuse, not that they
