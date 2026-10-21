@@ -14669,7 +14669,8 @@ issues:
     title: 's(270) ≤ 16.928162252197: registration request'
     author: evand
     opened: '2026-10-20'
-    state: open
+    state: closed
+    closed: '2026-10-21'
     kind: result-report
     triage: done
     summary: >-
@@ -14716,7 +14717,21 @@ issues:
     beads:
     - think-a9jp
     answer_bead: think-a9jp
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/703#issuecomment-6308741545
+      date: '2026-10-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n270
+        id: T-224
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n270
+        id: E-evand-703-n270-report
+      - result: n270
+        id: E-evand-703-n270-exact-feasibility
     close_when: >-
       The certificate is registered on main and replayed here, the stage 4 review has been mapped,
       the case at 270 has adopted it and regularized its drawing with the requested credit, and the
@@ -14730,4 +14745,16 @@ issues:
       and T-140 (#488) by 1.61e-3, T-136 (#481) by 1.62e-3, T-134, T-130 and T-138 by 8.56e-3, and
       T-119, T-098 and T-056 by 9.6e-3; no other open report through #703 states a bound at 270,
       so the report-order rule records it. The result is numbered T-224, after T-223 (#678), which
-      PR #701 registered and merged first.
+      PR #701 registered and merged first. The final reply, posted at 2026-10-21T05:23:53Z
+      (issuecomment-6308741545) after PR #708 merged, reported T-224 at V3/C3, confirmed,
+      significance S3, with its evidence entries E-evand-703-n270-report and
+      E-evand-703-n270-exact-feasibility, its adoption as the house best packing at 270 with the
+      credit asked for and its regularized drawing, and said that nothing asked for is queued; the
+      issue closed at 2026-10-21T05:23Z. Of the review's two questions it answers one from the
+      author's retained files: s270_sw.json lists free_squares: [82], so the certificate's square
+      82 is the one rattler the report counts and the one square the regularized view turns
+      upright, the view being the certificate under a quarter turn of the box, a rotation where
+      the review wrote reflection. It puts the other to the author, saying that neither bears on
+      the bound: whether his matching in s270_sw_vs_prior.json pairs squares 269, 48, 23, 15, 3, 2
+      and 216 differently from the identity on the certificates, or whether its 0.391 is the
+      regularized views' displacement rather than the certificates'.
