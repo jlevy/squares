@@ -1854,6 +1854,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "run_negative_controls.py, changed after that merge, changes only the worker "
             "snapshot's UNREAD_WORKER_OUTPUTS and its comments, and importing each of the "
             "four producers loads no devtools.run_negative_controls. "
+            "Re-taken by source review after review B of #704: its fixes change T-196's "
+            "notes in results.yaml, which name T-223 and change neither count; the "
+            "house writer's override reason, check and refresh in adopt_houses and "
+            "its 70 reasons in source-coverage.yaml, which the explainer does not read; "
+            "and comments in upper_bound_houses and run_negative_controls, which no "
+            "producer loads. "
             "Retain v0.4.12."
         ),
     ),
@@ -1903,6 +1909,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "run_negative_controls.py, changed after that merge, changes only the worker "
             "snapshot's UNREAD_WORKER_OUTPUTS and its comments, and importing each of the "
             "four producers loads no devtools.run_negative_controls. "
+            "Re-taken by source review after review B of #704: its fixes change T-196's "
+            "notes in results.yaml, outside the n11 ladder, the house writer's "
+            "override reason, check and refresh in adopt_houses, and comments in "
+            "upper_bound_houses and run_negative_controls, none of which these "
+            "producers call. "
             "Retain v0.1.7 and v0.1.0."
         ),
     ),
@@ -1951,6 +1962,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "run_negative_controls.py, changed after that merge, changes only the worker "
             "snapshot's UNREAD_WORKER_OUTPUTS and its comments, and importing each of the "
             "four producers loads no devtools.run_negative_controls. "
+            "Re-taken by source review after review B of #704: its fixes change T-196's "
+            "notes in results.yaml, the de Winter source's note and the 70 adoption "
+            "override reasons in source-coverage.yaml, none of which the survey cites, "
+            "and the house writer's reason, check and refresh in adopt_houses and "
+            "comments in upper_bound_houses and run_negative_controls, which do not "
+            "enter its output. "
             "Retain v0.2.3."
         ),
     ),

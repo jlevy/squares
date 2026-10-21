@@ -2054,6 +2054,7 @@ def test_an_opening_only_refresh_keeps_later_lower_bound_evidence_and_prose(
     path.write_text(old_before + marker + " Stale opening.\n\n" + old_after.split("\n\n", 1)[1])
     monkeypatch.setattr(adopt, "replay_plan", lambda: [move])
     monkeypatch.setattr(select, "case_path", lambda _n: path)
+    monkeypatch.setattr(adopt, "COVERAGE", _coverage_copy(tmp_path))
     assert adopt.main(["--refresh-openings"]) == 0
     refreshed = path.read_text()
     assert _front(refreshed) == _front(committed)
@@ -2108,12 +2109,54 @@ def test_a_refresh_limited_to_named_counts_leaves_the_others_unread(
     monkeypatch.setattr(adopt, "replay_plan", lambda: moves)
     monkeypatch.setattr(adopt, "held_counts", lambda: [108])
     monkeypatch.setattr(select, "case_path", lambda n: tmp_path / f"n-{n:03d}.md")
+    monkeypatch.setattr(adopt, "COVERAGE", _coverage_copy(tmp_path))
     assert adopt.main(["--refresh", "--n", "29"]) == 0
     assert "Stale opening." not in paths[29].read_text()
     assert _flat(adopt.opening(moves[0])) in _flat(paths[29].read_text())
     assert paths[108].read_bytes() == untouched
     with pytest.raises(SystemExit):
         adopt.main(["--check", "--n", "29"])
+
+
+def _coverage_copy(directory: Path) -> Path:
+    """A copy of the coverage register, so that a refresh under test writes no real file."""
+    path = directory / "source-coverage.yaml"
+    path.write_bytes(adopt.COVERAGE.read_bytes())
+    return path
+
+
+def test_a_refresh_brings_each_override_reason_to_the_writers_and_check_holds_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """An adopted count's selected override says the smallest validated side, since T-223
+    at V0/C0 lies below the house best packing at 260 (review B1 of #704). A reason in the
+    earlier wording fails `--check`, and a refresh rewrites it with the writer's dump."""
+    committed = adopt.COVERAGE.read_text(encoding="utf-8")
+    reason = adopt.override_reason(260, houses.ADOPTED[260])
+    assert reason.startswith("The smallest validated exact side the register holds")
+    (entry,) = [e for e in safe_load(committed)["selected_overrides"] if e["n"] == 260]
+    assert entry["reason"] == reason
+    earlier = ("smallest validated exact", "smallest exact")
+    head, tail = committed.split("\n- n: 260\n", 1)
+    stale = head + "\n- n: 260\n" + tail.replace(*earlier, 1)
+    (entry,) = [e for e in safe_load(stale)["selected_overrides"] if e["n"] == 260]
+    assert entry["reason"] == reason.replace(*earlier)
+    path = _coverage_copy(tmp_path)
+    path.write_text(stale, encoding="utf-8")
+    monkeypatch.setattr(adopt, "COVERAGE", path)
+    assert [problem for problem in adopt.check() if "reason" in problem] == [
+        (
+            "n=260: the selected override's reason is not what the writer writes "
+            "(`--refresh-openings` rewrites it)"
+        )
+    ]
+    assert adopt.reworded(stale, counts=[227]) == (stale, [])
+    assert adopt.reworded(stale) == (committed, [260])
+    monkeypatch.setattr(adopt, "replay_plan", list)
+    monkeypatch.setattr(adopt, "held_counts", list)
+    assert adopt.main(["--refresh-openings"]) == 0
+    assert path.read_text(encoding="utf-8") == committed
+    assert adopt.check() == []
 
 
 def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:

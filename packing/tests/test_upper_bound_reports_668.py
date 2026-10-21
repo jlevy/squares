@@ -26,7 +26,7 @@ SOURCE_KEY = "[de Winter upper bounds 2026-10-17]"
 COUNTS = (227, 229, 260)
 #: Where each side stands: against the case, and against each other report at its count.
 #: At 227 and 260 it is below the case and above a later Couzo report; at 229 it is above
-#: the house, Evan Daniel's T-199, and above his T-198 and Couzo's #672 as well.
+#: the house best packing, Evan Daniel's T-199, and above his T-198 and Couzo's #672 as well.
 RELATIONS = {
     227: ("below", {"#672": "above"}),
     229: ("above", {"#672": "above", "T-198 (#674)": "above"}),

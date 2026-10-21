@@ -614,14 +614,14 @@ On 20 October 2026 the adoption of Joost de Winter’s certificates of issue 668
 think-qdcc) moved 227 and 260 from the Kingbird catalogue’s packings to house best
 packings $7.27 \times 10^{-3}$ and $1.11 \times 10^{-2}$ below them.
 At 227 the grid-slack view of the earlier witness lapsed; at 260 the earlier house
-drawing was regular as published, and the axis tool refuses the new witness’s. Both
-generators then ran on both counts, on a shared host at a load average of about
+drawing was regular as published, and the axis tool made a view of the new witness.
+Both generators then ran on both counts, on a shared host at a load average of about
 thirteen: Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-20-n227-260-evand`,
-about 1,015 CPU-seconds by its receipt, 536 seconds of wall at two workers) and
-grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-20-n227-260-grid-deg05`,
-`-grid-deg1` and `-grid-deg5`, 30, 29 and 31 seconds, the per-count seconds their
-reports record, retained under those names though they ran as `-grid-0.5`, `-grid-1` and
-`-grid-5`); the selection took 139 seconds of wall at two workers.
+243 CPU-seconds and 535 seconds of wall at two workers by its receipt) and grid-slack at
+0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-20-n227-260-grid-deg05`, `-grid-deg1`
+and `-grid-deg5`, 30, 29 and 31 seconds, the per-count seconds their reports record,
+retained under those names though they ran as `-grid-0.5`, `-grid-1` and `-grid-5`); the
+selection took 139 seconds of wall at two workers.
 Every same-side view is admitted at row 10 at the witness’s own side, and the selection
 draws his same-side view at both counts.
 At 227 it has no uneven and no near-axis square, 5 angle classes and hues and 676 / 684

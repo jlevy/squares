@@ -27611,7 +27611,7 @@ results:
       later #672 by 1.71e-04. At n = 229 it is above the case's ceiling (Evan Daniel, T-199)
       by 1.32e-05, above Daniel's T-198 by 1.15e-05 and above Couzo's #672 by 1.67e-08. At
       n = 260 it is below the earlier verified ceiling (the Kingbird catalogue, T-155) by
-      1.11e-02 and above Couzo's later #678 by 2.56e-05.
+      1.11e-02 and above Couzo's later #678, registered as T-223 at V0/C0, by 2.56e-05.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share certificate
@@ -27622,8 +27622,8 @@ results:
       V3 and C3 rest on the replay (E-de-winter-668-upper-exact-feasibility) and the 20
       October review. The cases at 227 and 260 adopted these certificates as their house best
       packings on 20 October 2026, with both strong regularizers' runs; at 229 the case keeps
-      T-199. A later validated certificate below T-196 at 227 or 260, such as Couzo's, replaces
-      it there under the house rule.
+      T-199. A later validated certificate below T-196 at 227 or 260, such as Couzo's #672 or
+      T-223, replaces it there under the house rule.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 20 October, is

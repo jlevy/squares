@@ -239,7 +239,9 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # selection-n227-n260.json (28,333 bytes), has no registered mention and no inline or
 # result rescue: people open it from the atlas README beside its Markdown summary, and no
 # control reads it. Left out, with this note, the snapshot measures 232,767,018 bytes,
-# 16,854 under the cap.
+# 16,854 under the cap. At #704's head d2eca7108, after 6d9a3d278 and d2eca7108, it read
+# 232,768,595 bytes, 15,277 under, and after review B's fixes 232,775,794, 8,078 under, less
+# than this one selection record.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
