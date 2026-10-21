@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 42
+version: 46
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -42,14 +42,16 @@ child_order_hints:
   - is-01m5g28824ts9q4byp8ezh6sxf
   - is-01m5g2wfw0xf50d000t9mn6wbv
   - is-01m5g3da86sky65p89agbvcpfs
+  - is-01m5g5f5tscrhtwz9tws7jpet7
+  - is-01m5g5gnq2essjemgdmkm4rxzh
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T20:45:57.382Z
+updated_at: 2026-10-21T21:22:44.577Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Final integration head e2925e726ef3ed4916b7845aac8be21f3e74f073 pushed to PR #578. Includes c3e8f1cc generated URL date correction and measured mobile title fix. Main preserved at origin/main 7eeab1f5e. External checkout /Volumes/spud-ext2/worktrees/squares-profiles-final-20261021 is clean. Preview server99187 serves site-integrated-reviewed on127.0.0.1:8790 with all224result pages and updated immutable assets. T037 mobile CLS0.001994 across3runs per theme; desktop0.000622, no unreadable math. All224title text/MathML preserved;18focused tests,16finalCSS tests,16peer scenarios pass. Full rollup/footer selection30pass45.61s; final browser floor29.46s;2176documentation checks pass. Astra final review has no findings. Reopened think-uwd6 because historical child0ltn remains open;6054beads validate without error. LatestPRbody contains full local receipts and deferred scope. Hosted Packing/Pages and explicit Deferred checkpoint running on e2925e726; watch final-pr-checks-e292-watch.log in usual scratch. Earlier setup timeout and superseded-run cancellations are not final-head acceptance. Keep draft until exact-head CI is green; do not merge or deploy.
+Pushed e162a870a to PR #578, including merge e9149e2a2 of origin/main 970e89de8, data pin 3ae236a16, and updated plan. GitHub reports MERGEABLE; still draft until final CI. Local push gate passed all 69 selected steps in 952.59s (19,907 normal tests passed, 65 skipped, one expected failure; 23 pool-heavy passed). Full rebuilt preview site-merged-3ae236a16 is live on port 8790 and open in Arc. All 7,298 publication checks, 692-page profile-link audit, 48 PDF links, 59 shared assets, and eight live routes pass. Name column has a 16rem floor and long resource URLs wrap. Model remains 75 profiles, 213 primary results, 701 credits, 114 authored records; global current records 116. Latest main adoption at 227/260 and release v0.8.15 preserved beneath proposed v0.9.0. Astra found no merge issues. Explicit deep run 39676452183 and all final-head PR checks are being watched. Next: fix any CI failures, then mark ready and finish handoff without merging or deploying. Deferred archive population and historical registrations remain separately tracked.
