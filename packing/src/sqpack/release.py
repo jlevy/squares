@@ -88,6 +88,11 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.13",
+        first_published="October 21, 2026",
+        result_scope="Name the 20 October review in the lineages at 154 and 308.",
+    ),
+    PublicationHistoryEntry(
         version="v0.8.12",
         first_published="October 21, 2026",
         result_scope=(
@@ -682,7 +687,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "ce2f7737662f106e3d4f70772027988ab000b06d"
+DATA_REVISION = "a577f632b604c8b8a34b8946e6f47d28f3c0f036"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1172,6 +1177,13 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.12",
+        version="v0.8.13",
+        impact="patch",
+        reason="Name the 20 October review in the lineages at 154 and 308.",
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.8.11",
@@ -1896,6 +1908,34 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/n-154.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered at 1bcbe222 and with main 2e6d528d's copies of these paths: 68 "
+            "byte-identical files, no PDF."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
@@ -6158,7 +6198,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "45f1918d"
+PUBLICATION_REVISION = "902c92d9"
 
 
 def data_pathspec() -> tuple[str, ...]:
