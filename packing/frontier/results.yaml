@@ -30616,7 +30616,10 @@ results:
       separating-axis method. No optimality, local minimum or human oversight is claimed.
 
       V3 and C3 rest on the 21 October review and the replay it reproduced
-      (E-evand-703-n270-exact-feasibility).
+      (E-evand-703-n270-exact-feasibility). The case at 270 adopted this certificate as
+      its house best packing on 21 October 2026, from T-174, which stays retained as
+      history, and both strong generators decided the new witness in the same pull
+      request: Evan Daniel's solved view at the witness's side is drawn.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a
       distinct reviewer and a retained human oversight record; one AI review, of 21
