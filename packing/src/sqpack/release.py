@@ -1845,7 +1845,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "For the #703 lane of 21 October (T-224 at n = 270, its stage 4 review and "
-            "its adoption as the house best packing at 270) against main 6b825f44: both "
+            "its adoption as the house best packing at 270) against main a5bdb96a: both "
             "reviews read results.yaml only through paper_figures.ladder_records, which "
             "selects the n11 ladder rungs LADDER_RUNGS names and holds them to "
             "LADDER_DIGEST; T-224 and the 270 regularized-drawing item are outside that "
@@ -1854,7 +1854,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packet, 270 in ADOPTED and the 21 October pass; upper_bound_reports.py one "
             "house reader. render_n11_lower_bounds_explainer_pdf.py changes only "
             "EXPECTED_PAGE_COUNT, the explainer's pagination check; these producers "
-            "import its dated helper. Rendered at link revision 2854ca22, once from this "
+            "import its dated helper. Rendered at link revision 667fed68, once from this "
             "branch's tree and once with main's copies of the seven changed inputs "
             "(these five, result-requests.yaml and source-coverage.yaml): "
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
@@ -1881,7 +1881,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "For the #703 lane of 21 October (T-224 at n = 270, its stage 4 review and "
-            "its adoption as the house best packing at 270) against main 6b825f44: "
+            "its adoption as the house best packing at 270) against main a5bdb96a: "
             "result requests, source coverage and results are citation targets whose "
             "existence the producer checks, not inlined text, and every cited path exists "
             "at both revisions; the #703 request, the n270 coverage source and the 270 "
@@ -1890,7 +1890,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "adoption's writer inputs and one house reader, which do not enter its "
             "output; render_n11_lower_bounds_explainer_pdf.py, a render input, changes "
             "only EXPECTED_PAGE_COUNT, which the survey's producer does not read. "
-            "Rendered at link revision 2854ca22, once from this branch's tree and once "
+            "Rendered at link revision 667fed68, once from this branch's tree and once "
             "with main's copies of the seven changed inputs: render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
             "files they write byte-identical between the trees. No PDF was printed; it "
