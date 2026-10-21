@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 43
+version: 44
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -45,11 +45,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T20:57:33.757Z
+updated_at: 2026-10-21T21:10:00.340Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Latest continuation: origin/main970e89de8 (#704, T-196 adoption and site v0.8.15) landed during hosted checks. Merged in e9149e2a2, then repinned DATA_REVISION in3ae236a16. Both commits local, not yet pushed. Three conflicts resolved preserving proposed v0.9.0 and upstream v0.8.15 history; RESULTS regenerated; exact n227/n260 occurrence joins now point to Joost de Winter. Astra reviewed merge boundaries with no findings. Counts unchanged75profiles/213primaryResults/701Credits/114authoredRecords (116globalcurrent). URLregistry1144rows0failures; sourcecoverage324cases580facts0divergences;20classifier/T196 and54identity/tally tests pass. Records52steps68.61s and edit68steps317.1s pass. Pushgate sincee2925e726 is running5305 with1800s cap, log latest-main-push-gate.log. Fullfreshpreview build98370 writes site-merged-3ae236a16, preserving live site-integrated-reviewed untilauditspass. Latestremotehead e2925e726 is conflicted against main; no Packing/Pages started for it, supersededdeferredrun39672860595 canceled. Next: finishgate/build, updateplan/PRbody, pushlocalmerge/pin, runexactheadCI+deferredcheckpoint, markreadyonlywhenallgreen. No merge/deploy.
+Pushed e162a870a to PR #578, including merge e9149e2a2 of origin/main 970e89de8, data pin 3ae236a16, and updated plan. GitHub reports MERGEABLE; still draft until final CI. Local push gate passed all 69 selected steps in 952.59s (19,907 normal tests passed, 65 skipped, one expected failure; 23 pool-heavy passed). Full rebuilt preview site-merged-3ae236a16 is live on port 8790 and open in Arc. All 7,298 publication checks, 692-page profile-link audit, 48 PDF links, 59 shared assets, and eight live routes pass. Name column has a 16rem floor and long resource URLs wrap. Model remains 75 profiles, 213 primary results, 701 credits, 114 authored records; global current records 116. Latest main adoption at 227/260 and release v0.8.15 preserved beneath proposed v0.9.0. Astra found no merge issues. Explicit deep run 39676452183 and all final-head PR checks are being watched. Next: fix any CI failures, then mark ready and finish handoff without merging or deploying. Deferred archive population and historical registrations remain separately tracked.
