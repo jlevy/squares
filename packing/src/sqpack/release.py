@@ -682,7 +682,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "85c57d5191184aa356e60f82dc2b98bc7bc2cc0d"
+DATA_REVISION = "6b116f1df1b8c9625d80fff3db4b24cdcf13d7bb"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1901,7 +1901,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "them. The survey cites the requests and coverage records without inlining "
             "them; the snapshot prune and issue 686's card reach no paper. With main's "
             "copies of the other four inputs, the four renderers write 68 byte-identical "
-            "files at link revision 255049cb. Retain v0.4.13, v0.1.7, v0.1.0 and v0.2.3."
+            "files at link revision 255049cb, and after review A's record edits the "
+            "survey's HTML and Markdown again at 8fd21bb6. Retain v0.4.13, v0.1.7, v0.1.0 "
+            "and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
