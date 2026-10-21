@@ -1900,7 +1900,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "Rendered at fc4d8b7f and with main 2e6d528d's copies of these paths: 68 "
+            "Rendered at 1bcbe222 and with main 2e6d528d's copies of these paths: 68 "
             "byte-identical files, no PDF."
         ),
     ),
