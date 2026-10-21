@@ -37,8 +37,9 @@ A run produces two kinds of output, and they take different paths:
 
 A certificate that proves more than the record holds is registered as a result first,
 and its drawing enters the layer only after that.
-Once validated, a register result below the case’s house is the house, by the import
-runbook’s [house rule](../../../packing/campaign/result-import.md#the-house-rule).
+Once validated, a register result below the case’s house best packing replaces it, by
+the import runbook’s
+[house rule](../../../packing/campaign/result-import.md#the-house-rule).
 
 ## 2. Definitions
 
@@ -327,10 +328,10 @@ routine gate’s wall ceiling.
 So it runs on request with a receipt, and the gates hold the decisions it produced
 ([OR-13](../../../operating-rules.md#or-13-every-fast-check-runs-in-ci-only-the-unavoidably-slow-ones-leave),
 [OR-17](../../../operating-rules.md#or-17-every-routine-gate-has-a-wall-ceiling-and-anything-above-it-is-selected-on-purpose)).
-A house adoption is such a request: the intake pass that re-houses a count runs the
-generators on the new witness in the adoption’s pull request, by the import runbook’s
-[house rule](../../../packing/campaign/result-import.md#the-house-rule), which says how
-the runs fit the compute cap and which deferrals `--check-state` allows.
+An adoption is such a request: the intake pass that changes a count’s house best packing
+runs the generators on the new witness in the adoption’s pull request, by the import
+runbook’s [house rule](../../../packing/campaign/result-import.md#the-house-rule), which
+says how the runs fit the compute cap and which deferrals `--check-state` allows.
 
 | Check | What it holds | Where it runs |
 | --- | --- | --- |

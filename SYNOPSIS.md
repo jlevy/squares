@@ -4667,6 +4667,36 @@ Distinct from the **analytic optimum**, which exists only where the case is prov
 At $n = 5$ and $n = 10$ they coincide; at $n = 11$ the standing best is Trump’s
 construction and the optimum is unknown.
 
+**House best packing**, or *house best* for short (“the house best packing at 204”, “the
+house best at 204”). Either form names the packing this project chooses to stand for a
+count. Both upper lanes of the case record hold its certificate, its witness is
+`packing/witnesses/known-best/n-NNN.yaml`, and the case page, the atlas and every
+picture published as the count’s packing show it, regularized where a view improves on
+it. By the import runbook’s
+[house rule](packing/campaign/result-import.md#the-house-rule), the pass that validates
+a smaller packing adopts it, whoever found it, so the house best packing is the smallest
+validated packing. The one exception is a count staged in
+`select_houses.PENDING_ADOPTION`, where a smaller validated packing waits for one of the
+three `STAGING_REASONS`: the pass’s next pull request, regularization runs over the item
+cap, or no writer yet for its algebraic side.
+On 20 October 2026 nineteen counts are staged, all for want of a writer, 204 among them.
+The house best packing also trails the standing best wherever a smaller reported packing
+has no certificate through stage 4 yet.
+In code and record keys the term is spelled *house*: `devtools.select_houses` derives
+each count’s house best packing from the register, `devtools.upper_bound_houses`
+rebuilds its witness from the retained certificate, `devtools.adopt_houses` writes it
+into the case record, and `select_houses.PENDING_ADOPTION` names each staged count with
+the bead that adopts it.
+Elsewhere *house* has the same modifier sense of “the project’s own”: the house renderer
+(`sqpack.render`) draws every witness.
+A **house drawing** is that renderer’s picture of the house best packing as published;
+the count’s **default picture** is its regularized view where the
+[regularization policy](docs/project/policies/regularization-policy.md#12-the-default-picture)
+draws one, and the house drawing everywhere else.
+The regularization policy’s contact-shading *house rule* (gap $2 \times 10^{-6}$, beside
+the workbench’s stage rule) belongs to that renderer and is unrelated to the adoption
+rule.
+
 **Polish failure** and **exploration failure.** The decomposition of a gap, and the
 campaign’s central diagnostic.
 A **polish failure** is a gap that the declared refiner closes, as $n = 10$ was, from
