@@ -27611,7 +27611,8 @@ results:
       later #672 by 1.71e-04. At n = 229 it is above the case's ceiling (Evan Daniel, T-199)
       by 1.32e-05, above Daniel's T-198 by 1.15e-05 and above Couzo's #672 by 1.67e-08. At
       n = 260 it is below the earlier verified ceiling (the Kingbird catalogue, T-155) by
-      1.11e-02 and above Couzo's later #678, registered as T-223 at V0/C0, by 2.56e-05.
+      1.11e-02 and above Couzo's later #678 (T-223, at V3/C3 since its 20 October review) by
+      2.56e-05.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share certificate
@@ -27622,8 +27623,8 @@ results:
       V3 and C3 rest on the replay (E-de-winter-668-upper-exact-feasibility) and the 20
       October review. The cases at 227 and 260 adopted these certificates as their house best
       packings on 20 October 2026, with both strong regularizers' runs; at 229 the case keeps
-      T-199. A later validated certificate below T-196 at 227 or 260, such as Couzo's #672 or
-      T-223, replaces it there under the house rule.
+      T-199. On 21 October T-223 replaced it at 260 under the house rule (#706); at 227 a
+      later validated certificate below it, such as Couzo's #672, replaces it there.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 20 October, is
@@ -30918,10 +30919,12 @@ results:
       optimal assignment gives the moves listed; at 260, 207 of 260 squares lie within
       1e-9 of T-223's and none turns.
 
-      Since #704 merged on 21 October, T-196 is the house best packing at 227 and 260, and
-      the certificate lies below it there by 1.71e-04 and 2.56e-05. This entry leaves the
-      case records unchanged: #706 adopts T-223 at 204 and 260, and this entry's adoption
-      at all four counts follows it, with both strong generators on each re-housed count.
+      Since #704 and #706 merged on 21 October, the houses are T-223 at 204 and 260, T-196
+      at 227 and T-199 at 229, each a member of the ledger's frozen start, and the
+      certificate lies below each by the margins above: 1.39e-09 and 2.51e-11 below T-223,
+      1.71e-04 below T-196 and 1.91e-11 below T-199. This entry leaves the case records
+      unchanged; its adoption at all four counts follows its stage 4 review, with both
+      strong generators on each re-housed count.
       #706's own runs of Evan Daniel's regularizer on T-223's witnesses found solved views
       at the margins stated here at 204 and 260, listed there as register candidates.
 
@@ -30934,8 +30937,7 @@ results:
       each count: each side lies below every value the record holds or has pending, by
       1.9e-11 at 229 to 1.39e-9 at 204 against the packing it solves, and each lies below
       the verified bound at the next count. Both strong generators run on each re-housed
-      count in the adoption's pull request, after #706 adopts T-223 (#704 adopted T-196 at
-      227 and 260 on 21 October).
+      count in the adoption's pull request.
     unfinished_confirmations:
       - what: >-
           Enter the retained two-route replay at 204, 227, 229 and 260 as confirming

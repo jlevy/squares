@@ -148,8 +148,8 @@ Each side also lies below the verified upper bound at the next count, so each bo
 new by the monotonicity test $s(n) \le s(n + 1)$: 14.82445114612409 at 205,
 15.60460147572967 at 228, 15.68292682926830 at 230 and 16.67877987534291 at 261.
 No registered certificate states any of the four sides.
-Two pull requests move these houses before this import’s adoption: #704, merged on 21
-October, adopted T-196 at 227 and 260, and #706 adopts T-223 at 204 and 260. #706’s own runs of Evan Daniel’s
+Two pull requests merged on 21 October moved these houses before this import’s
+adoption: #704 adopted T-196 at 227 and 260, and #706 T-223 at 204 and 260. #706’s own runs of Evan Daniel’s
 regularizer on T-223’s witnesses found solved views $1.39 \times 10^{-9}$ and
 $2.51 \times 10^{-11}$ below the witness at 204 and 260, the margins of the views here,
 and listed them as register candidates (row 3), not drawn.

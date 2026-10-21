@@ -13504,7 +13504,8 @@ issues:
       (docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md, accepted with five
       non-blocking findings), added the near-contact control (six per certificate, 498 in all,
       every one refused), entered the confirming evidence, raised T-223 to V3/C3 and adopted
-      the house best packings at 204 and 260 with both strong generators run on each. The
+      it as the house best packing at 204; the case at 260 adopted it on 21 October, from
+      T-196, which #704 had adopted there, and both strong generators ran on each count. The
       full-kernel all-pairs replay beyond the corpus is held on think-fpnd. Coordinate with
       think-pvav for issue 675.
   - number: 680
