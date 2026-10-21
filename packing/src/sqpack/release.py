@@ -2188,6 +2188,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/atlas/known-best/bound-citations.json",
             "packing/atlas/known-best/composite-figure.json",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/evand_arrangement_reports.py",
             "packing/devtools/upper_bound_houses.py",
@@ -2263,6 +2268,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods and render_n11_lower_bounds_explainer, the last with "
             "its pinned Chromium math pass, write 68 files, all byte-identical between "
             "the trees. No PDF was printed; each prints from that HTML. "
+            "Re-taken after the merge of main 7eeab1f5e (#714, #712, site v0.8.14) and "
+            "this branch's site v0.8.15 cut, which regenerates the five claim documents "
+            "with only their source-link revision changed, 642464f8 to 5e16f345, and "
+            "after the custody note's new reading in upper_bound_houses. Rendered at "
+            "link revision 30ba79d8, the cut, once from this branch's tree and once "
+            "with main's bytes of the fifteen changed inputs (the ten above and the "
+            "five claim documents): the four renderers write 68 files, all "
+            "byte-identical between the trees. No PDF was printed. "
             "Retain v0.4.13."
         ),
     ),
@@ -2332,6 +2345,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods and render_n11_lower_bounds_explainer, the last with "
             "its pinned Chromium math pass, write 68 files, all byte-identical between "
             "the trees. No PDF was printed; each prints from that HTML. "
+            "Re-taken after the merge of main 7eeab1f5e (#714, #712, site v0.8.14) and "
+            "this branch's site v0.8.15 cut, which regenerates the five claim documents "
+            "with only their source-link revision changed, 642464f8 to 5e16f345, and "
+            "after the custody note's new reading in upper_bound_houses. Rendered at "
+            "link revision 30ba79d8, the cut, once from this branch's tree and once "
+            "with main's bytes of the fifteen changed inputs (the ten above and the "
+            "five claim documents): the four renderers write 68 files, all "
+            "byte-identical between the trees. No PDF was printed. "
             "Retain v0.1.7 and v0.1.0."
         ),
     ),
@@ -2401,6 +2422,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods and render_n11_lower_bounds_explainer, the last with "
             "its pinned Chromium math pass, write 68 files, all byte-identical between "
             "the trees. No PDF was printed; each prints from that HTML. "
+            "Re-taken after the merge of main 7eeab1f5e (#714, #712, site v0.8.14) and "
+            "this branch's site v0.8.15 cut, which regenerates the five claim documents "
+            "with only their source-link revision changed, 642464f8 to 5e16f345, and "
+            "after the custody note's new reading in upper_bound_houses. Rendered at "
+            "link revision 30ba79d8, the cut, once from this branch's tree and once "
+            "with main's bytes of the fifteen changed inputs (the ten above and the "
+            "five claim documents): the four renderers write 68 files, all "
+            "byte-identical between the trees. No PDF was printed. "
             "Retain v0.2.3."
         ),
     ),
