@@ -19,6 +19,7 @@ from sqpack.contributors import (
     ContributorError,
     load_contributor,
     load_contributors,
+    render_bio,
 )
 from sqpack.project import require_project_root
 from sqpack.yamlio import load_yaml
@@ -380,6 +381,34 @@ def test_bio_preserves_inline_markdown_and_abbreviations(
     body = "Dr. Example wrote **a paper** (e.g. on packing).\nIt has a [source](https://example.com/)."
     write_record(path, document, body)
     assert load_contributor(path, repo=REPO).bio == body
+
+
+@pytest.mark.parametrize(
+    "link",
+    [
+        "[bad](javascript:alert%281%29)",
+        "[bad](relative/page.html)",
+        "[bad](/profiles/mira.html)",
+        "[bad](//example.com/paper)",
+        "[bad](https://user:pass@example.com/paper)",
+        "[bad](file:///tmp/private)",
+        "<someone@example.com>",
+    ],
+)
+def test_bio_links_are_public_urls_when_the_record_loads(
+    record: tuple[Path, dict[str, Any]], link: str
+) -> None:
+    """The renderer's link rule runs at load, so validation fails before publication."""
+    path, document = record
+    document["contributor"]["bio_sources"] = ["repository-citation"]
+    write_record(path, document, f"Mira wrote a paper. It is {link}.")
+    with pytest.raises(ContributorError, match="URL"):
+        load_contributor(path, repo=REPO)
+    with pytest.raises(ContributorError, match="URL"):
+        render_bio(f"It is {link}.")
+    assert render_bio("It is [here](https://example.com/paper).") == (
+        'It is <a href="https://example.com/paper">here</a>.'
+    )
 
 
 @pytest.mark.parametrize(

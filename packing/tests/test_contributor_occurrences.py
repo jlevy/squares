@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import html
+import json
 import re
 import shutil
 from dataclasses import asdict, replace
@@ -13,7 +14,9 @@ from typing import Any
 import pytest
 import yaml
 
+from devtools import contributor_census, validate_schemas
 from devtools.contributor_census import (
+    BOUNDARY_REVIEW,
     census,
     reconcile,
     stale_occurrences,
@@ -23,11 +26,14 @@ from devtools.contributor_credit import render_credit
 from devtools.result_credit import credit_line, result_credit_html
 from sqpack.contributor_occurrences import (
     CONTRACT,
+    ROLES,
     SCHEMA_PATH,
     CreditOccurrence,
     CreditOrigin,
+    MissingSourceError,
     OccurrenceError,
     load_occurrences,
+    source_text,
 )
 from sqpack.contributors import load_contributors
 from sqpack.project import require_project_root
@@ -356,3 +362,263 @@ def test_census_retains_prerequisite_roles_and_pending_pdf_scope() -> None:
     assert report["dispositions"].get("unreviewed", 0) == 0
     assert report["pdfs"]["tracked"] == report["pdfs"]["pending"]
     assert report["pdfs"].get("inspected", 0) == 0
+
+
+def write_yaml(path: Path, document: Any) -> None:
+    path.write_text(yaml.safe_dump(document, sort_keys=False, allow_unicode=True), "utf-8")
+
+
+def set_bibliography(repo: Path, authors: list[str], credit: str | None = None) -> None:
+    source: dict[str, Any] = {"key": "test-source", "authors": authors}
+    if credit is not None:
+        source["credit"] = credit
+    write_yaml(repo / "packing/resources/bibliography.yaml", {"sources": [source]})
+
+
+@pytest.fixture
+def manual_origin(
+    census_repo: tuple[Path, Path, dict[str, Any]],
+) -> tuple[Path, Path, dict[str, Any]]:
+    """A reviewed join on a generator constant, which no extractor produces."""
+    repo, path, document = census_repo
+    (repo / "packing/devtools").mkdir()
+    (repo / "packing/devtools/result_credit.py").write_text('PROJECT_AUTHOR = "Xu"\n')
+    row = {
+        **copy.deepcopy(document["occurrences"][0]),
+        "origin": {
+            "path": "packing/devtools/result_credit.py",
+            "record_key": "constants",
+            "field": "/PROJECT_AUTHOR",
+        },
+        "role": "project-author",
+    }
+    document["occurrences"].append(row)
+    write_yaml(path, document)
+    load_occurrences(path, repo=repo)
+    return repo, path, load_yaml(path.read_text())["occurrences"][-1]
+
+
+def test_census_counts_manual_origins_the_extractor_does_not_produce(
+    manual_origin: tuple[Path, Path, dict[str, Any]], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo, path, row = manual_origin
+    monkeypatch.setattr("devtools.contributor_census.tracked_pdfs", lambda _repo: ())
+    report = census(repo, load_occurrences(path, repo=repo))
+    assert report["manual_origin_count"] == 1
+    assert report["manual_occurrences"] == [
+        {
+            "origin": row["origin"],
+            "label": "Xu",
+            "role": "project-author",
+            "disposition": "resolved",
+            "contributor_id": "ryan-xu",
+        }
+    ]
+    assert report["structured_occurrence_count"] == len(structured_occurrences(repo))
+
+
+def test_reconcile_refuses_a_changed_manual_origin_and_drops_only_a_removed_one(
+    manual_origin: tuple[Path, Path, dict[str, Any]],
+) -> None:
+    repo, path, row = manual_origin
+    origin = CreditOrigin(**row["origin"])
+    constant = repo / "packing/devtools/result_credit.py"
+    before = path.read_bytes()
+    for text, expected in (
+        ('PROJECT_AUTHOR = "Ryan Xu"\n', "manual origin changed; review by hand"),
+        ('<<<<<<< HEAD\nPROJECT_AUTHOR = "Xu"\n=======\n', "manual origin unreadable"),
+    ):
+        constant.write_text(text)
+        assert [item["origin"] for item in stale_occurrences(repo, path)] == [row["origin"]]
+        with pytest.raises(OccurrenceError, match=expected):
+            reconcile(repo, path)
+        assert path.read_bytes() == before
+    constant.write_text('OTHER_CONSTANT = "Xu"\n')
+    report = reconcile(repo, path)
+    assert report["removed_fields"] == [row["origin"]]
+    assert report["dropped"] == [row]
+    assert report["dropped_resolved_count"] == 1
+    assert origin not in load_occurrences(path, repo=repo).by_origin
+
+
+def test_reconcile_reports_dropped_resolved_joins_as_prior_and_exits_3(
+    census_repo: tuple[Path, Path, dict[str, Any]],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    repo, path, _ = census_repo
+    reviewed = load_yaml(path.read_text())["occurrences"]
+    # An inserted author shifts every reviewed field by one index.
+    set_bibliography(repo, ["New Person", "Xu", "Xu", "Evan Daniel(evand)", "Xu", "evand"])
+    monkeypatch.setattr(
+        "devtools.contributor_census.require_project_root", lambda: repo / "packing"
+    )
+    assert contributor_census.main(["--reconcile"]) == contributor_census.EXIT_DROPPED_RESOLVED
+    output = capsys.readouterr()
+    assert "2 resolved joins dropped" in output.err
+    report = json.loads(output.out)
+    assert report["dropped_resolved_count"] == 2
+    proposals = {row["origin"]["field"]: row for row in report["unresolved"]}
+    assert proposals["/authors/0"]["prior"] == []
+    (shifted,) = proposals["/authors/1"]["prior"]
+    assert shifted["contributor_id"] == "ryan-xu"
+    assert proposals["/authors/2"]["prior"] == [shifted]
+    (moved,) = proposals["/authors/3"]["prior"]
+    assert moved == reviewed[1]
+    assert (moved["contributor_id"], moved["evidence"]) == ("evan-daniel", ["profile"])
+    registry = load_occurrences(path, repo=repo)
+    assert all(item.disposition == "unresolved" for item in registry.occurrences)
+    assert contributor_census.main(["--reconcile"]) == 0
+
+
+def test_draft_refuses_the_live_manifest_under_any_name(
+    census_repo: tuple[Path, Path, dict[str, Any]],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    repo, path, _ = census_repo
+    before = path.read_bytes()
+    alias = repo / "alias.yaml"
+    alias.symlink_to(path)
+    monkeypatch.setattr("devtools.contributor_census.tracked_pdfs", lambda _repo: ())
+    monkeypatch.setattr(
+        "devtools.contributor_census.require_project_root", lambda: repo / "packing"
+    )
+    for target in (path, alias, path.parent / ".." / "contributors" / path.name):
+        with pytest.raises(OccurrenceError, match="live manifest"):
+            contributor_census.draft(repo, target)
+        assert contributor_census.main(["--draft", str(target)]) == 1
+        assert "live manifest" in capsys.readouterr().err
+        assert path.read_bytes() == before
+    proposal = path.with_name("draft.yaml")
+    assert contributor_census.main(["--draft", str(proposal)]) == 0
+    assert len(load_occurrences(proposal, repo=repo).occurrences) == 6
+    assert path.read_bytes() == before
+
+
+def test_clause_and_organization_labels_are_flagged_without_changing_spans(
+    census_repo: tuple[Path, Path, dict[str, Any]], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    flagged = contributor_census.needs_boundary_or_non_person_review
+    for label in ("register seed data from Levy", "PingYou Ltd", "Example Inc", "A GmbH"):
+        assert flagged(label)
+    assert flagged("UnitSquare Project")
+    assert flagged("Square LLC")
+    for label in (
+        "Evan Daniel",
+        "de Winter",
+        "van der Waerden",
+        "Nate Chaoweeraprasit (itsnaka)",
+        "squarepacker (Ryu Sungjoon)",
+        "chelokot",
+    ):
+        assert not flagged(label)
+    repo, path, _ = census_repo
+    authors = ["Xu", "Xu", "Evan Daniel(evand)", "Xu", "evand", "PingYou Ltd"]
+    set_bibliography(repo, authors, "Daniel after Couzo; register seed data from Levy")
+    labels = [(row.label, row.role) for row in structured_occurrences(repo)][len(authors) :]
+    assert labels == [
+        ("Daniel", "credited-contributor"),
+        ("Couzo", "prerequisite"),
+        ("register seed data from Levy", "credited-contributor"),
+    ]
+    report = reconcile(repo, path)
+    marks = {row["label"]: row[BOUNDARY_REVIEW] for row in report["unresolved"]}
+    assert marks == {
+        "Xu": False,
+        "evand": False,
+        "PingYou Ltd": True,
+        "Daniel": False,
+        "Couzo": False,
+        "register seed data from Levy": True,
+    }
+    monkeypatch.setattr("devtools.contributor_census.tracked_pdfs", lambda _repo: ())
+    summary = census(repo, load_occurrences(path, repo=repo))
+    assert summary[f"{BOUNDARY_REVIEW}_count"] == 2
+    assert [row["label"] for row in summary["pending_occurrences"] if row[BOUNDARY_REVIEW]] == [
+        "PingYou Ltd",
+        "register seed data from Levy",
+    ]
+    proposal = path.with_name("draft.yaml")
+    assert contributor_census.draft(repo, proposal)[BOUNDARY_REVIEW] == 2
+    drafted = load_occurrences(proposal, repo=repo).occurrences
+    notes = {item.label: item.note for item in drafted}
+    assert "boundary or non-person review" in notes["PingYou Ltd"]
+    assert "boundary or non-person review" not in notes["Couzo"]
+
+
+def test_summary_refuses_a_stale_manifest_without_a_traceback(
+    census_repo: tuple[Path, Path, dict[str, Any]],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    repo, _, _ = census_repo
+    set_bibliography(repo, ["Ryan Xu", "Xu", "Evan Daniel(evand)", "Xu", "evand"])
+    monkeypatch.setattr("devtools.contributor_census.tracked_pdfs", lambda _repo: ())
+    monkeypatch.setattr(
+        "devtools.contributor_census.require_project_root", lambda: repo / "packing"
+    )
+    for arguments in ([], ["--json"]):
+        assert contributor_census.main(arguments) == 1
+        output = capsys.readouterr()
+        assert output.out == ""
+        assert "reviewed source text changed" in output.err
+        assert "--stale" in output.err
+        assert "--reconcile" in output.err
+    assert contributor_census.main(["--stale"]) == 1
+
+
+def test_malformed_sources_are_listed_as_stale_and_reported_by_validation(
+    census_repo: tuple[Path, Path, dict[str, Any]], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo, path, document = census_repo
+    bibliography = repo / "packing/resources/bibliography.yaml"
+    pristine = bibliography.read_text()
+    bibliography.write_text(f"<<<<<<< HEAD\n{pristine}=======\n{pristine}>>>>>>> main\n")
+    stale = stale_occurrences(repo, path)
+    assert len(stale) == len(document["occurrences"])
+    assert all(row["live_text"] is None for row in stale)
+    assert all("does not parse (ScannerError)" in row["live_error"] for row in stale)
+    with pytest.raises(OccurrenceError, match="does not parse"):
+        load_occurrences(path, repo=repo)
+    monkeypatch.setattr(validate_schemas, "REPO", repo)
+    monkeypatch.setattr(validate_schemas, "CONTRIBUTOR_OCCURRENCES", path)
+    (problem,) = validate_schemas.check(path)
+    assert "does not parse" in problem
+    assert str(bibliography) in problem
+    origin = CreditOrigin(**document["occurrences"][0]["origin"])
+    for text, expected in (
+        ("softschema: plain\nsources: []\n", "softschema must be a mapping"),
+        ("softschema: {envelope: missing}\nsources: []\n", "envelope must name a mapping"),
+        ("- not\n- a mapping\n", "structured mapping"),
+    ):
+        bibliography.write_text(text)
+        with pytest.raises(OccurrenceError, match=expected):
+            source_text(origin, repo=repo)
+    bibliography.write_text(pristine)
+    gone = replace(origin, record_key="no-such-source")
+    with pytest.raises(MissingSourceError, match="does not exist"):
+        source_text(gone, repo=repo)
+    with pytest.raises(MissingSourceError, match="does not exist"):
+        source_text(replace(origin, path="packing/missing.yaml"), repo=repo)
+
+
+def test_roles_are_one_published_vocabulary_enforced_by_schema_and_loader(
+    manifest: tuple[Path, dict[str, Any]],
+) -> None:
+    schema = load_yaml((PACKING / "contributors" / SCHEMA_PATH).read_text("utf-8"))
+    role = schema["properties"]["occurrences"]["items"]["properties"]["role"]
+    assert set(role["enum"]) == ROLES
+    assert {item.role for item in load_occurrences().occurrences} == ROLES
+    assert {item.role for item in structured_occurrences(REPO)} <= ROLES
+    path, document = manifest
+    document["occurrences"][0]["role"] = "mastermind"
+    write_yaml(path, document)
+    with pytest.raises(OccurrenceError, match="mastermind"):
+        load_occurrences(path, repo=REPO)
+    # A schema copy without the enum still meets the loader's own check.
+    role.pop("enum")
+    role["type"] = "string"
+    write_yaml(path.parent / SCHEMA_PATH, schema)
+    with pytest.raises(OccurrenceError, match="unknown credit role 'mastermind'"):
+        load_occurrences(path, repo=REPO)

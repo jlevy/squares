@@ -4,7 +4,8 @@ title: Contributor
 description: >-
   Evidence-backed identity for a square-packing contributor. The immutable id names
   the record; aliases are display spellings, not unique identifiers. An optional
-  Markdown body is one bio paragraph of at most five sentences, checked editorially.
+  Markdown body is one bio paragraph of at most five sentences, checked editorially,
+  whose links the loader requires to be public HTTP URLs.
 type: object
 additionalProperties: false
 required: [id, display_name, sources, provenance]
