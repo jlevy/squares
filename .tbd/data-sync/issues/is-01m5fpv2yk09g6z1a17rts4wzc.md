@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 37
+version: 38
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -42,11 +42,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T20:20:04.917Z
+updated_at: 2026-10-21T20:24:24.209Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-PR #578 updated to 7b566ae73, non-force push preserving prior PR work and origin/main 7eeab1f5e. Clean external worktree: /Volumes/spud-ext2/worktrees/squares-profiles-final-20261021. Source /Volumes/spud-ext2/agent-scratch/about-profiles-20261020/integration-env.sh for checks. Preview rebuilt and reopened in Arc at http://127.0.0.1:8790/profiles/index.html?review=7b566ae73. Publication checks: 7,294 passed. Resolved profile destination/name audit: 692 pages, zero broken links or label mismatches. All four PDF annotations valid (7/8/8/25). Broad gate: 68 non-behavioral steps passed; behavioral run 17,266 passed, 76 failed, 62 skipped, one xfail in 1,193.64s. Every original failure fixed and rerun: combined 77 cases (one renamed test gained a second PDF case) yielded 76 passes; final quoted-attribute parser assertion then passed in 8.05s. All 53 UI module tests passed, final browser floor passed, 121 new-module tests passed and supplied measured costs without threshold changes. Astra reviewed final source and test changes with no findings. Plan and PR body current. Hosted Packing, Pages and explicit Deferred checkpoint 39669160885 now running on this exact head; watch receipt final-pr-checks-watch.log. Keep draft until all hosted checks pass. No merge or deployment. Historical PDF inspection, result registrations and unresolved family-frontier followups remain separate.
+PR #578 final integration head is c3e8f1cc0965a5e4f65d3bed086994977fe35edb. This preserves integration commit 7b566ae73 and adds only generated explainer URL lastmod dates matching October 21. Hosted CI found this drift; local URL registry now has 1,143 rows and zero failures, and 15 date tests pass in 4.01s. Astra reviewed the correction without findings. Preview crawl files refreshed. Working tree clean. All earlier local validation and rebuilt-preview receipts are in PR body and the active plan. New hosted CI and explicit Deferred checkpoint are running; watch final-pr-checks-c3e8-watch.log in /Volumes/spud-ext2/agent-scratch/about-profiles-20261020. Keep draft until all final-head checks pass. No merge or deployment. Completed scoped beads closed; population/PDF inspection, historical registrations and other explicit followups remain open.
