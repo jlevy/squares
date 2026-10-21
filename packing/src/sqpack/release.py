@@ -1131,9 +1131,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         previous_version="v0.4.11",
         version="v0.4.12",
         impact="patch",
-        reason=(
-            "Update the registered result count after the n270 registration (T-224)."
-        ),
+        reason=("Update the registered result count after the n270 registration (T-224)."),
     ),
     ReleaseImpactDecision(
         component="site",
