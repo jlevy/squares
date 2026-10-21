@@ -40828,3 +40828,37 @@ evidence:
       case corpus are dated rows of the couzo-issue678-2026-10-18 source. No arrangement
       identity, local minimum, optimum or credit statement of the source's manifest is
       established.
+  - id: E-muglich-686-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [328, 330, 339, 344, 365, 377, 378, 379, 380, 381, 404, 412, 417, 418, 419,
+        420, 421, 422, 453, 459, 460, 461, 462, 463, 464, 496, 502, 503, 504, 505, 506, 508,
+        548, 550, 551, 552, 553, 554, 595, 597, 598, 599, 600, 601, 602, 603, 647, 648, 649,
+        650, 651, 652, 654, 700, 701, 702, 703, 704, 705, 706, 755, 756, 757, 758, 759, 760,
+        810, 811, 812, 813, 814, 815, 816, 817, 868, 869, 870, 871, 872, 873, 874, 875, 927,
+        928, 929, 930, 932, 933, 934, 935, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Muglich issue 686 2026-10-19]'
+    certificate: packing/resources/web/muglich-issue686-2026-10-19/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-21'
+    limitations: >-
+      This atom records issue 686's report of 100 upper bounds for n = 328 to 998, one exact
+      rational certificate each, in the issue's attachment, pinned by address and SHA-256 and
+      by no commit or DOI; the packet keeps derived facts, member digests and the per-case
+      provenance, not the archive's bytes. Each print is its exact side rounded up at 15
+      places. A separate complete repository replay is retained (devtools.muglich_686_import):
+      100 positives and 200 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 145844484 pair decisions, 29169.55 route CPU seconds,
+      the longest job 397.51 seconds. Every positive clears every wall by at least 5.000e-21
+      and every pair by at least 1.000e-12. Review and confirmation remain pending. The
+      source's own checkers were not run here. The two maintained routes share certificate
+      parsing, half-angle conversion, Fraction arithmetic and the separating-axis method. The
+      source says the 100 are not independent structures. No two independent methods, human
+      oversight, novelty, priority or optimality is claimed.

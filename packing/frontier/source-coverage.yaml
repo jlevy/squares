@@ -3122,6 +3122,7 @@ sources:
     text, diagrams, prose and programs stay outside Git under the existing retention policy. Every claim
     is tracked outside the 1..324 case corpus; no geometry, native replay, selected case, result row or
     transferred issue451 verification.
+    On 21 October 2026 issue 686's rows superseded one of this source's (muglich-issue686-2026-10-19).
 - id: couzo-extended-range-updates-2026-10-08
   title: Francisco Couzo's later decimal reports at n=375 and n=378
   role: source-repository
@@ -4218,6 +4219,7 @@ sources:
     the release's claims record; the in-corpus certificates at 154, 176, 211, 241 and 302
     are an entry of their own (couzo-certificates-2026-10-13-in-corpus), since that record
     holds the claims beyond the corpus only.
+    On 21 October 2026 issue 686's rows superseded one of this source's (muglich-issue686-2026-10-19).
   claims_record: resources/web/couzo-certificates-2026-10-13/acquisition/beyond-horizon-claims.json
 - id: pingyou-n153-refinement-2026-10-12
   title: PingYou Ltd's refined n153 certificate at 431186b, issue504
@@ -4694,6 +4696,7 @@ sources:
     exact side equals, or rounds up to, the side its source prints. T-NNN records the in-horizon report.
     All 18 native jobs have full outcomes. No selected override or superseded claim is created at this
     source-only stage; current cases and earlier source ownership remain unchanged.
+    On 21 October 2026 issue 686's rows superseded one of this source's (muglich-issue686-2026-10-19).
   claims_record: resources/web/fang-excess-theorem-2026-10-13/acquisition/beyond-horizon-claims.json
 - id: wand125-linear-n145-1224-2026-10-13
   title: Linear point, segment and rectangle certificate for n = 145, no issue
@@ -5181,6 +5184,7 @@ sources:
     the case corpus, so no register entry records them; each is a beyond-horizon row. All 9 native jobs
     have full outcomes. No selected override or superseded claim is created at this source-only stage;
     current cases and earlier source ownership remain unchanged.
+    On 21 October 2026 issue 686's rows superseded two of this source's (muglich-issue686-2026-10-19).
   claims_record: resources/web/evand-fresh-compositions-2026-10-14/acquisition/beyond-horizon-claims.json
 - id: fang-direct-certificates-2026-10-13
   title: Kevin Fang's direct certificates at 078789a, no issue
@@ -5884,6 +5888,7 @@ sources:
     at this source-only stage; current cases and earlier source ownership remain unchanged.
     On 20 October 2026 issue 678's rows superseded 57 of this source's
     (couzo-issue678-2026-10-18).
+    On 21 October 2026 issue 686's rows superseded 27 of this source's (muglich-issue686-2026-10-19).
   claims_record: resources/web/couzo-verified-bounds-2026-10-14/review/beyond-horizon-claims.json
 - id: couzo-certificates-2026-10-14
   title: Francisco Couzo's registration witnesses at 43ac7d2, issue 607
@@ -5936,6 +5941,7 @@ sources:
     at this source-only stage; current cases and earlier source ownership remain unchanged.
     On 20 October 2026 issue 678's rows superseded two of this source's
     (couzo-issue678-2026-10-18).
+    On 21 October 2026 issue 686's rows superseded eight of this source's (muglich-issue686-2026-10-19).
   claims_record: resources/web/couzo-certificates-2026-10-14/acquisition/beyond-horizon-claims.json
 - id: couzo-n237-2026-10-15
   title: Francisco Couzo's exact certificate at 237, 4e4c8ce, no issue
@@ -6083,6 +6089,7 @@ sources:
     records each of the 48 below this source (think-9vjn). No selected override is created
     at this source-only stage; the case lanes and house best packings at 204 and 260 are
     unchanged.
+    On 21 October 2026 issue 686's rows superseded 48 of this source's (muglich-issue686-2026-10-19).
   claims_record: resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
 - id: bengreff-s95-certificate-2026-10-15
   title: Benjamin Greff's mixed cover for s(95) = 10, issue610
@@ -6867,6 +6874,135 @@ sources:
     accepted, and the asset's data members are retained for the census. The author's full positives
     and 32-direction controls do not supply a maintained capture or whole-net controls. T-217
     registers it; replay and adoption remain under think-f40c.
+- id: muglich-issue686-2026-10-19
+  title: Darius Muglich's 100 exact certificates in the issue 686 attachment
+  role: first-party-release
+  url: https://github.com/jlevy/squares/issues/686
+  local: resources/web/muglich-issue686-2026-10-19/
+  source_key: '[Muglich issue 686 2026-10-19]'
+  scope:
+    n_values:
+    - 328
+    - 330
+    - 339
+    - 344
+    - 365
+    - 377
+    - 378
+    - 379
+    - 380
+    - 381
+    - 404
+    - 412
+    - 417
+    - 418
+    - 419
+    - 420
+    - 421
+    - 422
+    - 453
+    - 459
+    - 460
+    - 461
+    - 462
+    - 463
+    - 464
+    - 496
+    - 502
+    - 503
+    - 504
+    - 505
+    - 506
+    - 508
+    - 548
+    - 550
+    - 551
+    - 552
+    - 553
+    - 554
+    - 595
+    - 597
+    - 598
+    - 599
+    - 600
+    - 601
+    - 602
+    - 603
+    - 647
+    - 648
+    - 649
+    - 650
+    - 651
+    - 652
+    - 654
+    - 700
+    - 701
+    - 702
+    - 703
+    - 704
+    - 705
+    - 706
+    - 755
+    - 756
+    - 757
+    - 758
+    - 759
+    - 760
+    - 810
+    - 811
+    - 812
+    - 813
+    - 814
+    - 815
+    - 816
+    - 817
+    - 868
+    - 869
+    - 870
+    - 871
+    - 872
+    - 873
+    - 874
+    - 875
+    - 927
+    - 928
+    - 929
+    - 930
+    - 932
+    - 933
+    - 934
+    - 935
+    - 989
+    - 990
+    - 991
+    - 992
+    - 993
+    - 994
+    - 995
+    - 996
+    - 997
+    - 998
+  reviewed: '2026-10-21'
+  source_date: '2026-10-19'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/muglich-issue686-2026-10-19/README.md
+  - resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  evidence:
+  - E-muglich-686-certificate-report
+  notes: >-
+    Issue 686's 100 upper bounds at 328 to 998 (think-9vjn), one exact rational certificate
+    each, in the issue's attachment, pinned by address, size and SHA-256 (no commit or DOI).
+    As SQUISH #401's attachment was kept, the packet keeps derived facts, member digests and
+    the per-case provenance, not the archive's bytes; CC BY 4.0 granted 20 October 2026.
+    Each print is its exact side rounded up at 15 places. The packet's complete replay
+    accepted all 100 on both maintained exact routes and refused both kernel controls at
+    every count. The 20 October ledger records all 100 in report order; each supersedes the
+    row that stood at its count, and 12 counts start at the grid. The source credits each
+    construction's seeds in its provenance, Couzo's certificates most often; OpenAI Codex
+    assistance disclosed.
+  claims_record: resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
 
 selected_overrides:
 - n: 29
@@ -9800,7 +9936,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.925720814343350'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-1545
 - n: 378
   source_id: couzo-extended-range-reports-2026-10-08
@@ -9902,7 +10039,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.993724693587'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-rfce
 - n: 364
   source_id: evand-compositions-2026-10-13
@@ -9916,7 +10054,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.621320343560'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-yxkt
 - n: 370
   source_id: evand-fresh-compositions-2026-10-14
@@ -10081,7 +10220,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.959969683021'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-yxkt
 - n: 463
   source_id: fang-direct-certificates-2026-10-13
@@ -10160,7 +10300,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.999950000000000'
   assurance: verified
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-0esw
 - n: 339
   source_id: couzo-verified-bounds-2026-10-14
@@ -10175,7 +10316,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.915818555470'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-qik6
 - n: 342
   source_id: couzo-certificates-2026-10-14
@@ -10196,28 +10338,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.942506938325'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 379
   source_id: couzo-verified-bounds-2026-10-14
   claim: upper-bound
   value: '19.953043750299'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 380
   source_id: couzo-verified-bounds-2026-10-14
   claim: upper-bound
   value: '19.961601762435'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 381
   source_id: couzo-verified-bounds-2026-10-14
   claim: upper-bound
   value: '19.974740439435'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 382
   source_id: couzo-verified-bounds-2026-10-14
@@ -10246,7 +10392,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.621320344206'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 406
   source_id: couzo-verified-bounds-2026-10-14
@@ -10289,7 +10436,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.823062083485'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 413
   source_id: couzo-verified-bounds-2026-10-14
@@ -10310,7 +10458,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.942506938945'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 418
   source_id: couzo-verified-bounds-2026-10-14
@@ -10333,7 +10482,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.959997582079'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-qik6
 - n: 420
   source_id: couzo-verified-bounds-2026-10-14
@@ -10407,7 +10557,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.823014758322'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 454
   source_id: couzo-verified-bounds-2026-10-14
@@ -10528,7 +10679,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.823014758944'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 497
   source_id: couzo-verified-bounds-2026-10-14
@@ -10581,14 +10733,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.959969683673'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 504
   source_id: couzo-verified-bounds-2026-10-14
   claim: upper-bound
   value: '22.970562748509'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 505
   source_id: couzo-verified-bounds-2026-10-14
@@ -10603,7 +10757,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.973102824309'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 507
   source_id: couzo-verified-bounds-2026-10-14
@@ -10618,7 +10773,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.987759965317'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 532
   source_id: couzo-verified-bounds-2026-10-14
@@ -10749,14 +10905,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.961554161646'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 551
   source_id: couzo-verified-bounds-2026-10-14
   claim: upper-bound
   value: '23.967941709079'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 552
   source_id: couzo-verified-bounds-2026-10-14
@@ -10771,7 +10929,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.968034845503'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-qik6
 - n: 553
   source_id: couzo-verified-bounds-2026-10-14
@@ -10886,7 +11045,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.949747468436'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 596
   source_id: couzo-verified-bounds-2026-10-14
@@ -10924,7 +11084,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.968034846127'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-qik6
 - n: 600
   source_id: couzo-verified-bounds-2026-10-14
@@ -11061,7 +11222,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.953923698247'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 648
   source_id: couzo-verified-bounds-2026-10-14
@@ -11076,7 +11238,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.968034846328'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-qik6
 - n: 649
   source_id: couzo-verified-bounds-2026-10-14
@@ -11091,7 +11254,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.976974088403'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-qik6
 - n: 650
   source_id: couzo-verified-bounds-2026-10-14
@@ -11114,7 +11278,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.984515068279'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-qik6
 - n: 679
   source_id: couzo-verified-bounds-2026-10-14
@@ -11257,7 +11422,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.981802068412'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 732
   source_id: couzo-verified-bounds-2026-10-14
@@ -11417,7 +11583,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.984450134768'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 757
   source_id: couzo-verified-bounds-2026-10-14
@@ -11432,14 +11599,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.991000865994'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-qik6
 - n: 758
   source_id: couzo-verified-bounds-2026-10-14
   claim: upper-bound
   value: '27.995103637073'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 787
   source_id: couzo-verified-bounds-2026-10-14
@@ -11598,28 +11767,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.951463124709'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 811
   source_id: couzo-verified-bounds-2026-10-14
   claim: upper-bound
   value: '28.984450135397'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 813
   source_id: couzo-verified-bounds-2026-10-14
   claim: upper-bound
   value: '28.995103637701'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 814
   source_id: couzo-verified-bounds-2026-10-14
   claim: upper-bound
   value: '28.997961625277'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 844
   source_id: couzo-verified-bounds-2026-10-14
@@ -11770,7 +11943,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.987056764014'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 870
   source_id: couzo-verified-bounds-2026-10-14
@@ -11785,7 +11959,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.989568689191'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 903
   source_id: couzo-verified-bounds-2026-10-14
@@ -11936,7 +12111,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.987056764616'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-nj7h
 - n: 965
   source_id: couzo-verified-bounds-2026-10-14
@@ -12109,7 +12285,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.692697855726'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 343
   source_id: couzo-issue678-2026-10-18
@@ -12123,28 +12300,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.942828529884'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 420
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '20.974164562587'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 421
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '20.981525640927'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 422
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '20.983607201006'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 455
   source_id: couzo-issue678-2026-10-18
@@ -12172,35 +12353,40 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.942365250364'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 461
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '21.971318847922'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 462
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '21.974888792980'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 463
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '21.983603993953'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 464
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '21.987753655547'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 497
   source_id: couzo-issue678-2026-10-18
@@ -12228,14 +12414,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.942219237446'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 505
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '22.971592368271'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 507
   source_id: couzo-issue678-2026-10-18
@@ -12263,7 +12451,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.956345132949'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 549
   source_id: couzo-issue678-2026-10-18
@@ -12277,14 +12466,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.980727660940'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 554
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '23.993524047733'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 555
   source_id: couzo-issue678-2026-10-18
@@ -12312,35 +12503,40 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.961502766154'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 598
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '24.961502766154'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 600
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '24.980727660940'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 601
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '24.987983019378'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 602
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '24.993580713561'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 641
   source_id: couzo-issue678-2026-10-18
@@ -12361,14 +12557,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.982275449119'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 652
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '25.994256214773'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 653
   source_id: couzo-issue678-2026-10-18
@@ -12382,7 +12580,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.995888235804'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 693
   source_id: couzo-issue678-2026-10-18
@@ -12396,42 +12595,48 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.972679052192'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 701
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '26.975549413717'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 703
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '26.987459573204'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 704
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '26.994256369878'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 705
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '26.994256369878'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 706
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '26.998542133963'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 749
   source_id: couzo-issue678-2026-10-18
@@ -12473,14 +12678,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.951504031492'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 760
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '27.995022162160'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 804
   source_id: couzo-issue678-2026-10-18
@@ -12515,7 +12722,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.995022162160'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 863
   source_id: couzo-issue678-2026-10-18
@@ -12543,35 +12751,40 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.977390686090'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 870
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '29.985424855417'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 872
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '29.995022162160'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 873
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '29.996375057644'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 874
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '29.996375057644'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 919
   source_id: couzo-issue678-2026-10-18
@@ -12599,35 +12812,40 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.975475685281'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 928
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '30.975475685281'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 930
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '30.981535303483'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 933
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '30.994238714880'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 934
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '30.995302140806'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 984
   source_id: couzo-issue678-2026-10-18
@@ -12648,41 +12866,647 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.975475685281'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 990
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '31.977918827720'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 991
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '31.981485095638'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 992
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '31.984796372085'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 994
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '31.993645614627'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
 - n: 998
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound
   value: '31.998301106112'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
   bead: think-xu4d
+- n: 328
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '18.614376892294788'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 330
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '18.692672444467133'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 339
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '18.907351471178022'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 344
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '18.992727809365345'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 365
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '19.614376892314402'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 377
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '19.925471653974826'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 378
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '19.942018855984576'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 379
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '19.950889681503441'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 380
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '19.961350023835208'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 381
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '19.974739840483985'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 404
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '20.614376892315402'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 412
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '20.822995415461893'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 417
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '20.934672165248002'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 418
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '20.939184128264923'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 419
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '20.957804836274712'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 420
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '20.966588191190457'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 421
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '20.976371064794590'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 422
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '20.983575254585011'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 453
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '21.822995415463173'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 459
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '21.937227864889785'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 460
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '21.950987687999201'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 461
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '21.966193114436095'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 462
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '21.966193114414129'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 463
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '21.973675720477602'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 464
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '21.986268532628047'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 496
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '22.822875659409473'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 502
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '22.934445598628207'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 503
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '22.944667600407142'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 504
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '22.962118925863563'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 505
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '22.964253709989815'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 506
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '22.972145072003643'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 508
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '22.983309379055478'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 548
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '23.944667600431087'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 550
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '23.961058656835017'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 551
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '23.965801641974269'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 552
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '23.966628823345179'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 553
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '23.979786600215760'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 554
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '23.986315054037724'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 595
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '24.944667600432087'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 597
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '24.958141573307033'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 598
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '24.958220677835095'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 599
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '24.962832858735977'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 600
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '24.979786600240740'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 601
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '24.986315054062710'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 602
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '24.990355569404721'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 603
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '24.990355569379731'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 647
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '25.949897942498915'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 648
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '25.961052856924314'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 649
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '25.974939166891586'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 650
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '25.974939166865611'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 651
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '25.982878838106428'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 652
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '25.990355569405721'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 654
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '25.994867334132237'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 700
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '26.963730153903490'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 701
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '26.971171145178352'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 702
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '26.976692903975214'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 703
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '26.981389201596016'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 704
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '26.987139500916770'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 705
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '26.990473400222588'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 706
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '26.997919093469508'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 755
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '27.951463061397879'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 756
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '27.976914446491419'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 757
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '27.976914446463442'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 758
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '27.984283608420539'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 759
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '27.988569233273449'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 760
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '27.992923233306379'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 810
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '28.951463061400412'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 811
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '28.974848874209278'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 812
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '28.976914446492419'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 813
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '28.981594177184268'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 814
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '28.981594177155286'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 815
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '28.992923233335372'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 816
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '28.995944538692246'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 817
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '28.997492020606608'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 868
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '29.974562439897217'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 869
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '29.974936836673075'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 870
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '29.981594177185268'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 871
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '29.981594177185268'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 872
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '29.992623086320206'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 873
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '29.992623086290213'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 874
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '29.992883399225609'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 875
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '29.996974281851590'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 927
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '30.969979227501660'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 928
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '30.974936836704050'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 929
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '30.975405698329704'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 930
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '30.977403109932478'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 932
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '30.992623086321206'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 933
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '30.992883399256602'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 934
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '30.994174058187146'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 935
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '30.994174058156152'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 989
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '31.974936836705050'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 990
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '31.975405698332123'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 991
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '31.977403109964455'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 992
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '31.977815424176502'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 993
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '31.983895593654374'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 994
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '31.992883399257602'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 995
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '31.994174058188146'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 996
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '31.994174058188146'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 997
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '31.996875920326034'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+- n: 998
+  source_id: muglich-issue686-2026-10-19
+  claim: upper-bound
+  value: '31.996875920294037'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
 pending_catalogue_intake: []

@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.12",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Record Darius Muglich's 100 reported upper bounds at 328 to 998 (#686) as "
+            "beyond-horizon rows, superseding the rows they beat, with the issue's card."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.11",
         first_published="October 21, 2026",
         result_scope=(
@@ -674,7 +682,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "a4ad5fd4d1d8cdd66718641b4f562b051dc950cb"
+DATA_REVISION = "6b116f1df1b8c9625d80fff3db4b24cdcf13d7bb"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1149,6 +1157,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.11",
+        version="v0.8.12",
+        impact="patch",
+        reason=(
+            "Record Darius Muglich's 100 reported upper bounds at 328 to 998 (#686) as "
+            "beyond-horizon rows, superseding the rows they beat, with the issue's card."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.8.10",
@@ -1846,6 +1864,48 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Issue 686's import against main 9dda9224. The v0.8.12 cut changed only the "
+            "claim documents' link revision, fbb3d573 to 45f1918d, and the explainer links "
+            "them. The survey cites the requests and coverage records without inlining "
+            "them; the snapshot prune and issue 686's card reach no paper. With main's "
+            "copies of the other four inputs, the four renderers write 68 byte-identical "
+            "files at link revision 255049cb, and after review A's record edits the "
+            "survey's HTML and Markdown again at 8fd21bb6. Retain v0.4.13, v0.1.7, v0.1.0 "
+            "and v0.2.3."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-optimality-review",
@@ -5943,7 +6003,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "fbb3d573"
+PUBLICATION_REVISION = "45f1918d"
 
 
 def data_pathspec() -> tuple[str, ...]:
