@@ -197,9 +197,9 @@ claude/intake-YYYY-MM-DD, with today's date.
    devtools.intake_comments (stage 7, "Report-Order Verdict Comments").
 9. Run `make intake` again, and again after the merge: it and
    `check_requests --report` list the replies still due, and its "Regularization
-   owed" lists every count this pass re-housed that is still pending. Triage each new
-   item it lists read-only and propose its disposition on the epic bead (stage 1).
-   Report every item that still needs action.
+   owed" lists every count still pending where this pass changed the house best
+   packing. Triage each new item it lists read-only and propose its disposition on
+   the epic bead (stage 1). Report every item that still needs action.
 
 Never merge without the owner's word, never push to main, never post the announcement,
 and never start a replay above the owner's compute cap for the pass, or with no cap

@@ -4667,9 +4667,9 @@ Distinct from the **analytic optimum**, which exists only where the case is prov
 At $n = 5$ and $n = 10$ they coincide; at $n = 11$ the standing best is Trump’s
 construction and the optimum is unknown.
 
-**House best packing** (written in full, as in “the house best packing at 204”). The
-packing this project chooses to stand for a count.
-Both upper lanes of the case record hold its certificate, its witness is
+**House best packing**, or *house best* for short (“the house best packing at 204”, “the
+house best at 204”). Either form names the packing this project chooses to stand for a
+count. Both upper lanes of the case record hold its certificate, its witness is
 `packing/witnesses/known-best/n-NNN.yaml`, and the case page, the atlas and every
 picture published as the count’s packing show it, regularized where a view improves on
 it. By the import runbook’s

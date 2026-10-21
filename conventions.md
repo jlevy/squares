@@ -404,10 +404,11 @@ is used. Both restatements have drifted from it before.
 [convention] A term this project introduces is a phrase a reader can parse without a
 glossary, such as *house best packing*, and it enters
 [the synopsis’s terminology](SYNOPSIS.md#terminology) before other documents use it.
-*House* is only a modifier meaning the project’s own, as in *house best packing*, *house
-drawing* and *house renderer*. It is never a bare noun (“the house”, “houses”) and never
-part of a coined compound (“re-house”, “house candidate”, “algebraic house”).
-*Algebraic* keeps its mathematical sense.
+*House* is only a modifier meaning the project’s own, as in *house best packing* (short
+form *house best*: “the house best at 204”), *house drawing* and *house renderer*. It is
+never a bare noun (“the house”, “houses”) and never part of a coined compound
+(“re-house”, “house candidate”, “algebraic house”). *Algebraic* keeps its mathematical
+sense.
 An *algebraic side* here is an irrational one, held as the one root of its minimal
 polynomial in an isolating interval; a rational side is called rational.
 So write “a house best packing with an algebraic side”.
