@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 15
+version: 29
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -22,14 +22,27 @@ child_order_hints:
   - is-01m5frh6qfcggwvwaa3f9af9w4
   - is-01m5frjg0sxenf7fyjrryrt2db
   - is-01m5fs0mwhp9qa7qp46kdf11c9
+  - is-01m5fscvj1jgv9wx923z0a30y2
+  - is-01m5fsnyqj85asc7tq4276kyk9
+  - is-01m5fstx5hpcn6431qmyvrnr6a
+  - is-01m5ft29c3tph6bgywc9ycwgmp
+  - is-01m5ft6ard4cff2y4xah2q4p2e
+  - is-01m5ftdbpjs8bcm7450ngrhxae
+  - is-01m5ftsx292fked2gcgpkv6a5x
+  - is-01m5ftwbnpeqfcss048aexcjf7
+  - is-01m5ftx2xbjaehzd0q9pwgv1hc
+  - is-01m5fw6v3p9gb2jgen89a2ncs8
+  - is-01m5fw9z474w84hemxsff4a9zs
+  - is-01m5fwdhgyd3ar79bqwyy46jt8
+  - is-01m5fwv4cnnm68c35kmfne4wce
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T17:46:38.516Z
+updated_at: 2026-10-21T18:51:10.100Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Final Astra source review accepted shared tallies/resources, years-active partial-date support, reviewed issue/PR references scoped to credited entries, seven evidenced bio edits, build dependencies and import boundaries. Focused renderer checks and fresh complete preview build underway; full push gate, PR push/CI and final review handoff still required. Do not mark complete or claim current 8790 preview updated until rebuilt output is verified.
+Owner confirmed new historical result registrations separate from this PR and requested stabilization with all remaining work tracked. Frozen identity batch75profiles, structuredcensus1428resolved78nonperson7unresolved plus10manualorigins; primarymodel213distinctresults701credits. Live8790correctedintermediate now shows credit significance. Latest Accounts/resource URL split and muted parenthetical tallies implemented/tested, previewrefreshpending. New Results/Records semantics think-lekx under canonicalhistory review; user clarification pending bound-only versusallauthored andties. Final fullbuild/PDFs/gate/CI/PRhandoff pending; do not merge/deploy.
