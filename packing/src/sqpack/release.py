@@ -88,6 +88,15 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.8",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
+            "integrated exact replay and its stage 4 review, and adopt it as the house "
+            "best packing at 227 and 260 with Evan Daniel's regularized views."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.7",
         first_published="October 20, 2026",
         result_scope=(
@@ -1103,6 +1112,17 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.8.7",
+        version="v0.8.8",
+        impact="patch",
+        reason=(
+            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
+            "integrated exact replay and its stage 4 review, and adopt it as the house "
+            "best packing at 227 and 260 with Evan Daniel's regularized views."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.8.6",
         version="v0.8.7",
         impact="patch",
@@ -1786,6 +1806,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "attribute differently from run to run, as three renders of main's tree "
             "showed on the branch's earlier head. No PDF was printed; each prints from "
             "that HTML. "
+            "Re-taken by source review after the merge of main 4851d8193 (#705, site "
+            "v0.8.7): #705 changes none of these inputs but the five claim documents, "
+            "which the v0.8.8 cut regenerates and which differ from main's only in their "
+            "source-link revision, 9cd35d1e to fe6f350d. "
             "Retain v0.4.11."
         ),
     ),
@@ -1827,6 +1851,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "attribute differently from run to run, as three renders of main's tree "
             "showed on the branch's earlier head. No PDF was printed; each prints from "
             "that HTML. "
+            "Re-taken by source review after the merge of main 4851d8193 (#705, site "
+            "v0.8.7), which changes none of these inputs. "
             "Retain v0.1.7 and v0.1.0."
         ),
     ),
@@ -1867,6 +1893,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "attribute differently from run to run, as three renders of main's tree "
             "showed on the branch's earlier head. No PDF was printed; each prints from "
             "that HTML. "
+            "Re-taken by source review after the merge of main 4851d8193 (#705, site "
+            "v0.8.7), which changes none of these inputs. "
             "Retain v0.2.3."
         ),
     ),
@@ -5652,7 +5680,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "9cd35d1e"
+PUBLICATION_REVISION = "fe6f350d"
 
 
 def data_pathspec() -> tuple[str, ...]:
