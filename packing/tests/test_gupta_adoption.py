@@ -616,9 +616,30 @@ def test_formatted_gupta_sections_survive_current_redraft() -> None:
 
 
 @pytest.mark.parametrize("section", ["ceiling", "source"])
-def test_gupta_redraft_replaces_changed_prose_values(section: str) -> None:
+def test_gupta_redraft_replaces_changed_prose_values(
+    section: str,
+    original_pair: dict[int, str],
+    original_source: dict[int, dict[str, Any]],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools import adopt_houses  # noqa: PLC0415
+    from sqpack.witness import witness_document  # noqa: PLC0415
+
     n = 179
-    original = (register.FRONTIER / f"n-{n:03d}.md").read_text()
+    monkeypatch.setattr(houses, "NUMBERS", (*original_pair, n))
+    houses.reports.save_xz(
+        register.HISTORY,
+        {
+            "format": register.HISTORY_FORMAT,
+            "cases": [original_source[k] for k in houses.NUMBERS],
+        },
+    )
+    house = houses.house_path(n)
+    house.write_text(
+        witness_document(houses.build_witness(n), schema="../witness.schema.yaml"),
+        encoding="utf-8",
+    )
+    original = adopt_houses.read_pass("2026-10-17")[n]
     if section == "ceiling":
         # Exercise the earlier unconfirmed disclosure after live confirmation.
         # Its complete old ceiling comes from immutable history in memory.

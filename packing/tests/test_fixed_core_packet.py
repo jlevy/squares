@@ -2533,6 +2533,7 @@ def test_non_oserror_launch_failure_retains_type_message_and_returns_one(
     }
 
 
+@pytest.mark.pool_heavy
 @pytest.mark.skipif(sys.platform == "win32", reason="POSIX process groups are required")
 def test_stalled_preflight_process_group_termination_reaps_a_grandchild(
     tmp_path: Path,

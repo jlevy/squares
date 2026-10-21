@@ -87,8 +87,9 @@ RESULT_WAS = 411
 #: frontier table's width there.
 TABLE_AT_1280 = 1200
 #: The complete table's eight-column floor with the boxed five-segment significance
-#: meter (2026-10-14), leaving 75.5 pixels in the 1200-pixel desktop track.
-TABLE_FLOOR = 1124.5
+#: meter, 4.8em wide since 2026-10-16 (`think-e80k`), leaving 87.7 pixels in the
+#: 1200-pixel desktop track.
+TABLE_FLOOR = 1112.3
 SPARE_AT_1280 = 75
 #: The width a table of results bleeds to at 1440 pixels: the 1104-pixel wide track and
 #: a pixel for each pixel of window past 74rem.
@@ -113,12 +114,12 @@ MOST_CASES = "T-155"
 #: (2026-10-12, n = 176 left it).
 CASES_LINES_HELD_BY = ("T-101", MOST_CASES)
 LONG_QUOTIENTS = ("T-022", "T-024", "T-026", "T-033", "T-114")
-#: The 1124.5-pixel floor exceeds the 944/688-pixel frames by 180.5/436.5 pixels.
+#: The 1112.3-pixel floor exceeds the 944/688-pixel frames by 168.3/424.3 pixels.
 #: Half a pixel of measurement tolerance bounds native horizontal panning.
-SCROLL_MAX = {1024: 181, 768: 437}
+SCROLL_MAX = {1024: 169, 768: 425}
 #: The fixed boxed five-segment meter and the significance cell's side padding.
 #: Its measured column width is stable at every desktop/table viewport.
-S_WIDTH = 102.5
+S_WIDTH = 90.3
 S_PADDING = 6.4
 #: The id column: five characters and the cell's padding, well under KPress's 96.
 ID_MAX = 64
@@ -203,7 +204,7 @@ def test_a_table_of_results_fits_its_track_at_1280(
     laid: dict[tuple[str, int], Laid], name: str
 ) -> None:
     """Both tables fill their 1200-pixel track without scrolling. The complete
-    table's 1124.5-pixel floor leaves 75.5 pixels for its flexible columns."""
+    table's 1112.3-pixel floor leaves 87.7 pixels for its flexible columns."""
     table = laid[name, FITS].table
     assert table["layout"] == "table"
     assert table["scrolls"] == 0, table["table_width"]
@@ -251,7 +252,7 @@ def test_a_table_of_results_scrolls_at_1024_and_768_no_further_than_its_floors(
     laid: dict[tuple[str, int], Laid], name: str
 ) -> None:
     """At 1024 and 768 the table pans only as far as its column floors require.
-    The complete table exceeds its frame by 180.5 and 436.5 pixels respectively;
+    The complete table exceeds its frame by 168.3 and 424.3 pixels respectively;
     its result and case columns stay at their floors without clipping content."""
     for width, most in SCROLL_MAX.items():
         table = laid[name, width].table
@@ -446,7 +447,7 @@ def test_both_tables_lay_out_the_same_columns(
     laid: dict[tuple[str, int], Laid], name: str, width: int
 ) -> None:
     """Both tables keep the eight columns in one order. The boxed five-segment
-    significance meter holds a fixed 102.5-pixel column, so extra desktop width
+    significance meter holds a fixed 90.3-pixel column, so extra desktop width
     goes to flexible columns. IDs stay narrow; rungs and status retain enough
     room for their widest chips without cutting or wrapping them."""
     table, chips, _ = laid[name, width]

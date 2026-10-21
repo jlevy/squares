@@ -1,0 +1,8 @@
+T-064  current best                  equals the verified bound at n = 33, 46, 61, 78, 97, 118, 141, 166, 193, 222, 253, 286, 321
+    n = 193 upper 14: verified equal, reported equal
+T-081  current best, reported        equals the reported bound at n = 21, 32, 45, 60, 77, 96, 117, 140, 165, 192, 221, 252, 285, 320
+    n = 192 upper 14: verified equal, reported equal
+T-084  current best                  equals the verified bound at n = 8, 15, 24, 35, 48, 63, 80, 99, 120, 143, 168, 195, 224, 255, 288, 323
+    n = 195 upper 14: verified equal, reported equal
+T-086  current best                  equals the verified bound at n = 7, 14, 23, 34, 47, 62, 79, 98, 119, 142, 167, 194, 223, 254, 287, 322
+    n = 194 upper 14: verified equal, reported equal

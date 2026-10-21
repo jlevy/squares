@@ -1,0 +1,12 @@
+START 2026-10-19T21:16:53Z load=28.41 21.86 14.51 cmd: uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n229-dilation-2026-10-17 check
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+{
+  "229": {
+    "exact_verify_containment_clearance": "50100000000000099/100000000000000000000000000000",
+    "exact_verify_best_pair_gap": "110927585165685052848264896611518317557953882931/110965115528342950242931665589625000000000000000000000000000",
+    "independent_containment_clearance": "50100000000000099/100000000000000000000000000000",
+    "independent_best_pair_gap": "110927585165685052848264896611518317557953882931/110965115528342950242931665589625000000000000000000000000000"
+  }
+}
+1 certificates and 3 jobs admitted
+END 2026-10-19T21:16:59Z exit=0 wall=5.609349168s load=28.46 21.98 14.59

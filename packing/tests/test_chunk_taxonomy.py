@@ -1,11 +1,10 @@
-"""The corpus's non-expressible residue is axis-aligned, which is the opposite of the guess.
+"""The corpus's non-expressible residue is axis-aligned except for the radical n51 strip.
 
 `BC-024` asked which chunk shapes, sizes, tilted counts and wall seatings recur across the
-imported `n <= 100` corpus, and what the residue has in common. The answer that would not
-have been guessed: **not one** component the grammar fails to express is tilted. Every
-tilted component in the corpus is a singleton, a bar, an L or a rectangle -- all of them
-expressible. Extending the grammar to cover the residue is therefore a question about
-axis-aligned polyominoes, and the tilted structure is already covered.
+imported `n <= 100` corpus, and what the residue has in common. The radical n51 strip
+has two tilted components the grammar does not express; the remaining residue consists
+of axis-aligned polyominoes. Every other tilted component is a singleton, a bar, an L
+or a rectangle, all expressible.
 
 These assertions exist because that is a load-bearing claim for the partition-instrument
 design, and because it is exactly the kind of clean result that should be pinned before it
@@ -93,24 +92,17 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
     The wall seating separates them: 4 for a subset of an integer grid, which spans the
     container, and 2 for a block seated in a corner of a packing that is otherwise
     tilted. Among the catalogue's packings no residue component touches one wall or
-    three. The new radical n51 strip adds two tilted interior components. The one-wall
-    exception is n = 68, whose record moved on 2026-09-29 from its
-    UnitSquare rendering, where every square is a singleton, to Francisco Couzo's packing:
-    its five-square block seats against one wall. n = 69 made the same move on 2026-10-05,
-    to the catalogue's packing (T-088), and its two blocks, of 21 and 28 squares, are corner
-    blocks like the catalogue's others. The house adoption of 11 October 2026 (think-fvz4)
-    moved n = 70 to T-146's regularization of Ryan Xu's packing, whose larger corner block
-    has 31 squares rather than 30, and n = 84 and 86 to Couzo's T-130 packings, which leave
-    one corner block of 12 at 84 and none at 86 where Xu's had three and two.
+    three. The radical n51 strip adds two tilted interior components. T-174's adopted
+    witnesses at 68, 84 and 86 have two, three and two corner blocks respectively; all
+    touch two walls, including both of 68's, which end the former one-wall exception.
     """
     residue = _record()["residue"]
 
-    assert residue["walls_touched"] == {"0": 2, "1": 1, "2": 64, "4": 44}
-    # n = 29 moved from the catalogue to PR #622's packet (T-195) on 17 October 2026.
+    assert residue["walls_touched"] == {"0": 2, "2": 70, "4": 44}
     assert residue["by_source"] == {
         "exact-grid": 44,
         "kingbird-derived-facts": 56,
-        "packet-derived-facts": 11,
+        "packet-derived-facts": 16,
     }
     assert residue["tilted"] == 2
     assert residue["whole_record"] == 44
@@ -125,10 +117,15 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
                 (51, 5, 0),
                 (51, 10, 2),
                 (51, 18, 2),
-                (68, 5, 1),
+                (68, 6, 2),
+                (68, 11, 2),
                 (70, 18, 2),
                 (70, 31, 2),
-                (84, 12, 2),
+                (84, 6, 2),
+                (84, 15, 2),
+                (84, 25, 2),
+                (86, 22, 2),
+                (86, 37, 2),
                 (88, 16, 2),
                 (88, 25, 2),
             }, item

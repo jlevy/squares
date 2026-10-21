@@ -174,7 +174,7 @@ its `open` a yellow, each a hue and a level of the scale, and the yellow a chrom
 of 0.02, the most that keeps its dark fill in sRGB. Recorded results use yellow at level
 2 without the chroma boost.
 Incomplete results and lower-bound kinds use the shared lower-bound red diluted into the
-page background; upper-bound and optimality kinds use the upper-bound green.
+page background, and upper-bound kinds the upper-bound green.
 Superseded standings keep the neutral gray fill.
 `devtools.rung_scale` computes these too, and `tests/test_rung_scale.py` holds this
 table to its output and every ratio to 4.5:1.
@@ -187,6 +187,24 @@ table to its output and every ratio to 4.5:1.
 | `open` | `oklch(84.0% 0.083 95)` `#dbcb8c` | 10.9:1 | `oklch(34.2% 0.070 95)` `#443800` | 9.9:1 |
 | `recorded` | `oklch(84.0% 0.063 95)` `#d7cb9c` | 10.9:1 | `oklch(34.2% 0.050 95)` `#413818` | 9.9:1 |
 
+The topics that Results and News share take their fills from the same two sources
+(`think-z9za`). Verification is the `reviewed` blue; Optimality is violet, Project amber
+and Engineering orange, each at level 2 of the scale, Project with the open case’s
+chroma boost; the bound topics are the bound kinds’ diluted inks.
+One fill keeps one meaning: `devtools.rung_scale` holds every topic at least 0.02 in
+OkLab, about a just noticeable difference, from each status and each other topic in its
+theme, except Verification, which is the `reviewed` blue by design.
+`tests/test_rung_scale.py` holds this table to its output and every ratio to 4.5:1.
+
+| Topic | Light fill | Text contrast | Dark fill | Text contrast |
+| --- | --- | --- | --- | --- |
+| `lower-bound` | `oklch(91.4% 0.028 11.6)` `#f5dbde` | 13.6:1 | `oklch(27.5% 0.022 353)` `#302328` | 12.7:1 |
+| `upper-bound` | `oklch(92.2% 0.018 156.5)` `#dce9e0` | 14.2:1 | `oklch(28.1% 0.021 176.9)` `#1e2d29` | 12.2:1 |
+| `optimality` | `oklch(84.0% 0.063 310)` `#d7c0ea` | 10.6:1 | `oklch(34.2% 0.050 310)` `#40314c` | 10.1:1 |
+| `project` | `oklch(84.0% 0.083 70)` `#eec28f` | 10.7:1 | `oklch(34.2% 0.070 70)` `#4f3105` | 10.0:1 |
+| `engineering` | `oklch(84.0% 0.063 45)` `#efbea9` | 10.7:1 | `oklch(34.2% 0.050 45)` `#4e3022` | 10.1:1 |
+| `verification` | `oklch(84.0% 0.063 250)` `#accef3` | 10.9:1 | `oklch(34.2% 0.050 250)` `#243a51` | 9.9:1 |
+
 ### Significance and the Other Inks
 
 A significance rung is drawn in an ink of its own on the page, not on a chip:
@@ -194,14 +212,16 @@ A significance rung is drawn in an ink of its own on the page, not on a chip:
 verification blue so it reads as neither, and darker and bluer than the accent so it
 never reads as a link; it is light in dark mode.
 Every score uses `overview_sections.significance_mark`: an S label and five segments in
-one square-cornered border box, 5.5em wide at the shared note size and sans medium
+one square-cornered border box, 4.8em wide at the shared note size and sans medium
 weight. The label and bars have a 0.18em gap, smaller than a word space but visibly
 separate. Each bar is 0.5em wide and 0.6em tall; the first S bars are solid and the rest
-are empty outlines.
-The box keeps the same width from S0 through S5, while its accessible
-name states the score and its tooltip explains the judgment.
-News, Results tables, ladders, result overviews, case records and popovers share this
-component; significance continues to describe importance rather than V/C assurance.
+are empty outlines. The border uses the label’s own ink, with 0.18em horizontal padding.
+The box keeps the same width from S0 through S5, while its accessible name states the
+score and its tooltip gives the level’s meaning in the rubric that scored it: a result’s
+from the significance ladder in `epistemics.md`, a News post’s from the short label
+rubric in `result-import.md` (“Label the PR and Prepare News”). News, Results tables,
+ladders, result overviews, case records and popovers share this component; significance
+continues to describe importance rather than V/C assurance.
 It keeps the shared chip height, 1.45em. It is the second column of a table of results,
 narrow, and it stands first among the rungs in a result’s overview, a case record and
 the rating ladders.
@@ -1009,10 +1029,18 @@ contributor articles use their component sheets and the same text tokens.
   News places smaller Results-style topic chips on the left and the shared significance
   meter at the right below the date, followed by the article.
   The chips retain shared fills, corners and leading at 85% of the note-size chip scale.
+  Shared article headers place 0.3rem between title and date; News uses a 0.25rem header
+  gap, 0.4rem before the body and 0.5rem between body paragraphs.
   Homepage News and the archive use the same card renderer and CSS roles.
   Every post has an explicit importance score and a plain rationale.
-  The meter’s accessible label names its S level; its shared tooltip explains the level
-  and the post’s rationale.
+  The meter’s accessible label names its S level; its shared tooltip gives the level’s
+  short meaning in the News label rubric (`result-import.md`, “Label the PR and Prepare
+  News”), as the archive’s S buttons do (`render_changelog.news_significance_meanings`).
+  An S button explains itself on hover and keyboard focus, never on a mouse press.
+  Its explanation opens above the filters and below the site header while the header
+  shows, or below the filters when there is no room between, so it lies over neither a
+  filter control nor the header’s links (`data-site-tooltip-outside`); a press dismisses
+  it. The source record retains the post’s rationale.
   Its S and five bars remain one tightly paired mark.
   Homepage highlights keep the announcement’s significance and assurance qualifiers,
   with one S meter per card.
@@ -1020,15 +1048,20 @@ contributor articles use their component sheets and the same text tokens.
   News bookmarks forwarded there.
   Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
-  All significance and All topics clear their facet; Reset restores the defaults.
+  One unboxed Reset filters action restores the defaults.
   The compact chooser groups share the homepage’s small controls, wrap inline, and keep
   their group names accessible without visible headings.
-  Multi-select topic buttons form a joined strip, wrap between labels on narrow screens,
-  and use the cards’ sentence-case labels and topic fills in both color themes.
-  An inset underline marks selected topics; hover underlines the label and keyboard
-  focus keeps the shared outline.
+  Multi-select topic buttons wrap between labels on narrow screens, with a border around
+  each button rather than empty space at the end of a wrapped strip.
+  They use the cards’ sentence-case labels in both color themes: inactive buttons have a
+  neutral gray fill, and selected buttons have the shared topic fill and a leading
+  check, the theme menu’s mark for a chosen item, so selection never rests on hue alone.
+  The check’s place is held while it is hidden, so a press never moves a button.
+  Under a hovering pointer an inactive button takes a paler topic fill, so a press shows
+  at once; touch screens have no hover state.
+  Keyboard focus keeps the shared visible outline.
   Each topic’s muted tally counts articles at the selected significance levels,
-  independently of topic selection; All counts unique articles across those levels.
+  independently of topic selection.
   Counts use the Results control row, right aligned above the cards; an empty state
   describes a selection without matches.
   URL state preserves unrelated query parameters and browser history; a low-score
@@ -1379,7 +1412,9 @@ contributor articles use their component sheets and the same text tokens.
   (`data-case-status`, written by `case_status_chip` wherever a case’s status is drawn),
   a result’s `confirmed` green, `reviewed` blue, `recorded` yellow and `incomplete`
   light red (`data-status`). Bound-kind chips use lighter versions of the shared bound
-  hues: lower bounds red, upper bounds and optimality green.
+  hues: lower bounds red and upper bounds green.
+  Optimality uses violet, Project amber, and Engineering orange; News and Results use
+  the same topic palette.
   Superseded chips remain gray.
   These fills adapt to the page theme and apply in tables, records and popovers.
   No chip wraps: one rule on the component, `white-space: nowrap`, keeps a chip’s words
@@ -1923,11 +1958,14 @@ contributor articles use their component sheets and the same text tokens.
   `site-tabs site-chooser-small` component in `site-nav.css`. The text uses the Results
   widget control size, 1.35 leading, and 0.15rem by 0.65rem padding (`think-ticj`).
   Borders, hover, keyboard focus and motion use the same rules on every page.
-  Topic filters use their shared chip fills and mark selection with an inset underline.
+  Topic filters use neutral gray when inactive, and their shared chip fills and a check
+  when selected; an inactive filter under a hovering pointer takes a paler topic fill.
+  They have no label underline or inset selection mark.
   Single-select tabs keep `aria-selected` and arrow-key navigation; multi-select groups
   use native buttons with `aria-pressed`. Group names remain accessible when visually
-  hidden. Momentary All and Reset actions use the same compact button appearance without
-  a selected state. Chooser strips wrap at narrow widths; pages only place the groups.
+  hidden. Each compact choice owns its border, so wrapped rows fit their buttons.
+  News has one unboxed Reset filters action.
+  Chooser strips wrap at narrow widths; pages only place the groups.
   All action groups use a shared 0.7rem gap and wrap together at narrow widths; no
   section owns separate button spacing.
   Filter counts use the Results `site-table-tools` row and `site-count` role, aligned to
@@ -2181,7 +2219,7 @@ contributor articles use their component sheets and the same text tokens.
   The widths follow from each column’s floor and from what the n column asks for.
   The id, the significance, the rungs, the status, the details and the date are as
   narrow as what they hold.
-  The significance column holds the shared 5.5em meter, with the cell’s 0.2rem padding
+  The significance column holds the shared 4.8em meter, with the cell’s 0.2rem padding
   either side and room for a new-result star.
   The details are as wide as their widest link, “evidence 10”, 102 pixels, and a result
   with many records is the tallest row: T-075’s sixteen links stand 410 pixels.

@@ -6,6 +6,45 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: daniel-one-eighty-three-below-the-grid
+    date: '2026-10-20'
+    title: Daniel’s Packing of 183 Squares Below Side 14
+    significance:
+      score: 3
+      rationale: >-
+        T-220 is an S3 finite case result, the first packing of 183 squares below the
+        side-14 grid, from an established certificate kind and replay route. It brings no
+        new technique and claims no optimality.
+    topics: [upper-bound]
+    categories: [records]
+    pull_requests: [687]
+    result_ids: [T-220]
+    summary: |-
+      Daniel packs 183 unit squares in a square of side
+      $13999580178736252502081470897571/10^{30} < 14$, about $4.20 \times 10^{-4}$ below
+      the trivial $14 \times 14$ grid. It is the first packing of 183 squares below side 14
+      in this register. T-220 is confirmed at V3/C3 and is now the house at 183.
+    details: |-
+      - This project’s two maintained exact routes checked the original certificate, and
+        both refused its duplicate-square and outside-container controls. They
+        re-implement the geometry independently of the source’s code, though the two share
+        parsing, half-angle conversion and the separating-axis theorem with each other. A
+        separately prompted mathematical review accepted the bound.
+      - The case draws a regularized view made here with Daniel’s regularizer at the same
+        side. It is a drawing, not a second bound. The source’s own regularized
+        certificate and its two checkers did not run here.
+      - Credit Daniel, after Couzo’s 182-square packing. The source’s KKT, flat-motion
+        and local-minimum statements are numerical evidence that was not checked here, and
+        no optimality, rigidity or priority is claimed.
+    references:
+      - label: The case record at 183
+        target: packing/frontier/n-183.md
+      - label: Retained certificate and verification limits
+        target: packing/resources/web/evand-n183-subgrid-2026-10-19/README.md
+      - label: Mathematical review of 19 October
+        target: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+      - label: Daniel’s registration request
+        target: https://github.com/jlevy/squares/issues/680
   - id: greff-ninety-five-optimality-report
     date: '2026-10-16'
     title: Greff Reports an Optimum for 95 Squares
@@ -1643,6 +1682,11 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 687
+  title: 'records(#680): register and adopt Evan Daniel''s sub-grid n183 certificate (T-220)'
+  merged_at: '2026-10-20T17:15:02Z'
+  base_ref: main
+  merge_commit: d588ad987bd8de53361d087b8961a7f2bf157c41
 - number: 627
   title: 'research: the 15 October intake records, T-188 to T-192 in report order (supersedes #616)'
   merged_at: '2026-10-16T01:17:35Z'
@@ -2275,6 +2319,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 687
   - 246
   - 627
   - 628

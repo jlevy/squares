@@ -54,6 +54,7 @@ name: Certificate page
       - docs/project/research/research-2026-09-08-annealing-for-square-packing.md
       - docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md
       - packing/campaign/explorations/X-034-the-workbench-physics-as-a-search.md
+      - packing/campaign/result-import.md
       - packing/campaign/result-requests.yaml
       - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
       - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-202-round-1-perturbation.md

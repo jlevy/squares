@@ -227,6 +227,14 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # chelokot-lean-replay left on 2026-10-12: the register already bound its receipt, and
 # the Lean-backed rungs review of 2026-10-11 links its build log, so both of its files
 # return and the entry pruned nothing.
+# 2026-10-20, the adoption of 19 October at 155, 229, 236 and 271 (#692): grid-slack's
+# half-degree drawing at 229, kept beside its run evidence for the owner's row-7 review
+# (243,033 bytes), took the snapshot to 229,685,143 bytes, 46,999 over the then 219 MiB
+# cap. `--audit-snapshot --prune-candidate` finds no registered mention and no inline or
+# result rescue: people open it from the run README, and no control reads it. Left out,
+# with this note, the snapshot measured 229,442,770 bytes, 195,374 under that cap. At
+# #692's head, after #688 raised the cap to 221 MiB, it read 231,475,393 bytes, 259,903
+# under it.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
@@ -250,6 +258,8 @@ UNREAD_WORKER_OUTPUTS = frozenset(
         ROOT / "benchmarks/measure-verifier/results",
         ROOT / "atlas/prospective/source-coverage-101-324.svg",
         ROOT / "atlas/rendering/free-quench-n1-trace.json",
+        ROOT / "cases/regularized_drawings/think-ip1p-2026-10-19/review-229"
+        "/grid-slack-adopt-2026-10-19-n155-271-grid-deg05.svg",
     }
 )
 PRUNE = frozenset(
@@ -1542,18 +1552,51 @@ def root_files() -> tuple[Path, ...]:
 # and reads 212,861,306 with this change's code, tests and comments counted,
 # 13,631,110 under the cap.
 #
-# 2026-10-19, contributor profiles (think-iyao): before the capacity change,
-# --audit-snapshot read 229,065,765 bytes against 216 MiB; pinned main d167d4b86
-# projects 222,575,174 bytes with this selector. Required new evidence includes
-# Gobel's retained 1979 PDF,
-# 4,982,398 bytes, declared both by his profile and an inspected-byline receipt.
-# validate_schemas consumes these declarations, so keep the complete private PDF
-# and all other profile/occurrence dependencies. No unrelated prune is justified.
-# Allow 224 MiB for this measured new consumer; the copier and input selection stay
-# unchanged. Three portable workers remain bounded at 672 MiB. The custody regression
-# checks the PDF's bytes, private index and both loaders; the oversized guard still
-# refuses before cloning.
-SNAPSHOT_MAX_BYTES = 224 * 1024 * 1024
+# 2026-10-19, T-174's 37-house adoption on the landed T-200--T-217 intake:
+# the staged actual-main union projects 228,587,228 bytes before this allowance's
+# rationale and tests. The retained 66-house operation actually copied 228,578,604
+# bytes, admitted 156 inputs and refused/restored 24 late mutations without a geometry
+# decision (19.51 s setup, 15.71 s worker). Its receipt still records the former 216 MiB
+# cap; assess those unchanged measurements under this new allowance, never rewrite them.
+# Propose 219 MiB for this measured source surface, with unchanged selection and the
+# oversized pre-clone refusal. Three portable workers remain bounded at 657 MiB.
+# This allowance covers neither unlanded contributor-profile inputs nor future intakes.
+#
+# 2026-10-19, the #446 landing of T-205 to T-207 (think-2w1f), taken alone from the
+# 19 October handoff checkpoint f6f4a8482: `--source-bytes` read 228,914,908 on main
+# 926cd764a, 723,236 under 219 MiB, and 230,713,367 on this branch, +1,798,459 and
+# 1,075,223 over. Nearly all of it is the three fine-net Mac confirmations' captures,
+# controls and audit receipts (about 1,743,668 bytes of fde545a96 measured over the
+# checkpoint's copy list), which `check_results` needs as results dependencies; the rest
+# is the reporting code, tests and regenerated views. Raise to 221 MiB, the least whole
+# MiB above this surface, with unchanged selection and the oversized pre-clone refusal:
+# about 1 MB of headroom. It is measured for this change alone; the n183 and #678
+# records measure their own surface. Three portable workers are bounded at 663 MiB.
+#
+# 2026-10-20, the n183 registration and adoption (T-220, think-jh4w, #687), merged with
+# main 012dcf9e5: `--source-bytes` read 231,475,393 on that tree (#692's head, the same
+# tree, under review C of #692), 259,903 under 221 MiB, and 231,811,269 on this
+# branch, 335,876 more and 75,973 over. Priced against main's blobs of
+# the same paths, 323,203 bytes of the growth are this change's: the n183 packet the
+# results need as dependencies (93,723), the regularized-drawing runs and selection
+# (63,566), the intake record (57,772), the mapped review (35,229), and the register
+# entries, case record, verifiers, regenerated views and release records (72,913).
+# Raise to 222 MiB, the least whole MiB above this surface, with unchanged selection and
+# the oversized pre-clone refusal: 972,603 bytes of headroom. It is measured
+# for this change alone. Three portable workers are bounded at 666 MiB.
+#
+# 2026-10-20, contributor profiles (#578, think-wrh8, think-iyao) merged with main
+# 4851d8193: `--source-bytes` read 238,732,991 bytes, 5,949,119 over 222 MiB. Priced
+# against main's blobs of the same paths, the profile work adds 54 files (992,050 bytes;
+# the occurrence manifest is 716,713 of them) and grows shared files by 125,705 bytes.
+# Nearly all of the rest is Gobel's retained 1979 PDF (4,982,398 bytes), which main
+# tracks but does not copy: his profile and an inspected-byline receipt declare it, and
+# validate_schemas consumes both, so keep the complete private PDF and every other
+# profile and occurrence dependency. No unrelated prune is justified. Raise to 228 MiB,
+# the least whole MiB above this surface, with unchanged selection and the oversized
+# pre-clone refusal. The custody regression checks the PDF's bytes, private index and
+# both loaders. Three portable workers are bounded at 684 MiB.
+SNAPSHOT_MAX_BYTES = 228 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

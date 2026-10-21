@@ -22,10 +22,10 @@ has three since 2026-10-05, and they are not samples of one population:
   rendering's own imprecision explains. `n = 68` left it on 2026-09-29, and `n = 69` on
   2026-10-05 for the catalogue's packing (T-088), whose two corner blocks join the
   catalogue's others.
-- `packet-derived-facts` (6 records) includes Couzo's n68, the second SQUISH update
-  at n88, and the new Xu packings at51,70,84,86. Couzo's five-square block seats
-  against one wall. The undilated radical n51 has two tilted interior polyomino
-  components, so the earlier grid-subset and corner-block description is historical.
+- `packet-derived-facts` (6 records) includes T-174's adopted houses at 68, 84 and 86,
+  T-146's house at 70, Gupta's at 88 and the radical n51. The first three have seven
+  corner blocks in all, each touching two walls. The undilated radical n51 has two
+  tilted interior polyomino components.
 
 **No verdict is emitted and none is available.** This is descriptive: it reports what the
 retained census contains, stratified, with the residue characterized. `H-044` is untouched,

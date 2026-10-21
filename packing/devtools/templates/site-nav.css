@@ -492,10 +492,21 @@ nav.site-tabs a[aria-current="page"],
 
 /* Compact in-place choosers share the Results widget type scale. */
 .site-tabs.site-chooser-small {
+  border: 0;
   font-size: var(--site-chooser-small-size);
   line-height: var(--site-chooser-small-leading);
+  padding-block-end: 1px;
+  padding-inline-end: 1px;
 }
 .site-tabs.site-chooser-small :is([role="tab"], button) {
+  border: 1px solid var(--kpress-doc-border);
   font-weight: var(--site-font-weight-sans-medium, 500);
+  margin-block-end: -1px;
+  margin-inline-end: -1px;
   padding: var(--site-chooser-small-padding);
+}
+.site-tabs.site-chooser-small :is([role="tab"], button):focus-visible,
+.site-news-reset:focus-visible {
+  outline: 2px solid var(--kpress-doc-link);
+  outline-offset: 2px;
 }

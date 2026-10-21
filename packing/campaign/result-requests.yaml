@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-18'
+last_reviewed: '2026-10-20'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -3470,7 +3470,15 @@ issues:
       On 10 October the author reports a stronger n29 certificate, which awaits its own import. On 16
       October the author reports 21 more fine-net certificates, three of which (n = 37, 39 and 44) the
       record already holds from the source's repository as T-178, T-176 and T-177; the 18 new ones, at n
-      = 38 to 110, are each above both lower lanes at their count, and think-f40c imports them.
+      = 38 to 110, are registered as T-200 through T-217 in merged pull request 671. n108 (T-216)
+      completed its certificate checks and mathematical reviews at V3/C3 in that pull request,
+      and n68, n84 and n85 (T-205 to T-207) completed theirs at V3/C3 on 19 October, each
+      re-verified by sqverify-fast, which shares components with the producer's checker
+      (wand125's adaptation of this repository's crate) apart from the declared-net readers;
+      their lower lanes are 853/100, 3769/400 and 379/40. The other fourteen remain
+      V0/C0 under think-f40c; the n86 capture has no check or control run. No upper-bound house
+      changed. The post-deployment follow-up of 19 October records the n108 state and requests
+      the upstream control filename correction.
     read_through: '2026-10-16T09:00:31Z'
     results:
     - key: fine-net-n19
@@ -3586,16 +3594,21 @@ issues:
       - E-wand125-fine-net-n108-1062-report
       - E-wand125-fine-net-n110-1073-report
       - E-wand125-fine-net-n108-1062-sqverify-fast-replay
+      - E-wand125-fine-net-n68-853-sqverify-fast-replay
+      - E-wand125-fine-net-n84-94225-sqverify-fast-replay
+      - E-wand125-fine-net-n85-9475-sqverify-fast-replay
     asks:
     - what: Complete the maintained census, whole-net controls and certificate-specific mathematical
-        review for the other 17 fine-net lower bounds of 16 October before adopting their case lanes.
+        review for the other 14 fine-net lower bounds of 16 October before adopting their case lanes.
       state: queued
       bead: think-f40c
       note: >-
-        n108 is adopted at 531/50 after its retained complete native replay and two accepted
-        mathematical reviews; confirmation shares the producer's verifier components. The other
-        17 remain V0/C0. The former batch-1 plan is a continuation queue, not evidence that its
-        remaining native runs are active or complete.
+        n108 is adopted at 531/50, and n68, n84 and n85 at 853/100, 3769/400 and 379/40, each
+        after its retained complete native replay, whole-net controls and accepted mathematical
+        reviews; confirmation shares the producer's verifier components. The other 14 remain
+        V0/C0; the n86 capture finished but its check and control never ran. The former batch-1
+        plan is a continuation queue, not evidence that its remaining native runs are active or
+        complete.
     - what: Replay and review the n29 candidate at 291/50 over all 2073 directions with whole-net
         controls and restored positives, from a candidate retained where the census reads it.
       state: queued
@@ -3660,6 +3673,308 @@ issues:
       - result: fine-net-n29-582-followup
         id: E-wand125-fine-net-n29-582-followup-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6261561709
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n37-n39-n44-1016
+        id: T-176
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-177
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-178
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-18-1016
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6265360813
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-18-1016
+        id: T-200
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-201
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-202
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-203
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-204
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-205
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-206
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-207
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-208
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-209
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-210
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-211
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-212
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-213
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-214
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-215
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-216
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-217
+        verification: V0
+        confirmation: C0
+        status: recorded
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6285175046
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-18-1016
+        id: T-205
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-206
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-207
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-216
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-200
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-201
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-202
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-203
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-204
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-208
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-209
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-210
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-211
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-212
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-213
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-214
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-215
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-217
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-n37-n39-n44-1016
+        id: T-178
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-176
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-177
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n29-582-followup
+        id: T-132
+      - result: fine-net-n27-5655-followup
+      - result: fine-net-n19
+      - result: fine-net-n20
+      - result: fine-net-n26
+      - result: fine-net-n27
+      - result: fine-net-n28
+      - result: fine-net-n29
+      - result: fine-net-n31
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n68-853-report
+        status: reviewed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n84-94225-report
+        status: reviewed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n85-9475-report
+        status: reviewed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n108-1062-report
+        status: reviewed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n38-65775-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n40-6735-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n41-68025-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n43-69425-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n51-75275-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n86-95275-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n88-96325-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n89-9685-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n90-978-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n91-97875-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n92-986-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n106-10503-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n107-1058-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n110-1073-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n68-853-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n84-94225-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n85-9475-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n108-1062-sqverify-fast-replay
+        status: confirmed
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
   - number: 451
@@ -6051,6 +6366,31 @@ issues:
       - result: nine-beyond-horizon
       corrects:
       - https://github.com/jlevy/squares/issues/506#issuecomment-6130063939
+      outdated:
+      - 'Mykhailo Polkovskyi''s certificate (T-186) is not adopted at 304; since the adoption of 16
+        October, which merged with #657, T-186 is the house at 304, 1.79e-19 below T-175'
+      - 'at 305 T-152 is still the house; since the adoption of 17 October, which merged with #665,
+        PingYou Ltd''s PR #574 certificate (T-174) is the house at 305, 1.80e-19 below T-152'
+    - url: https://github.com/jlevy/squares/issues/506#issuecomment-6285175304
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n175
+        id: T-185
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n175
+        id: E-couzo-506-n175-report
+        status: reviewed
+      - result: n304-n305-exact-optima
+        id: T-152
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/506#issuecomment-6206057024
     close_when: The import and its disposition, including the beyond-horizon counts, are on main,
       the house adoption at 304 and 305 has landed or is owned, and the owner has posted the
       resulting state; the four unnamed certificates are imports of their own, and optimality is
@@ -7050,6 +7390,11 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/537#issuecomment-6261556635
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The packet and the evidence entry are on main, and the owner has decided on a sample or
       a full rebuild.
     notes: ' The author comment of 18 October (issuecomment-6247112302) is new evidence for T-064, held
@@ -7073,21 +7418,40 @@ issues:
     read_through: '2026-10-12T07:51:08Z'
     results: []
     asks:
-    - what: Compare the best of three timings with 400 ms, keep both ceilings, and attribute the play
-        message to load or to a regression.
+    - what: Compare the best of three timings with 400 ms and keep both ceilings.
+      state: done
+      note: >-
+        Landed in #685 (02b644c6f, merged at 14fd9e27f): the Animate view contract builds each
+        of the six trajectories three times through measurePhysics, past the trajectory cache,
+        compares the fastest with 400 ms and one build's bytes with 4 MB, both ceilings
+        unchanged, and af12aca78 requires the three builds to agree in bytes. #685's hosted
+        check_frontend passed at af12aca78 (Packing run 39312783060, frontend job
+        118266427235: the dearest trajectory 223 ms at its fastest of three builds)
+        (think-1bm2).
+    - what: Attribute the Animate view play message to load or to a regression.
       state: queued
-      bead: think-1bm2
+      note: >-
+        Neither #685 nor earlier work attributed `play did not carry on from step to step: the
+        stage showed n = [5, 6]`, and no third occurrence is recorded. Narrowed onto its own
+        bead.
+      bead: think-8vsk
     beads:
     - think-1bm2
-    answer_bead: think-1bm2
+    - think-8vsk
+    answer_bead: think-8vsk
     replies:
     - url: https://github.com/jlevy/squares/issues/538#issuecomment-6200838139
       date: '2026-10-15'
       by: jlevy
       kind: follow-up
       reported: []
-    close_when: The check compares the best of three timings with 400 ms, both ceilings are
-      unchanged, the play message is attributed, and check_frontend passes.
+    - url: https://github.com/jlevy/squares/issues/538#issuecomment-6279239104
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    close_when: The play message is attributed to load or to a regression; the timing check landed
+      in #685.
   - number: 539
     title: 'check_scroll_restoration: wait for the reload''s own navigation'
     author: jlevy
@@ -8219,6 +8583,13 @@ issues:
       evidence:
       - E-pingyou-574-certificate-report
       - E-pingyou-574-algebraic-report
+    asks:
+    - what: Complete and record the disposition of the full 148-count submission and the pull request.
+      state: queued
+      bead: think-9v2k
+      note: The existing intake owner retains the supplement and per-count decisions. Accepted certificates,
+        ties, superseded reports and reasoned non-imports remain distinct; unimported does not by itself
+        require a new replay. The algebraic house writer is separately tracked under think-ot5c.
     beads:
     - think-9v2k
     answer_bead: think-9v2k
@@ -8245,6 +8616,15 @@ issues:
       - result: pr574-certificates
         id: E-pingyou-574-algebraic-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/574#issuecomment-6270041615
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: pr574-certificates
+        id: T-174
+        verification: V3
+        confirmation: C3
     close_when: The import and its disposition are on main, the owner has decided the pull request and
       posted the resulting state with T-174's id, and the review and second route that would confirm
       T-174 are owned by its bead; optimality is outside this request.
@@ -8255,13 +8635,23 @@ issues:
       decided 17 of the 21 undecided comparisons exactly (result-import.md, Report-Order Verdict
       Comments); the comment as recorded is the edited one.
 
-      The reply `--report` lists as due (T-174 at V3/C3 and its two evidence entries reviewed, where
-      the follow-up of 14 October stated V0/C0 and recorded) waits for the owner, who decides the
-      pull request and, by `close_when`, posts the resulting state; T-174's adoption is no longer
-      the owner's: the house rule of 16 October 2026 makes it the house at 53 counts, staged under
-      think-3mry and, at 70, 153 and 207, under think-ot5c. It goes out on the owner's instruction,
-      from think-9v2k, and a pass that finds it due does not post it before then (PR #637's review,
-      A4).
+      The owner's requested follow-up of 19 October (issuecomment-6270041615) gives T-174 at V3/C3
+      and acknowledges the 37 rational houses PR #665 adopted from it, after the merged site passed
+      all 4,705 deployed-site checks: eleven regularized, 25 decided with no better regularization
+      and n103 retained as published. It accepts neither the complete 148-count submission nor the
+      pull request; the queued ask keeps a draft from proposing closure while think-9v2k holds the
+      supplement, the per-count dispositions and the pull-request decision. It states T-174's rungs
+      but not its status ("recorded at V3/C3", never "confirmed"), and it names neither evidence
+      entry, so `--report` still lists as due, against the follow-up of 14 October, which stated
+      recorded for all three, T-174's confirmed status and the two entries' reviewed status (PR
+      #696's review, A1). The think-9v2k reply carries all three; it goes out with the owner's
+      pull-request disposition, and a pass that finds it due does not post it before then (PR #637's
+      review, A4). T-174's adoption is no longer the owner's: the house rule of 16 October 2026
+      makes it the house at 41 counts, the adoption of 17 October 2026 (think-3mry) moved 37
+      rational ones to it, and the algebraic 70, 153 and 207 wait under think-ot5c for the writer.
+      T-193's smaller sides are staged at twelve others under think-ot5c; at 236 Evan Daniel's issue
+      659 reports a smaller side, whose import adopts it, with T-174 still staged under think-3mry
+      until then.
   - number: 575
     title: 's(176) ≤ 13.795872318437, s(211) ≤ 14.993694186584, s(241) ≤ 15.987134249051, s(304) ≤ 17.929427758076:
       registration request'
@@ -8736,6 +9126,15 @@ issues:
       - T-186
       evidence:
       - E-mishapolk-70a033f-certificate-report
+    asks:
+    - what: 'The owner decides whether the record credits Mykhailo Polkovskyi jointly with #586
+        (Francisco Couzo) at 211 and 241, as his comment of 14 October asks, citing his earlier commit
+        8bb41af (https://github.com/jlevy/squares/issues/593#issuecomment-6172128988).'
+      state: queued
+      bead: think-2ep3
+      note: 'The reply of 16 October listed the request as still with the owner and kept the issue open
+        for it, and the follow-up of 20 October repeats both. T-182 records the question as RQ-1. At
+        211 T-188 is the house since 16 October; at 241 the tied #586 certificate (T-182) still is.'
     beads:
     - think-2ep3
     answer_bead: think-2ep3
@@ -8817,6 +9216,33 @@ issues:
         status: recorded
       corrects:
       - https://github.com/jlevy/squares/issues/593#issuecomment-6179772564
+      outdated:
+      - neither of Francisco Couzo's certificates at 237 (T-189, T-190) is adopted before a review, so
+        T-183 stays the house; since the adoption of 16 October his 4e4c8ce certificate (T-190) is the
+        house at 237, 1.01e-4 below T-183, which is retained as history
+      - 'T-186 waits for a review and then a decision on adoption at the twelve counts; since the
+        adoption of 16 October, which merged with #657, T-186 is the house at all twelve'
+    - url: https://github.com/jlevy/squares/issues/593#issuecomment-6285175560
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: kkt-refinements-70a033f
+        id: T-186
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: kkt-refinements-70a033f
+        id: E-mishapolk-70a033f-certificate-report
+        status: reviewed
+      - result: n237
+        id: T-183
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: ties-211-241
+      corrects:
+      - https://github.com/jlevy/squares/issues/593#issuecomment-6206056451
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request. The author has said which name the record should carry.
@@ -8886,6 +9312,20 @@ issues:
         verification: V0
         confirmation: C0
         status: recorded
+      - result: second-route
+    - url: https://github.com/jlevy/squares/issues/594#issuecomment-6285175806
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s76-equals-9
+        id: T-184
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: s76-equals-9
+        id: E-bengreff-594-cover-report
+        status: reviewed
       - result: second-route
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
@@ -9065,7 +9505,7 @@ issues:
       squarepack-certs 0e9be7961773aa78b879c4ee6ba584a67e2e5513 and public squarepack-lean at
       947bdae. These source assertions await statement, axiom and replay review under think-494l;
       T-163 remains V2/C1, and Stage 4 adoption is separate.
-    read_through: '2026-10-18T21:02:13Z'
+    read_through: '2026-10-19T03:30:28Z'
     results:
     - key: excess-theorem
       claim: 's(n^2 - n + 1) < n for every n >= 15, and s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q
@@ -9090,6 +9530,21 @@ issues:
         T-163 retains V2/C1 and the existing finite-witness disposition.
       queued: true
       bead: think-494l
+    - key: note-v09-doi-2026-10-19
+      claim: Fang announces note v0.9, dated 18 October, archived as DOI 10.5281/zenodo.23463481 with
+        PDF and LaTeX under CC BY; he states it is the same text as note/fang-2026-n2-n-1.md in
+        TheSnakeFang/squarepack-certs at 6e265256061b7c8b4be7e690008fa59c12ca5ae7. That note, in its
+        Formal verification paragraph and its [FanL26] reference, scopes the unchanged Lean pin
+        947bdae to Theorem 1 and the maximum of the two unmixed bounds of Theorem 2; the mixed-step
+        form of Theorem 2 is not formalised.
+      source: https://github.com/jlevy/squares/issues/603#issuecomment-6259031488
+      not_registered: Publication and statement update to the existing theorem, queued with the existing
+        note and Lean review owner. DOI assets and statement binding remain to be retained and reviewed;
+        no new theorem entry, replay, or rung promotion. T-163 remains V2/C1. For the binding review,
+        the README at the same commit claims more than the note does, "Lean 4 formalisation of
+        Theorems 1 and 2" with no scope; the note's scope is the one to bind.
+      queued: true
+      bead: think-494l
     beads:
     - think-494l
     - think-0esw
@@ -9111,6 +9566,32 @@ issues:
       - result: excess-theorem
         id: E-fang-excess-theorem-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6257671390
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: excess-theorem
+        id: T-163
+        verification: V2
+        confirmation: C1
+      - result: note-v08-lean-2026-10-18
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6268897002
+      date: '2026-10-19'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: excess-theorem
+        id: T-163
+        verification: V2
+        confirmation: C1
+      - result: note-v09-doi-2026-10-19
+      - result: note-v08-lean-2026-10-18
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6271101249
+      date: '2026-10-19'
+      by: jlevy
+      kind: other
+      reported: []
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would raise its rungs are owned by its bead; optimality
       is outside this request.
@@ -9151,7 +9632,8 @@ issues:
     title: 's(146) ≤ 12.583782190152: registration request'
     author: evand
     opened: '2026-10-14'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: result-report
     triage: done
     summary: Evan Daniel reports s(146) <= 12.583782190152, the exact rational side
@@ -9194,6 +9676,20 @@ issues:
       - result: n146
         id: E-evand-606-n146-report
         status: recorded
+      - result: distinct-local-minimum
+    - url: https://github.com/jlevy/squares/issues/606#issuecomment-6285175984
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n146
+        id: T-187
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n146
+        id: E-evand-606-n146-report
+        status: reviewed
       - result: distinct-local-minimum
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would confirm the V0 entry are owned by its bead;
@@ -9259,6 +9755,29 @@ issues:
         status: recorded
       - result: fifteen-beyond-horizon
       - result: fang-composites
+      outdated:
+      - T-183 (#593) is the house at 237 and stays the house until a review decides adoption; since
+        the adoption of 16 October the 4e4c8ce certificate (T-190) is the house at 237, 2.40e-11 below
+        T-189, and T-183 is retained as history
+      - 'the #586 certificate (T-182) is the house at 211; since the adoption of 16 October the 487b058
+        certificate (T-188) is the house there, 9.29e-6 below T-182'
+    - url: https://github.com/jlevy/squares/issues/607#issuecomment-6285176205
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n237
+        id: T-189
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n237
+        id: E-couzo-607-certificate-report
+        status: reviewed
+      - result: fifteen-beyond-horizon
+      - result: fang-composites
+      corrects:
+      - https://github.com/jlevy/squares/issues/607#issuecomment-6206051473
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, the composites are with Fang's import, and the review and replay that would
       confirm the V0 entry are owned by its bead; optimality is outside this request.
@@ -9300,6 +9819,19 @@ issues:
       - result: s95-equals-10
         id: E-bengreff-610-cover-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/610#issuecomment-6285176428
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s95-equals-10
+        id: T-191
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: s95-equals-10
+        id: E-bengreff-610-cover-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm the V0 entry are owned by its
       bead; optimality is outside this request.
@@ -9351,7 +9883,8 @@ issues:
     title: 'data: submit a tighter exact N29 packing certificate'
     author: BuddenPing
     opened: '2026-10-15'
-    state: open
+    state: closed
+    closed: '2026-10-19'
     kind: result-report
     triage: done
     summary: >-
@@ -9366,9 +9899,9 @@ issues:
       controls, reviewed the same day (accepted, finite feasibility, no blocking defect) and registered
       as T-195 at V3/C3, a regularization of the packing it tightens. The per-count ledger records it
       by exception on the owner's standing house rule (PR #660, think-sa5r). Its adoption at 29 and
-      regularization decision are complete on the import branch, dated 17 October 2026. Stage 7
-      waits for the import to merge, the published site to agree and the final reply to be posted
-      under think-30n2; #622 stays open pending those steps and the owner's pull-request disposition.
+      regularization decision landed through #661 in the merged #661/#676 stack at d167d4b86
+      on 19 October. Deployment and live verification passed; the final reply reported adoption
+      and V3/C3, and the source pull request closed as incorporated at 06:50:12Z that day.
     read_through: '2026-10-16T03:40:22Z'
     results:
     - key: n29-certificate
@@ -9390,6 +9923,30 @@ issues:
       kind: acknowledgement
       reported:
       - result: n29-certificate
+    - url: https://github.com/jlevy/squares/issues/622#issuecomment-6261406058
+      date: '2026-10-19'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n29-certificate
+        id: T-195
+        verification: V3
+        confirmation: C3
+        status: confirmed
+    - url: https://github.com/jlevy/squares/issues/622#issuecomment-6261882344
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n29-certificate
+        id: T-195
+        verification: V3
+        confirmation: C3
+      - result: n29-certificate
+        id: E-pingyou-622-certificate-report
+      - result: n29-certificate
+        id: E-pingyou-622-exact-feasibility
+        status: confirmed
     close_when: The import and its disposition are on main, the owner has decided the pull request and
       posted the resulting state, and any replay that would confirm a recorded entry is owned by its bead;
       optimality is outside this request.
@@ -9444,7 +10001,8 @@ issues:
       exact configuration): registration request'
     author: evand
     opened: '2026-10-16'
-    state: open
+    state: closed
+    closed: '2026-10-19'
     kind: result-report
     triage: done
     summary: >-
@@ -9459,7 +10017,11 @@ issues:
       #574's rational certificates are
       smaller, by about 1e-62. Retained on 16 October in the evand-exact-cur-2026-10-16 packet; the 16
       October report-order ledger (campaign/issue-intake/upper-bounds-20261016) agrees with the triage at
-      every count, and T-193 registers the 16 recorded counts. Claude assistance disclosed.
+      every count, and T-193 registers the 16 recorded counts. The source's verify_exact.py, replayed here
+      on all 23 forms with controls, and the stage 4 review of 16 October, which found no blocking defect
+      and one major credit-route finding (RE-1), take T-193 to V3/C3 at all sixteen counts, where the
+      house rule of 16 October 2026 makes its sides the houses, staged under think-ot5c until the
+      writer takes an algebraic side. Claude assistance disclosed.
     read_through: '2026-10-16T03:37:13Z'
     results:
     - key: exact-sides-below-record
@@ -9473,6 +10035,7 @@ issues:
       - T-193
       evidence:
       - E-evand-639-exact-sides-report
+      - E-evand-639-verify-exact-replay
     - key: exact-side-51
       claim: s(51) <= (16 + 5√2)/3, the root of 9x^2 - 96x + 206.
       source: body
@@ -9497,13 +10060,31 @@ issues:
       not_registered: >-
         Weaker than an earlier report: #574's rational certificates at these counts (T-174), which three
         exact routes here decided, are below S* by 1.18e-62, 9.23e-63 and 6.62e-63, so S* is not the
-        least side of those packings. The acknowledgement drafted in think-phyb asks the author why.
+        least side of those packings. The final reply of 19 October asks the author why.
       queued: false
     beads:
     - think-phyb
     - think-g59l
     answer_bead: think-phyb
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/639#issuecomment-6278993243
+      date: '2026-10-19'
+      by: jlevy
+      kind: final
+      reported:
+      - result: exact-sides-below-record
+        id: T-193
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: exact-sides-below-record
+        id: E-evand-639-verify-exact-replay
+        status: confirmed
+      - result: exact-sides-below-record
+        id: E-evand-639-exact-sides-report
+      - result: exact-side-51
+      - result: exact-sides-574-algebraic
+      - result: exact-sides-above-574
     close_when: >-
       The recorded counts are registered on main, the author has been told what was registered and why
       51, 70, 153, 207, 172, 263 and 297 were not, and the replay is either run or owned by its bead,
@@ -9513,8 +10094,9 @@ issues:
       case records also name improvers (Gupta, Polkovskyi, Couzo and Daniel), whom the registered entry
       credits before Daniel's exact form, as a refinement. At 207 the source reports that its re-solve of
       the record's witness did not verify one pair and that the committed form comes from a copy that
-      ties it; T-173's rational certificate there was decided by three exact routes here, and the
-      acknowledgement asks what the re-solve shows. The source also lists 52 counts still without an
+      ties it; T-173's rational certificate there was decided by three exact routes here. The drafts in
+      think-phyb asked what the re-solve shows, but the final reply of 19 October dropped the question,
+      so whether to ask it as a follow-up is still open. The source also lists 52 counts still without an
       exact form, and s(29), whose polynomial #545 reports; neither is a claim.
   - number: 640
     title: 'Complete Lean proof of s(19) optimality: registration request'
@@ -9536,8 +10118,11 @@ issues:
       announcement as X returned it, is retained in the fitzharding-n19-lean-2026-10-16 packet. A full
       rebuild, several hours on 64 cores by the source's account, is above the pass's cap and held for the
       owner. Registered on 16 October 2026 as T-194, an optimality result at V0/C0, with its bibliography
-      key and a link from the n = 19 case page; its mathematical review (think-o40t) is the next step.
-      Claude and Codex assistance disclosed.
+      key and a link from the n = 19 case page. Its mathematical review of 16 October (think-o40t) found
+      no blocking or major defect, three minor findings and four notes, and re-established with programs of
+      its own the property each of the 2,328 native facts in the Git tree certifies; mapped the same day,
+      T-194 stands at V0/C1, its programs registered and their runs on n-019's case record. Claude and
+      Codex assistance disclosed.
     read_through: '2026-10-16T03:41:08Z'
     results:
     - key: n19-optimality-lean
@@ -9553,6 +10138,12 @@ issues:
       - T-194
       evidence:
       - E-n019-fitzharding-lean-report
+      - E-n019-fitzharding-endpoint-review
+      - E-n019-fitzharding-cover-census-review
+      - E-n019-fitzharding-region-review
+      - E-n019-fitzharding-capture-link-review
+      - E-n019-fitzharding-endgame-review
+      - E-n019-fitzharding-archives-review
     asks:
     - what: Link the proof from the n = 19 case page.
       state: done
@@ -9566,7 +10157,37 @@ issues:
     - think-nqnl
     - think-xik9
     answer_bead: think-a4x3
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/640#issuecomment-6278993930
+      date: '2026-10-19'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n19-optimality-lean
+        id: T-194
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-lean-report
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-endpoint-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-cover-census-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-region-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-capture-link-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-endgame-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-archives-review
+        status: confirmed
     close_when: >-
       The result is registered on main and linked from the n = 19 case page, the author has been told
       what was registered and has the mathematical review, and the full build has either passed, here or
@@ -9589,20 +10210,20 @@ issues:
     title: 's(236) ≤ 15.861934390608: registration request'
     author: evand
     opened: '2026-10-16'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: result-report
     triage: done
     summary: >-
       Evan Daniel reports s(236) <= 15.861934390608, the exact rational side
       7930967195303679308621899285697/(5 x 10^29) of evand/square-packing 5ad0069,
-      search/packer/candidates/s236_bm3c.cert, rounded up at 12 places, accepted by his two
-      standard-library exact checkers; a different local minimum from itsnaka's #481 composition, found
-      by his basin explorer from a rebuild of it, with a 6-group regularized view at the same side.
-      Triaged on 17 October 2026: 2.02e-3 below both case lanes (T-146's regularized list of #481's
-      packing) and below T-174, pending adoption there, and the latest report at 236, so the
-      report-order rule records it. Not yet retained; its replay on this repository's two exact routes
-      prices at about a CPU-minute. Once validated it moves the house at 236, whose drawing is then
-      regularized. Claude assistance disclosed.
+      search/packer/candidates/s236_bm3c.cert, rounded up at 12 places; a different local minimum
+      from itsnaka's #481 composition, found by his basin explorer from a rebuild of it, with a
+      6-group regularized view at the same side. Retained on 19 October 2026 in
+      evand-n236-2026-10-16, replayed on this repository's two exact routes, registered as T-218,
+      reviewed by the 19 October stage 4 review and raised to V3/C3; the case at 236 adopted it as
+      its house, taking 236 off T-174's staged adoption, and its drawing was regularized in the same
+      pull request. Claude assistance disclosed.
     read_through: '2026-10-16T14:05:14Z'
     results:
     - key: n236
@@ -9611,24 +10232,39 @@ issues:
         15.861934390607358617243798571394, the side of s236_bm3c.cert (SHA-256 21dbf679...), by a packing
         the source calls a different local minimum from #481's.
       source: body
-      not_registered: >-
-        Triage only (think-6wtz). Stage 2 retains the certificate, its regularized view and both source
-        checkers at 5ad0069; stage 3 records it in report order, below every standing or staged side at
-        236 by approximately 2.0213565519e-3. It is a new packing continuing itsnaka's #481 arrangement
-        (T-136), credited after it as the issue asks.
-      queued: true
-      bead: think-6wtz
+      register:
+      - T-218
     beads:
     - think-6wtz
     answer_bead: think-6wtz
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/659#issuecomment-6261557007
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n236
+      outdated:
+      - 'Registration, replay and case adoption remain queued; since #692 merged on 20 October, T-218
+        is registered and replayed at V3/C3, confirmed, and is the house at 236'
+    - url: https://github.com/jlevy/squares/issues/659#issuecomment-6294848229
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n236
+        id: T-218
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/659#issuecomment-6261557007
     close_when: >-
       The certificate is registered on main and replayed here, the case at 236 has adopted it and
       regularized its drawing, and the author has been told the id, rungs and adoption.
     notes: >-
-      236 is one of T-174's 50 counts staged for adoption under think-3mry. If this certificate is
-      validated before that adoption lands, the house selection takes 236 to it, and the T-174 adoption
-      leaves 236 out rather than adopt and regularize a house that would lapse.
+      Credit follows the issue and issue 673's reading of it: Evan Daniel found the packing, from a
+      rebuild of itsnaka's #481 composition, which the issue credits for the construction.
   - number: 664
     title: 's(271) ≤ 16.948947733714: registration request'
     author: evand
@@ -9639,14 +10275,13 @@ issues:
     summary: >-
       Evan Daniel reports s(271) <= 16.948947733714, the exact rational side
       16948947733713657510723401112423/10^30 of evand/square-packing 757b40b,
-      search/packer/candidates/s271_ex1.cert, rounded up at 12 places, accepted by his two
-      standard-library exact checkers; a refinement of Francisco Couzo's #561 packing found by one
-      tilt-swap move of his basin explorer from the register's witness, with a 21-group regularized view
-      at the same side. Triaged on 17 October 2026: 4.46e-5 below both case lanes (T-186, Mishapolk's
-      refinement of #561) and the latest report at 271, so the report-order rule records it. Not yet
-      retained; its replay on this repository's two exact routes prices at about a CPU-minute. Once
-      validated it moves the house at 271, whose drawing is then regularized. Claude assistance
-      disclosed.
+      search/packer/candidates/s271_ex1.cert, rounded up at 12 places; found by one tilt-swap move
+      of his basin explorer from the register's witness, which the issue calls a refinement of
+      Francisco Couzo's #561 packing, with a 21-group regularized view at the same side. Retained on
+      19 October 2026 in evand-n271-2026-10-17, replayed on this repository's two exact routes,
+      registered as T-219, reviewed by the 19 October stage 4 review and raised to V3/C3; the case
+      at 271 adopted it as its house and its drawing was regularized in the same pull request.
+      Claude assistance disclosed.
     read_through: '2026-10-17T04:30:51Z'
     results:
     - key: n271
@@ -9655,25 +10290,56 @@ issues:
         16.948947733713657510723401112423, the side of s271_ex1.cert (SHA-256 48abf7ca...), which the
         source calls a refinement of #561's packing.
       source: body
-      not_registered: >-
-        Triage only (think-8o5j). Stage 2 retains the certificate, its regularized view and both source
-        checkers at 757b40b; stage 3 records it in report order, below both case lanes at 271 by
-        approximately 4.4622737548e-5, credited after Couzo's #561 and Chaoweeraprasit's #500 packings as the
-        issue asks.
-      queued: true
+      register:
+      - T-219
+    asks:
+    - what: >-
+        The credit at 271 as this issue asks it, to Francisco Couzo's #561 packing and Nate
+        Chaoweeraprasit's SQUISH packing it refines (Chaoweeraprasit as finder, Couzo and Daniel as
+        improvers), held until the author says whether the reading he gave on issue 673 applies here,
+        where the issue calls the packing both a refinement of #561 and a different local minimum
+      state: queued
       bead: think-8o5j
+      note: >-
+        The case at 271 already gives this credit. It is held, not pending work, because the
+        follow-up of 20 October (issuecomment-6294848615) asks him which reading he means; under the
+        #673 reading a different local minimum would make him the finder and the credit would be
+        taken up again. That is why the follow-up says nothing he asked for is queued and still keeps
+        the issue open. A final comment closes it once he answers or leaves the credit as it is.
     beads:
     - think-8o5j
     answer_bead: think-8o5j
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/664#issuecomment-6261557347
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n271
+      outdated:
+      - 'Registration, replay and case adoption remain queued; since #692 merged on 20 October, T-219
+        is registered and replayed at V3/C3, confirmed, and is the house at 271'
+    - url: https://github.com/jlevy/squares/issues/664#issuecomment-6294848615
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n271
+        id: T-219
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/664#issuecomment-6261557347
     close_when: >-
       The certificate is registered on main and replayed here, the case at 271 has adopted it and
       regularized its drawing, and the author has been told the id, rungs and adoption.
     notes: >-
-      The source calls it a refinement of #561's packing, which the register would credit as a
-      regularization of Couzo's packing, and also a distinct local minimum, with one fewer
-      load-bearing tilted square than #561 and 59 squares moved by more than 1e-4. Which it is for
-      credit is put to the owner and the author with the triage (think-8o5j).
+      The source calls the packing a refinement of #561's, not a new construction, and also a
+      different local minimum; the case credits it as the issue asks, to Nate Chaoweeraprasit's
+      SQUISH packing improved by Francisco Couzo and Evan Daniel. Under issue 673's rule a different
+      local minimum would make Daniel the finder; the follow-up of 20 October asks him which he
+      means, and the queued ask holds the issue open for his answer.
   - number: 666
     title: 's(n) < ⌈√n⌉ at 18 counts from n = 509 to 1568, and s(464) ≤ 21.98881: registration request'
     author: JoostdeWinter
@@ -9822,7 +10488,31 @@ issues:
     beads:
     - think-3m10
     answer_bead: think-3m10
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/666#issuecomment-6261557725
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n464
+      - result: n509
+      - result: n555
+      - result: n603
+      - result: n654
+      - result: n706
+      - result: n760
+      - result: n817
+      - result: n875
+      - result: n935
+      - result: n998
+      - result: n1061
+      - result: n1128
+      - result: n1196
+      - result: n1266
+      - result: n1339
+      - result: n1413
+      - result: n1489
+      - result: n1568
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -9859,7 +10549,27 @@ issues:
     beads:
       - think-qdcc
     answer_bead: think-qdcc
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/668#issuecomment-6261558114
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n227
+        id: T-196
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n229
+        id: T-196
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n260
+        id: T-196
+        verification: V0
+        confirmation: C0
+        status: recorded
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -9881,12 +10591,17 @@ issues:
     title: 's(155) ≤ 12.952260944651: registration request'
     author: evand
     opened: '2026-10-17'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: result-report
     triage: done
-    summary: Evan Daniel reports an exact rational certificate at 155 from 59326b8, with a regularized view
-      at the same side. The source claims a different local minimum from Ostashev T-149, credits that packing
-      as its start, and discloses same-author exact checkers and numerical local-minimum diagnostics.
+    summary: >-
+      Evan Daniel reports s(155) <= 12.952260944651 from the exact rational certificate at 59326b8,
+      with a regularized view at the same side, a different local minimum from Daniil Ostashev's
+      T-149 found by his basin explorer from it. Registered as T-197 on 18 October; replayed on this
+      repository's two exact routes, reviewed by the 19 October stage 4 review and raised to V3/C3
+      on 19 October 2026; the case at 155 adopted it as its house and its drawing was regularized in
+      the same pull request.
     read_through: '2026-10-17T14:49:46Z'
     results:
       - key: n155
@@ -9898,21 +10613,66 @@ issues:
     beads:
       - think-n1ga
     answer_bead: think-n1ga
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/669#issuecomment-6261558471
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n155
+        id: T-197
+        verification: V0
+        confirmation: C0
+        status: recorded
+      outdated:
+      - 'Your reported n = 155 upper bound is now registered on main as T-197, V0/C0; since #692
+        merged on 20 October, T-197 is at V3/C3, confirmed, and the house at 155'
+      - 'Separate mathematical review and source-checker replay with geometric controls await
+        reviewed integration; since #692 merged on 20 October the mathematical review is
+        integrated, and T-197''s rungs rest on this repository''s two exact routes, an independent
+        re-implementation. The source-checker half still holds: that replay ran on 18 October and
+        its receipt (think-8kx2, think-0lu6) has not been integrated'
+    - url: https://github.com/jlevy/squares/issues/669#issuecomment-6294848994
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n155
+        id: T-197
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/669#issuecomment-6261558471
+      outdated:
+      - 'Our earlier reply spoke of a source-checker replay, but your verify_cert.py and
+        verify_cert2.py did not run here; they did. On 18 October a separate replay ran both on the
+        four certificates of #669 and #674, two from each, with eight accepted decisions and all 16
+        geometric mutants refused in 41.4 seconds (receipt SHA-256 cab73c96...). That receipt is
+        not yet integrated (think-8kx2, think-0lu6), so no rung rests on it'
+    - url: https://github.com/jlevy/squares/issues/669#issuecomment-6296071238
+      date: '2026-10-20'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: n155
+        id: T-197
+        verification: V3
+        confirmation: C3
+      corrects:
+      - https://github.com/jlevy/squares/issues/669#issuecomment-6294848994
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
-    notes: 'Stage 2 packet: packing/resources/web/evand-n155-explorer-2026-10-17/README.md, retained at
-      MIT-licensed 59326b86291b76c39d843f3f156e8f25fa0f6e3f; the claim date remains 2026-10-17. No source
-      checker or mathematical review ran during acquisition. PR661 keeps T-195. Each later PR takes the
-      next available IDs only after updating from main, in actual merge order; PR671''s entries are provisional,
-      and no ordering between PR671 and this intake branch is assumed. The issue and s155_ex2_prior.json
-      credit Daniil Ostashev''s T-149 as the search start, while s155_ex2_regularized.json says by: [Francisco
-      Couzo]. Both statements are preserved; resolve the discrepancy before using that field as attribution
-      evidence. The same-side display certificate is not a second bound; numerical local-minimum diagnostics
-      remain source assertions. Stage 3 joins every chronological claim to the register on the #661-dependent
-      intake branch, at V0/C0. IDs remain provisional until actual main merge order; no reply is posted.
-      Separate mathematical review and source-replay owners retain Stage 4 integration and any adoption. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here.'
+    notes: >-
+      Stage 2 packet: packing/resources/web/evand-n155-explorer-2026-10-17/README.md, retained at
+      MIT-licensed 59326b86291b76c39d843f3f156e8f25fa0f6e3f; the claim date remains 2026-10-17. The
+      issue and s155_ex2_prior.json credit Daniil Ostashev's T-149 as the search start, while
+      s155_ex2_regularized.json says by: [Francisco Couzo], as the same field of Daniel's 236 and
+      271 views does; the record follows the issue. Under issue 673's reading the start is what the
+      search was based on, so the case at 155 names Evan Daniel as the finder. The same-side display
+      certificate is not a second bound; numerical local-minimum diagnostics remain source
+      assertions.
   - number: 670
     title: '204-993: registration request'
     author: franciscouzo
@@ -10439,7 +11199,85 @@ issues:
     beads:
     - think-f28n
     answer_bead: think-f28n
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/670#issuecomment-6261558818
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+      - result: n330
+      - result: n339
+      - result: n364
+      - result: n370
+      - result: n378
+      - result: n379
+      - result: n382
+      - result: n403
+      - result: n417
+      - result: n418
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n444
+      - result: n452
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n501
+      - result: n503
+      - result: n505
+      - result: n536
+      - result: n546
+      - result: n548
+      - result: n551
+      - result: n553
+      - result: n598
+      - result: n600
+      - result: n647
+      - result: n650
+      - result: n651
+      - result: n700
+      - result: n701
+      - result: n702
+      - result: n703
+      - result: n749
+      - result: n753
+      - result: n754
+      - result: n756
+      - result: n757
+      - result: n758
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n863
+      - result: n866
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n871
+      - result: n922
+      - result: n925
+      - result: n926
+      - result: n927
+      - result: n928
+      - result: n929
+      - result: n930
+      - result: n931
+      - result: n987
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10780,7 +11618,58 @@ issues:
     beads:
     - think-2vjc
     answer_bead: think-2vjc
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/672#issuecomment-6261559222
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n227
+      - result: n229
+      - result: n330
+      - result: n461
+      - result: n507
+      - result: n652
+      - result: n653
+      - result: n704
+      - result: n749
+      - result: n750
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n757
+      - result: n758
+      - result: n759
+      - result: n804
+      - result: n805
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n815
+      - result: n816
+      - result: n817
+      - result: n864
+      - result: n865
+      - result: n868
+      - result: n869
+      - result: n871
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n923
+      - result: n924
+      - result: n929
+      - result: n930
+      - result: n932
+      - result: n933
+      - result: n934
+      - result: n935
+      - result: n990
+      - result: n991
+      - result: n994
+      - result: n995
+      - result: n996
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10790,38 +11679,69 @@ issues:
     title: 'Credit correction request: s(146) and s(308) found_by'
     author: evand
     opened: '2026-10-17'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: correction
-    triage: pending
-    summary: 'Evan Daniel asks to change found_by at 146 and 308 to his name, retaining Xu #432 and Fang
-      #484 as the starts. He distinguishes new local minima from refinements and cites a Lean path-soundness
-      theorem and numerical path tests. This audit records the request without deciding project credit policy.'
+    triage: done
+    summary: >-
+      Evan Daniel asks to change found_by at 146 and 308 to his name, with Ryan Xu's #432 and Kevin
+      Fang's #484 named as what his searches were based on: his requests in #606 and #489 to credit
+      them for the start or the construction meant "based on". He also states the rule he now uses
+      (same local minimum: refinement; otherwise the later poster is the finder) and names eleven
+      other counts as examples he does not ask to change. Applied on 19 October 2026 under the
+      project's credit rule that the source says who did what: the case records at 146 and 308 name
+      Evan Daniel as finder; the credit lines are unchanged and his general rule is not adopted as
+      project policy.
     read_through: '2026-10-17T22:31:41Z'
     results: []
     beads:
     - think-gzvu
     answer_bead: think-gzvu
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/673#issuecomment-6261559625
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported: []
+      outdated:
+      - 'The credit decision is still queued; since #692 merged on 20 October it is decided: the
+        cases at 146 and 308 name Evan Daniel as finder, the credit lines are unchanged, and his
+        general rule is not adopted as project policy'
+    - url: https://github.com/jlevy/squares/issues/673#issuecomment-6294849401
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported: []
+      corrects:
+      - https://github.com/jlevy/squares/issues/673#issuecomment-6261559625
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
     asks:
     - what: Review requested found_by corrections at 146 and 308 and determine how existing credit policy
         applies to the author clarification.
-      state: queued
-      bead: think-gzvu
-      note: Other counts in the issue are examples, not requested changes. The author proposed a rule; it
-        is not an adopted project rule.
+      state: done
+      note: >-
+        Applied on 19 October 2026: the case records at 146 (T-187's house) and 308 (T-174's house,
+        refining T-141's packing) name Evan Daniel as finder, from searches based on Xu's and Fang's
+        packings, as the source's corrected attribution says (epistemics.md, Parallel Projects and
+        Their Credit). Other counts in the issue are examples, not requested changes. The author's
+        proposed rule is not an adopted project rule.
   - number: 674
     title: 's(229) ≤ 15.650163254859: registration request'
     author: evand
     opened: '2026-10-17'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: result-report
     triage: done
-    summary: 'Evan Daniel reports a dilation certificate at 229 (e0338c7), then a smaller certificate at
-      00e68df and asks to use the latter instead. Both reports are retained in order; the update certifies
-      only an upper bound and credits Couzo #672 after de Winter #668.'
+    summary: >-
+      Evan Daniel reports a dilation certificate at 229 (e0338c7), then a smaller certificate at
+      00e68df and asks to use the latter instead. Both are registered in order (T-198, T-199),
+      replayed on this repository's two exact routes, reviewed by the 19 October stage 4 review and
+      raised to V3/C3 on 19 October 2026; the case at 229 adopted the update (T-199) as its house,
+      the first adoption at 229, and its drawing was regularized in the same pull request. Each
+      certifies only an upper bound and credits Couzo #672 after de Winter #668 as the start.
     read_through: '2026-10-18T01:36:21Z'
     results:
       - key: n229
@@ -10840,7 +11760,69 @@ issues:
     beads:
       - think-5ij2
     answer_bead: think-5ij2
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/674#issuecomment-6261560037
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n229
+        id: T-198
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n229-update
+        id: T-199
+        verification: V0
+        confirmation: C0
+        status: recorded
+      outdated:
+      - 'T-198 for the opening certificate and T-199 for your smaller update, both V0/C0; since #692
+        merged on 20 October both are at V3/C3, confirmed, and T-199 is the house at 229'
+      - 'Separate mathematical review and source-checker replay with geometric controls await
+        reviewed integration; since #692 merged on 20 October the mathematical review is
+        integrated, and T-198''s and T-199''s rungs rest on this repository''s two exact routes, an
+        independent re-implementation. The source-checker half still holds: that replay ran on 18
+        October and its receipt (think-8kx2, think-0lu6) has not been integrated'
+    - url: https://github.com/jlevy/squares/issues/674#issuecomment-6294849771
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n229
+        id: T-198
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n229-update
+        id: T-199
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/674#issuecomment-6261560037
+      outdated:
+      - 'Our earlier reply spoke of a source-checker replay, but your verify_cert.py, verify_cert2.py
+        and dilate_cert.py did not run here; the two checkers did. On 18 October a separate replay
+        ran verify_cert.py and verify_cert2.py on the four certificates of #669 and #674, two from
+        each, with eight accepted decisions and all 16 geometric mutants refused in 41.4 seconds
+        (receipt SHA-256 cab73c96...). That receipt is not yet integrated (think-8kx2, think-0lu6),
+        so no rung rests on it'
+    - url: https://github.com/jlevy/squares/issues/674#issuecomment-6296071486
+      date: '2026-10-20'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: n229
+        id: T-198
+        verification: V3
+        confirmation: C3
+      - result: n229-update
+        id: T-199
+        verification: V3
+        confirmation: C3
+      corrects:
+      - https://github.com/jlevy/squares/issues/674#issuecomment-6294849771
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10849,12 +11831,20 @@ issues:
       at MIT-licensed 00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db (published 2026-10-18). The opening and update
       remain separate chronological claims; 15.650161513896 is the current requested upper bound. Credit
       Daniel after Couzo''s 672 after de Winter''s 668. No source checker, geometric replay or mathematical
-      review ran during acquisition. PR661 keeps T-195. Each later PR takes the next available IDs only
-      after updating from main, in actual merge order; PR671''s entries are provisional, and no ordering
-      between PR671 and this intake branch is assumed. Stage 3 joins every chronological claim to the register
-      on the #661-dependent intake branch, at V0/C0. IDs remain provisional until actual main merge order;
-      no reply is posted. Separate mathematical review and source-replay owners retain Stage 4 integration
-      and any adoption. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here.'
+      review ran during acquisition. Stage 3 registered both claims in order through #676, as T-198 and
+      T-199 at V0/C0, and the follow-up of 19 October reported them so. #692, merged on 20 October,
+      carried the stage 4 review of 19 October and the replay of both certificates on this repository''s
+      two exact routes, an independent re-implementation, and raised both to V3/C3; the case at 229
+      adopted T-199 as its house, the first adoption at 229, and draws the axis tool''s view of it while
+      grid-slack''s half-degree view waits on the owner''s review (think-cyeo). The separately completed
+      source replay of 18 October, the source''s verify_cert.py and verify_cert2.py run on these two
+      certificates and #669''s two (eight accepted decisions and 16 geometric mutant refusals in 41.386
+      s, receipt SHA-256 cab73c96...), awaits integration under think-8kx2 and think-0lu6; no rung
+      rests on it. The final reply of 20 October reported both at V3/C3, confirmed, corrected the
+      earlier reply''s V0/C0 statement and the review it called pending, and closed the issue; it also said
+      the source''s checkers did not run here, which the correction of 20 October
+      (issuecomment-6296071486) withdrew. Couzo''s #672, the stated start, is not retained here; its
+      import is think-2vjc.'
   - number: 675
     title: '204-998: registration request'
     author: franciscouzo
@@ -11423,7 +12413,91 @@ issues:
     beads:
     - think-pvav
     answer_bead: think-pvav
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/675#issuecomment-6261560418
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n464
+      - result: n502
+      - result: n545
+      - result: n546
+      - result: n547
+      - result: n548
+      - result: n549
+      - result: n554
+      - result: n592
+      - result: n593
+      - result: n598
+      - result: n602
+      - result: n603
+      - result: n641
+      - result: n642
+      - result: n650
+      - result: n652
+      - result: n654
+      - result: n693
+      - result: n700
+      - result: n701
+      - result: n705
+      - result: n706
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n758
+      - result: n759
+      - result: n760
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n807
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n816
+      - result: n817
+      - result: n863
+      - result: n864
+      - result: n865
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n919
+      - result: n923
+      - result: n924
+      - result: n927
+      - result: n928
+      - result: n930
+      - result: n931
+      - result: n932
+      - result: n933
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
+      - result: n994
+      - result: n995
+      - result: n996
+      - result: n997
+      - result: n998
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12040,7 +13114,24 @@ issues:
     beads:
     - think-xu4d
     answer_bead: think-xu4d
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6257122870
+      date: '2026-10-19'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n260
+      outdated:
+      - Called e90993b1c0f625d1d6c2d1ea3b5f391bfe6d98f5bc387a10863434bb9db4934e a decompressed hash;
+        it hashes the gzip bytes.
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6270970266
+      date: '2026-10-19'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: n260
+      corrects:
+      - https://github.com/jlevy/squares/issues/678#issuecomment-6257122870
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12052,3 +13143,959 @@ issues:
       receipts are not local replays. The n545 and n641 witnesses require deletion of one surplus
       square from n546 and n642 respectively. No register entry, adopted upper bound, house
       choice or confirmation rung changes in this Stage 1 inventory; Stage 4 adoption is separate.
+  - number: 680
+    title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
+    author: evand
+    opened: '2026-10-19'
+    state: closed
+    closed: '2026-10-20'
+    kind: result-report
+    triage: done
+    summary: 'Evan Daniel''s original n183 certificate is registered as T-220, confirmed by a complete
+      replay here and an accepted mathematical review, and adopted as the n183 house on 2026-10-19,
+      regularized by both strong generators in the same pull request. The drawn view is this
+      project''s run of Evan Daniel''s regularizer at the same side; the source''s own regularized
+      certificate is retained and not executed.'
+    read_through: '2026-10-20T01:39:41Z'
+    results:
+    - key: n183
+      claim: s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571,
+        rounded upward at 12 places to 13.999580178737.
+      source: body
+      bead: think-xp0o
+      register:
+      - T-220
+      evidence:
+      - E-evand-680-n183-report
+      - E-evand-680-n183-primary-exact-feasibility
+    beads:
+    - think-xp0o
+    answer_bead: think-xp0o
+    replies:
+    - url: https://github.com/jlevy/squares/issues/680#issuecomment-6268897692
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n183
+      outdated:
+      - 'Registration is prepared for the next intake records PR, has not landed on main or been
+        deployed, and its result number is provisional; since #687 merged on 20 October it is on main
+        and on the published site as T-220, at V3/C3, confirmed'
+      - 'The regularized drawing and the adoption into the standing case remain a separate owned
+        follow-up (think-jh4w); since #687 merged on 20 October, T-220 is the house at 183, adopted on
+        19 October in the same change, and the site draws its regularized view'
+      - 'Both retained exact verification routes accepted its rational geometry: the two routes were
+        this repository''s sqpack.verify and devtools.check_rational_witness_independent, and the
+        source''s verify_cert.py and verify_cert2.py, though retained in the packet, did not run here'
+    - url: https://github.com/jlevy/squares/issues/680#issuecomment-6297284604
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n183
+        id: T-220
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/680#issuecomment-6268897692
+    - url: https://github.com/jlevy/squares/issues/680#issuecomment-6300872327
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n183
+        id: E-evand-680-n183-report
+        status: reviewed
+      - result: n183
+        id: E-evand-680-n183-primary-exact-feasibility
+        status: confirmed
+    close_when: The reported claim has a reviewed disposition on main, replay and mathematical review
+      have explicit owners, any adopted house is regularized in the adoption change, and a reply checked
+      against main and the deployed site reports the resulting state.
+    notes: 'Issue body retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680.json.
+      Source commit date is 2026-10-19T05:20:24Z, despite the author-local 18 October date. The second
+      crossover parent was not logged; exact geometry can be checked without reconstructing that lineage.
+      No independent source-priority conclusion is drawn. The retained original primary receipt and
+      mathematical review support finite feasibility only. The regularized endpoint and the stronger numerical, lineage and
+      priority claims remain source assertions. The 19 October posted interim reply reports completed local original-certificate
+      replay and mathematical review, while registration is unlanded, undeployed and its result number
+      provisional. It names no T-220 and makes no published-registration claim; house adoption and
+      regularized endpoint remain separate. Exact posted bodies are retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680-replies.json.
+      Evan Daniel''s comment of 2026-10-20T01:39:41Z thanks Joost de Winter for his 19 October note and
+      says how the search was found; it states no new claim, certificate or correction. The final reply
+      of 20 October (issuecomment-6297284604), posted after #687 merged, reports T-220 at V3/C3, confirmed,
+      on main and on the published site, the house at 183 with its regularized view, the credit Daniel
+      after Couzo, and the KKT, flat-motion and local-minimum statements as unregistered source evidence;
+      it says that the 19 October reply''s two routes were this repository''s, that the source''s two
+      checkers and its regularized certificate did not run here, and that nothing asked for is queued.
+      The issue closed with it at 2026-10-20T17:43:20Z. The 20 October follow-up (issuecomment-6300872327)
+      names the evidence that reply described: E-evand-680-n183-report, reviewed, and
+      E-evand-680-n183-primary-exact-feasibility, confirmed.'
+  - number: 686
+    title: '100 certified larger-count square packings (328–998): registration request'
+    author: gfppoy
+    opened: '2026-10-19'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Darius Muglich reports 100 exact rational upper-bound certificates beyond the case corpus,
+      at 328 to 998, in an archive attached to the issue with per-case provenance and comparisons. The
+      issue says they are not 100 independent structures; many are deletions, borders, crops or
+      refinements of other holders' packings, Francisco Couzo's most often. OpenAI Codex assistance
+      disclosed. The 20 October triage finds every side below the record's start and below every
+      earlier report at its count; custody, the replay and the rows are queued.
+    read_through: '2026-10-19T20:43:04Z'
+    results:
+    - key: n328
+      claim: s(328) <= 18.614376892294788, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n330
+      claim: s(330) <= 18.692672444467133, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n339
+      claim: s(339) <= 18.907351471178022, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n344
+      claim: s(344) <= 18.992727809365345, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n365
+      claim: s(365) <= 19.614376892314402, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n377
+      claim: s(377) <= 19.925471653974826, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n378
+      claim: s(378) <= 19.942018855984576, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n379
+      claim: s(379) <= 19.950889681503441, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n380
+      claim: s(380) <= 19.961350023835208, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n381
+      claim: s(381) <= 19.974739840483985, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n404
+      claim: s(404) <= 20.614376892315402, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n412
+      claim: s(412) <= 20.822995415461893, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n417
+      claim: s(417) <= 20.934672165248002, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n418
+      claim: s(418) <= 20.939184128264923, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n419
+      claim: s(419) <= 20.957804836274712, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n420
+      claim: s(420) <= 20.966588191190457, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n421
+      claim: s(421) <= 20.976371064794590, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n422
+      claim: s(422) <= 20.983575254585011, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n453
+      claim: s(453) <= 21.822995415463173, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n459
+      claim: s(459) <= 21.937227864889785, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n460
+      claim: s(460) <= 21.950987687999201, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n461
+      claim: s(461) <= 21.966193114436095, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n462
+      claim: s(462) <= 21.966193114414129, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n463
+      claim: s(463) <= 21.973675720477602, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n464
+      claim: s(464) <= 21.986268532628047, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n496
+      claim: s(496) <= 22.822875659409473, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n502
+      claim: s(502) <= 22.934445598628207, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n503
+      claim: s(503) <= 22.944667600407142, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n504
+      claim: s(504) <= 22.962118925863563, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n505
+      claim: s(505) <= 22.964253709989815, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n506
+      claim: s(506) <= 22.972145072003643, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n508
+      claim: s(508) <= 22.983309379055478, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n548
+      claim: s(548) <= 23.944667600431087, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n550
+      claim: s(550) <= 23.961058656835017, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n551
+      claim: s(551) <= 23.965801641974269, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n552
+      claim: s(552) <= 23.966628823345179, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n553
+      claim: s(553) <= 23.979786600215760, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n554
+      claim: s(554) <= 23.986315054037724, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n595
+      claim: s(595) <= 24.944667600432087, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n597
+      claim: s(597) <= 24.958141573307033, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n598
+      claim: s(598) <= 24.958220677835095, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n599
+      claim: s(599) <= 24.962832858735977, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n600
+      claim: s(600) <= 24.979786600240740, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n601
+      claim: s(601) <= 24.986315054062710, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n602
+      claim: s(602) <= 24.990355569404721, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n603
+      claim: s(603) <= 24.990355569379731, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n647
+      claim: s(647) <= 25.949897942498915, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n648
+      claim: s(648) <= 25.961052856924314, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n649
+      claim: s(649) <= 25.974939166891586, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n650
+      claim: s(650) <= 25.974939166865611, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n651
+      claim: s(651) <= 25.982878838106428, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n652
+      claim: s(652) <= 25.990355569405721, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n654
+      claim: s(654) <= 25.994867334132237, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n700
+      claim: s(700) <= 26.963730153903490, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n701
+      claim: s(701) <= 26.971171145178352, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n702
+      claim: s(702) <= 26.976692903975214, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n703
+      claim: s(703) <= 26.981389201596016, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n704
+      claim: s(704) <= 26.987139500916770, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n705
+      claim: s(705) <= 26.990473400222588, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n706
+      claim: s(706) <= 26.997919093469508, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n755
+      claim: s(755) <= 27.951463061397879, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n756
+      claim: s(756) <= 27.976914446491419, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n757
+      claim: s(757) <= 27.976914446463442, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n758
+      claim: s(758) <= 27.984283608420539, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n759
+      claim: s(759) <= 27.988569233273449, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n760
+      claim: s(760) <= 27.992923233306379, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n810
+      claim: s(810) <= 28.951463061400412, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n811
+      claim: s(811) <= 28.974848874209278, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n812
+      claim: s(812) <= 28.976914446492419, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n813
+      claim: s(813) <= 28.981594177184268, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n814
+      claim: s(814) <= 28.981594177155286, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n815
+      claim: s(815) <= 28.992923233335372, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n816
+      claim: s(816) <= 28.995944538692246, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n817
+      claim: s(817) <= 28.997492020606608, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n868
+      claim: s(868) <= 29.974562439897217, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n869
+      claim: s(869) <= 29.974936836673075, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n870
+      claim: s(870) <= 29.981594177185268, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n871
+      claim: s(871) <= 29.981594177185268, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n872
+      claim: s(872) <= 29.992623086320206, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n873
+      claim: s(873) <= 29.992623086290213, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n874
+      claim: s(874) <= 29.992883399225609, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n875
+      claim: s(875) <= 29.996974281851590, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n927
+      claim: s(927) <= 30.969979227501660, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n928
+      claim: s(928) <= 30.974936836704050, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n929
+      claim: s(929) <= 30.975405698329704, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n930
+      claim: s(930) <= 30.977403109932478, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n932
+      claim: s(932) <= 30.992623086321206, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n933
+      claim: s(933) <= 30.992883399256602, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n934
+      claim: s(934) <= 30.994174058187146, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n935
+      claim: s(935) <= 30.994174058156152, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n989
+      claim: s(989) <= 31.974936836705050, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n990
+      claim: s(990) <= 31.975405698332123, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n991
+      claim: s(991) <= 31.977403109964455, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n992
+      claim: s(992) <= 31.977815424176502, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n993
+      claim: s(993) <= 31.983895593654374, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n994
+      claim: s(994) <= 31.992883399257602, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n995
+      claim: s(995) <= 31.994174058188146, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n996
+      claim: s(996) <= 31.994174058188146, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n997
+      claim: s(997) <= 31.996875920326034, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n998
+      claim: s(998) <= 31.996875920294037, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    asks:
+    - what: >-
+        Keep the source, seed and solver credits each case's provenance.json gives: credit a
+        deletion, border, subset crop or refinement after the packing it comes from, since the 100
+        are not independent structures, and keep one provenance for copies of the release posted
+        elsewhere (the issue body's credit line and its Lineage and credit paragraph).
+      state: queued
+      bead: think-9vjn
+      note: >-
+        Taken up when the rows land, each row's credit following its case's provenance.json. About
+        47 cases name Couzo's certificates as parent or source. The archive says n = 810 refines
+        Couzo's certificates/best/n810.cert by 6.33e-8 and asks that it not be advertised as a new
+        structure.
+    beads:
+    - think-9vjn
+    answer_bead: think-9vjn
+    replies: []
+    close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
+      corpus take no register entry, and optimality is outside this request.
+    notes: >-
+      Triage of 20 October 2026 (think-9vjn). The evidence is the issue's attachment
+      01-squares-100-certificates-and-poses.zip: both attachment links serve the same 8,824,142 bytes,
+      with SHA-256 6b711d6e80c9828497ba09d44673ee490c00ccae51b80587ec591d940722a874 as the issue states.
+      No repository commit or DOI pins it, and it states no licence; the SQUISH #401 attachment, kept as
+      derived facts with its address and digest (squish-401-2026-10-07), is the one precedent, and the
+      owner is asked to confirm both points. devtools.acquire_source retains only Git checkouts, so
+      custody is a tool change or that facts route. The archive holds 100 certificates in Evan Daniel's
+      n S / x y t format, each digest in its case's provenance.json, and each issue print rounds its
+      certificate's exact header side up by less than 1e-15. comparisons.csv has eight more rows, at
+      229, 458, 501, 546, 547, 549, 555 and 653, without certificates, and the issue does not offer
+      them. The archive excludes them (include=False): seven are above the pending reports it compares
+      them with, and 229 falls short of its own 1e-10 margin; they are not claims. The report-order
+      comparison is
+      packing/campaign/issue-intake/upper-bounds-20261020/: every claim is recorded, below the
+      beyond-horizon row at 68 counts and the grid at 32, and below #666, #670, #672, #675 and #678
+      wherever they report the count. Publications in watched repositories are not in that ledger and
+      stay with the import bead. Triage replayed five certificates, 328, 381, 464, 810 and 998, on
+      sqpack.verify and devtools.check_rational_witness_independent in scratch, with both controls
+      refused at 328; nothing was retained and no row or rung rests on it. The full replay is 300
+      jobs, a positive and two controls at each count, about 7.5 CPU-hours, the longest job about
+      184 seconds. verify_public.py did not run. The acknowledgement posts after the pull request
+      that carries this triage merges.
+  - number: 689
+    title: 's(308) ≤ 17.997149121271: registration request'
+    author: evand
+    opened: '2026-10-19'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(308) <= 17.997149121271, the exact rational side
+      3599429824254181747030632150463/(2 x 10^29) of evand/square-packing bc0708f,
+      search/packer/candidates/s308_d308.cert, rounded up at 12 places, with a regularized view at
+      the same side; a new arrangement found by inserting one square into Nate Chaoweeraprasit's
+      #481 s(307) packing, which the source says neither refines nor descends from #484 or #489.
+      Retained on 20 October 2026 in evand-n308-2026-10-19, replayed on this repository's two exact
+      routes, registered as T-221, reviewed by the 20 October stage 4 review, which measured it as
+      another arrangement of the two-wedge design, and raised to V3/C3; the case at 308 adopted it
+      as its house, 1.12e-3 below T-174, and its drawing was regularized in the same pull request.
+      Claude assistance disclosed.
+    read_through: '2026-10-19T22:44:19Z'
+    results:
+    - key: n308
+      claim: >-
+        s(308) <= 3599429824254181747030632150463/200000000000000000000000000000 =
+        17.997149121270908735153160752315, the side of s308_d308.cert (SHA-256 6a9c0331...), by a
+        packing the source calls a new arrangement, not a refinement of #489.
+      source: body
+      bead: think-h8jm
+      register:
+      - T-221
+      evidence:
+      - E-evand-689-n308-report
+      - E-evand-689-n308-exact-feasibility
+    asks:
+    - what: >-
+        Credit Nate Chaoweeraprasit's (itsnaka's) s(307) packing of #481, the register's witness at
+        307, as the ultimate start of the packing at 308.
+      state: done
+      bead: think-h8jm
+      note: >-
+        The adoption of 20 October 2026 credits the case at 308 to Evan Daniel's arrangement of
+        Kevin Fang's two-wedge design in a search started from Nate Chaoweeraprasit's n = 307
+        packing, with Daniel as the finder in the structured fields; T-221's claim and its
+        bibliography key (Daniel after Chaoweeraprasit) name the start too. Fang stays named in
+        the credit sentence, as the earlier house's named him, and out of the structured fields;
+        whether he belongs there, for this house as for the earlier one, is the owner's decision
+        under think-a95t.
+    beads:
+    - think-h8jm
+    answer_bead: think-h8jm
+    replies: []
+    close_when: >-
+      The certificate is registered on main and replayed here, the stage 4 review has been mapped,
+      the case at 308 has adopted it and regularized its drawing with the requested credit, and the
+      author has been told the id, rungs and adoption.
+  - number: 694
+    title: 's(154) ≤ 12.921100940762: registration request'
+    author: evand
+    opened: '2026-10-20'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(154) <= 12.921100940762, the exact rational side
+      1615137617595210068732072760947/(1.25 x 10^29) = 12.921100940761680549856582087576 of
+      evand/square-packing 1d2bb82, search/packer/candidates/s154_sw.cert, rounded up at 12 places,
+      with a regularized view at the same side; a different KKT point in the family of Francisco
+      Couzo's #586 packing, found from Daniil Ostashev's s(156) packing. Retained on 20 October
+      2026 in evand-n154-sweep-2026-10-20, replayed on this repository's two exact routes,
+      registered as T-222, reviewed by the 20 October stage 4 review, which measured it as #586's
+      arrangement continued, and raised to V3/C3; the case at 154 adopted it as its house, 1.06e-4
+      below T-186, and its drawing was regularized in the same pull request. Claude assistance
+      disclosed.
+    read_through: '2026-10-20T03:56:43Z'
+    results:
+    - key: n154
+      claim: >-
+        s(154) <= 1615137617595210068732072760947/125000000000000000000000000000 =
+        12.921100940761680549856582087576, the side of s154_sw.cert (SHA-256 c2242dcd...), by a
+        packing the source calls a different KKT point from #586's, in its family.
+      source: body
+      bead: think-115j
+      register:
+      - T-222
+      evidence:
+      - E-evand-694-n154-report
+      - E-evand-694-n154-exact-feasibility
+    asks:
+    - what: >-
+        Credit Francisco Couzo's #586 arrangement, itself continued from Evan Daniel's #552, and
+        Daniil Ostashev's s(156) packing, the register's witness at 156, as the starts of the packing
+        at 154.
+      state: done
+      bead: think-115j
+      note: >-
+        The adoption of 20 October 2026 credits the case at 154 to Evan Daniel's continuation of
+        Francisco Couzo's further arrangement of Daniel's n = 154 packing in a search the source
+        started from Daniil Ostashev's n = 156 packing: Daniel as finder and Couzo as improver in
+        the structured fields, Ostashev in the credit sentence. The 20 October review measured the
+        packing as #586's arrangement continued, so Couzo's credit rests on that measurement and
+        Ostashev's on the source's account of the search, as T-222's claim and the bibliography
+        say.
+    beads:
+    - think-115j
+    answer_bead: think-115j
+    replies: []
+    close_when: >-
+      The certificate is registered on main and replayed here, the stage 4 review has been mapped,
+      the case at 154 has adopted it and regularized its drawing with the requested credit, and the
+      author has been told the id, rungs and adoption.

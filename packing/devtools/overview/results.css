@@ -1,0 +1,105 @@
+/* The results page's overview above its table, two stacks of KPress's own disclosure:
+   the last seven days' registrations, one a day (overview_sections.recent_added), then
+   the weekly rollup before them, one a week (recent_rollup). Two blocks of a stack share
+   one rule. */
+.kpress .site-rollup {
+  margin-block: 1rem var(--site-table-space);
+}
+
+.kpress .site-rollup details {
+  margin: 0;
+}
+
+.kpress .site-rollup details + details {
+  border-block-start: 0;
+}
+
+.kpress .site-rollup ul {
+  font-size: var(--site-font-size-note);
+  list-style: none;
+  margin: 0;
+}
+
+/* A line that wraps keeps its later lines under the first one's ids, indented past
+   the name, so each finder still starts a line of their own. */
+.kpress .site-rollup li {
+  margin-block: 0.35rem;
+  padding-inline-start: 1.5em;
+  text-indent: -1.5em;
+}
+
+/* Each line opens with a finder's name in medium weight, which is mark enough: the
+   prose list's drawn square would sit in the hanging indent's margin. */
+.kpress .site-rollup li::before {
+  content: none;
+}
+
+/* A summary that wraps breaks before its count, never inside it. */
+.kpress .site-rollup-count {
+  white-space: nowrap;
+}
+
+.kpress .site-rollup .site-rollup-who {
+  color: var(--kpress-doc-text);
+  font-weight: var(--site-font-weight-sans-medium);
+}
+
+/* An id never breaks at its hyphen, and a rung after it stays with it. */
+.kpress .site-rollup-ids a {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* A superseded id is muted and underlined, so it still reads as the link it is. */
+.kpress .site-rollup-ids a.site-rollup-superseded {
+  color: var(--site-support-color);
+  text-decoration-line: underline;
+}
+
+.kpress .site-rollup-s {
+  color: var(--site-significance);
+  font-size: 0.8em;
+  font-weight: var(--site-font-weight-sans-medium);
+  margin-inline-start: 0.15em;
+  white-space: nowrap;
+}
+
+/* A day's result: its id and headline, then a quiet line of its cases, rungs and credit
+   set under the headline's words, past the id's hanging indent. */
+.kpress .site-added li > a:first-child {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.kpress .site-added li small {
+  color: var(--site-support-color);
+  display: block;
+  font-family: var(--kpress-font-sans);
+  font-size: inherit;
+  text-indent: 0;
+}
+
+/* An S4 or S5 score in the significance ink, as the weekly lines set a rung. */
+.kpress .site-added li small b {
+  color: var(--site-significance);
+  font-weight: var(--site-font-weight-sans-medium);
+}
+
+/* A superseded entry's text is muted; its id and credit stay link-coloured, and its
+   quiet line says "superseded". */
+.kpress .site-added li.site-rollup-superseded {
+  color: var(--site-support-color);
+}
+
+/* The day's link to its own rows in the table, closing the day's block a line's space
+   under its last result: the list gives up the padding KPress sets under a disclosure's
+   body, which the link takes instead. */
+.kpress .site-added details > ul {
+  padding-block-end: 0;
+}
+
+.kpress .site-added details > p {
+  font-size: var(--site-font-size-note);
+  margin-block: 0;
+  padding-block: 0.35rem 0.75rem;
+}

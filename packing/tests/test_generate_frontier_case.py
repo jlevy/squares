@@ -248,7 +248,7 @@ def _before_ryxu(n: int, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> str
     historical_coverage = tmp_path / "historical-source-selection.yaml"
     historical_coverage.write_text(yaml.safe_dump(coverage, sort_keys=False))
     monkeypatch.setattr(source_supersession, "COVERAGE", historical_coverage)
-    if n in (105, 292):
+    if n in (68, 105, 292):
         from devtools import refinement_house_links as houses  # noqa: PLC0415
 
         custody = tmp_path / "historical-refinement"

@@ -52,19 +52,19 @@ W1 phase on one branch:
    validation bead. Start each new proof’s mathematical review as soon as its source is
    retained, in parallel with stage 3, by [stage 4’s review lane](#stage-4-validate).
    It does not wait for a replay budget, and it lands in a pull request of its own when
-   it returns. Where a validated result is smaller than a house, the pass adopts it
-   ([the house rule](#the-house-rule)). **Every new packing that becomes a house is
+   it returns. Where a validated result is smaller than a case’s house best packing, the
+   pass adopts it ([the house rule](#the-house-rule)). **Every new house best packing is
    regularized** in the pull request that makes it one
    ([stage 5](#adopt-a-house-then-regularize-it)), whichever import made it: the
    adoption of a register result like T-174 or T-186 to T-190, a Kingbird catalogue
-   intake, or an exact re-solve that moves a house.
-   None defers its runs: they run in the pull request that makes the house, under the
+   intake, or an exact re-solve that changes a house best packing.
+   None defers its runs: they run in the pull request that makes the change, under the
    item cap (the owner’s 40 CPU-hours where the pass sets none), and an adoption too
    large for one is split, its other counts waiting with their runs, never apart from
-   them. Only a witness corrected or re-solved with its house’s source and exact side
-   unchanged may defer its runs, in `default_drawings.PENDING_ALLOWED` with the open
-   bead that owns them, naming the witness it replaced in `default_drawings.CORRECTED`.
-   The sweep then lists each count still owed.
+   them. Only a witness corrected or re-solved with its source and exact side unchanged
+   may defer its runs, in `default_drawings.PENDING_ALLOWED` with the open bead that
+   owns them, naming the witness it replaced in `default_drawings.CORRECTED`. The sweep
+   then lists each count still owed.
 4. **Validate** from `packing/` with `packing-validate --records`, then `--push`, and
    leave `--fast` to CI ([stage 5](#stage-5-publish)).
 5. **Open one draft pull request** with `tbd shortcut create-or-update-pr-simple`,
@@ -117,6 +117,19 @@ post it. The owner may post instead.
 Under the same grant it adds the `intake` label, and a case label where one applies; it
 edits nothing else on an issue without the owner’s word.
 
+**The day a result lands.** Every register entry carries `landed`, the UTC day it
+reached `main` and the site, which the results page’s Added in the Last Seven Days and
+its Added filters read; the schema requires it.
+A lane writes it with each new entry, as the day it registers it
+([stage 3](#stage-3-record)). When the owner gives the word to merge, the branch’s last
+two commits re-date the branch’s new entries to the merge day and re-pin
+([stage 5](#stage-5-publish), Before merge).
+A forgotten re-date leaves that pull request’s entries a day or two early and turns
+nothing red. The sweep after a merge runs `python -m devtools.stamp_landed --audit` from
+`packing/`, which compares every entry on `main` with `main`’s first-parent history and
+gates nothing; `--audit --apply` writes its corrections, which ride the next records
+pull request.
+
 ### The Prompt
 
 A session asked to run the intake takes this as its instruction:
@@ -156,23 +169,14 @@ claude/intake-YYYY-MM-DD, with today's date.
    or with no cap, when the source prices it at minutes; otherwise give it a
    validation bead and a row in the backlog bead (stage 4, "The Compute Cap and the
    Validation Backlog"). Start each new proof's mathematical review (stage 4, "Who
-   reviews, and when") as soon as its source is retained, in parallel. Where a
-   validated result is smaller than a case's house, adopt it in this pass, whoever
-   found it and however large its witness: no adoption waits for the owner (stage 5, "The
-   House Rule"). Every new packing that becomes a house is regularized in the same pull
-   request: an adoption from any import (a register result such as T-174 or T-186 to
-   T-190, with devtools.adopt_houses), a Kingbird catalogue intake, or an exact
-   re-solve that moves a house (stage 5, "Adopt a House, Then Regularize It"), priced
-   as one validation item at the total adopt_houses prints, with each re-housed
-   count's drawing listed before and after. Its runs are within the item cap, the
-   owner's 40 CPU-hours where the pass sets none, and run in that pull request. A
-   re-housed count is never deferred to default_drawings.PENDING_ALLOWED: where the runs
-   of a large adoption would pass the cap, split it, staging the counts it leaves in
-   select_houses.PENDING_ADOPTION with the open validation bead that adopts them, and
-   adopt the rest. Only a witness corrected or re-solved with its house's source and
-   exact side unchanged may defer its runs there, naming an open bead labelled
-   regularization and validation, and naming the witness it replaced in
-   default_drawings.CORRECTED.
+   reviews, and when") as soon as its source is retained, in parallel. Then follow
+   stage 5, "The House Rule", and the adoption steps after it: adopt each validated
+   result smaller than a case's house best packing in this pass, whoever found it, and
+   regularize each count where any import changes the house best packing in the same
+   pull request, within the item cap (the owner's 40 CPU-hours where the pass sets
+   none), never deferring its runs to default_drawings.PENDING_ALLOWED. Only a witness
+   corrected or re-solved with its source and exact side unchanged may defer its runs,
+   naming the witness it replaced in default_drawings.CORRECTED.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
    --records`, then `--push`, and fix what fails.
 6. Commit, push the branch, and open one draft pull request, labelled intake, with
@@ -195,9 +199,9 @@ claude/intake-YYYY-MM-DD, with today's date.
    devtools.intake_comments (stage 7, "Report-Order Verdict Comments").
 9. Run `make intake` again, and again after the merge: it and
    `check_requests --report` list the replies still due, and its "Regularization
-   owed" lists every count this pass re-housed that is still pending. Triage each new
-   item it lists read-only and propose its disposition on the epic bead (stage 1).
-   Report every item that still needs action.
+   owed" lists every count still pending where this pass changed the house best
+   packing. Triage each new item it lists read-only and propose its disposition on
+   the epic bead (stage 1). Report every item that still needs action.
 
 Never merge without the owner's word, never push to main, never post the announcement,
 and never start a replay above the owner's compute cap for the pass, or with no cap
@@ -494,12 +498,26 @@ credit.
 
 Record the claim as reported, by the frontier README’s rules: a reported evidence entry,
 a coverage entry that cites it, the reported lane of each case it improves, and a
-register entry with its ratings and `next_rung`. Six rules are the process’s own:
+register entry with its ratings and `next_rung`.
+
+For a formal proof, also inspect the producer’s execution evidence under
+[epistemics.md → Reported Formal Proofs and Source Builds](../../epistemics.md#reported-formal-proofs-and-source-builds).
+When a complete source build qualifies, keep the literal reported entry and add a
+separate external source-build entry.
+It can raise V at intake; its passing status describes the producer’s run and cannot
+raise C beyond a qualifying read.
+An announcement, source scan, private run summary with unresolved build coverage, or
+partial build does not qualify as complete execution.
+
+The seven record rules are:
 
 - **`attribution.published` is the claim’s date, not the pin’s:** the date the source
   gives for it, or the UTC date of the first commit that contains the certificate; for
   an entry over several certificates, the last of those dates.
 - **The entry’s `scope` is covered** by the scopes of the evidence it cites.
+- **`landed` is written with the entry**, after `registered` and as the same day.
+  The schema requires it, and the merge step re-dates it to the day the entry reaches
+  `main` ([stage 5](#stage-5-publish)).
 - **The claim states each bound it reports**, in a form `devtools.check_standing` reads:
   `s(n) <= v` for an upper bound, `s(n) >= v` for a lower bound and the same with `=`
   for an exact value, where $v$ is the value the source certifies, written as a fraction
@@ -688,15 +706,18 @@ It merges on the owner’s word, by
 
 ### The House Rule
 
-A case record’s two upper lanes hold one certificate, its **house**. At every count the
-house is the smallest of the case’s own house and every packing whose certificate has
-passed [stage 4](#stage-4-validate), whoever found it: a validated packing smaller than
-the house replaces it, and a larger one never does.
-A smaller validated packing is adopted in the intake pass that validates it, and every
-count the adoption re-houses is regularized in the same pull request
-([Adopt a House, Then Regularize It](#adopt-a-house-then-regularize-it)). The owner set
-the rule on 16 October 2026: “We should always be adopting the smallest packing and then
-regularizing it. That should be the policy, obviously.”
+A case record’s two upper lanes hold one certificate, that of the case’s **house best
+packing**, which the synopsis defines under
+[The measurements](../../SYNOPSIS.md#the-measurements).
+At every count the house best packing is the smallest of the current one and every
+packing whose certificate has passed [stage 4](#stage-4-validate), whoever found it: a
+validated packing smaller than the house best packing replaces it, and a larger one
+never does. A smaller validated packing is adopted in the intake pass that validates it,
+and each count where the adoption changes the house best packing is regularized in the
+same pull request ([stage 5’s adoption steps](#adopt-a-house-then-regularize-it)). The
+owner set the rule on 16 October 2026: “We should always be adopting the smallest
+packing and then regularizing it.
+That should be the policy, obviously.”
 and “This should be built into our policy.
 It shouldn’t even be a question.”
 
@@ -711,24 +732,26 @@ No adoption waits for the owner’s word, and each case that once did is decided
   closed form included.
   Where the code cannot order two sides, the code is fixed, and `select_houses --check`
   fails until it is.
-- **Size never holds a house.** The certificate stays where its packet keeps it, as a
-  gzipped derived fact or as an upstream file pinned by its digest.
-  The house’s witness, `witnesses/known-best/n-NNN.yaml`, goes into Git while
+- **A witness’s size never holds an adoption back.** The certificate stays where its
+  packet keeps it, as a gzipped derived fact or as an upstream file pinned by its
+  digest. The house best packing’s witness, `witnesses/known-best/n-NNN.yaml`, goes into
+  Git while
   [OR-18](../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)
   allows, its sizes counted as Git stores them, which OR-18 defines: no file of more
   than a few megabytes and no pass’s set of tens.
   Past that it is published as a hosted data release, in the same pass, and read through
   its manifest with `sqpack.hosted_data.require`
-  ([Publishing Hosted Data](../../development.md#publishing-hosted-data)). No house
-  reader takes a hosted witness yet, so the adoption that first needs one writes that
-  reader in its own pull request (think-ot5c names it for T-193’s forms).
-  `python -m devtools.upper_bound_houses sizes` measures the witnesses a staged adoption
-  would write. On 17 October 2026 T-174’s 50 staged rational houses add 2.84 MB to
-  history as Git stores them, since the witnesses they replace stay in it, and 14.55 MB
-  to a checkout, the largest 0.22 MB stored: they go into Git.
-- **A regularized view below the house’s side is a smaller packing.** It is registered
-  as a result and taken through stages 3 and 4 like any report, with the packing
-  credited to its finder and the regularization to the regularizer
+  ([Publishing Hosted Data](../../development.md#publishing-hosted-data)). No tool that
+  reads a house best packing’s witness takes a hosted one yet, so the adoption that
+  first needs one writes that reader in its own pull request (think-ot5c names it for
+  T-193’s forms). `python -m devtools.upper_bound_houses sizes` measures the witnesses a
+  staged adoption would write.
+  On 17 October 2026 the witnesses of T-174’s 50 staged adoptions at rational sides add
+  2.84 MB to history as Git stores them, since the witnesses they replace stay in it,
+  and 14.55 MB to a checkout, the largest 0.22 MB stored: they go into Git.
+- **A regularized view below the house best packing’s side is a smaller packing.** It is
+  registered as a result and taken through stages 3 and 4 like any report, with the
+  packing credited to its finder and the regularization to the regularizer
   ([epistemics.md](../../epistemics.md#parallel-projects-and-their-credit)), and adopted
   once validated (the regularization guide’s
   [Register Candidates](../../docs/project/guides/regularization-process.md#register-candidates)).
@@ -736,18 +759,18 @@ No adoption waits for the owner’s word, and each case that once did is decided
   [report-order rule](#several-reports-at-one-count) the ledger applies, which governs
   wherever two orders could differ.
   An exact tie between different holders is decided by it: the ledger lists one for the
-  owner only as a possible exception to recording a result, and an exception moves no
-  house. `select_houses` moves a house only to a smaller side, so the case keeps its own
-  at an exact tie; between validated candidates of one side it keeps the earlier
-  `attribution.published`, then the earlier entry.
+  owner only as a possible exception to recording a result, and an exception changes no
+  house best packing. `select_houses` replaces a house best packing only with a smaller
+  one, so the case keeps its own at an exact tie; between validated candidates of one
+  side it keeps the earlier `attribution.published`, then the earlier entry.
   That date is the last of an entry’s certificates where it has several, so it stands in
   for report order only where the two agree.
   On 16 October 2026 no two candidates at a count that moves are exactly equal.
-- **Regularizing is part of adopting.** Both strong generators run on each count the
-  adoption re-houses, in the adoption’s pull request, and the count is admitted or
-  settled on what they find: its runs are owed there, so a re-housed count is never
-  deferred to `default_drawings.PENDING_ALLOWED`. A drawing less regular than the strong
-  view it replaces is no reason to wait.
+- **Regularizing is part of adopting.** Both strong generators run on each count where
+  the adoption changes the house best packing, in the adoption’s pull request, and the
+  count is admitted or settled on what they find: its runs are owed there, so such a
+  count is never deferred to `default_drawings.PENDING_ALLOWED`. A drawing less regular
+  than the strong view it replaces is no reason to wait.
   The owner on n = 176, 16 October 2026: “Adopt as settled.”
   - A view that rows 7 or 8 of the regularization policy’s
     [decision table](../../docs/project/policies/regularization-policy.md#the-decision-table)
@@ -757,41 +780,43 @@ No adoption waits for the owner’s word, and each case that once did is decided
     [section 5](../../docs/project/policies/regularization-policy.md#5-manual-review-and-adjustment),
     and a view the owner admits is drawn on its review record, as at n = 211 on 16
     October 2026: “Admit it.”
-  - At an algebraic house the runs settle the count: no rational view is `same` or
-    `bound` at an irrational side, and no number-field view is decided on two exact
-    routes yet (the policy’s obligation 1; think-mbdw is that second route).
-    Keeping a rational view just above an algebraic U is a question 13 decision, put to
-    the owner once with the counts it concerns, and it holds no adoption.
-- **A conjectured optimum** the new house is below, wherever its print rounds, is
-  withdrawn, and any other stays; the adoption goes ahead either way.
+  - Where the house best packing has an algebraic side, the runs settle the count: no
+    rational view is `same` or `bound` at an irrational side, and no number-field view
+    is decided on two exact routes yet (the policy’s obligation 1; think-mbdw is that
+    second route). Keeping a rational view just above an algebraic U is a question 13
+    decision, put to the owner once with the counts it concerns, and it holds no
+    adoption.
+- **A conjectured optimum** that the new house best packing is below, wherever its print
+  rounds, is withdrawn, and any other stays; the adoption goes ahead either way.
 
 `devtools.select_houses --check` is the gate, and `tests/test_house_adoption.py` runs it
-on every pull request: it fails wherever a validated smaller packing is not the house.
-A count’s adoption may follow in a later pull request than the one that validates it
-only where the count is staged in `select_houses.PENDING_ADOPTION`, with the open bead
-that adopts it and one of three reasons (`STAGING_REASONS`): the pass’s next pull
-request; regularization runs over the item cap, which split the adoption
-([Adopt a House, Then Regularize It](#adopt-a-house-then-regularize-it)); or no writer,
-where `adopt_houses` cannot yet write the house.
-An algebraic house is the one such gap the rule names, and the writer’s bead,
-think-ot5c, owns its counts.
+on every pull request: it fails wherever a validated smaller packing is not the house
+best packing. A count’s adoption may follow in a later pull request than the one that
+validates it only where the count is staged in `select_houses.PENDING_ADOPTION`, with
+the open bead that adopts it and one of three reasons (`STAGING_REASONS`): the pass’s
+next pull request; regularization runs over the item cap, which split the adoption
+([stage 5’s adoption steps](#adopt-a-house-then-regularize-it)); or no writer, where
+`adopt_houses` cannot yet write the new house best packing.
+A house best packing with an algebraic side is the one such gap the rule names, and the
+writer’s bead, think-ot5c, owns its counts.
 `bead tree` holds each bead open, and the adopting pull request takes the count off.
-`--check` fails on a staged count the selection no longer moves or names another house
-for, and on one staged for the writer whose house the writer writes, or the reverse.
+`--check` fails on a staged count where the selection no longer changes the house best
+packing, or would change it to a packing other than the one staged, and on a count
+staged for want of a writer that the writer can write, or the reverse.
 `default_drawings --check-state` fails while `PENDING_ALLOWED` defers the runs of a
-witness whose house has moved, whichever import moved it.
-Each entry is a corrected witness’s, and `default_drawings.CORRECTED` names the witness
-it replaced, by its source, path, revision and exact side.
+witness whose packing is no longer its count’s house best packing, whichever import
+replaced it. Each entry is a corrected witness’s, and `default_drawings.CORRECTED` names
+the witness it replaced, by its source, path, revision and exact side.
 The records tier holds that to the record of the commit the change is built on
 (`--check-state --base-ref origin/main`, which reads its merge base): the base’s witness
 at the count must be the one named, the record’s must have its source and exact side,
 and it must be another witness only, by another path or revision, or, at a source that
 pins no revision, by another witness file.
-So a house moved by an adoption, a Kingbird catalogue intake, whose source key never
-changes, or an exact re-solve fails, whatever its entry declares (review C3 of #660).
-Once the base defers the count, the entry stands while the record’s witness keeps the
-base’s source and exact side, whatever a later change does to the witness’s file or path
-(review D1).
+So a deferral fails wherever an adoption, a Kingbird catalogue intake (whose source key
+never changes) or an exact re-solve has changed the count’s house best packing, whatever
+its entry declares (review C3 of #660). Once the base defers the count, the entry stands
+while the record’s witness keeps the base’s source and exact side, whatever a later
+change does to the witness’s file or path (review D1).
 
 ### Adopt a House, Then Regularize It
 
@@ -923,13 +948,18 @@ Most supporting work belongs at S1 or S2; choose a higher score only when the de
 contribution meets its anchor.
 Being public alone does not make a change noteworthy.
 
-| Label | Delivered contribution | Examples |
-| --- | --- | --- |
-| `S1` | Bookkeeping, internal documentation, planning or formatting only | Session closeout, a roadmap, changelog synchronization, prose reflow |
-| `S2` | A routine fix or refactor, custody or attribution work, modest UI refinement, ordinary maintenance or supporting prototype | Refreshing a source packet, correcting credit, adjusting spacing, preparing a vendor import or an internal prototype |
-| `S3` | A distinct noteworthy new result, substantive public explanation, verification or policy, key tooling, or meaningful artifact delivery | A new S3 result, a substantive proof explanation, a reproducible verification tool, a useful new paper or certificate delivery |
-| `S4` | A major delivered capability or site restructure, or a substantial new result | A complete regularization capability, a major site reorganization, a new S4 result |
-| `S5` | A landmark mathematical contribution or major resolution | A new S5 result establishing an important previously open case |
+| Label | Delivered contribution | Short | Examples |
+| --- | --- | --- | --- |
+| `S1` | Bookkeeping, internal documentation, planning or formatting only | Minor housekeeping or internal documentation | Session closeout, a roadmap, changelog synchronization, prose reflow |
+| `S2` | A routine fix or refactor, custody or attribution work, modest UI refinement, ordinary maintenance or supporting prototype | Routine engineering, maintenance or internal reliability | Refreshing a source packet, correcting credit, adjusting spacing, preparing a vendor import or an internal prototype |
+| `S3` | A distinct noteworthy new result, substantive public explanation, verification or policy, key tooling, or meaningful artifact delivery | Distinct noteworthy result, explanation, verification, policy or key usable tooling | A new S3 result, a substantive proof explanation, a reproducible verification tool, a useful new paper or certificate delivery |
+| `S4` | A major delivered capability or site restructure, or a substantial new result | Substantial result or major public project capability | A complete regularization capability, a major site reorganization, a new S4 result |
+| `S5` | A landmark mathematical contribution or major resolution | Landmark mathematical advance or major resolution | A new S5 result establishing an important previously open case |
+
+The Short column is each label’s description on GitHub.
+It is also what a News meter and the archive’s S buttons say a level means
+(`render_changelog.news_significance_meanings`); a result’s meter keeps the result
+ladder in `epistemics.md`.
 
 A new registered result and its announcement inherit that result’s actual S score.
 An incidental reference to a result does not raise the PR’s score.
@@ -1006,6 +1036,15 @@ Preserve the source’s decimal print as a quote and the earlier certificate as 
 when a tighter reported packing supersedes it.
 Inspect representative desktop and mobile views for cropped drawings, missing source
 credit or unreadable labels.
+
+Last, once the owner has given the word, re-date the branch’s new register entries to
+the merge day.
+The branch’s last two commits are the stamp, `uv run --frozen --all-extras
+--group dev python -m devtools.stamp_landed --apply` from `packing/`, which sets
+`landed` on every entry `origin/main` lacks to today in UTC, and its re-pin, `python -m
+devtools.release_pin --update`. If `main` moves, or the merge slips past midnight UTC,
+run both again after the re-merge: the stamp re-dates the same entries.
+`landed` is the day of the stamp, so the stamp is the last step before the merge.
 
 Synchronize the owning beads to the native `tbd-sync` branch before clearing fallback
 outbox exports.

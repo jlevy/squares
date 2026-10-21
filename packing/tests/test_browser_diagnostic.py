@@ -86,6 +86,7 @@ def test_source_and_symlinked_artifact_paths_are_refused_before_writing(
     assert not list(source.iterdir())
 
 
+@pytest.mark.pool_heavy
 def test_timeout_keeps_raw_output_and_unfinished_phase_bound_to_actual_head(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

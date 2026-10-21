@@ -1,0 +1,24 @@
+format: intake-ledger-starts-v2
+read_at_main: d167d4b86ec46f9af6fb37591794cecc3b31eb64
+counts:
+- n: 183
+  members:
+  - label: 'record [Kingbird], '
+    kind: record
+    holders: '[Kingbird]'
+    model: exact
+    low: '14'
+    high: '14'
+    open_low: false
+    open_high: false
+    shown: '14.000000000000'
+    decide: ''
+    lanes:
+    - - reported
+      - '14.0'
+      - '14'
+      - ''
+    - - verified
+      - '14'
+      - '14'
+      - ''

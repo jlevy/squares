@@ -1,0 +1,9 @@
+START 2026-10-19T21:35:59Z load=25.18 22.77 21.16 cmd: uv run --frozen --all-extras --group dev python -I /tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/programs/third_route_1019.py --json resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/outputs/third-route-2026-10-19.json --upstream /dev/shm/rv-evand-work/custody
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+#669 n155: passed=True pairs=11935 measured=575 wall=5.000e-21 distance=1.000e-20 controls=6/6 receipt_input=True claim=True print=True 59.46 s
+#674 n229 opening: passed=True pairs=26106 measured=851 wall=5.010e-13 distance=9.997e-13 controls=6/6 receipt_input=True claim=True print=True 88.35 s
+#674 n229 update: passed=True pairs=26106 measured=850 wall=6.005e-13 distance=1.202e-12 controls=6/6 receipt_input=True claim=True print=True 65.96 s
+#659 n236: passed=True pairs=27730 measured=851 wall=5.000e-21 distance=1.000e-20 controls=6/6 receipt_input=True claim=True print=True 47.82 s
+#664 n271: passed=True pairs=36585 measured=1018 wall=5.000e-21 distance=1.000e-20 controls=6/6 receipt_input=True claim=True print=True 76.54 s
+5 certificates, problems: none
+END 2026-10-19T21:41:38Z exit=0 wall=338.818444106s load=20.56 20.77 20.85

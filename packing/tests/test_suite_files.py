@@ -7,6 +7,8 @@ import os
 import random
 import subprocess
 import sys
+from collections.abc import Iterator
+from contextlib import ExitStack
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
@@ -601,7 +603,21 @@ _PROBE_FILES = {
 }
 
 
+def _reap_probe(process: subprocess.Popen[str]) -> None:
+    if process.poll() is None:
+        process.kill()
+    process.communicate(timeout=60)
+
+
+@pytest.fixture
+def probe_scope() -> Iterator[ExitStack]:
+    # Own every sibling, including probes an earlier assertion never reaches.
+    with ExitStack() as probes:
+        yield probes
+
+
 def _probe(
+    probes: ExitStack,
     tmp_path: Path,
     *arguments: str,
     rootdir: Path | None = None,
@@ -610,7 +626,7 @@ def _probe(
     """Start one pytest run under the plugin; the runs below overlap to stay cheap."""
     rootdir = tmp_path if rootdir is None else rootdir
     test_root = tmp_path / "suite" if test_root is None else test_root
-    return subprocess.Popen(
+    process = subprocess.Popen(
         [
             sys.executable,
             "-m",
@@ -640,6 +656,8 @@ def _probe(
             "PYTHONPATH": str(PROJECT_ROOT),
         },
     )
+    probes.callback(_reap_probe, process)
+    return process
 
 
 def _finish(process: subprocess.Popen[str]) -> tuple[int, str]:
@@ -647,8 +665,53 @@ def _finish(process: subprocess.Popen[str]) -> tuple[int, str]:
     return process.returncode, output
 
 
+@pytest.mark.pool_heavy
+@pytest.mark.parametrize("failure", ["timeout", "assertion"])
+def test_a_failed_probe_scope_reaps_every_launched_sibling(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
+) -> None:
+    module = tmp_path / "test_waits.py"
+    module.write_text(
+        "import threading\n\ndef test_waits():\n    threading.Event().wait()\n",
+        encoding="utf-8",
+    )
+    processes: list[subprocess.Popen[str]] = []
+    expected = subprocess.TimeoutExpired if failure == "timeout" else AssertionError
+
+    def abandon_probes() -> None:
+        with ExitStack() as probes:
+            processes.extend(_probe(probes, tmp_path, test_root=module) for _ in range(2))
+            assert all(process.poll() is None for process in processes)
+            if failure == "assertion":
+                raise AssertionError("abandon unfinished probes")
+
+            def time_out(*, timeout: int) -> tuple[str, None]:
+                raise subprocess.TimeoutExpired(processes[0].args, timeout)
+
+            # Inject the deadline boundary without waiting for the real 60s cap.
+            with monkeypatch.context() as patch:
+                patch.setattr(processes[0], "communicate", time_out)
+                _finish(processes[0])
+
+    try:
+        with pytest.raises(expected):
+            abandon_probes()
+        for process in processes:
+            assert process.returncode is not None
+            assert process.returncode != 0
+            assert process.stdout is not None
+            assert process.stdout.closed
+    finally:
+        # Keep a failing cleanup regression from leaking its own negative controls.
+        for process in processes:
+            if process.poll() is None:
+                process.kill()
+            process.communicate(timeout=60)
+
+
+@pytest.mark.pool_heavy
 def test_the_plugin_collects_each_file_in_exactly_one_shard_and_reports_its_cost(
-    tmp_path: Path,
+    tmp_path: Path, probe_scope: ExitStack
 ) -> None:
     """End to end through pytest: collection filtered per shard, and the report written.
 
@@ -678,6 +741,7 @@ def test_the_plugin_collects_each_file_in_exactly_one_shard_and_reports_its_cost
     reports = [tmp_path / f"report-{index}.json" for index in (1, 2)]
     runs = [
         _probe(
+            probe_scope,
             tmp_path,
             f"--suite-shard={index}/2",
             f"--suite-file-costs={record}",
@@ -685,12 +749,13 @@ def test_the_plugin_collects_each_file_in_exactly_one_shard_and_reports_its_cost
         )
         for index, report in zip((1, 2), reports, strict=True)
     ]
-    refused = _probe(tmp_path, "--suite-shard=1/3", f"--suite-file-costs={record}")
+    refused = _probe(probe_scope, tmp_path, "--suite-shard=1/3", f"--suite-file-costs={record}")
     everything = {suite_files.repository_path(suite / name) for name in _PROBE_FILES}
     shares = suite_files.unrecorded_by_shard(suite_files.load_costs(record), everything)
     assert [unrecorded for _assigned, unrecorded in shares] in ([0, 3], [1, 2], [2, 1], [3, 0])
     loudest = max((1, 2), key=lambda index: shares[index - 1][1])
     silenced = _probe(
+        probe_scope,
         tmp_path,
         f"--suite-shard={loudest}/2",
         f"--suite-file-costs={record}",
@@ -739,7 +804,10 @@ def test_the_plugin_collects_each_file_in_exactly_one_shard_and_reports_its_cost
     assert "PytestConfigWarning" not in output, output
 
 
-def test_the_report_uses_the_actual_location_for_a_test_outside_rootdir(tmp_path: Path) -> None:
+@pytest.mark.pool_heavy
+def test_the_report_uses_the_actual_location_for_a_test_outside_rootdir(
+    tmp_path: Path, probe_scope: ExitStack
+) -> None:
     rootdir = tmp_path / "root"
     rootdir.mkdir()
     external = tmp_path / "external/test_external.py"
@@ -748,6 +816,7 @@ def test_the_report_uses_the_actual_location_for_a_test_outside_rootdir(tmp_path
     report = tmp_path / "external-report.json"
 
     run = _probe(
+        probe_scope,
         tmp_path,
         f"--test-file-costs={report}",
         rootdir=rootdir,
@@ -986,16 +1055,27 @@ def test_local_admission_command_updates_only_after_complete_validation(
     assert costs_path.read_bytes() == admitted
 
 
-def test_cost_plugin_records_actual_whole_module_scope_and_filtering(tmp_path: Path) -> None:
+@pytest.mark.pool_heavy
+def test_cost_plugin_records_actual_whole_module_scope_and_filtering(
+    tmp_path: Path, probe_scope: ExitStack
+) -> None:
     module = tmp_path / "test_scope.py"
     module.write_text(_PROBE_FILES["test_alpha.py"], encoding="utf-8")
     whole_path, filtered_path, node_path = [
         tmp_path / f"{name}.json" for name in ("whole", "filtered", "node")
     ]
     runs = [
-        _probe(tmp_path, f"--test-file-costs={whole_path}", test_root=module),
-        _probe(tmp_path, f"--test-file-costs={filtered_path}", "-k", "one", test_root=module),
+        _probe(probe_scope, tmp_path, f"--test-file-costs={whole_path}", test_root=module),
         _probe(
+            probe_scope,
+            tmp_path,
+            f"--test-file-costs={filtered_path}",
+            "-k",
+            "one",
+            test_root=module,
+        ),
+        _probe(
+            probe_scope,
             tmp_path,
             f"--test-file-costs={node_path}",
             test_root=Path(str(module) + "::test_one"),
@@ -1018,8 +1098,9 @@ def test_cost_plugin_records_actual_whole_module_scope_and_filtering(tmp_path: P
     assert node["requested_files"] == [name + "::test_one"]
 
 
+@pytest.mark.pool_heavy
 def test_local_admission_refuses_a_real_collection_override_that_hides_a_failure(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, probe_scope: ExitStack
 ) -> None:
     monkeypatch.setenv("GITHUB_RUN_ID", "hosted-outer-test")
     module = tmp_path / "packing/tests/test_probe.py"
@@ -1029,6 +1110,7 @@ def test_local_admission_refuses_a_real_collection_override_that_hides_a_failure
     )
     report_path = tmp_path / "filtered-collection.json"
     run = _probe(
+        probe_scope,
         tmp_path,
         f"--test-file-costs={report_path}",
         "-o",
@@ -1053,6 +1135,7 @@ def test_local_admission_refuses_a_real_collection_override_that_hides_a_failure
         )
 
 
+@pytest.mark.pool_heavy
 @pytest.mark.parametrize(
     ("option", "control"),
     [
@@ -1062,7 +1145,11 @@ def test_local_admission_refuses_a_real_collection_override_that_hides_a_failure
     ],
 )
 def test_local_admission_refuses_real_nonexecution_modes(
-    option: str, control: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    option: str,
+    control: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    probe_scope: ExitStack,
 ) -> None:
     monkeypatch.setenv("GITHUB_RUN_ID", "hosted-outer-test")
     module = tmp_path / "test_unexecuted.py"
@@ -1071,6 +1158,7 @@ def test_local_admission_refuses_real_nonexecution_modes(
     )
     report_path = tmp_path / "unexecuted.json"
     run = _probe(
+        probe_scope,
         tmp_path,
         "-c",
         str(PROJECT_ROOT / "pyproject.toml"),

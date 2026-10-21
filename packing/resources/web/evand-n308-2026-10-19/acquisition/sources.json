@@ -1,0 +1,102 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-20T17:20Z",
+  "git_scope": "Blobless clone of evand/square-packing and a sparse checkout of the issue #689 pin bc0708f, the commit that adds the eight s308_d308 files under search/packer/candidates/. All eight are retained: the certificate the claim rests on (s308_d308.cert), its 80-digit KKT point, the binary64 input it was solved from, the solver's report, the prior-record summary, the same-side regularized view with its report, and the source's comparison with #489's packing; with the licence, credits and the format and packer READMEs. The two source checkers, the exact solver and the basin explorer are pinned by digest against the identical copies the n183 packet retains, and the packer log, chained explorer and morph walk by digest only. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-n308-2026-10-19",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "bc0708fc75c84cffd241e1901c71fbdd120542a3",
+      "source_commit": "bc0708fc75c84cffd241e1901c71fbdd120542a3",
+      "committed_utc": "2026-10-19T22:41:02Z",
+      "git_tree": "e5c826d0c667fef3abbff3820d5c91b800c25d7a",
+      "archived_path": "packing/resources/web/evand-n308-2026-10-19/source",
+      "subtree_manifest": "packing/resources/web/evand-n308-2026-10-19/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "README.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/exact/exactsolve.py",
+        "search/packer/README.md",
+        "search/packer/PACKER.md",
+        "search/packer/explore.py",
+        "search/packer/chain.py",
+        "search/packer/landscape/morph.py",
+        "search/packer/candidates/s308_d308.cert",
+        "search/packer/candidates/s308_d308.exact.txt",
+        "search/packer/candidates/s308_d308.input.txt",
+        "search/packer/candidates/s308_d308.json",
+        "search/packer/candidates/s308_d308_prior.json",
+        "search/packer/candidates/s308_d308_regularized.cert",
+        "search/packer/candidates/s308_d308_regularized.json",
+        "search/packer/candidates/s308_d308_vs_prior.json"
+      ],
+      "subtree_file_count": 20,
+      "subtree_total_bytes": 906877,
+      "retained_file_count": 13,
+      "retained_total_bytes": 309168,
+      "compressed": [
+        "source/search/packer/candidates/s308_d308_vs_prior.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "search/exact/exactsolve.py",
+          "bytes": 62041,
+          "sha256": "ca32d01fea8ca125bb4a3c26cfcfd2bcbc2c1ecf99e140be08662d327d589111",
+          "reason": "Numerical high-precision certificate producer, byte-identical to the copy the n183 packet retains at 3a9948c; a replay consumes the completed certificate without this solver or its dependencies.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/exactsolve.py"
+        },
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two standalone exact checkers, byte-identical to the copies the n183 packet retains at 3a9948c; never executed by this acquisition.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two standalone exact checkers, byte-identical to the copies the n183 packet retains at 3a9948c; never executed by this acquisition.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py"
+        },
+        {
+          "path": "search/packer/PACKER.md",
+          "bytes": 447273,
+          "sha256": "69d581c375649c159debb8c378d890b5d1c89d83a6560b0dafbd445d7793f92b",
+          "reason": "The packer's chronological working log, 447,273 bytes of general search history; pinned for provenance."
+        },
+        {
+          "path": "search/packer/chain.py",
+          "bytes": 24034,
+          "sha256": "a50d4d3eea0c8eaf4cf1096129217008bfb7d549f0ff3fca37e62752f8a94b90",
+          "reason": "The chained explorer the issue names for the first lineage step; numerical discovery code, pinned for provenance and not executed."
+        },
+        {
+          "path": "search/packer/explore.py",
+          "bytes": 49031,
+          "sha256": "86e2b656e3dc88b7c84b45d4c6b9350e5a18a1fb9d6194f9bbd94484e686decd",
+          "reason": "Numerical basin explorer used for discovery, byte-identical to the copy the n183 packet retains at 3a9948c; not required by either standalone exact checker.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/explore.py"
+        },
+        {
+          "path": "search/packer/landscape/morph.py",
+          "bytes": 8828,
+          "sha256": "0531c42a76336b208a277d90ab763583732874d6496f20d512adc4bbabe476d0",
+          "reason": "The feasible-step morph walk the issue names; a numerical heuristic, pinned for provenance and not executed."
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md states Claude (Anthropic) under human direction, no peer review; the pinned commit names Claude Opus 5.5 as co-author and says the commit and push were approved by Evan Daniel. Issue #689 asks that Nate Chaoweeraprasit's (itsnaka's) s(307) packing (#481) be credited as the ultimate start.",
+      "claims": [
+        "Issue #689 reports s(308) <= 17.997149121271, the exact rational side 3599429824254181747030632150463/200000000000000000000000000000 = 17.997149121270908735153160752315 of search/packer/candidates/s308_d308.cert rounded up at 12 places, 1.12e-3 below the register's 17.998269879526; it prints the SHA-256 of s308_d308.cert and of s308_d308_regularized.cert, the same packing at the same side regularized for display.",
+        "The issue reports a KKT point at 80 digits with exact side S* = 17.997149121270908734973..., a local minimum of the side strict modulo 47 exact flat motions, no corner-corner MILP descent, 112 wall and 1604 square-square contact equations, 242 corner-corner contacts, 5 rattlers and 102 tilted squares (97 load-bearing) at 17.2 to 21.3 degrees, in the family of #484 and #489 (mirrored) with 8 fewer tilted squares. These are numerical evidence at 80 digits, as the issue says, not interval proofs.",
+        "The issue says the packing is not a refinement of #489: matched square by square over the 8 box symmetries, 295 load-bearing squares move by more than 1e-4 (at most 0.706), no tilt angle is shared, and #489 has 111 tilted squares and no rattlers; and that it does not descend from #489 or from Kevin Fang's #484.",
+        "The issue gives the lineage: on 14 October the chained explorer inserted one square into Nate Chaoweeraprasit's s(307) packing (#481), and explorer moves at 308 reached a stored non-record packing at 17.998946; on 19 October one of six diverse restarts from stored 308 packings reached 17.9971491213 in 710 s, twelve further 40-minute runs stayed at that side, and exactsolve.py certified it. It asks that #481's s(307) packing be credited as the ultimate start.",
+        "The author's two standard-library exact checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), are reported to accept both files; they share an author and the certificate format. No closed form, interval proof of local optimality or optimality is claimed."
+      ]
+    }
+  ]
+}

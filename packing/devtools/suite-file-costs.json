@@ -543,6 +543,7 @@
     "packing/tests/test_regression_diagnostics.py": 0.012,
     "packing/tests/test_regularize_axis_components.py": 0.339,
     "packing/tests/test_release.py": 0.689,
+    "packing/tests/test_release_components.py": 0.01,
     "packing/tests/test_release_pin.py": 0.146,
     "packing/tests/test_render_angle_hue_registry.py": 0.006,
     "packing/tests/test_render_colors.py": 2.935,
@@ -580,6 +581,7 @@
     "packing/tests/test_result_status.py": 10.354,
     "packing/tests/test_results_headline.py": 1.352,
     "packing/tests/test_results_register.py": 61.247,
+    "packing/tests/test_results_rollup.py": 7.94,
     "packing/tests/test_retained_data.py": 1.194,
     "packing/tests/test_retained_json.py": 0.745,
     "packing/tests/test_retained_json_layout.py": 0.095,
@@ -645,6 +647,7 @@
     "packing/tests/test_snapshot_link_consumers.py": 0.112,
     "packing/tests/test_soundness_perimeter.py": 0.045,
     "packing/tests/test_source_coverage.py": 1.367,
+    "packing/tests/test_source_formal_verification.py": 1.131,
     "packing/tests/test_source_supersession.py": 0.007,
     "packing/tests/test_squish_receipt_binding.py": 0.524,
     "packing/tests/test_squish_receipt_retention.py": 3.672,
@@ -653,8 +656,10 @@
     "packing/tests/test_squish_upper_bound_packets.py": 23.232,
     "packing/tests/test_squish_upper_bound_receipts.py": 3.216,
     "packing/tests/test_sqverify_fast_census.py": 9.778,
+    "packing/tests/test_sqverify_fast_census_reporting.py": 0.111,
     "packing/tests/test_stage_evand_bentz4_lean.py": 2.172,
     "packing/tests/test_stage_evand_bentz_lean.py": 1.239,
+    "packing/tests/test_stamp_landed.py": 0.645,
     "packing/tests/test_state_ai_assistance.py": 0.29,
     "packing/tests/test_static_site_content.py": 3.403,
     "packing/tests/test_stratify_n17_certified_residue.py": 0.051,
@@ -695,6 +700,7 @@
     "packing/tests/test_upper_bound_reports_606_70a033f.py": 26.528,
     "packing/tests/test_upper_bound_reports_607.py": 19.846,
     "packing/tests/test_upper_bound_reports_622.py": 0.963,
+    "packing/tests/test_upper_bound_reports_689_694.py": 0.828,
     "packing/tests/test_upper_bound_reports_fang_direct.py": 2.594,
     "packing/tests/test_upper_bound_reports_pingyou_1012.py": 10.588,
     "packing/tests/test_validation_cli.py": 27.688,
@@ -801,15 +807,24 @@
       "method": "successful-unsharded-unfiltered-whole-module-local-reports",
       "aggregation": "per-file-geometric-mean",
       "files": [
-        "packing/tests/test_contributor_occurrences.py",
-        "packing/tests/test_contributors.py",
-        "packing/tests/test_render_contributors.py"
+        "packing/tests/test_results_rollup.py",
+        "packing/tests/test_stamp_landed.py"
       ],
       "reports": [
         {
-          "report": "packing/devtools/suite-file-cost-admissions/contributor-profiles-2026-10-14.json",
+          "report": "packing/devtools/suite-file-cost-admissions/results-overview-landed-2026-10-14-run1.json",
           "provenance": {},
-          "tests": 98
+          "tests": 22
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/results-overview-landed-2026-10-14-run2.json",
+          "provenance": {},
+          "tests": 22
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/results-overview-landed-2026-10-14-run3.json",
+          "provenance": {},
+          "tests": 22
         }
       ]
     },
@@ -943,6 +958,78 @@
           "report": "packing/devtools/suite-file-cost-admissions/pingyou-pr622-2026-10-16.json",
           "provenance": {},
           "tests": 7
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_source_formal_verification.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/formal-proof-rubric-645-2026-10-16.json",
+          "provenance": {},
+          "tests": 47
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_sqverify_fast_census_reporting.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/fine-net-reporting-446-2026-10-19.json",
+          "provenance": {},
+          "tests": 7
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_release_components.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/release-components-446-2026-10-19.json",
+          "provenance": {},
+          "tests": 6
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_689_694.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-689-694-2026-10-20.json",
+          "provenance": {},
+          "tests": 8
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_contributor_occurrences.py",
+        "packing/tests/test_contributors.py",
+        "packing/tests/test_render_contributors.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/contributor-profiles-2026-10-14.json",
+          "provenance": {},
+          "tests": 98
         }
       ]
     },

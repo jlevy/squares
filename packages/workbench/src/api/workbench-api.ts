@@ -383,7 +383,7 @@ export interface AtlasIntegration {
   warning: "below-adaptive-stability-bound" | null;
 }
 
-/** One cached trajectory, reported. */
+/** One trajectory, cached (`physics`) or built afresh (`measurePhysics`), reported. */
 export interface AtlasPhysics {
   pair: number;
   n: number;
@@ -392,7 +392,7 @@ export interface AtlasPhysics {
   bodies: number;
   steps: number;
   ms: number;
-  /** Bytes in every unique retained typed-array buffer for this cached trajectory. */
+  /** Bytes in every unique retained typed-array buffer for this trajectory. */
   bytes: number;
   maxSpeedPerMove: number;
   maxPenetration: number;
@@ -734,6 +734,13 @@ export interface AtlasTransitions {
   seekSequence(seconds: number): void;
   /** Run (or fetch from the cache) one trajectory and report it, without changing the stage. */
   physics(index: number, style?: AtlasStyle, mode?: AtlasSimMode): AtlasPhysics;
+  /**
+   * Build one trajectory from scratch and report it as `physics` does, without changing the stage.
+   *
+   * The cache is neither read nor filled, so every call times the build again where `physics`
+   * hands a repeat the first build's `ms`. The trajectory is the one `physics` would cache.
+   */
+  measurePhysics(index: number, style?: AtlasStyle, mode?: AtlasSimMode): AtlasPhysics;
 
   // The whole sequence back to back, and the jump to a given n.
   playAll(): AtlasContinuous;

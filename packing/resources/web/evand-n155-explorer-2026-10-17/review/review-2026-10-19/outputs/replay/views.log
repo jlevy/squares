@@ -1,0 +1,6 @@
+START 2026-10-19T21:51:00Z load=26.00 21.65 20.85 cmd: uv run --frozen --all-extras --group dev python -I /tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/programs/views_1019.py --json resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/outputs/views-2026-10-19.json
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+#669 n155 {"passed": true, "same_side_as_certificate": true, "pairs": 11935, "measured_pairs": 573, "contacts": 0, "least_wall_clearance": "5.000e-21", "least_distance": "1.000e-20", "wall_seconds": 10.45}
+#659 n236 {"passed": true, "same_side_as_certificate": true, "pairs": 27730, "measured_pairs": 851, "contacts": 0, "least_wall_clearance": "5.000e-21", "least_distance": "1.000e-20", "wall_seconds": 11.66}
+#664 n271 {"passed": true, "same_side_as_certificate": true, "pairs": 36585, "measured_pairs": 1019, "contacts": 0, "least_wall_clearance": "5.000e-21", "least_distance": "1.000e-20", "wall_seconds": 18.1}
+END 2026-10-19T21:51:41Z exit=0 wall=41.056458883s load=24.95 21.93 20.98

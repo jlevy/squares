@@ -12,7 +12,13 @@ ratio of the page's text on it.
 
 The status chips take fills from the same scale, a rule each in the stylesheet naming
 a hue, a level and an optional chroma boost (`status_fills`, the owner, 2026-10-02,
-`think-c19o`), and are reported the same way.
+`think-c19o`), and are reported the same way. So are the topic chips that Results and
+News share (`topic_fills`, `think-z9za`): a topic on the scale, as the statuses are, and
+a bound topic as its bound's ink diluted into the page background. One fill keeps one
+meaning, so a topic's fill stands at least `DISTINCT` from every status's fill and
+every other topic's, unless it shares its meaning (`SHARED_FILLS`). The V and C rung
+fills are not compared: a rung chip names its rung, and the upper-bound topic stands
+0.020 from C1 in the dark theme, a pairing older than the topic palette.
 
 Significance is no chip since 2026-10-03 (`think-m3m4`): its rung is drawn in an ink of
 its own, `--site-significance`, on the page itself. The inks, that one and the
@@ -34,15 +40,18 @@ import re
 import sys
 from collections.abc import Sequence
 from dataclasses import dataclass
+from math import atan2, cos, degrees, hypot, radians, sin
 from pathlib import Path
 
 from devtools.overview_sections import rubric_levels
 from devtools.render_n11_lower_bounds_explainer import kpress_static
 from devtools.render_overview import SITE_CSS
+from devtools.site_topics import TOPICS
 from sqpack.render.color import (
     _linear_to_srgb,  # pyright: ignore[reportPrivateUsage]
     _maximum_chroma,  # pyright: ignore[reportPrivateUsage]
     _oklch_linear_rgb,  # pyright: ignore[reportPrivateUsage]
+    hex_oklch,
 )
 
 #: The ladders drawn as chips, in the order the site lists them. Significance, which the
@@ -63,6 +72,20 @@ _VAR = re.compile(r"var\((--[\w-]+)\)")
 #: A status chip's own rule: its attribute, a result's `status` or a case's
 #: `case-status`, and its word.
 _STATUS_RULE = re.compile(r'\.site-chip\[data-(status|case-status)="([a-z-]+)"\]')
+#: A topic named in a chip rule: a result's `kind` or a News post's `news-topic`.
+_TOPIC = re.compile(r'\[data-(?:kind|news-topic)="([a-z-]+)"\]')
+#: A bound topic's fill: its bound's ink mixed into the page background in OkLab.
+_BOUND_MIX = re.compile(
+    r"color-mix\(\s*in oklab,\s*var\((--site-bound-[a-z]+)\)\s+var\((--site-chip-tint)\),"
+    r"\s*var\(--kpress-doc-bg\)\s*\)"
+)
+_HEX = re.compile(r"#[0-9a-fA-F]{6}")
+#: The least OkLab distance between two fills that mean different things, about one
+#: just noticeable difference.
+DISTINCT = 0.02
+#: The fills that mean one thing on two chips: the Verification topic is a result's
+#: `reviewed` blue.
+SHARED_FILLS = frozenset({frozenset({"verification", "reviewed"})})
 
 Oklch = tuple[float, float, float]
 
@@ -273,6 +296,125 @@ def status_fills() -> list[Fill]:
     return report
 
 
+def _theme_values(name: str) -> dict[str, str]:
+    """A custom property's value in each theme: the dark theme's own, or the light one."""
+    declared: dict[str, str] = {}
+    for selector, tokens in _blocks(SITE_CSS):
+        if name in tokens:
+            declared.setdefault("dark" if _is_dark(selector) else "light", tokens[name])
+    if "light" not in declared:
+        raise SystemExit(f"site.css declares no {name}")
+    return {theme: declared.get(theme, declared["light"]) for theme in THEMES}
+
+
+def _parse_colour(value: str) -> Oklch:
+    """An `oklch()` or sRGB hex value as OkLCh."""
+    value = value.strip()
+    if match := _OKLCH.fullmatch(value):
+        lightness, chroma, hue = (float(part) for part in match.groups())
+        return (lightness / 100, chroma, hue)
+    if _HEX.fullmatch(value):
+        return hex_oklch(value)
+    raise SystemExit(f"site.css gives a colour this tool cannot read: {value}")
+
+
+def _oklab(colour: Oklch) -> tuple[float, float, float]:
+    lightness, chroma, hue = colour
+    return (lightness, chroma * cos(radians(hue)), chroma * sin(radians(hue)))
+
+
+def distance(first: Fill, second: Fill) -> float:
+    """The OkLab distance of two fills, where about 0.02 is a just noticeable difference."""
+    return hypot(
+        *(
+            a - b
+            for a, b in zip(
+                _oklab((first.lightness, first.chroma, first.hue)),
+                _oklab((second.lightness, second.chroma, second.hue)),
+                strict=True,
+            )
+        )
+    )
+
+
+def topic_fills() -> list[Fill]:
+    """Every topic chip with a fill of its own in each theme, its key as the `rung`: a
+    topic on the scale at its rule's `--rung-level` and `--rung-hue`, as `status_fills`
+    reads a status, or a bound topic's ink mixed into the page background at the chip
+    tint. A topic with no rule of its own keeps the plain chip and is not reported."""
+    themes = theme_tokens()
+    pages = page_colours()
+    rules: dict[str, dict[str, str]] = {}
+    for selectors, declared in _blocks(SITE_CSS):
+        for selector in (part.strip() for part in selectors.split(",")):
+            if selector.startswith(".site-chip"):
+                for topic in _TOPIC.findall(selector):
+                    rules.setdefault(topic, {}).update(declared)
+    report = []
+    for theme in THEMES:
+        tokens = themes[theme]
+        for topic in TOPICS:
+            declared = rules.get(topic, {})
+            if "--rung-level" in declared:
+                level = _number(declared["--rung-level"])
+                hue = _number(declared["--rung-hue"])
+                colour = (
+                    _number(tokens["--site-rung-base"])
+                    + level * _number(tokens["--site-rung-step"]),
+                    _number(tokens["--site-rung-chroma-base"])
+                    + level * _number(tokens["--site-rung-chroma-step"])
+                    + _number(declared.get("--rung-chroma-boost", "0")),
+                    hue,
+                )
+            elif mix := _BOUND_MIX.fullmatch(declared.get("--site-chip-fill", "").strip()):
+                ink = _oklab(_parse_colour(_theme_values(mix.group(1))[theme]))
+                page = _oklab(pages[theme]["bg"])
+                share = _number(_theme_values(mix.group(2))[theme])
+                lightness, a, b = (
+                    share * first + (1 - share) * second
+                    for first, second in zip(ink, page, strict=True)
+                )
+                colour = (lightness, hypot(a, b), round(degrees(atan2(b, a)) % 360, 1))
+            else:
+                continue
+            report.append(
+                Fill(
+                    theme=theme,
+                    rung=topic,
+                    lightness=colour[0],
+                    chroma=colour[1],
+                    hue=colour[2],
+                    hex=hex_colour(colour),
+                    in_gamut=colour[1] <= _maximum_chroma(colour[0], colour[2]),
+                    contrast=contrast(pages[theme]["text"], colour),
+                )
+            )
+    if not report:
+        raise SystemExit("site.css gives no topic chip a fill of its own")
+    return report
+
+
+def crowded(report: Sequence[Fill]) -> list[tuple[Fill, Fill, float]]:
+    """Each topic fill closer than `DISTINCT` to another fill of `report` in its theme
+    that means something else, or apart from one that shares its meaning, with their
+    distance. `main` passes the statuses and the topics."""
+    topics = {fill.rung for fill in report if fill.rung in TOPICS}
+    found = []
+    for first in report:
+        if first.rung not in topics:
+            continue
+        for second in report:
+            if second.theme != first.theme or second.rung == first.rung:
+                continue
+            if second.rung in topics and second.rung < first.rung:
+                continue
+            apart = distance(first, second)
+            shared = frozenset({first.rung, second.rung}) in SHARED_FILLS
+            if (apart > 1e-9) if shared else (apart < DISTINCT):
+                found.append((first, second, apart))
+    return found
+
+
 def inks() -> list[Fill]:
     """Every ink in each theme, its token as the `rung` and its contrast against the
     page's background: the value a theme's rule declares, or the light one where the
@@ -353,13 +495,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         raise SystemExit(__doc__)
     report = fills()
     statuses = status_fills()
+    topics = topic_fills()
     drawn = inks()
     print(markdown_table(report))
     print()
     print(markdown_table(statuses, "Status"))
     print()
+    print(markdown_table(topics, "Topic"))
+    print()
     print(ink_table(drawn))
-    report += statuses
+    report += statuses + topics
     pages = page_colours()
     for theme in THEMES:
         print(f"{theme}: text on the page background {contrast(*pages[theme].values()):.1f}:1")
@@ -371,7 +516,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"{'in' if fill.in_gamut else 'out of'} gamut, {fill.contrast:.2f}:1",
             file=sys.stderr,
         )
-    return 1 if failed else 0
+    close = crowded(statuses + topics)
+    for first, second, apart in close:
+        print(
+            f"{first.theme} {first.rung} and {second.rung}: {apart:.3f} apart in OkLab",
+            file=sys.stderr,
+        )
+    return 1 if failed or close else 0
 
 
 if __name__ == "__main__":

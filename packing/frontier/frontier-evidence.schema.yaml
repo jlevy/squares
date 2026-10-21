@@ -63,8 +63,12 @@ $defs:
         description: >-
           The hypotheses the proved theorem takes and does not itself prove, where the
           theorem is "H implies the claim": each with the evidence entries that discharge
-          it, a passing replay or audit here or a third party's replay retained here, or
-          none. With none the entry is a conditional theorem, verified only as the
+          it, a complete passing machine execution (exact, interval or proof-assistant,
+          never a published or audited proof) with its own premises discharged, or none.
+          A producer's admitted formal build can discharge verification; confirmation
+          requires execution beyond the producer throughout the premise chain. Every
+          discharge covers the theorem's scope; samples and cycles do not discharge.
+          With none the entry is a conditional theorem, verified only as the
           implication, and every view of it says so (devtools.render_evidence_inventory);
           a verified case bound may cite it only beside an entry that discharges each
           hypothesis (sqpack.assurance).
@@ -177,6 +181,13 @@ $defs:
         enum: [numerical-f64, numerical-multiprecision, interval-certified, exact-algebraic, published-proof, proof-audited, proof-assistant-checked, source-unspecified]
       performed_by:
         enum: [source-author, independent-external, repository, unknown-historical]
+        description: >-
+          Every confirming origin needs the actor it names: repository for replayed-here
+          and audited-here, independent-external for independently-external. For
+          proof-assistant execution, source-author also requires origin external, and a
+          build here is replayed-here: audited-here is refused, since reading another
+          party's build receipt is that build entry's external_review. Changing the
+          origin alone cannot turn the producer's execution into confirmation.
       relationship_to_generator:
         enum: [generator, same-implementation, shared-components, independent-implementation, not-applicable, unknown-historical]
         description: >-
@@ -247,6 +258,18 @@ $defs:
       tolerance: {type: string, minLength: 1}
       certificate: {type: string, minLength: 1}
       replay: {type: string, minLength: 1}
+      build_receipt:
+        type: string
+        minLength: 1
+        description: >-
+          Retained repository-relative receipt of a complete proof-assistant build.
+          Required with method proof-assistant-checked for every build this repository
+          did not run: the producer's own execution (origin external) and a third party's
+          (origin independently-external), each with its axioms_receipt, full coverage,
+          a scoped proof with an audit_record, and a qualifying read. A build or axiom
+          receipt records one execution, so entries of different actors never cite the
+          same one (sqpack.assurance). The scoped proof's audit_record assesses the receipt,
+          theorem, build pins and trust boundary.
       axioms_receipt:
         type: string
         minLength: 1

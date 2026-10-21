@@ -1,0 +1,48 @@
+format: intake-ledger-v1
+read_at_main: d167d4b86ec46f9af6fb37591794cecc3b31eb64
+read_on: '2026-10-19'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes: []
+reports:
+- report: evand/square-packing@3a9948c
+  url: https://github.com/evand/square-packing/tree/3a9948c781be668b1547cc2bf64a0d1e614f9bca/search/packer/candidates
+  kind: publication
+  holders: Evan Daniel
+  reported_at: '2026-10-19T05:20:24Z'
+  bead: think-xp0o
+  claims:
+  - n: 183
+    printed: '13.999580178737'
+    rounding: up
+    exact: 13999580178736252502081470897571/1000000000000000000000000000000
+    exact_from: packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert
+    first_committed: '2026-10-19T05:20:24Z'
+    new_packing:
+      source: https://github.com/jlevy/squares/issues/680
+      continues: Francisco Couzo's n182 packing, through a non-record explorer descendant
+        and insertion; a crossover mate was not logged.
+  note: 'Source publication and issue #680 are the same finite bound. Original and same-side
+    regularized display certificates are one claim. Numerical local-optimality and first-public
+    assertions are not certified here.'
+- report: '#680'
+  url: https://github.com/jlevy/squares/issues/680
+  kind: issue
+  holders: Evan Daniel
+  reported_at: '2026-10-19T05:24:01Z'
+  bead: think-xp0o
+  claims:
+  - n: 183
+    printed: '13.999580178737'
+    rounding: up
+    exact: 13999580178736252502081470897571/1000000000000000000000000000000
+    exact_from: packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert
+    first_committed: '2026-10-19T05:20:24Z'
+  note: The issue submits the source publication four minutes later; no second result is assigned
+    for the same bound.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

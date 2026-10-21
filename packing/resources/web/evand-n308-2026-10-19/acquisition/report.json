@@ -1,0 +1,85 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/689",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n308 2026-10-19]",
+  "report_evidence": "E-evand-689-n308-report",
+  "receipt_format": "evand-689-exact-replay-v1",
+  "witness_prefix": "W-evand-689-n",
+  "claim_limitations": "Complete bc0708f rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-20",
+  "read_at_main": "d588ad987bd8de53361d087b8961a7f2bf157c41",
+  "certificates": [
+    {
+      "n": 308,
+      "path": "search/packer/candidates/s308_d308.cert",
+      "format": "evand-cert",
+      "offered": "17.997149121271",
+      "first_committed": "2026-10-19T22:41:02Z",
+      "same_packing": []
+    }
+  ],
+  "requested": [
+    308
+  ],
+  "replayed": [
+    308
+  ],
+  "houses": [
+    {
+      "n": 308,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Evan Daniel, improved by PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "17.9982698795262558753",
+      "verified_value": "17.9982698795262558753",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 308,
+      "report": "T-141 (#489)",
+      "url": "https://github.com/jlevy/squares/issues/489",
+      "holders": "Evan Daniel, on Kevin Fang's two-wedge construction",
+      "result": "T-141",
+      "reader": "[Daniel record hunt 3 2026-10-10]"
+    },
+    {
+      "n": 308,
+      "report": "T-135 (#484)",
+      "url": "https://github.com/jlevy/squares/issues/484",
+      "holders": "Kevin Fang",
+      "result": "T-135",
+      "reader": "[Fang two-wedge certificates 2026-10-10]"
+    },
+    {
+      "n": 308,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk records 2026-10-14]"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's n308 certificate at bc0708f, issue689",
+    "headline": "Daniel's smaller n308 packing, started from Chaoweeraprasit's 307 packing, certified exactly",
+    "significance": 3,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept the certificate and its regularized view at the same side. The source reports a KKT local minimum strict modulo 47 exact flat motions, 242 corner-corner contacts with no corner-corner MILP descent, 5 rattlers and 102 tilted squares, in the family of #484 and #489 with 8 fewer tilted squares, and says it is not a refinement of #489: 295 load-bearing squares move by more than 1e-4 under its matching and no tilt angle is shared. Those are numerical evidence at 80 digits, as the source says, not proofs. No source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose chained explorer inserted one square into the register's s(307) packing, Nate Chaoweeraprasit's (itsnaka's) #481 packing (T-136), and whose basin explorer descended from there to this packing; the issue asks that #481's s(307) packing be credited as the ultimate start, and says the packing does not descend from Kevin Fang's #484 or Daniel's #489. The search, the checks and the request were done with Claude (Claude Code) under Evan Daniel's direction.",
+    "next_rung": "Independently review the retained replay, then adopt at 308.",
+    "bead": "think-h8jm",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Chaoweeraprasit, Levy",
+      "short_credit": "Daniel after Chaoweeraprasit, Levy",
+      "note": "One complete exact certificate at bc0708fc75c84cffd241e1901c71fbdd120542a3, s(308) <= 3599429824254181747030632150463/(2*10^29), found by the author's chained and basin explorers from one-square insertion into itsnaka's #481 s(307) packing, which the issue asks to be credited as the ultimate start. A same-side regularized view and the source's comparison with #489 are retained beside it. MIT-licensed; Claude assistance disclosed. KKT and local-minimum statements are the author's numerical evidence; no local or global optimality claim."
+    }
+  }
+}

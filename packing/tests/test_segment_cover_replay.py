@@ -9,7 +9,9 @@ from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
+import pytest
 
+from devtools import segment_cover_replay
 from devtools.segment_cover_replay import (
     DELTA,
     exact_certify_leaf,
@@ -20,6 +22,9 @@ from devtools.segment_cover_replay import (
 )
 
 PACKING = Path(__file__).resolve().parents[1]
+# think-fzzu: the broad gate exhausted 10s before JSON; quiet execution took 0.49s.
+# Allow both 10s provenance queries and 5s of interpreter startup.
+_INCOMPLETE_CLI_TIMEOUT_SECONDS = 25
 
 
 def test_retained_e4_cover_rechecks_every_leaf_and_discard() -> None:
@@ -59,6 +64,7 @@ def test_exact_geometry_keeps_the_recorded_escape_and_segment_crossing() -> None
     assert not exact_discard_box(np.array([0, 0, 0, 2, 0, 2], dtype=float))
 
 
+@pytest.mark.pool_heavy
 def test_cli_refuses_an_incomplete_cover_and_invalid_budget(tmp_path: Path) -> None:
     output = tmp_path / "cover.json"
     command = [
@@ -76,7 +82,7 @@ def test_cli_refuses_an_incomplete_cover_and_invalid_budget(tmp_path: Path) -> N
         check=False,
         capture_output=True,
         text=True,
-        timeout=10,
+        timeout=_INCOMPLETE_CLI_TIMEOUT_SECONDS,
     )
     assert incomplete.returncode == 1
     result = json.loads(incomplete.stdout)
@@ -96,3 +102,22 @@ def test_cli_refuses_an_incomplete_cover_and_invalid_budget(tmp_path: Path) -> N
     )
     assert invalid.returncode == 2
     assert json.loads(invalid.stdout)["status"] == "error"
+
+
+def test_a_provenance_timeout_cannot_publish_a_cover_result(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def git(command: list[str], **_options: object) -> str:
+        if command[1:] == ["rev-parse", "HEAD"]:
+            return "f" * 40
+        assert command[1:] == ["status", "--porcelain"]
+        raise subprocess.TimeoutExpired(command, timeout=10)
+
+    monkeypatch.setattr(subprocess, "check_output", git)
+    output = tmp_path / "cover.json"
+    assert segment_cover_replay.main(["--node-budget", "1", "--output", str(output)]) == 2
+    result = json.loads(capsys.readouterr().out)
+    assert result == json.loads(output.read_text())
+    assert result["status"] == "error"
+    assert result["proved"] is False
+    assert "timed out" in result["error"]

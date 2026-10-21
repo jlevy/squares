@@ -7,7 +7,7 @@ urls:
   generator: devtools.site_urls:write_crawl_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: about.html
   canonical: about.html
@@ -15,7 +15,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: all-results.html
   canonical: results.html
@@ -23,7 +23,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: results.html
 - path: apple-touch-icon.png
@@ -32,7 +32,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: ascent-n1-100-poster.png
   canonical: ascent-n1-100-poster.png
@@ -40,7 +40,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:write
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: ascent-n1-324-poster.png
   canonical: ascent-n1-324-poster.png
@@ -48,7 +48,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:write
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: assets/images/*.{hash}.png
   canonical: ''
@@ -56,7 +56,7 @@ urls:
   generator: devtools.site_assets:shared
   producer: overview
   first_published: '2026-10-02'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
   pattern: assets/images/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.png
 - path: assets/{css,js,fonts}/*.{hash}.{ext}
@@ -65,7 +65,7 @@ urls:
   generator: devtools.site_assets:shared
   producer: shared
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
   pattern: assets/(?:css/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.css|js/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.js|fonts/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.woff2)
 - path: atlas.html
@@ -74,7 +74,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-1.svg
   canonical: atlas/house/n-1.svg
@@ -82,7 +82,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-10.svg
   canonical: atlas/house/n-10.svg
@@ -90,7 +90,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-100.svg
   canonical: atlas/house/n-100.svg
@@ -98,7 +98,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-101.svg
   canonical: atlas/house/n-101.svg
@@ -106,7 +106,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-102.svg
   canonical: atlas/house/n-102.svg
@@ -114,7 +114,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-103.svg
   canonical: atlas/house/n-103.svg
@@ -122,7 +122,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-104.svg
   canonical: atlas/house/n-104.svg
@@ -130,7 +130,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-105.svg
   canonical: atlas/house/n-105.svg
@@ -138,7 +138,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-106.svg
   canonical: atlas/house/n-106.svg
@@ -146,7 +146,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-107.svg
   canonical: atlas/house/n-107.svg
@@ -154,7 +154,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-108.svg
   canonical: atlas/house/n-108.svg
@@ -162,7 +162,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-109.svg
   canonical: atlas/house/n-109.svg
@@ -170,7 +170,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-11.svg
   canonical: atlas/house/n-11.svg
@@ -178,7 +178,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-110.svg
   canonical: atlas/house/n-110.svg
@@ -186,7 +186,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-111.svg
   canonical: atlas/house/n-111.svg
@@ -194,7 +194,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-112.svg
   canonical: atlas/house/n-112.svg
@@ -202,7 +202,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-113.svg
   canonical: atlas/house/n-113.svg
@@ -210,7 +210,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-114.svg
   canonical: atlas/house/n-114.svg
@@ -218,7 +218,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-115.svg
   canonical: atlas/house/n-115.svg
@@ -226,7 +226,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-116.svg
   canonical: atlas/house/n-116.svg
@@ -234,7 +234,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-117.svg
   canonical: atlas/house/n-117.svg
@@ -242,7 +242,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-118.svg
   canonical: atlas/house/n-118.svg
@@ -250,7 +250,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-119.svg
   canonical: atlas/house/n-119.svg
@@ -258,7 +258,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-12.svg
   canonical: atlas/house/n-12.svg
@@ -266,7 +266,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-120.svg
   canonical: atlas/house/n-120.svg
@@ -274,7 +274,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-121.svg
   canonical: atlas/house/n-121.svg
@@ -282,7 +282,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-122.svg
   canonical: atlas/house/n-122.svg
@@ -290,7 +290,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-123.svg
   canonical: atlas/house/n-123.svg
@@ -298,7 +298,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-124.svg
   canonical: atlas/house/n-124.svg
@@ -306,7 +306,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-125.svg
   canonical: atlas/house/n-125.svg
@@ -314,7 +314,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-126.svg
   canonical: atlas/house/n-126.svg
@@ -322,7 +322,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-127.svg
   canonical: atlas/house/n-127.svg
@@ -330,7 +330,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-128.svg
   canonical: atlas/house/n-128.svg
@@ -338,7 +338,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-129.svg
   canonical: atlas/house/n-129.svg
@@ -346,7 +346,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-13.svg
   canonical: atlas/house/n-13.svg
@@ -354,7 +354,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-130.svg
   canonical: atlas/house/n-130.svg
@@ -362,7 +362,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-131.svg
   canonical: atlas/house/n-131.svg
@@ -370,7 +370,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-132.svg
   canonical: atlas/house/n-132.svg
@@ -378,7 +378,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-133.svg
   canonical: atlas/house/n-133.svg
@@ -386,7 +386,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-134.svg
   canonical: atlas/house/n-134.svg
@@ -394,7 +394,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-135.svg
   canonical: atlas/house/n-135.svg
@@ -402,7 +402,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-136.svg
   canonical: atlas/house/n-136.svg
@@ -410,7 +410,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-137.svg
   canonical: atlas/house/n-137.svg
@@ -418,7 +418,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-138.svg
   canonical: atlas/house/n-138.svg
@@ -426,7 +426,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-139.svg
   canonical: atlas/house/n-139.svg
@@ -434,7 +434,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-14.svg
   canonical: atlas/house/n-14.svg
@@ -442,7 +442,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-140.svg
   canonical: atlas/house/n-140.svg
@@ -450,7 +450,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-141.svg
   canonical: atlas/house/n-141.svg
@@ -458,7 +458,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-142.svg
   canonical: atlas/house/n-142.svg
@@ -466,7 +466,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-143.svg
   canonical: atlas/house/n-143.svg
@@ -474,7 +474,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-144.svg
   canonical: atlas/house/n-144.svg
@@ -482,7 +482,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-145.svg
   canonical: atlas/house/n-145.svg
@@ -490,7 +490,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-146.svg
   canonical: atlas/house/n-146.svg
@@ -498,7 +498,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-147.svg
   canonical: atlas/house/n-147.svg
@@ -506,7 +506,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-148.svg
   canonical: atlas/house/n-148.svg
@@ -514,7 +514,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-149.svg
   canonical: atlas/house/n-149.svg
@@ -522,7 +522,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-15.svg
   canonical: atlas/house/n-15.svg
@@ -530,7 +530,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-150.svg
   canonical: atlas/house/n-150.svg
@@ -538,7 +538,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-151.svg
   canonical: atlas/house/n-151.svg
@@ -546,7 +546,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-152.svg
   canonical: atlas/house/n-152.svg
@@ -554,7 +554,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-153.svg
   canonical: atlas/house/n-153.svg
@@ -562,7 +562,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-154.svg
   canonical: atlas/house/n-154.svg
@@ -570,7 +570,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-155.svg
   canonical: atlas/house/n-155.svg
@@ -578,7 +578,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-156.svg
   canonical: atlas/house/n-156.svg
@@ -586,7 +586,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-157.svg
   canonical: atlas/house/n-157.svg
@@ -594,7 +594,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-158.svg
   canonical: atlas/house/n-158.svg
@@ -602,7 +602,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-159.svg
   canonical: atlas/house/n-159.svg
@@ -610,7 +610,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-16.svg
   canonical: atlas/house/n-16.svg
@@ -618,7 +618,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-160.svg
   canonical: atlas/house/n-160.svg
@@ -626,7 +626,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-161.svg
   canonical: atlas/house/n-161.svg
@@ -634,7 +634,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-162.svg
   canonical: atlas/house/n-162.svg
@@ -642,7 +642,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-163.svg
   canonical: atlas/house/n-163.svg
@@ -650,7 +650,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-164.svg
   canonical: atlas/house/n-164.svg
@@ -658,7 +658,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-165.svg
   canonical: atlas/house/n-165.svg
@@ -666,7 +666,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-166.svg
   canonical: atlas/house/n-166.svg
@@ -674,7 +674,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-167.svg
   canonical: atlas/house/n-167.svg
@@ -682,7 +682,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-168.svg
   canonical: atlas/house/n-168.svg
@@ -690,7 +690,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-169.svg
   canonical: atlas/house/n-169.svg
@@ -698,7 +698,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-17.svg
   canonical: atlas/house/n-17.svg
@@ -706,7 +706,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-170.svg
   canonical: atlas/house/n-170.svg
@@ -714,7 +714,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-171.svg
   canonical: atlas/house/n-171.svg
@@ -722,7 +722,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-172.svg
   canonical: atlas/house/n-172.svg
@@ -730,7 +730,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-173.svg
   canonical: atlas/house/n-173.svg
@@ -738,7 +738,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-174.svg
   canonical: atlas/house/n-174.svg
@@ -746,7 +746,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-175.svg
   canonical: atlas/house/n-175.svg
@@ -754,7 +754,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-176.svg
   canonical: atlas/house/n-176.svg
@@ -762,7 +762,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-177.svg
   canonical: atlas/house/n-177.svg
@@ -770,7 +770,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-178.svg
   canonical: atlas/house/n-178.svg
@@ -778,7 +778,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-179.svg
   canonical: atlas/house/n-179.svg
@@ -786,7 +786,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-18.svg
   canonical: atlas/house/n-18.svg
@@ -794,7 +794,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-180.svg
   canonical: atlas/house/n-180.svg
@@ -802,7 +802,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-181.svg
   canonical: atlas/house/n-181.svg
@@ -810,7 +810,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-182.svg
   canonical: atlas/house/n-182.svg
@@ -818,7 +818,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-183.svg
   canonical: atlas/house/n-183.svg
@@ -826,7 +826,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-184.svg
   canonical: atlas/house/n-184.svg
@@ -834,7 +834,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-185.svg
   canonical: atlas/house/n-185.svg
@@ -842,7 +842,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-186.svg
   canonical: atlas/house/n-186.svg
@@ -850,7 +850,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-187.svg
   canonical: atlas/house/n-187.svg
@@ -858,7 +858,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-188.svg
   canonical: atlas/house/n-188.svg
@@ -866,7 +866,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-189.svg
   canonical: atlas/house/n-189.svg
@@ -874,7 +874,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-19.svg
   canonical: atlas/house/n-19.svg
@@ -882,7 +882,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-190.svg
   canonical: atlas/house/n-190.svg
@@ -890,7 +890,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-191.svg
   canonical: atlas/house/n-191.svg
@@ -898,7 +898,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-192.svg
   canonical: atlas/house/n-192.svg
@@ -906,7 +906,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-193.svg
   canonical: atlas/house/n-193.svg
@@ -914,7 +914,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-194.svg
   canonical: atlas/house/n-194.svg
@@ -922,7 +922,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-195.svg
   canonical: atlas/house/n-195.svg
@@ -930,7 +930,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-196.svg
   canonical: atlas/house/n-196.svg
@@ -938,7 +938,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-197.svg
   canonical: atlas/house/n-197.svg
@@ -946,7 +946,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-198.svg
   canonical: atlas/house/n-198.svg
@@ -954,7 +954,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-199.svg
   canonical: atlas/house/n-199.svg
@@ -962,7 +962,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-2.svg
   canonical: atlas/house/n-2.svg
@@ -970,7 +970,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-20.svg
   canonical: atlas/house/n-20.svg
@@ -978,7 +978,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-200.svg
   canonical: atlas/house/n-200.svg
@@ -986,7 +986,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-201.svg
   canonical: atlas/house/n-201.svg
@@ -994,7 +994,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-202.svg
   canonical: atlas/house/n-202.svg
@@ -1002,7 +1002,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-203.svg
   canonical: atlas/house/n-203.svg
@@ -1010,7 +1010,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-204.svg
   canonical: atlas/house/n-204.svg
@@ -1018,7 +1018,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-205.svg
   canonical: atlas/house/n-205.svg
@@ -1026,7 +1026,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-206.svg
   canonical: atlas/house/n-206.svg
@@ -1034,7 +1034,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-207.svg
   canonical: atlas/house/n-207.svg
@@ -1042,7 +1042,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-208.svg
   canonical: atlas/house/n-208.svg
@@ -1050,7 +1050,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-209.svg
   canonical: atlas/house/n-209.svg
@@ -1058,7 +1058,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-21.svg
   canonical: atlas/house/n-21.svg
@@ -1066,7 +1066,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-210.svg
   canonical: atlas/house/n-210.svg
@@ -1074,7 +1074,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-211.svg
   canonical: atlas/house/n-211.svg
@@ -1082,7 +1082,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-212.svg
   canonical: atlas/house/n-212.svg
@@ -1090,7 +1090,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-213.svg
   canonical: atlas/house/n-213.svg
@@ -1098,7 +1098,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-214.svg
   canonical: atlas/house/n-214.svg
@@ -1106,7 +1106,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-215.svg
   canonical: atlas/house/n-215.svg
@@ -1114,7 +1114,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-216.svg
   canonical: atlas/house/n-216.svg
@@ -1122,7 +1122,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-217.svg
   canonical: atlas/house/n-217.svg
@@ -1130,7 +1130,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-218.svg
   canonical: atlas/house/n-218.svg
@@ -1138,7 +1138,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-219.svg
   canonical: atlas/house/n-219.svg
@@ -1146,7 +1146,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-22.svg
   canonical: atlas/house/n-22.svg
@@ -1154,7 +1154,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-220.svg
   canonical: atlas/house/n-220.svg
@@ -1162,7 +1162,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-221.svg
   canonical: atlas/house/n-221.svg
@@ -1170,7 +1170,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-222.svg
   canonical: atlas/house/n-222.svg
@@ -1178,7 +1178,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-223.svg
   canonical: atlas/house/n-223.svg
@@ -1186,7 +1186,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-224.svg
   canonical: atlas/house/n-224.svg
@@ -1194,7 +1194,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-225.svg
   canonical: atlas/house/n-225.svg
@@ -1202,7 +1202,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-226.svg
   canonical: atlas/house/n-226.svg
@@ -1210,7 +1210,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-227.svg
   canonical: atlas/house/n-227.svg
@@ -1218,7 +1218,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-228.svg
   canonical: atlas/house/n-228.svg
@@ -1226,7 +1226,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-229.svg
   canonical: atlas/house/n-229.svg
@@ -1234,7 +1234,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-23.svg
   canonical: atlas/house/n-23.svg
@@ -1242,7 +1242,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-230.svg
   canonical: atlas/house/n-230.svg
@@ -1250,7 +1250,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-231.svg
   canonical: atlas/house/n-231.svg
@@ -1258,7 +1258,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-232.svg
   canonical: atlas/house/n-232.svg
@@ -1266,7 +1266,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-233.svg
   canonical: atlas/house/n-233.svg
@@ -1274,7 +1274,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-234.svg
   canonical: atlas/house/n-234.svg
@@ -1282,7 +1282,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-235.svg
   canonical: atlas/house/n-235.svg
@@ -1290,7 +1290,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-236.svg
   canonical: atlas/house/n-236.svg
@@ -1298,7 +1298,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-237.svg
   canonical: atlas/house/n-237.svg
@@ -1306,7 +1306,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-238.svg
   canonical: atlas/house/n-238.svg
@@ -1314,7 +1314,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-239.svg
   canonical: atlas/house/n-239.svg
@@ -1322,7 +1322,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-24.svg
   canonical: atlas/house/n-24.svg
@@ -1330,7 +1330,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-240.svg
   canonical: atlas/house/n-240.svg
@@ -1338,7 +1338,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-241.svg
   canonical: atlas/house/n-241.svg
@@ -1346,7 +1346,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-242.svg
   canonical: atlas/house/n-242.svg
@@ -1354,7 +1354,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-243.svg
   canonical: atlas/house/n-243.svg
@@ -1362,7 +1362,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-244.svg
   canonical: atlas/house/n-244.svg
@@ -1370,7 +1370,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-245.svg
   canonical: atlas/house/n-245.svg
@@ -1378,7 +1378,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-246.svg
   canonical: atlas/house/n-246.svg
@@ -1386,7 +1386,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-247.svg
   canonical: atlas/house/n-247.svg
@@ -1394,7 +1394,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-248.svg
   canonical: atlas/house/n-248.svg
@@ -1402,7 +1402,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-249.svg
   canonical: atlas/house/n-249.svg
@@ -1410,7 +1410,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-25.svg
   canonical: atlas/house/n-25.svg
@@ -1418,7 +1418,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-250.svg
   canonical: atlas/house/n-250.svg
@@ -1426,7 +1426,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-251.svg
   canonical: atlas/house/n-251.svg
@@ -1434,7 +1434,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-252.svg
   canonical: atlas/house/n-252.svg
@@ -1442,7 +1442,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-253.svg
   canonical: atlas/house/n-253.svg
@@ -1450,7 +1450,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-254.svg
   canonical: atlas/house/n-254.svg
@@ -1458,7 +1458,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-255.svg
   canonical: atlas/house/n-255.svg
@@ -1466,7 +1466,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-256.svg
   canonical: atlas/house/n-256.svg
@@ -1474,7 +1474,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-257.svg
   canonical: atlas/house/n-257.svg
@@ -1482,7 +1482,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-258.svg
   canonical: atlas/house/n-258.svg
@@ -1490,7 +1490,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-259.svg
   canonical: atlas/house/n-259.svg
@@ -1498,7 +1498,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-26.svg
   canonical: atlas/house/n-26.svg
@@ -1506,7 +1506,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-260.svg
   canonical: atlas/house/n-260.svg
@@ -1514,7 +1514,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-261.svg
   canonical: atlas/house/n-261.svg
@@ -1522,7 +1522,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-262.svg
   canonical: atlas/house/n-262.svg
@@ -1530,7 +1530,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-263.svg
   canonical: atlas/house/n-263.svg
@@ -1538,7 +1538,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-264.svg
   canonical: atlas/house/n-264.svg
@@ -1546,7 +1546,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-265.svg
   canonical: atlas/house/n-265.svg
@@ -1554,7 +1554,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-266.svg
   canonical: atlas/house/n-266.svg
@@ -1562,7 +1562,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-267.svg
   canonical: atlas/house/n-267.svg
@@ -1570,7 +1570,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-268.svg
   canonical: atlas/house/n-268.svg
@@ -1578,7 +1578,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-269.svg
   canonical: atlas/house/n-269.svg
@@ -1586,7 +1586,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-27.svg
   canonical: atlas/house/n-27.svg
@@ -1594,7 +1594,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-270.svg
   canonical: atlas/house/n-270.svg
@@ -1602,7 +1602,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-271.svg
   canonical: atlas/house/n-271.svg
@@ -1610,7 +1610,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-272.svg
   canonical: atlas/house/n-272.svg
@@ -1618,7 +1618,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-273.svg
   canonical: atlas/house/n-273.svg
@@ -1626,7 +1626,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-274.svg
   canonical: atlas/house/n-274.svg
@@ -1634,7 +1634,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-275.svg
   canonical: atlas/house/n-275.svg
@@ -1642,7 +1642,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-276.svg
   canonical: atlas/house/n-276.svg
@@ -1650,7 +1650,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-277.svg
   canonical: atlas/house/n-277.svg
@@ -1658,7 +1658,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-278.svg
   canonical: atlas/house/n-278.svg
@@ -1666,7 +1666,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-279.svg
   canonical: atlas/house/n-279.svg
@@ -1674,7 +1674,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-28.svg
   canonical: atlas/house/n-28.svg
@@ -1682,7 +1682,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-280.svg
   canonical: atlas/house/n-280.svg
@@ -1690,7 +1690,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-281.svg
   canonical: atlas/house/n-281.svg
@@ -1698,7 +1698,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-282.svg
   canonical: atlas/house/n-282.svg
@@ -1706,7 +1706,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-283.svg
   canonical: atlas/house/n-283.svg
@@ -1714,7 +1714,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-284.svg
   canonical: atlas/house/n-284.svg
@@ -1722,7 +1722,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-285.svg
   canonical: atlas/house/n-285.svg
@@ -1730,7 +1730,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-286.svg
   canonical: atlas/house/n-286.svg
@@ -1738,7 +1738,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-287.svg
   canonical: atlas/house/n-287.svg
@@ -1746,7 +1746,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-288.svg
   canonical: atlas/house/n-288.svg
@@ -1754,7 +1754,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-289.svg
   canonical: atlas/house/n-289.svg
@@ -1762,7 +1762,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-29.svg
   canonical: atlas/house/n-29.svg
@@ -1770,7 +1770,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-290.svg
   canonical: atlas/house/n-290.svg
@@ -1778,7 +1778,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-291.svg
   canonical: atlas/house/n-291.svg
@@ -1786,7 +1786,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-292.svg
   canonical: atlas/house/n-292.svg
@@ -1794,7 +1794,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-293.svg
   canonical: atlas/house/n-293.svg
@@ -1802,7 +1802,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-294.svg
   canonical: atlas/house/n-294.svg
@@ -1810,7 +1810,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-295.svg
   canonical: atlas/house/n-295.svg
@@ -1818,7 +1818,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-296.svg
   canonical: atlas/house/n-296.svg
@@ -1826,7 +1826,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-297.svg
   canonical: atlas/house/n-297.svg
@@ -1834,7 +1834,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-298.svg
   canonical: atlas/house/n-298.svg
@@ -1842,7 +1842,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-299.svg
   canonical: atlas/house/n-299.svg
@@ -1850,7 +1850,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-3.svg
   canonical: atlas/house/n-3.svg
@@ -1858,7 +1858,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-30.svg
   canonical: atlas/house/n-30.svg
@@ -1866,7 +1866,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-300.svg
   canonical: atlas/house/n-300.svg
@@ -1874,7 +1874,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-301.svg
   canonical: atlas/house/n-301.svg
@@ -1882,7 +1882,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-302.svg
   canonical: atlas/house/n-302.svg
@@ -1890,7 +1890,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-303.svg
   canonical: atlas/house/n-303.svg
@@ -1898,7 +1898,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-304.svg
   canonical: atlas/house/n-304.svg
@@ -1906,7 +1906,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-305.svg
   canonical: atlas/house/n-305.svg
@@ -1914,7 +1914,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-306.svg
   canonical: atlas/house/n-306.svg
@@ -1922,7 +1922,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-307.svg
   canonical: atlas/house/n-307.svg
@@ -1930,7 +1930,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-308.svg
   canonical: atlas/house/n-308.svg
@@ -1938,7 +1938,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-309.svg
   canonical: atlas/house/n-309.svg
@@ -1946,7 +1946,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-31.svg
   canonical: atlas/house/n-31.svg
@@ -1954,7 +1954,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-310.svg
   canonical: atlas/house/n-310.svg
@@ -1962,7 +1962,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-311.svg
   canonical: atlas/house/n-311.svg
@@ -1970,7 +1970,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-312.svg
   canonical: atlas/house/n-312.svg
@@ -1978,7 +1978,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-313.svg
   canonical: atlas/house/n-313.svg
@@ -1986,7 +1986,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-314.svg
   canonical: atlas/house/n-314.svg
@@ -1994,7 +1994,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-315.svg
   canonical: atlas/house/n-315.svg
@@ -2002,7 +2002,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-316.svg
   canonical: atlas/house/n-316.svg
@@ -2010,7 +2010,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-317.svg
   canonical: atlas/house/n-317.svg
@@ -2018,7 +2018,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-318.svg
   canonical: atlas/house/n-318.svg
@@ -2026,7 +2026,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-319.svg
   canonical: atlas/house/n-319.svg
@@ -2034,7 +2034,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-32.svg
   canonical: atlas/house/n-32.svg
@@ -2042,7 +2042,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-320.svg
   canonical: atlas/house/n-320.svg
@@ -2050,7 +2050,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-321.svg
   canonical: atlas/house/n-321.svg
@@ -2058,7 +2058,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-322.svg
   canonical: atlas/house/n-322.svg
@@ -2066,7 +2066,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-323.svg
   canonical: atlas/house/n-323.svg
@@ -2074,7 +2074,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-324.svg
   canonical: atlas/house/n-324.svg
@@ -2082,7 +2082,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-33.svg
   canonical: atlas/house/n-33.svg
@@ -2090,7 +2090,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-34.svg
   canonical: atlas/house/n-34.svg
@@ -2098,7 +2098,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-35.svg
   canonical: atlas/house/n-35.svg
@@ -2106,7 +2106,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-36.svg
   canonical: atlas/house/n-36.svg
@@ -2114,7 +2114,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-37.svg
   canonical: atlas/house/n-37.svg
@@ -2122,7 +2122,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-38.svg
   canonical: atlas/house/n-38.svg
@@ -2130,7 +2130,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-39.svg
   canonical: atlas/house/n-39.svg
@@ -2138,7 +2138,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-4.svg
   canonical: atlas/house/n-4.svg
@@ -2146,7 +2146,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-40.svg
   canonical: atlas/house/n-40.svg
@@ -2154,7 +2154,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-41.svg
   canonical: atlas/house/n-41.svg
@@ -2162,7 +2162,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-42.svg
   canonical: atlas/house/n-42.svg
@@ -2170,7 +2170,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-43.svg
   canonical: atlas/house/n-43.svg
@@ -2178,7 +2178,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-44.svg
   canonical: atlas/house/n-44.svg
@@ -2186,7 +2186,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-45.svg
   canonical: atlas/house/n-45.svg
@@ -2194,7 +2194,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-46.svg
   canonical: atlas/house/n-46.svg
@@ -2202,7 +2202,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-47.svg
   canonical: atlas/house/n-47.svg
@@ -2210,7 +2210,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-48.svg
   canonical: atlas/house/n-48.svg
@@ -2218,7 +2218,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-49.svg
   canonical: atlas/house/n-49.svg
@@ -2226,7 +2226,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-5.svg
   canonical: atlas/house/n-5.svg
@@ -2234,7 +2234,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-50.svg
   canonical: atlas/house/n-50.svg
@@ -2242,7 +2242,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-51.svg
   canonical: atlas/house/n-51.svg
@@ -2250,7 +2250,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-52.svg
   canonical: atlas/house/n-52.svg
@@ -2258,7 +2258,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-53.svg
   canonical: atlas/house/n-53.svg
@@ -2266,7 +2266,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-54.svg
   canonical: atlas/house/n-54.svg
@@ -2274,7 +2274,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-55.svg
   canonical: atlas/house/n-55.svg
@@ -2282,7 +2282,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-56.svg
   canonical: atlas/house/n-56.svg
@@ -2290,7 +2290,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-57.svg
   canonical: atlas/house/n-57.svg
@@ -2298,7 +2298,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-58.svg
   canonical: atlas/house/n-58.svg
@@ -2306,7 +2306,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-59.svg
   canonical: atlas/house/n-59.svg
@@ -2314,7 +2314,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-6.svg
   canonical: atlas/house/n-6.svg
@@ -2322,7 +2322,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-60.svg
   canonical: atlas/house/n-60.svg
@@ -2330,7 +2330,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-61.svg
   canonical: atlas/house/n-61.svg
@@ -2338,7 +2338,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-62.svg
   canonical: atlas/house/n-62.svg
@@ -2346,7 +2346,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-63.svg
   canonical: atlas/house/n-63.svg
@@ -2354,7 +2354,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-64.svg
   canonical: atlas/house/n-64.svg
@@ -2362,7 +2362,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-65.svg
   canonical: atlas/house/n-65.svg
@@ -2370,7 +2370,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-66.svg
   canonical: atlas/house/n-66.svg
@@ -2378,7 +2378,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-67.svg
   canonical: atlas/house/n-67.svg
@@ -2386,7 +2386,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-68.svg
   canonical: atlas/house/n-68.svg
@@ -2394,7 +2394,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-69.svg
   canonical: atlas/house/n-69.svg
@@ -2402,7 +2402,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-7.svg
   canonical: atlas/house/n-7.svg
@@ -2410,7 +2410,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-70.svg
   canonical: atlas/house/n-70.svg
@@ -2418,7 +2418,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-71.svg
   canonical: atlas/house/n-71.svg
@@ -2426,7 +2426,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-72.svg
   canonical: atlas/house/n-72.svg
@@ -2434,7 +2434,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-73.svg
   canonical: atlas/house/n-73.svg
@@ -2442,7 +2442,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-74.svg
   canonical: atlas/house/n-74.svg
@@ -2450,7 +2450,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-75.svg
   canonical: atlas/house/n-75.svg
@@ -2458,7 +2458,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-76.svg
   canonical: atlas/house/n-76.svg
@@ -2466,7 +2466,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-77.svg
   canonical: atlas/house/n-77.svg
@@ -2474,7 +2474,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-78.svg
   canonical: atlas/house/n-78.svg
@@ -2482,7 +2482,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-79.svg
   canonical: atlas/house/n-79.svg
@@ -2490,7 +2490,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-8.svg
   canonical: atlas/house/n-8.svg
@@ -2498,7 +2498,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-80.svg
   canonical: atlas/house/n-80.svg
@@ -2506,7 +2506,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-81.svg
   canonical: atlas/house/n-81.svg
@@ -2514,7 +2514,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-82.svg
   canonical: atlas/house/n-82.svg
@@ -2522,7 +2522,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-83.svg
   canonical: atlas/house/n-83.svg
@@ -2530,7 +2530,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-84.svg
   canonical: atlas/house/n-84.svg
@@ -2538,7 +2538,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-85.svg
   canonical: atlas/house/n-85.svg
@@ -2546,7 +2546,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-86.svg
   canonical: atlas/house/n-86.svg
@@ -2554,7 +2554,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-87.svg
   canonical: atlas/house/n-87.svg
@@ -2562,7 +2562,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-88.svg
   canonical: atlas/house/n-88.svg
@@ -2570,7 +2570,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-89.svg
   canonical: atlas/house/n-89.svg
@@ -2578,7 +2578,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-9.svg
   canonical: atlas/house/n-9.svg
@@ -2586,7 +2586,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-90.svg
   canonical: atlas/house/n-90.svg
@@ -2594,7 +2594,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-91.svg
   canonical: atlas/house/n-91.svg
@@ -2602,7 +2602,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-92.svg
   canonical: atlas/house/n-92.svg
@@ -2610,7 +2610,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-93.svg
   canonical: atlas/house/n-93.svg
@@ -2618,7 +2618,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-94.svg
   canonical: atlas/house/n-94.svg
@@ -2626,7 +2626,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-95.svg
   canonical: atlas/house/n-95.svg
@@ -2634,7 +2634,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-96.svg
   canonical: atlas/house/n-96.svg
@@ -2642,7 +2642,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-97.svg
   canonical: atlas/house/n-97.svg
@@ -2650,7 +2650,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-98.svg
   canonical: atlas/house/n-98.svg
@@ -2658,7 +2658,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/house/n-99.svg
   canonical: atlas/house/n-99.svg
@@ -2666,7 +2666,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-102.svg
   canonical: atlas/regularized/n-102.svg
@@ -2674,7 +2674,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-103.svg
   canonical: atlas/regularized/n-103.svg
@@ -2682,7 +2682,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-105.svg
   canonical: atlas/regularized/n-105.svg
@@ -2690,7 +2690,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-106.svg
   canonical: atlas/regularized/n-106.svg
@@ -2698,7 +2698,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-107.svg
   canonical: atlas/regularized/n-107.svg
@@ -2706,7 +2706,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-108.svg
   canonical: atlas/regularized/n-108.svg
@@ -2714,7 +2714,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-110.svg
   canonical: atlas/regularized/n-110.svg
@@ -2722,7 +2722,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-123.svg
   canonical: atlas/regularized/n-123.svg
@@ -2730,7 +2730,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-126.svg
   canonical: atlas/regularized/n-126.svg
@@ -2738,7 +2738,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-127.svg
   canonical: atlas/regularized/n-127.svg
@@ -2746,7 +2746,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-129.svg
   canonical: atlas/regularized/n-129.svg
@@ -2754,7 +2754,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-130.svg
   canonical: atlas/regularized/n-130.svg
@@ -2762,7 +2762,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-131.svg
   canonical: atlas/regularized/n-131.svg
@@ -2770,7 +2770,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-132.svg
   canonical: atlas/regularized/n-132.svg
@@ -2778,7 +2778,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-146.svg
   canonical: atlas/regularized/n-146.svg
@@ -2786,7 +2786,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-152.svg
   canonical: atlas/regularized/n-152.svg
@@ -2794,7 +2794,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-153.svg
   canonical: atlas/regularized/n-153.svg
@@ -2802,7 +2802,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-154.svg
   canonical: atlas/regularized/n-154.svg
@@ -2810,7 +2810,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-155.svg
   canonical: atlas/regularized/n-155.svg
@@ -2818,7 +2818,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-156.svg
   canonical: atlas/regularized/n-156.svg
@@ -2826,7 +2826,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-171.svg
   canonical: atlas/regularized/n-171.svg
@@ -2834,7 +2834,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-172.svg
   canonical: atlas/regularized/n-172.svg
@@ -2842,7 +2842,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-175.svg
   canonical: atlas/regularized/n-175.svg
@@ -2850,7 +2850,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-176.svg
   canonical: atlas/regularized/n-176.svg
@@ -2858,7 +2858,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-177.svg
   canonical: atlas/regularized/n-177.svg
@@ -2866,7 +2866,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-178.svg
   canonical: atlas/regularized/n-178.svg
@@ -2874,7 +2874,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-179.svg
   canonical: atlas/regularized/n-179.svg
@@ -2882,7 +2882,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-18.svg
   canonical: atlas/regularized/n-18.svg
@@ -2890,7 +2890,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-180.svg
   canonical: atlas/regularized/n-180.svg
@@ -2898,7 +2898,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-181.svg
   canonical: atlas/regularized/n-181.svg
@@ -2906,7 +2906,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-182.svg
   canonical: atlas/regularized/n-182.svg
@@ -2914,7 +2914,15 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
+  status: live
+- path: atlas/regularized/n-183.svg
+  canonical: atlas/regularized/n-183.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-198.svg
   canonical: atlas/regularized/n-198.svg
@@ -2922,7 +2930,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-199.svg
   canonical: atlas/regularized/n-199.svg
@@ -2930,7 +2938,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-204.svg
   canonical: atlas/regularized/n-204.svg
@@ -2938,7 +2946,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-206.svg
   canonical: atlas/regularized/n-206.svg
@@ -2946,7 +2954,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-207.svg
   canonical: atlas/regularized/n-207.svg
@@ -2954,7 +2962,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-208.svg
   canonical: atlas/regularized/n-208.svg
@@ -2962,7 +2970,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-209.svg
   canonical: atlas/regularized/n-209.svg
@@ -2970,7 +2978,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-210.svg
   canonical: atlas/regularized/n-210.svg
@@ -2978,7 +2986,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-211.svg
   canonical: atlas/regularized/n-211.svg
@@ -2986,7 +2994,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-227.svg
   canonical: atlas/regularized/n-227.svg
@@ -2994,7 +3002,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-228.svg
   canonical: atlas/regularized/n-228.svg
@@ -3002,7 +3010,15 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
+  status: live
+- path: atlas/regularized/n-229.svg
+  canonical: atlas/regularized/n-229.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-230.svg
   canonical: atlas/regularized/n-230.svg
@@ -3010,7 +3026,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-232.svg
   canonical: atlas/regularized/n-232.svg
@@ -3018,7 +3034,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-234.svg
   canonical: atlas/regularized/n-234.svg
@@ -3026,7 +3042,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-236.svg
   canonical: atlas/regularized/n-236.svg
@@ -3034,7 +3050,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-237.svg
   canonical: atlas/regularized/n-237.svg
@@ -3042,7 +3058,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-238.svg
   canonical: atlas/regularized/n-238.svg
@@ -3050,7 +3066,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-239.svg
   canonical: atlas/regularized/n-239.svg
@@ -3058,7 +3074,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-240.svg
   canonical: atlas/regularized/n-240.svg
@@ -3066,7 +3082,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-241.svg
   canonical: atlas/regularized/n-241.svg
@@ -3074,7 +3090,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-258.svg
   canonical: atlas/regularized/n-258.svg
@@ -3082,7 +3098,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-259.svg
   canonical: atlas/regularized/n-259.svg
@@ -3090,7 +3106,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-26.svg
   canonical: atlas/regularized/n-26.svg
@@ -3098,7 +3114,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-261.svg
   canonical: atlas/regularized/n-261.svg
@@ -3106,7 +3122,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-263.svg
   canonical: atlas/regularized/n-263.svg
@@ -3114,7 +3130,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-264.svg
   canonical: atlas/regularized/n-264.svg
@@ -3122,7 +3138,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-266.svg
   canonical: atlas/regularized/n-266.svg
@@ -3130,7 +3146,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-267.svg
   canonical: atlas/regularized/n-267.svg
@@ -3138,7 +3154,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-268.svg
   canonical: atlas/regularized/n-268.svg
@@ -3146,7 +3162,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-269.svg
   canonical: atlas/regularized/n-269.svg
@@ -3154,7 +3170,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-270.svg
   canonical: atlas/regularized/n-270.svg
@@ -3162,7 +3178,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-271.svg
   canonical: atlas/regularized/n-271.svg
@@ -3170,7 +3186,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-272.svg
   canonical: atlas/regularized/n-272.svg
@@ -3178,7 +3194,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-273.svg
   canonical: atlas/regularized/n-273.svg
@@ -3186,7 +3202,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-29.svg
   canonical: atlas/regularized/n-29.svg
@@ -3194,7 +3210,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-292.svg
   canonical: atlas/regularized/n-292.svg
@@ -3202,7 +3218,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-293.svg
   canonical: atlas/regularized/n-293.svg
@@ -3210,7 +3226,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-295.svg
   canonical: atlas/regularized/n-295.svg
@@ -3218,7 +3234,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-297.svg
   canonical: atlas/regularized/n-297.svg
@@ -3226,7 +3242,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-301.svg
   canonical: atlas/regularized/n-301.svg
@@ -3234,7 +3250,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-302.svg
   canonical: atlas/regularized/n-302.svg
@@ -3242,7 +3258,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-303.svg
   canonical: atlas/regularized/n-303.svg
@@ -3250,7 +3266,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-304.svg
   canonical: atlas/regularized/n-304.svg
@@ -3258,7 +3274,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-305.svg
   canonical: atlas/regularized/n-305.svg
@@ -3266,7 +3282,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-306.svg
   canonical: atlas/regularized/n-306.svg
@@ -3274,7 +3290,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-307.svg
   canonical: atlas/regularized/n-307.svg
@@ -3282,7 +3298,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-308.svg
   canonical: atlas/regularized/n-308.svg
@@ -3290,7 +3306,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-37.svg
   canonical: atlas/regularized/n-37.svg
@@ -3298,7 +3314,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-41.svg
   canonical: atlas/regularized/n-41.svg
@@ -3306,7 +3322,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-50.svg
   canonical: atlas/regularized/n-50.svg
@@ -3314,7 +3330,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-54.svg
   canonical: atlas/regularized/n-54.svg
@@ -3322,7 +3338,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-66.svg
   canonical: atlas/regularized/n-66.svg
@@ -3330,7 +3346,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-68.svg
   canonical: atlas/regularized/n-68.svg
@@ -3338,7 +3354,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-70.svg
   canonical: atlas/regularized/n-70.svg
@@ -3346,7 +3362,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-71.svg
   canonical: atlas/regularized/n-71.svg
@@ -3354,7 +3370,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-83.svg
   canonical: atlas/regularized/n-83.svg
@@ -3362,7 +3378,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-84.svg
   canonical: atlas/regularized/n-84.svg
@@ -3370,7 +3386,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-85.svg
   canonical: atlas/regularized/n-85.svg
@@ -3378,7 +3394,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-86.svg
   canonical: atlas/regularized/n-86.svg
@@ -3386,7 +3402,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-87.svg
   canonical: atlas/regularized/n-87.svg
@@ -3394,7 +3410,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/regularized/n-88.svg
   canonical: atlas/regularized/n-88.svg
@@ -3402,7 +3418,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: atlas/trump11-overview.svg
   canonical: atlas/trump11-overview.svg
@@ -3410,7 +3426,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: cases.html
   canonical: atlas.html
@@ -3418,7 +3434,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: atlas.html
   amendments:
@@ -3474,7 +3490,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/104.html
   canonical: cases/104.html
@@ -3490,7 +3506,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/106.html
   canonical: cases/106.html
@@ -3682,7 +3698,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/128.html
   canonical: cases/128.html
@@ -3714,7 +3730,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/131.html
   canonical: cases/131.html
@@ -3722,7 +3738,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/132.html
   canonical: cases/132.html
@@ -3730,7 +3746,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/133.html
   canonical: cases/133.html
@@ -3922,7 +3938,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-20'
   status: live
 - path: cases/155.html
   canonical: cases/155.html
@@ -3930,7 +3946,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/156.html
   canonical: cases/156.html
@@ -4082,7 +4098,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/173.html
   canonical: cases/173.html
@@ -4138,7 +4154,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/18.html
   canonical: cases/18.html
@@ -4154,7 +4170,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/181.html
   canonical: cases/181.html
@@ -4162,7 +4178,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/182.html
   canonical: cases/182.html
@@ -4170,7 +4186,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/183.html
   canonical: cases/183.html
@@ -4178,7 +4194,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/184.html
   canonical: cases/184.html
@@ -4386,7 +4402,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/207.html
   canonical: cases/207.html
@@ -4402,7 +4418,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/209.html
   canonical: cases/209.html
@@ -4410,7 +4426,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/21.html
   canonical: cases/21.html
@@ -4426,7 +4442,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/211.html
   canonical: cases/211.html
@@ -4578,7 +4594,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/229.html
   canonical: cases/229.html
@@ -4586,7 +4602,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/23.html
   canonical: cases/23.html
@@ -4650,7 +4666,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/237.html
   canonical: cases/237.html
@@ -4666,7 +4682,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/239.html
   canonical: cases/239.html
@@ -4674,7 +4690,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/24.html
   canonical: cases/24.html
@@ -4690,7 +4706,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/241.html
   canonical: cases/241.html
@@ -4874,7 +4890,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/262.html
   canonical: cases/262.html
@@ -4890,7 +4906,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/264.html
   canonical: cases/264.html
@@ -4930,7 +4946,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/269.html
   canonical: cases/269.html
@@ -4938,7 +4954,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/27.html
   canonical: cases/27.html
@@ -4954,7 +4970,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/271.html
   canonical: cases/271.html
@@ -4962,7 +4978,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/272.html
   canonical: cases/272.html
@@ -4970,7 +4986,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/273.html
   canonical: cases/273.html
@@ -4978,7 +4994,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/274.html
   canonical: cases/274.html
@@ -5186,7 +5202,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/298.html
   canonical: cases/298.html
@@ -5266,7 +5282,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/306.html
   canonical: cases/306.html
@@ -5274,7 +5290,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/307.html
   canonical: cases/307.html
@@ -5282,7 +5298,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/308.html
   canonical: cases/308.html
@@ -5290,7 +5306,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-20'
   status: live
 - path: cases/309.html
   canonical: cases/309.html
@@ -5746,7 +5762,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/69.html
   canonical: cases/69.html
@@ -5890,7 +5906,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/85.html
   canonical: cases/85.html
@@ -5898,7 +5914,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/86.html
   canonical: cases/86.html
@@ -6026,7 +6042,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: atlas.html
   amendments:
@@ -6042,7 +6058,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/erich-friedman.html
   amendments:
@@ -6059,7 +6075,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/evan-daniel.html
   amendments:
@@ -6076,7 +6092,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/f-gobel.html
   amendments:
@@ -6093,7 +6109,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/francisco-couzo.html
   amendments:
@@ -6110,7 +6126,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/gustavo-massaccesi.html
   amendments:
@@ -6127,7 +6143,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/guzhou0806.html
   amendments:
@@ -6144,7 +6160,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/hiroshi-nagamochi.html
   amendments:
@@ -6161,7 +6177,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/index.html
   amendments:
@@ -6178,7 +6194,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/joshua-levy.html
   amendments:
@@ -6195,7 +6211,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/marc-leonard-overbeck.html
   amendments:
@@ -6213,7 +6229,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/michael-j-kearney.html
   amendments:
@@ -6230,7 +6246,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/mira.html
   amendments:
@@ -6247,7 +6263,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/peter-shiu.html
   amendments:
@@ -6264,7 +6280,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/manasseh-ahmed.html
   amendments:
@@ -6282,7 +6298,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/ryu-sungjoon.html
   amendments:
@@ -6299,7 +6315,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/sam-burns.html
   amendments:
@@ -6316,7 +6332,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/tokoharu.html
   amendments:
@@ -6333,7 +6349,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/walter-stromquist.html
   amendments:
@@ -6350,7 +6366,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/walter-trump.html
   amendments:
@@ -6367,7 +6383,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/hiroaki-hosono.html
   amendments:
@@ -6385,7 +6401,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: profiles/wolfram-bentz.html
   amendments:
@@ -6402,7 +6418,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: defects.html
   canonical: https://github.com/jlevy/squares/blob/main/defects.md
@@ -6410,7 +6426,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: https://github.com/jlevy/squares/blob/main/defects.md
 - path: development.html
@@ -6419,7 +6435,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: epistemics.html
   canonical: epistemics.html
@@ -6427,7 +6443,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: explainer.html
   canonical: papers/n11-lower-bounds-explainer.html
@@ -6435,7 +6451,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: papers/n11-lower-bounds-explainer.html
 - path: favicon-48.png
@@ -6444,7 +6460,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: favicon.svg
   canonical: favicon.svg
@@ -6452,7 +6468,7 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: frontier.html
   canonical: atlas.html
@@ -6460,7 +6476,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: atlas.html
 - path: index.html
@@ -6469,7 +6485,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: known-best-1-100-card.png
   canonical: known-best-1-100-card.png
@@ -6477,7 +6493,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:write
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: known-best-1-100.pdf
   canonical: square-packings-100-20261008.pdf
@@ -6485,7 +6501,7 @@ urls:
   generator: devtools.preview_site:copy_moved_files
   producer: assembly
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
   target: square-packings-100-20261008.pdf
 - path: known-best-1-100.png
@@ -6494,7 +6510,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:write
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: known-best-1-100.svg
   canonical: known-best-1-100.svg
@@ -6502,7 +6518,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:write
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: known-best-1-324.pdf
   canonical: square-packings-324-20261008.pdf
@@ -6510,7 +6526,7 @@ urls:
   generator: devtools.preview_site:copy_moved_files
   producer: assembly
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
   target: square-packings-324-20261008.pdf
 - path: known-best-1-324.png
@@ -6519,7 +6535,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:write
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: known-best-1-324.svg
   canonical: known-best-1-324.svg
@@ -6527,7 +6543,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:write
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: n11-optimality/index.html
   canonical: papers/n11-optimality-review.html
@@ -6535,7 +6551,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: papers/n11-optimality-review.html
 - path: n11-optimality/t-060-explainer.html
@@ -6544,7 +6560,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: papers/n11-optimality-review.html
 - path: n11-optimality/t-060-explainer.md
@@ -6553,7 +6569,7 @@ urls:
   generator: devtools.preview_site:copy_moved_files
   producer: assembly
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
   target: papers/n11-optimality-review.md
 - path: n11-optimality/t-060-explainer.pdf
@@ -6562,7 +6578,7 @@ urls:
   generator: devtools.preview_site:copy_moved_files
   producer: assembly
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
   target: papers/n11-optimality-review.pdf
 - path: news.html
@@ -6571,7 +6587,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: papers.html
   canonical: papers.html
@@ -6579,7 +6595,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: papers/n11-lower-bounds-explainer.html
   canonical: papers/n11-lower-bounds-explainer.html
@@ -6683,7 +6699,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/david-r-maciver.html
   canonical: profiles/david-r-maciver.html
@@ -6691,7 +6707,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/erich-friedman.html
   canonical: profiles/erich-friedman.html
@@ -6699,7 +6715,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/evan-daniel.html
   canonical: profiles/evan-daniel.html
@@ -6707,7 +6723,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/f-gobel.html
   canonical: profiles/f-gobel.html
@@ -6715,7 +6731,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/francisco-couzo.html
   canonical: profiles/francisco-couzo.html
@@ -6723,7 +6739,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/gustavo-massaccesi.html
   canonical: profiles/gustavo-massaccesi.html
@@ -6731,7 +6747,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/guzhou0806.html
   canonical: profiles/guzhou0806.html
@@ -6739,7 +6755,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/hiroaki-hosono.html
   canonical: profiles/hiroaki-hosono.html
@@ -6747,7 +6763,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/hiroshi-nagamochi.html
   canonical: profiles/hiroshi-nagamochi.html
@@ -6755,7 +6771,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/index.html
   canonical: profiles/
@@ -6763,7 +6779,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/john-bidwell.html
   canonical: profiles/john-bidwell.html
@@ -6771,7 +6787,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/joshua-levy.html
   canonical: profiles/joshua-levy.html
@@ -6779,7 +6795,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/manasseh-ahmed.html
   canonical: profiles/manasseh-ahmed.html
@@ -6787,7 +6803,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/marc-leonard-overbeck.html
   canonical: profiles/marc-leonard-overbeck.html
@@ -6795,7 +6811,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/michael-j-kearney.html
   canonical: profiles/michael-j-kearney.html
@@ -6803,7 +6819,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/mira.html
   canonical: profiles/mira.html
@@ -6811,7 +6827,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/oscar-fitzharding.html
   canonical: profiles/oscar-fitzharding.html
@@ -6819,7 +6835,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/peter-shiu.html
   canonical: profiles/peter-shiu.html
@@ -6827,7 +6843,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/philippe-ryckelynck.html
   canonical: profiles/philippe-ryckelynck.html
@@ -6835,7 +6851,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/ryan-xu.html
   canonical: profiles/ryan-xu.html
@@ -6843,7 +6859,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/ryu-sungjoon.html
   canonical: profiles/ryu-sungjoon.html
@@ -6851,7 +6867,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/sam-burns.html
   canonical: profiles/sam-burns.html
@@ -6859,7 +6875,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/thierry-gensane.html
   canonical: profiles/thierry-gensane.html
@@ -6867,7 +6883,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/tokoharu.html
   canonical: profiles/tokoharu.html
@@ -6875,7 +6891,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/walter-stromquist.html
   canonical: profiles/walter-stromquist.html
@@ -6883,7 +6899,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/walter-trump.html
   canonical: profiles/walter-trump.html
@@ -6891,7 +6907,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: profiles/wolfram-bentz.html
   canonical: profiles/wolfram-bentz.html
@@ -6899,7 +6915,7 @@ urls:
   generator: devtools.render_contributors:contributor_pages
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: readme.html
   canonical: readme.html
@@ -6907,7 +6923,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: result/t-001.html
   canonical: result/t-001.html
@@ -13774,7 +13790,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: formalization
@@ -13789,6 +13805,7 @@ urls:
     builds_on: null
     evidence:
     - E-n017-fitzharding-lean-report
+    - E-n017-fitzharding-lean-source-build
     artifacts:
     - packing/resources/web/fitzharding-n17-lean-2026-10-13/README.md
     - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
@@ -13809,6 +13826,36 @@ urls:
       change to the claim's statement, scope, evidence, status or bound.
     previous:
       kind: simplification
+      scope:
+        n_values:
+        - 17
+      established: null
+      attribution:
+        source_keys:
+        - '[Fitzharding n17 Lean 2026]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-n017-fitzharding-lean-report
+      artifacts:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/README.md
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/PackingStatement.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/EndpointGeometry.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/EndpointRootData.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/clean-build-receipt.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/Square17Optimality.log.gz
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/source-consistency.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/endpoint-comparison.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/cover-comparison.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/closures.json
+      - docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
+  - date: '2026-10-15'
+    reason: The formal-proof audit (think-o6ou) admits the retained complete producer build as separate
+      external evidence. T-154 moves from V0/C1 to V3/C1; its mathematical statement, scope, source
+      credit and case bounds are unchanged, and no independent proof build is claimed.
+    previous:
+      kind: formalization
       scope:
         n_values:
         - 17
@@ -16603,6 +16650,7 @@ urls:
     builds_on: null
     evidence:
     - E-evand-639-exact-sides-report
+    - E-evand-639-verify-exact-replay
     artifacts:
     - packing/resources/web/evand-exact-cur-2026-10-16/README.md
     - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/RESULTS.md
@@ -16612,6 +16660,48 @@ urls:
     - packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
     - packing/resources/web/evand-exact-cur-2026-10-16/receipts/replay-verify-exact.json
     - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
+  amendments:
+  - date: '2026-10-16'
+    reason: 'The 16 October review of issue 639 (review-2026-10-16-evand-exact-sides-639.md) accepts
+      the retained replay: the result rises to V3/C3 and cites its confirming evidence (E-evand-639-verify-exact-replay);
+      the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 88
+        - 102
+        - 123
+        - 126
+        - 175
+        - 199
+        - 204
+        - 232
+        - 258
+        - 259
+        - 266
+        - 267
+        - 292
+        - 295
+        - 301
+        - 302
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel exact current records 2026-10-16]'
+        published: '2026-10-16'
+      builds_on: null
+      evidence:
+      - E-evand-639-exact-sides-report
+      artifacts:
+      - packing/resources/web/evand-exact-cur-2026-10-16/README.md
+      - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/RESULTS.md
+      - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/data/verify.txt
+      - packing/campaign/issue-intake/upper-bounds-20261016/README.md
+      - packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json
+      - packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+      - packing/resources/web/evand-exact-cur-2026-10-16/receipts/replay-verify-exact.json
+      - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
 - path: result/t-194.html
   canonical: result/t-194.html
   kind: result
@@ -16642,6 +16732,35 @@ urls:
     - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/EndpointPacking.lean
     - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/Square19Optimality.log.gz
     - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/kernel-replay.json
+    - packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    - docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+  amendments:
+  - date: '2026-10-16'
+    reason: 'The 16 October mathematical review of the s(19) proof is accepted as an adversarial read:
+      the result rises to C1 and lists the review and its programs'' README among its artifacts; the
+      claim, scope and attribution are unchanged.'
+    previous:
+      kind: optimality
+      scope:
+        n_values:
+        - 19
+      established: null
+      attribution:
+        source_keys:
+        - '[Fitzharding n19 Lean 2026]'
+        published: '2026-10-16'
+      builds_on: null
+      evidence:
+      - E-n019-fitzharding-lean-report
+      artifacts:
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/README.md
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/Optimality.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/PlainPacking.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/SquareBase.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Basic.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/EndpointPacking.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/Square19Optimality.log.gz
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/kernel-replay.json
 - path: result/t-195.html
   canonical: result/t-195.html
   kind: result
@@ -16709,7 +16828,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: upper-bound
@@ -16724,18 +16843,43 @@ urls:
     builds_on: null
     evidence:
     - E-evand-669-n155-report
+    - E-evand-669-n155-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n155-explorer-2026-10-17/README.md
     - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
     - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2_regularized.cert
-    - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+    - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+  amendments:
+  - date: '2026-10-19'
+    reason: 'The 19 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-evand-669-n155-exact-feasibility), with the review among its artifacts,
+      and on 19 October 2026 the case at 155 adopted it as its house; the bound, scope and attribution
+      are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 155
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n155 explorer 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-evand-669-n155-report
+      artifacts:
+      - packing/resources/web/evand-n155-explorer-2026-10-17/README.md
+      - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
+      - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2_regularized.cert
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
 - path: result/t-198.html
   canonical: result/t-198.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: upper-bound
@@ -16750,17 +16894,41 @@ urls:
     builds_on: null
     evidence:
     - E-evand-674-n229-opening-report
+    - E-evand-674-n229-opening-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
     - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
-    - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+    - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+  amendments:
+  - date: '2026-10-19'
+    reason: 'The 19 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-evand-674-n229-opening-exact-feasibility), with the review among
+      its artifacts; T-199, the author''s update, houses 229. The bound, scope and attribution are
+      unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 229
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n229 dilation 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-evand-674-n229-opening-report
+      artifacts:
+      - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
+      - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
 - path: result/t-199.html
   canonical: result/t-199.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: upper-bound
@@ -16775,10 +16943,34 @@ urls:
     builds_on: null
     evidence:
     - E-evand-674-n229-update-report
+    - E-evand-674-n229-update-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
     - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
-    - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+    - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+  amendments:
+  - date: '2026-10-19'
+    reason: 'The 19 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-evand-674-n229-update-exact-feasibility), with the review among its
+      artifacts, and on 19 October 2026 the case at 229 adopted it as its house; the bound, scope
+      and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 229
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n229 dilation update 2026-10-18]'
+        published: '2026-10-18'
+      builds_on: null
+      evidence:
+      - E-evand-674-n229-update-report
+      artifacts:
+      - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
+      - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
 - path: result/t-200.html
   canonical: result/t-200.html
   kind: result
@@ -16930,7 +17122,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-17'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: lower-bound
@@ -16945,6 +17137,7 @@ urls:
     builds_on: null
     evidence:
     - E-wand125-fine-net-n68-853-report
+    - E-wand125-fine-net-n68-853-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -16953,13 +17146,46 @@ urls:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/check2/receipt.json
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n68.json
     - packing/devtools/fine_net_followup.py
+    - docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md
+    - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit-result.json.gz
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.execution.json
+  amendments:
+  - date: '2026-10-19'
+    reason: Adopt the n68 retained native replay after the certificate-specific mathematical review,
+      adding its separate replay evidence and the supporting census, exact-audit and review artifacts;
+      the lower-bound claim and source attribution retain their original identity.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 68
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 fine-net lower bounds 2026-10-16]'
+        published: '2026-10-16'
+      builds_on: null
+      evidence:
+      - E-wand125-fine-net-n68-853-report
+      artifacts:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/candidate.json.gz
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/check2/receipt.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n68.json
+      - packing/devtools/fine_net_followup.py
 - path: result/t-206.html
   canonical: result/t-206.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-17'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: lower-bound
@@ -16974,6 +17200,7 @@ urls:
     builds_on: null
     evidence:
     - E-wand125-fine-net-n84-94225-report
+    - E-wand125-fine-net-n84-94225-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -16982,13 +17209,46 @@ urls:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/check2/receipt.json
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n84.json
     - packing/devtools/fine_net_followup.py
+    - docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+    - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n84-audit-result.json.gz
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.execution.json
+  amendments:
+  - date: '2026-10-19'
+    reason: Adopt the n84 retained native replay after the certificate-specific mathematical review,
+      adding its separate replay evidence and the supporting census, exact-audit and review artifacts;
+      the lower-bound claim and source attribution retain their original identity.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 84
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 fine-net lower bounds 2026-10-16]'
+        published: '2026-10-16'
+      builds_on: null
+      evidence:
+      - E-wand125-fine-net-n84-94225-report
+      artifacts:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/candidate.json.gz
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/check2/receipt.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n84.json
+      - packing/devtools/fine_net_followup.py
 - path: result/t-207.html
   canonical: result/t-207.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-17'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: lower-bound
@@ -17003,6 +17263,7 @@ urls:
     builds_on: null
     evidence:
     - E-wand125-fine-net-n85-9475-report
+    - E-wand125-fine-net-n85-9475-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -17011,6 +17272,39 @@ urls:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/check2/receipt.json
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n85.json
     - packing/devtools/fine_net_followup.py
+    - docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+    - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n85-audit-result.json.gz
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.execution.json
+  amendments:
+  - date: '2026-10-19'
+    reason: Adopt the n85 retained native replay after the certificate-specific mathematical review,
+      adding its separate replay evidence and the supporting census, exact-audit and review artifacts;
+      the lower-bound claim and source attribution retain their original identity.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 85
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 fine-net lower bounds 2026-10-16]'
+        published: '2026-10-16'
+      builds_on: null
+      evidence:
+      - E-wand125-fine-net-n85-9475-report
+      artifacts:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/candidate.json.gz
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/check2/receipt.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n85.json
+      - packing/devtools/fine_net_followup.py
 - path: result/t-208.html
   canonical: result/t-208.html
   kind: result
@@ -17340,13 +17634,160 @@ urls:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n110_L1073/check2/receipt.json
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n110.json
     - packing/devtools/fine_net_followup.py
+- path: result/t-218.html
+  canonical: result/t-218.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-19'
+  lastmod: '2026-10-19'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 236
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n236 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-evand-659-n236-report
+    - E-evand-659-n236-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n236-2026-10-16/README.md
+    - packing/resources/web/evand-n236-2026-10-16/acquisition/claims.json
+    - packing/resources/web/evand-n236-2026-10-16/source/search/packer/candidates/s236_bm3c.cert
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+- path: result/t-219.html
+  canonical: result/t-219.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-19'
+  lastmod: '2026-10-19'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 271
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n271 2026-10-17]'
+      published: '2026-10-17'
+    builds_on: null
+    evidence:
+    - E-evand-664-n271-report
+    - E-evand-664-n271-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n271-2026-10-17/README.md
+    - packing/resources/web/evand-n271-2026-10-17/acquisition/claims.json
+    - packing/resources/web/evand-n271-2026-10-17/source/search/packer/candidates/s271_ex1.cert
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+- path: result/t-220.html
+  canonical: result/t-220.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-19'
+  lastmod: '2026-10-19'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 183
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n183 subgrid 2026-10-19]'
+      published: '2026-10-19'
+    builds_on: null
+    evidence:
+    - E-evand-680-n183-report
+    - E-evand-680-n183-primary-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/README.md
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b_regularized.cert
+    - packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md
+    - docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+    - packing/campaign/issue-intake/intake-followup-20261019/n183-evidence-integration.yaml
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/certify-execution-provenance.json
+- path: result/t-221.html
+  canonical: result/t-221.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-20'
+  lastmod: '2026-10-20'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 308
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n308 2026-10-19]'
+      published: '2026-10-19'
+    builds_on: null
+    evidence:
+    - E-evand-689-n308-report
+    - E-evand-689-n308-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n308-2026-10-19/README.md
+    - packing/resources/web/evand-n308-2026-10-19/acquisition/claims.json
+    - packing/resources/web/evand-n308-2026-10-19/source/search/packer/candidates/s308_d308.cert
+    - packing/resources/web/evand-n308-2026-10-19/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md
+    - packing/resources/web/evand-n308-2026-10-19/review/review-2026-10-20/README.md
+- path: result/t-222.html
+  canonical: result/t-222.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-20'
+  lastmod: '2026-10-20'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 154
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n154 sweep 2026-10-20]'
+      published: '2026-10-20'
+    builds_on: null
+    evidence:
+    - E-evand-694-n154-report
+    - E-evand-694-n154-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n154-sweep-2026-10-20/README.md
+    - packing/resources/web/evand-n154-sweep-2026-10-20/acquisition/claims.json
+    - packing/resources/web/evand-n154-sweep-2026-10-20/source/search/packer/candidates/s154_sw.cert
+    - packing/resources/web/evand-n154-sweep-2026-10-20/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md
+    - packing/resources/web/evand-n308-2026-10-19/review/review-2026-10-20/README.md
 - path: results.html
   canonical: results.html
   kind: page
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: sitemap.xml
   canonical: sitemap.xml
@@ -17354,7 +17795,7 @@ urls:
   generator: devtools.site_urls:write_crawl_files
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: social-card.png
   canonical: social-card.png
@@ -17362,7 +17803,7 @@ urls:
   generator: devtools.social_card:write
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: square-packings-100-20261008.pdf
   canonical: square-packings-100-20261008.pdf
@@ -17386,7 +17827,7 @@ urls:
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: forwarded
   target: atlas.html
 - path: synopsis.html
@@ -17395,7 +17836,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/experiments-conducted.html
   canonical: synopsis/experiments-conducted.html
@@ -17403,7 +17844,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/handoff-record.html
   canonical: synopsis/handoff-record.html
@@ -17411,7 +17852,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/n-11-end-to-end.html
   canonical: synopsis/n-11-end-to-end.html
@@ -17419,7 +17860,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/references.html
   canonical: synopsis/references.html
@@ -17427,7 +17868,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/sessions-conducted.html
   canonical: synopsis/sessions-conducted.html
@@ -17435,7 +17876,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/terminology.html
   canonical: synopsis/terminology.html
@@ -17443,7 +17884,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/the-cell-decomposition.html
   canonical: synopsis/the-cell-decomposition.html
@@ -17451,7 +17892,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/the-corner-and-the-method-it-forced.html
   canonical: synopsis/the-corner-and-the-method-it-forced.html
@@ -17459,7 +17900,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/the-defect-record.html
   canonical: synopsis/the-defect-record.html
@@ -17467,7 +17908,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/the-hypothesis-registry.html
   canonical: synopsis/the-hypothesis-registry.html
@@ -17475,7 +17916,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/the-lay-of-the-land-by-n.html
   canonical: synopsis/the-lay-of-the-land-by-n.html
@@ -17483,7 +17924,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/the-problem.html
   canonical: synopsis/the-problem.html
@@ -17491,7 +17932,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/the-program-at-a-glance.html
   canonical: synopsis/the-program-at-a-glance.html
@@ -17499,7 +17940,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/the-program-so-far.html
   canonical: synopsis/the-program-so-far.html
@@ -17507,7 +17948,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/theoretical-results.html
   canonical: synopsis/theoretical-results.html
@@ -17515,7 +17956,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/what-is-built.html
   canonical: synopsis/what-is-built.html
@@ -17523,7 +17964,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/where-this-stands.html
   canonical: synopsis/where-this-stands.html
@@ -17531,7 +17972,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: synopsis/workflow-entry-contracts.html
   canonical: synopsis/workflow-entry-contracts.html
@@ -17539,7 +17980,7 @@ urls:
   generator: devtools.site_documents:chapter_pages
   producer: overview
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: t-018-explainer.md
   canonical: papers/n11-lower-bounds-explainer.md
@@ -17547,7 +17988,7 @@ urls:
   generator: devtools.preview_site:copy_moved_files
   producer: assembly
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
   target: papers/n11-lower-bounds-explainer.md
 - path: t-018-explainer.pdf
@@ -17556,7 +17997,7 @@ urls:
   generator: devtools.preview_site:copy_moved_files
   producer: assembly
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
   target: papers/n11-lower-bounds-explainer.pdf
 - path: tutorial-advanced.html
@@ -17565,7 +18006,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: tutorial.html
   canonical: tutorial.html
@@ -17573,7 +18014,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: visualize.html
   canonical: visualize.html
@@ -17581,7 +18022,7 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
 - path: workbench/assets/{css,js,fonts}/*.{hash}.{ext}
   canonical: ''
@@ -17589,7 +18030,7 @@ urls:
   generator: devtools.build_site:build
   producer: workbench
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
   pattern: workbench/assets/(?:css/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.css|js/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.js|fonts/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.woff2)
 - path: workbench/data/corpus.{hash}.json
@@ -17598,7 +18039,7 @@ urls:
   generator: devtools.build_site:build
   producer: workbench
   first_published: '2026-10-07'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live
   pattern: workbench/data/corpus\.[0-9a-f]{16}\.json
 - path: workbench/index.html
@@ -17607,5 +18048,5 @@ urls:
   generator: devtools.build_site:build
   producer: workbench
   first_published: '2026-09-29'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-20'
   status: live

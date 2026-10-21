@@ -70,12 +70,20 @@ Usage, from ``packing/`` with the project interpreter::
     python -m devtools.adopt_houses             # write
     python -m devtools.adopt_houses --dry-run   # list what would move
     python -m devtools.adopt_houses --check     # hold every adopted case to its house
-    python -m devtools.adopt_houses --refresh   # what each record's writer writes now
+    python -m devtools.adopt_houses --refresh   # full replay, refusing later lower layers
+    python -m devtools.adopt_houses --refresh-openings  # only the current dated paragraph
+    python -m devtools.adopt_houses --refresh --n 155 229  # only those records
 
 ``--refresh`` brings every adopted record's evidence roster, dated paragraph and
 certificate section to what its last pass's writer writes now, from the record that pass
-read, and every held count's note to the lifted holds; nothing another tool writes moves.
+read, and every held count's note to the lifted holds. It refuses a record whose lower
+lanes have changed since that pass, before writing any record: reconciling those later
+writers' evidence and prose needs an explicit merge rather than a historical replay.
 A record changes this way when the register gains a confirmed certificate at its count.
+For an opening-only wording correction, ``--refresh-openings`` leaves all other bytes
+alone, including evidence and prose a later lower-bound writer has added. ``--n`` limits
+either refresh to the records it names, so a writer change at a few counts is applied
+without replaying a record whose later layer the full refresh refuses.
 
 **A later pass.** A later import adopted the same way needs:
 
@@ -108,7 +116,7 @@ import argparse
 import json
 import re
 import sys
-from collections.abc import Mapping, Sequence
+from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from decimal import Decimal
@@ -142,10 +150,15 @@ FRACTION_CHARS = 72
 VERIFIER_TABLE = re.compile(
     r"<!-- BEGIN verification code.*?<!-- END verification code -->", re.DOTALL
 )
-#: Counts whose body the first pass, on 11 October 2026, marked as history by hand, in
-#: prose no tool writes in a fixed form (`historical`): the SQUISH update sections at 155,
-#: 258, 263 and 302 and the grid prose at 308. Only their owned parts are the writer's.
-HAND_MARKED = frozenset({155, 258, 263, 302, 308})
+#: Counts whose body a pass marked as history by hand, in prose no tool writes in a fixed
+#: form (`historical`): the first pass, on 11 October 2026, the SQUISH update sections at
+#: 155, 258, 263 and 302 and the grid prose at 308, and the pass of 19 October 2026 the
+#: intake's staging paragraph, grid sentence and packing section at 183 (T-220). Only
+#: their owned parts are the writer's.
+HAND_MARKED = frozenset({155, 183, 258, 263, 302, 308})
+#: The first pass whose writer also marks the closing sentence of a T-155 view's section as
+#: history (`_regularized_certificate`); earlier passes' records read as they wrote them.
+VIEW_SECTION_FROM = "2026-10-19"
 
 
 @dataclass(frozen=True)
@@ -161,6 +174,10 @@ class Prose:
     #: What the source says of where the packing came from and what was measured of it
     #: here, where its review asked the record to say so (T-160's RD-1, RD-5 and RD-7).
     lineage: str = ""
+    #: Whether `devtools.check_half_angle_area`, the third exact route, decided the
+    #: certificate too. T-220's replay ran the two maintained routes only, so its record
+    #: says no third route decided it rather than that one did.
+    third_route: bool = True
 
 
 #: Each adopted result, as its register entry and its review describe it.
@@ -423,6 +440,20 @@ RESULTS: dict[str, Prose] = {
             "orchestration and the issue’s preparation, directed by the author."
         ),
     ),
+    "T-174": Prose(
+        author="PingYou Ltd",
+        reported="in [pull request #574](https://github.com/jlevy/squares/pull/574)",
+        producer_route=False,
+        ai=(
+            "The source makes no statement about AI assistance in this pull request; for "
+            "its #503 and #504 certificates the author said on 12 October 2026 that they "
+            "were AI assisted by ‘PY’, an unreleased agentic AI offering by PingYou Ltd."
+        ),
+        routes=(
+            "The source ran both maintained routes itself on its corners witnesses; those "
+            "runs are its own, and the replay here is independently re-implemented."
+        ),
+    ),
     "T-175": Prose(
         author="Daniil Ostashev",
         reported="on [jlevy/squares#575](https://github.com/jlevy/squares/issues/575)",
@@ -541,6 +572,148 @@ RESULTS: dict[str, Prose] = {
             "re-implemented."
         ),
     ),
+    "T-197": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#669](https://github.com/jlevy/squares/issues/669)",
+        producer_route=False,
+        ai=(
+            "The issue says the work was done with Claude (Claude Code), directed and "
+            "approved by Evan Daniel."
+        ),
+        lineage=(
+            "The author’s basin explorer started from Daniil Ostashev’s packing, the "
+            "register’s witness for 155 when the search ran, and reached this one after a "
+            "chain of 18 moves; the issue credits that packing as the start. Measured here "
+            "square by square, no symmetry of the box pairs the two one to one, and the best "
+            "assignment moves 29 squares beyond a tenth, sharing no tilt: a new arrangement "
+            "found from Ostashev’s packing (T-197)."
+        ),
+    ),
+    "T-199": Prose(
+        author="Evan Daniel",
+        reported=(
+            "in [an update]"
+            "(https://github.com/jlevy/squares/issues/674#issuecomment-6244298663) on "
+            "[jlevy/squares#674](https://github.com/jlevy/squares/issues/674)"
+        ),
+        producer_route=False,
+        ai=(
+            "The issue says the work was done with Claude (Claude Code), directed and "
+            "approved by Evan Daniel."
+        ),
+        lineage=(
+            "The certificate is a dilation of the author’s binary64 packing by about "
+            "1 + 10⁻¹² with rational half-angle tangents; measured here, it pairs one to one "
+            "with his opening report (T-198), eight squares beyond a tenth. The issue credits "
+            "Francisco Couzo’s #672 packing, itself after Joost de Winter’s #668, as the "
+            "start; it carries de Winter’s four tilt bands but does not pair with his packing, "
+            "and #672 is not yet retained, so that step is the source’s (T-199)."
+        ),
+    ),
+    "T-218": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#659](https://github.com/jlevy/squares/issues/659)",
+        producer_route=False,
+        ai=(
+            "The issue says the work was done with Claude (Claude Code), directed and "
+            "approved by Evan Daniel."
+        ),
+        lineage=(
+            "The author’s basin explorer descended to this packing from a rebuild of Nate "
+            "Chaoweeraprasit’s SQUISH composition of #481, made from Kingbird’s s(152)_r2 "
+            "corner piece and itsnaka’s s(88); the issue credits that composition for the "
+            "construction. Measured here, the best assignment against the view of #481’s "
+            "packing the case held moves ten squares beyond a tenth and keeps 226 within one: "
+            "another arrangement of #481’s design (T-218)."
+        ),
+    ),
+    "T-219": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#664](https://github.com/jlevy/squares/issues/664)",
+        producer_route=False,
+        ai=(
+            "The issue says the work was done with Claude (Claude Code), directed and "
+            "approved by Evan Daniel."
+        ),
+        lineage=(
+            "The author’s basin explorer started from the register’s witness for 271 and "
+            "found this packing with one tilt-swap move and a re-polish; the issue calls it a "
+            "refinement of Francisco Couzo’s #561 packing of Nate Chaoweeraprasit’s SQUISH "
+            "design and asks that both be credited. Measured here, it pairs one to one with "
+            "#561’s packing, three squares beyond a tenth: Couzo’s arrangement continued, not "
+            "a refinement in this record’s sense (T-219). The credit is the one the issue "
+            "asks for, so Nate Chaoweeraprasit stays the finder, with Couzo and Daniel after "
+            "him; at 236, whose issue asks that the composition it started from be credited "
+            "for the construction, Daniel is the finder."
+        ),
+    ),
+    "T-220": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#680](https://github.com/jlevy/squares/issues/680)",
+        producer_route=False,
+        ai=(
+            "The source’s credits say its work was produced by Claude (Anthropic) under "
+            "human direction, and the commit that publishes the certificate names Claude "
+            "Opus 5.5 as co-author."
+        ),
+        lineage=(
+            "The author asks that the start be credited to Francisco Couzo’s n = 182 "
+            "packing, this register’s witness of the time, and it is: his basin explorer ran "
+            "17 moves at n = 182 from that witness to a packing that was no record, a square "
+            "was inserted into it, and a tilt-angle swap, two two-parent crossovers and "
+            "refinement led to this certificate. The crossovers’ second parents, other "
+            "packings of the same run, were not logged, so that lineage is the author’s "
+            "account and is not measured here. The source’s 27 numerical candidate flat "
+            "modes concern the 182-square force-bearing subsystem, excluding a free rattler, "
+            "and prove no local optimality."
+        ),
+        third_route=False,
+    ),
+    "T-221": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#689](https://github.com/jlevy/squares/issues/689)",
+        producer_route=False,
+        ai=(
+            "The source’s credits say its work was done with Claude (Anthropic) under human "
+            "direction, and the commit that publishes the certificate names Claude Opus 5.5 "
+            "as co-author and says Evan Daniel approved it."
+        ),
+        lineage=(
+            "The author’s chained explorer inserted one square into Nate Chaoweeraprasit’s "
+            "n = 307 packing of #481, the register’s witness for 307, and his basin explorer "
+            "descended from there to this packing; the issue asks that the 307 packing be "
+            "credited as the ultimate start, and says the packing neither refines nor "
+            "descends from Kevin Fang’s #484 or Daniel’s #489. Measured here square by "
+            "square, the best assignment against #489’s packing under a quarter turn moves 15 "
+            "squares beyond a tenth, at most 0.708, and keeps 293 within one, and 263 of the "
+            "307 squares of #481’s packing lie within a tenth of this one: another "
+            "arrangement of the two-wedge design that #484, #489 and #481’s 307 share, found "
+            "from #481’s 307 by the source’s account (T-221)."
+        ),
+    ),
+    "T-222": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#694](https://github.com/jlevy/squares/issues/694)",
+        producer_route=False,
+        ai=(
+            "The source’s credits say its work was done with Claude (Anthropic) under human "
+            "direction, and the commit that publishes the certificate names Claude Opus 5.5 "
+            "as co-author and says Evan Daniel approved it."
+        ),
+        lineage=(
+            "The author’s chained explorer removed two squares from Daniil Ostashev’s n = 156 "
+            "packing, the register’s witness for 156, and crossovers against close relatives "
+            "of Francisco Couzo’s #586 packing and a later restart of his basin explorer "
+            "reached this packing; the issue asks that #586’s arrangement, itself continued "
+            "from Daniel’s #552, and Ostashev’s packing be credited as its starts, and calls "
+            "it a different KKT point in #586’s family. Measured here square by square, it "
+            "pairs one to one with #586’s packing under a quarter turn, three squares beyond "
+            "a tenth, at most 0.204: Couzo’s arrangement continued, not a refinement in this "
+            "record’s sense, as at 271 (T-222). Ostashev’s packing lies within a tenth of it "
+            "at only 94 of its 156 squares, so his credit as the start rests on the source’s "
+            "account of the search, and Couzo’s on the measured arrangement."
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -582,19 +755,6 @@ def _couzo(start: str) -> Credit:
     return Credit((finder,), (COUZO,), f"Francisco Couzo’s refinement of {whose} packing")
 
 
-def _mondrian(pieces: str) -> Credit:
-    """A SQUISH Mondrian composition, with the pieces as its source names them (T-151)."""
-    return Credit(
-        (SQUISH,), (), f"Nate Chaoweeraprasit’s SQUISH packing, composed from {pieces}"
-    )
-
-
-def _composed(what: str) -> Credit:
-    """Daniil Ostashev's composition with his 38-square rectangle, as his issue names the
-    pieces (T-158); the pieces' sources are acknowledged, the packing is his."""
-    return Credit((OSTASHEV,), (), f"Daniil Ostashev’s composition of {what}")
-
-
 def _regularized(finder: str, whose: str, *, via: str | None = None) -> Credit:
     improved = (via, DANIEL) if via else (DANIEL,)
     refined = f", as {via} refined it," if via else ""
@@ -621,27 +781,72 @@ CREDITS: dict[int, Credit] = {
         found_year=2025,
         same_packing=True,
     ),
+    # T-174's regularization of T-118's packing, 22 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    68: Credit(
+        (COUZO,),
+        ("Seth Rehwaldt", PINGYOU),
+        "PingYou Ltd’s refinement of Seth Rehwaldt’s refinement of Francisco Couzo’s packing",
+    ),
     70: _regularized(XU, "Ryan Xu’s"),
-    84: _couzo("Xu"),
-    86: _couzo("Xu"),
+    # T-174's regularization of T-130's packing, 45 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    84: Credit(
+        (XU,),
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
+    ),
+    # T-174's regularization of T-130's packing, 64 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    86: Credit(
+        (XU,),
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
+    ),
     102: _regularized(XU, "Ryan Xu’s"),
-    103: _regularized(XU, "Ryan Xu’s", via="Mishapolk"),
-    # PingYou Ltd's tighter certificate of Couzo's packing, padding only (T-170's
-    # regularization of T-130, measured by the 14 October review).
+    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
+    # 1e-12 (the 14 October review of PR 574).
+    103: Credit(
+        (XU,),
+        (POLKOVSKYI, DANIEL, PINGYOU),
+        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Ryan "
+        "Xu’s packing as Mykhailo Polkovskyi refined it",
+    ),
+    # T-174's regularization of T-130's packing, as T-170 padded it, measured one to one,
+    # no square moved beyond 1e-12 (the 14 October review of PR 574).
     105: Credit(
         (XU,),
         (COUZO, PINGYOU),
         "PingYou Ltd’s tighter certificate of Francisco Couzo’s refinement of Ryan Xu’s "
         "packing",
     ),
-    108: _couzo("Xu"),
+    # T-174's regularization of T-128's packing, 13 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    108: Credit(
+        (XU,),
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
+    ),
+    # T-174's regularization of T-098's packing, 5 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    110: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+    ),
     123: _regularized(XU, "Ryan Xu’s"),
     126: Credit(
         (XU,),
         (DANIEL,),
         "Evan Daniel’s reconstruction and exact certificate of Ryan Xu’s arrangement",
     ),
-    127: _couzo("Xu"),
+    # T-174's regularization of T-128's packing, 53 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    127: Credit(
+        (XU,),
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
+    ),
     # Mykhailo Polkovskyi's KKT refinement of PR 574's re-solve of issue 562's packing
     # (T-186's regularization of T-174), no square moved beyond 1e-3.
     129: Credit(
@@ -650,12 +855,37 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 129 packing, as PingYou "
         "Ltd refined it",
     ),
-    131: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
-    132: Credit((DANIEL,), (), "Evan Daniel’s record-hunt packing"),
-    # Evan Daniel's chain search from Ryan Xu's packing: another arrangement of Xu's design,
-    # nine squares beyond a tenth against Xu's and Barnett's (RT-5 of the 16 October
-    # review; T-187 records no regularization).
-    146: Credit((XU,), (DANIEL,), "Evan Daniel’s arrangement of Ryan Xu’s n = 146 design"),
+    # T-174's regularization of T-127's packing, 15 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    130: Credit(
+        (SQUISH,),
+        ("Siddharth Gupta", PINGYOU),
+        "PingYou Ltd’s refinement of Siddharth Gupta’s refinement of Nate Chaoweeraprasit’s "
+        "SQUISH packing",
+    ),
+    # T-174's regularization of T-136's packing, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
+    131: Credit(
+        (SQUISH,),
+        (PINGYOU,),
+        "PingYou Ltd’s tighter certificate of Nate Chaoweeraprasit’s SQUISH packing",
+    ),
+    # T-174's regularization of T-141's packing, 18 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    132: Credit(
+        (DANIEL,),
+        (PINGYOU,),
+        "PingYou Ltd’s refinement of Evan Daniel’s record-hunt packing",
+    ),
+    # Evan Daniel's chain search from Ryan Xu's packing: nine squares beyond a tenth
+    # against Xu's and Barnett's (RT-5 of the 16 October review; T-187 records no
+    # regularization). Issue 673 corrects the source's credit: the start was named as
+    # "based on", and the finder of the packing posted is Daniel (19 October 2026).
+    146: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from a chain search started from Ryan Xu’s n = 146 packing",
+    ),
     # PingYou Ltd's design rearranged by Mykhailo Polkovskyi, as the 14 October review
     # measured it (RQ-5); whether it is a new arrangement is the owner's decision 1 on
     # pull request 602 (T-173).
@@ -665,15 +895,28 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s arrangement of PingYou Ltd’s n = 153 design, after Ryan "
         "Xu’s n = 70 packing and Evan Daniel’s exact certificate of it",
     ),
-    # T-182's packing re-solved (T-186's regularization of T-182), after Evan Daniel's
-    # issue-552 arrangement (RT-4 of the 16 October review).
+    # Evan Daniel's continuation of issue 586's arrangement, three squares beyond a tenth
+    # (the 20 October review), which Couzo continued from Daniel's issue-552 packing; issue
+    # 694 credits #586's arrangement and Ostashev's n = 156 packing as its starts, and only
+    # the first is near it by pose, so Ostashev is named as the source's account of the
+    # search. T-186's re-solve of T-182, the earlier house, is not its start.
     154: Credit(
         (DANIEL,),
-        (COUZO, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s refinement of Francisco Couzo’s further arrangement of Evan "
-        "Daniel’s n = 154 packing",
+        (COUZO,),
+        "Evan Daniel’s continuation of Francisco Couzo’s further arrangement of Daniel’s "
+        "n = 154 packing in a search the source started from Daniil Ostashev’s n = 156 "
+        "packing",
     ),
-    155: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # T-174's regularization of T-149's packing, 3 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # Evan Daniel's basin explorer from Ostashev's packing to a different local minimum;
+    # the issue credits Ostashev's packing as the start, which the author's issue 673
+    # reads as "based on", not as the finder of the packing posted.
+    155: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from a search started from Daniil Ostashev’s packing",
+    ),
     # PR 574's padding of issue 561's continuation of Ostashev's packing, padded again
     # (T-186's regularization of T-174; RT-4).
     156: Credit(
@@ -681,6 +924,13 @@ CREDITS: dict[int, Credit] = {
         (COUZO, PINGYOU, POLKOVSKYI),
         "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
         "Daniil Ostashev’s n = 156 packing, after PingYou Ltd’s",
+    ),
+    # T-174's regularization of T-098's packing, 69 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    172: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
     # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
     # T-174).
@@ -699,19 +949,45 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s exact re-solve of Daniil Ostashev’s issue-575 n = 176 "
         "packing, after PingYou Ltd’s",
     ),
+    # T-174's regularization of T-127's packing, 42 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    179: Credit(
+        (SQUISH,),
+        ("Siddharth Gupta", PINGYOU),
+        "PingYou Ltd’s refinement of Siddharth Gupta’s refinement of Nate Chaoweeraprasit’s "
+        "SQUISH packing",
+    ),
+    # T-174's regularization of T-128's packing, 25 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
     180: Credit(
         (SQUISH,),
-        ("Siddharth Gupta", COUZO),
-        "Francisco Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing, "
-        "as Siddharth Gupta refined it",
+        ("Siddharth Gupta", COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Nate Chaoweeraprasit’s "
+        "SQUISH packing, after Siddharth Gupta’s",
     ),
-    181: _mondrian("two of SQUISH’s own n = 154 packings"),
-    # By pose an exact re-solve of PingYou Ltd's packing (RQ-5 of the 14 October review).
-    207: Credit(
+    # T-174's regularization of T-151's packing re-solved, measured one to one, no square
+    # moved beyond 1.5e-4 (the 14 October review of PR 574).
+    181: Credit(
+        (SQUISH,),
         (PINGYOU,),
-        ("Mishapolk",),
-        "Mykhailo Polkovskyi’s exact re-solve of PingYou Ltd’s assembly of two placed "
-        "patches of Ryan Xu’s n = 70 packing, from Evan Daniel’s exact certificate of it",
+        "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing composed "
+        "from two of SQUISH’s own n = 154 packings",
+    ),
+    # T-174's regularization of T-098's packing, 27 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    182: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+    ),
+    # Evan Daniel's packing from his basin explorer, which started from Francisco Couzo's
+    # n = 182 packing as this register's witness held it; the crossover mates were not
+    # logged (issue 680, T-220). The register's seed is acknowledged in the bibliography's
+    # credit only, as no packing of the project's is in the lineage.
+    183: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
     # PR 574's re-solve of issue 562's packing, re-solved again (T-186's regularization of
     # T-174), two squares moved beyond 1e-3.
@@ -721,7 +997,44 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 204 packing, as PingYou "
         "Ltd refined it",
     ),
-    209: _couzo("SQUISH"),
+    # T-174's regularization of T-098's packing, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
+    206: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s tighter certificate of Evan Daniel’s exact optimum of Francisco "
+        "Couzo’s packing",
+    ),
+    # By pose an exact re-solve of PingYou Ltd's packing (RQ-5 of the 14 October review).
+    207: Credit(
+        (PINGYOU,),
+        ("Mishapolk",),
+        "Mykhailo Polkovskyi’s exact re-solve of PingYou Ltd’s assembly of two placed "
+        "patches of Ryan Xu’s n = 70 packing, from Evan Daniel’s exact certificate of it",
+    ),
+    # T-174's regularization of T-127's packing, 20 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    208: Credit(
+        (SQUISH,),
+        ("Siddharth Gupta", PINGYOU),
+        "PingYou Ltd’s refinement of Siddharth Gupta’s refinement of Nate Chaoweeraprasit’s "
+        "SQUISH packing",
+    ),
+    # T-174's regularization of T-140's packing, 23 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    209: Credit(
+        (SQUISH,),
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Nate Chaoweeraprasit’s "
+        "SQUISH packing",
+    ),
+    # T-174's regularization of T-098's packing, 33 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    210: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+    ),
     # Couzo's further arrangement of Ostashev's issue-575 design, five squares beyond a
     # tenth against T-182 and T-175 (RT-1 of the 16 October review; T-188 records no
     # regularization).
@@ -730,7 +1043,22 @@ CREDITS: dict[int, Credit] = {
         (COUZO,),
         "Francisco Couzo’s further arrangement of Daniil Ostashev’s n = 211 design",
     ),
-    228: Credit((COUZO,), (), "Francisco Couzo’s refinement of his own packing"),
+    # T-174's regularization of T-128's packing, 46 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    228: Credit(
+        (COUZO,),
+        (PINGYOU,),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of his own packing",
+    ),
+    # Evan Daniel's dilation of a nearby configuration of his opening packing (T-198); the
+    # issue credits Couzo's issue-672 packing, after de Winter's issue 668, as the start,
+    # which the author's issue 673 reads as "based on".
+    229: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from a search started from Francisco Couzo’s refinement of "
+        "Joost de Winter’s packing",
+    ),
     # PR 574's re-solve of issue 528's composition, re-solved again (T-186's
     # regularization of T-174).
     232: Credit(
@@ -740,7 +1068,14 @@ CREDITS: dict[int, Credit] = {
         "composition of his 38-square rectangle with a 76-square piece of Erich Friedman’s "
         "n = 85 packing",
     ),
-    236: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
+    # Evan Daniel's basin explorer from a rebuild of issue 481's composition to a different
+    # local minimum; the issue credits the composition for the construction, which the
+    # author's issue 673 reads as "based on", not as the finder of the packing posted.
+    236: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from a rebuild of Nate Chaoweeraprasit’s SQUISH composition",
+    ),
     # Couzo's refinement of issue 593's arrangement of his issue-561 design (T-190's
     # regularization of T-183).
     237: Credit(
@@ -749,9 +1084,29 @@ CREDITS: dict[int, Credit] = {
         "Francisco Couzo’s refinement of Mykhailo Polkovskyi’s arrangement of Couzo’s "
         "design, after Nate Chaoweeraprasit’s SQUISH packing",
     ),
-    238: _mondrian("SQUISH’s own n = 305 and n = 154 packings"),
-    239: _mondrian(
-        "SQUISH’s n = 209 packing as Siddharth Gupta refined it and its own n = 240 packing"
+    # T-174's regularization of T-151's packing, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
+    238: Credit(
+        (SQUISH,),
+        (PINGYOU,),
+        "PingYou Ltd’s tighter certificate of Nate Chaoweeraprasit’s SQUISH packing "
+        "composed from SQUISH’s own n = 305 and n = 154 packings",
+    ),
+    # T-174's regularization of T-151's packing re-solved, measured one to one, no square
+    # moved beyond 1.5e-4 (the 14 October review of PR 574).
+    239: Credit(
+        (SQUISH,),
+        (PINGYOU,),
+        "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing composed "
+        "from SQUISH’s n = 209 packing as Siddharth Gupta refined it and its own n = 240 "
+        "packing",
+    ),
+    # T-174's regularization of T-098's packing, 28 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    240: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
     241: Credit(
         (OSTASHEV,),
@@ -760,14 +1115,21 @@ CREDITS: dict[int, Credit] = {
     ),
     258: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH", via="Mishapolk"),
     259: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
-    # Barnett's packing re-solved, no square moved beyond 2e-06 (T-169's regularization
-    # of T-150).
+    # T-174's regularization of T-169's re-solve, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
     261: Credit(
         (XU,),
         (BARNETT, PINGYOU),
         "PingYou Ltd’s exact re-solve of Robert Barnett’s refinement of Ryan Xu’s packing",
     ),
-    263: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
+    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
+    # 1e-12 (the 14 October review of PR 574).
+    263: Credit(
+        (SQUISH,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Nate "
+        "Chaoweeraprasit’s SQUISH packing",
+    ),
     # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
     # T-174).
     264: Credit(
@@ -778,28 +1140,65 @@ CREDITS: dict[int, Credit] = {
         "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
     ),
     267: _couzo("Xu"),
-    269: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    270: _mondrian(
-        "SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird catalogue’s former "
-        "n = 19 packing"
+    # T-174's regularization of T-098's packing, 117 squares moved beyond 1e-3, one to
+    # one; that it is that packing is the source's statement (the 14 October review of PR
+    # 574).
+    268: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
-    # PR 574's padding of issue 561's refinement of SQUISH's packing, padded again
-    # (T-186's regularization of T-174; RT-4: whether T-161 lists T-151 is the owner's).
+    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
+    # 1e-12 (the 14 October review of PR 574).
+    269: Credit(
+        (SQUISH,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Nate "
+        "Chaoweeraprasit’s SQUISH packing",
+    ),
+    # T-174's regularization of T-151's packing, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
+    270: Credit(
+        (SQUISH,),
+        (PINGYOU,),
+        "PingYou Ltd’s tighter certificate of Nate Chaoweeraprasit’s SQUISH packing "
+        "composed from SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird "
+        "catalogue’s former n = 19 packing",
+    ),
+    # Evan Daniel's tilt-swap from the register's witness (T-186's tightening of issue 561's
+    # packing): issue 561's arrangement continued, three squares beyond a tenth (RV-2 of the
+    # 19 October review), which issue 664 calls a refinement of Couzo's packing of SQUISH's
+    # and asks both be credited.
     271: Credit(
         (SQUISH,),
-        (COUZO, PINGYOU, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Francisco "
-        "Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing",
+        (COUZO, DANIEL),
+        "Evan Daniel’s continuation of Francisco Couzo’s arrangement of Nate "
+        "Chaoweeraprasit’s SQUISH packing",
     ),
-    # SQUISH's packing re-solved, no square moved beyond 2e-07 (T-171's regularization of
-    # T-151).
+    # T-174's regularization of T-151's packing, as T-171 re-solved it, measured one to
+    # one, no square moved beyond 1.5e-4 (the 14 October review of PR 574).
     272: Credit(
         (SQUISH,),
         (PINGYOU,),
         "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing",
     ),
+    # T-174's regularization of T-098's packing, 49 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    273: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+    ),
     292: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
     295: _regularized(XU, "Ryan Xu’s"),
+    # T-174's regularization of T-098's packing, 119 squares moved beyond 1e-3, one to
+    # one; that it is that packing is the source's statement (the 14 October review of PR
+    # 574).
+    297: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+    ),
     # Issue 583's continuation of PingYou Ltd's arrangement, padded (T-186's
     # regularization of T-181; RT-4).
     302: Credit(
@@ -822,17 +1221,40 @@ CREDITS: dict[int, Credit] = {
         (POLKOVSKYI,),
         "Mykhailo Polkovskyi’s tighter certificate of Daniil Ostashev’s n = 304 packing",
     ),
+    # T-174's regularization of T-152's packing, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
     305: Credit(
         (SQUISH,),
-        (COUZO,),
-        "Francisco Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH Mondrian packing",
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s tighter certificate of Francisco Couzo’s refinement of Nate "
+        "Chaoweeraprasit’s SQUISH Mondrian packing",
     ),
-    306: Credit((COUZO,), (), "Francisco Couzo’s refinement of his own packing"),
-    307: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
+    # T-174's regularization of T-128's packing, 34 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    306: Credit(
+        (COUZO,),
+        (PINGYOU,),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of his own packing",
+    ),
+    # T-174's regularization of T-136's packing re-solved, measured one to one, no square
+    # moved beyond 1.5e-4 (the 14 October review of PR 574).
+    307: Credit(
+        (SQUISH,),
+        (PINGYOU,),
+        "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing",
+    ),
+    # T-174's regularization of T-141's packing, 25 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # Issue 689's packing, another arrangement of the two-wedge design (15 squares beyond a
+    # tenth of #489's, the 20 October review), found from issue 481's n = 307 packing, which
+    # the issue credits as the ultimate start. Fang is named in the sentence as the design's
+    # author, as the earlier house's credit named him, and not in the structured fields,
+    # which is the owner's open decision under think-a95t (RW-1 of that review).
     308: Credit(
-        ("Kevin Fang",),
         (DANIEL,),
-        "Evan Daniel’s move of Kevin Fang’s two-wedge construction",
+        (),
+        "Evan Daniel’s arrangement of Kevin Fang’s two-wedge design in a search started from "
+        "Nate Chaoweeraprasit’s n = 307 packing",
     ),
 }
 
@@ -997,8 +1419,10 @@ def _claims(path: Path) -> Mapping[int, str]:
     return load_claims(path)
 
 
-#: The most places a house's side is printed at to stay below the house it replaces.
-MAX_PLACES = 40
+#: The most places a house's side is printed at to stay below the house it replaces: 40
+#: until 17 October 2026, when T-174's 68 came in 4.58e-61 below Seth Rehwaldt's exact
+#: 59-place print (T-118), which 40 places tie.
+MAX_PLACES = 72
 
 
 def shown(side: Fraction, above: object = None) -> str:
@@ -1152,7 +1576,9 @@ def plan(
     Each move carries its case record's text, read from the frontier unless `texts` holds
     the count, as a replay of the retained prior state passes it. A count staged in
     `select_houses.PENDING_ADOPTION` for the house the selection names is no move here
-    until its bead's pull request takes it off the list.
+    until its bead's pull request takes it off the list. A house whose regularization item
+    is owed a correction (`select_houses.CORRECTIONS_OWED`) is refused until the item is
+    corrected, so its uncorrected credit is never written (review B1 of #658).
     """
     selections = select_houses.select() if selections is None else selections
     moves = []
@@ -1165,6 +1591,14 @@ def plan(
             # Owed to the staged bead's pull request, which takes the count off the list
             # and then adopts it here.
             continue
+        if (owed := select_houses.owed_correction(n, house)) is not None:
+            # The credit this writes is the item's `of`, which a review measured to be
+            # wrong here: the adoption waits for the correction (review B1 of #658).
+            raise AdoptionError(
+                f"n={n}: {house.result}'s regularization item names {owed.named} as the "
+                f"packing it solves, which {owed.measured_in} measured to be {owed.measured}; "
+                f"correct the item first ({owed.bead}, select_houses.CORRECTIONS_OWED)"
+            )
         if house.algebraic:
             raise AdoptionError(
                 f"n={n}: the house is {house.result}'s algebraic side, and this writes a "
@@ -1404,7 +1838,11 @@ def _lanes_differ(packing: Mapping[str, Any]) -> bool:
 
 
 def _ceiling(packing: Mapping[str, Any]) -> str:
-    """The margin's verified baseline where the lanes differ, not its retained display."""
+    """The earlier ceiling to quote: the exact verified side when its displays differ.
+
+    Otherwise retain the shared display. The exact certificate margin is stated
+    separately, since neither outward display need equal its certificate's side.
+    """
     if _lanes_differ(packing):
         return str(packing["verified_upper_bound"]["exact_form"])
     return str(packing["reported_upper_bound"]["value"])
@@ -1437,12 +1875,20 @@ def _reported_apart(move: Move) -> str:
 
 def opening(move: Move) -> str:
     n, house, credit = move.n, move.house, CREDITS[move.n]
+    earlier = (
+        "The earlier exact ceiling, "
+        if _lanes_differ(move.packing)
+        else "The earlier ceiling, displayed outward as "
+    )
     return (
         f"**House adoption, {day_words(n)}.** {credit.phrase[0].upper()}{credit.phrase[1:]} "
         f"({house.result}) is now this case’s house: its exact certificate proves "
         f"$s({n}) \\le {shown(move.side, _above(move))}$, the reported and the verified "
-        f"upper bound, `{_sci(move.selection.margin)}` below the ceiling the case held until "
-        f"then, ${_ceiling(move.packing)}$ from {_holder(move.packing)}, which stays retained "
+        "upper bound, rounded outward from its exact side. The exact certificate side "
+        "improves the previous verified exact side "
+        f"by about `{_sci(move.selection.margin)}`. {earlier}"
+        f"${_ceiling(move.packing)}$ from {_holder(move.packing)}, applied until this "
+        "adoption and stays retained "
         f"as history{_reported_apart(move)} ([the certificate](#{_anchor(move)}))."
     )
 
@@ -1476,6 +1922,12 @@ def section(move: Move) -> str:
         "re-implemented."
     )
     reviews = f"[review of {reviewed}](../../{review})"
+    third = (
+        ", and a third exact route, half-extent containment and exact intersection area, "
+        "decided it again"
+        if prose.third_route
+        else "; no third exact route has decided it"
+    )
     if _finally_reviewed(house.result):
         reviews = f"{reviews} and the [final review of 11 October 2026](../../{FINAL_REVIEW})"
     paragraphs = [
@@ -1490,8 +1942,7 @@ def section(move: Move) -> str:
         (
             "Both maintained exact routes decided it here, `sqpack`’s exact separating-axis "
             "verifier and the independent rational corner checker, with its duplicate-square "
-            "and outside-container controls, and a third exact route, half-extent containment "
-            f"and exact intersection area, decided it again. {routes} The {reviews} "
+            f"and outside-container controls{third}. {routes} The {reviews} "
             "accepted the replay for finite feasibility. "
             f"That proves $s({n}) \\le {ceiling}$, the verified upper bound: confirmed, "
             "independently re-implemented. It says nothing about "
@@ -1533,6 +1984,18 @@ def section(move: Move) -> str:
     waiting = [
         *held_sentences(move.selection.held, move.side, below="this house", keeps="this house"),
         *algebraic_sentences(move.selection, move.side),
+        *staged_sentences(
+            move.n,
+            move.side,
+            named={c.result for c in move.selection.held}
+            | {
+                result
+                for result, key in move.selection.algebraic
+                if select_houses.algebraic_below(key, move.n, move.side)
+            },
+            below="this house",
+            keeps="this house",
+        ),
     ]
     if waiting:
         history += " " + " ".join(waiting)
@@ -1553,6 +2016,35 @@ def _staged(n: int, result: str) -> str:
     return f", staged under {staged.bead},"
 
 
+def _writer_clause(staged: select_houses.Pending) -> str:
+    """What a staged adoption that waits for the writer adds: when it can move the case."""
+    if staged.why == select_houses.NO_WRITER:
+        return ", once the writer takes an algebraic side"
+    return ""
+
+
+def _keeps_until(n: int, result: str, keeps: str) -> str:
+    """The sentence that says what the case keeps until an adoption moves it.
+
+    Where the count is staged for `result`, or for nothing, that is `result`'s adoption.
+    Where a packing validated since is smaller still and staged in its place, as T-193's
+    exact sides are below T-174's at twelve counts (#658), it is that packing's adoption,
+    under its own bead and, where it waits for the writer, once the writer takes it; the
+    held result is named as the side it passes, and `staged_sentences` describes the
+    staged house (review B3 of #658)."""
+    staged = select_houses.PENDING_ADOPTION.get(n)
+    if staged is not None and staged.house != result:
+        return (
+            f"The case keeps {keeps} until {staged.house}’s adoption, staged under "
+            f"{staged.bead}, moves it to {staged.house}’s side, below {result}’s"
+            f"{_writer_clause(staged)}."
+        )
+    return (
+        f"The case keeps {keeps} until {result}’s adoption{_staged(n, result)} moves it to "
+        f"{result}’s side."
+    )
+
+
 def held_sentences(
     held: Sequence[select_houses.Candidate], side: exact_sides.Side, *, below: str, keeps: str
 ) -> list[str]:
@@ -1568,9 +2060,7 @@ def held_sentences(
             f"`{_sci(exact_sides.lower_gap(side, candidate.side))}` below {below}, is "
             "confirmed here and accepted by "
             f"the [review of {reviewed}](../../{review}). {lifted_sentence(candidate.result)} "
-            f"The case keeps {keeps} until {candidate.result}’s adoption"
-            f"{_staged(candidate.n, candidate.result)} moves it to {candidate.result}’s "
-            "side."
+            + _keeps_until(candidate.n, candidate.result, keeps)
         )
     return sentences
 
@@ -1605,9 +2095,14 @@ def held_history(text: str) -> str:
         name = re.escape(result)
         since, until = _spaced(words(hold.since)), _spaced(words(hold.until))
         lifted = rf"until\s+the\s+owner’s\s+house\s+rule\s+of\s+{until}\s+lifted\s+the\s+hold"
+        # Either the held result's own adoption moves the case, or a smaller packing staged
+        # in its place does, below the held result's side (`_keeps_until`).
         keeps = (
-            rf"case\s+keeps\s+(?:this|its)\s+house\s+until\s+{name}’s\s+adoption"
+            rf"case\s+keeps\s+(?:this|its)\s+house\s+until\s+(?:{name}’s\s+adoption"
             rf"(?:,\s+staged\s+under\s+think-[a-z0-9]+,)?\s+moves\s+it\s+to\s+{name}’s\s+side\."
+            rf"|T-\d+’s\s+adoption,\s+staged\s+under\s+think-[a-z0-9]+,\s+moves\s+it\s+to\s+"
+            rf"T-\d+’s\s+side,\s+below\s+{name}’s"
+            rf"(?:,\s+once\s+the\s+writer\s+takes\s+an\s+algebraic\s+side)?\.)"
         )
         history = f". {lifted_sentence(result)}"
         # The rule of 15 October's: "..., but PR #574's houses are held for the owner:
@@ -1655,16 +2150,80 @@ def algebraic_sentences(selection: select_houses.Selection, side: Fraction) -> l
         _value, degree = select_houses.algebraic_side(key, selection.n)
         margin = select_houses.algebraic_margin(key, selection.n, side)
         review, reviewed = _review(result)
-        sentences.append(
+        opening = (
             f"{result}’s algebraic certificate at this count, a root of a degree-{degree} "
             f"integer polynomial `{_sci(margin)}` below this house, is decided here on one "
             "exact route. The rule of 15 October left it out for the owner (RP-3 of the "
             f"[review of {reviewed}](../../{review})), and the owner’s house rule of "
-            f"{words(select_houses.RULE_SET_ON)} adopts it: the case keeps this house until "
+            f"{words(select_houses.RULE_SET_ON)} "
+        )
+        staged = select_houses.PENDING_ADOPTION.get(selection.n)
+        if staged is not None and staged.house != result:
+            # A smaller packing is staged in its place (review B3 of #658).
+            sentences.append(
+                f"{opening}ended that wait. {_keeps_until(selection.n, result, 'this house')}"
+            )
+            continue
+        sentences.append(
+            f"{opening}adopts it: the case keeps this house until "
             f"its adoption{_staged(selection.n, result)} moves it to {result}’s side, once "
             "the writer takes an algebraic side."
         )
     return sentences
+
+
+def _staged_house(n: int) -> tuple[select_houses.Pending, select_houses.Candidate] | None:
+    """The adoption staged at `n` and its house's candidate there, if any."""
+    staged = select_houses.PENDING_ADOPTION.get(n)
+    if staged is None:
+        return None
+    entries = [e for e in select_houses.load_results() if e["id"] == staged.house]
+    found = select_houses.candidates(entries, select_houses.load_evidence()).get(n)
+    return (staged, found[0]) if found else None
+
+
+def staged_sentences(
+    n: int, side: exact_sides.Side, *, named: set[str], below: str, keeps: str
+) -> list[str]:
+    """What a record says of a smaller house staged at its count that its other sentences
+    do not describe: one validated after the pass that wrote the record, as T-193's exact
+    algebraic sides are below T-186's houses at 175, 204, 232 and 302 and below T-174's
+    held sides at twelve counts (#658).
+
+    `named` are the results the record's held and algebraic sentences describe. Where the
+    staged house is among them, nothing is added. Where they describe others, their
+    closing clause already says the case moves to the staged house (`_keeps_until`), so
+    this adds what the staged house is: its kind, its margin below `below` and the review
+    that accepted it (review B3 of #658). Where there are none, it says that and that the
+    case keeps `keeps` until the staged adoption moves it."""
+    found = _staged_house(n)
+    if found is None:
+        return []
+    staged, candidate = found
+    if staged.house in named or not candidate.side < side:
+        return []
+    review, reviewed = _review(staged.house)
+    kind = (
+        f"exact algebraic side at this count, a root of a degree-{candidate.side.degree} "
+        "integer polynomial"
+        if isinstance(candidate.side, exact_sides.Algebraic)
+        else "exact side at this count"
+    )
+    margin = _sci(exact_sides.lower_gap(side, candidate.side))
+    described = (
+        f"{staged.house}’s {kind} `{margin}` below {below}, is confirmed here and "
+        f"accepted by the [review of {reviewed}](../../{review})."
+    )
+    if named:
+        return [described]
+    return [
+        (
+            f"{described[:-1]}. The owner’s house rule "
+            f"of {words(select_houses.RULE_SET_ON)} adopts it: the case keeps {keeps} "
+            f"until its adoption, staged under {staged.bead}, moves it to {staged.house}’s "
+            f"side{_writer_clause(staged)}."
+        )
+    ]
 
 
 #: The results whose regularizations are for display, at the side the source reports as
@@ -1777,13 +2336,83 @@ def _regularized_certificate(move: Move, text: str) -> str:
         rf"That proves \1, the verified upper bound until {until}.\2",
         text,
     )
-    return re.sub(
+    text = re.sub(
         r"\bThat\s+side\s+is\s+the\s+exact\s+form\s+of\s+the\s+case’s\s+`verified_upper_bound`,"
         r"\s+which\s+cites\s+both\s+certificates\s+\(([^)]*)\)\s+and\s+prints\s+it\s+as",
         rf"That side was the exact form of the case’s `verified_upper_bound` until {until}, "
         r"which cited both certificates (\1) and printed it as",
         text,
     )
+    if houses.adopted_on(n) < VIEW_SECTION_FROM:
+        return text
+    # Where the view's dated paragraph and section state the bound it proved as the
+    # verified lane, both are history too, from the pass of 19 October 2026 on: n = 229
+    # was the first count whose house moved off a T-155 view by more than the section's
+    # printed places. The paragraph is the form `register_regularized_bounds` writes for a
+    # side not at T-101's (review A1 of #692).
+    text = re.sub(
+        rf"\b(it\s+proves\s+{bound}),\s+the\s+verified\s+upper\s+bound\s+\((T-\d+)\)"
+        r"(\s+rounded\s+up\s+at\s+\d+\s+places)?,\s+which\s+the\s+record\s+still\s+prints\s+as"
+        r"\s+(\$[0-9.]+\$)\.",
+        rf"\1, the verified upper bound until {until} (\2)\3, which the record printed as \4.",
+        text,
+    )
+    return re.sub(
+        rf"\bThat\s+proves\s+({bound}),\s+the\s+verified\s+upper\s+bound\s+\((T-\d+)\),\s+the"
+        r"\s+exact\s+form\s+of\s+the\s+case’s\s+`verified_upper_bound`,\s+which\s+prints\s+it\s+as"
+        r"\s+(\$[0-9.]+\$),\s+the\s+decimal\s+it\s+printed\s+before",
+        rf"That proves \1, the verified upper bound until {until} (\2), then the exact form "
+        r"of the case’s `verified_upper_bound`, which printed it as \3, the decimal it printed "
+        r"before",
+        text,
+    )
+
+
+#: The dated paragraph the intake of 18 October 2026 wrote under a case's title for a
+#: report it registered at V0/C0 below the house (b783bcc0a), through the paragraphs that
+#: follow it up to the next dated one or heading.
+PENDING_REPORT = re.compile(
+    r"\*\*Reported\s+certificate\s+pending\s+adoption,\s+(\d{4}-\d{2}-\d{2})\.\*\*"
+    r"(?:(?!\n\n(?:\*\*|#)).)*",
+    re.DOTALL,
+)
+
+
+def pending_history(text: str, until: str) -> str:
+    """A registration's "pending adoption" paragraph, once a pass moves the house, as history.
+
+    The paragraph said the registration left both upper lanes, the house witness and its
+    drawing unchanged until review and adoption, and that the rigidity and arrangement
+    notes below described that house. An adoption at the count moves all of them, whichever
+    certificate it adopts, so the paragraph says what held until then, and a sentence after
+    it that calls a report pending adoption says until when (review A1 of #692: n = 155 and
+    229 adopted the very reports their paragraphs named, on 19 October 2026).
+    """
+
+    def past(match: re.Match[str]) -> str:
+        block = re.sub(
+            r"^\*\*Reported\s+certificate\s+pending\s+adoption,\s+",
+            "**Reported certificate, ",
+            match.group(),
+        )
+        block = re.sub(
+            r"\breports\s+a\s+(\d+)-square\s+certificate\b",
+            r"reported a \1-square certificate",
+            block,
+        )
+        block = re.sub(
+            r"\bThis\s+V0/C0\s+registration\s+leaves\s+both\s+case\s+upper\s+lanes,\s+the\s+house"
+            r"\s+witness\s+and\s+its\s+drawing\s+unchanged\s+until\s+separate\s+Stage\s+4\s+review"
+            r"\s+and\s+adoption\.\s+Rigidity\s+and\s+arrangement\s+notes\s+below\s+describe\s+that"
+            r"\s+retained\s+house\.",
+            f"Its V0/C0 registration left both case upper lanes, the house witness and its "
+            f"drawing unchanged until the house adoption of {until}, and until then the "
+            "rigidity and arrangement notes below described that retained house.",
+            block,
+        )
+        return re.sub(r"\bpending\s+adoption\.", f"pending adoption until {until}.", block)
+
+    return PENDING_REPORT.sub(past, text)
 
 
 def _n29_history(text: str) -> str:
@@ -1813,7 +2442,7 @@ def historical(move: Move, text: str) -> str:
     """The body's own statements of the earlier house, marked as history.
 
     `check_case_prose` holds every `s(n) <= x` a body writes to the front matter unless
-    its sentence says it is historical. Six kinds of prose refer to earlier bounds and
+    its sentence says it is historical. Seven kinds of prose refer to earlier bounds and
     are marked as history:
 
     - the opening "Open." sentence the generator writes, of the best known packing;
@@ -1821,18 +2450,22 @@ def historical(move: Move, text: str) -> str:
     - the exact-ceiling prose that `T-101` wrote where a certified side rounded up trails
       the catalogue's print (`apply_exact_ceilings`): its dated paragraph, its ceiling
       section, now "The earlier verified ceiling", and its certificate section;
-    - the regularized certificate's prose that `T-155` wrote at T-101's side
-      (`register_regularized_bounds`): its dated paragraph and its section;
+    - the regularized certificate's prose that `T-155` wrote (`register_regularized_bounds`):
+      its dated paragraph and its section, at T-101's side and, from the pass of 19
+      October 2026 on, off it;
     - a house an earlier pass of this adoption adopted, in its dated paragraph and its
       section;
+    - the dated paragraph an intake wrote for a report it registered pending adoption,
+      which said the house stayed until review and adoption (`pending_history`);
     - the n = 29 numerical solve and Schadt-certificate statements, which describe a
       ceiling the later interval and exact certificates superseded.
 
     Prose in no fixed form, which no tool here wrote, is not rewritten; `check_case_prose`
     refuses a record that still states it as the bound. The first pass marked such prose
     by hand at five counts, the SQUISH update sections at 155, 258, 263 and 302 and the
-    grid prose at 308 (`HAND_MARKED`); every other word of an adopted body, the verifier
-    table apart, is what this writes from the record its last pass read.
+    grid prose at 308, and the pass of 19 October 2026 the intake's prose at 183
+    (`HAND_MARKED`); every other word of an adopted body, the verifier table apart, is
+    what this writes from the record its last pass read.
     """
     n, until = move.n, day_words(move.n)
     text = _named_prose(text)
@@ -1853,6 +2486,7 @@ def historical(move: Move, text: str) -> str:
     if n == 29:
         text = _n29_history(text)
     text = held_history(text)
+    text = pending_history(text, until)
     # The records are wrapped, so a sentence may break at any space; whitespace is
     # matched as such and the reflow is the formatter's.
     text = re.sub(
@@ -1920,6 +2554,12 @@ def _section_span(text: str, key: str) -> tuple[int, int]:
 
 #: The clause of a displaced house's row that names the certificate below it.
 DISPLACED_BY = re.compile(r"and T-\d+'s exact side is smaller\.$")
+#: A superseded row's words for the house above which its report lies, as `_unaccounted`
+#: writes them or a pass wrote them by hand: a later house is smaller still, so the report
+#: lies above it too, and the row names it (n = 305's issue-489 row, 17 October 2026).
+ABOVE_HOUSE = re.compile(
+    r"\babove the house adopted (here )?on \d{4}-\d{2}-\d{2}(?: \(T-\d+\))?"
+)
 #: The day a selected override's reason says its house was adopted.
 ADOPTED_ON_DAY = re.compile(r"\badopted on (\d{4}-\d{2}-\d{2}) \(T-\d+\)")
 
@@ -1949,6 +2589,13 @@ def coverage(moves: Sequence[Move], text: str) -> str:
                 if "reason" in report:
                     report["reason"] = DISPLACED_BY.sub(
                         f"and {house.result}'s exact side is smaller.", str(report["reason"])
+                    )
+                    report["reason"] = ABOVE_HOUSE.sub(
+                        lambda match, n=n, result=house.result: (
+                            f"above the house adopted {match.group(1) or ''}on "
+                            f"{houses.adopted_on(n)} ({result})"
+                        ),
+                        str(report["reason"]),
                     )
         # The displaced house is recorded whether or not its source has a claims record:
         # its selected value is the source's print where it has one and the ceiling of
@@ -2264,12 +2911,19 @@ def held_note(n: int, text: str) -> str:
     if held:
         since = min(select_houses.LIFTED[c.result].since for c in held)
         until = max(select_houses.LIFTED[c.result].until for c in held)
-        sentences = held_sentences(
-            held,
-            select_houses.parse_case(n, text).verified,
-            below="this case’s verified ceiling",
-            keeps="its house",
-        )
+        verified = select_houses.parse_case(n, text).verified
+        sentences = [
+            *held_sentences(
+                held, verified, below="this case’s verified ceiling", keeps="its house"
+            ),
+            *staged_sentences(
+                n,
+                verified,
+                named={c.result for c in held},
+                below="this case’s verified ceiling",
+                keeps="its house",
+            ),
+        ]
         written = f"{HELD_OPENING}{words(since)}; lifted {words(until)}.** " + " ".join(
             sentences
         )
@@ -2350,6 +3004,15 @@ def _span(text: str, start: str, end: str) -> tuple[int, int]:
     return found, text.index(end, found)
 
 
+def refreshed_opening(move: Move, committed: str) -> str:
+    """Replace only this pass's dated opening; preserve every other writer's bytes."""
+    start, end = _span(committed, f"\n**House adoption, {day_words(move.n)}.**", "\n\n")
+    paragraph = "\n" + opening(move)
+    if _flat(committed[start:end]) == _flat(paragraph):
+        return committed
+    return committed[:start] + paragraph + committed[end:]
+
+
 def refreshed(move: Move, committed: str) -> str:
     """The committed record with what its last pass's writer writes now in the parts the
     writer alone owns: the evidence roster, priority notes, the dated paragraph and the
@@ -2359,6 +3022,16 @@ def refreshed(move: Move, committed: str) -> str:
     written = replayed_text(move)
     fence, front, rest = _split(committed)
     packing = _packing(_split(written)[1])
+    current = _packing(front)
+    if any(
+        current.get(key) != packing.get(key)
+        for key in ("reported_lower_bound", "verified_lower_bound")
+    ):
+        raise AdoptionError(
+            f"n={move.n}: full refresh refuses a later lower-bound layer; "
+            "use --refresh-openings for an opening-only correction, or reconcile "
+            "the later writer's evidence and prose explicitly"
+        )
     for key in ("evidence", "priority_notes"):
         if _packing(front).get(key) != packing.get(key):
             front = _replace(front, key, packing[key])
@@ -2397,26 +3070,43 @@ def _with_history(committed: str, written: str) -> str:
     return VERIFIER_TABLE.sub(lambda _match: table.group(), written, count=1)
 
 
-def refresh(*, write: bool) -> list[int]:
+def refresh(
+    *, write: bool, openings_only: bool = False, counts: Collection[int] | None = None
+) -> list[int]:
     """Every record whose writer-owned text, or held note, differs from what the writer
-    writes now, by count; written where `write`. Whitespace is the formatter's."""
+    writes now, by count; written where `write`. Whitespace is the formatter's.
+
+    `counts`, where given, limits the refresh to those records: a writer change at a few
+    counts is applied without replaying a count whose later lower layer the full refresh
+    refuses, as n = 108's fine-net lower bound is (review A1 of #692)."""
     changed = []
+    updates: list[tuple[Path, str]] = []
     for move in replay_plan():
+        if counts is not None and move.n not in counts:
+            continue
         path = select_houses.case_path(move.n)
         committed = path.read_text(encoding="utf-8")
-        text = refreshed(move, committed)
+        text = (
+            refreshed_opening(move, committed) if openings_only else refreshed(move, committed)
+        )
         if _flat(text) != _flat(committed):
             changed.append(move.n)
-            if write:
-                _write(path, text)
-    for n in held_counts():
-        path = select_houses.case_path(n)
-        committed = path.read_text(encoding="utf-8")
-        text = held_note(n, committed)
-        if _flat(text) != _flat(committed):
-            changed.append(n)
-            if write:
-                _write(path, text)
+            updates.append((path, text))
+    if not openings_only:
+        for n in held_counts():
+            if counts is not None and n not in counts:
+                continue
+            path = select_houses.case_path(n)
+            committed = path.read_text(encoding="utf-8")
+            text = held_note(n, committed)
+            if _flat(text) != _flat(committed):
+                changed.append(n)
+                updates.append((path, text))
+    # Plan every record before the first write: a refused later layer must leave the
+    # whole batch intact, including earlier records with legitimate pending changes.
+    if write:
+        for path, text in updates:
+            _write(path, text)
     return sorted(changed)
 
 
@@ -2744,9 +3434,31 @@ def main(argv: Sequence[str] | None = None) -> int:
     mode.add_argument(
         "--refresh", action="store_true", help="write what each record's writer writes now"
     )
+    mode.add_argument(
+        "--refresh-openings",
+        action="store_true",
+        help="refresh only current adoption paragraphs, retaining all other writers' bytes",
+    )
+    parser.add_argument(
+        "--n",
+        type=int,
+        nargs="+",
+        metavar="N",
+        help="with --refresh or --refresh-openings, refresh only these records",
+    )
     arguments = parser.parse_args(argv)
-    if arguments.refresh:
-        changed = refresh(write=True)
+    if arguments.n and not (arguments.refresh or arguments.refresh_openings):
+        parser.error("--n needs --refresh or --refresh-openings")
+    if arguments.refresh or arguments.refresh_openings:
+        try:
+            changed = refresh(
+                write=True,
+                openings_only=arguments.refresh_openings,
+                counts=frozenset(arguments.n) if arguments.n else None,
+            )
+        except AdoptionError as error:
+            print(f"FAIL {error}")
+            return 1
         print(f"refreshed {len(changed)} records: {', '.join(map(str, changed)) or 'none'}")
         return 0
     if arguments.check:

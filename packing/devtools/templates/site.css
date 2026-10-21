@@ -91,6 +91,7 @@ body {
   --site-new-result: oklch(52% 0.19 25);
   --site-scrim: oklch(0% 0 0 / 0.12);
   --site-chip-tint: 16%;
+  --site-topic-hover-tint: 60%;
   --site-action-hover-accent: 85%;
 }
 :root:where([data-kpress-resolved-theme="dark"]),
@@ -1209,11 +1210,12 @@ body {
   font-variant-caps: normal;
   letter-spacing: normal;
   text-transform: none;
-  --site-chip-fill: color-mix(
+  --site-chip-neutral-fill: color-mix(
     in oklch,
     var(--kpress-doc-muted) var(--site-chip-tint),
     var(--kpress-doc-bg)
   );
+  --site-chip-fill: var(--site-chip-neutral-fill);
   background: var(--site-chip-fill);
   border-radius: 0;
   color: var(--kpress-doc-text);
@@ -1236,13 +1238,21 @@ body {
    drawn (the owner, 2026-10-02, `think-c19o`): a case's `proved` is green and its `open`
    yellow, on the frontier table, a case record and a result's list of cases; a result's
    `confirmed` is the green of the confirmation rungs, at C3's strength, and its
-   `reviewed` the verification rungs' blue. Bound kinds use the bound colours, recorded is yellow, and
-   superseded standings keep the plain gray chip. `devtools.rung_scale` measures these fills too. */
+   `reviewed` the verification rungs' blue. Recorded is yellow, and superseded standings
+   keep the plain gray chip. The topics Results and News share take their fills here too:
+   Verification is the reviewed blue, Optimality violet, Project amber and Engineering
+   orange, and the bound topics their bound's ink diluted into the page (below).
+   `devtools.rung_scale` measures every one of these fills, the topics' with `topic_fills`,
+   and holds each topic apart from every status and every other topic. */
 .site-chip:is(
   [data-case-status],
   [data-status="confirmed"],
   [data-status="reviewed"],
-  [data-news-topic="verification"]
+  [data-news-topic="verification"],
+  [data-kind="optimality"],
+  [data-news-topic="optimality"],
+  [data-news-topic="project"],
+  [data-news-topic="engineering"]
 ) {
   --rung-chroma-boost: 0;
   --site-chip-fill: oklch(
@@ -1287,25 +1297,28 @@ body {
     var(--kpress-doc-bg)
   );
 }
-.site-chip:is(
-  [data-kind="upper-bound"],
-  [data-kind="optimality"],
-  [data-news-topic="upper-bound"],
-  [data-news-topic="optimality"]
-) {
+.site-chip:is([data-kind="upper-bound"], [data-news-topic="upper-bound"]) {
   --site-chip-fill: color-mix(
     in oklab,
     var(--site-bound-upper) var(--site-chip-tint),
     var(--kpress-doc-bg)
   );
 }
-.site-chip[data-news-topic="engineering"],
+.site-chip[data-kind="optimality"],
+.site-chip[data-news-topic="optimality"] {
+  --rung-level: 2;
+  --rung-hue: 310;
+}
+/* Project's amber stands between Engineering's orange and the statuses' yellow, with the
+   open case's chroma boost so it reads as neither (`devtools.rung_scale`, DISTINCT). */
 .site-chip[data-news-topic="project"] {
-  --site-chip-fill: color-mix(
-    in oklab,
-    var(--kpress-doc-accent) var(--site-chip-tint),
-    var(--kpress-doc-bg)
-  );
+  --rung-level: 2;
+  --rung-hue: 70;
+  --rung-chroma-boost: 0.02;
+}
+.site-chip[data-news-topic="engineering"] {
+  --rung-level: 2;
+  --rung-hue: 45;
 }
 .site-chip[data-status="recorded"] {
   --rung-level: 2;
@@ -1359,7 +1372,7 @@ body {
 .site-significance {
   align-items: center;
   block-size: 1.45em;
-  border: 1px solid currentColor;
+  border: 1px solid var(--site-significance);
   box-sizing: border-box;
   color: var(--site-significance);
   display: inline-flex;
@@ -1369,9 +1382,9 @@ body {
   font-variant-numeric: tabular-nums;
   font-weight: var(--site-font-weight-sans-medium);
   gap: 0.18em;
-  inline-size: 5.5em;
+  inline-size: 4.8em;
   justify-content: center;
-  padding-inline: 0.28em;
+  padding-inline: 0.18em;
   vertical-align: baseline;
   white-space: nowrap;
 }
@@ -2450,6 +2463,7 @@ html[data-site-atlas-scale="row"]
    a 0.01ms transition of every property, under which the triangle was laid out for one
    frame with the grid's gaps, 1344 pixels wide at 1280, before it settled. A tile keeps
    its own transition, which is the wash alone. */
+.site-page .site-atlas-grid,
 .site-atlas-cells,
 .site-atlas-row,
 .site-atlas-segment,
@@ -3490,9 +3504,12 @@ html[data-site-atlas-view="triangle"]
   opacity: 1;
 }
 .kpress .site-article-header {
+  display: grid;
   font-size: var(--kpress-font-size-base);
+  gap: 0.3rem;
+  margin-block-end: 0.6rem;
 }
-.kpress .site-article-date {
+.kpress .site-article-header > .site-article-date {
   color: inherit;
   font-family: var(--kpress-font-sans);
   font-feature-settings: var(--kpress-font-features-sans);
@@ -3501,7 +3518,7 @@ html[data-site-atlas-view="triangle"]
   font-weight: var(--site-font-weight-sans-medium);
   letter-spacing: normal;
   line-height: 1.45;
-  margin: 0 0 0.6rem;
+  margin: 0;
   text-align: start;
   text-transform: none;
 }
@@ -3509,6 +3526,7 @@ html[data-site-atlas-view="triangle"]
   color: inherit;
   font-style: normal;
   letter-spacing: normal;
+  margin-block: 0;
   text-align: start;
   text-transform: none;
 }
@@ -3526,14 +3544,21 @@ html[data-site-atlas-view="triangle"]
   align-items: baseline;
   display: flex;
   gap: 0.6rem;
-  margin-block-end: 0.5rem;
+  margin: 0;
 }
-.kpress .site-news-significance {
+.kpress .site-news-header {
+  gap: 0.25rem;
+  margin-block-end: 0.4rem;
+}
+.kpress .site-news-item > :is(p, ul, ol, blockquote) {
+  margin-block: 0 0.5rem;
+}
+.kpress .site-news-metadata > .site-news-significance {
   flex: none;
   margin: 0;
   margin-inline-start: auto;
 }
-.kpress .site-news-topics {
+.kpress .site-news-metadata > .site-news-topics {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
@@ -3543,7 +3568,7 @@ html[data-site-atlas-view="triangle"]
 /* News topics keep the Results chip's fill, corners and leading at a smaller scale. */
 .kpress .site-news-topics .site-chip {
   font-size: calc(var(--site-font-size-note) * 0.85);
-  margin-block: calc(0.15rem * 0.85);
+  margin-block: 0;
   padding-inline: calc(0.35rem * 0.85);
 }
 .kpress .site-news-item + .site-news-item {
@@ -3592,25 +3617,61 @@ html[data-site-atlas-view="triangle"]
 .site-news-filters :is(.site-tabs, .site-table-tools) {
   margin: 0;
 }
-/* Joined topic controls retain the card chips' palette and casing. Selection adds
-   an inset mark so the subject color keeps the same meaning in either state. */
+/* A selected topic takes the shared topic fill and shows a check, the theme menu's
+   mark for a chosen item, so selection never rests on hue alone: the bound topics'
+   fills are close to the gray in lightness. The check's place is held when it is
+   hidden, so a press never moves a button or rewraps the row. Under a hovering
+   pointer an unselected topic turns pale in its topic hue, so a press shows at once:
+   pale turns full, and full turns pale. Touch screens have no hover, so a tap shows the
+   new state without a sticky pale fill. */
 .site-news-filters [aria-labelledby="news-topics-label"] button {
   flex: 0 0 auto;
   white-space: nowrap;
 }
 .site-news-filters .site-tabs button.site-chip {
-  background: var(--site-chip-fill);
+  background: var(--site-chip-neutral-fill);
   color: var(--kpress-doc-text);
   font-variant-caps: normal;
   letter-spacing: normal;
-  margin: 0;
   text-transform: none;
+  transition: var(--site-hover-transition);
 }
 .site-news-filters .site-tabs button.site-chip[aria-pressed="true"] {
-  box-shadow: inset 0 -2px currentColor;
+  background: var(--site-chip-fill);
 }
-.site-news-filters .site-tabs button.site-chip:is(:hover, :focus-visible) {
-  text-decoration: underline;
+.site-news-check {
+  block-size: 0.85em;
+  inline-size: 0.85em;
+  margin-inline-end: 0.3em;
+  vertical-align: calc((1cap - 0.85em) / 2);
+  visibility: hidden;
+}
+.site-news-filters button[aria-pressed="true"] .site-news-check {
+  visibility: visible;
+}
+@media (hover: hover) {
+  .site-news-filters .site-tabs button.site-chip:not([aria-pressed="true"]):hover {
+    background: color-mix(
+      in oklab,
+      var(--site-chip-fill) var(--site-topic-hover-tint),
+      var(--kpress-doc-bg)
+    );
+  }
+}
+.site-news-reset {
+  background: none;
+  border: 0;
+  color: var(--kpress-doc-muted);
+  cursor: pointer;
+  font: inherit;
+  font-weight: var(--site-font-weight-sans-medium);
+  padding: var(--site-chooser-small-padding);
+  text-decoration: none;
+  transition: var(--site-hover-transition);
+}
+.site-news-reset:is(:hover, :focus-visible) {
+  background: var(--site-wash);
+  color: var(--kpress-doc-accent);
 }
 
 /* The default first paint already shows S4/S5. Readers without scripting receive

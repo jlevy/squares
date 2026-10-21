@@ -13436,50 +13436,444 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 fine-net lower bounds 2026-10-16]'
     field: /authors/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - commit-author
+  - owner-confirmation
+  note: Reviewed packing/resources/bibliography.yaml [[wand125 fine-net lower bounds
+    2026-10-16]] /authors/0 span 0:6. Source-keyed wand125 certificate/tool lineage.
+    The join rests on this source's repository, wand125/square-packing, being the
+    wand125 account's own, which the owner decision of 13 October 2026 identifies
+    as Hiroaki Hosono; the packet's retained commit-author metadata names him as author
+    of all 18 commits.
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 fine-net lower bounds 2026-10-16]'
     field: /credit
-  expected_text: wand125 after Tokoharu and Levy
+  expected_text: Hosono after Tokoharu and Levy
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - commit-author
+  - owner-confirmation
+  note: Reviewed packing/resources/bibliography.yaml [[wand125 fine-net lower bounds
+    2026-10-16]] /credit span 0:6. Source-keyed wand125 certificate/tool lineage.
+    The join rests on this source's repository, wand125/square-packing, being the
+    wand125 account's own, which the owner decision of 13 October 2026 identifies
+    as Hiroaki Hosono; the packet's retained commit-author metadata names him as author
+    of all 18 commits.
+  contributor_id: hiroaki-hosono
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    field: /credit
+  expected_text: Hosono after Tokoharu and Levy
+  start: 13
+  end: 21
+  label: Tokoharu
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[wand125 fine-net lower bounds
+    2026-10-16]] /credit span 13:21. The source-specific rectangle-density method/checker
+    lineage identifies tokoharu/square-packing-density-bounds; the retained source
+    licence names tokoharu.
+  contributor_id: tokoharu
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    field: /credit
+  expected_text: Hosono after Tokoharu and Levy
+  start: 26
+  end: 30
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: Reviewed packing/resources/bibliography.yaml [[wand125 fine-net lower bounds
+    2026-10-16]] /credit span 26:30. The specific first-party jlevy/squares method
+    or source is the Joshua Levy identity established by LICENSE and the retained
+    ojoshe receipt; project credit does not imply sole personal authorship.
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n183 subgrid 2026-10-19]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n183 subgrid 2026-10-19]]
+    /authors/0 span 0:6. The specific evand/square-packing certificate, fq solver
+    or regularizer matches the repository whose retained licence names Evan Daniel.
+    Keep finder, improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n183 subgrid 2026-10-19]'
+    field: /credit
+  expected_text: Daniel after Couzo; register seed data from Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n183 subgrid 2026-10-19]]
+    /credit span 0:6. The specific evand/square-packing certificate, fq solver or
+    regularizer matches the repository whose retained licence names Evan Daniel. Keep
+    finder, improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n183 subgrid 2026-10-19]'
+    field: /credit
+  expected_text: Daniel after Couzo; register seed data from Levy
+  start: 13
+  end: 18
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n183 subgrid 2026-10-19]]
+    /credit span 13:18. The specific franciscouzo certificate/refinement lineage matches
+    retained acquisition metadata naming Francisco Couzo. Keep packing finder and
+    refinement roles distinct.
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n183 subgrid 2026-10-19]'
+    field: /credit
+  expected_text: Daniel after Couzo; register seed data from Levy
+  start: 20
+  end: 48
+  label: register seed data from Levy
   role: credited-contributor
   disposition: unresolved
   evidence: []
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    record_key: '[Daniel n236 2026-10-16]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n236 2026-10-16]] /authors/0
+    span 0:6. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n236 2026-10-16]'
     field: /credit
-  expected_text: wand125 after Tokoharu and Levy
-  start: 14
-  end: 22
-  label: Tokoharu
+  expected_text: Daniel after Chaoweeraprasit, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n236 2026-10-16]] /credit
+    span 0:6. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n236 2026-10-16]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Levy
+  start: 13
+  end: 28
+  label: Chaoweeraprasit
   role: prerequisite
   disposition: unresolved
   evidence: []
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    record_key: '[Daniel n236 2026-10-16]'
     field: /credit
-  expected_text: wand125 after Tokoharu and Levy
-  start: 27
-  end: 31
+  expected_text: Daniel after Chaoweeraprasit, Levy
+  start: 30
+  end: 34
   label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n236 2026-10-16]] /credit
+    span 30:34. The specific first-party jlevy/squares method or source is the Joshua
+    Levy identity established by LICENSE and the retained ojoshe receipt; project
+    credit does not imply sole personal authorship.
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n271 2026-10-17]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n271 2026-10-17]] /authors/0
+    span 0:6. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n271 2026-10-17]'
+    field: /credit
+  expected_text: Daniel after Couzo, Chaoweeraprasit, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n271 2026-10-17]] /credit
+    span 0:6. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n271 2026-10-17]'
+    field: /credit
+  expected_text: Daniel after Couzo, Chaoweeraprasit, Levy
+  start: 13
+  end: 18
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n271 2026-10-17]] /credit
+    span 13:18. The specific franciscouzo certificate/refinement lineage matches retained
+    acquisition metadata naming Francisco Couzo. Keep packing finder and refinement
+    roles distinct.
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n271 2026-10-17]'
+    field: /credit
+  expected_text: Daniel after Couzo, Chaoweeraprasit, Levy
+  start: 20
+  end: 35
+  label: Chaoweeraprasit
   role: prerequisite
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n271 2026-10-17]'
+    field: /credit
+  expected_text: Daniel after Couzo, Chaoweeraprasit, Levy
+  start: 37
+  end: 41
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n271 2026-10-17]] /credit
+    span 37:41. The specific first-party jlevy/squares method or source is the Joshua
+    Levy identity established by LICENSE and the retained ojoshe receipt; project
+    credit does not imply sole personal authorship.
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n308 2026-10-19]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n308 2026-10-19]] /authors/0
+    span 0:6. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n308 2026-10-19]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n308 2026-10-19]] /credit
+    span 0:6. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n308 2026-10-19]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Levy
+  start: 13
+  end: 28
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n308 2026-10-19]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Levy
+  start: 30
+  end: 34
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n308 2026-10-19]] /credit
+    span 30:34. The specific first-party jlevy/squares method or source is the Joshua
+    Levy identity established by LICENSE and the retained ojoshe receipt; project
+    credit does not imply sole personal authorship.
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n154 sweep 2026-10-20]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n154 sweep 2026-10-20]]
+    /authors/0 span 0:6. The specific evand/square-packing certificate, fq solver
+    or regularizer matches the repository whose retained licence names Evan Daniel.
+    Keep finder, improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n154 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n154 sweep 2026-10-20]]
+    /credit span 0:6. The specific evand/square-packing certificate, fq solver or
+    regularizer matches the repository whose retained licence names Evan Daniel. Keep
+    finder, improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n154 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, Levy
+  start: 13
+  end: 18
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n154 sweep 2026-10-20]]
+    /credit span 13:18. The specific franciscouzo certificate/refinement lineage matches
+    retained acquisition metadata naming Francisco Couzo. Keep packing finder and
+    refinement roles distinct.
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n154 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, Levy
+  start: 20
+  end: 28
+  label: Ostashev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n154 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, Levy
+  start: 30
+  end: 34
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n154 sweep 2026-10-20]]
+    /credit span 30:34. The specific first-party jlevy/squares method or source is
+    the Joshua Levy identity established by LICENSE and the retained ojoshe receipt;
+    project credit does not imply sole personal authorship.
+  contributor_id: joshua-levy
 - origin:
     path: packing/frontier/results.yaml
     record_key: T-001
@@ -15341,6 +15735,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-068.md
+    record_key: '68'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-069.md
     record_key: '69'
     field: /reported_upper_bound/found_by/0
@@ -15778,6 +16184,18 @@ occurrences:
     acquisition metadata naming Francisco Couzo. Keep packing finder and refinement
     roles distinct.
 - origin:
+    path: packing/frontier/n-084.md
+    record_key: '84'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-085.md
     record_key: '85'
     field: /reported_upper_bound/found_by/0
@@ -15859,6 +16277,18 @@ occurrences:
     span 0:15. The specific franciscouzo certificate/refinement lineage matches retained
     acquisition metadata naming Francisco Couzo. Keep packing finder and refinement
     roles distinct.
+- origin:
+    path: packing/frontier/n-086.md
+    record_key: '86'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-087.md
     record_key: '87'
@@ -16286,6 +16716,18 @@ occurrences:
     matches the repository whose retained licence names Evan Daniel. Keep finder,
     improver and solver roles distinct.
 - origin:
+    path: packing/frontier/n-103.md
+    record_key: '103'
+    field: /reported_upper_bound/improved_by/2
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-104.md
     record_key: '104'
     field: /reported_lower_bound/proved_by/0
@@ -16459,14 +16901,22 @@ occurrences:
     path: packing/frontier/n-108.md
     record_key: '108'
     field: /reported_lower_bound/proved_by/0
-  expected_text: wand125
+  expected_text: Hosono
   start: 0
-  end: 7
-  label: wand125
+  end: 6
+  label: Hosono
   role: lower-bound-prover
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - commit-author
+  - owner-confirmation
+  note: Reviewed packing/frontier/n-108.md [108] /reported_lower_bound/proved_by/0
+    span 0:6. Source-keyed wand125 certificate/tool lineage. The lower bound's source,
+    [wand125 fine-net lower bounds 2026-10-16], is a set of commits to wand125/square-packing;
+    the join rests on that repository being the wand125 account's own, which the owner
+    decision of 13 October 2026 identifies as Hiroaki Hosono, and the packet's retained
+    commit-author metadata names him as author of all 18 commits.
+  contributor_id: hiroaki-hosono
 - origin:
     path: packing/frontier/n-108.md
     record_key: '108'
@@ -16485,6 +16935,18 @@ occurrences:
     span 0:15. The specific franciscouzo certificate/refinement lineage matches retained
     acquisition metadata naming Francisco Couzo. Keep packing finder and refinement
     roles distinct.
+- origin:
+    path: packing/frontier/n-108.md
+    record_key: '108'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-109.md
     record_key: '109'
@@ -16545,6 +17007,18 @@ occurrences:
   note: Reviewed packing/frontier/n-110.md [110] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-110.md
+    record_key: '110'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-111.md
     record_key: '111'
@@ -16887,6 +17361,18 @@ occurrences:
     acquisition metadata naming Francisco Couzo. Keep packing finder and refinement
     roles distinct.
 - origin:
+    path: packing/frontier/n-127.md
+    record_key: '127'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-128.md
     record_key: '128'
     field: /reported_upper_bound/found_by/0
@@ -17038,6 +17524,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-130.md
+    record_key: '130'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-131.md
     record_key: '131'
     field: /reported_upper_bound/found_by/0
@@ -17066,6 +17564,18 @@ occurrences:
   note: Reviewed packing/frontier/n-131.md [131] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-131.md
+    record_key: '131'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-132.md
     record_key: '132'
@@ -17101,6 +17611,18 @@ occurrences:
   note: Reviewed packing/frontier/n-132.md [132] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-132.md
+    record_key: '132'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-133.md
     record_key: '133'
@@ -17288,19 +17810,20 @@ occurrences:
     path: packing/frontier/n-146.md
     record_key: '146'
     field: /reported_upper_bound/found_by/0
-  expected_text: Ryan Xu
+  expected_text: Evan Daniel
   start: 0
-  end: 7
-  label: Ryan Xu
+  end: 11
+  label: Evan Daniel
   role: construction-finder
   disposition: resolved
   evidence:
-  - packet
-  - owner-confirmation
-  contributor_id: ryan-xu
-  note: 'Reviewed packing/frontier/n-146.md [146] /reported_upper_bound/found_by/0
-    span 0:7. The cited construction or method derives from ry-xu issue #432 or its
-    documented refinements; the packet and owner confirmation bind ry-xu to Ryan Xu.'
+  - repository-license
+  - bibliography
+  note: Reviewed packing/frontier/n-146.md [146] /reported_upper_bound/found_by/0
+    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-146.md
     record_key: '146'
@@ -17313,24 +17836,6 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
-- origin:
-    path: packing/frontier/n-146.md
-    record_key: '146'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  note: Reviewed packing/frontier/n-146.md [146] /reported_upper_bound/improved_by/0
-    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
-    matches the repository whose retained licence names Evan Daniel. Keep finder,
-    improver and solver roles distinct.
-  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-147.md
     record_key: '147'
@@ -17584,29 +18089,23 @@ occurrences:
     acquisition metadata naming Francisco Couzo. Keep packing finder and refinement
     roles distinct.
 - origin:
-    path: packing/frontier/n-154.md
-    record_key: '154'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
     path: packing/frontier/n-155.md
     record_key: '155'
     field: /reported_upper_bound/found_by/0
-  expected_text: Daniil Ostashev
+  expected_text: Evan Daniel
   start: 0
-  end: 15
-  label: Daniil Ostashev
+  end: 11
+  label: Evan Daniel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/frontier/n-155.md [155] /reported_upper_bound/found_by/0
+    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-155.md
     record_key: '155'
@@ -17972,6 +18471,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-172.md
+    record_key: '172'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-173.md
     record_key: '173'
     field: /reported_lower_bound/proved_by/0
@@ -18213,6 +18724,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-179.md
+    record_key: '179'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-180.md
     record_key: '180'
     field: /reported_upper_bound/found_by/0
@@ -18272,6 +18795,18 @@ occurrences:
     acquisition metadata naming Francisco Couzo. Keep packing finder and refinement
     roles distinct.
 - origin:
+    path: packing/frontier/n-180.md
+    record_key: '180'
+    field: /reported_upper_bound/improved_by/2
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-181.md
     record_key: '181'
     field: /reported_upper_bound/found_by/0
@@ -18300,6 +18835,18 @@ occurrences:
   note: Reviewed packing/frontier/n-181.md [181] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-181.md
+    record_key: '181'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-182.md
     record_key: '182'
@@ -18344,6 +18891,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-182.md
+    record_key: '182'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-183.md
     record_key: '183'
     field: /reported_lower_bound/proved_by/0
@@ -18360,6 +18919,24 @@ occurrences:
   note: Reviewed packing/frontier/n-183.md [183] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-183.md
+    record_key: '183'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-finder
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/frontier/n-183.md [183] /reported_upper_bound/found_by/0
+    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-184.md
     record_key: '184'
@@ -18827,6 +19404,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-206.md
+    record_key: '206'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-207.md
     record_key: '207'
     field: /reported_upper_bound/found_by/0
@@ -18909,6 +19498,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-208.md
+    record_key: '208'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-209.md
     record_key: '209'
     field: /reported_upper_bound/found_by/0
@@ -18956,6 +19557,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-209.md
+    record_key: '209'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-210.md
     record_key: '210'
     field: /reported_upper_bound/found_by/0
@@ -18998,6 +19611,18 @@ occurrences:
   note: Reviewed packing/frontier/n-210.md [210] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-210.md
+    record_key: '210'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-211.md
     record_key: '211'
@@ -19314,6 +19939,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-228.md
+    record_key: '228'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-229.md
     record_key: '229'
     field: /reported_lower_bound/proved_by/0
@@ -19325,6 +19962,24 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/frontier/n-229.md
+    record_key: '229'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-finder
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/frontier/n-229.md [229] /reported_upper_bound/found_by/0
+    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-230.md
     record_key: '230'
@@ -19535,32 +20190,20 @@ occurrences:
     path: packing/frontier/n-236.md
     record_key: '236'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
-  start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
-  role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-236.md
-    record_key: '236'
-    field: /reported_upper_bound/improved_by/0
   expected_text: Evan Daniel
   start: 0
   end: 11
   label: Evan Daniel
-  role: construction-improver
+  role: construction-finder
   disposition: resolved
   evidence:
   - repository-license
   - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/n-236.md [236] /reported_upper_bound/improved_by/0
+  note: Reviewed packing/frontier/n-236.md [236] /reported_upper_bound/found_by/0
     span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
     matches the repository whose retained licence names Evan Daniel. Keep finder,
     improver and solver roles distinct.
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-236.md
     record_key: '236'
@@ -19667,6 +20310,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-238.md
+    record_key: '238'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-239.md
     record_key: '239'
     field: /reported_upper_bound/found_by/0
@@ -19695,6 +20350,18 @@ occurrences:
   note: Reviewed packing/frontier/n-239.md [239] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-239.md
+    record_key: '239'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-240.md
     record_key: '240'
@@ -19738,6 +20405,18 @@ occurrences:
   note: Reviewed packing/frontier/n-240.md [240] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-240.md
+    record_key: '240'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-241.md
     record_key: '241'
@@ -20260,6 +20939,18 @@ occurrences:
     matches the repository whose retained licence names Evan Daniel. Keep finder,
     improver and solver roles distinct.
 - origin:
+    path: packing/frontier/n-263.md
+    record_key: '263'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-264.md
     record_key: '264'
     field: /reported_lower_bound/proved_by/0
@@ -20455,6 +21146,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-268.md
+    record_key: '268'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-269.md
     record_key: '269'
     field: /reported_upper_bound/found_by/0
@@ -20497,6 +21200,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-269.md
+    record_key: '269'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-270.md
     record_key: '270'
     field: /reported_upper_bound/found_by/0
@@ -20525,6 +21240,18 @@ occurrences:
   note: Reviewed packing/frontier/n-270.md [270] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-270.md
+    record_key: '270'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-271.md
     record_key: '271'
@@ -20576,26 +21303,20 @@ occurrences:
     path: packing/frontier/n-271.md
     record_key: '271'
     field: /reported_upper_bound/improved_by/1
-  expected_text: PingYou Ltd
+  expected_text: Evan Daniel
   start: 0
   end: 11
-  label: PingYou Ltd
+  label: Evan Daniel
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-271.md
-    record_key: '271'
-    field: /reported_upper_bound/improved_by/2
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/frontier/n-271.md [271] /reported_upper_bound/improved_by/1
+    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-272.md
     record_key: '272'
@@ -20680,6 +21401,18 @@ occurrences:
   note: Reviewed packing/frontier/n-273.md [273] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-273.md
+    record_key: '273'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-274.md
     record_key: '274'
@@ -21153,6 +21886,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-297.md
+    record_key: '297'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-298.md
     record_key: '298'
     field: /reported_lower_bound/proved_by/0
@@ -21475,6 +22220,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-305.md
+    record_key: '305'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-306.md
     record_key: '306'
     field: /reported_upper_bound/found_by/0
@@ -21505,6 +22262,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-306.md
+    record_key: '306'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-307.md
     record_key: '307'
     field: /reported_upper_bound/found_by/0
@@ -21534,6 +22303,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-307.md
+    record_key: '307'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-308.md
     record_key: '308'
     field: /reported_lower_bound/proved_by/0
@@ -21554,32 +22335,20 @@ occurrences:
     path: packing/frontier/n-308.md
     record_key: '308'
     field: /reported_upper_bound/found_by/0
-  expected_text: Kevin Fang
-  start: 0
-  end: 10
-  label: Kevin Fang
-  role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-308.md
-    record_key: '308'
-    field: /reported_upper_bound/improved_by/0
   expected_text: Evan Daniel
   start: 0
   end: 11
   label: Evan Daniel
-  role: construction-improver
+  role: construction-finder
   disposition: resolved
   evidence:
   - repository-license
   - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/n-308.md [308] /reported_upper_bound/improved_by/0
+  note: Reviewed packing/frontier/n-308.md [308] /reported_upper_bound/found_by/0
     span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
     matches the repository whose retained licence names Evan Daniel. Keep finder,
     improver and solver roles distinct.
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-309.md
     record_key: '309'
