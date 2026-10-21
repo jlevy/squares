@@ -30563,7 +30563,6 @@ results:
       - packing/resources/web/evand-n270-sweep-2026-10-20/receipts/exact-certification.json.xz
       - packing/devtools/upper_bound_reports.py
       - docs/project/reviews/review-2026-10-21-upper-bound-import-703.md
-      - docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md
       - packing/resources/web/evand-n270-sweep-2026-10-20/review/review-2026-10-21/README.md
     controls:
       - packing/tests/test_upper_bound_reports.py
