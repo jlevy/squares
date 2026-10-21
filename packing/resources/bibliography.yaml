@@ -2971,6 +2971,28 @@ sources:
       and a different local minimum. A same-side regularized view and the source''s comparison with #561
       are retained beside it. MIT-licensed; Claude assistance disclosed. KKT and local-minimum statements
       are the author''s numerical evidence; no local or global optimality claim.'
+  - key: '[Couzo issue 678 2026-10-18]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-18'
+    lineage: builds-on-project
+    credit: Couzo after de Winter, Polkovskyi, Daniel, Fang, PingYou Ltd, Levy
+    short_credit: Couzo after de Winter et al.
+    note: >-
+      Francisco Couzo's issue 678 reports 85 upper bounds for n = 204 to 998 by 83 exact
+      rational certificates first committed at 7b6c87e129cf80b5ff9847b90b47fd30b4563c54
+      on 18 October 2026, after the c6da0fc pin of issue 675; 545 and 641 delete one
+      square from the 546 and 642 certificates. The 83 certificates are retained as
+      factual data with the source's checker, Evan Daniel's MIT-licensed verifier as
+      modified by Couzo with Codex, in web/couzo-issue678-2026-10-18/; prose, the index
+      and the provenance manifest are hash-pinned. The manifest keeps seed and
+      construction credits, among them Joost de Winter, Mykhailo Polkovskyi, Evan Daniel,
+      Kevin Fang and PingYou Ltd. The source checks with this project's verification
+      code and Daniel's checker; that lineage is not independent. T-223 registers 204
+      and 260 at V0/C0, pending adoption, and the 83 beyond the corpus are beyond-horizon
+      rows; the packet's exact replay is Stage 4 evidence pending a mapped mathematical
+      review.
   - key: '[Daniel n308 2026-10-19]'
     authors:
     - Daniel

@@ -279,11 +279,16 @@ def unfinished_label(item: Mapping[str, Any]) -> str:
 def unfinished_sentence(item: Mapping[str, Any]) -> str:
     """One unfinished confirmation as a reader is told it in prose: the rung it would
     reach, the bead or record that owns it, what it is, and its cost, `C3 (think-r333): a
-    complete sqverify-fast census .... About 4.3 CPU-hours (priced 2026-10-10).`"""
+    complete sqverify-fast census .... About 4.3 CPU-hours (priced 2026-10-10).`
+
+    A `what` written as a sentence, with its own full stop, keeps that one stop: the
+    sentence adds a stop only where `what` has none, so it never reads `review.. Not
+    priced.`"""
     link = f" ({item['link']})" if item.get("link") else ""
     what = " ".join(str(item.get("what", "")).split())
+    stop = "" if what.endswith((".", "?", "!")) else "."
     cost = cost_phrase(item.get("estimated_cost"))
-    return f"{item.get('rung')}{link}: {what}. {cost[:1].upper()}{cost[1:]}."
+    return f"{item.get('rung')}{link}: {what}{stop} {cost[:1].upper()}{cost[1:]}."
 
 
 def priced_hours(items: Sequence[Mapping[str, Any]]) -> tuple[float, float, int]:

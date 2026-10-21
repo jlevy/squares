@@ -1616,9 +1616,15 @@ def test_results_md_lists_each_unfinished_confirmation_under_its_next_action() -
         ),
         "  - Unfinished, C4: a second review. Not priced.",
     ]
+    # A `what` that ends in its own full stop keeps one: no "review.. Not priced.".
+    stopped = _unfinished(what="A second review.", rung="C4", link=None, estimated_cost=None)
+    assert render_results.next_action(
+        {**record, "next_rung": "First.", "unfinished_confirmations": [stopped]}
+    ) == ["- **T-999** — First.", "  - Unfinished, C4: A second review. Not priced."]
     committed = render_results.OUTPUT.read_text(encoding="utf-8")
     assert "  - Unfinished, C3 (think-nd7g): a complete replay of all 201 angles" in committed
     assert "About 11.24 CPU-hours, up to about 23 (priced 2026-10-10)." in committed
+    assert ".. Not priced." not in committed
 
 
 #: The regularizer of T-146's certificates, and the review its measurements come from.
