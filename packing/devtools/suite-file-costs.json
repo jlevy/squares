@@ -185,6 +185,7 @@
     "packing/tests/test_corner_ownership_audit.py": 0.38,
     "packing/tests/test_count_cell_occupancies.py": 0.036,
     "packing/tests/test_count_grid_symmetry.py": 0.024,
+    "packing/tests/test_couzo_678_replay.py": 3.84,
     "packing/tests/test_couzo_custody.py": 1.739,
     "packing/tests/test_couzo_extended_reports.py": 29.122,
     "packing/tests/test_couzo_followup_reports.py": 21.259,
@@ -1010,6 +1011,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-689-694-2026-10-20.json",
           "provenance": {},
           "tests": 8
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_couzo_678_replay.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/couzo-678-replay-2026-10-20.json",
+          "provenance": {},
+          "tests": 9
         }
       ]
     }

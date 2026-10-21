@@ -34,6 +34,16 @@ allowlist:
       These two comparisons bind runtime inputs and build products across saved
       recordings, not Git source. The historical source digest remains reported
       build metadata; current crate source and Git revisions do not gate acceptance.
+  - path: packing/devtools/couzo_678_replay.py
+    kind: download
+    boundary: >-
+      `filtered --pinned` reads issue 678's source manifest.json, which the
+      couzo-issue678-2026-10-18 packet pins by digest and does not retain, from a
+      checkout of franciscouzo/square-packing at 7b6c87e; the file is held to the
+      packet manifest's digest before it is parsed, and each row's stated certificate
+      digest is compared with the one the packet pinned, so the bound it states is bound
+      to the retained bytes. The retained certificates are read from Git and compared
+      with nothing; their custody is acquire_source --check's.
   - path: packing/devtools/muglich_686_import.py
     kind: download
     boundary: >-
