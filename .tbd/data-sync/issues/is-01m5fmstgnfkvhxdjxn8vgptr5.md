@@ -3,19 +3,19 @@ type: is
 id: is-01m5fmstgnfkvhxdjxn8vgptr5
 title: Increase spacing above section H1s after action buttons
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: profiles-spacing
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T16:30:38.611Z
-updated_at: 2026-10-21T16:32:50.240Z
+updated_at: 2026-10-21T16:34:25.506Z
 started_at: 2026-10-21T16:30:47.485Z
-closed_at: 2026-10-21T16:32:27.190Z
-close_reason: Shared screen section-title top spacing increased from 3.75rem (60px) to 5rem (80px), design contract updated; CSS lint and existing title test passed; local preview hashed assets refreshed. Source remains uncommitted.
+closed_at: 2026-10-21T16:34:25.494Z
+close_reason: Completed shared 80px section-title spacing and corrected first-title reset specificity; design guide and active layout spec aligned. Focused title test, CSS lint and diff checks passed; preview stylesheet refreshed. Changes remain uncommitted.
 resolution: null
 duplicate_of: null
 ---
