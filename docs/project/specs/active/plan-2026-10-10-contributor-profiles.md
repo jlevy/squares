@@ -40,6 +40,11 @@ Continue through `think-zpfo` and [PR #578](https://github.com/jlevy/squares/pul
 The active checkout is `/Volumes/spud-ext2/worktrees/squares-profiles-final-20261021`;
 source `/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/integration-env.sh`
 before build or test commands.
+Latest upstream integration includes origin/main `970e89de8` and its T-196 adoption at
+227 and 260. Merge `e9149e2a2` preserves release `v0.8.15` beneath the proposed profile
+release `v0.9.0`; `3ae236a16` pins that data revision.
+The two changed finder occurrences now reference Joost de Winter.
+Canonical result and source-coverage views reconcile, with no stale attribution spans.
 Earlier dated receipts below are historical, including their counts, environments and
 preview ports.
 
@@ -112,15 +117,19 @@ and [attribution policy](../../../../attribution.md) own these rules.
 | `think-5q5y` | Canonical names and SVG navigation geometry regressions |
 
 The reviewed preview is <http://127.0.0.1:8790/profiles/index.html>, served from
-`/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-integrated-reviewed`. It
+`/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-merged-3ae236a16`. It
 includes all 75 profiles, separate Results, Records and Credits, credit significance
 breakdowns, Accounts and Resources columns, and muted parenthetical tallies.
 The complete merged build includes all four PDFs.
-All 7,294 publication checks pass; the PDFs contain 7, 8, 8 and 25 valid profile
+All 7,298 publication checks pass; the PDFs contain 7, 8, 8 and 25 valid profile
 annotations. The profile audit covers 692 pages with zero label mismatches or broken
 profile destinations.
 The directory reserves 16rem for full names and lets resource addresses wrap at normal
 boundaries, with a fallback for long segments.
+The URL registry has 1,144 rows with zero failures.
+The latest merge passes all 52 record-validation and 68 edit checks, plus 54
+identity/tally/coverage and 20 classifier/T-196 tests.
+The post-merge push gate and hosted acceptance remain pending.
 The sourced integration environment includes the project interpreter and tools on PATH.
 
 Local focused checks passed: 88 profile, naming, resource, tally and GitHub-reference
