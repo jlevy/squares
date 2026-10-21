@@ -1878,8 +1878,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_threshold_bound_review and render_packing_methods at link revision "
             "b90a9312, the branch head, once from its tree and once with main's copies of "
             "those three inputs, n-270.md and the five claim documents: the 50 files the "
-            "three write are byte-identical. No PDF was printed; each prints from that "
-            "HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
+            "three write are byte-identical. Rendered the same way again at f021abc3, after "
+            "review A of #710 changed the #703 entry's note and final reply: byte-identical "
+            "again. No PDF was printed; each prints from that HTML. Retain v0.1.7, v0.1.0 "
+            "and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
