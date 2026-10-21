@@ -235,24 +235,26 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # under it.
 # 2026-10-21, think-bl1p: main 51ac9d7ee read 232,783,862 bytes, 10 under the unchanged
 # 222 MiB cap, with #712, #704 and #706 waiting behind it. Answered by option (b), as
-# #464 and #692 were: 223 historical files join this list, 2,974,471 bytes. They are the
+# #464 and #692 were: 220 historical files join this list, 2,906,231 bytes. They are the
 # 18 and 19 October intake passes' raw API dumps, inventories and sweep and records
 # transcripts with the 14 October review's printed outputs (23 files, 1,812,785 bytes),
 # the series' launch and execution manifests, exit and timing stamps, producer logs and
-# superseded run files (149, 1,047,809), Session 105--185 receipts and logs (28,
-# 75,564), X-048's route-review receipts (15, 28,444) and three benchmark outputs (8,
-# 9,869). `--audit-snapshot --prune-candidate` finds no registered mention and no
-# inline or result rescue for any of them, and no ledger-checked `pipeline_changes` or
+# superseded run files (148, 985,912), Session 105--185 receipts and logs (26, 69,221),
+# X-048's route-review receipts (15, 28,444) and three benchmark outputs (8, 9,869).
+# `--audit-snapshot --prune-candidate` finds no registered mention and no inline or
+# result rescue for any of them, and no ledger-checked `pipeline_changes` or
 # `closeout.changes` path names one. Kept on those grounds: session-186's validation
 # disposition (a closeout path), the series' top-level `results/*.jsonl` (the
-# basin-events step globs them), each experiment's descriptor, README and mechanical
-# summary, and Session 105's fast-final and push source identities. With them left
-# out, all 174 controls fire at `-j 2`, and each of the 50 distinct commands, run
-# unmutated in a worker with them and in one without them, prints the same output
-# apart from wall times and the runner-preflight lease timestamp; the four already red
-# (the full suite, `validate_schemas`, the operating-rules append script and
-# `test_change_scoped_selection`) are red identically. Left out, with this note, the
-# snapshot measures 229,821,817 bytes, 2,962,055 under the cap.
+# basin-events step globs them), and each experiment's descriptor, README and
+# mechanical summary. Kept because a test here pins them in workers: exp-140's
+# canonical cover, whose stdout twin left on 2026-10-07, and Session 105's four source
+# identities. With them left out, all 174 controls fire at `-j 2`, and each of the 50
+# distinct commands, run unmutated in a worker with them and in one without them,
+# prints the same output apart from wall times and the runner-preflight lease
+# timestamp; the four already red (the full suite, `validate_schemas`, the
+# operating-rules append script and `test_change_scoped_selection`) are red
+# identically. Left out, with this note, the snapshot measures 229,889,861 bytes,
+# 2,894,011 under the cap.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
@@ -291,15 +293,8 @@ UNREAD_WORKER_OUTPUTS = frozenset(
         *(
             ROOT / "campaign/agent-sessions" / relative
             for relative in (
-                *(
-                    f"session-105-validation/{name}"
-                    for name in (
-                        "fast-cpu4-bdc28e89-source.json",
-                        "fast-native-bdc28e89-source.json",
-                        "pivot-control-48a4544f.jsonl",
-                        "reducible-control-48a4544f.jsonl",
-                    )
-                ),
+                "session-105-validation/pivot-control-48a4544f.jsonl",
+                "session-105-validation/reducible-control-48a4544f.jsonl",
                 *(
                     f"session-153-{name}"
                     for name in (
@@ -418,7 +413,6 @@ UNREAD_WORKER_OUTPUTS = frozenset(
                         "exp-137-stdout.json",
                         "exp-139-exact-full-net-residual.json",
                         "exp-139-stdout.jsonl",
-                        "exp-140-owner-footprint-cover.json",
                         "exp-141-corner-dual-salvage-audit.json",
                         "exp-141-stdout.jsonl",
                         "four-owner-five-dot.png",
