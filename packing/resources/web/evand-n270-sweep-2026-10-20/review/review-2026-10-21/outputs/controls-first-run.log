@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/review708/sharp_controls_708.py", line 145, in <module>
+    sys.exit(main(sys.argv))
+             ~~~~^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/review708/sharp_controls_708.py", line 109, in main
+    out["W1_side_minus_clearance"] = routes(parse(mutate(new_side=side - wall)))
+                                     ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/review708/sharp_controls_708.py", line 45, in routes
+    "gap": f"{float(first['minimum_best_pair_gap']):.6e}",
+              ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '326977500424421726639659470647872033976162222194784412488318157416719240490668134461/32697750042442211293471958995515227318893213310212723893833641895566450000000000000000000000000000000000'

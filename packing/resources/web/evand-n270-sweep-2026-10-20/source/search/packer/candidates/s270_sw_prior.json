@@ -1,0 +1,159 @@
+{
+ "store_id": 212419,
+ "s": 16.928196993329017,
+ "sources": [
+  "pending:#500 (itsnaka (SQUISH))",
+  "pending:#593 (Mishapolk)",
+  "pending:#624 (mstrmg)",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "register (Nate Chaoweeraprasit (itsnaka))",
+  "run:runs/ex1/explore/n270/explore0 (ours)",
+  "run:runs/ex2/explore/n270/explore0 (ours)",
+  "run:runs/ex3/explore/n270/explore0 (ours)",
+  "run:runs/hunt1012/h5/r0092_n270 (ours)",
+  "run:runs/night1014/nh/r0117_n270 (ours)",
+  "run:runs/night1015/nh3/n270/explore0 (ours)",
+  "watch:Mishapolk/square-packing-records@27fec17 (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@2b907b2 (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@3f2b89b (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@4366e0c (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@70a033f (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@be08166 (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@ec87dc6 (Mishapolk)",
+  "watch:franciscouzo/square-packing@23aff0c (lollipoll)",
+  "watch:franciscouzo/square-packing@4e4c8ce (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@58a7833 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@7b6c87e (lollipoll)",
+  "watch:franciscouzo/square-packing@af8cb79 (lollipoll)",
+  "watch:franciscouzo/square-packing@c6da0fc (lollipoll)",
+  "watch:itsnaka/squish-certs@56fa71f (itsnaka (SQUISH))"
+ ],
+ "ok": true,
+ "S_exact": "16.928196993329016588277835999829018159578955077888960837070128049",
+ "S_cert": "16.928196993329016588447117969763",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 270 closed unit squares pairwise disjoint inside the open box of side 16.928196993329017062 (579 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": 3.321565523435646e-05,
+  "status": "local minimum of S, strict modulo 33 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "flat_motions": 33,
+  "flat_realised": 33.0,
+  "flat_residual": 9.990116966935082e-61,
+  "negative_eigs": 0,
+  "corner_corner": 287,
+  "vv_milp_dS": 0.0,
+  "rattlers": 1,
+  "min_pair": 9.999999999999989e-21,
+  "min_wall": 5e-21
+ },
+ "regularized": {
+  "ok": true,
+  "S_exact": "16.9281969933290165882778359998290181595789550778889608370701",
+  "S_cert": "16928196993329016588447117969763/1000000000000000000000000000000",
+  "groups": [
+   21,
+   20
+  ],
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 270 closed unit squares pairwise disjoint inside the open box of side 16.928196993329017062 (573 close pairs checked)"
+   }
+  }
+ },
+ "verdict": "distinct minimum",
+ "difference": {
+  "side_gap": 3.4741132267868124e-05,
+  "matching_distance_regularized": 0.06519427159184923,
+  "symmetry": 0,
+  "moved_gt_1e4": 79,
+  "moved_gt_1e2": 59,
+  "moved_gt_1e1": 17,
+  "moved_gt_1e1_all": 18,
+  "max_move": 0.39051693667499016,
+  "max_move_all": 0.39051693667499016,
+  "max_angle_change": 31.64298928417665,
+  "rattler_status_swaps": 2,
+  "shared_angles": [],
+  "ours_only_angles": [
+   "14.1474",
+   "21.2504",
+   "21.4047",
+   "21.9388",
+   "22.7679",
+   "24.1392",
+   "24.2940",
+   "28.0883",
+   "29.0373",
+   "29.3689",
+   "29.7710",
+   "29.9360",
+   "29.9925",
+   "29.9951",
+   "30.7849",
+   "32.2999",
+   "32.3553",
+   "32.3629",
+   "43.1392"
+  ],
+  "prior_only_angles": [
+   "0.7199",
+   "14.4814",
+   "21.2224",
+   "21.4296",
+   "22.0482",
+   "23.6274",
+   "24.0220",
+   "24.1444",
+   "24.4495",
+   "25.0418",
+   "25.5120",
+   "25.5265",
+   "27.7994",
+   "29.9993",
+   "3.8578",
+   "30.7901",
+   "35.2949",
+   "38.7598"
+  ],
+  "contacts": {
+   "symmetry": 0,
+   "edges_ours": 563,
+   "edges_prior": 563,
+   "shared": 514,
+   "ours_only": 49,
+   "prior_only": 49,
+   "rattlers_ours": 1,
+   "rattlers_prior": 1,
+   "rattlers_shared": 0
+  }
+ }
+}

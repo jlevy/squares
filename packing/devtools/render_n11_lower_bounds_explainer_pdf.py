@@ -109,8 +109,10 @@ OUTPUT = PAGE.with_suffix(".pdf")
 #: The theorem-first introduction, complete T-025/T-026 derivation, and final assurance
 #: links deliberately brought the reviewed v0.4.0 edition to 22. The v0.4.8 publication
 #: draws 23 pages on the pinned Linux and macOS Chromium builds, including its final
-#: reference and colophon page.
-EXPECTED_PAGE_COUNT = 23
+#: reference and colophon page. The v0.4.13 publication draws 24 on the pinned Linux
+#: build: its version history no longer fits under the document-tooling block on page
+#: 21, so the history moves whole to page 22 and the notes and colophon end on page 24.
+EXPECTED_PAGE_COUNT = 24
 
 #: The two fields Chromium stamps from the clock, and the only two that move between
 #: renders of one page. Normalised rather than removed: the length has to stay put or

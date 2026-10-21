@@ -1,0 +1,13 @@
+{
+ "kkt_side_first_40": "16.928162252196750114728683360190544338217",
+ "certificate_side": "16928162252196750114897964982713/1000000000000000000000000000000",
+ "side_is_kkt_scaled_rounded_up_at_30": true,
+ "rounded_up_by": "4.882e-31",
+ "side_exceeds_kkt_by": "1.693e-19",
+ "largest_centre_difference_from_scaled_kkt": "4.991e-36",
+ "centres_within_5e-36": 270,
+ "largest_tangent_difference_from_tan_half_angle": "4.895e-36",
+ "tangents_within_1e-35": 270,
+ "upright_t0": 202,
+ "predicted_least_wall_clearance": "eps/2 = 5e-21 for an upright square whose centre is 1/2 from a wall"
+}

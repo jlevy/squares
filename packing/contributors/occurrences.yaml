@@ -14009,6 +14009,72 @@ occurrences:
     the Joshua Levy identity established by LICENSE and the retained ojoshe receipt;
     project credit does not imply sole personal authorship.
 - origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n270 sweep 2026-10-20]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n270 sweep 2026-10-20]]
+    /authors/0 span 0:6. The specific evand/square-packing certificate, fq solver
+    or regularizer matches the repository whose retained licence names Evan Daniel.
+    Keep finder, improver and solver roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n270 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n270 sweep 2026-10-20]]
+    /credit span 0:6. The specific evand/square-packing certificate, fq solver or
+    regularizer matches the repository whose retained licence names Evan Daniel. Keep
+    finder, improver and solver roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n270 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Levy
+  start: 13
+  end: 28
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n270 sweep 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Chaoweeraprasit, Levy
+  start: 30
+  end: 34
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n270 sweep 2026-10-20]]
+    /credit span 30:34. The specific first-party jlevy/squares method or source is
+    the Joshua Levy identity established by LICENSE and the retained ojoshe receipt;
+    project credit does not imply sole personal authorship.
+- origin:
     path: packing/frontier/results.yaml
     record_key: T-001
     field: /builds_on/credit/0
@@ -21351,14 +21417,20 @@ occurrences:
     path: packing/frontier/n-270.md
     record_key: '270'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
+  expected_text: Evan Daniel
   start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
+  end: 11
+  label: Evan Daniel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/frontier/n-270.md [270] /reported_upper_bound/found_by/0
+    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
 - origin:
     path: packing/frontier/n-270.md
     record_key: '270'
@@ -21376,18 +21448,6 @@ occurrences:
   note: Reviewed packing/frontier/n-270.md [270] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-270.md
-    record_key: '270'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
 - origin:
     path: packing/frontier/n-271.md
     record_key: '271'

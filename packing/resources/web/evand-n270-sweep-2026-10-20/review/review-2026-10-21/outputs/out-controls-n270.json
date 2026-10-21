@@ -1,0 +1,92 @@
+{
+ "n": 270,
+ "wall_clearance": "1/200000000000000000000",
+ "wall_square": 15,
+ "least_pair": [
+  41,
+  56
+ ],
+ "least_gap": "9.9999999999999889e-21",
+ "axis_index": 0,
+ "axis_is_face_normal_of": "first",
+ "pair_tilts_equal": true,
+ "W1_side_minus_clearance": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "3051/6250000000000000000000000000000000",
+   "gap": "1.000000e-20",
+   "failures": [],
+   "cpu": 5.5
+  },
+  "independent": {
+   "passed": true,
+   "wall": "3051/6250000000000000000000000000000000",
+   "gap": "1.000000e-20",
+   "failures": [],
+   "cpu": 3.4
+  }
+ },
+ "W2_side_minus_clearance_minus_1e-30": {
+  "exact_verify": {
+   "passed": false,
+   "wall": "-3199/6250000000000000000000000000000000",
+   "gap": "1.000000e-20",
+   "failures": [
+    "('container', 'square 216 violates x<=s')",
+    "('container', 'square 216 violates x<=s')"
+   ],
+   "cpu": 5.6
+  },
+  "independent": {
+   "passed": false,
+   "wall": "-3199/6250000000000000000000000000000000",
+   "gap": "1.000000e-20",
+   "failures": [
+    "container penetration -3199/6250000000000000000000000000000000"
+   ],
+   "cpu": 3.5
+  }
+ },
+ "P1_pair_closed_by_gap": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "1/200000000000000000000",
+   "gap": "0.000000e+00",
+   "failures": [],
+   "cpu": 5.6
+  },
+  "independent": {
+   "passed": true,
+   "wall": "1/200000000000000000000",
+   "gap": "0.000000e+00",
+   "failures": [],
+   "cpu": 3.8
+  },
+  "review_sat_gap": "0.000000e+00",
+  "review_clip_area": "0.000000e+00"
+ },
+ "P2_pair_closed_by_gap_plus_1e-30": {
+  "exact_verify": {
+   "passed": false,
+   "wall": "1/200000000000000000000",
+   "gap": "-1.000000e-30",
+   "failures": [
+    "('overlap', 'squares 41 and 56 overlap')"
+   ],
+   "cpu": 5.5
+  },
+  "independent": {
+   "passed": false,
+   "wall": "1/200000000000000000000",
+   "gap": "-1.000000e-30",
+   "failures": [
+    "1 overlapping pairs; worst exact gap -1/1000000000000000000000000000000"
+   ],
+   "cpu": 3.4
+  },
+  "review_sat_gap": "-1.000000e-30",
+  "review_clip_area": "8.417753e-31"
+ },
+ "F1_decimal_literal": "ACCEPTED (wrong)",
+ "F2_one_row_short": "refused: n=270: 269 square rows for n = 270"
+}
