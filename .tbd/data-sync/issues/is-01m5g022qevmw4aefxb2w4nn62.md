@@ -3,9 +3,9 @@ type: is
 id: is-01m5g022qevmw4aefxb2w4nn62
 title: Resolve integrated profile gate regressions
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 6
 delegate: profiles_data_integration
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5fpv2yk09g6z1a17rts4wzc
 hold: null
 hold_until: null
 created_at: 2026-10-21T19:47:23.500Z
-updated_at: 2026-10-21T20:13:41.628Z
+updated_at: 2026-10-21T20:21:47.070Z
 started_at: 2026-10-21T19:47:36.581Z
+closed_at: 2026-10-21T20:21:47.069Z
+close_reason: Scoped profile model, identity audit and integration regressions are implemented and verified in PR 578 at 7b566ae73. Final local receipts are recorded in each bead. Exhaustive PDF coverage, historical registrations and other explicit follow-ups remain separate; overall hosted CI remains pending.
+resolution: null
+duplicate_of: null
 ---
 Retained full push diagnostics found workbench navigation extraction omits the new GitHub SVG link, and negative-control source snapshots exceed the existing229MiB limit. Diagnose source snapshot growth and repair correct scope without masking unrelated content or merely increasing limits; frontend owns nav regression. Re-run affected tests and complete broad validation.
 
@@ -29,3 +33,7 @@ Suite costs: exact origin/main 7eeab1f5e checker/record/test roster passes at 81
 Additional assigned fixes: homepage asserts the complete Profiles heading order and preserves zero extra margin for About's first block versus shared section spacing; all six originally failing cases pass. Tutorial served-route inventory includes exact canonical profile pages; its failing case passes. The proof-fixture ceiling consumer is explicitly declared and its guard passes. Project-footer extraction balances nested spans and tests complete nonempty Records/Credits rather than truncating at the first significance span; the renderer-aligned failing case passes in 97.58 seconds. Ruff check/format and BasedPyright over all seven changed Python files are clean; git diff --check passes.
 
 Broad retained run completed normally: 76 failed / 17,266 passed / 62 skipped / 1 xfailed in 1193.64 seconds, not a hang. All original traces and nodes remain in external scratch/reachable-rerun-failures-final.json and reachable-rerun-failed-nodes-final.txt. A runnable selector mapping and 20-file disposition matrix are retained as reachable-rerun-runnable-nodes-final.txt and reachable-rerun-dispositions.tsv for the coordinator's final rerun. No commits or pushes by this worker.
+
+Final integration receipt: commit 7b566ae73 is pushed to https://github.com/jlevy/squares/pull/578. The final rerun covered 77 previously failing cases: 76 passed in 166.02 seconds; the remaining quote-parser case was fixed and passed separately in 8.05 seconds. The coordinator reports all 68 other selected checks, the complete 121-test module run, 53 UI checks and the browser floor clean. Hosted CI remains pending under think-zpfo.
+
+Scoped acceptance is met: navigation and profile presentation regressions are fixed, the measured 252 MiB snapshot allowance retains the complete source PDF and pending inspection status, and the seven-module timing admission preserves all earlier weights and hosted provenance. The failed-node rerun and final quote-parser check complete the verification left pending in the earlier notes.

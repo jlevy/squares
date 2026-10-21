@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 36
+version: 39
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -39,14 +39,15 @@ child_order_hints:
   - is-01m5fy05g8n1q6rksv7pntnrxe
   - is-01m5g022qevmw4aefxb2w4nn62
   - is-01m5g0dept4r1ejr31gnkr77kt
+  - is-01m5g28824ts9q4byp8ezh6sxf
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T19:53:36.211Z
+updated_at: 2026-10-21T20:25:42.722Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Final preview live in Arc from site-integrated-reviewed;7293publication checks,1143URL rows and692-page name audit pass; fourPDFs have7/8/8/25 valid profile annotations after title-free footnote fix15cbd2742. Plan committed d4770d02b. Formalization confirmed in existing ontology/schema/shared kind filters. First push gate:66of69steps pass; type binding and doc map failures fixed and reruns pass; behavioral suite timed out900s without verdict. Rerunning final whole gate with explicit1800s cap and retained artifacts (dynamic reachable step cannot be selected alone). Log profiles-final-push-rerun.log in external scratch; session17337. Read-only data agent monitors diagnostics. Push, hosted CI and PR handoff pending; no merge/deployment. All historical population/registration and family-frontier followups remain separate.
+PR #578 final integration head is c3e8f1cc0965a5e4f65d3bed086994977fe35edb. This preserves integration commit 7b566ae73 and adds only generated explainer URL lastmod dates matching October 21. Hosted CI found this drift; local URL registry now has 1,143 rows and zero failures, and 15 date tests pass in 4.01s. Astra reviewed the correction without findings. Preview crawl files refreshed. Working tree clean. All earlier local validation and rebuilt-preview receipts are in PR body and the active plan. New hosted CI and explicit Deferred checkpoint are running; watch final-pr-checks-c3e8-watch.log in /Volumes/spud-ext2/agent-scratch/about-profiles-20261020. Keep draft until all final-head checks pass. No merge or deployment. Completed scoped beads closed; population/PDF inspection, historical registrations and other explicit followups remain open.
