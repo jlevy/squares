@@ -1987,19 +1987,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "Issue 678's stage 4 and house best packing adoption (T-223 at V3/C3, the "
-            "house at 204 and 260) against main 51ac9d7e, after merging it. Rendered at "
-            "link revision a6db78d1, the merge, once from its tree and once with main's "
-            "copies of these twelve inputs: render_n11_optimality_review, "
-            "render_n11_threshold_bound_review, render_packing_methods and "
-            "render_n11_lower_bounds_explainer write 68 files, byte-identical between the "
-            "trees. The explainer's first render from the merge's tree wrote one math "
-            "span's empty style attribute before its data attributes; two more renders of "
-            "that tree match main's copies byte for byte. Rendered the same way again at "
-            "646b99b6, after review A's edits to adopt_houses.py (per-count lineage) and "
-            "results.yaml (T-223's confirmed significance): 68 files byte-identical, the "
-            "explainer's first render again writing that one span's attribute first and its "
-            "second matching. No PDF was printed; each prints from that HTML. Retain v0.4.13, "
-            "v0.1.7, v0.1.0 and v0.2.3."
+            "house at 204 since 20 October and at 260 since 21 October 2026, from T-196) "
+            "against main 970e89de, after merging it. Rendered at link revision 02eef374, the "
+            "merge, twice from its tree and twice with main's copies of these twelve inputs: "
+            "render_n11_optimality_review, render_n11_threshold_bound_review, "
+            "render_packing_methods and render_n11_lower_bounds_explainer write 68 files, "
+            "byte-identical across all four renders. No PDF was printed; each prints from that "
+            "HTML. Retain v0.4.13, v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
