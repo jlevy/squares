@@ -7659,14 +7659,19 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/544#issuecomment-6308157470
+      date: '2026-10-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: Every item the tracker lists has landed, been declined or moved to an issue of its
       own.
     notes: >-
-      The follow-up of 15 October: every pull request of the pass has merged except #514 (#516,
-      #518, #553 and #531 on 12 October, #563 on 14 October); #485's s(40) > 3359/500 is T-157 at
-      V3/C3 (#598) and #506's s(175) is answered and registered as T-185 (#612). Still queued:
-      #514 and the owner decisions on #543, #532 to #542, #419's Lean build, the n = 17
-      certificates of #495 and #413, #494's note and #446's four values (think-eth9).
+      The follow-up of 15 October: every pull request of the pass has merged except #514; #485's
+      s(40) > 3359/500 is T-157 at V3/C3 (#598) and #506's s(175) is T-185 (#612). The update of
+      21 October: #514 has merged too. Still queued: #543's budgets, #494's note, #446's values
+      (think-eth9) and the held replays think-2d7f, think-yfoo, think-8eo1 and think-0arj; the
+      rest of the intake continues under #684.
   - number: 545
     title: Evan Daniel's s(29) minimal polynomial (degree 7213) and grade-C local-minimality checks (evand/square-packing ad86d42)
     author: jlevy
@@ -13544,6 +13549,28 @@ issues:
       The issue closed with it at 2026-10-20T17:43:20Z. The 20 October follow-up (issuecomment-6300872327)
       names the evidence that reply described: E-evand-680-n183-report, reviewed, and
       E-evand-680-n183-primary-exact-feasibility, confirmed.'
+  - number: 684
+    title: 'Handoff: resume reviewed intake and remaining PR landings after machine transfer'
+    author: jlevy
+    opened: '2026-10-19'
+    state: open
+    kind: other
+    triage: done
+    summary: >-
+      The owner's handoff of 19 October 2026 between machines: the evidence release
+      data/intake-handoff-2026-10-19, the codex/handoff-20261019/* checkpoints and what each
+      still needs, and the intake's state. Like #544 it tracks work, not a reported item.
+    read_through: '2026-10-19T15:51:21Z'
+    results: []
+    asks:
+    - what: Every checkpoint it lists landed, declined or moved to its own issue or bead.
+      state: queued
+      bead: think-xmxb
+    beads:
+    - think-xmxb
+    answer_bead: think-xmxb
+    replies: []
+    close_when: Nothing it lists is left.
   - number: 686
     title: '100 certified larger-count square packings (328–998): registration request'
     author: gfppoy
@@ -14540,8 +14567,8 @@ issues:
         packing’s design, composed from SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird
         catalogue’s former n = 19 packing", with Daniel as the finder in the structured fields and
         Chaoweeraprasit in the credit sentence, as at 308. PR #710 added the design's composition
-        to the sentence after the final reply had quoted its first wording, so that reply carries
-        an outdated item. T-224's claim, its bibliography key [Daniel n270 sweep 2026-10-20] (Daniel after
+        to the sentence after the final reply had quoted its first wording, and the correction
+        of 07:11Z replaced it. T-224's claim, its bibliography key [Daniel n270 sweep 2026-10-20] (Daniel after
         Chaoweeraprasit) and the packet README's Lineage section name the start too. The 21 October
         review measured the packing against T-174's, which is #500's to 1e-30: 255 of 270 squares
         within a tenth under the identity and 15 beyond, so another arrangement of #500's design,
@@ -14571,6 +14598,14 @@ issues:
         Daniel’s arrangement, in a search started from Nate Chaoweeraprasit’s SQUISH packing, of
         that packing’s design, composed from SQUISH’s issue 481 n = 209 packing, whole, and the
         Kingbird catalogue’s former n = 19 packing"
+    - url: https://github.com/jlevy/squares/issues/703#issuecomment-6310273813
+      date: '2026-10-21'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: n270
+      corrects:
+      - https://github.com/jlevy/squares/issues/703#issuecomment-6308741545
     close_when: >-
       The certificate is registered on main and replayed here, the stage 4 review has been mapped,
       the case at 270 has adopted it and regularized its drawing with the requested credit, and the
