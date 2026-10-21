@@ -233,15 +233,6 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # with this note, the snapshot measured 229,442,770 bytes, 195,374 under that cap. At
 # #692's head, after #688 raised the cap to 221 MiB, it read 231,475,393 bytes, 259,903
 # under it.
-# 2026-10-21, T-196's adoption at 227 and 260 (#704) after its merge of main e7de85ff6
-# (#701): the branch's review, receipts and regularization runs took the snapshot to
-# 232,794,722 bytes, 10,850 over the 222 MiB cap. The day's selection record,
-# selection-n227-n260.json (28,333 bytes), has no registered mention and no inline or
-# result rescue: people open it from the atlas README beside its Markdown summary, and no
-# control reads it. Left out, with this note, the snapshot measures 232,767,018 bytes,
-# 16,854 under the cap. At #704's head d2eca7108, after 6d9a3d278 and d2eca7108, it read
-# 232,768,595 bytes, 15,277 under, and after review B's fixes 232,775,794, 8,078 under, less
-# than this one selection record.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
@@ -267,7 +258,6 @@ UNREAD_WORKER_OUTPUTS = frozenset(
         ROOT / "atlas/rendering/free-quench-n1-trace.json",
         ROOT / "cases/regularized_drawings/think-ip1p-2026-10-19/review-229"
         "/grid-slack-adopt-2026-10-19-n155-271-grid-deg05.svg",
-        ROOT / "cases/regularized_drawings/think-qdcc-2026-10-20/selection-n227-n260.json",
     }
 )
 PRUNE = frozenset(
