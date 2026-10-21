@@ -15,7 +15,7 @@ The source claims no priority, rigidity or optimality, and decides none.
 | --- | --- |
 | Issue | [jlevy/squares#686](https://github.com/jlevy/squares/issues/686), opened 2026-10-19T20:43:04Z |
 | Evidence | The attachment `01-squares-100-certificates-and-poses.zip`, at two addresses that serve the same bytes: [files/33685905](https://github.com/user-attachments/files/33685905/01-squares-100-certificates-and-poses.zip) and [files/33685972](https://github.com/user-attachments/files/33685972/01-squares-100-certificates-and-poses.zip) |
-| Pin | 8,824,142 bytes, SHA-256 `6b711d6e80c9828497ba09d44673ee490c00ccae51b80587ec591d940722a874`, which the issue states; there is no commit or DOI |
+| Pin | SHA-256 `6b711d6e80c9828497ba09d44673ee490c00ccae51b80587ec591d940722a874`, which the issue states, and 8,824,142 bytes, which triage measured; there is no commit or DOI |
 | Bibliography key | **[Muglich issue 686 2026-10-19]** |
 | Human credit | Darius Muglich, after the seeds and sources each case’s `provenance.json` names, Francisco Couzo’s certificates most often; `ATTRIBUTION.md` also credits Evan Daniel’s solver and workflow and the public contributions of Joost de Winter and Kevin Fang |
 | AI assistance | The issue and the archive’s `ATTRIBUTION.md` state that OpenAI Codex assisted with optimization, orchestration, verification and packaging |
@@ -114,12 +114,13 @@ python -m devtools.muglich_686_import check --n 328 --replay
 ```
 
 `derive --check` rebuilds every fact, the provenance record and the manifest from a
-local copy of the attachment, which it refuses unless its size and SHA-256 are the
-issue’s. `check` holds the facts to the manifest and to the issue’s prints, the claims
-record to its rebuild, and every receipt to its count’s fact; `--replay` decides the
-selected counts again.
-`certify --jobs-dir DIR --workers 2` resumes an interrupted replay: a count whose
-receipt is admitted is skipped, and a finished job left in `DIR` is reused.
+local copy of the attachment, which it refuses unless it has the SHA-256 the issue
+states and the size triage measured.
+`check` holds the facts to the manifest and to the issue’s prints, the claims record to
+its rebuild, and every receipt to its count’s fact; `--replay` decides the selected
+counts again.
+`certify --jobs-dir DIR --workers 2` resumes an interrupted replay: a count
+whose receipt is admitted is skipped, and a finished job left in `DIR` is reused.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

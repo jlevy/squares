@@ -7,11 +7,11 @@ only by its address and SHA-256: an issue attachment has no commit, so
 not the archive's bytes. Its README says what is retained, the credit and the licence.
 
 - ``derive --archive ZIP`` reads a local copy of the attachment as data, refuses it unless
-  its size and SHA-256 are the issue's, parses the 100 certificates in Evan Daniel's
-  ``n S`` / ``x y t`` format, admits each only where its exact side rounds up to the
-  issue's print at 15 places, and writes ``facts/n-NNN.json.gz`` (side, centres and
-  half-angle tangents, exactly) and ``acquisition/sources.json`` (every member's path,
-  size and SHA-256). ``--check`` rebuilds both from the archive and compares.
+  it has the SHA-256 the issue states and the size triage measured, parses the 100
+  certificates in Evan Daniel's ``n S`` / ``x y t`` format, admits each only where its
+  exact side rounds up to the issue's print at 15 places, and writes ``facts/n-NNN.json.gz``
+  (side, centres and half-angle tangents, exactly) and ``acquisition/sources.json`` (every
+  member's path, size and SHA-256). ``--check`` rebuilds both from the archive and compares.
 - ``claims-record`` writes ``acquisition/beyond-horizon-claims.json``, which
   ``check_source_coverage`` reads each beyond-horizon row against.
 - ``certify`` runs a positive, a duplicate-square and an outside-container job per count
@@ -217,7 +217,7 @@ def archive_bytes(path: Path) -> bytes:
         data = stream.read(ARCHIVE_BYTES + 1)
     _require(
         len(data) == ARCHIVE_BYTES and hashlib.sha256(data).hexdigest() == ARCHIVE_SHA256,
-        "the archive is not the attachment issue 686 pins by size and SHA-256",
+        "the archive lacks the SHA-256 issue 686 states or the size triage measured",
     )
     return data
 

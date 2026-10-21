@@ -14188,6 +14188,11 @@ issues:
       - result: n996
       - result: n997
       - result: n998
+      outdated:
+      - 'no row for these counts is on main yet; since #711 merged, the 100 rows of
+        muglich-issue686-2026-10-19 are on main'
+      - 'a row is listed as reported until that replay lands, and as verified once it has; the
+        replay landed with #711, and every row stays reported until a stage 4 review'
     close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
       corpus take no register entry, and optimality is outside this request.
     notes: >-
@@ -14231,7 +14236,17 @@ issues:
       archive bytes, as squish-401-2026-10-07 did, and ran the full replay: a positive and both
       kernel controls at every count, on both maintained exact routes over every pair and wall,
       one receipt per count. The 100 rows of the muglich-issue686-2026-10-19 source are
-      reported, pending review, and each supersedes the row that stood at its count.
+      reported, pending review; 88 supersede the row that stood at their count, and 12 counts
+      had none. Read on 21 October 2026, the four watched repositories that publish beyond
+      the corpus hold no side at or below #686's at its counts through their last commits
+      before it: franciscouzo/square-packing 7b6c87e (#678's pin; its upper_bounds.json is
+      above #686 everywhere, least by 6.33e-8 at 810), evand/square-packing 3a9948c (since
+      622cd2e only copies of Fang's 078789a certificates here), JoostdeWinter's site b9cdc16
+      (#666's packings) and TheSnakeFang/squarepack-certs 9ffba0f (notes since 078789a).
+      #666, #670, #672 and #675, pending triage, report 9, 47, 33 and 54 of these counts, 11
+      of those 12 among them, each above #686, so their rows there will enter superseded;
+      their beads (think-3m10, think-f28n, think-2vjc, think-pvav) were told on 21 October
+      2026.
   - number: 689
     title: 's(308) ≤ 17.997149121271: registration request'
     author: evand

@@ -3123,7 +3123,6 @@ sources:
     is tracked outside the 1..324 case corpus; no geometry, native replay, selected case, result row or
     transferred issue451 verification.
     On 21 October 2026 issue 686's rows superseded one of this source's (muglich-issue686-2026-10-19).
-
 - id: couzo-extended-range-updates-2026-10-08
   title: Francisco Couzo's later decimal reports at n=375 and n=378
   role: source-repository
@@ -6993,14 +6992,14 @@ sources:
   evidence:
   - E-muglich-686-certificate-report
   notes: >-
-    Issue 686's 100 upper bounds at 328 to 998, one exact rational certificate each, in the
-    issue's attachment, pinned by address, size and SHA-256 (no commit or DOI). As SQUISH
-    #401's attachment was kept, the packet keeps derived facts, member digests and the
-    per-case provenance, not the archive's bytes; CC BY 4.0 granted 20 October 2026. Each
-    print is its exact side rounded up at 15 places. The packet's complete replay accepted
-    all 100 on both maintained exact routes and refused both kernel controls at every count.
-    The 20 October ledger records all 100 in report order; each supersedes the row that
-    stood at its count, and 12 counts start at the grid. The source credits each
+    Issue 686's 100 upper bounds at 328 to 998 (think-9vjn), one exact rational certificate
+    each, in the issue's attachment, pinned by address, size and SHA-256 (no commit or DOI).
+    As SQUISH #401's attachment was kept, the packet keeps derived facts, member digests and
+    the per-case provenance, not the archive's bytes; CC BY 4.0 granted 20 October 2026.
+    Each print is its exact side rounded up at 15 places. The packet's complete replay
+    accepted all 100 on both maintained exact routes and refused both kernel controls at
+    every count. The 20 October ledger records all 100 in report order; each supersedes the
+    row that stood at its count, and 12 counts start at the grid. The source credits each
     construction's seeds in its provenance, Couzo's certificates most often; OpenAI Codex
     assistance disclosed.
   claims_record: resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
