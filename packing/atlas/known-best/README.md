@@ -1,8 +1,10 @@
 # Known-Best Packing Atlas, `n = 1..324`
 
 This atlas retains one complete geometry record for every frontier case from $n = 1$
-through $n = 324$ and renders every record with the repository’s deterministic house
-renderer. The machine-readable discovery layer is [`manifest.json`](manifest.json).
+through $n = 324$, the witness of the count’s
+[house best packing](../../../SYNOPSIS.md#the-measurements), and renders every record
+with the repository’s deterministic house renderer.
+The machine-readable discovery layer is [`manifest.json`](manifest.json).
 The range widened from 100 on 2026-09-07 under
 [the expansion plan](../../../docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md).
 Two composites are drawn from it: the published figure of the first hundred, with its

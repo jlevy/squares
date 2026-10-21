@@ -89,11 +89,10 @@ class PublicationHistoryEntry(NamedTuple):
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
         version="v0.8.7",
-        first_published="October 21, 2026",
+        first_published="October 20, 2026",
         result_scope=(
-            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
-            "integrated exact replay and its stage 4 review, and adopt it as the house "
-            "best packing at 227 and 260 with Evan Daniel's regularized views."
+            "The synopsis defines the house best packing, and the conventions write house "
+            "only as a modifier."
         ),
     ),
     PublicationHistoryEntry(
@@ -1108,9 +1107,8 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.8.7",
         impact="patch",
         reason=(
-            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
-            "integrated exact replay and its stage 4 review, and adopt it as the house "
-            "best packing at 227 and 260 with Evan Daniel's regularized views."
+            "The synopsis defines the house best packing, and the conventions write house "
+            "only as a modifier."
         ),
     ),
     ReleaseImpactDecision(
@@ -1870,6 +1868,45 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "showed on the branch's earlier head. No PDF was printed; each prints from "
             "that HTML. "
             "Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site v0.8.7 cut for the house best packing terminology (think-9v1i) "
+            "regenerated the five claim documents, and each of the 22 changed lines differs "
+            "from main 99cfcc8a only in its source-link revision, e6b9d98c to 9cd35d1e. "
+            "The explainer links those documents rather than inlining them, so its HTML "
+            "and Markdown are unchanged by them and it keeps v0.4.11. This is a "
+            "source-reviewed disposition, as #695's was for v0.8.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/frontier/README.md",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Reviewed October 20, 2026 against main 99cfcc8a (think-9v1i): the frontier "
+            "README's two house-rule passages now name the house best packing and link "
+            "the synopsis's definition, and nothing else in it changes. Rendered with "
+            "render_packing_methods at link revision 99cfcc8a, once from this branch's "
+            "tree and once with main's copy of frontier/README.md: all 42 files it writes "
+            "are byte-identical, and its PDF prints from that HTML and was not rebuilt. "
+            "The survey keeps v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
@@ -5615,7 +5652,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "093db30e"
+PUBLICATION_REVISION = "9cd35d1e"
 
 
 def data_pathspec() -> tuple[str, ...]:
