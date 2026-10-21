@@ -123,7 +123,7 @@ from decimal import Decimal
 from fractions import Fraction
 from functools import cache
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import yaml
 from strif import atomic_output_file
@@ -1523,6 +1523,31 @@ FORMER_PROSE = (
 
 #: A name field's item that gives the handle, in front matter an earlier record wrote.
 FORMER_NAME_FIELD = re.compile(r"(\n(\s*)(?:claimed_by|found_by|improved_by):\n\2- )ry-xu\n")
+
+
+#: The prover a record written before the attribution migration of 13 to 20 October 2026
+#: names by handle in a lower bound, with the credited name that replaced it
+#: (attribution.md), and the same handle's possessive in that lower bound's note.
+FORMER_PROVERS = {"wand125": "Hosono", "squarepacker (Ryu Sungjoon)": "Ryu Sungjoon"}
+FORMER_NOTE_NAMES = ((re.compile(r"(?<![\w/@\[-])wand125's"), "Hosono's"),)
+
+
+def _named_lower(layer: object) -> object:
+    """A lower-bound layer with its prover and note credited as the record credits them
+    now, so a replayed earlier layer that differs only by the migrated name is the same
+    layer (`refreshed`)."""
+    if not isinstance(layer, Mapping):
+        return layer
+    named = dict(cast("Mapping[str, Any]", layer))
+    provers = named.get("proved_by")
+    if isinstance(provers, list):
+        named["proved_by"] = [FORMER_PROVERS.get(str(name), name) for name in provers]
+    note = named.get("note")
+    if isinstance(note, str):
+        for pattern, replacement in FORMER_NOTE_NAMES:
+            note = pattern.sub(replacement, note)
+        named["note"] = note
+    return named
 
 
 def _named_fields(front: str) -> str:
@@ -3024,7 +3049,7 @@ def refreshed(move: Move, committed: str) -> str:
     packing = _packing(_split(written)[1])
     current = _packing(front)
     if any(
-        current.get(key) != packing.get(key)
+        _named_lower(current.get(key)) != _named_lower(packing.get(key))
         for key in ("reported_lower_bound", "verified_lower_bound")
     ):
         raise AdoptionError(

@@ -1632,7 +1632,7 @@ def test_n29_numerical_and_schadt_ceiling_claims_replay_as_idempotent_history(
 
 
 N108_LOWER_INTRO = r"""**Fine-net lower bound, 18 October 2026.** The certificate
-`mixed_n108_L1062`, published by wand125 on 16 October, raises both lower lanes to
+`mixed_n108_L1062`, published by Hosono on 16 October, raises both lower lanes to
 $s(108) \ge 531/50 = 10.62$. Its exact nonnegative rectangle measure has total mass
 $10799999/100000 < 108$. The retained maintained `sqverify-fast` census verifies capture
 at every centre in all 201 declared-net directions, and its whole-net control receipt
@@ -1780,7 +1780,7 @@ def _fine_net_lower_projection(
         f"`{candidate}` raises both lower lanes from ${earlier}$ to ${exact}$. The complete "
         "201-direction maintained native replay and [mathematical "
         f"review](../../docs/project/reviews/review-2026-10-19-{review}.md) confirm it by a "
-        "re-implementation sharing components with the producer’s checker, wand125’s "
+        "re-implementation sharing components with the producer’s checker, Hosono’s "
         "adaptation of this repository’s `sqverify_fast` crate, apart from the declared-net "
         "readers. The exact audits check premises and saved poses only. The original 18 source "
         "reports and historical native receipts remain retained."
