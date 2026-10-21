@@ -5,13 +5,13 @@ title: "Owner decision on the #673 credit consequences: Kevin Fang's structured 
 kind: task
 status: open
 priority: 2
-version: 4
+version: 5
 labels:
   - result-import
   - owner-decision
 dependencies: []
 created_at: 2026-10-20T04:03:18.113Z
-updated_at: 2026-10-21T04:50:59.286Z
+updated_at: 2026-10-21T04:51:17.375Z
 ---
 Owner decisions the #673 credit correction raises in PR #692 (review A3, senior; review B1, correctness). PR #692 follows epistemics.md's rule that the source says who did what: at 146 and 308 Evan Daniel becomes the finder, as the author's #673 asks, and at 236 the issue's credit of #481 for the construction is read as "based on", so Daniel is also the finder there.
 
@@ -32,4 +32,4 @@ Done when the owner chooses. Under (b), the change lands in its own PR. Under (a
 2026-10-20 23:40Z coordinator (review B of #699). T-221 (#689, Evan Daniel's 308, adopted as the house best packing at 308 by #699) is now the count's result: its credit sentence names 'Kevin Fang's two-wedge design' and the structured credit names Daniel only, the same split main made for T-174. Fact for the decision: #481's 307 packing (T-136, published 9 October), from which T-221 was found, already shares that two-wedge design, a day before Fang's #484 (10 October).
 
 
-2026-10-21 04:55Z coordinator (review B6 of #708). The same structured-credit question now also arises at 270: T-224 (#703, Evan Daniel, adopted by #708) names Daniel as finder in the structured fields, with Nate Chaoweeraprasit's #500 packing in the credit sentence only, the split used for Fang at 308. The design T-174/T-224 share is composed of #481's n=209 packing plus the catalogue's n=19 packing; the new credit sentence does not say so (records follow-up think-ijdy or the next records PR).
+2026-10-21 04:55Z coordinator (review B6 of #708). The same structured-credit question now also arises at 270: T-224 (#703, Evan Daniel, adopted by #708) names Daniel as finder in the structured fields, with Nate Chaoweeraprasit's #500 packing in the credit sentence only, the split used for Fang at 308. The design T-174/T-224 share is composed of #481's n=209 packing plus the catalogue's n=19 packing; the new credit sentence does not say so (records follow-up think-xl9i).
