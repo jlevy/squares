@@ -7235,11 +7235,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 270
-  source_id: pingyou-pr574-certificates-2026-10-13
-  value: '16.92819699332901659'
-  evidence: E-pingyou-574-certificate-report
+  source_id: evand-n270-sweep-2026-10-20
+  value: '16.9281622521967502'
+  evidence: E-evand-703-n270-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+    here and an accepted review, adopted on 2026-10-21 (T-224).
 - n: 271
   source_id: evand-n271-2026-10-17
   value: '16.9489477337136576'
@@ -8299,14 +8299,14 @@ superseded_reports:
 - n: 270
   source_id: casson-square-packing-2026
   value: '16.94057158197226087'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: evand-n270-sweep-2026-10-20
   reason: 'Larger than Francisco Couzo''s side at this count; the case record states both sources''
     dates and values; since 2026-10-05 the selected report is Evan Daniel''s exact optimum of that
     packing (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 270
   source_id: franciscouzo-square-packing-2026
   value: '16.937810329390629'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: evand-n270-sweep-2026-10-20
   reason: 'Superseded on 2026-10-05 by Evan Daniel''s exact optimum of the same packing, certified
     here (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 271
@@ -8721,7 +8721,7 @@ superseded_reports:
 - n: 270
   source_id: evand-square-packing-2026-10-05
   value: '16.937810329340954110200218669924'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: evand-n270-sweep-2026-10-20
   reason: 'The complete #399 construction has a strictly smaller side; the earlier report and its
     full certificates remain historical.'
 - n: 272
@@ -9010,9 +9010,9 @@ superseded_reports:
 - n: 270
   source_id: evand-new-arrangements-2026-10-07
   value: '16.937807228446029110709567408515'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-224's exact
     side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: evand-n270-sweep-2026-10-20
 - n: 292
   source_id: rehwaldt-couzo-refinements-2026-10-07
   value: '17.597249391156465040471442005510391858592626557'
@@ -9113,8 +9113,8 @@ superseded_reports:
   source_id: couzo-certificates-2026-10-10
   value: '16.9297753535413596'
   reason: The house from 2026-10-11 until 2026-10-12; its certificate stays retained and verified,
-    and T-174's exact side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+    and T-224's exact side is smaller.
+  superseded_by: evand-n270-sweep-2026-10-20
 - n: 305
   source_id: couzo-certificates-2026-10-10
   value: '17.9511397722069976'
@@ -9509,8 +9509,8 @@ superseded_reports:
   source_id: squish-500-fourth-request-2026-10-11
   value: '16.9281969933290166'
   reason: The house from 2026-10-12 until 2026-10-17; its certificate stays retained and verified,
-    and T-174's exact side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+    and T-224's exact side is smaller.
+  superseded_by: evand-n270-sweep-2026-10-20
 - n: 272
   source_id: pingyou-n272-refinement-2026-10-12
   value: '16.9655864748376707'
@@ -9583,6 +9583,12 @@ superseded_reports:
   reason: The house from 2026-10-17 until 2026-10-20; its certificate stays retained and verified,
     and T-221's exact side is smaller.
   superseded_by: evand-n308-2026-10-19
+- n: 270
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '16.92819699332901659'
+  reason: The house from 2026-10-17 until 2026-10-21; its certificate stays retained and verified,
+    and T-224's exact side is smaller.
+  superseded_by: evand-n270-sweep-2026-10-20
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
