@@ -1806,6 +1806,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/evand_arrangement_reports.py",
+            "packing/devtools/run_negative_controls.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
@@ -1850,6 +1851,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "in their source-link revision, and results.yaml, where its T-223 is in both "
             "trees and this branch's edits, T-196's and T-223's note on the house best "
             "packing at 260, still change neither count. "
+            "run_negative_controls.py, changed after that merge, changes only the worker "
+            "snapshot's UNREAD_WORKER_OUTPUTS and its comments, and importing each of the "
+            "four producers loads no devtools.run_negative_controls. "
             "Retain v0.4.12."
         ),
     ),
@@ -1858,6 +1862,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/devtools/adopt_houses.py",
             "packing/devtools/evand_arrangement_reports.py",
+            "packing/devtools/run_negative_controls.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
@@ -1895,6 +1900,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.8.7), which changes none of these inputs, and after the merge of main "
             "e7de85ff6 (#701, site v0.8.8), which adds T-223 to results.yaml outside the "
             "n11 ladder; this branch edits only T-223's notes there. "
+            "run_negative_controls.py, changed after that merge, changes only the worker "
+            "snapshot's UNREAD_WORKER_OUTPUTS and its comments, and importing each of the "
+            "four producers loads no devtools.run_negative_controls. "
             "Retain v0.1.7 and v0.1.0."
         ),
     ),
@@ -1904,6 +1912,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/campaign/result-requests.yaml",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/evand_arrangement_reports.py",
+            "packing/devtools/run_negative_controls.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
@@ -1939,6 +1948,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.8.7), which changes none of these inputs, and after the merge of main "
             "e7de85ff6 (#701, site v0.8.8), whose T-223, #678 request and coverage rows "
             "the survey does not cite either. "
+            "run_negative_controls.py, changed after that merge, changes only the worker "
+            "snapshot's UNREAD_WORKER_OUTPUTS and its comments, and importing each of the "
+            "four producers loads no devtools.run_negative_controls. "
             "Retain v0.2.3."
         ),
     ),
