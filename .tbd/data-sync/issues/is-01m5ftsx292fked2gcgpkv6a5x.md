@@ -5,7 +5,7 @@ title: Audit profile coverage against significant results and PDF credits
 kind: task
 status: in_progress
 priority: 2
-version: 11
+version: 12
 delegate: profiles-data-integration
 labels: []
 dependencies: []
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T18:15:32.680Z
-updated_at: 2026-10-21T20:32:24.997Z
+updated_at: 2026-10-21T20:32:29.004Z
 started_at: 2026-10-21T18:15:42.083Z
 closed_at: null
 close_reason: null
@@ -37,3 +37,5 @@ This closure does not claim an exhaustive PDF credit census: 146 full-PDF inspec
 Final integration receipt: commit 7b566ae73 is pushed to https://github.com/jlevy/squares/pull/578. The final rerun covered 77 previously failing cases: 76 passed in 166.02 seconds; the remaining quote-parser case was fixed and passed separately in 8.05 seconds. The coordinator reports all 68 other selected checks, the complete 121-test module run, 53 UI checks and the browser floor clean. Hosted CI remains pending under think-zpfo.
 
 Reopened: The bounded PR 578 audit is complete, but this coverage parent has unfinished children, including think-0ltn. Keep the parent live until those follow-ups are resolved; preserve all completed-work receipts and child states.
+
+Tracker hierarchy correction: this coverage parent is reopened and remains live because its children include the open dated-contribution model think-0ltn and in-progress profile batches think-8wj0, think-2ccx and think-eigy. The completed bounded PR 578 audit, implementation and verification receipts above remain valid; they do not complete the parent's remaining children or the broader PDF coverage. No child was closed or reparented. Historical intake and the overall hosted-CI handoff remain open.
