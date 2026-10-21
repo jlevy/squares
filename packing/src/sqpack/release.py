@@ -2110,14 +2110,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/atlas/known-best/bound-citations.json",
             "packing/atlas/known-best/composite-figure.json",
-            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
-            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
-            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/evand_arrangement_reports.py",
-            "packing/devtools/run_negative_controls.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
@@ -2178,7 +2172,20 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "T-222's prose leaves both counts at 223 entries and 32 novel ones; "
             "adopt_houses.py, which the explainer does not load; and "
             "bound-citations.json at 271 only. "
-            "Retain v0.4.12."
+            "Re-taken after the merge of main 51ac9d7ee (#708 to #713, site v0.8.13, "
+            "explainer v0.4.13). That merge withdrew this branch's site v0.8.10 cut, so "
+            "the five claim documents are main's and leave these paths, and the next "
+            "commit withdrew its change to run_negative_controls.py (review B4). "
+            "Rendered at link revision fd7f939e, once from this branch's tree and once "
+            "with main's bytes of the ten changed inputs (bound-citations.json, "
+            "composite-figure.json, result-requests.yaml, adopt_houses, "
+            "evand_arrangement_reports, upper_bound_houses, upper_bound_reports, "
+            "results.yaml, source-coverage.yaml and validate.py): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review, "
+            "render_packing_methods and render_n11_lower_bounds_explainer, the last with "
+            "its pinned Chromium math pass, write 68 files, all byte-identical between "
+            "the trees. No PDF was printed; each prints from that HTML. "
+            "Retain v0.4.13."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2186,7 +2193,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/devtools/adopt_houses.py",
             "packing/devtools/evand_arrangement_reports.py",
-            "packing/devtools/run_negative_controls.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
@@ -2235,6 +2241,19 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Re-taken by source review after the merge of main 6b825f441 (#707, site "
             "v0.8.9), whose results.yaml prose is outside the n11 ladder and whose "
             "adopt_houses.py prose these producers do not call. "
+            "Re-taken after the merge of main 51ac9d7ee (#708 to #713, site v0.8.13, "
+            "explainer v0.4.13). That merge withdrew this branch's site v0.8.10 cut, so "
+            "the five claim documents are main's and leave these paths, and the next "
+            "commit withdrew its change to run_negative_controls.py (review B4). "
+            "Rendered at link revision fd7f939e, once from this branch's tree and once "
+            "with main's bytes of the ten changed inputs (bound-citations.json, "
+            "composite-figure.json, result-requests.yaml, adopt_houses, "
+            "evand_arrangement_reports, upper_bound_houses, upper_bound_reports, "
+            "results.yaml, source-coverage.yaml and validate.py): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review, "
+            "render_packing_methods and render_n11_lower_bounds_explainer, the last with "
+            "its pinned Chromium math pass, write 68 files, all byte-identical between "
+            "the trees. No PDF was printed; each prints from that HTML. "
             "Retain v0.1.7 and v0.1.0."
         ),
     ),
@@ -2244,7 +2263,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/campaign/result-requests.yaml",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/evand_arrangement_reports.py",
-            "packing/devtools/run_negative_controls.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
@@ -2292,6 +2310,19 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Re-taken by source review after the merge of main 6b825f441 (#707, site "
             "v0.8.9), whose result-requests.yaml entries, results.yaml prose and "
             "adopt_houses.py prose the survey does not cite. "
+            "Re-taken after the merge of main 51ac9d7ee (#708 to #713, site v0.8.13, "
+            "explainer v0.4.13). That merge withdrew this branch's site v0.8.10 cut, so "
+            "the five claim documents are main's and leave these paths, and the next "
+            "commit withdrew its change to run_negative_controls.py (review B4). "
+            "Rendered at link revision fd7f939e, once from this branch's tree and once "
+            "with main's bytes of the ten changed inputs (bound-citations.json, "
+            "composite-figure.json, result-requests.yaml, adopt_houses, "
+            "evand_arrangement_reports, upper_bound_houses, upper_bound_reports, "
+            "results.yaml, source-coverage.yaml and validate.py): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review, "
+            "render_packing_methods and render_n11_lower_bounds_explainer, the last with "
+            "its pinned Chromium math pass, write 68 files, all byte-identical between "
+            "the trees. No PDF was printed; each prints from that HTML. "
             "Retain v0.2.3."
         ),
     ),
