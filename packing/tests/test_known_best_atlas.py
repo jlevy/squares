@@ -2170,7 +2170,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # more, his packets at 154 and 308 (T-222, T-221), with no new name: Mishapolk's KKT
     # refinements and PingYou Ltd's PR 574 certificates still hold other counts. The same
     # day's adoption at 227 and 260 draws from one more, Joost de Winter's issue 668 packet
-    # (T-196), and the catalogue it re-housed still holds other counts.
+    # (T-196), and the catalogue that held both counts still holds others.
     assert len(expected_sources) == 25
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
