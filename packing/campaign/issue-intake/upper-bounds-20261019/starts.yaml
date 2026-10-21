@@ -1,0 +1,1209 @@
+format: intake-ledger-starts-v2
+read_at_main: d588ad987bd8de53361d087b8961a7f2bf157c41
+counts:
+- n: 204
+  members:
+  - label: record T-186
+    kind: record
+    holders: Daniil Ostashev, improved by PingYou Ltd, Mishapolk
+    model: exact
+    low: 740433161719347828316145172430104761481126338872178671530915993369069066972891707484286255665843382616078162213/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    high: 740433161719347828316145172430104761481126338872178671530915993369069066972891707484286255665843382616078162213/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    open_low: false
+    open_high: false
+    shown: '14.808663234387'
+    decide: ''
+    lanes:
+    - - reported
+      - '14.80866323438695657'
+      - 740433161719347828316145172430104761481126338872178671530915993369069066972891707484286255665843382616078162213/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+      - ''
+    - - verified
+      - '14.80866323438695657'
+      - 740433161719347828316145172430104761481126338872178671530915993369069066972891707484286255665843382616078162213/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+      - ''
+- n: 260
+  members:
+  - label: record [Kingbird] (reported lane)
+    kind: record
+    holders: David Ellsworth
+    model: closed form
+    low: 4241326419846993022870337115891633754575288160613463142901096282609436307595670806655419307/254629497041810760783555711051172270131433549208242031329517556169297662470417088272924672
+    high: 1060331604961748255717584278972908438643822040153365785725274070652359076898917701663854827/63657374260452690195888927762793067532858387302060507832379389042324415617604272068231168
+    open_low: false
+    open_high: false
+    shown: '16.65685424949238'
+    decide: an exact comparison with the reported lane's closed form 11 + 4 sqrt(2)
+    lanes:
+    - - reported
+      - '16.65685424949238'
+      - 11 + 4 sqrt(2)
+      - ''
+  - label: record T-155 (verified lane)
+    kind: record
+    holders: T-155
+    model: exact
+    low: 416421356237309504880168872421/25000000000000000000000000000
+    high: 416421356237309504880168872421/25000000000000000000000000000
+    open_low: false
+    open_high: false
+    shown: '16.656854249493'
+    decide: ''
+    lanes:
+    - - verified
+      - '16.65685424949239'
+      - 416421356237309504880168872421/25000000000000000000000000000
+      - ''
+  - label: register T-196, pending adoption
+    kind: register
+    holders: '[de Winter upper bounds 2026-10-17]'
+    model: exact
+    low: 16645778804181379786535601/1000000000000000000000000
+    high: 16645778804181379786535601/1000000000000000000000000
+    open_low: false
+    open_high: false
+    shown: '16.645778804182'
+    decide: ''
+    lanes: []
+    stated:
+    - 16645778804181379786535601/1000000000000000000000000
+    - '0'
+- n: 330
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '19'
+    high: '19'
+    open_low: false
+    open_high: false
+    shown: '19'
+    decide: ''
+    lanes: []
+- n: 343
+  members:
+  - label: beyond-horizon row evand-record-hunt3-2026-10-10
+    kind: record
+    holders: evand-record-hunt3-2026-10-10
+    model: print
+    low: 9489116261817805639865256053011/500000000000000000000000000000
+    high: 2372279065454451409966314013253/125000000000000000000000000000
+    open_low: false
+    open_high: false
+    shown: '18.978232523635611279730512106023'
+    decide: the exact side of the beyond-horizon row evand-record-hunt3-2026-10-10 at n =
+      343
+    lanes: []
+- n: 418
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 5237251307251/250000000000
+    high: 10474502614503/500000000000
+    open_low: false
+    open_high: false
+    shown: '20.949005229005'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 418
+    lanes: []
+- n: 420
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 5243618275867/250000000000
+    high: 2097447310347/100000000000
+    open_low: false
+    open_high: false
+    shown: '20.974473103469'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 420
+    lanes: []
+- n: 421
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 20983397833443/1000000000000
+    high: 4196679566689/200000000000
+    open_low: false
+    open_high: false
+    shown: '20.983397833444'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 421
+    lanes: []
+- n: 422
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 1311523039837/62500000000
+    high: 10492184318697/500000000000
+    open_low: false
+    open_high: false
+    shown: '20.984368637393'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 422
+    lanes: []
+- n: 455
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 21882451030513/1000000000000
+    high: 4376490206103/200000000000
+    open_low: false
+    open_high: false
+    shown: '21.882451030514'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 455
+    lanes: []
+- n: 456
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 10949747468331/500000000000
+    high: 2737436867083/125000000000
+    open_low: false
+    open_high: false
+    shown: '21.899494936663'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 456
+    lanes: []
+- n: 458
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 4388501387829/200000000000
+    high: 21942506939147/1000000000000
+    open_low: false
+    open_high: false
+    shown: '21.942506939146'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 458
+    lanes: []
+- n: 459
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 21946654374101/1000000000000
+    high: 21946654374103/1000000000000
+    open_low: false
+    open_high: false
+    shown: '21.946654374102'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 459
+    lanes: []
+- n: 461
+  members:
+  - label: beyond-horizon row couzo-certificates-2026-10-14
+    kind: record
+    holders: couzo-certificates-2026-10-14
+    model: print
+    low: 10986591876687/500000000000
+    high: 686661992293/31250000000
+    open_low: false
+    open_high: false
+    shown: '21.973183753375'
+    decide: the exact side of the beyond-horizon row couzo-certificates-2026-10-14 at n =
+      461
+    lanes: []
+- n: 462
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 5495527142599/250000000000
+    high: 10991054285199/500000000000
+    open_low: false
+    open_high: false
+    shown: '21.982108570397'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 462
+    lanes: []
+- n: 463
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 4396871792107/200000000000
+    high: 21984358960537/1000000000000
+    open_low: false
+    open_high: false
+    shown: '21.984358960536'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 463
+    lanes: []
+- n: 464
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 10994996072249/500000000000
+    high: 43979984289/2000000000
+    open_low: false
+    open_high: false
+    shown: '21.989992144499'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 464
+    lanes: []
+- n: 497
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 11414213562389/500000000000
+    high: 1141421356239/50000000000
+    open_low: false
+    open_high: false
+    shown: '22.828427124779'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 497
+    lanes: []
+- n: 499
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 11449747468341/500000000000
+    high: 5724873734171/250000000000
+    open_low: false
+    open_high: false
+    shown: '22.899494936683'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 499
+    lanes: []
+- n: 501
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 11467262341/500000000
+    high: 11467262341001/500000000000
+    open_low: false
+    open_high: false
+    shown: '22.934524682001'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 501
+    lanes: []
+- n: 502
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 11473041205503/500000000000
+    high: 44816567209/1953125000
+    open_low: false
+    open_high: false
+    shown: '22.946082411007'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 502
+    lanes: []
+- n: 505
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 2297310282433/100000000000
+    high: 5743275706083/250000000000
+    open_low: false
+    open_high: false
+    shown: '22.973102824331'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 505
+    lanes: []
+- n: 507
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 1435860082171/62500000000
+    high: 11486880657369/500000000000
+    open_low: false
+    open_high: false
+    shown: '22.973761314737'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 507
+    lanes: []
+- n: 545
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 5974873734161/250000000000
+    high: 11949747468323/500000000000
+    open_low: false
+    open_high: false
+    shown: '23.899494936645'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 545
+    lanes: []
+- n: 546
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 23934524682623/1000000000000
+    high: 191476197461/8000000000
+    open_low: false
+    open_high: false
+    shown: '23.934524682624'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 546
+    lanes: []
+- n: 548
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 1497428530791/62500000000
+    high: 11979428246329/500000000000
+    open_low: false
+    open_high: false
+    shown: '23.958856492657'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 548
+    lanes: []
+- n: 549
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 23961547101297/1000000000000
+    high: 23961547101299/1000000000000
+    open_low: false
+    open_high: false
+    shown: '23.961547101298'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 549
+    lanes: []
+- n: 553
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 11993321740031/500000000000
+    high: 46848913047/1953125000
+    open_low: false
+    open_high: false
+    shown: '23.986643480063'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 553
+    lanes: []
+- n: 554
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '24'
+    high: '24'
+    open_low: false
+    open_high: false
+    shown: '24'
+    decide: ''
+    lanes: []
+- n: 555
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '24'
+    high: '24'
+    open_low: false
+    open_high: false
+    shown: '24'
+    decide: ''
+    lanes: []
+- n: 592
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 24899494936649/1000000000000
+    high: 24899494936651/1000000000000
+    open_low: false
+    open_high: false
+    shown: '24.899494936650'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 592
+    lanes: []
+- n: 593
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 4979898987329/200000000000
+    high: 24899494936647/1000000000000
+    open_low: false
+    open_high: false
+    shown: '24.899494936646'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 593
+    lanes: []
+- n: 597
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 24961554162269/1000000000000
+    high: 24961554162271/1000000000000
+    open_low: false
+    open_high: false
+    shown: '24.961554162270'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 597
+    lanes: []
+- n: 598
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 24967683695023/1000000000000
+    high: 998707347801/40000000000
+    open_low: false
+    open_high: false
+    shown: '24.967683695024'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 598
+    lanes: []
+- n: 600
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 6246413084479/250000000000
+    high: 12492826168959/500000000000
+    open_low: false
+    open_high: false
+    shown: '24.985652337917'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 600
+    lanes: []
+- n: 601
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 12494741173709/500000000000
+    high: 1249474117371/50000000000
+    open_low: false
+    open_high: false
+    shown: '24.989482347419'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 601
+    lanes: []
+- n: 602
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '25'
+    high: '25'
+    open_low: false
+    open_high: false
+    shown: '25'
+    decide: ''
+    lanes: []
+- n: 641
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 25899494936671/1000000000000
+    high: 25899494936673/1000000000000
+    open_low: false
+    open_high: false
+    shown: '25.899494936672'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 641
+    lanes: []
+- n: 642
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 25899494936671/1000000000000
+    high: 25899494936673/1000000000000
+    open_low: false
+    open_high: false
+    shown: '25.899494936672'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 642
+    lanes: []
+- n: 650
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 25983103013169/1000000000000
+    high: 25983103013171/1000000000000
+    open_low: false
+    open_high: false
+    shown: '25.983103013170'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 650
+    lanes: []
+- n: 652
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '26'
+    high: '26'
+    open_low: false
+    open_high: false
+    shown: '26'
+    decide: ''
+    lanes: []
+- n: 653
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '26'
+    high: '26'
+    open_low: false
+    open_high: false
+    shown: '26'
+    decide: ''
+    lanes: []
+- n: 654
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '26'
+    high: '26'
+    open_low: false
+    open_high: false
+    shown: '26'
+    decide: ''
+    lanes: []
+- n: 693
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 26899494936673/1000000000000
+    high: 1075979797467/40000000000
+    open_low: false
+    open_high: false
+    shown: '26.899494936674'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 693
+    lanes: []
+- n: 700
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 13488070143699/500000000000
+    high: 134880701437/5000000000
+    open_low: false
+    open_high: false
+    shown: '26.976140287399'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 700
+    lanes: []
+- n: 701
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 6744035071843/250000000000
+    high: 13488070143687/500000000000
+    open_low: false
+    open_high: false
+    shown: '26.976140287373'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 701
+    lanes: []
+- n: 703
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '27'
+    high: '27'
+    open_low: false
+    open_high: false
+    shown: '27'
+    decide: ''
+    lanes: []
+- n: 704
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '27'
+    high: '27'
+    open_low: false
+    open_high: false
+    shown: '27'
+    decide: ''
+    lanes: []
+- n: 705
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '27'
+    high: '27'
+    open_low: false
+    open_high: false
+    shown: '27'
+    decide: ''
+    lanes: []
+- n: 706
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '27'
+    high: '27'
+    open_low: false
+    open_high: false
+    shown: '27'
+    decide: ''
+    lanes: []
+- n: 749
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 3493718433587/125000000000
+    high: 13974873734349/500000000000
+    open_low: false
+    open_high: false
+    shown: '27.949747468697'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 749
+    lanes: []
+- n: 751
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 27949747468343/1000000000000
+    high: 5589949493669/200000000000
+    open_low: false
+    open_high: false
+    shown: '27.949747468344'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 751
+    lanes: []
+- n: 752
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 13974873734293/500000000000
+    high: 6987436867147/250000000000
+    open_low: false
+    open_high: false
+    shown: '27.949747468587'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 752
+    lanes: []
+- n: 753
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 27949747468343/1000000000000
+    high: 5589949493669/200000000000
+    open_low: false
+    open_high: false
+    shown: '27.949747468344'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 753
+    lanes: []
+- n: 754
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 27950422600589/1000000000000
+    high: 27950422600591/1000000000000
+    open_low: false
+    open_high: false
+    shown: '27.950422600590'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 754
+    lanes: []
+- n: 755
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 13976114667209/500000000000
+    high: 1397611466721/50000000000
+    open_low: false
+    open_high: false
+    shown: '27.952229334419'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 755
+    lanes: []
+- n: 760
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '28'
+    high: '28'
+    open_low: false
+    open_high: false
+    shown: '28'
+    decide: ''
+    lanes: []
+- n: 804
+  members:
+  - label: beyond-horizon row couzo-certificates-2026-10-14
+    kind: record
+    holders: couzo-certificates-2026-10-14
+    model: print
+    low: 3615049843447/125000000000
+    high: 14460199373789/500000000000
+    open_low: false
+    open_high: false
+    shown: '28.920398747577'
+    decide: the exact side of the beyond-horizon row couzo-certificates-2026-10-14 at n =
+      804
+    lanes: []
+- n: 805
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 3615897016919/125000000000
+    high: 14463588067677/500000000000
+    open_low: false
+    open_high: false
+    shown: '28.927176135353'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 805
+    lanes: []
+- n: 806
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 14466940502373/500000000000
+    high: 7233470251187/250000000000
+    open_low: false
+    open_high: false
+    shown: '28.933881004747'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 806
+    lanes: []
+- n: 808
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 14466940502359/500000000000
+    high: 361673512559/12500000000
+    open_low: false
+    open_high: false
+    shown: '28.933881004719'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 808
+    lanes: []
+- n: 815
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '29'
+    high: '29'
+    open_low: false
+    open_high: false
+    shown: '29'
+    decide: ''
+    lanes: []
+- n: 863
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 29933881005347/1000000000000
+    high: 29933881005349/1000000000000
+    open_low: false
+    open_high: false
+    shown: '29.933881005348'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 863
+    lanes: []
+- n: 865
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 29933881005347/1000000000000
+    high: 29933881005349/1000000000000
+    open_low: false
+    open_high: false
+    shown: '29.933881005348'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 865
+    lanes: []
+- n: 867
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 5990173443381/200000000000
+    high: 29950867216907/1000000000000
+    open_low: false
+    open_high: false
+    shown: '29.950867216906'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 867
+    lanes: []
+- n: 868
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 29984276416601/1000000000000
+    high: 29984276416603/1000000000000
+    open_low: false
+    open_high: false
+    shown: '29.984276416602'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 868
+    lanes: []
+- n: 870
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 1874191047749/62500000000
+    high: 14993528381993/500000000000
+    open_low: false
+    open_high: false
+    shown: '29.987056763985'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 870
+    lanes: []
+- n: 872
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '30'
+    high: '30'
+    open_low: false
+    open_high: false
+    shown: '30'
+    decide: ''
+    lanes: []
+- n: 873
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '30'
+    high: '30'
+    open_low: false
+    open_high: false
+    shown: '30'
+    decide: ''
+    lanes: []
+- n: 874
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '30'
+    high: '30'
+    open_low: false
+    open_high: false
+    shown: '30'
+    decide: ''
+    lanes: []
+- n: 919
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '31'
+    high: '31'
+    open_low: false
+    open_high: false
+    shown: '31'
+    decide: ''
+    lanes: []
+- n: 924
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 30933881005549/1000000000000
+    high: 30933881005551/1000000000000
+    open_low: false
+    open_high: false
+    shown: '30.933881005550'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 924
+    lanes: []
+- n: 926
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 6190173443507/200000000000
+    high: 30950867217537/1000000000000
+    open_low: false
+    open_high: false
+    shown: '30.950867217536'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 926
+    lanes: []
+- n: 927
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 30984276417231/1000000000000
+    high: 30984276417233/1000000000000
+    open_low: false
+    open_high: false
+    shown: '30.984276417232'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 927
+    lanes: []
+- n: 928
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 6197411352923/200000000000
+    high: 30987056764617/1000000000000
+    open_low: false
+    open_high: false
+    shown: '30.987056764616'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 928
+    lanes: []
+- n: 930
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '31'
+    high: '31'
+    open_low: false
+    open_high: false
+    shown: '31'
+    decide: ''
+    lanes: []
+- n: 933
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '31'
+    high: '31'
+    open_low: false
+    open_high: false
+    shown: '31'
+    decide: ''
+    lanes: []
+- n: 934
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '31'
+    high: '31'
+    open_low: false
+    open_high: false
+    shown: '31'
+    decide: ''
+    lanes: []
+- n: 984
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 15960155108413/500000000000
+    high: 7980077554207/250000000000
+    open_low: false
+    open_high: false
+    shown: '31.920310216827'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 984
+    lanes: []
+- n: 987
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 31949747468349/1000000000000
+    high: 31949747468351/1000000000000
+    open_low: false
+    open_high: false
+    shown: '31.949747468350'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 987
+    lanes: []
+- n: 989
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 1999191047801/62500000000
+    high: 15993528382409/500000000000
+    open_low: false
+    open_high: false
+    shown: '31.987056764817'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 989
+    lanes: []
+- n: 990
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 1999191047801/62500000000
+    high: 15993528382409/500000000000
+    open_low: false
+    open_high: false
+    shown: '31.987056764817'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 990
+    lanes: []
+- n: 991
+  members:
+  - label: beyond-horizon row couzo-verified-bounds-2026-10-14
+    kind: record
+    holders: couzo-verified-bounds-2026-10-14
+    model: print
+    low: 31989568690021/1000000000000
+    high: 31989568690023/1000000000000
+    open_low: false
+    open_high: false
+    shown: '31.989568690022'
+    decide: the exact side of the beyond-horizon row couzo-verified-bounds-2026-10-14 at n
+      = 991
+    lanes: []
+- n: 992
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '32'
+    high: '32'
+    open_low: false
+    open_high: false
+    shown: '32'
+    decide: ''
+    lanes: []
+- n: 994
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '32'
+    high: '32'
+    open_low: false
+    open_high: false
+    shown: '32'
+    decide: ''
+    lanes: []
+- n: 998
+  members:
+  - label: the grid
+    kind: record
+    holders: ceil(sqrt n)
+    model: exact
+    low: '32'
+    high: '32'
+    open_low: false
+    open_high: false
+    shown: '32'
+    decide: ''
+    lanes: []

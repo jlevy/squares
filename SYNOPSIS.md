@@ -340,6 +340,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-214](packing/frontier/RESULTS.md) | 106 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(106) >= 10503/1000 = 10.503. |
 | [T-215](packing/frontier/RESULTS.md) | 107 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(107) >= 529/50 = 10.58. |
 | [T-217](packing/frontier/RESULTS.md) | 110 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(110) >= 1073/100 = 10.73. |
+| [T-223](packing/frontier/RESULTS.md) | 204, 260 | `V0` | `C0` | `S3` | `previously-published` | Two complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(204) <= 141654921219558922887849/9565692327860000000000; s(260) <= 146417594016514621500994169/8796093022208000000000000. |
 | [T-224](packing/frontier/RESULTS.md) | 270 | `V0` | `C0` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(270) <= 16.928162252196750114897964982713. |
 | [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V3` | `C3` | `S2` | `apparently-novel` | The sixteen-point set’s unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips’ a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
 | [T-005](packing/frontier/RESULTS.md) | 13 | `V3` | `C3` | `S2` | `apparently-novel` | Bentz 2010, Lemma 10 is false as printed -- the middle replacement point (1, 1.74) is refuted by an exact escape certificate, and the published page image carries the same transposed text -- and true under the corrected reading (1.74, 1), with all three corrected replacement covers certified exactly. |
@@ -425,7 +426,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 223 | 223 registered, 191 by others |
+| Frontier results | 224 | 224 registered, 192 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -703,6 +704,8 @@ case or experiment separately.
 | [n183 Claim Inputs](packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261018/README.md) | generated status view | generated | generated | — |
 | [Lane Records for the 18 October Ledger](packing/campaign/issue-intake/upper-bounds-20261018/lane-claims/README.md) | source retention and archive policy | record | retained | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261019/README.md) | generated status view | generated | generated | — |
+| [Lane Records for the 19 October Ledger](packing/campaign/issue-intake/upper-bounds-20261019/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261020/README.md) | generated status view | generated | generated | — |
 | [Lane Records for the 20 October Ledger](packing/campaign/issue-intake/upper-bounds-20261020/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
