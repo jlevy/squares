@@ -3,10 +3,10 @@ type: is
 id: is-01m59frtdq5mb5wp445nqb4sbd
 title: "Resume intake after merged stack #677 and record author replies"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
-delegate: codex-intake-followup-20261019
+version: 9
+delegate: coord-intake-1021b
 labels:
   - result-import
 dependencies: []
@@ -18,8 +18,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T07:07:16.275Z
-updated_at: 2026-10-19T09:49:07.958Z
+updated_at: 2026-10-21T17:43:18.894Z
 started_at: 2026-10-19T07:07:25.663Z
+closed_at: 2026-10-21T17:43:18.894Z
+close_reason: "Complete or carried elsewhere (21 October triage c-triage-sweep-1021b). The local checkpoint f57ede12 on codex/intake-followup-20261019 was never pushed or opened as a pull request; its work landed through other owners. #680 was imported as T-220 by #687 (think-xp0o, think-1hmn, think-glg8 and think-jh4w all closed); the replies are recorded, since the 21 October sweep reports \"The record holds every issue, reply and comment\"; #671's order is settled (merged 19 October); #678 is think-xu4d's. The validation backlog child think-wpyh closes with it. No record names this bead as an owner (only the descriptive README of packing/campaign/issue-intake/intake-followup-20261019/)."
+resolution: null
+duplicate_of: null
 ---
 W1 continuation from #676 on origin/main d167d4b86. Reuse clean existing confirm-422 checkout as codex/intake-followup-20261019; old source branch preserved. Run make intake, record all Needs Action/Not Checked with explicit existing or new owners, retain and triage new #680 (think-xp0o) and new source deltas. Incorporate 12 readback-verified Stage7 reply receipts preserved at .codex/intake-resume-20261019/posted-stage7-receipts.json plus #622 merged publication reply and source PR closure. Do not close source/replay/adoption owners or promote any assurance without evidence. Stage3 result numbers allocated in actual merge order after pending #671, not silently collide. Validate records and push, publish qualified intake PR and draft owed replies, rerun sweep with honest network limitations. Existing API recovery is not a clean completed make intake. External task temporary storage and primary read-only Python environment, no new environments or bulk clones.
 

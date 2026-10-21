@@ -5,8 +5,8 @@ title: "Import franciscouzo: 85 upper bounds at 204–998 (#678)"
 kind: task
 status: in_progress
 priority: 2
-version: 15
-delegate: c-lane-678-l3
+version: 17
+delegate: coord-intake-1021b
 labels:
   - result-import
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T00:14:38.592Z
-updated_at: 2026-10-20T22:30:39.505Z
+updated_at: 2026-10-21T17:43:16.513Z
 started_at: 2026-10-19T00:15:01.708Z
 ---
 New 2026-10-18 issue https://github.com/jlevy/squares/issues/678 reports 85 upper-bound rows from franciscouzo/square-packing commit 7b6c87e129cf80b5ff9847b90b47fd30b4563c54, parent c6da0fc7524d667bf3d224559724ba9b60762e60 (#675). Stage 0 owner for the new report; source claims are unverified. Read-only table triage finds 55 counts overlapping #675, each tighter than its earlier displayed value, and 30 new counts; #675 also has 24 counts absent here. Preserve both chronologies and credits, including two deletion-derived rows n545/n641. Next: add pending request/read-through, retain pinned source custody and report-order comparison; price exact replay, independent review and any later house adoption. #678 n260 is below pending T-196 in #676, so later registration must supersede it in merge order without rewriting that earlier report. Do not infer certificate validity or allocate a T number before merge. Draft author reply after the relevant records merge and deployed-site verification. Coordinate with think-pvav (#675). blocked_on: none
@@ -32,3 +32,8 @@ New 2026-10-18 issue https://github.com/jlevy/squares/issues/678 reports 85 uppe
 2026-10-19 independent Fable math review (claude-pr678-math-review-20261019) of caef09ede: ACCEPT-WITH-FINDINGS, no Blocker/High. Independent all-pairs at 204/260/330/545/641/998, independent SAT on all 140,866 candidate pairs, sides/prints for all 85 rows all agree with receipts. Three Low wording findings applied in 2c2c8032d on claude/intake-2026-10-19. Remaining: Stage 3 registration (T numbers in merge order), held full-kernel replay think-fpnd.
 
 2026-10-19 23:30Z note from parallel coordinator session_014ZKp7R (cloud, claude-code), for reuse — I am standing down on this bead's lane because a live owner holds it. Reviewed, pushed evidence: claude/intake-2026-10-19 376ac16b2 (checkpoint f6f4a848 + records-tier repair + #678 exact replay + n183 adoption, integrated). Independent Fable reviews: (1) delta 9bf7d594..f6f4a848 custody ACCEPT (two Low: #676 is a PR not an issue; 8,107,636-byte figure needs retained per-path listing); (2) #678 replay caef09ede ACCEPT-WITH-FINDINGS (independent all-pairs at 204/260/330/545/641/998, SAT on all 140,866 candidate pairs; 3 Low wording, applied in 2c2c8032d); (3) n183 adoption 180d04ce4 ACCEPT-WITH-FINDINGS (S'<14, witness = original cert, view valid; F1 custody snapshot cap overage, F2 grid-slack CPU 352-388 s each not 152, F3 unretained 1,586 s selection wall). Custody cap measurement: main f3d5da7b 228,635,067 B; merged intake 231,325,227 B vs 219 MiB cap; proposal dbb170233 raises to 221 MiB (separable). Results page headroom think-v1qe (~8 rows). Deferred-deadline fix PR #691 (think-ev4k) should land before any intake's deferred checkpoint can pass.
+
+2026-10-21 coord-intake-1021b: ownership transferred to the 21 October intake coordinator (no update since the previous owner's last note; the 19 October machine-transfer handoff #684 and the owner's instruction of 21 October to resume the intake). Triage of the 21 October sweep follows.
+
+2026-10-21 c-triage-sweep-1021b (read-only triage of the 21 October sweep): #676 merged on 19 October; the description's "#678 n260 is below pending T-196 in #676" is what the sweep read as a wait. Since then #701 (merged 21 October) registered T-223 at 204 and 260 at V0/C0 and the 83 beyond-horizon rows, and the couzo-issue678-2026-10-18 packet pins 7b6c87e. What remains here is PR #706 (draft: stage 4 to V3/C3 and adoption at 204 and 260, ordered after #704), then the final #678 reply from main. think-fpnd (held full-kernel replay) stays open on its own. The 21 October intake-watch patch drops this bead from the 7b6c87e read, which now covers only unretained copies, drawings, indexes and seed certificates. Evan Daniel's solved views at 204 and 260 (0075967), which #706 lists as register candidates, go to their own import bead.
+blocked_on: jlevy/squares#706

@@ -5,15 +5,15 @@ title: "Import Evan Daniel: s(343) <= 18.977682482405 (#702)"
 kind: task
 status: in_progress
 priority: 2
-version: 4
-delegate: c-lane-702-import
+version: 6
+delegate: coord-intake-1021b
 labels:
   - result-import
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T00:50:40.249Z
-updated_at: 2026-10-21T07:35:33.773Z
+updated_at: 2026-10-21T17:43:15.072Z
 started_at: 2026-10-21T05:27:59.180Z
 ---
 Stage 1 triage of jlevy/squares#702 (Evan Daniel, opened 2026-10-20T22:09:31Z), read-only, 21 October 2026, lane c-lane-records-1021. Nothing retained, imported or replayed.
@@ -58,3 +58,8 @@ Stages 2 and 3 are on draft PR #712 (https://github.com/jlevy/squares/pull/712),
 - Snapshot: head f46c0b7f3 232,773,217 vs cap 232,783,872 (10,655 under); delta +17,031 over main 9dda92240 (232,756,186). #711 reportedly leaves 4,318 under, so #712 would be about 12,713 over: it waits on the owner's cap decision (no cap value proposed).
 - Validation: --records 52/52 at f46c0b7f3. --push 66/67 at f46c0b7f3; reachable tests (326 files) hit the 900 s ceiling on the shared host. Run alone at 341eb16e7: 11,696 passed, 3 failed (stale DATA_REVISION, fixed by the re-pin; two fixed_core_packet process-group tests, which also fail from main's checkout on this host). Hosted at f46c0b7f3: 31 pass, 28 skipped, 0 fail.
 - Stage 7: final reply drafted at the coordinator's scratchpad replies-new/702.draft.md (DATE to fill at merge); nothing posted.
+
+2026-10-21 coord-intake-1021b: ownership transferred to the 21 October intake coordinator (no update since the previous owner's last note; the 19 October machine-transfer handoff #684 and the owner's instruction of 21 October to resume the intake). Triage of the 21 October sweep follows.
+
+2026-10-21 c-triage-sweep-1021b (read-only triage of the 21 October sweep): the sweep read "main (4851d8193) holds the current row at 343 ... (Daniel, #489)" as a wait on #489, closed 12 October. What this bead waits on is PR #712's merge (draft, head cae58cb2, review A posted 21 October), which itself waits on the owner's snapshot-cap decision; #711 merged at 09:16Z. When #712 merges, post the #702 reply drafted in replies-new/702.draft.md from main and close. The sweep's evand item for 88385ab (the s343 files) clears when #712's packet lands; no intake-watch read is needed for it.
+blocked_on: jlevy/squares#712
