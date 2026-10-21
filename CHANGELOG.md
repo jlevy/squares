@@ -9,6 +9,37 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ## Changelog
 
+<a id="changelog-date-2026-10-21"></a>
+
+### 2026-10-21
+
+<a id="changelog-entry-de-winter-two-twenty-seven-and-two-sixty-adopted"></a>
+
+#### De Winter’s Smaller Packings of 227 and 260 Squares Adopted
+
+Significance S3: T-196 is an S3 finite case result: de Winter’s exact certificates move the case ceilings at 227 and 260, the first improvement at 260 below 11 + 4√2, in a construction family Couzo and Daniel improved further within three days. It brings no new technique and claims no optimality.
+
+De Winter’s exact rational packings of 227 and 260 unit squares, reported on 17
+October, are confirmed at V3/C3 and are now the house packings at both counts. They
+lie about $7.27 \times 10^{-3}$ and $1.11 \times 10^{-2}$ below the earlier ceilings,
+$17/2 + 5\sqrt{2}$ and $11 + 4\sqrt{2}$, which the record no longer carries as
+conjectured optima. His certificate at 229 is confirmed too; Daniel’s smaller T-199
+stays the house there.
+
+- This project’s two maintained exact routes checked the three certificates, and both
+  refused their duplicate-square and outside-container controls. They re-implement the
+  geometry independently of the source’s code, though they share parsing, half-angle
+  conversion and the separating-axis theorem. A separately prompted mathematical
+  review decided them again on its own exact route and refused controls $10^{-30}$
+  past contact. The source’s own checkers did not run here.
+- Each case draws Daniel’s regularized view made here at the same side. It is a
+  drawing, not a second bound.
+- Smaller later reports exist at both counts, Couzo’s #672 at 227 and his #678
+  (T-223) at 260; each replaces de Winter’s packing there once it is validated. No
+  optimality, rigidity or priority is claimed.
+
+PRs and supporting records: [\#704](https://github.com/jlevy/squares/pull/704) · [The case record at 227](packing/frontier/n-227.md) · [The case record at 260](packing/frontier/n-260.md) · [Retained certificates and verification limits](packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md) · [Mathematical review of 20 October](docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md) · [De Winter’s registration request](https://github.com/jlevy/squares/issues/668).
+
 <a id="changelog-date-2026-10-20"></a>
 
 ### 2026-10-20

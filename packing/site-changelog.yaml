@@ -6,6 +6,50 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: de-winter-two-twenty-seven-and-two-sixty-adopted
+    date: '2026-10-21'
+    title: De Winter’s Smaller Packings of 227 and 260 Squares Adopted
+    significance:
+      score: 3
+      rationale: >-
+        T-196 is an S3 finite case result: de Winter’s exact certificates move the case
+        ceilings at 227 and 260, the first improvement at 260 below 11 + 4√2, in a
+        construction family Couzo and Daniel improved further within three days. It brings
+        no new technique and claims no optimality.
+    topics: [upper-bound]
+    categories: [records]
+    pull_requests: [704]
+    result_ids: [T-196]
+    summary: |-
+      De Winter’s exact rational packings of 227 and 260 unit squares, reported on 17
+      October, are confirmed at V3/C3 and are now the house packings at both counts. They
+      lie about $7.27 \times 10^{-3}$ and $1.11 \times 10^{-2}$ below the earlier ceilings,
+      $17/2 + 5\sqrt{2}$ and $11 + 4\sqrt{2}$, which the record no longer carries as
+      conjectured optima. His certificate at 229 is confirmed too; Daniel’s smaller T-199
+      stays the house there.
+    details: |-
+      - This project’s two maintained exact routes checked the three certificates, and both
+        refused their duplicate-square and outside-container controls. They re-implement the
+        geometry independently of the source’s code, though they share parsing, half-angle
+        conversion and the separating-axis theorem. A separately prompted mathematical
+        review decided them again on its own exact route and refused controls $10^{-30}$
+        past contact. The source’s own checkers did not run here.
+      - Each case draws Daniel’s regularized view made here at the same side. It is a
+        drawing, not a second bound.
+      - Smaller later reports exist at both counts, Couzo’s #672 at 227 and his #678
+        (T-223) at 260; each replaces de Winter’s packing there once it is validated. No
+        optimality, rigidity or priority is claimed.
+    references:
+      - label: The case record at 227
+        target: packing/frontier/n-227.md
+      - label: The case record at 260
+        target: packing/frontier/n-260.md
+      - label: Retained certificates and verification limits
+        target: packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md
+      - label: Mathematical review of 20 October
+        target: docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md
+      - label: De Winter’s registration request
+        target: https://github.com/jlevy/squares/issues/668
   - id: daniel-one-eighty-three-below-the-grid
     date: '2026-10-20'
     title: Daniel’s Packing of 183 Squares Below Side 14
@@ -1682,6 +1726,11 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 704
+  title: 'records(#668): T-196 to V3/C3 on its stage 4 review; adopted as the house best packing at 227 and 260'
+  merged_at: '2026-10-21T20:34:54Z'
+  base_ref: main
+  merge_commit: 970e89de8c253133500797b414d2dd31f9e17258
 - number: 687
   title: 'records(#680): register and adopt Evan Daniel''s sub-grid n183 certificate (T-220)'
   merged_at: '2026-10-20T17:15:02Z'
@@ -2319,6 +2368,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 704
   - 687
   - 246
   - 627
