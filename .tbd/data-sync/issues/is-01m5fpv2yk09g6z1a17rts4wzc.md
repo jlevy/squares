@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 44
+version: 46
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -42,10 +42,12 @@ child_order_hints:
   - is-01m5g28824ts9q4byp8ezh6sxf
   - is-01m5g2wfw0xf50d000t9mn6wbv
   - is-01m5g3da86sky65p89agbvcpfs
+  - is-01m5g5f5tscrhtwz9tws7jpet7
+  - is-01m5g5gnq2essjemgdmkm4rxzh
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T21:10:00.340Z
+updated_at: 2026-10-21T21:22:44.577Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
