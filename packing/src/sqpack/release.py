@@ -1847,6 +1847,73 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main d640ad8f for the records lane of 21 "
+            "October (think-xl9i: review B of #708, the #703 final reply and closure, and "
+            "the 703 review's erratum). results.yaml changes only T-224's significance "
+            "rationale, outside the n11 ladder rungs paper_figures reads; adopt_houses.py "
+            "only T-224's lineage paragraph and the 270 credit; result-requests.yaml only "
+            "the #703 entry. Rendered with render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods at link revision "
+            "b90a9312, the branch head, once from its tree and once with main's copies of "
+            "those three inputs, n-270.md and the five claim documents: the 50 files the "
+            "three write are byte-identical. No PDF was printed; each prints from that "
+            "HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main d640ad8f for the records lane of 21 "
+            "October (think-xl9i). The site v0.8.11 cut regenerated the five claim "
+            "documents, and each of the 22 changed lines differs from main only in its "
+            "source-link revision, d798819c to fbb3d573; the explainer links them rather "
+            "than inlining them. results.yaml changes only T-224's significance rationale "
+            "and adopt_houses.py only T-224's lineage paragraph and the 270 credit; the "
+            "register's counts and the n11 citation the explainer reads are unchanged. "
+            "Rendered with the browser's math pass at the branch head b90a9312, once from "
+            "its tree and once with main's copies of results.yaml, adopt_houses.py, "
+            "result-requests.yaml, n-270.md and the five claim documents: the 54 files it "
+            "writes, its HTML and Markdown and the files at the site root, are "
+            "byte-identical. It keeps v0.4.13; no PDF was printed, and it prints from that "
+            "HTML."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
         paths=(
             "packing/devtools/adopt_houses.py",
