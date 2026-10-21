@@ -91,8 +91,9 @@ PUBLICATION_HISTORY = (
         version="v0.8.11",
         first_published="October 21, 2026",
         result_scope=(
-            "Record Evan Daniel's s(343) certificate of issue 702 as the current "
-            "beyond-horizon row at 343, superseding issue 678's row there."
+            "Correct T-224's significance wording, give the 270 credit sentence the "
+            "design's composition, and name the 21 October review as where T-224 was "
+            "measured."
         ),
     ),
     PublicationHistoryEntry(
@@ -673,7 +674,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "2daae04617bcb6bedbf48fb85052fb8e86d94197"
+DATA_REVISION = "a4ad5fd4d1d8cdd66718641b4f562b051dc950cb"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1154,8 +1155,9 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.8.11",
         impact="patch",
         reason=(
-            "Record Evan Daniel's s(343) certificate of issue 702 as the current "
-            "beyond-horizon row at 343, superseding issue 678's row there."
+            "Correct T-224's significance wording, give the 270 credit sentence the "
+            "design's composition, and name the 21 October review as where T-224 was "
+            "measured."
         ),
     ),
     ReleaseImpactDecision(
@@ -1845,6 +1847,44 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main d640ad8f for the records lane of 21 "
+            "October (think-xl9i: review B of #708, the #703 final reply and closure, and "
+            "the 703 review's erratum). results.yaml changes only T-224's significance "
+            "rationale, outside the n11 ladder rungs paper_figures reads; adopt_houses.py "
+            "only T-224's lineage paragraph and the 270 credit; result-requests.yaml only "
+            "the #703 entry. Rendered with render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods at link revision "
+            "b90a9312, the branch head, once from its tree and once with main's copies of "
+            "those three inputs, n-270.md and the five claim documents: the 50 files the "
+            "three write are byte-identical. Rendered the same way again at f021abc3, after "
+            "review A of #710 changed the #703 entry's note and final reply: byte-identical "
+            "again. No PDF was printed; each prints from that HTML. Retain v0.1.7, v0.1.0 "
+            "and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
@@ -1852,41 +1892,27 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
             "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
             "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/results.yaml",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
         ),
         reason=(
-            "The site v0.8.11 cut for #702's beyond-horizon row at 343 regenerated the "
-            "five claim documents, and each of the 22 changed lines differs from main "
-            "d640ad8f only in its source-link revision, d798819c to 7d4d8146. The "
-            "explainer links those documents rather than inlining them, so its HTML and "
-            "Markdown are unchanged by them and it keeps v0.4.13. This is a "
-            "source-reviewed disposition, as think-9v1i's was for v0.8.7."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=("paper:square-packing-methods-survey",),
-        paths=(
-            "packing/campaign/result-requests.yaml",
-            "packing/frontier/source-coverage.yaml",
-        ),
-        outputs=(
-            "papers/square-packing-methods-survey.html",
-            "papers/square-packing-methods-survey.md",
-            "papers/square-packing-methods-survey.pdf",
-        ),
-        reason=(
-            "For the #702 import of 21 October (Evan Daniel's s(343) beyond-horizon row, "
-            "evand-n343-sweep-2026-10-20, superseding #678's row at 343) against main "
-            "d640ad8f: result requests and source coverage are citation targets whose "
-            "existence the producer checks, not inlined text, and every cited path exists "
-            "at both revisions; the #702 request, the n343 coverage source and its row are "
-            "not cited by the survey. Rendered at link revision 2daae046, once from this "
-            "branch's tree and once with main's copies of the two changed inputs: "
-            "render_packing_methods leaves the 42 files it writes byte-identical between "
-            "the trees. No PDF was printed; it prints from that HTML. Retain v0.2.3."
+            "Reviewed October 21, 2026 against main d640ad8f for the records lane of 21 "
+            "October (think-xl9i). The site v0.8.11 cut regenerated the five claim "
+            "documents, and each of the 22 changed lines differs from main only in its "
+            "source-link revision, d798819c to fbb3d573; the explainer links them rather "
+            "than inlining them. results.yaml changes only T-224's significance rationale "
+            "and adopt_houses.py only T-224's lineage paragraph and the 270 credit; the "
+            "register's counts and the n11 citation the explainer reads are unchanged. "
+            "Rendered with the browser's math pass at the branch head b90a9312, once from "
+            "its tree and once with main's copies of results.yaml, adopt_houses.py, "
+            "result-requests.yaml, n-270.md and the five claim documents: the 54 files it "
+            "writes, its HTML and Markdown and the files at the site root, are "
+            "byte-identical. It keeps v0.4.13; no PDF was printed, and it prints from that "
+            "HTML."
         ),
     ),
     ReleaseNoPublicChange(
@@ -5917,7 +5943,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "7d4d8146"
+PUBLICATION_REVISION = "fbb3d573"
 
 
 def data_pathspec() -> tuple[str, ...]:

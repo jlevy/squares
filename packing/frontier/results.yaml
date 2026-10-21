@@ -30542,9 +30542,10 @@ results:
       rationale: >-
         Another arrangement of the design at 270, 3.47e-05 below the case and every report
         there, to a new KKT point with 15 squares moved beyond a tenth, two fewer tilted
-        squares and no tilt angle shared; between #664's 271 (4.46e-05, three squares, S3)
-        and #689's 308 (1.12e-03, 15 squares, S3), and well above T-188's 9.29e-06 (S2);
-        no lower bound or optimum.
+        squares and no tilt angle shared; a smaller margin than #664's 271 (4.46e-05,
+        three squares, S3) and #689's 308 (1.12e-03, S3), with as many squares beyond a
+        tenth as the 308 (15), and well above T-188's 9.29e-06 (S2); no lower bound or
+        optimum.
       scored: '2026-10-21'
       by: >-
         the 21 October review
