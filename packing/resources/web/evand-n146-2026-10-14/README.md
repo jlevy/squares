@@ -52,6 +52,18 @@ pinned by digest only. They are byte-identical to the copies the
 run. The packer’s working log, `search/packer/PACKER.md` (290,674 bytes), is pinned by
 digest only.
 
+The regularized view’s report, `tt2_n146_regularized.json`, says
+`"by": ["David W. Cantrell"]`; the issue credits Ryan Xu’s #432 packing as the start and
+Robert Barnett’s #505 as the record it improves, and the field is retained as the source
+wrote it.
+[The author’s comment on #669 of 20 October 2026](https://github.com/jlevy/squares/issues/669#issuecomment-6302893217)
+explains the field: it was a bug in his tooling, which took it from the record holder at
+that count in his 5 October batch instead of from the packing drawn, fixed in
+`search/packer/candidate.py` at `a435c97`, after this pin.
+He names `tt2_n146` among the affected views, noting that it says David W. Cantrell, and
+asks that the field there be read as no credit at all, the issue’s credit line being
+what he asks for.
+
 ## Exact Replay
 
 The certificate goes through the maintained two-route kernel of
