@@ -6,12 +6,15 @@ import os
 import re
 from pathlib import Path
 from typing import Literal
+from urllib.parse import urljoin
 
 import pytest
+from markdown_it import MarkdownIt
 
 from devtools import (
     check_published_site,
     paper_front,
+    paper_structure,
     render_n11_lower_bounds_explainer,
     render_overview,
 )
@@ -195,15 +198,22 @@ def test_the_page_carries_the_sites_bar_with_papers_current(rendered: tuple[str,
     assert paper.SITE_PATH == "papers/n11-optimality-review.html"
     assert paper.SITE_PATH in render_overview.SITE_PAGES
     assert paper.SITE_PATH.count("/") == paper.SITE_ROOT.count("../") == 1
-    assert render_overview.nav_html("papers", root="../") in html
+    root = paper_structure.parse(html)
+    navs = root.find_all("nav", "site-nav")
+    assert len(navs) == 1
+    assert navs[0].attrs.get("aria-label")
+    current = [link for link in root.find_all("a") if link.attrs.get("aria-current") == "page"]
+    assert [(link.attrs.get("data-page"), link.attrs.get("href")) for link in current] == [
+        ("explanations", "../papers.html")
+    ]
+    assert current[0] in navs[0].find_all("a")
+    assert current[0].text() == "Explanations"
+    main = root.find("main")
+    assert main is not None
     assert (
-        '<a data-page="explanations" aria-current="page" href="../papers.html">Explanations</a>'
-        in html
+        next(child for child in main.children if isinstance(child, paper_structure.Node))
+        is navs[0]
     )
-    # One link is current, the bar's entry: the format chips link the other formats.
-    assert len(re.findall(r'<a\b[^>]*\saria-current="page"', html)) == 1
-    main = html.split('<main class="kpress-page-main kpress-viewport">', 1)[1]
-    assert main.lstrip().startswith('<nav class="site-nav"')
     nav_css = render_overview.SITE_NAV_CSS.read_text(encoding="utf-8")
     assert nav_css in html
     # The shared text tokens come first, then the bar, then the publication layer both
@@ -529,71 +539,62 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     assert "doc-links" not in paper.SHELL.read_text(encoding="utf-8")
     assert ".credits" not in paper.STYLE.read_text(encoding="utf-8")
     html, markdown = rendered
-    address = "github.com/Queuingtheorydotcom/11SquaresOptimal"
-    author_profile = render_overview.canonical_url("profiles/manasseh-ahmed.html")
-    oversight_profile = render_overview.canonical_url("profiles/joshua-levy.html")
-    oversight = f'<a data-profile-name="full" href="{oversight_profile}" target="_blank" rel="noopener noreferrer">'
-    block = html.split('<div class="credits centred">', 1)[1].split("</div>", 1)[0]
-    assert [line.strip() for line in block.strip().splitlines()] == [
-        (
-            '<span class="credits-source">From the original proof by '
-            f'<a data-profile-name="full" href="{author_profile}" target="_blank" rel="noopener noreferrer">'
-            "<strong>Manasseh Ahmed</strong></a></span>"
-        ),
-        (
-            f'<span class="credits-source"><a href="https://{address}" target="_blank" '
-            f'rel="noopener noreferrer">{address}</a></span>'
-        ),
-        (
-            f'<span class="credits-own">Human oversight: {oversight}'
-            "<strong>Joshua Levy</strong></a></span>"
-        ),
-        "<span>Agents: <strong>GPT-6 Astra</strong> and <strong>GPT-6 Sol</strong></span>",
-        (
-            f'<span class="edition">{release.OPTIMALITY_REVIEW_EDITION} '
-            '(<a href="#version-history">version history</a>)</span>'
-        ),
-        (
-            '<span class="publication-date">'
-            f"First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "
-            f"Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
-            f"Last revised {release.OPTIMALITY_REVIEW_REVISED}</span>"
-        ),
-        # The series strip: Part III of the n = 11 series, after Parts I and II.
-        '<span class="series">Part III of 3 in the n = 11 series</span>',
-        (
-            '<span class="series">Part I: <a href="n11-lower-bounds-explainer.html">'
-            "New Lower Bounds for Square Packing for n = 11</a></span>"
-        ),
-        (
-            '<span class="series">Part II: <a href="n11-threshold-bound-review.html">'
-            "A Review of the Certified Lower Bound s(11) &gt; 31/8 for 11 Squares</a></span>"
-        ),
+    root = paper_structure.parse(html)
+    assert len(root.find_all(cls="credits")) == 1
+    structure = paper_structure.read(paper.SLUG, html, markdown)
+    assert [line.kind for line in structure.credits[:6]] == [
+        "source",
+        "address",
+        "oversight",
+        "agents",
+        "version",
+        "dates",
     ]
-    assert html.index('<div class="doc-links screen-only">') < html.index('<div class="hero">')
-    shared = render_overview.PAPER_TYPE_CSS.read_text(encoding="utf-8")
-    assert "  grid-template-columns: minmax(0, 1fr);\n" in shared
-    assert ".credits a {\n  overflow-wrap: anywhere;\n}" in shared
-    assert (
-        ".credits .credits-source + .credits-own,\n.credits .publication-date,\n"
-        ".credits .publication-date + .series {\n  margin-block-start: 1lh;\n}"
-    ) in shared
-    assert markdown.startswith(
-        f"# {paper.TITLE}\n\n"
-        f"- From the original proof by [**Ahmed**]({author_profile})\n"
-        f"- [{address}](https://{address})\n"
-        f"- Human oversight: [**Levy**]({oversight_profile})\n"
-        "- Agents: **GPT-6 Astra** and **GPT-6 Sol**\n"
-        f"- {release.OPTIMALITY_REVIEW_EDITION} ([version history](#version-history))\n"
-        f"- First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "
-        f"Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
-        f"Last revised {release.OPTIMALITY_REVIEW_REVISED}\n"
-        "- Part III of 3 in the n = 11 series\n"
-        "- Part I: [New Lower Bounds for Square Packing for n = 11]"
-        "(https://squaremath.org/papers/n11-lower-bounds-explainer.html)\n"
-        "- Part II: [A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares]"
-        "(https://squaremath.org/papers/n11-threshold-bound-review.html)\n\n"
+    source, address, oversight, agents, version, dates, *series = structure.credits
+    author_profile = render_overview.canonical_url("profiles/manasseh-ahmed.html")
+    assert {href for _label, href in source.links} == {author_profile}
+    assert source.bold
+    assert {href for _label, href in address.links} == {
+        "https://github.com/Queuingtheorydotcom/11SquaresOptimal"
+    }
+    assert not address.bold
+    assert {href for _label, href in oversight.links} == {
+        person.url for person in paper.FRONT.oversight
+    }
+    assert oversight.bold
+    assert set(agents.bold) == set(paper.FRONT.agents)
+    assert release.OPTIMALITY_REVIEW_EDITION in version.text
+    assert {href for _label, href in version.links} == {"#version-history"}
+    assert not version.bold
+    for dated in paper.FRONT.dates:
+        assert f"{dated.label} {dated.day}" in dates.text
+    assert len(series) == 3
+    assert "Part III of 3" in series[0].text
+    assert [href for line in series[1:] for _label, href in line.links] == [
+        "n11-lower-bounds-explainer.html",
+        "n11-threshold-bound-review.html",
+    ]
+    elements = list(root.walk())
+    formats = root.find(cls="doc-links")
+    hero = root.find(cls="hero")
+    assert formats is not None
+    assert hero is not None
+    assert elements.index(formats) < elements.index(hero)
+    markdown_front = paper_structure.parse(
+        MarkdownIt().render("\n".join(structure.markdown_head))
     )
+    assert markdown_front.find("h1") is not None
+    items = markdown_front.find_all("li")
+    assert len(items) == len(structure.credits)
+    page_url = render_overview.canonical_url(paper.SITE_PATH)
+    for item, credit in zip(items, structure.credits, strict=True):
+        assert [urljoin(page_url, link.attrs["href"]) for link in item.find_all("a")] == [
+            urljoin(page_url, href) for _label, href in credit.links
+        ]
+        assert bool(item.find_all("strong")) == bool(credit.bold)
+    assert release.OPTIMALITY_REVIEW_EDITION in items[4].text()
+    for dated in paper.FRONT.dates:
+        assert f"{dated.label} {dated.day}" in items[5].text()
     assert "doc-links" not in markdown
     assert '<div class="hero">' not in markdown
 

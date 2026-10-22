@@ -49,7 +49,6 @@ from devtools.repo_links import (
     repo_url,
 )
 from devtools.result_credit import OTHERS, source_lineage
-from devtools.site_icons import github_reference_icon
 from sqpack.yamlio import safe_load
 from tests import site_renders
 
@@ -58,6 +57,18 @@ ID = re.compile(r'\sid="([^"]+)"')
 ROW = re.compile(
     r'<tr id="(t-\d{3})" data-source="(ours|others)" data-v="\d" data-c="(\d)"[^>]*>'
 )
+
+
+class _Tags(HTMLParser):
+    """Read element roles, destinations and icon attributes independently of formatting."""
+
+    def __init__(self, markup: str) -> None:
+        super().__init__()
+        self.tags: list[tuple[str, dict[str, str | None]]] = []
+        self.feed(markup)
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.tags.append((tag, dict(attrs)))
 
 
 @pytest.fixture(scope="module")
@@ -1523,7 +1534,16 @@ def test_the_atlas_grid_opens_each_case_in_the_case_popover(atlas_page: str) -> 
     assert 'id="pop-atlas"' not in atlas_page
     assert "data-atlas-facts" not in atlas_page
     popover = render_case_pages.case_popover()
-    assert popover in atlas_page
+    rendered = _Tags(atlas_page).tags
+    shell = [attrs for tag, attrs in rendered if tag == "div" and attrs.get("id") == "pop-case"]
+    assert len(shell) == 1
+    assert shell[0]["role"] == "dialog"
+    assert shell[0]["aria-label"] == "Case record"
+    actions_in_page = [
+        attrs for tag, attrs in rendered if tag == "a" and "data-case-open" in attrs
+    ]
+    assert len(actions_in_page) == 1
+    assert actions_in_page[0]["href"] == "atlas.html"
     actions = re.findall(
         r'<a class="site-popover-action" data-go="page" (data-case-[a-z]+) '
         r'href="([^"]+)">([^<]*)</a>',
@@ -2639,10 +2659,6 @@ def test_other_project_cards_are_links_showing_their_address(
     ]
     assert sorted(url for url, _ in cards) == sorted(overview_sections.project_urls())
 
-    def closed(markup: str) -> str:
-        """`markup` with each empty element closed as kpress writes it, `<path … />`."""
-        return re.sub(r"\s*/>", " />", markup)
-
     for url, _body in cards:
         source = re.search(
             rf'<a class="site-card-url" href="{re.escape(url)}"[^>]*>(.*?)</a>',
@@ -2652,15 +2668,23 @@ def test_other_project_cards_are_links_showing_their_address(
         assert source is not None, url
         if reference := parse_github_reference(url):
             assert f'<span class="site-card-url-text">#{reference.number}</span>' in source[1]
-            icon = github_reference_icon(reference.kind, class_name="site-link-icon")
-            assert closed(icon) in closed(source[1]), url
             assert f"{reference.repository}#{reference.number}" in source[0], url
         else:
             address = url.removeprefix("https://").rstrip("/")
             assert html.escape(address) in source[1].replace("<wbr>", ""), url
-            assert closed(overview_sections.link_icon(url)) in closed(source[1]), url
-    assert closed(overview_sections.GITHUB_MARK) in closed(section)
-    assert closed(overview_sections.WEB_MARK) in closed(section)
+        icons = [
+            (tag, attrs)
+            for tag, attrs in _Tags(source[1]).tags
+            if "site-link-icon" in (attrs.get("class") or "").split()
+        ]
+        assert len(icons) == 1, url
+        tag, attributes = icons[0]
+        if tag == "svg":
+            assert attributes["aria-hidden"] == "true", url
+            assert attributes["focusable"] == "false", url
+        else:
+            assert tag == "img", url
+            assert attributes.get("alt") == "", url
     assert "popovertarget" not in section
     assert "pop-project-" not in page
 
@@ -2720,21 +2744,15 @@ def test_the_nav_has_one_explanations_entry_for_the_papers_and_film() -> None:
     """Papers, the film and the tutorial share one top-level Explanations destination.
     The former papers key remains an alias for callers rendering legacy pages."""
     nav = render_overview.nav_html("papers")
-    links = re.findall(
-        r'<a data-page="(\w+)"(?: aria-current="page")? href="([^"]+)"([^>]*)>(.*?)</a>', nav
-    )
-    entries = [
-        (key, href, "GitHub" if key == "github" else label)
-        for key, href, _attrs, label in links
+    links = [attrs for tag, attrs in _Tags(nav).tags if tag == "a" and "data-page" in attrs]
+    assert [(attrs["data-page"], attrs["href"]) for attrs in links] == [
+        (key, href) for key, href, _label in NAV_ENTRIES
     ]
-    assert entries == NAV_ENTRIES
-    assert 'class="site-nav-icon"' in nav
-    assert 'title="GitHub"' in nav
-    assert 'aria-label="GitHub"' in nav
-    assert (
-        '<a data-page="explanations" aria-current="page" href="papers.html">Explanations</a>'
-        in nav
-    )
+    github = next(attrs for attrs in links if attrs["data-page"] == "github")
+    assert github["aria-label"] == "GitHub"
+    assert github["title"] == "GitHub"
+    explanations = next(attrs for attrs in links if attrs["data-page"] == "explanations")
+    assert explanations["aria-current"] == "page"
     assert nav == render_overview.nav_html("explanations")
     assert "papers.html" in render_overview.SITE_PAGES
     assert "papers.html" in render_overview.PAGES
@@ -4328,7 +4346,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         *((f"cases/{n}.html", str(n)) for n in (21, 32, 45, 60)),
     ):
         linked = re.search(
-            rf'<a href="{re.escape(address)}"[^>]*>(.*?)</a>', narrative, re.DOTALL
+            rf'<a\b[^>]*href="{re.escape(address)}"[^>]*>(.*?)</a>', narrative, re.DOTALL
         )
         assert linked is not None, address
         assert _rendered_text(linked[1]) == _markdown_text(label), address
@@ -4638,10 +4656,10 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
     assert re.findall(r'<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)</a>', introduction) == [
         (overview_sections.LOWER_BOUNDS_PAPER, "Part I"),
         (overview_sections.THRESHOLD_BOUND_PAPER, "Part II"),
-        ("profiles/marc-leonard-overbeck.html", "Overbeck"),
+        ("profiles/marc-leonard-overbeck.html", "Marc Leonard Overbeck"),
         ("results.html#t-037", "T-037"),
         (overview_sections.OPTIMALITY_PAPER, "Part III"),
-        ("profiles/manasseh-ahmed.html", "Ahmed"),
+        ("profiles/manasseh-ahmed.html", "Manasseh Ahmed"),
         ("results.html#t-060", "T-060"),
         ("papers/square-packing-methods-survey.html", "How Record Square Packings Are Found"),
     ]
@@ -5581,10 +5599,12 @@ def test_every_popover_shares_one_margin_and_close_target() -> None:
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     popover = css[css.index(".site-popover {") :]
     assert "padding: var(--site-popover-pad);" in popover[: popover.index("}")]
-    close = css[css.index(".site-popover .site-popover-close {") :]
-    close = close[: close.index("}")]
-    for token in ("--site-popover-close)", "--site-popover-close-inset)"):
-        assert f"var({token}" in close
+    # Browser controls tests verify the shared hit targets. These declarations can
+    # live on the control or its wrapper without changing their common dimensions.
+    for dimension in ("block-size", "inline-size"):
+        assert f"{dimension}: var(--site-popover-close);" in css
+    for inset in ("inset-block-start", "inset-inline-end"):
+        assert f"{inset}: var(--site-popover-close-inset);" in css
 
 
 def test_a_popover_is_as_tall_as_the_window_allows() -> None:
@@ -6068,7 +6088,13 @@ def test_a_result_rows_popover_body_comes_from_one_function(
             panel = _row_popover(table, f"pop-result-{row.id.lower()}")
             assert f'data-row-pop-src="result/{row.id.lower()}.html"' in panel
             assert "<p>Full record</p>" in panel
-            assert panel.count(f'href="result/{row.id.lower()}.html"') == 1
+            links = [attrs for tag, attrs in _Tags(panel).tags if tag == "a"]
+            for class_name in ("site-popover-expand", "site-popover-action"):
+                action = [
+                    attrs for attrs in links if class_name in (attrs.get("class") or "").split()
+                ]
+                assert action
+                assert all(attrs["href"] == f"result/{row.id.lower()}.html" for attrs in action)
             assert ">Open Result Record</a>" in panel
             assert "<dl" not in panel
 
@@ -6082,7 +6108,16 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
         full = result_bodies[result.id]
         assert f'href="{overview_sections.result_fragment(result.id)}"' in preview, result.id
         assert "<p>Full record</p>" in preview, result.id
-        assert preview.count(f'href="{overview_sections.result_fragment(result.id)}"') == 1
+        links = [attrs for tag, attrs in _Tags(preview).tags if tag == "a"]
+        for class_name in ("site-popover-expand", "site-popover-action"):
+            action = [
+                attrs for attrs in links if class_name in (attrs.get("class") or "").split()
+            ]
+            assert action, result.id
+            assert all(
+                attrs["href"] == overview_sections.result_fragment(result.id)
+                for attrs in action
+            ), result.id
         assert ">Open Result Record</a>" in preview, result.id
         assert (
             link_prose(

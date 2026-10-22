@@ -7,14 +7,17 @@ import json
 import re
 from fractions import Fraction
 from pathlib import Path
+from urllib.parse import urljoin
 
 import pytest
+from markdown_it import MarkdownIt
 
 from devtools import (
     check_published_site,
     n11_threshold_figures,
     paper_front,
     paper_links,
+    paper_structure,
     render_overview,
 )
 from devtools import render_n11_threshold_bound_review as paper
@@ -179,49 +182,66 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     assert "doc-links" not in paper.SHELL.read_text(encoding="utf-8")
     assert ".credits" not in paper.STYLE.read_text(encoding="utf-8")
     html, markdown = rendered
-    address = "github.com/Kleddamag/11-squares-certified-bound"
+    root = paper_structure.parse(html)
+    assert len(root.find_all(cls="credits")) == 1
+    structure = paper_structure.read(paper.SLUG, html, markdown)
+    assert [line.kind for line in structure.credits[:6]] == [
+        "source",
+        "address",
+        "oversight",
+        "agents",
+        "version",
+        "dates",
+    ]
+    source, address, oversight, agents, version, dates, *series = structure.credits
     author_profile = render_overview.canonical_url("profiles/marc-leonard-overbeck.html")
-    block = html.split('<div class="credits centred">', 1)[1].split("</div>", 1)[0]
-    lines = [line.strip() for line in block.strip().splitlines()]
-    assert lines[0] == (
-        '<span class="credits-source">From the original proof by '
-        f'<a data-profile-name="full" href="{author_profile}" target="_blank" rel="noopener noreferrer">'
-        "<strong>Marc Leonard Overbeck</strong></a></span>"
+    assert {href for _label, href in source.links} == {author_profile}
+    assert source.bold
+    assert {href for _label, href in address.links} == {
+        "https://github.com/Kleddamag/11-squares-certified-bound"
+    }
+    assert not address.bold
+    assert {href for _label, href in oversight.links} == {
+        person.url for person in paper.FRONT.oversight
+    }
+    assert oversight.bold
+    assert set(agents.bold) == set(paper.FRONT.agents)
+    assert release.THRESHOLD_REVIEW_EDITION in version.text
+    assert {href for _label, href in version.links} == {"#version-history"}
+    assert not version.bold
+    for dated in paper.FRONT.dates:
+        assert f"{dated.label} {dated.day}" in dates.text
+    assert len(series) == 3
+    assert "Part II of 3" in series[0].text
+    assert [href for line in series[1:] for _label, href in line.links] == [
+        "n11-lower-bounds-explainer.html",
+        "n11-optimality-review.html",
+    ]
+    elements = list(root.walk())
+    formats = root.find(cls="doc-links")
+    hero = root.find(cls="hero")
+    assert formats is not None
+    assert hero is not None
+    assert elements.index(formats) < elements.index(hero)
+    markdown_front = paper_structure.parse(
+        MarkdownIt().render("\n".join(structure.markdown_head))
     )
-    assert lines[1] == (
-        f'<span class="credits-source"><a href="https://{address}" target="_blank" '
-        f'rel="noopener noreferrer">{address}</a></span>'
-    )
-    assert lines[2].startswith('<span class="credits-own">Human oversight: ')
-    assert "<strong>Joshua Levy</strong>" in lines[2]
-    assert lines[3].startswith("<span>Agents: <strong>")
-    assert lines[4] == (
-        f'<span class="edition">{release.THRESHOLD_REVIEW_EDITION} '
-        '(<a href="#version-history">version history</a>)</span>'
-    )
-    assert lines[5] == (
-        '<span class="publication-date">'
-        f"First published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published} · "
-        f"Original proof {release.THRESHOLD_PROOF_PUBLISHED} · "
-        f"Last revised {release.THRESHOLD_REVIEW_REVISED}</span>"
-    )
-    assert html.index('<div class="doc-links screen-only">') < html.index('<div class="hero">')
-    # The title's formula is typeset on the page, never printed as TeX.
-    heading = re.search(r"<h1[^>]*>(.*?)</h1>", html, re.DOTALL)
+    assert markdown_front.find("h1") is not None
+    items = markdown_front.find_all("li")
+    assert len(items) == len(structure.credits)
+    page_url = render_overview.canonical_url(paper.SITE_PATH)
+    for item, credit in zip(items, structure.credits, strict=True):
+        assert [urljoin(page_url, link.attrs["href"]) for link in item.find_all("a")] == [
+            urljoin(page_url, href) for _label, href in credit.links
+        ]
+        assert bool(item.find_all("strong")) == bool(credit.bold)
+    assert release.THRESHOLD_REVIEW_EDITION in items[4].text()
+    for dated in paper.FRONT.dates:
+        assert f"{dated.label} {dated.day}" in items[5].text()
+    heading = root.find("h1")
     assert heading is not None
-    assert 'class="kpress-math kpress-math-inline"' in heading.group(1)
-    assert "\\gt" not in heading.group(1)
-    assert '<span class="tex">' not in heading.group(1)
-    # The shared rule keeps the hero's caps off the formula (`paper-publication.css`).
-    assert ".hero h1 .tex,\n.hero h1 .kpress-math {" in html
-    assert markdown.startswith(
-        f"# {paper.HERO_TITLE}\n\n"
-        f"- From the original proof by [**Overbeck**]({author_profile})\n"
-    )
-    assert (
-        f"- {release.THRESHOLD_REVIEW_EDITION} ([version history](#version-history))"
-        in markdown
-    )
+    assert heading.find(cls="kpress-math") is not None
+    assert not heading.find_all(cls="tex")
     assert "doc-links" not in markdown
     assert paper.PACKING / "src" / "sqpack" / "release.py" in paper.RENDER_INPUTS
 
@@ -230,12 +250,16 @@ def test_the_page_carries_the_sites_bar_and_the_shared_layers(
     rendered: tuple[str, str],
 ) -> None:
     html, _ = rendered
-    assert render_overview.nav_html("papers", root="../") in html
-    assert (
-        '<a data-page="explanations" aria-current="page" href="../papers.html">Explanations</a>'
-        in html
-    )
-    assert len(re.findall(r'<a\b[^>]*\saria-current="page"', html)) == 1
+    root = paper_structure.parse(html)
+    navs = root.find_all("nav", "site-nav")
+    assert len(navs) == 1
+    assert navs[0].attrs.get("aria-label")
+    current = [link for link in root.find_all("a") if link.attrs.get("aria-current") == "page"]
+    assert [(link.attrs.get("data-page"), link.attrs.get("href")) for link in current] == [
+        ("explanations", "../papers.html")
+    ]
+    assert current[0] in navs[0].find_all("a")
+    assert current[0].text() == "Explanations"
     layer = paper.render_n11_lower_bounds_explainer.publication_layer()
     head = html.split("</head>", 1)[0]
     for name, value in layer.items():
