@@ -1,7 +1,7 @@
 # The Squares Project
 
-**[The Squares Project website](https://jlevy.github.io/squares/) is a full archive of
-every known result on the square packing problem**, including the many new results since
+**[The Squares Project website](https://squaremath.org/) is a full archive of every
+known result on the square packing problem**, including the many new results since
 August 2026, several of them first found here and since built on by many others.
 Its atlas lists the best known packing and the current upper and lower bounds for every
 case $n = 1\ldots324$, each with its source and credit.
@@ -10,14 +10,14 @@ that rates how far each new result has been verified.
 Its homepage links every other major resource on square packing.
 All of it is generated from the record in this repository.
 
-**On the website:** [News](https://jlevy.github.io/squares/news.html) ·
-[Atlas](https://jlevy.github.io/squares/atlas.html) ·
-[Results](https://jlevy.github.io/squares/results.html) ·
-[Frontier Survey](https://jlevy.github.io/squares/atlas.html#the-frontier-survey) ·
-[Explanations](https://jlevy.github.io/squares/papers.html) ·
-[About](https://jlevy.github.io/squares/about.html)
+**On the website:** [News](https://squaremath.org/news.html) ·
+[Atlas](https://squaremath.org/atlas.html) ·
+[Results](https://squaremath.org/results.html) ·
+[Frontier Survey](https://squaremath.org/atlas.html#the-frontier-survey) ·
+[Explanations](https://squaremath.org/papers.html) ·
+[About](https://squaremath.org/about.html)
 
-[![The best known packings of n = 1 to 324 unit squares, one row for each perfect square, from the atlas on The Squares Project website](docs/images/atlas-triangle-1-324.png)](https://jlevy.github.io/squares/)
+[![The best known packings of n = 1 to 324 unit squares, one row for each perfect square, from the atlas on The Squares Project website](docs/images/atlas-triangle-1-324.png)](https://squaremath.org/)
 
 > [!IMPORTANT]
 > **Report your results!** If you have new results of any kind for square packing (a
@@ -48,10 +48,10 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 ## Recent Results
 
-The website lists the [recent results](https://jlevy.github.io/squares/#recent-results)
-and [every result](https://jlevy.github.io/squares/results.html), this project’s and
-others’, each with its credit and
-[verification rating](https://jlevy.github.io/squares/results.html#verification-ladders).
+The website lists the [recent results](https://squaremath.org/#recent-results) and
+[every result](https://squaremath.org/results.html), this project’s and others’, each
+with its credit and
+[verification rating](https://squaremath.org/results.html#verification-ladders).
 The most significant since August 2026:
 
 - **Eleven squares settled:** $s(11) = 3.877083590022814\ldots$, the side of Walter
@@ -98,21 +98,21 @@ The most significant since August 2026:
 
 ## Papers
 
-The website’s [papers page](https://jlevy.github.io/squares/papers.html) links each
-paper and its PDF. Three form a series on $n = 11$:
+The website’s [papers page](https://squaremath.org/papers.html) links each paper and its
+PDF. Three form a series on $n = 11$:
 
-1. [**New Lower Bounds for Square Packing for n = 11**](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html):
+1. [**New Lower Bounds for Square Packing for n = 11**](https://squaremath.org/papers/n11-lower-bounds-explainer.html):
    weighted points and 2-of-3 threshold atoms prove $s(11) \ge 3.8264\ldots$.
-2. [**A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares**](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html):
+2. [**A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares**](https://squaremath.org/papers/n11-threshold-bound-review.html):
    Overbeck’s proof by k-of-m charges and a certificate over 12,028 angle rows.
-3. [**A Review of the Optimality Proof of the Trump Packing of 11 Squares**](https://jlevy.github.io/squares/papers/n11-optimality-review.html):
+3. [**A Review of the Optimality Proof of the Trump Packing of 11 Squares**](https://squaremath.org/papers/n11-optimality-review.html):
    Ahmed’s proof that Trump’s packing is optimal.
 
-[**How Record Square Packings Are Found**](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html)
+[**How Record Square Packings Are Found**](https://squaremath.org/papers/square-packing-methods-survey.html)
 is a tutorial on geometric construction, physics-inspired search, annealing, surgery,
 local refinement, and upper-bound certification.
 
-The website is at edition `v0.9.0` and the atlas posters at `v0.6.4`; each paper carries
+The website is at edition `v0.9.1` and the atlas posters at `v0.6.4`; each paper carries
 its own version.
 
 ## Repository Guide
@@ -125,7 +125,7 @@ every claim is graded, and every defect is logged
 
 | Where | What |
 | --- | --- |
-| [**Changelog**](CHANGELOG.md) | Noteworthy merged contributions and launched papers, PDFs, results and site features; also on [News](https://jlevy.github.io/squares/news.html) |
+| [**Changelog**](CHANGELOG.md) | Noteworthy merged contributions and launched papers, PDFs, results and site features; also on [News](https://squaremath.org/news.html) |
 | [**Basic tutorial**](TUTORIAL.md) | First-principles introduction to packings, bounds, rotation, overlap, and proof versus best-known results |
 | [**Advanced tutorial**](TUTORIAL-ADVANCED.md) | Linear programs, exact arithmetic, certificates, regularization, search, and global proofs |
 | [**Synopsis**](SYNOPSIS.md) | Current research status and roadmap, established results, terminology, workflow contracts, and handoff |

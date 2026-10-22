@@ -123,8 +123,8 @@ def test_homepage_keeps_both_reported_proofs_and_their_complete_qualification_te
     assert "the full Lean build has not been replayed here" in fitzharding
     assert "The full capture computation" in overbeck
     assert "These samples do not confirm the whole" in overbeck
-    assert 'href="https://jlevy.github.io/squares/result/t-154.html"' in fitzharding
-    assert 'href="https://jlevy.github.io/squares/result/t-153.html"' in overbeck
+    assert 'href="https://squaremath.org/result/t-154.html"' in fitzharding
+    assert 'href="https://squaremath.org/result/t-153.html"' in overbeck
 
 
 def test_homepage_ahmed_article_keeps_the_result_and_explainer_reachable(
@@ -134,8 +134,8 @@ def test_homepage_ahmed_article_keeps_the_result_and_explainer_reachable(
     assert 'datetime="2026-09-30"' in card
     assert "V3/C3" in card
     assert "a second independent proof method" in card
-    assert 'href="https://jlevy.github.io/squares/result/t-060.html"' in card
-    assert 'href="https://jlevy.github.io/squares/papers/n11-optimality-review.html"' in card
+    assert 'href="https://squaremath.org/result/t-060.html"' in card
+    assert 'href="https://squaremath.org/papers/n11-optimality-review.html"' in card
 
 
 def test_homepage_and_archive_link_preferred_names_directly_to_reviewed_profiles(

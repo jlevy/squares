@@ -13,7 +13,7 @@ const absoluteLinks = /** @type {(page: string) => void} */ (
   probe("devtools/probes/render_n11_lower_bounds_explainer_pdf/absolute_links.js")
 );
 
-const PAGE = "https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html";
+const PAGE = "https://squaremath.org/papers/n11-lower-bounds-explainer.html";
 
 /** @param {string} href */
 const anchor = (href) => ({
@@ -44,11 +44,11 @@ absoluteLinks(PAGE);
 assert.deepEqual(
   anchors.map((a) => a.href),
   [
-    "https://jlevy.github.io/squares/known-best-1-100.pdf",
-    "https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.md",
-    "https://jlevy.github.io/squares/papers.html",
-    "https://jlevy.github.io/squares/",
-    "https://jlevy.github.io/squares/all-results.html#t-060",
+    "https://squaremath.org/known-best-1-100.pdf",
+    "https://squaremath.org/papers/n11-lower-bounds-explainer.md",
+    "https://squaremath.org/papers.html",
+    "https://squaremath.org/",
+    "https://squaremath.org/all-results.html#t-060",
     "#fn-3",
     "https://github.com/jlevy/squares",
     "mailto:someone@example.org",

@@ -137,7 +137,7 @@ def head(path: str, *, description: str | None = None) -> str:
     )
     if description is not None:
         meta = meta._replace(description=description)
-    tags = f"{render_overview.head_tags(meta)}{render_overview.favicon_html(root='/squares/')}"
+    tags = f"{render_overview.head_tags(meta)}{render_overview.favicon_html(root='/')}"
     return f'<!doctype html><html lang="en"><head>{tags}</head>'
 
 
@@ -503,7 +503,7 @@ def test_the_checked_pages_are_every_page_the_site_serves_but_the_workbench() ->
     """
     assert tuple(render_overview.PAGES) == SITE_PAGES
     assert SITE_PAGES.index("index.html") == 0
-    assert PAGE_URL.endswith(f"/squares/{EXPLAINER}")
+    assert f"https://squaremath.org/{EXPLAINER}" == PAGE_URL
     assert EXPLAINER == "papers/n11-lower-bounds-explainer.html"
     assert {*SITE_PAGES, EXPLAINER, "workbench/index.html"} <= set(render_overview.SITE_PAGES)
     assert {
@@ -514,10 +514,12 @@ def test_the_checked_pages_are_every_page_the_site_serves_but_the_workbench() ->
         "results.html",
     } == LINK_CHECKED_PAGES
     assert render_overview.canonical_url("index.html") == check_published_site.SITE_URL
-    assert render_overview.canonical_url("tutorial.html").endswith("/squares/tutorial.html")
+    assert (
+        render_overview.canonical_url("tutorial.html") == "https://squaremath.org/tutorial.html"
+    )
     # The papers page was added to the renderer alone, and is checked here for it.
     assert "papers.html" in SITE_PAGES
-    assert render_overview.canonical_url("papers.html").endswith("/squares/papers.html")
+    assert render_overview.canonical_url("papers.html") == "https://squaremath.org/papers.html"
 
 
 def test_live_source_check_accepts_the_receipt_written_by_the_pdf_exporter(
