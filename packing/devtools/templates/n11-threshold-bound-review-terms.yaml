@@ -24,7 +24,7 @@ terms:
     defined_by: "A unit square is a square of side one"
     anchor: the-result
     forward:
-      - text: "This paper explains the computer-assisted proof of a lower bound of 31/8 for eleven unit squares, published by Overbeck (Kleddamag) in 11-squares-certified-bound: the proof, certificate and reproduction at t"
+      - text: "This paper explains the computer-assisted proof of a lower bound of 31/8 for eleven unit squares, published by Marc Leonard Overbeck (Kleddamag) in 11-squares-certified-bound: the proof, certificate and reproduction at t"
         reason: roadmap
   - term: "packing"
     uses: "\\bpackings?\\b"
@@ -63,7 +63,7 @@ terms:
   - term: "T"
     symbol: true
     uses: "(?<![A-Za-z0-9_\\\\])T(?![A-Za-z0-9_-])"
-    defined_by: "Write $T=3.8770835900\\ldots$ for the side of Trump’s packing"
+    defined_by: "Write $T=3.8770835900\\ldots$ for the side of Walter Trump’s packing"
     anchor: the-result
     requires: ["packing"]
   - term: "bound gap"

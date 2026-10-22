@@ -58,9 +58,9 @@ already linked below the name.
 Matching ignores case and an initial `@`. An account’s transient display name need not
 become the preferred credit name.
 
-Inline profile links use one registry-wide naming rule: an evidenced surname when
-unique, the full public name when surnames collide, then an evidenced handle or stable
-ID if the full names also collide.
+Technical prose and credit links use one registry-wide naming rule: an evidenced surname
+when unique, the full public name when surnames collide, then an evidenced handle or
+stable ID if the full names also collide.
 The optional `surname` field names the family name explicitly and requires provenance;
 word position never establishes it.
 A person without an established surname uses their public account handle, preferring
@@ -70,9 +70,16 @@ names beside distinct reviewed-result tallies, separate reviewed-credit counts,
 cited-resource counts and public account links.
 Full profile headings and identity metadata also retain the full public name.
 Home and About invite readers to the directory without listing names.
-About’s narrative introduction uses full public names with profile links.
-This is a presentation exception for explanatory prose; compact credits and official
-result records retain the surname rule.
+Resource bylines and descriptions, explanatory papers and reader documents, and About’s
+narrative introduction use full public names with profile links.
+Technical result and case records, News reports, and compact credits retain the surname
+rule.
+The naming context is retained in rendered markup so the profile-link audit applies
+the same rule as the renderer.
+
+Present contribution tallies in the order **Records, Results, Credits** across resource
+cards, profile summaries and sections, and directory columns.
+Resources and account links follow these contribution measures.
 
 Identity evidence may include the person’s public account or publication, linked
 profiles, retained account identifiers, and an explicit confirmation recorded by the
@@ -145,8 +152,9 @@ Retained PR titles, quotations and source identifiers keep their original wordin
 Authored site introductions, case narratives and open-question notes, result claims,
 summaries and explanatory notes, declared reader-document articles, News summaries and
 details, and profile biographies link exact full names that identify one published
-profile. Soft-wrapped names match across whitespace; linked labels use the shared
-surname-or-handle rule, with possessive punctuation retained outside the link.
+profile.
+Soft-wrapped names match across whitespace; linked labels use the naming context
+above, with possessive punctuation retained outside the link.
 Existing account links may lead to that profile only when both their exact verified URL
 and visible name or handle identify the same person.
 This presentation pass does not match surnames or raw aliases, infer missing identities,

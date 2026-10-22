@@ -72,6 +72,7 @@ from devtools.render_overview import (
     nav_html,
     paper_path,
 )
+from devtools.site_icons import GITHUB_ICON_INPUTS
 from sqpack.release import (
     THRESHOLD_PROOF_PUBLISHED,
     THRESHOLD_REVIEW_EDITION,
@@ -296,6 +297,7 @@ RENDER_INPUTS = tuple(
             # links between papers by the shared placeholder.
             PACKING / "devtools" / "paper_front.py",
             PACKING / "devtools/profile_links.py",
+            *GITHUB_ICON_INPUTS,
             PACKING / "contributors/people",
             PACKING / "devtools" / "paper_links.py",
             render_n11_lower_bounds_explainer.PUBLICATION_STYLE,
@@ -572,7 +574,7 @@ def render(
         "SITE_KPRESS_CLIENT": kpress_client_script(),
         "SITE_TOOLTIPS": TOOLTIP_SCRIPT.read_text(encoding="utf-8"),
         "THEME_BOOTSTRAP": render_n11_lower_bounds_explainer.theme_bootstrap(static),
-        "BODY_HTML": link_prose(document.html, prefix=SITE_ROOT),
+        "BODY_HTML": link_prose(document.html, prefix=SITE_ROOT, full_names=True),
         **(math_scripts(static) if document.has_math else {"KATEX_JS": "", "SITE_MATH": ""}),
         "DIAGRAM_LABEL_SCRIPT": render_n11_lower_bounds_explainer.INLINE_SCRIPT_ASSETS[
             "DIAGRAM_LABEL_SCRIPT"
