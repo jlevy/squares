@@ -2087,8 +2087,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "four renders; only the explainer, which counts the register, differs, and it "
             "takes v0.4.15. Rendered the same way again at link revision da2671cf, from "
             "this tree at 369db682, after the rigidity blocks and t-180's page budget: the "
-            "same three byte-identical. No PDF was printed; each prints from that HTML. "
-            "Retain v0.1.7, v0.1.0 and v0.2.3."
+            "same three byte-identical. Re-taken against main de1651e1 (#717, #715's rows), "
+            "after merging it: rendered at link revision 653597be, twice from this tree at "
+            "089cf042 and twice from main's, the same three byte-identical and the explainer "
+            "differing only in its edition and register count. No PDF was printed; each "
+            "prints from that HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
