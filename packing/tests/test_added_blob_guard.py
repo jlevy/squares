@@ -258,6 +258,8 @@ def test_repository_configuration_cannot_move_the_total(repo: tuple[Path, str]) 
         commit(path)
     pinned = tool.added_bytes(path, base)
     assert tool.added_bytes(path, base) == pinned
+    # Review L3: the unpinned packs read no developer's global or system Git config.
+    unconfigured = {**os.environ, "GIT_CONFIG_GLOBAL": os.devnull, "GIT_CONFIG_NOSYSTEM": "1"}
     # The pins are Git's own defaults, so an unconfigured clone packs the same bytes.
     default = subprocess.run(
         [
@@ -278,6 +280,7 @@ def test_repository_configuration_cannot_move_the_total(repo: tuple[Path, str]) 
         capture_output=True,
         check=True,
         timeout=10,
+        env=unconfigured,
     )
     assert len(default.stdout) == pinned
     for setting, value in (
@@ -286,6 +289,7 @@ def test_repository_configuration_cannot_move_the_total(repo: tuple[Path, str]) 
         ("pack.windowMemory", "1k"),
         ("pack.threads", "4"),
         ("pack.useBitmaps", "true"),
+        ("core.bigFileThreshold", "1k"),
         ("pack.compression", "0"),
         ("core.compression", "0"),
     ):
@@ -299,9 +303,28 @@ def test_repository_configuration_cannot_move_the_total(repo: tuple[Path, str]) 
         capture_output=True,
         check=True,
         timeout=10,
+        env=unconfigured,
     )
     assert len(configured.stdout) != pinned
     assert tool.added_bytes(path, base) == pinned
+
+
+def test_a_bitmap_cannot_hide_a_blob_restored_from_base_history(
+    repo: tuple[Path, str],
+) -> None:
+    """Review L of #406: with a bitmap, Git would drop a restored blob from the pack."""
+    path, _ = repo
+    add(path, "dump.bin", noise(4096))
+    commit(path)
+    git(path, "rm", "-q", "--", "dump.bin")
+    base = commit(path)
+    git(path, "checkout", "-q", f"{base}~1", "--", "dump.bin")
+    commit(path)
+    before = tool.added_bytes(path, base)
+    assert before >= 4096
+    git(path, "repack", "-adbq")
+    git(path, "config", "pack.useBitmaps", "true")
+    assert tool.added_bytes(path, base) == before
 
 
 def test_a_staged_copy_of_a_base_blob_adds_nothing(repo: tuple[Path, str]) -> None:
@@ -1235,10 +1258,49 @@ def test_the_cli_measures_the_total_at_the_given_head(
     output = capsys.readouterr().out
     assert f"REJECT_ADDED_STORAGE: {total_failure(feature, feature - 1)}" in output
     monkeypatch.setattr(
-        tool, "load_ceilings", lambda: tool.Ceilings(per_blob=8192, total=feature)
+        tool, "load_ceilings", lambda: tool.Ceilings(per_blob=8192, total=feature + 100)
     )
     assert tool.main(["--base", base, "--head", "feature"]) == 0
-    assert f"PASS: {feature} bytes added as a thin pack" in capsys.readouterr().out
+    output = capsys.readouterr().out
+    assert f"PASS: {feature} bytes added as a thin pack" in output
+    # Review L5: the margin is the total less the pack, in this clone.
+    assert (
+        f"ceilings 8192/blob as Git stores it and {feature + 100} total, 100 bytes under it "
+        "in this clone; a fresh clone, as CI uses, can read more"
+    ) in output
+
+
+def test_one_check_resolves_its_range_once(
+    repo: tuple[Path, str],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """K5 and L5 of #406: the inventory and the pack measure the range main resolved."""
+    path, base = repo
+    add(path, "own.bin", noise(256))
+    commit(path)
+    resolved: list[tool.Range] = []
+    real = tool._range  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+
+    def record(*arguments: Any, **options: Any) -> tool.Range:
+        resolved.append(real(*arguments, **options))
+        return resolved[-1]
+
+    monkeypatch.setattr(tool, "_range", record)
+    monkeypatch.chdir(path)
+    assert tool.main(["--base", base]) == 0
+    assert len(resolved) == 1
+    assert f"PASS: {pack_size(path, base)} bytes added" in capsys.readouterr().out
+    # Each census replay resolves its range once, for both measures.
+    git(path, "checkout", "-qb", "small")
+    add(path, "small.txt", b"ok")
+    commit(path)
+    git(path, "checkout", "-q", "main")
+    merge(path, "small", 5)
+    resolved.clear()
+    rows = tool.census(path, "main", 1, ceilings=tool.Ceilings(per_blob=4096, total=1 << 20))
+    assert [row.refusal for row in rows] == [""]
+    assert len(resolved) == 1
 
 
 def test_failed_metadata_cli_never_reports_pass(

@@ -39,9 +39,10 @@ zlib once and never held whole, and one check reads at most MAX_CONTENT_BYTES of
 pack is streamed too and only counted, with one delta-search thread, so a clone gives
 the same figure on every run. Git reuses the deltas its object store already holds, so
 clones packed differently give different figures. The reference is CI's: the pull
-request's check runs in a fresh full clone of GitHub's packs. A working clone can read
-less, up to about 20% on text-heavy ranges and 0 to 2.4% on bulk-dominated ones (review
-K of #406): #578 packs to about 2.7 MiB in CI's clone and 2.39 MiB in a working one.
+request's check runs in a fresh full clone of GitHub's packs. On the ranges measured in
+reviews K and L of #406, CI read 12% (#578: about 2.7 MiB against 2.39) to 37% (#406's
+own range: 232,934 bytes against 169,790) more than a working clone on text-heavy
+ranges, and 0 to 2.4% more on bulk-dominated ones.
 Recomputing every delta would make the figure nearly clone-independent, but #461's pack
 alone then takes 25.6 s. A working clone also packs its loose objects afresh, so `--push`
 on a large branch before `git gc` is slower: #474's 1,191 loose objects took 17.8 s
@@ -94,11 +95,13 @@ MAX_QUERY_SECONDS = 10
 # How many parsed entries pass between deadline checks.
 DEADLINE_STRIDE = 4096
 # Git's own defaults for the pack that sizes the total, pinned so that a local
-# configuration cannot move the measure; bitmaps and the sparse walk are off so the
-# object set is exactly rev-list's. Delta search runs on one thread with no window memory
-# limit: with a thread per CPU, #578 packed to anything from 2,803,938 to 3,186,775 bytes
-# from one run to the next in CI's clone, and with one it gave the same bytes every time,
-# for at most 1.5 s more on #474 (review K1 of #406).
+# configuration cannot move the measure. Bitmaps and the sparse walk are off so the
+# object set is exactly rev-list's: with a bitmap, Git would leave out a blob the branch
+# restores from deeper in BASE's history, which the inventory charges (review L2 of
+# #406). Delta search runs on one thread with no window memory limit: with a thread per
+# CPU, #578 packed to anything from 2,803,938 to 3,186,775 bytes from one run to the
+# next in CI's clone, and with one it gave the same bytes every time, for at most 1.5 s
+# more on #474 (review K1 of #406).
 PACK_CONFIG = (
     "core.compression=-1",
     "pack.compression=-1",
@@ -1079,7 +1082,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         f"{len(charged)} new versions "
         f"({sum(blob.checkout for blob in charged.values())} bytes in a checkout); "
         f"ceilings {ceilings.per_blob}/blob as Git stores it and {ceilings.total} total, "
-        f"{ceilings.total - added} bytes under it here; CI's fresh clone can read more"
+        f"{ceilings.total - added} bytes under it in this clone; a fresh clone, as CI uses, "
+        "can read more"
     )
     return 0
 

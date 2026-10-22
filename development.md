@@ -263,7 +263,7 @@ stands, as [the deep gate](#the-deep-gate-the-deferred-surface-before-the-merge)
 | `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 109 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 109 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
 | `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 109 | 90 s | 72.83 s, the geometric mean of ten hosted readings on 2026-10-11, 59.12–90.06 s (1.52x), the first cohort of the three-step tier (`think-th8p`); the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks` |
-| *(workflow step)* | **CI, on every pull request**, in the `validate` job before `--checks`: the added-blob guard with the pull request’s own base and head SHA (`OR-18`); `--push` runs the same guard locally | 1, outside the registry | 30 s, the guard’s one deadline for the whole check, with `timeout-minutes: 1` on the step | locally on 2026-10-22 at load 2, compressing each new blob and packing the range: 3.5 s for #665 (102 MiB of new content), 7.8 s for #580 (196 MiB), 9.6 s for #474 (the largest pack, 45.4 MiB) and 18.0 s for #461 (446 MiB, the largest merge into `main`); the pack is 0.3 to 2 s of it on every CPU, and pinning it to one thread adds at most 1.5 s, on #474 (review K of #406). With a branch’s objects still loose in a working clone, #474 took 17.8 s, so run `git gc` before `--push` on a large branch. `--census 150` replays the merges back to #426 in 214 s. Hosted, 0.95 s and 187,572 bytes for #406 at `aaf39e8` (run 39832072494) |
+| *(workflow step)* | **CI, on every pull request**, in the `validate` job before `--checks`: the added-blob guard with the pull request’s own base and head SHA (`OR-18`); `--push` runs the same guard locally | 1, outside the registry | 30 s, the guard’s one deadline for the whole check, with `timeout-minutes: 1` on the step | locally on 2026-10-22 at load 2, compressing each new blob and packing the range: 3.5 s for #665 (102 MiB of new content), 7.8 s for #580 (196 MiB), 9.6 s for #474 (the largest pack, 45.4 MiB) and 18.0 s for #461 (446 MiB, the largest merge into `main`); the pack is 0.3 to 2 s of it on every CPU, and pinning it to one thread adds at most 1.5 s, on #474 (review K of #406). With a branch’s objects still loose in a working clone, #474 took 17.8 s, so run `git gc` before `--push` on a large branch. `--census 150` replays the merges back to #426 in 214 s. Hosted, 1.35 s and 232,934 bytes for #406 at `9b9f77c` (run 39854000601) |
 | *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 109 of 109 | 3600 s | integration, serial quick suites and ten deferred workers; new whole-wall measurement pending |
 
 Step counts describe the current 109-step registry, read from the validator’s canonical
@@ -2553,12 +2553,13 @@ is the rule; this is how to follow it.
   Git reuses the deltas a clone already holds, so clones packed differently give
   different figures, and CI’s is the reference: the pull request’s check packs in a
   fresh full clone of GitHub’s packs.
-  A working clone can read less, up to about 20% on text-heavy ranges and 0 to 2.4% on
-  bulk-dominated ones (#578 is about 2.7 MiB in CI’s clone and 2.39 MiB in a working
-  one), so a `--push` that passes within a few percent of the total can still be refused
-  by CI; the PASS line prints the margin.
-  A working clone also packs a branch’s loose objects afresh, so `--push` on a large
-  branch is faster after `git gc`. A path already over 5 MiB at the base is
+  On the ranges measured, CI read 12% (#578: about 2.7 MiB against 2.39) to 37% (this
+  PR’s own range) more than a working clone on text-heavy ranges, and 0 to 2.4% more on
+  bulk-dominated ones.
+  So a `--push` of a bulk-dominated range that passes within a few percent of the total
+  can still be refused by CI, and a text-heavy range needs a wider margin; the PASS line
+  prints it. A working clone also packs a branch’s loose objects afresh, so `--push` on a
+  large branch is faster after `git gc`. A path already over 5 MiB at the base is
   grandfathered from the per-blob ceiling until `think-xeav` moves it to hosted data; a
   new path, a copy or an edited rename is not.
   A Git LFS pointer is refused, since the repository does not use LFS. `--help` has the

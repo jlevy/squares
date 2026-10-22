@@ -503,7 +503,8 @@ credit.
   counts it. By OR-18’s threshold, a certificate, dump or evidence file of more than a
   few megabytes, or a set of them totalling tens of megabytes, goes into no commit.
   The per-pull-request added-blob check enforces it, with its limits in
-  `packing/devtools/added-blobs.yaml`: stage the packet and run
+  `packing/devtools/added-blobs.yaml`: stage the packet, run `git fetch origin` so the
+  base is current, and run
   `python -m devtools.check_added_blobs --base origin/main --staged` from `packing/`
   before the first commit, so the decision is made before the bytes are in history.
   Publish such data as a hosted data release by

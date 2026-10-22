@@ -828,10 +828,12 @@ rule, not the unit. A dump that is already compressed costs about its own size; 
 format that compresses well costs a fraction of its checkout bytes.
 On 22 October 2026 the set’s unit was corrected from the sum of its blobs to the thin
 pack, in #406: summed version by version, #578’s 48 merges of `main` came to 59.17 MiB
-of rewritten registers, against a thin pack of about 2.7 MiB in CI’s fresh clone (2.39
-MiB in a working clone, which reuses deltas of its own and can read up to about 20%
-less). Many versions of one text file cost about their edits once packed, while distinct
-dumps cost about their sum either way.
+of rewritten registers, against a thin pack of about 2.7 MiB in CI’s fresh clone, the
+reference. A working clone reuses deltas of its own and read #578 at 2.39 MiB; on the
+ranges measured, CI read 12 to 37% more than a working clone on text-heavy ranges and 0
+to 2.4% more on bulk-dominated ones.
+Many versions of one text file cost about their edits once packed, while distinct dumps
+cost about their sum either way.
 `python -m devtools.upper_bound_houses sizes`, from `packing/`, measures the witnesses a
 staged adoption would write, as Git stores them and in a checkout.
 On 17 October 2026 the witnesses of T-174’s 50 staged adoptions at rational sides come

@@ -27,9 +27,10 @@
 #
 # CI's figure is the reference: the pull request's check packs in a fresh full clone of
 # GitHub's packs, with one delta-search thread so that a run repeats exactly. A working
-# clone reuses deltas of its own and can read less, up to about 20% on text-heavy ranges
-# and 0 to 2.4% on bulk-dominated ones (review K of #406), so a `--push` that passes
-# within a few percent of the total can still be refused by CI.
+# clone reuses deltas of its own. On the ranges measured in reviews K and L of #406, CI
+# read 12% (#578) to 37% (#406's own range) more on text-heavy ranges and 0 to 2.4% more
+# on bulk-dominated ones, so a `--push` of a bulk-dominated range that passes within a
+# few percent of the total can still be refused by CI, and a text-heavy one needs more.
 #
 # Both values were set on 2026-10-11 in checkout bytes and are unchanged. Measured again
 # on 2026-10-20 in this unit (review H of #406), `--census 411` over every first-parent
