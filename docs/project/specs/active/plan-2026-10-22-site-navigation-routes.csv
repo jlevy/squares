@@ -889,7 +889,7 @@ existing,profiles/yohei-nakajima.html,https://squaremath.org/profiles/yohei-naka
 existing,profiles/zk-shangitbayev.html,https://squaremath.org/profiles/zk-shangitbayev.html,page,live,yes,person-profile,about,About,About > Profiles,retain content address; use proposed navigation parent,,
 existing,readme.html,https://squaremath.org/readme.html,page,live,yes,documentation,github,About,About,retain content address; use proposed navigation parent,,
 added,recent-results.html,https://squaremath.org/recent-results.html,page,live,yes,results,,Results,Results,complete daily arrival and weekly publication lists; archive row links; retained recent-list fragments,,
-added,report.html,https://squaremath.org/report.html,page,live,yes,contribution-instructions,,About,About,complete substantive collection or instructions; preserve prior fragment links,,
+added,report.html,https://squaremath.org/report.html,page,live,yes,contribution-instructions,,Results,Results,complete substantive collection or instructions; preserve prior fragment links,,
 added,resources.html,https://squaremath.org/resources.html,page,live,yes,resource-directory,,Learn,Learn,complete ranked Resources directory under Learn; old homepage fragments retain summaries,,
 existing,result/t-001.html,https://squaremath.org/result/t-001.html,result,live,yes,result-record,results,Results,Results > Results Archive,retain content address; use proposed navigation parent,,
 existing,result/t-002.html,https://squaremath.org/result/t-002.html,result,live,yes,result-record,results,Results,Results > Results Archive,retain content address; use proposed navigation parent,,

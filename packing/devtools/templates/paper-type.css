@@ -170,6 +170,7 @@
   --paper-support-leading: 1.4;
   --paper-button-label-case: uppercase;
   --paper-button-label-scale: 0.9;
+  --paper-button-letter-spacing: var(--kpress-caps-spacing, 0.021em);
   --paper-popover-title-scale: 1.25;
   --paper-popover-section-scale: 1.1;
 }
@@ -181,10 +182,12 @@ button:not(.site-card),
 a.site-action,
 a.site-popover-action,
 .site-tabs a {
+  letter-spacing: var(--paper-button-letter-spacing);
   text-transform: var(--paper-button-label-case);
 }
 :is(button, a.site-action, a.site-popover-action, .site-tabs a)
   :is(.kpress-math, .katex, .tex, math) {
+  letter-spacing: normal;
   text-transform: none;
 }
 @media print {

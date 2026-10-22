@@ -33,6 +33,7 @@ NAVIGATION = (
             NavigationItem("all-results", "Results Archive", "results.html"),
             NavigationItem("atlas", "Visual Atlas", "atlas.html"),
             NavigationItem("verification", "Verification and Ratings", "epistemics.html"),
+            NavigationItem("report", "Report a Result", "report.html"),
         ),
     ),
     NavigationItem(
@@ -56,7 +57,6 @@ NAVIGATION = (
             NavigationItem("project", "The Squares Project", "about.html"),
             NavigationItem("profiles", "Contributor Profiles", "profiles/"),
             NavigationItem("documentation", "Project Documentation", "documentation.html"),
-            NavigationItem("report", "Report a Result", "report.html"),
         ),
     ),
 )
@@ -100,7 +100,7 @@ _PARENTS = {
     "resources.html": ("learn",),
     "profiles/": ("about",),
     "documentation.html": ("about",),
-    "report.html": ("about",),
+    "report.html": ("results",),
     "readme.html": ("about",),
     "synopsis.html": ("about",),
     "conventions.html": ("about",),
@@ -122,7 +122,7 @@ _CHEVRON = (
     '<svg class="site-nav-icon" viewBox="0 0 24 24" fill="none" '
     'stroke="currentColor" stroke-width="2" stroke-linecap="round" '
     'stroke-linejoin="round" aria-hidden="true" focusable="false">'
-    '<path d="m9 6 6 6-6 6"/></svg>'
+    '<path d="m6 9 6 6 6-6"/></svg>'
 )
 
 
@@ -211,6 +211,8 @@ def navigation_links(current: str, root: str = "") -> str:
 def _trail(path: str, title: str) -> tuple[tuple[str, str], ...]:
     path = _path(path)
     parents = _parents(path)
+    if not parents:
+        return ()
     current = navigation_title(path, title)
     return (*(_ANCESTORS[key] for key in parents), (current, path))
 

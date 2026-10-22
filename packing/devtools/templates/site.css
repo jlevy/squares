@@ -3746,7 +3746,7 @@ html[data-site-atlas-view="triangle"]
   background: var(--site-chip-neutral-fill);
   color: var(--kpress-doc-text);
   font-variant-caps: normal;
-  letter-spacing: normal;
+  letter-spacing: var(--paper-button-letter-spacing);
   text-transform: none;
   transition: var(--site-hover-transition);
 }

@@ -100,16 +100,8 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
                 catalogue = "papers.html" if expected[1] == "Papers" else "tutorials.html"
                 assert f'href="../{catalogue}"' in trail
     for path in ("index.html", "./", "news.html"):
-        trail = breadcrumbs_html(path, "Root page")
-        tags = Tags(trail).tags
-        assert any(tag == "span" and attrs.get("aria-current") == "page" for tag, attrs in tags)
-        assert not any(tag == "a" for tag, _ in tags)
-        data = breadcrumb_data(path, "Root page", "https://squaremath.org/")
-        assert data
-        assert len(data["itemListElement"]) == 1
-        if path in {"index.html", "./"}:
-            assert data["itemListElement"][0]["name"] == "Overview"
-            assert ">Overview</span>" in trail
+        assert not breadcrumbs_html(path, "Standalone page")
+        assert breadcrumb_data(path, "Standalone page", "https://squaremath.org/") is None
 
 
 def test_legacy_navigation_keys_keep_the_correct_group() -> None:
@@ -688,8 +680,12 @@ def test_menu_destinations_supply_canonical_titles_and_categories_have_no_urls()
                 continue
             assert navigation_title(item.path, "Stale page title") == item.label
             trail = breadcrumbs_html(item.path, "Stale page title")
-            assert f'<span aria-current="page">{html.escape(item.label)}</span>' in trail
             data = breadcrumb_data(item.path, "Stale page title", "https://squaremath.org/")
+            if not group.children:
+                assert not trail
+                assert data is None
+                continue
+            assert f'<span aria-current="page">{html.escape(item.label)}</span>' in trail
             assert data
             assert data["itemListElement"][-1]["name"] == item.label
             if group.children:
@@ -700,3 +696,101 @@ def test_menu_destinations_supply_canonical_titles_and_categories_have_no_urls()
     assert navigation_title("profiles/index.html") == navigation_title("profiles/")
     about = breadcrumbs_html("about.html", "Stale project title")
     assert not any(tag == "a" for tag, _ in Tags(about).tags)
+
+
+def test_short_card_groups_align_their_outer_edges_with_prose_for_every_size() -> None:
+    from tests import site_browser  # noqa: PLC0415
+
+    groups = []
+    for size in ("small", "medium", "large"):
+        for count in (1, 2):
+            most = ' data-cards-most="3"' if count == 1 else ""
+            cards = "".join(
+                f'<a class="site-card" data-card-size="{size}" href="#reading">Card {n}</a>'
+                for n in range(count)
+            )
+            groups.append(
+                f'<div class="site-cards-frame site-wide" id="{size}-{count}">'
+                f'<div class="site-cards"{most}>{cards}</div></div>'
+            )
+    head = _browser_document().split("</head>", 1)[0]
+    document = (
+        head + '</head><body><main class="kpress-page-main kpress-viewport">'
+        '<article class="kpress kpress-doc"><div class="kpress-doc-layout">'
+        '<div class="kpress-prose kpress-long-text site-page">'
+        '<p id="reading">Shared prose column.</p>'
+        + "".join(groups)
+        + "</div></div></article></main></body></html>"
+    )
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        for width in (1280, 768, 390, 320):
+            page = browser.new_page(viewport={"width": width, "height": 900})
+            page.set_content(document)
+            prose = page.locator("#reading").bounding_box()
+            assert prose is not None
+            for size in ("small", "medium", "large"):
+                for count in (1, 2):
+                    frame = page.locator(f"#{size}-{count}")
+                    box = frame.bounding_box()
+                    cards = [card.bounding_box() for card in frame.locator(".site-card").all()]
+                    assert box is not None
+                    assert all(card is not None for card in cards)
+                    assert abs(box["x"] - prose["x"]) < 0.5
+                    assert abs(box["width"] - prose["width"]) < 0.5
+                    assert abs(min(card["x"] for card in cards) - prose["x"]) < 0.5
+                    right = max(card["x"] + card["width"] for card in cards)
+                    assert abs(right - prose["x"] - prose["width"]) < 0.5
+                    if count == 2 and width >= 768:
+                        assert abs(cards[0]["y"] - cards[1]["y"]) < 0.5
+                    if width < 768:
+                        assert all(abs(card["width"] - prose["width"]) < 0.5 for card in cards)
+            page.close()
+        browser.close()
+
+
+def test_menu_chevrons_keep_down_up_endpoints_and_reverse_their_travel() -> None:
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    motion = probe(Path(__file__).with_name("probes"), "site_navigation/motion")
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        page.set_content(_browser_document())
+        button = page.get_by_role("button", name="Results", exact=True)
+        assert button.locator("path").get_attribute("d") == "m6 9 6 6 6-6"
+        button.click()
+        opened = page.evaluate(motion)["chevron"]
+        assert opened["keyframes"][-1] == "rotate(-180deg)"
+        page.wait_for_timeout(170)
+        button.click()
+        closed = page.evaluate(motion)["chevrons"]["results"]
+        assert closed["keyframes"][-1] == "rotate(0deg)"
+        browser.close()
+
+
+def test_text_buttons_and_actions_share_the_same_small_tracking() -> None:
+    import pytest  # noqa: PLC0415
+
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    motion = probe(Path(__file__).with_name("probes"), "site_navigation/motion")
+    controls = (
+        '<a class="site-action" href="#reading">Browse</a>'
+        '<a class="site-popover-action" href="#reading">Open</a>'
+        '<div class="site-news-filters"><div class="site-tabs">'
+        '<button class="site-chip">Topic</button></div></div>'
+    )
+    document = _browser_document().replace("</main>", controls + "</main>")
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        for width in (1280, 390):
+            page = browser.new_page(viewport={"width": width, "height": 900})
+            page.set_content(document)
+            labels = page.evaluate(motion)["labels"]
+            assert {"Browse", "Open", "Topic"} <= {item["label"] for item in labels}
+            assert all(item["tracking"] == pytest.approx(0.021, abs=0.00001) for item in labels)
+            page.close()
+        browser.close()

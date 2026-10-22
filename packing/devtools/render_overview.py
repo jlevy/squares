@@ -1142,6 +1142,8 @@ def article_page_scripts(page_scripts: Sequence[Path]) -> tuple[Path, ...]:
 
 def _navigation_heading(body: str, path: str) -> str:
     """Use the menu's page name for its first heading, retaining legacy anchor IDs."""
+    if path in {"index.html", "./", ""}:
+        return body
     title = site_navigation.navigation_title(path)
     if not title:
         return body

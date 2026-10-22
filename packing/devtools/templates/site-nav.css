@@ -594,7 +594,7 @@ nav.site-tabs a[aria-current="page"],
   font-weight: var(--paper-font-weight-sans-bold, 680);
 }
 .site-nav-disclosure[aria-expanded="true"] svg {
-  transform: rotate(90deg);
+  transform: rotate(-180deg);
 }
 .site-nav-submenu {
   flex-basis: 100%;
@@ -794,13 +794,4 @@ nav.site-tabs a[aria-current="page"],
   .site-nav .site-nav-disclosure svg {
     transition-duration: 0ms;
   }
-}
-
-/* Closed chevrons point right; positive travel opens them downward clockwise.
-   Closing reverses that same quarter turn, including nested native disclosures. */
-.kpress details:not([open]) > summary::before {
-  transform: rotate(0deg);
-}
-.kpress details[open] > summary::before {
-  transform: rotate(90deg);
 }

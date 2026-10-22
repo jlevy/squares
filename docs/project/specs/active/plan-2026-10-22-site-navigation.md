@@ -23,10 +23,10 @@ publication remain in progress.
 Use the confirmed top-level order **Overview**, **News**, **Results**, **Learn**, and
 **About**. Overview and the site name link home; News links directly to its page.
 Results, Learn, and About have dropdowns.
-Results groups Recent Results, the Results Archive, Visual Atlas, and verification
-explanations. Learn groups tutorials, papers, film, downloads, the workbench, and the
-Resources directory.
-About groups the project, people, contribution guidance, and documentation.
+Results groups Recent Results, the Results Archive, Visual Atlas, Verification and
+Ratings, and Report a Result.
+Learn groups Papers, Tutorials, Videos, Workbench, Downloads, and Resources.
+About groups The Squares Project, Contributor Profiles, and Project Documentation.
 
 Use a small dropdown for each group, a consistent parent for each nested page, and short
 homepage previews with buttons into the hierarchy.
@@ -89,7 +89,7 @@ that host.
 | Read a particular proof | Learn → Papers | The paper’s HTML, PDF, and source; linked result records |
 | See or manipulate packings | Learn → Videos or Workbench | Atlas and individual cases when evidence is needed |
 | Follow recent work | News | Announcement, then the linked result, paper, or profile |
-| Identify a contributor or submit a result | About → People and Profiles or Report a Result | Person’s credited work or the existing submission route |
+| Identify a contributor or submit a result | About → Contributor Profiles; Results → Report a Result | Person’s credited work or the existing submission route |
 | Reproduce or extend the project | About → Documentation | Synopsis, conventions, development guide, and repository |
 
 The result register is organized by contribution; the Atlas and Frontier Survey are
@@ -274,7 +274,8 @@ Site name → / [Home; selected previews and actions]
 │   │   └── result/t-NNN.html [229 record pages]
 │   ├── Visual Atlas → atlas.html [menu; page]
 │   │   └── cases/N.html [324 case pages]
-│   └── Verification and Ratings → epistemics.html [menu; page]
+│   ├── Verification and Ratings → epistemics.html [menu; page]
+│   └── Report a Result → report.html [menu; contribution instructions]
 ├── Learn [menu container; no category page]
 │   ├── Papers → papers.html [menu; complete paper catalogue]
 │   │   └── Four paper HTML pages, each with its PDF and Markdown editions
@@ -289,29 +290,30 @@ Site name → / [Home; selected previews and actions]
     ├── The Squares Project → about.html [menu; project page]
     ├── Contributor Profiles → profiles/ [menu; directory]
     │   └── 75 profile pages
-    ├── Project Documentation → documentation.html [menu; full documentation directory]
-    │   ├── readme.html
-    │   ├── synopsis.html → 18 chapter pages
-    │   ├── conventions.html
-    │   └── development.html
-    └── Report a Result → report.html [menu; contribution instructions]
+    └── Project Documentation → documentation.html [menu; full documentation directory]
+        ├── readme.html
+        ├── synopsis.html → 18 chapter pages
+        ├── conventions.html
+        └── development.html
 GitHub and color theme [utilities]
 ```
 
-Results has four dropdown entries, Learn six, and About four.
+Results has five dropdown entries, Learn six, and About three.
 The menus omit individual records and the 18 Synopsis chapters.
 Each menu destination has substantive content.
 Only Overview carries summary previews.
-Every actual menu destination uses its menu label for the page H1, browser and preview
-titles, and current breadcrumb item, from the shared `navigation_title` lookup.
-This includes Overview, Verification and Ratings, Contributor Profiles, Project
-Documentation, and Workbench.
+Actual menu destinations use their menu label for browser and preview titles, page
+headings, and current breadcrumb items, from the shared `navigation_title` lookup.
+The homepage is the explicit heading exception: its menu/browser label remains Overview,
+but its H1 remains **The Square Packing Problem**. This includes Overview, Verification
+and Ratings, Contributor Profiles, Project Documentation, and Workbench.
 Preserve scientific source-document titles and legacy anchors; the rendered reader page
 supplies its canonical navigation heading.
-Overview retains The Square Packing Problem as its meaningful subtitle.
-Epistemics remains cross-linked from Documentation, tutorials, and result explanations;
-its single navigation parent becomes Results because readers use it to interpret
-evidence labels.
+The next homepage section is **Visual Atlas**. Preserve its existing
+`#the-atlas-of-square-packings` and `#the-atlas` anchors without adding a duplicate
+problem subtitle. Epistemics remains cross-linked from Documentation, tutorials, and
+result explanations; its single navigation parent becomes Results because readers use it
+to interpret evidence labels.
 
 ### Landing pages and content ownership
 
@@ -404,7 +406,7 @@ catalogue content on the page.
 | Report Your Results | One invitation and Report a Result button | `report.html` |
 | All tutorial/paper cards | Selected starting points with View All Tutorials and View All Papers actions | `tutorials.html`, `papers.html` |
 | Poster and inline film | One media preview with View Videos, Workbench, and Downloads actions | `visualize.html`, `workbench/`, `downloads.html` |
-| Complete documentation cards | One short project/developer introduction and Documentation button | `documentation.html` |
+| Complete documentation cards | One short project/developer introduction and Project Documentation button | `documentation.html` |
 | Full external resource cards | Short summary and View All Resources button | `resources.html` |
 
 Use shared records and existing card renderers for previews; do not maintain a second
@@ -418,8 +420,8 @@ result significance or contributor status.
 
 All 666 content pages keep their addresses.
 Six new pages are registered: `resources.html`, `tutorials.html`, and `downloads.html`
-under Learn, `documentation.html` and `report.html` under About, and
-`recent-results.html` under Results.
+under Learn, `documentation.html` under About, and `recent-results.html` and
+`report.html` under Results.
 The route CSV marks them as `added`, separately from the 1,149 baseline registrations.
 The CSV expands the generated families and technical registrations; this table specifies
 the reader-facing parent for every named page or family.
@@ -450,9 +452,9 @@ the reader-facing parent for every named page or family.
 | `news.html` | News | Top-level page; preserve `#changelog` and entry anchors |
 | `about.html` | The Squares Project | About; project narrative with preserved compatibility fragments |
 | `documentation.html` | Project Documentation | About; complete reader and developer document catalogue |
-| `report.html` | Report a Result | About; complete contribution instructions |
-| `profiles/` (`profiles/index.html`) | People and Profiles | About; full directory |
-| `profiles/<person>.html` (75) | Person’s evidenced name | About → Profiles; retain all reviewed identity and credit content |
+| `report.html` | Report a Result | Results; complete contribution instructions |
+| `profiles/` (`profiles/index.html`) | Contributor Profiles | About; full directory |
+| `profiles/<person>.html` (75) | Person’s evidenced name | About → Contributor Profiles; retain all reviewed identity and credit content |
 | `readme.html` | Project Guide | About; keep README content and source link |
 | `synopsis.html` | Research Synopsis | About; full chapter index |
 | `synopsis/<chapter>.html` (18) | Chapter title | About → Research Synopsis; keep previous/next links |
@@ -469,19 +471,19 @@ remain chapters, rather than competing with their parent in a dropdown.
 
 ### Breadcrumbs and active navigation
 
-Every page shows a breadcrumb above its heading, consistently across kpress articles,
-static records, profiles, and the workbench shell.
-The homepage’s current label is Overview.
-Top-level content pages show their own plain current-page label; nested pages add their
-collection ancestry.
+Pages with collection ancestry show a breadcrumb above their heading, consistently
+across kpress articles, static records, profiles, and the workbench shell.
+Standalone Overview and News show no visible breadcrumb and emit no structured
+`BreadcrumbList`. Their global navigation still marks the current page.
+Nested pages retain their collection ancestry and plain final item.
 Results, Learn, and About are menu containers with no category landing URL, so their
 content pages show the container as plain ancestor text before the current page title.
 The final breadcrumb item is always plain text, never a link.
 
 | Page | Visible trail, ending with the current page |
 | --- | --- |
-| Overview | Overview |
-| News | News |
+| Overview | None |
+| News | None |
 | Recent Results | Results → Recent Results |
 | Results register | Results → Results Archive |
 | The Squares Project | About → The Squares Project |
@@ -493,7 +495,8 @@ The final breadcrumb item is always plain text, never a link.
 | Videos, Workbench, or Resources | Learn → Videos / Workbench / Resources, as appropriate |
 | Profile directory | About → Contributor Profiles |
 | Person profile | About → Contributor Profiles → Person’s name |
-| Project Documentation, Report a Result, Project Guide, Conventions, or Development | About → Current title |
+| Report a Result | Results → Report a Result |
+| Project Documentation, Project Guide, Conventions, or Development | About → Current title |
 | Research Synopsis | About → Research Synopsis |
 | Synopsis chapter | About → Research Synopsis → Chapter title |
 
@@ -532,6 +535,10 @@ Each grouped label and its chevron are one button exposing `aria-expanded` and
 Its first link leads to substantive content.
 All controls work with a keyboard or touchscreen.
 Do not require hover, and do not assign application-menu roles to ordinary site links.
+Keep the original chevron states: closed points down and open points up.
+Only reverse the transition’s direction: expansion rotates by -180 degrees instead of
++180 degrees, and collapse reverses it.
+Reduced motion preserves the same endpoint states without animation.
 
 Tab reaches links and buttons in document order.
 Enter or Space toggles a disclosure; Escape closes it and returns focus to its
@@ -575,6 +582,11 @@ collection. Render the existing shared right-arrow component after the label; ke
 decorative icon out of the accessible name.
 Use the existing action-link component, with consistent size, padding, alignment, icon
 spacing, and focus treatment.
+Buttons and action links share `--paper-button-letter-spacing`, resolving to
+`var(--kpress-caps-spacing, 0.021em)`. Apply it through the common casing component to
+ordinary buttons, `site-action` and `site-popover-action` links, and retained tab links;
+news filter buttons reuse the same token.
+Mathematics inside labels keeps normal tracking.
 Collection navigation styled as a button remains an actual anchor with its destination
 in `href`. Individual detail links name the case, result, person, or paper; contribution
 actions retain purpose-specific wording such as Report a Result.
@@ -615,17 +627,18 @@ review.
 
 ### Profile, popover, and footer consistency follow-ups
 
-These five follow-ups belong to the navigation and consistency implementation after PR
-#733 has merged. They remain open under `think-7kbb`; this draft does not implement or
-claim them. Document their shared components and states in the existing
+These follow-ups belong to the navigation and consistency implementation under
+`think-7kbb`. The table records the requested behavior; the linked beads carry current
+implementation and validation status.
+Document their shared components and states in the existing
 [Design System](../../../../packing/devtools/templates/paper-design.md).
 
 | Bead | Requirement and acceptance |
 | --- | --- |
 | `think-2abe` | Put Accounts second, immediately after Name, in the profile directory. Preserve the relative Records → Results → Credits order and existing sorting and responsive behavior. |
-| `think-7kbb` | Apply the shared 35em reading measure and prose-aligned card groups, cap columns to actual cards, use sans navigation chrome, and remove footer GitHub icons. |
+| `think-7kbb` | Apply the shared 35em reading measure and prose-aligned card groups, cap columns to actual cards, use sans navigation chrome, remove footer GitHub icons, and reverse chevron rotation while preserving down-closed/up-open states. |
 | `think-j4jk` | Remove repeated Recent Results introductions, contents links and per-day filter navigation; preserve dates, result lists, credits, ratings and one archive action. |
-| `think-0xj7` | Use each menu destination’s canonical label for its H1, browser metadata and current breadcrumb; rename Project Documentation and Contributor Profiles consistently. |
+| `think-0xj7` | Use each menu destination’s canonical label for its H1, browser metadata and current breadcrumb; rename Project Documentation and Contributor Profiles consistently; put Report a Result last under Results, outside About; preserve the explicit homepage H1/Visual Atlas exception and no-trail Overview/News rule. |
 | `think-aefa` | Set the numeric total in each profile-table tally in bold, never italic; keep its result, record, or credit label in regular weight. Preserve muted significance parentheticals and blank zero cells through the shared tally component. |
 | `think-mpxs` | Give shared profile, result, and case popovers roughly 60% more width on wide screens where space permits. Base the shared responsive rule on `--kpress-measure`, panel padding, and viewport gutters. Audit the current 36rem general and 46rem framed-page ceilings rather than multiplying every variant. Cap prose measure while preserving room for case visualizations, narrow-screen fit, focus, controls, scrolling, and freedom from horizontal overflow. |
 | `think-klec` | Use diagonal outward arrows for the shared expand action. Prefer Lucide `maximize-2` if available in the existing pinned icon set; otherwise use a coherent shared equivalent. Preserve shared icon sizing, the accessible Open full page label, and identical header/footer destinations wherever an overlay opens a full page. |
@@ -672,11 +685,11 @@ Visible breadcrumbs and metadata must use that lookup.
 - [x] Update the shared Design System document with the navigation disclosure component,
   its tokens, states, and accessibility/interaction contract; use that component
   consistently across pages and the workbench.
-- [x] Add shared dropdowns, active-parent rules, and breadcrumbs on every page across
-  all page producers and the workbench.
+- [x] Add shared dropdowns, active-parent rules, and ancestry breadcrumbs across all
+  page producers and the workbench.
 - [x] Reorganize Results and Learn with the specified entry points; add the full
   Resources directory at `resources.html` under Learn; include the About project page
-  and Overview in the breadcrumb system.
+  with Overview and News as standalone pages without breadcrumb trails.
 - [x] Reduce homepage catalogues to previews and direct actions while preserving old
   anchors and ordinary links.
 - [ ] Audit collection buttons across Overview and all landing pages for the shared View
@@ -786,7 +799,7 @@ Include representative direct loads of a paper, advanced tutorial, profile, resu
 11, a late Atlas case such as 291, a Synopsis chapter, the Resources directory, and the
 workbench. Verify menu focus and dismissal, sticky header interaction, current-parent
 indication, visible/structured breadcrumb agreement, and a plain current-page label on
-every page, including Overview and About.
+every nested page, including the About children; Overview and News have no trail.
 Confirm the shared 35em reading measure and the absence of a Film/Workbench switcher.
 Expand a News entry and check that metadata links each occupy their own line, with serif
 article prose and muted sans metadata.

@@ -891,7 +891,7 @@ EXPLAINER_HISTORY = (
         version="v0.4.20",
         first_published="October 22, 2026",
         result_scope=(
-            "Set a shared 33em reading measure for paper prose in HTML and PDF layouts."
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
         ),
     ),
     PublicationHistoryEntry(
@@ -1082,7 +1082,7 @@ OPTIMALITY_REVIEW_HISTORY = (
         version="v0.1.11",
         first_published="October 22, 2026",
         result_scope=(
-            "Set a shared 33em reading measure for paper prose in HTML and PDF layouts."
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
         ),
     ),
     PublicationHistoryEntry(
@@ -1227,7 +1227,7 @@ THRESHOLD_REVIEW_HISTORY = (
         version="v0.1.4",
         first_published="October 22, 2026",
         result_scope=(
-            "Set a shared 33em reading measure for paper prose in HTML and PDF layouts."
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
         ),
     ),
     PublicationHistoryEntry(
@@ -1286,7 +1286,7 @@ PACKING_METHODS_HISTORY = (
         version="v0.2.7",
         first_published="October 22, 2026",
         result_scope=(
-            "Set a shared 33em reading measure for paper prose in HTML and PDF layouts."
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
         ),
     ),
     PublicationHistoryEntry(
@@ -1410,28 +1410,28 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         previous_version="v0.2.6",
         version="v0.2.7",
         impact="patch",
-        reason=("Set a shared 33em reading measure for paper prose in HTML and PDF layouts."),
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
     ),
     ReleaseImpactDecision(
         component="paper:n11-threshold-bound-review",
         previous_version="v0.1.3",
         version="v0.1.4",
         impact="patch",
-        reason=("Set a shared 33em reading measure for paper prose in HTML and PDF layouts."),
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
     ),
     ReleaseImpactDecision(
         component="paper:n11-optimality-review",
         previous_version="v0.1.10",
         version="v0.1.11",
         impact="patch",
-        reason=("Set a shared 33em reading measure for paper prose in HTML and PDF layouts."),
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
     ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.19",
         version="v0.4.20",
         impact="patch",
-        reason=("Set a shared 33em reading measure for paper prose in HTML and PDF layouts."),
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
     ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",

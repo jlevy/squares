@@ -2838,7 +2838,7 @@ def pdf_note() -> str:
     """Retained SVG/source links, for the Papers page's PDFs."""
     atlas = REPO / "packing" / "atlas" / "known-best"
     return (
-        '<p class="site-wide site-atlas-note">Each poster is also an SVG '
+        '<p class="site-atlas-note">Each poster is also an SVG '
         f'(<a href="{branch_file(atlas / "known-best-1-100.svg")}">1 to 100</a>, '
         f'<a href="{branch_file(atlas / "known-best-1-324.svg")}">1 to 324</a>), '
         f'and the <a href="{branch_file(atlas / "README.md")}">atlas README</a> '

@@ -6,9 +6,7 @@
 
 <!-- The explainer's older #the-square-packing-problem fragment belongs to that paper;
      this page keeps its own title address. -->
-<h1 id="the-problem" class="site-title">Overview</h1>
-
-<p class="site-navigation-copy">The Square Packing Problem</p>
+<h1 id="the-problem" class="site-title">The Square Packing Problem</h1>
 
 The square packing problem is a simple and long-standing problem in geometry: what is
 the size of the smallest square that can hold $n$ unit squares, where the squares are
@@ -20,7 +18,7 @@ lie between an upper bound (the size of the enclosing square for the tightest pa
 ever discovered, such as $s(29) \le 5.934$) and a lower bound (a size below which it is
 proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
-<h2 id="the-atlas-of-square-packings" class="site-title">The Atlas of Square Packings<a id="the-atlas"></a></h2>
+<h2 id="the-atlas-of-square-packings" class="site-title">Visual Atlas<a id="the-atlas"></a></h2>
 
 {{ATLAS_GRID}}
 

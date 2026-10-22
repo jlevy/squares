@@ -105,6 +105,13 @@ One accent, the teal `--kpress-doc-accent`, is the only link and emphasis color:
 dark. Both the paper and site layers alias KPress’s separate link blue to it.
 Primary content uses the normal foreground (`--kpress-doc-text`), including
 descriptions, handles, account links, result summaries, credits and resources.
+Navigation and chrome always use the shared sans face: menus, contents links, collection
+headings, disclosure labels, counts and browsing controls.
+Substantive exposition remains serif, and an inline citation or link in that exposition
+inherits its surrounding prose.
+The shared `site-navigation-copy` and `site-navigation-heading` roles cover metadata and
+collection structure without restyling every prose link.
+
 Secondary metadata such as dates, breadcrumbs, captions and provenance may use KPress’s
 gray (`--kpress-doc-muted`, carried as `--site-support-color`) on the web and black in
 print.
@@ -274,7 +281,7 @@ and `tests/test_site_text_tokens.py` pins what they resolve to in Chromium.
 | Token | Value | Resolves to |
 | --- | --- | --- |
 | `--kpress-host-font-size-base` | `18px` | Every KPress size, from `--kpress-font-size-base` |
-| `--kpress-measure` | 33em of the shared prose base | 594px at the 18px base; the width of actual prose, excluding padding |
+| `--kpress-measure` | 35em of the shared prose base | 630px at the 18px base; the width of actual prose, excluding padding |
 | `--kpress-font-size-h2` | 1.2 of the base | 21.6px at every width; KPress steps it to 1.4 from a 64rem pane |
 | `--paper-font-scale-sans` | 19/18 | The 19px sans base of captions, cards and notes |
 | `--paper-font-weight-sans-medium`, `-bold` | 550, 680 | The sans medium and bold |
@@ -293,7 +300,7 @@ the tutorial, the readme and the homepage, identical on all four where the role 
 | Table cell | Source Sans 3, 410 | 17.1px | 16.2px |
 | Inline code | Planetaire Mono Text | 14.76 / 22.14px | Same |
 | Inline math | KPress Math Text (serif) | 18px, the text’s own em | Same |
-| Reading column | — | 594px: the shared 33em prose measure | The column less the page and document gutters |
+| Reading column | — | 630px: the shared 35em prose measure | The column less the page and document gutters |
 
 h3 and h4 keep KPress’s own step up at a 64rem pane.
 Every published page H1 uses the shared upright sans-serif, all-caps title treatment,
@@ -877,7 +884,7 @@ contributor articles use their component sheets and the same text tokens.
   Results, Learn, and About each use one button containing the label and chevron.
   The whole button opens its list.
   Its first entry leads to substantive content: Recent Results, Papers, or The Squares
-  Project. Results and Learn have no category page or URL. Results contains Recent
+  Project. Results, Learn and About have no category page or URL. Results contains Recent
   Results (`recent-results.html`), Results Archive (`results.html`), Visual Atlas
   (`atlas.html`), and Verification and Ratings (`epistemics.html`). The hierarchy and
   destination paths live in `site_navigation.py`; `site-nav.html` supplies the shared
@@ -888,10 +895,12 @@ contributor articles use their component sheets and the same text tokens.
   Labels retain Title Case.
   A button has a minimum 2rem square target; its open or hovered state takes
   `--site-wash` and accent text.
-  The chevron turns upward while open.
-  The list uses the page background, document border, and shared shadow, with 0.3rem
-  inner padding and links padded 0.45rem by 0.7rem. Links and buttons show a 2px
-  document-link outline with 2px clearance on keyboard focus.
+  The closed chevron points right and expands clockwise by a positive 90-degree turn to
+  point down. Collapse reverses the same turn counterclockwise.
+  Native disclosures follow the same convention; the Atlas’s double chevron uses a
+  positive half-turn. The list uses the page background, document border, and shared
+  shadow, with 0.3rem inner padding and links padded 0.45rem by 0.7rem. Links and
+  buttons show a 2px document-link outline with 2px clearance on keyboard focus.
   The current content link is underlined; an ancestor uses the accent and shared sans
   bold weight (680). A fragment destination does not also claim the current page.
 
@@ -916,19 +925,19 @@ contributor articles use their component sheets and the same text tokens.
   size and support leading, centered on the reading column, 1rem below the navigation
   and 2.5rem above the title.
   The trail replaces the article’s usual top gap.
-  Ancestors with a destination are links; Results and Learn are plain container text
-  with no URL. Chevrons separate the items, and the current title is plain text with
-  `aria-current="page"`. A root page has one plain current item; the homepage is
+  Ancestors with a destination are links; Results, Learn and About are plain container
+  text with no URL. Chevrons separate the items, and the current title is plain text
+  with `aria-current="page"`. A root page has one plain current item; the homepage is
   labelled Overview. Learn has no category page; its content pages carry the plain Learn
-  ancestor. The trail and prose share the 33em reading width and narrow-screen gutters,
+  ancestor. The trail and prose share the 35em reading width and narrow-screen gutters,
   independent of the trail’s smaller sans type.
   Contributor profiles and the directory use the same text width.
   Tables and figures keep their wider tracks.
   `site_navigation.py` supplies the same ancestry for the visible trail and structured
   BreadcrumbList data.
   Cases belong to Results → Visual Atlas, result articles to Results → Results Archive,
-  profiles to About → Profiles, chapters to About → Research Synopsis, and verification
-  guidance to Results.
+  profiles to About → Contributor Profiles, chapters to About → Research Synopsis, and
+  verification guidance to Results.
   Paper details link their Papers catalogue; the tutorial articles link their Tutorials
   catalogue after Learn.
   Overlays and print hide the visible trail.
@@ -978,6 +987,8 @@ contributor articles use their component sheets and the same text tokens.
   icons.
 
 - **Closing credit.** Every page with a footer ends on the same two centred lines:
+  Footer links keep their text and destinations without decorative brand or
+  external-link icons; body links retain their usual icon treatment.
 
   > The Squares Project · github.com/jlevy/squares\
   > v0.4.2-8ac5de · Formatted and typeset with Flowmark and KPress
@@ -1255,10 +1266,16 @@ contributor articles use their component sheets and the same text tokens.
 
 - **Cards.** A card is a summary with square corners, a thin border, a caps label, a
   value and a supporting note.
-  A card section is one wrapping row in the wide track, in a `.site-cards-frame` the row
-  measures itself against.
-  Any line the cards do not fill centres on it, at every width: four cards on a wide
-  screen, a section of three, and the last line of a long section alike.
+  A card section is one wrapping row inside the prose track, in a `.site-cards-frame`
+  the row measures itself against.
+  Its outer edges align with the shared 35em prose column, including on profile pages
+  and in groups whose markup retains `site-wide`. Data tables, packing figures, the
+  atlas and video stages keep their explicit wider tracks.
+  A prose note does not become wider by sharing a visual block’s wrapper.
+  The column count is capped to the number of actual cards, so one- and two-card groups
+  fill the track without empty columns.
+  A final partial row in a longer group remains centered.
+  Explicit multirow sections follow this same rule.
   A card’s popover is its sibling in the row’s markup but never in the row, since a
   closed popover is not displayed and an open one is in the top layer.
   Print keeps the plain grid of medium columns, filled from the left.
@@ -1378,19 +1395,22 @@ contributor articles use their component sheets and the same text tokens.
   `data-card-size`; a card that names none is medium.
   Each size is as wide as a column of the grid of its own minimum column the frame fits,
   with 1rem gaps, so cards of one size line up as a grid at every width:
-  - `small`, 12rem columns, for a headline and one line, under 80 characters: four to a
-    line at 1280 pixels (264px each), four at 1024 (236px) and three at 768 (235px).
-  - `medium`, 16rem columns, for a headline and a sentence, 80 to 159 characters: four
-    to a line at 1280 pixels (264px), three at 1024 (320px) and two at 768 (360px).
-  - `large`, 21rem columns, for a paragraph or a list, 160 characters or more: three to
-    a line at 1280 pixels (357px), two at 1024 (488px) and two at 768 (360px).
+  - `small`, 12rem minimum columns, for a headline and one line, under 80 characters.
+  - `medium`, 16rem minimum columns, for a headline and a sentence, 80 to 159
+    characters.
+  - `large`, 18rem minimum columns, for a paragraph or a list, 160 characters or more.
 
+  At the 630px desktop prose width, three small cards or two medium or large cards fit
+  on one row. A group of two small cards also uses two full-width columns rather than
+  reserving an empty third slot.
+  Two large cards fit from 37rem; this shared threshold applies to every catalogue,
+  including Tutorials.
   On a phone every card takes the whole line.
   The count to a line is `--site-cards-small`, `-medium` or `-large`, each stepped by
   its own container queries: n columns of minimum m and n − 1 gaps need (m + 1)n − 1
-  rem, so medium steps at 33, 50 and 67rem and small at 25, 38 and 51rem. No size sets
-  more than four cards to a line (the owner, 2026-10-05), so medium stops at four, small
-  at four and large at four.
+  rem, so medium steps at 33, 50 and 67rem, small at 25, 38 and 51rem, and large at 37,
+  56 and 75rem. No size sets more than four cards to a line (the owner, 2026-10-05), so
+  medium stops at four, small at four and large at four.
   A section declares one size for all its cards, in `SECTION_CARD_SIZES`
   (`overview_sections.py`), so its lines are one grid; the size is the one its typical
   card’s text asks for, the median card’s, which for an even count is the mean of the
@@ -1406,11 +1426,10 @@ contributor articles use their component sheets and the same text tokens.
   the $n = 11$ series in reading order, then the tutorial and the workbench.
   Each line is a grid of its own in the section’s one frame, a gap below the line
   before, and none sets more cards to a line than the longest line holds
-  (`data-cards-most`, at which the stylesheet caps its size’s count), so the lines share
-  one column width and each centres in it: three medium columns at 1280 pixels, the
-  Frontier page’s card centred over the papers.
-  Wherever the frame fits two medium cards, from 33rem, every line stands as set; on a
-  phone every card takes the line.
+  (`data-cards-most`, at which the stylesheet caps its size’s count).
+  Actual card count remains a further cap, so a short row fills the prose width without
+  an empty slot. Wherever the frame fits two medium cards, from 33rem, every line stands
+  as set; on a phone every card takes the line.
   The owner asked for the page cards in two rows on 2026-10-02 (`think-ec5k`), and two
   over three was chosen over three over two from screenshots at 1280 pixels; later the
   same day the owner set the Frontier page’s card on a line of its own at the top and
@@ -1616,7 +1635,7 @@ contributor articles use their component sheets and the same text tokens.
     it still reads under reduced motion.
   - **Navigation disclosure.** Results, Learn and About use the same 140ms ease-out
     timing for their dropdown’s opacity and quarter-rem vertical travel and their
-    chevron’s half-turn.
+    chevron’s negative half-turn.
     The mobile Menu list uses that timing too.
     A discrete display transition lets the exit finish; closed lists are inert
     immediately, with focus restored to their trigger when needed.
@@ -2011,7 +2030,7 @@ contributor articles use their component sheets and the same text tokens.
 - **Wide bleed.** A wide block (`.site-wide`) takes the wide track, `--site-wide`, less
   the page gutters (`--site-wide-gutter` on either side; **Spacing**, above).
   The track is forty times the shared type base plus 24rem, 1104px at the 18px base.
-  It is independent of the prose measure, thirty-three times the shared base, so changes
+  It is independent of the prose measure, thirty-five times the shared base, so changes
   to reading lines preserve the room tables and card grids need.
   Two kinds bleed past it.
   The atlas grid fills the available page width less its edge gutters, with no fixed

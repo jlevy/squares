@@ -1626,7 +1626,8 @@ def test_the_page_cards_keep_the_series_together_at_one_column_width(
         most, size = max(lines), overview_sections.SECTION_CARD_SIZES[section]
         rule = screen[screen.index(f'.site-cards[data-cards-most="{most}"] > .site-card {{') :]
         assert (
-            f"--site-cards-line: min(var(--site-cards-{size}), {most}, var(--site-cards-count));"
+            "--site-cards-line: "
+            f"min(var(--site-cards-{size}), {most}, var(--site-cards-count));"
             in rule[: rule.index("}")]
         ), section
     monkeypatch.setitem(overview_sections.SECTION_CARD_LINES, "pages", (2, 2))
@@ -2089,7 +2090,7 @@ def test_the_frontier_survey_is_an_atlas_section_without_duplicate_cards(
     assert "$" not in bound_heading
     assert r"\le" not in bound_heading
     intro = atlas_page.split("</h1>", 1)[1].split("data-atlas-grid", 1)[0]
-    assert _rendered_text(intro).startswith("The Atlas shows the best-known packings")
+    assert _rendered_text(intro).startswith("The Visual Atlas shows the best-known packings")
     for fragment in ("packings", "the-frontier-survey", "best-known-results"):
         assert f'href="#{fragment}"' in intro
     assert "frontier.html" not in render_overview.PAGES
@@ -7505,11 +7506,17 @@ def test_menu_page_headers_and_metadata_use_the_same_labels(
             page = rendered(path)
             heading = re.search(r"<h1\b[^>]*>(.*?)</h1>", page, re.DOTALL)
             assert heading is not None, path
-            assert _rendered_text(heading[1]).strip() == item.label, path
+            expected_heading = (
+                "The Square Packing Problem" if path == "index.html" else item.label
+            )
+            assert _rendered_text(heading[1]).strip() == expected_heading, path
             assert f"<title>{render_overview.page_title(item.label)}</title>" in page, path
             assert (
                 f'property="og:title" content="{html.escape(item.label, quote=True)}"' in page
             )
+            if path in {"index.html", "news.html"}:
+                assert 'aria-label="Breadcrumb"' not in page, path
+                continue
             breadcrumb = page.split('aria-label="Breadcrumb"', 1)[1].split("</nav>", 1)[0]
             assert f'aria-current="page">{html.escape(item.label)}</span>' in breadcrumb, path
 

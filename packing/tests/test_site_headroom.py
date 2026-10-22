@@ -137,7 +137,7 @@ def test_header_hides_down_and_returns_on_first_upward_scroll(
             if name == "ordinary":
                 assert page.locator(".site-headroom nav.site-tabs").count() == 0
                 trail = page.get_by_role("navigation", name="Breadcrumb", exact=True)
-                assert trail.is_visible()
+                assert trail.count() == 0
         finally:
             page.close()
 
