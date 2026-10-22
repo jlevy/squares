@@ -3,9 +3,9 @@ type: is
 id: is-01m5j10qmw6d55ghhfxg9ekww1
 title: Migrate generated site URLs and validate legacy profile links
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-22-squaremath-domain.md
 delegate: squaremath-implementation
 labels: []
@@ -19,8 +19,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T14:42:36.827Z
-updated_at: 2026-10-22T16:36:14.622Z
+updated_at: 2026-10-22T17:39:27.597Z
 started_at: 2026-10-22T15:44:53.762Z
+closed_at: 2026-10-22T17:39:27.597Z
+close_reason: "Implemented and pushed in PR727 at73a28c47fb0499999fb1a9b9e8baad78a6589215. Senior review A and follow-up B complete; A1 fixed and disposition posted https://github.com/jlevy/squares/pull/727#issuecomment-6347206000. Final hosted CI green: packing39815232494, Pages39815232525 attempt2. Local corrected file133passed and pool23passed. Live cutover separately tracked think-juq7."
+resolution: null
+duplicate_of: null
 ---
 Implement canonical squaremath.org site URLs, explicit legacy profile aliases, live changelog targets, and regressions per plan. Include the required site release-impact disposition for published SYNOPSIS.md/development.md documentation inputs; pre-push reports these pending at current v0.9.0. Preserve github.com/jlevy/squares repository links in PDFs. Plan and guide staged on codex/squaremath-domain.
 

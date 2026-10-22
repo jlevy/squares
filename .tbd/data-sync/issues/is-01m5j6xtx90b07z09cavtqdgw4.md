@@ -3,9 +3,9 @@ type: is
 id: is-01m5j6xtx90b07z09cavtqdgw4
 title: "PR #727 A1: correct completed domain verification in migration plan"
 kind: bug
-status: in_progress
+status: closed
 priority: 3
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-22-squaremath-domain.md
 delegate: squaremath-doc-fix
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m5j10qmw6d55ghhfxg9ekww1
 hold: null
 hold_until: null
 created_at: 2026-10-22T16:25:53.319Z
-updated_at: 2026-10-22T16:27:10.611Z
+updated_at: 2026-10-22T17:39:27.581Z
 started_at: 2026-10-22T16:26:06.436Z
+closed_at: 2026-10-22T17:39:27.580Z
+close_reason: "Implemented and pushed in PR727 at73a28c47fb0499999fb1a9b9e8baad78a6589215. Senior review A and follow-up B complete; A1 fixed and disposition posted https://github.com/jlevy/squares/pull/727#issuecomment-6347206000. Final hosted CI green: packing39815232494, Pages39815232525 attempt2. Local corrected file133passed and pool23passed. Live cutover separately tracked think-juq7."
+resolution: null
+duplicate_of: null
 ---
 Address senior Review A finding A1 (Low) on PR #727: https://github.com/jlevy/squares/pull/727#pullrequestreview-5617479538.
 

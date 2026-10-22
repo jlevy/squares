@@ -3,9 +3,9 @@ type: is
 id: is-01m5j79r46k1ez04dzq3arz7zv
 title: Fix stale Pages subpath fixtures in publication checker tests
 kind: bug
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-22-squaremath-domain.md
 delegate: squaremath-test-fix
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m5j10qmw6d55ghhfxg9ekww1
 hold: null
 hold_until: null
 created_at: 2026-10-22T16:32:23.685Z
-updated_at: 2026-10-22T16:34:20.942Z
+updated_at: 2026-10-22T17:39:27.591Z
 started_at: 2026-10-22T16:32:32.330Z
+closed_at: 2026-10-22T17:39:27.591Z
+close_reason: "Implemented and pushed in PR727 at73a28c47fb0499999fb1a9b9e8baad78a6589215. Senior review A and follow-up B complete; A1 fixed and disposition posted https://github.com/jlevy/squares/pull/727#issuecomment-6347206000. Final hosted CI green: packing39815232494, Pages39815232525 attempt2. Local corrected file133passed and pool23passed. Live cutover separately tracked think-juq7."
+resolution: null
+duplicate_of: null
 ---
 CI shard C on PR #727 reports seven stale-domain failures in packing/tests/test_check_published_site.py. Evidence: https://github.com/jlevy/squares/actions/runs/39812882258/job/119943570388.
 
