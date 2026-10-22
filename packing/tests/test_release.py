@@ -7,9 +7,10 @@ disagree. What is pinned here is the shape, the single source, and the drift che
 holds the pinned data revision to git. (The explainer's credits print the paper's own
 version since 2026-10-02; the stamp is the site's and the posters'.)
 
-The site's version history is held to two rules of its own: it only grows, back to the
-first edition, and each edition is dated by when it was first published rather than when
-its label was first written down. The papers' own versions are held beside it: a paper's
+The site's version history is held to three rules of its own: it keeps every edition
+back to the first, each edition is dated by when it was first published rather than when
+its label was first written down, and it is frozen, since site editions are retired as of
+22 October 2026 (think-wdqo). The papers' own versions are held beside it: a paper's
 history lists the editions in which that paper changed, at the numbers and dates they
 were published under, and no paper's version carries the site's edition or the data hash.
 
@@ -43,6 +44,7 @@ from sqpack.release import (
     PUBLICATION_STAMP,
     PUBLICATION_STATUS,
     PUBLICATION_VERSION,
+    RELEASE_IMPACTS,
     PublicationHistoryEntry,
     commit_date,
     data_pathspec,
@@ -123,9 +125,9 @@ def test_the_history_keeps_every_edition_back_to_the_first() -> None:
 
     This test used to say the history was "the two retained editions", which is the rule
     that let adding v0.4.1 drop v0.3.0 -- the proof of s(11) >= 381/100 the publication
-    began with -- and pass. The history now only grows: every edition ever published is
-    listed, newest first, and the oldest is the 381/100 edition. A new edition goes on the
-    front; nothing comes off the back.
+    began with -- and pass. The history keeps every edition ever published, newest first,
+    and the oldest is the 381/100 edition. Nothing comes off the back, and since site
+    editions were retired nothing goes on the front either (the next test).
     """
     versions = [entry.version for entry in PUBLICATION_HISTORY]
     assert {"v0.4.2", "v0.4.1", "v0.4.0", "v0.3.0"} <= set(versions)
@@ -138,6 +140,36 @@ def test_the_history_keeps_every_edition_back_to_the_first() -> None:
     assert "381/100" in first.result_scope
     assert all("weak" not in entry.result_scope.lower() for entry in PUBLICATION_HISTORY)
     assert PUBLICATION_HISTORY[0].version == PUBLICATION_VERSION
+
+
+#: The last site edition. Site editions are retired as of 22 October 2026 (the owner:
+#: "We don't have any real value in committing a synthetic version for the site";
+#: think-wdqo), and the history stops here. Its date is its own entry's, read below.
+FINAL_SITE_EDITION = "v0.9.2"
+
+
+def test_the_site_history_is_frozen_since_site_editions_were_retired() -> None:
+    """Nothing follows the last site edition: no entry and no release-impact decision.
+
+    The site deploys continuously from main, so its history is kept as history.
+    `check_release_impact` refuses any edit to `PUBLICATION_HISTORY` and to
+    `PUBLICATION_REVISION`, the claim documents' link commit, which moved only with a
+    site edition; `cut_release --component site` refuses to cut one. The papers and the
+    art keep their own versions. The frozen edition's date is read from its entry rather
+    than written here, so whichever day the last old-rule cut first went live holds.
+    """
+    final = PUBLICATION_HISTORY[0]
+    assert final.version == FINAL_SITE_EDITION, (
+        "site editions are retired as of October 22, 2026 (think-wdqo): drop the site cut "
+        "and leave PUBLICATION_HISTORY as it stands"
+    )
+    assert (final.version, final.first_published) == (PUBLICATION_VERSION, PUBLICATION_DATE)
+    versions = [entry.version for entry in PUBLICATION_HISTORY]
+    decisions = [decision for decision in RELEASE_IMPACTS if decision.component == "site"]
+    assert decisions
+    for decision in decisions:
+        assert {decision.previous_version, decision.version} <= set(versions), decision
+        assert _version(PublicationHistoryEntry(decision.version, "", "")) <= _version(final)
 
 
 def test_each_edition_is_dated_by_when_it_was_first_published() -> None:
