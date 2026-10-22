@@ -3,15 +3,19 @@ type: is
 id: is-01m4yr8jtj1znqhx7fva8g60bw
 title: "Import Francisco Couzo: 4e4c8ce beyond-horizon index, 341 counts 325-1023 below 487b058 and #607 (no issue)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 4
+version: 6
+delegate: coord-intake-1021b
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
+hold: null
+hold_until: null
 created_at: 2026-10-15T03:04:02.641Z
-updated_at: 2026-10-16T00:36:11.535Z
+updated_at: 2026-10-22T02:18:25.638Z
+started_at: 2026-10-22T02:18:23.107Z
 ---
 Stage 1 triage, read-only, by the 15 October reads lane (think-mq0k), from the 02:30Z sweep at main 6964362b5. No issue reports any of it.
 
@@ -32,3 +36,6 @@ Price: the exact all-pairs replay of 341 certificates of 325 to 1023 squares is 
 2026-10-16 coordinator (from #627's 616/A1 disposition): Couzo's 4e4c8ce index is smaller than all 238 rows T-188 records as current (3.79e-12 at 381 to 2.38e-02 at 749) and 7 of T-189's (339, 382, 450, 552, 599, 648, 757). Any comparison at these counts must declare the index's side (#627 owner decision 3). #624 (n = 366, mstrmg) is a later report at 366 that this import must list.
 
 2026-10-16 coordinator (#627 review C, C1): at #607's 15 counts the index's own certificates beat 7 rows; its upper_bounds.json also gives a deletion bound at 542 (from its 543 certificate, 7.461e-14 below #607's row) that the manifest records as a tie. This import must decide whether the index's deletion bounds become rows, and then restate T-189's notes, the #607 source note and the packet README count (7 or 8).
+
+2026-10-22 coord-intake-1021b: #715 (Couzo, 1285 rows; PR #717 imports the 109 new rows <= 1024) re-certifies some of this bead's earlier-commit certificates byte for byte. The #715 acknowledgement (issuecomment-6329883508) told the author those 64 rows will be recorded from their first commits; this bead records its share (#717 review A2). 30 sub-print re-certifications of 4e4c8ce are held on think-fwa9. The filtered two-route replay (couzo_715_replay) re-prices this bead's replay at about 40 CPU-minutes (triage-715 price.md).
+blocked_on: jlevy/squares#717

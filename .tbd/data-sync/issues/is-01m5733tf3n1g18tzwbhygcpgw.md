@@ -5,7 +5,7 @@ title: "Import franciscouzo: 204-993: registration request (#670)"
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.418Z
-updated_at: 2026-10-22T01:20:06.997Z
+updated_at: 2026-10-22T01:51:37.757Z
 started_at: 2026-10-18T13:04:20.664Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/670
@@ -104,3 +104,5 @@ c-lane-715-import, branch `claude/intake-2026-10-22`). Set its `jlevy/squares#N`
 it is opened. The 204 registration does not wait.
 
 blocked_on: none
+
+2026-10-22 02:00 c-lane-t225-stage4 (PR-A, on the coordinator's word; branch claude/stoic-thompson-ku09fw, pushed 784244a58): #670's 204 registered as T-226 (V0/C0, superseded on entry by #675, T-223 and T-225), packet couzo-issue670-2026-10-17 at 23aff0c6 (n204.cert f317d0c0...73dc with JSON). Replay: positive passes both routes, 2 controls refused, 124,236 pair decisions, 10.22 route CPU s. Stage 4: think-0nse. The 72 beyond-horizon rows wait for PR-B after #715's import. Reply drafts: triage-backlog/replies/670-*.md (not posted).

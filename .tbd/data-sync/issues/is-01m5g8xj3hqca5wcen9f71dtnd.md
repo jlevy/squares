@@ -5,7 +5,7 @@ title: "Import franciscouzo: 1285 upper bounds at 328–9913 (#715)"
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:22:12.593Z
-updated_at: 2026-10-22T00:55:25.968Z
+updated_at: 2026-10-22T01:42:34.969Z
 started_at: 2026-10-21T22:22:13.353Z
 ---
 Issue #715 (https://github.com/jlevy/squares/issues/715), opened 2026-10-21T20:55:57Z by Francisco Couzo as a follow-up to #678: 1285 strict improvements over the strongest retained public comparison (173 below 1024, 1112 above; first request above 1024), source commit 6b7391de820fd01f3ff6984e4a081e8c86845588 (upper_bounds.json, certified_bounds.json, certificates/best/manifest.json, public_bounds.json). Includes 343 at 18.977575126267, below #702's row registered today. Stage 0 owner; stage 1 triage (read-only, priced) first.
@@ -158,4 +158,18 @@ with its id. Do not append the placeholder as written: a blocked_on line that na
 issue, pull request or bead reads as no wait. -->
 
 2026-10-22 00:50 coord-intake-1021b: 6b7391de is public (Couzo, #678 23:26Z). Acknowledgement posted https://github.com/jlevy/squares/issues/715#issuecomment-6329883508 after #716 entered #715 at triage pending (deploy run 39700175588, check_published_site 4784/4784). It promises an exact check of the 8 October decimal poses at 335. Import of rows <= 1024 under way on claude/intake-2026-10-22 (c-lane-715-import), which also records the acknowledgement and the #678 follow-up. Rows above 1024 wait on the owner (think-f2io).
+blocked_on: think-f2io
+2026-10-22 c-lane-715-import (stages 2 and 3 at or below 1024; branch claude/intake-2026-10-22, draft PR https://github.com/jlevy/squares/pull/717, pushed head ad9fd50ac).
+- Source: 6b7391de, d09edd7 and 5a299b4 were pushed together at 2026-10-21T22:56:37Z (repository pushed_at), after the issue (20:55:57Z); master stood at 7b6c87e from 2026-10-18T23:23:42Z. Retrieved 00:13Z on 22 October.
+- At each of the 173 counts <= 1024 the pin has an explicit certificates/nN.cert of n squares (header side rounds up to the print, equals certified_bounds.json); the index calls 59 of them L-border constructions and 11 deletions, written out in full. So D2 does not arise at or below 1024.
+- devtools.couzo_715_replay publications (all 1,567 .cert blobs reachable from 7b6c87e plus the index there, exact): 109 recorded (the triage's 109, below every earlier public side by >= 2.90e-7); 30 held, first committed at 5a299b4, 2.37e-23 to 3.18e-23 below the 4e4c8ce certificate of the same count with the same print (decision bead think-fwa9); 34 restated (32 byte-identical, 743 and 985 equal side). The triage's 64 "byte-for-byte" rows were read at 7b6c87e; at the pin 30 were re-certified.
+- Packet couzo-issue715-2026-10-21: 139 certificates retained (13.7 MB, 4.42 MB zlib); 220 files pinned (8 restated certs and the checker+licence via identical_to).
+- Replay: couzo_678_replay's filtered decision reused unchanged; 139/139 verified, 834/834 controls refused by both, 115.8 positive CPU s, 570 s wall on 2 workers; check --replay 18 m 15 s, OK. All-pairs kernel at 343 and 996: 554,163 pairs, 96.2 CPU s, equal least gaps and clearances. Goebel: all 139 below, least margin 2.17e-2 at 860.
+- Ledger upper-bounds-20261022, starts at d588ad98 (the last main before #678's rows; everything since at these counts is #678/#686/#702, walked as reports): #715 109 recorded, 33 not recorded, 31 undecided (30 held + 338 vs the identical certificate read by print).
+- Records: source couzo-issue715-2026-10-21 + 109 rows; superseded 50 #686, 29 487b058, 26 #678, #702 at 343 (by 1.0736e-4); grid at 509, 860, 931. E-couzo-715-certificate-report; bibliography [Couzo issue 715 2026-10-21]; resources row; result-requests #715 triage done (173 per-count results + above-1024 queued, blocked on think-f2io); the coordinator's #715 acknowledgement and #678 follow-up records applied (check_requests --github 0 differences). test_upper_bound_reports_715 (9 tests).
+- Release: DATA_REVISION 56dc2454; survey no-public-change (42 files identical); site v0.8.18 cut (PUBLICATION_REVISION 9da60d47); explainer no-public-change (54 files identical), keeps v0.4.14.
+- Above 1024 for think-f2io: 1112 rows rest on 98 certificates under certificates/best/ (51.2 MB checkout, 9.1 MB zlib); 85 own, 171 deletions, 856 L-border constructions (621 with deletion); explicit files at only 90 counts. So D2 is live above 1024 and D4 is about 9 MB, not 25-89.
+- 335 decimal-pose check (D3, promised in the acknowledgement): child bead think-rx26, not run (decimal angles need an interval or algebraic route).
+- Found in passing: check_bead_tree fails on think-lrvl (open) under the closed #668 import bead; pre-existing, it fails every --records run.
+Next: the reachable tests alone (the push tier hit its 900 s ceiling), hosted CI on #717, the coordinator's merge; after merge, the stage 7 reply for #715 (rows recorded, 30 held, above 1024 waiting).
 blocked_on: think-f2io
