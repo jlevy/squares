@@ -48,10 +48,10 @@ REVIEWS = tuple(record.slug for record in PAPERS[1:])
 #: Each review's source, as the first two lines of its credits name it.
 SOURCES = {
     THRESHOLD: (
-        "Overbeck",
+        "Marc Leonard Overbeck",
         "https://github.com/Kleddamag/11-squares-certified-bound",
     ),
-    REVIEW: ("Ahmed", "https://github.com/Queuingtheorydotcom/11SquaresOptimal"),
+    REVIEW: ("Manasseh Ahmed", "https://github.com/Queuingtheorydotcom/11SquaresOptimal"),
 }
 #: Each paper's own version line and dates line, from `sqpack.release`.
 VERSIONS = {
@@ -213,10 +213,10 @@ def test_each_papers_credits_follow_the_owners_form(
         lines = structure.credits
         strip = series_length if paper_record(slug).part is not None else 0
         oversight, agents, version, dates = lines[-4 - strip : -strip or None]
-        assert oversight.text == "Human oversight: Levy"
-        assert oversight.bold == ("Levy",)
+        assert oversight.text == "Human oversight: Joshua Levy"
+        assert oversight.bold == ("Joshua Levy",)
         assert oversight.links == (
-            ("Levy", render_overview.canonical_url("profiles/joshua-levy.html")),
+            ("Joshua Levy", render_overview.canonical_url("profiles/joshua-levy.html")),
         )
         assert agents.text.startswith("Agents: ")
         assert agents.bold == tuple(
@@ -312,7 +312,8 @@ def test_the_tool_prints_the_audit_of_a_built_site(
 
     # A paper whose credits set a name plain is a form difference, and the tool says so.
     html = renders[REVIEW][0]
-    broken = html.replace("<strong>Ahmed</strong>", "Ahmed")
+    broken = html.replace("<strong>Manasseh Ahmed</strong>", "Manasseh Ahmed")
+    assert broken != html
     (tmp_path / paper_path(REVIEW)).write_text(broken, encoding="utf-8")
     assert paper_structure.main([str(tmp_path)]) == 1
     assert "credits: names bold" in capsys.readouterr().err

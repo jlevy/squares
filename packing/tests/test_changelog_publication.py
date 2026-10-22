@@ -82,7 +82,7 @@ def test_news_links_named_contributors_directly_to_their_profiles(
     assert "wand125\N{RIGHT SINGLE QUOTATION MARK}s" not in history
     # The names stay plain links: the News container declares its profile links plain
     # once, and every one of them lies inside it.
-    plain = history.index('<div class="site-news sans-text" data-news data-contributor-plain>')
+    plain = history.index('<div class="site-news" data-news data-contributor-plain>')
     assert all(
         history.index(f'<a href="profiles/{identifier}.html">') > plain
         for _name, identifier in published_profiles
@@ -191,7 +191,8 @@ def test_news_cards_keep_the_actual_article_and_structured_math_once(
     assert 'href="https://example.com/proof"' in rendered
     formulas = site_math.formula_sources(rendered)
     assert [item.source for item in formulas].count(formula) == 1
-    assert all(item.profile == "sans" for item in formulas)
+    assert next(item for item in formulas if item.source == formula).profile == "prose"
+    assert all(item.profile == "sans" for item in formulas if item.source != formula)
 
 
 def test_publication_audit_refuses_lost_archives_or_reintroduced_maintenance(

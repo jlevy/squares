@@ -1,0 +1,33 @@
+/* GitHub's brand mark (Octicons, MIT) and Lucide 1.17.0 circle-dot / git-pull-request
+   (ISC), retained once under overview/icons and shared with the inline references.
+   Empty generated content is decorative; the anchor's text and markup stay intact. */
+:root {
+  --site-github-mark: url("__SITE_GITHUB_GITHUB__");
+  --site-github-issue-mark: url("__SITE_GITHUB_ISSUE__");
+  --site-github-pull-mark: url("__SITE_GITHUB_PULL_REQUEST__");
+}
+@media screen {
+  :where(
+    a[href^="https://github.com/" i],
+    a[href^="http://github.com/" i],
+    a[href^="//github.com/" i]
+  ):not(.site-card):not(:has(svg, img))::before {
+    background-color: currentColor;
+    block-size: var(--site-icon-size, 0.85em);
+    content: "";
+    display: inline-block;
+    inline-size: var(--site-icon-size, 0.85em);
+    margin-inline-end: 0.3em;
+    mask-image: var(--site-github-mark);
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    vertical-align: calc((1cap - var(--site-icon-size, 0.85em)) / 2);
+  }
+  a[data-site-github-kind="issue"]:not(.site-card):not(:has(svg, img))::before {
+    mask-image: var(--site-github-issue-mark);
+  }
+  a[data-site-github-kind="pull-request"]:not(.site-card):not(:has(svg, img))::before {
+    mask-image: var(--site-github-pull-mark);
+  }
+}

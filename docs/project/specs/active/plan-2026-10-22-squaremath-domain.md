@@ -7,9 +7,10 @@ author: Codex, for the repository owner
 
 **Date:** 2026-10-22
 
-**Status:** Implemented on `codex/squaremath-domain`; validation is in progress.
-The owner verified domain ownership.
-Repository domain binding, DNS routing, and production cutover remain pending.
+**Status:** Source migration merged in
+[PR #727](https://github.com/jlevy/squares/pull/727). Domain ownership, DNS routing, the
+apex Pages binding, and HTTPS enforcement are complete.
+The hosted publication audit and local-browser DNS/fragment acceptance passed.
 
 **Tracking:** `think-igk4` (epic), `think-m1j6` (documentation), `think-v4ab` (site
 migration), `think-juq7` (production cutover).
@@ -107,20 +108,20 @@ canonical host.
   changelog targets (`think-v4ab`).
 - [x] Add regressions for canonical and legacy URLs, rejected external hosts, and
   changelog validation.
-- [ ] Build the complete site, inspect local output, and run the required validation
+- [x] Build the complete site, inspect local output, and run the required validation
   tier and PR checks.
-- [ ] Review the migration diff, including PDF repository-link preservation.
+- [x] Review the migration diff, including PDF repository-link preservation.
 
 ### Phase 2: Coordinate production cutover
 
-- [ ] Record current DNS, Pages configuration, and the last healthy deployment.
+- [x] Record current DNS, Pages configuration, and the last healthy deployment.
 - [x] Complete GitHub account domain verification while retaining its TXT record.
-- [ ] Coordinate the reviewed deployment with custom-domain configuration and DNS
+- [x] Coordinate the reviewed deployment with custom-domain configuration and DNS
   changes (`think-juq7`).
-- [ ] Verify DNS, certificate provisioning, HTTPS enforcement, apex and www behavior,
+- [x] Verify DNS, certificate provisioning, HTTPS enforcement, apex and www behavior,
   and old-host deep redirects.
-- [ ] Run the publication checker against the deployed commit and canonical domain.
-- [ ] Record deployment run, revision, redirect evidence, and any remaining follow-up in
+- [x] Run the publication checker against the deployed commit and canonical domain.
+- [x] Record deployment run, revision, redirect evidence, and any remaining follow-up in
   this spec; update the guide’s deployment status.
 
 The source migration is one reviewable PR. DNS and repository settings are operational
@@ -149,13 +150,45 @@ Preserve mail and unrelated DNS records.
 Use the guide’s recovery procedure if the site or deep links fail; do not delete
 ownership verification as a shortcut.
 
-## Open Operational Items
+## Cutover Evidence: 2026-10-22
 
-- Configure the pending Pages domain binding and DNS routing while retaining the
-  existing ownership verification TXT record.
-- Capture live old-host redirect behavior after binding the domain.
-- Confirm TLS issuance and deployment verification before declaring the migration
-  complete.
+PR #727 merged at `78dc902c19d814fa021432f66ed476b0fb1a4266` after senior reviews and 31
+applicable checks passed.
+The owner retained verification TXT and mail records and saved the four GitHub Pages A
+records plus the `www` CNAME. Authoritative DNS and Google public DNS returned the
+expected records.
+
+GitHub approved a certificate covering both hosts, expiring 2027-01-20. Pages now
+reports `https_enforced: true` and `https://squaremath.org/` as its public URL. Normal
+TLS checks against the authoritative serving address succeeded: apex HTTP returns 301 to
+HTTPS with the results query retained, and `www` HTTPS returns 301 to the bare host.
+A deep profile returns 200. Some cached old-host responses still point first to HTTP;
+the apex then upgrades them to HTTPS while retaining the path and query.
+
+[Production workflow](https://github.com/jlevy/squares/actions/runs/39825552463) attempt
+1 published before the certificate existed, so the HTTPS-only live audit correctly
+refused its HTTP deployment URL. Attempt 2 repeated artifact assembly and produced two
+`github-pages` artifacts, preventing deployment.
+The original artifact was downloaded and verified before its duplicate was removed.
+Attempt 3 redeployed successfully; its hosted audit passed all 5,459 checks at 18:39
+UTC. The separate post-merge packing workflow passed.
+Do not weaken the HTTPS audit or repeat artifact assembly merely to refresh an existing
+deployment URL.
+
+Ordinary local DNS access subsequently returned 200 over HTTPS. The built-in browser
+followed `https://jlevy.github.io/squares/results.html?s=5#all-results` to
+`https://squaremath.org/results.html?s=5#all-results`: the S5 filter displayed ten
+results and the Browse Results heading landed below the navigation bar.
+This verifies both query behavior and browser fragment retention.
+The cutover monitor is disabled.
+
+## Follow-up
+
+The migration acceptance is complete.
+Browser-install timeout hardening remains tracked separately in `think-fqhc`; it does
+not block domain operation.
+Future deployment changes follow the lasting guide rather than repeating the one-time
+domain cutover.
 
 ## References
 

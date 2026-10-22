@@ -64,6 +64,7 @@ from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, su
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES, recent_contributions_by_case
 from devtools.site_icons import account_icon, github_reference_icon
+from devtools.site_popovers import popover_controls
 
 # The curated source tuples remain exported here for recorded evidence locators;
 # site_resources owns their shared homepage/profile projection.
@@ -471,8 +472,7 @@ def card(
         f'<span class="site-card-note">{note}</span></button>'
         f'<div class="site-popover" id="{_esc(target)}" popover '
         f'data-go="{kind}">'
-        f'<button type="button" class="site-popover-close" popovertarget="{_esc(target)}" '
-        'popovertargetaction="hide" aria-label="Close">\u00d7</button>'
+        f"{popover_controls(target, destination=(href, action), sprite=True)}"
         f'<span class="site-card-label">{_esc(label)}</span>'
         f'<p class="site-popover-value"{face}>{value}</p>{body}'
         f'<p class="site-popover-actions"><a class="site-popover-action" href="{_esc(href)}" '
@@ -564,6 +564,7 @@ def row_detail(
             f"<noscript>{fallback}</noscript>" if fallback else ""
         )
     fetched = f' data-row-pop-src="{_esc(source)}"' if source else ""
+    controls = popover_controls(target, destination=action, sprite=True)
     target = _esc(target)
     attributes = f'data-row-popover="{target}" aria-label="{_esc(name)}"'
     button = (
@@ -581,8 +582,7 @@ def row_detail(
     popover = (
         f'<div class="site-popover site-row-pop" id="{target}" popover role="dialog" '
         f'aria-labelledby="{target}-title">'
-        f'<button type="button" class="site-popover-close" popovertarget="{target}" '
-        'popovertargetaction="hide" aria-label="Close">\u00d7</button>'
+        f"{controls}"
         f'<span class="site-card-label">{_esc(label)}</span>'
         f'<p class="site-popover-value"{headline_math_face(title)} id="{target}-title">'
         f"{title}</p>"
@@ -2605,7 +2605,7 @@ def _tally_records() -> tuple[tuple[Mapping[str, Any], ...], dict[str, tuple[int
 
 
 def project_tally(url: str, tally: ProjectTally) -> str:
-    """The shared result/credit components scoped to this project's explicit sources."""
+    """Records, Results and Credits scoped to this project's explicit sources."""
     slug = project_slug(url)
     records, measures = _tally_records()
     authors = next(
@@ -2625,12 +2625,12 @@ def project_tally(url: str, tally: ProjectTally) -> str:
     records_markup = record_tally(tally.results, measures, blank_zero=True)
     return (
         '<span class="site-credit-tally">'
+        + (records_markup + " · " if records_markup else "")
         + render_tally(
             tally,
             total_href=results_filter_url(slug) if tally.results else None,
             level_hrefs={level: results_filter_url(slug, level) for level, _ in tally.counts},
         )
-        + (" · " + records_markup if records_markup else "")
         + credit_markup
         + "</span>"
     )
@@ -2646,12 +2646,14 @@ def project_author(author: str, *, current_profile: str | None = None) -> str:
     if len(matches) == 1 and key in index.personal_labels[matches[0]]:
         identifier = matches[0]
         if identifier == current_profile:
-            return "By " + _esc(index.people[identifier].label)
+            return "By " + _esc(index.people[identifier].full_name)
         return (
-            f'By <a href="profiles/{identifier}.html">'
-            f"{_esc(index.people[identifier].label)}</a>"
+            f'By <a href="profiles/{identifier}.html" data-profile-name="full">'
+            f"{_esc(index.people[identifier].full_name)}</a>"
         )
-    return "By " + link_prose(_esc(author), index=index, current_profile=current_profile)
+    return "By " + link_prose(
+        _esc(author), index=index, current_profile=current_profile, full_names=True
+    )
 
 
 def resource_byline(resource: Resource, *, current_profile: str | None = None) -> str:
@@ -2660,9 +2662,12 @@ def resource_byline(resource: Resource, *, current_profile: str | None = None) -
         return project_author(resource.byline, current_profile=current_profile)
     names = public_index().people
     labels = [
-        _esc(names[identifier].label)
+        _esc(names[identifier].full_name)
         if identifier == current_profile
-        else f'<a href="profiles/{identifier}.html">{_esc(names[identifier].label)}</a>'
+        else (
+            f'<a href="profiles/{identifier}.html" data-profile-name="full">'
+            f"{_esc(names[identifier].full_name)}</a>"
+        )
         for identifier in resource.profile_ids
     ]
     return "Contributors: " + ", ".join(labels)
@@ -2683,7 +2688,9 @@ def resource_card(
         url,
         "Repository" if resource.kind == "repository" else "Website",
         _esc(resource.title) if resource.kind == "repository" else tex_bounds(resource.title),
-        link_prose(tex_bounds(resource.description), current_profile=current_profile),
+        link_prose(
+            tex_bounds(resource.description), current_profile=current_profile, full_names=True
+        ),
         size=SECTION_CARD_SIZES["projects"],
         foot=f'<span class="site-project-tally">{project_tally(url, tally)}</span>',
         byline=(

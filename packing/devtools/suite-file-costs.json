@@ -641,12 +641,14 @@
     "packing/tests/test_site_documents.py": 71.296,
     "packing/tests/test_site_drawing_hover.py": 8.782,
     "packing/tests/test_site_forwarders.py": 1.613,
+    "packing/tests/test_site_github_links.py": 14.146,
     "packing/tests/test_site_glyphs.py": 0.756,
     "packing/tests/test_site_head.py": 72.725,
     "packing/tests/test_site_hover_motion.py": 0.894,
     "packing/tests/test_site_ladders.py": 6.303,
     "packing/tests/test_site_math.py": 0.838,
     "packing/tests/test_site_merge.py": 0.631,
+    "packing/tests/test_site_popover_controls.py": 18.784,
     "packing/tests/test_site_preview_checks.py": 0.025,
     "packing/tests/test_site_project_tallies.py": 9.075,
     "packing/tests/test_site_scripts.py": 0.008,
@@ -1177,6 +1179,21 @@
           "report": "packing/devtools/suite-file-cost-admissions/beyond-horizon-replay-2026-10-22.json",
           "provenance": {},
           "tests": 9
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_site_github_links.py",
+        "packing/tests/test_site_popover_controls.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/presentation-2026-10-22/popover-github-links.json",
+          "provenance": {},
+          "tests": 16
         }
       ]
     },
