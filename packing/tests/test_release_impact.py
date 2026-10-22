@@ -1,4 +1,9 @@
-"""The impact gate selects publication inputs and requires fresh owning dispositions."""
+"""The impact gate selects publication inputs and requires fresh owning dispositions.
+
+Site editions are retired (the owner, 2026-10-22; think-wdqo): nothing the site reads
+selects it, and its frozen record, `PUBLICATION_HISTORY` and `PUBLICATION_REVISION`,
+refuses every edit.
+"""
 
 # These contracts exercise the validation command's internal step boundary.
 # pyright: reportPrivateUsage=false
@@ -115,14 +120,16 @@ def test_hosted_workflow_pins_release_base_to_pull_request_event_commit() -> Non
     )
 
 
-def test_real_producer_helper_closure_covers_overview_content_without_workflow_tests() -> None:
+def test_real_producer_helper_closure_leaves_out_the_site_and_workflow_tests() -> None:
     inputs = gate.producer_inputs()
-    assert "packing/devtools/overview_sections.py" in inputs["site"]
+    assert gate.SITE not in inputs
+    assert "packing/devtools/overview_sections.py" in inputs[PAPER]
+    assert not any("development.md" in paths for paths in inputs.values())
     assert not any("packing/tests/test_changelog.py" in paths for paths in inputs.values())
     assert "packing/devtools/check_n11_optimality_d4.py" in inputs[OTHER]
 
 
-def test_actual_overview_section_helper_delta_selects_site(
+def test_actual_overview_section_helper_delta_selects_the_papers_and_not_the_site(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     live_inputs = gate.producer_inputs()
@@ -131,8 +138,9 @@ def test_actual_overview_section_helper_delta_selects_site(
     helper = "packing/devtools/overview_sections.py"
     repo.write(helper, "PUBLIC_CONTENT = 'A changed Results legend'\n")
     report = repo.inspect()
-    assert helper in report.candidate_paths["site"]
-    assert any("site" in error for error in report.errors)
+    assert gate.SITE not in report.candidate_paths
+    assert helper in report.candidate_paths[PAPER]
+    assert not any(error.startswith("site:") for error in report.errors)
 
 
 class Repository:
@@ -296,20 +304,82 @@ def test_paper_body_requires_its_own_successor(
     assert report.candidate_paths == {PAPER: (paper_path,)}
     assert report.baseline_versions[PAPER] == "v1.0.0"
     assert any(PAPER in error for error in report.errors)
-    repo.bump("site")
+    repo.bump("infographics")
     assert any(PAPER in error for error in repo.inspect().errors)
     repo.bump(PAPER)
     assert repo.inspect().errors == ()
 
 
-def test_shared_typography_selects_every_declared_owner(
+def test_shared_typography_selects_every_declared_owner_but_the_site(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     repo = Repository(tmp_path, monkeypatch)
     repo.write("shared.css", "body { color: blue; }\n")
     report = repo.inspect()
-    assert set(report.candidate_paths) == {"site", *PAPERS}
-    assert len(report.errors) == 1 + len(PAPERS)
+    assert set(report.candidate_paths) == set(PAPERS)
+    assert len(report.errors) == len(PAPERS)
+
+
+@pytest.mark.parametrize(
+    ("path", "text"),
+    [
+        ("about.md", "The About page gains a section.\n"),
+        (
+            gate.CHANGELOG_PATH,
+            yaml.safe_dump(
+                {"entries": [{"id": "new", "summary": "A new News entry"}], "deliveries": []}
+            ),
+        ),
+        ("packing/campaign/result-import.md", "| `S4` | A reworded News meaning |\n"),
+    ],
+)
+def test_a_change_only_the_site_reads_needs_no_disposition(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, path: str, text: str
+) -> None:
+    """The site deploys continuously from main (the owner, 2026-10-22; think-wdqo), so a
+    change it alone reads selects no component: no site cut and no no-change record."""
+    repo = Repository(tmp_path, monkeypatch)
+    repo.inputs["site"] = (*repo.inputs["site"], "packing/campaign/result-import.md")
+    repo.write(path, text)
+    report = repo.inspect()
+    assert report.candidate_paths == {}
+    assert report.errors == ()
+
+
+@pytest.mark.parametrize("edit", ["cut", "redate", "revision", "decision"])
+def test_the_frozen_site_record_refuses_every_edit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, edit: str
+) -> None:
+    """`PUBLICATION_HISTORY` and `PUBLICATION_REVISION` are kept as history: a new site
+    edition, a redated one, a moved link commit and a fresh site decision are refused,
+    with the message `cut_release --component site` gives, which names think-wdqo."""
+    repo = Repository(tmp_path, monkeypatch)
+    repo.write("about.md", "A site change that once took a site cut.\n")
+    if edit == "cut":
+        repo.bump("site")
+    elif edit == "redate":
+        repo.histories["site"] = (
+            repo.histories["site"][0]._replace(first_published="October 2, 2026"),
+        )
+        repo.write_release()
+    elif edit == "revision":
+        repo.write_release(suffix="PUBLICATION_REVISION = 'a-moved-link-commit'\n")
+    else:
+        repo.decisions.append(
+            release.ReleaseImpactDecision("site", "v1.0.0", "v1.0.1", "patch", "A site cut")
+        )
+        repo.write_release()
+    field = "PUBLICATION_REVISION" if edit == "revision" else "PUBLICATION_HISTORY"
+    for report in (repo.inspect(), gate.inspect(repo=repo.root, base=repo.base)):
+        assert report.candidate_paths == {}
+        refusals = [error for error in report.errors if gate.SITE_EDITIONS_RETIRED in error]
+        assert refusals, report.errors
+        assert all(error.startswith("site: ") for error in refusals)
+        assert "think-wdqo" in gate.SITE_EDITIONS_RETIRED
+        if edit == "decision":
+            assert any("fresh release-impact decision" in error for error in refusals)
+        else:
+            assert any(f"{field} edited" in error for error in refusals)
 
 
 def test_fresh_about_only_review_exempts_papers_on_broad_inputs(
@@ -319,7 +389,6 @@ def test_fresh_about_only_review_exempts_papers_on_broad_inputs(
     helper = "packing/src/sqpack/helper.py"
     repo.write("about.md", "The About page gains a changelog.\n")
     repo.write(helper, "def helper():\n    return 2\n")
-    repo.bump("site")
     repo.exempt(
         PAPERS,
         (helper,),
@@ -352,10 +421,7 @@ def test_pins_comments_audit_metadata_and_tests_create_no_obligation(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     repo = Repository(tmp_path, monkeypatch)
-    repo.write_release(
-        suffix="# A pipeline comment.\nDATA_REVISION = 'new-pin'\n"
-        "PUBLICATION_REVISION = 'new-pin'\n"
-    )
+    repo.write_release(suffix="# A pipeline comment.\nDATA_REVISION = 'new-pin'\n")
     repo.write(
         "packing/src/sqpack/helper.py",
         '"""Reworded docstring."""\n# New comment\ndef helper():\n    return 1\n',
@@ -419,26 +485,27 @@ def test_dependent_base_requires_own_successor_and_keeps_uncovered_input_red(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     repo = Repository(tmp_path, monkeypatch)
-    repo.write("about.md", "A parent-layer public correction.\n")
-    repo.bump("site")
-    parent = repo.commit("parent site successor")
+    paper_path = repo.inputs[PAPER][0]
+    repo.write(paper_path, "A parent-layer public correction.\n")
+    repo.bump(PAPER)
+    parent = repo.commit("parent paper successor")
     repo.git("update-ref", "refs/remotes/origin/parent", parent)
-    repo.write("about.md", "The parent correction and this layer's public correction.\n")
-    repo.bump("site")
-    repo.commit("own site successor")
+    repo.write(paper_path, "The parent correction and this layer's public correction.\n")
+    repo.bump(PAPER)
+    repo.commit("own paper successor")
 
     # Main sees two cuts; this layer must still own the immediate parent-to-child cut.
-    assert any("site" in error for error in repo.inspect().errors)
+    assert any(PAPER in error for error in repo.inspect().errors)
     own = gate.inspect(repo=repo.root, baseline_ref="origin/parent")
     assert own.baseline == parent
-    assert own.baseline_versions["site"] == "v1.0.1"
+    assert own.baseline_versions[PAPER] == "v1.0.1"
     assert own.errors == ()
 
-    paper_path = repo.inputs[PAPER][0]
-    repo.write(paper_path, "An uncovered public paper change in this layer.\n")
+    other_path = repo.inputs[OTHER][0]
+    repo.write(other_path, "An uncovered public paper change in this layer.\n")
     uncovered = gate.inspect(repo=repo.root, baseline_ref="origin/parent")
-    assert paper_path in uncovered.candidate_paths[PAPER]
-    assert any(PAPER in error for error in uncovered.errors)
+    assert other_path in uncovered.candidate_paths[OTHER]
+    assert any(OTHER in error for error in uncovered.errors)
 
 
 def test_atomic_delivery_accepts_complete_fresh_adjacent_cuts(
@@ -447,8 +514,8 @@ def test_atomic_delivery_accepts_complete_fresh_adjacent_cuts(
     repo = Repository(tmp_path, monkeypatch)
     repo.git("checkout", "-qb", "fixture-stack")
     for layer in ("first", "second"):
-        repo.write("about.md", f"The {layer} layer's public correction.\n")
-        repo.bump("site")
+        repo.write(repo.inputs[PAPER][0], f"The {layer} layer's public correction.\n")
+        repo.bump(PAPER)
         repo.commit(f"{layer} layer")
     repo.git("checkout", "-qb", "fixture-main", repo.base)
     repo.git(
@@ -465,28 +532,28 @@ def test_atomic_delivery_accepts_complete_fresh_adjacent_cuts(
 
     report = gate.inspect(repo=repo.root, base="HEAD^1")
     assert report.baseline == repo.base
-    assert report.baseline_versions["site"] == "v1.0.0"
+    assert report.baseline_versions[PAPER] == "v1.0.0"
     assert report.errors == ()
 
 
 @pytest.mark.parametrize(
     ("damage", "expected"),
     [
-        ("missing-first", "site: candidate public inputs"),
-        ("missing-last", "site: candidate public inputs"),
+        ("missing-first", f"{PAPER}: candidate public inputs"),
+        ("missing-last", f"{PAPER}: candidate public inputs"),
         ("arithmetic", "requires its minor successor v1.1.0"),
         ("backward", "requires its patch successor v1.0.2"),
-        ("lost-baseline", "site: delivery baseline has no retained edition"),
-        ("unchanged-edition", "site: candidate public inputs"),
+        ("lost-baseline", f"{PAPER}: delivery baseline has no retained edition"),
+        ("unchanged-edition", f"{PAPER}: candidate public inputs"),
     ],
 )
 def test_delivery_rejects_incomplete_or_invalid_retained_chains(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, damage: str, expected: str
 ) -> None:
     repo = Repository(tmp_path, monkeypatch)
-    repo.write("about.md", "Two public corrections in one delivery.\n")
-    repo.bump("site")
-    repo.bump("site")
+    repo.write(repo.inputs[PAPER][0], "Two public corrections in one delivery.\n")
+    repo.bump(PAPER)
+    repo.bump(PAPER)
     if damage == "missing-first":
         repo.decisions.pop(0)
     elif damage == "missing-last":
@@ -494,15 +561,15 @@ def test_delivery_rejects_incomplete_or_invalid_retained_chains(
     elif damage == "arithmetic":
         repo.decisions[-1] = repo.decisions[-1]._replace(impact="minor")
     elif damage == "backward":
-        repo.histories["site"] = (
-            repo.histories["site"][0]._replace(version="v0.9.0"),
-            *repo.histories["site"][1:],
+        repo.histories[PAPER] = (
+            repo.histories[PAPER][0]._replace(version="v0.9.0"),
+            *repo.histories[PAPER][1:],
         )
         repo.decisions[-1] = repo.decisions[-1]._replace(version="v0.9.0")
     elif damage == "lost-baseline":
-        repo.histories["site"] = repo.histories["site"][:-1]
+        repo.histories[PAPER] = repo.histories[PAPER][:-1]
     else:
-        repo.histories["site"] = repo.histories["site"][-1:]
+        repo.histories[PAPER] = repo.histories[PAPER][-1:]
         repo.decisions.clear()
     repo.write_release()
 
@@ -514,18 +581,18 @@ def test_delivery_cannot_reuse_a_decision_already_present_at_its_baseline(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     repo = Repository(tmp_path, monkeypatch)
-    repo.bump("site")
-    repo.bump("site")
-    repo.histories["site"] = repo.histories["site"][-1:]
+    repo.bump(PAPER)
+    repo.bump(PAPER)
+    repo.histories[PAPER] = repo.histories[PAPER][-1:]
     repo.write_release()
     baseline = repo.commit("predeclared decisions without their editions or changes")
     repo.decisions.clear()
-    repo.write("about.md", "The later public corrections need fresh decisions.\n")
-    repo.bump("site")
-    repo.bump("site")
+    repo.write(repo.inputs[PAPER][0], "The later public corrections need fresh decisions.\n")
+    repo.bump(PAPER)
+    repo.bump(PAPER)
 
     report = gate.inspect(repo=repo.root, base=baseline)
-    assert any("site: candidate public inputs" in error for error in report.errors)
+    assert any(f"{PAPER}: candidate public inputs" in error for error in report.errors)
 
 
 def test_retained_composite_export_has_only_its_infographic_owner(
@@ -547,10 +614,26 @@ def test_visible_release_dates_and_status_select_the_owning_component(
     report = repo.inspect()
     assert report.candidate_paths == {PAPER: (gate.RELEASE_PATH,)}
     assert any(PAPER in error for error in report.errors)
-    repo.write_release(suffix="PUBLICATION_STATUS = 'Draft'\n")
+    repo.write_release(suffix="OPTIMALITY_REVIEW_STATUS = 'Final'\n")
     report = repo.inspect()
-    assert report.candidate_paths == {"site": (gate.RELEASE_PATH,)}
-    assert any("site" in error for error in report.errors)
+    assert report.candidate_paths == {OTHER: (gate.RELEASE_PATH,)}
+    assert any(OTHER in error for error in report.errors)
+
+
+@pytest.mark.parametrize(
+    "field",
+    ["PUBLICATION_STATUS", "PUBLICATION_EDITION", "PUBLICATION_DATE", "FIRST_PUBLISHED"],
+)
+def test_the_sites_published_release_fields_select_no_owner(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, field: str
+) -> None:
+    """Outside its frozen record, the site's release metadata selects nothing: it is not
+    a release implementation change either, so no other component is asked for a review."""
+    repo = Repository(tmp_path, monkeypatch)
+    repo.write_release(suffix=f"{field} = 'A changed site value'\n")
+    report = repo.inspect()
+    assert report.candidate_paths == {}
+    assert report.errors == ()
 
 
 def test_no_change_review_requires_outputs_owned_by_each_claimed_component(
@@ -575,7 +658,6 @@ def test_no_change_review_requires_outputs_owned_by_each_claimed_component(
     [
         ("OPTIMALITY_PROOF_PUBLISHED", OTHER),
         ("THRESHOLD_PROOF_PUBLISHED", "paper:n11-threshold-bound-review"),
-        ("PUBLICATION_EDITION", "site"),
         ("INFOGRAPHIC_EDITION", "infographics"),
     ],
 )
@@ -599,7 +681,7 @@ def test_release_edition_implementation_changes_select_every_owner_including_inf
     repo = Repository(tmp_path, monkeypatch)
     repo.write_release(suffix='def edition_at(revision):\n    return "Edition " + revision\n')
     report = repo.inspect()
-    assert set(report.candidate_paths) == {"site", "infographics", *PAPERS}
+    assert set(report.candidate_paths) == {"infographics", *PAPERS}
     assert all(paths == (gate.RELEASE_PATH,) for paths in report.candidate_paths.values())
     assert len(report.errors) == len(report.candidate_paths)
 
@@ -644,73 +726,3 @@ def test_disposable_git_fixtures_ignore_inherited_repository_and_hook_configurat
         if path.is_file()
     }
     assert after == before
-
-
-#: A runbook with the News label rubric among its process text, as
-#: `packing/campaign/result-import.md` carries it.
-RUBRIC = (
-    "# Runbook\n\nIntake process.\n\n### Label the PR and Prepare News\n\n"
-    "| Label | Delivered contribution | Short | Examples |\n| --- | --- | --- | --- |\n"
-    + "".join(
-        f"| `S{n}` | Contribution {n} | Meaning {n} | Example {n} |\n" for n in range(1, 6)
-    )
-    + "\nScore conservatively.\n\n## The Next Stage\n\nMore process.\n"
-)
-
-
-def test_only_the_news_rubric_rows_of_the_intake_runbook_are_a_site_candidate(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """The site reads one thing from the intake runbook, each S label's `Short` meaning
-    (`render_changelog.news_rubric_meanings`), so a process edit anywhere else in it,
-    the rubric's other columns included, owes the site no release decision; an edit to a
-    `Short` meaning does, and so does a rubric the site can no longer read."""
-    repo = Repository(tmp_path, monkeypatch)
-    repo.inputs["site"] = (*repo.inputs["site"], gate.NEWS_RUBRIC_PATH)
-    repo.write(gate.NEWS_RUBRIC_PATH, RUBRIC)
-    repo.base = repo.commit("rubric baseline")
-    repo.git("update-ref", "refs/remotes/origin/main", repo.base)
-
-    repo.write(
-        gate.NEWS_RUBRIC_PATH,
-        RUBRIC.replace("More process.", "Reworded process.")
-        .replace("Contribution 3", "A reworded anchor")
-        .replace("Score conservatively.", "Score every PR conservatively."),
-    )
-    report = repo.inspect()
-    assert report.candidate_paths == {}
-    assert report.errors == ()
-
-    repo.write(gate.NEWS_RUBRIC_PATH, RUBRIC.replace("Meaning 4", "A new short meaning"))
-    report = repo.inspect()
-    assert set(report.candidate_paths["site"]) == {gate.NEWS_RUBRIC_PATH}
-    assert any("site" in error for error in report.errors)
-
-    without_short = "".join(
-        line.replace(" Short |", "").replace(" --- | --- | --- | --- |", " --- | --- | --- |")
-        for line in RUBRIC.splitlines(keepends=True)
-        if not line.startswith("| `S")
-    ) + "".join(f"| `S{n}` | Contribution {n} | Example {n} |\n" for n in range(1, 6))
-    repo.write(gate.NEWS_RUBRIC_PATH, without_short)
-    report = repo.inspect()
-    assert set(report.candidate_paths["site"]) == {gate.NEWS_RUBRIC_PATH}
-
-
-def test_a_second_unit_declaring_the_intake_runbook_compares_its_bytes(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """The rubric comparison holds for the site alone. Once another unit declares the
-    runbook too, nothing says what that unit reads of it, so a process edit outside the
-    rubric is a candidate for every owner, the site included."""
-    repo = Repository(tmp_path, monkeypatch)
-    repo.inputs["site"] = (*repo.inputs["site"], gate.NEWS_RUBRIC_PATH)
-    repo.inputs[PAPER] = (*repo.inputs[PAPER], gate.NEWS_RUBRIC_PATH)
-    repo.write(gate.NEWS_RUBRIC_PATH, RUBRIC)
-    repo.base = repo.commit("rubric baseline")
-    repo.git("update-ref", "refs/remotes/origin/main", repo.base)
-    repo.write(gate.NEWS_RUBRIC_PATH, RUBRIC.replace("More process.", "Reworded process."))
-    report = repo.inspect()
-    assert report.candidate_paths == {
-        PAPER: (gate.NEWS_RUBRIC_PATH,),
-        "site": (gate.NEWS_RUBRIC_PATH,),
-    }
