@@ -256,23 +256,23 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # identically. Left out, with this note and its release record, the snapshot measures
 # 229,891,287 bytes, 2,892,585 under the cap.
 # 2026-10-22, think-i903: main 7359fa8b6 read 231,655,578 bytes, 1,128,294 under the
-# unchanged 222 MiB cap, and #720's head 0b09ac278 read 232,400,158, 383,714 under it,
-# with issue 719's records (about 0.5 to 0.8 MB) behind them. Answered by option (b)
-# again: 121 entries, 599 files and 4,782,231 bytes that no worker command reads. They
-# are the regularized drawings' run evidence (each run's per-count reports, receipts
-# and `run.json`, the selections' JSON and the review galleries: 506 files, 2,912,772
-# bytes), the regularized bounds' generated views (60, 448,778), the 14 October
-# ledger's retained lane claim copies and undecided sides with the 14 and 16 October
-# comment drafts (16, 851,114), the 8 October n17 reconciliation and the 18 and 19
-# October issue and source receipts (5, 97,846), the house adoption's prior-state
-# receipts (9, 191,528), the ds7 lower-bound audit (230,276) and the 2 October
-# author-checker profile's timings and attribution (49,917). Every README and
-# `selection-*.md` stays in workers, as do each ledger's README, data files and
-# `lane-claims/README.md`, the 11 October custody receipt (`upper_bound_houses` names
-# it) and the n5 motion lab (`test_motion_lab` reads it). Each of the 50 distinct
-# commands and the five commands the worker tests run, unmutated under
-# `strace -f -e trace=%file` in a worker built at 0b09ac278 that held them, opened none
-# of the 599 except in sweeps that look for nothing here: `check_readme`'s
+# unchanged 222 MiB cap, and main 0281e7763, with #720 merged, 232,414,111, 369,761
+# under it, with issue 719's records (about 0.5 to 0.8 MB) behind them. Answered by
+# option (b) again, with four on-request tools (below) and 121 entries here: 599 files
+# and 4,782,231 bytes that no worker command reads. They are the regularized drawings'
+# run evidence (each run's per-count reports, receipts and `run.json`, the selections'
+# JSON and the review galleries: 506 files, 2,912,772 bytes), the regularized bounds'
+# generated views (60, 448,778), the 14 October ledger's retained lane claim copies and
+# undecided sides with the 14 and 16 October comment drafts (16, 851,114), the 8 October
+# n17 reconciliation and the 18 and 19 October issue and source receipts (5, 97,846),
+# the house adoption's prior-state receipts (9, 191,528), the ds7 lower-bound audit
+# (230,276) and the 2 October author-checker profile's timings and attribution (49,917).
+# Every README and `selection-*.md` stays in workers, as do each ledger's README, data
+# files and `lane-claims/README.md`, the 11 October custody receipt
+# (`upper_bound_houses` names it) and the n5 motion lab (`test_motion_lab` reads it).
+# Each of the 50 distinct commands and the five commands the worker tests run, unmutated
+# under `strace -f -e trace=%file` in a worker built at 0b09ac278 that held them, opened
+# none of the 599 except in sweeps that look for nothing here: `check_readme`'s
 # retired-identifier sweep (113 files, none holding the identifier), `validate_schemas`'
 # defect-citation sweep (the two comment drafts, neither citing a defect) and the
 # directory walks of `ledger check`, `check_generated_markdown` and
@@ -280,10 +280,12 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # against main's selector finds no registered mention and no inline or result rescue,
 # and every entry prunes something. With them and the on-request tools below left out,
 # all 174 controls fire at `-j 2`, and each of the 50 distinct commands, run unmutated
-# in a worker with them and in one without them, prints the same output apart from
-# wall times and the runner-preflight lease timestamp; the four already red are red
-# identically. Left out, with this note and its release record, the snapshot measures
-# 226,772,979 bytes, 6,010,893 under the cap.
+# in a worker with them and in one without them, prints the same output apart from wall
+# times, the progress lines they pace and the runner-preflight lease timestamp, except
+# that `check_no_embedded_js` reads 1,879 Python files rather than 1,887, the eight
+# below fewer, to the same verdict; the four already red are red identically. Left out,
+# with this note and its release record, the snapshot measures 227,473,806 bytes,
+# 5,310,066 under the cap.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
@@ -1431,16 +1433,19 @@ PRUNE |= REGULARIZATION_TOOLS
 # 2026-10-21, issue 686's import (think-9vjn), with main d640ad8fb: 8,969 bytes over the
 # cap. Its tool runs on request and only its test imports it; `--audit-snapshot` finds no
 # registered mention or rescue for either (27,204 bytes), the regularization tools' grounds.
-# 2026-10-22 (think-i903, with the note at `UNREAD_WORKER_OUTPUTS`): three more join on
-# the same grounds, with their tests (112,160 bytes): issue 715's replay, the 14 October
-# ledger's exact decision of its undecided comparisons, whose input `undecided-sides.json`
-# leaves with the note's entries, and the Couzo follow-up report's registration. Each
-# runs on request and only its own test imports it; `--audit-snapshot` finds no
-# registered mention or rescue for any of the six. In a worker only the
-# embedded-JavaScript and probe scans read them, as they read every module, and both
-# print the same without them. Not `intake_comments.py`: `ledger check` stats it as a
-# declared campaign path. Not `couzo_678_replay.py`: `upper_bound_houses` imports it and
-# `check_results` opens it in workers.
+# 2026-10-22 (think-i903, with the note at `UNREAD_WORKER_OUTPUTS`): four more join on
+# the same grounds, with their tests (170,410 bytes): issue 715's replay, the 22 October
+# backlog's beyond-horizon replay (#720), the 14 October ledger's exact decision of its
+# undecided comparisons, whose input `undecided-sides.json` leaves with the note's
+# entries, and the Couzo follow-up report's registration. Each runs on request and only
+# its own test imports it; no control, validation step or worker test runs one, and
+# `--audit-snapshot` finds no registered mention or rescue for any of the eight files.
+# In a worker they are read only where every module or text file is: by the
+# embedded-JavaScript and probe scans, `check_readme`'s retired-identifier sweep, and
+# the whole suite's unmutated collection, which stops on the worker's missing `HEAD`
+# either way. Not `intake_comments.py`: `ledger check` stats it as a declared campaign
+# path. Not `couzo_678_replay.py`: `upper_bound_houses` imports it and `check_results`
+# opens it in workers.
 ON_REQUEST_IMPORT_TOOLS = frozenset(
     ROOT / relative
     for relative in (
@@ -1448,6 +1453,8 @@ ON_REQUEST_IMPORT_TOOLS = frozenset(
         "tests/test_muglich_686_import.py",
         "devtools/couzo_715_replay.py",
         "tests/test_upper_bound_reports_715.py",
+        "devtools/beyond_horizon_replay.py",
+        "tests/test_beyond_horizon_replay.py",
         "devtools/decide_undecided_comparisons.py",
         "tests/test_decide_undecided_comparisons.py",
         "devtools/register_couzo_followup_report.py",

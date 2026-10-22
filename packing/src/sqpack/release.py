@@ -6663,7 +6663,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "The runner's `UNREAD_WORKER_OUTPUTS` gains 121 entries (599 files) and its "
-            "`ON_REQUEST_IMPORT_TOOLS` three tools with their tests, which mutation workers "
+            "`ON_REQUEST_IMPORT_TOOLS` four tools with their tests, which mutation workers "
             "no longer copy, and the snapshot log gains an entry (think-i903). The import "
             "path is the one recorded for think-b6ir and think-bl1p: the runner enters the "
             "builders' import closure only through `upper_bound_houses.custody`, and no "
