@@ -2005,9 +2005,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and Markdown byte-identical across all four renders; only the explainer, which "
             "counts the register, differs, and it takes v0.4.14. Rendered the same way again "
             "at 1300bc76, after the #678, #668 and #715 records and the overview's Couzo "
-            "card, and at 3b8bd62e, after review A of #716 and T-225's 22 October stamp: "
-            "the same three byte-identical. No PDF was printed; each prints from that HTML. "
-            "Retain v0.1.7, v0.1.0 and v0.2.3."
+            "card, and at 3b8bd62e and fb58349a, after review A of #716, T-225's 22 October "
+            "stamp and the reading of Couzo's answers on #678: the same three byte-identical. "
+            "No PDF was printed; each prints from that HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
