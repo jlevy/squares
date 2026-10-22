@@ -1,6 +1,6 @@
 inventory_status,registry_path,canonical_url,kind,status,is_content_page,family,current_nav,proposed_nav,breadcrumb_parent,disposition,forwarding_target,pattern
 existing,404.html,https://squaremath.org/404.html,site-file,live,no,site-infrastructure,,,,retain site artifact; exclude from page navigation,,
-existing,about.html,https://squaremath.org/about.html,page,live,yes,about,about,About,,project narrative and approved Profiles invitation; forward documentation/contribution fragments to dedicated pages,,
+existing,about.html,https://squaremath.org/about.html,page,live,yes,about,about,About,,project narrative and contextual Profiles link; forward documentation/contribution fragments to dedicated pages,,
 existing,all-results.html,https://squaremath.org/results.html,forwarder,forwarded,no,compatibility-forwarder,,,,retain forwarding target and supported query/fragment behavior; exclude from navigation,results.html,
 existing,apple-touch-icon.png,https://squaremath.org/apple-touch-icon.png,asset-file,live,no,asset-file,,,,retain asset address or pattern; exclude from page navigation,,
 existing,ascent-n1-100-poster.png,https://squaremath.org/ascent-n1-100-poster.png,asset-file,live,no,asset-file,,,,retain asset address or pattern; exclude from page navigation,,
