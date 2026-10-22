@@ -3,9 +3,9 @@ type: is
 id: is-01m5h8n8vq93540wmwcrq009cx
 title: "Snapshot: leave 121 more unread worker outputs and three on-request import tools out of mutation workers (option b, 2026-10-22, unchanged cap)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 delegate: c-lane-snapshot-prune-1022
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m1sx5m1p5868jhwcdzfkvada
 hold: null
 hold_until: null
 created_at: 2026-10-22T07:36:55.415Z
-updated_at: 2026-10-22T10:34:06.786Z
+updated_at: 2026-10-22T11:10:59.544Z
 started_at: 2026-10-22T07:36:59.996Z
+closed_at: 2026-10-22T11:10:59.544Z
+close_reason: "Merged as #721 (76496462b, 22 Oct 11:10Z). Review A approve-with-nits; A1 deferred to think-wtso, owner note think-cmbx. main at 261,568,999 B, 5,817,881 under 255 MiB."
+resolution: null
+duplicate_of: null
 ---
 main 7359fa8b6 reads 231,655,578 B and open #720 232,400,158 B against SNAPSHOT_MAX_BYTES 232,783,872 (222 MiB, unchanged); #719's records (~0.5-0.8 MB) would cross it. Apply option (b) as #714 did: set A (121 entries, 4,782,231 B: regularized-drawing run evidence and selection data, regularized-bound views, the 14 October lane-claim copies and comment drafts, n17-20261008, two manual-source receipts, nine house-adoption prior-state receipts, ds7 lower-bound audit, author-checker profile timings/attribution) into UNREAD_WORKER_OUTPUTS, and set D on main (couzo_715_replay + test_upper_bound_reports_715, decide_undecided_comparisons, register_couzo_followup_report and their tests; 112,532 B) into ON_REQUEST_IMPORT_TOOLS, with a dated note. Evidence: --source-bytes before/after, --audit-snapshot --prune-candidate, 50-command --baseline with and without, 174 controls at -j 2, the worker tests, release records. Not in scope: think-d2he's stub copy-back, sets B and C, beyond_horizon_replay (#720 only), the cap.
 
