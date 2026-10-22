@@ -2000,6 +2000,42 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/result_credit.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-225's stage 4 review and rise to V3/C3, its adoption at 204, 227, 229 and "
+            "260, and the registration of Francisco Couzo's #670, #672 and #675 rows "
+            "(T-226 to T-228), against main d7923b8d. Rendered at link revision ab006e47 "
+            "into empty site directories, twice from this tree at ba8b3cc9 and twice from "
+            "main's: render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write their HTML and Markdown byte-identical across all "
+            "four renders; only the explainer, which counts the register, differs, and it "
+            "takes v0.4.15. No PDF was printed; each prints from that HTML. Retain v0.1.7, "
+            "v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
             "packing/devtools/overview_sections.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
