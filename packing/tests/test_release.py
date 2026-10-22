@@ -23,7 +23,6 @@ from __future__ import annotations
 
 import re
 import subprocess
-from datetime import datetime
 from pathlib import Path
 
 import pytest
@@ -45,6 +44,7 @@ from sqpack.release import (
     PUBLICATION_STAMP,
     PUBLICATION_STATUS,
     PUBLICATION_VERSION,
+    RELEASE_IMPACTS,
     PublicationHistoryEntry,
     commit_date,
     data_pathspec,
@@ -144,28 +144,32 @@ def test_the_history_keeps_every_edition_back_to_the_first() -> None:
 
 #: The last site edition. Site editions are retired as of 22 October 2026 (the owner:
 #: "We don't have any real value in committing a synthetic version for the site";
-#: think-wdqo), and the history stops here.
+#: think-wdqo), and the history stops here. Its date is its own entry's, read below.
 FINAL_SITE_EDITION = "v0.9.1"
-RETIRED = "October 22, 2026"
 
 
 def test_the_site_history_is_frozen_since_site_editions_were_retired() -> None:
-    """No site edition follows the last one, and none is dated after the retirement.
+    """Nothing follows the last site edition: no entry and no release-impact decision.
 
     The site deploys continuously from main, so its history is kept as history.
     `check_release_impact` refuses any edit to `PUBLICATION_HISTORY` and to
     `PUBLICATION_REVISION`, the claim documents' link commit, which moved only with a
     site edition; `cut_release --component site` refuses to cut one. The papers and the
-    art keep their own versions.
+    art keep their own versions. The frozen edition's date is read from its entry rather
+    than written here, so whichever day the last old-rule cut first went live holds.
     """
-    assert PUBLICATION_HISTORY[0].version == FINAL_SITE_EDITION, (
+    final = PUBLICATION_HISTORY[0]
+    assert final.version == FINAL_SITE_EDITION, (
         "site editions are retired as of October 22, 2026 (think-wdqo): drop the site cut "
         "and leave PUBLICATION_HISTORY as it stands"
     )
-    retired = datetime.strptime(RETIRED, "%B %d, %Y")  # noqa: DTZ007
-    for entry in PUBLICATION_HISTORY:
-        published = datetime.strptime(entry.first_published, "%B %d, %Y")  # noqa: DTZ007
-        assert published <= retired, entry.version
+    assert (final.version, final.first_published) == (PUBLICATION_VERSION, PUBLICATION_DATE)
+    versions = [entry.version for entry in PUBLICATION_HISTORY]
+    decisions = [decision for decision in RELEASE_IMPACTS if decision.component == "site"]
+    assert decisions
+    for decision in decisions:
+        assert {decision.previous_version, decision.version} <= set(versions), decision
+        assert _version(PublicationHistoryEntry(decision.version, "", "")) <= _version(final)
 
 
 def test_each_edition_is_dated_by_when_it_was_first_published() -> None:
