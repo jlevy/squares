@@ -7,6 +7,7 @@ adds the front door and the pages around it, as the plan in
 
 - `index.html`, the overview: the problem, the headline and recent results and the
   verification statistics, generated from the register;
+- `recent-results.html`, recent arrivals by day and earlier publications by week;
 - `results.html`, every registered result in one table, which the overview's cards
   and recent list point into by row (`#t-018`);
 - `atlas.html`, the graphical Atlas followed by the Frontier Survey: one row for every
@@ -91,6 +92,7 @@ NEWS_ARTICLE = TEMPLATES / "news-article.md"
 #: The invitation to report results, with its button: About's and the overview's alike.
 REPORT_RESULTS = TEMPLATES / "report-results.md"
 RESULTS_ARTICLE = TEMPLATES / "all-results-article.md"
+RECENT_RESULTS_ARTICLE = TEMPLATES / "recent-results-article.md"
 VISUALIZE_ARTICLE = TEMPLATES / "visualize-article.md"
 PAPERS_ARTICLE = TEMPLATES / "papers-article.md"
 TUTORIALS_ARTICLE = TEMPLATES / "tutorials-article.md"
@@ -223,6 +225,7 @@ FRONTIER_DESCRIPTION = (
 #: The results table's canonical page; row ids are the results' (`#t-018`).
 #: The legacy `all-results.html` address forwards here with query and fragment kept.
 RESULTS_PAGE = "results.html"
+RECENT_RESULTS_PAGE = "recent-results.html"
 
 #: The repository documents served as pages outside the navigation, reached from the
 #: overview's cards, in the cards' order; `site_documents` renders them. README and
@@ -461,6 +464,7 @@ SITE_PAGES: tuple[str, ...] = (
     "atlas.html",
     "about.html",
     RESULTS_PAGE,
+    RECENT_RESULTS_PAGE,
     f"{PROFILES_DIR}/index.html",
     "papers.html",
     "tutorials.html",
@@ -580,6 +584,7 @@ RENDER_INPUTS: tuple[Path, ...] = (
     NEWS_ARTICLE,
     REPORT_RESULTS,
     RESULTS_ARTICLE,
+    RECENT_RESULTS_ARTICLE,
     VISUALIZE_ARTICLE,
     PAPERS_ARTICLE,
     TUTORIALS_ARTICLE,
@@ -673,9 +678,15 @@ class PageMeta(NamedTuple):
 
 #: The records the results page and the frontier atlas write their heads from, named
 #: here because a forwarder to either previews it (`forwarded_metas`).
-RESULTS_META = PageMeta("Results", RESULTS_DESCRIPTION, RESULTS_PAGE)
+RESULTS_META = PageMeta("Results Archive", RESULTS_DESCRIPTION, RESULTS_PAGE)
+RECENT_RESULTS_META = PageMeta(
+    "Recent Results",
+    "Recent square-packing results: every arrival by day, followed by significant "
+    "earlier publications by week, with authors and links to the full result register.",
+    RECENT_RESULTS_PAGE,
+)
 ATLAS_META = PageMeta(
-    "The Atlas of Square Packings",
+    "Visual Atlas",
     ATLAS_DESCRIPTION,
     "atlas.html",
     structured_data=(
@@ -1511,27 +1522,6 @@ def results_page() -> Page:
     values = {
         "EPISTEMICS_URL": "epistemics.html",
         "ARROW_RIGHT": overview_sections.arrow_icon("right"),
-        # The overview above the table, from the same register (think-2z22): the last
-        # seven days' arrivals, a block a day, then the weekly S3+ rollup before them. The
-        # arrival link names the section's own first day, so it lists the section's
-        # results on any day (#514's review A, finding A3); the last day's counts from
-        # the reader's.
-        "RECENT_ADDED": overview_sections.recent_added(overview),
-        "ADDED_LINK": overview_sections.added_link(
-            f"added-since={overview_sections.added_since(overview).isoformat()}"
-        ),
-        "ADDED_LAST_DAY": overview_sections.added_link("added-age=1"),
-        "ADDED_DAYS": overview_sections.ADDED_DAYS_WORD[overview_sections.ADDED_DAYS],
-        "ADDED_DAYS_TITLE": overview_sections.ADDED_DAYS_WORD[
-            overview_sections.ADDED_DAYS
-        ].capitalize(),
-        "ADDED_SPAN": overview_sections.span_label(
-            overview_sections.added_since(overview), overview_sections.added_reference(overview)
-        ),
-        "ADDED_FIRST": overview_sections.day_label(overview_sections.added_since(overview)),
-        "RECENT_ROLLUP": overview_sections.recent_rollup(overview),
-        "ROLLUP_FLOOR": f"S{overview_sections.ROLLUP_FLOOR}",
-        "ROLLUP_WEEKS": overview_sections.ROLLUP_WEEKS_WORD[overview_sections.ROLLUP_WEEKS],
         "RESULTS_TABLE": overview_sections.results_table(overview),
         "STATUS_COUNTS": overview_sections.status_counts(overview),
         # The rating ladders, the homepage's Verification Ladders until 2026-10-02.
@@ -1553,6 +1543,45 @@ def results_page() -> Page:
     )
 
     return page._replace(html=compact_visual_math_classes(page.html, profile_links=True))
+
+
+def recent_results_page() -> Page:
+    """Daily arrivals and weekly publications, linked to canonical archive rows."""
+    from devtools import overview_data, overview_sections  # noqa: PLC0415
+
+    overview = overview_data.load()
+    values = {
+        "RECENT_ADDED": overview_sections.recent_added(overview),
+        "ADDED_LINK": overview_sections.added_link(
+            f"added-since={overview_sections.added_since(overview).isoformat()}"
+        ),
+        "ADDED_LAST_DAY": overview_sections.added_link("added-age=1"),
+        "ADDED_DAYS": overview_sections.ADDED_DAYS_WORD[overview_sections.ADDED_DAYS],
+        "ADDED_DAYS_TITLE": overview_sections.ADDED_DAYS_WORD[
+            overview_sections.ADDED_DAYS
+        ].capitalize(),
+        "ADDED_SPAN": overview_sections.span_label(
+            overview_sections.added_since(overview), overview_sections.added_reference(overview)
+        ),
+        "ADDED_FIRST": overview_sections.day_label(overview_sections.added_since(overview)),
+        "RECENT_ROLLUP": overview_sections.recent_rollup(overview),
+        "ROLLUP_FLOOR": f"S{overview_sections.ROLLUP_FLOOR}",
+        "ROLLUP_WEEKS": overview_sections.ROLLUP_WEEKS_WORD[overview_sections.ROLLUP_WEEKS],
+    }
+    # These shared rollup components formerly sat above the archive table. On their
+    # own page their result links must keep the archive's canonical row addresses.
+    for key in ("RECENT_ADDED", "RECENT_ROLLUP"):
+        values[key] = values[key].replace('href="#t-', f'href="{RESULTS_PAGE}#t-')
+    return kpress_page(
+        _template_markdown(RECENT_RESULTS_ARTICLE, values),
+        name=RECENT_RESULTS_META.path,
+        current="results",
+        title=RECENT_RESULTS_META.name,
+        description=RECENT_RESULTS_META.description,
+        toc=False,
+        rewrite_body=_authored_profile_links,
+        page_scripts=(POPOVER_SCRIPT,),
+    )
 
 
 def papers_page() -> Page:
@@ -1830,6 +1859,7 @@ PAGES: dict[str, Callable[[], Page]] = {
     "atlas.html": atlas_page,
     "about.html": about_page,
     RESULTS_PAGE: results_page,
+    RECENT_RESULTS_PAGE: recent_results_page,
     "papers.html": papers_page,
     "tutorials.html": tutorials_page,
     "downloads.html": downloads_page,

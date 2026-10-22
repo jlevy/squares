@@ -117,6 +117,11 @@ def results() -> str:
 
 
 @pytest.fixture(scope="module")
+def recent_results() -> str:
+    return site_renders.html("recent-results.html")
+
+
+@pytest.fixture(scope="module")
 def result_bodies() -> dict[str, str]:
     """Render complete result bodies during setup, before per-test monkeypatches.
 
@@ -250,10 +255,10 @@ def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
     attributes = overview_sections.all_results_link_attributes(site_renders.overview())
     assert (
         '<p class="site-action-row site-more"><a class="site-action" '
-        'href="results.html#verification-ladders">About Result Verification'
+        'href="recent-results.html">View Recent Results'
         f"{overview_sections.arrow_icon('right')}</a>"
         f'<a class="site-action" href="results.html#all-results" {attributes}>'
-        f"View All Results{overview_sections.arrow_icon('right')}</a></p>"
+        f"View Results Archive{overview_sections.arrow_icon('right')}</a></p>"
     ) in recent
 
 
@@ -265,8 +270,8 @@ def test_every_link_to_a_result_goes_to_its_row(
     rows = {row_id for row_id, _, _ in ROW.findall(results)}
     linked = re.findall(r'href="results\.html#([^"]+)"', page)
     assert linked
-    # The two section actions are the only non-row destinations.
-    assert set(linked) - rows == {"verification-ladders", "all-results"}
+    # The archive action is the only non-row destination on results.html.
+    assert set(linked) - rows == {"all-results"}
     assert 'id="verification-ladders"' in results
     assert not re.search(r'href="#t-\d+"', page)
     for record in case_pages.values():
@@ -2009,7 +2014,7 @@ def test_the_ladders_are_the_results_pages_and_the_overview_points_to_them(
     page: str, results: str
 ) -> None:
     """Ratings and evidence follow the complete table, retaining the old section
-    anchor. A homepage action links that account without repeating its diagram."""
+    anchor. The homepage links the archive without repeating its diagram."""
     heading = (
         '<h2 id="verification-ladders">Verification Ladders'
         '<a id="verification-at-a-glance"></a></h2>'
@@ -2042,7 +2047,7 @@ def test_the_ladders_are_the_results_pages_and_the_overview_points_to_them(
         assert gone not in page, gone
     assert 'class="site-ladders"' not in page
     assert _seen(page).count("Verification Ladders") == 0
-    assert 'href="results.html#verification-ladders">About Result Verification' in page
+    assert 'href="recent-results.html">View Recent Results' in page
     assert 'id="all-results"' in results
     assert results.index('id="all-results"') < results.index('<div class="site-table-tools')
     for scale, _, _, question in overview_sections.DIMENSIONS:
@@ -2063,7 +2068,7 @@ def test_the_frontier_survey_is_an_atlas_section_without_duplicate_cards(
     assert 'data-page="frontier"' not in about
     for page in (about, papers):
         assert 'href="atlas.html#the-frontier-survey"' not in page
-    assert "<title>The Atlas of Square Packings · The Squares Project</title>" in atlas_page
+    assert "<title>Visual Atlas · The Squares Project</title>" in atlas_page
     survey = (
         '<h1 id="the-frontier-survey" class="site-title">'
         'The Frontier Survey<a id="the-survey"></a></h1>'
@@ -3143,7 +3148,8 @@ def test_the_film_page_embeds_the_film_at_its_own_proportions(
     ):
         assert attribute in video[0], attribute
     assert f'<source src="{render_overview.FILM_URL}" type="video/mp4' in page
-    assert page.index('class="site-tabs"') < page.index("<h1") < page.index("<video")
+    assert page.index("<h1") < page.index("<video")
+    assert 'class="site-tabs"' not in page
 
 
 def test_the_film_starts_on_a_visit_to_its_page_and_nowhere_else(
@@ -3829,7 +3835,7 @@ def test_recent_results_is_one_table_not_cards_or_a_list(
     assert not re.search(r'class="site-card[ "]', recent)
     assert "site-rung-legend" not in section
     assert not re.search(r'class="site-card[ "]', section)
-    assert 'href="results.html#verification-ladders">About Result Verification' in section
+    assert 'href="recent-results.html">View Recent Results' in section
     assert 'href="results.html#all-results"' in section
     assert "<li>" not in section
     # The recent table and no other: a reported bound is a row of it (think-d04u).
@@ -4143,7 +4149,7 @@ def test_the_overview_opens_with_the_owners_two_paragraphs(page: str) -> None:
     )
 
 
-def test_recent_major_results_opens_with_preview_then_verification_and_results_actions(
+def test_recent_major_results_opens_with_preview_then_recent_and_archive_actions(
     page: str,
 ) -> None:
     section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
@@ -4155,7 +4161,7 @@ def test_recent_major_results_opens_with_preview_then_verification_and_results_a
     assert _asset_tag(render_overview.HOMEPAGE_CSS) in page
     order = [
         section.index(_recent_table(page)),
-        section.index('href="results.html#verification-ladders"'),
+        section.index('href="recent-results.html"'),
         section.index('href="results.html#all-results"'),
     ]
     assert order == sorted(order)
@@ -4580,7 +4586,7 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
     assert explainer.href == overview_sections.LOWER_BOUNDS_PAPER
     assert overview_sections.THRESHOLD_REVIEW is overview_sections.PAPERS[1]
     article = papers_article(papers)
-    paper_section = article.split('<h2 id="papers"', 1)[1]
+    paper_section = article.split('<h1 id="papers"', 1)[1]
     introduction, cards = paper_section.split('<div class="site-cards-frame', 1)
     assert re.findall(r'<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)</a>', introduction) == [
         (overview_sections.LOWER_BOUNDS_PAPER, "Part I"),
@@ -4596,33 +4602,33 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
         assert "<a" not in body
 
 
-def test_the_papers_page_says_what_each_paper_is(papers: str) -> None:
-    """The two tutorial cards distinguish the beginner's introduction from the
-    technical companion, with both in the prominent Tutorial section."""
+def test_the_papers_page_says_what_each_paper_is(papers: str, tutorials: str) -> None:
+    """Papers and Tutorials each carry their substantive catalogue and descriptions."""
     explainer = overview_sections.LOWER_BOUNDS_PAPER
     value, note = _page_card_parts(papers, explainer)
     assert card_text(value) == EXPLAINER_TITLE
     assert card_text(note) == EXPLAINER_NOTE
 
-    value, note = _page_card_parts(papers, "tutorial.html")
+    value, note = _page_card_parts(tutorials, "tutorial.html")
     assert card_text(value) == "Square Packing from First Principles"
     assert card_text(note) == (
         "The problem, bounds, small examples, and how to read a packing result."
     )
-    value, note = _page_card_parts(papers, "tutorial-advanced.html")
+    value, note = _page_card_parts(tutorials, "tutorial-advanced.html")
     assert card_text(value) == "Square Packing, Search, and Proof"
     assert card_text(note) == (
         "Linear programs, exact certificates, search, regularization, "
         "and global optimality proofs."
     )
-    tutorial_section = papers.split('<h2 id="tutorial"', 1)[1].split('<h2 id="papers"', 1)[0]
-    assert [href for href, _, _ in _page_cards(papers)][:2] == [
+    tutorial_section = tutorials.split('<h1 id="tutorial"', 1)[1]
+    assert [href for href, _, _ in _page_cards(tutorials)] == [
         "tutorial.html",
         "tutorial-advanced.html",
     ]
     for href in ("tutorial.html", "tutorial-advanced.html"):
         assert f'href="{href}"' in tutorial_section
-    assert {explainer, "tutorial.html", "tutorial-advanced.html"} <= {
+    assert explainer in {href for href, _, _ in _page_cards(papers)}
+    assert not {"tutorial.html", "tutorial-advanced.html"} & {
         href for href, _, _ in _page_cards(papers)
     }
 
@@ -4641,7 +4647,7 @@ def test_the_optimality_papers_card_says_what_t060s_rungs_allow(
     assert paper.href in render_overview.SITE_PAGES
     assert paper.title == renderer.TITLE
     assert paper.title == "A Review of the Optimality Proof of the Trump Packing of 11 Squares"
-    section = papers.split('<h2 id="papers"', 1)[1].split('<h2 id="pdfs"', 1)[0]
+    section = papers_article(papers)
     assert re.findall(r'<a class="site-card site-card-link" href="([^"]+)"', section) == [
         item.href for item in overview_sections.PAPERS if item.href.startswith("papers/")
     ]
@@ -5341,7 +5347,7 @@ def test_the_frontier_results_and_papers_pages_carry_no_subtitle(
         if name == "atlas.html":
             assert (
                 '<h1 id="the-atlas-of-square-packings" class="site-title">'
-                'The Atlas of Square Packings<a id="the-atlas"></a></h1>'
+                'Visual Atlas<a id="the-atlas"></a></h1>'
             ) in page
             assert 'id="the-frontier-survey"' in page
         else:
@@ -6181,26 +6187,19 @@ def test_no_page_carries_a_result_overview(
 
 
 def test_the_results_page_has_room_through_its_room_count(results: str) -> None:
-    """The results page stays under its ceiling through `RESULTS_ROOM_THROUGH` results,
-    each result past the register's count costing what the table's 90th-percentile row
-    costs now and an average entry of the seven days, so an import lane meets the ceiling
-    as a measured choice and not as a red build (#514's review A, finding A2). The room is
-    to a fixed count: it shrinks as results are registered, and the test fails only when
-    the page could not reach that count at today's cost (review B, finding B1)."""
+    """The archive keeps its existing ceiling through `RESULTS_ROOM_THROUGH` results,
+    at the current 90th-percentile row cost. Recent arrivals live on their own page, so
+    they no longer consume archive runway. The target remains a fixed result count."""
     table = results[results.index("site-table site-results") : results.index("</table>")]
     found = re.findall(r'<tr id="t-\d+".*?</tr>', table, re.DOTALL)
     rows = sorted(len(row.encode()) for row in found)
-    added = results[results.index('<div class="site-rollup site-added">') :]
-    added = added[: added.index("</details></div>")]
-    entries = re.findall(r"<li[ >].*?</li>", added, re.DOTALL)
     row = rows[int(len(rows) * 0.9)]
-    entry = sum(len(item.encode()) for item in entries) // len(entries)
     size = len(results.encode("utf-8"))
     more = max(0, RESULTS_ROOM_THROUGH - len(found))
-    projected = size + more * (row + entry)
+    projected = size + more * row
     print(
-        f"results.html: {size:,} bytes at {len(found)} results + {more} x ({row:,} + "
-        f"{entry:,}) = {projected:,} / {PAGE_CEILINGS[render_overview.RESULTS_PAGE]:,}"
+        f"results.html: {size:,} bytes at {len(found)} results + {more} x {row:,} "
+        f"= {projected:,} / {PAGE_CEILINGS[render_overview.RESULTS_PAGE]:,}"
     )
     assert projected < PAGE_CEILINGS[render_overview.RESULTS_PAGE]
     ceiling = site_urls.PAGE_BUDGET_EXCEPTIONS[render_overview.RESULTS_PAGE][0]
@@ -7386,15 +7385,12 @@ def test_results_and_atlas_expose_their_collections_before_details(
 ) -> None:
     article = results.split("<article", 1)[1].split("</article>", 1)[0]
     table = article.index('id="all-results"')
-    assert table < article.index('id="recent-arrivals"')
     assert table < article.index('id="verification-ladders"')
     assert article.count('id="all-results"') == 1
-    assert 'href="atlas.html">Atlas' in article[:table]
+    assert 'href="atlas.html">Visual Atlas' in article[:table]
     assert 'href="atlas.html#best-known-results">Best Known Bounds' in article[:table]
     for fragment in (
         "all-results",
-        "recent-arrivals",
-        "earlier-results-by-week-published",
         "verification-ladders",
         "evidence-and-exactness",
         "results-and-credits",
@@ -7445,3 +7441,38 @@ def test_about_subcategories_keep_their_complete_content_on_dedicated_pages(
         assert re.search(rf'<h[1-6][^>]*id="{fragment}"', visible) is None
     assert 'href="documentation.html"' in about
     assert 'href="report.html"' in about
+
+
+def test_recent_results_and_archive_have_separate_substantive_content(
+    page: str, results: str, recent_results: str, overview: overview_data.Overview
+) -> None:
+    """Daily and weekly result lists have their own page; archive filters and row
+    addresses stay canonical, with a useful no-script path from old fragments."""
+    assert "recent-results.html" in render_overview.SITE_PAGES
+    assert render_overview.PAGES["recent-results.html"] is render_overview.recent_results_page
+    assert '<h1 id="every-result">Results Archive</h1>' in results
+    assert '<h1 id="recent-results">Recent Results</h1>' in recent_results
+    assert 'class="site-rollup site-added"' not in results
+    assert 'class="site-rollup"' not in results
+    assert "data-site-table" in results
+    assert sorted(row_id for row_id, _, _ in ROW.findall(results)) == sorted(
+        result.id.lower() for result in overview.results
+    )
+    assert "data-site-table" not in recent_results
+    assert 'class="site-rollup site-added"' in recent_results
+    assert 'class="site-rollup"' in recent_results
+    row_links = re.findall(r'href="results\.html#(t-\d+)"', recent_results)
+    assert row_links
+    assert set(row_links) <= {result.id.lower() for result in overview.results}
+    assert not re.search(r'href="#t-\d+', recent_results)
+    for fragment in (
+        "recent-arrivals",
+        "added-in-the-last-seven-days",
+        "earlier-results-by-week-published",
+    ):
+        assert f'id="{fragment}"' in recent_results
+        assert f'id="{fragment}" href="recent-results.html#{fragment}"' in results
+    assert 'href="results.html?added-since=' in recent_results
+    assert 'href="recent-results.html">View Recent Results' in page
+    assert 'href="results.html#all-results" data-all-results' in page
+    assert "View Results Archive" in page

@@ -14,7 +14,16 @@
           ["#report-your-results", "report.html"],
           ["#contribute-your-results", "report.html"],
         ])
-      : null;
+      : location.pathname.endsWith("/results.html")
+        ? new Map([
+            ["#recent-arrivals", "recent-results.html#recent-arrivals"],
+            ["#added-in-the-last-seven-days", "recent-results.html#added-in-the-last-seven-days"],
+            [
+              "#earlier-results-by-week-published",
+              "recent-results.html#earlier-results-by-week-published",
+            ],
+          ])
+        : null;
   const forwardLegacyFragment = () => {
     const moved = aliases?.get(location.hash);
     if (!moved) {

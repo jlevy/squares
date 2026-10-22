@@ -23,7 +23,7 @@ publication remain in progress.
 Use the confirmed top-level order **Overview**, **News**, **Results**, **Learn**, and
 **About**. Overview and the site name link home; News links directly to its page.
 Results, Learn, and About have dropdowns.
-Results groups the result register, Atlas, Frontier Survey, and verification
+Results groups Recent Results, the Results Archive, Visual Atlas, and verification
 explanations. Learn groups tutorials, papers, film, downloads, the workbench, and the
 Resources directory.
 About groups the project, people, contribution guidance, and documentation.
@@ -83,8 +83,8 @@ that host.
 
 | Reader’s task | First destination | Next step |
 | --- | --- | --- |
-| Find the best known packing or bounds for a particular n | Results → Best Known Bounds, or Atlas | One case record, its sources, and relevant results |
-| Check a new theorem, certificate, or improvement | Results → All Results | One result record, its affected cases, evidence, and authors |
+| Find the best known packing or bounds for a particular n | Results → Visual Atlas | One case record, its sources, and relevant results |
+| Check a new theorem, certificate, or improvement | Results → Results Archive | One result record, its affected cases, evidence, and authors |
 | Learn the problem and its methods | Learn → Tutorials | Advanced tutorial, paper, or interactive workbench |
 | Read a particular proof | Learn → Papers | The paper’s HTML, PDF, and source; linked result records |
 | See or manipulate packings | Learn → Videos or Workbench | Atlas and individual cases when evidence is needed |
@@ -269,9 +269,10 @@ Site name → / [Home; selected previews and actions]
 ├── Overview → / [direct link; same homepage]
 ├── News → news.html [direct link; announcements and changelog]
 ├── Results [menu container]
-│   ├── All Results → results.html [menu; complete result register]
+│   ├── Recent Results → recent-results.html [menu; daily arrivals and weekly publications]
+│   ├── Results Archive → results.html [menu; complete result register]
 │   │   └── result/t-NNN.html [229 record pages]
-│   ├── Atlas → atlas.html [menu; page]
+│   ├── Visual Atlas → atlas.html [menu; page]
 │   │   └── cases/N.html [324 case pages]
 │   └── Verification and Ratings → epistemics.html [menu; page]
 ├── Learn [menu container; no category page]
@@ -297,7 +298,7 @@ Site name → / [Home; selected previews and actions]
 GitHub and color theme [utilities]
 ```
 
-Results has three dropdown entries, Learn six, and About four.
+Results has four dropdown entries, Learn six, and About four.
 The menus omit individual records and the 18 Synopsis chapters.
 Each menu destination has substantive content.
 Only Overview carries summary previews.
@@ -307,19 +308,25 @@ evidence labels.
 
 ### Landing pages and content ownership
 
-**Results.** Keep `results.html` as the Results hub and register.
-Start with a short explanation of results versus cases, direct actions for Atlas and
-Best Known Bounds, and visible access to the result table and its filters.
-The table should follow that compact introduction.
-Retain arrivals and publication rollups as named sections with local jump links.
-Keep the existing verification, evidence, credit, and status anchors, with concise
-explanations linking to the full policy in `epistemics.html`. Do not copy Atlas tiles or
-the 324-case table onto this page.
+**Results.** Results is a menu container with no landing page.
+`recent-results.html` is the substantive Recent Results page: every arrival by day and
+significant earlier publications by week, with the existing windows, order, and credits.
+Its result identifiers link to their canonical rows in the Results Archive.
+Keep `results.html` as the **Results Archive**, with its complete sortable, filterable
+register after a compact introduction and direct actions for Recent Results and Visual
+Atlas. Preserve archive query parameters, result-row anchors, and the existing
+verification, evidence, credit, and status anchors.
+The archive retains its visual rating guide and unique exactness examples, linked to the
+full Verification and Ratings policy in `epistemics.html`. Do not copy the recent lists,
+Atlas tiles, or the 324-case table onto this page.
+Legacy `results.html#recent-arrivals`, `#added-in-the-last-seven-days`, and
+`#earlier-results-by-week-published` links forward to the same fragments on Recent
+Results with the query preserved; no-script links retain access to those destinations.
 
-**Atlas and Frontier.** Keep the visual Atlas and Frontier Survey on `atlas.html`
+**Visual Atlas and Frontier.** Keep the visual Atlas and Frontier Survey on `atlas.html`
 initially. Give the page clear local links for **Packings**, **About the Bounds**, and
-**Best Known Bounds**. The Results dropdown’s Best Known Bounds link lands directly on
-the table, where readers can reach the survey explanation.
+**Best Known Bounds**. The Results dropdown links to Visual Atlas; its local navigation
+reaches the bounds table and survey explanation.
 Preserve the survey’s reported/verified distinction and its source and verification
 links.
 
@@ -364,8 +371,9 @@ links. The directory has the breadcrumb Learn → Resources, with no competing f
 directory on About.
 
 **News.** Keep dated announcements and the full changelog together.
-Recent-result rollups remain on Results because they describe the register; News entries
-can cover papers, downloads, and site changes as well as mathematical results.
+Recent-result rollups have the dedicated Recent Results page because they describe the
+register; News entries can cover papers, downloads, and site changes as well as
+mathematical results.
 
 ### Homepage composition
 
@@ -380,7 +388,7 @@ catalogue content on the page.
 | Problem and n = 53 hero | Retain concise introduction and case link | Tutorial; case 53 |
 | Atlas preview and controls | Retain a bounded preview and existing expand behavior | Atlas; Best Known Bounds; complete PDF |
 | News cards | Selected recent entries and View All News button | `news.html` |
-| Recent Major Results | Bounded selected rows and View All Results button | `results.html#all-results` |
+| Recent Major Results | Bounded selected rows with View Recent Results and View Results Archive actions | `recent-results.html`, `results.html#all-results` |
 | Profiles section | Short statement and View All Profiles button; no names or table | `profiles/` |
 | Report Your Results | One invitation and Report a Result button | `report.html` |
 | All tutorial/paper cards | Selected starting points with View All Tutorials and View All Papers actions | `tutorials.html`, `papers.html` |
@@ -398,8 +406,9 @@ result significance or contributor status.
 ### Route disposition and page parents
 
 All 666 content pages keep their addresses.
-Five new pages are registered: `resources.html`, `tutorials.html`, and `downloads.html`
-under Learn, plus `documentation.html` and `report.html` under About.
+Six new pages are registered: `resources.html`, `tutorials.html`, and `downloads.html`
+under Learn, `documentation.html` and `report.html` under About, and
+`recent-results.html` under Results.
 The route CSV marks them as `added`, separately from the 1,149 baseline registrations.
 The CSV expands the generated families and technical registrations; this table specifies
 the reader-facing parent for every named page or family.
@@ -407,12 +416,13 @@ the reader-facing parent for every named page or family.
 | Path or page family | Proposed label or role | Parent and disposition |
 | --- | --- | --- |
 | `/` (`index.html`) | Overview / Home | Overview and site-name destination; selected previews |
-| `results.html` | Results / All Results | Top-level Results hub; table remains at `#all-results` |
-| `result/t-NNN.html` (229) | Result identifier and title | Results; retain record contents and evidence links |
-| `atlas.html` | Atlas | Results; retain graphical collection and survey |
+| `recent-results.html` | Recent Results | Results; complete daily arrivals and weekly publication lists |
+| `results.html` | Results Archive | Results; complete table remains at `#all-results` with query filters |
+| `result/t-NNN.html` (229) | Result identifier and title | Results → Results Archive; retain record contents and evidence links |
+| `atlas.html` | Visual Atlas | Results; retain graphical collection and survey |
 | `atlas.html#the-frontier-survey` | About the Bounds / Frontier Survey | Section of Atlas; contextual explanation |
-| `atlas.html#best-known-results` | Best Known Bounds | Section of Atlas; direct Results menu entry |
-| `cases/N.html` (324) | Case n | Results → Atlas; reached from either Atlas or bounds table |
+| `atlas.html#best-known-results` | Best Known Bounds | Section of Visual Atlas; local bounds-table destination |
+| `cases/N.html` (324) | Case n | Results → Visual Atlas; reached from either Atlas or bounds table |
 | `epistemics.html` | Verification and Ratings | Results; cross-link from documentation without changing parent |
 | `papers.html` | Papers | Learn; complete paper catalogue with retained address and legacy fragments |
 | `tutorials.html` | Tutorials | Learn; complete tutorial catalogue |
@@ -453,19 +463,20 @@ static records, profiles, and the workbench shell.
 The homepage’s current label is Overview.
 Top-level content pages show their own plain current-page label; nested pages add their
 collection ancestry.
-Learn is a menu container with no page or URL, so its content pages show Learn as plain
-ancestor text before the current page title.
+Results, Learn, and About are menu containers with no category landing URL, so their
+content pages show the container as plain ancestor text before the current page title.
 The final breadcrumb item is always plain text, never a link.
 
 | Page | Visible trail, ending with the current page |
 | --- | --- |
 | Overview | Overview |
 | News | News |
-| Results register | Results |
+| Recent Results | Results → Recent Results |
+| Results register | Results → Results Archive |
 | The Squares Project | The Squares Project |
-| Atlas | Results → Atlas |
-| Case 11 | Results → Atlas → n = 11 |
-| Result T-060 | Results → T-060 |
+| Visual Atlas | Results → Visual Atlas |
+| Case 11 | Results → Visual Atlas → n = 11 |
+| Result T-060 | Results → Results Archive → T-060 |
 | Epistemics | Results → Verification and Ratings |
 | Papers, Tutorials, Downloads, Tutorial, Advanced Tutorial, or a paper | Learn → Current title |
 | Videos, Workbench, or Resources | Learn → Videos / Workbench / Resources, as appropriate |
@@ -480,9 +491,10 @@ trail. Generate visible ancestry and structured `BreadcrumbList` data from the s
 parent definitions; if the structured form includes Home, its remaining ancestors must
 match the visible trail.
 The final item is text with `aria-current="page"`. Ancestors with a substantive
-destination are links; Learn is plain container text with no invented URL. An Atlas
-table section does not create a second breadcrumb trail for the same case.
-A result opened from a profile still belongs to Results.
+destination are links; Results, Learn, and About are plain container text with no
+invented category URL. A Visual Atlas table section does not create a second breadcrumb
+trail for the same case.
+A result opened from a profile still belongs to Results → Results Archive.
 Browser Back and contextual related links handle the path the reader actually took.
 
 Mark the active top-level group by its descendant relationship.
@@ -490,7 +502,7 @@ Use `aria-current="page"` for the current page label, and an appropriate ancesto
 indication such as `aria-current="true"` with a visible style for a group whose child is
 open.
 A fragment link may identify the selected location after explicit navigation; avoid
-marking both Atlas and Best Known Bounds as the current page.
+marking both Visual Atlas and its bounds section as the current page.
 Use the same rules after a hard reload, a direct deep link, and browser Back.
 
 Videos and Workbench are separate destinations in the Learn menu, with Videos linking
@@ -544,11 +556,12 @@ treatment, disclosure-icon size and alignment, focus indicator, active-parent st
 open/closed states. Reuse the existing KPress, `paper-type.css`, and navigation tokens;
 add a shared token only for a role the current system does not express.
 
-Collection links use **View All … →**: View All Results, View All Profiles, View All
-Resources, View All News, View All Papers, View All Tutorials, and View All Downloads.
-Each action leads to its complete collection.
-Render the existing shared right-arrow component after the label; keep the decorative
-icon out of the accessible name.
+Collection links use **View All … →**: View All Profiles, View All Resources, View All
+News, View All Papers, View All Tutorials, and View All Downloads.
+The homepage’s result actions name the two distinct collections explicitly: **View
+Recent Results →** and **View Results Archive →**. Each action leads to its complete
+collection. Render the existing shared right-arrow component after the label; keep the
+decorative icon out of the accessible name.
 Use the existing action-link component, with consistent size, padding, alignment, icon
 spacing, and focus treatment.
 Collection navigation styled as a button remains an actual anchor with its destination
@@ -696,6 +709,15 @@ All six changed page producers rendered through the published-math pipeline; the
 register checked at 1,154 entries with no failures.
 These checks cover the full tutorial, paper, poster, document, and contribution content
 on the new pages, plus preserved profile credits and legacy destination links.
+
+The `think-qxq2` follow-up makes Results a container and moves the complete daily
+arrivals and weekly publication lists to `recent-results.html`. Results Archive keeps
+the table, filters, row addresses, rating guide, and explanatory anchors; the Visual
+Atlas keeps its existing page and section addresses with its new title.
+Overview links both result collections.
+Eight focused checks passed, including the page split, retained row links and filters,
+four migrated paper/video expectations, and the archive runway at its unchanged byte
+ceiling. The generated URL register now has 1,155 entries with no failures.
 
 The integrated build, full validation surface, and reader checks remain in Phase 3.
 

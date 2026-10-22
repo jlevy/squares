@@ -51,8 +51,10 @@ def test_navigation_marks_ancestors_without_claiming_the_parent_page() -> None:
 
 def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None:
     families = {
-        "cases/11.html": ["Results", "Atlas", "Current <title>"],
-        "result/t-060.html": ["Results", "Current <title>"],
+        "cases/11.html": ["Results", "Visual Atlas", "Current <title>"],
+        "result/t-060.html": ["Results", "Results Archive", "Current <title>"],
+        "results.html": ["Results", "Current <title>"],
+        "recent-results.html": ["Results", "Current <title>"],
         "profiles/person.html": ["About", "Profiles", "Current <title>"],
         "synopsis/problem.html": ["About", "Research Synopsis", "Current <title>"],
         "epistemics.html": ["Results", "Current <title>"],
@@ -83,13 +85,13 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
         assert [item["name"] for item in items] == expected
         canonical = path.removesuffix("index.html") if path.endswith("/index.html") else path
         assert items[-1]["item"] == f"https://squaremath.org/{canonical}"
-        if expected[0] == "Learn":
+        if expected[0] in {"Learn", "Results"}:
             assert "item" not in items[0]
-            assert "<li><span>Learn</span></li>" in trail
-            if len(expected) > 2:
+            assert f"<li><span>{expected[0]}</span></li>" in trail
+            if expected[0] == "Learn" and len(expected) > 2:
                 catalogue = "papers.html" if expected[1] == "Papers" else "tutorials.html"
                 assert f'href="../{catalogue}"' in trail
-    for path in ("index.html", "./", "news.html", "results.html", "about.html"):
+    for path in ("index.html", "./", "news.html", "about.html"):
         trail = breadcrumbs_html(path, "Root page")
         tags = Tags(trail).tags
         assert any(tag == "span" and attrs.get("aria-current") == "page" for tag, attrs in tags)
@@ -184,7 +186,7 @@ def test_disclosures_work_with_keyboard_outside_click_and_mobile_menu() -> None:
         assert results.get_attribute("aria-expanded") == "true"
         page.keyboard.press("Tab")
         site_browser.api().expect(
-            page.get_by_role("link", name="All Results", exact=True)
+            page.get_by_role("link", name="Recent Results", exact=True)
         ).to_be_focused()
         page.keyboard.press("Escape")
         assert results.get_attribute("aria-expanded") == "false"
@@ -202,7 +204,7 @@ def test_disclosures_work_with_keyboard_outside_click_and_mobile_menu() -> None:
         site_browser.api().expect(results).to_be_hidden()
         menu.click()
         results.click()
-        assert page.get_by_role("link", name="All Results", exact=True).is_visible()
+        assert page.get_by_role("link", name="Results Archive", exact=True).is_visible()
         page.keyboard.press("Escape")
         assert results.get_attribute("aria-expanded") == "false"
         page.keyboard.press("Escape")
@@ -225,8 +227,9 @@ def test_navigation_remains_reachable_without_script() -> None:
         for label in (
             "Overview",
             "News",
-            "All Results",
-            "Atlas",
+            "Recent Results",
+            "Results Archive",
+            "Visual Atlas",
             "Tutorials",
             "Resources",
             "Documentation",
@@ -307,7 +310,7 @@ def test_open_navigation_protects_the_sticky_header_without_keyboard_focus() -> 
         page.evaluate(blur)
         page.evaluate(scroll, 700)
         assert page.evaluate(layout)["headerTop"] >= 0
-        assert page.get_by_role("link", name="All Results", exact=True).is_visible()
+        assert page.get_by_role("link", name="Results Archive", exact=True).is_visible()
         page.get_by_role("button", name="Results", exact=True).click()
         page.evaluate(blur)
         page.evaluate(scroll, 900)
@@ -446,7 +449,7 @@ def test_group_controls_include_label_and_chevron_and_start_with_substantive_con
     ]
     assert all(any(tag == "svg" for tag, _ in Tags(content).tags) for content in controls)
     for group, target in {
-        "results": "results.html",
+        "results": "recent-results.html",
         "learn": "papers.html",
         "about": "about.html",
     }.items():
@@ -469,7 +472,7 @@ def test_legacy_catalogue_fragments_keep_queries_and_reach_substantive_pages(
     from devtools import preview_site  # noqa: PLC0415
     from tests import site_browser  # noqa: PLC0415
 
-    for source in ("papers.html", "about.html"):
+    for source in ("papers.html", "about.html", "results.html"):
         (tmp_path / source).write_text(_browser_document())
     for destination in (
         "tutorials.html",
@@ -478,6 +481,7 @@ def test_legacy_catalogue_fragments_keep_queries_and_reach_substantive_pages(
         "resources.html",
         "documentation.html",
         "report.html",
+        "recent-results.html",
     ):
         (tmp_path / destination).write_text(
             '<h1>Complete destination</h1><section id="tutorial"></section>'
@@ -491,6 +495,13 @@ def test_legacy_catalogue_fragments_keep_queries_and_reach_substantive_pages(
         "about.html#squares-project-documentation": "documentation.html",
         "about.html#report-your-results": "report.html",
         "about.html#contribute-your-results": "report.html",
+        "results.html#recent-arrivals": "recent-results.html#recent-arrivals",
+        "results.html#added-in-the-last-seven-days": (
+            "recent-results.html#added-in-the-last-seven-days"
+        ),
+        "results.html#earlier-results-by-week-published": (
+            "recent-results.html#earlier-results-by-week-published"
+        ),
     }
     server = preview_site.serve(tmp_path, 0)
     try:
@@ -557,7 +568,7 @@ def test_every_shell_aligns_the_trail_with_33em_prose_and_preserves_wide_blocks(
     css = _browser_document().split("<style>", 1)[1].split("</style>", 1)[0]
     publication = (render_overview.TEMPLATES / "paper-publication.css").read_text()
     paper = (
-        '<!doctype html><html><head></head><body>'
+        "<!doctype html><html><head></head><body>"
         '<main class="kpress-page-main kpress-viewport">'
         + navigation_links("papers/example.html")
         + breadcrumbs_html("papers/example.html", "Paper")
@@ -634,3 +645,31 @@ def test_disclosure_and_chevron_motion_share_timing_and_respect_reduced_motion()
                     assert panel.get_attribute("inert") is not None
                 page.close()
         browser.close()
+
+
+def test_results_container_names_and_marks_each_substantive_destination() -> None:
+    destinations = (
+        ("recent-results.html", "Recent Results"),
+        ("results.html", "Results Archive"),
+        ("atlas.html", "Visual Atlas"),
+        ("epistemics.html", "Verification and Ratings"),
+    )
+    for path, label in destinations:
+        nav = navigation_links(path)
+        menu = re.search(r'<ul id="site-nav-results"[^>]*>(.*?)</ul>', nav)
+        assert menu is not None
+        assert [html.unescape(text) for text in re.findall(r"<a[^>]*>(.*?)</a>", menu[1])] == [
+            name for _, name in destinations
+        ]
+        links = [attrs for tag, attrs in Tags(menu[1]).tags if tag == "a"]
+        assert [link["href"] for link in links] == [target for target, _ in destinations]
+        assert [link["href"] for link in links if link.get("aria-current") == "page"] == [path]
+        controls = [
+            (tag, attrs) for tag, attrs in Tags(nav).tags if attrs.get("data-page") == "results"
+        ]
+        assert {tag for tag, _ in controls} == {"span", "button"}
+        assert all(attrs.get("aria-current") == "true" for _, attrs in controls)
+        trail = breadcrumbs_html(path, label)
+        assert "<li><span>Results</span></li>" in trail
+        assert not any(tag == "a" for tag, _ in Tags(trail).tags)
+        assert f'<span aria-current="page">{label}</span>' in trail

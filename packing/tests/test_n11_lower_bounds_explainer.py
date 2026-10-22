@@ -1116,11 +1116,18 @@ def test_every_relative_link_in_the_page_names_a_file_the_deploy_serves(page: st
         f"{PAPERS_DIR}/{PDF_OUTPUT.name}",
         *(asset.name for asset in COMPOSITE_ASSETS),
         *SITE_PAGES,
+        "workbench/index.html",
         *render_contributors.page_paths(),
         *(page.removesuffix("index.html") or "./" for page in SITE_PAGES),
         # The series' other papers, which the page links (`devtools.paper_links`).
         *(render_overview.paper_path(slug) for slug in paper_links.PAPER_SLUGS),
     }
+    served = {posixpath.normpath(path) for path in served}
+    served.update(
+        posixpath.dirname(path) or "."
+        for path in tuple(served)
+        if posixpath.basename(path) == "index.html"
+    )
     # Markup only. The page inlines KaTeX and kpress's client, and a minified
     # `'+a(this.src)+'` in one of them reads as an attribute to a regex that does not
     # know where the script ends.
@@ -1136,9 +1143,7 @@ def test_every_relative_link_in_the_page_names_a_file_the_deploy_serves(page: st
         for link in links
     }
     assert all(not path.startswith("..") for path in resolved.values()), resolved
-    missing = sorted(
-        link for link, path in resolved.items() if (path if path != "." else "./") not in served
-    )
+    missing = sorted(link for link, path in resolved.items() if path not in served)
     assert not missing, f"relative links to files the deploy does not serve: {missing}"
     # The atlas's files are at the root, where the overview links them and a link
     # preview names the card: the page reaches each a level up.

@@ -34,7 +34,7 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 {{RECENT}}
 
-<p class="site-action-row site-more"><a class="site-action" href="results.html#verification-ladders">About Result Verification{{ARROW_RIGHT}}</a><a class="site-action" href="results.html#all-results" {{RESULTS_LINK_ATTRIBUTES}}>View All Results{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="recent-results.html">View Recent Results{{ARROW_RIGHT}}</a><a class="site-action" href="results.html#all-results" {{RESULTS_LINK_ATTRIBUTES}}>View Results Archive{{ARROW_RIGHT}}</a></p>
 
 {{PROFILES}}
 

@@ -1,43 +1,21 @@
 <div class="site-hero">
 
-<h1 id="every-result">Results</h1>
+<h1 id="every-result">Results Archive</h1>
 
 </div>
 
-The result register lists individual contributions: bounds, proofs, constructions, and
-methods. For the best-known bounds by number of squares, use the Atlas and its case
+The complete result register lists individual contributions: bounds, proofs,
+constructions, and methods.
+For the best-known bounds by number of squares, use the Visual Atlas and its case
 records.
 
-<p class="site-action-row site-more"><a class="site-action" href="atlas.html">Atlas{{ARROW_RIGHT}}</a><a class="site-action" href="atlas.html#best-known-results">Best Known Bounds{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="recent-results.html">Recent Results{{ARROW_RIGHT}}</a><a class="site-action" href="atlas.html">Visual Atlas{{ARROW_RIGHT}}</a><a class="site-action" href="atlas.html#best-known-results">Best Known Bounds{{ARROW_RIGHT}}</a></p>
 
-<nav aria-label="On this page"><a href="#all-results">Browse Results</a> · <a href="#recent-arrivals">Recent Arrivals</a> · <a href="#earlier-results-by-week-published">Earlier Publications</a> · <a href="#verification-ladders">Verification and Ratings</a> · <a href="#evidence-and-exactness">Evidence</a> · <a href="#results-and-credits">Credits</a> · <a href="#status-and-supersession">Status</a></nav>
+<nav aria-label="On this page"><a href="#all-results">Browse Results</a> · <a href="#verification-ladders">Verification and Ratings</a> · <a href="#evidence-and-exactness">Evidence</a> · <a href="#results-and-credits">Credits</a> · <a href="#status-and-supersession">Status</a></nav>
 
 <h2 id="all-results">Browse Results</h2>
 
 {{RESULTS_TABLE}}
-
-<a id="recent-arrivals"></a>
-
-## Added in the Last {{ADDED_DAYS_TITLE}} Days
-
-Every result that reached this site over {{ADDED_SPAN}} (its newest day and the
-{{ADDED_DAYS}} before it), at any significance, by the day it arrived, newest first.
-Each id leads to its row in the register table; S4 and S5 are marked, and a muted entry
-says it has since been superseded.
-[Browse these arrivals]({{ADDED_LINK}}) in the table, or open each day’s link for that
-day; [what arrived in the last day]({{ADDED_LAST_DAY}}) counts whole days on the same
-calendar as these dates.
-
-{{RECENT_ADDED}}
-
-<h2 id="earlier-results-by-week-published">Earlier Publications</h2>
-
-Results at {{ROLLUP_FLOOR}} and above from the {{ROLLUP_WEEKS}} before {{ADDED_FIRST}},
-by the week each was published (or established, for this project’s own), with who found
-them. A result added above that was published earlier is listed here too.
-A muted, underlined id has since been superseded.
-
-{{RECENT_ROLLUP}}
 
 ## Verification Ladders<a id="verification-at-a-glance"></a>
 
@@ -48,6 +26,8 @@ confirmed independently.
 For results by others, this repository assigns `V` and `C` under its
 [review policy]({{EPISTEMICS_URL}}#results-by-others).
 Each ladder links to its rubric; each rung has a tooltip with its full meaning.
+The full [Verification and Ratings guide]({{EPISTEMICS_URL}}) defines the evidence
+standards, review policy, and complete rubrics.
 
 {{VERIFICATION}}
 
@@ -106,7 +86,16 @@ whole claim; *superseded in part* means it implies only part, so the original re
 current. The table names the most recent replacement, with “and others” when needed; the
 full record lists every replacement.
 
+The [Recent Results](recent-results.html) page lists arrivals by day and earlier
+publications by week.
 The [overview](./#recent-results) highlights recent major results.
+
+<noscript><p>Recent-result sections have moved:
+<a id="recent-arrivals" href="recent-results.html#recent-arrivals">Recent Arrivals</a>,
+<a id="added-in-the-last-seven-days" href="recent-results.html#added-in-the-last-seven-days">Added
+in the Last Seven Days</a>, and
+<a id="earlier-results-by-week-published" href="recent-results.html#earlier-results-by-week-published">Earlier
+Publications</a>.</p></noscript>
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

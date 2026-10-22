@@ -1,4 +1,4 @@
-"""The results page's overview above its table, read from the register at render time.
+"""The dedicated Recent Results page, read from the register at render time.
 
 Two sections (`think-2z22`). "Added in the Last Seven Days" lists every result the
 register took in over its newest day and the seven before it, one block a day by
@@ -55,7 +55,7 @@ LINE = re.compile(r'<li><span class="site-rollup-who">()(.*?)</span> (.*?)</li>'
 #: One result's link in a line, with its attributes, and what it says to a screen
 #: reader past its id when it has been superseded.
 ID_LINK = re.compile(
-    r'<a href="#(t-\d{3})"([^>]*)>(T-\d{3})'
+    r'<a href="(?:results\.html)?#(t-\d{3})"([^>]*)>(T-\d{3})'
     r'(<span class="site-visually-hidden"> \(superseded\)</span>)?</a>'
     r'(<span class="site-rollup-s">S(\d)</span>)?'
 )
@@ -64,7 +64,8 @@ ID_LINK = re.compile(
 #: project its credit links to if any, the credit's name, and the word that says it has
 #: been superseded.
 ENTRY = re.compile(
-    r'<li( class="site-rollup-superseded")?><a href="#(t-\d{3})"( title="Superseded")?>'
+    r'<li( class="site-rollup-superseded")?><a href="(?:results\.html)?#(t-\d{3})"'
+    r'( title="Superseded")?>'
     r"(T-\d{3})</a> (.*?)<small>([^<]*) · (V\d) (C\d) (<b>S\d</b>|S\d) · "
     r"()(.*?)( · superseded)?</small></li>",
     re.DOTALL,
@@ -100,7 +101,7 @@ ROLLUP_BYTES = 48_000
 
 @pytest.fixture(scope="module")
 def results() -> str:
-    return site_renders.html(render_overview.RESULTS_PAGE)
+    return site_renders.html(render_overview.RECENT_RESULTS_PAGE)
 
 
 @pytest.fixture(scope="module")
@@ -157,18 +158,15 @@ def _window(overview: overview_data.Overview) -> tuple[date, date]:
     return newest - timedelta(days=ADDED_DAYS), newest
 
 
-def test_the_register_precedes_the_rollups_and_stays_whole(
+def test_recent_lists_are_separate_and_the_archive_stays_whole(
     results: str, overview: overview_data.Overview
 ) -> None:
-    """The complete register comes first, followed by recent arrivals and publications;
-    the table still carries one row for every register entry."""
+    """Arrivals precede publications on their own page; every result stays in the
+    archive, with no duplicate result table beside the lists."""
     assert results.count('<div class="site-rollup site-added">') == 1
     assert results.count('<div class="site-rollup">') == 1
-    table = results.index("data-site-table")
+    assert "data-site-table" not in results
     order = [
-        results.index('<h2 id="all-results">'),
-        table,
-        results.index("</table>", table),
         results.index('<h2 id="added-in-the-last-seven-days">'),
         results.index('<div class="site-rollup site-added">'),
         results.index('<h2 id="earlier-results-by-week-published">'),
@@ -177,20 +175,14 @@ def test_the_register_precedes_the_rollups_and_stays_whole(
     assert order == sorted(order)
     headings = re.findall(r"<h([1-6])\b[^>]*>(.*?)</h\1>", results, re.DOTALL)
     assert [(level, re.sub(r"<[^>]+>", "", body)) for level, body in headings] == [
-        ("1", "Results"),
-        ("2", "Browse Results"),
+        ("1", "Recent Results"),
         ("2", "Added in the Last Seven Days"),
         ("2", "Earlier Publications"),
-        ("2", "Verification Ladders"),
-        ("2", "Evidence and Exactness"),
-        ("2", "Result Types and Credits"),
-        ("2", "Status and Supersession"),
     ]
-    assert not any(re.search(r"<a\b[^>]*\bhref=", body) for _, body in headings)
-    for anchor in ("every-result", "results-and-credits"):
-        assert results.count(f'id="{anchor}"') == 1
-    rows = re.findall(r'<tr id="(t-\d{3})"', results)
+    archive = site_renders.html(render_overview.RESULTS_PAGE)
+    rows = re.findall(r'<tr id="(t-\d{3})"', archive)
     assert sorted(rows) == sorted(result.id.lower() for result in overview.results)
+    assert 'class="site-rollup' not in archive
 
 
 def test_the_introductions_state_the_window_and_the_floor_from_the_code(

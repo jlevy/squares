@@ -519,7 +519,7 @@ def test_legacy_home_query_and_registered_fragment_reach_the_complete_filtered_t
             "age": ["180"],
         }
         with page.expect_navigation(url=arrival(pages["results.html"]), wait_until="load"):
-            page.get_by_role("link", name="All Results", exact=True).click()
+            page.locator("a[data-all-results]").click()
         landed = urlsplit(page.url)
         assert landed.path.endswith("/results.html")
         assert landed.query == destination.query
@@ -667,7 +667,7 @@ def test_retired_reader_fragment_updates_the_ordinary_home_link_and_reaches_its_
         assert destination.fragment == fragment
         assert parse_qs(destination.query) == parse_qs(supported)
         with page.expect_navigation(url=arrival(pages[row.path]), wait_until="load"):
-            page.get_by_role("link", name="All Results", exact=True).click()
+            page.locator("a[data-all-results]").click()
         assert_tombstone(page, row, fragment, supported)
     finally:
         page.close()

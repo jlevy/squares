@@ -54,7 +54,6 @@ def shells(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
         title="Header test",
         description="Header behavior fixture.",
         toc=False,
-        tabs=render_overview.visualize_tabs("film"),
         prepare_math=False,
     )
     static = render_overview.static_content_page(
@@ -136,7 +135,9 @@ def test_header_hides_down_and_returns_on_first_upward_scroll(
             page.evaluate(SCROLL, 0)
             assert not page.evaluate(STATE)["hidden"], name
             if name == "ordinary":
-                assert before["tabsInside"]
+                assert page.locator(".site-headroom nav.site-tabs").count() == 0
+                trail = page.get_by_role("navigation", name="Breadcrumb", exact=True)
+                assert trail.is_visible()
         finally:
             page.close()
 
@@ -373,7 +374,7 @@ def test_header_measurement_does_not_restyle_the_native_math_document(
     assert max(invalidations, default=0) < expressions, invalidations
 
 
-def test_nonscrolling_workbench_keeps_header_and_tabs_visible(
+def test_nonscrolling_workbench_keeps_header_and_breadcrumb_visible(
     browser: Any, shells: dict[str, Path]
 ) -> None:
     page = browser.new_page(viewport={"width": 390, "height": 700}, reduced_motion="reduce")
@@ -384,7 +385,8 @@ def test_nonscrolling_workbench_keeps_header_and_tabs_visible(
         header = page.locator(".site-headroom")
         assert header.count() == 1
         assert "site-headroom-hidden" not in (header.get_attribute("class") or "")
-        assert header.locator("nav.site-tabs").is_visible()
+        assert header.locator("nav.site-tabs").count() == 0
+        assert page.get_by_role("navigation", name="Breadcrumb", exact=True).is_visible()
     finally:
         page.close()
 

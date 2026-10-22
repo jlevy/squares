@@ -679,12 +679,12 @@ def test_generated_directory_keeps_native_profile_navigation(
         directory = page.evaluate(LAYOUT)["directory"]
         assert directory["headers"] == [
             "Name",
+            "Accounts",
             "Records",
             "Results",
             "Credits",
             "Years active",
             "Resources",
-            "Accounts",
         ]
         name_keys = [row["keys"][0] for row in directory["rows"]]
         assert name_keys == sorted(name_keys)
@@ -705,7 +705,7 @@ def test_generated_directory_keeps_native_profile_navigation(
                 )
                 == "ascending"
             )
-            for column, label in ((1, "Records"), (2, "Results"), (3, "Credits")):
+            for column, label in ((2, "Records"), (3, "Results"), (4, "Credits")):
                 heading = page.get_by_role("columnheader", name=label, exact=True)
                 heading.focus()
                 heading.press("Enter")
@@ -718,7 +718,7 @@ def test_generated_directory_keeps_native_profile_navigation(
                 values = [int(row["keys"][column]) for row in rows]
                 assert values == sorted(values, reverse=True), label
                 assert heading.get_attribute("aria-sort") == "descending"
-            for label, column in (("Years active", 4), ("Resources", 5), ("Accounts", 6)):
+            for label, column in (("Years active", 5), ("Resources", 6), ("Accounts", 1)):
                 heading = page.get_by_role("columnheader", name=label, exact=True)
                 for _ in range(2):
                     heading.click()

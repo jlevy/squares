@@ -27,10 +27,11 @@ NAVIGATION = (
     NavigationItem(
         "results",
         "Results",
-        "results.html",
+        "",
         (
-            NavigationItem("all-results", "All Results", "results.html"),
-            NavigationItem("atlas", "Atlas", "atlas.html"),
+            NavigationItem("recent-results", "Recent Results", "recent-results.html"),
+            NavigationItem("all-results", "Results Archive", "results.html"),
+            NavigationItem("atlas", "Visual Atlas", "atlas.html"),
             NavigationItem("verification", "Verification and Ratings", "epistemics.html"),
         ),
     ),
@@ -63,6 +64,7 @@ _LEGACY_PATHS = {
     "overview": "./",
     "news": "news.html",
     "results": "results.html",
+    "recent-results": "recent-results.html",
     "atlas": "atlas.html",
     "papers": "papers.html",
     "explanations": "papers.html",
@@ -77,7 +79,8 @@ _LEGACY_PATHS = {
 }
 # The same parent declarations drive the group indication and visible/structured trails.
 _PARENTS = {
-    "atlas.html": ("results",),
+    "recent-results.html": ("results",),
+    "results.html": ("results",),    "atlas.html": ("results",),
     "epistemics.html": ("results",),
     "papers.html": ("learn",),
     "tutorials.html": ("learn",),
@@ -97,7 +100,7 @@ _PARENTS = {
 }
 _COLLECTIONS = {
     "cases/": ("results", "atlas"),
-    "result/": ("results",),
+    "result/": ("results", "all-results"),
     "papers/": ("learn", "papers"),
     "profiles/": ("about", "profiles"),
     "synopsis/": ("about", "synopsis"),
@@ -105,7 +108,6 @@ _COLLECTIONS = {
 _ANCESTORS = {
     **{item.key: (item.label, item.path) for item in NAVIGATION},
     **{child.key: (child.label, child.path) for item in NAVIGATION for child in item.children},
-    "atlas": ("Atlas", "atlas.html"),
     "profiles": ("Profiles", "profiles/"),
     "synopsis": ("Research Synopsis", "synopsis.html"),
 }

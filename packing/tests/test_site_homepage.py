@@ -116,12 +116,12 @@ def _requests(page: Any) -> list[str]:
 
 @pytest.fixture(scope="module")
 def film_payloads() -> dict[str, bytes]:
-    """Only the homepage and local poster assets, without rendering the case records."""
-    html = site_renders.html("index.html")
-    files = site_assets.shared().assets.referenced([html])
+    """Homepage and standalone Videos, without rendering the case records."""
+    documents = {name: site_renders.html(name) for name in ("index.html", "visualize.html")}
+    files = site_assets.shared().assets.referenced(documents.values())
     posters = {hero for _, hero, *_ in overview_sections.ATLAS_CARDS}
     return {
-        "index.html": html.encode("utf-8"),
+        **{name: html.encode("utf-8") for name, html in documents.items()},
         **{f"assets/{name}": data for name, data in files.items()},
         **render_overview.support_files(),
         **{path.name: path.read_bytes() for path in COMPOSITE_ASSETS if path.name in posters},
@@ -129,11 +129,11 @@ def film_payloads() -> dict[str, bytes]:
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
+def test_homepage_links_to_native_videos_and_reduced_motion_waits_for_click(
     browser: Any, request: pytest.FixtureRequest, width: int
 ) -> None:
     requests = []
-    page = browser.new_page(viewport={"width": width, "height": 900})
+    page = browser.new_page(viewport={"width": width, "height": 900}, reduced_motion="reduce")
     live = os.environ.get("SQPACK_SITE_PREVIEW_URL")
     origin = f"{live.rstrip('/')}/" if live else ORIGIN
     if not live:
@@ -146,7 +146,11 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
     page.route(render_overview.FILM_URL, intercept)
     try:
         page.goto(f"{origin}index.html", wait_until="load")
-        film = page.locator(".site-homepage-film video")
+        assert page.locator("video").count() == 0
+        videos = page.locator('a[href="visualize.html"]').filter(has_text="View Videos")
+        assert videos.count() == 1
+        videos.click()
+        film = page.locator(".site-film-frame video")
         film.scroll_into_view_if_needed()
         state = page.evaluate(FILM)
         assert requests == [], "preload=none must wait for the reader"
@@ -154,7 +158,7 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
         assert state["inline"]
         assert state["preload"] == "none"
         assert not state["autoplay"]
-        assert not state["marked_autoplay"]
+        assert state["marked_autoplay"]
         assert state["paused"]
         assert state["play_icon"]["content"] == '""'
         assert state["play_icon"]["width"] > 0
@@ -172,21 +176,6 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
         assert state["right"] <= width
         assert state["overflow"] <= 0
         assert state["width"] / state["height"] == pytest.approx(16 / 9, abs=0.01)
-        assert [heading["id"] for heading in state["headings"]] == [
-            "the-problem",
-            "the-atlas-of-square-packings",
-            "news",
-            "recent-results",
-            "profiles",
-            "report-your-results",
-            "papers",
-            "visuals",
-            "squares-project-documentation",
-            "more-resources",
-        ]
-        for heading in state["headings"]:
-            assert heading["above"] == pytest.approx(state["title_above"], abs=0.01)
-            assert heading["below"] == pytest.approx(state["title_below"], abs=0.01)
         overlay = page.get_by_role("button", name="Play video", exact=True)
         with page.expect_request(render_overview.FILM_URL, timeout=5000):
             overlay.click()
@@ -736,7 +725,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     assert len(home["news_headings"]) == len(selected)
     assert all(heading["title"] for heading in home["news_headings"])
     assert [heading["href"] for heading in home["paper_headings"]] == [
-        paper.href for paper in overview_sections.PAPERS
+        paper.href for paper in (*overview_sections.PAPERS[-2:], overview_sections.PAPERS[0])
     ]
     assert all(heading["title"] for heading in home["paper_headings"])
     assert home["other_lower_headings"] == []
@@ -751,7 +740,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     for action in home["actions"]:
         assert action["transform"] == "uppercase", action
     download = seen[width]["download"]
-    assert download["order"] == ["Download PDF", "Explore the atlas"]
+    assert download["order"] == ["Download PDF", "View All Packings"]
     assert download["href"] == overview_sections.PDF_CARD_SPECS[1][0]
     assert download["download"]
     assert download["uppercase"] == "uppercase"
@@ -774,7 +763,10 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
     origin = f"{live.rstrip('/')}/" if live else ORIGIN
     files = None
     if not live:
-        documents = {name: site_renders.html(name) for name in ("index.html", "results.html")}
+        documents = {
+            name: site_renders.html(name)
+            for name in ("index.html", "recent-results.html", "results.html")
+        }
         files = {
             **{name: html.encode() for name, html in documents.items()},
             **{
@@ -792,25 +784,25 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
         try:
             page.goto(f"{origin}index.html?s=4", wait_until="load")
             initial = page.evaluate(STATE)
-            verification = page.get_by_role(
-                "link", name=re.compile("^About Result Verification$", re.IGNORECASE)
+            recent = page.get_by_role(
+                "link", name=re.compile("^View Recent Results$", re.IGNORECASE)
             )
-            bounds = verification.bounding_box()
+            bounds = recent.bounding_box()
             assert bounds is not None
             assert bounds["x"] >= 0
             assert bounds["x"] + bounds["width"] <= width
-            verification.focus()
+            recent.focus()
             with page.expect_navigation(wait_until="load"):
                 page.keyboard.press("Enter")
-            destination = f"{origin}results.html#verification-ladders"
+            destination = f"{origin}recent-results.html"
             sync_api.expect(page).to_have_url(destination)
-            sync_api.expect(page.locator("#verification-ladders")).to_be_in_viewport()
+            sync_api.expect(
+                page.get_by_role("heading", name="Recent Results", exact=True)
+            ).to_be_visible()
             sync_api.expect(page.locator("div.site-rung-legend[role=note]")).to_have_count(0)
             keyboard_destination = page.url
             page.goto(f"{origin}index.html?s=4", wait_until="load")
-            all_results = page.get_by_role(
-                "link", name=re.compile("^All Results$", re.IGNORECASE)
-            )
+            all_results = page.locator("a[data-all-results]")
             bounds = all_results.bounding_box()
             assert bounds is not None
             assert bounds["x"] >= 0
@@ -831,7 +823,7 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
 
 
 @pytest.mark.parametrize("width", NAV_WIDTHS)
-def test_results_actions_reach_verification_and_the_complete_table(
+def test_results_actions_reach_recent_results_and_the_complete_archive(
     results_navigation_seen: dict[int, dict[str, Any]], width: int
 ) -> None:
     reading = results_navigation_seen[width]

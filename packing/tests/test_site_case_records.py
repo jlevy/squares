@@ -389,8 +389,12 @@ def test_the_popovers_compact_drawing_keeps_its_own_line_weight(
         assert drawn is not None
         assert drawn["caption_math"], drawn
         assert min(drawn["caption_math"]) > 0.5 * drawn["rem"], drawn
-        limit = 20 if width == 1280 else 18
-        assert drawn["width"] == pytest.approx(min(drawn["body"], limit * drawn["rem"]), abs=1)
+        article = popover.locator("article.site-case").bounding_box()
+        assert article is not None
+        limit = 20 if article["width"] >= 42 * drawn["rem"] else 18
+        assert drawn["width"] == pytest.approx(
+            min(article["width"], limit * drawn["rem"]), abs=1
+        )
         assert drawn["height"] == pytest.approx(drawn["width"], abs=0.5), drawn
         assert drawn["frame_effect"] == drawn["outline_effect"] == "non-scaling-stroke"
         lines = min(drawn["width"], 12 * drawn["rem"])

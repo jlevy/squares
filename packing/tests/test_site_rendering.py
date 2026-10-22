@@ -320,23 +320,12 @@ def test_native_closed_optional_math_is_outside_the_initial_readability_sample(
         server.server_close()
 
 
-#: The results page with its overview taken out, served beside the page as shipped, so
-#: that its first screen is the prose the fallback faces were tuned on. With the overview
-#: first (think-2z22), a 390 by 900 screen ends inside its open blocks: the unadjusted
-#: face rewraps the overview's introduction and moves the blocks below it, CLS 0.014
-#: with the weekly prototype, and the Verification Ladders prose the negative control was
-#: written against is off the screen. A taller screen does not bring it back, since CLS
-#: divides each move by the screen's height (0.077 at 1800). Taken out, the control reads
-#: 0.105 again, its value before the overview. The control now sets both fallbacks'
-#: metrics wrong (`mismatched`, from `main`'s 2b67bb679) rather than relying on the
-#: unadjusted face, and it still runs here, on the prose it was written against.
+#: A prose-first variant of the archive retains the font-metric negative control's
+#: rating-guide prose above the fold. Recent lists now have their own page; removing
+#: the archive table here is a test fixture, never a production alternate page.
 PROSE_FIRST = "results-prose-first.html"
-#: The overview's two sections, the last seven days' registrations and the weekly rollup
-#: under them, headings, introductions and blocks: to the next section's heading, which
-#: is the next `h2` at the top of the page or `All Results` if it moves above the table.
-_OVERVIEW = re.compile(
-    r'<h2 id="added-in-the-last-seven-days">.*?'
-    r'<h2 id="earlier-results-by-week-published">.*?(?=<h[12][ >])',
+_ARCHIVE_TABLE = re.compile(
+    r'<h2 id="all-results">.*?(?=<h2 id="verification-ladders">)',
     re.DOTALL,
 )
 
@@ -344,14 +333,14 @@ _OVERVIEW = re.compile(
 @pytest.fixture(scope="module")
 def results_font_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     """One actual results page and its asset closure, without other producer trees,
-    and beside it the same page with its overview taken out (`PROSE_FIRST`)."""
+    and beside it the same page with its table taken out (`PROSE_FIRST`)."""
     from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
 
     root = tmp_path_factory.mktemp("results-font-layout")
     rendered = render_overview.results_page()
     (root / rendered.name).write_text(rendered.html, encoding="utf-8")
-    prose_first, taken = _OVERVIEW.subn("", rendered.html)
-    assert taken == 1, "the results page no longer has one overview to take out"
+    prose_first, taken = _ARCHIVE_TABLE.subn("", rendered.html)
+    assert taken == 1, "the archive no longer has one table section to take out"
     (root / PROSE_FIRST).write_text(prose_first, encoding="utf-8")
     assets = render_overview.asset_files([rendered])
     assert sum(map(len, assets.values())) + len(rendered.html.encode()) < 3 * 1024 * 1024
@@ -1015,13 +1004,17 @@ def test_frontier_preloads_every_pt_serif_face_it_draws(
 
 
 def _navigation_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[str, Any]]]:
-    """The bar's link boxes and the faces Chromium actually draws their labels in."""
+    """Visible navigation controls and the faces Chromium draws their labels in."""
+    selector = ".site-nav a, .site-nav-disclosure, .site-nav-mobile-toggle"
     boxes = []
-    for link in page.locator(".site-nav-inner > a").all():
-        box = link.bounding_box()
+    for control in page.locator(selector).all():
+        if not control.is_visible():
+            continue
+        box = control.bounding_box()
         assert box is not None
         boxes.append(dict(box))
-    assert len(boxes) > 3
+    assert page.get_by_role("navigation", name="Site", exact=True).is_visible()
+    assert boxes
     session = page.context.new_cdp_session(page)
     try:
         session.send("DOM.enable")
@@ -1029,7 +1022,7 @@ def _navigation_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[s
         document = session.send("DOM.getDocument")
         links = session.send(
             "DOM.querySelectorAll",
-            {"nodeId": document["root"]["nodeId"], "selector": ".site-nav-inner > a"},
+            {"nodeId": document["root"]["nodeId"], "selector": selector},
         )
         fonts = [
             face

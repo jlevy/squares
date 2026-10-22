@@ -2929,10 +2929,9 @@ html[data-site-atlas-view="triangle"]
    cases carries (overview/case-popover.js). A record opens with its visual summary,
    the drawing and bound facts together, followed by the detailed record. */
 :root {
-  /* Resolve the canonical shell's measure and foundation insets here, before a
-     fetched record inherits another page's band-specific inset. Both readers use
-     this cap, with enough room for two 17rem bound cards and their gap. */
-  --site-case-max: min(48rem, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
+  /* Canonical and fetched records share the actual reading measure; container
+     queries adapt their bound cards and drawing to the available space. */
+  --site-case-max: var(--kpress-measure);
 }
 .site-case {
   container-type: inline-size;

@@ -1465,7 +1465,7 @@ def test_see_all_results_and_the_expander_are_one_button(seen: Readings, name: s
     assert see_all["icon"]["width"] == pytest.approx(expander["icon"]["width"], abs=0.5)
     assert see_all["icon"]["after_text"]
     assert expander["icon"]["after_text"]
-    assert see_all["label"] == "All Results"
+    assert see_all["label"] == "View Results Archive"
 
 
 def test_the_expander_reads_show_more_then_show_less_with_the_chevron_turned(
