@@ -13914,7 +13914,12 @@ issues:
     beads:
     - think-xmxb
     answer_bead: think-xmxb
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/684#issuecomment-6331907160
+      date: '2026-10-22'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
     close_when: Its ask is done.
   - number: 686
     title: '100 certified larger-count square packings (328–998): registration request'
