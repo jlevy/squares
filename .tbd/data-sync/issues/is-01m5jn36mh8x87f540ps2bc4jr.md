@@ -5,13 +5,13 @@ title: "Gate: every registered result at S4 or S5 has a News item (records tier 
 kind: task
 status: open
 priority: 0
-version: 2
+version: 3
 labels:
   - process
 dependencies: []
 parent_id: is-01m5jn336nm6erpp0ygedhgpva
 created_at: 2026-10-22T20:33:29.233Z
-updated_at: 2026-10-22T20:52:22.233Z
+updated_at: 2026-10-22T20:53:36.444Z
 ---
 c-lane-announce-1022, branch claude/news-gate-s4-s5. Includes T-194's News item and the decision on the 13 September S4/S5 results. Epic think-s38d.
 
@@ -30,3 +30,5 @@ EXEMPTION: 15 results, the 13 September ones plus T-064 and T-081 (S4, landed 1 
 FOR think-2252: of the 28 PRs labelled S3+ and merged into main since 2026-10-13 (gh pr list, label S3/S4/S5), 11 are not in site-changelog.yaml `deliveries`, all S3: #578, #620, #621, #644, #645, #657, #671, #688, #692, #699, #708. #651 (S5) was the twelfth, and is imported on this branch. Unlabelled PRs were not counted.
 
 OTHER PRs: #725 at 3d43e15da (T-226/T-227 S2->S3) and #731 at ef005f489 (T-230 S3) give no failures and no owed notes, on their branch or on main.
+
+2026-10-22 20:55Z coord-intake-1021b: PR #735 (https://github.com/jlevy/squares/pull/735, branch claude/news-gate-s4-s5, head 2260fb10f on main 59b1ec594): gate (records-tier synopsis step, render_changelog --announcement-base), T-194's News item with #651's delivery imported, 15-result pre-archive exemption (6279bd0e6), stage 7 'Announce a Significant Result'. Senior review A launched (c-review-735-A). Merge as soon as reviewed and green.
