@@ -204,8 +204,18 @@ def test_live_current_families_pending_comparison_and_known_scope_gap() -> None:
     assert "T-163" not in index.current_results
     assert "think-kqi1" in " ".join(index.unresolved["T-163"])
     assert records.current_record_ids(["T-037", "T-060", "T-163", "T-060"], index) == ("T-060",)
+    # T-229 (#719), pending adoption, states a smaller side at 105 and 204 than the
+    # houses, so the reported lane's comparison there is its own; T-174 and T-225 keep
+    # the verified lane.
     assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-225"]} == {
         (n, "upper", lane) for n in (204, 227, 229, 260) for lane in ("reported", "verified")
+    } - {(204, "upper", "reported")}
+    assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-229"]} == {
+        (105, "upper", "reported"),
+        (204, "upper", "reported"),
+    }
+    assert (105, "upper", "reported") not in {
+        (facet.n, facet.direction, facet.lane) for facet in index.facets["T-174"]
     }
 
 
