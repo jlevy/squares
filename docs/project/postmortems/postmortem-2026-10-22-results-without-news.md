@@ -251,7 +251,7 @@ News, so 15 S4/S5 results predate News without an article.
 
 | Bead | Change | Guards against |
 | --- | --- | --- |
-| `think-9wxc` | A records-tier and CI gate: every registered S4 or S5 result has a News article that News shows, at its own score. The result’s own PR drafts the article, and a named stage 7 step lands it right after the verified deploy; the gate fails every later PR until it does. T-194 gets its article | An S4/S5 result landing unannounced; an article left to “the next change” |
+| `think-9wxc` | A records-tier and CI gate: every registered S4 or S5 result has a News article that News shows, at its own score. The result’s own PR drafts the article, and a named stage 7 step lands it right after the verified deploy; until it does, the gate fails the next change to the register or News, and warns on any other. T-194 gets its article | An S4/S5 result landing unannounced; an article left to “the next change” |
 | `think-gq0l` | The owner decides whether the 15 S4/S5 results from before News get articles dated to their merges; until then the gate exempts them | A gap the archive inherited when it was created |
 | `think-aqv8` | A discreet significance filter at the top right of the home box, S5 by default when there are enough S5 articles, otherwise S4+S5 | A box that stays the same for a week without anyone noticing |
 | `think-2252` | An audit of the 26 S3+ results without articles; S3 articles stay optional, by the owner’s decision | The S3 backlog this incident left |
@@ -262,16 +262,23 @@ News, so 15 S4/S5 results predate News without an article.
 1. **The gate should count articles News shows.** It should require an entry scored 3 or
    more, without `news_exclusion`, that lists the result.
    Presence in `result_ids` is not enough: T-064 and T-081 sit in an S2 entry that News
-   never shows.
+   never shows. **Done in #735**: the gate reads the entries News renders, at the
+   result’s own score.
 2. **The gate needs the ordering problem solved, not only described.** While the
    validator requires a merged delivery, a PR cannot carry its own article.
-   A gate on that rule then turns `main` red at every S4/S5 merge, and the next PR,
-   whatever it is, inherits the duty.
-   One way out is to let a branch’s article name its own PR as pending, accepted only
-   for that PR, with its date set at merge by the same stamp that sets `landed` in
-   `devtools.stamp_landed`, and its delivery row added by the importer afterwards.
+   A gate on that rule alone would turn `main` red at the next merge after every S4/S5
+   merge, and the next PR, whatever it is, would inherit the duty.
+   #735 handles it narrowly: an article owed on `main` fails only a change that edits
+   `results.yaml` or `site-changelog.yaml`, the change that can settle it, and every
+   other change, `main`’s pushes and scheduled runs included, gets a warning and passes.
+   The real fix is still open as `think-n51k`: let a branch’s article name its own PR as
+   pending, accepted only for that PR, with its date set at merge by the same stamp that
+   sets `landed` in `devtools.stamp_landed`, and its delivery row added by the importer
+   afterwards.
 3. **Run the gate when a score rises, not only at registration.** T-189 rose from S2 to
    S3 and nothing asked for an article.
+   **Done in #735** for S4 and S5: a raise is owed exactly as a registration is.
+   S3 stays optional (item 4).
 4. **Make S3 a decision.** Give each S3 result an article or a recorded omission with
    its reason, as each PR has a coverage omission now, and have the sweep list
    `T-NNN owes News or an omission`, as it lists replies.
@@ -289,6 +296,8 @@ News, so 15 S4/S5 results predate News without an article.
 9. **Turn the measurement into a tool (OR-1).** These counts came from a one-off script
    over `results.yaml` and `site-changelog.yaml`. `think-9wxc`’s gate, or a report mode
    of it, should print them.
+   **Done in #735** for S4 and S5: every run of the gate prints the registered, exempt,
+   owed and failing counts.
 
 ## The rules this yields
 

@@ -7075,8 +7075,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "The S4 and S5 announcement gate (think-9wxc): `render_changelog` gains "
             "`check_announcements` and its helpers, called only by its own `main` under "
             "`--announcement-base`, and the records tier's synopsis step passes that flag. "
-            "No existing function changes. The papers reach `render_changelog` only "
-            "through `site_documents`, which calls `entry_anchor`, and no builder calls "
+            "No function the papers reach changes; `main` gains the flag and `_synopsis` "
+            "passes it. The papers reach `render_changelog` only through "
+            "`site_documents`, which calls `entry_anchor`, and no builder calls "
             "`validate._synopsis`. No render was taken, and every paper keeps its version."
         ),
     ),
