@@ -5,7 +5,7 @@ title: "PR #578 final review and merge"
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -14,10 +14,11 @@ child_order_hints:
   - is-01m5h7zahankya4n90qy81y3f1
   - is-01m5h8ywbnz0bwpa535jvnwws7
   - is-01m5h96c68c0bgddrtjjfrb3vm
+  - is-01m5hb27t5efe7vksmnhrjwa4a
 hold: null
 hold_until: null
 created_at: 2026-10-22T07:18:59.452Z
-updated_at: 2026-10-22T08:18:43.455Z
+updated_at: 2026-10-22T08:18:57.475Z
 started_at: 2026-10-22T07:19:14.287Z
 ---
 User requests final review of the combined profile feature, fresh main integration, and merge only after reviews and required checks pass. Run pinned senior and applicable dedicated review updates, resolve all findings, confirm current-head CI, then merge with a merge commit. Deployment is separate.
