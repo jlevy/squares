@@ -506,7 +506,7 @@ def _register_records() -> None:
                         "before confirmation."
                     ),
                     "notes": (
-                        "Credit to ry-xu with disclosed LLM assistance. All 25 source "
+                        "Credit to Ryan Xu with disclosed LLM assistance. All 25 source "
                         "inputs retained; no upstream code executed. Exact finite "
                         "feasibility only."
                     ),
@@ -618,8 +618,7 @@ def register() -> None:
             previous.update(
                 superseded_by=houses.RADICAL_SOURCE_ID if n == 51 else houses.SOURCE_ID,
                 reason=(
-                    "Historical source ceiling superseded by a smaller exact ry-xu "
-                    "construction."
+                    "Historical source ceiling superseded by a smaller exact Xu construction."
                 ),
             )
             start = text.index("beyond_horizon_claims:")

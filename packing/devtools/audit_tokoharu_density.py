@@ -219,7 +219,7 @@ def preflight(case: Path, n: int, expected_side: Fraction | None = None) -> dict
     """Bind raw intervals to exact data and prove all non-coverage obligations.
 
     ``expected_side`` defaults to the reviewed Tokoharu side for ``n``; other packets in
-    the same format (wand125's rectangle certificates) pass their own pinned side.
+    the same format (Hosono's rectangle certificates) pass their own pinned side.
     """
     data = _json(case / "certified_candidate.json")
     side, shrink, total, rectangles = density(data)

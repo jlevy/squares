@@ -4,8 +4,8 @@ For each n this places n side-B cores at net orientations, from the repository's
 known-best witness and from the ceil(sqrt n) grid, and decides their containment and
 disjointness in exact rational arithmetic (sqpack.rectangle_ceiling). Each verified
 placement at side L proves that no rectangle-density certificate at any side >= L has
-mass below n. The receipt compares that proved ceiling with the B*UB(n) values the pinned
-wand125 tools derive from their rounded upper-bound table (T-058).
+mass below n. The receipt compares that proved ceiling with the B*UB(n) values Hosono's
+pinned tools derive from their rounded upper-bound table (T-058).
 
 From packing/:
     python -m devtools.certify_rectangle_ceiling            # write the receipts

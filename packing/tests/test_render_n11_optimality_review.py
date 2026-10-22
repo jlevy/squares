@@ -530,13 +530,15 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     assert ".credits" not in paper.STYLE.read_text(encoding="utf-8")
     html, markdown = rendered
     address = "github.com/Queuingtheorydotcom/11SquaresOptimal"
-    oversight = '<a href="https://x.com/ojoshe" target="_blank" rel="noopener noreferrer">'
+    author_profile = render_overview.canonical_url("profiles/manasseh-ahmed.html")
+    oversight_profile = render_overview.canonical_url("profiles/joshua-levy.html")
+    oversight = f'<a href="{oversight_profile}" target="_blank" rel="noopener noreferrer">'
     block = html.split('<div class="credits centred">', 1)[1].split("</div>", 1)[0]
     assert [line.strip() for line in block.strip().splitlines()] == [
         (
             '<span class="credits-source">From the original proof by '
-            '<a href="https://x.com/ManassehA06" target="_blank" rel="noopener noreferrer">'
-            "<strong>Mannaseh Ahmed</strong></a></span>"
+            f'<a href="{author_profile}" target="_blank" rel="noopener noreferrer">'
+            "<strong>Ahmed</strong></a></span>"
         ),
         (
             f'<span class="credits-source"><a href="https://{address}" target="_blank" '
@@ -544,7 +546,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
         ),
         (
             f'<span class="credits-own">Human oversight: {oversight}'
-            "<strong>Joshua Levy</strong></a></span>"
+            "<strong>Levy</strong></a></span>"
         ),
         "<span>Agents: <strong>GPT-6 Astra</strong> and <strong>GPT-6 Sol</strong></span>",
         (
@@ -577,9 +579,10 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
         ".credits .publication-date + .series {\n  margin-block-start: 1lh;\n}"
     ) in shared
     assert markdown.startswith(
-        f"# {paper.TITLE}\n\n- From the original proof by [**Mannaseh Ahmed**](https://x.com/ManassehA06)\n"
+        f"# {paper.TITLE}\n\n"
+        f"- From the original proof by [**Ahmed**]({author_profile})\n"
         f"- [{address}](https://{address})\n"
-        "- Human oversight: [**Joshua Levy**](https://x.com/ojoshe)\n"
+        f"- Human oversight: [**Levy**]({oversight_profile})\n"
         "- Agents: **GPT-6 Astra** and **GPT-6 Sol**\n"
         f"- {release.OPTIMALITY_REVIEW_EDITION} ([version history](#version-history))\n"
         f"- First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "

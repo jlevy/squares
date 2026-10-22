@@ -14,7 +14,7 @@ field is known from the published exact sides `(7 + sqrt(7))/2` and `(17 + sqrt(
 The lift re-runs from the complete source witness at every verification and the side
 lift is pinned to the published form, exactly as in `cases/lifted_q2`. The n86 input
 is the original Kingbird witness preserved before the #432 atlas replacement; the
-current ry-xu construction has different exact geometry and is certified separately.
+current Xu construction has different exact geometry and is certified separately.
 
 Nothing here claims optimality.
 """

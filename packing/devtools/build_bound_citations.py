@@ -190,7 +190,7 @@ class Source:
     credit: str | None = None
     #: What the stage prints where the whole `credit` does not fit its line: the credit's
     #: authors and the first of its links, ending in `et al.` (`Tokoharu after Levy,
-    #: wand125 et al.`). The stage's alone; every other renderer prints `credit` whole.
+    #: Hosono et al.`). The stage's alone; every other renderer prints `credit` whole.
     #: `check_short_credit` holds it to that shape.
     short_credit: str | None = None
     #: The source's own date for the version cited, where the bibliography gives one.
@@ -260,8 +260,8 @@ def short_credits(credit: str) -> list[str]:
     """Every shortening the stage may print for `credit`, longest first.
 
     The credit's authors whole, then `after` and a proper prefix of its links, at least
-    one, then `et al.`: `Tokoharu after Levy, wand125 et al.` for `Tokoharu after Levy,
-    wand125, Stromquist, Nagamochi, Burns, Massaccesi`. A shortened line therefore keeps
+    one, then `et al.`: `Tokoharu after Levy, Hosono et al.` for `Tokoharu after Levy,
+    Hosono, Stromquist, Nagamochi, Burns, Massaccesi`. A shortened line therefore keeps
     every author, names each link it keeps in the place the credit names it, and says that
     links follow. A credit with one link or none has no shortening: `A et al.` would read
     as coauthors.

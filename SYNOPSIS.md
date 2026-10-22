@@ -143,15 +143,16 @@ and differ in how they close germs, and $s(12) \ge 15680/3951$ at `V3/C3`; its
 $s(21) \ge 5000/1001$ was superseded by the same author’s mixed covers of 27 September,
 weighted points plus mass on interior grid-line segments, which prove $s(21) = 5$ and
 $s(45) = 7$, both `V3/C3`. Its case-free proof of Bentz’s $s(13) = 4$ was kernel-checked
-in Lean here on 30 September and is recorded under T-006. wand125’s rectangle-density
-certificates, 44 as of 27 September, 50 standing as of 28 September and raised again on
-1 October for $n = 18$ to $95$, built with Tokoharu’s solver and decided by Tokoharu’s
-reviewed interval verifier, are verified by complete replays here at 37 counts (T-045,
-T-070, T-074) and reported at the others until their replays run.
-wand125’s point-only routes to $s(21) = 5$ and $s(45) = 7$, both verified here as second
-certificates, and its $s(50) \ge 37/5$, verified here by a complete replay, followed on
-28 September. Guzhou0806’s continuation of R052, $s(17) > 4.62003$, superseded by
-`v1.1.0`, is retained as a publication record.
+in Lean here on 30 September and is recorded under T-006. The rectangle-density
+certificates of Hiroaki Hosono (wand125), 44 as of 27 September, 50 standing as of 28
+September and raised again on 1 October for $n = 18$ to $95$, built with Tokoharu’s
+solver and decided by Tokoharu’s reviewed interval verifier, are verified by complete
+replays here at 37 counts (T-045, T-070, T-074) and reported at the others until their
+replays run. Hosono’s point-only routes to $s(21) = 5$ and $s(45) = 7$, both verified
+here as second certificates, and his $s(50) \ge 37/5$, verified here by a complete
+replay, followed on 28 September.
+Guzhou0806’s continuation of R052, $s(17) > 4.62003$, superseded by `v1.1.0`, is
+retained as a publication record.
 The [results register](packing/frontier/RESULTS.md) and the site’s
 [results table](https://jlevy.github.io/squares/results.html) give the credit for each.
 The rungs above are the register’s, under the ladder in force since 2026-09-30. Dated
@@ -217,7 +218,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-043](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S3` | `previously-published` | s(17) > 116511/25000 = 4.66044, by Guzhou0806 / N17 project’s R068 release of 28 September 2026, continuing Marc Leonard Overbeck’s public 4.66001 charge (T-041). |
 | [T-044](packing/frontier/RESULTS.md) | 26, 29, 39, 40, 41, 52, 53, 54, 55, 56, 57, 68, 69, 70, 71, 72, 73 | `V3` | `C3` | `S3` | `previously-published` | Ten exact weighted point certificates in wand125/square-packing-bounds, of 22 September 2026, prove s(26) >= 109/20, s(29) >= 557/100, s(39) >= 13/2, s(40) >= 13/2, s(53) >= 369/50, s(55) >= 377/50, s(56) >= 381/50, s(69) >= 841/100, s(70) >= 171/20 and s(72) >= 861/100. |
 | [T-045](packing/frontier/RESULTS.md) | 18, 19, 20, 26, 27, 28, 30, 31, 32, 40, 61, 75, 76, 77, 78 | `V3` | `C3` | `S3` | `previously-published` | Twelve rectangle-density certificates in wand125/square-packing-bounds, added on 26 and 27 September 2026, prove s(18) >= 939/200, s(19) >= 963/200, s(20) >= 979/200, s(26) >= 553/100, s(27) >= 28/5, s(30) >= 1173/200, s(31) >= 148/25, s(32) >= 119/20, s(40) >= 1339/200, s(61) >= 199/25, s(75) >= 889/100 and s(78) >= 1791/200. |
-| [T-048](packing/frontier/RESULTS.md) | 50, 51 | `V3` | `C3` | `S3` | `previously-published` | s(50) >= 37/5 = 7.4, by wand125’s mixed rectangle-density certificate of 28 September 2026. |
+| [T-048](packing/frontier/RESULTS.md) | 50, 51 | `V3` | `C3` | `S3` | `previously-published` | s(50) >= 37/5 = 7.4, by Hiroaki Hosono’s mixed rectangle-density certificate of 28 September 2026. |
 | [T-049](packing/frontier/RESULTS.md) | 12 | `V3` | `C3` | `S3` | `previously-published` | s(12) >= 15680/3951 = 3.9686155 …, by Evan Daniel’s weighted point certificate, published on 25 August 2026 and first seen here on 27 September. |
 | [T-050](packing/frontier/RESULTS.md) | 21 | `V3` | `C3` | `S3` | `previously-published` | s(21) >= 5000/1001 = 4.995004995 …, by Evan Daniel’s weighted point certificate of 23 September 2026. |
 | [T-053](packing/frontier/RESULTS.md) | 45 | `V3` | `C3` | `S3` | `previously-published` | s(45) = 7: the lower half by Evan Daniel’s mixed cover of 27 September 2026, the upper half by the 7 x 7 grid. |
@@ -225,8 +226,8 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-057](packing/frontier/RESULTS.md) | 211 | `V3` | `C3` | `S3` | `previously-published` | s(211) <= 14.99796070496771500150 < 15, by Joost de Winter’s packing of 16 September 2026: 211 unit squares in a square of that side. |
 | [T-062](packing/frontier/RESULTS.md) | 60 | `V3` | `C3` | `S3` | `previously-published` | s(60) = 8: the lower half by Evan Daniel’s mixed cover of 28 September 2026, the upper half by the 8 x 8 grid. |
 | [T-063](packing/frontier/RESULTS.md) | 61 | `V3` | `C3` | `S3` | `previously-published` | s(61) = 8, as a corollary of s(60) = 8 (T-062), which Evan Daniel published with it on 28 September 2026. |
-| [T-066](packing/frontier/RESULTS.md) | 59 | `V3` | `C3` | `S3` | `previously-published` | s(59) = 8: the lower half by wand125’s mixed cover of 1 October 2026, the upper half by the 8 x 8 grid. |
-| [T-067](packing/frontier/RESULTS.md) | 77, 78 | `V3` | `C3` | `S3` | `previously-published` | s(77) = 9: the lower half by wand125’s mixed cover of 1 October 2026, the upper half by the 9 x 9 grid. |
+| [T-066](packing/frontier/RESULTS.md) | 59 | `V3` | `C3` | `S3` | `previously-published` | s(59) = 8: the lower half by Hiroaki Hosono’s mixed cover of 1 October 2026, the upper half by the 8 x 8 grid. |
+| [T-067](packing/frontier/RESULTS.md) | 77, 78 | `V3` | `C3` | `S3` | `previously-published` | s(77) = 9: the lower half by Hiroaki Hosono’s mixed cover of 1 October 2026, the upper half by the 9 x 9 grid. |
 | [T-068](packing/frontier/RESULTS.md) | 19, 20, 26, 27, 28, 29, 30, 31, 38, 39, 40, 41, 42, 43, 44, 53, 54, 55, 56, 66, 68, 69, 70, 74, 75, 76, 86, 87, 88, 89, 90, 93, 94, 95 | `V3` | `C3` | `S3` | `previously-published` | Thirty-four rectangle-density certificates of wand125/square-packing-bounds, one at each of 34 counts from n = 19 to n = 95, published between 29 September and 1 October 2026, prove the values below. |
 | [T-069](packing/frontier/RESULTS.md) | 37, 65, 66, 90, 92 | `V3` | `C3` | `S3` | `previously-published` | Five rectangle densities of wand125/square-packing-bounds, checked at coverage one and published between 29 September and 1 October 2026, prove s(37) >= 161/25 = 6.44, s(65) >= 167/20 = 8.35, s(66) >= 421/50 = 8.42, s(90) >= 48/5 = 9.6 and s(92) >= 969/100 = 9.69. |
 | [T-070](packing/frontier/RESULTS.md) | 29, 38, 39, 41, 42, 43, 44, 51, 52, 53, 54, 55, 57, 59, 60, 67, 68, 69, 70, 71, 72, 73, 74, 86, 95 | `V3` | `C3` | `S3` | `previously-published` | Sixteen rectangle-density certificates in wand125/square-packing-bounds, added or raised on 27 and 28 September 2026, prove s(29) >= 579/100, s(38) >= 327/50, s(39) >= 663/100, s(41) >= 1351/200, s(51) >= 2977/400, s(52) >= 1507/200, s(53) >= 1519/200, s(57) >= 1567/200, s(59) >= 198/25, s(67) >= 1691/200, s(69) >= 343/40, s(71) >= 1737/200, s(72) >= 437/50, s(73) >= 439/50, s(86) >= 1871/200 and s(95) >= 49209/5000. |
@@ -347,8 +348,8 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-011](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S2` | `previously-published` | Trump’s 1979 packing is exactly valid: 11 unit squares in a square of side the published degree-8 algebraic number 3.877083590022814 …, with 14 of 55 pairs in exact zero-separation contact and 20 corner coordinates exactly on the boundary, so s(11) <= that side. |
 | [T-031](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S2` | `apparently-novel` | At L = 96/25 and B = 9977/10000 on the 181-direction net (half-tangents k*207107/90000000, k = 0..180), the D4-symmetric point measure of total mass 10868617/1000000 = 10.868617 in cases/n11_corner_class_certificate/certificate.json, the retained exp-220 covering, charges at least 2000013/2000000 to every closed B-square at a net direction whose minimum of x + y is at least 1/2 in each of the four corner frames, decided by the exact event-cell sweep and by the interval branch and bound, which agree at that value. |
 | [T-042](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S2` | `previously-published` | s(17) > 233009/50000 = 4.66018, by Guzhou0806 / N17 project’s R067 release of 28 September 2026. |
-| [T-054](packing/frontier/RESULTS.md) | 45 | `V3` | `C3` | `S2` | `previously-published` | s(45) = 7 by a second, point-only route: the lower half by wand125’s point-only measure of 28 September 2026, the upper half by the 7 x 7 grid. |
-| [T-055](packing/frontier/RESULTS.md) | 21 | `V3` | `C3` | `S2` | `previously-published` | s(21) = 5 by a second, point-only route: the lower half by wand125’s point-only measure, completed on 28 September 2026 with a Lean 4 reduction, the upper half by the 5 x 5 grid. |
+| [T-054](packing/frontier/RESULTS.md) | 45 | `V3` | `C3` | `S2` | `previously-published` | s(45) = 7 by a second, point-only route: the lower half by Hiroaki Hosono’s point-only measure of 28 September 2026, the upper half by the 7 x 7 grid. |
+| [T-055](packing/frontier/RESULTS.md) | 21 | `V3` | `C3` | `S2` | `previously-published` | s(21) = 5 by a second, point-only route: the lower half by Hiroaki Hosono’s point-only measure, completed on 28 September 2026 with a Lean 4 reduction, the upper half by the 5 x 5 grid. |
 | [T-058](packing/frontier/RESULTS.md) | 1-100 | `V3` | `C3` | `S2` | `previously-published` | A rectangle-density certificate with core side B = 9977/10000 and the 201-direction net of step D = 83/40000 cannot have mass below n at any side L >= α U, where U is the side of any packing of n unit squares and α = B(1 + D) = 399908091/400000000; if every orientation of that packing lies in the net’s D4 orbit, L >= B U suffices. |
 | [T-059](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S2` | `previously-published` | wand125/square-packing-tools reports that its exact general_pose_tree checker reproduces all 12028 per-row core minima of Marc Leonard Overbeck’s n11 certificate, release v1.0.2, with global row minimum 999962528 units and all witnesses replayed. |
 | [T-061](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S2` | `previously-published` | s(11) > 3875000000/999999999 = 3.875000003875000003875 …, by Ke Wang and Can Li’s Zenodo record of 29 September 2026, reported on jlevy/squares#247. |
@@ -690,6 +691,11 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Profile Coverage and Result-Intake Boundaries, 21 October 2026](docs/project/reviews/review-2026-10-21-profile-coverage.md) | dated review record | record | retained | — |
+| [Project PDF Credit Coverage, 21 October 2026](packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md) | dated review record | record | retained | — |
+| [Attribution Policy](attribution.md) | artifact and naming conventions | definitive | maintained | — |
+| [Person Profiles](packing/contributors/README.md) | component scope and use | current | maintained | — |
+| [Feature: Contributor Profiles and Linked Result Credits](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md) | implementation plan | current | transient | — |
 | [Review: Evan Daniel’s Regularized Views at 204, 227, 229 and 260 (T-225, evand/square-packing@0075967)](docs/project/reviews/review-2026-10-21-evand-regularized-views.md) | dated review record | record | retained | — |
 | [Review: Couzo’s 85 Exact Upper-Bound Certificates at 204–998 (Issue #678)](docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) | dated review record | record | retained | — |
 | [Erratum: the 21 October Review of Evan Daniel’s Import at 270](docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md) | dated review record | record | retained | — |
@@ -1642,6 +1648,7 @@ case or experiment separately.
 | [Evan Daniel’s New Arrangements: Independent Replay Review](docs/project/reviews/review-2026-10-08-evand-new-arrangements.md) | dated review record | record | retained | — |
 | [Restricted N17 Family Cell Audit](docs/project/research/research-2026-10-09-n17-family-cell-audit.md) | research synthesis | supporting | retained | — |
 | [Review of FN-1 Original Compressed Input Custody](docs/project/reviews/review-2026-10-08-fn1-original-input-bindings.md) | dated review record | record | retained | — |
+| `packing/contributors/people/*.md` | hand-maintained registry | record | maintained | — |
 | `packing/site-changelog.yaml` | hand-maintained registry | current | maintained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
 | `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
@@ -2232,7 +2239,7 @@ ceiling repair and accelerated-verifier validation.
 These slices do not promote a packing bound.
 
 [Session 162](packing/campaign/agent-sessions/session-162-wand125-tools-intake.md)
-initially closed the wand125 intake, native rectangle-verifier prototype and
+initially closed the intake of Hosono’s tools, native rectangle-verifier prototype and
 documentation slice with explicit certification debt, since discharged by the hosted
 fast checkpoint. The implementation and review are published in
 [PR 246](https://github.com/jlevy/squares/pull/246). Required CI and the
@@ -2409,7 +2416,7 @@ certified the closed session.
 
 **The 27 September planning block** (BC-392,
 [plan](docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md)) followed
-Overbeck v1.1.0’s $s(17) > 232001/50000 = 4.640020$ and wand125’s rectangle certificates
+Overbeck v1.1.0’s $s(17) > 232001/50000 = 4.640020$ and Hosono’s rectangle certificates
 for n = 18 to 78. Every atom of v1.1.0 has capacity one, so the certificate itself
 refutes H-243’s $4.63$ family and the ceiling search moves to $4.65$ in clique-weighted
 form (H-248); a reweighting of its dictionary is worth of order $10^{-3}$ in charge, an
@@ -2417,7 +2424,7 @@ unmeasured amount of side (the
 [lemma check](docs/project/reviews/review-2026-09-27-plan-4640020-lemma-check.md)
 withdrew the plan’s $+0.006$ cap).
 BC-386 is superseded by BC-393, the same cap lift aimed at v1.1.0 through a
-winning-subset atom; BC-391 is superseded by wand125’s $4.985$. The overnight queue is
+winning-subset atom; BC-391 is superseded by Hosono’s $4.985$. The overnight queue is
 BC-390 on eight workers beside rectangle-density ladders at n = 82 and n = 50 (BC-394,
 H-250 and H-251) and n = 12 (BC-395, H-249), the rows the external certificates left
 weakest; BC-393, BC-388 and BC-387 follow their day builds.
@@ -2427,14 +2434,14 @@ $3.99$ and add BC-396 (H-252): the same cover carried upward to $n = 45$, side $
 
 [Session 160](packing/campaign/agent-sessions/session-160-n17-4640020-evand-wand125-intake.md)
 took in Overbeck’s $s(17) > 232001/50000$ at `V4/C3`, Evan Daniel’s $s(32) = 6$ at
-`V4/C1` with $s(12) \ge 15680/3951$ and $s(21) \ge 5000/1001$ at `V4/C3`, and wand125’s
+`V4/C1` with $s(12) \ge 15680/3951$ and $s(21) \ge 5000/1001$ at `V4/C3`, and Hosono’s
 rectangle bounds for n = 18 to 78, each after a Fable max review, and contained D-509’s
 explainer PDF wobble on PR 235.
 
 [Session 161](packing/campaign/agent-sessions/session-161-wand125-update-and-sept-28-intake.md)
-took in wand125’s 28 September update and what it pointed to: Guzhou0806’s
+took in Hosono’s 28 September update and what it pointed to: Guzhou0806’s
 $s(17) > 116511/25000$ (T-043), Evan Daniel’s mixed covers for $s(21) = 5$ and
-$s(45) = 7$ (T-052, T-053), wand125’s point-only routes to both (T-054, T-055) and its
+$s(45) = 7$ (T-052, T-053), Hosono’s point-only routes to both (T-054, T-055) and his
 reported $s(50) \ge 37/5$ (T-048), each after a Fable max review, and recorded the
 retained `zmx2` run as a second method for $s(32) = 6$ (jlevy/squares#245). It stopped
 at 07:12Z with the complete `zm_mixed.py` re-sweeps unfinished, so its handover is
@@ -2446,8 +2453,9 @@ T-052 and T-053 to `C4`.
 
 **Selected next entry at the Session 160 cutoff:** `think-7c17`, BC-390: the widened n =
 11 rung 0 box on eight workers overnight, with BC-394’s rectangle ladders
-(`think-pr2b`), the 41 queued wand125 replays and Evan Daniel’s $s(32)$ full sweep on
-the remaining workers; BC-393 (`think-0rbj`), BC-388 and BC-387 follow their day builds.
+(`think-pr2b`), the 41 queued replays of Hosono’s certificates and Evan Daniel’s $s(32)$
+full sweep on the remaining workers; BC-393 (`think-0rbj`), BC-388 and BC-387 follow
+their day builds.
 
 **Selected next entry at the Session 159 cutoff:** `think-amx8`, BC-386, since stopped
 in favour of BC-393.
@@ -5136,7 +5144,7 @@ the review is explicit that the percentage is not a probability of optimality.
 **The other external results bear on $n = 11$ only lightly.** Tokoharu’s
 rectangle-density certificate proves the weaker $381/100$ here, fully replayed
 ([integration review](docs/project/reviews/review-2026-09-22-external-square-certificates-integration.md));
-wand125’s ten point certificates concern other $n$; and Guzhou0806’s R038 scanner enters
+Hosono’s ten point certificates concern other $n$; and Guzhou0806’s R038 scanner enters
 only as the pinned lineage of Overbeck’s JavaScript sweep.
 
 **The first-party record was reconciled to it.**
@@ -5376,7 +5384,7 @@ Overbeck’s $s(11) > 31/8$ ([T-037](packing/frontier/RESULTS.md)) remains an ea
 independently verified lower bound.
 The restricted six-plus-five theorem and local Trump theorem
 ([T-035](packing/frontier/RESULTS.md) and [T-036](packing/frontier/RESULTS.md)) retain
-their own scopes. The separate wand125 ceiling and row-minimum reports
+their own scopes. Hosono’s separate ceiling and row-minimum reports
 ([T-058](packing/frontier/RESULTS.md) and [T-059](packing/frontier/RESULTS.md)) have not
 been promoted by T-060’s verification.
 Global optimality of the side does not assert uniqueness of the optimal arrangement.
@@ -6147,7 +6155,7 @@ round that names the hypothesis, control roles included.
 | [H-247](packing/campaign/hypotheses/H-247-n11-rung0-widened-to-half-width-1e-4.md) | open | Rung 0 widened: H-236’s statement on the half-tangent box of half-width 10^-4 around Trump’s tilt, by the unchanged instrument (BC-390) | 0 | — |
 | [H-248](packing/campaign/hypotheses/H-248-n17-clique-weighted-family-at-4-675.md) | blocked | A clique-weighted family of unit squares with fractional stability at least 17 fits at 4675/1000 (then 467/100), capping every capacity-one certificate at n17 under the proved ceiling lemma; the successor of H-243, whose 463/100 Kleddamag v1.1.0 refutes; retargeted 2026-09-27 after Kleddamag’s 4.66001 certificate refuted its first targets, 465/100 and 466/100; blocked on the search driver (BC-387) | 0 | — |
 | [H-249](packing/campaign/hypotheses/H-249-n12-rectangle-density-certificate-at-3-99.md) | open | A rectangle-density certificate in tokoharu’s format with mass below 12 at 397/100, then 399/100 (BC-395) | 0 | — |
-| [H-250](packing/campaign/hypotheses/H-250-n50-rectangle-density-certificate-at-7-3.md) | open | A rectangle-density certificate with mass below 50 at 73/10, the row wand125’s ladder left at 1 + √37 (BC-394) | 0 | — |
+| [H-250](packing/campaign/hypotheses/H-250-n50-rectangle-density-certificate-at-7-3.md) | open | A rectangle-density certificate with mass below 50 at 73/10, the row Hosono’s ladder left at 1 + √37 (BC-394) | 0 | — |
 | [H-251](packing/campaign/hypotheses/H-251-n82-rectangle-density-certificate-at-9-3.md) | open | A rectangle-density certificate with mass below 82 at 93/10, covering n = 82..85 by mass against Nagamochi’s 1 + √(n − 17) (BC-394) | 0 | — |
 | [H-252](packing/campaign/hypotheses/H-252-n45-zero-margin-closed-cover-at-7.md) | blocked | Evan Daniel’s zero-margin closed cover carried to k = 7: a cover of [0,7]² with mass below 45, so s(45) = 7; blocked on the intake lane’s review of the s(32) certificate (BC-396) | 0 | — |
 | [H-253](packing/campaign/hypotheses/H-253-n17-retained-rational-upper.md) | confirmed | The retained Kleddamag rational reconstruction contains seventeen unit squares at exact side 4675530093604551/1000000000000000 | 1 | 8s wall |

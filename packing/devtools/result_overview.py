@@ -54,6 +54,7 @@ from collections.abc import Collection, Iterable, Mapping, Sequence
 from dataclasses import replace
 from decimal import Decimal
 from functools import cache
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, NamedTuple, cast
 from urllib.parse import urlsplit
@@ -72,6 +73,7 @@ from devtools.overview_data import (
     prose_html,
     tex_bounds,
 )
+from devtools.profile_links import link_prose
 from devtools.repo_links import path_kind, repo_url
 from sqpack.known_best import display_bound_value
 
@@ -626,6 +628,59 @@ def _case_table(rows: Sequence[tuple[int, Sequence[str]]]) -> str:
     )
 
 
+class _OptionalCaseEnds(HTMLParser):
+    """Locate only HTML-optional cell and row ends in native broad-case tables."""
+
+    def __init__(self, page: str) -> None:
+        super().__init__(convert_charrefs=False)
+        self.page = page
+        # HTMLParser advances its line number only at LF, not every Unicode line
+        # separator recognized by str.splitlines(). Match that coordinate system.
+        self.lines = [0, *(match.end() for match in re.finditer("\n", page))]
+        self.depth = 0
+        self.target: int | None = None
+        self.ends: list[tuple[int, int]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag == "table":
+            self.depth += 1
+            if "site-result-cases" in (dict(attrs).get("class") or "").split():
+                self.target = self.depth
+
+    def handle_endtag(self, tag: str) -> None:
+        if self.target == self.depth and tag in {"td", "th", "tr"}:
+            line, column = self.getpos()
+            start = self.lines[line - 1] + column
+            end = start + len(tag) + 3
+            following = self.page[end:]
+            allowed = (
+                r"<(?:td|th)\b|</tr>"
+                if tag in {"td", "th"}
+                else r"<tr\b|</(?:thead|tbody|tfoot)>"
+            )
+            if re.match(allowed, following):
+                self.ends.append((start, end))
+        if tag == "table":
+            if self.target == self.depth:
+                self.target = None
+            self.depth -= 1
+
+
+def compact_case_tables(page: str) -> str:
+    """Omit legal HTML table end tags in a final page; XML source bodies stay explicit.
+
+    HTML permits a cell's end before the next cell or its row's end, and a row's end
+    before another row or its section's end. Every attribute, child and link remains
+    byte-for-byte intact, and tables outside the broad-case list are untouched.
+    """
+    parser = _OptionalCaseEnds(page)
+    parser.feed(page)
+    parser.close()
+    for start, end in reversed(parser.ends):
+        page = page[:start] + page[end:]
+    return page
+
+
 def case_list(cases: Sequence[int], overview: Overview) -> str:
     """A broad result's cases, one compact row each: the film's two bounds and the gap,
     the case's status, and its record on this site, its row in the frontier atlas and
@@ -689,7 +744,7 @@ def regularization_notes(sentences: Sequence[str]) -> str:
         match = re.fullmatch(r"n = (\d+)", prefix)
         if not separator or match is None:
             raise ValueError(f"a regularization note has no count label: {sentence!r}")
-        notes.append(f"<var>n</var> = {match[1]}: {prose_html(detail)}")
+        notes.append(f"<var>n</var> = {match[1]}: {link_prose(prose_html(detail))}")
     return "<br><br>".join(notes)
 
 
@@ -712,7 +767,7 @@ def head(result: Result, cases: Sequence[int]) -> str:
     from devtools.result_status import unfinished_sentence  # noqa: PLC0415
 
     record = result.record
-    claim = prose_html(record["claim"], between='</p><p class="site-result-claim">')
+    claim = link_prose(prose_html(record["claim"], between='</p><p class="site-result-claim">'))
     # A later result its entry declares implies it says what it implies, under the
     # claim it bears on; a superseded bound's chip names its successors, which need no
     # sentence, since their bounds are the case's.
@@ -720,7 +775,7 @@ def head(result: Result, cases: Sequence[int]) -> str:
         '<p class="site-result-claim site-result-superseded"><strong>'
         f"{'Superseded' if item['extent'] == 'whole' else 'Superseded in part'} by "
         f'<a href="{_esc(result_url(str(item["result"])))}">{_esc(str(item["result"]))}</a>.'
-        f"</strong> {prose_html(item['what'])}</p>"
+        f"</strong> {link_prose(prose_html(item['what']))}</p>"
         for item in record.get("superseded_by") or []
     )
     more = [
@@ -736,7 +791,9 @@ def head(result: Result, cases: Sequence[int]) -> str:
         ),
     ]
     rows = "".join(
-        f"<dt>{label}</dt><dd>{prose_html(text)}</dd>" for label, text in more if text
+        f"<dt>{label}</dt><dd>{link_prose(prose_html(text))}</dd>"
+        for label, text in more
+        if text
     )
     rows += "".join(
         f"<dt>{label}</dt><dd>{regularization_notes(sentences)}</dd>"
@@ -754,7 +811,8 @@ def head(result: Result, cases: Sequence[int]) -> str:
     return (
         '<header class="site-result-head">'
         f'<p class="site-result-status">{status_chips(result)}</p>'
-        f'<p class="site-result-meta">{date_cell(result)} \u00b7 {_esc(result.credit)} '
+        f'<p class="site-result-meta">{date_cell(result)} \u00b7 '
+        f'<span class="site-result-credit">{result.credit_html or _esc(result.credit)}</span> '
         f"\u00b7 {where(cases)}</p>"
         f'<p class="site-result-claim">{claim}</p>'
         f"{superseded}"
@@ -925,7 +983,7 @@ def step(other: Result, current: Result, cases: Sequence[int]) -> str:
             said += f" by {listed(links)}"
         chips += f' <span class="site-cell-quiet">{on_case}, {said}</span>'
     chip_line = f'<p class="site-result-step-chips">{chips}</p>'
-    cites = [_esc(other.credit), *citations(other)]
+    cites = [other.credit_html or _esc(other.credit), *citations(other)]
     # A step is set back where its result is superseded here as its row would be
     # (`render_recent_results.superseded`): a bound no case bound here rests on and the
     # cases here match or beat, or a result its entry declares superseded as a whole,
@@ -938,15 +996,17 @@ def step(other: Result, current: Result, cases: Sequence[int]) -> str:
         dimmed = NO_STANDING
     else:
         dimmed = here
+    # The chain's li and final citation use structural styles in site-result.css.
+    # Their former classes added no hook and repeated on every step of broad reports.
     return (
-        f'<li class="site-result-step" data-step="{_esc(other.id.lower())}" '
+        f'<li data-step="{_esc(other.id.lower())}" '
         f'data-standing="{_esc(standing_key(dimmed))}"{current_mark}>'
         f'<p class="site-result-step-head">{date_cell(other)} '
         f'<a href="{_esc(result_url(other.id))}">{_esc(other.id)}</a>{this}'
         f"{on}</p>"
-        f'<p class="site-result-step-summary">{tex_bounds(other.summary)}</p>'
+        f'<p class="site-result-step-summary">{link_prose(tex_bounds(other.summary))}</p>'
         f"{chip_line}"
-        f'<p class="site-result-step-cite">{DOT.join(cites)}</p></li>'
+        f"<p>{DOT.join(cites)}</p></li>"
     )
 
 
@@ -1137,7 +1197,7 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
     or record carries."""
     from devtools.overview_sections import result_fragment  # noqa: PLC0415
     from devtools.render_case_pages import case_url  # noqa: PLC0415
-    from devtools.render_overview import SITE_PAGES  # noqa: PLC0415
+    from devtools.site_documents import served_pages  # noqa: PLC0415
 
     pinned = repo_links.hash_pinned_links(body)
     if pinned:
@@ -1152,7 +1212,7 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
         "results.html": ids,
     }
     served = {
-        *SITE_PAGES,
+        *served_pages(),
         *(case_url(n) for n in overview.cases),
         *(result_fragment(result.id) for result in overview.results),
     }

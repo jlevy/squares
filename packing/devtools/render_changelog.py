@@ -182,7 +182,8 @@ def _target(target: str, *, destination: Destination) -> str:
     resolved = (REPO / parts.path).resolve()
     if not resolved.is_relative_to(REPO.resolve()):
         raise ValueError(f"link escapes repository: {target}")
-    if path_kind(parts.path) is None:
+    kind = path_kind(parts.path)
+    if kind is None:
         raise ValueError(f"missing repository link target: {target}")
     # Partial Pages checkouts omit research directories; repo_url handles those from
     # the retained Git tree rather than inventing a site-local address.
@@ -190,6 +191,12 @@ def _target(target: str, *, destination: Destination) -> str:
         f"#{parts.fragment}" if parts.fragment else ""
     )
     if destination == "site":
+        if (
+            kind == "blob"
+            and path.parent == PurePosixPath("packing/contributors/people")
+            and path.suffix == ".md"
+        ):
+            return f"profiles/{path.stem}.html{fragment}"
         return repo_url(parts.path, fragment)
     return target
 
@@ -341,7 +348,9 @@ def _inline_references(text: str, tokens: list[Token], env: dict[str, Any]) -> s
     return source.strip()
 
 
-def _prose(text: str, *, destination: Destination = "github") -> str:
+def _prose(
+    text: str, *, destination: Destination = "github", rewrite_links: bool = True
+) -> str:
     if not text.strip():
         raise ValueError("blank changelog prose")
     env: dict[str, Any] = {}
@@ -359,7 +368,7 @@ def _prose(text: str, *, destination: Destination = "github") -> str:
     for reference in [*env.get("references", {}).values(), *env.get("duplicate_refs", [])]:
         _target(reference["href"], destination=destination)
     tree = _sanitized_prose(text)
-    rendered = _RenderedURLs(destination)
+    rendered = _RenderedURLs(destination if rewrite_links else "github")
     rendered.feed(tree.html)
     rendered.close()
     if destination == "github":
@@ -368,7 +377,9 @@ def _prose(text: str, *, destination: Destination = "github") -> str:
 
 
 def _inline_math(tex: str) -> str:
-    rendered = _prose(f"${tex}$", destination="site")
+    # The surrounding inline renderer applies the site URL policy to the completed
+    # fragment. Retain authored paths here so profile URLs are converted only once.
+    rendered = _prose(f"${tex}$", destination="site", rewrite_links=False)
     return rendered.removeprefix("<p>").removesuffix("</p>")
 
 
@@ -401,9 +412,9 @@ def inline_html(text: str, *, allow_links: bool = True) -> str:
         if token.type == "link_open":
             if not allow_links:
                 raise ValueError("links are not allowed in News headlines")
-            token.attrSet(
-                "href", serialized_target(str(token.attrGet("href")), destination="site")
-            )
+            # Validate the authored repository path here; the final HTML pass also
+            # handles MathML links and rewrites every destination exactly once.
+            _target(str(token.attrGet("href")), destination="site")
 
     def render_inline(
         _renderer: object,
@@ -718,15 +729,17 @@ def _entry_lines(
     destination: Destination,
     *,
     include_significance: bool = True,
+    include_prose: bool = True,
 ) -> list[str]:
     """Shared contribution prose and evidence for the complete GitHub and News views."""
     rating = entry_significance(entry)
     out: list[str] = []
     if destination == "github" and include_significance:
         out.extend([f"Significance S{rating['score']}: {_text(rating['rationale'])}", ""])
-    out.extend([_prose(entry["summary"], destination=destination), ""])
-    if "details" in entry:
-        out.extend([_prose(entry["details"], destination=destination), ""])
+    if include_prose:
+        out.extend([_prose(entry["summary"], destination=destination), ""])
+        if "details" in entry:
+            out.extend([_prose(entry["details"], destination=destination), ""])
     if entry.get("artifacts"):
         links = [
             _markdown_link(item["label"], item["target"], destination=destination)
@@ -958,7 +971,11 @@ def news_card(anchor: str, day_text: str, body: str) -> str:
 def render_news(
     document: Document, *, limit: int | None = None, entry_ids: set[str] | None = None
 ) -> str:
-    """Complete canonical cards, optionally selected by ID and limited for a preview."""
+    """Complete canonical cards, optionally selected by ID and limited for a preview.
+
+    Their names are plain profile links (`data-contributor-plain`): News navigates to a
+    profile rather than opening it in the profile popover (`paper-design.md`).
+    """
     validate(document)
     if limit is not None and limit < 1:
         raise ValueError("a News preview needs at least one item")
@@ -973,7 +990,7 @@ def render_news(
         news_filters({topic for entry in entries for topic in entry.get("topics", [])})
         if limit is None
         else "",
-        '<div class="site-news sans-text" data-news>',
+        '<div class="site-news sans-text" data-news data-contributor-plain>',
     ]
     seen_dates: set[str] = set()
     for entry in entries:
@@ -992,9 +1009,16 @@ def render_news(
         article.append(
             f'<article class="site-news-item" data-news-entry="{entry["id"]}">{header}'
         )
+        from devtools.profile_links import link_prose  # noqa: PLC0415
+
+        article.append(link_prose(_prose(entry["summary"], destination="site")))
+        if "details" in entry:
+            article.append(link_prose(_prose(entry["details"], destination="site")))
         article.extend(
             _prose(field, destination="site")
-            for field in _entry_lines(document, entry, "github", include_significance=False)
+            for field in _entry_lines(
+                document, entry, "github", include_significance=False, include_prose=False
+            )
             if field
         )
         article.append("</article>")

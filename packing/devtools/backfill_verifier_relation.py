@@ -137,7 +137,7 @@ FIXES: dict[str, Fix] = {
         INDEPENDENT,
         SAME,
         (
-            "the replay runs wand125's own src/check_with_sqpack.py, whose docstring says the "
+            "the replay runs Hosono's own src/check_with_sqpack.py, whose docstring says the "
             "source verifies its certificates with this repository's verifier, unmodified: the "
             "producer's verification route itself"
         ),
@@ -166,7 +166,7 @@ FIXES: dict[str, Fix] = {
         SAME,
         (
             "the replay builds and runs zmx2 6b7f0f79, the digest the source's own verify.sh "
-            "pins and verifies the cover with; its review says so, as wand125's own verify.sh "
+            "pins and verifies the cover with; its review says so, as Hosono's own verify.sh "
             "already uses it. The pattern of E-n045-wand125-point-cover-source-replay"
         ),
     ),
@@ -258,8 +258,8 @@ DECISIONS: dict[str, tuple[Classification, str]] = {
     "E-n061-wand125-point-cover-evand-replay-report": (
         runs(("V-evand-zeromargin-py", "V-evand-zmcheck", "V-evand-zmx2"), None, "decision"),
         (
-            "Daniel ran his own zeromargin.py and zmcheck on wand125's cover, and zmx2, the "
-            "checker wand125 tuned the cover against, which he calls a reproduction. The "
+            "Daniel ran his own zeromargin.py and zmcheck on Hosono's cover, and zmx2, the "
+            "checker Hosono tuned the cover against, which he calls a reproduction. The "
             "record says independent-implementation; whether two programs by zmx2's author are "
             "independent of zmx2 is the owner's call."
         ),
@@ -381,7 +381,7 @@ def _id(pattern: str) -> Test:
 REPLAY_RULES: tuple[Rule, ...] = (
     # External checkers re-run on their retained bytes: the producer's code.
     (
-        "Tokoharu's verify.cpp under the wand125 rectangle preflight",
+        "Tokoharu's verify.cpp under the preflight of Hosono's rectangle certificates",
         _in_replay(r"audit_wand125_rectangles"),
         runs(("V-tokoharu-verify-cpp", "V-audit-wand125-rectangles"), PRODUCER),
     ),
@@ -391,14 +391,14 @@ REPLAY_RULES: tuple[Rule, ...] = (
         runs(("V-tokoharu-verify-cpp", "V-audit-tokoharu-density"), PRODUCER),
     ),
     (
-        "wand125's mixed_rotated_verify.cpp through the bundle driver",
+        "Hosono's mixed_rotated_verify.cpp through the bundle driver",
         _in_replay(r"audit_wand125_point_and_mixed mixed-replay"),
         runs(
             ("V-wand125-mixed-rotated-verify-cpp", "V-audit-wand125-point-and-mixed"), PRODUCER
         ),
     ),
     (
-        "wand125's verify_mixed_full_proof.py, which compiles its mixed_rotated_verify.cpp",
+        "Hosono's verify_mixed_full_proof.py, which compiles its mixed_rotated_verify.cpp",
         _in_replay(r"verify_mixed_full_proof\.py proof"),
         runs(
             (
@@ -410,22 +410,22 @@ REPLAY_RULES: tuple[Rule, ...] = (
         ),
     ),
     (
-        "wand125's verify_portable.py for the point-only cover bundle",
+        "Hosono's verify_portable.py for the point-only cover bundle",
         _in_replay(r"verify_portable\.py"),
         runs(("V-wand125-verify-portable-py", "V-audit-wand125-point-and-mixed"), PRODUCER),
     ),
     (
-        "Daniel's s12 verify and squarepacker's indep_check.cpp",
+        "Daniel's s12 verify and Ryu's indep_check.cpp",
         _in_replay(r"indep_check"),
         runs(("V-evand-angle-net-verify", "V-squarepacker-indep-check-cpp"), PRODUCER),
     ),
     (
-        "wand125's general pose tree under the row census",
+        "Hosono's general pose tree under the row census",
         _in_replay(r"check_general_pose_tree_census"),
         runs(("V-wand125-tools", "V-check-general-pose-tree-census"), PRODUCER),
     ),
     (
-        "wand125's unified_linear_verify.cpp through the bundle driver",
+        "Hosono's unified_linear_verify.cpp through the bundle driver",
         _in_replay(r"audit_wand125_linear"),
         runs(("V-wand125-unified-linear-verify-cpp", "V-audit-wand125-linear"), PRODUCER),
     ),
@@ -473,7 +473,7 @@ REPLAY_RULES: tuple[Rule, ...] = (
         runs(("V-evand-lean",), PRODUCER),
     ),
     (
-        "wand125's check_with_sqpack.py and this repository's verifier",
+        "Hosono's check_with_sqpack.py and this repository's verifier",
         _in_replay(r"check_with_sqpack"),
         runs(("V-wand125-check-with-sqpack", "V-sqpack-fractional-exact"), PRODUCER),
     ),
@@ -726,12 +726,12 @@ SOURCE_RULES: tuple[Rule, ...] = (
         runs(("V-wand125-valid7-checker", "V-audit-valid7-independent"), INDEPENDENT),
     ),
     (
-        "Tokoharu's verify.cpp, which wand125's rectangle certificates ship unchanged",
+        "Tokoharu's verify.cpp, which Hosono's rectangle certificates ship unchanged",
         _source(r"^\[(?:wand125 rectangle bounds|Tokoharu density)"),
         runs(("V-tokoharu-verify-cpp",), PRODUCER),
     ),
     (
-        "wand125's point certificates, checked by its adapter and this repository's verifier",
+        "Hosono's point certificates, checked by its adapter and this repository's verifier",
         _source(r"^\[wand125 point bounds 2026\]"),
         runs(("V-wand125-check-with-sqpack", "V-sqpack-fractional-exact"), PRODUCER),
     ),
@@ -740,7 +740,7 @@ SOURCE_RULES: tuple[Rule, ...] = (
         _source(r"^\[squarepacker s12"),
         runs(("V-evand-angle-net-verify", "V-squarepacker-indep-check-cpp"), PRODUCER),
     ),
-    ("wand125's tools", _source(r"^\[wand125 tools"), runs(("V-wand125-tools",), None)),
+    ("Hosono's tools", _source(r"^\[wand125 tools"), runs(("V-wand125-tools",), None)),
     (
         "Wang and Li's verify.py and Overbeck's sweep",
         _source(r"^\[Wang Li n11"),

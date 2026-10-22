@@ -152,7 +152,7 @@ terms:
       centers allowed over that interval
     anchor: sixteen-regions-cover-all-possible-centers
     forward:
-      - text: wand125’s row-minimum check of T-037
+      - text: Hosono’s row-minimum check of T-037
         reason: link-to-definition
 
   # One Geometric Invariant Supports the Certificates

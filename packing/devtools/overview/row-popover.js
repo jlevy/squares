@@ -3,69 +3,13 @@
 // fetches that page, extracts its prepared article and resolves relative links against
 // the response URL. Sorting and filtering preserve each row's named overlay.
 (() => {
-  /** Styles shared by fetched case and result records, including pending loads. */
-  const styleState =
-    /** @type {typeof globalThis & { squaresStaticMathStyles?: Map<string, Promise<void>> }} */ (
-      globalThis
-    );
-  styleState.squaresStaticMathStyles ??= new Map();
-  const mathStyles = styleState.squaresStaticMathStyles;
-
-  /**
-   * Load the canonical page's prepared metric rules before placing its article.
-   * @param {DocumentFragment} parsed
-   * @param {string} base
-   */
-  const loadMathStyles = async (parsed, base) => {
-    const responseURL = new URL(base, document.baseURI);
-    const pageURL = new URL(document.baseURI);
-    const assetRoot = new URL("../assets/css/", responseURL);
-    for (const declared of parsed.querySelectorAll("link[data-site-math-styles]")) {
-      const href = declared.getAttribute("href");
-      if (!href) {
-        throw new Error("The prepared mathematics stylesheet has no address");
-      }
-      const url = new URL(href, responseURL);
-      if (
-        responseURL.origin !== pageURL.origin ||
-        url.origin !== pageURL.origin ||
-        !url.pathname.startsWith(assetRoot.pathname) ||
-        !url.pathname.endsWith(".css")
-      ) {
-        throw new Error("The prepared mathematics stylesheet is outside this site");
-      }
-      let pending = mathStyles.get(url.href);
-      if (pending === undefined) {
-        const existing = Array.from(document.querySelectorAll("link[data-site-math-styles]")).find(
-          (link) => new URL(link.getAttribute("href") || "", document.baseURI).href === url.href,
-        );
-        const link =
-          existing instanceof HTMLLinkElement ? existing : document.createElement("link");
-        pending = link.sheet
-          ? Promise.resolve()
-          : new Promise((resolve, reject) => {
-              link.addEventListener("load", () => resolve(), { once: true });
-              link.addEventListener(
-                "error",
-                () => {
-                  link.remove();
-                  reject(new Error("The prepared mathematics stylesheet could not load"));
-                },
-                { once: true },
-              );
-              if (!existing) {
-                link.setAttribute("rel", "stylesheet");
-                link.setAttribute("href", url.href);
-                link.setAttribute("data-site-math-styles", "");
-                document.head.append(link);
-              }
-            });
-        mathStyles.set(url.href, pending);
-        void pending.catch(() => mathStyles.delete(url.href));
-      }
-      await pending;
-    }
-  };
+  const available = globalThis.siteArticles;
+  if (available === undefined) {
+    return;
+  }
+  const articles = available;
+  /** @type {WeakMap<HTMLElement, number>} */
+  const generations = new WeakMap();
 
   /** What a click on a row leaves alone: the row's own links and controls. */
   const CONTROLS = "a[href], button, input, select, textarea, label, summary";
@@ -97,49 +41,20 @@
         continue;
       }
       body.setAttribute("data-row-pop-loading", "");
-      void fetch(source)
-        .then(async (response) => {
-          if (!response.ok) {
-            throw new Error(String(response.status));
+      const generation = generations.get(popover) || 0;
+      void articles
+        .loadArticle(source, "article.site-result[data-result-overview]")
+        .then(({ article }) => {
+          if (generation !== (generations.get(popover) || 0)) {
+            return;
           }
-          const held = document.createElement("template");
-          held.innerHTML = await response.text();
-          const article = held.content.querySelector("article.site-result[data-result-overview]");
-          if (!(article instanceof HTMLElement)) {
-            throw new Error("The result page has no record article");
-          }
-          for (const node of article.querySelectorAll("[href], [src]")) {
-            for (const attribute of ["href", "src"]) {
-              const value = node.getAttribute(attribute);
-              if (value === null || value.startsWith("#")) {
-                continue;
-              }
-              node.setAttribute(
-                attribute,
-                new URL(value, response.url || new URL(source, document.baseURI).href).href,
-              );
-            }
-          }
-          await loadMathStyles(
-            held.content,
-            response.url || new URL(source, document.baseURI).href,
-          );
-          const heading = article.querySelector("h1");
-          if (heading instanceof HTMLElement) {
-            // The canonical heading's ID is also the row's fragment on the results
-            // page. Give this copy a dialog-specific ID and preserve its local links.
-            const previous = heading.id;
-            heading.setAttribute("id", `${popover.id}-record-title`);
-            if (previous) {
-              for (const link of article.querySelectorAll("[href]")) {
-                if (link.getAttribute("href") === `#${previous}`) {
-                  link.setAttribute("href", `#${heading.id}`);
-                }
-              }
-            }
-          }
+          const heading = Array.from(article.children).find((child) => child.matches("h1"));
           body.replaceChildren(article);
           if (heading instanceof HTMLElement) {
+            // The shared loader scopes this clone's heading and every local reference.
+            if (!heading.id) {
+              heading.id = `${popover.id}-record-title`;
+            }
             popover.setAttribute("aria-labelledby", heading.id);
             // The short title stays usable while loading or offline. Once the full
             // title is present it owns the dialog's name, without repeating above it.
@@ -154,7 +69,9 @@
         // The short body is already there; a later opening tries again.
         .catch(() => undefined)
         .finally(() => {
-          body.removeAttribute("data-row-pop-loading");
+          if (generation === (generations.get(popover) || 0)) {
+            body.removeAttribute("data-row-pop-loading");
+          }
         });
     }
   }
@@ -197,6 +114,8 @@
       if (popover.matches(":popover-open")) {
         return;
       }
+      articles.cancelRequests();
+      articles.setReturnFocus(popover, row);
       popover.showPopover();
       // The toggle event below says the same a task later; the row's wash should not wait.
       row.setAttribute("aria-expanded", "true");
@@ -206,26 +125,32 @@
       }
     };
 
-    // A press starts the fetch a moment before the click that opens the popover.
-    row.addEventListener("pointerdown", () => {
-      fetchBodies(popover);
+    /**
+     * Whether a press or click landed on one of the row's own links or controls, other
+     * than its popover's trigger, and so is that control's and not the row's.
+     * @param {Element} target
+     */
+    const ownControl = (target) => {
+      const control = target.closest(CONTROLS);
+      return (
+        control !== null &&
+        row.contains(control) &&
+        control.getAttribute("popovertarget") !== popover.id
+      );
+    };
+
+    // A press starts the fetch a moment before the click that opens the popover. A press
+    // the click will leave alone, such as on a name linking to a profile, fetches nothing.
+    row.addEventListener("pointerdown", (event) => {
+      const target = articles.clickTarget(event);
+      if (target !== null && !ownControl(target)) {
+        fetchBodies(popover);
+      }
     });
 
     row.addEventListener("click", (event) => {
-      if (
-        event.defaultPrevented ||
-        event.button !== 0 ||
-        event.metaKey ||
-        event.ctrlKey ||
-        event.shiftKey ||
-        event.altKey ||
-        !(event.target instanceof Element)
-      ) {
-        return;
-      }
-      const control = event.target.closest(CONTROLS);
-      const trigger = control?.getAttribute("popovertarget") === popover.id;
-      if ((control !== null && row.contains(control) && !trigger) || selecting(row)) {
+      const target = articles.clickTarget(event);
+      if (target === null || ownControl(target) || selecting(row)) {
         return;
       }
       // The trigger opens its popover natively too; cancelling the click leaves one
@@ -251,9 +176,18 @@
     // A body held in a template is placed before the popover shows, so it is there for
     // the first paint and for the math pass the open popover gets.
     popover.addEventListener("beforetoggle", (event) => {
-      if (!(event instanceof ToggleEvent) || event.newState !== "open") {
+      if (!(event instanceof ToggleEvent)) {
         return;
       }
+      if (event.newState === "closed") {
+        generations.set(popover, (generations.get(popover) || 0) + 1);
+        row.setAttribute("aria-expanded", "false");
+        for (const pending of popover.querySelectorAll("[data-row-pop-loading]")) {
+          pending.removeAttribute("data-row-pop-loading");
+        }
+        return;
+      }
+      articles.setReturnFocus(popover, row);
       for (const held of popover.querySelectorAll("template[data-row-pop-body]")) {
         if (held instanceof HTMLTemplateElement) {
           held.replaceWith(held.content);

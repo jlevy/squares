@@ -820,6 +820,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "--ignore=tests/test_site_homepage.py",
         "--ignore=tests/test_site_result_popover.py",
         "--ignore=tests/test_site_case_records.py",
+        "--ignore=tests/test_site_contributor_popovers.py",
         "--ignore=tests/test_site_rating_tooltips.py",
         "--ignore=tests/test_site_math_faces.py",
         "--ignore=tests/test_site_column_measurement.py",
@@ -4521,6 +4522,26 @@ def test_browser_floor_liveness_runs_only_with_the_frontend_node_toolchain() -> 
 SITE_LAYOUT_STEP = "site table layout in Chromium"
 
 
+@pytest.mark.parametrize(
+    "path",
+    [
+        "packing/contributors/occurrences.yaml",
+        "packing/contributors/schemas/occurrences.schema.yaml",
+        "packing/contributors/people/walter-stromquist.md",
+        "LICENSE",
+    ],
+)
+def test_contributor_inputs_select_site_layout_and_url_checks(path: str) -> None:
+    """Changing profile data or cited evidence selects its published-page checks."""
+    for universe in (validate.STEPS, tuple(step for step in validate.STEPS if step.fast)):
+        selection = validate.select_for_paths([path], universe)
+        assert not selection.unattributed_paths
+        assert {
+            SITE_LAYOUT_STEP,
+            "published URL registry and historical compatibility",
+        } <= {step.name for step in selection.steps}
+
+
 def _installs_chromium(job: Mapping[str, Any], *, pull_request: bool) -> bool:
     """Whether a workflow job installs the pinned Chromium on this event: a `playwright
     install` step whose own condition does not exclude the event."""
@@ -4559,6 +4580,7 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
         "tests/test_site_result_popover.py",
         "tests/test_site_rating_tooltips.py",
         "tests/test_site_case_records.py",
+        "tests/test_site_contributor_popovers.py",
         "tests/test_site_math_faces.py",
         "tests/test_site_column_measurement.py",
         "tests/test_site_result_filters.py",

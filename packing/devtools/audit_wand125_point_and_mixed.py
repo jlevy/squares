@@ -1,4 +1,4 @@
-"""Audit and replay wand125's point-only and mixed-rectangle certificates.
+"""Audit and replay Hosono's point-only and mixed-rectangle certificates.
 
 wand125/square-packing-bounds at ``39d8ecc`` adds three certificate families that are not
 in Tokoharu's rectangle format:

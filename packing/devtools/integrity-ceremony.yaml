@@ -355,13 +355,13 @@ allowlist:
       new bounds, assurance promotion or internal code/verdict hashes.
   - path: packing/devtools/audit_wand125_declared_net.py
     kind: download
-    boundary: wand125's finer-net bundle, its candidate, axis tables and checker files against the digests its manifest and the n50 packet's upstream copy pin (#366).
+    boundary: Hosono's finer-net bundle, its candidate, axis tables and checker files against the digests its manifest and the n50 packet's upstream copy pin (#366).
   - path: packing/devtools/fine_net_followup.py
     kind: download
-    boundary: wand125's fine-net release assets kept outside Git against the size and digest the packet pins, and their sealed inner bundles against the source's own files-sha256.json (#446).
+    boundary: Hosono's fine-net release assets kept outside Git against the size and digest the packet pins, and their sealed inner bundles against the source's own files-sha256.json (#446).
   - path: packing/devtools/continuous_pose_followup.py
     kind: download
-    boundary: wand125's continuous-pose release asset kept outside Git against the size and digest the packet pins, its sealed inner bundle against the source's files-sha256.json, check2's kernel inputs regenerated here against the digests its manifests name, and each program's source digest by the rule the source states for it.
+    boundary: Hosono's continuous-pose release asset kept outside Git against the size and digest the packet pins, its sealed inner bundle against the source's files-sha256.json, check2's kernel inputs regenerated here against the digests its manifests name, and each program's source digest by the rule the source states for it.
   - path: packing/devtools/audit_n11_lean.py
     kind: download
     boundary: 11SquaresFormalized's final audit, downloaded from the source, against the digest the packet's manifest pinned at retention and the uncompressed digest the source's summary.json states.
@@ -370,20 +370,20 @@ allowlist:
     boundary: Zenodo deposits and deployed web pages against the MD5 and digests the record or a retained manifest states.
   - path: packing/devtools/audit_wand125_point_and_mixed.py
     kind: download
-    boundary: wand125's acquired packets, their upstream listings and checker files (H3).
+    boundary: Hosono's acquired packets, their upstream listings and checker files (H3).
   - path: packing/devtools/audit_wand125_rectangles.py
     kind: download
-    boundary: wand125's rectangle certificates and the reviewed upstream checker (H3).
+    boundary: Hosono's rectangle certificates and the reviewed upstream checker (H3).
   - path: packing/devtools/audit_validtilt9_independent.py
     kind: download
-    boundary: wand125's records-tilt9-v1 release records against the digests the 2026-10-06 packet's retained records.sha256 pins, the checker files and cover their headers name against the retained bytes, and the staged copies against both (think-dsz4).
+    boundary: Hosono's records-tilt9-v1 release records against the digests the 2026-10-06 packet's retained records.sha256 pins, the checker files and cover their headers name against the retained bytes, and the staged copies against both (think-dsz4).
   - path: packing/devtools/audit_wand125_tools.py
     kind: download
-    boundary: wand125's published input digests against the regenerated input (H3).
+    boundary: Hosono's published input digests against the regenerated input (H3).
   - path: packing/devtools/audit_wand125_closed_form.py
     kind: download
     boundary: >-
-      wand125's closed form: replay4d's printed source hash and the structure receipt's
+      Hosono's closed form: replay4d's printed source hash and the structure receipt's
       validate_family digest, as the source states them at 9a28a84 and 1c661b7, against
       their recomputation from the pinned upstream files, which is the claim under test
       (think-4wgw); and the downloaded closed-form-v1 records and families against the

@@ -109,6 +109,8 @@ from devtools import upper_bound_houses as adopted_houses
 from devtools import wand125_fn1_bindings as fn1
 from devtools.check_checkout_imports import environment_for
 from devtools.repo_scope import tracked_files
+from sqpack.contributor_occurrences import MANIFEST as OCCURRENCES_MANIFEST
+from sqpack.contributors import PEOPLE_DIR, load_contributors
 from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
 
@@ -2056,7 +2058,50 @@ def root_files() -> tuple[Path, ...]:
 # Raise to 222 MiB, the least whole MiB above this surface, with unchanged selection and
 # the oversized pre-clone refusal: 972,603 bytes of headroom. It is measured
 # for this change alone. Three portable workers are bounded at 666 MiB.
-SNAPSHOT_MAX_BYTES = 222 * 1024 * 1024
+#
+# 2026-10-20, contributor profiles (#578, think-wrh8, think-iyao) merged with main
+# 4851d8193: `--source-bytes` read 238,732,991 bytes, 5,949,119 over 222 MiB. Priced
+# against main's blobs of the same paths, the profile work adds 54 files (992,050 bytes;
+# the occurrence manifest is 716,713 of them) and grows shared files by 125,705 bytes.
+# Nearly all of the rest is Gobel's retained 1979 PDF (4,982,398 bytes), which main
+# tracks but does not copy: his profile and an inspected-byline receipt declare it, and
+# validate_schemas consumes both, so keep the complete private PDF and every other
+# profile and occurrence dependency. No unrelated prune is justified. The custody
+# regression checks the PDF's bytes, private index and both loaders. After the second
+# merge, of main e7de85ff6 (#701, T-223), the surface read 239,280,102 bytes, 204,774
+# over 228 MiB, the growth being T-223's records. Raise to 229 MiB, the least whole MiB
+# above it, with unchanged selection and the oversized pre-clone refusal: 843,802 bytes
+# of headroom. Three portable workers are bounded at 687 MiB.
+#
+# 2026-10-21, the completed profile identity review (think-4m6m):
+# `--audit-snapshot` reads 263,907,248 bytes. The newly declared primary-byline
+# dependency `resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf`
+# contributes 25,831,878 bytes: it is a complete volume scan, with the byline on
+# PDF pages 287 and 296. Without this one dependency the same selection reads
+# 238,075,370 bytes, below the former 229 MiB cap. The profile loader requires the
+# named archive, so retain the complete private file rather than omitting or
+# excerpting it. Its full PDF credit census remains pending; copied custody does
+# not certify inspection. Raise to 252 MiB, the least whole MiB above this measured
+# surface, with 333,904 bytes of headroom and unchanged source selection and
+# pre-clone oversized refusal. Three portable workers remain bounded at 756 MiB.
+# 2026-10-21, the profile branch merged with main d7923b8d8 (#706 and #716):
+# `--source-bytes` reads 264,512,602 bytes, 271,450 over 252 MiB. The merged
+# adoption records and their complete deciding evidence remain in the same private
+# source roster. Raise to 253 MiB, the least whole MiB above this measured surface,
+# leaving 777,126 bytes before this comment, with no source exclusions and the same
+# oversized pre-clone refusal. Three portable workers remain bounded at 759 MiB.
+# 2026-10-21, merge of main 7359fa8b6 (#717 and #718): the unchanged
+# source roster measures 265,715,597 bytes, 425,869 above 253 MiB. Retain all
+# deciding evidence and raise only to the next whole MiB: 254 MiB, leaving
+# 622,707 bytes before this comment. Three workers remain bounded at 762 MiB;
+# source selection and oversized pre-clone refusal are unchanged.
+# 2026-10-22, merge of main 0281e7763 (PR #720): the unchanged source roster
+# measures 266,502,917 bytes, 164,613 above 254 MiB. Its 205 beyond-horizon rows
+# and complete deciding evidence remain in the private snapshot. Raise to 255 MiB,
+# the least whole MiB above that measurement, leaving 883,963 bytes before this
+# comment. Three workers remain bounded at 765 MiB; source selection and oversized
+# pre-clone refusal are unchanged.
+SNAPSHOT_MAX_BYTES = 255 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something
@@ -2358,10 +2403,41 @@ def defect_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
     return _declared_pruned_targets(_defect_paths(log), roots)
 
 
+def contributor_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
+    """Pruned archive files explicitly supporting contributor identity and bio claims."""
+    directory = ROOT / PEOPLE_DIR
+    if not directory.is_dir():
+        return []
+    registry = load_contributors(directory, repo=REPO)
+    selected_roots = frozenset(LINKED_PRUNE_ROOTS if roots is None else roots)
+    targets: set[Path] = set()
+    for contributor in registry.by_id.values():
+        for source in contributor.sources:
+            if source.archive_path is not None:
+                path = (REPO / source.archive_path).resolve()
+                if in_pruned_roots(path, selected_roots):
+                    targets.add(path)
+    manifest = ROOT / OCCURRENCES_MANIFEST
+    if manifest.is_file():
+        from sqpack.contributor_occurrences import dependency_paths  # noqa: PLC0415
+
+        targets.update(
+            path.resolve()
+            for path in dependency_paths(manifest, repo=REPO)
+            if in_pruned_roots(path.resolve(), selected_roots)
+        )
+    return sorted(targets)
+
+
 def snapshot_pruned_targets() -> list[Path]:
     """All pruned source files needed by checks that run inside a worker."""
     return sorted(
-        {*linked_pruned_targets(), *result_pruned_targets(), *defect_pruned_targets()}
+        {
+            *linked_pruned_targets(),
+            *result_pruned_targets(),
+            *defect_pruned_targets(),
+            *contributor_pruned_targets(),
+        }
     )
 
 
@@ -2465,6 +2541,7 @@ def snapshot_audit(
     roots = (*LINKED_PRUNE_ROOTS, *proposed)
     linked = set(linked_pruned_targets(roots=roots))
     registered = {*result_pruned_targets(roots=roots), *defect_pruned_targets(roots=roots)}
+    contributors = set(contributor_pruned_targets(roots=roots))
     records = safe_load(spec_path.read_text(encoding="utf-8"))["controls"]
 
     def rows(selected: Sequence[Path] | set[Path]) -> list[dict[str, object]]:
@@ -2479,7 +2556,8 @@ def snapshot_audit(
         copied = [path for path in paths if in_pruned_roots(path, below)]
         linked_here = {path for path in linked if in_pruned_roots(path, below)}
         registered_here = {path for path in registered if in_pruned_roots(path, below)}
-        rescued = linked_here | registered_here
+        contributors_here = {path for path in contributors if in_pruned_roots(path, below)}
+        rescued = linked_here | registered_here | contributors_here
         mentions = []
         for record in records:
             target = (ROOT / record["file"]).resolve()
@@ -2496,6 +2574,7 @@ def snapshot_audit(
                 "currently_copied_bytes": sum(sizes[path] for path in copied),
                 "inline_rescue": rows(linked_here),
                 "result_rescue": rows(registered_here),
+                "contributor_rescue": rows(contributors_here),
                 "net_saved_bytes": sum(sizes[path] for path in copied if path not in rescued),
                 "registered_mentions": mentions,
             }
@@ -2504,7 +2583,8 @@ def snapshot_audit(
     saved = sum(
         sizes[path]
         for path in paths
-        if in_pruned_roots(path, frozenset(proposed)) and path not in linked | registered
+        if in_pruned_roots(path, frozenset(proposed))
+        and path not in linked | registered | contributors
     )
     return {
         "source_bytes": total,
@@ -2561,9 +2641,15 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
         and BUILD_CACHES.isdisjoint(path.relative_to(REPO).parts)
     ]
     register = ROOT / "frontier/results.yaml"
+    contributor_documents = sorted(
+        path for path in inventory if path.parent == ROOT / PEOPLE_DIR and path.suffix == ".md"
+    )
+    occurrence_manifest = ROOT / OCCURRENCES_MANIFEST
     defect_log = ROOT / "defects.yaml"
     logs = [defect_log] if defect_log in inventory else []
-    readers = [*documents, register, *logs]
+    readers = [*documents, register, *logs, *contributor_documents]
+    if occurrence_manifest in inventory:
+        readers.append(occurrence_manifest)
     queries = "".join(inventory[path][0] + "\n" for path in readers)
     contents = subprocess.run(
         ["git", "cat-file", "--batch"],
@@ -2588,6 +2674,23 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
     for document in documents:
         for raw in INLINE_LINK.findall(texts[document]):
             path = (document.parent / raw).resolve()
+            if path in inventory and in_pruned_roots(path, roots):
+                rescued.add(path)
+    for document in contributor_documents:
+        contributor = safe_load(texts[document].split("---\n")[1])["contributor"]
+        for source in contributor["sources"]:
+            if "archive_path" in source:
+                path = (REPO / source["archive_path"]).resolve()
+                if path in inventory and in_pruned_roots(path, roots):
+                    rescued.add(path)
+    if occurrence_manifest in texts:
+        manifest = safe_load(texts[occurrence_manifest])
+        dependencies = [row["origin"]["path"] for row in manifest["occurrences"]]
+        dependencies.extend(
+            row["path"] for row in manifest["inspections"] if row["status"] == "inspected"
+        )
+        for raw in dependencies:
+            path = (REPO / raw).resolve()
             if path in inventory and in_pruned_roots(path, roots):
                 rescued.add(path)
     declared = result_paths(safe_load(texts[register]))

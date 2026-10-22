@@ -1,4 +1,4 @@
-"""wand125's rectangle-density certificates: pins, input binding, and the bounds they carry."""
+"""Hosono's rectangle-density certificates: pins, input binding, and the bounds they carry."""
 
 from __future__ import annotations
 
@@ -596,8 +596,8 @@ def _hold(frontier: Path, n: int, value: Fraction) -> None:
 
 #: Bounds registered separately from the rectangle certificates of the packet dated by
 #: the key, each stronger than what that packet's certificates give at the count:
-#: wand125's exact covers at n59 and n77, Evan Daniel's at n60, n61 and n78, and
-#: wand125's mixed rectangle-measure certificates at n37, n65, n66, n90 and n92.
+#: Hosono's exact covers at n59 and n77, Evan Daniel's at n60, n61 and n78, and
+#: Hosono's mixed rectangle-measure certificates at n37, n65, n66, n90 and n92.
 STRONGER_REPORTS = {
     "2026-10-01": {
         37: Fraction(161, 25),
@@ -611,7 +611,7 @@ STRONGER_REPORTS = {
         90: Fraction(48, 5),
         92: Fraction(969, 100),
     },
-    # The same, with wand125's n76 mixed certificate, and the mixed certificates of the
+    # The same, with Hosono's n76 mixed certificate, and the mixed certificates of the
     # packet's own revision at n91 and n92, which carries to n93.
     "2026-10-02": {
         37: Fraction(161, 25),
@@ -805,7 +805,7 @@ def _foreign(registration: apply.Registration, n: int) -> str:
 def _direct_plan(frontier: Path) -> apply.Plan:
     """The newest registration's plan at the least count it certifies directly.
 
-    A later source's bound can hold every such count, as wand125's check2 certificate of
+    A later source's bound can hold every such count, as Hosono's check2 certificate of
     6 October does at n = 20, the last one the registration still wrote. So the tool
     writes the registration's own report back into the copy there first, and the
     placement rules are tried on the paragraph the tool writes.

@@ -1,5 +1,7 @@
 <h1 id="the-squares-project" class="site-title">The Squares Project</h1>
 
+<div class="site-profile-prose">
+
 Work on the square packing problem has exploded in the summer of 2026 thanks to
 AI-powered research efforts.
 
@@ -11,10 +13,10 @@ Contributions include:
 - [Marc Leonard Overbeck](https://x.com/kleddamag)’s
   [certified lower bound of $31/8$](papers/n11-threshold-bound-review.html) for eleven
   squares.
-- [Mannaseh Ahmed](https://x.com/ManassehA06)’s
+- [Manasseh Ahmed](https://x.com/ManassehA06)’s
   [proof of optimality](papers/n11-optimality-review.html) for
   [eleven squares](cases/11.html).
-- Independently, [Evan Daniel](https://x.com/evanbd) has proved the optimality of
+- Independently, [Evan Daniel](profiles/evan-daniel.html) has proved the optimality of
   [an infinite family](results.html#t-064), $s(k^2 - 3) = k$ for every $k \ge 6$, along
   with exact values at [21](cases/21.html), [32](cases/32.html), [45](cases/45.html) and
   [60](cases/60.html) squares.
@@ -31,6 +33,10 @@ This project now independently tabulates all known new results and does
 [AI-assisted verification](results.html#verification-ladders) of the proofs and
 certificates behind them, to encourage open collaboration on open questions and
 formalizations of current proofs.
+
+</div>
+
+{{PROFILES}}
 
 <h1 id="report-your-results" class="site-title">Report Your Results!<a id="contribute-your-results"></a></h1>
 

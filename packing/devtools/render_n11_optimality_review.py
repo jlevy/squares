@@ -33,6 +33,7 @@ from kpress.output import write_bytes_atomic
 from strif import atomic_output_file
 
 from devtools import artifact_dates, paper_front, paper_links, render_n11_lower_bounds_explainer
+from devtools.profile_links import link_prose
 from devtools.render_n11_lower_bounds_explainer_pdf import dated
 from devtools.render_overview import (
     EMBED_SCRIPT,
@@ -48,6 +49,7 @@ from devtools.render_overview import (
     THEME_SCRIPT,
     TOOLTIP_SCRIPT,
     PageMeta,
+    canonical_url,
     colophon_lines,
     favicon_html,
     head_tags,
@@ -93,11 +95,13 @@ FRONT = paper_front.check(
         slug=SLUG,
         title=TITLE,
         source=paper_front.Source(
-            "Mannaseh Ahmed",
+            "Manasseh Ahmed",
             "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
-            author_url="https://x.com/ManassehA06",
+            author_url=canonical_url("profiles/manasseh-ahmed.html"),
         ),
-        oversight=(paper_front.Person("Joshua Levy", "https://x.com/ojoshe"),),
+        oversight=(
+            paper_front.Person("Joshua Levy", canonical_url("profiles/joshua-levy.html")),
+        ),
         agents=("GPT-6 Astra", "GPT-6 Sol"),
         version=OPTIMALITY_REVIEW_EDITION,
         dates=(
@@ -162,6 +166,8 @@ RENDER_INPUTS = (
     *ARCHIVED_CITATION_SOURCES,
     # The front of the paper is written by the component both papers share.
     PACKING / "devtools" / "paper_front.py",
+    PACKING / "devtools/profile_links.py",
+    PACKING / "contributors/people",
     render_n11_lower_bounds_explainer.PUBLICATION_STYLE,
     FIGURES_MODULE,
     # The series bound ladder, drawn from the register's headlines.
@@ -514,7 +520,7 @@ def render(
         "SITE_KPRESS_CLIENT": kpress_client_script(),
         "SITE_TOOLTIPS": TOOLTIP_SCRIPT.read_text(encoding="utf-8"),
         "THEME_BOOTSTRAP": render_n11_lower_bounds_explainer.theme_bootstrap(static),
-        "BODY_HTML": document.html,
+        "BODY_HTML": link_prose(document.html, prefix=SITE_ROOT),
         **(math_scripts(static) if document.has_math else {"KATEX_JS": "", "SITE_MATH": ""}),
         "DIAGRAM_LABEL_SCRIPT": render_n11_lower_bounds_explainer.INLINE_SCRIPT_ASSETS[
             "DIAGRAM_LABEL_SCRIPT"

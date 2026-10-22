@@ -62,10 +62,14 @@
 }
 .site-result-meta,
 .site-result-note,
-.site-result-step-cite {
+.site-result-chain > li > p:last-child {
   color: var(--site-support-color);
   font-size: var(--site-font-size-note);
   line-height: 1.45;
+}
+.site-result-note,
+.site-result-credit {
+  color: var(--kpress-doc-text);
 }
 .site-result .site-date-kind {
   color: var(--site-support-color);
@@ -76,7 +80,7 @@
   line-height: 1.5;
   overflow: auto hidden;
 }
-.site-result-step-summary {
+.site-result-chain > li > p:nth-child(2) {
   overflow: auto hidden;
 }
 
@@ -264,10 +268,10 @@
 .site-result-chain > li[data-current] {
   border-inline-start-color: var(--kpress-doc-accent);
 }
-.site-result-chain > li[data-standing="superseded"] .site-result-step-summary {
-  color: var(--site-support-color);
+.site-result-chain > li[data-standing="superseded"] > p:nth-child(2) {
+  color: var(--kpress-doc-text);
 }
-.site-result-step-head {
+.site-result-chain > li > p:first-child {
   font-variant-numeric: tabular-nums;
 }
 .site-result-this {
@@ -299,5 +303,13 @@
 @media (max-width: 40rem) {
   .kpress .site-result-cases :is(th, td) {
     padding-inline: 0.45rem;
+  }
+}
+
+/* Keep the record ID and headline on separate mobile lines before fonts arrive.
+   Otherwise fallback math can fit beside the ID, then wrap as its real face loads. */
+@media screen and (max-width: 40rem) {
+  .site-result > h1 > .site-result-id {
+    display: block;
   }
 }

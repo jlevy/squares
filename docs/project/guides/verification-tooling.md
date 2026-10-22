@@ -244,7 +244,7 @@ Each claim’s retained receipts determine which work is complete.
 | Adaptive parent-core certificate | [`parent_core`](../../../packing/src/sqpack/fractional/parent_core.py), [`parent_core_interval`](../../../packing/src/sqpack/fractional/parent_core_interval.py) | Exact checks prove the angle-row cover, strict core containment, symmetry and budget; interval subdivision decides every centre in each row’s parent domain. Source-specific readers support Marc Leonard Overbeck’s n11 certificate, Evan Daniel’s angle-net format and Guzhou R052. A pilot, input refusal or sizing run cannot establish complete coverage. |
 | Tokoharu rectangle density | [`audit_tokoharu_density`](../../../packing/devtools/audit_tokoharu_density.py), [`audit_wand125_rectangles`](../../../packing/devtools/audit_wand125_rectangles.py), [native exact prototype](../../../packing/devtools/verify_rectangle_density.py) | Existing retained bound replays use the unchanged upstream C++ checker with independent exact prerequisites and input binding. The native prototype implements exact coverage without upstream code and passes a complete analytic control; a complete native run on a retained external certificate remains outstanding. |
 | Mixed point and segment cover with zero margin | [`audit_evand_mixed_covers`](../../../packing/devtools/audit_evand_mixed_covers.py) | Independent exact measure, symmetry and root-census audits surround source `zmx2` and `zm_mixed.py` runs. These audits do not re-prove individual boxes. The native parent-core engine needs strict interior cores and has no segment atom, so it cannot replace these source checkers. |
-| wand125 point-only and modified rectangle bundles | [`audit_wand125_point_and_mixed`](../../../packing/devtools/audit_wand125_point_and_mixed.py) | Independently checks exact arithmetic premises and input binding for the n21, n45 and n50 packets, then audits or reruns their source programs. Its `exact` command decides no coverage. The n50 research checker differs from the standard Tokoharu checker, including acceptance at coverage `>= 1`. |
+| Hosono’s point-only and modified rectangle bundles | [`audit_wand125_point_and_mixed`](../../../packing/devtools/audit_wand125_point_and_mixed.py) | Independently checks exact arithmetic premises and input binding for the n21, n45 and n50 packets, then audits or reruns their source programs. Its `exact` command decides no coverage. The n50 research checker differs from the standard Tokoharu checker, including acceptance at coverage `>= 1`. |
 | Finite family depth and closed polygon coverage | [exact face](../../../packing/devtools/density_face_verifier.py), [independent slab](../../../packing/devtools/density_slab_verifier.py), [graph certificate](../../../packing/devtools/check_geometric_graph_certificate.py), [closed polygon cover](../../../packing/devtools/check_closed_polygon_cover.py) readers | Scoped geometric lemmas about supplied square families or polygon inventories. The caller must bind the source geometry and prove the reduction to a packing claim. These tools do not supply global rectangle-density coverage over all square poses. |
 
 The [native n11 review](../reviews/review-2026-09-22-native-n11-parent-core.md) records
@@ -279,8 +279,9 @@ numbers, expands the eight symmetry images with multiplicity, and checks nonnega
 target side, the angle-net endpoint and containment and smoothing margins.
 It also checks that every supplied binary64 interval encloses its exact datum and that
 the axis-event list is complete.
-The wand125 importer regenerates the interval input and checks its identity against the
-published input. Source binding fixes which checker was reviewed and replayed.
+The importer for Hiroaki Hosono’s certificates regenerates the interval input and checks
+its identity against the published input.
+Source binding fixes which checker was reviewed and replayed.
 
 The existing retained bound replays use Tokoharu’s unchanged `verify.cpp` for global
 rotated coverage. Their independent rational clipping and slice probes test its
@@ -343,7 +344,7 @@ outstanding. The
 tracked by **think-bmf3**, requires that run before assigning method-distinct
 confirmation to the external certificate.
 
-wand125’s MIT-licensed
+Hosono’s MIT-licensed
 [`square-packing-tools`](https://github.com/wand125/square-packing-tools) adds
 transformations and search accelerations while retaining the unchanged Tokoharu checker
 for acceptance. The
@@ -569,10 +570,10 @@ paired measurements and source identities.
 
 ## T-059 Row Replay and Its Separate Global Argument
 
-The wand125 entries are T-058 (ceiling) and T-059 (row replay).
+Hosono’s entries are T-058 (ceiling) and T-059 (row replay).
 Their September 29 intake and archived receipts used provisional labels T-056/T-057; the
 merge retained those published IDs for Couzo and de Winter and assigned these new IDs to
-wand125. Historical receipts keep their original labels and bytes.
+Hosono. Historical receipts keep their original labels and bytes.
 
 T-059 concerns all 12,028 row minima of Overbeck’s n11 point and threshold-charge
 certificate. It is a different input and theorem from the Tokoharu rectangle example.
@@ -637,8 +638,8 @@ subdivision architecture.
 This n32 confirmation does not discharge the pending complete mixed-cover re-sweeps for
 n21 and n45.
 
-The
-[September 28 wand125 packet](../../../packing/resources/web/wand125-point-and-mixed-2026-09-28/README.md#limitations)
+Hosono’s
+[September 28 packet](../../../packing/resources/web/wand125-point-and-mixed-2026-09-28/README.md#limitations)
 distinguishes exact premise audits, source replay and pending work for each case.
 In particular, its retained n50 sample covers four of 201 directions; that sample alone
 does not establish the full rectangle claim.

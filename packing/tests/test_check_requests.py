@@ -1099,7 +1099,7 @@ def test_the_github_comparison_lists_every_issue_reported_for_intake_without_the
 
 
 def test_a_comment_read_and_then_edited_after_read_through_is_listed_as_unread() -> None:
-    """wand125's #485 review was read at its creation, then edited to link a new mode.
+    """Hosono's #485 review was read at its creation, then edited to link a new mode.
 
     `read_through` holds a creation time, so an edit to a comment it already covers
     arrived unseen: the f30cc2c link reached the record on 12 October only because the

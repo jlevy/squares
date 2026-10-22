@@ -117,6 +117,18 @@ properties:
         corollary: {type: string}
         complementary_case: {type: string}
         note: {type: string}
+        record_scope:
+          type: object
+          additionalProperties: false
+          required: [result, review_bead]
+          description: >-
+            An explicit link from this theorem-family scope to its registered finite
+            case projection. It exposes unassessed family currentness under an open
+            review bead; it never asserts a current best window from a frozen comparison.
+            The linked result must attribute this row's source_key.
+          properties:
+            result: {type: string, pattern: '^T-[0-9]{3}$'}
+            review_bead: {type: string, pattern: '^think-[a-z0-9]{4}$'}
   related_results:
     type: array
     items:

@@ -216,6 +216,23 @@ def test_inline_visuals_choices_are_not_header_tabs(browser: Any) -> None:
     assert tabs_problems(found) == []
 
 
+def test_baseline_labels_use_visible_text_or_the_icon_links_accessible_name(
+    browser: Any,
+) -> None:
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    try:
+        page.set_content(
+            '<nav class="site-nav">'
+            '<a data-page="overview" aria-label="Overview page">Overview</a>'
+            '<a data-page="github" aria-label="GitHub">'
+            '<svg aria-hidden="true" viewBox="0 0 24 24"></svg></a></nav>'
+        )
+        found = page.evaluate(BASELINES)
+    finally:
+        page.close()
+    assert [link["label"] for link in found["links"]] == ["Overview", "GitHub"]
+
+
 def test_tabs_over_the_rule_are_caught(
     browser: Any, section_pages: dict[str, tuple[Path, str, float]]
 ) -> None:

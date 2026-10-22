@@ -12,7 +12,9 @@ This page holds the sequence, and the few rules that belong to no single record.
 The rest has an owner, and is not repeated here:
 
 - [`epistemics.md`](../../epistemics.md#results-by-others) owns which results enter, how
-  they are credited, the `V`, `C` and `S` ratings, and the three end points.
+  their evidential status, the `V`, `C` and `S` ratings, and the three end points.
+- [Attribution Policy](../../attribution.md) owns person names, handle reconciliation,
+  lineage credit, project and tool attribution, and case-specific exceptions.
 - [The frontier README](../frontier/README.md#adding-or-reviewing-a-result) owns the
   rules and fields of the records.
 - [The synopsis](../../SYNOPSIS.md#result-import-and-efficient-confirmation) owns the
@@ -303,8 +305,8 @@ happened:
   address says what it cites, not what was retained, and reading it as the whole tree
   hid every earlier commit no packet took in.
   A commit a README names in prose pins nothing, because prose that names a commit is as
-  likely to say it was left for an import of its own, as the 4 October wand125 packet
-  said of `c56b9b7` and `1ebd484`.
+  likely to say it was left for an import of its own, as Hiroaki Hosono’s 4 October
+  packet said of `c56b9b7` and `1ebd484`.
 - **A Kingbird count that drops below its record** is a result by others, imported like
   any other. Where the register cannot take it yet, it is declared under
   `pending_catalogue_intake`, with its bead and the day it was recorded.
@@ -336,7 +338,7 @@ happened:
   “waits for jlevy/squares#305”, and a `blocks` dependency always does.
   Prose in the notes is never read: notes accumulate, and the sweep once took “was held
   for #305, which merged” and another bead’s example of a wait as waits still open.
-  Nothing resumes a wait when its blocker resolves, so the sweep reports it: wand125’s 4
+  Nothing resumes a wait when its blocker resolves, so the sweep reports it: Hosono’s 4
   October certificates waited for #305, which merged that evening, and stayed queued.
 - **A drawing owed regularization names its bead.** Every new house is a new witness,
   and its count reads `pending` in `default-drawings.json` until both strong generators

@@ -1,12 +1,12 @@
-"""Stage 4's negative controls for wand125's checkers: mutations they refuse.
+"""Stage 4's negative controls for Hosono's checkers: mutations they refuse.
 
 ``campaign/result-import.md`` asks that two mutated certificates be refused by every
 checker that accepted the original, with a test holding them. Tokoharu's ``verify.cpp``
-(the rectangle replays of ``devtools.audit_wand125_rectangles``) and wand125's
+(the rectangle replays of ``devtools.audit_wand125_rectangles``) and Hosono's
 ``mixed_rotated_verify.cpp`` (the mixed replays of
 ``devtools.audit_wand125_point_and_mixed``) each have one retained control: a standing
 certificate and two mutations of it run on one net direction, the original accepted
-again there and both mutations refused. wand125's ``verify_portable.py``, the ``s(21)``
+again there and both mutations refused. Hosono's ``verify_portable.py``, the ``s(21)``
 point replay, has two: the source's runner on each of two mutated covers, ending in the
 witness replay's own refusal. These tests read the retained receipts and the retained
 certificates only; nothing here compiles or runs a checker.

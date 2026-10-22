@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import copy
+import html
 import re
 
 import pytest
 
 from devtools import check_results, news_highlights, render_changelog, site_topics
+from devtools.profile_links import public_names
 
 
 @pytest.fixture(scope="module")
@@ -134,6 +136,86 @@ def test_homepage_ahmed_article_keeps_the_result_and_explainer_reachable(
     assert "a second independent proof method" in card
     assert 'href="https://jlevy.github.io/squares/result/t-060.html"' in card
     assert 'href="https://jlevy.github.io/squares/papers/n11-optimality-review.html"' in card
+
+
+def test_homepage_and_archive_link_preferred_names_directly_to_reviewed_profiles(
+    document: render_changelog.Document,
+) -> None:
+    expected = {
+        "fitzharding-n17-reported-proof": (
+            ("Oscar Fitzharding", "oscar-fitzharding"),
+            ("John Bidwell", "john-bidwell"),
+            ("Marc Leonard Overbeck", "marc-leonard-overbeck"),
+            ("Hiroaki Hosono", "hiroaki-hosono"),
+        ),
+        "overbeck-n17-candidate-proof": (
+            ("Marc Leonard Overbeck", "marc-leonard-overbeck"),
+            ("John Bidwell", "john-bidwell"),
+        ),
+        "ahmed-eleven-square-optimality": (
+            ("Manasseh Ahmed", "manasseh-ahmed"),
+            ("Walter Trump", "walter-trump"),
+            ("Joshua Levy", "joshua-levy"),
+            ("Marc Leonard Overbeck", "marc-leonard-overbeck"),
+        ),
+    }
+    for rendered in (news_highlights.render(document), render_changelog.render_news(document)):
+        # The names stay plain links, since their container says so once and the profile
+        # popover leaves every profile link inside it alone.
+        assert '<div class="site-news sans-text" data-news data-contributor-plain>' in rendered
+        cards = _cards(rendered)
+        for identifier, people in expected.items():
+            card = cards[identifier]
+            for _preferred_name, profile_id in people:
+                label = public_names()[profile_id].label
+                assert f'<a href="profiles/{profile_id}.html">{html.escape(label)}</a>' in card
+            assert "data-person" not in card
+
+
+@pytest.mark.parametrize("suffix", ["", "?plain=1&view=full#accounts"])
+def test_inline_news_converts_repository_profile_links_once(suffix: str) -> None:
+    target = f"packing/contributors/people/hiroaki-hosono.md{suffix}"
+    rendered = render_changelog.inline_html(f"Reviewed by [Hiroaki Hosono]({target}).")
+    canonical = html.escape(f"profiles/hiroaki-hosono.html{suffix}", quote=True)
+    assert rendered == f'Reviewed by <a href="{canonical}">Hiroaki Hosono</a>.'
+    math = render_changelog.inline_html(rf"$\href{{{target}}}{{H}}$")
+    assert "<math" in math
+    assert f'href="{canonical}"' in math
+
+
+def test_inline_news_keeps_authored_preferred_names_and_styling() -> None:
+    target = "packing/contributors/people/hiroaki-hosono.md"
+    for label, styled in (
+        ("**Hiroaki Hosono**", "<strong>Hiroaki Hosono</strong>"),
+        (
+            "*Reviewed by **Hiroaki Hosono***",
+            "<em>Reviewed by <strong>Hiroaki Hosono</strong></em>",
+        ),
+    ):
+        rendered = render_changelog.inline_html(
+            f"Hiroaki Hosono; [{label}]({target}); "
+            "[**Hiroaki Hosono**](https://example.org/proof); Hiroaki Hosono."
+        )
+        assert rendered == (
+            f'Hiroaki Hosono; <a href="profiles/hiroaki-hosono.html">{styled}</a>; '
+            '<a href="https://example.org/proof"><strong>Hiroaki Hosono</strong></a>; '
+            "Hiroaki Hosono."
+        )
+
+
+@pytest.mark.parametrize(
+    ("target", "message"),
+    [
+        ("packing/contributors/people/missing-person-not-a-profile.md", "missing repository"),
+        ("packing/contributors/people/%252e%252e/README.md", "repository-relative"),
+        ("packing/contributors/people/hiroaki-hosono.md?x=%3Cscript%3E", "unsafe"),
+    ],
+)
+def test_inline_news_rejects_missing_and_unsafe_profile_targets(
+    target: str, message: str
+) -> None:
+    with pytest.raises(ValueError, match=message):
+        render_changelog.inline_html(f"[Person]({target})")
 
 
 def test_news_schema_uses_the_shared_topic_vocabulary() -> None:

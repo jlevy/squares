@@ -1,4 +1,4 @@
-"""The audit of wand125's ValidTilt9 records, and the receipts of its stage-3 sample.
+"""The audit of Hosono's ValidTilt9 records, and the receipts of its stage-3 sample.
 
 The three record files are pinned by SHA-256 and not retained, so the tests over the run
 read the retained receipts: the audit's JSON, the log of the source's
