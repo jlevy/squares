@@ -7117,6 +7117,33 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "keeps its version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/render_changelog.py", "packing/src/sqpack/cli/validate.py"),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The S4 and S5 announcement gate (think-9wxc): `render_changelog` gains "
+            "`check_announcements` and its helpers, called only by its own `main` under "
+            "`--announcement-base`, and the records tier's synopsis step passes that flag. "
+            "No existing function changes. The papers reach `render_changelog` only "
+            "through `site_documents`, which calls `entry_anchor`, and no builder calls "
+            "`validate._synopsis`. No render was taken, and every paper keeps its version."
+        ),
+    ),
 )
 
 
