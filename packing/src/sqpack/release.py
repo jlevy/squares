@@ -2374,8 +2374,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "Stage 4 of T-226 to T-229 (V3/C3 after the 22 October reviews, T-229 adopted "
             "at 105 and 204 and regularized, the replies after #722) against main "
-            "cddc5843f (#733): rendered at link revision 40a71b16 into empty site "
-            "directories, twice from this tree at 3b776a5d and twice from main's (68 files "
+            "bfc04b659 (#733, #735): rendered at link revision 40a71b16 into empty site "
+            "directories, twice from this tree at 720648d3 and twice from main's (68 files "
             "each), render_n11_lower_bounds_explainer, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write every "
             "file byte-identical across all four, except one span's style attribute in "
