@@ -420,8 +420,9 @@ def edition_file(path: Path) -> str:
     The verifiable-claim documents and the proof card are generated, committed, and
     compared byte for byte with a fresh render, and they are not site pages: each pins
     the verifier and the evidence a reported run used, so their links name
-    `sqpack.release.PUBLICATION_REVISION`, a commit on `main` that is bumped when an
-    edition is cut. Every link on the site itself names `main` (`repo_links`).
+    `sqpack.release.PUBLICATION_REVISION`, a commit on `main` that each site edition
+    used to move and that is frozen since site editions were retired on 22 October 2026
+    (think-wdqo). Every link on the site itself names `main` (`repo_links`).
     """
     return repo_url(path, ref=PUBLICATION_REVISION)
 

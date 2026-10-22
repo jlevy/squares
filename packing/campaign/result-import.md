@@ -727,6 +727,15 @@ The pull request that registers or raises a result runs
 rendered in the commit that changes the record, and the data pin moves in the next.
 No documentation phase is opened for it.
 
+It cuts no site edition.
+Site editions are retired as of 22 October 2026
+([Cutting an edition](../../development.md#cutting-an-edition); `think-wdqo`): the site
+deploys continuously from `main`, and `check_release_impact` asks it for no disposition
+and refuses an edit to the frozen `PUBLICATION_HISTORY` or `PUBLICATION_REVISION`, so
+the claim documents are not regenerated for an intake either.
+A paper or the posters still take their own cut, or a no-change record, when the import
+changes what they print.
+
 The pull request’s `--fast` surface runs on CI’s runners, not on a machine that is also
 running a replay, where a tier’s wall measures the contention rather than the branch
 ([What each tier costs](../../development.md#what-each-tier-costs-and-where-its-ceiling-lives)).

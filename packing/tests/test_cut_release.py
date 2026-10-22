@@ -4,6 +4,7 @@ These tests hold successor and impact refusals, isolation of component histories
 refusal of dirty input or a stale pin before writes. Command plans retain the owning
 generators, quick contract tests, and final checkpoint and deployment obligations.
 Selection probes collect real test identities without executing full certificate sweeps.
+A site cut is refused: site editions are retired (the owner, 2026-10-22; think-wdqo).
 """
 
 from __future__ import annotations
@@ -17,6 +18,7 @@ import pytest
 
 from devtools import (
     build_known_best_atlas,
+    check_release_impact,
     cut_release,
     release_pin,
     render_n11_lower_bounds_explainer_pdf,
@@ -26,6 +28,7 @@ from sqpack.cli.validate import QUICK_TESTS
 
 PACKING = Path(__file__).resolve().parents[1]
 SOURCE = release_pin.RELEASE.read_text(encoding="utf-8")
+EXPLAINER = "paper:n11-lower-bounds-explainer"
 LONG = (
     "The atlas edition: the posters state the data they were drawn from, the site's "
     "pages carry one footer, and $s(11) = 3.8770835…$ is recorded as proved optimal."
@@ -39,39 +42,36 @@ def _module(text: str) -> dict[str, object]:
 
 
 def _next() -> str:
-    return release.successor_version(release.PUBLICATION_VERSION, "patch")
+    return release.successor_version(release.EXPLAINER_VERSION, "patch")
 
 
 @pytest.mark.parametrize("scope", [LONG, "A short edition."])
 def test_a_bump_adds_the_edition_at_the_front_and_moves_nothing_else(scope: str) -> None:
-    """One entry more, newest first; the claim documents' revision; the data pin untouched."""
+    """One entry more, newest first; the frozen site record and the data pin untouched."""
     version = _next()
     bumped = cut_release.with_edition(
         SOURCE,
         version=version,
         first_published="October 2, 2026",
         scope=scope,
-        revision="0123abcd",
+        component=EXPLAINER,
     )
     module = _module(bumped)
-    history = module["PUBLICATION_HISTORY"]
+    history = module["EXPLAINER_HISTORY"]
     assert isinstance(history, tuple)
-    assert len(history) == len(release.PUBLICATION_HISTORY) + 1
+    assert len(history) == len(release.EXPLAINER_HISTORY) + 1
     assert tuple(history[0]) == (version, "October 2, 2026", scope)
     assert [tuple(entry) for entry in history[1:]] == [
-        tuple(entry) for entry in release.PUBLICATION_HISTORY
+        tuple(entry) for entry in release.EXPLAINER_HISTORY
     ]
-    assert module["PUBLICATION_VERSION"] == version
-    assert module["PUBLICATION_DATE"] == "October 2, 2026"
-    assert module["FIRST_PUBLISHED"] == release.FIRST_PUBLISHED
-    assert module["PUBLICATION_REVISION"] == "0123abcd"
+    assert module["EXPLAINER_VERSION"] == version
+    assert module["EXPLAINER_FIRST_PUBLISHED"] == release.EXPLAINER_FIRST_PUBLISHED
+    # The site's record is frozen (think-wdqo): no paper cut moves it or its link commit.
+    assert module["PUBLICATION_HISTORY"] == release.PUBLICATION_HISTORY
+    assert module["PUBLICATION_REVISION"] == release.PUBLICATION_REVISION
+    assert module["PUBLICATION_EDITION"] == release.PUBLICATION_EDITION
     assert module["DATA_REVISION"] == release.DATA_REVISION
-    assert module["PUBLICATION_EDITION"] == (
-        f"{version}-{release.DATA_REVISION[: release.DATA_REVISION_LENGTH]}"
-    )
-    # A site bump moves no paper: each paper's own history and version stay as they are.
-    assert module["EXPLAINER_HISTORY"] == release.EXPLAINER_HISTORY
-    assert module["EXPLAINER_VERSION"] == release.EXPLAINER_VERSION
+    # A paper's cut moves no other paper and no poster.
     assert module["OPTIMALITY_REVIEW_EDITION"] == release.OPTIMALITY_REVIEW_EDITION
     assert module["INFOGRAPHIC_HISTORY"] == release.INFOGRAPHIC_HISTORY
     assert module["INFOGRAPHIC_VERSION"] == release.INFOGRAPHIC_VERSION
@@ -79,7 +79,7 @@ def test_a_bump_adds_the_edition_at_the_front_and_moves_nothing_else(scope: str)
     assert module["PACKING_METHODS_HISTORY"] == release.PACKING_METHODS_HISTORY
     validate = module["validate_release_impacts"]
     assert callable(validate)
-    validate(externally_changed=["site"])
+    validate(externally_changed=[EXPLAINER])
 
     # The lint floor formats every tracked Python file, so the edit has to be written
     # the way the formatter writes it, or a bump would fail the gate on its own output.
@@ -97,7 +97,7 @@ def test_a_bump_adds_the_edition_at_the_front_and_moves_nothing_else(scope: str)
 @pytest.mark.parametrize(
     ("change", "refusal"),
     [
-        ({"version": release.PUBLICATION_VERSION}, "is not after the current edition"),
+        ({"version": release.EXPLAINER_VERSION}, "is not after the current edition"),
         ({"version": "v0.1.0"}, "is not after the current edition"),
         ({"version": "0.5.0"}, "is not a version"),
         ({"version": "v0.5"}, "is not a version"),
@@ -105,7 +105,6 @@ def test_a_bump_adds_the_edition_at_the_front_and_moves_nothing_else(scope: str)
         ({"scope": "No full stop"}, "one trimmed sentence"),
         ({"scope": " Padded. "}, "one trimmed sentence"),
         ({"scope": "Two\nlines."}, "one trimmed sentence"),
-        ({"revision": "HEAD"}, "is not a commit"),
     ],
 )
 def test_a_bump_that_is_not_one_is_refused(change: dict[str, str], refusal: str) -> None:
@@ -113,7 +112,6 @@ def test_a_bump_that_is_not_one_is_refused(change: dict[str, str], refusal: str)
         "version": _next(),
         "first_published": "October 2, 2026",
         "scope": "A short edition.",
-        "revision": "0123abcd",
     } | change
     with pytest.raises(ValueError, match=refusal):
         cut_release.with_edition(
@@ -121,16 +119,53 @@ def test_a_bump_that_is_not_one_is_refused(change: dict[str, str], refusal: str)
             version=arguments["version"],
             first_published=arguments["first_published"],
             scope=arguments["scope"],
-            revision=arguments["revision"],
+            component=EXPLAINER,
         )
 
 
+def test_a_site_cut_is_refused_because_site_editions_are_retired(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The owner, 2026-10-22 (think-wdqo): the site deploys continuously and takes no
+    edition. `--component site` fails before any write or git read, with the message the
+    release-impact gate gives an edit to the frozen record, and the other entry points
+    refuse the site too."""
+    version = release.successor_version(release.PUBLICATION_VERSION, "patch")
+
+    def no_git(*_arguments: str) -> str:
+        raise AssertionError("a refused site cut reads no git state")
+
+    monkeypatch.setattr(cut_release, "_git", no_git)
+    arguments = [version, "--component", "site", "--impact", "patch", "--scope", "A cut."]
+    assert cut_release.main(arguments) == 1
+    error = capsys.readouterr().err
+    assert check_release_impact.SITE_EDITIONS_RETIRED in error
+    assert "think-wdqo" in error
+    assert release_pin.RELEASE.read_text(encoding="utf-8") == SOURCE
+    with pytest.raises(ValueError, match="site editions are retired"):
+        cut_release.with_edition(
+            SOURCE,
+            version=version,
+            first_published="October 23, 2026",
+            scope="A cut.",
+            component="site",
+        )
+    with pytest.raises(ValueError, match="site editions are retired"):
+        cut_release.steps(version, "site")
+    assert "site" not in cut_release.COMPONENT_TESTS
+
+
+def test_a_cut_names_its_component(capsys: pytest.CaptureFixture[str]) -> None:
+    """`--component` has no default: the old default, the site, is retired, and a cut that
+    named nothing would otherwise be refused for a component nobody chose."""
+    with pytest.raises(SystemExit) as stopped:
+        cut_release.main([_next(), "--impact", "patch", "--scope", "A cut."])
+    assert stopped.value.code == 2
+    assert "--component" in capsys.readouterr().err
+    assert release_pin.RELEASE.read_text(encoding="utf-8") == SOURCE
+
+
 def test_component_steps_generate_only_owned_outputs() -> None:
-    site_plan = cut_release.steps("v9.9.9")
-    assert [command[0] for _what, command in site_plan] == [
-        "devtools.render_verifiable_claim",
-        "pytest",
-    ]
     plan = cut_release.steps("v9.9.9", "infographics")
     atlas_steps = [command for _what, command in plan if command[0].endswith("atlas")]
     assert [command[1:] for command in atlas_steps] == [
@@ -140,9 +175,9 @@ def test_component_steps_generate_only_owned_outputs() -> None:
     for command in atlas_steps:
         build_known_best_atlas.parser().parse_args(list(command[1:]))
     assert "tests/test_known_best_composites.py" in plan[-1][1]
-    assert "tests/test_known_best_composites.py" not in site_plan[-1][1]
-    assert "tests/test_n11_lower_bounds_explainer.py" not in site_plan[-1][1]
-    for component in release.COMPONENT_HISTORY_NAMES:
+    assert "tests/test_n11_lower_bounds_explainer.py" not in plan[-1][1]
+    assert set(cut_release.COMPONENT_TESTS) == set(release.COMPONENT_HISTORY_NAMES) - {"site"}
+    for component in cut_release.COMPONENT_TESTS:
         command = cut_release.steps("v9.9.9", component)[-1][1]
         targets = [argument for argument in command if argument.startswith("tests/")]
         assert len(targets) == len(set(targets))
@@ -186,13 +221,15 @@ def test_a_dry_run_prints_the_plan_and_changes_nothing(
     include_deep_tests: bool,
 ) -> None:
     """The whole plan, and what is left for the owner, without touching the tree."""
-    answers = {("rev-parse", "--short=8", "HEAD"): "0123abcd", ("status", "--porcelain"): ""}
+    answers = {("status", "--porcelain"): ""}
     monkeypatch.setattr(cut_release, "_git", lambda *arguments: answers[arguments])
     monkeypatch.setattr(release_pin, "check", lambda _repo, _source: 0)
     version = _next()
     status = cut_release.main(
         [
             version,
+            "--component",
+            EXPLAINER,
             "--impact",
             "patch",
             "--scope",
@@ -205,7 +242,7 @@ def test_a_dry_run_prints_the_plan_and_changes_nothing(
     )
     printed = capsys.readouterr().out
     assert status == 0
-    assert f"{release.PUBLICATION_VERSION} -> {version}, first published October 2, 2026" in (
+    assert f"{release.EXPLAINER_VERSION} -> {version}, first published October 2, 2026" in (
         printed
     )
     assert "python -m devtools.build_known_best_atlas --update-composites" not in printed
@@ -218,10 +255,10 @@ def test_a_dry_run_prints_the_plan_and_changes_nothing(
         assert command[command.index("-m") + 1] == QUICK_TESTS
     assert "full checkpoint for final review" in printed
     assert "matching source and base" in printed
-    # A site bump ends at the deployment check. No tag and no GitHub release are
+    # A paper's cut ends at the deployment check. No tag and no GitHub release are
     # routine (the owner, 2026-10-01: releases matter only for the generated assets
-    # that need a download address, the films), and no paper's version moves.
-    assert f"The site version {version} is complete when that passes" in printed
+    # that need a download address, the films), and no other component's version moves.
+    assert f"The {EXPLAINER} version {version} is complete when that passes" in printed
     assert "git tag" not in printed
     assert "gh release create" not in printed
     assert "A release is cut only to host generated" in printed
@@ -245,10 +282,11 @@ def test_a_bump_starts_only_from_a_clean_tree_and_a_current_pin(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
     """A poster drawn over uncommitted data, or under a stale pin, would be stamped wrong."""
-    answers = {("rev-parse", "--short=8", "HEAD"): "0123abcd", ("status", "--porcelain"): dirty}
+    answers = {("status", "--porcelain"): dirty}
     monkeypatch.setattr(cut_release, "_git", lambda *arguments: answers[arguments])
     monkeypatch.setattr(release_pin, "check", lambda _repo, _source: pin)
-    assert cut_release.main([_next(), "--impact", "patch", "--scope", "A short edition."]) == 1
+    arguments = [_next(), "--component", EXPLAINER, "--impact", "patch", "--scope", "A cut."]
+    assert cut_release.main(arguments) == 1
     assert refusal in capsys.readouterr().err
     assert release_pin.RELEASE.read_text(encoding="utf-8") == SOURCE
 
@@ -267,7 +305,6 @@ def test_component_cut_preserves_all_other_histories_and_records_its_impact(
         version=version,
         first_published="October 13, 2026",
         scope="Change the delivered component.",
-        revision="0123abcd",
         component=component,
         impact=impact,
     )
@@ -310,17 +347,16 @@ def test_a_cut_refuses_skipped_or_wrong_impact_successors(
             version=version,
             first_published="October 13, 2026",
             scope="Change the delivered component.",
-            revision="0123abcd",
             impact=impact,
             component="infographics",
         )
 
 
-def test_site_checks_collect_claim_refusals_and_defer_full_net(tmp_path: Path) -> None:
+def test_explainer_checks_collect_claim_refusals_and_defer_full_net(tmp_path: Path) -> None:
     """Inspect real selection identities without executing a certificate sweep."""
-    quick_command = cut_release.steps("v9.9.9")[-1][1]
+    quick_command = cut_release.steps("v9.9.9", EXPLAINER)[-1][1]
     assert quick_command[quick_command.index("-m") + 1] == QUICK_TESTS
-    deep_command = cut_release.steps("v9.9.9", include_deep_tests=True)[-1][1]
+    deep_command = cut_release.steps("v9.9.9", EXPLAINER, include_deep_tests=True)[-1][1]
     selections: list[set[str]] = []
     for name, command in (("quick", quick_command), ("deep", deep_command)):
         result = subprocess.run(
@@ -346,8 +382,11 @@ def test_site_checks_collect_claim_refusals_and_defer_full_net(tmp_path: Path) -
             "tests/test_release.py",
             "tests/test_release_components.py",
             "tests/test_artifact_dates.py",
+            "tests/test_n11_lower_bounds_explainer.py",
+            "tests/test_render_n11_lower_bounds_explainer_pdf.py",
             "tests/test_verify_claim.py",
             "tests/test_verify_threshold_claim.py",
+            "tests/test_paper_structure.py",
         }
         selections.append(nodes)
     quick, deep = selections

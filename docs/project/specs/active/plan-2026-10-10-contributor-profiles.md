@@ -46,10 +46,12 @@ Presentation work continues on `codex/profile-naming-and-tally-order`, under
 build and test commands.
 The follow-up preserves reviewed identities and the Results, Records, and Credits
 counting definitions.
-Main through `e44a51f44` is integrated, including T-229 and the newly landed
-archive/intake work.
-Site `v0.9.3` and lower-bounds `v0.4.19` follow the incoming editions without replacing
-their history; all 90 incoming impact decisions are retained.
+Main through `59b1ec594` is integrated, including T-229, the archive/intake work and
+[PR #729](https://github.com/jlevy/squares/pull/729), which retires site editions.
+The site deploys continuously from `main`; its frozen history ends at `v0.9.2`, and its
+claim-document link pin remains at upstream’s `7ff5b129`. The four paper successors
+remain lower-bounds `v0.4.19`, optimality review `v0.1.10`, threshold review `v0.1.3`
+and methods survey `v0.2.6`; all incoming histories and impact decisions are retained.
 It changes their presentation:
 
 - Technical records and credit labels use the evidenced surname with existing

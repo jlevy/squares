@@ -1,5 +1,14 @@
 """Independent public editions for the site, the infographic pair and each paper.
 
+Site editions are retired as of 22 October 2026 (the owner; think-wdqo): "We don't have
+any real value in committing a synthetic version for the site." The site deploys
+continuously from `main`. `PUBLICATION_HISTORY` is kept as history, the record of the
+site editions that were published, and is frozen together with `PUBLICATION_REVISION`,
+the commit the claim documents link to: `devtools.check_release_impact` refuses an edit
+to either, and `devtools.cut_release --component site` refuses to cut. The papers and
+the art, the infographic posters and the films, keep their versions. Until the footer
+names the deployed commit, the site's pages print the frozen edition with the data pin.
+
 `PUBLICATION_EDITION` stamps the site's footer and workbench. The infographic family
 has its own `INFOGRAPHIC_HISTORY` and `INFOGRAPHIC_VERSION`; its two SVGs, PDFs and PNG
 exports carry one shared semantic core plus their derivation revision. Every paper
@@ -50,9 +59,13 @@ class PublicationHistoryEntry(NamedTuple):
     result_scope: str
 
 
+#: FROZEN since 22 October 2026, when site editions were retired (the owner; think-wdqo).
+#: It is kept as the record of the site editions that were published: no entry is added,
+#: removed or redated, and `devtools.check_release_impact` refuses an edit to it.
+#:
 #: Every edition this publication, the site and its data, has had, newest first, and NONE
 #: is ever removed. It is the site's record: its pages and workbench are stamped from
-#: it, the claim documents are regenerated at each entry, and `development.md` (Cutting
+#: it, the claim documents were regenerated at each entry, and `development.md` (Cutting
 #: an edition) is where a reader finds it. It is not a paper's history: a paper lists its
 #: own editions (`EXPLAINER_HISTORY`, below), which are the ones in which that paper
 #: changed. Until 2026-10-02 the explainer listed this whole record and called it its
@@ -86,18 +99,7 @@ class PublicationHistoryEntry(NamedTuple):
 #:
 #: Reproduce with `gh api "repos/jlevy/squares/deployments?environment=github-pages"` and,
 #: for each deployment's commit, what the page it built stated.
-# The leading entry is proposed for the next publication; confirm its date at first deployment.
 PUBLICATION_HISTORY = (
-    PublicationHistoryEntry(
-        version="v0.9.3",
-        first_published="October 22, 2026",
-        result_scope=(
-            "Use full names in explanatory prose and resource bylines, order contribution "
-            "tallies consistently, distinguish News exposition from metadata, and add "
-            "header links from popovers to their standalone pages with consistent GitHub "
-            "link icons."
-        ),
-    ),
     PublicationHistoryEntry(
         version="v0.9.2",
         first_published="October 22, 2026",
@@ -678,8 +680,8 @@ PUBLICATION_HISTORY = (
     ),
 )
 
-#: The edition the site's pages and workbench state. Choose at most one
-#: version bump per merge, and keep it fixed while revising that pull request.
+#: The edition the site's pages and workbench state: the last site edition, frozen since
+#: site editions were retired (think-wdqo).
 PUBLICATION_VERSION = PUBLICATION_HISTORY[0].version
 
 #: Where the edition stands, said ahead of the version. Empty once it is final; the
@@ -1381,18 +1383,6 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.4.19",
         impact="patch",
         reason="Use full public names in explanatory narrative profile links.",
-    ),
-    ReleaseImpactDecision(
-        component="site",
-        previous_version="v0.9.2",
-        version="v0.9.3",
-        impact="patch",
-        reason=(
-            "Use full names in explanatory prose and resource bylines, order contribution "
-            "tallies consistently, distinguish News exposition from metadata, and add "
-            "header links from popovers to their standalone pages with consistent GitHub "
-            "link icons."
-        ),
     ),
     ReleaseImpactDecision(
         component="site",
@@ -7197,9 +7187,11 @@ def validate_release_impacts(
 #: (`render_n11_lower_bounds_explainer.edition_file`), at this repository's short length. It is
 #: pinned for the reason `DATA_REVISION` is: those documents are compared byte for byte with a
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
-#: in no version string. It moves when the claim documents are regenerated for an edition. It
-#: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "e44a51f443efacb415c85d13754b56b0831b3068"
+#: in no version string. It moved when the claim documents were regenerated for a site
+#: edition, and is FROZEN since site editions were retired on 22 October 2026 (think-wdqo):
+#: `devtools.check_release_impact` refuses an edit to it. It must be a commit on `main`; the
+#: site's own links name `main` itself (`devtools.repo_links`).
+PUBLICATION_REVISION = "7ff5b129"
 
 
 def data_pathspec() -> tuple[str, ...]:

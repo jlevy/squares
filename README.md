@@ -112,8 +112,9 @@ PDF. Three form a series on $n = 11$:
 is a tutorial on geometric construction, physics-inspired search, annealing, surgery,
 local refinement, and upper-bound certification.
 
-The website is at edition `v0.9.3` and the atlas posters at `v0.6.4`; each paper carries
-its own version.
+The website deploys continuously from `main`; its last site edition, `v0.9.2`, is
+retained as history.
+The atlas posters are at edition `v0.6.4`, and each paper carries its own version.
 
 ## Repository Guide
 
