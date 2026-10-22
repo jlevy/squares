@@ -1,0 +1,23 @@
+Packings of n unit squares in a square, n > 324, that improve the Squares Project record (17 October 2026).
+Sides rounded up at 12 decimals. nNNNN.json: centres and angles in degrees. nNNNN.cert: exact certificate, line 1 "n side", then "x y t" per square with t = tan(angle/2).
+
+    n  side              Squares Project   improvement     holder on the Squares Project
+  464  21.988813022694   21.989992144499   0.001179121804  Francisco Couzo, certificate of 14 October 2026
+  509  22.994328036438   23                0.005671963562  none (integer grid)
+  555  23.993653790591   24                0.006346209409  none (integer grid)
+  603  24.995268064197   25                0.004731935803  none (integer grid)
+  654  25.996103908965   26                0.003896091035  none (integer grid)
+  706  26.998712100405   27                0.001287899595  none (integer grid)
+  760  27.995949340329   28                0.004050659671  none (integer grid)
+  817  28.998488480775   29                0.001511519225  none (integer grid)
+  875  29.998783733108   30                0.001216266892  none (integer grid)
+  935  30.995955854834   31                0.004044145166  none (integer grid)
+  998  31.998349747355   32                0.001650252645  none (integer grid)
+ 1061  32.996048342114   33                0.003951657886  none (integer grid)
+ 1128  33.998294117981   34                0.001705882019  none (integer grid)
+ 1196  34.998294118334   35                0.001705881666  none (integer grid)
+ 1266  35.996046404219   36                0.003953595781  none (integer grid)
+ 1339  36.997865207179   37                0.002134792821  none (integer grid)
+ 1413  37.999463832123   38                0.000536167877  none (integer grid)
+ 1489  38.997600184483   39                0.002399815517  none (integer grid)
+ 1568  39.999336626159   40                0.000663373841  none (integer grid)

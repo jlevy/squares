@@ -1877,7 +1877,13 @@ def root_files() -> tuple[Path, ...]:
 # deciding evidence and raise only to the next whole MiB: 254 MiB, leaving
 # 622,707 bytes before this comment. Three workers remain bounded at 762 MiB;
 # source selection and oversized pre-clone refusal are unchanged.
-SNAPSHOT_MAX_BYTES = 254 * 1024 * 1024
+# 2026-10-22, merge of main 0281e7763 (PR #720): the unchanged source roster
+# measures 266,502,917 bytes, 164,613 above 254 MiB. Its 205 beyond-horizon rows
+# and complete deciding evidence remain in the private snapshot. Raise to 255 MiB,
+# the least whole MiB above that measurement, leaving 883,963 bytes before this
+# comment. Three workers remain bounded at 765 MiB; source selection and oversized
+# pre-clone refusal are unchanged.
+SNAPSHOT_MAX_BYTES = 255 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

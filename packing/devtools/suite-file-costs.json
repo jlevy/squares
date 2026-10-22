@@ -72,6 +72,7 @@
     "packing/tests/test_bentz13.py": 0.961,
     "packing/tests/test_bentz2016_tools.py": 3.49,
     "packing/tests/test_bentz46.py": 0.07,
+    "packing/tests/test_beyond_horizon_replay.py": 6.221,
     "packing/tests/test_bound_citations.py": 46.907,
     "packing/tests/test_bounded_diagnostics.py": 0.181,
     "packing/tests/test_bui_integer_count.py": 1.737,
@@ -1161,6 +1162,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-715-2026-10-22.json",
           "provenance": {},
           "tests": 22
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_beyond_horizon_replay.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/beyond-horizon-replay-2026-10-22.json",
+          "provenance": {},
+          "tests": 9
         }
       ]
     }

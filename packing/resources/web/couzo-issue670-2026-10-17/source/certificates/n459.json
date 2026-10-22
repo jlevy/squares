@@ -1,0 +1,37 @@
+{
+  "n": 459,
+  "packing": "n459.txt",
+  "packing_sha256": "65ce47fdd1c7c092b2bafddec01dcab6caed23ed6978b3fccb9c9f467fb83b20",
+  "certificate": "certificates/n459.cert",
+  "certificate_sha256": "aa9735350a8c3f6848e2f4d2371a149a3c8056042c711f77a500a6c7c80aa16f",
+  "rational_side": "412430838140282635914314183/18794923825706000000000000",
+  "kind": "rational witness",
+  "origin": {
+    "web_seed": {
+      "id": "70003a98890993ec062f5d78bba05907",
+      "n": 459,
+      "side": 21.94665437409726,
+      "method": "hop",
+      "received": "20261014T151544Z",
+      "original_packing_sha256": "9d8d9995baddad437b4bfa6d51d809771c8887a5ff5154697921ab4707bc9cc5"
+    },
+    "search_job": {
+      "id": 104623,
+      "method": "hop",
+      "source": "n459.txt",
+      "source_origin": "constructed",
+      "source_sha256": "5c089e66a922bd434c2703cbfc8932cd255b763a05b0b1121e625738b28b95fb",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n459.txt",
+        "source_sha256": "a089248a919644cafea1b4068d80cff8ccd67f69c557f327c770166c0e9d005e",
+        "source_n": 459,
+        "source_side": 21.94665437408056,
+        "layers": 0,
+        "deleted": 0,
+        "side": 21.94665437408056
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

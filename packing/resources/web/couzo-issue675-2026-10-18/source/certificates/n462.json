@@ -1,0 +1,67 @@
+{
+  "n": 462,
+  "packing": "n462.txt",
+  "packing_sha256": "6d35798c9cdccb4e5f3cbfcf941f006cebe041113fea27f8d3e0d568aaf1bf07",
+  "certificate": "certificates/n462.cert",
+  "certificate_sha256": "74a20018abc9f009ef4f1d77228a8c433881ce4f290066118f5d2a5a3490143a",
+  "rational_side": "35207439096481858883937934481/1601758675865500000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "web_seed": {
+      "category": "CT105 web submission",
+      "source_certificate_sha256": "74a20018abc9f009ef4f1d77228a8c433881ce4f290066118f5d2a5a3490143a",
+      "submission_id": "de9a42608f0f4fd10f5e82f03b6e8fb1",
+      "method": "fq",
+      "received": "20261017T234830Z",
+      "previous_source_credit": {
+        "web_seed": {
+          "id": "13a44303183b69f300437e5383122c82",
+          "n": 462,
+          "side": 21.98210857039247,
+          "method": "fq",
+          "received": "20261014T122009Z",
+          "original_packing_sha256": "2fd85a1b9c5b950eba74b61eda38022bf9ecbe2cfbdff4941685798951c676a8"
+        },
+        "search_job": {
+          "id": 106001,
+          "method": "hop",
+          "source": "n462.txt",
+          "source_origin": "constructed",
+          "source_sha256": "086eb942caf707fcf0938e88a5727b9f5c4e24301a83c13943c422fe821b4ac3",
+          "constructed_seed": {
+            "construction": "L-border and deletion",
+            "source": "n462.txt",
+            "source_sha256": "4c4591d91a88418446ab46818fb9492bbe86631b8c24d0b6076c6643a99d0862",
+            "source_n": 462,
+            "source_side": 21.980760219706287,
+            "layers": 0,
+            "deleted": 0,
+            "side": 21.980760219706287
+          }
+        }
+      }
+    },
+    "search_job": {
+      "id": 106001,
+      "method": "hop",
+      "source": "n462.txt",
+      "source_origin": "constructed",
+      "source_sha256": "086eb942caf707fcf0938e88a5727b9f5c4e24301a83c13943c422fe821b4ac3",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n462.txt",
+        "source_sha256": "4c4591d91a88418446ab46818fb9492bbe86631b8c24d0b6076c6643a99d0862",
+        "source_n": 462,
+        "source_side": 21.980760219706287,
+        "layers": 0,
+        "deleted": 0,
+        "side": 21.980760219706287
+      }
+    },
+    "seed_credit": "Francisco Couzo",
+    "source_n": 462,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "74a20018abc9f009ef4f1d77228a8c433881ce4f290066118f5d2a5a3490143a"
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

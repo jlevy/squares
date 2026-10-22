@@ -25178,6 +25178,99 @@ occurrences:
     span and prerequisite role are retained. This is the source-specific jlevy/squares
     method lineage; it does not imply sole personal authorship of project work.
   contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 666 2026-10-17]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  note: 'Reviewed against issue 666 and its retained packet: Joost de Winter authored
+    the certificates; the method credits name the authors of the cited 2021 Arslanov,
+    Mustafin and Shangitbayev paper.'
+  contributor_id: joost-de-winter
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 666 2026-10-17]'
+    field: /credit
+  expected_text: de Winter after Arslanov, Mustafin, Shangitbayev, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  note: 'Reviewed against issue 666 and its retained packet: Joost de Winter authored
+    the certificates; the method credits name the authors of the cited 2021 Arslanov,
+    Mustafin and Shangitbayev paper.'
+  contributor_id: joost-de-winter
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 666 2026-10-17]'
+    field: /credit
+  expected_text: de Winter after Arslanov, Mustafin, Shangitbayev, Levy
+  start: 16
+  end: 24
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  note: 'Reviewed against issue 666 and its retained packet: Joost de Winter authored
+    the certificates; the method credits name the authors of the cited 2021 Arslanov,
+    Mustafin and Shangitbayev paper.'
+  contributor_id: mz-arslanov
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 666 2026-10-17]'
+    field: /credit
+  expected_text: de Winter after Arslanov, Mustafin, Shangitbayev, Levy
+  start: 26
+  end: 34
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  note: 'Reviewed against issue 666 and its retained packet: Joost de Winter authored
+    the certificates; the method credits name the authors of the cited 2021 Arslanov,
+    Mustafin and Shangitbayev paper.'
+  contributor_id: sa-mustafin
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 666 2026-10-17]'
+    field: /credit
+  expected_text: de Winter after Arslanov, Mustafin, Shangitbayev, Levy
+  start: 36
+  end: 48
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  note: 'Reviewed against issue 666 and its retained packet: Joost de Winter authored
+    the certificates; the method credits name the authors of the cited 2021 Arslanov,
+    Mustafin and Shangitbayev paper.'
+  contributor_id: zk-shangitbayev
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 666 2026-10-17]'
+    field: /credit
+  expected_text: de Winter after Arslanov, Mustafin, Shangitbayev, Levy
+  start: 50
+  end: 54
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: The bibliography marks this source credits-project; comparison with the project
+    register does not establish a personal contribution by Joshua Levy.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

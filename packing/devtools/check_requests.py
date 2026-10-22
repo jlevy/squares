@@ -31,8 +31,9 @@ Modes, from ``packing/`` with the project interpreter::
     .venv/bin/python3 -m devtools.check_requests --github   # live issues, read-only
 
 The default mode reads two files and the register and touches no clock, network or
-history, so its verdict is a function of the tree. Only the ids and the schema can fail
-it: a reply that is due is owed after the merge, not a broken record. ``--draft``
+history, so its verdict is a function of the tree. Only the ids, the schema and a value
+an unquoted `` #`` cuts short (`comment_cut_scalars`) can fail it: a reply that is due is
+owed after the merge, not a broken record. ``--draft``
 refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until it
 merges and a reply links only to `main`. ``--github`` reads the live issues through
 ``gh api`` and writes nothing anywhere.
@@ -51,7 +52,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+import yaml
 from jsonschema_rs import Draft202012Validator
+from yaml.nodes import MappingNode, ScalarNode, SequenceNode
 
 from devtools import result_status, verifier_registry
 from sqpack.assurance import (
@@ -61,7 +64,7 @@ from sqpack.assurance import (
     external_formal_build_problems,
     undischarged,
 )
-from sqpack.yamlio import load_yaml, safe_load
+from sqpack.yamlio import FastSafeLoader, load_yaml, safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
@@ -173,6 +176,33 @@ def load_register(
         evidence={str(item["id"]): item for item in entries["evidence"]},
         verifiers=load_verifiers(VERIFIERS if verifiers is None else verifiers),
     )
+
+
+def comment_cut_scalars(text: str) -> list[str]:
+    """The plain scalars of a YAML text that an unquoted `` #`` on their line cuts short.
+
+    YAML reads ``#`` after a space as the start of a comment, so ``summary: as #684 says``
+    records ``as``, silently. Five such values in this record lost their text before PR #720
+    quoted them; each found here must be quoted with its full text (think-mh6b holds the
+    same defect in other registers).
+    """
+    lines = text.splitlines()
+    found: list[tuple[int, str]] = []
+    stack = [yaml.compose(text, Loader=FastSafeLoader)]
+    while stack:
+        node = stack.pop()
+        if isinstance(node, MappingNode):
+            stack.extend(part for pair in node.value for part in pair)
+        elif isinstance(node, SequenceNode):
+            stack.extend(node.value)
+        elif isinstance(node, ScalarNode) and not node.style:
+            end = node.end_mark
+            rest = lines[end.line][end.column :] if end.line < len(lines) else ""
+            if re.match(r"\s+#", rest):
+                found.append(
+                    (end.line + 1, f"{node.value!r} is cut short by {rest.strip()[:40]!r}")
+                )
+    return [f"line {line}: {what}; quote the whole value" for line, what in sorted(found)]
 
 
 def load_record(path: Path = RECORD) -> dict[str, Any]:
@@ -1411,7 +1441,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     options = parser.parse_args(argv)
     record = load_record(options.record)
     register = load_register()
-    found = problems(record, register)
+    found = comment_cut_scalars(options.record.read_text(encoding="utf-8")) or problems(
+        record, register
+    )
     if found:
         print(
             f"result requests: {len(found)} problem(s) in {options.record.name}",

@@ -1,0 +1,30 @@
+{
+  "n": 364,
+  "packing": "n364.txt",
+  "packing_sha256": "b7bfde6bfc4cf7ee3beff843b35d66240bbe94c06895454f4b5dedd1fc85fa5a",
+  "certificate": "certificates/n364.cert",
+  "certificate_sha256": "d73f8a651e80b9f9d704a8c29cf10bc758f29496cafe8b24eb92e700ef9a277f",
+  "rational_side": "19583782190151860342362508597077/1000000000000000000000000000000",
+  "kind": "rational witness",
+  "origin": {
+    "seed_credit": "Evan Daniel",
+    "search_job": {
+      "id": 102265,
+      "method": "fq",
+      "source": "n364.txt",
+      "source_origin": "constructed",
+      "source_sha256": "69f5993b37892677380cc368ca274c344aa60acf141f924938f3afb811d3c51a",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n364.txt",
+        "source_sha256": "de646398d28978b8c1922bbaa11858f1f2e51234b7e79ed9695000c35226417e",
+        "source_n": 364,
+        "source_side": 19.583782203954577,
+        "layers": 0,
+        "deleted": 0,
+        "side": 19.583782203954577
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

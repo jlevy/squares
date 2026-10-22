@@ -27606,8 +27606,9 @@ results:
 
       At n = 227 the certificate is below the earlier verified ceiling (David Ellsworth, the
       Kingbird catalogue, verified by T-155's exact ceiling) by 7.27e-03 and above Couzo's
-      later #672 by 1.71e-04. At n = 229 it is above the case's ceiling (Evan Daniel, T-199)
-      by 1.32e-05, above Daniel's T-198 by 1.15e-05 and above Couzo's #672 by 1.67e-08. At
+      later #672 by 1.71e-04. At n = 229 it is above Evan Daniel's T-199, the case's ceiling
+      from 19 to 22 October 2026, by 1.32e-05, above Daniel's T-198 by 1.15e-05 and above
+      Couzo's #672 by 1.67e-08. At
       n = 260 it is below the earlier verified ceiling (the Kingbird catalogue, T-155) by
       1.11e-02 and above Couzo's later #678 (T-223, at V3/C3 since its 20 October review) by
       2.56e-05.
@@ -27620,9 +27621,10 @@ results:
 
       V3 and C3 rest on the replay (E-de-winter-668-upper-exact-feasibility) and the 20
       October review. The cases at 227 and 260 adopted these certificates as their house best
-      packings on 20 October 2026, with both strong regularizers' runs; at 229 the case keeps
-      T-199. On 21 October T-223 replaced it at 260 under the house rule (#706), and on 22
-      October Evan Daniel's solved view of Couzo's #672 packing (T-225) replaced it at 227;
+      packings on 20 October 2026, with both strong regularizers' runs; at 229 the case kept
+      T-199, which T-225 replaced there on 22 October. On 21 October T-223 replaced it at 260
+      under the house rule (#706), and on 22 October Evan Daniel's solved view of Couzo's #672
+      packing (T-225) replaced it at 227;
       #672's own certificates, which refine this packing at 227 and 229, are T-227,
       registered the same day at V0/C0.
     next_rung: >-
@@ -27813,7 +27815,8 @@ results:
       At n = 229 the certificate is below the case's verified ceiling (the Kingbird
       catalogue, verified by T-155's exact ceiling) by 6.69e-03, below T-196 (#668) and
       #672 by 1.15e-05 at their prints; T-199, the author's update, is below it by
-      1.74e-06 and houses the count.
+      1.74e-06 and housed the count from 19 October 2026 until Evan Daniel's solved view of it
+      (T-225) replaced it on 22 October.
 
       Measured by the 19 October review: the certificate is exactly the dilation its
       header states, the input's printed side times 1 + delta rounded up at 30 places,
@@ -27933,7 +27936,8 @@ results:
 
       V3 and C3 rest on the 19 October review and the replay it reproduced
       (E-evand-674-n229-update-exact-feasibility). The case at 229 adopted this
-      certificate as its house on 19 October 2026, the first adoption at 229.
+      certificate as its house on 19 October 2026, the first adoption at 229; on 22 October
+      2026 Evan Daniel's solved view of this packing (T-225) replaced it.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a
       distinct reviewer and a retained human oversight record; one AI review, of 19
@@ -30583,7 +30587,9 @@ results:
       (E-couzo-678-filtered-exact-feasibility). The case at 204 adopted its certificate as the
       house best packing on 20 October 2026, and the case at 260 on 21 October 2026, from
       T-196, which #704 had adopted there on 20 October; both strong generators ran on each
-      count's witness. No two independent methods, human oversight or optimality is claimed.
+      count's witness. On 22 October 2026 Evan Daniel's solved views of these packings (T-225)
+      replaced it at both counts. No two independent methods, human oversight or optimality is
+      claimed.
     next_rung: None for the bound. V4 and C4 need a second accepted adversarial review by a
       distinct reviewer and a retained human oversight record; one AI review, of 20 October, is
       retained.
@@ -30796,13 +30802,14 @@ results:
       is not a new bound. The checkers are byte-identical to the copies the n183 packet
       retains. Those statements are the author's; no source program ran here.
 
-      Credit the packings to their finders, as the source's lists name them: Francisco
+      Credit the packings to their finders (at 227 the source's list names Couzo, whose
+      #672 refines de Winter's packing): Francisco
       Couzo's at 204 (#678, T-223, which his source credits to Mykhailo Polkovskyi's
-      construction), 227 (#672, T-227, the refinement of Joost de Winter's #668 packing,
-      T-196, that #672 reports; who made it the source does not say) and 260 (#678,
-      T-223, his arrangement from a search seeded with Evan Daniel's exact-form
-      certificate of Joost de Winter's #668 packing), and Evan Daniel's own at 229 (#674,
-      T-199, from Couzo's #672 packing, which refines de Winter's).
+      construction) and 260 (#678, T-223, his arrangement from a search seeded with Evan
+      Daniel's exact-form certificate of Joost de Winter's #668 packing); Joost de Winter's
+      at 227 (#668, T-196) as refined in Francisco Couzo's #672 report (T-227; who made the
+      refinement the source does not say); and Evan Daniel's own at 229 (#674, T-199, from
+      Couzo's #672 packing, which refines de Winter's).
 
       Evan Daniel (https://github.com/evand/square-packing) refreshed each packing from his
       store, solved it to the exact side stated (at 229 after a polish), regularized it for
@@ -30950,8 +30957,9 @@ results:
       pose by pose (measure/identity.json; a measurement, which decides nothing), and
       reproduced by the review on code of its own.
 
-      At 227 the view is #672's packing: 194
-      of 227 squares lie within 1e-6 of #672's poses, 16 move beyond 1e-3, at most 0.168,
+      At 227 the view regularizes the packing #672 reports, as its source says;
+      measured, nearest centres pair the two one to one, 194 of 227 squares lie within
+      1e-6 of #672's poses, 16 move beyond 1e-3, at most 0.168,
       turning up to 2.54 degrees, and #672's packing moves no square beyond a tenth from
       T-196's, which it refines. The item names T-227, #672's entry, registered on 22
       October 2026 (think-2vjc), as RF-1 of the 21 October review and A2 of #716 asked;
@@ -31120,7 +31128,8 @@ results:
       Independently review the retained replay (think-0nse). The entry is superseded on
       entry at 204: Couzo's own #675 and #678 (T-223) and Evan Daniel's view of #678's
       packing (T-225) are smaller, and the case holds T-225. The 72 rows beyond the corpus
-      are think-f28n's.
+      are the source's dated beyond-horizon rows since 22 October 2026, recorded in report
+      order by the backlog ledger (upper-bounds-backlog-20261022).
     unfinished_confirmations:
       - what: >-
           Review the retained two-route replay of #670's 204 certificate and enter it as
@@ -31141,7 +31150,7 @@ results:
       231170315041711399213831561/14771101209934000000000000. Complete native feasibility
       outcomes are retained separately; the entry awaits independent review. At 227 it is
       below de Winter's T-196, the house best packing when it was reported; Evan Daniel's
-      solved view of this packing (T-225), smaller still, is the house since 22 October
+      solved view of this packing (T-225), smaller still, has been the house since 22 October
       2026. At 229 Evan Daniel's #674 opening and update (T-198, T-199), reported after it,
       are smaller.
 
@@ -31261,9 +31270,11 @@ results:
     next_rung: >-
       Independently review the retained replay (think-0nse). At 227 the entry is 1.71e-4
       below T-196, the house when it was reported, and Evan Daniel's solved view of this
-      packing (T-225), 1.76e-11 below it, is the house since 22 October 2026; at 229 it is
+      packing (T-225), 1.76e-11 below it, has been the house since 22 October 2026; at 229 it is
       superseded on entry by #674's opening and update (T-198, T-199), reported after it,
-      T-199 1.32e-5 below it. The 44 rows beyond the corpus are think-2vjc's.
+      T-199 1.32e-5 below it. The 44 rows beyond the corpus are the source's dated
+      beyond-horizon rows since 22 October 2026, recorded in report order by the backlog
+      ledger (upper-bounds-backlog-20261022).
     unfinished_confirmations:
       - what: >-
           Review the retained two-route replay of #672's 227 and 229 certificates and enter
@@ -31358,7 +31369,9 @@ results:
     next_rung: >-
       Independently review the retained replay (think-0nse). The entry is superseded on
       entry at 204: Couzo's own #678 (T-223) and Evan Daniel's view of its packing (T-225)
-      are smaller, and the case holds T-225. The 78 rows beyond the corpus are think-pvav's.
+      are smaller, and the case holds T-225. The 78 rows beyond the corpus are the source's
+      dated beyond-horizon rows since 22 October 2026, recorded in report order by the
+      backlog ledger (upper-bounds-backlog-20261022).
     unfinished_confirmations:
       - what: >-
           Review the retained two-route replay of #675's 204 certificate and enter it as

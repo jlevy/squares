@@ -7,8 +7,8 @@
 **Status:** Data-model spike, initial population, website and `/profiles/` URLs
 implemented; continued from [PR #490](https://github.com/jlevy/squares/pull/490) in
 [PR #578](https://github.com/jlevy/squares/pull/578), under final integration and review
-on 2026-10-21. The current integration bead is `think-zpfo`; coverage expansion and
-final validation are still in progress.
+on 2026-10-21. The current integration bead is `think-lqk2`; the final upstream merge
+and validation are in progress.
 Dated validation receipts below apply only to the revisions they name.
 
 **Workflow:** W7 pipeline improvement, entered through `tbd shortcut new-plan-spec`.
@@ -36,29 +36,34 @@ Linking a person must not turn an acknowledgment into authorship.
 
 ## Current Integration: 2026-10-22
 
-Continue through `think-zpfo` and [PR #578](https://github.com/jlevy/squares/pull/578).
+Continue through `think-lqk2` and [PR #578](https://github.com/jlevy/squares/pull/578).
 The active checkout is `/Volumes/spud-ext2/worktrees/squares-profiles-final-20261021`;
 source `/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/integration-env.sh`
 before build or test commands.
-Latest upstream integration includes origin/main `7359fa8b6`: T-225’s V3/C3 review and
-adoption at 204, 227, 229 and 260; historical T-226 through T-228; the 109 new
-beyond-horizon rows from issue #715; and the published `v0.8.19` history.
-The proposed profile release remains `v0.9.0`; the profile-link explainer patch is now
-`v0.4.16`, after upstream’s `v0.4.15`. The historical registrations add authored
-Results, not current Records.
+The latest upstream integration incorporates origin/main `0281e7763` (PR #720) into the
+reviewed profile candidate `086c44ec0`. It retains 205 dated beyond-horizon rows, the
+T-225 attribution and narrative corrections, the new Joost de Winter source, and the
+published `v0.8.20` history.
+The proposed profile release remains `v0.9.0`, following `v0.8.20`; the profile-link
+explainer patch remains `v0.4.16`, following upstream’s `v0.4.15`. The upstream paper
+no-public-change receipts and claim-document link revision `cadf73fd` are retained
+alongside the proposed profile-link paper patches.
+Historical registrations add authored Results, not current Records.
 Beyond-horizon rows without registered result IDs do not inflate either tally.
-Implementation is complete at the validated K1 checkpoint `9939b62a7`, with the normal
-website preview rebuilt and audited.
+The K1 corporate-attribution correction and the L1 README and ink-portability fixes
+remain in the candidate.
+The earlier preview at `9939b62a7` has not yet been rebuilt for this integration; final
+review, validation and a normal website rebuild are pending.
 PR #578 and `think-18ic` maintain the authoritative final-head review, CI and merge
 receipt; this plan does not assert final hosted acceptance or a completed merge.
 Earlier dated receipts below are historical, including their counts, environments and
 preview ports.
 
 The frozen identity batch contains 75 profiles.
-The structured census reports 1,465 resolved spans, 78 non-person spans and seven
-unresolved spans; ten manual origins are reported separately.
-The primary-authorship model yields 217 distinct registered results and 714 non-primary
-person/result credits.
+The structured census reports 1,470 resolved spans, 78 non-person spans and eight
+unresolved spans, with no stale or unreviewed spans; ten manual origins are reported
+separately. The primary-authorship model yields 217 distinct registered results and 714
+non-primary person/result credits.
 Results retain all authored registered results.
 The requested Records subset (`think-lekx`) covers current contributions across every
 result kind, including optimality proofs and formalizations.
@@ -71,10 +76,12 @@ priority or scope identified separately.
 Astra reviewed the model and renderer boundaries without a blocker.
 Formalization uses the existing result kind in the ontology, schema and filters;
 `proves_kind` preserves the distinction from the original result.
-Family-currentness work remains under `think-e953` and `think-kqi1`. The seven remaining
-spans have explicit identity or collective-credit exceptions under `think-0v9j`; no new
-mathematical result is registered in this PR. All 146 inventoried PDFs still await
-complete credit inspection; this presentation slice does not close `think-m7il`.
+Family-currentness work remains under `think-e953` and `think-kqi1`. Seven remaining
+spans have explicit identity or collective-credit exceptions under `think-0v9j`. The
+eighth is the new de Winter source’s project-register comparison, which does not
+establish a personal contribution by Joshua Levy.
+No new mathematical result is registered in this PR. All 146 inventoried PDFs still
+await complete credit inspection; this presentation slice does not close `think-m7il`.
 
 Home and About lead to the directory, which shows full names, distinct results by
 significance, separate credits, resources and public accounts.
@@ -122,9 +129,43 @@ and [attribution policy](../../../../attribution.md) own these rules.
 | `think-98c5` | Linked-name result assertions and exact terminology anchors |
 | `think-5q5y` | Canonical names and SVG navigation geometry regressions |
 
+### Upstream Merge Verification
+
+The three textual conflicts preserve the proposed site version, both release histories,
+and the shared resource table used by homepage cards and profiles.
+Joost de Winter’s new repository card is in that shared table and appears among his
+profile resources. The directory projection now has 48 linked resources; its people,
+Records, Results and Credits totals are unchanged.
+The `n=227` record retains upstream’s distinction between de Winter’s construction, the
+refinement reported by Couzo and Daniel’s regularization.
+
+The census reconciliation added six spans and dropped none.
+The retained issue #666 packet identifies de Winter as the certificate author and cites
+the 2021 paper by Arslanov, Mustafin and Shangitbayev as the method source.
+Five spans join those existing profiles after that source review; the project comparison
+remains unresolved. All 146 PDFs still await the complete credit census.
+
+Focused contributor, occurrence, profile-link and coverage checks pass 128 tests.
+Snapshot custody and link-consumer, record-model and release-component checks pass
+another 70 tests. Ruff reports no findings in the resolved source.
+The merged RESULTS, VERIFIERS and evidence inventory pass their drift checks, and the
+URL registry passes all 1,148 rows.
+The initial wider focused run passed 280 tests and failed the live-census check on the
+six new spans; the subsequent 128-test run confirms that reconciliation fixed that
+failure.
+
+With the complete upstream deciding evidence retained, the private snapshot measured
+266,506,555 bytes before this receipt.
+Its limit is 255 MiB, the least whole MiB above the measured surface, leaving 880,325
+bytes at that measurement.
+Three portable workers are bounded at 765 MiB. Source selection and the oversized
+pre-clone refusal are unchanged.
+The new head needs fresh push, full-checkpoint and website-build evidence; earlier green
+heads do not validate this integration.
+
 ### Current Preview and Validation
 
-The current preview is <http://127.0.0.1:8790/profiles/index.html>, served from
+The last validated preview is <http://127.0.0.1:8790/profiles/index.html>, served from
 `/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-final-9939b62a7`. The
 normal website build of `9939b62a7` includes all 228 registered result pages, 324 case
 pages and 75 profiles.

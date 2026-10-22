@@ -1,0 +1,37 @@
+{
+  "n": 700,
+  "packing": "n700.txt",
+  "packing_sha256": "e00021ab156af20a45a1c3914048c87dfdc481a7118e8999d4d4c60b7055b884",
+  "certificate": "certificates/n700.cert",
+  "certificate_sha256": "71bfe1937cbbbdc324ede4525afb59859dd02bc9039e8c47d1b6e10e81cf3747",
+  "rational_side": "125188720386448547452026593/4641268359735000000000000",
+  "kind": "rational witness",
+  "origin": {
+    "construction": {
+      "label": "elimination from n=701",
+      "kind": "derived",
+      "source_n": 701,
+      "source": "b6db23ea9874b5fafdf3e64c338b7589816f62427cb25f43ce5fd65a30002906",
+      "tiles": 1,
+      "layers": 0
+    },
+    "search_job": {
+      "id": 107839,
+      "method": "hop",
+      "source": "n700.txt",
+      "source_origin": "constructed",
+      "source_sha256": "3ff45375412d2f5f935052ecca9c198253ae25c0622235a476ad58bbdaaa77e6",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n700.txt",
+        "source_sha256": "adb67e5bbee934e47b4e5e27d0ce0dbd7d4fda5e956cd9c8df6724458ec61ced",
+        "source_n": 700,
+        "source_side": 26.972996848594477,
+        "layers": 0,
+        "deleted": 0,
+        "side": 26.972996848594477
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

@@ -209,6 +209,15 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/JoostdeWinter/joostdewinter.github.io",
+        "Joost de Winter",
+        (
+            "Nineteen exact rational certificates beyond 324 squares, at 464 and from 509"
+            " to 1568 below the integer grid (#666); the eleven at or below 1024 are"
+            " replayed here as dated rows beyond the case corpus."
+        ),
+    ),
+    (
         "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
         "Manasseh Ahmed",
         "A computer-assisted proof that Trump's packing of eleven squares is optimal.",
