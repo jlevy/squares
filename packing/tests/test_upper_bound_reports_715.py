@@ -33,14 +33,21 @@ from sqpack.yamlio import safe_load
 SOURCE = "couzo-issue715-2026-10-21"
 COVERAGE = reports.REPO / "packing/frontier/source-coverage.yaml"
 LEDGER = replay.ROOT / "campaign/issue-intake/upper-bounds-20261022"
-#: The row each recorded count superseded, by source, and the counts that held none.
+#: The row each recorded count superseded, by source, and the counts that held none. The
+#: backlog rows of #666, #670, #672 and #675, recorded on 22 October after this import,
+#: stand before it in report order, so ten of them are superseded by its rows too, and 509
+#: and 931 no longer hold this import's row alone.
 SUPERSEDED = {
     "muglich-issue686-2026-10-19": 50,
     "couzo-verified-bounds-2026-10-14": 29,
     "couzo-issue678-2026-10-18": 26,
     "evand-n343-sweep-2026-10-20": 1,
+    "de-winter-issue666-2026-10-17": 1,
+    "couzo-issue670-2026-10-17": 2,
+    "couzo-issue672-2026-10-17": 1,
+    "couzo-issue675-2026-10-18": 6,
 }
-GRID_COUNTS = [509, 860, 931]
+GRID_COUNTS = [860]
 #: Issue 702's exact side at 343, which this import's row supersedes in report order.
 SIDE_702 = Fraction(18977682482404124568634475670459, 10**30)
 #: The certificates the issue restates that earlier packets already retain, byte for byte.

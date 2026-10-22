@@ -201,6 +201,14 @@ counts the issue’s print cannot be ordered against the `4e4c8ce` certificate, 
 ledger leaves them undecided and names what would decide them.
 The ledger orders reports and verifies no certificate; recording is stage 3’s.
 
+Since 22 October the
+[backlog ledger](../../../campaign/issue-intake/upper-bounds-backlog-20261022/README.md)
+has recorded the rows of #666, #670, #672 and #675, which come before #715 in report
+order, so ten of them are superseded by this packet’s rows as well: de Winter’s #666 row
+at 509, #670’s at 866 and 925, #672’s at 750, and #675’s at 547, 807, 809, 864, 923 and
+931. Only 860 still holds this packet’s row alone.
+The table below keeps the rows that stood on `main` when this packet was written.
+
 ### The 109 Recorded Rows
 
 Each row’s print, its exact side rounded up at 16 places, what the index calls it (`own`,

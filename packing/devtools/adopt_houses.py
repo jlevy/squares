@@ -2787,6 +2787,10 @@ def historical(move: Move, text: str) -> str:
         text,
         flags=re.DOTALL,
     )
+    # The 11 October pass quoted a credit that ended in its own comma, so its history at
+    # 103 read "refined it, (T-146) was" and "refined it,, reported" (review B4 of #718).
+    text = re.sub(r"\brefined\s+it,\s+\((T-\d+)\)\s+was\b", r"refined it (\1), was", text)
+    text = re.sub(r"\brefined\s+it,,(\s)", r"refined it,\1", text)
     text = re.sub(
         rf"(That\s+proves\s+\$s\({n}\)\s+\\le\s+[0-9.]+\$,\s+the\s+verified\s+upper\s+bound):"
         r"\s+confirmed,",
