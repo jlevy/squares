@@ -65,8 +65,9 @@ W1 phase on one branch:
    may defer its runs, in `default_drawings.PENDING_ALLOWED` with the open bead that
    owns them, naming the witness it replaced in `default_drawings.CORRECTED`. The sweep
    then lists each count still owed.
-4. **Validate** from `packing/` with `packing-validate --records`, then `--push`, and
-   leave `--fast` to CI ([stage 5](#stage-5-publish)).
+4. **Validate** from `packing/` with `packing-validate --records`, `--edit` too where
+   the pass changed code, and the tests the change directly affects; leave `--fast` to
+   CI, which gates the draft pull request ([stage 5](#stage-5-publish)).
 5. **Open one draft pull request** with `tbd shortcut create-or-update-pr-simple`,
    labelled `intake`. It lists each item with its bead and the stage it reached, and
    every source under Not Checked.
@@ -182,7 +183,8 @@ claude/intake-YYYY-MM-DD, with today's date.
    corrected or re-solved with its source and exact side unchanged may defer its runs,
    naming the witness it replaced in default_drawings.CORRECTED.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
-   --records`, then `--push`, and fix what fails.
+   --records`, `--edit` too where the pass changed code, and the tests the change
+   directly affects, and fix what fails. Hosted CI is the draft's full test gate.
 6. Commit, push the branch, and open one draft pull request, labelled intake, with
    `tbd shortcut create-or-update-pr-simple`. List every item with its bead and the
    stage it reached, and every source the sweep could not check. Before merge, assign
@@ -746,7 +748,10 @@ changes what they print.
 The pull request’s `--fast` surface runs on CI’s runners, not on a machine that is also
 running a replay, where a tier’s wall measures the contention rather than the branch
 ([What each tier costs](../../development.md#what-each-tier-costs-and-where-its-ceiling-lives)).
-It merges on the owner’s word, by
+That hosted run is the draft’s full test gate: marking the pull request ready for
+review, and merging it, both need `packing-required` and `pages-required` green on the
+head ([development.md](../../development.md#hosted-ci-gates-a-draft-pull-request)). It
+merges on the owner’s word, by
 [the merge policy](../../development.md#merging-a-pull-request).
 
 ### The House Rule
