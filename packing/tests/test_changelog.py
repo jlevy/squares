@@ -1123,3 +1123,135 @@ def test_prior_domain_artifacts_remain_valid_for_retained_history() -> None:
     artifact["target"] = "https://unrelated.example/tutorial.html"
     with pytest.raises(ValueError, match="not a registered public destination"):
         render_changelog.validate(previous)
+
+
+def _result(identifier: str, score: int) -> dict:
+    return {"id": identifier, "significance": {"score": score, "by": "lane-x"}}
+
+
+def _news(identifier: str, score: int, *result_ids: str) -> dict:
+    return {
+        "id": identifier,
+        "date": "2026-10-20",
+        "significance": {"score": score, "rationale": "An announcement."},
+        "result_ids": list(result_ids),
+    }
+
+
+@pytest.fixture
+def no_exemptions(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Synthetic registers hold none of the real exempt results."""
+    monkeypatch.setattr(render_changelog, "ANNOUNCEMENT_EXEMPT", {})
+
+
+def _merged_at_42(identifier: str, score: int) -> render_changelog.Landing:
+    del identifier, score
+    return {"pull_request": 42, "commit": "b" * 40, "subject": "Merge pull request #42 from x"}
+
+
+@pytest.mark.usefixtures("no_exemptions")
+def test_an_s4_or_s5_result_on_main_without_its_news_item_fails() -> None:
+    results = [_result("T-901", 5), _result("T-902", 3)]
+    failures, notes = render_changelog.check_announcements(
+        {"entries": []}, results, results, locate=_merged_at_42
+    )
+    assert notes == []
+    [failure] = failures
+    # The message names the result, its score, the merged PR the entry must name, the
+    # command that drafts it and who scored it: everything a passing author needs.
+    assert failure.startswith("T-901 (S5) is on main with no News item at S5.")
+    assert "naming PR #42, which registered or raised it (merge bbbbbbbbb)" in failure
+    assert "devtools.import_changelog --pr 42 " in failure
+    assert "Announce a Significant Result" in failure
+    assert "scored by lane-x" in failure
+
+
+@pytest.mark.usefixtures("no_exemptions")
+def test_a_news_item_at_the_result_score_satisfies_the_gate() -> None:
+    results = [_result("T-901", 5), _result("T-903", 4)]
+    document = {"entries": [_news("both", 5, "T-901", "T-903")]}
+    assert render_changelog.check_announcements(document, results, results) == ([], [])
+    # Only an item News shows counts, at the result's own score or above.
+    low = {"entries": [_news("low", 4, "T-901", "T-903")]}
+    hidden = {"entries": [{**_news("hidden", 5, "T-901", "T-903"), "news_exclusion": "x"}]}
+    assert [r["id"] for r in render_changelog.owed_announcements(low, results)] == ["T-901"]
+    assert len(render_changelog.owed_announcements(hidden, results)) == 2
+
+
+@pytest.mark.usefixtures("no_exemptions")
+def test_a_raise_to_s4_is_owed_after_its_merge_and_fails_once_on_main() -> None:
+    before = [_result("T-904", 3)]
+    raised = [_result("T-904", 4)]
+    empty: dict = {"entries": []}
+    assert render_changelog.check_announcements(empty, before, before) == ([], [])
+    # The raising branch: its entry can name only merged PRs, so the item is owed.
+    failures, [note] = render_changelog.check_announcements(
+        empty, raised, before, locate=_merged_at_42
+    )
+    assert failures == []
+    assert note.startswith("T-904 (S4) is registered or raised on this branch")
+    # Every later change, with the raise on main: the same record fails.
+    failures, notes = render_changelog.check_announcements(
+        empty, raised, raised, locate=_merged_at_42
+    )
+    assert notes == []
+    assert [f.split(" is on main")[0] for f in failures] == ["T-904 (S4)"]
+    # An S4 item does not announce a later raise to S5.
+    s4_item = {"entries": [_news("item", 4, "T-904")]}
+    to_five = [_result("T-904", 5)]
+    assert render_changelog.check_announcements(
+        s4_item, to_five, to_five, locate=_merged_at_42
+    )[0][0].startswith("T-904 (S5) is on main")
+
+
+def test_exemptions_cover_only_results_before_the_archive_and_never_go_stale(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    results = render_changelog.load_results()
+    landed = {result["id"]: result["landed"] for result in results}
+    assert all(
+        landed[identifier] < "2026-10-13" for identifier in render_changelog.ANNOUNCEMENT_EXEMPT
+    )
+    assert render_changelog.stale_exemptions(render_changelog.load(), results) == []
+    monkeypatch.setattr(render_changelog, "ANNOUNCEMENT_EXEMPT", {"T-905": 4, "T-906": 4})
+    exempt = [_result("T-905", 4), _result("T-906", 5)]
+    # Raised above its exempt score, a result is owed again.
+    assert [r["id"] for r in render_changelog.owed_announcements({"entries": []}, exempt)] == [
+        "T-906"
+    ]
+    announced = {"entries": [_news("item", 4, "T-905")]}
+    assert render_changelog.stale_exemptions(announced, exempt) == [
+        "T-905 now has its News item: remove it from render_changelog.ANNOUNCEMENT_EXEMPT"
+    ]
+
+
+def test_the_landing_change_is_the_oldest_first_parent_merge_at_the_score(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def register(score: int | None) -> str:
+        body = "results:\n  - id: T-001\n    significance:\n      score: 2\n"
+        if score is not None:
+            body += f"  - id: T-907\n    kind: x\n    significance:\n      score: {score}\n"
+        return body + "  - id: T-999\n    significance:\n      score: 1\n"
+
+    history = {"c3": 5, "c2": 5, "c1": 3, "c0": None}
+    subjects = {
+        "c3": "Merge pull request #12 from x",
+        "c2": "Merge pull request #11 from x",
+        "c1": "Merge pull request #10 from x",
+        "c0": "Merge pull request #9 from x",
+    }
+
+    def git(*arguments: str) -> str:
+        if arguments[0] == "log":
+            return "".join(f"{commit}\0{subjects[commit]}\n" for commit in history)
+        return register(history[arguments[1].split(":")[0]])
+
+    monkeypatch.setattr(render_changelog, "_git", git)
+    found = render_changelog.landing("T-907", 5, "origin/main")
+    assert found == {"pull_request": 11, "commit": "c2", "subject": subjects["c2"]}
+    assert render_changelog.landing("T-907", 3, "origin/main") == {
+        "pull_request": 10,
+        "commit": "c1",
+        "subject": subjects["c1"],
+    }

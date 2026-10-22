@@ -81,6 +81,10 @@ W1 phase on one branch:
    it left out and where each handle came from.
    Put its output in the pull request description under **Announcement**, for the owner
    to post; an agent never posts it.
+   **A result the pass registers at S4 or S5, or raises to either, also owes a News
+   item**: draft it in the description under **News**, and land it in the first change
+   after the merge ([Announce a Significant Result](#announce-a-significant-result)).
+   The records tier fails every later pull request until it lands.
 7. **Draft the replies** in each issue’s answer bead: every issue the pass touches gets
    one. Once the pull request merges, render each from `main`, check that `main` and the
    deployed site say what it says, post it, and record it under the issue’s `replies` in
@@ -189,7 +193,10 @@ claude/intake-YYYY-MM-DD, with today's date.
    devtools.render_announcement --ids T-NNN ... --github` with the T-NNN this pass
    registered (not --since, which also picks up other passes' results), and add its
    output to the pull request description under "Announcement", for the owner to
-   post. Do not post it.
+   post. Do not post it. For each result registered at S4 or S5, or raised to
+   either, draft its News entry under "News" too, and land it in the first change
+   after the merge (stage 7, "Announce a Significant Result"); the records tier
+   fails every later pull request until it lands.
 8. Draft the reply each issue the pass touches is owed in its answer bead; every one
    gets a comment. Once the pull request merges, render each from main with
    `check_requests --draft N`, check that main and the deployed site say what it says
@@ -251,7 +258,7 @@ steps, and `--json` prints the whole sweep.
 | 4. Validate | W2 | Replay evidence, a mapped review and the rungs they derive: status `confirmed`, or `incomplete` |
 | 5. Publish | The change that moves the record | The reader documents state the result, and each count it re-houses is regularized in the same change; once stage 4 has passed, *integrated* |
 | 6. Explain | W8, with a W2 review | A review paper, for the results that warrant one |
-| 7. Answer | After each merge, by the pass | A reply on the issue for each change of its state, to the final comment: *answered* |
+| 7. Answer | After each merge, by the pass | A reply on the issue for each change of its state, to the final comment, and a News item for each S4 or S5 result: *answered* |
 
 Stage 0 finds the inputs, stages 1 to 3 are the import, stage 4 is the correctness part,
 and stages 5 to 7 are the publication.
@@ -1020,10 +1027,13 @@ Engineering and Verification remain available topics, alongside the precise resu
 kinds. News excludes Correction and Audit topic labels; Results keeps those registered
 kinds.
 
-For S3–S5, draft a concise News entry before merge, or record an editorial omission when
-the PR is an intermediate research checkpoint without a distinct reader-facing
-development. Name what changed, why it matters, the source PR and relevant `result_ids`,
-direct public artifact links where available, and the actual verification or publication
+For S4 and S5 results a News entry is required, by the step and the gate in
+[Announce a Significant Result](#announce-a-significant-result).
+For other S3–S5 work, S3 results included, News stays optional, as before: draft a
+concise News entry before merge, or record an editorial omission when the PR is an
+intermediate research checkpoint without a distinct reader-facing development.
+Name what changed, why it matters, the source PR and relevant `result_ids`, direct
+public artifact links where available, and the actual verification or publication
 limits.
 Use surnames throughout News titles, summaries, details and display labels unless
 two distinct people share one; retain handles, organization names and literal cited
@@ -1114,6 +1124,8 @@ After merge:
    owner.
 6. Complete the prepared News/changelog disposition in the next change, following
    [Label the PR and Prepare News](#label-the-pr-and-prepare-news).
+   For an S4 or S5 result that change is required, and stage 7’s
+   [Announce a Significant Result](#announce-a-significant-result) says who opens it.
    Retain the actual merge date, source PR, `result_ids`, artifact links and limits.
    After that change deploys, check the live News entry and its public artifact links
    against the merged record, and retain the deployment receipt.
@@ -1179,6 +1191,51 @@ What lets an agent post is the `github-workflows` grant, which covers issues.
 - The reply that reports a confirmation names the programs that ran, and says whether
   they were the author’s own code re-run or a re-implementation.
 - The issue is closed with a final comment when nothing the author asked for is queued.
+- **Every S4 or S5 result gets a News item** in the first change after the merge that
+  registered or raised it:
+  [Announce a Significant Result](#announce-a-significant-result).
+
+### Announce a Significant Result
+
+The owner’s decision of 22 October 2026: “We need a systematic process for the
+significant results”, then “Let’s have it do S4 and S5 then”.
+Every registered result at S4 or S5 has a News item: an entry in
+[`site-changelog.yaml`](../site-changelog.yaml) that News shows, scored at the result’s
+own score, with the result in its `result_ids`. S3 News stays optional, as
+[Label the PR and Prepare News](#label-the-pr-and-prepare-news) says.
+
+1. **Before the merge**, the pull request that registers a result at S4 or S5, or raises
+   one to either (a stage 4 rescoring included), drafts the entry in its description
+   under **News**, beside the announcement.
+   An entry names only merged pull requests, by their retained merge date and commit, so
+   it cannot land in the change it announces.
+2. **Right after the deploy of that merge is verified**
+   ([Verify the Published Result](#verify-the-published-result)), the pass’s coordinator
+   opens the News follow-up, or the next records pull request carries it.
+   From `packing/`, run
+   `uv run --frozen --all-extras --group dev python -m devtools.import_changelog --pr NNN
+   --significance-rationale "..." --output "$TMPDIR/changelog-candidate.yaml"` with the
+   merged pull request’s number.
+   Bring its delivery row, its coverage number and the reviewed entry into
+   `site-changelog.yaml`, dated the delivery’s merge day as the record requires, and
+   render with `python -m devtools.render_changelog`.
+3. **The gate is the backstop.** The records tier’s “synopsis agrees with the artifacts”
+   step, which pull-request CI runs, passes `--announcement-base` to
+   `devtools.render_changelog`. It fails when an S4 or S5 result on `main` has no item,
+   naming the result, its score, the merged pull request the entry must name, the
+   command that drafts it and who scored the result.
+   A result registered or raised on the branch under test is reported as owed after the
+   merge instead; once it is on `main`, every later pull request fails until its item
+   lands.
+
+The fifteen S4 and S5 results that landed before the News archive existed, on 13 October
+2026 (6279bd0e6), are exempt, listed with the score each is exempt at in
+`render_changelog.ANNOUNCEMENT_EXEMPT`. Backfilling them as dated News, as T-060’s item
+was on 15 October, is a separate decision.
+The gate exists because T-194, the S5 report of a Lean proof that
+$s(19) = 3 + 4\sqrt{2}/3$, landed on 16 October and had no News item until 22 October:
+completing the item “in the next change” was a step nothing checked, and its pull
+request, #651, was never imported into the changelog.
 
 ### Report-Order Verdict Comments
 
