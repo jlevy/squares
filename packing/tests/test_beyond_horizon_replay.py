@@ -39,14 +39,15 @@ BACKLOG = (666, 670, 672, 675)
 #: Each report's rows: the table's, the decided (beyond the corpus to 1024) and the held.
 ROWS = {666: (19, 11, 8), 670: (73, 72, 0), 672: (46, 44, 0), 675: (79, 78, 0)}
 #: The rows #719 supersedes on entry, by the source that held each count.
+#: Since the history walk, #719's other 49 rows follow Couzo's own, his 4e4c8ce index's at
+#: 38 counts and his 5a299b4 reconciliation's at 11, which that walk plans.
 SUPERSEDED_BY_719 = {
-    "muglich-issue686-2026-10-19": 42,
-    "couzo-verified-bounds-2026-10-14": 39,
+    "muglich-issue686-2026-10-19": 33,
     "couzo-issue715-2026-10-21": 16,
     "couzo-issue678-2026-10-18": 7,
-    "couzo-certificates-2026-10-14": 3,
     "couzo-issue670-2026-10-17": 3,
-    "couzo-extended-range-reports-2026-10-08": 1,
+    "couzo-verified-bounds-2026-10-14": 2,
+    "couzo-certificates-2026-10-14": 1,
 }
 #: #670's rows that are the current row at their count, and the rows they supersede.
 CURRENT_670 = {
@@ -145,11 +146,11 @@ def test_every_certificate_was_first_committed_at_the_commit_the_record_states()
     """Couzo's at each issue's own pin, minutes before the issue; de Winter's at b9cdc16b,
     whose time the issue's off-branch pin b3152f52 shares, three minutes before the issue."""
     for chosen in replay.RELEASES.values():
-        commits = _read(chosen.directory / replay.FIRST_COMMITS)
+        commits = _read(chosen.path(replay.FIRST_COMMITS))
         assert commits["retained_commit"] == chosen.retained
         for row in commits["rows"]:
             assert (row["first_commit"], row["committed"]) == chosen.first_commit_of(row["n"])
-        record = _read(chosen.directory / replay.RECORD)
+        record = _read(chosen.path(replay.RECORD))
         for row in record["results"]:
             assert row["first_committed"] == chosen.first_commit_of(row["n"])[1]
     later = replay.release(719)
@@ -160,7 +161,7 @@ def test_every_certificate_was_first_committed_at_the_commit_the_record_states()
 
 def test_each_receipt_decided_every_row_and_refused_every_control() -> None:
     for chosen in replay.RELEASES.values():
-        receipt = _read(chosen.directory / replay.FILTERED)
+        receipt = _read(chosen.path(replay.FILTERED))
         summary = receipt["summary"]
         assert summary["rows"] == summary["verified"] == chosen.decided
         assert summary["refused"] == []
@@ -260,7 +261,8 @@ def test_the_ledger_records_every_row_and_the_plan_reads_its_dispositions() -> N
     ]
     assert len(steps) == sum(replay.release(issue).decided for issue in BACKLOG)
     assert {step["verdict"] for step in steps} == {"recorded"}
-    rows = [row for row in replay.planned_rows() if row["source_id"] != MISHAPOLK]
+    backlog = {replay.release(issue).source for issue in BACKLOG}
+    rows = [row for row in replay.planned_rows() if row["source_id"] in backlog]
     current = {row["n"]: row["source_id"] for row in rows if "superseded_by" not in row}
     assert current == dict.fromkeys(CURRENT_670, "couzo-issue670-2026-10-17")
     found: dict[str, Counter[str]] = {}
@@ -268,7 +270,7 @@ def test_the_ledger_records_every_row_and_the_plan_reads_its_dispositions() -> N
         if "superseded_by" in row:
             found.setdefault(row["source_id"], Counter())[row["superseded_by"]] += 1
     assert {source: dict(counts) for source, counts in found.items()} == SUCCESSORS
-    supersessions = [item for item in replay.planned_supersessions() if item[2] != MISHAPOLK]
+    supersessions = [item for item in replay.planned_supersessions() if item[2] in backlog]
     assert [(n, earlier, by) for n, earlier, by in supersessions if n in current] == [
         (n, earlier, "couzo-issue670-2026-10-17") for n, earlier in CURRENT_670.items()
     ]
@@ -276,24 +278,31 @@ def test_the_ledger_records_every_row_and_the_plan_reads_its_dispositions() -> N
 
 
 def test_each_walked_count_is_one_chain_in_report_order() -> None:
-    """At 464 the 14 October row named #678 on ``main``; #666, reported first, beat it."""
+    """At 464 Couzo's 4e4c8ce row, which the history walk records, is beaten first by #666,
+    reported before #678; a row naming #678 there is out of report order for the history
+    walk, and the backlog walk can no longer lead from the 14 October row to #666."""
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     assert replay.chain_problems(coverage) == []
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
-    rows[464, "couzo-verified-bounds-2026-10-14"]["superseded_by"] = "couzo-issue678-2026-10-18"
-    assert replay.chain_problems(coverage) == [
-        (
-            "n=464 from couzo-verified-bounds-2026-10-14: superseded naming "
-            "couzo-issue678-2026-10-18, not superseded by de-winter-issue666-2026-10-17"
-        )
-    ]
+    rows[464, "couzo-index-2026-10-15"]["superseded_by"] = "couzo-issue678-2026-10-18"
+    from_index = (
+        "n=464 from couzo-index-2026-10-15: superseded naming "
+        "couzo-issue678-2026-10-18, not superseded by de-winter-issue666-2026-10-17"
+    )
+    from_14_october = (
+        "n=464 from couzo-verified-bounds-2026-10-14: superseded naming "
+        "couzo-index-2026-10-15, not superseded by de-winter-issue666-2026-10-17"
+    )
+    assert replay.chain_problems(coverage) == [from_14_october, from_index]
     del rows[464, "couzo-issue675-2026-10-18"]["superseded_by"]
     rows[464, "couzo-issue675-2026-10-18"]["disposition"] = "tracked-outside-case-corpus"
-    assert replay.chain_problems(coverage)[1:] == [
+    assert replay.chain_problems(coverage) == [
+        from_14_october,
         (
             "n=464 from couzo-issue675-2026-10-18: tracked-outside-case-corpus naming None, "
             "not superseded by couzo-issue678-2026-10-18"
-        )
+        ),
+        from_index,
     ]
 
 
@@ -314,14 +323,14 @@ def test_the_coverage_register_reads_each_source_claims_record() -> None:
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     sources = {source["id"]: source for source in coverage["sources"]}
     for chosen in replay.RELEASES.values():
-        source = sources[chosen.packet]
+        source = sources[chosen.source]
         record = replay.ROOT / source["claims_record"]
-        assert record == chosen.directory / replay.RECORD
+        assert record == chosen.path(replay.RECORD)
         claims = coverage_check.load_claims(record)
         rows = {
             row["n"]: row["value"]
             for row in coverage["beyond_horizon_claims"]
-            if row["source_id"] == chosen.packet
+            if row["source_id"] == chosen.source
         }
         assert rows == claims
         assert set(rows) <= set(source["scope"]["n_values"])
@@ -500,21 +509,25 @@ def test_719_leaves_366_unrecorded_and_supersedes_the_row_at_each_other_count() 
 
 
 def test_a_report_awaiting_its_own_import_is_passed_over_in_the_chain() -> None:
-    """At 410 the walk records Couzo's 4e4c8ce certificate, then #719; 4e4c8ce has no row
-    until think-yfoo lands, so main's row names #719, and a row naming 4e4c8ce's would not
-    be the chain."""
+    """At 631 the #719 walk records Couzo's 4e4c8ce certificate, #715's re-certification of
+    it and #719. 4e4c8ce's row is the history walk's; #715's waits on think-fwa9, so the
+    chain passes over it and 4e4c8ce's row names #719."""
     walk = replay.WALKS[replay.ISSUE_719]
-    (count,) = [item for item in _read(walk.ledger)["counts"] if item["n"] == 410]
+    (count,) = [item for item in _read(walk.ledger)["counts"] if item["n"] == 631]
     assert [step["report"] for step in count["steps"] if step["verdict"] == "recorded"] == [
+        "franciscouzo/square-packing@4e4c8ce",
+        "#715",
+        "#719",
+    ]
+    assert replay.recorded_reports(walk, count) == [
         "franciscouzo/square-packing@4e4c8ce",
         "#719",
     ]
-    assert replay.recorded_reports(walk, count) == ["#719"]
-    assert (
-        410,
-        "couzo-verified-bounds-2026-10-14",
-        MISHAPOLK,
-    ) in replay.planned_supersessions()
+    assert walk.later["franciscouzo/square-packing@4e4c8ce"] == "couzo-index-2026-10-15"
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
+    assert rows[631, "couzo-index-2026-10-15"]["superseded_by"] == MISHAPOLK
+    assert (631, "couzo-issue715-2026-10-21") not in rows
     held = walk.awaiting["#715"].counts
     assert held is not None
     assert 631 in held
@@ -826,3 +839,79 @@ def test_an_earlier_walk_s_pair_may_be_bridged_by_a_report_a_later_walk_orders(
     reached["other"] = {"a", "b", "c"}
     reached["first"] = {"a", "b", "c"}
     assert not replay.bridged(rows, 500, "a", "c", first)
+
+
+HISTORY_LEDGER = replay.ROOT / f"campaign/issue-intake/{replay.HISTORY}"
+#: Each publication the history walk records as rows: its rows, and how many are current.
+HISTORY_ROWS = {
+    "franciscouzo/square-packing@02f9690": (12, 6),
+    "evand/square-packing@f7a2325": (1, 0),
+    "franciscouzo/square-packing@3ef7634": (2, 0),
+    "franciscouzo/square-packing@f311f08": (4, 1),
+    "franciscouzo/square-packing@a7067d7": (1, 0),
+    "TheSnakeFang/squarepack-certs@bef5c42": (2, 0),
+    "franciscouzo/square-packing@93570ef": (2, 0),
+    "franciscouzo/square-packing@4596670": (1, 0),
+    "franciscouzo/square-packing@4e4c8ce": (253, 91),
+    "franciscouzo/square-packing@23aff0c": (21, 0),
+    "franciscouzo/square-packing@5a299b4": (20, 9),
+}
+#: What the history walk holds back, by class: (publications, decision's bead).
+HISTORY_HOLDS = {
+    "goebel": (148, "think-8krd"),
+    "sub-print": (74, "think-fwa9"),
+    "consequence": (54, "think-f2io"),
+    "recipe": (64, "think-f2io"),
+}
+
+
+def test_the_history_walk_records_each_publication_s_rows() -> None:
+    """319 rows of 11 publications no issue reports: 107 current, 212 superseded on entry,
+    each certificate first committed at its publication's commit and below Göbel."""
+    found = {}
+    rows = [row for row in replay.planned_rows() if row["bead"]]
+    for label, chosen in replay.RELEASES.items():
+        if chosen.walk != replay.HISTORY:
+            continue
+        assert chosen.issue is None
+        mine = [row for row in rows if row["source_id"] == chosen.source]
+        current = sum(1 for row in mine if "superseded_by" not in row)
+        found[label] = (len(mine), current)
+        assert len(replay.decided_claims(chosen)) == chosen.decided == len(mine)
+    assert found == HISTORY_ROWS
+    assert sum(rows for rows, _ in found.values()) == 319
+    assert sum(current for _, current in found.values()) == 107
+
+
+def test_each_publication_declares_the_rows_its_walk_records() -> None:
+    """The packet's declaration is what `declared_rows` writes from the ledger and the
+    scan; dropping a row or declaring one the walk holds is refused."""
+    assert replay.declaration_problems() == []
+    for chosen in replay.RELEASES.values():
+        if chosen.issue is None:
+            assert replay.declared_rows(chosen) == _read(chosen.directory / chosen.declared)
+
+
+def test_the_history_walk_holds_back_what_waits_on_a_decision() -> None:
+    """Göbel-above, sub-print, deletion-bound and recipe publications have no row; each is
+    held with its decision's bead, and the plan lists every hold."""
+    held = [item for item in replay.held_plan() if item["walk"] == replay.HISTORY]
+    by_class = Counter(item["class"] for item in held)
+    beads = {item["class"]: item["bead"] for item in held}
+    assert {kind: (by_class[kind], beads[kind]) for kind in by_class} == HISTORY_HOLDS
+    assert sum(by_class.values()) == 340
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    assert replay.held_problems(coverage) == []
+
+
+def test_the_history_ledger_transcribes_the_scan_and_the_register() -> None:
+    """sources.yaml is what `history_sources` writes from the scan and the register; the
+    starts are frozen at a97b712b9, where the 8 October rows or the grid stood."""
+    sources = safe_load((HISTORY_LEDGER / "sources.yaml").read_text(encoding="utf-8"))
+    assert sources == replay.history_sources(str(sources["read_on"]))
+    starts = safe_load((HISTORY_LEDGER / "starts.yaml").read_text(encoding="utf-8"))
+    assert starts["read_at_main"] == replay.HISTORY_READ_AT_MAIN
+    labels = {member["label"] for count in starts["counts"] for member in count["members"]}
+    assert labels == {"the grid"} | {
+        f"beyond-horizon row {source}" for source in replay.HISTORY_START_SOURCES
+    }

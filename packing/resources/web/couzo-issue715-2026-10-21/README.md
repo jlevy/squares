@@ -346,6 +346,9 @@ every control refused; the ledger leaves each undecided against the `4e4c8ce`
 publication. Recording them would add 30 rows to the claims record, superseding the
 `487b058` rows that stand at those counts, and `4e4c8ce`’s rows when that import
 (think-yfoo) lands.
+Since 22 October 2026 `4e4c8ce`’s rows are recorded (couzo-index-2026-10-15), by the
+[history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md), which holds
+these 30 for think-fwa9 too.
 
 | n | Printed, up | 4e4c8ce side, up at 16 | This certificate below it by | Index |
 | ---: | --- | --- | --- | --- |
@@ -387,6 +390,10 @@ think-1545), `f311f08`’s by think-om5l, `4e4c8ce`’s by think-yfoo, and `a706
 already the row the record holds (`couzo-certificates-2026-10-12`). At 335 the
 certificate is 1.78e-11 or more above the 8 October decimal report the record holds, so
 neither it nor the issue is recorded there.
+Since 22 October 2026 the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md)
+records 30 of these earlier certificates, the ones `02f9690`, `f311f08` and `4e4c8ce`
+first published; the index deletion bounds at 743 and 985 stay held for the owner
+(proposed D6, think-f2io).
 
 | n | Printed | First published | Earlier certificate | Here |
 | ---: | --- | --- | --- | --- |

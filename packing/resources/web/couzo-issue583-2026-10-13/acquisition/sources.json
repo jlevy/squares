@@ -1,7 +1,7 @@
 {
   "format": "external-source-acquisition-v1",
-  "retrieved_at_utc": "2026-10-14T11:20Z",
-  "git_scope": "Full clone; the certificates directory and the root README at 4596670, the commit issue #583 pins (2026-10-13T13:53:57Z). Its certificates at 154, 211, 241, 339, 379, 380 and 382 are the ones #583 reports, and its 154 is the certificate issue #570 names by SHA-256 (5335cb3b...) at 1b31bc90, a commit GitHub no longer serves; b85dee2, the issue-586 pin, replaced all seven, so they are retained here as factual data. Every other certificate of the commit is pinned by digest: 64 byte-identical to copies other packets retain (302, 375, 376 and 381 among them, which couzo-certificates-2026-10-13 retains unchanged at b85dee2), and 344 and 378, intermediate certificates no report names. The rest of the tree, including the decimal pose files, drawings and search programs, is pinned by the commit and was not retained or executed.",
+  "retrieved_at_utc": "2026-10-22T19:10Z",
+  "git_scope": "Full clone; the certificates directory and the root README at 4596670, the commit issue #583 pins (2026-10-13T13:53:57Z). Its certificates at 154, 211, 241, 339, 379, 380 and 382 are the ones #583 reports, and its 154 is the certificate issue #570 names by SHA-256 (5335cb3b...) at 1b31bc90, a commit GitHub no longer serves; b85dee2, the issue-586 pin, replaced all seven, so they are retained here as factual data. Every other certificate of the commit is pinned by digest: 64 byte-identical to copies other packets retain (302, 375, 376 and 381 among them, which couzo-certificates-2026-10-13 retains unchanged at b85dee2), and 344, an intermediate certificate no report names. Its 378, an intermediate certificate no issue names, is retained since 22 October (added from the same pin at 19:10Z, think-om5l): the report-order walk of Couzo's history records it as a report from the commit, superseded on entry. The rest of the tree, including the decimal pose files, drawings and search programs, is pinned by the commit and was not retained or executed.",
   "sources": [
     {
       "id": "franciscouzo-square-packing",
@@ -18,8 +18,8 @@
       ],
       "subtree_file_count": 93,
       "subtree_total_bytes": 2888625,
-      "retained_file_count": 7,
-      "retained_total_bytes": 303367,
+      "retained_file_count": 8,
+      "retained_total_bytes": 349962,
       "compressed": [],
       "pinned_only": [
         {
@@ -539,12 +539,6 @@
           "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n377.cert"
         },
         {
-          "path": "certificates/n378.cert",
-          "bytes": 46595,
-          "sha256": "5ba870c8b0f2469c1285bac52ee259b887a22c823d58cf4f2a1b3203a7e256a5",
-          "reason": "An intermediate certificate no issue or report names, replaced at b85dee2 by the certificate the couzo-certificates-2026-10-13 packet retains; pinned by digest only."
-        },
-        {
           "path": "certificates/n378.json",
           "bytes": 993,
           "sha256": "2297ae940619c74b3b83cbcae87a89c9ccb939e6484968a3ed96f050398e59f2",
@@ -608,7 +602,8 @@
         "Issue #583 reports s(211) <= 14.993558914123, s(241) <= 15.987117095169 and s(302) <= 17.870013850405 in the case corpus, and s(339) <= 18.927383638495, s(379) <= 19.953531531603, s(380) <= 19.973553606628, s(381) <= 19.974977397657 and s(382) <= 19.988600568289 beyond it, each its certificate's exact side rounded up to 12 places; its 302 and 381 are unchanged at b85dee2 and retained by couzo-certificates-2026-10-13.",
         "Issue #583 also reports s(154) <= 12.922499814643, the certificate issue #570 reported on 12 October by its SHA-256.",
         "Issue #570 reports s(379) <= 19.953542593650 by a certificate (SHA-256 ac463682...) in no reachable commit of the source; it is not retained.",
-        "The checker statements are the author's; no optimality claim is made."
+        "The checker statements are the author's; no optimality claim is made.",
+        "The commit's certificates/n378.cert states s(378) <= 19.942519694047, its exact header side rounded up at 12 places; no issue names it, and it is a report from the commit by the order it reached the repository, superseded on entry by the certificate the couzo-certificates-2026-10-13 packet retains."
       ]
     }
   ]

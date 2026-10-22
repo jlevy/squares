@@ -29,7 +29,11 @@ every file is bound to its Git blob at the pin.
 Retained: every certificate the issue links, `source/certificates/nN.cert` at its 73
 counts, each with its per-count JSON `nN.json`, 146 files, 7,453,248 bytes (2.65 MB as
 Git’s zlib stores them): the 204 pair at 01:24Z on 22 October for T-226, and the 72
-beyond the corpus from the same pin at 04:41Z.
+beyond the corpus from the same pin at 04:41Z. On 22 October at 19:10Z the 21
+certificates the pin publishes beyond the corpus and the issue does not claim were added
+from the same pin, 8 under `certificates/best/` and 13 at the root with their per-count
+JSON ([The Pin’s Unclaimed Certificates](#the-pins-unclaimed-certificates)): 180 files,
+13,835,156 bytes in all.
 The repository states no licence for its data or prose, so the certificates and their
 JSON are retained as factual data under the owner decision of 9 October 2026 recorded in
 [known-best-packings/README.md](../known-best-packings/README.md).
@@ -129,6 +133,22 @@ recorded by the [ledger of 22 October for issue
 three of the eight, at 370, 452 and 536, by 2.88e-12 to 1.27e-11; five remain current.
 [acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record
 the source register reads them from.
+
+## The Pin’s Unclaimed Certificates
+
+Issue #670 claims 72 of the pin’s certificates beyond the corpus. The pin publishes 21 more at 325 to 1024 that the issue does not claim, at 547, 554, 602, 652, 653, 704, 705, 759, 814, 815, 816, 872, 873, 874, 932, 933, 934, 994, 995, 996 and 997: 8 under `certificates/best/` and 13 at the root. A publication in a watched repository is a report from its first commit (the owner, 14 October 2026), so since 22 October 2026 they are rows of their own, as the source `couzo-23aff0c-2026-10-17`, which the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) records in report order (think-tmwt).
+
+[`devtools.beyond_horizon_replay`](../../../devtools/beyond_horizon_replay.py) declares this publication a release with no issue, `franciscouzo/square-packing@23aff0c`, and reads the rows the history walk records from [acquisition/watched-release-23aff0c.json](acquisition/watched-release-23aff0c.json), which `declare-rows` writes from the walk.
+
+Each certificate was first committed at the commit itself ([receipts/23aff0c/first-commits.json](receipts/23aff0c/first-commits.json)).
+
+**All 21 are verified.** The filtered two-route decision of `devtools.couzo_678_replay`, reused unchanged, accepts every packing on both routes (40,608 candidate pairs of 7,113,182, and every corner against every wall), and every side is its header side rounded up at 12 places. **All 126 controls are refused by both routes.** The positive decisions took 138.9 CPU seconds ([receipts/23aff0c/filtered-exact-replay.json](receipts/23aff0c/filtered-exact-replay.json)). 13 touch the box and 12 have touching pairs, which the closed contract allows. Every side is below Göbel’s classical construction at its count ([receipts/23aff0c/goebel-comparison.json](receipts/23aff0c/goebel-comparison.json)).
+
+The [history walk of 22 October](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) walks every count from 325 to 1024 in report order from starts frozen at `main` `a97b712b9` and records all 21. **All 21 are superseded on entry**, by Couzo’s #672 (16) and Couzo’s #675 (5). The rows supersede first Couzo’s 4e4c8ce (4); at 17 counts no row stood before them.
+
+[acquisition/beyond-horizon-rows-23aff0c.json](acquisition/beyond-horizon-rows-23aff0c.json) is the record the source register reads them from, as the source `couzo-23aff0c-2026-10-17`.
+
+The walk records the pin’s publications at 71 more counts and holds each back from a row for its decision: 10 re-certifications below the side they beat by less than 10⁻¹² with the same 12-place print, at 325, 333, 362, 401, 442, 456, 485, 499, 530 and 577 (think-fwa9); 15 bounds `upper_bounds.json` states by deleting squares from the next count’s certificate, with no certificate file at their own count, 447 among them (D6, proposed on think-f2io); and 46 L-border, tiling or composite bounds of the index with no certificate file of their own (D2, think-f2io).
 
 ## Credit
 

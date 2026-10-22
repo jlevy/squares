@@ -1,0 +1,49 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-22T19:10Z",
+  "git_scope": "Bare clone of franciscouzo/square-packing (history to 6b7391de, fetched 22 October), checked out sparsely at f311f08 (committed 2026-10-11T03:39:54Z), the parent of issue #506's pin 337078c and a commit no issue reports. Retained: certificates/n340.cert, n378.cert, n379.cert and n380.cert, which the report-order walk of Couzo's history records as reports; n340.cert is byte-identical to the copy the couzo-certificates-2026-10-11 packet retains. Pinned by digest only: n376.cert, held above G\u00f6bel's construction, and the root README.md. The rest of the tree is pinned by the commit alone; no source file was executed.",
+  "sources": [
+    {
+      "id": "franciscouzo-square-packing",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_ref": "master",
+      "source_commit": "f311f08901c24b2a6c5f720710a45adec23e926a",
+      "committed_utc": "2026-10-11T03:39:54Z",
+      "git_tree": "f8e60302a619944ea2dae9e23dc56794a240282a",
+      "archived_path": "packing/resources/web/couzo-extended-certificates-2026-10-11/source",
+      "subtree_manifest": "packing/resources/web/couzo-extended-certificates-2026-10-11/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "certificates/n340.cert",
+        "certificates/n376.cert",
+        "certificates/n378.cert",
+        "certificates/n379.cert",
+        "certificates/n380.cert"
+      ],
+      "subtree_file_count": 6,
+      "subtree_total_bytes": 292581,
+      "retained_file_count": 4,
+      "retained_total_bytes": 223855,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 11944,
+          "sha256": "8a99064ba16ee3c842b3cf6bf504419ebced1b540068884f690ad9ba927d3a8c",
+          "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "certificates/n376.cert",
+          "bytes": 56782,
+          "sha256": "748dcdd61d90e77fc7c6d392bf1ae5e2c6cd8b0721e5ebb413c58934df905bd7",
+          "reason": "Published at f311f08, above G\u00f6bel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+        }
+      ],
+      "license": "The repository states no licence for its data or prose: the tree has no LICENSE, and no README states reuse terms. The four certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). Prose is hash-pinned and not copied.",
+      "claims": [
+        "franciscouzo/square-packing@f311f08 publishes s(340) <= 18.939649632892 and certificates at 378, 379 and 380, each the exact rational side in its header rounded up at 12 places; 340 is the count's current row, and 378 to 380 are superseded on entry by issue #506's certificates at 337078c.",
+        "No source program ran here."
+      ]
+    }
+  ]
+}

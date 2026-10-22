@@ -308,6 +308,123 @@ def history_label(source: str) -> str:
     return f"#{issue[0]}" if issue is not None else source
 
 
+#: The row sources the history walk takes after its starts, each the report of its rows.
+HISTORY_SOURCES = (
+    "fang-two-wedge-certificates-2026-10-10",
+    "evand-record-hunt3-2026-10-10",
+    "couzo-certificates-2026-10-11",
+    "couzo-certificates-2026-10-12",
+    "fang-direct-certificates-2026-10-13",
+    "fang-excess-theorem-2026-10-13",
+    "couzo-issue583-2026-10-13",
+    "evand-compositions-2026-10-13",
+    "couzo-certificates-2026-10-13",
+    "evand-fresh-compositions-2026-10-14",
+    "couzo-verified-bounds-2026-10-14",
+    "couzo-certificates-2026-10-14",
+    "de-winter-issue666-2026-10-17",
+    "couzo-issue670-2026-10-17",
+    "couzo-issue672-2026-10-17",
+    "couzo-issue675-2026-10-18",
+    "couzo-issue678-2026-10-18",
+    "muglich-issue686-2026-10-19",
+    "evand-n343-sweep-2026-10-20",
+    "couzo-issue715-2026-10-21",
+    "mishapolk-issue719-2026-10-22",
+)
+
+
+def _held(kind: str, bead: str, counts: str) -> Held:
+    """A `Held` whose counts are written out, separated by spaces."""
+    return Held(kind, bead, frozenset(int(n) for n in counts.split()))
+
+
+#: What the history walk records and holds back from a row, by report and class, each
+#: waiting on its decision's bead: Göbel's constructions (#613, think-8krd), sub-print
+#: re-certifications (think-fwa9), index deletion bounds (D6, proposed on think-f2io) and
+#: recipes with no certificate file (D2, think-f2io). ``check`` holds each to the walk.
+HISTORY_HELD: dict[str, tuple[Held, ...]] = {
+    "franciscouzo/square-packing@02f9690": (_held(GOEBEL_ABOVE, "think-8krd", "369 375 376"),),
+    "evand/square-packing@49907ec": (_held(GOEBEL_ABOVE, "think-8krd", "964"),),
+    "franciscouzo/square-packing@f311f08": (_held(GOEBEL_ABOVE, "think-8krd", "376"),),
+    "franciscouzo/square-packing@a7067d7": (_held(GOEBEL_ABOVE, "think-8krd", "375"),),
+    "TheSnakeFang/squarepack-certs@bef5c42": (
+        _held(
+            RECIPE,
+            "think-f2io",
+            "420 462 506 552 600 650 702 756 757 812 813 870 871 930 931 992 993",
+        ),
+    ),
+    "franciscouzo/square-packing@93570ef": (_held(GOEBEL_ABOVE, "think-8krd", "375"),),
+    "franciscouzo/square-packing@487b058": (
+        _held(
+            GOEBEL_ABOVE,
+            "think-8krd",
+            "369 376 408 415 416 445 449 488 489 492 493 537 538 585 586 634 635 636 "
+            "685 686 687 688 738 739 740 793 794 795 851 852 853 860 861 910 911 912 "
+            "919 920 921 964 971 972 973 974",
+        ),
+        _held(RECIPE, "think-f2io", "327"),
+    ),
+    "franciscouzo/square-packing@4e4c8ce": (
+        _held(
+            GOEBEL_ABOVE,
+            "think-8krd",
+            "331 368 407 408 415 416 445 448 449 488 489 491 492 493 537 538 585 586 "
+            "634 635 636 685 686 687 688 738 739 740 793 794 795 851 852 853 860 861 "
+            "910 911 912 919 920 921 964 971 972 973 974",
+        ),
+        _held(SUB_PRINT, "think-fwa9", "327 332 542"),
+        _held(
+            CONSEQUENCE,
+            "think-f2io",
+            "505 533 549 551 580 583 589 593 595 598 629 632 638 642 680 683 693 700 "
+            "733 743 751 752 753 788 798 805 807 845 855 864 869 904 923 927 928 965 "
+            "979 985 989",
+        ),
+    ),
+    "franciscouzo/square-packing@58a7833": (
+        _held(
+            GOEBEL_ABOVE,
+            "think-8krd",
+            "331 368 369 376 407 408 415 416 445 448 449 488 489 491 492 493 537 538 "
+            "585 586 634 635 636 685 686 687 688 738 739 740 793 794 795 851 852 853 "
+            "860 861 910 911 912 919 920 921 964 971 972 973 974",
+        ),
+    ),
+    "franciscouzo/square-packing@23aff0c": (
+        _held(SUB_PRINT, "think-fwa9", "325 333 362 401 442 456 485 499 530 577"),
+        _held(
+            CONSEQUENCE,
+            "think-f2io",
+            "367 406 447 541 542 588 589 638 751 847 848 906 907 967 968",
+        ),
+        _held(
+            RECIPE,
+            "think-f2io",
+            "368 407 448 457 491 500 533 534 543 545 580 581 590 592 626 629 630 639 "
+            "641 677 680 681 690 730 733 734 741 752 785 788 789 796 842 845 846 849 "
+            "901 904 905 908 962 965 966 969 981 982",
+        ),
+    ),
+    "#715": (
+        _held(
+            SUB_PRINT,
+            "think-fwa9",
+            "535 582 591 631 633 640 682 684 691 695 735 737 742 745 790 791 797 798 "
+            "799 854 855 856 857 909 913 915 916 970 975 977",
+        ),
+    ),
+    "franciscouzo/square-packing@5a299b4": (
+        _held(GOEBEL_ABOVE, "think-8krd", "331"),
+        _held(
+            SUB_PRINT,
+            "think-fwa9",
+            "326 327 329 332 334 363 366 371 372 402 405 414 443 446 451 486 494 531 "
+            "539 540 578 587 627 632 678 683 731 786 843 902 963",
+        ),
+    ),
+}
 #: The walk of each ledger these releases' rows are planned from. The backlog ledger's
 #: starts were frozen at the 18 October ledger's ``main``; #719's at ``main`` after #720.
 WALKS: dict[str, Walk] = {
@@ -322,13 +439,30 @@ WALKS: dict[str, Walk] = {
     ),
     ISSUE_719: Walk(
         ISSUE_719,
-        later={},
-        awaiting={
-            "franciscouzo/square-packing@4e4c8ce": Awaiting("think-yfoo"),
-            "franciscouzo/square-packing@23aff0c": Awaiting("think-tmwt"),
-            "franciscouzo/square-packing@5a299b4": Awaiting("think-tmwt"),
-            "#715": Awaiting("think-fwa9", _held_715()),
+        later={
+            "franciscouzo/square-packing@4e4c8ce": "couzo-index-2026-10-15",
+            "franciscouzo/square-packing@23aff0c": "couzo-23aff0c-2026-10-17",
+            "franciscouzo/square-packing@5a299b4": "couzo-reconcile-2026-10-20",
         },
+        awaiting={"#715": Awaiting("think-fwa9", _held_715())},
+        held={
+            report: tuple(
+                Held(item.kind, item.bead, item.counts & counts)
+                for item in HISTORY_HELD[report]
+                if item.counts & counts
+            )
+            for report, counts in (
+                ("franciscouzo/square-packing@4e4c8ce", frozenset({743, 798})),
+                ("franciscouzo/square-packing@23aff0c", frozenset({447})),
+                ("franciscouzo/square-packing@5a299b4", frozenset({366, 372})),
+            )
+        },
+    ),
+    HISTORY: Walk(
+        HISTORY,
+        later={history_label(source): source for source in HISTORY_SOURCES},
+        awaiting={},
+        held=HISTORY_HELD,
     ),
 }
 #: A Couzo row: the count, the prior and new prints, the deletion and the link.
@@ -570,6 +704,143 @@ def read_declared_rows(body: str, release: Release) -> list[Claim]:
 
 
 COUZO_URL = "https://github.com/franciscouzo/square-packing"
+EVAND_URL = "https://github.com/evand/square-packing"
+FANG_URL = "https://github.com/TheSnakeFang/squarepack-certs"
+#: The publications no issue reports whose rows the history walk records, each with its
+#: packet, holder, repository, commit and committer time, its row count, the counts its
+#: all-pairs sample decides, its bead, and where it differs from the defaults: the push
+#: that made it public (`PUSHED_LATER`), and the source, record and receipts of a second
+#: report in one packet.
+WATCHED: tuple[
+    tuple[str, str, str, str, str, int, tuple[int, ...], str, dict[str, Any]], ...
+] = (
+    (
+        "couzo-exact-certificates-2026-10-09",
+        "Francisco Couzo",
+        COUZO_URL,
+        "02f969075f79d5e13fa21e09e381a44e8647b452",
+        "2026-10-09T20:28:52Z",
+        12,
+        (),
+        "think-a4wq",
+        {"source_id": "couzo-02f9690-2026-10-09"},
+    ),
+    (
+        "evand-hunt3-first-hour-2026-10-10",
+        "Evan Daniel",
+        EVAND_URL,
+        "f7a2325df1e396f46ee373c6d00a880795b749b7",
+        "2026-10-10T09:15:50Z",
+        1,
+        (),
+        "think-xm4h",
+        {},
+    ),
+    (
+        "couzo-certificates-2026-10-10",
+        "Francisco Couzo",
+        COUZO_URL,
+        "3ef76349025bf4bfa99c9c3600bcc273f4c33e02",
+        "2026-10-10T13:52:27Z",
+        2,
+        (),
+        "think-1545",
+        {"source_id": "couzo-3ef7634-2026-10-10"},
+    ),
+    (
+        "couzo-extended-certificates-2026-10-11",
+        "Francisco Couzo",
+        COUZO_URL,
+        "f311f08901c24b2a6c5f720710a45adec23e926a",
+        "2026-10-11T03:39:54Z",
+        4,
+        (),
+        "think-om5l",
+        {},
+    ),
+    (
+        "couzo-updates-2026-10-12",
+        "Francisco Couzo",
+        COUZO_URL,
+        "a7067d7b92b1e0208499b26d93e898648f0e8667",
+        "2026-10-12T17:55:52Z",
+        1,
+        (),
+        "think-rfce",
+        {},
+    ),
+    (
+        "fang-composites-2026-10-12",
+        "Kevin Fang",
+        FANG_URL,
+        "bef5c42d58257fe38ed010a5d1ff9b8fc608df57",
+        "2026-10-12T19:13:41Z",
+        2,
+        (),
+        "think-qik6",
+        {},
+    ),
+    (
+        "couzo-retained-certificates-2026-10-12",
+        "Francisco Couzo",
+        COUZO_URL,
+        "93570ef79474fd8c35d1293addf095f9eee6a658",
+        "2026-10-12T21:31:43Z",
+        2,
+        (),
+        "think-rfce",
+        {},
+    ),
+    (
+        "couzo-issue583-2026-10-13",
+        "Francisco Couzo",
+        COUZO_URL,
+        "45966700cf15d3f42e064fd6da51fcb9a5def2be",
+        "2026-10-13T13:53:57Z",
+        1,
+        (),
+        "think-rfce",
+        {"source_id": "couzo-4596670-2026-10-13"},
+    ),
+    (
+        "couzo-index-2026-10-15",
+        "Francisco Couzo",
+        COUZO_URL,
+        "4e4c8ce23cb5e87f033021687010992c40575480",
+        "2026-10-15T00:31:53Z",
+        253,
+        (366, 703),
+        "think-yfoo",
+        {},
+    ),
+    (
+        "couzo-issue670-2026-10-17",
+        "Francisco Couzo",
+        COUZO_URL,
+        "23aff0c6f992271e1ad13a148d44f392c4b386c0",
+        "2026-10-17T18:00:09Z",
+        21,
+        (),
+        "think-tmwt",
+        {
+            "source_id": "couzo-23aff0c-2026-10-17",
+            "record": Path("acquisition/beyond-horizon-rows-23aff0c.json"),
+            "receipts": Path("receipts/23aff0c"),
+            "declared": Path("acquisition/watched-release-23aff0c.json"),
+        },
+    ),
+    (
+        "couzo-reconcile-2026-10-20",
+        "Francisco Couzo",
+        COUZO_URL,
+        "5a299b4708ab1ae4870d0fc1ab155738144f6ab8",
+        "2026-10-20T22:35:41Z",
+        20,
+        (903,),
+        "think-tmwt",
+        {"published": "2026-10-21T22:56:37Z"},
+    ),
+)
 RELEASES: dict[str, Release] = {
     release.label: release
     for release in (
@@ -656,6 +927,26 @@ RELEASES: dict[str, Release] = {
             },
             # The issue's 06:05:31Z edit added 366 and 447 to the table it opened with.
             claimed_at={366: "2026-10-22T06:05:31Z", 447: "2026-10-22T06:05:31Z"},
+        ),
+        *(
+            Release(
+                issue=None,
+                packet=packet,
+                holders=holders,
+                source_url=url,
+                pin=commit,
+                retained=commit,
+                first_commit=commit,
+                committed=committed,
+                rows=rows,
+                decided=rows,
+                sampled=sampled,
+                bead=bead,
+                read=read_declared_rows,
+                walk=HISTORY,
+                **extra,
+            )
+            for packet, holders, url, commit, committed, rows, sampled, bead, extra in WATCHED
         ),
     )
 }
@@ -1441,6 +1732,16 @@ def _least_claims(items: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     return found
 
 
+def _earlier_bead(walk: Walk, label: str, chosen: Release) -> str:
+    """The bead that owned an earlier publication when ``walk`` was made: its pending
+    import's, its own import's once it is a release here, else the walk's."""
+    if label in walk.awaiting:
+        return walk.awaiting[label].bead
+    if label in RELEASES:
+        return RELEASES[label].bead
+    return chosen.bead
+
+
 def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[str, Any]:
     """The ``sources.yaml`` a release's walk reads, transcribed from the packets' receipts
     (`devtools.intake_ledger` gathers it).
@@ -1468,9 +1769,7 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
                     "url": f"https://github.com/{item['repository']}/tree/{item['commit']}",
                     "reported_at": item["published"],
                     "holders": HOLDERS[item["repository"]],
-                    "bead": walk.awaiting[label].bead
-                    if label in walk.awaiting
-                    else chosen.bead,
+                    "bead": _earlier_bead(walk, label, chosen),
                     "claims": [],
                 },
             )
@@ -2355,7 +2654,8 @@ def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
     later walk may insert between two of an earlier walk's reports a report the earlier
     walk does not reach, as the history walk inserts Couzo's 4e4c8ce between a start and
     #670; the register may then lead from one to the other through it (`bridged`), and
-    the later walk holds that stretch to its own chain.
+    the later walk holds that stretch to its own chain. A problem two walks find is named
+    once.
     """
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
     problems: list[str] = []
@@ -2389,7 +2689,7 @@ def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
                     problems.append(
                         f"n={n} from {earlier}: names {successor}, earlier in the chain"
                     )
-    return problems
+    return list(dict.fromkeys(problems))
 
 
 def _reached(walk: Walk, n: int) -> set[str]:

@@ -1,0 +1,26 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-square-packing",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "main",
+  "source_commit": "f7a2325df1e396f46ee373c6d00a880795b749b7",
+  "retrieved_at_utc": "2026-10-22T19:10Z",
+  "git_scope": "Bare clone of evand/square-packing (history to 7051f4ea, fetched 22 October), checked out sparsely at f7a2325 (committed 2026-10-10T09:15:50Z, 'packer: Hunt 3 first hour'), a commit no issue reports. Retained: search/packer/candidates/hunt3_n343.dil.cert, which the report-order walk of Couzo's history records as a report at 343, superseded on entry, and the repository's MIT LICENSE. Pinned by digest only: the root README.md. The rest of the tree is pinned by the commit alone; no source file was executed.",
+  "archived_dir": "source",
+  "license": "MIT License, Copyright (c) 2026 Evan Daniel (LICENSE, retained). The certificate is retained under it.",
+  "claims": [
+    "evand/square-packing@f7a2325 publishes search/packer/candidates/hunt3_n343.dil.cert, a dilated rational certificate at 343 with its exact side in the header; it is a report by the order it reached the repository and is superseded on entry by Evan Daniel's verified Hunt 3 row of the same day.",
+    "No source program ran here."
+  ],
+  "scope": [
+    "LICENSE",
+    "README.md",
+    "search/packer/candidates/hunt3_n343.dil.cert"
+  ],
+  "pinned_only": [
+    {
+      "match": "**/README.md",
+      "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+    }
+  ]
+}

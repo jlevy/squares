@@ -70,8 +70,9 @@ def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
     """The earlier packet still prints its sides; the register supersedes, never rewrites.
 
     Each report keeps its own row at its own print when a later one beats it: ffd900d's by
-    2d32a6e's on 8 October, 2d32a6e's by issue 506's certificates on 12 October, and
-    issue 506's by issue 561's in the intake of 14 October.
+    2d32a6e's on 8 October, 2d32a6e's by issue 506's certificates on 12 October (at 378 by
+    Couzo's 02f9690 certificate of 9 October first), and issue 506's by issue 561's in the
+    intake of 14 October.
     """
     claims = earlier.read_json(earlier.PACKET / "acquisition/sources.json")
     printed = {row["n"]: row["side"] for row in claims["sources"][0]["cases"]}
@@ -95,7 +96,9 @@ def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
         assert first["superseded_by"] == updates.SOURCE_ID
         assert later["value"] == LATER[n]
         assert later["disposition"] == "superseded"
-        assert later["superseded_by"] == ISSUE_506
+        # At 378 Couzo's 02f9690 certificate of 9 October came first, a dated row since the
+        # history walk of 22 October, and issue 506's certificate beat it in turn.
+        assert later["superseded_by"] == (ISSUE_506 if n == 375 else "couzo-02f9690-2026-10-09")
         current = rows[n, ISSUE_506]
         assert current["value"] == CERTIFIED[n]
         # Issue 561's certificates, reported on 12 October, are the next in report order.

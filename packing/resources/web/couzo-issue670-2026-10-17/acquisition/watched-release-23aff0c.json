@@ -1,0 +1,115 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/franciscouzo/square-packing/tree/23aff0c6f992271e1ad13a148d44f392c4b386c0",
+ "commit": "23aff0c6f992271e1ad13a148d44f392c4b386c0",
+ "committed": "2026-10-17T18:00:09Z",
+ "published": "2026-10-17T18:00:09Z",
+ "walk": "upper-bounds-couzo-history-20261022",
+ "rows": [
+  {
+   "n": 547,
+   "certificate": "certificates/best/n547.cert",
+   "printed": "23.942809041643"
+  },
+  {
+   "n": 554,
+   "certificate": "certificates/n554.cert",
+   "printed": "23.993653790591"
+  },
+  {
+   "n": 602,
+   "certificate": "certificates/best/n602.cert",
+   "printed": "24.993653790591"
+  },
+  {
+   "n": 652,
+   "certificate": "certificates/best/n652.cert",
+   "printed": "25.995268064197"
+  },
+  {
+   "n": 653,
+   "certificate": "certificates/n653.cert",
+   "printed": "25.996103908965"
+  },
+  {
+   "n": 704,
+   "certificate": "certificates/n704.cert",
+   "printed": "26.996103908965"
+  },
+  {
+   "n": 705,
+   "certificate": "certificates/best/n705.cert",
+   "printed": "26.996103908965"
+  },
+  {
+   "n": 759,
+   "certificate": "certificates/n759.cert",
+   "printed": "27.995949340329"
+  },
+  {
+   "n": 814,
+   "certificate": "certificates/n814.cert",
+   "printed": "28.995949340329"
+  },
+  {
+   "n": 815,
+   "certificate": "certificates/best/n815.cert",
+   "printed": "28.995949340329"
+  },
+  {
+   "n": 816,
+   "certificate": "certificates/n816.cert",
+   "printed": "28.998488480775"
+  },
+  {
+   "n": 872,
+   "certificate": "certificates/best/n872.cert",
+   "printed": "29.995949340329"
+  },
+  {
+   "n": 873,
+   "certificate": "certificates/n873.cert",
+   "printed": "29.998488480775"
+  },
+  {
+   "n": 874,
+   "certificate": "certificates/best/n874.cert",
+   "printed": "29.998488480775"
+  },
+  {
+   "n": 932,
+   "certificate": "certificates/n932.cert",
+   "printed": "30.995955854834"
+  },
+  {
+   "n": 933,
+   "certificate": "certificates/n933.cert",
+   "printed": "30.995955854834"
+  },
+  {
+   "n": 934,
+   "certificate": "certificates/n934.cert",
+   "printed": "30.995955854834"
+  },
+  {
+   "n": 994,
+   "certificate": "certificates/n994.cert",
+   "printed": "31.995955854834"
+  },
+  {
+   "n": 995,
+   "certificate": "certificates/n995.cert",
+   "printed": "31.995955854834"
+  },
+  {
+   "n": 996,
+   "certificate": "certificates/best/n996.cert",
+   "printed": "31.995955854834"
+  },
+  {
+   "n": 997,
+   "certificate": "certificates/n997.cert",
+   "printed": "31.998349747355"
+  }
+ ]
+}

@@ -25409,6 +25409,530 @@ occurrences:
     Reviewed /credit span 58:62. The first-party jlevy/squares record is the Joshua Levy
     identity established by LICENSE and the retained ojoshe receipt; project credit does
     not imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Hunt 3 first hour 2026-10-10]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel Hunt 3 first hour 2026-10-10]]
+    /authors/0 span 0:6: the repository at the commit the evand-hunt3-first-hour-2026-10-10
+    packet pins is Evan Daniel''s, as its acquisition record names. Keep packing finder and
+    refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Hunt 3 first hour 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel Hunt 3 first hour 2026-10-10]]
+    /credit span 0:6: the repository at the commit the evand-hunt3-first-hour-2026-10-10 packet
+    pins is Evan Daniel''s, as its acquisition record names. Keep packing finder and refinement
+    roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Hunt 3 first hour 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev
+  start: 13
+  end: 17
+  label: Fang
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed [[Daniel Hunt 3 first hour 2026-10-10]] in packing/resources/bibliography.yaml
+    against its retained source packet (evand-hunt3-first-hour-2026-10-10) and the existing
+    profile evidence. Raw label, span and prerequisite role are retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Hunt 3 first hour 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev
+  start: 19
+  end: 27
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: Reviewed 2026-10-22 against the named profile sources; the printed source text and
+    credit role are retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Hunt 3 first hour 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev
+  start: 29
+  end: 37
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: Reviewed 2026-10-22 against the named profile sources; the printed source text and
+    credit role are retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Hunt 3 first hour 2026-10-10]'
+    field: /credit
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev
+  start: 39
+  end: 51
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: Reviewed 2026-10-22 against the named profile sources; the printed source text and
+    credit role are retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo extended certificates 2026-10-11]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo extended certificates 2026-10-11]]
+    /authors/0 span 0:5: the repository at the commit the couzo-extended-certificates-2026-10-11
+    packet pins is Francisco Couzo''s, as its acquisition record names. Keep packing finder
+    and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo extended certificates 2026-10-11]'
+    field: /credit
+  expected_text: Couzo after Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo extended certificates 2026-10-11]]
+    /credit span 0:5: the repository at the commit the couzo-extended-certificates-2026-10-11
+    packet pins is Francisco Couzo''s, as its acquisition record names. Keep packing finder
+    and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo extended certificates 2026-10-11]'
+    field: /credit
+  expected_text: Couzo after Levy
+  start: 12
+  end: 16
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed /credit span 12:16. The first-party jlevy/squares record is the Joshua Levy
+    identity established by LICENSE and the retained ojoshe receipt; project credit does not
+    imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo updates 2026-10-12]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo updates 2026-10-12]] /authors/0
+    span 0:5: the repository at the commit the couzo-updates-2026-10-12 packet pins is Francisco
+    Couzo''s, as its acquisition record names. Keep packing finder and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo updates 2026-10-12]'
+    field: /credit
+  expected_text: Couzo after Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo updates 2026-10-12]] /credit
+    span 0:5: the repository at the commit the couzo-updates-2026-10-12 packet pins is Francisco
+    Couzo''s, as its acquisition record names. Keep packing finder and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo updates 2026-10-12]'
+    field: /credit
+  expected_text: Couzo after Levy
+  start: 12
+  end: 16
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed /credit span 12:16. The first-party jlevy/squares record is the Joshua Levy
+    identity established by LICENSE and the retained ojoshe receipt; project credit does not
+    imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang composites 2026-10-12]'
+    field: /authors/0
+  expected_text: Fang
+  start: 0
+  end: 4
+  label: Fang
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: 'Reviewed packing/resources/bibliography.yaml [[Fang composites 2026-10-12]] /authors/0
+    span 0:4: the repository at the commit the fang-composites-2026-10-12 packet pins is Kevin
+    Fang''s, as its acquisition record names. Keep packing finder and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang composites 2026-10-12]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev
+  start: 0
+  end: 4
+  label: Fang
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: 'Reviewed packing/resources/bibliography.yaml [[Fang composites 2026-10-12]] /credit
+    span 0:4: the repository at the commit the fang-composites-2026-10-12 packet pins is Kevin
+    Fang''s, as its acquisition record names. Keep packing finder and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang composites 2026-10-12]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev
+  start: 11
+  end: 19
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: Reviewed 2026-10-22 against the named profile sources; the printed source text and
+    credit role are retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang composites 2026-10-12]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev
+  start: 21
+  end: 29
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: Reviewed 2026-10-22 against the named profile sources; the printed source text and
+    credit role are retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang composites 2026-10-12]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev
+  start: 31
+  end: 43
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: Reviewed 2026-10-22 against the named profile sources; the printed source text and
+    credit role are retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo retained certificates 2026-10-12]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo retained certificates 2026-10-12]]
+    /authors/0 span 0:5: the repository at the commit the couzo-retained-certificates-2026-10-12
+    packet pins is Francisco Couzo''s, as its acquisition record names. Keep packing finder
+    and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo retained certificates 2026-10-12]'
+    field: /credit
+  expected_text: Couzo after Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo retained certificates 2026-10-12]]
+    /credit span 0:5: the repository at the commit the couzo-retained-certificates-2026-10-12
+    packet pins is Francisco Couzo''s, as its acquisition record names. Keep packing finder
+    and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo retained certificates 2026-10-12]'
+    field: /credit
+  expected_text: Couzo after Levy
+  start: 12
+  end: 16
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed /credit span 12:16. The first-party jlevy/squares record is the Joshua Levy
+    identity established by LICENSE and the retained ojoshe receipt; project credit does not
+    imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo index 2026-10-15]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo index 2026-10-15]] /authors/0
+    span 0:5: the repository at the commit the couzo-index-2026-10-15 packet pins is Francisco
+    Couzo''s, as its acquisition record names. Keep packing finder and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo index 2026-10-15]'
+    field: /credit
+  expected_text: Couzo after PingYou Ltd, Daniel, Fang, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo index 2026-10-15]] /credit span
+    0:5: the repository at the commit the couzo-index-2026-10-15 packet pins is Francisco
+    Couzo''s, as its acquisition record names. Keep packing finder and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo index 2026-10-15]'
+    field: /credit
+  expected_text: Couzo after PingYou Ltd, Daniel, Fang, Levy
+  start: 12
+  end: 23
+  label: PingYou Ltd
+  role: prerequisite
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo index 2026-10-15]'
+    field: /credit
+  expected_text: Couzo after PingYou Ltd, Daniel, Fang, Levy
+  start: 25
+  end: 31
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed [[Couzo index 2026-10-15]] in packing/resources/bibliography.yaml against
+    its retained source packet (couzo-index-2026-10-15) and the existing profile evidence.
+    Raw label, span and prerequisite role are retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo index 2026-10-15]'
+    field: /credit
+  expected_text: Couzo after PingYou Ltd, Daniel, Fang, Levy
+  start: 33
+  end: 37
+  label: Fang
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed [[Couzo index 2026-10-15]] in packing/resources/bibliography.yaml against
+    its retained source packet (couzo-index-2026-10-15) and the existing profile evidence.
+    Raw label, span and prerequisite role are retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo index 2026-10-15]'
+    field: /credit
+  expected_text: Couzo after PingYou Ltd, Daniel, Fang, Levy
+  start: 39
+  end: 43
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed /credit span 39:43. The first-party jlevy/squares record is the Joshua Levy
+    identity established by LICENSE and the retained ojoshe receipt; project credit does not
+    imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo reconcile 2026-10-20]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo reconcile 2026-10-20]] /authors/0
+    span 0:5: the repository at the commit the couzo-reconcile-2026-10-20 packet pins is Francisco
+    Couzo''s, as its acquisition record names. Keep packing finder and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo reconcile 2026-10-20]'
+    field: /credit
+  expected_text: Couzo after Muglich, Daniel, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo reconcile 2026-10-20]] /credit
+    span 0:5: the repository at the commit the couzo-reconcile-2026-10-20 packet pins is Francisco
+    Couzo''s, as its acquisition record names. Keep packing finder and refinement roles distinct.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo reconcile 2026-10-20]'
+    field: /credit
+  expected_text: Couzo after Muglich, Daniel, Levy
+  start: 12
+  end: 19
+  label: Muglich
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: darius-muglich
+  note: Reviewed [[Couzo reconcile 2026-10-20]] in packing/resources/bibliography.yaml against
+    its retained source packet (couzo-reconcile-2026-10-20) and the existing profile evidence.
+    Raw label, span and prerequisite role are retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo reconcile 2026-10-20]'
+    field: /credit
+  expected_text: Couzo after Muglich, Daniel, Levy
+  start: 21
+  end: 27
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed [[Couzo reconcile 2026-10-20]] in packing/resources/bibliography.yaml against
+    its retained source packet (couzo-reconcile-2026-10-20) and the existing profile evidence.
+    Raw label, span and prerequisite role are retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo reconcile 2026-10-20]'
+    field: /credit
+  expected_text: Couzo after Muglich, Daniel, Levy
+  start: 29
+  end: 33
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed /credit span 29:33. The first-party jlevy/squares record is the Joshua Levy
+    identity established by LICENSE and the retained ojoshe receipt; project credit does not
+    imply sole personal authorship.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

@@ -1,0 +1,11 @@
+{
+  "format": "upper-bound-beyond-horizon-claims-v1",
+  "horizon": 324,
+  "issue_pin": "f7a2325df1e396f46ee373c6d00a880795b749b7",
+  "limit": 1024,
+  "publication": "https://github.com/evand/square-packing/tree/f7a2325df1e396f46ee373c6d00a880795b749b7",
+  "published": "2026-10-10T09:15:50Z",
+  "results": [{"ceiling":"18.9895529524524921","certificate":"search/packer/candidates/hunt3_n343.dil.cert","deleted":0,"exact_side":"18989552952452492052952433502119/1000000000000000000000000000000","first_committed":"2026-10-10T09:15:50Z","n":343,"offered_side":"18.989552952453"}],
+  "revision": "f7a2325df1e396f46ee373c6d00a880795b749b7",
+  "source": "https://github.com/evand/square-packing"
+}

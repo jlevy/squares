@@ -1,0 +1,7 @@
+{
+  "format": "beyond-horizon-first-commits-v1",
+  "history_commits": 28,
+  "retained_commit": "45966700cf15d3f42e064fd6da51fcb9a5def2be",
+  "rows": [{"blob":"77e4cbcda49ffee7d2f179e5ae62d74ed1ccb399","certificate":"certificates/n378.cert","committed":"2026-10-13T13:53:57Z","first_commit":"45966700cf15d3f42e064fd6da51fcb9a5def2be","n":378}],
+  "source": "https://github.com/franciscouzo/square-packing"
+}

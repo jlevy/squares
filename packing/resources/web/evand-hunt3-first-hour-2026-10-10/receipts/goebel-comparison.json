@@ -1,0 +1,6 @@
+{
+  "comparison": {"above":[],"detail":[{"goebel":"10 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":349,"margin":-0.20283520297262578,"n":343,"note":"search/packer/candidates/hunt3_n343.dil.cert","relation":"below","side":"18989552952452492052952433502119/1000000000000000000000000000000"}],"rows":1,"set":"evand/square-packing@f7a2325 at f7a2325d","tally":{"above":0,"below":1,"equal":0}},
+  "families": "G\u00f6bel squares, G\u00f6bel strips and corner-touching strips, with deletion",
+  "format": "beyond-horizon-goebel-comparison-v1",
+  "program": "packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
+}
