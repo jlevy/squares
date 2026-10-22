@@ -91,9 +91,9 @@ PUBLICATION_HISTORY = (
         version="v0.8.18",
         first_published="October 22, 2026",
         result_scope=(
-            "Raise Evan Daniel's regularized views (T-225) to V3/C3 after their stage 4 "
-            "review, adopt them as the house best packings at 204, 227, 229 and 260, and "
-            "register Francisco Couzo's #670, #672 and #675 rows (T-226 to T-228)."
+            "Record Francisco Couzo's 109 new upper bounds at or below 1024 from issue "
+            "715 as current beyond-horizon rows, superseding the rows that stood at those "
+            "counts, and record the #715 acknowledgement and the #678 follow-up."
         ),
     ),
     PublicationHistoryEntry(
@@ -732,7 +732,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "da2671cfebaf76f6bc61c841bdbdc04dec4e33a0"
+DATA_REVISION = "56dc24548a7ef2ec4f9dabde922e9dafbfbd79a7"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1229,9 +1229,9 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.8.18",
         impact="patch",
         reason=(
-            "Raise Evan Daniel's regularized views (T-225) to V3/C3 after their stage 4 "
-            "review, adopt them as the house best packings at 204, 227, 229 and 260, and "
-            "register Francisco Couzo's #670, #672 and #675 rows (T-226 to T-228)."
+            "Record Francisco Couzo's 109 new upper bounds at or below 1024 from issue "
+            "715 as current beyond-horizon rows, superseding the rows that stood at those "
+            "counts, and record the #715 acknowledgement and the #678 follow-up."
         ),
     ),
     ReleaseImpactDecision(
@@ -2012,6 +2012,46 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The v0.8.18 cut for #715 moved the claim documents' link revision, 18a1fb61 "
+            "to 9da60d47, in 22 lines. Rendered into empty site directories from this "
+            "tree and with main d7923b8d's copies of the five: 54 byte-identical files. "
+            "Retain v0.4.14."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the #715 import (Francisco Couzo's 109 new beyond-horizon rows at or "
+            "below 1024, and the #715 and #678 replies) against main d7923b8d: the survey "
+            "cites neither the #715 request nor the couzo-issue715-2026-10-21 source. "
+            "Rendered at link revision 56dc2454 into empty site directories, from this tree "
+            "and with main's copies of the two inputs: render_packing_methods writes 42 "
+            "byte-identical files. No PDF printed; it prints from that HTML. Retain v0.2.3."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-optimality-review",
@@ -6625,7 +6665,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "89a145fa"
+PUBLICATION_REVISION = "9da60d47"
 
 
 def data_pathspec() -> tuple[str, ...]:

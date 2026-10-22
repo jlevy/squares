@@ -131,6 +131,9 @@ to 998 and skip 343.
 Francisco Couzo’s #678 reached this repository on 18 October, before #702, and each is
 below the row before it, so the owner’s rule of 14 October records both, in report order
 ([result-import.md, Several Reports at One Count](../../../campaign/result-import.md#several-reports-at-one-count)).
+On 22 October 2026 Couzo’s #715, which reached this repository after #702, recorded a row
+at 343 1.0736e-04 below this one, and the source register keeps this row as superseded by
+it ([the 21 October packet](../couzo-issue715-2026-10-21/README.md)).
 
 ## Lineage
 

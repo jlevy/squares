@@ -1,0 +1,10 @@
+{
+  "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
+  "format": "couzo-715-exhaustive-sample-v1",
+  "kernel": "devtools.evand_arrangement_reports.run_case, positive job, every pair",
+  "rows": [{"cpu_seconds":{"exact_verify":6.202209717,"independent":3.976694425},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"95940708216244304531224481/79784062246503147885254756000000000000","least_wall_clearance":"1/1000000000000000","n":343,"pairs_tested":58653,"routes_agree_on_least_gap":true,"wall_seconds":10.4},{"cpu_seconds":{"exact_verify":49.113238123,"independent":36.885083074},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"7364473361109442774088279/6143563474630471864201801250000000000","least_wall_clearance":"0","n":996,"pairs_tested":495510,"routes_agree_on_least_gap":true,"wall_seconds":86.8}],
+  "sample_cpu_seconds": 96.2,
+  "sample_pairs": 554163,
+  "started_utc": "2026-10-22T00:50:44Z",
+  "workers": 2
+}

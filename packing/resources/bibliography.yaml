@@ -3141,6 +3141,29 @@ sources:
       to one with #670''s packing. Retained as factual data with its per-count JSON; the source''s checker,
       Evan Daniel''s MIT verifier as Couzo modified it with Codex, is pinned by digest. OpenAI Codex assistance
       disclosed. No optimizer, local or global claim.'
+  - key: '[Couzo issue 715 2026-10-21]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-21'
+    lineage: builds-on-project
+    credit: Couzo after Muglich, Daniel, Fang, PingYou Ltd, Levy
+    short_credit: Couzo after Muglich et al.
+    note: >-
+      Francisco Couzo's issue 715 reports 1285 upper bounds for n = 328 to 9913 at
+      6b7391de820fd01f3ff6984e4a081e8c86845588, committed 21 October 2026 and pushed with
+      d09edd7 and 5a299b4 at 2026-10-21T22:56:37Z, after the issue. At each of its 173 counts
+      at or below 1024 the pin holds an explicit certificate; the 139 first committed after
+      7b6c87e are retained as factual data in web/couzo-issue715-2026-10-21/, the source's
+      checker is pinned against the 18 October packet's identical MIT-licensed copy, and the
+      indexes, manifest and credit records are hash-pinned. 109 are the issue's own reports
+      and beyond-horizon rows; 30 re-certify its 4e4c8ce certificates by 2.4e-23 to 3.2e-23
+      and 34 restate earlier publications, and neither is recorded here; the 1112 rows above
+      1024 wait on the owner. The manifest credits Couzo at every row, after Darius Muglich's
+      packings at 28 counts, Evan Daniel's at 343 (Kevin Fang's two-wedge family) and Fang's
+      rectangle and gluing with PingYou Ltd's squares at one. Upper bounds only; no
+      optimality claim.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono
