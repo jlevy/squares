@@ -1,0 +1,1526 @@
+format: intake-ledger-v1
+read_at_main: 0281e776342f2f1b63d3df66dc3c1737e8202945
+read_on: '2026-10-22'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes: []
+reports:
+- report: '#666'
+  url: https://github.com/jlevy/squares/issues/666
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-10-17T07:06:07Z'
+  bead: think-3m10
+  claims:
+  - n: 1061
+    printed: '32.996048342114'
+    rounding: up
+    exact: 329960483421136142348026634962556811786799/10000000000000000000000000000000000000000
+    exact_from: square-packing-above-324/n1061.cert (its header), retained in the de-winter-issue666-2026-10-17
+      packet
+  - n: 1128
+    printed: '33.998294117981'
+    rounding: up
+    exact: 13599317647192037572037504689187968542119/400000000000000000000000000000000000000
+    exact_from: square-packing-above-324/n1128.cert (its header), retained in the de-winter-issue666-2026-10-17
+      packet
+  - n: 1196
+    printed: '34.998294118334'
+    rounding: up
+    exact: 174991470591666186673092778325579252648447/5000000000000000000000000000000000000000
+    exact_from: square-packing-above-324/n1196.cert (its header), retained in the de-winter-issue666-2026-10-17
+      packet
+  - n: 1266
+    printed: '35.996046404219'
+    rounding: up
+    exact: 71992092808437527755203280686701868421267/2000000000000000000000000000000000000000
+    exact_from: square-packing-above-324/n1266.cert (its header), retained in the de-winter-issue666-2026-10-17
+      packet
+  - n: 1339
+    printed: '36.997865207179'
+    rounding: up
+    exact: 184989326035893969510633969107327704569719/5000000000000000000000000000000000000000
+    exact_from: square-packing-above-324/n1339.cert (its header), retained in the de-winter-issue666-2026-10-17
+      packet
+  - n: 1413
+    printed: '37.999463832123'
+    rounding: up
+    exact: 379994638321227620825803147820010728517917/10000000000000000000000000000000000000000
+    exact_from: square-packing-above-324/n1413.cert (its header), retained in the de-winter-issue666-2026-10-17
+      packet
+  - n: 1489
+    printed: '38.997600184483'
+    rounding: up
+    exact: 24373500115301822836053819291237697413889/625000000000000000000000000000000000000
+    exact_from: square-packing-above-324/n1489.cert (its header), retained in the de-winter-issue666-2026-10-17
+      packet
+  - n: 1568
+    printed: '39.999336626159'
+    rounding: up
+    exact: 399993366261589318512711221794625566636181/10000000000000000000000000000000000000000
+    exact_from: square-packing-above-324/n1568.cert (its header), retained in the de-winter-issue666-2026-10-17
+      packet
+  note: Issue-table prints at the counts above 1024 that issue 719 also claims, each with
+    its certificate's exact header side from the de-winter-issue666-2026-10-17 packet. Whether
+    the record tracks counts above 1024 waits on the owner (think-f2io); none is recorded
+    by this pass.
+- report: franciscouzo/square-packing@4e4c8ce
+  url: https://github.com/franciscouzo/square-packing/tree/4e4c8ce23cb5e87f033021687010992c40575480
+  kind: publication
+  holders: Francisco Couzo
+  reported_at: '2026-10-15T00:31:53Z'
+  bead: think-yfoo
+  claims:
+  - n: 366
+    printed: '19.656854249493'
+    rounding: up
+    exact: 89958739263761169588320518404047278044390783517573500161683721551734072452215393747982209723582895557711078543879184707588397171/4576456543960194931282571407551335685804336062596184387988797828552996622120775298799573100710767469181000000000000000000000000
+    exact_from: certificates/best/n366.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 372
+    printed: '19.822875655562'
+    rounding: up
+    exact: 17883009298919530533553218062009298919530533553200179/902140012864500000000000000000000000000000000000000
+    exact_from: certificates/best/n372.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 410
+    printed: '20.778174593076'
+    rounding: up
+    exact: 94471653122979184069256010393/4546677221321500000000000000
+    exact_from: certificates/best/n410.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 413
+    printed: '20.831663365378'
+    rounding: up
+    exact: 14788902264945330397898211051/709924215150500000000000000
+    exact_from: certificates/best/n413.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 447
+    printed: '21.704232790737'
+    rounding: up
+    exact: 794627825494394801833685945504845927430150141055348392265574647429709969877120886181721072664803357459108821571014395954859319768044049609982624946746573768130260673704543720970609093545256575037198723146355026758075416127644706661345500975944660787794431606299670600812398862812456862025813521229732238040737/36611652351681559449894454736893870089395507788940745426457516375579220096118310437967302621337544958618903963758079496567528606287847925155121719643301792924876591014162889022443210482644420630802824806030592533330387607935216747157652973980032316746844778713488638566930668654941952000000000000000000000000
+    exact_from: certificates/best/n447.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 450
+    printed: '21.767428349991'
+    rounding: up
+    exact: 80058848391382138284767071571/3677919463160500000000000000
+    exact_from: certificates/n450.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 454
+    printed: '21.828427124844'
+    rounding: up
+    exact: 9902683823108832887861760392581595687736445438313409171476900389/453659980468240847136222819645681050167293678569500000000000000
+    exact_from: certificates/best/n454.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 490
+    printed: '22.656854249519'
+    rounding: up
+    exact: 20568111801941912117732654041/907809688645500000000000000
+    exact_from: certificates/best/n490.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 498
+    printed: '22.828427124827'
+    rounding: up
+    exact: 8363897193568998249163868051/366380791275500000000000000
+    exact_from: certificates/best/n498.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 535
+    printed: '23.656854249519'
+    rounding: up
+    exact: 21475921490587412117732675516921490587412117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n535.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 544
+    printed: '23.828427124775'
+    rounding: up
+    exact: 106204719683191506574210087623/4457059592186500000000000000
+    exact_from: certificates/best/n544.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 582
+    printed: '24.656854249519'
+    rounding: up
+    exact: 22383731179232912117732676424731179232912117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n582.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 584
+    printed: '24.677669529693'
+    rounding: up
+    exact: 106704880274912139583387223531/4323944777140500000000000000
+    exact_from: certificates/best/n584.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 591
+    printed: '24.828427124775'
+    rounding: up
+    exact: 110661779275378006574210198284779275378006574210087623/4457059592186500000000000000000000000000000000000000
+    exact_from: certificates/best/n591.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 596
+    printed: '24.949747468335'
+    rounding: up
+    exact: 20647833226251446911537607243/827576842309000000000000000
+    exact_from: certificates/best/n596.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 631
+    printed: '25.656854249519'
+    rounding: up
+    exact: 23291540867878412117732677332540867878412117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n631.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 633
+    printed: '25.677669529693'
+    rounding: up
+    exact: 111028825052052639583387334559825052052639583387223531/4323944777140500000000000000000000000000000000000000
+    exact_from: certificates/best/n633.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 637
+    printed: '25.778174593082'
+    rounding: up
+    exact: 14218305948422917845352943573/551563722911500000000000000
+    exact_from: certificates/best/n637.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 640
+    printed: '25.828427124775'
+    rounding: up
+    exact: 115118838867564506574210202741838867564506574210087623/4457059592186500000000000000000000000000000000000000
+    exact_from: certificates/best/n640.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 644
+    printed: '25.899494936642'
+    rounding: up
+    exact: 58332098902857334354888971453/2252248510851500000000000000
+    exact_from: certificates/best/n644.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 682
+    printed: '26.656854249519'
+    rounding: up
+    exact: 24199350556523912117732678240350556523912117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n682.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 684
+    printed: '26.677669529693'
+    rounding: up
+    exact: 115352769829193139583387338883769829193139583387223531/4323944777140500000000000000000000000000000000000000
+    exact_from: certificates/best/n684.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 689
+    printed: '26.778174593084'
+    rounding: up
+    exact: 64560763567023404638316865519/2410947144384500000000000000
+    exact_from: certificates/best/n689.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 691
+    printed: '26.828427124775'
+    rounding: up
+    exact: 119575898459751006574210207198898459751006574210087623/4457059592186500000000000000000000000000000000000000
+    exact_from: certificates/best/n691.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 692
+    printed: '26.828427124777'
+    rounding: up
+    exact: 2170773985187235613928386751798607816255275226080305609/80913203561700000000000000809132035617000000000000000
+    exact_from: certificates/best/n692.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 695
+    printed: '26.899494936642'
+    rounding: up
+    exact: 60584347413708834354889032037347413708834354888971453/2252248510851500000000000000000000000000000000000000
+    exact_from: certificates/best/n695.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 699
+    printed: '26.949747468415'
+    rounding: up
+    exact: 2639279110114456251093845068032514979091306618754176347383507942311619528429158431628215963/97933352184755025353856069228269529418330701801359119989360075707804482627984375000000000
+    exact_from: certificates/best/n699.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 735
+    printed: '27.656854249519'
+    rounding: up
+    exact: 25107160245169412117732679148160245169412117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n735.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 736
+    printed: '27.656854249525'
+    rounding: up
+    exact: 108379279001146218403256921173/3918713170461500000000000000
+    exact_from: certificates/best/n736.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 737
+    printed: '27.677669529693'
+    rounding: up
+    exact: 119676714606333639583387343207714606333639583387223531/4323944777140500000000000000000000000000000000000000
+    exact_from: certificates/best/n737.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 742
+    printed: '27.778174593084'
+    rounding: up
+    exact: 66971710711407904638316932490710711407904638316865519/2410947144384500000000000000000000000000000000000000
+    exact_from: certificates/best/n742.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 743
+    printed: '27.798989873256'
+    rounding: up
+    exact: 126205981453356425112883379827/4539948466788500000000000000
+    exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (the bound it states)
+  - n: 744
+    printed: '27.798989873256'
+    rounding: up
+    exact: 126205981453356425112883379827/4539948466788500000000000000
+    exact_from: certificates/best/n744.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 745
+    printed: '27.828427124777'
+    rounding: up
+    exact: 2251687188748935613928389004294928600807889154467058216739851872275226080305609/80913203561700000000000000809132035617000000000000000000000000000000000000000
+    exact_from: certificates/best/n745.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 746
+    printed: '27.828427124795'
+    rounding: up
+    exact: 367730549996634359546132990970943037615006771420523791609353382892995237219913991334741637917/13214205328514320723053151955570100452150938098877368234280471670077308683458500000000000000
+    exact_from: certificates/best/n746.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 790
+    printed: '28.656854249519'
+    rounding: up
+    exact: 26014969933814912117732680055969933814912117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n790.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 791
+    printed: '28.656854249525'
+    rounding: up
+    exact: 112297992171607718403257033470992171607718403256921173/3918713170461500000000000000000000000000000000000000
+    exact_from: certificates/best/n791.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 792
+    printed: '28.656854249526'
+    rounding: up
+    exact: 58182954586327656682331419387/2030332920693500000000000000
+    exact_from: certificates/best/n792.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 797
+    printed: '28.778174593084'
+    rounding: up
+    exact: 69382657855792404638316934901657855792404638316865519/2410947144384500000000000000000000000000000000000000
+    exact_from: certificates/best/n797.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 798
+    printed: '28.798989873256'
+    rounding: up
+    exact: 130745929920144925112883510572929920144925112883379827/4539948466788500000000000000000000000000000000000000
+    exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (the bound it states)
+  - n: 799
+    printed: '28.798989873256'
+    rounding: up
+    exact: 130745929920144925112883510572929920144925112883379827/4539948466788500000000000000000000000000000000000000
+    exact_from: certificates/best/n799.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 800
+    printed: '28.798989873257'
+    rounding: up
+    exact: 72850332987746575778041765269/2529614174259500000000000000
+    exact_from: certificates/best/n800.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  note: 'A publication in a watched repository with no issue, dated by its first commit, or
+    by the later push that made it public; transcribed from the mishapolk-issue719-2026-10-22
+    packet''s receipts/earlier-publications.json at each count #719 claims where it is strictly
+    below the record''s standing side. Its rows are its own import''s (think-yfoo); none is
+    recorded by this pass.'
+- report: franciscouzo/square-packing@23aff0c
+  url: https://github.com/franciscouzo/square-packing/tree/23aff0c6f992271e1ad13a148d44f392c4b386c0
+  kind: publication
+  holders: Francisco Couzo
+  reported_at: '2026-10-17T18:00:09Z'
+  bead: think-tmwt
+  claims:
+  - n: 447
+    printed: '21.692388155426'
+    rounding: up
+    exact: 271154851942813972715137208842037968883785839874377030945605228711747013875046197/12500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  note: 'A publication in a watched repository with no issue, dated by its first commit, or
+    by the later push that made it public; transcribed from the mishapolk-issue719-2026-10-22
+    packet''s receipts/earlier-publications.json at each count #719 claims where it is strictly
+    below the record''s standing side. Its rows are its own import''s (think-tmwt); none is
+    recorded by this pass.'
+- report: franciscouzo/square-packing@5a299b4
+  url: https://github.com/franciscouzo/square-packing/tree/5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+  kind: publication
+  holders: Francisco Couzo
+  reported_at: '2026-10-21T22:56:37Z'
+  bead: think-tmwt
+  claims:
+  - n: 366
+    printed: '19.656854249493'
+    rounding: up
+    exact: 89958739263761169588320428445308014283221195197145054853669438330538875307160540078543879184707588397171/4576456543960194931282571407551335685804336062596184387988797828552996622120775298799573100710767469181
+    exact_from: certified_bounds.json at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (the bound it states)
+  - n: 372
+    printed: '19.822875655562'
+    rounding: up
+    exact: 17883009298919530533553200179/902140012864500000000000000
+    exact_from: certificates/n372.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 409
+    printed: '20.767428349965'
+    rounding: up
+    exact: 6880350962082345238114488011490642382990126114760193790505670976537/331304909117169496147556853313049091171694961475568500000000000000
+    exact_from: certificates/n409.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 447
+    printed: '21.692388155448'
+    rounding: up
+    exact: 6105864450853120439520715891/281474976710656000000000000
+    exact_from: certificates/n447.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 450
+    printed: '21.767428349965'
+    rounding: up
+    exact: 7211655871199514734262044864803691474161821076235762290505670976537/331304909117169496147556853313049091171694961475568500000000000000
+    exact_from: certificates/n450.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 453
+    printed: '21.822995415462'
+    rounding: up
+    exact: 2182299541546189299541544107/100000000000000000000000000
+    exact_from: certificates/n453.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 535
+    printed: '23.656854249519'
+    rounding: up
+    exact: 21475921490587412117732654041/907809688645500000000000000
+    exact_from: certificates/n535.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 582
+    printed: '24.656854249519'
+    rounding: up
+    exact: 22383731179232912117732654041/907809688645500000000000000
+    exact_from: certificates/n582.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 591
+    printed: '24.828427124775'
+    rounding: up
+    exact: 110661779275378006574210087623/4457059592186500000000000000
+    exact_from: certificates/n591.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 631
+    printed: '25.656854249519'
+    rounding: up
+    exact: 23291540867878412117732654041/907809688645500000000000000
+    exact_from: certificates/n631.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 633
+    printed: '25.677669529693'
+    rounding: up
+    exact: 111028825052052639583387223531/4323944777140500000000000000
+    exact_from: certificates/n633.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 640
+    printed: '25.828427124775'
+    rounding: up
+    exact: 115118838867564506574210087623/4457059592186500000000000000
+    exact_from: certificates/n640.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 649
+    printed: '25.974939166866'
+    rounding: up
+    exact: 6493734791716402734791709909/250000000000000000000000000
+    exact_from: certificates/n649.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 682
+    printed: '26.656854249519'
+    rounding: up
+    exact: 24199350556523912117732654041/907809688645500000000000000
+    exact_from: certificates/n682.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 684
+    printed: '26.677669529693'
+    rounding: up
+    exact: 115352769829193139583387223531/4323944777140500000000000000
+    exact_from: certificates/n684.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 691
+    printed: '26.828427124775'
+    rounding: up
+    exact: 119575898459751006574210087623/4457059592186500000000000000
+    exact_from: certificates/n691.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 695
+    printed: '26.899494936642'
+    rounding: up
+    exact: 60584347413708834354888971453/2252248510851500000000000000
+    exact_from: certificates/n695.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 735
+    printed: '27.656854249519'
+    rounding: up
+    exact: 25107160245169412117732654041/907809688645500000000000000
+    exact_from: certificates/n735.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 737
+    printed: '27.677669529693'
+    rounding: up
+    exact: 119676714606333639583387223531/4323944777140500000000000000
+    exact_from: certificates/n737.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 742
+    printed: '27.778174593084'
+    rounding: up
+    exact: 66971710711407904638316865519/2410947144384500000000000000
+    exact_from: certificates/n742.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 745
+    printed: '27.828427124777'
+    rounding: up
+    exact: 2251687188748935613928386752607739851872275226080305609/80913203561700000000000000809132035617000000000000000
+    exact_from: certificates/n745.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 790
+    printed: '28.656854249519'
+    rounding: up
+    exact: 26014969933814912117732654041/907809688645500000000000000
+    exact_from: certificates/n790.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 791
+    printed: '28.656854249525'
+    rounding: up
+    exact: 112297992171607718403256921173/3918713170461500000000000000
+    exact_from: certificates/n791.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 797
+    printed: '28.778174593084'
+    rounding: up
+    exact: 69382657855792404638316865519/2410947144384500000000000000
+    exact_from: certificates/n797.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 798
+    printed: '28.798989873256'
+    rounding: up
+    exact: 130745929920144925112883379827/4539948466788500000000000000
+    exact_from: certificates/n798.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 799
+    printed: '28.798989873256'
+    rounding: up
+    exact: 130745929920144925112883379827/4539948466788500000000000000
+    exact_from: certificates/n799.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 810
+    printed: '28.951463061398'
+    rounding: up
+    exact: 289514630613978789265660013152658019852368893378633713492795362653543557146068222308638023941041241424204804114778247728586353395029031655833893827096733406569718136212204733/10000000000000000000000000000002351646480753390444953839622466429758199411053384258253033584419062061714957283082577492257162250000000000000000000000000000000000000000000000
+    exact_from: certificates/n810.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 812
+    printed: '28.976914446464'
+    rounding: up
+    exact: 5795382889292688382889287093/200000000000000000000000000
+    exact_from: certificates/n812.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 933
+    printed: '30.992883399226'
+    rounding: up
+    exact: 968527606225800277606224863/31250000000000000000000000
+    exact_from: certificates/n933.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 934
+    printed: '30.994174058157'
+    rounding: up
+    exact: 30994174058156151174058125157/1000000000000000000000000000
+    exact_from: certificates/n934.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 990
+    printed: '31.975405698330'
+    rounding: up
+    exact: 99923142807280144219618114971776332436848328762321169505512264449173016626412684305898680447782014028491498637/3124999999999994375000000000005062499999999997750000000000000500000000000000000000000000000000000000000000000
+    exact_from: certificates/n990.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 991
+    printed: '31.977403109933'
+    rounding: up
+    exact: 63954806219864954806219803/2000000000000000000000000
+    exact_from: certificates/n991.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 997
+    printed: '31.996875920295'
+    rounding: up
+    exact: 799921898007350921898006551/25000000000000000000000000
+    exact_from: certificates/n997.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 1061
+    printed: '32.995954740113'
+    rounding: up
+    exact: 18356885580070065456184523141764729762262683550791481462273/556337457868852013956840754578688520139512773800000000000
+    exact_from: certificates/parents/b86d46b6a3245228c6ac26bbd9056f069dd28c872a9e6faf9928dc81955d4bca.cert
+      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+  - n: 1128
+    printed: '33.998294117981'
+    rounding: up
+    exact: 13599317647192037572037504689187968542119/400000000000000000000000000000000000000
+    exact_from: certificates/best/n1128.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 1196
+    printed: '34.998294118334'
+    rounding: up
+    exact: 174991470591666186673092778325579252648447/5000000000000000000000000000000000000000
+    exact_from: certificates/best/n1196.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 1266
+    printed: '35.996046404219'
+    rounding: up
+    exact: 71992092808437527755203280686701868421267/2000000000000000000000000000000000000000
+    exact_from: certificates/parents/309d732d2f20d00c085242b03dd1a033a366da62c5b9f8b07f1f98a0bac0b6b1.cert
+      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+  - n: 1339
+    printed: '36.997865207179'
+    rounding: up
+    exact: 184989326035893969510633969107327704569719/5000000000000000000000000000000000000000
+    exact_from: certificates/parents/5801aea03fb59583d16dfc9fe9d98e187379e4391b53f6d0a533c594b5e5e678.cert
+      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+  - n: 1413
+    printed: '37.999336623140'
+    rounding: up
+    exact: 144745072094959935924752841/3809147341978000000000000
+    exact_from: certificates/parents/556ad01c699c05b1578a91a823ce32a3db366abf3856c78926816e46011b78e3.cert
+      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+  - n: 1489
+    printed: '38.997600152000'
+    rounding: up
+    exact: 405994634557540583875100791/10410759456354000000000000
+    exact_from: certificates/parents/d14390dc7c4f8e151dc11e0ca0361bbda91b174c8e5d1c54691faa8048aef5b9.cert
+      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+  - n: 1568
+    printed: '39.999336626159'
+    rounding: up
+    exact: 399993366261589318512711221794625566636181/10000000000000000000000000000000000000000
+    exact_from: certificates/parents/e8b290f25544265ca999016c8f6f4fb671d25688cf47bf39d0429713d7afebb8.cert
+      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+  note: 'A publication in a watched repository with no issue, dated by its first commit, or
+    by the later push that made it public; transcribed from the mishapolk-issue719-2026-10-22
+    packet''s receipts/earlier-publications.json at each count #719 claims where it is strictly
+    below the record''s standing side. Its rows are its own import''s (think-tmwt); none is
+    recorded by this pass.'
+- report: '#715'
+  url: https://github.com/jlevy/squares/issues/715
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-21T20:55:57Z'
+  bead: think-cyal
+  claims:
+  - n: 535
+    printed: '23.656854249519'
+    rounding: up
+    exact: 21475921490587412117732654041/907809688645500000000000000
+    exact_from: certificates/n535.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 582
+    printed: '24.656854249519'
+    rounding: up
+    exact: 22383731179232912117732654041/907809688645500000000000000
+    exact_from: certificates/n582.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 591
+    printed: '24.828427124775'
+    rounding: up
+    exact: 110661779275378006574210087623/4457059592186500000000000000
+    exact_from: certificates/n591.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 631
+    printed: '25.656854249519'
+    rounding: up
+    exact: 23291540867878412117732654041/907809688645500000000000000
+    exact_from: certificates/n631.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 633
+    printed: '25.677669529693'
+    rounding: up
+    exact: 111028825052052639583387223531/4323944777140500000000000000
+    exact_from: certificates/n633.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 640
+    printed: '25.828427124775'
+    rounding: up
+    exact: 115118838867564506574210087623/4457059592186500000000000000
+    exact_from: certificates/n640.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 682
+    printed: '26.656854249519'
+    rounding: up
+    exact: 24199350556523912117732654041/907809688645500000000000000
+    exact_from: certificates/n682.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 684
+    printed: '26.677669529693'
+    rounding: up
+    exact: 115352769829193139583387223531/4323944777140500000000000000
+    exact_from: certificates/n684.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 691
+    printed: '26.828427124775'
+    rounding: up
+    exact: 119575898459751006574210087623/4457059592186500000000000000
+    exact_from: certificates/n691.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 695
+    printed: '26.899494936642'
+    rounding: up
+    exact: 60584347413708834354888971453/2252248510851500000000000000
+    exact_from: certificates/n695.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 735
+    printed: '27.656854249519'
+    rounding: up
+    exact: 25107160245169412117732654041/907809688645500000000000000
+    exact_from: certificates/n735.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 737
+    printed: '27.677669529693'
+    rounding: up
+    exact: 119676714606333639583387223531/4323944777140500000000000000
+    exact_from: certificates/n737.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 742
+    printed: '27.778174593084'
+    rounding: up
+    exact: 66971710711407904638316865519/2410947144384500000000000000
+    exact_from: certificates/n742.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 745
+    printed: '27.828427124777'
+    rounding: up
+    exact: 2251687188748935613928386752607739851872275226080305609/80913203561700000000000000809132035617000000000000000
+    exact_from: certificates/n745.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 790
+    printed: '28.656854249519'
+    rounding: up
+    exact: 26014969933814912117732654041/907809688645500000000000000
+    exact_from: certificates/n790.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 791
+    printed: '28.656854249525'
+    rounding: up
+    exact: 112297992171607718403256921173/3918713170461500000000000000
+    exact_from: certificates/n791.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 797
+    printed: '28.778174593084'
+    rounding: up
+    exact: 69382657855792404638316865519/2410947144384500000000000000
+    exact_from: certificates/n797.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 798
+    printed: '28.798989873256'
+    rounding: up
+    exact: 130745929920144925112883379827/4539948466788500000000000000
+    exact_from: certificates/n798.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 799
+    printed: '28.798989873256'
+    rounding: up
+    exact: 130745929920144925112883379827/4539948466788500000000000000
+    exact_from: certificates/n799.cert (its header) at franciscouzo/square-packing@6b7391de,
+      retained and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 1061
+    printed: '32.995954738136'
+    rounding: up
+    exact: 82146354562160256765907529/2489588654551600000000000
+    exact_from: certificates/n1061.cert (its header) at franciscouzo/square-packing@6b7391de,
+      the certificate the issue links, read from a clone; not retained (think-f2io)
+  - n: 1266
+    printed: '35.996046403807'
+    rounding: up
+    exact: 7154126068419701653805424823963748218039263/198747550999465681895967823754000000000000
+    exact_from: certificates/n1266.cert (its header) at franciscouzo/square-packing@6b7391de,
+      the certificate the issue links, read from a clone; not retained (think-f2io)
+  - n: 1339
+    printed: '36.997865205268'
+    rounding: up
+    exact: 247766578754686340078410594673928318675693220397772935889853173650099414015041/6696780405573488981509794157808108624275049063537523737344606208000000000000
+    exact_from: certificates/n1339.cert (its header) at franciscouzo/square-packing@6b7391de,
+      the certificate the issue links, read from a clone; not retained (think-f2io)
+  - n: 1413
+    printed: '37.999315487115'
+    rounding: up
+    exact: 8680015823225610841212421002804535039751972457966549578273/228425583775820037555361555837758200375530773000000000000
+    exact_from: certificates/n1413.cert (its header) at franciscouzo/square-packing@6b7391de,
+      the certificate the issue links, read from a clone; not retained (think-f2io)
+  - n: 1489
+    printed: '38.997599735618'
+    rounding: up
+    exact: 2129694834888432657321383/54610920911200000000000
+    exact_from: certificates/n1489.cert (its header) at franciscouzo/square-packing@6b7391de,
+      the certificate the issue links, read from a clone; not retained (think-f2io)
+  - n: 1568
+    printed: '39.999336624698'
+    rounding: up
+    exact: 213802133319945456991340859/5345141978878000000000000
+    exact_from: certificates/n1568.cert (its header) at franciscouzo/square-packing@6b7391de,
+      the certificate the issue links, read from a clone; not retained (think-f2io)
+  note: 'Issue 715''s rows at the counts issue 719 also claims that no row of the couzo-issue715-2026-10-21
+    source holds: its re-certifications of the 4e4c8ce certificates below the 12-place print,
+    at their exact sides from that packet''s filtered replay, which wait on a decision (think-fwa9),
+    and its rows above 1024, at the exact sides of the certificates the issue links, which
+    wait on the owner (think-f2io). None is recorded by this pass.'
+- report: '#719'
+  url: https://github.com/jlevy/squares/issues/719
+  kind: issue
+  holders: Mykhailo Polkovskyi
+  reported_at: '2026-10-22T05:30:47Z'
+  bead: think-xyhn
+  claims:
+  - n: 105
+    printed: '10.7893037837429748'
+    rounding: binary64
+    exact: 674331486483935962030285457609/62500000000000000000000000000
+    exact_from: facts/n-105.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-105.cert at 12fc4667 (its header)
+  - n: 204
+    printed: '14.8086428305278961'
+    rounding: binary64
+    exact: 882663895519250432/59604644775390625
+    exact_from: facts/n-204.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-204.cert at 12fc4667 (its header)
+  - n: 330
+    printed: '18.6926724444540682'
+    rounding: binary64
+    exact: 5570850504772087808/298023223876953125
+    exact_from: facts/n-330.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-330.cert at 12fc4667 (its header)
+  - n: 339
+    printed: '18.9073514711767388'
+    rounding: binary64
+    exact: 5634829840414744576/298023223876953125
+    exact_from: facts/n-339.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-339.cert at 12fc4667 (its header)
+  - n: 342
+    printed: '18.9647067231682804'
+    rounding: binary64
+    exact: 5651923037519538176/298023223876953125
+    exact_from: facts/n-342.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-342.cert at 12fc4667 (its header)
+  - n: 344
+    printed: '18.9927278093559089'
+    rounding: binary64
+    exact: 5660273971961709568/298023223876953125
+    exact_from: facts/n-344.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-344.cert at 12fc4667 (its header)
+  - n: 366
+    printed: '19.7388031475702945'
+    rounding: binary64
+    exact: 5882621749511448576/298023223876953125
+    exact_from: facts/n-366.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-366.cert at 12fc4667 (its header)
+  - n: 370
+    printed: '19.7674283499617083'
+    rounding: binary64
+    exact: 5891152724612268032/298023223876953125
+    exact_from: facts/n-370.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-370.cert at 12fc4667 (its header)
+  - n: 372
+    printed: '19.8228756555523127'
+    rounding: binary64
+    exact: 1181535461875934208/59604644775390625
+    exact_from: facts/n-372.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-372.cert at 12fc4667 (its header)
+  - n: 377
+    printed: '19.9254716539692609'
+    rounding: binary64
+    exact: 5938253299584764928/298023223876953125
+    exact_from: facts/n-377.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-377.cert at 12fc4667 (its header)
+  - n: 378
+    printed: '19.9420180574448551'
+    rounding: binary64
+    exact: 5943184512092130304/298023223876953125
+    exact_from: facts/n-378.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-378.cert at 12fc4667 (its header)
+  - n: 379
+    printed: '19.9508896814991914'
+    rounding: binary64
+    exact: 5945828462093827072/298023223876953125
+    exact_from: facts/n-379.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-379.cert at 12fc4667 (its header)
+  - n: 380
+    printed: '19.9613500238311268'
+    rounding: binary64
+    exact: 5948945887038447616/298023223876953125
+    exact_from: facts/n-380.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-380.cert at 12fc4667 (its header)
+  - n: 381
+    printed: '19.9747398404791632'
+    rounding: binary64
+    exact: 5952936363363016704/298023223876953125
+    exact_from: facts/n-381.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-381.cert at 12fc4667 (its header)
+  - n: 409
+    printed: '20.7674283499626853'
+    rounding: binary64
+    exact: 1237835189697902592/59604644775390625
+    exact_from: facts/n-409.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-409.cert at 12fc4667 (its header)
+  - n: 410
+    printed: '20.7781745930728796'
+    rounding: binary64
+    exact: 6192378578505778176/298023223876953125
+    exact_from: facts/n-410.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-410.cert at 12fc4667 (its header)
+  - n: 412
+    printed: '20.8229954154576440'
+    rounding: binary64
+    exact: 248229448979588096/11920928955078125
+    exact_from: facts/n-412.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-412.cert at 12fc4667 (its header)
+  - n: 413
+    printed: '20.8316633653748795'
+    rounding: binary64
+    exact: 6208319474868440064/298023223876953125
+    exact_from: facts/n-413.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-413.cert at 12fc4667 (its header)
+  - n: 417
+    printed: '20.9332107700260792'
+    rounding: binary64
+    exact: 209332107700260781517446329/10000000000000000000000000
+    exact_from: facts/n-417.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-417.cert at 12fc4667 (its header)
+  - n: 418
+    printed: '20.9391841282486943'
+    rounding: binary64
+    exact: 6240363159253804032/298023223876953125
+    exact_from: facts/n-418.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-418.cert at 12fc4667 (its header)
+  - n: 419
+    printed: '20.9578048362645823'
+    rounding: binary64
+    exact: 6245912562687570944/298023223876953125
+    exact_from: facts/n-419.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-419.cert at 12fc4667 (its header)
+  - n: 420
+    printed: '20.9665881911787615'
+    rounding: binary64
+    exact: 6248530206435550208/298023223876953125
+    exact_from: facts/n-420.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-420.cert at 12fc4667 (its header)
+  - n: 421
+    printed: '20.9762739979630339'
+    rounding: binary64
+    exact: 209762739979630332988009159/10000000000000000000000000
+    exact_from: facts/n-421.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-421.cert at 12fc4667 (its header)
+  - n: 422
+    printed: '20.9835752545799785'
+    rounding: binary64
+    exact: 1250718549166916608/59604644775390625
+    exact_from: facts/n-422.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-422.cert at 12fc4667 (its header)
+  - n: 447
+    printed: '21.6903559373146493'
+    rounding: binary64
+    exact: 5422588984328662578984323239881/250000000000000000000000000000
+    exact_from: facts/n-447.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-447.cert at 12fc4667 (its header)
+  - n: 450
+    printed: '21.7674283499636907'
+    rounding: binary64
+    exact: 6487199172366765056/298023223876953125
+    exact_from: facts/n-450.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-450.cert at 12fc4667 (its header)
+  - n: 452
+    printed: '21.7781745930739135'
+    rounding: binary64
+    exact: 6490401802383039488/298023223876953125
+    exact_from: facts/n-452.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-452.cert at 12fc4667 (its header)
+  - n: 453
+    printed: '21.8229954154586636'
+    rounding: binary64
+    exact: 6503759448366958592/298023223876953125
+    exact_from: facts/n-453.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-453.cert at 12fc4667 (its header)
+  - n: 454
+    printed: '21.8284271247681012'
+    rounding: binary64
+    exact: 1301075644777304064/59604644775390625
+    exact_from: facts/n-454.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-454.cert at 12fc4667 (its header)
+  - n: 456
+    printed: '21.8813062181121190'
+    rounding: binary64
+    exact: 6521137421760594944/298023223876953125
+    exact_from: facts/n-456.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-456.cert at 12fc4667 (its header)
+  - n: 460
+    printed: '21.9509876879891586'
+    rounding: binary64
+    exact: 6541904118057834496/298023223876953125
+    exact_from: facts/n-460.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-460.cert at 12fc4667 (its header)
+  - n: 462
+    printed: '21.9661922111896395'
+    rounding: binary64
+    exact: 219661922111896412150184471/10000000000000000000000000
+    exact_from: facts/n-462.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-462.cert at 12fc4667 (its header)
+  - n: 490
+    printed: '22.6568542495151206'
+    rounding: binary64
+    exact: 6752268746350741504/298023223876953125
+    exact_from: facts/n-490.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-490.cert at 12fc4667 (its header)
+  - n: 498
+    printed: '22.8284271247691315'
+    rounding: binary64
+    exact: 6803401447763780608/298023223876953125
+    exact_from: facts/n-498.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-498.cert at 12fc4667 (its header)
+  - n: 499
+    printed: '22.8813062181129858'
+    rounding: binary64
+    exact: 1363832129127561216/59604644775390625
+    exact_from: facts/n-499.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-499.cert at 12fc4667 (its header)
+  - n: 507
+    printed: '22.9736971636574836'
+    rounding: binary64
+    exact: 6846695293086017536/298023223876953125
+    exact_from: facts/n-507.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-507.cert at 12fc4667 (its header)
+  - n: 508
+    printed: '22.9833093783497979'
+    rounding: binary64
+    exact: 6849559956297218048/298023223876953125
+    exact_from: facts/n-508.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-508.cert at 12fc4667 (its header)
+  - n: 535
+    printed: '23.6568542495161900'
+    rounding: binary64
+    exact: 7050291970228013056/298023223876953125
+    exact_from: facts/n-535.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-535.cert at 12fc4667 (its header)
+  - n: 536
+    printed: '23.6776695296874564'
+    rounding: binary64
+    exact: 7056495407130556416/298023223876953125
+    exact_from: facts/n-536.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-536.cert at 12fc4667 (its header)
+  - n: 544
+    printed: '23.8284271247704780'
+    rounding: binary64
+    exact: 7101424671641135104/298023223876953125
+    exact_from: facts/n-544.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-544.cert at 12fc4667 (its header)
+  - n: 551
+    printed: '23.9658016419622690'
+    rounding: binary64
+    exact: 7142365468133172224/298023223876953125
+    exact_from: facts/n-551.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-551.cert at 12fc4667 (its header)
+  - n: 552
+    printed: '23.9666288233401836'
+    rounding: binary64
+    exact: 7142611987394149376/298023223876953125
+    exact_from: facts/n-552.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-552.cert at 12fc4667 (its header)
+  - n: 553
+    printed: '23.9789210762278451'
+    rounding: binary64
+    exact: 47957842152455690625632503/2000000000000000000000000
+    exact_from: facts/n-553.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-553.cert at 12fc4667 (its header)
+  - n: 555
+    printed: '23.9935807135564332'
+    rounding: binary64
+    exact: 7150644276605973504/298023223876953125
+    exact_from: facts/n-555.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-555.cert at 12fc4667 (its header)
+  - n: 582
+    printed: '24.6568542495172451'
+    rounding: binary64
+    exact: 7348315194105280512/298023223876953125
+    exact_from: facts/n-582.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-582.cert at 12fc4667 (its header)
+  - n: 584
+    printed: '24.6776695296884547'
+    rounding: binary64
+    exact: 7354518631007806464/298023223876953125
+    exact_from: facts/n-584.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-584.cert at 12fc4667 (its header)
+  - n: 591
+    printed: '24.8284271247714869'
+    rounding: binary64
+    exact: 7399447895518388224/298023223876953125
+    exact_from: facts/n-591.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-591.cert at 12fc4667 (its header)
+  - n: 596
+    printed: '24.9497474683309122'
+    rounding: binary64
+    exact: 7435604175427827712/298023223876953125
+    exact_from: facts/n-596.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-596.cert at 12fc4667 (its header)
+  - n: 601
+    printed: '24.9853949028319278'
+    rounding: binary64
+    exact: 7446227938780763136/298023223876953125
+    exact_from: facts/n-601.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-601.cert at 12fc4667 (its header)
+  - n: 631
+    printed: '25.6568542495182825'
+    rounding: binary64
+    exact: 7646338417982542848/298023223876953125
+    exact_from: facts/n-631.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-631.cert at 12fc4667 (its header)
+  - n: 633
+    printed: '25.6776695296895383'
+    rounding: binary64
+    exact: 7652541854885083136/298023223876953125
+    exact_from: facts/n-633.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-633.cert at 12fc4667 (its header)
+  - n: 637
+    printed: '25.7781745930779884'
+    rounding: binary64
+    exact: 7682494697892066304/298023223876953125
+    exact_from: facts/n-637.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-637.cert at 12fc4667 (its header)
+  - n: 640
+    printed: '25.8284271247724924'
+    rounding: binary64
+    exact: 7697471119395641344/298023223876953125
+    exact_from: facts/n-640.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-640.cert at 12fc4667 (its header)
+  - n: 641
+    printed: '25.8813062181159843'
+    rounding: binary64
+    exact: 7713230317269559296/298023223876953125
+    exact_from: facts/n-641.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-641.cert at 12fc4667 (its header)
+  - n: 642
+    printed: '25.8813062181159843'
+    rounding: binary64
+    exact: 7713230317269559296/298023223876953125
+    exact_from: facts/n-642.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-642.cert at 12fc4667 (its header)
+  - n: 644
+    printed: '25.8994949366377156'
+    rounding: binary64
+    exact: 7718650977801595904/298023223876953125
+    exact_from: facts/n-644.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-644.cert at 12fc4667 (its header)
+  - n: 649
+    printed: '25.9748973459228907'
+    rounding: binary64
+    exact: 259748973459228904465293973/10000000000000000000000000
+    exact_from: facts/n-649.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-649.cert at 12fc4667 (its header)
+  - n: 650
+    printed: '25.9748809420021658'
+    rounding: binary64
+    exact: 1548223551631102976/59604644775390625
+    exact_from: facts/n-650.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-650.cert at 12fc4667 (its header)
+  - n: 652
+    printed: '25.9881250760857050'
+    rounding: binary64
+    exact: 1549012963538509824/59604644775390625
+    exact_from: facts/n-652.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-652.cert at 12fc4667 (its header)
+  - n: 682
+    printed: '26.6568542495058907'
+    rounding: binary64
+    exact: 7944361641855803392/298023223876953125
+    exact_from: facts/n-682.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-682.cert at 12fc4667 (its header)
+  - n: 684
+    printed: '26.6776695296907000'
+    rounding: binary64
+    exact: 7950565078762382336/298023223876953125
+    exact_from: facts/n-684.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-684.cert at 12fc4667 (its header)
+  - n: 689
+    printed: '26.7781745930789761'
+    rounding: binary64
+    exact: 7980517921769314304/298023223876953125
+    exact_from: facts/n-689.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-689.cert at 12fc4667 (its header)
+  - n: 691
+    printed: '26.8284271247735191'
+    rounding: binary64
+    exact: 7995494343272900608/298023223876953125
+    exact_from: facts/n-691.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-691.cert at 12fc4667 (its header)
+  - n: 692
+    printed: '26.8284271247731461'
+    rounding: binary64
+    exact: 7995494343272788992/298023223876953125
+    exact_from: facts/n-692.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-692.cert at 12fc4667 (its header)
+  - n: 693
+    printed: '26.8813062181169933'
+    rounding: binary64
+    exact: 8011253541146812416/298023223876953125
+    exact_from: facts/n-693.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-693.cert at 12fc4667 (its header)
+  - n: 695
+    printed: '26.8994949366386997'
+    rounding: binary64
+    exact: 8016674201678841856/298023223876953125
+    exact_from: facts/n-695.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-695.cert at 12fc4667 (its header)
+  - n: 699
+    printed: '26.9497474683329123'
+    rounding: binary64
+    exact: 8031650623182329856/298023223876953125
+    exact_from: facts/n-699.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-699.cert at 12fc4667 (its header)
+  - n: 701
+    printed: '26.9700653112172652'
+    rounding: binary64
+    exact: 269700653112172655029657023/10000000000000000000000000
+    exact_from: facts/n-701.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-701.cert at 12fc4667 (its header)
+  - n: 703
+    printed: '26.9813119207547061'
+    rounding: binary64
+    exact: 1608211512610596864/59604644775390625
+    exact_from: facts/n-703.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-703.cert at 12fc4667 (its header)
+  - n: 704
+    printed: '26.9871091926749678'
+    rounding: binary64
+    exact: 8042785284720351232/298023223876953125
+    exact_from: facts/n-704.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-704.cert at 12fc4667 (its header)
+  - n: 705
+    printed: '26.9903755780257875'
+    rounding: binary64
+    exact: 1608751748682605568/59604644775390625
+    exact_from: facts/n-705.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-705.cert at 12fc4667 (its header)
+  - n: 735
+    printed: '27.6568542495066403'
+    rounding: binary64
+    exact: 8242384865732979712/298023223876953125
+    exact_from: facts/n-735.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-735.cert at 12fc4667 (its header)
+  - n: 736
+    printed: '27.6568542495202685'
+    rounding: binary64
+    exact: 8242384865737040896/298023223876953125
+    exact_from: facts/n-736.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-736.cert at 12fc4667 (its header)
+  - n: 737
+    printed: '27.6776695296915705'
+    rounding: binary64
+    exact: 8248588302639594496/298023223876953125
+    exact_from: facts/n-737.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-737.cert at 12fc4667 (its header)
+  - n: 742
+    printed: '27.7781745930799566'
+    rounding: binary64
+    exact: 8278541145646559232/298023223876953125
+    exact_from: facts/n-742.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-742.cert at 12fc4667 (its header)
+  - n: 743
+    printed: '27.7989898732512835'
+    rounding: binary64
+    exact: 13255591332078592/476837158203125
+    exact_from: facts/n-743.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-743.cert at 12fc4667 (its header)
+  - n: 744
+    printed: '27.7989898732513581'
+    rounding: binary64
+    exact: 8284744582549142528/298023223876953125
+    exact_from: facts/n-744.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-744.cert at 12fc4667 (its header)
+  - n: 745
+    printed: '27.8284271247741621'
+    rounding: binary64
+    exact: 8293517567150045184/298023223876953125
+    exact_from: facts/n-745.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-745.cert at 12fc4667 (its header)
+  - n: 746
+    printed: '27.8284271247742012'
+    rounding: binary64
+    exact: 8293517567150056448/298023223876953125
+    exact_from: facts/n-746.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-746.cert at 12fc4667 (its header)
+  - n: 753
+    printed: '27.9324498863881487'
+    rounding: binary64
+    exact: 8324518765922829312/298023223876953125
+    exact_from: facts/n-753.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-753.cert at 12fc4667 (its header)
+  - n: 754
+    printed: '27.9374233139930546'
+    rounding: binary64
+    exact: 8326000962851361792/298023223876953125
+    exact_from: facts/n-754.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-754.cert at 12fc4667 (its header)
+  - n: 755
+    printed: '27.9514629577605831'
+    rounding: binary64
+    exact: 8330185102749044736/298023223876953125
+    exact_from: facts/n-755.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-755.cert at 12fc4667 (its header)
+  - n: 757
+    printed: '27.9769144464501274'
+    rounding: binary64
+    exact: 8337770237460770816/298023223876953125
+    exact_from: facts/n-757.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-757.cert at 12fc4667 (its header)
+  - n: 758
+    printed: '27.9822355374306575'
+    rounding: binary64
+    exact: 8339356046149330944/298023223876953125
+    exact_from: facts/n-758.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-758.cert at 12fc4667 (its header)
+  - n: 759
+    printed: '27.9885691622969013'
+    rounding: binary64
+    exact: 8341243613450796032/298023223876953125
+    exact_from: facts/n-759.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-759.cert at 12fc4667 (its header)
+  - n: 790
+    printed: '28.6568542495070275'
+    rounding: binary64
+    exact: 8540408089610048512/298023223876953125
+    exact_from: facts/n-790.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-790.cert at 12fc4667 (its header)
+  - n: 791
+    printed: '28.6568542495212277'
+    rounding: binary64
+    exact: 8540408089614280704/298023223876953125
+    exact_from: facts/n-791.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-791.cert at 12fc4667 (its header)
+  - n: 792
+    printed: '28.6568542495212135'
+    rounding: binary64
+    exact: 8540408089614276608/298023223876953125
+    exact_from: facts/n-792.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-792.cert at 12fc4667 (its header)
+  - n: 797
+    printed: '28.7781745930809798'
+    rounding: binary64
+    exact: 8576564369523817472/298023223876953125
+    exact_from: facts/n-797.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-797.cert at 12fc4667 (its header)
+  - n: 798
+    printed: '28.7989898732522818'
+    rounding: binary64
+    exact: 8582767806426371072/298023223876953125
+    exact_from: facts/n-798.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-798.cert at 12fc4667 (its header)
+  - n: 799
+    printed: '28.7989898732523031'
+    rounding: binary64
+    exact: 8582767806426377216/298023223876953125
+    exact_from: facts/n-799.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-799.cert at 12fc4667 (its header)
+  - n: 800
+    printed: '28.7989898732523351'
+    rounding: binary64
+    exact: 8582767806426386432/298023223876953125
+    exact_from: facts/n-800.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-800.cert at 12fc4667 (its header)
+  - n: 810
+    printed: '28.9514630500047723'
+    rounding: binary64
+    exact: 8628208354116908032/298023223876953125
+    exact_from: facts/n-810.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-810.cert at 12fc4667 (its header)
+  - n: 811
+    printed: '28.9743521869765459'
+    rounding: binary64
+    exact: 2897435218697654690802373/100000000000000000000000
+    exact_from: facts/n-811.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-811.cert at 12fc4667 (its header)
+  - n: 812
+    printed: '28.9769143205190431'
+    rounding: binary64
+    exact: 8635793423807335424/298023223876953125
+    exact_from: facts/n-812.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-812.cert at 12fc4667 (its header)
+  - n: 816
+    printed: '28.9959445386864587'
+    rounding: binary64
+    exact: 8641464870776671232/298023223876953125
+    exact_from: facts/n-816.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-816.cert at 12fc4667 (its header)
+  - n: 868
+    printed: '29.9742166092550129'
+    rounding: binary64
+    exact: 8933012667076293632/298023223876953125
+    exact_from: facts/n-868.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-868.cert at 12fc4667 (its header)
+  - n: 869
+    printed: '29.9749357188757237'
+    rounding: binary64
+    exact: 74937339297189308801270217/2500000000000000000000000
+    exact_from: facts/n-869.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-869.cert at 12fc4667 (its header)
+  - n: 872
+    printed: '29.9922154605662570'
+    rounding: binary64
+    exact: 8938376742770152448/298023223876953125
+    exact_from: facts/n-872.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-872.cert at 12fc4667 (its header)
+  - n: 874
+    printed: '29.9926541962530777'
+    rounding: binary64
+    exact: 299926541962530774705606471/10000000000000000000000000
+    exact_from: facts/n-874.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-874.cert at 12fc4667 (its header)
+  - n: 927
+    printed: '30.9691903108826168'
+    rounding: binary64
+    exact: 9229537937308137472/298023223876953125
+    exact_from: facts/n-927.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-927.cert at 12fc4667 (its header)
+  - n: 928
+    printed: '30.9744956681247743'
+    rounding: binary64
+    exact: 1846223811395452928/59604644775390625
+    exact_from: facts/n-928.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-928.cert at 12fc4667 (its header)
+  - n: 929
+    printed: '30.9753932494690254'
+    rounding: binary64
+    exact: 9231386557063170048/298023223876953125
+    exact_from: facts/n-929.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-929.cert at 12fc4667 (its header)
+  - n: 930
+    printed: '30.9772726277994437'
+    rounding: binary64
+    exact: 61954545255598888093050689/2000000000000000000000000
+    exact_from: facts/n-930.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-930.cert at 12fc4667 (its header)
+  - n: 932
+    printed: '30.9906441863849018'
+    rounding: binary64
+    exact: 9235931690449983488/298023223876953125
+    exact_from: facts/n-932.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-932.cert at 12fc4667 (its header)
+  - n: 933
+    printed: '30.9906396110631484'
+    rounding: binary64
+    exact: 9235930326897844224/298023223876953125
+    exact_from: facts/n-933.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-933.cert at 12fc4667 (its header)
+  - n: 934
+    printed: '30.9940783327694191'
+    rounding: binary64
+    exact: 9236955145826762752/298023223876953125
+    exact_from: facts/n-934.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-934.cert at 12fc4667 (its header)
+  - n: 990
+    printed: '31.9753934398895581'
+    rounding: binary64
+    exact: 9529409837689864192/298023223876953125
+    exact_from: facts/n-990.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-990.cert at 12fc4667 (its header)
+  - n: 991
+    printed: '31.9756199047897383'
+    rounding: binary64
+    exact: 319756199047897387425559881/10000000000000000000000000
+    exact_from: facts/n-991.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-991.cert at 12fc4667 (its header)
+  - n: 992
+    printed: '31.9776473755027233'
+    rounding: binary64
+    exact: 79944118438756805625517361/2500000000000000000000000
+    exact_from: facts/n-992.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-992.cert at 12fc4667 (its header)
+  - n: 993
+    printed: '31.9838955805472231'
+    rounding: binary64
+    exact: 9531943673058516992/298023223876953125
+    exact_from: facts/n-993.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-993.cert at 12fc4667 (its header)
+  - n: 994
+    printed: '31.9906763852541545'
+    rounding: binary64
+    exact: 319906763852541558003749823/10000000000000000000000000
+    exact_from: facts/n-994.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-994.cert at 12fc4667 (its header)
+  - n: 996
+    printed: '31.9934449769752192'
+    rounding: binary64
+    exact: 39991806221219024636516041/1250000000000000000000000
+    exact_from: facts/n-996.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-996.cert at 12fc4667 (its header)
+  - n: 997
+    printed: '31.9968759191575884'
+    rounding: binary64
+    exact: 9535812115418191872/298023223876953125
+    exact_from: facts/n-997.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
+      certificates/n-997.cert at 12fc4667 (its header)
+  - n: 1061
+    printed: '32.9956811739297748'
+    rounding: binary64
+    exact: 329956811739297758545091679/10000000000000000000000000
+    exact_from: certificates/n-1061.cert at 12fc4667 (its header), pinned by digest in the
+      mishapolk-issue719-2026-10-22 packet and read from a clone; not derived until the owner's
+      D1
+  - n: 1128
+    printed: '33.9972722117471022'
+    rounding: binary64
+    exact: 10131976667567224832/298023223876953125
+    exact_from: certificates/n-1128.cert at 12fc4667 (its header), pinned by digest in the
+      mishapolk-issue719-2026-10-22 packet and read from a clone; not derived until the owner's
+      D1
+  - n: 1196
+    printed: '34.9966951712759240'
+    rounding: binary64
+    exact: 349966951712759224663978217/10000000000000000000000000
+    exact_from: certificates/n-1196.cert at 12fc4667 (its header), pinned by digest in the
+      mishapolk-issue719-2026-10-22 packet and read from a clone; not derived until the owner's
+      D1
+  - n: 1266
+    printed: '35.9951719516850943'
+    rounding: binary64
+    exact: 10727397189046470656/298023223876953125
+    exact_from: certificates/n-1266.cert at 12fc4667 (its header), pinned by digest in the
+      mishapolk-issue719-2026-10-22 packet and read from a clone; not derived until the owner's
+      D1
+  - n: 1339
+    printed: '36.9972433771151188'
+    rounding: binary64
+    exact: 11026037745808099328/298023223876953125
+    exact_from: certificates/n-1339.cert at 12fc4667 (its header), pinned by digest in the
+      mishapolk-issue719-2026-10-22 packet and read from a clone; not derived until the owner's
+      D1
+  - n: 1413
+    printed: '37.9987133186672281'
+    rounding: binary64
+    exact: 452979961856212992/11920928955078125
+    exact_from: certificates/n-1413.cert at 12fc4667 (its header), pinned by digest in the
+      mishapolk-issue719-2026-10-22 packet and read from a clone; not derived until the owner's
+      D1
+  - n: 1489
+    printed: '38.9972984908123834'
+    rounding: binary64
+    exact: 11622100618723745792/298023223876953125
+    exact_from: certificates/n-1489.cert at 12fc4667 (its header), pinned by digest in the
+      mishapolk-issue719-2026-10-22 packet and read from a clone; not derived until the owner's
+      D1
+  - n: 1568
+    printed: '39.9986704693230806'
+    rounding: binary64
+    exact: 476821308962381824/11920928955078125
+    exact_from: certificates/n-1568.cert at 12fc4667 (its header), pinned by digest in the
+      mishapolk-issue719-2026-10-22 packet and read from a clone; not derived until the owner's
+      D1
+  note: 'Issue-table prints at all 122 counts: each is the binary64 value of the certificate''s
+    exact header side printed at 16 places, which lies below that side at 76 rows, so each
+    claim carries the exact side and is compared by it. 121 certificates were first committed
+    at 1851c2c (05:29:48Z), a minute before the issue, and 447''s at the pin (06:05:07Z);
+    no other report reached the repository at these counts between those times.'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []
