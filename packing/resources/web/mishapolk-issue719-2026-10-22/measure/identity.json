@@ -1,0 +1,193 @@
+{
+ "format": "mishapolk-719-identity-v1",
+ "tilted_squares": {
+  "105": 43,
+  "204": 77
+ },
+ "pairs": [
+  {
+   "n": 105,
+   "view": "#719",
+   "against": "T-174 (PR 574)",
+   "side_difference": "-5.183438e-12",
+   "side_difference_exact": "-2089025172676605427189198997799613208245254725808874216707057311103280716830963180673444559667024058054381996189624634554960490877412007456877939191870223820603939018473853719805820620603056672942743065398849164885008766129282261874279673883441910149682423829297334538170250760139489143457335734400601881197234470271059437119249548587435210726933734459702753823497895456252654985188483790359650315456484120919904755796673454565642528675940099922051286037604254652811214255251344682347773/403019191979063716046027574877978127588534650527751084196774281639432639417501161499079773904421743741396711265007898089928684544592967915599387175948425999468413559512669009443819419442865758919943114623320996909234499701964019955654955990536198173409161358451366241647057780436093973733522766263084702358278406163973043361887261592991617309953945920358390805964130271668570328615792989006501733853637816839158009496342557852455455731452865376067212067560680550396662687500000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 0,
+    "largest_displacement": "4.900890e-2",
+    "largest_turn_degrees": "2.411",
+    "moved_beyond": {
+     "1e-9": 71,
+     "1e-6": 42,
+     "1e-3": 42,
+     "1e-2": 27,
+     "1e-1": 0
+    },
+    "turned_beyond_1e-6": 9
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.0490089",
+    "moved_beyond": {
+     "1e-9": 71,
+     "1e-6": 42,
+     "1e-3": 42,
+     "1e-2": 27,
+     "1e-1": 0
+    },
+    "largest_turn_degrees": "2.411",
+    "turned_beyond_1e-6": 9
+   }
+  },
+  {
+   "n": 105,
+   "view": "#719",
+   "against": "T-183 (#593) at 105",
+   "side_difference": "-5.183439e-12",
+   "side_difference_exact": "-5183438550162376177/1000000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 0,
+    "largest_displacement": "4.900890e-2",
+    "largest_turn_degrees": "2.411",
+    "moved_beyond": {
+     "1e-9": 71,
+     "1e-6": 42,
+     "1e-3": 42,
+     "1e-2": 27,
+     "1e-1": 0
+    },
+    "turned_beyond_1e-6": 9
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.0490089",
+    "moved_beyond": {
+     "1e-9": 71,
+     "1e-6": 42,
+     "1e-3": 42,
+     "1e-2": 27,
+     "1e-1": 0
+    },
+    "largest_turn_degrees": "2.411",
+    "turned_beyond_1e-6": 9
+   }
+  },
+  {
+   "n": 204,
+   "view": "#719",
+   "against": "T-225 (evand 0075967)",
+   "side_difference": "-1.006360e-08",
+   "side_difference_exact": "-10063597267311130871459/1000000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 2,
+    "largest_displacement": "2.730522e-1",
+    "largest_turn_degrees": "25.64",
+    "moved_beyond": {
+     "1e-9": 169,
+     "1e-6": 87,
+     "1e-3": 67,
+     "1e-2": 39,
+     "1e-1": 6
+    },
+    "turned_beyond_1e-6": 23
+   },
+   "assignment": {
+    "symmetry": 2,
+    "largest_move": "0.273052",
+    "moved_beyond": {
+     "1e-9": 169,
+     "1e-6": 87,
+     "1e-3": 67,
+     "1e-2": 39,
+     "1e-1": 6
+    },
+    "largest_turn_degrees": "25.64",
+    "turned_beyond_1e-6": 23
+   }
+  },
+  {
+   "n": 204,
+   "view": "#719",
+   "against": "T-223 (#678)",
+   "side_difference": "-1.145335e-08",
+   "side_difference_exact": "-668696457850148493063377/58384352587036132812500000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 0,
+    "largest_displacement": "2.370158e-1",
+    "largest_turn_degrees": "25.64",
+    "moved_beyond": {
+     "1e-9": 172,
+     "1e-6": 91,
+     "1e-3": 60,
+     "1e-2": 29,
+     "1e-1": 7
+    },
+    "turned_beyond_1e-6": 26
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.237016",
+    "moved_beyond": {
+     "1e-9": 172,
+     "1e-6": 91,
+     "1e-3": 60,
+     "1e-2": 29,
+     "1e-1": 7
+    },
+    "largest_turn_degrees": "25.64",
+    "turned_beyond_1e-6": 26
+   }
+  },
+  {
+   "n": 204,
+   "view": "#719",
+   "against": "T-186 (70a033f)",
+   "side_difference": "-2.040386e-05",
+   "side_difference_exact": "-1020192952995528279572430104761481126338872178671530915993369069066972891707484286255665843382616078162213/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": false,
+    "refusal": "no symmetry matches the two packings square for square"
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.716105",
+    "moved_beyond": {
+     "1e-9": 169,
+     "1e-6": 169,
+     "1e-3": 98,
+     "1e-2": 45,
+     "1e-1": 14
+    },
+    "largest_turn_degrees": "25.9",
+    "turned_beyond_1e-6": 75
+   }
+  },
+  {
+   "n": 204,
+   "view": "#719",
+   "against": "T-183 (#593) at 204",
+   "side_difference": "-2.040386e-05",
+   "side_difference_exact": "-10201929529955356839040473/500000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": false,
+    "refusal": "no symmetry matches the two packings square for square"
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.716105",
+    "moved_beyond": {
+     "1e-9": 169,
+     "1e-6": 169,
+     "1e-3": 98,
+     "1e-2": 45,
+     "1e-1": 14
+    },
+    "largest_turn_degrees": "25.91",
+    "turned_beyond_1e-6": 75
+   }
+  }
+ ]
+}

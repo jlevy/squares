@@ -54,6 +54,10 @@ allowlist:
       row, whose root metadata may describe another file than the certificates/best/ file
       the issue links, is bound to the bytes it is about. The retained certificates are
       read from Git and compared with nothing; their custody is acquire_source --check's.
+      A derived packet (#719's) retains no upstream byte, so `first-commits` and `earlier`
+      read each certificate a row names from a clone of the source and hold its bytes to
+      the SHA-256 the packet's manifest pins before taking its Git blob or header; the
+      derived facts' own custody is devtools.upper_bound_reports'.
   - path: packing/devtools/couzo_715_replay.py
     kind: download
     boundary: >-

@@ -1,9 +1,10 @@
-"""The beyond-horizon rows of issues #666, #670, #672 and #675, recorded on 22 October 2026.
+"""The beyond-horizon rows of issues #666, #670, #672, #675 and #719, recorded on 22 October.
 
-`devtools.beyond_horizon_replay` decides the rows at or below 1024 of four reports from
-their retained packets: Joost de Winter's #666 (11 of its 19 rows; the 8 above 1024 wait on
-the owner) and the rows beyond the corpus of Francisco Couzo's #670, #672 and #675, whose
-in-corpus rows T-226 to T-228 register. These tests hold what is particular to the import:
+`devtools.beyond_horizon_replay` decides the rows at or below 1024 of five reports from
+their packets: Joost de Winter's #666 (11 of its 19 rows; the 8 above 1024 wait on the
+owner), the rows beyond the corpus of Francisco Couzo's #670, #672 and #675, whose in-corpus
+rows T-226 to T-228 register, and Mykhailo Polkovskyi's #719, whose packet keeps derived
+facts and no upstream byte. These tests hold what is particular to the import:
 each issue table's rows and the certificate each reads, the receipts and records against the
 packets, the first commit of every certificate, each row's place in the backlog ledger's
 report order and the coverage register's rows that follow from it, each walked count as
@@ -27,8 +28,22 @@ from devtools.retained_data import read_retained_bytes
 from sqpack.yamlio import safe_load
 
 LEDGER = replay.ROOT / "campaign/issue-intake/upper-bounds-backlog-20261022"
+LEDGER_719 = replay.ROOT / "campaign/issue-intake/upper-bounds-issue719-20261022"
+MISHAPOLK = "mishapolk-issue719-2026-10-22"
+#: The four reports the backlog ledger walks.
+BACKLOG = (666, 670, 672, 675)
 #: Each report's rows: the table's, the decided (beyond the corpus to 1024) and the held.
 ROWS = {666: (19, 11, 8), 670: (73, 72, 0), 672: (46, 44, 0), 675: (79, 78, 0)}
+#: The rows #719 supersedes on entry, by the source that held each count.
+SUPERSEDED_BY_719 = {
+    "muglich-issue686-2026-10-19": 42,
+    "couzo-verified-bounds-2026-10-14": 39,
+    "couzo-issue715-2026-10-21": 16,
+    "couzo-issue678-2026-10-18": 7,
+    "couzo-certificates-2026-10-14": 3,
+    "couzo-issue670-2026-10-17": 3,
+    "couzo-extended-range-reports-2026-10-08": 1,
+}
 #: #670's rows that are the current row at their count, and the rows they supersede.
 CURRENT_670 = {
     364: "evand-compositions-2026-10-13",
@@ -128,11 +143,15 @@ def test_every_certificate_was_first_committed_at_the_commit_the_record_states()
     for chosen in replay.RELEASES.values():
         commits = _read(chosen.directory / replay.FIRST_COMMITS)
         assert commits["retained_commit"] == chosen.retained
-        assert {(row["first_commit"], row["committed"]) for row in commits["rows"]} == {
-            (chosen.first_commit, chosen.committed)
-        }
+        for row in commits["rows"]:
+            assert (row["first_commit"], row["committed"]) == chosen.first_commit_of(row["n"])
         record = _read(chosen.directory / replay.RECORD)
-        assert {row["first_committed"] for row in record["results"]} == {chosen.committed}
+        for row in record["results"]:
+            assert row["first_committed"] == chosen.first_commit_of(row["n"])[1]
+    later = replay.release(719)
+    assert {row["n"] for row in _read(later.directory / replay.FIRST_COMMITS)["rows"]} >= {447}
+    assert later.first_commit_of(447) == (later.retained, "2026-10-22T06:05:07Z")
+    assert later.first_commit_of(330) == (later.first_commit, "2026-10-22T05:29:48Z")
 
 
 def test_each_receipt_decided_every_row_and_refused_every_control() -> None:
@@ -217,7 +236,8 @@ def test_each_side_rounds_up_to_its_print_and_the_ledger_reads_the_same_side() -
         for claim in report["claims"]
         if "exact" in claim
     }
-    for issue, chosen in replay.RELEASES.items():
+    for issue in BACKLOG:
+        chosen = replay.release(issue)
         for row in _read(chosen.directory / replay.RECORD)["results"]:
             side = Fraction(row["exact_side"])
             printed = Fraction(row["offered_side"])
@@ -227,16 +247,16 @@ def test_each_side_rounds_up_to_its_print_and_the_ledger_reads_the_same_side() -
 
 def test_the_ledger_records_every_row_and_the_plan_reads_its_dispositions() -> None:
     verdicts = _read(LEDGER / "ledger.json")
-    ours = {f"#{issue}" for issue in replay.RELEASES}
+    ours = {f"#{issue}" for issue in BACKLOG}
     steps = [
         step
         for count in verdicts["counts"]
         for step in count["steps"]
         if step["report"] in ours and count["n"] > 324
     ]
-    assert len(steps) == sum(chosen.decided for chosen in replay.RELEASES.values())
+    assert len(steps) == sum(replay.release(issue).decided for issue in BACKLOG)
     assert {step["verdict"] for step in steps} == {"recorded"}
-    rows = replay.planned_rows()
+    rows = [row for row in replay.planned_rows() if row["source_id"] != MISHAPOLK]
     current = {row["n"]: row["source_id"] for row in rows if "superseded_by" not in row}
     assert current == dict.fromkeys(CURRENT_670, "couzo-issue670-2026-10-17")
     found: dict[str, Counter[str]] = {}
@@ -244,7 +264,7 @@ def test_the_ledger_records_every_row_and_the_plan_reads_its_dispositions() -> N
         if "superseded_by" in row:
             found.setdefault(row["source_id"], Counter())[row["superseded_by"]] += 1
     assert {source: dict(counts) for source, counts in found.items()} == SUCCESSORS
-    supersessions = replay.planned_supersessions()
+    supersessions = [item for item in replay.planned_supersessions() if item[2] != MISHAPOLK]
     assert [(n, earlier, by) for n, earlier, by in supersessions if n in current] == [
         (n, earlier, "couzo-issue670-2026-10-17") for n, earlier in CURRENT_670.items()
     ]
@@ -259,14 +279,30 @@ def test_each_walked_count_is_one_chain_in_report_order() -> None:
     rows[464, "couzo-verified-bounds-2026-10-14"]["superseded_by"] = "couzo-issue678-2026-10-18"
     assert replay.chain_problems(coverage) == [
         (
-            "n=464 from couzo-verified-bounds-2026-10-14: names couzo-issue678-2026-10-18, "
-            "not de-winter-issue666-2026-10-17"
+            "n=464 from couzo-verified-bounds-2026-10-14: superseded naming "
+            "couzo-issue678-2026-10-18, not superseded by de-winter-issue666-2026-10-17"
         )
     ]
     del rows[464, "couzo-issue675-2026-10-18"]["superseded_by"]
     rows[464, "couzo-issue675-2026-10-18"]["disposition"] = "tracked-outside-case-corpus"
     assert replay.chain_problems(coverage)[1:] == [
-        "n=464 from couzo-issue675-2026-10-18: names None, not couzo-issue678-2026-10-18"
+        (
+            "n=464 from couzo-issue675-2026-10-18: tracked-outside-case-corpus naming None, "
+            "not superseded by couzo-issue678-2026-10-18"
+        )
+    ]
+
+
+def test_a_right_successor_under_a_wrong_disposition_is_named_once() -> None:
+    """#720's review B, B4: the message names the disposition, not the successor twice."""
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
+    rows[330, "couzo-issue670-2026-10-17"]["disposition"] = "tracked-outside-case-corpus"
+    assert replay.chain_problems(coverage) == [
+        (
+            "n=330 from couzo-issue670-2026-10-17: tracked-outside-case-corpus naming "
+            "couzo-issue672-2026-10-17, not superseded by couzo-issue672-2026-10-17"
+        )
     ]
 
 
@@ -285,3 +321,149 @@ def test_the_coverage_register_reads_each_source_claims_record() -> None:
         }
         assert rows == claims
         assert set(rows) <= set(source["scope"]["n_values"])
+
+
+def test_a_successor_outside_the_walk_holds_the_plan_and_one_it_reaches_does_not() -> None:
+    """#720's review B, B1: a later import may supersede a row the plan calls current, as
+    #719 supersedes #670's at 370, 452 and 536, while a successor the walk reaches out of
+    order is still refused."""
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
+    for n in (370, 452, 536):
+        assert rows[n, "couzo-issue670-2026-10-17"]["superseded_by"] == MISHAPOLK
+    assert replay.coverage_problems(coverage) == []
+    held = rows[364, "couzo-issue670-2026-10-17"]
+    assert "superseded_by" not in held
+    held["disposition"] = "superseded"
+    held["superseded_by"] = "a-later-import-2026-10-23"
+    assert replay.coverage_problems(coverage) == []
+    held["superseded_by"] = "evand-compositions-2026-10-13"
+    assert replay.coverage_problems(coverage) == [
+        "n=364 from couzo-issue670-2026-10-17: the register's row is not the plan's",
+        (
+            "n=364 from couzo-issue670-2026-10-17: names evand-compositions-2026-10-13, "
+            "earlier in the chain"
+        ),
+    ]
+
+
+def test_719_reads_both_tables_and_holds_each_file_to_its_pinned_digest() -> None:
+    chosen = replay.release(719)
+    assert chosen.derived
+    assert (
+        chosen.rows,
+        len(replay.decided_claims(chosen)),
+        len(replay.held_claims(chosen)),
+    ) == (
+        122,
+        112,
+        8,
+    )
+    pinned = replay.manifest(chosen)
+    for row in replay.claims(chosen):
+        assert row.path == f"certificates/n-{row.n}.cert"
+        assert row.path in pinned
+        assert len(row.printed.partition(".")[2]) == 16
+    body = json.loads((chosen.directory / replay.ISSUE).read_text(encoding="utf-8"))["body"]
+    digest = pinned["certificates/n-330.cert"]
+    with pytest.raises(replay.ReplayError, match="n=330: not the pinned digest"):
+        chosen.read(body.replace(digest, "0" * 64), chosen)
+    with pytest.raises(replay.ReplayError, match="links another commit"):
+        chosen.read(body.replace(chosen.pin, "0" * 40), chosen)
+
+
+def test_719_prints_the_binary64_side_and_its_rows_round_the_side_up_at_16_places() -> None:
+    """76 of the issue's 16-place prints lie below the exact side, so the rows record the
+    side rounded up at 16 places; at 631 that is what tells #719 from Couzo's 4e4c8ce and
+    5a299b4 certificates, which round up to the same 12 places."""
+    chosen = replay.release(719)
+    record = {row["n"]: row for row in _read(chosen.directory / replay.RECORD)["results"]}
+    below = 0
+    for row in replay.decided_claims(chosen):
+        if row.n not in record:
+            continue
+        side = Fraction(record[row.n]["exact_side"])
+        assert replay.print_holds(chosen, side, row.printed)
+        assert record[row.n]["issue_print"] == row.printed
+        assert record[row.n]["offered_side"] == replay.ceiling(side, 16)
+        below += Fraction(row.printed) < side
+    assert below > 0
+    assert not replay.print_holds(
+        chosen, Fraction(record[330]["exact_side"]), "18.692672444455"
+    )
+    earlier = _read(chosen.directory / replay.EARLIER)
+    (at_631,) = [row for row in earlier["rows"] if row["n"] == 631]
+    ours = Fraction(record[631]["exact_side"])
+    for item in at_631["publications"]:
+        assert item["ceiling_12"] == replay.ceiling(ours)
+        assert Fraction(item["side"]) > Fraction(record[631]["offered_side"]) > ours
+
+
+def test_719_leaves_366_unrecorded_and_supersedes_the_row_at_each_other_count() -> None:
+    """Couzo's 4e4c8ce certificate of 15 October is below #719's 366, so the walk does not
+    record it: the receipt decides it, and no row or record entry holds it."""
+    chosen = replay.release(719)
+    assert replay.unrecorded_rows() == [(366, MISHAPOLK)]
+    receipt = {row["n"]: row for row in _read(chosen.directory / replay.FILTERED)["rows"]}
+    assert receipt[366]["verified"]
+    assert 366 not in {row["n"] for row in _read(chosen.directory / replay.RECORD)["results"]}
+    verdicts = _read(LEDGER_719 / "ledger.json")
+    own = Counter(
+        step["verdict"]
+        for count in verdicts["counts"]
+        for step in count["steps"]
+        if step["report"] == "#719"
+    )
+    assert own == {"recorded": 121, "not recorded": 1}
+    rows = [row for row in replay.planned_rows() if row["source_id"] == MISHAPOLK]
+    assert len(rows) == 111
+    assert {row["disposition"] for row in rows} == {"tracked-outside-case-corpus"}
+    flips = [item for item in replay.planned_supersessions() if item[2] == MISHAPOLK]
+    assert dict(Counter(earlier for _, earlier, _ in flips)) == SUPERSEDED_BY_719
+
+
+def test_a_report_awaiting_its_own_import_is_passed_over_in_the_chain() -> None:
+    """At 410 the walk records Couzo's 4e4c8ce certificate, then #719; 4e4c8ce has no row
+    until think-yfoo lands, so main's row names #719, and a row naming 4e4c8ce's would not
+    be the chain."""
+    walk = replay.WALKS[replay.ISSUE_719]
+    (count,) = [item for item in _read(walk.ledger)["counts"] if item["n"] == 410]
+    assert [step["report"] for step in count["steps"] if step["verdict"] == "recorded"] == [
+        "franciscouzo/square-packing@4e4c8ce",
+        "#719",
+    ]
+    assert replay.recorded_reports(walk, count) == ["#719"]
+    assert (
+        410,
+        "couzo-verified-bounds-2026-10-14",
+        MISHAPOLK,
+    ) in replay.planned_supersessions()
+    held = walk.awaiting["#715"].counts
+    assert held is not None
+    assert 631 in held
+    assert 417 not in held
+
+
+def test_the_719_ledger_transcribes_the_packets_receipts() -> None:
+    """sources.yaml is what `ledger_sources` writes from the earlier-publications receipt,
+    the facts' claim record and the #666 and #715 packets."""
+    sources = safe_load((LEDGER_719 / "sources.yaml").read_text(encoding="utf-8"))
+    assert sources == replay.ledger_sources(
+        719, sources["read_at_main"], str(sources["read_on"])
+    )
+    earlier = _read(replay.release(719).directory / replay.EARLIER)
+    assert earlier["pushed_later"]["franciscouzo/square-packing"]["pushed"] == (
+        "2026-10-21T22:56:37Z"
+    )
+    counts = {row["n"] for row in earlier["rows"] if row["publications"]}
+    assert len(counts) == 60
+    assert {n for n in counts if n > replay.LIMIT} == {
+        1061,
+        1128,
+        1196,
+        1266,
+        1339,
+        1413,
+        1489,
+        1568,
+    }
