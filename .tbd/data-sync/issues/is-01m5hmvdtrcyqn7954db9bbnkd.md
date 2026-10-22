@@ -3,15 +3,19 @@ type: is
 id: is-01m5hmvdtrcyqn7954db9bbnkd
 title: REGULARIZATION_TOOLS comment says nothing imports them; select_houses, adopt_houses and default_drawings do, so none imports in a worker
 kind: bug
-status: open
+status: in_progress
 priority: 3
-version: 1
+version: 2
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
+delegate: c-lane-tooling-1022
 labels: []
 dependencies: []
 parent_id: is-01m1sx5m1p5868jhwcdzfkvada
+hold: null
+hold_until: null
 created_at: 2026-10-22T11:10:00.024Z
-updated_at: 2026-10-22T11:10:00.024Z
+updated_at: 2026-10-22T11:14:09.399Z
+started_at: 2026-10-22T11:14:09.398Z
 ---
 Owner note from review A of #721 (not a finding against that PR).
 
