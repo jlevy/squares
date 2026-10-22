@@ -1571,7 +1571,9 @@ def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
             chain = ([start] if start is not None else []) + [
                 _source_of(walk, report) for report in recorded_reports(walk, count)
             ]
-            for earlier, later in zip(chain, [*chain[1:], None], strict=True):
+            # At 366 the grid stands and only publications awaiting their imports are
+            # recorded, so the chain is empty until one lands.
+            for earlier, later in zip(chain, [*chain[1:], None][: len(chain)], strict=True):
                 held = rows.get((n, earlier))
                 if held is None:
                     problems.append(f"n={n}: the register has no row from {earlier}")

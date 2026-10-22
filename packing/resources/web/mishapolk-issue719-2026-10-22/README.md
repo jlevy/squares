@@ -153,14 +153,26 @@ square touches the box and no pair touches: every wall clears by at least
 $2.02 \times 10^{-13}$ and every pair by at least $4.04 \times 10^{-13}$. Each print is the
 binary64 value of its exact side at 16 places.
 
-{EXHAUSTIVE}
+The maintained all-pairs kernel of `devtools.evand_arrangement_reports`, every pair and
+no filter, decided the positives at 447, 652 and 997, one of each margin class: 808,413
+pairs in 401.2 CPU seconds, both routes accepting each, and each least pair gap and wall
+clearance equal, exactly, to the filtered decision’s
+([receipts/exhaustive-sample.json](receipts/exhaustive-sample.json)).
 
 [receipts/goebel-comparison.json](receipts/goebel-comparison.json) holds every decided
 side to Göbel’s classical squares and strips, with deletion, using the 15 October packet’s
 retained program: 111 are below, and 366 is above Göbel’s strip at 369, $19 + \sqrt2/2$,
 by 0.0317.
 
-{CERTIFY}
+**In the corpus.** 105 and 204 go through the same kernel by the declaration-driven
+importer `devtools.upper_bound_reports`: a positive job, a duplicate-square control and an
+outside-container control at each count, each in its own child process. Both positives
+pass both routes, and both routes refuse all four controls: 156,996 pair decisions in
+22.55 route CPU seconds on 22 October 2026
+([receipts/exact-certification.json.xz](receipts/exact-certification.json.xz), every
+deciding input and both routes’ complete outputs). At 105 every wall clears by at least
+$5.00 \times 10^{-21}$ and every pair by $9.99 \times 10^{-21}$; at 204 by
+$5.0 \times 10^{-13}$ and $9.98 \times 10^{-13}$.
 
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
 arithmetic and the separating-axis method. No source program ran here.
