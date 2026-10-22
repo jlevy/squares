@@ -22,9 +22,11 @@ import pytest
 
 from devtools import (
     check_results,
+    news_highlights,
     overview_data,
     overview_sections,
     render_case_pages,
+    render_changelog,
     render_contributors,
     render_overview,
     render_recent_results,
@@ -413,8 +415,13 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
         for header in article_headers
         for heading in re.findall(r"<h3\b.*?</h3>", header, re.DOTALL)
     ]
-    assert len(re.findall(r"<h3\b.*?</h3>", news, re.DOTALL)) == 3
-    assert len(headings) == 9  # Three News items, four papers and two tutorials.
+    # The News box carries the newest three of each level for its filter
+    # (`news_highlights.carried`) and shows three.
+    carried = len(news_highlights.carried(render_changelog.load()))
+    assert len(re.findall(r"<h3\b.*?</h3>", news, re.DOTALL)) == carried
+    shown = news.split("<section ")[1:]
+    assert sum(not card.startswith("hidden ") for card in shown) == news_highlights.LIMIT
+    assert len(headings) == carried + 6  # The News box's cards, four papers, two tutorials.
     assert '<h1 id="more-resources" class="site-title">More Resources' in page
     assert "site-resource-links" not in page
 
