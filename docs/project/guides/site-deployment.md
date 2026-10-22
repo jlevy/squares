@@ -1,12 +1,15 @@
 # Site Deployment
 
 The Squares website is a static publication built by GitHub Actions and hosted on GitHub
-Pages. Its intended canonical address is **https://squaremath.org/**. The source
-repository and repository links in PDFs remain **https://github.com/jlevy/squares**.
+Pages. Its canonical address is **https://squaremath.org/**. The source repository and
+repository links in PDFs remain **https://github.com/jlevy/squares**.
 
-**Deployment status:** The custom-domain migration is planned, not yet deployed.
-Until cutover is verified, the production address remains
-`https://jlevy.github.io/squares/`. Track the transition in the
+**Deployment status (2026-10-22):** The domain is bound to GitHub Pages, its certificate
+covers apex and `www`, and HTTPS enforcement is enabled.
+HTTP upgrades to HTTPS and `www` redirects to the bare host.
+The hosted audit passed all 5,459 checks; ordinary browser access and legacy
+path/query/fragment redirects were verified.
+Evidence is recorded in the
 [domain migration plan](../specs/active/plan-2026-10-22-squaremath-domain.md).
 
 ## Ownership and Configuration

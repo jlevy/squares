@@ -84,6 +84,7 @@ from devtools.render_overview import (
     paper_path,
 )
 from devtools.repo_links import repo_url
+from devtools.site_icons import GITHUB_ICON_INPUTS
 from sqpack.fractional.certificate import (
     Certificate,
     closed_form_conditions,
@@ -726,6 +727,9 @@ def kpress_css(static: Path, faces: FaceSink = inline_face) -> str:
         # Each stylesheet resolves its own references, from its own directory, so
         # a kpress stylesheet added outside `css/` would still find its faces.
         parts.append(resolve_font_urls(pruned, (static / name).parent, faces))
+    from devtools.site_icons import github_link_css  # noqa: PLC0415
+
+    parts.append(github_link_css())
     return "\n".join(parts)
 
 
@@ -2660,7 +2664,7 @@ def shell_substitutions(static: Path, shared: dict[str, str], body: str) -> dict
         # the site's goes on no paper.
         "COLOPHON": colophon_lines(edition=""),
         **shared,
-        "BODY_HTML": link_prose(body, prefix=SITE_ROOT),
+        "BODY_HTML": link_prose(body, prefix=SITE_ROOT, full_names=True),
     }
 
 
@@ -2931,6 +2935,7 @@ RENDER_INPUTS = (
     THRESHOLD_CASE,
     Path(__file__),
     PACKING / "devtools/site_assets.py",
+    *GITHUB_ICON_INPUTS,
     EXPLAINER_SCRIPTS,
     # The front of the paper is written by the component both papers share.
     PACKING / "devtools" / "paper_front.py",

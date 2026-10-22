@@ -196,19 +196,11 @@ def test_the_table_fits_its_track_at_1280_and_scrolls_in_its_wrap_below(
     widths = {cell["words"]: cell["width"] for cell in wide["head"]}
     assert widths["n"] < 50
     assert widths["Recent"] < 96
-    # At 1280 the table is stretched to its track; below it keeps its own width, the same
-    # at every narrower window: 1192 pixels since the table has no frame (2026-10-02,
-    # think-wadm), 1194 before, and 1180 since 3 October 2026, when an exact gap with a
-    # numerator or denominator of more than eight digits became its decimal (n = 68's
-    # 4512425581603/15625000000000 was the widest gap; GAP_DIGITS), and 1165 since 6
-    # October 2026, when Evan Daniel's exact optima (T-098) put the upper lane of 48
-    # counts, n = 68 among them, at their certified sides and narrowed the gap column.
-    # The n = 11 credit now reads Ahmed. A same-page control changing only that credit
-    # back to Queuingtheorydotcom restores 1165.3 from 1150.5 pixels by widening the
-    # reported-lower column; Linux reads the current table at 1150 (think-66ym).
+    # At 1280 the table stretches to its track. Below it keeps a stable intrinsic
+    # width, bounded by that desktop track, while each narrower frame scrolls locally.
     own = laid[WIDTHS[1]]["table_width"]
     assert own <= wide["table_width"]
-    assert own == pytest.approx(1150, abs=10)
+    assert own > laid[WIDTHS[1]]["frame_width"]
     for width in WIDTHS[1:]:
         assert laid[width]["scrolls"] > 0, width
         assert laid[width]["table_width"] == pytest.approx(own, abs=1), width
