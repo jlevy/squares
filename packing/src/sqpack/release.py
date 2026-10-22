@@ -4219,7 +4219,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "PR406 adds the Git-storage guard to the validation CLI push schedule "
             "and its status banner. The explainer declares the whole sqpack package, "
-            "but the import closure of its eleven Python producers, measured with "
+            "but the import closure of its fourteen Python producers, measured with "
             "pages_scope.import_closure on main cddc5843f with this branch merged, is "
             "145 files and holds no sqpack.cli module. The manuscript, certificate "
             "inputs, figures, rendering helpers and paper release metadata are "
