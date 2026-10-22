@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **184** programs: **51** external and **133** first-party; **127** decide claims and **57** check premises.
-- **575** of **699** evidence entries name the programs that verified them: 277 reproduced with the producer’s code, 250 independently re-implemented, 29 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
+- **186** programs: **51** external and **135** first-party; **128** decide claims and **58** check premises.
+- **577** of **701** evidence entries name the programs that verified them: 277 reproduced with the producer’s code, 251 independently re-implemented, 30 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -79,8 +79,8 @@ second implementation agrees.
 | [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 2 | 1 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 16 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 87 | 76 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 81 | 79 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 88 | 77 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 82 | 80 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -138,12 +138,14 @@ second implementation agrees.
 | [`V-couzo-678-review-check`](#v-couzo-678-review-check) | review_678_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-evand-regularized-1020-review-check`](#v-evand-regularized-1020-review-check) | review_t225_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-couzo-670-672-675-review-check`](#v-couzo-670-672-675-review-check) | review_0nse_check.py | Squares Project (Levy) | first-party | decides | 3 | 3 |
+| [`V-mishapolk-719-review-check`](#v-mishapolk-719-review-check) | review_t229_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-evand-regularized-1020-review-controls`](#v-evand-regularized-1020-review-controls) | sharp_controls_t225.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-couzo-670-672-675-review-controls`](#v-couzo-670-672-675-review-controls) | sharp_controls_0nse.py | Squares Project (Levy) | first-party | premises | 3 | 3 |
+| [`V-mishapolk-719-review-controls`](#v-mishapolk-719-review-controls) | sharp_controls_t229.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-overbeck-review3-seed-packing`](#v-overbeck-review3-seed-packing) | seed_packing_check.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-overbeck-review3-spec-lemmas`](#v-overbeck-review3-spec-lemmas) | spec_lemmas_numeric.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-overbeck-review3-parallel-rows`](#v-overbeck-review3-parallel-rows) | parallel_row_check.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 65 | 63 |
+| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 66 | 64 |
 | [`V-check-n11-final-composition`](#v-check-n11-final-composition) | devtools.check_n11_final_composition | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-n11-lean`](#v-audit-n11-lean) | devtools.audit_n11_lean | Squares Project (Levy) | first-party | premises | 2 | 1 |
 | [`V-fitzharding-n17-source-manifest`](#v-fitzharding-n17-source-manifest) | check_source_manifest.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -170,9 +172,9 @@ second implementation agrees.
 | [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 62 | 62 |
+| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 63 | 63 |
 | [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 57 | 57 |
+| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 58 | 58 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-refinement-custody`](#v-refinement-custody) | devtools.refinement_custody | Squares Project (Levy) | first-party | premises | 2 | 2 |
@@ -1267,6 +1269,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-couzo-670-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-226 |
 | `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
 | `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
+| `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1362,6 +1365,7 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-couzo-670-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-226 |
 | `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
 | `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
+| `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -2291,6 +2295,22 @@ The 22 October review's standard-library exact checker of the four certificates 
 | `E-couzo-672-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair, on each of the checker's two routes | T-227 |
 | `E-couzo-675-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair, on each of the checker's two routes | T-228 |
 
+### `V-mishapolk-719-review-check`
+
+**review_t229_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 22 October review's standard-library exact checker of the two certificates T-229 cites, with readers of its own for the source's certificate text and for the packet's Witness/v2 center-basis fact, deciding each on two routes that share only the reader: route Z in integers alone (a Pythagorean triple per row, containment by half-extents and every pair by four separating-axis inequalities cleared of denominators), and route C in Fraction (unit edges, right angles, orientation and corner mean, corner containment, every pair by the exact area one square's closed half-planes clip from the other, and the exact squared distance of every pair whose centres are closer than 2). Its same command decides that each fact states exactly its certificate's squares.
+
+- Source: [`packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/programs/review_t229_check.py`](../../packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/programs/review_t229_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-22-mishapolk-719.md`](../../docs/project/reviews/review-2026-10-22-mishapolk-719.md)
+- Independence: its authors read mathematics, certificate-format, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of T-229 (c-review-t229-math, think-4h23), strong sub-agent tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The issue names this repository's sqpack/verify.py, whose first revisions are Claude-authored commits, as one of its checkers, and discloses Gemini assistance with the author's scripting. Written in a file of its own that imports nothing from this repository or the source, from the certificates' format line, the packet README and receipts and the 22 October review of T-226 to T-228's account of its checker, and frozen and run on both certificates before its author read any maintained or source code; its author never read sqpack/verify.py's deciding code, check_rational_witness_independent or the source's named checkers.
+- Note: Written and run on 22 October 2026 by the review; kept in the mishapolk-issue719-2026-10-22 packet's review/review-2026-10-22/ with its README and receipts (RF-8).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-mishapolk-719-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair, on each of the checker's two routes, from the derived facts and from the source's files | T-229 |
+
 ### `V-evand-regularized-1020-review-controls`
 
 **sharp_controls_t225.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
@@ -2322,6 +2342,21 @@ The 22 October review's sharp controls of the four certificates T-226, T-227 and
 | `E-couzo-670-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair, on each of the checker's two routes | T-226 |
 | `E-couzo-672-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair, on each of the checker's two routes | T-227 |
 | `E-couzo-675-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair, on each of the checker's two routes | T-228 |
+
+### `V-mishapolk-719-review-controls`
+
+**sharp_controls_t229.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+The 22 October review's sharp controls of the two certificates T-229 cites, built from the packet's derived facts written back in the source's certificate format with the round trip checked exactly: eight mutants a certificate (the side lowered by the least far-wall clearance, every square moved by the least near-wall clearance, the least-gap pair closed along the first square's edge normal, each at exact contact and 1e-30 past it; a row dropped; a decimal literal), each decided by the review's checker and by both maintained routes through the evand-cert adapter, and the kernel's run_sharp at contact and past it. It also checks that the adapter's certificate equals the packet's fact as read_facts admits it. It adds the mutants and the expectations; the routes decide.
+
+- Source: [`packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/programs/sharp_controls_t229.py`](../../packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/programs/sharp_controls_t229.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-22-mishapolk-719.md`](../../docs/project/reviews/review-2026-10-22-mishapolk-719.md)
+- Note: Written and run on 22 October 2026 by the review (c-review-t229-math); it imports devtools.evand_arrangement_reports, devtools.evand_exact_certificates and devtools.upper_bound_reports to reach the maintained routes, and the review's checker. Kept with its receipts out-controls-T-229-n105.json and -n204.json in the mishapolk-issue719-2026-10-22 packet's review/review-2026-10-22/ (RF-7, RF-8).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-mishapolk-719-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair, on each of the checker's two routes, from the derived facts and from the source's files | T-229 |
 
 ### `V-overbeck-review3-seed-packing`
 
@@ -2447,6 +2482,7 @@ Reads Evan Daniel's rational certificates, refusing anything the format does not
 | `E-couzo-670-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-226 |
 | `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
 | `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
+| `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
 
 ### `V-check-n11-final-composition`
 
@@ -3027,6 +3063,7 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-couzo-670-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-226 |
 | `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
 | `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
+| `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
 
 ### `V-algebraic-witness-reports`
 
@@ -3111,6 +3148,7 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-couzo-670-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-226 |
 | `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
 | `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
+| `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
 
 ### `V-rehwaldt-n68-verify`
 

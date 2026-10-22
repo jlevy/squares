@@ -42154,20 +42154,192 @@ evidence:
     certificate: packing/resources/web/mishapolk-issue719-2026-10-22/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-22'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-229
+        (c-review-t229-math, think-4h23), strong sub-agent tier, maximum reasoning,
+        prompted separately from the import lane and from the reviewers of #722
+      note: >-
+        docs/project/reviews/review-2026-10-22-mishapolk-719.md accepted both
+        certificates T-229 cites for finite feasibility only, with nine non-blocking
+        findings (RF-1 to RF-9); the replay it reproduced is
+        E-mishapolk-719-exact-feasibility, and its own checker's run is
+        E-mishapolk-719-review-exact-feasibility.
     source_reviewed: '2026-10-22'
     limitations: >-
-      This atom records the source author's report, issue 719, of 2 exact rational certificates
-      at 12fc4667, certificates/n-105.cert and n-204.cert, kept as derived exact facts with no
-      upstream byte retained. A separate complete repository replay is retained for n = 105 and
-      204: 2 positives and 4 duplicate-square and outside-container controls passed their
-      required outcomes on both routes, 156996 pair decisions; summed over the 6 jobs, the
-      receipt records 22.55 route CPU seconds and 23.02 job wall seconds, the longest job 5.91
-      seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at least
-      9.99e-21. Independent review and confirmation remain pending (think-4h23). The source's
-      own checkers were not run here. The two maintained routes, the sqpack rational witness
-      verifier and the independent rational corner checker, share certificate parsing,
-      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
-      independent methods, human oversight or optimality is claimed.
+      This atom records the source author's report, issue 719, of 2 exact rational
+      certificates at 12fc4667, certificates/n-105.cert and n-204.cert, kept as derived
+      exact facts with no upstream byte retained. A separate complete repository replay is
+      retained for n = 105 and 204: 2 positives and 4 duplicate-square and outside-container
+      controls passed their required outcomes on both routes, 156996 pair decisions; summed
+      over the 6 jobs, the receipt records 22.55 route CPU seconds and 23.02 job wall
+      seconds, the longest job 5.91 seconds. Every positive clears every wall by at least
+      5.00e-21 and every pair by at least 9.99e-21. The 22 October stage 4 review accepted
+      the replay; the confirming entries are E-mishapolk-719-exact-feasibility and
+      E-mishapolk-719-review-exact-feasibility. The source's own scripts were not run here.
+      The issue names this repository's sqpack/verify.py as a checker, and the exact_verify
+      route decides through that file (RF-1); as the issue runs it, that file reads no
+      certificate (RF-2). The two maintained routes, the sqpack rational witness verifier
+      and the independent rational corner checker, share certificate parsing, half-angle
+      conversion, Fraction arithmetic and the separating-axis method. No two independent
+      methods, human oversight or optimality is claimed.
+  - id: E-mishapolk-719-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [105, 204]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        sqpack.verify's unit-shape and separating-axis predicates (verify_packing, which
+        sqpack.witness.exact_verify calls), the jlevy/squares checker the issue names as one
+        of its two checkers
+      - >-
+        the fact reader of devtools.upper_bound_reports and the half-angle map and witness
+        basis of devtools.evand_exact_certificates, through which both maintained routes
+        read each certificate
+      - CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk issue 719 2026-10-22]'
+    certificate: packing/resources/web/mishapolk-issue719-2026-10-22/facts/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host:
+      python -m devtools.upper_bound_reports mishapolk-issue719-2026-10-22 certify --workers
+      2 wrote the receipt on 22 October 2026 from the packet's derived facts, and check
+      --replay decides all 6 retained jobs, the two certificates and their duplicate-square
+      and outside-container controls, again through both maintained routes and holds each to
+      its retained row; check-claims rebuilds the frozen comparison. The 22 October stage 4
+      review reproduced the replay on the records branch of #722, niced, 2 certificates and
+      6 jobs admitted in 49.9 s, and check-claims equal
+      (docs/project/reviews/review-2026-10-22-mishapolk-719.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 105 and 204 that T-229 cites, every wall and every pair
+          decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipt
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-10-22-mishapolk-719.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-22'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-229
+        (c-review-t229-math, think-4h23), strong sub-agent tier, maximum reasoning,
+        prompted separately from the import lane and from the reviewers of #722
+      note: >-
+        Accepted for finite feasibility only. All 6 retained jobs reproduced on both
+        maintained routes and check-claims rebuilt equal; every side, pose, pair count,
+        least wall clearance and least pair gap of the receipt equals the review's own
+        checker's on both of its routes, from the facts and from the source's certificates
+        (E-mishapolk-719-review-exact-feasibility); each fact states its certificate
+        exactly; and the review's sharp controls accepted exact contact and refused 1e-30
+        past it at the far wall, the near wall and the least-gap pair on both maintained
+        routes at both counts, as the kernel's run_sharp did. Findings RF-1 to RF-9, none
+        blocking.
+    limitations: >-
+      A replay of the derived facts at n = 105 and 204 by two maintained exact routes that
+      share fact reading, half-angle conversion, Fraction arithmetic and the separating-axis
+      method, and with the source a named checker: the exact_verify route decides through
+      sqpack/verify.py, which the issue names, so the replay shares the producer's
+      components (RF-1 of the 22 October review). At 105 every wall clears by at least
+      5.00e-21 and every pair by 9.99e-21; at 204 by 4.99e-13 and 9.98e-13. The receipt's
+      two controls a count are gross, a duplicated square and a square moved outside
+      (RF-7); the sharp controls are the review's, kept with their receipts
+      out-controls-T-229-n105.json and out-controls-T-229-n204.json in the packet's
+      review/review-2026-10-22/ (V-mishapolk-719-review-controls), and
+      test_upper_bound_reports.py runs the kernel's two sharp controls on the 105
+      certificate at contact and 1e-30 past it on both routes. The source's own scripts
+      were not run here. Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-22'
+  - id: E-mishapolk-719-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [105, 204]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk issue 719 2026-10-22]'
+    certificate: packing/resources/web/mishapolk-issue719-2026-10-22/facts/
+    replay: >-
+      From the packet's review/review-2026-10-22/, with any CPython 3.12 or later: python -I
+      programs/review_t229_check.py check on each count's derived fact and on the source's
+      certificate at the pin, one process a count, as the 22 October review ran it (3.0 s
+      and 7.0 s): all four inputs passed on both of its routes, every wall cleared by at
+      least exactly 1/(2*10^20) at 105 and 37251567/74505805969238281250 at 204, and every
+      one of the 5,460 and 20,706 pairs separated, none touching, the least gaps
+      9.999999999999988e-21 (squares 71 and 86) and 9.980857291582e-13 (11 and 17,
+      numbered from 1); its same command found each fact equal to its certificate row by
+      row, and agree_t229.py every side, pose, pair count, least clearance and least gap
+      equal to the receipt's two routes. Its sharp controls (sharp_controls_t229.py)
+      accepted exact contact and refused 1e-30 past it on both of its routes and both
+      maintained routes.
+    replay_status: passed
+    verifiers:
+      - V-mishapolk-719-review-check
+      - V-mishapolk-719-review-controls
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 105 and 204 that T-229 cites, every wall and every pair,
+          on each of the checker's two routes, from the derived facts and from the source's
+          files
+        checked: 2
+        of: 2
+      read: [mathematics, certificate-format, producer-output, earlier-review]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-229 (c-review-t229-math, think-4h23),
+            strong sub-agent tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue names this repository's sqpack/verify.py, whose first revisions are
+          Claude-authored commits, as one of its checkers, and discloses Gemini assistance
+          with the author's scripting. The review's checker is Claude's too, written from a
+          prompt of its own in a file that imports nothing from this repository or the
+          source, from the certificates' format line, the packet README and receipts and the
+          22 October review of T-226 to T-228's account of its checker; it was frozen and
+          had decided both certificates before its author read any maintained or source
+          code, and its author never read sqpack/verify.py's deciding code,
+          check_rational_witness_independent or the source's named checkers. Afterwards the
+          author read the first thirty lines of the source's check_packing.py, which neither
+          the issue nor the source's README names.
+    independence_record: docs/project/reviews/review-2026-10-22-mishapolk-719.md
+    limitations: >-
+      The review's own checker, with readers of its own and no code of the packet's routes
+      or the source's; route C shares CPython's Fraction with the maintained routes, and
+      route Z uses integers alone. Its author read the 22 October review of T-226 to T-228,
+      which describes that review's checker, before writing it (earlier-review). The
+      packet's two gross controls were decided by the maintained routes, not by this
+      checker; its own controls are the review's sharp mutants and a self-test of 21
+      hand-built packings and 6 reader cases. Finite feasibility only.
+    source_reviewed: '2026-10-22'
   - id: E-mishapolk-719-beyond-horizon-report
     claim: upper-bound
     scope:

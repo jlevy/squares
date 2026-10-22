@@ -35,7 +35,12 @@ below an earlier certificate; the 8 above 1024 wait on the owner.
   are the digests of the pinned files.
 - **Checks.** The issue says Evan Daniel’s `verify_cert.py` and this repository’s
   `sqpack/verify.py`, run from the author’s copies under `tools/`, accept all 122 with
-  zero tolerance. Neither copy is in the pinned tree, and no source program ran here.
+  zero tolerance. Neither copy is in the pinned tree, and no source script ran here.
+  This repository’s `sqpack/verify.py` decides the maintained `exact_verify` route, so
+  that route shares the producer’s named checker (RF-1 of the
+  [22 October review](../../../../docs/project/reviews/review-2026-10-22-mishapolk-719.md)). It has no command-line entry point at any revision, so
+  run as the issue writes the command it reads no file and exits 0 whatever it is given
+  (RF-2). The source’s README names `verify_cert.py` and `verify_cert2.py`.
 - **Not claimed.** No global optimality, local rigidity or KKT condition.
 - **Lineage.** Each row names a baseline holder, and the closing paragraph credits the
   finders the packings build on: Erich Friedman, Joshua Levy, Evan Daniel, Francisco
@@ -81,12 +86,12 @@ it.
 | n | Exact side | House | Below the house by | Also below |
 | --- | --- | --- | --- | --- |
 | 105 | `674331486483935962030285457609/62500000000000000000000000000` | T-174 (PingYou Ltd after Couzo after Xu) | $5.18 \times 10^{-12}$ | #593’s 105, the same packing, by $5.18 \times 10^{-12}$ |
-| 204 | `882663895519250432/59604644775390625` | T-225 (Daniel after Couzo) | $1.006 \times 10^{-8}$ | T-223 by $1.145 \times 10^{-8}$, T-228 by $1.54 \times 10^{-6}$, T-226 by $1.59 \times 10^{-6}$, T-186 by $2.04 \times 10^{-5}$ |
+| 204 | `882663895519250432/59604644775390625` | T-225 (Daniel after Couzo) | $1.006 \times 10^{-8}$ | T-223 by $1.145 \times 10^{-8}$, T-228 by $1.53 \times 10^{-6}$, T-226 by $1.59 \times 10^{-6}$, T-186 by $2.04 \times 10^{-5}$ |
 
 No earlier certificate states either side. Couzo’s copies of the house sides, at
 `4e4c8ce` (105) and `5a299b4` (204), equal them. One register entry records both, at
-V0/C0, pending adoption at both counts; it lists each as a regularization of the house
-packing it re-solves.
+V3/C3 since its 22 October review, pending adoption at both counts; it lists each as a
+regularization of the house packing it re-solves.
 
 **Pose by pose.** [measure/identity.py](measure/identity.py) measures each against the
 packings the record credits, with the measures of the
@@ -98,8 +103,12 @@ measurement, which decides nothing:
   beyond $10^{-3}$, none beyond a tenth, at most 0.049, turning up to 2.41°. The author’s
   own 105 of issue 593 is the same packing at this scale, and measures the same.
 - At 204 they pair one to one with T-225’s and with T-223’s: 67 move beyond $10^{-3}$ and
-  6 beyond a tenth, at most 0.273, and every square turns less than 1° but one, which is
-  re-oriented by 25.64°. T-225 itself moves 4 squares beyond a tenth of T-223’s, at most
+  6 beyond a tenth, at most 0.273, and every square turns less than 1° but one, square 38,
+  which T-223 and T-225 hold within $1.2 \times 10^{-10}$ and $1.2 \times 10^{-20}$ by four
+  neighbours and which #719 releases and turns by 25.64°: nothing lies within
+  $1.25 \times 10^{-2}$ of it (RF-3). The certificate keeps the frame and tilt pattern of
+  Couzo’s #678 certificate, where T-225 is a half turn of it with nine squares
+  straightened (RF-4). T-225 itself moves 4 squares beyond a tenth of T-223’s, at most
   0.442, which the record registers as the same packing regularized. It does not pair with
   the author’s own 204 of 13 and 14 October (T-183, T-186): 14 move beyond a tenth under
   an optimal assignment.
@@ -172,10 +181,12 @@ pass both routes, and both routes refuse all four controls: 156,996 pair decisio
 ([receipts/exact-certification.json.xz](receipts/exact-certification.json.xz), every
 deciding input and both routes’ complete outputs). At 105 every wall clears by at least
 $5.00 \times 10^{-21}$ and every pair by $9.99 \times 10^{-21}$; at 204 by
-$5.0 \times 10^{-13}$ and $9.98 \times 10^{-13}$.
+$4.99 \times 10^{-13}$ and $9.98 \times 10^{-13}$.
 
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
-arithmetic and the separating-axis method. No source program ran here.
+arithmetic and the separating-axis method. No source script ran here; the `exact_verify`
+route decides through `sqpack/verify.py`, which the issue names as a checker, so the replay
+shares the producer’s components (RF-1).
 
 ## Beyond the Corpus
 
@@ -216,15 +227,35 @@ Each is pinned by digest in the manifest, and the reply asks the author about it
 
 A finite packing certifies an upper bound and nothing more. No optimality, rigidity or
 KKT statement is replayed, no arrangement identity beyond the measurement above is
-decided, and the source’s checkers were not run. The entry for 105 and 204 awaits its
-stage 4 review (think-4h23); a beyond-horizon row owes none.
+decided, and the source’s checkers were not run. The entry for 105 and 204 rests on its
+stage 4 review ([below](#stage-4-review)); a beyond-horizon row owes none.
+
+## Stage 4 Review
+
+The [review of 22 October 2026](../../../../docs/project/reviews/review-2026-10-22-mishapolk-719.md) accepted both
+in-corpus certificates for finite feasibility, with nine findings, none blocking.
+It reproduced the packet’s replay and frozen comparison, decided each certificate again
+on a clean-room checker of its own, from the source’s file and from the derived fact, on
+an integer route and a `Fraction` route with exact clipping area, found each fact equal to
+its certificate row by row, and ran sharp controls at $10^{-30}$ through both maintained
+routes and that checker: each route accepted exact contact at the far wall, the near wall
+and the least-gap pair, and refused $10^{-30}$ past it, at both counts.
+Its programs, receipts and logs are in
+[review/review-2026-10-22/](review/review-2026-10-22/README.md); the review lane’s
+scratch copy of the source’s bytes, including a mutated 105 certificate, is not retained,
+since this packet keeps no upstream byte. `tests/test_upper_bound_reports.py` runs the
+kernel’s two sharp controls on the 105 certificate (RF-7).
+T-229 rests at `V3`/`C3` on that review, the replay it reproduced and its checker’s run.
+The review’s two questions for the author, how `sqpack/verify.py` was run and how square
+38 at 204 came to be released from which starting file, go with the reply on #719.
 
 ## Credit
 
 Mykhailo Polkovskyi (Mishapolk), the name the record has used since issue 593; the issue
 gives Mikhail Polk. At 105 and 204 the entry credits each packing’s finders first, as a
 regularization: Ryan Xu’s packing as Francisco Couzo and PingYou Ltd refined it, and
-Couzo’s packing as Evan Daniel regularized it, which Couzo’s source credits to
+Couzo’s packing, first reported in #670 and refined in #675 and #678, as Evan Daniel
+regularized it, which Couzo’s source credits to
 Polkovskyi’s own construction. Per-row lineage beyond the corpus is not stated by the
 source, and per-row credit beyond the horizon is the owner’s open question from #686.
 The issue discloses Gemini assistance.

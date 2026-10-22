@@ -18560,7 +18560,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-22'
-  lastmod: '2026-10-22'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: upper-bound
@@ -18576,6 +18576,8 @@ urls:
     builds_on: null
     evidence:
     - E-mishapolk-719-certificate-report
+    - E-mishapolk-719-exact-feasibility
+    - E-mishapolk-719-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue719-2026-10-22/README.md
     - packing/resources/web/mishapolk-issue719-2026-10-22/acquisition/claims.json
@@ -18585,6 +18587,37 @@ urls:
     - packing/resources/web/mishapolk-issue719-2026-10-22/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-22-mishapolk-719.md
+    - packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/README.md
+  amendments:
+  - date: '2026-10-23'
+    reason: 'The 22 October stage 4 review of T-229 accepts the replay: the result rises to V3/C3
+      and cites its two confirming evidence entries, the packet''s replay (sharing the producer''s
+      named components) and the review''s clean-room checker, with the review and its retained programs
+      among its artifacts and controls; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 105
+        - 204
+      established: null
+      attribution:
+        source_keys:
+        - '[Mishapolk issue 719 2026-10-22]'
+        published: '2026-10-22'
+      builds_on: null
+      evidence:
+      - E-mishapolk-719-certificate-report
+      artifacts:
+      - packing/resources/web/mishapolk-issue719-2026-10-22/README.md
+      - packing/resources/web/mishapolk-issue719-2026-10-22/acquisition/claims.json
+      - packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-105.yaml.gz
+      - packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-204.yaml.gz
+      - packing/resources/web/mishapolk-issue719-2026-10-22/receipts/exact-certification.json.xz
+      - packing/resources/web/mishapolk-issue719-2026-10-22/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md
+      - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page
