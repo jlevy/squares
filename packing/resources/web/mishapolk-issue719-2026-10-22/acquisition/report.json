@@ -1,0 +1,2022 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/719",
+  "author": "Mishapolk",
+  "source_key": "[Mishapolk issue 719 2026-10-22]",
+  "report_evidence": "E-mishapolk-719-certificate-report",
+  "receipt_format": "mishapolk-719-exact-replay-v1",
+  "witness_prefix": "W-mishapolk-719-n",
+  "claim_limitations": "Complete 12fc466 rational centre/half-angle certificate in Evan Daniel's format, centres in [0, S]^2, converted from a checkout at the pin whose bytes have the digests the packet records; no upstream byte is retained. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-22",
+  "read_at_main": "0281e776342f2f1b63d3df66dc3c1737e8202945",
+  "certificates": [
+    {
+      "n": 105,
+      "path": "certificates/n-105.cert",
+      "format": "evand-cert",
+      "offered": "10.789303783742975392484567321744",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-105.yaml"
+    },
+    {
+      "n": 204,
+      "path": "certificates/n-204.cert",
+      "format": "evand-cert",
+      "offered": "14.808642830527896655757312",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-204.yaml"
+    },
+    {
+      "n": 330,
+      "path": "certificates/n-330.cert",
+      "format": "evand-cert",
+      "offered": "18.6926724444540695851565056",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-330.yaml"
+    },
+    {
+      "n": 339,
+      "path": "certificates/n-339.cert",
+      "format": "evand-cert",
+      "offered": "18.9073514711767398672760832",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-339.yaml"
+    },
+    {
+      "n": 342,
+      "path": "certificates/n-342.cert",
+      "format": "evand-cert",
+      "offered": "18.9647067231682792397996032",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-342.yaml"
+    },
+    {
+      "n": 344,
+      "path": "certificates/n-344.cert",
+      "format": "evand-cert",
+      "offered": "18.9927278093559090303205376",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-344.yaml"
+    },
+    {
+      "n": 366,
+      "path": "certificates/n-366.cert",
+      "format": "evand-cert",
+      "offered": "19.7388031475702934464888832",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates/n-366.cert",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-366.yaml"
+    },
+    {
+      "n": 370,
+      "path": "certificates/n-370.cert",
+      "format": "evand-cert",
+      "offered": "19.7674283499617074045517824",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-370.yaml"
+    },
+    {
+      "n": 372,
+      "path": "certificates/n-372.cert",
+      "format": "evand-cert",
+      "offered": "19.822875655552313409404928",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-372.yaml"
+    },
+    {
+      "n": 377,
+      "path": "certificates/n-377.cert",
+      "format": "evand-cert",
+      "offered": "19.9254716539692623012560896",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-377.yaml"
+    },
+    {
+      "n": 378,
+      "path": "certificates/n-378.cert",
+      "format": "evand-cert",
+      "offered": "19.9420180574448564020707328",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-378.yaml"
+    },
+    {
+      "n": 379,
+      "path": "certificates/n-379.cert",
+      "format": "evand-cert",
+      "offered": "19.9508896814991898107183104",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-379.yaml"
+    },
+    {
+      "n": 380,
+      "path": "certificates/n-380.cert",
+      "format": "evand-cert",
+      "offered": "19.9613500238311271916634112",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-380.yaml"
+    },
+    {
+      "n": 381,
+      "path": "certificates/n-381.cert",
+      "format": "evand-cert",
+      "offered": "19.9747398404791635309232128",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-381.yaml"
+    },
+    {
+      "n": 409,
+      "path": "certificates/n-409.cert",
+      "format": "evand-cert",
+      "offered": "20.767428349962686532943872",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-409.yaml"
+    },
+    {
+      "n": 410,
+      "path": "certificates/n-410.cert",
+      "format": "evand-cert",
+      "offered": "20.7781745930728795413676032",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-410.yaml"
+    },
+    {
+      "n": 412,
+      "path": "certificates/n-412.cert",
+      "format": "evand-cert",
+      "offered": "20.82299541545764538810368",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-412.yaml"
+    },
+    {
+      "n": 413,
+      "path": "certificates/n-413.cert",
+      "format": "evand-cert",
+      "offered": "20.8316633653748781073563648",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-413.yaml"
+    },
+    {
+      "n": 417,
+      "path": "certificates/n-417.cert",
+      "format": "evand-cert",
+      "offered": "20.9332107700260781517446329",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-417.yaml"
+    },
+    {
+      "n": 418,
+      "path": "certificates/n-418.cert",
+      "format": "evand-cert",
+      "offered": "20.9391841282486938133069824",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-418.yaml"
+    },
+    {
+      "n": 419,
+      "path": "certificates/n-419.cert",
+      "format": "evand-cert",
+      "offered": "20.9578048362645836485623808",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-419.yaml"
+    },
+    {
+      "n": 420,
+      "path": "certificates/n-420.cert",
+      "format": "evand-cert",
+      "offered": "20.9665881911787631836921856",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-420.yaml"
+    },
+    {
+      "n": 421,
+      "path": "certificates/n-421.cert",
+      "format": "evand-cert",
+      "offered": "20.9762739979630332988009159",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-421.yaml"
+    },
+    {
+      "n": 422,
+      "path": "certificates/n-422.cert",
+      "format": "evand-cert",
+      "offered": "20.983575254579979986403328",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-422.yaml"
+    },
+    {
+      "n": 447,
+      "path": "certificates/n-447.cert",
+      "format": "evand-cert",
+      "offered": "21.690355937314650315937292959524",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates/n-447.cert",
+      "first_committed": "2026-10-22T06:05:07Z",
+      "fact": "facts/n-447.yaml"
+    },
+    {
+      "n": 450,
+      "path": "certificates/n-450.cert",
+      "format": "evand-cert",
+      "offered": "21.7674283499636897131528192",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-450.yaml"
+    },
+    {
+      "n": 452,
+      "path": "certificates/n-452.cert",
+      "format": "evand-cert",
+      "offered": "21.7781745930739136453410816",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-452.yaml"
+    },
+    {
+      "n": 453,
+      "path": "certificates/n-453.cert",
+      "format": "evand-cert",
+      "offered": "21.8229954154586623122079744",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-453.yaml"
+    },
+    {
+      "n": 454,
+      "path": "certificates/n-454.cert",
+      "format": "evand-cert",
+      "offered": "21.828427124768102179405824",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-454.yaml"
+    },
+    {
+      "n": 456,
+      "path": "certificates/n-456.cert",
+      "format": "evand-cert",
+      "offered": "21.8813062181121203327991808",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-456.yaml"
+    },
+    {
+      "n": 460,
+      "path": "certificates/n-460.cert",
+      "format": "evand-cert",
+      "offered": "21.9509876879891579663286272",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-460.yaml"
+    },
+    {
+      "n": 462,
+      "path": "certificates/n-462.cert",
+      "format": "evand-cert",
+      "offered": "21.9661922111896412150184471",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-462.yaml"
+    },
+    {
+      "n": 490,
+      "path": "certificates/n-490.cert",
+      "format": "evand-cert",
+      "offered": "22.6568542495151203945545728",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-490.yaml"
+    },
+    {
+      "n": 498,
+      "path": "certificates/n-498.cert",
+      "format": "evand-cert",
+      "offered": "22.8284271247691328474054656",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-498.yaml"
+    },
+    {
+      "n": 499,
+      "path": "certificates/n-499.cert",
+      "format": "evand-cert",
+      "offered": "22.881306218112986074054656",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-499.yaml"
+    },
+    {
+      "n": 507,
+      "path": "certificates/n-507.cert",
+      "format": "evand-cert",
+      "offered": "22.9736971636574845562519552",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-507.yaml"
+    },
+    {
+      "n": 508,
+      "path": "certificates/n-508.cert",
+      "format": "evand-cert",
+      "offered": "22.9833093783497974780788736",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-508.yaml"
+    },
+    {
+      "n": 535,
+      "path": "certificates/n-535.cert",
+      "format": "evand-cert",
+      "offered": "23.6568542495161888582664192",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-535.yaml"
+    },
+    {
+      "n": 536,
+      "path": "certificates/n-536.cert",
+      "format": "evand-cert",
+      "offered": "23.6776695296874570382835712",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-536.yaml"
+    },
+    {
+      "n": 544,
+      "path": "certificates/n-544.cert",
+      "format": "evand-cert",
+      "offered": "23.8284271247704796249980928",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-544.yaml"
+    },
+    {
+      "n": 551,
+      "path": "certificates/n-551.cert",
+      "format": "evand-cert",
+      "offered": "23.9658016419622694334496768",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-551.yaml"
+    },
+    {
+      "n": 552,
+      "path": "certificates/n-552.cert",
+      "format": "evand-cert",
+      "offered": "23.9666288233401842434834432",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-552.yaml"
+    },
+    {
+      "n": 553,
+      "path": "certificates/n-553.cert",
+      "format": "evand-cert",
+      "offered": "23.9789210762278453128162515",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-553.yaml"
+    },
+    {
+      "n": 555,
+      "path": "certificates/n-555.cert",
+      "format": "evand-cert",
+      "offered": "23.9935807135564328733769728",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-555.yaml"
+    },
+    {
+      "n": 582,
+      "path": "certificates/n-582.cert",
+      "format": "evand-cert",
+      "offered": "24.6568542495172435780829184",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-582.yaml"
+    },
+    {
+      "n": 584,
+      "path": "certificates/n-584.cert",
+      "format": "evand-cert",
+      "offered": "24.6776695296884533465448448",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-584.yaml"
+    },
+    {
+      "n": 591,
+      "path": "certificates/n-591.cert",
+      "format": "evand-cert",
+      "offered": "24.8284271247714862411808768",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-591.yaml"
+    },
+    {
+      "n": 596,
+      "path": "certificates/n-596.cert",
+      "format": "evand-cert",
+      "offered": "24.9497474683309115870019584",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-596.yaml"
+    },
+    {
+      "n": 601,
+      "path": "certificates/n-601.cert",
+      "format": "evand-cert",
+      "offered": "24.9853949028319279555018752",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-601.yaml"
+    },
+    {
+      "n": 631,
+      "path": "certificates/n-631.cert",
+      "format": "evand-cert",
+      "offered": "25.6568542495182811180302336",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-631.yaml"
+    },
+    {
+      "n": 633,
+      "path": "certificates/n-633.cert",
+      "format": "evand-cert",
+      "offered": "25.6776695296895389901258752",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-633.yaml"
+    },
+    {
+      "n": 637,
+      "path": "certificates/n-637.cert",
+      "format": "evand-cert",
+      "offered": "25.7781745930779882137059328",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-637.yaml"
+    },
+    {
+      "n": 640,
+      "path": "certificates/n-640.cert",
+      "format": "evand-cert",
+      "offered": "25.8284271247724928573636608",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-640.yaml"
+    },
+    {
+      "n": 641,
+      "path": "certificates/n-641.cert",
+      "format": "evand-cert",
+      "offered": "25.8813062181159853067599872",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-641.yaml"
+    },
+    {
+      "n": 642,
+      "path": "certificates/n-642.cert",
+      "format": "evand-cert",
+      "offered": "25.8813062181159853067599872",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-642.yaml"
+    },
+    {
+      "n": 644,
+      "path": "certificates/n-644.cert",
+      "format": "evand-cert",
+      "offered": "25.8994949366377159252246528",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-644.yaml"
+    },
+    {
+      "n": 649,
+      "path": "certificates/n-649.cert",
+      "format": "evand-cert",
+      "offered": "25.9748973459228904465293973",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-649.yaml"
+    },
+    {
+      "n": 650,
+      "path": "certificates/n-650.cert",
+      "format": "evand-cert",
+      "offered": "25.974880942002166946594816",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-650.yaml"
+    },
+    {
+      "n": 652,
+      "path": "certificates/n-652.cert",
+      "format": "evand-cert",
+      "offered": "25.988125076085703635369984",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-652.yaml"
+    },
+    {
+      "n": 682,
+      "path": "certificates/n-682.cert",
+      "format": "evand-cert",
+      "offered": "26.6568542495058908722233344",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-682.yaml"
+    },
+    {
+      "n": 684,
+      "path": "certificates/n-684.cert",
+      "format": "evand-cert",
+      "offered": "26.6776695296907002251313152",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-684.yaml"
+    },
+    {
+      "n": 689,
+      "path": "certificates/n-689.cert",
+      "format": "evand-cert",
+      "offered": "26.7781745930789776500195328",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-689.yaml"
+    },
+    {
+      "n": 691,
+      "path": "certificates/n-691.cert",
+      "format": "evand-cert",
+      "offered": "26.8284271247735200893894656",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-691.yaml"
+    },
+    {
+      "n": 692,
+      "path": "certificates/n-692.cert",
+      "format": "evand-cert",
+      "offered": "26.8284271247731455682412544",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-692.yaml"
+    },
+    {
+      "n": 693,
+      "path": "certificates/n-693.cert",
+      "format": "evand-cert",
+      "offered": "26.8813062181169919229427712",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-693.yaml"
+    },
+    {
+      "n": 695,
+      "path": "certificates/n-695.cert",
+      "format": "evand-cert",
+      "offered": "26.8994949366386984895905792",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-695.yaml"
+    },
+    {
+      "n": 699,
+      "path": "certificates/n-699.cert",
+      "format": "evand-cert",
+      "offered": "26.9497474683329110754721792",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-699.yaml"
+    },
+    {
+      "n": 701,
+      "path": "certificates/n-701.cert",
+      "format": "evand-cert",
+      "offered": "26.9700653112172655029657023",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-701.yaml"
+    },
+    {
+      "n": 703,
+      "path": "certificates/n-703.cert",
+      "format": "evand-cert",
+      "offered": "26.981311920754707476250624",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-703.yaml"
+    },
+    {
+      "n": 704,
+      "path": "certificates/n-704.cert",
+      "format": "evand-cert",
+      "offered": "26.9871091926749664430260224",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-704.yaml"
+    },
+    {
+      "n": 705,
+      "path": "certificates/n-705.cert",
+      "format": "evand-cert",
+      "offered": "26.990375578025789057138688",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-705.yaml"
+    },
+    {
+      "n": 735,
+      "path": "certificates/n-735.cert",
+      "format": "evand-cert",
+      "offered": "27.6568542495066397903683584",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-735.yaml"
+    },
+    {
+      "n": 736,
+      "path": "certificates/n-736.cert",
+      "format": "evand-cert",
+      "offered": "27.6568542495202668626051072",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-736.yaml"
+    },
+    {
+      "n": 737,
+      "path": "certificates/n-737.cert",
+      "format": "evand-cert",
+      "offered": "27.6776695296915694023606272",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-737.yaml"
+    },
+    {
+      "n": 742,
+      "path": "certificates/n-742.cert",
+      "format": "evand-cert",
+      "offered": "27.7781745930799567784116224",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-742.yaml"
+    },
+    {
+      "n": 743,
+      "path": "certificates/n-743.cert",
+      "format": "evand-cert",
+      "offered": "27.798989873251283369984",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-743.yaml"
+    },
+    {
+      "n": 744,
+      "path": "certificates/n-744.cert",
+      "format": "evand-cert",
+      "offered": "27.7989898732513589614084096",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-744.yaml"
+    },
+    {
+      "n": 745,
+      "path": "certificates/n-745.cert",
+      "format": "evand-cert",
+      "offered": "27.8284271247741624923455488",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-745.yaml"
+    },
+    {
+      "n": 746,
+      "path": "certificates/n-746.cert",
+      "format": "evand-cert",
+      "offered": "27.8284271247742002880577536",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-746.yaml"
+    },
+    {
+      "n": 753,
+      "path": "certificates/n-753.cert",
+      "format": "evand-cert",
+      "offered": "27.9324498863881493397110784",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-753.yaml"
+    },
+    {
+      "n": 754,
+      "path": "certificates/n-754.cert",
+      "format": "evand-cert",
+      "offered": "27.9374233139930545357062144",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-754.yaml"
+    },
+    {
+      "n": 755,
+      "path": "certificates/n-755.cert",
+      "format": "evand-cert",
+      "offered": "27.9514629577605834659069952",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-755.yaml"
+    },
+    {
+      "n": 757,
+      "path": "certificates/n-757.cert",
+      "format": "evand-cert",
+      "offered": "27.9769144464501287013056512",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-757.yaml"
+    },
+    {
+      "n": 758,
+      "path": "certificates/n-758.cert",
+      "format": "evand-cert",
+      "offered": "27.9822355374306587005943808",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-758.yaml"
+    },
+    {
+      "n": 759,
+      "path": "certificates/n-759.cert",
+      "format": "evand-cert",
+      "offered": "27.9885691622969020801613824",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-759.yaml"
+    },
+    {
+      "n": 790,
+      "path": "certificates/n-790.cert",
+      "format": "evand-cert",
+      "offered": "28.6568542495070279312605184",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-790.yaml"
+    },
+    {
+      "n": 791,
+      "path": "certificates/n-791.cert",
+      "format": "evand-cert",
+      "offered": "28.6568542495212288111280128",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-791.yaml"
+    },
+    {
+      "n": 792,
+      "path": "certificates/n-792.cert",
+      "format": "evand-cert",
+      "offered": "28.6568542495212150672326656",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-792.yaml"
+    },
+    {
+      "n": 797,
+      "path": "certificates/n-797.cert",
+      "format": "evand-cert",
+      "offered": "28.7781745930809805744635904",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-797.yaml"
+    },
+    {
+      "n": 798,
+      "path": "certificates/n-798.cert",
+      "format": "evand-cert",
+      "offered": "28.7989898732522831142191104",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-798.yaml"
+    },
+    {
+      "n": 799,
+      "path": "certificates/n-799.cert",
+      "format": "evand-cert",
+      "offered": "28.7989898732523037300621312",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-799.yaml"
+    },
+    {
+      "n": 800,
+      "path": "certificates/n-800.cert",
+      "format": "evand-cert",
+      "offered": "28.7989898732523346538266624",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-800.yaml"
+    },
+    {
+      "n": 810,
+      "path": "certificates/n-810.cert",
+      "format": "evand-cert",
+      "offered": "28.9514630500047710609997824",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-810.yaml"
+    },
+    {
+      "n": 811,
+      "path": "certificates/n-811.cert",
+      "format": "evand-cert",
+      "offered": "28.97435218697654690802373",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-811.yaml"
+    },
+    {
+      "n": 812,
+      "path": "certificates/n-812.cert",
+      "format": "evand-cert",
+      "offered": "28.9769143205190417585799168",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-812.yaml"
+    },
+    {
+      "n": 816,
+      "path": "certificates/n-816.cert",
+      "format": "evand-cert",
+      "offered": "28.9959445386864602040500224",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-816.yaml"
+    },
+    {
+      "n": 868,
+      "path": "certificates/n-868.cert",
+      "format": "evand-cert",
+      "offered": "29.9742166092550133486977024",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-868.yaml"
+    },
+    {
+      "n": 869,
+      "path": "certificates/n-869.cert",
+      "format": "evand-cert",
+      "offered": "29.9749357188757235205080868",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-869.yaml"
+    },
+    {
+      "n": 872,
+      "path": "certificates/n-872.cert",
+      "format": "evand-cert",
+      "offered": "29.9922154605662571946049536",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-872.yaml"
+    },
+    {
+      "n": 874,
+      "path": "certificates/n-874.cert",
+      "format": "evand-cert",
+      "offered": "29.9926541962530774705606471",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-874.yaml"
+    },
+    {
+      "n": 927,
+      "path": "certificates/n-927.cert",
+      "format": "evand-cert",
+      "offered": "30.9691903108826161850875904",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-927.yaml"
+    },
+    {
+      "n": 928,
+      "path": "certificates/n-928.cert",
+      "format": "evand-cert",
+      "offered": "30.974495668124775190888448",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-928.yaml"
+    },
+    {
+      "n": 929,
+      "path": "certificates/n-929.cert",
+      "format": "evand-cert",
+      "offered": "30.9753932494690259080052736",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-929.yaml"
+    },
+    {
+      "n": 930,
+      "path": "certificates/n-930.cert",
+      "format": "evand-cert",
+      "offered": "30.9772726277994440465253445",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-930.yaml"
+    },
+    {
+      "n": 932,
+      "path": "certificates/n-932.cert",
+      "format": "evand-cert",
+      "offered": "30.9906441863849020349218816",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-932.yaml"
+    },
+    {
+      "n": 933,
+      "path": "certificates/n-933.cert",
+      "format": "evand-cert",
+      "offered": "30.9906396110631484960800768",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-933.yaml"
+    },
+    {
+      "n": 934,
+      "path": "certificates/n-934.cert",
+      "format": "evand-cert",
+      "offered": "30.9940783327694194542116864",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-934.yaml"
+    },
+    {
+      "n": 990,
+      "path": "certificates/n-990.cert",
+      "format": "evand-cert",
+      "offered": "31.9753934398895585119698944",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-990.yaml"
+    },
+    {
+      "n": 991,
+      "path": "certificates/n-991.cert",
+      "format": "evand-cert",
+      "offered": "31.9756199047897387425559881",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-991.yaml"
+    },
+    {
+      "n": 992,
+      "path": "certificates/n-992.cert",
+      "format": "evand-cert",
+      "offered": "31.9776473755027222502069444",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-992.yaml"
+    },
+    {
+      "n": 993,
+      "path": "certificates/n-993.cert",
+      "format": "evand-cert",
+      "offered": "31.9838955805472240428908544",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-993.yaml"
+    },
+    {
+      "n": 994,
+      "path": "certificates/n-994.cert",
+      "format": "evand-cert",
+      "offered": "31.9906763852541558003749823",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-994.yaml"
+    },
+    {
+      "n": 996,
+      "path": "certificates/n-996.cert",
+      "format": "evand-cert",
+      "offered": "31.9934449769752197092128328",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-996.yaml"
+    },
+    {
+      "n": 997,
+      "path": "certificates/n-997.cert",
+      "format": "evand-cert",
+      "offered": "31.9968759191575870731976704",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/LEGAL_VICTORIES.jsonl",
+      "first_committed": "2026-10-22T05:29:48Z",
+      "fact": "facts/n-997.yaml"
+    }
+  ],
+  "requested": [
+    105,
+    204
+  ],
+  "replayed": [
+    105,
+    204
+  ],
+  "houses": [
+    {
+      "n": 105,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Ryan Xu, improved by Francisco Couzo and PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "10.789303783748158831",
+      "verified_value": "10.789303783748158831",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    },
+    {
+      "n": 204,
+      "reader": "[Daniel regularized lists 2026-10-20]",
+      "source_key": "[Daniel regularized lists 2026-10-20]",
+      "holders": "Francisco Couzo, improved by Evan Daniel",
+      "result": "T-225",
+      "reported_value": "14.8086428405914940",
+      "verified_value": "14.8086428405914940",
+      "evidence": [
+        "E-evand-regularized-1020-exact-feasibility",
+        "E-evand-regularized-1020-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 105,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk records 2026-10-14]"
+    },
+    {
+      "n": 204,
+      "report": "T-186 (#593's packet's KKT refinement)",
+      "url": "https://github.com/Mishapolk/square-packing-records/tree/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates",
+      "holders": "Mykhailo Polkovskyi, after Daniil Ostashev and PingYou Ltd",
+      "result": "T-186",
+      "reader": "[Mishapolk KKT refinements 2026-10-14]"
+    },
+    {
+      "n": 204,
+      "report": "T-223 (#678)",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "holders": "Francisco Couzo",
+      "result": "T-223",
+      "reader": "[Couzo issue 678 2026-10-18]"
+    },
+    {
+      "n": 204,
+      "report": "T-226 (#670)",
+      "url": "https://github.com/jlevy/squares/issues/670",
+      "holders": "Francisco Couzo",
+      "result": "T-226",
+      "reader": "[Couzo issue 670 2026-10-17]"
+    },
+    {
+      "n": 204,
+      "report": "T-228 (#675)",
+      "url": "https://github.com/jlevy/squares/issues/675",
+      "holders": "Francisco Couzo",
+      "result": "T-228",
+      "reader": "[Couzo issue 675 2026-10-18]"
+    },
+    {
+      "n": 330,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "18.692672444467133",
+      "rounding": "unstated"
+    },
+    {
+      "n": 339,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "18.907351471178022",
+      "rounding": "unstated"
+    },
+    {
+      "n": 342,
+      "report": "couzo-certificates-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2",
+      "holders": "Francisco Couzo's registration witnesses at 43ac7d2, issue 607",
+      "printed": "18.964706723173",
+      "rounding": "unstated"
+    },
+    {
+      "n": 344,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "18.992727809365345",
+      "rounding": "unstated"
+    },
+    {
+      "n": 370,
+      "report": "couzo-issue670-2026-10-17",
+      "url": "https://github.com/franciscouzo/square-packing/tree/23aff0c6f992271e1ad13a148d44f392c4b386c0",
+      "holders": "Francisco Couzo's 73 exact certificates of issue 670 at 23aff0c6",
+      "printed": "19.767428349965",
+      "rounding": "unstated"
+    },
+    {
+      "n": 372,
+      "report": "couzo-extended-range-reports-2026-10-08",
+      "url": "https://github.com/franciscouzo/square-packing/tree/ffd900dfff6d2674ad995359208c2f0714915c82",
+      "holders": "Francisco Couzo's twenty decimal reports beyond the case corpus",
+      "printed": "19.822875655616990",
+      "rounding": "unstated"
+    },
+    {
+      "n": 377,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "19.925471653974826",
+      "rounding": "unstated"
+    },
+    {
+      "n": 378,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "19.942018855984576",
+      "rounding": "unstated"
+    },
+    {
+      "n": 379,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "19.950889681503441",
+      "rounding": "unstated"
+    },
+    {
+      "n": 380,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "19.961350023835208",
+      "rounding": "unstated"
+    },
+    {
+      "n": 381,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "19.974739840483985",
+      "rounding": "unstated"
+    },
+    {
+      "n": 409,
+      "report": "couzo-certificates-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2",
+      "holders": "Francisco Couzo's registration witnesses at 43ac7d2, issue 607",
+      "printed": "20.767428349966",
+      "rounding": "unstated"
+    },
+    {
+      "n": 410,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "20.778174593080",
+      "rounding": "unstated"
+    },
+    {
+      "n": 412,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "20.822995415461893",
+      "rounding": "unstated"
+    },
+    {
+      "n": 413,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "20.831663365382",
+      "rounding": "unstated"
+    },
+    {
+      "n": 417,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "20.933672777441",
+      "rounding": "unstated"
+    },
+    {
+      "n": 418,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "20.939184128264923",
+      "rounding": "unstated"
+    },
+    {
+      "n": 419,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "20.957804836274712",
+      "rounding": "unstated"
+    },
+    {
+      "n": 420,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "20.966588191190457",
+      "rounding": "unstated"
+    },
+    {
+      "n": 421,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "20.976371064794590",
+      "rounding": "unstated"
+    },
+    {
+      "n": 422,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "20.983575254585011",
+      "rounding": "unstated"
+    },
+    {
+      "n": 447,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "21.704232790766",
+      "rounding": "unstated"
+    },
+    {
+      "n": 450,
+      "report": "couzo-certificates-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2",
+      "holders": "Francisco Couzo's registration witnesses at 43ac7d2, issue 607",
+      "printed": "21.767428350587",
+      "rounding": "unstated"
+    },
+    {
+      "n": 452,
+      "report": "couzo-issue670-2026-10-17",
+      "url": "https://github.com/franciscouzo/square-packing/tree/23aff0c6f992271e1ad13a148d44f392c4b386c0",
+      "holders": "Francisco Couzo's 73 exact certificates of issue 670 at 23aff0c6",
+      "printed": "21.778174593086",
+      "rounding": "unstated"
+    },
+    {
+      "n": 453,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "21.822995415463173",
+      "rounding": "unstated"
+    },
+    {
+      "n": 454,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "21.828427124848",
+      "rounding": "unstated"
+    },
+    {
+      "n": 456,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "21.881307463869",
+      "rounding": "unstated"
+    },
+    {
+      "n": 460,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "21.950987687999201",
+      "rounding": "unstated"
+    },
+    {
+      "n": 462,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "21.966193114414129",
+      "rounding": "unstated"
+    },
+    {
+      "n": 490,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "22.656854249523",
+      "rounding": "unstated"
+    },
+    {
+      "n": 498,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "22.828427124831",
+      "rounding": "unstated"
+    },
+    {
+      "n": 499,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "22.881306218323",
+      "rounding": "unstated"
+    },
+    {
+      "n": 507,
+      "report": "couzo-issue678-2026-10-18",
+      "url": "https://github.com/franciscouzo/square-packing/tree/7b6c87e129cf80b5ff9847b90b47fd30b4563c54/certificates/best",
+      "holders": "Francisco Couzo's 83 exact certificates at 7b6c87e, issue 678",
+      "printed": "22.973697163680",
+      "rounding": "unstated"
+    },
+    {
+      "n": 508,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "22.983309379055478",
+      "rounding": "unstated"
+    },
+    {
+      "n": 535,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "23.656854249525",
+      "rounding": "unstated"
+    },
+    {
+      "n": 536,
+      "report": "couzo-issue670-2026-10-17",
+      "url": "https://github.com/franciscouzo/square-packing/tree/23aff0c6f992271e1ad13a148d44f392c4b386c0",
+      "holders": "Francisco Couzo's 73 exact certificates of issue 670 at 23aff0c6",
+      "printed": "23.677669529701",
+      "rounding": "unstated"
+    },
+    {
+      "n": 544,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "23.828427124779",
+      "rounding": "unstated"
+    },
+    {
+      "n": 551,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "23.965801641974269",
+      "rounding": "unstated"
+    },
+    {
+      "n": 552,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "23.966628823345179",
+      "rounding": "unstated"
+    },
+    {
+      "n": 553,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "23.979452392567",
+      "rounding": "unstated"
+    },
+    {
+      "n": 555,
+      "report": "couzo-issue678-2026-10-18",
+      "url": "https://github.com/franciscouzo/square-packing/tree/7b6c87e129cf80b5ff9847b90b47fd30b4563c54/certificates/best",
+      "holders": "Francisco Couzo's 83 exact certificates at 7b6c87e, issue 678",
+      "printed": "23.993580713561",
+      "rounding": "unstated"
+    },
+    {
+      "n": 582,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "24.656854249526",
+      "rounding": "unstated"
+    },
+    {
+      "n": 584,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "24.677669529698",
+      "rounding": "unstated"
+    },
+    {
+      "n": 591,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "24.828427124781",
+      "rounding": "unstated"
+    },
+    {
+      "n": 596,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "24.949747468340",
+      "rounding": "unstated"
+    },
+    {
+      "n": 601,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "24.986189080604",
+      "rounding": "unstated"
+    },
+    {
+      "n": 631,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "25.656854249528",
+      "rounding": "unstated"
+    },
+    {
+      "n": 633,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "25.677669529699",
+      "rounding": "unstated"
+    },
+    {
+      "n": 637,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "25.778174593087",
+      "rounding": "unstated"
+    },
+    {
+      "n": 640,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "25.828427124782",
+      "rounding": "unstated"
+    },
+    {
+      "n": 641,
+      "report": "couzo-issue678-2026-10-18",
+      "url": "https://github.com/franciscouzo/square-packing/tree/7b6c87e129cf80b5ff9847b90b47fd30b4563c54/certificates/best",
+      "holders": "Francisco Couzo's 83 exact certificates at 7b6c87e, issue 678",
+      "printed": "25.881306220594",
+      "rounding": "unstated"
+    },
+    {
+      "n": 642,
+      "report": "couzo-issue678-2026-10-18",
+      "url": "https://github.com/franciscouzo/square-packing/tree/7b6c87e129cf80b5ff9847b90b47fd30b4563c54/certificates/best",
+      "holders": "Francisco Couzo's 83 exact certificates at 7b6c87e, issue 678",
+      "printed": "25.881306220594",
+      "rounding": "unstated"
+    },
+    {
+      "n": 644,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "25.899494936647",
+      "rounding": "unstated"
+    },
+    {
+      "n": 649,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "25.974939166891586",
+      "rounding": "unstated"
+    },
+    {
+      "n": 650,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "25.974939166865611",
+      "rounding": "unstated"
+    },
+    {
+      "n": 652,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "25.990044325432",
+      "rounding": "unstated"
+    },
+    {
+      "n": 682,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "26.656854249529",
+      "rounding": "unstated"
+    },
+    {
+      "n": 684,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "26.677669529700",
+      "rounding": "unstated"
+    },
+    {
+      "n": 689,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "26.778174593089",
+      "rounding": "unstated"
+    },
+    {
+      "n": 691,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "26.828427124789",
+      "rounding": "unstated"
+    },
+    {
+      "n": 692,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "26.828427124782",
+      "rounding": "unstated"
+    },
+    {
+      "n": 693,
+      "report": "couzo-issue678-2026-10-18",
+      "url": "https://github.com/franciscouzo/square-packing/tree/7b6c87e129cf80b5ff9847b90b47fd30b4563c54/certificates/best",
+      "holders": "Francisco Couzo's 83 exact certificates at 7b6c87e, issue 678",
+      "printed": "26.881306218365",
+      "rounding": "unstated"
+    },
+    {
+      "n": 695,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "26.899494936649",
+      "rounding": "unstated"
+    },
+    {
+      "n": 699,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "26.949747468420",
+      "rounding": "unstated"
+    },
+    {
+      "n": 701,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "26.971171145178352",
+      "rounding": "unstated"
+    },
+    {
+      "n": 703,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "26.981389201596016",
+      "rounding": "unstated"
+    },
+    {
+      "n": 704,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "26.987139500916770",
+      "rounding": "unstated"
+    },
+    {
+      "n": 705,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "26.990419622637",
+      "rounding": "unstated"
+    },
+    {
+      "n": 735,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "27.656854249623",
+      "rounding": "unstated"
+    },
+    {
+      "n": 736,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "27.656854249530",
+      "rounding": "unstated"
+    },
+    {
+      "n": 737,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "27.677669529702",
+      "rounding": "unstated"
+    },
+    {
+      "n": 742,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "27.778174593090",
+      "rounding": "unstated"
+    },
+    {
+      "n": 743,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "27.798989873288",
+      "rounding": "unstated"
+    },
+    {
+      "n": 744,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "27.798989873262",
+      "rounding": "unstated"
+    },
+    {
+      "n": 745,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "27.828427124812",
+      "rounding": "unstated"
+    },
+    {
+      "n": 746,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "27.828427124801",
+      "rounding": "unstated"
+    },
+    {
+      "n": 753,
+      "report": "couzo-issue678-2026-10-18",
+      "url": "https://github.com/franciscouzo/square-packing/tree/7b6c87e129cf80b5ff9847b90b47fd30b4563c54/certificates/best",
+      "holders": "Francisco Couzo's 83 exact certificates at 7b6c87e, issue 678",
+      "printed": "27.932449886404",
+      "rounding": "unstated"
+    },
+    {
+      "n": 754,
+      "report": "couzo-issue678-2026-10-18",
+      "url": "https://github.com/franciscouzo/square-packing/tree/7b6c87e129cf80b5ff9847b90b47fd30b4563c54/certificates/best",
+      "holders": "Francisco Couzo's 83 exact certificates at 7b6c87e, issue 678",
+      "printed": "27.937423317053",
+      "rounding": "unstated"
+    },
+    {
+      "n": 755,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "27.951463061397879",
+      "rounding": "unstated"
+    },
+    {
+      "n": 757,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "27.976914446463442",
+      "rounding": "unstated"
+    },
+    {
+      "n": 758,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "27.983731022945",
+      "rounding": "unstated"
+    },
+    {
+      "n": 759,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "27.988569233273449",
+      "rounding": "unstated"
+    },
+    {
+      "n": 790,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "28.656854249532",
+      "rounding": "unstated"
+    },
+    {
+      "n": 791,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "28.656854249532",
+      "rounding": "unstated"
+    },
+    {
+      "n": 792,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "28.656854249532",
+      "rounding": "unstated"
+    },
+    {
+      "n": 797,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "28.778174593092",
+      "rounding": "unstated"
+    },
+    {
+      "n": 798,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "28.798989873291",
+      "rounding": "unstated"
+    },
+    {
+      "n": 799,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "28.798989873291",
+      "rounding": "unstated"
+    },
+    {
+      "n": 800,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
+      "holders": "Francisco Couzo's exact certificate at 211, 487b058, no issue",
+      "printed": "28.798989873263",
+      "rounding": "unstated"
+    },
+    {
+      "n": 810,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "28.951463061400412",
+      "rounding": "unstated"
+    },
+    {
+      "n": 811,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "28.974848874209278",
+      "rounding": "unstated"
+    },
+    {
+      "n": 812,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "28.976914446492419",
+      "rounding": "unstated"
+    },
+    {
+      "n": 816,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "28.995944538692246",
+      "rounding": "unstated"
+    },
+    {
+      "n": 868,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "29.974553547719",
+      "rounding": "unstated"
+    },
+    {
+      "n": 869,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "29.974935743865",
+      "rounding": "unstated"
+    },
+    {
+      "n": 872,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "29.992261716554",
+      "rounding": "unstated"
+    },
+    {
+      "n": 874,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "29.992883399225609",
+      "rounding": "unstated"
+    },
+    {
+      "n": 927,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "30.969443226806",
+      "rounding": "unstated"
+    },
+    {
+      "n": 928,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "30.974935654060",
+      "rounding": "unstated"
+    },
+    {
+      "n": 929,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "30.975405698329704",
+      "rounding": "unstated"
+    },
+    {
+      "n": 930,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "30.977403109932478",
+      "rounding": "unstated"
+    },
+    {
+      "n": 932,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "30.992265777039",
+      "rounding": "unstated"
+    },
+    {
+      "n": 933,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "30.992883399256602",
+      "rounding": "unstated"
+    },
+    {
+      "n": 934,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "30.994174058187146",
+      "rounding": "unstated"
+    },
+    {
+      "n": 990,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "31.975405698332123",
+      "rounding": "unstated"
+    },
+    {
+      "n": 991,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "31.977403109964455",
+      "rounding": "unstated"
+    },
+    {
+      "n": 992,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "31.977815424176502",
+      "rounding": "unstated"
+    },
+    {
+      "n": 993,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "31.983895593654374",
+      "rounding": "unstated"
+    },
+    {
+      "n": 994,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "31.992271544010",
+      "rounding": "unstated"
+    },
+    {
+      "n": 996,
+      "report": "couzo-issue715-2026-10-21",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6b7391de820fd01f3ff6984e4a081e8c86845588/certificates",
+      "holders": "Francisco Couzo's 109 exact certificates at 6b7391de, issue 715",
+      "printed": "31.994135336337",
+      "rounding": "unstated"
+    },
+    {
+      "n": 997,
+      "report": "muglich-issue686-2026-10-19",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "holders": "Darius Muglich's 100 exact certificates in the issue 686 attachment",
+      "printed": "31.996875920326034",
+      "rounding": "unstated"
+    }
+  ],
+  "register": {
+    "title": "Mykhailo Polkovskyi's 122 certificates of issue 719 at 12fc4667",
+    "headline": "Polkovskyi's re-solves of the house packings at 105 and 204, below T-174 and T-225",
+    "significance": 2,
+    "source_checks": "The issue states that every certificate passes Evan Daniel's exact checker verify_cert.py and this repository's sqpack/verify.py with zero tolerance, 122 of 122 on each, run from the author's own copies under tools/, which are not in the pinned tree. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Mykhailo Polkovskyi (https://github.com/Mishapolk/square-packing-records), the name the record gives him since issue 593 (the issue gives Mikhail Polk), for re-solving each count's house packing to a smaller side: at 105, Ryan Xu's packing as Francisco Couzo and PingYou Ltd refined it (T-174); at 204, Francisco Couzo's packing as Evan Daniel regularized it (T-225), which grew from Polkovskyi's own seed (hop job 105412, per issue 670's per-count JSON).",
+    "next_rung": "Independently review the retained replay of 105 and 204 (think-4h23); once at V3/C3, adopt both as the houses and regularize them.",
+    "bead": "think-xyhn",
+    "bibliography": {
+      "authors": [
+        "Polkovskyi"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Polkovskyi after Couzo, Daniel, Xu, PingYou Ltd, Muglich et al.",
+      "short_credit": "Polkovskyi after Couzo et al.",
+      "note": "Issue 719's 122 exact certificates at 12fc46678fa8eefa3f156ff37dfffd84c8f3a580 in Evan Daniel's format, two in the case corpus (105 and 204) and 120 beyond it; re-solves and new arrangements of packings by Couzo, Muglich, Daniel, Xu and PingYou Ltd among others. Derived exact facts only; no upstream byte is retained. Gemini assistance disclosed. No optimality claim."
+    }
+  }
+}

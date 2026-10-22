@@ -122,6 +122,11 @@ superseded in turn; the start there, 50 of `couzo-verified-bounds-2026-10-14`’
 of `couzo-certificates-2026-10-14`’s and `evand-fresh-compositions-2026-10-14`’s at 460,
 now names #670 as its successor instead of the #678, #686 or #715 row that had superseded
 it on `main`, so each count is one chain in report order.
+Since 22 October Mykhailo Polkovskyi’s #719 rows
+([`mishapolk-issue719-2026-10-22`](../mishapolk-issue719-2026-10-22/README.md)),
+recorded by the [ledger of 22 October for issue
+719](../../../campaign/issue-intake/upper-bounds-issue719-20261022/README.md), supersede
+three of the eight, at 370, 452 and 536, by 2.88e-12 to 1.27e-11; five remain current.
 [acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record
 the source register reads them from.
 
