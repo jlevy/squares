@@ -97,13 +97,14 @@ the closed contract allows; elsewhere the least pair gap is between 1.0e-20 (at 
 7.8e-11. **All 432 controls are refused by both routes.** The positive decisions took 76.6
 CPU seconds; [receipts/filtered-exact-replay.json](receipts/filtered-exact-replay.json)
 keeps every row’s side, both routes’ counts, least clearance, least gap and failures, the
-controls, and the per-count JSON’s seed credit. The maintained all-pairs kernel, `devtools.evand_arrangement_reports`’s two
-routes with no filter, decided every pair at 922, the row that becomes current there: 424,581 pairs in 107.0 CPU seconds;
-both routes accept it, and their least pair gap and wall clearance equal the filtered
-decision’s exactly ([receipts/exhaustive-sample.json](receipts/exhaustive-sample.json)).
-The all-pairs replay of every row, about 4 CPU-hours for the three Couzo packets at that
-rate, is not run; the filtered route is the replay of record, as for #678 and #715. Every side is below Göbel’s
-classical construction at its count, by 5.47e-03 at 330 or more
+controls, and the per-count JSON’s seed credit. The maintained all-pairs kernel,
+`devtools.evand_arrangement_reports`’s two routes with no filter, decided every pair at
+922, the row that becomes current there: 424,581 pairs in 107.0 CPU seconds; both routes
+accept it, and their least pair gap and wall clearance equal the filtered decision’s
+exactly ([receipts/exhaustive-sample.json](receipts/exhaustive-sample.json)). The
+all-pairs replay of every row, about 4 CPU-hours for the three Couzo packets at that rate,
+is not run; the filtered route is the replay of record, as for #678 and #715. Every side
+is below Göbel’s classical construction at its count, by 5.47e-03 at 330 or more
 ([receipts/goebel-comparison.json](receipts/goebel-comparison.json), the 15 October
 packet’s retained program).
 

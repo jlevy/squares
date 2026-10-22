@@ -103,13 +103,14 @@ and 2.9e-09. **All 456 controls of the 76 certificates are refused by both route
 positive decisions took 90.3 CPU seconds;
 [receipts/filtered-exact-replay.json](receipts/filtered-exact-replay.json) keeps every
 row’s side, both routes’ counts, least clearance, least gap and failures, the controls,
-and the per-count JSON’s seed credit. The maintained all-pairs kernel, `devtools.evand_arrangement_reports`’s two
-routes with no filter, decided every pair at 998: 497,503 pairs in 105.0 CPU seconds;
-both routes accept it, and their least pair gap and wall clearance equal the filtered
-decision’s exactly ([receipts/exhaustive-sample.json](receipts/exhaustive-sample.json)).
-The all-pairs replay of every row, about 4 CPU-hours for the three Couzo packets at that
-rate, is not run; the filtered route is the replay of record, as for #678 and #715. Every side is below Göbel’s classical
-construction at its count, by 1.00e-05 at 919 or more
+and the per-count JSON’s seed credit. The maintained all-pairs kernel,
+`devtools.evand_arrangement_reports`’s two routes with no filter, decided every pair at
+998: 497,503 pairs in 105.0 CPU seconds; both routes accept it, and their least pair gap
+and wall clearance equal the filtered decision’s exactly
+([receipts/exhaustive-sample.json](receipts/exhaustive-sample.json)). The all-pairs replay
+of every row, about 4 CPU-hours for the three Couzo packets at that rate, is not run; the
+filtered route is the replay of record, as for #678 and #715. Every side is below Göbel’s
+classical construction at its count, by 1.00e-05 at 919 or more
 ([receipts/goebel-comparison.json](receipts/goebel-comparison.json)).
 
 The [backlog ledger of 22 October](../../../campaign/issue-intake/upper-bounds-backlog-20261022/README.md)

@@ -127,14 +127,16 @@ and both routes accept every packing: 88,101 candidate pairs of 15,138,963, and 
 corner against every wall. 35 touch the box and 6 have touching pairs, 394 in all, which
 the closed contract allows; elsewhere the least pair gap is between 1.1e-12 (at 652 and
 653) and 6.6e-11. **All 264 controls are refused by both routes.** The positive decisions
-took 58.8 CPU seconds; [receipts/filtered-exact-replay.json](receipts/filtered-exact-replay.json)
-keeps every row’s side, both routes’ counts, least clearance, least gap and failures, the
-controls, and the per-count JSON’s seed credit. The maintained all-pairs kernel, `devtools.evand_arrangement_reports`’s two
-routes with no filter, decided every pair at 996: 495,510 pairs in 221.5 CPU seconds;
-both routes accept it, and their least pair gap and wall clearance equal the filtered
-decision’s exactly ([receipts/exhaustive-sample.json](receipts/exhaustive-sample.json)).
-The all-pairs replay of every row, about 4 CPU-hours for the three Couzo packets at that
-rate, is not run; the filtered route is the replay of record, as for #678 and #715. Every side is below Göbel’s
+took 58.8 CPU seconds;
+[receipts/filtered-exact-replay.json](receipts/filtered-exact-replay.json) keeps every
+row’s side, both routes’ counts, least clearance, least gap and failures, the controls,
+and the per-count JSON’s seed credit. The maintained all-pairs kernel,
+`devtools.evand_arrangement_reports`’s two routes with no filter, decided every pair at
+996: 495,510 pairs in 221.5 CPU seconds; both routes accept it, and their least pair gap
+and wall clearance equal the filtered decision’s exactly
+([receipts/exhaustive-sample.json](receipts/exhaustive-sample.json)). The all-pairs replay
+of every row, about 4 CPU-hours for the three Couzo packets at that rate, is not run; the
+filtered route is the replay of record, as for #678 and #715. Every side is below Göbel’s
 classical construction at its count, by 1.44e-02 at 330 or more
 ([receipts/goebel-comparison.json](receipts/goebel-comparison.json)).
 

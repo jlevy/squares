@@ -3,7 +3,7 @@
 Joost de Winter’s [issue #666](https://github.com/jlevy/squares/issues/666), opened
 2026-10-17T07:06:07Z, reports nineteen packings of n unit squares beyond the n ≤ 324 case
 corpus, each the exact rational side of a certificate rounded up at 12 places: 464, and
-from 509 to 1568 one count below each integer side ⌈√n⌉ that the record held there.
+from 509 to 1568 a side below the integer ⌈√n⌉, where the record held the grid.
 This packet retains all nineteen certificates. The 11 at or below 1024 are recorded as
 dated beyond-horizon rows of the `de-winter-issue666-2026-10-17` source; the 8 above
 1024 wait on the owner’s decision whether the record tracks counts that high
@@ -37,7 +37,7 @@ certificates). Pinned by digest only: the 19 decimal-pose files `nNNNN.json` and
 
 Each certificate is `n S`, one comment line, then n rows `x y t`, a rational centre and
 $t = \tan(\theta/2)$, in Evan Daniel’s certificate format; the header side is
-authoritative. The sides carry large rationals (numerators of up to 110 digits).
+authoritative. The poses carry long rationals, with numerators of up to 110 digits.
 
 | n | Issue’s print, rounded up | Record the issue names | Disposition |
 | --- | --- | --- | --- |
