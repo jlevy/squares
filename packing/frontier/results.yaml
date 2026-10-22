@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-21'
+last_reviewed: '2026-10-22'
 results:
   - id: T-001
     kind: lower-bound
@@ -30760,9 +30760,13 @@ results:
       Four complete rational source certificates report finite upper-bound improvements at
       the exact sides they state: s(204) <= 14.808642840591493923068442871459, s(227) <=
       15.563625652325149084792443723702, s(229) <= 15.650161513876431064009548865321 and
-      s(260) <= 16.645753250519812194746296653316. Complete native feasibility outcomes are
-      retained separately; the selected standing cases are unchanged pending independent
-      review and record review.
+      s(260) <= 16.645753250519812194746296653316.
+
+      The four certificates and their duplicate-square and outside-container controls were
+      decided here on 21 October 2026 by both maintained exact routes, and the frozen
+      comparison rebuilt; no route here is the source's code, so the replay is
+      independently re-implemented. The 21 October review reproduced it, decided each
+      certificate again on a clean-room checker of its own, and found no blocking defect.
 
       Each certificate is a display-regularized view, in Evan Daniel's regularized record
       lists, of a packing already reported, solved to its exact side, and lies below that
@@ -30786,16 +30790,16 @@ results:
       Couzo's at 204 (#678, T-223, which his source credits to Mykhailo Polkovskyi's
       construction), 227 (#672, his refinement of Joost de Winter's #668 packing, T-196)
       and 260 (#678, T-223, his arrangement from a search seeded with Evan Daniel's
-      exact-form certificate of Joost de Winter's #668 packing), and Evan Daniel's own at 229 (#674, T-199, from
-      Couzo's #672 packing, which refines de Winter's). Evan Daniel
+      exact-form certificate of Joost de Winter's #668 packing), and Evan Daniel's own at
+      229 (#674, T-199, from Couzo's #672 packing, which refines de Winter's). Evan Daniel
       (https://github.com/evand/square-packing) refreshed each packing from his store,
       solved it to the exact side stated (at 229 after a polish), regularized it for
       display at that side and wrote the certificate. His credits say the repository's work
       was produced by Claude (Anthropic) under human direction.
     scope:
       n_values: [204, 227, 229, 260]
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
       rationale: >-
@@ -30804,14 +30808,15 @@ results:
         227, Daniel's #674 at 229), 1.76e-11 to 1.39e-9 below that packing's certificate
         and regularized for display: a citable detail of each case that moves no theorem,
         S2 as T-146 is. At 227 the drop of 1.71e-4 below T-196 is #672's (think-2vjc), not
-        this entry's. No lower bound or optimum. Drafted at intake and confirmed by review
-        A of #716; the stage 4 review may still change it.
+        this entry's. No lower bound or optimum. Drafted at intake, confirmed by review A of
+        #716 and by the 21 October stage 4 review.
       scored: '2026-10-21'
       by: >-
-        review A of #716, the pull request's reviewer c-review-716-A
-        (https://github.com/jlevy/squares/pull/716#issuecomment-6328806725), confirming the
-        draft S2 of think-ql4v (the views lane of 21 October); not the lane that reviews the
-        mathematics, whose stage 4 review is still owed
+        the 21 October stage 4 review
+        (docs/project/reviews/review-2026-10-21-evand-regularized-views.md), confirming the
+        draft S2 of think-ql4v (the views lane of 21 October), which review A of #716
+        (https://github.com/jlevy/squares/pull/716#issuecomment-6328806725) had confirmed
+        first
     novelty: previously-published
     attribution:
       source_keys: ['[Daniel regularized lists 2026-10-20]']
@@ -30853,9 +30858,6 @@ results:
           basis: source-claim
           measured_in: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
           one_to_one: false
-          moved: 112
-          max_move: 0.65
-          max_turn_deg: 0.055
       - n: 260
         of: T-223
         by: '[Daniel regularized lists 2026-10-20]'
@@ -30866,10 +30868,10 @@ results:
           basis: source-claim
           measured_in: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
           one_to_one: false
-          moved: 41
-          max_move: 0.643
-          max_turn_deg: 1.3e-07
-    evidence: [E-evand-regularized-1020-certificate-report]
+    evidence:
+      - E-evand-regularized-1020-certificate-report
+      - E-evand-regularized-1020-exact-feasibility
+      - E-evand-regularized-1020-review-exact-feasibility
     artifacts:
       - packing/resources/web/evand-regularized-2026-10-20/README.md
       - packing/resources/web/evand-regularized-2026-10-20/acquisition/claims.json
@@ -30881,22 +30883,38 @@ results:
       - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-20261021/README.md
       - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-21-evand-regularized-views.md
+      - packing/resources/web/evand-regularized-2026-10-20/review/review-2026-10-21/README.md
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_regularized_1020.py
+      - packing/resources/web/evand-regularized-2026-10-20/receipts/exact-certification.json.xz
     notes: >-
-      A separate complete repository replay is retained for n = 204, 227, 229 and 260: 4
-      positives and 8 duplicate-square and outside-container controls passed their
-      required outcomes on both routes, 636798 pair decisions; summed over the 12 jobs,
-      the receipt records 63.0 route CPU seconds and 71.44 job wall seconds, the longest
-      job 7.07 seconds. Every positive clears every wall by at least 5.00e-21 and every
-      pair by at least 9.99e-21.
+      A complete repository replay is retained for n = 204, 227, 229 and 260: 4 positives
+      and 8 duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 636798 pair decisions; summed over the 12 jobs, the receipt records
+      63.0 route CPU seconds and 71.44 job wall seconds, the longest job 7.07 seconds.
+      Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21; the 21 October review measured the least wall clearance as exactly
+      1/(2*10^20) at every count and the least pair gaps as 9.99999999999999e-21 to the
+      digits printed, between squares (60, 82), (169, 180), (36, 129) and (178, 193), as
+      the source's solved packing scaled by 1 + 1e-20 gives.
+
+      The receipt's two controls a count are gross, a duplicated square (gap -1) and a
+      square moved outside: they show that both routes refuse, not that they refuse at the
+      certificates' margins of 1e-20 (RF-3). The review's sharp controls, kept with their
+      receipts in the packet's review/review-2026-10-21/, lowered the side by the least
+      far-wall clearance, moved every square by the least near-wall clearance and closed
+      the least-gap pair by its gap: both maintained routes and the review's checker
+      accepted each at exact contact and refused each 1e-30 further, at all four counts,
+      as did the kernel's run_sharp. test_upper_bound_reports_regularized_1020.py runs the
+      kernel's two sharp controls on the 204 certificate at contact and 1e-30 past it.
 
       In the packet's frozen comparison, read before #704 merged: at n = 204 the
       certificate is below the case's ceiling (Daniil Ostashev, improved by PingYou Ltd
-      and Mishapolk, T-186) by 2.04e-05; below T-223 (#678) (Francisco Couzo)
-      by 1.39e-09; below #675 (Francisco Couzo) by 1.53e-06; below #670 (Francisco Couzo)
-      by 1.58e-06.
+      and Mishapolk, T-186) by 2.04e-05; below T-223 (#678) (Francisco Couzo) by
+      1.39e-09; below #675 (Francisco Couzo) by 1.53e-06; below #670 (Francisco Couzo) by
+      1.58e-06.
 
       At n = 227 it is below the case's ceiling (the Kingbird catalogue (David
       Ellsworth), verified by T-155's exact ceiling) by 7.44e-03; below #672 (Francisco
@@ -30909,61 +30927,84 @@ results:
 
       It is the smallest report at each count, and each side lies below the verified upper
       bound at n + 1 (14.82445114612409 at 205, 15.60460147572968 at 228, 15.68292682926830
-      at 230, 16.67877987534291 at 261). No registered certificate states any of the four
-      sides, so no item names first_certified_in. The 21 October ledger (upper-bounds-20261021) records each in
+      at 230, 16.67877987534291 at 261); the review compared each side with every verified
+      and reported upper bound at every later count through 324 and found the least margin
+      at n + 1. No registered certificate states any of the four sides, so no item names
+      first_certified_in. The 21 October ledger (upper-bounds-20261021) records each in
       report order, a refinement of the packing named, after #672 at 227.
 
       Each count is listed in regularizations as a solved view of the registered packing
       its source credits, the identity resting on the source's path test and measured here
-      pose by pose (measure/identity.json; a measurement, which decides nothing). At 227
-      the view is #672's packing: 194 of 227 squares lie within 1e-6 of #672's poses, and
-      #672's packing moves no square beyond a tenth from T-196's, so the item names T-196,
-      whose packing #672 refines, and the credit names #672, which think-2vjc imports. At
-      229 and 260 nearest centres pair the squares one to one under no symmetry, and an
-      optimal assignment gives the moves listed; at 260, 207 of 260 squares lie within
-      1e-9 of T-223's and none turns by 1e-6 degrees, the largest by 1.3e-7.
+      pose by pose (measure/identity.json; a measurement, which decides nothing), and
+      reproduced by the review on code of its own. At 227 the view is #672's packing: 194
+      of 227 squares lie within 1e-6 of #672's poses, and #672's packing moves no square
+      beyond a tenth from T-196's, so the item names T-196, whose packing #672 refines, and
+      the credit names #672, which think-2vjc imports (RF-1). At 229 and 260 nearest
+      centres pair the squares one to one under no symmetry, so those items record no move
+      or turn, as the regularization policy's clarification of 16 October asks (RF-4); an
+      optimal assignment moves 112 squares beyond 1e-3 at 229, at most 0.650, turning
+      none beyond 0.055 degrees, and 41 at 260, at most 0.643; at 260, 207 of 260 squares
+      lie within 1e-9 of T-223's and none turns by 1e-6 degrees, the largest by 1.3e-7.
 
-      Since #704 and #706 merged on 21 October, the houses are T-223 at 204 and 260, T-196
-      at 227 and T-199 at 229, each a member of the ledger's frozen start, and the
+      Each item's changes are the source's report of its regularizer's own step, which kept
+      every free angle and turned or merged none. Measured against the credited
+      certificate, the views do turn squares: 12 beyond 1e-3 degrees at 204, 4 at 227 (one
+      by 2.54 degrees against #672's) and 31 at 229, several near-axis squares exactly to
+      the axis. The method log's account of the exact solve, which snaps near-axis tilts to
+      the axis, suggests they arise before the regularizer, in the refresh's solve or at
+      229 the polish; the record does not say which step made them, and the review asks
+      the author (RF-2, its Question 1).
+
+      Since #704 and #706 merged on 21 October, the houses were T-223 at 204 and 260,
+      T-196 at 227 and T-199 at 229, each a member of the ledger's frozen start, and the
       certificate lies below each by the margins above: 1.39e-09 and 2.51e-11 below T-223,
-      1.71e-04 below T-196 and 1.91e-11 below T-199. This entry leaves the case records
-      unchanged; its adoption at all four counts follows its stage 4 review, with both
-      strong generators on each re-housed count.
-      #706's own runs of Evan Daniel's regularizer on T-223's witnesses found solved views
-      at the margins stated here at 204 and 260, listed there as register candidates.
+      1.71e-04 below T-196 and 1.91e-11 below T-199. #706's own runs of Evan Daniel's
+      regularizer on T-223's witnesses found solved views at the margins stated here at
+      204 and 260, listed there as register candidates.
 
-      The source's own checkers were not run here. The two maintained routes, the sqpack rational witness verifier
-      and the independent rational corner checker, share certificate parsing, half-angle
-      conversion, Fraction arithmetic and the separating-axis method. No two independent
-      methods, human oversight or optimality is claimed.
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method; the review's checker shares no code with them, and its
+      integer route no arithmetic library. No optimality, local minimum or human
+      oversight is claimed.
+
+      V3 and C3 rest on the 21 October review and the replay it reproduced
+      (E-evand-regularized-1020-exact-feasibility), with the review's own checker
+      (E-evand-regularized-1020-review-exact-feasibility).
     next_rung: >-
-      Independently review the retained replay and the identity measurements, then adopt at
-      each count: each side lies below every value the record holds or has pending, by
-      1.9e-11 at 229 to 1.39e-9 at 204 against the packing it solves, and each lies below
-      the verified bound at the next count. Both strong generators run on each re-housed
-      count in the adoption's pull request.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 21 October, is
+      retained.
 
       The adoption at 227 waits for think-2vjc's registration of #672, after which the
       item's of names that result: as recorded it names T-196, so an adoption would credit
-      de Winter's packing and leave out Couzo's refinement, the whole 1.71e-4 (review A2 of
-      #716). From this entry's C3 on, a test requires select_houses.CORRECTIONS_OWED to hold
-      227 while the item names T-196, and adopt_houses refuses the count until it is
-      repointed.
-    unfinished_confirmations:
-      - what: >-
-          Enter the retained two-route replay at 204, 227, 229 and 260 as confirming
-          evidence, with the mapped stage 4 review of the four certificates and of the
-          identity measurement, and add the sharp controls the replay lacks, each with a
-          contact pushed 1e-30 into overlap, since its two controls are gross (the evidence
-          atom's limitations).
-        rung: C3
-        link: think-ql4v
-      - what: >-
-          Repoint the 227 item's of from T-196 to #672's result once think-2vjc registers
-          it; until then the adoption at 227 waits, held by select_houses.CORRECTIONS_OWED
-          from this entry's C3 on (review A2 of #716).
-        rung: C3
-        link: think-2vjc
+      de Winter's packing and leave out Couzo's refinement, the whole 1.71e-4 (RF-1 of the
+      21 October review; review A2 of #716). select_houses stages 227 under think-2vjc and
+      holds it in CORRECTIONS_OWED while the item names T-196, and adopt_houses refuses the
+      count until it is repointed.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-21-evand-regularized-views.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, reasoning setting xhigh), the stage 4
+          mathematical review lane of T-225 (c-review-t225-math), prompted separately from
+          the import lane that built the packet and its replay and from the senior reviewer
+          of #716
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-21'
+        scope: >-
+          Finite feasibility of the four certificates T-225 cites: the retained receipt
+          replayed on both maintained routes, the frozen claim record rebuilt, a clean-room
+          checker written for the review deciding each certificate on an integer route and
+          a Fraction route with exact clipping area, eight sharp and format controls a
+          count through both maintained routes and that checker, each side's margins
+          against every bound through 324, the eight retained gzip files held to their Git
+          blobs at the pin, each route's trust boundary, and the credit the entry states
+          measured pose by pose against T-223, #672, T-196 and T-199.
+        verdict: accepted
+        covers: [T-225]
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

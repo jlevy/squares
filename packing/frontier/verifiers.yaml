@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-20'
+last_reviewed: '2026-10-22'
 verifiers:
   - id: V-evand-verify-exact
     program: verify_exact.py
@@ -2386,7 +2386,80 @@ verifiers:
       Written and run on 20 October 2026 by the review; kept in the couzo-issue678-2026-10-18
       packet's review/ with its README and receipts (RF-5).
 
+  - id: V-evand-regularized-1020-review-check
+    program: review_t225_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 21 October review's standard-library exact checker of the four regularized
+      certificates T-225 cites, with a reader of its own that admits only integer and p/q
+      literals, deciding each certificate on two routes that share only that reader: route
+      I in integers alone (a Pythagorean triple per row, containment by half-extents and
+      every pair by four separating-axis inequalities cleared of denominators), and route F
+      in Fraction (unit edges and right angles on the corners, corner containment, every
+      pair by corner projections on the four unit edge normals, and every pair whose
+      bounding boxes overlap again by the exact area one square's closed half-planes clip
+      from the other).
+    source:
+      - packing/resources/web/evand-regularized-2026-10-20/review/review-2026-10-21/programs/review_t225_check.py
+    independence_record: docs/project/reviews/review-2026-10-21-evand-regularized-views.md
+    independence:
+      read: [mathematics, certificate-format, specification, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-225 (c-review-t225-math,
+            think-ql4v), strong sub-agent tier, reasoning setting xhigh
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's CREDITS.md says the repository's work was produced by Claude
+          (Anthropic) under human direction. Written in a file of its own that imports
+          nothing from this repository or the source, from the certificates' format line,
+          the mathematics, the source's method log and JSON files and the two 20 October
+          reviews' account of the maintained routes' method, before its author read either
+          maintained route; its author never read the source's checkers verify_cert.py and
+          verify_cert2.py. Route F uses CPython's Fraction, as those checkers and the
+          maintained routes do; route I uses integers only.
+    note: >-
+      Written and run on 21 October 2026 by the review; kept in the
+      evand-regularized-2026-10-20 packet's review/review-2026-10-21/ with its README and
+      receipts (RF-6).
+
   # --- First-party programs: premise checks and replay drivers ------------------------
+  - id: V-evand-regularized-1020-review-controls
+    program: sharp_controls_t225.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      The 21 October review's sharp controls of T-225's four certificates: eight mutants a
+      count at the scale of the margins (the side lowered by the least far-wall clearance,
+      every square moved by the least near-wall clearance, the least-gap pair closed along
+      its best separating axis, each at exact contact and 1e-30 past it; a row dropped; a
+      decimal literal), each decided by the review's checker and by both maintained routes
+      through the packet's evand-cert adapter, and the kernel's run_sharp at contact and
+      past it. It adds the mutants and the expectations; the routes decide.
+    source:
+      - packing/resources/web/evand-regularized-2026-10-20/review/review-2026-10-21/programs/sharp_controls_t225.py
+    independence_record: docs/project/reviews/review-2026-10-21-evand-regularized-views.md
+    note: >-
+      Written and run on 21 October 2026 by the review (c-review-t225-math); it imports
+      devtools.evand_arrangement_reports, devtools.evand_exact_certificates and
+      devtools.upper_bound_reports to reach the maintained routes, and the review's
+      checker. Kept with its receipts out-controls-nNNN.json in the packet's
+      review/review-2026-10-21/ (RF-3, RF-6).
+
   - id: V-overbeck-review3-seed-packing
     program: seed_packing_check.py
     author: Squares Project (Levy)

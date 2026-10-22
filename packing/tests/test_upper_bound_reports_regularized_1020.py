@@ -26,6 +26,7 @@ from typing import Any
 import pytest
 
 from devtools import check_source_coverage as coverage
+from devtools import evand_arrangement_reports as kernel
 from devtools import select_houses
 from devtools import upper_bound_reports as reports
 
@@ -117,6 +118,31 @@ def test_the_227_view_is_measured_as_672s_packing_solved_lower() -> None:
     # #672's packing moves no square beyond a tenth from de Winter's: it refines it.
     refines = pairs[227, "#672", "T-196 (#668)"]
     assert refines["assignment"]["moved_beyond"]["1e-1"] == 0
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize("where", ["at-contact", "past-contact"])
+@pytest.mark.parametrize("control", kernel.SHARP_CONTROLS)
+def test_both_routes_meet_contact_and_refuse_1e30_past_it_at_204(
+    control: str, where: str
+) -> None:
+    """RF-3 of the 21 October review: the receipt's two controls are gross (a duplicated
+    square, gap -1, and a square moved outside), while every margin these certificates keep
+    is about 1e-20, so a route rounding at binary64 or tolerating 1e-12 would pass the
+    packet as retained. The kernel's two sharp controls on the 204 certificate: the side
+    lowered by its least far-wall clearance, or its tightest pair closed along its best
+    separating axis, is accepted by both maintained routes at exact contact with the margin
+    exactly 0, and refused by both 1e-30 past it at exactly -1e-30, as the review's
+    controls found at all four counts (review/review-2026-10-21/outputs/out-controls-n*.json).
+    Each case runs both routes over 20,706 pairs, about 3 s a route, above the quick lane's
+    per-test ceiling, so it runs in the deep surface."""
+    certificate = reports.read_facts(_packet())[204]
+    margin = "wall" if control == "side-lowered-past-wall-contact" else "gap"
+    past = where == "past-contact"
+    verdicts = kernel.run_sharp(certificate, control, past=past)
+    for route in kernel.ROUTES:
+        assert verdicts[route]["passed"] is not past, route
+        assert verdicts[route][margin] == (-kernel.SHARP_EPSILON if past else 0), route
 
 
 #: The bead that imports #672, after which T-225's item at 227 names that result.

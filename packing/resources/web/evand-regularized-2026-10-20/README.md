@@ -55,7 +55,15 @@ case’s house best packing is a smaller packing, registered as a result
 Each JSON also reports the certificate VALID under the source’s checkers and verified
 at 80 digits, the `conservative` policy, and level 2, “same packing: traversable
 without expansion (angle moves path-checked; slides by construction)”. Its
-`angle_changes` at the four counts are free angles kept, none turned or merged.
+`angle_changes` at the four counts are free angles kept, none turned or merged: the
+source’s report of its regularizer’s own step against the solved input.
+Measured against the certificate each view is credited to ([Pose by Pose](#pose-by-pose)),
+the views do turn squares: 12 beyond $10^{-3}$ degrees at 204, 4 at 227 (one by 2.54°
+against #672’s) and 31 at 229, several near-axis squares exactly to the axis.
+The method log’s account of the exact solve, which snaps near-axis tilts to the axis,
+suggests those turns arise before the regularizer, in the refresh’s solve or at 229 the
+polish; which step made them is the 21 October review’s first question to the author
+(its RF-2).
 
 ## Retained Here
 
@@ -202,6 +210,21 @@ the same packing at that side, level 2 of the method log’s scale, by a path te
 samples the path and that the log says is not a continuous proof; and every view is
 verified at 80 digits and accepted by both of the source’s checkers.
 Novelty, local or global optimality and rigidity are not established.
+
+## Stage 4 Review
+
+The [review of 21 October 2026](../../../../docs/project/reviews/review-2026-10-21-evand-regularized-views.md)
+accepted the four certificates for finite feasibility, with six findings, none blocking.
+It reproduced the replay and the frozen comparison, decided each certificate again on a
+clean-room checker of its own, on an integer route and a `Fraction` route with exact
+clipping area, and ran sharp controls at $10^{-30}$ through both maintained routes and
+that checker: each route accepted exact contact at the far wall, the near wall and the
+least-gap pair, and refused $10^{-30}$ past it, at all four counts.
+Its programs, receipts and logs are in
+[review/review-2026-10-21/](review/review-2026-10-21/README.md), and
+`tests/test_upper_bound_reports_regularized_1020.py` runs the kernel’s two sharp
+controls on the 204 certificate (RF-3).
+T-225 rests at `V3`/`C3` on that review, the replay it reproduced and its checker’s run.
 
 ## Credit and Licence
 
