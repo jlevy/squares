@@ -3262,7 +3262,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-10'
-    lineage: builds-on-project
+    lineage: independent
     credit: Daniel after Fang, Arslanov, Mustafin, Shangitbayev
     short_credit: Daniel after Fang et al.
     note: >-

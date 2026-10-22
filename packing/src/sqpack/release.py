@@ -2295,6 +2295,41 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Couzo's watched history at 325 to 1024 (#730: 319 beyond-horizon rows, the "
+            "T-188, T-189 and T-191 notes, #715's and #624's request texts) against main "
+            "59b1ec594 (#729): rendered at link revision 6610be93 into empty site "
+            "directories from this tree at ebb24910 and from main's (68 files each). "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write their HTML and Markdown byte-identical, and the "
+            "explainer its Markdown; the explainer's HTML differs only in the order of "
+            "attributes on two math spans, which a second render of this tree reorders "
+            "too, and is identical once they are normalized. No PDF was printed; each "
+            "prints from that HTML. Retain v0.4.18, v0.1.9, v0.1.2 and v0.2.5."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
