@@ -1866,7 +1866,13 @@ def root_files() -> tuple[Path, ...]:
 # not certify inspection. Raise to 252 MiB, the least whole MiB above this measured
 # surface, with 333,904 bytes of headroom and unchanged source selection and
 # pre-clone oversized refusal. Three portable workers remain bounded at 756 MiB.
-SNAPSHOT_MAX_BYTES = 252 * 1024 * 1024
+# 2026-10-21, the profile branch merged with main d7923b8d8 (#706 and #716):
+# `--source-bytes` reads 264,512,602 bytes, 271,450 over 252 MiB. The merged
+# adoption records and their complete deciding evidence remain in the same private
+# source roster. Raise to 253 MiB, the least whole MiB above this measured surface,
+# leaving 777,126 bytes before this comment, with no source exclusions and the same
+# oversized pre-clone refusal. Three portable workers remain bounded at 759 MiB.
+SNAPSHOT_MAX_BYTES = 253 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

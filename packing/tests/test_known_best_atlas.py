@@ -92,7 +92,8 @@ from sqpack.yamlio import safe_load
 #: and its pass for issue 528 moved n = 264 onto Daniil Ostashev's packet (think-cq95), and
 #: that of 15 October n = 204 onto his issue 562 packet (T-162), and that of 19 October
 #: n = 229 onto Evan Daniel's issue 674 packet (T-199), and that of 20 October n = 227 and
-#: 260 onto Joost de Winter's issue 668 packet (T-196).
+#: 260 onto Joost de Winter's issue 668 packet (T-196), and that of 21 October n = 260 onto
+#: Francisco Couzo's issue 678 packet (T-223).
 GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 43}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
@@ -125,7 +126,8 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # Kingbird) on 17 October, to PR #622's packet (T-195), and on 19 October 183 (from the
     # grid), to Evan Daniel's issue 680 packet (T-220, think-jh4w), and 229 (from
     # Kingbird), to his issue 674 packet (T-199), and on 20 October 227 and 260 (both from
-    # Kingbird), to Joost de Winter's issue 668 packet (T-196).
+    # Kingbird), to Joost de Winter's issue 668 packet (T-196), and on 21 October 260 again,
+    # to Francisco Couzo's issue 678 packet (T-223, think-xu4d).
     "n=1..324": {
         "exact-grid": 174,
         "kingbird-derived-facts": 72,
@@ -2166,14 +2168,16 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     assert len(expected_names) == 26
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
-    # re-housed still holds another count. The adoption of 20 October draws from two
-    # more, his packets at 154 and 308 (T-222, T-221), with no new name: Mishapolk's KKT
-    # refinements and PingYou Ltd's PR 574 certificates still hold other counts. The same
-    # day's adoption at 227 and 260 draws from one more, Joost de Winter's issue 668 packet
-    # (T-196), and the catalogue that held both counts still holds others. The adoption of
-    # 21 October draws from one more, Evan Daniel's packet at 270 (T-224), with no new name:
+    # re-housed still holds another count. The adoption of 20 October draws from three
+    # more, his packets at 154 and 308 (T-222, T-221) and Francisco Couzo's issue 678
+    # packet at 204 (T-223), with no new name: Mishapolk's KKT refinements and PingYou Ltd's
+    # PR 574 certificates still hold other counts. The same day's adoption at 227 and 260
+    # draws from one more, Joost de Winter's issue 668 packet (T-196), and the catalogue that
+    # held both counts still holds others; at 260 Couzo's packet replaces de Winter's on 21
+    # October, and de Winter's still holds 227. The adoption of 21 October draws from one
+    # more, Evan Daniel's packet at 270 (T-224), with no new name:
     # PingYou Ltd's PR 574 certificates still hold other counts.
-    assert len(expected_sources) == 26
+    assert len(expected_sources) == 27
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None

@@ -161,6 +161,10 @@ HAND_MARKED = frozenset({155, 183, 258, 263, 302, 308})
 #: The first pass whose writer also marks the closing sentence of a T-155 view's section as
 #: history (`_regularized_certificate`); earlier passes' records read as they wrote them.
 VIEW_SECTION_FROM = "2026-10-19"
+#: The first pass whose writer marks an earlier section's staged-adoption sentence as history
+#: (`staged_history`): on 20 October 2026 issue 678's certificate (T-223) took 204 off T-193's
+#: staged adoption, the first staged count a smaller packing overtook in a written section.
+STAGED_HISTORY_FROM = "2026-10-20"
 
 
 @dataclass(frozen=True)
@@ -176,12 +180,20 @@ class Prose:
     #: What the source says of where the packing came from and what was measured of it
     #: here, where its review asked the record to say so (T-160's RD-1, RD-5 and RD-7).
     lineage: str = ""
+    #: Each count's own lineage paragraph, where one result's counts have different starts
+    #: and measurements (T-223: Polkovskyi's construction at 204, de Winter's #668 packing at
+    #: 260; review A4 of #706); `lineage` stands for a count this does not name.
+    lineage_at: Mapping[int, str] | None = None
     #: Whether `devtools.check_half_angle_area`, the third exact route, decided the
     #: certificate too. T-220's replay ran the two maintained routes only, so its record
     #: says no third route decided it rather than that one did. A string is the clause the
     #: record writes instead, where the review decided the certificate on an exact route of
     #: its own that no verifier entry names (T-224, A5 of the 21 October review).
     third_route: bool | str = True
+    #: Which confirmation the verified bound's sentence names, as the register's relation
+    #: reads it (`verifier_registry.LABELS`). T-223's two routes share the corner verifier
+    #: its source reports running, so its replay shares the producer's components.
+    confirmation: str = "independently re-implemented"
     #: How the certificate states each square. T-196's states a rational centre and the
     #: rotation's cosine and sine, which the adapter turns into a half-angle tangent.
     squares: str = "a rational centre and the tangent of its half-angle"
@@ -741,6 +753,44 @@ RESULTS: dict[str, Prose] = {
             "account of the search, and Couzo’s on the measured arrangement."
         ),
     ),
+    "T-223": Prose(
+        author="Francisco Couzo",
+        reported="on [jlevy/squares#678](https://github.com/jlevy/squares/issues/678)",
+        producer_route=True,
+        ai=(
+            "The issue states nothing about AI assistance; the header of the source’s "
+            "checker names Codex, and the author’s issues of 13 and 14 October 2026 disclose "
+            "OpenAI Codex and Claude Code assistance."
+        ),
+        routes=(
+            "One maintained route, `sqpack`’s predicates, is the corner verifier the source "
+            "reports running, and the packet’s filtered replay reads the certificate once "
+            "for both routes, through one parser, half-angle map and pair filter; the "
+            "source’s own checker, run unchanged from its retained copy, accepted it too."
+        ),
+        lineage_at={
+            204: (
+                "The source’s manifest credits Mykhailo Polkovskyi’s construction as the seed "
+                "at 204. Measured by review A of #706 under the box’s symmetries against "
+                "T-186’s packing, the house best packing here before this adoption and the "
+                "record’s packing of Polkovskyi’s refinement, 87 of the 204 squares lie within "
+                "10⁻⁴ of a square of it with the same axes and 44 moved by more than 10⁻², 14 "
+                "of them beyond a tenth: not a refinement of that packing in place "
+                "([the review programs](../resources/web/couzo-issue678-2026-10-18/review/"
+                "README.md), T-223)."
+            ),
+            260: (
+                "The source’s manifest credits Joost de Winter’s #668 packing as the seed at "
+                "260, through Evan Daniel’s exact-form certificate of it in "
+                "[`evand/square-packing`](https://github.com/evand/square-packing), which the "
+                "issue’s comment of 19 October names and the intake retained. Measured here "
+                "under the box’s symmetries, 162 of the 260 squares lie within 10⁻⁴ of a "
+                "square of that seed and 55 moved by more than 10⁻²: not a refinement of the "
+                "seed in place (T-223)."
+            ),
+        },
+        confirmation="re-implemented, sharing the producer’s components",
+    ),
     "T-224": Prose(
         author="Evan Daniel",
         reported="on [jlevy/squares#703](https://github.com/jlevy/squares/issues/703)",
@@ -1046,13 +1096,15 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
-    # PR 574's re-solve of issue 562's packing, re-solved again (T-186's regularization of
-    # T-174), two squares moved beyond 1e-3.
+    # Issue 678's packing (T-223), which the source's manifest credits to Couzo with
+    # Polkovskyi's construction as its seed; that seed is the source's account, not
+    # measured here. The house it replaced was Polkovskyi's refinement of Ostashev's
+    # packing as PingYou Ltd refined it (T-186's regularization of T-174).
     204: Credit(
-        (OSTASHEV,),
-        (PINGYOU, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 204 packing, as PingYou "
-        "Ltd refined it",
+        (COUZO,),
+        (),
+        "Francisco Couzo’s packing from a search the source seeded with Mykhailo "
+        "Polkovskyi’s n = 204 construction",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -1175,8 +1227,18 @@ CREDITS: dict[int, Credit] = {
     ),
     258: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH", via="Mishapolk"),
     259: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
-    # Joost de Winter's packing of issue 668 (T-196), as at 227.
-    260: Credit((DE_WINTER,), (), "Joost de Winter’s packing"),
+    # Issue 678's packing (T-223), adopted here on 21 October 2026 from Joost de Winter's
+    # T-196, which the pass of 20 October had adopted from the catalogue's packing: the
+    # source seeded its search with Evan Daniel's exact-form certificate of de Winter's
+    # issue-668 packing (T-196), and the 20 October review measured 162 of its squares
+    # within 1e-4 of that seed's, 55 beyond 1e-2, so de Winter is named in the sentence as
+    # the construction's author, as at 229, and not in the structured fields.
+    260: Credit(
+        (COUZO,),
+        (),
+        "Francisco Couzo’s packing from a search seeded with Evan Daniel’s exact "
+        "certificate of Joost de Winter’s n = 260 packing",
+    ),
     # T-174's regularization of T-169's re-solve, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
     261: Credit(
@@ -2039,7 +2101,7 @@ def section(move: Move) -> str:
             f"and outside-container controls{third}. {routes} The {reviews} "
             "accepted the replay for finite feasibility. "
             f"That proves $s({n}) \\le {ceiling}$, the verified upper bound: confirmed, "
-            "independently re-implemented. It says nothing about "
+            f"{prose.confirmation}. It says nothing about "
             "optimality, rigidity or a local minimum."
         ),
     ]
@@ -2056,8 +2118,9 @@ def section(move: Move) -> str:
         )
     if prose.ai:
         paragraphs.append(prose.ai)
-    if prose.lineage:
-        paragraphs.append(prose.lineage)
+    lineage = (prose.lineage_at or {}).get(move.n, prose.lineage)
+    if lineage:
+        paragraphs.append(lineage)
     earlier = set(_earlier(move.packing))
     held = set(move.selection.held)
     others = [
@@ -2477,10 +2540,15 @@ def pending_history(text: str, until: str) -> str:
 
     The paragraph said the registration left both upper lanes, the house witness and its
     drawing unchanged until review and adoption, and that the rigidity and arrangement
-    notes below described that house. An adoption at the count moves all of them, whichever
-    certificate it adopts, so the paragraph says what held until then, and a sentence after
-    it that calls a report pending adoption says until when (review A1 of #692: n = 155 and
-    229 adopted the very reports their paragraphs named, on 19 October 2026).
+    notes below described that house; from the intake of 20 October 2026 it says the same
+    of the house best packing, in a sentence of its own (#701 at n = 260), and that the
+    side is registered at V0/C0; where no rigidity or arrangement note follows, that
+    sentence ends at the drawing (#701's A6 at n = 204), and #704's names the house best
+    packing in parentheses (T-196 at 260). An adoption at the count moves all of them,
+    whichever certificate it adopts, so the paragraph says what held until then, and a
+    sentence after it that calls a report pending adoption says until when (review A1 of
+    #692: n = 155 and 229 adopted the very reports their paragraphs named, on 19 October
+    2026).
     """
 
     def past(match: re.Match[str]) -> str:
@@ -2492,6 +2560,34 @@ def pending_history(text: str, until: str) -> str:
         block = re.sub(
             r"\breports\s+a\s+(\d+)-square\s+certificate\b",
             r"reported a \1-square certificate",
+            block,
+        )
+        # The rung the side held before its review, said as history: once the review
+        # raises the result, a bare "was registered at V0/C0" asserts a rung no result at
+        # the count holds (`rung_prose`), as at 204 once T-223 was V3/C3.
+        block = re.sub(
+            r"\bThe\s+exact\s+rational\s+side\s+is\s+registered\s+at\s+V0/C0\b",
+            "Before its review, the exact rational side was registered at V0/C0",
+            block,
+        )
+        # The house best packing may be named in parentheses, as #704's intake named T-196's
+        # at 260 (review A1 of #706); the past form keeps the name.
+        block = re.sub(
+            r"\bUntil\s+separate\s+Stage\s+4\s+review\s+and\s+adoption,\s+both\s+case\s+upper"
+            r"\s+lanes,\s+the\s+house\s+best\s+packing(\s+\([^)]*\))?\s+and\s+its\s+drawing\s+stay"
+            r"\s+as\s+they\s+were(,\s+and\s+the\s+rigidity\s+and\s+arrangement\s+notes\s+below"
+            r"\s+describe\s+that\s+packing)?\.",
+            lambda match: (
+                f"Until the adoption of {until}, both case upper lanes, the house best packing"
+                + (f" {' '.join(match.group(1).split())}" if match.group(1) else "")
+                + " and its drawing stayed as they were"
+                + (
+                    ", and the rigidity and arrangement notes below described that packing"
+                    if match.group(2)
+                    else ""
+                )
+                + "."
+            ),
             block,
         )
         block = re.sub(
@@ -2530,6 +2626,36 @@ def _n29_history(text: str) -> str:
         "This proved the earlier Schadt rational ceiling.",
         text,
     )
+
+
+_STAGED_SENTENCE = re.compile(
+    r"\b([Tt])he\s+owner’s\s+house\s+rule\s+of\s+(\d{1,2}\s+[A-Z][a-z]+\s+\d{4})\s+adopts\s+it:"
+    r"\s+the\s+case\s+keeps\s+this\s+house\s+until\s+its\s+adoption,\s+staged\s+under"
+    r"\s+(think-[a-z0-9]+),\s+moves\s+it\s+to\s+(T-\d+)’s\s+side"
+    r"(,\s+once\s+the\s+writer\s+takes\s+an\s+algebraic\s+side)?\."
+)
+
+
+def staged_history(text: str, until: str, house: str) -> str:
+    """An earlier section's staged-adoption sentence (`staged_sentences`), once a pass moves
+    the count: it said the case kept its house until the staged adoption moved it, which
+    held until this pass, whether the pass adopts the staged house or a smaller one."""
+
+    def past(match: re.Match[str]) -> str:
+        initial, rule, bead, staged, writer = match.groups()
+        opening = f"{initial}he owner’s house rule of {rule} adopted it"
+        if staged == house:
+            return (
+                f"{opening}: the case kept this house until its adoption, staged under {bead}, "
+                f"moved it to {staged}’s side on {until}."
+            )
+        waiting = " for the writer to take an algebraic side" if writer else ""
+        return (
+            f"{opening}, staged under {bead}{waiting}; on {until} the case moved instead to "
+            f"{house}, a smaller validated packing below {staged}’s side."
+        )
+
+    return _STAGED_SENTENCE.sub(past, text)
 
 
 def historical(move: Move, text: str) -> str:
@@ -2581,6 +2707,8 @@ def historical(move: Move, text: str) -> str:
         text = _n29_history(text)
     text = held_history(text)
     text = pending_history(text, until)
+    if houses.adopted_on(n) >= STAGED_HISTORY_FROM:
+        text = staged_history(text, until, move.house.result)
     # The records are wrapped, so a sentence may break at any space; whitespace is
     # matched as such and the reflow is the formatter's.
     text = re.sub(

@@ -1093,16 +1093,21 @@ repositories:
       replay, bound adoption or assurance change here.
   - url: https://github.com/franciscouzo/square-packing
     read_through: 7b6c87e129cf80b5ff9847b90b47fd30b4563c54
-    read_on: '2026-10-19'
-    bead: think-xu4d
+    read_on: '2026-10-21'
     note: >-
-      One commit past c6da0fc, reporting the 85 upper bounds in #678, owned by
-      think-xu4d. All commit-file pages retain 543 changed paths in
-      packing/campaign/issue-intake/intake-20261019/couzo-source-inventory.json.
-      This inventory is not whole-source custody or certificate replay. Exact-side,
-      report-order and classical-envelope comparison and seed/construction provenance
-      remain open. Earlier #672 stays with think-2vjc. No discovery-credit decision or
-      assurance change here.
+      The head, one commit past c6da0fc, of 18 October (23:19Z): the 85 upper bounds #678
+      reports. Since #701 the couzo-issue678-2026-10-18 packet pins it and retains the
+      certificates under certificates/best/ with their checker and licence, so this read
+      holds nothing back. It stays because that packet retains 90 of the commit's 543
+      changed paths, and without the read the sweep lists the commit again. The other 453
+      are the 85 flat copies certificates/nNNN.cert and .json, each byte-identical to its
+      retained certificates/best/ file; the drawings and decimal poses nNNN.svg and
+      nNNN.txt of the same packings; the indexes and provenance files (known_best.json,
+      certified_bounds.json, bound_sources.json, record_provenance.json,
+      RECORD_PROVENANCE.md, certificates/README.md); and 106 new seed certificates under
+      certificates/parents/, none below the source's own index entry at its count. The
+      rows of #670, #672 and #675 that the index carries stay with think-f28n, think-2vjc
+      and think-pvav. Nothing else to import.
   - url: https://github.com/TheSnakeFang/squarepack-certs
     read_through: 0e9be7961773aa78b879c4ee6ba584a67e2e5513
     read_on: '2026-10-19'
@@ -1130,3 +1135,72 @@ repositories:
       not logged, as source assertions, not confirmed, with nothing queued, as #680's final
       reply (issuecomment-6297284604) said. Inventory: packing/campaign/issue-intake/intake-followup-20261019/evand-source-inventory.json.
       Earlier deficiency and staircase imports remain with think-f8py and think-pf37.
+  # The intake pass of 2026-10-21, triage lane c-triage-sweep-1021b: what the sweep of about
+  # 17:15Z listed. evand's 88385ab is left to #712, whose packet retains its s343 files.
+  - url: https://github.com/evand/square-packing
+    read_through: 0075967bace18a3deabcc0baa64c2fb294fc80a0
+    read_on: '2026-10-21'
+    note: >-
+      0075967 (20 October, 02:36Z) refreshes Evan Daniel's regularized record lists under
+      search/regularize/lists/ (best, alternates and the certificates at 183, 204, 227, 229,
+      260 and 308) and his site's data (records2026, credits, lineage, drawings, history
+      steps) and TODO.md. Since think-ql4v's import the evand-regularized-2026-10-20 packet
+      pins it and retains the certificates and JSON at 204, 227, 229 and 260, which T-225
+      registers, with the method log, licence and credits, and pins best.csv, best.json,
+      records2026.json and lineage.yaml by digest. This read stays because that packet
+      retains 8 of the commit's 41 changed paths, and without it the sweep lists the commit
+      again. The other 33 hold nothing to import: at 183 and 308 the new certificates state
+      the case's exact side (T-220, T-221); the alternates drop 227's level-3 alternate;
+      best.md, credits, the review notes and the site's drawings and steps restate the
+      lists. Nothing else to import.
+  - url: https://github.com/evand/square-packing
+    read_through: a435c970774403bf5c6f94815997b1cfd77dcf44
+    read_on: '2026-10-21'
+    bead: think-f8py
+    note: >-
+      a435c97 (20 October, 21:47Z) commits the packer's work of 17 to 20 October: the fill
+      module, relax schedules, a CPU-limit watchdog, bulbgen and BULB.md, SUBMITTING.md and
+      submission.py, candidate.py now naming the finder as a regularized view's "by" (the
+      cause of the n155 view's Couzo "by" that #669's import flagged), reg.py beyond 324,
+      CLAIMS.md C49, TODO.md and Completed.md. The n270 packet at 88385ab retains its
+      README.md, PACKER.md, SUBMITTING.md and dgen.py. search/packer/candidates/s183_h183*
+      is the H183 hunt's earlier candidate at 13.999805115796, above T-220.
+      tasks/k2c-exponent/ and tasks/k2c-lower/ are framing notes that state no new bound.
+      search/ryu/junction.py, junction-table-15-400.txt and the "Merged junction corner"
+      section of tasks/fang-gluing/README.md give a variant of the filled L-shape
+      (r1prime.py) that the source reports lowers c by 1 or 2 at 374 of the 386 k from 15
+      to 400, one below the Lean closed form 4 ceil(sqrt(2k - 7)) - 1 where it samples,
+      checked exactly by the source (the whole packing for k <= 100, every pair with a
+      corner-fill square beyond) and not in Lean. At k <= 31 every count k^2 - c it reaches
+      already has a beyond-horizon row below k, so it moves no count the record tracks. A
+      claim in the c*(k) family think-f8py imports, which think-f8py holds until a packet
+      pins this commit or its import declines it. Nothing else to import.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: 9ffba0f3a84b38f0c92790c1d3089f979ef53f0b
+    read_on: '2026-10-21'
+    bead: think-494l
+    note: >-
+      The two commits of 19 October (03:29Z) past 0e9be79, the head. 6e26525 makes the note
+      draft v0.9 with the Zenodo DOI 10.5281/zenodo.23463481, rewords its abstract and
+      introduction, cites this project's theorem-level review (#603) and says the n = 15
+      record has since moved; no theorem, certificate or checker changes. 9ffba0f narrows
+      the README's Lean statement from "Theorems 1 and 2" to "Theorem 1 and the unmixed
+      bounds of Theorem 2", the scope think-494l compares with T-163 before any rung
+      change. New evidence for T-163, which think-494l holds (the DOI with think-0esw,
+      #603); no certificate to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: a6c0dbbb259c26ed2ae5f429dbe68c9c3a27185d
+    read_on: '2026-10-21'
+    note: >-
+      The sixteen commits of 19 and 20 October (UTC) past the 6d93afc read, e70cf2f to
+      a6c0dbb, the head. e70cf2f, 5a81ce1 and 60c468c prove s(21) = 7 for unit squares in a
+      right isosceles triangle; efa8496 adds problems/rectangle-closed-form/, an upper bound
+      for unit squares in a rectangle with real sides that reduces at a = b to the closed
+      form T-180 registers; 7d75652, c17bc1e, 3c4944e, 92af130, 0c23156, 6ee2fda, 054e1ad,
+      56e1192 and 76f8d1c are unit 4-cubes in a 4-cube. All are outside this record.
+      77e94f1 states in checks/valid7/ the one-polygon premise of Lemma F2 that the 2
+      October review of the checker recorded (review-2026-10-02-valid7-independent-checker.md,
+      section 4.4), adds a guard and a face sweep for other covers, and reports the
+      records-v1 replay unchanged: no change for T-064. 1f70ab3 and a6c0dbb correct the
+      wording of eight papers, the closed-form paper now citing cfcheck's replay of
+      intervals 1 and 34, which T-180 already records. Nothing to import.

@@ -1720,7 +1720,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[evand exact optima 2026-10-05]'
@@ -2068,7 +2069,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: ke-wang
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
@@ -2083,7 +2085,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: can-li
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
@@ -2098,7 +2101,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: ke-wang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
@@ -2113,7 +2117,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: can-li
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Wang Li n11 2026]'
@@ -5670,7 +5675,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter n211 2026-09-16]'
@@ -5685,7 +5691,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[griffcass square-packing 2026-09-23]'
@@ -5700,7 +5707,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: griffin-casson
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[griffcass square-packing 2026-09-23]'
@@ -5715,7 +5723,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: griffin-casson
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[griffcass square-packing 2026-09-23]'
@@ -5813,7 +5822,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ellsworth n69 2026-09-24]'
@@ -6028,7 +6038,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n87 2026-09-24]'
@@ -6107,7 +6118,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH ten packings 2026-10-07]'
@@ -6122,7 +6135,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH ten packings 2026-10-07]'
@@ -6151,7 +6166,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH n153 2026-10-07]'
@@ -6166,7 +6183,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH n153 2026-10-07]'
@@ -6195,7 +6214,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH update 2026-10-07]'
@@ -6210,7 +6231,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH update 2026-10-07]'
@@ -6252,7 +6275,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH second update 2026-10-07]'
@@ -6267,7 +6292,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH second update 2026-10-07]'
@@ -6322,7 +6349,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: seth-rehwaldt
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt Couzo refinements 2026-10-07]'
@@ -6337,7 +6365,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: seth-rehwaldt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt Couzo refinements 2026-10-07]'
@@ -6378,7 +6407,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: seth-rehwaldt
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt n68 refinement 2026-10-07]'
@@ -6393,7 +6423,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: seth-rehwaldt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt n68 refinement 2026-10-07]'
@@ -6536,7 +6567,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Gupta rational refinements 2026-10-08]'
@@ -6551,7 +6583,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Gupta rational refinements 2026-10-08]'
@@ -6566,7 +6599,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Gupta rational refinements 2026-10-08]'
@@ -6594,7 +6629,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: seth-rehwaldt
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt n68 exact-root report v1.2]'
@@ -6609,7 +6645,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: seth-rehwaldt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Rehwaldt n68 exact-root report v1.2]'
@@ -6744,7 +6781,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact refinements 2026-10-08]'
@@ -6759,7 +6798,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact refinements 2026-10-08]'
@@ -7119,7 +7159,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel record hunt 2026-10-09]'
@@ -7500,7 +7542,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact certificates 2026-10-09]'
@@ -7516,7 +7559,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact certificates 2026-10-09]'
@@ -7532,7 +7577,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact certificates 2026-10-09]'
@@ -7617,7 +7663,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang two-wedge certificates 2026-10-10]'
@@ -7632,7 +7679,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang two-wedge certificates 2026-10-10]'
@@ -7727,7 +7775,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH third request 2026-10-09]'
@@ -7743,7 +7793,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH third request 2026-10-09]'
@@ -7810,7 +7862,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH third request 2026-10-09]'
@@ -7876,7 +7929,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: eric-deleeuw
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Deleeuw n70 refinement 2026-10-10]'
@@ -7891,7 +7945,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: eric-deleeuw
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Deleeuw n70 refinement 2026-10-10]'
@@ -7938,7 +7993,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk decimal poses 2026-10-09]'
@@ -7954,7 +8010,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk decimal poses 2026-10-09]'
@@ -8022,7 +8079,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk decimal poses 2026-10-09]'
@@ -8140,7 +8199,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-10]'
@@ -8191,7 +8252,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-10]'
@@ -8206,7 +8269,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-10]'
@@ -8323,7 +8387,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel record hunt 3 2026-10-10]'
@@ -8962,7 +9027,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel regularized lists 2026-10-10]'
@@ -8977,7 +9044,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel regularized lists 2026-10-10]'
@@ -9166,7 +9234,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-11]'
@@ -9181,7 +9250,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-11]'
@@ -9244,7 +9314,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: robert-barnett
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Barnett refinements 2026-10-11]'
@@ -9259,7 +9330,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: robert-barnett
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Barnett refinements 2026-10-11]'
@@ -9324,7 +9396,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH fourth request 2026-10-11]'
@@ -9339,7 +9413,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH fourth request 2026-10-11]'
@@ -9372,7 +9448,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH fourth request 2026-10-11]'
@@ -9474,7 +9551,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-11]'
@@ -9489,7 +9568,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-11]'
@@ -9769,7 +9849,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-12]'
@@ -9785,7 +9866,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-12]'
@@ -9836,7 +9918,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-12]'
@@ -9870,7 +9953,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev records 2026-10-12]'
@@ -9942,7 +10026,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: rio-calle
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Calle n102 2026-10-12]'
@@ -9957,7 +10042,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: rio-calle
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Calle n102 2026-10-12]'
@@ -10114,7 +10200,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang direct certificates 2026-10-13]'
@@ -10129,7 +10216,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang direct certificates 2026-10-13]'
@@ -10228,7 +10316,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess theorem 2026-10-13]'
@@ -10244,7 +10333,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess theorem 2026-10-13]'
@@ -10346,7 +10436,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess theorem 2026-10-13]'
@@ -10716,7 +10807,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: benjamin-greff
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[bengreff s76 certificate 2026-10-14]'
@@ -10731,7 +10823,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: benjamin-greff
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[bengreff s76 certificate 2026-10-14]'
@@ -10851,7 +10944,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-12]'
@@ -10866,7 +10960,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-12]'
@@ -10881,7 +10977,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-12]'
@@ -10949,7 +11046,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev compositions 2026-10-12]'
@@ -10964,7 +11062,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev compositions 2026-10-12]'
@@ -10995,7 +11094,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev compositions 2026-10-12]'
@@ -11200,7 +11301,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
@@ -11229,7 +11331,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
@@ -11489,7 +11592,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: robert-barnett
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n146 refinement 2026-10-12]'
@@ -11586,7 +11690,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: robert-barnett
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n261 refinement 2026-10-12]'
@@ -11765,7 +11870,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n272 refinement 2026-10-12]'
@@ -11870,7 +11977,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
@@ -11885,7 +11993,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
@@ -11936,7 +12045,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk exact certificates 2026-10-12]'
@@ -11951,7 +12061,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk exact certificates 2026-10-12]'
@@ -11984,7 +12095,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk exact certificates 2026-10-12]'
@@ -12122,7 +12235,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: robert-barnett
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -12157,7 +12271,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -12173,7 +12288,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -12189,7 +12306,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -12205,7 +12323,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -12221,7 +12340,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -12255,7 +12375,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
@@ -12270,7 +12391,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
@@ -12319,7 +12441,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
@@ -12388,7 +12511,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -12404,7 +12528,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -12476,7 +12601,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -12492,7 +12619,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: robert-barnett
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -12527,7 +12655,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -12561,7 +12690,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -12633,7 +12763,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel compositions 2026-10-13]'
@@ -12664,7 +12795,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: robert-barnett
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel compositions 2026-10-13]'
@@ -12680,7 +12812,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel compositions 2026-10-13]'
@@ -12696,7 +12829,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel compositions 2026-10-13]'
@@ -12784,7 +12919,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel fresh compositions 2026-10-14]'
@@ -12868,7 +13005,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk KKT refinements 2026-10-14]'
@@ -12883,7 +13021,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk KKT refinements 2026-10-14]'
@@ -12898,7 +13037,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk KKT refinements 2026-10-14]'
@@ -13053,7 +13193,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo verified bounds 2026-10-14]'
@@ -13140,7 +13281,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-14]'
@@ -13155,7 +13297,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-14]'
@@ -13259,7 +13402,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n237 2026-10-15]'
@@ -13274,7 +13418,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n237 2026-10-15]'
@@ -13325,7 +13471,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: benjamin-greff
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[bengreff s95 certificate 2026-10-15]'
@@ -13340,7 +13487,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: benjamin-greff
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[bengreff s95 certificate 2026-10-15]'
@@ -13534,7 +13682,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel exact current records 2026-10-16]'
@@ -13550,7 +13700,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel exact current records 2026-10-16]'
@@ -13600,7 +13751,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel exact current records 2026-10-16]'
@@ -13616,7 +13768,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel exact current records 2026-10-16]'
@@ -13743,7 +13896,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 622 certificate 2026-10-15]'
@@ -13808,7 +13962,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed author byline matches the retained source intake and bibliography identity.
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter upper bounds 2026-10-17]'
@@ -13823,7 +13978,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter upper bounds 2026-10-17]'
@@ -13888,7 +14044,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n155 explorer 2026-10-17]'
@@ -13975,7 +14132,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n229 dilation 2026-10-17]'
@@ -14062,7 +14220,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n229 dilation update 2026-10-18]'
@@ -14273,7 +14432,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n236 2026-10-16]'
@@ -14360,7 +14521,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n271 2026-10-17]'
@@ -14429,7 +14592,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n308 2026-10-19]'
@@ -14516,7 +14681,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n154 sweep 2026-10-20]'
@@ -14585,7 +14751,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 678 2026-10-18]'
@@ -14600,7 +14767,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 678 2026-10-18]'
@@ -14633,7 +14801,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 678 2026-10-18]'
@@ -14716,7 +14885,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n270 sweep 2026-10-20]'
@@ -14749,7 +14920,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: darius-muglich
-  note: Reviewed issue 686 credit name and retained source-intake byline plus bibliography credited_names bind this source span to Darius Muglich; original source label retained.
+  note: Reviewed issue 686 credit name and retained source-intake byline plus bibliography
+    credited_names bind this source span to Darius Muglich; original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Muglich issue 686 2026-10-19]'
@@ -14764,7 +14937,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: darius-muglich
-  note: Reviewed issue 686 credit name and retained source-intake byline plus bibliography credited_names bind this source span to Darius Muglich; original source label retained.
+  note: Reviewed issue 686 credit name and retained source-intake byline plus bibliography
+    credited_names bind this source span to Darius Muglich; original source label
+    retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Muglich issue 686 2026-10-19]'
@@ -14797,7 +14972,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Muglich issue 686 2026-10-19]'
@@ -14812,7 +14988,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Muglich issue 686 2026-10-19]'
@@ -15826,7 +16003,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-029.md
     record_key: '29'
@@ -16077,7 +16255,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-039.md
     record_key: '39'
@@ -16138,7 +16317,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-041.md
     record_key: '41'
@@ -16286,7 +16466,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-050.md
     record_key: '50'
@@ -16497,7 +16678,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-055.md
     record_key: '55'
@@ -16775,7 +16957,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: seth-rehwaldt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-068.md
     record_key: '68'
@@ -16948,7 +17131,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-071.md
     record_key: '71'
@@ -17472,7 +17656,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-088.md
     record_key: '88'
@@ -17487,7 +17673,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-088.md
     record_key: '88'
@@ -17809,7 +17996,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-103.md
     record_key: '103'
@@ -18586,7 +18774,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-129.md
     record_key: '129'
@@ -18632,7 +18821,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-130.md
     record_key: '130'
@@ -18647,7 +18837,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-130.md
     record_key: '130'
@@ -18662,7 +18854,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-130.md
     record_key: '130'
@@ -18708,7 +18901,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-131.md
     record_key: '131'
@@ -19221,7 +19416,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-154.md
     record_key: '154'
@@ -19324,7 +19520,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-156.md
     record_key: '156'
@@ -19388,7 +19585,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-157.md
     record_key: '157'
@@ -19740,7 +19938,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-175.md
     record_key: '175'
@@ -19786,7 +19985,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-176.md
     record_key: '176'
@@ -19818,7 +20018,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-176.md
     record_key: '176'
@@ -19847,7 +20048,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-177.md
     record_key: '177'
@@ -19922,7 +20124,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-179.md
     record_key: '179'
@@ -19937,7 +20141,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-179.md
     record_key: '179'
@@ -19983,7 +20188,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-180.md
     record_key: '180'
@@ -19998,7 +20205,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-180.md
     record_key: '180'
@@ -20062,7 +20270,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-181.md
     record_key: '181'
@@ -20418,7 +20628,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-199.md
     record_key: '199'
@@ -20433,7 +20645,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-199.md
     record_key: '199'
@@ -20550,46 +20763,18 @@ occurrences:
     path: packing/frontier/n-204.md
     record_key: '204'
     field: /reported_upper_bound/found_by/0
-  expected_text: Daniil Ostashev
+  expected_text: Francisco Couzo
   start: 0
   end: 15
-  label: Daniil Ostashev
+  label: Francisco Couzo
   role: construction-finder
   disposition: resolved
+  contributor_id: francisco-couzo
   evidence:
-  - source-intake
+  - primary-byline
   - bibliography
-  contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
-- origin:
-    path: packing/frontier/n-204.md
-    record_key: '204'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
-- origin:
-    path: packing/frontier/n-204.md
-    record_key: '204'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: >-
+    Reviewed after PR 706 adoption of T-223: the adopted source and case name Francisco Couzo as finder; prior construction lineage remains in the retained result and case history.
 - origin:
     path: packing/frontier/n-205.md
     record_key: '205'
@@ -20737,7 +20922,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-208.md
     record_key: '208'
@@ -20752,7 +20938,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-208.md
     record_key: '208'
@@ -20767,7 +20955,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: siddharth-gupta
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-208.md
     record_key: '208'
@@ -20813,7 +21002,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-209.md
     record_key: '209'
@@ -20934,7 +21125,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-211.md
     record_key: '211'
@@ -21204,9 +21396,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: Reviewed after upstream PR 704 adoption of T-196 from [de Winter upper
-    bounds 2026-10-17]; the adopted case finder names the existing Joost de Winter
-    identity. Source text and construction-finder role are retained.
+  note: Reviewed after upstream PR 704 adoption of T-196 from [de Winter upper bounds
+    2026-10-17]; the adopted case finder names the existing Joost de Winter identity.
+    Source text and construction-finder role are retained.
 - origin:
     path: packing/frontier/n-227.md
     record_key: '227'
@@ -21376,7 +21568,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-232.md
     record_key: '232'
@@ -21405,7 +21598,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-233.md
     record_key: '233'
@@ -21564,7 +21758,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-237.md
     record_key: '237'
@@ -21614,7 +21810,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-238.md
     record_key: '238'
@@ -21629,7 +21826,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-238.md
     record_key: '238'
@@ -21675,7 +21874,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-239.md
     record_key: '239'
@@ -21778,7 +21979,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-241.md
     record_key: '241'
@@ -22079,7 +22281,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-258.md
     record_key: '258'
@@ -22109,7 +22313,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-258.md
     record_key: '258'
@@ -22142,7 +22347,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-259.md
     record_key: '259'
@@ -22162,19 +22369,18 @@ occurrences:
     path: packing/frontier/n-260.md
     record_key: '260'
     field: /reported_upper_bound/found_by/0
-  expected_text: Joost de Winter
+  expected_text: Francisco Couzo
   start: 0
   end: 15
-  label: Joost de Winter
+  label: Francisco Couzo
   role: construction-finder
   disposition: resolved
+  contributor_id: francisco-couzo
   evidence:
-  - source-intake
+  - primary-byline
   - bibliography
-  contributor_id: joost-de-winter
-  note: Reviewed after upstream PR 704 adoption of T-196 from [de Winter upper
-    bounds 2026-10-17]; the adopted case finder names the existing Joost de Winter
-    identity. Source text and construction-finder role are retained.
+  note: >-
+    Reviewed after PR 706 adoption of T-223: the adopted source and case name Francisco Couzo as finder; prior construction lineage remains in the retained result and case history.
 - origin:
     path: packing/frontier/n-260.md
     record_key: '260'
@@ -22238,7 +22444,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: robert-barnett
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-261.md
     record_key: '261'
@@ -22284,7 +22491,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-263.md
     record_key: '263'
@@ -22365,7 +22574,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-264.md
     record_key: '264'
@@ -22394,7 +22604,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-265.md
     record_key: '265'
@@ -22565,7 +22776,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-269.md
     record_key: '269'
@@ -22694,7 +22907,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-272.md
     record_key: '272'
@@ -23066,7 +23281,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-292.md
     record_key: '292'
@@ -23473,7 +23690,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-303.md
     record_key: '303'
@@ -23488,7 +23706,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-303.md
     record_key: '303'
@@ -23534,7 +23753,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-304.md
     record_key: '304'
@@ -23549,7 +23769,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-304.md
     record_key: '304'
@@ -23581,7 +23802,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/frontier/n-305.md
     record_key: '305'
@@ -23596,7 +23818,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-305.md
     record_key: '305'
@@ -23704,7 +23928,9 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
+    retained.
 - origin:
     path: packing/frontier/n-307.md
     record_key: '307'
@@ -24037,7 +24263,8 @@ occurrences:
   - spheres-byline
   - archive-index
   contributor_id: thierry-gensane
-  note: The retained 2004 sphere-packing paper byline and archive index identify Thierry Gensane.
+  note: The retained 2004 sphere-packing paper byline and archive index identify Thierry
+    Gensane.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Gensane–Ryckelynck 2005]'
@@ -24082,7 +24309,8 @@ occurrences:
   - title-page
   - packet
   contributor_id: david-r-maciver
-  note: The retained seventeen-square manuscript title page names David R. MacIver and prints 8 August 2026.
+  note: The retained seventeen-square manuscript title page names David R. MacIver
+    and prints 8 August 2026.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Schadt n=29 repository]'
@@ -24097,7 +24325,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: thomas-schadt
-  note: The retained repository Results table credits the New Solution to Thomas Schadt (2025).
+  note: The retained repository Results table credits the New Solution to Thomas Schadt
+    (2025).
 - origin:
     path: packing/atlas/known-best/credit-attributions.json
     record_key: $
@@ -24333,8 +24562,8 @@ occurrences:
   evidence:
   - repository-license
   - bibliography
-  note: Reviewed source-specific identity against the retained n343 intake and existing profile
-    evidence; raw source label, span and role retained.
+  note: Reviewed source-specific identity against the retained n343 intake and existing
+    profile evidence; raw source label, span and role retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n343 sweep 2026-10-20]'
@@ -24349,8 +24578,8 @@ occurrences:
   evidence:
   - repository-license
   - bibliography
-  note: Reviewed source-specific identity against the retained n343 intake and existing profile
-    evidence; raw source label, span and role retained.
+  note: Reviewed source-specific identity against the retained n343 intake and existing
+    profile evidence; raw source label, span and role retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n343 sweep 2026-10-20]'
@@ -24365,8 +24594,8 @@ occurrences:
   evidence:
   - source-intake
   - bibliography
-  note: Reviewed source-specific identity against the retained n343 intake and existing profile
-    evidence; raw source label, span and role retained.
+  note: Reviewed source-specific identity against the retained n343 intake and existing
+    profile evidence; raw source label, span and role retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n343 sweep 2026-10-20]'
@@ -24381,8 +24610,8 @@ occurrences:
   evidence:
   - paper-byline
   - bibliography
-  note: Reviewed source-specific identity against the retained n343 intake and existing profile
-    evidence; raw source label, span and role retained.
+  note: Reviewed source-specific identity against the retained n343 intake and existing
+    profile evidence; raw source label, span and role retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n343 sweep 2026-10-20]'
@@ -24397,8 +24626,8 @@ occurrences:
   evidence:
   - paper-byline
   - bibliography
-  note: Reviewed source-specific identity against the retained n343 intake and existing profile
-    evidence; raw source label, span and role retained.
+  note: Reviewed source-specific identity against the retained n343 intake and existing
+    profile evidence; raw source label, span and role retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n343 sweep 2026-10-20]'
@@ -24413,8 +24642,8 @@ occurrences:
   evidence:
   - paper-byline
   - bibliography
-  note: Reviewed source-specific identity against the retained n343 intake and existing profile
-    evidence; raw source label, span and role retained.
+  note: Reviewed source-specific identity against the retained n343 intake and existing
+    profile evidence; raw source label, span and role retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n343 sweep 2026-10-20]'
@@ -24430,8 +24659,99 @@ occurrences:
   - daniel-343-credit
   - primary-byline
   - bibliography
-  note: Reviewed source-specific identity against the retained n343 intake and existing profile
-    evidence; raw source label, span and role retained.
+  note: Reviewed source-specific identity against the retained n343 intake and existing
+    profile evidence; raw source label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-20]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  contributor_id: evan-daniel
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed against the retained T-225 packet, its named packing lineage and CREDITS.md, and existing profile evidence; raw label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Couzo, de Winter, Polkovskyi, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  contributor_id: evan-daniel
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed against the retained T-225 packet, its named packing lineage and CREDITS.md, and existing profile evidence; raw label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Couzo, de Winter, Polkovskyi, Levy
+  start: 13
+  end: 18
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  contributor_id: francisco-couzo
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed against the retained T-225 packet, its named packing lineage and CREDITS.md, and existing profile evidence; raw label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Couzo, de Winter, Polkovskyi, Levy
+  start: 20
+  end: 29
+  label: de Winter
+  role: prerequisite
+  disposition: resolved
+  contributor_id: joost-de-winter
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed against the retained T-225 packet, its named packing lineage and CREDITS.md, and existing profile evidence; raw label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Couzo, de Winter, Polkovskyi, Levy
+  start: 31
+  end: 41
+  label: Polkovskyi
+  role: prerequisite
+  disposition: resolved
+  contributor_id: mykhailo-polkovskyi
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed against the retained T-225 packet, its named packing lineage and CREDITS.md, and existing profile evidence; raw label, span and role retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel regularized lists 2026-10-20]'
+    field: /credit
+  expected_text: Daniel after Couzo, de Winter, Polkovskyi, Levy
+  start: 43
+  end: 47
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  contributor_id: joshua-levy
+  evidence:
+  - daniel-regularized-credit
+  - primary-byline
+  - bibliography
+  note: Reviewed against the retained T-225 packet, its named packing lineage and CREDITS.md, and existing profile evidence; raw label, span and role retained.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

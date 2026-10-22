@@ -32,6 +32,10 @@ contributor:
       archive_path: packing/resources/web/evand-n343-sweep-2026-10-20/source/CREDITS.md
       url: https://github.com/evand/square-packing/blob/88385abc95ab25d520302282d1946cbb07bc9cf3/CREDITS.md
       locator: 'Parallel 2026 work explicitly names Joshua Levy (jlevy), the Squares Project; this source supplies the personal identity behind the new Daniel n343 credit, unlike generic collective-project labels.'
+    - id: daniel-regularized-credit
+      archive_path: packing/resources/web/evand-regularized-2026-10-20/source/CREDITS.md
+      url: https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/CREDITS.md
+      locator: 'Parallel 2026 work explicitly names Joshua Levy (jlevy), the Squares Project; this retained source supplies the personal identity behind the T-225 bibliography credit.'
   provenance:
     - field: /surname
       sources: [primary-byline, bibliography]

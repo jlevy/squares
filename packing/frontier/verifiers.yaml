@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-18'
+last_reviewed: '2026-10-20'
 verifiers:
   - id: V-evand-verify-exact
     program: verify_exact.py
@@ -413,6 +413,33 @@ verifiers:
       - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py
     versions:
       - {sha256: 55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3}
+
+  - id: V-couzo-verify-bound-certificate
+    program: verify_bound_certificate.py
+    author: Evan Daniel, modified by Francisco Couzo with Codex
+    provenance: external
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The source's standard-library checker of issue 678's rational certificates, in
+      Fraction arithmetic: every rotation on the unit circle, every square in the closed
+      box by its half-extent, and every pair whose centres lie in neighbouring exact cells
+      of side 2 and within sqrt 2 of each other separated along a unit edge normal; contact
+      is accepted, and --strict asks for an open box and disjoint closed squares.
+    source:
+      - packing/resources/web/couzo-issue678-2026-10-18/source/verify_bound_certificate.py
+    versions:
+      - sha256: 1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b
+        revision: 7b6c87e129cf80b5ff9847b90b47fd30b4563c54
+        note: The retained copy at the pin, which couzo_678_replay source-checker ran unchanged.
+    note: >-
+      Its header names Evan Daniel's MIT verifier at 622cd2e (search/exact/verify_cert.py)
+      with modifications by Couzo with Codex, under the MIT licence retained beside it.
+      Run here unchanged from the retained copy in a python -I child process on the 85
+      packings of issue 678 and 332 controls (receipts/source-checker-replay.json in the
+      couzo-issue678-2026-10-18 packet): the producer's own code, so its replay is
+      same-implementation.
 
   - id: V-evand-lean
     program: The source's Lean development (lean/), with gen_zmtree.py emitting a cover's box tree
@@ -2259,6 +2286,105 @@ verifiers:
         It uses the producer's stored multipliers as hints, and in its second mode builds
         every row and box itself; its authors had read the producer's rigidity code.
     note: Retained as run in the Overbeck packet's review-2/.
+
+  - id: V-couzo-678-replay
+    program: devtools.couzo_678_replay, its filtered two-route decision
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides each of issue 678's 85 rows from the retained certificates on two exact routes
+      over Q, sqpack.verify's unit-shape and separating-axis predicates on sqpack.witness's
+      corners and the independent rational corner checker's on the kernel's corners, over
+      every wall and every pair whose centres are closer than sqrt 2, an exactly justified
+      filter whose lemma both routes' unit-shape and centre checks secure; holds each print
+      to its header side rounded up at 12 places; and refuses six controls per certificate,
+      the near-contact pair 10^-30 past exact contact among them.
+    source:
+      - packing/devtools/couzo_678_replay.py
+      - packing/tests/test_couzo_678_replay.py
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    independence:
+      read: [mathematics, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares:
+        - >-
+          sqpack.verify's check_unit_squares and separated, the jlevy/squares corner
+          verifier the source reports running
+        - >-
+          devtools.check_rational_witness_independent's square_failures and pair_gap
+        - the certificate parser and half-angle map of devtools.evand_exact_certificates
+        - CPython's fractions.Fraction arithmetic
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the import lane of issue 678 (think-xu4d), 19 October 2026; its tier and
+            reasoning setting are not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: >-
+          The source's author disclosed OpenAI Codex and Claude Code assistance in his
+          issues of 13 and 14 October 2026, and the checker's header names Codex. The
+          program imports the sqpack.verify predicates the source reports running; it runs
+          the source's checker only as a separate process.
+      note: >-
+        RF-1 of the 20 October review: the two routes read each certificate once,
+        together, through the shared parser, half-angle map and filter, so a misread
+        literal or a wrong map would reach both alike. The source's checker and the
+        review's checker read the text with readers of their own and found the same
+        inputs at all 85 rows.
+    note: >-
+      Written by the import lane of issue 678 on 19 October 2026; its near-contact control
+      was added on 20 October 2026 by the stage 4 records lane (RF-2), and the receipt
+      rewritten with it. The 20 October review (docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md)
+      read it in full and reproduced check --replay.
+
+  - id: V-couzo-678-review-check
+    program: review_678_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 20 October review's standard-library exact checker of issue 678's certificates,
+      with readers of its own: every rotation on the unit circle, containment in the closed
+      box by half-extents with no corner formed, every pair whose centres are closer than
+      sqrt 2 by separating axes along unit normals and again by the exact area of one
+      square clipped by the other's four closed half-planes, every pair at seven counts by
+      separating axes, and each print against its header side rounded up at 12 places.
+    source:
+      - packing/resources/web/couzo-issue678-2026-10-18/review/programs/review_678_check.py
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    independence:
+      read: [mathematics, certificate-format, producer-code, producer-output, earlier-review]
+      clean_room: false
+      shares:
+        - CPython's fractions.Fraction arithmetic
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 678 (c-review-678-fable,
+            think-xu4d), strong tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: >-
+          The source's author disclosed OpenAI Codex and Claude Code assistance. Written
+          in a file of its own that imports nothing from this repository or the source;
+          it shares Python's Fraction with every route, and its author read the source's
+          checker, both maintained routes and the summary of the 19 October review before
+          writing it, so it is not clean-room.
+    note: >-
+      Written and run on 20 October 2026 by the review; kept in the couzo-issue678-2026-10-18
+      packet's review/ with its README and receipts (RF-5).
 
   # --- First-party programs: premise checks and replay drivers ------------------------
   - id: V-overbeck-review3-seed-packing
@@ -4623,3 +4749,37 @@ verifiers:
     note: The upper-bound driver calls this custody premise before parsing. Historical command/environment
       and actual source hash are retained in the n183 packet; no upstream or archived code is
       executed by this registration.
+
+  - id: V-couzo-678-review-identity
+    program: identity_260.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [numerical-f64]
+    role: premises
+    summary: >-
+      Compares three n = 260 packings, T-196's, the evand 14a9af8 seed and issue 678's,
+      under the box's eight symmetries in binary64: how many squares of one have a square
+      of the other within a tolerance in centre with the same axes. It decides no bound.
+    source:
+      - packing/resources/web/couzo-issue678-2026-10-18/review/programs/identity_260.py
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    independence:
+      read: [certificate-format, producer-output, earlier-review]
+      clean_room: false
+      shares:
+        - CPython's fractions.Fraction, to read the exact poses
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 678 (c-review-678-fable,
+            think-xu4d), strong tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: As for V-couzo-678-review-check, in a file of its own.
+    note: >-
+      Measures the identity statement of issue 678's comment of 19 October; no evidence
+      entry cites it. Its log is the records lane's rerun of 20 October 2026, unchanged.

@@ -40,18 +40,18 @@ Continue through `think-zpfo` and [PR #578](https://github.com/jlevy/squares/pul
 The active checkout is `/Volumes/spud-ext2/worktrees/squares-profiles-final-20261021`;
 source `/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/integration-env.sh`
 before build or test commands.
-Latest upstream integration includes origin/main `970e89de8` and its T-196 adoption at
-227 and 260. Merge `e9149e2a2` preserves release `v0.8.15` beneath the proposed profile
-release `v0.9.0`; `3ae236a16` pins that data revision.
-The two changed finder occurrences now reference Joost de Winter.
-Canonical result and source-coverage views reconcile, with no stale attribution spans.
-Earlier dated receipts below are historical, including their counts, environments and
-preview ports.
+Latest upstream integration includes origin/main `d7923b8d8`: T-223’s adoption at 204
+and 260, T-225’s registration, and the published `v0.8.17` history.
+The proposed profile release remains `v0.9.0`; the profile-link explainer patch is now
+`v0.4.15`, after upstream’s `v0.4.14`. Canonical result and source-coverage views
+reconcile, with no stale attribution spans.
+The merged tree is awaiting its final build and CI. Earlier dated receipts below are
+historical, including their counts, environments and preview ports.
 
 The frozen identity batch contains 75 profiles.
-The structured census reports 1,435 resolved spans, 78 non-person spans and seven
+The structured census reports 1,440 resolved spans, 77 non-person spans and seven
 unresolved spans; ten manual origins are reported separately.
-The primary-authorship model yields 213 distinct registered results and 701 non-primary
+The primary-authorship model yields 214 distinct registered results and 705 non-primary
 person/result credits.
 Results retain all authored registered results.
 The requested Records subset (`think-lekx`) covers current contributions across every
@@ -60,7 +60,7 @@ Bound records require strict improvements; matching an existing bound alone does
 qualify. Family-specific currentness is implemented in `profile_records.py` and must not
 be inferred from bound standing for non-bound results.
 The classifier passed ten focused tests.
-The directory and profile renderers show 114 current authored Records, with unresolved
+The directory and profile renderers show 115 current authored Records, with unresolved
 priority or scope identified separately.
 Astra reviewed the model and renderer boundaries without a blocker.
 Formalization uses the existing result kind in the ontology, schema and filters;
@@ -187,7 +187,7 @@ The full push gate and final hosted checks are recorded in PR #578 and `think-zp
 these focused receipts do not stand in for that acceptance.
 
 Visible oversight credit labels and links require proposed paper successors: explainer
-`v0.4.14` and methods survey `v0.2.4`. The site remains the proposed `v0.9.0` batch.
+`v0.4.15` and methods survey `v0.2.4`. The site remains the proposed `v0.9.0` batch.
 Confirm all proposed edition dates at first deployment.
 The next reviewer should review PR #578, starting with the final checks and diff;
 merging and deployment remain separate from this handoff.

@@ -2894,10 +2894,13 @@ sources:
       web/de-winter-upper-bounds-227-229-260-2026-10-17/. The issue credits the public
       jlevy/squares catalogue as the search start and preserves its prior-packing credits.
       It discloses Codex agents under the author's direction and subsequent Claude
-      replay. Stage 3 registers these claims as T-196 in packing/frontier/results.yaml,
-      V0/C0 and pending adoption. The separately completed mathematical review and
-      source replay with controls await descendant integration; this entry adopts no
-      confirmation, and both case upper lanes and houses remain unchanged.
+      replay. T-196 registers these claims in packing/frontier/results.yaml, at V3/C3
+      since the 20 October review
+      (docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md) and the
+      replay on both maintained exact routes; no run of the source's own checkers is in
+      the record. T-196 became the house at 227 and 260 in the pass of 20 October
+      (#704); T-223 replaced it at 260 on 21 October (#706); T-199 stays the house at
+      229.
   - key: '[Daniel n183 subgrid 2026-10-19]'
     authors: [Daniel]
     year: 2026
@@ -3135,6 +3138,21 @@ sources:
       the source''s comparison with #678''s packing are retained beside it. MIT-licensed; Claude assistance
       disclosed. KKT and local-minimum statements are the author''s numerical evidence; no local or global
       optimality claim.'
+  - key: '[Daniel regularized lists 2026-10-20]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-20'
+    lineage: builds-on-project
+    credit: Daniel after Couzo, de Winter, Polkovskyi, Levy
+    short_credit: Daniel after Couzo et al.
+    note: 'Four complete exact certificates at 0075967bace18a3deabcc0baa64c2fb294fc80a0 from the display-regularized
+      record lists of search/regularize: at 204, 227 and 260 Francisco Couzo''s packings (at 227 his #672
+      refinement of Joost de Winter''s #668 packing) and at 229 Evan Daniel''s own #674 packing, each solved
+      to its exact side, regularized for display at that side and scaled by 1 + 1e-20. MIT-licensed certificates
+      and JSON retained; Claude assistance disclosed. The source claims no record; no KKT, same-packing,
+      local or global optimality is admitted.'
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono

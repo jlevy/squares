@@ -348,6 +348,11 @@ DECLARED_CONSUMERS = {
         "checks that each certified case's ceiling cites its replay and agrees with the "
         "report exactly where the receipt says it does; it asserts nothing about s(n)"
     ),
+    "packing/tests/test_upper_bound_reports_regularized_1020.py": (
+        "checks that each of T-225's sides lies below the next count's ceiling, the "
+        "monotonicity test s(n) <= s(n + 1) a new bound must pass; it reads the field as a "
+        "ceiling on s(n + 1) and asserts nothing about either count's s(n)"
+    ),
     "packing/devtools/check_results.py": (
         "reads only the evidence ids a case's bound fields cite, to derive whether a "
         "registered result still holds a case bound; it takes no value from the field and "

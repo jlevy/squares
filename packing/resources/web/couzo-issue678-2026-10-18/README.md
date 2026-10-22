@@ -8,8 +8,12 @@ at `7b6c87e129cf80b5ff9847b90b47fd30b4563c54`. The packet retains the 83 certifi
 issue links and the source’s exact checker, records the exact replay of all 85 rows, and
 compares each claim with the record and the earlier reports in report order.
 [T-223](../../../frontier/RESULTS.md) registers the two claims in the case corpus, at 204
-and 260, pending adoption; the 83 beyond it are dated beyond-horizon rows of the
-`couzo-issue678-2026-10-18` source in
+and 260, at V3/C3 since the
+[review of 20 October 2026](../../../../docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md),
+and the case at 204 adopted its claim as the house best packing that day, the case at 260
+on 21 October 2026, from Joost de Winter’s T-196, which #704 had adopted there on 20
+October; the 83 beyond it are
+dated beyond-horizon rows of the `couzo-issue678-2026-10-18` source in
 [source-coverage.yaml](../../../frontier/source-coverage.yaml), read from
 [acquisition/beyond-horizon-claims.json](acquisition/beyond-horizon-claims.json).
 
@@ -203,11 +207,16 @@ certificate from this packet, holds it to the manifest digest, and decides each 
 - **the deletion rows.** 545 and 641 are the 546 and 642 certificates without their last
   square, at the same side. A subset of a packing is a packing, so the choice of square
   does not matter.
-- **five controls per certificate**, each with a known answer and each decided by both
+- **six controls per certificate**, each with a known answer and each decided by both
   routes: square 2 replaced by square 1; square 1 moved `S + 2` to the right; the side
   lowered by the least top or right clearance plus `10^-18`; square 1 enlarged by
-  `10^-12` about its centre; and, for the candidate pair with the least `|dy|` (at most
-  1/2), one square given the other’s `x`, so their inscribed discs of radius 1/2 meet.
+  `10^-12` about its centre; for the candidate pair with the least `|dy|` (at most 1/2),
+  one square given the other’s `x`, so their inscribed discs of radius 1/2 meet; and the
+  near-contact pair, the candidate pair with the least separating gap, its second square
+  translated by the exact vector between the pair’s closest points into contact and then
+  `10^-30` of the centre distance further. The last overlaps by about `10^-30` at the
+  `10^-11` to `10^-13` scale of the least gaps, where a binary64 checker with a tolerance
+  would accept it; it was added on 20 October 2026 for RF-2 of the review.
 
 ### Results
 
@@ -219,19 +228,26 @@ exactly `10^-15` at the other 23.
 The least pair gap is exactly 0 at nine rows (499, 501, 600, 602, 808, 815, 872, 924 and
 989), 695 touching pairs in all, and elsewhere between $1.85 \times 10^{-13}$ (at 459)
 and $9.16 \times 10^{-11}$ (at 330).
-**All 415 controls are refused by both routes**, each on the overlap, wall or shape it
-was built to break.
-The positive decisions took 90.8 CPU seconds. With the controls, three workers took
-1,631.5 seconds of wall from 17:10:17Z on 19 October, on a four-core machine shared with
-other lanes at a load average of 15 to 25.
+**All 498 controls are refused by both routes**, each on the overlap, wall or shape it
+was built to break. The near-contact mutant overlaps its own pair alone at 78
+certificates; at 600, 815, 872, 924 and 989, where the moved square also touches a third,
+that pair overlaps too. In exact contact, before the push, both routes accept the pair
+(the test holds that at 204).
+The positive decisions took 80.5 CPU seconds. With the controls, two workers took
+1,266.1 seconds of wall from 22:40:06Z on 20 October, on a four-core machine
+shared with other lanes at a load average of about 12 to 17; the receipt of 19 October,
+with five controls a certificate, took 1,631.5 seconds on three workers.
 [receipts/filtered-exact-replay.json](receipts/filtered-exact-replay.json) keeps every
 row’s side, both routes’ counts, least clearance, least gap and failures, the controls,
-and, from the source’s pinned `manifest.json`, each row’s stated bound, digest and credit.
+and, from the source’s pinned `manifest.json`, each row’s stated bound, digest and credit,
+with the manifest entry’s own strict verdict as `manifest_entry_strict_valid`, which at 545
+and 641 is about the manifest’s `n545.cert` and `n641.cert`, not the issue’s rows (RF-3).
 
 **The source’s checker**, run unchanged from its retained copy (SHA-256
 `1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b`, read before it was
 run) in a `python -I` child process, accepts all 85 packings under its default contract
-and refuses all 332 controls the certificate format states (83 certificates, four each).
+and refuses all 332 controls the certificate format states (83 certificates, four each);
+the near-contact control, added later, was not given to it.
 Its `--strict` verdict, open container and disjoint closed squares, is false at 62 rows,
 the contacts above. Receipt:
 [receipts/source-checker-replay.json](receipts/source-checker-replay.json).
@@ -246,7 +262,13 @@ routes on the loaded machine. At that rate the all-pairs positives of the 83 cer
 are 10.06, and 20.12 with `check --replay`. That is under the owner’s 40 CPU-hour cap,
 but past this session’s wall bound, and the 641 job alone took 587 seconds of wall,
 against the kernel’s 600-second job ceiling. It did not run here; the import bead
-prices it. Receipt: [receipts/exhaustive-sample.json](receipts/exhaustive-sample.json).
+prices it (think-fpnd). Receipt: [receipts/exhaustive-sample.json](receipts/exhaustive-sample.json).
+At the two counts of the case corpus the kernel’s three jobs, a positive and its
+duplicate-square and outside-container controls, each decided by both routes over every
+pair, ran on 20 October 2026 in 30.7 CPU seconds: they are what the house best packing’s
+witness is built from and held to (`upper_bound_houses`), and `check` holds each
+positive’s least gap and wall clearance to the filtered decision’s. Receipt:
+[receipts/house-jobs.json.xz](receipts/house-jobs.json.xz).
 
 **Göbel’s classical constructions.** Every claimed side is below Göbel’s side at its
 count (Göbel squares, Göbel strips and corner-touching strips, with deletion), by
@@ -393,11 +415,15 @@ the source’s checker; those runs are the author’s.
 The filtered route is a first-party program written for this replay. Its two routes
 share the certificate parser, the half-angle conversion, the pair filter and Python’s
 rational arithmetic, so it is two implementations of the unit-shape, pair and wall
-predicates, not two independent replays.
-Its one adversarial review to date is the 19 October mathematical review on the import
-bead: independent all-pairs checks at 204, 260, 330, 545, 641 and 998 and an independent
-separating-axis test on all 140,866 candidate pairs agreed with the receipts.
-The maintained all-pairs kernel has run only on the sample above.
+predicates, not two independent replays (RF-1).
+The [review of 20 October 2026](../../../../docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md)
+accepted all 85 rows for finite feasibility, with five findings, none blocking: it
+reproduced `check --replay`, and its own checker, sharing only Python’s `Fraction` with
+the routes, decided every row, every pair at seven counts and every near pair again by
+exact clipping area, agreeing at every number they share. Its programs and receipts are in
+[review/](review/README.md). The 19 October mathematical review on the import bead,
+summarized there and not retained, reached the same verdict.
+The maintained all-pairs kernel has run only on the sample above and at 204 and 260.
 
 ## Credit and Licence
 
@@ -422,16 +448,18 @@ From `packing/`:
 uv run --frozen --all-extras --group dev python -m devtools.acquire_source couzo-issue678-2026-10-18 --check
 uv run --frozen --all-extras --group dev python -m devtools.couzo_678_replay check
 uv run --frozen --all-extras --group dev python -m devtools.couzo_678_replay check --replay
-uv run --frozen --all-extras --group dev python -m devtools.couzo_678_replay filtered --pinned CHECKOUT --workers 3
+uv run --frozen --all-extras --group dev python -m devtools.couzo_678_replay filtered --pinned CHECKOUT --workers 2
+uv run --frozen --all-extras --group dev python -m devtools.couzo_678_replay house-jobs --jobs-dir SCRATCH --workers 2
 uv run --frozen --all-extras --group dev python -m devtools.couzo_678_replay source-checker --scratch SCRATCH
 uv run --frozen --all-extras --group dev python -m devtools.couzo_678_replay exhaustive --n 204 260 343 545 641
 uv run --frozen --all-extras --group dev python -m devtools.couzo_678_replay goebel
 uv run --frozen --all-extras --group dev python -m devtools.couzo_678_replay claims-record
 ```
 
-`check` reads the four receipts and the beyond-horizon claims record against the issue
-and the packet; `check --replay` decides every row and control again. `filtered`,
-`source-checker`, `exhaustive` and `goebel` rewrite their receipts, and `claims-record`
+`check` reads the five receipts and the beyond-horizon claims record against the issue
+and the packet; `check --replay` decides every row, control and house job again.
+`filtered`, `house-jobs`, `source-checker`, `exhaustive` and `goebel` rewrite their
+receipts, and `claims-record`
 rewrites `acquisition/beyond-horizon-claims.json`; `--pinned` names a checkout at the
 pin, from which the source’s `manifest.json` is read and held to its digest.
 
