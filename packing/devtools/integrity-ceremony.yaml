@@ -44,6 +44,17 @@ allowlist:
       digest is compared with the one the packet pinned, so the bound it states is bound
       to the retained bytes. The retained certificates are read from Git and compared
       with nothing; their custody is acquire_source --check's.
+  - path: packing/devtools/couzo_715_replay.py
+    kind: download
+    boundary: >-
+      `filtered --pinned` reads issue 715's certified_bounds.json and source
+      manifest.json, which the couzo-issue715-2026-10-21 packet pins by digest and does
+      not retain, and each construction's parent certificate, whose digest the index
+      states, from a checkout of franciscouzo/square-packing at 6b7391de; each file is
+      held to that digest before it is parsed, so the index entry and parent relation
+      recorded beside a row are bound to the pinned bytes. The retained certificates
+      are read from Git and compared with nothing; their custody is acquire_source
+      --check's.
   - path: packing/devtools/muglich_686_import.py
     kind: download
     boundary: >-

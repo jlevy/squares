@@ -13648,6 +13648,25 @@ issues:
         that reviewing the author's n260 float-conversion, search-chain, packing-identity and
         analytic-optimum statements was still queued; since #716 that ask is done, on the 20
         October review's mapping of the issue's assertions
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6329885169
+      date: '2026-10-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+        id: T-223
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n260
+        id: T-223
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n545
+      - result: n641
+      corrects:
+      - https://github.com/jlevy/squares/issues/678#issuecomment-6328042744
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -13713,6 +13732,22 @@ issues:
       changes no result, rung or credit: T-223 already establishes no arrangement identity or
       optimum and credits de Winter's construction seeded from Daniel's exact-form certificate.
       The follow-up after #716 merges acknowledges it.
+
+      The follow-up, posted at 2026-10-22T00:44:49Z (issuecomment-6329885169) after #716 merged
+      and its Pages deployment of d7923b8d8 (run 39700175588, deployment 7240701386, site
+      v0.8.17) was checked, corrects the stage 7 reply's statement that the second ask was still
+      queued: it is done, on the 20 October review's The Issue's Assertions, Mapped. It thanked
+      the author for his answers and gave the n260 statements in his agreed terms: the identity
+      measured at 240 within 1e-7 and 49 within 1e-8 in place of the withdrawn 1e-8 figure, with
+      no arrangement identity, local minimum or optimum established; the analytic optimum
+      asserted but unverified, the wording being Evan Daniel's; and the float conversion and
+      search chain asserted but unverified until their evidence is retained. It said that the
+      rows at 545 and 641 are the 546 and 642 certificates less one square, unchanged and
+      current; that the source-patch ask stays queued in his words, since 6b7391de leaves the
+      stale evand pin and the ambiguous seed-hash field; that T-223 stays V3/C3, confirmed, the
+      house at 204 and 260; and that #716 registered T-225 at V0/C0, Evan Daniel's solved views
+      of his packings, which the case pages list without changing their best known packing. The
+      issue stays open.
   - number: 680
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand
@@ -14722,8 +14757,9 @@ issues:
       (#484), which it credits as the construction, as #489 did. 343 is beyond the n <= 324 case
       corpus. Triaged read-only on 21 October 2026; retained the same day in
       evand-n343-sweep-2026-10-20, replayed on this repository's two exact routes with its
-      controls, and recorded as the current beyond-horizon row at 343, superseding #678's row
-      there in report order. Claude assistance disclosed.
+      controls, and recorded as the beyond-horizon row at 343, superseding #678's row there in
+      report order. It was the current row until 22 October 2026, when #715's row
+      (couzo-issue715-2026-10-21) superseded it. Claude assistance disclosed.
     read_through: '2026-10-20T22:09:31Z'
     results:
     - key: n343
@@ -14733,8 +14769,9 @@ issues:
         packing the source calls a different local minimum from #678's.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the current row at 343 of the evand-n343-sweep-2026-10-20
-        source, which supersedes couzo-issue678-2026-10-18's row there.
+        Beyond the n <= 324 corpus: a row at 343 of the evand-n343-sweep-2026-10-20 source, which
+        superseded couzo-issue678-2026-10-18's row there and was current until
+        couzo-issue715-2026-10-21's row superseded it on 22 October 2026.
       queued: false
       bead: think-wuxt
     asks:
@@ -14930,20 +14967,1713 @@ issues:
     opened: '2026-10-21'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: >-
-      Francisco Couzo asks, as a follow-up to #678, that 1285 improved upper bounds from n = 328 to
-      9913 be registered, 173 below 1024 and 1112 above it, from
-      franciscouzo/square-packing at 6b7391de820fd01f3ff6984e4a081e8c86845588, each side
-      rounded upward at twelve places with the exact certificate header authoritative; the
-      rows include native and browser refinements and their square-tiling, repeated L-border
-      and deletion consequences.
+      Francisco Couzo asks, as a follow-up to #678, that 1285 improved upper bounds from n = 328
+      to 9913 be registered, 173 below 1024 and 1112 above it, from franciscouzo/square-packing
+      at 6b7391de820fd01f3ff6984e4a081e8c86845588, each side rounded upward at twelve places
+      with the exact certificate header authoritative; the rows include native and browser
+      refinements and their square-tiling, repeated L-border and deletion consequences. Imported
+      on 22 October 2026 at or below 1024: the couzo-issue715-2026-10-21 packet retains the 139
+      certificates first committed after 7b6c87e, whose filtered exact replay decided every one
+      on two routes with every control refused, and the 109 that are the issue's own reports are
+      beyond-horizon rows. 30 re-certify the author's 4e4c8ce certificates under the print's
+      resolution and wait on a decision; 34 restate earlier publications; the 1112 above 1024
+      wait on the owner.
     read_through: '2026-10-21T20:55:57Z'
-    results: []
+    results:
+    - key: n328
+      claim: s(328) <= 18.614368938513, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n335
+      claim: s(335) <= 18.822875655562, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09,
+        1.78e-11 or more above the 8 October decimal report the record holds at 335, so neither
+        it nor this restatement is recorded; the exact check of that report's poses is
+        think-rx26.
+      queued: false
+    - key: n336
+      claim: s(336) <= 18.825571499862, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
+        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n337
+      claim: s(337) <= 18.858391767637, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
+        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n338
+      claim: s(338) <= 18.906332809853, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the same certificate, byte for byte, as the
+        couzo-certificates-2026-10-12 row the record holds at 338, first published at a7067d7 on
+        2026-10-12; a tie the earlier holder keeps.
+      queued: false
+    - key: n340
+      claim: s(340) <= 18.939649632892, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at f311f08 on 2026-10-11, at
+        the same exact side, an earlier report. It is left to its own import (think-om5l, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n341
+      claim: s(341) <= 18.951882408720, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
+        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n343
+      claim: s(343) <= 18.977575126267, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n365
+      claim: s(365) <= 19.614368938513, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n373
+      claim: s(373) <= 19.823062082838, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
+        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n374
+      claim: s(374) <= 19.832356217033, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
+        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n404
+      claim: s(404) <= 20.614368938513, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n410
+      claim: s(410) <= 20.778174593076, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n413
+      claim: s(413) <= 20.831663365378, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n417
+      claim: s(417) <= 20.933672777441, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n454
+      claim: s(454) <= 21.828427124844, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n455
+      claim: s(455) <= 21.848427413955, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n456
+      claim: s(456) <= 21.881307463869, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n458
+      claim: s(458) <= 21.903616797192, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n459
+      claim: s(459) <= 21.937022304151, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n461
+      claim: s(461) <= 21.964134608334, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n463
+      claim: s(463) <= 21.971254044975, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n490
+      claim: s(490) <= 22.656854249519, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n496
+      claim: s(496) <= 22.822875655559, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n497
+      claim: s(497) <= 22.823102656285, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n498
+      claim: s(498) <= 22.828427124827, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n499
+      claim: s(499) <= 22.881306218323, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n500
+      claim: s(500) <= 22.887841512273, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n501
+      claim: s(501) <= 22.887841512273, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n502
+      claim: s(502) <= 22.933269925480, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n503
+      claim: s(503) <= 22.943933771540, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n504
+      claim: s(504) <= 22.961828398888, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n505
+      claim: s(505) <= 22.964182800913, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n506
+      claim: s(506) <= 22.971254044975, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n509
+      claim: s(509) <= 22.993588501431, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n535
+      claim: s(535) <= 23.656854249519, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.37e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n544
+      claim: s(544) <= 23.828427124775, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n545
+      claim: s(545) <= 23.883414761903, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n546
+      claim: s(546) <= 23.887841512273, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n547
+      claim: s(547) <= 23.898819144794, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n548
+      claim: s(548) <= 23.943933771540, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n549
+      claim: s(549) <= 23.955501804754, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n550
+      claim: s(550) <= 23.960681444798, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n553
+      claim: s(553) <= 23.979452392567, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n554
+      claim: s(554) <= 23.986307325908, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n582
+      claim: s(582) <= 24.656854249519, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.47e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n584
+      claim: s(584) <= 24.677669529693, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n591
+      claim: s(591) <= 24.828427124775, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.48e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n592
+      claim: s(592) <= 24.883414761903, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n593
+      claim: s(593) <= 24.887841512273, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n594
+      claim: s(594) <= 24.898819144794, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n595
+      claim: s(595) <= 24.943933771540, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n596
+      claim: s(596) <= 24.949747468335, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n597
+      claim: s(597) <= 24.950690418637, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n598
+      claim: s(598) <= 24.954250129268, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n599
+      claim: s(599) <= 24.959619887409, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n600
+      claim: s(600) <= 24.978172747238, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n601
+      claim: s(601) <= 24.986189080604, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n602
+      claim: s(602) <= 24.988237878425, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n631
+      claim: s(631) <= 25.656854249519, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.57e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n633
+      claim: s(633) <= 25.677669529693, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.57e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n637
+      claim: s(637) <= 25.778174593082, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n640
+      claim: s(640) <= 25.828427124775, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.58e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n643
+      claim: s(643) <= 25.898819144794, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n644
+      claim: s(644) <= 25.899494936642, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n645
+      claim: s(645) <= 25.946937290069, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n646
+      claim: s(646) <= 25.946937290069, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n647
+      claim: s(647) <= 25.946937290069, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n648
+      claim: s(648) <= 25.959619886978, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n651
+      claim: s(651) <= 25.981928099991, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n652
+      claim: s(652) <= 25.990044325432, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n653
+      claim: s(653) <= 25.992652721826, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n654
+      claim: s(654) <= 25.994801642508, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n682
+      claim: s(682) <= 26.656854249519, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.67e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n684
+      claim: s(684) <= 26.677669529693, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.67e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n689
+      claim: s(689) <= 26.778174593084, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n691
+      claim: s(691) <= 26.828427124775, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.68e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n692
+      claim: s(692) <= 26.828427124777, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n694
+      claim: s(694) <= 26.898819144794, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n695
+      claim: s(695) <= 26.899494936642, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.69e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n696
+      claim: s(696) <= 26.946937290069, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n697
+      claim: s(697) <= 26.946937290069, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n698
+      claim: s(698) <= 26.946937290069, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n699
+      claim: s(699) <= 26.949747468415, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n700
+      claim: s(700) <= 26.963723854128, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n702
+      claim: s(702) <= 26.976012028499, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n705
+      claim: s(705) <= 26.990419622637, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n735
+      claim: s(735) <= 27.656854249519, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.77e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n736
+      claim: s(736) <= 27.656854249525, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n737
+      claim: s(737) <= 27.677669529693, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.77e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n742
+      claim: s(742) <= 27.778174593084, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.78e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n743
+      claim: s(743) <= 27.798989873256, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
+        count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier
+        report. It is left to its own import (think-yfoo, open), which has not recorded it yet;
+        this restatement is not recorded.
+      queued: false
+    - key: n744
+      claim: s(744) <= 27.798989873256, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n745
+      claim: s(745) <= 27.828427124777, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.78e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n746
+      claim: s(746) <= 27.828427124795, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n747
+      claim: s(747) <= 27.884019388658, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n748
+      claim: s(748) <= 27.884019388658, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n749
+      claim: s(749) <= 27.884019388658, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n750
+      claim: s(750) <= 27.911200800711, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n751
+      claim: s(751) <= 27.914175785603, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n752
+      claim: s(752) <= 27.932396768486, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n756
+      claim: s(756) <= 27.976782251658, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n758
+      claim: s(758) <= 27.983731022945, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n790
+      claim: s(790) <= 28.656854249519, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.87e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n791
+      claim: s(791) <= 28.656854249525, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.87e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n792
+      claim: s(792) <= 28.656854249526, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n797
+      claim: s(797) <= 28.778174593084, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.88e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n798
+      claim: s(798) <= 28.798989873256, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.88e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n799
+      claim: s(799) <= 28.798989873256, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.88e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n800
+      claim: s(800) <= 28.798989873257, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n801
+      claim: s(801) <= 28.825777528963, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n802
+      claim: s(802) <= 28.827439471389, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n803
+      claim: s(803) <= 28.827585222385, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n804
+      claim: s(804) <= 28.884019388658, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n805
+      claim: s(805) <= 28.902673974184, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n806
+      claim: s(806) <= 28.902673974184, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n807
+      claim: s(807) <= 28.924694876402, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n808
+      claim: s(808) <= 28.931498747933, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n809
+      claim: s(809) <= 28.933954694456, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n813
+      claim: s(813) <= 28.979120019579, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n814
+      claim: s(814) <= 28.981388189193, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n815
+      claim: s(815) <= 28.992261716554, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n850
+      claim: s(850) <= 29.656854249528, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n854
+      claim: s(854) <= 29.778174593084, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.98e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n855
+      claim: s(855) <= 29.798989873256, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.98e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n856
+      claim: s(856) <= 29.798989873256, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.98e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n857
+      claim: s(857) <= 29.798989873257, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 2.98e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n858
+      claim: s(858) <= 29.825571500168, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n859
+      claim: s(859) <= 29.825571500168, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n860
+      claim: s(860) <= 29.827585222385, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n862
+      claim: s(862) <= 29.899494936647, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n863
+      claim: s(863) <= 29.902673974184, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n864
+      claim: s(864) <= 29.924694876402, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n865
+      claim: s(865) <= 29.931498747933, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n866
+      claim: s(866) <= 29.933954694456, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n867
+      claim: s(867) <= 29.942070418091, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n868
+      claim: s(868) <= 29.974553547719, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n869
+      claim: s(869) <= 29.974935743865, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n870
+      claim: s(870) <= 29.979120019579, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n871
+      claim: s(871) <= 29.981295638373, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n872
+      claim: s(872) <= 29.992261716554, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n873
+      claim: s(873) <= 29.992265777039, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n909
+      claim: s(909) <= 30.656854249528, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 3.07e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n913
+      claim: s(913) <= 30.778174593084, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 3.08e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n914
+      claim: s(914) <= 30.778174593089, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n915
+      claim: s(915) <= 30.798989873256, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 3.08e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n916
+      claim: s(916) <= 30.798989873257, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 3.08e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n917
+      claim: s(917) <= 30.825571499902, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n918
+      claim: s(918) <= 30.825571499902, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n919
+      claim: s(919) <= 30.827585222385, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n923
+      claim: s(923) <= 30.924694876402, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n924
+      claim: s(924) <= 30.931498747933, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n925
+      claim: s(925) <= 30.933954694456, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n926
+      claim: s(926) <= 30.942070418091, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n927
+      claim: s(927) <= 30.969443226806, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n928
+      claim: s(928) <= 30.974935654060, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n931
+      claim: s(931) <= 30.989934444611, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n932
+      claim: s(932) <= 30.992265777039, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n970
+      claim: s(970) <= 31.656854249528, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 3.17e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n975
+      claim: s(975) <= 31.778174593089, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 3.18e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n976
+      claim: s(976) <= 31.778174593090, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n977
+      claim: s(977) <= 31.798989873257, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
+        refused, is 3.18e-23 below the certificate the source first published at 4e4c8ce on
+        2026-10-15, under the print's resolution; whether that re-certification is a new report
+        waits on a decision, and no row is recorded.
+      queued: true
+      bead: think-fwa9
+    - key: n978
+      claim: s(978) <= 31.825090165859, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n979
+      claim: s(979) <= 31.825090165859, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n980
+      claim: s(980) <= 31.827585222385, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n985
+      claim: s(985) <= 31.920310216821, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
+        count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier
+        report. It is left to its own import (think-yfoo, open), which has not recorded it yet;
+        this restatement is not recorded.
+      queued: false
+    - key: n986
+      claim: s(986) <= 31.920310216821, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n987
+      claim: s(987) <= 31.941797078452, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n988
+      claim: s(988) <= 31.949747468406, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
+      queued: false
+    - key: n989
+      claim: s(989) <= 31.974181306003, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n994
+      claim: s(994) <= 31.992271544010, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n995
+      claim: s(995) <= 31.993696413074, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: n996
+      claim: s(996) <= 31.994135336337, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the couzo-issue715-2026-10-21 source, below
+        every earlier report at its count. Its retained certificate's exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control
+        refused (receipts/filtered-exact-replay.json); the 22 October ledger records it in
+        report order.
+      queued: false
+    - key: above-1024
+      claim: >-
+        1112 upper bounds at n = 1033 to 9913, each its certificate or construction side rounded
+        upward at twelve places, listed in the issue's table.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus, and above 1024, where the record holds no row. Whether the
+        record tracks these counts, whether a construction without its own certificate file
+        becomes a row (856 of the 1112 are L-border constructions, and the pin writes out an
+        explicit certificate at only 90 counts), and where the 98 certificates they rest on (9.1
+        MB as zlib stores them) are hosted wait on the owner; nothing is retained or replayed
+        above 1024.
+      queued: true
+      bead: think-cyal
+      blocked_on:
+      - think-f2io
     beads:
     - think-cyal
+    - think-fwa9
+    - think-rx26
     answer_bead: think-cyal
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/715#issuecomment-6329883508
+      date: '2026-10-22'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
     close_when: >-
       Every claim has a reviewed disposition on main, pending validation has a priced owner,
       any changed house is regularized in its adoption, and the author has received a reply
@@ -14951,3 +16681,52 @@ issues:
     notes: >-
       Entered on 21 October 2026 at stage 0 with triage pending, so the record holds the issue;
       think-cyal owns its read-only stage 1 triage and import. Nothing is imported here.
+
+      The acknowledgement, posted at 2026-10-22T00:44:42Z (issuecomment-6329883508) after #716
+      merged and its Pages deployment of d7923b8d8 (run 39700175588, deployment 7240701386, site
+      v0.8.17) was checked, said that #716 entered the issue with triage pending and that
+      nothing is retained, replayed or recorded yet. It reported the triage's comparison, made
+      from the issue's table and the then-public head 7b6c87e with each side read against main's
+      rows as a 12-place upward rounding: 64 of the 173 rows at or below 1024 are certificates
+      first committed at 02f9690, f311f08, a7067d7 and 4e4c8ce between 9 and 15 October, to be
+      recorded from those commits by the report-order rule; 338 is the file main holds from
+      couzo-certificates-2026-10-12; 335 is 1.84e-11 above main's row from the 8 October decimal
+      report and is not recorded; and the other 1221 rows lie below main's current row or the
+      grid and below every earlier open report, 343 by 1.0736e-4 below issue 702's row. It said
+      that 6b7391de is now public and does not complete issue 678's source correction, that
+      counts above 1024 wait on the owner, as issue 666's do, and that certificates above 1024
+      would be pinned by SHA-256 under OR-18. It gave the plan (custody, report order, the
+      filtered two-route replay at or below 1024, rows recorded as reported) and asked three
+      questions: certificates or recipes above 1024 and their size, each row's parent, and
+      whether the 9 October certificate at 335 certifies the 8 October decimal report. It states
+      no T-NNN, and the issue stays open.
+
+      The import of 22 October 2026 (think-cyal, PR on branch claude/intake-2026-10-22) found
+      6b7391de public: it and its parents 5a299b4 and d09edd7 were pushed together at
+      2026-10-21T22:56:37Z, after the issue, while master had stood at 7b6c87e since
+      2026-10-18T23:23:42Z. At each of the 173 counts at or below 1024 the pin holds an explicit
+      certificate certificates/nN.cert whose header side rounds up to the print and equals the
+      index's bound; 59 are the index's L-border constructions and 11 its deletions, written out
+      in full. devtools.couzo_715_replay publications held each against every certificate the
+      source published through 7b6c87e and the index there: 109 are below every earlier public
+      side at print precision and are the issue's own reports; 30, first committed at 5a299b4,
+      are 2.37e-23 to 3.18e-23 below the 4e4c8ce certificate of the same count, which rounds up
+      to the same print (think-fwa9); 34 equal a certificate first published at 02f9690,
+      f311f08, a7067d7 or 4e4c8ce, 32 of them byte for byte, so the triage's 64 restated rows
+      are 34 restated and 30 re-certified. The couzo-issue715-2026-10-21 packet retains the 139
+      new certificates (4.42 MB as zlib stores them) and pins the rest by digest, eight restated
+      certificates and the checker against identical copies other packets retain. The filtered
+      two-route replay of couzo_678_replay accepted all 139 and refused all 834 controls, the
+      all-pairs kernel agreed at 343 and 996, every side is below Goebel's constructions, and
+      check --replay decided every row again. The 22 October ledger, read at the 20 October main
+      d588ad98 and walking the publications, issues 666, 670, 672 and 675, then 678, 686 and
+      702, records the 109 and leaves the 30 undecided; the 109 are rows of the
+      couzo-issue715-2026-10-21 source (E-couzo-715-certificate-report), superseding 50 of issue
+      686's rows, 29 of 487b058's, 26 of issue 678's and issue 702's at 343, which issue 715
+      beats by 1.0736e-4. The exact check of the 8 October decimal poses at 335 the
+      acknowledgement promised is think-rx26. Nothing above 1024 is retained, replayed or
+      recorded. The acknowledgement said the 64 earlier-commit rows would be recorded from those
+      commits, and put 335 1.84e-11 above main's row: this import records none of the 64 (34
+      restated, left to their owning imports think-a4wq, think-om5l and think-yfoo, all open,
+      and 30 re-certified, held on think-fwa9), and the exact certificate at 335 is 1.7825e-11
+      above that row; the next reply on the issue corrects both.
