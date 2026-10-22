@@ -2,9 +2,9 @@
 // the overview's recent results.
 //
 // A classic script, inlined into each page by `devtools.render_overview`. It enhances
-// every `table.site-table` whose wrapper follows a `.site-table-tools` bar, directly or
-// with a table of results' legend between them (`toolsBefore`); the table is complete in
-// the HTML, so with scripting off every row is present and nothing is lost.
+// every `table.site-table`, with optional filters in its preceding `.site-table-tools`
+// bar (`toolsBefore`). The table is complete in the HTML, so with scripting off every
+// row is present and nothing is lost.
 //
 // Headings with `data-sort="num"` or `data-sort="text"` sort on click (a numeric sort
 // reads each cell's `data-value`, else its text). Filters are the bar's controls, each
@@ -92,13 +92,23 @@
    * @param {readonly string[]} keys
    * @param {SiteTableSortType} type
    * @param {"ascending" | "descending"} direction
+   * @param {boolean} [missingLast=false] Keep absent values last in either direction.
    * @returns {number[]}
    */
-  function sortOrder(keys, type, direction) {
+  function sortOrder(keys, type, direction, missingLast = false) {
     const sign = direction === "ascending" ? 1 : -1;
     return keys
       .map((key, index) => ({ key, index }))
-      .sort((a, b) => sign * compareKeys(a.key, b.key, type) || a.index - b.index)
+      .sort((a, b) => {
+        if (missingLast) {
+          const aMissing = type === "num" ? Number.isNaN(Number.parseFloat(a.key)) : !a.key.trim();
+          const bMissing = type === "num" ? Number.isNaN(Number.parseFloat(b.key)) : !b.key.trim();
+          if (aMissing !== bMissing) {
+            return Number(aMissing) - Number(bMissing);
+          }
+        }
+        return sign * compareKeys(a.key, b.key, type) || a.index - b.index;
+      })
       .map((entry) => entry.index);
   }
 
@@ -389,7 +399,11 @@
         return;
       }
       heading.tabIndex = 0;
-      heading.setAttribute("aria-sort", "none");
+      const initial = heading.getAttribute("aria-sort");
+      heading.setAttribute(
+        "aria-sort",
+        initial === "ascending" || initial === "descending" ? initial : "none",
+      );
       const sort = () => {
         const direction =
           heading.getAttribute("aria-sort") === "ascending" ? "descending" : "ascending";
@@ -401,7 +415,12 @@
         heading.setAttribute("aria-sort", direction);
         const current = Array.from(body.rows);
         const keys = current.map((row) => cellKey(row.cells[column]));
-        const order = sortOrder(keys, type, direction);
+        const order = sortOrder(
+          keys,
+          type,
+          direction,
+          heading.getAttribute("data-sort-empty") === "last",
+        );
         body.append(...order.flatMap((index) => current[index] ?? []));
         applyFilters();
       };

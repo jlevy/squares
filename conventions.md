@@ -4,9 +4,10 @@ This document defines the project’s record formats and naming conventions.
 Where another document restates an id or naming convention, this one takes precedence.
 This page governs the *shape of what is produced*; how a session is conducted is
 [`operating-rules.md`](operating-rules.md), and a rule about agent conduct belongs there
-rather than here.
-Changing program status remains owned by `SYNOPSIS.md`, and schemas and
-source artifacts remain authoritative for their own fields and evidence.
+rather than here. Person names, credit text and attribution exceptions are owned by
+[Attribution Policy](attribution.md).
+Changing program status remains owned by `SYNOPSIS.md`, and schemas and source artifacts
+remain authoritative for their own fields and evidence.
 Read this before adding an artifact, workflow phase, round, series, or tool.
 
 Each rule is marked **[checked]** when something fails on a violation, or

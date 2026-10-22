@@ -35,13 +35,13 @@ second implementation agrees.
 | [`V-evand-verify-exact`](#v-evand-verify-exact) | verify_exact.py | Evan Daniel | external | decides | 1 | 1 |
 | [`V-evand-639-replay-driver`](#v-evand-639-replay-driver) | replay_verify_exact.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
-| [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | wand125 | external | decides | 89 | 14 |
-| [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | wand125 | external | decides | 66 | 11 |
-| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | wand125, adapting this repository's sqverify_fast | external | decides | 33 | 33 |
-| [`V-wand125-unified-linear-verify-cpp`](#v-wand125-unified-linear-verify-cpp) | unified_linear_verify.cpp | wand125 | external | decides | 8 | 5 |
-| [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | wand125 | external | decides | 2 | 1 |
-| [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | wand125 | external | decides | 5 | 1 |
-| [`V-wand125-valid7-checker`](#v-wand125-valid7-checker) | valid7-independent-check (Tier A, Tier B and the record checker) | wand125 | external | decides | 2 | 2 |
+| [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | Hosono | external | decides | 89 | 14 |
+| [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | Hosono | external | decides | 66 | 11 |
+| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | Hosono, adapting this repository's sqverify_fast | external | decides | 33 | 33 |
+| [`V-wand125-unified-linear-verify-cpp`](#v-wand125-unified-linear-verify-cpp) | unified_linear_verify.cpp | Hosono | external | decides | 8 | 5 |
+| [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | Hosono | external | decides | 2 | 1 |
+| [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | Hosono | external | decides | 5 | 1 |
+| [`V-wand125-valid7-checker`](#v-wand125-valid7-checker) | valid7-independent-check (Tier A, Tier B and the record checker) | Hosono | external | decides | 2 | 2 |
 | [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 23 | 11 |
 | [`V-evand-zm-mixed-py`](#v-evand-zm-mixed-py) | zm_mixed.py | Evan Daniel | external | decides | 10 | 8 |
 | [`V-evand-zeromargin-py`](#v-evand-zeromargin-py) | zeromargin.py | Evan Daniel | external | decides | 4 | 2 |
@@ -68,8 +68,8 @@ second implementation agrees.
 | [`V-mira-17squares-point-checker`](#v-mira-17squares-point-checker) | verify_certificate.py | Mira | external | decides | 1 | 0 |
 | [`V-stanislavfort-17squares-point-checker`](#v-stanislavfort-17squares-point-checker) | verify_certificate.py | Stanislav Fort | external | decides | 1 | 0 |
 | [`V-queuingtheory-n11-verify`](#v-queuingtheory-n11-verify) | VERIFY.py | Ahmed | external | decides | 1 | 1 |
-| [`V-queuingtheory-n11-lean`](#v-queuingtheory-n11-lean) | The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack) | Ahmed, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis | external | decides | 2 | 1 |
-| [`V-wand125-tools`](#v-wand125-tools) | The wand125 tools repository's transfer/l_cap.py and general_pose_tree | wand125 | external | decides | 3 | 2 |
+| [`V-queuingtheory-n11-lean`](#v-queuingtheory-n11-lean) | The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack) | Ahmed, Hosono, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis | external | decides | 2 | 1 |
+| [`V-wand125-tools`](#v-wand125-tools) | Hiroaki Hosono's square-packing-tools repository's transfer/l_cap.py and general_pose_tree | Hosono | external | decides | 3 | 2 |
 | [`V-squarepacker-indep-check-cpp`](#v-squarepacker-indep-check-cpp) | indep_check.cpp | squarepacker | external | decides | 4 | 2 |
 | [`V-schadt-n29-check-py`](#v-schadt-n29-check-py) | check.py | Schadt | external | decides | 1 | 0 |
 | [`V-anabologyco-n17-checker`](#v-anabologyco-n17-checker) | scripts/check_certificate.py and its event pipeline | anabologyco-maker | external | decides | 1 | 0 |
@@ -253,7 +253,7 @@ Decides a rectangle-density covering certificate over every net direction by out
 
 - Source: [`packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/src/verify.cpp`](../../packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/src/verify.cpp), [`packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/src/run_verify.py`](../../packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/src/run_verify.py)
 - Versions run: SHA-256 `a75140df1b48…` (verify.cpp); SHA-256 `7bce246763ca…` (run_verify.py; of `run_verify.py`)
-- Note: wand125's density and rectangle certificates ship byte-identical copies of both files, so a replay of a wand125 rectangle certificate runs the code its producer verified it with.
+- Note: Hiroaki Hosono's density and rectangle certificates ship byte-identical copies of both files, so a replay of one of Hosono's rectangle certificates runs the code its producer verified it with.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
@@ -273,7 +273,7 @@ Decides a rectangle-density covering certificate over every net direction by out
 
 ### `V-wand125-mixed-rotated-verify-cpp`
 
-**mixed_rotated_verify.cpp, with the source's per-angle replay functions** · wand125 · external · decides · C++, Python · interval-certified
+**mixed_rotated_verify.cpp, with the source's per-angle replay functions** · Hosono · external · decides · C++, Python · interval-certified
 
 Decides a mixed point-and-rectangle certificate at each direction of the certificate's net, 201 on the standard net or the 416 that mixed_n18_L470 declares, returning the direction's own record of cells and lower bound.
 
@@ -374,7 +374,7 @@ Decides a mixed point-and-rectangle certificate at each direction of the certifi
 
 ### `V-wand125-verify-mixed-full-proof-py`
 
-**verify_mixed_full_proof.py** · wand125 · external · decides · Python · interval-certified
+**verify_mixed_full_proof.py** · Hosono · external · decides · Python · interval-certified
 
 The source's driver for a complete mixed-certificate proof: it runs mixed_rotated_verify.cpp over every net direction and joins the per-direction records.
 
@@ -453,7 +453,7 @@ The source's driver for a complete mixed-certificate proof: it runs mixed_rotate
 
 ### `V-wand125-sqverify-proof-net`
 
-**sqverify-proof-net, the source's adaptation of sqverify-fast, run by fine_net_check.sh** · wand125, adapting this repository's sqverify_fast · external · decides · Rust, Bash, Python · interval-certified
+**sqverify-proof-net, the source's adaptation of sqverify-fast, run by fine_net_check.sh** · Hosono, adapting this repository's sqverify_fast · external · decides · Rust, Bash, Python · interval-certified
 
 The source's copy of this repository's sqverify_fast with one change, reading a format M candidate's declared net (proof_net), with which it decides its check2 certificates at every direction of that net; the script runs it with a mass control and writes the receipt.
 
@@ -499,7 +499,7 @@ The source's copy of this repository's sqverify_fast with one change, reading a 
 
 ### `V-wand125-unified-linear-verify-cpp`
 
-**unified_linear_verify.cpp** · wand125 · external · decides · C++ · interval-certified
+**unified_linear_verify.cpp** · Hosono · external · decides · C++ · interval-certified
 
 Decides a linear (segment) certificate at every net direction, the axis direction included.
 
@@ -520,7 +520,7 @@ Decides a linear (segment) certificate at every net direction, the axis directio
 
 ### `V-wand125-verify-portable-py`
 
-**verify_portable.py** · wand125 · external · decides · Python · exact-algebraic
+**verify_portable.py** · Hosono · external · decides · Python · exact-algebraic
 
 The source's portable exact checker for its point-only n = 21 cover bundle.
 
@@ -535,9 +535,9 @@ The source's portable exact checker for its point-only n = 21 cover bundle.
 
 ### `V-wand125-check-with-sqpack`
 
-**check_with_sqpack.py** · wand125 · external · decides · Python · exact-algebraic
+**check_with_sqpack.py** · Hosono · external · decides · Python · exact-algebraic
 
-wand125's adapter that expands its point certificates' direction rule and hands them to this repository's exact verifier, sqpack.fractional.certificate, unmodified.
+Hiroaki Hosono's adapter that expands its point certificates' direction rule and hands them to this repository's exact verifier, sqpack.fractional.certificate, unmodified.
 
 - Source: [`packing/resources/web/external-square-certificates-2026-09-22/wand125-points/src/check_with_sqpack.py`](../../packing/resources/web/external-square-certificates-2026-09-22/wand125-points/src/check_with_sqpack.py)
 - Versions run: SHA-256 `f64fe22eddfd…`; revision `1398e42f17f2`
@@ -553,7 +553,7 @@ wand125's adapter that expands its point certificates' direction rule and hands 
 
 ### `V-wand125-valid7-checker`
 
-**valid7-independent-check (Tier A, Tier B and the record checker)** · wand125 · external · decides · Python · exact-algebraic
+**valid7-independent-check (Tier A, Tier B and the record checker)** · Hosono · external · decides · Python · exact-algebraic
 
 Decides Valid7 for Evan Daniel's k = 7 cover: every closed unit square in [0,7]^2, at every centre and angle, has mass at least one, by branch and bound in Fraction and python-flint arithmetic with its own Sturm root isolation. From c561dbb3 it also decides ValidTilt9 for Daniel's box-9 cover, over centres [0, 9/2]^2 and u = tan(theta/2) in [0, 7/16].
 
@@ -574,8 +574,8 @@ Decides Valid7 for Evan Daniel's k = 7 cover: every closed unit square in [0,7]^
 Decides a zero-margin point-and-segment cover by branch and bound over centre and angle boxes, each acceptance an exact integer test on outward-rounded binary64 enclosures, over the D4 region (--d4) or the unreduced pose space (--full).
 
 - Source: [`packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/verify2/src/bin/zmx2.rs`](../../packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/verify2/src/bin/zmx2.rs), [`packing/resources/web/evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs`](../../packing/resources/web/evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs), [`packing/resources/web/evand-square-packing-2026-10-04/square-packing/s12/verify2/src/bin/zmx2.rs`](../../packing/resources/web/evand-square-packing-2026-10-04/square-packing/s12/verify2/src/bin/zmx2.rs)
-- Versions run: SHA-256 `6b7f0f79466b…` (the 2026-09-28 packet's post-audit parser, which made the shipped records and which wand125's verify.sh pins); SHA-256 `92a4cfe87b4e…`, revision `e4af291cf527` (the --sym-atoms version, for the unreduced s(32) sweep; of `zmx2.rs`); SHA-256 `e2bb84e9e059…`, revision `b8157df7a7c7` (the version that accepts a side that is not a multiple of 1/10, with which the source checked its s(20) point cover at side 2443/500; unchanged at 7ff3b211 and not run here; of `zmx2.rs`)
-- Note: wand125 verified its own covers with zmx2 as well, so a zmx2 replay of a wand125 cover is a replay of the producer's code.
+- Versions run: SHA-256 `6b7f0f79466b…` (the 2026-09-28 packet's post-audit parser, which made the shipped records and which Hiroaki Hosono's verify.sh pins); SHA-256 `92a4cfe87b4e…`, revision `e4af291cf527` (the --sym-atoms version, for the unreduced s(32) sweep; of `zmx2.rs`); SHA-256 `e2bb84e9e059…`, revision `b8157df7a7c7` (the version that accepts a side that is not a multiple of 1/10, with which the source checked its s(20) point cover at side 2443/500; unchanged at 7ff3b211 and not run here; of `zmx2.rs`)
+- Note: Hosono verified his own covers with zmx2 as well, so a zmx2 replay of one of Hosono's covers is a replay of the producer's code.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
@@ -1008,7 +1008,7 @@ The publisher's advertised replay of its n = 11 optimality proof, binding every 
 
 ### `V-queuingtheory-n11-lean`
 
-**The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake at its pinned toolchain, with scripts/run_verification.sh and the finalizer scripts/finalize_verification.py driving the build and the axiom audit** · Ahmed, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis · external · decides · Lean 4, Python, Bash · proof-assistant-checked
+**The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake at its pinned toolchain, with scripts/run_verification.sh and the finalizer scripts/finalize_verification.py driving the build and the axiom audit** · Ahmed, Hosono, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis · external · decides · Lean 4, Python, Bash · proof-assistant-checked
 
 Proves ElevenSquare.optimality, s(11) = T, in Lean 4.34.1 with Mathlib d13f23b7: the geometry, checker soundness and assembly kernel-checked, and 10,464 numerical certificate declarations decided by native_decide; the finalizer accepts the run only when every module's receipt, source hash and axiom report agree and no admission or unapproved axiom remains.
 
@@ -1023,7 +1023,7 @@ Proves ElevenSquare.optimality, s(11) = T, in Lean 4.34.1 with Mathlib d13f23b7:
 
 ### `V-wand125-tools`
 
-**The wand125 tools repository's transfer/l_cap.py and general_pose_tree** · wand125 · external · decides · Python, Rust · exact-algebraic
+**Hiroaki Hosono's square-packing-tools repository's transfer/l_cap.py and general_pose_tree** · Hosono · external · decides · Python, Rust · exact-algebraic
 
 The source's ceiling transfer for the fixed B = 9977/10000 and its general pose tree, which reports exact per-row minima for Overbeck's n = 11 certificate.
 
@@ -2487,7 +2487,7 @@ The exact preflight and replay driver for density certificates: it regenerates e
 
 **devtools.audit_wand125_rectangles** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-The exact preflight and replay driver for wand125's rectangle certificates: input regeneration against the published digest, orbit normalization, exact mass, net and smoothing premises, then Tokoharu's retained verify.cpp.
+The exact preflight and replay driver for Hiroaki Hosono's rectangle certificates: input regeneration against the published digest, orbit normalization, exact mass, net and smoothing premises, then Tokoharu's retained verify.cpp.
 
 - Source: [`packing/devtools/audit_wand125_rectangles.py`](../../packing/devtools/audit_wand125_rectangles.py)
 - Versions run: this repository's commits, which Git holds
@@ -2503,7 +2503,7 @@ The exact preflight and replay driver for wand125's rectangle certificates: inpu
 
 **devtools.audit_wand125_point_and_mixed** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Fetches, pins and binds wand125's point and mixed bundles, checks their exact premises, drives the source's checker and compares its records with the shipped ones.
+Fetches, pins and binds Hiroaki Hosono's point and mixed bundles, checks their exact premises, drives the source's checker and compares its records with the shipped ones.
 
 - Source: [`packing/devtools/audit_wand125_point_and_mixed.py`](../../packing/devtools/audit_wand125_point_and_mixed.py)
 - Versions run: this repository's commits, which Git holds
@@ -2532,7 +2532,7 @@ Fetches, pins and binds wand125's point and mixed bundles, checks their exact pr
 
 **devtools.audit_wand125_declared_net** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Checks the exact premises of wand125's mixed certificates on a declared net, lemma N0's among them; binds each bundle's files to the packet and every shipped record and input to the declared net and the expanded candidate; runs the bundle's own driver with its assertions on and compares the replay with the shipped records, requiring the run to have happened; and runs the stage-4 controls with the source's checker.
+Checks the exact premises of Hiroaki Hosono's mixed certificates on a declared net, lemma N0's among them; binds each bundle's files to the packet and every shipped record and input to the declared net and the expanded candidate; runs the bundle's own driver with its assertions on and compares the replay with the shipped records, requiring the run to have happened; and runs the stage-4 controls with the source's checker.
 
 - Source: [`packing/devtools/audit_wand125_declared_net.py`](../../packing/devtools/audit_wand125_declared_net.py)
 - Versions run: this repository's commits, which Git holds
@@ -2546,7 +2546,7 @@ Checks the exact premises of wand125's mixed certificates on a declared net, lem
 
 **devtools.audit_wand125_linear** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-The audit, replay driver and controls for wand125's linear certificates.
+The audit, replay driver and controls for Hiroaki Hosono's linear certificates.
 
 - Source: [`packing/devtools/audit_wand125_linear.py`](../../packing/devtools/audit_wand125_linear.py)
 - Versions run: this repository's commits, which Git holds
@@ -2760,7 +2760,7 @@ Decides everything the re-weighted s(12) certificate rests on but coverage, in i
 
 **devtools.audit_s12_v11_certificate** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Decides everything squarepacker's v1.1 s(12) certificate rests on but coverage, in integers and Fraction: its bytes, the header and side, a one-to-one match of its points to Daniel's dilated within the stated rounding, positivity, containment, D4 invariance and orbits, the total below 12, the corner points, and the source's two controls rebuilt byte for byte.
+Decides everything Ryu's v1.1 s(12) certificate rests on but coverage, in integers and Fraction: its bytes, the header and side, a one-to-one match of its points to Daniel's dilated within the stated rounding, positivity, containment, D4 invariance and orbits, the total below 12, the corner points, and the source's two controls rebuilt byte for byte.
 
 - Source: [`packing/devtools/audit_s12_v11_certificate.py`](../../packing/devtools/audit_s12_v11_certificate.py)
 - Versions run: this repository's commits, which Git holds
@@ -2840,7 +2840,7 @@ Checks what the Valid7 checker's verify.sh leaves out: the records are the relea
 
 **devtools.audit_validtilt9_independent** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Checks what wand125's verify_tilt9.sh leaves out of the ValidTilt9 run: the records are the release's and name the retained code, their roots are the grid over ValidTilt9's region once, each root's Tier B leaves fit the options its place in the run gives it, and which lines of the checker also occur in Daniel's. It stages the checker, re-runs a sample of roots against their published leaves, prices the full replay from the sample, and runs two mutant-cover controls. A diagnostic, not a replay.
+Checks what Hiroaki Hosono's verify_tilt9.sh leaves out of the ValidTilt9 run: the records are the release's and name the retained code, their roots are the grid over ValidTilt9's region once, each root's Tier B leaves fit the options its place in the run gives it, and which lines of the checker also occur in Daniel's. It stages the checker, re-runs a sample of roots against their published leaves, prices the full replay from the sample, and runs two mutant-cover controls. A diagnostic, not a replay.
 
 - Source: [`packing/devtools/audit_validtilt9_independent.py`](../../packing/devtools/audit_validtilt9_independent.py)
 - Versions run: this repository's commits, which Git holds

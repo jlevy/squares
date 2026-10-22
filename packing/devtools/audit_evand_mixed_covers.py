@@ -11,7 +11,7 @@ three packets under ``resources/web/``:
   and ``32``;
 - ``evand-square-packing-2026-10-01/``: ``s(60) = 8`` with both checkers' records, and
   the ``s(32)`` point cover's ``zmx2 --full --pair-points --sym-atoms`` log;
-- ``wand125-point-and-mixed-2026-10-01/``: wand125's ``s(59) = 8`` and ``s(77) = 9``,
+- ``wand125-point-and-mixed-2026-10-01/``: Hosono's ``s(59) = 8`` and ``s(77) = 9``,
   whose ``zmx2`` logs and ``zm_mixed.py`` per-root records are not published, only the
   ``zm_mixed.py`` manifests;
 - ``bengreff-s76-certificate-2026-10-14/`` and ``bengreff-s95-certificate-2026-10-15/``:
@@ -175,7 +175,7 @@ WAND125_1001 = WEB / "wand125-point-and-mixed-2026-10-01/square-packing-bounds"
 BENGREFF_S76 = WEB / "bengreff-s76-certificate-2026-10-14"
 BENGREFF_S95 = WEB / "bengreff-s95-certificate-2026-10-15"
 CHECKER_FILES = ("zm_mixed.py", "mixed_cover.py", "zeromargin.py")
-#: The checker files wand125's ``verify.sh`` pins at evand ``b91d70b6`` (``zm_mixed.py``
+#: The checker files Hosono's ``verify.sh`` pins at evand ``b91d70b6`` (``zm_mixed.py``
 #: ``ee3e2915``), which the s(59) and s(77) manifests name; ``zeromargin.py`` is retained
 #: by the September 26 packet.
 CHECKER_B91D70B6 = (
@@ -395,7 +395,7 @@ SPLIT_CASES = {
 }
 MIXED_CASES = {**CASES, **IMPORTED_CASES, **SPLIT_CASES}
 #: A cover in the plain point format, audited by ``cover`` alone: its sweeps are the
-#: ``PointCoverRun`` below. wand125's s(61) total is the one its ``provenance.json`` states.
+#: ``PointCoverRun`` below. Hosono's s(61) total is the one its ``provenance.json`` states.
 POINT_ONLY_CASES = {
     61: Case(
         n=61,
@@ -1850,7 +1850,7 @@ POINT_COVER_RUNS = (
         full_log=EVAND_1001 / "certificates/s32/zmx2_full_sym/roots.log.xz",
         full_atoms="pairpts+sym",
     ),
-    # wand125's point-only s(61) cover: its provenance.json reports 800,042 boxes at depth
+    # Hosono's point-only s(61) cover: its provenance.json reports 800,042 boxes at depth
     # 30 and no leaf split, which is left out of the comparison. Replayed here with the
     # zmx2 6b7f0f79 its verify.sh builds.
     PointCoverRun(

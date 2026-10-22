@@ -12,7 +12,7 @@ from pathlib import Path
 
 import pytest
 
-from devtools import render_overview
+from devtools import render_case_pages, render_overview
 from devtools.measure_site_pages import (
     card_rows,
     chip_rows,
@@ -561,6 +561,30 @@ def test_a_link_to_a_page_that_moved_is_reported(tmp_path: Path) -> None:
         "index.html: defects.html?view=embed",
         "result/t-001.html: ../status.html",
     ]
+
+
+@pytest.mark.parametrize("quote", ["", "'", '"'])
+def test_moved_link_audit_preserves_targets_after_result_compaction(
+    tmp_path: Path, quote: str
+) -> None:
+    directory = tmp_path / "result"
+    directory.mkdir()
+    target = directory / "t-test.html"
+    source = (
+        '<article class="site-result">'
+        f"<a href={quote}../status.html{quote}>Moved page</a>"
+        f"<iframe src={quote}../defects.html{quote}></iframe>"
+        '<a href="../status&#46;html">Entity in the same target</a>'
+        "<p title=' href=\"../all-results.html\"'>Attribute-like text is not a link</p>"
+        "</article>"
+    )
+    compact = render_case_pages.compact_visual_math_classes(
+        source, all_html_classes=True, result_article_attributes=True
+    )
+    expected = ["result/t-test.html: ../defects.html", "result/t-test.html: ../status.html"]
+    for markup in (source, compact):
+        target.write_text(markup, encoding="utf-8")
+        assert moved_links(tmp_path) == expected
 
 
 def test_a_moved_file_is_copied_to_its_old_address(tmp_path: Path) -> None:

@@ -99,6 +99,7 @@
     "packing/tests/test_check_checkout_imports.py": 0.449,
     "packing/tests/test_check_class_record_claims.py": 0.891,
     "packing/tests/test_check_closed_polygon_cover.py": 0.125,
+    "packing/tests/test_check_darwin_memory_results.py": 0.031,
     "packing/tests/test_check_declared_bounds.py": 1.182,
     "packing/tests/test_check_diamond_cover_witness.py": 0.274,
     "packing/tests/test_check_full_square_compatibility.py": 0.243,
@@ -181,6 +182,8 @@
     "packing/tests/test_contact_realization.py": 0.033,
     "packing/tests/test_contact_scaffold_atlas.py": 0.003,
     "packing/tests/test_continuous_pose_followup.py": 0.026,
+    "packing/tests/test_contributor_occurrences.py": 6.755,
+    "packing/tests/test_contributors.py": 0.347,
     "packing/tests/test_control_anchors.py": 0.101,
     "packing/tests/test_core_shrink.py": 0.524,
     "packing/tests/test_corner_ownership_audit.py": 0.38,
@@ -272,6 +275,7 @@
     "packing/tests/test_generate_frontier_case.py": 120.277,
     "packing/tests/test_generated_table_typography.py": 0.37,
     "packing/tests/test_geometric_graph_certificate.py": 0.133,
+    "packing/tests/test_github_references.py": 0.006,
     "packing/tests/test_gobel_family.py": 0.562,
     "packing/tests/test_gobel_family_construction.py": 9.897,
     "packing/tests/test_golden_basins.py": 0.007,
@@ -495,11 +499,14 @@
     "packing/tests/test_produce_n17_conditional_owned_hull.py": 0.221,
     "packing/tests/test_produce_threshold_certificate.py": 0.146,
     "packing/tests/test_profile_author_measure_checkers.py": 0.007,
+    "packing/tests/test_profile_coverage.py": 0.046,
+    "packing/tests/test_profile_links.py": 2.033,
     "packing/tests/test_profile_n17_coverage_candidate.py": 0.761,
     "packing/tests/test_profile_n17_endpoint_intervals.py": 0.018,
     "packing/tests/test_profile_n17_exact_replay.py": 1.292,
     "packing/tests/test_profile_n17_kernel_memory.py": 1.162,
     "packing/tests/test_profile_n17_partner_memo.py": 1.241,
+    "packing/tests/test_profile_records.py": 0.517,
     "packing/tests/test_promote_contacts.py": 1.622,
     "packing/tests/test_promote_interval_verify.py": 0.03,
     "packing/tests/test_promote_krawczyk.py": 0.012,
@@ -524,6 +531,7 @@
     "packing/tests/test_recent_contributions.py": 0.731,
     "packing/tests/test_recent_results.py": 3.156,
     "packing/tests/test_reconcile_n17_issue_patterns.py": 8.613,
+    "packing/tests/test_record_presentation.py": 0.001,
     "packing/tests/test_rectangle_ceiling.py": 0.588,
     "packing/tests/test_rectangle_density.py": 0.581,
     "packing/tests/test_rectangle_density_cli_golden.py": 0.828,
@@ -547,6 +555,7 @@
     "packing/tests/test_release_pin.py": 0.146,
     "packing/tests/test_render_angle_hue_registry.py": 0.006,
     "packing/tests/test_render_colors.py": 2.935,
+    "packing/tests/test_render_contributors.py": 3.73,
     "packing/tests/test_render_document_map.py": 0.003,
     "packing/tests/test_render_motion.py": 0.026,
     "packing/tests/test_render_n11_lower_bounds_explainer_fonts.py": 0.667,
@@ -627,6 +636,7 @@
     "packing/tests/test_site_assets.py": 0.22,
     "packing/tests/test_site_atlas_views.py": 3.994,
     "packing/tests/test_site_browser.py": 0.002,
+    "packing/tests/test_site_contributor_popovers.py": 21.085,
     "packing/tests/test_site_documents.py": 71.296,
     "packing/tests/test_site_drawing_hover.py": 8.782,
     "packing/tests/test_site_forwarders.py": 1.613,
@@ -639,6 +649,7 @@
     "packing/tests/test_site_preview_checks.py": 0.025,
     "packing/tests/test_site_project_tallies.py": 9.075,
     "packing/tests/test_site_scripts.py": 0.008,
+    "packing/tests/test_site_tallies.py": 2.485,
     "packing/tests/test_site_text_tokens.py": 0.55,
     "packing/tests/test_site_urls.py": 4.44,
     "packing/tests/test_site_wide_blocks.py": 0.361,
@@ -1073,6 +1084,56 @@
           "report": "packing/devtools/suite-file-cost-admissions/muglich-686-import-2026-10-21.json",
           "provenance": {},
           "tests": 8
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_contributor_occurrences.py",
+        "packing/tests/test_contributors.py",
+        "packing/tests/test_render_contributors.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/contributor-profiles-2026-10-14.json",
+          "provenance": {},
+          "tests": 98
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_darwin_memory_results.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/darwin-memory-results-2026-10-19.json",
+          "provenance": {},
+          "tests": 20
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_github_references.py",
+        "packing/tests/test_profile_coverage.py",
+        "packing/tests/test_profile_links.py",
+        "packing/tests/test_profile_records.py",
+        "packing/tests/test_record_presentation.py",
+        "packing/tests/test_site_contributor_popovers.py",
+        "packing/tests/test_site_tallies.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/profile-integration-2026-10-21.json",
+          "provenance": {},
+          "tests": 121
         }
       ]
     },

@@ -247,7 +247,7 @@ docs/project/reviews/review-2026-10-06-evand-exact-optima.md
 # parenthesis escaped.
 docs/project/reviews/review-2026-10-06-evand-exact-optima-fix-check.md
 
-# The separately prompted review of T-099 and T-100 (wand125's finer-net certificates of 6
+# The separately prompted review of T-099 and T-100 (Hosono's finer-net certificates of 6
 # October, #366), stored byte-identical to the reviewer's output as the lane brief
 # requires: its first 25,427 bytes are that output, SHA-256 9e5a41b7..., and the
 # common-doc footer the documentation check requires follows them. Measured on a copy in directory mode with the pinned
@@ -279,7 +279,7 @@ docs/project/reviews/review-2026-10-06-evand-exact-ceilings.md
 # curly.
 docs/project/reviews/review-2026-10-06-evand-exact-ceilings-fix-check.md
 
-# The separately prompted review of T-102 to T-111 (wand125's ten certificates of 6
+# The separately prompted review of T-102 to T-111 (Hosono's ten certificates of 6
 # October at 2fad66e, nine of them check2 bundles), stored byte-identical to the
 # reviewer's output as the lane brief requires, SHA-256 1d5e1326..., the common-doc footer
 # included as the reviewer wrote it. Measured on a copy in directory mode with the pinned

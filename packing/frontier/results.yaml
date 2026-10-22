@@ -382,7 +382,7 @@ results:
 
       2026-10-03: merged with the replayed certificates recorded in parallel on 2 and 3
       October, which raised 51 of those re-grounded floors, n = 54, 57 and 73 among them:
-      wand125's rectangle-density, mixed and linear certificates (T-048, T-069 to T-072,
+      Hiroaki Hosono's rectangle-density, mixed and linear certificates (T-048, T-069 to T-072,
       T-074, T-075, T-076 at n = 82 and, at n = 101 to 105, T-080), the mixed covers proving s(59), s(60), s(61) = 8 and s(77), s(78) = 9 (T-062, T-063,
       T-066, T-067), and the s(k^2 - 3) = k family (T-064). None of them rests on this
       result.
@@ -1521,7 +1521,7 @@ results:
       supersedes this result at both sizes. What this result still holds alone is
       n = 19, whose bound stays 24/5 because T-021's atoms are too heavy for it; the
       rung itself is retained at cases/n20_fractional_certificate/certificate-24-5.json
-      and replays by name. On 2026-10-02 wand125's replayed rectangle certificate,
+      and replays by name. On 2026-10-02 Hiroaki Hosono's replayed rectangle certificate,
       s(19) >= 963/200 (T-045), superseded it at n = 19 as well. This result stays true as
       stated at all three of its sizes.
 
@@ -1630,7 +1630,7 @@ results:
       The n = 21 half of the margin was taken on 2026-09-23: T-034 certifies
       122/25 = 4.88 at n = 21 from an unseeded site set and supersedes this result there.
       What this result still held alone was n = 20, whose bound stayed 97/20 because
-      T-034's atoms are too heavy for it, until wand125's replayed rectangle certificate,
+      T-034's atoms are too heavy for it, until Hiroaki Hosono's replayed rectangle certificate,
       s(20) >= 979/200 (T-045), superseded it there on 2026-10-02. This result stays true
       as stated at both of its sizes.
 
@@ -2500,7 +2500,7 @@ results:
       adversarial AI reviews by distinct reviewers and a human oversight record, and none is
       retained.
 
-      Superseded as the verified lower bound on 2026-10-02 by wand125's replayed
+      Superseded as the verified lower bound on 2026-10-02 by Hiroaki Hosono's replayed
       s(18) >= 939/200 (T-045), so a further rung of this method moves the case only above
       4.695; stays true as stated.
 
@@ -3884,7 +3884,7 @@ results:
       verifier, sqpack.fractional.certificate, over the complete 201-direction net through the
       source's adapter check_with_sqpack.py.
 
-      wand125,
+      Hiroaki Hosono,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/1398e42f17f23fe3744bc54425a589fab1f3542c),
       building on this project: the source says "The method is not ours", credits
       jlevy/squares for the generator, and checks with this project's verifier.
@@ -3951,7 +3951,7 @@ results:
       No packing/tests control reads this packet; the control named is the verifier's own
       adversarial suite.
 
-      wand125's replayed rectangle certificates superseded these as the
+      Hosono's replayed rectangle certificates superseded these as the
       verified lower bound on 2026-10-02 at n = 40 (T-045), at n = 39, 41, 52, 53, 55
       and 68 to 72 (T-070), and at n = 56 (T-074), the last count they held then.
       The three counts this entry took the same day when Karakuş's finding (T-085) moved
@@ -3989,7 +3989,7 @@ results:
       the upstream accepting run recorded and checks the exact mass, net, smoothing and
       axis-event premises.
 
-      wand125,
+      Hiroaki Hosono,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/ad43d29d96d0d9740b34643b5ac3fb960909cf9c),
       built with and checked by Tokoharu's solver and interval verifier. The source keeps its
       credit to this project for the method lineage and says parts of the work were produced
@@ -4060,7 +4060,7 @@ results:
       field; at n = 61 on 2026-10-02 by s(61) = 8 (T-063), when the s(60) cover's replay
       landed; on the same day at n = 76 by s(76) >= 447/50 (T-072) and at n = 77 and 78 by
       s(77) = 9 and s(78) = 9 (T-067), when their replays landed; and at n = 19, 20, 26 to
-      28, 30, 31, 40 and 75 by wand125's raised certificates of 1 October (T-074), when
+      28, 30, 31, 40 and 75 by Hosono's raised certificates of 1 October (T-074), when
       their replays were merged. Stays true as stated.
 
   - id: T-046
@@ -4098,7 +4098,7 @@ results:
       stand here as reported; those whose certificates have since been replayed in full
       are registered again as replayed results, in T-045 and T-070.
 
-      wand125 after Tokoharu and Levy, square-packing-bounds as of [27
+      Hiroaki Hosono after Tokoharu and Levy, square-packing-bounds as of [27
       September](https://github.com/wand125/square-packing-bounds/tree/ad43d29d96d0d9740b34643b5ac3fb960909cf9c)
       and [28
       September](https://github.com/wand125/square-packing-bounds/tree/39d8ecc74d651b54ec977c331c8f2015b442a6c4)
@@ -4206,8 +4206,8 @@ results:
 
       Tokoharu,
       [square-packing-density-bounds](https://github.com/tokoharu/square-packing-density-bounds/tree/b543990f7794b8c511cb46cf3854b7e8166c3674),
-      after Levy and wand125: the author's announcement says it was inspired by
-      @ojoshe and @wand125, and the README credits jlevy/squares, through wand125's
+      after Levy and Hiroaki Hosono: the author's announcement says it was inspired by
+      @ojoshe and @wand125, and the README credits jlevy/squares, through Hosono's
       attribution, for row and column generation and branch-and-bound. The rectangle-density
       method and its interval verifier are Tokoharu's.
     scope: {n_values: [11, 26, 27, 28, 29, 30, 31]}
@@ -4217,7 +4217,7 @@ results:
       score: 4
       rationale: >-
         Scored at S4 by the anchor "a reusable technique": the rectangle-density certificate
-        and its interval verifier are Tokoharu's, and wand125's certificates at 48 counts
+        and its interval verifier are Tokoharu's, and Hosono's certificates at 48 counts
         (T-045, T-046) and its n = 50 checker (T-048) are built on them. Its own bounds
         moved n = 26 to 31 by 0.02 to 0.38 over Nagamochi's closed form; at n = 11 it is
         below the standing bound and never held a field. Confirmed on 11 October: the
@@ -4263,7 +4263,7 @@ results:
       record, and none is retained. A second machine method would be a method-distinct
       decision of global rotated coverage; the exact rational
       polygon and derivative probes exercise the interval kernel but decide no coverage.
-      Superseded as the verified lower bound by wand125's replayed rectangle certificates
+      Superseded as the verified lower bound by Hosono's replayed rectangle certificates
       at n = 27, 28 and 31 on 2026-09-27 (T-045), and at n = 26 and 30 (T-045) and n = 29
       (T-070) on 2026-10-02; at n = 11 it never held the field, being below T-033 and
       Marc Leonard Overbeck's 31/8 (T-037). Stays true as stated.
@@ -4274,7 +4274,7 @@ results:
     landed: '2026-09-29'
     headline: "`s(50) ≥ 37/5 = 7.4`"
     claim: >-
-      s(50) >= 37/5 = 7.4, by wand125's mixed rectangle-density certificate of 28 September
+      s(50) >= 37/5 = 7.4, by Hiroaki Hosono's mixed rectangle-density certificate of 28 September
       2026. It exceeds Green's reported 2 sqrt(2) + 101/25 + 3 sqrt(14)/25 = 7.3174260 by
       more than 0.0825739888. The certificate's mass is below 51 too, so it gives s(51) >=
       37/5 as well.
@@ -4292,7 +4292,7 @@ results:
       of all 621 bundle files and all 200 oblique inputs. The replay runs the source's own
       algorithm and is not an independent decision of coverage.
 
-      wand125 after Evan Daniel and Tokoharu,
+      Hiroaki Hosono after Evan Daniel and Tokoharu,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/39d8ecc74d651b54ec977c331c8f2015b442a6c4/certificates/mixed_n50_L740),
       the n = 50 measure resting on Tokoharu's format and checker. The source says parts of
       the work were produced with AI assistance under human direction.
@@ -4331,12 +4331,12 @@ results:
     reviews:
       - path: docs/project/reviews/review-2026-09-28-wand125-n50-mixed-verifier.md
         kind: adversarial
-        reviewer: AI review sub-agent at maximum thinking effort, the correctness lane (W2 factual review) of the 2026-09-28 wand125 intake
+        reviewer: AI review sub-agent at maximum thinking effort, the correctness lane (W2 factual review) of the 2026-09-28 intake of Hosono's certificates
         reviewer_kind: ai
         relation: project
         date: '2026-09-28'
         scope: >-
-          wand125's n = 50 mixed certificates (L740, L735 and L7318) and their threshold-one verifier, against Tokoharu's verify.cpp line by line: what the 10001/10000 margin pays for, the containment argument and the per-node centre domain in exact arithmetic, the certificate language, and what the replay lane must check.
+          Hosono's n = 50 mixed certificates (L740, L735 and L7318) and their threshold-one verifier, against Tokoharu's verify.cpp line by line: what the 10001/10000 margin pays for, the containment argument and the per-node centre domain in exact arithmetic, the certificate language, and what the replay lane must check.
         verdict: accepted
         covers: [T-048]
     artifacts:
@@ -4573,7 +4573,7 @@ results:
         with k >= 4, 0.204 above Nagamochi's closed form. S4 by the anchor "a reusable
         technique": the zero-margin closed cover decided by exhaustive pose-space
         subdivision, which the same author carried to n = 21 and 45 (T-052, T-053) and
-        wand125 to n = 45 (T-054). Not S5: n = 32 is not a central open case of this
+        Hiroaki Hosono to n = 45 (T-054). Not S5: n = 32 is not a central open case of this
         project. Confirmed on 11 October: the first instance of the cover technique, which
         T-052, T-053, T-062, T-066 and T-067 and the family theorems T-064 and T-081 reuse;
         the later single-count instances are S3 (T-053, T-062, T-066, T-067) and the
@@ -4832,7 +4832,7 @@ results:
       Compound: the lower half is E-n045-evand-mixed-cover-zmx2-replay (interval-certified),
       the upper half the grid (E-basic-grid-upper, exact-algebraic). As for T-052, the two
       machine methods certify different halves; the lower half stands on one replayed method
-      and sets the minimum, and the equality is C3. wand125's point-only lower half (T-054) is
+      and sets the minimum, and the equality is C3. Hiroaki Hosono's point-only lower half (T-054) is
       a second certificate under the same
       checker and is registered separately.
     produced_by:
@@ -4872,7 +4872,7 @@ results:
     landed: '2026-09-29'
     headline: "`s(45) = 7` by a second, point-only route"
     claim: >-
-      s(45) = 7 by a second, point-only route: the lower half by wand125's point-only measure
+      s(45) = 7 by a second, point-only route: the lower half by Hiroaki Hosono's point-only measure
       of 28 September 2026, the upper half by the 7 x 7 grid.
 
       The measure is 12,645 D4-invariant points, total 12666371418707823/2^48 = 44.99999100001
@@ -4883,7 +4883,7 @@ results:
       The source's verify.sh was replayed here in full on 28 and 29 September 2026:
       VERIFIED-D4 on all 4,900 roots, 1,295,460 boxes, the source's reference census.
 
-      wand125 after Evan Daniel,
+      Hiroaki Hosono after Evan Daniel,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/39d8ecc74d651b54ec977c331c8f2015b442a6c4/point_n45_L7).
       The source uses Daniel's checker, states that Daniel published s(45) = 7 first (T-053)
       and claims no priority, and says parts of the work were produced with AI assistance
@@ -4948,7 +4948,7 @@ results:
     landed: '2026-09-29'
     headline: "`s(21) = 5` by a point-only route"
     claim: >-
-      s(21) = 5 by a second, point-only route: the lower half by wand125's point-only
+      s(21) = 5 by a second, point-only route: the lower half by Hiroaki Hosono's point-only
       measure, completed on 28 September 2026 with a Lean 4 reduction, the upper half by the
       5 x 5 grid.
 
@@ -4966,7 +4966,7 @@ results:
       output files byte for byte and the rest in every certified quantity. The Lean overlay
       was not built here.
 
-      wand125 after Evan Daniel,
+      Hiroaki Hosono after Evan Daniel,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/39d8ecc74d651b54ec977c331c8f2015b442a6c4/point_n21_L5).
       The source names Daniel's mixed-cover proof (T-052) as first, claims no priority, and
       says its code was developed with Codex.
@@ -5004,7 +5004,7 @@ results:
         relation: project
         date: '2026-09-28'
         scope: >-
-          wand125's point-only certificates for s(45) = 7 and s(21) = 5: for s(21), the argument with a capture threshold below 1, what the portable runner replays and what makes each numerical stage rigorous, the lemma map sampled, and the Lean overlay term for term; zmx2's own soundness taken from the companion review of Daniel's covers.
+          Hosono's point-only certificates for s(45) = 7 and s(21) = 5: for s(21), the argument with a capture threshold below 1, what the portable runner replays and what makes each numerical stage rigorous, the lemma map sampled, and the Lean overlay term for term; zmx2's own soundness taken from the companion review of Daniel's covers.
         verdict: accepted
         covers: [T-055]
     artifacts:
@@ -5229,7 +5229,7 @@ results:
       table's rounded value. The source's original B UB(n) is proved at the 64 grid rows
       only; at the 36 others it is neither proved nor refuted.
 
-      wand125,
+      Hiroaki Hosono,
       [square-packing-tools](https://github.com/wand125/square-packing-tools/tree/0d33ab61726c2ab03e3eb8f457dabaf22db8571f),
       29 September 2026, building on Tokoharu's rectangle method, solver and verifier and on
       Evan Daniel's point verifier. The source discloses Codex and Claude assistance.
@@ -5298,7 +5298,7 @@ results:
       row-scan equality claim only, not a new proof of the global counting theorem or
       independent rectangle-density coverage.
 
-      wand125,
+      Hiroaki Hosono,
       [square-packing-tools](https://github.com/wand125/square-packing-tools/tree/0d33ab61726c2ab03e3eb8f457dabaf22db8571f),
       29 September 2026, building on Tokoharu's rectangle method, solver and verifier and on
       Evan Daniel's point verifier. The source discloses Codex and Claude assistance.
@@ -5468,7 +5468,7 @@ results:
 
       2026-10-04: Lean 4 formalizations of this proof are in progress outside this
       project, in wand125/n11-optimality-lean and Queuingtheorydotcom/11SquaresFormalized.
-      wand125 reports, on jlevy/squares#317, that the 76 prior-family cases and the 173
+      Hiroaki Hosono reports, on jlevy/squares#317, that the 76 prior-family cases and the 173
       returned cases are already kernel-checked with Lean's standard axioms only, and
       that the prior-family proof does not use the 1,931-case baseline premise that the
       accepted certificates of cases 2175 and 2176 carry. This project has not reviewed
@@ -5478,9 +5478,9 @@ results:
       [11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) is
       imported (bead think-8spq). Its author, Ahmed, who posts on X as
       @ManassehA06, announced that day that the optimality "has been formalized in lean
-      thanks to Astra and Claude", thanking Joshua Levy, Overbeck, wand125, Guzhou0806 and
-      ctjlewis; the retained first post of the thread does not name the repository. Its
-      acknowledgements credit Ahmed, EvolvingPrograms and ctjlewis, wand125,
+      thanks to Astra and Claude", thanking Joshua Levy, Overbeck, Hosono (@wand_125), Guzhou0806 and
+      Lewis (ctjlewis); the retained first post of the thread does not name the repository. Its
+      acknowledgements credit Ahmed, EvolvingPrograms and Lewis (as ctjlewis), Hosono (as @wand125),
       Benjamin Gurevitch, Julian-JJ and Guzhou0806.
 
       Joshua Levy [quoted the announcement](https://x.com/ojoshe/status/2107513739222380935)
@@ -5630,7 +5630,7 @@ results:
 
       zmx2 was replayed here in full on 2 October 2026, over all 6,400 D4 roots and all
       51,200 unreduced roots, every root's census equal to the source's; zm_mixed.py was not
-      run. wand125's s(59) = 8 (T-066), replayed here the same day with the same checker,
+      run. Hiroaki Hosono's s(59) = 8 (T-066), replayed here the same day with the same checker,
       gives this value a second route by monotonicity.
 
       Evan Daniel,
@@ -5728,10 +5728,10 @@ results:
       its certificate decides both counts.
 
       T-062's lower half was replayed here in full on 2 October 2026, and this value with it.
-      wand125's s(59) = 8 (T-066), replayed here the same day, gives it a second route by
+      Hiroaki Hosono's s(59) = 8 (T-066), replayed here the same day, gives it a second route by
       the same deduction, and the same source's family s(k^2 - 3) = k (T-064) states it again
       at k = 8, by a separate certificate, replayed here on 3 October with the reduction
-      built. wand125's point-only cover for s(61) itself, which Evan Daniel also reports
+      built. Hosono's point-only cover for s(61) itself, which Evan Daniel also reports
       certifying, was replayed here on 2 October by Daniel's zmx2, VERIFIED-D4 over all
       6,400 roots: a route that uses points only, on a cover built by someone else.
 
@@ -5766,10 +5766,10 @@ results:
       T-062, E-n060-evand-mixed-cover-zmx2-replay (interval-certified, replayed here),
       whose scope takes in n = 61 because the cover's total is below 61; monotonicity by
       deletion, E-n061-evand-derived-report, read and found sound; and the 8 x 8 grid,
-      E-basic-grid-upper. It stands at T-062's V3/C3 and never above it. wand125's s(59) =
+      E-basic-grid-upper. It stands at T-062's V3/C3 and never above it. Hosono's s(59) =
       8 (T-066) is a second route under the same checker.
 
-      So is wand125's separate point-only cover for s(61) = 8, replayed here by zmx2
+      So is Hosono's separate point-only cover for s(61) = 8, replayed here by zmx2
       (E-n061-wand125-point-cover-zmx2-replay): a second route by the source's pinned
       checker, the same checker as T-062's, so no second method. Evan Daniel's reports
       of certifying that cover with zeromargin.py and zmcheck
@@ -5809,7 +5809,7 @@ results:
       - packing/tests/test_replay_controls.py
       - packing/tests/test_audit_evand_mixed_covers.py
     next_rung: >-
-      Nothing of its own: this entry rises with T-062. wand125's point-only cover was
+      Nothing of its own: this entry rises with T-062. Hosono's point-only cover was
       replayed here by zmx2 (think-hxrz); replaying Daniel's zeromargin.py or zmcheck on it
       would give s(61) = 8 a route that rests neither on zmx2 nor on T-062's cover.
     notes: >-
@@ -5848,7 +5848,7 @@ results:
       adversarial reviews of the certificate by AI agents and none by outside
       mathematicians.
 
-      On 2 October 2026 wand125 published a second, separately written exact-rational
+      On 2 October 2026 Hiroaki Hosono published a second, separately written exact-rational
       checker of Valid7 on the same cover, which reports all 156,800 root boxes of the
       unreduced pose space certified in 9,640,060 leaves, about 626 core-hours, and says
       Daniel's checker and lemma write-ups were not read. The two share the statement, the
@@ -5861,20 +5861,20 @@ results:
       bytes with the pinned toolchain, and bentz_of_valid7 depends only on the standard
       axioms. Together they prove the theorem here, for every k >= 6.
 
-      wand125's second checker was reviewed on 2 October and found sound but for one defect
+      Hosono's second checker was reviewed on 2 October and found sound but for one defect
       in its exact positivity test (D-1), which cannot make a true Valid7 fail. It was
       replayed here in full on 2 and 3 October with that test's accepting case made a
       refusal, in fourteen shards: all 156,800 root boxes certified in 9,808,968 leaves,
       none uncertified, and each root the source ran under its published code with the
-      published leaves. So Valid7 is decided here by two separately written exact checkers,
-      Daniel's reproduced with the producer's code and wand125's independently
+      published leaves. So Valid7 is decided here by two separately written exact
+      checkers, Daniel's reproduced with the producer's code and Hosono's independently
       re-implemented.
 
-      So s(97) = 10, s(118) = 11, s(141) = 12, s(166) = 13, s(193) = 14, s(222) = 15, s(253)
-      = 16, s(286) = 17 and s(321) = 18 are proved here, nine cases closed. s(33) = 6 and
-      s(46) = 7 were proved already on Bentz's proofs, s(61) = 8 on Daniel's s(60) cover
-      (T-063), and s(78) = 9 on wand125's s(77) cover (T-067); this family proves each again
-      by another route.
+      So s(97) = 10, s(118) = 11, s(141) = 12, s(166) = 13, s(193) = 14, s(222) = 15,
+      s(253) = 16, s(286) = 17 and s(321) = 18 are proved here, nine cases closed. s(33) =
+      6 and s(46) = 7 were proved already on Bentz's proofs, s(61) = 8 on Daniel's s(60)
+      cover (T-063), and s(78) = 9 on Hosono's s(77) cover (T-067); this family proves
+      each again by another route.
 
       Evan Daniel,
       [evand/square-packing](https://github.com/evand/square-packing/tree/08e8a5faa54c0a7b0bb1cb0134c77d3565ce40c5/s12/certificates/k2m3),
@@ -5914,7 +5914,7 @@ results:
       (E-k2m3-evand-bentz-lean-build, proof-assistant-checked, with its axiom receipt). Each
       is V3 and C3, so the result is.
 
-      Valid7 has a second replayed checker, wand125's separately written one, replayed here
+      Valid7 has a second replayed checker, Hosono's separately written one, replayed here
       in full with D-1 guarded (E-k2m3-wand125-valid7-independent, exact-algebraic,
       independent-implementation). It is the same method as Daniel's, so it adds no distinct
       method and moves no rung. No human formalization review is retained, so the Lean build
@@ -5937,9 +5937,7 @@ results:
         relation: project
         date: '2026-10-02'
         scope: >-
-          The method of wand125's independent Valid7 checker (DESIGN.md, every module of
-          src/), its independence, the statement and assumptions of the Lean reduction, and
-          the replay cost of both checkers.
+          The method of Hosono's independent Valid7 checker (DESIGN.md, every module of src/), its independence, the statement and assumptions of the Lean reduction, and the replay cost of both checkers.
         verdict: accepted
         covers: [T-064]
     artifacts:
@@ -6009,10 +6007,10 @@ results:
       reader of its newest lemmas.
     notes: >-
       V0/C1 until 3 October 2026, when the full qx2_zm.py replay (two shards, think-4k80)
-      and lane LL's Lean build were recorded; the 1 October mathematical review and lane Y's
-      review of 2 October are the reads. The review's D-1 is recorded on wand125's entry,
-      which was reported evidence until its replay with D-1 guarded (fourteen shards,
-      think-e3tq) was recorded on 3 October; that moved no rung.
+      and lane LL's Lean build were recorded; the 1 October mathematical review and lane
+      Y's review of 2 October are the reads. The review's D-1 is recorded on Hosono's
+      entry, which was reported evidence until its replay with D-1 guarded (fourteen
+      shards, think-e3tq) was recorded on 3 October; that moved no rung.
 
       The source's six adversarial reviews by AI agents are its own and are not retained as
       review records here; their reports, private until the source published them on 3
@@ -6020,8 +6018,8 @@ results:
       The source's Lean toward ValidTilt7 (LebMass, LebMass7, ValidSplit7) was retained on 5
       October 2026 in the evand packet of 4 October (think-plrl); it moves no rung.
 
-      wand125 fixed the review's D-1 to D-3 upstream on 3 October; that revision's verify.sh
-      ran here on 5 October on the unchanged records, an evidence update on
+      Hosono fixed the review's D-1 to D-3 upstream on 3 October; that revision's
+      verify.sh ran here on 5 October on the unchanged records, an evidence update on
       E-k2m3-wand125-valid7-independent that moves no rung (think-uu60).
   - id: T-065
     kind: upper-bound
@@ -6117,7 +6115,7 @@ results:
     landed: '2026-10-03'
     headline: "`s(59) = 8`, by a mixed cover of points and grid-line segments"
     claim: >-
-      s(59) = 8: the lower half by wand125's mixed cover of 1 October 2026, the upper half
+      s(59) = 8: the lower half by Hiroaki Hosono's mixed cover of 1 October 2026, the upper half
       by the 8 x 8 grid. The cover's total is below 60 and 61 too, so it gives s(60) = 8 and
       s(61) = 8 as well, a second route to T-062 and T-063.
 
@@ -6139,7 +6137,7 @@ results:
       51,200 unreduced roots, none uncertified, with the box totals the source states; its
       run records are not published, so no root-for-root comparison was possible.
 
-      wand125,
+      Hiroaki Hosono,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/1a25a5ed745fdd905a52f48fcc48150a0669032d/certificates/k2m5_n59_L8),
       building directly on Evan Daniel's method, format, checkers and s(60) cover.
       Registration was requested in jlevy/squares#280. The source says parts of the work were
@@ -6175,7 +6173,7 @@ results:
         relation: project
         date: '2026-10-02'
         scope: >-
-          An adversarial soundness review of wand125's s(59) = 8 and s(77) = 9 by mixed covers, and of the corollaries the record states for them in T-062, T-063 and T-064: the reduction, both checkers' trust boundaries and what they share, both covers' data facts recomputed, and the lemmas the new cover shapes touch.
+          An adversarial soundness review of Hosono's s(59) = 8 and s(77) = 9 by mixed covers, and of the corollaries the record states for them in T-062, T-063 and T-064: the reduction, both checkers' trust boundaries and what they share, both covers' data facts recomputed, and the lemmas the new cover shapes touch.
         verdict: accepted
         covers: [T-066, T-067]
     evidence:
@@ -6226,7 +6224,7 @@ results:
     landed: '2026-10-03'
     headline: "`s(77) = 9`, by a mixed cover extended from Daniel's `s(60)` cover"
     claim: >-
-      s(77) = 9: the lower half by wand125's mixed cover of 1 October 2026, the upper half
+      s(77) = 9: the lower half by Hiroaki Hosono's mixed cover of 1 October 2026, the upper half
       by the 9 x 9 grid. The cover's total is below 78 too, so it gives s(78) = 9 as well, a
       second route to the k = 9 case of the family Evan Daniel reports (T-064).
 
@@ -6252,7 +6250,7 @@ results:
       lists run logs that are not in the repository, so its two zmx2 steps were run here as
       this repository's own sequence.
 
-      wand125,
+      Hiroaki Hosono,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/1a25a5ed745fdd905a52f48fcc48150a0669032d/certificates/k2m4_n77_L9),
       building directly on Evan Daniel's s(60) cover, format and checkers. Registration was
       requested in jlevy/squares#279. The source says parts of the work were produced with AI
@@ -6296,7 +6294,7 @@ results:
         relation: project
         date: '2026-10-02'
         scope: >-
-          An adversarial soundness review of wand125's s(59) = 8 and s(77) = 9 by mixed covers, and of the corollaries the record states for them in T-062, T-063 and T-064: the reduction, both checkers' trust boundaries and what they share, both covers' data facts recomputed, and the lemmas the new cover shapes touch.
+          An adversarial soundness review of Hosono's s(59) = 8 and s(77) = 9 by mixed covers, and of the corollaries the record states for them in T-062, T-063 and T-064: the reduction, both checkers' trust boundaries and what they share, both covers' data facts recomputed, and the lemmas the new cover shapes touch.
         verdict: accepted
         covers: [T-066, T-067]
     evidence:
@@ -6385,7 +6383,7 @@ results:
       accepting run at every direction; 29 of them are registered again in T-074, and n =
       76's in none. The case records decide which certificate is current at each count.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/1a25a5ed745fdd905a52f48fcc48150a0669032d).
       Registration was requested in jlevy/squares#281. The source says parts of the work were
       produced with AI assistance under human direction.
@@ -6572,7 +6570,7 @@ results:
       each returning the certificate's own record. The replays run the source's own algorithm
       and are not an independent decision of coverage.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/1a25a5ed745fdd905a52f48fcc48150a0669032d/certificates).
       Registration was requested in jlevy/squares#282. The source says parts of the work were
       produced with AI assistance under human direction.
@@ -6689,7 +6687,7 @@ results:
       rect_n91_L9645, are below the mixed certificates that hold n = 58 and 91 (T-091) and
       are not registered here.
 
-      wand125,
+      Hiroaki Hosono,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/39d8ecc74d651b54ec977c331c8f2015b442a6c4),
       built with and checked by Tokoharu's solver and interval verifier. The source keeps its
       credit to this project for the method lineage and says parts of the work were produced
@@ -6703,7 +6701,7 @@ results:
       score: 3
       rationale: >-
         Raised the verified lower bound at 23 counts from n = 29 to 95, by 0.004 to 0.34,
-        over wand125's weighted point certificates (T-044), Tokoharu's n = 29 certificate
+        over Hosono's weighted point certificates (T-044), Tokoharu's n = 29 certificate
         (T-047) and Nagamochi's closed form, on Tokoharu's method with larger certificates,
         and on 6 October at n = 51, 57 and 72, by 0.0425, 0.0525 and 0.019 over the mixed
         certificates of T-048 and T-091 and T-074's n = 56 certificate. Substantive case
@@ -6745,7 +6743,7 @@ results:
       At n = 59 and 60 superseded on 2026-10-02 by the exact values s(59) = 8 (T-066) and
       s(60) = 8 (T-062), when their covers' replays landed, at n = 86 the same day by
       s(86) >= 471/50 from the replayed n = 85 mixed certificate (T-071), and at n = 29,
-      38, 39, 41 to 44, 53 to 55, 68 to 70, 74 and 95 by wand125's raised certificates of 1
+      38, 39, 41 to 44, 53 to 55, 68 to 70, 74 and 95 by Hosono's raised certificates of 1
       October (T-074), when their replays were merged; stays true as stated. The counts it
       took on the morning of 6 October, n = 51, 57 and 72, went later that day to T-090's
       mixed certificates when sqverify-fast decided them, and n = 52, the last count it
@@ -6806,7 +6804,7 @@ results:
       each returning the certificate's own record. The replays run the source's own algorithm
       and are not an independent decision of coverage.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/52af997dc91c579658f0828bc8304e306ad9d95b/certificates).
       Registration was requested in a comment of 2 October 2026 on jlevy/squares#282. The
       source says parts of the work were produced with AI assistance under human direction.
@@ -6908,7 +6906,7 @@ results:
       certificate's own record. The replay runs the source's own algorithm and is not an
       independent decision of coverage.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/7975030a192607ef27edd1559aee4e98bd93047b/certificates/mixed_n76_L894).
       Registration was requested in a comment of 2 October 2026 on jlevy/squares#282. The
       source says parts of the work were produced with AI assistance under human direction.
@@ -6918,7 +6916,7 @@ results:
     significance:
       score: 3
       rationale: >-
-        Raised the verified lower bound at n = 76 by 0.05, over wand125's n = 75 rectangle
+        Raised the verified lower bound at n = 76 by 0.05, over Hosono's n = 75 rectangle
         certificate by monotonicity (T-045), by the certificate kind of T-048, T-069 and
         T-071: a further size from one generator, a substantive case result at S3. The 2
         October review of the certificate confirmed the draft.
@@ -6944,7 +6942,7 @@ results:
         relation: project
         date: '2026-10-02'
         scope: >-
-          wand125's linear certificates for s(101) >= 257/25 and s(83) >= 187/20 and their point-and-segment checker, unified_linear_verify.cpp: the argument from a linear measure to the bound, the point and segment capture bounds, the quadrant reduction by the measure's symmetry, the angle-zero branch, the hypotheses the checker assumes, and where the requests and the record differ; with an addendum on the n = 76 mixed certificate, against the kind and checker reviewed on 28 September and 2 October.
+          Hosono's linear certificates for s(101) >= 257/25 and s(83) >= 187/20 and their point-and-segment checker, unified_linear_verify.cpp: the argument from a linear measure to the bound, the point and segment capture bounds, the quadrant reduction by the measure's symmetry, the angle-zero branch, the hypotheses the checker assumes, and where the requests and the record differ; with an addendum on the n = 76 mixed certificate, against the kind and checker reviewed on 28 September and 2 October.
         verdict: accepted
         covers: [T-072]
     artifacts:
@@ -7018,7 +7016,7 @@ results:
       decision of coverage. n = 101's five counts are also registered as replayed in
       their own entry (T-080).
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/0c35d909764997ead04dfd90081c9fe9af8d07f2/certificates).
       Registration was requested in jlevy/squares#294 and its comment of 2 October 2026.
       The source says parts of the work were produced with AI assistance under human
@@ -7068,7 +7066,7 @@ results:
         relation: project
         date: '2026-10-02'
         scope: >-
-          wand125's linear certificates for s(101) >= 257/25 and s(83) >= 187/20 and their point-and-segment checker, unified_linear_verify.cpp: the argument from a linear measure to the bound, the point and segment capture bounds, the quadrant reduction by the measure's symmetry, the angle-zero branch, the hypotheses the checker assumes, and where the requests and the record differ; with an addendum on the n = 76 mixed certificate, against the kind and checker reviewed on 28 September and 2 October.
+          Hosono's linear certificates for s(101) >= 257/25 and s(83) >= 187/20 and their point-and-segment checker, unified_linear_verify.cpp: the argument from a linear measure to the bound, the point and segment capture bounds, the quadrant reduction by the measure's symmetry, the angle-zero branch, the hypotheses the checker assumes, and where the requests and the record differ; with an addendum on the n = 76 mixed certificate, against the kind and checker reviewed on 28 September and 2 October.
         verdict: accepted
         covers: [T-073]
     artifacts:
@@ -7135,7 +7133,7 @@ results:
       premises. A thirtieth certificate replayed in the same batches, rect_n76_L8925, is
       below the mixed certificate that holds n = 76 (T-072) and is not registered here.
 
-      wand125,
+      Hiroaki Hosono,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/1a25a5ed745fdd905a52f48fcc48150a0669032d),
       built with and checked by Tokoharu's solver and interval verifier. The source keeps its
       credit to this project for the method lineage and says parts of the work were produced
@@ -7149,7 +7147,7 @@ results:
       score: 3
       rationale: >-
         Raised the verified lower bound at 31 counts from n = 19 to 95, over the replayed
-        certificates of T-045 and T-070, wand125's point certificate at n = 56 (T-044) and
+        certificates of T-045 and T-070, Hosono's point certificate at n = 56 (T-044) and
         Nagamochi's closed form at n = 57 and 58, on Tokoharu's method with larger
         certificates. Substantive case results, S3, as T-045 and T-070; the 2 October review
         of T-068 confirmed S3 for these certificates. The closed form has been a reported
@@ -7248,7 +7246,7 @@ results:
       checker and runs the same net-and-shrink method, so it is a second implementation and
       not a second method.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/b00fc70f1904e9b1b567afee056d347f911209e8/certificates).
       Registration was requested in four comments of 2 October 2026 on jlevy/squares#282.
       The source says parts of the work were produced with AI assistance under human
@@ -7396,7 +7394,7 @@ results:
       returning the certificate's own record. The replay runs the source's own
       algorithm and is not an independent decision of coverage.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/b00fc70f1904e9b1b567afee056d347f911209e8/certificates/mixed_n82_L932).
       Registration was requested in a comment of 2 October 2026 on jlevy/squares#294. The
       source says parts of the work were produced with AI assistance under human direction.
@@ -7502,7 +7500,7 @@ results:
       source's checker and runs the same method, a second implementation and not a second
       method.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/b00fc70f1904e9b1b567afee056d347f911209e8).
       No issue requests these certificates; the import of 2 October took them in from the
       source's own commits. The source says parts of the work were produced with AI
@@ -7620,13 +7618,13 @@ results:
       The certificate is Daniel's 1,736-point weighted certificate of T-049 with every
       coordinate and the container multiplied by 7902/7901 and the weights unchanged,
       total 11.9738036 < 12. The rescaling and its verification on the finer angle net
-      are squarepacker's; the certificate and the verifier that decides it are Daniel's.
+      are Ryu's; the certificate and the verifier that decides it are Daniel's.
       Every closed unit square in [0, 31360/7901]^2, at every angle, captures weight at
       least one, decided over the rational angle net 2 arctan(k/24000) with a per-bin
       shrink of 1/(cos d + sin d). The nets N = 6000 and 12000 refuse it, which a pass at
       one net does not need: each net's test is a complete sufficient condition.
 
-      It was replayed here on 2 October 2026 by Daniel's verifier and by squarepacker's
+      It was replayed here on 2 October 2026 by Daniel's verifier and by Ryu's
       own indep_check.cpp at N = 24000, least captured weight 10000056/10^7 at bin 0 in
       both, as the source records, and decided completely by this repository's native
       parent-core interval branch and bound over all 9,942 rows, which shares nothing
@@ -7660,7 +7658,7 @@ results:
     composition: >-
       Primary at n = 12: one certificate, no monotonicity. Two entries whose methods
       differ decide it: the producer's two arrangement sweeps, Daniel's verify and
-      squarepacker's indep_check.cpp (exact-algebraic, replayed here, one method in two
+      Ryu's indep_check.cpp (exact-algebraic, replayed here, one method in two
       implementations), and this repository's directed-rounding interval coverage of
       every row (interval-certified); that is C3, with the two methods shown beside the
       rung. All three rest on the certificate, the counting theorem and the shrink lemma
@@ -7673,7 +7671,7 @@ results:
         relation: project
         date: '2026-10-02'
         scope: >-
-          squarepacker's s(12) >= 31360/7901: the exact identity with Daniel's certificate
+          Ryu's s(12) >= 31360/7901: the exact identity with Daniel's certificate
           times 7902/7901, the reduction, the angle-net shrink lemma and admissible centre
           box, why refusals at N = 6000 and 12000 and a pass at 24000 are consistent, a
           line-by-line read of indep_check.cpp, the three checkers' trust boundaries, the
@@ -7736,7 +7734,7 @@ results:
     claim: >-
       s(12) >= 15680000/3949423 = 3.97020020..., by re-weighting Evan Daniel's 1,736 points.
       It raises the verified lower bound by 33774720/31204391123, about 0.0010824, over
-      squarepacker's s(12) >= 31360/7901 (T-078), and leaves a gap of 117692/3949423, about
+      Ryu's s(12) >= 31360/7901 (T-078), and leaves a gap of 117692/3949423, about
       0.0298, to the grid's 4.
 
       The certificate keeps the points of Daniel's s(12) certificate (T-049), every
@@ -7754,7 +7752,7 @@ results:
       s(12) > 15680000/3949423. Both checkers refuse two mutated certificates.
 
       This project's re-weighting, after Evan Daniel's certificate and verifier (T-049),
-      whose method is Burns's and Massaccesi's, and after squarepacker's rescaling of that
+      whose method is Burns's and Massaccesi's, and after Ryu's rescaling of that
       certificate (T-078), which showed a finer net leaves room for a larger container. The
       same work rescaled Daniel's certificate whole to s(12) >= 1568000/395039, which this
       bound implies.
@@ -7830,17 +7828,17 @@ results:
       oversight record. Rung 5 needs a proof-assistant formalization reviewed by human
       experts; Daniel's Lean pose-box-tree checker, which kernel-checks T-049's certificate,
       could in principle take this one. The same 1,736 points carried the bound further:
-      the LP total was 0.024 below 12 at this side, and squarepacker's re-weighting of them
+      the LP total was 0.024 below 12 at this side, and Ryu's re-weighting of them
       reached 7943/2000 (T-095). The exact value remains open; the conjecture is s(12) = 4.
     notes: >-
       Registered from lane RV's review (think-4srr) of lane BB's write-up. The review's
       finding F1, that lane BB's first-party check was a 1,034-row sample, is resolved by
       the complete native run this entry cites; F2 to F5 are notes on the write-up, the
       verifier's header comment and the native reader, none bearing on the bound.
-      Supersedes T-078 at n = 12. squarepacker's rescaling is credited in the claim and not
+      Supersedes T-078 at n = 12. Ryu's rescaling is credited in the claim and not
       in builds_on: the registered certificate rests on Daniel's points and verifier, and
       the Route A rescaling it implies is not separately registered.
-      Superseded as the verified lower bound on 2026-10-05 by squarepacker's v1.1 (T-095),
+      Superseded as the verified lower bound on 2026-10-05 by Ryu's v1.1 (T-095),
       which keeps these points and this recipe at a larger side; stays true as stated.
 
   - id: T-080
@@ -7869,7 +7867,7 @@ results:
       record. The replay runs the source's own algorithm and is not an independent decision
       of coverage.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/0c35d909764997ead04dfd90081c9fe9af8d07f2/certificates/mixed_n101_L1028).
       Registration was requested in jlevy/squares#294. The source says parts of the work were
       produced with AI assistance under human direction.
@@ -7908,7 +7906,7 @@ results:
         relation: project
         date: '2026-10-02'
         scope: >-
-          wand125's linear certificates for s(101) >= 257/25 and s(83) >= 187/20 and their point-and-segment checker, unified_linear_verify.cpp: the argument from a linear measure to the bound, the point and segment capture bounds, the quadrant reduction by the measure's symmetry, the angle-zero branch, the hypotheses the checker assumes, and where the requests and the record differ; read before the replay this entry records.
+          Hosono's linear certificates for s(101) >= 257/25 and s(83) >= 187/20 and their point-and-segment checker, unified_linear_verify.cpp: the argument from a linear measure to the bound, the point and segment capture bounds, the quadrant reduction by the measure's symmetry, the angle-zero branch, the hypotheses the checker assumes, and where the requests and the record differ; read before the replay this entry records.
         verdict: accepted
         covers: [T-073, T-080]
     artifacts:
@@ -7951,7 +7949,7 @@ results:
       s(77) = 9, s(96) = 10, s(117) = 11, s(140) = 12, s(165) = 13, s(192) = 14, s(221) =
       15, s(252) = 16, s(285) = 17 and s(320) = 18. The reported theorem does not end at
       k = 18. New to this record are k = 10 to 18; s(21), s(32) and s(45) are T-052, T-051
-      and T-053, with T-054 a second route at k = 7, s(60) = 8 is T-062, and wand125 published s(77) = 9 first, on 1 October
+      and T-053, with T-054 a second route at k = 7, s(60) = 8 is T-062, and Hiroaki Hosono published s(77) = 9 first, on 1 October
       (T-067).
 
       For each k >= 8 the measure on [0,k]^2 is a corner module on [0,3]^2 in each corner,
@@ -7969,7 +7967,7 @@ results:
       leaves. The source reports three adversarial reviews of the certificate by AI agents
       and none by outside mathematicians.
 
-      A second, separately written exact checker reports ValidTilt9 too: wand125's, the
+      A second, separately written exact checker reports ValidTilt9 too: Hosono's, the
       checker whose Valid7 run was replayed here for T-064, in
       [valid7-independent-check](https://github.com/wand125/valid7-independent-check) on 6
       October 2026, over centres [0, 9/2]^2 and u in [0, 7/16] with no symmetry used, in
@@ -7978,7 +7976,7 @@ results:
       statements.
 
       Here the bundle's fast verify.sh passed on the retained bytes; it recomputes no
-      tilted leaf. wand125's verify_tilt9.sh and an audit of its records passed here, 30 of
+      tilted leaf. Hosono's verify_tilt9.sh and an audit of its records passed here, 30 of
       its roots were certified again here, 21 of them with their published leaves, and two
       lighter covers were refused; that re-decides about 3% of its recorded cost. The
       reduction was built here from the retained bytes on 3 October, with only the three
@@ -8020,7 +8018,7 @@ results:
       beside it at k = 7), and this entry adds no evidence to them.
 
       At k >= 8 it is two parts in series: the finite premise ValidTilt9, reported by the
-      source's run (E-k2m4-evand-validtilt9-qx2-report) and by wand125's independent run
+      source's run (E-k2m4-evand-validtilt9-qx2-report) and by Hosono's independent run
       (E-k2m4-wand125-validtilt9-report), and the reduction from it to every k >= 8, the
       source's Lean (E-k2m4-evand-lean-report), built here with its axiom receipt
       (E-k2m4-evand-bentz4-lean-build). The reduction is replayed and the finite premise is
@@ -8054,7 +8052,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's run of ValidTilt9 at c561dbb3: the checker's statement against the Lean ValidTilt9 and the qx2_zm.py run's region, each premise of the 2 October method review on the box-9 cover, the fixes of da469ec line by line, the v2 hand-off and the mid-run option changes, independence from qx2_zm.py, both checkers' trust boundaries, what a replay must establish, and what T-081 may claim.
+          Hosono's run of ValidTilt9 at c561dbb3: the checker's statement against the Lean ValidTilt9 and the qx2_zm.py run's region, each premise of the 2 October method review on the box-9 cover, the fixes of da469ec line by line, the v2 hand-off and the mid-run option changes, independence from qx2_zm.py, both checkers' trust boundaries, what a replay must establish, and what T-081 may claim.
         verdict: accepted
         covers: [T-081]
     artifacts:
@@ -8073,13 +8071,13 @@ results:
     next_rung: >-
       ValidTilt9 replayed in full by either checker: qx2_zm.py on the box-9 cover, about
       226 CPU-hours at the source, in the shards the evand packet's replay plan gives,
-      compared root for root with the published record (think-4uir); or wand125's run, the
+      compared root for root with the published record (think-4uir); or Hosono's run, the
       independent route, priced here from a sample at about 435 CPU-hours as
       published, or about 118 under its last options (think-hwpr). The Lean reduction is
       replayed already (E-k2m4-evand-bentz4-lean-build), and the claim chain is reviewed.
       Then a replayed entry for ValidTilt9, and the verified lower bounds at k = 10 to 18.
 
-      A replay of wand125's run lifts the ValidTilt9
+      A replay of Hosono's run lifts the ValidTilt9
       part only, and with Daniel's own Lean beside it the result's code relation stays that
       of the producer's reduction.
 
@@ -8091,7 +8089,7 @@ results:
     unfinished_confirmations:
       - what: >-
           ValidTilt9 replayed in full by either checker, with the route's controls, as a
-          replayed entry beside the Lean reduction's build: wand125's run, the independent
+          replayed entry beside the Lean reduction's build: Hosono's run, the independent
           route, or qx2_zm.py on the box-9 cover in the shards of the evand packet's replay
           plan, compared root for root with the published record
         rung: C3
@@ -8100,7 +8098,7 @@ results:
           cpu_hours: 118
           cpu_hours_high: 435
           basis: >-
-            The cheaper route, wand125's, priced from 30 of its roots re-run here
+            The cheaper route, Hosono's, priced from 30 of its roots re-run here
             (packing/resources/web/wand125-valid7-independent-check-2026-10-06/README.md,
             section A-6, and receipts/validtilt9_sample_compare.json): about 118 CPU-hours
             with every root under the run's last options, certified afresh, an estimate
@@ -8111,14 +8109,14 @@ results:
             (packing/resources/web/evand-square-packing-2026-10-03/receipts/valid9/qx2_replay_plan.json).
           priced: '2026-10-06'
     notes: >-
-      V0 because every cited entry is a report, the source's or wand125's: assurance
+      V0 because every cited entry is a report, the source's or Hosono's: assurance
       reported, replay not attempted. C1 because the claim-chain review of 3 October is recorded as the report
       entry's external_review, with no blocking defect. By monotonicity the theorem
       also gives s(k^2 - 3) = k for every k >= 5, which T-064 registers for k >= 6 and
       Bentz's s(22) = 5 holds at k = 5; it adds no entry, and T-064 gains a sentence naming
       this route when this one is replayed.
 
-      Evidence update, 2026-10-06 (think-dsz4): wand125's independent run of ValidTilt9 is
+      Evidence update, 2026-10-06 (think-dsz4): Hosono's independent run of ValidTilt9 is
       a second report of the finite premise (E-k2m4-wand125-validtilt9-report), reviewed
       the same day with no blocking defect
       (docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md).
@@ -8179,7 +8177,7 @@ results:
       net-and-shrink method, so it is a second implementation and not a second method. The
       source's own checker was not run here.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2aff2076c492d62340e986c84f60a0a29eb668df/certificates).
       Registration was requested in 22 comments of 3 October 2026 on jlevy/squares#282. The
       source says parts of the work were produced with AI assistance under human direction.
@@ -8588,7 +8586,7 @@ results:
       September 2026; chelokot,
       [square-packing-archive](https://github.com/chelokot/square-packing-archive), 4
       September 2026, the earlier public record, which Karakuş's paper does not cite.
-      wand125 first reported both, and the defect, to this project in jlevy/squares#295,
+      Hiroaki Hosono first reported both, and the defect, to this project in jlevy/squares#295,
       2 October 2026.
     scope: {n_min: 10, n_max: 324}
     verification: V3
@@ -8755,7 +8753,7 @@ results:
     notes: >-
       Superseded as the verified lower bound at both of its cases when this line of the
       register merged with the replays recorded in parallel, on 2026-10-03: at n = 37 by
-      wand125's mixed certificate, s(37) >= 161/25 = 6.44 (T-069), and at n = 61 by the
+      Hiroaki Hosono's mixed certificate, s(37) >= 161/25 = 6.44 (T-069), and at n = 61 by the
       replayed cover proving s(61) = 8 (T-063), both replayed here on 2 October 2026. This
       result stays true as stated and keeps its rungs: a proof of both bounds that uses
       nothing of Nagamochi 2005 and no computer search.
@@ -9042,7 +9040,7 @@ results:
       runs the same net-and-shrink method, so it is a second implementation and not a second
       method. The source's own checker was not run here.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/8aa6a10b3b8f165d39c85b68982fed1de086516c/certificates).
       Registration was requested in 16 comments of 3 and 4 October 2026 on jlevy/squares#282.
       The source says parts of the work were produced with AI assistance under human
@@ -9227,7 +9225,7 @@ results:
       runs the same net-and-shrink method, so it is a second implementation and not a second
       method. The source's own checker was not run here.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/797bdf6e10eba5f9dccca9da06f8352e81ba9dde/certificates).
       Registration was requested in 12 comments of 4 October 2026 on jlevy/squares#282. The
       source says parts of the work were produced with AI assistance under human direction.
@@ -9596,7 +9594,7 @@ results:
       runs the same net-and-shrink method, so it is a second implementation and not a second
       method. The source's own checker was not run here.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/a541afbe7826ff75f6d3848e10279fd524d55af3/certificates).
       Registration was requested in two comments of 5 October 2026 on jlevy/squares#282.
       The source says parts of the work were produced with AI assistance under human
@@ -9698,7 +9696,7 @@ results:
       source's log; and independently re-implemented by this repository's parent-core
       interval branch and bound over all 39,765 rows, which shares no code with the sweep
       or with the search that made the weights and gives the strict s(12) > 7943/2000.
-      squarepacker's own indep_check.cpp, replayed here at N = 96000 and 192000 with the
+      Ryu's own indep_check.cpp, replayed here at N = 96000 and 192000 with the
       source's minimum, is the producer's evidence: the search stopped when its
       range-restricted copy found no violation. All three refuse the source's two altered
       certificates.
@@ -9736,7 +9734,7 @@ results:
       every row (interval-certified), which shares no code with it or with the search that
       made the weights; that is C3, with two methods shown beside the rung.
 
-      squarepacker's indep_check.cpp, replayed here too, is a second implementation of
+      Ryu's indep_check.cpp, replayed here too, is a second implementation of
       the sweep's method and the producer's own, and its range-restricted copy was the
       search's stopping rule, so it is producer evidence, reproduced with the producer's code, and confirms nothing beyond the other two (review F3). The exact audit of the file is a premise check and decides
       nothing. All rest on the certificate, the counting step and the shrink lemma on the
@@ -9755,7 +9753,7 @@ results:
         relation: project
         date: '2026-10-05'
         scope: >-
-          squarepacker's v1.1 certificate for s(12) >= 7943/2000, pinned at 7a96bec3: the argument from certificate to bound with every hypothesis of Daniel's verify, indep_check.cpp and the native parent-core route; the producer's logs and controls cross-read; container, dilation, advance, gap, heaviest orbit, row positions and slip thresholds re-derived by hand; the trust boundaries and the search's fitting to two checkers; the source's account of why it stops near 3.9715 and its clarification of #309; credit, licence, AI statement and dates; significance. Reading only: no computation ran in the review lane, whose tool permissions refused it (its F1).
+          Ryu's v1.1 certificate for s(12) >= 7943/2000, pinned at 7a96bec3: the argument from certificate to bound with every hypothesis of Daniel's verify, indep_check.cpp and the native parent-core route; the producer's logs and controls cross-read; container, dilation, advance, gap, heaviest orbit, row positions and slip thresholds re-derived by hand; the trust boundaries and the search's fitting to two checkers; the source's account of why it stops near 3.9715 and its clarification of #309; credit, licence, AI statement and dates; significance. Reading only: no computation ran in the review lane, whose tool permissions refused it (its F1).
         verdict: accepted
         covers: [T-095]
     artifacts:
@@ -9844,7 +9842,7 @@ results:
       to read a declared net, also decided all 416 directions here, a second
       implementation that is not yet a registered verifier and on which no rung rests.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/43050edc5bdf5116fc5a073283128edd6749946b/certificates/mixed_n18_L470).
       Registration was requested in jlevy/squares#366. The source says parts of the work
       were produced with AI assistance under human direction.
@@ -9883,7 +9881,7 @@ results:
         relation: project
         date: '2026-10-05'
         scope: >-
-          wand125's mixed_n18_L470 (s(18) >= 47/10, on the net its candidate declares, core 999/1000 and 416 half-angle tangents of step 1/1001) and mixed_n66_L843 (s(66) >= 843/100, on the standard net), pinned at 43050edc, and sqverify-fast's declared-net change of f007d7afd: the argument from certificate to bound with the declared net re-derived in exact arithmetic, lemma N0 and the admission of a declared net, the tests and controls, the source's runs on the declared net, every number in the records, the first-party audit tools and the check_standing change, and what a sqverify-fast pass supports; before any complete replay.
+          Hosono's mixed_n18_L470 (s(18) >= 47/10, on the net its candidate declares, core 999/1000 and 416 half-angle tangents of step 1/1001) and mixed_n66_L843 (s(66) >= 843/100, on the standard net), pinned at 43050edc, and sqverify-fast's declared-net change of f007d7afd: the argument from certificate to bound with the declared net re-derived in exact arithmetic, lemma N0 and the admission of a declared net, the tests and controls, the source's runs on the declared net, every number in the records, the first-party audit tools and the check_standing change, and what a sqverify-fast pass supports; before any complete replay.
         verdict: accepted
         covers: [T-096, T-097]
     artifacts:
@@ -9944,7 +9942,7 @@ results:
       method. The source's own checker was replayed here at 12 of the 201 directions, each
       returning the certificate's own record, and not in full.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/43050edc5bdf5116fc5a073283128edd6749946b/certificates/mixed_n66_L843).
       Registration was requested in a comment of 5 October 2026 on jlevy/squares#282. The
       source says parts of the work were produced with AI assistance under human direction.
@@ -9983,7 +9981,7 @@ results:
         relation: project
         date: '2026-10-05'
         scope: >-
-          wand125's mixed_n18_L470 (s(18) >= 47/10, on the net its candidate declares, core 999/1000 and 416 half-angle tangents of step 1/1001) and mixed_n66_L843 (s(66) >= 843/100, on the standard net), pinned at 43050edc, and sqverify-fast's declared-net change of f007d7afd: the argument from certificate to bound with the declared net re-derived in exact arithmetic, lemma N0 and the admission of a declared net, the tests and controls, the source's runs on the declared net, every number in the records, the first-party audit tools and the check_standing change, and what a sqverify-fast pass supports; before any complete replay.
+          Hosono's mixed_n18_L470 (s(18) >= 47/10, on the net its candidate declares, core 999/1000 and 416 half-angle tangents of step 1/1001) and mixed_n66_L843 (s(66) >= 843/100, on the standard net), pinned at 43050edc, and sqverify-fast's declared-net change of f007d7afd: the argument from certificate to bound with the declared net re-derived in exact arithmetic, lemma N0 and the admission of a declared net, the tests and controls, the source's runs on the declared net, every number in the records, the first-party audit tools and the check_standing change, and what a sqverify-fast pass supports; before any complete replay.
         verdict: accepted
         covers: [T-096, T-097]
     artifacts:
@@ -10228,7 +10226,7 @@ results:
       with its assertions on, each returning the certificate's own record: confirmed,
       reproduced with the producer's code.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/65e408c9fa6bb787b6744c7c479ec19551a15016/certificates/mixed_n18_L4704).
       Registration was requested in a comment of 6 October 2026 on jlevy/squares#366. The
       source says parts of the work were produced with AI assistance under human direction.
@@ -10270,7 +10268,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's mixed_n18_L4704 (s(18) >= 588/125, core 1999/2000 on 832 half-angle tangents of step 1/2006 the candidate declares) and mixed_n19_L48229 (s(19) >= 48229/10000, on T-096's net of 416 tangents of step 1/1001), pinned at 65e408c9: the argument from certificate to bound with both nets re-derived in exact arithmetic, lemma N0 at step 1/2006, the source's runs and its path-metadata redaction, every number in the records, the first-party audit, sample, replay, control and compare commands, and the drafted significance, at 35a148afa; it re-derived the binding of every shipped record and input with code of its own and reproduced six more nodes with the producer's code.
+          Hosono's mixed_n18_L4704 (s(18) >= 588/125, core 1999/2000 on 832 half-angle tangents of step 1/2006 the candidate declares) and mixed_n19_L48229 (s(19) >= 48229/10000, on T-096's net of 416 tangents of step 1/1001), pinned at 65e408c9: the argument from certificate to bound with both nets re-derived in exact arithmetic, lemma N0 at step 1/2006, the source's runs and its path-metadata redaction, every number in the records, the first-party audit, sample, replay, control and compare commands, and the drafted significance, at 35a148afa; it re-derived the binding of every shipped record and input with code of its own and reproduced six more nodes with the producer's code.
         verdict: accepted
         covers: [T-099, T-100]
     artifacts:
@@ -10351,7 +10349,7 @@ results:
       found no defect. The source's own checker was replayed here at 10 of the 416
       directions, each returning the certificate's own record, and not in full.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/65e408c9fa6bb787b6744c7c479ec19551a15016/certificates/mixed_n19_L48229).
       Registration was requested in a comment of 6 October 2026 on jlevy/squares#366. The
       source says parts of the work were produced with AI assistance under human direction.
@@ -10397,7 +10395,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's mixed_n18_L4704 (s(18) >= 588/125, core 1999/2000 on 832 half-angle tangents of step 1/2006 the candidate declares) and mixed_n19_L48229 (s(19) >= 48229/10000, on T-096's net of 416 tangents of step 1/1001), pinned at 65e408c9: the argument from certificate to bound with both nets re-derived in exact arithmetic, lemma N0 at step 1/2006, the source's runs and its path-metadata redaction, every number in the records, the first-party audit, sample, replay, control and compare commands, and the drafted significance, at 35a148afa; it re-derived the binding of every shipped record and input with code of its own and reproduced six more nodes with the producer's code.
+          Hosono's mixed_n18_L4704 (s(18) >= 588/125, core 1999/2000 on 832 half-angle tangents of step 1/2006 the candidate declares) and mixed_n19_L48229 (s(19) >= 48229/10000, on T-096's net of 416 tangents of step 1/1001), pinned at 65e408c9: the argument from certificate to bound with both nets re-derived in exact arithmetic, lemma N0 at step 1/2006, the source's runs and its path-metadata redaction, every number in the records, the first-party audit, sample, replay, control and compare commands, and the drafted significance, at 35a148afa; it re-derived the binding of every shipped record and input with code of its own and reproduced six more nodes with the producer's code.
         verdict: accepted
         covers: [T-099, T-100]
     artifacts:
@@ -10681,7 +10679,7 @@ results:
       the least-bound node of the source's run among them, and was not run in full:
       samples that decide those nodes only.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2fad66e02f54a492835dc41ac37a9184e1e7a662/certificates/mixed_n18_L4705).
       No registration was requested: an intake pass of the source found it. The
       source says parts of the work were produced with AI assistance under human
@@ -10721,7 +10719,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's ten certificates of 6 October pinned at 2fad66e0, nine check2
+          Hosono's ten certificates of 6 October pinned at 2fad66e0, nine check2
           bundles and the n = 29 proof bundle: the argument from certificate to bound,
           the three declared nets re-derived in exact arithmetic, the 1/5002 net among
           them, against the scope of the declared-net soundness review; what check2
@@ -10812,7 +10810,7 @@ results:
       the least-bound node of the source's run among them, and was not run in full:
       samples that decide those nodes only.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2fad66e02f54a492835dc41ac37a9184e1e7a662/certificates/mixed_n19_L4825).
       No registration was requested: an intake pass of the source found it. The
       source says parts of the work were produced with AI assistance under human
@@ -10852,7 +10850,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's ten certificates of 6 October pinned at 2fad66e0, nine check2
+          Hosono's ten certificates of 6 October pinned at 2fad66e0, nine check2
           bundles and the n = 29 proof bundle: the argument from certificate to bound,
           the three declared nets re-derived in exact arithmetic, the 1/5002 net among
           them, against the scope of the declared-net soundness review; what check2
@@ -10942,7 +10940,7 @@ results:
       the least-bound node of the source's run among them, and was not run in full:
       samples that decide those nodes only.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2fad66e02f54a492835dc41ac37a9184e1e7a662/certificates/mixed_n20_L4905).
       No registration was requested: an intake pass of the source found it. The
       source says parts of the work were produced with AI assistance under human
@@ -10982,7 +10980,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's ten certificates of 6 October pinned at 2fad66e0, nine check2
+          Hosono's ten certificates of 6 October pinned at 2fad66e0, nine check2
           bundles and the n = 29 proof bundle: the argument from certificate to bound,
           the three declared nets re-derived in exact arithmetic, the 1/5002 net among
           them, against the scope of the declared-net soundness review; what check2
@@ -11073,7 +11071,7 @@ results:
       the least-bound node of the source's run among them, and was not run in full:
       samples that decide those nodes only.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2fad66e02f54a492835dc41ac37a9184e1e7a662/certificates/mixed_n26_L5545).
       No registration was requested: an intake pass of the source found it. The
       source says parts of the work were produced with AI assistance under human
@@ -11113,7 +11111,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's ten certificates of 6 October pinned at 2fad66e0, nine check2
+          Hosono's ten certificates of 6 October pinned at 2fad66e0, nine check2
           bundles and the n = 29 proof bundle: the argument from certificate to bound,
           the three declared nets re-derived in exact arithmetic, the 1/5002 net among
           them, against the scope of the declared-net soundness review; what check2
@@ -11205,7 +11203,7 @@ results:
       the least-bound node of the source's run among them, and was not run in full:
       samples that decide those nodes only.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2fad66e02f54a492835dc41ac37a9184e1e7a662/certificates/mixed_n27_L56435).
       No registration was requested: an intake pass of the source found it. The
       source says parts of the work were produced with AI assistance under human
@@ -11245,7 +11243,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's ten certificates of 6 October pinned at 2fad66e0, nine check2
+          Hosono's ten certificates of 6 October pinned at 2fad66e0, nine check2
           bundles and the n = 29 proof bundle: the argument from certificate to bound,
           the three declared nets re-derived in exact arithmetic, the 1/5002 net among
           them, against the scope of the declared-net soundness review; what check2
@@ -11335,7 +11333,7 @@ results:
       the least-bound node of the source's run among them, and was not run in full:
       samples that decide those nodes only.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2fad66e02f54a492835dc41ac37a9184e1e7a662/certificates/mixed_n28_L5735).
       No registration was requested: an intake pass of the source found it. The
       source says parts of the work were produced with AI assistance under human
@@ -11375,7 +11373,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's ten certificates of 6 October pinned at 2fad66e0, nine check2
+          Hosono's ten certificates of 6 October pinned at 2fad66e0, nine check2
           bundles and the n = 29 proof bundle: the argument from certificate to bound,
           the three declared nets re-derived in exact arithmetic, the 1/5002 net among
           them, against the scope of the declared-net soundness review; what check2
@@ -11464,7 +11462,7 @@ results:
       returning the certificate's own record, and not in full: a partial reproduction with
       the producer's code.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2fad66e02f54a492835dc41ac37a9184e1e7a662/certificates/mixed_n29_L581).
       No registration was requested: an intake pass of the source found it. The
       source says parts of the work were produced with AI assistance under human
@@ -11503,7 +11501,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's ten certificates of 6 October pinned at 2fad66e0, nine check2
+          Hosono's ten certificates of 6 October pinned at 2fad66e0, nine check2
           bundles and the n = 29 proof bundle: the argument from certificate to bound,
           the three declared nets re-derived in exact arithmetic, the 1/5002 net among
           them, against the scope of the declared-net soundness review; what check2
@@ -11593,7 +11591,7 @@ results:
       the least-bound node of the source's run among them, and was not run in full:
       samples that decide those nodes only.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2fad66e02f54a492835dc41ac37a9184e1e7a662/certificates/mixed_n30_L58835).
       No registration was requested: an intake pass of the source found it. The
       source says parts of the work were produced with AI assistance under human
@@ -11633,7 +11631,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's ten certificates of 6 October pinned at 2fad66e0, nine check2
+          Hosono's ten certificates of 6 October pinned at 2fad66e0, nine check2
           bundles and the n = 29 proof bundle: the argument from certificate to bound,
           the three declared nets re-derived in exact arithmetic, the 1/5002 net among
           them, against the scope of the declared-net soundness review; what check2
@@ -11723,7 +11721,7 @@ results:
       the least-bound node of the source's run among them, and was not run in full:
       samples that decide those nodes only.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2fad66e02f54a492835dc41ac37a9184e1e7a662/certificates/mixed_n39_L665).
       No registration was requested: an intake pass of the source found it. The
       source says parts of the work were produced with AI assistance under human
@@ -11763,7 +11761,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's ten certificates of 6 October pinned at 2fad66e0, nine check2
+          Hosono's ten certificates of 6 October pinned at 2fad66e0, nine check2
           bundles and the n = 29 proof bundle: the argument from certificate to bound,
           the three declared nets re-derived in exact arithmetic, the 1/5002 net among
           them, against the scope of the declared-net soundness review; what check2
@@ -11853,7 +11851,7 @@ results:
       the least-bound node of the source's run among them, and was not run in full:
       samples that decide those nodes only.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2fad66e02f54a492835dc41ac37a9184e1e7a662/certificates/mixed_n41_L6775).
       No registration was requested: an intake pass of the source found it. The
       source says parts of the work were produced with AI assistance under human
@@ -11893,7 +11891,7 @@ results:
         relation: project
         date: '2026-10-06'
         scope: >-
-          wand125's ten certificates of 6 October pinned at 2fad66e0, nine check2
+          Hosono's ten certificates of 6 October pinned at 2fad66e0, nine check2
           bundles and the n = 29 proof bundle: the argument from certificate to bound,
           the three declared nets re-derived in exact arithmetic, the 1/5002 net among
           them, against the scope of the declared-net soundness review; what check2
@@ -13275,12 +13273,12 @@ results:
 
       Evan Daniel's later regularized certificates (T-146) are smaller at 70, 102, 103, 123,
       129, 146 and 295, by 7.90e-11 to 7.82e-10, and regularize the packings there, credited
-      to Ryan Xu, at 103 as refined by Mishapolk (T-138); at 70 Eric Deleeuw's refinement
+      to Xu, at 103 as refined by Mishapolk (T-138); at 70 Eric Deleeuw's refinement
       (T-137) is named only as the smallest side the record held. The 11 October review of
       T-146 accepted it, and on 11 October 2026 the case records adopted it as the house at
-      six of those counts, crediting each packing to Ryan Xu. At 146 and 261 Robert Barnett's
+      six of those counts, crediting each packing to Xu. At 146 and 261 Robert Barnett's
       refinements of the same packings (T-150, issue 505) are smaller still, and the same
-      adoption made them the houses there, crediting the packings to Ryan Xu.
+      adoption made them the houses there, crediting the packings to Xu.
 
       The same adoption moved the houses at 84, 86, 105, 108, 126, 127, 131, 175 and 267 to
       smaller confirmed certificates: Francisco Couzo's refinements of these packings (T-128,
@@ -13955,7 +13953,7 @@ results:
       diagnostic, not a replay. No complete replay has run here, so the value stands as
       reported.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/22a23c8a99aa4e9616d596bc2f28555bacbee3dd/problems/square-lower-bounds/certificates/mixed_n29_L582).
       The source says parts of the work were produced with AI assistance under human
       direction.
@@ -14042,7 +14040,7 @@ results:
       gives the weaker s(40) > 67000√(6400006889)/798988091 = 6.7084890815…, which needs no
       density peak.
 
-      The certificate is wand125's rect_n40_L67 rectangle density of T-068, unchanged, of
+      The certificate is Hiroaki Hosono's rect_n40_L67 rectangle density of T-068, unchanged, of
       mass 3999/100 at core side 9977/10000. Every closed square of that side inside
       [0, 67/10]^2, at each of 401 half-angle tangents of step 83/80000, twice as fine as
       T-068's net of 201, captures mass at least 10001/10000.
@@ -14073,9 +14071,9 @@ results:
       transfer, the clipped-corner bound and the strict endpoint and found no blocking
       defect. No second method decided the nodal statement.
 
-      Guzhou0806 after wand125, Tokoharu and Levy,
+      Guzhou0806 after Hosono, Tokoharu and Levy,
       [n40-square-packing](https://github.com/Guzhou0806/n40-square-packing/tree/e5abeb4d078a5c5b35df6204dd9b93378e5a7880).
-      The source credits the density and the original verification method to wand125,
+      The source credits the density and the original verification method to Hosono,
       Tokoharu and their cited predecessors, and says Guzhou0806's contribution, the
       finer-net verification, the strict core transfer and the clipped-corner composition,
       came from AI-assisted research; the issue says AI assisted the exploration, proof
@@ -14106,7 +14104,7 @@ results:
       source_keys: ['[Guzhou0806 n40 clipped corner 2026-10-10]']
       published: '2026-10-10'
     composition: >-
-      One certificate, wand125's rect_n40_L67, and one transfer, with two load-bearing
+      One certificate, Hosono's rect_n40_L67, and one transfer, with two load-bearing
       parts, each decided here once. The 401-direction nodal statement is decided by
       sqverify-fast, interval-certified, the code the release itself ran, so that part is
       reproduced with the producer's code. The transfer's finite steps, the density's peak
@@ -14131,7 +14129,7 @@ results:
         relation: project
         date: '2026-10-10'
         scope: >-
-          Guzhou0806's s(40) > 335427/50000 and the full-core s(40) > 67000 sqrt(6400006889)/798988091, pinned at e5abeb4d: the argument from wand125's rect_n40_L67 density to the bound, re-derived (the D4 fold, the case split, the legality of both references, the clipped-corner bound and its monotonicity, the density peak, the counting and the strict endpoint); every finite quantity recomputed in exact rationals with the reviewer's own code; six of the 401 directions reproduced on the reviewed build and four controls run; the checkers' hypotheses and trust boundaries; the replay contract; and the drafted significance.
+          Guzhou0806's s(40) > 335427/50000 and the full-core s(40) > 67000 sqrt(6400006889)/798988091, pinned at e5abeb4d: the argument from Hosono's rect_n40_L67 density to the bound, re-derived (the D4 fold, the case split, the legality of both references, the clipped-corner bound and its monotonicity, the density peak, the counting and the strict endpoint); every finite quantity recomputed in exact rationals with the reviewer's own code; six of the 401 directions reproduced on the reviewed build and four controls run; the checkers' hypotheses and trust boundaries; the replay contract; and the drafted significance.
         verdict: accepted
         covers: [T-133]
       - path: docs/project/reviews/review-2026-10-11-final-lower-bounds.md
@@ -14194,7 +14192,7 @@ results:
       n = 40's reported and verified lower bounds moved from T-068's 67/10 to 335427/50000
       at registration, and T-145, registered the same day on the same density, raised both
       lanes to 1340000/199529; the case record keeps this entry as history. The full-core bound, weaker, is a corollary
-      the case records do not hold. wand125's comment on the issue reporting a third run
+      the case records do not hold. Hosono's comment on the issue reporting a third run
       and an exact check of the transfer is a third party's report and is not retained as a
       replay.
 
@@ -15615,7 +15613,7 @@ results:
       diagnostic, not a replay. No complete replay has run here, so the value stands as
       reported.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/36b85b9f37efa7cc5d4464805cfb0f2d21576267/problems/square-lower-bounds/certificates/mixed_n28_L57425).
       The source says parts of the work were produced with AI assistance under human
       direction.
@@ -15721,7 +15719,7 @@ results:
       diagnostic, not a replay. No complete replay has run here, so the value stands as
       reported.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/ff9f2692afe7d1e65a51bb079b61b3710b97fc82/problems/square-lower-bounds/certificates/mixed_n30_L58925).
       The source says parts of the work were produced with AI assistance under human
       direction.
@@ -15825,7 +15823,7 @@ results:
       repository's retained copies, returned the certificate's own records: a diagnostic,
       not a replay. No complete replay has run here, so the value stands as reported.
 
-      wand125 after Tokoharu and Levy,
+      Hiroaki Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/a9f76c382d023b4095899c4eb7ea7483b8b87ecf/problems/square-lower-bounds/certificates/mixed_n122_L1126).
       The source says parts of the work were produced with AI assistance under human
       direction.
@@ -15913,7 +15911,7 @@ results:
       reported on jlevy/squares#485. It raises T-133's 335427/50000 by 72586117/9976450000 =
       0.0072757…, from the same certificate.
 
-      The certificate is wand125's rect_n40_L67 rectangle density of T-068, unchanged, of mass
+      The certificate is Hiroaki Hosono's rect_n40_L67 rectangle density of T-068, unchanged, of mass
       3999/100. Every closed square of side 199529/200000 inside [0, 67/10]^2, at every angle and
       every legal centre, captures mass at least 4999/5000, and 40 × 4999/5000 − 3999/100 = 1/500,
       so no packing fits at side 1340000/199529; compactness makes the bound strict.
@@ -15938,9 +15936,9 @@ results:
       second way on the original density. The 10 October review re-derived the kernel's lemmas and
       found no blocking defect. No second method decided the continuous cover.
 
-      Guzhou0806 after wand125, Tokoharu and Levy,
+      Guzhou0806 after Hosono, Tokoharu and Levy,
       [n40-square-packing](https://github.com/Guzhou0806/n40-square-packing/tree/71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3).
-      The source credits the density to wand125, the rectangle-density method and the
+      The source credits the density to Hosono (as wand125), the rectangle-density method and the
       translation-derivative structure to Tokoharu, says the concave-section bound is informed by
       this repository's sqverify_fast, and gives Guzhou0806's contribution, the continuous-pose
       extension, the smaller-square coverage, the near-axis patch and the composition, as
@@ -15971,7 +15969,7 @@ results:
       source_keys: ['[Guzhou0806 n40 continuous pose 2026-10-10]']
       published: '2026-10-10'
     composition: >-
-      One certificate, wand125's rect_n40_L67, and three load-bearing parts. The continuous cover
+      One certificate, Hosono's rect_n40_L67, and three load-bearing parts. The continuous cover
       of the 43 slabs is decided by the release's continuous_pose.cpp, interval-certified, the
       producer's code, rebuilt here from reviewed source and replayed in full. The near-axis
       statement at side 997643/1000000 is decided by the release's axis_integer_grid.cpp, exact,
@@ -15998,7 +15996,7 @@ results:
         relation: project
         date: '2026-10-10'
         scope: >-
-          Guzhou0806's s(40) > 1340000/199529, pinned at 71c97d07: the argument from wand125's
+          Guzhou0806's s(40) > 1340000/199529, pinned at 71c97d07: the argument from Hosono's
           rect_n40_L67 density to the bound, re-derived (the D4 reduction, the t-dependent centre
           domain, the enclosures of cos, sin and their sum, whole-box containment and exclusion,
           the concave-section integral bound, the translation-derivative extension, the dyadic
@@ -17937,7 +17935,7 @@ results:
       certificates and its endpoint checker (THIRD_PARTY.md). Overbeck publishes on GitHub as
       Kleddamag, the handle under which he published T-037, T-038, T-040, T-041 and T-065,
       now credited to him by name, and on X as @kleddamag. CREDITS.md lists
-      wand125's certificates, kernel and verifier as context, not as a premise. Issue #557's
+      Hiroaki Hosono's certificates, kernel and verifier as context, not as a premise. Issue #557's
       title says n=18; the source is n = 17.
 
   - id: T-154
@@ -18241,7 +18239,7 @@ results:
       cover (H-266) vertex for vertex and under its cell names, with H-259's wall lemma and
       parameters; the cap 1169/250 is H-266's and the 43,593-orbit census exp-246's; 32 of
       the 35 excluded patterns are entries of this project's certified sub-pattern ledger,
-      eleven of them closed by wand125 through issue #472; the endpoint chart and layout are
+      eleven of them closed by Hosono through issue #472; the endpoint chart and layout are
       H-255's, exp-237's and H-256's, whose 60-place centre is Overbeck's seed of 21
       September 2026; and the local half follows the 52-row recipe of the review of 2
       October. The packet's first-party comparisons retain the cover, pattern and endpoint
@@ -19499,7 +19497,7 @@ results:
       from a new certificate.
 
       The certificate is a new rational density of 685 positive D4 rectangle orbits, 522 of them
-      rows of wand125's rect_n40_L67 pool and 163 generated outside it, every weight new, of mass
+      rows of Hosono's rect_n40_L67 pool and 163 generated outside it, every weight new, of mass
       3999/100. Every closed square of side 3350/3359 inside [0, 67/10]^2, at every angle and every
       legal centre, captures mass at least 4999/5000, and 40 x 4999/5000 - 3999/100 = 1/500, so no
       packing fits at side 3359/500; compactness makes the bound strict.
@@ -19520,9 +19518,9 @@ results:
       the density itself and verified the 401-direction nodal statement at the new side. The 12
       October review found no blocking defect. No second method decided the continuous cover.
 
-      Guzhou0806 after wand125, Tokoharu and Levy,
+      Guzhou0806 after Hosono, Tokoharu and Levy,
       [n40-square-packing](https://github.com/Guzhou0806/n40-square-packing/tree/6a65957e6c5c51cdf267917d882dab7f5b4928dd).
-      The source credits the original density and pool to wand125, the translation-derivative
+      The source credits the original density and pool to Hosono (as wand125), the translation-derivative
       structure to Tokoharu, says the concave-section calculations draw on this repository's
       sqverify_fast, and gives Guzhou0806's AI-assisted contribution as the new supports, the
       weight optimization, the continuous-cover certificate and the support-family obstruction,
@@ -19564,7 +19562,7 @@ results:
       producer's code. C3 rests on the complete replay of both kernels and its controls, and the
       kernels' lemmas on the 10 October review of T-145, which read the same bytes. No second
       method decides the continuous cover; the 401-direction run of sqverify-fast at the new side
-      is a necessary condition it passed. wand125's published sqverify_continuous (think-xzob),
+      is a necessary condition it passed. Hosono's published sqverify_continuous (think-xzob),
       once reviewed and replayed here, would make the cover independently re-implemented and
       move the mark, not the rung.
     evidence:
@@ -19587,7 +19585,7 @@ results:
           binaries rebuilt; the axis certificate and all 43 slabs replayed with the producer's
           kernels and held to both receipts; the contract's controls A to H; the near-axis and the
           401-direction statements decided by sqverify-fast; the release's two dual programs; the
-          replay's judge; the rungs and the drafted significance; and what a replay of wand125's
+          replay's judge; the rungs and the drafted significance; and what a replay of Hosono's
           sqverify_continuous would change.
         verdict: accepted
         covers: [T-157]
@@ -19620,7 +19618,7 @@ results:
       V4 and C4 need a second retained adversarial AI review by a distinct reviewer (the 11
       October final review covers T-145's kernel and density, not this density) and a human
       oversight record. Beside the rung: a decision of the continuous cover by code other than the
-      producer's, which wand125's published sqverify_continuous (think-xzob: retention, a soundness
+      producer's, which Hosono's published sqverify_continuous (think-xzob: retention, a soundness
       review, about 2.3 CPU-hours here) or a first-party interval kernel with the angle as an
       interval dimension (GC-4 of the 10 October review) would supply; either would make the
       result independently re-implemented and leave the rung where it is.
@@ -19636,10 +19634,10 @@ results:
       (GN-3); the composition and the claim say what decides the continuous cover (GN-4); the
       kernel contract held at the new parameters without re-tuning (GN-5); OBSTRUCTION.md's
       negative result was replayed with the release's programs and is registered nowhere (GN-6);
-      wand125's sqverify_continuous is published and unretained (GN-7); the release's tests were
+      Hosono's sqverify_continuous is published and unretained (GN-7); the release's tests were
       not run here (GN-8).
 
-      wand125's review comment of 11 October (#485, 6111583905, edited 12 October) reports a fresh
+      Hosono's review comment of 11 October (#485, 6111583905, edited 12 October) reports a fresh
       run of the release's entry point and his own continuous-angle verifier, both verified; it
       publishes no receipt, so it is a third party's report and confirms nothing here.
 
@@ -19871,13 +19869,13 @@ results:
 
       Credit Rio Calle (https://github.com/riocalle/my-repo, University of New Hampshire)
       with this arrangement and its layout, found by his own search engine from scratch,
-      and Ryan Xu (T-125) with finding the design and width first, as the issue asks: Xu
+      and Ryan Xu (T-125) with finding the design and width first, as the issue asks: Ryan Xu
       published on 8 October 2026 and the author's search finished its first packing of the
       design about ten hours later. Measured pose by pose, every square pairs with one of
-      Xu's under a half turn of the box, 40 within 1e-9 and none turned, and 62 moved, 19
+      Ryan Xu's under a half turn of the box, 40 within 1e-9 and none turned, and 62 moved, 19
       of them beyond a tenth of a unit and the largest by 0.494, 11 turned by up to about 43
       degrees: another arrangement of the design, not a refinement or a regularization of
-      Xu's packing.
+      Ryan Xu's packing.
 
       The issue and README state AI assistance: the author designed and directed the
       project and its experiments, and Claude wrote and ran the code, the GPU search, the
@@ -19890,7 +19888,7 @@ results:
       score: 2
       rationale: >-
         A certified side at n = 102, 2.43e-11 above the case's ceiling (T-146) and 5.48e-11
-        below Ryan Xu's certificate (T-125), of another arrangement of Xu's design: a
+        below Ryan Xu's certificate (T-125), of another arrangement of Ryan Xu's design: a
         citable detail of the case that moves no bound and no theorem, S2 as T-120, T-137
         and T-150 are; no lower bound or optimum.
       scored: '2026-10-12'
@@ -23807,7 +23805,7 @@ results:
       diagnostic, not a replay. No complete replay has run here, so the value stands as
       reported.
 
-      wand125 after Tokoharu and Levy,
+      Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/dfb2cf85fdf9ee5f95c5ec2c67fd49210854f146/problems/square-lower-bounds/certificates/mixed_n39_L66625).
       The source says parts of the work were produced with AI assistance under human
       direction.
@@ -23946,7 +23944,7 @@ results:
       diagnostic, not a replay. No complete replay has run here, so the value stands as
       reported.
 
-      wand125 after Tokoharu and Levy,
+      Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/9f24185c602c8c0b83cf6a88b11a69ea8d668673/problems/square-lower-bounds/certificates/mixed_n44_L69975).
       The source says parts of the work were produced with AI assistance under human
       direction.
@@ -24082,7 +24080,7 @@ results:
       diagnostic, not a replay. No complete replay has run here, so the value stands as
       reported.
 
-      wand125 after Tokoharu and Levy,
+      Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/7a42c16eacaab112b537ab09e89d3485f6f4c75f/problems/square-lower-bounds/certificates/mixed_n37_L64975).
       The source says parts of the work were produced with AI assistance under human
       direction.
@@ -24215,7 +24213,7 @@ results:
       repository's retained copies, returned the certificate's own records: a diagnostic,
       not a replay. No complete replay has run here, so the value stands as reported.
 
-      wand125 after Tokoharu and Levy,
+      Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/22f06b31a9295c8185be5d30a1a7b19982b16847/problems/square-lower-bounds/certificates/mixed_n145_L1224).
       The source says parts of the work were produced with AI assistance under human
       direction.
@@ -24360,7 +24358,7 @@ results:
       re-derived the argument from the certificate to the claim and found no blocking
       defect.
 
-      wand125,
+      Hosono,
       [square-packing](https://github.com/wand125/square-packing/tree/9a28a84bd55dc124bfa2919bb6c4fb504dda3149/problems/closed-form),
       13 October 2026, credited to Hiroaki Hosono (wand125) as issue 600 asks. Issue 600
       states: 'The search, the certificates, the checkers and this text were produced with
@@ -24369,7 +24367,7 @@ results:
 
       The case records take a(n) in the reported lane at 154 of the 156 counts, rounded down
       at 12 places. At 125 and 148 an earlier report is stronger and pending adoption,
-      wand125's 563/50 at 122 to 126 (T-144) and 306/25 at 145 to 149 (T-179), so those
+      Hosono's 563/50 at 122 to 126 (T-144) and 306/25 at 145 to 149 (T-179), so those
       lanes are unchanged; at 149 this bound supersedes the latter. The verified lanes are
       unchanged until a replay.
     scope: {n_values: [50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 66,
@@ -25124,7 +25122,7 @@ results:
 
       Credit Benjamin Greff (https://github.com/bengreff/s76-certificate), building on Evan
       Daniel's method at margin zero, mixed format, checkers and Lean library, and on
-      wand125's s(59) = 8 cover, reused for the corners, and band-insertion construction.
+      Hosono's s(59) = 8 cover, reused for the corners, and band-insertion construction.
       Registration was requested in jlevy/squares#594. The source says the search, LP and
       verification pipeline were built and run with Claude (Anthropic) as an AI assistant,
       under the author's direction.
@@ -25226,7 +25224,7 @@ results:
       confirmation is held at C1 until zm_mixed.py's mutated-certificate controls are
       held, as the composition says.
 
-      The case record's lanes keep wand125's 1793/200 until the case adopts the value
+      The case record's lanes keep Hosono's 1793/200 until the case adopts the value
       (devtools/certificate-citation-deferrals.yaml), so the entry is pending adoption at
       n = 76. The source's full zm_mixed.py pass over all 129,600 D4 roots, published
       after the pin on 14 October 2026 with one cell closed at depth 34, is not retained
@@ -26598,7 +26596,7 @@ results:
 
       Credit Benjamin Greff (https://github.com/bengreff/s95-certificate), building on
       Evan Daniel's method at margin zero, mixed format, checkers and Lean library, and
-      on wand125's s(59) = 8 cover, reused for the corners, and band-insertion
+      on Hosono's s(59) = 8 cover, reused for the corners, and band-insertion
       construction. Registration was requested in jlevy/squares#610. The source's README
       states: "Benjamin Greff directed the work. The search, LP and verification
       pipeline were built and run with Claude (Anthropic) as an AI assistant."
@@ -26689,7 +26687,7 @@ results:
       and the composite found no mathematical defect and no blocking finding. The
       confirmation is held at C1 until zm_mixed.py's mutated-certificate controls are
       held, as the composition says. The case
-      record's lanes keep wand125's 1993/200 until the case adopts the value
+      record's lanes keep Hosono's 1993/200 until the case adopts the value
       (devtools/certificate-citation-deferrals.yaml), so the entry is pending adoption at n
       = 95. At n = 96 it gives s(96) >= 10 by monotonicity, which T-081 registers
       already. No full zm_mixed.py pass over the 160,000 D4 roots is at the pinned
@@ -28509,7 +28507,7 @@ results:
 
       This raises the verified and reported lower lanes from 851/100 to 853/100. The
       bound is confirmed by a re-implementation sharing components with the
-      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      producer's checker, sqverify-proof-net, which is Hosono's adaptation of this
       repository's sqverify_fast crate: the two share the crate apart from their
       declared-net readers. The exact audits check premises and saved poses, not
       coverage between poses; no independent full implementation, second method,
@@ -28543,7 +28541,7 @@ results:
       published: '2026-10-16'
     composition: >-
       One source certificate and one complete maintained native replay, C3. The replay
-      shares components with the producer's checker, wand125's adaptation of this
+      shares components with the producer's checker, Hosono's adaptation of this
       repository's sqverify_fast crate, apart from the declared-net readers. The
       separate exact premise and saved-point audits the case record cites supply no
       universal decision or higher rung.
@@ -28629,7 +28627,7 @@ results:
 
       This raises the verified and reported lower lanes from 9411/1000 to 3769/400.
       The bound is confirmed by a re-implementation sharing components with the
-      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      producer's checker, sqverify-proof-net, which is Hosono's adaptation of this
       repository's sqverify_fast crate: the two share the crate apart from their
       declared-net readers. The exact audits check premises and saved poses, not
       coverage between poses; no independent full implementation, second method,
@@ -28663,7 +28661,7 @@ results:
       published: '2026-10-16'
     composition: >-
       One source certificate and one complete maintained native replay, C3. The replay
-      shares components with the producer's checker, wand125's adaptation of this
+      shares components with the producer's checker, Hosono's adaptation of this
       repository's sqverify_fast crate, apart from the declared-net readers. The
       separate exact premise and saved-point audits the case record cites supply no
       universal decision or higher rung.
@@ -28748,7 +28746,7 @@ results:
 
       This raises the verified and reported lower lanes from 473/50 to 379/40. The
       bound is confirmed by a re-implementation sharing components with the
-      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      producer's checker, sqverify-proof-net, which is Hosono's adaptation of this
       repository's sqverify_fast crate: the two share the crate apart from their
       declared-net readers. The exact audits check premises and saved poses, not
       coverage between poses; no independent full implementation, second method,
@@ -28782,7 +28780,7 @@ results:
       published: '2026-10-16'
     composition: >-
       One source certificate and one complete maintained native replay, C3. The replay
-      shares components with the producer's checker, wand125's adaptation of this
+      shares components with the producer's checker, Hosono's adaptation of this
       repository's sqverify_fast crate, apart from the declared-net readers. The
       separate exact premise and saved-point audits the case record cites supply no
       universal decision or higher rung.
@@ -29492,7 +29490,7 @@ results:
       mass scaled by 197/200 refused at 32 sampled directions.
 
       The value is above the reported lower bound at n = 106, T-180's
-      10.403976649170..., wand125's closed form (jlevy/squares#600), by 0.0990, and
+      10.403976649170..., Hosono's closed form (jlevy/squares#600), by 0.0990, and
       above the verified one, 10.3107084351... (Karakuş's strip bound, T-083 and
       T-084), by 0.1923; the bundle's own README compares it with the latter.
 
@@ -29600,7 +29598,7 @@ results:
       mass scaled by 197/200 refused at 32 sampled directions.
 
       The value is above the reported lower bound at n = 107, T-180's
-      10.436790394042..., wand125's closed form (jlevy/squares#600), by 0.1432, and
+      10.436790394042..., Hosono's closed form (jlevy/squares#600), by 0.1432, and
       above the verified one, 10.3615414616... (Karakuş's strip bound, T-083 and
       T-084), by 0.2185; the bundle's own README compares it with the latter.
 
@@ -29856,7 +29854,7 @@ results:
       mass scaled by 197/200 refused at 32 sampled directions.
 
       The value is above the reported lower bound at n = 110, T-180's
-      10.600000000000..., wand125's closed form (jlevy/squares#600), by 0.1300, and
+      10.600000000000..., Hosono's closed form (jlevy/squares#600), by 0.1300, and
       above the verified one, 10.5124921972... (Karakuş's strip bound, T-083 and
       T-084), by 0.2175; the bundle's own README compares it with the latter.
 

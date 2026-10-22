@@ -1,7 +1,7 @@
 """Audit Guzhou0806's continuous-pose bound, s(40) > 1340000/199529, and drive its replay.
 
 The follow-up comment of 2026-10-10 on jlevy/squares#485 claims ``s(40) > 1340000/199529``
-from wand125's ``rect_n40_L67`` density, which the 2026-10-01 rectangle packet retains,
+from Hosono's ``rect_n40_L67`` density, which the 2026-10-01 rectangle packet retains,
 by a continuous-pose interval kernel over 43 closed slabs of the half-angle tangent and an
 exact horizontal certificate for the near-axis patch. The source is retained in
 ``resources/web/guzhou-n40-continuous-pose-2026-10-10/``; the argument and the replay

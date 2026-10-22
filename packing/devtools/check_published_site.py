@@ -1149,10 +1149,19 @@ def _lazy_row_records(
         return "", f"record source must be {address}"
     row_links = markup.find(tag="a", class_name="site-row-open", within=table_row)
     fallback = markup.find(tag="a", within=body)
-    actions = markup.find(tag="a", class_name="site-popover-action", within=popover)
-    for links in (row_links, fallback, actions):
-        if not links or any(link.attrs.get("href") != address for link in links):
-            return "", f"static record link must be {address}"
+    # The loader replaces the body, so its optional links cannot supply the
+    # persistent action. The native row link and that action must both remain.
+    actions = [
+        link
+        for link in markup.find(tag="a", class_name="site-popover-action", within=popover)
+        if link not in fallback
+    ]
+    if (
+        not row_links
+        or not actions
+        or any(link.attrs.get("href") != address for link in (*row_links, *fallback, *actions))
+    ):
+        return "", f"static record link must be {address}"
     if address not in articles:
         return "", f"record page {address} not served"
     found = articles[address]

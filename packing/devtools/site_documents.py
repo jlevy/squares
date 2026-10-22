@@ -57,6 +57,7 @@ from urllib.parse import quote, unquote
 from devtools import render_changelog, render_overview, repo_links
 from devtools.render_overview import REPO, Page
 from devtools.repo_links import RepositoryTree, repo_url, repository_tree
+from sqpack.contributors import PROFILES_DIR
 
 TUTORIAL = REPO / repo_links.TUTORIAL
 TUTORIAL_ADVANCED = REPO / repo_links.TUTORIAL_ADVANCED
@@ -203,6 +204,7 @@ RECORD_PAGES: dict[str, str] = {
 #: Where every case's record is served, one address per case (`render_case_pages`).
 CASES_DIR = "cases"
 _CASE_FILE = re.compile(r"packing/frontier/n-(\d{3})\.md")
+_CONTRIBUTOR_FILE = re.compile(r"packing/contributors/people/([a-z0-9]+(?:-[a-z0-9]+)*)\.md")
 #: A link as kpress writes one, with its text plain or one code span.
 _TEXT_LINK = re.compile(r'<a href="([^"]*)">(<code>)?([^<]*)(</code>)?</a>')
 _RESULT_ID = re.compile(r"T-\d{3}")
@@ -332,14 +334,26 @@ def rewrite_link(url: str, *, tag: str, context: LinkContext, report: LinkReport
 
 def record_aliases(tree: RepositoryTree) -> dict[str, str]:
     """Where a link to a record the site has a page for leads, by the record's path: the
-    results register and the status table (`RECORD_PAGES`), and each case file in `tree`
-    to that case's record."""
+    results register and the status table (`RECORD_PAGES`), each case file in `tree`
+    to that case's record, and each profile record to its profile."""
     cases = {
         path: f"{CASES_DIR}/{int(match.group(1))}.html"
         for path in tree.files
         if (match := _CASE_FILE.fullmatch(path))
     }
-    return {**RECORD_PAGES, **cases}
+    profiles = {
+        path: f"{PROFILES_DIR}/{match.group(1)}.html"
+        for path in tree.files
+        if (match := _CONTRIBUTOR_FILE.fullmatch(path))
+    }
+    return {**RECORD_PAGES, **cases, **profiles}
+
+
+def served_pages() -> frozenset[str]:
+    """Every static page a reader-document link may name directly."""
+    from devtools.render_contributors import page_paths  # noqa: PLC0415
+
+    return frozenset((*render_overview.SITE_PAGES, *page_paths()))
 
 
 @cache
@@ -443,6 +457,18 @@ def tutorial_front(page: str) -> str:
     return page[: match.start()] + front + page[match.end() :]
 
 
+def _reader_profile_links(page: str) -> str:
+    """Only the declared reader document's article is authored person-linking prose."""
+    from devtools.profile_links import link_prose  # noqa: PLC0415
+
+    return re.sub(
+        r"(<article\b[^>]*>)(.*?)(</article>)",
+        lambda match: match[1] + link_prose(match[2]) + match[3],
+        page,
+        flags=re.DOTALL,
+    )
+
+
 def render_document(
     document: SiteDocument, *, tree: RepositoryTree, report: LinkReport
 ) -> Page:
@@ -452,7 +478,7 @@ def render_document(
         document.name,
         tree,
         base,
-        served=frozenset(render_overview.SITE_PAGES),
+        served=served_pages(),
         aliases=record_aliases(tree),
     )
     return render_overview.kpress_page(
@@ -474,10 +500,16 @@ def render_document(
         toc=False if document.name == "synopsis.html" else "auto",
         trust_mode="sanitized",
         strict_anchors=True,
-        rewrite_body=lambda page: rewrite_article(
-            tutorial_front(page) if document.source in (TUTORIAL, TUTORIAL_ADVANCED) else page,
-            context=context,
-            report=report,
+        rewrite_body=lambda page: (
+            _reader_profile_links if document in DOCUMENTS else lambda value: value
+        )(
+            rewrite_article(
+                tutorial_front(page)
+                if document.source in (TUTORIAL, TUTORIAL_ADVANCED)
+                else page,
+                context=context,
+                report=report,
+            )
         ),
     )
 
@@ -584,7 +616,7 @@ def rewrite_overview_blocks(page: str) -> str:
     context = LinkContext(
         "index.html",
         tree,
-        served=frozenset(render_overview.SITE_PAGES),
+        served=served_pages(),
         aliases=record_aliases(tree),
     )
     report = LinkReport()

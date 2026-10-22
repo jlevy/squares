@@ -242,7 +242,7 @@ sources:
     audit under think-3i74. Source and LFS pointer inventory retained; large certificate payloads
     are not yet locally acquired. The source explicitly says its sanitized public derivative has no
     fresh full geometric replay. No verified frontier value changes on intake. This is distinct from
-    Marc Leonard Overbeck's T-037 lower bound and wand125's T-059 row-minimum equality.
+    Marc Leonard Overbeck's T-037 lower bound and Hiroaki Hosono's T-059 row-minimum equality.
 - id: queuingtheorydotcom-11squaresformalized-2026-10-06
   title: Lean 4 formalization of the eleven-square optimality proof
   role: source-repository
@@ -411,7 +411,7 @@ sources:
     reduction are recorded in T-064. The exact Valid7 premise has one source Python checker and has
     not been freshly replayed here. No verified case bound changed on this intake. The source''s CREDITS.md
     says it was produced by Claude (Anthropic) in a single session under human direction. An independent
-    point-only s(61) = 8 source by wand125 at f8846cec is noted in the coverage review; its primary
+    point-only s(61) = 8 source by Hiroaki Hosono at f8846cec is noted in the coverage review; its primary
     packet awaits separate intake. On 2026-10-01 the packet gained, from the same revision, the s60
     bundle''s run records (jlevy/squares#256, which names the earlier d9f79bc1, where no file of the
     bundle but its README differs) and the records of a zmx2 run that certifies the s(32) cover without
@@ -440,7 +440,7 @@ sources:
   evidence:
   - E-n061-wand125-point-cover-evand-replay-report
   notes: Revision 7d6f46d9d0780241245dfbf77bad28aa1594c6b5, retrieved at 2026-10-02T07:44Z for Evan
-    Daniel's comment of 2 October on jlevy/squares#238. It reports his replay of wand125's point-only
+    Daniel's comment of 2 October on jlevy/squares#238. It reports his replay of Hiroaki Hosono's point-only
     s(61) = 8 cover by zeromargin.py and zmcheck, recorded as a reported route beside T-063 and not
     replayed here; the cover and every checker its manifest names are retained. The same pin holds
     Lemma 2 of the clique family in Lean, the dual_exact.py fixes and the claims audit, which restates
@@ -971,10 +971,10 @@ sources:
   - E-tokoharu-density-monotone-report
   - E-tokoharu-density-source-replay
   notes: 'Complete tree at b543990f7794b8c511cb46cf3854b7e8166c3674, including Japanese proof, search
-    code, interval verifier and all three certificates. The separately retained wand125 density fork''s
+    code, interval verifier and all three certificates. Hiroaki Hosono''s separately retained density fork''s
     main and add-push-driver branch contain the same certificates; neither supplies the unspecified
     stronger numerical results mentioned by the social post. Re-checked on 2026-09-27 at HEAD 84bebef51856d46a19c145b035664324ba9572d3
-    (2026-09-23, merged from the wand125 fork''s fix-ladder-driver branch), the only commit after
+    (2026-09-23, merged from the fix-ladder-driver branch of Hosono''s fork), the only commit after
     b543990: it changes src/push.py, tests/test_push.py and .gitignore alone (the ladder driver''s
     step widening, consecutive-failure stop, push.jsonl run log and failure detail). No certificate,
     proof, certify.py or verify.cpp byte changes, so no recorded result moves and the retained b543990
@@ -1539,7 +1539,7 @@ sources:
     verifier and the author's indep_check.cpp both accepted it here at the angle net N = 24000, and
     this repository's native parent-core interval route decided all 9,942 rows, so s(12) >= 31360/7901
     is verified (T-078, V3/C3) and supersedes T-049's 15680/3951; this project's re-weighting of the
-    same points (T-079) held the verified bound from 3 October, and squarepacker's v1.1 (T-095) holds
+    same points (T-079) held the verified bound from 3 October, and Ryu's v1.1 (T-095) holds
     both the reported and the verified one since 5 October. All three checkers refuse two mutated
     certificates. The one retained review was written by the lane that ran the replays (its finding
     F1).
@@ -1899,7 +1899,7 @@ sources:
     unchanged; T-067) and point_n21_L5 (781afb3: relativized paths and a corrected lemma-code map,
     the certificate unchanged; T-055), which the record-updates packet retains.'
 - id: wand125-record-updates-2026-10-04
-  title: Record and script updates of 4 October 2026 to wand125's s(21), s(45), s(59) and s(77) certificates
+  title: Record and script updates of 4 October 2026 to Hiroaki Hosono's s(21), s(45), s(59) and s(77) certificates
   role: source-repository
   url: https://github.com/wand125/square-packing-bounds/tree/797bdf6e10eba5f9dccca9da06f8352e81ba9dde
   local: resources/web/wand125-record-updates-2026-10-04/
@@ -2207,7 +2207,7 @@ sources:
   evidence:
   - E-k2m4-wand125-validtilt9-report
   notes: 'Revision c561dbb3fcea9178599db017f51f56b42ad9f91f, retrieved at 2026-10-06T05:34Z, with
-    its release records-tilt9-v1, pinned by SHA-256. wand125''s checker, unchanged since da469ec but
+    its release records-tilt9-v1, pinned by SHA-256. Hiroaki Hosono''s checker, unchanged since da469ec but
     for a driver option, decides ValidTilt9, the finite premise of T-081 for k >= 8, on Daniel''s
     box-9 cover: 28,350 roots over centres [0, 9/2]^2 and u in [0, 7/16], none uncertified. Recorded
     as reported evidence on T-081, which moves no rung. On 6 October its verify_tilt9.sh, devtools.audit_validtilt9_independent,
@@ -2766,7 +2766,7 @@ sources:
     require their own assurance. Historical counts excluded by the author do not replace smaller
     ceilings.
 - id: ry-xu-new-packings-2026-10-08
-  title: 'ry-xu new square constructions, issue #432'
+  title: 'Ryan Xu''s new square constructions, issue #432'
   role: source-repository
   url: https://github.com/ry-xu/square_packing/tree/8dc415296f697f5140caea27c7a0193d52deb4e6
   local: resources/web/ry-xu-new-packings-2026-10-08/
@@ -2830,7 +2830,7 @@ sources:
     plus the separate undilated radical n51 construction; eight rational certificates are non-selected.
     No 191-contact assertion admitted.
 - id: ry-xu-undilated-n51-2026
-  title: ry-xu undilated n51 exact construction
+  title: Xu's undilated n51 exact construction
   role: source-repository
   url: https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/square_packing_records.json
   local: resources/web/ry-xu-new-packings-2026-10-08/
@@ -3246,7 +3246,7 @@ sources:
   - E-n040-guzhou-clipped-corner-sqverify-fast-replay
   - E-n040-guzhou-clipped-corner-finite-audit
   notes: Release n40-670854-20261010 at e5abeb4d, retrieved at 2026-10-10T10:28Z for jlevy/squares#485,
-    with 20 of its 36 files retained, wand125's rect_n40_L67 density and the vendored copy of this
+    with 20 of its 36 files retained, Hiroaki Hosono's rect_n40_L67 density and the vendored copy of this
     repository's sqverify_fast pinned by digest, and the release ZIP's CI receipt kept beside the tree's
     local one. It reports s(40) > 335427/50000 and the weaker full-core s(40) > 67000 sqrt(6400006889)/798988091.
     The 401-direction nodal statement was replayed here in full with sqverify-fast, the producer's own
@@ -3477,7 +3477,7 @@ sources:
     343 superseded this source's there (couzo-issue678-2026-10-18).
   claims_record: resources/web/evand-record-hunt3-2026-10-10/acquisition/claims.json
 - id: wand125-fine-net-n28-57425-2026-10-10
-  title: Wand125 reported n28 fine-net lower bound, no issue
+  title: Hosono reported n28 fine-net lower bound, no issue
   role: source-repository
   url: https://github.com/wand125/square-packing/tree/36b85b9f37efa7cc5d4464805cfb0f2d21576267/problems/square-lower-bounds/certificates/mixed_n28_L57425
   local: resources/web/wand125-fine-net-n28-n30-2026-10-10/
@@ -3499,7 +3499,7 @@ sources:
     maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
     supply a maintained capture or whole-net controls. Replay and adoption remain under think-i85v.
 - id: wand125-fine-net-n30-58925-2026-10-10
-  title: Wand125 reported n30 fine-net lower bound, no issue
+  title: Hosono reported n30 fine-net lower bound, no issue
   role: source-repository
   url: https://github.com/wand125/square-packing/tree/ff9f2692afe7d1e65a51bb079b61b3710b97fc82/problems/square-lower-bounds/certificates/mixed_n30_L58925
   local: resources/web/wand125-fine-net-n28-n30-2026-10-10/
@@ -3569,7 +3569,7 @@ sources:
   - E-n040-guzhou-continuous-pose-finite-audit
   - E-n040-guzhou-continuous-pose-crate-axis
   notes: Release n40-continuous-1340000-199529-20261010 at 71c97d07, retrieved at 2026-10-10T17:25Z for
-    the follow-up comment on jlevy/squares#485, with 27 of its 28 files retained, wand125's rect_n40_L67
+    the follow-up comment on jlevy/squares#485, with 27 of its 28 files retained, Hiroaki Hosono's rect_n40_L67
     density pinned by digest, and the release ZIP's CI receipt kept beside the tree's local one. It
     reports s(40) > 1340000/199529 by a continuous-pose interval kernel over 43 slabs and an exact axis
     certificate. Both kernels were rebuilt here into the CI run's binaries and replayed in full, every
@@ -3600,7 +3600,7 @@ sources:
   - E-n040-guzhou-new-supports-finite-audit
   - E-n040-guzhou-new-supports-crate-axis
   notes: Release n40-new-supports-6718-20261011 at 6a65957e, retrieved on 11 October 2026 for the comment
-    on jlevy/squares#485, with thirty-four files retained, wand125's rect_n40_L67 pool pinned by digest,
+    on jlevy/squares#485, with thirty-four files retained, Hosono's rect_n40_L67 pool pinned by digest,
     and the release ZIP's CI receipt kept beside the tree's local one. It reports s(40) > 3359/500 by
     the 10 October release's two kernels, byte for byte, on a new density of 685 rectangle orbits, and
     an exact obstruction for the original support family that bears on no bound. The finite steps and
@@ -4608,7 +4608,7 @@ sources:
     have full outcomes. On 15 October 2026 the case at 304 adopted its certificate, the
     selected override below; at 211 and 241 issue 586's certificates (T-182) are smaller.
 - id: wand125-fine-net-n39-66625-2026-10-13
-  title: Wand125 reported n39 fine-net lower bound, no issue
+  title: Hosono reported n39 fine-net lower bound, no issue
   role: source-repository
   url: https://github.com/wand125/square-packing/tree/dfb2cf85fdf9ee5f95c5ec2c67fd49210854f146/problems/square-lower-bounds/certificates/mixed_n39_L66625
   local: resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/
@@ -4630,7 +4630,7 @@ sources:
     supply a maintained capture or whole-net controls; the 99/100 mutant's axis refusal falls outside
     the census's AXIS_ROUNDING. Replay and adoption remain under think-u0av.
 - id: wand125-fine-net-n44-69975-2026-10-13
-  title: Wand125 reported n44 fine-net lower bound, no issue
+  title: Hosono reported n44 fine-net lower bound, no issue
   role: source-repository
   url: https://github.com/wand125/square-packing/tree/9f24185c602c8c0b83cf6a88b11a69ea8d668673/problems/square-lower-bounds/certificates/mixed_n44_L69975
   local: resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/
@@ -4651,7 +4651,7 @@ sources:
     maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
     supply a maintained capture or whole-net controls. Replay and adoption remain under think-u0av.
 - id: wand125-fine-net-n37-64975-2026-10-13
-  title: Wand125 reported n37 fine-net lower bound, no issue
+  title: Hosono reported n37 fine-net lower bound, no issue
   role: source-repository
   url: https://github.com/wand125/square-packing/tree/7a42c16eacaab112b537ab09e89d3485f6f4c75f/problems/square-lower-bounds/certificates/mixed_n37_L64975
   local: resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/
@@ -9623,7 +9623,7 @@ superseded_reports:
   source_id: squish-update-2026-10-07
   value: '11.8793752067111287'
   superseded_by: mishapolk-kkt-refinements-2026-10-14
-  reason: Historical source ceiling superseded by a smaller exact Xu construction.
+  reason: Historical source ceiling superseded by a smaller exact refinement by Mykhailo Polkovskyi.
 - n: 131
   source_id: evand-square-packing-2026-10-05
   value: '11.954916830216124410139679227683'
@@ -9767,7 +9767,7 @@ superseded_reports:
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '11.8793752067078730'
   superseded_by: mishapolk-kkt-refinements-2026-10-14
-  reason: The withdrawn Gupta rational certificate is larger than the selected Xu construction; its
+  reason: The withdrawn Gupta rational certificate is larger than the selected refinement by Mykhailo Polkovskyi; its
     complete source and replay remain retained.
 - n: 105
   source_id: evand-batch-105-130-2026-10-07

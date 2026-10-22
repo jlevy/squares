@@ -26,7 +26,7 @@ The sources, one section of the report each:
   and a fetch of commits and trees (no blobs) reads two things. Commits past every
   packet's pin and every read in `campaign/intake-watch.yaml` are new to the record.
   Commits a packet's pin already contains but whose changed paths no packet at or after
-  them retains are evidence nobody took in, such as wand125's `c56b9b7` and `1ebd484`.
+  them retains are evidence nobody took in, such as Hosono's `c56b9b7` and `1ebd484`.
   A pin is structured: an acquisition record's commit with the paths it declares, or a
   revision in a register source's address with the path the address names after it,
   the whole tree when it names none. Where both pin one commit the acquisition record's

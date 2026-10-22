@@ -64,6 +64,8 @@ from urllib.parse import quote
 
 from devtools import repo_links
 from devtools.repo_links import repo_url
+from devtools.site_icons import account_icon
+from sqpack.contributors import PROFILES_DIR
 from sqpack.release import PUBLICATION_EDITION, PUBLICATION_HISTORY
 
 if TYPE_CHECKING:
@@ -76,6 +78,7 @@ SITE_CSS = TEMPLATES / "site.css"
 #: The result overview's styles, the popover body a result's row opens
 #: (`devtools.result_overview`), kept apart from `site.css` and inlined after it.
 SITE_RESULT_CSS = TEMPLATES / "site-result.css"
+SITE_CONTRIBUTOR_CSS = TEMPLATES / "site-contributor.css"
 SITE_NAV = TEMPLATES / "site-nav.html"
 SITE_NAV_CSS = TEMPLATES / "site-nav.css"
 #: The text tokens every page shares with the explainer: its type base, reading measure,
@@ -104,6 +107,8 @@ ATLAS_VIEW_SCRIPT = BROWSER / "atlas-view.js"
 ATLAS_GRID_SCRIPT = BROWSER / "atlas-grid.js"
 EMBED_SCRIPT = BROWSER / "embed.js"
 CASE_POPOVER_SCRIPT = BROWSER / "case-popover.js"
+ARTICLE_LOADER_SCRIPT = BROWSER / "article-loader.js"
+CONTRIBUTOR_POPOVER_SCRIPT = BROWSER / "contributor-popover.js"
 #: What starts the Visualize page's film when the page is visited.
 FILM_SCRIPT = BROWSER / "film.js"
 THEME_SCRIPT = BROWSER / "theme.js"
@@ -411,6 +416,43 @@ def paper_path(slug: str, suffix: str = ".html") -> str:
     return f"{PAPERS_DIR}/{slug}{suffix}"
 
 
+#: Where the person profiles were served until 2026-10-13: every address under it is a
+#: forwarder to the same name under `PROFILES_DIR` (`MOVED_PAGES`).
+LEGACY_PROFILES_DIR = "contributors"
+
+#: The profiles the reviewed preview served under `LEGACY_PROFILES_DIR` before the move,
+#: by their id there, each with the id of the record it forwards to. The set is fixed: a
+#: profile added since has only its `profiles/` address, and `kleddamag`,
+#: `queuingtheorydotcom` and `wand125` forward to the records that credit Marc Leonard
+#: Overbeck, Manasseh Ahmed and Hiroaki Hosono by name.
+LEGACY_PROFILES: dict[str, str] = {
+    **{
+        identifier: identifier
+        for identifier in (
+            "erich-friedman",
+            "evan-daniel",
+            "f-gobel",
+            "francisco-couzo",
+            "gustavo-massaccesi",
+            "guzhou0806",
+            "hiroshi-nagamochi",
+            "joshua-levy",
+            "michael-j-kearney",
+            "mira",
+            "peter-shiu",
+            "ryu-sungjoon",
+            "sam-burns",
+            "tokoharu",
+            "walter-stromquist",
+            "walter-trump",
+            "wolfram-bentz",
+        )
+    },
+    "kleddamag": "marc-leonard-overbeck",
+    "queuingtheorydotcom": "manasseh-ahmed",
+    "wand125": "hiroaki-hosono",
+}
+
 #: Every page the published site serves, by path under the site root, whichever build
 #: writes it. The navigation bar links only to these, and tests hold it to that.
 SITE_PAGES: tuple[str, ...] = (
@@ -419,6 +461,7 @@ SITE_PAGES: tuple[str, ...] = (
     "atlas.html",
     "about.html",
     RESULTS_PAGE,
+    f"{PROFILES_DIR}/index.html",
     "papers.html",
     *(paper_path(paper.slug) for paper in PAPERS),
     "tutorial.html",
@@ -440,6 +483,10 @@ SITE_PAGES: tuple[str, ...] = (
 #: address its directory had. Each old path is still served, as a forwarder
 #: (`forwarder_pages`), so a link written before the change arrives with its query and
 #: its fragment. Nothing on the site links an old path; a test holds every page to that.
+#: The person profiles moved from `contributors/` (`LEGACY_PROFILES_DIR`) to `profiles/`
+#: on 2026-10-13 (think-0v2c), since the directory lists cited paper authors beside the
+#: project's contributors; the directory and each profile the reviewed preview served
+#: there keep a forwarder at the earlier address (`LEGACY_PROFILES`).
 MOVED_PAGES: tuple[tuple[str, str], ...] = (
     ("all-results.html", RESULTS_PAGE),
     ("status.html", "atlas.html"),
@@ -451,6 +498,11 @@ MOVED_PAGES: tuple[tuple[str, str], ...] = (
     # Atlas owns case browsing; the retired directories keep incoming selectors.
     ("cases.html", "atlas.html"),
     ("cases/index.html", "atlas.html"),
+    (f"{LEGACY_PROFILES_DIR}/index.html", f"{PROFILES_DIR}/index.html"),
+    *(
+        (f"{LEGACY_PROFILES_DIR}/{old}.html", f"{PROFILES_DIR}/{new}.html")
+        for old, new in LEGACY_PROFILES.items()
+    ),
 )
 #: What a forwarder that leads off the site calls the place it sends a reader, by that
 #: place's address. A forwarder to a page of the site calls the page by the page's own
@@ -485,6 +537,12 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "site-changelog.yaml",
     PACKING / "site-changelog.schema.yaml",
     PACKING / "devtools/render_changelog.py",
+    PACKING / "devtools/profile_links.py",
+    PACKING / "devtools/site_icons.py",
+    PACKING / "devtools/site_resources.py",
+    PACKING / "devtools/site_tallies.py",
+    PACKING / "devtools/record_presentation.py",
+    PACKING / "devtools/github_references.py",
     # The News label rubric, whose `Short` column a News meter and the archive's S
     # buttons quote (`render_changelog.news_significance_meanings`).
     PACKING / "campaign" / "result-import.md",
@@ -503,6 +561,7 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "devtools/probes/site_assets/preload_fonts.js",
     PACKING / "devtools/node/render-site-math.mjs",
     SITE_RESULT_CSS,
+    SITE_CONTRIBUTOR_CSS,
     SITE_NAV,
     SITE_NAV_CSS,
     PAPER_TYPE_CSS,
@@ -581,7 +640,7 @@ class PageMeta(NamedTuple):
     whatever draws a preview of a shared link (`head_tags`)."""
 
     name: str
-    """The page's own name, with no site name after it: `Every Result`. The overview's is
+    """The page's own name, with no site name after it: `Results`. The overview's is
     the project's name."""
     description: str
     """One or two plain sentences on this page and no other, `DESCRIPTION_LIMIT`
@@ -601,7 +660,7 @@ class PageMeta(NamedTuple):
 
 #: The records the results page and the frontier atlas write their heads from, named
 #: here because a forwarder to either previews it (`forwarded_metas`).
-RESULTS_META = PageMeta("Every Result", RESULTS_DESCRIPTION, RESULTS_PAGE)
+RESULTS_META = PageMeta("Results", RESULTS_DESCRIPTION, RESULTS_PAGE)
 ATLAS_META = PageMeta(
     "The Atlas of Square Packings",
     ATLAS_DESCRIPTION,
@@ -762,6 +821,7 @@ def inputs() -> tuple[Path, ...]:
     from devtools import render_n11_lower_bounds_explainer as explainer  # noqa: PLC0415
     from devtools.evand_exact_certificates import COMPARISON_RECEIPT  # noqa: PLC0415
     from devtools.render_case_pages import CASES_INPUTS  # noqa: PLC0415
+    from devtools.render_contributors import inputs as contributor_inputs  # noqa: PLC0415
     from devtools.render_frontier_page import FRONTIER_INPUTS  # noqa: PLC0415
 
     return tuple(
@@ -774,6 +834,7 @@ def inputs() -> tuple[Path, ...]:
                 COMPARISON_RECEIPT,
                 *FRONTIER_INPUTS,
                 *CASES_INPUTS,
+                *contributor_inputs(),
                 *explainer.COMPOSITE_ASSETS,
                 *explainer.WALKTHROUGH,
                 explainer.THRESHOLD_CERTIFICATE,
@@ -808,7 +869,14 @@ def page_assets(*, styles: Sequence[Path] = ()) -> tuple[str, str]:
     code_symbols = bundle.assets.stylesheet(
         "code-symbols.css", code_symbol_face_css(kpress_static(), bundle.assets.face)
     )
-    own = (PAPER_TYPE_CSS, SITE_NAV_CSS, SITE_CSS, SITE_RESULT_CSS, *styles)
+    own = (
+        PAPER_TYPE_CSS,
+        SITE_NAV_CSS,
+        SITE_CSS,
+        SITE_RESULT_CSS,
+        SITE_CONTRIBUTOR_CSS,
+        *styles,
+    )
     head = "\n".join(
         [
             bundle.head(_FROM_ROOT),
@@ -843,7 +911,11 @@ def assert_fetches_only_assets(name: str, page: str) -> None:
 def nav_html(current: str, *, root: str = "") -> str:
     """The navigation bar, with the current page marked."""
     nav = SITE_NAV.read_text(encoding="utf-8")
-    nav = nav.replace("{{ROOT}}", root)
+    nav = nav.replace("{{ROOT}}", root).replace(
+        "{{GITHUB_ICON}}", account_icon("github", class_name="site-nav-icon")
+    )
+    if not current:
+        return nav
     # Existing paper renderers and film callers share the Explanations destination.
     current = {"papers": "explanations", "visualize": "explanations"}.get(current, current)
     marker = f'data-page="{current}"'
@@ -1028,9 +1100,56 @@ def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
 
 
 def colophon_html() -> str:
-    """The closing credit every site page carries, in KPress's footer slot: the two lines
-    every page shares (`colophon_lines`), as the explainer's are."""
-    return f'<p class="site-colophon">{colophon_lines()}</p>'
+    """The shared closing credits and profile directory in each site's footer."""
+    profiles = (
+        f'<span class="site-colophon-line"><a href="{PROFILES_DIR}/index.html">'
+        "Profiles</a></span>"
+    )
+    return f'<p class="site-colophon">{colophon_lines()}{profiles}</p>'
+
+
+def article_overlay_shells(page: str) -> str:
+    """Add the shared article overlays once, including on standalone record pages."""
+    from devtools.render_case_pages import case_popover  # noqa: PLC0415
+
+    shells = []
+    if "data-case-popover" not in page:
+        shells.append(case_popover())
+    if "data-contributor-popover" not in page:
+        shells.append(
+            '<div id="pop-contributor" class="site-popover site-contributor-popover" '
+            'popover="auto" data-contributor-popover role="dialog" '
+            'aria-label="Profile">'
+            '<button type="button" class="site-popover-close" '
+            'popovertarget="pop-contributor" popovertargetaction="hide" '
+            'aria-label="Close">\u00d7</button>'
+            "<div data-contributor-body></div>"
+            '<p class="site-popover-actions"><a class="site-popover-action" '
+            f'data-contributor-open href="{PROFILES_DIR}/index.html">Open profile</a></p></div>'
+        )
+    return page.replace(
+        "</body>",
+        '<div class="kpress site-overlay-shells">' + "".join(shells) + "</div></body>",
+        1,
+    )
+
+
+def article_page_scripts(page_scripts: Sequence[Path]) -> tuple[Path, ...]:
+    """Load shared fetch/lifecycle code before every article controller."""
+    return tuple(
+        dict.fromkeys(
+            (
+                THEME_SCRIPT,
+                HEADROOM_SCRIPT,
+                TOOLTIP_SCRIPT,
+                ARTICLE_LOADER_SCRIPT,
+                POPOVER_SCRIPT,
+                *page_scripts,
+                CASE_POPOVER_SCRIPT,
+                CONTRIBUTOR_POPOVER_SCRIPT,
+            )
+        )
+    )
 
 
 def kpress_page(
@@ -1125,6 +1244,7 @@ def kpress_page(
     )
     if rewrite_body is not None:
         page = rewrite_body(page)
+    page = article_overlay_shells(page)
     from devtools import site_assets  # noqa: PLC0415
 
     assets = site_assets.shared().assets
@@ -1132,10 +1252,7 @@ def kpress_page(
         f"\n{site_assets.script_tag(ref, _FROM_ROOT)}"
         for ref in (
             kpress_client_asset(),
-            *(
-                assets.script_file(path)
-                for path in (THEME_SCRIPT, HEADROOM_SCRIPT, TOOLTIP_SCRIPT, *page_scripts)
-            ),
+            *(assets.script_file(path) for path in article_page_scripts(page_scripts)),
         )
     )
     page = page.replace("</body>", f"{programs}\n</body>", 1)
@@ -1285,6 +1402,7 @@ def overview_page() -> Page:
         overview_data,
         overview_sections,
         render_changelog,
+        render_contributors,
     )
 
     overview = overview_data.load()
@@ -1300,6 +1418,7 @@ def overview_page() -> Page:
         "REPORT_RESULTS": report_results(),
         "RESULTS_LINK_ATTRIBUTES": overview_sections.all_results_link_attributes(overview),
         "OTHER_PROJECTS": overview_sections.other_project_cards(overview),
+        "PROFILES": render_contributors.profile_preview(),
         "ARROW_RIGHT": overview_sections.arrow_icon("right"),
         "ARROW_DOWNLOAD": overview_sections.arrow_icon("download"),
         "ATLAS_PDF": overview_sections.PDF_CARD_SPECS[1][0],
@@ -1348,7 +1467,7 @@ def atlas_page() -> Page:
         description=ATLAS_META.description,
         structured_data=ATLAS_META.structured_data,
         toc=False,
-        rewrite_body=_case_links,
+        rewrite_body=lambda page: _case_links(_authored_profile_links(page)),
         page_scripts=(
             POPOVER_SCRIPT,
             ATLAS_VIEW_SCRIPT,
@@ -1383,11 +1502,16 @@ def news_page() -> Page:
 
 def about_page() -> Page:
     """The project narrative, approach, attribution, and supporting resources."""
-    from devtools import overview_sections, render_changelog  # noqa: PLC0415
+    from devtools import (  # noqa: PLC0415
+        overview_sections,
+        render_changelog,
+        render_contributors,
+    )
 
     markdown = _template_markdown(
         ABOUT_ARTICLE,
         {
+            "PROFILES": render_contributors.profile_preview(),
             "REPORT_RESULTS": report_results(),
             "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
             "NEWS_LEGACY_ANCHORS": render_changelog.legacy_news_anchors(
@@ -1406,7 +1530,7 @@ def about_page() -> Page:
             "Read about its approach and contributors."
         ),
         toc=False,
-        rewrite_body=_case_links,
+        rewrite_body=lambda page: _case_links(_authored_profile_links(page, full_names=True)),
         page_scripts=(POPOVER_SCRIPT, NEWS_FORWARD_SCRIPT),
     )
 
@@ -1414,13 +1538,14 @@ def about_page() -> Page:
 def results_page() -> Page:
     """Every registered result, one row each at its own id, sortable and filterable."""
     from devtools import overview_data, overview_sections  # noqa: PLC0415
+    from devtools.render_case_pages import compact_visual_math_classes  # noqa: PLC0415
 
     overview = overview_data.load()
     values = {
         "EPISTEMICS_URL": "epistemics.html",
         # The overview above the table, from the same register (think-2z22): the last
         # seven days' arrivals, a block a day, then the weekly S3+ rollup before them. The
-        # heading's link names the section's own first day, so it lists the section's
+        # arrival link names the section's own first day, so it lists the section's
         # results on any day (#514's review A, finding A3); the last day's counts from
         # the reader's.
         "RECENT_ADDED": overview_sections.recent_added(overview),
@@ -1447,22 +1572,25 @@ def results_page() -> Page:
     markdown = fill(
         RESULTS_ARTICLE.read_text(encoding="utf-8"), values, where=RESULTS_ARTICLE.name
     )
-    return kpress_page(
+    page = kpress_page(
         markdown,
         name=RESULTS_META.path,
         current="results",
         title=RESULTS_META.name,
         description=RESULTS_META.description,
         toc=False,
+        rewrite_body=_authored_profile_links,
         page_styles=(RESULTS_CSS,),
         page_scripts=(TABLE_SCRIPT, POPOVER_SCRIPT, ROW_POPOVER_SCRIPT),
     )
 
+    return page._replace(html=compact_visual_math_classes(page.html, profile_links=True))
+
 
 def papers_page() -> Page:
     """The Papers section's page: a short introduction and one large card per paper,
-    each the link to its paper, which is a full page of the site. It has no popover,
-    so it carries no popover script. The introduction's links to the three parts of the
+    each the link to its paper, which is a full page of the site. Shared article overlays
+    remain available for marked record links. The introduction's links to the three parts of the
     series are the cards' own addresses, filled from the one constant each."""
     from devtools import overview_sections  # noqa: PLC0415
 
@@ -1496,6 +1624,7 @@ def papers_page() -> Page:
         title="Explanations",
         description=PAPERS_DESCRIPTION,
         toc=False,
+        rewrite_body=_authored_profile_links,
         page_scripts=(FILM_SCRIPT,),
     )
 
@@ -1512,7 +1641,9 @@ def frontier_page() -> Page:
     return next(page for page in forwarder_pages() if page.name == "frontier.html")
 
 
-def static_content_page(body: str, *, meta: PageMeta, current: str) -> Page:
+def static_content_page(
+    body: str, *, meta: PageMeta, current: str, page_scripts: Sequence[Path] = ()
+) -> Page:
     """A complete styled page around an already rendered article."""
     from devtools import site_assets, site_math  # noqa: PLC0415
     from devtools.render_case_pages import rebase_links  # noqa: PLC0415
@@ -1527,7 +1658,7 @@ def static_content_page(body: str, *, meta: PageMeta, current: str) -> Page:
         + "\n"
         + "\n".join(
             site_assets.script_tag(site_assets.shared().assets.script_file(path), _FROM_ROOT)
-            for path in (THEME_SCRIPT, HEADROOM_SCRIPT, TOOLTIP_SCRIPT)
+            for path in article_page_scripts(page_scripts)
         )
     )
     page = fill(
@@ -1538,16 +1669,36 @@ def static_content_page(body: str, *, meta: PageMeta, current: str) -> Page:
             "NAV": nav_html(current),
             "RECORD": body,
             "FOOTER": colophon_html(),
-            "PROGRAMS": programs,
+            "PROGRAMS": "",
         },
         where="case-record.html",
     )
+    page = article_overlay_shells(page)
+    page = page.replace("</body>", f"{programs}\n</body>", 1)
     page = site_math.prepare(page)
     directory = str(Path(meta.path).parent)
     if directory != ".":
         page = rebase_links(page, directory)
     assert_fetches_only_assets(meta.path, page)
     return Page(meta.path, page)
+
+
+def _authored_profile_links(page: str, *, full_names: bool = False) -> str:
+    """Link only template-marked authored fragments, then remove their wrappers."""
+    from devtools.profile_links import link_prose  # noqa: PLC0415
+
+    return re.sub(
+        r'<div class="site-profile-prose">(.*?)</div>',
+        lambda match: (
+            '<div class="site-profile-full-names">'
+            + link_prose(match[1], full_names=True)
+            + "</div>"
+            if full_names
+            else link_prose(match[1])
+        ),
+        page,
+        flags=re.DOTALL,
+    )
 
 
 def _case_links(page: str) -> str:
@@ -1644,7 +1795,13 @@ def iter_result_fragments(*, result_ids: frozenset[str] | None = None) -> Iterat
 
     Chains, amendments and neighbors always use the complete register; row overlays
     extract each page's article on input."""
-    from devtools import overview_data, overview_sections, site_urls  # noqa: PLC0415
+    from devtools import (  # noqa: PLC0415
+        overview_data,
+        overview_sections,
+        render_case_pages,
+        result_overview,
+        site_urls,
+    )
 
     overview = overview_data.load()
     rows = site_urls.load_registry()
@@ -1667,7 +1824,7 @@ def iter_result_fragments(*, result_ids: frozenset[str] | None = None) -> Iterat
             path,
             structured_data=(
                 breadcrumb_data(
-                    ("Home", "index.html"), ("Every Result", RESULTS_PAGE), (result.id, path)
+                    ("Home", "index.html"), (RESULTS_META.name, RESULTS_PAGE), (result.id, path)
                 ),
             ),
         )
@@ -1696,11 +1853,18 @@ def iter_result_fragments(*, result_ids: frozenset[str] | None = None) -> Iterat
         )
         body = body.removesuffix("</div>") + navigation + "</article>"
         heading = (
-            f'<h1 id="{result.id.lower()}">{html.escape(result.id)}: '
-            f"{overview_sections.tex_bounds(result.summary)}</h1>"
+            f'<h1 id="{result.id.lower()}">'
+            f'<span class="site-result-id">{html.escape(result.id)}:</span> '
+            f'<span class="site-result-title">'
+            f"{overview_sections.tex_bounds(result.summary)}</span></h1>"
         )
         body = body.replace(">", ">" + heading, 1)
-        yield static_content_page(body, meta=meta, current="results")
+        page = static_content_page(body, meta=meta, current="results")
+        compact = result_overview.compact_case_tables(page.html)
+        compact = render_case_pages.compact_visual_math_classes(
+            compact, all_html_classes=True, result_article_attributes=True
+        )
+        yield Page(page.name, compact)
 
 
 def result_fragments() -> list[Page]:
@@ -1711,21 +1875,23 @@ def result_fragments() -> list[Page]:
 def forwarded_metas() -> dict[str, PageMeta]:
     """Each page of the site a forwarder leads to (`MOVED_PAGES`), by its path, with the
     record that page writes its own head from: the results page's and the frontier
-    Atlas's (`RESULTS_META`, `ATLAS_META`), and each paper's `page_meta`, the explainer's as the
-    site publishes it. They are read from the pages' own records and not restated, so a
-    forwarder cannot preview a page by another name, kind or description than the
-    page's own head gives it.
+    Atlas's (`RESULTS_META`, `ATLAS_META`), each paper's `page_meta`, the explainer's as the
+    site publishes it, and the profile directory's and each profile's
+    (`render_contributors.page_metas`). They are read from the pages' own records and not
+    restated, so a forwarder cannot preview a page by another name, kind or description
+    than the page's own head gives it.
 
     The renderers are imported here rather than at the top, as in `inputs`, since each of
     them imports this module."""
+    from devtools import render_contributors, render_n11_optimality_review  # noqa: PLC0415
     from devtools import render_n11_lower_bounds_explainer as explainer  # noqa: PLC0415
-    from devtools import render_n11_optimality_review  # noqa: PLC0415
 
     metas = (
         RESULTS_META,
         ATLAS_META,
         explainer.published_page_meta(),
         render_n11_optimality_review.page_meta(),
+        *render_contributors.page_metas().values(),
     )
     return {meta.path: meta for meta in metas}
 
@@ -1761,9 +1927,12 @@ def forwarder_pages() -> list[Page]:
     A forwarder is a few lines and no page of the site: `overview/forward.js`, the script
     the overview already forwards its own old fragments with, reads where the reader is
     sent from the root element and sends them there with the query string and the
-    fragment they came with. File navigation uses the registered physical output;
-    the no-script refresh and link also name that file, so directory indexes open
-    their content in either transport. A crawler sees the canonical address. It has no
+    fragment they came with: the page's canonical address, a directory's own address
+    where the page is its `index.html`, as the profile directory is
+    (`check_published_site.forwarder_expected`). File navigation uses the registered
+    physical output; the no-script refresh and link also name that file, so directory
+    indexes open their content in either transport. A crawler sees the canonical
+    address. It has no
     bar, no stamp and no styles, and is not among `PAGES`. A target is written as the
     old path's reader must follow it: relative for a page of the site, climbing out of
     the old path's directory where it has one, and whole for an address off it.
@@ -1778,6 +1947,8 @@ def forwarder_pages() -> list[Page]:
     """
     import posixpath  # noqa: PLC0415
 
+    from devtools.profile_links import person_label  # noqa: PLC0415
+
     metas = forwarded_metas()
     template = FORWARDER.read_text(encoding="utf-8")
     pages = []
@@ -1785,13 +1956,18 @@ def forwarder_pages() -> list[Page]:
         external = new.startswith("https://")
         file_target = new if external else posixpath.relpath(new, posixpath.dirname(old))
         target = file_target
+        if not external and new.endswith("/index.html"):
+            directory = new.removesuffix("index.html")
+            target = posixpath.relpath(directory, posixpath.dirname(old)) + "/"
         meta = None if external else metas.get(new)
         if not external and meta is None:
             raise SystemExit(f"{old} forwards to {new}, which `forwarded_metas` does not name")
         values = {
             "TARGET": html.escape(target, quote=True),
             "FILE_TARGET": html.escape(file_target, quote=True),
-            "TITLE": html.escape(OFF_SITE_TITLES[new] if meta is None else meta.name),
+            "TITLE": html.escape(
+                OFF_SITE_TITLES[new] if meta is None else person_label(meta.name, new)
+            ),
             "HEAD": forwarder_head(new, meta, old=old),
             "FORWARD_SCRIPT": _script_text(FORWARD_SCRIPT),
         }
@@ -1807,9 +1983,16 @@ def forwarder_pages() -> list[Page]:
 
 
 def render_site() -> list[Page]:
-    """Every file this module writes: the pages, the result fragments, the case record
-    files, and a forwarder at each address a page used to have."""
-    return [*render_all(), *result_fragments(), *case_records(), *forwarder_pages()]
+    """Every page, result, case, profile and historical address this build serves."""
+    from devtools.render_contributors import contributor_pages  # noqa: PLC0415
+
+    return [
+        *render_all(),
+        *result_fragments(),
+        *case_records(),
+        *contributor_pages(),
+        *forwarder_pages(),
+    ]
 
 
 def asset_files(files: Sequence[Page]) -> dict[str, bytes]:
@@ -1856,16 +2039,16 @@ def support_files() -> dict[str, bytes]:
 
 def write_site(output: Path, files: Sequence[Page]) -> None:
     """Write `files` under `output`, with the shared assets they name under `assets/`,
-    and drop any result fragment, case record file or asset already there that is not
-    among them, so a directory built before a result was withdrawn, a case dropped or
-    an asset changed does not keep serving it."""
+    and drop any result fragment, case record file, profile, profile forwarder or asset
+    already there that is not among them, so a directory built before a result was
+    withdrawn, a case dropped or an asset changed does not keep serving it."""
     from devtools import site_assets  # noqa: PLC0415
     from devtools.overview_sections import RESULT_FRAGMENTS  # noqa: PLC0415
     from devtools.render_case_pages import CASES_DIR  # noqa: PLC0415
 
     output.mkdir(parents=True, exist_ok=True)
     kept = {output / file.name for file in files}
-    for directory in (RESULT_FRAGMENTS, CASES_DIR):
+    for directory in (RESULT_FRAGMENTS, CASES_DIR, PROFILES_DIR, LEGACY_PROFILES_DIR):
         for stale in sorted((output / directory).glob("*.html")):
             if stale not in kept:
                 stale.unlink()
@@ -1907,15 +2090,18 @@ def main(argv: Sequence[str] | None = None) -> int:
             "referenced titles agree across renderers, cards and references"
         )
         return 0
+    from devtools.render_contributors import contributor_pages  # noqa: PLC0415
+
     output = args.output.resolve()
     pages = render_all()
     fragments = result_fragments()
     records = case_records()
+    contributors = contributor_pages()
     forwarders = forwarder_pages()
     if args.check:
         stale = [
             p.name
-            for p in (*pages, *fragments, *records, *forwarders)
+            for p in (*pages, *fragments, *records, *contributors, *forwarders)
             if not (output / p.name).is_file()
             or (output / p.name).read_text(encoding="utf-8") != p.html
         ]
@@ -1932,17 +2118,23 @@ def main(argv: Sequence[str] | None = None) -> int:
             if not (output / name).is_file()
             or (output / name).read_text(encoding="utf-8") != text
         ]
-        written = {p.name for p in (*pages, *fragments, *records, *forwarders)} | set(crawl)
+        written = {
+            p.name for p in (*pages, *fragments, *records, *contributors, *forwarders)
+        } | set(crawl)
         stale += [
             path.relative_to(output).as_posix()
-            for directory in (RESULT_FRAGMENTS, CASES_DIR)
+            for directory in (RESULT_FRAGMENTS, CASES_DIR, PROFILES_DIR, LEGACY_PROFILES_DIR)
             for path in sorted((output / directory).glob("*.html"))
             if path.relative_to(output).as_posix() not in written
         ]
         from devtools import site_assets  # noqa: PLC0415
 
         stale += site_assets.stale_assets(
-            output, {**asset_files([*pages, *fragments, *records, *forwarders]), **crawl_assets}
+            output,
+            {
+                **asset_files([*pages, *fragments, *records, *contributors, *forwarders]),
+                **crawl_assets,
+            },
         )
         stale += [
             name
@@ -1954,15 +2146,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
         print(
             f"{len(pages)} pages, {len(fragments)} result overviews, {len(records)} case "
-            f"records and {len(forwarders)} forwarders match a fresh render"
+            f"records, {len(contributors)} profile pages and {len(forwarders)} forwarders "
+            "match a fresh render"
         )
         return 0
-    write_site(output, [*pages, *fragments, *records, *forwarders])
+    write_site(output, [*pages, *fragments, *records, *contributors, *forwarders])
     for page in pages:
         print(f"wrote {output / page.name} ({len(page.html) // 1024} KB)")
     for forwarder in forwarders:
         print(f"wrote {output / forwarder.name}, a forwarder")
-    shared = asset_files([*pages, *fragments, *records, *forwarders])
+    shared = asset_files([*pages, *fragments, *records, *contributors, *forwarders])
     print(
         f"wrote {len(shared)} shared assets under {output / 'assets'}/ "
         f"({sum(len(data) for data in shared.values()) // 1024} KB in all)"

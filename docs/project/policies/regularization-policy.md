@@ -10,8 +10,8 @@ It says what a regularized view must satisfy, what the automated pass decides by
 what a reviewer decides, and how each decision is recorded and credited.
 
 Neighbouring documents own the rest.
-[`epistemics.md`](../../../epistemics.md#parallel-projects-and-their-credit) owns credit
-and the rungs; the
+[`attribution.md`](../../../attribution.md#credit-text-and-lineage) owns credit and
+[`epistemics.md`](../../../epistemics.md#no-blind-trust) the rungs; the
 [atlas README](../../../packing/atlas/known-best/README.md#the-regularized-views)
 describes the layer and how to rebuild it;
 [`development.md`](../../../development.md#the-deep-gate-the-deferred-surface-before-the-merge)

@@ -85,18 +85,18 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # completed zmx2 replay of the s(77) mixed cover (T-067) proved n = 77 and, by its
     # total below 78, n = 78; both were reported-proved and neither Nagamochi-bounded,
     # so formal-open falls by two in every corpus. The replayed s(76) >= 447/50 (T-072)
-    # leaves n = 76 open. 2026-10-02, the merged replay of wand125's n = 50 mixed
+    # leaves n = 76 open. 2026-10-02, the merged replay of Hosono's n = 50 mixed
     # certificate (T-048) took n = 50 and, by its mass, n = 51 off Nagamochi's bound;
     # both stay open in both lanes, so only the Nagamochi-bounded count falls by two. The
     # same day the replayed mixed certificates of T-069 and T-071 took n = 37, 65, 66, 84,
     # 85, 87, 90 and 92 off it, eight more, all open in both lanes; n = 86 moved too, from
-    # a rectangle certificate. Then the merged replays of wand125's rectangle
+    # a rectangle certificate. Then the merged replays of Hosono's rectangle
     # certificates of 1 October (T-074) took n = 57, 58, 88, 89, 93 and 94 off it, six
     # more, all open in both lanes. 2026-10-03: the full replay of Valid7 and the built
     # Lean reduction proved T-064's s(k^2 - 3) = k, closing n = 97, 118, 141, 166, 193,
     # 222, 253, 286 and 321; all were reported-proved and Nagamochi-bounded, so the
     # formal-open and Nagamochi-bounded counts fall together, by one, five and nine. The
-    # same day the replays of wand125's six afternoon mixed certificates (T-075) took
+    # same day the replays of Hosono's six afternoon mixed certificates (T-075) took
     # n = 83, 91 and 96 off Nagamochi's bound, all open in both lanes, so only the
     # Nagamochi-bounded count falls, by three in every corpus. Then the n = 101 linear
     # certificate's replay of 2 October, recorded as T-080, took n = 101 to 105 off it,
@@ -285,6 +285,7 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_homepage.py",
     "tests/test_site_result_popover.py",
     "tests/test_site_case_records.py",
+    "tests/test_site_contributor_popovers.py",
     "tests/test_site_rating_tooltips.py",
     "tests/test_site_math_faces.py",
     "tests/test_site_column_measurement.py",
@@ -325,6 +326,7 @@ _SITE_INPUTS = (
     "packages/workbench/tools/*",
     "packing/tests/probes/*",
     "packing/frontier/*",
+    "packing/contributors/*",
     "packing/atlas/*",
     "packing/witnesses/*",
     "packing/campaign/*",
@@ -333,6 +335,7 @@ _SITE_INPUTS = (
     "packing/pyproject.toml",
     "packing/uv.lock",
     "vendor/kpress/*",
+    "LICENSE",
     "*.md",
 )
 SLOW_TESTS = "slow and not exhaustive_exact"

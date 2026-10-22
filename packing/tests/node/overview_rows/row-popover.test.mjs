@@ -4,7 +4,8 @@
 // event, `:popover-open`) and for focus, so the test reads the script's own part:
 // which presses open a row's popover, where focus goes, and what the row is told. A
 // fourth row's body names a fuller one beside the page, which a stand-in `fetch` serves
-// or refuses.
+// or refuses. Each row also names a person, as a results table's credit cell does, and
+// a test can load `popover.js` and `contributor-popover.js` beside the row's scripts.
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
@@ -15,8 +16,23 @@ const SOURCE = readFileSync(
   "utf8",
 );
 
+const ARTICLE_SOURCE = readFileSync(
+  new URL("../../../devtools/overview/article-loader.js", import.meta.url),
+  "utf8",
+);
+
 const CASE_SOURCE = readFileSync(
   new URL("../../../devtools/overview/case-popover.js", import.meta.url),
+  "utf8",
+);
+
+const POPOVER_SOURCE = readFileSync(
+  new URL("../../../devtools/overview/popover.js", import.meta.url),
+  "utf8",
+);
+
+const CONTRIBUTOR_SOURCE = readFileSync(
+  new URL("../../../devtools/overview/contributor-popover.js", import.meta.url),
   "utf8",
 );
 
@@ -38,8 +54,20 @@ const COMPOUND = /^([a-z][a-z0-9]*)?((?:\[[^\]]+\]|\.[a-z-]+|:popover-open)*)$/;
  * One page's stand-in classes and document, in a context of its own.
  * @param {string} [protocol] how the page was reached; `offline:` is `https:` with no
  *   network, so every fetch is refused
+ * @param {string[]} [scripts] further page scripts, run after the row's own
  */
-function page(protocol = "https:") {
+function page(protocol = "https:", scripts = []) {
+  /** @type {{ shell: StandInElement, article: StandInElement }[]} */
+  const parsedArticles = [];
+  /**
+   * What an article's text parses to beyond its heading, by the text: what a test puts
+   * in a served page that the stand-in's reading of the markup does not.
+   * @type {Map<string, () => StandInElement[]>}
+   */
+  const markup = new Map();
+  /** @type {{ element: StandInElement, options: unknown }[]} every `scrollIntoView` */
+  const scrolled = [];
+
   class StandInElement {
     /**
      * @param {string} tag
@@ -49,7 +77,7 @@ function page(protocol = "https:") {
     constructor(tag, attributes = {}, children = []) {
       this.tag = tag;
       /** @type {Map<string, string>} */
-      this.attributes = new Map(Object.entries(attributes));
+      this.attributeMap = new Map(Object.entries(attributes));
       /** @type {StandInElement[]} */
       this.children = [];
       /** @type {StandInElement | null} */
@@ -65,8 +93,30 @@ function page(protocol = "https:") {
       this.append(...children);
     }
 
+    get attributes() {
+      return Array.from(this.attributeMap, ([name, value]) => ({ name, value }));
+    }
+
+    get isConnected() {
+      return body.contains(this);
+    }
+
+    /** @param {boolean} [deep] @returns {StandInElement} */
+    cloneNode(deep = false) {
+      return new StandInElement(
+        this.tag,
+        Object.fromEntries(this.attributeMap),
+        deep ? this.children.map((child) => child.cloneNode(true)) : [],
+      );
+    }
+
+    /** @param {string} value */
+    set id(value) {
+      this.attributeMap.set("id", value);
+    }
+
     get id() {
-      return this.attributes.get("id") ?? "";
+      return this.attributeMap.get("id") ?? "";
     }
 
     /** @param {StandInElement[]} children */
@@ -98,24 +148,29 @@ function page(protocol = "https:") {
 
     scrollTo() {}
 
+    /** @param {unknown} options read into this realm, as `node:assert` compares them */
+    scrollIntoView(options) {
+      scrolled.push({ element: this, options: JSON.parse(JSON.stringify(options)) });
+    }
+
     /** @param {string} name */
     getAttribute(name) {
-      return this.attributes.get(name) ?? null;
+      return this.attributeMap.get(name) ?? null;
     }
 
     /** @param {string} name @param {string} value */
     setAttribute(name, value) {
-      this.attributes.set(name, value);
+      this.attributeMap.set(name, value);
     }
 
     /** @param {string} name */
     hasAttribute(name) {
-      return this.attributes.has(name);
+      return this.attributeMap.has(name);
     }
 
     /** @param {string} name */
     removeAttribute(name) {
-      this.attributes.delete(name);
+      this.attributeMap.delete(name);
     }
 
     /**
@@ -137,14 +192,20 @@ function page(protocol = "https:") {
             ...(isCase ? { "data-case": "11" } : { "data-result-overview": "t-004" }),
             "data-text": text,
           },
-          heading
-            ? [
-                new StandInElement("h1", { id: heading[1] || "" }),
-                new StandInElement("a", { href: `#${heading[1] || ""}` }),
-              ]
-            : [],
+          [
+            ...(heading
+              ? [
+                  new StandInElement("h1", { id: heading[1] || "" }),
+                  new StandInElement("a", { href: `#${heading[1] || ""}` }),
+                ]
+              : []),
+            ...(markup.get(text)?.() ?? []),
+          ],
         ),
       ]);
+      const article = this.content.querySelector("article");
+      assert.ok(article);
+      parsedArticles.push({ shell: this.content, article });
     }
 
     /** @param {StandInElement | null} fragment whose children become this element's */
@@ -159,6 +220,9 @@ function page(protocol = "https:") {
 
     /** @param {string} selector */
     matches(selector) {
+      if (selector === "*") {
+        return true;
+      }
       return selector.split(",").some((part) => {
         const found = COMPOUND.exec(part.trim());
         assert.ok(found, `the stand-in does not read the selector ${part}`);
@@ -171,7 +235,7 @@ function page(protocol = "https:") {
               return this.open;
             }
             if (condition.startsWith(".")) {
-              return (this.attributes.get("class") ?? "").split(" ").includes(condition.slice(1));
+              return (this.attributeMap.get("class") ?? "").split(" ").includes(condition.slice(1));
             }
             const attribute = /^\[([a-z-]+)(?:([~]?=)"([^"]*)")?\]$/.exec(condition);
             assert.ok(attribute);
@@ -245,6 +309,7 @@ function page(protocol = "https:") {
     }
 
     hidePopover() {
+      fire(this, "beforetoggle", { newState: "closed" });
       this.open = false;
       /** @type {object | null} */
       this.sheet = null;
@@ -268,6 +333,7 @@ function page(protocol = "https:") {
     body,
     head,
     baseURI: "https://example.test/squares/index.html",
+    URL: "https://example.test/squares/index.html",
     /** @type {StandInElement | null} */
     activeElement: body,
     /**
@@ -351,14 +417,20 @@ function page(protocol = "https:") {
     const target = `pop-${key}`;
     const trigger = new StandInElement("button", { class: "site-row-open", popovertarget: target });
     const link = new StandInElement("a", { href: `records/${key}` });
+    const name = new StandInElement("a", { href: "profiles/hiroaki-hosono.html" });
     const text = new StandInElement("td");
     const attributes = { id: key, "data-row-popover": target, ...more };
     const element = new StandInElement("tr", attributes, [
       new StandInElement("td", {}, [trigger]),
       text,
       new StandInElement("td", {}, [link]),
+      new StandInElement("td", {}, [name]),
     ]);
     const close = new StandInElement("button", { class: "site-popover-close" });
+    const title = new StandInElement("p", {
+      class: "site-popover-value",
+      id: `${target}-title`,
+    });
     const detail = new StandInElement("a", { href: `detail/${key}` });
     const held = new StandInElement("template", { "data-row-pop-body": "" });
     held.content = new StandInElement("fragment", {}, [detail]);
@@ -367,14 +439,13 @@ function page(protocol = "https:") {
       { class: "site-row-pop-body", ...(source ? { "data-row-pop-src": source } : {}) },
       [deferred ? held : detail],
     );
-    const title = new StandInElement("p", { class: "site-popover-value", id: `${target}-title` });
     const label = new StandInElement("span", { class: "site-card-label" });
     const popover = new StandInElement(
       "div",
-      { id: target, class: "site-popover", "aria-labelledby": title.id },
+      { id: target, class: "site-popover", popover: "auto", "aria-labelledby": title.id },
       [close, label, title, body],
     );
-    return { element, trigger, link, text, popover, close, body, held, detail };
+    return { element, trigger, link, name, text, popover, close, title, body, held, detail };
   }
 
   const first = row("t-001");
@@ -401,13 +472,45 @@ function page(protocol = "https:") {
   const caseBody = new StandInElement("div", { "data-case-body": "" });
   const caseAction = new StandInElement("a", { "data-case-open": "" });
   const caseClose = new StandInElement("button", { class: "site-popover-close" });
-  const casePopover = new StandInElement("div", { "data-case-popover": "", id: "case-popover" }, [
-    caseBody,
-    caseAction,
-    caseClose,
-  ]);
+  const casePopover = new StandInElement(
+    "div",
+    { "data-case-popover": "", id: "case-popover", class: "site-popover", popover: "auto" },
+    [caseBody, caseAction, caseClose],
+  );
   const caseLink = new StandInElement("a", { "data-case": "11", href: "cases/11.html" });
   body.append(casePopover, caseLink);
+
+  // The shared profile overlay, and a name in a held template beside the table, as a
+  // deferred body holds one.
+  const contributorPopover = new StandInElement(
+    "div",
+    {
+      "data-contributor-popover": "",
+      id: "pop-contributor",
+      class: "site-popover",
+      popover: "auto",
+    },
+    [
+      new StandInElement("button", { class: "site-popover-close" }),
+      new StandInElement("div", { "data-contributor-body": "" }),
+    ],
+  );
+  const heldName = new StandInElement("a", { href: "profiles/walter-stromquist.html" });
+  const downloaded = new StandInElement("a", {
+    href: "profiles/walter-stromquist.html",
+    download: "",
+  });
+  const aside = new StandInElement("template");
+  aside.content = new StandInElement("fragment", {}, [heldName, downloaded]);
+  // Profile addresses the overlay leaves plain: a name in a container that declares its
+  // names plain, as News does, the directory, and a profile on another site.
+  const plainName = new StandInElement("a", { href: "profiles/walter-stromquist.html" });
+  const plain = new StandInElement("div", { "data-contributor-plain": "" }, [plainName]);
+  const directory = new StandInElement("a", { href: "profiles/index.html" });
+  const elsewhere = new StandInElement("a", {
+    href: "https://elsewhere.test/squares/profiles/walter-stromquist.html",
+  });
+  body.append(contributorPopover, aside, plain, directory, elsewhere);
 
   /** What the site serves, by address; an address it lacks is a 404. */
   const served = new Map([
@@ -425,7 +528,8 @@ function page(protocol = "https:") {
   /** @param {string} address */
   const fetch = (address) => {
     requests.push(address);
-    const text = served.get(address);
+    const text =
+      served.get(address) ?? served.get(new URL(address).pathname.replace("/squares/", ""));
     const response =
       protocol === "offline:"
         ? Promise.reject(new TypeError("Failed to fetch"))
@@ -465,11 +569,28 @@ function page(protocol = "https:") {
     HTMLLinkElement: StandInElement,
     ToggleEvent: StandInToggleEvent,
   });
+  vm.runInContext(ARTICLE_SOURCE, context);
   vm.runInContext(SOURCE, context);
   vm.runInContext(CASE_SOURCE, context);
+  for (const script of scripts) {
+    vm.runInContext(script, context);
+  }
   return {
     document,
     fire,
+    /**
+     * @param {string} tag
+     * @param {Record<string, string>} [attributes]
+     * @param {StandInElement[]} [children]
+     */
+    element: (tag, attributes = {}, children = []) => new StandInElement(tag, attributes, children),
+    markup,
+    scrolled,
+    heldName,
+    downloaded,
+    plainName,
+    directory,
+    elsewhere,
     first,
     second,
     orphan,
@@ -482,6 +603,7 @@ function page(protocol = "https:") {
     caseLink,
     casePopover,
     requests,
+    parsedArticles,
     typeset,
     settled,
   };
@@ -640,7 +762,7 @@ void test("a body that names a fuller one is replaced by it when the popover fir
   assert.deepEqual(fetched.body.children, [fetched.detail]);
   assert.ok(fetched.body.hasAttribute("data-row-pop-loading"));
   await settled();
-  assert.deepEqual(requests, ["result/t-004.html"]);
+  assert.deepEqual(requests, ["https://example.test/squares/result/t-004.html"]);
   assert.deepEqual(
     fetched.body.children.map((child) => child.getAttribute("data-text")),
     ["the whole overview of t-004"],
@@ -652,20 +774,20 @@ void test("a body that names a fuller one is replaced by it when the popover fir
   fetched.popover.hidePopover();
   fire(fetched.text, "click");
   await settled();
-  assert.deepEqual(requests, ["result/t-004.html"], "fetched once");
+  assert.deepEqual(requests, ["https://example.test/squares/result/t-004.html"], "fetched once");
 });
 
 void test("a press starts the fetch, and a body that lands before the popover opens waits for popover.js", async () => {
   const { fire, fetched, requests, typeset, settled } = page();
   fire(fetched.text, "pointerdown");
-  assert.deepEqual(requests, ["result/t-004.html"]);
+  assert.deepEqual(requests, ["https://example.test/squares/result/t-004.html"]);
   // The click that follows the press finds the fetch under way and starts no other.
   await settled();
   assert.ok(!fetched.popover.open);
   assert.deepEqual(typeset, [], "a closed popover's math is left to its opening");
   fire(fetched.text, "click");
   await settled();
-  assert.deepEqual(requests, ["result/t-004.html"]);
+  assert.deepEqual(requests, ["https://example.test/squares/result/t-004.html"]);
   assert.equal(fetched.body.children.length, 1);
   assert.equal(fetched.body.children[0]?.getAttribute("class"), "site-result");
 });
@@ -705,7 +827,7 @@ void test("the complete article title replaces outer titles and has a dialog-spe
   assert.ok(heading);
   assert.equal(fetched.popover.querySelector(".site-card-label"), null);
   assert.equal(fetched.popover.querySelector(".site-popover-value"), null);
-  assert.equal(heading.id, "pop-t-004-record-title");
+  assert.match(heading.id, /^site-article-\d+-t-004$/);
   assert.equal(fetched.popover.getAttribute("aria-labelledby"), heading.id);
   assert.equal(document.getElementById(heading.id), heading);
   assert.equal(document.getElementById("t-004"), fetched.element);
@@ -848,4 +970,209 @@ void test("the canonical response address resolves its prepared stylesheet", asy
   fire(link, "load");
   await settled();
   assert.equal(caseBody.children[0]?.getAttribute("class"), "site-case");
+});
+
+void test("a cross-site article response is refused before its stylesheet or markup is used", async () => {
+  const { document, fire, served, caseLink, responseURLs, caseBody, navigation, settled } = page();
+  responseURLs.set(caseLink.href, "https://other.test/cases/11.html");
+  served.set(
+    caseLink.href,
+    '<link data-site-math-styles href="../assets/css/site-math-response.css"><article class="site-case">Case 11</article>',
+  );
+  fire(caseLink, "click");
+  await settled();
+  assert.equal(document.head.children.length, 0);
+  assert.equal(caseBody.children.length, 0);
+  assert.equal(navigation.href, caseLink.href);
+});
+
+void test("consumer mutations do not alter the cached pristine article", async () => {
+  const { fire, fetched, requests, settled } = page();
+  fire(fetched.text, "click");
+  await settled();
+  const first = fetched.body.children[0];
+  assert.ok(first);
+  first.setAttribute("class", "mutated");
+  fetched.popover.hidePopover();
+  fetched.body.setAttribute("data-row-pop-src", "result/t-004.html");
+  fire(fetched.text, "click");
+  await settled();
+  assert.equal(fetched.body.children[0]?.getAttribute("class"), "site-result");
+  assert.notEqual(fetched.body.children[0], first);
+  assert.equal(requests.length, 1);
+});
+
+void test("cached articles detach from response shells and give each clone scoped headings", async () => {
+  const { document, fire, fetched, served, requests, parsedArticles, settled } = page();
+  served.set(
+    "result/t-004.html",
+    '<link data-site-math-styles href="../assets/css/site-math-cache.css"><article class="site-result" data-result-overview="t-004"><h1 id="t-004">Result</h1></article>',
+  );
+  fire(fetched.text, "click");
+  await settled();
+  const cached = parsedArticles[0];
+  assert.ok(cached);
+  assert.equal(cached.article.parentElement, cached.shell, "styles are read before detaching");
+  const stylesheet = document.head.children[0];
+  assert.ok(stylesheet);
+  assert.equal(stylesheet.href, "https://example.test/squares/assets/css/site-math-cache.css");
+  fire(stylesheet, "load");
+  await settled();
+  assert.equal(cached.article.parentElement, null, "the cache retains no response shell");
+  assert.equal(cached.shell.querySelector("article"), null);
+  assert.notEqual(fetched.body.children[0], cached.article);
+  assert.equal(cached.article.querySelector("h1")?.id, "t-004");
+  const title = fetched.body.querySelector("h1");
+  assert.ok(title);
+  assert.ok(!title.hasAttribute("hidden"));
+  assert.match(title.id, /^site-article-\d+-t-004$/);
+  assert.equal(fetched.popover.getAttribute("aria-labelledby"), title.id);
+  // A consumer mutation of one clone cannot hide the next cached article's title.
+  title.setAttribute("hidden", "");
+  fetched.popover.hidePopover();
+  fetched.body.setAttribute("data-row-pop-src", "result/t-004.html");
+  fire(fetched.text, "click");
+  await settled();
+  const freshTitle = fetched.body.querySelector("h1");
+  assert.ok(freshTitle);
+  assert.notEqual(freshTitle, title);
+  assert.notEqual(freshTitle.id, title.id);
+  assert.ok(!freshTitle.hasAttribute("hidden"));
+  assert.equal(fetched.popover.getAttribute("aria-labelledby"), freshTitle.id);
+  assert.equal(requests.length, 1);
+  assert.equal(parsedArticles.length, 1);
+});
+
+void test("a press on the row's own link or a name in it fetches nothing; the row's press does", async () => {
+  const { fire, fetched, requests, settled } = page();
+  // A results table names people in its credit cells; pressing one opens their
+  // profile, so fetching the result's whole page beside it would be waste.
+  fire(fetched.name, "pointerdown");
+  fire(fetched.link, "pointerdown");
+  // Nor does a press the click will leave alone, with a modifier or another button.
+  fire(fetched.text, "pointerdown", { metaKey: true });
+  fire(fetched.text, "pointerdown", { button: 2 });
+  await settled();
+  assert.deepEqual(requests, []);
+  assert.ok(!fetched.body.hasAttribute("data-row-pop-loading"));
+  // The trigger is the row's own control, so a press on it starts the fetch.
+  fire(fetched.trigger, "pointerdown");
+  await settled();
+  assert.deepEqual(requests, ["https://example.test/squares/result/t-004.html"]);
+});
+
+void test("a loaded article keeps no script, handler, srcdoc or javascript: address", async () => {
+  const { fire, fetched, served, markup, element, settled } = page();
+  served.set("result/t-004.html", "hostile");
+  markup.set("hostile", () => [
+    element("script", {}, [element("p")]),
+    element("img", { src: "figure.svg", onerror: "alert(1)", ONLOAD: "alert(2)" }),
+    element("iframe", { srcdoc: "<p onclick=alert(3)>" }),
+    element("a", { href: " JavaScript:alert(4)", onclick: "alert(5)" }),
+    element("a", { "xlink:href": "java\tscript:alert(6)" }),
+    element("form", { action: "javascript:alert(7)" }, [
+      element("button", { formaction: "javascript:alert(8)" }),
+    ]),
+    element("a", { href: "../cases/11.html", onmouseover: "alert(9)" }),
+  ]);
+  fire(fetched.text, "click");
+  await settled();
+  const article = fetched.body.children[0];
+  assert.ok(article);
+  assert.equal(article.getAttribute("class"), "site-result");
+  assert.equal(article.querySelectorAll("script").length, 0);
+  for (const node of [article, ...article.querySelectorAll("*")]) {
+    for (const { name, value } of node.attributes) {
+      assert.ok(!/^on/i.test(name), `<${node.tag}> keeps ${name}`);
+      assert.notEqual(name, "srcdoc");
+      assert.ok(!/script:/i.test(value.replace(/\s/g, "")), `<${node.tag} ${name}="${value}">`);
+    }
+  }
+  // What is not code stays, resolved against the response as before.
+  assert.equal(
+    article.querySelector("img")?.getAttribute("src"),
+    "https://example.test/squares/result/figure.svg",
+  );
+  assert.deepEqual(
+    article.querySelectorAll("a").map((link) => link.getAttribute("href")),
+    [null, null, "https://example.test/squares/cases/11.html"],
+  );
+  assert.ok(article.querySelector("iframe"));
+  assert.ok(article.querySelector("button"));
+});
+
+void test("a link to a place in the open panel scrolls there and leaves the address alone", async () => {
+  const { document, fire, fetched, served, scrolled, settled } = page("https:", [POPOVER_SOURCE]);
+  served.set(
+    "result/t-004.html",
+    '<article class="site-result"><h1 id="t-004">T-004: Result</h1><a href="#t-004">Title</a></article>',
+  );
+  fire(fetched.text, "click");
+  await settled();
+  const heading = fetched.body.querySelector("h1");
+  const local = fetched.body.querySelector("a");
+  assert.ok(heading && local);
+  assert.equal(local.getAttribute("href"), `#${heading.id}`);
+  assert.equal(document.getElementById(heading.id), heading);
+  // The scoped ID is this load's alone: following it natively would write it into the
+  // address and push a history entry, so the click's default is cancelled.
+  assert.ok(fire(local, "click"), "the fragment navigation is prevented");
+  assert.ok(fetched.popover.open, "the panel stays open");
+  assert.deepEqual(scrolled, [{ element: heading, options: { block: "nearest" } }]);
+});
+
+void test("a link out of a panel still closes it and follows, and a modified click is left alone", async () => {
+  const { fire, first, scrolled } = page("https:", [POPOVER_SOURCE]);
+  fire(first.text, "click");
+  assert.ok(first.popover.open);
+  assert.ok(!fire(first.detail, "click", { metaKey: true }));
+  assert.ok(first.popover.open, "a modified click opens elsewhere and keeps the panel");
+  assert.ok(!fire(first.detail, "click"), "the link's own navigation is left alone");
+  assert.ok(!first.popover.open);
+  assert.deepEqual(scrolled, []);
+});
+
+void test("each name link the profile overlay enhances says it opens a dialog", async () => {
+  const {
+    fire,
+    first,
+    second,
+    fetched,
+    served,
+    markup,
+    element,
+    heldName,
+    downloaded,
+    plainName,
+    directory,
+    elsewhere,
+    settled,
+  } = page("https:", [CONTRIBUTOR_SOURCE]);
+  // A name is known by its address alone: no page marks it.
+  for (const name of [first.name, second.name, fetched.name, heldName]) {
+    assert.equal(name.getAttribute("aria-haspopup"), "dialog");
+  }
+  // A link that downloads is not enhanced, so it is not announced as opening one.
+  assert.equal(downloaded.getAttribute("aria-haspopup"), null);
+  // Nor is any link that was not a name, a name its container keeps plain, the
+  // directory, or a profile address on another site.
+  for (const link of [first.link, plainName, directory, elsewhere]) {
+    assert.equal(link.getAttribute("aria-haspopup"), null);
+  }
+  // A name in an article the loader clones later is announced as it lands.
+  served.set("result/t-004.html", "credited");
+  markup.set("credited", () => [element("a", { href: "../profiles/evan-daniel.html" })]);
+  fire(fetched.text, "click");
+  await settled();
+  const landed = fetched.body.querySelector("a");
+  assert.equal(
+    landed?.getAttribute("href"),
+    "https://example.test/squares/profiles/evan-daniel.html",
+  );
+  assert.equal(landed?.getAttribute("aria-haspopup"), "dialog");
+});
+
+void test("a page read from a file announces no dialog, since it cannot fetch one", () => {
+  const { first } = page("file:", [CONTRIBUTOR_SOURCE]);
+  assert.equal(first.name.getAttribute("aria-haspopup"), null);
 });

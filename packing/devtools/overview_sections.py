@@ -30,6 +30,8 @@ from xml.etree import ElementTree as ET
 from devtools import repo_links
 from devtools.artifact_dates import long_date, written_date
 from devtools.check_results import KINDS, kind_label
+from devtools.contributor_credit import occurrence_registry
+from devtools.github_references import parse_github_reference
 from devtools.overview_data import (
     APOSTROPHE,
     BIBLIOGRAPHY,
@@ -42,6 +44,11 @@ from devtools.overview_data import (
     prose_html,
     tex_bounds,
 )
+from devtools.overview_data import (
+    load as load_overview,
+)
+from devtools.profile_links import link_prose, public_index
+from devtools.record_presentation import record_tally
 from devtools.render_overview import (
     DOCUMENT_PAGES,
     N11_LOWER_BOUNDS_EXPLAINER,
@@ -56,6 +63,29 @@ from devtools.render_overview import PAPERS as PAPER_RECORDS
 from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, superseded
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES, recent_contributions_by_case
+from devtools.site_icons import account_icon, github_reference_icon
+
+# The curated source tuples remain exported here for recorded evidence locators;
+# site_resources owns their shared homepage/profile projection.
+from devtools.site_resources import (
+    CATALOGUE_SITES,
+    KINGBIRD,
+    OTHER_PROJECTS,
+    OTHER_SITES,
+    Resource,
+    profile_ids_for_byline,
+    resources,
+)
+from devtools.site_tallies import (
+    ResultTally as ProjectTally,
+)
+from devtools.site_tallies import (
+    project_credit_associations,
+    project_primary_results,
+    render_tally,
+    tally_credits,
+    tally_results,
+)
 from devtools.site_topics import topic_chip, topic_label
 from sqpack import release
 from sqpack.known_best import PackingSegment, grid_transitions
@@ -257,6 +287,7 @@ SECTION_CARD_SIZES: dict[str, CardSize] = {
     "pages": "medium",
     "atlas": "medium",
     "projects": "medium",
+    "profiles": "medium",
     "documents": "small",
 }
 
@@ -481,9 +512,10 @@ class RowDetail(NamedTuple):
     the row's accessible name. It carries no `tabindex`: `overview/row-popover.js` makes
     the row focusable, so a row is never a stop that does nothing."""
     trigger: str
-    """The row's one native trigger, a `<button popovertarget>` around the row's own key:
-    without scripts it is what opens the popover; with them the whole row does, and the
-    button leaves the tab order so each row is one stop."""
+    """The native entry around the row's key: a generic `<button popovertarget>` or a
+    result's ordinary link to its complete page. Enhancement makes the row focusable
+    and removes native popover buttons from the tab order; result links remain links.
+    """
     popover: str
     """The panel: a card's popover in every way (`.site-popover`: the close cross, the caps
     label, the headline, Escape and a click outside), with the row's body and an optional
@@ -576,8 +608,8 @@ def _detail(result: Result) -> str:
     result fragment retains composition and next-rung details (`result_overview.head`).
     """
     record = result.record
-    rows = [("Claim", prose_html(record["claim"]))]
-    rows.append(("Significance", prose_html(record["significance"]["rationale"])))
+    rows = [("Claim", link_prose(prose_html(record["claim"])))]
+    rows.append(("Significance", link_prose(prose_html(record["significance"]["rationale"]))))
     meaning = novelty_labels().get(result.novelty, "")
     rows.append(
         (
@@ -640,8 +672,10 @@ RESULT_FRAGMENTS = "result"
 
 
 def result_fragment(result_id: str) -> str:
-    """The address of a result's overview, from a page at the site's root. Its links
-    are written from the root too, so only a page there may place it."""
+    """The complete result page's address from the site root.
+
+    Its article's relative links are rebased against the response URL when fetched.
+    """
     return f"{RESULT_FRAGMENTS}/{result_id.lower()}.html"
 
 
@@ -669,22 +703,21 @@ def new_result_label(result: Result, overview: Overview) -> str:
 
 def result_row(result: Result, *, trigger: str, starred: bool = False) -> RowDetail:
     """A result's row popover, the same on both tables of results: its id as the caps
-    label, its summary as the headline, then the result's short detail (`_detail`),
-    which the script replaces with the whole overview, fetched from `result_fragment`
-    when the popover first opens. It has no button: the row pressed is the result's
-    row, in either table, and a button from one table to the same row of the other
-    leads nowhere new. A recent row's name ends ", new result", its accessible
-    recency label."""
+    label, its summary as the headline, then a short pointer to the complete record.
+    The script replaces that short body with the record's article, fetched from
+    `result_fragment` when the popover first opens. Its Open Result Record action
+    always reaches the complete page; the result ID is an ordinary link too.
+    A recent row's name ends ", new result", its accessible recency label."""
     name = f"{result.id}: {plain_text(result.summary)}"
+    # The persistent action also serves the short body's native fallback, including
+    # after a failed fetch. A second identical link adds bytes to every table row.
     detail = row_detail(
         f"pop-result-{result.id.lower()}",
         name=f"{name}, {NEW_RESULT}" if starred else name,
         trigger=trigger,
         label=result.id,
-        title=tex_bounds(result.summary),
-        body=(
-            f'<p><a href="{result_fragment(result.id)}">Read the complete result record</a></p>'
-        ),
+        title=link_prose(tex_bounds(result.summary)),
+        body="<p>Full record</p>",
         source=result_fragment(result.id),
         action=(result_fragment(result.id), "Open Result Record"),
     )
@@ -849,7 +882,7 @@ def result_filters(
     Added since, which holds it to that day or later (`since`). Each is `hidden` in the
     HTML and starts at all. A link sets them, `results.html?project=…&s=4`, as the
     tallies on the other projects' cards do (`project_tally`), each day of the
-    overview's seven does (`?added=2026-10-12`) and its heading does
+    overview's seven does (`?added=2026-10-12`) and its arrival link does
     (`?added-since=2026-10-06`, `recent_added`), and the script shows a preset control
     while it filters, so the reader sees what narrows the table and can set it back to
     All. A preset value no option offers is kept and applied, so it shows no row.
@@ -987,14 +1020,14 @@ def result_text(result: Result) -> str:
     return f'<a href="{result_fragment(result.id)}">{tex_bounds(result.summary)}</a>'
 
 
-def credit_cell(credit: str) -> str:
+def credit_cell(credit: str, markup: str = "") -> str:
     """A credit as its cell sets it, whatever the register's credit line says: the
     finder first, and "after …", the work it builds on, quiet after it, in full. So a
     row says whose the result is and what it rests on without a heading over it."""
-    finder, _, after = credit.partition(" after ")
+    finder, _, after = (markup or _esc(credit)).partition(" after ")
     if not after:
-        return _esc(finder)
-    return f'{_esc(finder)} <span class="site-cell-quiet">after {_esc(after)}</span>'
+        return finder
+    return f'{finder} <span class="site-cell-quiet">after {after}</span>'
 
 
 def date_cell(result: Result, *, recent_label: str = "") -> str:
@@ -1037,7 +1070,7 @@ def result_cells(
         f'<td class="{case_cell_class(result)}" data-value="{result.first_n}">'
         f"{case_list(result)}</td>"
         f'<td class="site-col-credit" data-value="{_esc(result.credit)}">'
-        f"{credit_cell(result.credit)}</td>"
+        f"{credit_cell(result.credit, result.credit_html)}</td>"
         f'<td class="site-rungs" '
         f'data-value="{_esc(record["confirmation"] + record["verification"])}">'
         f'{ladder_chips(result)}<span class="site-kind">{kind_chip(result)}</span></td>'
@@ -1173,7 +1206,7 @@ def results_table(overview: Overview, defaults: FilterDefaults = RESULTS_DEFAULT
 #: How far back "Added in the Last Seven Days" reaches: every result that reached the
 #: site at most this many days before the newest arrival (`added_since`), which is what
 #: `results.html?added-age=7` shows when read on that day (`age_cutoff`), and what the
-#: heading's `?added-since=` shows on any day.
+#: arrival link's `?added-since=` shows on any day.
 ADDED_DAYS = 7
 #: The count of days as the section's heading and introduction write it.
 ADDED_DAYS_WORD = {7: "seven"}
@@ -1182,7 +1215,7 @@ ADDED_OPEN = 2
 #: The longest list of cases an entry writes whole (`added_cases`). A longer one, T-124's
 #: 178 counts among them, is written as how many and its first and last.
 ADDED_CASES = 40
-#: The id of the table's heading, `# All Results`, where a filter link lands.
+#: The id of the table's Browse Results heading, where a filter link lands.
 ALL_RESULTS = "all-results"
 #: The lowest significance the weekly rollup lists: `S3`, "a substantive case result
 #: or machine audit" (epistemics.md, Significance and Novelty), and above. The owner
@@ -1275,7 +1308,7 @@ def added_reference(overview: Overview) -> date:
 def added_since(overview: Overview, days: int = ADDED_DAYS) -> date:
     """The first day "Added in the Last Seven Days" covers: `days` before the newest
     arrival (`added_reference`), the cutoff `?added-age=7` holds a row to when read on
-    that day (`age_cutoff`) and the day the heading's `?added-since=` names."""
+    that day (`age_cutoff`) and the day the arrival link's `?added-since=` names."""
     return added_reference(overview) - timedelta(days=days)
 
 
@@ -1403,12 +1436,24 @@ def external_link(url: str, text: str) -> str:
     return f'<a href="{_esc(url)}" target="_blank" rel="noopener noreferrer">{text}</a>'
 
 
-def credit_link(finder: str, projects: Sequence[str]) -> str:
-    """A credit as both parts of the overview name it: the finder's name as the
-    register's credit line gives it, linked to the first of `projects`
-    (`finder_projects`), the address its card on the overview opens. A finder whose
-    results no listed project holds, this project's own among them, is named plainly.
-    Where a contributor's own page exists, this is the one place to link it instead."""
+def credit_link(finder: str, projects: Sequence[str], *, results: Sequence[Result] = ()) -> str:
+    """Prefer the reviewed finder joins, otherwise an exact identity or cited project."""
+    if results:
+        reviewed = {
+            credit_finder(result.credit_html or _esc(result.credit)) for result in results
+        }
+        # Identical words do not authorize choosing between different reviewed joins.
+        if len(reviewed) != 1:
+            return _esc(finder)
+        linked = next(iter(reviewed))
+        if '<a href="profiles/' in linked:
+            return f"<span data-contributor-plain>{linked}</span>"
+        # A source-addressed unresolved credit stays unresolved in its summary too.
+        name = _esc(finder)
+        return external_link(projects[0], name) if projects else name
+    linked = project_author(finder).removeprefix("By ")
+    if '<a href="profiles/' in linked:
+        return f"<span data-contributor-plain>{linked}</span>"
     name = _esc(finder)
     return external_link(projects[0], name) if projects else name
 
@@ -1416,7 +1461,8 @@ def credit_link(finder: str, projects: Sequence[str]) -> str:
 def rollup_who(credit: RollupCredit) -> str:
     """A line's credit (`credit_link`), linked to the project holding most of its
     results, in the medium weight that opens the line."""
-    return f'<span class="site-rollup-who">{credit_link(credit.finder, credit.projects)}</span>'
+    linked = credit_link(credit.finder, credit.projects, results=credit.results)
+    return f'<span class="site-rollup-who">{linked}</span>'
 
 
 #: What a muted id in the weekly lines says to a screen reader, which the grey cannot.
@@ -1521,9 +1567,11 @@ def added_entry(result: Result) -> str:
     superseded = is_superseded(result)
     mark = ' class="site-rollup-superseded"' if superseded else ""
     title = ' title="Superseded"' if superseded else ""
-    headline = html.escape(plain_text(result.summary), quote=False)
+    headline = link_prose(html.escape(plain_text(result.summary), quote=False))
     rungs = f"{_esc(record['verification'])} {_esc(record['confirmation'])} {score}"
-    who = credit_link(credit_finder(result.credit), finder_projects((result,)))
+    who = credit_link(
+        credit_finder(result.credit), finder_projects((result,)), results=(result,)
+    )
     note = " · superseded" if superseded else ""
     return (
         f'<li{mark}><a href="#{_esc(result.id.lower())}"{title}>{_esc(result.id)}</a> '
@@ -1940,6 +1988,10 @@ def document_cards() -> str:
     )
 
 
+#: The canonical profile directory, retained for link and route consumers.
+PROFILES_DIRECTORY = "profiles/index.html"
+
+
 def documentation_block() -> str:
     """The shared repository introduction and reader-document cards on Home and About."""
     lead = (
@@ -1979,7 +2031,7 @@ PAPER_DESCRIPTIONS: dict[str, str] = {
         "reoptimized certificate over 12,028 angle rows."
     ),
     N11_OPTIMALITY_REVIEW: (
-        "Explains Mannaseh Ahmed\u2019s proof that Trump\u2019s packing is optimal, "
+        "Explains Manasseh Ahmed\u2019s proof that Trump\u2019s packing is optimal, "
         "s(11) = 3.8770835\u2026 (T-060): construction, case exclusions, capture and "
         "local isolation."
     ),
@@ -2172,390 +2224,6 @@ def hero() -> str:
     )
 
 
-#: The other public square-packing projects on GitHub that the research frontier cites:
-#: each repository's home, its author as the record credits them (the GitHub handle
-#: where the record names no one), and what it holds. A test holds this list to cover
-#: every source repository in the source-coverage register.
-OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
-    (
-        "https://github.com/SidG2k1/square-packing-refinements",
-        "Siddharth Gupta",
-        (
-            "Seventeen rational refinements of Nate Chaoweeraprasit's SQUISH packings, "
-            "using Evan Daniel's optimizer; fourteen finite upper-bound improvements selected "
-            "here (T-127) and three withdrawn. Exact feasibility is confirmed with "
-            "independently re-implemented code; optimality is not established."
-        ),
-    ),
-    (
-        "https://github.com/ry-xu/square_packing",
-        "Ryan Xu",
-        (
-            "Complete rational packings and an undilated radical n = 51 construction; "
-            "finite feasibility is confirmed here (T-125, T-126)."
-        ),
-    ),
-    (
-        "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/square_packing_records.json",
-        "Ryan Xu",
-        "The complete source report retained for the rational packing comparisons.",
-    ),
-    (
-        "https://github.com/wand125/square-packing",
-        "wand125",
-        "Canonical certificate and checker repository; historical source pins remain valid.",
-    ),
-    (
-        "https://github.com/lollipoll/couzo-five-exact-certificates",
-        "Seth Rehwaldt",
-        (
-            "Rational refinements of Couzo's packings; complete finite certificates at "
-            "n = 105 and 292 are replayed here (T-117)."
-        ),
-    ),
-    (
-        "https://github.com/lollipoll/certified-square-packing-68",
-        "Seth Rehwaldt",
-        (
-            "An exact finite rational refinement of Couzo's n = 68 packing, replayed "
-            "here (T-118). Its analytic root and dual programs remain outside that replay."
-        ),
-    ),
-    (
-        "https://github.com/evand/square-packing",
-        "Evan Daniel",
-        (
-            "Exact covers settling n = 21, 32, 45 and 60, and s(k\u00b2 \u2212 3) = k for every"
-            " k \u2265 6; s(k\u00b2 \u2212 4) = k awaits its replay here."
-        ),
-    ),
-    (
-        "https://github.com/squarepacker/s12-lower-bound",
-        "Ryu Sungjoon",
-        (
-            "Evan Daniel's s(12) points rescaled and then re-weighted, the lower bound"
-            " s(12) \u2265 7943/2000 for twelve squares."
-        ),
-    ),
-    (
-        "https://github.com/wand125/square-packing-bounds",
-        "wand125",
-        "Weighted point and rectangle-density lower-bound certificates across many n.",
-    ),
-    (
-        "https://github.com/wand125/valid7-independent-check",
-        "wand125",
-        "A second, independent exact checker of Valid7, the finite step of s(k² \u2212 3) = k.",
-    ),
-    (
-        "https://github.com/tokoharu/square-packing-density-bounds",
-        "Tokoharu",
-        "Rectangle-density lower-bound certificates.",
-    ),
-    (
-        "https://github.com/franciscouzo/square-packing",
-        "Francisco Couzo",
-        (
-            "Improved packings for 49 counts from n = 68 to 307. "
-            "Exact rational certificates at 204 and 260 (T-223), replayed and reviewed "
-            "here, are the house best packings there; the earlier refinements of issue451 "
-            "(T-128) and their follow-up (T-130), replayed here, have since been superseded."
-        ),
-    ),
-    (
-        "https://github.com/itsnaka/squish-certs",
-        "Nate Chaoweeraprasit",
-        "Exact rational certificates for SQUISH upper-bound packings.",
-    ),
-    (
-        "https://github.com/TheSnakeFang/squarepack-certs",
-        "Kevin Fang",
-        (
-            "Two-wedge packings of 308, 343 and 344 squares with exact certificates; the"
-            " 308, below the grid, is replayed here (T-135)."
-        ),
-    ),
-    (
-        "https://github.com/ebdeleeuw/square-packing-n70",
-        "Eric Deleeuw",
-        "An exact rational refinement of Ryan Xu's packing of 70 squares (T-137).",
-    ),
-    (
-        "https://github.com/Mishapolk/square-packing-records",
-        "Mishapolk",
-        (
-            "Decimal packings at 48 counts; exact witnesses derived here prove the printed"
-            " sides at the 30 within the corpus (T-138)."
-        ),
-    ),
-    (
-        "https://github.com/BuddenPing/square-packing-certificates",
-        "PingYou Ltd",
-        (
-            "Exact rational packings of 207 and 153 squares built from Ryan Xu's packing of"
-            " 70, both replayed here (T-147, T-148)."
-        ),
-    ),
-    (
-        "https://github.com/dostashev/square-packing",
-        "Daniil Ostashev",
-        (
-            "New packings of 155, 156, 175, 211, 232 and 264 squares with exact"
-            " certificates and a GMP checker; all six are replayed here (T-149, T-158)."
-        ),
-    ),
-    (
-        "https://github.com/riocalle/my-repo",
-        "Rio Calle",
-        (
-            "A decimal layout of 102 squares, another arrangement of Ryan Xu's design;"
-            " certified here from the layout (T-159)."
-        ),
-    ),
-    (
-        "https://github.com/BuddenPing/squares",
-        "PingYou Ltd",
-        (
-            "Pull request #574's tighter certificates of others' packings, recorded at 68"
-            " counts and replayed at every one of them here (T-174)."
-        ),
-    ),
-    (
-        "https://github.com/bengreff/s76-certificate",
-        "Benjamin Greff",
-        (
-            "A mixed cover of points and grid-line segments for s(76) = 9, with the run"
-            " records of both checkers; reported, its census replayed in triage (T-184)."
-        ),
-    ),
-    (
-        "https://github.com/bengreff/s95-certificate",
-        "Benjamin Greff",
-        (
-            "A mixed cover of points and grid-line segments for s(95) = 10, with the run"
-            " records of both checkers; reported, both checkers replayed in triage (T-191)."
-        ),
-    ),
-    (
-        "https://github.com/RobertBarnettProjects/square-packing-research",
-        "Robert Barnett",
-        (
-            "Exact rational refinements of Ryan Xu's packings of 146 and 261 squares,"
-            " replayed here (T-150)."
-        ),
-    ),
-    (
-        "https://github.com/griffcass/square-packing",
-        "Griffin Casson",
-        "Improved packings for n = 103, 105 and other cases.",
-    ),
-    (
-        "https://github.com/JoostdeWinter/square-packing-211",
-        "Joost de Winter",
-        "A packing of 211 squares in a square of side under 15.",
-    ),
-    (
-        "https://github.com/JoostdeWinter/square-packing",
-        "Joost de Winter",
-        (
-            "Exact rational certificates for 227, 229 and 260 squares, replayed and"
-            " reviewed here (T-196); the house best packing at 227 until T-225 replaced it"
-            " on 22 October, and at 260 until T-223 replaced it on 21 October."
-        ),
-    ),
-    (
-        "https://github.com/JoostdeWinter/joostdewinter.github.io",
-        "Joost de Winter",
-        (
-            "Nineteen exact rational certificates beyond 324 squares, at 464 and from 509"
-            " to 1568 below the integer grid (#666); the eleven at or below 1024 are"
-            " replayed here as dated rows beyond the case corpus."
-        ),
-    ),
-    (
-        "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
-        "Mannaseh Ahmed",
-        "A computer-assisted proof that Trump's packing of eleven squares is optimal.",
-    ),
-    (
-        "https://github.com/Queuingtheorydotcom/11SquaresFormalized",
-        "Mannaseh Ahmed et al.",
-        "A Lean 4 formalization of that proof, trusting Lean's compiler for its certificates.",
-    ),
-    (
-        "https://github.com/Kleddamag/11-squares-certified-bound",
-        "Marc Leonard Overbeck",
-        "A certified lower bound for eleven squares.",
-    ),
-    (
-        "https://github.com/Kleddamag/17-squares-certified-bound",
-        "Marc Leonard Overbeck",
-        "Certified lower bounds for seventeen squares.",
-    ),
-    (
-        "https://github.com/Kleddamag/the-seventeenth-square-candidate",
-        "Marc Leonard Overbeck",
-        "A candidate proof that Bidwell's packing of seventeen squares is optimal.",
-    ),
-    (
-        "https://github.com/ofitzharding/sq17-lean",
-        "Oscar Fitzharding",
-        (
-            "A Lean 4 proof that Bidwell's packing of seventeen squares is optimal, "
-            "trusting Lean's compiler for its certificates."
-        ),
-    ),
-    (
-        "https://github.com/ofitzharding/sq19",
-        "Oscar Fitzharding",
-        (
-            "A Lean 4 proof that Wainwright's packing of nineteen squares is optimal, "
-            "trusting Lean's compiler for its certificates."
-        ),
-    ),
-    (
-        "https://github.com/Guzhou0806/n17-square-packing",
-        "Guzhou0806",
-        "Strict lower bounds for seventeen squares.",
-    ),
-    (
-        "https://github.com/Guzhou0806/n40-square-packing",
-        "Guzhou0806",
-        "Strict lower bounds for forty squares, on densities grown from wand125's.",
-    ),
-    (
-        "https://github.com/DRMacIver/square-packing-research",
-        "David R. MacIver",
-        "A lower bound for seventeen squares, with its paper and a Lean check.",
-    ),
-    (
-        "https://github.com/ahyangyi/17squares",
-        "ahyangyi",
-        "A lower-bound proof for seventeen squares.",
-    ),
-    (
-        "https://github.com/anabologyco-maker/square17-lower-bound",
-        "anabologyco-maker",
-        "A weighted fractional lower bound for seventeen squares.",
-    ),
-    (
-        "https://github.com/BalthasarStrauss/Squares-packing_S-29-_New-Record",
-        "Thomas Schadt",
-        "A record packing of 29 squares.",
-    ),
-)
-
-#: David Ellsworth's Squares in Squares catalogue, the record's `[Kingbird]`.
-KINGBIRD = "https://kingbird.myphotos.cc/packing/squares_in_squares.html"
-
-#: The catalogues of the record packings, which lead the Other Square Packing
-#: Projects section in this order, ahead of the ranked cards (the owner, 2026-10-05,
-#: `think-lvhh`): each one's address, its name, its maintainer as the record credits
-#: them, and what it holds. Ellsworth's catalogue is the baseline of every upper bound
-#: (`kingbird-current` in the source-coverage register). Erich Friedman's original page
-#: is the one the catalogue's header credits, at the archived address that header links
-#: (`resources/web/kingbird-squares-in-squares.md`). Evan Daniel's atlas is the
-#: bibliography's `[evand square packing atlas 2026-10-04]`.
-CATALOGUE_SITES: tuple[tuple[str, str, str, str], ...] = (
-    (
-        KINGBIRD,
-        "Squares in Squares",
-        "David Ellsworth after Erich Friedman",
-        (
-            "The catalogue of record packings, with their exact sides and histories: the"
-            " baseline of every upper bound here."
-        ),
-    ),
-    (
-        "https://web.archive.org/web/20230530194618/https://erich-friedman.github.io/packing/squinsqu/",
-        "Erich\u2019s Packing Center",
-        "Erich Friedman",
-        (
-            "The original Squares in Squares page, as archived on 30 May 2023, which"
-            " Ellsworth\u2019s catalogue continues."
-        ),
-    ),
-    (
-        "https://evand.github.io/square-packing/",
-        "Square Packing Atlas",
-        "Evan Daniel",
-        (
-            "Every record packing drawn beside the proven floor beneath it, with a page of"
-            " open problems."
-        ),
-    ),
-)
-
-#: Other cited result pages, including first-party GitHub issue reports, ranked with the
-#: projects on GitHub: each one's address, its name (a post's is its title, as the post
-#: gives it), its author as the record credits them, and what it holds. They are the
-#: source-coverage register's two sources off GitHub that are not a catalogue,
-#: UnitSquare's release and Wang and Li's Zenodo record, and the two posts behind
-#: Burns's and Massaccesi's n = 17 bound, whose key the register credits with T-015 and
-#: T-016 and the case records cite. A test holds every source the coverage register
-#: reviews to a card, here or in `OTHER_PROJECTS`, and every address here and in
-#: `CATALOGUE_SITES` to one the record cites.
-OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
-    (
-        "https://github.com/jlevy/squares/issues/401#issuecomment-6031977107",
-        "SQUISH Packing of 153 Squares",
-        "Nate Chaoweeraprasit",
-        "The supplemental rational certificate submitted with the SQUISH packings.",
-    ),
-    (
-        "https://github.com/jlevy/squares/issues/401#issuecomment-6043191866",
-        "SQUISH dated source follow-up",
-        "Nate Chaoweeraprasit",
-        (
-            "Dated SQUISH update, including a pinned copy of the original rational "
-            "n153 certificate."
-        ),
-    ),
-    (
-        "https://github.com/jlevy/squares/issues/686",
-        "100 Certified Larger-Count Square Packings",
-        "Darius Muglich",
-        (
-            "Exact rational upper-bound certificates for n = 328 to 998, in an archive"
-            " attached to the issue."
-        ),
-    ),
-    (
-        "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/",
-        "Proposing a Better Lower Bound for n = 17 Square Packing",
-        "Sam Burns",
-        (
-            "A weighted certificate for s(17) \u2265 4.4811, the method Massaccesi\u2019s"
-            " bound builds on."
-        ),
-    ),
-    (
-        "https://gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html",
-        "Another Better Lower Bound for n = 17 Square Packing",
-        "Gustavo Massaccesi",
-        "s(17) \u2265 4.5058, by linear programming on Burns\u2019s certificate architecture.",
-    ),
-    (
-        "https://doi.org/10.5281/zenodo.23038546",
-        "Zenodo 23038546",
-        "Ke Wang and Can Li",
-        (
-            "An exact lower bound for eleven squares, a reweighting of Overbeck\u2019s"
-            " certificate."
-        ),
-    ),
-    (
-        "https://hmbelvedere.com/",
-        "UnitSquare",
-        "the UnitSquare Project",
-        (
-            "Results Release 1, reported packings for six counts from n = 68 to 131, each"
-            " since superseded."
-        ),
-    ),
-)
-
-
 def site_name(url: str) -> str | None:
     """A listed website's name, `None` for a repository on GitHub."""
     for address, name, _, _ in (*CATALOGUE_SITES, *OTHER_SITES):
@@ -2568,26 +2236,12 @@ def site_name(url: str) -> str | None:
 #: (`example.org.png`, `.svg` or `.ico`) and inlined, so the page fetches nothing.
 PROJECT_FAVICONS = Path(__file__).resolve().parent / "overview" / "favicons"
 
-#: GitHub's mark (Octicons `mark-github`, 16 units), drawn in the text colour.
-GITHUB_MARK = (
-    '<svg class="site-link-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">'
-    '<path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08'
-    "-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 "
-    "0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27"
-    "-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28"
-    "-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15"
-    "-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67"
-    '.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>'
-)
+#: Shared standard GitHub brand glyph, in the project-link icon role.
+GITHUB_MARK = account_icon("github", class_name="site-link-icon")
 
-#: The mark for a website whose favicon is not saved in `PROJECT_FAVICONS`: a globe, a
-#: circle crossed by one meridian and the equator, drawn in the text colour on GitHub's
-#: mark's 16 units.
-WEB_MARK = (
-    '<svg class="site-link-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">'
-    '<g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.75"/>'
-    '<ellipse cx="8" cy="8" rx="2.75" ry="6.75"/><path d="M1.25 8h13.5"/></g></svg>'
-)
+#: Shared KPress external-link glyph where a source's saved favicon is unavailable.
+WEB_MARK = account_icon("personal", class_name="site-link-icon")
+
 
 _FAVICON_TYPES = {".png": "image/png", ".svg": "image/svg+xml", ".ico": "image/x-icon"}
 
@@ -2630,6 +2284,7 @@ def link_card(
     size: CardSize | None = None,
     new_tab: bool = True,
     foot: str = "",
+    byline: str = "",
 ) -> str:
     """A card that is itself the link, with no popover: for a place whose address, or
     whose picture, is the whole of what a preview would say, and for a full page of this
@@ -2650,7 +2305,9 @@ def link_card(
     results. A link cannot hold a link, so a card with a foot is a box, `div.site-card`,
     holding the card's link (`site-card-main`, everything above the foot) and then the
     foot (`site-card-foot`), inside the one border. It sizes, washes and shows its
-    corner icon as every card does (`site.css`).
+    corner icon as every card does (`site.css`). An optional HTML `byline` sits between
+    the linked heading and the note, with independent links of its own; the source
+    address remains a separate external link.
     """
     kind = card_kind(url)
     if not new_tab and not is_site_page(url):
@@ -2658,20 +2315,45 @@ def link_card(
     tab = ' target="_blank" rel="noopener noreferrer"' if new_tab else ""
     typed = ' type="application/pdf"' if url.endswith(".pdf") else ""
     address = ""
+    address_value = ""
+    source_label = ""
     if kind == "external":
         shown = url.removeprefix("https://").rstrip("/")
-        address = (
-            f'<span class="site-card-url">{link_icon(url)}'
-            f'<span class="site-card-url-text">{_breakable(shown)}</span></span>'
-        )
-    body = (
+        if reference := parse_github_reference(url):
+            icon = github_reference_icon(reference.kind, class_name="site-link-icon")
+            address_value = f'{icon}<span class="site-card-url-text">#{reference.number}</span>'
+            reference_kind = "issue" if reference.kind == "issue" else "pull request"
+            source_label = (
+                f' aria-label="GitHub {reference_kind} '
+                f'{_esc(reference.repository)}#{reference.number}"'
+            )
+        else:
+            address_value = (
+                f'{link_icon(url)}<span class="site-card-url-text">{_breakable(shown)}</span>'
+            )
+        address = f'<span class="site-card-url">{address_value}</span>'
+    heading = (
         f"{card_hero(hero) if hero else ''}"
         f'<span class="site-card-label">{_esc(label)}</span>'
         f'<span class="site-card-value"{headline_math_face(value)}>{value}</span>'
-        f'<span class="site-card-note">{note}</span>'
-        f"{address}"
     )
+    body = heading + f'<span class="site-card-note">{note}</span>' + address
     sized = _size_attribute(size, value, note, address)
+    if byline:
+        source = (
+            f'<a class="site-card-url" href="{_esc(url)}"{source_label}{typed}{tab}>'
+            f"{address_value}</a>"
+            if address_value
+            else ""
+        )
+        closing = f'<p class="site-card-foot">{foot}</p>' if foot else ""
+        return (
+            f'<div class="site-card site-card-footed" data-go="{kind}" {sized}>'
+            '<div class="site-card-main">'
+            f'<a class="site-card-link site-card-heading" href="{_esc(url)}"{typed}{tab}>'
+            f'{heading}</a><p class="site-card-byline">{byline}</p>'
+            f'{source}<span class="site-card-note">{note}</span></div>{closing}</div>'
+        )
     if foot:
         return (
             f'<div class="site-card site-card-footed" data-go="{kind}" {sized}>'
@@ -2689,7 +2371,7 @@ def link_card(
 #: of weighted certificates is two repositories under one key, Guzhou0806's R012 and
 #: Mira's measure; Guzhou0806's is listed here, so the result registered from the packet
 #: counts for it. The key of Burns's and Massaccesi's n = 17 bound names both authors
-#: and both posts, so its results count for each.
+#: and both posts; reviewed roles separate Massaccesi's Results from Burns's Credits.
 PROJECT_EXTRA_KEYS: dict[str, tuple[str, ...]] = {
     "https://github.com/Guzhou0806/n17-square-packing": (
         "[n17 weighted certificates 2026-09-20]",
@@ -2747,8 +2429,8 @@ def source_repository(url: str) -> str:
 def project_source_keys() -> dict[str, frozenset[str]]:
     """Each listed project's bibliography keys: those the source-coverage register gives
     the sources at its address, those `PROJECT_EXTRA_KEYS` adds, and every key whose
-    venue is the project's in `SOURCE_VENUES`. A result is a project's where its
-    `attribution.source_keys` names one of them."""
+    venue is the project's in `SOURCE_VENUES`. These keys establish source scope;
+    reviewed author and credit roles separately decide primary Results and received Credits."""
     coverage = safe_load(SOURCE_COVERAGE.read_text(encoding="utf-8"))["sources"]
     bibliography = safe_load(BIBLIOGRAPHY.read_text(encoding="utf-8"))["sources"]
     keys: dict[str, set[str]] = {
@@ -2764,13 +2446,23 @@ def project_source_keys() -> dict[str, frozenset[str]]:
     return {url: frozenset(found) for url, found in keys.items()}
 
 
+@cache
+def _project_primary_ids() -> dict[str, frozenset[str]]:
+    records, _ = _tally_records()
+    authors = {resource.url: resource.profile_ids for resource in resources()}
+    occurrences = occurrence_registry().occurrences
+    return {
+        url: frozenset(
+            project_primary_results(authors.get(url, ()), keys, occurrences, records)
+        )
+        for url, keys in project_source_keys().items()
+    }
+
+
 def result_projects(result: Result) -> tuple[str, ...]:
-    """The slugs of the listed projects a result is attributed to, in the list's order.
-    A result attributed to sources of several projects is each one's; this project's
-    results, and a result by others whose source no listed project holds, are none's."""
-    cited = set((result.record.get("attribution") or {}).get("source_keys") or ())
+    """Projects with reviewed primary authorship of this registered result."""
     return tuple(
-        project_slug(url) for url, keys in project_source_keys().items() if cited & keys
+        project_slug(url) for url, ids in _project_primary_ids().items() if result.id in ids
     )
 
 
@@ -2789,31 +2481,18 @@ class Cited(NamedTuple):
     projects: tuple[str, ...]
 
 
-class ProjectTally(NamedTuple):
-    """The results the register cites from one project: their ids in the order given,
-    how many stand at each significance level, the highest level first and every level
-    present, and the date of the newest, empty where there is none."""
-
-    results: tuple[str, ...]
-    counts: tuple[tuple[int, int], ...]
-    latest: str
-
-
 def project_tallies(
     projects: Sequence[str], results: Iterable[Cited], levels: Sequence[int]
 ) -> dict[str, ProjectTally]:
-    """Each project's tally over `results`. A result attributed to several projects
-    counts once for each of them."""
+    """Use the shared distinct-result projection for every explicitly attributed project."""
     cited = list(results)
-    tallies = {}
-    for project in projects:
-        own = [result for result in cited if project in result.projects]
-        tallies[project] = ProjectTally(
-            tuple(result.id for result in own),
-            tuple((level, sum(result.level == level for result in own)) for level in levels),
-            max((result.dated for result in own), default=""),
+    measures = {result.id: (result.level, result.dated) for result in cited}
+    return {
+        project: tally_results(
+            (result.id for result in cited if project in result.projects), measures, levels
         )
-    return tallies
+        for project in projects
+    }
 
 
 def project_order(tallies: dict[str, ProjectTally], names: dict[str, str]) -> list[str]:
@@ -2868,30 +2547,36 @@ def headline_html(url: str) -> str:
 
 
 def _tallied(urls: Sequence[str], overview: Overview) -> dict[str, ProjectTally]:
-    """Each of `urls`'s tally over the register, by its address."""
-    slugs = {project_slug(url): url for url in urls}
-    tallies = project_tallies(list(slugs), cited_results(overview), significance_levels())
-    return {url: tallies[slug] for slug, url in slugs.items()}
+    """Each project's reviewed primary results, with the shared significance ordering."""
+    authors = {resource.url: resource.profile_ids for resource in resources()}
+    records = tuple(result.record for result in overview.results)
+    measures = {
+        result.id: (significance(result), result.dated[1]) for result in overview.results
+    }
+    occurrences = occurrence_registry().occurrences
+    return {
+        url: tally_results(
+            project_primary_results(
+                authors.get(url, ()), project_source_keys().get(url, ()), occurrences, records
+            ),
+            measures,
+            significance_levels(),
+        )
+        for url in urls
+    }
 
 
 def ranked_projects(overview: Overview) -> list[tuple[str, ProjectTally]]:
-    """The projects the page ranks, every listed one but the catalogues, in the order it
-    shows them (`project_order`), each with its tally: read from the register when the
-    page is rendered, never kept by hand."""
-    urls = [*(url for url, _, _, _ in OTHER_SITES), *(url for url, _, _ in OTHER_PROJECTS)]
+    """Every resource kind by descending S5-to-S1 counts, newest result, name and URL."""
+    urls = project_urls()
     tallies = _tallied(urls, overview)
-    slugs = {project_slug(url): url for url in urls}
-    names = {slug: project_headline(url) for slug, url in slugs.items()}
-    ordered = project_order({slug: tallies[url] for slug, url in slugs.items()}, names)
-    return [(slugs[slug], tallies[slugs[slug]]) for slug in ordered]
+    names = {url: project_headline(url) for url in urls}
+    return [(url, tallies[url]) for url in project_order(tallies, names)]
 
 
 def listed_projects(overview: Overview) -> list[tuple[str, ProjectTally]]:
-    """Every card of the Other Square Packing Projects section in page order, each with
-    its tally: the catalogues as `CATALOGUE_SITES` writes them, then `ranked_projects`."""
-    catalogues = [url for url, _, _, _ in CATALOGUE_SITES]
-    tallies = _tallied(catalogues, overview)
-    return [(url, tallies[url]) for url in catalogues] + ranked_projects(overview)
+    """One significance order for catalogues, repositories and other source cards."""
+    return ranked_projects(overview)
 
 
 def results_filter_url(project: str, level: int | None = None) -> str:
@@ -2902,49 +2587,141 @@ def results_filter_url(project: str, level: int | None = None) -> str:
     return f"{RESULTS_PAGE}?project={project}{exact}"
 
 
+@cache
+def _tally_records() -> tuple[tuple[Mapping[str, Any], ...], dict[str, tuple[int, str]]]:
+    records = tuple(safe_load((FRONTIER / "results.yaml").read_text())["results"])
+    measures = {
+        str(record["id"]): (
+            int(record["significance"]["score"]),
+            str(
+                (record.get("attribution") or {}).get("published")
+                or record.get("established")
+                or record["registered"]
+            ),
+        )
+        for record in records
+    }
+    return records, measures
+
+
 def project_tally(url: str, tally: ProjectTally) -> str:
-    """A project card's closing line, its results in the register: the total, then in
-    parentheses the count at each significance level that has one, the highest first,
-    `6 results (3 at S4, 3 at S3)`. The total links to the results table filtered to the
-    project, and each count to the same table at that level. A project with one level
-    keeps the parentheses, so every tally reads the same way and names its level. A
-    project with no registered result has no line."""
-    total = len(tally.results)
-    if not total:
-        return ""
+    """The shared result/credit components scoped to this project's explicit sources."""
     slug = project_slug(url)
-    counts = ", ".join(
-        f'<a href="{_esc(results_filter_url(slug, level))}">{count} at S{level}</a>'
-        for level, count in tally.counts
-        if count
+    records, measures = _tally_records()
+    authors = next(
+        (resource.profile_ids for resource in resources() if resource.url == url), ()
     )
-    noun = "result" if total == 1 else "results"
-    return f'<a href="{_esc(results_filter_url(slug))}">{total} {noun}</a> ({counts})'
+    associations = project_credit_associations(
+        authors, project_source_keys().get(url, ()), occurrence_registry().occurrences, records
+    )
+    credit_markup = (
+        " · "
+        + render_tally(
+            tally_credits(associations, measures, significance_levels()), noun="credit"
+        )
+        if associations
+        else ""
+    )
+    records_markup = record_tally(tally.results, measures, blank_zero=True)
+    return (
+        '<span class="site-credit-tally">'
+        + render_tally(
+            tally,
+            total_href=results_filter_url(slug) if tally.results else None,
+            level_hrefs={level: results_filter_url(slug, level) for level, _ in tally.counts},
+        )
+        + (" · " + records_markup if records_markup else "")
+        + credit_markup
+        + "</span>"
+    )
+
+
+def project_author(author: str, *, current_profile: str | None = None) -> str:
+    """Link a curated project byline to its uniquely evidenced public identity."""
+    index = public_index()
+    key = " ".join(author.split()).casefold()
+    matches = profile_ids_for_byline(author, index)
+    if not matches:
+        return "By " + _esc(author)
+    if len(matches) == 1 and key in index.personal_labels[matches[0]]:
+        identifier = matches[0]
+        if identifier == current_profile:
+            return "By " + _esc(index.people[identifier].label)
+        return (
+            f'By <a href="profiles/{identifier}.html">'
+            f"{_esc(index.people[identifier].label)}</a>"
+        )
+    return "By " + link_prose(_esc(author), index=index, current_profile=current_profile)
+
+
+def resource_byline(resource: Resource, *, current_profile: str | None = None) -> str:
+    """Mixed proof/support contributors are explicit reviewed identities, not authors."""
+    if resource.byline_label == "By":
+        return project_author(resource.byline, current_profile=current_profile)
+    names = public_index().people
+    labels = [
+        _esc(names[identifier].label)
+        if identifier == current_profile
+        else f'<a href="profiles/{identifier}.html">{_esc(names[identifier].label)}</a>'
+        for identifier in resource.profile_ids
+    ]
+    return "Contributors: " + ", ".join(labels)
+
+
+@cache
+def _profile_resource_tallies() -> dict[str, ProjectTally]:
+    """Compute the resource inventory's register projection once for complete profiles."""
+    return dict(listed_projects(load_overview()))
+
+
+def resource_card(
+    resource: Resource, tally: ProjectTally, *, current_profile: str | None = None
+) -> str:
+    """One shared external-resource card on Home and the credited person's profile."""
+    url = resource.url
+    return link_card(
+        url,
+        "Repository" if resource.kind == "repository" else "Website",
+        _esc(resource.title) if resource.kind == "repository" else tex_bounds(resource.title),
+        link_prose(tex_bounds(resource.description), current_profile=current_profile),
+        size=SECTION_CARD_SIZES["projects"],
+        foot=f'<span class="site-project-tally">{project_tally(url, tally)}</span>',
+        byline=(
+            '<span class="site-project-author" data-contributor-plain>'
+            + resource_byline(resource, current_profile=current_profile)
+            + "</span>"
+        ),
+    )
+
+
+def resource_cards(
+    records: Sequence[Resource],
+    *,
+    overview: Overview | None = None,
+    current_profile: str | None = None,
+) -> str:
+    """The same card grid and resource projection across homepage and profile contexts."""
+    tallies = (
+        _profile_resource_tallies() if overview is None else dict(listed_projects(overview))
+    )
+    by_url = {record.url: record for record in records}
+    empty = ProjectTally((), tuple((level, 0) for level in significance_levels()), "")
+    selected = {url: tallies.get(url, empty) for url in by_url}
+    order = project_order(selected, {url: record.title for url, record in by_url.items()})
+    return _cards(
+        [
+            resource_card(by_url[url], selected[url], current_profile=current_profile)
+            for url in order
+        ]
+    )
 
 
 def other_project_cards(overview: Overview) -> str:
-    """One card per other project, website or repository, in `listed_projects`'s order:
-    its name (`project_headline`), its author, what it holds and its address, and at its
-    foot its tally of registered results (`project_tally`). Each card's link opens the
-    project in a new tab. The note is prose like a page card's, so a case it names
-    (`n = 21`) is set as math."""
-    listed = {url: (author, note) for url, author, note in OTHER_PROJECTS} | {
-        url: (author, note) for url, _, author, note in (*CATALOGUE_SITES, *OTHER_SITES)
-    }
-    cards = []
-    for url, tally in listed_projects(overview):
-        author, note = listed[url]
-        cards.append(
-            link_card(
-                url,
-                f"By {author}",
-                headline_html(url),
-                tex_bounds(note),
-                size=SECTION_CARD_SIZES["projects"],
-                foot=project_tally(url, tally),
-            )
-        )
-    return _cards(cards)
+    """The shared source cards in descending significance order across every kind."""
+    by_url = {resource.url: resource for resource in resources()}
+    return resource_cards(
+        [by_url[url] for url, _ in listed_projects(overview)], overview=overview
+    )
 
 
 #: The page the atlas's film card opens: the film alone, at full size.

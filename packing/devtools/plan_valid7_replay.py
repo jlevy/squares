@@ -7,7 +7,7 @@ full here (``campaign/result-import.md``):
 
 - ``qx2``, Daniel's ``qx2_zm.py`` run V3 over the D4 region, 9,800 roots, whose record
   ``runV3_6294052a_leaves.jsonl.gz`` the October 1 evand packet retains;
-- ``wand125``, wand125's independent checker over the whole pose space, 156,800 roots,
+- ``wand125``, Hosono's independent checker over the whole pose space, 156,800 roots,
   whose two records the release ``records-v1`` holds and its packet pins by digest.
 
 Each record carries every root's CPU time, so the replay can be priced and split before
@@ -26,7 +26,7 @@ anything runs. This tool decides nothing about a leaf; the checkers do.
     consecutive cells, so a shard is at most three rectangles, each one checker run with
     its own region flags and record. Each checker resumes from its own record, so an
     interrupted shard is finished by running the same command again. ``--speed`` is this
-    host's CPU seconds per recorded CPU second, measured with ``region``. wand125's
+    host's CPU seconds per recorded CPU second, measured with ``region``. Hosono's
     ``run_all.py`` is launched under the ``fork`` start method (``FORK_LAUNCH``), so that
     the receipt counts its workers' CPU; its record's per-root time is wall time in the
     worker.
@@ -224,11 +224,11 @@ def read_record(path: Path, checker: str) -> Record:
 
 
 def published(checker: str, records: Path | None) -> list[Root]:
-    """The published roots, with each wand125 V1 root marked as not comparable."""
+    """The published roots, with each V1 root of Hosono's checker marked as not comparable."""
     if checker == "qx2":
         return read_record(QX2_RECORD, "qx2").roots
     if records is None:
-        msg = "wand125's records are not retained: pass --records DIR"
+        msg = "Hosono's records are not retained: pass --records DIR"
         raise SystemExit(msg)
     roots: list[Root] = []
     for name in WAND125_RECORDS:
@@ -247,7 +247,7 @@ def mirror(box: Box) -> Box:
 
 
 def priced(checker: str, roots: list[Root]) -> dict[Box, float]:
-    """Each root's CPU under the published code: a wand125 V1 root at its V2 mirror."""
+    """Each root's CPU under the published code: a V1 root of Hosono's at its V2 mirror."""
     cpu = {root.box: root.cpu for root in roots}
     if checker == "qx2":
         return cpu
@@ -566,7 +566,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     for action in ("stage", "plan", "region", "compare"):
         p = sub.add_parser(action)
         p.add_argument("--checker", choices=sorted(CHECKERS), required=True)
-        p.add_argument("--records", type=Path, help="directory of wand125's two .jsonl.gz")
+        p.add_argument("--records", type=Path, help="directory of Hosono's two .jsonl.gz")
         p.add_argument("--json", type=Path, help="also write the result here")
         p.add_argument("--guard-d1", action="store_true", help="wand125: refuse D-1's case")
         if action == "stage":
@@ -584,7 +584,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             p.add_argument("--partial", action="store_true", help="one region, not the grid")
     args = parser.parse_args(argv)
     if args.guard_d1 and args.checker != "wand125":
-        parser.error("--guard-d1 applies to wand125's checker only")
+        parser.error("--guard-d1 applies to Hosono's checker only")
     result: dict[str, object]
     if args.action == "stage":
         result = {"staged": stage(args.checker, args.work, guard=args.guard_d1)}

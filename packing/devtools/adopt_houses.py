@@ -125,7 +125,7 @@ from decimal import Decimal
 from fractions import Fraction
 from functools import cache
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import yaml
 from strif import atomic_output_file
@@ -1748,6 +1748,31 @@ FORMER_PROSE = (
 FORMER_NAME_FIELD = re.compile(r"(\n(\s*)(?:claimed_by|found_by|improved_by):\n\2- )ry-xu\n")
 
 
+#: The prover a record written before the attribution migration of 13 to 20 October 2026
+#: names by handle in a lower bound, with the credited name that replaced it
+#: (attribution.md), and the same handle's possessive in that lower bound's note.
+FORMER_PROVERS = {"wand125": "Hosono", "squarepacker (Ryu Sungjoon)": "Ryu Sungjoon"}
+FORMER_NOTE_NAMES = ((re.compile(r"(?<![\w/@\[-])wand125's"), "Hosono's"),)
+
+
+def _named_lower(layer: object) -> object:
+    """A lower-bound layer with its prover and note credited as the record credits them
+    now, so a replayed earlier layer that differs only by the migrated name is the same
+    layer (`refreshed`)."""
+    if not isinstance(layer, Mapping):
+        return layer
+    named = dict(cast("Mapping[str, Any]", layer))
+    provers = named.get("proved_by")
+    if isinstance(provers, list):
+        named["proved_by"] = [FORMER_PROVERS.get(str(name), name) for name in provers]
+    note = named.get("note")
+    if isinstance(note, str):
+        for pattern, replacement in FORMER_NOTE_NAMES:
+            note = pattern.sub(replacement, note)
+        named["note"] = note
+    return named
+
+
 def _named_fields(front: str) -> str:
     """Front matter whose name fields credit the finder by name where an earlier record
     gave the handle; every other item's text is left alone."""
@@ -2678,6 +2703,29 @@ def pending_history(text: str, until: str) -> str:
     return PENDING_REPORT.sub(past, text)
 
 
+def _n29_history(text: str) -> str:
+    """The numerical solve and Schadt's rational ceiling as historical evidence."""
+    earlier = (
+        "**This does not move any bound.** A high-precision root is not a certificate: "
+        "no outward-rounded interval and no exact algebraic form is produced, so "
+        "`verified_upper_bound` remains the Schadt rational and the `5.23e-5` gap to "
+        "the reported record stands."
+    )
+    historical = (
+        "**This solve did not move a bound.** A high-precision root is not a certificate: "
+        "no outward-rounded interval and no exact algebraic form is produced, so at "
+        "the time of the 28 August measurement, `verified_upper_bound` remained the "
+        "Schadt rational and the `5.23e-5` gap to the reported record stood. "
+        "The later interval and exact regularized certificates above superseded that ceiling."
+    )
+    text = re.sub(_spaced(earlier), historical, text)
+    return re.sub(
+        _spaced("This proves the formal upper bound shown above."),
+        "This proved the earlier Schadt rational ceiling.",
+        text,
+    )
+
+
 _STAGED_SENTENCE = re.compile(
     r"\b([Tt])he\s+owner’s\s+house\s+rule\s+of\s+(\d{1,2}\s+[A-Z][a-z]+\s+\d{4})\s+adopts\s+it:"
     r"\s+the\s+case\s+keeps\s+this\s+house\s+until\s+its\s+adoption,\s+staged\s+under"
@@ -2734,8 +2782,8 @@ def historical(move: Move, text: str) -> str:
     """The body's own statements of the earlier house, marked as history.
 
     `check_case_prose` holds every `s(n) <= x` a body writes to the front matter unless
-    its sentence says it is historical. Six kinds of prose state the earlier house, and
-    each says now that it held until this adoption:
+    its sentence says it is historical. Seven kinds of prose refer to earlier bounds and
+    are marked as history:
 
     - the opening "Open." sentence the generator writes, of the best known packing;
     - the exact-optimum sections that `T-098` wrote, in two fixed sentences;
@@ -2748,7 +2796,9 @@ def historical(move: Move, text: str) -> str:
     - a house an earlier pass of this adoption adopted, in its dated paragraph and its
       section;
     - the dated paragraph an intake wrote for a report it registered pending adoption,
-      which said the house stayed until review and adoption (`pending_history`).
+      which said the house stayed until review and adoption (`pending_history`);
+    - the n = 29 numerical solve and Schadt-certificate statements, which describe a
+      ceiling the later interval and exact certificates superseded.
 
     Prose in no fixed form, which no tool here wrote, is not rewritten; `check_case_prose`
     refuses a record that still states it as the bound. The first pass marked such prose
@@ -2773,6 +2823,8 @@ def historical(move: Move, text: str) -> str:
     )
     text = _earlier_ceiling(move, text)
     text = _regularized_certificate(move, text)
+    if n == 29:
+        text = _n29_history(text)
     text = held_history(text)
     text = pending_history(text, until)
     if houses.adopted_on(n) >= RETAINED_672_FROM:
@@ -3361,7 +3413,7 @@ def refreshed(move: Move, committed: str) -> str:
     packing = _packing(_split(written)[1])
     current = _packing(front)
     if any(
-        current.get(key) != packing.get(key)
+        _named_lower(current.get(key)) != _named_lower(packing.get(key))
         for key in ("reported_lower_bound", "verified_lower_bound")
     ):
         raise AdoptionError(

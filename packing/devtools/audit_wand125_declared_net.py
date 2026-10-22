@@ -1,4 +1,4 @@
-"""Audit wand125's mixed certificates on a declared net, and replay and compare them.
+"""Audit Hosono's mixed certificates on a declared net, and replay and compare them.
 
 wand125/square-packing-bounds declares its own half-angle net in thirteen certificates,
 the first three posted on jlevy/squares#366, each a rectangle density whose candidate

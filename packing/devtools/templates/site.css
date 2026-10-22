@@ -243,6 +243,8 @@ body {
     padding-block-start: var(--site-page-top);
   }
   .kpress-long-text > :first-child,
+  .kpress-long-text > .site-title:first-child,
+  .kpress-long-text > :is(article, header):first-child > h1:first-of-type,
   .kpress-long-text > :first-child > .site-hero:first-child,
   .site-hero:first-child > :first-child {
     margin-block-start: 0;
@@ -266,7 +268,7 @@ body {
 /* Main section titles share the homepage's breathing room on every web page. */
 @media screen {
   .kpress {
-    --site-title-space-above: 3.75rem;
+    --site-title-space-above: 6.25rem;
     --site-title-space-below: 2.5rem;
   }
   .kpress :where(.site-page, .kpress-prose) h1,
@@ -463,7 +465,11 @@ body {
   padding: var(--site-card-pad-block) var(--site-card-pad-end) 0.5rem var(--site-card-pad-start);
   text-decoration: none;
 }
-.kpress .site-card-footed:has(> .site-card-main:is(:hover, :focus-visible)) {
+.kpress
+  .site-card-footed:has(
+    > a.site-card-main:is(:hover, :focus-visible),
+    > .site-card-main > :is(.site-card-heading, a.site-card-url):is(:hover, :focus-visible)
+  ) {
   background: var(--site-wash);
 }
 .kpress div.site-card.site-card-footed::after {
@@ -476,10 +482,25 @@ body {
   position: absolute;
   transition: opacity var(--site-hover-duration) var(--site-hover-easing);
 }
-.kpress .site-card-footed:has(> .site-card-main:is(:hover, :focus-visible))::after {
+.kpress
+  .site-card-footed:has(
+    > a.site-card-main:is(:hover, :focus-visible),
+    > .site-card-main > :is(.site-card-heading, a.site-card-url):is(:hover, :focus-visible)
+  )::after {
   opacity: 1;
 }
-.kpress .site-card-footed > .site-card-foot {
+.kpress .site-card-footed > .site-card-main > .site-card-heading {
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-decoration: none;
+}
+.kpress .site-card-footed:not(:has(> .site-card-foot)) > .site-card-main {
+  padding-block-end: var(--site-card-pad-block);
+}
+.kpress .site-card-footed > .site-card-foot,
+.kpress .site-card-main > .site-card-byline {
   color: var(--site-support-color);
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
@@ -487,6 +508,10 @@ body {
   line-height: 1.4;
   margin: 0;
   padding: 0 1rem var(--site-card-pad-block) var(--site-card-pad-start);
+}
+
+.kpress .site-card-main > .site-card-byline {
+  padding: 0;
 }
 
 /* ---------- Arrows ----------
@@ -804,7 +829,7 @@ body {
   font-size: var(--site-font-size-note);
 }
 .site-popover .site-popover-preview {
-  color: var(--site-support-color);
+  color: var(--kpress-doc-text);
   font-size: var(--site-font-size-note);
   line-height: 1.45;
 }
@@ -827,6 +852,9 @@ body {
    face and size put back to the link's. */
 .kpress :is(.site-popover a, button).site-popover-action,
 .kpress :is(a, button).site-action {
+  /* Source Sans capitals sit about 0.016em above their line-box center. Balance
+     that ink while preserving the total padding and the existing click height. */
+  --site-action-cap-offset: 0.016em;
   align-items: center;
   background: var(--kpress-doc-accent);
   color: var(--kpress-doc-bg);
@@ -837,6 +865,8 @@ body {
   gap: 0.5rem;
   line-height: calc(var(--site-font-size-note) * 1.5);
   padding: 0.45rem 0.9rem;
+  padding-block-start: calc(0.45rem + var(--site-action-cap-offset));
+  padding-block-end: calc(0.45rem - var(--site-action-cap-offset));
   text-decoration: none;
   transition: var(--site-hover-transition);
 }
@@ -844,6 +874,8 @@ body {
 .kpress .site-action .site-icon-arrow {
   align-self: center;
   margin: 0;
+  /* The inset corrects the label; the arrow retains its geometric center. */
+  margin-block-start: calc(-2 * var(--site-action-cap-offset));
 }
 .kpress button:is(.site-popover-action, .site-action) {
   border: 0;
@@ -911,6 +943,12 @@ body {
   :is(.kpress-math, .katex) {
   line-height: 0;
 }
+/* Heading capitals and tracking belong to words, not mathematical variables. */
+.site-page :where(h1, h2, h3, h4) .kpress-math {
+  font-variant-caps: normal;
+  letter-spacing: normal;
+  text-transform: none;
+}
 /* The tighter leading takes the room a looser line kept around the headline, so the
    headline carries it as margin: a little above, under the label, and more below, over
    the note. */
@@ -923,7 +961,7 @@ body {
   overflow-y: hidden;
 }
 .kpress .site-card .site-card-note {
-  color: var(--site-support-color);
+  color: var(--kpress-doc-text);
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
   font-weight: var(--site-font-weight-sans-light);
@@ -955,9 +993,9 @@ body {
   min-inline-size: 0;
 }
 .kpress .site-card .site-link-icon {
-  block-size: 1em;
+  block-size: var(--site-icon-size);
   flex: none;
-  inline-size: 1em;
+  inline-size: var(--site-icon-size);
   translate: 0 0.15em;
 }
 
@@ -1713,6 +1751,9 @@ body {
     grid-area: 3 / 1 / auto / -1;
     text-align: start;
   }
+  .site-results .site-col-date {
+    color: var(--kpress-doc-muted);
+  }
   .site-results .site-col-result {
     grid-column: 1 / -1;
   }
@@ -1731,8 +1772,10 @@ body {
     display: inline;
   }
   .site-results :is(.site-col-credit, .site-col-date) {
-    color: var(--kpress-doc-muted);
     font-size: 0.9em;
+  }
+  .site-results .site-col-date {
+    color: var(--kpress-doc-muted);
   }
   .site-results .site-col-result {
     min-width: 0;
@@ -1750,6 +1793,9 @@ body {
 }
 .kpress .site-table tr[data-current="false"] td {
   color: var(--site-support-color);
+}
+.kpress .site-table tr[data-current="false"] td.site-col-result {
+  color: var(--kpress-doc-text);
 }
 
 /* Rows part on a light rule rather than KPress's zebra stripe, and wash on hover, the
@@ -2039,7 +2085,7 @@ body {
   color: var(--kpress-doc-accent);
 }
 .site-ladders-question {
-  color: var(--site-support-color);
+  color: var(--kpress-doc-text);
   display: block;
 }
 .site-ladders-cell {
@@ -3411,6 +3457,9 @@ html[data-site-atlas-view="triangle"]
   max-inline-size: calc(var(--kpress-measure) + 2 * var(--kpress-column-inset));
   text-align: center;
 }
+.site-page .site-film-note {
+  color: var(--kpress-doc-text);
+}
 .site-page .site-film-frame figcaption {
   margin-block-start: 0.6rem;
 }
@@ -3680,4 +3729,35 @@ html[data-site-atlas-view="triangle"]
   .kpress .site-news-day[hidden] {
     display: block;
   }
+}
+
+/* Registered results and reviewed credit spans share one component on cards, tables
+   and complete profiles. Each surface supplies its own native destinations. */
+.site-credit-tally {
+  color: var(--kpress-doc-text);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-note);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--site-font-weight-sans-light);
+  line-height: var(--paper-support-leading);
+}
+.site-credit-tally a {
+  color: inherit;
+}
+
+/* Credited people remain primary content, including historical result rows. */
+.kpress .site-table td.site-col-credit,
+.site-col-credit .site-cell-quiet {
+  color: var(--kpress-doc-text);
+}
+
+/* Significance is secondary to the result/credit total on every shared tally. */
+.kpress .site-tally-levels,
+.kpress .site-tally-levels a {
+  color: var(--site-support-color);
+}
+
+.site-record-pending {
+  color: var(--site-support-color);
+  font-size: var(--site-font-size-note);
 }

@@ -1,10 +1,10 @@
-"""Verify every replayed wand125 certificate with the clean-room verifier.
+"""Verify every replayed certificate of Hosono's with the clean-room verifier.
 
 Two families, each covering every retained certificate of its formats, replayed by the
 authors' checker here or not. `--family rectangles` (format T; Milestone A,
-`think-d69e`) runs every `certified_candidate.json.gz` of the wand125 rectangle packets
+`think-d69e`) runs every `certified_candidate.json.gz` of Hosono's rectangle packets
 and Tokoharu's three, at the threshold the files declare; `--family mixed` (formats M
-and L; Milestone B, `think-4vf7`) runs every `mixed_n*` candidate of the wand125 mixed
+and L; Milestone B, `think-4vf7`) runs every `mixed_n*` candidate of Hosono's mixed
 and linear packets at the threshold they declare, with the authors' recorded CPU on the
 directions they replayed beside ours on the same directions. `--summary` writes
 `census-summary.json` and `census-summary.md` beside the two census folders: one row per
@@ -14,7 +14,7 @@ recorded here is complete, the input the records lane uses for evidence entries.
 The replay receipts named below were the first census's case list; the rectangle
 family now reads them only for the authors' replay status. They are
 the ones this repository has already replayed with the authors' checker: every case in
-the `receipts/replay/audit.json` of the wand125 rectangle packets, and Tokoharu's three
+the `receipts/replay/audit.json` of Hosono's rectangle packets, and Tokoharu's three
 in the 22 September packet. Each runs through `sqverify-fast` at every direction of its
 net, 201 unless a format M file declares its own (`proof_net`, jlevy/squares#366); its
 per-direction receipts and summary are kept as `--out/PACKET/CERTIFICATE.jsonl.gz`.
@@ -237,7 +237,7 @@ def named_side(name: str, side: Fraction) -> bool:
 
 
 def rectangle_cases() -> list[Case]:
-    """Tokoharu's three replayed certificates and every wand125 rectangle certificate."""
+    """Tokoharu's three replayed certificates and every rectangle certificate of Hosono's."""
     receipt = WEB / "external-square-certificates-2026-09-22/receipts/density/audit.json"
     passed = {
         (int(case["n"]), str(case["L"]))
@@ -268,7 +268,7 @@ def certificates_root(packet: str) -> Path:
 
 
 def mixed_cases() -> list[Case]:
-    """Every format M or L certificate of the wand125 mixed and linear packets."""
+    """Every format M or L certificate of Hosono's mixed and linear packets."""
     cases: list[Case] = []
     for packet in MIXED_PACKETS:
         root = certificates_root(packet)
@@ -1595,9 +1595,9 @@ def evidence_entry(
         *folded(
             "theorem",
             "The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; "
-            "Formats M and L, lemma D for format M's per-bin domain), applied to wand125's "
-            f"{case.certificate}: no {case.n} unit squares pack in a square of side {side}, "
-            f"so s({case.n}) >= {side}.",
+            "Formats M and L, lemma D for format M's per-bin domain), applied to Hiroaki "
+            f"Hosono's {case.certificate}: no {case.n} unit squares pack in a square of side "
+            f"{side}, so s({case.n}) >= {side}.",
             indent=6,
         ),
         (
@@ -1817,7 +1817,7 @@ def rectangle_evidence_entry(
         *folded(
             "theorem",
             "The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; "
-            "format T, with Tokoharu's centre domain), applied to wand125's "
+            "format T, with Tokoharu's centre domain), applied to Hiroaki Hosono's "
             f"{case.certificate}: no {case.n} unit squares pack in a square of side {side}, "
             f"so s({case.n}) >= {side}.",
             indent=6,

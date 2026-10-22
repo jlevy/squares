@@ -198,7 +198,7 @@ def reported_field(plan: Plan) -> dict[str, Any]:
         "value": _a12(plan.a30),
         "exact_form": _exact30(plan.a30),
         "kind": "counting",
-        "proved_by": ["wand125"],
+        "proved_by": ["Hosono"],
         "proved_year": 2026,
         "source_key": SOURCE_KEY,
         "note": (

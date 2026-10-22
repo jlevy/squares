@@ -3,7 +3,7 @@
 
 Two profiles are in use and they need different handling:
 
-- `frontmatter-md` (the 100 `n-NNN.md` cases). The softschema CLI validates
+- `frontmatter-md` (case and contributor records). The softschema CLI validates
   these directly: `uvx softschema==0.8.0 validate n-011.md`.
 - `pure-yaml` (frontier datasets, defects, results, and witness interchange
   files). Since softschema 0.8.0 the CLI validates these directly too (0.6.x
@@ -37,6 +37,8 @@ from sqpack.assurance import (
     formal_run_elsewhere,
     shared_receipt_problems,
 )
+from sqpack.contributor_occurrences import OccurrenceError, load_occurrences
+from sqpack.contributors import ContributorError, load_contributor, load_contributors
 from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.yamlio import load_yaml, safe_load
 
@@ -90,6 +92,9 @@ REGULARIZED_INDEX = FRONTIER.parent / "atlas" / "known-best" / "regularized" / "
 DEFAULT_DRAWINGS = FRONTIER.parent / "atlas" / "known-best" / "default-drawings.json"
 #: Hosted-data manifests (OR-18): one per release that holds bulk data outside Git.
 HOSTED = FRONTIER.parent / "hosted"
+#: The person records and their reviewed credit joins (`sqpack.contributors.PEOPLE_DIR`).
+CONTRIBUTORS = FRONTIER.parent / "contributors" / "people"
+CONTRIBUTOR_OCCURRENCES = FRONTIER.parent / "contributors" / "occurrences.yaml"
 
 
 def load_schema(name: str) -> dict:
@@ -153,6 +158,18 @@ def _validator(schema_path: pathlib.Path) -> Draft202012Validator:
 
 
 def check(path: pathlib.Path) -> list[str]:
+    occurrence_manifest = path.resolve() == CONTRIBUTOR_OCCURRENCES.resolve()
+    if occurrence_manifest or (
+        path.parent.resolve() == CONTRIBUTORS.resolve() and path.suffix == ".md"
+    ):
+        try:
+            if occurrence_manifest:
+                load_occurrences(path, repo=REPO)
+            else:
+                load_contributor(path, repo=REPO)
+        except (ContributorError, OccurrenceError, OSError, yaml.YAMLError) as error:
+            return [str(error)]
+        return []
     errs: list[str] = []
     try:
         payload, meta = payload_and_meta(path)
@@ -212,6 +229,10 @@ def source_build_file_problems(record: dict, repo: pathlib.Path = REPO) -> list[
 def cross_checks() -> list[str]:
     """Invariants a JSON Schema cannot express."""
     errs = []
+    try:
+        load_contributors(CONTRIBUTORS, repo=REPO)
+    except (ContributorError, OSError) as error:
+        errs.append(f"contributors: {error}")
     for kind in ("search", "proof"):
         d = safe_load((FRONTIER / f"{kind}-strategies.yaml").read_text(encoding="utf-8"))
         ss = d["strategies"]
@@ -358,8 +379,9 @@ def corpus_paths() -> tuple[list[pathlib.Path], list[pathlib.Path]]:
     corpus this step does. A second enumeration would drift, and the first thing it
     would stop covering is whatever was added last.
     """
-    md = sorted(FRONTIER.glob("n-*.md"))
+    md = sorted(FRONTIER.glob("n-*.md")) + sorted(CONTRIBUTORS.glob("*.md"))
     datasets = sorted(p for p in FRONTIER.glob("*.yaml") if not p.name.endswith(".schema.yaml"))
+    datasets.append(CONTRIBUTOR_OCCURRENCES)
     datasets += [FRONTIER.parent / "defects.yaml"]
     datasets += sorted(
         path for path in WITNESSES.rglob("*.yaml") if not path.name.endswith(".schema.yaml")
@@ -430,10 +452,8 @@ def main() -> int:
         f"  {len(md)} frontmatter-md artifacts + {len(datasets)} pure-yaml datasets "
         f"validate against their declared schemas"
     )
-    declared = {
-        safe_load(d.read_text(encoding="utf-8"))["softschema"]["schema"] for d in datasets
-    }
-    print(f"  schemas in use: {sorted(declared | {'square-packing-case.schema.yaml'})}")
+    declared = {payload_and_meta(path)[1]["schema"] for path in md + datasets}
+    print(f"  schemas in use: {sorted(declared)}")
     return 0
 
 

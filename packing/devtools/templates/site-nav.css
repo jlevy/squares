@@ -19,6 +19,7 @@
   --site-chooser-small-padding: 0.15rem 0.65rem;
   --site-header-duration: 180ms;
   --site-header-layer: 5;
+  --site-icon-size: 0.85em;
 }
 /* JS measures the entire header, including wrapped links and section tabs. Its sticky
    box keeps its original space while a transform hides it. Without JS the bar retains
@@ -230,11 +231,12 @@
   padding: 0.3rem 0.45rem;
   transition: var(--site-hover-transition);
 }
+.site-nav-icon,
 .site-theme-button svg {
-  block-size: 1.05rem;
+  block-size: var(--site-icon-size);
   display: inline-block;
-  inline-size: 1.05rem;
-  vertical-align: calc((1cap - 1.05rem) / 2);
+  inline-size: var(--site-icon-size);
+  vertical-align: calc((1cap - var(--site-icon-size)) / 2);
 }
 .site-theme-button:is(:hover, :focus-visible, [aria-expanded="true"]) {
   background: var(--site-wash);

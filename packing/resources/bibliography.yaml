@@ -20,7 +20,7 @@ last_reviewed: '2026-10-18'
 # agent, and every link the source names. Where `credit year, venue`, or the line with this
 # project's note, would not fit the atlas stage's 66 characters, `short_credit` is what the
 # stage prints instead: the same authors, `after`, the first of the same links, and
-# `et al.` (`Tokoharu after Levy, wand125 et al.`). Only the atlas stage shortens, and the
+# `et al.` (`Tokoharu after Levy, Hosono et al.`). Only the atlas stage shortens, and the
 # explainer's figure, which prints the stage's own line; every other renderer prints
 # `credit` whole. `devtools.build_bound_citations` checks both the
 # width and that shape. `lineage`, required on the source of a result
@@ -75,7 +75,7 @@ sources:
     lineage: builds-on-project
     note: >-
       11SquaresOptimal at f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c, announced by
-      Mannaseh Ahmed, who posts on X as @ManassehA06, as an Astra-assisted global
+      Manasseh Ahmed, who posts on X as @ManassehA06, as an Astra-assisted global
       optimality proof (announced on 29 September as @MathCompSciFTW; the post is retained
       in web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/announcement/).
       README and THIRD_PARTY_NOTICES credit jlevy/squares at c55726e1e885227f63110131c0a914665175ff89,
@@ -84,7 +84,7 @@ sources:
       The public derivative has not had a fresh full geometric replay according to
       docs/PUBLICATION.md. Retained intake: web/n11-optimality-2026-09-29/.
   - key: '[Ahmed 11SquaresFormalized 2026]'
-    authors: [Ahmed, ctjlewis, wand125, Gurevitch, Julian-JJ, Guzhou0806]
+    authors: [Ahmed, Lewis, Hosono, Gurevitch, Julian-JJ, Guzhou0806]
     year: 2026
     venue: GitHub
     short_venue: Web
@@ -93,39 +93,40 @@ sources:
     lineage: builds-on-project
     note: >-
       11SquaresFormalized at cdc746ed907d258057c283aeb6d077cb2c27e349, the Lean 4
-      formalization of T-060's optimality proof. Mannaseh Ahmed, who posts on X as
+      formalization of T-060's optimality proof. Manasseh Ahmed, who posts on X as
       @ManassehA06, announced on 6 October 2026 that it "has been formalized in lean thanks
-      to Astra and Claude", thanking Joshua Levy (@ojoshe), Marc Leonard Overbeck (@kleddamag), wand125, Guzhou0806
-      and ctjlewis "for aiding in the process"; the post, the author's own and 1/n of a
+      to Astra and Claude", thanking Joshua Levy (@ojoshe), Marc Leonard Overbeck (@kleddamag), Hiroaki Hosono (@wand_125), Guzhou0806
+      and Lewis (ctjlewis) "for aiding in the process"; the post, the author's own and 1/n of a
       thread, links this project's n = 11 page as its image credit and does not name the
       repository. Joshua Levy quoted it that day
       (https://x.com/ojoshe/status/2107513739222380935), calling it "a Lean formalization
       from @ManassehA06 assembled over the last few days, with assistance from @ctjlewis
       @guzhou0806 and others"; both posts are retained in the intake's
-      receipts/announcement/. Authors as read from ACKNOWLEDGEMENTS.md: Mannaseh Ahmed (published as Queuingtheorydotcom; the underlying
+      receipts/announcement/. Authors as read from ACKNOWLEDGEMENTS.md: Manasseh Ahmed (published as Queuingtheorydotcom; the underlying
       computer-assisted proof, and the formalization's development and integration),
-      EvolvingPrograms and ctjlewis (verification infrastructure and the complete replay),
-      wand125 (n11-optimality-lean, certificate checkers, generated proofs), Benjamin
+      EvolvingPrograms and Lewis (listed as ctjlewis; verification infrastructure and the complete replay),
+      Hosono (listed as @wand125; n11-optimality-lean, certificate checkers, generated proofs), Benjamin
       Gurevitch (T03), Julian-JJ (running the proof on an HPC cluster) and Guzhou0806
       (proof, transport and verification work); it credits jlevy/squares for the exact
       packing formulas, Evan Daniel for the square-packing definitions, and Walter Trump
-      for the packing. No licence at the root; MIT notices for the incorporated wand125
+      for the packing. No licence at the root; MIT notices for the incorporated Hosono
       and Daniel work. Retained intake: web/queuingtheorydotcom-n11-lean-2026-10-06/.
   - key: '[wand125 tools 2026]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-09-29'
-    credit: wand125 after Tokoharu, Daniel
+    credit: Hosono after Tokoharu, Daniel
     lineage: independent
     note: >-
-      square-packing-tools at 0d33ab61726c2ab03e3eb8f457dabaf22db8571f, MIT,
+      square-packing-tools by Hiroaki Hosono, who publishes on GitHub as wand125 and on X
+      as @wand_125, at 0d33ab61726c2ab03e3eb8f457dabaf22db8571f, MIT,
       retained in web/wand125-tools-2026-09-29/upstream.tar.gz. README.md,
       solver/PROVENANCE.md and THIRD_PARTY_NOTICES.md give authorship and provenance;
       the source discloses Codex and Claude assistance. Tool claims are separate from
       the numerical bounds published in square-packing-bounds. Its own attribution names
       Tokoharu and Evan Daniel; this entry does not infer a direct credit to this project
-      from those upstream projects' lineage. The general pose tree extends wand125's n21
+      from those upstream projects' lineage. The general pose tree extends Hosono's n21
       checker to point and threshold-charge measures and tests Marc Leonard Overbeck's n = 11 certificate.
   - key: '[Bentz 2010]'
     authors: [Bentz]
@@ -190,10 +191,51 @@ sources:
       The page's own header: "SVG, high-precision, and other updates by David
       Ellsworth, based on original compiled by Erich Friedman"
       (web/kingbird-squares-in-squares.md, lines 10-11). A maintained page, so no year.
+  - key: '[Arslanov et al.]'
+    authors: [Arslanov, Mustafin, Shangitbayev]
+    year: 2021
+    venue: 'Electron. J. Combin. 28(4), #P4.22'
+    dated: '2021-11-05'
+    note: >-
+      The retained title page in papers/arslanov-improved-packings-n-n-1.raw.md names
+      M.Z. Arslanov, S.A. Mustafin and Z.K. Shangitbayev, in that order, and states
+      Published: Nov 5, 2021. The archive index uses this existing citation key.
+      DOI 10.37236/8586. This author/date record does not register or independently
+      validate the paper's mathematical claims.
   - key: '[Nagamochi 2005]'
     authors: [Nagamochi]
     year: 2005
     venue: 'Electron. J. Combin. 12, #R37'
+  - key: '[Gensane 2004]'
+    authors: [Gensane]
+    year: 2004
+    venue: 'Electron. J. Combin. 11, #R33'
+    note: >-
+      The retained paper's opening byline names Th. Gensane and its publication line
+      gives 27 May 2004, in papers/gensane-2004-dense-packings-equal-spheres-cube.raw.md.
+      The archive index's sphere-packing paper row confirms the author, year and venue.
+  - key: '[Gensane–Ryckelynck 2005]'
+    authors: [Gensane, Ryckelynck]
+    year: 2005
+    venue: 'Discrete Comput. Geom. 34, 97–109'
+  - key: '[MacIver 2026 n17]'
+    authors: [MacIver]
+    year: 2026
+    venue: Author-hosted manuscript
+    dated: '2026-08-08'
+    note: >-
+      The title page names David R. MacIver and prints 8 August 2026, as retained in
+      web/maciver-square-packing-2026-09-07/maciver-2026-seventeen-unit-squares-lower-bound.raw.md
+      and the packet's Papers and Dates table. The manuscript discloses AI assistance
+      and incomplete human review; its date is not the later archive or repository date.
+  - key: '[Schadt n=29 repository]'
+    authors: [Schadt]
+    year: 2025
+    venue: GitHub
+    note: >-
+      The retained repository README's Results table credits its New Solution to
+      Thomas Schadt (2025), in web/schadt-s29-2025/README.md. The archive index identifies
+      the repository as BalthasarStrauss/Squares-packing_S-29-_New-Record.
   - key: '[Stromquist 2003]'
     authors: [Stromquist]
     year: 2003
@@ -402,7 +444,7 @@ sources:
     note: >-
       evand/square-packing at 7d6f46d9d0780241245dfbf77bad28aa1594c6b5
       (2026-10-02T01:10:42Z), the files Evan Daniel's comment of 2 October on
-      jlevy/squares#238 points to: his replay of wand125's point-only cover for s(61) = 8
+      jlevy/squares#238 points to: his replay of Hiroaki Hosono's point-only cover for s(61) = 8
       with zeromargin.py and zmcheck (search/s61_wand125/ and search/S61_WAND125_REPLAY.md,
       committed 2026-10-01T03:20Z and unchanged at this pin), Lemma 2 of the clique family
       in Lean, the dual_exact.py fixes and the claims audit. Its CREDITS.md still says the
@@ -491,7 +533,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-02'
-    credit: squarepacker after Daniel
+    credit: Ryu after Daniel
     lineage: independent
     note: >-
       squarepacker/s12-lower-bound at 8c53049025b94bb589ed25a90203f0a34c2945e4
@@ -511,7 +553,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-05'
-    credit: squarepacker after Roth, Vaughan
+    credit: Ryu after Roth, Vaughan
     lineage: independent
     note: >-
       squarepacker/k2-minus-c at 25f645e8fcadb3c2768f4da42d80e977fb1a508d
@@ -537,7 +579,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-06'
-    credit: squarepacker after Roth, Vaughan
+    credit: Ryu after Roth, Vaughan
     lineage: independent
     note: >-
       Sungjoon Ryu's version 1.2 of Packing k^2 - c unit squares, immutable tag
@@ -585,7 +627,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-05'
-    credit: squarepacker after Daniel, Levy
+    credit: Ryu after Daniel, Levy
     lineage: builds-on-project
     note: >-
       squarepacker/s12-lower-bound release v1.1 at 7a96bec36bc6811c3715ef581598f22ff9b7ba3a
@@ -650,31 +692,32 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-09-22'
-    credit: Tokoharu after Levy, wand125, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: Tokoharu after Levy, wand125 et al.
+    credit: Tokoharu after Levy, Hosono, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Tokoharu after Levy, Hosono et al.
     lineage: credits-project
     note: >-
       The tokoharu/square-packing-density-bounds repository, pinned in
       web/external-square-certificates-2026-09-22/acquisition/sources.json,
       and the author's September 22 announcement retained in acquisition/x-tokoharu.txt.
-      Joint with this project and wand125, in the author's order: the announcement says
+      Joint with this project and Hiroaki Hosono, in the author's order: the announcement says
       it was inspired "by @ojoshe and @wand125", and tokoharu-density/README.md, which
-      generalizes wand125's argument, credits through wand125's attribution the
+      generalizes Hosono's argument, credits through Hosono's attribution the
       underlying method to Walter Stromquist, Hiroshi Nagamochi, Sam Burns and Gustavo
       Massaccesi, and to jlevy/squares for row and column generation and
       branch-and-bound (lines 169-183). The rectangle-density method is Tokoharu's. The
       README says parts of the work were produced with AI assistance under human
       direction. Dated by the pinned commit b543990f, 2026-09-22.
   - key: '[wand125 point bounds 2026]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-09-22'
-    credit: wand125 after Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Levy et al.
+    credit: Hosono after Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Levy et al.
     lineage: builds-on-project
     note: >-
-      The wand125/square-packing-bounds repository and its 2026 certificate claims,
+      The wand125/square-packing-bounds repository of Hiroaki Hosono, who publishes on
+      GitHub as wand125 and on X as @wand_125, and its 2026 certificate claims,
       retained under web/external-square-certificates-2026-09-22/wand125-points/;
       acquisition/sources.json pins the complete source tree.
       Joint with this project: wand125-points/README.md says "The method is not ours" and
@@ -684,12 +727,12 @@ sources:
       project's verifier. The README says parts of the work were produced with AI
       assistance under human direction. Dated by the pinned commit 1398e42f, 2026-09-22.
   - key: '[wand125 rectangle bounds 2026]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-09-27'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The rectangle-density certificates wand125/square-packing-bounds added on
@@ -703,12 +746,12 @@ sources:
       says parts of the work were produced with AI assistance under human direction.
       Dated by that revision, 2026-09-27.
   - key: '[wand125 rectangle bounds 2026-09-28]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-09-28'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The rectangle-density certificates wand125/square-packing-bounds added or raised
@@ -718,12 +761,12 @@ sources:
       Credited as the September 27 key is, on the same README attribution
       (wand125-rectangles/README.md, lines 635-650). Dated by that revision, 2026-09-28.
   - key: '[wand125 point and mixed bounds 2026-09-28]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-09-28'
-    credit: wand125 after Daniel, Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Daniel et al.
+    credit: Hosono after Daniel, Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Daniel et al.
     lineage: credits-project
     note: >-
       The point-only s(21) = 5 and s(45) = 7 certificates and the mixed-rectangle
@@ -745,12 +788,12 @@ sources:
       directories. Dated by that revision, 2026-09-28. The complete s(21) and n = 50
       replays ran here on 2026-09-29, with their receipts in the packet.
   - key: '[wand125 rectangle bounds 2026-10-01]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-01'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The rectangle-density certificates wand125/square-packing-bounds added or raised
@@ -763,12 +806,12 @@ sources:
       produced with AI assistance under human direction. Dated by that revision,
       2026-10-01 UTC.
   - key: '[wand125 exact covers 2026-10-01]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-01'
-    credit: wand125 after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Daniel, Levy et al.
+    credit: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Daniel, Levy et al.
     lineage: credits-project
     note: >-
       The mixed covers for s(59) = 8 and s(77) = 9 that wand125/square-packing-bounds added
@@ -786,12 +829,12 @@ sources:
       The s(59) and s(77) covers' zmx2 sweeps were replayed here on 2026-10-02, with their
       receipts in the packet.
   - key: '[wand125 mixed bounds 2026-10-01]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-01'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The mixed rectangle-measure certificates for n = 37, 65, 66, 90 and 92 that
@@ -803,18 +846,18 @@ sources:
       accepts coverage at least 1, as for its n = 50 certificate. Credited as the
       rectangle keys are, on the same README attribution (lines 749-773); the issue says
       format and base checker are Tokoharu's and the measures and the modified checker
-      wand125's. The README says parts of the work were produced with AI assistance under
+      Hiroaki Hosono's. The README says parts of the work were produced with AI assistance under
       human direction. web/wand125-point-and-mixed-2026-10-01/acquisition/sources.json pins
       revision 1a25a5ed745fdd905a52f48fcc48150a0669032d. Dated by that revision,
       2026-10-01 UTC. Each certificate's complete replay ran here on 2026-10-02, with its
       receipts in the packet.
   - key: '[wand125 mixed bounds 2026-10-02]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-02'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The mixed rectangle-measure certificates for n = 84 and 85 that
@@ -831,12 +874,12 @@ sources:
       Each certificate's complete replay ran here on 2026-10-02, with its receipts in the
       packet.
   - key: '[wand125 mixed bounds n76 2026-10-02]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-02'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The mixed rectangle-measure certificate for n = 76 that wand125/square-packing-bounds
@@ -851,12 +894,12 @@ sources:
       revision 7975030a192607ef27edd1559aee4e98bd93047b. Dated by that revision, 2026-10-02
       UTC. Its complete replay ran here on 2026-10-02, with its receipts in the packet.
   - key: '[wand125 point n61 2026-09-30]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-09-30'
-    credit: wand125 after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Daniel, Levy et al.
+    credit: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Daniel, Levy et al.
     lineage: credits-project
     note: >-
       The point-only cover for s(61) = 8 that wand125/square-packing-bounds added on
@@ -871,12 +914,12 @@ sources:
       pins revision f8846cec9661773dbd0cc7cbeee7d01ddb12a2b8. Dated by that revision,
       2026-09-30 UTC.
   - key: '[wand125 linear certificates 2026-10-02]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-02'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The linear certificates for n = 101 and 83 that wand125/square-packing-bounds added on
@@ -894,11 +937,11 @@ sources:
       The n = 101 certificate's complete replay ran here on 2026-10-02 and the n = 83
       certificate's on 2026-10-03, with their receipts in the packet.
   - key: '[wand125 valid7 independent check 2026-10-02]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-02'
-    credit: wand125 after Daniel
+    credit: Hosono after Daniel
     lineage: independent
     note: >-
       wand125/valid7-independent-check at 38dd31b369991b0d96c917a4af0c7139b44a038d, the
@@ -913,11 +956,11 @@ sources:
       pins the revision, and the release records are pinned by SHA-256. Dated by that
       revision, 2026-10-02 UTC.
   - key: '[wand125 valid7 independent check 2026-10-03]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-03'
-    credit: wand125 after Daniel
+    credit: Hosono after Daniel
     lineage: independent
     note: >-
       wand125/valid7-independent-check at da469ecff5da0c71882e894b65d680ce57a0c87e, the
@@ -930,11 +973,11 @@ sources:
       and READ_LOG.md. web/wand125-valid7-independent-check-2026-10-03/acquisition/sources.json
       pins the revision. Dated by that revision, 2026-10-03 UTC.
   - key: '[wand125 valid7 independent check 2026-10-06]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-06'
-    credit: wand125 after Daniel
+    credit: Hosono after Daniel
     lineage: independent
     note: >-
       wand125/valid7-independent-check at c561dbb3fcea9178599db017f51f56b42ad9f91f, the
@@ -948,11 +991,11 @@ sources:
       ValidTilt9. web/wand125-valid7-independent-check-2026-10-06/acquisition/sources.json
       pins the revision. Dated by that revision, 2026-10-06 UTC.
   - key: '[wand125 Green DS7 Theorem 9 2026-10-02]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-02'
-    credit: wand125 after Friedman, MacIver
+    credit: Hosono after Friedman, MacIver
     lineage: independent
     note: >-
       The gist 9e5f27e25607c0966c4f91bc1253ce8b at 9d6de784d98169b90a1af8d5e57c0499cfb12874
@@ -966,12 +1009,12 @@ sources:
       web/wand125-green-ds7-theorem9-2026-10-02/acquisition/sources.json pins the revision.
       Dated by that revision, 2026-10-02 UTC.
   - key: '[wand125 mixed bounds afternoon 2026-10-02]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-02'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The six mixed rectangle-measure certificates for n = 83, 85, 87, 91, 92 and 96 that
@@ -991,12 +1034,12 @@ sources:
       Each certificate's complete replay ran here on 2026-10-02 or 2026-10-03, with its
       receipts in the packet.
   - key: '[wand125 linear n82 2026-10-02]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-02'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The linear certificate for n = 82 that wand125/square-packing-bounds added on
@@ -1013,12 +1056,12 @@ sources:
       b00fc70f1904e9b1b567afee056d347f911209e8. Dated by that revision, 2026-10-02 UTC. Its
       complete replay ran here on 2026-10-03, with its receipts in the packet.
   - key: '[wand125 rectangle bounds 2026-10-02]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-02'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The rectangle-density certificates wand125/square-packing-bounds raised on 2026-10-02
@@ -1031,12 +1074,12 @@ sources:
       README says parts of the work were produced with AI assistance under human direction.
       Dated by that revision, 2026-10-02 UTC.
   - key: '[wand125 mixed bounds 2026-10-03]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-03'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The 22 mixed rectangle-measure certificates that wand125/square-packing-bounds added in
@@ -1054,12 +1097,12 @@ sources:
       assistant. web/wand125-mixed-bounds-2026-10-03/acquisition/sources.json pins revision
       2aff2076c492d62340e986c84f60a0a29eb668df. Dated by that revision, 2026-10-03 UTC.
   - key: '[wand125 mixed bounds 2026-10-04]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-04'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The 16 mixed rectangle-measure certificates that wand125/square-packing-bounds added in
@@ -1080,12 +1123,12 @@ sources:
       assistant. web/wand125-mixed-bounds-2026-10-04/acquisition/sources.json pins revision
       8aa6a10b3b8f165d39c85b68982fed1de086516c. Dated by that revision, 2026-10-04 UTC.
   - key: '[wand125 mixed bounds evening 2026-10-04]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-04'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The 12 mixed rectangle-measure certificates that wand125/square-packing-bounds added in
@@ -1107,12 +1150,12 @@ sources:
       web/wand125-mixed-bounds-evening-2026-10-04/acquisition/sources.json pins revision
       797bdf6e10eba5f9dccca9da06f8352e81ba9dde. Dated by that revision, 2026-10-04 UTC.
   - key: '[wand125 record updates 2026-10-04]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-04'
-    credit: wand125 after Daniel, Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Daniel et al.
+    credit: Hosono after Daniel, Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Daniel et al.
     lineage: credits-project
     note: >-
       Four updates wand125/square-packing-bounds made on 2026-10-04 to certificates this
@@ -1129,12 +1172,12 @@ sources:
       revision 797bdf6e10eba5f9dccca9da06f8352e81ba9dde. Dated by that revision, 2026-10-04
       UTC.
   - key: '[wand125 mixed bounds 2026-10-05]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-05'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The two mixed rectangle-measure certificates that wand125/square-packing-bounds added
@@ -1152,12 +1195,12 @@ sources:
       web/wand125-mixed-bounds-2026-10-05/acquisition/sources.json pins revision
       a541afbe7826ff75f6d3848e10279fd524d55af3. Dated by that revision, 2026-10-05 UTC.
   - key: '[wand125 mixed bounds finer net 2026-10-05]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-05'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The two mixed rectangle-measure certificates that wand125/square-packing-bounds added
@@ -1176,12 +1219,12 @@ sources:
       pins revision 43050edc5bdf5116fc5a073283128edd6749946b. Dated by that revision,
       2026-10-05 UTC.
   - key: '[wand125 mixed bounds finer net 2026-10-06]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-06'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The two mixed rectangle-measure certificates that wand125/square-packing-bounds added
@@ -1202,12 +1245,12 @@ sources:
       65e408c9fa6bb787b6744c7c479ec19551a15016 (the commit's author name is Hiroaki
       Hosono). Dated by that revision, 2026-10-06 UTC.
   - key: '[wand125 mixed bounds check2 2026-10-06]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-06'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The ten mixed rectangle-measure certificates that wand125/square-packing-bounds added
@@ -1529,11 +1572,11 @@ sources:
       preserved outside live Git.
   - key: '[wand125 fine-net lower bounds 2026-10-08]'
     authors:
-    - wand125
+    - Hosono
     year: 2026
     venue: GitHub
     dated: '2026-10-08'
-    credit: wand125 after Levy
+    credit: Hosono after Levy
     lineage: builds-on-project
     note: Seven finer-net measure lower-bound reports for n19,20,26,27,28,29,31 at source 61e37d583ad690266da2188ad027ef3f697bf162;
       original archives/nested source identities retained outside live Git. Conditional maintained measure/net-premise
@@ -1638,11 +1681,11 @@ sources:
       admitted.'
   - key: '[wand125 fine-net n29 2026-10-10]'
     authors:
-    - wand125
+    - Hosono
     year: 2026
     venue: GitHub
     dated: '2026-10-10'
-    credit: wand125 after Tokoharu and Levy
+    credit: Hosono after Tokoharu and Levy
     lineage: builds-on-project
     note: The later n29 finer-net measure lower-bound report, s(29) >= 291/50, at source 22a23c8a99aa4e9616d596bc2f28555bacbee3dd,
       with its data in release square-lower-bounds-v1; the release asset is pinned by size and digest and
@@ -1654,17 +1697,17 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-10'
-    credit: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
-    short_credit: Guzhou0806 after wand125 et al.
+    credit: Guzhou0806 after Hosono, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+    short_credit: Guzhou0806 after Hosono et al.
     lineage: builds-on-project
     note: >-
       Release n40-670854-20261010 of Guzhou0806/n40-square-packing at
       e5abeb4d078a5c5b35df6204dd9b93378e5a7880 (committed 2026-10-10T06:47:01Z), reported
       on jlevy/squares#485: s(40) > 335427/50000 by a clipped-corner transfer from a
-      401-direction nodal statement on wand125's rect_n40_L67 density, unchanged, and the
+      401-direction nodal statement on Hiroaki Hosono's rect_n40_L67 density, unchanged, and the
       weaker full-core s(40) > 67000 sqrt(6400006889)/798988091. Credit is read from its
       SOURCES.md, which credits the density and the original verification method to
-      wand125, Tokoharu and their cited predecessors, including Stromquist, Burns and
+      Hosono (as wand125), Tokoharu and their cited predecessors, including Stromquist, Burns and
       Massaccesi, keeps the Rust verifier, this project's sqverify_fast, byte for byte from
       Joshua Levy's squares project, and gives Guzhou0806's contribution as the finer-net
       verification, the strict core transfer and the clipped-corner composition, from
@@ -1833,11 +1876,11 @@ sources:
       the author's numerical evidence; no local or global optimality claim.
   - key: '[wand125 fine-net n28 n30 2026-10-10]'
     authors:
-    - wand125
+    - Hosono
     year: 2026
     venue: GitHub
     dated: '2026-10-10'
-    credit: wand125 after Tokoharu and Levy
+    credit: Hosono after Tokoharu and Levy
     lineage: builds-on-project
     note: The n28 and n30 finer-net measure lower-bound reports, s(28) >= 2297/400 at source
       36b85b9f37efa7cc5d4464805cfb0f2d21576267 and s(30) >= 2357/400 at ff9f2692afe7d1e65a51bb079b61b3710b97fc82,
@@ -1847,12 +1890,12 @@ sources:
       redistribution of the nested verifier, which adapts this project's sqverify_fast, so a maintained
       replay is not another independent implementation.
   - key: '[wand125 linear n122 2026-10-10]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-10'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The linear certificate for n = 122 that wand125/square-packing added on 2026-10-10
@@ -1864,11 +1907,11 @@ sources:
       T-080 route's exact premises pass and a two-angle replay sample matched; the complete replay and
       adoption are pending. The enclosing problems/square-lower-bounds notice is MIT.
   - key: '[wand125 fine-net n37 n39 n44 2026-10-13]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-13'
-    credit: wand125 after Tokoharu and Levy
+    credit: Hosono after Tokoharu and Levy
     lineage: builds-on-project
     note: >-
       The n37, n39 and n44 finer-net measure lower-bound reports that wand125/square-packing
@@ -1881,11 +1924,11 @@ sources:
       The nested verifier adapts this project's sqverify_fast, so a maintained replay is not
       another independent implementation.
   - key: '[wand125 fine-net lower bounds 2026-10-16]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-16'
-    credit: wand125 after Tokoharu and Levy
+    credit: Hosono after Tokoharu and Levy
     lineage: builds-on-project
     note: >-
       The 18 fine-net measure lower-bound reports that wand125/square-packing added on
@@ -1900,12 +1943,12 @@ sources:
       nested verifier adapts this project's sqverify_fast, so a maintained replay is not
       another independent implementation.
   - key: '[wand125 linear n145 2026-10-13]'
-    authors: [wand125]
+    authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-13'
-    credit: wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
-    short_credit: wand125 after Tokoharu, Levy et al.
+    credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
     note: >-
       The linear certificate for n = 145 that wand125/square-packing added on 2026-10-13
@@ -1921,16 +1964,16 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-10'
-    credit: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
-    short_credit: Guzhou0806 after wand125 et al.
+    credit: Guzhou0806 after Hosono, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+    short_credit: Guzhou0806 after Hosono et al.
     lineage: builds-on-project
     note: >-
       Release n40-continuous-1340000-199529-20261010 of Guzhou0806/n40-square-packing at
       71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3 (committed 2026-10-10T14:30:28Z), reported in a
       follow-up comment on jlevy/squares#485: s(40) > 1340000/199529 by a continuous-pose
       interval kernel over 43 slabs of the half-angle tangent and an exact near-axis
-      certificate, on wand125's rect_n40_L67 density, unchanged. Credit is read from its
-      SOURCES.md, which credits the density to wand125, the rectangle-density method and the
+      certificate, on Hiroaki Hosono's rect_n40_L67 density, unchanged. Credit is read from its
+      SOURCES.md, which credits the density to Hosono (as wand125), the rectangle-density method and the
       translation-derivative verification structure to Tokoharu, prior measure and
       unavoidable-set work to Stromquist, Burns and Massaccesi, says the concave-section bound
       is informed by the Rust implementation in Joshua Levy's Squares Project (sqverify_fast at
@@ -1946,18 +1989,18 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-11'
-    credit: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
-    short_credit: Guzhou0806 after wand125 et al.
+    credit: Guzhou0806 after Hosono, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+    short_credit: Guzhou0806 after Hosono et al.
     lineage: builds-on-project
     note: >-
       Release n40-new-supports-6718-20261011 of Guzhou0806/n40-square-packing at
       6a65957e6c5c51cdf267917d882dab7f5b4928dd (committed 2026-10-11T07:12:04Z), reported in a
       comment on jlevy/squares#485: s(40) > 3359/500 by the continuous-pose and axis kernels of
       the 10 October release, byte for byte, on a new rational density of 685 D4 rectangle
-      orbits (522 rows of wand125's rect_n40_L67 pool, 163 generated outside it, every weight
+      orbits (522 rows of Hiroaki Hosono's rect_n40_L67 pool, 163 generated outside it, every weight
       new), with a separate exact obstruction for the full original support family at 168/25
       that bears on no bound. Credit is read from its SOURCES.md, which credits the original
-      density and candidate rectangles to wand125, the translation-derivative structure to
+      density and candidate rectangles to Hosono's wand125/square-packing-bounds, the translation-derivative structure to
       Tokoharu's rectangle-density method, says the concave-section calculations draw on
       Joshua Levy's Squares Project (sqverify_fast at ef79288a4), names prior measure and
       unavoidable-set work by Stromquist, Burns and Massaccesi, and gives Guzhou0806's
@@ -2155,7 +2198,7 @@ sources:
       Mira-acc/17squares (the certificate frame), Guzhou0806's N17 project (the angle
       catalogue, the parent-side reduction and the first exact JavaScript checker) and
       Muhammad Maaz (the semidefinite leaves); Bidwell for the packing, and Gensane and
-      Ryckelynck and David Ellsworth for its exact description. It lists wand125's
+      Ryckelynck and David Ellsworth for its exact description. It lists Hiroaki Hosono's
       certificates, kernel and verifier as context, not as a premise. README.md: "The
       mathematics, the engines, the certificates, the checkers, the reviews and the text
       were produced by AI systems under his direction and to his instructions: Codex
@@ -2209,7 +2252,7 @@ sources:
       13 October (docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md) records
       two attribution findings to put to the author. F-1: the proof runs on this project's
       24-cell cover, cap, census, endpoint chart and layout and 52-row local recipe, and on
-      32 patterns of its certified sub-pattern ledger, eleven of them wand125's, none of
+      32 patterns of its certified sub-pattern ledger, eleven of them Hosono's, none of
       which the README or CITATION.cff credits beyond collecting "the wider research
       record"; and Overbeck's 60-place seed of 21 September 2026 fixes the centre of the
       endpoint box. The packet's first-party comparison programs retain the cover, pattern
@@ -2294,7 +2337,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-14'
-    credit: Greff after Daniel, wand125
+    credit: Greff after Daniel, Hosono
     lineage: independent
     note: >-
       bengreff/s76-certificate at 1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f
@@ -2305,7 +2348,7 @@ sources:
       evand/square-packing b91d70b6, with a Lean wrapper on Daniel's Sqpack at 1718a58 that
       takes the covering statement as a hypothesis. Registration was requested in
       jlevy/squares#594. The README credits Evan Daniel for the method at margin zero, the
-      mixed format, the checkers and the Lean library, and wand125 for the s(59) = 8 cover
+      mixed format, the checkers and the Lean library, and Hosono for the s(59) = 8 cover
       reused for the corners, the band-insertion construction and the pinned toolchain;
       it does not mention this project, and the issue cites the record's n-076.md only for
       the standing bound. AI assistance, README.md: "Benjamin Greff directed the work. The
@@ -2723,7 +2766,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-15'
-    credit: Greff after Daniel, wand125
+    credit: Greff after Daniel, Hosono
     lineage: independent
     note: >-
       bengreff/s95-certificate at dd7297d06adc664268c65005369b895e4ded7547
@@ -2734,7 +2777,7 @@ sources:
       evand/square-packing b91d70b6, with a Lean wrapper on Daniel's Sqpack at 1718a58
       that takes the covering statement as a hypothesis. Registration was requested in
       jlevy/squares#610. The README credits Evan Daniel for the method at margin zero,
-      the mixed format, the checkers and the Lean library, and wand125 for the s(59) = 8
+      the mixed format, the checkers and the Lean library, and Hosono for the s(59) = 8
       cover reused for the corners and the band-insertion construction; it names the
       author's own s(76) certificate as the previous case, and does not mention this
       project except that the issue cites the record's n-095.md for the standing bound.
@@ -3067,6 +3110,17 @@ sources:
       per-case provenance are retained in web/muglich-issue686-2026-10-19/, not the
       archive's bytes. CC BY 4.0 granted 20 October 2026; OpenAI Codex assistance
       disclosed. Upper bounds only.
+  - key: '[Roth–Vaughan 1978]'
+    authors:
+    - Roth
+    - Vaughan
+    year: 1978
+    venue: J. Combin. Theory Ser. A 24
+    lineage: independent
+    note: Inefficiency in Packing Squares with Unit Squares, pages 170–186. The retained PDF
+      title page credits K. F. Roth and R. C. Vaughan; archived as papers/roth-vaughan-1978-inefficiency-packing-squares.pdf.
+      Original published work underlying the later Ryu citations; this bibliography entry does
+      not register a new mathematical result.
   - key: '[Daniel n343 sweep 2026-10-20]'
     authors:
     - Daniel

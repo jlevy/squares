@@ -1,4 +1,4 @@
-"""Audit wand125's rectangle-density certificates and replay the reviewed checker.
+"""Audit Hosono's rectangle-density certificates and replay the reviewed checker.
 
 wand125/square-packing-bounds publishes certificates in Tokoharu's rectangle-density
 format, checked by Tokoharu's unchanged ``verify.cpp``. This tool binds them to the

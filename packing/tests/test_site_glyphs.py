@@ -99,7 +99,7 @@ KNOWN: dict[str, dict[str, str]] = {
 #: bar's own sheet, `site-nav.css`, is not among them: it is inlined in the explainer,
 #: whose bytes this change leaves alone, and on every KPress page its three containers
 #: already inherit the regular weight from KPress's header.
-SANS_RULE_SHEETS = ("site.css", "site-result.css")
+SANS_RULE_SHEETS = ("site.css", "site-result.css", "site-contributor.css")
 SANS_FAMILY = "font-family: var(--kpress-font-sans);"
 SANS_WEIGHT = re.compile(
     r"font-weight: (var\(--site-font-weight-sans-(light|medium|bold)\)|inherit);"

@@ -86,7 +86,16 @@ class PublicationHistoryEntry(NamedTuple):
 #:
 #: Reproduce with `gh api "repos/jlevy/squares/deployments?environment=github-pages"` and,
 #: for each deployment's commit, what the page it built stated.
+# The leading entry is proposed for PR #578; confirm its date at first deployment.
 PUBLICATION_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.9.0",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Add person profiles and reviewed credit links, with direct profile "
+            "navigation and shared article popovers for complete case and result records."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.8.20",
         first_published="October 22, 2026",
@@ -751,7 +760,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "728dc8833554414d3b2f39989f1fb973cb97c4dd"
+DATA_REVISION = "6a8c90331b48b20187e81a9b817624e8a7264982"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -846,7 +855,16 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            form, 9b459da65 and 97e4069d5) went live
 #:                                            on October 1 and 2, so the substantive
 #:                                            day is the one recorded
+#: The leading entry is proposed for PR #578; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.16",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Link reviewed oversight credits and article names to person profiles with "
+            "consistent surname labels."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.15",
         first_published="October 22, 2026",
@@ -993,14 +1011,23 @@ EXPLAINER_FIRST_PUBLISHED = EXPLAINER_HISTORY[-1].first_published
 #: `PUBLICATION_DATE`, the day the edition was first published, which stood still while
 #: the article changed under it: merging is the whole publish, so the text a reader sees
 #: moves between editions. Change it in the commit that changes the article.
-EXPLAINER_REVISED = "October 13, 2026"
+EXPLAINER_REVISED = "October 21, 2026"
 
 #: The optimality review's own editions, newest first, each with the day it was first
 #: published and what changed in the paper: the review's history, as `EXPLAINER_HISTORY`
 #: is the explainer's, linked from its front (`PaperFront.history`). v0.1.0 is dated by
 #: the commit that published it (620ffff54); the day it first went live is not recorded
 #: (think-2cqu).
+# The leading entry is proposed for PR #578; confirm its date at first deployment.
 OPTIMALITY_REVIEW_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.8",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Correct Manasseh Ahmed's name and credit Hiroaki Hosono's checker and "
+            "formalization reports by name; link reviewed article names to person profiles."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.1.7",
         first_published="October 7, 2026",
@@ -1107,7 +1134,7 @@ OPTIMALITY_REVIEW_EDITION = " ".join(
 #: prints, by the rule `EXPLAINER_REVISED` follows -- the author date of the last commit
 #: that changed its article, `n11-optimality-review-article.md`, held to git by
 #: `devtools.artifact_dates`. Change it in the commit that changes the article.
-OPTIMALITY_REVIEW_REVISED = "October 12, 2026"
+OPTIMALITY_REVIEW_REVISED = "October 13, 2026"
 
 #: The day the proof the review explains was published by its source, which the review's
 #: "Original proof" date prints. A fact about someone else's work, so it is typed, and
@@ -1116,7 +1143,16 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 
 #: Every edition of Part II, the review of Overbeck's certified lower bound
 #: `s(11) > 31/8` (T-037), newest first, as `OPTIMALITY_REVIEW_HISTORY` is Part III's.
+# The leading entry is proposed for PR #578; confirm its date at first deployment.
 THRESHOLD_REVIEW_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.1",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Credit Hiroaki Hosono's checker and retained tools by name; "
+            "link reviewed names in the article to person profiles."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.1.0",
         first_published="October 5, 2026",
@@ -1146,7 +1182,16 @@ THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 
 #: The standalone tutorial on finding and verifying record packings. Its version and
 #: dates belong to the paper, independently of the site and n = 11 series.
+#: The leading entry is proposed for PR #578; confirm its date at first deployment.
 PACKING_METHODS_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.2.4",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Link reviewed oversight credits and article names to person profiles with "
+            "consistent surname labels."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.2.3",
         first_published="October 17, 2026",
@@ -1242,6 +1287,38 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.15",
+        version="v0.4.16",
+        impact="patch",
+        reason=(
+            "Link the oversight credit to Joshua Levy's profile and use the reviewed "
+            "surname label in the HTML and Markdown fronts, also used for PDF output; "
+            "link reviewed article names to profiles."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:square-packing-methods-survey",
+        previous_version="v0.2.3",
+        version="v0.2.4",
+        impact="patch",
+        reason=(
+            "Link the oversight credit to Joshua Levy's profile and use the reviewed "
+            "surname label in the HTML and Markdown fronts, also used for PDF output; "
+            "link reviewed article names to profiles."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.20",
+        version="v0.9.0",
+        impact="minor",
+        reason=(
+            "Add person profiles and reviewed credit links, with direct profile "
+            "navigation and shared article popovers for complete case and result records."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.8.19",
@@ -1617,6 +1694,26 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         reason=(
             "Update the registered result count and current bound citations after the "
             "fine-net imports and reviewed n108 adoption."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-optimality-review",
+        previous_version="v0.1.7",
+        version="v0.1.8",
+        impact="patch",
+        reason=(
+            "Correct Manasseh Ahmed's name and credit Hiroaki Hosono's checker and "
+            "formalization reports by name; link reviewed article names to person profiles."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-threshold-bound-review",
+        previous_version="v0.1.0",
+        version="v0.1.1",
+        impact="patch",
+        reason=(
+            "Credit Hiroaki Hosono's checker and retained tools by name; "
+            "link reviewed names in the article to person profiles."
         ),
     ),
     ReleaseImpactDecision(
