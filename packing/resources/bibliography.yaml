@@ -3232,8 +3232,8 @@ sources:
       house packings (T-174's and T-225's) and 120 rows beyond the corpus, many of them
       re-solves of Couzo's and Muglich's packings and some new arrangements. No licence:
       derived exact facts only, no upstream byte retained. The issue credits Mishapolk
-      (Mikhail Polk) and the finders its packings build on, and discloses Gemini
-      assistance. Upper bounds only; no optimality claim.
+      (Mykhailo Polkovskyi, since its 11:35:16Z edit) and the finders its packings build
+      on, and discloses Gemini assistance. Upper bounds only; no optimality claim.
   - key: '[de Winter issue 666 2026-10-17]'
     authors: [de Winter]
     year: 2026

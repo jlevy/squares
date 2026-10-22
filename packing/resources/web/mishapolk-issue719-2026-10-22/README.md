@@ -17,13 +17,16 @@ below an earlier certificate; the 8 above 1024 wait on the owner.
 
 ## What the Issue Reports
 
-- **Versions.** The issue opened with 221 counts to 4035, pinned at `1851c2c`; an edit at
-  05:35:31Z changed the credit name, and an edit at 06:05:31Z cut it to 122 counts pinned
-  at `12fc466`, withdrawing 101 and adding 366 and 447. No side or digest of a surviving
-  row changed. The issue had no comments when it was read.
-- **Credit name.** “Mishapolk (Mikhail Polk)”; the first edit wrote “Mykhailo
-  Polkovskyi”, the name the record has used since issue 593, and the current body
-  reverts to “Mikhail Polk”. The reply asks which the record should use.
+- **Versions.** The issue opened with 221 counts to 4035, pinned at `1851c2c`; an edit
+  at 05:35:31Z changed the credit name, and an edit at 06:05:31Z cut it to 122 counts
+  pinned at `12fc466`, withdrawing 101 and adding 366 and 447. No side or digest of a
+  surviving row changed. The issue had no comments when it was read. An edit at
+  11:35:16Z, after that read, changed only the two credit lines.
+- **Credit name.** The credit line alternated across the four versions: “Mishapolk
+  (Mikhail Polk)” at 05:30:47Z and 06:05:31Z, and “Mishapolk (Mykhailo Polkovskyi)”, the
+  name the record has used since issue 593, at 05:35:31Z and in the current body, edited
+  at 11:35:16Z. [acquisition/issue.json](acquisition/issue.json) keeps the 06:05:31Z
+  body as read.
 - **Sides.** The table’s “Certified Side S (16 dec)” is each exact header side’s binary64
   value printed at 16 places. At 76 of the 122 rows that print lies below the exact side,
   so it is no upper bound as written; this packet compares and records the exact sides.
@@ -55,11 +58,13 @@ redistribution permission or licence determination is asserted.
 pin, from [acquisition/declaration.json](acquisition/declaration.json);
 [acquisition/sources.json](acquisition/sources.json) is the record and
 [acquisition/upstream-subtree.sha256](acquisition/upstream-subtree.sha256) the manifest.
-Its scope is 173 files, 14,943,057 bytes, every one pinned by digest and bound to its Git
-blob at the pin: the README, both victory indexes, the 122 claimed certificates, and 48
-more certificates this packet answers for without importing them
-([Not Imported](#not-imported)). The rest of the tree’s 607 certificates are pinned by
-the commit alone. [acquisition/issue.json](acquisition/issue.json) keeps the issue as read.
+Its scope is 173 files, 14,943,057 bytes, every one pinned by digest and bound to its
+Git blob at the pin: the README, both victory indexes, the 122 claimed certificates, and
+48 more certificates this packet answers for without importing them ([Not
+Imported](#not-imported)). The other 437 of the tree’s 607 certificates are pinned by
+the commit alone, among them `certificates/n105.cert`, a second 105 file $4.64 \times
+10^{-12}$ above `n-105.cert`, which the issue does not name.
+[acquisition/issue.json](acquisition/issue.json) keeps the issue as read.
 
 ## Derived Facts
 
@@ -221,13 +226,13 @@ stage 4 review (think-4h23); a beyond-horizon row owes none.
 
 ## Credit
 
-Mykhailo Polkovskyi (Mishapolk), the name the record has used since issue 593; the issue
-gives Mikhail Polk. At 105 and 204 the entry credits each packing’s finders first, as a
-regularization: Ryan Xu’s packing as Francisco Couzo and PingYou Ltd refined it, and
-Couzo’s packing as Evan Daniel regularized it, which Couzo’s source credits to
-Polkovskyi’s own construction. Per-row lineage beyond the corpus is not stated by the
-source, and per-row credit beyond the horizon is the owner’s open question from #686.
-The issue discloses Gemini assistance.
+Mykhailo Polkovskyi (Mishapolk), the name the record has used since issue 593 and the
+issue’s credit since its 11:35:16Z edit. At 105 and 204 the entry credits each packing’s
+finders first, as a regularization: Ryan Xu’s packing as Francisco Couzo and PingYou Ltd
+refined it, and Couzo’s packing as Evan Daniel regularized it, which Couzo’s source
+credits to Polkovskyi’s own construction. Per-row lineage beyond the corpus is not
+stated by the source, and per-row credit beyond the horizon is the owner’s open question
+from #686. The issue discloses Gemini assistance.
 
 ## Commands
 

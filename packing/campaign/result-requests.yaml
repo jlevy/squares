@@ -18695,7 +18695,7 @@ issues:
     kind: result-report
     triage: done
     summary: >-
-      Mykhailo Polkovskyi (Mishapolk, credited in the issue as Mikhail Polk) reports 122 upper
+      Mykhailo Polkovskyi (Mishapolk) reports 122 upper
       bounds at n = 105 to 1568 from Mishapolk/square-packing-records at
       12fc46678fa8eefa3f156ff37dfffd84c8f3a580, each an exact certificate certificates/n-N.cert
       whose header side is authoritative; the table prints each side's binary64 value at 16
@@ -18706,7 +18706,7 @@ issues:
       the corpus at or below 1024 are beyond-horizon rows, each current, after the filtered
       exact replay decided every one on two routes with every control refused; 366 is not
       recorded, below Couzo's 4e4c8ce certificate; the 8 rows above 1024 wait on the owner.
-    read_through: '2026-10-22T05:30:47Z'
+    read_through: '2026-10-22T11:35:16Z'
     results:
     - key: n105
       claim: s(105) <= 10.7893037837429748, binary64; the exact header side is authoritative.
@@ -20047,14 +20047,16 @@ issues:
       counts above 1024 are tracked (think-f2io) and the 8 rows above 1024 have their
       disposition (think-9vr8), and the replies reporting each are posted.
     notes: >-
-      The issue opened at 2026-10-22T05:30:47Z with 221 counts to 4035 pinned at 1851c2c, was
-      edited at 05:35:31Z (credit name Mykhailo Polkovskyi) and at 06:05:31Z to 122 counts
-      pinned at 12fc466, withdrawing 101 and adding 366 and 447. The watched repository's
-      certificates are reports from their first commit: 1851c2c (05:29:48Z) for 121, 12fc466
-      (06:05:07Z) for 447. The stage 1 triage (think-xyhn) and this import found no reply due
-      before the import: the acknowledgement drafted in triage is folded into the import reply,
-      posted after the records pull request merges. Ten withdrawn rows still new by the record's
-      test, 34 in-corpus files below or undecided against the record beyond the twelfth place
-      (three of them failing both exact routes in triage) and a second 204 file, 1.48e-11 lower,
-      are pinned by digest and not imported; the reply asks the author about each, and about the
-      credit name and per-row lineage.
+      The issue opened at 2026-10-22T05:30:47Z with 221 counts to 4035 pinned at 1851c2c, was edited
+      at 05:35:31Z (credit name Mykhailo Polkovskyi) and at 06:05:31Z to 122 counts pinned at
+      12fc466, withdrawing 101 and adding 366 and 447 and restoring the credit name Mikhail Polk; an
+      edit at 11:35:16Z changed only the two credit lines, to Mykhailo Polkovskyi, the name the
+      record uses. The watched repository's certificates are reports from their first commit:
+      1851c2c (05:29:48Z) for 121, 12fc466 (06:05:07Z) for 447; the ledger dates #719's claims at
+      366 and 447 by the 06:05:31Z edit that first made them. The stage 1 triage (think-xyhn) and
+      this import found no reply due before the import: the acknowledgement drafted in triage is
+      folded into the import reply, posted after the records pull request merges. 48 certificates
+      the issue does not claim are pinned by digest and not imported: ten withdrawn rows still new
+      by the record's test, 34 in-corpus files below or undecided against the record beyond the
+      twelfth place, three files that failed both exact routes in triage, and a second 204 file,
+      1.48e-11 lower. The reply asks the author about each, and about per-row lineage.
