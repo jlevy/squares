@@ -2023,6 +2023,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/adopt_houses.py",
             "packing/devtools/default_drawings.py",
             "packing/devtools/result_credit.py",
+            "packing/devtools/site_urls.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
@@ -2044,8 +2045,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "main's: render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods write their HTML and Markdown byte-identical across all "
             "four renders; only the explainer, which counts the register, differs, and it "
-            "takes v0.4.15. No PDF was printed; each prints from that HTML. Retain v0.1.7, "
-            "v0.1.0 and v0.2.3."
+            "takes v0.4.15. Rendered the same way again at link revision da2671cf, from "
+            "this tree at 369db682, after the rigidity blocks and t-180's page budget: the "
+            "same three byte-identical. No PDF was printed; each prints from that HTML. "
+            "Retain v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
