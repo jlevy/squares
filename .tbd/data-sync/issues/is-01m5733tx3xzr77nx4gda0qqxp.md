@@ -5,7 +5,7 @@ title: "Import franciscouzo: 227, 229, 330-996: registration request (#672)"
 kind: task
 status: in_progress
 priority: 2
-version: 16
+version: 17
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.866Z
-updated_at: 2026-10-22T06:29:11.540Z
+updated_at: 2026-10-22T07:49:13.336Z
 started_at: 2026-10-18T12:53:37.251Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/672
@@ -248,3 +248,4 @@ Replay: all 205 rows (666: 11, 670: 72, 672: 44, 675: 78) verified on both maint
 Ledger: 432 claims at 124 counts, all recorded, none undecided; starts frozen at 804eff369; recomputed against main 7359fa8b6, no verdict changed from the triage.
 2026-10-22 05:55Z c-lane-pr-b: draft PR https://github.com/jlevy/squares/pull/720 (label intake), last pushed head 5ab83974e9445e3da671a72c9c2defe9fdd5957a (ls-remote confirmed), after the release commits cfeb44cc8 (DATA_REVISION b8045210), cadf73fd9 (papers' record), 5ab83974e (site v0.8.20). Next: local --push tier running; hosted CI; then report to the coordinator. Verdict comment drafts: scratchpad replies/verdicts-prb/ (intake_comments --check passes).
 2026-10-22 06:31Z c-lane-pr-b: PR https://github.com/jlevy/squares/pull/720 (draft, label intake) last pushed head 0b09ac278b400b6a67b9497f1494b0d43b1b87a0 (ls-remote confirmed). Hosted CI at 5286f1b69 (run 39730271004) failed suite-a, suite-b and suite-d on three stale statements, fixed in 9efff7252: the overview's other-projects card for joostdewinter.github.io and T-196's card (T-225 the house at 227 since 22 October); the house writer's historical() makes review B4's comma repair at 103; #715's test and packet README count the ten backlog rows #715's rows also supersede (#666 at 509, #670 at 866 and 925, #672 at 750, #675 at 547, 807, 809, 864, 923, 931). 0b09ac278 extends the papers' no-public-change record (re-rendered at link revision b8045210 from 9efff7252: the same 68 files; DATA_REVISION stays b8045210). Hosted at 0b09ac278: Packing validation 39732884021, Certificate page 39732883974 and Branch mergeability all pass. Local packing-validate --push (started at 5ab83974e): 66/67 steps; 18,867 passed, 8 failed = those four tests plus four known host-only (two fixed_core_packet reaping, two test_site_column_measurement). --source-bytes 232,400,158 (383,714 under the cap). Next: the coordinator's review and merge of #720 (S2 proposed, not applied); then the verdict comments drafted in scratchpad replies/verdicts-prb/.
+2026-10-22 07:50Z c-lane-pr-b: review A of PR #720 addressed (parent think-xloh, closed). Commits 728dc8833 (A1: 77 start rows repointed so each count is one report-order chain, chain_problems in check; A2-A6), 76961e6e7 (A7 requests guard), cecd6e26b (DATA_REVISION 728dc883), 82cfccb5b (papers' record). Last pushed head 82cfccb5ba8a914a31447ad9f8b33efeec0a18fc (ls-remote confirmed); hosted CI green (Packing validation 39739425203, Certificate page 39739425200, Branch mergeability 39739417086). Dispositions: https://github.com/jlevy/squares/pull/720#issuecomment-6335611258. --source-bytes 232,414,111 (369,761 under). Next: the coordinator's merge of #720 (S2 applied); A8 is think-t1lk's prune lane; think-mh6b now has the guard to extend.
