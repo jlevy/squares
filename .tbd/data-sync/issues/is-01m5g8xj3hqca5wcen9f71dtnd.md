@@ -3,9 +3,9 @@ type: is
 id: is-01m5g8xj3hqca5wcen9f71dtnd
 title: "Import franciscouzo: 1285 upper bounds at 328–9913 (#715)"
 kind: task
-status: closed
+status: in_progress
 priority: 1
-version: 11
+version: 14
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -17,10 +17,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:22:12.593Z
-updated_at: 2026-10-22T02:52:57.532Z
+updated_at: 2026-10-22T02:54:55.888Z
 started_at: 2026-10-21T22:22:13.353Z
-closed_at: 2026-10-22T02:52:56.233Z
-close_reason: "Not closed: placeholder"
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -183,4 +183,7 @@ blocked_on: think-f2io
 blocked_on: think-f2io
 
 2026-10-22 02:53 coord-intake-1021b: #717 merged as de1651e1c (109 new rows <= 1024 recorded; 30 held on think-fwa9; 34 restated left to think-a4wq/think-1545, think-om5l, think-yfoo; 335 not recorded; site v0.8.18). Owed: the #715 stage 7 reply correcting the acknowledgement (64 -> 34 + 30; 335 margin 1.7825e-11; #678 545 superseded); follow-ups on #702 (343 superseded), #686 (50 rows superseded) and #678 (26 rows and 545 superseded). Rows above 1024 wait on think-f2io (D2 is live above 1024: 856 L-border rows; bulk ~9.1 MB zlib).
+blocked_on: think-f2io
+
+2026-10-22 02:55 coord-intake-1021b: this bead was closed in error at 02:52:56Z by a stray command (reason "Not closed: placeholder") and reopened at once; nothing about #715 changed.
 blocked_on: think-f2io
