@@ -16,6 +16,7 @@ import re
 from collections.abc import Iterator
 from html.parser import HTMLParser
 from pathlib import Path
+from typing import override
 
 import pytest
 
@@ -446,9 +447,16 @@ def test_a_forwarder_previews_the_page_it_leads_to_and_one_off_the_site_carries_
     the defect log's, names that address and carries no card. Every forwarder is the
     renderer's, the papers' old addresses among them: the optimality paper's page, the
     directory it was served from, and the explainer's."""
+    from devtools import render_contributors  # noqa: PLC0415
     from devtools import render_n11_lower_bounds_explainer as explainer  # noqa: PLC0415
     from devtools import render_n11_optimality_review as paper  # noqa: PLC0415
 
+    # The profiles' earlier `contributors/` addresses lead to profile pages, which their
+    # own renderer writes beside `render_overview`'s pages.
+    pages = {
+        **pages,
+        **{profile.name: profile.html for profile in render_contributors.contributor_pages()},
+    }
     named = check_published_site.forwarder_canonicals()
     forwarders = {page.name: page.html for page in render_overview.forwarder_pages()}
     assert set(named) == set(forwarders)
@@ -555,9 +563,9 @@ def test_a_forwarder_previewing_its_page_by_another_name_kind_or_sentence_is_nam
     assert said in forwarder
     for old, new, finding in (
         (
-            "Every Result",
+            render_overview.RESULTS_META.name,
             "All Results",
-            "its og:title is ['All Results'], and the page's own is ['Every Result']",
+            "its og:title is ['All Results'], and the page's own is ['Results']",
         ),
         (
             'og:type" content="website"',
@@ -621,6 +629,18 @@ def records() -> dict[str, str]:
     return site_renders.case_records()
 
 
+class _DocumentElements(HTMLParser):
+    def __init__(self, page: str) -> None:
+        super().__init__()
+        self.elements: list[tuple[str, dict[str, str | None]]] = []
+        self.feed(page)
+        self.close()
+
+    @override
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.elements.append((tag, dict(attrs)))
+
+
 def test_result_overviews_are_complete_canonical_documents(
     result_pages: dict[str, str],
 ) -> None:
@@ -632,7 +652,10 @@ def test_result_overviews_are_complete_canonical_documents(
         assert len(re.findall(r"<h1\b", page)) == 1, path
         assert '<article class="site-result"' in page, path
         assert "<main" in page, path
-        assert 'class="site-nav"' in page, path
+        assert any(
+            tag == "nav" and "site-nav" in (attrs.get("class") or "").split()
+            for tag, attrs in _DocumentElements(page).elements
+        ), path
 
 
 def test_the_card_is_the_heros_drawing_on_the_pages_background() -> None:
@@ -971,7 +994,7 @@ def test_head_checks_report_one_line_a_page_a_forwarder_and_the_card(card: bytes
         == f"forwarder all-results.html: previews {target} as that page's own head does"
     )
     # The same forwarder under another name fails beside the page, and passes alone.
-    renamed = forwarder.replace("Every Result", "All Results")
+    renamed = forwarder.replace(render_overview.RESULTS_META.name, "All Results")
     results = head_checks({"results.html": page}, {"all-results.html": (renamed, target)}, card)
     assert [passed for passed, _ in results] == [True, True, False, True]
     results = head_checks({}, {"all-results.html": (renamed, target)}, card)

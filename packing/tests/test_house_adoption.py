@@ -1649,16 +1649,58 @@ def _flat(text: str) -> str:
     return " ".join(text.split())
 
 
-def _body(text: str) -> str:
-    """A record's body as the writer is answerable for it (`adopt_houses.history_words`).
+#: Record-wide edits made after a pass, which its replay cannot know: on 13 October 2026
+#: every credit to wand125 became Hosono, Hiroaki Hosono at a record's first mention
+#: (`attribution.md`, Hiroaki Hosono / wand125), and on 14 October every credit to ry-xu
+#: became Xu, Ryan Xu in finder lists and at first mention (Ryan Xu / ry-xu). Both sides
+#: are read in the compact credit.
+LATER_RENAMES = (
+    ("wand125’s", "Hosono’s"),
+    ("Hiroaki Hosono", "Hosono"),
+    ("ry-xu reports", "Xu reports"),
+    ("Ryan Xu reports", "Xu reports"),
+    ("The ry-xu construction", "The Xu construction"),
+)
+#: The finder lists those renames changed, which the writer carries from the prior state.
+LATER_FINDERS = (("\n    - ry-xu\n", "\n    - Ryan Xu\n"),)
 
-    The counts the first pass marked by hand (`adopt_houses.HAND_MARKED`) are compared
-    only in their owned parts."""
-    return adopt.history_words(text.split("---\n", 2)[2])
+
+def _body(text: str) -> str:
+    """The writer-owned history, with later contributor renames read alike."""
+    body = adopt.history_words(text.split("---\n", 2)[2])
+    for old, new in LATER_RENAMES:
+        body = body.replace(old, new)
+    return body
+
+
+def test_n29_numerical_and_schadt_ceiling_claims_replay_as_idempotent_history(
+    replayed: list[adopt.Move],
+) -> None:
+    move = next(move for move in replayed if move.n == 29)
+    current = select.case_path(29).read_text(encoding="utf-8")
+    heading = "\n## Six Numerically Checked Orientation Classes"
+    stale = (
+        move.text[
+            move.text.index("**This does not move any bound.**") : move.text.index(heading)
+        ].strip()
+        + "\n\nThis proves the formal upper bound shown above."
+    )
+    expected = (
+        current[
+            current.index("**This solve did not move a bound.**") : current.index(heading)
+        ].strip()
+        + "\n\nThis proved the earlier Schadt rational ceiling."
+    )
+    other = next(move for move in replayed if move.n != 29)
+    for original in (stale, "\n".join(stale.split())):
+        written = adopt.historical(move, original)
+        assert _flat(written) == _flat(expected)
+        assert adopt.historical(move, written) == written
+        assert adopt.historical(other, original) == original
 
 
 N108_LOWER_INTRO = r"""**Fine-net lower bound, 18 October 2026.** The certificate
-`mixed_n108_L1062`, published by wand125 on 16 October, raises both lower lanes to
+`mixed_n108_L1062`, published by Hosono on 16 October, raises both lower lanes to
 $s(108) \ge 531/50 = 10.62$. Its exact nonnegative rectangle measure has total mass
 $10799999/100000 < 108$. The retained maintained `sqverify-fast` census verifies capture
 at every centre in all 201 declared-net directions, and its whole-net control receipt
@@ -1708,6 +1750,8 @@ def _n108_later_lower_projection(held: dict[str, Any], wrote: dict[str, Any], bo
         held[key] = wrote[key]
     for addition in (N108_LOWER_INTRO, N108_CURRENT_LOWER):
         words = _flat(addition)
+        for old, new in LATER_RENAMES:
+            words = words.replace(old, new)
         assert body.count(words) == 1
         body = body.replace(words, "", 1)
     # Only these explicit historical adjustments accompany the lower adoption.
@@ -1804,7 +1848,7 @@ def _fine_net_lower_projection(
         f"`{candidate}` raises both lower lanes from ${earlier}$ to ${exact}$. The complete "
         "201-direction maintained native replay and [mathematical "
         f"review](../../docs/project/reviews/review-2026-10-19-{review}.md) confirm it by a "
-        "re-implementation sharing components with the producer’s checker, wand125’s "
+        "re-implementation sharing components with the producer’s checker, Hosono’s "
         "adaptation of this repository’s `sqverify_fast` crate, apart from the declared-net "
         "readers. The exact audits check premises and saved poses only. The original 18 source "
         "reports and historical native receipts remain retained."
@@ -1867,6 +1911,7 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     after the count's last pass (`LATER_PENDING_REPORTS`).
     """
     assert [move.n for move in replayed] == sorted(houses.ADOPTED)
+    body_mismatches = []
     for move in replayed:
         assert move.house.result == houses.ADOPTED[move.n]
         committed = select.case_path(move.n).read_text(encoding="utf-8")
@@ -1874,6 +1919,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         # later fine-net introduction precedes it. Its historical replay follows each
         # pass, including 15 October, which read records it had already raised.
         written = closed_form.replay(move.n, adopt.rewrite(move))
+        for old, new in LATER_FINDERS:
+            written = written.replace(old, new)
         held, wrote = _front(committed), _front(written)
         if (move.n, move.house.result) in LATER_PENDING_REPORTS:
             committed = _later_pending_projection((move.n, move.house.result), held, committed)
@@ -1887,8 +1934,9 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         body = _flat(committed.split("---\n", 2)[2])
         assert _flat(adopt.opening(move)) in body, f"n={move.n}: opening paragraph"
         assert _flat(adopt.section(move)) in body, f"n={move.n}: certificate section"
-        if move.n not in adopt.HAND_MARKED:
-            assert historical_body == _body(written), f"n={move.n}: the body as history"
+        if move.n not in adopt.HAND_MARKED and historical_body != _body(written):
+            body_mismatches.append(move.n)
+    assert not body_mismatches, f"the body as history differs at n={body_mismatches}"
 
 
 #: A synthetic later pass, its review and its source: n = 84 adopted again after T-174.

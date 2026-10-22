@@ -245,37 +245,42 @@ def result_row(row: str, *, here: bool, records: bool = True) -> str:
     )
 
 
-def lazy_result_row(row: str, *, here: bool) -> str:
+def lazy_result_row(row: str, *, here: bool, body_fallback: bool = True) -> str:
     """The deployed row: its bound popover fetches the complete result page, with
     static links to that same page in the row and the popover's fallback."""
     address = result_fragment(row)
     target = f"pop-result-{row}"
+    body = (
+        f'<p><a href="{address}">Read the complete result record</a></p>'
+        if body_fallback
+        else ""
+    )
     return (
         f'<tr {"id" if here else "data-result"}="{row}" data-s="3" '
         f'data-row-popover="{target}"><td><a class="site-row-open" href="{address}">'
         f"{row}</a></td><td>A result</td></tr>"
         f'<div class="site-popover site-row-pop" id="{target}" popover role="dialog" '
         f'aria-labelledby="{target}-title"><div class="site-row-pop-body" '
-        f'data-row-pop-src="{address}"><p><a href="{address}">'
-        "Read the complete result record</a></p></div>"
+        f'data-row-pop-src="{address}">{body}</div>'
         f'<p class="site-popover-actions"><a class="site-popover-action" '
         f'href="{address}">Open Result Record</a></p></div>'
     )
 
 
-def lazy_site_pages() -> dict[str, bytes]:
+def lazy_site_pages(*, body_fallback: bool = True) -> dict[str, bytes]:
     """The deployed lazy shape on both tables, with each complete result page served."""
     pages = site_pages()
     for name in RECORD_LINK_PAGES:
         here = name == render_overview.RESULTS_PAGE
-        for row in EXPECTED_RECORDS.rows:
-            pages[name] = pages[name].replace(
-                result_row(row, here=here).encode(), lazy_result_row(row, here=here).encode()
-            )
         for address in OVERVIEWS:
             pages[name] = pages[name].replace(
                 f'<div class="site-row-pop-body" data-row-pop-src="{address}"></div>'.encode(),
                 b"",
+            )
+        for row in EXPECTED_RECORDS.rows:
+            pages[name] = pages[name].replace(
+                result_row(row, here=here).encode(),
+                lazy_result_row(row, here=here, body_fallback=body_fallback).encode(),
             )
     for address in OVERVIEWS:
         pages[address] = head(address).encode() + pages[address]
@@ -727,11 +732,18 @@ def test_absent_links_names_what_a_deploy_dropped_and_rows_are_read_one_by_one()
     assert row_records(nested) == {"t-002": f'<a href="{RECORD}">register</a>'}
 
 
+@pytest.mark.parametrize("body_fallback", [False, True], ids=["single-action", "body-link"])
 def test_check_accepts_the_deployed_lazy_record_links_without_refetching(
-    monkeypatch: pytest.MonkeyPatch,
+    monkeypatch: pytest.MonkeyPatch, *, body_fallback: bool
 ) -> None:
     requested: list[str] = []
-    assert failures(monkeypatch, fake_site(lazy_site_pages(), requested=requested)) == []
+    assert (
+        failures(
+            monkeypatch,
+            fake_site(lazy_site_pages(body_fallback=body_fallback), requested=requested),
+        )
+        == []
+    )
     for address in OVERVIEWS:
         assert requested.count(f"https://example.org/{address}") == 1
     requested.clear()
@@ -1551,7 +1563,6 @@ def test_check_rejects_global_popover_id_shadows(
         "wrong row link",
         "missing row link",
         "wrong fallback",
-        "missing fallback",
         "wrong action",
         "missing action",
         "duplicate row",
@@ -1594,7 +1605,6 @@ def test_check_rejects_lazy_row_binding_mutants(
         "wrong row link": full.replace(row_link, row_link.replace("t-002.html", "t-001.html")),
         "missing row link": full.replace(row_link, "t-002"),
         "wrong fallback": full.replace(fallback, fallback.replace("t-002.html", "t-001.html")),
-        "missing fallback": full.replace(fallback, ""),
         "wrong action": full.replace(action, action.replace("t-002.html", "t-001.html")),
         "missing action": full.replace(action, ""),
         "duplicate row": full + full,
@@ -1611,6 +1621,37 @@ def test_check_rejects_lazy_row_binding_mutants(
     assert "invalid bindings" in row_failures[0]
     assert all(url.startswith(("https://example.org/", REPO_URL)) for url in requested)
     assert not any("../" in url for url in requested)
+
+
+@pytest.mark.parametrize("name", RECORD_LINK_PAGES)
+@pytest.mark.parametrize("mutation", ["missing", "wrong target", "inside replaced body"])
+def test_single_fallback_rows_require_their_own_persistent_canonical_action(
+    monkeypatch: pytest.MonkeyPatch, name: str, mutation: str
+) -> None:
+    pages = lazy_site_pages(body_fallback=False)
+    full = lazy_result_row(
+        "t-002", here=name == render_overview.RESULTS_PAGE, body_fallback=False
+    )
+    action = (
+        '<p class="site-popover-actions"><a class="site-popover-action" '
+        'href="result/t-002.html">Open Result Record</a></p>'
+    )
+    if mutation == "missing":
+        changed = full.replace(action, "")
+    elif mutation == "wrong target":
+        changed = full.replace(action, action.replace("t-002.html", "t-001.html"))
+    else:
+        changed = full.replace(action, "").replace(
+            'data-row-pop-src="result/t-002.html"></div>',
+            f'data-row-pop-src="result/t-002.html">{action}</div>',
+        )
+    assert changed != full
+    pages[name] = pages[name].replace(full.encode(), changed.encode())
+    failed = failures(monkeypatch, fake_site(pages))
+    assert len(failed) == 1, failed
+    assert failed[0].startswith(f"{name}: 1 of 2 result rows lack record links")
+    assert "t-002" in failed[0]
+    assert "invalid bindings" in failed[0]
 
 
 @pytest.mark.parametrize("mutation", ["missing", "non-200", "wrong result", "dropped record"])
@@ -2210,12 +2251,21 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     """A page that moved or was withdrawn is still served at its old address, as a
     forwarder naming where a visit goes now (`render_overview.MOVED_PAGES`): the three
     repository documents that left the site, the papers, which moved under `papers/`,
-    and the one page of every case record, whose records moved under `cases/`. A deploy
-    without one 404s every link written before the change. It fails when an old address
-    is gone, when the page there still is the old page, and when a forwarder leads
-    anywhere but where a visit should go, in any one of the five places it says where
-    that is."""
+    the one page of every case record, whose records moved under `cases/`, and the
+    profile directory and every profile, which moved from `contributors/` to
+    `profiles/`. A deploy without one 404s every link written before the change. It
+    fails when an old address is gone, when the page there still is the old page, and
+    when a forwarder leads anywhere but where a visit should go, in any one of the five
+    places it says where that is."""
     moved = dict(render_overview.MOVED_PAGES)
+    legacy = render_overview.LEGACY_PROFILES_DIR
+    profiles = {
+        f"{legacy}/index.html": "profiles/index.html",
+        **{
+            f"{legacy}/{old}.html": f"profiles/{new}.html"
+            for old, new in render_overview.LEGACY_PROFILES.items()
+        },
+    }
     assert set(moved) == {
         "all-results.html",
         "status.html",
@@ -2226,7 +2276,9 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
         "n11-optimality/index.html",
         "cases.html",
         "cases/index.html",
+        *profiles,
     }
+    assert {old: moved[old] for old in profiles} == profiles
     assert not set(moved) & set(render_overview.SITE_PAGES)
     pages = site_pages()
     requested: list[str] = []
@@ -2234,7 +2286,7 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     for old in moved:
         assert f"https://example.org/{old}" in requested, old
 
-    # Each address has its own verdict. Exercise all nine in each corruption batch,
+    # Each address has its own verdict. Exercise every address in each corruption batch,
     # keeping the complete production check without rebuilding and checking every
     # unrelated page once per address. Strict pairing rejects missing or extra failures.
     missing = failures(monkeypatch, fake_site(pages, lost=tuple(f"/{old}" for old in moved)))
@@ -2287,6 +2339,13 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     assert says["script"] == "../papers/n11-optimality-review.html"
     says = check_published_site.forwarder_says(pages["defects.html"].decode())
     assert says["script"] == says["canonical"] == f"{REPO_URL}/blob/{DEFAULT_BRANCH}/defects.md"
+    # A directory's index is sent to the directory's own address by script, and to its
+    # index file by file navigation, the refresh and the link.
+    says = check_published_site.forwarder_says(
+        site_pages()[f"{render_overview.LEGACY_PROFILES_DIR}/index.html"].decode()
+    )
+    assert says["script"] == "../profiles/"
+    assert says["file"] == says["refresh"] == says["link"] == "../profiles/index.html"
 
 
 def test_check_requires_each_moved_file_at_its_old_address_with_the_same_bytes(

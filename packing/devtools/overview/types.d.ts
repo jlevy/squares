@@ -20,6 +20,7 @@ interface SiteTableApi {
     keys: readonly string[],
     type: SiteTableSortType,
     direction: "ascending" | "descending",
+    missingLast?: boolean,
   ): number[];
   covers(list: string, value: number): boolean;
   rowMatches(

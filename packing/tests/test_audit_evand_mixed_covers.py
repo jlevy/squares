@@ -1,8 +1,8 @@
 """Controls for the 1 October and the split imports in `devtools.audit_evand_mixed_covers`.
 
 Three covers joined the two of the September 28 packet: Daniel's ``s(60) = 8`` from the
-October 1 evand packet, and wand125's ``s(59) = 8`` and ``s(77) = 9`` from the October 1
-wand125 packet. Daniel's ``s(32)`` sweep without the D4 fold came with the first. These
+October 1 evand packet, and Hosono's ``s(59) = 8`` and ``s(77) = 9`` from Hosono's
+October 1 packet. Daniel's ``s(32)`` sweep without the D4 fold came with the first. These
 tests hold the fast part. Each new cover is well formed, weighs exactly what its source
 states and less than the count it excludes, and is invariant under the square's
 symmetries; a cover changed in one mass orbit or one position is refused. A ``zmx2`` log
@@ -393,7 +393,7 @@ def test_the_zmx2_command_derives_the_new_regions_and_requires_atoms(
     )
     assert code == 0, result
     assert result["roots_present"] == 8100
-    # What wand125's README states of its unpublished run, reported beside the audit.
+    # What Hosono's README states of its unpublished run, reported beside the audit.
     assert (result["atoms_source_ran"], result["atoms_as_source_ran"]) == ("pairpts", True)
     assert result["boxes_stated_by_source"] == 5810824
     assert not result["boxes_equal_source_statement"]

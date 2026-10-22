@@ -72,13 +72,13 @@ verifiers:
         path: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/src/run_verify.py
         note: run_verify.py
     note: >-
-      wand125's density and rectangle certificates ship byte-identical copies of both
-      files, so a replay of a wand125 rectangle certificate runs the code its producer
+      Hiroaki Hosono's density and rectangle certificates ship byte-identical copies of both
+      files, so a replay of one of Hosono's rectangle certificates runs the code its producer
       verified it with.
 
   - id: V-wand125-mixed-rotated-verify-cpp
     program: mixed_rotated_verify.cpp, with the source's per-angle replay functions
-    author: wand125
+    author: Hosono
     provenance: external
     language: [C++, Python]
     methods: [interval-certified]
@@ -97,7 +97,7 @@ verifiers:
 
   - id: V-wand125-verify-mixed-full-proof-py
     program: verify_mixed_full_proof.py
-    author: wand125
+    author: Hosono
     provenance: external
     language: [Python]
     methods: [interval-certified]
@@ -121,7 +121,7 @@ verifiers:
 
   - id: V-wand125-sqverify-proof-net
     program: sqverify-proof-net, the source's adaptation of sqverify-fast, run by fine_net_check.sh
-    author: wand125, adapting this repository's sqverify_fast
+    author: Hosono, adapting this repository's sqverify_fast
     provenance: external
     language: [Rust, Bash, Python]
     methods: [interval-certified]
@@ -155,7 +155,7 @@ verifiers:
 
   - id: V-wand125-unified-linear-verify-cpp
     program: unified_linear_verify.cpp
-    author: wand125
+    author: Hosono
     provenance: external
     language: [C++]
     methods: [interval-certified]
@@ -171,7 +171,7 @@ verifiers:
 
   - id: V-wand125-verify-portable-py
     program: verify_portable.py
-    author: wand125
+    author: Hosono
     provenance: external
     language: [Python]
     methods: [exact-algebraic]
@@ -185,13 +185,13 @@ verifiers:
 
   - id: V-wand125-check-with-sqpack
     program: check_with_sqpack.py
-    author: wand125
+    author: Hosono
     provenance: external
     language: [Python]
     methods: [exact-algebraic]
     role: decides
     summary: >-
-      wand125's adapter that expands its point certificates' direction rule and hands
+      Hiroaki Hosono's adapter that expands its point certificates' direction rule and hands
       them to this repository's exact verifier, sqpack.fractional.certificate, unmodified.
     source:
       - packing/resources/web/external-square-certificates-2026-09-22/wand125-points/src/check_with_sqpack.py
@@ -205,7 +205,7 @@ verifiers:
 
   - id: V-wand125-valid7-checker
     program: valid7-independent-check (Tier A, Tier B and the record checker)
-    author: wand125
+    author: Hosono
     provenance: external
     language: [Python]
     methods: [exact-algebraic]
@@ -262,7 +262,7 @@ verifiers:
       - packing/resources/web/evand-square-packing-2026-10-04/square-packing/s12/verify2/src/bin/zmx2.rs
     versions:
       - sha256: 6b7f0f79466bf25c9a85f8fe2f3866de734935f0521ea188136818c2fb5b3fed
-        note: the 2026-09-28 packet's post-audit parser, which made the shipped records and which wand125's verify.sh pins
+        note: the 2026-09-28 packet's post-audit parser, which made the shipped records and which Hiroaki Hosono's verify.sh pins
       - sha256: 92a4cfe87b4e33d57ce132c9c517eded3fe62b4a5a2151b5ba250b8ee329fe64
         revision: e4af291cf52711a3ef7cedfea262f001fa2cafe1
         path: packing/resources/web/evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs
@@ -275,8 +275,8 @@ verifiers:
           source checked its s(20) point cover at side 2443/500; unchanged at 7ff3b211 and
           not run here
     note: >-
-      wand125 verified its own covers with zmx2 as well, so a zmx2 replay of a wand125
-      cover is a replay of the producer's code.
+      Hosono verified his own covers with zmx2 as well, so a zmx2 replay of one of
+      Hosono's covers is a replay of the producer's code.
 
   - id: V-evand-zm-mixed-py
     program: zm_mixed.py
@@ -778,7 +778,7 @@ verifiers:
       The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake
       at its pinned toolchain, with scripts/run_verification.sh and the finalizer
       scripts/finalize_verification.py driving the build and the axiom audit
-    author: Ahmed, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis
+    author: Ahmed, Hosono, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis
     provenance: external
     language: [Lean 4, Python, Bash]
     methods: [proof-assistant-checked]
@@ -802,8 +802,8 @@ verifiers:
       in the run's final audit.
 
   - id: V-wand125-tools
-    program: The wand125 tools repository's transfer/l_cap.py and general_pose_tree
-    author: wand125
+    program: Hiroaki Hosono's square-packing-tools repository's transfer/l_cap.py and general_pose_tree
+    author: Hosono
     provenance: external
     language: [Python, Rust]
     methods: [exact-algebraic]
@@ -2695,7 +2695,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      The exact preflight and replay driver for wand125's rectangle certificates: input
+      The exact preflight and replay driver for Hiroaki Hosono's rectangle certificates: input
       regeneration against the published digest, orbit normalization, exact mass, net
       and smoothing premises, then Tokoharu's retained verify.cpp.
     source: [packing/devtools/audit_wand125_rectangles.py]
@@ -2708,7 +2708,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Fetches, pins and binds wand125's point and mixed bundles, checks their exact
+      Fetches, pins and binds Hiroaki Hosono's point and mixed bundles, checks their exact
       premises, drives the source's checker and compares its records with the shipped ones.
     source: [packing/devtools/audit_wand125_point_and_mixed.py]
 
@@ -2720,7 +2720,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Checks the exact premises of wand125's mixed certificates on a declared net, lemma
+      Checks the exact premises of Hiroaki Hosono's mixed certificates on a declared net, lemma
       N0's among them; binds each bundle's files to the packet and every shipped record and
       input to the declared net and the expanded candidate; runs the bundle's own driver
       with its assertions on and compares the replay with the shipped records, requiring
@@ -2734,7 +2734,7 @@ verifiers:
     language: [Python]
     methods: [exact-algebraic]
     role: premises
-    summary: The audit, replay driver and controls for wand125's linear certificates.
+    summary: The audit, replay driver and controls for Hiroaki Hosono's linear certificates.
     source: [packing/devtools/audit_wand125_linear.py]
 
   - id: V-sqverify-fast
@@ -2858,7 +2858,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Decides everything squarepacker's v1.1 s(12) certificate rests on but coverage, in
+      Decides everything Ryu's v1.1 s(12) certificate rests on but coverage, in
       integers and Fraction: its bytes, the header and side, a one-to-one match of its
       points to Daniel's dilated within the stated rounding, positivity, containment, D4
       invariance and orbits, the total below 12, the corner points, and the source's two
@@ -2932,7 +2932,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Checks what wand125's verify_tilt9.sh leaves out of the ValidTilt9 run: the records
+      Checks what Hiroaki Hosono's verify_tilt9.sh leaves out of the ValidTilt9 run: the records
       are the release's and name the retained code, their roots are the grid over
       ValidTilt9's region once, each root's Tier B leaves fit the options its place in the
       run gives it, and which lines of the checker also occur in Daniel's. It stages the

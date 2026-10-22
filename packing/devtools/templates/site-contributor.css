@@ -1,0 +1,208 @@
+/* Contributor articles share the text, spacing and overlay roles in paper-design.md.
+   The standalone bio inherits serif prose; its overlay inherits the sans panel face. */
+.site-contributor,
+.site-contributor-directory {
+  margin-inline: auto;
+  max-inline-size: var(--kpress-measure);
+  overflow-wrap: break-word;
+}
+.site-contributor-breadcrumb,
+.site-contributor-evidence,
+.site-contributor-identity,
+.site-contributor-links,
+.site-contributor-sources > ol,
+.site-contributor-sources > ul,
+.site-contributor-credits,
+.site-contributor-resources,
+.site-contributor-news,
+.site-contributor-references,
+.site-profile-summary {
+  font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-note);
+  font-weight: var(--site-font-weight-sans-light);
+  line-height: var(--paper-support-leading);
+}
+.site-contributor-breadcrumb,
+.site-contributor-evidence,
+.site-contributor-sources > ol,
+.site-contributor-sources > ul {
+  color: var(--site-support-color);
+}
+.site-contributor-identity,
+.site-contributor-links,
+.site-contributor-credits,
+.site-contributor-resources,
+.site-contributor-news,
+.site-contributor-references,
+.site-profile-summary {
+  color: var(--kpress-doc-text);
+}
+.site-contributor
+  :is(
+    .site-contributor-breadcrumb,
+    .site-contributor-evidence,
+    .site-contributor-identity,
+    .site-contributor-links,
+    .site-contributor-sources,
+    .site-contributor-credits,
+    .site-contributor-resources,
+    .site-contributor-news,
+    .site-contributor-references
+  )
+  a {
+  color: inherit;
+}
+.site-contributor-identity dt {
+  font-weight: var(--site-font-weight-sans-medium);
+}
+.site-contributor-identity dd {
+  margin-inline-start: 0;
+  margin-block-end: 0.75rem;
+}
+.kpress .site-contributor-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: center;
+  list-style: none;
+  margin-inline: 0;
+  padding-inline-start: 0;
+}
+.kpress .site-contributor-links > li {
+  margin: 0;
+}
+.kpress .site-contributor-links > li::before {
+  content: none;
+}
+.kpress .site-contributor-links a {
+  align-items: flex-start;
+  color: inherit;
+  display: inline-flex;
+  gap: 0.4em;
+}
+.site-account-icon {
+  block-size: var(--site-icon-size);
+  flex: none;
+  inline-size: var(--site-icon-size);
+}
+.site-contributor-links .site-account-icon {
+  margin-block-start: calc((1lh - var(--site-icon-size)) / 2);
+}
+.site-contributor-news time {
+  white-space: nowrap;
+}
+.site-contributor-popover {
+  inline-size: min(36rem, calc(100vw - 2rem));
+}
+.site-contributor-popover > [data-contributor-body] {
+  padding-inline-end: 0;
+}
+.site-contributor-popover .site-contributor-breadcrumb {
+  padding-inline-end: calc(
+    var(--site-popover-close) +
+    var(--site-popover-close-inset) -
+    var(--site-popover-pad)
+  );
+}
+.site-contributor-popover .site-contributor {
+  font-size: var(--kpress-font-size-base);
+}
+.site-contributor-popover .site-contributor h1 {
+  margin-block: 0.5rem 1rem;
+}
+.site-contributor-popover .site-contributor h2 {
+  margin-block: var(--paper-section-space) var(--paper-section-space-below);
+}
+
+.kpress .site-profile-table tbody td {
+  padding: 0;
+}
+.kpress .site-profile-table :is(th, td):first-child {
+  inline-size: 16rem;
+  min-inline-size: 16rem;
+}
+.kpress .site-profile-table td > a,
+.kpress .site-profile-table .site-profile-empty {
+  display: block;
+  padding: 0.55rem 0.5rem;
+}
+.kpress .site-profile-table .num {
+  inline-size: 1%;
+  min-inline-size: 0;
+  white-space: nowrap;
+}
+.kpress .site-profile-table td.site-profile-years,
+.kpress .site-profile-table td.site-profile-stats,
+.kpress .site-profile-table td.site-profile-records,
+.kpress .site-profile-table td.site-profile-credits,
+.kpress .site-profile-table td.site-profile-resources,
+.kpress .site-profile-table td.site-profile-links {
+  min-inline-size: 6rem;
+  padding: 0.55rem 0.5rem;
+}
+.kpress .site-contributor-links-compact {
+  gap: 0.25rem;
+  justify-content: flex-start;
+  margin-block: 0;
+}
+.kpress .site-contributor-links-compact a {
+  max-inline-size: 100%;
+  padding: 0.2rem;
+}
+.kpress .site-contributor-links-compact > li {
+  max-inline-size: 100%;
+}
+.site-contributor-links-compact span {
+  overflow-wrap: anywhere;
+}
+:is(.site-profile-stats, .site-profile-records, .site-profile-credits) .site-credit-tally {
+  display: block;
+  min-inline-size: 8rem;
+}
+.site-profile-table .site-tally-levels {
+  display: block;
+}
+.site-profile-table tbody tr[data-profile-ready] {
+  cursor: pointer;
+}
+.kpress .site-profile-table tbody tr:focus-within {
+  background: var(--site-wash);
+}
+
+.site-github-ref {
+  align-items: center;
+  color: inherit;
+  display: inline-flex;
+  gap: 0.25em;
+  white-space: nowrap;
+}
+.site-profile-summary {
+  text-align: center;
+}
+.site-profile-years {
+  white-space: nowrap;
+}
+
+/* Breadcrumbs belong to these nested pages, above their first page heading. */
+@media screen {
+  .kpress-long-text > :is(.site-contributor, .site-contributor-directory) {
+    margin-block-start: -2rem;
+  }
+  .kpress-long-text
+    > :is(.site-contributor, .site-contributor-directory)
+    > .site-contributor-breadcrumb {
+    margin-block: 0 2rem;
+  }
+}
+
+.kpress .site-profile-table td.site-profile-links {
+  min-inline-size: 12rem;
+}
+
+.kpress .site-profile-table td.site-profile-resources {
+  min-inline-size: 12rem;
+}
+
+.site-profile-resources .site-contributor-links-compact span {
+  overflow-wrap: break-word;
+}

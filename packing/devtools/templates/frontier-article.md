@@ -35,6 +35,8 @@ work.
 {{SURVEY_COUNTS}}
 {{CORRECTIONS}}
 
+<div class="site-profile-prose">
+
 **Seventeen squares.** Before this project’s work began, seven authors had published
 lower bounds for seventeen squares, some also for eighteen, all independently:
 Brandwijk’s $89/20$ (18 July), Burns’s $4.4811$ (6 August), MacIver’s $4.4502\ldots$ (8
@@ -47,6 +49,8 @@ separate routes: Marc Leonard Overbeck’s candidate proof ([T-153](results.html
 and Oscar Fitzharding’s Lean 4 proof ([T-154](results.html#t-154)). The case is reported
 proved; neither proof has yet been replayed in full here, so its verified bounds are
 unchanged.
+
+</div>
 
 **Reported and verified.** The *best known packing* and the *reported lower* bound are
 what the published sources say, credited to whoever found or proved them.

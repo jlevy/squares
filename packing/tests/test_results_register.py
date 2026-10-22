@@ -71,7 +71,7 @@ def test_a_dated_records_own_title_is_not_held_to_the_register(tmp_path: Path) -
 
 def test_the_uniqueness_reviews_title_keeps_its_provisional_id() -> None:
     """T-112 was registered as the provisional T-102 and renumbered when it merged with
-    main, whose T-102 is wand125's bound at n = 18. Its adversarial review, stored as its
+    main, whose T-102 is Hosono's bound at n = 18. Its adversarial review, stored as its
     reviewer wrote it, names T-102 in its title, and the synopsis quotes that title; the
     register's note on T-112 says which result the review's "T-102" is (think-d1bd)."""
     review = "docs/project/reviews/review-2026-10-06-n11-uniqueness-adversarial.md"

@@ -763,6 +763,27 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/98.html | cases/98.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/99.html | cases/99.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/index.html | atlas.html | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → atlas.html |
+| contributors/erich-friedman.html | profiles/erich-friedman.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/erich-friedman.html |
+| contributors/evan-daniel.html | profiles/evan-daniel.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/evan-daniel.html |
+| contributors/f-gobel.html | profiles/f-gobel.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/f-gobel.html |
+| contributors/francisco-couzo.html | profiles/francisco-couzo.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/francisco-couzo.html |
+| contributors/gustavo-massaccesi.html | profiles/gustavo-massaccesi.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/gustavo-massaccesi.html |
+| contributors/guzhou0806.html | profiles/guzhou0806.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/guzhou0806.html |
+| contributors/hiroshi-nagamochi.html | profiles/hiroshi-nagamochi.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/hiroshi-nagamochi.html |
+| contributors/index.html | profiles/ | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/index.html |
+| contributors/joshua-levy.html | profiles/joshua-levy.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/joshua-levy.html |
+| contributors/kleddamag.html | profiles/marc-leonard-overbeck.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/marc-leonard-overbeck.html |
+| contributors/michael-j-kearney.html | profiles/michael-j-kearney.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/michael-j-kearney.html |
+| contributors/mira.html | profiles/mira.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/mira.html |
+| contributors/peter-shiu.html | profiles/peter-shiu.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/peter-shiu.html |
+| contributors/queuingtheorydotcom.html | profiles/manasseh-ahmed.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/manasseh-ahmed.html |
+| contributors/ryu-sungjoon.html | profiles/ryu-sungjoon.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/ryu-sungjoon.html |
+| contributors/sam-burns.html | profiles/sam-burns.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/sam-burns.html |
+| contributors/tokoharu.html | profiles/tokoharu.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/tokoharu.html |
+| contributors/walter-stromquist.html | profiles/walter-stromquist.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/walter-stromquist.html |
+| contributors/walter-trump.html | profiles/walter-trump.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/walter-trump.html |
+| contributors/wand125.html | profiles/hiroaki-hosono.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/hiroaki-hosono.html |
+| contributors/wolfram-bentz.html | profiles/wolfram-bentz.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/wolfram-bentz.html |
 | conventions.html | conventions.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | defects.html | https://github.com/jlevy/squares/blob/main/defects.md | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → https://github.com/jlevy/squares/blob/main/defects.md |
 | development.html | development.html | page | overview | 2026-09-29 | 2026-10-22 | live |
@@ -785,18 +806,94 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | n11-optimality/t-060-explainer.pdf | papers/n11-optimality-review.pdf | copy | assembly | 2026-09-29 | 2026-10-22 | live → papers/n11-optimality-review.pdf |
 | news.html | news.html | page | overview | 2026-10-14 | 2026-10-22 | live |
 | papers.html | papers.html | page | overview | 2026-09-29 | 2026-10-22 | live |
-| papers/n11-lower-bounds-explainer.html | papers/n11-lower-bounds-explainer.html | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-13 | live |
-| papers/n11-lower-bounds-explainer.md | papers/n11-lower-bounds-explainer.md | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-13 | live |
-| papers/n11-lower-bounds-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-13 | live |
-| papers/n11-optimality-review.html | papers/n11-optimality-review.html | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-12 | live |
-| papers/n11-optimality-review.md | papers/n11-optimality-review.md | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-12 | live |
-| papers/n11-optimality-review.pdf | papers/n11-optimality-review.pdf | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-12 | live |
+| papers/n11-lower-bounds-explainer.html | papers/n11-lower-bounds-explainer.html | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-21 | live |
+| papers/n11-lower-bounds-explainer.md | papers/n11-lower-bounds-explainer.md | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-21 | live |
+| papers/n11-lower-bounds-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-21 | live |
+| papers/n11-optimality-review.html | papers/n11-optimality-review.html | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-13 | live |
+| papers/n11-optimality-review.md | papers/n11-optimality-review.md | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-13 | live |
+| papers/n11-optimality-review.pdf | papers/n11-optimality-review.pdf | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-13 | live |
 | papers/n11-threshold-bound-review.html | papers/n11-threshold-bound-review.html | paper-file | paper:n11-threshold-bound-review | 2026-10-05 | 2026-10-13 | live |
 | papers/n11-threshold-bound-review.md | papers/n11-threshold-bound-review.md | paper-file | paper:n11-threshold-bound-review | 2026-10-05 | 2026-10-13 | live |
 | papers/n11-threshold-bound-review.pdf | papers/n11-threshold-bound-review.pdf | paper-file | paper:n11-threshold-bound-review | 2026-10-05 | 2026-10-13 | live |
 | papers/square-packing-methods-survey.html | papers/square-packing-methods-survey.html | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-17 | live |
 | papers/square-packing-methods-survey.md | papers/square-packing-methods-survey.md | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-17 | live |
 | papers/square-packing-methods-survey.pdf | papers/square-packing-methods-survey.pdf | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-17 | live |
+| profiles/ahyangyi.html | profiles/ahyangyi.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/allen-chang.html | profiles/allen-chang.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/anabologyco-maker.html | profiles/anabologyco-maker.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/andrey-vlasenko.html | profiles/andrey-vlasenko.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/anna-slivkova.html | profiles/anna-slivkova.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/benjamin-greff.html | profiles/benjamin-greff.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/benjamin-gurevitch.html | profiles/benjamin-gurevitch.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/bojan-basic.html | profiles/bojan-basic.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/can-li.html | profiles/can-li.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/ctjlewis.html | profiles/ctjlewis.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/daniil-ostashev.html | profiles/daniil-ostashev.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/darius-muglich.html | profiles/darius-muglich.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/david-ellsworth.html | profiles/david-ellsworth.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/david-r-maciver.html | profiles/david-r-maciver.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/david-w-cantrell.html | profiles/david-w-cantrell.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/e-summins.html | profiles/e-summins.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/eric-deleeuw.html | profiles/eric-deleeuw.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/erich-friedman.html | profiles/erich-friedman.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/evan-daniel.html | profiles/evan-daniel.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/evert-stenlund.html | profiles/evert-stenlund.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/f-gobel.html | profiles/f-gobel.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/francisco-couzo.html | profiles/francisco-couzo.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/griffin-casson.html | profiles/griffin-casson.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/gustavo-massaccesi.html | profiles/gustavo-massaccesi.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/guzhou0806.html | profiles/guzhou0806.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/hakan-karakus.html | profiles/hakan-karakus.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/hiroaki-hosono.html | profiles/hiroaki-hosono.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/hiroshi-nagamochi.html | profiles/hiroshi-nagamochi.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/hong-duc-bui.html | profiles/hong-duc-bui.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/index.html | profiles/ | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/joe-devincentis.html | profiles/joe-devincentis.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/john-bidwell.html | profiles/john-bidwell.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/joost-de-winter.html | profiles/joost-de-winter.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/joshua-levy.html | profiles/joshua-levy.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/julian-jj.html | profiles/julian-jj.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/karoly-hajba.html | profiles/karoly-hajba.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/ke-wang.html | profiles/ke-wang.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/kevin-fang.html | profiles/kevin-fang.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/kf-roth.html | profiles/kf-roth.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/magnus-thulin.html | profiles/magnus-thulin.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/manasseh-ahmed.html | profiles/manasseh-ahmed.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/marc-leonard-overbeck.html | profiles/marc-leonard-overbeck.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/martin-gardner.html | profiles/martin-gardner.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/mats-gustafsson.html | profiles/mats-gustafsson.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/maurizio-morandi.html | profiles/maurizio-morandi.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/michael-j-kearney.html | profiles/michael-j-kearney.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/mira.html | profiles/mira.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/muhammad-maaz.html | profiles/muhammad-maaz.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/mykhailo-polkovskyi.html | profiles/mykhailo-polkovskyi.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/mz-arslanov.html | profiles/mz-arslanov.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/nate-chaoweeraprasit.html | profiles/nate-chaoweeraprasit.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/oscar-fitzharding.html | profiles/oscar-fitzharding.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/pertti-hamalainen.html | profiles/pertti-hamalainen.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/peter-shiu.html | profiles/peter-shiu.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/philippe-ryckelynck.html | profiles/philippe-ryckelynck.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/rc-vaughan.html | profiles/rc-vaughan.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/rio-calle.html | profiles/rio-calle.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/robert-barnett.html | profiles/robert-barnett.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/robert-wainwright.html | profiles/robert-wainwright.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/ryan-xu.html | profiles/ryan-xu.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/ryu-sungjoon.html | profiles/ryu-sungjoon.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/s-el-moumni.html | profiles/s-el-moumni.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/sa-mustafin.html | profiles/sa-mustafin.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/sam-burns.html | profiles/sam-burns.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/seth-rehwaldt.html | profiles/seth-rehwaldt.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/siddharth-gupta.html | profiles/siddharth-gupta.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/tej-stead.html | profiles/tej-stead.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/thierry-gensane.html | profiles/thierry-gensane.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/thomas-schadt.html | profiles/thomas-schadt.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/tokoharu.html | profiles/tokoharu.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/trevor-green.html | profiles/trevor-green.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/walter-stromquist.html | profiles/walter-stromquist.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/walter-trump.html | profiles/walter-trump.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/wolfram-bentz.html | profiles/wolfram-bentz.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/yohei-nakajima.html | profiles/yohei-nakajima.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/zk-shangitbayev.html | profiles/zk-shangitbayev.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | readme.html | readme.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | result/t-001.html | result/t-001.html | result | overview | 2026-08-31 | 2026-08-31 | live |
 | result/t-002.html | result/t-002.html | result | overview | 2026-08-31 | 2026-08-31 | live |
@@ -1075,7 +1172,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 
 | Physical path | Bytes | Reason |
 | --- | ---: | --- |
-| atlas.html | 1,000,000 | Combined 324-case Atlas measures 862,357 bytes: 688,112 for the complete Frontier Survey and 174,245 for graphics and the shared shell. |
+| atlas.html | 1,050,000 | Combined 324-case Atlas measures 862,357 bytes: 688,112 for the complete Frontier Survey and 174,245 for graphics and the shared shell. With the person profiles (#578) it measured 1,005,866 bytes on 21 October 2026: its 344 reviewed credit links to profiles cost 14,692 bytes, recognised by address with no per-link marker, and the page is 991,174 without them. No timing was re-measured for this change. |
 | cases/11.html | 500,000 | Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes. |
 | cases/17.html | 550,000 | Complete n=17 proof/certificate record and prepared bounds measure 501,977 bytes on 16 October 2026 with T-154's source-build evidence, 499,855 on main at 26d8bb335. The ceiling leaves room for the open n=17 intakes. |
 | cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 326,548 bytes. |

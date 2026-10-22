@@ -104,10 +104,14 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "atlas.html": (
-        1_000_000,
+        1_050_000,
         (
             "Combined 324-case Atlas measures 862,357 bytes: 688,112 for the complete "
-            "Frontier Survey and 174,245 for graphics and the shared shell."
+            "Frontier Survey and 174,245 for graphics and the shared shell. With the "
+            "person profiles (#578) it measured 1,005,866 bytes on 21 October 2026: its "
+            "344 reviewed credit links to profiles cost 14,692 bytes, recognised by "
+            "address with no per-link marker, and the page is 991,174 without them. No "
+            "timing was re-measured for this change."
         ),
     ),
     "results.html": (
@@ -326,6 +330,7 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
     from devtools import (  # noqa: PLC0415
         overview_data,
         paper_front,
+        render_contributors,
         render_overview,
         site_documents,
     )
@@ -349,6 +354,19 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
     rows = [
         _new_row(path, "page", "overview", "devtools.render_overview:render_all", lastmod=day)
         for path in render_overview.PAGES
+    ]
+    # Profiles were registered under `contributors/` on 2026-10-10 and moved to
+    # `profiles/` on 2026-10-13 (think-0v2c); the old addresses are `MOVED_PAGES` forwarders.
+    rows += [
+        _new_row(
+            path,
+            "page",
+            "overview",
+            "devtools.render_contributors:contributor_pages",
+            first="2026-10-13",
+            lastmod=max(day, "2026-10-13"),
+        )
+        for path in render_contributors.page_paths()
     ]
     for record in records:
         first, revised = _result_dates(record)
@@ -384,7 +402,7 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
         first = paper_front.iso_date(front.dates[0].day)
         revised = paper_front.iso_date(paper_front.revised(front))
         for extension in (".html", ".md", ".pdf"):
-            rows.append(  # noqa: PERF401 -- each output has its own registration
+            rows.append(
                 _new_row(
                     render_overview.paper_path(paper.slug, extension),
                     "paper-file",

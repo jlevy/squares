@@ -25,15 +25,19 @@ from devtools import (
     overview_data,
     overview_sections,
     render_case_pages,
+    render_contributors,
     render_overview,
     render_recent_results,
     result_overview,
     result_status,
     site_assets,
+    site_math,
     site_topics,
     site_urls,
 )
 from devtools.check_results import scope_values
+from devtools.github_references import parse_github_reference
+from devtools.profile_links import link_prose
 from devtools.render_n11_lower_bounds_explainer import COMPOSITE_ASSETS, OVERVIEW_FILM_POSTER
 from devtools.render_n11_lower_bounds_explainer import MARKDOWN as EXPLAINER_ARTICLE
 from devtools.render_n11_lower_bounds_explainer import PUBLICATION_STYLE as EXPLAINER_STYLE
@@ -45,6 +49,7 @@ from devtools.repo_links import (
     repo_url,
 )
 from devtools.result_credit import OTHERS, source_lineage
+from devtools.site_icons import github_reference_icon
 from sqpack.yamlio import safe_load
 from tests import site_renders
 
@@ -116,6 +121,12 @@ def served() -> Callable[[str], str]:
     them. Every page is assembled here, during setup, as `rendered` renders them."""
     assembled = {name: site_renders.served(name) for name in render_overview.PAGES}
     return assembled.__getitem__
+
+
+@pytest.fixture(scope="module")
+def contributor_documents() -> dict[str, str]:
+    """Render the contributor directory and every profile before per-test patches."""
+    return {page.name: page.html for page in render_contributors.contributor_pages()}
 
 
 def _asset_tag(path: Path, name: str = "index.html") -> str:
@@ -370,6 +381,7 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
         "the-atlas-of-square-packings",
         "news",
         "recent-results",
+        "profiles",
         "report-your-results",
         "papers",
         "visuals",
@@ -582,8 +594,9 @@ def _page_card_parts(page: str, href: str) -> tuple[str, str]:
 
 def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> None:
     """Explanations holds four standalone papers and both tutorials once each.
-    Their titles and descriptions are preserved. About holds the project story
-    and documents; survey and workbench cards do not belong to these pages."""
+    Their titles and descriptions are preserved. About holds the project story, one
+    profiles card and the documents; survey and workbench cards do not belong to these
+    pages."""
     cards = _page_cards(papers)
     entries = overview_sections.PAPERS
     assert [paper.href for paper in entries] == [
@@ -604,13 +617,17 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
     ]
     assert overview_sections.OPTIMALITY is entries[2]
     note = entries[2].description
-    assert note.startswith("Explains Mannaseh Ahmed\u2019s proof that Trump\u2019s packing")
+    assert note.startswith("Explains Manasseh Ahmed\u2019s proof that Trump\u2019s packing")
     assert "(T-060)" in note
     assert "formal" not in note.lower()
     assert Counter(href for href, _, _ in cards) == Counter(paper.href for paper in entries)
     assert 'id="reading-and-research"' not in about
     assert "PAGE_CARDS" not in render_overview.ABOUT_ARTICLE.read_text(encoding="utf-8")
-    assert not re.findall(r'<a class="site-card site-card-link"', about)
+    assert re.findall(r'<a class="site-card site-card-link" href="([^"]+)"', about) == []
+    assert (
+        f'<a class="site-action" href="{overview_sections.PROFILES_DIRECTORY}">All Profiles'
+        in about
+    )
     for page in (about, papers):
         assert (
             re.search(
@@ -1563,6 +1580,25 @@ def test_the_big_tables_have_no_outer_border(
         assert all("site-table" in classes.split() for classes in tables), (name, tables)
 
 
+def test_about_has_one_profiles_invitation_that_opens_the_directory(
+    about: str, page: str
+) -> None:
+    """Home and About put the shared native Profiles invitation before reporting."""
+    for name, source in (("About", about), ("Overview", page)):
+        begin = source.index('id="profiles"')
+        end = source.index('id="report-your-results"')
+        assert begin < end, name
+        section = source[begin:end]
+        assert re.findall(r'<a [^>]*href="([^"]+)"', section) == ["profiles/index.html"]
+        assert 'class="site-action" href="profiles/index.html"' in section
+        assert 'target="_blank"' not in section
+        assert (
+            "We track contributors and the authors cited in the square-packing record"
+            in section
+        )
+        assert not re.search(r"profiles/(?!index\.html)[a-z0-9-]+\.html", section)
+
+
 def test_every_card_grid_sits_in_a_frame_it_can_measure(about: str, papers: str) -> None:
     """Each About/Papers card grid is directly inside its measurable frame."""
     pages = about + papers
@@ -1687,29 +1723,93 @@ def test_each_card_size_is_a_column_of_its_own_grid() -> None:
     assert '[data-card-size="medium"]' not in css
 
 
-#: A card, as its opening tag's size and everything after its caps label: the headline,
-#: the note and a direct card's address.
-_CARD_ELEMENT = re.compile(
-    r'<(button|a|div)\b[^>]*class="site-card[ "][^>]*data-card-size="([^"]*)"[^>]*>'
-    r'.*?(?:<span class="site-card-value">|<h3[^>]*>)(.*?)</(?:button|a)>',
-    re.DOTALL,
-)
+class _CardContents(HTMLParser):
+    """Read sized cards' headline, note and address across independent child links."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.cards: list[tuple[str, str]] = []
+        self.stack: list[str] = []
+        self.size: str | None = None
+        self.card_depth = 0
+        self.capture_depth = 0
+        self.parts: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        classes = set((attributes.get("class") or "").split())
+        if tag not in {
+            "area",
+            "base",
+            "br",
+            "col",
+            "embed",
+            "hr",
+            "img",
+            "input",
+            "link",
+            "meta",
+            "param",
+            "source",
+            "track",
+            "wbr",
+        }:
+            self.stack.append(tag)
+        if "site-card" in classes:
+            assert self.size is None, "cards do not nest"
+            self.size = attributes["data-card-size"]
+            self.card_depth = len(self.stack)
+            self.parts = []
+        if (
+            self.size is not None
+            and not self.capture_depth
+            and (
+                tag == "h3"
+                or classes.intersection({"site-card-value", "site-card-note", "site-card-url"})
+            )
+        ):
+            self.capture_depth = len(self.stack)
+        if self.capture_depth:
+            token = self.get_starttag_text()
+            assert token is not None
+            self.parts.append(token)
+
+    def handle_endtag(self, tag: str) -> None:
+        if not self.stack or self.stack[-1] != tag:
+            return
+        depth = len(self.stack)
+        if self.capture_depth:
+            self.parts.append(f"</{tag}>")
+            if depth == self.capture_depth:
+                self.capture_depth = 0
+                self.parts.append(" ")
+        if self.size is not None and depth == self.card_depth:
+            self.cards.append((self.size, "".join(self.parts)))
+            self.size = None
+        self.stack.pop()
+
+    def handle_data(self, data: str) -> None:
+        if self.capture_depth:
+            self.parts.append(html.escape(data))
 
 
 def _card_sections(page: str, about: str, papers: str) -> dict[str, list[tuple[str, str]]]:
-    """Homepage projects, About documents, and Papers reading/media cards."""
+    """Homepage projects, About profiles and documents, and Papers reading/media cards."""
     about_frames = about.split('<div class="site-cards-frame')[1:]
     paper_frames = papers.split('<div class="site-cards-frame')[1:]
     assert len(about_frames) == 1
     assert len(paper_frames) == 3
     projects = page.split('id="other-square-packing-projects"', 1)[1]
-    frames = [*paper_frames, projects, about_frames[0]]
+    frames = [*paper_frames, projects, *about_frames]
     names = ("tutorial", "papers", "atlas", "projects", "documents")
     assert len(frames) == len(names)
-    return {
-        name: [(size, text) for _, size, text in _CARD_ELEMENT.findall(frame)]
-        for name, frame in zip(names, frames, strict=True)
-    }
+    sections = {}
+    for name, frame in zip(names, frames, strict=True):
+        reader = _CardContents()
+        reader.feed(frame)
+        reader.close()
+        sections[name] = reader.cards
+    return sections
 
 
 def test_every_card_names_one_of_three_sizes(page: str, about: str, papers: str) -> None:
@@ -1740,6 +1840,7 @@ def test_every_card_names_one_of_three_sizes(page: str, about: str, papers: str)
         "pages": "medium",
         "atlas": "medium",
         "projects": "medium",
+        "profiles": "medium",
         "documents": "small",
     }
 
@@ -2463,9 +2564,9 @@ def test_every_website_card_opens_a_place_the_record_cites(
 ) -> None:
     """Each website's card, a catalogue's or another site's, opens an address the record
     itself cites (`CITING_FILES`), whole, so the list says no more than the record does.
-    David Ellsworth's catalogue, the record's `[Kingbird]`, is there and leads the
-    section, ahead of Friedman's original page and Evan Daniel's atlas, and its card
-    counts exactly the results the register files under the catalogue's venue. No
+    David Ellsworth's catalogue, the record's `[Kingbird]`, is present in the shared
+    significance order, and its card counts exactly the results the register files
+    under the catalogue's venue. No
     GitHub website is an issue or discussion rather than a repository, and every address
     `PROJECT_EXTRA_KEYS` and `SOURCE_VENUES`
     name is listed."""
@@ -2489,8 +2590,8 @@ def test_every_website_card_opens_a_place_the_record_cites(
         "evand.github.io",
     ]
     assert overview_sections.CATALOGUE_SITES[0][0] == overview_sections.KINGBIRD
-    (first, tally), *_ = overview_sections.listed_projects(overview)
-    assert first == overview_sections.KINGBIRD
+    ranked = overview_sections.listed_projects(overview)
+    tally = dict(ranked)[overview_sections.KINGBIRD]
     bibliography = safe_load(overview_data.BIBLIOGRAPHY.read_text(encoding="utf-8"))
     filed = {
         entry["key"]
@@ -2505,10 +2606,13 @@ def test_every_website_card_opens_a_place_the_record_cites(
     )
     assert own
     assert sorted(tally.results) == own
-    section = page.split('id="other-square-packing-projects"', 1)[1].split("<h2", 1)[0]
-    assert section.index(f'href="{overview_sections.KINGBIRD}"') == min(
-        section.index(f'href="{url}"') for url in overview_sections.project_urls()
-    )
+    section = re.split(
+        r"<h[12]\b|</article>",
+        page.split('id="other-square-packing-projects"', 1)[1],
+        maxsplit=1,
+    )[0]
+    positions = [section.index(f'href="{url}"') for url, _ in ranked]
+    assert positions == sorted(positions)
     named = {*overview_sections.PROJECT_EXTRA_KEYS, *overview_sections.SOURCE_VENUES}
     assert named <= set(overview_sections.project_urls())
 
@@ -2521,9 +2625,13 @@ def test_other_project_cards_are_links_showing_their_address(
     none is saved, the globe. A card with a tally of results is a box around that link
     and the tally; one with none is the link itself
     (`tests/test_site_project_tallies.py` holds the order, the tallies and their links)."""
-    section = page.split('id="other-square-packing-projects"', 1)[1].split("<h2", 1)[0]
+    section = re.split(
+        r"<h[12]\b|</article>",
+        page.split('id="other-square-packing-projects"', 1)[1],
+        maxsplit=1,
+    )[0]
     cards = re.findall(
-        r'<a class="site-card(?: site-card-link|-link site-card-main)" href="([^"]+)"(.*?)</a>',
+        r'<a class="site-card-link site-card-heading" href="([^"]+)"(.*?)</a>',
         section,
     )
     assert [url for url, _ in cards] == [
@@ -2535,10 +2643,22 @@ def test_other_project_cards_are_links_showing_their_address(
         """`markup` with each empty element closed as kpress writes it, `<path … />`."""
         return re.sub(r"\s*/>", " />", markup)
 
-    for url, body in cards:
-        address = url.removeprefix("https://").rstrip("/")
-        assert html.escape(address) in body.replace("<wbr>", ""), url
-        assert closed(overview_sections.link_icon(url)) in closed(body), url
+    for url, _body in cards:
+        source = re.search(
+            rf'<a class="site-card-url" href="{re.escape(url)}"[^>]*>(.*?)</a>',
+            section,
+            re.DOTALL,
+        )
+        assert source is not None, url
+        if reference := parse_github_reference(url):
+            assert f'<span class="site-card-url-text">#{reference.number}</span>' in source[1]
+            icon = github_reference_icon(reference.kind, class_name="site-link-icon")
+            assert closed(icon) in closed(source[1]), url
+            assert f"{reference.repository}#{reference.number}" in source[0], url
+        else:
+            address = url.removeprefix("https://").rstrip("/")
+            assert html.escape(address) in source[1].replace("<wbr>", ""), url
+            assert closed(overview_sections.link_icon(url)) in closed(source[1]), url
     assert closed(overview_sections.GITHUB_MARK) in closed(section)
     assert closed(overview_sections.WEB_MARK) in closed(section)
     assert "popovertarget" not in section
@@ -2600,10 +2720,17 @@ def test_the_nav_has_one_explanations_entry_for_the_papers_and_film() -> None:
     """Papers, the film and the tutorial share one top-level Explanations destination.
     The former papers key remains an alias for callers rendering legacy pages."""
     nav = render_overview.nav_html("papers")
-    entries = re.findall(
-        r'<a data-page="(\w+)"(?: aria-current="page")? href="([^"]+)">([^<]+)</a>', nav
+    links = re.findall(
+        r'<a data-page="(\w+)"(?: aria-current="page")? href="([^"]+)"([^>]*)>(.*?)</a>', nav
     )
+    entries = [
+        (key, href, "GitHub" if key == "github" else label)
+        for key, href, _attrs, label in links
+    ]
     assert entries == NAV_ENTRIES
+    assert 'class="site-nav-icon"' in nav
+    assert 'title="GitHub"' in nav
+    assert 'aria-label="GitHub"' in nav
     assert (
         '<a data-page="explanations" aria-current="page" href="papers.html">Explanations</a>'
         in nav
@@ -2809,15 +2936,63 @@ def test_the_closing_credit_is_two_lines_the_project_and_the_version() -> None:
     assert part in nav_css
 
 
-@pytest.mark.parametrize("name", sorted(render_overview.PAGES))
+class _ClosingCredits(HTMLParser):
+    """Read exact footer structure/text independently of attribute serialization."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.footers: list[list[tuple[str, object]]] = []
+        self.depth = 0
+        self.lines = 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        classes = (dict(attrs).get("class") or "").split()
+        if tag == "span" and "site-colophon-line" in classes:
+            self.lines += 1
+        if self.depth or (tag == "p" and "site-colophon" in classes):
+            if not self.depth:
+                self.footers.append([])
+            self.depth += 1
+            self.footers[-1].append(("start", (tag, sorted(attrs))))
+
+    def handle_endtag(self, tag: str) -> None:
+        if self.depth:
+            self.footers[-1].append(("end", tag))
+            self.depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if self.depth:
+            self.footers[-1].append(("text", data))
+
+
+def test_closing_credit_comparison_accepts_unquoted_profile_destinations() -> None:
+    footer = render_overview.colophon_html()
+    expected, compact = _ClosingCredits(), _ClosingCredits()
+    expected.feed(footer)
+    compact.feed(footer.replace('href="profiles/index.html"', "href=profiles/index.html"))
+    assert len(expected.footers) == 1
+    assert compact.footers == expected.footers
+    assert compact.lines == expected.lines == 3
+
+
+@pytest.mark.parametrize(
+    "name", sorted((*render_overview.PAGES, *render_contributors.page_paths()))
+)
 def test_every_site_page_ends_with_the_closing_credit(
-    name: str, rendered: Callable[[str], str]
+    name: str, rendered: Callable[[str], str], contributor_documents: dict[str, str]
 ) -> None:
-    """Each KPress page carries the two lines once, in its footer slot."""
-    footer = f'<p class="site-colophon">{render_overview.colophon_lines()}</p>'
-    page = rendered(name)
-    assert page.count(footer) == 1
-    assert page.count('class="site-colophon-line"') == 2
+    """Every page retains the two shared credits and one rebased contributor link."""
+    footer = render_overview.colophon_html()
+    directory = str(Path(name).parent)
+    if directory != ".":
+        footer = render_case_pages.rebase_links(footer, directory)
+    page = contributor_documents[name] if name in contributor_documents else rendered(name)
+    expected, actual = _ClosingCredits(), _ClosingCredits()
+    expected.feed(footer)
+    actual.feed(page)
+    assert len(expected.footers) == 1
+    assert actual.footers == expected.footers
+    assert actual.lines == expected.lines == 3
 
 
 SITE_NAV_BLOCK = re.compile(r'<nav class="site-nav" aria-label="Site">.*?</nav>', re.DOTALL)
@@ -2856,7 +3031,7 @@ def test_every_site_page_carries_the_same_bar(
     else:
         # A page in a directory of its own, the case records', reaches the root from it.
         page, root = rendered(name), "../" * name.count("/")
-    partial = render_overview.SITE_NAV.read_text(encoding="utf-8").replace("{{ROOT}}", "")
+    partial = render_overview.nav_html("")
     assert _the_bar(page, root=root) == SITE_NAV_BLOCK.findall(partial)[0]
 
 
@@ -3812,9 +3987,9 @@ def test_the_html_measures_an_age_from_the_register_and_never_from_the_clock(
 def test_a_credit_splits_at_what_it_builds_on_and_a_standing_into_its_chips() -> None:
     # A credit is set whole, whatever the register's credit line says: the finder, then
     # what the result builds on, quiet.
-    credit = overview_sections.credit_cell("wand125 after Daniel, Tokoharu, Levy, Stromquist")
+    credit = overview_sections.credit_cell("Hosono after Daniel, Tokoharu, Levy, Stromquist")
     assert credit == (
-        'wand125 <span class="site-cell-quiet">after Daniel, Tokoharu, Levy, Stromquist</span>'
+        'Hosono <span class="site-cell-quiet">after Daniel, Tokoharu, Levy, Stromquist</span>'
     )
     assert overview_sections.credit_cell("Levy") == "Levy"
     assert overview_sections.credit_cell("Levy after Burns, Massaccesi") == (
@@ -3938,7 +4113,7 @@ def _template_paragraphs(section: str) -> list[str]:
 #: record reports them (the owner, 2026-10-03: "make the examples current"), each
 #: written as the record writes it, with $\le$ and $\ge$. The lower is called reported,
 #: the field `test_the_intros_examples_are_the_records` compares it with: when this was
-#: written wand125's certificate was not yet replayed here and stood at V0/C0, so "proved"
+#: written Hosono's certificate was not yet replayed here and stood at V0/C0, so "proved"
 #: alone would have put a reported bound in a verified one's place. Its 6 October
 #: certificate (T-108) is replayed here at V3/C3, so both lanes now hold 5.81, and the
 #: word stays the owner's.
@@ -3961,7 +4136,7 @@ PROBLEM_STATEMENT = (
 
 def test_the_intros_examples_are_the_records() -> None:
     """The introduction's two examples are case 29's current bounds: its lower example
-    is the reported lower bound, wand125's 5.79 of 2026-09-28 when this was written,
+    is the reported lower bound, Hosono's 5.79 of 2026-09-28 when this was written,
     its 2319/400 = 5.7975 of 1 October (T-074) after it, and its 581/100 = 5.81 of 6
     October (T-108) since, and its upper example is the reported upper bound rounded
     up, which also stands at or above the verified ceiling, so it is itself a proved
@@ -4085,6 +4260,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         '<a id="contribute-your-results"></a></h1>',
         1,
     )
+    narrative = narrative.split('<h1 id="profiles"', 1)[0]
     assert len(re.findall(r"<p>", narrative)) == 4
     assert len(re.findall(r"<p>", contribution)) == 2
     items = re.findall(r"<li>(.*?)</li>", narrative, re.DOTALL)
@@ -4101,7 +4277,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         _markdown_text(
             "Marc Leonard Overbeck\u2019s certified lower bound of $31/8$ for eleven squares."
         ),
-        "Mannaseh Ahmed\u2019s proof of optimality for eleven squares.",
+        "Manasseh Ahmed\u2019s proof of optimality for eleven squares.",
         _markdown_text(
             "Independently, Evan Daniel has proved the optimality of an infinite family, "
             r"$s(k^2 - 3) = k$ for every $k \ge 6$, along with exact values at "
@@ -4121,7 +4297,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         "Work on the square packing problem has exploded",
         "Joshua Levy",
         "Marc Leonard Overbeck",
-        "Mannaseh Ahmed",
+        "Manasseh Ahmed",
         "Evan Daniel",
         "Oscar Fitzharding",
         "Independently",
@@ -4130,10 +4306,10 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         assert claim in text, claim
     founder = '<a href="https://x.com/ojoshe" target="_blank" rel="noopener noreferrer">'
     for address, label in (
-        ("https://x.com/ojoshe", "Joshua Levy"),
-        ("https://x.com/kleddamag", "Marc Leonard Overbeck"),
-        ("https://x.com/ManassehA06", "Mannaseh Ahmed"),
-        ("https://x.com/evanbd", "Evan Daniel"),
+        ("profiles/joshua-levy.html", "Joshua Levy"),
+        ("profiles/marc-leonard-overbeck.html", "Marc Leonard Overbeck"),
+        ("profiles/manasseh-ahmed.html", "Manasseh Ahmed"),
+        ("profiles/evan-daniel.html", "Evan Daniel"),
         ("papers/n11-lower-bounds-explainer.html", "new lower bounds"),
         ("papers/n11-threshold-bound-review.html", "certified lower bound of $31/8$"),
         ("papers/n11-optimality-review.html", "proof of optimality"),
@@ -4210,6 +4386,7 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert about.count(heading) == 1
     assert re.findall(r'<h1\b[^>]*\bid="([^"]+)"', about) == [
         "the-squares-project",
+        "profiles",
         "report-your-results",
         "squares-project-documentation",
     ]
@@ -4219,10 +4396,27 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert "data-news-entry=" not in about
     assert '<a id="news"></a>' in about
     following = about.split(heading, 1)[1].lstrip()
-    assert following.startswith("<p>Work on the square packing problem")
+    assert following.startswith(
+        '<div class="site-profile-full-names">\n<p>Work on the square packing problem'
+    )
     assert "Work on the square packing problem has exploded" not in page
     assert page.count('id="the-squares-project"') == 0
     assert 'href="about.html"' in page
+    preview = about.split('<h1 id="profiles" class="site-title">Profiles</h1>', 1)[1]
+    preview = preview.split('<h1 id="report-your-results"', 1)[0]
+    assert "site-contributor-list" not in preview
+    assert "profiles/manasseh-ahmed.html" not in preview
+    home_preview = page.split('<h1 id="profiles" class="site-title">Profiles</h1>', 1)[1]
+    home_preview = home_preview.split('<h1 id="squares-project-documentation"', 1)[0]
+    assert "site-contributor-list" not in home_preview
+    assert "profiles/manasseh-ahmed.html" not in home_preview
+    for invitation in (preview, home_preview):
+        assert "We track contributors and the authors cited" in invitation
+        assert 'href="profiles/index.html">All Profiles' in invitation
+    assert "data-person" not in preview
+    assert re.search(
+        r'<a class="site-action" href="profiles/index.html">All Profiles<span\b', preview
+    )
 
 
 def test_the_project_is_named_the_squares_project_wherever_it_is_named(
@@ -4353,7 +4547,7 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
     entry there. A paper is a full page the site serves, so its card is the link itself
     and goes there in the same tab: an `<a href>` with
     the page icon (`data-go="page"`), no popover, no framed preview and no new tab.
-    The page has no popover, so it carries no popover script."""
+    Its shared case and contributor overlays enhance ordinary links outside the cards."""
     page = papers
     paper_specs = overview_sections.PAPERS
     assert [paper.href for paper in paper_specs] == [
@@ -4396,8 +4590,28 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
         if markup == 'target="_blank"':
             continue  # Contributor citations are external; paper cards stay same-tab.
         assert markup not in article, markup
-    popover = render_overview.POPOVER_SCRIPT.read_text(encoding="utf-8")
-    assert popover not in site_renders.served("papers.html")
+    programs = (
+        render_overview.THEME_SCRIPT,
+        render_overview.HEADROOM_SCRIPT,
+        render_overview.TOOLTIP_SCRIPT,
+        render_overview.ARTICLE_LOADER_SCRIPT,
+        render_overview.POPOVER_SCRIPT,
+        render_overview.CASE_POPOVER_SCRIPT,
+        render_overview.CONTRIBUTOR_POPOVER_SCRIPT,
+    )
+    tags = [_asset_tag(program, "papers.html") for program in programs]
+    assert all(page.count(tag) == 1 for tag in tags)
+    assert [page.index(tag) for tag in tags] == sorted(page.index(tag) for tag in tags)
+    for selector in ("data-case-popover", "data-contributor-popover"):
+        assert page.count(selector) == 1
+        assert page.index(selector) < page.index(
+            _asset_tag(render_overview.POPOVER_SCRIPT, "papers.html")
+        )
+    for program in (render_overview.TABLE_SCRIPT, render_overview.ROW_POPOVER_SCRIPT):
+        assert _asset_tag(program, "papers.html") not in page
+    assembled = site_renders.served("papers.html")
+    for program in programs:
+        assert program.read_text(encoding="utf-8") in assembled
 
 
 def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
@@ -4424,10 +4638,10 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
     assert re.findall(r'<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)</a>', introduction) == [
         (overview_sections.LOWER_BOUNDS_PAPER, "Part I"),
         (overview_sections.THRESHOLD_BOUND_PAPER, "Part II"),
-        ("https://x.com/kleddamag", "Marc Leonard Overbeck"),
+        ("profiles/marc-leonard-overbeck.html", "Overbeck"),
         ("results.html#t-037", "T-037"),
         (overview_sections.OPTIMALITY_PAPER, "Part III"),
-        ("https://x.com/ManassehA06", "Mannaseh Ahmed"),
+        ("profiles/manasseh-ahmed.html", "Ahmed"),
         ("results.html#t-060", "T-060"),
         ("papers/square-packing-methods-survey.html", "How Record Square Packings Are Found"),
     ]
@@ -4488,7 +4702,7 @@ def test_the_optimality_papers_card_says_what_t060s_rungs_allow(
     value, note = _page_card_parts(papers, paper.href)
     assert card_text(value) == paper.title
     text = card_text(note)
-    assert text.startswith("Explains Mannaseh Ahmed\u2019s proof that Trump\u2019s packing")
+    assert text.startswith("Explains Manasseh Ahmed\u2019s proof that Trump\u2019s packing")
     assert "(T-060)" in text
     assert "is optimal" in text
     assert "s(11) = 3.8770835" in text
@@ -4516,7 +4730,7 @@ def test_the_papers_page_introduces_the_papers_within_t060s_rungs(
     assert "machine-checked proof" in text
     assert "packing of eleven squares is optimal" in " ".join(text.split())
     assert "review record is pending" in text
-    assert "Mannaseh Ahmed" in text
+    assert "Manasseh Ahmed" in text
     assert f'<a href="{overview_sections.THRESHOLD_BOUND_PAPER}">Part II</a>' in article
     assert "figures drawn from published record packings" in " ".join(text.split())
     assert "formal" not in text.lower()
@@ -4817,13 +5031,24 @@ def test_a_table_of_results_is_one_flat_list_newest_first(
     assert len(overview.groups) > 1
     # Each row's credit is the register's, whole: the finder, then what it builds on.
     for result in overview.results:
-        cell = (
-            f'<td class="site-col-credit" data-value="{html.escape(result.credit)}">'
-            f"{overview_sections.credit_cell(result.credit)}</td>"
-        )
-        assert cell in _row(table, result.id), result.id
+        rows = [_row(table, result.id)]
         if f'data-result="{result.id.lower()}"' in recent:
-            assert cell in _recent_row(recent, result.id), result.id
+            rows.append(_recent_row(recent, result.id))
+        for row in rows:
+            opening = f'<td class="site-col-credit" data-value="{html.escape(result.credit)}">'
+            assert opening in row, result.id
+            cell = row.split(opening, 1)[1].split("</td>", 1)[0]
+            assert _rendered_text(cell) == _rendered_text(result.credit_html), result.id
+            assert Counter(re.findall(r'href="([^"]+)"', cell)) == Counter(
+                re.findall(r'href="([^"]+)"', result.credit_html)
+            ), result.id
+            if " after " in result.credit:
+                quiet = re.search(r'<span class="site-cell-quiet">(.*?)</span>', cell)
+                assert quiet is not None, result.id
+                assert (
+                    _rendered_text(quiet[1])
+                    == "after " + _rendered_text(result.credit_html).partition(" after ")[2]
+                )
         source = "ours" if result.ours else "others"
         assert f'data-source="{source}"' in _row(table, result.id), result.id
     assert {result.ours for result in overview.results} == {True, False}
@@ -4844,7 +5069,7 @@ def test_grouping_agrees_with_readmes_relation(
     overview: overview_data.Overview, records: render_recent_results.Records
 ) -> None:
     """The register's groups, which `RESULTS.md` prints and no page of the site does, are
-    `source_lineage`'s, the lineage `render_recent_results.relation` names, so wand125's
+    `source_lineage`'s, the lineage `render_recent_results.relation` names, so Hosono's
     T-048, T-054 and T-055 read as crediting this project second-hand in both."""
     titles = dict(OTHERS)
     for title, members in overview.groups[1:]:
@@ -4957,10 +5182,11 @@ def test_the_gear_sits_level_with_the_tab_text() -> None:
     wrapper = _rule(css, ".site-theme")
     assert "align-self: baseline;" in wrapper
     assert "display: flex;" in wrapper
-    icon = _rule(css, ".site-theme-button svg")
-    assert "block-size: 1.05rem;" in icon
-    assert "inline-size: 1.05rem;" in icon
-    assert "vertical-align: calc((1cap - 1.05rem) / 2);" in icon
+    icon = _rule(css, ".site-nav-icon,\n.site-theme-button svg")
+    assert "--site-icon-size: 0.85em;" in css
+    assert "block-size: var(--site-icon-size);" in icon
+    assert "inline-size: var(--site-icon-size);" in icon
+    assert "vertical-align: calc((1cap - var(--site-icon-size)) / 2);" in icon
     assert "--site-gear-drop" not in css
 
 
@@ -5009,6 +5235,9 @@ def test_a_page_title_stands_one_space_above_what_follows_it() -> None:
     subtitle hands the space to the subtitle."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     assert css.count("--site-subtitle-space: 2rem;") == 1
+    assert "  .kpress-long-text > .site-title:first-child," in css
+    assert "  .kpress-long-text > :is(article, header):first-child > h1:first-of-type," in css
+    assert "    --site-title-space-above: 6.25rem;" in css
     assert "  margin-block: var(--site-subtitle-space);\n" in css
     assert (
         ".kpress :where(.site-page, .kpress-prose) h1,\n"
@@ -5816,7 +6045,17 @@ def test_a_result_rows_popover_body_comes_from_one_function(
     for file, row in zip(fragments, overview.results, strict=True):
         assert f"BODY OF {row.id}" in file.html
         assert "<main " in file.html
-        assert "<h1 " in file.html
+        heading = re.search(r"<h1\b[^>]*>(.*?)</h1>", file.html, re.DOTALL)
+        assert heading is not None, row.id
+        assert re.search(r'class=["\']?site-result-id["\']?>', heading[1]), row.id
+        assert re.search(r'class=["\']?site-result-title["\']?>', heading[1]), row.id
+        original = site_math.prepare(
+            f"<h1>{html.escape(row.id)}: {overview_sections.tex_bounds(row.summary)}</h1>"
+        )
+        assert _visible_text(heading[1]) == _visible_text(original), row.id
+        assert re.findall(r"<math\b.*?</math>", heading[1], re.DOTALL) == re.findall(
+            r"<math\b.*?</math>", original, re.DOTALL
+        ), row.id
         assert 'aria-label="Neighboring results"' in file.html
         for neighbor in re.findall(r'rel="(?:prev|next)" href="([^"]+)"', file.html):
             assert f"result/{neighbor}" in {page.name for page in fragments}
@@ -5828,7 +6067,9 @@ def test_a_result_rows_popover_body_comes_from_one_function(
         for row in listed:
             panel = _row_popover(table, f"pop-result-{row.id.lower()}")
             assert f'data-row-pop-src="result/{row.id.lower()}.html"' in panel
-            assert "Read the complete result record" in panel
+            assert "<p>Full record</p>" in panel
+            assert panel.count(f'href="result/{row.id.lower()}.html"') == 1
+            assert ">Open Result Record</a>" in panel
             assert "<dl" not in panel
 
 
@@ -5840,15 +6081,20 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
         preview = overview_sections.result_row(result, trigger="row").popover
         full = result_bodies[result.id]
         assert f'href="{overview_sections.result_fragment(result.id)}"' in preview, result.id
-        assert "Read the complete result record" in preview, result.id
+        assert "<p>Full record</p>" in preview, result.id
+        assert preview.count(f'href="{overview_sections.result_fragment(result.id)}"') == 1
+        assert ">Open Result Record</a>" in preview, result.id
         assert (
-            overview_sections.prose_html(
-                result.record["claim"], between='</p><p class="site-result-claim">'
+            link_prose(
+                overview_sections.prose_html(
+                    result.record["claim"], between='</p><p class="site-result-claim">'
+                )
             )
             in full
         ), result.id
         assert (
-            overview_sections.prose_html(result.record["significance"]["rationale"]) in full
+            link_prose(overview_sections.prose_html(result.record["significance"]["rationale"]))
+            in full
         ), result.id
         for link in result.records:
             assert f'href="{html.escape(link.url, quote=True)}"' in full, result.id
@@ -5869,7 +6115,9 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
             assert f"<dt>{label}</dt>" not in preview, result.id
             if result.record.get(key):
                 assert f"<dt>{label}</dt>" in full, result.id
-                assert overview_sections.prose_html(result.record[key]) in full, result.id
+                assert link_prose(overview_sections.prose_html(result.record[key])) in full, (
+                    result.id
+                )
 
 
 #: What the two pages that list results may weigh. The result overviews are 4.9 MB
@@ -5890,7 +6138,7 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: bytes with the new-result stars, and the ceiling is 2,500,000 again, without the
 #: fetch think-yozo planned for the second drawings. The results' short rows took both
 #: past it on 6 October: 2,548,891 and 1,200,769 bytes with the six results of that
-#: morning, and 2,680,770 and 1,332,411 with wand125's ten check2 results after them,
+#: morning, and 2,680,770 and 1,332,411 with Hosono's ten check2 results after them,
 #: about 13 KB a result on each page. Each ceiling keeps about a hundred kilobytes above
 #: the second measurement. Merged with main's T-101 the same day, as T-102 to T-111, they
 #: measured 2,727,614 and 1,379,239 bytes, above both earlier ceilings and about 70 KB
@@ -5990,9 +6238,10 @@ def test_the_results_page_has_room_through_its_room_count(results: str) -> None:
 def test_the_site_writes_each_result_overview_once_and_drops_a_withdrawn_one(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """`write_site` writes the pages at the root and the fragments in their directory,
-    and removes a fragment a directory built earlier still holds for a result the
-    register no longer has; nothing else in the directory is touched."""
+    """Each result, contributor page and forwarder is written and freshness checked.
+
+    Withdrawn results and retired profiles are pruned; another builder's paper remains.
+    """
     files = [
         render_overview.Page("index.html", "<p>page</p>"),
         render_overview.Page("result/t-001.html", "<p>one</p>\n"),
@@ -6018,16 +6267,45 @@ def test_the_site_writes_each_result_overview_once_and_drops_a_withdrawn_one(
     monkeypatch.setattr(render_overview, "render_all", lambda: files[:1])
     monkeypatch.setattr(render_overview, "result_fragments", lambda: files[1:])
     monkeypatch.setattr(render_overview, "case_records", list)
+    contributors = [
+        render_overview.Page("profiles/index.html", "<p>profiles</p>"),
+        render_overview.Page("profiles/levy.html", "<p>Levy</p>"),
+    ]
+    monkeypatch.setattr(render_contributors, "contributor_pages", lambda: contributors)
     forwarder = render_overview.Page("old.html", "<p>moved</p>")
     monkeypatch.setattr(render_overview, "forwarder_pages", lambda: [forwarder])
     assert [file.name for file in render_overview.render_site()] == [
         "index.html",
         "result/t-001.html",
+        *(page.name for page in contributors),
         "old.html",
     ]
     # A forwarder is one of the files a render writes, so a build without it is stale.
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
-    render_overview.write_site(tmp_path, [*files, forwarder])
+    complete = [*files, *contributors, forwarder]
+    render_overview.write_site(tmp_path, complete)
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
+    profile = tmp_path / "profiles/levy.html"
+    profile.write_text("changed profile", encoding="utf-8")
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
+    render_overview.write_site(tmp_path, complete)
+    profile.unlink()
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
+    render_overview.write_site(tmp_path, complete)
+    retired = tmp_path / "profiles/retired.html"
+    retired.write_text("retired contributor", encoding="utf-8")
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
+    render_overview.write_site(tmp_path, complete)
+    assert not retired.exists()
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
+    # The earlier profile directory holds only forwarders, so a file the build no longer
+    # writes there is stale too.
+    (tmp_path / render_overview.LEGACY_PROFILES_DIR).mkdir()
+    retired = tmp_path / render_overview.LEGACY_PROFILES_DIR / "retired.html"
+    retired.write_text("retired forwarder", encoding="utf-8")
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
+    render_overview.write_site(tmp_path, complete)
+    assert not retired.exists()
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
     (tmp_path / "result" / "t-001.html").write_text("changed", encoding="utf-8")
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
@@ -6048,11 +6326,16 @@ def test_check_finds_a_record_file_or_overview_left_from_another_build(
     monkeypatch.setattr(render_overview, "result_fragments", list)
     monkeypatch.setattr(render_overview, "case_records", lambda: records)
     monkeypatch.setattr(render_overview, "forwarder_pages", list)
+    contributors = [
+        render_overview.Page("profiles/index.html", "<p>profiles</p>"),
+        render_overview.Page("profiles/levy.html", "<p>Levy</p>"),
+    ]
+    monkeypatch.setattr(render_contributors, "contributor_pages", lambda: contributors)
     assert render_overview.main(["--output", str(tmp_path)]) == 0
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
     (tmp_path / "cases" / "325.html").write_text("a dropped case", encoding="utf-8")
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
-    render_overview.write_site(tmp_path, [*files, *records])
+    render_overview.write_site(tmp_path, [*files, *records, *contributors])
     assert not (tmp_path / "cases" / "325.html").exists()
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
 
@@ -6883,8 +7166,17 @@ def test_the_site_writes_its_forwarders_and_checks_them(
     monkeypatch.setattr(render_overview, "render_all", lambda: [page])
     monkeypatch.setattr(render_overview, "result_fragments", list)
     monkeypatch.setattr(render_overview, "case_records", list)
+    contributors = [
+        render_overview.Page("profiles/index.html", "<p>profiles</p>"),
+        render_overview.Page("profiles/levy.html", "<p>Levy</p>"),
+    ]
+    monkeypatch.setattr(render_contributors, "contributor_pages", lambda: contributors)
     moved = [old for old, _ in render_overview.MOVED_PAGES]
-    assert [file.name for file in render_overview.render_site()] == ["index.html", *moved]
+    assert [file.name for file in render_overview.render_site()] == [
+        "index.html",
+        *(profile.name for profile in contributors),
+        *moved,
+    ]
     assert {"explainer.html", "n11-optimality/index.html"} < set(moved)
     assert render_overview.main(["--output", str(tmp_path)]) == 0
     crawl, crawl_assets = site_urls.crawl_files()
@@ -6898,6 +7190,7 @@ def test_the_site_writes_its_forwarders_and_checks_them(
     ) == sorted(
         [
             "index.html",
+            *(profile.name for profile in contributors),
             *moved,
             *render_overview.support_files(),
             *crawl,

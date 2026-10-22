@@ -413,6 +413,56 @@ def test_reference_labels_are_local_to_each_summary_and_details() -> None:
         assert ("https://example.com/second", "<strong>source</strong>") in links
 
 
+def test_contributor_links_resolve_for_each_reader_surface() -> None:
+    target = "packing/contributors/people/hiroaki-hosono.md?plain=1#accounts"
+    for prose in (
+        f"[Hiroaki Hosono]({target})\N{RIGHT SINGLE QUOTATION MARK}s certificate was retained.",
+        (
+            f"[Hiroaki Hosono][person]\N{RIGHT SINGLE QUOTATION MARK}s certificate was kept."
+            f"\n\n[person]: {target}"
+        ),
+    ):
+        data = document()
+        data["entries"][0]["summary"] = prose
+        data["entries"][0]["details"] = (
+            "The [contributor records](packing/contributors/README.md) retain the evidence."
+        )
+        render_changelog.validate(data)
+        github = render_changelog.render_markdown(data)
+        assert f"[Hiroaki Hosono]({target})\N{RIGHT SINGLE QUOTATION MARK}s" in github
+        site = render_changelog.render_markdown(data, destination="site")
+        assert (
+            '<a href="profiles/hiroaki-hosono.html?plain=1#accounts">'
+            "Hiroaki Hosono</a>\N{RIGHT SINGLE QUOTATION MARK}s"
+        ) in site
+        assert repo_url("packing/contributors/README.md") in site
+
+
+def test_contributor_links_retain_the_repository_target_in_details() -> None:
+    data = document()
+    target = "packing/contributors/people/evan-daniel.md"
+    data["entries"][0]["details"] = f"- Retained [Evan Daniel][].\n\n[Evan Daniel]: {target}"
+    github = render_changelog.render_markdown(data)
+    site = render_changelog.render_markdown(data, destination="site")
+    assert f"[Evan Daniel]({target})" in github
+    assert '<a href="profiles/evan-daniel.html">Evan Daniel</a>' in site
+
+
+def test_contributor_links_reject_missing_and_unsafe_targets() -> None:
+    for target, message in (
+        ("packing/contributors/people/missing-person-not-a-profile.md", "missing repository"),
+        ("packing/contributors/people/../README.md", "repository-relative"),
+        ("packing/contributors/people/%252e%252e/README.md", "repository-relative"),
+        ("packing/contributors/people/evan-daniel.md?x=%3Cscript%3E", "unsafe"),
+    ):
+        for prose in (f"[Person]({target})", f"[Person][person]\n\n[person]: {target}"):
+            data = document()
+            data["entries"][0]["summary"] = prose
+            for destination in ("github", "site"):
+                with pytest.raises(ValueError, match=message):
+                    render_changelog.render_markdown(data, destination=destination)
+
+
 def test_structured_links_reject_decoded_markup_and_unsafe_authorities() -> None:
     attacks = [
         "https://example.com/)<script>forbidden</script>",

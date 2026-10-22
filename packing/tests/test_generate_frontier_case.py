@@ -160,17 +160,17 @@ NOT_REPRODUCED = {
 BODY_NOT_REPRODUCED = {
     100: "an editorial section about the edge of the corpus, written for this one case",
     68: (
-        "the lower-bound prose: wand125's two intake paragraphs, and the n68 floor deduced "
-        "from wand125's n69 certificate, in place of the Nagamochi opener and section; the "
+        "the lower-bound prose: Hosono's two intake paragraphs, and the n68 floor deduced "
+        "from Hosono's n69 certificate, in place of the Nagamochi opener and section; the "
         "packing section, which the #227 intake writes over the release draft, reproduces"
     ),
     69: (
         "the 2026-10-05 catalogue intake (T-088), which names the release it overtook and "
-        "keeps the release's paragraph as the previous best known packing, and wand125's "
+        "keeps the release's paragraph as the previous best known packing, and Hosono's "
         "lower-bound intake paragraphs"
     ),
     50: (
-        "the 2026-09-28 intake of wand125's reported 37/5, whose replay was still running, "
+        "the 2026-09-28 intake of Hosono's reported 37/5, whose replay was still running, "
         "and the history of Green's DS7 report it displaced from the reported lane"
     ),
 }
@@ -1464,7 +1464,7 @@ def test_reported_green_bound_preserves_the_verified_theorem_precision() -> None
     """The source lane can improve without changing the certified theorem's digits.
 
     Read from the generator's own draft, before the reviewed promotion is applied: since
-    2026-09-28 the committed record's reported lane carries wand125's 37/5, a promotion
+    2026-09-28 the committed record's reported lane carries Hosono's 37/5, a promotion
     the generator preserves rather than derives. The certified theorem is Karakuş's general
     bound since 2026-10-02; it was Nagamochi's closed form, `7.0827625303`, until then.
     """

@@ -1454,7 +1454,7 @@ The assembled publication check runs this inventory automatically.
 | Class | Retained programs | Initial-content contract |
 | --- | --- | --- |
 | Pre-paint bootstrap | persisted theme/font attributes, embed/atlas query attributes, font hinting | Root attributes are set before body paint; inline programs stay under 4,096 bytes |
-| Input response | table filters/sorts, theme controls, case/result popovers, atlas controls, paper certificate controls | Primary records and mathematics already exist; a reader action may open or update a reserved region |
+| Input response | table filters/sorts, theme controls, shared article loading and case/result/contributor popovers, atlas controls, paper certificate controls | Primary records and mathematics already exist; a reader action may open or update a reserved region |
 | Non-layout enhancement | film playback, atlas grid helpers, document behavior and paper readiness wiring | Reserved media boxes and prepared prose/math retain their layout |
 | Registered forwarding | moved-page and case-index forwarders, and the known-alias 404 resolver | Only registered historical paths and fragments are redirected |
 | Workbench application | validated corpus loader and the packing application | Static heading/help remains readable; application data loads from an immutable JSON URL |
@@ -1652,6 +1652,18 @@ which the overview job writes with them (`devtools/site_assets.py`;
 `templates/paper-design.md`, Shared Assets); the papers share that bundle, and the
 published workbench links its own assets and corpus data.
 The offline editions remain self-contained.
+
+Case and result records and contributor profiles are complete pages; overlays load a
+copy of the same article through the shared loader.
+The canonical
+[article and overlay contract](packing/devtools/templates/paper-design.md#article-pages-and-overlays)
+defines native entry points, cache and ID isolation, focus behavior, component owners
+and retained checks.
+Update that contract with a presentation change rather than restating its rules in a
+feature plan. [Attribution Policy](attribution.md) owns names, credit roles and
+case-specific decisions across the website and PDFs.
+Contributor identity and census work is tracked in the
+[contributor-profile plan](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md).
 
 Before drawing PDF bytes, the exporter checks that visible math is typeset; a completed
 font-error fallback that exposes literal TeX fails this check.

@@ -25,7 +25,7 @@
   const shown = (el) => el.getClientRects().length > 0;
   /** @param {Element} el */
   const labelled = (el) => ({
-    label: (el.textContent ?? "").trim(),
+    label: (el.textContent ?? "").trim() || el.getAttribute("aria-label") || "",
     baseline: baseline(el),
     top: Math.round(el.getBoundingClientRect().top + window.scrollY),
     current: el.getAttribute("aria-current") === "page",

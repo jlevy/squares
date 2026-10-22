@@ -1335,7 +1335,7 @@ def compare_github(record: Mapped, fetch: Fetch = gh_fetch) -> list[str]:
     A comment that is not a reply is unread when it was created after the entry's
     `read_through`, or created on or before it and edited after it: `read_through` is a
     creation time, so an edit to a comment it covers is content the record has not read.
-    wand125's #485 review linked a new verifier mode that way on 12 October, nine hours
+    Hosono's #485 review linked a new verifier mode that way on 12 October, nine hours
     after posting and after the record had read the comment.
     """
     repository, owner = str(record["repository"]), str(record["owner"])

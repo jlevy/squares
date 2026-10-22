@@ -60,9 +60,10 @@ import tempfile
 import threading
 import time
 from collections.abc import Sequence
+from html.parser import HTMLParser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Literal
+from typing import TYPE_CHECKING, Any, Literal, override
 
 from devtools import check_published_site, render_overview, site_urls, social_card
 
@@ -126,8 +127,6 @@ LAZY_WAIT_MS = 5_000
 #: How long what a press opens may take to typeset its math.
 PRESS_WAIT_MS = 5_000
 HREF = re.compile(r'<nav class="site-nav".*?</nav>', re.DOTALL)
-#: Every address a built page links or frames.
-HREF_ATTRIBUTE = re.compile(r'\s(?:href|src)="([^"]*)"')
 #: The motion preference a tool opens a page that starts a film under: a reader's who
 #: asks for reduced motion. The Visualize page starts its film on a visit unless the
 #: reader asks that (`overview/film.js`), and the film is a 216 MB release download a page
@@ -193,12 +192,19 @@ def build(output: Path, skip: set[str]) -> None:
         pages = render_overview.render_all()
         fragments = render_overview.result_fragments()
         records = render_overview.case_records()
+        from devtools.render_contributors import contributor_pages  # noqa: PLC0415
+
+        contributors = contributor_pages()
         forwarders = render_overview.forwarder_pages()
-        render_overview.write_site(output, [*pages, *fragments, *records, *forwarders])
+        render_overview.write_site(
+            output, [*pages, *fragments, *records, *contributors, *forwarders]
+        )
         for page in pages:
             print(f"wrote {output / page.name}")
         print(f"wrote {len(fragments)} result overviews beside them")
         print(f"wrote {len(records)} case record files under {output / 'cases'}")
+        profiles = output / render_overview.PROFILES_DIR
+        print(f"wrote {len(contributors)} profile pages under {profiles}")
         for forwarder in forwarders:
             print(f"wrote {output / forwarder.name}, a forwarder")
         print(f"wrote {social_card.write(output)}, the link preview's card")
@@ -236,6 +242,22 @@ def missing_links(output: Path) -> list[str]:
     return missing
 
 
+class _LinkedAddresses(HTMLParser):
+    """Read link and frame targets through the same HTML grammar as the browser."""
+
+    def __init__(self, source: str) -> None:
+        super().__init__(convert_charrefs=True)
+        self.addresses: set[str] = set()
+        self.feed(source)
+        self.close()
+
+    @override
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.addresses.update(
+            value for name, value in attrs if name in {"href", "src"} and value is not None
+        )
+
+
 def moved_links(output: Path) -> list[str]:
     """Every link in the built site to an address that is now a forwarder
     (`render_overview.MOVED_PAGES`) or the old address of a file that moved
@@ -249,7 +271,8 @@ def moved_links(output: Path) -> list[str]:
         name = path.relative_to(output).as_posix()
         if name in forwarders:
             continue
-        for href in sorted(set(HREF_ATTRIBUTE.findall(path.read_text(encoding="utf-8")))):
+        links = _LinkedAddresses(path.read_text(encoding="utf-8"))
+        for href in sorted(links.addresses):
             if href.startswith(("https://", "http://", "#", "data:", "mailto:")):
                 continue
             target = (path.parent / href.partition("#")[0].partition("?")[0]).resolve()

@@ -26,6 +26,7 @@ from devtools import (
     build_known_best_atlas,
     check_published_site,
     paper_links,
+    render_contributors,
     render_n11_lower_bounds_explainer,
     render_overview,
 )
@@ -870,10 +871,13 @@ def test_the_pages_filter_covers_every_overview_input() -> None:
             without_documents = [p for p in patterns if p != tutorial]
             exposed = [path for path in declared if not covered(path, without_documents)]
             assert exposed == [REPO / tutorial], event
-        receipt = COMPARISON_RECEIPT.relative_to(REPO).as_posix()
-        without_receipt = [pattern for pattern in patterns if pattern != receipt]
+        # Contributor evidence also uses a resources-wide trigger, so remove every
+        # matching pattern to exercise the receipt guard through overlapping coverage.
+        without_receipt = [
+            pattern for pattern in patterns if not covered(COMPARISON_RECEIPT, [pattern])
+        ]
         exposed = [path for path in declared if not covered(path, without_receipt)]
-        assert exposed == [COMPARISON_RECEIPT], event
+        assert COMPARISON_RECEIPT in exposed, event
 
 
 def test_every_declared_overview_input_exists() -> None:
@@ -1103,6 +1107,7 @@ def test_every_relative_link_in_the_page_names_a_file_the_deploy_serves(page: st
         f"{PAPERS_DIR}/{PDF_OUTPUT.name}",
         *(asset.name for asset in COMPOSITE_ASSETS),
         *SITE_PAGES,
+        *render_contributors.page_paths(),
         *(page.removesuffix("index.html") or "./" for page in SITE_PAGES),
         # The series' other papers, which the page links (`devtools.paper_links`).
         *(render_overview.paper_path(slug) for slug in paper_links.PAPER_SLUGS),
@@ -1337,3 +1342,17 @@ def test_reader_facing_version_references_follow_release_metadata() -> None:
     development = (REPO / "development.md").read_text()
     assert "PUBLICATION_HISTORY" in development
     assert "EXPLAINER_HISTORY" in development
+
+
+def test_authored_trump_footnote_links_evidenced_independent_contributors(page: str) -> None:
+    footnotes = page.split('class="kpress-footnotes"', 1)[1]
+    for identifier, label in (
+        ("mats-gustafsson", "Gustafsson"),
+        ("magnus-thulin", "Thulin"),
+        ("martin-gardner", "Gardner"),
+    ):
+        assert re.search(
+            rf'href="https://jlevy.github.io/squares/profiles/{identifier}\.html"[^>]*>{label}</a>',
+            footnotes,
+        )
+    assert "November 1980" in " ".join(footnotes.split())

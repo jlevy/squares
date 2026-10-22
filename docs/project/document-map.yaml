@@ -9,6 +9,11 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-21-profile-coverage.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md, role: review, authority: record, lifecycle: retained}
+  - {path: attribution.md, role: conventions, authority: definitive, lifecycle: maintained}
+  - {path: packing/contributors/README.md, role: component-guide, authority: current, lifecycle: maintained}
+  - {path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-21-evand-regularized-views.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md, role: review, authority: record, lifecycle: retained}
@@ -1343,6 +1348,12 @@ documents:
     authority: record
     lifecycle: retained
 collections:
+  - pattern: packing/contributors/people/*.md
+    role: registry
+    authority: record
+    lifecycle: maintained
+    contract: packing.squares:Contributor/v1
+    schema: packing/contributors/schemas/contributor.schema.yaml
   - pattern: packing/site-changelog.yaml
     role: registry
     authority: current

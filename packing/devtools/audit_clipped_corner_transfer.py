@@ -1,6 +1,6 @@
 """Audit Guzhou0806's clipped-corner transfer, s(40) > 335427/50000, in exact rationals.
 
-Issue jlevy/squares#485 claims ``s(40) > 335427/50000`` from wand125's ``rect_n40_L67``
+Issue jlevy/squares#485 claims ``s(40) > 335427/50000`` from Hosono's ``rect_n40_L67``
 density, which the 2026-10-01 rectangle packet retains, by a continuous-angle transfer
 from a 401-direction nodal statement with a clipped-corner loss bound, and the weaker
 full-core bound ``s(40) > 67000 sqrt(6400006889)/798988091``. The source is retained in

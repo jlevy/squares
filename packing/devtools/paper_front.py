@@ -5,7 +5,7 @@ chips offering the Markdown it is rendered from, its typeset PDF and the project
 GitHub; then the title; then the credits, in the owner's form (2026-10-01), and under
 them the series strip (the series plan, 2026-10-05):
 
-    From the original proof by **Mannaseh Ahmed**
+    From the original proof by **Manasseh Ahmed**
     github.com/Queuingtheorydotcom/11SquaresOptimal
 
     Human oversight: **Joshua Levy**
@@ -51,6 +51,7 @@ from html import escape
 from typing import NamedTuple
 
 from devtools import render_overview
+from devtools.profile_links import person_label
 from devtools.repo_links import REPO_URL
 from sqpack.release import PublicationHistoryEntry
 
@@ -269,9 +270,8 @@ def _shown(address: str) -> str:
 
 def _linked_name(person: Person) -> str:
     """A name in bold, linking its address."""
-    return (
-        f'<a href="{escape(person.url, quote=True)}"><strong>{escape(person.name)}</strong></a>'
-    )
+    label = escape(person_label(person.name, person.url))
+    return f'<a href="{escape(person.url, quote=True)}"><strong>{label}</strong></a>'
 
 
 def chips(front: PaperFront) -> tuple[tuple[str, str, str], ...]:
@@ -321,7 +321,7 @@ def _credit_lines(front: PaperFront) -> list[tuple[str, str, str]]:
     """Each line of the credits: its class, its HTML and its Markdown, in order."""
     lines: list[tuple[str, str, str]] = []
     if front.source is not None:
-        author = escape(front.source.author)
+        author = escape(person_label(front.source.author, front.source.author_url))
         address = front.source.address
         author_html = f"<strong>{author}</strong>"
         author_markdown = f"**{author}**"
@@ -348,7 +348,9 @@ def _credit_lines(front: PaperFront) -> list[tuple[str, str, str]]:
             "credits-own",
             "Human oversight: " + _names(tuple(_linked_name(p) for p in front.oversight)),
             "Human oversight: "
-            + _names(tuple(f"[**{p.name}**]({p.url})" for p in front.oversight)),
+            + _names(
+                tuple(f"[**{person_label(p.name, p.url)}**]({p.url})" for p in front.oversight)
+            ),
         )
     )
     lines.append(

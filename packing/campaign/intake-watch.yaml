@@ -453,7 +453,7 @@ repositories:
       refreshed from the author's packing store and solved exactly, and five level-3
       alternates. 122d0ba refreshes the lists at 132, 175, 209, 237, 270 and 308 to the sides
       of T-140 and T-141, drops 270's alternate, adds register_cert.py and
-      certs/raw/n-261.cert.gz, the register's ry-xu witness at 261 converted exactly because
+      certs/raw/n-261.cert.gz, the register's Xu witness at 261 converted exactly because
       exactsolve cannot certify that packing, and builds the site from the lists, with
       site/data/records2026.json crediting the 70 records newer than the catalogue to their
       first posting. Parsed exactly, the list certificates at 15 counts have a side strictly

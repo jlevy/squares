@@ -86,7 +86,7 @@ from sqpack.yamlio import safe_load
 
 #: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
 #: The first SQUISH update moved n = 179 and 258 onto packet-derived facts;
-#: the second also moved n = 88. Complete evand and ry-xu packets now supersede
+#: the second also moved n = 88. Complete evand and Xu packets now supersede
 #: earlier catalogue sources. These inventory counts follow the current corpus; the house
 #: adoption of 12 October 2026 moved n = 176 onto SQUISH's issue 500 packet (think-fvz4),
 #: and its pass for issue 528 moved n = 264 onto Daniil Ostashev's packet (think-cq95), and
@@ -708,7 +708,7 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
 
 @pytest.mark.parametrize("n", [51, 70, 261, 308])
 def test_a_linked_house_manifest_refuses_a_noncanonical_house_path(n: int) -> None:
-    """An ry-xu house (51) or one adopted on 11 October 2026 (70, 261, 308) is read only
+    """A Xu house (51) or one adopted on 11 October 2026 (70, 261, 308) is read only
     from its canonical leaf."""
     document = json.loads((ATLAS / "manifest.json").read_text(encoding="utf-8"))
     entry = next(row for row in document["atlas"]["entries"] if row["n"] == n)

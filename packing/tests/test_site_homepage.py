@@ -172,7 +172,18 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
         assert state["right"] <= width
         assert state["overflow"] <= 0
         assert state["width"] / state["height"] == pytest.approx(16 / 9, abs=0.01)
-        assert len(state["headings"]) == 9
+        assert [heading["id"] for heading in state["headings"]] == [
+            "the-problem",
+            "the-atlas-of-square-packings",
+            "news",
+            "recent-results",
+            "profiles",
+            "report-your-results",
+            "papers",
+            "visuals",
+            "squares-project-documentation",
+            "more-resources",
+        ]
         for heading in state["headings"]:
             assert heading["above"] == pytest.approx(state["title_above"], abs=0.01)
             assert heading["below"] == pytest.approx(state["title_below"], abs=0.01)
@@ -277,7 +288,12 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
     assert report["about"]["h1_spacing"]
     h1_space = initial["h1_spacing"][0]["above"]
     assert h1_space > 0
-    for heading in (*initial["h1_spacing"], *report["about"]["h1_spacing"]):
+    about_headings = report["about"]["h1_spacing"]
+    assert about_headings[0]["id"] == "the-squares-project"
+    # The page's first block starts at its shared top padding; subsequent sections
+    # keep the title-spacing token, as every homepage title below its hero does.
+    assert about_headings[0]["above"] == pytest.approx(0, abs=0.01)
+    for heading in (*initial["h1_spacing"], *about_headings[1:]):
         assert heading["above"] == pytest.approx(h1_space, abs=0.01)
     hero = report["hero"]
     assert [drawing["n"] for drawing in hero["drawings"]] == [53]
@@ -707,11 +723,12 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     ]
     assert home["main_titles"] == [
         "the-problem",
+        "profiles",
         "visuals",
         "squares-project-documentation",
         "more-resources",
     ]
-    assert len(home["section_title_styles"]) == 8
+    assert len(home["section_title_styles"]) == 9
     selected = news_highlights.highlights(render_changelog.load())
     assert [heading["entry"] for heading in home["news_headings"]] == [
         entry["id"] for entry in selected

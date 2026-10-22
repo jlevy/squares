@@ -707,63 +707,10 @@ to credit it as carefully as this project’s own.
   inferred here from whose method a result resembles.
   When a later release changes its attribution, the bibliography key for that release
   records the new wording.
-- **Credit text has one home.** A source’s `credit` in
-  [`bibliography.yaml`](packing/resources/bibliography.yaml) is written once: its
-  authors, then `after` and the work the source says it builds on
-  (`Daniel after Burns, Massaccesi`). The atlas citation line and the register renderers
-  print it, and hand-written prose may add to it but never drops a link.
-  A chain through an intermediate author names every link the source names: Overbeck’s
-  $4.66001$ builds on Squares Project (Joshua Levy), Mira and Guzhou0806. The atlas
-  stage sets each line in 66 characters, so where the whole line does not fit it prints
-  the source’s `short_credit`: the same authors and the first of the same links, ending
-  in `et al.` (`Tokoharu after Levy, wand125 et al.`), a shape
-  `devtools.build_bound_citations` enforces.
-  The explainer’s figure, which prints the atlas’s own citation line, shows the same
-  shortened form; every other renderer prints the full line.
-- **Method credit travels with the result.** A result built with another author’s
-  method, solver or checker credits them in the same line
-  (`wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi`). This
-  project is credited as `after Levy` only where the source itself says so.
-- **A regularization leaves the packing with its finder.** A certificate that rearranges
-  a packing the record already credits, for display or after solving it to an exact
-  side, does not take the packing’s credit.
-  The finder keeps the packing through the register result that holds it, which the
-  regularized result names as `of` in its `regularizations`, one item a count.
-  The regularizer is credited with the regularization, and with the certificate where it
-  is theirs, and is typed there as `by`, with the method, the side and what the
-  regularization changed: `T-146` regularizes Ryan Xu’s, Mishapolk’s and SQUISH’s
-  packings and is credited `Daniel after Xu, Chaoweeraprasit, Mishapolk, Levy`. The
-  record never says in its own voice that a regularization is the same packing as the
-  one it was made from unless the item’s `identity.basis` is `measured`, a decision made
-  here. Otherwise it says whose claim the identity is, as `T-146` says that each view’s
-  identity rests on Evan Daniel’s sampled path test; measurements made here are recorded
-  beside the claim and decide nothing.
-- **This project’s results are credited the same way.** A result of this project is
-  `Levy` in the register and on the site, by name as every other author is, and
-  `Levy after …` where it rests directly on another’s proof, method or tool
-  (`Levy after Burns, Massaccesi` for a weighted certificate, `Levy after Stromquist`
-  for the repair of his point set).
-  The `after` is the entry’s `builds_on` in
-  [`results.yaml`](packing/frontier/results.yaml): each source it names is one the
-  result’s own evidence cites, and each name is an author of that source.
-  A repair or correction of a proof is `after` that proof’s author, since the result
-  reuses the argument it mends.
-  A property proved of a packing, such as its rigidity, is not `after` the packing’s
-  finder: the packing is the result’s subject, and its argument owes it nothing.
-  The credit carries the lineage in both directions, so a table of results needs no
-  grouping to say whose work rests on whose.
-- **People and projects, never tools.** Credit names people by name, and a credit line
-  by surname: `Xu`, not the handle `ry-xu` (the owner, 2026-10-14: “use Ryan Xu real
-  name or surname Xu not the handle for regular credits”). A handle stands in a credit
-  only for an author whose sources give no other name.
-  Everywhere else a handle is an identifier and stays as it is: in a source key, a path,
-  a URL or a repository name.
-  A bound this project holds is cited on the atlas as `Squares Project (Levy)`; its
-  results and its place in another source’s credit line are `Levy`. An AI agent is never
-  a credited author. Where a source states that AI assisted its work, its case record or
-  register entry says so in the source’s own terms, and so does any README prose about
-  the result; `devtools.state_ai_assistance` names a case record that cites such a
-  source without saying so.
+- **Attribution has one policy.** [Attribution Policy](attribution.md) owns preferred
+  person names, aliases, project and tool attribution, credit text and lineage,
+  assistance, PDF presentation, and case-specific decisions.
+  Apply it to first-party records and preserve the wording of archived sources.
 - **A citation, not a disclaimer.** A register claim names the result’s authors, its
   date and its source, with a link.
   That a result is another’s is what its credit line and `attribution` state, and where

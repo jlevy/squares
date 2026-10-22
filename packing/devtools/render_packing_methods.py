@@ -24,6 +24,7 @@ from devtools import (
     paper_links,
     render_n11_lower_bounds_explainer,
 )
+from devtools.profile_links import link_prose
 from devtools.render_n11_optimality_review import (
     FIGURE_SLOT,
     RELATIVE_ANCHOR,
@@ -55,6 +56,7 @@ from devtools.render_overview import (
     THEME_SCRIPT,
     TOOLTIP_SCRIPT,
     PageMeta,
+    canonical_url,
     colophon_lines,
     favicon_html,
     head_tags,
@@ -90,7 +92,9 @@ FRONT = paper_front.check(
     paper_front.PaperFront(
         slug=SLUG,
         title=TITLE,
-        oversight=(paper_front.Person("Joshua Levy", "https://x.com/ojoshe"),),
+        oversight=(
+            paper_front.Person("Joshua Levy", canonical_url("profiles/joshua-levy.html")),
+        ),
         agents=("GPT-6 Astra", "GPT-6 Sol"),
         version=PACKING_METHODS_EDITION,
         history="version-history",
@@ -140,6 +144,8 @@ RENDER_INPUTS = (
     EMBED_SCRIPT,
     MATH_SCRIPT,
     PACKING / "devtools/paper_front.py",
+    PACKING / "devtools/profile_links.py",
+    PACKING / "contributors/people",
     PACKING / "devtools/paper_links.py",
     PACKING / "devtools/render_overview.py",
     PACKING / "devtools/render_n11_optimality_review.py",
@@ -274,7 +280,7 @@ def render(
         "SITE_KPRESS_CLIENT": kpress_client_script(),
         "SITE_TOOLTIPS": TOOLTIP_SCRIPT.read_text(encoding="utf-8"),
         "THEME_BOOTSTRAP": render_n11_lower_bounds_explainer.theme_bootstrap(static),
-        "BODY_HTML": document.html,
+        "BODY_HTML": link_prose(document.html, prefix=SITE_ROOT),
         **(math_scripts(static) if document.has_math else {"KATEX_JS": "", "SITE_MATH": ""}),
         "DIAGRAM_LABEL_SCRIPT": render_n11_lower_bounds_explainer.INLINE_SCRIPT_ASSETS[
             "DIAGRAM_LABEL_SCRIPT"

@@ -16,8 +16,8 @@ from typing import Any
 
 import pytest
 
+from devtools import render_contributors, render_overview
 from devtools import render_n11_optimality_review as optimality_paper
-from devtools import render_overview
 from devtools import render_packing_methods as methods_paper
 from devtools.pages_scope import BUILDER_INPUTS, declared_inputs, pull_request_jobs
 from devtools.render_n11_lower_bounds_explainer import SITE_PATH as EXPLAINER_PATH
@@ -1800,6 +1800,27 @@ def test_every_browser_checks_the_same_prepared_publication() -> None:
     )
 
 
+def _overview_evidence_command() -> str:
+    """The workflow restores declared evidence before either parallel page render."""
+    commands = [
+        line.strip()
+        for step in load()["jobs"]["overview"]["steps"]
+        for line in step.get("run", "").splitlines()
+    ]
+    command = (
+        "uv run --frozen --group dev python -m devtools.render_contributors --checkout-evidence"
+    )
+    assert commands.count(command) == 1
+    renders = [
+        index
+        for index, line in enumerate(commands)
+        if "python -m devtools.render_overview " in line
+    ]
+    assert len(renders) == 2
+    assert commands.index(command) < min(renders)
+    return command
+
+
 def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
     """Leaving out the literature archive and the campaign must not change the page.
 
@@ -1809,7 +1830,9 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
     keep their top-level files. The workbench stamps the checkout's cleanliness into its
     page, but Git's sparse checkout keeps omitted tracked files at `skip-worktree`: a clean
     sparse checkout is still clean, and downloading 504 MB of unrelated archive and
-    campaign data cannot make that answer more honest.
+    campaign data cannot make that answer more honest. The overview restores its exact
+    declared contributor evidence before rendering, including archive bylines and
+    inspected occurrence sources; it does not keep the whole archive.
     """
     jobs = load()["jobs"]
     patterns = "/*\n!/packing/resources/*/\n!/packing/campaign/*/\n"
@@ -1845,8 +1868,13 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
     )
     kept["publish"] = kept["overview"]
     assert set(kept) == PAPER_JOBS | {"overview", "publish"}
+    _overview_evidence_command()
+    restored = set(render_contributors.evidence_paths())
+    assert restored
 
     def keeps(job: str, declared: Path) -> bool:
+        if job == "overview" and declared in restored:
+            return True
         if job in {"overview", "publish"}:
             return declared == REPO / kept["overview"][-1].removeprefix("/")
         for pattern in kept.get(job, ()):
@@ -1897,6 +1925,68 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
         assert omitted == [], f"{half}: render inputs omitted by sparse checkout: {omitted}"
     assert (REPO / "packing/resources/README.md").is_file()
     assert (REPO / "packing/campaign/README.md").is_file()
+
+
+@pytest.fixture(scope="module")
+def overview_sparse_tree(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """Prepare the workflow's actual sparse checkout outside the per-test call budget."""
+    checkout = tmp_path_factory.mktemp("overview-sparse") / "checkout"
+
+    def git(*args: str, cwd: Path | None = None, input_text: str | None = None) -> None:
+        subprocess.run(
+            ("git", *args),
+            cwd=cwd,
+            input=input_text,
+            text=True,
+            check=True,
+            capture_output=True,
+        )
+
+    git("clone", "-q", "--shared", "--no-checkout", str(REPO), str(checkout))
+    patterns = next(
+        step["with"]["sparse-checkout"]
+        for step in load()["jobs"]["overview"]["steps"]
+        if "actions/checkout@" in step.get("uses", "")
+    )
+    git("sparse-checkout", "set", "--no-cone", "--stdin", cwd=checkout, input_text=patterns)
+    git("checkout", "-q", "HEAD", cwd=checkout)
+    return checkout
+
+
+def test_overview_sparse_checkout_restores_all_declared_evidence_before_rendering(
+    overview_sparse_tree: Path,
+) -> None:
+    """Run the real workflow rescue in its sparse tree, restoring only declared paths."""
+    command = shlex.split(_overview_evidence_command())
+    checkout = overview_sparse_tree
+    evidence = [path.relative_to(REPO) for path in render_contributors.evidence_paths()]
+    omitted = [path for path in evidence if not (checkout / path).is_file()]
+    assert omitted, "the workflow's initial checkout must exercise evidence restoration"
+    python = command.index("python")
+    subprocess.run(
+        [sys.executable, *command[python + 1 :]],
+        cwd=checkout / "packing",
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert all((checkout / path).is_file() for path in evidence)
+    retained = {Path(path) for path in REVIEW_CHECKOUTS["overview"][0]}
+    for root in (Path("packing/resources"), Path("packing/campaign")):
+        actual = {
+            path.relative_to(checkout)
+            for path in (checkout / root).rglob("*")
+            if path.is_file() and len(path.relative_to(checkout / root).parts) > 1
+        }
+        assert actual == {
+            path
+            for path in set(evidence) | retained
+            if path.is_relative_to(root) and len(path.relative_to(root).parts) > 1
+        }
+    assert not (
+        checkout
+        / "packing/resources/papers/kearney-shiu-2002-efficient-packing-unit-squares.pdf"
+    ).exists()
 
 
 def test_optimality_archive_links_are_all_in_its_sparse_checkout() -> None:

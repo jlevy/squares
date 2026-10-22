@@ -4,7 +4,7 @@ The baseline for the independent measure verifier (`think-gpe0`): how fast the t
 outward-rounded checkers this repository replays actually are, and where their time
 goes. For one small certificate of each family, the tool
 
-- builds Tokoharu's `verify.cpp` (rectangle density), and wand125's
+- builds Tokoharu's `verify.cpp` (rectangle density), and Hosono's
   `mixed_rotated_verify.cpp` and `unified_linear_verify.cpp`, from the retained packets
   at their pinned SHA-256, under the reviewed compile line plus `-g`;
 - regenerates each direction's input from the retained exact candidate (by the
