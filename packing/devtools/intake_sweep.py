@@ -556,7 +556,8 @@ class RepoHistory:
     `count` commits, dated `first` to `last`, are past every pin and read in the head's
     history (`pins_in_history` of them are in it). `unretained` are commits the pins
     already contain whose changes no packet at or after them retains and no read covers,
-    each as its short id and subject.
+    each as its short id and subject. `held_by_head_read` are those `unretained` would
+    list without a read through the head: what that read covers and no packet retains.
     """
 
     count: int
@@ -565,6 +566,7 @@ class RepoHistory:
     subjects: tuple[str, ...]
     pins_in_history: int
     unretained: tuple[str, ...] = ()
+    held_by_head_read: tuple[str, ...] = ()
 
 
 def read_history(
@@ -601,13 +603,19 @@ def read_history(
         stops = sorted({packet.pin for packet in pinned} | set(read))
         listed = git("log", "--format=%cI%x09%s", head, "--not", *stops, "--")
         lines = [line.split("\t", 1) for line in listed.splitlines() if "\t" in line]
+        unretained = _unretained(git, pinned, read)
+        held: tuple[str, ...] = ()
+        if head in read:
+            without = _unretained(git, pinned, [commit for commit in read if commit != head])
+            held = tuple(commit for commit in without if commit not in unretained)
         return RepoHistory(
             count=len(lines),
             first=lines[-1][0][:10] if lines else "",
             last=lines[0][0][:10] if lines else "",
             subjects=tuple(subject for _, subject in lines[:3]),
             pins_in_history=len({packet.pin for packet in pinned}),
-            unretained=_unretained(git, pinned, read),
+            unretained=unretained,
+            held_by_head_read=held,
         )
 
 
@@ -700,11 +708,12 @@ def repositories_section(
         matching = [r for r in reads.get(key, ()) if str(r["read_through"]) == head]
         if head in entry.pins:
             current += 1
-            section.notes.extend(
-                f"{entry.url}: a packet now pins {head[:12]}, so intake-watch.yaml's read of "
-                "it can be removed."
-                for _ in matching
-            )
+            # With no history read, nothing says whether the read can go.
+            if isinstance(commits, RepoHistory):
+                section.notes.extend(
+                    _pinned_read_note(entry.url, head, commits.held_by_head_read)
+                    for _ in matching
+                )
         elif matching:
             section.items.extend(_read_item(entry.url, head, read, beads) for read in matching)
         else:
@@ -713,6 +722,24 @@ def repositories_section(
             section.items.append(_unretained_item(entry.url, commits.unretained))
     section.notes.insert(0, f"{current} of {len(repos)} heads are a commit a packet pins.")
     return section
+
+
+def _pinned_read_note(url: str, head: str, held: Sequence[str]) -> str:
+    """Whether a read through a pinned head can go: only when the history read without it
+    finds no commit left unretained (think-bspk). A packet that pins the head can retain
+    part of its tree, and the read is then what covers the rest."""
+    if not held:
+        return (
+            f"{url}: a packet now pins {head[:12]}, so intake-watch.yaml's read of it can "
+            "be removed."
+        )
+    count = len(held)
+    shown = "; ".join(held[:3]) + ("; …" if count > 3 else "")
+    return (
+        f"{url}: a packet pins {head[:12]}, but intake-watch.yaml's read of it stays: "
+        f"{count} commit{'' if count == 1 else 's'} it covers "
+        f"change{'s' if count == 1 else ''} paths no packet retains: {shown}"
+    )
 
 
 def _try(function: Callable[[str], str]) -> Callable[[str], str | Exception]:
