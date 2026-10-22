@@ -1,6 +1,6 @@
 // Read actual capital-letter ink against the shared action's border box. A marker
 // belongs inside the text's flex item; a direct flex child is not a text baseline.
-async () => {
+async (labelOffset = 0) => {
   await document.fonts.ready;
   const context = document.createElement("canvas").getContext("2d");
   if (!context) {
@@ -21,6 +21,11 @@ async () => {
         }
         text.before(label);
         label.append(text);
+      }
+      // Move the visible label for sensitivity controls without resizing its hit area.
+      const originalStyle = label.getAttribute("style");
+      if (labelOffset) {
+        label.setAttribute("style", `${originalStyle ?? ""}; translate: 0 ${labelOffset}px`);
       }
       const marker = document.createElement("span");
       Object.assign(marker.style, {
@@ -59,6 +64,11 @@ async () => {
         iconOffset: icon ? (icon.top + icon.bottom - box.top - box.bottom) / 2 : null,
       };
       marker.remove();
+      if (originalStyle === null) {
+        label.removeAttribute("style");
+      } else {
+        label.setAttribute("style", originalStyle);
+      }
       if (!existing) {
         label.replaceWith(...label.childNodes);
       }

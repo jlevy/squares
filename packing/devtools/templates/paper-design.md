@@ -1855,6 +1855,10 @@ contributor articles use their component sheets and the same text tokens.
   so none carries one.
   `tests/test_site_atlas_views.py` reads both in Chromium at 1280 and 390 pixels and
   holds their colours, type, height, padding and centring to each other.
+  `tests/test_site_headroom.py` allows 0.25px of visible capital-ink centring error
+  across font rasterizers, holds arrow geometry within 0.1px and preserves the hit area.
+  Controlled label shifts of one pixel in either direction must exceed the ink limit at
+  both widths.
 
 - **Homepage Atlas preview.** Reuse the dedicated Atlas’s per-case SVG drawings,
   overview, view/size/scale controls, color legend, complete row and segment placement,

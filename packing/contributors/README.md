@@ -97,8 +97,12 @@ fields to person records: these would duplicate data and drift after intake.
   dates. Later reuse, citations and imports do not extend the range.
   Undated work stays unknown.
   A case improvement cannot borrow the original finder’s year.
-- **Project cards:** primary results and received credits require that project’s exact
-  source relationships and reviewed people.
+- **Project cards:** primary Results require exact project/source relationships and
+  reviewed source authorship, subject to source-specific prerequisite exclusions.
+  A resource with no resolved byline profile IDs can retain Results through reviewed
+  non-person or unresolved bibliography author spans.
+  Received Credits still require identified people and scoped source relationships.
+  Acknowledgments and later citations do not establish primary authorship.
   An author’s unrelated work and credits given by the project do not enter the tally.
 - **Resources:** the same deduplicated curated inventory drives homepage cards, profile
   cards and directory counts.

@@ -21,6 +21,10 @@ SCROLL = probe(PROBES, "site_headroom/scroll")
 ANCHOR = probe(PROBES, "site_headroom/anchor")
 NAVIGATION = probe(PROBES, "site_headroom/navigation")
 ACTIONS = probe(PROBES, "site_headroom/actions")
+#: Chromium 151 at 15.732px reports -0.007508px on macOS and +0.140625px on Linux
+#: (2026-10-22). Cover that measured ink-metric difference while the one-pixel controls
+#: below still fail; icon geometry and hit-area thresholds remain independent.
+ACTION_INK_TOLERANCE = 0.25
 BODY = (
     "<h1>Header test</h1><p>Scroll to the target.</p>"
     '<div style="height: 1600px"></div><h2 id="header-target">Target</h2>'
@@ -423,9 +427,19 @@ def test_main_actions_center_their_visible_capital_ink(
         assert len(readings) == 5
         for reading in readings:
             assert reading["height"] == pytest.approx(reading["originalHeight"], abs=0.05)
-            assert abs(reading["centerOffset"]) <= 0.1, reading
+            assert abs(reading["centerOffset"]) <= ACTION_INK_TOLERANCE, reading
             if reading["iconOffset"] is not None:
                 assert abs(reading["iconOffset"]) <= 0.1, reading
             assert reading["height"] >= 40
+        for label_offset in (-1, 1):
+            shifted = page.evaluate(ACTIONS, label_offset)
+            for centered, displaced in zip(readings, shifted, strict=True):
+                assert displaced["label"] == centered["label"]
+                assert displaced["centerOffset"] == pytest.approx(
+                    centered["centerOffset"] + label_offset, abs=0.05
+                )
+                assert abs(displaced["centerOffset"]) > ACTION_INK_TOLERANCE, displaced
+                assert displaced["height"] == centered["height"]
+                assert displaced["iconOffset"] == centered["iconOffset"]
     finally:
         page.close()
