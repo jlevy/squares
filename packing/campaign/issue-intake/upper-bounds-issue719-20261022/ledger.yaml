@@ -104,11 +104,11 @@ reports:
     exact_from: certificates/best/n447.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
       (its header)
   - n: 450
-    printed: '21.767428349991'
+    printed: '21.767428349966'
     rounding: up
-    exact: 80058848391382138284767071571/3677919463160500000000000000
-    exact_from: certificates/n450.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
-      (its header)
+    exact: 13535170858039542797577211512170858039542797577197977/621808448863500000000000000000000000000000000000000
+    exact_from: certificates/best/n450.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header); the least of the 2 sides the commit states at this count, beside certificates/n450.cert
   - n: 454
     printed: '21.828427124844'
     rounding: up
@@ -264,7 +264,8 @@ reports:
     rounding: up
     exact: 126205981453356425112883379827/4539948466788500000000000000
     exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
-      (the bound it states)
+      (the bound it states); the least of the 2 sides the commit states at this count, beside
+      certificates/best/n743.cert
   - n: 744
     printed: '27.798989873256'
     rounding: up
@@ -312,7 +313,8 @@ reports:
     rounding: up
     exact: 130745929920144925112883510572929920144925112883379827/4539948466788500000000000000000000000000000000000000
     exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
-      (the bound it states)
+      (the bound it states); the least of the 2 sides the commit states at this count, beside
+      certificates/best/n798.cert
   - n: 799
     printed: '28.798989873256'
     rounding: up
@@ -342,7 +344,8 @@ reports:
     rounding: up
     exact: 271154851942813972715137208842037968883785839874377030945605228711747013875046197/12500000000000000000000000000000000000000000000000000000000000000000000000000000
     exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
-      (the bound it states)
+      (the bound it states); the least of the 2 sides the commit states at this count, beside
+      certificates/best/n447.cert
   note: 'A publication in a watched repository with no issue, dated by its first commit, or
     by the later push that made it public; transcribed from the mishapolk-issue719-2026-10-22
     packet''s receipts/earlier-publications.json at each count #719 claims where it is strictly
@@ -554,11 +557,11 @@ reports:
     exact_from: certificates/n997.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
       (its header)
   - n: 1061
-    printed: '32.995954740113'
+    printed: '32.995954738136'
     rounding: up
-    exact: 18356885580070065456184523141764729762262683550791481462273/556337457868852013956840754578688520139512773800000000000
-    exact_from: certificates/parents/b86d46b6a3245228c6ac26bbd9056f069dd28c872a9e6faf9928dc81955d4bca.cert
-      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+    exact: 82146354562160256765907529/2489588654551600000000000
+    exact_from: certificates/best/n1061.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header); the least of the 2 sides the commit states at this count, beside certificates/parents/b86d46b6a3245228c6ac26bbd9056f069dd28c872a9e6faf9928dc81955d4bca.cert
   - n: 1128
     printed: '33.998294117981'
     rounding: up
@@ -572,35 +575,35 @@ reports:
     exact_from: certificates/best/n1196.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
       (its header)
   - n: 1266
-    printed: '35.996046404219'
+    printed: '35.996046403807'
     rounding: up
-    exact: 71992092808437527755203280686701868421267/2000000000000000000000000000000000000000
-    exact_from: certificates/parents/309d732d2f20d00c085242b03dd1a033a366da62c5b9f8b07f1f98a0bac0b6b1.cert
-      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+    exact: 7154126068419701653805424823963748218039263/198747550999465681895967823754000000000000
+    exact_from: certificates/best/n1266.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header); the least of the 2 sides the commit states at this count, beside certificates/parents/309d732d2f20d00c085242b03dd1a033a366da62c5b9f8b07f1f98a0bac0b6b1.cert
   - n: 1339
-    printed: '36.997865207179'
+    printed: '36.997865205268'
     rounding: up
-    exact: 184989326035893969510633969107327704569719/5000000000000000000000000000000000000000
-    exact_from: certificates/parents/5801aea03fb59583d16dfc9fe9d98e187379e4391b53f6d0a533c594b5e5e678.cert
-      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+    exact: 247766578754686340078410594673928318675693220397772935889853173650099414015041/6696780405573488981509794157808108624275049063537523737344606208000000000000
+    exact_from: certificates/best/n1339.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header); the least of the 2 sides the commit states at this count, beside certificates/parents/5801aea03fb59583d16dfc9fe9d98e187379e4391b53f6d0a533c594b5e5e678.cert
   - n: 1413
-    printed: '37.999336623140'
+    printed: '37.999315487115'
     rounding: up
-    exact: 144745072094959935924752841/3809147341978000000000000
-    exact_from: certificates/parents/556ad01c699c05b1578a91a823ce32a3db366abf3856c78926816e46011b78e3.cert
-      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+    exact: 8680015823225610841212421002804535039751972457966549578273/228425583775820037555361555837758200375530773000000000000
+    exact_from: certificates/best/n1413.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header); the least of the 2 sides the commit states at this count, beside certificates/parents/556ad01c699c05b1578a91a823ce32a3db366abf3856c78926816e46011b78e3.cert
   - n: 1489
-    printed: '38.997600152000'
+    printed: '38.997599735618'
     rounding: up
-    exact: 405994634557540583875100791/10410759456354000000000000
-    exact_from: certificates/parents/d14390dc7c4f8e151dc11e0ca0361bbda91b174c8e5d1c54691faa8048aef5b9.cert
-      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+    exact: 2129694834888432657321383/54610920911200000000000
+    exact_from: certificates/best/n1489.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header); the least of the 2 sides the commit states at this count, beside certificates/parents/d14390dc7c4f8e151dc11e0ca0361bbda91b174c8e5d1c54691faa8048aef5b9.cert
   - n: 1568
-    printed: '39.999336626159'
+    printed: '39.999336624698'
     rounding: up
-    exact: 399993366261589318512711221794625566636181/10000000000000000000000000000000000000000
-    exact_from: certificates/parents/e8b290f25544265ca999016c8f6f4fb671d25688cf47bf39d0429713d7afebb8.cert
-      at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8 (its header)
+    exact: 213802133319945456991340859/5345141978878000000000000
+    exact_from: certificates/best/n1568.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header); the least of the 2 sides the commit states at this count, beside certificates/parents/e8b290f25544265ca999016c8f6f4fb671d25688cf47bf39d0429713d7afebb8.cert
   note: 'A publication in a watched repository with no issue, dated by its first commit, or
     by the later push that made it public; transcribed from the mishapolk-issue719-2026-10-22
     packet''s receipts/earlier-publications.json at each count #719 claims where it is strictly
@@ -767,7 +770,10 @@ reports:
     source holds: its re-certifications of the 4e4c8ce certificates below the 12-place print,
     at their exact sides from that packet''s filtered replay, which wait on a decision (think-fwa9),
     and its rows above 1024, at the exact sides of the certificates the issue links, which
-    wait on the owner (think-f2io). None is recorded by this pass.'
+    wait on the owner (think-f2io). None is recorded by this pass. Its other rows at these
+    counts, at 410, 413, 454, 490, 498, 544, 584, 596, 637, 644, 689, 692, 699, 736, 743,
+    744, 746, 792 and 800, state the 4e4c8ce certificates'' sides exactly, the same holder''s,
+    so they are not walked: each would be an exact tie, not recorded, and move nothing.'
 - report: '#719'
   url: https://github.com/jlevy/squares/issues/719
   kind: issue
@@ -817,6 +823,7 @@ reports:
     exact: 5882621749511448576/298023223876953125
     exact_from: facts/n-366.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
       certificates/n-366.cert at 12fc4667 (its header)
+    reported_at: '2026-10-22T06:05:31Z'
   - n: 370
     printed: '19.7674283499617083'
     rounding: binary64
@@ -925,6 +932,7 @@ reports:
     exact: 5422588984328662578984323239881/250000000000000000000000000000
     exact_from: facts/n-447.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
       certificates/n-447.cert at 12fc4667 (its header)
+    reported_at: '2026-10-22T06:05:31Z'
   - n: 450
     printed: '21.7674283499636907'
     rounding: binary64
@@ -1518,8 +1526,10 @@ reports:
   note: 'Issue-table prints at all 122 counts: each is the binary64 value of the certificate''s
     exact header side printed at 16 places, which lies below that side at 76 rows, so each
     claim carries the exact side and is compared by it. 121 certificates were first committed
-    at 1851c2c (05:29:48Z), a minute before the issue, and 447''s at the pin (06:05:07Z);
-    no other report reached the repository at these counts between those times.'
+    at 1851c2c (05:29:48Z), a minute before the issue, and 447''s at the pin (06:05:07Z).
+    366 and 447 are dated by the 06:05:31Z edit that first claimed them; the issue opened
+    with the other 120. No other report reached the repository at these counts between those
+    times.'
 exceptions: []
 key_reason_candidates: []
 other_items: []

@@ -83,6 +83,7 @@ import math
 import re
 import subprocess
 import sys
+from collections import Counter
 from collections.abc import Callable, Iterable, Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from dataclasses import dataclass, field, replace
@@ -2618,9 +2619,20 @@ def _selected(
     return str(row.get("printed_in", "")) == url
 
 
-def _merge(transcribed: Sequence[Claim], from_lanes: Sequence[Claim]) -> list[Claim]:
+def _merge(
+    transcribed: Sequence[Claim], from_lanes: Sequence[Claim], report: str = ""
+) -> list[Claim]:
     """Transcribed fields win; a lane adds the exact side and the commit time. Record
-    relations are kept from both, the lane's first."""
+    relations are kept from both, the lane's first. A report transcribes one claim per
+    count, its least there: two at one count are refused, since keying them by count
+    would keep the last and drop the other unseen (#722's review A, A2)."""
+    counted = Counter(claim["n"] for claim in transcribed)
+    twice = sorted(n for n, times in counted.items() if times > 1)
+    _require(
+        not twice,
+        f"{report or 'a report'} transcribes more than one claim at n = {twice}: "
+        "transcribe its least side at each count",
+    )
     merged: dict[int, Claim] = {claim["n"]: cast("Claim", dict(claim)) for claim in from_lanes}
     for claim in transcribed:
         lane = merged.get(claim["n"])
@@ -2687,7 +2699,7 @@ def gather(
             for mapping in source.get("lanes", [])
             for claim in lane_claims(directory, mapping, lanes, url, rounding, taken=taken)
         ]
-        claims = _merge(source.get("claims", []), from_lanes)
+        claims = _merge(source.get("claims", []), from_lanes, str(source["report"]))
         if kind == "pull-request":
             claims = [_later(claim, reported_at) for claim in claims]
         report: Report = {

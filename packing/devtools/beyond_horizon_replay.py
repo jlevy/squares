@@ -279,7 +279,9 @@ class Release:
     beyond the corpus at or below ``LIMIT``; ``sampled`` names the counts the all-pairs
     sample decides, which the packet README and the atom state. ``walk`` names the ledger
     that plans its rows, ``rounding`` how the issue prints a side (`UP`, `BINARY64`), and
-    ``derived`` that the packet keeps derived facts and no upstream byte.
+    ``derived`` that the packet keeps derived facts and no upstream byte. ``claimed_at``
+    dates the counts an edit of the issue first claimed, which the ledger walks at that
+    time rather than the issue's opening (#722's review A, A4).
     """
 
     issue: int
@@ -299,6 +301,7 @@ class Release:
     rounding: str = UP
     derived: bool = False
     later_commits: Mapping[int, tuple[str, str]] | None = None
+    claimed_at: Mapping[int, str] | None = None
 
     @property
     def directory(self) -> Path:
@@ -463,6 +466,8 @@ RELEASES: dict[int, Release] = {
             later_commits={
                 447: ("12fc46678fa8eefa3f156ff37dfffd84c8f3a580", "2026-10-22T06:05:07Z")
             },
+            # The issue's 06:05:31Z edit added 366 and 447 to the table it opened with.
+            claimed_at={366: "2026-10-22T06:05:31Z", 447: "2026-10-22T06:05:31Z"},
         ),
     )
 }
@@ -577,8 +582,8 @@ def print_holds(chosen: Release, side: Fraction, printed: str) -> bool:
 
 
 def recorded_side(chosen: Release, side: Fraction, printed: str) -> str:
-    """The side a row records: the issue's print where it rounds the side up, else the
-    side rounded up at 16 places, the places a binary64 print shows."""
+    """The side a row records: an `UP` release's print; for a `BINARY64` release, the
+    side rounded up at 16 places, the places a binary64 print shows, at every row."""
     return ceiling(side, 16) if chosen.rounding == BINARY64 else printed
 
 
@@ -891,8 +896,8 @@ def beyond_horizon_rows(chosen: Release) -> dict[str, Any]:
     """The decided rows as the coverage register reads them, rebuilt.
 
     Each keeps the side the row records as ``offered_side``, the value a dated
-    beyond-horizon row holds byte for byte: the issue's print where it rounds the side up,
-    else the side rounded up at 16 places, with the issue's print beside it
+    beyond-horizon row holds byte for byte: an `UP` release's print; for a `BINARY64`
+    release, the side rounded up at 16 places, with the issue's print beside it
     (`recorded_side`). Each also keeps its certificate's exact header side and when the
     certificate was first committed. A decided row the walk does not record, as #719's 366,
     is no row, so the record leaves it out; the filtered receipt keeps its decision.
@@ -1216,6 +1221,30 @@ def _claim(n: int, side: Fraction, exact_from: str) -> dict[str, Any]:
     }
 
 
+def _least_claims(items: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    """One claim per count for a commit's publications: the least side it states there,
+    naming the files and bounds it also states at that count (#722's review A, A2). The
+    ledger keeps one claim of a report per count, so a commit that states two sides at
+    a count is its least."""
+    by_n: dict[int, list[Mapping[str, Any]]] = {}
+    for item in items:
+        by_n.setdefault(int(item["n"]), []).append(item)
+    found = []
+    for n, stated in sorted(by_n.items()):
+        ranked = sorted(stated, key=lambda item: (Fraction(item["side"]), item["path"]))
+        least = ranked[0]
+        what = "its header" if least["kind"] == "certificate" else "the bound it states"
+        where = f"{least['path']} at {least['repository']}@{least['commit']} ({what})"
+        others = [item["path"] for item in ranked[1:]]
+        if others:
+            where += (
+                f"; the least of the {len(ranked)} sides the commit states at this count, "
+                f"beside {', '.join(others)}"
+            )
+        found.append(_claim(n, Fraction(least["side"]), where))
+    return found
+
+
 def ledger_sources(issue: int, read_at_main: str, read_on: str) -> dict[str, Any]:
     """The ``sources.yaml`` a release's walk reads, transcribed from the packets' receipts
     (`devtools.intake_ledger` gathers it).
@@ -1249,16 +1278,10 @@ def ledger_sources(issue: int, read_at_main: str, read_on: str) -> dict[str, Any
                     "claims": [],
                 },
             )
-            what = "its header" if item["kind"] == "certificate" else "the bound it states"
-            group["claims"].append(
-                _claim(
-                    row["n"],
-                    Fraction(item["side"]),
-                    f"{item['path']} at {item['repository']}@{item['commit']} ({what})",
-                )
-            )
+            group["claims"].append(item | {"n": row["n"]})
     publications = sorted(groups.values(), key=lambda group: group["reported_at"])
     for group in publications:
+        group["claims"] = _least_claims(group["claims"])
         group["note"] = (
             "A publication in a watched repository with no issue, dated by its first commit, "
             "or by the later push that made it public; transcribed from the "
@@ -1288,15 +1311,16 @@ def ledger_sources(issue: int, read_at_main: str, read_on: str) -> dict[str, Any
             else f"{row.path} at {chosen.retained[:8]} (its header), pinned by digest in the "
             f"{chosen.packet} packet and read from a clone; not derived until the owner's D1"
         )
-        own.append(
-            {
-                "n": row.n,
-                "printed": row.printed,
-                "rounding": BINARY64 if chosen.rounding == BINARY64 else "up",
-                "exact": legacy.literal(side),
-                "exact_from": where,
-            }
-        )
+        claim = {
+            "n": row.n,
+            "printed": row.printed,
+            "rounding": BINARY64 if chosen.rounding == BINARY64 else "up",
+            "exact": legacy.literal(side),
+            "exact_from": where,
+        }
+        if row.n in (chosen.claimed_at or {}):
+            claim["reported_at"] = (chosen.claimed_at or {})[row.n]
+        own.append(claim)
     reports_list: list[dict[str, Any]] = [
         {
             "report": "#666",
@@ -1324,7 +1348,11 @@ def ledger_sources(issue: int, read_at_main: str, read_on: str) -> dict[str, Any
                 "4e4c8ce certificates below the 12-place print, at their exact sides from "
                 "that packet's filtered replay, which wait on a decision (think-fwa9), and "
                 "its rows above 1024, at the exact sides of the certificates the issue "
-                "links, which wait on the owner (think-f2io). None is recorded by this pass."
+                "links, which wait on the owner (think-f2io). None is recorded by this pass. "
+                "Its other rows at these counts, at 410, 413, 454, 490, 498, 544, 584, 596, "
+                "637, 644, 689, 692, 699, 736, 743, 744, 746, 792 and 800, state the 4e4c8ce "
+                "certificates' sides exactly, the same holder's, so they are not walked: each "
+                "would be an exact tie, not recorded, and move nothing."
             ),
         },
         {
@@ -1339,8 +1367,9 @@ def ledger_sources(issue: int, read_at_main: str, read_on: str) -> dict[str, Any
                 "certificate's exact header side printed at 16 places, which lies below that "
                 "side at 76 rows, so each claim carries the exact side and is compared by it. "
                 "121 certificates were first committed at 1851c2c (05:29:48Z), a minute before "
-                "the issue, and 447's at the pin (06:05:07Z); no other report reached the "
-                "repository at these counts between those times."
+                "the issue, and 447's at the pin (06:05:07Z). 366 and 447 are dated by the "
+                "06:05:31Z edit that first claimed them; the issue opened with the other 120. "
+                "No other report reached the repository at these counts between those times."
             ),
         },
     ]
@@ -1604,16 +1633,36 @@ def _reached(walk: Walk, n: int) -> set[str]:
     return {source for source in reached if source is not None}
 
 
-def _superseded_after(plan: Mapping[str, Any], held: Mapping[str, Any], walk: Walk) -> bool:
+def _superseded_after(
+    plan: Mapping[str, Any], held: Mapping[str, Any], walk: Walk, register: Mapping[str, Any]
+) -> bool:
     """Whether a row the plan calls current is held superseded by a report its walk does
-    not reach: a later import's row, as `chain_problems` allows (#720's review B, B1)."""
+    not reach: a later import's row, as `chain_problems` allows (#720's review B, B1). The
+    held row must be the plan's but for its disposition and successor, and the successor
+    must hold a row at the count strictly below it, from a source dated no earlier than the
+    row's own, so the plan does not rest on `check_source_coverage` (#722's review A, A5).
+    A successor dated the same day is not ordered by the day, as that gate does not."""
     if "superseded_by" in plan or held.get("disposition") != "superseded":
         return False
     successor = held.get("superseded_by")
+    if (
+        successor is None
+        or successor in _reached(walk, plan["n"])
+        or {**plan, "disposition": "superseded", "superseded_by": successor} != dict(held)
+    ):
+        return False
+    dated = {str(item["id"]): str(item.get("source_date", "")) for item in register["sources"]}
+    later = [
+        row
+        for row in register["beyond_horizon_claims"]
+        if row["n"] == plan["n"] and row["source_id"] == successor
+    ]
+    own = dated.get(str(plan["source_id"]), "")
     return (
-        successor is not None
-        and successor not in _reached(walk, plan["n"])
-        and {**plan, "disposition": "superseded", "superseded_by": successor} == dict(held)
+        len(later) == 1
+        and bool(own)
+        and dated.get(str(successor), "") >= own
+        and Fraction(str(later[0]["value"])) < Fraction(str(plan["value"]))
     )
 
 
@@ -1632,7 +1681,7 @@ def coverage_problems(coverage: Mapping[str, Any] | None = None) -> list[str]:
     for row in planned_rows():
         held = rows.get((row["n"], row["source_id"]))
         if held != row and not (
-            held is not None and _superseded_after(row, held, walks[row["source_id"]])
+            held is not None and _superseded_after(row, held, walks[row["source_id"]], register)
         ):
             problems.append(
                 f"n={row['n']} from {row['source_id']}: the register's row is not the plan's"
