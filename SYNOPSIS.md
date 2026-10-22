@@ -1602,6 +1602,7 @@ case or experiment separately.
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoffs/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
 | [Postmortem: Three Catalogue Intakes Nobody Owned](docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md) | failure analysis and lessons | record | retained | — |
+| [Postmortem: Results That Landed Without News](docs/project/postmortems/postmortem-2026-10-22-results-without-news.md) | failure analysis and lessons | record | retained | — |
 | [Proof Verification Consolidation and Independent n11 Completion](docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md) | implementation plan | current | transient | — |
 | [n17 Eight-Hour Proof Block](docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md) | implementation plan | current | transient | — |
 | [n17 Three-Block Session Plan](docs/project/specs/future/plan-2026-10-10-n17-three-block-session.md) | implementation plan | current | transient | — |
