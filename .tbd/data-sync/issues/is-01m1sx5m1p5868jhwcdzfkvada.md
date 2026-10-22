@@ -5,7 +5,7 @@ title: The mutation-snapshot cap has 0.9% headroom and the record keeps growing
 kind: task
 status: in_progress
 priority: 1
-version: 24
+version: 25
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 delegate: claude-code@vm
 labels: []
@@ -25,7 +25,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-05T23:06:30.837Z
-updated_at: 2026-10-22T16:00:20.252Z
+updated_at: 2026-10-22T20:18:59.500Z
 started_at: 2026-10-05T11:32:06.787Z
 ---
 Measured 2026-09-05 after pruning packing/site/ and the link-preview card: the snapshot is 66,490,716 bytes against a 67,108,864 cap, 99.1% of it, 618,148 bytes of headroom. SNAPSHOT_MAX_BYTES' own comment says a guard with 2% headroom fires for the wrong reason; 0.9% is worse than the case it warns about, and the next committed artifact of any size trips it.
@@ -160,3 +160,5 @@ Pre-existing finding, not caused by this change, and identical with or without i
 The worker red-baseline defect is filed as think-nns5 (P1, child of this bead). This bead stays open: durable dependency-aware selection is still the work.
 
 2026-10-22 16:00 c-lane-snapshot-policy-1022 (for coord-intake-1021b): the owner decided the headroom question on 22 October. SNAPSHOT_MAX_BYTES goes to 512 MiB, a coarse bound against accidents rather than a tracker of growth, and is no longer raised per pull request; per-PR bulk is the added-blob guard's job (#406). --source-bytes reads 261,568,999 on main 76496462b, so 275,301,913 bytes (262.5 MiB) of headroom: 110 days at the analysis's 2.5 MB a day, 86 at the 3.2 MB a day the surface grew from c4c690a3e to d660905ec beyond two retained archive scans. The prune classes stay as they are; nothing joins them for headroom. PR #726 (https://github.com/jlevy/squares/pull/726, head ecd6cd598). This bead closes when #726 merges.
+
+2026-10-22 20:20Z coord-intake-1021b: #726 merged (e44a51f44): SNAPSHOT_MAX_BYTES = 512 MiB (main reads ~262.3 MB, ~274.5 MB headroom, about 3-4 months at 2.5-3.2 MB/day; about five weeks if archive scans keep arriving at the 22 Oct rate). The owner chose this plan over stub copy-back (think-d2he closed). The cap is no longer raised per PR; #406 (per-PR thin-pack guard) is the bulk check. This bead stays open only for its open children (think-nns5, think-wzmf, think-b6ir, think-7wpx); its headroom problem is resolved.

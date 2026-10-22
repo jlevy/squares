@@ -5,7 +5,7 @@ title: "Import franciscouzo: 1285 upper bounds at 328–9913 (#715)"
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:22:12.593Z
-updated_at: 2026-10-22T13:13:19.094Z
+updated_at: 2026-10-22T20:08:06.228Z
 started_at: 2026-10-21T22:22:13.353Z
 closed_at: null
 close_reason: null
@@ -204,3 +204,5 @@ blocked_on: think-f2io
 - The 30 held re-certifications stay with `think-fwa9`, which widens to 74 publications,
   and 335 stays with `think-rx26`.
 - Draft the reply from `main` once the PR is in, linking the new sources' rows.
+
+2026-10-22 coord-intake-1021b: #715 follow-up posted 2026-10-22T20:04:03Z: #719 (#722) superseded 16 of #715's rows; https://github.com/jlevy/squares/issues/715#issuecomment-6350117001. The promised reply for the Couzo history rows (02f9690, f311f08, 4e4c8ce) follows #730.

@@ -5,7 +5,7 @@ title: "Import franciscouzo: 204-993: registration request (#670)"
 kind: task
 status: in_progress
 priority: 2
-version: 15
+version: 16
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.418Z
-updated_at: 2026-10-22T08:30:21.682Z
+updated_at: 2026-10-22T20:08:08.153Z
 started_at: 2026-10-18T13:04:20.664Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/670
@@ -119,3 +119,5 @@ Ledger: 432 claims at 124 counts, all recorded, none undecided; starts frozen at
 
 2026-10-22 08:30 coord-intake-1021b: after #720 merged (0281e7763; deploy run 39745544894, check_published_site 4806/4806), the import reply with the report-order verdicts was posted: #670 https://github.com/jlevy/squares/issues/670#issuecomment-6336293996. Its record edit is in the coordinator scratchpad replies/0122d.md (validate0122d/), carried by #719's records PR (think-xyhn).
 blocked_on: none
+
+2026-10-22 coord-intake-1021b: #670 follow-up posted 2026-10-22T20:04:06Z: #719 (#722) superseded 3 of #670's rows; https://github.com/jlevy/squares/issues/670#issuecomment-6350117997.
