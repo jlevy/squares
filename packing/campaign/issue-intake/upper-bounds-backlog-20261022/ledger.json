@@ -1,0 +1,809 @@
+{
+  "format": "intake-ledger-verdicts-v1",
+  "read_at_main": "804eff369193b698d497a9c06847059eb9de0470",
+  "read_on": "2026-10-22",
+  "counts": [
+    {
+      "n": 204,
+      "start": [{"label":"record T-186","holders":"Daniil Ostashev, improved by PingYou Ltd, Mishapolk","side":"14.808663234387","exact":true}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"14.808644417690","exact":true,"verdict":"recorded","reason":"below","decided_against":["record T-186"],"difference":"below by 1.88e-05"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"14.808644367227","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 5.05e-08"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"14.808642841982","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.53e-06"},
+        {"report":"evand/square-packing@0075967","kind":"publication","reported_at":"2026-10-20T02:36:12Z","side":"14.808642840592","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 1.39e-09","first_committed":"2026-10-20T02:36:12Z","measured":"nearest centres one to one under a half turn; 58 squares move beyond 1e-3 and 4 beyond 0.1 (largest 0.442), largest turn 0.159 degrees","packing":{"kind":"refinement","packing_of":"Francisco Couzo","entry":"T-223"}}
+      ],
+      "best_now": [{"label":"evand/square-packing@0075967","holders":"Evan Daniel (evand)","side":"14.808642840592","exact":true}],
+      "publication_dependent": [{"report":"evand/square-packing@0075967","with_publications":"recorded","held_by_with":"#678","without_publications":"not in the walk","held_by_without":""}],
+      "best_now_without_publications": [{"label":"#678","holders":"Francisco Couzo","side":"14.808642841982","exact":true}]
+    },
+    {
+      "n": 227,
+      "start": [{"label":"record [Kingbird] (reported lane)","holders":"David Ellsworth","side":"15.57106781186547","exact":false}],
+      "steps": [
+        {"report":"#668","kind":"issue","reported_at":"2026-10-17T14:06:25Z","side":"15.563796703670","exact":true,"verdict":"recorded","reason":"below","decided_against":["record [Kingbird] (reported lane)"],"difference":"below by at least 7.27e-03"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"15.563625652343","exact":true,"verdict":"recorded","reason":"below","decided_against":["#668"],"difference":"below by 1.71e-04","measured":"no square moves beyond 0.1 (largest 0.080) under an optimal assignment; 226 of 227 move beyond 1e-6 and 58 turn","packing":{"kind":"refinement","packing_of":"Joost de Winter","entry":"T-196"}},
+        {"report":"evand/square-packing@0075967","kind":"publication","reported_at":"2026-10-20T02:36:12Z","side":"15.563625652326","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.76e-11","first_committed":"2026-10-20T02:36:12Z","measured":"nearest centres one to one under a half turn; 194 of 227 squares within 1e-6, 16 beyond 1e-3 and 3 beyond 0.1 (largest 0.168); the side is 1.76e-11 below the exact side of #672's certificate","packing":{"kind":"refinement","packing_of":"Francisco Couzo","entry":"#672"}}
+      ],
+      "best_now": [{"label":"evand/square-packing@0075967","holders":"Evan Daniel (evand)","side":"15.563625652326","exact":true}],
+      "publication_dependent": [{"report":"evand/square-packing@0075967","with_publications":"recorded","held_by_with":"#672","without_publications":"not in the walk","held_by_without":""}],
+      "best_now_without_publications": [{"label":"#672","holders":"Francisco Couzo","side":"15.563625652343","exact":true}]
+    },
+    {
+      "n": 229,
+      "start": [{"label":"record [Kingbird] (reported lane)","holders":"[Kingbird]","side":"15.65685424949238","exact":false}],
+      "steps": [
+        {"report":"#668","kind":"issue","reported_at":"2026-10-17T14:06:25Z","side":"15.650174756949","exact":true,"verdict":"recorded","reason":"below","decided_against":["record [Kingbird] (reported lane)"],"difference":"below by at least 6.68e-03"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"15.650174740273","exact":true,"verdict":"recorded","reason":"below","decided_against":["#668"],"difference":"below by 1.67e-08","packing":{"kind":"refinement","packing_of":"Joost de Winter","entry":"T-196"}},
+        {"report":"#674","kind":"issue","reported_at":"2026-10-17T23:10:59Z","side":"15.650163254859","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.15e-05"},
+        {"report":"#674 update","kind":"comment","reported_at":"2026-10-18T01:36:21Z","side":"15.650161513896","exact":true,"verdict":"recorded","reason":"below","decided_against":["#674"],"difference":"below by 1.74e-06"},
+        {"report":"evand/square-packing@0075967","kind":"publication","reported_at":"2026-10-20T02:36:12Z","side":"15.650161513877","exact":true,"verdict":"recorded","reason":"below","decided_against":["#674 update"],"difference":"below by 1.91e-11","first_committed":"2026-10-20T02:36:12Z","measured":"nearest centres one to one under no symmetry; an optimal assignment moves 112 squares beyond 1e-3 and 13 beyond 0.1 (largest 0.650), largest turn 0.055 degrees","packing":{"kind":"refinement","packing_of":"Evan Daniel","entry":"T-199"}}
+      ],
+      "best_now": [{"label":"evand/square-packing@0075967","holders":"Evan Daniel (evand)","side":"15.650161513877","exact":true}],
+      "publication_dependent": [{"report":"evand/square-packing@0075967","with_publications":"recorded","held_by_with":"#674 update","without_publications":"not in the walk","held_by_without":""}],
+      "best_now_without_publications": [{"label":"#674 update","holders":"Evan Daniel","side":"15.650161513896","exact":true}]
+    },
+    {
+      "n": 330,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"19","exact":true}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"18.701641583454","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 2.98e-01"},{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"18.692698795114","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 8.94e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"18.692697855726","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 9.39e-07"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"18.692672444468","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 2.54e-05"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"18.692672444468","exact":false}],
+      "publication_dependent": []
+    },
+    {"n":339,"start":[{"label":"beyond-horizon row couzo-certificates-2026-10-14","holders":"couzo-certificates-2026-10-14","side":"18.915818555470","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"18.911307592083","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-certificates-2026-10-14"],"difference":"below by at least 4.51e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"18.907351471179","exact":false,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by at least 3.96e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"18.907351471179","exact":false}],"publication_dependent":[]},
+    {"n":364,"start":[{"label":"beyond-horizon row evand-compositions-2026-10-13","holders":"evand-compositions-2026-10-13","side":"19.583782203951","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"19.583782190152","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row evand-compositions-2026-10-13"],"difference":"below by at least 1.38e-08"}],"best_now":[{"label":"#670","holders":"Francisco Couzo","side":"19.583782190152","exact":true}],"publication_dependent":[]},
+    {"n":370,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"19.767479045659","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"19.767428349965","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.07e-05"}],"best_now":[{"label":"#670","holders":"Francisco Couzo","side":"19.767428349965","exact":true}],"publication_dependent":[]},
+    {"n":378,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"19.942506938325","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"19.942505611659","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.33e-06"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"19.942018855985","exact":false,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by at least 4.87e-04"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"19.942018855985","exact":false}],"publication_dependent":[]},
+    {"n":379,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"19.953043750299","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"19.953014213942","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 2.95e-05"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"19.950889681504","exact":false,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by at least 2.12e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"19.950889681504","exact":false}],"publication_dependent":[]},
+    {"n":382,"start":[{"label":"beyond-horizon row couzo-certificates-2026-10-14","holders":"couzo-certificates-2026-10-14","side":"19.987621154241","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"19.987621153966","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-certificates-2026-10-14"],"difference":"below by at least 2.74e-10"}],"best_now":[{"label":"#670","holders":"Francisco Couzo","side":"19.987621153966","exact":true}],"publication_dependent":[]},
+    {"n":403,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"20.583782203979","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"20.583782190152","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.38e-08"}],"best_now":[{"label":"#670","holders":"Francisco Couzo","side":"20.583782190152","exact":true}],"publication_dependent":[]},
+    {"n":417,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"20.942506938945","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"20.942505611684","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.33e-06"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"20.934672165249","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 7.83e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"20.933672777441","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 9.99e-04"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"20.933672777441","exact":true}],"publication_dependent":[]},
+    {"n":418,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"20.949005229005","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"20.945240141353","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.77e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"20.942828529884","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 2.41e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"20.939184128265","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 3.64e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"20.939184128265","exact":false}],"publication_dependent":[]},
+    {"n":419,"start":[{"label":"beyond-horizon row couzo-certificates-2026-10-14","holders":"couzo-certificates-2026-10-14","side":"20.959997582079","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"20.959713620588","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-certificates-2026-10-14"],"difference":"below by at least 2.84e-04"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"20.959713421191","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.99e-07"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"20.957804836275","exact":false,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by at least 1.91e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"20.957804836275","exact":false}],"publication_dependent":[]},
+    {
+      "n": 421,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"20.983397833444","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"20.982817421775","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.80e-04"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"20.982817268367","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.53e-07"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"20.981525640927","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.29e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"20.976371064795","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 5.15e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"20.976371064795","exact":false}],
+      "publication_dependent": []
+    },
+    {
+      "n": 422,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"20.984368637393","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"20.984021832955","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.47e-04"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"20.983607310148","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.15e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"20.983607201006","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.09e-07"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"20.983575254586","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 3.19e-05"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"20.983575254586","exact":false}],
+      "publication_dependent": []
+    },
+    {"n":444,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"21.583782203980","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"21.583782190152","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.38e-08"}],"best_now":[{"label":"#670","holders":"Francisco Couzo","side":"21.583782190152","exact":true}],"publication_dependent":[]},
+    {"n":452,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"21.778174597699","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"21.778174593086","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 4.61e-09"}],"best_now":[{"label":"#670","holders":"Francisco Couzo","side":"21.778174593086","exact":true}],"publication_dependent":[]},
+    {
+      "n": 458,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"21.942506939146","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"21.942505611689","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.33e-06"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"21.942423483273","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 8.21e-05"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"21.903778442820","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 3.86e-02"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"21.903616797192","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 1.62e-04"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"21.903616797192","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 459,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"21.946654374102","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"21.943735551416","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 2.92e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"21.942423483273","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.31e-03"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"21.942365250364","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 5.82e-05"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"21.937227864890","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 5.14e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"21.937022304151","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 2.06e-04"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"21.937022304151","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":460,"start":[{"label":"beyond-horizon row evand-fresh-compositions-2026-10-14","holders":"evand-fresh-compositions-2026-10-14","side":"21.959969683021","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"21.957651945776","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row evand-fresh-compositions-2026-10-14"],"difference":"below by at least 2.32e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"21.957558542548","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 9.34e-05"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"21.950987688000","exact":false,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by at least 6.57e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"21.950987688000","exact":false}],"publication_dependent":[]},
+    {
+      "n": 461,
+      "start": [{"label":"beyond-horizon row couzo-certificates-2026-10-14","holders":"couzo-certificates-2026-10-14","side":"21.973183753375","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"21.972483922352","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-certificates-2026-10-14"],"difference":"below by at least 7.00e-04"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"21.971645445094","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 8.38e-04"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"21.971616092121","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 2.94e-05"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"21.971318847922","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 2.97e-04"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"21.966193114437","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 5.13e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"21.964134608334","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 2.06e-03"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"21.964134608334","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 462,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"21.982108570397","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"21.980759715480","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.35e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"21.980489088007","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 2.71e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"21.974888792980","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 5.60e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"21.966193114415","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 8.70e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"21.966193114415","exact":false}],
+      "publication_dependent": []
+    },
+    {
+      "n": 463,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"21.984358960536","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"21.984021832955","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.37e-04"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"21.983605908182","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.16e-04"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"21.983603993953","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.91e-06"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"21.973675720478","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 9.93e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"21.971254044975","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 2.42e-03"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"21.971254044975","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 464,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"21.989992144499","exact":false}],
+      "steps": [{"report":"#666","kind":"issue","reported_at":"2026-10-17T07:06:07Z","side":"21.988813022694","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.18e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"21.988035588879","exact":true,"verdict":"recorded","reason":"below","decided_against":["#666"],"difference":"below by 7.77e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"21.987753655547","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 2.82e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"21.986268532629","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 1.49e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"21.986268532629","exact":false}],
+      "publication_dependent": []
+    },
+    {"n":501,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"22.934524682001","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"22.933763683699","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 7.61e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"22.903778442820","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 3.00e-02"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"22.887841512273","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 1.59e-02"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"22.887841512273","exact":true}],"publication_dependent":[]},
+    {
+      "n": 502,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"22.946082411007","exact":false}],
+      "steps": [{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"22.942402035201","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.68e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"22.942219237446","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.83e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"22.934445598629","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 7.77e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"22.933269925480","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 1.18e-03"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"22.933269925480","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":503,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"22.959969683673","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"22.957558542542","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 2.41e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"22.944667600408","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.29e-02"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"22.943933771540","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 7.34e-04"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"22.943933771540","exact":true}],"publication_dependent":[]},
+    {
+      "n": 505,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"22.973102824331","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"22.972317735354","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 7.85e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"22.971592368271","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 7.25e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"22.964253709990","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 7.34e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"22.964182800913","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 7.09e-05"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"22.964182800913","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":507,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"22.973761314737","exact":false}],"steps":[{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"22.973703609857","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.77e-05"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"22.973697163680","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 6.45e-06"}],"best_now":[{"label":"#678","holders":"Francisco Couzo","side":"22.973697163680","exact":true}],"publication_dependent":[]},
+    {"n":509,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"23","exact":true}],"steps":[{"report":"#666","kind":"issue","reported_at":"2026-10-17T07:06:07Z","side":"22.994328036438","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 5.67e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"22.993588501431","exact":true,"verdict":"recorded","reason":"below","decided_against":["#666"],"difference":"below by 7.40e-04"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"22.993588501431","exact":true}],"publication_dependent":[]},
+    {"n":536,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"23.677669534779","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"23.677669529701","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.08e-09"}],"best_now":[{"label":"#670","holders":"Francisco Couzo","side":"23.677669529701","exact":true}],"publication_dependent":[]},
+    {"n":545,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"23.899494936645","exact":false}],"steps":[{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"23.889722420681","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 9.77e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"23.889010439304","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 7.12e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"23.883414761903","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 5.60e-03"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"23.883414761903","exact":true}],"publication_dependent":[]},
+    {
+      "n": 546,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"23.934524682624","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"23.933763683699","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 7.61e-04"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"23.889722420681","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.40e-02"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"23.889010439304","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 7.12e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"23.887841512273","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 1.17e-03"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"23.887841512273","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":547,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"23.946082411630","exact":false}],"steps":[{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"23.906371163646","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.97e-02"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"23.898819144794","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 7.55e-03"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"23.898819144794","exact":true}],"publication_dependent":[]},
+    {
+      "n": 548,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"23.958856492657","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"23.957558542543","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.30e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"23.957455469976","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.03e-04"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"23.956345132949","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.11e-03"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"23.944667600432","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 1.17e-02"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"23.943933771540","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 7.34e-04"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"23.943933771540","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":549,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"23.961547101298","exact":false}],"steps":[{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"23.957455469976","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 4.09e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"23.956345132949","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.11e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"23.955501804754","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 8.43e-04"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"23.955501804754","exact":true}],"publication_dependent":[]},
+    {"n":551,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"23.967941709079","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"23.966898919633","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.04e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"23.965801641975","exact":false,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by at least 1.10e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"23.965801641975","exact":false}],"publication_dependent":[]},
+    {
+      "n": 553,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"23.986643480063","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"23.981588093282","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.06e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"23.980727660940","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 8.60e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"23.979786600216","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 9.41e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"23.979452392567","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 3.34e-04"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"23.979452392567","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 554,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"24","exact":true}],
+      "steps": [{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"23.993580713561","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 6.42e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"23.993524047733","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 5.67e-05"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"23.986315054038","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 7.21e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"23.986307325908","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 7.73e-06"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"23.986307325908","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":555,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"24","exact":true}],"steps":[{"report":"#666","kind":"issue","reported_at":"2026-10-17T07:06:07Z","side":"23.993653790591","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 6.35e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"23.993580713561","exact":true,"verdict":"recorded","reason":"below","decided_against":["#666"],"difference":"below by 7.31e-05"}],"best_now":[{"label":"#678","holders":"Francisco Couzo","side":"23.993580713561","exact":true}],"publication_dependent":[]},
+    {"n":592,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"24.899494936650","exact":false}],"steps":[{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"24.889722420681","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 9.77e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"24.888988759404","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 7.34e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"24.883414761903","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 5.57e-03"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"24.883414761903","exact":true}],"publication_dependent":[]},
+    {"n":593,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"24.899494936646","exact":false}],"steps":[{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"24.889722420681","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 9.77e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"24.888988761769","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 7.34e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"24.887841512273","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 1.15e-03"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"24.887841512273","exact":true}],"publication_dependent":[]},
+    {
+      "n": 598,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"24.967683695024","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"24.962916747309","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 4.77e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"24.962908839930","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 7.91e-06"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"24.961502766154","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.41e-03"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"24.958220677836","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 3.28e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"24.954250129268","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 3.97e-03"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"24.954250129268","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 600,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"24.985652337917","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"24.981585347399","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 4.07e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"24.980727660940","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 8.58e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"24.979786600241","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 9.41e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"24.978172747238","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 1.61e-03"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"24.978172747238","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 602,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"25","exact":true}],
+      "steps": [{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"24.993580715986","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 6.42e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"24.993580713561","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 2.43e-09"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"24.990355569405","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 3.23e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"24.988237878425","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 2.12e-03"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"24.988237878425","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":603,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"25","exact":true}],"steps":[{"report":"#666","kind":"issue","reported_at":"2026-10-17T07:06:07Z","side":"24.995268064197","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.73e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"24.994263342387","exact":true,"verdict":"recorded","reason":"below","decided_against":["#666"],"difference":"below by 1.00e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"24.990355569380","exact":false,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by at least 3.91e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"24.990355569380","exact":false}],"publication_dependent":[]},
+    {"n":641,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"25.899494936672","exact":false}],"steps":[{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"25.889564291814","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 9.93e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"25.881306220594","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 8.26e-03"}],"best_now":[{"label":"#678","holders":"Francisco Couzo","side":"25.881306220594","exact":true}],"publication_dependent":[]},
+    {"n":642,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"25.899494936672","exact":false}],"steps":[{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"25.889722420681","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 9.77e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"25.881306220594","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 8.42e-03"}],"best_now":[{"label":"#678","holders":"Francisco Couzo","side":"25.881306220594","exact":true}],"publication_dependent":[]},
+    {"n":647,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"25.953923698247","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"25.953248543199","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.75e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"25.949897942499","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 3.35e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"25.946937290069","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 2.96e-03"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"25.946937290069","exact":true}],"publication_dependent":[]},
+    {
+      "n": 650,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"25.983103013170","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"25.982429027496","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.74e-04"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"25.982428402604","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 6.25e-07"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"25.982275449119","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.53e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"25.974939166866","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 7.34e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"25.974939166866","exact":false}],
+      "publication_dependent": []
+    },
+    {"n":651,"start":[{"label":"beyond-horizon row couzo-certificates-2026-10-14","holders":"couzo-certificates-2026-10-14","side":"25.984515068279","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"25.983790120159","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-certificates-2026-10-14"],"difference":"below by at least 7.25e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"25.982878838107","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 9.11e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"25.981928099991","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 9.51e-04"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"25.981928099991","exact":true}],"publication_dependent":[]},
+    {
+      "n": 652,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"26","exact":true}],
+      "steps": [
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"25.994469543497","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 5.53e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"25.994256215430","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 2.13e-04"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"25.994256214773","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 6.57e-10"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"25.990355569406","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 3.90e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"25.990044325432","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 3.11e-04"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"25.990044325432","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":653,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"26","exact":true}],"steps":[{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"25.994469543497","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 5.53e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"25.994414202392","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 5.53e-05"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"25.992652721826","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 1.76e-03"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"25.992652721826","exact":true}],"publication_dependent":[]},
+    {
+      "n": 654,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"26","exact":true}],
+      "steps": [
+        {"report":"#666","kind":"issue","reported_at":"2026-10-17T07:06:07Z","side":"25.996103908965","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 3.90e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"25.995905846673","exact":true,"verdict":"recorded","reason":"below","decided_against":["#666"],"difference":"below by 1.98e-04"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"25.995888235804","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.76e-05"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"25.994867334133","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 1.02e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"25.994801642508","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 6.57e-05"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"25.994801642508","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":693,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"26.899494936674","exact":false}],"steps":[{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"26.889722420681","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 9.77e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"26.881306218365","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 8.42e-03"}],"best_now":[{"label":"#678","holders":"Francisco Couzo","side":"26.881306218365","exact":true}],"publication_dependent":[]},
+    {
+      "n": 700,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"26.976140287399","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"26.972996848621","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.14e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"26.972954520906","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.23e-05"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"26.972679052192","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 2.75e-04"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"26.963730153904","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 8.95e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"26.963723854128","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 6.30e-06"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"26.963723854128","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 701,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"26.976140287373","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"26.975561031531","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.79e-04"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"26.975560060840","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 9.71e-07"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"26.975549413717","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.06e-05"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"26.971171145179","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 4.38e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"26.971171145179","exact":false}],
+      "publication_dependent": []
+    },
+    {"n":702,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"26.981802068412","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"26.977494114977","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 4.31e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"26.976692903976","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 8.01e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"26.976012028499","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 6.81e-04"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"26.976012028499","exact":true}],"publication_dependent":[]},
+    {"n":703,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"27","exact":true}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"26.987493360751","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.25e-02"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"26.987459573204","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 3.38e-05"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"26.981389201597","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 6.07e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"26.981389201597","exact":false}],"publication_dependent":[]},
+    {"n":704,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"27","exact":true}],"steps":[{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"26.994469543497","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 5.53e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"26.994256369878","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 2.13e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"26.987139500917","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 7.12e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"26.987139500917","exact":false}],"publication_dependent":[]},
+    {
+      "n": 705,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"27","exact":true}],
+      "steps": [{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"26.995905846673","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.09e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"26.994256369878","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.65e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"26.990473400223","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 3.78e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"26.990419622637","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 5.38e-05"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"26.990419622637","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 706,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"27","exact":true}],
+      "steps": [{"report":"#666","kind":"issue","reported_at":"2026-10-17T07:06:07Z","side":"26.998712100405","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.29e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"26.998639495676","exact":true,"verdict":"recorded","reason":"below","decided_against":["#666"],"difference":"below by 7.26e-05"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"26.998542133963","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 9.74e-05"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"26.997919093470","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 6.23e-04"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"26.997919093470","exact":false}],
+      "publication_dependent": []
+    },
+    {
+      "n": 749,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"27.949747468697","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"27.925883089331","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 2.39e-02"},{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"27.924010906540","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.87e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"27.911194713730","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.28e-02"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.884019388658","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 2.72e-02"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"27.884019388658","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":750,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"27.949747468418","exact":false}],"steps":[{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"27.927909095101","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 2.18e-02"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.911200800711","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.67e-02"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"27.911200800711","exact":true}],"publication_dependent":[]},
+    {
+      "n": 753,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"27.949747468344","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"27.937423518013","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.23e-02"},{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"27.936842811648","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 5.81e-04"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"27.935538484638","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.30e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"27.932449886404","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 3.09e-03"}],
+      "best_now": [{"label":"#678","holders":"Francisco Couzo","side":"27.932449886404","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":754,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"27.950422600590","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"27.937423518013","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.30e-02"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"27.937423317053","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 2.01e-07"}],"best_now":[{"label":"#678","holders":"Francisco Couzo","side":"27.937423317053","exact":true}],"publication_dependent":[]},
+    {
+      "n": 755,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"27.952229334419","exact":false}],
+      "steps": [{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"27.951635349895","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.94e-04"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"27.951593396552","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 4.20e-05"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"27.951504031492","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 8.94e-05"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"27.951463061398","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 4.10e-05"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"27.951463061398","exact":false}],
+      "publication_dependent": []
+    },
+    {
+      "n": 756,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"27.984450134768","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"27.984237490911","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 2.13e-04"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"27.983489205831","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 7.48e-04"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"27.982602664098","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 8.87e-04"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"27.976914446492","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 5.69e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.976782251658","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 1.32e-04"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"27.976782251658","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":757,"start":[{"label":"beyond-horizon row couzo-certificates-2026-10-14","holders":"couzo-certificates-2026-10-14","side":"27.991000865994","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"27.989936988207","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-certificates-2026-10-14"],"difference":"below by at least 1.06e-03"},{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"27.989936967966","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 2.02e-08"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"27.976914446464","exact":false,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by at least 1.30e-02"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"27.976914446464","exact":false}],"publication_dependent":[]},
+    {
+      "n": 758,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"27.995103637073","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"27.994980212536","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.23e-04"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"27.994973756311","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 6.46e-06"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"27.993798579000","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.18e-03"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"27.984283608421","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 9.51e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.983731022945","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 5.53e-04"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"27.983731022945","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":759,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"28","exact":true}],"steps":[{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"27.995946347749","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.05e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"27.993798579000","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 2.15e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"27.988569233274","exact":false,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by at least 5.23e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"27.988569233274","exact":false}],"publication_dependent":[]},
+    {
+      "n": 760,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"28","exact":true}],
+      "steps": [{"report":"#666","kind":"issue","reported_at":"2026-10-17T07:06:07Z","side":"27.995949340329","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.05e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"27.995946706541","exact":true,"verdict":"recorded","reason":"below","decided_against":["#666"],"difference":"below by 2.63e-06"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"27.995022162160","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 9.25e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"27.992923233307","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 2.10e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"27.992923233307","exact":false}],
+      "publication_dependent": []
+    },
+    {
+      "n": 804,
+      "start": [{"label":"beyond-horizon row couzo-certificates-2026-10-14","holders":"couzo-certificates-2026-10-14","side":"28.920398747577","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"28.917335789888","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-certificates-2026-10-14"],"difference":"below by at least 3.06e-03"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"28.915928305844","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.41e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"28.911312576594","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 4.62e-03"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"28.909246527138","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 2.07e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.884019388658","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 2.52e-02"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"28.884019388658","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 805,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.927176135353","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"28.921843659464","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.33e-03"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"28.916476090926","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 5.37e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"28.911312576594","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 5.16e-03"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"28.909665866810","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.65e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.902673974184","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 6.99e-03"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"28.902673974184","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 806,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.933881004747","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"28.921843662228","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.20e-02"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"28.921462680479","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 3.81e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"28.919759255285","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.70e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.902673974184","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 1.71e-02"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"28.902673974184","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":807,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.933881004747","exact":false}],"steps":[{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"28.924702911083","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 9.18e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.924694876402","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 8.03e-06"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"28.924694876402","exact":true}],"publication_dependent":[]},
+    {"n":809,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.942670732678","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"28.937423518015","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.25e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"28.937423314202","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 2.04e-07"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.933954694456","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 3.47e-03"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"28.933954694456","exact":true}],"publication_dependent":[]},
+    {
+      "n": 811,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.984450135397","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"28.982472918533","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.98e-03"},{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"28.982462261975","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.07e-05"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"28.981360068210","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.10e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"28.974848874210","exact":false,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by at least 6.51e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"28.974848874210","exact":false}],
+      "publication_dependent": []
+    },
+    {
+      "n": 812,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"29","exact":true}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"28.982472918533","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.75e-02"},{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"28.982462261975","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.07e-05"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"28.981360068210","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.10e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"28.976914446493","exact":false,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by at least 4.45e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"28.976914446493","exact":false}],
+      "publication_dependent": []
+    },
+    {
+      "n": 813,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.995103637701","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"28.990394020145","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 4.71e-03"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"28.989935237439","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.59e-04"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"28.989934397793","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 8.40e-07"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"28.981594177185","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 8.34e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.979120019579","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 2.47e-03"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"28.979120019579","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 814,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.997961625277","exact":false}],
+      "steps": [{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"28.995946347758","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 2.02e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"28.993798579000","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 2.15e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"28.981594177156","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.22e-02"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.981388189193","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 2.06e-04"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"28.981388189193","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 815,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"29","exact":true}],
+      "steps": [{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"28.995946384109","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.05e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"28.995022162160","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 9.24e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"28.992923233336","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 2.10e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.992261716554","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 6.62e-04"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"28.992261716554","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":816,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"29","exact":true}],"steps":[{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"28.998352177961","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.65e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"28.998219025338","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.33e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"28.995944538693","exact":false,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by at least 2.27e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"28.995944538693","exact":false}],"publication_dependent":[]},
+    {
+      "n": 817,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"29","exact":true}],
+      "steps": [{"report":"#666","kind":"issue","reported_at":"2026-10-17T07:06:07Z","side":"28.998488480775","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.51e-03"},{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"28.998352177961","exact":true,"verdict":"recorded","reason":"below","decided_against":["#666"],"difference":"below by 1.36e-04"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"28.998234675372","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.18e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"28.997492020607","exact":false,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by at least 7.43e-04"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"28.997492020607","exact":false}],
+      "publication_dependent": []
+    },
+    {
+      "n": 863,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"29.933881005348","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"29.921843659464","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.20e-02"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"29.921462677966","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 3.81e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"29.916419307447","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 5.04e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"29.902673974184","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 1.37e-02"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"29.902673974184","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":864,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"29.933881005348","exact":false}],"steps":[{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"29.932742598598","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.14e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"29.924702911083","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 8.04e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"29.924694876402","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 8.03e-06"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"29.924694876402","exact":true}],"publication_dependent":[]},
+    {
+      "n": 865,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"29.933881005348","exact":false}],
+      "steps": [{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"29.932742598598","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.14e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"29.932623425046","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.19e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"29.932449886402","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.74e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"29.931498747933","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 9.51e-04"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"29.931498747933","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":866,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"29.935914948140","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"29.935764472087","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.50e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"29.933954694456","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.81e-03"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"29.933954694456","exact":true}],"publication_dependent":[]},
+    {
+      "n": 867,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"29.950867216906","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"29.950265025802","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.02e-04"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"29.950105216770","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.60e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"29.949688481977","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 4.17e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"29.942070418091","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 7.62e-03"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"29.942070418091","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 868,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"29.984276416602","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"29.982204111182","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 2.07e-03"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"29.982119729132","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 8.44e-05"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"29.981359990606","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 7.60e-04"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"29.977390686090","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 3.97e-03"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"29.974562439898","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 2.83e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"29.974553547719","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 8.89e-06"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"29.974553547719","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 869,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"29.987056764014","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"29.982472918533","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 4.58e-03"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"29.982462261984","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.07e-05"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"29.981360065447","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.10e-03"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"29.974936836674","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 6.42e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"29.974935743865","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 1.09e-06"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"29.974935743865","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 870,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"29.987056763985","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"29.985969207342","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.09e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"29.985524292952","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.45e-04"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"29.985424855417","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 9.94e-05"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"29.981594177186","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 3.83e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"29.979120019579","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 2.47e-03"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"29.979120019579","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 871,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"29.989568689191","exact":false}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"29.989329079687","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 2.40e-04"},{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"29.986798495028","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 2.53e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"29.981594177186","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 5.20e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"29.981295638373","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 2.99e-04"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"29.981295638373","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 872,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"30","exact":true}],
+      "steps": [
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"29.995946384118","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.05e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"29.995946381399","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 2.72e-09"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"29.995022162160","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 9.24e-04"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"29.992623086321","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 2.40e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"29.992261716554","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 3.61e-04"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"29.992261716554","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 873,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"30","exact":true}],
+      "steps": [
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"29.998242686046","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.76e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"29.998171180951","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 7.15e-05"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"29.996375057644","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.80e-03"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"29.992623086291","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 3.75e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"29.992265777039","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 3.57e-04"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"29.992265777039","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 874,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"30","exact":true}],
+      "steps": [{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"29.998242686046","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.76e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"29.998171180951","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 7.15e-05"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"29.996375057644","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.80e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"29.992883399226","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 3.49e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"29.992883399226","exact":false}],
+      "publication_dependent": []
+    },
+    {"n":875,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"30","exact":true}],"steps":[{"report":"#666","kind":"issue","reported_at":"2026-10-17T07:06:07Z","side":"29.998783733108","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.22e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"29.996974281852","exact":false,"verdict":"recorded","reason":"below","decided_against":["#666"],"difference":"below by at least 1.81e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"29.996974281852","exact":false}],"publication_dependent":[]},
+    {"n":919,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"31","exact":true}],"steps":[{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"30.849232404954","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.51e-01"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"30.844931419278","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 4.30e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"30.827585222385","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 1.73e-02"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"30.827585222385","exact":true}],"publication_dependent":[]},
+    {"n":922,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"30.899494939181","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"30.899494936660","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 2.52e-09"}],"best_now":[{"label":"#670","holders":"Francisco Couzo","side":"30.899494936660","exact":true}],"publication_dependent":[]},
+    {"n":923,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"30.933881005550","exact":false}],"steps":[{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"30.932644308698","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.24e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"30.924702911083","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 7.94e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"30.924694876402","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 8.03e-06"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"30.924694876402","exact":true}],"publication_dependent":[]},
+    {
+      "n": 924,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"30.933881005550","exact":false}],
+      "steps": [{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"30.932742598607","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.14e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"30.932577553094","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.65e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"30.932449886402","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.28e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"30.931498747933","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 9.51e-04"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"30.931498747933","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":925,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"30.935914948771","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"30.935764472087","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.50e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"30.933954694456","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.81e-03"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"30.933954694456","exact":true}],"publication_dependent":[]},
+    {"n":926,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"30.950867217536","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"30.949634321517","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.23e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"30.945612117331","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.02e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"30.942070418091","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 3.54e-03"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"30.942070418091","exact":true}],"publication_dependent":[]},
+    {
+      "n": 927,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"30.984276417232","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"30.976993727283","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 7.28e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"30.976949083864","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.46e-05"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"30.975475685281","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.47e-03"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"30.969979227502","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 5.50e-03"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"30.969443226806","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 5.36e-04"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"30.969443226806","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 928,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"30.987056764616","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"30.976993727283","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.01e-02"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"30.976949083864","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.46e-05"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"30.975475685281","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.47e-03"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"30.974936836705","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 5.39e-04"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"30.974935654060","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 1.18e-06"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"30.974935654060","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":929,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"30.987056764616","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"30.978848462737","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 8.21e-03"},{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"30.978235012084","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 6.13e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"30.975405698330","exact":false,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by at least 2.83e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"30.975405698330","exact":false}],"publication_dependent":[]},
+    {
+      "n": 930,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"31","exact":true}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"30.982052182975","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.79e-02"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"30.982010362324","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.18e-05"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"30.981543197185","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 4.67e-04"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"30.981535303483","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 7.89e-06"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"30.977403109933","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 4.13e-03"}
+      ],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"30.977403109933","exact":false}],
+      "publication_dependent": []
+    },
+    {"n":931,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"31","exact":true}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"30.989936243547","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.01e-02"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"30.989934734721","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 1.51e-06"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"30.989934444611","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 2.90e-07"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"30.989934444611","exact":true}],"publication_dependent":[]},
+    {
+      "n": 932,
+      "start": [{"label":"beyond-horizon row fang-excess-theorem-2026-10-13","holders":"fang-excess-theorem-2026-10-13","side":"30.999950000000000","exact":false}],
+      "steps": [{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"30.993904118222","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row fang-excess-theorem-2026-10-13"],"difference":"below by at least 6.05e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"30.993891653207","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.25e-05"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"30.992623086322","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.27e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"30.992265777039","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 3.57e-04"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"30.992265777039","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 933,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"31","exact":true}],
+      "steps": [{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"30.995336946282","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.66e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"30.995293256848","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 4.37e-05"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"30.994238714880","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.05e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"30.992883399257","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 1.36e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"30.992883399257","exact":false}],
+      "publication_dependent": []
+    },
+    {"n":934,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"31","exact":true}],"steps":[{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"30.995336946282","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.66e-03"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"30.995302140806","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 3.48e-05"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"30.994174058188","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 1.13e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"30.994174058188","exact":false}],"publication_dependent":[]},
+    {"n":935,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"31","exact":true}],"steps":[{"report":"#666","kind":"issue","reported_at":"2026-10-17T07:06:07Z","side":"30.995955854834","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.04e-03"},{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"30.995336946282","exact":true,"verdict":"recorded","reason":"below","decided_against":["#666"],"difference":"below by 6.19e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"30.994174058157","exact":false,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by at least 1.16e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"30.994174058157","exact":false}],"publication_dependent":[]},
+    {"n":987,"start":[{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"31.949747468350","exact":false}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"31.949634321517","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.13e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"31.944662519483","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.97e-03"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"31.941797078452","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 2.87e-03"}],"best_now":[{"label":"#715","holders":"Francisco Couzo","side":"31.941797078452","exact":true}],"publication_dependent":[]},
+    {
+      "n": 989,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"31.987056764817","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"31.976993727283","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.01e-02"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"31.976125363479","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 8.68e-04"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"31.975475685281","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 6.50e-04"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"31.974936836706","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 5.39e-04"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"31.974181306003","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 7.56e-04"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"31.974181306003","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 990,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"31.987056764817","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"31.978848462737","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 8.21e-03"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"31.978235012084","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 6.13e-04"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"31.978044872634","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.90e-04"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"31.977918827720","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 1.26e-04"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"31.975405698333","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 2.51e-03"}
+      ],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"31.975405698333","exact":false}],
+      "publication_dependent": []
+    },
+    {
+      "n": 991,
+      "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"31.989568690022","exact":false}],
+      "steps": [
+        {"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"31.982052182975","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 7.52e-03"},
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"31.982010362324","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 4.18e-05"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"31.981535631408","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 4.75e-04"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"31.981485095638","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 5.05e-05"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"31.977403109965","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 4.08e-03"}
+      ],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"31.977403109965","exact":false}],
+      "publication_dependent": []
+    },
+    {
+      "n": 992,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"32","exact":true}],
+      "steps": [{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"31.985130163599","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.49e-02"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"31.984841090107","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 2.89e-04"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"31.984796372085","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 4.47e-05"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"31.977815424177","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 6.98e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"31.977815424177","exact":false}],
+      "publication_dependent": []
+    },
+    {"n":993,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"32","exact":true}],"steps":[{"report":"#670","kind":"issue","reported_at":"2026-10-17T18:05:06Z","side":"31.985130163599","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.49e-02"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"31.984841090107","exact":true,"verdict":"recorded","reason":"below","decided_against":["#670"],"difference":"below by 2.89e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"31.983895593655","exact":false,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by at least 9.45e-04"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"31.983895593655","exact":false}],"publication_dependent":[]},
+    {
+      "n": 994,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"32","exact":true}],
+      "steps": [
+        {"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"31.995336946282","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.66e-03"},
+        {"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"31.993865896560","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 1.47e-03"},
+        {"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"31.993645614627","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 2.20e-04"},
+        {"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"31.992883399258","exact":true,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by 7.62e-04"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"31.992271544010","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 6.12e-04"}
+      ],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"31.992271544010","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 995,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"32","exact":true}],
+      "steps": [{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"31.995336946282","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.66e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"31.994784549711","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 5.52e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"31.994174058189","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 6.10e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"31.993696413074","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 4.78e-04"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"31.993696413074","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 996,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"32","exact":true}],
+      "steps": [{"report":"#672","kind":"issue","reported_at":"2026-10-17T20:48:34Z","side":"31.995336946282","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 4.66e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"31.994784549711","exact":true,"verdict":"recorded","reason":"below","decided_against":["#672"],"difference":"below by 5.52e-04"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"31.994174058189","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 6.10e-04"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"31.994135336337","exact":true,"verdict":"recorded","reason":"below","decided_against":["#686"],"difference":"below by 3.87e-05"}],
+      "best_now": [{"label":"#715","holders":"Francisco Couzo","side":"31.994135336337","exact":true}],
+      "publication_dependent": []
+    },
+    {"n":997,"start":[{"label":"the grid","holders":"ceil(sqrt n)","side":"32","exact":true}],"steps":[{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"31.998300669675","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.70e-03"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"31.996875920327","exact":false,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by at least 1.42e-03"}],"best_now":[{"label":"#686","holders":"Darius Muglich","side":"31.996875920327","exact":false}],"publication_dependent":[]},
+    {
+      "n": 998,
+      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"32","exact":true}],
+      "steps": [{"report":"#666","kind":"issue","reported_at":"2026-10-17T07:06:07Z","side":"31.998349747355","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 1.65e-03"},{"report":"#675","kind":"issue","reported_at":"2026-10-18T06:02:11Z","side":"31.998301912120","exact":true,"verdict":"recorded","reason":"below","decided_against":["#666"],"difference":"below by 4.78e-05"},{"report":"#678","kind":"issue","reported_at":"2026-10-18T23:23:19Z","side":"31.998301106112","exact":true,"verdict":"recorded","reason":"below","decided_against":["#675"],"difference":"below by 8.06e-07"},{"report":"#686","kind":"issue","reported_at":"2026-10-19T20:43:04Z","side":"31.996875920295","exact":false,"verdict":"recorded","reason":"below","decided_against":["#678"],"difference":"below by at least 1.43e-03"}],
+      "best_now": [{"label":"#686","holders":"Darius Muglich","side":"31.996875920295","exact":false}],
+      "publication_dependent": []
+    }
+  ],
+  "summary": {"counts":124,"claims":432,"recorded_new":0,"recorded_new_continuing":0,"recorded_refinement":5,"recorded_unclassified":427,"recorded_by_exception":0,"not_recorded":0,"undecided":0},
+  "cross_check": [],
+  "reports": [
+    {"report":"#666","url":"https://github.com/jlevy/squares/issues/666","kind":"issue","holders":"Joost de Winter","reported_at":"2026-10-17T07:06:07Z","bead":"think-3m10","counts":[464,509,555,603,654,706,760,817,875,935,998],"recorded":[464,509,555,603,654,706,760,817,875,935,998],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[464,509,555,603,654,706,760,817,875,935,998],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
+    {"report":"#668","url":"https://github.com/jlevy/squares/issues/668","kind":"issue","holders":"Joost de Winter","reported_at":"2026-10-17T14:06:25Z","bead":"think-qdcc","counts":[227,229],"recorded":[227,229],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[227,229],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
+    {
+      "report": "#670",
+      "url": "https://github.com/jlevy/squares/issues/670",
+      "kind": "issue",
+      "holders": "Francisco Couzo",
+      "reported_at": "2026-10-17T18:05:06Z",
+      "bead": "think-f28n",
+      "counts": [204,330,339,364,370,378,379,382,403,417,418,419,421,422,444,452,458,459,460,461,462,463,501,503,505,536,546,548,551,553,598,600,647,650,651,700,701,702,703,749,753,754,756,757,758,804,805,806,809,811,812,813,863,866,867,868,869,870,871,922,925,926,927,928,929,930,931,987,989,990,991,992,993],
+      "recorded": [204,330,339,364,370,378,379,382,403,417,418,419,421,422,444,452,458,459,460,461,462,463,501,503,505,536,546,548,551,553,598,600,647,650,651,700,701,702,703,749,753,754,756,757,758,804,805,806,809,811,812,813,863,866,867,868,869,870,871,922,925,926,927,928,929,930,931,987,989,990,991,992,993],
+      "recorded_new": [],
+      "recorded_refinement": [],
+      "recorded_unclassified": [204,330,339,364,370,378,379,382,403,417,418,419,421,422,444,452,458,459,460,461,462,463,501,503,505,536,546,548,551,553,598,600,647,650,651,700,701,702,703,749,753,754,756,757,758,804,805,806,809,811,812,813,863,866,867,868,869,870,871,922,925,926,927,928,929,930,931,987,989,990,991,992,993],
+      "recorded_by_exception": [],
+      "not_recorded": [],
+      "undecided": []
+    },
+    {"report":"#672","url":"https://github.com/jlevy/squares/issues/672","kind":"issue","holders":"Francisco Couzo","reported_at":"2026-10-17T20:48:34Z","bead":"think-2vjc","counts":[227,229,330,461,507,652,653,704,749,750,753,755,756,757,758,759,804,805,811,812,813,814,815,816,817,864,865,868,869,871,872,873,874,923,924,929,930,932,933,934,935,990,991,994,995,996],"recorded":[227,229,330,461,507,652,653,704,749,750,753,755,756,757,758,759,804,805,811,812,813,814,815,816,817,864,865,868,869,871,872,873,874,923,924,929,930,932,933,934,935,990,991,994,995,996],"recorded_new":[],"recorded_refinement":[{"n":227,"packing_of":"Joost de Winter","entry":"T-196"},{"n":229,"packing_of":"Joost de Winter","entry":"T-196"}],"recorded_unclassified":[330,461,507,652,653,704,749,750,753,755,756,757,758,759,804,805,811,812,813,814,815,816,817,864,865,868,869,871,872,873,874,923,924,929,930,932,933,934,935,990,991,994,995,996],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
+    {"report":"#674","url":"https://github.com/jlevy/squares/issues/674","kind":"issue","holders":"Evan Daniel","reported_at":"2026-10-17T23:10:59Z","bead":"think-5ij2","counts":[229],"recorded":[229],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[229],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
+    {"report":"#674 update","url":"https://github.com/jlevy/squares/issues/674#issuecomment-6244298663","kind":"comment","holders":"Evan Daniel","reported_at":"2026-10-18T01:36:21Z","bead":"think-5ij2","counts":[229],"recorded":[229],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[229],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
+    {
+      "report": "#675",
+      "url": "https://github.com/jlevy/squares/issues/675",
+      "kind": "issue",
+      "holders": "Francisco Couzo",
+      "reported_at": "2026-10-18T06:02:11Z",
+      "bead": "think-pvav",
+      "counts": [204,419,421,422,458,459,460,461,462,463,464,502,545,546,547,548,549,554,592,593,598,602,603,641,642,650,652,654,693,700,701,705,706,753,755,756,758,759,760,804,805,806,807,809,811,812,813,814,816,817,863,864,865,867,868,869,870,872,873,874,919,923,924,927,928,930,931,932,933,989,990,991,992,993,994,995,996,997,998],
+      "recorded": [204,419,421,422,458,459,460,461,462,463,464,502,545,546,547,548,549,554,592,593,598,602,603,641,642,650,652,654,693,700,701,705,706,753,755,756,758,759,760,804,805,806,807,809,811,812,813,814,816,817,863,864,865,867,868,869,870,872,873,874,919,923,924,927,928,930,931,932,933,989,990,991,992,993,994,995,996,997,998],
+      "recorded_new": [],
+      "recorded_refinement": [],
+      "recorded_unclassified": [204,419,421,422,458,459,460,461,462,463,464,502,545,546,547,548,549,554,592,593,598,602,603,641,642,650,652,654,693,700,701,705,706,753,755,756,758,759,760,804,805,806,807,809,811,812,813,814,816,817,863,864,865,867,868,869,870,872,873,874,919,923,924,927,928,930,931,932,933,989,990,991,992,993,994,995,996,997,998],
+      "recorded_by_exception": [],
+      "not_recorded": [],
+      "undecided": []
+    },
+    {
+      "report": "#678",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "kind": "issue",
+      "holders": "Francisco Couzo",
+      "reported_at": "2026-10-18T23:23:19Z",
+      "bead": "think-xu4d",
+      "counts": [204,330,418,421,422,458,459,461,462,463,464,501,502,505,507,545,546,548,549,553,554,555,592,593,598,600,602,641,642,650,652,653,654,693,700,701,703,704,705,706,749,753,754,755,760,804,805,806,815,863,865,867,868,870,872,873,874,919,924,926,927,928,930,933,934,987,989,990,991,992,994,998],
+      "recorded": [204,330,418,421,422,458,459,461,462,463,464,501,502,505,507,545,546,548,549,553,554,555,592,593,598,600,602,641,642,650,652,653,654,693,700,701,703,704,705,706,749,753,754,755,760,804,805,806,815,863,865,867,868,870,872,873,874,919,924,926,927,928,930,933,934,987,989,990,991,992,994,998],
+      "recorded_new": [],
+      "recorded_refinement": [],
+      "recorded_unclassified": [204,330,418,421,422,458,459,461,462,463,464,501,502,505,507,545,546,548,549,553,554,555,592,593,598,600,602,641,642,650,652,653,654,693,700,701,703,704,705,706,749,753,754,755,760,804,805,806,815,863,865,867,868,870,872,873,874,919,924,926,927,928,930,933,934,987,989,990,991,992,994,998],
+      "recorded_by_exception": [],
+      "not_recorded": [],
+      "undecided": []
+    },
+    {
+      "report": "#686",
+      "url": "https://github.com/jlevy/squares/issues/686",
+      "kind": "issue",
+      "holders": "Darius Muglich",
+      "reported_at": "2026-10-19T20:43:04Z",
+      "bead": "think-9vjn",
+      "counts": [330,339,378,379,417,418,419,421,422,459,460,461,462,463,464,502,503,505,548,551,553,554,598,600,602,603,647,650,651,652,654,700,701,702,703,704,705,706,755,756,757,758,759,760,811,812,813,814,815,816,817,868,869,870,871,872,873,874,875,927,928,929,930,932,933,934,935,989,990,991,992,993,994,995,996,997,998],
+      "recorded": [330,339,378,379,417,418,419,421,422,459,460,461,462,463,464,502,503,505,548,551,553,554,598,600,602,603,647,650,651,652,654,700,701,702,703,704,705,706,755,756,757,758,759,760,811,812,813,814,815,816,817,868,869,870,871,872,873,874,875,927,928,929,930,932,933,934,935,989,990,991,992,993,994,995,996,997,998],
+      "recorded_new": [],
+      "recorded_refinement": [],
+      "recorded_unclassified": [330,339,378,379,417,418,419,421,422,459,460,461,462,463,464,502,503,505,548,551,553,554,598,600,602,603,647,650,651,652,654,700,701,702,703,704,705,706,755,756,757,758,759,760,811,812,813,814,815,816,817,868,869,870,871,872,873,874,875,927,928,929,930,932,933,934,935,989,990,991,992,993,994,995,996,997,998],
+      "recorded_by_exception": [],
+      "not_recorded": [],
+      "undecided": []
+    },
+    {"report":"evand/square-packing@0075967","url":"https://github.com/evand/square-packing/tree/0075967bace18a3deabcc0baa64c2fb294fc80a0","kind":"publication","holders":"Evan Daniel (evand)","reported_at":"2026-10-20T02:36:12Z","bead":"think-ql4v","counts":[204,227,229],"recorded":[204,227,229],"recorded_new":[],"recorded_refinement":[{"n":204,"packing_of":"Francisco Couzo","entry":"T-223"},{"n":227,"packing_of":"Francisco Couzo","entry":"#672"},{"n":229,"packing_of":"Evan Daniel","entry":"T-199"}],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
+    {
+      "report": "#715",
+      "url": "https://github.com/jlevy/squares/issues/715",
+      "kind": "issue",
+      "holders": "Francisco Couzo",
+      "reported_at": "2026-10-21T20:55:57Z",
+      "bead": "think-cyal",
+      "counts": [417,458,459,461,463,501,502,503,505,509,545,546,547,548,549,553,554,592,593,598,600,602,647,651,652,653,654,700,702,705,749,750,756,758,804,805,806,807,809,813,814,815,863,864,865,866,867,868,869,870,871,872,873,919,923,924,925,926,927,928,931,932,987,989,994,995,996],
+      "recorded": [417,458,459,461,463,501,502,503,505,509,545,546,547,548,549,553,554,592,593,598,600,602,647,651,652,653,654,700,702,705,749,750,756,758,804,805,806,807,809,813,814,815,863,864,865,866,867,868,869,870,871,872,873,919,923,924,925,926,927,928,931,932,987,989,994,995,996],
+      "recorded_new": [],
+      "recorded_refinement": [],
+      "recorded_unclassified": [417,458,459,461,463,501,502,503,505,509,545,546,547,548,549,553,554,592,593,598,600,602,647,651,652,653,654,700,702,705,749,750,756,758,804,805,806,807,809,813,814,815,863,864,865,866,867,868,869,870,871,872,873,919,923,924,925,926,927,928,931,932,987,989,994,995,996],
+      "recorded_by_exception": [],
+      "not_recorded": [],
+      "undecided": []
+    }
+  ],
+  "owner_decisions": {
+    "exact_ties": [],
+    "first_commit_before_report": [],
+    "undecided": [],
+    "publication_dependent": [{"n":204,"report":"evand/square-packing@0075967","with_publications":"recorded","held_by_with":"#678","without_publications":"not in the walk","held_by_without":"","best_now_without":"#678 14.808642841982"},{"n":227,"report":"evand/square-packing@0075967","with_publications":"recorded","held_by_with":"#672","without_publications":"not in the walk","held_by_without":"","best_now_without":"#672 15.563625652343"},{"n":229,"report":"evand/square-packing@0075967","with_publications":"recorded","held_by_with":"#674 update","without_publications":"not in the walk","held_by_without":"","best_now_without":"#674 update 15.650161513896"}],
+    "unknown_times": [],
+    "refinement_chains": [{"n":227,"packing":"T-196","packing_of":"Joost de Winter","refinements":[{"report":"#672","difference":"below by 1.71e-04","decided_against":"#668"},{"report":"evand/square-packing@0075967","difference":"below by 1.76e-11","decided_against":"#672"}]}],
+    "key_reason_candidates": [],
+    "measured_identity": [
+      {"n":204,"report":"evand/square-packing@0075967","verdict":"recorded","source_says":"a refinement of Francisco Couzo's packing (T-223)","against":"T-223","finding":"nearest centres one to one under a half turn; 58 squares move beyond 1e-3 and 4 beyond 0.1 (largest 0.442), largest turn 0.159 degrees","source":"packing/resources/web/evand-regularized-2026-10-20/measure/identity.json"},
+      {"n":227,"report":"#672","verdict":"recorded","source_says":"a refinement of Joost de Winter's packing (T-196)","against":"T-196","finding":"no square moves beyond 0.1 (largest 0.080) under an optimal assignment; 226 of 227 move beyond 1e-6 and 58 turn","source":"packing/resources/web/evand-regularized-2026-10-20/measure/identity.json"},
+      {"n":227,"report":"evand/square-packing@0075967","verdict":"recorded","source_says":"a refinement of Francisco Couzo's packing (#672)","against":"#672","finding":"nearest centres one to one under a half turn; 194 of 227 squares within 1e-6, 16 beyond 1e-3 and 3 beyond 0.1 (largest 0.168); the side is 1.76e-11 below the exact side of #672's certificate","source":"packing/resources/web/evand-regularized-2026-10-20/measure/identity.json"},
+      {"n":229,"report":"evand/square-packing@0075967","verdict":"recorded","source_says":"a refinement of Evan Daniel's packing (T-199)","against":"T-199","finding":"nearest centres one to one under no symmetry; an optimal assignment moves 112 squares beyond 1e-3 and 13 beyond 0.1 (largest 0.650), largest turn 0.055 degrees","source":"packing/resources/web/evand-regularized-2026-10-20/measure/identity.json"}
+    ]
+  },
+  "other_items": []
+}

@@ -2359,8 +2359,17 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Joost de Winter",
         (
             "Exact rational certificates for 227, 229 and 260 squares, replayed and"
-            " reviewed here (T-196); the house best packing at 227, and at 260 until"
-            " T-223 replaced it on 21 October."
+            " reviewed here (T-196); the house best packing at 227 until T-225 replaced it"
+            " on 22 October, and at 260 until T-223 replaced it on 21 October."
+        ),
+    ),
+    (
+        "https://github.com/JoostdeWinter/joostdewinter.github.io",
+        "Joost de Winter",
+        (
+            "Nineteen exact rational certificates beyond 324 squares, at 464 and from 509"
+            " to 1568 below the integer grid (#666); the eleven at or below 1024 are"
+            " replayed here as dated rows beyond the case corpus."
         ),
     ),
     (

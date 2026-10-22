@@ -1,0 +1,23 @@
+{
+  "n": 444,
+  "packing": "n444.txt",
+  "packing_sha256": "c2f7ebceb44c0d073d7ec26148b1b69fb1bb696e50d4a98950e7720eeca22b5f",
+  "certificate": "certificates/n444.cert",
+  "certificate_sha256": "b25efa063750d744afe62b798270ee07648c0ead63e41226db6079fde59d0f58",
+  "rational_side": "21583782190151860342362508597077/1000000000000000000000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Francisco Couzo; seed/construction: Evan Daniel",
+    "construction": {
+      "kind": "L-border",
+      "source_n": 364,
+      "layers": 2,
+      "parent_certificate_sha256": "d73f8a651e80b9f9d704a8c29cf10bc758f29496cafe8b24eb92e700ef9a277f",
+      "capacity": 444
+    },
+    "source_n": 444,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "b25efa063750d744afe62b798270ee07648c0ead63e41226db6079fde59d0f58"
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

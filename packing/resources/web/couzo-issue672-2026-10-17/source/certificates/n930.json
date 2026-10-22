@@ -1,0 +1,38 @@
+{
+  "n": 930,
+  "packing": "n930.txt",
+  "packing_sha256": "7afc36602aec5642a7ef2396cc63fb1bb5ee3adf3b0311c0da21f4d8db4fafcd",
+  "certificate": "certificates/n930.cert",
+  "certificate_sha256": "25b7ebd5586bf163989e6a4b3667f7e6402b40052dccb03ea7e3e15e057abc20",
+  "rational_side": "37944142481455719427169607/1224715311812000000000000",
+  "kind": "rational witness",
+  "origin": {
+    "construction": {
+      "label": "L-border from n=871",
+      "kind": "derived",
+      "source_n": 871,
+      "source": "2a942824644161ed8b35312731a17b72e245f1bd20b8e566650e98343cf533cb",
+      "tiles": 1,
+      "layers": 1
+    },
+    "seed_credit": "Francisco Couzo",
+    "search_job": {
+      "id": 106919,
+      "method": "slp",
+      "source": "n930.txt",
+      "source_origin": "constructed",
+      "source_sha256": "f522bf297ce1d7cb17e5e8b94a7518da77a0695897d7dbf68fb743d02f83b8db",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n930.txt",
+        "source_sha256": "abb1193135d2a02d18d1dfc2bccf8d0b6c3dd14d3c77ca31da2b8c16c52a8992",
+        "source_n": 930,
+        "source_side": 30.98205218294495,
+        "layers": 0,
+        "deleted": 0,
+        "side": 30.98205218294495
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

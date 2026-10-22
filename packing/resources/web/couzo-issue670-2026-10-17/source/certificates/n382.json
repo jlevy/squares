@@ -1,0 +1,45 @@
+{
+  "n": 382,
+  "packing": "n382.txt",
+  "packing_sha256": "acee2fa63560019f296467a0a232fad69e9261be74699df3b97c4cf725c69093",
+  "certificate": "certificates/n382.cert",
+  "certificate_sha256": "9db528330c8db2b193df228e1140714f2e7babedf2dead5e7a9b5cb5af9f5ac5",
+  "rational_side": "9993810576982755438812785108659/500000000000000000000000000000",
+  "kind": "rational witness",
+  "origin": {
+    "seed_credit": "Kevin Fang (TheSnakeFang)",
+    "seed_certificate": {
+      "source": "snakefang",
+      "certificate": "snakefang/n0382/n0382.cert",
+      "sha256": "12cde743471060bf9afe7fff9abbc757c207afb3bc83222e1f88ae887e182524",
+      "request": "https://github.com/jlevy/squares/issues/484",
+      "side": "269457653704352009538801091757719713332271894027604544062655799750885/13479973333575319909990991250831751289361739009640320293602072723456"
+    },
+    "web_seed": {
+      "id": "7d0c74edde3ffee3dbd5c51a7ac1aa4a",
+      "n": 382,
+      "side": 19.987713157609193,
+      "method": "fq",
+      "received": "20261013T160950Z",
+      "original_packing_sha256": "9693f5fa9b8b427d47d015e2a92ea5720ecf15b6062b3f38b04258953091ec5c"
+    },
+    "search_job": {
+      "id": 101561,
+      "method": "hop",
+      "source": "n382.txt",
+      "source_origin": "constructed",
+      "source_sha256": "44c5ffb85788d7a6431569bf1bd3ef67577e21b5797c4cb1d3114f62238705af",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n382.txt",
+        "source_sha256": "3cebdf31d5b5197f47f515fd9342cfaf3b048b5684689cb24616edf7acefd511",
+        "source_n": 382,
+        "source_side": 19.987621154213613,
+        "layers": 0,
+        "deleted": 0,
+        "side": 19.987621154213613
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

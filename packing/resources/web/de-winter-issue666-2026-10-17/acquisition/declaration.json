@@ -1,0 +1,70 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "joostdewinter-github-io-square-packing-above-324",
+  "source_url": "https://github.com/JoostdeWinter/joostdewinter.github.io",
+  "source_ref": "643dc9ad4d3dbd71a9a05558c7f6116b809ba930",
+  "source_commit": "643dc9ad4d3dbd71a9a05558c7f6116b809ba930",
+  "retrieved_at_utc": "2026-10-22T04:44Z",
+  "git_scope": "Blobless clone of JoostdeWinter/joostdewinter.github.io with a sparse checkout of square-packing-above-324/ at 643dc9a (committed 2026-10-17T14:27:33Z), the licensed successor of the folder issue #666 links. The issue pins b3152f52 (committed 2026-10-17T07:03:15Z), which no branch reaches since the site's history was rewritten to drop an unrelated PDF; the reachable b9cdc16b, with the same commit time and message, holds the identical folder tree 83563a8b, and 643dc9a adds only the folder's MIT LICENSE and a licence paragraph in its README, leaving all 41 certificate, pose and checker blobs unchanged. Retained: the 19 exact certificates nNNNN.cert, of which the 11 at or below n = 1024 are recorded here and the 8 above wait on the owner (think-f2io), with the licence, the folder README, records.txt and the source checker check.py, which was read and not run. Pinned by digest only: the 19 decimal-pose files nNNNN.json and the figure before_after.svg. The rest of the site is pinned by the commit alone.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Joost de Winter: square-packing-above-324/LICENSE, added in 643dc9a at 2026-10-17T14:27:33Z with the README sentence that every file in the folder is released under it; retained. The issue pin b3152f52 and b9cdc16b carry no licence file. The README credits the numerical search and refinement to GPT-6 Astra under de Winter's direction and the certificates and checks to Claude (Anthropic).",
+  "claims": [
+    "Issue #666 reports nineteen upper bounds beyond the n <= 324 corpus, each the exact rational side in its certificate's header rounded upward at 12 decimal places: s(464) <= 21.988813022694, below Francisco Couzo's certificate of 14 October, and, at 509, 555, 603, 654, 706, 760, 817, 875, 935, 998, 1061, 1128, 1196, 1266, 1339, 1413, 1489 and 1568, a side below the integer ceil(sqrt n).",
+    "The issue states that check.py (standard library, exact rational arithmetic) accepts all 19 certificates and that the printed poses pass the same test at 80 digits, with least clearances between 1e-35 and 2e-11, and that no checker outside the author's has run on them. It credits the staircase-rectangle and four-block method of Arslanov, Mustafin and Shangitbayev (Electron. J. Combin. 28(4), P4.22, 2021) and, at 464, a six-square patch from the author's n = 422 construction. Those statements are the author's; no source program ran here."
+  ],
+  "scope": [
+    "square-packing-above-324/LICENSE",
+    "square-packing-above-324/README.md",
+    "square-packing-above-324/before_after.svg",
+    "square-packing-above-324/check.py",
+    "square-packing-above-324/n0464.cert",
+    "square-packing-above-324/n0464.json",
+    "square-packing-above-324/n0509.cert",
+    "square-packing-above-324/n0509.json",
+    "square-packing-above-324/n0555.cert",
+    "square-packing-above-324/n0555.json",
+    "square-packing-above-324/n0603.cert",
+    "square-packing-above-324/n0603.json",
+    "square-packing-above-324/n0654.cert",
+    "square-packing-above-324/n0654.json",
+    "square-packing-above-324/n0706.cert",
+    "square-packing-above-324/n0706.json",
+    "square-packing-above-324/n0760.cert",
+    "square-packing-above-324/n0760.json",
+    "square-packing-above-324/n0817.cert",
+    "square-packing-above-324/n0817.json",
+    "square-packing-above-324/n0875.cert",
+    "square-packing-above-324/n0875.json",
+    "square-packing-above-324/n0935.cert",
+    "square-packing-above-324/n0935.json",
+    "square-packing-above-324/n0998.cert",
+    "square-packing-above-324/n0998.json",
+    "square-packing-above-324/n1061.cert",
+    "square-packing-above-324/n1061.json",
+    "square-packing-above-324/n1128.cert",
+    "square-packing-above-324/n1128.json",
+    "square-packing-above-324/n1196.cert",
+    "square-packing-above-324/n1196.json",
+    "square-packing-above-324/n1266.cert",
+    "square-packing-above-324/n1266.json",
+    "square-packing-above-324/n1339.cert",
+    "square-packing-above-324/n1339.json",
+    "square-packing-above-324/n1413.cert",
+    "square-packing-above-324/n1413.json",
+    "square-packing-above-324/n1489.cert",
+    "square-packing-above-324/n1489.json",
+    "square-packing-above-324/n1568.cert",
+    "square-packing-above-324/n1568.json",
+    "square-packing-above-324/records.txt"
+  ],
+  "pinned_only": [
+    {
+      "match": "square-packing-above-324/*.json",
+      "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+    },
+    {
+      "match": "square-packing-above-324/before_after.svg",
+      "reason": "A 10.6 MB figure of each packing beside the record it improves; no claim rests on it. Hash-pinned, not copied."
+    }
+  ]
+}
