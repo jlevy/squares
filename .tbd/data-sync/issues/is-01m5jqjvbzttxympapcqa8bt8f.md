@@ -3,9 +3,9 @@ type: is
 id: is-01m5jqjvbzttxympapcqa8bt8f
 title: Merge PR733 after green CI and verify the production deployment
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: sol-merge-deploy
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m5jct23n8s7fj3ydf94n0yhv
 hold: null
 hold_until: null
 created_at: 2026-10-22T21:16:59.134Z
-updated_at: 2026-10-22T21:36:58.940Z
+updated_at: 2026-10-22T21:42:20.443Z
 started_at: 2026-10-22T21:17:05.103Z
+closed_at: 2026-10-22T21:42:20.431Z
+close_reason: PR733 merged as cddc5843f58cdd08aed345abbf7316615c5ef07f after reviewed-head CI green. Actual production Pages run39857389186 and live-site auditjob120102118997 SUCCESS. Production revision matches merge; News typography/metadata, result expand destinations, GitHub icon variants, full-name profile/paper credits and Records→Results→Credits order validated. HTTP/www/legacy redirects preserve path/query; browser legacy fragment preserved.
+resolution: null
+duplicate_of: null
 ---
 User explicitly requests a Sol sub-agent to monitor merging and validate deployment. Confirm reviewed exact head064b2bc5ab6e8c124aff329210eec5ee5417901a, all required CI checks green/skips understood, mergeability, no unresolved review findings; merge with merge commit and matching head; verify resulting Pages deployment and https://squaremath.org presentation/deep links/redirects. Do not merge draft navigation PR737.
 
