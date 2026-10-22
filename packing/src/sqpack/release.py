@@ -2354,7 +2354,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/campaign/result-requests.yaml",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/default_drawings.py",
-            "packing/devtools/site_urls.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/n-105.md",
@@ -2375,14 +2374,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "Stage 4 of T-226 to T-229 (V3/C3 after the 22 October reviews, T-229 adopted "
             "at 105 and 204 and regularized, the replies after #722) against main "
-            "59b1ec594 (#729): rendered at link revision 40a71b16 into empty site "
-            "directories, twice from this tree at 10404b92 and twice from main's (68 files "
+            "cddc5843f (#733): rendered at link revision 40a71b16 into empty site "
+            "directories, twice from this tree at 3b776a5d and twice from main's (68 files "
             "each), render_n11_lower_bounds_explainer, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write every "
             "file byte-identical across all four, except one span's style attribute in "
             "the explainer's HTML, whose place varies between two renders of one tree. "
             "The register stays at 229 results. No PDF was printed; each prints from that "
-            "HTML. Retain v0.4.18, v0.1.9, v0.1.2 and v0.2.5."
+            "HTML. Retain #733's v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
         ),
     ),
     ReleaseNoPublicChange(
