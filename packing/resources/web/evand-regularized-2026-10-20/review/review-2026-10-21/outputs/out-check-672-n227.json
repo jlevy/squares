@@ -1,0 +1,61 @@
+{
+ "n": 227,
+ "side": "71427829379429597600111901507/4589408083628500000000000000",
+ "route_integers": {
+  "passed": true,
+  "least_wall_clearance": {
+   "exact": "1/1000000000000000",
+   "approx": "1.000000e-15"
+  },
+  "least_wall_at": [
+   0,
+   "y<=S"
+  ],
+  "pairs_decided": 25651,
+  "overlapping_pairs": [],
+  "overlapping_count": 0,
+  "contacts": 0,
+  "least_pair_gap": {
+   "exact": "8746396849245434078609221/7273482587599361164347576400000000000",
+   "approx": "1.202505e-12"
+  },
+  "least_pair": [
+   68,
+   76
+  ],
+  "cpu_s": 0.08
+ },
+ "route_fraction": {
+  "passed": true,
+  "least_wall_clearance": {
+   "exact": "1/1000000000000000",
+   "approx": "1.000000e-15"
+  },
+  "least_wall_at": [
+   0,
+   "y<=S"
+  ],
+  "overlapping_pairs": [],
+  "overlapping_count": 0,
+  "contacts": 0,
+  "least_pair_gap": {
+   "exact": "8746396849245434078609221/7273482587599361164347576400000000000",
+   "approx": "1.202505e-12"
+  },
+  "least_pair": [
+   68,
+   76
+  ],
+  "clipped_pairs": 145,
+  "clip_positive_pairs": [],
+  "clip_disagreements": [],
+  "cpu_s": 3.26
+ },
+ "routes_agree": {
+  "least_wall": true,
+  "least_gap": true,
+  "verdict": true
+ },
+ "passed": true,
+ "strict": true
+}

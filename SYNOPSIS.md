@@ -687,6 +687,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: Evan Daniel’s Regularized Views at 204, 227, 229 and 260 (T-225, evand/square-packing@0075967)](docs/project/reviews/review-2026-10-21-evand-regularized-views.md) | dated review record | record | retained | — |
 | [Review: Couzo’s 85 Exact Upper-Bound Certificates at 204–998 (Issue #678)](docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) | dated review record | record | retained | — |
 | [Erratum: the 21 October Review of Evan Daniel’s Import at 270](docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Upper-Bound Import at 270 (#703, T-224, PR #708)](docs/project/reviews/review-2026-10-21-upper-bound-import-703.md) | dated review record | record | retained | — |
