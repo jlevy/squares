@@ -1183,12 +1183,14 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
             assert margins[f"exact_verify_{field}"] == margins[f"independent_{field}"]
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
-    # SQUISH's, #567's and #622's squares touch the box; every other source's clear it.
+    # SQUISH's, #567's, #622's and Couzo's #670 and #675 squares touch the box at 204;
+    # every other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
     }
-    assert (walls == {0}) is (name in {SQUISH_481, SQUISH_500, PINGYOU_261, PINGYOU_622})
+    touching = {SQUISH_481, SQUISH_500, PINGYOU_261, PINGYOU_622, COUZO_670, COUZO_675}
+    assert (walls == {0}) is (name in touching)
     # Only #567's and #622's squares touch each other, an exact contact the kernel admits;
     # every other source's pairs clear.
     gaps = {
@@ -1422,6 +1424,9 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         DE_WINTER_668: "2026-10-17",
         DANIEL_703: "2026-10-20",
         DANIEL_REGULARIZED_1020: "2026-10-20",
+        COUZO_670: "2026-10-17",
+        COUZO_672: "2026-10-17",
+        COUZO_675: "2026-10-18",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]
