@@ -2084,6 +2084,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/campaign/result-requests.yaml",
             "packing/devtools/adopt_houses.py",
+            "packing/devtools/overview_sections.py",
             "packing/devtools/site_urls.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/n-103.md",
@@ -2104,10 +2105,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "PR-B of the 22 October backlog (205 beyond-horizon rows of #666, #670, #672 "
             "and #675, review B of #718, the replies after #718 and #643's) against main "
             "7359fa8b: rendered at link revision b8045210 into empty site directories from "
-            "this tree at cfeb44cc and from main's, render_n11_optimality_review, "
+            "this tree at cfeb44cc, again at 9efff725 after the hosted findings' fixes to "
+            "adopt_houses.py and overview_sections.py, and from main's, "
+            "render_n11_optimality_review, "
             "render_n11_threshold_bound_review, render_packing_methods and "
-            "render_n11_lower_bounds_explainer write 68 files, byte-identical between the "
-            "two. No PDF was printed; each prints from that HTML. Retain v0.4.15, v0.1.7, "
+            "render_n11_lower_bounds_explainer write 68 files, byte-identical among the "
+            "three. No PDF was printed; each prints from that HTML. Retain v0.4.15, v0.1.7, "
             "v0.1.0 and v0.2.3."
         ),
     ),
