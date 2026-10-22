@@ -215,6 +215,19 @@ Emit a readable slowest-work summary and retain machine-readable records with th
 artifacts or experiment receipt.
 Record timing coverage so missing units cannot look measured.
 
+Session 188 continues `think-uhxt` by extending the existing progress writer and
+timing/report tools with completed pytest phase records that survive process
+termination. The [development guide](../../../../development.md#performance-work)
+describes native artifact capture, the standalone `--phase-timings` option and the fixed
+`phase-overhead-v2` comparison.
+Its six whole-CLI observations must preserve the selected case identities and outcomes,
+complete enabled-phase coverage and same-run JUnit totals, with median overhead at most
+5 percent and 3 seconds.
+Current-source control, target and integration evidence remain outstanding; no
+performance result is claimed here.
+Session 187’s measurements retain their original source and protocol, and Phase 2’s
+historical closeout evidence remains separate.
+
 Register each candidate’s criterion before timing it.
 Exploratory comparisons use at least three runs per condition, interleaved order,
 median, and range.

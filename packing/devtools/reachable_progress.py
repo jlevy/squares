@@ -7,19 +7,27 @@ file, so a terminated test leaves its last start row readable without waiting fo
 from __future__ import annotations
 
 import json
+import math
 import os
 import re
 import time
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import TextIO
+from typing import TYPE_CHECKING, TextIO
 
 import pytest
+
+if TYPE_CHECKING:
+    from xdist.workermanage import WorkerController
 
 ARTIFACT_STEM = "PACKING_REACHABLE_TEST_ARTIFACT_STEM"
 RUN_ID = "PACKING_REACHABLE_TEST_RUN_ID"
 SOURCE_COMMIT = "PACKING_REACHABLE_TEST_SOURCE_COMMIT"
 SCHEMA = "reachable-progress-v1"
+PHASE_CAPABILITY = "pytest-report-duration-v1"
+PHASE_PLUGIN_PATH = "PACKING_REACHABLE_TEST_PHASE_PLUGIN_PATH"
+_PHASE_REQUESTED = pytest.StashKey[bool]()
+_WORKER_FAILED = pytest.StashKey[bool]()
 
 
 class ProgressWriter:
@@ -61,8 +69,9 @@ class ProgressWriter:
         exit_status: int | None = None,
         phase: str | None = None,
         longrepr: str | None = None,
+        duration_seconds: float | None = None,
     ) -> None:
-        row: dict[str, str | int] = {
+        row: dict[str, str | int | float] = {
             "schema": SCHEMA,
             "event": event,
             "run_id": self.run_id,
@@ -78,6 +87,19 @@ class ProgressWriter:
             "exclusions": self.exclusions,
             "xdist_workers": self.workers,
         }
+        if event == "session_start" and self.phases:
+            row.update(
+                phase_timing_capability=PHASE_CAPABILITY,
+                phase_plugin_path=str(Path(__file__).resolve()),
+            )
+        if duration_seconds is not None:
+            if (
+                type(duration_seconds) not in (float, int)
+                or not math.isfinite(duration_seconds)
+                or duration_seconds < 0
+            ):
+                raise ValueError("pytest phase duration must be finite and nonnegative")
+            row["duration_seconds"] = duration_seconds
         if outcome is not None:
             row["outcome"] = outcome
         if exit_status is not None:
@@ -97,7 +119,13 @@ class ProgressWriter:
     def pytest_runtest_logreport(self, report: pytest.TestReport) -> None:
         nodeid = report.nodeid
         if self.phases:
-            self._emit("phase_finish", nodeid, phase=report.when, outcome=report.outcome)
+            self._emit(
+                "phase_finish",
+                nodeid,
+                phase=report.when,
+                outcome=report.outcome,
+                duration_seconds=report.duration,
+            )
         if report.failed:
             # JUnit is finalized at session end. A later hung test must not erase this
             # failure's identity or traceback when the command's process group is killed.
@@ -119,7 +147,45 @@ class ProgressWriter:
         self.stream.close()
 
 
+def pytest_addoption(parser: pytest.Parser) -> None:
+    _ = parser.getgroup("reachable progress").addoption(
+        "--reachable-phase-timings",
+        choices=(PHASE_CAPABILITY,),
+        default=None,
+        help="require quantitative completed pytest phase reports",
+    )
+
+
+@pytest.hookimpl(optionalhook=True)
+def pytest_testnodedown(node: WorkerController, error: object | None) -> None:
+    if error is not None and node.config.stash.get(_PHASE_REQUESTED, False):
+        node.config.stash[_WORKER_FAILED] = True
+
+
+@pytest.hookimpl(trylast=True)
+def pytest_sessionfinish(session: pytest.Session, exitstatus: int | pytest.ExitCode) -> None:
+    if (
+        session.config.stash.get(_WORKER_FAILED, False)
+        and exitstatus == 0
+        and session.exitstatus == 0
+    ):
+        session.exitstatus = pytest.ExitCode.INTERNAL_ERROR
+
+
 def pytest_configure(config: pytest.Config) -> None:
+    explicit = config.getoption("reachable_phase_timings", default=None) is not None
+    config.stash[_PHASE_REQUESTED] = (
+        explicit or os.environ.get("PACKING_REACHABLE_TEST_PHASES") == "1"
+    )
+    if explicit:
+        expected = Path(os.environ.get(PHASE_PLUGIN_PATH, ""))
+        if (
+            not expected.is_absolute()
+            or expected.resolve() != Path(__file__).resolve()
+            or os.environ.get("PACKING_REACHABLE_TEST_PHASES") != "1"
+            or not os.environ.get(ARTIFACT_STEM)
+        ):
+            raise pytest.UsageError("actual phase timing plugin path or settings differ")
     stem_value = os.environ.get(ARTIFACT_STEM)
     if not stem_value:
         return
