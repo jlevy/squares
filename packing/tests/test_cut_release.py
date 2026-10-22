@@ -155,6 +155,16 @@ def test_a_site_cut_is_refused_because_site_editions_are_retired(
     assert "site" not in cut_release.COMPONENT_TESTS
 
 
+def test_a_cut_names_its_component(capsys: pytest.CaptureFixture[str]) -> None:
+    """`--component` has no default: the old default, the site, is retired, and a cut that
+    named nothing would otherwise be refused for a component nobody chose."""
+    with pytest.raises(SystemExit) as stopped:
+        cut_release.main([_next(), "--impact", "patch", "--scope", "A cut."])
+    assert stopped.value.code == 2
+    assert "--component" in capsys.readouterr().err
+    assert release_pin.RELEASE.read_text(encoding="utf-8") == SOURCE
+
+
 def test_component_steps_generate_only_owned_outputs() -> None:
     plan = cut_release.steps("v9.9.9", "infographics")
     atlas_steps = [command for _what, command in plan if command[0].endswith("atlas")]

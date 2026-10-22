@@ -8,7 +8,10 @@ The site is never a candidate. Site editions are retired as of 22 October 2026
 (think-wdqo): the site deploys continuously from `main` and needs no disposition, and
 its edition record, `PUBLICATION_HISTORY`, and the claim documents' link commit,
 `PUBLICATION_REVISION`, are frozen as history. An edit to either is refused, as is a
-fresh site release-impact decision. The papers and the infographics keep their versions.
+fresh site release-impact decision. A fresh no-change record written under the old rules
+that names the site beside other components keeps its coverage of them, with a warning
+that its site part is ignored; one naming only the site is refused. The papers and the
+infographics keep their versions.
 """
 
 from __future__ import annotations
@@ -27,11 +30,9 @@ from typing import override
 from devtools import pages_scope, render_overview
 from sqpack import release
 from sqpack.known_best import KNOWN_BEST_COMPOSITES
-from sqpack.yamlio import load_yaml
 
 REPO = pages_scope.REPO
 RELEASE_PATH = "packing/src/sqpack/release.py"
-CHANGELOG_PATH = "packing/site-changelog.yaml"
 #: The retired component, whose inputs select nothing and whose record is frozen.
 SITE = "site"
 #: What the site's record keeps frozen: its editions, and the commit the claim documents
@@ -114,9 +115,8 @@ def _semantic_bytes(path: str, content: bytes | None) -> object:
     if path.endswith(".py"):
         tree = _WithoutDocstrings().visit(ast.parse(content, filename=path))
         return ast.dump(tree, include_attributes=False)
-    if path == CHANGELOG_PATH:
-        document = load_yaml(content.decode())
-        return document["entries"]
+    # The changelog's entries-only comparison and the News rubric's went with the site,
+    # their one reader; a paper that declares either compares its bytes.
     return content
 
 
@@ -478,19 +478,60 @@ def _records(fields: Mapping[str, ast.expr], name: str) -> tuple[tuple, ...]:
     return tuple(records)
 
 
+def _without_site(
+    decision: release.ReleaseNoPublicChange, outputs: Mapping[str, tuple[str, ...]]
+) -> release.ReleaseNoPublicChange:
+    """An old-rule record's part for the components that still own a disposition.
+
+    The site's recognized outputs are its own and no other component's, so they come off
+    exactly; the paths stay, and must still name the remaining components' candidates.
+    """
+    kept = tuple(component for component in decision.components if component != SITE)
+    still_owned = {output for component in kept for output in outputs.get(component, ())}
+    return decision._replace(
+        components=kept,
+        outputs=tuple(
+            output
+            for output in decision.outputs
+            if output in still_owned or output not in outputs.get(SITE, ())
+        ),
+    )
+
+
 def _exemptions(
     candidates: Mapping[str, tuple[str, ...]],
     current: Mapping[str, ast.expr],
     previous: Mapping[str, ast.expr],
-) -> tuple[set[str], list[str]]:
+) -> tuple[set[str], list[str], list[str]]:
+    """The components fresh no-change records exempt, the records' errors, and warnings.
+
+    A record written under the old rules may name the site beside the components it
+    covers. Its site part is ignored with a warning and the rest is held to every rule
+    below, so the coverage it reviewed still counts; a record naming only the site is
+    refused, since nothing in it applies.
+    """
     old = set(_records(previous, "RELEASE_NO_PUBLIC_CHANGES"))
     outputs = component_outputs()
     covered: dict[str, set[str]] = {component: set() for component in candidates}
-    errors = []
+    errors: list[str] = []
+    warnings: list[str] = []
     for record in _records(current, "RELEASE_NO_PUBLIC_CHANGES"):
         if record in old:
             continue
         decision = release.ReleaseNoPublicChange(*record)
+        if SITE in decision.components:
+            decision = _without_site(decision, outputs)
+            if not decision.components:
+                errors.append(
+                    f"{SITE}: fresh no-public-change record names only the retired site; "
+                    f"{SITE_EDITIONS_RETIRED}; remove the record"
+                )
+                continue
+            warnings.append(
+                f"{SITE}: fresh no-public-change record also names the retired site, whose "
+                f"part is ignored; {SITE_EDITIONS_RETIRED}; a new record names no site and "
+                "none of its outputs"
+            )
         if (
             not decision.components
             or not decision.paths
@@ -533,7 +574,7 @@ def _exemptions(
     exempt = {
         component for component, paths in candidates.items() if set(paths) <= covered[component]
     }
-    return exempt, errors
+    return exempt, errors, warnings
 
 
 @dataclass(frozen=True)
@@ -545,6 +586,7 @@ class ImpactReport:
     baseline_versions: dict[str, str]
     exempt_components: tuple[str, ...]
     errors: tuple[str, ...]
+    warnings: tuple[str, ...] = ()
 
 
 def inspect(
@@ -557,7 +599,7 @@ def inspect(
     versions = baseline_versions(repo, baseline)
     previous = _assignments(_previous(repo, baseline, RELEASE_PATH))
     current = _assignments(_current(repo, RELEASE_PATH))
-    exempt, errors = _exemptions(candidates, current, previous)
+    exempt, errors, warnings = _exemptions(candidates, current, previous)
     errors.extend(frozen_site_errors(current, previous))
     old_decisions = set(_records(previous, "RELEASE_IMPACTS"))
     fresh_decisions = {
@@ -592,7 +634,9 @@ def inspect(
             )
         except ValueError as error:
             errors.append(str(error))
-    return ImpactReport(baseline, candidates, versions, tuple(sorted(exempt)), tuple(errors))
+    return ImpactReport(
+        baseline, candidates, versions, tuple(sorted(exempt)), tuple(errors), tuple(warnings)
+    )
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -612,6 +656,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     else:
         for component, paths in sorted(report.candidate_paths.items()):
             print(f"{component} ({report.baseline_versions[component]}): " + ", ".join(paths))
+        for warning in report.warnings:
+            print(f"release impact: warning: {warning}", file=sys.stderr)
         for error in report.errors:
             print(f"release impact: {error}", file=sys.stderr)
         if not report.errors:

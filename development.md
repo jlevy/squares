@@ -2116,6 +2116,10 @@ site reads needs no disposition.
 The gate refuses any edit to the frozen `PUBLICATION_HISTORY` and
 `PUBLICATION_REVISION`, and a fresh site release-impact decision, with a message naming
 `think-wdqo`; the remedy is to drop the site cut.
+A fresh no-change record names no site and none of the site’s outputs.
+One written under the old rules that names the site beside papers still covers those
+papers: the gate ignores its site part and prints a warning, and holds the rest to every
+rule above. A record that names only the site is refused.
 A prior no-change review cannot excuse another batch.
 Tests and checker changes do not independently select a public component; broad builder
 inputs can select one even when the changed code does not run in that output.

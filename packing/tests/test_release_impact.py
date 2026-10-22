@@ -29,6 +29,8 @@ OTHER = "paper:n11-optimality-review"
 PAPERS = tuple(
     component for component in release.COMPONENT_HISTORY_NAMES if component.startswith("paper:")
 )
+#: The changelog, which only the site reads.
+CHANGELOG = "packing/site-changelog.yaml"
 
 
 @pytest.mark.parametrize(
@@ -167,7 +169,7 @@ class Repository:
             "about.md",
             "shared.css",
             "packing/src/sqpack",
-            gate.CHANGELOG_PATH,
+            CHANGELOG,
         )
         self.inputs["infographics"] = gate.component_outputs()["infographics"]
         monkeypatch.setattr(gate, "producer_inputs", lambda: self.inputs)
@@ -185,7 +187,7 @@ class Repository:
         self.write("about.md", "About the project.\n")
         self.write("shared.css", "body { color: black; }\n")
         self.write(
-            gate.CHANGELOG_PATH,
+            CHANGELOG,
             yaml.safe_dump(
                 {"entries": [{"id": "entry", "summary": "Contribution"}], "deliveries": []}
             ),
@@ -325,7 +327,7 @@ def test_shared_typography_selects_every_declared_owner_but_the_site(
     [
         ("about.md", "The About page gains a section.\n"),
         (
-            gate.CHANGELOG_PATH,
+            CHANGELOG,
             yaml.safe_dump(
                 {"entries": [{"id": "new", "summary": "A new News entry"}], "deliveries": []}
             ),
@@ -382,6 +384,93 @@ def test_the_frozen_site_record_refuses_every_edit(
             assert any(f"{field} edited" in error for error in refusals)
 
 
+def test_an_old_rule_record_naming_the_site_keeps_its_paper_coverage_with_a_warning(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A no-change record written before site editions were retired names the site beside
+    the papers it covers, as #723's and #726's do. Its site part is ignored, with a
+    warning naming think-wdqo, and its paper part still exempts the papers."""
+    repo = Repository(tmp_path, monkeypatch)
+    helper = "packing/src/sqpack/helper.py"
+    repo.write(helper, "def helper():\n    return 2\n")
+    site_outputs = ("development.html", "index.html")
+    repo.no_changes.append(
+        release.ReleaseNoPublicChange(
+            (*PAPERS, "site"),
+            (helper,),
+            (
+                *site_outputs,
+                *(f"papers/{paper.removeprefix('paper:')}.html" for paper in PAPERS),
+            ),
+            "Reviewed under the old rules; every output is unchanged",
+        )
+    )
+    repo.write_release()
+    report = repo.inspect()
+    assert set(report.exempt_components) == set(PAPERS)
+    assert report.errors == ()
+    assert len(report.warnings) == 1
+    assert report.warnings[0].startswith("site: ")
+    assert gate.SITE_EDITIONS_RETIRED in report.warnings[0]
+
+
+@pytest.mark.parametrize(
+    ("components", "outputs", "expected"),
+    [
+        (("site",), ("index.html",), "names only the retired site"),
+        (
+            (PAPER, "site"),
+            ("index.html", "papers/n11-optimality-review.html"),
+            "recognized examined outputs",
+        ),
+    ],
+)
+def test_the_rest_of_an_old_rule_site_record_is_held_to_every_rule(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    components: tuple[str, ...],
+    outputs: tuple[str, ...],
+    expected: str,
+) -> None:
+    """Ignoring the site part loosens nothing else: a record with nothing left is refused,
+    and one whose remaining components name none of their own outputs still fails."""
+    repo = Repository(tmp_path, monkeypatch)
+    paper_path = repo.inputs[PAPER][0]
+    repo.write(paper_path, "A paper change the record claims is invisible.\n")
+    repo.no_changes.append(
+        release.ReleaseNoPublicChange(components, (paper_path,), outputs, "Reviewed")
+    )
+    repo.write_release()
+    report = repo.inspect()
+    assert PAPER not in report.exempt_components
+    assert any(expected in error for error in report.errors), report.errors
+
+
+def test_site_decisions_already_at_the_base_are_history_not_a_fresh_cut(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Only a fresh site decision is refused: a base that already retains site cuts, as
+    `main` does, lets an ordinary paper cut through."""
+    repo = Repository(tmp_path, monkeypatch)
+    repo.bump("site")
+    repo.base = repo.commit("a site cut made under the old rules")
+    repo.git("update-ref", "refs/remotes/origin/main", repo.base)
+    repo.write(repo.inputs[PAPER][0], "A corrected public claim.\n")
+    repo.bump(PAPER)
+    for report in (repo.inspect(), gate.inspect(repo=repo.root, base=repo.base)):
+        assert set(report.candidate_paths) == {PAPER}
+        assert report.errors == ()
+
+
+def test_the_real_release_record_retains_site_decisions_and_none_is_fresh() -> None:
+    """Against the repository's own `release.py`, the site's retained decisions are not
+    refused when nothing changed: the freeze judges what a change adds."""
+    fields = gate._assignments(Path(release.__file__).read_bytes())  # noqa: SLF001
+    records = gate._records(fields, "RELEASE_IMPACTS")  # noqa: SLF001
+    assert any(record[0] == gate.SITE for record in records)
+    assert gate.frozen_site_errors(fields, fields) == []
+
+
 def test_fresh_about_only_review_exempts_papers_on_broad_inputs(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -427,7 +516,7 @@ def test_pins_comments_audit_metadata_and_tests_create_no_obligation(
         '"""Reworded docstring."""\n# New comment\ndef helper():\n    return 1\n',
     )
     repo.write(
-        gate.CHANGELOG_PATH,
+        CHANGELOG,
         yaml.safe_dump(
             {
                 "entries": [{"id": "entry", "summary": "Contribution"}],
