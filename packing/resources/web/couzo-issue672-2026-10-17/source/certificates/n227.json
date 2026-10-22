@@ -1,0 +1,64 @@
+{
+  "n": 227,
+  "packing": "n227.txt",
+  "packing_sha256": "be2a86910f521813ee5a9e941404cc9b1a4b19e831dc048b55cb63c46bf1051a",
+  "certificate": "certificates/n227.cert",
+  "certificate_sha256": "65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17",
+  "rational_side": "71427829379429597600111901507/4589408083628500000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Joost de Winter (JoostdeWinter)",
+    "web_seed": {
+      "category": "CT105 web submission",
+      "source_certificate_sha256": "65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17",
+      "submission_id": "f0ca7a659c465f2c48e9e688c297324c",
+      "method": "fq",
+      "received": "20261017T202822Z",
+      "seed_credit": "Joost de Winter (JoostdeWinter)",
+      "prior_retained_witness": {
+        "certificate": "certificates/parents/cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0.cert",
+        "certificate_sha256": "cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0",
+        "source_credit": {
+          "seed_credit": "Joost de Winter (JoostdeWinter)",
+          "category": "reviewed public submission",
+          "source_url": "https://github.com/JoostdeWinter/square-packing/blob/c95c4938f068ed44a1819ef973e770ec241aa567/n227/n227_record.cert",
+          "request": "https://github.com/jlevy/squares/issues/668",
+          "source_n": 227,
+          "deleted_squares": 0,
+          "source_certificate_sha256": "7d386887c4acdfe2472c0b83fff54e76eae76d414fef9ddc45478d0e03011d1f",
+          "seed_certificate": {
+            "source": "evand",
+            "certificate": "evand/search/regularize/lists/certs/alt/n-227.cert.gz",
+            "sha256": "cbaf36bf537196321f3d2beb62c18e154047c745cb72d478942be6a49490c225",
+            "request": "https://github.com/jlevy/squares/issues/668",
+            "side": "486368646470642329014092781873/31250000000000000000000000000"
+          }
+        }
+      }
+    },
+    "source_n": 227,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17",
+    "prior_retained_witness": {
+      "certificate": "certificates/parents/cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0.cert",
+      "certificate_sha256": "cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0",
+      "source_credit": {
+        "seed_credit": "Joost de Winter (JoostdeWinter)",
+        "category": "reviewed public submission",
+        "source_url": "https://github.com/JoostdeWinter/square-packing/blob/c95c4938f068ed44a1819ef973e770ec241aa567/n227/n227_record.cert",
+        "request": "https://github.com/jlevy/squares/issues/668",
+        "source_n": 227,
+        "deleted_squares": 0,
+        "source_certificate_sha256": "7d386887c4acdfe2472c0b83fff54e76eae76d414fef9ddc45478d0e03011d1f",
+        "seed_certificate": {
+          "source": "evand",
+          "certificate": "evand/search/regularize/lists/certs/alt/n-227.cert.gz",
+          "sha256": "cbaf36bf537196321f3d2beb62c18e154047c745cb72d478942be6a49490c225",
+          "request": "https://github.com/jlevy/squares/issues/668",
+          "side": "486368646470642329014092781873/31250000000000000000000000000"
+        }
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

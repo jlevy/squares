@@ -2176,8 +2176,12 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # held both counts still holds others; at 260 Couzo's packet replaces de Winter's on 21
     # October, and de Winter's still holds 227. The adoption of 21 October draws from one
     # more, Evan Daniel's packet at 270 (T-224), with no new name:
-    # PingYou Ltd's PR 574 certificates still hold other counts.
-    assert len(expected_sources) == 27
+    # PingYou Ltd's PR 574 certificates still hold other counts. The adoption of 22 October
+    # draws 204, 227, 229 and 260 from one packet, Evan Daniel's regularized lists of 20
+    # October (T-225), and no longer from Couzo's issue 678 packet, de Winter's issue 668
+    # packet or Daniel's n229 update, which held nothing else: two sources fewer, and no new
+    # name, since the credit at 227 keeps de Winter as the packing's finder.
+    assert len(expected_sources) == 25
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None

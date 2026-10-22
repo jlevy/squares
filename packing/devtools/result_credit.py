@@ -212,7 +212,15 @@ def regularization_sentence(
             changed.append(
                 _plural(changes["re_angled"], "free angle", "free angles") + " moved"
             )
-        parts.append(", ".join(changed) or "no angle changed")
+        # A source's `changes` report its regularizer's own step against the solved input,
+        # not the view against the certificate `of` names, which the identity measures (RF-2
+        # of the review of 21 October 2026).
+        unchanged = (
+            "no angle changed"
+            if item["by"] == "project"
+            else "the regularizer changed no angle, as its source reports"
+        )
+        parts.append(", ".join(changed) or unchanged)
     identity = item["identity"]
     parts.append(_BASES[str(identity["basis"])])
     if "one_to_one" in identity:

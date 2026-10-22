@@ -1884,6 +1884,11 @@ def test_results_md_says_whose_packing_each_regularization_is() -> None:
     )
     still = _regularization(changes={"straightened": 0}, identity={"basis": "source-claim"})
     assert result_credit.regularization_sentence(still, sources).endswith(
+        "(fewest; solved to its side; the regularizer changed no angle, as its source "
+        "reports; identity: the source\u2019s claim)."
+    )
+    own = {**still, "by": "project"}
+    assert result_credit.regularization_sentence(own, sources).endswith(
         "(fewest; solved to its side; no angle changed; identity: the source\u2019s claim)."
     )
     committed = render_results.OUTPUT.read_text(encoding="utf-8")

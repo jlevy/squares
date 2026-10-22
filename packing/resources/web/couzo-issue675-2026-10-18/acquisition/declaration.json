@@ -1,0 +1,54 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "franciscouzo-square-packing",
+  "source_url": "https://github.com/franciscouzo/square-packing",
+  "source_ref": "master",
+  "source_commit": "c6da0fc7524d667bf3d224559724ba9b60762e60",
+  "retrieved_at_utc": "2026-10-22T01:24Z",
+  "git_scope": "Blobless clone of franciscouzo/square-packing with a sparse checkout at the pin of issue #675, c6da0fc7 (committed 2026-10-18T05:46:00Z), the first commit holding this certificate; its parent af8cb795 is the pin of issue #672, and the history is linear to the head 6b7391de on 22 October. Retained: the issue's only in-corpus certificate, certificates/best/n204.cert, which the issue links, and the per-count JSON certificates/n204.json, which describes the same bytes (the root certificates/n204.cert is the same Git blob). Pinned by digest only: the root README.md and upper_bounds.json, the certificate directory's README, manifest.json and SHA256SUMS, and the exact checker verify_bound_certificate.py with its MIT licence, against the issue-678 packet's identical copies. The issue's 78 rows beyond the n <= 324 corpus and the rest of the tree are pinned by the commit and were neither retained nor executed; their import is think-pvav's.",
+  "archived_dir": "source",
+  "license": "The repository states no licence for its data or prose: the tree has no LICENSE, and neither README.md nor certificates/best/README.md states reuse terms. The in-corpus certificate and its per-count JSON are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). verify_bound_certificate.py states that it is Evan Daniel's MIT-licensed verifier with modifications by Francisco Couzo with Codex, distributed under the MIT licence in BOUND_VERIFIER_LICENSE.txt; both are pinned by digest against the identical copies the issue-678 packet retains, and were not run. Prose, the index and the manifest are hash-pinned and not copied.",
+  "claims": [
+    "Issue #675 reports 79 improved upper bounds for n = 204 and 419 to 998, each the exact rational side in its linked certificate's header rounded upward at 12 decimal places, with the header authoritative. In the n <= 324 corpus it reports s(204) <= 14.808644367227 (certificates/best/n204.cert), against #670's 14.808644417690.",
+    "The issue states that each bound is strictly smaller than the source's previous index at af8cb795 and the reviewed public comparison envelope, and that the manifest records source credits, parent hashes and verification receipts. The per-count JSON credits the 204 seed to Mykhailo Polkovskyi (Mishapolk), search job 107960 (slp). Those statements are the author's; no source program ran here."
+  ],
+  "scope": [
+    "BOUND_VERIFIER_LICENSE.txt",
+    "README.md",
+    "certificates/best/README.md",
+    "certificates/best/SHA256SUMS",
+    "certificates/best/manifest.json",
+    "certificates/best/n204.cert",
+    "certificates/n204.json",
+    "upper_bounds.json",
+    "verify_bound_certificate.py"
+  ],
+  "pinned_only": [
+    {
+      "match": "**/README.md",
+      "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+    },
+    {
+      "match": "upper_bounds.json",
+      "reason": "The author's index at the pin, which records each exact bound and the relationship the issue states; pinned for provenance, as no claim rests on it."
+    },
+    {
+      "match": "certificates/best/manifest.json",
+      "reason": "The source's provenance manifest: exact sides, digests, seed and construction credits, parent hashes and the author's checker receipts; pinned for credit, as no claim rests on it."
+    },
+    {
+      "match": "certificates/best/SHA256SUMS",
+      "reason": "The source's digest list for certificates/best/; pinned for provenance."
+    },
+    {
+      "match": "verify_bound_certificate.py",
+      "reason": "The source's exact checker, which the issue names; byte-identical to the copy the issue-678 packet retains at 7b6c87e, and never executed here.",
+      "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source"
+    },
+    {
+      "match": "BOUND_VERIFIER_LICENSE.txt",
+      "reason": "The checker's MIT licence (Copyright (c) 2026 Evan Daniel); byte-identical to the copy the issue-678 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source"
+    }
+  ]
+}

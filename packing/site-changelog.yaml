@@ -1773,6 +1773,11 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 716
+  title: 'records(think-ql4v): Daniel''s regularized views as T-225 (no issue); #668, #678 and #702 replies; T-196 and T-223 News; site v0.8.17'
+  merged_at: '2026-10-22T00:31:09Z'
+  base_ref: main
+  merge_commit: d7923b8d8a8def4d6b738608910211d8d4f295bc
 - number: 706
   title: 'records(#678): stage 4 raises T-223 to V3/C3 and adopts it at 204 and 260'
   merged_at: '2026-10-21T22:19:02Z'
@@ -2420,6 +2425,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 716
   - 706
   - 704
   - 687
@@ -2643,6 +2649,10 @@ coverage:
   - pull_request: 615
     reason: 'S2: Repairs validation-worker inputs for identity measurements. No public artifact, record
       or result changes.'
+  - pull_request: 716
+    reason: 'S2: Registers Daniel’s regularized views at 204, 227, 229 and 260 as T-225 at V0/C0 with
+      their replay, records the #668, #678 and #702 replies, and carries T-196’s and T-223’s News.
+      It confirms and adopts nothing; T-225’s review and adoption follow in a later PR.'
 frozen_entries:
 - id: october-fourteen-reviewed-packing-adoptions
   date: '2026-10-15'

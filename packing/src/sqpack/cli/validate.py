@@ -167,11 +167,15 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: separating and -8 translating squares; and the pass of 21 October 2026 the two it moved:
 #: to Evan Daniel's issue-703 certificate, 270 (T-224), 1 strictly separating square, index
 #: 82, and 24 translating squares against T-174's 1 and 14, and to Couzo's issue-678
-#: certificate (T-223), 260, 17 and 53 against T-196's 1 and 11.
+#: certificate (T-223), 260, 17 and 53 against T-196's 1 and 11; and the pass of 22
+#: October 2026 the four it moved to Evan Daniel's regularized views (T-225, think-ql4v),
+#: whose least margins are 1e-20: separating and translating squares 8 and 25 at 204
+#: against T-223's 39 and 76, 2 and 9 at 227 against T-196's 22 and 26, 2 and 25 at 229
+#: against T-199's 90 and 134, and 0 and 16 at 260 against T-223's 17 and 53.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 112, 86, 577),
     "n=1..200": (67, 433, 182, 2113),
-    "n=1..324": (125, 1342, 302, 5346),
+    "n=1..324": (124, 1186, 302, 5132),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

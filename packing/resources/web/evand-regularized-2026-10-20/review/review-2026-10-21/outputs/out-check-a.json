@@ -1,0 +1,124 @@
+{
+ "204": {
+  "n": 204,
+  "side": "14808642840591493923068442871459/1000000000000000000000000000000",
+  "route_integers": {
+   "passed": true,
+   "least_wall_clearance": {
+    "exact": "1/200000000000000000000",
+    "approx": "5.000000e-21"
+   },
+   "least_wall_at": [
+    0,
+    "x>=0"
+   ],
+   "pairs_decided": 20706,
+   "overlapping_pairs": [],
+   "overlapping_count": 0,
+   "contacts": 0,
+   "least_pair_gap": {
+    "exact": "202932850841119591987615603569417458940879225207684296237321087982167209195764368351/20293285084111981874540018407607913965177129023500067316649617231005300000000000000000000000000000000000",
+    "approx": "1.000000e-20"
+   },
+   "least_pair": [
+    60,
+    82
+   ],
+   "cpu_s": 0.07
+  },
+  "route_fraction": {
+   "passed": true,
+   "least_wall_clearance": {
+    "exact": "1/200000000000000000000",
+    "approx": "5.000000e-21"
+   },
+   "least_wall_at": [
+    0,
+    "x>=0"
+   ],
+   "overlapping_pairs": [],
+   "overlapping_count": 0,
+   "contacts": 0,
+   "least_pair_gap": {
+    "exact": "202932850841119591987615603569417458940879225207684296237321087982167209195764368351/20293285084111981874540018407607913965177129023500067316649617231005300000000000000000000000000000000000",
+    "approx": "1.000000e-20"
+   },
+   "least_pair": [
+    60,
+    82
+   ],
+   "clipped_pairs": 178,
+   "clip_positive_pairs": [],
+   "clip_disagreements": [],
+   "cpu_s": 3.63
+  },
+  "routes_agree": {
+   "least_wall": true,
+   "least_gap": true,
+   "verdict": true
+  },
+  "passed": true,
+  "strict": true
+ },
+ "227": {
+  "n": 227,
+  "side": "7781812826162574542396221861851/500000000000000000000000000000",
+  "route_integers": {
+   "passed": true,
+   "least_wall_clearance": {
+    "exact": "1/200000000000000000000",
+    "approx": "5.000000e-21"
+   },
+   "least_wall_at": [
+    0,
+    "y>=0"
+   ],
+   "pairs_decided": 25651,
+   "overlapping_pairs": [],
+   "overlapping_count": 0,
+   "contacts": 0,
+   "least_pair_gap": {
+    "exact": "85371121243160240936019866920944593923639290742111606434518788941647137560078428689/8537112124316032227639943012569507127789235795876620464122943803836100781250000000000000000000000000000",
+    "approx": "1.000000e-20"
+   },
+   "least_pair": [
+    169,
+    180
+   ],
+   "cpu_s": 0.07
+  },
+  "route_fraction": {
+   "passed": true,
+   "least_wall_clearance": {
+    "exact": "1/200000000000000000000",
+    "approx": "5.000000e-21"
+   },
+   "least_wall_at": [
+    0,
+    "y>=0"
+   ],
+   "overlapping_pairs": [],
+   "overlapping_count": 0,
+   "contacts": 0,
+   "least_pair_gap": {
+    "exact": "85371121243160240936019866920944593923639290742111606434518788941647137560078428689/8537112124316032227639943012569507127789235795876620464122943803836100781250000000000000000000000000000",
+    "approx": "1.000000e-20"
+   },
+   "least_pair": [
+    169,
+    180
+   ],
+   "clipped_pairs": 149,
+   "clip_positive_pairs": [],
+   "clip_disagreements": [],
+   "cpu_s": 3.95
+  },
+  "routes_agree": {
+   "least_wall": true,
+   "least_gap": true,
+   "verdict": true
+  },
+  "passed": true,
+  "strict": true
+ }
+}

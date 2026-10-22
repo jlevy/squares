@@ -55,7 +55,15 @@ case’s house best packing is a smaller packing, registered as a result
 Each JSON also reports the certificate VALID under the source’s checkers and verified
 at 80 digits, the `conservative` policy, and level 2, “same packing: traversable
 without expansion (angle moves path-checked; slides by construction)”. Its
-`angle_changes` at the four counts are free angles kept, none turned or merged.
+`angle_changes` at the four counts are free angles kept, none turned or merged: the
+source’s report of its regularizer’s own step against the solved input.
+Measured against the certificate each view is credited to ([Pose by Pose](#pose-by-pose)),
+the views do turn squares: 12 beyond $10^{-3}$ degrees at 204, 4 at 227 (one by 2.54°
+against #672’s) and 31 at 229, several near-axis squares exactly to the axis.
+The method log’s account of the exact solve, which snaps near-axis tilts to the axis,
+suggests those turns arise before the regularizer, in the refresh’s solve or at 229 the
+polish; which step made them is the 21 October review’s first question to the author
+(its RF-2).
 
 ## Retained Here
 
@@ -183,9 +191,10 @@ beyond a tenth from T-196’s (largest 0.080, 58 turned), so #672 refines de Win
 packing, and the view is #672’s packing solved lower and regularized. #672’s
 certificate is `certificates/n227.cert` at
 `franciscouzo/square-packing@af8cb7959aead318c0cf5e9f873de3caa763f77a`, SHA-256
-`65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17`; no packet retains
-it (think-2vjc owns #672’s import), and the program reads a copy fetched at that commit
-and refuses any other bytes.
+`65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17`. When this packet
+was built no packet retained it, so the program reads a copy fetched at that commit and
+refuses any other bytes; #672’s import (T-227) now retains the same bytes in
+[`couzo-issue672-2026-10-17`](../couzo-issue672-2026-10-17/README.md).
 At 260, 207 of the 260 squares lie within $10^{-9}$ of T-223’s and none turns by $10^{-6}$ degrees, the largest by $1.294 \times 10^{-7}$; the 53
 that move slide, as the method log says the regularization does. At 204 and 229 the
 slides are larger, and at 229 large enough that nearest centres pair the squares one to
@@ -203,6 +212,27 @@ samples the path and that the log says is not a continuous proof; and every view
 verified at 80 digits and accepted by both of the source’s checkers.
 Novelty, local or global optimality and rigidity are not established.
 
+## Stage 4 Review
+
+The [review of 21 October 2026](../../../../docs/project/reviews/review-2026-10-21-evand-regularized-views.md)
+accepted the four certificates for finite feasibility, with six findings, none blocking.
+It reproduced the replay and the frozen comparison, decided each certificate again on a
+clean-room checker of its own, on an integer route and a `Fraction` route with exact
+clipping area, and ran sharp controls at $10^{-30}$ through both maintained routes and
+that checker: each route accepted exact contact at the far wall, the near wall and the
+least-gap pair, and refused $10^{-30}$ past it, at all four counts.
+Its programs, receipts and logs are in
+[review/review-2026-10-21/](review/review-2026-10-21/README.md), and
+`tests/test_upper_bound_reports_regularized_1020.py` runs the kernel’s two sharp
+controls on all four certificates (RF-3).
+T-225 rests at `V3`/`C3` on that review, the replay it reproduced and its checker’s run.
+Its RF-5, the 21 October ledger’s open cross-check at 229, leaves that ledger as it
+stands: its `sources.yaml` omits #672 at 229 on purpose, since the 18 October ledger walked
+that row and it lies above the later ledger’s frozen start (T-199), so the cross-check
+decides nothing; #672’s 229 row is T-227’s since 22 October 2026, superseded on entry.
+The review’s three questions for Evan Daniel, on the turns at 204, 227 and 229, the
+store’s packings and the slides at 229, wait for a reply to put them (think-e4ys).
+
 ## Credit and Licence
 
 Evan Daniel wrote the source under the MIT licence (`LICENSE`), with credits in
@@ -214,8 +244,8 @@ The record credits each packing to the finder the source names, as T-146 did:
 - Francisco Couzo at 204 and 260, the packings of issue #678 (T-223); at 204 his source
   credits Mykhailo Polkovskyi’s construction, and at 260 it says it seeded Joost de
   Winter’s #668 packing from Evan Daniel’s exact-form certificate;
-- Francisco Couzo at 227, his #672 refinement of Joost de Winter’s #668 packing
-  (T-196), measured above;
+- Francisco Couzo at 227, the refinement of Joost de Winter’s #668 packing (T-196) that his
+  #672 reports, measured above;
 - Evan Daniel at 229, his #674 packing (T-199), which started from Couzo’s #672 packing,
   which refines de Winter’s, as the site’s `lineage.yaml` records.
 

@@ -382,39 +382,25 @@ _README_3MRY = (
     "selection of 17 October 2026 (think-3mry), beside the runs' receipts and reports"
 )
 
-#: Both generators on the four witnesses the adoption of 19 October 2026 moved to Evan
-#: Daniel's certificates (think-ip1p): his regularizer and grid-slack at 0.5, 1 and 5
-#: degrees on 155, 229, 236 and 271. The selection drew grid-slack's 0.5-degree view at 155
-#: and his same-side views at 236 and 271, and decided 229 (`SETTLED`). Their receipt,
-#: run blocks, reports and the selection's report are in
-#: packing/cases/regularized_drawings/think-ip1p-2026-10-19/.
-_RUNIP1P = (
-    ("evand-regularize", "evand-regularize-adopt-2026-10-19-n155-271-evand"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-deg05"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-deg1"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-deg5"),
+#: Both generators on the three witnesses the adoption of 22 October 2026 moved to Evan
+#: Daniel's regularized views of 20 October (T-225, think-ql4v): his regularizer and
+#: grid-slack at 0.5, 1 and 5 degrees on 204, 229 and 260. The selection drew grid-slack's
+#: 0.5-degree view at 229 and decided 204 and 260 (`SETTLED`). Their receipt, run blocks,
+#: reports and the selection's report are in
+#: packing/cases/regularized_drawings/think-ql4v-2026-10-22/.
+_RUNQL4V = (
+    ("evand-regularize", "evand-regularize-adopt-2026-10-22-n204-260-evand"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-22-n204-260-grid-deg05"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-22-n204-260-grid-deg1"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-22-n204-260-grid-deg5"),
 )
-_README_IP1P = (
-    "packing/cases/regularized_drawings/think-ip1p-2026-10-19/README.md, the selection of 19 "
-    "October 2026 (think-ip1p), beside the runs' receipt, blocks and reports"
+_README_QL4V = (
+    "packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md, the selection of 22 "
+    "October 2026 (think-ql4v), beside the runs' receipt, blocks and reports"
 )
-
-#: Both generators on the two witnesses of Francisco Couzo's issue-678 certificates
-#: (T-223, think-xu4d), which the adoption of 20 October 2026 drew at 204 and that of 21
-#: October 2026 at 260, after #704's T-196: Evan Daniel's regularizer and grid-slack at
-#: 0.5, 1 and 5 degrees on 204 and 260. The selection drew grid-slack's
-#: 0.5-degree view at 204 and decided 260 (`SETTLED`). Their receipt, run blocks, reports
-#: and the selection's report are in packing/cases/regularized_drawings/think-xu4d-2026-10-20/.
-_RUNXU4D = (
-    ("evand-regularize", "evand-regularize-adopt-2026-10-20-n204-260-evand"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-20-n204-260-grid-deg05"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-20-n204-260-grid-deg1"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-20-n204-260-grid-deg5"),
-)
-_README_XU4D = (
-    "packing/cases/regularized_drawings/think-xu4d-2026-10-20/README.md, the selection of 20 "
-    "October 2026 (think-xu4d), beside the runs' receipt, blocks and reports"
-)
+_T225 = "[Daniel regularized lists 2026-10-20]"
+_T225_CERTS = "resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/"
+_T225_REVISION = "0075967bace18a3deabcc0baa64c2fb294fc80a0"
 
 #: The counts whose drawing is not regularized and not regular as published, settled on
 #: purpose: each named with the witness it was settled on, so a new witness makes the
@@ -827,24 +813,18 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
     ),
-    229: Settled(
+    204: Settled(
         DECIDED,
-        "[Daniel n229 dilation update 2026-10-18]",
-        "resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/"
-        "s229_v2.cert",
-        "00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db",
-        "7825080756947776580756939951343/500000000000000000000000000000",
-        _RUNIP1P,
-        "Evan Daniel's regularizer draws no view (its solve of the dilation certificate is not "
-        "jammed); grid-slack's views at 0.5, 1 and 5 degrees improve on the axis tool's view "
-        "on every goal, but two squares' contact counts fall while no total does, so the "
-        "selection sends each to the owner's review at row 7 and the axis tool's view stays "
-        "drawn until a review record admits one",
-        _README_IP1P,
-        # Review A2 of #692: the decision is the owner's, so the bead that records it stays
-        # open while this names it (`deferrals`).
-        "think-cyeo: the owner's row-7 review of grid-slack's views, admitted or declined "
-        "in a review record",
+        _T225,
+        _T225_CERTS + "n-204.cert.gz",
+        _T225_REVISION,
+        "14808642840591493923068442871459/1000000000000000000000000000000",
+        _RUNQL4V,
+        "the house is Evan Daniel's own display regularization (T-225): grid-slack at 0.5, 1 "
+        "and 5 degrees draws no change, and his regularizer's solved view, with the same "
+        "light, uneven and near-axis squares and sides, lies 8.91e-12 below the witness's "
+        "side, a register candidate (row 3), not drawn",
+        _README_QL4V,
     ),
     237: Settled(
         DECIDED,
@@ -901,20 +881,15 @@ SETTLED: dict[int, Settled] = {
     ),
     260: Settled(
         DECIDED,
-        "[Couzo issue 678 2026-10-18]",
-        "resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert",
-        "7b6c87e129cf80b5ff9847b90b47fd30b4563c54",
-        "146417594016514621500994169/8796093022208000000000000",
-        _RUNXU4D,
-        "Evan Daniel's same-side view and grid-slack's views at 0.5, 1 and 5 degrees each "
-        "improve on the axis tool's view on light and uneven squares and both totals, but "
-        "some squares' contact counts fall while no total does (29 for his view, 2 for "
-        "grid-slack's), so the selection sends each to the owner's review at row 7 and the "
-        "axis tool's view stays drawn until a review record admits one; his solved view, "
-        "2.51e-11 below the witness's side, is a register candidate (row 3), not drawn",
-        _README_XU4D,
-        "think-fltj: the owner's row-7 review of the strong views at 260, admitted or "
-        "declined in a review record",
+        _T225,
+        _T225_CERTS + "n-260.cert.gz",
+        _T225_REVISION,
+        "4161438312629953048686574163329/250000000000000000000000000000",
+        _RUNQL4V,
+        "the house is Evan Daniel's own display regularization (T-225): his regularizer's "
+        "same-side and solved views and grid-slack's at 0.5, 1 and 5 degrees each draw no "
+        "change",
+        _README_QL4V,
     ),
     263: Settled(
         DECIDED,

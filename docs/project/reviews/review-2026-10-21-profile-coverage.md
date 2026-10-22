@@ -33,11 +33,11 @@ author of the citing result.
 
 ## Closing snapshot
 
-After the final manifest handoff, the audit loads **75 profiles**, with **214 distinct
-registered results** having reviewed primary profile authorship and **705 nonprimary
-person/result credit associations**. The structured census has 1,440 resolved spans, 77
+After the final manifest handoff, the audit loads **75 profiles**, with **217 distinct
+registered results** having reviewed primary profile authorship and **714 nonprimary
+person/result credit associations**. The structured census has 1,465 resolved spans, 78
 non-person spans and seven unresolved spans.
-Together with ten manual-origin spans, these account for all 1,534 manifest occurrences.
+Together with ten manual-origin spans, these account for all 1,560 manifest occurrences.
 The seven unresolved spans are four distinct labels: three collective-project `Levy`
 mentions, one `BuddenPing` account, one `register seed data from Levy` clause and two
 `hmbelvedere` mentions.

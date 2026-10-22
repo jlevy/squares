@@ -147,7 +147,7 @@ establish its human identity.
 The frozen registry has 75 profiles.
 The audit separately reports ten manual origins: the project-author constant and the
 nine figure-source spans.
-The reusable all-significance audit reports 1,440 resolved structured spans, 77
+The reusable all-significance audit reports 1,465 resolved structured spans, 78
 non-person structured spans and seven unresolved structured spans: three collective Levy
 labels, the clause “register seed data from Levy”, BuddenPing and two hmbelvedere spans.
 The ambiguity follow-up is `think-0v9j`; this review resolves its earlier Said El Moumni

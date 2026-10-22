@@ -197,15 +197,16 @@ def test_live_current_families_pending_comparison_and_known_scope_gap() -> None:
     )
     assert "T-031" not in index.current_results
     assert "T-037" not in index.current_results
-    assert "T-223" in index.current_results
+    assert "T-225" in index.current_results
+    assert {"T-196", "T-199", "T-223", "T-226", "T-227", "T-228"}.isdisjoint(
+        index.current_results
+    )
     assert "T-163" not in index.current_results
     assert "think-kqi1" in " ".join(index.unresolved["T-163"])
     assert records.current_record_ids(["T-037", "T-060", "T-163", "T-060"], index) == ("T-060",)
-    assert all(
-        not (f.n in {204, 260} and f.direction == "upper" and f.lane == "reported")
-        for f in index.facets.get("T-196", ())
-    )
-    assert any(f.n == 227 for f in index.facets["T-196"])
+    assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-225"]} == {
+        (n, "upper", lane) for n in (204, 227, 229, 260) for lane in ("reported", "verified")
+    }
 
 
 def test_cli_keeps_unassessed_distinct_from_known_current(

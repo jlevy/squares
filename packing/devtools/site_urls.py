@@ -143,10 +143,11 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-180.html": (
-        400_000,
+        450_000,
         (
             "The closed form's result, its scope of 264 counts and prepared math measure "
-            "341,524 bytes."
+            "341,524 bytes, and 402,418 on 22 October 2026, when its register list on those "
+            "counts reached 138 results."
         ),
     ),
     "tutorial-advanced.html": (

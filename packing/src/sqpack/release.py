@@ -97,6 +97,24 @@ PUBLICATION_HISTORY = (
         ),
     ),
     PublicationHistoryEntry(
+        version="v0.8.19",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Raise Evan Daniel's regularized views (T-225) to V3/C3 after their stage 4 "
+            "review, adopt them as the house best packings at 204, 227, 229 and 260, and "
+            "register Francisco Couzo's #670, #672 and #675 rows (T-226 to T-228)."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.18",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Record Francisco Couzo's 109 new upper bounds at or below 1024 from issue "
+            "715 as current beyond-horizon rows, superseding the rows that stood at those "
+            "counts, and record the #715 acknowledgement and the #678 follow-up."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.17",
         first_published="October 22, 2026",
         result_scope=(
@@ -732,7 +750,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "8dd742b7ea937462da72034f3eef6f6094ea6a49"
+DATA_REVISION = "00e3de3735ef03a5efb70caf2c369b20262e605e"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -830,11 +848,19 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for PR #578; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
-        version="v0.4.15",
+        version="v0.4.16",
         first_published="October 22, 2026",
         result_scope=(
             "Link reviewed oversight credits and article names to person profiles with "
             "consistent surname labels."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.4.15",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Francisco "
+            "Couzo's #670, #672 and #675 rows (T-226 to T-228)."
         ),
     ),
     PublicationHistoryEntry(
@@ -1253,8 +1279,8 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
-        previous_version="v0.4.14",
-        version="v0.4.15",
+        previous_version="v0.4.15",
+        version="v0.4.16",
         impact="patch",
         reason=(
             "Link the oversight credit to Joshua Levy's profile and use the reviewed "
@@ -1275,12 +1301,44 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ),
     ReleaseImpactDecision(
         component="site",
-        previous_version="v0.8.17",
+        previous_version="v0.8.19",
         version="v0.9.0",
         impact="minor",
         reason=(
             "Add person profiles and reviewed credit links, with direct profile "
             "navigation and shared article popovers for complete case and result records."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.18",
+        version="v0.8.19",
+        impact="patch",
+        reason=(
+            "Raise Evan Daniel's regularized views (T-225) to V3/C3 after their stage 4 "
+            "review, adopt them as the house best packings at 204, 227, 229 and 260, and "
+            "register Francisco Couzo's #670, #672 and #675 rows (T-226 to T-228)."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.17",
+        version="v0.8.18",
+        impact="patch",
+        reason=(
+            "Record Francisco Couzo's 109 new upper bounds at or below 1024 from issue "
+            "715 as current beyond-horizon rows, superseding the rows that stood at those "
+            "counts, and record the #715 acknowledgement and the #678 follow-up."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.14",
+        version="v0.4.15",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Francisco "
+            "Couzo's #670, #672 and #675 rows (T-226 to T-228)."
         ),
     ),
     ReleaseImpactDecision(
@@ -2071,6 +2129,92 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The v0.8.18 cut for #715 moved the claim documents' link revision, 18a1fb61 "
+            "to 9da60d47, in 22 lines. Rendered into empty site directories from this "
+            "tree and with main d7923b8d's copies of the five: 54 byte-identical files. "
+            "Retain v0.4.14."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the #715 import (Francisco Couzo's 109 new beyond-horizon rows at or "
+            "below 1024, and the #715 and #678 replies) against main d7923b8d: the survey "
+            "cites neither the #715 request nor the couzo-issue715-2026-10-21 source. "
+            "Rendered at link revision 56dc2454 into empty site directories, from this tree "
+            "and with main's copies of the two inputs: render_packing_methods writes 42 "
+            "byte-identical files. No PDF printed; it prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/result_credit.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-225's stage 4 review and rise to V3/C3, its adoption at 204, 227, 229 and "
+            "260, and the registration of Francisco Couzo's #670, #672 and #675 rows "
+            "(T-226 to T-228), against main d7923b8d. Rendered at link revision ab006e47 "
+            "into empty site directories, twice from this tree at ba8b3cc9 and twice from "
+            "main's: render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write their HTML and Markdown byte-identical across all "
+            "four renders; only the explainer, which counts the register, differs, and it "
+            "takes v0.4.15. Rendered the same way again at link revision da2671cf, from "
+            "this tree at 369db682, after the rigidity blocks and t-180's page budget: the "
+            "same three byte-identical. Re-taken against main de1651e1 (#717, #715's rows), "
+            "after merging it: rendered at link revision 653597be, twice from this tree at "
+            "089cf042 and twice from main's, the same three byte-identical and the explainer "
+            "differing only in its edition and register count; the survey again at "
+            "68b17200, after the four reply records of 22 October, its 42 files "
+            "byte-identical to main's; and all four again at link revision 00e3de37, from "
+            "this tree at f6457df8 after review A's fixes, the same three byte-identical and "
+            "the explainer differing only in its edition and register count. No PDF was "
+            "printed; each prints from that HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-optimality-review",
@@ -6645,7 +6789,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "18a1fb61"
+PUBLICATION_REVISION = "d39f458c"
 
 
 def data_pathspec() -> tuple[str, ...]:
