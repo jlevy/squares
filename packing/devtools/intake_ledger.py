@@ -83,6 +83,7 @@ import math
 import re
 import subprocess
 import sys
+from collections import Counter
 from collections.abc import Callable, Iterable, Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from dataclasses import dataclass, field, replace
@@ -1966,8 +1967,9 @@ def _report_link(label: str, url: str) -> str:
     return f"[{_cell(label)}]({url})"
 
 
-def readme(ledger: Ledger, verdicts: Mapping[str, Any]) -> str:
-    """The human tables: the rule, per report, per count, owner decisions, other items."""
+def readme(ledger: Ledger, verdicts: Mapping[str, Any], *, retained: bool = True) -> str:
+    """The human tables: the rule, per report, per count, owner decisions, other items.
+    ``retained`` says the intake directory holds a `LANE_CLAIMS` copy to link to."""
     lines = [
         "# Upper-Bound Reports, Count by Count, in Report Order",
         "",
@@ -2023,10 +2025,15 @@ def readme(ledger: Ledger, verdicts: Mapping[str, Any]) -> str:
         "",
         (
             "Exact sides marked as a lane's come from its `acquisition/claims.json` (and "
-            "`algebraic-claims.json`) records, read by path from the checkout or, for a "
-            "packet the tree does not hold, from the copy in "
-            "[lane-claims/](lane-claims/README.md). Each commit is where the lane froze "
-            "them, given as provenance; nothing reads it."
+            "`algebraic-claims.json`) records, read by path from the checkout"
+            + (
+                " or, for a packet the tree does not hold, from the copy in "
+                "[lane-claims/](lane-claims/README.md)"
+                if retained
+                else ""
+            )
+            + ". Each commit is where the lane froze them, given as provenance; nothing "
+            "reads it."
         ),
         "",
         "| Lane | Branch | Commit | Note |",
@@ -2424,7 +2431,8 @@ def rendered(directory: Path) -> dict[str, str]:
     records on the tree are not read (`tree_drift` compares them)."""
     ledger, starts = load_walk(directory)
     verdicts = evaluate(ledger, starts)
-    return {VERDICTS: json_text(verdicts), README: readme(ledger, verdicts)}
+    retained = (directory / LANE_CLAIMS).is_dir()
+    return {VERDICTS: json_text(verdicts), README: readme(ledger, verdicts, retained=retained)}
 
 
 def render(directory: Path, *, check: bool = False) -> list[str]:
@@ -2611,9 +2619,20 @@ def _selected(
     return str(row.get("printed_in", "")) == url
 
 
-def _merge(transcribed: Sequence[Claim], from_lanes: Sequence[Claim]) -> list[Claim]:
+def _merge(
+    transcribed: Sequence[Claim], from_lanes: Sequence[Claim], report: str = ""
+) -> list[Claim]:
     """Transcribed fields win; a lane adds the exact side and the commit time. Record
-    relations are kept from both, the lane's first."""
+    relations are kept from both, the lane's first. A report transcribes one claim per
+    count, its least there: two at one count are refused, since keying them by count
+    would keep the last and drop the other unseen (#722's review A, A2)."""
+    counted = Counter(claim["n"] for claim in transcribed)
+    twice = sorted(n for n, times in counted.items() if times > 1)
+    _require(
+        not twice,
+        f"{report or 'a report'} transcribes more than one claim at n = {twice}: "
+        "transcribe its least side at each count",
+    )
     merged: dict[int, Claim] = {claim["n"]: cast("Claim", dict(claim)) for claim in from_lanes}
     for claim in transcribed:
         lane = merged.get(claim["n"])
@@ -2680,7 +2699,7 @@ def gather(
             for mapping in source.get("lanes", [])
             for claim in lane_claims(directory, mapping, lanes, url, rounding, taken=taken)
         ]
-        claims = _merge(source.get("claims", []), from_lanes)
+        claims = _merge(source.get("claims", []), from_lanes, str(source["report"]))
         if kind == "pull-request":
             claims = [_later(claim, reported_at) for claim in claims]
         report: Report = {
