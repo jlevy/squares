@@ -605,9 +605,10 @@ def read_history(
         lines = [line.split("\t", 1) for line in listed.splitlines() if "\t" in line]
         unretained = _unretained(git, pinned, read)
         held: tuple[str, ...] = ()
-        if head in read:
-            without = _unretained(git, pinned, [commit for commit in read if commit != head])
-            held = tuple(commit for commit in without if commit not in unretained)
+        if head in read and any(packet.pin == head for packet in pinned):
+            # A read through the head covers every commit the pins reach, so `unretained`
+            # is empty here, and what the history lists without it is what it alone holds.
+            held = _unretained(git, pinned, [commit for commit in read if commit != head])
         return RepoHistory(
             count=len(lines),
             first=lines[-1][0][:10] if lines else "",

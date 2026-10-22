@@ -294,6 +294,9 @@ def test_the_history_reads_commits_past_the_pins_and_changes_no_packet_retains(
     assert found.unretained == (f"{second[:7]} change certificates/b/cert.txt",)
     read = sweep.read_history(f"file://{repo}", head, packets, (second,))
     assert read.unretained == ()
+    # No packet pins this head, so no note reads what its read holds, and none is computed.
+    unpinned = sweep.read_history(f"file://{repo}", head, packets, (head,))
+    assert (unpinned.unretained, unpinned.held_by_head_read) == ((), ())
 
 
 def _upstream(tmp_path: Path) -> tuple[Path, tuple[str, str, str, str]]:
