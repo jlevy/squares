@@ -2110,8 +2110,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "same three byte-identical. Re-taken against main de1651e1 (#717, #715's rows), "
             "after merging it: rendered at link revision 653597be, twice from this tree at "
             "089cf042 and twice from main's, the same three byte-identical and the explainer "
-            "differing only in its edition and register count. No PDF was printed; each "
-            "prints from that HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
+            "differing only in its edition and register count; the survey again at "
+            "68b17200, after the four reply records of 22 October, its 42 files "
+            "byte-identical to main's. No PDF was printed; each prints from that HTML. "
+            "Retain v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
