@@ -2343,6 +2343,43 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/news_highlights.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/probes/check_site_rendering/report.js",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_overview.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "#736, the home page's News box filter and Recently Added (think-aqv8, "
+            "think-rqen), against main cddc5843f (#733): rendered at link revision "
+            "6610be93 into empty site directories, twice from this tree at 031619415 and "
+            "twice from main's (68 files each). render_n11_lower_bounds_explainer, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across the two trees; "
+            "the explainer's HTML differs between two renders of main's own tree in one "
+            "span's attributes, and this tree's second render equals main's second in all "
+            "68 files. No PDF was printed; each prints from that HTML. Retain v0.4.19, "
+            "v0.1.10, v0.1.3 and v0.2.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
