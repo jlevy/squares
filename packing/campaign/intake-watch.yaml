@@ -1057,7 +1057,10 @@ repositories:
       bounded GitHub API HEAD read confirmed this unchanged head; the original full history/tree
       fetch hit its 60-second cap. This checks head freshness only, not a fresh full source-content
       audit. The receipt is
-      packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json.
+      packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json. On 22 October 2026 the in-corpus rows of all three were retained from their pins and
+      registered at V0/C0 (T-226 at 204, T-227 at 227 and 229, T-228 at 204; packets
+      couzo-issue670-2026-10-17, couzo-issue672-2026-10-17 and couzo-issue675-2026-10-18); their
+      beyond-horizon rows stay with the three beads and follow #715's import.
   - url: https://github.com/wand125/square-packing
     read_through: d7afe3e525299d70de298af72cf17c581a86c0b1
     read_on: '2026-10-18'

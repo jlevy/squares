@@ -21,7 +21,10 @@ Every house's packet is read through its declaration (`packet_source`): the adop
 readers of their own, to `T-174`. Issue 678's packet (`T-223`) carries no import
 declaration: its replay module reads it, and `couzo_678_source` reads its two counts of
 the case corpus through that module, the certificate bound to its pinned digest and the
-kernel's three jobs kept in the packet's own receipt (`couzo_678_replay house-jobs`).
+kernel's three jobs kept in the packet's own receipt (`couzo_678_replay house-jobs`). The
+adoption of 22 October 2026 moved both of its counts, and the last counts of `T-196` and
+`T-199`, to `T-225`, so none of the three is a source here now; `couzo_678_source` stays
+for a pass that houses issue 678 again.
 
 **No geometry runs in a check.** `check_houses` admits the inputs and compares the
 retained witness with the one they rebuild; `build_witness`, which writes a house, also
@@ -382,15 +385,12 @@ def _sources() -> dict[str, Source]:
         packet_source("T-188", "couzo-verified-bounds-2026-10-14"),
         packet_source("T-190", "couzo-n237-2026-10-15"),
         packet_source("T-195", "pingyou-pr622-certificate-2026-10-15"),
-        packet_source("T-196", "de-winter-upper-bounds-227-229-260-2026-10-17"),
         packet_source("T-197", "evand-n155-explorer-2026-10-17"),
-        packet_source("T-199", "evand-n229-dilation-update-2026-10-18"),
         packet_source("T-218", "evand-n236-2026-10-16"),
         packet_source("T-219", "evand-n271-2026-10-17"),
         packet_source("T-220", "evand-n183-subgrid-2026-10-19"),
         packet_source("T-221", "evand-n308-2026-10-19"),
         packet_source("T-222", "evand-n154-sweep-2026-10-20"),
-        couzo_678_source(),
         packet_source("T-224", "evand-n270-sweep-2026-10-20"),
         packet_source("T-225", "evand-regularized-2026-10-20"),
     ]
