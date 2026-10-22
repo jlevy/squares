@@ -2033,6 +2033,43 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/n-103.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "PR-B of the 22 October backlog (205 beyond-horizon rows of #666, #670, #672 "
+            "and #675, review B of #718, the replies after #718 and #643's) against main "
+            "7359fa8b: rendered at link revision b8045210 into empty site directories from "
+            "this tree at cfeb44cc and from main's, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review, render_packing_methods and "
+            "render_n11_lower_bounds_explainer write 68 files, byte-identical between the "
+            "two. No PDF was printed; each prints from that HTML. Retain v0.4.15, v0.1.7, "
+            "v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
