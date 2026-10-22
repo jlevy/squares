@@ -10,13 +10,15 @@ async () => {
   }
   const items = [
     ...inner.querySelectorAll(
-      ":scope > a[data-page], .site-nav-links > li > a, :scope > .site-nav-mobile-toggle, :scope > .site-theme",
+      ":scope > a[data-page], .site-nav-links > li > a, .site-nav-links > li > .site-nav-disclosure, :scope > .site-nav-mobile-toggle, :scope > .site-theme",
     ),
   ].filter((item) => item.getClientRects().length > 0);
   return items.map((item) => {
     const box = item.getBoundingClientRect();
     const button = item.querySelector(".site-theme-button");
-    const reference = item.matches("a[data-page], .site-nav-mobile-toggle") ? item : button;
+    const reference = item.matches("a[data-page], .site-nav-disclosure, .site-nav-mobile-toggle")
+      ? item
+      : button;
     let baseline = null;
     let inkCenter = null;
     let capCenter = null;

@@ -5,6 +5,7 @@ from __future__ import annotations
 import html
 import re
 from html.parser import HTMLParser
+from pathlib import Path
 from typing import override
 
 from devtools.site_navigation import breadcrumb_data, breadcrumbs_html, navigation_links
@@ -27,12 +28,14 @@ def test_navigation_marks_ancestors_without_claiming_the_parent_page() -> None:
     links = [attrs for tag, attrs in tags if tag == "a"]
     assert [
         link["data-page"]
-        for link in links
-        if link.get("data-page") in {"overview", "news", "results", "learn", "about"}
+        for tag, link in tags
+        if tag in {"a", "button"}
+        and link.get("class") != "site-nav-fallback"
+        and link.get("data-page") in {"overview", "news", "results", "learn", "about"}
     ] == ["overview", "news", "results", "learn", "about"]
     assert any(
         link.get("data-page") == "results" and link.get("aria-current") == "true"
-        for link in links
+        for _, link in tags
     )
     assert any(
         link.get("href") == "../atlas.html" and link.get("aria-current") == "true"
@@ -54,6 +57,9 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
         "synopsis/problem.html": ["About", "Research Synopsis", "Current <title>"],
         "epistemics.html": ["Results", "Current <title>"],
         "papers/proof.html": ["Learn", "Current <title>"],
+        "papers.html": ["Learn", "Current <title>"],
+        "tutorials.html": ["Learn", "Current <title>"],
+        "downloads.html": ["Learn", "Current <title>"],
         "resources.html": ["Learn", "Current <title>"],
         "workbench/index.html": ["Learn", "Current <title>"],
     }
@@ -75,7 +81,10 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
         assert [item["name"] for item in items] == expected
         canonical = path.removesuffix("index.html") if path.endswith("/index.html") else path
         assert items[-1]["item"] == f"https://squaremath.org/{canonical}"
-    for path in ("index.html", "./", "news.html", "results.html", "papers.html", "about.html"):
+        if expected[0] == "Learn":
+            assert "item" not in items[0]
+            assert "<li><span>Learn</span></li>" in trail
+    for path in ("index.html", "./", "news.html", "results.html", "about.html"):
         assert not breadcrumbs_html(path, "Root page")
         assert breadcrumb_data(path, "Root page", "https://squaremath.org/") is None
 
@@ -88,7 +97,7 @@ def test_legacy_navigation_keys_keep_the_correct_group() -> None:
         "visualize": "learn",
         "github": "about",
     }.items():
-        links = [attrs for tag, attrs in Tags(navigation_links(key)).tags if tag == "a"]
+        links = [attrs for _, attrs in Tags(navigation_links(key)).tags]
         assert any(
             link.get("data-page") == group and link.get("aria-current") for link in links
         )
@@ -149,10 +158,16 @@ def test_disclosures_work_with_keyboard_outside_click_and_mobile_menu() -> None:
         browser = site_browser.launch(driver)
         page = browser.new_page(viewport={"width": 1280, "height": 800})
         page.set_content(_browser_document())
-        results = page.get_by_role("button", name="Results links")
-        learn = page.get_by_role("button", name="Learn links")
+        results = page.get_by_role("button", name="Results", exact=True)
+        learn = page.get_by_role("button", name="Learn", exact=True)
         results.focus()
         page.keyboard.press("Enter")
+        assert results.get_attribute("aria-expanded") == "true"
+        for fallback in page.locator(".site-nav-fallback").all():
+            assert not fallback.is_visible()
+        results.locator("svg").click()
+        assert results.get_attribute("aria-expanded") == "false"
+        results.click()
         assert results.get_attribute("aria-expanded") == "true"
         page.keyboard.press("Tab")
         site_browser.api().expect(
@@ -275,12 +290,12 @@ def test_open_navigation_protects_the_sticky_header_without_keyboard_focus() -> 
         )
         page.set_content(_browser_document())
         page.locator(".site-headroom").wait_for(state="attached")
-        page.get_by_role("button", name="Results links").click()
+        page.get_by_role("button", name="Results", exact=True).click()
         page.evaluate(blur)
         page.evaluate(scroll, 700)
         assert page.evaluate(layout)["headerTop"] >= 0
         assert page.get_by_role("link", name="All Results", exact=True).is_visible()
-        page.get_by_role("button", name="Results links").click()
+        page.get_by_role("button", name="Results", exact=True).click()
         page.evaluate(blur)
         page.evaluate(scroll, 900)
         assert "site-headroom-hidden" in (
@@ -327,3 +342,166 @@ def test_paper_formats_fit_between_breadcrumb_and_title_without_a_second_opening
             assert not page.locator(".site-breadcrumbs").is_visible()
             page.close()
         browser.close()
+
+
+def test_served_navigation_has_no_shift_when_its_controller_arrives_after_first_paint(
+    tmp_path: Path,
+) -> None:
+    from typing import Any, Literal  # noqa: PLC0415
+
+    from devtools import check_site_rendering, preview_site, render_overview  # noqa: PLC0415
+    from devtools.render_n11_lower_bounds_explainer import (  # noqa: PLC0415
+        kpress_css,
+        kpress_static,
+    )
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    template = (render_overview.TEMPLATES / "n11-lower-bounds-explainer-shell.html").read_text()
+    template = template.replace(
+        "<script>{{SITE_NAVIGATION}}</script>", '<script src="navigation.js"></script>'
+    )
+    values = {
+        "KPRESS_CSS": kpress_css(kpress_static()),
+        "PAPER_TYPE_CSS": render_overview.PAPER_TYPE_CSS.read_text(),
+        "SITE_NAV_CSS": render_overview.SITE_NAV_CSS.read_text(),
+        "PUBLICATION_CSS": (render_overview.TEMPLATES / "paper-publication.css").read_text(),
+        "SITE_EMBED": render_overview.EMBED_SCRIPT.read_text(),
+        "SITE_NAV": navigation_links("papers/n11-lower-bounds-explainer.html"),
+        "BODY_HTML": "<h1>Navigation layout</h1><p>Reading content.</p>"
+        '<div style="height:1800px"></div>',
+        "SITE_HEADROOM": render_overview.HEADROOM_SCRIPT.read_text(),
+    }
+    document = re.sub(r"\{\{([A-Z_]+)\}\}", lambda match: values.get(match[1], ""), template)
+    (tmp_path / "paper.html").write_text(document)
+    (tmp_path / "navigation.js").write_text(render_overview.NAVIGATION_SCRIPT.read_text())
+    scroll = probe(Path(__file__).with_name("probes"), "site_headroom/scroll")
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with site_browser.api().sync_playwright() as driver:
+            browser = site_browser.launch(driver)
+            pending: list[Any] = []
+
+            def hold_navigation(route: Any) -> None:
+                pending.append(route)
+
+            variants: tuple[tuple[int, Literal["light", "dark"]], ...] = (
+                (1280, "light"),
+                (1280, "dark"),
+                (390, "light"),
+                (390, "dark"),
+            )
+            for width, theme in variants:
+                context = browser.new_context(
+                    viewport={"width": width, "height": 900}, color_scheme=theme
+                )
+                check_site_rendering.install_observer(context)
+                page = context.new_page()
+                page.route("**/navigation.js", hold_navigation)
+                page.goto(
+                    f"http://127.0.0.1:{server.server_port}/paper.html", wait_until="commit"
+                )
+                heading = page.get_by_role("heading", name="Navigation layout")
+                heading.wait_for(state="visible")
+                check_site_rendering.wait_for_fonts(page)
+                page.evaluate(scroll, 0)
+                before = heading.bounding_box()
+                assert before is not None
+                assert len(pending) == 1
+                pending.pop().continue_()
+                page.wait_for_load_state("load")
+                page.evaluate(scroll, 0)
+                after = heading.bounding_box()
+                assert after is not None
+                assert abs(after["y"] - before["y"]) < 0.5
+                report = check_site_rendering.read_report(page)
+                assert report["cls"] <= check_site_rendering.CLS_LIMIT, report
+                context.close()
+            browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+def test_group_controls_include_label_and_chevron_and_start_with_substantive_content() -> None:
+    nav = navigation_links("tutorials.html")
+    controls = re.findall(r'<button[^>]+class="site-nav-disclosure"[^>]*>(.*?)</button>', nav)
+    assert [html.unescape(re.sub(r"<[^>]+>", "", content)) for content in controls] == [
+        "Results",
+        "Learn",
+        "About",
+    ]
+    assert all(any(tag == "svg" for tag, _ in Tags(content).tags) for content in controls)
+    for group, target in {
+        "results": "results.html",
+        "learn": "papers.html",
+        "about": "about.html",
+    }.items():
+        menu = re.search(rf'<ul id="site-nav-{group}"[^>]*>(.*?)</ul>', nav)
+        assert menu is not None
+        links = [attrs for tag, attrs in Tags(menu[1]).tags if tag == "a"]
+        assert links[0]["href"] == target
+        assert all("#" not in (link["href"] or "") for link in links)
+    assert any(
+        attrs.get("data-page") == "learn" and tag == "span" and "href" not in attrs
+        for tag, attrs in Tags(nav).tags
+    )
+    for label in ("The Squares Project", "Contributor Profiles"):
+        assert label in nav
+
+
+def test_legacy_catalogue_fragments_keep_queries_and_reach_substantive_pages(
+    tmp_path: Path,
+) -> None:
+    from devtools import preview_site  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    for source in ("papers.html", "about.html"):
+        (tmp_path / source).write_text(_browser_document())
+    for destination in (
+        "tutorials.html",
+        "downloads.html",
+        "visualize.html",
+        "resources.html",
+        "documentation.html",
+        "report.html",
+    ):
+        (tmp_path / destination).write_text(
+            '<h1>Complete destination</h1><section id="tutorial"></section>'
+            '<section id="pdfs"></section>'
+        )
+    variants = {
+        "papers.html#tutorial": "tutorials.html#tutorial",
+        "papers.html#pdfs": "downloads.html#pdfs",
+        "papers.html#visuals": "visualize.html",
+        "papers.html#resources": "resources.html",
+        "about.html#squares-project-documentation": "documentation.html",
+        "about.html#report-your-results": "report.html",
+        "about.html#contribute-your-results": "report.html",
+    }
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with site_browser.api().sync_playwright() as driver:
+            browser = site_browser.launch(driver)
+            page = browser.new_page()
+            base = f"http://127.0.0.1:{server.server_port}/"
+            for source, destination in variants.items():
+                source_path, fragment = source.split("#", 1)
+                target_path, _, target_fragment = destination.partition("#")
+                query = "?keep=1&filter=complete"
+                expected = (
+                    base
+                    + target_path
+                    + query
+                    + ("#" + target_fragment if target_fragment else "")
+                )
+                for loaded_source in (False, True):
+                    if loaded_source:
+                        page.goto(base + source_path + query)
+                    page.goto(base + source_path + query + "#" + fragment)
+                    page.wait_for_url(expected)
+                    assert page.get_by_role("heading", name="Complete destination").is_visible()
+            browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()

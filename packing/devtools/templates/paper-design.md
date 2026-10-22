@@ -873,12 +873,14 @@ contributor articles use their component sheets and the same text tokens.
   Its five entries are **Overview**, **News**, **Results**, **Learn**, and **About**, in
   that keyboard order, followed by the GitHub and theme utilities.
   Overview and News link directly to their pages.
-  Results, Learn, and About each have a normal landing-page link and a separate
-  disclosure button. The hierarchy and destination paths live in `site_navigation.py`;
-  `site-nav.html` supplies the shared shell.
+  Results, Learn, and About each use one button containing the label and chevron.
+  The whole button opens its list.
+  Its first entry leads to substantive content: All Results, Papers, or The Squares
+  Project. Learn has no category page or URL. The hierarchy and destination paths live in
+  `site_navigation.py`; `site-nav.html` supplies the shared shell.
 
-  The disclosure button uses the navigation face, line, and muted text, with a Lucide
-  chevron at `--site-icon-size`, aligned on the capital height.
+  Each unified trigger uses the navigation face, line, medium weight, and muted text,
+  with a Lucide chevron at `--site-icon-size`, aligned on the capital height.
   Labels retain Title Case.
   A button has a minimum 2rem square target; its open or hovered state takes
   `--site-wash` and accent text.
@@ -886,11 +888,11 @@ contributor articles use their component sheets and the same text tokens.
   The list uses the page background, document border, and shared shadow, with 0.3rem
   inner padding and links padded 0.45rem by 0.7rem. Links and buttons show a 2px
   document-link outline with 2px clearance on keyboard focus.
-  The current landing page is underlined; an ancestor uses the accent and shared sans
+  The current content link is underlined; an ancestor uses the accent and shared sans
   bold weight (680). A fragment destination does not also claim the current page.
 
   `overview/navigation.js` enhances ordinary navigation lists, without application-menu
-  roles. Enter or Space toggles the adjacent button; Tab follows ordinary document order.
+  roles. Enter or Space toggles the unified button; Tab follows ordinary document order.
   Escape closes the open list and restores its button.
   Outside activation closes the list without preventing the target action.
   Opening a group closes its sibling, and opening a theme or article popover dismisses
@@ -898,19 +900,24 @@ contributor articles use their component sheets and the same text tokens.
   Arrow Down or Up on a disclosure opens the list and focuses its first or last link.
 
   Below 48rem, a labelled Menu button exposes the same groups vertically.
-  Disclosures remain inline, have 2.5rem square targets, and reveal their children
-  beneath the parent. The open navigation scrolls within the available viewport height.
-  Without JavaScript, all links and their children remain exposed; enhancement buttons
-  are hidden. Print and embedded articles omit the global header.
+  The unified triggers fill their row, have at least 2.5rem height, and reveal their
+  children beneath the parent.
+  The open navigation scrolls within the available viewport height.
+  The shared head bootstrap reserves the collapsed navigation geometry before paint, so
+  the footer controller does not shift a paper when it initializes.
+  Without JavaScript, enhancement buttons are hidden and the content links remain
+  exposed. Print and embedded articles omit the global header.
 
   Nested pages carry a sans, muted breadcrumb trail above their title, at the shared
   note size and support leading, centered on the reading column, 1rem below the
   navigation and 2.5rem above the title.
   The trail replaces the article’s usual top gap.
-  Ancestors are links, separated visually by chevrons; the current title is plain text
-  with `aria-current="page"`. The five landing pages have no trail.
-  `site_navigation.py` supplies the same ancestry for the visible trail and structured
-  BreadcrumbList data.
+  Ancestors with a destination are links; Learn is plain container text with no URL.
+  Chevrons separate the items, and the current title is plain text with
+  `aria-current="page"`. Overview, News, the Results register, and the About project
+  page have no trail. Learn has no category page; its content pages carry the plain Learn
+  ancestor. `site_navigation.py` supplies the same ancestry for the visible trail and
+  structured BreadcrumbList data.
   Cases belong to Results → Atlas, profiles to About → Profiles, chapters to About →
   Research Synopsis, and verification guidance to Results.
   Overlays and print hide the visible trail.
@@ -2791,16 +2798,19 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   `preview_site.moved_links` hold the pages to that, and `check_published_site` asks the
   deployed site for each one.
 
-- **Learn page.** The Learn navigation entry leads to `papers.html`, headed “Learn”.
-  Its sections are Tutorial, Papers, PDFs, Visuals, and Resources, in that order.
-  Tutorial presents the basic introduction and advanced companion as two large reading
-  cards. Papers presents the three parts of the $n = 11$ series in reading order,
-  followed by the methods survey.
-  PDFs offers the two infographic posters.
-  Visuals links to the full Film page and Workbench.
-  Resources links to the complete Resources directory.
-  Reading cards come from `overview_sections.PAPERS`, each entry a document’s address,
-  label, title, description and card size.
+- **Learning catalogues.** Learn is a menu container with no page or URL. Papers
+  (`papers.html`) contains all four papers, with the three parts of the $n = 11$ series
+  in reading order followed by the methods survey.
+  Tutorials (`tutorials.html`) presents both the basic introduction and advanced
+  companion with their full introductions.
+  Downloads (`downloads.html`) contains the two infographic posters and every paper’s
+  PDF and source editions.
+  Film, Workbench, and Resources have their own substantive destinations.
+  Only Overview carries summary previews.
+  Published Papers fragments forward to the corresponding full catalogue or Film page,
+  retaining queries; without scripts, ordinary links at the old anchors reach the same
+  content. Reading cards come from `overview_sections.PAPERS`, each entry a document’s
+  address, label, title, description and card size.
   Each card links directly to its document in the same tab, with no popover or framed
   preview (`link_card`, `new_tab=False`; see Cards).
   Links cited by descriptions belong in the section introduction rather than inside a
@@ -2808,10 +2818,11 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   independent publication editions.
   The tutorials remain `tutorial.html` and `tutorial-advanced.html`, using the
   reader-document pipeline.
-  Learn is the active navigation ancestor on its papers, tutorials, Film, Workbench, and
-  Resources. The full film is served at `visualize.html`. Shared article overlays remain
-  available for marked record and contributor links elsewhere on the page; the reading
-  cards themselves navigate directly.
+  Learn is the active navigation ancestor on its papers, tutorials, downloads, Film,
+  Workbench, and Resources.
+  The full film is served at `visualize.html`. Shared article overlays remain available
+  for marked record and contributor links elsewhere on the page; the reading cards
+  themselves navigate directly.
   The addresses the papers had before 2026-10-01, `explainer.html` and
   `n11-optimality/t-060-explainer.html` with its directory, each serve a forwarder: a
   page of a few lines that sends a reader on with the query string and the fragment they

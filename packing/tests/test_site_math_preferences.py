@@ -16,13 +16,14 @@ from devtools import (
     check_site_rendering,
     overview_data,
     overview_sections,
+    prepare_n11_lower_bounds_explainer_math,
     preview_site,
     render_overview,
     site_assets,
     site_math,
     site_urls,
 )
-from sqpack.probes import applied, probe
+from sqpack.probes import probe
 from tests import site_browser
 
 if TYPE_CHECKING:
@@ -42,12 +43,8 @@ def browser() -> Iterator[Browser]:
 
 def test_prepared_math_ignores_empty_runtime_style_attribute_order(browser: Browser) -> None:
     """Font visibility cleanup leaves empty style at timing-dependent attribute positions."""
-    measure = applied(
-        probe(
-            render_overview.PACKING / "devtools/probes",
-            "prepare_n11_lower_bounds_explainer_math/measure_math",
-        )
-    )
+    # Exercise the exact production measurement, including its serialized clone cleanup.
+    measure = prepare_n11_lower_bounds_explainer_math._MEASURE_MATH  # noqa: SLF001
     data = 'data-kpress-math-source="n" data-kpress-math-display="inline"'
     styled = 'style="color: rgb(1, 2, 3); --publication-note: keep"'
     attributes = (data, f'style="" {data}', f'{data} style=""', f'style="  " {data}')

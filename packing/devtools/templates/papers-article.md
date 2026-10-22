@@ -1,21 +1,10 @@
 <div class="site-hero">
 
-<h1 id="explanations">Learn</h1>
+<h1 id="papers">Papers</h1>
 
 </div>
 
-Learn the problem, read its proofs, explore packings, or download the posters.
-
-<nav aria-label="Learning materials"><a href="#tutorial">Tutorials</a> · <a href="#papers">Papers</a> · <a href="#pdfs">Downloads</a> · <a href="#visuals">Film and Workbench</a> · <a href="resources.html">Resources</a></nav>
-
-## Tutorial
-
-Start with the basic ideas, definitions and examples in the first-principles tutorial.
-Continue with the advanced tutorial for the methods behind the search and proofs.
-
-{{TUTORIAL_CARDS}}
-
-## Papers
+<a id="explanations"></a>
 
 <div class="site-profile-prose">
 
@@ -37,25 +26,11 @@ published record packings.
 
 {{PAPER_CARDS}}
 
-## PDFs
-
-{{PDF_CARDS}}
-
-{{PDF_NOTE}}
-
-## Visuals
-
-Watch *The Ascent to n = 324*, which builds the Atlas one square at a time.
-In the Workbench, move squares by hand and explore the known packings.
-
-<p class="site-action-row site-more"><a class="site-action" href="visualize.html">Watch Film{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a></p>
-
-## Resources
-
-The resource directory brings together external catalogues, research repositories, and
-websites, with linked contributor bylines and their registered results.
-
-<p class="site-action-row site-more"><a class="site-action" href="resources.html">View All Resources{{ARROW_RIGHT}}</a></p>
+<noscript><p>Other learning collections:
+<a id="tutorial" href="tutorials.html#tutorial">Tutorials</a>,
+<a id="pdfs" href="downloads.html#pdfs">Downloads</a>,
+<a id="visuals" href="visualize.html">Film</a>, and
+<a id="resources" href="resources.html">Resources</a>.</p></noscript>
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

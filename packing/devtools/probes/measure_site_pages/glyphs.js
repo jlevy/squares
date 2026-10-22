@@ -124,8 +124,8 @@
   /** @type {[string, string, string?][]} */
   const roles = [
     ["nav name", ".site-name-text"],
-    ["nav ancestor", '.site-nav a[aria-current="true"]'],
-    ["nav link", ".site-nav a:not(.site-name)"],
+    ["nav ancestor", '.site-nav :is(a, button)[aria-current="true"]'],
+    ["nav link", ".site-nav a:not(.site-name), .site-nav-disclosure"],
     ["breadcrumb", ".site-breadcrumbs :is(a, span)"],
     ["compact chooser", '.site-tabs.site-chooser-small [role="tab"]'],
     ["section tab", '.site-tabs :is(a, [role="tab"])'],

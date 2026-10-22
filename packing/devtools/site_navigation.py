@@ -29,22 +29,21 @@ NAVIGATION = (
         "Results",
         "results.html",
         (
-            NavigationItem("all-results", "All Results", "results.html#all-results"),
+            NavigationItem("all-results", "All Results", "results.html"),
             NavigationItem("atlas", "Atlas", "atlas.html"),
-            NavigationItem("bounds", "Best Known Bounds", "atlas.html#best-known-results"),
             NavigationItem("verification", "Verification and Ratings", "epistemics.html"),
         ),
     ),
     NavigationItem(
         "learn",
         "Learn",
-        "papers.html",
+        "",
         (
-            NavigationItem("tutorials", "Tutorials", "papers.html#tutorial"),
-            NavigationItem("papers", "Papers", "papers.html#papers"),
+            NavigationItem("papers", "Papers", "papers.html"),
+            NavigationItem("tutorials", "Tutorials", "tutorials.html"),
             NavigationItem("film", "Film", "visualize.html"),
             NavigationItem("workbench", "Workbench", "workbench/"),
-            NavigationItem("downloads", "Downloads", "papers.html#pdfs"),
+            NavigationItem("downloads", "Downloads", "downloads.html"),
             NavigationItem("resources", "Resources", "resources.html"),
         ),
     ),
@@ -53,12 +52,10 @@ NAVIGATION = (
         "About",
         "about.html",
         (
-            NavigationItem("project", "The Project", "about.html#the-squares-project"),
-            NavigationItem("profiles", "People and Profiles", "profiles/"),
-            NavigationItem(
-                "documentation", "Documentation", "about.html#squares-project-documentation"
-            ),
-            NavigationItem("report", "Report a Result", "about.html#report-your-results"),
+            NavigationItem("project", "The Squares Project", "about.html"),
+            NavigationItem("profiles", "Contributor Profiles", "profiles/"),
+            NavigationItem("documentation", "Documentation", "documentation.html"),
+            NavigationItem("report", "Report a Result", "report.html"),
         ),
     ),
 )
@@ -82,12 +79,17 @@ _LEGACY_PATHS = {
 _PARENTS = {
     "atlas.html": ("results",),
     "epistemics.html": ("results",),
+    "papers.html": ("learn",),
+    "tutorials.html": ("learn",),
+    "downloads.html": ("learn",),
     "tutorial.html": ("learn",),
     "tutorial-advanced.html": ("learn",),
     "visualize.html": ("learn",),
     "workbench/": ("learn",),
     "resources.html": ("learn",),
     "profiles/": ("about",),
+    "documentation.html": ("about",),
+    "report.html": ("about",),
     "readme.html": ("about",),
     "synopsis.html": ("about",),
     "conventions.html": ("about",),
@@ -157,10 +159,22 @@ def navigation_links(current: str, root: str = "") -> str:
         contents = _link(item, path, ancestors, root)
         if item.children:
             target = f"site-nav-{item.key}"
-            contents += (
-                '<button type="button" class="site-nav-disclosure" '
-                f'aria-expanded="false" aria-controls="{target}" '
-                f'aria-label="{item.label} links">{_CHEVRON}</button>'
+            active = item.key in ancestors or bool(item.path and _path(item.path) == path)
+            current = ' aria-current="true"' if active else ""
+            fallback = (
+                contents.replace("<a ", '<a class="site-nav-fallback" ', 1).replace(
+                    'aria-current="page"', 'aria-current="true"'
+                )
+                if item.path
+                else (
+                    f'<span class="site-nav-fallback" data-page="{item.key}"{current}>'
+                    f"{item.label}</span>"
+                )
+            )
+            contents = (
+                fallback + '<button type="button" class="site-nav-disclosure" '
+                f'data-page="{item.key}" aria-expanded="false" aria-controls="{target}"'
+                f"{current}>{html.escape(item.label)}{_CHEVRON}</button>"
                 f'<ul id="{target}" class="site-nav-submenu">'
                 + "".join(
                     f"<li>{_link(child, path, ancestors, root)}</li>" for child in item.children
@@ -197,7 +211,11 @@ def breadcrumbs_html(path: str, title: str, root: str = "") -> str:
         + (
             f'<span aria-current="page">{html.escape(label)}</span>'
             if index == len(trail) - 1
-            else f'<a href="{html.escape(root + target, quote=True)}">{html.escape(label)}</a>'
+            else (
+                f'<a href="{html.escape(root + target, quote=True)}">{html.escape(label)}</a>'
+                if target
+                else f"<span>{html.escape(label)}</span>"
+            )
         )
         + "</li>"
         for index, (label, target) in enumerate(trail)
@@ -218,7 +236,7 @@ def breadcrumb_data(path: str, title: str, site_url: str) -> dict[str, Any] | No
                 "@type": "ListItem",
                 "position": index,
                 "name": label,
-                "item": urljoin(site_url.rstrip("/") + "/", target),
+                **({"item": urljoin(site_url.rstrip("/") + "/", target)} if target else {}),
             }
             for index, (label, target) in enumerate(trail, start=1)
         ],

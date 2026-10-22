@@ -280,6 +280,7 @@ function bootstrapped(search, pathname = "/atlas.html") {
       location: { search, pathname },
       document: {
         documentElement: {
+          dataset: {},
           /** @param {string} name @param {string} value */
           setAttribute(name, value) {
             attributes[name] = value;

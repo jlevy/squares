@@ -157,32 +157,34 @@ def _window(overview: overview_data.Overview) -> tuple[date, date]:
     return newest - timedelta(days=ADDED_DAYS), newest
 
 
-def test_the_overview_sits_above_the_table_and_leaves_it_whole(
+def test_the_register_precedes_the_rollups_and_stays_whole(
     results: str, overview: overview_data.Overview
 ) -> None:
-    """Two sections, each under its own heading, the seven days first, both before the
-    table and its first row; the table still carries one row for every register entry."""
+    """The complete register comes first, followed by recent arrivals and publications;
+    the table still carries one row for every register entry."""
     assert results.count('<div class="site-rollup site-added">') == 1
     assert results.count('<div class="site-rollup">') == 1
+    table = results.index("data-site-table")
     order = [
+        results.index('<h2 id="all-results">'),
+        table,
+        results.index("</table>", table),
         results.index('<h2 id="added-in-the-last-seven-days">'),
         results.index('<div class="site-rollup site-added">'),
         results.index('<h2 id="earlier-results-by-week-published">'),
         results.index('<div class="site-rollup">'),
-        results.index('<h2 id="all-results">'),
-        results.index("data-site-table"),
     ]
     assert order == sorted(order)
     headings = re.findall(r"<h([1-6])\b[^>]*>(.*?)</h\1>", results, re.DOTALL)
     assert [(level, re.sub(r"<[^>]+>", "", body)) for level, body in headings] == [
         ("1", "Results"),
+        ("2", "Browse Results"),
         ("2", "Added in the Last Seven Days"),
         ("2", "Earlier Publications"),
         ("2", "Verification Ladders"),
         ("2", "Evidence and Exactness"),
         ("2", "Result Types and Credits"),
         ("2", "Status and Supersession"),
-        ("2", "Browse Results"),
     ]
     assert not any(re.search(r"<a\b[^>]*\bhref=", body) for _, body in headings)
     for anchor in ("every-result", "results-and-credits"):

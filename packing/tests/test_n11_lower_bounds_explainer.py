@@ -147,9 +147,9 @@ def test_the_bar_marks_papers_current_on_the_explainer(page: str) -> None:
     root = paper_structure.parse(page)
     trail = root.find("nav", "site-breadcrumbs")
     assert trail is not None
-    assert [(link.text(), link.attrs.get("href")) for link in trail.find_all("a")] == [
-        ("Learn", "../papers.html")
-    ]
+    assert trail.find_all("a") == []
+    assert trail.find_all("span")[0].text() == "Learn"
+    assert trail.find_all("span")[0].attrs.get("href") is None
     assert [
         (node.tag, node.text())
         for node in trail.walk()

@@ -12,8 +12,8 @@ from typing import Any
 import pytest
 from kpress.format import markdown
 
+from devtools import paper_structure, render_overview, site_assets
 from devtools import render_frontier_page as frontier
-from devtools import render_overview, site_assets
 from devtools import render_research_tables as tables
 from devtools.render_overview import assert_fetches_only_assets
 from sqpack.assurance import bounds_agree_at_declared_precision
@@ -567,7 +567,13 @@ def test_the_page_carries_the_table_script_and_its_controls(page: str, served: s
     assert page.count(site_assets.script_tag(table, "atlas.html")) == 1
     assert frontier.TABLE_SCRIPT.read_text(encoding="utf-8") in served
     assert 'class="site-table-tools" data-table="frontier" hidden' in page
-    assert 'aria-current="page" href="atlas.html"' in page
+    navigation = paper_structure.parse(page).find("nav", "site-nav")
+    assert navigation is not None
+    assert [
+        (link.text(), link.attrs.get("href"))
+        for link in navigation.find_all("a")
+        if link.attrs.get("aria-current") == "page"
+    ] == [("Atlas", "atlas.html")]
     assert 'data-page="frontier"' not in page
 
 

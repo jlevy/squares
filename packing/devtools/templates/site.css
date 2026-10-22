@@ -759,6 +759,11 @@ body {
   text-decoration: none;
 }
 .site-popover-controls svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   block-size: 1.25rem;
   inline-size: 1.25rem;
 }

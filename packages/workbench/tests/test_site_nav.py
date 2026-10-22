@@ -49,11 +49,11 @@ def test_the_page_carries_the_shared_nav_with_learn_as_its_parent(page: str) -> 
     assert nav.attrs.get("aria-label")
     active = [
         (link.text(), link.attrs.get("href"), link.attrs.get("aria-current"))
-        for link in nav.find_all("a")
-        if link.attrs.get("aria-current")
+        for link in nav.walk()
+        if link.tag in {"a", "button"} and link.attrs.get("aria-current")
     ]
     assert active == [
-        ("Learn", "../papers.html", "true"),
+        ("Learn", None, "true"),
         ("Workbench", "../workbench/", "page"),
     ]
 
@@ -88,14 +88,16 @@ def test_the_bar_has_the_shared_five_destinations_and_direct_learning_links(page
     menu = nav.find("ul", "site-nav-links")
     assert menu is not None
     entries = [
-        child.find("a") for child in menu.children if isinstance(child, paper_structure.Node)
+        child.find("button") or child.find("a")
+        for child in menu.children
+        if isinstance(child, paper_structure.Node)
     ]
     assert [(link.text(), link.attrs.get("href")) for link in entries if link] == [
         ("Overview", ".././"),
         ("News", "../news.html"),
-        ("Results", "../results.html"),
-        ("Learn", "../papers.html"),
-        ("About", "../about.html"),
+        ("Results", None),
+        ("Learn", None),
+        ("About", None),
     ]
     links = {
         link.attrs.get("data-page"): link
@@ -195,9 +197,9 @@ def test_breadcrumbs_precede_the_application_and_match_its_learning_parent(page:
     root = paper_structure.parse(page)
     trail = root.find("nav", "site-breadcrumbs")
     assert trail is not None
-    assert [(link.text(), link.attrs.get("href")) for link in trail.find_all("a")] == [
-        ("Learn", "../papers.html")
-    ]
+    assert trail.find_all("a") == []
+    assert trail.find_all("span")[0].text() == "Learn"
+    assert trail.find_all("span")[0].attrs.get("href") is None
     current = [node for node in trail.walk() if node.attrs.get("aria-current") == "page"]
     assert len(current) == 1
     assert current[0].tag == "span"

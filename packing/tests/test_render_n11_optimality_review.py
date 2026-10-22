@@ -203,17 +203,17 @@ def test_the_page_carries_the_sites_bar_with_papers_current(rendered: tuple[str,
     assert len(navs) == 1
     assert navs[0].attrs.get("aria-label")
     current = [
-        link for link in navs[0].find_all("a") if link.attrs.get("aria-current") == "true"
+        link for link in navs[0].find_all("button") if link.attrs.get("aria-current") == "true"
     ]
     assert [(link.attrs.get("data-page"), link.attrs.get("href")) for link in current] == [
-        ("learn", "../papers.html")
+        ("learn", None)
     ]
     assert current[0].text() == "Learn"
     trail = root.find("nav", "site-breadcrumbs")
     assert trail is not None
-    assert [(link.text(), link.attrs.get("href")) for link in trail.find_all("a")] == [
-        ("Learn", "../papers.html")
-    ]
+    assert trail.find_all("a") == []
+    assert trail.find_all("span")[0].text() == "Learn"
+    assert trail.find_all("span")[0].attrs.get("href") is None
     assert [
         (node.tag, node.text())
         for node in trail.walk()

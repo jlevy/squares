@@ -8,7 +8,7 @@ the corresponding filters.
 
 {{RESOURCE_CARDS}}
 
-<p class="site-action-row site-more"><a class="site-action" href="papers.html">View All Learning Materials{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="papers.html">View All Papers{{ARROW_RIGHT}}</a></p>
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

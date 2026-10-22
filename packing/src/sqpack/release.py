@@ -7088,6 +7088,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
         ),
         paths=(
+            "packing/devtools/overview/embed.js",
             "packing/devtools/overview/headroom.js",
             "packing/devtools/overview/navigation.js",
             "packing/devtools/overview_sections.py",
@@ -7144,6 +7145,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "whitespace-only style attributes from cloned math hosts after font "
             "readiness; meaningful styles and MathML stay intact. This removes scheduling "
             "residue from serialization without changing mathematical content or layout. "
+            "The existing prepaint bootstrap now reserves the collapsed navigation "
+            "geometry before first paint, without modifying paper content or print layout. "
             "No byte-identical HTML, Markdown or PDF rebuild against the baseline is "
             "claimed."
         ),

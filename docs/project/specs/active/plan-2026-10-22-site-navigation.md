@@ -30,8 +30,10 @@ About groups the project, people, contribution guidance, and documentation.
 Use a small dropdown for each group, a consistent parent for each nested page, and short
 homepage previews with buttons into the hierarchy.
 Keep all existing public page addresses.
-The confirmed label **Learn** replaces **Explanations** in navigation, while its landing
-page stays at `papers.html`.
+The confirmed label **Learn** replaces **Explanations** in navigation.
+Learn is a menu container without a landing page; `papers.html` is the complete Papers
+catalogue, alongside separate Tutorials, Downloads, Film, Workbench, and Resources
+pages.
 
 ## Goals
 
@@ -50,8 +52,8 @@ page stays at `papers.html`.
 
 This plan does not change scientific claims, verification levels, attribution, result
 ranking, workbench behavior, hosting, or domain configuration.
-It does not implement navigation, replace the static build, introduce a site framework,
-or create a global search service.
+The implementation retains the static build and introduces neither a site framework nor
+a global search service.
 Page-weight work already tracked as `think-v1qe` remains a separate implementation
 concern; reorganizing navigation does not by itself reduce table bytes.
 
@@ -103,10 +105,11 @@ asset.
 The [complete route disposition index](plan-2026-10-22-site-navigation-routes.csv)
 lists all 1,149 baseline entries with their current kind, canonical address, proposed
 parent, and disposition.
-Its `inventory_status` column separates those `existing` rows from one additional
-`proposed` row for `resources.html`; that new page is excluded from all baseline counts
-below. Counts describe this baseline; implementation must reconcile later registrations
-before changing navigation.
+Its `inventory_status` column separates those `existing` rows from five `added` rows for
+Resources, Tutorials, Downloads, Documentation, and Report a Result.
+Those pages are excluded from all baseline counts below.
+Counts describe this baseline; implementation must reconcile later registrations before
+changing navigation.
 
 | Registered kind or family | Count | Meaning for navigation |
 | --- | ---: | --- |
@@ -253,50 +256,50 @@ An external project card is a citation or resource link, not a local subpage.
 
 ### Proposed hierarchy
 
-A top-level label is a normal link to its landing page, with a separate disclosure
-button for its menu.
-Overview and News are direct links; Results, Learn, and About have dropdowns.
-Keep a single dropdown level; the collection pages handle individual cases, people,
-papers, and chapters.
+Overview and News are direct links.
+Results, Learn, and About are menu containers: each label and chevron form one button
+that opens its dropdown.
+The first menu item leads to substantive content, rather than a category preview page.
+Learn has no separate landing page or URL. Keep one dropdown level; collection pages
+handle individual cases, people, papers, and chapters.
 
 ```text
 Site name → / [Home; selected previews and actions]
 ├── Overview → / [direct link; same homepage]
 ├── News → news.html [direct link; announcements and changelog]
-├── Results → results.html [hub and complete result register]
-│   ├── All Results → results.html#all-results [menu; section]
+├── Results [menu container]
+│   ├── All Results → results.html [menu; complete result register]
 │   │   └── result/t-NNN.html [229 record pages]
 │   ├── Atlas → atlas.html [menu; page]
 │   │   └── cases/N.html [324 case pages]
-│   ├── Best Known Bounds → atlas.html#best-known-results [menu; section]
-│   │   └── Frontier Survey explanation and the same case pages
 │   └── Verification and Ratings → epistemics.html [menu; page]
-├── Learn → papers.html [hub; current Explanations page]
-│   ├── Tutorials → papers.html#tutorial [menu; section]
+├── Learn [menu container; no category page]
+│   ├── Papers → papers.html [menu; complete paper catalogue]
+│   │   └── Four paper HTML pages, each with its PDF and Markdown editions
+│   ├── Tutorials → tutorials.html [menu; complete tutorial catalogue]
 │   │   ├── tutorial.html
 │   │   └── tutorial-advanced.html
-│   ├── Papers → papers.html#papers [menu; section]
-│   │   └── Four paper HTML pages, each with its PDF and Markdown editions
 │   ├── Film → visualize.html [menu; page]
 │   ├── Workbench → workbench/ [menu; page]
-│   ├── Downloads → papers.html#pdfs [menu; section]
-│   └── Resources → resources.html [menu; proposed directory page]
-└── About → about.html [hub; no breadcrumb on this page]
-    ├── The Project → about.html#the-squares-project [menu; section]
-    ├── People and Profiles → profiles/ [menu; directory]
+│   ├── Downloads → downloads.html [menu; complete download catalogue]
+│   └── Resources → resources.html [menu; complete directory]
+└── About [menu container]
+    ├── The Squares Project → about.html [menu; project page]
+    ├── Contributor Profiles → profiles/ [menu; directory]
     │   └── 75 profile pages
-    ├── Documentation → about.html#squares-project-documentation [menu; section]
+    ├── Documentation → documentation.html [menu; full documentation directory]
     │   ├── readme.html
     │   ├── synopsis.html → 18 chapter pages
     │   ├── conventions.html
     │   └── development.html
-    └── Report a Result → about.html#report-your-results [menu; section]
+    └── Report a Result → report.html [menu; contribution instructions]
 GitHub and color theme [utilities]
 ```
 
-Results has four dropdown entries, Learn six, and About four.
+Results has three dropdown entries, Learn six, and About four.
 The menus omit individual records and the 18 Synopsis chapters.
-Readers can open the top-level landing page for introductions and all collection links.
+Each menu destination has substantive content.
+Only Overview carries summary previews.
 Epistemics remains cross-linked from Documentation, tutorials, and result explanations;
 its single navigation parent becomes Results because readers use it to interpret
 evidence labels.
@@ -329,21 +332,25 @@ forwards to Atlas, and historical Atlas links must continue to reach the corresp
 rows. The present plan does not silently turn that forwarder into a different
 destination.
 
-**Learn.** Reuse `papers.html` as a concise learning index.
-Its existing tutorial and paper cards remain the complete catalogues.
-Keep `#visuals` as a film/workbench summary with direct links; show the full player at
-`visualize.html`. Keep the existing PDF section, with poster downloads and links to
-paper editions, under the menu label Downloads.
-Retain both Film and Workbench as direct menu choices so the interactive tool is visible
-without introducing an otherwise empty Tools category.
+**Learn.** Use the menu as a container for complete content pages, with Papers first.
+`papers.html` contains the four research papers and their series narrative;
+`tutorials.html` contains both complete tutorial cards and reading guidance;
+`downloads.html` contains both Atlas poster PDFs and all paper PDF and Markdown
+editions. Film, Workbench, and Resources retain their substantive pages.
+No Learn page or visible single-button subsection duplicates these destinations.
+Legacy `papers.html#tutorial`, `#pdfs`, `#visuals`, and `#resources` links forward to
+the corresponding page, preserving queries.
+Without JavaScript, inline compatibility links at those fragments reach the same
+destinations. `#papers` and `#explanations` remain on the Papers catalogue.
 
-**About.** Keep the project narrative, the full contribution instructions, documentation
-cards, and the approved short statement with a View All Profiles button.
-Within the Profiles sections on About and Home, show the short statement and button
-without names or a table.
-Preserve full-name attributions in the surrounding project narrative.
-About may cross-link to the Resources directory under Learn.
-Profile Resources fields continue to link a person’s own sources.
+**About.** Keep the project narrative at `about.html`, titled The Squares Project, with
+its full-name attributions and the approved short Profiles statement and View All
+Profiles action. The complete documentation catalogue lives at `documentation.html`; the
+complete contribution instructions and submission link live at `report.html`. Legacy
+About documentation and contribution fragments forward to those pages, with inline
+no-script compatibility links.
+About may cross-link Resources under Learn; profile Resources fields continue to link a
+person’s own sources.
 
 **Resources.** Add `resources.html` as the complete directory under Learn, using the
 existing external-resource data and card renderer.
@@ -372,10 +379,10 @@ catalogue content on the page.
 | News cards | Selected recent entries and View All News button | `news.html` |
 | Recent Major Results | Bounded selected rows and View All Results button | `results.html#all-results` |
 | Profiles section | Short statement and View All Profiles button; no names or table | `profiles/` |
-| Report Your Results | One invitation and Report a Result button | `about.html#report-your-results` |
-| All tutorial/paper cards | Selected starting points and View All Learning Materials button | `papers.html` |
-| Poster and inline film | One media preview with Watch Film, Workbench, and Downloads actions | `visualize.html`, `workbench/`, `papers.html#pdfs` |
-| Complete documentation cards | One short project/developer introduction and Documentation button | `about.html#squares-project-documentation` |
+| Report Your Results | One invitation and Report a Result button | `report.html` |
+| All tutorial/paper cards | Selected starting points with View All Tutorials and View All Papers actions | `tutorials.html`, `papers.html` |
+| Poster and inline film | One media preview with Watch Film, Workbench, and Downloads actions | `visualize.html`, `workbench/`, `downloads.html` |
+| Complete documentation cards | One short project/developer introduction and Documentation button | `documentation.html` |
 | Full external resource cards | Short summary and View All Resources button | `resources.html` |
 
 Use shared records and existing card renderers for previews; do not maintain a second
@@ -388,8 +395,9 @@ result significance or contributor status.
 ### Route disposition and page parents
 
 All 666 content pages keep their addresses.
-The proposed new page is `resources.html`, under Learn.
-The route CSV marks it as `proposed`, separately from the 1,149 existing registrations.
+Five new pages are registered: `resources.html`, `tutorials.html`, and `downloads.html`
+under Learn, plus `documentation.html` and `report.html` under About.
+The route CSV marks them as `added`, separately from the 1,149 baseline registrations.
 The CSV expands the generated families and technical registrations; this table specifies
 the reader-facing parent for every named page or family.
 
@@ -403,7 +411,9 @@ the reader-facing parent for every named page or family.
 | `atlas.html#best-known-results` | Best Known Bounds | Section of Atlas; direct Results menu entry |
 | `cases/N.html` (324) | Case n | Results → Atlas; reached from either Atlas or bounds table |
 | `epistemics.html` | Verification and Ratings | Results; cross-link from documentation without changing parent |
-| `papers.html` | Learn | Top-level learning hub at its current address |
+| `papers.html` | Papers | Learn; complete paper catalogue with retained address and legacy fragments |
+| `tutorials.html` | Tutorials | Learn; complete tutorial catalogue |
+| `downloads.html` | Downloads | Learn; complete poster and paper-edition downloads |
 | `tutorial.html` | Tutorial | Learn; retain first-principles text |
 | `tutorial-advanced.html` | Advanced Tutorial | Learn; retain advanced text and links |
 | `papers/n11-lower-bounds-explainer.html` | Part I: New Lower Bounds | Learn; keep full title on the paper |
@@ -412,9 +422,11 @@ the reader-facing parent for every named page or family.
 | `papers/square-packing-methods-survey.html` | How Record Square Packings Are Found | Learn; retain paper and editions |
 | `visualize.html` | Film | Learn; full player and release links |
 | `workbench/` (`workbench/index.html`) | Workbench | Learn; retain application states and shareable URLs |
-| `resources.html` (proposed) | Resources | Learn; full resource directory moved from the homepage |
+| `resources.html` | Resources | Learn; complete resource directory |
 | `news.html` | News | Top-level page; preserve `#changelog` and entry anchors |
-| `about.html` | About | Top-level hub; preserve all existing sections and aliases |
+| `about.html` | The Squares Project | About; project narrative with preserved compatibility fragments |
+| `documentation.html` | Documentation | About; complete reader and developer document catalogue |
+| `report.html` | Report a Result | About; complete contribution instructions |
 | `profiles/` (`profiles/index.html`) | People and Profiles | About; full directory |
 | `profiles/<person>.html` (75) | Person’s evidenced name | About → Profiles; retain all reviewed identity and credit content |
 | `readme.html` | Project Guide | About; keep README content and source link |
@@ -433,8 +445,9 @@ remain chapters, rather than competing with their parent in a dropdown.
 
 ### Breadcrumbs and active navigation
 
-Top-level Overview (Home), News, Results, Learn, and About pages need no visible
-breadcrumb. In particular, do not add an About breadcrumb above the About page’s title.
+Overview (Home), News, the Results register, and the About project page need no visible
+breadcrumb. Learn is a menu container with no page or URL. Its content pages show Learn
+as plain ancestor text, followed by the current page title.
 Nested pages show their parent trail above the heading, consistently across kpress
 articles, static records, profiles, and the workbench shell.
 
@@ -444,11 +457,11 @@ articles, static records, profiles, and the workbench shell.
 | Case 11 | Results → Atlas → n = 11 |
 | Result T-060 | Results → T-060 |
 | Epistemics | Results → Verification and Ratings |
-| Tutorial, Advanced Tutorial, or a paper | Learn → Current title |
+| Papers, Tutorials, Downloads, Tutorial, Advanced Tutorial, or a paper | Learn → Current title |
 | Film, Workbench, or Resources | Learn → Film / Workbench / Resources, as appropriate |
 | Profile directory | About → Profiles |
 | Person profile | About → Profiles → Person’s name |
-| Project Guide, Conventions, or Development | About → Current title |
+| Documentation, Report a Result, Project Guide, Conventions, or Development | About → Current title |
 | Research Synopsis | About → Research Synopsis |
 | Synopsis chapter | About → Research Synopsis → Chapter title |
 
@@ -456,8 +469,9 @@ Keep Home available through the site name instead of repeating it in every visib
 trail. Generate visible ancestry and structured `BreadcrumbList` data from the same
 parent definitions; if the structured form includes Home, its remaining ancestors must
 match the visible trail.
-The final item is text with `aria-current="page"`; ancestor items are links.
-An Atlas table section does not create a second breadcrumb trail for the same case.
+The final item is text with `aria-current="page"`. Ancestors with a substantive
+destination are links; Learn is plain container text with no invented URL. An Atlas
+table section does not create a second breadcrumb trail for the same case.
 A result opened from a profile still belongs to Results.
 Browser Back and contextual related links handle the path the reader actually took.
 
@@ -477,9 +491,11 @@ second global header inside the overlay.
 ### Dropdown and small-screen behavior
 
 Use semantic navigation lists and disclosure buttons.
-The top-level text links keep ordinary browser behavior; a distinct adjacent button
-opens the list and exposes `aria-expanded` and `aria-controls`. Readers can activate
-either with a keyboard or a touchscreen.
+Overview and News keep ordinary link behavior.
+Each grouped label and its chevron are one button exposing `aria-expanded` and
+`aria-controls`; pressing either part opens the same list.
+Its first link leads to substantive content.
+All controls work with a keyboard or touchscreen.
 Do not require hover, and do not assign application-menu roles to ordinary site links.
 
 Tab reaches links and buttons in document order.
@@ -495,7 +511,7 @@ It must fit without horizontal scrolling, work with enlarged text, and keep touc
 targets separated.
 Do not add flyout submenus or require the reader to dismiss a modal to
 follow a link. Without JavaScript, expose the navigation links or provide a native
-disclosure fallback; neither primary navigation nor the landing-page contents may become
+disclosure fallback; neither primary navigation nor the content pages may become
 unreachable.
 
 An open disclosure or keyboard focus within the header keeps the scroll-aware header
@@ -637,12 +653,14 @@ journeys.
 
 The `think-je3b` slice reorganized Results with the register table immediately after its
 introduction and local links; added Atlas section links; kept complete tutorial, paper,
-and download catalogues on Learn; and moved the ranked shared resource directory to
-`resources.html`. Overview now uses selected learning cards and visible summaries at its
-retained collection fragments.
+and download catalogues on their own pages under Learn; and moved the ranked shared
+resource directory to `resources.html`. Overview now uses selected learning cards and
+visible summaries at its retained collection fragments.
 The four standalone paper shells and Workbench use the shared breadcrumbs and navigation
 program, with both declared as render inputs.
-The Learn heading retains `papers.html#explanations`.
+The Papers catalogue retains `papers.html#explanations`. The `think-izo6` follow-up
+separates Tutorials, Downloads, Documentation, and Report a Result into substantive
+pages, without a Learn category page or visible stub sections.
 
 Focused checks passed on 2026-10-22: six section-helper tests, 21 landing/resource
 tests, 11 Workbench navigation/input tests, and four standalone-paper tests.

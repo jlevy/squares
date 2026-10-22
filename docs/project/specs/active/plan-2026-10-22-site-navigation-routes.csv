@@ -1,6 +1,6 @@
 inventory_status,registry_path,canonical_url,kind,status,is_content_page,family,current_nav,proposed_nav,breadcrumb_parent,disposition,forwarding_target,pattern
 existing,404.html,https://squaremath.org/404.html,site-file,live,no,site-infrastructure,,,,retain site artifact; exclude from page navigation,,
-existing,about.html,https://squaremath.org/about.html,page,live,yes,about,about,About,,retain address and anchors; may cross-link Resources under Learn; no root breadcrumb,,
+existing,about.html,https://squaremath.org/about.html,page,live,yes,about,about,About,,project narrative and approved Profiles invitation; forward documentation/contribution fragments to dedicated pages,,
 existing,all-results.html,https://squaremath.org/results.html,forwarder,forwarded,no,compatibility-forwarder,,,,retain forwarding target and supported query/fragment behavior; exclude from navigation,results.html,
 existing,apple-touch-icon.png,https://squaremath.org/apple-touch-icon.png,asset-file,live,no,asset-file,,,,retain asset address or pattern; exclude from page navigation,,
 existing,ascent-n1-100-poster.png,https://squaremath.org/ascent-n1-100-poster.png,asset-file,live,no,asset-file,,,,retain asset address or pattern; exclude from page navigation,,
@@ -796,7 +796,7 @@ existing,n11-optimality/t-060-explainer.html,https://squaremath.org/papers/n11-o
 existing,n11-optimality/t-060-explainer.md,https://squaremath.org/papers/n11-optimality-review.md,copy,live,no,compatibility-copy,,,,retain published copy and canonical edition; exclude from navigation,papers/n11-optimality-review.md,
 existing,n11-optimality/t-060-explainer.pdf,https://squaremath.org/papers/n11-optimality-review.pdf,copy,live,no,compatibility-copy,,,,retain published copy and canonical edition; exclude from navigation,papers/n11-optimality-review.pdf,
 existing,news.html,https://squaremath.org/news.html,page,live,yes,news,news,News,,retain content address; use proposed navigation parent,,
-existing,papers.html,https://squaremath.org/papers.html,page,live,yes,learning-index,explanations,Learn,,retain address and anchors; label Learn; full film remains at visualize.html,,
+existing,papers.html,https://squaremath.org/papers.html,page,live,yes,learning-index,explanations,Learn,,complete Papers catalogue; retain papers/explanations fragments; forward tutorial/pdf/visual/resource fragments to dedicated pages,,
 existing,papers/n11-lower-bounds-explainer.html,https://squaremath.org/papers/n11-lower-bounds-explainer.html,paper-file,live,yes,paper,explanations,Learn,Learn,retain content address; use proposed navigation parent,,
 existing,papers/n11-lower-bounds-explainer.md,https://squaremath.org/papers/n11-lower-bounds-explainer.md,paper-file,live,no,paper-download,,,,retain download edition; link from owning paper and Learn downloads,,
 existing,papers/n11-lower-bounds-explainer.pdf,https://squaremath.org/papers/n11-lower-bounds-explainer.pdf,paper-file,live,no,paper-download,,,,retain download edition; link from owning paper and Learn downloads,,
@@ -1148,4 +1148,8 @@ existing,visualize.html,https://squaremath.org/visualize.html,page,live,yes,film
 existing,"workbench/assets/{css,js,fonts}/*.{hash}.{ext}",,asset-file,live,no,asset-pattern,,,,retain asset address or pattern; exclude from page navigation,,workbench/assets/(?:css/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.css|js/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.js|fonts/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.woff2)
 existing,workbench/data/corpus.{hash}.json,,asset-file,live,no,asset-pattern,,,,retain asset address or pattern; exclude from page navigation,,workbench/data/corpus\.[0-9a-f]{16}\.json
 existing,workbench/index.html,https://squaremath.org/workbench/,page,live,yes,workbench,explanations,Learn,Learn,retain content address; use proposed navigation parent,,
-proposed,resources.html,https://squaremath.org/resources.html,proposed-page,proposed,yes,resource-directory,,Learn,Learn,proposed new directory; move complete resource cards from Overview; retain old homepage resource anchors as summary and View All Resources link,,
+added,resources.html,https://squaremath.org/resources.html,page,live,yes,resource-directory,,Learn,Learn,complete ranked Resources directory under Learn; old homepage fragments retain summaries,,
+added,tutorials.html,https://squaremath.org/tutorials.html,page,live,yes,tutorial-directory,,Learn,Learn,complete substantive collection or instructions; preserve prior fragment links,,
+added,downloads.html,https://squaremath.org/downloads.html,page,live,yes,download-directory,,Learn,Learn,complete substantive collection or instructions; preserve prior fragment links,,
+added,documentation.html,https://squaremath.org/documentation.html,page,live,yes,documentation-directory,,About,About,complete substantive collection or instructions; preserve prior fragment links,,
+added,report.html,https://squaremath.org/report.html,page,live,yes,contribution-instructions,,About,About,complete substantive collection or instructions; preserve prior fragment links,,

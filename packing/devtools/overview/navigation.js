@@ -1,9 +1,40 @@
 // Ordinary site links keep their browser behavior. Buttons only disclose their lists.
 (() => {
+  // Published Papers fragments keep their query while leading to full catalogues.
+  const aliases = location.pathname.endsWith("/papers.html")
+    ? new Map([
+        ["#tutorial", "tutorials.html#tutorial"],
+        ["#pdfs", "downloads.html#pdfs"],
+        ["#visuals", "visualize.html"],
+        ["#resources", "resources.html"],
+      ])
+    : location.pathname.endsWith("/about.html")
+      ? new Map([
+          ["#squares-project-documentation", "documentation.html"],
+          ["#report-your-results", "report.html"],
+          ["#contribute-your-results", "report.html"],
+        ])
+      : null;
+  const forwardLegacyFragment = () => {
+    const moved = aliases?.get(location.hash);
+    if (!moved) {
+      return false;
+    }
+    const destination = new URL(moved, location.href);
+    destination.search = location.search;
+    location.replace(destination.href);
+    return true;
+  };
+  if (forwardLegacyFragment()) {
+    return;
+  }
+  window.addEventListener("hashchange", forwardLegacyFragment);
   const nav = document.querySelector(".site-nav");
   if (!(nav instanceof HTMLElement)) {
     return;
   }
+  // Minimal embedded fixtures may omit the shared head bootstrap.
+  document.documentElement.dataset.siteNavEnhanced = "true";
   const mobile = nav.querySelector(".site-nav-mobile-toggle");
   if (!(mobile instanceof HTMLButtonElement)) {
     return;

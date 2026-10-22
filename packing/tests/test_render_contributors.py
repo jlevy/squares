@@ -246,7 +246,7 @@ def test_credits_link_cases_and_results_preserving_roles_without_duplicates() ->
     )
     assert ">Full Public Name</a>" in directory
     assert 'class="site-credit-tally"' in directory
-    assert '>1 credit</a> <span class="site-tally-levels">(at S' in directory
+    assert '><strong>1</strong> credit</a> <span class="site-tally-levels">(at S' in directory
     assert "<details open>" not in rendered
     long_credits = tuple(
         replace(

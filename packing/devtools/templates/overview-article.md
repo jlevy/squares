@@ -43,16 +43,16 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 Have a new packing, bound, or proof to share?
 Read the contribution instructions and send the evidence behind your result.
 
-<p class="site-action-row site-more"><a class="site-action" href="about.html#report-your-results">Report a Result{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="report.html">Report a Result{{ARROW_RIGHT}}</a></p>
 
 <h2 id="papers" class="site-title">Learn<a id="learn-more"></a></h2>
 
 Start with the tutorials, then follow the lower-bound methods for eleven squares.
-Learn has the complete paper catalogue and further ways to explore the problem.
+The tutorial and paper catalogues contain the complete reading collections.
 
 {{PAPER_CARDS}}
 
-<p class="site-action-row site-more"><a class="site-action" href="papers.html">View All Learning Materials{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="tutorials.html">View All Tutorials{{ARROW_RIGHT}}</a><a class="site-action" href="papers.html">View All Papers{{ARROW_RIGHT}}</a></p>
 
 <h1 id="visuals" class="site-title">Visuals<a id="pdfs"></a><a id="video"></a><a id="pdfs-and-videos"></a></h1>
 
@@ -63,14 +63,14 @@ Learn has the complete paper catalogue and further ways to explore the problem.
 Watch the Atlas grow one square at a time in the film, or try a packing yourself in the
 Workbench.
 
-<p class="site-action-row site-more"><a class="site-action" href="visualize.html">Watch Film{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a><a class="site-action" href="papers.html#pdfs">View All Downloads{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="visualize.html">Watch Film{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a><a class="site-action" href="downloads.html">View All Downloads{{ARROW_RIGHT}}</a></p>
 
 <h1 id="squares-project-documentation" class="site-title">Squares Project Documentation</h1>
 
 The project documentation explains the research, evidence, record formats, and how to
 build and extend the tools.
 
-<p class="site-action-row site-more"><a class="site-action" href="about.html#squares-project-documentation">View All Documentation{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="documentation.html">View All Documentation{{ARROW_RIGHT}}</a></p>
 
 <h1 id="more-resources" class="site-title">More Resources<a id="other-square-packing-projects"></a></h1>
 

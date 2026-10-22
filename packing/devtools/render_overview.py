@@ -94,6 +94,10 @@ REPORT_RESULTS = TEMPLATES / "report-results.md"
 RESULTS_ARTICLE = TEMPLATES / "all-results-article.md"
 VISUALIZE_ARTICLE = TEMPLATES / "visualize-article.md"
 PAPERS_ARTICLE = TEMPLATES / "papers-article.md"
+TUTORIALS_ARTICLE = TEMPLATES / "tutorials-article.md"
+DOWNLOADS_ARTICLE = TEMPLATES / "downloads-article.md"
+DOCUMENTATION_ARTICLE = TEMPLATES / "documentation-article.md"
+REPORT_ARTICLE = TEMPLATES / "report-article.md"
 RESOURCES_ARTICLE = TEMPLATES / "resources-article.md"
 BROWSER = PACKING / "devtools" / "overview"
 FORWARD_SCRIPT = BROWSER / "forward.js"
@@ -187,8 +191,8 @@ ATLAS_DESCRIPTION = (
     "squares, with drawings, case records and the complete Frontier Survey."
 )
 PAPERS_DESCRIPTION = (
-    "Tutorials, papers and PDFs on square packing, with films and an interactive "
-    "workbench for exploring the problem and its proofs."
+    "Research papers on square packing: the eleven-square proof series and the "
+    "methods used to discover and verify record packings."
 )
 VISUALIZE_DESCRIPTION = (
     "The best packings known of n unit squares, n = 1 to 324, built one square at a "
@@ -466,6 +470,10 @@ SITE_PAGES: tuple[str, ...] = (
     RESULTS_PAGE,
     f"{PROFILES_DIR}/index.html",
     "papers.html",
+    "tutorials.html",
+    "downloads.html",
+    "documentation.html",
+    "report.html",
     "resources.html",
     *(paper_path(paper.slug) for paper in PAPERS),
     "tutorial.html",
@@ -581,6 +589,10 @@ RENDER_INPUTS: tuple[Path, ...] = (
     RESULTS_ARTICLE,
     VISUALIZE_ARTICLE,
     PAPERS_ARTICLE,
+    TUTORIALS_ARTICLE,
+    DOWNLOADS_ARTICLE,
+    DOCUMENTATION_ARTICLE,
+    REPORT_ARTICLE,
     FORWARDER,
     BROWSER,
     PACKING / "src" / "sqpack",
@@ -976,6 +988,7 @@ def nav_shell(current: str, *, root: str, tabs: str = "") -> NavShell:
     head = (
         f"{favicon_html()}\n"
         f"<script>{theme_bootstrap(static)}</script>\n"
+        f"<script>{_script_text(EMBED_SCRIPT)}</script>\n"
         f"<style>{tokens}</style>\n"
         f"<style>{PAPER_TYPE_CSS.read_text(encoding='utf-8')}</style>\n"
         f"<style>{SITE_NAV_CSS.read_text(encoding='utf-8')}</style>"
@@ -1490,7 +1503,6 @@ def news_page() -> Page:
 def about_page() -> Page:
     """The project narrative, approach, attribution, and supporting resources."""
     from devtools import (  # noqa: PLC0415
-        overview_sections,
         render_changelog,
         render_contributors,
     )
@@ -1499,8 +1511,6 @@ def about_page() -> Page:
         ABOUT_ARTICLE,
         {
             "PROFILES": render_contributors.profile_preview(),
-            "REPORT_RESULTS": report_results(),
-            "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
             "NEWS_LEGACY_ANCHORS": render_changelog.legacy_news_anchors(
                 render_changelog.load()
             ),
@@ -1582,19 +1592,8 @@ def papers_page() -> Page:
     series are the cards' own addresses, filled from the one constant each."""
     from devtools import overview_sections  # noqa: PLC0415
 
-    tutorials = tuple(
-        paper
-        for paper in overview_sections.PAPERS
-        if paper.href in {"tutorial.html", "tutorial-advanced.html"}
-    )
     values = {
-        "TUTORIAL_CARDS": overview_sections.paper_cards(papers=tutorials),
-        "PAPER_CARDS": overview_sections.paper_cards(
-            papers=tuple(paper for paper in overview_sections.PAPERS if paper not in tutorials)
-        ),
-        "ARROW_RIGHT": overview_sections.arrow_icon("right"),
-        "PDF_CARDS": overview_sections.pdf_cards(),
-        "PDF_NOTE": overview_sections.pdf_note(),
+        "PAPER_CARDS": overview_sections.paper_cards(papers=overview_sections.PAPERS[:-2]),
         "LOWER_BOUNDS_PAPER": overview_sections.LOWER_BOUNDS_PAPER,
         "THRESHOLD_BOUND_PAPER": overview_sections.THRESHOLD_BOUND_PAPER,
         "OPTIMALITY_PAPER": overview_sections.OPTIMALITY_PAPER,
@@ -1608,10 +1607,83 @@ def papers_page() -> Page:
         markdown,
         name="papers.html",
         current="explanations",
-        title="Learn",
+        title="Papers",
         description=PAPERS_DESCRIPTION,
         toc=False,
         rewrite_body=lambda page: _authored_profile_links(page, full_names=True),
+    )
+
+
+def tutorials_page() -> Page:
+    """The complete catalogue of first-principles and advanced tutorials."""
+    from devtools import overview_sections  # noqa: PLC0415
+
+    markdown = _template_markdown(
+        TUTORIALS_ARTICLE,
+        {"TUTORIAL_CARDS": overview_sections.paper_cards(papers=overview_sections.PAPERS[-2:])},
+    )
+    return kpress_page(
+        markdown,
+        name="tutorials.html",
+        current="tutorials.html",
+        title="Tutorials",
+        description=(
+            "First-principles and advanced tutorials on square packing, search, and proof."
+        ),
+        toc=False,
+    )
+
+
+def downloads_page() -> Page:
+    """Complete poster downloads and the PDF and source editions of every paper."""
+    from devtools import overview_sections  # noqa: PLC0415
+
+    markdown = _template_markdown(
+        DOWNLOADS_ARTICLE,
+        {
+            "PDF_CARDS": overview_sections.pdf_cards(),
+            "PDF_NOTE": overview_sections.pdf_note(),
+            "PAPER_DOWNLOADS": overview_sections.paper_downloads(),
+        },
+    )
+    return kpress_page(
+        markdown,
+        name="downloads.html",
+        current="downloads.html",
+        title="Downloads",
+        description=(
+            "Square-packing poster PDFs and the PDF and Markdown editions of every paper."
+        ),
+        toc=False,
+    )
+
+
+def documentation_page() -> Page:
+    """The complete catalogue of reader and developer documentation."""
+    from devtools import overview_sections  # noqa: PLC0415
+
+    return kpress_page(
+        _template_markdown(
+            DOCUMENTATION_ARTICLE,
+            {"DOCUMENTATION_BLOCK": overview_sections.documentation_block()},
+        ),
+        name="documentation.html",
+        current="documentation.html",
+        title="Documentation",
+        description="Project guides, research records, verification policy, and development.",
+        toc=False,
+    )
+
+
+def report_page() -> Page:
+    """The complete contribution instructions and existing result-submission form."""
+    return kpress_page(
+        _template_markdown(REPORT_ARTICLE, {"REPORT_RESULTS": report_results()}),
+        name="report.html",
+        current="report.html",
+        title="Report a Result",
+        description="Submit square-packing results with evidence and contribution credits.",
+        toc=False,
     )
 
 
@@ -1790,6 +1862,10 @@ PAGES: dict[str, Callable[[], Page]] = {
     "about.html": about_page,
     RESULTS_PAGE: results_page,
     "papers.html": papers_page,
+    "tutorials.html": tutorials_page,
+    "downloads.html": downloads_page,
+    "documentation.html": documentation_page,
+    "report.html": report_page,
     "resources.html": resources_page,
     "tutorial.html": tutorial_page,
     "tutorial-advanced.html": _document_page("tutorial-advanced.html"),

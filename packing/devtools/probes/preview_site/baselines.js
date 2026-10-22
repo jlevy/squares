@@ -41,7 +41,7 @@
   const rule = owner ? round(owner.getBoundingClientRect().bottom + window.scrollY) : null;
   const candidates = [
     ...document.querySelectorAll(
-      ".site-nav-links > li > a, .site-nav-inner > a[data-page], .site-nav-mobile-toggle",
+      ".site-nav-links > li > a, .site-nav-links > li > .site-nav-disclosure, .site-nav-inner > a[data-page], .site-nav-mobile-toggle",
     ),
   ];
   const links = (

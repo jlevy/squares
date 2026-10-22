@@ -2151,6 +2151,22 @@ def homepage_paper_cards() -> str:
     return paper_cards(papers=starting_points)
 
 
+def paper_downloads() -> str:
+    """Every registered paper's PDF and Markdown editions, with its shared title."""
+    rows = "".join(
+        f"<tr><td>{tex_bounds(paper.title)}</td>"
+        f'<td><a href="{paper_path(paper.slug, ".pdf")}">PDF</a></td>'
+        f'<td><a href="{paper_path(paper.slug, ".md")}">Markdown</a></td></tr>'
+        for paper in PAPER_RECORDS
+    )
+    return (
+        '<div class="site-wide kpress-table-wrap"><table class="kpress-table">'
+        '<thead><tr><th scope="col">Paper</th><th scope="col">PDF</th>'
+        '<th scope="col">Source</th></tr></thead>'
+        f"<tbody>{rows}</tbody></table></div>"
+    )
+
+
 #: The site's reading and working pages, as the overview's cards under The Squares
 #: Project show them: the page, a label, its title, and one line on what a reader finds
 #: there. Both are register prose, so a bound in either is written in ASCII

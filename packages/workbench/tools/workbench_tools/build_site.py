@@ -57,6 +57,7 @@ from kpress.format.assets import content_hash
 
 from devtools import site_assets
 from devtools.render_overview import (
+    EMBED_SCRIPT,
     NAVIGATION_SCRIPT,
     PageMeta,
     favicon_html,
@@ -103,6 +104,7 @@ RENDER_INPUTS = (
     ROOT / "devtools/templates/site-nav.css",
     ROOT / "devtools/site_navigation.py",
     NAVIGATION_SCRIPT,
+    EMBED_SCRIPT,
     ROOT / "devtools/templates/paper-type.css",
     ROOT / "devtools/overview/theme.js",
     ROOT / "devtools/overview/headroom.js",

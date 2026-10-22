@@ -787,6 +787,8 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | conventions.html | conventions.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | defects.html | https://github.com/jlevy/squares/blob/main/defects.md | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → https://github.com/jlevy/squares/blob/main/defects.md |
 | development.html | development.html | page | overview | 2026-09-29 | 2026-10-22 | live |
+| documentation.html | documentation.html | page | overview | 2026-10-22 | 2026-10-22 | live |
+| downloads.html | downloads.html | page | overview | 2026-10-22 | 2026-10-22 | live |
 | epistemics.html | epistemics.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | explainer.html | papers/n11-lower-bounds-explainer.html | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → papers/n11-lower-bounds-explainer.html |
 | favicon-48.png | favicon-48.png | asset-file | overview | 2026-10-07 | 2026-10-22 | live |
@@ -895,6 +897,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/yohei-nakajima.html | profiles/yohei-nakajima.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/zk-shangitbayev.html | profiles/zk-shangitbayev.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | readme.html | readme.html | page | overview | 2026-09-29 | 2026-10-22 | live |
+| report.html | report.html | page | overview | 2026-10-22 | 2026-10-22 | live |
 | resources.html | resources.html | page | overview | 2026-10-08 | 2026-10-22 | live |
 | result/t-001.html | result/t-001.html | result | overview | 2026-08-31 | 2026-08-31 | live |
 | result/t-002.html | result/t-002.html | result | overview | 2026-08-31 | 2026-08-31 | live |
@@ -1154,6 +1157,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | t-018-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | copy | assembly | 2026-09-29 | 2026-10-22 | live → papers/n11-lower-bounds-explainer.pdf |
 | tutorial-advanced.html | tutorial-advanced.html | page | overview | 2026-10-14 | 2026-10-22 | live |
 | tutorial.html | tutorial.html | page | overview | 2026-09-29 | 2026-10-22 | live |
+| tutorials.html | tutorials.html | page | overview | 2026-10-22 | 2026-10-22 | live |
 | visualize.html | visualize.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | workbench/assets/{css,js,fonts}/*.{hash}.{ext} | — | asset-file | workbench | 2026-10-07 | 2026-10-22 | live |
 | workbench/data/corpus.{hash}.json | — | asset-file | workbench | 2026-10-07 | 2026-10-22 | live |

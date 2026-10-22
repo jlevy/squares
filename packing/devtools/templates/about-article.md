@@ -38,16 +38,12 @@ formalizations of current proofs.
 
 {{PROFILES}}
 
-<h1 id="report-your-results" class="site-title">Report Your Results!<a id="contribute-your-results"></a></h1>
-
-{{REPORT_RESULTS}}
-
-<h1 id="squares-project-documentation" class="site-title">Squares Project Documentation</h1>
-
-{{DOCUMENTATION_BLOCK}}
-
 The [Resources directory](resources.html) under Learn lists external square packing
 catalogues, research repositories, and websites.
+
+<noscript><p>Project information: <a id="report-your-results" href="report.html">Report
+a Result</a><a id="contribute-your-results"></a> and
+<a id="squares-project-documentation" href="documentation.html">Documentation</a>.</p></noscript>
 
 {{NEWS_LEGACY_ANCHORS}}
 

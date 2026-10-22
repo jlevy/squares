@@ -6445,6 +6445,22 @@ urls:
   first_published: '2026-09-29'
   lastmod: '2026-10-22'
   status: live
+- path: documentation.html
+  canonical: documentation.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+- path: downloads.html
+  canonical: downloads.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
 - path: epistemics.html
   canonical: epistemics.html
   kind: page
@@ -7315,6 +7331,14 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
+  lastmod: '2026-10-22'
+  status: live
+- path: report.html
+  canonical: report.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-22'
   lastmod: '2026-10-22'
   status: live
 - path: resources.html
@@ -18730,6 +18754,14 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
+  lastmod: '2026-10-22'
+  status: live
+- path: tutorials.html
+  canonical: tutorials.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-22'
   lastmod: '2026-10-22'
   status: live
 - path: visualize.html

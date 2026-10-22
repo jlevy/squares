@@ -796,3 +796,21 @@ def test_every_partial_paper_or_workbench_check_stages_the_shared_card() -> None
         "workbench",
         "pdf",
     }
+
+
+def test_substantive_collection_pages_are_registered_canonical_crawl_destinations() -> None:
+    retained = site_urls.load_registry()
+    rows = site_urls.derive_registry(retained)
+    by_path = {entry.path: entry for entry in rows}
+    for path in ("tutorials.html", "downloads.html", "documentation.html", "report.html"):
+        entry = by_path[path]
+        assert (entry.kind, entry.canonical, entry.status, entry.first_published) == (
+            "page",
+            path,
+            "live",
+            "2026-10-22",
+        )
+        assert path in render_overview.SITE_PAGES
+        assert path in render_overview.PAGES
+        assert render_overview.canonical_url(path) in site_urls.render_sitemap(rows)
+    assert not failures(site_urls.check_history(rows, retained))
