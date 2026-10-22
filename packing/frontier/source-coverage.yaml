@@ -7828,7 +7828,7 @@ sources:
     below this source's row when it lands. Its 366 is not recorded: Couzo's 4e4c8ce
     certificate, published 15 October, is 8.19e-2 below it. The 8 rows above 1024 are pinned
     by digest and wait on the owner (think-9vr8, think-f2io). Per-row lineage is not stated
-    by the source; the issue credits Mishapolk (Mikhail Polk) and names the earlier finders
+    by the source; the issue credits Mishapolk (Mykhailo Polkovskyi) and names the earlier finders
     its packings build on, and discloses Gemini assistance.
   claims_record: resources/web/mishapolk-issue719-2026-10-22/acquisition/beyond-horizon-rows.json
 

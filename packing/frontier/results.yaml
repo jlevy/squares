@@ -31626,13 +31626,13 @@ results:
 
       Credit the packings to their finders, each re-solved to a smaller side by Mykhailo
       Polkovskyi (https://github.com/Mishapolk/square-packing-records), the name the record
-      gives him since issue 593 (the issue gives Mikhail Polk): at 105 Ryan Xu's packing as
-      Francisco Couzo and PingYou Ltd refined it (T-174); at 204 Francisco Couzo's packing,
-      first reported in #670 and refined in #675 and #678 (T-226, T-228, T-223), as Evan
-      Daniel regularized it (T-225), which Couzo's source credits to Polkovskyi's own
-      construction (hop job 105412). The source states no method and no lineage per count;
-      the issue credits Mishapolk (Mikhail Polk) and names the earlier finders its packings
-      build on, and discloses Gemini assistance.
+      gives him since issue 593 and the issue's credit since its edit of 22 October: at 105
+      Ryan Xu's packing as Francisco Couzo and PingYou Ltd refined it (T-174); at 204
+      Francisco Couzo's packing, first reported in #670 and refined in #675 and #678 (T-226,
+      T-228, T-223), as Evan Daniel regularized it (T-225), which Couzo's source credits to
+      Polkovskyi's own construction (hop job 105412). The source states no method and no
+      lineage per count; the issue credits Mishapolk (Mykhailo Polkovskyi) and names the
+      earlier finders its packings build on, and discloses Gemini assistance.
     scope:
       n_values: [105, 204]
     verification: V3
@@ -31719,11 +31719,12 @@ results:
       is a half turn of it with nine squares straightened.
 
       The release holds a second 204 file, certificates/n204.cert, 1.48e-11 below the one
-      the issue names and the same packing, and a second 105 file, 4.6e-12 above it; the
-      issue names neither, and they are pinned by digest only. Its other files below the
-      record beyond the twelfth decimal place at 34 in-corpus counts, and its ten rows the
-      issue's edit withdrew, are pinned by digest and not imported; the reply asks the
-      author about each.
+      the issue names and the same packing, pinned by digest, and a second 105 file,
+      certificates/n105.cert, 4.6e-12 above it, which the packet does not pin; the issue
+      names neither, and the packet's scope holds 170 of the pin's 607 certificate files,
+      the rest pinned by the commit alone. Its other files below the record beyond the
+      twelfth decimal place at 34 in-corpus counts, and its ten rows the issue's edit
+      withdrew, are pinned by digest and not imported; the reply asks the author about each.
 
       The source's own scripts were not run here. The issue names this repository's
       sqpack/verify.py as a checker, and that file decides the exact_verify route, so the
