@@ -716,6 +716,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     home = seen[width]["initial"]
     assert home["headings"] == [
         "the-atlas-of-square-packings",
+        "recently-added",
         "news",
         "recent-results",
         "report-your-results",
@@ -728,7 +729,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
         "squares-project-documentation",
         "more-resources",
     ]
-    assert len(home["section_title_styles"]) == 9
+    assert len(home["section_title_styles"]) == 10
     carried = news_highlights.carried(render_changelog.load())
     assert [heading["entry"] for heading in home["news_headings"]] == [
         entry["id"] for entry in carried
@@ -1294,6 +1295,55 @@ def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
             static.close()
     finally:
         page.close()
+
+
+@pytest.mark.parametrize("width", WIDTHS)
+def test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts(
+    browser: Any, payloads: dict[str, bytes], width: int
+) -> None:
+    """Recently Added sits above News, opens on its newest day and keeps every line
+    inside the page at both widths, in both schemes and without scripts; its days are
+    native disclosures, so the older ones open by keyboard with or without scripts."""
+    overview = site_renders.overview()
+    days = [recent.day.isoformat() for recent in overview_sections.recent_days(overview)]
+    for scripts in (True, False):
+        page = browser.new_page(
+            viewport={"width": width, "height": 900},
+            reduced_motion="reduce",
+            java_script_enabled=scripts,
+        )
+        _serve(page, payloads)
+        try:
+            page.goto(ORIGIN, wait_until="load")
+            section = page.locator("#recently-added")
+            news = page.locator("#news")
+            assert section.bounding_box()["y"] < news.bounding_box()["y"]
+            blocks = page.locator(".site-added details[data-day]")
+            assert blocks.count() == len(days)
+            shown = [blocks.nth(index).get_attribute("data-day") for index in range(len(days))]
+            assert shown == days
+            first = blocks.first.locator("li").first
+            assert first.is_visible()
+            assert not blocks.nth(1).locator("li").first.is_visible()
+            blocks.nth(1).locator("summary").focus()
+            page.keyboard.press("Enter")
+            site_browser.api().expect(blocks.nth(1).locator("li").first).to_be_visible()
+            for scheme in ("light", "dark"):
+                page.emulate_media(color_scheme=scheme)
+                assert page.evaluate(NEWS_FILTERS)["overflow"] == 0, (scheme, scripts)
+                if scripts and (screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR")):
+                    section.scroll_into_view_if_needed()
+                    page.screenshot(
+                        path=str(Path(screenshot_dir) / f"home-recent-{scheme}-{width}.png"),
+                        clip={
+                            "x": 0,
+                            "y": section.bounding_box()["y"] - 8,
+                            "width": width,
+                            "height": 900,
+                        },
+                    )
+        finally:
+            page.close()
 
 
 def test_excluded_news_bookmarks_reach_the_retained_changelog(

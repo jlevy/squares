@@ -226,9 +226,15 @@ def test_every_link_to_a_result_goes_to_its_row(
     rows = {row_id for row_id, _, _ in ROW.findall(results)}
     linked = re.findall(r'href="results\.html#([^"]+)"', page)
     assert linked
-    # The two section actions are the only non-row destinations.
-    assert set(linked) - rows == {"verification-ladders", "all-results"}
+    # The two section actions and Recently Added's link to the seven days are the only
+    # non-row destinations.
+    assert set(linked) - rows == {
+        "verification-ladders",
+        "all-results",
+        "added-in-the-last-seven-days",
+    }
     assert 'id="verification-ladders"' in results
+    assert 'id="added-in-the-last-seven-days"' in results
     assert not re.search(r'href="#t-\d+"', page)
     for record in case_pages.values():
         assert set(re.findall(r'href="\.\./results\.html#([^"]+)"', record)) <= rows
@@ -373,6 +379,7 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     assert '<h1 id="the-problem"' in page
     assert re.findall(r'<h2 id="([^"]+)"', page) == [
         "the-atlas-of-square-packings",
+        "recently-added",
         "news",
         "recent-results",
         "report-your-results",
@@ -381,6 +388,7 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     assert re.findall(r'<h[12] id="([^"]+)" class="site-title"', page) == [
         "the-problem",
         "the-atlas-of-square-packings",
+        "recently-added",
         "news",
         "recent-results",
         "profiles",

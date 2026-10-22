@@ -1,7 +1,8 @@
 /* The results page's overview above its table, two stacks of KPress's own disclosure:
    the last seven days' registrations, one a day (overview_sections.recent_added), then
    the weekly rollup before them, one a week (recent_rollup). Two blocks of a stack share
-   one rule. */
+   one rule. The home page's Recently Added is the first stack again, with its house best
+   packings and dated rows (recently_added). */
 .kpress .site-rollup {
   margin-block: 1rem var(--site-table-space);
 }
@@ -96,6 +97,12 @@
    body, which the link takes instead. */
 .kpress .site-added details > ul {
   padding-block-end: 0;
+}
+
+/* A day with no results, on the home page, has no link to close it: its list keeps the
+   space the link would take. */
+.kpress .site-added details > ul:last-child {
+  padding-block-end: 0.75rem;
 }
 
 .kpress .site-added details > p {

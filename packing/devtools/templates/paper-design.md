@@ -980,10 +980,10 @@ contributor articles use their component sheets and the same text tokens.
   the shared project-name constant.
   The opening content section remains The Square Packing Problem.
   A short problem introduction opens the page.
-  The next sections are Atlas, News, Recent Major Results, Papers, PDFs, Video, Squares
-  Project Documentation, then More Resources (`think-5c8r`, `think-sq1i`). Papers shares
-  all reading cards with the Papers page; Squares Project Documentation shares its
-  introductory text and cards with About.
+  The next sections are Atlas, Recently Added, News, Recent Major Results, Papers, PDFs,
+  Video, Squares Project Documentation, then More Resources (`think-5c8r`, `think-sq1i`,
+  `think-rqen`). Papers shares all reading cards with the Papers page; Squares Project
+  Documentation shares its introductory text and cards with About.
   The PDF downloads and inline video player remain separate sections.
   Their action rows link directly to Papers (`papers.html`), its PDFs section
   (`papers.html#pdfs`), Video (`visualize.html`), and Docs (`about.html`), using the
@@ -2662,8 +2662,24 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   `tests/test_overview.py` holds each section’s prose to one paragraph of its own where
   this applies, the cards to their pages, and the three pages to saying each thing once.
 
-- **Recent results.** The homepage’s **Recent Major Results** section sits directly
-  below the Atlas preview.
+- **Recently Added.** Directly below the Atlas preview, the homepage lists what reached
+  the site over the days the Results page’s “Added in the Last Seven Days” covers, one
+  native disclosure a day, newest first, the newest open
+  (`overview_sections.recently_added`, the owner, 22 October 2026, `think-rqen`). Each
+  day holds every result that arrived, at any significance, as the Results page lists it
+  (`added_entry`, its id linking to its row there); each count whose house best packing
+  an adoption pass moved that day, under the result that holds it now
+  (`upper_bound_houses.ADOPTED` and `adopted_on`, which the case records agree with);
+  and the dated beyond-horizon rows the coverage register recorded that day, one line a
+  source with its count, its span of counts, its credit and how many are since
+  superseded, linking to the source’s packet on GitHub, since no page of the site lists
+  those rows. The summary tallies the three and wraps between them.
+  The section reuses the Results page’s classes and `results.css`, and its introduction
+  links that page’s seven days and News.
+  `tests/test_home_recent.py` holds it to the records and to 40,000 bytes.
+
+- **Recent results.** The homepage’s **Recent Major Results** section sits below
+  Recently Added and News.
   It contains up to twelve current results of significance S4 or higher from the last
   180 days, newest first, excluding superseded results (`think-5c8r`). The preview has
   no count/scope sentence or introductory text explaining the links.

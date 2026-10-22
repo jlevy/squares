@@ -24,6 +24,16 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 <p class="site-action-row site-more site-homepage-atlas-actions"><a class="site-action" href="{{ATLAS_PDF}}" download>Download PDF{{ARROW_DOWNLOAD}}</a><a class="site-action" href="atlas.html">Explore the atlas{{ARROW_RIGHT}}</a></p>
 
+<h2 id="recently-added" class="site-title">Recently Added</h2>
+
+Everything that reached this site over {{RECENT_SPAN}}, newest first: each result at any
+significance, each count whose house best packing moved, and the dated bounds recorded
+beyond $n = {{CORPUS_END}}$. The Results page lists
+[the last {{ADDED_DAYS}} days](results.html#added-in-the-last-seven-days) in full;
+[News](news.html) announces the most significant.
+
+{{RECENTLY_ADDED}}
+
 <h2 id="news" class="site-title">News</h2>
 
 {{NEWS_PREVIEW}}
