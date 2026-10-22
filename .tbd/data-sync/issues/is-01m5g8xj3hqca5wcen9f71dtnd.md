@@ -5,7 +5,7 @@ title: "Import franciscouzo: 1285 upper bounds at 328–9913 (#715)"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:22:12.593Z
-updated_at: 2026-10-21T22:51:57.868Z
+updated_at: 2026-10-22T00:48:16.990Z
 started_at: 2026-10-21T22:22:13.353Z
 ---
 Issue #715 (https://github.com/jlevy/squares/issues/715), opened 2026-10-21T20:55:57Z by Francisco Couzo as a follow-up to #678: 1285 strict improvements over the strongest retained public comparison (173 below 1024, 1112 above; first request above 1024), source commit 6b7391de820fd01f3ff6984e4a081e8c86845588 (upper_bounds.json, certified_bounds.json, certificates/best/manifest.json, public_bounds.json). Includes 343 at 18.977575126267, below #702's row registered today. Stage 0 owner; stage 1 triage (read-only, priced) first.
@@ -153,4 +153,6 @@ It will surface as a new commit in the sweep’s franciscouzo/square-packing wat
 <!-- Coordinator: open one bead for the owner's D1-D4, then append the closing line below
 with its id. Do not append the placeholder as written: a blocked_on line that names no
 issue, pull request or bead reads as no wait. -->
+
+2026-10-22 00:50 coord-intake-1021b: 6b7391de is public (Couzo, #678 23:26Z). Acknowledgement posted https://github.com/jlevy/squares/issues/715#issuecomment-6329883508 after #716 entered #715 at triage pending (deploy run 39700175588, check_published_site 4784/4784). It promises an exact check of the 8 October decimal poses at 335. Import of rows <= 1024 under way on claude/intake-2026-10-22 (c-lane-715-import), which also records the acknowledgement and the #678 follow-up. Rows above 1024 wait on the owner (think-f2io).
 blocked_on: think-f2io
