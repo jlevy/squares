@@ -5,7 +5,8 @@ title: Order shared cards and profile work as Records Results Credits
 kind: task
 status: closed
 priority: 2
-version: 4
+version: 5
+spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: squaremath-tally-order
 labels: []
 dependencies: []
@@ -13,7 +14,7 @@ parent_id: is-01m5jct23n8s7fj3ydf94n0yhv
 hold: null
 hold_until: null
 created_at: 2026-10-22T18:11:40.159Z
-updated_at: 2026-10-22T18:17:36.146Z
+updated_at: 2026-10-22T18:19:48.660Z
 started_at: 2026-10-22T18:11:53.399Z
 closed_at: 2026-10-22T18:17:36.145Z
 close_reason: Delegated tally-order implementation and targeted regressions complete; 3 ordering tests and 59 full focused tests pass. Coordinator owns final shared-file validation, commit, and PR.
