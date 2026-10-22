@@ -32,7 +32,6 @@ from devtools.overview_sections import (
     ADDED_OPEN,
     ROLLUP_FLOOR,
     ROLLUP_WEEKS,
-    ROLLUP_WEEKS_WORD,
     added_days,
     credit_finder,
     rollup_order,
@@ -71,11 +70,6 @@ ENTRY = re.compile(
     re.DOTALL,
 )
 
-#: A day's link to its own rows: the day it filters on and how many it says it shows.
-DAY_LINK = re.compile(
-    r'<p><a href="results\.html\?added=(\d{4}-\d{2}-\d{2})#all-results">'
-    r"Show (it|these (\d+)) in the table</a></p>"
-)
 #: The most bytes the overview, both sections, may weigh. The weekly prototype measured
 #: 11,605 bytes on 11 October 2026 and was held to 24,000. On 12 October the two
 #: sections measured 28,187: 20,013 for the 65 results added over 5-12 October, about
@@ -172,9 +166,11 @@ def test_recent_lists_are_separate_and_the_archive_stays_whole(
     assert results.count('<div class="site-rollup">') == 1
     assert "data-site-table" not in results
     order = [
-        results.index('<h2 id="added-in-the-last-seven-days">'),
+        results.index('<h2 id="added-in-the-last-seven-days" class="site-navigation-heading">'),
         results.index('<div class="site-rollup site-added">'),
-        results.index('<h2 id="earlier-results-by-week-published">'),
+        results.index(
+            '<h2 id="earlier-results-by-week-published" class="site-navigation-heading">'
+        ),
         results.index('<div class="site-rollup">'),
     ]
     assert order == sorted(order)
@@ -190,29 +186,19 @@ def test_recent_lists_are_separate_and_the_archive_stays_whole(
     assert 'class="site-rollup' not in archive
 
 
-def test_the_introductions_state_the_window_and_the_floor_from_the_code(
+def test_the_recent_page_states_its_window_and_floor_without_repeated_instructions(
     results: str, overview: overview_data.Overview
 ) -> None:
-    """The template types neither the days, the floor nor the weeks: all are filled in.
-    The introduction opens the table on the section's own days, from its first,
-    `?added-since=`, so it lists the same results on any later day (#514's review A,
-    finding A3); it also links the last day's arrivals by the reader's day."""
+    """The compact date span and significance floor come from the same projection
+    as the lists; explanatory navigation does not repeat their contents."""
     first, last = _window(overview)
     days = ADDED_DAYS_WORD[ADDED_DAYS]
     assert (
-        f'<h2 id="added-in-the-last-seven-days">Added in the Last {days.capitalize()} Days</h2>'
+        '<h2 id="added-in-the-last-seven-days" class="site-navigation-heading">'
+        f'Added in the Last {days.capitalize()} Days</h2>'
     ) in results
-    prose = " ".join(results.split())
-    assert (
-        '<a href="results.html?added-since='
-        f'{first.isoformat()}#all-results">Browse these arrivals</a>'
-    ) in prose
-    assert f"reached this site over {span_label(first, last)} (its newest day and the" in prose
-    last_day = '<a href="results.html?added-age=1#all-results">what arrived in the last day</a>'
-    assert last_day in prose
-    words = ROLLUP_WEEKS_WORD[ROLLUP_WEEKS]
-    shown = overview_sections.day_label(first)
-    assert f"Results at S{ROLLUP_FLOOR} and above from the {words} before {shown}," in prose
+    assert f'<p class="site-navigation-copy">{span_label(first, last)}</p>' in results
+    assert f"S{ROLLUP_FLOOR} and above, by publication or establishment date." in results
 
 
 def test_each_day_lists_exactly_the_entries_that_arrived_on_it(
@@ -356,14 +342,11 @@ def test_a_day_entry_says_what_the_row_says(
         assert keys == sorted(keys)
 
 
-def test_each_day_and_the_heading_open_the_table_on_their_rows(
+def test_archive_arrival_controls_remain_available_without_repeated_day_navigation(
     added: str, archive: str
 ) -> None:
-    """A day's link opens the table on that day alone, `?added=2026-10-12`, which the
-    bar's preset-only Added on control offers, every day anything reached the site among
-    its choices; the heading's opens it from the section's first day, `?added-since=`,
-    which the preset-only Added since control takes; and the visible Added within control
-    takes an age of arrival, `?added-age=1`."""
+    """Removing repeated filter links leaves explicit added-day, age and since
+    archive URL presets intact, with each arrival day offered by the table."""
     days = DAY.findall(added)
     bar = archive.split('<div class="site-table-tools site-result-filters">', 1)[1]
     bar = bar.split("</div>", 1)[0]
@@ -386,11 +369,8 @@ def test_each_day_and_the_heading_open_the_table_on_their_rows(
         "data-preset></label>"
     ) in bar
     for day, _, body in days:
-        link = DAY_LINK.search(body)
-        assert link, day
-        assert link[1] == day
-        count = len(ENTRY.findall(body))
-        assert link[2] == ("it" if count == 1 else f"these {count}"), day
+        assert day in {value for value, _ in offered}
+        assert '<p><a href="results.html?added=' not in body
 
 
 def test_each_week_lists_exactly_the_entries_at_the_floor_dated_in_it(
@@ -763,3 +743,19 @@ def test_finder_html_comparison_rejects_changed_reviewed_credits(mutation: str) 
     }[mutation]
     with pytest.raises(AssertionError):
         _assert_finder(changed, (result,))
+
+
+def test_clean_recent_page_has_lists_and_one_archive_action(results: str) -> None:
+    """Dates, ratings, credits and result links carry the page without repeated
+    navigation or instructions describing how to read its own lists."""
+    article = results.split("<article", 1)[1].split("</article>", 1)[0]
+    assert 'aria-label="On this page"' not in article
+    assert "Browse these arrivals" not in article
+    assert "what arrived in the last day" not in article
+    assert not re.search(r'href="results\.html\?added', article)
+    assert article.count('href="results.html#all-results"') == 1
+    assert "View Results Archive" in article
+    assert 'href="atlas.html"' not in article
+    assert DAY.findall(article)
+    assert WEEK.findall(article)
+    assert ID_LINK.findall(article)

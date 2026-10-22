@@ -8,7 +8,13 @@ from html.parser import HTMLParser
 from pathlib import Path
 from typing import override
 
-from devtools.site_navigation import breadcrumb_data, breadcrumbs_html, navigation_links
+from devtools.site_navigation import (
+    NAVIGATION,
+    breadcrumb_data,
+    breadcrumbs_html,
+    navigation_links,
+    navigation_title,
+)
 
 
 class Tags(HTMLParser):
@@ -55,7 +61,8 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
         "result/t-060.html": ["Results", "Results Archive", "Current <title>"],
         "results.html": ["Results", "Current <title>"],
         "recent-results.html": ["Results", "Current <title>"],
-        "profiles/person.html": ["About", "Profiles", "Current <title>"],
+        "profiles/person.html": ["About", navigation_title("profiles/"), "Current <title>"],
+        "about.html": ["About", "Current <title>"],
         "synopsis/problem.html": ["About", "Research Synopsis", "Current <title>"],
         "epistemics.html": ["Results", "Current <title>"],
         "papers/proof.html": ["Learn", "Papers", "Current <title>"],
@@ -68,6 +75,7 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
         "workbench/index.html": ["Learn", "Current <title>"],
     }
     for path, expected in families.items():
+        expected[-1] = navigation_title(path, expected[-1])
         trail = breadcrumbs_html(path, "Current <title>", root="../")
         labels = [
             html.unescape(re.sub(r"<[^>]+>", "", item))
@@ -85,13 +93,13 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
         assert [item["name"] for item in items] == expected
         canonical = path.removesuffix("index.html") if path.endswith("/index.html") else path
         assert items[-1]["item"] == f"https://squaremath.org/{canonical}"
-        if expected[0] in {"Learn", "Results"}:
+        if expected[0] in {"Learn", "Results", "About"}:
             assert "item" not in items[0]
             assert f"<li><span>{expected[0]}</span></li>" in trail
             if expected[0] == "Learn" and len(expected) > 2:
                 catalogue = "papers.html" if expected[1] == "Papers" else "tutorials.html"
                 assert f'href="../{catalogue}"' in trail
-    for path in ("index.html", "./", "news.html", "about.html"):
+    for path in ("index.html", "./", "news.html"):
         trail = breadcrumbs_html(path, "Root page")
         tags = Tags(trail).tags
         assert any(tag == "span" and attrs.get("aria-current") == "page" for tag, attrs in tags)
@@ -232,7 +240,7 @@ def test_navigation_remains_reachable_without_script() -> None:
             "Visual Atlas",
             "Tutorials",
             "Resources",
-            "Documentation",
+            "Project Documentation",
         ):
             assert page.get_by_role("link", name=label, exact=True).is_visible()
         assert not page.get_by_role("button", name="Menu", exact=True).is_visible()
@@ -531,7 +539,7 @@ def test_legacy_catalogue_fragments_keep_queries_and_reach_substantive_pages(
         server.server_close()
 
 
-def test_every_shell_aligns_the_trail_with_33em_prose_and_preserves_wide_blocks() -> None:
+def test_every_shell_aligns_the_trail_with_35em_prose_and_preserves_wide_blocks() -> None:
     from devtools import render_overview  # noqa: PLC0415
     from devtools.measure_site_pages import TYPOGRAPHY  # noqa: PLC0415
     from tests import site_browser  # noqa: PLC0415
@@ -597,9 +605,9 @@ def test_every_shell_aligns_the_trail_with_33em_prose_and_preserves_wide_blocks(
                 assert text is not None, (name, width, found)
                 assert abs(trail["left"] - text["x"]) < 0.5, (name, width, found)
                 assert abs(trail["width"] - text["width"]) < 0.5, (name, width, found)
-                assert text["width"] <= 33 * 18 + 0.5, (name, width, found)
+                assert text["width"] <= 35 * 18 + 0.5, (name, width, found)
                 if width >= 768:
-                    assert abs(text["width"] - 33 * 18) < 0.5, (name, width, found)
+                    assert abs(text["width"] - 35 * 18) < 0.5, (name, width, found)
                 assert text["x"] >= 8, (name, width, found)
                 assert text["x"] + text["width"] <= width - 8, (name, width, found)
                 if name in {"ordinary", "directory"} and width >= 1256:
@@ -648,12 +656,8 @@ def test_disclosure_and_chevron_motion_share_timing_and_respect_reduced_motion()
 
 
 def test_results_container_names_and_marks_each_substantive_destination() -> None:
-    destinations = (
-        ("recent-results.html", "Recent Results"),
-        ("results.html", "Results Archive"),
-        ("atlas.html", "Visual Atlas"),
-        ("epistemics.html", "Verification and Ratings"),
-    )
+    group = next(item for item in NAVIGATION if item.key == "results")
+    destinations = tuple((item.path, item.label) for item in group.children)
     for path, label in destinations:
         nav = navigation_links(path)
         menu = re.search(r'<ul id="site-nav-results"[^>]*>(.*?)</ul>', nav)
@@ -673,3 +677,26 @@ def test_results_container_names_and_marks_each_substantive_destination() -> Non
         assert "<li><span>Results</span></li>" in trail
         assert not any(tag == "a" for tag, _ in Tags(trail).tags)
         assert f'<span aria-current="page">{label}</span>' in trail
+
+
+def test_menu_destinations_supply_canonical_titles_and_categories_have_no_urls() -> None:
+    for group in NAVIGATION:
+        if group.children:
+            assert not group.path
+        for item in (group, *group.children):
+            if not item.path:
+                continue
+            assert navigation_title(item.path, "Stale page title") == item.label
+            trail = breadcrumbs_html(item.path, "Stale page title")
+            assert f'<span aria-current="page">{html.escape(item.label)}</span>' in trail
+            data = breadcrumb_data(item.path, "Stale page title", "https://squaremath.org/")
+            assert data
+            assert data["itemListElement"][-1]["name"] == item.label
+            if group.children:
+                assert f"<li><span>{group.label}</span></li>" in trail
+                assert "item" not in data["itemListElement"][0]
+    assert navigation_title("papers/specific-proof.html", "Specific proof") == "Specific proof"
+    assert navigation_title("visualize") == navigation_title("visualize.html")
+    assert navigation_title("profiles/index.html") == navigation_title("profiles/")
+    about = breadcrumbs_html("about.html", "Stale project title")
+    assert not any(tag == "a" for tag, _ in Tags(about).tags)

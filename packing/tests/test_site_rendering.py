@@ -325,7 +325,7 @@ def test_native_closed_optional_math_is_outside_the_initial_readability_sample(
 #: the archive table here is a test fixture, never a production alternate page.
 PROSE_FIRST = "results-prose-first.html"
 _ARCHIVE_TABLE = re.compile(
-    r'<h2 id="all-results">.*?(?=<h2 id="verification-ladders">)',
+    r'<h2 id="all-results"[^>]*>.*?(?=<h2 id="verification-ladders"[^>]*>)',
     re.DOTALL,
 )
 

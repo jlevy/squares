@@ -1234,6 +1234,8 @@ def _role_rules(entry: dict[str, Any]) -> dict[str, tuple[float | None, float | 
         "nav ancestor": (note, bold),
         "nav link": (note, medium),
         "breadcrumb": (note, regular),
+        "navigation copy": (base, regular),
+        "navigation heading": (tokens["--kpress-font-size-h2"], medium),
         "section tab": (note * tokens["--paper-button-label-scale"], medium),
         "compact chooser": (tokens.get("--site-chooser-small-size"), medium),
     }

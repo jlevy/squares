@@ -289,7 +289,7 @@ Site name → / [Home; selected previews and actions]
     ├── The Squares Project → about.html [menu; project page]
     ├── Contributor Profiles → profiles/ [menu; directory]
     │   └── 75 profile pages
-    ├── Documentation → documentation.html [menu; full documentation directory]
+    ├── Project Documentation → documentation.html [menu; full documentation directory]
     │   ├── readme.html
     │   ├── synopsis.html → 18 chapter pages
     │   ├── conventions.html
@@ -302,6 +302,13 @@ Results has four dropdown entries, Learn six, and About four.
 The menus omit individual records and the 18 Synopsis chapters.
 Each menu destination has substantive content.
 Only Overview carries summary previews.
+Every actual menu destination uses its menu label for the page H1, browser and preview
+titles, and current breadcrumb item, from the shared `navigation_title` lookup.
+This includes Overview, Verification and Ratings, Contributor Profiles, Project
+Documentation, and Workbench.
+Preserve scientific source-document titles and legacy anchors; the rendered reader page
+supplies its canonical navigation heading.
+Overview retains The Square Packing Problem as its meaningful subtitle.
 Epistemics remains cross-linked from Documentation, tutorials, and result explanations;
 its single navigation parent becomes Results because readers use it to interpret
 evidence labels.
@@ -312,6 +319,10 @@ evidence labels.
 `recent-results.html` is the substantive Recent Results page: every arrival by day and
 significant earlier publications by week, with the existing windows, order, and credits.
 Its result identifiers link to their canonical rows in the Results Archive.
+Keep the page concise: the date span, chronological disclosures, significance-floor
+note, result links and one View Results Archive action are sufficient.
+Omit a local contents bar, repeated how-to prose, and repeated per-day filter links; the
+archive retains all explicit query/filter URLs.
 Keep `results.html` as the **Results Archive**, with its complete sortable, filterable
 register after a compact introduction and direct actions for Recent Results and Visual
 Atlas. Preserve archive query parameters, result-row anchors, and the existing
@@ -438,7 +449,7 @@ the reader-facing parent for every named page or family.
 | `resources.html` | Resources | Learn; complete resource directory |
 | `news.html` | News | Top-level page; preserve `#changelog` and entry anchors |
 | `about.html` | The Squares Project | About; project narrative with preserved compatibility fragments |
-| `documentation.html` | Documentation | About; complete reader and developer document catalogue |
+| `documentation.html` | Project Documentation | About; complete reader and developer document catalogue |
 | `report.html` | Report a Result | About; complete contribution instructions |
 | `profiles/` (`profiles/index.html`) | People and Profiles | About; full directory |
 | `profiles/<person>.html` (75) | Person’s evidenced name | About → Profiles; retain all reviewed identity and credit content |
@@ -473,16 +484,16 @@ The final breadcrumb item is always plain text, never a link.
 | News | News |
 | Recent Results | Results → Recent Results |
 | Results register | Results → Results Archive |
-| The Squares Project | The Squares Project |
+| The Squares Project | About → The Squares Project |
 | Visual Atlas | Results → Visual Atlas |
 | Case 11 | Results → Visual Atlas → n = 11 |
 | Result T-060 | Results → Results Archive → T-060 |
 | Epistemics | Results → Verification and Ratings |
 | Papers, Tutorials, Downloads, Tutorial, Advanced Tutorial, or a paper | Learn → Current title |
 | Videos, Workbench, or Resources | Learn → Videos / Workbench / Resources, as appropriate |
-| Profile directory | About → Profiles |
-| Person profile | About → Profiles → Person’s name |
-| Documentation, Report a Result, Project Guide, Conventions, or Development | About → Current title |
+| Profile directory | About → Contributor Profiles |
+| Person profile | About → Contributor Profiles → Person’s name |
+| Project Documentation, Report a Result, Project Guide, Conventions, or Development | About → Current title |
 | Research Synopsis | About → Research Synopsis |
 | Synopsis chapter | About → Research Synopsis → Chapter title |
 
@@ -569,7 +580,21 @@ in `href`. Individual detail links name the case, result, person, or paper; cont
 actions retain purpose-specific wording such as Report a Result.
 Document this vocabulary and its examples in the same Design System entry.
 
-The reading measure is 33em of the shared prose font base, or 594px at an 18px base.
+Navigation and collection chrome use the shared sans face: menus, breadcrumbs, page
+headers, local navigation, collection-section headings, rollup dates/counts, and compact
+navigation metadata.
+Mark these with the shared `site-navigation-heading` and `site-navigation-copy` roles
+where native navigation elements do not express the role.
+Substantive mathematical exposition and News article bodies retain the serif face.
+Remove GitHub icons from the site footer; retained footer links keep their text.
+
+The reading measure is 35em of the shared prose font base, or 630px at an 18px base.
+Card groups use that same outer width across catalogues and profile resources, with a
+shared frame rule and a responsive column count capped to the actual number of cards.
+Large cards use an 18rem minimum and fit two columns from 37rem; two Tutorials cards
+therefore fill the reading measure without an empty third slot.
+Wide tables, Atlas drawings, paper figures, and the Workbench application remain
+visual/data surfaces rather than alternate prose measures.
 Headings and breadcrumbs resolve the same calculated width instead of interpreting em
 against their own font size.
 Column padding sits outside that text measure.
@@ -598,6 +623,9 @@ claim them. Document their shared components and states in the existing
 | Bead | Requirement and acceptance |
 | --- | --- |
 | `think-2abe` | Put Accounts second, immediately after Name, in the profile directory. Preserve the relative Records → Results → Credits order and existing sorting and responsive behavior. |
+| `think-7kbb` | Apply the shared 35em reading measure and prose-aligned card groups, cap columns to actual cards, use sans navigation chrome, and remove footer GitHub icons. |
+| `think-j4jk` | Remove repeated Recent Results introductions, contents links and per-day filter navigation; preserve dates, result lists, credits, ratings and one archive action. |
+| `think-0xj7` | Use each menu destination’s canonical label for its H1, browser metadata and current breadcrumb; rename Project Documentation and Contributor Profiles consistently. |
 | `think-aefa` | Set the numeric total in each profile-table tally in bold, never italic; keep its result, record, or credit label in regular weight. Preserve muted significance parentheticals and blank zero cells through the shared tally component. |
 | `think-mpxs` | Give shared profile, result, and case popovers roughly 60% more width on wide screens where space permits. Base the shared responsive rule on `--kpress-measure`, panel padding, and viewport gutters. Audit the current 36rem general and 46rem framed-page ceilings rather than multiplying every variant. Cap prose measure while preserving room for case visualizations, narrow-screen fit, focus, controls, scrolling, and freedom from horizontal overflow. |
 | `think-klec` | Use diagonal outward arrows for the shared expand action. Prefer Lucide `maximize-2` if available in the existing pinned icon set; otherwise use a coherent shared equivalent. Preserve shared icon sizing, the accessible Open full page label, and identical header/footer destinations wherever an overlay opens a full page. |
@@ -759,7 +787,7 @@ Include representative direct loads of a paper, advanced tutorial, profile, resu
 workbench. Verify menu focus and dismissal, sticky header interaction, current-parent
 indication, visible/structured breadcrumb agreement, and a plain current-page label on
 every page, including Overview and About.
-Confirm the shared 33em reading measure and the absence of a Film/Workbench switcher.
+Confirm the shared 35em reading measure and the absence of a Film/Workbench switcher.
 Expand a News entry and check that metadata links each occupy their own line, with serif
 article prose and muted sans metadata.
 

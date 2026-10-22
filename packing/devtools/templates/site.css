@@ -173,7 +173,7 @@ body {
 /* Capped at 100% as kpress caps its column: beside a TOC the column is a grid item with
    auto margins, sized to its min-content, so a wide code block or table would otherwise
    push it past a phone's viewport instead of scrolling inside it. The text fills the
-   column at the shared 33em text measure. Insets belong outside that text width; on
+   column at the shared 35em text measure. Insets belong outside that text width; on
    a phone the page and document gutters keep it off the screen’s edge. */
 .kpress .site-page {
   margin-inline: auto;
@@ -181,7 +181,7 @@ body {
   padding-block-end: calc(var(--kpress-font-size-base) * 5);
   padding-inline: 0;
 }
-/* Wide blocks (tables, the atlas figure, card grids) take a wider track than prose, and
+/* Explicit data tables and visualizations take a wider track than prose, and
    stop `--site-wide-gutter` short of the page's content area on either side. That area
    is KPress's page container less its margin, `100cqw`: the width the page is laid out
    in. `100vw` is not, since it counts a scrollbar the layout does not, and a narrow page
@@ -304,11 +304,11 @@ body {
 }
 
 /* ---------- Cards ---------- */
-/* A card section is a frame the width of the wide track holding the cards, so the cards
+/* A card section is a frame the width of the prose holding the cards, so the cards
    can ask how wide their frame is. A card comes in three sizes, which it names in
    `data-card-size`, and is as wide as a column of the grid of its size's columns the
    frame fits, with 1rem gaps: small columns are at least 12rem, medium 16rem and large
-   21rem, so a 69rem frame holds four small or four medium cards to a line, or three large; no size sets
+   18rem. The count is capped to the cards present, so short groups fill the prose track; no size sets
    more than four to a line (the owner, 2026-10-05).
    `--site-cards-small`, `-medium` and `-large` are those counts, each stepped by its own
    container queries: n columns of minimum m and n - 1 gaps need (m + 1)n - 1 rem. A card
@@ -322,14 +322,31 @@ body {
   container-type: inline-size;
   margin-block: 1.5rem;
 }
+/* Catalogue and profile resource cards share prose edges, even when legacy markup
+   also names the generic wide track. Data tables and visual stages keep that track. */
+.site-page :is(.site-cards-frame, .site-atlas-note) {
+  inline-size: 100%;
+  margin-inline: auto;
+  max-inline-size: min(100%, var(--kpress-measure));
+}
 .site-cards {
   --site-card-gap: 1rem;
+  --site-cards-count: 1;
   --site-cards-small: 1;
   --site-cards-medium: 1;
   --site-cards-large: 1;
   display: grid;
   gap: var(--site-card-gap);
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+}
+.site-cards:has(> :nth-child(2 of .site-card)) {
+  --site-cards-count: 2;
+}
+.site-cards:has(> :nth-child(3 of .site-card)) {
+  --site-cards-count: 3;
+}
+.site-cards:has(> :nth-child(4 of .site-card)) {
+  --site-cards-count: 4;
 }
 /* Each line of a section set in lines of its own is a row of its cards, a gap below the
    line before it. */
@@ -351,7 +368,7 @@ body {
     --site-cards-small: 3;
   }
 }
-@container (width >= 43rem) {
+@container (width >= 37rem) {
   .site-cards {
     --site-cards-large: 2;
   }
@@ -366,7 +383,7 @@ body {
     --site-cards-small: 4;
   }
 }
-@container (width >= 65rem) {
+@container (width >= 56rem) {
   .site-cards {
     --site-cards-large: 3;
   }
@@ -376,7 +393,7 @@ body {
     --site-cards-medium: 4;
   }
 }
-@container (width >= 87rem) {
+@container (width >= 75rem) {
   .site-cards {
     --site-cards-large: 4;
   }
@@ -388,23 +405,23 @@ body {
     justify-content: center;
   }
   .site-cards > .site-card {
-    --site-cards-line: var(--site-cards-medium);
+    --site-cards-line: min(var(--site-cards-medium), var(--site-cards-count));
     --site-cards-gaps: calc((var(--site-cards-line) - 1) * var(--site-card-gap));
     flex: 0 0 calc((100% - var(--site-cards-gaps)) / var(--site-cards-line));
     min-inline-size: 0;
   }
   .site-cards > .site-card[data-card-size="small"] {
-    --site-cards-line: var(--site-cards-small);
+    --site-cards-line: min(var(--site-cards-small), var(--site-cards-count));
   }
   .site-cards > .site-card[data-card-size="large"] {
-    --site-cards-line: var(--site-cards-large);
+    --site-cards-line: min(var(--site-cards-large), var(--site-cards-count));
   }
   /* A section set in lines of its own (`SECTION_CARD_LINES`) sets no more cards to a
      line than its longest line holds, so its lines share one column width: the page
      cards stand one, three and three, at the width of three to a line, the three papers
      of the n = 11 series on the line of three. */
   .site-cards[data-cards-most="3"] > .site-card {
-    --site-cards-line: min(var(--site-cards-medium), 3);
+    --site-cards-line: min(var(--site-cards-medium), 3, var(--site-cards-count));
   }
 }
 /* A card is a clean summary with square corners. Most cards are a button that opens a
@@ -3826,4 +3843,22 @@ html[data-site-atlas-view="triangle"]
     > .kpress-long-text {
     padding-block-start: 0;
   }
+}
+
+/* Navigation, collection controls and metadata use the sans role. Inline links in
+   substantive exposition retain their paragraph's serif face. */
+.kpress
+:is(
+  nav,
+  .site-navigation-copy,
+  .site-navigation-heading,
+  .site-rollup summary,
+  .site-rollup-count
+) {
+  font-family: var(--kpress-font-sans);
+  font-weight: var(--site-font-weight-sans-light);
+}
+.kpress .site-navigation-heading {
+  font-style: normal;
+  font-weight: var(--site-font-weight-sans-medium);
 }

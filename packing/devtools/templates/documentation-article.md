@@ -1,4 +1,4 @@
-<h1 id="squares-project-documentation" class="site-title">Documentation</h1>
+<h1 id="squares-project-documentation" class="site-title">Project Documentation</h1>
 
 {{DOCUMENTATION_BLOCK}}
 

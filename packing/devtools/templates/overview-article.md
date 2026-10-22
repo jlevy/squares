@@ -6,7 +6,9 @@
 
 <!-- The explainer's older #the-square-packing-problem fragment belongs to that paper;
      this page keeps its own title address. -->
-<h1 id="the-problem" class="site-title">The Square Packing Problem</h1>
+<h1 id="the-problem" class="site-title">Overview</h1>
+
+<p class="site-navigation-copy">The Square Packing Problem</p>
 
 The square packing problem is a simple and long-standing problem in geometry: what is
 the size of the smallest square that can hold $n$ unit squares, where the squares are

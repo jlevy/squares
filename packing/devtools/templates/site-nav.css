@@ -358,6 +358,12 @@
 .site-colophon-line {
   display: block;
 }
+/* Footer credits retain ordinary text links without decorative brand/external marks. */
+:is(.site-colophon, .colophon) .site-colophon-line a[href]::before,
+:is(.site-colophon, .colophon) .site-colophon-line a[href]::after {
+  content: none;
+  display: none;
+}
 .site-colophon-part {
   display: inline-block;
   text-wrap: balance;
@@ -572,6 +578,7 @@ nav.site-tabs a[aria-current="page"],
 }
 .site-nav-disclosure svg {
   margin-inline-start: 0.3rem;
+  transform: rotate(0deg);
   transition: transform var(--site-hover-duration) var(--site-hover-easing);
 }
 .site-nav :is(.site-nav-mobile-toggle, .site-nav-disclosure):is(:hover, [aria-expanded="true"]) {
@@ -587,7 +594,7 @@ nav.site-tabs a[aria-current="page"],
   font-weight: var(--paper-font-weight-sans-bold, 680);
 }
 .site-nav-disclosure[aria-expanded="true"] svg {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 .site-nav-submenu {
   flex-basis: 100%;
@@ -787,4 +794,13 @@ nav.site-tabs a[aria-current="page"],
   .site-nav .site-nav-disclosure svg {
     transition-duration: 0ms;
   }
+}
+
+/* Closed chevrons point right; positive travel opens them downward clockwise.
+   Closing reverses that same quarter turn, including nested native disclosures. */
+.kpress details:not([open]) > summary::before {
+  transform: rotate(0deg);
+}
+.kpress details[open] > summary::before {
+  transform: rotate(90deg);
 }

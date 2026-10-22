@@ -397,7 +397,7 @@ def test_header_is_usable_without_javascript(browser: Any, shells: dict[str, Pat
         page.goto(shells["ordinary"].as_uri(), wait_until="load")
         nav = page.locator(".site-nav")
         assert nav.is_visible()
-        assert nav.locator('a[data-page="about"]').is_visible()
+        assert nav.locator('a[data-page="project"]').is_visible()
         assert nav.locator('a[data-page="github"]').is_visible()
     finally:
         page.close()

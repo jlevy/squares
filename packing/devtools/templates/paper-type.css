@@ -111,14 +111,14 @@
   }
 }
 
-/* The text itself reads at 33em of the shared prose base (594px at 18px).
+/* The text itself reads at 35em of the shared prose base (630px at 18px).
    Use the host base, not the consuming element’s font size: a sans breadcrumb or
    heading must resolve the same width as prose. Column padding is outside this measure.
    Declared on the scopes KPress declares its own on, so it wins there. */
 :root,
 .kpress,
 .kpress-page-main {
-  --kpress-measure: calc(var(--kpress-host-font-size-base) * 33);
+  --kpress-measure: calc(var(--kpress-host-font-size-base) * 35);
 }
 
 /* Section headings at 1.2 of the prose at every width. KPress steps its h2 up to 1.4

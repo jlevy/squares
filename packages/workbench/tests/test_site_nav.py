@@ -73,8 +73,8 @@ def test_the_page_carries_the_sites_head_at_the_address_it_is_served_at(page: st
     assert head.meta("og:type") == ["website"]
     assert head.meta("description") == [build_site.PAGE.description]
     template = TEMPLATE.read_text(encoding="utf-8")
-    assert template.count("<title>Square packing workbench</title>") == 1
-    assert "<title>Square packing workbench</title>" not in page
+    assert template.count("<title>Workbench</title>") == 1
+    assert 'id="stage-accessible-title">Workbench</h1>' in page
     assert page.count("<title>") == 1
     assert 'data-src="data/corpus.' in page
     assert page.index(build_site.POLICY_META) < page.index("<title>")

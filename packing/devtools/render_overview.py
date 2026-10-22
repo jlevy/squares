@@ -768,6 +768,7 @@ def head_tags(page: PageMeta) -> str:
         )
     if not page.name.strip():
         raise SystemExit(f"{page.path}: a page has a name")
+    page = page._replace(name=site_navigation.navigation_title(page.path, page.name))
     for moment in (page.published, page.modified):
         if moment and not _ISO_DATE.fullmatch(moment):
             raise SystemExit(f"{page.path}: {moment!r} is not an ISO date")
@@ -1139,6 +1140,26 @@ def article_page_scripts(page_scripts: Sequence[Path]) -> tuple[Path, ...]:
     )
 
 
+def _navigation_heading(body: str, path: str) -> str:
+    """Use the menu's page name for its first heading, retaining legacy anchor IDs."""
+    title = site_navigation.navigation_title(path)
+    if not title:
+        return body
+    heading = re.search(r"(<h1\b[^>]*>)(.*?)(</h1>)", body, re.DOTALL)
+    if heading is not None:
+        aliases = "".join(re.findall(r'<a\b[^>]*\bid="[^"]+"[^>]*></a>', heading[2]))
+        return body[: heading.start(2)] + html.escape(title) + aliases + body[heading.end(2) :]
+    markdown_heading = re.search(r"^# ([^\n]+)$", body, re.MULTILINE)
+    if markdown_heading is None:
+        return body
+    anchor = re.sub(r"[^a-z0-9]+", "-", markdown_heading[1].lower()).strip("-")
+    return (
+        body[: markdown_heading.start()]
+        + f'<h1 id="{anchor}">{html.escape(title)}</h1>'
+        + body[markdown_heading.end() :]
+    )
+
+
 def kpress_page(
     markdown: str,
     *,
@@ -1178,6 +1199,8 @@ def kpress_page(
     from kpress.format.model import DocumentInput, RenderOptions  # noqa: PLC0415
     from kpress.format.render import render_page  # noqa: PLC0415
 
+    title = site_navigation.navigation_title(name, title)
+    markdown = _navigation_heading(markdown, name)
     document = DocumentInput(
         title=page_title(title),
         source_text=markdown,
@@ -1552,21 +1575,15 @@ def recent_results_page() -> Page:
     overview = overview_data.load()
     values = {
         "RECENT_ADDED": overview_sections.recent_added(overview),
-        "ADDED_LINK": overview_sections.added_link(
-            f"added-since={overview_sections.added_since(overview).isoformat()}"
-        ),
-        "ADDED_LAST_DAY": overview_sections.added_link("added-age=1"),
-        "ADDED_DAYS": overview_sections.ADDED_DAYS_WORD[overview_sections.ADDED_DAYS],
         "ADDED_DAYS_TITLE": overview_sections.ADDED_DAYS_WORD[
             overview_sections.ADDED_DAYS
         ].capitalize(),
         "ADDED_SPAN": overview_sections.span_label(
             overview_sections.added_since(overview), overview_sections.added_reference(overview)
         ),
-        "ADDED_FIRST": overview_sections.day_label(overview_sections.added_since(overview)),
         "RECENT_ROLLUP": overview_sections.recent_rollup(overview),
         "ROLLUP_FLOOR": f"S{overview_sections.ROLLUP_FLOOR}",
-        "ROLLUP_WEEKS": overview_sections.ROLLUP_WEEKS_WORD[overview_sections.ROLLUP_WEEKS],
+        "ARROW_RIGHT": overview_sections.arrow_icon("right"),
     }
     # These shared rollup components formerly sat above the archive table. On their
     # own page their result links must keep the archive's canonical row addresses.
@@ -1735,6 +1752,7 @@ def static_content_page(
         theme_bootstrap,
     )
 
+    body = _navigation_heading(body, meta.path)
     head, _math_scripts = page_assets()
     programs = (
         site_assets.script_tag(kpress_client_asset(), _FROM_ROOT)

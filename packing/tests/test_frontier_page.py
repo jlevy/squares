@@ -573,7 +573,7 @@ def test_the_page_carries_the_table_script_and_its_controls(page: str, served: s
         (link.text(), link.attrs.get("href"))
         for link in navigation.find_all("a")
         if link.attrs.get("aria-current") == "page"
-    ] == [("Atlas", "atlas.html")]
+    ] == [("Visual Atlas", "atlas.html")]
     assert 'data-page="frontier"' not in page
 
 

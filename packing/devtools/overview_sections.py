@@ -1580,22 +1580,18 @@ def added_entry(result: Result) -> str:
 
 
 def recent_added(overview: Overview, *, days: int = ADDED_DAYS) -> str:
-    """The results page's top section: every result that reached the site over the
-    `days` to the newest arrival (`added_days`), one disclosure a day, newest first, its
-    summary the date and its count, its body every entry (`added_entry`) and a link that
-    opens the table on that day alone (`?added=`). The `ADDED_OPEN` newest days start open
-    and the others closed."""
+    """Every arrival over `days` to the newest arrival, grouped newest first by day.
+    Each disclosure keeps its date, count and complete entries (`added_entry`). The
+    `ADDED_OPEN` newest days start open and the others closed."""
     blocks = []
     for index, added in enumerate(added_days(overview.results, added_since(overview, days))):
         state = " open" if index < ADDED_OPEN else ""
-        count = len(added.results)
         day = added.day.isoformat()
         blocks.append(
             f'<details data-day="{day}"{state}>'
-            f"{disclosure_summary(day_label(added.day), count)}"
+            f"{disclosure_summary(day_label(added.day), len(added.results))}"
             f"<ul>{''.join(added_entry(result) for result in added.results)}</ul>"
-            f'<p><a href="{_esc(added_link(f"added={day}"))}">'
-            f"Show {'it' if count == 1 else f'these {count}'} in the table</a></p></details>"
+            "</details>"
         )
     return f'<div class="site-rollup site-added">{"".join(blocks)}</div>'
 

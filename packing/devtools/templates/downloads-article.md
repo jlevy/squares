@@ -4,7 +4,7 @@
 
 </div>
 
-## Packing Posters
+<h2 id="packing-posters" class="site-navigation-heading">Packing Posters</h2>
 
 Download the first hundred packings or the complete 324-case Atlas as a printable PDF.
 The posters label their bounds and identify open cases; the linked case records in the
@@ -14,7 +14,7 @@ The posters label their bounds and identify open cases; the linked case records 
 
 {{PDF_NOTE}}
 
-## Paper Editions
+<h2 id="paper-editions" class="site-navigation-heading">Paper Editions</h2>
 
 Each paper has a PDF for reading and printing and a Markdown source edition.
 The [papers catalogue](papers.html) introduces the full series and its HTML editions.

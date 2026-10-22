@@ -62,7 +62,7 @@ pytestmark = pytest.mark.usefixtures(prepared_forwarders.__name__)
 RESULTS = PageMeta(
     name="Every Result",
     description="Every reviewed result, with its claim, its credit and its ratings.",
-    path="results.html",
+    path="example-results.html",
 )
 
 
@@ -89,7 +89,7 @@ def test_head_tags_writes_each_tag_once_from_a_page_record() -> None:
     """One record gives the whole set: the title, the description, the canonical link,
     Open Graph and Twitter, each once, the addresses in full under the published root."""
     head = read_head(document(head_tags(RESULTS)))
-    url = SITE_URL + "results.html"
+    url = SITE_URL + RESULTS.path
     assert head.titles == ("Every Result · The Squares Project",)
     assert head.link("canonical") == [url]
     assert [key for key, _ in head.metas] == ["description", "robots", *REQUIRED_META[1:]]
@@ -127,11 +127,13 @@ def test_the_title_helper_does_not_repeat_the_formal_project_name() -> None:
     assert page_title("Papers") == "Papers · The Squares Project"
     assert page_title(PROJECT_NAME) == PROJECT_NAME == "The Squares Project"
     head = read_head(
-        document(head_tags(PageMeta(PROJECT_NAME, "The front door.", "index.html")))
+        document(
+            head_tags(PageMeta(PROJECT_NAME, "Project identity.", "project-identity.html"))
+        )
     )
     assert head.titles == (PROJECT_NAME,)
     assert head.meta("og:title") == head.meta("og:site_name") == [PROJECT_NAME]
-    assert head.link("canonical") == head.meta("og:url") == [SITE_URL]
+    assert head.link("canonical") == head.meta("og:url") == [SITE_URL + "project-identity.html"]
 
 
 def test_a_page_is_canonical_at_the_address_it_is_served_at() -> None:
@@ -199,7 +201,7 @@ def test_every_page_of_the_site_carries_the_set_once_at_its_own_address(
         assert "Square Packing Project" not in title, name
         # kpress's own four tags are gone, not added to.
         assert len(head.meta("og:type")) == len(head.meta("twitter:card")) == 1, name
-    assert read_head(pages["index.html"]).titles == ("The Squares Project",)
+    assert read_head(pages["index.html"]).titles == ("Overview · The Squares Project",)
     assert read_head(pages["tutorial.html"]).meta("og:type") == ["article"]
     kinds = {name: read_head(page).meta("og:type") for name, page in pages.items()}
     assert [name for name, kind in kinds.items() if kind != ["website"]] == [
@@ -286,7 +288,7 @@ OG_TITLE = '<meta property="og:title" content="Every Result">'
         ),
         (
             (
-                'og:url" content="https://squaremath.org/results.html',
+                'og:url" content="https://squaremath.org/example-results.html',
                 'og:url" content="https://squaremath.org/all-results.html',
             ),
             "og:url is",
@@ -296,7 +298,7 @@ OG_TITLE = '<meta property="og:title" content="Every Result">'
                 'rel="canonical" href="https://squaremath.org/',
                 'rel="canonical" href="',
             ),
-            "the canonical link is 'results.html'",
+            "the canonical link is 'example-results.html'",
         ),
         (
             ('og:image" content="https://squaremath.org/', 'og:image" content="'),
@@ -565,7 +567,10 @@ def test_a_forwarder_previewing_its_page_by_another_name_kind_or_sentence_is_nam
         (
             render_overview.RESULTS_META.name,
             "All Results",
-            "its og:title is ['All Results'], and the page's own is ['Results']",
+            (
+                "its og:title is ['All Results'], and the page's own is "
+                f"[{render_overview.RESULTS_META.name!r}]"
+            ),
         ),
         (
             'og:type" content="website"',
@@ -968,12 +973,13 @@ def test_a_page_added_later_or_a_record_that_loses_a_tag_fails_the_check(
     )
     (tmp_path / "status.html").write_text(forwarder, encoding="utf-8")
     assert all(passed for passed, _ in local_head_checks(tmp_path))
-    renamed = forwarder.replace("The Atlas of Square Packings", "The Frontier Atlas")
+    renamed = forwarder.replace(render_overview.ATLAS_META.name, "The Frontier Atlas")
+    assert renamed != forwarder
     (tmp_path / "status.html").write_text(renamed, encoding="utf-8")
     (failure,) = [line for passed, line in local_head_checks(tmp_path) if not passed]
     assert failure == (
         "forwarder status.html: head: its og:title is ['The Frontier Atlas'], and the "
-        "page's own is ['The Atlas of Square Packings']"
+        f"page's own is [{render_overview.ATLAS_META.name!r}]"
     )
 
 

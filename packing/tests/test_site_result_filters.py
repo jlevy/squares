@@ -63,7 +63,7 @@ def browser() -> Iterator[Any]:
 @pytest.fixture(scope="module")
 def pages(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
     root = tmp_path_factory.mktemp("site")
-    written = site_renders.write(root, "index.html", *PAGES)
+    written = site_renders.write(root, "index.html", "recent-results.html", *PAGES)
     crawl, _ = site_urls.crawl_files()
     for row in RETIRED:
         target = root / row.path
@@ -343,10 +343,10 @@ def test_the_added_filter_shows_what_reached_the_site(
     Added within and shows exactly the results that arrived that day or the day before,
     whatever the date their rows show or the day a lane registered them, and leaves Max
     age empty (#514's review A, finding A1); the clock is noon, where the reader's day and
-    the UTC day an age of arrival counts in agree. The seven days' arrival link opens
-    the table from the section's first day, `?added-since=`, with Added since in the
-    bar, on the results the section lists (A3). The newest day's own link opens it on
-    that day alone, with Added on in the bar naming the day; and a day nothing arrived
+    the UTC day an age of arrival counts in agree. The archive URL `?added-since=`
+    opens the table from the Recent Results section's first day, with Added since in
+    the bar, on the results that section lists (A3). An explicit `?added=` URL opens
+    the newest day alone, with Added on in the bar naming the day; and a day nothing arrived
     on is named there too and shows no row, rather than every row (A5)."""
     name = "results.html"
     reference = overview_sections.added_reference(overview)
@@ -375,29 +375,30 @@ def test_the_added_filter_shows_what_reached_the_site(
 
         page.goto(pages[name].as_uri(), wait_until="load")
         assert not page.locator(added_since).is_visible()
-        arrivals = page.get_by_role("link", name="Browse these arrivals", exact=True)
-        with page.expect_navigation(url=arrival(pages[name]), wait_until="load"):
-            arrivals.click()
+        page.goto(pages["recent-results.html"].as_uri(), wait_until="load")
+        listed = sorted(
+            urlsplit(link.get_attribute("href") or "").fragment
+            for link in page.locator(".site-added li > a:first-child").all()
+        )
+        newest = reference.isoformat()
+        day = page.locator(f'.site-added details[data-day="{newest}"]')
+        newest_listed = sorted(
+            urlsplit(link.get_attribute("href") or "").fragment
+            for link in day.locator("li > a:first-child").all()
+        )
         first = (reference - timedelta(days=overview_sections.ADDED_DAYS)).isoformat()
+        page.goto(pages[name].as_uri() + f"?added-since={first}#all-results", wait_until="load")
         assert urlsplit(page.url).query == f"added-since={first}"
         assert urlsplit(page.url).fragment == "all-results"
         assert page.locator(added_since).is_visible()
         assert page.locator(added_since).input_value() == first
-        listed = sorted(
-            (link.get_attribute("href") or "").removeprefix("#")
-            for link in page.locator(".site-added li > a:first-child").all()
-        )
         found = state(page)
         assert sorted(found["shown"]) == listed == _arrived_since(overview, 7)
 
-        page.goto(pages[name].as_uri(), wait_until="load")
-        newest = reference.isoformat()
-        day = page.locator(f'.site-added details[data-day="{newest}"]')
-        with page.expect_navigation(url=arrival(pages[name]), wait_until="load"):
-            day.locator("p a").click()
+        page.goto(pages[name].as_uri() + f"?added={newest}#all-results", wait_until="load")
         assert urlsplit(page.url).query == f"added={newest}"
         found = state(page)
-        assert sorted(found["shown"]) == _arrived_since(overview, 0)
+        assert sorted(found["shown"]) == newest_listed == _arrived_since(overview, 0)
         assert page.locator(added_on).is_visible()
         assert page.locator(added_on).input_value() == newest
         assert page.locator(added_age).input_value() == ""

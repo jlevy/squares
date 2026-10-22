@@ -921,7 +921,7 @@ def contributor_article(
 #: The directory's head record. Profiles include cited paper authors, so the directory
 #: says whose work the record names rather than calling everyone a contributor.
 DIRECTORY_META = PageMeta(
-    "Profiles",
+    "Contributor Profiles",
     "People whose work the square-packing record cites or credits, with sourced public "
     "profiles and links to their work.",
     DIRECTORY_PATH,
@@ -974,7 +974,7 @@ def contributor_pages() -> list[Page]:
     occurrences = load_occurrences().occurrences
     directory = (
         '<article class="site-contributor-directory">'
-        "<h1>Profiles</h1>"
+        "<h1>Contributor Profiles</h1>"
         "<p>People whose work the square-packing record cites or credits, paper authors "
         "and project contributors alike. Each profile records public identity evidence "
         "and links to reviewed credits. Results count distinct registered results by their "

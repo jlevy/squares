@@ -51,15 +51,21 @@ NAVIGATION = (
     NavigationItem(
         "about",
         "About",
-        "about.html",
+        "",
         (
             NavigationItem("project", "The Squares Project", "about.html"),
             NavigationItem("profiles", "Contributor Profiles", "profiles/"),
-            NavigationItem("documentation", "Documentation", "documentation.html"),
+            NavigationItem("documentation", "Project Documentation", "documentation.html"),
             NavigationItem("report", "Report a Result", "report.html"),
         ),
     ),
 )
+_PAGE_TITLES = {
+    item.path: item.label
+    for group in NAVIGATION
+    for item in (group, *group.children)
+    if item.path
+}
 _LEGACY_PATHS = {
     "overview": "./",
     "news": "news.html",
@@ -79,8 +85,10 @@ _LEGACY_PATHS = {
 }
 # The same parent declarations drive the group indication and visible/structured trails.
 _PARENTS = {
+    "about.html": ("about",),
     "recent-results.html": ("results",),
-    "results.html": ("results",),    "atlas.html": ("results",),
+    "results.html": ("results",),
+    "atlas.html": ("results",),
     "epistemics.html": ("results",),
     "papers.html": ("learn",),
     "tutorials.html": ("learn",),
@@ -108,14 +116,13 @@ _COLLECTIONS = {
 _ANCESTORS = {
     **{item.key: (item.label, item.path) for item in NAVIGATION},
     **{child.key: (child.label, child.path) for item in NAVIGATION for child in item.children},
-    "profiles": ("Profiles", "profiles/"),
     "synopsis": ("Research Synopsis", "synopsis.html"),
 }
 _CHEVRON = (
     '<svg class="site-nav-icon" viewBox="0 0 24 24" fill="none" '
     'stroke="currentColor" stroke-width="2" stroke-linecap="round" '
     'stroke-linejoin="round" aria-hidden="true" focusable="false">'
-    '<path d="m6 9 6 6 6-6"/></svg>'
+    '<path d="m9 6 6 6-6 6"/></svg>'
 )
 
 
@@ -128,6 +135,11 @@ def _path(value: str) -> str:
     if path.endswith("/index.html"):
         return path.removesuffix("index.html")
     return path
+
+
+def navigation_title(path: str, fallback: str = "") -> str:
+    """Return a menu destination's canonical title, leaving detail titles to the caller."""
+    return _PAGE_TITLES.get(_path(path), fallback)
 
 
 def _parents(path: str) -> tuple[str, ...]:
@@ -199,7 +211,7 @@ def navigation_links(current: str, root: str = "") -> str:
 def _trail(path: str, title: str) -> tuple[tuple[str, str], ...]:
     path = _path(path)
     parents = _parents(path)
-    current = "Overview" if path == "./" else title
+    current = navigation_title(path, title)
     return (*(_ANCESTORS[key] for key in parents), (current, path))
 
 

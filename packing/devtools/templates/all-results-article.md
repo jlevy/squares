@@ -13,11 +13,11 @@ records.
 
 <nav aria-label="On this page"><a href="#all-results">Browse Results</a> · <a href="#verification-ladders">Verification and Ratings</a> · <a href="#evidence-and-exactness">Evidence</a> · <a href="#results-and-credits">Credits</a> · <a href="#status-and-supersession">Status</a></nav>
 
-<h2 id="all-results">Browse Results</h2>
+<h2 id="all-results" class="site-navigation-heading">Browse Results</h2>
 
 {{RESULTS_TABLE}}
 
-## Verification Ladders<a id="verification-at-a-glance"></a>
+<h2 id="verification-ladders" class="site-navigation-heading">Verification Ladders<a id="verification-at-a-glance"></a></h2>
 
 Each result has an identifier, a claim, and three ratings, defined in
 [`epistemics.md`]({{EPISTEMICS_URL}}): **S**, its significance; **V**, the strongest
@@ -31,7 +31,7 @@ standards, review policy, and complete rubrics.
 
 {{VERIFICATION}}
 
-## Evidence and Exactness
+<h2 id="evidence-and-exactness" class="site-navigation-heading">Evidence and Exactness</h2>
 
 The ladders grade a result.
 Its evidence carries an assurance label: *reported*, a named source’s claim not checked
@@ -53,7 +53,7 @@ These checks also audit published work: T-004 and T-008 check Bentz’s 2010 The
 including both halves of $s(46) = 7$, and T-011 checks Trump’s 1979 packing for eleven
 squares. The theorem remains the source’s; this repository adds an exact machine check.
 
-<h2 id="results-and-credits">Result Types and Credits</h2>
+<h2 id="results-and-credits" class="site-navigation-heading">Result Types and Credits</h2>
 
 A result’s kind is *lower bound*, *upper bound*, *optimality* (settling an exact value),
 or a kind that bounds no case, such as *rigidity*, *case exclusion*, *simplification* (a
@@ -67,7 +67,7 @@ Credits name the source’s authors; this project’s results are credited to Jo
 
 </div>
 
-## Status and Supersession
+<h2 id="status-and-supersession" class="site-navigation-heading">Status and Supersession</h2>
 
 A result’s status is *recorded* (registered from its source without review or replay
 here), *reviewed* (its argument read here), *confirmed* (its certificate replayed

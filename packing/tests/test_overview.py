@@ -1626,7 +1626,7 @@ def test_the_page_cards_keep_the_series_together_at_one_column_width(
         most, size = max(lines), overview_sections.SECTION_CARD_SIZES[section]
         rule = screen[screen.index(f'.site-cards[data-cards-most="{most}"] > .site-card {{') :]
         assert (
-            f"--site-cards-line: min(var(--site-cards-{size}), {most});"
+            f"--site-cards-line: min(var(--site-cards-{size}), {most}, var(--site-cards-count));"
             in rule[: rule.index("}")]
         ), section
     monkeypatch.setitem(overview_sections.SECTION_CARD_LINES, "pages", (2, 2))
@@ -1644,7 +1644,7 @@ _CARDS_TO_A_LINE = re.compile(
 #: to: `paper-design.md`, Cards.
 #: Each size's minimum column in rem and the most cards it sets to a line: four at most for
 #: every size (the owner, 2026-10-05).
-CARD_COLUMNS = {"small": (12, 4), "medium": (16, 4), "large": (21, 4)}
+CARD_COLUMNS = {"small": (12, 4), "medium": (16, 4), "large": (18, 4)}
 
 
 def _screen_card_rules() -> str:
@@ -1669,12 +1669,13 @@ def test_every_card_line_centres_on_its_line() -> None:
         assert declaration in row
     card = screen[screen.index(".site-cards > .site-card {") :]
     card = card[: card.index("}")]
-    assert "--site-cards-line: var(--site-cards-medium);" in card
+    assert "--site-cards-line: min(var(--site-cards-medium), var(--site-cards-count));" in card
     assert "calc((var(--site-cards-line) - 1) * var(--site-card-gap));" in card
     assert "flex: 0 0 calc((100% - var(--site-cards-gaps)) / var(--site-cards-line));" in card
     assert "min-inline-size: 0;" in card
     cards = css[css.index("/* ---------- Cards") : css.index(".kpress .site-card {")]
-    assert ":has(" not in cards, "a card line centres without counting its cards"
+    assert "nth-child(2 of .site-card)" in cards
+    assert "--site-cards-count" in cards
 
 
 def test_each_card_size_is_a_column_of_its_own_grid() -> None:
@@ -1699,7 +1700,10 @@ def test_each_card_size_is_a_column_of_its_own_grid() -> None:
             rule = screen[
                 screen.index(f'.site-cards > .site-card[data-card-size="{size}"] {{') :
             ]
-            assert f"--site-cards-line: var(--site-cards-{size});" in rule[: rule.index("}")]
+            assert (
+                f"--site-cards-line: min(var(--site-cards-{size}), var(--site-cards-count));"
+                in rule[: rule.index("}")]
+            )
     assert '[data-card-size="medium"]' not in css
 
 
@@ -2016,7 +2020,7 @@ def test_the_ladders_are_the_results_pages_and_the_overview_points_to_them(
     """Ratings and evidence follow the complete table, retaining the old section
     anchor. The homepage links the archive without repeating its diagram."""
     heading = (
-        '<h2 id="verification-ladders">Verification Ladders'
+        '<h2 id="verification-ladders" class="site-navigation-heading">Verification Ladders'
         '<a id="verification-at-a-glance"></a></h2>'
     )
     assert results.count(heading) == 1
@@ -2031,7 +2035,9 @@ def test_the_ladders_are_the_results_pages_and_the_overview_points_to_them(
     assert "C, what this repository has confirmed independently" in lead
     assert "under its review policy" in lead
     assert 'href="epistemics.html#results-by-others"' in section
-    evidence = results.split('<h2 id="evidence-and-exactness">', 1)[1].split("<h2", 1)[0]
+    evidence = results.split(
+        '<h2 id="evidence-and-exactness" class="site-navigation-heading">', 1
+    )[1].split("<h2", 1)[0]
     after = _rendered_text(evidence.split("</h2>", 1)[1])
     assert after.startswith("The ladders grade a result. Its evidence carries")
     assert "Finite precision is not enough where squares touch exactly." in after
@@ -2064,7 +2070,7 @@ def test_the_frontier_survey_is_an_atlas_section_without_duplicate_cards(
     assert '"href": "#the-frontier-survey"' not in about
     assert "The frontier survey is the record the atlas" not in _seen(about)
     assert "frontier.html?recent=true" not in about
-    assert '<a data-page="atlas" href="atlas.html">Atlas</a>' in about
+    assert '<a data-page="atlas" href="atlas.html">Visual Atlas</a>' in about
     assert 'data-page="frontier"' not in about
     for page in (about, papers):
         assert 'href="atlas.html#the-frontier-survey"' not in page
@@ -4388,7 +4394,9 @@ def test_the_project_is_named_the_squares_project_wherever_it_is_named(
     Packing Problem the subject; neither is this project's name."""
     from devtools import site_documents  # noqa: PLC0415
 
-    heading = '<h1 id="squares-project-documentation" class="site-title">Documentation</h1>'
+    heading = (
+        '<h1 id="squares-project-documentation" class="site-title">Project Documentation</h1>'
+    )
     assert documentation.count(heading) == 1
     section = documentation.split(heading, 1)[1]
     assert "live in the Squares Project\u2019s" in _rendered_text(section)
@@ -4397,7 +4405,7 @@ def test_the_project_is_named_the_squares_project_wherever_it_is_named(
     # README's page is named for the file in its tab, since the project's name follows
     # it there as it does every page's name, and the overview's title is that name alone.
     assert "<title>README · The Squares Project</title>" in rendered("readme.html")
-    assert "<title>The Squares Project</title>" in page
+    assert "<title>Overview · The Squares Project</title>" in page
     labels = [label for _, label, _ in overview_sections.DOCUMENTS]
     assert labels[0] == "The Squares Project"
     for name in (
@@ -7473,7 +7481,47 @@ def test_recent_results_and_archive_have_separate_substantive_content(
     ):
         assert f'id="{fragment}"' in recent_results
         assert f'id="{fragment}" href="recent-results.html#{fragment}"' in results
-    assert 'href="results.html?added-since=' in recent_results
+    assert 'href="results.html?added-since=' not in recent_results
+    assert 'href="results.html#all-results">View Results Archive' in recent_results
     assert 'href="recent-results.html">View Recent Results' in page
     assert 'href="results.html#all-results" data-all-results' in page
     assert "View Results Archive" in page
+
+
+def test_menu_page_headers_and_metadata_use_the_same_labels(
+    rendered: Callable[[str], str],
+) -> None:
+    """The menu model names actual page H1s, browser previews and current crumbs;
+    the category containers never invent a landing page."""
+    from devtools import site_navigation  # noqa: PLC0415
+
+    for group in site_navigation.NAVIGATION:
+        for item in (group, *group.children):
+            if not item.path:
+                continue
+            path = "index.html" if item.path == "./" else item.path
+            if path not in render_overview.PAGES:
+                continue
+            page = rendered(path)
+            heading = re.search(r"<h1\b[^>]*>(.*?)</h1>", page, re.DOTALL)
+            assert heading is not None, path
+            assert _rendered_text(heading[1]).strip() == item.label, path
+            assert f"<title>{render_overview.page_title(item.label)}</title>" in page, path
+            assert (
+                f'property="og:title" content="{html.escape(item.label, quote=True)}"' in page
+            )
+            breadcrumb = page.split('aria-label="Breadcrumb"', 1)[1].split("</nav>", 1)[0]
+            assert f'aria-current="page">{html.escape(item.label)}</span>' in breadcrumb, path
+
+
+def test_contributor_directory_uses_its_menu_label(
+    contributor_documents: dict[str, str],
+) -> None:
+    """The canonical directory title does not drift from Contributor Profiles."""
+    from devtools import site_navigation  # noqa: PLC0415
+
+    page = contributor_documents[render_contributors.DIRECTORY_PATH]
+    label = site_navigation.navigation_title(render_contributors.DIRECTORY_PATH)
+    assert label == "Contributor Profiles"
+    assert f"<h1>{label}</h1>" in page
+    assert f"<title>{render_overview.page_title(label)}</title>" in page
