@@ -5,7 +5,7 @@ title: Inventory site hierarchy and plan intuitive navigation menus
 kind: task
 status: in_progress
 priority: 2
-version: 18
+version: 19
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
 delegate: navigation-planner
 labels: []
@@ -27,11 +27,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T20:45:47.321Z
-updated_at: 2026-10-22T23:43:32.847Z
+updated_at: 2026-10-22T23:57:42.579Z
 started_at: 2026-10-22T20:46:24.554Z
 ---
 Implement and validate the site navigation redesign in PR #737: category menus, dedicated destination pages, canonical labels and breadcrumbs, shared typography and layout, and associated design-system refinements.
 
 ## Notes
 
-Current refinement slice: global 35em/630px reading measure; card groups aligned to prose; sans-serif chrome and navigation; text-only footer; concise Recent Results; Project Documentation and matching menu/page/breadcrumb labels; non-link category breadcrumbs including About; clockwise-expand chevrons. Child beads track implementation and CI repairs. Plan: docs/project/specs/active/plan-2026-10-22-site-navigation.md. Prior head20df Pages passed; Packing had stale expectations under repair. Keep PR draft until current-head validation passes.
+PR #737 implementation and live review. Shared design rules:35em/630px prose with card-group edges aligned; sans navigation/metadata; text-only footer; canonical destination labels except Overview H1 The Square Packing Problem; homepage sections Visual Atlas and Results; no breadcrumb on standalone Overview/News; plain category breadcrumbs; Report a Result last in Results. Menu keeps original down-closed/up-open endpoints and reverses its animation (-180deg opening). Button text uses shared subtle caps-spacing token. Latest slice: Recent Results becomes one chronological table with last seven days shown and older rows collapsed in that same table. Child beads and docs/project/specs/active/plan-2026-10-22-site-navigation.md track scope and validation. PR remains draft during review and current-head CI.
