@@ -858,6 +858,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for PR #578; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.17",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Mykhailo "
+            "Polkovskyi's #719 re-solves at 105 and 204 (T-229)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.16",
         first_published="October 22, 2026",
         result_scope=(
@@ -1287,6 +1295,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.16",
+        version="v0.4.17",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Mykhailo "
+            "Polkovskyi's #719 re-solves at 105 and 204 (T-229)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.15",
