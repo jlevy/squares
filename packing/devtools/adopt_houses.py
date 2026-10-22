@@ -2155,10 +2155,13 @@ def section(move: Move) -> str:
     )
     if _finally_reviewed(house.result):
         reviews = f"{reviews} and the [final review of 11 October 2026](../../{FINAL_REVIEW})"
+    # A credit that ends in a report ("as refined in Francisco Couzo's #672 report") takes
+    # another verb, so the sentence does not read "report, reported" (review B6 of #718).
+    verb = "published" if credit.phrase.endswith(" report") else "reported"
     paragraphs = [
         f"## {_title(move)}",
         (
-            f"{credit.phrase[0].upper()}{credit.phrase[1:]}, reported {prose.reported}, "
+            f"{credit.phrase[0].upper()}{credit.phrase[1:]}, {verb} {prose.reported}, "
             f"{side} ({house.result}). The certificate gives a rational side and, for each "
             f"of the {n} unit squares, {prose.squares}; "
             f"the [retained packet](../resources/web/{packet}/README.md) holds it with the "

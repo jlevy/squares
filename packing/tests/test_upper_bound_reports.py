@@ -10,6 +10,7 @@ import gzip
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 from collections.abc import Callable, Collection, Mapping
@@ -18,6 +19,7 @@ from pathlib import Path
 from typing import Any, cast
 
 import pytest
+import yaml
 
 from devtools import check_source_coverage as coverage_check
 from devtools import check_standing
@@ -847,6 +849,37 @@ def test_a_tie_reads_as_one_exact_side_and_not_as_undecided() -> None:
         "At n = 400 the certificate is beyond the horizon, with no case record, and "
         "1.50e+00 below the grid; equal #1 (A); no report is smallest, since this "
         "certificate and #1 are one exact side."
+    )
+
+
+def test_the_wall_sentence_keeps_the_wording_every_recorded_atom_uses() -> None:
+    """Review B5 of #718: where every positive clears every wall, the replay sentence reads
+    as the 52 atoms written before #718 do, "and every pair by at least"; where a positive
+    touches the box it reads "every pair clears by at least", as those atoms do."""
+    clear = {"exact_verify_containment_clearance": "1/1000"}
+    touch = {"exact_verify_containment_clearance": "0"}
+    gap = Fraction(1, 10**12)
+    walls = reports._walls  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert walls({227: clear}, gap) == (
+        "Every positive clears every wall by at least 1.00e-03 and every pair by at least "
+        "1.00e-12."
+    )
+    assert walls({204: touch}, gap).endswith("and every pair clears by at least 1.00e-12.")
+    assert walls({227: clear, 229: touch}, gap) == (
+        "At 229 squares touch the box, a least wall clearance of exactly 0; at 227 every "
+        "wall clears by at least 1.00e-03; and every pair clears by at least 1.00e-12."
+    )
+    evidence = yaml.safe_load((reports.ROOT / "frontier/evidence.yaml").read_text("utf-8"))
+    stated = [
+        " ".join(str(atom.get("limitations", "")).split())
+        for atom in evidence["evidence"]
+        if "Every positive clears every wall by at least"
+        in " ".join(str(atom.get("limitations")).split())
+    ]
+    assert len(stated) >= 52
+    assert all(
+        re.search(r"clears every wall by at least \S+ and every pair by at least", text)
+        for text in stated
     )
 
 

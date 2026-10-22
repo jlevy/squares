@@ -699,6 +699,42 @@ def test_no_record_leaves_an_adoption_to_the_owner() -> None:
             assert phrase not in words, (path.name, phrase)
 
 
+def test_the_statements_that_672_was_not_retained_become_history() -> None:
+    """Review B2 of #718: the pass of 22 October 2026 retained and registered Couzo's #672
+    (T-227), so the 229 record's two sentences saying it was neither retained nor verified
+    here are put in the past tense, wrapped at any space, and the case body says so, which
+    `adopt_houses.check` cannot see: it reads the front matter only."""
+    intake = (
+        "Couzo’s intervening claim remains Stage 1 under `think-2vjc`, with no packet or "
+        "verification adopted here."
+    )
+    step = (
+        "it carries de Winter’s four tilt bands but does not pair with his packing, and #672 "
+        "is not yet retained, so that step is the source’s (T-199)."
+    )
+    intake_history = (
+        "Couzo’s intervening claim remained Stage 1 under `think-2vjc`, with no packet or "
+        "verification here, until 22 October 2026, when it was retained and registered as "
+        "T-227."
+    )
+    step_history = (
+        "it carries de Winter’s four tilt bands but does not pair with his packing, and "
+        "#672 was not retained until 22 October 2026, so that step is the source’s (T-199); "
+        "measured since (T-227), #672’s packing pairs with T-199’s under no symmetry."
+    )
+    for text, history in ((intake, intake_history), (step, step_history)):
+        wrapped = text.replace(" under ", "\nunder ").replace(" yet ", "\nyet ")
+        assert _flat(adopt._retained_672(wrapped)) == history  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        assert _flat(adopt._retained_672(history)) == history  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    body = _flat(select.case_path(229).read_text(encoding="utf-8"))
+    assert "remains Stage 1 under `think-2vjc`" not in body
+    assert "#672 is not yet retained" not in body
+    assert "until 22 October 2026, when it was retained and registered as T-227." in body
+    assert "#672 was not retained until 22 October 2026, so that step is the source’s" in body
+    assert adopt.RETAINED_672_FROM == "2026-10-22"
+    assert houses.adopted_on(229) >= adopt.RETAINED_672_FROM
+
+
 def test_a_moved_house_keeps_its_lifted_hold_as_history() -> None:
     """Review C7 of #660, and the merge of #657, which moved ten counts below T-174 on the
     day the house rule lifted the hold: a section whose house a later pass moved keeps
