@@ -1,0 +1,64 @@
+{
+ "certificate_sha256": "929c2acf72ee54a1850183fc149f06dbf35bffa2f7ee68c8f833d888400e8080",
+ "control": "duplicate-square-overlap",
+ "adapter": "read",
+ "validate_job": "passed",
+ "wall_seconds": 28.88,
+ "cpu_seconds": {
+  "exact_verify": 6.73,
+  "independent": 4.53
+ },
+ "checker_input_sha256": "7eb444e3fc16fb803fb9367766f957d95aa1b74007e33388416e38b22abb4d22",
+ "side": "447744305431858194305431410441/25000000000000000000000000000",
+ "exact_verify": {
+  "keys": [
+   "coordinate_provenance",
+   "failures",
+   "field_certificate",
+   "id",
+   "limitations",
+   "method",
+   "minimum_best_pair_gap",
+   "minimum_containment_clearance",
+   "n",
+   "operation",
+   "pairs_tested",
+   "side",
+   "verification_passed"
+  ],
+  "verification_passed": false,
+  "pairs_tested": 45753,
+  "minimum_containment_clearance": "60480000000010479/100000000000000000000000000000",
+  "minimum_best_pair_gap": "-1",
+  "failures": [
+   [
+    "overlap",
+    "squares 0 and 1 overlap"
+   ]
+  ],
+  "failure_count": 1
+ },
+ "independent": {
+  "keys": [
+   "coordinate_provenance",
+   "failures",
+   "field",
+   "limitations",
+   "method",
+   "minimum_best_pair_gap",
+   "minimum_containment_clearance",
+   "n",
+   "pairs_tested",
+   "side",
+   "verification_passed"
+  ],
+  "verification_passed": false,
+  "pairs_tested": 45753,
+  "minimum_containment_clearance": "60480000000010479/100000000000000000000000000000",
+  "minimum_best_pair_gap": "-1",
+  "failures": [
+   "1 overlapping pairs; worst exact gap -1"
+  ],
+  "failure_count": 1
+ }
+}

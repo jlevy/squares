@@ -120,8 +120,8 @@ other open report through #727 states a bound at 303.
 certificates of Ostashev’s packing the record holds, with the measures of the
 [evand-regularized-2026-10-20](../evand-regularized-2026-10-20/README.md) packet’s
 identity program, and writes [measure/identity.json](measure/identity.json). It repeats
-the stage 1 triage’s measurement from the retained files. A measurement, which decides
-nothing:
+the stage 1 triage’s measurement from the retained files; the stage 4 review’s own
+measurement, below, agrees. A measurement, which decides nothing:
 
 - **No symmetry pairs it one to one** by nearest centres with T-186’s packing, T-174’s or
   T-162’s.
@@ -204,7 +204,44 @@ uv run --frozen --all-extras --group dev python resources/web/evand-n303-2026-10
 `--replay` decides the geometry again.
 `certify --jobs-dir SCRATCH --workers 2` writes a new receipt from a fresh job
 directory, and `register-plan` prints the record entries the import needs. The records
-pull request of 22 October registers it as `T-230`, at V0/C0 until the stage 4 review.
+pull request of 22 October registers it as `T-230`, and the stage 4 review below raises
+it to V3/C3.
+
+## Stage 4 Review
+
+The [review of 22 October 2026](../../../../docs/project/reviews/review-2026-10-22-daniel-728.md)
+accepted the certificate for finite feasibility, with seven findings, none blocking.
+Its programs and outputs are kept in
+[review/review-2026-10-22/](review/review-2026-10-22/README.md); the fetched copies of
+the source’s files it read are not, since this packet keeps them.
+
+- **Its own checker.** `review_728_check.py` decides the certificate on two exact routes
+  that share only a reader of its own: integers alone (route Z) and `Fraction` with the
+  exact clipped area of every pair (route C). Both accept it, with the least wall
+  clearance and the least pair gap above, and agree with both maintained routes at every
+  number they share. Its author read neither maintained route nor the source’s checkers
+  before it decided, so it is a clean-room re-implementation
+  (`E-evand-728-n303-review-exact-feasibility`).
+- **Sharp controls.** Eight mutants, at exact contact and $10^{-30}$ past it at a wall
+  and at the least-gap pair, are accepted and refused as expected by all four deciders,
+  and so is the kernel’s `run_sharp`. The receipt’s own two controls are gross (RF-2).
+- **The adapter** (RF-1). The maintained routes read the certificate through
+  `devtools.evand_exact_certificates`, whose line filter and corner construction are the
+  source’s checkers’ expressions transcribed; its module statement and registry note now
+  say so, and the replay entry records `producer-code` among what its authors read.
+- **Identity** (RF-3). The review measured the packing against the house’s and T-146’s:
+  64 squares beyond a tenth of the house’s, 8 beyond half a unit, 180 within $10^{-3}$
+  and 24 tilts reversed. It is another arrangement, and the closest to Ostashev’s of
+  those compared. The issue’s matching distance of 0.266 is not defined there, and no
+  definition the review tried reproduced it.
+- **The issue’s citation** (RF-4). The issue cites #501 beside #562 for the earlier
+  bound; #501 makes no claim at 303.
+- **The exact side** (RF-5). `verify_cert2.py`’s VALID line prints the side as a
+  binary64, $9.95 \times 10^{-16}$ below it; the record quotes the exact side or its
+  12-place ceiling, never that print.
+- **Local optimality** (RF-7) is unresolved by the source’s own account, and the record
+  states no local-minimum, KKT or rigidity claim.
+- **Significance** S3, as T-197 at 155 is.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

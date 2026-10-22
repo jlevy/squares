@@ -18510,6 +18510,8 @@ urls:
     builds_on: null
     evidence:
     - E-evand-728-n303-report
+    - E-evand-728-n303-exact-feasibility
+    - E-evand-728-n303-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n303-2026-10-22/README.md
     - packing/resources/web/evand-n303-2026-10-22/acquisition/claims.json
@@ -18517,6 +18519,8 @@ urls:
     - packing/resources/web/evand-n303-2026-10-22/receipts/exact-certification.json.xz
     - packing/resources/web/evand-n303-2026-10-22/measure/identity.json
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-22-daniel-728.md
+    - packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/README.md
 - path: results.html
   canonical: results.html
   kind: page

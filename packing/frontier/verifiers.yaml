@@ -2386,6 +2386,54 @@ verifiers:
       Written and run on 20 October 2026 by the review; kept in the couzo-issue678-2026-10-18
       packet's review/ with its README and receipts (RF-5).
 
+  - id: V-evand-728-review-check
+    program: review_728_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 22 October review's standard-library exact checker of the certificate T-230
+      cites, with a reader of its own that admits only integer and p/q literals, deciding
+      the certificate on two routes that share only that reader: route Z in integers
+      alone, never loading fractions (a Pythagorean triple per row, containment by
+      half-extents and every pair by four separating-axis inequalities cleared of
+      denominators, giving each pair's exact gap), and route C in Fraction (unit edges,
+      right angles, orientation and corner mean, corner containment, every pair by the
+      exact area one square's closed half-planes clip from the other, with no distance
+      filter, and the exact squared distance of every pair whose centres are closer than
+      2).
+    source:
+      - packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/programs/review_728_check.py
+    independence_record: docs/project/reviews/review-2026-10-22-daniel-728.md
+    independence:
+      read: [mathematics, specification, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of #728 (c-review-728-math,
+            think-icp1), strong sub-agent tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's CREDITS.md says the repository's work was produced by Claude
+          (Anthropic) under human direction, and the pinned commit names Claude Opus 5.5
+          as co-author. Written in a file of its own that imports nothing from this
+          repository or the source, from the issue and the certificate's format, after its
+          author had read the 22 October review of T-226 to T-228's account of its own
+          checker's design; it had decided the certificate, and its digest was recorded,
+          before its author read the source's report, input or checkers or any maintained
+          route, and it did not change after.
+    note: >-
+      Written and run on 22 October 2026 by the review; kept in the evand-n303-2026-10-22
+      packet's review/review-2026-10-22/ with its README and receipts (RF-6).
+
   - id: V-evand-regularized-1020-review-check
     program: review_t225_check.py
     author: Squares Project (Levy)
@@ -2492,6 +2540,33 @@ verifiers:
       note: From the file's format and the geometry; its authors read none of the edition's seed checks.
     note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
 
+  - id: V-evand-728-review-controls
+    program: sharp_controls_728.py, with maintained_routes_728.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      The 22 October review's sharp controls of T-230's certificate: eight mutants at the
+      scale of its margins (the side lowered by the least top-or-right clearance, every
+      square moved by the least left clearance, square 296 moved onto square 284 along its
+      edge normal by the least gap, each at exact contact and 1e-30 past it; a row dropped;
+      a decimal literal), each decided by the review's checker and by both maintained
+      routes through maintained_routes_728.py, which runs them as certify's child does,
+      through the evand-cert adapter and the kernel's run_case and validate_job, and runs
+      the kernel's run_sharp. It adds the mutants and the expectations; the routes decide.
+    source:
+      - packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/programs/sharp_controls_728.py
+      - packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/programs/maintained_routes_728.py
+    independence_record: docs/project/reviews/review-2026-10-22-daniel-728.md
+    note: >-
+      Written and run on 22 October 2026 by the review (c-review-728-math); it imports
+      devtools.evand_arrangement_reports and devtools.upper_bound_reports to reach the
+      maintained routes, and the review's checker. Kept with its receipts
+      outputs/sharp-controls.json and outputs/maintained-*.json in the packet's
+      review/review-2026-10-22/ (RF-2, RF-6).
+
   - id: V-overbeck-review3-spec-lemmas
     program: spec_lemmas_numeric.py
     author: Squares Project (Levy)
@@ -2578,14 +2653,20 @@ verifiers:
     note: >-
       Written from the certificate format the source's README states and from the
       geometry. Its author read the source's verify_cert.py and verify_cert2.py before
-      writing it, to check that the conversion means what they mean, and imports or
-      copies none of their code; it runs them only as separate processes.
+      writing it, to check that the conversion means what they mean, and imports none of
+      their code; it runs them only as separate processes. Two of its expressions are
+      theirs, transcribed (RF-1 of the 22 October review of #728): the reader's line
+      filter, which skips blank lines and lines beginning with #, and Pose.corners, the
+      corner construction the independent route decides on, which is verify_cert2.py's
+      corners term for term. The earlier evand replay entries that read through it are
+      brought into line by a later records pass (think-ysif).
 
     versions:
     - sha256: 52073811e61dba8bca0574a1e8cf99b91058fb70c17b38621baf07b5fb94cf3e
       path: packing/devtools/evand_exact_certificates.py
-      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
-        provenance identifies the historical run
+      note: The source the n183 primary batch ran; the retained seven-file provenance
+        identifies the historical run. Its module statement was corrected on 22 October
+        2026 (RF-1 of the review of #728), with no code changed
 
   - id: V-check-n11-final-composition
     program: devtools.check_n11_final_composition

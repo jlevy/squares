@@ -20104,10 +20104,11 @@ issues:
       Ostashev's by its basin explorer, the last move a band flip, and leaves local optimality
       unresolved (a first-order descent of about 4.8e-7 is predicted). Triaged read-only on 22
       October 2026 (think-icp1). Retained on 22 October 2026 in evand-n303-2026-10-22, replayed
-      on this repository's two exact routes with both controls refused, and registered as T-230
-      at V0/C0; measured pose by pose, it is another arrangement of Ostashev's two-band design,
-      with one tilted band reflected, not a refinement. The stage 4 review, the adoption at 303
-      and the regularization follow in the same pull request. Claude assistance disclosed.
+      on this repository's two exact routes with both controls refused, registered as T-230,
+      and raised to V3/C3 by the 22 October stage 4 review, whose clean-room checker decided it
+      again; measured pose by pose, it is another arrangement of Ostashev's two-band design,
+      with one tilted band's tilt reversed, not a refinement. The adoption at 303 and the
+      regularization follow in the same pull request. Claude assistance disclosed.
     read_through: '2026-10-22T17:17:20Z'
     results:
     - key: n303
@@ -20122,6 +20123,8 @@ issues:
       - T-230
       evidence:
       - E-evand-728-n303-report
+      - E-evand-728-n303-exact-feasibility
+      - E-evand-728-n303-review-exact-feasibility
     beads:
     - think-icp1
     answer_bead: think-icp1

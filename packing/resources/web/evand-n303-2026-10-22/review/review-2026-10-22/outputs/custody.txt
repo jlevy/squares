@@ -1,0 +1,17 @@
+# Custody of what this review read from the source, 2026-10-22 (UTC).
+# Fetched from https://raw.githubusercontent.com/evand/square-packing/f06521f4bde9e379a91c1ea88053f3e43df8ede5/search/packer/candidates/<file>;
+# Git blobs from a blobless clone of https://github.com/evand/square-packing (git ls-tree at the pin).
+pin f06521f4bde9e379a91c1ea88053f3e43df8ede5
+commit author Evan Daniel, authored 2026-10-22T11:09:55-06:00, committed 2026-10-22T11:14:52-06:00
+issue #728 created 2026-10-22T17:17:20Z by evand (GitHub REST API)
+
+# sha256  file  (git blob at the pin)
+929c2acf72ee54a1850183fc149f06dbf35bffa2f7ee68c8f833d888400e8080  search/packer/candidates/s303_r303w0.cert  (blob c4bda0b40aebde7fc2d83354bc71f1f0429e6bb2, local c4bda0b40aebde7fc2d83354bc71f1f0429e6bb2)
+8167bcb37498ded1029f8fea6b13665f59806cfb0a2beb750388852452f107b7  search/packer/candidates/s303_r303w0.input.txt  (blob d1a5b152e7e7f2c512c23a6d055047a6a6c39d89, local d1a5b152e7e7f2c512c23a6d055047a6a6c39d89)
+36d033db66991743d92f3dc2a370fe018d5ad328ffa6b67315621c58c5bdf910  search/packer/candidates/s303_r303w0.json  (blob 4b618f400113eaf4bd612aeadbad111ff4b1bf8d, local 4b618f400113eaf4bd612aeadbad111ff4b1bf8d)
+
+# The source's two named checkers at the pin, read after this review's checker had decided:
+3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52  search/exact/verify_cert.py  (blob 187f5b325699be132179bfb6a1fcaddfcb1e2cfc)
+55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3  search/exact/verify_cert2.py  (blob 713cc8ce27d098a19335a8dfa2ce0d587ef53ba8)
+# Both equal the versions registered as V-evand-verify-cert-py and V-evand-verify-cert2-py
+# (packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/).
