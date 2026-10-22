@@ -103,9 +103,9 @@ canonical host.
 
 - [x] Choose GitHub Pages and the apex canonical domain.
 - [x] Create the plan, deployment guide, and linked beads.
-- [ ] Update generated canonical URLs, current live links, profile URL recognition, and
+- [x] Update generated canonical URLs, current live links, profile URL recognition, and
   changelog targets (`think-v4ab`).
-- [ ] Add regressions for canonical and legacy URLs, rejected external hosts, and
+- [x] Add regressions for canonical and legacy URLs, rejected external hosts, and
   changelog validation.
 - [ ] Build the complete site, inspect local output, and run the required validation
   tier and PR checks.
@@ -114,7 +114,7 @@ canonical host.
 ### Phase 2: Coordinate production cutover
 
 - [ ] Record current DNS, Pages configuration, and the last healthy deployment.
-- [ ] Complete GitHub account domain verification while retaining its TXT record.
+- [x] Complete GitHub account domain verification while retaining its TXT record.
 - [ ] Coordinate the reviewed deployment with custom-domain configuration and DNS
   changes (`think-juq7`).
 - [ ] Verify DNS, certificate provisioning, HTTPS enforcement, apex and www behavior,

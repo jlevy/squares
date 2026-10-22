@@ -132,9 +132,7 @@ def test_the_editions_pin_repository_citations_and_link_sibling_papers(
     assert source in html
     assert source in markdown
     assert 'href="n11-lower-bounds-explainer.html"' in html
-    assert (
-        "(https://squaremath.org/papers/n11-lower-bounds-explainer.html)" in markdown
-    )
+    assert "(https://squaremath.org/papers/n11-lower-bounds-explainer.html)" in markdown
     assert markdown.startswith("# How Record Square Packings Are Found\n")
     assert "[PDF]" not in markdown
 
