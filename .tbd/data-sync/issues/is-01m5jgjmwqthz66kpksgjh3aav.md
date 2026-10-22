@@ -5,7 +5,7 @@ title: Diagnose presentation pre-push behavioral suite timeout
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: presentation-validation
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m5jct23n8s7fj3ydf94n0yhv
 hold: null
 hold_until: null
 created_at: 2026-10-22T19:14:32.468Z
-updated_at: 2026-10-22T20:49:53.152Z
+updated_at: 2026-10-22T21:04:21.745Z
 started_at: 2026-10-22T20:19:38.497Z
 ---
 Presentation branch codex/profile-naming-and-tally-order: all 67 non-behavioral push checks passed, but reachable behavioral tests exceeded 1800 seconds (1917s total). Final edit tier 68/68 passed, GitHub icon focused tests 37/37 passed, full rebuilt-site audit 7341/7341 passed, senior review clean. Diagnose selection/runtime and finish required pre-push validation before commit/push/PR; do not treat timeout as a test assertion failure. Log: /Volumes/spud-ext2/agent-scratch/about-profiles-20261020/tmp/presentation-push-complete.log. Existing presentation parent think-zpzg.
@@ -35,3 +35,10 @@ Dispositions of all13 captured failures:
 Current229-result browser artifact, for reuse without rendering: /Volumes/spud-ext2/agent-scratch/about-profiles-20261020/tmp/pytest-of-levy/pytest-29/popen-gw0/site0/results.html (1,327,838bytes,229rows,13CSS assets alongside). Performance reviewer routing goes through coordinator because its agent path is not visible from this lane.
 
 Handoff: at the coordinator's explicit direction, do not restart the whole local gate while matching-source hosted distributed CI is running each push. No timeout/coverage/threshold was relaxed and no validation CLI patch was made. A future local retry can use the already-supported --timeout-seconds1800 option explicitly. Coordinator owns final upstream integration, CI acceptance, review and merge; this bead stays open pending that acceptance. No commit/push by this delegated lane. Coordinator owns handoff sync.
+
+PR733 CI follow-up at 064b2bc5ab6e8c124aff329210eec5ee5417901a:
+- Diagnosed all8 assertion failures in hosted run39852077730 from individual job logs while the run was ongoing. suite-a4: Markdown paper credits retained shortened labels after HTML expanded names; suite-b1: two exact scientific-term registry anchors retained Overbeck/Trump after narrative names expanded; suite-d2: a class-prefix popover count included the new controls wrapper and a single-line list-item regex omitted multiline SVG; frontend1: intrinsic Atlas table width1170 exceeded a former1150±10 snapshot although desktop fit, local narrow scrolling and zero page overflow remained correct.
+- Coordinator repaired paper_front.py/profile_links.py and structure fixtures, preserving short technical-label defaults via keyword-only full_names=False. Full test_paper_structure.py + test_profile_links.py:46passed9.34s; coordinator log tmp/presentation-paper-structure-parity-fixed.log.
+- This lane updated only the2 term anchor names, replaced popover serialization counting with the native-popover id/role/accessible-label roster, parsed credit list items and asserted source/registration URLs stay with their result, and replaced the fixed intrinsic-width snapshot with stable narrow width bounded by the desktop track. No scientific definition, forward allowance, assertion coverage, timeout, gate or size threshold was relaxed.
+- Four previously failing focused nodes passed45.47s, including real Chromium at1280/1024/768/390. Log tmp/pr733-ci-semantic-focused.log. Ruff, formatting and git diff --check passed. Precommit review found no further actionable issues; native attribute and destination semantics preserve the contracts under SVG/layout serialization changes. Normal lefthook completed2.45s, including paper-title agreement.
+- Combined7file repair committed and pushed directly with coordinator authorization as064b2bc5ab6e8c124aff329210eec5ee5417901a; remote ref read back identical and source tree clean. The prior historical no-commit statement describes only the earlier handoff. Hosted CI and final review/merge acceptance remain coordinator-owned; this bead stays open pending that acceptance.
