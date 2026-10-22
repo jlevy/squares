@@ -18114,6 +18114,25 @@ occurrences:
     Credit section records the request to credit PingYou Ltd and identifies its unreleased
     agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
+    path: packing/frontier/n-105.md
+    record_key: '105'
+    field: /reported_upper_bound/improved_by/2
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed source credit: issue 719's re-solve at 105 (T-229), the case's house since
+    the adoption of 23 October 2026. Mishapolk is Mykhailo Polkovskyi, the name the record
+    gives him since issue 593 and the issue's credit since its edit of 22 October; the
+    construction-improver role is retained.
+- origin:
     path: packing/frontier/n-106.md
     record_key: '106'
     field: /reported_upper_bound/found_by/0
@@ -20794,6 +20813,25 @@ occurrences:
     its retained regularized certificate lineage. The existing named profile matches
     this construction-improver role; original found_by credit is unchanged.
   contributor_id: evan-daniel
+- origin:
+    path: packing/frontier/n-204.md
+    record_key: '204'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed source credit: issue 719's re-solve at 204 (T-229), the case's house since
+    the adoption of 23 October 2026. Mishapolk is Mykhailo Polkovskyi, the name the record
+    gives him since issue 593 and the issue's credit since its edit of 22 October; the
+    construction-improver role is retained.
 - origin:
     path: packing/frontier/n-205.md
     record_key: '205'
