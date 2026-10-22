@@ -388,6 +388,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-226](packing/frontier/RESULTS.md) | 204 | `V0` | `C0` | `S2` | `previously-published` | One complete rational source certificate of issue #670 reports a finite upper-bound improvement at the exact side it states: s(204) <= 45044217780850246618141/3041751595240000000000, below T-186, the case’s house best packing when it was reported. |
 | [T-227](packing/frontier/RESULTS.md) | 227, 229 | `V0` | `C0` | `S2` | `previously-published` | Two complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(227) <= 71427829379429597600111901507/4589408083628500000000000000 and s(229) <= 231170315041711399213831561/14771101209934000000000000. |
 | [T-228](packing/frontier/RESULTS.md) | 204 | `V0` | `C0` | `S2` | `previously-published` | One complete rational source certificate of issue #675 reports a finite upper-bound improvement at the exact side it states: s(204) <= 101859759444979981360793459/6878398651426000000000000, below his #670 (T-226). |
+| [T-229](packing/frontier/RESULTS.md) | 105, 204 | `V0` | `C0` | `S2` | `previously-published` | Two complete rational source certificates of issue 719 report finite upper-bound improvements at the exact sides they state: s(105) <= 674331486483935962030285457609/62500000000000000000000000000 and s(204) <= 882663895519250432/59604644775390625, below the case’s house best packing at each, T-174 at 105 by 5.18e-12 and T-225 at 204 by 1.006e-8. |
 | [T-155](packing/frontier/RESULTS.md) | 28, 29, 37, 39, 41, 50, 53, 54, 55, 69, 71, 83, 87, 101, 104, 107, 109, 122, 124, 125, 128, 145, 147, 148, 149, 151, 170, 171, 173, 174, 178, 197, 198, 200, 201, 202, 203, 204, 205, 226, 227, 229, 230, 231, 233, 234, 235, 257, 260, 262, 264, 265, 291, 293, 294, 296, 298, 299, 300 | `V3` | `C3` | `S1` | `apparently-novel` | For each of 59 counts n from 28 to 300, s(n) <= s_n, where s_n is the exact side of a rational packing that this project made from the register’s known-best witness at n with Evan Daniel’s exact solver and regularizer and decided here over Q; at 57 of the counts it is measured here as the witness’s packing, and at n = 204 and 299 that is not decided. |
 | [T-156](packing/frontier/RESULTS.md) | 290 | `V3` | `C3` | `S1` | `apparently-novel` | s(290) <= 17.53553390593273762200422181052425, which is 70142135623730950488016887242097/4000000000000000000000000000000 exactly, by monotonicity from T-155 (a packing of 291 unit squares contains a packing of 290): T-155 certifies n = 291 at exactly this side. |
 | [T-166](packing/frontier/RESULTS.md) | 153 | `V3` | `C3` | `S1` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(153) <= 12.870013850407034002770080892. |
@@ -431,7 +432,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 228 | 228 registered, 196 by others |
+| Frontier results | 229 | 229 registered, 197 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -731,6 +732,7 @@ case or experiment separately.
 | [Lane Records for the 22 October Ledger](packing/campaign/issue-intake/upper-bounds-20261022/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-backlog-20261022/README.md) | generated status view | generated | generated | — |
 | [Lane Records for the Backlog Ledger of 22 October](packing/campaign/issue-intake/upper-bounds-backlog-20261022/lane-claims/README.md) | source retention and archive policy | record | retained | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md) | generated status view | generated | generated | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
 | [Mathematical Review of wand125’s n108 Measure Certificate](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |

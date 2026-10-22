@@ -315,6 +315,12 @@ has recorded the rows of #666, #670, #672 and #675, which come before #678 in re
 order. Where one of them beat the start first, the start now names that report as its
 successor, so each count is one chain: 46 of the 57 and both of the two, while 11 of
 `couzo-verified-bounds-2026-10-14`’s rows and the 343 row still name #678.
+Since 22 October Mykhailo Polkovskyi’s #719 rows
+([`mishapolk-issue719-2026-10-22`](../mishapolk-issue719-2026-10-22/README.md)),
+recorded by the [ledger of 22 October for issue
+719](../../../campaign/issue-intake/upper-bounds-issue719-20261022/README.md), supersede
+seven of this packet’s rows that were current, at 507, 555, 641, 642, 693, 753 and 754;
+one, at 984, remains current.
 
 ### Per Row
 
