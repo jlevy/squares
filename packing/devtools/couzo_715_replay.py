@@ -56,7 +56,7 @@ From ``packing/``, with the project interpreter::
     python -m devtools.couzo_715_replay exhaustive --n 343 996 [--workers 2]
     python -m devtools.couzo_715_replay goebel
     python -m devtools.couzo_715_replay claims-record
-    python -m devtools.couzo_715_replay check [--replay]
+    python -m devtools.couzo_715_replay check [--replay [--workers 2]]
 
 A finite packing certifies an upper bound and nothing more: novelty, rigidity and optimality
 are not decided here, and neither are the source's credit and lineage statements.
@@ -73,6 +73,7 @@ import re
 import subprocess
 import time
 from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Set as AbstractSet
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -107,7 +108,6 @@ SOURCE_URL = "https://github.com/franciscouzo/square-packing"
 PIN = "6b7391de820fd01f3ff6984e4a081e8c86845588"
 #: The source's public head while the issue was written (see the module docstring).
 PUBLIC_HEAD = "7b6c87e129cf80b5ff9847b90b47fd30b4563c54"
-PUBLIC_HEAD_COMMITTED = "2026-10-18T23:19:02+00:00"
 #: The issue's rows, and those at or below this count, which this module decides.
 ROWS = 1285
 LIMIT = 1024
@@ -345,7 +345,13 @@ def earlier_publications(clone: Path) -> dict[str, Any]:
         least = min(candidates, key=lambda item: (item["side"], dates[item["commit"]]))
         rows.append(
             publication_row(
-                row, blob, side, first=first_holding[blob][0], least=least, dates=dates
+                row,
+                blob,
+                side,
+                first=first_holding[blob][0],
+                least=least,
+                dates=dates,
+                public=public,
             )
         )
     return {
@@ -378,9 +384,12 @@ def publication_row(
     first: str,
     least: Mapping[str, Any],
     dates: Mapping[str, str],
+    public: AbstractSet[str],
 ) -> dict[str, Any]:
-    """One count's record: its certificate, when first committed, and the least earlier side."""
+    """One count's record: its certificate, when first committed and whether that commit was
+    public before the issue (reachable from ``PUBLIC_HEAD``), and the least earlier side."""
     earlier = least["side"]
+    _require(least["commit"] in public, f"n={row.n}: an earlier side not public before")
     kept = {
         "kind": least["kind"],
         "path": least["path"],
@@ -398,6 +407,7 @@ def publication_row(
         "blob": blob,
         "first_commit": first,
         "first_committed": dates[first],
+        "first_commit_public": first in public,
         "exact_side": legacy.literal(side),
         "earlier": kept,
         "below_earlier_by": legacy.literal(earlier - side),
@@ -717,7 +727,7 @@ def publication_problems() -> list[str]:
             problems.append(f"n={row['n']}: the retained certificate's side differs")
         if not retained(row["n"]) and claim.path not in digests:
             problems.append(f"n={row['n']}: the restated certificate is not pinned")
-        if row["set"] != RESTATED and row["first_committed"] <= PUBLIC_HEAD_COMMITTED:
+        if row["set"] != RESTATED and row["first_commit_public"]:
             problems.append(f"n={row['n']}: first committed while public, yet new")
     sizes = {name: len(record["sets"][name]) for name in SET_SIZES}
     if sizes != SET_SIZES:
@@ -725,8 +735,12 @@ def publication_problems() -> list[str]:
     return problems
 
 
-def check(*, replay: bool) -> list[str]:
-    """Problems with the receipts against the packet and the issue; empty when they hold."""
+def check(*, replay: bool, workers: int = 1) -> list[str]:
+    """Problems with the receipts against the packet and the issue; empty when they hold.
+
+    With ``replay`` every retained row and its controls are decided again, on ``workers``
+    processes, and each must equal its receipt row apart from timings.
+    """
     custody()
     problems = publication_problems()
     rows = replayed_claims()
@@ -734,7 +748,11 @@ def check(*, replay: bool) -> list[str]:
     stored = receipt["rows"]
     if [row["n"] for row in stored] != [row.n for row in rows]:
         return [*problems, "the filtered receipt's rows are not the retained certificates"]
-    for row, kept in zip(rows, stored, strict=True):
+    again: list[dict[str, Any]] = []
+    if replay:
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            again = list(pool.map(decide_row, rows))
+    for position, (row, kept) in enumerate(zip(rows, stored, strict=True)):
         if kept["certificate"] != row.path or kept["printed"] != row.printed:
             problems.append(f"n={row.n}: receipt row differs from the issue")
         if not kept["verified"]:
@@ -757,7 +775,7 @@ def check(*, replay: bool) -> list[str]:
             )
         ):
             problems.append(f"n={row.n}: the file does not realize the index's entry")
-        if replay and _stable(decide_row(row)) != _stable(kept):
+        if again and _stable(again[position]) != _stable(kept):
             problems.append(f"n={row.n}: the replay differs from the receipt")
     if receipt["summary"] != base.summary(stored):
         problems.append("the summary does not match the rows")
@@ -789,6 +807,11 @@ def _cross_check_problems(rows: Sequence[Claim]) -> list[str]:
     comparison = json.loads(GOEBEL.read_text(encoding="utf-8"))["comparison"]
     if comparison["rows"] != len(rows) or comparison["tally"]["below"] != len(rows):
         problems.append("a replayed side is not below Göbel's construction at its count")
+    compared = [
+        (item["n"], Fraction(item["side"]), item["relation"]) for item in comparison["detail"]
+    ]
+    if compared != [(row.n, certificate(row).side, "below") for row in rows]:
+        problems.append("the Göbel receipt's rows are not the retained certificates' sides")
     return problems
 
 
@@ -807,6 +830,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     commands.add_parser("claims-record")
     audit = commands.add_parser("check")
     audit.add_argument("--replay", action="store_true")
+    audit.add_argument("--workers", type=int, default=1)
     args = parser.parse_args(argv)
     actions: dict[str, Callable[[], Any]] = {
         "publications": lambda: write_publications(args.history),
@@ -816,7 +840,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "claims-record": claims_record,
     }
     if args.command == "check":
-        problems = check(replay=args.replay)
+        problems = check(replay=args.replay, workers=args.workers)
         for problem in problems:
             print(problem)
         recorded, held = len(counts_in(RECORDED)), len(counts_in(HELD))

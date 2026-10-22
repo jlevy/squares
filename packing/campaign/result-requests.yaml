@@ -14757,8 +14757,9 @@ issues:
       (#484), which it credits as the construction, as #489 did. 343 is beyond the n <= 324 case
       corpus. Triaged read-only on 21 October 2026; retained the same day in
       evand-n343-sweep-2026-10-20, replayed on this repository's two exact routes with its
-      controls, and recorded as the current beyond-horizon row at 343, superseding #678's row
-      there in report order. Claude assistance disclosed.
+      controls, and recorded as the beyond-horizon row at 343, superseding #678's row there in
+      report order. It was the current row until 22 October 2026, when #715's row
+      (couzo-issue715-2026-10-21) superseded it. Claude assistance disclosed.
     read_through: '2026-10-20T22:09:31Z'
     results:
     - key: n343
@@ -14768,8 +14769,9 @@ issues:
         packing the source calls a different local minimum from #678's.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the current row at 343 of the evand-n343-sweep-2026-10-20
-        source, which supersedes couzo-issue678-2026-10-18's row there.
+        Beyond the n <= 324 corpus: a row at 343 of the evand-n343-sweep-2026-10-20 source, which
+        superseded couzo-issue678-2026-10-18's row there and was current until
+        couzo-issue715-2026-10-21's row superseded it on 22 October 2026.
       queued: false
       bead: think-wuxt
     asks:
@@ -15004,16 +15006,16 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
-        the same exact side, an earlier report that its own import (think-a4wq) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n337
       claim: s(337) <= 18.858391767637, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
-        the same exact side, an earlier report that its own import (think-a4wq) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n338
       claim: s(338) <= 18.906332809853, rounded upward; exact certificate side is authoritative.
@@ -15028,16 +15030,16 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at f311f08 on 2026-10-11, at
-        the same exact side, an earlier report that its own import (think-om5l) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-om5l, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n341
       claim: s(341) <= 18.951882408720, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
-        the same exact side, an earlier report that its own import (think-a4wq) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n343
       claim: s(343) <= 18.977575126267, rounded upward; exact certificate side is authoritative.
@@ -15064,16 +15066,16 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
-        the same exact side, an earlier report that its own import (think-a4wq) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n374
       claim: s(374) <= 19.832356217033, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
-        the same exact side, an earlier report that its own import (think-a4wq) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n404
       claim: s(404) <= 20.614368938513, rounded upward; exact certificate side is authoritative.
@@ -15090,16 +15092,16 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n413
       claim: s(413) <= 20.831663365378, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n417
       claim: s(417) <= 20.933672777441, rounded upward; exact certificate side is authoritative.
@@ -15116,8 +15118,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n455
       claim: s(455) <= 21.848427413955, rounded upward; exact certificate side is authoritative.
@@ -15184,8 +15186,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n496
       claim: s(496) <= 22.822875655559, rounded upward; exact certificate side is authoritative.
@@ -15212,8 +15214,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n499
       claim: s(499) <= 22.881306218323, rounded upward; exact certificate side is authoritative.
@@ -15320,8 +15322,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n545
       claim: s(545) <= 23.883414761903, rounded upward; exact certificate side is authoritative.
@@ -15418,8 +15420,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n591
       claim: s(591) <= 24.828427124775, rounded upward; exact certificate side is authoritative.
@@ -15476,8 +15478,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n597
       claim: s(597) <= 24.950690418637, rounded upward; exact certificate side is authoritative.
@@ -15564,8 +15566,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n640
       claim: s(640) <= 25.828427124775, rounded upward; exact certificate side is authoritative.
@@ -15592,8 +15594,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n645
       claim: s(645) <= 25.946937290069, rounded upward; exact certificate side is authoritative.
@@ -15700,8 +15702,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n691
       claim: s(691) <= 26.828427124775, rounded upward; exact certificate side is authoritative.
@@ -15718,8 +15720,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n694
       claim: s(694) <= 26.898819144794, rounded upward; exact certificate side is authoritative.
@@ -15776,8 +15778,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n700
       claim: s(700) <= 26.963723854128, rounded upward; exact certificate side is authoritative.
@@ -15824,8 +15826,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n737
       claim: s(737) <= 27.677669529693, rounded upward; exact certificate side is authoritative.
@@ -15853,15 +15855,16 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
         count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier
-        report that its own import (think-yfoo) records; this restatement is not recorded.
+        report. It is left to its own import (think-yfoo, open), which has not recorded it yet;
+        this restatement is not recorded.
       queued: false
     - key: n744
       claim: s(744) <= 27.798989873256, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n745
       claim: s(745) <= 27.828427124777, rounded upward; exact certificate side is authoritative.
@@ -15878,8 +15881,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n747
       claim: s(747) <= 27.884019388658, rounded upward; exact certificate side is authoritative.
@@ -15986,8 +15989,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n797
       claim: s(797) <= 28.778174593084, rounded upward; exact certificate side is authoritative.
@@ -16024,8 +16027,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n801
       claim: s(801) <= 28.825777528963, rounded upward; exact certificate side is authoritative.
@@ -16152,8 +16155,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n854
       claim: s(854) <= 29.778174593084, rounded upward; exact certificate side is authoritative.
@@ -16230,8 +16233,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n863
       claim: s(863) <= 29.902673974184, rounded upward; exact certificate side is authoritative.
@@ -16368,8 +16371,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n915
       claim: s(915) <= 30.798989873256, rounded upward; exact certificate side is authoritative.
@@ -16526,8 +16529,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n977
       claim: s(977) <= 31.798989873257, rounded upward; exact certificate side is authoritative.
@@ -16575,15 +16578,16 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
         count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier
-        report that its own import (think-yfoo) records; this restatement is not recorded.
+        report. It is left to its own import (think-yfoo, open), which has not recorded it yet;
+        this restatement is not recorded.
       queued: false
     - key: n986
       claim: s(986) <= 31.920310216821, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n987
       claim: s(987) <= 31.941797078452, rounded upward; exact certificate side is authoritative.
@@ -16600,8 +16604,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report that its own import (think-yfoo) records; this
-        restatement is not recorded.
+        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
+        which has not recorded it yet; this restatement is not recorded.
       queued: false
     - key: n989
       claim: s(989) <= 31.974181306003, rounded upward; exact certificate side is authoritative.
@@ -16721,4 +16725,8 @@ issues:
       686's rows, 29 of 487b058's, 26 of issue 678's and issue 702's at 343, which issue 715
       beats by 1.0736e-4. The exact check of the 8 October decimal poses at 335 the
       acknowledgement promised is think-rx26. Nothing above 1024 is retained, replayed or
-      recorded.
+      recorded. The acknowledgement said the 64 earlier-commit rows would be recorded from those
+      commits, and put 335 1.84e-11 above main's row: this import records none of the 64 (34
+      restated, left to their owning imports think-a4wq, think-om5l and think-yfoo, all open,
+      and 30 re-certified, held on think-fwa9), and the exact certificate at 335 is 1.7825e-11
+      above that row; the next reply on the issue corrects both.

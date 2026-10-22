@@ -3,13 +3,13 @@
   "shard": null,
   "provenance": {},
   "exit_status": 0,
-  "tests": 9,
-  "seconds": 5.925,
+  "tests": 22,
+  "seconds": 11.961,
   "files": [
     {
       "file": "packing/tests/test_upper_bound_reports_715.py",
-      "tests": 9,
-      "seconds": 5.925
+      "tests": 22,
+      "seconds": 11.961
     }
   ],
   "module_scope": {
@@ -46,7 +46,7 @@
       "collectonly": false
     },
     "collected_tests": {
-      "packing/tests/test_upper_bound_reports_715.py": 9
+      "packing/tests/test_upper_bound_reports_715.py": 22
     },
     "deselected_tests": 0
   }

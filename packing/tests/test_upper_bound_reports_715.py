@@ -19,7 +19,10 @@ import hashlib
 import json
 from collections import Counter
 from fractions import Fraction
+from pathlib import Path
 from typing import Any
+
+import pytest
 
 from devtools import check_source_coverage as coverage_check
 from devtools import couzo_715_replay as replay
@@ -79,11 +82,12 @@ def test_every_new_certificate_reached_the_repository_through_the_issue() -> Non
     assert record["issue_filed"] < record["public_until"]
     rewritten = []
     for row in record["rows"]:
+        # Newness is reachability from the public head, never a committer date.
         if row["set"] != replay.RESTATED:
-            assert row["first_committed"] > replay.PUBLIC_HEAD_COMMITTED
+            assert not row["first_commit_public"]
             continue
         assert row["below_earlier_by"] == "0"
-        if row["first_committed"] > replay.PUBLIC_HEAD_COMMITTED:
+        if not row["first_commit_public"]:
             rewritten.append(row["n"])
     # Two restated deletions were written out again at the same side as the 4e4c8ce
     # index's deletion bound; the other 32 restated files are the earlier bytes.
@@ -196,3 +200,149 @@ def test_the_22_october_ledger_decides_each_count_as_the_record_does() -> None:
         set(replay.counts_in(replay.RESTATED)) - {338}
     )
     assert ledger["read_at_main"] == "d588ad987bd8de53361d087b8961a7f2bf157c41"
+
+
+def test_the_ledger_reads_the_exact_sides_the_publications_receipt_holds() -> None:
+    """Each exact side the 22 October ledger's sources give #715 or a watched-repository
+    publication is the side the packet's publications receipt read from the certificate."""
+    sources = safe_load((LEDGER / "sources.yaml").read_text(encoding="utf-8"))
+    rows = {row["n"]: row for row in replay.publications()["rows"]}
+    checked = 0
+    for report in sources["reports"]:
+        for claim in report["claims"]:
+            if "exact" not in claim:
+                continue
+            if report["report"] == "#715":
+                assert claim["exact"] == rows[claim["n"]]["exact_side"]
+                checked += 1
+            elif report["report"].startswith("franciscouzo/square-packing@"):
+                earlier = rows[claim["n"]]["earlier"]
+                assert report["report"].endswith(earlier["commit"][:7])
+                assert claim["exact"] == earlier["exact_side"]
+                checked += 1
+    held = set(replay.counts_in(replay.HELD))
+    assert checked == (replay.DECIDED - len(held)) + (len(held) + 34 - 1)
+
+
+@pytest.mark.parametrize(
+    ("side", "printed", "earlier", "expected"),
+    [
+        (Fraction(1, 3), "0.333333333334", Fraction(1, 3), replay.RESTATED),
+        (Fraction(1, 3), "0.333333333334", Fraction(1, 3) + Fraction(1, 10**20), replay.HELD),
+        (
+            Fraction(1, 3),
+            "0.333333333334",
+            Fraction(1, 3) + Fraction(1, 10**9),
+            replay.RECORDED,
+        ),
+    ],
+)
+def test_classify_reads_equal_sub_print_and_print_margins(
+    side: Fraction, printed: str, earlier: Fraction, expected: str
+) -> None:
+    assert replay.classify(side, printed, earlier) == expected
+
+
+@pytest.mark.parametrize(
+    ("side", "printed", "earlier", "refusal"),
+    [
+        (Fraction(1, 3), "0.333333333334", Fraction(1, 3) - Fraction(1, 10**20), "above"),
+        (Fraction(1, 3), "0.333333333333", Fraction(1, 3), "rounded up"),
+        (Fraction(1, 3), "0.333333333335", Fraction(1, 3), "rounded up"),
+    ],
+)
+def test_classify_refuses_a_side_above_its_earlier_one_or_off_its_print(
+    side: Fraction, printed: str, earlier: Fraction, refusal: str
+) -> None:
+    with pytest.raises(replay.ReplayError, match=refusal):
+        replay.classify(side, printed, earlier)
+
+
+def _forge(monkeypatch: pytest.MonkeyPatch, tmp_path: Path, name: str, edit: Any) -> Path:
+    """A copy of one receipt under ``tmp_path``, edited, that the module then reads."""
+    source = {"filtered": replay.FILTERED, "publications": replay.PUBLICATIONS}[name]
+    value = json.loads(source.read_text(encoding="utf-8"))
+    edit(value)
+    copy = tmp_path / source.name
+    copy.write_text(json.dumps(value), encoding="utf-8")
+    monkeypatch.setattr(
+        replay, {"filtered": "FILTERED", "publications": "PUBLICATIONS"}[name], copy
+    )
+    return copy
+
+
+def _filtered_check(monkeypatch: pytest.MonkeyPatch, tmp_path: Path, edit: Any) -> list[str]:
+    """`check` on a forged filtered receipt, the publications and claims records held."""
+    _forge(monkeypatch, tmp_path, "filtered", edit)
+    record = json.loads(replay.BEYOND.read_text(encoding="utf-8"))
+    monkeypatch.setattr(replay, "custody", lambda: None)
+    monkeypatch.setattr(replay, "publication_problems", list)
+    monkeypatch.setattr(replay, "beyond_horizon_claims", lambda: record)
+    return replay.check(replay=False)
+
+
+def test_a_control_forged_as_accepted_is_refused(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    def edit(value: Any) -> None:
+        value["rows"][0]["controls"][2]["refused_by_independent"] = False
+
+    problems = _filtered_check(monkeypatch, tmp_path, edit)
+    assert any("side-below-least-clearance was accepted" in problem for problem in problems)
+
+
+def test_an_index_relation_forged_false_is_refused(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    def edit(value: Any) -> None:
+        (row,) = [row for row in value["rows"] if row["n"] == 365]
+        row["source_index"]["parent_poses_lead"] = False
+
+    problems = _filtered_check(monkeypatch, tmp_path, edit)
+    assert problems == ["n=365: the file does not realize the index's entry"]
+
+
+def test_a_receipt_row_moved_to_another_count_is_refused(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    def edit(value: Any) -> None:
+        value["rows"][0]["n"] = 327
+
+    problems = _filtered_check(monkeypatch, tmp_path, edit)
+    assert problems == ["the filtered receipt's rows are not the retained certificates"]
+
+
+def test_a_held_row_relabelled_recorded_is_refused(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    def edit(value: Any) -> None:
+        (row,) = [row for row in value["rows"] if row["n"] == 535]
+        row["set"] = replay.RECORDED
+
+    _forge(monkeypatch, tmp_path, "publications", edit)
+    problems = replay.publication_problems()
+    assert "n=535: the set is held, not recorded" in problems
+
+
+def test_a_recorded_row_made_equal_to_its_earlier_side_is_refused(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    def edit(value: Any) -> None:
+        (row,) = [row for row in value["rows"] if row["n"] == 328]
+        row["earlier"]["exact_side"] = row["exact_side"]
+
+    _forge(monkeypatch, tmp_path, "publications", edit)
+    problems = replay.publication_problems()
+    assert "n=328: the margin is not the sides' difference" in problems
+    assert "n=328: the set is restated, not recorded" in problems
+
+
+def test_a_new_row_marked_public_before_the_issue_is_refused(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    def edit(value: Any) -> None:
+        (row,) = [row for row in value["rows"] if row["n"] == 343]
+        row["first_commit_public"] = True
+
+    _forge(monkeypatch, tmp_path, "publications", edit)
+    assert "n=343: first committed while public, yet new" in replay.publication_problems()
