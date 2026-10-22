@@ -38,7 +38,7 @@
     "packages/workbench/tests/test_transitions.py": 0.005,
     "packing/tests/test_acquire_original_gzip.py": 0.191,
     "packing/tests/test_acquire_source.py": 1.394,
-    "packing/tests/test_added_blob_guard.py": 15.454,
+    "packing/tests/test_added_blob_guard.py": 20.942,
     "packing/tests/test_admit_fixed_support_dual.py": 3.833,
     "packing/tests/test_admit_threshold_atom_orbits.py": 0.043,
     "packing/tests/test_admit_threshold_compression.py": 8.43,
@@ -1190,7 +1190,7 @@
         {
           "report": "packing/devtools/suite-file-cost-admissions/added-blob-guard-406-2026-10-20.json",
           "provenance": {},
-          "tests": 83
+          "tests": 85
         }
       ]
     }
