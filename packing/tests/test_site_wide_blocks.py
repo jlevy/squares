@@ -194,7 +194,7 @@ def test_the_section_tabs_stand_under_the_bars_rule(
         assert tabs["current"] == current, where
         assert tabs["top"] - rule["bottom"] == pytest.approx(TABS_SPACE * REM, abs=0.05), where
         breadcrumb = found.get("breadcrumb")
-        if breadcrumb and name != "workbench/":
+        if breadcrumb:
             assert breadcrumb["top"] - tabs["bottom"] == pytest.approx(REM, abs=0.05), where
             assert first["top"] - breadcrumb["bottom"] == pytest.approx(2.5 * REM, abs=0.05), (
                 where

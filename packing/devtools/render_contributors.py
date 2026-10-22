@@ -986,7 +986,7 @@ def contributor_pages() -> list[Page]:
         "discovery or proof records, excluding later reuse and import dates. "
         "Accounts open public account profiles; Resources lists personal and publication "
         "websites and the cited "
-        "external work shown on the homepage.</p>"
+        "external work in the Resources directory.</p>"
         + profile_summary(contributors, occurrences)
         + profile_table(contributors, occurrences)
         + "</article>"

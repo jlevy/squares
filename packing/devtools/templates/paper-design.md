@@ -744,7 +744,7 @@ come from its complete page.
 | Case record | `cases/N.html` | Case link, index entry or neighboring-record link | `a[data-case]`, atlas tiles and frontier rows load `article.site-case` in the shared case panel |
 | Result record | `result/t-nnn.html` | Result ID link or **Open Result Record** | Pressing the rest of a result row loads `article.site-result[data-result-overview]` in that row’s panel |
 | Person profile | `profiles/ID.html` | Public-name link or **Open profile** | A marked credit in a case or result article loads `article.site-contributor` in the shared contributor panel |
-| Profile directory | `profiles/index.html` | Home/About **All Profiles** button or colophon **Profiles** link | Full public names, reviewed-result/significance and credit tallies, resource counts, and public account links in a surname-sorted native table; name links navigate directly to profiles |
+| Profile directory | `profiles/index.html` | Home/About **View All Profiles** button or About navigation menu | Full public names, reviewed-result/significance and credit tallies, resource counts, and public account links in a surname-sorted native table; name links navigate directly to profiles |
 | News article | `news.html#ID` | Linked announcement title or bookmarked article | Homepage and archive reuse the authored article; its profile links navigate directly |
 | Card preview | The card’s ordinary target | Native `popovertarget` button and action link | The card’s preview remains authored in the page; it is not an article fetch |
 | Framed card preview | Target page with `?view=embed` | Native card button and **Expand** | The frame loads on first opening and uses its own document |
@@ -1048,10 +1048,10 @@ contributor articles use their component sheets and the same text tokens.
   Dates and publication records use the shared support gray; the main prose retains the
   normal foreground and metadata links keep the shared link affordance.
   Each eligible entry is one hairline-bordered card containing its actual article once.
-  News and Explanations share an article heading: an optional eyebrow, the title, the
-  original publication date, then optional topic tags and significance metadata.
-  The title uses the Explanations card’s sans face, medium weight, size and leading; it
-  stays upright, left aligned and in the theme’s text foreground.
+  News and Learn share an article heading: an optional eyebrow, the title, the original
+  publication date, then optional topic tags and significance metadata.
+  The title uses the Learn card’s sans face, medium weight, size and leading; it stays
+  upright, left aligned and in the theme’s text foreground.
   A linked article title inherits the heading’s color and typography.
   News headlines use surnames when unambiguous.
   Article text follows the authored record.
@@ -1069,7 +1069,7 @@ contributor articles use their component sheets and the same text tokens.
   revisions do not restamp them.
   News and homepage highlights retain each announcement’s frozen date.
   No current site edition or filesystem timestamp supplies a date.
-  Explanations uses the eyebrow for the paper’s series part or tutorial label.
+  Learn uses the eyebrow for the paper’s series part or tutorial label.
   News places smaller Results-style topic chips on the left and the shared significance
   meter at the right below the date, followed by the article.
   The chips retain shared fills, corners and leading at 85% of the note-size chip scale.
@@ -1401,10 +1401,9 @@ contributor articles use their component sheets and the same text tokens.
   (`overview_sections.py`), so its lines are one grid; the size is the one its typical
   card’s text asks for, the median card’s, which for an even count is the mean of the
   two middle lengths, and `tests/test_overview.py` holds the two together.
-  Explanations’ Tutorial section is the one explicit exception: its two brief
-  introductory cards use the papers’ large reading-card layout to give readers a
-  prominent starting point.
-  Tutorial and Papers remain separate sections when checking typical text lengths.
+  Learn’s Tutorial section is the one explicit exception: its two brief introductory
+  cards use the papers’ large reading-card layout to give readers a prominent starting
+  point. Tutorial and Papers remain separate sections when checking typical text lengths.
   The page cards, the atlas cards and the other projects are medium; the documents,
   whose notes are a line, are small.
   A section can also be set in lines of its own, in `SECTION_CARD_LINES`, where one
@@ -1953,23 +1952,23 @@ contributor articles use their component sheets and the same text tokens.
   Without scripting, the homepage shows its first 100 cases and Explore link; the
   dedicated Atlas exposes all 324 cases.
 
-- **About and Explanations.** About separates the project narrative into paragraphs for
-  its origins, subsequent work, independent results, and current role.
+- **About and Learn.** About separates the project narrative into paragraphs for its
+  origins, subsequent work, independent results, and current role.
   **Report Your Results!** is an H1 over the reporting invitation, which asks for the
   name to credit and ends in a **Report a Result** button opening the repository’s
   result form; the old `#contribute-your-results` anchor stays on the heading.
-  The overview carries the same invitation (`report-results.md`) as an H2 after Recent
-  Major Results. Project documentation remains on About.
+  The overview carries a short reporting summary after Profiles, with a **Report a
+  Result** link to the full invitation on About.
+  Project documentation remains on About.
   Between the narrative and reporting invitation, **Profiles** briefly introduces the
   contributors and cited authors tracked here.
   Home carries the same invitation.
-  The centered **All Profiles** action uses the shared button and right arrow and
+  The centered **View All Profiles** action uses the shared button and right arrow and
   navigates to `profiles/index.html`, whose full-name table links directly to profiles.
   Neither invitation lists names.
   The directory and individual profiles keep **About** active in the shared navigation;
-  their breadcrumbs return to About’s `#profiles` section, with **Profiles** as the
-  additional parent on each person’s page.
-  Explanations holds the Tutorial, Papers and PDFs sections, followed by Visuals.
+  their breadcrumbs return to About, with **Profiles** as the additional parent on each
+  person’s page. Learn holds Tutorial, Papers, PDFs, Visuals, and Resources sections.
   About no longer carries Reading and Research; omit redundant Frontier Survey and
   Workbench cards from both pages (`think-h21i`).
 
@@ -2793,12 +2792,13 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   deployed site for each one.
 
 - **Learn page.** The Learn navigation entry leads to `papers.html`, headed “Learn”.
-  Its sections are Tutorial, Papers, PDFs and Visuals, in that order.
+  Its sections are Tutorial, Papers, PDFs, Visuals, and Resources, in that order.
   Tutorial presents the basic introduction and advanced companion as two large reading
   cards. Papers presents the three parts of the $n = 11$ series in reading order,
   followed by the methods survey.
   PDFs offers the two infographic posters.
-  Visuals links to the full Film page, Workbench, and the Resources directory.
+  Visuals links to the full Film page and Workbench.
+  Resources links to the complete Resources directory.
   Reading cards come from `overview_sections.PAPERS`, each entry a document’s address,
   label, title, description and card size.
   Each card links directly to its document in the same tab, with no popover or framed
@@ -3053,7 +3053,7 @@ surname-or-handle naming policy.
 Resource bylines and descriptions, explanatory papers and reader documents, and About
 introductions use full public names.
 Directory names remain full so people can be identified while browsing.
-Home and About share a short Profiles invitation and the **All Profiles** action
+Home and About share a short Profiles invitation and the **View All Profiles** action
 (`render_contributors.profile_preview`), with no name list or metadata reads.
 Breadcrumbs appear only on lower-level pages, including the Profiles directory and
 individual profiles.

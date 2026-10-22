@@ -175,6 +175,12 @@
           child.style.left = "0";
           child.style.top = "0";
         }
+        // Font readiness temporarily sets visibility. Its empty style attribute can
+        // precede or follow the source attributes depending on runtime scheduling;
+        // omit that residue only in the publication clone, preserving real styles.
+        if (!copy.getAttribute("style")?.trim()) {
+          copy.removeAttribute("style");
+        }
         copy.dataset.kpressMathPrepared = "true";
         delete copy.dataset.squaresMathReady;
         delete copy.dataset.done;

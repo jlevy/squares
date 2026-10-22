@@ -183,18 +183,6 @@
   white-space: nowrap;
 }
 
-/* Breadcrumbs belong to these nested pages, above their first page heading. */
-@media screen {
-  .kpress-long-text > :is(.site-contributor, .site-contributor-directory) {
-    margin-block-start: -2rem;
-  }
-  .kpress-long-text
-    > :is(.site-contributor, .site-contributor-directory)
-    > .site-contributor-breadcrumb {
-    margin-block: 0 2rem;
-  }
-}
-
 .kpress .site-profile-table td.site-profile-links {
   min-inline-size: 12rem;
 }

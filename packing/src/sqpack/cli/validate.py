@@ -282,6 +282,7 @@ BROWSER_FLOOR_LIVENESS_TESTS = "tests/test_browser_floor_contract.py"
 SITE_FORWARDER_TEST = "tests/test_site_forwarders.py"
 SITE_LAYOUT_TESTS = (
     "tests/test_site_navigation.py",
+    "tests/test_site_popover_controls.py",
     "tests/test_site_headroom.py",
     "tests/test_site_homepage.py",
     "tests/test_site_result_popover.py",

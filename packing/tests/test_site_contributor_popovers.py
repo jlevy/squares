@@ -331,6 +331,7 @@ def test_generated_profile_uses_shared_roles_without_overflow(
             assert styles["panelWidth"] <= width - 32 + 1
         else:
             assert styles["body"]["family"] != styles["note"]["family"]
+            assert styles["breadcrumbGap"] == pytest.approx(2.5 * 16, abs=1)
         assert styles["overflow"] == []
         for bounds in styles["wideBounds"]:
             assert bounds["left"] >= 0
@@ -650,7 +651,9 @@ def test_generated_profile_keeps_its_own_anchors_and_breadcrumb_plain(
         assert anchors.count() > 0
         for index in range(anchors.count()):
             assert anchors.nth(index).get_attribute("aria-haspopup") is None
-        breadcrumb = page.locator('.site-breadcrumbs a[href="../profiles/"]')
+        breadcrumb = page.get_by_role("navigation", name="Breadcrumb").get_by_role(
+            "link", name="Profiles", exact=True
+        )
         assert breadcrumb.get_attribute("aria-haspopup") is None
         for disclosure in article.locator("details").all():
             if disclosure.get_attribute("open") is None:
@@ -743,5 +746,7 @@ def test_generated_directory_keeps_native_profile_navigation(
             page.locator("main article.site-contributor h1").text_content()
             == "Walter Stromquist"
         )
-        page.locator('nav[aria-label="Breadcrumb"] a[href="../profiles/"]').click()
+        page.get_by_role("navigation", name="Breadcrumb").get_by_role(
+            "link", name="Profiles", exact=True
+        ).click()
         page.wait_for_url(f"{generated}profiles/")

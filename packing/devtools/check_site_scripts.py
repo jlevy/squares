@@ -39,6 +39,10 @@ FAMILIES = {
         "input-response",
         "Click or tap expands the existing News article; hover never changes its height.",
     ),
+    "navigation": (
+        "input-response",
+        "Disclose navigation links while keeping every destination available without scripts.",
+    ),
     "news-filters": (
         "input-response",
         "Filter complete News articles by importance and subject, preserving address state.",
@@ -107,6 +111,10 @@ FAMILIES = {
 # Paper publication links pre-existing inline programs as page.<hash>.js. These
 # stable source markers give each retained program its own reviewed declaration.
 PAPER_PROGRAMS = (
+    (
+        "Ordinary site links keep their browser behavior.",
+        *FAMILIES["navigation"],
+    ),
     (
         "Every shell keeps its whole header in the document flow.",
         *FAMILIES["headroom"],

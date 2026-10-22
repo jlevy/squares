@@ -7091,6 +7091,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/overview/headroom.js",
             "packing/devtools/overview/navigation.js",
             "packing/devtools/overview_sections.py",
+            "packing/devtools/probes/prepare_n11_lower_bounds_explainer_math/measure_math.js",
             "packing/devtools/probes/preview_site/baselines.js",
             "packing/devtools/probes/preview_site/header.js",
             "packing/devtools/record_presentation.py",
@@ -7134,8 +7135,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "popover expand glyphs affect site chrome; preview probes inspect that "
             "chrome, and the validation selector adds its browser tests without changing "
             "any paper builder. The examined HTML shell and Markdown generation paths "
-            "justify retaining each paper edition under the existing chrome exception. No "
-            "byte-identical HTML, Markdown or PDF rebuild is claimed."
+            "justify retaining each paper edition under the existing chrome exception. "
+            "The math publication probe also removes absent, empty or whitespace-only "
+            "style attributes from cloned math hosts after font readiness; meaningful "
+            "styles and MathML stay intact. This removes scheduling residue from "
+            "serialization without changing mathematical content or layout. No "
+            "byte-identical HTML, Markdown or PDF rebuild against the baseline is "
+            "claimed."
         ),
     ),
 )

@@ -582,17 +582,17 @@ Visible breadcrumbs and metadata must use that lookup.
   contents and homepage ownership.
 - [ ] Reconcile the inventory with the then-current URL register and retain a
   disposition for every content page, alias, and named fragment family.
-- [ ] Define the shared parent map and page-family rules.
+- [x] Define the shared parent map and page-family rules.
   Keep the current paths and the initial Atlas/Frontier section arrangement.
 - [ ] Review a small desktop/mobile navigation prototype, including a case, a profile,
   and the workbench, before applying it to every producer.
 
 ### Phase 2: Implement navigation and landing pages
 
-- [ ] Update the shared Design System document with the navigation disclosure component,
+- [x] Update the shared Design System document with the navigation disclosure component,
   its tokens, states, and accessibility/interaction contract; use that component
   consistently across pages and the workbench.
-- [ ] Add shared dropdowns, active-parent rules, and nested-page breadcrumbs across all
+- [x] Add shared dropdowns, active-parent rules, and nested-page breadcrumbs across all
   page producers and the workbench.
 - [x] Reorganize Results and Learn with the specified entry points; add the full
   Resources directory at `resources.html` under Learn; keep the About root
@@ -607,6 +607,31 @@ Visible breadcrumbs and metadata must use that lookup.
   System.
 - [ ] Keep the full record pages, download editions, compatibility forwarders, and
   query/fragment behavior intact.
+
+### Completed shared navigation and popover slice
+
+The `think-pfsk` slice defines the five navigation groups and one parent lookup in
+`packing/devtools/site_navigation.py`. Visible and structured breadcrumbs use the same
+lookup. The shared disclosure controller preserves ordinary links and no-script access,
+adds the mobile Menu, and keeps an open or focused header visible.
+The Design System records its typography, states, focus treatment, and collection-action
+convention. Breadcrumbs sit 1rem below navigation and leave 2.5rem before the title;
+paper format chips occupy that gap.
+They are hidden in print and overlays.
+
+The `think-mpxs` and `think-klec` fixes use the standard reading measure plus padding
+for prose panels, preserve the wider case stage and viewport gutters, and share the same
+diagonal expand glyph and full-page destination in both icon modes.
+Profile headings reserve space for both controls, and standalone profiles use the shared
+trail gap without an extra vertical offset.
+
+Focused checks passed on 2026-10-22: nine navigation/component tests, 34 existing
+navigation assertions, header baseline/type/control checks, two breadcrumb/title
+geometry checks, and the real long-profile control check at 320 pixels.
+The final semantic breadcrumb-selector regression passed independently: one test, 24.17
+seconds. Ruff, helper types, browser formatting, and the overview JavaScript type check
+passed. Phase 3 retains responsibility for the complete build, validation, and reader
+journeys.
 
 ### Completed landing and standalone-shell slice
 

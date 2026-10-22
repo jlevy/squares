@@ -234,8 +234,7 @@ def test_paper_metadata_matches_the_published_title_dates_and_downloads(
     )
     assert breadcrumb["@type"] == "BreadcrumbList"
     assert [item["name"] for item in breadcrumb["itemListElement"]] == [
-        "Home",
-        "Papers",
+        "Learn",
         meta.name,
     ]
     assert f" · {render_overview.PROJECT_NAME}</title>" not in head
