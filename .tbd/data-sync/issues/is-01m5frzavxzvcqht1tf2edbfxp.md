@@ -5,7 +5,7 @@ title: "Import Evan Daniel: solved views below the record at 204, 227, 229 and 2
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 13
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:43:33.500Z
-updated_at: 2026-10-21T23:36:08.501Z
+updated_at: 2026-10-22T00:17:28.917Z
 started_at: 2026-10-21T17:43:35.847Z
 ---
 Stage 0 owner for four certificates Evan Daniel published, with no issue, in evand/square-packing at 0075967bace18a3deabcc0baa64c2fb294fc80a0 (committed 2026-10-20T02:36:12Z, "Site up to date: records at 183, 229, 308 (ours) and 204, 227, 260 (Couzo), certified and regularized"): search/regularize/lists/certs/n-NNN.cert.gz, each with n-NNN.json.gz beside it. Found by the read-only triage of the 21 October sweep (c-triage-sweep-1021b). Nothing has been retained, replayed or registered.
@@ -63,3 +63,7 @@ blocked_on: none
 
 2026-10-21 23:40 coord-intake-1021b: stage 4 mathematical review done by c-review-t225-math (tbd strong tier, Claude Opus 5.5, reasoning xhigh; separate from the import lane and #716's senior reviewer): all four accepted with findings for finite feasibility; clean-room two-route checker (integers only; Fraction with clipping area) agrees with both maintained routes; sharp controls at contact and 1e-30 past it behave at all four counts; identity measurements reproduce identity.json; S2 confirmed. Findings RF-1 major non-blocking (227 credit via of: T-196; same as #716 A2), RF-2..RF-6 minor/notes. Draft and programs: coordinator scratchpad review-t225/. Next (after #716 merges): stage 4 PR on the session branch retaining the review and programs, entering the evidence, raising T-225 to V3/C3, and adopting/regularizing at 204, 229, 260 (and 227 once its credit is right), ~0.8 CPU-h of strong generators.
 blocked_on: none
+
+2026-10-21 23:39 c-lane-views-import: review A of #716 (head be6416a03) addressed in d1651fef9 (A1), 47049b7fd (A2 hold + test, A5-A7, A9-A12), fbc4f8b28 (A3), f28c17c24 (A8); all unpushed, last pushed be6416a03. A2: the 227 adoption waits for think-2vjc's registration of #672 (next_rung and a C3 unfinished item); a test makes select_houses.CORRECTIONS_OWED hold 227 once T-225 is eligible while its item names T-196. Next: after 00:00Z the A4 re-date (stamp_landed, editions to October 22, re-pin, claim documents and explainer, the papers' no-change record), --records, push, CI, dispositions on #716.
+
+2026-10-22 00:20 c-lane-views-import: pushed 824cf984c to claude/stoic-thompson-ku09fw (#716). After review A's fixes: A4 re-date done past 00:00Z (9555c3ed7 stamps T-225 landed 2026-10-22; 3b8bd62e7 re-pins DATA_REVISION to 9555c3ed; da40a7bef dates site v0.8.17 and explainer v0.4.14 October 22, PUBLICATION_REVISION stays 18a1fb61; 40c44d7db URL registry lastmod), fb58349a2 reads Couzo's #678 comment of 23:26Z (issuecomment-6328825034: 545/641 deletion rows; withdraws the 1e-8 statement; 6b7391de does not complete the source patch, ask 1 stays queued), 824cf984c re-takes the papers' no-change record. --records passes at 824cf984c (52/52, 102 s); check_requests --github 0 differences; #678 reply due (A3 outdated statement plus the new comment, for after merge). Nothing unpushed. Next: hosted CI at 824cf984c, PR body, dispositions on #716. For the stage 4 PR: adopt 204, 229, 260; 227 waits on think-2vjc (the test requires CORRECTIONS_OWED[227] once T-225 is eligible while of is T-196).

@@ -3,9 +3,9 @@ type: is
 id: is-01m5gcjg5g0z6fr6y4rh84fzkf
 title: "Address PR #716 review A: T-225 import records"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 14
+version: 15
 delegate: c-lane-views-import
 labels: []
 dependencies: []
@@ -26,7 +26,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T23:26:04.464Z
-updated_at: 2026-10-21T23:26:16.656Z
+updated_at: 2026-10-22T00:30:11.935Z
 started_at: 2026-10-21T23:26:16.655Z
+closed_at: 2026-10-22T00:30:11.935Z
+close_reason: "Review A of #716 addressed: all twelve findings fixed; dispositions https://github.com/jlevy/squares/pull/716#issuecomment-6329692212 at head 824cf984c"
+resolution: null
+duplicate_of: null
 ---
 Review A (senior, round 1, head be6416a03) on PR #716: https://github.com/jlevy/squares/pull/716#issuecomment-6328806725. Twelve items A1-A12; dispositions posted with the tbd:dispositions marker.
