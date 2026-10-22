@@ -1,4 +1,4 @@
-# Francisco Couzo’s Issue 670: the In-Corpus Certificate at 204
+# Francisco Couzo’s Issue 670: 73 Certificates at 23aff0c6
 
 Francisco Couzo’s [issue #670](https://github.com/jlevy/squares/issues/670), opened
 2026-10-17T18:05:06Z, asks to register 73 upper bounds for n = 204 and 330 to 993, each
@@ -7,7 +7,8 @@ the exact rational side of a certificate in
 at `23aff0c6f992271e1ad13a148d44f392c4b386c0` (committed 2026-10-17T18:00:09Z) rounded up
 at 12 places.
 This packet retains the one row in the n ≤ 324 case corpus, s(204), registered as T-226.
-The 72 rows beyond the corpus are think-f28n’s, and follow #715’s import.
+Since 22 October it also retains the issue’s 72 rows beyond the corpus, recorded as
+dated beyond-horizon rows ([Beyond the Corpus](#beyond-the-corpus)).
 
 | n | Exact side of the certificate | Issue’s print, rounded up | SHA-256 |
 | --- | --- | --- | --- |
@@ -25,7 +26,10 @@ the pin, from the declaration in [acquisition/declaration.json](acquisition/decl
 every file is bound to its Git blob at the pin.
 [acquisition/sources.json](acquisition/sources.json) is the acquisition record and
 [acquisition/upstream-subtree.sha256](acquisition/upstream-subtree.sha256) the manifest.
-Retained: `source/certificates/n204.cert`, the certificate the issue links, and `source/certificates/n204.json`, 2 files, 22,075 bytes.
+Retained: every certificate the issue links, `source/certificates/nN.cert` at its 73
+counts, each with its per-count JSON `nN.json`, 146 files, 7,453,248 bytes (2.65 MB as
+Git’s zlib stores them): the 204 pair at 01:24Z on 22 October for T-226, and the 72
+beyond the corpus from the same pin at 04:41Z.
 The repository states no licence for its data or prose, so the certificates and their
 JSON are retained as factual data under the owner decision of 9 October 2026 recorded in
 [known-best-packings/README.md](../known-best-packings/README.md).
@@ -34,7 +38,7 @@ directory’s `README.md`, `manifest.json` and `SHA256SUMS`, and the source’s 
 `verify_bound_certificate.py` with its MIT licence `BOUND_VERIFIER_LICENSE.txt`, which are
 byte-identical to the copies the [issue-678 packet](../couzo-issue678-2026-10-18/README.md)
 retains and were not run.
-The issue’s 72 other certificates and the rest of the tree are pinned by the commit alone.
+The rest of the tree is pinned by the commit alone.
 
 ## Exact Replay
 
@@ -68,11 +72,63 @@ Measured pose by pose in the
 #675’s packing is this one under the identity (5 squares beyond a tenth, at most 0.143),
 Couzo’s own sequence; no regularization is recorded.
 
+## Beyond the Corpus
+
+The issue’s 72 rows from 330 to 993 read root `certificates/nN.cert`, each first committed
+at the pin, five minutes before the issue
+([receipts/first-commits.json](receipts/first-commits.json)).
+
+[`devtools.beyond_horizon_replay`](../../../devtools/beyond_horizon_replay.py) reads every
+certificate a row beyond the corpus names from this packet once `acquire_source --check`
+holds it, and decides it with the filtered two-route decision and the six controls of
+[`devtools.couzo_678_replay`](../../../devtools/couzo_678_replay.py), reused unchanged:
+route `sqpack` through `sqpack.witness` and `sqpack.verify`’s exact predicates, route
+`independent` through `devtools.check_rational_witness_independent`’s, over every corner
+against every wall and every pair whose centres are closer than √2 by exact comparison.
+A unit square’s interior lies in the open disc of radius √2/2 about its centre, so no
+other pair can overlap; both routes check that every square is a unit square whose corner
+mean is that centre. The [18 October packet](../couzo-issue678-2026-10-18/README.md#exact-replay)
+states the six controls.
+
+**All 72 are verified.** Every printed side is its header side rounded up at 12 places,
+and both routes accept every packing: 118,501 candidate pairs of 17,911,878, and every
+corner against every wall. 60 touch the box and 10 have touching pairs, 604 in all, which
+the closed contract allows; elsewhere the least pair gap is between 1.0e-20 (at 382) and
+7.8e-11. **All 432 controls are refused by both routes.** The positive decisions took 76.6
+CPU seconds; [receipts/filtered-exact-replay.json](receipts/filtered-exact-replay.json)
+keeps every row’s side, both routes’ counts, least clearance, least gap and failures, the
+controls, and the per-count JSON’s seed credit. The maintained all-pairs kernel, `devtools.evand_arrangement_reports`’s two
+routes with no filter, decided every pair at 922, the row that becomes current there: 424,581 pairs in 107.0 CPU seconds;
+both routes accept it, and their least pair gap and wall clearance equal the filtered
+decision’s exactly ([receipts/exhaustive-sample.json](receipts/exhaustive-sample.json)).
+The all-pairs replay of every row, about 4 CPU-hours for the three Couzo packets at that
+rate, is not run; the filtered route is the replay of record, as for #678 and #715. Every side is below Göbel’s
+classical construction at its count, by 5.47e-03 at 330 or more
+([receipts/goebel-comparison.json](receipts/goebel-comparison.json), the 15 October
+packet’s retained program).
+
+The [backlog ledger of 22 October](../../../campaign/issue-intake/upper-bounds-backlog-20261022/README.md)
+walks every report at these counts from the 18 October ledger’s starts, frozen at `main`
+`804eff369`, and records all 72. **Eight are current**, at 364, 370, 382, 403, 444, 452,
+536 and 922: each supersedes the row that stood there, six of Couzo’s own 487b058 rows
+(`couzo-verified-bounds-2026-10-14`), his 14 October certificate at 382
+(`couzo-certificates-2026-10-14`) and Evan Daniel’s composition at 364
+(`evand-compositions-2026-10-13`), by 2.74e-10 (at 382) to 5.07e-05. **64 are superseded
+on entry** by the next report the walk records at their count: Couzo’s #675 (25), #672
+(19), #678 (9) and #715 (2), and Darius Muglich’s #686 (9).
+[acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record
+the source register reads them from.
+
 ## Credit
 
 Francisco Couzo, whose issue keeps every seed, construction and certificate credit in
 the source’s manifest; the per-count JSON credits the seed to Mykhailo Polkovskyi.
 The source discloses OpenAI Codex assistance with its checker.
+Beyond the corpus the per-count JSON credits Couzo’s seeds at most counts, Evan Daniel’s
+at 364 and his seed or construction at 403 and 444, Kevin Fang’s at 382, and Fang’s
+rectangle and gluing with PingYou Ltd’s square input at 703, 757, 813 and 931, and names
+no seed credit at 21; those statements are the source’s, and per-row credit beyond the
+horizon is the owner’s open question from #686.
 
 ## Commands
 
@@ -84,6 +140,8 @@ python -m devtools.upper_bound_reports couzo-issue670-2026-10-17 check-claims
 python -m devtools.upper_bound_reports couzo-issue670-2026-10-17 certify --jobs-dir "$TMPDIR/jobs" --workers 1
 python -m devtools.upper_bound_reports couzo-issue670-2026-10-17 check --replay
 python -m devtools.upper_bound_reports couzo-issue670-2026-10-17 register-plan
+python -m devtools.beyond_horizon_replay check --issue 670
+python -m devtools.beyond_horizon_replay check --issue 670 --replay --workers 2
 ```
 
 <!-- This document follows common-doc-guidelines.md.

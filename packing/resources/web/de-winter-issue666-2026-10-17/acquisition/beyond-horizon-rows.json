@@ -1,0 +1,22 @@
+{
+  "format": "upper-bound-beyond-horizon-claims-v1",
+  "horizon": 324,
+  "issue": "https://github.com/jlevy/squares/issues/666",
+  "issue_pin": "b3152f526f23bc3ae450e51b6e906841233086d1",
+  "limit": 1024,
+  "results": [
+    {"ceiling":"21.9888130226937817","certificate":"square-packing-above-324/n0464.cert","deleted":0,"exact_side":"10994406511346890813/500000000000000000","first_committed":"2026-10-17T07:03:15Z","n":464,"offered_side":"21.988813022694"},
+    {"ceiling":"22.9943280364379813","certificate":"square-packing-above-324/n0509.cert","deleted":0,"exact_side":"229943280364379812353527908255755274821759/10000000000000000000000000000000000000000","first_committed":"2026-10-17T07:03:15Z","n":509,"offered_side":"22.994328036438"},
+    {"ceiling":"23.9936537905909374","certificate":"square-packing-above-324/n0555.cert","deleted":0,"exact_side":"599841344764773433515660753617274733361/25000000000000000000000000000000000000","first_committed":"2026-10-17T07:03:15Z","n":555,"offered_side":"23.993653790591"},
+    {"ceiling":"24.9952680641961326","certificate":"square-packing-above-324/n0603.cert","deleted":0,"exact_side":"3124408508024516567/125000000000000000","first_committed":"2026-10-17T07:03:15Z","n":603,"offered_side":"24.995268064197"},
+    {"ceiling":"25.9961039089645507","certificate":"square-packing-above-324/n0654.cert","deleted":0,"exact_side":"6499025977241137654691967211499090902723/250000000000000000000000000000000000000","first_committed":"2026-10-17T07:03:15Z","n":654,"offered_side":"25.996103908965"},
+    {"ceiling":"26.9987121004043450","certificate":"square-packing-above-324/n0706.cert","deleted":0,"exact_side":"26998712100404344909005416027219267574873/1000000000000000000000000000000000000000","first_committed":"2026-10-17T07:03:15Z","n":706,"offered_side":"26.998712100405"},
+    {"ceiling":"27.9959493403287249","certificate":"square-packing-above-324/n0760.cert","deleted":0,"exact_side":"279959493403287248613110541910531104379287/10000000000000000000000000000000000000000","first_committed":"2026-10-17T07:03:15Z","n":760,"offered_side":"27.995949340329"},
+    {"ceiling":"28.9984884807749067","certificate":"square-packing-above-324/n0817.cert","deleted":0,"exact_side":"18124055300484316642750416463963715847119/625000000000000000000000000000000000000","first_committed":"2026-10-17T07:03:15Z","n":817,"offered_side":"28.998488480775"},
+    {"ceiling":"29.9987837331079279","certificate":"square-packing-above-324/n0875.cert","deleted":0,"exact_side":"149993918665539639324087987587084819661007/5000000000000000000000000000000000000000","first_committed":"2026-10-17T07:03:15Z","n":875,"offered_side":"29.998783733108"},
+    {"ceiling":"30.9959558548339203","certificate":"square-packing-above-324/n0935.cert","deleted":0,"exact_side":"154979779274169601234769816827136411957663/5000000000000000000000000000000000000000","first_committed":"2026-10-17T07:03:15Z","n":935,"offered_side":"30.995955854834"},
+    {"ceiling":"31.9983497473545592","certificate":"square-packing-above-324/n0998.cert","deleted":0,"exact_side":"639966994947091183224777254436933414843/20000000000000000000000000000000000000","first_committed":"2026-10-17T07:03:15Z","n":998,"offered_side":"31.998349747355"}
+  ],
+  "revision": "643dc9ad4d3dbd71a9a05558c7f6116b809ba930",
+  "source": "https://github.com/JoostdeWinter/joostdewinter.github.io"
+}

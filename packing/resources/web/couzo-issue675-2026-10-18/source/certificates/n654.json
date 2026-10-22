@@ -1,0 +1,39 @@
+{
+  "n": 654,
+  "packing": "n654.txt",
+  "packing_sha256": "18a88f6c26bcd477df8715bbc070ac13c39a5fc2dc5826e1fe6ab9dfa4cbad71",
+  "certificate": "certificates/n654.cert",
+  "certificate_sha256": "c0472384c6ad4ba4c257e1e7361e729ee8d78d3d6f0c878404833edbac5c8cb2",
+  "rational_side": "11433120301194393315650073/439804651110400000000000",
+  "kind": "rational witness",
+  "origin": {
+    "seed_credit": "Joost de Winter",
+    "category": "reviewed public submission",
+    "source_url": "https://github.com/JoostdeWinter/joostdewinter.github.io/blob/b3152f526f23bc3ae450e51b6e906841233086d1/square-packing-above-324/n0654.cert",
+    "request": "https://github.com/jlevy/squares/issues/666",
+    "construction_credit": [
+      "Arslanov, Mustafin and Shangitbayev (four-block method)"
+    ],
+    "source_n": 654,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "1dc22766ad5fcf945d8005d5621477256133ded3fea3934d3ef43955e695ede6",
+    "search_job": {
+      "id": 107749,
+      "method": "fq",
+      "source": "n654.txt",
+      "source_origin": "constructed",
+      "source_sha256": "0c5bd54d868aa7417d420629422633a5be3660c6181af62ada6ddbf4a8d882a6",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n654.txt",
+        "source_sha256": "0c5bd54d868aa7417d420629422633a5be3660c6181af62ada6ddbf4a8d882a6",
+        "source_n": 654,
+        "source_side": 25.99610390893134,
+        "layers": 0,
+        "deleted": 0,
+        "side": 25.99610390893134
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

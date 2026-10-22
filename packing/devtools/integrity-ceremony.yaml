@@ -44,6 +44,16 @@ allowlist:
       digest is compared with the one the packet pinned, so the bound it states is bound
       to the retained bytes. The retained certificates are read from Git and compared
       with nothing; their custody is acquire_source --check's.
+  - path: packing/devtools/beyond_horizon_replay.py
+    kind: download
+    boundary: >-
+      The per-count metadata certificates/nN.json that the Couzo packets retain from
+      franciscouzo/square-packing names the digest of the certificate its seed credit
+      describes; `seed_credit` holds that stated digest against the digest the packet's
+      manifest pins for the certificate a row reads, so the credit recorded beside a #675
+      row, whose root metadata may describe another file than the certificates/best/ file
+      the issue links, is bound to the bytes it is about. The retained certificates are
+      read from Git and compared with nothing; their custody is acquire_source --check's.
   - path: packing/devtools/couzo_715_replay.py
     kind: download
     boundary: >-

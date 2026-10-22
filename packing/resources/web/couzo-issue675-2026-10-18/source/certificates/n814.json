@@ -1,0 +1,23 @@
+{
+  "n": 814,
+  "packing": "n814.txt",
+  "packing_sha256": "23f64d383c8b74a59e860931f338e376b5159ed2f7a8a17caaeba1864cfac5ff",
+  "certificate": "certificates/n814.cert",
+  "certificate_sha256": "08d7ffa41186de58a58559c7bf85e06cb0483465faeefce67b8a4267800810d6",
+  "rational_side": "87218804624554978113565792364312602174419141253907605150532690001591/3008188264359686175261079580081882643596861752610795500000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Francisco Couzo; retained seed/construction credit: Joost de Winter",
+    "construction": {
+      "kind": "L-border",
+      "source_n": 759,
+      "layers": 1,
+      "parent_certificate_sha256": "8e75e9e459afeaa303bda9c1461a3319a6071731034d4bfcc4f4048eb38270fd",
+      "capacity": 814
+    },
+    "source_n": 814,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "08d7ffa41186de58a58559c7bf85e06cb0483465faeefce67b8a4267800810d6"
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

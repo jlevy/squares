@@ -1,0 +1,54 @@
+{
+  "n": 330,
+  "packing": "n330.txt",
+  "packing_sha256": "3ec0ffd826f2cfafeaae26bb7a7fab3d52115a54cb91dd59ad0823b739b873a6",
+  "certificate": "certificates/n330.cert",
+  "certificate_sha256": "21be9eb4af6f37a3e72fa02cffd5f5a3d56020099c8228335b5a27e2fd5ca5df",
+  "rational_side": "6748764126299635103858366087797796647482602981114382402710783058757/361037440354186299129428478610374403541862991294284750000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Francisco Couzo",
+    "web_seed": {
+      "category": "CT105 web submission",
+      "source_certificate_sha256": "21be9eb4af6f37a3e72fa02cffd5f5a3d56020099c8228335b5a27e2fd5ca5df",
+      "submission_id": "5d00d00ad18192406902195c7c2c4c0b",
+      "method": "fq",
+      "received": "20261017T202210Z",
+      "seed_credit": "Francisco Couzo",
+      "prior_retained_witness": {
+        "certificate": "certificates/parents/552864a7f2da3ef99fd64deebd650fcf1ac2b3cfae6dd833d141d6da17537b8e.cert",
+        "certificate_sha256": "552864a7f2da3ef99fd64deebd650fcf1ac2b3cfae6dd833d141d6da17537b8e",
+        "source_credit": {
+          "seed_credit": "Francisco Couzo",
+          "web_seed": {
+            "category": "CT105 web submission",
+            "submission_id": "ade01c7d2310836af71be9de990c63b7",
+            "received": "20261017T173718Z",
+            "method": "hop",
+            "seed": "volunteer",
+            "source_certificate_sha256": "552864a7f2da3ef99fd64deebd650fcf1ac2b3cfae6dd833d141d6da17537b8e"
+          }
+        }
+      }
+    },
+    "source_n": 330,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "21be9eb4af6f37a3e72fa02cffd5f5a3d56020099c8228335b5a27e2fd5ca5df",
+    "prior_retained_witness": {
+      "certificate": "certificates/parents/552864a7f2da3ef99fd64deebd650fcf1ac2b3cfae6dd833d141d6da17537b8e.cert",
+      "certificate_sha256": "552864a7f2da3ef99fd64deebd650fcf1ac2b3cfae6dd833d141d6da17537b8e",
+      "source_credit": {
+        "seed_credit": "Francisco Couzo",
+        "web_seed": {
+          "category": "CT105 web submission",
+          "submission_id": "ade01c7d2310836af71be9de990c63b7",
+          "received": "20261017T173718Z",
+          "method": "hop",
+          "seed": "volunteer",
+          "source_certificate_sha256": "552864a7f2da3ef99fd64deebd650fcf1ac2b3cfae6dd833d141d6da17537b8e"
+        }
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

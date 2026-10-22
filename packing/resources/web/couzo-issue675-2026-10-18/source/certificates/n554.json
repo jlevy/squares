@@ -1,0 +1,41 @@
+{
+  "n": 554,
+  "packing": "n554.txt",
+  "packing_sha256": "6109d2bca9f76b591623915b4b5ac5ada29c7d2e26fdacf48a99e2c62118b960",
+  "certificate": "certificates/n554.cert",
+  "certificate_sha256": "a55f099f9d4a960b378d2ef53ba10f5ccd2c982d7a7541689152a971ac1ed074",
+  "rational_side": "413720192835406785697998941/17242953345500000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Francisco Couzo; retained seed/construction credit: Joost de Winter",
+    "category": "reviewed public submission",
+    "source_url": "https://github.com/JoostdeWinter/joostdewinter.github.io/blob/b3152f526f23bc3ae450e51b6e906841233086d1/square-packing-above-324/n0555.cert",
+    "request": "https://github.com/jlevy/squares/issues/666",
+    "construction_credit": [
+      "Arslanov, Mustafin and Shangitbayev (four-block method)"
+    ],
+    "source_n": 554,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "a55f099f9d4a960b378d2ef53ba10f5ccd2c982d7a7541689152a971ac1ed074",
+    "web_seed": {
+      "category": "CT105 web submission",
+      "source_certificate_sha256": "a55f099f9d4a960b378d2ef53ba10f5ccd2c982d7a7541689152a971ac1ed074",
+      "submission_id": "26f97f1380eaf943c82f040f1e939358",
+      "method": "fq",
+      "received": "20261018T023939Z",
+      "previous_source_credit": {
+        "seed_credit": "Joost de Winter",
+        "category": "reviewed public submission",
+        "source_url": "https://github.com/JoostdeWinter/joostdewinter.github.io/blob/b3152f526f23bc3ae450e51b6e906841233086d1/square-packing-above-324/n0555.cert",
+        "request": "https://github.com/jlevy/squares/issues/666",
+        "construction_credit": [
+          "Arslanov, Mustafin and Shangitbayev (four-block method)"
+        ],
+        "source_n": 555,
+        "deleted_squares": 1,
+        "source_certificate_sha256": "330ff746344b3c425fdbd724462bb71bc66dfbb01038aacf219ef948417eb424"
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

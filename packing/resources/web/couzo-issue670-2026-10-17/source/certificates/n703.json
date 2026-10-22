@@ -1,0 +1,37 @@
+{
+  "n": 703,
+  "packing": "n703.txt",
+  "packing_sha256": "9783c1a293ff30cdff9f06a66c355dd644606a73ea2b5877b5cb6f2c7146222c",
+  "certificate": "certificates/n703.cert",
+  "certificate_sha256": "d8872a917f4912849bd1ca16709db0a5f9fd23ba9d765865baca8b9f5321a84f",
+  "rational_side": "505697986485927959751714019/18738234771422000000000000",
+  "kind": "rational witness",
+  "origin": {
+    "seed_credit": "Kevin Fang (rectangle and gluing); PingYou Ltd (BuddenPing) (square input)",
+    "construction": {
+      "parent_n": 29,
+      "parent_certificate_sha256": "b484ee938e1e8e0707b6ddacda481a5579abeb285e60dbd63688eb62f72155b2",
+      "rectangle": "r22x21_n0443",
+      "rectangle_sha256": "db13813740cd979cfcdb071a6a252239df85936748b93f1ac4234e8c3f096d3c",
+      "source_revision": "078789a4cfd36f915f1bfbe76d742413d79b2965"
+    },
+    "search_job": {
+      "id": 106473,
+      "method": "hop",
+      "source": "n703.txt",
+      "source_origin": "constructed",
+      "source_sha256": "099ad7e6dd940839092e1e246afa1dca0e63a72e0ca007efe6be95d8ff615b80",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n703.txt",
+        "source_sha256": "1afbcf995934a56bbbfd245056a2beae209e599634c01a0f999d24a7d2f2b7b0",
+        "source_n": 703,
+        "source_side": 26.989569478121382,
+        "layers": 0,
+        "deleted": 0,
+        "side": 26.989569478121382
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

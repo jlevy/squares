@@ -1,0 +1,40 @@
+{
+  "n": 874,
+  "packing": "n874.txt",
+  "packing_sha256": "a5b7b81422c9b18f0b1d5a6f8c6d7653a0468b22bff1622b81b6b710d34ba1fb",
+  "certificate": "certificates/n874.cert",
+  "certificate_sha256": "a492229002f0f23464b5e5a22003c3e229650955272b9cc46abc472e150c789d",
+  "rational_side": "6665094484746642911653749/222182830991200000000000",
+  "kind": "rational witness",
+  "origin": {
+    "seed_credit": "Joost de Winter",
+    "construction": {
+      "kind": "L-border",
+      "source_n": 817,
+      "layers": 1,
+      "parent_certificate_sha256": "afcf3145cc6856c31177b1b01d7178211adee69d38a268af8710df648ed81c5e",
+      "capacity": 874
+    },
+    "source_n": 874,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "7d8f2abb63688b8372860652b13f317047bee9e94d9101f2ebe7093134ecf151",
+    "search_job": {
+      "id": 106809,
+      "method": "hop",
+      "source": "n817.txt",
+      "source_origin": "constructed",
+      "source_sha256": "d27a8a0db00bcfc8f2c52f72e021fcefe0bbc87c37d6011c487ca08971138834",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n817.txt",
+        "source_sha256": "a97bcd56780989cac87b94c6f8be961fdc8ae52733146bb975cf662e5442854b",
+        "source_n": 817,
+        "source_side": 28.99835217793205,
+        "layers": 1,
+        "deleted": 0,
+        "side": 29.99835217793405
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

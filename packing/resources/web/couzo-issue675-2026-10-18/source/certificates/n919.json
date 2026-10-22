@@ -1,0 +1,23 @@
+{
+  "n": 919,
+  "packing": "n919.txt",
+  "packing_sha256": "35a7ec269cab683b0eb9de9a2ec3376c1a54abc8a0424b546a4c77ab4fedf726",
+  "certificate": "certificates/n919.cert",
+  "certificate_sha256": "e7934ede7d21a47b78896ed9692839da92b914928bd9497eeb0d1096812dcdd3",
+  "rational_side": "4332648751682942202834101/140445917577750000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "construction": {
+      "category": "local reconstruction",
+      "source": "experiments/young-corner-20261017/screen/n921.txt",
+      "actual_square_count": 919,
+      "target_square_count": 921,
+      "construction_family_credit": "Joost de Winter (Young-corner / slipped-ribbon family; separate local reconstruction)"
+    },
+    "seed_credit": "Francisco Couzo",
+    "source_n": 919,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "e7934ede7d21a47b78896ed9692839da92b914928bd9497eeb0d1096812dcdd3"
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}
