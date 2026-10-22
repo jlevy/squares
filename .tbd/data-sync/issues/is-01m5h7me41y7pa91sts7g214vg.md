@@ -5,7 +5,7 @@ title: "PR #578 final review and merge"
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -17,11 +17,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T07:18:59.452Z
-updated_at: 2026-10-22T07:46:15.878Z
+updated_at: 2026-10-22T08:18:43.455Z
 started_at: 2026-10-22T07:19:14.287Z
 ---
 User requests final review of the combined profile feature, fresh main integration, and merge only after reviews and required checks pass. Run pinned senior and applicable dedicated review updates, resolve all findings, confirm current-head CI, then merge with a merge commit. Deployment is separate.
 
 ## Notes
 
-Fresh origin/main7359fa8b6 is ancestor of candidate02b4caa0c; policy grants current, no policy diff, standalone PR. Senior review K published pinned to02b4: https://github.com/jlevy/squares/pull/578#pullrequestreview-5610640379 . Sole High finding K1 organization project attribution tracked think-m39f, Sol fixing; no other findings. Prior A-J reviewed/disposed. Local push10/10steps608.48s, docs8/8steps32.33s, fullpool23pass66.57s. Candidatepushed; ordinaryCIrunning. Next fixK1, dedicatedcorrectness/security/performance reviews, final gates/fullhostedcheckpoint, guardedmerge. Deployment separate.
+Candidate 086c44ec passed 28/28 local gate steps in 576.29s; 7565 normal tests and 13 pool tests passed. Pushed non-force. Senior K1 fixed9939 and verified by correctness L; L1 docs and Linux ink-test portability fixed d8f8. Security M completed zero findings, publishing. Main advanced during qualification to0281e776 (PR720,205 beyond-horizon rows); PR now conflicts. Hosted checkpoint withheld. Integrate new main, preserve reviewed feature and new result evidence, refresh affected attribution and release records, review integration, then rerun final gates before guarded merge. Historical population remains separately tracked.
