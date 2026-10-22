@@ -381,10 +381,10 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
         "the-atlas-of-square-packings",
         "news",
         "recent-results",
+        "profiles",
         "report-your-results",
         "papers",
         "visuals",
-        "profiles",
         "squares-project-documentation",
         "more-resources",
     ]
@@ -2564,9 +2564,9 @@ def test_every_website_card_opens_a_place_the_record_cites(
 ) -> None:
     """Each website's card, a catalogue's or another site's, opens an address the record
     itself cites (`CITING_FILES`), whole, so the list says no more than the record does.
-    David Ellsworth's catalogue, the record's `[Kingbird]`, is there and leads the
-    section, ahead of Friedman's original page and Evan Daniel's atlas, and its card
-    counts exactly the results the register files under the catalogue's venue. No
+    David Ellsworth's catalogue, the record's `[Kingbird]`, is present in the shared
+    significance order, and its card counts exactly the results the register files
+    under the catalogue's venue. No
     GitHub website is an issue or discussion rather than a repository, and every address
     `PROJECT_EXTRA_KEYS` and `SOURCE_VENUES`
     name is listed."""
@@ -2590,8 +2590,8 @@ def test_every_website_card_opens_a_place_the_record_cites(
         "evand.github.io",
     ]
     assert overview_sections.CATALOGUE_SITES[0][0] == overview_sections.KINGBIRD
-    (first, tally), *_ = overview_sections.listed_projects(overview)
-    assert first == overview_sections.KINGBIRD
+    ranked = overview_sections.listed_projects(overview)
+    tally = dict(ranked)[overview_sections.KINGBIRD]
     bibliography = safe_load(overview_data.BIBLIOGRAPHY.read_text(encoding="utf-8"))
     filed = {
         entry["key"]
@@ -2611,9 +2611,8 @@ def test_every_website_card_opens_a_place_the_record_cites(
         page.split('id="other-square-packing-projects"', 1)[1],
         maxsplit=1,
     )[0]
-    assert section.index(f'href="{overview_sections.KINGBIRD}"') == min(
-        section.index(f'href="{url}"') for url in overview_sections.project_urls()
-    )
+    positions = [section.index(f'href="{url}"') for url, _ in ranked]
+    assert positions == sorted(positions)
     named = {*overview_sections.PROJECT_EXTRA_KEYS, *overview_sections.SOURCE_VENUES}
     assert named <= set(overview_sections.project_urls())
 

@@ -343,11 +343,11 @@ def test_the_added_filter_shows_what_reached_the_site(
     Added within and shows exactly the results that arrived that day or the day before,
     whatever the date their rows show or the day a lane registered them, and leaves Max
     age empty (#514's review A, finding A1); the clock is noon, where the reader's day and
-    the UTC day an age of arrival counts in agree. The seven days' heading opens the table from
-    the section's first day, `?added-since=`, with Added since in the bar, on the results
-    the section lists (A3). The newest day's own link opens it on that day alone, with
-    Added on in the bar naming the day; and a day nothing arrived on is named there too
-    and shows no row, rather than every row (A5)."""
+    the UTC day an age of arrival counts in agree. The seven days' arrival link opens
+    the table from the section's first day, `?added-since=`, with Added since in the
+    bar, on the results the section lists (A3). The newest day's own link opens it on
+    that day alone, with Added on in the bar naming the day; and a day nothing arrived
+    on is named there too and shows no row, rather than every row (A5)."""
     name = "results.html"
     reference = overview_sections.added_reference(overview)
     cutoff = overview_sections.age_cutoff(reference, 1)
@@ -375,9 +375,9 @@ def test_the_added_filter_shows_what_reached_the_site(
 
         page.goto(pages[name].as_uri(), wait_until="load")
         assert not page.locator(added_since).is_visible()
-        heading = page.get_by_role("heading", name="Added in the Last Seven Days")
+        arrivals = page.get_by_role("link", name="Browse these arrivals", exact=True)
         with page.expect_navigation(url=arrival(pages[name]), wait_until="load"):
-            heading.get_by_role("link").click()
+            arrivals.click()
         first = (reference - timedelta(days=overview_sections.ADDED_DAYS)).isoformat()
         assert urlsplit(page.url).query == f"added-since={first}"
         assert urlsplit(page.url).fragment == "all-results"
