@@ -2,19 +2,24 @@
 
 from __future__ import annotations
 
+import ast
 import cProfile
 import hashlib
 import inspect
+import itertools
 import json
 import os
+import re
 import shlex
 import shutil
 import subprocess
 import sys
 import tempfile
 import time
+import tomllib
 from collections.abc import Callable, Iterator
 from datetime import datetime, timedelta
+from functools import cache
 from pathlib import Path
 from types import ModuleType
 from typing import Any
@@ -1795,6 +1800,221 @@ def test_snapshot_audit_cli_never_clones_or_runs_a_control(
     assert report["candidate_source_bytes"] == 41
     with pytest.raises(SystemExit, match="2"):
         controls.main([str(spec), "--prune-candidate", str(old)])
+
+
+def test_the_audit_names_a_control_that_runs_a_candidate_by_its_module_name(
+    snapshot_audit_fixture: tuple[Path, Path],
+) -> None:
+    """#721 review A1 (think-wtso): `-m devtools.tool` never spells `devtools/tool.py`."""
+    old, spec = snapshot_audit_fixture
+    tool = old.parent / "devtools/pruned_tool.py"
+    tool.parent.mkdir()
+    tool.write_text("", encoding="utf-8")
+    spec.write_text(
+        "controls:\n"
+        "- {name: runs it, file: source.py, run: python3 -m devtools.pruned_tool}\n"
+        "- name: imports it\n"
+        "  file: source.py\n"
+        "  run: |-\n"
+        "    python3 - <<'PY'\n"
+        "    from devtools.pruned_tool import main\n"
+        "    PY\n"
+        "- {name: another tool, file: source.py, run: python3 -m devtools.pruned_tool_two}\n",
+        encoding="utf-8",
+    )
+    candidates = controls.snapshot_audit([tool], spec_path=spec)["candidates"]
+    assert isinstance(candidates, list)
+    mentions = candidates[0]["registered_mentions"]
+    assert [row["name"] for row in mentions] == ["runs it", "imports it"]
+    assert (
+        controls.module_name(controls.ROOT / "src/sqpack/campaign/ledger.py")
+        == "sqpack.campaign.ledger"
+    )
+    assert controls.module_name(controls.ROOT / "src/sqpack/__init__.py") == "sqpack"
+    assert controls.module_name(old / "generated.bin") is None
+
+
+@cache
+def _console_scripts() -> dict[str, str]:
+    """Each console script the project declares, and the module it runs."""
+    project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+    return {
+        name: str(target).partition(":")[0]
+        for name, target in project["project"]["scripts"].items()
+    }
+
+
+@cache
+def _module_files(name: str, *, tests: bool = False) -> tuple[Path, ...]:
+    """The first-party files `import name` loads: each package on the way, then the module.
+
+    A module under `tests/` also imports its siblings by bare name (`from
+    test_upper_bound_reports_574 import ...`), since pytest puts `tests/` on `sys.path`.
+    """
+    bases = (ROOT, ROOT / "src", *((ROOT / "tests",) if tests else ()))
+    parts = name.split(".")
+    found: list[Path] = []
+    for end in range(1, len(parts) + 1):
+        stems = [base.joinpath(*parts[:end]) for base in bases]
+        candidates = [
+            path for stem in stems for path in (stem.with_suffix(".py"), stem / "__init__.py")
+        ]
+        found += [path for path in candidates if path.is_file()][:1]
+    return tuple(found)
+
+
+def _loaded_by(tree: ast.Module, *, tests: bool = False) -> set[Path]:
+    """What loading `tree` imports: its module-level imports, not those inside a function
+    or under `TYPE_CHECKING`, which run only when called or never."""
+    names: set[str] = set()
+    pending: list[ast.AST] = list(tree.body)
+    while pending:
+        node = pending.pop()
+        if isinstance(node, ast.Import):
+            names.update(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            names.add(node.module)
+            names.update(f"{node.module}.{alias.name}" for alias in node.names)
+        elif isinstance(node, ast.If) and "TYPE_CHECKING" in ast.unparse(node.test):
+            pending.extend(node.orelse)
+        elif not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.expr)):
+            pending.extend(ast.iter_child_nodes(node))
+    return {path for name in names for path in _module_files(name, tests=tests)}
+
+
+@cache
+def _loads(path: Path) -> frozenset[Path]:
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    return frozenset(_loaded_by(tree, tests=path.parent == ROOT / "tests"))
+
+
+#: A here-document: its quoted or bare delimiter, the rest of its line, and its body.
+_HEREDOC = re.compile(
+    r"<<-?[ \t]*(['\"]?)(\w+)\1([^\n]*)\n(.*?)\n[ \t]*\2[ \t]*(?=\n|$)", re.DOTALL
+)
+_SEPARATORS = frozenset({"&&", "||", ";", "|", "&", "(", ")"})
+
+
+def _pytest_files(arguments: list[str], run: str) -> set[Path]:
+    tests = {
+        ROOT / argument.partition("::")[0]
+        for argument in arguments
+        if re.fullmatch(r"tests/[\w/.-]+\.py(::\S*)?", argument)
+    }
+    if not tests:
+        raise ValueError(f"pytest is given no test file, so its loads are unknown: {run!r}")
+    return tests | {ROOT / "tests/conftest.py"}
+
+
+def _pruned_loads(run: str) -> list[str]:
+    """The pruned files a control's command imports as its programs load, with everything
+    those import at load.
+
+    Its programs are each `python` invocation's `-m` module, `-c` source, script or
+    here-document, each test file pytest is given with its `conftest.py`, and each
+    console script's module. It fails closed (#723 review A1): a `python` or `pytest`
+    invocation in any other form raises, so a new spelling fails the guard until this
+    learns it rather than passing as loading nothing.
+    """
+    heredocs: list[str] = []
+
+    def hold(match: re.Match[str]) -> str:
+        heredocs.append(match[4])
+        return f"<< __heredoc_{len(heredocs) - 1}__{match[3]}"
+
+    shell = _HEREDOC.sub(hold, run).replace("\\\n", " ")
+    loaded: set[Path] = set()
+    for line in shell.splitlines():
+        lexer = shlex.shlex(line, posix=True, punctuation_chars=True)
+        lexer.whitespace_split = True
+        tokens = list(lexer)
+        for index, token in enumerate(tokens):
+            rest = list(
+                itertools.takewhile(lambda t: t not in _SEPARATORS, tokens[index + 1 :])
+            )
+            if token in _console_scripts():
+                loaded |= set(_module_files(_console_scripts()[token]))
+            program = Path(token).name
+            if program == "pytest" and tokens[index - 1 : index] != ["-m"]:
+                loaded |= _pytest_files(rest, run)
+            elif re.fullmatch(r"python3?(\.\d+)?", program):
+                fed = [int(m[1]) for t in rest if (m := re.fullmatch(r"__heredoc_(\d+)__", t))]
+                match rest:
+                    case ["-m", "pytest", *arguments]:
+                        loaded |= _pytest_files(arguments, run)
+                    case ["-m", module, *_]:
+                        loaded |= set(_module_files(module))
+                    case ["-c", source, *_]:
+                        loaded |= _loaded_by(ast.parse(source))
+                    case ["-", *_] if len(fed) == 1:
+                        loaded |= _loaded_by(ast.parse(heredocs[fed[0]]))
+                    case [script, *_] if script.endswith(".py") and (ROOT / script).is_file():
+                        loaded.add(ROOT / script)
+                    case _:
+                        raise ValueError(f"an unrecognised python invocation: {run!r}")
+    pending = list(loaded)
+    while pending:
+        for path in _loads(pending.pop()) - loaded:
+            loaded.add(path)
+            pending.append(path)
+    return sorted(
+        path.relative_to(ROOT).as_posix()
+        for path in loaded
+        if controls.in_pruned_roots(path, PRUNE)
+    )
+
+
+#: The registered commands whose programs the guard cannot follow, and why none of them
+#: loads a pruned file in a worker.
+UNFOLLOWED_COMMANDS = {
+    "uv run --frozen --group dev pytest -q": (
+        "the whole suite: its control points `testpaths` at a missing directory, and "
+        "pytest stops at configuration before importing a test"
+    ),
+}
+
+
+def test_no_control_loads_a_pruned_tool() -> None:
+    """No control's program imports a pruned file as it loads (think-wtso, think-cmbx).
+
+    A worker carries nothing in `PRUNE`, so such a control fails at import in the worker
+    rather than in review. `adopt_houses` is the standing case: it loads `select_houses`,
+    which loads `algebraic_witness_reports`, which loads the pruned `regularize_evand`.
+    Imports inside a function are left out, since `check_results` reaches the same tool
+    through a call it never makes; so are the commands a validation step starts, which
+    only a control's own run in a worker decides. A `python` or `pytest` invocation the
+    guard cannot read fails it, unless `UNFOLLOWED_COMMANDS` says why (#723 review A1).
+    """
+    spec = safe_load((ROOT / "devtools/controls.yaml").read_text(encoding="utf-8"))
+    for run in sorted({str(control["run"]) for control in spec["controls"]}):
+        if run in UNFOLLOWED_COMMANDS:
+            with pytest.raises(ValueError, match="no test file"):
+                _pruned_loads(run)
+        else:
+            assert _pruned_loads(run) == [], run
+    adopt = "from devtools import adopt_houses"
+    for run in (
+        "python3 -m devtools.adopt_houses",
+        ".venv/bin/python3 -m devtools.adopt_houses",
+        "python3 devtools/adopt_houses.py",
+        f'python3 -c "{adopt}"',
+        f"python3 - <<'PY'\n{adopt}\nPY",
+        f'python3 - <<"PY" > /dev/null\n{adopt}\nPY',
+        f"set -e\npython3 - <<PY | tee out.txt\n{adopt}\nPY\necho done",
+        "uv run --frozen --group dev pytest -q tests/test_exact_sides.py::test_x",
+        "uv run --frozen --group dev python -m pytest tests/test_house_adoption.py -q",
+    ):
+        assert "devtools/regularize_evand.py" in _pruned_loads(run), run
+    assert _pruned_loads("python3 -m devtools.couzo_715_replay") == [
+        "devtools/couzo_715_replay.py"
+    ]
+    # pytest puts `tests/` on `sys.path`, so a test's bare sibling import is followed.
+    sibling = ROOT / "tests/test_upper_bound_reports_574.py"
+    assert sibling in _loads(ROOT / "tests/test_upper_bound_reports_622.py")
+    assert _pruned_loads("cat <<'EOF' > notes.yaml\nkey: [1, 2\nEOF") == []
+    for run in ("python3 -X dev -m devtools.adopt_houses", "uv run pytest -q tests -k exact"):
+        with pytest.raises(ValueError, match=r"unrecognised python invocation|no test file"):
+            _pruned_loads(run)
 
 
 def test_baseline_runs_each_command_unmutated_once_in_one_private_worker(

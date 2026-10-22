@@ -88,7 +88,7 @@ import subprocess
 import sys
 import tempfile
 import time
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import suppress
 from dataclasses import dataclass
@@ -1378,9 +1378,18 @@ PRUNE |= REGULARIZED_WITNESSES | HISTORICAL_SNAPSHOT_OUTPUTS | UNREAD_WORKER_OUT
 # regularizer, the same-side re-solve, the review gallery and their tests took the
 # snapshot to 209,779,702 bytes, 64,502 over the cap. They run on request, outside any
 # gate, and only on run directories outside the checkout. `--audit-snapshot` with these
-# eight paths as candidates finds no registered mention and no inline or result rescue;
-# nothing else in the repository imports them (they import each other and their tests
-# import them). The one control that runs the whole suite points `testpaths` at a missing
+# eight paths as candidates finds no registered mention and no inline or result rescue.
+# Other modules do import them, so what holds is that no control loads one (corrected
+# 2026-10-22, think-cmbx). That day 15 unpruned modules imported one at load, and so
+# cannot be imported in a worker: `algebraic_witness_reports`, which imports
+# `regularize_evand`, the `select_houses` and `adopt_houses` that import it, and 12
+# tests. `default_drawings`, `register_regularized_bounds`, `regularize_axis_components`
+# and `select_houses` also import them inside functions, which load in a worker and fail
+# only when called; `check_results` and `validate_schemas` reach such calls through
+# `upper_bound_houses` and `default_drawings` and never make them. The list is the
+# guard's, not this note's: `test_no_control_loads_a_pruned_tool` holds that no control
+# loads one, and a call is caught only by its control failing in a worker.
+# The one control that runs the whole suite points `testpaths` at a missing
 # directory and expects pytest to stop at configuration, before any test is collected,
 # so the consumer contract's declarations of the driver and the gallery are never read
 # in a worker. Left out, the snapshot measures 209,536,887 bytes, 178,313 under the
@@ -1928,6 +1937,46 @@ def in_pruned_roots(path: Path, roots: frozenset[Path]) -> bool:
     return path in roots or any(parent in roots for parent in path.parents)
 
 
+def module_name(path: Path) -> str | None:
+    """The dotted name `python -m` runs, and `import` reads, a Python file under `ROOT` by.
+
+    `src/` is the import root of `sqpack`; every other package imports from `ROOT`.
+    """
+    if path.suffix != ".py" or not path.is_relative_to(ROOT):
+        return None
+    parts = path.relative_to(ROOT).with_suffix("").parts
+    parts = parts[1:] if parts[0] == "src" else parts
+    return ".".join(parts[:-1] if parts[-1] == "__init__" else parts)
+
+
+def registered_mentions(
+    candidate: Path, records: Sequence[Mapping[str, object]]
+) -> list[dict[str, str]]:
+    """The registered controls that target `candidate` or name it in their command.
+
+    A command names a file by its repository- or packing-relative path or, for Python, by
+    its dotted module name (think-wtso): `python3 -m devtools.couzo_715_replay` runs that
+    tool as surely as its path does. These are exact references; what a named module
+    imports is `test_no_control_loads_a_pruned_tool`'s question, not this one's.
+    """
+    below = frozenset((candidate,))
+    tokens = [candidate.relative_to(REPO).as_posix()]
+    if candidate.is_relative_to(ROOT):
+        tokens.append(candidate.relative_to(ROOT).as_posix())
+    module = module_name(candidate)
+    dotted = re.compile(rf"(?<![\w.]){re.escape(module)}(?!\w)") if module else None
+    found = []
+    for record in records:
+        run = str(record["run"])
+        if (
+            in_pruned_roots((ROOT / str(record["file"])).resolve(), below)
+            or any(token in run for token in tokens)
+            or (dotted is not None and dotted.search(run))
+        ):
+            found.append({"name": str(record["name"]), "run": run})
+    return found
+
+
 #: The documents outside the campaign record whose links a registered control resolves in
 #: a worker, relative to `REPO`: `check_readme` and `check_synopsis` run
 #: `check_synopsis.check_links` over these two, and `ledger check`'s `dead_links` covers
@@ -2168,7 +2217,8 @@ def snapshot_audit(
 ) -> dict[str, object]:
     """Read-only byte inventory and proposed prune savings after dependency rescue.
 
-    Command mentions are exact path references, not a claim about transitive readers.
+    Command mentions are exact path or module-name references (`registered_mentions`),
+    not a claim about transitive readers.
     Inspect the registered consumers before adopting a candidate; this mode never
     changes PRUNE, copies source, or runs a control. Candidates overlapping an
     unconditional copy route are refused: PRUNE only controls the packing tree walk.
@@ -2223,16 +2273,6 @@ def snapshot_audit(
         registered_here = {path for path in registered if in_pruned_roots(path, below)}
         contributors_here = {path for path in contributors if in_pruned_roots(path, below)}
         rescued = linked_here | registered_here | contributors_here
-        mentions = []
-        for record in records:
-            target = (ROOT / record["file"]).resolve()
-            tokens = (candidate.relative_to(REPO).as_posix(),)
-            if candidate.is_relative_to(ROOT):
-                tokens += (candidate.relative_to(ROOT).as_posix(),)
-            if in_pruned_roots(target, below) or any(
-                token in record["run"] for token in tokens
-            ):
-                mentions.append({"name": record["name"], "run": record["run"]})
         reports.append(
             {
                 "path": candidate.relative_to(REPO).as_posix(),
@@ -2241,7 +2281,7 @@ def snapshot_audit(
                 "result_rescue": rows(registered_here),
                 "contributor_rescue": rows(contributors_here),
                 "net_saved_bytes": sum(sizes[path] for path in copied if path not in rescued),
-                "registered_mentions": mentions,
+                "registered_mentions": registered_mentions(candidate, records),
             }
         )
     total = sum(sizes[path] for path in paths)
