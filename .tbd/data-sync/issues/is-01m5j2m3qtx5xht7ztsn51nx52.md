@@ -5,12 +5,12 @@ title: check_pr_wall's live fallback refuses a running PR attempt when GitHub's 
 kind: bug
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - tooling
 dependencies: []
 created_at: 2026-10-22T15:10:40.377Z
-updated_at: 2026-10-22T15:10:40.377Z
+updated_at: 2026-10-22T18:23:40.817Z
 ---
 Found 2026-10-22 by c-lane-tooling-1022 on jlevy/squares#723; #722 shows the same signature in the same window.
 
@@ -38,3 +38,14 @@ A failed-jobs-only re-run cannot pass either. Attempt 2 re-ran only the aggregat
 Whether the fallback may accept a run or aggregator that the API reports as `queued`. `GITHUB_RUN_ID`, `GITHUB_RUN_ATTEMPT` and `GITHUB_JOB` already prove the process runs inside that live attempt, and only `completed` would contradict liveness. The `aggregator.get("status") != "in_progress"` test in the timestamp check has the same exposure.
 
 The alternatives are a longer settle window, or naming the mismatched field in the refusal so the next occurrence is diagnosable without polling.
+
+## Notes
+
+2026-10-22 c-lane-tooling-1022: a second form of the same API staleness, on #723's head `e35898d58`. Packing validation run 39827928106 had every prerequisite succeed.
+
+- `packing-required` started at 18:15:44Z. Its wall step exited 1 with "verdict: unmeasurable": "NOT JUDGED: `frontend` has not completed (in_progress)".
+- The aggregator's own `needs` context, printed in that step, records `"frontend": {"result": "success"}`. `frontend` is in its `needs`, so it had finished before the aggregator could start.
+- The jobs API still listed `frontend` as `in_progress` with no `completed_at` at 18:23Z.
+- githubstatus.com had an unresolved incident, "Errors loading Issues, Pull Requests, and search results", investigating since 15:28Z.
+
+Exit 1 here is the measured "unmeasurable" verdict, not the identity refusal (exit 2). A fix could take prerequisite results from `needs` (already passed in as `EXPECTED_PREREQUISITES`) when the jobs API lags, or settle longer.
