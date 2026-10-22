@@ -89,7 +89,7 @@ class PublicationHistoryEntry(NamedTuple):
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
         version="v0.8.17",
-        first_published="October 21, 2026",
+        first_published="October 22, 2026",
         result_scope=(
             "Register Evan Daniel's solved and regularized views at 204, 227, 229 and 260 "
             "(T-225, V0/C0); record the #668 and #702 replies, #678's stage 7 reply and "
@@ -821,7 +821,7 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
         version="v0.4.14",
-        first_published="October 21, 2026",
+        first_published="October 22, 2026",
         result_scope=(
             "Update the registered result count after the registration of Evan Daniel's "
             "regularized views at 204, 227, 229 and 260 (T-225)."
@@ -2005,8 +2005,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and Markdown byte-identical across all four renders; only the explainer, which "
             "counts the register, differs, and it takes v0.4.14. Rendered the same way again "
             "at 1300bc76, after the #678, #668 and #715 records and the overview's Couzo "
-            "card: the same three byte-identical. No PDF was printed; each prints from that "
-            "HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
+            "card, and at 3b8bd62e, after review A of #716 and T-225's 22 October stamp: "
+            "the same three byte-identical. No PDF was printed; each prints from that HTML. "
+            "Retain v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
