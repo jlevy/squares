@@ -36,12 +36,17 @@ base's newer files.
 
 Sizing a version means compressing its content, so each checked blob is streamed through
 zlib once and never held whole, and one check reads at most MAX_CONTENT_BYTES of it. The
-pack is streamed too and only counted. Git reuses the deltas its object store already
-holds, so the total can differ a little between clones packed differently: on #578 the
-pack is 2.39 MiB with this repository's deltas and 1.77 MiB with every delta recomputed,
-which matters only near the ceiling. One deadline, MAX_SECONDS, bounds the whole check,
-parsing and packing included, and each metadata query also has its own,
-MAX_QUERY_SECONDS.
+pack is streamed too and only counted, with one delta-search thread, so a clone gives
+the same figure on every run. Git reuses the deltas its object store already holds, so
+clones packed differently give different figures. The reference is CI's: the pull
+request's check runs in a fresh full clone of GitHub's packs. A working clone can read
+less, up to about 20% on text-heavy ranges and 0 to 2.4% on bulk-dominated ones (review
+K of #406): #578 packs to about 2.7 MiB in CI's clone and 2.39 MiB in a working one.
+Recomputing every delta would make the figure nearly clone-independent, but #461's pack
+alone then takes 25.6 s. A working clone also packs its loose objects afresh, so `--push`
+on a large branch before `git gc` is slower: #474's 1,191 loose objects took 17.8 s
+against about 10 s packed. One deadline, MAX_SECONDS, bounds the whole check, parsing
+and packing included, and each metadata query also has its own, MAX_QUERY_SECONDS.
 
 Exit 0 is PASS and 1 is REJECT_ADDED_STORAGE. Exit 2 is GUARD_REFUSED, never a pass: a
 base this clone lacks (fetch it; a force-pushed base clears when the pull request
@@ -90,13 +95,18 @@ MAX_QUERY_SECONDS = 10
 DEADLINE_STRIDE = 4096
 # Git's own defaults for the pack that sizes the total, pinned so that a local
 # configuration cannot move the measure; bitmaps and the sparse walk are off so the
-# object set is exactly rev-list's.
+# object set is exactly rev-list's. Delta search runs on one thread with no window memory
+# limit: with a thread per CPU, #578 packed to anything from 2,803,938 to 3,186,775 bytes
+# from one run to the next in CI's clone, and with one it gave the same bytes every time,
+# for at most 1.5 s more on #474 (review K1 of #406).
 PACK_CONFIG = (
     "core.compression=-1",
     "pack.compression=-1",
     "core.bigFileThreshold=512m",
     "pack.window=10",
     "pack.depth=50",
+    "pack.windowMemory=0",
+    "pack.threads=1",
     "pack.useBitmaps=false",
 )
 # The LFS specification keeps pointers small; git-lfs never reads a larger blob as one.
@@ -181,7 +191,8 @@ def _within(deadline: float) -> None:
     """Refuse once the check has run past its one deadline."""
     if time.monotonic() >= deadline:
         raise MetadataError(
-            f"the check exceeded its {MAX_SECONDS}-second deadline: check a shorter range"
+            f"the check exceeded its {MAX_SECONDS}-second deadline: check a shorter range, "
+            "or in a working clone pack its loose objects with `git gc` first"
         )
 
 
@@ -597,10 +608,15 @@ def inventory(
     head: str = "HEAD",
     staged: bool = False,
     deadline: float | None = None,
+    resolved: Range | None = None,
 ) -> list[Blob]:
-    """Every blob version the branch adds to history, and every tip or index addition."""
+    """Every blob version the branch adds to history, and every tip or index addition.
+
+    `resolved` is the range `_range` already resolved for this check, so that the
+    inventory and the pack measure the same commits however `base` moves meanwhile.
+    """
     deadline = _deadline() if deadline is None else deadline
-    start, end, tip = _range(repo, base, head, staged=staged, deadline=deadline)
+    start, end, tip = resolved or _range(repo, base, head, staged=staged, deadline=deadline)
     # New to history: reachable from HEAD, or the index's additions given on stdin, and
     # from neither BASE's tree nor an edge's. Edge commits print with a leading "-".
     new: set[bytes] = set()
@@ -677,18 +693,20 @@ def added_bytes(
     head: str = "HEAD",
     staged: bool = False,
     deadline: float | None = None,
+    resolved: Range | None = None,
 ) -> int:
     """What the branch adds to the repository: the thin pack of its new objects.
 
     `git pack-objects --revs --thin --shallow` packs every commit, tree and blob reachable
     from HEAD and from none of BASE's trees or the trees where the branch meets BASE's
     history (the same reading as `inventory`), with deltas against each other and
-    against those trees' objects. In --staged mode the index's additions join it; one
-    that BASE already stores adds nothing. The pack is counted as it streams and never
-    held; an empty range packs to nothing and counts 0.
+    against those trees' objects. In --staged mode the index's additions join it; one in
+    BASE's tree adds nothing, while one restored from deeper in BASE's history is packed
+    again, as the inventory charges it. The pack is counted as it streams and never held;
+    an empty range packs to nothing and counts 0. `resolved` is as for `inventory`.
     """
     deadline = _deadline() if deadline is None else deadline
-    start, end, tip = _range(repo, base, head, staged=staged, deadline=deadline)
+    start, end, tip = resolved or _range(repo, base, head, staged=staged, deadline=deadline)
     revisions = [end.encode("ascii"), b"^" + start.encode("ascii")]
     if staged:
         revisions.extend(sorted(tip))
@@ -714,7 +732,6 @@ def added_bytes(
         data=b"".join(revision + b"\n" for revision in revisions),
         sink=count,
     )
-    _within(deadline)
     return counted[0]
 
 
@@ -840,20 +857,16 @@ def judge(
     blobs: Sequence[Blob],
     ceilings: Ceilings,
     *,
-    head: str = "HEAD",
-    staged: bool = False,
-    added: int | None = None,
+    added: int,
     deadline: float | None = None,
 ) -> tuple[dict[str, int], list[str]]:
     """The failures, with the paths grandfathered at `base` exempted.
 
     Grandfathering only ever removes a per-blob failure, so the base tree is listed only
     for a blob over that ceiling, and only that blob's paths are measured at the base.
-    The total is judged on `added`, the range's thin pack, measured here when not given.
+    The total is judged on `added`, the range's thin pack from `added_bytes`.
     """
     deadline = _deadline() if deadline is None else deadline
-    if added is None:
-        added = added_bytes(repo, base, head=head, staged=staged, deadline=deadline)
     over = sorted(
         {path for blob in blobs if blob.stored > ceilings.per_blob for path in blob.paths}
     )
@@ -898,11 +911,10 @@ def census(repo: Path, ref: str, count: int, *, ceilings: Ceilings) -> list[Cens
             continue
         first, second = parents.split()
         try:
-            blobs = inventory(repo, first, head=second, deadline=replay)
-            added = added_bytes(repo, first, head=second, deadline=replay)
-            exempt, failures = judge(
-                repo, first, blobs, ceilings, head=second, added=added, deadline=replay
-            )
+            resolved = _range(repo, first, second, staged=False, deadline=replay)
+            blobs = inventory(repo, first, head=second, deadline=replay, resolved=resolved)
+            added = added_bytes(repo, first, head=second, deadline=replay, resolved=resolved)
+            exempt, failures = judge(repo, first, blobs, ceilings, added=added, deadline=replay)
         except MetadataError as error:
             rows.append(replace(row, refusal=str(error), seconds=time.monotonic() - started))
             continue
@@ -1024,11 +1036,25 @@ def main(argv: Sequence[str] | None = None) -> int:
         # One deadline for the whole check: inventory, the pack, grandfathering and the
         # verdict.
         deadline = _deadline()
+        # Resolved once, so the inventory and the pack measure the same commits.
+        resolved = _range(
+            Path.cwd(), args.base, args.head, staged=args.staged, deadline=deadline
+        )
         blobs = inventory(
-            Path.cwd(), args.base, head=args.head, staged=args.staged, deadline=deadline
+            Path.cwd(),
+            args.base,
+            head=args.head,
+            staged=args.staged,
+            deadline=deadline,
+            resolved=resolved,
         )
         added = added_bytes(
-            Path.cwd(), args.base, head=args.head, staged=args.staged, deadline=deadline
+            Path.cwd(),
+            args.base,
+            head=args.head,
+            staged=args.staged,
+            deadline=deadline,
+            resolved=resolved,
         )
         exempt, failures = judge(
             Path.cwd(), args.base, blobs, ceilings, added=added, deadline=deadline
@@ -1052,7 +1078,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         f"PASS: {added} bytes added as a thin pack; {len(blobs)} unique checked blobs, "
         f"{len(charged)} new versions "
         f"({sum(blob.checkout for blob in charged.values())} bytes in a checkout); "
-        f"ceilings {ceilings.per_blob}/blob as Git stores it and {ceilings.total} total"
+        f"ceilings {ceilings.per_blob}/blob as Git stores it and {ceilings.total} total, "
+        f"{ceilings.total - added} bytes under it here; CI's fresh clone can read more"
     )
     return 0
 

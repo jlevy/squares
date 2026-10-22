@@ -73,7 +73,7 @@ jobs:
       - name: Refuse added bulk Git blobs
         if: "github.event_name == 'pull_request'"
         # OR-17: the guard refuses past its own 30 s deadline, and the largest merge into
-        # main to date took 15 s on a shared host; this bounds the step if uv or Git hangs.
+        # main to date took 18 s on a shared host; this bounds the step if uv or Git hangs.
         timeout-minutes: 1
         env:
           PR_STORAGE_BASE: ${{ github.event.pull_request.base.sha }}

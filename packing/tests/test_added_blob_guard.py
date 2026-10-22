@@ -241,6 +241,69 @@ def test_rewriting_a_register_costs_its_edits_not_its_versions(repo: tuple[Path,
     assert tool.violations(blobs, per_blob=stored(versions[-1]), total=added, added=added) == []
 
 
+def test_repository_configuration_cannot_move_the_total(repo: tuple[Path, str]) -> None:
+    """K1 of #406: the pack's settings are the guard's, whatever the clone configures.
+
+    Thirty versions of a register, each five entries from the last, so that the delta
+    window, the chain depth, the window's memory and the thread count all move the pack.
+    """
+    path, base = repo
+    generator = random.Random(0)
+    entries = register(1500).splitlines(keepends=True)
+    for _ in range(30):
+        for _ in range(5):
+            index = generator.randrange(0, len(entries), 2)
+            entries[index + 1] = b"  value: %032x\n" % generator.getrandbits(128)
+        add(path, "frontier/results.yaml", b"".join(entries))
+        commit(path)
+    pinned = tool.added_bytes(path, base)
+    assert tool.added_bytes(path, base) == pinned
+    # The pins are Git's own defaults, so an unconfigured clone packs the same bytes.
+    default = subprocess.run(
+        [
+            "git",
+            "pack-objects",
+            "--revs",
+            "--thin",
+            "--shallow",
+            "--no-sparse",
+            "--delta-base-offset",
+            "--non-empty",
+            "--threads=1",
+            "--stdout",
+            "-q",
+        ],
+        cwd=path,
+        input=f"HEAD\n^{base}\n".encode(),
+        capture_output=True,
+        check=True,
+        timeout=10,
+    )
+    assert len(default.stdout) == pinned
+    for setting, value in (
+        ("pack.window", "0"),
+        ("pack.depth", "1"),
+        ("pack.windowMemory", "1k"),
+        ("pack.threads", "4"),
+        ("pack.useBitmaps", "true"),
+        ("pack.compression", "0"),
+        ("core.compression", "0"),
+    ):
+        git(path, "config", setting, value)
+    assert pack_size(path, base) == pinned
+    # Git itself, under the clone's settings, would have packed it differently.
+    configured = subprocess.run(
+        ["git", "pack-objects", "--revs", "--thin", "--stdout", "-q"],
+        cwd=path,
+        input=f"HEAD\n^{base}\n".encode(),
+        capture_output=True,
+        check=True,
+        timeout=10,
+    )
+    assert len(configured.stdout) != pinned
+    assert tool.added_bytes(path, base) == pinned
+
+
 def test_a_staged_copy_of_a_base_blob_adds_nothing(repo: tuple[Path, str]) -> None:
     path, _ = repo
     add(path, "large.bin", noise(4096))
@@ -510,9 +573,12 @@ def test_grandfathered_path_rewrites_are_charged_in_full(repo: tuple[Path, str])
     rewritten = tool.added_bytes(path, base)
     assert rewritten >= 5 * 1024
     ceilings = tool.Ceilings(per_blob=PER, total=rewritten)
-    assert tool.judge(path, base, blobs, ceilings) == ({"atlas.svg": stored(noise(1024))}, [])
+    assert tool.judge(path, base, blobs, ceilings, added=rewritten) == (
+        {"atlas.svg": stored(noise(1024))},
+        [],
+    )
     _, failures = tool.judge(
-        path, base, blobs, tool.Ceilings(per_blob=PER, total=rewritten - 1)
+        path, base, blobs, tool.Ceilings(per_blob=PER, total=rewritten - 1), added=rewritten
     )
     assert failures == [total_failure(rewritten, rewritten - 1)]
 
@@ -595,7 +661,9 @@ def test_one_blob_at_a_grandfathered_and_a_new_path_is_refused(repo: tuple[Path,
     add(path, "new.bin", noise(64, 1))
     commit(path)
     (blob,) = tool.inventory(path, base)
-    exempt, failures = tool.judge(path, base, [blob], tool.Ceilings(per_blob=PER, total=1024))
+    exempt, failures = tool.judge(
+        path, base, [blob], tool.Ceilings(per_blob=PER, total=1024), added=0
+    )
     assert exempt == {"large.bin": stored(noise(64))}
     assert failures == [
         (
@@ -616,8 +684,10 @@ def test_shrinking_a_grandfathered_path_offsets_nothing(repo: tuple[Path, str]) 
     commit(path)
     blobs = tool.inventory(path, base)
     added = tool.added_bytes(path, base)
-    assert tool.judge(path, base, blobs, tool.Ceilings(per_blob=PER, total=added)) == ({}, [])
-    _, failures = tool.judge(path, base, blobs, tool.Ceilings(per_blob=PER, total=added - 1))
+    ceilings = tool.Ceilings(per_blob=PER, total=added)
+    assert tool.judge(path, base, blobs, ceilings, added=added) == ({}, [])
+    ceilings = tool.Ceilings(per_blob=PER, total=added - 1)
+    _, failures = tool.judge(path, base, blobs, ceilings, added=added)
     assert failures == [total_failure(added, added - 1)]
 
 
@@ -636,10 +706,12 @@ def test_grandfathering_needs_more_than_the_ceiling_at_the_base(
     assert tool.grandfathered(path, base, per_blob=at_base - 1) == {"big.bin": at_base}
     # The unit is the stored one, so a base blob at the ceiling in a checkout is over it.
     assert tool.grandfathered(path, base, per_blob=64) == {"big.bin": at_base}
-    _, failures = tool.judge(path, base, blobs, tool.Ceilings(per_blob=at_base, total=1024))
+    ceilings = tool.Ceilings(per_blob=at_base, total=1024)
+    _, failures = tool.judge(path, base, blobs, ceilings, added=0)
     assert len(failures) == 1
     assert "('big.bin',)" in failures[0]
-    assert tool.judge(path, base, blobs, tool.Ceilings(per_blob=at_base - 1, total=1024)) == (
+    ceilings = tool.Ceilings(per_blob=at_base - 1, total=1024)
+    assert tool.judge(path, base, blobs, ceilings, added=0) == (
         {"big.bin": at_base},
         [],
     )
@@ -837,7 +909,7 @@ def test_one_deadline_bounds_the_whole_check(
     with pytest.raises(tool.MetadataError, match="exceeded its 30-second deadline"):
         tool.judge(path, base, [], ceilings, added=0, deadline=spent)
     with pytest.raises(tool.MetadataError, match="deadline"):
-        tool.judge(path, base, blobs, ceilings, deadline=spent)
+        tool.judge(path, base, blobs, ceilings, added=0, deadline=spent)
     with pytest.raises(tool.MetadataError, match="deadline"):
         tool.added_bytes(path, base, deadline=spent)
     with pytest.raises(tool.MetadataError, match="deadline"):
@@ -870,6 +942,7 @@ def test_one_deadline_bounds_the_whole_check(
     monkeypatch.setattr(tool, "inventory", record_inventory)
     monkeypatch.setattr(tool, "added_bytes", record_added)
     monkeypatch.setattr(tool, "judge", record_judge)
+    monkeypatch.chdir(path)
     started = time.monotonic()
     assert tool.main(["--base", base]) == 0
     assert len(seen) == 3
@@ -1140,6 +1213,34 @@ def test_boolean_limits_are_not_numeric_ceilings() -> None:
         tool.violations([], per_blob=True, total=1, added=0)
 
 
+def test_the_cli_measures_the_total_at_the_given_head(
+    repo: tuple[Path, str],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """K3 of #406: CI checks out a synthetic merge and names the PR head with --head."""
+    path, base = repo
+    git(path, "checkout", "-qb", "feature")
+    add(path, "dump.bin", noise(4096))
+    commit(path)
+    git(path, "checkout", "-q", "main")
+    feature = pack_size(path, base, "feature")
+    assert feature >= 4096
+    assert tool.added_bytes(path, base) == 0
+    monkeypatch.chdir(path)
+    monkeypatch.setattr(
+        tool, "load_ceilings", lambda: tool.Ceilings(per_blob=8192, total=feature - 1)
+    )
+    assert tool.main(["--base", base, "--head", "feature"]) == 1
+    output = capsys.readouterr().out
+    assert f"REJECT_ADDED_STORAGE: {total_failure(feature, feature - 1)}" in output
+    monkeypatch.setattr(
+        tool, "load_ceilings", lambda: tool.Ceilings(per_blob=8192, total=feature)
+    )
+    assert tool.main(["--base", base, "--head", "feature"]) == 0
+    assert f"PASS: {feature} bytes added as a thin pack" in capsys.readouterr().out
+
+
 def test_failed_metadata_cli_never_reports_pass(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -1243,33 +1344,43 @@ def test_census_replays_merges_with_their_verdicts(
     """Review A1: the measurement behind the ceilings is a mode of the tool."""
     path, _ = repo
     git(path, "checkout", "-qb", "dump")
-    add(path, "dump.bin", noise(64))
+    add(path, "dump.bin", noise(2048))
     commit(path)
     git(path, "checkout", "-q", "main")
     rejected = merge(path, "dump", 7)
     git(path, "checkout", "-qb", "small")
-    add(path, "small.txt", b"ok")
+    for name in ("a.txt", "b.txt", "c.txt"):
+        add(path, name, name.encode())
     commit(path)
     git(path, "checkout", "-q", "main")
     passed = merge(path, "small", 8)
-    ceilings = tool.Ceilings(per_blob=PER, total=1024)
+    # Fewer blobs and a larger pack, so the largest pass is chosen by the pack alone.
+    git(path, "checkout", "-qb", "medium")
+    add(path, "medium.bin", noise(900))
+    commit(path)
+    git(path, "checkout", "-q", "main")
+    largest = merge(path, "medium", 9)
+    ceilings = tool.Ceilings(per_blob=1024, total=16384)
     rows = tool.census(path, "main", 5, ceilings=ceilings)
     assert [(row.merge, bool(row.failures), row.refusal) for row in rows] == [
+        (largest, False, ""),
         (passed, False, ""),
         (rejected, True, ""),
     ]
+    assert [row.added for row in rows] == [
+        pack_size(path, f"{merge}^1", f"{merge}^2") for merge in (largest, passed, rejected)
+    ]
+    assert rows[0].added > rows[1].added
+    assert len(rows[0].blobs) < len(rows[1].blobs)
     tool.print_census(rows, "main", ceilings)
     output = capsys.readouterr().out
     assert (
-        f"{passed[:9]} #8 pass: 0.00 MiB added as a thin pack; 1 blobs checked, 1 new versions"
+        f"{passed[:9]} #8 pass: 0.00 MiB added as a thin pack; 3 blobs checked, 3 new versions"
     ) in output
-    assert [row.added for row in rows] == [
-        pack_size(path, f"{merge}^1", f"{merge}^2") for merge in (passed, rejected)
-    ]
     assert f"{rejected[:9]} #7 REJECT: 0.00 MiB added as a thin pack; 1 blobs checked" in output
     assert (
-        "SUMMARY: 1 of 2 merges rejected, 0 of them by the total alone; 0 guard refusals; "
-        f"largest passing total 0.00 MiB ({passed[:9]} #8)"
+        "SUMMARY: 1 of 3 merges rejected, 0 of them by the total alone; 0 guard refusals; "
+        f"largest passing total 0.00 MiB ({largest[:9]} #9)"
     ) in output
 
 

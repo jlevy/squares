@@ -22,7 +22,14 @@
 # Until 2026-10-22 the total was the sum of each new version's own stored size, and the
 # censuses below up to that date are in that unit. That day the set's unit was corrected
 # to the pack, in #406: summed, #578's 48 merges of main came to 59.17 MiB of rewritten
-# registers, against a 2.4 MiB pack. Neither ceiling's value changed.
+# registers, against a thin pack of about 2.7 MiB in CI's fresh clone (2.39 MiB in a
+# working clone). Neither ceiling's value changed.
+#
+# CI's figure is the reference: the pull request's check packs in a fresh full clone of
+# GitHub's packs, with one delta-search thread so that a run repeats exactly. A working
+# clone reuses deltas of its own and can read less, up to about 20% on text-heavy ranges
+# and 0 to 2.4% on bulk-dominated ones (review K of #406), so a `--push` that passes
+# within a few percent of the total can still be refused by CI.
 #
 # Both values were set on 2026-10-11 in checkout bytes and are unchanged. Measured again
 # on 2026-10-20 in this unit (review H of #406), `--census 411` over every first-parent
@@ -45,9 +52,11 @@
 # to #679, refuse only #578 and pass at most #687's 28.96 MiB. Whether the total should
 # refuse a long-lived branch for that churn is the owner's decision as well.
 #
-# The same census in the pack unit, the same day, refuses one: #461, on its six blobs
-# over the per-blob ceiling, though its pack, 25.38 MiB, is under the total. #578 packs
-# to 2.39 MiB and #474 to 45.41 MiB, the largest pass; #704, the largest intake merge in
+# The same census in the pack unit, the same day, in a working clone and before the
+# delta search was pinned to one thread, refuses one: #461, on its six blobs over the
+# per-blob ceiling, though its pack, 25.38 MiB (26.00 in CI's clone), is under the total.
+# #578 packs to 2.39 MiB (about 2.7 in CI's) and #474 to 45.41 MiB, the largest pass and
+# the same in every clone, since posters do not delta; #704, the largest intake merge in
 # the sum, packs to 0.54 MiB. The census took 214.4 s on a shared 4-CPU host. Of the
 # older poster merges the 2026-10-20 census refused by the total, #249 packs to 14.90 MiB,
 # #262 to 7.90 and #248 to 17.41, so none of the five merges put to the owner on the
