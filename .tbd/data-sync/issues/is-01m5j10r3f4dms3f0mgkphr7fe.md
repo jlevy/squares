@@ -3,9 +3,9 @@ type: is
 id: is-01m5j10r3f4dms3f0mgkphr7fe
 title: Coordinate squaremath.org DNS, Pages, TLS, and live redirect checks
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-10-22-squaremath-domain.md
 delegate: squaremath-coordinator
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m5j0rns0p8gq9rrn3wnns7p1
 hold: null
 hold_until: null
 created_at: 2026-10-22T14:42:37.294Z
-updated_at: 2026-10-22T18:43:08.088Z
+updated_at: 2026-10-22T18:54:00.390Z
 started_at: 2026-10-22T17:39:29.421Z
+closed_at: 2026-10-22T18:54:00.389Z
+close_reason: "End-to-end cutover verified: PR727 merged at78dc902c; authoritative/public/local DNS, certificate for apex/www, HTTPS enforcement, HTTP/www redirects, deep profile and legacy path/query chain verified. Production39825552463 attempt3 succeeded with5459/5459 hosted checks. Built-in browser verified legacy results.html?s=5#all-results redirects to canonical HTTPS with S5filter and heading fragment intact. Deployment docs updated in presentation branch; monitor paused. Independent timeout hardening remains think-fqhc."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
