@@ -124,7 +124,9 @@
   /** @type {[string, string, string?][]} */
   const roles = [
     ["nav name", ".site-name-text"],
+    ["nav ancestor", '.site-nav a[aria-current="true"]'],
     ["nav link", ".site-nav a:not(.site-name)"],
+    ["breadcrumb", ".site-breadcrumbs :is(a, span)"],
     ["compact chooser", '.site-tabs.site-chooser-small [role="tab"]'],
     ["section tab", '.site-tabs :is(a, [role="tab"])'],
     ["source chip", ".doc-links .chip"],

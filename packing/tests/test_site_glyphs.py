@@ -1155,3 +1155,25 @@ def test_prepared_probe_keeps_semantics_and_renderer_guards(
                 sum(row["count"] for row in found["math"] if row["typeset"] == measure.TYPESET)
                 == 1
             )
+
+
+def test_navigation_text_roles_follow_the_shared_weight_tokens() -> None:
+    sans = "Source Sans 3 Variable"
+    correct = entry(
+        text=[
+            text_row("nav ancestor", family=sans, weight="680", size=17.48, example="Learn"),
+            text_row("breadcrumb", family=sans, weight="410", size=17.48, example="Learn"),
+        ]
+    )
+    assert measure.glyph_problems(correct) == []
+    wrong = entry(
+        text=[
+            text_row("nav ancestor", family=sans, weight="550", size=17.48, example="Learn"),
+            text_row("breadcrumb", family=sans, weight="400", size=17.48, example="Learn"),
+        ]
+    )
+    assert measure.glyph_problems(wrong) == [
+        "nav ancestor `Learn`: weight 550, not the role's 680",
+        "breadcrumb `Learn`: sans text at 400, which no token names",
+        "breadcrumb `Learn`: weight 400, not the role's 410",
+    ]

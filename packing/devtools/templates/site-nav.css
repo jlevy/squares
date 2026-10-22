@@ -568,7 +568,7 @@ nav.site-tabs a[aria-current="page"],
 }
 .site-nav a[aria-current="true"] {
   color: var(--kpress-doc-accent);
-  font-weight: 650;
+  font-weight: var(--paper-font-weight-sans-bold, 680);
 }
 .site-nav-disclosure[aria-expanded="true"] svg {
   transform: rotate(180deg);
@@ -660,7 +660,7 @@ nav.site-tabs a[aria-current="page"],
   color: var(--site-support-color, var(--kpress-doc-muted));
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note, var(--site-nav-font-size));
-  font-weight: var(--site-font-weight-sans-light, 400);
+  font-weight: var(--kpress-font-weight-sans-regular);
   line-height: var(--paper-support-leading, 1.4);
   margin-block: 1rem 2.5rem;
   margin-inline: auto;

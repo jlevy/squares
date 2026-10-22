@@ -1231,7 +1231,9 @@ def _role_rules(entry: dict[str, Any]) -> dict[str, tuple[float | None, float | 
         "footnote": (note, regular),
         "colophon": (sans * tokens["--paper-colophon-scale"], regular),
         "nav name": (sans, bold),
+        "nav ancestor": (note, bold),
         "nav link": (note, medium),
+        "breadcrumb": (note, regular),
         "section tab": (note * tokens["--paper-button-label-scale"], medium),
         "compact chooser": (tokens.get("--site-chooser-small-size"), medium),
     }

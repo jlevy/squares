@@ -848,7 +848,7 @@ contributor articles use their component sheets and the same text tokens.
   destinations. At every width its accessible label is “The Squares Project home”.
   Every item takes the cards’ gentle wash on hover and nothing underlines on hover; the
   current page alone is underlined in the accent; a current ancestor uses accent text at
-  weight 650 without an underline.
+  the shared sans bold weight (680) without an underline.
   The edition appears only in the closing credit (below).
   Every page renders it from the one partial, `site-nav.html`, and it has the same box
   on every page at every width.
@@ -886,8 +886,8 @@ contributor articles use their component sheets and the same text tokens.
   The list uses the page background, document border, and shared shadow, with 0.3rem
   inner padding and links padded 0.45rem by 0.7rem. Links and buttons show a 2px
   document-link outline with 2px clearance on keyboard focus.
-  The current landing page is underlined; an ancestor is accent and weight 650. A
-  fragment destination does not also claim the current page.
+  The current landing page is underlined; an ancestor uses the accent and shared sans
+  bold weight (680). A fragment destination does not also claim the current page.
 
   `overview/navigation.js` enhances ordinary navigation lists, without application-menu
   roles. Enter or Space toggles the adjacent button; Tab follows ordinary document order.
