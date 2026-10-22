@@ -127,10 +127,24 @@ def test_homepage_keeps_both_reported_proofs_and_their_complete_qualification_te
     assert 'href="https://squaremath.org/result/t-153.html"' in overbeck
 
 
-def test_homepage_ahmed_article_keeps_the_result_and_explainer_reachable(
+def test_homepage_leads_with_the_s19_lean_proof_report(
     document: render_changelog.Document,
 ) -> None:
-    card = _cards(news_highlights.render(document))["ahmed-eleven-square-optimality"]
+    # T-194's item, the S5 announcement the box lacked from 16 to 22 October (think-9wxc).
+    cards = _cards(news_highlights.render(document))
+    assert next(iter(cards)) == "fitzharding-n19-reported-proof"
+    card = cards["fitzharding-n19-reported-proof"]
+    assert 'datetime="2026-10-16"' in card
+    assert "V0/C1" in card
+    assert "the Lean build has not been replayed here" in card
+    assert 'href="https://squaremath.org/result/t-194.html"' in card
+
+
+def test_ahmed_article_keeps_the_result_and_explainer_reachable(
+    document: render_changelog.Document,
+) -> None:
+    # Newer S5 announcements have moved it off the homepage; the archive keeps it.
+    card = _cards(render_changelog.render_news(document))["ahmed-eleven-square-optimality"]
     assert 'datetime="2026-09-30"' in card
     assert "V3/C3" in card
     assert "a second independent proof method" in card
@@ -142,6 +156,10 @@ def test_homepage_and_archive_link_preferred_names_directly_to_reviewed_profiles
     document: render_changelog.Document,
 ) -> None:
     expected = {
+        "fitzharding-n19-reported-proof": (
+            ("Oscar Fitzharding", "oscar-fitzharding"),
+            ("Robert Wainwright", "robert-wainwright"),
+        ),
         "fitzharding-n17-reported-proof": (
             ("Oscar Fitzharding", "oscar-fitzharding"),
             ("John Bidwell", "john-bidwell"),
@@ -159,12 +177,18 @@ def test_homepage_and_archive_link_preferred_names_directly_to_reviewed_profiles
             ("Marc Leonard Overbeck", "marc-leonard-overbeck"),
         ),
     }
-    for rendered in (news_highlights.render(document), render_changelog.render_news(document)):
+    homepage = news_highlights.render(document)
+    archive = render_changelog.render_news(document)
+    # The archive carries every article; the homepage only its newest announcements.
+    for rendered, every in ((homepage, False), (archive, True)):
         # The names stay plain links, since their container says so once and the profile
         # popover leaves every profile link inside it alone.
         assert '<div class="site-news sans-text" data-news data-contributor-plain>' in rendered
         cards = _cards(rendered)
+        assert "fitzharding-n19-reported-proof" in cards
         for identifier, people in expected.items():
+            if identifier not in cards and not every:
+                continue
             card = cards[identifier]
             for _preferred_name, profile_id in people:
                 label = public_names()[profile_id].label
