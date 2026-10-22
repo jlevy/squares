@@ -86,8 +86,17 @@ class PublicationHistoryEntry(NamedTuple):
 #:
 #: Reproduce with `gh api "repos/jlevy/squares/deployments?environment=github-pages"` and,
 #: for each deployment's commit, what the page it built stated.
-# The leading entry is proposed for PR #578; confirm its date at first deployment.
+# The two leading entries are proposed, v0.9.1 for the draft pull-request gate and v0.9.0
+# for PR #578; confirm their dates at first deployment.
 PUBLICATION_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.9.1",
+        first_published="October 22, 2026",
+        result_scope=(
+            "The development guide records that hosted CI is the full test gate for a "
+            "draft pull request."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.9.0",
         first_published="October 22, 2026",
@@ -1288,6 +1297,16 @@ class ReleaseImpactDecision(NamedTuple):
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.9.0",
+        version="v0.9.1",
+        impact="patch",
+        reason=(
+            "The development guide records that hosted CI is the full test gate for a "
+            "draft pull request."
+        ),
+    ),
+    ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.15",
         version="v0.4.16",
@@ -2151,6 +2170,29 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site v0.9.1 cut for the draft pull-request gate regenerated the five claim "
+            "documents, and every changed line differs from main only in its source-link "
+            "revision, cadf73fd to 2b7a25fb. The explainer links those documents on main "
+            "rather than inlining them (`edition_file` is called only by "
+            "`render_verifiable_claim`), so its HTML and Markdown are unchanged by them and "
+            "it keeps v0.4.16. This is a source-reviewed disposition, as #695's was for "
+            "v0.8.2."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -6904,7 +6946,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "cadf73fd"
+PUBLICATION_REVISION = "2b7a25fb"
 
 
 def data_pathspec() -> tuple[str, ...]:

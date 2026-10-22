@@ -140,14 +140,14 @@ directly.
 
 ## Evidence and Scope
 
-The repository's [`t-025-threshold-certificate-proof.md`](https://github.com/jlevy/squares/blob/cadf73fd/packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md) states the retained
-proof and measurements. [`review-2026-09-09-threshold-certificate-theorem.md`](https://github.com/jlevy/squares/blob/cadf73fd/docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md) reviews the theorem's
+The repository's [`t-025-threshold-certificate-proof.md`](https://github.com/jlevy/squares/blob/2b7a25fb/packing/cases/n11_threshold_certificate/t-025-threshold-certificate-proof.md) states the retained
+proof and measurements. [`review-2026-09-09-threshold-certificate-theorem.md`](https://github.com/jlevy/squares/blob/2b7a25fb/docs/project/reviews/review-2026-09-09-threshold-certificate-theorem.md) reviews the theorem's
 disjoint-trace budget, symmetry, net endpoint, event-cell boundaries, and
 inclusion-exclusion reduction. The retention gate
-[`decide_threshold_certificate.py`](https://github.com/jlevy/squares/blob/cadf73fd/packing/devtools/decide_threshold_certificate.py) reads [`certificate.json`](https://github.com/jlevy/squares/blob/cadf73fd/packing/cases/n11_threshold_certificate/certificate.json)
+[`decide_threshold_certificate.py`](https://github.com/jlevy/squares/blob/2b7a25fb/packing/devtools/decide_threshold_certificate.py) reads [`certificate.json`](https://github.com/jlevy/squares/blob/2b7a25fb/packing/cases/n11_threshold_certificate/certificate.json)
 once and requires agreement between the exact sweep in
-[`threshold.py`](https://github.com/jlevy/squares/blob/cadf73fd/packing/src/sqpack/fractional/threshold.py) and the directed-rounding interval decision in
-[`threshold_interval.py`](https://github.com/jlevy/squares/blob/cadf73fd/packing/src/sqpack/fractional/threshold_interval.py).
+[`threshold.py`](https://github.com/jlevy/squares/blob/2b7a25fb/packing/src/sqpack/fractional/threshold.py) and the directed-rounding interval decision in
+[`threshold_interval.py`](https://github.com/jlevy/squares/blob/2b7a25fb/packing/src/sqpack/fractional/threshold_interval.py).
 
 The verifier is an additional standard-library implementation of the exact event-cell
 decision. It uses the same certificate and theorem.
@@ -870,7 +870,7 @@ if __name__ == "__main__":
 
 ## Certificate
 
-The marked block is byte-for-byte [`certificate.json`](https://github.com/jlevy/squares/blob/cadf73fd/packing/cases/n11_threshold_certificate/certificate.json).
+The marked block is byte-for-byte [`certificate.json`](https://github.com/jlevy/squares/blob/2b7a25fb/packing/cases/n11_threshold_certificate/certificate.json).
 
 <!-- BEGIN THRESHOLD CERTIFICATE -->
 ```json
