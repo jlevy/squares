@@ -7075,10 +7075,38 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "The S4 and S5 announcement gate (think-9wxc): `render_changelog` gains "
             "`check_announcements` and its helpers, called only by its own `main` under "
             "`--announcement-base`, and the records tier's synopsis step passes that flag. "
-            "No function the papers reach changes; `main` gains the flag and `_synopsis` "
-            "passes it. The papers reach `render_changelog` only through "
-            "`site_documents`, which calls `entry_anchor`, and no builder calls "
+            "No existing function changes. The papers reach `render_changelog` only "
+            "through `site_documents`, which calls `entry_anchor`, and no builder calls "
             "`validate._synopsis`. No render was taken, and every paper keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/render_changelog.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Review A of #735 (think-9wxc): the announcement gate's owed items fail only "
+            "a change to the register or News, `check_announcements` returns its findings "
+            "in three lists, three helpers become public and `main` prints warnings. The "
+            "papers reach `render_changelog` only through `site_documents`, which calls "
+            "`entry_anchor`, unchanged. This also corrects #735's record above, whose "
+            "`No existing function changes` was wrong: no function the papers reach "
+            "changed, while `main` gained the flag and `_synopsis` passed it. No render "
+            "was taken, and every paper keeps its version."
         ),
     ),
 )
