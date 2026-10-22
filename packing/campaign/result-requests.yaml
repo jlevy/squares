@@ -12664,7 +12664,7 @@ issues:
       V3/C3 since the stage 4 review of 20 October; the case at 204 adopted it as its house
       best packing that day, and the case at 260 on 21 October, from T-196, which #704 had
       adopted there on 20 October. The 83 beyond the corpus are dated beyond-horizon rows.
-    read_through: '2026-10-19T15:31:25Z'
+    read_through: '2026-10-21T23:26:00Z'
     results:
     - key: n204
       claim: s(204) <= 14.808642841982, rounded upward; exact certificate side is authoritative.
@@ -12853,7 +12853,9 @@ issues:
         below every earlier report at its count. Less one square, the retained n546.cert packs 545
         at its exact header side, which rounds up to this print, and both project exact routes accept
         that packing (receipts/filtered-exact-replay.json); the 19 October ledger records it in report
-        order.'
+        order. The author confirmed on 21 October that the row is the 546 certificate less one square,
+        as certified_bounds.json at 7b6c87e records, and that the separate n545.cert in the manifest is
+        not its witness (https://github.com/jlevy/squares/issues/678#issuecomment-6328825034).'
       queued: false
     - key: n546
       claim: s(546) <= 23.889010439304, rounded upward; exact certificate side is authoritative.
@@ -12966,7 +12968,9 @@ issues:
         below every earlier report at its count. Less one square, the retained n642.cert packs 641
         at its exact header side, which rounds up to this print, and both project exact routes accept
         that packing (receipts/filtered-exact-replay.json); the 19 October ledger records it in report
-        order.'
+        order. The author confirmed on 21 October that the row is the 642 certificate less one square,
+        as certified_bounds.json at 7b6c87e records, and that the separate n641.cert in the manifest is
+        not its witness (https://github.com/jlevy/squares/issues/678#issuecomment-6328825034).'
       queued: false
     - key: n642
       claim: s(642) <= 25.881306220594, rounded upward; exact certificate side is authoritative.
@@ -13357,11 +13361,18 @@ issues:
         links it (https://github.com/jlevy/squares/issues/678#issuecomment-6269517369).
       state: queued
       bead: think-xu4d
-      note: The author's comment identifies the exact n260 seed bytes and promises a follow-up that refreshes
-        the evand pin, labels each external hash as gzip or decompressed, and adds Evan Daniel's certificate
-        credit; franciscouzo/square-packing still ends at 7b6c87e, so it is not yet pushed. Our correction
-        https://github.com/jlevy/squares/issues/678#issuecomment-6270970266 asked for the link. Coordinate
-        the follow-up with think-pvav for issue 675.
+      note: >-
+        The author's comment identifies the exact n260 seed bytes and promises a follow-up that
+        refreshes the evand pin, labels each external hash as gzip or decompressed, and adds Evan
+        Daniel's certificate credit. Our correction
+        https://github.com/jlevy/squares/issues/678#issuecomment-6270970266 asked for the link. On 21
+        October (https://github.com/jlevy/squares/issues/678#issuecomment-6328825034) the author wrote that the public 6b7391de, the commit #715 reports from, "does not
+        complete the promised source correction: the stale top-level evand pin and ambiguous seed-hash
+        field remain. Please keep this item open." The correct seed remains the n-260.cert.gz of evand
+        14a9af8, with the gzip and decompressed hashes our correction confirmed; he credits the
+        construction to Joost de Winter and the exact-form certificate to Evan Daniel, as T-223 does.
+        The ask stays queued until a commit completes the correction. Coordinate the follow-up with
+        think-pvav for issue 675.
     - what: Review the author's n260 float-conversion, search-chain, packing-identity and analytic-optimum
         assertions (https://github.com/jlevy/squares/issues/678#issuecomment-6269517369) separately from
         seed custody.
@@ -13377,7 +13388,12 @@ issues:
         asks the author about 1e-8. The float conversion and the search chain stay asserted but
         unverified, since the importer, the converted seed and the intermediate files are not retained;
         the analytic optimum stays asserted but unverified, since no route here decides a contact
-        graph's optimality. Nothing further is queued for this ask.
+        graph's optimality. Nothing further is queued for this ask. The author's answer of 21
+        October (https://github.com/jlevy/squares/issues/678#issuecomment-6328825034) withdraws the unqualified "240 within 1e-8" statement for the measurements here,
+        240 within 1e-7 and 49 within 1e-8, asserts no rescaled interpretation and no arrangement
+        identity from numerical proximity, says the "analytic optimum" wording came from Evan Daniel's
+        notes and is no optimality proof, and agrees the conversion and search-chain statements stay
+        unverified until their reproducibility evidence is retained, as the record holds them.
     beads:
     - think-xu4d
     - think-fpnd
@@ -13685,6 +13701,18 @@ issues:
       issue stays open. Its statement that the second ask was still queued is outdated since
       #716, which marks that ask done (review A3 of #716); the follow-up that says so is posted
       after #716 merges.
+
+      Francisco Couzo's comment of 2026-10-21T23:26:00Z (https://github.com/jlevy/squares/issues/678#issuecomment-6328825034) answers the 20 October review's
+      three questions. The rows at 545 and 641 are the 546 and 642 certificates less one square,
+      as certified_bounds.json at 7b6c87e records, and the manifest's separate files are not
+      their witnesses. At 260 he withdraws the unqualified 1e-8 identity statement for the
+      measurements here, asserts no rescale or arrangement identity, attributes "analytic
+      optimum" to Evan Daniel's notes, and leaves the conversion and search chain unverified.
+      The public 6b7391de does not complete the source correction, so ask 1 stays queued. He
+      discloses OpenAI Codex assistance with the repository work and the reply. Reading it
+      changes no result, rung or credit: T-223 already establishes no arrangement identity or
+      optimum and credits de Winter's construction seeded from Daniel's exact-form certificate.
+      The follow-up after #716 merges acknowledges it.
   - number: 680
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand
