@@ -849,6 +849,7 @@ case or experiment separately.
 | [Regularization Runs for n = 29 on PR #622’s Witness (think-30n2)](packing/cases/regularized_drawings/think-30n2-2026-10-16/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs for 155, 229, 236 and 271 After the 19 October Adoption (think-ip1p)](packing/cases/regularized_drawings/think-ip1p-2026-10-19/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs for 204 and 260 After the 20 October Adoption (think-xu4d)](packing/cases/regularized_drawings/think-xu4d-2026-10-20/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the 22 October Adoption of T-225 (think-ql4v)](packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md) | source retention and archive policy | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |

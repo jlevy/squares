@@ -27822,7 +27822,9 @@ results:
       delta the double nearest 10^-12, and its least margins split exactly into the
       input's own clearance and the dilation's share (RV-4). It does not pair one to one
       with de Winter's T-196, though it carries its four tilt bands within 0.03 degrees
-      (RV-9). Couzo's #672, which the issue names as the start, is registered since 22
+      (RV-9).
+
+      Couzo's #672, which the issue names as the start, is registered since 22
       October 2026 (T-227), and this certificate does not pair one to one with its 229
       packing under any symmetry of the box: an optimal assignment moves 77 squares beyond
       a tenth, at most 0.807, with turns up to 38.3 degrees
@@ -27921,7 +27923,9 @@ results:
       input's own clearance, about 1.0e-13 at the walls and 2.0e-13 between squares, plus
       the dilation's share (RV-5). It pairs one to one with the opening certificate, eight
       squares moving beyond a tenth, at most 0.54, with the same four tilt bands; it does
-      not pair with de Winter's T-196 (RV-9). Couzo's #672, registered since 22 October
+      not pair with de Winter's T-196 (RV-9).
+
+      Couzo's #672, registered since 22 October
       2026 (T-227), does not pair with it either: under no symmetry of the box do nearest
       centres pair the two one to one, and an optimal assignment moves 79 squares beyond a
       tenth, at most 0.873, with turns up to 38.3 degrees
@@ -30945,13 +30949,17 @@ results:
       Each count is listed in regularizations as a solved view of the registered packing
       its source credits, the identity resting on the source's path test and measured here
       pose by pose (measure/identity.json; a measurement, which decides nothing), and
-      reproduced by the review on code of its own. At 227 the view is #672's packing: 194
+      reproduced by the review on code of its own.
+
+      At 227 the view is #672's packing: 194
       of 227 squares lie within 1e-6 of #672's poses, 16 move beyond 1e-3, at most 0.168,
       turning up to 2.54 degrees, and #672's packing moves no square beyond a tenth from
       T-196's, which it refines. The item names T-227, #672's entry, registered on 22
       October 2026 (think-2vjc), as RF-1 of the 21 October review and A2 of #716 asked;
       it named T-196 until then, with figures that measured #672's refinement and the
-      regularization together (58 squares beyond 1e-3, at most 0.208). At 229 and 260 nearest
+      regularization together (58 squares beyond 1e-3, at most 0.208).
+
+      At 229 and 260 nearest
       centres pair the squares one to one under no symmetry, so those items record no move
       or turn, as the regularization policy's clarification of 16 October asks (RF-4); an
       optimal assignment moves 112 squares beyond 1e-3 at 229, at most 0.650, turning
@@ -31087,7 +31095,8 @@ results:
       positive a square touches the box, a least wall clearance of exactly 0, and every
       pair clears by at least 5.47e-11.
 
-      In the packet's frozen comparison, read at main d7923b8d: at n = 204 the certificate
+      In the packet's frozen comparison, read from main on 22 October 2026 before T-225's
+      adoptions: at n = 204 the certificate
       is above the case's ceiling (Francisco Couzo, T-223) by 1.58e-06; above T-225 by
       1.58e-06; above #675 (Francisco Couzo) by 5.05e-08; below T-186 (Daniil Ostashev,
       improved by PingYou Ltd and Mishapolk) by 1.88e-05. The 18 October ledger
@@ -31145,10 +31154,10 @@ results:
 
       Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with
       refinements of Joost de Winter's #668 packings (T-196), as the author's comment of 17
-      October says: at 227 a CT105 web submission (f0ca7a65, method fq) seeded from de
-      Winter's #668 certificate by way of Evan Daniel's exact form of it, which the source
-      does not say who made, and at 229 an slp refinement (search job 106640) of de
-      Winter's #668 certificate.
+      October says: at 227 a CT105 web submission (method fq) seeded from de Winter's #668
+      certificate by way of Evan Daniel's exact form of it, which the source does not say
+      who made, and at 229 an slp refinement (search job 106640) of de Winter's #668
+      certificate.
     scope:
       n_values: [227, 229]
     verification: V0
@@ -31218,7 +31227,8 @@ results:
       227 every wall is cleared by at least 1e-15, and at 229 a square touches the box, a
       least wall clearance of exactly 0; every pair clears by at least 1.19e-12.
 
-      In the packet's frozen comparison, read at main d7923b8d: at n = 227 the certificate
+      In the packet's frozen comparison, read from main on 22 October 2026 before T-225's
+      adoptions: at n = 227 the certificate
       is below the case's ceiling (Joost de Winter, T-196) by 1.71e-04 and above T-225 by
       1.76e-11. At n = 229 it is above the case's ceiling (Evan Daniel, T-199) by 1.32e-05,
       above T-225 by 1.32e-05 and above T-198 (#674) by 1.15e-05, and below T-196 (#668) by
@@ -31233,8 +31243,10 @@ results:
       beyond 1e-3, at most 0.0796, turns up to 5.84 degrees, no square beyond a tenth
       (evand-regularized-2026-10-20/measure/identity.json); at 229 one to one, 57 beyond
       1e-3, at most 0.00941, turns up to 0.0308 degrees
-      (couzo-issue672-2026-10-17/measure/identity.json). Evan Daniel's #674 opening and
-      update (T-198, T-199), which #674 says started from this packing, pair with it one
+      (couzo-issue672-2026-10-17/measure/identity.json).
+
+      Evan Daniel's #674 opening and update (T-198, T-199), which #674 says started from
+      this packing, pair with it one
       to one under no symmetry of the box: an optimal assignment moves 77 and 79 squares
       beyond a tenth, at most 0.807 and 0.873, with turns up to 38.3 degrees, so they are
       other arrangements and record no regularization of it.
@@ -31322,7 +31334,8 @@ results:
       positive a square touches the box, a least wall clearance of exactly 0, and every
       pair clears by at least 1.20e-12.
 
-      In the packet's frozen comparison, read at main d7923b8d: at n = 204 the certificate
+      In the packet's frozen comparison, read from main on 22 October 2026 before T-225's
+      adoptions: at n = 204 the certificate
       is above the case's ceiling (Francisco Couzo, T-223) by 1.53e-06; above T-225 by
       1.53e-06; below #670 (Francisco Couzo, T-226) by 5.05e-08; below T-186 (Daniil
       Ostashev, improved by PingYou Ltd and Mishapolk) by 1.89e-05. The 18 October ledger
