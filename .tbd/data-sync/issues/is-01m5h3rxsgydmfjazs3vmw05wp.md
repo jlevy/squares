@@ -5,7 +5,7 @@ title: "Import Mishapolk: 122 upper bounds at 105–1568, incl. 105 and 204 in t
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T06:11:32.271Z
-updated_at: 2026-10-22T08:30:24.561Z
+updated_at: 2026-10-22T09:39:19.591Z
 started_at: 2026-10-22T06:11:33.610Z
 ---
 Issue #719 (https://github.com/jlevy/squares/issues/719), opened 2026-10-22T05:30:47Z by Mishapolk (Mikhail Polk; repository Mishapolk/square-packing-records): 122 claimed strict improvements at N in [105, 1568], two in the case corpus (105: 5.18e-12 below the catalogue witness; 204: 1.006e-8 below T-225, the house since #718), 112 beyond the horizon at or below 1024, 8 above 1024 (1061-1568; owner decision D1, think-f2io). Many margins are ~1e-12 (likely re-solves of existing arrangements); several are 1e-4 to 2e-3 (447, 553, 601, 652, 701). Stage 0 owner; stage 1 triage (read-only, priced) first.
@@ -173,4 +173,6 @@ with `blocked_on: jlevy/squares#720`. The rows above 1024 wait on think-f2io in 
 2026-10-22 coord-intake-1021b: deferred from #720 review B (https://github.com/jlevy/squares/pull/720#issuecomment-6335921422) to this import, which is where they bite: B1 (Medium) beyond_horizon_replay.coverage_problems (:826-830) still requires each planned row to match exactly, including the 8 current #670 rows; #719 prints below #670 at 370, 452 and 536, so this import will fail --records with "the register's row is not the plan's": make coverage_problems accept a successor outside the walk (consistent with chain_problems), with a test. B2 (Low) the register notes for #678 and #715 (source-coverage.yaml:6127-6129, :7612-7616) still give the old supersession counts (57 + 2, 29; now 11 + 0 and 21): this import rewrites those sources' dated sentences; correct them then. B4 (suggestion) chain_problems prints "names X, not X" when the successor is right but the disposition is wrong: clarify the message.
 
 2026-10-22 08:30 coord-intake-1021b: #720 merged (0281e7763). This import's records PR also carries the record edits for the four replies posted after #720 (scratchpad replies/0122d.md: apply0122d.py and the new comments.yaml beside upper-bounds-backlog-20261022). It waits on the snapshot prune PR (think-t1lk child) landing first.
+
+2026-10-22 09:50 c-lane-719-import (WIP): branch claude/intake-2026-10-22 pushed at 650184e26 (not yet merged with main d660905ec, #578): b93126ed8 the replies after #720 and comments.yaml; 5e272e29b the packet mishapolk-issue719-2026-10-22 (derived facts, filtered replay 112/112 verified, 672 controls refused) and beyond_horizon_replay's fifth Release, walks, awaiting reports, B1 and B4; 405adf21f the ledger upper-bounds-issue719-20261022 (121 recorded, 366 not); f2f5cfac2 certify 105/204 and the all-pairs sample; 650184e26 111 rows, T-229 at 105 and 204 (V0/C0, regularizations of T-174 and T-225, measured), B2, the #719 requests entry. Next: check --replay (running), merge origin/main (#578, site v0.9.0), wait for the prune PR (think-t1lk child), re-pin, papers' record, cut v0.9.1, stamp_landed, validation, draft PR.
 blocked_on: think-t1lk
