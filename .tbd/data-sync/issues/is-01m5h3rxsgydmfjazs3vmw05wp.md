@@ -5,7 +5,7 @@ title: "Import Mishapolk: 122 upper bounds at 105–1568, incl. 105 and 204 in t
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 15
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T06:11:32.271Z
-updated_at: 2026-10-22T20:08:04.325Z
+updated_at: 2026-10-22T20:49:15.492Z
 started_at: 2026-10-22T06:11:33.610Z
 ---
 Issue #719 (https://github.com/jlevy/squares/issues/719), opened 2026-10-22T05:30:47Z by Mishapolk (Mikhail Polk; repository Mishapolk/square-packing-records): 122 claimed strict improvements at N in [105, 1568], two in the case corpus (105: 5.18e-12 below the catalogue witness; 204: 1.006e-8 below T-225, the house since #718), 112 beyond the horizon at or below 1024, 8 above 1024 (1061-1568; owner decision D1, think-f2io). Many margins are ~1e-12 (likely re-solves of existing arrangements); several are 1e-4 to 2e-3 (447, 553, 601, 652, 701). Stage 0 owner; stage 1 triage (read-only, priced) first.
@@ -200,3 +200,13 @@ blocked_on: jlevy/squares#722
 2026-10-22 c-lane-719-import: #727 (squaremath.org; site v0.9.1, explainer v0.4.17) merged into #722 at 5d2ee4a10 with main's release accounting; re-taken on top: DATA_REVISION 6610be93 (a9b8d8092), explainer v0.4.18 (f39b60022), three papers kept at v0.1.9/v0.1.2/v0.2.5 (7ff5b1292, 68 files byte-identical twice), site v0.9.2 (a287ece85, PUBLICATION_REVISION 7ff5b129). The branch adds no site URL, so the domain change needs nothing. Records tier 52/52; 657 site/overview/profile/release tests pass; --source-bytes 262,349,326 (5,037,554 under). Last pushed SHA a287ece85.
 
 2026-10-22 coord-intake-1021b: #719 import reply posted 2026-10-22T20:03:44Z after the deploy of #722 (cacdafc1f) was verified on squaremath.org (5466/5466): https://github.com/jlevy/squares/issues/719#issuecomment-6350110834 (body scratchpad/replies/0122e-719-reply.md). Record patch replies/0122e-requests.patch rides #725. Mishapolk opened #732 (5,468 certificates at 814fbe9) at 19:55Z: think-0gp6.
+
+2026-10-22 c-triage-1022d (read-only; triage-732/README.md §§1 and 3).
+
+- At `814fbe9`, 31 of #719's 122 counts state a lower side: 7.49e-13 to 0.0819, all at or
+  below 1024, the largest at 366. At the other 91 the side is unchanged.
+- #732's import supersedes 29 of #719's rows, or 30 if 499 is recorded rather than held.
+- 539, withdrawn by #719's 06:05 edit, is claimed again in #732's manifest. It is
+  recorded there, dated `1851c2c`.
+- 366's new side is 1.24e-18 above Couzo's `4e4c8ce` certificate, so it is still not
+  recorded.

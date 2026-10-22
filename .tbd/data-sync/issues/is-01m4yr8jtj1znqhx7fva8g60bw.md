@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 4e4c8ce beyond-horizon index, 341 counts 325-102
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 11
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:04:02.641Z
-updated_at: 2026-10-22T20:34:38.004Z
+updated_at: 2026-10-22T20:49:17.334Z
 started_at: 2026-10-22T02:18:23.107Z
 ---
 Stage 1 triage, read-only, by the 15 October reads lane (think-mq0k), from the 02:30Z sweep at main 6964362b5. No issue reports any of it.
@@ -106,3 +106,27 @@ blocked_on: think-xyhn
 2026-10-22 (c-lane-couzo-residue-1022): The records change is PR #730 (branch claude/intake-couzo-history-2026-10-22, lane c-lane-couzo-residue-1022), records commit a91c70907, 22 October 2026. The history walk (packing/campaign/issue-intake/upper-bounds-couzo-history-20261022) walks every count from 325 to 1024 from starts frozen at main a97b712b9. It covers every row source since then and every publication in a watched repository below the start. It reproduces the c-triage-1022b walk's recorded chain at every count. The one difference is that #715's 30 re-certifications are attributed to #715 rather than to 5a299b4, and they are held either way. 319 rows are recorded at assurance reported, 107 current and 212 superseded on entry; 236 existing rows are repointed. 340 publications are held back, each with its decision's bead (beyond_horizon_replay.HISTORY_HELD). The filtered two-route replay with six controls covers all 319 rows.
 
 For this bead (4e4c8ce/58a7833): 253 rows of the new source couzo-index-2026-10-15, dated 2026-10-15T00:31:53Z by the commit, retained in the new couzo-index-2026-10-15 packet (253 certificates; manifest, indexes, 47 Göbel-held and 2 sub-print files pinned by digest): 91 current and 162 superseded on entry (by #670 55, #719 38, #715 20, #686 16, 5a299b4 10, #678 9, #672 5, #675 4, 23aff0c 4, #666 1). They supersede first 487b058's rows at 199 counts (64 of them current until then) and #607's at 7; at 41 counts no row stood before them. Held at 89 counts: 47 above Göbel (think-8krd), 39 index deletion bounds (proposed D6, think-f2io; 743 and 985, which #715 restates, among them) and 3 sub-print re-certifications (327, 332, 542; think-fwa9). 58a7833's Göbel bounds stay with #613: its read in intake-watch.yaml now names think-8krd. #715's restatements of 24 of these certificates now name the rows. Filtered replay: 253 verified, 1,518 controls refused, 333.2 positive CPU s; the all-pairs kernel at 366 and 703 (313,548 pairs, 117.7 CPU s) agreed exactly. Custody is Git (OR-18). The bead stays open until the PR merges; the coordinator closes it.
+
+2026-10-22 c-triage-1022d (read-only).
+
+- #732's recorded rows supersede 14 of the current rows #730 plans, all Couzo's `4e4c8ce`:
+  411, 451, 494, 495, 539, 540, 587, 854, 856, 857, 913, 915, 916 and 977.
+- They tie #730's planned deletion row at 985.
+- At 369 and 376, they are above `58a7833`'s held recipe bounds by 3.5e-31 and 2.3e-30.
+- #732's records PR should land after #730.
+
+## Proposed New Beads
+
+None is needed if the coordinator folds the tool slice into `think-0gp6`. Should it be
+split out:
+
+- **N1 (task, P2, child of `think-0gp6`): "beyond_horizon_replay: a release whose rows
+  come from a pinned manifest (#732)".**
+  - #732's body has no row table. Its 5,468 rows are in `certificates/manifest.json` at
+    the pin.
+  - Add a reader of the packet's retained manifest (`UP` at 12 places), or extend #730's
+    declared-rows path to an issue's release.
+  - Tests: the reader refuses a manifest row whose path, digest or side disagrees with the
+    derived fact.
+  - Seconds of CPU.
+  - Blocked on #730.

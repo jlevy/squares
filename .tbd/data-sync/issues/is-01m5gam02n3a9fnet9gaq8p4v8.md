@@ -5,7 +5,7 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-22T13:13:20.757Z
+updated_at: 2026-10-22T20:49:11.730Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -50,3 +50,21 @@ by deleting squares from the next count's certificate. There are 54 (`4e4c8ce` 3
 **D1.** Couzo's `5a299b4` index states 5,078 non-grid bounds above 1024: 282 certificates
 and 4,796 constructions. #715 claims 1,112 of those counts. The certificate files cover
 139 counts.
+
+2026-10-22 c-triage-1022d (read-only; triage-732/README.md §4 and price.md D).
+
+**#732 adds 5,078 rows above 1024**, at 1025–9913: 27,724,386 squares in 5.21 GB of
+certificates at `Mishapolk/square-packing-records@814fbe9`.
+
+- Census baselines: #715's print at 1,112 counts, the grid at 3,966.
+- Against #715's prints: below at all 1,112, by less than 1e-12 at 66.
+- #719's eight counts keep #719's sides.
+- 3426's certificate is above its own grid side.
+- **The issue proposes capping tracking at N = 10,000** (§7), a question for this decision.
+
+**The price if A:**
+
+- about 19 CPU-h on the positives, or 193 CPU-h with six controls (over the item cap: five
+  or more items, or controls sampled);
+- about 1.6 GB of derived facts, since there is no licence: a data release under OR-18
+  (D4).

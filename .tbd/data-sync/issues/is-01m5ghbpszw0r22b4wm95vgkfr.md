@@ -5,7 +5,7 @@ title: "Decide #715's 30 sub-print re-certifications of Couzo's 4e4c8ce certific
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: c-lane-715-import
 labels:
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m5g8xj3hqca5wcen9f71dtnd
 hold: null
 hold_until: null
 created_at: 2026-10-22T00:49:44.766Z
-updated_at: 2026-10-22T13:13:22.535Z
+updated_at: 2026-10-22T20:49:13.296Z
 started_at: 2026-10-22T00:49:56.222Z
 ---
 Issue #715 (franciscouzo/square-packing 6b7391de) restates 64 counts at or below 1024 that the triage read as certificates first published at 02f9690, f311f08, a7067d7 and 4e4c8ce (9 to 15 October). At the pin, 30 of them are not byte-identical: the explicit certificates certificates/nN.cert, first committed at 5a299b4 (2026-10-20) and pushed with the pin at 2026-10-21T22:56:37Z after the issue, are exact L-border re-materializations of the same packings whose sides are below the 4e4c8ce certificates' by 2.37e-23 to 3.18e-23. Both round up to the same 12-place print. Counts: 535, 582, 591, 631, 633, 640, 682, 684, 691, 695, 735, 737, 742, 745, 790, 791, 797, 798, 799, 854, 855, 856, 857, 909, 913, 915, 916, 970, 975, 977.
@@ -51,3 +51,17 @@ by under 1e-12, and both round up to one 12-place print:
 - **In the corpus.** 18 of `4e4c8ce`'s certificates are below today's case lanes by
   1.6e-31 to 2.4e-12, but none is below an exact side the register already states. They
   are not this question.
+
+2026-10-22 c-triage-1022d (read-only; triage-732/README.md §§2–3).
+
+- **At 325–1024, #732 adds one row in the class: 499.** It is 8.66e-13 below #719's row,
+  and both print 22.881306218113.
+- **The precedents conflict.** #722 recorded #719's 631 (2.73e-13 below Couzo's, same
+  print, kept at 16 places). #730's `SUB_PRINT` holds the class.
+- **In the corpus, the class is larger.** At 42 counts whose house is Kingbird's,
+  Mishapolk's files (published at `1851c2c`, #719's pin) are below the house's verified
+  side by 1.35e-36 to 7.23e-15. Each is within one unit of the reported print's 14th place
+  and the same arrangement.
+  - The house rule's exception (T-195) would record them, if asked and validated.
+  - The author has not asked: #719's question 4.
+  - Adoption would cost 3.5 to 17.5 CPU-h.
