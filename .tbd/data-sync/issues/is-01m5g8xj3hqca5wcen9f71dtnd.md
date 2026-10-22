@@ -3,9 +3,9 @@ type: is
 id: is-01m5g8xj3hqca5wcen9f71dtnd
 title: "Import franciscouzo: 1285 upper bounds at 328–9913 (#715)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 11
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:22:12.593Z
-updated_at: 2026-10-22T02:49:57.931Z
+updated_at: 2026-10-22T02:52:57.532Z
 started_at: 2026-10-21T22:22:13.353Z
+closed_at: 2026-10-22T02:52:56.233Z
+close_reason: "Not closed: placeholder"
+resolution: null
+duplicate_of: null
 ---
 Issue #715 (https://github.com/jlevy/squares/issues/715), opened 2026-10-21T20:55:57Z by Francisco Couzo as a follow-up to #678: 1285 strict improvements over the strongest retained public comparison (173 below 1024, 1112 above; first request above 1024), source commit 6b7391de820fd01f3ff6984e4a081e8c86845588 (upper_bounds.json, certified_bounds.json, certificates/best/manifest.json, public_bounds.json). Includes 343 at 18.977575126267, below #702's row registered today. Stage 0 owner; stage 1 triage (read-only, priced) first.
 blocked_on: none
@@ -176,4 +180,7 @@ Next: the reachable tests alone (the push tier hit its 900 s ceiling), hosted CI
 blocked_on: think-f2io
 
 2026-10-22 02:50 c-lane-715-import: review A of #717 (https://github.com/jlevy/squares/pull/717#issuecomment-6331084775; 0 Blocker/High) addressed in acffb035e: A1 #702's row called superseded in its request, resources row and packet README; A2 the 32 restated results say they are owed by their open imports, and the import note and PR list the corrections the next #715 reply must carry (64 = 34 restated, left to think-a4wq/think-1545, think-om5l, think-yfoo, + 30 held on think-fwa9; 335 at 1.7825e-11 from the exact certificate, not 1.84e-11; #678's 545 row now superseded); A3 classify and six forged-receipt refusal tests; A4 newness by reachability (first_commit_public); A5 PR body; A6 ledger sides held to the receipt; A7 Goebel rows bound, check --replay --workers; A8 #686 line for the coordinator. Dispositions https://github.com/jlevy/squares/pull/717#issuecomment-6331477178. Head acffb035e6c6dd4382f8b770e332a794db63e051 (ls-remote); hosted CI 31 pass, 28 skipped; --records 52/52; PR draft, labels intake and S2. Next: coordinator's merge gate; after merge, #715's stage 7 reply with those corrections.
+blocked_on: think-f2io
+
+2026-10-22 02:53 coord-intake-1021b: #717 merged as de1651e1c (109 new rows <= 1024 recorded; 30 held on think-fwa9; 34 restated left to think-a4wq/think-1545, think-om5l, think-yfoo; 335 not recorded; site v0.8.18). Owed: the #715 stage 7 reply correcting the acknowledgement (64 -> 34 + 30; 335 margin 1.7825e-11; #678 545 superseded); follow-ups on #702 (343 superseded), #686 (50 rows superseded) and #678 (26 rows and 545 superseded). Rows above 1024 wait on think-f2io (D2 is live above 1024: 856 L-border rows; bulk ~9.1 MB zlib).
 blocked_on: think-f2io
