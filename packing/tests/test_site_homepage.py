@@ -171,7 +171,7 @@ def test_homepage_links_to_native_videos_and_reduced_motion_waits_for_click(
         assert state["label"]
         assert state["codec"] == "probably"
         assert abs(state["center_offset"]) <= 1
-        assert state["width"] <= state["max_width"] + 1
+        assert state["height"] <= 900
         assert state["left"] >= 0
         assert state["right"] <= width
         assert state["overflow"] <= 0
@@ -751,7 +751,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     assert home["solo_cards"]
     for card in home["solo_cards"]:
         assert abs(card["center_offset"]) <= 1, card
-    assert "squares-project-documentation" in seen[width]["about"]["main_titles"]
+    assert seen[width]["about"]["main_titles"] == ["the-squares-project"]
 
 
 @pytest.fixture(scope="module")
