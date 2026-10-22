@@ -3,18 +3,22 @@ type: is
 id: is-01m5gg2v4ers872jhw0rz9cwpf
 title: Balance main action button labels against their visible capital-letter ink
 kind: bug
-status: in_progress
+status: closed
 priority: 2
-version: 3
-delegate: about_profiles_implementation
+version: 5
+delegate: upstream_integration
 labels: []
 dependencies: []
 parent_id: is-01m5fpv2yk09g6z1a17rts4wzc
 hold: null
 hold_until: null
 created_at: 2026-10-22T00:27:25.698Z
-updated_at: 2026-10-22T00:39:27.849Z
+updated_at: 2026-10-22T09:19:51.013Z
 started_at: 2026-10-22T00:28:08.071Z
+closed_at: 2026-10-22T09:19:51.013Z
+close_reason: "Implemented and validated in PR #578, merged as d660905ec81383d7ca89830ff23a68e1832426e5 at 2026-10-22T09:14:53Z. Accepted candidate a020a6a11: final delta 9/9, full pool 23 pass, ordinary CI 31 successes, full checkpoint 39751078588 all ten workers and aggregate passed, Reviews N/O accepted, fresh site and four PDFs built with 7333 publication checks. Historical population, coverage and Results-growth follow-ups remain open; deployment is separate."
+resolution: null
+duplicate_of: null
 ---
 The main shared site-action links and buttons have equal physical padding, but their uppercase Source Sans labels appear high inside the filled rectangle. Measure line-box and cap-ink geometry using retained browser tests, repair the shared typography rule without guessed pixel offsets, retain icon alignment and hit areas, and refresh the immutable CSS preview. No unrelated source edits or push.
 
