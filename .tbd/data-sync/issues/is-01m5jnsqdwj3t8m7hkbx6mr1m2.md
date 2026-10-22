@@ -5,7 +5,7 @@ title: Inventory site hierarchy and plan intuitive navigation menus
 kind: task
 status: in_progress
 priority: 2
-version: 16
+version: 17
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
 delegate: navigation-planner
 labels: []
@@ -26,11 +26,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T20:45:47.321Z
-updated_at: 2026-10-22T23:38:47.380Z
+updated_at: 2026-10-22T23:41:17.874Z
 started_at: 2026-10-22T20:46:24.554Z
 ---
-Inventory every current page family, each named page/subpage, top tabs, local tabs, breadcrumbs and cross-links. Model as a tree and propose top-level tabs with menu items. Planning only, in parallel with landing PR733; keep its implementation unchanged.
+Implement and validate the site navigation redesign in PR #737: category menus, dedicated destination pages, canonical labels and breadcrumbs, shared typography and layout, and associated design-system refinements.
 
 ## Notes
 
-Implementation is in PR #737 on codex/site-navigation-plan-20261022. The navigation split, dedicated Learn/About pages, breadcrumbs, 33em reading measure, and shared menu motion are implemented and locally rebuilt. Current follow-up: split Results into Recent Results, Results Archive, Visual Atlas, and Verification and Ratings without a category landing page. CI failures from the prior head are being triaged and fixed; PR remains draft until current-head validation passes.
+Current refinement slice: global 35em/630px reading measure; card groups aligned to prose; sans-serif chrome and navigation; text-only footer; concise Recent Results; Project Documentation and matching menu/page/breadcrumb labels; non-link category breadcrumbs including About; clockwise-expand chevrons. Child beads track implementation and CI repairs. Plan: docs/project/specs/active/plan-2026-10-22-site-navigation.md. Prior head20df Pages passed; Packing had stale expectations under repair. Keep PR draft until current-head validation passes.
