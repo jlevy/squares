@@ -128,9 +128,16 @@ def test_the_on_request_prune_has_no_registered_control_consumer() -> None:
     for path in sorted(controls.ON_REQUEST_IMPORT_TOOLS):
         assert path in controls.PRUNE
         assert path.exists()
-        relative = path.relative_to(controls.ROOT).as_posix()
-        for control in specification["controls"]:
-            assert not controls.in_pruned_roots(
-                (controls.ROOT / control["file"]).resolve(), frozenset({path})
-            )
-            assert relative not in control["run"]
+        # No control targets it or names it by path or by dotted module name (think-wtso);
+        # `test_no_control_loads_a_pruned_tool` holds what the controls' programs import.
+        assert controls.registered_mentions(path, specification["controls"]) == []
+    tool = imp.ROOT / "devtools/couzo_715_replay.py"
+    caught = {
+        "name": "runs it",
+        "file": "pyproject.toml",
+        "run": "python3 -m devtools.couzo_715_replay",
+    }
+    assert tool.relative_to(imp.ROOT).as_posix() not in caught["run"]
+    assert controls.registered_mentions(tool, [caught]) == [
+        {"name": "runs it", "run": caught["run"]}
+    ]

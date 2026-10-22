@@ -2,19 +2,23 @@
 
 from __future__ import annotations
 
+import ast
 import cProfile
 import hashlib
 import inspect
 import json
 import os
+import re
 import shlex
 import shutil
 import subprocess
 import sys
 import tempfile
 import time
+import tomllib
 from collections.abc import Callable, Iterator
 from datetime import datetime, timedelta
+from functools import cache
 from pathlib import Path
 from types import ModuleType
 from typing import Any
@@ -1795,6 +1799,131 @@ def test_snapshot_audit_cli_never_clones_or_runs_a_control(
     assert report["candidate_source_bytes"] == 41
     with pytest.raises(SystemExit, match="2"):
         controls.main([str(spec), "--prune-candidate", str(old)])
+
+
+def test_the_audit_names_a_control_that_runs_a_candidate_by_its_module_name(
+    snapshot_audit_fixture: tuple[Path, Path],
+) -> None:
+    """#721 review A1 (think-wtso): `-m devtools.tool` never spells `devtools/tool.py`."""
+    old, spec = snapshot_audit_fixture
+    tool = old.parent / "devtools/pruned_tool.py"
+    tool.parent.mkdir()
+    tool.write_text("", encoding="utf-8")
+    spec.write_text(
+        "controls:\n"
+        "- {name: runs it, file: source.py, run: python3 -m devtools.pruned_tool}\n"
+        "- name: imports it\n"
+        "  file: source.py\n"
+        "  run: |-\n"
+        "    python3 - <<'PY'\n"
+        "    from devtools.pruned_tool import main\n"
+        "    PY\n"
+        "- {name: another tool, file: source.py, run: python3 -m devtools.pruned_tool_two}\n",
+        encoding="utf-8",
+    )
+    candidates = controls.snapshot_audit([tool], spec_path=spec)["candidates"]
+    assert isinstance(candidates, list)
+    mentions = candidates[0]["registered_mentions"]
+    assert [row["name"] for row in mentions] == ["runs it", "imports it"]
+    assert (
+        controls.module_name(controls.ROOT / "src/sqpack/campaign/ledger.py")
+        == "sqpack.campaign.ledger"
+    )
+    assert controls.module_name(controls.ROOT / "src/sqpack/__init__.py") == "sqpack"
+    assert controls.module_name(old / "generated.bin") is None
+
+
+@cache
+def _console_scripts() -> dict[str, str]:
+    """Each console script the project declares, and the module it runs."""
+    project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+    return {
+        name: str(target).partition(":")[0]
+        for name, target in project["project"]["scripts"].items()
+    }
+
+
+@cache
+def _module_files(name: str) -> tuple[Path, ...]:
+    """The first-party files `import name` loads: each package on the way, then the module."""
+    parts = name.split(".")
+    found: list[Path] = []
+    for end in range(1, len(parts) + 1):
+        stems = [base.joinpath(*parts[:end]) for base in (ROOT, ROOT / "src")]
+        candidates = [
+            path for stem in stems for path in (stem.with_suffix(".py"), stem / "__init__.py")
+        ]
+        found += [path for path in candidates if path.is_file()][:1]
+    return tuple(found)
+
+
+def _loaded_by(tree: ast.Module) -> set[Path]:
+    """What loading `tree` imports: its module-level imports, not those inside a function
+    or under `TYPE_CHECKING`, which run only when called or never."""
+    names: set[str] = set()
+    pending: list[ast.AST] = list(tree.body)
+    while pending:
+        node = pending.pop()
+        if isinstance(node, ast.Import):
+            names.update(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            names.add(node.module)
+            names.update(f"{node.module}.{alias.name}" for alias in node.names)
+        elif isinstance(node, ast.If) and "TYPE_CHECKING" in ast.unparse(node.test):
+            pending.extend(node.orelse)
+        elif not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.expr)):
+            pending.extend(ast.iter_child_nodes(node))
+    return {path for name in names for path in _module_files(name)}
+
+
+@cache
+def _loads(path: Path) -> frozenset[Path]:
+    return frozenset(_loaded_by(ast.parse(path.read_text(encoding="utf-8"))))
+
+
+def _pruned_loads(run: str) -> list[str]:
+    """The pruned files a control's command imports as its programs load: each `-m`
+    module, each test file pytest is given with its `conftest.py`, a console script's
+    module, and a here-document's source, with everything those import at load."""
+    names = re.findall(r"-m\s+([\w.]+)", run)
+    names += [module for script, module in _console_scripts().items() if script in run]
+    loaded = {path for name in names for path in _module_files(name)}
+    for test in re.findall(r"\btests/[\w/.-]+\.py", run):
+        loaded |= {ROOT / test, ROOT / "tests/conftest.py"}
+    for _, source in re.findall(r"<<-?\s*'?(\w+)'?\n(.*?)\n\1\b", run, re.DOTALL):
+        loaded |= _loaded_by(ast.parse(source))
+    pending = list(loaded)
+    while pending:
+        for path in _loads(pending.pop()) - loaded:
+            loaded.add(path)
+            pending.append(path)
+    return sorted(
+        path.relative_to(ROOT).as_posix()
+        for path in loaded
+        if controls.in_pruned_roots(path, PRUNE)
+    )
+
+
+def test_no_control_loads_a_pruned_tool() -> None:
+    """No control's program imports a pruned file as it loads (think-wtso, think-cmbx).
+
+    A worker carries nothing in `PRUNE`, so such a control fails at import in the worker
+    rather than in review. `adopt_houses` is the standing case: it loads `select_houses`,
+    which loads `algebraic_witness_reports`, which loads the pruned `regularize_evand`.
+    Imports inside a function are left out, since `check_results` reaches the same tool
+    through a call it never makes; so are the commands a validation step starts and the
+    whole suite's collection, which only a control's own run in a worker decides.
+    """
+    spec = safe_load((ROOT / "devtools/controls.yaml").read_text(encoding="utf-8"))
+    for run in sorted({str(control["run"]) for control in spec["controls"]}):
+        assert _pruned_loads(run) == [], run
+    assert "devtools/regularize_evand.py" in _pruned_loads("python3 -m devtools.adopt_houses")
+    for run in (
+        "python3 -m devtools.couzo_715_replay",
+        "uv run --frozen --group dev pytest -q tests/test_exact_sides.py",
+        "python3 - <<'PY'\nfrom devtools import beyond_horizon_replay\nPY",
+    ):
+        assert _pruned_loads(run), run
 
 
 def test_baseline_runs_each_command_unmutated_once_in_one_private_worker(
