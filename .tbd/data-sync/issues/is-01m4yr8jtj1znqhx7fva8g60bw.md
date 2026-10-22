@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 4e4c8ce beyond-horizon index, 341 counts 325-102
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:04:02.641Z
-updated_at: 2026-10-22T06:48:14.501Z
+updated_at: 2026-10-22T12:18:37.946Z
 started_at: 2026-10-22T02:18:23.107Z
 ---
 Stage 1 triage, read-only, by the 15 October reads lane (think-mq0k), from the 02:30Z sweep at main 6964362b5. No issue reports any of it.
@@ -41,3 +41,6 @@ Price: the exact all-pairs replay of 341 certificates of 325 to 1023 squares is 
 
 2026-10-22 coord-intake-1021b: #715 (Couzo, 1285 rows; PR #717 imports the 109 new rows <= 1024) re-certifies some of this bead's earlier-commit certificates byte for byte. The #715 acknowledgement (issuecomment-6329883508) told the author those 64 rows will be recorded from their first commits; this bead records its share (#717 review A2). 30 sub-print re-certifications of 4e4c8ce are held on think-fwa9. The filtered two-route replay (couzo_715_replay) re-prices this bead's replay at about 40 CPU-minutes (triage-715 price.md).
 blocked_on: jlevy/squares#717
+
+2026-10-22 12:25Z coord-intake-1021b: #717 merged (and #720, #721). The rest of this import is the next records change after #719's (PR on claude/intake-2026-10-22, think-xyhn): it edits the same registers, and #719's ledger walks Couzo's 5a299b4 as a dated publication. A read-only re-plan against main 76496462b and #719's head is running (c-triage-1022b, scratchpad triage-1022b/).
+blocked_on: think-xyhn
