@@ -5,12 +5,18 @@ title: "Site: continuous deployment identified by its git revision; drop site ed
 kind: feature
 status: open
 priority: 1
-version: 5
+version: 10
 labels:
   - release
 dependencies: []
+child_order_hints:
+  - is-01m5jn66kw26mhk3xhxrc6k9hv
+  - is-01m5jn68yf1cnjdqj164bpr22g
+  - is-01m5jn6b695wqc6sn8t3n0ts57
+  - is-01m5jn6dwrnhbr41q8anmm6j6k
+  - is-01m5jn6g57b24wax2k1p1q23ce
 created_at: 2026-10-22T17:51:10.847Z
-updated_at: 2026-10-22T19:31:14.536Z
+updated_at: 2026-10-22T20:35:17.287Z
 ---
 Owner decision, 22 October 2026 (in conversation with the coordinator coord-intake-1021b):
 
