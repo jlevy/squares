@@ -272,7 +272,7 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
         "devtools/regularize_axis_components.py",
     ):
         assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
-    assert SNAPSHOT_MAX_BYTES == 254 * 1024 * 1024
+    assert SNAPSHOT_MAX_BYTES == 255 * 1024 * 1024
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
@@ -562,7 +562,7 @@ def test_the_snapshot_byte_report_enforces_the_exact_capacity_boundary(
     assert controls.main(["--source-bytes"]) == int(offset > 0)
     report = json.loads(capsys.readouterr().out)
     assert report["source_bytes"] == measured
-    assert report["cap_bytes"] == 254 * 1024 * 1024
+    assert report["cap_bytes"] == 255 * 1024 * 1024
     assert report["headroom_bytes"] == -offset
 
 
