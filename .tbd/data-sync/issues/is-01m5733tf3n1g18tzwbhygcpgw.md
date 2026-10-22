@@ -5,7 +5,7 @@ title: "Import franciscouzo: 204-993: registration request (#670)"
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 12
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.418Z
-updated_at: 2026-10-22T02:28:43.927Z
+updated_at: 2026-10-22T05:48:09.348Z
 started_at: 2026-10-18T13:04:20.664Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/670
@@ -107,3 +107,10 @@ blocked_on: none
 
 2026-10-22 02:00 c-lane-t225-stage4 (PR-A, on the coordinator's word; branch claude/stoic-thompson-ku09fw, pushed 784244a58): #670's 204 registered as T-226 (V0/C0, superseded on entry by #675, T-223 and T-225), packet couzo-issue670-2026-10-17 at 23aff0c6 (n204.cert f317d0c0...73dc with JSON). Replay: positive passes both routes, 2 controls refused, 124,236 pair decisions, 10.22 route CPU s. Stage 4: think-0nse. The 72 beyond-horizon rows wait for PR-B after #715's import. Reply drafts: triage-backlog/replies/670-*.md (not posted).
 2026-10-22 02:30 c-lane-t225-stage4: PR-A is in draft PR https://github.com/jlevy/squares/pull/718 (head a3ff722bb, with T-225 stage 4 and adoption). The reply drafts need reconciling before posting: at 204 the house is T-225 (not T-223); at 227 T-225, which solves #672's packing and credits it, is the house, so T-227 is not pending adoption; the entries' stage 4 is think-0nse.
+
+2026-10-22 c-lane-pr-b (PR-B): #670's 72 rows beyond the corpus are recorded as dated beyond-horizon rows of couzo-issue670-2026-10-17 (the #718 packet, re-acquired at 23aff0c6 with all 73 certificates and their per-count JSON; acquisition/beyond-horizon-rows.json is the claims record). 8 current (364, 370, 382, 403, 444, 452, 536, 922), superseding couzo-verified-bounds-2026-10-14 (6), couzo-certificates-2026-10-14 (382) and evand-compositions-2026-10-13 (364), each source with the dated sentence; 64 superseded on entry (#675 25, #672 19, #678 9, #686 9, #715 2). Atom E-couzo-670-beyond-horizon-report. Request: 72 results settled (queued false).
+
+Branch claude/intake-2026-10-22 (from main 7359fa8b6). Commits: 9f5d9867a (packets, devtools.beyond_horizon_replay, receipts, records, tests), 8375ca986 (ledger upper-bounds-backlog-20261022), 15b885a9d (coverage rows, atoms, credit, intake-watch), 95a75d321 (requests; replies after #718 and #643; quoted scalars), d045c4b93 (review B of #718, B1-B7), b8045210c (views), e6d65154f (suite cost admission), cfeb44cc8 (DATA_REVISION re-pin).
+Replay: all 205 rows (666: 11, 670: 72, 672: 44, 675: 78) verified on both maintained routes, all 1,218 controls refused by both; 282.8 positive CPU s, 1,305.5 s wall on 2 workers (2,604 row-s); all-pairs kernel at 464/922/996/998 agrees exactly (1,525,010 pairs, 649.2 CPU s); every side below Goebel; every certificate first committed at its issue's pin (de Winter at b9cdc16b).
+Ledger: 432 claims at 124 counts, all recorded, none undecided; starts frozen at 804eff369; recomputed against main 7359fa8b6, no verdict changed from the triage.
+2026-10-22 05:55Z c-lane-pr-b: draft PR https://github.com/jlevy/squares/pull/720 (label intake), last pushed head 5ab83974e9445e3da671a72c9c2defe9fdd5957a (ls-remote confirmed), after the release commits cfeb44cc8 (DATA_REVISION b8045210), cadf73fd9 (papers' record), 5ab83974e (site v0.8.20). Next: local --push tier running; hosted CI; then report to the coordinator. Verdict comment drafts: scratchpad replies/verdicts-prb/ (intake_comments --check passes).

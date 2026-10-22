@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: s(n) < ⌈√n⌉ at 18 counts from n = 509 to 156
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 11
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:34.680Z
-updated_at: 2026-10-22T01:20:11.027Z
+updated_at: 2026-10-22T05:48:12.576Z
 started_at: 2026-10-18T13:04:20.646Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/666
@@ -111,3 +111,10 @@ after #715's import. PR-D carries the 8 above, after D1.
   unrelated paper since 643dc9a.
 
 blocked_on: think-f2io
+
+2026-10-22 c-lane-pr-b (PR-B): new packet de-winter-issue666-2026-10-17 retains all 19 certificates, check.py (read, not run), records.txt, README and MIT LICENSE from 643dc9a (issue pin b3152f52 off-branch; b9cdc16b holds the identical tree 83563a8b; first commit b9cdc16b at 07:03:15Z); decimal-pose JSON and the 10.6 MB figure pinned by digest. The 11 rows at or below 1024 are recorded as dated beyond-horizon rows of the new de-winter-issue666-2026-10-17 source, each superseded on entry (#675 6, #672 2, #678/#686/#715 1 each); bibliography key [de Winter issue 666 2026-10-17] (credits-project), atom E-de-winter-666-certificate-report; triage done in result-requests. The 8 rows above 1024 are retained, not replayed or recorded: still blocked on think-f2io (D1). intake-watch reads joostdewinter.github.io through 206c7fc.
+
+Branch claude/intake-2026-10-22 (from main 7359fa8b6). Commits: 9f5d9867a (packets, devtools.beyond_horizon_replay, receipts, records, tests), 8375ca986 (ledger upper-bounds-backlog-20261022), 15b885a9d (coverage rows, atoms, credit, intake-watch), 95a75d321 (requests; replies after #718 and #643; quoted scalars), d045c4b93 (review B of #718, B1-B7), b8045210c (views), e6d65154f (suite cost admission), cfeb44cc8 (DATA_REVISION re-pin).
+Replay: all 205 rows (666: 11, 670: 72, 672: 44, 675: 78) verified on both maintained routes, all 1,218 controls refused by both; 282.8 positive CPU s, 1,305.5 s wall on 2 workers (2,604 row-s); all-pairs kernel at 464/922/996/998 agrees exactly (1,525,010 pairs, 649.2 CPU s); every side below Goebel; every certificate first committed at its issue's pin (de Winter at b9cdc16b).
+Ledger: 432 claims at 124 counts, all recorded, none undecided; starts frozen at 804eff369; recomputed against main 7359fa8b6, no verdict changed from the triage.
+2026-10-22 05:55Z c-lane-pr-b: draft PR https://github.com/jlevy/squares/pull/720 (label intake), last pushed head 5ab83974e9445e3da671a72c9c2defe9fdd5957a (ls-remote confirmed), after the release commits cfeb44cc8 (DATA_REVISION b8045210), cadf73fd9 (papers' record), 5ab83974e (site v0.8.20). Next: local --push tier running; hosted CI; then report to the coordinator. Verdict comment drafts: scratchpad replies/verdicts-prb/ (intake_comments --check passes).
