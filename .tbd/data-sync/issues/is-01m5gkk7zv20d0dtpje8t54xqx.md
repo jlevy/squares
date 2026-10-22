@@ -3,17 +3,20 @@ type: is
 id: is-01m5gkk7zv20d0dtpje8t54xqx
 title: "Stage 4: review and confirm Couzo's in-corpus #670, #672, #675 entries (T-226 to T-228)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
-delegate: c-lane-t225-stage4
+version: 3
+delegate: coord-intake-1021b
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5frzavxzvcqht1tf2edbfxp
+hold: null
+hold_until: null
 created_at: 2026-10-22T01:28:48.887Z
-updated_at: 2026-10-22T01:28:48.887Z
+updated_at: 2026-10-22T09:06:38.196Z
+started_at: 2026-10-22T09:06:36.864Z
 ---
 Stage 4 for Francisco Couzo's in-corpus rows of issues 670, 672 and 675, registered at V0/C0 in the think-ql4v stage 4 pull request (branch claude/stoic-thompson-ku09fw) as T-226 (#670 at 204), T-227 (#672 at 227 and 229) and T-228 (#675 at 204); the ids are the branch's and may change in merge order. The 21 October review of T-225 measured #672's 227 certificate on its own checker for information only and does not cover these entries, so they stay at V0/C0 until a review covers them.
 
@@ -26,3 +29,8 @@ Stage 4 for Francisco Couzo's in-corpus rows of issues 670, 672 and 675, registe
 - Depends on: the think-ql4v stage 4 pull request merging (packets, receipts, entries).
 - Done when: the review is mapped and accepted with no blocking defect, confirming evidence entries added, and T-226, T-227 and T-228 raised to V3/C3 by check_results; T-227's raise then also lets the house rule weigh it at 227 behind T-225.
 - Machine note: seconds of CPU; shares the machine with any gate.
+
+## Notes
+
+2026-10-22 coord-intake-1021b: stage 4 mathematical review done by c-review-t226-t228-math (tbd strong tier, Claude Opus 5.5, reasoning xhigh; separate from the import lanes and #718's reviewers): all four certificates accepted for finite feasibility (T-226@204, T-227@227 and @229, T-228@204); clean-room two-route checker (integers only; Fraction with clipping area, every pair) agrees exactly with both maintained routes; sharp controls behave at all four; identity confirms T-225@227's credit. Significance: T-227 S3, T-226 S3 (low end; else T-223's 204 half should be S2), T-228 S2. Findings RF-1 (major: the manifests name jlevy/squares@37e6757 sqpack/verify.py as first checker, so the confirming replay is shared-components; earlier Couzo imports carry the same wrong sentence), RF-2..RF-8 minor/notes. Draft, programs and outputs: coordinator scratchpad review-t226-t228/. Lands in the next stage 4 PR (with #719's 105/204 stage 4, think-4h23): map the review, enter evidence, raise T-226..T-228, apply RF fixes.
+blocked_on: think-xyhn
