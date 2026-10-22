@@ -640,7 +640,7 @@ class PageMeta(NamedTuple):
     whatever draws a preview of a shared link (`head_tags`)."""
 
     name: str
-    """The page's own name, with no site name after it: `Every Result`. The overview's is
+    """The page's own name, with no site name after it: `Results`. The overview's is
     the project's name."""
     description: str
     """One or two plain sentences on this page and no other, `DESCRIPTION_LIMIT`
@@ -660,7 +660,7 @@ class PageMeta(NamedTuple):
 
 #: The records the results page and the frontier atlas write their heads from, named
 #: here because a forwarder to either previews it (`forwarded_metas`).
-RESULTS_META = PageMeta("Every Result", RESULTS_DESCRIPTION, RESULTS_PAGE)
+RESULTS_META = PageMeta("Results", RESULTS_DESCRIPTION, RESULTS_PAGE)
 ATLAS_META = PageMeta(
     "The Atlas of Square Packings",
     ATLAS_DESCRIPTION,
@@ -1545,7 +1545,7 @@ def results_page() -> Page:
         "EPISTEMICS_URL": "epistemics.html",
         # The overview above the table, from the same register (think-2z22): the last
         # seven days' arrivals, a block a day, then the weekly S3+ rollup before them. The
-        # heading's link names the section's own first day, so it lists the section's
+        # arrival link names the section's own first day, so it lists the section's
         # results on any day (#514's review A, finding A3); the last day's counts from
         # the reader's.
         "RECENT_ADDED": overview_sections.recent_added(overview),
@@ -1824,7 +1824,7 @@ def iter_result_fragments(*, result_ids: frozenset[str] | None = None) -> Iterat
             path,
             structured_data=(
                 breadcrumb_data(
-                    ("Home", "index.html"), ("Every Result", RESULTS_PAGE), (result.id, path)
+                    ("Home", "index.html"), (RESULTS_META.name, RESULTS_PAGE), (result.id, path)
                 ),
             ),
         )

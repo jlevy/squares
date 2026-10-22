@@ -31,6 +31,20 @@ void test("a key that is not a number sorts after every number", () => {
   assert.equal(table.compareKeys("", "", "num"), 0);
 });
 
+void test("optional missing-last sorting preserves numeric zero and stable empty ties", () => {
+  const keys = ["", "10", "0", "2", ""];
+  assert.deepEqual([...table.sortOrder(keys, "num", "ascending", true)], [2, 3, 1, 0, 4]);
+  assert.deepEqual([...table.sortOrder(keys, "num", "descending", true)], [1, 3, 2, 0, 4]);
+  assert.deepEqual(
+    [...table.sortOrder(["", "Beta", "Alpha"], "text", "ascending", true)],
+    [2, 1, 0],
+  );
+  assert.deepEqual(
+    [...table.sortOrder(["", "Beta", "Alpha"], "text", "descending", true)],
+    [1, 2, 0],
+  );
+});
+
 void test("equal keys keep their order", () => {
   const keys = ["open", "proved", "open", "proved"];
   assert.deepEqual([...table.sortOrder(keys, "text", "ascending")], [0, 2, 1, 3]);

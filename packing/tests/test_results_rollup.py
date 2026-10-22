@@ -169,10 +169,24 @@ def test_the_overview_sits_above_the_table_and_leaves_it_whole(
         results.index('<div class="site-rollup site-added">'),
         results.index('<h2 id="earlier-results-by-week-published">'),
         results.index('<div class="site-rollup">'),
-        results.index('<h1 id="all-results">'),
+        results.index('<h2 id="all-results">'),
         results.index("data-site-table"),
     ]
     assert order == sorted(order)
+    headings = re.findall(r"<h([1-6])\b[^>]*>(.*?)</h\1>", results, re.DOTALL)
+    assert [(level, re.sub(r"<[^>]+>", "", body)) for level, body in headings] == [
+        ("1", "Results"),
+        ("2", "Added in the Last Seven Days"),
+        ("2", "Earlier Publications"),
+        ("2", "Verification Ladders"),
+        ("2", "Evidence and Exactness"),
+        ("2", "Result Types and Credits"),
+        ("2", "Status and Supersession"),
+        ("2", "Browse Results"),
+    ]
+    assert not any(re.search(r"<a\b[^>]*\bhref=", body) for _, body in headings)
+    for anchor in ("every-result", "results-and-credits"):
+        assert results.count(f'id="{anchor}"') == 1
     rows = re.findall(r'<tr id="(t-\d{3})"', results)
     assert sorted(rows) == sorted(result.id.lower() for result in overview.results)
 
@@ -181,16 +195,19 @@ def test_the_introductions_state_the_window_and_the_floor_from_the_code(
     results: str, overview: overview_data.Overview
 ) -> None:
     """The template types neither the days, the floor nor the weeks: all are filled in.
-    The seven days' heading opens the table on the section's own days, from its first,
+    The introduction opens the table on the section's own days, from its first,
     `?added-since=`, so it lists the same results on any later day (#514's review A,
-    finding A3); the introduction links the last day's arrivals by the reader's day."""
+    finding A3); it also links the last day's arrivals by the reader's day."""
     first, last = _window(overview)
     days = ADDED_DAYS_WORD[ADDED_DAYS]
     assert (
-        '<h2 id="added-in-the-last-seven-days"><a href="results.html?added-since='
-        f'{first.isoformat()}#all-results">Added in the Last {days.capitalize()} Days</a></h2>'
+        f'<h2 id="added-in-the-last-seven-days">Added in the Last {days.capitalize()} Days</h2>'
     ) in results
     prose = " ".join(results.split())
+    assert (
+        '<a href="results.html?added-since='
+        f'{first.isoformat()}#all-results">Browse these arrivals</a>'
+    ) in prose
     assert f"reached this site over {span_label(first, last)} (its newest day and the" in prose
     last_day = '<a href="results.html?added-age=1#all-results">what arrived in the last day</a>'
     assert last_day in prose

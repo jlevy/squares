@@ -673,6 +673,55 @@ def test_generated_directory_keeps_native_profile_navigation(
         color_scheme="dark",
     ) as page:
         page.goto(f"{generated}profiles/index.html", wait_until="load")
+        directory = page.evaluate(LAYOUT)["directory"]
+        assert directory["headers"] == [
+            "Name",
+            "Records",
+            "Results",
+            "Credits",
+            "Years active",
+            "Resources",
+            "Accounts",
+        ]
+        name_keys = [row["keys"][0] for row in directory["rows"]]
+        assert name_keys == sorted(name_keys)
+        assert {item["column"] for item in directory["tallies"]} == {
+            "site-profile-records",
+            "site-profile-stats",
+            "site-profile-credits",
+        }
+        for item in directory["tallies"]:
+            assert item["levelsTop"] >= item["totalBottom"] - 1
+            assert item["totalColor"] == item["tallyColor"]
+            assert item["levelsColor"] != item["totalColor"]
+            assert all(color == item["levelsColor"] for color in item["levelLinkColors"])
+        if javascript:
+            assert (
+                page.get_by_role("columnheader", name="Name", exact=True).get_attribute(
+                    "aria-sort"
+                )
+                == "ascending"
+            )
+            for column, label in ((1, "Records"), (2, "Results"), (3, "Credits")):
+                heading = page.get_by_role("columnheader", name=label, exact=True)
+                heading.focus()
+                heading.press("Enter")
+                rows = page.evaluate(LAYOUT)["directory"]["rows"]
+                values = [int(row["keys"][column]) for row in rows]
+                assert values == sorted(values), label
+                assert heading.get_attribute("aria-sort") == "ascending"
+                heading.press("Space")
+                rows = page.evaluate(LAYOUT)["directory"]["rows"]
+                values = [int(row["keys"][column]) for row in rows]
+                assert values == sorted(values, reverse=True), label
+                assert heading.get_attribute("aria-sort") == "descending"
+            for label, column in (("Years active", 4), ("Resources", 5), ("Accounts", 6)):
+                heading = page.get_by_role("columnheader", name=label, exact=True)
+                for _ in range(2):
+                    heading.click()
+                    rows = page.evaluate(LAYOUT)["directory"]["rows"]
+                    missing = [not row["keys"][column].strip() for row in rows]
+                    assert missing == sorted(missing), label
         public = page.get_by_role("link", name="GitHub: evand (Evan Daniel)", exact=True)
         assert public.get_attribute("href") == "https://github.com/evand"
         page.route(

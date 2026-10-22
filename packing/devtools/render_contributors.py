@@ -23,13 +23,14 @@ from markdown_it import MarkdownIt
 
 from devtools.github_references import credit_reference_urls, render_github_references
 from devtools.overview_data import RESULTS
-from devtools.profile_links import link_prose, profile_names
+from devtools.profile_links import link_prose, profile_names, public_names
 from devtools.profile_records import current_record_ids, record_input_paths
 from devtools.record_presentation import record_index, record_tally
 from devtools.render_overview import (
     PACKING,
     REPO,
     RESULTS_PAGE,
+    TABLE_SCRIPT,
     Page,
     PageMeta,
     static_content_page,
@@ -118,6 +119,7 @@ def inputs() -> tuple[Path, ...]:
     return (
         Path(__file__).resolve(),
         DIRECTORY_SCRIPT,
+        TABLE_SCRIPT,
         PACKING / "devtools/profile_links.py",
         PACKING / "devtools/site_icons.py",
         PACKING / "devtools/site_resources.py",
@@ -649,6 +651,7 @@ def profile_summary(
         + " · ".join(
             (
                 people,
+                _plural(len(current_record_ids(result_ids, record_index())), "record"),
                 _plural(len(result_ids), "result"),
                 _plural(len(credit_pairs), "credit"),
                 _plural(len(resource_urls), "resource"),
@@ -695,6 +698,7 @@ def profile_table(
 ) -> str:
     """Full public names with separate primary-result and nonprimary-credit tallies."""
     records = _register_results() if results is None else results
+    names = public_names()
     rows = []
     for person in contributors:
         name = html.escape(person.real_name or person.display_name)
@@ -736,22 +740,31 @@ def profile_table(
         )
         if record_cell:
             record_cell = '<span class="site-credit-tally">' + record_cell + "</span>"
+        sort_name = html.escape(" | ".join(names[person.id].sort_key), quote=True)
+        record_count = len(current_record_ids(stats.results, record_index()))
         rows.append(
-            f'<tr><td><a href="{target}">{label}</a></td>'
-            f'<td class="site-profile-years">{html.escape(years) if years else ""}</td>'
-            f'<td class="site-profile-stats">{tally}</td>'
-            f'<td class="site-profile-records">{record_cell}</td>'
-            f'<td class="site-profile-credits">{credit_cell_markup}</td>'
+            f'<tr><td data-value="{sort_name}"><a href="{target}">{label}</a></td>'
+            f'<td class="site-profile-records" data-value="{record_count}">{record_cell}</td>'
+            f'<td class="site-profile-stats" data-value="{len(stats.results)}">{tally}</td>'
+            f'<td class="site-profile-credits" data-value="{len(stats.credited_results)}">'
+            f"{credit_cell_markup}</td>"
+            f'<td class="site-profile-years" data-value="{years[:4] if years else ""}">'
+            f"{html.escape(years) if years else ''}</td>"
             f'<td class="site-profile-resources">{resource_links(person)}</td>'
             f'<td class="site-profile-links">{account_links(person, compact=True)}</td></tr>'
         )
     return (
         '<div class="site-table-wrap site-wide">'
         '<table class="kpress-table site-table site-profile-table" data-contributor-plain '
-        'aria-label="Profiles"><thead><tr><th scope="col">Name</th>'
-        '<th scope="col">Years active</th>'
-        '<th scope="col">Results</th><th scope="col">Records</th><th scope="col">Credits</th>'
-        '<th scope="col">Resources</th><th scope="col">Accounts</th>'
+        'aria-label="Profiles"><thead><tr>'
+        '<th scope="col" data-sort="text" aria-sort="ascending">Name</th>'
+        '<th scope="col" data-sort="num">Records</th>'
+        '<th scope="col" data-sort="num">Results</th>'
+        '<th scope="col" data-sort="num">Credits</th>'
+        '<th scope="col" data-sort="num" data-sort-empty="last" '
+        'title="Sort by the first recorded activity year">Years active</th>'
+        '<th scope="col" data-sort="text" data-sort-empty="last">Resources</th>'
+        '<th scope="col" data-sort="text" data-sort-empty="last">Accounts</th>'
         "</tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>"
     )
 
@@ -982,7 +995,10 @@ def contributor_pages() -> list[Page]:
     )
     pages = [
         static_content_page(
-            directory, meta=DIRECTORY_META, current="about", page_scripts=(DIRECTORY_SCRIPT,)
+            directory,
+            meta=DIRECTORY_META,
+            current="about",
+            page_scripts=(TABLE_SCRIPT, DIRECTORY_SCRIPT),
         )
     ]
     pages.extend(

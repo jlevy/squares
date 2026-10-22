@@ -1,9 +1,8 @@
 """The other projects' order, their tallies of results, and the links the tallies carry.
 
-The overview's Other Square Packing Projects section leads with the catalogues of the
-record packings (the owner, 2026-10-05) and then lists each project, on GitHub or off
-it, by the significance of the results the register cites from it (the owner,
-2026-10-01). A card with registered results ends with a tally, `6 results (3 at S4, 3 at
+The overview and profile resources rank catalogues, repositories and websites together
+by the significance of the primary results the register attributes to each. A card
+with registered results ends with a tally, `6 results (3 at S4, 3 at
 S3)`, whose total opens the results table on that project's results and whose counts
 open it at one significance level.
 
@@ -27,7 +26,7 @@ from dataclasses import dataclass
 from datetime import datetime, time
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import pytest
 
@@ -115,6 +114,67 @@ def test_projects_level_on_every_count_stand_newest_first_then_by_name() -> None
     # The name that breaks a tie is the one given for the project, not its key.
     renamed = {**names, "a": "zeta"}
     assert project_order(tallies, renamed) == ["c", "a", "b", "d", "Y", "z"]
+
+
+@pytest.mark.parametrize("on_profile", [False, True], ids=["homepage", "profile"])
+def test_shared_resource_cards_rank_every_kind_and_ignore_inventory_order(
+    monkeypatch: pytest.MonkeyPatch, *, on_profile: bool
+) -> None:
+    """A pinned catalogue or an unranked personal site cannot jump above S5 work."""
+    titles = {
+        "catalogue": "Catalogue",
+        "strong": "Strong",
+        "mixed": "Mixed",
+        "recent": "Recent",
+        "old": "Old",
+        "zero-a": "Shared",
+        "zero-b": "Shared",
+        "personal": "Personal website",
+    }
+    urls = {name: f"https://example.org/{name}" for name in titles}
+    records = tuple(
+        site_resources.Resource(
+            urls[name], title, "", "", (), "catalogue" if name == "catalogue" else "website"
+        )
+        for name, title in titles.items()
+    )
+    cited = [
+        Cited("T-1", 5, "2025-01-01", tuple(urls[name] for name in ("strong", "mixed", "old"))),
+        Cited("T-2", 5, "2026-01-01", (urls["strong"], urls["recent"])),
+        Cited("T-3", 4, "2026-01-01", (urls["mixed"],)),
+        *(Cited(f"T-c{i}", 4, "2026-10-01", (urls["catalogue"],)) for i in range(9)),
+    ]
+    tallies = project_tallies(
+        [url for name, url in urls.items() if name != "personal"], cited, LEVELS
+    )
+    monkeypatch.setattr(overview_sections, "_profile_resource_tallies", lambda: tallies)
+    monkeypatch.setattr(overview_sections, "listed_projects", lambda _: list(tallies.items()))
+    monkeypatch.setattr(overview_sections, "significance_levels", lambda: LEVELS)
+
+    def card(resource: site_resources.Resource, _tally: ProjectTally, **_kwargs: object) -> str:
+        return f'<a href="{resource.url}">{resource.title}</a>'
+
+    monkeypatch.setattr(overview_sections, "resource_card", card)
+    expected = [
+        urls[name]
+        for name in (
+            "strong",
+            "mixed",
+            "recent",
+            "old",
+            "catalogue",
+            "personal",
+            "zero-a",
+            "zero-b",
+        )
+    ]
+    for supplied in (records, tuple(reversed(records))):
+        rendered = overview_sections.resource_cards(
+            supplied,
+            overview=None if on_profile else cast(overview_data.Overview, object()),
+            current_profile="person" if on_profile else None,
+        )
+        assert re.findall(r'href="([^"]+)"', rendered) == expected
 
 
 def test_project_bylines_link_known_people_and_keep_organizations_plain(
@@ -361,18 +421,17 @@ def _cards(page: str) -> list[tuple[str, str]]:
 def test_the_page_lists_the_projects_in_the_functions_order(
     page: str, overview: overview_data.Overview, project_inputs: _ProjectInputs
 ) -> None:
-    """The rendered order is the catalogues as `CATALOGUE_SITES` writes them, then
-    `ranked_projects`, computed from the register; the lists in the source keep no
-    order of their own. Checked against the register directly: after the catalogues the
-    tuple of counts never rises down the page, and the projects with no registered
-    result come last, by name."""
+    """All resource kinds share the register's descending significance order.
+
+    No catalogue prefix may interrupt the count vector, and resources with no
+    registered result come last, by name.
+    """
     ranked = overview_sections.ranked_projects(overview)
-    catalogues = [url for url, _, _, _ in overview_sections.CATALOGUE_SITES]
-    assert [url for url, _ in _cards(page)] == [*catalogues, *(url for url, _ in ranked)]
+    assert [url for url, _ in _cards(page)] == [url for url, _ in ranked]
     assert [url for url, _ in overview_sections.listed_projects(overview)] == [
         url for url, _ in _cards(page)
     ]
-    assert {*catalogues, *(url for url, _ in ranked)} == set(overview_sections.project_urls())
+    assert {url for url, _ in ranked} == set(overview_sections.project_urls())
     keys = []
     for url, _ in ranked:
         own = _attributed(overview, url, project_inputs)

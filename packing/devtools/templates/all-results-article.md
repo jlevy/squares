@@ -1,22 +1,22 @@
 <div class="site-hero">
 
-# Every Result
+<h1 id="every-result">Results</h1>
 
 </div>
 
-## [Added in the Last {{ADDED_DAYS_TITLE}} Days]({{ADDED_LINK}})
+## Added in the Last {{ADDED_DAYS_TITLE}} Days
 
 Every result that reached this site over {{ADDED_SPAN}} (its newest day and the
 {{ADDED_DAYS}} before it), at any significance, by the day it arrived, newest first.
 Each id leads to its row in the table below; S4 and S5 are marked, and a muted entry
 says it has since been superseded.
-The heading opens the table on these days’ arrivals and each day’s link on that day’s;
-[what arrived in the last day]({{ADDED_LAST_DAY}}) counts whole days on the same
+[Browse these arrivals]({{ADDED_LINK}}) in the table, or open each day’s link for that
+day; [what arrived in the last day]({{ADDED_LAST_DAY}}) counts whole days on the same
 calendar as these dates.
 
 {{RECENT_ADDED}}
 
-## Earlier Results by Week Published
+<h2 id="earlier-results-by-week-published">Earlier Publications</h2>
 
 Results at {{ROLLUP_FLOOR}} and above from the {{ROLLUP_WEEKS}} before {{ADDED_FIRST}},
 by the week each was published (or established, for this project’s own), with who found
@@ -59,7 +59,7 @@ These checks also audit published work: T-004 and T-008 check Bentz’s 2010 The
 including both halves of $s(46) = 7$, and T-011 checks Trump’s 1979 packing for eleven
 squares. The theorem remains the source’s; this repository adds an exact machine check.
 
-## Results and Credits
+<h2 id="results-and-credits">Result Types and Credits</h2>
 
 A result’s kind is *lower bound*, *upper bound*, *optimality* (settling an exact value),
 or a kind that bounds no case, such as *rigidity*, *case exclusion*, *simplification* (a
@@ -94,7 +94,7 @@ full record lists every replacement.
 
 The [overview](./#recent-results) highlights recent major results.
 
-# All Results
+<h2 id="all-results">Browse Results</h2>
 
 {{RESULTS_TABLE}}
 

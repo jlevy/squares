@@ -1116,12 +1116,12 @@ contributor articles use their component sheets and the same text tokens.
   margin above and starts `--site-page-top` under the header.
   A page that has a title (the Frontier page, the Results page, the Papers page, the
   canonical case record) sets it in the hero, centred.
-  The Frontier page’s title is “The Frontier Survey”, the Results page’s “Every Result”
-  and the Explanations page’s “Explanations”; each stood over a subtitle the owner
-  dictated on 1 October (“A survey of everything known for cases $n = 1, \ldots, 324$”,
-  “A survey of all reviewed results”, “Papers and interactive explanations for specific
-  results”) and dropped on 2 October as adding little (`think-wz9d`); the page
-  descriptions in each `<head>` are their own constants and stay.
+  The Frontier page’s title is “The Frontier Survey”, the Results page’s “Results” and
+  the Explanations page’s “Explanations”; each stood over a subtitle the owner dictated
+  on 1 October (“A survey of everything known for cases $n = 1, \ldots, 324$”, “A survey
+  of all reviewed results”, “Papers and interactive explanations for specific results”)
+  and dropped on 2 October as adding little (`think-wz9d`); the page descriptions in
+  each `<head>` are their own constants and stay.
   Individual case pages use their own case heading; the Atlas replaces the former
   separate case-directory hero and index (**Case records**, below).
   A subtitle, where a page has one, is the sans face at 1.1 times the sans base
@@ -1373,29 +1373,23 @@ contributor articles use their component sheets and the same text tokens.
   The cards’ widths, rows and centring are the same with a foot as without
   (`measure_site_pages cards`, at 1280, 1024, 768 and 390).
 
-- **Other projects.** The overview’s Other Square Packing Projects section leads with
-  three websites, the catalogues of the record packings, in the order `CATALOGUE_SITES`
-  writes them: David Ellsworth’s Squares in Squares (the record’s `[Kingbird]`), Erich
-  Friedman’s original page at the archived address the catalogue links, and Evan
-  Daniel’s Square Packing Atlas (the owner, 2026-10-05). Every other card, a repository
-  on GitHub (`OTHER_PROJECTS`) or a place off it the record cites results from
-  (`OTHER_SITES`: posts, a release, a Zenodo record), follows them, ordered by the
-  significance of the results the register cites from each project (the owner,
-  2026-10-01): by how many of its results stand at S5, then at S4, and so on down the
-  scale, more first at each level and compared in that order, so one result at S5 stands
-  before any number below it.
-  Projects level on every count stand by their newest result, the most recent first, and
-  then by repository name; a project with no registered result comes last, by name.
-  The order is computed from `results.yaml` when the page is rendered
-  (`overview_sections.ranked_projects`, over `project_tallies` and `project_order`) and
-  is kept nowhere by hand; the section’s introduction says the rule in a sentence.
-  A result is a project’s where its `attribution.source_keys` names a bibliography key
-  the source-coverage register gives a source at the project’s address
-  (`project_source_keys`; `PROJECT_EXTRA_KEYS` adds a key two places share, and
-  `SOURCE_VENUES` every key the bibliography files under the catalogue’s venue), and a
-  result attributed to sources of several listed projects counts for each.
-  This project’s own results, and results by others from a source no listed project
-  holds, count for none.
+- **Other projects.** Homepage and profile Resources cards rank catalogues, repositories
+  and other cited websites together.
+  The catalogue inventory includes David Ellsworth’s Squares in Squares (the record’s
+  `[Kingbird]`), Erich Friedman’s archived page and Evan Daniel’s Square Packing Atlas;
+  none receives a fixed position ahead of the significance order.
+  Cards sort by their primary-authored result counts at S5, then S4, down through S1,
+  descending at every level, so one result at S5 stands before any number below it.
+  Ties sort by newest result first, then displayed resource name and exact URL.
+  Resources with no registered primary result follow those with results, by name and
+  URL. The same rule sorts each profile’s subset, including evidenced personal websites
+  with no registered result.
+  The order is computed from `results.yaml` when rendered (`ranked_projects`,
+  `resource_cards` and the shared `project_order`); inventory insertion order is not a
+  presentation rule. A project’s source keys define its scope (`project_source_keys`,
+  with `PROJECT_EXTRA_KEYS` and `SOURCE_VENUES` for shared packets and catalogue
+  venues). Reviewed person roles determine which scoped results count as primary Results
+  and which count as received Credits; source-key presence alone establishes neither.
   A card’s repository or website title opens that source.
   Below the repository heading, its byline begins with “By” and the author: a known
   person links to their profile using the shared surname label, while an organization or
@@ -2669,24 +2663,21 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   The legacy `all-results.html` address forwards here, preserving the query string and
   fragment. Current navigation, buttons, cards and record links name `results.html`
   directly; only the legacy address remains in the compatibility registry.
-  The page has the Frontier page’s shape: a hero title, “Every Result”, whose id is
-  `every-result`, a subtitle, the prose that names the three ratings and points at the
-  ladders, defines the kinds, statuses and dating rule, with how many results stand at
-  each status where the statuses are defined (`status_counts`, each count the link to
-  those rows), and the table under its filters (**Result filters**, above), which start
-  with significance at All, no maximum age and Hide superseded clear, so every result
-  shows, newest first, in one flat list.
-  Under the table stands **Verification Ladders** (`#verification-ladders`, with the
-  empty anchor `#verification-at-a-glance` the section carried on the homepage), since
-  2026-10-02 (the owner, `think-hqb3`): a lead that defines the three ratings once, S, V
-  and C in the ladder heads’ words, with the policy for results by others; the diagram
-  (**Rating ladders**, above); and then what the diagram does not show, the three
-  assurance labels on evidence, where finite precision falls short, and the audit of
-  published work. It stands under the table rather than above it so a reader meets the
-  table without a long preamble; the opening paragraph points down to it, and the
-  homepage’s Recent Results links it.
-  Each row keeps its id, the result’s own (`#t-018`), which is where the overview’s
-  recent table and each case record’s results link.
+  The page has one hero title, “Results”, retaining `#every-result` for existing links.
+  Its sections are “Added in the Last Seven Days”, “Earlier Publications”, “Verification
+  Ladders”, “Evidence and Exactness”, “Result Types and Credits”, “Status and
+  Supersession”, and “Browse Results”.
+  Heading text is not a navigation link; the recent-arrivals filter link lives in the
+  introductory paragraph.
+  Renamed sections preserve their former anchor IDs, including `#all-results` for the
+  table and `#earlier-results-by-week-published` for the publication rollup.
+  The ratings and status explanations precede the table.
+  Verification Ladders retains `#verification-ladders` and the compatibility anchor
+  `#verification-at-a-glance`. The status counts (`status_counts`) link to the
+  corresponding rows. Table filters (**Result filters**, above) start with significance
+  at All, no maximum age and Hide superseded clear, so every result shows, newest first,
+  in one flat list. Each row keeps its id, the result’s own (`#t-018`), which is where
+  the overview’s recent table and each case record’s results link.
   A row opens its result’s popover, the full claim and its novelty label, with the id in
   its first cell as the trigger (**Row popovers**, above).
   The overview keeps the newest results and ends that table with a “All Results” line
@@ -2900,9 +2891,15 @@ Their content role is primary; an account handle is not muted metadata.
 Evidence and breadcrumb metadata may retain the secondary text role.
 
 The profile directory at `profiles/` is a native table: full real or public **Name**,
-**Years active**, **Results**, **Records**, **Credits**, **Resources**, and
-**Accounts**. It sorts by the shared evidenced surname key, falling back to the public
-handle when no surname is established.
+**Records**, **Results**, **Credits**, **Years active**, **Resources**, and
+**Accounts**. Its default order uses the shared evidenced surname key, falling back to
+the public handle when no surname is established.
+Every column uses the Results table’s shared sortable-heading interaction: pointer,
+Enter and Space update the order and `aria-sort`, while the initial Name order remains
+announced. Tally columns sort their numeric counts, including zero when its display cell
+is blank. Years active sorts by the first recorded activity year.
+Missing years, resources and accounts stay last in either direction.
+Native anchors and the complete surname-ordered table remain available without scripts.
 The directory name contains only the full real or public name.
 Additional handles appear on the individual profile, while account usernames remain in
 the Accounts column.
@@ -2917,10 +2914,12 @@ would squeeze names.
 Resource addresses wrap at normal URL boundaries, with an emergency break for a segment
 too long to fit. Icons stay beside the first line.
 
-The directory introduction totals people, distinct primary results, credited
-person/result pairs and unique linked resources.
-Shared results and resources count once across the directory, while each person retains
-their own counts in the table.
+The directory introduction totals people, distinct supported current Records, distinct
+primary Results, credited person/result pairs and unique linked resources.
+Records are the intersection of the union of primary-authored result IDs with the shared
+current-record index; global records without a profiled primary author do not inflate
+this total. Shared Records, Results and Resources count once across the directory, while
+each person retains their own counts in the table.
 Years active uses evidenced dates of the person’s own authored or established work,
 including original publications without a dedicated registered result.
 A later result citing that work does not extend the original author’s activity range.
@@ -2930,7 +2929,9 @@ range. Unknown years stay blank.
 
 Results and Credits occupy separate directory columns.
 A zero result or credit count leaves its cell blank.
-Both nonzero columns use the shared significance breakdown.
+The Records, Results and Credits cells keep each nonzero total on its first line and
+start the muted parenthetical significance breakdown on the next line.
+The shared tally remains inline outside the directory table.
 [Attribution Policy](../../../attribution.md) defines the two disjoint per-person
 buckets: Results are primary-authored results; Credits are results that explicitly
 credit the person in another role.

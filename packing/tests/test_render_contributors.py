@@ -18,6 +18,7 @@ from devtools import (
     site_urls,
     validate_schemas,
 )
+from devtools.profile_records import RecordIndex
 from devtools.repo_links import RepositoryTree, repo_url
 from devtools.result_credit import PROJECT_AUTHOR_ORIGIN
 from devtools.site_resources import Resource
@@ -42,11 +43,20 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     index = pages["profiles/index.html"]
     assert "<h1>Profiles</h1>" in index
     assert 'class="kpress-table site-table site-profile-table"' in index
-    assert '<th scope="col">Name</th>' in index
-    assert (
-        '<th scope="col">Results</th><th scope="col">Records</th><th scope="col">Credits</th>'
-    ) in index
-    assert '<th scope="col">Resources</th><th scope="col">Accounts</th>' in index
+    assert re.findall(r"<th\b[^>]*>([^<]+)</th>", index) == [
+        "Name",
+        "Records",
+        "Results",
+        "Credits",
+        "Years active",
+        "Resources",
+        "Accounts",
+    ]
+    assert index.count('data-sort="num"') == 4
+    assert index.count('data-sort="text"') == 3
+    assert 'data-sort="text" aria-sort="ascending">Name</th>' in index
+    assert re.search(r'src="../assets/js/table\.[a-f0-9]+\.js"', index)
+    assert render_overview.TABLE_SCRIPT in render_contributors.inputs()
     assert '<div class="site-table-wrap site-wide">' in index
     assert (
         "Results count distinct registered results by their reviewed primary authors" in index
@@ -716,7 +726,12 @@ def test_identity_evidence_names_each_claimed_value() -> None:
     assert "<b>" not in rendered
 
 
-def test_directory_summary_unions_work_and_years_exclude_import_dates() -> None:
+def test_directory_summary_unions_work_and_years_exclude_import_dates(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        render_contributors, "record_index", lambda: RecordIndex(("T-201",), {}, {})
+    )
     registry = load_contributors()
     people = [registry.by_id["manasseh-ahmed"], registry.by_id["nate-chaoweeraprasit"]]
     first = _credit("[A]", "/authors/0", "Ahmed", "source-author", people[0].id)
@@ -741,7 +756,7 @@ def test_directory_summary_unions_work_and_years_exclude_import_dates() -> None:
     summary = render_contributors.profile_summary(
         people, (first, first, second, case), results=records, resources=(resource, resource)
     )
-    assert "2 people · 1 result · 0 credits · 1 resource" in summary
+    assert "2 people · 1 record · 1 result · 0 credits · 1 resource" in summary
     assert render_contributors.profile_years(people[0].id, (first,), records) is None
 
 
@@ -789,8 +804,9 @@ def test_credit_thread_references_stay_with_the_result_they_document(
 def test_directory_unknown_years_and_zero_work_cells_are_blank() -> None:
     person = load_contributors().by_id["manasseh-ahmed"]
     table = render_contributors.profile_table((person,), (), results=())
-    assert '<td class="site-profile-years"></td>' in table
-    assert '<td class="site-profile-stats"></td>' in table
-    assert '<td class="site-profile-credits"></td>' in table
+    assert '<td class="site-profile-years" data-value=""></td>' in table
+    assert '<td class="site-profile-stats" data-value="0"></td>' in table
+    assert '<td class="site-profile-credits" data-value="0"></td>' in table
+    assert '<td class="site-profile-records" data-value="0"></td>' in table
     assert "0 results" not in table
     assert "0 credits" not in table

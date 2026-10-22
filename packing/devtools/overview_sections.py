@@ -882,7 +882,7 @@ def result_filters(
     Added since, which holds it to that day or later (`since`). Each is `hidden` in the
     HTML and starts at all. A link sets them, `results.html?project=…&s=4`, as the
     tallies on the other projects' cards do (`project_tally`), each day of the
-    overview's seven does (`?added=2026-10-12`) and its heading does
+    overview's seven does (`?added=2026-10-12`) and its arrival link does
     (`?added-since=2026-10-06`, `recent_added`), and the script shows a preset control
     while it filters, so the reader sees what narrows the table and can set it back to
     All. A preset value no option offers is kept and applied, so it shows no row.
@@ -1206,7 +1206,7 @@ def results_table(overview: Overview, defaults: FilterDefaults = RESULTS_DEFAULT
 #: How far back "Added in the Last Seven Days" reaches: every result that reached the
 #: site at most this many days before the newest arrival (`added_since`), which is what
 #: `results.html?added-age=7` shows when read on that day (`age_cutoff`), and what the
-#: heading's `?added-since=` shows on any day.
+#: arrival link's `?added-since=` shows on any day.
 ADDED_DAYS = 7
 #: The count of days as the section's heading and introduction write it.
 ADDED_DAYS_WORD = {7: "seven"}
@@ -1215,7 +1215,7 @@ ADDED_OPEN = 2
 #: The longest list of cases an entry writes whole (`added_cases`). A longer one, T-124's
 #: 178 counts among them, is written as how many and its first and last.
 ADDED_CASES = 40
-#: The id of the table's heading, `# All Results`, where a filter link lands.
+#: The id of the table's Browse Results heading, where a filter link lands.
 ALL_RESULTS = "all-results"
 #: The lowest significance the weekly rollup lists: `S3`, "a substantive case result
 #: or machine audit" (epistemics.md, Significance and Novelty), and above. The owner
@@ -1308,7 +1308,7 @@ def added_reference(overview: Overview) -> date:
 def added_since(overview: Overview, days: int = ADDED_DAYS) -> date:
     """The first day "Added in the Last Seven Days" covers: `days` before the newest
     arrival (`added_reference`), the cutoff `?added-age=7` holds a row to when read on
-    that day (`age_cutoff`) and the day the heading's `?added-since=` names."""
+    that day (`age_cutoff`) and the day the arrival link's `?added-since=` names."""
     return added_reference(overview) - timedelta(days=days)
 
 
@@ -2567,23 +2567,16 @@ def _tallied(urls: Sequence[str], overview: Overview) -> dict[str, ProjectTally]
 
 
 def ranked_projects(overview: Overview) -> list[tuple[str, ProjectTally]]:
-    """The projects the page ranks, every listed one but the catalogues, in the order it
-    shows them (`project_order`), each with its tally: read from the register when the
-    page is rendered, never kept by hand."""
-    urls = [*(url for url, _, _, _ in OTHER_SITES), *(url for url, _, _ in OTHER_PROJECTS)]
+    """Every resource kind by descending S5-to-S1 counts, newest result, name and URL."""
+    urls = project_urls()
     tallies = _tallied(urls, overview)
-    slugs = {project_slug(url): url for url in urls}
-    names = {slug: project_headline(url) for slug, url in slugs.items()}
-    ordered = project_order({slug: tallies[url] for slug, url in slugs.items()}, names)
-    return [(slugs[slug], tallies[slugs[slug]]) for slug in ordered]
+    names = {url: project_headline(url) for url in urls}
+    return [(url, tallies[url]) for url in project_order(tallies, names)]
 
 
 def listed_projects(overview: Overview) -> list[tuple[str, ProjectTally]]:
-    """Every card of the Other Square Packing Projects section in page order, each with
-    its tally: the catalogues as `CATALOGUE_SITES` writes them, then `ranked_projects`."""
-    catalogues = [url for url, _, _, _ in CATALOGUE_SITES]
-    tallies = _tallied(catalogues, overview)
-    return [(url, tallies[url]) for url in catalogues] + ranked_projects(overview)
+    """One significance order for catalogues, repositories and other source cards."""
+    return ranked_projects(overview)
 
 
 def results_filter_url(project: str, level: int | None = None) -> str:
@@ -2711,20 +2704,20 @@ def resource_cards(
     tallies = (
         _profile_resource_tallies() if overview is None else dict(listed_projects(overview))
     )
+    by_url = {record.url: record for record in records}
+    empty = ProjectTally((), tuple((level, 0) for level in significance_levels()), "")
+    selected = {url: tallies.get(url, empty) for url in by_url}
+    order = project_order(selected, {url: record.title for url, record in by_url.items()})
     return _cards(
         [
-            resource_card(
-                record,
-                tallies.get(record.url, ProjectTally((), (), "")),
-                current_profile=current_profile,
-            )
-            for record in records
+            resource_card(by_url[url], selected[url], current_profile=current_profile)
+            for url in order
         ]
     )
 
 
 def other_project_cards(overview: Overview) -> str:
-    """The shared source cards in the established significance and catalogue order."""
+    """The shared source cards in descending significance order across every kind."""
     by_url = {resource.url: resource for resource in resources()}
     return resource_cards(
         [by_url[url] for url, _ in listed_projects(overview)], overview=overview

@@ -159,6 +159,9 @@
   display: block;
   min-inline-size: 8rem;
 }
+.site-profile-table .site-tally-levels {
+  display: block;
+}
 .site-profile-table tbody tr[data-profile-ready] {
   cursor: pointer;
 }

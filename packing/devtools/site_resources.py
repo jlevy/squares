@@ -101,8 +101,9 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         (
             "Improved packings for 49 counts from n = 68 to 307. "
             "Exact rational certificates at 204 and 260 (T-223), replayed and reviewed "
-            "here, are the house best packings there; the earlier refinements of issue451 "
-            "(T-128) and their follow-up (T-130), replayed here, have since been superseded."
+            "here, supplied earlier house packings; Daniel's regularized views (T-225) "
+            "have since replaced them. The earlier refinements of issue451 (T-128) and "
+            "their follow-up (T-130), replayed here, have also been superseded."
         ),
     ),
     (
@@ -201,9 +202,10 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://github.com/JoostdeWinter/square-packing",
         "Joost de Winter",
         (
-            "Exact rational certificates for 227, 229 and 260 squares, replayed and"
-            " reviewed here (T-196); the house best packing at 227, and at 260 until"
-            " T-223 replaced it on 21 October."
+            "Exact rational certificates for 227, 229 and 260 squares, replayed and "
+            "reviewed here (T-196). The house packing at 260 was replaced by T-223 on "
+            "21 October; Daniel's regularized views (T-225) now supply the house "
+            "packings at 227, 229 and 260."
         ),
     ),
     (

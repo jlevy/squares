@@ -563,9 +563,9 @@ def test_a_forwarder_previewing_its_page_by_another_name_kind_or_sentence_is_nam
     assert said in forwarder
     for old, new, finding in (
         (
-            "Every Result",
+            render_overview.RESULTS_META.name,
             "All Results",
-            "its og:title is ['All Results'], and the page's own is ['Every Result']",
+            "its og:title is ['All Results'], and the page's own is ['Results']",
         ),
         (
             'og:type" content="website"',
@@ -994,7 +994,7 @@ def test_head_checks_report_one_line_a_page_a_forwarder_and_the_card(card: bytes
         == f"forwarder all-results.html: previews {target} as that page's own head does"
     )
     # The same forwarder under another name fails beside the page, and passes alone.
-    renamed = forwarder.replace("Every Result", "All Results")
+    renamed = forwarder.replace(render_overview.RESULTS_META.name, "All Results")
     results = head_checks({"results.html": page}, {"all-results.html": (renamed, target)}, card)
     assert [passed for passed, _ in results] == [True, True, False, True]
     results = head_checks({}, {"all-results.html": (renamed, target)}, card)
