@@ -5,7 +5,7 @@ title: "Import Mishapolk: 122 upper bounds at 105–1568, incl. 105 and 204 in t
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T06:11:32.271Z
-updated_at: 2026-10-22T06:48:13.655Z
+updated_at: 2026-10-22T08:07:36.992Z
 started_at: 2026-10-22T06:11:33.610Z
 ---
 Issue #719 (https://github.com/jlevy/squares/issues/719), opened 2026-10-22T05:30:47Z by Mishapolk (Mikhail Polk; repository Mishapolk/square-packing-records): 122 claimed strict improvements at N in [105, 1568], two in the case corpus (105: 5.18e-12 below the catalogue witness; 204: 1.006e-8 below T-225, the house since #718), 112 beyond the horizon at or below 1024, 8 above 1024 (1061-1568; owner decision D1, think-f2io). Many margins are ~1e-12 (likely re-solves of existing arrangements); several are 1e-4 to 2e-3 (447, 553, 601, 652, 701). Stage 0 owner; stage 1 triage (read-only, priced) first.
@@ -169,4 +169,6 @@ every .cert blob and index bound in the Couzo, Daniel and de Winter histories be
 github-stacked-prs grant. If you choose to wait for #720 to merge instead, replace it
 with `blocked_on: jlevy/squares#720`. The rows above 1024 wait on think-f2io in child bead
 2, not here. -->
+
+2026-10-22 coord-intake-1021b: deferred from #720 review B (https://github.com/jlevy/squares/pull/720#issuecomment-6335921422) to this import, which is where they bite: B1 (Medium) beyond_horizon_replay.coverage_problems (:826-830) still requires each planned row to match exactly, including the 8 current #670 rows; #719 prints below #670 at 370, 452 and 536, so this import will fail --records with "the register's row is not the plan's": make coverage_problems accept a successor outside the walk (consistent with chain_problems), with a test. B2 (Low) the register notes for #678 and #715 (source-coverage.yaml:6127-6129, :7612-7616) still give the old supersession counts (57 + 2, 29; now 11 + 0 and 21): this import rewrites those sources' dated sentences; correct them then. B4 (suggestion) chain_problems prints "names X, not X" when the successor is right but the disposition is wrong: clarify the message.
 blocked_on: jlevy/squares#720
