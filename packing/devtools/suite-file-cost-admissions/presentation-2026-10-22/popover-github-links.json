@@ -1,0 +1,60 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 16,
+  "seconds": 32.93,
+  "files": [
+    {
+      "file": "packing/tests/test_site_github_links.py",
+      "tests": 7,
+      "seconds": 14.146
+    },
+    {
+      "file": "packing/tests/test_site_popover_controls.py",
+      "tests": 9,
+      "seconds": 18.784
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_site_github_links.py",
+      "packing/tests/test_site_popover_controls.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_site_github_links.py": 7,
+      "packing/tests/test_site_popover_controls.py": 9
+    },
+    "deselected_tests": 0
+  }
+}

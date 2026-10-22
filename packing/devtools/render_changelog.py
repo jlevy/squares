@@ -1047,7 +1047,7 @@ def render_news(
         limited = f' data-news-limit="{limit}"'
     out = [
         filters,
-        f'<div class="site-news sans-text" data-news{limited} data-contributor-plain>',
+        f'<div class="site-news" data-news{limited} data-contributor-plain>',
     ]
     seen_dates: set[str] = set()
     for entry in entries:
@@ -1068,9 +1068,12 @@ def render_news(
         )
         from devtools.profile_links import link_prose  # noqa: PLC0415
 
+        article.append('<div class="site-news-prose kpress-prose">')
         article.append(link_prose(_prose(entry["summary"], destination="site")))
         if "details" in entry:
             article.append(link_prose(_prose(entry["details"], destination="site")))
+        article.append("</div>")
+        article.append('<div class="site-news-records sans-text">')
         article.extend(
             _prose(field, destination="site")
             for field in _entry_lines(
@@ -1078,6 +1081,7 @@ def render_news(
             )
             if field
         )
+        article.append("</div>")
         article.append("</article>")
         card = news_card(anchor, entry["date"], "\n".join(article))
         card = card.replace(

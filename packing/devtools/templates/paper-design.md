@@ -1005,7 +1005,13 @@ contributor articles use their component sheets and the same text tokens.
 - **News.** News is the second navigation item and carries eligible public
   announcements. The changelog record retains excluded historical entries and their
   reasons; `CHANGELOG.md` contains the complete history.
-  Its H1 uses the shared sans-serif caps; its operational text uses the sans face.
+  Its H1 uses the shared sans-serif caps.
+  Factual and mathematical body paragraphs and lists use the shared prose role, which
+  defaults to serif text and mathematics and follows the reader’s font preference.
+  Titles, dates, topic chips, significance, artifact and publication metadata,
+  references and controls use the sans face.
+  Dates and publication records use the shared support gray; the main prose retains the
+  normal foreground and metadata links keep the shared link affordance.
   Each eligible entry is one hairline-bordered card containing its actual article once.
   News and Explanations share an article heading: an optional eyebrow, the title, the
   original publication date, then optional topic tags and significance metadata.
@@ -1033,7 +1039,10 @@ contributor articles use their component sheets and the same text tokens.
   meter at the right below the date, followed by the article.
   The chips retain shared fills, corners and leading at 85% of the note-size chip scale.
   Shared article headers place 0.3rem between title and date; News uses a 0.25rem header
-  gap, 0.4rem before the body and 0.5rem between body paragraphs.
+  gap and 0.4rem after the header.
+  The prose block adds 0.25rem of padding above and below its text, with 0.5rem between
+  paragraphs. Publication records start 1rem below the prose block and have their own
+  sans wrapper so formulas follow the text role of their block.
   Homepage News and the archive use the same card renderer and CSS roles.
   Every post has an explicit importance score and a plain rationale.
   The meter’s accessible label names its S level; its shared tooltip gives the level’s
@@ -1294,10 +1303,20 @@ contributor articles use their component sheets and the same text tokens.
   sans, closed by its `×`, by Escape, or by a click outside, and it works without
   scripting. A card, popover or direct, gains a gentle wash on hover.
   Every popover has the same margin on all four sides, `--site-popover-pad` (1.75rem;
-  1.1rem on a phone). Its `×` is a 2.75rem square tap target (`--site-popover-close`) set
-  0.6rem in from the corner (0.25rem on a phone), washed on hover.
-  Only the first block after it keeps clear of it, so the margins stay even everywhere
-  else. A popover’s height has one limit, the window’s: `--site-popover-max-block`, the
+  1.1rem on a phone). Its header groups the Lucide maximize and close icons at the upper
+  right, each in a 2.75rem square tap target (`--site-popover-close`), set 0.6rem in
+  from the corner (0.25rem on a phone) and washed on hover or keyboard focus.
+  The maximize link sits immediately left of Close, uses the bottom full-page action’s
+  destination and accessible label, and leaves that bottom action in place.
+  A panel with no full page, including a detail whose action only scrolls within its
+  host page, has Close alone.
+  Case stepping and profile replacement update both full-page links together; opening
+  either article still puts keyboard focus on Close.
+  The controls use the same 1.25rem Lucide icon size, and the case controls stay in
+  reach while its panel scrolls.
+  Only the first text block reserves their combined width; the article keeps its full
+  measure and the margins stay even elsewhere.
+  A popover’s height has one limit, the window’s: `--site-popover-max-block`, the
   window’s height less `--site-popover-window-margin` above and below, which is 4% of
   that height and never under 1rem nor over 3rem. A card’s or a row’s popover, the case
   popover and a result overview may be that tall and scroll inside past it, each as one
@@ -1404,7 +1423,7 @@ contributor articles use their component sheets and the same text tokens.
   counts unresolved. Acknowledgments and later citations do not establish authorship.
   A card’s repository or website title opens that source.
   Below the repository heading, its byline begins with “By” and the author: a known
-  person links to their profile using the shared surname label, while an organization or
+  person links to their profile using their full public name, while an organization or
   an unreviewed identity stays plain text.
   Exact curated author names and evidenced aliases identify people; repository owner
   strings alone do not establish personal identity.
@@ -2887,6 +2906,25 @@ A section heading in the overview is a caps label, so it holds no formula: capit
 would change the formula’s letters.
 `tests/test_result_overview.py` holds every part and every link.
 
+## GitHub Links
+
+Repository and document links use the existing GitHub brand mark.
+Issue links use Lucide `circle-dot`; pull-request links use Lucide `git-pull-request`,
+matching the open-issue and branch shapes GitHub readers recognize.
+The retained SVGs in `devtools/overview/icons/` supply both inline reference icons and
+the shared stylesheet’s decorative masks: Lucide 1.17.0 under ISC, and the existing
+Octicons GitHub mark under MIT. The KPress sprite has no GitHub brand glyph.
+
+At publication, `site_github_links.decorate_github_links` classifies exact
+`github.com/owner/repo/issues/N` and `/pull/N` routes with one data attribute.
+Repository owners named `issues` and query strings containing those words keep the
+GitHub mark. Link targets, labels and nested code or mathematics stay intact; bare
+account handles keep their account text.
+The shared stylesheet paints a compact mark in the link’s colour beside its first line,
+including on pages without JavaScript and inside fetched popovers.
+Links with an existing SVG, image or card icon receive no second mark.
+These screen decorations do not change paper pagination.
+
 ## Person Profiles
 
 [Attribution Policy](../../../attribution.md) owns preferred names, verified aliases,
@@ -2898,7 +2936,7 @@ byline, source-address link, description and available result/significance and c
 tally retain the same order and link targets.
 A profile does not introduce a second resource inventory.
 Available GitHub issue and pull-request evidence uses linked number labels such as
-“#123”, with the corresponding GitHub issue or branch-style pull-request icon.
+“#123”, with the corresponding Lucide issue or branch-style pull-request icon.
 Accessible labels identify the repository and reference type; references come from
 recorded evidence rather than inferred authorship.
 
@@ -2984,10 +3022,11 @@ Profile and table variants change layout only.
 Project cards scope both tallies to the project’s reported results and evidenced credit
 associations, not its owner’s global count.
 Zero reviewed credits means no established associations in this record, not no
-contribution. Inline prose links keep the short surname-or-handle naming policy;
-directory names remain full so people can be identified while browsing.
-About’s narrative introduction also keeps full public names on its profile links;
-record-keeping surfaces and compact bylines retain surname labels.
+contribution. Technical records, News, and compact credit labels use the shared
+surname-or-handle naming policy.
+Resource bylines and descriptions, explanatory papers and reader documents, and About
+introductions use full public names.
+Directory names remain full so people can be identified while browsing.
 Home and About share a short Profiles invitation and the **All Profiles** action
 (`render_contributors.profile_preview`), with no name list or metadata reads.
 Breadcrumbs appear only on lower-level pages, including the Profiles directory and
@@ -2996,7 +3035,7 @@ Top-level Home, About and News pages have no breadcrumb.
 On nested pages the breadcrumb sits nearer the navigation, with a larger gap below it
 before the title; pages without a breadcrumb retain their normal top spacing.
 The table’s native name anchor goes directly to the person’s profile.
-Separate Results, Records and Credits columns use the shared significance tally.
+Separate Records, Results and Credits columns use the shared significance tally.
 Records are the current subset of authored Results across every result kind, including
 formalization. Known zero counts stay blank; unresolved record classification shows a
 Review pending link rather than implying zero.
@@ -3110,9 +3149,12 @@ inherits the standard KPress summary role.
 Identity terms use the shared medium weight.
 Nested metadata never multiplies the note size.
 `profile_links.link_prose` identifies people by exact full names or reviewed account
-links, then applies the shared short labels within authored introduction fragments, News
-summaries and details, or one biography.
-Template scope wrappers are removed after rendering.
+links, then applies the naming policy for that context.
+Technical introductions, News summaries and details, and biographies use short labels;
+resource descriptions and explanatory narrative use full public names.
+Generated full-name links retain `data-profile-name="full"` so relinking and the
+built-site audit preserve that choice.
+Temporary matching-scope wrappers are removed after rendering.
 It links unique exact full names and verified account links whose visible label matches
 the same person, preserving authored text and source-work links.
 Name matching permits soft-wrapped whitespace and checks collisions on the same

@@ -22,6 +22,7 @@ from devtools import render_frontier_page as frontier
 from devtools import render_research_tables as tables
 from devtools.build_bound_citations import CORRECTS
 from devtools.profile_links import link_prose
+from devtools.site_popovers import popover_controls
 
 if TYPE_CHECKING:
     from devtools.render_overview import Page, PageMeta
@@ -106,11 +107,13 @@ def case_popover() -> str:
     other way. `case-popover.js` fetches the record file of the case that was pressed,
     puts its record in the body, and points the action at the record's own address; the
     record's steps, and the arrow keys, move it to the neighbouring case in place."""
+    controls = popover_controls(
+        CASE_POPOVER_ID, destination=("atlas.html", "Open the Case Record")
+    )
     return (
         f'<div class="site-popover site-case-pop" id="{CASE_POPOVER_ID}" popover '
         'data-case-popover role="dialog" aria-label="Case record">'
-        f'<button type="button" class="site-popover-close" popovertarget="{CASE_POPOVER_ID}" '
-        'popovertargetaction="hide" aria-label="Close">\u00d7</button>'
+        f"{controls}"
         '<div class="site-case-pop-body" data-case-body data-kpress-prose-font="sans"></div>'
         '<p class="site-popover-actions"><a class="site-popover-action" data-go="page" '
         'data-case-open href="atlas.html">Open the Case Record</a>'

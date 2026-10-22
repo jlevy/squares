@@ -17,6 +17,7 @@ import pytest
 
 from devtools import (
     overview_sections,
+    paper_structure,
     render_case_pages,
     render_contributors,
     render_overview,
@@ -360,7 +361,6 @@ def test_the_atlas_grid_and_the_frontier_table_open_the_same_record(
         )
         assert len(tile) == 1, n
         assert "regularized" not in tile[0], n
-    assert grid.count(render_case_pages.case_popover()) == 1
     links = re.findall(
         r'<a(?: class="is-new-result")? aria-label="n = \d+: '
         r'(?:recent result; )?open its case record" '
@@ -373,7 +373,15 @@ def test_the_atlas_grid_and_the_frontier_table_open_the_same_record(
     rows = re.findall(r'data-case-row="(\d+)" data-case-href="cases/(\d+)\.html"', frontier)
     assert [int(n) for n, _ in rows] == numbers
     assert all(a == b for a, b in rows)
-    assert frontier.count(render_case_pages.case_popover()) == 1
+    for markup in (grid, frontier):
+        popovers = [
+            node
+            for node in paper_structure.parse(markup).walk()
+            if "data-case-popover" in node.attrs
+        ]
+        assert len(popovers) == 1
+        assert popovers[0].attrs["id"] == render_case_pages.CASE_POPOVER_ID
+        assert popovers[0].attrs["role"] == "dialog"
 
 
 def test_the_frontier_rows_minimal_popovers_are_gone(

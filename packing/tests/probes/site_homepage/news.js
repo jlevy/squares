@@ -22,9 +22,11 @@
   };
   // The homepage's real paper title supplies the shared article-heading role.
   const reference = document.querySelector(".site-card .site-article-header > h3");
+  const referenceProse = news.closest(".kpress-prose");
   const archiveAction = document.querySelector('.site-action[href$="/blob/main/CHANGELOG.md"]');
   return {
     reference_article_title: reference ? typography(reference) : null,
+    reference_prose: referenceProse ? typography(referenceProse) : null,
     archive_action: archiveAction
       ? {
           family: getComputedStyle(archiveAction).fontFamily,
@@ -43,7 +45,9 @@
       const style = getComputedStyle(day);
       const box = day.getBoundingClientRect();
       const body = day.querySelector(".site-news-body");
-      const prose = day.querySelector(".site-news-item > p");
+      const proseBlock = day.querySelector(".site-news-prose");
+      const prose = proseBlock?.querySelector("p");
+      const records = day.querySelector(".site-news-records");
       const title = day.querySelector(".site-news-item h3");
       const date = day.querySelector("time");
       const dateBox = date?.parentElement?.getBoundingClientRect();
@@ -62,6 +66,23 @@
         date: day.getAttribute("data-news-day"),
         family: style.fontFamily,
         body_family: prose ? getComputedStyle(prose).fontFamily : null,
+        body_style: prose ? typography(prose) : null,
+        prose_padding: proseBlock
+          ? {
+              before: Number.parseFloat(getComputedStyle(proseBlock).paddingBlockStart),
+              after: Number.parseFloat(getComputedStyle(proseBlock).paddingBlockEnd),
+            }
+          : null,
+        metadata_families: [...day.querySelectorAll(".site-news-records > p")].map(
+          (item) => getComputedStyle(item).fontFamily,
+        ),
+        metadata_colors: [...day.querySelectorAll(".site-news-records > p")].map(
+          (item) => getComputedStyle(item).color,
+        ),
+        prose_records_gap:
+          proseBlock && records?.getClientRects().length
+            ? records.getBoundingClientRect().top - proseBlock.getBoundingClientRect().bottom
+            : null,
         body_height: body?.clientHeight ?? 0,
         body_scroll: body?.scrollHeight ?? 0,
         inline_height: body instanceof HTMLElement ? body.style.maxBlockSize : null,
@@ -75,6 +96,8 @@
         height_transition: body ? getComputedStyle(body).transitionProperty : null,
         arrow_transition: arrow ? getComputedStyle(arrow).transitionProperty : null,
         date_transform: date ? getComputedStyle(date).textTransform : null,
+        date_family: date ? getComputedStyle(date).fontFamily : null,
+        date_color: date ? getComputedStyle(date).color : null,
         title_transform: title ? getComputedStyle(title).textTransform : null,
         title_style: title ? typography(title) : null,
         headline_style: title ? typography(title.querySelector("a") ?? title) : null,

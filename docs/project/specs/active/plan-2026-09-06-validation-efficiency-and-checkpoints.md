@@ -246,6 +246,11 @@ The standing fast-loop contract is:
 - During a research or implementation loop, run the narrowest relevant tool or `--edit`.
   Do not put slow, exhaustive, deferred, golden, or strict work in each edit cycle.
 - Run `--push` once immediately before each push.
+  *Amended 22 October 2026:* for a draft pull request this is superseded by the owner’s
+  decision that hosted CI is the full test gate; a draft push needs only the edit or
+  records tier and the directly affected tests, and `--push` stays recommended before a
+  push straight to a non-draft branch
+  ([development.md](../../../../development.md#hosted-ci-gates-a-draft-pull-request)).
   The pull request then runs all seven parts of `--fast` concurrently: `--checks`,
   `--frontend`, `--typecheck`, `--geometry`, `--suite-a`, `--suite-b`, and `--sweeps`.
 - Reserve the full and deferred checkpoints for final review, research or merge

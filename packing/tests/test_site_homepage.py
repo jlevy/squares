@@ -970,6 +970,7 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         assert footer["href"] == f"{document['repository']}/blob/main/CHANGELOG.md"
         assert preview["reference_article_title"] is not None
         for surface in (preview, news):
+            assert surface["reference_prose"] is not None
             assert surface["overflow"] == 0
             for day in surface["days"]:
                 if day["hidden"]:
@@ -979,7 +980,20 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
                 assert day["border"] == 1
                 assert 0 <= day["left"] < day["right"] <= width
                 assert day["family"] == surface["family"]
-                assert day["body_family"] == surface["family"]
+                assert day["body_family"] == surface["reference_prose"]["family"]
+                assert day["body_family"] != surface["family"]
+                for role in ("size", "weight", "leading"):
+                    assert day["body_style"][role] == surface["reference_prose"][role]
+                assert day["metadata_families"]
+                assert set(day["metadata_families"]) == {surface["family"]}
+                assert day["date_family"] == surface["family"]
+                assert set(day["metadata_colors"]) == {day["date_color"]}
+                assert day["date_color"] != surface["text_color"]
+                assert day["body_style"]["color"] == surface["text_color"]
+                if day["prose_records_gap"] is not None:
+                    assert 16 <= day["prose_records_gap"] <= 20
+                for padding in day["prose_padding"].values():
+                    assert 0 < padding <= 6
                 assert day["date_transform"] == "none"
                 assert day["title_style"] == preview["reference_article_title"]
                 assert day["headline_style"] == day["title_style"]
@@ -987,8 +1001,9 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
                 assert day["title_before_date"]
                 assert day["date_before_topics"]
                 assert day["metadata_after_date"]
-                for gap in ("title_date_gap", "date_metadata_gap", "metadata_body_gap"):
+                for gap in ("title_date_gap", "date_metadata_gap"):
                     assert 0 <= day[gap] <= 7, (day["id"], gap, day[gap])
+                assert 8 <= day["metadata_body_gap"] <= 12
                 if day["paragraph_gap"] is not None:
                     assert 4 <= day["paragraph_gap"] <= 12
                 assert day["meter_count"] == 1
@@ -1066,6 +1081,8 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         opened = reading()
         assert opened["body_height"] >= opened["body_scroll"] - 1
         assert opened["fade"] == "0"
+        if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
+            card.screenshot(path=str(Path(screenshot_dir) / f"news-card-expanded-{width}.png"))
         page.mouse.move(0, 0)
         assert reading()["height"] == opened["height"]
         button.press("Space")

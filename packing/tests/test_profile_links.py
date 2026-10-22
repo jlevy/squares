@@ -132,9 +132,12 @@ def test_authored_about_and_explanations_link_reviewed_people_directly() -> None
         )
     assert "site-profile-prose" not in about
     papers = render_overview.papers_page().html
-    assert re.search(r'<a\b[^>]*href="profiles/manasseh-ahmed\.html"[^>]*>Ahmed</a>', papers)
     assert re.search(
-        r'<a\b[^>]*href="profiles/marc-leonard-overbeck\.html"[^>]*>Overbeck</a>', papers
+        r'<a\b[^>]*href="profiles/manasseh-ahmed\.html"[^>]*>Manasseh Ahmed</a>', papers
+    )
+    assert re.search(
+        r'<a\b[^>]*href="profiles/marc-leonard-overbeck\.html"[^>]*>Marc Leonard Overbeck</a>',
+        papers,
     )
     for markup in (about, papers):
         for anchor in re.findall(r'<a\b[^>]*href="profiles/[^" ]+"[^>]*>', markup):
@@ -157,7 +160,10 @@ def test_case_and_reader_boundaries_preserve_nested_math_and_source_regions() ->
     reader += "<table><tr><td>Hiroaki Hosono</td></tr></table></article>"
     linked_reader = site_documents._reader_profile_links(reader)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     assert linked_reader.startswith("<header>Evan Daniel</header>")
-    assert '<a href="profiles/evan-daniel.html">Daniel</a>' in linked_reader
+    assert (
+        '<a href="profiles/evan-daniel.html" data-profile-name="full">Evan Daniel</a>'
+        in linked_reader
+    )
     assert "<td>Hiroaki Hosono</td>" in linked_reader
 
 
@@ -384,3 +390,21 @@ def test_profile_target_audit_resolves_links_from_the_containing_page(
             ),
         }
     }
+
+
+def test_full_name_context_survives_relinking_and_audit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    index = profile_index({"alice": {"display_name": "Alice Example", "surname": "Example"}})
+    monkeypatch.setattr("devtools.profile_links.public_index", lambda: index)
+    source = '<p>Alice Example and <a href="profiles/alice.html">Example</a>.</p>'
+    narrative = link_prose(source, index=index, full_names=True)
+    assert narrative.count('data-profile-name="full"') == 2
+    assert narrative.count(">Alice Example</a>") == 2
+    assert link_prose(narrative, index=index) == narrative
+    technical = link_prose(source, index=index)
+    assert technical.count(">Example</a>") == 2
+    (tmp_path / "profiles").mkdir()
+    (tmp_path / "profiles/alice.html").write_text("")
+    (tmp_path / "index.html").write_text(narrative + technical)
+    assert audit_site(tmp_path)["profile_link_label_mismatches"] == {}

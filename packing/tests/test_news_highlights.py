@@ -267,8 +267,7 @@ def test_homepage_and_archive_link_preferred_names_directly_to_reviewed_profiles
         # The names stay plain links, since their container says so once and the profile
         # popover leaves every profile link inside it alone.
         assert (
-            f'<div class="site-news sans-text" data-news{attributes} data-contributor-plain>'
-            in rendered
+            f'<div class="site-news" data-news{attributes} data-contributor-plain>' in rendered
         )
         cards = _cards(rendered)
         for identifier, people in expected.items():
