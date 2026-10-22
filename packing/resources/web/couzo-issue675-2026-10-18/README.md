@@ -117,6 +117,10 @@ The [backlog ledger of 22 October](../../../campaign/issue-intake/upper-bounds-b
 walks every report at these counts from the 18 October ledger’s starts, frozen at `main`
 `804eff369`, and records all 78. Each is superseded on entry by the next report the walk
 records at its count: Couzo’s #678 (54) and #715 (6), and Darius Muglich’s #686 (18).
+At ten of these counts #675 is the first report the walk records, and the start there, a
+row of `couzo-verified-bounds-2026-10-14`, now names #675 as its successor instead of the
+#678, #686 or #715 row that had superseded it on `main`, so each count is one chain in
+report order.
 [acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record
 the source register reads them from.
 

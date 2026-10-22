@@ -111,6 +111,8 @@ Couzo’s #715. Each of the 11 is recorded: at 464 below Francisco Couzo’s cer
 14 October, elsewhere below the grid. Each is superseded on entry by a later report at
 its count, which the source register names as the row’s successor: Couzo’s #675 at six
 counts, his #672 at two, and his #678, Darius Muglich’s #686 and Couzo’s #715 at one each.
+At 464 #666 is also the first report to beat Couzo’s 14 October row, which now names it as
+its successor instead of #678’s row, so the count is one chain in report order.
 
 ## Above 1024
 

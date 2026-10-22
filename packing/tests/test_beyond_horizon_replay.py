@@ -6,9 +6,9 @@ the owner) and the rows beyond the corpus of Francisco Couzo's #670, #672 and #6
 in-corpus rows T-226 to T-228 register. These tests hold what is particular to the import:
 each issue table's rows and the certificate each reads, the receipts and records against the
 packets, the first commit of every certificate, each row's place in the backlog ledger's
-report order and the coverage register's rows that follow from it, and the forged receipt
-rows a check must refuse. Every test reads the retained packets, the ledger and the source
-register only; none needs the network.
+report order and the coverage register's rows that follow from it, each walked count as
+one chain in report order, and the forged receipts a check must refuse. Every test reads
+the retained packets, the ledger and the source register only; none needs the network.
 """
 
 from __future__ import annotations
@@ -23,6 +23,7 @@ import pytest
 
 from devtools import beyond_horizon_replay as replay
 from devtools import check_source_coverage as coverage_check
+from devtools.retained_data import read_retained_bytes
 from sqpack.yamlio import safe_load
 
 LEDGER = replay.ROOT / "campaign/issue-intake/upper-bounds-backlog-20261022"
@@ -38,6 +39,19 @@ CURRENT_670 = {
     452: "couzo-verified-bounds-2026-10-14",
     536: "couzo-verified-bounds-2026-10-14",
     922: "couzo-verified-bounds-2026-10-14",
+}
+#: The starts each report's rows beat first in report order, by the start's source; eight
+#: are #670's current rows above, and the rest name the report that beat them first, not
+#: the later #678, #686 or #715 row that superseded them on ``main``.
+FIRST_BEATEN = {
+    ("couzo-verified-bounds-2026-10-14", "couzo-issue670-2026-10-17"): 56,
+    ("couzo-verified-bounds-2026-10-14", "couzo-issue675-2026-10-18"): 10,
+    ("couzo-verified-bounds-2026-10-14", "couzo-issue672-2026-10-17"): 8,
+    ("couzo-verified-bounds-2026-10-14", "de-winter-issue666-2026-10-17"): 1,
+    ("couzo-certificates-2026-10-14", "couzo-issue670-2026-10-17"): 7,
+    ("evand-compositions-2026-10-13", "couzo-issue670-2026-10-17"): 1,
+    ("evand-fresh-compositions-2026-10-14", "couzo-issue670-2026-10-17"): 1,
+    ("fang-excess-theorem-2026-10-13", "couzo-issue672-2026-10-17"): 1,
 }
 #: Each report's superseded rows, by the source of the next report the walk records.
 SUCCESSORS = {
@@ -82,7 +96,7 @@ def test_each_issue_table_reads_its_rows_and_the_certificate_each_names() -> Non
         digests = replay.manifest(chosen)
         for row in [*replay.decided_claims(chosen), *replay.held_claims(chosen)]:
             assert row.path in digests, (issue, row.n)
-            assert (replay.archive(chosen) / row.path).is_file(), (issue, row.n)
+            assert read_retained_bytes(replay.archive(chosen) / row.path), (issue, row.n)
     deletions = [
         (row.n, row.certificate_n, row.deleted)
         for row in replay.decided_claims(replay.release(675))
@@ -158,6 +172,43 @@ def test_a_forged_receipt_row_is_refused() -> None:
     ]
 
 
+def test_an_empty_or_disagreeing_all_pairs_sample_is_refused() -> None:
+    chosen = replay.release(670)
+    rows = replay.decided_claims(chosen)
+    sample = _read(chosen.directory / replay.EXHAUSTIVE)["rows"]
+    assert replay.sample_problems(chosen, rows, sample) == []
+    assert replay.sample_problems(chosen, rows, []) == [
+        "#670: the all-pairs sample decides [], not the declared [922]"
+    ]
+    disagreeing = copy.deepcopy(sample)
+    disagreeing[0]["equals_filtered_least_gap"] = False
+    assert replay.sample_problems(chosen, rows, disagreeing) == [
+        "#670 n=922: the all-pairs sample disagrees with the filtered one"
+    ]
+
+
+def test_a_deletion_row_needs_its_certificate_read_whole() -> None:
+    """#675's 992 and 995 delete from the 993 and 996 certificates, whose own rows carry
+    the controls; without such a row the certificate would have none."""
+    chosen = replay.release(675)
+    rows = replay.decided_claims(chosen)
+    assert replay.deletion_problems(chosen, rows) == []
+    assert replay.deletion_problems(chosen, [row for row in rows if row.n != 993]) == [
+        (
+            "#675 n=992: deletes from n993, which no row of the release reads whole, so no "
+            "control decides its certificate"
+        )
+    ]
+
+
+def test_check_for_one_issue_reports_that_issue(capsys: pytest.CaptureFixture[str]) -> None:
+    assert replay.main(["check", "--issue", "672"]) == 0
+    assert capsys.readouterr().out.splitlines()[-1] == (
+        "OK: 44 rows of #672 verified, controls refused; "
+        "the coverage plan and report order hold"
+    )
+
+
 def test_each_side_rounds_up_to_its_print_and_the_ledger_reads_the_same_side() -> None:
     sources = safe_load((LEDGER / "sources.yaml").read_text(encoding="utf-8"))
     transcribed = {
@@ -193,8 +244,29 @@ def test_the_ledger_records_every_row_and_the_plan_reads_its_dispositions() -> N
         if "superseded_by" in row:
             found.setdefault(row["source_id"], Counter())[row["superseded_by"]] += 1
     assert {source: dict(counts) for source, counts in found.items()} == SUCCESSORS
-    assert replay.planned_supersessions() == [
+    supersessions = replay.planned_supersessions()
+    assert [(n, earlier, by) for n, earlier, by in supersessions if n in current] == [
         (n, earlier, "couzo-issue670-2026-10-17") for n, earlier in CURRENT_670.items()
+    ]
+    assert dict(Counter((earlier, by) for _, earlier, by in supersessions)) == FIRST_BEATEN
+
+
+def test_each_walked_count_is_one_chain_in_report_order() -> None:
+    """At 464 the 14 October row named #678 on ``main``; #666, reported first, beat it."""
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    assert replay.chain_problems(coverage) == []
+    rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
+    rows[464, "couzo-verified-bounds-2026-10-14"]["superseded_by"] = "couzo-issue678-2026-10-18"
+    assert replay.chain_problems(coverage) == [
+        (
+            "n=464 from couzo-verified-bounds-2026-10-14: names couzo-issue678-2026-10-18, "
+            "not de-winter-issue666-2026-10-17"
+        )
+    ]
+    del rows[464, "couzo-issue675-2026-10-18"]["superseded_by"]
+    rows[464, "couzo-issue675-2026-10-18"]["disposition"] = "tracked-outside-case-corpus"
+    assert replay.chain_problems(coverage)[1:] == [
+        "n=464 from couzo-issue675-2026-10-18: names None, not couzo-issue678-2026-10-18"
     ]
 
 

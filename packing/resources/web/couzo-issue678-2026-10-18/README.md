@@ -309,6 +309,12 @@ Stage 3 registered 204 and 260 as T-223 and took the 83 beyond the corpus as row
 the `couzo-issue678-2026-10-18` source, each superseding the row that stood at its count
 where one did: 57 of `couzo-verified-bounds-2026-10-14`’s, two of
 `couzo-certificates-2026-10-14`’s and `evand-record-hunt3-2026-10-10`’s at 343.
+Since 22 October the
+[backlog ledger](../../../campaign/issue-intake/upper-bounds-backlog-20261022/README.md)
+has recorded the rows of #666, #670, #672 and #675, which come before #678 in report
+order. Where one of them beat the start first, the start now names that report as its
+successor, so each count is one chain: 46 of the 57 and both of the two, while 11 of
+`couzo-verified-bounds-2026-10-14`’s rows and the 343 row still name #678.
 
 ### Per Row
 

@@ -35,11 +35,13 @@ COVERAGE = reports.REPO / "packing/frontier/source-coverage.yaml"
 LEDGER = replay.ROOT / "campaign/issue-intake/upper-bounds-20261022"
 #: The row each recorded count superseded, by source, and the counts that held none. The
 #: backlog rows of #666, #670, #672 and #675, recorded on 22 October after this import,
-#: stand before it in report order, so ten of them are superseded by its rows too, and 509
-#: and 931 no longer hold this import's row alone.
+#: stand before it in report order: ten of them are the rows its rows supersede, and at
+#: eight of those counts the 14 October row now names the backlog report that beat it
+#: first, so 21 of its 29 rows remain here. 509 and 931 no longer hold this import's row
+#: alone.
 SUPERSEDED = {
     "muglich-issue686-2026-10-19": 50,
-    "couzo-verified-bounds-2026-10-14": 29,
+    "couzo-verified-bounds-2026-10-14": 21,
     "couzo-issue678-2026-10-18": 26,
     "evand-n343-sweep-2026-10-20": 1,
     "de-winter-issue666-2026-10-17": 1,

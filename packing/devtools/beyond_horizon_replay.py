@@ -30,7 +30,8 @@ whose centres are closer than ``sqrt 2`` by exact comparison, with its six contr
 certificate a row reads whole. That module's docstring states the filter's lemma and the
 controls. A deletion row is decided as its certificate's first ``n`` poses at the
 certificate's side, since removing squares from a packing leaves a packing; the controls
-are decided on the certificate's own row.
+are decided on the certificate's own row, which ``check`` requires the release to read
+whole.
 
 **The records.** Each packet keeps, under ``receipts/``, the filtered replay
 (``filtered-exact-replay.json``), the first commit holding each certificate
@@ -50,8 +51,15 @@ row and control again.
 **The rows.** ``coverage-plan`` reads each row's disposition from the report-order ledger
 of ``campaign/issue-intake/upper-bounds-backlog-20261022`` (`planned_rows`): recorded at
 its count, it is superseded by the next report the walk records there, or it is the
-count's current row and supersedes the count's start (`planned_supersessions`). ``check``
-holds ``frontier/source-coverage.yaml`` to that plan.
+count's current row. Where a release's row is the first report the walk records at a count,
+the count's start names that release as its successor (`planned_supersessions`), whether
+the release's row is current or a later report's row supersedes it in turn: the four
+reports came before #678, #686 and #715, so a start those later reports had superseded on
+``main`` now names the backlog report that beat it first. ``check`` holds
+``frontier/source-coverage.yaml`` to that plan, and holds every count the ledger walks
+beyond the corpus to one chain in report order (`chain_problems`): the start, then each
+recorded report's row, each superseded by the next, the last current or superseded by a
+report the walk does not reach.
 
 From ``packing/``, with the project interpreter::
 
@@ -93,7 +101,7 @@ from devtools import couzo_678_replay as base
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
 from devtools import upper_bound_reports as reports
-from devtools.retained_data import read_retained_bytes
+from devtools.retained_data import read_retained_bytes, read_retained_text
 from sqpack.retained_json import dumps as retained_dumps
 from sqpack.yamlio import safe_load
 
@@ -170,7 +178,8 @@ class Release:
     but for #666), and ``first_commit`` the first commit of ``retained``'s history that holds
     every certificate a row reads, committed at ``committed``: what ``first-commits``
     measures and the claims record states. ``rows`` counts the issue's table and ``decided``
-    the rows beyond the corpus at or below ``LIMIT``.
+    the rows beyond the corpus at or below ``LIMIT``; ``sampled`` names the counts the
+    all-pairs sample decides, which the packet README and the atom state.
     """
 
     issue: int
@@ -183,6 +192,7 @@ class Release:
     committed: str
     rows: int
     decided: int
+    sampled: tuple[int, ...]
     bead: str
     read: Callable[[str, Release], list[Claim]]
 
@@ -250,6 +260,7 @@ RELEASES: dict[int, Release] = {
             committed="2026-10-17T07:03:15Z",
             rows=19,
             decided=11,
+            sampled=(464,),
             bead="think-3m10",
             read=_de_winter_rows,
         ),
@@ -264,6 +275,7 @@ RELEASES: dict[int, Release] = {
             committed="2026-10-17T18:00:09Z",
             rows=73,
             decided=72,
+            sampled=(922,),
             bead="think-f28n",
             read=_couzo_rows,
         ),
@@ -278,6 +290,7 @@ RELEASES: dict[int, Release] = {
             committed="2026-10-17T20:44:59Z",
             rows=46,
             decided=44,
+            sampled=(996,),
             bead="think-2vjc",
             read=_couzo_rows,
         ),
@@ -292,6 +305,7 @@ RELEASES: dict[int, Release] = {
             committed="2026-10-18T05:46:00Z",
             rows=79,
             decided=78,
+            sampled=(998,),
             bead="think-pvav",
             read=_couzo_rows,
         ),
@@ -370,10 +384,12 @@ def seed_credit(chosen: Release, row: Claim) -> dict[str, Any] | None:
     """The per-count metadata's seed credit, where the packet retains it, and whether the
     metadata describes the row's certificate (a #675 row reads ``best/``, the metadata the
     root certificate of its count)."""
-    path = archive(chosen) / f"certificates/n{row.n}.json"
-    if not path.is_file():
+    try:
+        metadata = json.loads(
+            read_retained_text(archive(chosen) / f"certificates/n{row.n}.json")
+        )
+    except FileNotFoundError:
         return None
-    metadata = json.loads(path.read_text(encoding="utf-8"))
     return {
         "metadata": f"certificates/n{row.n}.json",
         "seed_credit": (metadata.get("origin") or {}).get("seed_credit", ""),
@@ -431,15 +447,15 @@ def decide_row(job: tuple[int, int]) -> dict[str, Any]:
 
 
 def _jobs(chosen: Sequence[Release]) -> list[tuple[int, int]]:
-    """Every decided row of the chosen releases, the largest certificates first."""
-    jobs = [(item.issue, row.n) for item in chosen for row in decided_claims(item)]
-    sizes = {
-        (item.issue, row.n): (archive(item) / row.path).stat().st_size
+    """Every decided row of the chosen releases, the largest certificates first: a
+    certificate's work grows with its count, which the issue row names, so no file is read
+    to order the jobs."""
+    jobs = [
+        (row.certificate_n, item.issue, row.n)
         for item in chosen
         for row in decided_claims(item)
-        if (archive(item) / row.path).is_file()
-    }
-    return sorted(jobs, key=lambda job: -sizes.get(job, 0))
+    ]
+    return [(issue, n) for _, issue, n in sorted(jobs, key=lambda job: -job[0])]
 
 
 def filtered(issues: Sequence[int], workers: int) -> dict[int, dict[str, Any]]:
@@ -738,27 +754,73 @@ def planned_rows() -> list[dict[str, Any]]:
     return rows
 
 
-def planned_supersessions() -> list[tuple[int, str, str]]:
-    """Where a release's row becomes its count's current row, the row it supersedes.
+def _start_source(count: Mapping[str, Any]) -> str | None:
+    """The source of a walked count's start, where the start is a beyond-horizon row (a
+    count the grid or a register entry held has none)."""
+    (start,) = count["start"]
+    match = _START_ROW.fullmatch(start["label"])
+    return None if match is None else match[1]
 
-    That is the count's start, a beyond-horizon row frozen in the ledger's starts (a count
-    the grid held has none): ``(n, its source, the release's source)``.
+
+def planned_supersessions() -> list[tuple[int, str, str]]:
+    """Where a release's row is the first report the walk records at its count, the start
+    it supersedes: ``(n, the start's source, the release's source)``, in count order.
+
+    The start is the count's beyond-horizon row frozen in the ledger's starts. The release's
+    row may itself be superseded by a later report; the start still names the release, the
+    first report to beat it in report order, so each count is one chain.
     """
-    walked = {count["n"]: count for count in _read(LEDGER)["counts"]}
+    ours = {f"#{issue}": item.packet for issue, item in RELEASES.items()}
     flips: list[tuple[int, str, str]] = []
-    for row in planned_rows():
-        if row["disposition"] == "superseded":
-            continue
-        (start,) = walked[row["n"]]["start"]
-        match = _START_ROW.fullmatch(start["label"])
-        if match is not None:
-            flips.append((row["n"], match[1], row["source_id"]))
+    for count in _read(LEDGER)["counts"]:
+        recorded = [step["report"] for step in count["steps"] if step["verdict"] == "recorded"]
+        start = _start_source(count)
+        if start is not None and recorded and recorded[0] in ours:
+            flips.append((count["n"], start, ours[recorded[0]]))
     return flips
+
+
+def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
+    """Where a count the ledger walks beyond the corpus is not one chain in report order.
+
+    The chain is the count's start, where it is a beyond-horizon row, then the row of each
+    report the walk records, in report order. Each must be in the register and superseded by
+    the next; the last is current, or superseded by a report the walk does not reach.
+    """
+    rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
+    problems: list[str] = []
+    for count in _read(LEDGER)["counts"]:
+        n = count["n"]
+        if n <= reports.HORIZON:
+            continue
+        start = _start_source(count)
+        chain = ([start] if start is not None else []) + [
+            _source_of(step["report"])
+            for step in count["steps"]
+            if step["verdict"] == "recorded"
+        ]
+        for earlier, later in zip(chain, [*chain[1:], None], strict=True):
+            held = rows.get((n, earlier))
+            if held is None:
+                problems.append(f"n={n}: the register has no row from {earlier}")
+                continue
+            successor = held.get("superseded_by")
+            if later is not None and (held.get("disposition"), successor) != (
+                "superseded",
+                later,
+            ):
+                problems.append(f"n={n} from {earlier}: names {successor}, not {later}")
+            elif later is None and successor in chain:
+                problems.append(
+                    f"n={n} from {earlier}: names {successor}, earlier in the chain"
+                )
+    return problems
 
 
 def coverage_problems() -> list[str]:
     """Where the coverage register differs from the plan: each planned row, as written,
-    and each superseded start row naming the release's source as its successor."""
+    each start a release's row beat first naming the release's source as its successor, and
+    each walked count one chain in report order."""
     coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
     problems = [
@@ -770,7 +832,7 @@ def coverage_problems() -> list[str]:
         held = rows.get((n, earlier)) or {}
         if (held.get("disposition"), held.get("superseded_by")) != ("superseded", successor):
             problems.append(f"n={n} from {earlier}: not superseded by {successor}")
-    return problems
+    return problems + chain_problems(coverage)
 
 
 # --------------------------------------------------------------------------- check
@@ -813,6 +875,48 @@ def row_problems(chosen: Release, row: Claim, kept: Mapping[str, Any]) -> list[s
     return problems
 
 
+def deletion_problems(chosen: Release, rows: Sequence[Claim]) -> list[str]:
+    """A deletion row whose certificate no row of the release reads whole: its controls are
+    decided on that row (`decide_row`), so without it the certificate would have none."""
+    whole = {row.n: row.path for row in rows if not row.deleted}
+    return [
+        f"#{chosen.issue} n={row.n}: deletes from n{row.certificate_n}, which no row of the "
+        "release reads whole, so no control decides its certificate"
+        for row in rows
+        if row.deleted and whole.get(row.certificate_n) != row.path
+    ]
+
+
+def sample_problems(
+    chosen: Release, rows: Sequence[Claim], sample: Sequence[Mapping[str, Any]]
+) -> list[str]:
+    """Where the all-pairs sample is not the declared counts, or disagrees with the
+    filtered decision at one of them."""
+    problems: list[str] = []
+    if [item["n"] for item in sample] != list(chosen.sampled):
+        problems.append(
+            f"#{chosen.issue}: the all-pairs sample decides "
+            f"{[item['n'] for item in sample]}, not the declared {list(chosen.sampled)}"
+        )
+    decided = {row.n for row in rows}
+    problems.extend(
+        f"#{chosen.issue} n={item['n']}: the all-pairs sample disagrees with the filtered one"
+        for item in sample
+        if item["n"] not in decided
+        or not all(
+            item[key]
+            for key in (
+                "exact_verify_passed",
+                "independent_passed",
+                "routes_agree_on_least_gap",
+                "equals_filtered_least_gap",
+                "equals_filtered_least_wall",
+            )
+        )
+    )
+    return problems
+
+
 def release_problems(chosen: Release, *, replay: bool, workers: int) -> list[str]:
     """Problems with one packet's receipts and record; empty when they hold."""
     custody(chosen)
@@ -821,7 +925,7 @@ def release_problems(chosen: Release, *, replay: bool, workers: int) -> list[str
     stored = receipt["rows"]
     if [row["n"] for row in stored] != [row.n for row in rows]:
         return [f"#{chosen.issue}: the filtered receipt's rows are not the issue's"]
-    problems: list[str] = []
+    problems = deletion_problems(chosen, rows)
     for row, kept in zip(rows, stored, strict=True):
         problems.extend(row_problems(chosen, row, kept))
         if Fraction(kept["exact_side"]) != certificate(chosen, row).side:
@@ -862,23 +966,7 @@ def _cross_check_problems(chosen: Release, rows: Sequence[Claim]) -> list[str]:
         for item in commits["rows"]
         if (item["first_commit"], item["committed"]) != (chosen.first_commit, chosen.committed)
     )
-    decided = {row.n for row in rows}
-    sample = _read(chosen.directory / EXHAUSTIVE)["rows"]
-    problems.extend(
-        f"#{chosen.issue} n={item['n']}: the all-pairs sample disagrees with the filtered one"
-        for item in sample
-        if item["n"] not in decided
-        or not all(
-            item[key]
-            for key in (
-                "exact_verify_passed",
-                "independent_passed",
-                "routes_agree_on_least_gap",
-                "equals_filtered_least_gap",
-                "equals_filtered_least_wall",
-            )
-        )
-    )
+    problems.extend(sample_problems(chosen, rows, _read(chosen.directory / EXHAUSTIVE)["rows"]))
     comparison = _read(chosen.directory / GOEBEL)["comparison"]
     compared = [
         (item["n"], Fraction(item["side"]), item["relation"]) for item in comparison["detail"]
@@ -941,11 +1029,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         problems = check(replay=args.replay, workers=args.workers, issues=args.issue)
         for problem in problems:
             print(problem)
-        decided = sum(item.decided for item in RELEASES.values())
+        chosen = [release(issue) for issue in args.issue] or list(RELEASES.values())
+        decided = sum(item.decided for item in chosen)
+        named = ", ".join(f"#{item.issue}" for item in chosen)
         print(
             "FAILED"
             if problems
-            else f"OK: {decided} rows of {len(RELEASES)} reports verified, controls refused"
+            else f"OK: {decided} rows of {named} verified, controls refused; "
+            "the coverage plan and report order hold"
         )
         return 1 if problems else 0
     print(json.dumps(actions[args.command](), indent=1, default=str))

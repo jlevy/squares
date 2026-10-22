@@ -117,6 +117,11 @@ walks every report at these counts from the 18 October ledger’s starts, frozen
 (`evand-compositions-2026-10-13`), by 2.74e-10 (at 382) to 5.07e-05. **64 are superseded
 on entry** by the next report the walk records at their count: Couzo’s #675 (25), #672
 (19), #678 (9) and #715 (2), and Darius Muglich’s #686 (9).
+At 57 counts besides the eight, #670 is the first report the walk records and its row is
+superseded in turn; the start there, 50 of `couzo-verified-bounds-2026-10-14`’s rows, six
+of `couzo-certificates-2026-10-14`’s and `evand-fresh-compositions-2026-10-14`’s at 460,
+now names #670 as its successor instead of the #678, #686 or #715 row that had superseded
+it on `main`, so each count is one chain in report order.
 [acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record
 the source register reads them from.
 
@@ -128,7 +133,7 @@ The source discloses OpenAI Codex assistance with its checker.
 Beyond the corpus the per-count JSON credits Couzo’s seeds at most counts, Evan Daniel’s
 at 364 and his seed or construction at 403 and 444, Kevin Fang’s at 382, and Fang’s
 rectangle and gluing with PingYou Ltd’s square input at 703, 757, 813 and 931, and names
-no seed credit at 21; those statements are the source’s, and per-row credit beyond the
+no seed credit at 21 counts; those statements are the source’s, and per-row credit beyond the
 horizon is the owner’s open question from #686.
 
 ## Commands
