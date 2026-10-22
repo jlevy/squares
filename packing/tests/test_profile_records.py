@@ -214,9 +214,12 @@ def test_live_current_families_pending_comparison_and_known_scope_gap() -> None:
         (105, "upper", "reported"),
         (204, "upper", "reported"),
     }
-    assert (105, "upper", "reported") not in {
-        (facet.n, facet.direction, facet.lane) for facet in index.facets["T-174"]
+    at_105 = {
+        (facet.n, facet.direction, facet.lane)
+        for facet in index.facets["T-174"]
+        if facet.n == 105
     }
+    assert at_105 == {(105, "upper", "verified")}
 
 
 def test_cli_keeps_unassessed_distinct_from_known_current(

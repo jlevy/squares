@@ -323,28 +323,101 @@ def test_the_coverage_register_reads_each_source_claims_record() -> None:
         assert set(rows) <= set(source["scope"]["n_values"])
 
 
-def test_a_successor_outside_the_walk_holds_the_plan_and_one_it_reaches_does_not() -> None:
+def _successor_at_631(
+    successor: str, added: tuple[str, str] | None = None, **changed: str
+) -> tuple[list[str], list[str]]:
+    """#719's row at 631 held superseded by ``successor``, with ``added`` (a value and a
+    date) as that source's row, and what the plan and `check_source_coverage` say there."""
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
+    held = rows[631, MISHAPOLK]
+    held.update(disposition="superseded", superseded_by=successor, **changed)
+    claims = {
+        source["id"]: coverage_check.load_claims(coverage_check.ROOT / source["claims_record"])
+        for source in coverage["sources"]
+        if source.get("claims_record")
+    }
+    if added is not None:
+        value, dated = added
+        mine = next(source for source in coverage["sources"] if source["id"] == MISHAPOLK)
+        coverage["sources"].append(
+            {**mine, "id": successor, "source_date": dated, "scope": {"n_values": [631]}}
+        )
+        coverage["beyond_horizon_claims"].append(
+            {
+                "n": 631,
+                "source_id": successor,
+                "claim": "upper-bound",
+                "value": value,
+                "assurance": "reported",
+                "disposition": "tracked-outside-case-corpus",
+                "bead": "think-xyhn",
+            }
+        )
+        claims[successor] = {631: value}
+    plan = [problem for problem in replay.coverage_problems(coverage) if "n=631 " in problem]
+    gate = [
+        error
+        for error in coverage_check.beyond_horizon_errors(coverage, claims)[0]
+        if "631" in error
+    ]
+    return plan, gate
+
+
+def test_a_successor_outside_the_walk_holds_the_plan_only_with_a_later_smaller_row() -> None:
     """#720's review B, B1: a later import may supersede a row the plan calls current, as
-    #719 supersedes #670's at 370, 452 and 536, while a successor the walk reaches out of
-    order is still refused."""
+    #719 supersedes #670's at 370, 452 and 536. #722's review A, A5: the plan accepts such
+    a successor only where it holds a row at the count strictly below, dated no earlier,
+    with the held row otherwise as planned, so it does not rest on the coverage gate; a
+    same-day successor is not ordered by either."""
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
     for n in (370, 452, 536):
         assert rows[n, "couzo-issue670-2026-10-17"]["superseded_by"] == MISHAPOLK
     assert replay.coverage_problems(coverage) == []
-    held = rows[364, "couzo-issue670-2026-10-17"]
-    assert "superseded_by" not in held
-    held["disposition"] = "superseded"
-    held["superseded_by"] = "a-later-import-2026-10-23"
-    assert replay.coverage_problems(coverage) == []
-    held["superseded_by"] = "evand-compositions-2026-10-13"
-    assert replay.coverage_problems(coverage) == [
-        "n=364 from couzo-issue670-2026-10-17: the register's row is not the plan's",
-        (
-            "n=364 from couzo-issue670-2026-10-17: names evand-compositions-2026-10-13, "
-            "earlier in the chain"
-        ),
-    ]
+    refused = "n=631 from mishapolk-issue719-2026-10-22: the register's row is not the plan's"
+    smaller, larger = "25.6568542495100000", "25.6568542496000000"
+    later = _successor_at_631("x-later-2026-10-23", (smaller, "2026-10-23"))
+    assert later == ([], [])
+    same_day = _successor_at_631("x-same-2026-10-22", (smaller, "2026-10-22"))
+    assert same_day == ([], [])
+    for successor, added in (
+        ("couzo-issue715-2026-10-21", None),
+        ("a-later-import-2026-10-23", None),
+        ("x-early-2026-10-21", (smaller, "2026-10-21")),
+        ("x-big-2026-10-23", (larger, "2026-10-23")),
+    ):
+        plan, gate = _successor_at_631(successor, added)
+        assert plan == [refused], successor
+        assert gate, successor
+    changed, _ = _successor_at_631(
+        "x-later-2026-10-23", (smaller, "2026-10-23"), assurance="verified"
+    )
+    assert changed == [refused]
+
+
+def test_a_commit_stating_two_sides_at_a_count_is_walked_at_its_least() -> None:
+    """#722's review A, A2: 4e4c8ce states 450 twice and 5a299b4 six counts above 1024
+    twice (`best/` and `parents/`); the ledger walks each commit's least side there, naming
+    the other file, so 5a299b4 ties #715 above 1024 rather than lying above it. A4: 366 and
+    447 are #719's from the 06:05:31Z edit that first claimed them."""
+    sources = safe_load((replay.WALKS[replay.ISSUE_719].directory / "sources.yaml").read_text())
+    reports = {report["report"]: report for report in sources["reports"]}
+    for report in reports.values():
+        counted = Counter(claim["n"] for claim in report["claims"])
+        assert max(counted.values()) == 1, report["report"]
+    couzo = reports["franciscouzo/square-packing@4e4c8ce"]
+    at_450 = next(claim for claim in couzo["claims"] if claim["n"] == 450)
+    assert at_450["printed"] == "21.767428349966"
+    assert "the least of the 2 sides" in at_450["exact_from"]
+    later = reports["franciscouzo/square-packing@5a299b4"]
+    held_715 = {claim["n"]: claim["exact"] for claim in reports["#715"]["claims"]}
+    for n in (1061, 1266, 1339, 1413, 1489, 1568):
+        claim = next(claim for claim in later["claims"] if claim["n"] == n)
+        assert claim["exact"] == held_715[n], n
+    own = {claim["n"]: claim for claim in reports["#719"]["claims"]}
+    assert {n for n, claim in own.items() if "reported_at" in claim} == {366, 447}
+    assert own[447]["reported_at"] == "2026-10-22T06:05:31Z"
 
 
 def test_719_reads_both_tables_and_holds_each_file_to_its_pinned_digest() -> None:
