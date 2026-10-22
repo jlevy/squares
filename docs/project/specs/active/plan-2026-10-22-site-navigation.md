@@ -1,0 +1,654 @@
+---
+title: Site Navigation and Page Hierarchy
+description: Current route inventory and the Overview, News, Results, Learn, and About hierarchy with stable addresses and consistent breadcrumbs
+author: Codex, for the repository owner
+---
+# Feature: Site Navigation and Page Hierarchy
+
+**Date:** 2026-10-22
+
+**Author:** Codex, for the repository owner
+
+**Status:** Draft for review.
+No site implementation is included.
+
+**Tracking:** `think-7kbb` (planning; pending plan review)
+
+**Workflow:** `tbd shortcut new-plan-spec`
+
+## Overview
+
+Use the confirmed top-level order **Overview**, **News**, **Results**, **Learn**, and
+**About**. Overview and the site name link home; News links directly to its page.
+Results, Learn, and About have dropdowns.
+Results groups the result register, Atlas, Frontier Survey, and verification
+explanations. Learn groups tutorials, papers, film, downloads, and the workbench.
+About groups the project, people, contribution guidance, documentation, and external
+resources.
+
+Use a small dropdown for each group, a consistent parent for each nested page, and short
+homepage previews with buttons into the hierarchy.
+Keep all existing public page addresses.
+The confirmed label **Learn** replaces **Explanations** in navigation, while its landing
+page stays at `papers.html`.
+
+## Goals
+
+- Let readers choose by purpose: find a bound, understand a proof, try a packing, follow
+  new work, or contribute.
+- Put the result register and the case-oriented Atlas and Frontier Survey under one
+  Results parent, while explaining the difference between results and cases.
+- Make every content page reachable through a collection or landing page, with the
+  active top-level parent and a predictable trail on nested pages.
+- Give the homepage selected content and direct actions without reproducing entire
+  directories, paper catalogues, or resource lists.
+- Preserve published paths, fragments, queries, downloads, record identities, and
+  ordinary links that work without opening a popover.
+
+## Non-Goals
+
+This plan does not change scientific claims, verification levels, attribution, result
+ranking, workbench behavior, hosting, or domain configuration.
+It does not implement navigation, replace the static build, introduce a site framework,
+or create a global search service.
+Page-weight work already tracked as `think-v1qe` remains a separate implementation
+concern; reorganizing navigation does not by itself reduce table bytes.
+
+## Background
+
+The source baseline is `59b1ec594` on 2026-10-22. The inventory comes from
+[the URL register](../../../../packing/site-urls.yaml), the shared
+[navigation partial](../../../../packing/devtools/templates/site-nav.html),
+[page producers](../../../../packing/devtools/render_overview.py),
+[document and chapter producers](../../../../packing/devtools/site_documents.py), and
+[profile producers](../../../../packing/devtools/render_contributors.py).
+The retained `site-squaremath-domain` build from the domain work was also read for
+headings, current navigation, and visible breadcrumbs on the main pages, workbench, and
+sample records. This is an inspection of source and an existing rendered artifact, not a
+new build or a production crawl.
+The current tree below records that baseline; the proposed homepage and About page
+incorporate the owner’s subsequent instruction to replace profile previews with a short
+statement and an All Profiles button.
+
+All reader-facing addresses in this proposal use `https://squaremath.org/`. Paths in the
+trees are relative to that root.
+The separate [domain plan](plan-2026-10-22-squaremath-domain.md) owns publication at
+that host.
+
+### Audience journeys
+
+| Reader’s task | First destination | Next step |
+| --- | --- | --- |
+| Find the best known packing or bounds for a particular n | Results → Best Known Bounds, or Atlas | One case record, its sources, and relevant results |
+| Check a new theorem, certificate, or improvement | Results → All Results | One result record, its affected cases, evidence, and authors |
+| Learn the problem and its methods | Learn → Tutorials | Advanced tutorial, paper, or interactive workbench |
+| Read a particular proof | Learn → Papers | The paper’s HTML, PDF, and source; linked result records |
+| See or manipulate packings | Learn → Film or Workbench | Atlas and individual cases when evidence is needed |
+| Follow recent work | News | Announcement, then the linked result, paper, or profile |
+| Identify a contributor or submit a result | About → People and Profiles or Report a Result | Person’s credited work or the existing submission route |
+| Reproduce or extend the project | About → Documentation | Synopsis, conventions, development guide, and repository |
+
+The result register is organized by contribution; the Atlas and Frontier Survey are
+organized by number of squares.
+Neither collection contains the other.
+Their common Results parent makes both discoverable without turning each result or case
+into a menu entry.
+
+## Current Site Inventory
+
+The URL register contains **1,149 registrations**, of which **666 are content HTML
+pages**. Asset patterns count as register entries, not as enumerations of every emitted
+asset.
+The [complete route disposition index](plan-2026-10-22-site-navigation-routes.csv)
+lists all 1,149 entries with their current kind, canonical address, proposed parent, and
+disposition. Counts describe this baseline; implementation must reconcile later
+registrations before changing navigation.
+
+| Registered kind or family | Count | Meaning for navigation |
+| --- | ---: | --- |
+| General content pages | 15 | Main pages, tutorials, documentation, film, and workbench |
+| Synopsis chapters | 18 | Generated chapter pages, reached from the Synopsis index |
+| Profile directory and profiles | 76 | One directory and 75 individual people |
+| Case records | 324 | One full page per n, from 1 through 324 |
+| Result records | 229 | One full page per registered result |
+| Paper HTML pages | 4 | Three n = 11 papers and the packing-methods paper |
+| **Content HTML subtotal** | **666** | Collections and their content, not 666 menu items |
+| Forwarders | 30 | Compatibility pages, including old contributor addresses |
+| Other paper files | 8 | Four PDF and four Markdown editions |
+| Byte copies | 6 | Published compatibility copies of papers or posters |
+| Asset registrations | 437 | Drawings, posters, icons, and four hashed-asset patterns |
+| Site files | 2 | `404.html` and `sitemap.xml` |
+| **All registrations** | **1,149** | Content, compatibility, assets, and site infrastructure |
+
+### Current navigation and content tree
+
+`[page]` means a content HTML page; `[section]` means a fragment within a page;
+`[family]` means individually published pages; `[external]` leaves the site.
+The tree shows how readers reach content, so a shared preview can appear in more than
+one place. It does not imply that duplicate previews are separate pages.
+
+```text
+Site name → / [page; home]
+├── Overview → / [page; same destination as site name]
+│   ├── The Square Packing Problem [section #the-problem; hero n = 53]
+│   ├── Atlas preview [section #the-atlas-of-square-packings]
+│   │   └── Atlas page, case records, and complete poster PDF
+│   ├── News preview [section #news] → news.html
+│   ├── Recent Major Results [section #recent-results] → results.html
+│   ├── Profiles preview [section #profiles] → profiles/
+│   ├── Report Your Results [section #report-your-results]
+│   ├── Papers cards [section #papers] → tutorials and papers.html
+│   ├── Visuals [section #visuals]
+│   │   ├── Poster PDF and inline film
+│   │   └── All PDFs → papers.html#pdfs; View Visualizations → visualize.html
+│   ├── Squares Project Documentation [section #squares-project-documentation]
+│   │   └── README, Epistemics, Synopsis, Conventions, Development
+│   └── More Resources [section #more-resources; external project/source cards]
+├── News → news.html [page]
+│   └── News/changelog entries, filters, and dated entry anchors [sections]
+├── Atlas → atlas.html [page]
+│   ├── Graphical Atlas [section #the-atlas-of-square-packings; 324 tiles]
+│   ├── The Frontier Survey [section #the-frontier-survey; explanation]
+│   ├── Best Known Results [section #best-known-results; 324 table rows]
+│   └── cases/1.html … cases/324.html [family; 324 full case records]
+├── Results → results.html [page]
+│   ├── Added in the Last Seven Days [section]
+│   ├── Earlier Publications [section #earlier-results-by-week-published]
+│   ├── Verification Ladders [section #verification-ladders]
+│   ├── Evidence and Exactness [section]
+│   ├── Result Types and Credits [section #results-and-credits]
+│   ├── Status and Supersession [section]
+│   ├── Browse Results [section #all-results; filtered/sorted table]
+│   └── result/t-001.html … result/t-229.html [family; 229 full records]
+├── Explanations → papers.html [page]
+│   ├── Tutorial [section #tutorial]
+│   │   ├── tutorial.html [page; first-principles tutorial]
+│   │   └── tutorial-advanced.html [page; advanced tutorial]
+│   ├── Papers [section #papers]
+│   │   ├── papers/n11-lower-bounds-explainer.html [page; Part I]
+│   │   ├── papers/n11-threshold-bound-review.html [page; Part II]
+│   │   ├── papers/n11-optimality-review.html [page; Part III]
+│   │   └── papers/square-packing-methods-survey.html [page]
+│   ├── PDFs [section #pdfs; poster download cards]
+│   └── Visuals [section #visuals; full inline film and local navigation]
+│       ├── Film local link → papers.html#visuals
+│       ├── Workbench local link → workbench/ [page]
+│       │   └── Animate / Pack / Search; Animation studio [application states]
+│       └── visualize.html [page; standalone film with the same local links]
+├── About → about.html [page]
+│   ├── The Squares Project [section #the-squares-project]
+│   ├── Profiles [section #profiles; same preview as home]
+│   │   └── profiles/ [page; directory]
+│   │       └── profiles/<person>.html [family; 75 profiles]
+│   │           └── Records, Results, Credited Work, Other Reviewed Records,
+│   │               Related News, public accounts, and resources [profile sections]
+│   ├── Report Your Results [section #report-your-results]
+│   └── Squares Project Documentation [section #squares-project-documentation]
+│       ├── readme.html [page; project guide]
+│       ├── epistemics.html [page; verification and significance policy]
+│       ├── synopsis.html [page; chapter index]
+│       │   └── synopsis/<chapter>.html [family; 18 chapters]
+│       ├── conventions.html [page]
+│       └── development.html [page]
+└── GitHub [external utility link]
+    └── Repository-only research records, archive, defects, and developer sources
+Color theme [utility control; System / Light / Dark]
+```
+
+The global bar currently has six content links plus GitHub: Overview, News, Atlas,
+Results, Explanations, and About.
+The Film/Workbench links are a local navigation row, not global tabs.
+Workbench modes, Atlas layout and size choices, table filters, news filters, popovers,
+and theme choices are controls or states within pages.
+They do not add pages to the route count.
+
+The five documentation pages and all Synopsis chapters currently mark **GitHub** as
+current even though the reader is still on the site.
+Profiles mark About as current and visibly show `About → Profiles` ancestry.
+Case and result pages declare structured breadcrumbs in their metadata, but the
+inspected sample pages have no equivalent visible breadcrumb navigation.
+About itself has no breadcrumb; retain that choice.
+
+### Compatibility, fragments, downloads, and external material
+
+The 30 forwarders comprise 21 `contributors/` addresses, four Atlas aliases
+(`frontier.html`, `status.html`, `cases.html`, `cases/index.html`), one Results alias
+(`all-results.html`), three paper aliases, and `defects.html`, which leads to the
+repository’s defect log.
+Preserve their current targets and query/fragment behavior.
+In particular, **`frontier.html` is a forwarder today**, while the substantive Frontier
+Survey is part of `atlas.html`.
+
+The six copies are the two `known-best-*.pdf` aliases, the old `t-018-explainer`
+Markdown and PDF, and the old `n11-optimality/t-060-explainer` Markdown and PDF. The
+four paper families each publish HTML, Markdown, and PDF editions.
+These download links belong with their papers; they are not additional menu entries.
+
+Of the 437 asset registrations, 420 are Atlas drawings: 324 house drawings, 95
+regularized drawings, and the Trump eleven-square overview drawing.
+The other 17 registrations cover poster images and exports, icons, the social card, and
+four hashed-asset/data patterns.
+Films are external release assets, reached from the film page.
+Crawler and deployment artifacts do not belong in the content hierarchy.
+
+Preserve homepage aliases such as `#the-atlas`, `#learn-more`, `#pdfs`, `#video`,
+`#pdfs-and-videos`, and `#other-square-packing-projects`; the About contribution and
+news aliases; result-row and news-entry anchors; Atlas tile and survey-row anchors; and
+Synopsis’s old section landings.
+The route CSV inventories registered paths, not every anchor, query combination, or
+external resource. Implementation must check those against the generated pages and their
+existing compatibility tests.
+
+The literature archive, evidence inventory, research experiments, sessions, hypotheses,
+raw frontier Markdown, and defect log are repository material linked from the site.
+They do not each have a separately published site page.
+Synopsis chapters summarize and link these collections.
+An external project card is a citation or resource link, not a local subpage.
+
+## Design
+
+### Proposed hierarchy
+
+A top-level label is a normal link to its landing page, with a separate disclosure
+button for its menu.
+Overview and News are direct links; Results, Learn, and About have dropdowns.
+Keep a single dropdown level; the collection pages handle individual cases, people,
+papers, and chapters.
+
+```text
+Site name → / [Home; selected previews and actions]
+├── Overview → / [direct link; same homepage]
+├── News → news.html [direct link; announcements and changelog]
+├── Results → results.html [hub and complete result register]
+│   ├── All Results → results.html#all-results [menu; section]
+│   │   └── result/t-NNN.html [229 record pages]
+│   ├── Atlas → atlas.html [menu; page]
+│   │   └── cases/N.html [324 case pages]
+│   ├── Best Known Bounds → atlas.html#best-known-results [menu; section]
+│   │   └── Frontier Survey explanation and the same case pages
+│   └── Verification and Ratings → epistemics.html [menu; page]
+├── Learn → papers.html [hub; current Explanations page]
+│   ├── Tutorials → papers.html#tutorial [menu; section]
+│   │   ├── tutorial.html
+│   │   └── tutorial-advanced.html
+│   ├── Papers → papers.html#papers [menu; section]
+│   │   └── Four paper HTML pages, each with its PDF and Markdown editions
+│   ├── Film → visualize.html [menu; page]
+│   ├── Workbench → workbench/ [menu; page]
+│   └── Downloads → papers.html#pdfs [menu; section]
+└── About → about.html [hub; no breadcrumb on this page]
+    ├── The Project → about.html#the-squares-project [menu; section]
+    ├── People and Profiles → profiles/ [menu; directory]
+    │   └── 75 profile pages
+    ├── Documentation → about.html#squares-project-documentation [menu; section]
+    │   ├── readme.html
+    │   ├── synopsis.html → 18 chapter pages
+    │   ├── conventions.html
+    │   └── development.html
+    ├── External Resources → about.html#resources [menu; new section]
+    └── Report a Result → about.html#report-your-results [menu; section]
+GitHub and color theme [utilities]
+```
+
+The four-, five-, and five-item dropdowns avoid listing individual records or all 18
+Synopsis chapters. Readers can open the top-level landing page for introductions and all
+collection links. Epistemics remains cross-linked from Documentation, tutorials, and
+result explanations; its single navigation parent becomes Results because readers use it
+to interpret evidence labels.
+
+### Landing pages and content ownership
+
+**Results.** Keep `results.html` as the Results hub and register.
+Start with a short explanation of results versus cases, direct actions for Atlas and
+Best Known Bounds, and visible access to the result table and its filters.
+The table should follow that compact introduction.
+Retain arrivals and publication rollups as named sections with local jump links.
+Keep the existing verification, evidence, credit, and status anchors, with concise
+explanations linking to the full policy in `epistemics.html`. Do not copy Atlas tiles or
+the 324-case table onto this page.
+
+**Atlas and Frontier.** Keep the visual Atlas and Frontier Survey on `atlas.html`
+initially. Give the page clear local links for **Packings**, **About the Bounds**, and
+**Best Known Bounds**. The Results dropdown’s Best Known Bounds link lands directly on
+the table, where readers can reach the survey explanation.
+Preserve the survey’s reported/verified distinction and its source and verification
+links.
+
+The Frontier Survey has substantial prose and a separate 324-row table, so a distinct
+page is a reasonable later alternative.
+This proposal first tests direct section links and local navigation.
+Split only if reader checks still confuse the two views, or measured rendering and
+scrolling costs justify it.
+A split would require its own route and fragment disposition: `frontier.html` currently
+forwards to Atlas, and historical Atlas links must continue to reach the corresponding
+rows. The present plan does not silently turn that forwarder into a different
+destination.
+
+**Learn.** Reuse `papers.html` as a concise learning index.
+Its existing tutorial and paper cards remain the complete catalogues.
+Keep `#visuals` as a film/workbench summary with direct links; show the full player at
+`visualize.html`. Keep the existing PDF section, with poster downloads and links to
+paper editions, under the menu label Downloads.
+Retain both Film and Workbench as direct menu choices so the interactive tool is visible
+without introducing an otherwise empty Tools category.
+
+**About.** Keep the project narrative, the full contribution instructions, documentation
+cards, and the approved short statement with an All Profiles button.
+Within the Profiles sections on About and Home, show the short statement and button
+without names or a table.
+Preserve full-name attributions in the surrounding project narrative.
+Move the full external resource card collection to the new `about.html#resources`
+section, using the existing resource data and rendering.
+This gives homepage-only content a stable place without adding a new hub page.
+Profile Resources fields continue to link a person’s own sources.
+
+**News.** Keep dated announcements and the full changelog together.
+Recent-result rollups remain on Results because they describe the register; News entries
+can cover papers, downloads, and site changes as well as mathematical results.
+
+### Homepage composition
+
+Retain the problem introduction and hero, then a compact Atlas preview.
+Follow with selected recent news, a bounded recent-results preview, selected learning
+cards, and short About/contribution links.
+Keep the user’s chosen visual presentation while reducing the amount of complete
+catalogue content on the page.
+
+| Current homepage content | Proposed homepage treatment | Complete destination |
+| --- | --- | --- |
+| Problem and n = 53 hero | Retain concise introduction and case link | Tutorial; case 53 |
+| Atlas preview and controls | Retain a bounded preview and existing expand behavior | Atlas; Best Known Bounds; complete PDF |
+| News cards | Selected recent entries and All News button | `news.html` |
+| Recent Major Results | Bounded selected rows and All Results button | `results.html#all-results` |
+| Profiles section | Short statement and All Profiles button; no names or table | `profiles/` |
+| Report Your Results | One invitation and Report a Result button | `about.html#report-your-results` |
+| All tutorial/paper cards | Selected starting points and Browse Learning Materials button | `papers.html` |
+| Poster and inline film | One media preview with Watch Film, Workbench, and Downloads actions | `visualize.html`, `workbench/`, `papers.html#pdfs` |
+| Complete documentation cards | One short project/developer introduction and Documentation button | `about.html#squares-project-documentation` |
+| Full external resource cards | Short resource link or selected cards and All Resources button | `about.html#resources` |
+
+Use shared records and existing card renderers for previews; do not maintain a second
+copy of the full content.
+Preserve old homepage anchors with visible summary landings and destination links.
+Do not depend on JavaScript redirects to make those old links useful.
+A preview count or selection rule is presentation data, never a new assertion about
+result significance or contributor status.
+
+### Route disposition and page parents
+
+All 666 content pages keep their addresses.
+The only new address is the `about.html#resources` section fragment.
+The CSV expands the generated families and technical registrations; this table specifies
+the reader-facing parent for every named page or family.
+
+| Existing path or family | Proposed label or role | Parent and disposition |
+| --- | --- | --- |
+| `/` (`index.html`) | Overview / Home | Overview and site-name destination; selected previews |
+| `results.html` | Results / All Results | Top-level Results hub; table remains at `#all-results` |
+| `result/t-NNN.html` (229) | Result identifier and title | Results; retain record contents and evidence links |
+| `atlas.html` | Atlas | Results; retain graphical collection and survey |
+| `atlas.html#the-frontier-survey` | About the Bounds / Frontier Survey | Section of Atlas; contextual explanation |
+| `atlas.html#best-known-results` | Best Known Bounds | Section of Atlas; direct Results menu entry |
+| `cases/N.html` (324) | Case n | Results → Atlas; reached from either Atlas or bounds table |
+| `epistemics.html` | Verification and Ratings | Results; cross-link from documentation without changing parent |
+| `papers.html` | Learn | Top-level learning hub at its current address |
+| `tutorial.html` | Tutorial | Learn; retain first-principles text |
+| `tutorial-advanced.html` | Advanced Tutorial | Learn; retain advanced text and links |
+| `papers/n11-lower-bounds-explainer.html` | Part I: New Lower Bounds | Learn; keep full title on the paper |
+| `papers/n11-threshold-bound-review.html` | Part II: Certified Lower Bound Review | Learn; keep full title on the paper |
+| `papers/n11-optimality-review.html` | Part III: Optimality Review | Learn; keep full title on the paper |
+| `papers/square-packing-methods-survey.html` | How Record Square Packings Are Found | Learn; retain paper and editions |
+| `visualize.html` | Film | Learn; full player and release links |
+| `workbench/` (`workbench/index.html`) | Workbench | Learn; retain application states and shareable URLs |
+| `news.html` | News | Top-level page; preserve `#changelog` and entry anchors |
+| `about.html` | About | Top-level hub; preserve all existing sections and aliases |
+| `profiles/` (`profiles/index.html`) | People and Profiles | About; full directory |
+| `profiles/<person>.html` (75) | Person’s evidenced name | About → Profiles; retain all reviewed identity and credit content |
+| `readme.html` | Project Guide | About; keep README content and source link |
+| `synopsis.html` | Research Synopsis | About; full chapter index |
+| `synopsis/<chapter>.html` (18) | Chapter title | About → Research Synopsis; keep previous/next links |
+| `conventions.html` | Conventions | About; documentation entry |
+| `development.html` | Development | About; documentation entry |
+
+The 18 Synopsis chapters are: **The Program at a Glance**, **The Problem**, **The
+Program So Far**, **The Cell Decomposition**, **n = 11 End to End**, **The Corner and
+the Method It Forced**, **The Lay of the Land by n**, **Theoretical Results**, **What Is
+Built**, **The Hypothesis Registry**, **Experiments Conducted**, **Sessions Conducted**,
+**The Defect Record**, **Where This Stands**, **Workflow Entry Contracts**, **Handoff
+Record**, **Terminology**, and **References**. Their exact paths appear in the CSV. They
+remain chapters, rather than competing with their parent in a dropdown.
+
+### Breadcrumbs and active navigation
+
+Top-level Overview (Home), News, Results, Learn, and About pages need no visible
+breadcrumb. In particular, do not add an About breadcrumb above the About page’s title.
+Nested pages show their parent trail above the heading, consistently across kpress
+articles, static records, profiles, and the workbench shell.
+
+| Page | Visible trail, ending with the current page |
+| --- | --- |
+| Atlas | Results → Atlas |
+| Case 11 | Results → Atlas → n = 11 |
+| Result T-060 | Results → T-060 |
+| Epistemics | Results → Verification and Ratings |
+| Tutorial, Advanced Tutorial, or a paper | Learn → Current title |
+| Film or Workbench | Learn → Film / Workbench, as appropriate |
+| Profile directory | About → Profiles |
+| Person profile | About → Profiles → Person’s name |
+| Project Guide, Conventions, or Development | About → Current title |
+| Research Synopsis | About → Research Synopsis |
+| Synopsis chapter | About → Research Synopsis → Chapter title |
+
+Keep Home available through the site name instead of repeating it in every visible
+trail. Generate visible ancestry and structured `BreadcrumbList` data from the same
+parent definitions; if the structured form includes Home, its remaining ancestors must
+match the visible trail.
+The final item is text with `aria-current="page"`; ancestor items are links.
+An Atlas table section does not create a second breadcrumb trail for the same case.
+A result opened from a profile still belongs to Results.
+Browser Back and contextual related links handle the path the reader actually took.
+
+Mark the active top-level group by its descendant relationship.
+Use `aria-current="page"` only when a link names the current page, and an appropriate
+ancestor indication such as `aria-current="true"` with a visible style for a group whose
+child is open. A fragment link may identify the selected location after explicit
+navigation; avoid marking both Atlas and Best Known Bounds as the current page.
+Use the same rules after a hard reload, a direct deep link, and browser Back.
+
+Retain the Film/Workbench sibling links where they help, but make Film lead directly to
+`visualize.html`. These are page links, not ARIA tab panels.
+Workbench’s Animate, Pack, and Search controls retain their separate application
+semantics. Popovers retain a clear full-page action; their navigation must not create a
+second global header inside the overlay.
+
+### Dropdown and small-screen behavior
+
+Use semantic navigation lists and disclosure buttons.
+The top-level text links keep ordinary browser behavior; a distinct adjacent button
+opens the list and exposes `aria-expanded` and `aria-controls`. Readers can activate
+either with a keyboard or a touchscreen.
+Do not require hover, and do not assign application-menu roles to ordinary site links.
+
+Tab reaches links and buttons in document order.
+Enter or Space toggles a disclosure; Escape closes it and returns focus to its
+disclosure button. Closing a menu must not leave focus in hidden content.
+Outside activation closes it without blocking the activated link or stealing focus.
+Opening one disclosure closes the other, and focus indicators remain visible.
+Hover can supplement these interactions, never replace them.
+
+On narrow screens, show a labelled Menu button that reveals the same groups as a
+vertical list with inline disclosures.
+It must fit without horizontal scrolling, work with enlarged text, and keep touch
+targets separated.
+Do not add flyout submenus or require the reader to dismiss a modal to
+follow a link. Without JavaScript, expose the navigation links or provide a native
+disclosure fallback; neither primary navigation nor the landing-page contents may become
+unreachable.
+
+An open disclosure or keyboard focus within the header keeps the scroll-aware header
+visible. Account for the header when scrolling to fragments so a section heading or
+focused control is not hidden.
+Coordinate dismissal with the existing theme popover and case/result/profile overlays.
+Keep the site navigation usable in both themes and with reduced motion, and preserve the
+current print behavior.
+
+### Shared design-system component
+
+The dropdowns must match the site’s existing design system.
+Define one navigation disclosure component in
+[Design System](../../../../packing/devtools/templates/paper-design.md) before
+implementing its shared styles.
+Document the typography, label casing, spacing, surface and text colors, border
+treatment, disclosure-icon size and alignment, focus indicator, active-parent state, and
+open/closed states. Reuse the existing KPress, `paper-type.css`, and navigation tokens;
+add a shared token only for a role the current system does not express.
+
+Use the same component and tokens in every page producer and the workbench shell.
+Do not introduce per-page dropdown markup or styling.
+The design-system entry must also specify keyboard and touch behavior, narrow-screen
+expansion, no-script fallback, light/dark themes, reduced motion, and scroll-aware
+header interaction. Link the shared stylesheet and behavior implementation back to that
+entry, and include representative paper, record, profile, and workbench pages in visual
+review.
+
+### Components and interfaces
+
+Use one declared hierarchy for top-level groups, menu entries, page-family parents, and
+breadcrumb labels. Route membership must be explicit for overlapping collections such as
+Epistemics and profile-linked results.
+Reuse the URL register for existing addresses and the page producers for record
+membership; do not turn the dated CSV into a second live route registry.
+
+The implementation touches the shared `site-nav.html` and `site-nav.css`, navigation
+rendering in `render_overview.py`, its overview/article templates, `site_documents.py`,
+`render_case_pages.py`, `render_contributors.py`, result and paper rendering, and the
+workbench’s shared navigation integration.
+Browser behavior belongs in repository JavaScript or TypeScript files under the existing
+browser floor. No new package is needed merely to render links and disclosure controls.
+
+There is no external API change.
+Existing canonical paths, record identities, filter parameters, workbench state links,
+and asset URLs retain their meanings.
+Internal navigation helpers will need a page identity and parent lookup rather than only
+the current flat `data-page` key.
+Visible breadcrumbs and metadata must use that lookup.
+
+## Implementation Plan
+
+### Phase 1: Agree the hierarchy and route contract
+
+- [ ] Use the confirmed order Overview, News, Results, Learn, About; review the dropdown
+  contents and homepage ownership.
+- [ ] Reconcile the inventory with the then-current URL register and retain a
+  disposition for every content page, alias, and named fragment family.
+- [ ] Define the shared parent map and page-family rules.
+  Keep the current paths and the initial Atlas/Frontier section arrangement.
+- [ ] Review a small desktop/mobile navigation prototype, including a case, a profile,
+  and the workbench, before applying it to every producer.
+
+### Phase 2: Implement navigation and landing pages
+
+- [ ] Update the shared Design System document with the navigation disclosure component,
+  its tokens, states, and accessibility/interaction contract; use that component
+  consistently across pages and the workbench.
+- [ ] Add shared dropdowns, active-parent rules, and nested-page breadcrumbs across all
+  page producers and the workbench.
+- [ ] Reorganize Results and Learn with the specified entry points; add the full
+  external resources section to About and keep the About root breadcrumb-free.
+- [ ] Reduce homepage catalogues to previews and direct actions while preserving old
+  anchors and ordinary links.
+- [ ] Keep the full record pages, download editions, compatibility forwarders, and
+  query/fragment behavior intact.
+
+### Phase 3: Verify reader journeys and publish
+
+- [ ] Check every route family against the parent map, and verify all dropdown and
+  breadcrumb targets in a built artifact.
+- [ ] Exercise the journeys, keyboard/touch behavior, responsive layouts, deep links,
+  browser history, and no-script fallbacks described below.
+- [ ] Run the repository’s applicable validation tiers, review the implementation PR,
+  and check the deployed pages at `squaremath.org` after publication.
+- [ ] Record any remaining Frontier separation need as a distinct decision with reader
+  or performance evidence; do not expand this plan merely to create more pages.
+
+Implementation phase beads should be created after plan review, using these three phases
+as the initial scope.
+The planning bead remains open while the hierarchy is being reviewed; drafting this
+document does not authorize implementation.
+
+## Testing Strategy
+
+For this planning change, check the route CSV against all URL-register entries, verify
+counts and named-page coverage, check relative documentation links, run the document-map
+renderer/check, and format the new Markdown with the project’s pinned Flowmark.
+No site build is needed to review the proposed hierarchy.
+
+For implementation, extend existing navigation, document, profile, record, and workbench
+checks rather than copying template markup into new tests.
+Prove that each content page has exactly one top-level parent, each nested page has a
+resolvable acyclic ancestry, and no asset or forwarder appears in a content menu.
+Reconcile the complete generated route set, including newly added records, rather than
+hard-coding 666 as a permanent site limit.
+
+Browser acceptance covers desktop and narrow mobile layouts in both themes, keyboard
+navigation, touch activation, increased text size, reduced motion, and disabled
+JavaScript. Check every dropdown item at least once.
+Include representative direct loads of a paper, advanced tutorial, profile, result, case
+11, a late Atlas case such as 291, a Synopsis chapter, and the workbench.
+Verify menu focus and dismissal, sticky header interaction, current-parent indication,
+visible/structured breadcrumb agreement, and the absence of a breadcrumb on About
+itself.
+
+Retain regression coverage for `frontier.html` and case aliases, old contributor
+addresses, old paper downloads, legacy homepage and About fragments, result filters,
+result-row links, news-entry links, synopsis section landings, and Atlas tile/table
+anchors. Confirm that cases beyond the initial Atlas preview still expand and scroll to
+the correct target. A compatibility pass must also work without JavaScript where that
+behavior is currently supported.
+
+Follow [the validation tiers](../../../../development.md#validation-tiers): edit checks
+while changing code, reachable push checks before publishing a branch, the normal PR
+fast surface, and the full checkpoint at implementation close.
+Measure any changed page weight and browser cost against the existing published-page
+budgets.
+A menu change must not introduce a new rendering or navigation fetch dependency.
+
+## Rollout Plan
+
+Land this plan separately from the current presentation and domain work.
+Implement only after its review choices are settled.
+Publish the shared hierarchy and matching landing-page links together, with the site
+build’s existing URL and link checks.
+
+Keep the route register and compatibility outputs intact throughout.
+Check the live Home, Results, Atlas bounds anchor, Learn, a profile, a result, and
+Workbench after publication.
+A revert of the navigation implementation restores the preceding layout without changing
+scientific records or invalidating published URLs.
+
+## Open Questions
+
+- **Homepage selection?** Recommend retaining the Atlas preview and recent news/results,
+  with a smaller selection of learning content.
+  The people section remains the approved short statement and All Profiles button.
+  Choose learning cards during visual review rather than inventing a new ranking policy
+  in this plan.
+- **Frontier as its own page?** Recommend the direct Results menu anchor and Atlas local
+  navigation first. Revisit only with evidence that the combined page remains difficult
+  to use or exceeds its measured rendering limits.
+
+## References
+
+- [Complete route disposition index](plan-2026-10-22-site-navigation-routes.csv)
+- [Published URL catalogue](../../site-urls.md) and
+  [URL registration implementation](../../../../packing/devtools/site_urls.py)
+- [Current layout plan](plan-2026-10-08-site-layout-and-navigation.md)
+- [Contributor profiles plan](plan-2026-10-10-contributor-profiles.md)
+- [News and changelog plan](plan-2026-10-13-site-changelog.md)
+- [Domain plan](plan-2026-10-22-squaremath-domain.md) and
+  [deployment guide](../../guides/site-deployment.md)
+- [Workbench page template](../../../../packages/workbench/assets/template.html)
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
