@@ -5,7 +5,7 @@ title: Triage Couzo extended-range construction updates beyond the eight-case in
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: claude-code@spud10.local
 labels:
   - result-import
@@ -16,7 +16,7 @@ parent_id: is-01m44qz0rxvkakmyqaj7qdgagv
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:17:46.179Z
-updated_at: 2026-10-09T21:56:40.121Z
+updated_at: 2026-10-22T13:13:07.658Z
 started_at: 2026-10-09T00:19:50.892Z
 ---
 Read complete franciscouzo/square-packing changes74f7e8b andb10ad36 beyond already retained451 eight exact certificates: n378 update and20 added n>324 decimal pose/diagram pairs327332335-342364369372-379, plus remaining n<=324 context. Preserve explicit324-case standing horizon, source-only versus verified claims and all superseded histories. Acquire complete immutable ordinary inputs and licensing/lineage before any registry/adoption/replay; no credit transfer from accepted eight-case native jobs. Record a dated watched-source read with this open owner until a complete scoped packet disposes the new claims.
@@ -50,3 +50,15 @@ Review B on #466 (B2): #466 packet README, source-coverage notes and the two bey
 2026-10-09 review of PR #479 (C6, design note): with (n, source_id) succession requiring a strictly better, no-earlier-dated successor and at most one current row per n, a later-dated worse report, an equal re-report, or an earlier-dated better report found afterwards cannot be registered at a count that already has a current row (deferred-conflict counts as current). In-horizon superseded_reports has no date rule. Revisit if such a report arrives.
 
 2026-10-09: PR #479 (head 0698b2dd0, CI green, review A published with dispositions) adds dated beyond-horizon supersession keyed (n, source_id) and imports Couzo 2d32a6e n375/n378 into couzo-extended-updates-2026-10-08 (derived-only; blobs 96f21d6c/4179d7d4 as #469 recorded; SHA-256 cdcb176c/dbd3cc98). The ffd900d rows remain as dated superseded rows. Outside-corpus readers (render_recent_results, build_bound_citations) still open; use check_source_coverage.current_beyond_horizon().
+
+2026-10-22 c-triage-1022b (read-only; coordinator scratchpad triage-1022b/couzo-residue-plan.md).
+
+**The outside-corpus part this bead owns.**
+
+- The report-order walk records `3ef7634`'s 338 and 340 as history rows:
+  - 338 (18.907150436394) is superseded by `couzo-certificates-2026-10-11`;
+  - 340 (18.939701150684) is superseded by `f311f08`.
+- `couzo-certificates-2026-10-10` already retains both files byte for byte.
+- They are in the Couzo history records PR's optional set (O7). With `think-a4wq`'s 12
+  `02f9690` rows recorded, the `9bf90e7` read's hold for this bead can be removed in that
+  PR.

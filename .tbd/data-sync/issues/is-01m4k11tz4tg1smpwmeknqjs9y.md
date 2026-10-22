@@ -5,7 +5,7 @@ title: "Couzo 02f9690 beyond-horizon certificates: 15 below the tracked rows (n3
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T13:46:45.604Z
-updated_at: 2026-10-22T12:18:32.501Z
+updated_at: 2026-10-22T13:13:14.825Z
 started_at: 2026-10-22T02:18:23.092Z
 ---
 Found by the importer lane (think-md2i) in packing/resources/web/couzo-exact-certificates-2026-10-09/acquisition/claims.json: franciscouzo/square-packing 02f969075f79 holds 20 certificates beyond the n <= 324 horizon. 15 are below the tracked dated beyond-horizon rows (332, 336-341, 369, 373-379; 375 at 9953490883645300797660281830293/(5*10^29) by 4.29e-5, 378 at 9973230520053043026984980967643/(5*10^29) by 4.00e-4) and 5 above by about 1.8e-11 (327, 335, 342, 364, 372). think-1545 (another session) owns Couzo's extended-range rows; this bead holds the 02f9690 update for it: dated beyond_horizon_claims rows keyed (n, source_id) with dated supersession, as PR #479 did for 2d32a6e.
@@ -28,4 +28,38 @@ blocked_on: none
 blocked_on: jlevy/squares#717
 
 2026-10-22 12:25Z coord-intake-1021b: #717 merged (and #720, #721). The rest of this import is the next records change after #719's (PR on claude/intake-2026-10-22, think-xyhn): it edits the same registers, and #719's ledger walks Couzo's 5a299b4 as a dated publication. A read-only re-plan against main 76496462b and #719's head is running (c-triage-1022b, scratchpad triage-1022b/).
+blocked_on: think-xyhn
+
+2026-10-22 c-triage-1022b (read-only re-plan against main 76496462b and #719's head
+f9cee4736; coordinator scratchpad triage-1022b/: couzo-residue-plan.md, residue-rows.tsv).
+
+**Reproduced exactly.** The report-order walk over all of Couzo's history
+(tools/residue.py) finds the counts in this bead's title:
+
+- 15 of `02f9690`'s 20 beyond-horizon certificates are below the rows that stood on 9
+  October.
+- 5 are above: 327, 335, 342, 364 and 372.
+- 375 is below by 4.29e-5, and 378 by 4.0e-4.
+
+**Disposition.**
+
+- **12 become rows.** The `couzo-exact-certificates-2026-10-09` packet already retains
+  all 12 byte for byte (verified by blob id).
+  - **6 current:** 332, 336, 337, 341, 373 and 374. Each is below the 8 October decimal
+    row by 4.5e-12 to 1.6e-11. Five of them are among the 32 rows #715's import reply
+    left to this bead.
+  - **6 history:**
+    - 338, superseded by `3ef7634`;
+    - 339, by `couzo-certificates-2026-10-11`;
+    - 340, by `3ef7634`;
+    - 377, by #686;
+    - 378 and 379, by `f311f08`.
+- **3 are held: 369, 375 and 376**, above Göbel's construction at their counts. They go
+  to #613 (`think-8krd`). `main` already records superseded rows above Göbel at 375 and
+  376, so the owner's answer there should say whether history rows above Göbel are kept.
+- **Replay and closure.** The filtered replay of the 12 is about 1.5 CPU-min with controls.
+  It lands in the one Couzo history records PR (couzo-residue-plan.md), after #719's PR.
+  That PR closes this bead, and its reply on #715 covers this bead's share of the
+  promise.
+
 blocked_on: think-xyhn

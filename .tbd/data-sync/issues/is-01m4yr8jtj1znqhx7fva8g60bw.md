@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 4e4c8ce beyond-horizon index, 341 counts 325-102
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:04:02.641Z
-updated_at: 2026-10-22T12:18:37.946Z
+updated_at: 2026-10-22T13:13:36.245Z
 started_at: 2026-10-22T02:18:23.107Z
 ---
 Stage 1 triage, read-only, by the 15 October reads lane (think-mq0k), from the 02:30Z sweep at main 6964362b5. No issue reports any of it.
@@ -43,4 +43,62 @@ Price: the exact all-pairs replay of 341 certificates of 325 to 1023 squares is 
 blocked_on: jlevy/squares#717
 
 2026-10-22 12:25Z coord-intake-1021b: #717 merged (and #720, #721). The rest of this import is the next records change after #719's (PR on claude/intake-2026-10-22, think-xyhn): it edits the same registers, and #719's ledger walks Couzo's 5a299b4 as a dated publication. A read-only re-plan against main 76496462b and #719's head is running (c-triage-1022b, scratchpad triage-1022b/).
+blocked_on: think-xyhn
+
+2026-10-22 c-triage-1022b (read-only re-plan against main 76496462b and #719's head
+f9cee4736; coordinator scratchpad triage-1022b/: couzo-residue-plan.md, residue-rows.tsv,
+residue-held.tsv).
+
+**The walk.**
+
+- `tools/residue.py` walks every count from 325 to 1024 in report order from the grid.
+- The events are all 950 rows on #719's head and every certificate and index bound in the
+  Couzo, Daniel, Fang and de Winter histories, compared exactly.
+- It finds `4e4c8ce` below the standing side at 342 counts. This bead counted 341. The 47
+  above Göbel are exactly `think-8krd`'s 47.
+
+**Disposition by report order.**
+
+- **253 certificate rows.**
+  - **91 current:**
+    - 36 at counts where `main` holds only the grid, 0.177 to 0.464 below it: 325, 326,
+      329, 333, 334, 362, 363, 366, 367, 371, 401, 402, 405, 442, 443, 446, 485, 486, 530,
+      531, 577, 578, 626, 627, 677, 678, 730, 731, 785, 786, 842, 843, 901, 902, 962 and
+      963;
+    - 55 below `487b058`'s rows, 13 of them by 1e-10 to 1.04e-9 and 42 by 4e-12 to
+      1e-10.
+  - **162 history**, superseded by #670 (55), #719 (38), #715 (20), #686 (16), `5a299b4`
+    (10), #678 (9), #672 (5), #675 (4), `23aff0c` (4) and #666 (1).
+  - **The 26 rows #715's import reply left to this bead:** 24 are among these, 6 current
+    (850, 862, 914, 976, 986, 988) and 18 history under #719. 743 and 985 are index
+    deletion bounds.
+- **Held:**
+  - 47 above Göbel (`think-8krd`);
+  - 39 index deletion bounds with no file at their count. This is this bead's #627 C1
+    question, proposed as D6 on `think-f2io`. Recommended: no rows (the claim table's
+    monotonicity line), except 743 and 985, which #715 claimed (the #675 precedent).
+  - 3 sub-prints, 327, 332 and 542 (`think-fwa9`);
+  - `58a7833`'s 49 index entries, Göbel's own closed forms as rational enclosures (#613).
+
+**In the corpus.** Nothing new.
+
+- 18 of `4e4c8ce`'s certificates are below today's case lanes: 70, 88, 102, 106, 123, 126,
+  152, 153, 177, 199, 207, 258, 259, 266, 267, 292, 295 and 301.
+- Each is at or above an exact side the register already states (T-174's algebraic
+  supplement and the like). For example, 207 is 3.6e-31 above
+  14.880960371555579594696691574923….
+
+**The packet.**
+
+- New: `couzo-index-2026-10-15` at `4e4c8ce`. Its 253 certificates are 42.7 MB in a
+  checkout, about 8 MB as Git packs them. The Göbel files are pinned by digest.
+- Retention is owner decision O5: all of them, or the 91 current ones (17.2 MB, about
+  2 MB packed) with digests for the rest.
+- The replay by the filtered two-route decision is about 60 CPU-min with controls. That
+  re-prices this bead's 45 CPU-hour all-pairs figure.
+
+**Closure.** The one Couzo history records PR closes this bead, after #719's PR; its
+reply on #715 keeps this bead's share of the promise. The held items move to
+`think-8krd`, `think-fwa9` and D6 before it closes.
+
 blocked_on: think-xyhn

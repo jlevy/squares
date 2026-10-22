@@ -5,13 +5,13 @@ title: Beyond-horizon rows above Göbel's classical constructions
 kind: task
 status: open
 priority: 2
-version: 3
+version: 4
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-15T03:46:28.067Z
-updated_at: 2026-10-15T03:55:49.556Z
+updated_at: 2026-10-22T13:13:10.971Z
 ---
 **Owner question:** do Frits Göbel's classical constructions count as earlier reports, and so as the baseline beyond n = 324, so that a beyond-horizon row above one is not recorded? The record holds no Göbel construction beyond the corpus; its standing side there is the beyond-horizon row or the grid. Until the owner answers, draft register plans mark the affected rows `undecided-goebel` rather than recorded.
 
@@ -36,3 +36,25 @@ Göbel's side at m is the least member side at any count ≥ m (deletion). Sides
 2026-10-15: committed as 8cf42e177da4530f2d95c505854d48f304682782 on claude/wizardly-meitner-wqn4x3-reads-1015 (pushed; no PR), through the hooks. packing-validate --records exit 0; focused tests 319 passed (test_upper_bound_reports_487b058 holds the four set tallies and the undecided-goebel rule).
 
 2026-10-15T04:00Z, coordinator: tracked on GitHub as https://github.com/jlevy/squares/issues/613 (labelled bug; owner decision on Göbel as the beyond-horizon baseline; registered rows 369 and 376 above Göbel by 3.33e-2 and 4.57e-3).
+
+2026-10-22 c-triage-1022b (read-only; coordinator scratchpad triage-1022b/residue-held.tsv).
+
+**Göbel-above publications at 325 to 1024.** The retained `goebel_beyond_horizon.py`
+decided each exactly, in the report-order walk of Couzo's whole history. The Couzo history
+records PR would hold 101 of them for #613:
+
+- **`4e4c8ce`: 47.** These are exactly this bead's 47. 45 would be current rows; 860 and
+  919 would be superseded.
+- **`58a7833`: 49.** These are index entries that are Göbel's own closed forms as rational
+  upper enclosures. At 369 and 376 they are below `main`'s current rows, so recording them
+  is the correction #613 describes.
+- **`02f9690`:** 369, 375 and 376.
+- **`f311f08`:** 376.
+- **`5a299b4`:** 331.
+
+`487b058`'s 44 are unchanged.
+
+**A question for the owner's answer.** `main` already records superseded rows above
+Göbel's side at 375 (the 8 October, `2d32a6e`, 11 and 12 October rows) and at 376 (8, 11,
+12 and 13 October). Should held history rows above Göbel be recorded likewise, or should
+those rows be marked?

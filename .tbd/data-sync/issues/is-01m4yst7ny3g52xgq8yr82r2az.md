@@ -5,13 +5,13 @@ title: "Validate: Couzo 487b058's 296 beyond-horizon certificates, exact replay 
 kind: task
 status: open
 priority: 3
-version: 3
+version: 4
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4yd28hxb6m3ns2fbzws27ns
 created_at: 2026-10-15T03:31:09.628Z
-updated_at: 2026-10-16T00:13:48.073Z
+updated_at: 2026-10-22T13:13:09.170Z
 ---
 Validation part of think-nj7h (franciscouzo/square-packing 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d, first committed 2026-10-14T17:45:39Z, no issue). HELD by the owner's cap (2026-10-14: hold anything above 40 CPU-h).
 
@@ -42,3 +42,14 @@ The 296 certificates stay out of Git, pinned by SHA-256 in the packet's acquisit
 Göbel update (same day): 42 of the rows the packet compares are now `undecided-goebel` (above Göbel's classical construction at their count), pending the owner; 252 are recorded. The proposed subset of 31 report-beaten counts is now 30 (964 is undecided-goebel): 339, 370, 378-382, 420-422, 462-464, 506-508, 552, 553, 600, 601, 650, 651, 702, 756-758, 813, 814, 870, 871. The price of the whole is unchanged (456,922,338 pair decisions, 38-48 CPU-h, HELD).
 
 2026-10-16 coordinator: fold in hosting of the 296 487b058 certificates (bytes held only in Couzo's repository at the pin; #627 616/A7, owner decision 2): the replay needs them until a hosted release keeps them.
+
+2026-10-22 c-triage-1022b: a re-price by the filtered route.
+
+- The filtered two-route decision with six controls that #678, #715 and #720 used is
+  0.0215·n CPU-s per certificate. The #719 lane measured that; the samples here agree,
+  4.1 to 23.9 CPU-s at n = 336 to 988.
+- `487b058`'s 296 beyond-horizon certificates have Σn = 205,677, so the decision with
+  controls is about 1.2 CPU-hours, against 38 to 48 for the all-pairs replay held here.
+  `check --replay` doubles it.
+- **That fits under the cap** with `devtools.beyond_horizon_replay`, once it takes a
+  release with no issue: the W7 slice the Couzo history records plan needs anyway.

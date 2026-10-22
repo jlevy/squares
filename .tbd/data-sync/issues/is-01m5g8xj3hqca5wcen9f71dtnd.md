@@ -5,7 +5,7 @@ title: "Import franciscouzo: 1285 upper bounds at 328–9913 (#715)"
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 15
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:22:12.593Z
-updated_at: 2026-10-22T02:54:55.888Z
+updated_at: 2026-10-22T13:13:19.094Z
 started_at: 2026-10-21T22:22:13.353Z
 closed_at: null
 close_reason: null
@@ -187,3 +187,20 @@ blocked_on: think-f2io
 
 2026-10-22 02:55 coord-intake-1021b: this bead was closed in error at 02:52:56Z by a stray command (reason "Not closed: placeholder") and reopened at once; nothing about #715 changed.
 blocked_on: think-f2io
+
+2026-10-22 c-triage-1022b (read-only; coordinator scratchpad triage-1022b/couzo-residue-plan.md).
+
+**The reply owed on #715 after the Couzo history records PR merges.**
+
+- The import reply (#717) said the 32 restated rows "are left to the imports of `02f9690`,
+  `f311f08` and `4e4c8ce`" and "We will reply here when each reaches `main`".
+- In the plan, 30 of the 32 become rows dated by their first commits.
+  - **12 current:** 336, 337, 341, 373 and 374 (`02f9690`); 340 (`f311f08`); 850, 862,
+    914, 976, 986 and 988 (`4e4c8ce`).
+  - **18 history**, `4e4c8ce`'s rows superseded by #719: 410, 413, 454, 490, 498, 544,
+    584, 596, 637, 644, 689, 692, 699, 736, 744, 746, 792 and 800.
+- 743 and 985 are `4e4c8ce`'s index deletion bounds. The plan recommends recording them,
+  since #715 claimed them (the #675 precedent); the owner decides (O2).
+- The 30 held re-certifications stay with `think-fwa9`, which widens to 74 publications,
+  and 335 stays with `think-rx26`.
+- Draft the reply from `main` once the PR is in, linking the new sources' rows.
