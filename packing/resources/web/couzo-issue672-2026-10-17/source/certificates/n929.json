@@ -1,0 +1,75 @@
+{
+  "n": 929,
+  "packing": "n929.txt",
+  "packing_sha256": "de3503715149178314ffc5343ed6c6603ceeb1388a9fc6ebd59273fe7205e25c",
+  "certificate": "certificates/n929.cert",
+  "certificate_sha256": "604df9a132d1e1b99768236805d89efb4d1fe9491b52075160da4ce44ac9dc4d",
+  "rational_side": "7810483075058933354989897/252128085154375000000000",
+  "kind": "rational witness",
+  "origin": {
+    "seed_credit": "Francisco Couzo",
+    "web_seed": {
+      "category": "CT105 web submission",
+      "source_certificate_sha256": "ab47b6f1cb73d0d342f3c5ccddade81d0eac7eb33a737e868b32977df4ce6ffa",
+      "submission_id": "a50fbd8a108dee0c9b795d4b46461fca",
+      "method": "hop",
+      "received": "20261015T002250Z",
+      "seed_credit": "Francisco Couzo",
+      "prior_retained_witness": {
+        "certificate": "certificates/parents/604df9a132d1e1b99768236805d89efb4d1fe9491b52075160da4ce44ac9dc4d.cert",
+        "certificate_sha256": "604df9a132d1e1b99768236805d89efb4d1fe9491b52075160da4ce44ac9dc4d",
+        "source_credit": {
+          "seed_credit": "Francisco Couzo",
+          "web_seed": {
+            "category": "CT105 web submission",
+            "source_certificate_sha256": "ab47b6f1cb73d0d342f3c5ccddade81d0eac7eb33a737e868b32977df4ce6ffa",
+            "submission_id": "a50fbd8a108dee0c9b795d4b46461fca",
+            "method": "hop",
+            "received": "20261015T002250Z"
+          },
+          "source_n": 929,
+          "deleted_squares": 0,
+          "source_certificate_sha256": "ab47b6f1cb73d0d342f3c5ccddade81d0eac7eb33a737e868b32977df4ce6ffa"
+        }
+      }
+    },
+    "source_n": 929,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "ab47b6f1cb73d0d342f3c5ccddade81d0eac7eb33a737e868b32977df4ce6ffa",
+    "search_job": {
+      "id": 106917,
+      "method": "fq",
+      "source": "n929.txt",
+      "source_origin": "constructed",
+      "source_sha256": "16d53ea86423a4f125435bb3517d1bf9228d1eeb30a37e8ab80eee2436da610c",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n929.txt",
+        "source_sha256": "16d53ea86423a4f125435bb3517d1bf9228d1eeb30a37e8ab80eee2436da610c",
+        "source_n": 929,
+        "source_side": 30.978848462742793,
+        "layers": 0,
+        "deleted": 0,
+        "side": 30.978848462742793
+      }
+    },
+    "prior_retained_witness": {
+      "certificate": "certificates/parents/604df9a132d1e1b99768236805d89efb4d1fe9491b52075160da4ce44ac9dc4d.cert",
+      "certificate_sha256": "604df9a132d1e1b99768236805d89efb4d1fe9491b52075160da4ce44ac9dc4d",
+      "source_credit": {
+        "seed_credit": "Francisco Couzo",
+        "web_seed": {
+          "category": "CT105 web submission",
+          "source_certificate_sha256": "ab47b6f1cb73d0d342f3c5ccddade81d0eac7eb33a737e868b32977df4ce6ffa",
+          "submission_id": "a50fbd8a108dee0c9b795d4b46461fca",
+          "method": "hop",
+          "received": "20261015T002250Z"
+        },
+        "source_n": 929,
+        "deleted_squares": 0,
+        "source_certificate_sha256": "ab47b6f1cb73d0d342f3c5ccddade81d0eac7eb33a737e868b32977df4ce6ffa"
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

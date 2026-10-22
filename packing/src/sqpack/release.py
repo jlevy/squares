@@ -88,6 +88,16 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.20",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Record the beyond-horizon rows of four older reports, Joost de Winter's #666 "
+            "at or below 1024 and Francisco Couzo's #670, #672 and #675, as 205 dated "
+            "rows of which 8 of #670's become current, and record the replies after #718 "
+            "and #643's acknowledgement."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.19",
         first_published="October 22, 2026",
         result_scope=(
@@ -741,7 +751,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "00e3de3735ef03a5efb70caf2c369b20262e605e"
+DATA_REVISION = "728dc8833554414d3b2f39989f1fb973cb97c4dd"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1232,6 +1242,18 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.19",
+        version="v0.8.20",
+        impact="patch",
+        reason=(
+            "Record the beyond-horizon rows of four older reports, Joost de Winter's #666 "
+            "at or below 1024 and Francisco Couzo's #670, #672 and #675, as 205 dated "
+            "rows of which 8 of #670's become current, and record the replies after #718 "
+            "and #643's acknowledgement."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.8.18",
@@ -2032,6 +2054,68 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The v0.8.20 cut for PR-B moved the claim documents' link revision, d39f458c "
+            "to cadf73fd, in 22 lines. Rendered into empty site directories from this "
+            "tree after the cut and from main 7359fa8b's: the explainer and the other "
+            "three papers write 68 byte-identical files. Retain v0.4.15."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/n-103.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "PR-B of the 22 October backlog (205 beyond-horizon rows of #666, #670, #672 "
+            "and #675, review B of #718, the replies after #718 and #643's) against main "
+            "7359fa8b: rendered at link revision b8045210 into empty site directories from "
+            "this tree at cfeb44cc, again at 9efff725 after the hosted findings' fixes to "
+            "adopt_houses.py and overview_sections.py, and from main's, "
+            "render_n11_optimality_review, "
+            "render_n11_threshold_bound_review, render_packing_methods and "
+            "render_n11_lower_bounds_explainer write 68 files, byte-identical among the "
+            "three. After review A's repoint of 77 start rows in source-coverage.yaml, "
+            "rendered again at link revision 728dc883 from this tree at cecd6e26 and from "
+            "main's: the same 68 files, byte-identical between the two. No PDF was "
+            "printed; each prints from that HTML. Retain v0.4.15, v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -6723,7 +6807,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "d39f458c"
+PUBLICATION_REVISION = "cadf73fd"
 
 
 def data_pathspec() -> tuple[str, ...]:

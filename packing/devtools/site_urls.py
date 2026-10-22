@@ -143,7 +143,9 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         (
             "The closed form's result, its scope of 264 counts and prepared math measure "
             "341,524 bytes, and 402,418 on 22 October 2026, when its register list on those "
-            "counts reached 138 results."
+            "counts reached 138 results. At about 1.5 KB a listed result the room is about 32 "
+            "more; think-v4me owns the runway and re-measures the page, its timing included, "
+            "before it passes 440,000 bytes."
         ),
     ),
     "tutorial-advanced.html": (

@@ -1,0 +1,54 @@
+{
+  "n": 507,
+  "packing": "n507.txt",
+  "packing_sha256": "a7419e1b3a0fdae72b750a0ff00f67b0510717a7f021fb98dc5c24ee8c1f6440",
+  "certificate": "certificates/n507.cert",
+  "certificate_sha256": "f78563d2930bcd0d06ab37783bb8611cac9ca227e322a9fe9cc2a869f08d7f32",
+  "rational_side": "8526738512939185417064796374951295387031054780493936200064141545665758236001595105954382717/371152107546167715203195530915493345113629845190305272039722696519526931583500000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Francisco Couzo",
+    "web_seed": {
+      "category": "CT105 web submission",
+      "source_certificate_sha256": "f78563d2930bcd0d06ab37783bb8611cac9ca227e322a9fe9cc2a869f08d7f32",
+      "submission_id": "198043972ef064f98bfa02c9f53f804f",
+      "method": "fq",
+      "received": "20261017T192837Z",
+      "seed_credit": "Francisco Couzo",
+      "prior_retained_witness": {
+        "certificate": "certificates/parents/cdde267b794f69ede268097cbc33c2ddb842b1667f6d028e3177a055b0569b59.cert",
+        "certificate_sha256": "cdde267b794f69ede268097cbc33c2ddb842b1667f6d028e3177a055b0569b59",
+        "source_credit": {
+          "web_seed": {
+            "id": "ab237979412daec437fca68464d3e910",
+            "n": 507,
+            "side": 22.97376131473252,
+            "method": "fq",
+            "received": "20261014T134447Z",
+            "original_packing_sha256": "8a4c0d661b86d29bc5139fcd3cd2c41de35722e386ae566f9ff661a13bc55f3a"
+          },
+          "seed_credit": "Francisco Couzo"
+        }
+      }
+    },
+    "source_n": 507,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "f78563d2930bcd0d06ab37783bb8611cac9ca227e322a9fe9cc2a869f08d7f32",
+    "prior_retained_witness": {
+      "certificate": "certificates/parents/cdde267b794f69ede268097cbc33c2ddb842b1667f6d028e3177a055b0569b59.cert",
+      "certificate_sha256": "cdde267b794f69ede268097cbc33c2ddb842b1667f6d028e3177a055b0569b59",
+      "source_credit": {
+        "web_seed": {
+          "id": "ab237979412daec437fca68464d3e910",
+          "n": 507,
+          "side": 22.97376131473252,
+          "method": "fq",
+          "received": "20261014T134447Z",
+          "original_packing_sha256": "8a4c0d661b86d29bc5139fcd3cd2c41de35722e386ae566f9ff661a13bc55f3a"
+        },
+        "seed_credit": "Francisco Couzo"
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

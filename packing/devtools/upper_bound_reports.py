@@ -2302,8 +2302,10 @@ def _walls(found: Mapping[int, Mapping[str, str]], gap: Fraction) -> str:
     clear = [wall for wall in walls.values() if wall]
     pairs = f"every pair clears by at least {_floor_sci(gap)}."
     if not touching:
+        # The wording every atom written before #718 records (review B5 of #718).
         return (
-            f"Every positive clears every wall by at least {_floor_sci(min(clear))} and {pairs}"
+            f"Every positive clears every wall by at least {_floor_sci(min(clear))} and every "
+            f"pair by at least {_floor_sci(gap)}."
         )
     if not clear:
         return (

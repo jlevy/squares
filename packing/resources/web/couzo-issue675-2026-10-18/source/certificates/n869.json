@@ -1,0 +1,40 @@
+{
+  "n": 869,
+  "packing": "n869.txt",
+  "packing_sha256": "d508d98bb56590a17aed06a96ee1971eee214ddfcaa2198fde3ed257185c1b9c",
+  "certificate": "certificates/n869.cert",
+  "certificate_sha256": "067f09daa36d7ad285670a8027b587cf3318b3631f790a8f7e1f1676ab213fbc",
+  "rational_side": "74609124086058421976953/2488516996000000000000",
+  "kind": "rational witness",
+  "origin": {
+    "seed_credit": "Francisco Couzo",
+    "construction": {
+      "kind": "L-border",
+      "source_n": 812,
+      "layers": 1,
+      "parent_certificate_sha256": "b08058cbcd84a2683497663f7244da44e81bf9768e6ba9f198887d24adfc725e",
+      "capacity": 869
+    },
+    "source_n": 869,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "ffc88acdbe41322ec94415bddc3ba79409c2dac39f23c295f4db7dc0f7b40e05",
+    "search_job": {
+      "id": 108171,
+      "method": "slp",
+      "source": "n812.txt",
+      "source_origin": "constructed",
+      "source_sha256": "099896d824ea95de70e8b4f825a439cf61261fa6b6b9d6ac8fb378416e09eb79",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n812.txt",
+        "source_sha256": "3192a901fd30f195e9471622c46bf8df9069e8ee0a2c23a76e6b23da6297972f",
+        "source_n": 812,
+        "source_side": 28.981360065411003,
+        "layers": 1,
+        "deleted": 0,
+        "side": 29.981360065413003
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

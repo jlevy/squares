@@ -1044,23 +1044,6 @@ repositories:
       unchanged head; the original full history/tree fetch hit its 60-second cap. This checks head
       freshness only, not a fresh full source-content audit. The receipt is
       packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json.
-  - url: https://github.com/franciscouzo/square-packing
-    read_through: c6da0fc7524d667bf3d224559724ba9b60762e60
-    read_on: '2026-10-18'
-    bead: think-pvav
-    note: >-
-      All three new commits are #670 (23aff0c6, think-f28n), #672 (af8cb795, think-2vjc) and #675
-      (c6da0fc7, think-pvav). Their 73, 46 and 79 reported rows and whole-source index/manifest
-      inventory are owned separately; read is not an import. Preserve author source/seed credits and
-      distinguish index adoption of Daniel s229 from a Couzo discovery.
-      Chronological/classical-envelope comparison and bulk replay remain queued. On 18 October, a
-      bounded GitHub API HEAD read confirmed this unchanged head; the original full history/tree
-      fetch hit its 60-second cap. This checks head freshness only, not a fresh full source-content
-      audit. The receipt is
-      packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json. On 22 October 2026 the in-corpus rows of all three were retained from their pins and
-      registered at V0/C0 (T-226 at 204, T-227 at 227 and 229, T-228 at 204; packets
-      couzo-issue670-2026-10-17, couzo-issue672-2026-10-17 and couzo-issue675-2026-10-18); their
-      beyond-horizon rows stay with the three beads and follow #715's import.
   - url: https://github.com/wand125/square-packing
     read_through: d7afe3e525299d70de298af72cf17c581a86c0b1
     read_on: '2026-10-18'
@@ -1109,8 +1092,21 @@ repositories:
       certified_bounds.json, bound_sources.json, record_provenance.json,
       RECORD_PROVENANCE.md, certificates/README.md); and 106 new seed certificates under
       certificates/parents/, none below the source's own index entry at its count. The
-      rows of #670, #672 and #675 that the index carries stay with think-f28n, think-2vjc
-      and think-pvav. Nothing else to import.
+      rows of #670, #672 and #675 that the index carries are recorded since 22 October 2026,
+      their certificates retained from 23aff0c6, af8cb795 and c6da0fc7 in the
+      couzo-issue670-2026-10-17, couzo-issue672-2026-10-17 and couzo-issue675-2026-10-18
+      packets; the read through c6da0fc7 that held them for think-pvav is removed, since this
+      read covers that commit and every one before it. Nothing else to import.
+  - url: https://github.com/JoostdeWinter/joostdewinter.github.io
+    read_through: 206c7fc63b9105cf9b4009d8c6ea3fa160c495ad
+    read_on: '2026-10-22'
+    note: >-
+      One commit past 643dc9a, the de-winter-issue666-2026-10-17 packet's pin: 206c7fc of 18
+      October adds multicollinearity-review.pdf, the October 2026 version of an unrelated
+      paper, and changes nothing under square-packing-above-324/. Issue #666's pin b3152f52
+      is on no branch since the site's history was rewritten to drop that PDF, and b9cdc16b
+      holds its folder unchanged. Nothing to import; the 8 rows above 1024 wait on the owner
+      (think-f2io).
   - url: https://github.com/TheSnakeFang/squarepack-certs
     read_through: 0e9be7961773aa78b879c4ee6ba584a67e2e5513
     read_on: '2026-10-19'

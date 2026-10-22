@@ -183,12 +183,14 @@ not. It is a measurement, and decides nothing:
 | 260 | T-223 (#678) | $2.51 \times 10^{-11}$ | none one to one | 53, 53, 41, 20 | 0.643 | $1.294 \times 10^{-7}$° |
 | 260 | T-196 (#668) | $2.56 \times 10^{-5}$ | none one to one | 260, 254, 79, 21 | 0.646 | 24.5° |
 
-At 227 the view is #672’s packing: 194 of its 227 squares lie within $10^{-6}$ of
+At 227 the view regularizes the packing #672 reports (T-227), as its source says; measured,
+nearest centres pair the two one to one, 194 of its 227 squares lie within $10^{-6}$ of
 #672’s, and its side is $1.76 \times 10^{-11}$ below #672’s exact side,
 `71427829379429597600111901507/4589408083628500000000000000`. Against de Winter’s
 packing (T-196) 226 squares move beyond $10^{-6}$; #672’s own packing moves no square
 beyond a tenth from T-196’s (largest 0.080, 58 turned), so #672 refines de Winter’s
-packing, and the view is #672’s packing solved lower and regularized. #672’s
+packing, and the view is, by its source’s account and within these measurements, #672’s
+packing solved lower and regularized; the identity is the source’s claim, not decided here. #672’s
 certificate is `certificates/n227.cert` at
 `franciscouzo/square-packing@af8cb7959aead318c0cf5e9f873de3caa763f77a`, SHA-256
 `65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17`. When this packet
@@ -239,13 +241,14 @@ Evan Daniel wrote the source under the MIT licence (`LICENSE`), with credits in
 `CREDITS.md`, which say the work was produced by Claude (Anthropic) under human
 direction; the pinned commit names Claude Opus 5.5 as co-author and says its commit and
 push were approved by Evan Daniel.
-The record credits each packing to the finder the source names, as T-146 did:
+The record credits each packing to its finder, as T-146 did; at 227 the source’s list names
+Francisco Couzo, whose #672 refines de Winter’s packing:
 
 - Francisco Couzo at 204 and 260, the packings of issue #678 (T-223); at 204 his source
   credits Mykhailo Polkovskyi’s construction, and at 260 it says it seeded Joost de
   Winter’s #668 packing from Evan Daniel’s exact-form certificate;
-- Francisco Couzo at 227, the refinement of Joost de Winter’s #668 packing (T-196) that his
-  #672 reports, measured above;
+- Joost de Winter at 227, his #668 packing (T-196) as refined in Francisco Couzo’s #672
+  report (T-227), measured above; who made the refinement the source does not say;
 - Evan Daniel at 229, his #674 packing (T-199), which started from Couzo’s #672 packing,
   which refines de Winter’s, as the site’s `lineage.yaml` records.
 

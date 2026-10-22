@@ -1,0 +1,23 @@
+{
+  "n": 422,
+  "packing": "n422.txt",
+  "packing_sha256": "fb65d33214ee7b47ab3e5bbf0e42fa52e5c894cac59e7263f2fe76308f584a72",
+  "certificate": "certificates/n422.cert",
+  "certificate_sha256": "237b7176cc7a4f643c69a0f6cce90d5c24207679ff2e2255dc31d92382354c08",
+  "rational_side": "10341766570579309999734780366340518517071577288548173030137562499007625678858854880019581/492840059589432571364357149022525078865497206811572435844957616415295090500000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Francisco Couzo",
+    "web_seed": {
+      "category": "CT105 web submission",
+      "source_certificate_sha256": "237b7176cc7a4f643c69a0f6cce90d5c24207679ff2e2255dc31d92382354c08",
+      "submission_id": "ee093e5e07a0488193dabf5665dbf297",
+      "method": "hop",
+      "received": "20261015T002832Z"
+    },
+    "source_n": 422,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "237b7176cc7a4f643c69a0f6cce90d5c24207679ff2e2255dc31d92382354c08"
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

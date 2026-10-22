@@ -1,0 +1,28 @@
+{
+  "n": 700,
+  "packing": "n700.txt",
+  "packing_sha256": "adb67e5bbee934e47b4e5e27d0ce0dbd7d4fda5e956cd9c8df6724458ec61ced",
+  "certificate": "certificates/n700.cert",
+  "certificate_sha256": "890dc65a4d6857b90ba7cbc4f49422b2a2f3b12ec0b9be0554bc408b159c339f",
+  "rational_side": "15536991484352335971267839/576020216498375000000000",
+  "kind": "rational witness",
+  "origin": {
+    "construction": {
+      "label": "elimination from n=701",
+      "kind": "derived",
+      "source_n": 701,
+      "source": "b6db23ea9874b5fafdf3e64c338b7589816f62427cb25f43ce5fd65a30002906",
+      "tiles": 1,
+      "layers": 0
+    },
+    "search_job": {
+      "id": 106467,
+      "method": "shrink",
+      "source": "n702.txt",
+      "source_origin": "own",
+      "source_sha256": "fa1b934777876ac821dc3a1a76292f8b1bcae9ae2f7c6d6e44cf8d5d78a5f759",
+      "constructed_seed": null
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

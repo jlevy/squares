@@ -1,0 +1,37 @@
+{
+  "n": 868,
+  "packing": "n868.txt",
+  "packing_sha256": "02c17aa734e52074c1b568365e595cf84f7fd11acd8c9710021b86bb817c7309",
+  "certificate": "certificates/n868.cert",
+  "certificate_sha256": "250f15fcd9dd8932fd35feaf1a6ad90afb86f6b387e8c9e29e4fa3ecd562f567",
+  "rational_side": "266839004794696938841330263/8900163464176000000000000",
+  "kind": "rational witness",
+  "origin": {
+    "web_seed": {
+      "id": "ae4dc2fa24e11d29f6984ee8ffb5e072",
+      "n": 868,
+      "side": 29.984276416595737,
+      "method": "ellsworth",
+      "received": "20261014T145542Z",
+      "original_packing_sha256": "c09fabe9e0714102553f93ff42cb81b339d0d607a97e4089fa73a1384b4d4317"
+    },
+    "search_job": {
+      "id": 108169,
+      "method": "hop",
+      "source": "n812.txt",
+      "source_origin": "constructed",
+      "source_sha256": "95db8d2ca7c055f5f7175dd0e746df5b0bf2727657ea7f335fb05ebb8aaf13af",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n812.txt",
+        "source_sha256": "3192a901fd30f195e9471622c46bf8df9069e8ee0a2c23a76e6b23da6297972f",
+        "source_n": 812,
+        "source_side": 28.981360065411003,
+        "layers": 1,
+        "deleted": 1,
+        "side": 29.981360065413003
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

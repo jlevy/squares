@@ -1,0 +1,34 @@
+{
+  "n": 750,
+  "packing": "n750.txt",
+  "packing_sha256": "9cc750213ffed77f77dc42a1a1f9c2a092b6bb66b21a4d82509e89c3a89fe332",
+  "certificate": "certificates/n750.cert",
+  "certificate_sha256": "27ebdd5c211feae5a53e5cb2c8b1af779e1e1853b0520acb92576f087309eced",
+  "rational_side": "1923783510361799960254789/68883907628420000000000",
+  "kind": "rational witness",
+  "origin": {
+    "construction": {
+      "label": "parametric construction",
+      "kind": "construction"
+    },
+    "seed_credit": "Francisco Couzo",
+    "search_job": {
+      "id": 106565,
+      "method": "fq",
+      "source": "n750.txt",
+      "source_origin": "constructed",
+      "source_sha256": "7fd2d0ebdeeaaceed8658722a81ae3ff9b39442cd93131196e7dd669d61b8f85",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n750.txt",
+        "source_sha256": "011e6bf62941afab74ca373930ed8abd4df9f180f0a9f77097c205ab35e19fb8",
+        "source_n": 750,
+        "source_side": 27.92878027606094,
+        "layers": 0,
+        "deleted": 0,
+        "side": 27.92878027606094
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

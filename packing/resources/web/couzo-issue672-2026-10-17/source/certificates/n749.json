@@ -1,0 +1,80 @@
+{
+  "n": 749,
+  "packing": "n749.txt",
+  "packing_sha256": "3e3b6a412dcd471b0a9eddc9a4bd7c621e74c1e060ef8e1950a8ad221d7b2e4c",
+  "certificate": "certificates/n749.cert",
+  "certificate_sha256": "8c95f415a9e43ed89848d77e3b48fcaa040f768ba8d729fdcab8f717fc0ffe67",
+  "rational_side": "13167606432921746998135840287/471551399868500000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "franciscouzo",
+    "web_seed": {
+      "category": "CT105 web submission",
+      "source_certificate_sha256": "8c95f415a9e43ed89848d77e3b48fcaa040f768ba8d729fdcab8f717fc0ffe67",
+      "submission_id": "4d5a4981004265a3820c2b9172f21e1d",
+      "method": "fq",
+      "received": "20261017T194037Z",
+      "seed_credit": "franciscouzo",
+      "prior_retained_witness": {
+        "certificate": "certificates/parents/379565068e3e12aa5ae881fa2fbf73d6974c8b401fdd1a8e8d7d421b61345b9b.cert",
+        "certificate_sha256": "379565068e3e12aa5ae881fa2fbf73d6974c8b401fdd1a8e8d7d421b61345b9b",
+        "source_credit": {
+          "construction": {
+            "label": "parametric construction",
+            "kind": "construction"
+          },
+          "seed_credit": "franciscouzo",
+          "search_job": {
+            "id": 105191,
+            "method": "hop",
+            "source": "n749.txt",
+            "source_origin": "constructed",
+            "source_sha256": "0a88cadf8df1a97fc380637e61e3232db8b5402ce6c406ba878091bf51f3ec76",
+            "constructed_seed": {
+              "construction": "L-border and deletion",
+              "source": "n749.txt",
+              "source_sha256": "071c60b412b7b01e93cbe15b7a2c20a6e83db17936a0747e7321565f41637658",
+              "source_n": 749,
+              "source_side": 27.925990619512284,
+              "layers": 0,
+              "deleted": 0,
+              "side": 27.925990619512284
+            }
+          }
+        }
+      }
+    },
+    "source_n": 749,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "8c95f415a9e43ed89848d77e3b48fcaa040f768ba8d729fdcab8f717fc0ffe67",
+    "prior_retained_witness": {
+      "certificate": "certificates/parents/379565068e3e12aa5ae881fa2fbf73d6974c8b401fdd1a8e8d7d421b61345b9b.cert",
+      "certificate_sha256": "379565068e3e12aa5ae881fa2fbf73d6974c8b401fdd1a8e8d7d421b61345b9b",
+      "source_credit": {
+        "construction": {
+          "label": "parametric construction",
+          "kind": "construction"
+        },
+        "seed_credit": "franciscouzo",
+        "search_job": {
+          "id": 105191,
+          "method": "hop",
+          "source": "n749.txt",
+          "source_origin": "constructed",
+          "source_sha256": "0a88cadf8df1a97fc380637e61e3232db8b5402ce6c406ba878091bf51f3ec76",
+          "constructed_seed": {
+            "construction": "L-border and deletion",
+            "source": "n749.txt",
+            "source_sha256": "071c60b412b7b01e93cbe15b7a2c20a6e83db17936a0747e7321565f41637658",
+            "source_n": 749,
+            "source_side": 27.925990619512284,
+            "layers": 0,
+            "deleted": 0,
+            "side": 27.925990619512284
+          }
+        }
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}
