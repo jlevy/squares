@@ -5,7 +5,7 @@ title: "Significant-result announcements fail silently: T-194 (S5) never announc
 kind: epic
 status: open
 priority: 0
-version: 6
+version: 11
 labels:
   - process
 dependencies: []
@@ -15,8 +15,13 @@ child_order_hints:
   - is-01m5jn38xtd10xgdmshtkeat2w
   - is-01m5jn3aef5zxqyjnpk4q15xjf
   - is-01m5jndazhq3txnf5w5vzkv3w2
+  - is-01m5jpfmjqpbx2geqhn5aqw43e
+  - is-01m5jpfpf3dd0ftcn7tq0hckne
+  - is-01m5jpfr0qy3dwar98cc3g4jzn
+  - is-01m5jpfse3y2j2thgax8h0ejbv
+  - is-01m5jpfvqftdgnchf2rmw46wsa
 created_at: 2026-10-22T20:33:25.717Z
-updated_at: 2026-10-22T20:39:01.360Z
+updated_at: 2026-10-22T20:57:52.623Z
 ---
 Owner, 22 October 2026 (in conversation): "this means we have a serious failure in the process ... This is the most urgent part of the work." Significant results are not announced systematically.
 
