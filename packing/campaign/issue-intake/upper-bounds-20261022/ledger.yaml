@@ -1,0 +1,2483 @@
+format: intake-ledger-v1
+read_at_main: d588ad987bd8de53361d087b8961a7f2bf157c41
+read_on: '2026-10-22'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes: []
+reports:
+- report: '#666'
+  url: https://github.com/jlevy/squares/issues/666
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-10-17T07:06:07Z'
+  bead: think-3m10
+  claims:
+  - n: 509
+    printed: '22.994328036438'
+    rounding: up
+  - n: 654
+    printed: '25.996103908965'
+    rounding: up
+  note: Issue-table prints at the counts at or below 1024 that issue 715 claims; the report
+    is not yet recorded and its other counts are not read here. A ledger verdict alone is
+    not registration or feasibility verification.
+- report: '#670'
+  url: https://github.com/jlevy/squares/issues/670
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-17T18:05:06Z'
+  bead: think-f28n
+  claims:
+  - n: 417
+    printed: '20.942505611684'
+    rounding: up
+  - n: 458
+    printed: '21.942505611689'
+    rounding: up
+  - n: 459
+    printed: '21.943735551416'
+    rounding: up
+  - n: 461
+    printed: '21.972483922352'
+    rounding: up
+  - n: 463
+    printed: '21.984021832955'
+    rounding: up
+  - n: 501
+    printed: '22.933763683699'
+    rounding: up
+  - n: 503
+    printed: '22.957558542542'
+    rounding: up
+  - n: 505
+    printed: '22.972317735354'
+    rounding: up
+  - n: 546
+    printed: '23.933763683699'
+    rounding: up
+  - n: 548
+    printed: '23.957558542543'
+    rounding: up
+  - n: 553
+    printed: '23.981588093282'
+    rounding: up
+  - n: 598
+    printed: '24.962916747309'
+    rounding: up
+  - n: 600
+    printed: '24.981585347399'
+    rounding: up
+  - n: 647
+    printed: '25.953248543199'
+    rounding: up
+  - n: 651
+    printed: '25.983790120159'
+    rounding: up
+  - n: 700
+    printed: '26.972996848621'
+    rounding: up
+  - n: 702
+    printed: '26.977494114977'
+    rounding: up
+  - n: 749
+    printed: '27.925883089331'
+    rounding: up
+  - n: 756
+    printed: '27.984237490911'
+    rounding: up
+  - n: 758
+    printed: '27.994980212536'
+    rounding: up
+  - n: 804
+    printed: '28.917335789888'
+    rounding: up
+  - n: 805
+    printed: '28.921843659464'
+    rounding: up
+  - n: 806
+    printed: '28.921843662228'
+    rounding: up
+  - n: 809
+    printed: '28.937423518015'
+    rounding: up
+  - n: 813
+    printed: '28.990394020145'
+    rounding: up
+  - n: 863
+    printed: '29.921843659464'
+    rounding: up
+  - n: 866
+    printed: '29.935764472087'
+    rounding: up
+  - n: 867
+    printed: '29.950265025802'
+    rounding: up
+  - n: 868
+    printed: '29.982204111182'
+    rounding: up
+  - n: 869
+    printed: '29.982472918533'
+    rounding: up
+  - n: 870
+    printed: '29.985969207342'
+    rounding: up
+  - n: 871
+    printed: '29.989329079687'
+    rounding: up
+  - n: 925
+    printed: '30.935764472087'
+    rounding: up
+  - n: 926
+    printed: '30.949634321517'
+    rounding: up
+  - n: 927
+    printed: '30.976993727283'
+    rounding: up
+  - n: 928
+    printed: '30.976993727283'
+    rounding: up
+  - n: 931
+    printed: '30.989936243547'
+    rounding: up
+  - n: 987
+    printed: '31.949634321517'
+    rounding: up
+  - n: 989
+    printed: '31.976993727283'
+    rounding: up
+  note: Issue-table prints at the counts at or below 1024 that issue 715 claims; the report
+    is not yet recorded and its other counts are not read here. A ledger verdict alone is
+    not registration or feasibility verification.
+- report: '#672'
+  url: https://github.com/jlevy/squares/issues/672
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-17T20:48:34Z'
+  bead: think-2vjc
+  claims:
+  - n: 461
+    printed: '21.971645445094'
+    rounding: up
+  - n: 652
+    printed: '25.994469543497'
+    rounding: up
+  - n: 653
+    printed: '25.994469543497'
+    rounding: up
+  - n: 749
+    printed: '27.924010906540'
+    rounding: up
+  - n: 750
+    printed: '27.927909095101'
+    rounding: up
+  - n: 756
+    printed: '27.983489205831'
+    rounding: up
+  - n: 758
+    printed: '27.994973756311'
+    rounding: up
+  - n: 804
+    printed: '28.915928305844'
+    rounding: up
+  - n: 805
+    printed: '28.916476090926'
+    rounding: up
+  - n: 813
+    printed: '28.989935237439'
+    rounding: up
+  - n: 814
+    printed: '28.995946347758'
+    rounding: up
+  - n: 815
+    printed: '28.995946384109'
+    rounding: up
+  - n: 864
+    printed: '29.932742598598'
+    rounding: up
+  - n: 865
+    printed: '29.932742598598'
+    rounding: up
+  - n: 868
+    printed: '29.982119729132'
+    rounding: up
+  - n: 869
+    printed: '29.982462261984'
+    rounding: up
+  - n: 871
+    printed: '29.986798495028'
+    rounding: up
+  - n: 872
+    printed: '29.995946384118'
+    rounding: up
+  - n: 873
+    printed: '29.998242686046'
+    rounding: up
+  - n: 923
+    printed: '30.932644308698'
+    rounding: up
+  - n: 924
+    printed: '30.932742598607'
+    rounding: up
+  - n: 932
+    printed: '30.993904118222'
+    rounding: up
+  - n: 994
+    printed: '31.995336946282'
+    rounding: up
+  - n: 995
+    printed: '31.995336946282'
+    rounding: up
+  - n: 996
+    printed: '31.995336946282'
+    rounding: up
+  note: Issue-table prints at the counts at or below 1024 that issue 715 claims; the report
+    is not yet recorded and its other counts are not read here. A ledger verdict alone is
+    not registration or feasibility verification.
+- report: '#675'
+  url: https://github.com/jlevy/squares/issues/675
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-18T06:02:11Z'
+  bead: think-pvav
+  claims:
+  - n: 458
+    printed: '21.942423483273'
+    rounding: up
+  - n: 459
+    printed: '21.942423483273'
+    rounding: up
+  - n: 461
+    printed: '21.971616092121'
+    rounding: up
+  - n: 463
+    printed: '21.983605908182'
+    rounding: up
+  - n: 502
+    printed: '22.942402035201'
+    rounding: up
+  - n: 545
+    printed: '23.889722420681'
+    rounding: up
+  - n: 546
+    printed: '23.889722420681'
+    rounding: up
+  - n: 547
+    printed: '23.906371163646'
+    rounding: up
+  - n: 548
+    printed: '23.957455469976'
+    rounding: up
+  - n: 549
+    printed: '23.957455469976'
+    rounding: up
+  - n: 554
+    printed: '23.993580713561'
+    rounding: up
+  - n: 592
+    printed: '24.889722420681'
+    rounding: up
+  - n: 593
+    printed: '24.889722420681'
+    rounding: up
+  - n: 598
+    printed: '24.962908839930'
+    rounding: up
+  - n: 602
+    printed: '24.993580715986'
+    rounding: up
+  - n: 652
+    printed: '25.994256215430'
+    rounding: up
+  - n: 654
+    printed: '25.995905846673'
+    rounding: up
+  - n: 700
+    printed: '26.972954520906'
+    rounding: up
+  - n: 705
+    printed: '26.995905846673'
+    rounding: up
+  - n: 756
+    printed: '27.982602664098'
+    rounding: up
+  - n: 758
+    printed: '27.993798579000'
+    rounding: up
+  - n: 804
+    printed: '28.911312576594'
+    rounding: up
+  - n: 805
+    printed: '28.911312576594'
+    rounding: up
+  - n: 806
+    printed: '28.921462680479'
+    rounding: up
+  - n: 807
+    printed: '28.924702911083'
+    rounding: up
+  - n: 809
+    printed: '28.937423314202'
+    rounding: up
+  - n: 813
+    printed: '28.989934397793'
+    rounding: up
+  - n: 814
+    printed: '28.993798579000'
+    rounding: up
+  - n: 863
+    printed: '29.921462677966'
+    rounding: up
+  - n: 864
+    printed: '29.924702911083'
+    rounding: up
+  - n: 865
+    printed: '29.932623425046'
+    rounding: up
+  - n: 867
+    printed: '29.950105216770'
+    rounding: up
+  - n: 868
+    printed: '29.981359990606'
+    rounding: up
+  - n: 869
+    printed: '29.981360065447'
+    rounding: up
+  - n: 870
+    printed: '29.985524292952'
+    rounding: up
+  - n: 872
+    printed: '29.995946381399'
+    rounding: up
+  - n: 873
+    printed: '29.998171180951'
+    rounding: up
+  - n: 919
+    printed: '30.849232404954'
+    rounding: up
+  - n: 923
+    printed: '30.924702911083'
+    rounding: up
+  - n: 924
+    printed: '30.932577553094'
+    rounding: up
+  - n: 927
+    printed: '30.976949083864'
+    rounding: up
+  - n: 928
+    printed: '30.976949083864'
+    rounding: up
+  - n: 931
+    printed: '30.989934734721'
+    rounding: up
+  - n: 932
+    printed: '30.993891653207'
+    rounding: up
+  - n: 989
+    printed: '31.976125363479'
+    rounding: up
+  - n: 994
+    printed: '31.993865896560'
+    rounding: up
+  - n: 995
+    printed: '31.994784549711'
+    rounding: up
+  - n: 996
+    printed: '31.994784549711'
+    rounding: up
+  note: Issue-table prints at the counts at or below 1024 that issue 715 claims; the report
+    is not yet recorded and its other counts are not read here. A ledger verdict alone is
+    not registration or feasibility verification.
+- report: '#678'
+  url: https://github.com/jlevy/squares/issues/678
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-18T23:23:19Z'
+  bead: think-xu4d
+  claims:
+  - n: 343
+    printed: '18.978232204823'
+    rounding: up
+    exact: 41733573967670534550712079/2199023255552000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 455
+    printed: '21.882183551471'
+    rounding: up
+    exact: 11613822913094702166651186369837112541339805344903709711505338807121/530743327592378557828056055307433275923785578280560500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 456
+    printed: '21.882183551471'
+    rounding: up
+    exact: 11613822913094702166651186369837112541339805344903709711505338807121/530743327592378557828056055307433275923785578280560500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 458
+    printed: '21.903778442820'
+    rounding: up
+    exact: 103271142430408315808123966273/4714763834011500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 459
+    printed: '21.942365250364'
+    rounding: up
+    exact: 288953132032662784399822541/13168732209846000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 461
+    printed: '21.971318847922'
+    rounding: up
+    exact: 387404913591862772612304831/17632301286662000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 463
+    printed: '21.983603993953'
+    rounding: up
+    exact: 53187317556573267909093233/2419408463289500000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 497
+    printed: '22.823104027272'
+    rounding: up
+    exact: 10604780551957862523857841706101294449354660587471393697/464651107022350000000000004646511070223500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 499
+    printed: '22.882183551471'
+    rounding: up
+    exact: 12144566240687080724479242425144545817263590923184270211505338807121/530743327592378557828056055307433275923785578280560500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 501
+    printed: '22.903778442820'
+    rounding: up
+    exact: 107985906264419815808123966273/4714763834011500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 502
+    printed: '22.942219237446'
+    rounding: up
+    exact: 73375074239719933215451563617/3198255298683500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 505
+    printed: '22.971592368271'
+    rounding: up
+    exact: 390014776214344036642092409/16978134121562000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 545
+    printed: '23.889010439304'
+    rounding: up
+    exact: 69133786818820995616987673399/2893957746574500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 546
+    printed: '23.889010439304'
+    rounding: up
+    exact: 69133786818820995616987673399/2893957746574500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 548
+    printed: '23.956345132949'
+    rounding: up
+    exact: 114614263684737829966954527/4784296730101000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 549
+    printed: '23.956345132949'
+    rounding: up
+    exact: 114614263684737829966954527/4784296730101000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 553
+    printed: '23.980727660940'
+    rounding: up
+    exact: 330867999963168070753914221/13797246048630000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 554
+    printed: '23.993524047733'
+    rounding: up
+    exact: 29957208392643458654477273/1248553915341750000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 592
+    printed: '24.888988759404'
+    rounding: up
+    exact: 62018407569647026606549901/2491801019686500000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 593
+    printed: '24.888988761769'
+    rounding: up
+    exact: 729473716291826462201657/29309094205240000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 597
+    printed: '24.961502766154'
+    rounding: up
+    exact: 864076787732322991281275702394604108327695296435857391/34616376899550000000000000346163768995500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 598
+    printed: '24.961502766154'
+    rounding: up
+    exact: 864076787732322991281275702394604108327695296435857391/34616376899550000000000000346163768995500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 600
+    printed: '24.980727660940'
+    rounding: up
+    exact: 344665246011798070753914221/13797246048630000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 601
+    printed: '24.987983019378'
+    rounding: up
+    exact: 94857473669459061350004809/3796123664559000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 602
+    printed: '24.993580713561'
+    rounding: up
+    exact: 62469089153717725277280141453/2499405342101500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 652
+    printed: '25.994256214773'
+    rounding: up
+    exact: 85276484423977395894907527/3280589516368400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 653
+    printed: '25.994414202392'
+    rounding: up
+    exact: 11432464269102226596178819/439804651110400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 654
+    printed: '25.995888235804'
+    rounding: up
+    exact: 37190567371787759934687289/1430632684463000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 700
+    printed: '26.972679052192'
+    rounding: up
+    exact: 88178769692360709581284193/3269188408082800000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 705
+    printed: '26.994256369878'
+    rounding: up
+    exact: 19314801785150565220404030516166606494258682818400213266350370122441/715515238519535387040157057155152385195353870401570500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 749
+    printed: '27.911194713730'
+    rounding: up
+    exact: 381054512896696402122993103/13652389903226000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 751
+    printed: '27.932448900769'
+    rounding: up
+    exact: 236577160764683107543166473/8469617597982000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 752
+    printed: '27.932449886404'
+    rounding: up
+    exact: 421440969626533353106895129/15087862730998000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 804
+    printed: '28.909246527138'
+    rounding: up
+    exact: 63572105413660373082158047/2199023255552000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 805
+    printed: '28.909665866810'
+    rounding: up
+    exact: 93831992673017586296472033/3245696200894000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 806
+    printed: '28.919759255285'
+    rounding: up
+    exact: 285582814168308707807545489/9875006622544000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 808
+    printed: '28.932449886404'
+    rounding: up
+    exact: 436528832357531353106895129/15087862730998000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 815
+    printed: '28.995022162160'
+    rounding: up
+    exact: 423145514569828958055273607/14593729647914000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 863
+    printed: '29.916419307447'
+    rounding: up
+    exact: 1809921773859061641086563003892727007491319546955850769433/60499278180946296693698842389219105854172288800000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 865
+    printed: '29.932449886402'
+    rounding: up
+    exact: 53303799351630122996258149/1780803093429600000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 867
+    printed: '29.949688481977'
+    rounding: up
+    exact: 5366107054571286936341061/179170713505100000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 868
+    printed: '29.977390686090'
+    rounding: up
+    exact: 30247929636250191793737254293704089479425184258098756259148135079/1009024766464609415396446688288085879705867359570750000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 870
+    printed: '29.985424855417'
+    rounding: up
+    exact: 569844129880617840092664377/19004037215690000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 872
+    printed: '29.995022162160'
+    rounding: up
+    exact: 437739244217742958055273607/14593729647914000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 873
+    printed: '29.996375057644'
+    rounding: up
+    exact: 7994231915393978258329036847/266506599548500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 919
+    printed: '30.844931419278'
+    rounding: up
+    exact: 864661025727630835135511065428595720536154663263906724077/28032515747051716344709415879606303792312035250000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 924
+    printed: '30.932449886402'
+    rounding: up
+    exact: 55084602445059722996258149/1780803093429600000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 926
+    printed: '30.945612117331'
+    rounding: up
+    exact: 13632288045967101442390912029221694158771714423909119017092957760307/440524103846455947589615354405241038464559475896153500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 927
+    printed: '30.975475685281'
+    rounding: up
+    exact: 5359120778692586109044077/173011734610400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 928
+    printed: '30.975475685281'
+    rounding: up
+    exact: 5359120778692586109044077/173011734610400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 987
+    printed: '31.944662519483'
+    rounding: up
+    exact: 26994297027873650953999340393/845033094696500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 989
+    printed: '31.975475685281'
+    rounding: up
+    exact: 5532132513302986109044077/173011734610400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 994
+    printed: '31.993645614627'
+    rounding: up
+    exact: 568303250996569540247122001/17763003874018000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  note: Recorded on main since this read, as rows of the couzo-issue678-2026-10-18 source;
+    walked here as a report at the counts at or below 1024 that issue 715 claims, with the
+    exact sides its claims record keeps.
+- report: '#686'
+  url: https://github.com/jlevy/squares/issues/686
+  kind: issue
+  holders: Darius Muglich
+  reported_at: '2026-10-19T20:43:04Z'
+  bead: think-9vjn
+  claims:
+  - n: 328
+    printed: '18.614376892294788'
+    rounding: up
+    exact: 18614376892294787376892276173/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 365
+    printed: '19.614376892314402'
+    rounding: up
+    exact: 19614376892314401753784570960376892276173/1000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 404
+    printed: '20.614376892315402'
+    rounding: up
+    exact: 20614376892315401753784570960376892276173/1000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 417
+    printed: '20.934672165248002'
+    rounding: up
+    exact: 20934672165248001672165227067/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 459
+    printed: '21.937227864889785'
+    rounding: up
+    exact: 21937227864889784227864867847/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 461
+    printed: '21.966193114436095'
+    rounding: up
+    exact: 10983096557218047193114403145096557196081/500000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 463
+    printed: '21.973675720477602'
+    rounding: up
+    exact: 5493418930119400418930113907/250000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 496
+    printed: '22.822875659409473'
+    rounding: up
+    exact: 456457513188189457513187733/20000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 502
+    printed: '22.934445598628207'
+    rounding: up
+    exact: 2866805699828525805699825659/125000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 503
+    printed: '22.944667600407142'
+    rounding: up
+    exact: 22944667600407141667600384197/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 504
+    printed: '22.962118925863563'
+    rounding: up
+    exact: 114810594629317810594629203/5000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 505
+    printed: '22.964253709989815'
+    rounding: up
+    exact: 459285074199796285074199337/20000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 506
+    printed: '22.972145072003643'
+    rounding: up
+    exact: 2297214507200364214507198067/100000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 548
+    printed: '23.944667600431087'
+    rounding: up
+    exact: 23944667600431086335200791338667600384197/1000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 550
+    printed: '23.961058656835017'
+    rounding: up
+    exact: 4792211731367003211731362211/200000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 553
+    printed: '23.979786600215760'
+    rounding: up
+    exact: 1198989330010787989330009589/50000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 554
+    printed: '23.986315054037724'
+    rounding: up
+    exact: 23986315054037723315054013737/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 595
+    printed: '24.944667600432087'
+    rounding: up
+    exact: 24944667600432086335200791338667600384197/1000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 597
+    printed: '24.958141573307033'
+    rounding: up
+    exact: 12479070786653516070786641037/500000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 598
+    printed: '24.958220677835095'
+    rounding: up
+    exact: 3119777584729386777584726267/125000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 599
+    printed: '24.962832858735977'
+    rounding: up
+    exact: 12481416429367988416429355507/500000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 600
+    printed: '24.979786600240740'
+    rounding: up
+    exact: 1248989330012036978660020376989330009589/50000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 601
+    printed: '24.986315054062710'
+    rounding: up
+    exact: 24986315054062709630108051460315054013737/1000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 602
+    printed: '24.990355569404721'
+    rounding: up
+    exact: 1249517778470236035556936723517778467737/50000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 647
+    printed: '25.949897942498915'
+    rounding: up
+    exact: 5189979588499782979588494593/200000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 648
+    printed: '25.961052856924314'
+    rounding: up
+    exact: 1622565803557769565803556147/62500000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 651
+    printed: '25.982878838106428'
+    rounding: up
+    exact: 5196575767621285575767616089/200000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 652
+    printed: '25.990355569405721'
+    rounding: up
+    exact: 1299517778470286035556936723517778467737/50000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 654
+    printed: '25.994867334132237'
+    rounding: up
+    exact: 12997433667066118433667053121/500000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 700
+    printed: '26.963730153903490'
+    rounding: up
+    exact: 13481865076951744865076938263/500000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 702
+    printed: '26.976692903975214'
+    rounding: up
+    exact: 26976692903975213692903948237/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 705
+    printed: '26.990473400222588'
+    rounding: up
+    exact: 26990473400222587473400195597/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 756
+    printed: '27.976914446491419'
+    rounding: up
+    exact: 5595382889298283765778579781382889287093/200000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 758
+    printed: '27.984283608420539'
+    rounding: up
+    exact: 5596856721676964378543766282263882218249404077456684018084985724232546340250450939128810812013270475344965159699/199999999999744740000000162894168999960700693683004740610073640500000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 813
+    printed: '28.981594177184268'
+    rounding: up
+    exact: 905674818037008349636071299674818035197/31250000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 814
+    printed: '28.981594177155286'
+    rounding: up
+    exact: 905674818036102674818035197/31250000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 815
+    printed: '28.992923233335372'
+    rounding: up
+    exact: 14496461616667685923233292382461616639193/500000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 868
+    printed: '29.974562439897217'
+    rounding: up
+    exact: 14987281219948608281219933621/500000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 869
+    printed: '29.974936836673075'
+    rounding: up
+    exact: 299749368366730749368366431/10000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 870
+    printed: '29.981594177185268'
+    rounding: up
+    exact: 936924818037039599636071299674818035197/31250000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 871
+    printed: '29.981594177185268'
+    rounding: up
+    exact: 936924818037039599636071299674818035197/31250000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 872
+    printed: '29.992623086320206'
+    rounding: up
+    exact: 1499631154316010262308627521631154313011/50000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 873
+    printed: '29.992623086290213'
+    rounding: up
+    exact: 1499631154314510631154313011/50000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 927
+    printed: '30.969979227501660'
+    rounding: up
+    exact: 3096997922750165997922747069/100000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 928
+    printed: '30.974936836704050'
+    rounding: up
+    exact: 309749368367040498736733161749368366431/10000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 932
+    printed: '30.992623086321206'
+    rounding: up
+    exact: 1549631154316060262308627521631154313011/50000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 989
+    printed: '31.974936836705050'
+    rounding: up
+    exact: 319749368367050498736733161749368366431/10000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 994
+    printed: '31.992883399257602'
+    rounding: up
+    exact: 999777606226800055212450663277606224863/31250000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 995
+    printed: '31.994174058188146'
+    rounding: up
+    exact: 31994174058188145348116281308174058125157/1000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 996
+    printed: '31.994174058188146'
+    rounding: up
+    exact: 31994174058188145348116281308174058125157/1000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  note: Recorded on main since this read, as rows of the muglich-issue686-2026-10-19 source;
+    walked here as a report at the counts at or below 1024 that issue 715 claims, with the
+    exact sides its claims record keeps.
+- report: '#702'
+  url: https://github.com/jlevy/squares/issues/702
+  kind: issue
+  holders: Evan Daniel
+  reported_at: '2026-10-20T22:09:31Z'
+  bead: think-wuxt
+  claims:
+  - n: 343
+    printed: '18.977682482405'
+    rounding: up
+    exact: 18977682482404124568634475670459/1000000000000000000000000000000
+    exact_from: packing/resources/web/evand-n343-sweep-2026-10-20/acquisition/beyond-horizon-claims.json
+  note: Recorded on main since this read, as rows of the evand-n343-sweep-2026-10-20 source;
+    walked here as a report at the counts at or below 1024 that issue 715 claims, with the
+    exact sides its claims record keeps.
+- report: franciscouzo/square-packing@02f9690
+  url: https://github.com/franciscouzo/square-packing/tree/02f969075f79d5e13fa21e09e381a44e8647b452
+  kind: publication
+  holders: Francisco Couzo
+  reported_at: '2026-10-09T20:28:52Z'
+  bead: think-a4wq
+  claims:
+  - n: 335
+    printed: '18.822875655562'
+    rounding: up
+    exact: 16980869286055030533553200179/902140012864500000000000000
+    exact_from: certificates/n335.cert at franciscouzo/square-packing@02f969075f79d5e13fa21e09e381a44e8647b452
+      (its header)
+  - n: 336
+    printed: '18.825571499862'
+    rounding: up
+    exact: 18825571499861668938686306400451/1000000000000000000000000000000
+    exact_from: certificates/n336.cert at franciscouzo/square-packing@02f969075f79d5e13fa21e09e381a44e8647b452
+      (its header)
+  - n: 337
+    printed: '18.858391767637'
+    rounding: up
+    exact: 3771678353527245620694257618907/200000000000000000000000000000
+    exact_from: certificates/n337.cert at franciscouzo/square-packing@02f969075f79d5e13fa21e09e381a44e8647b452
+      (its header)
+  - n: 341
+    printed: '18.951882408720'
+    rounding: up
+    exact: 18951882408719945107766159138401/1000000000000000000000000000000
+    exact_from: certificates/n341.cert at franciscouzo/square-packing@02f969075f79d5e13fa21e09e381a44e8647b452
+      (its header)
+  - n: 373
+    printed: '19.823062082838'
+    rounding: up
+    exact: 19823062082837804646390244631729/1000000000000000000000000000000
+    exact_from: certificates/n373.cert at franciscouzo/square-packing@02f969075f79d5e13fa21e09e381a44e8647b452
+      (its header)
+  - n: 374
+    printed: '19.832356217033'
+    rounding: up
+    exact: 19832356217032762224853652799723/1000000000000000000000000000000
+    exact_from: certificates/n374.cert at franciscouzo/square-packing@02f969075f79d5e13fa21e09e381a44e8647b452
+      (its header)
+  note: A publication in a watched repository with no issue, dated by its first commit (the
+    owner, 2026-10-14). Read here at the counts at or below 1024 that issue 715 restates or
+    certifies again, from the certificate each first published there or the index bound that
+    names it; its other counts are its own import's. Each side is the certificate's exact
+    header side, read by devtools.couzo_715_replay publications (the 21 October packet's receipts/earlier-publications.json).
+- report: franciscouzo/square-packing@f311f08
+  url: https://github.com/franciscouzo/square-packing/tree/f311f08901c24b2a6c5f720710a45adec23e926a
+  kind: publication
+  holders: Francisco Couzo
+  reported_at: '2026-10-11T03:39:54Z'
+  bead: think-om5l
+  claims:
+  - n: 340
+    printed: '18.939649632892'
+    rounding: up
+    exact: 4734912408222751641551744529533/250000000000000000000000000000
+    exact_from: certificates/n340.cert at franciscouzo/square-packing@f311f08901c24b2a6c5f720710a45adec23e926a
+      (its header)
+  note: A publication in a watched repository with no issue, dated by its first commit (the
+    owner, 2026-10-14). Read here at the counts at or below 1024 that issue 715 restates or
+    certifies again, from the certificate each first published there or the index bound that
+    names it; its other counts are its own import's. Each side is the certificate's exact
+    header side, read by devtools.couzo_715_replay publications (the 21 October packet's receipts/earlier-publications.json).
+- report: franciscouzo/square-packing@4e4c8ce
+  url: https://github.com/franciscouzo/square-packing/tree/4e4c8ce23cb5e87f033021687010992c40575480
+  kind: publication
+  holders: Francisco Couzo
+  reported_at: '2026-10-15T00:31:53Z'
+  bead: think-yfoo
+  claims:
+  - n: 410
+    printed: '20.778174593076'
+    rounding: up
+    exact: 94471653122979184069256010393/4546677221321500000000000000
+    exact_from: certificates/best/n410.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 413
+    printed: '20.831663365378'
+    rounding: up
+    exact: 14788902264945330397898211051/709924215150500000000000000
+    exact_from: certificates/best/n413.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 454
+    printed: '21.828427124844'
+    rounding: up
+    exact: 9902683823108832887861760392581595687736445438313409171476900389/453659980468240847136222819645681050167293678569500000000000000
+    exact_from: certificates/best/n454.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 490
+    printed: '22.656854249519'
+    rounding: up
+    exact: 20568111801941912117732654041/907809688645500000000000000
+    exact_from: certificates/best/n490.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 498
+    printed: '22.828427124827'
+    rounding: up
+    exact: 8363897193568998249163868051/366380791275500000000000000
+    exact_from: certificates/best/n498.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 535
+    printed: '23.656854249519'
+    rounding: up
+    exact: 21475921490587412117732675516921490587412117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n535.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 544
+    printed: '23.828427124775'
+    rounding: up
+    exact: 106204719683191506574210087623/4457059592186500000000000000
+    exact_from: certificates/best/n544.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 582
+    printed: '24.656854249519'
+    rounding: up
+    exact: 22383731179232912117732676424731179232912117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n582.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 584
+    printed: '24.677669529693'
+    rounding: up
+    exact: 106704880274912139583387223531/4323944777140500000000000000
+    exact_from: certificates/best/n584.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 591
+    printed: '24.828427124775'
+    rounding: up
+    exact: 110661779275378006574210198284779275378006574210087623/4457059592186500000000000000000000000000000000000000
+    exact_from: certificates/best/n591.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 596
+    printed: '24.949747468335'
+    rounding: up
+    exact: 20647833226251446911537607243/827576842309000000000000000
+    exact_from: certificates/best/n596.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 631
+    printed: '25.656854249519'
+    rounding: up
+    exact: 23291540867878412117732677332540867878412117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n631.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 633
+    printed: '25.677669529693'
+    rounding: up
+    exact: 111028825052052639583387334559825052052639583387223531/4323944777140500000000000000000000000000000000000000
+    exact_from: certificates/best/n633.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 637
+    printed: '25.778174593082'
+    rounding: up
+    exact: 14218305948422917845352943573/551563722911500000000000000
+    exact_from: certificates/best/n637.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 640
+    printed: '25.828427124775'
+    rounding: up
+    exact: 115118838867564506574210202741838867564506574210087623/4457059592186500000000000000000000000000000000000000
+    exact_from: certificates/best/n640.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 644
+    printed: '25.899494936642'
+    rounding: up
+    exact: 58332098902857334354888971453/2252248510851500000000000000
+    exact_from: certificates/best/n644.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 682
+    printed: '26.656854249519'
+    rounding: up
+    exact: 24199350556523912117732678240350556523912117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n682.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 684
+    printed: '26.677669529693'
+    rounding: up
+    exact: 115352769829193139583387338883769829193139583387223531/4323944777140500000000000000000000000000000000000000
+    exact_from: certificates/best/n684.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 689
+    printed: '26.778174593084'
+    rounding: up
+    exact: 64560763567023404638316865519/2410947144384500000000000000
+    exact_from: certificates/best/n689.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 691
+    printed: '26.828427124775'
+    rounding: up
+    exact: 119575898459751006574210207198898459751006574210087623/4457059592186500000000000000000000000000000000000000
+    exact_from: certificates/best/n691.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 692
+    printed: '26.828427124777'
+    rounding: up
+    exact: 2170773985187235613928386751798607816255275226080305609/80913203561700000000000000809132035617000000000000000
+    exact_from: certificates/best/n692.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 695
+    printed: '26.899494936642'
+    rounding: up
+    exact: 60584347413708834354889032037347413708834354888971453/2252248510851500000000000000000000000000000000000000
+    exact_from: certificates/best/n695.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 699
+    printed: '26.949747468415'
+    rounding: up
+    exact: 2639279110114456251093845068032514979091306618754176347383507942311619528429158431628215963/97933352184755025353856069228269529418330701801359119989360075707804482627984375000000000
+    exact_from: certificates/best/n699.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 735
+    printed: '27.656854249519'
+    rounding: up
+    exact: 25107160245169412117732679148160245169412117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n735.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 736
+    printed: '27.656854249525'
+    rounding: up
+    exact: 108379279001146218403256921173/3918713170461500000000000000
+    exact_from: certificates/best/n736.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 737
+    printed: '27.677669529693'
+    rounding: up
+    exact: 119676714606333639583387343207714606333639583387223531/4323944777140500000000000000000000000000000000000000
+    exact_from: certificates/best/n737.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 742
+    printed: '27.778174593084'
+    rounding: up
+    exact: 66971710711407904638316932490710711407904638316865519/2410947144384500000000000000000000000000000000000000
+    exact_from: certificates/best/n742.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 743
+    printed: '27.798989873256'
+    rounding: up
+    exact: 126205981453356425112883379827/4539948466788500000000000000
+    exact_from: 'certified_bounds.json at franciscouzo/square-packing@7b6c87e129cf80b5ff9847b90b47fd30b4563c54:
+      certificates/best/n744.cert less 1 square(s), first committed at 4e4c8ce23cb5e87f033021687010992c40575480'
+    note: a deletion bound of the index, from the certificate of the next count
+  - n: 744
+    printed: '27.798989873256'
+    rounding: up
+    exact: 126205981453356425112883379827/4539948466788500000000000000
+    exact_from: certificates/best/n744.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 745
+    printed: '27.828427124777'
+    rounding: up
+    exact: 2251687188748935613928389004294928600807889154467058216739851872275226080305609/80913203561700000000000000809132035617000000000000000000000000000000000000000
+    exact_from: certificates/best/n745.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 746
+    printed: '27.828427124795'
+    rounding: up
+    exact: 367730549996634359546132990970943037615006771420523791609353382892995237219913991334741637917/13214205328514320723053151955570100452150938098877368234280471670077308683458500000000000000
+    exact_from: certificates/best/n746.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 790
+    printed: '28.656854249519'
+    rounding: up
+    exact: 26014969933814912117732680055969933814912117732654041/907809688645500000000000000000000000000000000000000
+    exact_from: certificates/best/n790.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 791
+    printed: '28.656854249525'
+    rounding: up
+    exact: 112297992171607718403257033470992171607718403256921173/3918713170461500000000000000000000000000000000000000
+    exact_from: certificates/best/n791.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 792
+    printed: '28.656854249526'
+    rounding: up
+    exact: 58182954586327656682331419387/2030332920693500000000000000
+    exact_from: certificates/best/n792.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 797
+    printed: '28.778174593084'
+    rounding: up
+    exact: 69382657855792404638316934901657855792404638316865519/2410947144384500000000000000000000000000000000000000
+    exact_from: certificates/best/n797.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 798
+    printed: '28.798989873256'
+    rounding: up
+    exact: 130745929920144925112883510572929920144925112883379827/4539948466788500000000000000000000000000000000000000
+    exact_from: 'certified_bounds.json at franciscouzo/square-packing@7b6c87e129cf80b5ff9847b90b47fd30b4563c54:
+      certificates/best/n799.cert less 1 square(s), first committed at 4e4c8ce23cb5e87f033021687010992c40575480'
+    note: a deletion bound of the index, from the certificate of the next count
+  - n: 799
+    printed: '28.798989873256'
+    rounding: up
+    exact: 130745929920144925112883510572929920144925112883379827/4539948466788500000000000000000000000000000000000000
+    exact_from: certificates/best/n799.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 800
+    printed: '28.798989873257'
+    rounding: up
+    exact: 72850332987746575778041765269/2529614174259500000000000000
+    exact_from: certificates/best/n800.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 850
+    printed: '29.656854249528'
+    rounding: up
+    exact: 81474235135286982498402752441/2747231194845500000000000000
+    exact_from: certificates/best/n850.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 854
+    printed: '29.778174593084'
+    rounding: up
+    exact: 71793605000176904638316937312605000176904638316865519/2410947144384500000000000000000000000000000000000000
+    exact_from: certificates/best/n854.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 855
+    printed: '29.798989873256'
+    rounding: up
+    exact: 135285878386933425112883515112878386933425112883379827/4539948466788500000000000000000000000000000000000000
+    exact_from: 'certified_bounds.json at franciscouzo/square-packing@7b6c87e129cf80b5ff9847b90b47fd30b4563c54:
+      certificates/best/n856.cert less 1 square(s), first committed at 4e4c8ce23cb5e87f033021687010992c40575480'
+    note: a deletion bound of the index, from the certificate of the next count
+  - n: 856
+    printed: '29.798989873256'
+    rounding: up
+    exact: 135285878386933425112883515112878386933425112883379827/4539948466788500000000000000000000000000000000000000
+    exact_from: certificates/best/n856.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 857
+    printed: '29.798989873257'
+    rounding: up
+    exact: 75379947162006075778041840648947162006075778041765269/2529614174259500000000000000000000000000000000000000
+    exact_from: certificates/best/n857.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 862
+    printed: '29.899494936647'
+    rounding: up
+    exact: 59222200921662745453265999507/1980709073753500000000000000
+    exact_from: certificates/best/n862.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 909
+    printed: '30.656854249528'
+    rounding: up
+    exact: 84221466330132482498402836662466330132482498402752441/2747231194845500000000000000000000000000000000000000
+    exact_from: certificates/best/n909.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 913
+    printed: '30.778174593084'
+    rounding: up
+    exact: 74204552144561404638316939723552144561404638316865519/2410947144384500000000000000000000000000000000000000
+    exact_from: certificates/best/n913.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 914
+    printed: '30.778174593089'
+    rounding: up
+    exact: 127461597773996078582211376877/4141298158813500000000000000
+    exact_from: certificates/best/n914.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 915
+    printed: '30.798989873256'
+    rounding: up
+    exact: 139825826853721925112883519652826853721925112883379827/4539948466788500000000000000000000000000000000000000
+    exact_from: certificates/best/n915.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 916
+    printed: '30.798989873257'
+    rounding: up
+    exact: 77909561336265575778041843178561336265575778041765269/2529614174259500000000000000000000000000000000000000
+    exact_from: certificates/best/n916.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 970
+    printed: '31.656854249528'
+    rounding: up
+    exact: 86968697524977982498402839409697524977982498402752441/2747231194845500000000000000000000000000000000000000
+    exact_from: certificates/best/n970.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 975
+    printed: '31.778174593089'
+    rounding: up
+    exact: 131602895932809578582211508479895932809578582211376877/4141298158813500000000000000000000000000000000000000
+    exact_from: certificates/best/n975.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 976
+    printed: '31.778174593090'
+    rounding: up
+    exact: 91717504595305587097814204831/2886179139290500000000000000
+    exact_from: certificates/best/n976.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 977
+    printed: '31.798989873257'
+    rounding: up
+    exact: 80439175510525075778041845708175510525075778041765269/2529614174259500000000000000000000000000000000000000
+    exact_from: certificates/best/n977.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 985
+    printed: '31.920310216821'
+    rounding: up
+    exact: 151772453123382777232691846593/4754729891171500000000000000
+    exact_from: 'certified_bounds.json at franciscouzo/square-packing@7b6c87e129cf80b5ff9847b90b47fd30b4563c54:
+      certificates/best/n986.cert less 1 square(s), first committed at 4e4c8ce23cb5e87f033021687010992c40575480'
+    note: a deletion bound of the index, from the certificate of the next count
+  - n: 986
+    printed: '31.920310216821'
+    rounding: up
+    exact: 151772453123382777232691846593/4754729891171500000000000000
+    exact_from: certificates/best/n986.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  - n: 988
+    printed: '31.949747468406'
+    rounding: up
+    exact: 144905786426265101551104872702307199989853609428833568481446593615050986003791678492024833511/4535428224262524319815774723197613864094732808783296778433316214694896106255500000000000000
+    exact_from: certificates/best/n988.cert at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (its header)
+  note: A publication in a watched repository with no issue, dated by its first commit (the
+    owner, 2026-10-14). Read here at the counts at or below 1024 that issue 715 restates or
+    certifies again, from the certificate each first published there or the index bound that
+    names it; its other counts are its own import's. Each side is the certificate's exact
+    header side, read by devtools.couzo_715_replay publications (the 21 October packet's receipts/earlier-publications.json).
+- report: '#715'
+  url: https://github.com/jlevy/squares/issues/715
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-21T20:55:57Z'
+  bead: think-cyal
+  claims:
+  - n: 328
+    printed: '18.614368938513'
+    rounding: up
+    exact: 5991890293618152760054413250743818176340881222496592793/321895967218167241377443521489582290271500000000000000
+    exact_from: certificates/n328.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 335
+    printed: '18.822875655562'
+    rounding: up
+    exact: 16980869286055030533553200179/902140012864500000000000000
+    exact_from: certificates/n335.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@02f9690
+  - n: 336
+    printed: '18.825571499862'
+    rounding: up
+    exact: 18825571499861668938686306400451/1000000000000000000000000000000
+    exact_from: certificates/n336.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@02f9690
+  - n: 337
+    printed: '18.858391767637'
+    rounding: up
+    exact: 3771678353527245620694257618907/200000000000000000000000000000
+    exact_from: certificates/n337.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@02f9690
+  - n: 338
+    printed: '18.906332809853'
+    rounding: up
+    exact: 9453166404926046689995693165509/500000000000000000000000000000
+    exact_from: certificates/n338.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@a7067d7
+    note: the same certificate, byte for byte (Git blob 55c627a86e0d038bf56a175b28b7fd856affb3bc),
+      as the couzo-certificates-2026-10-12 row the record holds at 338, which the start reads
+      only as its print; the exact sides are equal, a tie that the earlier holder keeps, and
+      no row is recorded
+  - n: 340
+    printed: '18.939649632892'
+    rounding: up
+    exact: 4734912408222751641551744529533/250000000000000000000000000000
+    exact_from: certificates/n340.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@f311f08
+  - n: 341
+    printed: '18.951882408720'
+    rounding: up
+    exact: 18951882408719945107766159138401/1000000000000000000000000000000
+    exact_from: certificates/n341.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@02f9690
+  - n: 343
+    printed: '18.977575126267'
+    rounding: up
+    exact: 3993049794861220561760624561/210408851936750000000000000
+    exact_from: certificates/n343.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 365
+    printed: '19.614368938513'
+    rounding: up
+    exact: 6313786260836320001431856772233400466612381222496592793/321895967218167241377443521489582290271500000000000000
+    exact_from: certificates/n365.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 373
+    printed: '19.823062082838'
+    rounding: up
+    exact: 19823062082837804646390244631729/1000000000000000000000000000000
+    exact_from: certificates/n373.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@02f9690
+  - n: 374
+    printed: '19.832356217033'
+    rounding: up
+    exact: 19832356217032762224853652799723/1000000000000000000000000000000
+    exact_from: certificates/n374.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@02f9690
+  - n: 404
+    printed: '20.614368938513'
+    rounding: up
+    exact: 6635682228054487242809300293722982756883881222496592793/321895967218167241377443521489582290271500000000000000
+    exact_from: certificates/n404.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 410
+    printed: '20.778174593076'
+    rounding: up
+    exact: 94471653122979184069256010393/4546677221321500000000000000
+    exact_from: certificates/n410.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 413
+    printed: '20.831663365378'
+    rounding: up
+    exact: 14788902264945330397898211051/709924215150500000000000000
+    exact_from: certificates/n413.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 417
+    printed: '20.933672777441'
+    rounding: up
+    exact: 301106674304339722830747043/14383843557010000000000000
+    exact_from: certificates/n417.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 454
+    printed: '21.828427124844'
+    rounding: up
+    exact: 9902683823108832887861760392581595687736445438313409171476900389/453659980468240847136222819645681050167293678569500000000000000
+    exact_from: certificates/n454.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 455
+    printed: '21.848427413955'
+    rounding: up
+    exact: 5358919623050436424906219/245277132377400000000000
+    exact_from: certificates/n455.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 456
+    printed: '21.881307463869'
+    rounding: up
+    exact: 58519308997543545617087000236755614819/2674397272382963949747076500000000000
+    exact_from: certificates/n456.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 458
+    printed: '21.903616797192'
+    rounding: up
+    exact: 2262032907223546078860969/103272118397980000000000
+    exact_from: certificates/n458.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 459
+    printed: '21.937022304151'
+    rounding: up
+    exact: 64336776808635659847968151313/2932794429281500000000000000
+    exact_from: certificates/n459.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 461
+    printed: '21.964134608334'
+    rounding: up
+    exact: 11250226318076613017368399/512208949666875000000000
+    exact_from: certificates/n461.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 463
+    printed: '21.971254044975'
+    rounding: up
+    exact: 3722082268875297535796061/169406910559420000000000
+    exact_from: certificates/n463.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 490
+    printed: '22.656854249519'
+    rounding: up
+    exact: 20568111801941912117732654041/907809688645500000000000000
+    exact_from: certificates/n490.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 496
+    printed: '22.822875655559'
+    rounding: up
+    exact: 4728252156315104130234035188140867288112126327730093939/207171621476346038271504245788572991344500000000000000
+    exact_from: certificates/n496.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 497
+    printed: '22.823102656285'
+    rounding: up
+    exact: 91891930577365623714995578121/4026268117935500000000000000
+    exact_from: certificates/n497.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 498
+    printed: '22.828427124827'
+    rounding: up
+    exact: 8363897193568998249163868051/366380791275500000000000000
+    exact_from: certificates/n498.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 499
+    printed: '22.881306218323'
+    rounding: up
+    exact: 1986515670415270886938531/86818280891000000000000
+    exact_from: certificates/n499.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 500
+    printed: '22.887841512273'
+    rounding: up
+    exact: 56286555050722332239648733349/2459233869674500000000000000
+    exact_from: certificates/n500.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 501
+    printed: '22.887841512273'
+    rounding: up
+    exact: 56286555050722332239648733349/2459233869674500000000000000
+    exact_from: certificates/n501.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 502
+    printed: '22.933269925480'
+    rounding: up
+    exact: 12593467482321294332207521/549135274788250000000000
+    exact_from: certificates/n502.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 503
+    printed: '22.943933771540'
+    rounding: up
+    exact: 56403591377461322238057315017249881278547553828962194129564722238713633888647589618571989111/2458322619786554571054946382228357602770753290102513576451314049052075795530500000000000000
+    exact_from: certificates/n503.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 504
+    printed: '22.961828398888'
+    rounding: up
+    exact: 550235180260777025281839621416578727214165261/23963038600508000000239630386005080000000000
+    exact_from: certificates/n504.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 505
+    printed: '22.964182800913'
+    rounding: up
+    exact: 21097041348205130185414401299/918693320424500000000000000
+    exact_from: certificates/n505.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 506
+    printed: '22.971254044975'
+    rounding: up
+    exact: 3891489179434717535796061/169406910559420000000000
+    exact_from: certificates/n506.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 509
+    printed: '22.993588501431'
+    rounding: up
+    exact: 153591402585753911653464403/6679749121204000000000000
+    exact_from: certificates/n509.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 535
+    printed: '23.656854249519'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.37e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 544
+    printed: '23.828427124775'
+    rounding: up
+    exact: 106204719683191506574210087623/4457059592186500000000000000
+    exact_from: certificates/n544.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 545
+    printed: '23.883414761903'
+    rounding: up
+    exact: 3243474506627957003535009/135804470967100000000000
+    exact_from: certificates/n545.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 546
+    printed: '23.887841512273'
+    rounding: up
+    exact: 58745788920396832239648733349/2459233869674500000000000000
+    exact_from: certificates/n546.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 547
+    printed: '23.898819144794'
+    rounding: up
+    exact: 75465979533245983149930599784731059706918355705302863/3157728382981011356523969339333246556500000000000000
+    exact_from: certificates/n547.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 548
+    printed: '23.943933771540'
+    rounding: up
+    exact: 58861913997247876809112261399478238881318307119064707706016036287765709684178089618571989111/2458322619786554571054946382228357602770753290102513576451314049052075795530500000000000000
+    exact_from: certificates/n548.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 549
+    printed: '23.955501804754'
+    rounding: up
+    exact: 47740514523994251617197427413/1992883092706500000000000000
+    exact_from: certificates/n549.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 550
+    printed: '23.960681444798'
+    rounding: up
+    exact: 76600101155237659586681314611/3196908290430500000000000000
+    exact_from: certificates/n550.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 553
+    printed: '23.979452392567'
+    rounding: up
+    exact: 41615909060866080427016467/1735482044359200000000000
+    exact_from: certificates/n553.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 554
+    printed: '23.986307325908'
+    rounding: up
+    exact: 134709039456034092958680081/5616080775824000000000000
+    exact_from: certificates/n554.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 582
+    printed: '24.656854249519'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.47e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 584
+    printed: '24.677669529693'
+    rounding: up
+    exact: 106704880274912139583387223531/4323944777140500000000000000
+    exact_from: certificates/n584.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 591
+    printed: '24.828427124775'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.48e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 592
+    printed: '24.883414761903'
+    rounding: up
+    exact: 3379278977595057003535009/135804470967100000000000
+    exact_from: certificates/n592.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 593
+    printed: '24.887841512273'
+    rounding: up
+    exact: 61205022790071332239648733349/2459233869674500000000000000
+    exact_from: certificates/n593.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 594
+    printed: '24.898819144794'
+    rounding: up
+    exact: 78623707916226994506454569124064306263418355705302863/3157728382981011356523969339333246556500000000000000
+    exact_from: certificates/n594.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 595
+    printed: '24.943933771540'
+    rounding: up
+    exact: 61320236617034431380167207781706596484089060409167221282467350336817785479708589618571989111/2458322619786554571054946382228357602770753290102513576451314049052075795530500000000000000
+    exact_from: certificates/n595.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 596
+    printed: '24.949747468335'
+    rounding: up
+    exact: 20647833226251446911537607243/827576842309000000000000000
+    exact_from: certificates/n596.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 597
+    printed: '24.950690418637'
+    rounding: up
+    exact: 368753807500038974504750427/14779302749258000000000000
+    exact_from: certificates/n597.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 598
+    printed: '24.954250129268'
+    rounding: up
+    exact: 13718744089780168988275879/549755813888000000000000
+    exact_from: certificates/n598.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 599
+    printed: '24.959619887409'
+    rounding: up
+    exact: 398699968620225726168921821/15973799698022000000000000
+    exact_from: certificates/n599.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 600
+    printed: '24.978172747238'
+    rounding: up
+    exact: 11463524048413976394438297171345823890532805002723609963/458941659360650000000000004589416593606500000000000000
+    exact_from: certificates/n600.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 601
+    printed: '24.986189080604'
+    rounding: up
+    exact: 20492923270447299393587572427/820170022901000000000000000
+    exact_from: certificates/n601.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 602
+    printed: '24.988237878425'
+    rounding: up
+    exact: 5405585620612592604180029/216325202557800000000000
+    exact_from: certificates/n602.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 631
+    printed: '25.656854249519'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.57e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 633
+    printed: '25.677669529693'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.57e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 637
+    printed: '25.778174593082'
+    rounding: up
+    exact: 14218305948422917845352943573/551563722911500000000000000
+    exact_from: certificates/n637.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 640
+    printed: '25.828427124775'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.58e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 643
+    printed: '25.898819144794'
+    rounding: up
+    exact: 81781436299208005862978538463397552819918355705302863/3157728382981011356523969339333246556500000000000000
+    exact_from: certificates/n643.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 644
+    printed: '25.899494936642'
+    rounding: up
+    exact: 58332098902857334354888971453/2252248510851500000000000000
+    exact_from: certificates/n644.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 645
+    printed: '25.946937290069'
+    rounding: up
+    exact: 111073610791541051373866870963/4280798521606500000000000000
+    exact_from: certificates/n645.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 646
+    printed: '25.946937290069'
+    rounding: up
+    exact: 111073610791541051373866870963/4280798521606500000000000000
+    exact_from: certificates/n646.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 647
+    printed: '25.946937290069'
+    rounding: up
+    exact: 111073610791541051373866870963/4280798521606500000000000000
+    exact_from: certificates/n647.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 648
+    printed: '25.959619886978'
+    rounding: up
+    exact: 457202852477132590774392819/17612078083874000000000000
+    exact_from: certificates/n648.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 651
+    printed: '25.981928099991'
+    rounding: up
+    exact: 5840693353164324627837472752063893645831591691/224798303293218815976851554093016000000000000
+    exact_from: certificates/n651.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 652
+    printed: '25.990044325432'
+    rounding: up
+    exact: 406462989946813823809618089/15639180328334000000000000
+    exact_from: certificates/n652.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 653
+    printed: '25.992652721826'
+    rounding: up
+    exact: 117568785317328226040021437558543680685674821150491509611/4523154545846307016869467045458463070168242355000000000
+    exact_from: certificates/n653.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 654
+    printed: '25.994801642508'
+    rounding: up
+    exact: 81788192611736041863828829/3146328782828400000000000
+    exact_from: certificates/n654.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 682
+    printed: '26.656854249519'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.67e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 684
+    printed: '26.677669529693'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.67e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 689
+    printed: '26.778174593084'
+    rounding: up
+    exact: 64560763567023404638316865519/2410947144384500000000000000
+    exact_from: certificates/n689.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 691
+    printed: '26.828427124775'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.68e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 692
+    printed: '26.828427124777'
+    rounding: up
+    exact: 2170773985187235613928386751798607816255275226080305609/80913203561700000000000000809132035617000000000000000
+    exact_from: certificates/n692.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 694
+    printed: '26.898819144794'
+    rounding: up
+    exact: 84939164682189017219502507802730799376418355705302863/3157728382981011356523969339333246556500000000000000
+    exact_from: certificates/n694.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 695
+    printed: '26.899494936642'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.69e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 696
+    printed: '26.946937290069'
+    rounding: up
+    exact: 115354409313147551373866870963/4280798521606500000000000000
+    exact_from: certificates/n696.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 697
+    printed: '26.946937290069'
+    rounding: up
+    exact: 115354409313147551373866870963/4280798521606500000000000000
+    exact_from: certificates/n697.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 698
+    printed: '26.946937290069'
+    rounding: up
+    exact: 115354409313147551373866870963/4280798521606500000000000000
+    exact_from: certificates/n698.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 699
+    printed: '26.949747468415'
+    rounding: up
+    exact: 2639279110114456251093845068032514979091306618754176347383507942311619528429158431628215963/97933352184755025353856069228269529418330701801359119989360075707804482627984375000000000
+    exact_from: certificates/n699.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 700
+    printed: '26.963723854128'
+    rounding: up
+    exact: 179857318073440169367885550226726643969433473646857118793600265487/6670344164866154968783350066703441648661549687833500000000000000
+    exact_from: certificates/n700.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 702
+    printed: '26.976012028499'
+    rounding: up
+    exact: 345428272301659623256054421/12805016246906000000000000
+    exact_from: certificates/n702.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 705
+    printed: '26.990419622637'
+    rounding: up
+    exact: 1678333552383585098611707/62182566104900000000000
+    exact_from: certificates/n705.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 735
+    printed: '27.656854249519'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.77e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 736
+    printed: '27.656854249525'
+    rounding: up
+    exact: 108379279001146218403256921173/3918713170461500000000000000
+    exact_from: certificates/n736.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 737
+    printed: '27.677669529693'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.77e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 742
+    printed: '27.778174593084'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.78e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 743
+    printed: '27.798989873256'
+    rounding: up
+    exact: 126205981453356425112883379827/4539948466788500000000000000
+    exact_from: certificates/n743.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 744
+    printed: '27.798989873256'
+    rounding: up
+    exact: 126205981453356425112883379827/4539948466788500000000000000
+    exact_from: certificates/n744.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 745
+    printed: '27.828427124777'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.78e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 746
+    printed: '27.828427124795'
+    rounding: up
+    exact: 367730549996634359546132990970943037615006771420523791609353382892995237219913991334741637917/13214205328514320723053151955570100452150938098877368234280471670077308683458500000000000000
+    exact_from: certificates/n746.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 747
+    printed: '27.884019388658'
+    rounding: up
+    exact: 114542132955217192542896156831/4107805670290500000000000000
+    exact_from: certificates/n747.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 748
+    printed: '27.884019388658'
+    rounding: up
+    exact: 114542132955217192542896156831/4107805670290500000000000000
+    exact_from: certificates/n748.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 749
+    printed: '27.884019388658'
+    rounding: up
+    exact: 114542132955217192542896156831/4107805670290500000000000000
+    exact_from: certificates/n749.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 750
+    printed: '27.911200800711'
+    rounding: up
+    exact: 80481256564020403131137/2883475244890625000000
+    exact_from: certificates/n750.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 751
+    printed: '27.914175785603'
+    rounding: up
+    exact: 37683976423149836682175231709/1349994236354500000000000000
+    exact_from: certificates/n751.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 752
+    printed: '27.932396768486'
+    rounding: up
+    exact: 58354095818745909581853699769970334976991407/2089118821503500000020891188215035000000000
+    exact_from: certificates/n752.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 756
+    printed: '27.976782251658'
+    rounding: up
+    exact: 26267093138502328204137511/938889000966000000000000
+    exact_from: certificates/n756.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 758
+    printed: '27.983731022945'
+    rounding: up
+    exact: 932745307356629738341517417995147386069863074489321712553/33331699285982946611751058050315010881932623420000000000
+    exact_from: certificates/n758.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 790
+    printed: '28.656854249519'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.87e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 791
+    printed: '28.656854249525'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.87e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 792
+    printed: '28.656854249526'
+    rounding: up
+    exact: 58182954586327656682331419387/2030332920693500000000000000
+    exact_from: certificates/n792.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 797
+    printed: '28.778174593084'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.88e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 798
+    printed: '28.798989873256'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.88e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 799
+    printed: '28.798989873256'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.88e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 800
+    printed: '28.798989873257'
+    rounding: up
+    exact: 72850332987746575778041765269/2529614174259500000000000000
+    exact_from: certificates/n800.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 801
+    printed: '28.825777528963'
+    rounding: up
+    exact: 979992148528341507246437/33997075969372000000000
+    exact_from: certificates/n801.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 802
+    printed: '28.827439471389'
+    rounding: up
+    exact: 582294784960729546107839/20199323826130000000000
+    exact_from: certificates/n802.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 803
+    printed: '28.827585222385'
+    rounding: up
+    exact: 9984094780930028299805439154810655679192900686060591720001170484223/346338227912949481776898653463382279129494817768986500000000000000
+    exact_from: certificates/n803.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 804
+    printed: '28.884019388658'
+    rounding: up
+    exact: 118649938625507692542896156831/4107805670290500000000000000
+    exact_from: certificates/n804.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 805
+    printed: '28.902673974184'
+    rounding: up
+    exact: 72291652226586790442397587/2501209828930000000000000
+    exact_from: certificates/n805.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 806
+    printed: '28.902673974184'
+    rounding: up
+    exact: 72291652226586790442397587/2501209828930000000000000
+    exact_from: certificates/n806.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 807
+    printed: '28.924694876402'
+    rounding: up
+    exact: 235311548823335590940409947/8135316546253906250000000
+    exact_from: certificates/n807.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 808
+    printed: '28.931498747933'
+    rounding: up
+    exact: 12113555080424187918502527389138845601201251313721807390985379033031/418697807049830917349641554186978070498309173496415500000000000000
+    exact_from: certificates/n808.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 809
+    printed: '28.933954694456'
+    rounding: up
+    exact: 139341281307276285073506888673/4815839479211500000000000000
+    exact_from: certificates/n809.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 813
+    printed: '28.979120019579'
+    rounding: up
+    exact: 32467351670904099221895169723/1120370516736500000000000000
+    exact_from: certificates/n813.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 814
+    printed: '28.981388189193'
+    rounding: up
+    exact: 1736238420543802968138791/59908738988260000000000
+    exact_from: certificates/n814.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 815
+    printed: '28.992261716554'
+    rounding: up
+    exact: 2693806663943726077815226267/92914678071000000000000000
+    exact_from: certificates/n815.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 850
+    printed: '29.656854249528'
+    rounding: up
+    exact: 81474235135286982498402752441/2747231194845500000000000000
+    exact_from: certificates/n850.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 854
+    printed: '29.778174593084'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.98e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 855
+    printed: '29.798989873256'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.98e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 856
+    printed: '29.798989873256'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.98e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 857
+    printed: '29.798989873257'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 2.98e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 858
+    printed: '29.825571500168'
+    rounding: up
+    exact: 40379692093543158306225247/1353861470628200000000000
+    exact_from: certificates/n858.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 859
+    printed: '29.825571500168'
+    rounding: up
+    exact: 40379692093543158306225247/1353861470628200000000000
+    exact_from: certificates/n859.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 860
+    printed: '29.827585222385'
+    rounding: up
+    exact: 10330433008842977781582337808274037958322395503829578220001170484223/346338227912949481776898653463382279129494817768986500000000000000
+    exact_from: certificates/n860.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 862
+    printed: '29.899494936647'
+    rounding: up
+    exact: 59222200921662745453265999507/1980709073753500000000000000
+    exact_from: certificates/n862.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 863
+    printed: '29.902673974184'
+    rounding: up
+    exact: 74792862055516790442397587/2501209828930000000000000
+    exact_from: certificates/n863.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 864
+    printed: '29.924694876402'
+    rounding: up
+    exact: 243446865369589497190409947/8135316546253906250000000
+    exact_from: certificates/n864.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 865
+    printed: '29.931498747933'
+    rounding: up
+    exact: 12532252887474018835852168943325823671699560487218222890985379033031/418697807049830917349641554186978070498309173496415500000000000000
+    exact_from: certificates/n865.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 866
+    printed: '29.933954694456'
+    rounding: up
+    exact: 144157120786487785073506888673/4815839479211500000000000000
+    exact_from: certificates/n866.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 867
+    printed: '29.942070418091'
+    rounding: up
+    exact: 9472289485124763203720875967459356273967815683351030809/316353857727950000000000003163538577279500000000000000
+    exact_from: certificates/n867.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 868
+    printed: '29.974553547719'
+    rounding: up
+    exact: 102870408427167638483802623/3431924624445200000000000
+    exact_from: certificates/n868.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 869
+    printed: '29.974935743865'
+    rounding: up
+    exact: 79633031749659976377789417/2656653960166000000000000
+    exact_from: certificates/n869.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 870
+    printed: '29.979120019579'
+    rounding: up
+    exact: 33587722187640599221895169723/1120370516736500000000000000
+    exact_from: certificates/n870.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 871
+    printed: '29.981295638373'
+    rounding: up
+    exact: 208951391346767060697725766410549021429/6969391645614418149003386750000000000
+    exact_from: certificates/n871.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 872
+    printed: '29.992261716554'
+    rounding: up
+    exact: 2786721342014726077815226267/92914678071000000000000000
+    exact_from: certificates/n872.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 873
+    printed: '29.992265777039'
+    rounding: up
+    exact: 145930153476937824291827241701/4865592835225500000000000000
+    exact_from: certificates/n873.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 909
+    printed: '30.656854249528'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 3.07e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 913
+    printed: '30.778174593084'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 3.08e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 914
+    printed: '30.778174593089'
+    rounding: up
+    exact: 127461597773996078582211376877/4141298158813500000000000000
+    exact_from: certificates/n914.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 915
+    printed: '30.798989873256'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 3.08e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 916
+    printed: '30.798989873257'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 3.08e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 917
+    printed: '30.825571499902'
+    rounding: up
+    exact: 58038744216977155932596797/1882811620124000000000000
+    exact_from: certificates/n917.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 918
+    printed: '30.825571499902'
+    rounding: up
+    exact: 58038744216977155932596797/1882811620124000000000000
+    exact_from: certificates/n918.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 919
+    printed: '30.827585222385'
+    rounding: up
+    exact: 10676771236755927263359236461737420237451890321598564720001170484223/346338227912949481776898653463382279129494817768986500000000000000
+    exact_from: certificates/n919.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 923
+    printed: '30.924694876402'
+    rounding: up
+    exact: 251582181915843403440409947/8135316546253906250000000
+    exact_from: certificates/n923.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 924
+    printed: '30.931498747933'
+    rounding: up
+    exact: 12950950694523849753201810497512801742197869660714638390985379033031/418697807049830917349641554186978070498309173496415500000000000000
+    exact_from: certificates/n924.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 925
+    printed: '30.933954694456'
+    rounding: up
+    exact: 148972960265699285073506888673/4815839479211500000000000000
+    exact_from: certificates/n925.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 926
+    printed: '30.942070418091'
+    rounding: up
+    exact: 9788643342852713203720875970622894851247315683351030809/316353857727950000000000003163538577279500000000000000
+    exact_from: certificates/n926.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 927
+    printed: '30.969443226806'
+    rounding: up
+    exact: 2100518311089619279992361/67825510962740000000000
+    exact_from: certificates/n927.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 928
+    printed: '30.974935654060'
+    rounding: up
+    exact: 440547585823965324873926921/14222711896618000000000000
+    exact_from: certificates/n928.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 931
+    printed: '30.989934444611'
+    rounding: up
+    exact: 97707112181770354246132333/3152866049342800000000000
+    exact_from: certificates/n931.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 932
+    printed: '30.992265777039'
+    rounding: up
+    exact: 150795746312163324291827241701/4865592835225500000000000000
+    exact_from: certificates/n932.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 970
+    printed: '31.656854249528'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 3.17e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 975
+    printed: '31.778174593089'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 3.18e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 976
+    printed: '31.778174593090'
+    rounding: up
+    exact: 91717504595305587097814204831/2886179139290500000000000000
+    exact_from: certificates/n976.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 977
+    printed: '31.798989873257'
+    rounding: up
+    note: 'compared by its print: its certificate, retained and replayed in the couzo-issue715-2026-10-21
+      packet, is 3.18e-23 below the certificate first published at franciscouzo/square-packing@4e4c8ce,
+      under the print''s resolution; whether that re-certification makes a new report waits
+      on a decision (think-fwa9)'
+  - n: 978
+    printed: '31.825090165859'
+    rounding: up
+    exact: 120376829742360594379194107/3782450548137000000000000
+    exact_from: certificates/n978.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 979
+    printed: '31.825090165859'
+    rounding: up
+    exact: 120376829742360594379194107/3782450548137000000000000
+    exact_from: certificates/n979.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 980
+    printed: '31.827585222385'
+    rounding: up
+    exact: 11023109464668876745136135115200802516581385139367551220001170484223/346338227912949481776898653463382279129494817768986500000000000000
+    exact_from: certificates/n980.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 985
+    printed: '31.920310216821'
+    rounding: up
+    exact: 151772453123382777232691846593/4754729891171500000000000000
+    exact_from: certificates/n985.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 986
+    printed: '31.920310216821'
+    rounding: up
+    exact: 151772453123382777232691846593/4754729891171500000000000000
+    exact_from: certificates/n986.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 987
+    printed: '31.941797078452'
+    rounding: up
+    exact: 8251690186164048093520156538108110916605750307379661596183383970659/258335189028255697872192327583351890282556978721923250000000000000
+    exact_from: certificates/n987.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 988
+    printed: '31.949747468406'
+    rounding: up
+    exact: 144905786426265101551104872702307199989853609428833568481446593615050986003791678492024833511/4535428224262524319815774723197613864094732808783296778433316214694896106255500000000000000
+    exact_from: certificates/n988.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      pinned by digest in the couzo-issue715-2026-10-21 packet
+    restates: the certificate first published at franciscouzo/square-packing@4e4c8ce
+  - n: 989
+    printed: '31.974181306003'
+    rounding: up
+    exact: 17577992067284028236253379/549755813888000000000000
+    exact_from: certificates/n989.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 994
+    printed: '31.992271544010'
+    rounding: up
+    exact: 4611240261212280419168811/144136069077460000000000
+    exact_from: certificates/n994.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 995
+    printed: '31.993696413074'
+    rounding: up
+    exact: 386736709089352929754857685915166817464624679766371404851380373153/12087903319959022098778275120879033199590220987782750000000000000
+    exact_from: certificates/n995.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 996
+    printed: '31.994135336337'
+    rounding: up
+    exact: 364144082419956597581812320221003025625991073/11381588487762324508318941042596000000000000
+    exact_from: certificates/n996.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  note: 'Issue-table prints at the 173 counts at or below 1024, each its certificate''s exact
+    header side rounded up at 12 places; the exact side is given where it decides nothing
+    the print cannot, and at the 30 counts where it would decide a re-certification the print
+    does not, the print stands (see each claim). The packet''s receipts/earlier-publications.json
+    also holds every one to every certificate the source published through 7b6c87e and to
+    the index there: none is below or equal to a recorded claim. The 1112 rows above 1024
+    are not read here; they wait on the owner (think-f2io).'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []
