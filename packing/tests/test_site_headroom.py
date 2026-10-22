@@ -10,7 +10,7 @@ from typing import Any
 
 import pytest
 
-from devtools import check_site_rendering, render_overview, site_assets
+from devtools import check_site_rendering, overview_sections, render_overview, site_assets
 from devtools.render_n11_lower_bounds_explainer import kpress_css, kpress_static
 from sqpack.probes import probe
 from tests import site_browser
@@ -20,6 +20,7 @@ STATE = probe(PROBES, "site_headroom/state")
 SCROLL = probe(PROBES, "site_headroom/scroll")
 ANCHOR = probe(PROBES, "site_headroom/anchor")
 NAVIGATION = probe(PROBES, "site_headroom/navigation")
+ACTIONS = probe(PROBES, "site_headroom/actions")
 BODY = (
     "<h1>Header test</h1><p>Scroll to the target.</p>"
     '<div style="height: 1600px"></div><h2 id="header-target">Target</h2>'
@@ -383,5 +384,48 @@ def test_header_is_usable_without_javascript(browser: Any, shells: dict[str, Pat
         assert nav.is_visible()
         assert nav.locator('a[data-page="about"]').is_visible()
         assert nav.locator('a[data-page="github"]').is_visible()
+    finally:
+        page.close()
+
+
+@pytest.mark.parametrize("width", [1280, 390])
+def test_main_actions_center_their_visible_capital_ink(
+    browser: Any, tmp_path: Path, width: int
+) -> None:
+    """The visible label and arrow share the action's center, with its hit area intact."""
+    body = '<h1>Shared actions</h1><p class="site-action-row">'
+    for label in ("All News", "All Profiles", "All Results"):
+        body += (
+            '<a class="site-action" href="#actions">'
+            + label
+            + overview_sections.arrow_icon()
+            + "</a>"
+        )
+    body += (
+        '<button class="site-action" data-atlas-toggle>'
+        "<span data-atlas-label>Show More</span>"
+        + overview_sections.arrow_icon("double-down")
+        + "</button></p>"
+        + '<div class="site-popover"><a class="site-popover-action" data-go="page" '
+        + 'href="#actions">Open Page</a></div>'
+    )
+    result = render_overview.static_content_page(
+        body,
+        meta=render_overview.PageMeta("Shared actions", "Action ink fixture.", "actions.html"),
+        current="about",
+    )
+    target = tmp_path / "actions.html"
+    target.write_text(site_assets.shared().assets.inlined(result.html))
+    page = browser.new_page(viewport={"width": width, "height": 900})
+    try:
+        page.goto(target.as_uri(), wait_until="load")
+        readings = page.evaluate(ACTIONS)
+        assert len(readings) == 5
+        for reading in readings:
+            assert reading["height"] == pytest.approx(reading["originalHeight"], abs=0.05)
+            assert abs(reading["centerOffset"]) <= 0.1, reading
+            if reading["iconOffset"] is not None:
+                assert abs(reading["iconOffset"]) <= 0.1, reading
+            assert reading["height"] >= 40
     finally:
         page.close()

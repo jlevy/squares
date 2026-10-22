@@ -852,6 +852,9 @@ body {
    face and size put back to the link's. */
 .kpress :is(.site-popover a, button).site-popover-action,
 .kpress :is(a, button).site-action {
+  /* Source Sans capitals sit about 0.016em above their line-box center. Balance
+     that ink while preserving the total padding and the existing click height. */
+  --site-action-cap-offset: 0.016em;
   align-items: center;
   background: var(--kpress-doc-accent);
   color: var(--kpress-doc-bg);
@@ -862,6 +865,8 @@ body {
   gap: 0.5rem;
   line-height: calc(var(--site-font-size-note) * 1.5);
   padding: 0.45rem 0.9rem;
+  padding-block-start: calc(0.45rem + var(--site-action-cap-offset));
+  padding-block-end: calc(0.45rem - var(--site-action-cap-offset));
   text-decoration: none;
   transition: var(--site-hover-transition);
 }
@@ -869,6 +874,8 @@ body {
 .kpress .site-action .site-icon-arrow {
   align-self: center;
   margin: 0;
+  /* The inset corrects the label; the arrow retains its geometric center. */
+  margin-block-start: calc(-2 * var(--site-action-cap-offset));
 }
 .kpress button:is(.site-popover-action, .site-action) {
   border: 0;
