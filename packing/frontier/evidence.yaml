@@ -41639,3 +41639,71 @@ evidence:
       pending; no stage 4 review is owed for a beyond-horizon row. No arrangement identity,
       local minimum, optimum or credit statement of the source's per-count metadata is
       established.
+  - id: E-mishapolk-719-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [105, 204]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk issue 719 2026-10-22]'
+    certificate: packing/resources/web/mishapolk-issue719-2026-10-22/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records the source author's report, issue 719, of 2 exact rational certificates
+      at 12fc4667, certificates/n-105.cert and n-204.cert, kept as derived exact facts with no
+      upstream byte retained. A separate complete repository replay is retained for n = 105 and
+      204: 2 positives and 4 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 156996 pair decisions; summed over the 6 jobs, the
+      receipt records 22.55 route CPU seconds and 23.02 job wall seconds, the longest job 5.91
+      seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21. Independent review and confirmation remain pending (think-4h23). The source's
+      own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-mishapolk-719-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [330, 339, 342, 344, 370, 372, 377, 378, 379, 380, 381, 409, 410, 412, 413, 417,
+        418, 419, 420, 421, 422, 447, 450, 452, 453, 454, 456, 460, 462, 490, 498, 499, 507, 508,
+        535, 536, 544, 551, 552, 553, 555, 582, 584, 591, 596, 601, 631, 633, 637, 640, 641, 642,
+        644, 649, 650, 652, 682, 684, 689, 691, 692, 693, 695, 699, 701, 703, 704, 705, 735, 736,
+        737, 742, 743, 744, 745, 746, 753, 754, 755, 757, 758, 759, 790, 791, 792, 797, 798, 799,
+        800, 810, 811, 812, 816, 868, 869, 872, 874, 927, 928, 929, 930, 932, 933, 934, 990, 991,
+        992, 993, 994, 996, 997]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk issue 719 2026-10-22]'
+    certificate: packing/resources/web/mishapolk-issue719-2026-10-22/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records the source author's report, issue 719, of the 111 upper bounds beyond
+      the n <= 324 corpus at or below 1024 that the ledger of 22 October for issue 719 records:
+      exact rational certificates certificates/n-N.cert at 12fc4667, kept as derived exact facts
+      with no upstream byte retained, each printed by the issue as the binary64 value of its
+      exact header side at 16 places and recorded at that side rounded up at 16 places. A
+      separate complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, the sqpack.verify predicates and the independent rational
+      corner checker's, over every wall and the pairs whose centres are closer than sqrt 2, an
+      exactly justified filter, accepted all 112 rows beyond the corpus at or below 1024, 366
+      included, and refused all 672 controls, in 160.2 positive CPU seconds; no square touches
+      the box and no pair touches, every wall clearing by at least 2.02e-13 and every pair by at
+      least 4.04e-13. The all-pairs kernel at 447, 652 and 997 (808,413 pairs, 401.2 CPU
+      seconds) agreed exactly with it on each least gap and clearance. The two routes share
+      certificate parsing, half-angle conversion, the pair filter and Fraction arithmetic. The
+      source's own checkers were not run here. Review and confirmation remain pending; no stage
+      4 review is owed for a beyond-horizon row. No arrangement identity, local minimum or
+      optimum is established.
