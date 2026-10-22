@@ -3,15 +3,23 @@ type: is
 id: is-01m5bqmmyavdqzsztnah3ntczy
 title: "Owner review at 229: admit grid-slack's 0.5-degree view of T-199 (row 7) or keep the axis tool's view drawn"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 3
+delegate: coord-intake-1021b
 labels:
   - regularization
   - owner-decision
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-10-20T04:03:17.066Z
-updated_at: 2026-10-20T04:03:17.066Z
+updated_at: 2026-10-22T04:29:20.238Z
+started_at: 2026-10-22T04:29:19.837Z
+closed_at: 2026-10-22T04:29:20.238Z
+close_reason: "Moot after #718 (merged 2026-10-22T04:28:54Z as 7359fa8b6): T-225 replaced T-199 as the house at 229, so the row-7 choice between grid-slack's view of T-199 and the axis tool's view no longer arises; 229's new witness is regularized at row 10 (#718 review A7; default_drawings.py on main no longer names this bead)."
+resolution: null
+duplicate_of: null
 ---
 Owner review owed at n = 229 since the adoption of 19 October 2026 (PR #692, review A2; think-ip1p regularized the four re-housed counts). The house is Evan Daniel's dilation certificate T-199. His regularizer draws no view there (its solve is not jammed). grid-slack's views at 0.5, 1 and 5 degrees each beat the drawn axis-tool view on every goal: 1 light, 4 uneven, 0 near-axis and 13 classes against 25 / 55 / 24 / 32, with house sides 655 against 455. But two squares' contact counts fall while no total does, so `regularize_select` sends each view to row 7, the owner's review, and the axis tool's view stays drawn until a review record admits one.
 
