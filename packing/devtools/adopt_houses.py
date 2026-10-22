@@ -831,6 +831,18 @@ RESULTS: dict[str, Prose] = {
             "it."
         ),
         lineage_at={
+            227: (
+                "The source names Francisco Couzo’s #672 packing (T-227), his refinement of "
+                "Joost de Winter’s #668 packing (T-196), as the one it regularizes and calls "
+                "the certificate not a new bound: Evan Daniel solved that packing to its "
+                "exact side, $1.76 \\times 10^{-11}$ below #672’s certificate, and "
+                "regularized it for display at that side. Measured by the import and again "
+                "by the 21 October review, nearest centres pair the two one to one under a "
+                "half turn; 194 of the 227 squares lie within $10^{-6}$ of T-227’s, 16 move "
+                "beyond $10^{-3}$ and 3 beyond a tenth, at most 0.168, and one square turns "
+                "by 2.54° (T-225). #672’s packing moves no square beyond a tenth from de "
+                "Winter’s (T-227)."
+            ),
             204: (
                 "The source names Francisco Couzo’s #678 packing (T-223) as the one it "
                 "regularizes and calls the certificate not a new bound: Evan Daniel solved "
@@ -850,7 +862,10 @@ RESULTS: dict[str, Prose] = {
                 "keeps 95 of "
                 "the 229 squares within $10^{-6}$ of T-199’s, moves 112 beyond $10^{-3}$ "
                 "and 13 beyond a tenth, at most 0.650, and turns six near-axis squares to "
-                "the axis (T-225)."
+                "the axis (T-225). Francisco Couzo’s #672 packing (T-227), which #674 names "
+                "as its start, pairs with T-199 under no symmetry either: an optimal "
+                "assignment moves 79 squares beyond a tenth, at most 0.873, with turns up to "
+                "38° (T-227)."
             ),
             260: (
                 "The source names Francisco Couzo’s #678 packing (T-223) as the one it "
@@ -1205,9 +1220,14 @@ CREDITS: dict[int, Credit] = {
         (COUZO,),
         "Francisco Couzo’s further arrangement of Daniil Ostashev’s n = 211 design",
     ),
-    # Joost de Winter's packing of issue 668 (T-196), from a search the issue says started
-    # from this repository's catalogue; no identity with the catalogue's packing is measured.
-    227: Credit((DE_WINTER,), (), "Joost de Winter’s packing"),
+    # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of Francisco
+    # Couzo's issue-672 packing (T-227), solved to its exact side 1.76e-11 below #672's
+    # certificate: T-225's item names T-227, whose own item names de Winter's T-196, which
+    # #672 refines (no square beyond a tenth). So the packing stays with de Winter, Couzo is
+    # credited with the refinement and Daniel with the regularization, as at 258. The house
+    # it replaced was de Winter's packing of issue 668 (T-196), from a search the issue says
+    # started from this repository's catalogue.
+    227: _regularized(DE_WINTER, "Joost de Winter’s", via=COUZO),
     # T-174's regularization of T-128's packing, 46 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
     228: Credit(

@@ -1,0 +1,27 @@
+{
+  "n": 229,
+  "packing": "n229.txt",
+  "packing_sha256": "c2d01489c3e6f706bb76cba0183632c0a504f6bc07ddb6522bef74da3e44f3ea",
+  "certificate": "certificates/n229.cert",
+  "certificate_sha256": "9ab667ec73e55b4570fdc427b9f9930831a3e3f07b6953a2e05c6aee0a07609f",
+  "rational_side": "231170315041711399213831561/14771101209934000000000000",
+  "kind": "rational witness",
+  "origin": {
+    "seed_credit": "Joost de Winter",
+    "category": "reviewed public submission",
+    "source_url": "https://github.com/JoostdeWinter/square-packing/blob/c95c4938f068ed44a1819ef973e770ec241aa567/n229/n229_record.cert",
+    "request": "https://github.com/jlevy/squares/issues/668",
+    "source_n": 229,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "34ddede798ec3bc6ff9e94fd4c12ee12207946dd43435001e8ac9e9aacdde419",
+    "search_job": {
+      "id": 106640,
+      "method": "slp",
+      "source": "n229.txt",
+      "source_origin": "own",
+      "source_sha256": "7e5411b6657fbe385b588bf93dfb7b146a5a289a4e4039db254dd9ef51ed40c7",
+      "constructed_seed": null
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

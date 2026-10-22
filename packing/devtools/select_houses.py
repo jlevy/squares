@@ -202,12 +202,7 @@ class Pending:
 #: adopted Evan Daniel's original certificate there (T-220). A smaller validated packing
 #: takes a staged count off too: the adoption of 20 October 2026 (think-xu4d) took 204
 #: from T-193 to Francisco Couzo's issue 678 (T-223), below T-193's algebraic side there by
-#: 2.04e-5, which leaves T-193 three houses below T-186, at 175, 232 and 302. Evan
-#: Daniel's regularized views of 20 October (T-225), validated at stage 4 on 22 October
-#: 2026 (think-ql4v), are smaller at 204, 227, 229 and 260; the adoption of that day took
-#: 204, 229 and 260 to them, and stages 227 for the next pull request that can adopt it,
-#: think-2vjc's, which registers Francisco Couzo's #672 and repoints T-225's item there
-#: (`CORRECTIONS_OWED`).
+#: 2.04e-5, which leaves T-193 three houses below T-186, at 175, 232 and 302.
 PENDING_ADOPTION: dict[int, Pending] = {
     **{
         n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER)
@@ -219,7 +214,6 @@ PENDING_ADOPTION: dict[int, Pending] = {
             88, 102, 123, 126, 175, 199, 232, 258, 259, 266, 267, 292, 295, 301, 302,
         )
     },
-    227: Pending(house="T-225", bead="think-2vjc", why=NEXT_PULL_REQUEST),
 }  # fmt: skip
 
 
@@ -245,10 +239,6 @@ class Correction:
 RE1_BEAD = "think-8ido"
 #: The stage 4 review of issue 639, whose RE-1 measured T-193's forms pose by pose.
 REVIEW_639 = "docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md"
-#: The bead that registers Francisco Couzo's #672, after which T-225's item at 227 names it.
-REGISTERS_672 = "think-2vjc"
-#: The stage 4 review of T-225, whose RF-1 measured its 227 view to be #672's packing.
-REVIEW_T225 = "docs/project/reviews/review-2026-10-21-evand-regularized-views.md"
 
 #: Regularization items owed a correction before their house is adopted (review B1 of
 #: #658). At nine of T-193's counts the item names PingYou Ltd's (T-174) or Polkovskyi's
@@ -263,25 +253,15 @@ REVIEW_T225 = "docs/project/reviews/review-2026-10-21-evand-regularized-views.md
 #: not be the house: at 204 Francisco Couzo's issue 678 (T-223) is below it, adopted on 20
 #: October 2026, so T-193's item there no longer waits on an adoption, and `--check`
 #: refuses an entry whose count another result houses. The item itself, Polkovskyi's
-#: T-186 named where the review measured T-162, stays think-8ido's to correct. At 227,
-#: T-225's item names de Winter's T-196, while the view is Couzo's #672 packing solved
-#: 1.76e-11 lower (194 of 227 squares within 1e-6 of #672's), which #672 refines from
-#: T-196's: an adoption would credit de Winter's packing and leave out Couzo's refinement,
-#: the whole 1.71e-4 (RF-1 of the review of 21 October 2026; review A2 of #716). #672 is
-#: not registered yet, so the adoption waits for think-2vjc, which registers it and
-#: repoints the item.
+#: T-186 named where the review measured T-162, stays think-8ido's to correct.
 CORRECTIONS_OWED: dict[int, Correction] = {
-    **{
-        n: Correction(result="T-193", named=named, measured=measured, bead=RE1_BEAD,
-                      measured_in=REVIEW_639)
-        for n, named, measured in (
-            (88, "T-174", "T-127"), (126, "T-174", "T-139"), (175, "T-186", "T-158"),
-            (199, "T-174", "T-127"), (232, "T-186", "T-158"),
-            (266, "T-174", "T-119"), (292, "T-174", "T-146"), (301, "T-174", "T-098"),
-        )
-    },
-    227: Correction(result="T-225", named="T-196", measured="#672's packing",
-                    bead=REGISTERS_672, measured_in=REVIEW_T225),
+    n: Correction(result="T-193", named=named, measured=measured, bead=RE1_BEAD,
+                  measured_in=REVIEW_639)
+    for n, named, measured in (
+        (88, "T-174", "T-127"), (126, "T-174", "T-139"), (175, "T-186", "T-158"),
+        (199, "T-174", "T-127"), (232, "T-186", "T-158"),
+        (266, "T-174", "T-119"), (292, "T-174", "T-146"), (301, "T-174", "T-098"),
+    )
 }  # fmt: skip
 
 

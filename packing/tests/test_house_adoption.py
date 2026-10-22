@@ -1279,18 +1279,10 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     The adoption of 17 October 2026 (think-3mry) took 37 rational counts off; twelve
     others are staged for T-193, the adoption of 19 October 2026 took 236 to issue 659's
     certificate and 155 to issue 669's, the adoption of 20 October 2026 took 308 to issue
-    689's, and the adoption of 21 October 2026 took 270 to issue 703's. The adoption of 22
-    October 2026 (think-ql4v) stages 227 for T-225 under think-2vjc, the pull request that
-    registers #672 and repoints T-225's item there, which `CORRECTIONS_OWED` holds until
-    then (RF-1 of the review of 21 October 2026)."""
+    689's, and the adoption of 21 October 2026 took 270 to issue 703's."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
         algebraic = n in (70, 153, 207) or pending.house == "T-193"
-        if pending.house == "T-225":
-            owed = select.CORRECTIONS_OWED[n]
-            assert (n, pending.bead, pending.why) == (227, owed.bead, select.NEXT_PULL_REQUEST)
-            assert (owed.result, owed.named) == ("T-225", "T-196")
-            continue
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
             if algebraic

@@ -4394,7 +4394,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-21'
+  lastmod: '2026-10-22'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -4594,7 +4594,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-21'
+  lastmod: '2026-10-22'
   status: live
 - path: cases/228.html
   canonical: cases/228.html
@@ -4610,7 +4610,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-21'
+  lastmod: '2026-10-22'
   status: live
 - path: cases/23.html
   canonical: cases/23.html
@@ -4890,7 +4890,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-21'
+  lastmod: '2026-10-22'
   status: live
 - path: cases/261.html
   canonical: cases/261.html
@@ -17333,7 +17333,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-21'
-  lastmod: '2026-10-21'
+  lastmod: '2026-10-22'
   status: live
   identity:
     kind: upper-bound
@@ -17351,6 +17351,8 @@ urls:
     builds_on: null
     evidence:
     - E-evand-regularized-1020-certificate-report
+    - E-evand-regularized-1020-exact-feasibility
+    - E-evand-regularized-1020-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-regularized-2026-10-20/README.md
     - packing/resources/web/evand-regularized-2026-10-20/acquisition/claims.json
@@ -17361,6 +17363,132 @@ urls:
     - packing/resources/web/evand-regularized-2026-10-20/receipts/exact-certification.json.xz
     - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-20261021/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-21-evand-regularized-views.md
+    - packing/resources/web/evand-regularized-2026-10-20/review/review-2026-10-21/README.md
+  amendments:
+  - date: '2026-10-22'
+    reason: 'The 21 October review accepts the replay: the result rises to V3/C3 and cites its two
+      confirming evidence entries (E-evand-regularized-1020-exact-feasibility and E-evand-regularized-1020-review-exact-feasibility),
+      with the review and its retained programs among its artifacts; its 227 item names #672''s entry
+      (T-227), and the adoption of 22 October 2026 makes it the house best packing at 204, 227, 229
+      and 260; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 204
+        - 227
+        - 229
+        - 260
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel regularized lists 2026-10-20]'
+        published: '2026-10-20'
+      builds_on: null
+      evidence:
+      - E-evand-regularized-1020-certificate-report
+      artifacts:
+      - packing/resources/web/evand-regularized-2026-10-20/README.md
+      - packing/resources/web/evand-regularized-2026-10-20/acquisition/claims.json
+      - packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-204.cert.gz
+      - packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-227.cert.gz
+      - packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-229.cert.gz
+      - packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-260.cert.gz
+      - packing/resources/web/evand-regularized-2026-10-20/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-20261021/README.md
+      - packing/devtools/upper_bound_reports.py
+- path: result/t-226.html
+  canonical: result/t-226.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 204
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo issue 670 2026-10-17]'
+      published: '2026-10-17'
+    builds_on: null
+    evidence:
+    - E-couzo-670-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-issue670-2026-10-17/README.md
+    - packing/resources/web/couzo-issue670-2026-10-17/acquisition/claims.json
+    - packing/resources/web/couzo-issue670-2026-10-17/source/certificates/n204.cert
+    - packing/resources/web/couzo-issue670-2026-10-17/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-227.html
+  canonical: result/t-227.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 227
+      - 229
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo issue 672 2026-10-17]'
+      published: '2026-10-17'
+    builds_on: null
+    evidence:
+    - E-couzo-672-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-issue672-2026-10-17/README.md
+    - packing/resources/web/couzo-issue672-2026-10-17/acquisition/claims.json
+    - packing/resources/web/couzo-issue672-2026-10-17/source/certificates/n227.cert
+    - packing/resources/web/couzo-issue672-2026-10-17/source/certificates/n229.cert
+    - packing/resources/web/couzo-issue672-2026-10-17/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+    - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-228.html
+  canonical: result/t-228.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 204
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo issue 675 2026-10-18]'
+      published: '2026-10-18'
+    builds_on: null
+    evidence:
+    - E-couzo-675-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-issue675-2026-10-18/README.md
+    - packing/resources/web/couzo-issue675-2026-10-18/acquisition/claims.json
+    - packing/resources/web/couzo-issue675-2026-10-18/source/certificates/best/n204.cert
+    - packing/resources/web/couzo-issue675-2026-10-18/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-20261018/README.md
     - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html

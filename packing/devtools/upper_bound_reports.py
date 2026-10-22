@@ -1390,6 +1390,11 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     ),
     "[Daniel n270 sweep 2026-10-20]": _import("evand-n270-sweep-2026-10-20"),
     "[Daniel regularized lists 2026-10-20]": _import("evand-regularized-2026-10-20"),
+    # Francisco Couzo's in-corpus rows of issues 670, 672 and 675 (think-f28n, think-2vjc,
+    # think-pvav), retained from their pins; their rows beyond the corpus follow later.
+    "[Couzo issue 670 2026-10-17]": _import("couzo-issue670-2026-10-17"),
+    "[Couzo issue 672 2026-10-17]": _import("couzo-issue672-2026-10-17"),
+    "[Couzo issue 675 2026-10-18]": _import("couzo-issue675-2026-10-18"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

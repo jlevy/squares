@@ -8,8 +8,9 @@ it, as the stage 4 review of 19 October asked of the imports before it (RV-1 of
 docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md): how each
 side was made from the solved side its JSON prints, that each is below every report at its
 count and below the verified bound at the next count, that the house reader rebuilds it,
-what the identity measurement found at 227, and that the adoption there waits for #672's
-registration (review A2 of #716). Every test reads the retained packet and
+what the identity measurement found at 227, that the 227 item names #672's entry since
+its registration (review A2 of #716), and that both maintained routes meet the sharp
+controls at 204 (RF-3 of the 21 October review). Every test reads the retained packet and
 the records only; none needs the network.
 """
 
@@ -145,29 +146,30 @@ def test_both_routes_meet_contact_and_refuse_1e30_past_it_at_204(
         assert verdicts[route][margin] == (-kernel.SHARP_EPSILON if past else 0), route
 
 
-#: The bead that imports #672, after which T-225's item at 227 names that result.
-REGISTERS_672 = "think-2vjc"
+#: Francisco Couzo's #672 at 227 and 229, registered on 22 October 2026 (think-2vjc).
+COUZO_672_ENTRY = "T-227"
 
 
-def test_the_227_adoption_waits_for_672s_registration(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Review A2 of #716: the view at 227 is #672's packing, which no entry registers yet,
-    so the item names T-196, whose packing #672 refines, and an adoption would credit de
-    Winter's packing and leave out Couzo's refinement. From T-225's confirmation on,
-    `select_houses.CORRECTIONS_OWED` must hold 227 while the item names T-196, and that
-    entry makes `adopt_houses.plan` refuse the count until think-2vjc repoints it."""
-    entry = next(e for e in select_houses.load_results() if e["id"] == "T-225")
-    owed = select_houses.CORRECTIONS_OWED.get(227)
-    if select_houses.regularized(entry, 227) == "T-196" and select_houses.eligible(entry):
-        assert owed is not None, "hold 227 in CORRECTIONS_OWED (review A2 of #716)"
-        assert (owed.result, owed.named, owed.bead) == ("T-225", "T-196", REGISTERS_672)
-    # The hold refuses the house it names: the entry the confirming pull request adds.
-    house = select_houses.Candidate(
-        result="T-225", n=227, side=SIDES[227], source_key=KEY, published="2026-10-20",
-        report_evidence=(), confirming_evidence=(), regularizes="T-196",
-    )  # fmt: skip
-    hold = select_houses.Correction(
-        result="T-225", named="T-196", measured="#672's packing", bead=REGISTERS_672,
-        measured_in=f"packing/resources/web/{PACKET}/measure/identity.json",
-    )  # fmt: skip
-    monkeypatch.setitem(select_houses.CORRECTIONS_OWED, 227, hold)
-    assert select_houses.owed_correction(227, house) == hold
+def test_the_227_item_names_672s_entry_and_its_credit_reaches_couzo() -> None:
+    """Review A2 of #716 and RF-1 of the 21 October review: the view at 227 is #672's
+    packing (194 of 227 squares within 1e-6 of #672's), which refines de Winter's (T-196)
+    and was unregistered when T-225 was registered, so the item named T-196 and the
+    adoption at 227 waited. #672's entry now registers it, the item names that entry with
+    the identity measured against it, and nothing holds 227: the house rule adopts T-225
+    there with the packing credited to #672's entry, whose own item names de Winter's."""
+    results = {entry["id"]: entry for entry in select_houses.load_results()}
+    entry = results["T-225"]
+    assert select_houses.regularized(entry, 227) == COUZO_672_ENTRY
+    (item,) = (item for item in entry["regularizations"] if item["n"] == 227)
+    record = json.loads((_packet() / "measure/identity.json").read_text("utf-8"))
+    pairs = {(pair["n"], pair["view"], pair["against"]): pair for pair in record["pairs"]}
+    measured = pairs[227, "evand 0075967", "#672"]["assignment"]
+    assert item["identity"]["one_to_one"]
+    assert item["identity"]["moved"] == measured["moved_beyond"]["1e-3"] == 16
+    assert item["identity"]["max_move"] == round(float(measured["largest_move"]), 3)
+    assert item["identity"]["max_turn_deg"] == float(measured["largest_turn_degrees"])
+    couzo = results[COUZO_672_ENTRY]
+    assert couzo["attribution"]["source_keys"] == ["[Couzo issue 672 2026-10-17]"]
+    assert select_houses.regularized(couzo, 227) == "T-196"
+    assert 227 not in select_houses.CORRECTIONS_OWED
+    assert 227 not in select_houses.PENDING_ADOPTION

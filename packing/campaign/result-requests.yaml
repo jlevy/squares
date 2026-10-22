@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-21'
+last_reviewed: '2026-10-22'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -10815,7 +10815,7 @@ issues:
     opened: '2026-10-17'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: Francisco Couzo reports 73 improved upper bounds at 204 to 993 from 23aff0c6, using exact rational
       certificates, deletion where needed, and retained source/seed credits. Complete per-count report-order
       and classical-envelope comparison remains queued.
@@ -10824,10 +10824,8 @@ issues:
     - key: n204
       claim: s(204) <= 14.808644417690, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-f28n
+      register:
+      - T-226
     - key: n330
       claim: s(330) <= 18.701641583454, rounded upward; exact certificate side is authoritative.
       source: body
@@ -11423,7 +11421,7 @@ issues:
     opened: '2026-10-17'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: 'Francisco Couzo reports 46 improved upper bounds at 227, 229 and 330 to 996 from af8cb795.
       His comment states 227 and 229 are based on de Winter findings; that lineage is retained for the comparison
       with #668 and #674.'
@@ -11432,17 +11430,13 @@ issues:
     - key: n227
       claim: s(227) <= 15.563625652343, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-2vjc
+      register:
+      - T-227
     - key: n229
       claim: s(229) <= 15.650174740273, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-2vjc
+      register:
+      - T-227
     - key: n330
       claim: s(330) <= 18.692698795114, rounded upward; exact certificate side is authoritative.
       source: body
@@ -11996,7 +11990,7 @@ issues:
     opened: '2026-10-18'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: Francisco Couzo reports 79 improved upper bounds at 204 to 998 from c6da0fc. The complete source
       index also adopts Daniel at 229 and retains 542 finite witnesses across 1024 indexed counts; the import
       must distinguish these from Couzo discoveries.
@@ -12005,10 +11999,8 @@ issues:
     - key: n204
       claim: s(204) <= 14.808644367227, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-pvav
+      register:
+      - T-228
     - key: n419
       claim: s(419) <= 20.959713421191, rounded upward; exact certificate side is authoritative.
       source: body

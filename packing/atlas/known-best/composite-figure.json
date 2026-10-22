@@ -6031,12 +6031,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"194547458795865848854407472552117653131825098066089500568310019841668910818842825068644658133972443495777187230686109286929082683273291187074040913251499/12500000000000000000000000000001272204783003459957077568639425038233180795950995922365041743732086145591922059343477256613382050000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"7781812826162574542396221861851/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(227) ≥ 15.068802","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.0688022843"},
         "n": 227,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"15.5637967036692680","source_url":"https://github.com/JoostdeWinter/square-packing/blob/9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d/n227/n227_exact.json","witness_id":"W-known-best-n227","witness_path":"packing/witnesses/known-best/n-227.yaml"},
+          "assessed_geometry": {"reported_side":"15.5636256523251491","source_url":"https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-227.cert.gz","witness_id":"W-known-best-n227","witness_path":"packing/witnesses/known-best/n-227.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -6053,7 +6053,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(227) ≤ 15.563797","provenance":"frontier","relation":"upper-bound","value":"15.5637967036692680"}
+        "side": {"display":"s(227) ≤ 15.563626","provenance":"frontier","relation":"upper-bound","value":"15.5636256523251491"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

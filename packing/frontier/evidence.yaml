@@ -41383,3 +41383,82 @@ evidence:
       review's sharp mutants and a self-test of twelve hand-built cases. Finite
       feasibility only.
     source_reviewed: '2026-10-21'
+  - id: E-couzo-670-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 204
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 670 2026-10-17]'
+    certificate: packing/resources/web/couzo-issue670-2026-10-17/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: 'This atom records the source author''s report of 1 exact rational certificate at 23aff0c.
+      A separate complete repository replay is retained for n = 204: 1 positive and 2 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 124236 pair decisions; summed
+      over the 3 jobs, the receipt records 10.22 route CPU seconds and 10.41 job wall seconds, the longest
+      job 3.79 seconds. In every positive squares touch the box, a least wall clearance of exactly 0, and
+      every pair clears by at least 5.47e-11. Independent review and confirmation remain pending. The source''s
+      own checkers were not run here. The two maintained routes, the sqpack rational witness verifier and
+      the independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight or optimality
+      is claimed.'
+  - id: E-couzo-672-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 227
+      - 229
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 672 2026-10-17]'
+    certificate: packing/resources/web/couzo-issue672-2026-10-17/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: 'This atom records the source author''s report of 2 exact rational certificates at af8cb79.
+      A separate complete repository replay is retained for n = 227 and 229: 2 positives and 4 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 310542 pair decisions;
+      summed over the 6 jobs, the receipt records 23.85 route CPU seconds and 24.17 job wall seconds, the
+      longest job 4.3 seconds. In every positive squares touch the box, a least wall clearance of exactly
+      0, and every pair clears by at least 1.19e-12. Independent review and confirmation remain pending.
+      The source''s own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.'
+  - id: E-couzo-675-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 204
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 675 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue675-2026-10-18/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: 'This atom records the source author''s report of 1 exact rational certificate at c6da0fc.
+      A separate complete repository replay is retained for n = 204: 1 positive and 2 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 124236 pair decisions; summed
+      over the 3 jobs, the receipt records 10.07 route CPU seconds and 10.29 job wall seconds, the longest
+      job 3.61 seconds. In every positive squares touch the box, a least wall clearance of exactly 0, and
+      every pair clears by at least 1.20e-12. Independent review and confirmation remain pending. The source''s
+      own checkers were not run here. The two maintained routes, the sqpack rational witness verifier and
+      the independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight or optimality
+      is claimed.'

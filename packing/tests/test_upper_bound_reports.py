@@ -118,6 +118,11 @@ DANIEL_703 = "evand-n270-sweep-2026-10-20"
 #: Evan Daniel's regularized lists at 0075967, which no issue reports, retained under MIT
 #: by the views lane of 21 October (`test_upper_bound_reports_regularized_1020`).
 DANIEL_REGULARIZED_1020 = "evand-regularized-2026-10-20"
+#: Francisco Couzo's in-corpus rows of issues #670, #672 and #675, retained as factual data
+#: by the think-ql4v stage 4 lane of 22 October (`test_upper_bound_reports_couzo_670_672_675`).
+COUZO_670 = "couzo-issue670-2026-10-17"
+COUZO_672 = "couzo-issue672-2026-10-17"
+COUZO_675 = "couzo-issue675-2026-10-18"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -158,6 +163,9 @@ EVERY = (
     DANIEL_703,
     DANIEL_702,
     DANIEL_REGULARIZED_1020,
+    COUZO_670,
+    COUZO_672,
+    COUZO_675,
 )
 
 

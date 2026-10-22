@@ -424,7 +424,8 @@ def _sources() -> dict[str, Source]:
 #: and 260. The pass of 21 October 2026 adopted Evan Daniel's certificate of issue 703
 #: (T-224) at 270 and Couzo's of issue 678 (T-223) at 260, which replaced T-196 there. The
 #: pass of 22 October 2026 adopted Evan Daniel's regularized views of 20 October (T-225) at
-#: 204 and 260 from T-223 and at 229 from T-199; 227 is staged for think-2vjc.
+#: 204 and 260 from T-223, at 227 from T-196, once Francisco Couzo's #672 was registered
+#: as T-227 and T-225's item there named it, and at 229 from T-199.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -463,7 +464,7 @@ ADOPTED: dict[int, str] = {
     209: "T-174",
     210: "T-174",
     211: "T-188",
-    227: "T-196",
+    227: "T-225",
     228: "T-174",
     229: "T-225",
     232: "T-186",
@@ -548,7 +549,8 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: October 2026 adopted Evan Daniel's regularized views of 20 October (T-225) after the 21
 #: October review of them: his solved views of Couzo's issue-678 packings at 204 and 260,
 #: 1.39e-09 and 2.51e-11 below T-223, and of his own issue-674 packing at 229, 1.91e-11
-#: below T-199; its view at 227 waits for #672's registration (think-2vjc).
+#: below T-199; and, once Couzo's #672 was registered (T-227) and T-225's item there named
+#: it, his solved view of #672's packing at 227, 1.71e-04 below de Winter's T-196.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -623,7 +625,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-19": frozenset({155, 183, 229, 236, 271}),
     "2026-10-20": frozenset({154, 204, 227, 260, 308}),
     "2026-10-21": frozenset({260, 270}),
-    "2026-10-22": frozenset({204, 229, 260}),
+    "2026-10-22": frozenset({204, 227, 229, 260}),
 }
 
 
