@@ -5158,6 +5158,8 @@ sources:
     the case corpus, so no register entry records them; each is a beyond-horizon row. All 9 native jobs
     have full outcomes. No selected override or superseded claim is created at this source-only stage;
     current cases and earlier source ownership remain unchanged.
+    On 22 October 2026 issue 670's rows superseded one of this source's
+    (couzo-issue670-2026-10-17).
   claims_record: resources/web/evand-compositions-2026-10-13/acquisition/beyond-horizon-claims.json
 - id: evand-fresh-compositions-2026-10-14
   title: Evan Daniel's fresh-pass composition certificates at 622cd2e, issue596
@@ -5891,6 +5893,8 @@ sources:
     On 21 October 2026 issue 686's rows superseded 27 of this source's (muglich-issue686-2026-10-19).
     On 22 October 2026 issue 715's rows superseded 29 of this source's
     (couzo-issue715-2026-10-21).
+    On 22 October 2026 issue 670's rows superseded six of this source's
+    (couzo-issue670-2026-10-17).
   claims_record: resources/web/couzo-verified-bounds-2026-10-14/review/beyond-horizon-claims.json
 - id: couzo-certificates-2026-10-14
   title: Francisco Couzo's registration witnesses at 43ac7d2, issue 607
@@ -5944,6 +5948,8 @@ sources:
     On 20 October 2026 issue 678's rows superseded two of this source's
     (couzo-issue678-2026-10-18).
     On 21 October 2026 issue 686's rows superseded eight of this source's (muglich-issue686-2026-10-19).
+    On 22 October 2026 issue 670's rows superseded one of this source's
+    (couzo-issue670-2026-10-17).
   claims_record: resources/web/couzo-certificates-2026-10-14/acquisition/beyond-horizon-claims.json
 - id: couzo-n237-2026-10-15
   title: Francisco Couzo's exact certificate at 237, 4e4c8ce, no issue
@@ -6567,8 +6573,51 @@ sources:
     its exact side equals the side its JSON prints. T-225 records the in-horizon report. All 12 native
     jobs have full outcomes. No selected override or superseded claim is created at this source-only
     stage; current cases and earlier source ownership remain unchanged.
+- id: de-winter-issue666-2026-10-17
+  title: Joost de Winter's 19 exact certificates beyond 324, issue 666
+  role: source-repository
+  url: https://github.com/JoostdeWinter/joostdewinter.github.io/tree/643dc9ad4d3dbd71a9a05558c7f6116b809ba930/square-packing-above-324
+  local: resources/web/de-winter-issue666-2026-10-17/
+  source_key: '[de Winter issue 666 2026-10-17]'
+  scope:
+    n_values:
+    - 464
+    - 509
+    - 555
+    - 603
+    - 654
+    - 706
+    - 760
+    - 817
+    - 875
+    - 935
+    - 998
+  reviewed: '2026-10-22'
+  source_date: '2026-10-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/de-winter-issue666-2026-10-17/README.md
+  - resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+  evidence:
+  - E-de-winter-666-certificate-report
+  notes: >-
+    Issue 666's rows at or below 1024: 11 exact certificates square-packing-above-324/nNNNN.cert,
+    first committed at 2026-10-17T07:03:15Z, three minutes before the issue. The issue pins
+    b3152f52, which no branch reaches since the site's history was rewritten to drop an
+    unrelated PDF; b9cdc16b, with the same time, holds the identical folder, and the packet
+    retains it from the MIT-licensed successor 643dc9a, which changes no certificate
+    (receipts/first-commits.json). Each header side rounds up at 12 places to the issue's
+    print, and the packet's filtered exact replay decided every one on two routes with all six
+    controls refused (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay). The
+    backlog ledger of 22 October (campaign/issue-intake/upper-bounds-backlog-20261022) records
+    each in report order, and each is superseded on entry, by issue 675's (6), 672's (2),
+    678's, 686's and 715's (1 each) rows. The issue credits the staircase-rectangle and
+    four-block method of Arslanov, Mustafin and Shangitbayev. The 8 rows above 1024 are
+    retained and not recorded or replayed; they wait on the owner (think-f2io).
+  claims_record: resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
 - id: couzo-issue670-2026-10-17
-  title: Francisco Couzo's in-corpus certificate of issue 670 at 23aff0c6
+  title: Francisco Couzo's 73 exact certificates of issue 670 at 23aff0c6
   role: source-repository
   url: https://github.com/franciscouzo/square-packing/tree/23aff0c6f992271e1ad13a148d44f392c4b386c0
   local: resources/web/couzo-issue670-2026-10-17/
@@ -6576,6 +6625,78 @@ sources:
   scope:
     n_values:
     - 204
+    - 330
+    - 339
+    - 364
+    - 370
+    - 378
+    - 379
+    - 382
+    - 403
+    - 417
+    - 418
+    - 419
+    - 421
+    - 422
+    - 444
+    - 452
+    - 458
+    - 459
+    - 460
+    - 461
+    - 462
+    - 463
+    - 501
+    - 503
+    - 505
+    - 536
+    - 546
+    - 548
+    - 551
+    - 553
+    - 598
+    - 600
+    - 647
+    - 650
+    - 651
+    - 700
+    - 701
+    - 702
+    - 703
+    - 749
+    - 753
+    - 754
+    - 756
+    - 757
+    - 758
+    - 804
+    - 805
+    - 806
+    - 809
+    - 811
+    - 812
+    - 813
+    - 863
+    - 866
+    - 867
+    - 868
+    - 869
+    - 870
+    - 871
+    - 922
+    - 925
+    - 926
+    - 927
+    - 928
+    - 929
+    - 930
+    - 931
+    - 987
+    - 989
+    - 990
+    - 991
+    - 992
+    - 993
   reviewed: '2026-10-22'
   source_date: '2026-10-17'
   disposition: current-report
@@ -6583,14 +6704,32 @@ sources:
   represented_by:
   - frontier/results.yaml
   - resources/web/couzo-issue670-2026-10-17/acquisition/claims.json
+  - resources/web/couzo-issue670-2026-10-17/README.md
+  - resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json
   evidence:
   - E-couzo-670-certificate-report
-  notes: The 1 complete certificate is retained as the source wrote them, admitted only where its exact
-    side equals, or rounds up to, the side its source prints. T-226 records the in-horizon report. All
-    3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
-    stage; current cases and earlier source ownership remain unchanged.
+  - E-couzo-670-beyond-horizon-report
+  notes: >-
+    The 1 in-corpus certificate is retained as the source wrote it, admitted only where its
+    exact side equals, or rounds up to, the side its source prints; T-226 records it, and all
+    3 native jobs have full outcomes. The issue's 72 rows beyond the corpus, root
+    certificates/nN.cert at 23aff0c6, each first committed there minutes before the issue
+    (receipts/first-commits.json), are retained beside it from the same pin, each with its
+    per-count JSON; each header side rounds up at 12 places to the issue's print, and the
+    packet's filtered exact replay decided every one on two routes with all six controls
+    refused (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay). The
+    backlog ledger of 22 October (campaign/issue-intake/upper-bounds-backlog-20261022)
+    records each in report order: 8 are current, at 364, 370, 382, 403, 444, 452, 536 and
+    922, each superseding the row that stood there (six of couzo-verified-bounds-2026-10-14's,
+    one each of couzo-certificates-2026-10-14's and evand-compositions-2026-10-13's), and 64
+    are superseded on entry by issue 672's (19), 675's (25), 678's (9), 686's (9) and 715's
+    (2) rows. The per-count JSON credits Couzo's seeds at most counts, Evan Daniel's at 364
+    and his seed or construction at 403 and 444, Kevin Fang's at 382, Fang's rectangle and
+    gluing with PingYou Ltd's square input at 703, 757, 813 and 931, and names no seed
+    credit at 21; those statements are the source's.
+  claims_record: resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json
 - id: couzo-issue672-2026-10-17
-  title: Francisco Couzo's in-corpus certificates of issue 672 at af8cb795
+  title: Francisco Couzo's 46 exact certificates of issue 672 at af8cb795
   role: source-repository
   url: https://github.com/franciscouzo/square-packing/tree/af8cb7959aead318c0cf5e9f873de3caa763f77a
   local: resources/web/couzo-issue672-2026-10-17/
@@ -6599,6 +6738,50 @@ sources:
     n_values:
     - 227
     - 229
+    - 330
+    - 461
+    - 507
+    - 652
+    - 653
+    - 704
+    - 749
+    - 750
+    - 753
+    - 755
+    - 756
+    - 757
+    - 758
+    - 759
+    - 804
+    - 805
+    - 811
+    - 812
+    - 813
+    - 814
+    - 815
+    - 816
+    - 817
+    - 864
+    - 865
+    - 868
+    - 869
+    - 871
+    - 872
+    - 873
+    - 874
+    - 923
+    - 924
+    - 929
+    - 930
+    - 932
+    - 933
+    - 934
+    - 935
+    - 990
+    - 991
+    - 994
+    - 995
+    - 996
   reviewed: '2026-10-22'
   source_date: '2026-10-17'
   disposition: current-report
@@ -6606,14 +6789,30 @@ sources:
   represented_by:
   - frontier/results.yaml
   - resources/web/couzo-issue672-2026-10-17/acquisition/claims.json
+  - resources/web/couzo-issue672-2026-10-17/README.md
+  - resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json
   evidence:
   - E-couzo-672-certificate-report
-  notes: All 2 complete certificates are retained as the source wrote them, each admitted only where its
-    exact side equals, or rounds up to, the side its source prints. T-227 records the in-horizon report.
-    All 6 native jobs have full outcomes. No selected override or superseded claim is created at this
-    source-only stage; current cases and earlier source ownership remain unchanged.
+  - E-couzo-672-beyond-horizon-report
+  notes: >-
+    The 2 in-corpus certificates are retained as the source wrote them, each admitted only
+    where its exact side equals, or rounds up to, the side its source prints; T-227 records
+    them, and all 6 native jobs have full outcomes. The issue's 44 rows beyond the corpus,
+    root certificates/nN.cert at af8cb795, each first committed there minutes before the
+    issue (receipts/first-commits.json), are retained beside them from the same pin, each
+    with its per-count JSON; each header side rounds up at 12 places to the issue's print,
+    and the packet's filtered exact replay decided every one on two routes with all six
+    controls refused (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay).
+    The backlog ledger of 22 October (campaign/issue-intake/upper-bounds-backlog-20261022)
+    records each in report order, and each is superseded on entry, by issue 675's (32),
+    678's (7), 686's (4) and 715's (1) rows. The per-count JSON credits Joost de Winter's
+    seeds at 12 counts (652, 653, 759, 814, 815, 817, 872, 874 and 932 to 935) and his seed
+    or construction at 816 and 873, Fang's rectangle and gluing with PingYou Ltd's square
+    input at 757 and 813, and Couzo's at most of the rest; those statements are the
+    source's.
+  claims_record: resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json
 - id: couzo-issue675-2026-10-18
-  title: Francisco Couzo's in-corpus certificate of issue 675 at c6da0fc7
+  title: Francisco Couzo's 77 exact certificates of issue 675 at c6da0fc7
   role: source-repository
   url: https://github.com/franciscouzo/square-packing/tree/c6da0fc7524d667bf3d224559724ba9b60762e60
   local: resources/web/couzo-issue675-2026-10-18/
@@ -6621,6 +6820,84 @@ sources:
   scope:
     n_values:
     - 204
+    - 419
+    - 421
+    - 422
+    - 458
+    - 459
+    - 460
+    - 461
+    - 462
+    - 463
+    - 464
+    - 502
+    - 545
+    - 546
+    - 547
+    - 548
+    - 549
+    - 554
+    - 592
+    - 593
+    - 598
+    - 602
+    - 603
+    - 641
+    - 642
+    - 650
+    - 652
+    - 654
+    - 693
+    - 700
+    - 701
+    - 705
+    - 706
+    - 753
+    - 755
+    - 756
+    - 758
+    - 759
+    - 760
+    - 804
+    - 805
+    - 806
+    - 807
+    - 809
+    - 811
+    - 812
+    - 813
+    - 814
+    - 816
+    - 817
+    - 863
+    - 864
+    - 865
+    - 867
+    - 868
+    - 869
+    - 870
+    - 872
+    - 873
+    - 874
+    - 919
+    - 923
+    - 924
+    - 927
+    - 928
+    - 930
+    - 931
+    - 932
+    - 933
+    - 989
+    - 990
+    - 991
+    - 992
+    - 993
+    - 994
+    - 995
+    - 996
+    - 997
+    - 998
   reviewed: '2026-10-22'
   source_date: '2026-10-18'
   disposition: current-report
@@ -6628,12 +6905,28 @@ sources:
   represented_by:
   - frontier/results.yaml
   - resources/web/couzo-issue675-2026-10-18/acquisition/claims.json
+  - resources/web/couzo-issue675-2026-10-18/README.md
+  - resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json
   evidence:
   - E-couzo-675-certificate-report
-  notes: The 1 complete certificate is retained as the source wrote them, admitted only where its exact
-    side equals, or rounds up to, the side its source prints. T-228 records the in-horizon report. All
-    3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
-    stage; current cases and earlier source ownership remain unchanged.
+  - E-couzo-675-beyond-horizon-report
+  notes: >-
+    The 1 in-corpus certificate is retained as the source wrote it, admitted only where its
+    exact side equals, or rounds up to, the side its source prints; T-228 records it, and all
+    3 native jobs have full outcomes. The issue's 78 rows beyond the corpus read 76
+    certificates/best/nN.cert at c6da0fc7, each first committed there minutes before the
+    issue (receipts/first-commits.json); 992 and 995 are the 993 and 996 certificates less
+    their last square, at the same side. They are retained beside it from the same pin, with
+    the root per-count JSON of each count; each header side rounds up at 12 places to the
+    issue's print, and the packet's filtered exact replay decided every row on two routes
+    with all six controls of each certificate refused (receipts/filtered-exact-replay.json,
+    devtools.beyond_horizon_replay). The backlog ledger of 22 October
+    (campaign/issue-intake/upper-bounds-backlog-20261022) records each in report order, and
+    each is superseded on entry, by issue 678's (54), 686's (18) and 715's (6) rows. The
+    per-count JSON credits Joost de Winter's seeds or constructions at 21 counts and Fang's
+    rectangle and gluing with PingYou Ltd's square input at 813 and 931, and Couzo's at most
+    of the rest; those statements are the source's.
+  claims_record: resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json
 - id: wand125-fine-net-n38-65775-2026-10-16
   title: Wand125 reported n38 fine-net lower bound (#446)
   role: source-repository
@@ -10408,7 +10701,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.583782203951'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue670-2026-10-17
   bead: think-x333
 - n: 365
   source_id: evand-fresh-compositions-2026-10-14
@@ -10692,7 +10986,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.767479045659'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue670-2026-10-17
   bead: think-nj7h
 - n: 378
   source_id: couzo-verified-bounds-2026-10-14
@@ -10739,14 +11034,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.987621154241'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue670-2026-10-17
   bead: think-qik6
 - n: 403
   source_id: couzo-verified-bounds-2026-10-14
   claim: upper-bound
   value: '20.583782203979'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue670-2026-10-17
   bead: think-nj7h
 - n: 404
   source_id: couzo-verified-bounds-2026-10-14
@@ -10875,7 +11172,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.583782203980'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue670-2026-10-17
   bead: think-nj7h
 - n: 447
   source_id: couzo-verified-bounds-2026-10-14
@@ -10911,7 +11209,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.778174597699'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue670-2026-10-17
   bead: think-nj7h
 - n: 453
   source_id: couzo-verified-bounds-2026-10-14
@@ -11171,7 +11470,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.677669534779'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue670-2026-10-17
   bead: think-nj7h
 - n: 539
   source_id: couzo-verified-bounds-2026-10-14
@@ -12443,7 +12743,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.899494939181'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue670-2026-10-17
   bead: think-nj7h
 - n: 923
   source_id: couzo-verified-bounds-2026-10-14
@@ -14747,4 +15048,1636 @@ beyond_horizon_claims:
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-cyal
+- n: 464
+  source_id: de-winter-issue666-2026-10-17
+  claim: upper-bound
+  value: '21.988813022694'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-3m10
+- n: 509
+  source_id: de-winter-issue666-2026-10-17
+  claim: upper-bound
+  value: '22.994328036438'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue715-2026-10-21
+  bead: think-3m10
+- n: 555
+  source_id: de-winter-issue666-2026-10-17
+  claim: upper-bound
+  value: '23.993653790591'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-3m10
+- n: 603
+  source_id: de-winter-issue666-2026-10-17
+  claim: upper-bound
+  value: '24.995268064197'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-3m10
+- n: 654
+  source_id: de-winter-issue666-2026-10-17
+  claim: upper-bound
+  value: '25.996103908965'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-3m10
+- n: 706
+  source_id: de-winter-issue666-2026-10-17
+  claim: upper-bound
+  value: '26.998712100405'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-3m10
+- n: 760
+  source_id: de-winter-issue666-2026-10-17
+  claim: upper-bound
+  value: '27.995949340329'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-3m10
+- n: 817
+  source_id: de-winter-issue666-2026-10-17
+  claim: upper-bound
+  value: '28.998488480775'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-3m10
+- n: 875
+  source_id: de-winter-issue666-2026-10-17
+  claim: upper-bound
+  value: '29.998783733108'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-3m10
+- n: 935
+  source_id: de-winter-issue666-2026-10-17
+  claim: upper-bound
+  value: '30.995955854834'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-3m10
+- n: 998
+  source_id: de-winter-issue666-2026-10-17
+  claim: upper-bound
+  value: '31.998349747355'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-3m10
+- n: 330
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '18.701641583454'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 339
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '18.911307592083'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-f28n
+- n: 364
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '19.583782190152'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-f28n
+- n: 370
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '19.767428349965'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-f28n
+- n: 378
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '19.942505611659'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-f28n
+- n: 379
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '19.953014213942'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-f28n
+- n: 382
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '19.987621153966'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-f28n
+- n: 403
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '20.583782190152'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-f28n
+- n: 417
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '20.942505611684'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-f28n
+- n: 418
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '20.945240141353'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-f28n
+- n: 419
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '20.959713620588'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 421
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '20.982817421775'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 422
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '20.984021832955'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 444
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '21.583782190152'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-f28n
+- n: 452
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '21.778174593086'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-f28n
+- n: 458
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '21.942505611689'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 459
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '21.943735551416'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 460
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '21.957651945776'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 461
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '21.972483922352'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 462
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '21.980759715480'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 463
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '21.984021832955'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 501
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '22.933763683699'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-f28n
+- n: 503
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '22.957558542542'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-f28n
+- n: 505
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '22.972317735354'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-f28n
+- n: 536
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '23.677669529701'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-f28n
+- n: 546
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '23.933763683699'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 548
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '23.957558542543'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 551
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '23.966898919633'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-f28n
+- n: 553
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '23.981588093282'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-f28n
+- n: 598
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '24.962916747309'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 600
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '24.981585347399'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-f28n
+- n: 647
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '25.953248543199'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-f28n
+- n: 650
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '25.982429027496'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 651
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '25.983790120159'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-f28n
+- n: 700
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '26.972996848621'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 701
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '26.975561031531'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 702
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '26.977494114977'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-f28n
+- n: 703
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '26.987493360751'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-f28n
+- n: 749
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '27.925883089331'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 753
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '27.937423518013'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 754
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '27.937423518013'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-f28n
+- n: 756
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '27.984237490911'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 757
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '27.989936988207'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 758
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '27.994980212536'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 804
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '28.917335789888'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 805
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '28.921843659464'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 806
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '28.921843662228'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 809
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '28.937423518015'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 811
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '28.982472918533'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 812
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '28.982472918533'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 813
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '28.990394020145'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 863
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '29.921843659464'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 866
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '29.935764472087'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue715-2026-10-21
+  bead: think-f28n
+- n: 867
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '29.950265025802'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 868
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '29.982204111182'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 869
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '29.982472918533'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 870
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '29.985969207342'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 871
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '29.989329079687'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 922
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '30.899494936660'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-f28n
+- n: 925
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '30.935764472087'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue715-2026-10-21
+  bead: think-f28n
+- n: 926
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '30.949634321517'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-f28n
+- n: 927
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '30.976993727283'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 928
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '30.976993727283'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 929
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '30.978848462737'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 930
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '30.982052182975'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 931
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '30.989936243547'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 987
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '31.949634321517'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-f28n
+- n: 989
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '31.976993727283'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 990
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '31.978848462737'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 991
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '31.982052182975'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue672-2026-10-17
+  bead: think-f28n
+- n: 992
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '31.985130163599'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 993
+  source_id: couzo-issue670-2026-10-17
+  claim: upper-bound
+  value: '31.985130163599'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-f28n
+- n: 330
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '18.692698795114'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-2vjc
+- n: 461
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '21.971645445094'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 507
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '22.973703609857'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-2vjc
+- n: 652
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '25.994469543497'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 653
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '25.994469543497'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-2vjc
+- n: 704
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '26.994469543497'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-2vjc
+- n: 749
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '27.924010906540'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-2vjc
+- n: 750
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '27.927909095101'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue715-2026-10-21
+  bead: think-2vjc
+- n: 753
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '27.936842811648'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 755
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '27.951635349895'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 756
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '27.983489205831'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 757
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '27.989936967966'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-2vjc
+- n: 758
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '27.994973756311'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 759
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '27.995946347749'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 804
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '28.915928305844'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 805
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '28.916476090926'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 811
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '28.982462261975'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 812
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '28.982462261975'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 813
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '28.989935237439'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 814
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '28.995946347758'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 815
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '28.995946384109'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-2vjc
+- n: 816
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '28.998352177961'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 817
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '28.998352177961'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 864
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '29.932742598598'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 865
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '29.932742598598'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 868
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '29.982119729132'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 869
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '29.982462261984'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 871
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '29.986798495028'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-2vjc
+- n: 872
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '29.995946384118'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 873
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '29.998242686046'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 874
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '29.998242686046'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 923
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '30.932644308698'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 924
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '30.932742598607'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 929
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '30.978235012084'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-2vjc
+- n: 930
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '30.982010362324'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 932
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '30.993904118222'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 933
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '30.995336946282'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 934
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '30.995336946282'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-2vjc
+- n: 935
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '30.995336946282'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-2vjc
+- n: 990
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '31.978235012084'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 991
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '31.982010362324'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 994
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '31.995336946282'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 995
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '31.995336946282'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 996
+  source_id: couzo-issue672-2026-10-17
+  claim: upper-bound
+  value: '31.995336946282'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue675-2026-10-18
+  bead: think-2vjc
+- n: 419
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '20.959713421191'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 421
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '20.982817268367'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 422
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '20.983607310148'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 458
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '21.942423483273'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 459
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '21.942423483273'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 460
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '21.957558542548'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 461
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '21.971616092121'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 462
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '21.980489088007'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 463
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '21.983605908182'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 464
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '21.988035588879'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 502
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '22.942402035201'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 545
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '23.889722420681'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 546
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '23.889722420681'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 547
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '23.906371163646'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue715-2026-10-21
+  bead: think-pvav
+- n: 548
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '23.957455469976'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 549
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '23.957455469976'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 554
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '23.993580713561'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 592
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '24.889722420681'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 593
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '24.889722420681'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 598
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '24.962908839930'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 602
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '24.993580715986'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 603
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '24.994263342387'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 641
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '25.889564291814'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 642
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '25.889722420681'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 650
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '25.982428402604'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 652
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '25.994256215430'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 654
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '25.995905846673'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 693
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '26.889722420681'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 700
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '26.972954520906'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 701
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '26.975560060840'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 705
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '26.995905846673'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 706
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '26.998639495676'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 753
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '27.935538484638'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 755
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '27.951593396552'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 756
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '27.982602664098'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 758
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '27.993798579000'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 759
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '27.993798579000'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 760
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '27.995946706541'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 804
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '28.911312576594'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 805
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '28.911312576594'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 806
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '28.921462680479'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 807
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '28.924702911083'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue715-2026-10-21
+  bead: think-pvav
+- n: 809
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '28.937423314202'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue715-2026-10-21
+  bead: think-pvav
+- n: 811
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '28.981360068210'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 812
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '28.981360068210'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 813
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '28.989934397793'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 814
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '28.993798579000'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 816
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '28.998219025338'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 817
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '28.998234675372'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 863
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '29.921462677966'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 864
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '29.924702911083'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue715-2026-10-21
+  bead: think-pvav
+- n: 865
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '29.932623425046'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 867
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '29.950105216770'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 868
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '29.981359990606'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 869
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '29.981360065447'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 870
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '29.985524292952'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 872
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '29.995946381399'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 873
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '29.998171180951'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 874
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '29.998171180951'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 919
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '30.849232404954'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 923
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '30.924702911083'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue715-2026-10-21
+  bead: think-pvav
+- n: 924
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '30.932577553094'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 927
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '30.976949083864'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 928
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '30.976949083864'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 930
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '30.981543197185'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 931
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '30.989934734721'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue715-2026-10-21
+  bead: think-pvav
+- n: 932
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '30.993891653207'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 933
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '30.995293256848'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 989
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '31.976125363479'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 990
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '31.978044872634'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 991
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '31.981535631408'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 992
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '31.984841090107'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 993
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '31.984841090107'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 994
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '31.993865896560'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
+- n: 995
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '31.994784549711'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 996
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '31.994784549711'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 997
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '31.998300669675'
+  assurance: reported
+  disposition: superseded
+  superseded_by: muglich-issue686-2026-10-19
+  bead: think-pvav
+- n: 998
+  source_id: couzo-issue675-2026-10-18
+  claim: upper-bound
+  value: '31.998301912120'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-issue678-2026-10-18
+  bead: think-pvav
 pending_catalogue_intake: []

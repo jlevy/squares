@@ -3164,6 +3164,29 @@ sources:
       packings at 28 counts, Evan Daniel's at 343 (Kevin Fang's two-wedge family) and Fang's
       rectangle and gluing with PingYou Ltd's squares at one. Upper bounds only; no
       optimality claim.
+  - key: '[de Winter issue 666 2026-10-17]'
+    authors: [de Winter]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-17'
+    lineage: credits-project
+    credit: de Winter after Arslanov, Mustafin, Shangitbayev, Levy
+    short_credit: de Winter after Arslanov et al.
+    note: >-
+      Joost de Winter's issue 666 reports nineteen exact rational certificates beyond the
+      n <= 324 corpus, at 464 and from 509 to 1568, published in
+      JoostdeWinter/joostdewinter.github.io at b3152f526f23bc3ae450e51b6e906841233086d1 on
+      17 October 2026 (07:03:15Z); a rewrite of the site's history left that commit on no
+      branch, and b9cdc16bc20fedfbd4f5aa142dd7039b22f757f2, with the same time, holds the
+      identical folder. The MIT-licensed successor 643dc9ad4d3dbd71a9a05558c7f6116b809ba930
+      changes only the licence and a README paragraph, and web/de-winter-issue666-2026-10-17/
+      retains its 19 certificates, check.py, records.txt, README and licence; the decimal
+      poses and the figure are hash-pinned. The packings follow the staircase-rectangle and
+      four-block method of Arslanov, Mustafin and Shangitbayev (2021); the issue compares
+      each with this project's record of 17 October. It discloses GPT-6 Astra for the
+      search and Claude for the certificates and checks, under the author's direction. The
+      11 rows at or below 1024 are beyond-horizon rows; the 8 above wait on the owner. Upper
+      bounds only; no optimality claim.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono
