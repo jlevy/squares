@@ -491,19 +491,26 @@ credit.
 - **Bulk goes to hosted data, decided before the first commit.** Size what the packet
   and the pass retain as
   [OR-18](../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)
-  counts it, each file by its blob compressed as Git stores it and a set by the sum.
-  A certificate, dump or evidence file of more than a few megabytes, or a set of them
-  totalling tens of megabytes, goes into no commit; the added-blob guard of #406
-  (`devtools.check_added_blobs`) draws those lines at 5 MiB a blob and 48 MiB a pull
-  request. Publish it as a hosted data release by
+  counts it. By OR-18’s threshold, a certificate, dump or evidence file of more than a
+  few megabytes, or a set of them totalling tens of megabytes, goes into no commit.
+  The per-pull-request added-blob check that will enforce it is #406, in review on 22
+  October 2026; once it lands, its limits are in `packing/devtools/added-blobs.yaml`,
+  and until then OR-18’s wording is the rule.
+  Publish such data as a hosted data release by
   [Publishing Hosted Data](../../development.md#publishing-hosted-data): ignore the
   directory that will hold it, stage a manifest in `packing/hosted/` with
   `python -m devtools.hosted_data stage`, publish it under a `data/<subject>-v<N>` tag
   with `python -m devtools.hosted_data publish`, and commit the manifest and the code
   that reads through `sqpack.hosted_data.require`, never the bytes.
-  The packet’s README lists each hosted file with its manifest, the receipts, verdicts
-  and summaries the record cites stay in Git, and the pull request gives the release
-  URL, the manifest path and the total size.
+  A hosted upstream file is declared pinned-only in the packet’s acquisition
+  declaration, with the manifest as its reason, and fetched outside the packet’s
+  archived directory: the packet `squarepacker-k2-minus-c-upper-2026-10-09` pins Ryu’s
+  two largest certificates that way, and their manifest fetches them to
+  `packing/cases/asymptotic/hosted/`. Inside the packet,
+  `devtools.acquire_source --check` would read such a file as a retained one its record
+  does not list. The packet’s README lists each hosted file with its manifest, the
+  receipts, verdicts and summaries the record cites stay in Git, and the pull request
+  gives the release URL, the manifest path and the total size.
   This is decided at retention, not at review: once a blob is in a branch’s history,
   taking it out means rebuilding the branch.
   An import never raises the mutation workers’ snapshot cap or prunes their inputs to

@@ -282,16 +282,17 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # `test_change_scoped_selection`. `--audit-snapshot --prune-candidate` with the 121
 # against main's selector finds no registered mention and no inline or result rescue,
 # and every entry prunes something. #578 has since raised the cap to 255 MiB for the
-# contributor profiles (see `SNAPSHOT_MAX_BYTES`): main d660905ec, with it merged, reads
-# 266,509,045 bytes, 877,835 under it, and at that tree the audit finds no contributor
-# rescue either and the entries leave exactly the same 607 files with the tools below.
+# contributor profiles (see the cap's log at main 76496462b): main d660905ec, with it
+# merged, reads 266,509,045 bytes, 877,835 under it, and at that tree the audit finds no
+# contributor rescue either and the entries leave exactly the same 607 files with the
+# tools below.
 # With them left out, all 174 controls fire at `-j 2`, and each of the 50 distinct
 # commands, run unmutated at d660905ec in a worker with them and in one without them,
 # prints the same output apart from wall times and the runner-preflight lease timestamp,
 # except that `check_no_embedded_js` reads 1,902 Python files rather than 1,910, the
 # eight below fewer, to the same verdict; the four already red are red identically. Left
 # out, with this note and its release record, the snapshot measures 261,568,999 bytes,
-# 5,817,881 under the cap.
+# 5,817,881 under the 255 MiB cap of the time.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
@@ -1743,25 +1744,28 @@ def root_files() -> tuple[Path, ...]:
 # written into the tree it was measuring, a fact about the checkout rather than the
 # commit, which a higher number would only have postponed.
 #
-# On main the cap went from 40 MiB to 255 MiB in thirteen raises between 2026-08-29 and
-# 2026-10-22, with more on branches before they merged, latterly each to the least whole
-# MiB above the measured surface, and option-(b) prunes were taken between raises to
-# make room. That log, with every measurement and trace it cites, is this comment at
-# main 76496462b. A cap a megabyte above the tree tripped on every import, so on
-# 2026-10-22 the owner reset it to a coarse bound (think-d2he, think-t1lk).
+# On main the cap went from 32 MiB, set on 2026-08-24, to 255 MiB in fourteen raises and
+# one undo by 2026-10-22, with more on branches before they merged, latterly each to the
+# least whole MiB above the measured surface, and option-(b) prunes were taken between
+# raises to make room. That log, with every measurement and trace it cites, is this
+# comment at main 76496462b. A cap a megabyte above the tree tripped on every import, so
+# on 2026-10-22 the owner reset it to a coarse bound (think-d2he, think-t1lk).
 # `--source-bytes` read 261,568,999 bytes on main 76496462b, and 512 MiB leaves
-# 275,301,913 (262.5 MiB) of headroom. Intake grows the surface about 2.5 MB a day (the
-# 22 October snapshot analysis); from c4c690a3e to d660905ec, seven days, it grew
-# 22,846,225 bytes beyond two retained archive scans, about 3.2 MB a day. That is 110
-# or 86 days. Three workers are bounded at 1.5 GiB; each copies only the measured
-# surface.
+# 275,301,913 (262.6 MiB) of headroom. Intake grows the surface about 2.5 MB a day
+# (think-d2he's 22 October snapshot analysis). From c4c690a3e to d660905ec, 7.1 days, it
+# grew 22,846,225 bytes beyond two retained archive scans, Göbel 1979 (4,982,398 bytes)
+# and El Moumni 1999 (25,831,878), about 3.2 MB a day. That is 110 or 86 days. With the
+# scans counted, that week grew about 7.5 MB a day, which would be about five weeks;
+# under OR-18 such scans now go to hosted data. Three workers are bounded at 1.5 GiB;
+# each copies only the measured surface.
 #
-# Do not raise this per pull request. Keeping bulk out of Git is a per-pull-request
-# check on added blobs under OR-18 (`devtools.check_added_blobs`, #406), and a retained
-# set above OR-18's threshold goes to hosted data rather than into Git or a worker. The
-# prune classes above stay, since no control reads what they leave out, but nothing
-# joins them to make room under this cap. When it next fires, the breach is either bulk
-# that belongs in hosted data or months of growth, and the second is the owner's call.
+# Do not raise this per pull request. Keeping bulk out of Git is the job of the
+# per-pull-request added-blob check that #406 adds (`devtools.check_added_blobs`, in
+# review on 2026-10-22) under OR-18, and a retained set above OR-18's threshold goes to
+# hosted data rather than into Git or a worker. The prune classes above stay, since no
+# control reads what they leave out, but nothing joins them to make room under this cap.
+# When it next fires, the breach is either bulk that belongs in hosted data or months of
+# growth, and the second is the owner's call.
 SNAPSHOT_MAX_BYTES = 512 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
