@@ -1378,14 +1378,15 @@ PRUNE |= REGULARIZED_WITNESSES | HISTORICAL_SNAPSHOT_OUTPUTS | UNREAD_WORKER_OUT
 # gate, and only on run directories outside the checkout. `--audit-snapshot` with these
 # eight paths as candidates finds no registered mention and no inline or result rescue.
 # Other modules do import them, so what holds is that no control loads one (corrected
-# 2026-10-22, think-cmbx). `algebraic_witness_reports` imports `regularize_evand` at
-# load, so it, `select_houses` and `adopt_houses`, which import it, cannot be imported
-# in a worker, nor can `test_exact_sides` or `test_improvement_rule`. `default_drawings`,
-# `register_regularized_bounds`, `regularize_axis_components` and `select_houses` also
-# import them inside functions, which load in a worker and fail only when called;
-# `check_results` and `validate_schemas` reach such calls through `upper_bound_houses`
-# and `default_drawings` and never make them. `test_no_control_loads_a_pruned_tool`
-# holds the load half; a call is caught only by its control failing in a worker.
+# 2026-10-22, think-cmbx). That day 15 unpruned modules imported one at load, and so
+# cannot be imported in a worker: `algebraic_witness_reports`, which imports
+# `regularize_evand`, the `select_houses` and `adopt_houses` that import it, and 12
+# tests. `default_drawings`, `register_regularized_bounds`, `regularize_axis_components`
+# and `select_houses` also import them inside functions, which load in a worker and fail
+# only when called; `check_results` and `validate_schemas` reach such calls through
+# `upper_bound_houses` and `default_drawings` and never make them. The list is the
+# guard's, not this note's: `test_no_control_loads_a_pruned_tool` holds that no control
+# loads one, and a call is caught only by its control failing in a worker.
 # The one control that runs the whole suite points `testpaths` at a missing
 # directory and expects pytest to stop at configuration, before any test is collected,
 # so the consumer contract's declarations of the driver and the gallery are never read
