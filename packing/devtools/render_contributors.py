@@ -349,21 +349,6 @@ def _credited_work(
     if not (primary_lines or credit_lines or other_lines or authored):
         return CreditedWork((), 0)
     pieces = []
-    if primary_lines or authored:
-        pieces.append('<section id="results"><h2>Results</h2>')
-        first_party_ids = tuple(
-            str(record["id"]) for record in results if is_first_party(record)
-        )
-        pieces.extend(
-            '<ul class="site-contributor-credits">'
-            f'<li><a href="{RESULTS_PAGE}">The register\u2019s '
-            f"{html.escape(_plural(len(first_party_ids), 'first-party result'))}</a>: "
-            f"{_role(occurrence.role)} — {html.escape(occurrence.label)}"
-            f"{contribution_references((), first_party_ids)}</li></ul>"
-            for occurrence in authored
-        )
-        pieces.extend(_work_listing(primary_lines, "Results"))
-        pieces.append("</section>")
     current_ids = current_record_ids(primary_ids, record_index())
     pending = sorted(primary_ids.intersection(record_index().unresolved))
     if current_ids or pending:
@@ -393,6 +378,21 @@ def _credited_work(
                     f"{html.escape(result_id)}</a>: {html.escape(reasons)}</li>"
                 )
             pieces.append("</ul>")
+        pieces.append("</section>")
+    if primary_lines or authored:
+        pieces.append('<section id="results"><h2>Results</h2>')
+        first_party_ids = tuple(
+            str(record["id"]) for record in results if is_first_party(record)
+        )
+        pieces.extend(
+            '<ul class="site-contributor-credits">'
+            f'<li><a href="{RESULTS_PAGE}">The register\u2019s '
+            f"{html.escape(_plural(len(first_party_ids), 'first-party result'))}</a>: "
+            f"{_role(occurrence.role)} — {html.escape(occurrence.label)}"
+            f"{contribution_references((), first_party_ids)}</li></ul>"
+            for occurrence in authored
+        )
+        pieces.extend(_work_listing(primary_lines, "Results"))
         pieces.append("</section>")
     if credit_lines:
         pieces.append('<section id="credited-work"><h2>Credited work</h2>')
@@ -821,7 +821,7 @@ def profile_tally(
     target: str = "",
     results: Sequence[Mapping[str, Any]] | None = None,
 ) -> str:
-    """The shared primary-result and nonprimary-credit significance components."""
+    """Current Records, primary Results and nonprimary Credits with shared formatting."""
     records = _register_results() if results is None else results
     stats = person_credit_stats(identifier, occurrences, records)
     measures = _profile_measures(records)
@@ -833,14 +833,14 @@ def profile_tally(
     )
     return (
         '<span class="site-credit-tally">'
-        + render_tally(authored, total_href=target + "#results" if authored.results else None)
-        + " · "
         + record_tally(
             stats.results,
             measures,
             total_href=target + "#records",
             pending_href=target + "#records",
         )
+        + " · "
+        + render_tally(authored, total_href=target + "#results" if authored.results else None)
         + " · "
         + render_tally(
             credited,
