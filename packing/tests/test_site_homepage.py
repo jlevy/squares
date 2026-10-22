@@ -729,11 +729,11 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
         "more-resources",
     ]
     assert len(home["section_title_styles"]) == 9
-    selected = news_highlights.highlights(render_changelog.load())
+    carried = news_highlights.carried(render_changelog.load())
     assert [heading["entry"] for heading in home["news_headings"]] == [
-        entry["id"] for entry in selected
+        entry["id"] for entry in carried
     ]
-    assert len(home["news_headings"]) == len(selected)
+    assert len(home["news_headings"]) == len(carried)
     assert all(heading["title"] for heading in home["news_headings"])
     assert [heading["href"] for heading in home["paper_headings"]] == [
         paper.href for paper in overview_sections.PAPERS
@@ -937,8 +937,14 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         page.goto(ORIGIN, wait_until="load")
         preview = page.evaluate(NEWS)
         selected = news_highlights.highlights(render_changelog.load())
-        assert preview["entries"] == [entry["id"] for entry in selected]
-        title_link = page.locator(".site-news-header > h3 > a").first
+        carried = news_highlights.carried(render_changelog.load())
+        assert preview["entries"] == [entry["id"] for entry in carried]
+        assert [day["id"] for day in preview["days"] if not day["hidden"]] == [
+            render_changelog.entry_anchor(entry["id"]) for entry in selected
+        ]
+        title_link = page.locator(
+            "[data-news-day]:not([hidden]) .site-news-header > h3 > a"
+        ).first
         anchor = render_changelog.entry_anchor(selected[0]["id"])
         sync_api.expect(title_link).to_have_attribute("href", f"news.html#{anchor}")
         title_link.click()
@@ -965,6 +971,10 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         for surface in (preview, news):
             assert surface["overflow"] == 0
             for day in surface["days"]:
+                if day["hidden"]:
+                    # The box's cards outside its opening levels wait for its filter.
+                    assert surface is preview
+                    continue
                 assert day["border"] == 1
                 assert 0 <= day["left"] < day["right"] <= width
                 assert day["family"] == surface["family"]
@@ -992,7 +1002,7 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
                     assert float(topic["size"].removesuffix("px")) < day["title_size"]
                     assert topic["family"] == day["title_style"]["family"]
         archive_days = {day["id"]: day for day in news["days"]}
-        for day in preview["days"]:
+        for day in (day for day in preview["days"] if not day["hidden"]):
             assert day["topic_styles"] == archive_days[day["id"]]["topic_styles"]
             assert day["headline_style"] == archive_days[day["id"]]["headline_style"]
         card = page.locator("[data-news-day].is-collapsed").first
@@ -1166,6 +1176,124 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
                     assert full["body_height"] >= full["body_scroll"] - 1
             finally:
                 context.close()
+
+
+@pytest.mark.parametrize("width", WIDTHS)
+def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
+    browser: Any, payloads: dict[str, bytes], width: int
+) -> None:
+    """The box opens on `news_highlights.default_levels`, the newest `LIMIT` there. Its
+    filter is the archive's significance widget, smaller, at the right and above the
+    cards. A keyboard press changes the levels and the box shows the newest `LIMIT` at
+    them, or says nothing matches; its "All news" link carries the choice to the archive,
+    which opens on it. In both schemes a pressed level reads apart from the others.
+    Without scripts the box shows its opening levels and no filter."""
+    document = render_changelog.load()
+    carried = news_highlights.carried(document)
+    levels = set(news_highlights.default_levels(document))
+    limit = news_highlights.LIMIT
+    significance = '[aria-labelledby="news-significance-label"]'
+
+    def newest(chosen: set[int]) -> list[str]:
+        return [
+            render_changelog.entry_anchor(entry["id"])
+            for entry in carried
+            if entry["significance"]["score"] in chosen
+        ][:limit]
+
+    def look(page: Any, score: int) -> dict[str, Any]:
+        choice = {"chooser": significance, "choice": f'[data-news-score="{score}"]'}
+        return page.evaluate(NEWS_FILTERS, choice)["chooser"]
+
+    page = browser.new_page(
+        viewport={"width": width, "height": 900},
+        reduced_motion="reduce",
+        has_touch=width == 390,
+    )
+    _serve(page, payloads)
+    try:
+        page.goto(ORIGIN, wait_until="load")
+
+        def visible() -> list[str]:
+            return [
+                card["id"] for card in page.evaluate(NEWS_FILTERS)["cards"] if card["visible"]
+            ]
+
+        seen = page.evaluate(NEWS_FILTERS)
+        assert not seen["controls_hidden"]
+        assert {int(score) for score in seen["scores"]} == levels
+        assert [group["name"] for group in seen["groups"]] == ["Significance"]
+        assert seen["groups"][0]["hidden_legend"]
+        assert seen["resets"] == []
+        assert seen["count"] is None
+        assert not seen["empty"]
+        assert seen["overflow"] == 0
+        assert visible() == newest(levels)
+        for score, meaning in seen["score_tooltips"].items():
+            description = render_changelog.news_significance_tooltip(int(score))
+            assert meaning == f"Significance S{score}: {description}"
+        group = page.locator(f"[data-news-filters] {significance}").bounding_box()
+        card = page.locator("[data-news-day]:not([hidden])").first.bounding_box()
+        assert abs(group["x"] + group["width"] - card["x"] - card["width"]) <= 1
+        assert group["y"] + group["height"] <= card["y"]
+        compact = look(page, 5)["appearance"]
+        for scheme in ("light", "dark"):
+            page.emulate_media(color_scheme=scheme)
+            pressed, other = (look(page, score)["appearance"] for score in (5, 3))
+            assert pressed["background-color"] != other["background-color"], scheme
+            if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
+                page.locator("#news").scroll_into_view_if_needed()
+                page.screenshot(
+                    path=str(Path(screenshot_dir) / f"home-news-{scheme}-{width}.png"),
+                    clip={
+                        "x": 0,
+                        "y": page.locator("#news").bounding_box()["y"],
+                        "width": width,
+                        "height": 420,
+                    },
+                )
+        page.emulate_media(color_scheme="light")
+        widened = levels | {3}
+        page.locator('[data-news-filters] button[data-news-score="3"]').focus()
+        page.keyboard.press("Enter")
+        assert visible() == newest(widened)
+        carry = page.locator("a[data-news-carry]").get_attribute("href")
+        query = parse_qs(urlsplit(carry).query)
+        assert query["news-s"] == [",".join(str(score) for score in sorted(widened))]
+        for score in sorted(widened):
+            page.locator(f'[data-news-filters] button[data-news-score="{score}"]').focus()
+            page.keyboard.press(" ")
+        seen = page.evaluate(NEWS_FILTERS)
+        assert seen["scores"] == []
+        assert seen["empty"]
+        assert not visible()
+        page.locator('[data-news-filters] button[data-news-score="3"]').focus()
+        page.keyboard.press("Enter")
+        assert visible() == newest({3})
+        assert urlsplit(page.url).query == ""
+        page.locator("a[data-news-carry]").click()
+        page.wait_for_url(f"{ORIGIN}news.html?news-s=3")
+        archive = page.evaluate(NEWS_FILTERS)
+        assert archive["scores"] == ["3"]
+        archive_look = look(page, 5)["appearance"]
+        assert float(compact["font-size"].removesuffix("px")) < float(
+            archive_look["font-size"].removesuffix("px")
+        )
+        assert compact["font-family"] == archive_look["font-family"]
+        static = browser.new_page(
+            viewport={"width": width, "height": 900}, java_script_enabled=False
+        )
+        _serve(static, payloads)
+        try:
+            static.goto(ORIGIN, wait_until="load")
+            plain = static.evaluate(NEWS_FILTERS)
+            assert plain["controls_hidden"]
+            assert [card["id"] for card in plain["cards"] if card["visible"]] == newest(levels)
+            assert plain["overflow"] == 0
+        finally:
+            static.close()
+    finally:
+        page.close()
 
 
 def test_excluded_news_bookmarks_reach_the_retained_changelog(

@@ -225,6 +225,10 @@ labels. The result count reuses the Results control row and aligns right immedia
 above the cards. The homepage highlights up to three newest eligible S5 News articles
 that name result IDs, ordered by frozen announcement date and stable ID, followed by the
 shared “All news →” action.
+Since 22 October 2026 (think-aqv8) the homepage box shows the three newest News articles
+at the levels it opens on, S5 alone where News holds three S5 articles and otherwise S4
+and S5, under the archive’s significance filter in a compact form;
+`packing/devtools/news_highlights.py` states the rule.
 Homepage and archive use the same title, date, topic chips, complete article,
 significance meter and disclosure renderer.
 Claim qualifications remain in the shared article; the title links to its stable News
@@ -473,7 +477,8 @@ Use a small set of meaningful behavioral and negative checks:
   unknown first-live dates, and check direct public artifact links.
 - News has stable anchors and readable desktop/mobile individual cards, remains
   discoverable from GitHub and the second navigation item, and receives old About
-  bookmarks. The homepage previews the three newest S5 results and About keeps one short
+  bookmarks. The homepage previews the three newest S5 results (since 22 October 2026,
+  the three newest at the levels its compact filter opens on) and About keeps one short
   link.
 - Component tests cover patch and minor successors, both infographic versions advancing
   together, a missing/mixed export refusal, independent paper editions, and no invented

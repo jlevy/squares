@@ -1095,10 +1095,18 @@ contributor articles use their component sheets and the same text tokens.
   so parent headings cannot change their casing.
   The chip renderer preserves each consumer’s filter attribute.
   Full result records retain the result’s real kind, status, claim and credit.
-  The homepage highlights up to three newest eligible S5 News announcements that name
-  result IDs, ordered by the announcement’s frozen date and stable ID, followed by “All
-  news →”. Each preview uses the archive’s title, date, topic chips, complete article
-  and disclosure. Its title links to the stable News article anchor.
+  The homepage’s News box shows the three newest News articles at the levels it opens
+  on, ordered by the announcement’s frozen date and stable ID, followed by “All news →”.
+  It opens on S5 alone where News holds at least three S5 articles, and otherwise on S4
+  and S5, decided at render time (`news_highlights.default_levels`, the owner, 22
+  October 2026). Above the cards, at the right, sits the archive’s own significance
+  filter in its compact form (`render_changelog.news_filters(compact=True)`): the same
+  buttons, smaller and lighter, with no topics, reset or count.
+  A press shows the newest three at the chosen levels; the box carries the newest three
+  of each level for that, hidden until chosen, and keeps its opening levels without
+  scripts. “All news →” carries a changed choice to the archive as `news-s`. Each preview
+  uses the archive’s title, date, topic chips, complete article and disclosure.
+  Its title links to the stable News article anchor.
   Keep claim qualifications in that shared article; result records carry the detailed
   verification, confirmation and status marks.
   The archive ends with a shared action button, “Full changelog”, using the

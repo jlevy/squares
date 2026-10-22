@@ -71,6 +71,12 @@ NEWS_CHECK = (
     'stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" '
     'focusable="false"><path d="M20 6 9 17l-5-5"/></svg>'
 )
+#: The lowest significance News announces (`news_entries`); lower scores stay in the
+#: GitHub history.
+NEWS_FLOOR = 3
+#: The levels the News archive opens on, and what an address without `news-s` means
+#: there (`news-filters.js`).
+NEWS_LEVELS = (4, 5)
 
 
 def news_rubric_meanings(text: str) -> dict[int, str]:
@@ -851,7 +857,7 @@ def news_entries(document: Document) -> list[Document]:
     return [
         entry
         for entry in ordered_entries(document)
-        if "news_exclusion" not in entry and entry_significance(entry)["score"] >= 3
+        if "news_exclusion" not in entry and entry_significance(entry)["score"] >= NEWS_FLOOR
     ]
 
 
@@ -919,14 +925,44 @@ def news_article_header(
     )
 
 
-def news_filters(topics_present: set[str] | None = None) -> str:
-    """Progressive controls: without the enhancement every article stays visible."""
+def news_significance_filter(selected: Sequence[int] = NEWS_LEVELS) -> str:
+    """The significance choices, one button a level News has, pressed for each level in
+    `selected`: the one widget both the archive's filters and the home page's News box
+    draw (`news_filters`), and the selection `news-filters.js` starts from."""
     scores = "".join(
         f'<button type="button" data-news-score="{score}" '
         f'title="{html.escape(news_significance_tooltip(score), quote=True)}" '
-        f'aria-pressed="{str(score >= 4).lower()}">S{score}</button>'
-        for score in range(3, 6)
+        f'aria-pressed="{str(score in selected).lower()}">S{score}</button>'
+        for score in range(NEWS_FLOOR, 6)
     )
+    return (
+        '<fieldset><legend class="site-visually-hidden" id="news-significance-label">'
+        'Significance</legend><div class="site-tabs site-chooser-small" role="group" '
+        f'aria-labelledby="news-significance-label">{scores}</div></fieldset>'
+    )
+
+
+#: What a filtered list says when nothing matches its choices.
+NEWS_EMPTY = "<p data-news-empty hidden>No news matches these filters.</p>"
+
+
+def news_filters(
+    topics_present: set[str] | None = None,
+    *,
+    selected: Sequence[int] = NEWS_LEVELS,
+    compact: bool = False,
+) -> str:
+    """Progressive controls, hidden until `news-filters.js` shows them. The archive's
+    are the significance choices (`news_significance_filter`), the topics, a reset and a
+    count; without the enhancement every article stays visible. The `compact` form, the
+    home page's News box's, is the significance choices alone, at the right above the
+    cards and quieter than the archive's (`.site-news-filters-compact`)."""
+    if compact:
+        return (
+            '<div class="site-news-filters site-news-filters-compact sans-text" '
+            "data-news-filters data-site-tooltip-outside hidden>"
+            f"{news_significance_filter(selected)}{NEWS_EMPTY}</div>"
+        )
     topics = "".join(
         f'<button type="button" class="site-chip" data-news-topic="{topic}" '
         f'aria-pressed="true">{NEWS_CHECK}<span data-news-topic-label>{label}</span>'
@@ -937,10 +973,8 @@ def news_filters(topics_present: set[str] | None = None) -> str:
     return (
         '<div class="site-news-filters sans-text" data-news-filters '
         "data-site-tooltip-outside hidden>"
-        '<fieldset><legend class="site-visually-hidden" id="news-significance-label">'
-        'Significance</legend><div class="site-tabs site-chooser-small" role="group" '
-        'aria-labelledby="news-significance-label">'
-        f'{scores}</div></fieldset><fieldset><legend class="site-visually-hidden" '
+        f"{news_significance_filter(selected)}"
+        '<fieldset><legend class="site-visually-hidden" '
         'id="news-topics-label">Topics</legend>'
         '<div class="site-tabs site-chooser-small" role="group" '
         f'aria-labelledby="news-topics-label">{topics}</div></fieldset>'
@@ -948,8 +982,7 @@ def news_filters(topics_present: set[str] | None = None) -> str:
         '<button type="button" class="site-news-reset" data-news-reset>'
         "Reset filters</button>"
         '<span class="site-count" data-news-count role="status" '
-        'aria-live="polite"></span></div>'
-        "<p data-news-empty hidden>No news matches these filters.</p></div>"
+        f'aria-live="polite"></span></div>{NEWS_EMPTY}</div>'
     )
 
 
@@ -972,9 +1005,20 @@ def news_card(anchor: str, day_text: str, body: str) -> str:
 
 
 def render_news(
-    document: Document, *, limit: int | None = None, entry_ids: set[str] | None = None
+    document: Document,
+    *,
+    limit: int | None = None,
+    entry_ids: set[str] | None = None,
+    selected: Sequence[int] | None = None,
 ) -> str:
     """Complete canonical cards, optionally selected by ID and limited for a preview.
+
+    The archive (no `limit`) opens on `NEWS_LEVELS` under its full filters. A preview
+    shows `limit` cards. Given `selected` levels, it carries every card `entry_ids` names
+    under the compact significance filter preselected to those levels, and shows the
+    newest `limit` of them at those levels; the rest are hidden, with or without scripts,
+    until a reader widens the choice (`news-filters.js`, `data-news-limit`). Without
+    `selected` a preview carries its newest `limit` cards alone, unfiltered.
 
     Their names are plain profile links (`data-contributor-plain`): News navigates to a
     profile rather than opening it in the profile popover (`paper-design.md`).
@@ -987,13 +1031,24 @@ def render_news(
         for entry in news_entries(document)
         if entry_ids is None or entry["id"] in entry_ids
     ]
-    if limit is not None:
+    filtered = limit is not None and selected is not None
+    if limit is not None and not filtered:
         entries = entries[:limit]
+    levels = NEWS_LEVELS if selected is None else tuple(selected)
+    # A filtered preview first shows the newest `limit` cards at its levels.
+    first = [entry["id"] for entry in entries if entry_significance(entry)["score"] in levels]
+    shown = set(first[:limit]) if filtered else None
+    filters, limited = "", ""
+    if limit is None:
+        filters = news_filters(
+            {topic for entry in entries for topic in entry.get("topics", [])}
+        )
+    elif filtered:
+        filters = news_filters(selected=levels, compact=True)
+        limited = f' data-news-limit="{limit}"'
     out = [
-        news_filters({topic for entry in entries for topic in entry.get("topics", [])})
-        if limit is None
-        else "",
-        '<div class="site-news sans-text" data-news data-contributor-plain>',
+        filters,
+        f'<div class="site-news sans-text" data-news{limited} data-contributor-plain>',
     ]
     seen_dates: set[str] = set()
     for entry in entries:
@@ -1032,7 +1087,12 @@ def render_news(
             f'data-news-topics="{" ".join(entry.get("topics", []))}" data-news-day=',
             1,
         )
-        if limit is None and entry_significance(entry)["score"] < 4:
+        hidden = (
+            entry["id"] not in shown
+            if shown is not None
+            else limit is None and entry_significance(entry)["score"] not in levels
+        )
+        if hidden:
             card = card.replace(
                 '<section class="site-news-day"', '<section hidden class="site-news-day"', 1
             )

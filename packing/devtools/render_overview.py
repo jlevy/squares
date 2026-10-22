@@ -1435,6 +1435,7 @@ def overview_page() -> Page:
         page_styles=(HOMEPAGE_CSS,),
         page_scripts=(
             NEWS_CARDS_SCRIPT,
+            NEWS_FILTERS_SCRIPT,
             FILM_SCRIPT,
             FORWARD_SCRIPT,
             TABLE_SCRIPT,

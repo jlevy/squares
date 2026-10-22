@@ -58,6 +58,7 @@
       const arrow = button?.querySelector("[data-arrow]");
       return {
         id: day.id,
+        hidden: day instanceof HTMLElement && day.hidden,
         date: day.getAttribute("data-news-day"),
         family: style.fontFamily,
         body_family: prose ? getComputedStyle(prose).fontFamily : null,

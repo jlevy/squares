@@ -1,4 +1,5 @@
-"""Homepage previews keep the canonical News articles and their public metadata."""
+"""The home page's News box keeps the canonical News articles and their public metadata,
+under the archive's own significance filter in its compact form."""
 
 from __future__ import annotations
 
@@ -17,39 +18,111 @@ def document() -> render_changelog.Document:
     return render_changelog.load()
 
 
-def test_selection_uses_eligible_s5_result_articles_in_frozen_date_and_id_order() -> None:
-    def entry(identifier: str, day: str, score: int = 5) -> render_changelog.Document:
-        return {
-            "id": identifier,
-            "date": day,
-            "result_ids": ["T-154"],
-            "significance": {"score": score, "rationale": "A result announcement."},
-        }
+def _entry(identifier: str, day: str, score: int) -> render_changelog.Document:
+    return {
+        "id": identifier,
+        "date": day,
+        "result_ids": ["T-154"],
+        "significance": {"score": score, "rationale": "A News article."},
+    }
 
-    candidates = [
-        entry("z-third", "2026-10-12"),
-        entry("low-score", "2026-10-14", 4),
-        entry("a-second", "2026-10-12"),
-        entry("older", "2026-09-29"),
-        entry("newest", "2026-10-13"),
-        {**entry("unrelated", "2026-10-15"), "result_ids": []},
-        {**entry("excluded", "2026-10-16"), "news_exclusion": "Retained history only."},
+
+def test_the_box_opens_on_s5_alone_once_s5_fills_it_and_otherwise_on_s4_and_s5() -> None:
+    """The opening levels follow the archive (`default_levels`, the owner, 22 October
+    2026): S5 alone where News holds `LIMIT` S5 articles, of any age, and S4 and S5 while
+    it holds fewer. An article outside News, below S3 or excluded, never counts."""
+    limit = news_highlights.LIMIT
+    fives = [_entry(f"five-{index}", f"2026-10-0{index + 1}", 5) for index in range(limit)]
+    others = [
+        _entry("four", "2026-10-20", 4),
+        _entry("three", "2026-10-21", 3),
+        _entry("two", "2026-10-22", 2),
+        {**_entry("excluded", "2026-10-22", 5), "news_exclusion": "Retained history only."},
     ]
-    expected = ["newest", "a-second", "z-third"]
-    for ordered in (candidates, list(reversed(candidates))):
-        assert [
-            item["id"] for item in news_highlights.highlights({"entries": ordered})
-        ] == expected
-    assert not news_highlights.highlights({"entries": candidates[1:2] + candidates[5:]})
-    assert news_highlights.highlights({"entries": candidates[3:4]}) == (candidates[3],)
+    full = {"entries": [*fives, *others]}
+    assert news_highlights.default_levels(full) == (5,)
+    assert [entry["id"] for entry in news_highlights.highlights(full)] == [
+        f"five-{index}" for index in reversed(range(limit))
+    ]
+    short = {"entries": [*fives[1:], *others]}
+    assert news_highlights.default_levels(short) == render_changelog.NEWS_LEVELS == (4, 5)
+    assert [entry["id"] for entry in news_highlights.highlights(short)] == [
+        "four",
+        *(f"five-{index}" for index in reversed(range(1, limit))),
+    ][:limit]
+    assert news_highlights.default_levels({"entries": others}) == (4, 5)
     assert not news_highlights.highlights({"entries": []})
+
+
+def test_the_box_carries_the_newest_of_each_level_in_frozen_date_and_id_order() -> None:
+    """Any choice of levels finds its newest `LIMIT` among the carried articles: the
+    newest `LIMIT` at each level, in News order, ties on a day broken by id."""
+    entries = [
+        _entry("z-third", "2026-10-12", 5),
+        _entry("low-score", "2026-10-14", 4),
+        _entry("a-second", "2026-10-12", 5),
+        _entry("older", "2026-09-29", 5),
+        _entry("newest", "2026-10-13", 5),
+        _entry("oldest", "2026-09-28", 5),
+        _entry("three", "2026-10-15", 3),
+        {**_entry("excluded", "2026-10-16", 5), "news_exclusion": "Retained history only."},
+    ]
+    for ordered in (entries, list(reversed(entries))):
+        document = {"entries": ordered}
+        assert [entry["id"] for entry in news_highlights.carried(document)] == [
+            "three",
+            "low-score",
+            "newest",
+            "a-second",
+            "z-third",
+        ]
+        assert [entry["id"] for entry in news_highlights.highlights(document)] == [
+            "newest",
+            "a-second",
+            "z-third",
+        ]
+
+
+def test_the_box_follows_new_s5_articles_with_and_without_t194(
+    document: render_changelog.Document,
+) -> None:
+    """On the record today, and with the S5 article for T-194 of 16 October that another
+    lane adds: the box opens on S5 whenever News holds three S5 articles, and leads with
+    the newest of them."""
+    for added in (False, True):
+        data = copy.deepcopy(document)
+        if added and not any(
+            "T-194" in entry.get("result_ids", []) for entry in data["entries"]
+        ):
+            model = next(
+                entry
+                for entry in render_changelog.news_entries(data)
+                if render_changelog.entry_significance(entry)["score"] == 5
+            )
+            data["entries"].append(
+                {**copy.deepcopy(model), "id": "t194-for-this-test", "date": "2026-10-16"}
+            )
+        fives = [
+            entry
+            for entry in render_changelog.news_entries(data)
+            if render_changelog.entry_significance(entry)["score"] == 5
+        ]
+        levels = news_highlights.default_levels(data)
+        assert levels == ((5,) if len(fives) >= news_highlights.LIMIT else (4, 5))
+        shown = news_highlights.highlights(data)
+        assert len(shown) == news_highlights.LIMIT
+        if levels == (5,):
+            assert list(shown) == fives[: news_highlights.LIMIT]
+        if added:
+            assert shown[0]["date"] >= "2026-10-16"
 
 
 def _cards(rendered: str) -> dict[str, str]:
     return {
         identifier: card
         for card, identifier in re.findall(
-            r'(<section class="site-news-day"[^>]*>.*?data-news-entry="([^"]+)".*?</section>)',
+            r'(<section (?:hidden )?class="site-news-day"[^>]*>.*?data-news-entry="([^"]+)"'
+            r".*?</section>)",
             rendered,
             re.DOTALL,
         )
@@ -60,21 +133,29 @@ def test_homepage_and_archive_render_the_same_articles_and_cards(
     document: render_changelog.Document,
 ) -> None:
     before = copy.deepcopy(document)
+    carried = news_highlights.carried(document)
     selected = news_highlights.highlights(document)
     rendered = news_highlights.render(document)
     archive = render_changelog.render_news(document)
     preview_cards = _cards(rendered)
     archive_cards = _cards(archive)
-    assert list(preview_cards) == [entry["id"] for entry in selected]
-    assert 0 < len(preview_cards) <= 3
-    assert "data-news-filters" not in rendered
+    assert list(preview_cards) == [entry["id"] for entry in carried]
+    shown = [
+        identifier
+        for identifier, card in preview_cards.items()
+        if card.startswith('<section class="site-news-day"')
+    ]
+    assert shown == [entry["id"] for entry in selected]
+    assert 0 < len(shown) <= news_highlights.LIMIT
+    assert f'data-news data-news-limit="{news_highlights.LIMIT}"' in rendered
     assert "site-result-status" not in rendered
     assert "data-kind=" not in rendered
-    for entry in selected:
+    for entry in carried:
         identifier = entry["id"]
         anchor = render_changelog.entry_anchor(identifier)
-        preview = preview_cards[identifier]
-        canonical = archive_cards[identifier]
+        # Which cards start hidden is each list's own choice.
+        preview = preview_cards[identifier].replace("<section hidden ", "<section ", 1)
+        canonical = archive_cards[identifier].replace("<section hidden ", "<section ", 1)
         # Preview titles link to the full archive. Daily bookmarks occur only once.
         preview = re.sub(
             r'<h3><a href="news.html#[^"]+">(.*?)</a></h3>', r"<h3>\1</h3>", preview
@@ -95,23 +176,40 @@ def test_homepage_and_archive_render_the_same_articles_and_cards(
     assert document == before
 
 
-def test_homepage_does_not_fill_missing_s5_result_slots_from_other_news(
+def test_homepage_draws_the_archives_significance_filter_compact_and_preselected(
     document: render_changelog.Document,
 ) -> None:
-    data = copy.deepcopy(document)
-    selected = news_highlights.highlights(data)
-    for entry in render_changelog.news_entries(data):
-        if entry.get("result_ids") and entry["significance"]["score"] == 5:
-            entry["significance"]["score"] = 4
-    assert not _cards(news_highlights.render(data))
-    selected[0]["significance"]["score"] = 5
-    assert list(_cards(news_highlights.render(data))) == [selected[0]["id"]]
+    """The box's filter is the archive's own significance widget, drawn by the one
+    function both call, in its compact form: the same buttons, titles and legend, pressed
+    at the box's opening levels, with no topics, reset or count, hidden until the script
+    shows it."""
+    rendered = news_highlights.render(document)
+    archive = render_changelog.render_news(document)
+    levels = news_highlights.default_levels(document)
+    widget = render_changelog.news_significance_filter(levels)
+    assert rendered.startswith(
+        '<div class="site-news-filters site-news-filters-compact sans-text" '
+        f"data-news-filters data-site-tooltip-outside hidden>{widget}"
+        f"{render_changelog.NEWS_EMPTY}</div>"
+    )
+    assert render_changelog.news_significance_filter() in archive
+    assert re.findall(r'data-news-score="(\d)"[^>]*aria-pressed="true"', widget) == [
+        str(level) for level in levels
+    ]
+    for absent in ('aria-labelledby="news-topics-label"', "data-news-reset", "data-news-count"):
+        assert absent not in rendered
+        assert absent in archive
+    # The archive itself still opens on S4 and S5 under its full filters.
+    assert re.findall(
+        r'data-news-score="(\d)"[^>]*aria-pressed="true"',
+        archive.split('aria-labelledby="news-topics-label"', 1)[0],
+    ) == ["4", "5"]
 
 
-def test_homepage_keeps_both_reported_proofs_and_their_complete_qualification_text(
+def test_news_keeps_both_reported_proofs_and_their_complete_qualification_text(
     document: render_changelog.Document,
 ) -> None:
-    cards = _cards(news_highlights.render(document))
+    cards = _cards(render_changelog.render_news(document))
     fitzharding = cards["fitzharding-n17-reported-proof"]
     overbeck = cards["overbeck-n17-candidate-proof"]
     for card in (fitzharding, overbeck):
@@ -127,10 +225,10 @@ def test_homepage_keeps_both_reported_proofs_and_their_complete_qualification_te
     assert 'href="https://squaremath.org/result/t-153.html"' in overbeck
 
 
-def test_homepage_ahmed_article_keeps_the_result_and_explainer_reachable(
+def test_news_ahmed_article_keeps_the_result_and_explainer_reachable(
     document: render_changelog.Document,
 ) -> None:
-    card = _cards(news_highlights.render(document))["ahmed-eleven-square-optimality"]
+    card = _cards(render_changelog.render_news(document))["ahmed-eleven-square-optimality"]
     assert 'datetime="2026-09-30"' in card
     assert "V3/C3" in card
     assert "a second independent proof method" in card
@@ -159,12 +257,23 @@ def test_homepage_and_archive_link_preferred_names_directly_to_reviewed_profiles
             ("Marc Leonard Overbeck", "marc-leonard-overbeck"),
         ),
     }
-    for rendered in (news_highlights.render(document), render_changelog.render_news(document)):
+    home = news_highlights.render(document)
+    archive = render_changelog.render_news(document)
+    # The box carries the newest articles of each level, so these three leave it in time;
+    # the archive keeps them all.
+    assert set(expected) & set(_cards(home))
+    limited = f' data-news-limit="{news_highlights.LIMIT}"'
+    for rendered, attributes in ((home, limited), (archive, "")):
         # The names stay plain links, since their container says so once and the profile
         # popover leaves every profile link inside it alone.
-        assert '<div class="site-news sans-text" data-news data-contributor-plain>' in rendered
+        assert (
+            f'<div class="site-news sans-text" data-news{attributes} data-contributor-plain>'
+            in rendered
+        )
         cards = _cards(rendered)
         for identifier, people in expected.items():
+            if identifier not in cards and rendered is home:
+                continue
             card = cards[identifier]
             for _preferred_name, profile_id in people:
                 label = public_names()[profile_id].label
