@@ -218,7 +218,8 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # file leaves. Their readers are scientific checkers, generators and ordinary tests that
 # run in the primary tree. Inline-linked and registered files below them still return
 # (exp-246, exp-249); exp-295 keeps its descriptor and metadata, as exp-297--314 do. The
-# trace and measurement are at `SNAPSHOT_MAX_BYTES`.
+# trace and measurement are in the cap's log, the comment on `SNAPSHOT_MAX_BYTES` at main
+# 76496462b.
 # Later the same day, exp-317's admission outputs (the census, the partition, and the
 # replay, Rust and contributor receipts with their logs: 2,359,681 bytes) joined by the
 # test's rule, without a new trace: no control names them, and kept in the worker they
@@ -999,8 +1000,8 @@ PRUNE = frozenset(
         # suite; nothing reads the other two. No control names any of them. Both census
         # READMEs, which SYNOPSIS links, and the 118 receipts and indexes the results
         # register lists return through `snapshot_pruned_targets`, 3,299,132 bytes; the
-        # attack folder, which a review links, comes back empty. The trace is at
-        # `SNAPSHOT_MAX_BYTES`.
+        # attack folder, which a review links, comes back empty. The trace is in the
+        # cap's log, the comment on `SNAPSHOT_MAX_BYTES` at main 76496462b.
         # The 7 October follow-up crossed the unchanged 192 MiB snapshot cap.
         # These three historical validation-output roots hold timing archives,
         # command journals and publication diagnostics, not source or control targets.
@@ -1195,7 +1196,7 @@ PRUNE = frozenset(
         # from the repository or a declared dependency from the worker.
         #
         # Agenda 041 joins the same class on 2026-09-22, and it is the whole of this
-        # branch's answer to the 479,365-byte breach logged at `SNAPSHOT_MAX_BYTES`. It
+        # branch's answer to the 479,365-byte breach in the cap's log (main 76496462b). It
         # arrived with the merge at 5cd610a1a and is 10,827,488 bytes in 62 files, of
         # which four are 9,943,654 on their own: exp-222's repricing-cell journal
         # (7,127,269), exp-221's two unrestricted nets (1,071,250 and 1,071,246) and the
@@ -1732,379 +1733,36 @@ def root_files() -> tuple[Path, ...]:
     return tuple(path for path in listed if path not in named)
 
 
-# Keep a bounded portable fallback with enough headroom for source, schemas, and
-# manifests after generator-owned prospective geometry is pruned above.
+# The cap on a mutation worker's source snapshot. It exists to catch an accident, such
+# as someone checking in a gigabyte of data or the gate counting what it wrote into the
+# tree it measures, not to track the record's ordinary growth.
 #
-# Raised from 40 MiB on 2026-08-29, when the snapshot measured 39.20 MiB and the guard
-# was one artifact away from refusing to run the whole suite (D-371). The cap exists to
-# stop someone checking in a gigabyte of data, not to track the record's ordinary growth,
-# and a guard with 2% headroom fires for the wrong reason. Cost is the cap times the
-# worker count, so 64 MiB across three private trees is still bounded. `atlas/` is
-# 18.16 MiB of the total; pruning what no control reads is the alternative to raising
-# this again, and it belongs with the tier work rather than here.
+# Two lessons from its breaches stand. D-371: a guard with 2% headroom fires for the
+# wrong reason, so the cap sits well above the surface rather than just over it. D-422:
+# read `BUILD_CACHES` before believing a breach; 12 MB of one was bytecode the gate had
+# written into the tree it was measuring, a fact about the checkout rather than the
+# commit, which a higher number would only have postponed.
 #
-# Read `BUILD_CACHES` before raising it a second time. When this next fired, on
-# 2026-09-04, 12 MB of the breach was bytecode the gate had itself written into the tree
-# it was measuring, so the cap was reporting a fact about the checkout; a higher number
-# would have postponed that rather than fixed it (D-422).
-# The combined PR97/98 source measured 67,801,700 bytes (64.66 MiB) on 2026-09-06,
-# after excluding caches and generator outputs. No safe additional prune was found:
-# linked evidence must remain present so controls reach their intended refusal.
-# Compressing the retained summary to xz would leave only about 40 KiB of headroom.
-# Allow 80 MiB as measured storage headroom, not a speed target. Raising this guard
-# does not increase the bytes actually copied; dependency-policy work is separate.
+# On main the cap went from 40 MiB to 255 MiB in thirteen raises between 2026-08-29 and
+# 2026-10-22, with more on branches before they merged, latterly each to the least whole
+# MiB above the measured surface, and option-(b) prunes were taken between raises to
+# make room. That log, with every measurement and trace it cites, is this comment at
+# main 76496462b. A cap a megabyte above the tree tripped on every import, so on
+# 2026-10-22 the owner reset it to a coarse bound (think-d2he, think-t1lk).
+# `--source-bytes` read 261,568,999 bytes on main 76496462b, and 512 MiB leaves
+# 275,301,913 (262.5 MiB) of headroom. Intake grows the surface about 2.5 MB a day (the
+# 22 October snapshot analysis); from c4c690a3e to d660905ec, seven days, it grew
+# 22,846,225 bytes beyond two retained archive scans, about 3.2 MB a day. That is 110
+# or 86 days. Three workers are bounded at 1.5 GiB; each copies only the measured
+# surface.
 #
-# 2026-09-07, with the corpus at n = 1..324 and the poster composite: 90,858,775 bytes.
-# The growth is witnesses/known-best (7.6 MB for 324 cases, the source of record for the
-# catalogue-derived ones, which the sampled atlas step rebuilds inside a worker), the
-# poster SVG (6.2 MB, generated, but inline-linked from the atlas README and therefore
-# copied back by `linked_pruned_targets` even when pruned -- pruning it was tried and
-# moved nothing), and the escape screen record (3.1 MB). No further safe prune was found;
-# a link checker that tolerated pruned targets would be the next one. Allow 96 MiB.
-#
-# 2026-09-08, after the retained research state was linked into the checked record:
-# 106,107,961 bytes. This is tracked source and declared checker input, not cache drift.
-# The largest copied-back dependencies are exp-059's registered completion record
-# (10,923,451 bytes) and BC-232's linked resumable state (5,248,062); the largest files
-# on the unpruned source surface are the known-best chunk components (9,672,604), poster
-# SVG (6,198,351), exp-042 result (5,740,789), and chunk partitions (5,220,955). Dropping
-# any of them would either remove a declared dependency or change the source surface the
-# controls exercise. Allow 128 MiB: three portable workers remain bounded at 384 MiB,
-# while the bytes actually cloned remain the measured source size.
-#
-# 2026-09-09, with `T-026` registered: 135,122,909 bytes against 134,217,728, over by
-# 905,181. This is the event `think-t1lk` predicted when the last breach was answered by
-# pruning rather than raising -- it recorded 618,148 bytes of headroom and said the next
-# committed artifact of any size would trip the cap. What tripped it is 2,679,887 bytes
-# of tracked record: the two finer-net threshold certificates (673,899 and 673,896, both
-# registered artifacts), the 360-step rung retained beside lane A2 (673,643), lane A3's
-# thirteen receipts (562,882 in all, the largest a 123,814-byte plateau dual), the two
-# lane reports, the proof packet, the two limit records and the promoted measurement with
-# its tests. None is prunable here: each is either a registered artifact or a receipt a
-# retained report cites. The durable fix is still `think-t1lk`'s -- trace which controls
-# read the five large generated files under `packing/` and prune the ones nothing reads,
-# starting with the 6.2 MB poster SVG whose PNG, PDF and 2x exports are already pruned.
-# Allow 160 MiB, which is 31.1 MiB of headroom rather than 0.9, so the guard fires on a
-# gigabyte of data and not on a research round; three portable workers remain bounded at
-# 480 MiB.
-#
-# 2026-09-16, after the workbench and its compact kinetics records landed: the tracked
-# snapshot measured 168,058,379 bytes, 286,219 bytes past the 160 MiB ceiling. This is
-# the ordinary source growth `think-t1lk` predicted, not cache drift or an accidental
-# generated tree. Reset the same roughly-32-MiB operating headroom at 192 MiB while that
-# bead retains the durable audit of generated files that no mutation control reads.
-# Three portable workers remain bounded at 576 MiB.
-#
-# 2026-09-16, the same day, merging that raise into the pipeline closeout block: it was
-# measured before the output roots of agendas 031 and 033--035 and of exp-201/202 joined
-# `PRUNE` above. Agenda 032 is not among them: only its exp-137 receipt is pruned.
-# With them pruned, the merged snapshot measures 144,637,123 bytes (137.9 MiB), 22.1 MiB
-# under 160 MiB. The raise answered a breach this branch removes by pruning, so it is
-# undone rather than kept as slack that would hide the next one. Three portable workers
-# return to 480 MiB.
-#
-# 2026-09-22, on PR 218's branch: 168,251,525 bytes against 167,772,160, over by 479,365.
-# Hosted `suite-b` read 168,221,736 for the same breach, on a tree without this session's
-# untracked probe sources. It arrives with the merge at 5cd610a1a -- 12,475,060 bytes in
-# 96 files from `origin/main`, whose own CI passes because main sits just under the cap --
-# and this branch's own additions, chiefly the 176,032-byte
-# `atlas/known-best/bound-citations.json`, are what tip it over.
-#
-# Answered by pruning, not by raising. Agenda 041's output root joins `PRUNE` above for a
-# net 10,624,188 bytes, leaving 157,627,337 and 9.7 MiB of headroom under an unchanged
-# 160 MiB cap. The poster SVG this log nominated three breaches ago was measured first
-# and cannot pay: `README.md` links both composite vectors inline, so pruning either
-# saves exactly zero bytes and four `check_readme` controls depend on the copy-back that
-# makes it zero. That measurement is now written out beside the vectors themselves, so
-# the next breach does not spend its first hour taking it a third time. `think-t1lk`
-# survives this branch narrowed rather than discharged: its nominated starting point is
-# disproved, and what remains is a link scan that can tolerate a pruned target.
-# 2026-09-30, T-060's reviewed local/census/inclusion receipts: 167,821,919 bytes,
-# 49,759 beyond 160 MiB even after four measured historical non-input prunes.
-# The remaining linked proof receipts are required evidence, not cache drift. Stop
-# making each small receipt trigger another archive hunt: restore roughly 32 MiB
-# operating headroom at 192 MiB while think-t1lk owns dependency-aware selection.
-# This changes no copied bytes or time limit. At three portable workers the storage
-# ceiling is 576 MiB; the current measured payload remains about 160.05 MiB per tree.
-# 2026-10-03, the merge of main (#292, #311) into PR 305: 204,106,772 bytes, 2,780,180
-# over 192 MiB, though each side alone was under it -- main's retained certificate
-# packets and receipts and PR 305's regularized atlas layer and X-049 censuses, each
-# needed by its own checks. The note above says not to answer that with another archive
-# hunt, so the same reasoning restores roughly 29 MiB of headroom at 224 MiB, with
-# think-t1lk still owning dependency-aware selection. At three portable workers the
-# storage ceiling is 672 MiB; nothing copied changes.
-# 2026-10-03, later the same day, the stacked re-layout (think-k131) on PR 305's second
-# merge of main (#320, #322): 187,283,918 bytes, 14,042,674 under 192 MiB. Writing the
-# retained results one record per line through `sqpack.retained_json` took about
-# 17 MB out of this surface -- the chunk census, the escape screen, exp-042 and the
-# other files the snapshot copies -- without pruning anything, so the cap returns to
-# 192 MiB rather than keeping a raise the bytes no longer need.
-# 2026-10-05, the n=17 stack: PR 360 at e62bed3a6 measured 201,854,760 bytes, 528,168
-# over 192 MiB, and hosted suite-b read the same figure (run 37298541719). No one layer
-# broke it. Main's dee22b882 measures 193,929,477; the five layers add 4,688,427 (PR 347),
-# 432,986, 882,399, 520,210 and 1,401,261 (PR 360), almost all of it X-048 session
-# receipts and their probes and tests, which are evidence and stay. Answered by
-# `think-t1lk`'s option (b) rather than by raising: the two composite vectors join
-# `PRUNE` above, traced as no control's input, for 8,559,777 bytes. That leaves PR 360
-# at 193,294,983 and this branch at 190,058,127, both before this change's own 4.5 KB
-# of comment and test, under an unchanged cap. PR 360 separately prunes its Sessions
-# 169-179 exploration folders (93a6839ca, net 2,122,114 bytes); the two prunes are
-# independent, and together they leave that layer about 9.7 MiB under the cap.
-# 2026-10-06, PR #382: hosted suite-a read 201,674,181 bytes at 7f2a01816, 347,589 over
-# 192 MiB. CI measures the branch merged with main. This branch alone measured
-# 201,491,089 here, and its merge with main at eb0783695 (#379, Session 182's n=17
-# records and certificates) 201,674,549. The day's intake did it -- new packets,
-# receipts, census rows and larger generated records -- not cache. Answered by
-# `think-t1lk`'s option (b) again rather than by raising: five receipt roots join `PRUNE`
-# above, traced as no control's input -- the measure-verifier census, mixed-census and
-# attack receipts, the gate-cost run journals, and T-092's exact certificates. They hold
-# 8,363,388 bytes, of which 3,299,132 return through the copy-back: net 5,064,256.
-#
-# Traced as on 2026-10-05: all 170 controls were run mutated under `strace -f -e
-# trace=%file` in worker trees that still held the five roots, and all 170 fired. Five
-# checkers, behind 29 controls, touch the roots at all. `validate_schemas` and
-# `check_generated_markdown` walk the tree and open only the two census READMEs,
-# `check_synopsis` stats those READMEs for its links, and `check_results` stats the 118
-# registered receipts; every one of those returns. The one reader of the rest is
-# `check_readme`, through `scan_retired_workflow_identifiers`, which reads every text
-# file the worker's own index
-# tracks, the 475 journals among them; a pruned file leaves that index and so the sweep,
-# as the composite vectors did. Run unmutated in a worker with the roots and in one
-# without them, every distinct command but the full suite printed the same output, wall
-# times and one lease timestamp aside, and with the roots pruned all 170 controls fire.
-#
-# With this change's own comments and test counted, the branch measures 196,433,238
-# bytes and its merge with main 196,616,698, 4.67 MiB and 4.49 MiB under an unchanged cap.
-# 2026-10-08, the atlas cleanup (think-lq8t): the maintained snapshot audit reads
-# 201,971,305 bytes across 6,757 copy operations, 644,713 over 192 MiB. The prior
-# gap-export revision measured 201,280,929, with only 45,663 bytes of headroom.
-# Structured rigidity source/date metadata grows composite-figure.json by 564,800
-# bytes; validate_schemas consumes that record and retained_json already bounds its
-# serialization. The renamed PDFs, vectors and PNGs remain pruned. Independent review
-# found no additional prune justified by the consumer evidence, so calibrate the cap
-# to 200 MiB: 7,743,895 bytes (7.39 MiB) headroom, with no change to copied inputs,
-# dependency rescue or timeout. Three portable workers remain bounded at 600 MiB,
-# 24 MiB above the prior ceiling. think-t1lk still owns dependency-aware selection.
-#
-# 2026-10-08, #404 (1af586ef4): no entry was written for this one, so it is recorded
-# here. `_link_needs_private_target` stopped copying back five historical browser
-# observations under `benchmarks/math-startup/runs/ci-34774787868`, 2,739,207 bytes
-# linked only from the 2026-09-13 explainer PDF comparison review. No registered control
-# reads them or follows that review's links; `check_documentation` does, and no control
-# runs it. On the #404 -> #454 -> #461 stack merged with main e0b02b3ab (projected over
-# its Git tree), that rule takes the snapshot from 203,181,930 to 200,442,723 bytes.
-#
-# 2026-10-09, #464 (the n17 SOS paper review) merged onto that tree: 201,534,311 bytes,
-# 207,719 over 192 MiB. Of its 1,091,588 bytes, 1,059,055 are one archived paper (PDF
-# and raw extraction) that the review links and `linked_pruned_targets` copies back.
-# Answered by option (b) again, under an unchanged cap: `UNREAD_WORKER_OUTPUTS` above.
-#
-# Traced as on 2026-10-06, at the integrated tree: all 174 controls ran mutated under
-# `strace -f -e trace=%file` in worker trees that still held the candidates, and all
-# 174 fired. Every file that leaves was opened by no control except `check_readme`,
-# whose retired-identifier sweep reads what the worker's index tracks; `ledger check`
-# stats the four linked audit directories, which `linked_pruned_directories` recreates.
-# With them pruned, all 174 controls fire, and each of the 50 distinct commands, run
-# unmutated in a worker with them and in one without them, prints the same output, wall
-# times aside. Four were already red unmutated and are red identically: the full suite,
-# `validate_schemas`' missing-archive cross-checks, the operating-rules append script
-# and `test_change_scoped_selection`.
-#
-# What option (b) cannot do is restore a margin. Measured before this selection, of the
-# 109.9 MB the packing walk copied, 34.4 MB was neither inline-linked nor registered, and
-# almost all of that is code, tests, witnesses and the frontier; this selection is most
-# of the rest. The other lever is rescue scope: 16.6 MB is copied back only because root
-# documents, `docs/` reviews and research link it, 12 MB of it from the archive. Two
-# readers hide there, and both are why `tests/test_snapshot_link_consumers.py` keeps
-# archive custody: `check_gate_budgets` opens `.github/workflows/pages.yml` and
-# `.github/workflows/packing-validation.yml`, the two workflows its wall register names,
-# which reach workers only through the 2026-09-12 workbench stack architecture review's
-# link and `defects.md`'s links respectively; and `ledger check` stats the original n11
-# review, which campaign Markdown reaches only through `#fragment` links that
-# `INLINE_LINK` does not match. Narrowing that rule needs those fixed first.
-#
-# With this change's comments and tests counted, the snapshot measures 200,145,032
-# bytes, 1,181,560 under the unchanged cap.
-#
-# The upstream measurements used its 192 MiB cap; retain the independently
-# calibrated 200 MiB atlas-metadata capacity on this branch.
-#
-# 2026-10-12, intake 2026-10-11 layer 2 (#516 at 1e41643e8, the #503, #504, #501 and
-# #505 imports): 210,099,865 bytes, 384,665 over 200 MiB, failing hosted suite-a and
-# suite-c. The tree below it, layer 1 (#512) at 604699ee1 on main's 3a5a91a90, measures
-# 209,353,914 and had 361,286 bytes of headroom left; this layer adds 745,951: 466,439 in
-# the four packets, the rest their two reviews, the register rows and the route's code
-# and tests. A lane found no safe prune: the new packets are results-register artifacts
-# that workers read, and the larger files of the walk are linked, registered or read by
-# controls. The only real saving is narrowing the copy-back for archive files linked only
-# from documents no control link-checks, about 14.4 MB, which needs the two hidden
-# readers above fixed first; think-b6ir owns it.
-#
-# The owner chose on 2026-10-12, in the intake session, to raise the cap to 216 MiB
-# rather than hunt another prune: 16,392,551 bytes (15.6 MiB) of headroom over this
-# layer, roughly ten intakes of this one's size (layers 1 to 3 add 1,525,785 bytes over
-# 3a5a91a90). Nothing copied changes; three portable workers are bounded at 648 MiB.
-# With this change's comments and tests counted, the snapshot measures 210,101,768
-# bytes, 16,390,648 under the raised cap.
-#
-# 2026-10-14, the records of the 14 October intake (T-161 to T-184): their artifacts
-# rescued 8,950,701 bytes and took the snapshot to 228,704,672, 2,212,256 over the cap.
-# T-174, PR #574's 68 counts, listed each count's fact file, 3,684,559 bytes; its
-# evidence names the facts directory and its claims record and receipts stay artifacts,
-# so the facts left its list. When the #574 lane's last replays came in (review B6 of
-# #602), all 64 rational receipts, 2,383,524 bytes, left it as well, its notes naming
-# their directory. With this comment counted the snapshot measured 224,357,130 bytes,
-# 2,135,286 under the cap.
-#
-# Merged with main at 16ea3bd06 (#604, #605), it measured 226,885,384, 392,968 over, and
-# suites C and D of #602 failed on it. The other imports' replay receipts left their
-# entries' artifacts the way T-174's did, 610,704 bytes from T-161 to T-183, each entry's
-# notes naming its receipt. With this comment counted the snapshot measures 226,274,880
-# bytes, 217,536 under the cap; the next intake needs the owner's decision on the cap
-# or think-b6ir's narrower copy-back.
-#
-# 2026-10-15, think-b6ir with think-wzmf: that narrower copy-back, under the unchanged
-# cap. Links are now followed only out of the documents a registered control link-checks
-# in a worker -- the campaign record (`ledger check`), `README.md` and `SYNOPSIS.md`
-# (`check_links`) -- and declared paths come back as before, with each defect's
-# `recorded_in` beside the results register's evidence. The reviews, research, specs
-# and guides still reach every worker; what they link no longer comes with them. On main
-# 6964362b5 that was 235 files of 14,415,037 bytes, 9.1 MB of them web packets and
-# 2.8 MB papers from the archive.
-#
-# Six readers had reached workers only through those links, and each is a declared input
-# now. The bead named two: `check_gate_budgets` opens the two workflows its wall register
-# names (`wall_workflows`, 221,785 bytes), and `ledger check` stats the original n11
-# review, which X-017 links only with fragments that `INLINE_LINK` now matches
-# (think-wzmf). A search of code and registries for the dropped paths found a third:
-# `validate_schemas` stats each defect's `recorded_in`, two of them papers only
-# `defects.md` linked (`defect_pruned_targets`, 81,669 bytes). The unmutated baselines
-# below found two that search had listed without telling them apart from prose: the
-# kingbird-29 cases behind 12 controls read their provenance drawing, and
-# `validate_schemas` stats three verifier-registry paths a review linked (26,343 bytes
-# for the four). The worker tests found the sixth: `squish_upper_bound_packets check`,
-# which `test_fn1_input_bindings` runs in a worker, reads two normalized claim records
-# (3,028 bytes). The last six files are `COPY_SEPARATELY` entries, so the selection
-# saves 14,082,212 of the 14,415,037.
-#
-# `--audit-snapshot` read 226,344,073 bytes on main 6964362b5, 148,343 under the cap, and
-# reads 212,296,412 on this branch, 14,196,004 under it, with 34,551 of the branch's own
-# code, tests and comments counted. All 174 controls fire at `-j 3`.
-# `run_negative_controls --baseline` ran each of the 50 distinct registered commands
-# unmutated in a worker before and after, and each printed the same apart from wall
-# times, the four already red included: the full suite, `validate_schemas`, the
-# operating-rules append script and `test_change_scoped_selection`. Two of those say
-# nothing about readers: the full suite dies at collection on the absent `vendor/kpress`
-# both times, and `test_change_scoped_selection`, timed out by the shared host's load in
-# the final record, matched only when re-run alone. The tests' readers are evidenced by
-# the per-module control commands and the worker tests instead; `test_fn1_input_bindings`
-# found the squish one. `check_documentation`, which no control runs, was red in a worker
-# before (270 distinct lines) and loses none after. It adds 380: the dead links to all
-# 225 dropped files the documents link, and 18 links to pruned directories a review names,
-# which were recreated empty before. That is the change itself, and think-b6ir's
-# criterion for it was amended to say so: those links are checked where
-# `check_documentation` runs, never in a worker.
-#
-# Review A2 of #611 found that `check_gate_budgets` exited 1 unmutated in every hosted
-# worker, on main as on this branch. Under `CI` it refuses an advisory bead it cannot
-# confirm, and a worker's fresh repository held no bead store, so its six controls were
-# scored over a red checker. `index_tree` now points each worker at the source's
-# sync-branch refs (`_carry_bead_store`). With `CI=1` the checker exits 1 in a worker
-# built by c8181dd77's runner and 0 in one built by this one, and all six controls fire.
-#
-# Review A8 asked for both full runs again, with the store in every worker. At 902ac9290,
-# `run_negative_controls -j 2` (the host was busy) fired all 174 controls in 629.1 s. In
-# the 50-command `--baseline`, 49 commands match main's apart from wall times. The 50th,
-# `check_gate_budgets`, still exits 0 but now confirms its four advisory beads live
-# where it printed them unchecked. `check_documentation` prints what it printed at
-# 227c345eb. Under `CI=1`, `check_gate_budgets` and `check_session_gate` exit 0 in a
-# worker, the latter byte for byte as on main's selection.
-#
-# 2026-10-15, after #612 (think-tddb): T-185 and T-186 name their regularizations'
-# measurements in two lineage outputs under `resources/web` (`identity.measured_in`,
-# 6,875 bytes). `check_results` requires each to exist and nothing declared them, so the
-# checker was red unmutated in every worker, at 13 rows. Every earlier `measured_in`
-# named a file no prune omits. `result_paths` declares the field now, on a result and in
-# the regularized drawings. `--audit-snapshot` read 212,848,544 bytes on main c4c690a3e
-# and reads 212,861,306 with this change's code, tests and comments counted,
-# 13,631,110 under the cap.
-#
-# 2026-10-19, T-174's 37-house adoption on the landed T-200--T-217 intake:
-# the staged actual-main union projects 228,587,228 bytes before this allowance's
-# rationale and tests. The retained 66-house operation actually copied 228,578,604
-# bytes, admitted 156 inputs and refused/restored 24 late mutations without a geometry
-# decision (19.51 s setup, 15.71 s worker). Its receipt still records the former 216 MiB
-# cap; assess those unchanged measurements under this new allowance, never rewrite them.
-# Propose 219 MiB for this measured source surface, with unchanged selection and the
-# oversized pre-clone refusal. Three portable workers remain bounded at 657 MiB.
-# This allowance covers neither unlanded contributor-profile inputs nor future intakes.
-#
-# 2026-10-19, the #446 landing of T-205 to T-207 (think-2w1f), taken alone from the
-# 19 October handoff checkpoint f6f4a8482: `--source-bytes` read 228,914,908 on main
-# 926cd764a, 723,236 under 219 MiB, and 230,713,367 on this branch, +1,798,459 and
-# 1,075,223 over. Nearly all of it is the three fine-net Mac confirmations' captures,
-# controls and audit receipts (about 1,743,668 bytes of fde545a96 measured over the
-# checkpoint's copy list), which `check_results` needs as results dependencies; the rest
-# is the reporting code, tests and regenerated views. Raise to 221 MiB, the least whole
-# MiB above this surface, with unchanged selection and the oversized pre-clone refusal:
-# about 1 MB of headroom. It is measured for this change alone; the n183 and #678
-# records measure their own surface. Three portable workers are bounded at 663 MiB.
-#
-# 2026-10-20, the n183 registration and adoption (T-220, think-jh4w, #687), merged with
-# main 012dcf9e5: `--source-bytes` read 231,475,393 on that tree (#692's head, the same
-# tree, under review C of #692), 259,903 under 221 MiB, and 231,811,269 on this
-# branch, 335,876 more and 75,973 over. Priced against main's blobs of
-# the same paths, 323,203 bytes of the growth are this change's: the n183 packet the
-# results need as dependencies (93,723), the regularized-drawing runs and selection
-# (63,566), the intake record (57,772), the mapped review (35,229), and the register
-# entries, case record, verifiers, regenerated views and release records (72,913).
-# Raise to 222 MiB, the least whole MiB above this surface, with unchanged selection and
-# the oversized pre-clone refusal: 972,603 bytes of headroom. It is measured
-# for this change alone. Three portable workers are bounded at 666 MiB.
-#
-# 2026-10-20, contributor profiles (#578, think-wrh8, think-iyao) merged with main
-# 4851d8193: `--source-bytes` read 238,732,991 bytes, 5,949,119 over 222 MiB. Priced
-# against main's blobs of the same paths, the profile work adds 54 files (992,050 bytes;
-# the occurrence manifest is 716,713 of them) and grows shared files by 125,705 bytes.
-# Nearly all of the rest is Gobel's retained 1979 PDF (4,982,398 bytes), which main
-# tracks but does not copy: his profile and an inspected-byline receipt declare it, and
-# validate_schemas consumes both, so keep the complete private PDF and every other
-# profile and occurrence dependency. No unrelated prune is justified. The custody
-# regression checks the PDF's bytes, private index and both loaders. After the second
-# merge, of main e7de85ff6 (#701, T-223), the surface read 239,280,102 bytes, 204,774
-# over 228 MiB, the growth being T-223's records. Raise to 229 MiB, the least whole MiB
-# above it, with unchanged selection and the oversized pre-clone refusal: 843,802 bytes
-# of headroom. Three portable workers are bounded at 687 MiB.
-#
-# 2026-10-21, the completed profile identity review (think-4m6m):
-# `--audit-snapshot` reads 263,907,248 bytes. The newly declared primary-byline
-# dependency `resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf`
-# contributes 25,831,878 bytes: it is a complete volume scan, with the byline on
-# PDF pages 287 and 296. Without this one dependency the same selection reads
-# 238,075,370 bytes, below the former 229 MiB cap. The profile loader requires the
-# named archive, so retain the complete private file rather than omitting or
-# excerpting it. Its full PDF credit census remains pending; copied custody does
-# not certify inspection. Raise to 252 MiB, the least whole MiB above this measured
-# surface, with 333,904 bytes of headroom and unchanged source selection and
-# pre-clone oversized refusal. Three portable workers remain bounded at 756 MiB.
-# 2026-10-21, the profile branch merged with main d7923b8d8 (#706 and #716):
-# `--source-bytes` reads 264,512,602 bytes, 271,450 over 252 MiB. The merged
-# adoption records and their complete deciding evidence remain in the same private
-# source roster. Raise to 253 MiB, the least whole MiB above this measured surface,
-# leaving 777,126 bytes before this comment, with no source exclusions and the same
-# oversized pre-clone refusal. Three portable workers remain bounded at 759 MiB.
-# 2026-10-21, merge of main 7359fa8b6 (#717 and #718): the unchanged
-# source roster measures 265,715,597 bytes, 425,869 above 253 MiB. Retain all
-# deciding evidence and raise only to the next whole MiB: 254 MiB, leaving
-# 622,707 bytes before this comment. Three workers remain bounded at 762 MiB;
-# source selection and oversized pre-clone refusal are unchanged.
-# 2026-10-22, merge of main 0281e7763 (PR #720): the unchanged source roster
-# measures 266,502,917 bytes, 164,613 above 254 MiB. Its 205 beyond-horizon rows
-# and complete deciding evidence remain in the private snapshot. Raise to 255 MiB,
-# the least whole MiB above that measurement, leaving 883,963 bytes before this
-# comment. Three workers remain bounded at 765 MiB; source selection and oversized
-# pre-clone refusal are unchanged.
-SNAPSHOT_MAX_BYTES = 255 * 1024 * 1024
+# Do not raise this per pull request. Keeping bulk out of Git is a per-pull-request
+# check on added blobs under OR-18 (`devtools.check_added_blobs`, #406), and a retained
+# set above OR-18's threshold goes to hosted data rather than into Git or a worker. The
+# prune classes above stay, since no control reads what they leave out, but nothing
+# joins them to make room under this cap. When it next fires, the breach is either bulk
+# that belongs in hosted data or months of growth, and the second is the owner's call.
+SNAPSHOT_MAX_BYTES = 512 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

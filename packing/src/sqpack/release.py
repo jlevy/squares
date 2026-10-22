@@ -6768,6 +6768,38 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and every component keeps its version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+            "site",
+        ),
+        paths=("packing/devtools/run_negative_controls.py",),
+        outputs=(
+            "development.html",
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The owner's reset of 22 October 2026 (think-d2he, think-t1lk): "
+            "`SNAPSHOT_MAX_BYTES` goes from 255 to 512 MiB and its dated log of raises "
+            "gives way to a short rationale, with three comments that cited the log "
+            "repointed to it in Git. Worker selection is unchanged. The import path is "
+            "the one recorded for think-b6ir and think-bl1p: the runner enters the "
+            "builders' import closure only through `upper_bound_houses.custody`, and no "
+            "builder calls it or reads the cap. No render was taken, and every component "
+            "keeps its version."
+        ),
+    ),
 )
 
 
