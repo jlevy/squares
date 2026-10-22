@@ -455,8 +455,11 @@ def _public_targets() -> frozenset[str]:
     from devtools.render_overview import SITE_URL  # noqa: PLC0415
 
     registry = load_yaml((ROOT / "site-urls.yaml").read_text(encoding="utf-8"))
+    # Previous main records retain their published host when the freeze check reads
+    # them. Recognize that explicit alias without accepting arbitrary hostnames.
     return frozenset(
-        SITE_URL + row["canonical"]
+        root + row["canonical"]
+        for root in (SITE_URL, "https://jlevy.github.io/squares/")
         for row in registry["urls"]
         if row.get("status") == "live" and not row.get("pattern")
     )

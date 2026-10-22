@@ -141,7 +141,7 @@ OUTPUT = PACKING / "site"
 #: Where the deploy serves the site: the one statement of the published root. Every
 #: canonical URL and every address in a link preview is built from it (`canonical_url`,
 #: `head_tags`), and `render_n11_lower_bounds_explainer.SITE_URL` is this constant.
-SITE_URL = "https://jlevy.github.io/squares/"
+SITE_URL = "https://squaremath.org/"
 #: The project's formal name (the owner, 2026-10-01). A page's title and its link
 #: preview carry it (`page_title`, `head_tags`; think-3w07), and since 2026-10-11 the
 #: bar's name in `site-nav.html` does too: the owner renamed the site from "Square

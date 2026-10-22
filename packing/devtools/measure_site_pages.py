@@ -175,7 +175,7 @@ Usage, from `packing/`:
         --page papers/n11-optimality-review.html \
         --width 1280 --width 390 --scheme light --scheme dark --view differences --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages glyphs \
-        https://jlevy.github.io/squares --page papers/n11-lower-bounds-explainer.html \
+        https://squaremath.org --page papers/n11-lower-bounds-explainer.html \
         --view problems --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages figures \
         SITE --page papers/n11-lower-bounds-explainer.html \

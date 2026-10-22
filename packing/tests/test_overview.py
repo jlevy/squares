@@ -7127,7 +7127,7 @@ def test_no_page_links_an_address_a_paper_used_to_have(
     old = _old_addresses()
     assert "explainer.html" in old
     assert "n11-optimality/" in old
-    assert "https://jlevy.github.io/squares/n11-optimality/t-060-explainer.pdf" in old
+    assert "https://squaremath.org/n11-optimality/t-060-explainer.pdf" in old
     download_alias = "known-best-1-324.pdf"
     copied_pdf = dict(render_overview.MOVED_FILES)[download_alias]
     registered = {row.path: row for row in site_urls.load_registry()}
