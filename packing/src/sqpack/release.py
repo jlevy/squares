@@ -88,6 +88,16 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.20",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Record the beyond-horizon rows of four older reports, Joost de Winter's #666 "
+            "at or below 1024 and Francisco Couzo's #670, #672 and #675, as 205 dated "
+            "rows of which 8 of #670's become current, and record the replies after #718 "
+            "and #643's acknowledgement."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.19",
         first_published="October 22, 2026",
         result_scope=(
@@ -1234,6 +1244,18 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.8.19",
+        version="v0.8.20",
+        impact="patch",
+        reason=(
+            "Record the beyond-horizon rows of four older reports, Joost de Winter's #666 "
+            "at or below 1024 and Francisco Couzo's #670, #672 and #675, as 205 dated "
+            "rows of which 8 of #670's become current, and record the replies after #718 "
+            "and #643's acknowledgement."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.8.18",
         version="v0.8.19",
         impact="patch",
@@ -2032,6 +2054,26 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The v0.8.20 cut for PR-B moved the claim documents' link revision, d39f458c "
+            "to cadf73fd, in 22 lines. Rendered into empty site directories from this "
+            "tree after the cut and from main 7359fa8b's: the explainer and the other "
+            "three papers write 68 byte-identical files. Retain v0.4.15."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
@@ -6729,7 +6771,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "d39f458c"
+PUBLICATION_REVISION = "cadf73fd"
 
 
 def data_pathspec() -> tuple[str, ...]:
