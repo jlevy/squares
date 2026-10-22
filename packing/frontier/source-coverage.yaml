@@ -7308,11 +7308,11 @@ selected_overrides:
   reason: The complete rational precision refinement is strictly smaller than both previous exact
     upper lanes.
 - n: 204
-  source_id: couzo-issue678-2026-10-18-in-corpus
-  value: '14.8086428419812473'
-  evidence: E-couzo-678-certificate-report
+  source_id: evand-regularized-2026-10-20
+  value: '14.8086428405914940'
+  evidence: E-evand-regularized-1020-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-20 (T-223).
+    a replay here and an accepted review, adopted on 2026-10-22 (T-225).
 - n: 206
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '14.8601586633919032367'
@@ -7362,11 +7362,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 229
-  source_id: evand-n229-dilation-update-2026-10-18
-  value: '15.6501615138955532'
-  evidence: E-evand-674-n229-update-report
+  source_id: evand-regularized-2026-10-20
+  value: '15.6501615138764311'
+  evidence: E-evand-regularized-1020-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-19 (T-199).
+    a replay here and an accepted review, adopted on 2026-10-22 (T-225).
 - n: 232
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '15.76417431748659663'
@@ -7422,11 +7422,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-136).
 - n: 260
-  source_id: couzo-issue678-2026-10-18-in-corpus
-  value: '16.6457532505449560'
-  evidence: E-couzo-678-certificate-report
+  source_id: evand-regularized-2026-10-20
+  value: '16.6457532505198122'
+  evidence: E-evand-regularized-1020-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-21 (T-223).
+    a replay here and an accepted review, adopted on 2026-10-22 (T-225).
 - n: 261
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.67877987534290982'
@@ -8177,7 +8177,7 @@ superseded_reports:
 - n: 204
   source_id: evand-square-packing-2026-10-05
   value: '14.822875655532295295399036633375'
-  superseded_by: couzo-issue678-2026-10-18-in-corpus
+  superseded_by: evand-regularized-2026-10-20
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -8296,7 +8296,7 @@ superseded_reports:
 - n: 229
   source_id: evand-square-packing-2026-10-05
   value: '15.656854249492380195363323439334'
-  superseded_by: evand-n229-dilation-update-2026-10-18
+  superseded_by: evand-regularized-2026-10-20
   reason: Certifies the catalogue's packing at a side 2.0e-16 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -8447,7 +8447,7 @@ superseded_reports:
 - n: 260
   source_id: evand-square-packing-2026-10-05
   value: '16.656854249492380195373323439334'
-  superseded_by: couzo-issue678-2026-10-18-in-corpus
+  superseded_by: evand-regularized-2026-10-20
   reason: Certifies the catalogue's packing at a side 2.0e-16 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -9516,8 +9516,8 @@ superseded_reports:
   source_id: dostashev-compositions-2026-10-12
   value: '14.8086632343869566'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-223's exact side is smaller.
-  superseded_by: couzo-issue678-2026-10-18-in-corpus
+    and T-225's exact side is smaller.
+  superseded_by: evand-regularized-2026-10-20
 - n: 211
   source_id: couzo-certificates-2026-10-13-in-corpus
   value: '14.9935589139740062'
@@ -9810,8 +9810,8 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '14.80866323438695657'
   reason: The house from 2026-10-16 until 2026-10-20; its certificate stays retained and verified,
-    and T-223's exact side is smaller.
-  superseded_by: couzo-issue678-2026-10-18-in-corpus
+    and T-225's exact side is smaller.
+  superseded_by: evand-regularized-2026-10-20
 - n: 154
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '12.92120657713263105'
@@ -9834,8 +9834,26 @@ superseded_reports:
   source_id: de-winter-upper-bounds-2026-10-17
   value: '16.6457788041813798'
   reason: The house from 2026-10-20 until 2026-10-21; its certificate stays retained and verified,
-    and T-223's exact side is smaller.
-  superseded_by: couzo-issue678-2026-10-18-in-corpus
+    and T-225's exact side is smaller.
+  superseded_by: evand-regularized-2026-10-20
+- n: 204
+  source_id: couzo-issue678-2026-10-18-in-corpus
+  value: '14.8086428419812473'
+  reason: The house from 2026-10-20 until 2026-10-22; its certificate stays retained and verified,
+    and T-225's exact side is smaller.
+  superseded_by: evand-regularized-2026-10-20
+- n: 229
+  source_id: evand-n229-dilation-update-2026-10-18
+  value: '15.6501615138955532'
+  reason: The house from 2026-10-19 until 2026-10-22; its certificate stays retained and verified,
+    and T-225's exact side is smaller.
+  superseded_by: evand-regularized-2026-10-20
+- n: 260
+  source_id: couzo-issue678-2026-10-18-in-corpus
+  value: '16.6457532505449560'
+  reason: The house from 2026-10-21 until 2026-10-22; its certificate stays retained and verified,
+    and T-225's exact side is smaller.
+  superseded_by: evand-regularized-2026-10-20
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

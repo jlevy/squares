@@ -392,6 +392,7 @@ def _sources() -> dict[str, Source]:
         packet_source("T-222", "evand-n154-sweep-2026-10-20"),
         couzo_678_source(),
         packet_source("T-224", "evand-n270-sweep-2026-10-20"),
+        packet_source("T-225", "evand-regularized-2026-10-20"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -421,7 +422,9 @@ def _sources() -> dict[str, Source]:
 #: of issues 694 (T-222) and 689 (T-221) at 154 and 308, Francisco Couzo's certificate of
 #: issue 678 (T-223) at 204 and Joost de Winter's certificates of issue 668 (T-196) at 227
 #: and 260. The pass of 21 October 2026 adopted Evan Daniel's certificate of issue 703
-#: (T-224) at 270 and Couzo's of issue 678 (T-223) at 260, which replaced T-196 there.
+#: (T-224) at 270 and Couzo's of issue 678 (T-223) at 260, which replaced T-196 there. The
+#: pass of 22 October 2026 adopted Evan Daniel's regularized views of 20 October (T-225) at
+#: 204 and 260 from T-223 and at 229 from T-199; 227 is staged for think-2vjc.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -453,7 +456,7 @@ ADOPTED: dict[int, str] = {
     181: "T-174",
     182: "T-174",
     183: "T-220",
-    204: "T-223",
+    204: "T-225",
     206: "T-174",
     207: "T-173",
     208: "T-174",
@@ -462,7 +465,7 @@ ADOPTED: dict[int, str] = {
     211: "T-188",
     227: "T-196",
     228: "T-174",
-    229: "T-199",
+    229: "T-225",
     232: "T-186",
     236: "T-218",
     237: "T-190",
@@ -472,7 +475,7 @@ ADOPTED: dict[int, str] = {
     241: "T-182",
     258: "T-146",
     259: "T-136",
-    260: "T-223",
+    260: "T-225",
     261: "T-174",
     263: "T-174",
     264: "T-186",
@@ -541,7 +544,11 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: (T-224) after the 21 October review, at 270 from T-174: another arrangement of the
 #: design of Nate Chaoweeraprasit's #500 packing, which T-174 refines, found from that
 #: packing; and, once #704 had landed, Couzo's certificate of issue 678 (T-223) at 260
-#: from T-196, 2.56e-05 below it, so that 260 moved twice in two days.
+#: from T-196, 2.56e-05 below it, so that 260 moved twice in two days. The pass of 22
+#: October 2026 adopted Evan Daniel's regularized views of 20 October (T-225) after the 21
+#: October review of them: his solved views of Couzo's issue-678 packings at 204 and 260,
+#: 1.39e-09 and 2.51e-11 below T-223, and of his own issue-674 packing at 229, 1.91e-11
+#: below T-199; its view at 227 waits for #672's registration (think-2vjc).
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -616,6 +623,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-19": frozenset({155, 183, 229, 236, 271}),
     "2026-10-20": frozenset({154, 204, 227, 260, 308}),
     "2026-10-21": frozenset({260, 270}),
+    "2026-10-22": frozenset({204, 229, 260}),
 }
 
 

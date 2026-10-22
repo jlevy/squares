@@ -820,6 +820,58 @@ RESULTS: dict[str, Prose] = {
             "routes exact at the far wall and at the closest pair"
         ),
     ),
+    "T-225": Prose(
+        author="Evan Daniel",
+        reported="in his regularized record lists, on no issue",
+        producer_route=False,
+        ai=(
+            "The source’s credits say the repository’s work was produced by Claude "
+            "(Anthropic) under human direction, and the commit that publishes the "
+            "certificate names Claude Opus 5.5 as co-author and says Evan Daniel approved "
+            "it."
+        ),
+        lineage_at={
+            204: (
+                "The source names Francisco Couzo’s #678 packing (T-223) as the one it "
+                "regularizes and calls the certificate not a new bound: Evan Daniel solved "
+                "that packing to its exact side, $1.39 \\times 10^{-9}$ below #678’s "
+                "certificate, and regularized it for display at that side. Measured by the "
+                "import and again by the 21 October review, nearest centres pair the two "
+                "one to one under a half turn; 132 of the 204 squares lie within $10^{-6}$ "
+                "of T-223’s, 58 move beyond $10^{-3}$ and 4 beyond a tenth, at most 0.442, "
+                "and three squares T-223 tilts by up to 0.088° are axis-aligned here (T-225)."
+            ),
+            229: (
+                "The source names Evan Daniel’s own #674 packing (T-199) as the one it "
+                "regularizes, polished to its exact side, $1.91 \\times 10^{-11}$ below "
+                "#674’s certificate, and calls the certificate not a new bound. Measured "
+                "by the import and again by the 21 October review, under no symmetry of "
+                "the box do nearest centres pair the two one to one; an optimal assignment "
+                "keeps 95 of "
+                "the 229 squares within $10^{-6}$ of T-199’s, moves 112 beyond $10^{-3}$ "
+                "and 13 beyond a tenth, at most 0.650, and turns six near-axis squares to "
+                "the axis (T-225)."
+            ),
+            260: (
+                "The source names Francisco Couzo’s #678 packing (T-223) as the one it "
+                "regularizes and calls the certificate not a new bound: Evan Daniel solved "
+                "that packing to its exact side, $2.51 \\times 10^{-11}$ below #678’s "
+                "certificate, and regularized it for display at that side. Measured by the "
+                "import and again by the 21 October review, 207 of the 260 squares lie "
+                "within $10^{-9}$ of T-223’s and none turns; under no symmetry of the box "
+                "do nearest centres pair the two one to one, and an optimal assignment "
+                "slides 41 squares beyond $10^{-3}$ and 20 beyond a tenth, at most 0.643 "
+                "(T-225)."
+            ),
+        },
+        third_route=(
+            ", and the 21 October review’s clean-room checker decided it again on two "
+            "routes of its own, in integers alone and in rationals with exact intersection "
+            "area on the pairs whose boxes overlap; its sharp controls at $10^{-30}$ found "
+            "both maintained routes exact at the far wall, the near wall and the least-gap "
+            "pair"
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1096,15 +1148,16 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
-    # Issue 678's packing (T-223), which the source's manifest credits to Couzo with
-    # Polkovskyi's construction as its seed; that seed is the source's account, not
-    # measured here. The house it replaced was Polkovskyi's refinement of Ostashev's
-    # packing as PingYou Ltd refined it (T-186's regularization of T-174).
+    # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of issue
+    # 678's packing (T-223), solved to its exact side 1.39e-9 below #678's certificate:
+    # T-225's item names T-223, and the packing stays with Couzo, whose source's manifest
+    # credits Polkovskyi's construction as its seed, which is that source's account, not
+    # measured here (A11 of #716 asked to keep Polkovskyi in the line).
     204: Credit(
         (COUZO,),
-        (),
-        "Francisco Couzo’s packing from a search the source seeded with Mykhailo "
-        "Polkovskyi’s n = 204 construction",
+        (DANIEL,),
+        "Evan Daniel’s display regularization of Francisco Couzo’s packing from a search "
+        "Couzo’s source seeded with Mykhailo Polkovskyi’s n = 204 construction",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -1162,14 +1215,17 @@ CREDITS: dict[int, Credit] = {
         (PINGYOU,),
         "PingYou Ltd’s refinement of Francisco Couzo’s refinement of his own packing",
     ),
-    # Evan Daniel's dilation of a nearby configuration of his opening packing (T-198); the
-    # issue credits Couzo's issue-672 packing, after de Winter's issue 668, as the start,
-    # which the author's issue 673 reads as "based on".
+    # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of his own
+    # issue-674 packing (T-199), polished to its exact side 1.91e-11 below #674's
+    # certificate: T-225's item names T-199, whose finder he is. #674's packing is his
+    # dilation of a nearby configuration of his opening packing (T-198); the issue credits
+    # Couzo's issue-672 packing, after de Winter's issue 668, as the start, which the
+    # author's issue 673 reads as "based on".
     229: Credit(
         (DANIEL,),
         (),
-        "Evan Daniel’s packing from a search started from Francisco Couzo’s refinement of "
-        "Joost de Winter’s packing",
+        "Evan Daniel’s display regularization of his own packing from a search started from "
+        "Francisco Couzo’s refinement of Joost de Winter’s packing",
     ),
     # PR 574's re-solve of issue 528's composition, re-solved again (T-186's
     # regularization of T-174).
@@ -1227,17 +1283,19 @@ CREDITS: dict[int, Credit] = {
     ),
     258: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH", via="Mishapolk"),
     259: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
-    # Issue 678's packing (T-223), adopted here on 21 October 2026 from Joost de Winter's
-    # T-196, which the pass of 20 October had adopted from the catalogue's packing: the
-    # source seeded its search with Evan Daniel's exact-form certificate of de Winter's
-    # issue-668 packing (T-196), and the 20 October review measured 162 of its squares
-    # within 1e-4 of that seed's, 55 beyond 1e-2, so de Winter is named in the sentence as
-    # the construction's author, as at 229, and not in the structured fields.
+    # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of issue
+    # 678's packing (T-223), solved to its exact side 2.51e-11 below #678's certificate:
+    # T-225's item names T-223, and the packing stays with Couzo. T-223 was adopted here on
+    # 21 October 2026 from Joost de Winter's T-196: its source seeded its search with Evan
+    # Daniel's exact-form certificate of de Winter's issue-668 packing (T-196), and the 20
+    # October review measured 162 of its squares within 1e-4 of that seed's, 55 beyond
+    # 1e-2, so de Winter is named in the sentence as the construction's author, as at 229,
+    # and not in the structured fields.
     260: Credit(
         (COUZO,),
-        (),
-        "Francisco Couzo’s packing from a search seeded with Evan Daniel’s exact "
-        "certificate of Joost de Winter’s n = 260 packing",
+        (DANIEL,),
+        "Evan Daniel’s display regularization of Francisco Couzo’s packing from a search "
+        "seeded with Evan Daniel’s exact certificate of Joost de Winter’s n = 260 packing",
     ),
     # T-174's regularization of T-169's re-solve, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -2359,10 +2417,11 @@ def staged_sentences(
 
 
 #: The results whose regularizations are for display, at the side the source reports as
-#: the packing's exact optimum, with the regularizer credited (T-146, Evan Daniel's
-#: regularized lists). Every other result's regularizations are certificates of the
-#: packing its entry names, by the identity's basis (`_regularization`).
-DISPLAY_REGULARIZERS = frozenset({"T-146"})
+#: the packing's exact optimum, with the regularizer credited (T-146 and T-225, Evan
+#: Daniel's regularized lists of 10 and 20 October). Every other result's regularizations
+#: are certificates of the packing its entry names, by the identity's basis
+#: (`_regularization`).
+DISPLAY_REGULARIZERS = frozenset({"T-146", "T-225"})
 
 
 def _regularization(move: Move, author: str) -> str:

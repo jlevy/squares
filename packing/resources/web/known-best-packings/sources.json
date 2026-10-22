@@ -1304,19 +1304,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-203a.svg"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/7b6c87e129cf80b5ff9847b90b47fd30b4563c54/certificates/best/n204.cert at 7b6c87e129cf80b5ff9847b90b47fd30b4563c54",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-204.cert.gz at 0075967bace18a3deabcc0baa64c2fb294fc80a0",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         204
       ],
       "n": 204,
-      "path": "resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert",
+      "path": "resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-204.cert.gz",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-19",
+      "retrieved": "2026-10-21",
       "source_n": 204,
-      "url": "https://github.com/franciscouzo/square-packing/blob/7b6c87e129cf80b5ff9847b90b47fd30b4563c54/certificates/best/n204.cert"
+      "url": "https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-204.cert.gz"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1467,19 +1467,19 @@
       "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n228.cert.json"
     },
     {
-      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db/search/packer/candidates/s229_v2.cert at 00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-229.cert.gz at 0075967bace18a3deabcc0baa64c2fb294fc80a0",
       "kind": "packet-derived-facts",
       "license_status": "MIT",
       "listed_n": [
         229
       ],
       "n": 229,
-      "path": "resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert",
+      "path": "resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-229.cert.gz",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-18",
+      "retrieved": "2026-10-21",
       "source_n": 229,
-      "url": "https://github.com/evand/square-packing/blob/00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db/search/packer/candidates/s229_v2.cert"
+      "url": "https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-229.cert.gz"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1702,19 +1702,19 @@
       "url": "https://github.com/itsnaka/squish-certs/blob/d45669b48cc97ad3aa17a6c847a8d06630f66eac/squish-submission-2026-10-09/n259/n259.cert.json"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/7b6c87e129cf80b5ff9847b90b47fd30b4563c54/certificates/best/n260.cert at 7b6c87e129cf80b5ff9847b90b47fd30b4563c54",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-260.cert.gz at 0075967bace18a3deabcc0baa64c2fb294fc80a0",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         260
       ],
       "n": 260,
-      "path": "resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert",
+      "path": "resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-260.cert.gz",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-19",
+      "retrieved": "2026-10-21",
       "source_n": 260,
-      "url": "https://github.com/franciscouzo/square-packing/blob/7b6c87e129cf80b5ff9847b90b47fd30b4563c54/certificates/best/n260.cert"
+      "url": "https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-260.cert.gz"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/pingyou-algebraic-refinements-2026-10-13/n261/native.yaml at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
