@@ -102,6 +102,7 @@ statements, which the receipt copies from the per-count metadata where a packet 
 from __future__ import annotations
 
 import argparse
+import functools
 import hashlib
 import importlib.util
 import json
@@ -111,7 +112,7 @@ import subprocess
 import time
 from collections.abc import Callable, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from fractions import Fraction
 from pathlib import Path
@@ -158,6 +159,7 @@ RECORDED, NOT_RECORDED = "recorded", "not recorded"
 #: exact side at 16 places, which may lie below it (#719).
 UP, BINARY64 = "up", "binary64"
 _START_ROW = re.compile(r"beyond-horizon row (\S+)")
+_BEAD = re.compile(r"think-[a-z0-9]{4}")
 
 
 @dataclass(frozen=True, slots=True)
@@ -173,17 +175,52 @@ class Awaiting:
     counts: frozenset[int] | None = None
 
 
+#: Why a walk holds a report's publication back from a row: each class waits on an owner
+#: decision, which its `Held` names by bead (`HELD_CLASSES`).
+GOEBEL_ABOVE, SUB_PRINT, CONSEQUENCE, RECIPE = "goebel", "sub-print", "consequence", "recipe"
+HELD_CLASSES = {
+    GOEBEL_ABOVE: "above Göbel's classical construction at its count (#613)",
+    SUB_PRINT: (
+        "below the side it beats by less than 1e-12, both rounding up to one 12-place print: "
+        "a re-certification of the same packing"
+    ),
+    CONSEQUENCE: (
+        "an index bound that deletes squares from the next count's certificate, with no "
+        "certificate file at its own count"
+    ),
+    RECIPE: "an L-border, tiling or composite bound with no certificate file of its own",
+}
+
+
+@dataclass(frozen=True, slots=True)
+class Held:
+    """A report's publications a walk records that wait on an owner decision.
+
+    ``kind`` is the class (`HELD_CLASSES`), ``bead`` the decision's bead and ``counts`` the
+    counts held. Unlike `Awaiting`, nothing is pending but the decision: the walk records
+    the publication, so it stands at its count, and no row may hold it until the owner
+    answers, when the walk's declaration drops it and a row is written, or it stays out.
+    The chain passes over it as over a report awaiting its import.
+    """
+
+    kind: str
+    bead: str
+    counts: frozenset[int]
+
+
 @dataclass(frozen=True, slots=True)
 class Walk:
     """A report-order ledger, ``campaign/issue-intake/<name>/``, whose verdicts plan rows.
 
     ``later`` maps each report the walk records after its releases to the source whose
-    dated rows record it; ``awaiting`` names the reports it records that have no rows yet.
+    dated rows record it; ``awaiting`` names the reports it records that have no rows yet,
+    and ``held`` the publications it records that wait on an owner decision (`Held`).
     """
 
     name: str
     later: Mapping[str, str]
     awaiting: Mapping[str, Awaiting]
+    held: Mapping[str, tuple[Held, ...]] = field(default_factory=dict)
 
     @property
     def directory(self) -> Path:
@@ -192,6 +229,10 @@ class Walk:
     @property
     def ledger(self) -> Path:
         return self.directory / "ledger.json"
+
+    def holds(self, report: str, n: int) -> Held | None:
+        """The decision a report's publication at ``n`` waits on, if the walk holds it."""
+        return next((item for item in self.held.get(report, ()) if n in item.counts), None)
 
 
 def _held_715() -> frozenset[int]:
@@ -1550,9 +1591,11 @@ def _releases(walk: Walk) -> dict[str, Release]:
 
 
 def _awaits(walk: Walk, report: str, n: int) -> bool:
-    """Whether a report the walk records at ``n`` has no row yet: its import is pending."""
+    """Whether a report the walk records at ``n`` has no row: its import is pending
+    (`Awaiting`), or its publication there waits on an owner decision (`Held`)."""
     awaiting = walk.awaiting.get(report)
-    return awaiting is not None and (awaiting.counts is None or n in awaiting.counts)
+    pending = awaiting is not None and (awaiting.counts is None or n in awaiting.counts)
+    return pending or walk.holds(report, n) is not None
 
 
 def _source_of(walk: Walk, report: str) -> str:
@@ -1565,7 +1608,26 @@ def _source_of(walk: Walk, report: str) -> str:
 
 
 def _counts(walk: Walk) -> list[dict[str, Any]]:
-    return _read(walk.ledger)["counts"]
+    ledger = walk.ledger
+    return _ledger_counts(str(ledger), ledger.stat().st_mtime_ns)
+
+
+def _walked(walk: Walk) -> dict[int, dict[str, Any]]:
+    """A walk's counts by ``n``."""
+    ledger = walk.ledger
+    return _ledger_index(str(ledger), ledger.stat().st_mtime_ns)
+
+
+@functools.cache
+def _ledger_index(path: str, modified: int) -> dict[int, dict[str, Any]]:
+    return {count["n"]: count for count in _ledger_counts(path, modified)}
+
+
+@functools.cache
+def _ledger_counts(path: str, _modified: int) -> list[dict[str, Any]]:
+    """A ledger's counts, read once while the file is unchanged: the checks read each walk
+    many times, and a walk may reach every count to 1024."""
+    return _read(Path(path))["counts"]
 
 
 def recorded_reports(walk: Walk, count: Mapping[str, Any]) -> list[str]:
@@ -1668,6 +1730,89 @@ def planned_supersessions() -> list[tuple[int, str, str]]:
     return sorted(flips)
 
 
+def held_problems(register: Mapping[str, Any]) -> list[str]:
+    """Where a walk's declared holds (`Held`) do not hold: each names a known class and a
+    bead, holds each count once, and holds only a publication the walk records there, which
+    no register row and no declared row of the report may then hold."""
+    rows = {(row["n"], row["source_id"]) for row in register["beyond_horizon_claims"]}
+    problems: list[str] = []
+    for walk in WALKS.values():
+        walked = _walked(walk)
+        releases = _releases(walk)
+        for report, items in walk.held.items():
+            source = releases[report].source if report in releases else walk.later.get(report)
+            declared = (
+                {row.n for row in decided_claims(releases[report])}
+                if report in releases
+                else set()
+            )
+            seen: set[int] = set()
+            for item in items:
+                where = f"{walk.name}: {report}"
+                if item.kind not in HELD_CLASSES:
+                    problems.append(f"{where}: no such class of hold, {item.kind!r}")
+                if not _BEAD.fullmatch(item.bead):
+                    problems.append(f"{where}: {item.bead!r} is not a decision's bead")
+                if seen & item.counts:
+                    problems.append(f"{where}: holds n={sorted(seen & item.counts)} twice")
+                seen |= item.counts
+                for n in sorted(item.counts):
+                    steps = walked.get(n, {"steps": []})["steps"]
+                    if not any(
+                        step["report"] == report and step["verdict"] == RECORDED
+                        for step in steps
+                    ):
+                        problems.append(
+                            f"{where} n={n}: the walk does not record it, so it holds nothing"
+                        )
+                    if source is not None and (n, source) in rows:
+                        problems.append(
+                            f"{where} n={n}: held for {item.bead}, yet {source} has a row there"
+                        )
+                    if n in declared:
+                        problems.append(f"{where} n={n}: held and declared as a row")
+    return problems
+
+
+def held_plan() -> list[dict[str, Any]]:
+    """Every publication a walk holds back from a row, with its class and decision's bead."""
+    return [
+        {"walk": walk.name, "report": report, "n": n, "class": item.kind, "bead": item.bead}
+        for walk in WALKS.values()
+        for report, items in walk.held.items()
+        for item in items
+        for n in sorted(item.counts)
+    ]
+
+
+def declaration_problems() -> list[str]:
+    """Where a publication no issue reports declares other rows than its walk makes: every
+    publication the walk records of it, and does not hold, is a declared row, and no other."""
+    problems: list[str] = []
+    for chosen in RELEASES.values():
+        if chosen.issue is not None:
+            continue
+        walk = walk_of(chosen)
+        recorded = {
+            n
+            for n, count in _walked(walk).items()
+            for step in count["steps"]
+            if step["report"] == chosen.label
+            and step["verdict"] == RECORDED
+            and walk.holds(chosen.label, n) is None
+        }
+        declared = {row.n for row in decided_claims(chosen)}
+        problems.extend(
+            f"{chosen.label} n={n}: the walk records it, and the packet declares no row"
+            for n in sorted(recorded - declared)
+        )
+        problems.extend(
+            f"{chosen.label} n={n}: declared as a row the walk does not record"
+            for n in sorted(declared - recorded)
+        )
+    return problems
+
+
 def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
     """Where a count a walk reaches beyond the corpus is not one chain in report order.
 
@@ -1710,7 +1855,7 @@ def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
 
 def _reached(walk: Walk, n: int) -> set[str]:
     """Every source a walk reaches at ``n``: its start's and each walked report's."""
-    count = next((item for item in _counts(walk) if item["n"] == n), None)
+    count = _walked(walk).get(n)
     if count is None:
         return set()
     reached = {_start_source(count)}
@@ -1783,7 +1928,9 @@ def coverage_problems(coverage: Mapping[str, Any] | None = None) -> list[str]:
         held = rows.get((n, earlier)) or {}
         if (held.get("disposition"), held.get("superseded_by")) != ("superseded", successor):
             problems.append(f"n={n} from {earlier}: not superseded by {successor}")
-    return problems + chain_problems(register)
+    return (
+        problems + held_problems(register) + declaration_problems() + chain_problems(register)
+    )
 
 
 # --------------------------------------------------------------------------- check
@@ -2012,6 +2159,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "coverage-plan": lambda: {
             "rows": planned_rows(),
             "supersessions": planned_supersessions(),
+            "held": held_plan(),
         },
     }
     if args.command == "check":

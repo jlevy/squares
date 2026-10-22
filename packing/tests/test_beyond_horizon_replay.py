@@ -618,3 +618,83 @@ def test_a_publication_reads_the_rows_its_packet_declares() -> None:
     for key, value in (("commit", "0" * 40), ("walk", "elsewhere"), ("format", "v0")):
         with pytest.raises(replay.ReplayError):
             watched.read(json.dumps(declared | {key: value}), watched)
+
+
+def _holding(monkeypatch: pytest.MonkeyPatch, **held: tuple[replay.Held, ...]) -> replay.Walk:
+    """#719's walk with Couzo's 5a299b4 held where ``held`` says, in place of awaiting its
+    import, as the only walk the checks read."""
+    walk = replay.WALKS[replay.ISSUE_719]
+    awaiting = {
+        report: item
+        for report, item in walk.awaiting.items()
+        if report != "franciscouzo/square-packing@5a299b4"
+    }
+    changed = dataclasses.replace(walk, awaiting=awaiting, held=held)
+    monkeypatch.setattr(replay, "WALKS", {replay.ISSUE_719: changed})
+    return changed
+
+
+def test_a_held_publication_is_passed_over_and_held_to_the_walk(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """At 366 and 372 the walk records Couzo's 5a299b4 below 4e4c8ce by 2e-23, the same
+    12-place print: held for the owner's answer (think-fwa9), it has no row, so the chain
+    passes over it, and the hold names a class, a decision's bead and a publication the
+    walk records there."""
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    label = "franciscouzo/square-packing@5a299b4"
+    walk = _holding(
+        monkeypatch,
+        **{label: (replay.Held(replay.SUB_PRINT, "think-fwa9", frozenset({366, 372})),)},
+    )
+    assert replay.held_problems(coverage) == []
+    assert walk.holds(label, 372) is not None
+    counts = {count["n"]: count for count in _read(walk.ledger)["counts"]}
+    assert label not in replay.recorded_reports(walk, counts[372])
+    assert label in replay.recorded_reports(walk, counts[409])
+    assert replay.held_plan() == [
+        {
+            "walk": replay.ISSUE_719,
+            "report": label,
+            "n": n,
+            "class": "sub-print",
+            "bead": "think-fwa9",
+        }
+        for n in (366, 372)
+    ]
+    _holding(
+        monkeypatch, **{label: (replay.Held(replay.SUB_PRINT, "think-fwa9", frozenset({371})),)}
+    )
+    assert replay.held_problems(coverage) == [
+        f"{replay.ISSUE_719}: {label} n=371: the walk does not record it, so it holds nothing"
+    ]
+    _holding(
+        monkeypatch,
+        **{
+            label: (
+                replay.Held("rounding", "fwa9", frozenset({366})),
+                replay.Held(replay.SUB_PRINT, "think-fwa9", frozenset({366})),
+            )
+        },
+    )
+    assert replay.held_problems(coverage) == [
+        f"{replay.ISSUE_719}: {label}: no such class of hold, 'rounding'",
+        f"{replay.ISSUE_719}: {label}: 'fwa9' is not a decision's bead",
+        f"{replay.ISSUE_719}: {label}: holds n=[366] twice",
+    ]
+
+
+def test_a_hold_on_a_count_a_row_holds_is_refused(monkeypatch: pytest.MonkeyPatch) -> None:
+    """#719's own row at 372 is a declared row with a register row: it cannot be held."""
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    _holding(
+        monkeypatch,
+        **{"#719": (replay.Held(replay.SUB_PRINT, "think-fwa9", frozenset({372})),)},
+    )
+    assert replay.held_problems(coverage) == [
+        (
+            f"{replay.ISSUE_719}: #719 n=372: held for think-fwa9, yet "
+            "mishapolk-issue719-2026-10-22 has a row there"
+        ),
+        f"{replay.ISSUE_719}: #719 n=372: held and declared as a row",
+    ]
