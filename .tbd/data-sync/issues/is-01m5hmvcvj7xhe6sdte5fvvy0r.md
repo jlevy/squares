@@ -5,7 +5,7 @@ title: On-request prune guard matches path spellings only; a dotted-module run o
 kind: task
 status: in_progress
 priority: 3
-version: 2
+version: 3
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 delegate: c-lane-tooling-1022
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m1sx5m1p5868jhwcdzfkvada
 hold: null
 hold_until: null
 created_at: 2026-10-22T11:09:59.026Z
-updated_at: 2026-10-22T11:14:08.735Z
+updated_at: 2026-10-22T14:11:03.603Z
 started_at: 2026-10-22T11:14:08.734Z
 ---
 Review A of #721, finding A1 (Low), deferred.
@@ -26,3 +26,12 @@ Reviewer found no such use at e6a1e026 (search, import closure, strace of 55 com
 Fix: also assert each tool's dotted module name (`devtools.<stem>`, `sqpack.<...>`) appears in no control's `run`; optionally an AST import scan of the control programs. Apply the same to `registered_mentions`. Test: a synthetic control running `-m devtools.<pruned tool>` must be caught.
 
 Review: https://github.com/jlevy/squares/pull/721#issuecomment-6339260683
+
+## Notes
+
+2026-10-22 c-lane-tooling-1022: done in jlevy/squares#723 (draft, head de5179c76), awaiting hosted CI and merge.
+
+- `registered_mentions(candidate, records)` is now a function in `run_negative_controls.py`, called by `--audit-snapshot`. It also matches the candidate's dotted module name (`module_name`: `devtools.<stem>`, and `sqpack.<...>` for files under `src/`), on a word boundary, so `devtools.pruned_tool_two` is not a mention of `devtools.pruned_tool`.
+- `test_the_on_request_prune_has_no_registered_control_consumer` asks `registered_mentions` for all ten files and shows a synthetic `-m devtools.couzo_715_replay` control caught. `test_the_audit_names_a_control_that_runs_a_candidate_by_its_module_name` drives the audit itself.
+- The optional AST import-closure check is taken as `test_no_control_loads_a_pruned_tool` in `tests/test_negative_controls.py` (about 85 lines with helpers, 1.45 s). It covers every path in `PRUNE`, not only the on-request tools. It follows the load-time closure of each control's `-m` modules, pytest files with `conftest.py`, console scripts and here-document source, and it is green on main for all 50 distinct commands. Function-local imports are excluded; counting them fails 11 commands (`check_results`, `validate_schemas`, ...) through calls they never make.
+- Remaining limits, stated in the PR: subprocesses that validation steps start, `importlib`, whole-suite collection, and a function-local import a control does call. Only the control's own run in a worker decides those.
