@@ -75,9 +75,8 @@ NEWS_CHECK = (
 
 def news_rubric_meanings(text: str) -> dict[int, str]:
     """Each level's short meaning in the text of the News rubric's document: all the site
-    reads of it, so `check_release_impact` compares an edit to the document by this too.
-    A document without the section or without a `Short` meaning for S1 to S5 raises
-    `ValueError`."""
+    reads of it. A document without the section or without a `Short` meaning for S1 to S5
+    raises `ValueError`."""
     if NEWS_RUBRIC_SECTION not in text:
         raise ValueError(f"{NEWS_RUBRIC.name} has no {NEWS_RUBRIC_SECTION!r} section")
     section = text.split(NEWS_RUBRIC_SECTION, 1)[1].split("\n#", 1)[0]

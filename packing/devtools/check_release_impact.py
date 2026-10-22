@@ -3,6 +3,15 @@
 Producer declarations select candidates; they do not prove that public output changed.
 A candidate needs an owning successor decision or a fresh, path-scoped no-change
 review naming the examined outputs. Prior source is parsed as data, never executed.
+
+The site is never a candidate. Site editions are retired as of 22 October 2026
+(think-wdqo): the site deploys continuously from `main` and needs no disposition, and
+its edition record, `PUBLICATION_HISTORY`, and the claim documents' link commit,
+`PUBLICATION_REVISION`, are frozen as history. An edit to either is refused, as is a
+fresh site release-impact decision. A fresh no-change record written under the old rules
+that names the site beside other components keeps its coverage of them, with a warning
+that its site part is ignored; one naming only the site is refused. The papers and the
+infographics keep their versions.
 """
 
 from __future__ import annotations
@@ -18,20 +27,24 @@ from itertools import pairwise
 from pathlib import Path, PurePosixPath
 from typing import override
 
-from devtools import pages_scope, render_changelog, render_overview
+from devtools import pages_scope, render_overview
 from sqpack import release
 from sqpack.known_best import KNOWN_BEST_COMPOSITES
-from sqpack.yamlio import load_yaml
 
 REPO = pages_scope.REPO
 RELEASE_PATH = "packing/src/sqpack/release.py"
-CHANGELOG_PATH = "packing/site-changelog.yaml"
-#: The intake runbook, a site input only for its News label rubric: an edit elsewhere in
-#: the process document changes no page, so only the rubric's rows are compared. That
-#: holds for the site alone; where another unit declares the runbook too, nothing says
-#: what it reads, so the path is compared by its bytes for every owner.
-NEWS_RUBRIC_PATH = render_changelog.NEWS_RUBRIC.relative_to(REPO).as_posix()
-NEWS_RUBRIC_READERS = frozenset({"site"})
+#: The retired component, whose inputs select nothing and whose record is frozen.
+SITE = "site"
+#: What the site's record keeps frozen: its editions, and the commit the claim documents
+#: link to, which moved only when a site edition was cut.
+FROZEN_SITE_FIELDS = ("PUBLICATION_HISTORY", "PUBLICATION_REVISION")
+#: The one message for a site cut, here and in `cut_release` (the owner, 2026-10-22).
+SITE_EDITIONS_RETIRED = (
+    "site editions are retired as of October 22, 2026 (think-wdqo): the site deploys "
+    "continuously from main and takes no edition, PUBLICATION_HISTORY and "
+    "PUBLICATION_REVISION are frozen as history, and only the papers and the art "
+    "(posters, films) keep versions"
+)
 
 
 def _git(repo: Path, *args: str) -> bytes:
@@ -95,25 +108,15 @@ class _WithoutDocstrings(ast.NodeTransformer):
         return node
 
 
-def _semantic_bytes(
-    path: str, content: bytes | None, owners: frozenset[str] = frozenset()
-) -> object:
-    """What of `content` its publication units read, for the `owners` that declare it."""
+def _semantic_bytes(path: str, content: bytes | None) -> object:
+    """What of `content` its publication units read."""
     if content is None:
         return None
     if path.endswith(".py"):
         tree = _WithoutDocstrings().visit(ast.parse(content, filename=path))
         return ast.dump(tree, include_attributes=False)
-    if path == CHANGELOG_PATH:
-        document = load_yaml(content.decode())
-        return document["entries"]
-    if path == NEWS_RUBRIC_PATH and owners == NEWS_RUBRIC_READERS:
-        # A side whose rubric does not parse, such as a revision before the table had
-        # its `Short` column, stays a byte comparison, so its change remains a candidate.
-        try:
-            return render_changelog.news_rubric_meanings(content.decode())
-        except ValueError:
-            return content
+    # The changelog's entries-only comparison and the News rubric's went with the site,
+    # their one reader; a paper that declares either compares its bytes.
     return content
 
 
@@ -135,6 +138,8 @@ def _assignments(content: bytes | None) -> dict[str, ast.expr]:
 
 # Published metadata has explicit owners; unknown declarations remain conservative
 # candidates through the executable-AST comparison below, rather than disappearing.
+# The site's names stay listed, so that editing one is not read as a change to the
+# release implementation, although the retired site owns no disposition.
 _PUBLISHED_RELEASE_FIELDS: dict[str, tuple[str, ...]] = {
     "site": (
         "PUBLICATION_HISTORY",
@@ -272,16 +277,22 @@ def _release_executable_ast(content: bytes | None) -> object:
 
 
 def producer_inputs() -> dict[str, tuple[str, ...]]:
-    """Declared producer inputs and helpers, without workflow-only check/test seeds."""
+    """Declared producer inputs and helpers, without workflow-only check/test seeds.
+
+    The site's builders, the overview and the workbench, are left out: the site is
+    retired as a release component, so nothing it reads selects it.
+    """
     result: dict[str, set[str]] = {
-        component: set() for component in release.COMPONENT_HISTORY_NAMES
+        component: set() for component in release.COMPONENT_HISTORY_NAMES if component != SITE
     }
     papers = {
         pages_scope.half_name(paper.slug): f"paper:{paper.slug}"
         for paper in render_overview.PAPERS
     }
     for half, builder in pages_scope.BUILDER_INPUTS.items():
-        component = "site" if half in {"overview", "workbench"} else papers[half]
+        if half in {"overview", "workbench"}:
+            continue
+        component = papers[half]
         declared = tuple(builder())
         helpers = pages_scope.import_closure(
             {path for path in declared if path.suffix == ".py" and path.is_file()}
@@ -319,8 +330,13 @@ def component_outputs() -> dict[str, tuple[str, ...]]:
 
 
 def candidate_paths(repo: Path, base: str) -> dict[str, tuple[str, ...]]:
-    """Exact changed inputs potentially affecting each owner, before editorial judgment."""
-    inputs = producer_inputs()
+    """Exact changed inputs potentially affecting each owner, before editorial judgment.
+
+    The retired site is never an owner, even where a declaration still names it.
+    """
+    inputs = {
+        component: paths for component, paths in producer_inputs().items() if component != SITE
+    }
     selected: dict[str, set[str]] = {component: set() for component in inputs}
     infographic_outputs = set(component_outputs()["infographics"])
     for path in changed_paths(repo, base):
@@ -349,15 +365,41 @@ def candidate_paths(repo: Path, base: str) -> dict[str, tuple[str, ...]]:
                 owners.update(inputs)
         elif path in infographic_outputs:
             owners = {"infographics"} if old != current else set()
-        elif _semantic_bytes(path, old, frozenset(matched)) == _semantic_bytes(
-            path, current, frozenset(matched)
-        ):
+        elif _semantic_bytes(path, old) == _semantic_bytes(path, current):
             owners = set()
         else:
             owners = matched
         for owner in owners:
             selected[owner].add(path)
     return {component: tuple(sorted(paths)) for component, paths in selected.items() if paths}
+
+
+def frozen_site_errors(
+    current: Mapping[str, ast.expr], previous: Mapping[str, ast.expr]
+) -> list[str]:
+    """Refuse an edit to the frozen site record, and a fresh site impact decision."""
+
+    def dumped(fields: Mapping[str, ast.expr], name: str) -> str | None:
+        node = fields.get(name)
+        return None if node is None else ast.dump(node, include_attributes=False)
+
+    edited = [
+        name for name in FROZEN_SITE_FIELDS if dumped(current, name) != dumped(previous, name)
+    ]
+    errors = (
+        [f"{SITE}: {' and '.join(edited)} edited; {SITE_EDITIONS_RETIRED}; drop the site cut"]
+        if edited
+        else []
+    )
+    old = set(_records(previous, "RELEASE_IMPACTS"))
+    if any(
+        record[0] == SITE and record not in old
+        for record in _records(current, "RELEASE_IMPACTS")
+    ):
+        errors.append(
+            f"{SITE}: fresh release-impact decision; {SITE_EDITIONS_RETIRED}; drop the site cut"
+        )
+    return errors
 
 
 def _history_head(fields: Mapping[str, ast.expr], name: str) -> str:
@@ -436,19 +478,60 @@ def _records(fields: Mapping[str, ast.expr], name: str) -> tuple[tuple, ...]:
     return tuple(records)
 
 
+def _without_site(
+    decision: release.ReleaseNoPublicChange, outputs: Mapping[str, tuple[str, ...]]
+) -> release.ReleaseNoPublicChange:
+    """An old-rule record's part for the components that still own a disposition.
+
+    The site's recognized outputs are its own and no other component's, so they come off
+    exactly; the paths stay, and must still name the remaining components' candidates.
+    """
+    kept = tuple(component for component in decision.components if component != SITE)
+    still_owned = {output for component in kept for output in outputs.get(component, ())}
+    return decision._replace(
+        components=kept,
+        outputs=tuple(
+            output
+            for output in decision.outputs
+            if output in still_owned or output not in outputs.get(SITE, ())
+        ),
+    )
+
+
 def _exemptions(
     candidates: Mapping[str, tuple[str, ...]],
     current: Mapping[str, ast.expr],
     previous: Mapping[str, ast.expr],
-) -> tuple[set[str], list[str]]:
+) -> tuple[set[str], list[str], list[str]]:
+    """The components fresh no-change records exempt, the records' errors, and warnings.
+
+    A record written under the old rules may name the site beside the components it
+    covers. Its site part is ignored with a warning and the rest is held to every rule
+    below, so the coverage it reviewed still counts; a record naming only the site is
+    refused, since nothing in it applies.
+    """
     old = set(_records(previous, "RELEASE_NO_PUBLIC_CHANGES"))
     outputs = component_outputs()
     covered: dict[str, set[str]] = {component: set() for component in candidates}
-    errors = []
+    errors: list[str] = []
+    warnings: list[str] = []
     for record in _records(current, "RELEASE_NO_PUBLIC_CHANGES"):
         if record in old:
             continue
         decision = release.ReleaseNoPublicChange(*record)
+        if SITE in decision.components:
+            decision = _without_site(decision, outputs)
+            if not decision.components:
+                errors.append(
+                    f"{SITE}: fresh no-public-change record names only the retired site; "
+                    f"{SITE_EDITIONS_RETIRED}; remove the record"
+                )
+                continue
+            warnings.append(
+                f"{SITE}: fresh no-public-change record also names the retired site, whose "
+                f"part is ignored; {SITE_EDITIONS_RETIRED}; a new record names no site and "
+                "none of its outputs"
+            )
         if (
             not decision.components
             or not decision.paths
@@ -491,7 +574,7 @@ def _exemptions(
     exempt = {
         component for component, paths in candidates.items() if set(paths) <= covered[component]
     }
-    return exempt, errors
+    return exempt, errors, warnings
 
 
 @dataclass(frozen=True)
@@ -503,18 +586,21 @@ class ImpactReport:
     baseline_versions: dict[str, str]
     exempt_components: tuple[str, ...]
     errors: tuple[str, ...]
+    warnings: tuple[str, ...] = ()
 
 
 def inspect(
     *, repo: Path = REPO, baseline_ref: str = "origin/main", base: str | None = None
 ) -> ImpactReport:
-    """Require owning successor decisions or fresh reviewed no-change dispositions."""
+    """Require owning successor decisions or fresh reviewed no-change dispositions,
+    and refuse any edit to the frozen site record."""
     baseline = resolve_base(repo, baseline_ref=baseline_ref, base=base)
     candidates = candidate_paths(repo, baseline)
     versions = baseline_versions(repo, baseline)
     previous = _assignments(_previous(repo, baseline, RELEASE_PATH))
     current = _assignments(_current(repo, RELEASE_PATH))
-    exempt, errors = _exemptions(candidates, current, previous)
+    exempt, errors, warnings = _exemptions(candidates, current, previous)
+    errors.extend(frozen_site_errors(current, previous))
     old_decisions = set(_records(previous, "RELEASE_IMPACTS"))
     fresh_decisions = {
         record[:3]
@@ -548,7 +634,9 @@ def inspect(
             )
         except ValueError as error:
             errors.append(str(error))
-    return ImpactReport(baseline, candidates, versions, tuple(sorted(exempt)), tuple(errors))
+    return ImpactReport(
+        baseline, candidates, versions, tuple(sorted(exempt)), tuple(errors), tuple(warnings)
+    )
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -568,6 +656,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     else:
         for component, paths in sorted(report.candidate_paths.items()):
             print(f"{component} ({report.baseline_versions[component]}): " + ", ".join(paths))
+        for warning in report.warnings:
+            print(f"release impact: warning: {warning}", file=sys.stderr)
         for error in report.errors:
             print(f"release impact: {error}", file=sys.stderr)
         if not report.errors:
