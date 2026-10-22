@@ -10653,9 +10653,52 @@ issues:
       - result: n1413
       - result: n1489
       - result: n1568
+    - url: https://github.com/jlevy/squares/issues/666#issuecomment-6336294534
+      date: '2026-10-22'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n464
+      - result: n509
+      - result: n555
+      - result: n603
+      - result: n654
+      - result: n706
+      - result: n760
+      - result: n817
+      - result: n875
+      - result: n935
+      - result: n998
+      - result: n1061
+      - result: n1128
+      - result: n1196
+      - result: n1266
+      - result: n1339
+      - result: n1413
+      - result: n1489
+      - result: n1568
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
+    notes: >-
+      The import reply, posted at 2026-10-22T08:27:06Z (issuecomment-6336294534) after #720
+      merged and its Pages deployment of 0281e7763 (run 39745544894, deployment 7247186557, site
+      v0.8.20) was checked, reported the 11 rows at or below 1024 recorded as dated
+      beyond-horizon rows of de-winter-issue666-2026-10-17 at assurance reported
+      (E-de-winter-666-certificate-report), each below everything reported before it and
+      superseded on entry by Couzo's #675 (6), #672 (2), #678 and #715 and Muglich's #686 (1
+      each), and at 464 the first to beat Couzo's 487b058 row; the dangling pin b3152f5, b9cdc16
+      holding the identical folder and the MIT-licensed 643dc9a retained, each certificate first
+      committed at b9cdc16 three minutes before the issue; both maintained routes accepting all
+      11 (18,530 candidate pairs of 2,972,615) and refusing all 66 controls, the all-pairs
+      kernel agreeing at 464, every side below Göbel's construction by 0.143 or more; check.py
+      read and not run; and the credit line de Winter after Arslanov, Mustafin, Shangitbayev,
+      Levy. It said the 8 rows above 1024 wait on the owner's decision (think-f2io). It folds in
+      the report-order verdict comment that devtools.intake_comments drafts from the backlog
+      ledger (upper-bounds-backlog-20261022, comments.yaml beside it), checked against the
+      committed ledger before posting: the rule, and a table giving each count's side, verdict
+      and best now as the ledger has them, with the row's place in the record. The issue stays
+      open.
   - number: 668
     title: 'Improved upper bounds for n = 227, 229, 260: registration request'
     author: JoostdeWinter
@@ -11911,6 +11954,85 @@ issues:
       - result: n991
       - result: n992
       - result: n993
+    - url: https://github.com/jlevy/squares/issues/670#issuecomment-6336293996
+      date: '2026-10-22'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n204
+        id: T-226
+      - result: n330
+      - result: n339
+      - result: n364
+      - result: n370
+      - result: n378
+      - result: n379
+      - result: n382
+      - result: n403
+      - result: n417
+      - result: n418
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n444
+      - result: n452
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n501
+      - result: n503
+      - result: n505
+      - result: n536
+      - result: n546
+      - result: n548
+      - result: n551
+      - result: n553
+      - result: n598
+      - result: n600
+      - result: n647
+      - result: n650
+      - result: n651
+      - result: n700
+      - result: n701
+      - result: n702
+      - result: n703
+      - result: n749
+      - result: n753
+      - result: n754
+      - result: n756
+      - result: n757
+      - result: n758
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n863
+      - result: n866
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n871
+      - result: n922
+      - result: n925
+      - result: n926
+      - result: n927
+      - result: n928
+      - result: n929
+      - result: n930
+      - result: n931
+      - result: n987
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -11929,6 +12051,25 @@ issues:
       recorded; the credit line Couzo after Polkovskyi, Daniel, Levy and the seed credit to
       Polkovskyi (hop job 105412). It said the 72 rows beyond the corpus are not yet recorded
       and follow in the next records pull request (think-f28n). The issue stays open.
+
+      The import reply of the rows beyond the corpus, posted at 2026-10-22T08:27:04Z
+      (issuecomment-6336293996) after #720 merged and its Pages deployment of 0281e7763 (run
+      39745544894, deployment 7247186557, site v0.8.20) was checked, reported the 72 rows
+      recorded as dated beyond-horizon rows of couzo-issue670-2026-10-17 at assurance reported
+      (E-couzo-670-beyond-horizon-report): 8 current, at 364, 370, 382, 403, 444, 452, 536 and
+      922, each superseding the row that stood there by 2.74e-10 to 5.07e-5, and 64 superseded
+      on entry by the author's #675 (25), #672 (19), #678 (9) and #715 (2) and Muglich's #686
+      (9); at 57 counts the start row now names #670 as its successor. It gave each certificate
+      first committed at the pin five minutes before the issue; both maintained routes accepting
+      all 72 (118,501 candidate pairs of 17,911,878) and refusing all 432 controls, the
+      all-pairs kernel agreeing at 922, every side below Göbel's construction; the source's
+      checker not run; and the per-count seed credits as the source's statements, per-row credit
+      beyond the horizon being the owner's open question from #686. At 204 it named T-226 and
+      stated no rung. It folds in the report-order verdict comment that devtools.intake_comments
+      drafts from the backlog ledger (upper-bounds-backlog-20261022, comments.yaml beside it),
+      checked against the committed ledger before posting: the rule, and a table giving each
+      count's side, verdict and best now as the ledger has them, with the row's place in the
+      record. The issue stays open while T-226's review is queued (think-0nse).
   - number: 672
     title: '227, 229, 330-996: registration request'
     author: franciscouzo
@@ -12554,6 +12695,59 @@ issues:
       - result: n994
       - result: n995
       - result: n996
+    - url: https://github.com/jlevy/squares/issues/672#issuecomment-6336293723
+      date: '2026-10-22'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n227
+        id: T-227
+      - result: n229
+        id: T-227
+      - result: n330
+      - result: n461
+      - result: n507
+      - result: n652
+      - result: n653
+      - result: n704
+      - result: n749
+      - result: n750
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n757
+      - result: n758
+      - result: n759
+      - result: n804
+      - result: n805
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n815
+      - result: n816
+      - result: n817
+      - result: n864
+      - result: n865
+      - result: n868
+      - result: n869
+      - result: n871
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n923
+      - result: n924
+      - result: n929
+      - result: n930
+      - result: n932
+      - result: n933
+      - result: n934
+      - result: n935
+      - result: n990
+      - result: n991
+      - result: n994
+      - result: n995
+      - result: n996
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12581,6 +12775,25 @@ issues:
       at 227 (f0ca7a65, method fq, received 2026-10-17T20:28:22Z), which the source does not
       say; and said the 44 rows beyond the corpus are not yet recorded and follow in the next
       records pull request (think-2vjc). The issue stays open.
+
+      The import reply of the rows beyond the corpus, posted at 2026-10-22T08:27:03Z
+      (issuecomment-6336293723) after #720 merged and its Pages deployment of 0281e7763 (run
+      39745544894, deployment 7247186557, site v0.8.20) was checked, reported the 44 rows
+      recorded as dated beyond-horizon rows of couzo-issue672-2026-10-17 at assurance reported
+      (E-couzo-672-beyond-horizon-report), each superseding the author's #670 row (19 counts),
+      de Winter's #666 row (817, 935), a start row it was first to beat (9) or the grid (14),
+      and each superseded on entry by the author's #675 (32), #678 (7) and #715 (1) and
+      Muglich's #686 (4). It gave each certificate first committed at the pin four minutes
+      before the issue; both maintained routes accepting all 44 (88,101 candidate pairs of
+      15,138,963) and refusing all 264 controls, the all-pairs kernel agreeing at 996, every
+      side below Göbel's construction; the source's checker not run; and the per-count seed
+      credits as the source's statements. At 227 and 229 it named T-227 and stated no rung, and
+      it said the CT105 question of 22 October still stands. It folds in the report-order
+      verdict comment that devtools.intake_comments drafts from the backlog ledger
+      (upper-bounds-backlog-20261022, comments.yaml beside it), checked against the committed
+      ledger before posting: the rule, and a table giving each count's side, verdict and best
+      now as the ledger has them, with the row's place in the record. The issue stays open while
+      T-227's review is queued (think-0nse).
   - number: 673
     title: 'Credit correction request: s(146) and s(308) found_by'
     author: evand
@@ -13857,6 +14070,91 @@ issues:
       - result: n996
       - result: n997
       - result: n998
+    - url: https://github.com/jlevy/squares/issues/675#issuecomment-6336294281
+      date: '2026-10-22'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n204
+        id: T-228
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n464
+      - result: n502
+      - result: n545
+      - result: n546
+      - result: n547
+      - result: n548
+      - result: n549
+      - result: n554
+      - result: n592
+      - result: n593
+      - result: n598
+      - result: n602
+      - result: n603
+      - result: n641
+      - result: n642
+      - result: n650
+      - result: n652
+      - result: n654
+      - result: n693
+      - result: n700
+      - result: n701
+      - result: n705
+      - result: n706
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n758
+      - result: n759
+      - result: n760
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n807
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n816
+      - result: n817
+      - result: n863
+      - result: n864
+      - result: n865
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n919
+      - result: n923
+      - result: n924
+      - result: n927
+      - result: n928
+      - result: n930
+      - result: n931
+      - result: n932
+      - result: n933
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
+      - result: n994
+      - result: n995
+      - result: n996
+      - result: n997
+      - result: n998
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -13876,6 +14174,25 @@ issues:
       seed credit to Polkovskyi (slp job 107960). It said the 78 rows beyond the corpus are not
       yet recorded and follow in the next records pull request (think-pvav). The issue stays
       open.
+
+      The import reply of the rows beyond the corpus, posted at 2026-10-22T08:27:05Z
+      (issuecomment-6336294281) after #720 merged and its Pages deployment of 0281e7763 (run
+      39745544894, deployment 7247186557, site v0.8.20) was checked, reported the 78 rows
+      recorded as dated beyond-horizon rows of couzo-issue675-2026-10-18 at assurance reported
+      (E-couzo-675-beyond-horizon-report), read from 76 certificates, 992 and 995 being the 993
+      and 996 certificates less their last square; each superseding the author's #672 row (32
+      counts), #670 row (25), de Winter's #666 row (6), a start row it was first to beat (10) or
+      the grid (5), and each superseded on entry by the author's #678 (54) and #715 (6) and
+      Muglich's #686 (18). It gave each certificate first committed at the pin sixteen minutes
+      before the issue; both maintained routes accepting all 78 rows (142,270 candidate pairs of
+      23,086,008) and refusing all 456 controls, the all-pairs kernel agreeing at 998, every
+      side below Göbel's construction; the source's checker not run; and the per-count seed
+      credits as the source's statements. At 204 it named T-228 and stated no rung. It folds in
+      the report-order verdict comment that devtools.intake_comments drafts from the backlog
+      ledger (upper-bounds-backlog-20261022, comments.yaml beside it), checked against the
+      committed ledger before posting: the rule, and a table giving each count's side, verdict
+      and best now as the ledger has them, with the row's place in the record. The issue stays
+      open while T-228's review is queued (think-0nse).
   - number: 678
     title: '204-998: registration request'
     author: franciscouzo
