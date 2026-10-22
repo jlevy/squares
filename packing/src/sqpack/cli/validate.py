@@ -6461,9 +6461,10 @@ def _push_storage_step(base: str) -> Step:
     this runs it against `--since` (default `origin/main`), which is that base once
     fetched, so a bulk blob is refused before it is pushed rather than after (`OR-18`,
     review A3 on #406). It has no `touches`: any path can carry a blob, so every change
-    selects it. It reads Git metadata and streams each new blob's content through zlib to
-    size it as Git stores it (`OR-18`), which costs about a second on a routine branch and
-    is bounded by the guard's own 30-second deadline.
+    selects it. It reads Git metadata, streams each new blob's content through zlib to
+    size it as Git stores it, and counts the thin pack of the branch's new objects for the
+    total (`OR-18`), which costs about a second on a routine branch and is bounded by the
+    guard's own 30-second deadline.
     """
 
     def action(context: Context) -> str:

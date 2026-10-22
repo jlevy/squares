@@ -1,10 +1,12 @@
 """OR-18's unit of repository size: a blob as Git stores it.
 
-`OR-18` counts a file's size as its blob's, compressed as Git packs it, and a set's as the
-sum of its blobs, because that is what a clone downloads and what history keeps. This
-module is that unit's one definition. `devtools.upper_bound_houses sizes` measures a staged
-adoption's witnesses with it, and `devtools.check_added_blobs` holds a branch's new blobs
-to the ceilings in `devtools/added-blobs.yaml` with it.
+`OR-18` counts a file's size as its blob's, compressed as Git packs it, because that is what
+a clone downloads for it and what history keeps. This module is that unit's one
+definition. `devtools.upper_bound_houses sizes` measures a staged adoption's witnesses with
+it, and `devtools.check_added_blobs` holds each of a branch's new blobs to the per-blob
+ceiling in `devtools/added-blobs.yaml` with it. A set's size is not a sum of these: since
+22 October 2026 it is the thin pack of the set's new objects, deltas included, which that
+guard asks Git for.
 
 The size is the blob object, the header ``blob <size>`` and a NUL then the content,
 compressed by zlib at its default level, as Git compresses an object in a pack

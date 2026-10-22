@@ -1,9 +1,11 @@
 """Tiny real Git histories exercise storage admission without large retained data.
 
-Sizes are OR-18's, a blob as Git stores it (`devtools.git_storage`), so each fixture states
-its ceilings in terms of `stored()` of its own contents. `noise()` is incompressible, so a
-noise blob stores at about its checkout size, while short text stores at a few bytes over
-its own; `PER` sits between the two.
+Sizes are OR-18's. A blob counts as Git stores it (`devtools.git_storage`), so each
+fixture states its per-blob ceiling in terms of `stored()` of its own contents. `noise()`
+is incompressible, so a noise blob stores at about its checkout size, while short text
+stores at a few bytes over its own; `PER` sits between the two. The total is the thin pack
+of the range's new objects, which `pack_size()` asks Git for directly; a noise blob lands
+in it at about its own size, and it cannot be a delta of other noise.
 """
 
 from __future__ import annotations
@@ -71,8 +73,38 @@ def add(repo: Path, name: str, data: bytes) -> None:
     git(repo, "add", "--", name)
 
 
-def charge(blobs: Sequence[tool.Blob]) -> int:
-    return tool.charged_bytes(blobs)
+def pack_size(repo: Path, base: str, head: str = "HEAD", *extra: str) -> int:
+    """Git's own thin pack of the range's new objects, with `extra` objects beside them."""
+    revisions = "".join(f"{line}\n" for line in (head, f"^{base}", *extra))
+    configuration = [option for setting in tool.PACK_CONFIG for option in ("-c", setting)]
+    result = subprocess.run(
+        [
+            "git",
+            *configuration,
+            "pack-objects",
+            "--revs",
+            "--thin",
+            "--shallow",
+            "--no-sparse",
+            "--delta-base-offset",
+            "--non-empty",
+            "--stdout",
+            "-q",
+        ],
+        cwd=repo,
+        input=revisions.encode(),
+        capture_output=True,
+        check=True,
+        timeout=10,
+    )
+    return len(result.stdout)
+
+
+def total_failure(added: int, total: int) -> str:
+    return (
+        f"the range adds {added} bytes to the repository, as a thin pack of its new objects "
+        f"against the base, exceeding {total}"
+    )
 
 
 @pytest.fixture(autouse=True)
@@ -173,8 +205,50 @@ def test_sizes_are_counted_as_git_stores_them(repo: tuple[Path, str]) -> None:
     (blob,) = tool.inventory(path, base)
     assert blob.checkout == len(text)
     assert blob.stored == stored(text) < len(text) // 50
-    # Ceilings at the stored size pass, although the checkout bytes are 50 times over them.
-    assert tool.violations([blob], per_blob=stored(text), total=stored(text)) == []
+    # A ceiling at the stored size passes, although the checkout bytes are 50 times over it.
+    assert tool.violations([blob], per_blob=stored(text), total=1, added=0) == []
+    assert tool.violations([blob], per_blob=stored(text) - 1, total=1, added=0)
+
+
+def register(entries: int, seed: int = 0) -> bytes:
+    """A register of distinct entries: compresses like YAML, and differs line by line."""
+    generator = random.Random(seed)
+    return b"".join(
+        b"- id: T-%05d\n  value: %032x\n" % (index, generator.getrandbits(128))
+        for index in range(entries)
+    )
+
+
+def test_rewriting_a_register_costs_its_edits_not_its_versions(repo: tuple[Path, str]) -> None:
+    """#578 on #406: 20 rewrites of one large register pack as one copy and 19 deltas.
+
+    Summed as standalone versions, #578's merges of main charged 59.17 MiB of register
+    churn; the thin pack of the same range is 2.43 MiB. The total is the pack.
+    """
+    path, base = repo
+    versions = [register(2000 + index) for index in range(20)]
+    for content in versions:
+        add(path, "frontier/results.yaml", content)
+        commit(path)
+    blobs = tool.inventory(path, base)
+    assert len(blobs) == 20
+    summed = sum(blob.stored for blob in blobs)
+    assert summed == sum(map(stored, versions))
+    added = tool.added_bytes(path, base)
+    assert added == pack_size(path, base)
+    assert 5 * added < summed
+    # A total the summed versions would exceed admits the branch.
+    assert tool.violations(blobs, per_blob=stored(versions[-1]), total=added, added=added) == []
+
+
+def test_a_staged_copy_of_a_base_blob_adds_nothing(repo: tuple[Path, str]) -> None:
+    path, _ = repo
+    add(path, "large.bin", noise(4096))
+    base = commit(path)
+    add(path, "copy.bin", noise(4096))
+    assert tool.added_bytes(path, base, staged=True) == 0
+    add(path, "fresh.bin", noise(4096, 1))
+    assert tool.added_bytes(path, base, staged=True) >= 4096
 
 
 def test_stack_uses_actual_lower_branch_not_main(repo: tuple[Path, str]) -> None:
@@ -183,22 +257,25 @@ def test_stack_uses_actual_lower_branch_not_main(repo: tuple[Path, str]) -> None
     lower = commit(path)
     add(path, "own.txt", b"ok")
     commit(path)
-    assert tool.violations(tool.inventory(path, lower), per_blob=PER, total=4 * PER) == []
-    assert tool.violations(tool.inventory(path, main), per_blob=PER, total=4 * PER)
+    assert tool.violations(tool.inventory(path, lower), per_blob=PER, total=1, added=0) == []
+    assert tool.violations(tool.inventory(path, main), per_blob=PER, total=1, added=0)
+    assert tool.added_bytes(path, lower) < tool.added_bytes(path, main)
 
 
 def test_add_then_delete_keeps_history_blob_in_inventory(repo: tuple[Path, str]) -> None:
     path, base = repo
-    add(path, "large.bin", noise(64))
+    add(path, "large.bin", noise(4096))
     commit(path)
     # Remove only the index entry: keep the fixture bytes on disk.
     git(path, "update-index", "--force-remove", "large.bin")
     commit(path)
     blobs = tool.inventory(path, base)
     assert [(blob.checkout, blob.paths, blob.charged) for blob in blobs] == [
-        (64, ("large.bin",), True)
+        (4096, ("large.bin",), True)
     ]
-    assert tool.violations(blobs, per_blob=PER, total=4 * PER)
+    assert tool.violations(blobs, per_blob=PER, total=1, added=0)
+    # History keeps the deleted blob, so the pack carries it.
+    assert tool.added_bytes(path, base) >= 4096
 
 
 def test_unchanged_large_base_blob_is_grandfathered(repo: tuple[Path, str]) -> None:
@@ -209,7 +286,7 @@ def test_unchanged_large_base_blob_is_grandfathered(repo: tuple[Path, str]) -> N
     commit(path)
     blobs = tool.inventory(path, base)
     assert [blob.checkout for blob in blobs] == [2]
-    assert tool.violations(blobs, per_blob=PER, total=4 * PER) == []
+    assert tool.violations(blobs, per_blob=PER, total=1, added=0) == []
 
 
 def test_reintroduced_base_history_blob_is_checked(repo: tuple[Path, str]) -> None:
@@ -220,7 +297,7 @@ def test_reintroduced_base_history_blob_is_checked(repo: tuple[Path, str]) -> No
     base = commit(path)
     git(path, "add", "large.bin")
     commit(path)
-    assert tool.violations(tool.inventory(path, base), per_blob=PER, total=4 * PER)
+    assert tool.violations(tool.inventory(path, base), per_blob=PER, total=1, added=0)
 
 
 def test_pure_rename_of_current_base_blob_does_not_add_storage(repo: tuple[Path, str]) -> None:
@@ -249,39 +326,40 @@ def test_blob_already_in_the_base_tree_is_checked_but_not_charged(
     """H4 of #406 (P5): the same bytes the newer base gained are stored already."""
     path, _ = repo
     git(path, "checkout", "-qb", "feature")
-    add(path, "same.bin", noise(64))
+    add(path, "same.bin", noise(4096))
     commit(path)
     git(path, "checkout", "-q", "main")
-    add(path, "same.bin", noise(64))
+    add(path, "same.bin", noise(4096))
     add(path, "other.txt", b"o")
     base = commit(path)
     (blob,) = tool.inventory(path, base, head="feature")
     assert (blob.paths, blob.charged) == (("same.bin",), False)
-    assert charge([blob]) == 0
+    # The pack holds the branch's commit and tree, not the blob the base stores already.
+    assert tool.added_bytes(path, base, head="feature") < 4096
     # It is still a new path's blob, so the per-blob ceiling holds it.
-    assert tool.violations([blob], per_blob=PER, total=1) == [
+    assert tool.violations([blob], per_blob=PER, total=1, added=0) == [
         (
-            f"{stored(noise(64))} bytes exceeds {PER} as Git stores them: ('same.bin',) "
-            f"({blob.object_id}, 64 bytes in a checkout)"
+            f"{stored(noise(4096))} bytes exceeds {PER} as Git stores them: ('same.bin',) "
+            f"({blob.object_id}, 4096 bytes in a checkout)"
         )
     ]
 
 
 def test_copy_of_large_base_blob_is_checked(repo: tuple[Path, str]) -> None:
     path, _ = repo
-    add(path, "large.bin", noise(64))
+    add(path, "large.bin", noise(4096))
     base = commit(path)
-    add(path, "copy.bin", noise(64))
+    add(path, "copy.bin", noise(4096))
     commit(path)
     exempt = tool.grandfathered(path, base, per_blob=PER)
-    assert exempt == {"large.bin": stored(noise(64))}
+    assert exempt == {"large.bin": stored(noise(4096))}
     blobs = tool.inventory(path, base)
-    failures = tool.violations(blobs, per_blob=PER, total=4 * PER, exempt=exempt)
+    failures = tool.violations(blobs, per_blob=PER, total=1, added=0, exempt=exempt)
     assert len(failures) == 1
     assert "copy.bin" in failures[0]
-    # H4 of #406: a copy of a base blob stores nothing new, so the total is not charged.
+    # H4 of #406: a copy of a base blob stores nothing new, so the pack does not carry it.
     assert [blob.charged for blob in blobs] == [False]
-    assert charge(blobs) == 0
+    assert tool.added_bytes(path, base) < 4096
 
 
 def test_a_base_blob_moved_through_a_new_path_is_judged_where_the_tip_keeps_it(
@@ -298,7 +376,7 @@ def test_a_base_blob_moved_through_a_new_path_is_judged_where_the_tip_keeps_it(
     commit(path)
     (blob,) = tool.inventory(path, base)
     assert (blob.paths, blob.charged) == (("atlas.svg",), False)
-    assert tool.judge(path, base, [blob], tool.Ceilings(per_blob=PER, total=1)) == (
+    assert tool.judge(path, base, [blob], tool.Ceilings(per_blob=PER, total=1), added=0) == (
         {"atlas.svg": stored(noise(64))},
         [],
     )
@@ -308,18 +386,25 @@ def test_unique_storage_is_deduplicated_and_distinct_objects_aggregate(
     repo: tuple[Path, str],
 ) -> None:
     path, base = repo
-    add(path, "one.bin", noise(12))
-    add(path, "same.bin", noise(12))
+    add(path, "one.bin", noise(4096))
+    add(path, "same.bin", noise(4096))
     commit(path)
     blobs = tool.inventory(path, base)
     assert len(blobs) == 1
     assert blobs[0].paths == ("one.bin", "same.bin")
-    assert tool.violations(blobs, per_blob=PER, total=stored(noise(12))) == []
-    add(path, "different.bin", noise(12, 1))
+    # One object, packed once, whatever the number of paths that carry it.
+    once = tool.added_bytes(path, base)
+    assert 4096 <= once < 2 * 4096
+    ceiling = stored(noise(4096))
+    assert tool.violations(blobs, per_blob=ceiling, total=once, added=once) == []
+    add(path, "different.bin", noise(4096, 1))
     commit(path)
-    both = stored(noise(12)) + stored(noise(12, 1))
-    assert charge(tool.inventory(path, base)) == both
-    assert tool.violations(tool.inventory(path, base), per_blob=PER, total=both - 1)
+    both = tool.added_bytes(path, base)
+    assert both >= 2 * 4096
+    blobs = tool.inventory(path, base)
+    assert tool.violations(blobs, per_blob=ceiling, total=both - 1, added=both) == [
+        total_failure(both, both - 1)
+    ]
 
 
 @pytest.mark.parametrize("staged", [False, True])
@@ -336,27 +421,30 @@ def test_shared_history_does_not_hide_distinct_retained_blobs(
     for name in names:
         add(path, name, b"template")
     commit(path)
-    everything = stored(b"template") + sum(map(stored, DISTINCT))
+    template = pack_size(path, base)
     monkeypatch.chdir(path)
     monkeypatch.setattr(
-        tool, "load_ceilings", lambda: tool.Ceilings(per_blob=PER, total=everything - 1)
+        tool, "load_ceilings", lambda: tool.Ceilings(per_blob=PER, total=template)
     )
     arguments = ["--base", base, *(["--staged"] if staged else [])]
-    # Identical retained copies still charge their one object, even at three paths.
+    # Identical retained copies pack their one object once, even at three paths.
     assert tool.main(arguments) == 0
-    assert f"{stored(b'template')} bytes charged" in capsys.readouterr().out
+    assert f"PASS: {template} bytes added as a thin pack" in capsys.readouterr().out
     for name, content in zip(names, DISTINCT, strict=True):
         add(path, name, content)
     if not staged:
         commit(path)
+        everything = pack_size(path, base)
     else:
         # Index membership comes from the index, even if worktree bytes disagree.
         for name in names:
             (path / name).write_bytes(b"template")
+        index = [git(path, "rev-parse", f":{name}") for name in names]
+        everything = pack_size(path, base, "HEAD", *index)
+    assert everything > template
     assert tool.main(arguments) == 1
     output = capsys.readouterr().out
-    assert "REJECT_ADDED_STORAGE" in output
-    assert f"total {everything} bytes as Git stores them, exceeding {everything - 1}" in output
+    assert f"REJECT_ADDED_STORAGE: {total_failure(everything, template)}" in output
 
 
 @pytest.mark.parametrize("ending", ["delete", "revert"])
@@ -367,80 +455,81 @@ def test_versions_the_head_deleted_or_reverted_are_charged(
     path, base = repo
     names = ("one.bin", "two.bin", "three.bin")
     for name in names:
-        add(path, name, b"template")
+        add(path, name, noise(1024))
     commit(path)
-    for name, content in zip(names, DISTINCT, strict=True):
-        add(path, name, content)
+    for seed, name in enumerate(names, start=1):
+        add(path, name, noise(1024, seed))
     commit(path)
     if ending == "delete":
         git(path, "rm", "-q", "--cached", *names)
     else:
         for name in names:
-            add(path, name, b"template")
+            add(path, name, noise(1024))
     commit(path)
     blobs = tool.inventory(path, base)
-    everything = stored(b"template") + sum(map(stored, DISTINCT))
-    assert charge(blobs) == everything
-    assert tool.violations(blobs, per_blob=PER, total=everything) == []
-    assert tool.violations(blobs, per_blob=PER, total=everything - 1) == [
-        (
-            f"the 4 blob versions new to history total {everything} bytes as Git stores them, "
-            f"exceeding {everything - 1}"
-        )
+    assert len(tool._charged(blobs)) == 4  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    everything = tool.added_bytes(path, base)
+    # The template and the three versions the head no longer keeps are all in the pack.
+    assert everything >= 4 * 1024
+    assert everything == pack_size(path, base)
+    ceiling = stored(noise(1024))
+    assert tool.violations(blobs, per_blob=ceiling, total=everything, added=everything) == []
+    assert tool.violations(blobs, per_blob=ceiling, total=everything - 1, added=everything) == [
+        total_failure(everything, everything - 1)
     ]
 
 
 def test_every_new_version_of_one_path_is_charged(repo: tuple[Path, str]) -> None:
     """H2 of #406 (P2): ten versions of one regenerated file are ten stored blobs."""
     path, base = repo
-    versions = [bytes([65 + index]) * 7 for index in range(10)]
+    versions = [noise(512, seed) for seed in range(10)]
     for content in versions:
         add(path, "out.bin", content)
         commit(path)
     blobs = tool.inventory(path, base)
     assert len(blobs) == 10
-    assert charge(blobs) == sum(map(stored, versions))
-    assert tool.violations(blobs, per_blob=PER, total=charge(blobs) - 1)
+    # Noise has no delta against other noise, so each version is in the pack whole.
+    added = tool.added_bytes(path, base)
+    assert added >= 10 * 512
+    assert tool.violations(blobs, per_blob=PER, total=added - 1, added=added)
     # Every version also meets the per-blob ceiling, including the ones no tree keeps.
-    assert len(tool.violations(blobs, per_blob=stored(versions[0]) - 1, total=1024)) == 10
+    over = tool.violations(blobs, per_blob=stored(versions[0]) - 1, total=1, added=0)
+    assert len(over) == 10
 
 
 def test_grandfathered_path_rewrites_are_charged_in_full(repo: tuple[Path, str]) -> None:
     """H2 of #406 (P3): grandfathering lifts the per-blob ceiling, never the total."""
     path, _ = repo
-    add(path, "atlas.svg", noise(64))
+    add(path, "atlas.svg", noise(1024))
     base = commit(path)
-    rewrites = [noise(64, seed) for seed in range(1, 6)]
+    rewrites = [noise(1024, seed) for seed in range(1, 6)]
     for content in rewrites:
         add(path, "atlas.svg", content)
         commit(path)
     blobs = tool.inventory(path, base)
-    rewritten = sum(map(stored, rewrites))
+    rewritten = tool.added_bytes(path, base)
+    assert rewritten >= 5 * 1024
     ceilings = tool.Ceilings(per_blob=PER, total=rewritten)
-    assert tool.judge(path, base, blobs, ceilings) == ({"atlas.svg": stored(noise(64))}, [])
+    assert tool.judge(path, base, blobs, ceilings) == ({"atlas.svg": stored(noise(1024))}, [])
     _, failures = tool.judge(
         path, base, blobs, tool.Ceilings(per_blob=PER, total=rewritten - 1)
     )
-    assert failures == [
-        (
-            f"the 5 blob versions new to history total {rewritten} bytes as Git stores them, "
-            f"exceeding {rewritten - 1}"
-        )
-    ]
+    assert failures == [total_failure(rewritten, rewritten - 1)]
 
 
 def test_retained_membership_uses_the_selected_head(repo: tuple[Path, str]) -> None:
     path, base = repo
     for name in ("one", "two", "three"):
-        add(path, name, b"template")
+        add(path, name, noise(1024))
     shared = commit(path)
-    for name, data in zip(("one", "two", "three"), DISTINCT, strict=True):
-        add(path, name, data)
+    for seed, name in enumerate(("one", "two", "three"), start=1):
+        add(path, name, noise(1024, seed))
     distinct = commit(path)
     git(path, "checkout", "--detach", shared)
-    blobs = tool.inventory(path, base, head=distinct)
-    assert charge(blobs) == stored(b"template") + sum(map(stored, DISTINCT))
-    assert charge(tool.inventory(path, base, head=shared)) == stored(b"template")
+    assert len(tool.inventory(path, base, head=distinct)) == 4
+    assert len(tool.inventory(path, base, head=shared)) == 1
+    assert tool.added_bytes(path, base, head=distinct) >= 4 * 1024
+    assert 1024 <= tool.added_bytes(path, base, head=shared) < 2 * 1024
 
 
 def test_branch_behind_its_base_is_not_charged_for_the_base_newer_files(
@@ -471,15 +560,13 @@ def test_changed_oversize_base_path_is_grandfathered_and_charged_in_full(
     blobs = tool.inventory(path, base)
     exempt = tool.grandfathered(path, base, per_blob=PER)
     assert exempt == {"large.bin": stored(noise(64))}
-    assert tool.violations(blobs, per_blob=PER, total=1024) != []
-    assert tool.violations(blobs, per_blob=PER, total=1024, exempt=exempt) == []
-    assert charge(blobs) == stored(noise(80, 1))
-    assert tool.violations(blobs, per_blob=PER, total=charge(blobs) - 1, exempt=exempt) == [
-        (
-            f"the 1 blob versions new to history total {charge(blobs)} bytes as Git stores "
-            f"them, exceeding {charge(blobs) - 1}"
-        )
-    ]
+    added = tool.added_bytes(path, base)
+    assert added >= 80
+    assert tool.violations(blobs, per_blob=PER, total=added, added=added) != []
+    assert tool.violations(blobs, per_blob=PER, total=added, added=added, exempt=exempt) == []
+    assert tool.violations(
+        blobs, per_blob=PER, total=added - 1, added=added, exempt=exempt
+    ) == [total_failure(added, added - 1)]
 
 
 def test_new_large_path_beside_a_grandfathered_one_is_refused(
@@ -493,7 +580,7 @@ def test_new_large_path_beside_a_grandfathered_one_is_refused(
     commit(path)
     exempt = tool.grandfathered(path, base, per_blob=PER)
     failures = tool.violations(
-        tool.inventory(path, base), per_blob=PER, total=1024, exempt=exempt
+        tool.inventory(path, base), per_blob=PER, total=1, added=0, exempt=exempt
     )
     assert len(failures) == 1
     assert "('new.bin',)" in failures[0]
@@ -528,12 +615,10 @@ def test_shrinking_a_grandfathered_path_offsets_nothing(repo: tuple[Path, str]) 
         add(path, name, content)
     commit(path)
     blobs = tool.inventory(path, base)
-    added = stored(b"s" * 10) + sum(map(stored, DISTINCT))
-    assert charge(blobs) == added
+    added = tool.added_bytes(path, base)
     assert tool.judge(path, base, blobs, tool.Ceilings(per_blob=PER, total=added)) == ({}, [])
     _, failures = tool.judge(path, base, blobs, tool.Ceilings(per_blob=PER, total=added - 1))
-    assert len(failures) == 1
-    assert f"total {added} bytes" in failures[0]
+    assert failures == [total_failure(added, added - 1)]
 
 
 def test_grandfathering_needs_more_than_the_ceiling_at_the_base(
@@ -571,7 +656,7 @@ def test_rename_of_a_grandfathered_path_passes_only_unedited(repo: tuple[Path, s
     add(path, "moved.bin", noise(64)[:-1] + b"y")
     commit(path)
     failures = tool.violations(
-        tool.inventory(path, base), per_blob=PER, total=1024, exempt=exempt
+        tool.inventory(path, base), per_blob=PER, total=1, added=0, exempt=exempt
     )
     assert len(failures) == 1
     assert "('moved.bin',)" in failures[0]
@@ -598,11 +683,16 @@ def test_grandfathered_paths_are_repository_relative_from_a_subdirectory(
 
 def test_staged_mode_catches_new_bytes_before_commit(repo: tuple[Path, str]) -> None:
     path, base = repo
-    add(path, "large.bin", noise(64))
+    add(path, "large.bin", noise(4096))
     assert tool.inventory(path, base) == []
+    # Nothing is committed, so the range packs to nothing until the index joins it.
+    assert tool.added_bytes(path, base) == 0
     staged = tool.inventory(path, base, staged=True)
     assert [blob.charged for blob in staged] == [True]
-    assert tool.violations(staged, per_blob=PER, total=4 * PER)
+    assert tool.violations(staged, per_blob=PER, total=1, added=0)
+    added = tool.added_bytes(path, base, staged=True)
+    assert added >= 4096
+    assert added == pack_size(path, base, "HEAD", git(path, "rev-parse", ":large.bin"))
 
 
 def test_submodule_gitlink_does_not_fetch_or_measure_external_content(
@@ -635,7 +725,7 @@ def test_lfs_pointer_is_refused_whatever_size_it_declares(repo: tuple[Path, str]
         ("external.bin",): True,
         ("notes.md",): False,
     }
-    failures = tool.violations(blobs, per_blob=4096, total=4096)
+    failures = tool.violations(blobs, per_blob=4096, total=4096, added=0)
     assert len(failures) == 1
     assert "Git LFS pointer" in failures[0]
     assert "external.bin" in failures[0]
@@ -745,9 +835,11 @@ def test_one_deadline_bounds_the_whole_check(
     spent = time.monotonic() - 1
     # The verdict alone needs no Git query, and it is still past the deadline.
     with pytest.raises(tool.MetadataError, match="exceeded its 30-second deadline"):
-        tool.judge(path, base, [], ceilings, deadline=spent)
+        tool.judge(path, base, [], ceilings, added=0, deadline=spent)
     with pytest.raises(tool.MetadataError, match="deadline"):
         tool.judge(path, base, blobs, ceilings, deadline=spent)
+    with pytest.raises(tool.MetadataError, match="deadline"):
+        tool.added_bytes(path, base, deadline=spent)
     with pytest.raises(tool.MetadataError, match="deadline"):
         tool.grandfathered(path, base, per_blob=PER, deadline=spent)
     raw = b"".join(
@@ -765,6 +857,10 @@ def test_one_deadline_bounds_the_whole_check(
         seen.append(deadline)
         return blobs
 
+    def record_added(*_arguments: object, deadline: float, **_options: object) -> int:
+        seen.append(deadline)
+        return 0
+
     def record_judge(
         *_arguments: object, deadline: float, **_options: object
     ) -> tuple[dict[str, int], list[str]]:
@@ -772,11 +868,12 @@ def test_one_deadline_bounds_the_whole_check(
         return {}, []
 
     monkeypatch.setattr(tool, "inventory", record_inventory)
+    monkeypatch.setattr(tool, "added_bytes", record_added)
     monkeypatch.setattr(tool, "judge", record_judge)
     started = time.monotonic()
     assert tool.main(["--base", base]) == 0
-    assert len(seen) == 2
-    assert seen[0] == seen[1]
+    assert len(seen) == 3
+    assert seen[0] == seen[1] == seen[2]
     assert started + tool.MAX_SECONDS <= seen[0] <= time.monotonic() + tool.MAX_SECONDS
 
 
@@ -996,18 +1093,18 @@ def test_content_reader_streams_and_refuses_malformed_batch_output() -> None:
 def test_exact_byte_boundaries_and_one_byte_excess() -> None:
     first = tool.Blob("a", 8, ("one",), checkout=8)
     second = tool.Blob("b", 8, ("two",), checkout=8)
-    assert tool.violations([first, second], per_blob=8, total=16) == []
-    assert tool.violations([tool.Blob("a", 9, ("one",), checkout=9)], per_blob=8, total=16)
-    assert tool.violations([first, second], per_blob=8, total=15)
-    # The same object twice is one version, and an uncharged one adds nothing.
-    assert tool.violations([first, first], per_blob=8, total=8) == []
-    assert tool.violations([first, replace_uncharged(second)], per_blob=8, total=8) == []
-
-
-def replace_uncharged(blob: tool.Blob) -> tool.Blob:
-    return tool.Blob(
-        blob.object_id, blob.stored, blob.paths, checkout=blob.checkout, charged=False
+    assert tool.violations([first, second], per_blob=8, total=16, added=16) == []
+    assert tool.violations(
+        [tool.Blob("a", 9, ("one",), checkout=9)], per_blob=8, total=16, added=0
     )
+    assert tool.violations([first, second], per_blob=8, total=16, added=17) == [
+        total_failure(17, 16)
+    ]
+    # The total is the pack alone: the blobs' own sizes neither add to it nor offset it.
+    assert tool.violations([first, second], per_blob=8, total=1, added=1) == []
+    for added in (-1, True, 1.0):
+        with pytest.raises(tool.MetadataError, match="added pack size"):
+            tool.violations([], per_blob=8, total=8, added=cast("int", added))
 
 
 def test_ceilings_are_the_reviewed_policy_file() -> None:
@@ -1040,7 +1137,7 @@ def test_a_malformed_policy_file_refuses_rather_than_defaults(
 
 def test_boolean_limits_are_not_numeric_ceilings() -> None:
     with pytest.raises(tool.MetadataError, match="integers"):
-        tool.violations([], per_blob=True, total=1)
+        tool.violations([], per_blob=True, total=1, added=0)
 
 
 def test_failed_metadata_cli_never_reports_pass(
@@ -1119,9 +1216,11 @@ def test_production_grandfathering_reports_and_passes_through_the_cli(
     output = capsys.readouterr().out
     assert "GRANDFATHERED:" in output
     assert "('atlas.svg',)" in output
+    added = pack_size(path, base)
+    assert len(rewrite) <= added < ceilings.total
     assert (
-        f"PASS: 1 unique checked blobs, {stored(rewrite)} bytes charged as Git stores them "
-        f"for 1 new versions ({len(rewrite)} bytes in a checkout)"
+        f"PASS: {added} bytes added as a thin pack; 1 unique checked blobs, 1 new versions "
+        f"({len(rewrite)} bytes in a checkout)"
     ) in output
 
 
@@ -1161,8 +1260,13 @@ def test_census_replays_merges_with_their_verdicts(
     ]
     tool.print_census(rows, "main", ceilings)
     output = capsys.readouterr().out
-    assert f"{passed[:9]} #8 pass: 1 blobs, 0.00 MiB charged for 1 new versions" in output
-    assert f"{rejected[:9]} #7 REJECT: 1 blobs" in output
+    assert (
+        f"{passed[:9]} #8 pass: 0.00 MiB added as a thin pack; 1 blobs checked, 1 new versions"
+    ) in output
+    assert [row.added for row in rows] == [
+        pack_size(path, f"{merge}^1", f"{merge}^2") for merge in (passed, rejected)
+    ]
+    assert f"{rejected[:9]} #7 REJECT: 0.00 MiB added as a thin pack; 1 blobs checked" in output
     assert (
         "SUMMARY: 1 of 2 merges rejected, 0 of them by the total alone; 0 guard refusals; "
         f"largest passing total 0.00 MiB ({passed[:9]} #8)"

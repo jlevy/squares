@@ -4,18 +4,25 @@
 # sees as one. The guard reads this file from the tree it checks; a missing or malformed
 # file refuses the check rather than falling back to a default.
 #
-# Both ceilings are in OR-18's unit, a blob as Git stores it: its object compressed by
-# zlib at the default level (`devtools.git_storage.stored_size`). A set is the sum of its
-# blobs.
+# Both ceilings are in OR-18's units. A blob counts as Git stores it: its object
+# compressed by zlib at the default level (`devtools.git_storage.stored_size`). A set
+# counts as what it adds to the repository: the thin pack of its new objects against the
+# base, deltas included (`git pack-objects --revs --thin`).
 #
 # per_blob_bytes applies to every blob version a branch adds, deleted ones included; a
 # path already over it at the pull request's base is grandfathered. 5 MiB is OR-18's
 # "a retained binary or dump of more than a few megabytes".
 #
-# total_bytes applies to the sum over every distinct blob version new to history, which
-# is what a merge commit keeps: versions the head deleted or reverted, each edit of one
-# path and a grandfathered path's rewrites all count, and an object counts once. 48 MiB
-# is OR-18's "a set of them totalling tens of megabytes".
+# total_bytes applies to that pack: every commit, tree and blob version new to history,
+# which is what a fetch downloads and a merge commit keeps. Versions the head deleted or
+# reverted, each edit of one path and a grandfathered path's rewrites are all in it, but
+# a version close to another packs as a delta, so a register rewritten many times costs
+# about its edits. 48 MiB is OR-18's "a set of them totalling tens of megabytes".
+#
+# Until 2026-10-22 the total was the sum of each new version's own stored size, and the
+# censuses below up to that date are in that unit. That day the set's unit was corrected
+# to the pack, in #406: summed, #578's 48 merges of main came to 59.17 MiB of rewritten
+# registers, against a 2.4 MiB pack. Neither ceiling's value changed.
 #
 # Both values were set on 2026-10-11 in checkout bytes and are unchanged. Measured again
 # on 2026-10-20 in this unit (review H of #406), `--census 411` over every first-parent
@@ -28,14 +35,23 @@
 # refuse those four is the owner's decision on #406.
 #
 # Measured again on 2026-10-22, `--census 150` at main 76496462b, back to #426 on
-# 2026-10-07, refuses three: #461 (three certificates over the per-blob ceiling), #474
-# (the posters) and #578, the contributor profiles, by the total alone at 59.17 MiB. None
+# 2026-10-07, refuses three: #461 (six blobs over the per-blob ceiling, three
+# certificates and their replays), #474 (the posters) and #578, the contributor
+# profiles, by the total alone at 59.17 MiB. None
 # of #578's 2,150 versions is over 0.36 MiB as stored; its total is the shared registers
 # rewritten by its 48 merges of main, among them 30 versions of SYNOPSIS.md (7.35 MiB),
 # 19 of frontier/evidence.yaml (6.25) and 20 of frontier/results.yaml (5.80). Every
 # intake merge in the window passes, at most #704's 17.73 MiB; the last 40 merges, back
 # to #679, refuse only #578 and pass at most #687's 28.96 MiB. Whether the total should
 # refuse a long-lived branch for that churn is the owner's decision as well.
+#
+# The same census in the pack unit, the same day, refuses one: #461, on its six blobs
+# over the per-blob ceiling, though its pack, 25.38 MiB, is under the total. #578 packs
+# to 2.39 MiB and #474 to 45.41 MiB, the largest pass; #704, the largest intake merge in
+# the sum, packs to 0.54 MiB. The census took 214.4 s on a shared 4-CPU host. Of the
+# older poster merges the 2026-10-20 census refused by the total, #249 packs to 14.90 MiB,
+# #262 to 7.90 and #248 to 17.41, so none of the five merges put to the owner on the
+# total is refused by it now.
 #
 # Re-measure before changing either, from `packing/`:
 #   uv run --frozen --all-extras --group dev python -m devtools.check_added_blobs --census 40

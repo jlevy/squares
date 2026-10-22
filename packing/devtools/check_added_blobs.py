@@ -3,20 +3,26 @@
 Git object IDs identify storage being measured here; they never identify scientific
 inputs or decide research verdicts. Existing unchanged base history is grandfathered.
 
-Sizes are OR-18's: a blob counts as Git stores it, its object compressed by zlib at the
-default level (`devtools.git_storage`), and a set counts as the sum of its blobs. The two
-ceilings are data, in devtools/added-blobs.yaml, so changing one is a visible policy diff.
-Against them the guard checks:
+Sizes are OR-18's. A blob counts as Git stores it, its object compressed by zlib at the
+default level (`devtools.git_storage`). A set counts as what it adds to the repository:
+the thin pack of its new objects against the base, deltas included, which is what a fetch
+of the branch downloads and what history keeps. The two ceilings are data, in
+devtools/added-blobs.yaml, so changing one is a visible policy diff. Against them the
+guard checks:
 
   per blob  every blob version new to history, plus tip or index additions that copy a
             base blob or restore one from older base history. A path whose blob at
             BASE is already over the per-blob ceiling is grandfathered: changing it is
             the status quo, not added bulk data. A new path, a copy or an edited
             rename is not.
-  in total  the sum over every distinct blob version new to history, which is what a
-            merge commit keeps: versions the head deleted or reverted, each version of
-            a path edited many times and a grandfathered path's rewrites all count. An
-            object counts once however many paths or commits carry it.
+  in total  the bytes of `git pack-objects --revs --thin` over the objects new to
+            history, commits and trees included, with the index's additions in
+            --staged mode. Versions the head deleted or reverted, each version of a
+            path edited many times and a grandfathered path's rewrites are all in it,
+            but a version that differs a little from another is a small delta, so
+            rewriting a large text register many times costs about its edits. Until
+            2026-10-22 the total was the sum of each new version's own stored size,
+            which charged #578's register churn 59.17 MiB against a 2.43 MiB pack.
   LFS       a Git LFS pointer is refused: this repository does not use LFS, and a
             pointer would carry bulk data past the gate.
 
@@ -29,9 +35,13 @@ the merge base of BASE and HEAD, so a branch behind its base is not charged for 
 base's newer files.
 
 Sizing a version means compressing its content, so each checked blob is streamed through
-zlib once and never held whole, and one check reads at most MAX_CONTENT_BYTES of it. One
-deadline, MAX_SECONDS, bounds the whole check, parsing included, and each metadata query
-also has its own, MAX_QUERY_SECONDS.
+zlib once and never held whole, and one check reads at most MAX_CONTENT_BYTES of it. The
+pack is streamed too and only counted. Git reuses the deltas its object store already
+holds, so the total can differ a little between clones packed differently: on #578 the
+pack is 2.43 MiB with this repository's deltas and 1.81 MiB with every delta recomputed,
+which matters only near the ceiling. One deadline, MAX_SECONDS, bounds the whole check,
+parsing and packing included, and each metadata query also has its own,
+MAX_QUERY_SECONDS.
 
 Exit 0 is PASS and 1 is REJECT_ADDED_STORAGE. Exit 2 is GUARD_REFUSED, never a pass: a
 base this clone lacks (fetch it; a force-pushed base clears when the pull request
@@ -70,13 +80,25 @@ from sqpack.yamlio import load_yaml
 POLICY = Path(__file__).with_name("added-blobs.yaml")
 MAX_METADATA_BYTES = 64 * 1024**2
 METADATA_READ_BYTES = 64 * 1024
-# Blob content one check reads and compresses. Every merge into main to 2026-10-20 is
-# under it, the largest being #461 at 446 MiB, which took 15 s on a shared 4-CPU host.
+# Blob content one check reads and compresses. Every merge into main to 2026-10-22 is
+# under it, the largest being #461 at 446 MiB, which took 18 s with its pack on a shared
+# 4-CPU host.
 MAX_CONTENT_BYTES = 512 * 1024**2
 MAX_SECONDS = 30
 MAX_QUERY_SECONDS = 10
 # How many parsed entries pass between deadline checks.
 DEADLINE_STRIDE = 4096
+# Git's own defaults for the pack that sizes the total, pinned so that a local
+# configuration cannot move the measure; bitmaps and the sparse walk are off so the
+# object set is exactly rev-list's.
+PACK_CONFIG = (
+    "core.compression=-1",
+    "pack.compression=-1",
+    "core.bigFileThreshold=512m",
+    "pack.window=10",
+    "pack.depth=50",
+    "pack.useBitmaps=false",
+)
 # The LFS specification keeps pointers small; git-lfs never reads a larger blob as one.
 LFS_POINTER_BYTES = 1024
 LFS_POINTER_PREFIXES = (
@@ -144,6 +166,7 @@ class CensusRow:
     failures: tuple[str, ...] = ()
     refusal: str = ""
     seconds: float = 0.0
+    added: int = 0
 
 
 def _mib(value: float) -> str:
@@ -533,18 +556,18 @@ def _measure(
     return reader.finish()
 
 
-def inventory(
-    repo: Path,
-    base: str,
-    *,
-    head: str = "HEAD",
-    staged: bool = False,
-    deadline: float | None = None,
-) -> list[Blob]:
-    """Every blob version the branch adds to history, and every tip or index addition."""
+class Range(NamedTuple):
+    """A check's base and head commits, and the blobs the tip or index adds by path."""
+
+    start: str
+    end: str
+    tip: dict[bytes, set[str]]
+
+
+def _range(repo: Path, base: str, head: str, *, staged: bool, deadline: float) -> Range:
+    """Resolve the range a check measures, refusing shallow history and missing commits."""
     if staged and head != "HEAD":
         raise MetadataError("staged mode uses the current HEAD/index")
-    deadline = _deadline() if deadline is None else deadline
     if (
         _git(repo, "rev-parse", "--is-shallow-repository", deadline=deadline).strip()
         != b"false"
@@ -564,6 +587,20 @@ def inventory(
         if change.mode == b"160000" or _null(change.after) or change.before == change.after:
             continue
         tip.setdefault(change.after, set()).add(change.path)
+    return Range(start, end, tip)
+
+
+def inventory(
+    repo: Path,
+    base: str,
+    *,
+    head: str = "HEAD",
+    staged: bool = False,
+    deadline: float | None = None,
+) -> list[Blob]:
+    """Every blob version the branch adds to history, and every tip or index addition."""
+    deadline = _deadline() if deadline is None else deadline
+    start, end, tip = _range(repo, base, head, staged=staged, deadline=deadline)
     # New to history: reachable from HEAD, or the index's additions given on stdin, and
     # from neither BASE's tree nor an edge's. Edge commits print with a leading "-".
     new: set[bytes] = set()
@@ -631,6 +668,54 @@ def inventory(
     ]
     _within(deadline)
     return blobs
+
+
+def added_bytes(
+    repo: Path,
+    base: str,
+    *,
+    head: str = "HEAD",
+    staged: bool = False,
+    deadline: float | None = None,
+) -> int:
+    """What the branch adds to the repository: the thin pack of its new objects.
+
+    `git pack-objects --revs --thin --shallow` packs every commit, tree and blob reachable
+    from HEAD and from none of BASE's trees or the trees where the branch meets BASE's
+    history (the same reading as `inventory`), with deltas against each other and
+    against those trees' objects. In --staged mode the index's additions join it; one
+    that BASE already stores adds nothing. The pack is counted as it streams and never
+    held; an empty range packs to nothing and counts 0.
+    """
+    deadline = _deadline() if deadline is None else deadline
+    start, end, tip = _range(repo, base, head, staged=staged, deadline=deadline)
+    revisions = [end.encode("ascii"), b"^" + start.encode("ascii")]
+    if staged:
+        revisions.extend(sorted(tip))
+    counted = [0]
+
+    def count(chunk: bytes) -> None:
+        counted[0] += len(chunk)
+
+    configuration = [option for setting in PACK_CONFIG for option in ("-c", setting)]
+    _git(
+        repo,
+        *configuration,
+        "pack-objects",
+        "--revs",
+        "--thin",
+        "--shallow",
+        "--no-sparse",
+        "--delta-base-offset",
+        "--non-empty",
+        "--stdout",
+        "-q",
+        deadline=deadline,
+        data=b"".join(revision + b"\n" for revision in revisions),
+        sink=count,
+    )
+    _within(deadline)
+    return counted[0]
 
 
 def grandfathered(
@@ -705,17 +790,8 @@ def _exempt(blob: Blob, per_blob: int, exempt: Mapping[str, int]) -> bool:
 
 
 def _charged(blobs: Sequence[Blob]) -> dict[str, Blob]:
+    """The checked blob versions that are new to history, each object once."""
     return {blob.object_id: blob for blob in blobs if blob.charged}
-
-
-def charged_bytes(blobs: Sequence[Blob]) -> int:
-    """The total: every distinct blob version new to history, as Git stores it.
-
-    That is what a merge commit keeps whatever the head retains, so a version the head
-    deleted or reverted, each edit of one path and a grandfathered path's rewrites all
-    count; the same object counts once.
-    """
-    return sum(blob.stored for blob in _charged(blobs).values())
 
 
 def violations(
@@ -723,10 +799,14 @@ def violations(
     *,
     per_blob: int,
     total: int,
+    added: int,
     exempt: Mapping[str, int] | None = None,
 ) -> list[str]:
+    """The per-blob and LFS failures of `blobs`, and the total's for `added` pack bytes."""
     if type(per_blob) is not int or type(total) is not int or min(per_blob, total) <= 0:
         raise MetadataError("byte ceilings must be positive integers")
+    if type(added) is not int or added < 0:
+        raise MetadataError("the added pack size must be a nonnegative integer")
     if any(
         type(size) is not int or size < 0
         for blob in blobs
@@ -746,11 +826,10 @@ def violations(
         for blob in blobs
         if blob.lfs_pointer
     )
-    amount = charged_bytes(blobs)
-    if amount > total:
+    if added > total:
         failures.append(
-            f"the {len(_charged(blobs))} blob versions new to history total {amount} bytes "
-            f"as Git stores them, exceeding {total}"
+            f"the range adds {added} bytes to the repository, as a thin pack of its new "
+            f"objects against the base, exceeding {total}"
         )
     return failures
 
@@ -761,14 +840,20 @@ def judge(
     blobs: Sequence[Blob],
     ceilings: Ceilings,
     *,
+    head: str = "HEAD",
+    staged: bool = False,
+    added: int | None = None,
     deadline: float | None = None,
 ) -> tuple[dict[str, int], list[str]]:
     """The failures, with the paths grandfathered at `base` exempted.
 
     Grandfathering only ever removes a per-blob failure, so the base tree is listed only
     for a blob over that ceiling, and only that blob's paths are measured at the base.
+    The total is judged on `added`, the range's thin pack, measured here when not given.
     """
     deadline = _deadline() if deadline is None else deadline
+    if added is None:
+        added = added_bytes(repo, base, head=head, staged=staged, deadline=deadline)
     over = sorted(
         {path for blob in blobs if blob.stored > ceilings.per_blob for path in blob.paths}
     )
@@ -778,7 +863,7 @@ def judge(
         else {}
     )
     failures = violations(
-        blobs, per_blob=ceilings.per_blob, total=ceilings.total, exempt=exempt
+        blobs, per_blob=ceilings.per_blob, total=ceilings.total, added=added, exempt=exempt
     )
     _within(deadline)
     return exempt, failures
@@ -814,7 +899,10 @@ def census(repo: Path, ref: str, count: int, *, ceilings: Ceilings) -> list[Cens
         first, second = parents.split()
         try:
             blobs = inventory(repo, first, head=second, deadline=replay)
-            exempt, failures = judge(repo, first, blobs, ceilings, deadline=replay)
+            added = added_bytes(repo, first, head=second, deadline=replay)
+            exempt, failures = judge(
+                repo, first, blobs, ceilings, head=second, added=added, deadline=replay
+            )
         except MetadataError as error:
             rows.append(replace(row, refusal=str(error), seconds=time.monotonic() - started))
             continue
@@ -825,6 +913,7 @@ def census(repo: Path, ref: str, count: int, *, ceilings: Ceilings) -> list[Cens
                 exempt=tuple(sorted(exempt.items())),
                 failures=tuple(failures),
                 seconds=time.monotonic() - started,
+                added=added,
             )
         )
     return rows
@@ -838,7 +927,7 @@ def _label(row: CensusRow) -> str:
 def print_census(rows: Sequence[CensusRow], ref: str, ceilings: Ceilings) -> None:
     print(
         f"CENSUS: {len(rows)} first-parent merges into {ref}; ceilings "
-        f"{ceilings.per_blob}/blob and {ceilings.total} total, as Git stores them"
+        f"{ceilings.per_blob}/blob as Git stores it and {ceilings.total} total as a thin pack"
     )
     for row in rows:
         label = _label(row)
@@ -849,8 +938,9 @@ def print_census(rows: Sequence[CensusRow], ref: str, ceilings: Ceilings) -> Non
         charged = _charged(row.blobs)
         largest = max(row.blobs, key=lambda blob: blob.stored, default=None)
         detail = (
-            f"{len(row.blobs)} blobs, {_mib(charged_bytes(row.blobs))} charged for "
-            f"{len(charged)} new versions "
+            f"{_mib(row.added)} added as a thin pack; {len(row.blobs)} blobs checked, "
+            f"{len(charged)} new versions, "
+            f"{_mib(sum(blob.stored for blob in charged.values()))} summed as stored "
             f"({_mib(sum(blob.checkout for blob in charged.values()))} in a checkout)"
         )
         if largest is not None:
@@ -880,13 +970,12 @@ def print_census(rows: Sequence[CensusRow], ref: str, ceilings: Ceilings) -> Non
     )
     refused = sum(1 for row in rows if row.refusal)
     passed = [row for row in rows if not row.refusal and not row.failures]
-    largest_pass = max(passed, key=lambda row: charged_bytes(row.blobs), default=None)
+    largest_pass = max(passed, key=lambda row: row.added, default=None)
     print(
         f"SUMMARY: {len(rejected)} of {len(rows)} merges rejected, {aggregate_only} of them "
         f"by the total alone; {refused} guard refusals; "
         + (
-            f"largest passing total {_mib(charged_bytes(largest_pass.blobs))} "
-            f"({_label(largest_pass)}); "
+            f"largest passing total {_mib(largest_pass.added)} ({_label(largest_pass)}); "
             if largest_pass is not None
             else ""
         )
@@ -932,12 +1021,18 @@ def main(argv: Sequence[str] | None = None) -> int:
             rows = census(Path.cwd(), args.census_ref, args.census, ceilings=ceilings)
             print_census(rows, args.census_ref, ceilings)
             return 0
-        # One deadline for the whole check: inventory, grandfathering and the verdict.
+        # One deadline for the whole check: inventory, the pack, grandfathering and the
+        # verdict.
         deadline = _deadline()
         blobs = inventory(
             Path.cwd(), args.base, head=args.head, staged=args.staged, deadline=deadline
         )
-        exempt, failures = judge(Path.cwd(), args.base, blobs, ceilings, deadline=deadline)
+        added = added_bytes(
+            Path.cwd(), args.base, head=args.head, staged=args.staged, deadline=deadline
+        )
+        exempt, failures = judge(
+            Path.cwd(), args.base, blobs, ceilings, added=added, deadline=deadline
+        )
     except MetadataError as error:
         print(f"GUARD_REFUSED: {error}", file=sys.stderr)
         return 2
@@ -954,10 +1049,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 1
     charged = _charged(blobs)
     print(
-        f"PASS: {len(blobs)} unique checked blobs, {charged_bytes(blobs)} bytes charged as "
-        f"Git stores them for {len(charged)} new versions "
+        f"PASS: {added} bytes added as a thin pack; {len(blobs)} unique checked blobs, "
+        f"{len(charged)} new versions "
         f"({sum(blob.checkout for blob in charged.values())} bytes in a checkout); "
-        f"ceilings {ceilings.per_blob}/blob and {ceilings.total} total"
+        f"ceilings {ceilings.per_blob}/blob as Git stores it and {ceilings.total} total"
     )
     return 0
 
