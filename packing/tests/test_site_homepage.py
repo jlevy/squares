@@ -175,6 +175,7 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
         assert [heading["id"] for heading in state["headings"]] == [
             "the-problem",
             "the-atlas-of-square-packings",
+            "recently-added",
             "news",
             "recent-results",
             "profiles",
