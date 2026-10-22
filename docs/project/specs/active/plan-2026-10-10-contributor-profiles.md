@@ -47,8 +47,10 @@ The proposed profile release remains `v0.9.0`; the profile-link explainer patch 
 `v0.4.16`, after upstream’s `v0.4.15`. The historical registrations add authored
 Results, not current Records.
 Beyond-horizon rows without registered result IDs do not inflate either tally.
-The complete preview of `b3646ac72` is built and audited; final integrated gate and
-hosted acceptance remain pending.
+Implementation is complete at the validated K1 checkpoint `9939b62a7`, with the normal
+website preview rebuilt and audited.
+PR #578 and `think-18ic` maintain the authoritative final-head review, CI and merge
+receipt; this plan does not assert final hosted acceptance or a completed merge.
 Earlier dated receipts below are historical, including their counts, environments and
 preview ports.
 
@@ -123,31 +125,43 @@ and [attribution policy](../../../../attribution.md) own these rules.
 ### Current Preview and Validation
 
 The current preview is <http://127.0.0.1:8790/profiles/index.html>, served from
-`/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-final-b3646ac72`. The
-normal complete build of `b3646ac72` includes the site, atlas, all 228 registered result
-pages, 324 case pages, 75 profiles and all four paper PDFs.
+`/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-final-9939b62a7`. The
+normal website build of `9939b62a7` includes all 228 registered result pages, 324 case
+pages and 75 profiles.
 The directory summary is 75 people, 112 supported current Records, 217 primary Results,
 714 Credits and 47 unique linked resources.
-The classifier has 114 current registered results overall; the directory counts only
-those with a profiled primary author.
+The classifier has 114 current registered results overall; only those with a profiled
+primary author count in the directory.
 All 7,333 publication checks pass.
-The profile audit covers 696 HTML pages with zero broken destinations and zero label
-mismatches. The four PDFs contain 50 valid profile annotations and retain every profile
-target from the preceding accepted build; their front pages and explicit credit footnote
-were visually checked.
-Twenty HTTP routes match the completed build bytes, and all 566 shared immutable assets
-referenced by the HTML pages are served whole.
+The profile audit covers 696 HTML pages with zero broken destinations or label
+mismatches. Twenty-three HTTP routes match build bytes, and all 566 shared immutable
+assets referenced by the HTML pages are served whole.
+All four PDFs retain the accepted `b3646ac72` bytes after confirming unchanged declared
+paper inputs; that build’s visual checks and 50 valid profile annotations remain
+applicable.
 
-Thirteen focused resource, directory, browser and Results-asset checks pass, together
-with 26 shared-sorter Node tests.
-The source-built T-037 and T-226 through T-228 rendering checks pass at desktop and
-mobile widths in both themes; their maximum measured layout shift is 0.001995.
-Independent Astra review accepted the final UI and assertion corrections without an
-actionable finding. The combined gate passed 68 of 69 steps: the behavioral run had
-19,958 passing tests and three obsolete presentation expectations.
-Those three assertions were corrected and passed in 42.29 seconds at `14340216b`. The
-final narrow push gate, worker-pool check and hosted checks remain pending; these
-focused and output receipts do not establish final acceptance.
+K1 is corrected in `9939b62a7`: the corporate BuddenPing/squares card and filter retain
+T-174 and T-195 at S1; square-packing-certificates retains nine results, three each at
+S3, S2 and S1. No person profile is invented.
+Card totals, significance ranking and project-filter memberships agree.
+The 49 homepage resource cards and all 75 profile resource grids use the shared order.
+[Review K](https://github.com/jlevy/squares/pull/578#pullrequestreview-5610640379)
+established K1;
+[Review L](https://github.com/jlevy/squares/pull/578#pullrequestreview-5610930767)
+independently verified the fix and reported only L1, a Low contributor-README
+correction. L1 and the ink-only headroom-test portability correction (`think-q0pu`) are
+tracked review follow-ups, not an incomplete feature implementation phase.
+
+The local selected gate passed 27/27 steps in 1,041.16 seconds: 11,803 normal tests
+passed, 61 skipped and one expected failure; all 14 pool-heavy tests passed.
+Retained presentation checks passed: 13 resource, directory, browser and Results-asset
+checks and 26 shared-sorter Node tests.
+PR #578 and `think-18ic` maintain the authoritative final correction head’s review
+findings, dispositions, hosted qualification, security/performance reviews and merge
+receipt. The owner authorizes merge after final checks and reviews clear.
+The normal merge to main runs the existing publication workflow; no separate manual
+deployment is required.
+These checkpoint receipts do not assert acceptance of a later head or a completed merge.
 
 ### Earlier Integration Receipts
 
@@ -247,9 +261,9 @@ including numeric totals, keyboard controls, announced sort state and missing va
 last in either direction; native links and surname order remain without JavaScript.
 `think-33rl` gives Results one plain page title and distinct plain section headings,
 retaining inbound anchors and moving navigation into adjacent prose.
-The Overview Profiles invitation precedes Report Your Results (`think-17fv`). The five
-profile-presentation beads and Results-heading bead await the coordinator’s combined
-validation receipt before closure.
+The Overview Profiles invitation precedes Report Your Results (`think-17fv`).
+Presentation implementation is complete; PR #578 and `think-18ic` maintain final review
+dispositions, current-head CI and merge acceptance.
 
 ## Remaining Integration Phases
 
@@ -257,9 +271,9 @@ validation receipt before closure.
 | --- | --- | --- | --- |
 | Attribution correction | Disjoint primary results and non-primary credits, significance tallies, original-work activity years; all-profile regression and independent review | `think-94ky`, `think-gjxb`, `think-sb9n` | Implemented and independently reviewed; complete preview rebuilt and audited |
 | Coverage completion | Every existing profile’s evidenced work reconciled; significant-result authors and PDF credits audited; missing joins, profiles and result records explicitly distinguished | `think-uwd6`, `think-m7il` | Bounded 75-profile evidence batch implemented; full archive inspection remains open |
-| Contract and plan reconciliation | Document canonical references, semantic checks and update procedure; reconcile current requirements and historical receipts | `think-noql`, `think-cq58` | Current contracts and receipts reconciled; final acceptance receipt pending |
-| Website acceptance | Rebuild all affected pages, verify table/card/link destinations and responsive presentation, run integrated gates | `think-zpfo`, presentation beads above | Complete preview audited; focused UI checks pass; final narrow gate, worker-pool and hosted checks pending |
-| Review handoff | Commit, integrate latest main/PR head, push PR #578, wait for hosted checks and publish final receipts | `think-zpfo` | Local integration committed; final review, validation, push and hosted acceptance pending; merge authorized once ready, deployment separate |
+| Contract and plan reconciliation | Document canonical references, semantic checks and update procedure; reconcile current requirements and historical receipts | `think-noql`, `think-cq58` | Source contracts reconciled; final-head acceptance maintained in PR #578 and `think-18ic` |
+| Website acceptance | Rebuild all affected pages, verify table/card/link destinations and responsive presentation, run integrated gates | `think-zpfo`, presentation beads above | Implementation and preview complete; local selected gate 27/27 and pool 14/14 pass; final-head qualification maintained in PR #578 and `think-18ic` |
+| Review handoff | Commit, integrate latest main/PR head, push PR #578, wait for hosted checks and publish final receipts | `think-18ic` | Final findings and review/CI receipt maintained in PR #578; merge authorized once ready; existing publication workflow runs on main merge |
 
 The implementation phases below describe the original delivery sequence.
 Dated review and handoff sections preserve their historical evidence; this section and
