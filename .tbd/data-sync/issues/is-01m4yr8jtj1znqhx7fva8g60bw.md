@@ -5,16 +5,18 @@ title: "Import Francisco Couzo: 4e4c8ce beyond-horizon index, 341 counts 325-102
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: coord-intake-1021b
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
+child_order_hints:
+  - is-01m5h5w4d59h67ckp28qgzbere
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:04:02.641Z
-updated_at: 2026-10-22T02:18:25.638Z
+updated_at: 2026-10-22T06:48:14.501Z
 started_at: 2026-10-22T02:18:23.107Z
 ---
 Stage 1 triage, read-only, by the 15 October reads lane (think-mq0k), from the 02:30Z sweep at main 6964362b5. No issue reports any of it.
