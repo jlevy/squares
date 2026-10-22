@@ -27,6 +27,16 @@
 # merges, back to #630, all pass, at most #676's 25.00 MiB. Whether the total should
 # refuse those four is the owner's decision on #406.
 #
+# Measured again on 2026-10-22, `--census 150` at main 76496462b, back to #426 on
+# 2026-10-07, refuses three: #461 (three certificates over the per-blob ceiling), #474
+# (the posters) and #578, the contributor profiles, by the total alone at 59.17 MiB. None
+# of #578's 2,150 versions is over 0.36 MiB as stored; its total is the shared registers
+# rewritten by its 48 merges of main, among them 30 versions of SYNOPSIS.md (7.35 MiB),
+# 19 of frontier/evidence.yaml (6.25) and 20 of frontier/results.yaml (5.80). Every
+# intake merge in the window passes, at most #704's 17.73 MiB; the last 40 merges, back
+# to #679, refuse only #578 and pass at most #687's 28.96 MiB. Whether the total should
+# refuse a long-lived branch for that churn is the owner's decision as well.
+#
 # Re-measure before changing either, from `packing/`:
 #   uv run --frozen --all-extras --group dev python -m devtools.check_added_blobs --census 40
 # (all 411 merges took 308 s on a shared 4-CPU host).
