@@ -7459,6 +7459,7 @@ def test_recent_results_and_archive_have_separate_substantive_content(
         result.id.lower() for result in overview.results
     )
     assert "data-site-table" not in recent_results
+    assert _asset_tag(render_overview.RESULTS_CSS, "recent-results.html") in recent_results
     assert 'class="site-rollup site-added"' in recent_results
     assert 'class="site-rollup"' in recent_results
     row_links = re.findall(r'href="results\.html#(t-\d+)"', recent_results)

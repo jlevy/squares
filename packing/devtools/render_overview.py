@@ -1580,6 +1580,7 @@ def recent_results_page() -> Page:
         description=RECENT_RESULTS_META.description,
         toc=False,
         rewrite_body=_authored_profile_links,
+        page_styles=(RESULTS_CSS,),
         page_scripts=(POPOVER_SCRIPT,),
     )
 

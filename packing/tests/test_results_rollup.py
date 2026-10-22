@@ -105,6 +105,11 @@ def results() -> str:
 
 
 @pytest.fixture(scope="module")
+def archive() -> str:
+    return site_renders.html(render_overview.RESULTS_PAGE)
+
+
+@pytest.fixture(scope="module")
 def overview() -> overview_data.Overview:
     return site_renders.overview()
 
@@ -301,7 +306,7 @@ def _assert_finder(
 
 
 def test_a_day_entry_says_what_the_row_says(
-    added: str, results: str, overview: overview_data.Overview
+    added: str, archive: str, overview: overview_data.Overview
 ) -> None:
     """Each entry's id leads to its own row; its headline is the register's, its cases
     the row's (or how many and the ends of a long list), its rungs and score the
@@ -330,7 +335,7 @@ def test_a_day_entry_says_what_the_row_says(
             result = by_id[anchor]
             record = result.record
             assert label.lower() == anchor
-            assert f'<tr id="{anchor}"' in results
+            assert f'<tr id="{anchor}"' in archive
             expected_headline = profile_links.link_prose(
                 html.escape(overview_sections.plain_text(result.summary), quote=False)
             )
@@ -352,7 +357,7 @@ def test_a_day_entry_says_what_the_row_says(
 
 
 def test_each_day_and_the_heading_open_the_table_on_their_rows(
-    added: str, results: str
+    added: str, archive: str
 ) -> None:
     """A day's link opens the table on that day alone, `?added=2026-10-12`, which the
     bar's preset-only Added on control offers, every day anything reached the site among
@@ -360,14 +365,14 @@ def test_each_day_and_the_heading_open_the_table_on_their_rows(
     which the preset-only Added since control takes; and the visible Added within control
     takes an age of arrival, `?added-age=1`."""
     days = DAY.findall(added)
-    bar = results.split('<div class="site-table-tools site-result-filters">', 1)[1]
+    bar = archive.split('<div class="site-table-tools site-result-filters">', 1)[1]
     bar = bar.split("</div>", 1)[0]
     on = re.search(
         r'<label hidden>Added on <select data-filter="added" data-preset>(.*?)</select>', bar
     )
     assert on
     offered = re.findall(r'<option value="([^"]*)"(?: selected)?>([^<]*)</option>', on[1])
-    taken = sorted(set(re.findall(r'data-added="([^"]+)"', results)), reverse=True)
+    taken = sorted(set(re.findall(r'data-added="([^"]+)"', archive)), reverse=True)
     assert offered == [
         ("", "All"),
         *((day, overview_sections.day_label(date.fromisoformat(day))) for day in taken),
@@ -441,13 +446,13 @@ def test_every_result_at_the_floor_since_the_rollup_begins_is_in_one_section_or_
             assert result.id.lower() in in_days | in_weeks, result.id
 
 
-def test_every_id_leads_to_its_own_row_on_this_page(rollup: str, results: str) -> None:
-    """An id's link is the fragment of its row in the table below, and names it."""
+def test_every_id_leads_to_its_own_archive_row(rollup: str, archive: str) -> None:
+    """Each rollup identifier names its canonical row on the Results Archive page."""
     links = ID_LINK.findall(rollup)
     assert links
     for anchor, _, label, _, _, _ in links:
         assert anchor == label.lower()
-        assert f'<tr id="{anchor}"' in results
+        assert f'<tr id="{anchor}"' in archive
 
 
 def test_a_line_credits_its_finder_and_links_the_project_holding_most_of_it(
