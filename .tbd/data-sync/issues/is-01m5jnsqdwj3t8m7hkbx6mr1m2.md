@@ -5,7 +5,7 @@ title: Inventory site hierarchy and plan intuitive navigation menus
 kind: task
 status: in_progress
 priority: 2
-version: 17
+version: 18
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
 delegate: navigation-planner
 labels: []
@@ -23,10 +23,11 @@ child_order_hints:
   - is-01m5jxkb9be0mqtaf9g2136t09
   - is-01m5jzm40218cv1bv0z37gg25h
   - is-01m5jzpg6q6mjmf5zff98wga9e
+  - is-01m5jzz6zg2fabzmkps0fghd5t
 hold: null
 hold_until: null
 created_at: 2026-10-22T20:45:47.321Z
-updated_at: 2026-10-22T23:41:17.874Z
+updated_at: 2026-10-22T23:43:32.847Z
 started_at: 2026-10-22T20:46:24.554Z
 ---
 Implement and validate the site navigation redesign in PR #737: category menus, dedicated destination pages, canonical labels and breadcrumbs, shared typography and layout, and associated design-system refinements.
