@@ -5,7 +5,7 @@ title: "Import Evan Daniel: solved views below the record at 204, 227, 229 and 2
 kind: task
 status: in_progress
 priority: 2
-version: 22
+version: 23
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,10 +16,11 @@ child_order_hints:
   - is-01m5gmjp98m4b8qs2m9cpsvdae
   - is-01m5gv0wafpa7w6ytsz1by4mex
   - is-01m5gvf83zhcjpfmrxsmv05pwj
+  - is-01m5gxvxvdf0hbxwdvb8p87g68
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:43:33.500Z
-updated_at: 2026-10-22T04:11:31.050Z
+updated_at: 2026-10-22T04:28:19.181Z
 started_at: 2026-10-21T17:43:35.847Z
 ---
 Stage 0 owner for four certificates Evan Daniel published, with no issue, in evand/square-packing at 0075967bace18a3deabcc0baa64c2fb294fc80a0 (committed 2026-10-20T02:36:12Z, "Site up to date: records at 183, 229, 308 (ours) and 204, 227, 260 (Couzo), certified and regularized"): search/regularize/lists/certs/n-NNN.cert.gz, each with n-NNN.json.gz beside it. Found by the read-only triage of the 21 October sweep (c-triage-sweep-1021b). Nothing has been retained, replayed or registered.
