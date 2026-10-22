@@ -1580,14 +1580,23 @@ def test_the_big_tables_have_no_outer_border(
         assert all("site-table" in classes.split() for classes in tables), (name, tables)
 
 
-def test_about_has_one_profiles_invitation_that_opens_the_directory(about: str) -> None:
-    """About uses the shared invitation and native All Profiles action, without names."""
-    section = about[about.index('id="profiles"') : about.index('id="report-your-results"')]
-    assert re.findall(r'<a [^>]*href="([^"]+)"', section) == ["profiles/index.html"]
-    assert 'class="site-action" href="profiles/index.html"' in section
-    assert 'target="_blank"' not in section
-    assert "We track contributors and the authors cited in the square-packing record" in section
-    assert not re.search(r"profiles/(?!index\.html)[a-z0-9-]+\.html", section)
+def test_about_has_one_profiles_invitation_that_opens_the_directory(
+    about: str, page: str
+) -> None:
+    """Home and About put the shared native Profiles invitation before reporting."""
+    for name, source in (("About", about), ("Overview", page)):
+        begin = source.index('id="profiles"')
+        end = source.index('id="report-your-results"')
+        assert begin < end, name
+        section = source[begin:end]
+        assert re.findall(r'<a [^>]*href="([^"]+)"', section) == ["profiles/index.html"]
+        assert 'class="site-action" href="profiles/index.html"' in section
+        assert 'target="_blank"' not in section
+        assert (
+            "We track contributors and the authors cited in the square-packing record"
+            in section
+        )
+        assert not re.search(r"profiles/(?!index\.html)[a-z0-9-]+\.html", section)
 
 
 def test_every_card_grid_sits_in_a_frame_it_can_measure(about: str, papers: str) -> None:

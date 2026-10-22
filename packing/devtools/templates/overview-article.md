@@ -36,6 +36,8 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 <p class="site-action-row site-more"><a class="site-action" href="results.html#verification-ladders">About Result Verification{{ARROW_RIGHT}}</a><a class="site-action" href="results.html#all-results" {{RESULTS_LINK_ATTRIBUTES}}>All Results{{ARROW_RIGHT}}</a></p>
 
+{{PROFILES}}
+
 <h2 id="report-your-results" class="site-title">Report Your Results!</h2>
 
 {{REPORT_RESULTS}}
@@ -59,8 +61,6 @@ methods tutorial describes how record packings are found.
 {{VIDEO_PLAYER}}
 
 <p class="site-action-row site-more"><a class="site-action" href="papers.html#pdfs">View All PDFs{{ARROW_RIGHT}}</a><a class="site-action" href="visualize.html">View Visualizations{{ARROW_RIGHT}}</a></p>
-
-{{PROFILES}}
 
 <h1 id="squares-project-documentation" class="site-title">Squares Project Documentation</h1>
 

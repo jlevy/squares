@@ -177,10 +177,10 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
             "the-atlas-of-square-packings",
             "news",
             "recent-results",
+            "profiles",
             "report-your-results",
             "papers",
             "visuals",
-            "profiles",
             "squares-project-documentation",
             "more-resources",
         ]
@@ -723,8 +723,8 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     ]
     assert home["main_titles"] == [
         "the-problem",
-        "visuals",
         "profiles",
+        "visuals",
         "squares-project-documentation",
         "more-resources",
     ]
