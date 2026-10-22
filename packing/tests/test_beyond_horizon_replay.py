@@ -17,6 +17,8 @@ from __future__ import annotations
 import copy
 import dataclasses
 import json
+import os
+import subprocess
 from collections import Counter
 from fractions import Fraction
 from pathlib import Path
@@ -698,3 +700,129 @@ def test_a_hold_on_a_count_a_row_holds_is_refused(monkeypatch: pytest.MonkeyPatc
         ),
         f"{replay.ISSUE_719}: #719 n=372: held and declared as a row",
     ]
+
+
+def _commit(repo: Path, when: str, files: dict[str, str]) -> None:
+    for name, text in files.items():
+        (repo / name).parent.mkdir(parents=True, exist_ok=True)
+        (repo / name).write_text(text, encoding="utf-8")
+    env = {"GIT_AUTHOR_DATE": when, "GIT_COMMITTER_DATE": when, "PATH": os.environ["PATH"]}
+    for args in (["add", "-A"], ["commit", "-q", "-m", when]):
+        subprocess.run(["git", "-C", str(repo), *args], check=True, env=env)
+
+
+def _repository(path: Path, commits: list[tuple[str, dict[str, str]]]) -> Path:
+    path.mkdir()
+    subprocess.run(["git", "init", "-q", str(path)], check=True)
+    for key, value in (("user.name", "t"), ("user.email", "t@t"), ("commit.gpgsign", "false")):
+        subprocess.run(["git", "-C", str(path), "config", key, value], check=True)
+    for when, files in commits:
+        _commit(path, when, files)
+    return path
+
+
+def test_the_history_scan_keeps_each_side_at_its_first_publication(tmp_path: Path) -> None:
+    """Every certificate header, index bound and table row at 325 to 1024 is a publication
+    from the first commit of any watched repository that stated it, below the frozen start;
+    a copy in a later commit or another repository is none."""
+    index = {
+        "entries": {
+            "400": {"verified": {"bound": "39/2"}},
+            "401": {"verified": {"bound": "19.9"}},
+        }
+    }
+    evand = _repository(
+        tmp_path / "evand",
+        [
+            (
+                "2026-10-10T00:00:00Z",
+                {
+                    "certificates/n400.cert": "400 39/2\n",
+                    "upper_bounds.json": json.dumps(index),
+                },
+            ),
+            (
+                "2026-10-11T00:00:00Z",
+                {
+                    "certificates/best/n400.cert": "400 39/2\n",
+                    "certificates/n402.cert": "# a comment\n402 20\n",
+                    "composites/table.csv": (
+                        "count,side_rounded_up_15,id\n403,20.123456789012345,x\n"
+                    ),
+                },
+            ),
+        ],
+    )
+    fang = _repository(
+        tmp_path / "fang", [("2026-10-09T00:00:00Z", {"n0400/n0400.cert": "400 39/2\n"})]
+    )
+    found = replay.first_publications("evand/square-packing", evand)
+    assert [(item["n"], item["side"], item["kind"], item["path"]) for item in found] == [
+        (400, "39/2", "certificate", "certificates/n400.cert"),
+        (401, "199/10", "index", "upper_bounds.json"),
+        (402, "20", "certificate", "certificates/n402.cert"),
+        (403, "4024691357802469/200000000000000", "table", "composites/table.csv:x"),
+    ]
+    start = tmp_path / "source-coverage.yaml"
+    start.write_text(
+        "beyond_horizon_claims:\n- n: 401\n  source_id: s\n  value: '19.5'\n"
+        "  disposition: tracked-outside-case-corpus\n",
+        encoding="utf-8",
+    )
+    scan = replay.history_publications(
+        {"evand/square-packing": evand, "TheSnakeFang/squarepack-certs": fang}, start
+    )
+    assert [(item["n"], item["repository"]) for item in scan["publications"]] == [
+        (400, "TheSnakeFang/squarepack-certs"),
+        (402, "evand/square-packing"),
+        (403, "evand/square-packing"),
+    ]
+    assert scan["read_at_main"] == replay.HISTORY_READ_AT_MAIN
+
+
+def test_the_history_starts_are_frozen_from_the_register_named(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The starts come from the coverage register of a checkout of the frozen ``main``,
+    read by its path: its current row at a count, else the grid."""
+    monkeypatch.setattr(replay, "INTAKE", tmp_path)
+    start = tmp_path / "source-coverage.yaml"
+    start.write_text(
+        "beyond_horizon_claims:\n- n: 401\n  source_id: s\n  value: '19.5'\n"
+        "  disposition: tracked-outside-case-corpus\n",
+        encoding="utf-8",
+    )
+    assert replay.write_history_starts(start, [400, 401]) == 2
+    starts = safe_load((tmp_path / replay.HISTORY / "starts.yaml").read_text(encoding="utf-8"))
+    assert starts["read_at_main"] == replay.HISTORY_READ_AT_MAIN
+    labels = {count["n"]: count["members"][0]["label"] for count in starts["counts"]}
+    assert labels == {400: "the grid", 401: "beyond-horizon row s"}
+    assert replay.history_label("couzo-issue670-2026-10-17") == "#670"
+    assert (
+        replay.history_label("couzo-verified-bounds-2026-10-14")
+        == "couzo-verified-bounds-2026-10-14"
+    )
+
+
+def test_an_earlier_walk_s_pair_may_be_bridged_by_a_report_a_later_walk_orders(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A walk whose starts were frozen later may lack an earlier publication another walk
+    inserts between two of its reports; the register may lead through it only where the
+    first walk does not reach it and another walk does."""
+    first = replay.Walk("first", later={}, awaiting={})
+    other = replay.Walk("other", later={}, awaiting={})
+    reached = {"first": {"a", "c"}, "other": {"a", "b", "c"}}
+    monkeypatch.setattr(replay, "WALKS", {"first": first, "other": other})
+    monkeypatch.setattr(replay, "_reached", lambda walk, _n: reached[walk.name])
+    rows = {
+        (500, "a"): {"disposition": "superseded", "superseded_by": "b"},
+        (500, "b"): {"disposition": "superseded", "superseded_by": "c"},
+    }
+    assert replay.bridged(rows, 500, "a", "c", first)
+    assert not replay.bridged(rows, 500, "a", "b", first)
+    reached["other"] = {"a", "c"}
+    assert not replay.bridged(rows, 500, "a", "c", first)
+    reached["other"] = {"a", "b", "c"}
+    reached["first"] = {"a", "b", "c"}
+    assert not replay.bridged(rows, 500, "a", "c", first)

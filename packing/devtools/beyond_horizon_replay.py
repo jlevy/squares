@@ -76,6 +76,27 @@ each recorded report's row, each superseded by the next, the last current or sup
 a report the walk does not reach. A planned current row the register shows superseded by
 such a later report holds the plan too (`coverage_problems`).
 
+**Publications no issue reports.** A watched repository's commit is a report from the
+time it reached GitHub, as the owner ruled on 14 October, and a `Release` with no issue:
+its packet declares the rows its walk records (``declare-rows``, `read_declared_rows`), and
+a second report retained in one packet has its own source, record and receipts. A walk
+holds back a publication that waits on an owner decision rather than an import (`Held`):
+a re-certification below the 12-place print, one above Göbel's construction, an index
+deletion bound or a recipe with no certificate file; ``check`` holds every hold and every
+declaration to the walk.
+
+**The history walk.** ``campaign/issue-intake/upper-bounds-couzo-history-20261022`` walks
+every count from 325 to 1024 from starts frozen at ``main`` a97b712b9 (#479's merge, whose
+only beyond-horizon rows are the two 8 October sources): every row source since, at its
+rows' exact sides, and every side a watched repository published below the start, each at
+the first commit of any of them that stated it. ``history-publications`` scans clones of
+the repositories into the 4e4c8ce packet's ``receipts/history-publications.json`` and
+freezes the starts from the coverage register of a checkout of that ``main``, read by its
+path; ``history-sources`` transcribes the walk's ``sources.yaml`` from the scan and the
+register. Where an earlier walk's starts were frozen later and it lacks a publication the
+history walk inserts between two of its reports, the register may lead from one to the
+other through that publication's row (`bridged`).
+
 **Earlier publications.** ``earlier`` reads clones of the watched repositories and writes
 ``receipts/earlier-publications.json`` for a release: at each of its counts, every
 certificate and index bound published before the release's row, strictly below the record's
@@ -84,15 +105,23 @@ them as reports (``ledger-sources``).
 
 From ``packing/``, with the project interpreter::
 
-    python -m devtools.beyond_horizon_replay filtered [--issue N ...] [--workers 2]
+    python -m devtools.beyond_horizon_replay filtered [--issue N|LABEL ...] [--workers 2]
     python -m devtools.beyond_horizon_replay first-commits --issue N --clone CLONE
     python -m devtools.beyond_horizon_replay exhaustive --issue N --n 922 [--workers 2]
     python -m devtools.beyond_horizon_replay goebel
     python -m devtools.beyond_horizon_replay claims-record
     python -m devtools.beyond_horizon_replay earlier --issue 719 --couzo CLONE
     python -m devtools.beyond_horizon_replay ledger-sources --issue 719
+    python -m devtools.beyond_horizon_replay history-publications \
+        --start-coverage CHECKOUT/packing/frontier/source-coverage.yaml \
+        --clone franciscouzo/square-packing=CLONE evand/square-packing=CLONE ...
+    python -m devtools.beyond_horizon_replay history-sources --read-on DATE
+    python -m devtools.beyond_horizon_replay declare-rows
     python -m devtools.beyond_horizon_replay coverage-plan
     python -m devtools.beyond_horizon_replay check [--replay [--workers 2]]
+
+A command's ``--issue`` takes an issue's number or a publication's label,
+``owner/name@commit``.
 
 A finite packing certifies an upper bound and nothing more: novelty, rigidity and
 optimality are not decided here, and neither are the sources' credit and lineage
@@ -243,6 +272,42 @@ def _held_715() -> frozenset[int]:
 
 BACKLOG = "upper-bounds-backlog-20261022"
 ISSUE_719 = "upper-bounds-issue719-20261022"
+#: The walk of every count from 325 to 1024 since ``main`` a97b712b9, Couzo's watched history
+#: and every row source since then in report order.
+HISTORY = "upper-bounds-couzo-history-20261022"
+#: The history walk's starts: ``main`` at #479's merge, 2026-10-10T00:28:19Z, the last
+#: ``main`` whose only beyond-horizon rows are the two 8 October sources.
+HISTORY_READ_AT_MAIN = "a97b712b94a138ebe9998070dd08d0ba0f320e09"
+#: The counts the history walk reaches: beyond the corpus to ``LIMIT``.
+HISTORY_COUNTS = range(reports.HORIZON + 1, LIMIT + 1)
+#: The sources whose rows are the history walk's starts, and so are not walked.
+HISTORY_START_SOURCES = (
+    "couzo-extended-range-reports-2026-10-08",
+    "couzo-extended-range-updates-2026-10-08",
+)
+#: The row sources an issue reported: the walk dates their claims by the issue, as the
+#: backlog and #719 ledgers do, and records where a watched repository published a side a
+#: little earlier (``first_committed``). Every other row source is a watched repository's
+#: publication, dated by the first commit that published each side.
+HISTORY_ISSUES: dict[str, tuple[int, str, str]] = {
+    "de-winter-issue666-2026-10-17": (666, "Joost de Winter", "think-3m10"),
+    "couzo-issue670-2026-10-17": (670, "Francisco Couzo", "think-f28n"),
+    "couzo-issue672-2026-10-17": (672, "Francisco Couzo", "think-2vjc"),
+    "couzo-issue675-2026-10-18": (675, "Francisco Couzo", "think-pvav"),
+    "couzo-issue678-2026-10-18": (678, "Francisco Couzo", "think-xu4d"),
+    "muglich-issue686-2026-10-19": (686, "Darius Muglich", "think-9vjn"),
+    "evand-n343-sweep-2026-10-20": (702, "Evan Daniel", "think-wuxt"),
+    "couzo-issue715-2026-10-21": (715, "Francisco Couzo", "think-cyal"),
+    "mishapolk-issue719-2026-10-22": (719, "Mykhailo Polkovskyi", "think-xyhn"),
+}
+
+
+def history_label(source: str) -> str:
+    """How the history walk names a row source's report: its issue, else its source id."""
+    issue = HISTORY_ISSUES.get(source)
+    return f"#{issue[0]}" if issue is not None else source
+
+
 #: The walk of each ledger these releases' rows are planned from. The backlog ledger's
 #: starts were frozen at the 18 October ledger's ``main``; #719's at ``main`` after #720.
 WALKS: dict[str, Walk] = {
@@ -1577,6 +1642,467 @@ def write_ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> i
     return len(document["reports"])
 
 
+# --------------------------------------------------------------------------- the history walk
+
+
+#: Where the history walk's scan of the watched repositories is kept: beside the 4e4c8ce
+#: packet's receipts, since the scan is the history of that index's author.
+HISTORY_PUBLICATIONS = WEB / "couzo-index-2026-10-15/receipts/history-publications.json"
+HISTORY_FORMAT = "beyond-horizon-history-publications-v1"
+#: Tables whose rows state composite sides rounded up at the places given.
+TABLES = {"composites/table.csv": 15}
+WATCHED_HOLDERS = {
+    "franciscouzo/square-packing": "Francisco Couzo",
+    "evand/square-packing": "Evan Daniel",
+    "TheSnakeFang/squarepack-certs": "Kevin Fang",
+    "JoostdeWinter/joostdewinter.github.io": "Joost de Winter",
+    "JoostdeWinter/square-packing": "Joost de Winter",
+}
+
+
+def history_start_highs(coverage: Mapping[str, Any]) -> dict[int, Fraction]:
+    """Each count's frozen start as `devtools.intake_ledger` reads it from ``coverage``, the
+    register at `HISTORY_READ_AT_MAIN`: the high end of the side it may be."""
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    rows = coverage_current(coverage)
+    return {
+        n: intake_ledger.side_of(intake_ledger.beyond_member(n, rows)).span.high
+        for n in HISTORY_COUNTS
+    }
+
+
+def coverage_current(coverage: Mapping[str, Any]) -> dict[int, Mapping[str, Any]]:
+    from devtools import check_source_coverage as coverage_check  # noqa: PLC0415
+
+    return coverage_check.current_beyond_horizon(coverage)
+
+
+def write_history_starts(start_coverage: Path, counts: Sequence[int]) -> int:
+    """Freeze the history walk's starts at ``counts`` from ``start_coverage``, the coverage
+    register of a checkout of `HISTORY_READ_AT_MAIN` (read by path, never from Git)."""
+    import yaml  # noqa: PLC0415
+
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    rows = coverage_current(safe_load(start_coverage.read_text(encoding="utf-8")))
+    members = {n: [intake_ledger.beyond_member(n, rows)] for n in sorted(counts)}
+    document = intake_ledger.starts_document(HISTORY_READ_AT_MAIN, members)
+    target = INTAKE / HISTORY / intake_ledger.STARTS
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with atomic_output_file(target) as temporary:
+        temporary.write_text(
+            yaml.safe_dump(document, sort_keys=False, allow_unicode=True, width=88),
+            encoding="utf-8",
+        )
+    return len(members)
+
+
+def _table_sides(raw: bytes, places: int) -> list[tuple[int, Fraction, str]]:
+    """A composites table's rows: the count, the side its print rounds up to at ``places``,
+    and the row's id."""
+    import csv  # noqa: PLC0415
+    import io  # noqa: PLC0415
+
+    found = []
+    for row in csv.DictReader(io.StringIO(raw.decode("utf-8"))):
+        printed = row[f"side_rounded_up_{places}"]
+        found.append((int(row["count"]), Fraction(printed), str(row["id"])))
+    return found
+
+
+def first_publications(name: str, clone: Path) -> list[dict[str, Any]]:
+    """Every side a repository published at `HISTORY_COUNTS`, each at the first commit that
+    stated it, by publication time and then history order (`_dated_commits`): a
+    certificate's header, a bound an index states (`INDEXES`), or a table row (`TABLES`)."""
+    commits = _dated_commits(name, clone, "9999-12-31T23:59:59Z")
+    rank = {commit: index for index, (commit, _) in enumerate(commits)}
+    files: dict[tuple[str, str], tuple[str, str]] = {}
+    for commit, when in commits:
+        for line in _git(clone, "ls-tree", "-r", commit).splitlines():
+            meta, _, path = line.partition("\t")
+            if path.endswith(".cert") or path in INDEXES or path in TABLES:
+                key = (meta.split()[2], path)
+                kept = files.get(key)
+                if kept is None or (when, rank[commit]) < (kept[1], rank[kept[0]]):
+                    files[key] = (commit, when)
+    texts = _blobs(clone, sorted({blob for blob, _ in files}))
+    stated: list[tuple[int, Fraction, dict[str, Any]]] = []
+    for (blob, path), (commit, when) in files.items():
+        item = {"repository": name, "commit": commit, "published": when, "path": path}
+        if path.endswith(".cert"):
+            header = _header(texts[blob])
+            if header is not None:
+                stated.append((*header, item | {"kind": "certificate", "blob": blob}))
+        elif path in TABLES:
+            for n, side, ident in _table_sides(texts[blob], TABLES[path]):
+                where = f"{path}:{ident}"
+                stated.append((n, side, item | {"kind": "table", "path": where, "blob": blob}))
+        else:
+            entries = json.loads(texts[blob]).get("entries") or {}
+            for key, entry in entries.items():
+                bound: Any = entry
+                for part in INDEXES[path]:
+                    bound = bound.get(part) if isinstance(bound, dict) else None
+                if bound is not None and str(key).isdigit():
+                    side = Fraction(str(bound))
+                    stated.append((int(key), side, item | {"kind": "index", "blob": blob}))
+    first: dict[tuple[int, Fraction], dict[str, Any]] = {}
+    for n, side, item in stated:
+        if n not in HISTORY_COUNTS:
+            continue
+        kept = first.get((n, side))
+        order = (item["published"], rank[item["commit"]], item["path"])
+        if kept is None or order < (kept["published"], rank[kept["commit"]], kept["path"]):
+            first[n, side] = item
+    return [
+        item | {"n": n, "side": legacy.literal(side)}
+        for (n, side), item in sorted(first.items(), key=lambda pair: (pair[0][0], pair[0][1]))
+    ]
+
+
+def history_publications(clones: Mapping[str, Path], start_coverage: Path) -> dict[str, Any]:
+    """The history walk's scan of the watched repositories: at each count, every side a
+    repository published strictly below the high end of the count's frozen start, at the
+    first commit of any of them that stated it, a copy in a later commit or another
+    repository being no report of its own; a side at or above the start could never be
+    recorded.
+
+    Each publication keeps its kind, path and Git blob; a table row is a print rounded up
+    at its places, every other side exact. ``start_coverage`` is the register of a checkout
+    of `HISTORY_READ_AT_MAIN`, which freezes the starts (`write_history_starts`)."""
+    highs = history_start_highs(safe_load(start_coverage.read_text(encoding="utf-8")))
+    scanned: dict[str, Any] = {}
+    first: dict[tuple[int, Fraction], dict[str, Any]] = {}
+    for name, clone in sorted(clones.items()):
+        items = [
+            item
+            for item in first_publications(name, clone)
+            if Fraction(item["side"]) < highs[item["n"]]
+        ]
+        for item in items:
+            key = (item["n"], Fraction(item["side"]))
+            if key not in first or item["published"] < first[key]["published"]:
+                first[key] = item
+        scanned[name] = {
+            "head": _git(clone, "rev-parse", "HEAD").strip(),
+            "commits": len(_git(clone, "rev-list", "HEAD").split()),
+        }
+    found = list(first.values())
+    for name, record in scanned.items():
+        record["publications"] = sum(1 for item in found if item["repository"] == name)
+    return {
+        "format": HISTORY_FORMAT,
+        "read_at_main": HISTORY_READ_AT_MAIN,
+        "counts": [HISTORY_COUNTS.start, HISTORY_COUNTS.stop - 1],
+        "repositories": scanned,
+        "pushed_later": {
+            name: {"public_head": head, "pushed": time}
+            for name, (head, time) in PUSHED_LATER.items()
+        },
+        "indexes": {path: ".".join(keys) for path, keys in INDEXES.items()},
+        "tables": {path: f"rounded up at {places} places" for path, places in TABLES.items()},
+        "publications": sorted(
+            found, key=lambda item: (item["n"], item["published"], item["repository"])
+        ),
+    }
+
+
+def write_history_publications(clones: Mapping[str, Path], start_coverage: Path) -> int:
+    """Write the scan (`history_publications`) and freeze the starts at every count it, or
+    a row of the register, reaches; return the publications found."""
+    record = history_publications(clones, start_coverage)
+    _write(HISTORY_PUBLICATIONS, record)
+    coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
+    counts = {item["n"] for item in record["publications"]} | {
+        row["n"] for row in coverage["beyond_horizon_claims"] if row["n"] in HISTORY_COUNTS
+    }
+    write_history_starts(start_coverage, sorted(counts))
+    return len(record["publications"])
+
+
+def _source_times(source: Mapping[str, Any]) -> str:
+    """When a row source's packet pin was committed, from its acquisition record."""
+    local = source.get("local", "")
+    record = ROOT / local.removeprefix("/") / "acquisition/sources.json"
+    commit = re.search(r"/tree/([0-9a-f]{40})", source.get("url", ""))
+    _require(record.is_file() and commit is not None, f"{source['id']}: no pinned commit")
+    assert commit is not None
+    for item in json.loads(record.read_text(encoding="utf-8"))["sources"]:
+        if item["source_commit"] == commit[1]:
+            return str(item["committed_utc"])
+    raise ReplayError(f"{source['id']}: the acquisition record does not pin {commit[1]}")
+
+
+def _exact_row_side(source: Mapping[str, Any], n: int) -> Fraction:
+    """A row's exact side, from its source's claims record; the history walk compares
+    sides exactly, so a row whose record keeps only a print is refused."""
+    record = json.loads(read_retained_text(ROOT / source["claims_record"]))
+    found = [item for item in record.get("results", []) if int(item["n"]) == n]
+    _require(
+        len(found) == 1 and "exact_side" in found[0],
+        f"{source['id']} n={n}: its claims record states no one exact side",
+    )
+    return Fraction(found[0]["exact_side"])
+
+
+def _history_rows(coverage: Mapping[str, Any]) -> dict[str, list[tuple[int, Fraction, str]]]:
+    """Every row source's rows the history walk takes, by source: each count, exact side
+    (from its claims record) and the value the row records. The starts' sources are the
+    walk's starts, and a release of the walk is walked as its publication instead."""
+    ours = {item.source for item in RELEASES.values() if item.walk == HISTORY}
+    sources = {source["id"]: source for source in coverage["sources"]}
+    found: dict[str, list[tuple[int, Fraction, str]]] = {}
+    for row in coverage["beyond_horizon_claims"]:
+        source = row["source_id"]
+        if row["n"] not in HISTORY_COUNTS or source in HISTORY_START_SOURCES or source in ours:
+            continue
+        side = _exact_row_side(sources[source], row["n"])
+        found.setdefault(source, []).append((row["n"], side, str(row["value"])))
+    return {source: sorted(rows) for source, rows in found.items()}
+
+
+def history_sources(read_on: str) -> dict[str, Any]:
+    """The history walk's ``sources.yaml``, transcribed from the register and the scan.
+
+    The reports are every row source since `HISTORY_READ_AT_MAIN` at its rows' exact sides,
+    and every publication the scan found (`history_publications`) that no row holds, one
+    report a commit, at the least side the commit states at each count (#722's review A,
+    A2). A publication of a row's side is that row's report; where it came before the issue
+    that reported the row, the claim says when (``first_committed``). #715's
+    re-certifications held on think-fwa9 are #715's claims, at the exact sides its packet's
+    filtered receipt states. A row source an issue did not report is dated, side by side, by
+    the first publication of the side, else its packet's pinned commit.
+    """
+    coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
+    sources = {source["id"]: source for source in coverage["sources"]}
+    scan = _read(HISTORY_PUBLICATIONS)
+    rows = _history_rows(coverage)
+    packet_715 = WEB / "couzo-issue715-2026-10-21"
+    held_715 = _held_715()
+    replayed = {
+        row["n"]: row
+        for row in _read(packet_715 / "receipts/filtered-exact-replay.json")["rows"]
+    }
+    rows.setdefault("couzo-issue715-2026-10-21", []).extend(
+        (n, Fraction(replayed[n]["exact_side"]), str(replayed[n]["printed"]))
+        for n in sorted(held_715)
+        if n in HISTORY_COUNTS
+    )
+    by_side: dict[tuple[int, Fraction], str] = {
+        (n, side): source for source, items in rows.items() for n, side, _ in items
+    }
+    groups: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for item in scan["publications"]:
+        groups.setdefault((item["repository"], item["commit"]), []).append(item)
+    attached: dict[tuple[int, Fraction], dict[str, Any]] = {}
+    publications = []
+    for (repository, commit), items in sorted(
+        groups.items(), key=lambda pair: (pair[1][0]["published"], pair[0])
+    ):
+        claims = []
+        for claim in _least_claims(items):
+            side = Fraction(claim["exact"])
+            least = next(
+                item
+                for item in items
+                if item["n"] == claim["n"] and Fraction(item["side"]) == side
+            )
+            if (claim["n"], side) in by_side:
+                attached[claim["n"], side] = least
+                continue
+            if least["kind"] == "table":
+                places = TABLES[least["path"].split(":", 1)[0]]
+                printed = {key: value for key, value in claim.items() if key != "exact"}
+                claims.append(printed | {"printed": ceiling(side, places)})
+            else:
+                claims.append(claim)
+        if claims:
+            publications.append(
+                {
+                    "report": f"{repository}@{commit[:7]}",
+                    "url": f"https://github.com/{repository}/tree/{commit}",
+                    "reported_at": items[0]["published"],
+                    "holders": WATCHED_HOLDERS[repository],
+                    "bead": _publication_bead(f"{repository}@{commit[:7]}"),
+                    "claims": claims,
+                    "note": (
+                        "A publication in a watched repository that no issue reports, dated "
+                        "by its commit, or by the later push that made it public; "
+                        "transcribed from the history scan "
+                        f"({HISTORY_PUBLICATIONS.relative_to(ROOT).as_posix()}) at each "
+                        "count where it states a side strictly below the frozen start "
+                        "that no row holds, at the least side the commit states there."
+                    ),
+                }
+            )
+    reports_list: list[dict[str, Any]] = []
+    for source, items in sorted(rows.items()):
+        label = history_label(source)
+        claims = []
+        for n, side, _ in items:
+            claim: dict[str, Any] = _claim(n, side, _history_where(sources[source], n))
+            first = attached.get((n, side))
+            if label.startswith("#"):
+                if first is not None:
+                    claim["first_committed"] = first["published"]
+            else:
+                pinned = _source_times(sources[source])
+                when = min(pinned, first["published"]) if first is not None else pinned
+                claim["reported_at"] = when
+            claims.append(claim)
+        issue = HISTORY_ISSUES.get(source)
+        report: dict[str, Any] = {
+            "report": label,
+            "holders": issue[1] if issue else WATCHED_HOLDERS[_repository(sources[source])],
+            "bead": issue[2] if issue else _row_bead(coverage, source),
+            "claims": claims,
+            "note": _history_note(source, label),
+        }
+        if issue is not None:
+            report["issue"] = issue[0]
+        else:
+            earliest = min(claim["reported_at"] for claim in claims)
+            for claim in claims:
+                if claim["reported_at"] == earliest:
+                    claim.pop("reported_at")
+            report |= {"url": sources[source]["url"], "reported_at": earliest}
+        reports_list.append(report)
+    return {
+        "format": "intake-ledger-sources-v1",
+        "read_at_main": HISTORY_READ_AT_MAIN,
+        "read_on": read_on,
+        "rule": RULE,
+        "lanes": [],
+        "reports": reports_list + publications,
+    }
+
+
+def _repository(source: Mapping[str, Any]) -> str:
+    match = re.match(r"https://github\.com/([^/]+/[^/]+)/tree/", str(source.get("url", "")))
+    _require(match is not None, f"{source['id']}: not a watched repository's tree")
+    assert match is not None
+    return match[1]
+
+
+def _row_bead(coverage: Mapping[str, Any], source: str) -> str:
+    """The bead most of a source's rows name."""
+    from collections import Counter  # noqa: PLC0415
+
+    beads = Counter(
+        str(row.get("bead") or "")
+        for row in coverage["beyond_horizon_claims"]
+        if row["source_id"] == source
+    )
+    return beads.most_common(1)[0][0] if beads else ""
+
+
+def _publication_bead(label: str) -> str:
+    """The bead a watched publication's claims wait on: its release's, else its holds'."""
+    chosen = RELEASES.get(label)
+    if chosen is not None:
+        return chosen.bead
+    held = WALKS[HISTORY].held.get(label, ()) if HISTORY in WALKS else ()
+    return held[0].bead if held else ""
+
+
+def _history_where(source: Mapping[str, Any], n: int) -> str:
+    return f"the exact side at n = {n} in the source's claims record, {source['claims_record']}"
+
+
+def _history_note(source: str, label: str) -> str:
+    if source == "couzo-issue715-2026-10-21":
+        return (
+            "Issue 715's rows, at the exact sides its source's claims record states, and its "
+            "30 re-certifications of the 4e4c8ce certificates below the 12-place print, at "
+            "the exact sides of the certificates its packet's filtered receipt states, which "
+            "wait on a decision (think-fwa9). Its other restatements of earlier certificates "
+            "tie them exactly and are not walked."
+        )
+    if label.startswith("#"):
+        return (
+            f"The {source} source's dated beyond-horizon rows at these counts, at the exact "
+            "sides its claims record states, dated by the issue; where a watched repository "
+            "published a side first, the claim says when (first_committed)."
+        )
+    return (
+        f"The {source} source's dated beyond-horizon rows at these counts, at the exact sides "
+        "its claims record states, a watched repository's publication that no issue reports: "
+        "each dated by the first commit that published its side, else by the commit its "
+        "packet pins."
+    )
+
+
+def write_history_sources(read_on: str) -> int:
+    """Write the history walk's ``sources.yaml``; return how many reports it holds."""
+    import yaml  # noqa: PLC0415
+
+    document = history_sources(read_on)
+    target = INTAKE / HISTORY / "sources.yaml"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with atomic_output_file(target) as temporary:
+        temporary.write_text(
+            yaml.safe_dump(document, sort_keys=False, allow_unicode=True, width=100),
+            encoding="utf-8",
+        )
+    return len(document["reports"])
+
+
+def declared_rows(chosen: Release) -> dict[str, Any]:
+    """A publication's rows as its walk records them (`declaration_problems`): at each
+    count the walk records it and does not hold it, the certificate the history scan found
+    at its least side there, with that side rounded up at 12 places."""
+    walk = walk_of(chosen)
+    commit = chosen.pin
+    found = {
+        item["n"]: item
+        for item in sorted(
+            (
+                item
+                for item in _read(HISTORY_PUBLICATIONS)["publications"]
+                if item["commit"] == commit
+            ),
+            key=lambda item: (Fraction(item["side"]), item["path"]),
+            reverse=True,
+        )
+    }
+    rows = []
+    for n, count in sorted(_walked(walk).items()):
+        if walk.holds(chosen.label, n) is not None:
+            continue
+        if not any(
+            step["report"] == chosen.label and step["verdict"] == RECORDED
+            for step in count["steps"]
+        ):
+            continue
+        item = found[n]
+        _require(item["kind"] == "certificate", f"{chosen.label} n={n}: no certificate file")
+        rows.append(
+            {"n": n, "certificate": item["path"], "printed": ceiling(Fraction(item["side"]))}
+        )
+    return {
+        "format": WATCHED_FORMAT,
+        "publication": chosen.issue_url,
+        "commit": chosen.pin,
+        "committed": chosen.committed,
+        "published": chosen.reported,
+        "walk": chosen.walk,
+        "rows": rows,
+    }
+
+
+def declare_rows() -> dict[str, int]:
+    """Write each publication's declared rows (`declared_rows`); return their counts."""
+    written: dict[str, int] = {}
+    for chosen in RELEASES.values():
+        if chosen.issue is None:
+            document = declared_rows(chosen)
+            path = chosen.directory / chosen.declared
+            path.write_text(json.dumps(document, indent=1) + "\n", encoding="utf-8")
+            written[chosen.label] = len(document["rows"])
+    return written
+
+
 # --------------------------------------------------------------------------- coverage plan
 
 
@@ -1719,15 +2245,20 @@ def planned_supersessions() -> list[tuple[int, str, str]]:
     first report to beat it in report order, so each count is one chain. A report the walk
     records before it whose import is pending has no row to name (`Awaiting`).
     """
-    flips: list[tuple[int, str, str]] = []
+    return sorted({(n, start, source) for _, n, start, source in _planned_supersessions()})
+
+
+def _planned_supersessions() -> list[tuple[Walk, int, str, str]]:
+    """`planned_supersessions` with the walk that plans each."""
+    flips: list[tuple[Walk, int, str, str]] = []
     for walk in WALKS.values():
         ours = {label: item.source for label, item in _releases(walk).items()}
         for count in _counts(walk):
             recorded = recorded_reports(walk, count)
             start = _start_source(count)
             if start is not None and recorded and recorded[0] in ours:
-                flips.append((count["n"], start, ours[recorded[0]]))
-    return sorted(flips)
+                flips.append((walk, count["n"], start, ours[recorded[0]]))
+    return flips
 
 
 def held_problems(register: Mapping[str, Any]) -> list[str]:
@@ -1820,7 +2351,11 @@ def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
     report the walk records, in report order, passing over a report whose import is pending
     (`Awaiting`). Each must be in the register and superseded by the next; the last is
     current, or superseded by a report the walk does not reach. Counts above ``LIMIT``
-    have no rows yet (the owner's D1) and are not held.
+    have no rows yet (the owner's D1) and are not held. Where two walks reach a count, a
+    later walk may insert between two of an earlier walk's reports a report the earlier
+    walk does not reach, as the history walk inserts Couzo's 4e4c8ce between a start and
+    #670; the register may then lead from one to the other through it (`bridged`), and
+    the later walk holds that stretch to its own chain.
     """
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
     problems: list[str] = []
@@ -1841,7 +2376,11 @@ def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
                     problems.append(f"n={n}: the register has no row from {earlier}")
                     continue
                 disposition, successor = held.get("disposition"), held.get("superseded_by")
-                if later is not None and (disposition, successor) != ("superseded", later):
+                if (
+                    later is not None
+                    and (disposition, successor) != ("superseded", later)
+                    and not bridged(rows, n, earlier, later, walk)
+                ):
                     problems.append(
                         f"n={n} from {earlier}: {disposition} naming {successor}, "
                         f"not superseded by {later}"
@@ -1864,6 +2403,35 @@ def _reached(walk: Walk, n: int) -> set[str]:
         source = {label: item.source for label, item in _releases(walk).items()}.get(report)
         reached.add(source or walk.later.get(report))
     return {source for source in reached if source is not None}
+
+
+def bridged(
+    rows: Mapping[tuple[int, str], Mapping[str, Any]],
+    n: int,
+    earlier: str,
+    later: str,
+    walk: Walk,
+) -> bool:
+    """Whether the register leads from ``earlier`` to ``later`` at ``n`` through one or more
+    rows of sources ``walk`` does not reach there, each of which another walk reaches at
+    ``n``, so that walk orders it in its own chain (`chain_problems`)."""
+    mine = _reached(walk, n)
+    others: set[str] = set()
+    for other in WALKS.values():
+        if other is not walk:
+            others |= _reached(other, n)
+    current, seen = earlier, {earlier}
+    while True:
+        held = rows.get((n, current)) or {}
+        successor = held.get("superseded_by")
+        if held.get("disposition") != "superseded" or successor is None:
+            return False
+        if successor == later:
+            return current != earlier
+        if successor in mine or successor not in others or successor in seen:
+            return False
+        seen.add(successor)
+        current = successor
 
 
 def _superseded_after(
@@ -1924,9 +2492,12 @@ def coverage_problems(coverage: Mapping[str, Any] | None = None) -> list[str]:
         for n, source in unrecorded_rows()
         if (n, source) in rows
     )
-    for n, earlier, successor in planned_supersessions():
+    for walk, n, earlier, successor in _planned_supersessions():
         held = rows.get((n, earlier)) or {}
-        if (held.get("disposition"), held.get("superseded_by")) != ("superseded", successor):
+        if (held.get("disposition"), held.get("superseded_by")) != (
+            "superseded",
+            successor,
+        ) and not bridged(rows, n, earlier, successor, walk):
             problems.append(f"n={n} from {earlier}: not superseded by {successor}")
     return (
         problems + held_problems(register) + declaration_problems() + chain_problems(register)
@@ -2105,6 +2676,12 @@ def check(*, replay: bool, workers: int = 1, issues: Sequence[int | str] = ()) -
     ] + coverage_problems()
 
 
+def _clone(text: str) -> tuple[str, Path]:
+    name, _, path = text.partition("=")
+    _require(bool(path) and name in WATCHED_HOLDERS, f"{text}: give owner/name=PATH")
+    return name, Path(path)
+
+
 #: How a command names a release: an issue's number, or a publication's ledger label.
 KEY_HELP = "an issue's number, or a publication's label owner/name@commit"
 
@@ -2133,6 +2710,22 @@ def main(argv: Sequence[str] | None = None) -> int:
     transcribe.add_argument("--issue", required=True, help=KEY_HELP)
     transcribe.add_argument("--read-at-main", required=True)
     transcribe.add_argument("--read-on", required=True)
+    scan_history = commands.add_parser("history-publications")
+    scan_history.add_argument(
+        "--clone",
+        nargs="+",
+        required=True,
+        help="owner/name=PATH, a clone of each watched repository",
+    )
+    scan_history.add_argument(
+        "--start-coverage",
+        type=Path,
+        required=True,
+        help="frontier/source-coverage.yaml of a checkout of HISTORY_READ_AT_MAIN",
+    )
+    transcribe_history = commands.add_parser("history-sources")
+    transcribe_history.add_argument("--read-on", required=True)
+    commands.add_parser("declare-rows")
     commands.add_parser("coverage-plan")
     audit = commands.add_parser("check")
     audit.add_argument("--issue", nargs="+", default=[], help=KEY_HELP)
@@ -2156,6 +2749,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         "ledger-sources": lambda: write_ledger_sources(
             args.issue, args.read_at_main, args.read_on
         ),
+        "history-publications": lambda: write_history_publications(
+            dict(_clone(item) for item in args.clone), args.start_coverage
+        ),
+        "history-sources": lambda: write_history_sources(args.read_on),
+        "declare-rows": declare_rows,
         "coverage-plan": lambda: {
             "rows": planned_rows(),
             "supersessions": planned_supersessions(),
