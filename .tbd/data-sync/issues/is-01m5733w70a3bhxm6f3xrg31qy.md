@@ -5,7 +5,7 @@ title: "Import franciscouzo: 204-998: registration request (#675)"
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:38.207Z
-updated_at: 2026-10-22T01:51:38.761Z
+updated_at: 2026-10-22T02:28:44.591Z
 started_at: 2026-10-18T13:04:20.685Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/675
@@ -101,3 +101,4 @@ registration does not wait.
 blocked_on: none
 
 2026-10-22 02:00 c-lane-t225-stage4 (PR-A, on the coordinator's word; branch claude/stoic-thompson-ku09fw, pushed 784244a58): #675's 204 registered as T-228 (V0/C0, superseded on entry by T-223 and T-225), packet couzo-issue675-2026-10-18 at c6da0fc7 (best/n204.cert 761af9ec...a97543, root n204.json). Replay: positive passes both routes, 2 controls refused, 124,236 pair decisions, 10.07 route CPU s. Measured: one to one with #670's 204 (5 beyond a tenth); T-223 one to one with it (none beyond 0.085). Stage 4: think-0nse. The 78 beyond-horizon rows wait for PR-B after #715's import; the intake-watch read at c6da0fc7 is unchanged here. Reply drafts: triage-backlog/replies/675-*.md (not posted).
+2026-10-22 02:30 c-lane-t225-stage4: PR-A is in draft PR https://github.com/jlevy/squares/pull/718 (head a3ff722bb, with T-225 stage 4 and adoption). The reply drafts need reconciling before posting: at 204 the house is T-225 (not T-223); at 227 T-225, which solves #672's packing and credits it, is the house, so T-227 is not pending adoption; the entries' stage 4 is think-0nse.
