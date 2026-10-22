@@ -3,9 +3,9 @@ type: is
 id: is-01m5dz0nzsgm7vbzwbf7q2x9bh
 title: "Import Evan Daniel: s(343) <= 18.977682482405 (#702)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 9
+version: 10
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -13,8 +13,12 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T00:50:40.249Z
-updated_at: 2026-10-21T19:34:56.337Z
+updated_at: 2026-10-22T00:31:26.390Z
 started_at: 2026-10-21T05:27:59.180Z
+closed_at: 2026-10-22T00:31:26.390Z
+close_reason: "#702 imported (#712, 7eeab1f5e), final reply posted (issuecomment-6324620374), #702 closed, and the reply recorded in #716 (d7923b8d8). #715 later supersedes the 343 row (think-cyal)."
+resolution: null
+duplicate_of: null
 ---
 Stage 1 triage of jlevy/squares#702 (Evan Daniel, opened 2026-10-20T22:09:31Z), read-only, 21 October 2026, lane c-lane-records-1021. Nothing retained, imported or replayed.
 

@@ -3,9 +3,9 @@ type: is
 id: is-01m5733s8sp4ftvztm0sndswpb
 title: "Import JoostdeWinter: Improved upper bounds for n = 227, 229, 260: registration request (#668)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 17
+version: 18
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -20,8 +20,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:35.192Z
-updated_at: 2026-10-21T22:22:14.672Z
+updated_at: 2026-10-22T00:31:26.886Z
 started_at: 2026-10-18T12:36:48.824Z
+closed_at: 2026-10-22T00:31:26.886Z
+close_reason: "#668: T-196 V3/C3 and adopted (#704, 970e89de8); final reply issuecomment-6326251307 and follow-up issuecomment-6328043878 posted; #668 closed; both recorded in #716 (d7923b8d8); News entry and stale texts fixed there."
+resolution: null
+duplicate_of: null
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/668
 Source pins in author report: 804eff369193b698d497a9c06847059eb9de0470, c95c4938f068ed44a1819ef973e770ec241aa567
