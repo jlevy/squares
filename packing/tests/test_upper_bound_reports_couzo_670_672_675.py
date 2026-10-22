@@ -18,6 +18,8 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
+import yaml
+
 from devtools import upper_bound_reports as reports
 
 PACKETS = {
@@ -57,6 +59,10 @@ def _packet(name: str) -> Path:
 
 def _json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _yaml(path: Path) -> Any:
+    return yaml.safe_load(path.read_text(encoding="utf-8"))
 
 
 def test_each_certificate_has_its_digest_and_side_and_the_house_reader_rebuilds_it() -> None:
@@ -144,3 +150,25 @@ def test_the_measurement_behind_the_regularization_items_and_notes() -> None:
     assert sequence["nearest_centre"]["one_to_one"]
     assert sequence["assignment"]["moved_beyond"]["1e-1"] == 5
     assert pairs[204, "T-223 (#678)", "#675"]["assignment"]["moved_beyond"]["1e-1"] == 0
+
+
+def test_each_atom_says_which_positives_touch_the_box() -> None:
+    """#670's and #675's positives touch the box at 204; #672's touches at 229 and clears
+    every wall at 227 by exactly 1e-15, so its atom names the count that touches rather
+    than saying every positive does (review A1 of #718)."""
+    evidence = {
+        row["id"]: row for row in _yaml(reports.ROOT / "frontier/evidence.yaml")["evidence"]
+    }
+    expected = {
+        "couzo-issue670-2026-10-17": "In every positive squares touch the box",
+        "couzo-issue672-2026-10-17": (
+            "At 229 squares touch the box, a least wall clearance of exactly 0; at 227 every "
+            "wall clears by at least 1.00e-15;"
+        ),
+        "couzo-issue675-2026-10-18": "In every positive squares touch the box",
+    }
+    for name, sentence in expected.items():
+        planned = reports.register_plan(_packet(name))["evidence.yaml"]
+        assert sentence in planned["limitations"], name
+        recorded = evidence[planned["id"]]["limitations"]
+        assert " ".join(recorded.split()) == " ".join(planned["limitations"].split()), name

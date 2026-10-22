@@ -51,7 +51,7 @@ It is registered as `V-evand-regularized-1020-review-controls`, a premise check:
 decides no certificate, and its receipts are what the confirming entries’ limitations
 cite for the sharp controls (RF-3).
 `tests/test_upper_bound_reports_regularized_1020.py` runs the kernel’s two sharp controls
-on the 204 certificate at contact and $10^{-30}$ past it on both maintained routes.
+on all four certificates at contact and $10^{-30}$ past it on both maintained routes.
 
 `agree_t225.py` holds the checker’s results to the import lane’s receipt: each pose of
 the receipt’s `checker_input` against the row this review’s reader read, the side, the

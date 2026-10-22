@@ -224,8 +224,14 @@ least-gap pair, and refused $10^{-30}$ past it, at all four counts.
 Its programs, receipts and logs are in
 [review/review-2026-10-21/](review/review-2026-10-21/README.md), and
 `tests/test_upper_bound_reports_regularized_1020.py` runs the kernel’s two sharp
-controls on the 204 certificate (RF-3).
+controls on all four certificates (RF-3).
 T-225 rests at `V3`/`C3` on that review, the replay it reproduced and its checker’s run.
+Its RF-5, the 21 October ledger’s open cross-check at 229, leaves that ledger as it
+stands: its `sources.yaml` omits #672 at 229 on purpose, since the 18 October ledger walked
+that row and it lies above the later ledger’s frozen start (T-199), so the cross-check
+decides nothing; #672’s 229 row is T-227’s since 22 October 2026, superseded on entry.
+The review’s three questions for Evan Daniel, on the turns at 204, 227 and 229, the
+store’s packings and the slides at 229, wait for a reply to put them (think-e4ys).
 
 ## Credit and Licence
 
@@ -238,8 +244,8 @@ The record credits each packing to the finder the source names, as T-146 did:
 - Francisco Couzo at 204 and 260, the packings of issue #678 (T-223); at 204 his source
   credits Mykhailo Polkovskyi’s construction, and at 260 it says it seeded Joost de
   Winter’s #668 packing from Evan Daniel’s exact-form certificate;
-- Francisco Couzo at 227, his #672 refinement of Joost de Winter’s #668 packing
-  (T-196), measured above;
+- Francisco Couzo at 227, the refinement of Joost de Winter’s #668 packing (T-196) that his
+  #672 reports, measured above;
 - Evan Daniel at 229, his #674 packing (T-199), which started from Couzo’s #672 packing,
   which refines de Winter’s, as the site’s `lineage.yaml` records.
 

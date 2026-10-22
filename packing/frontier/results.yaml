@@ -30800,13 +30800,14 @@ results:
 
       Credit the packings to their finders, as the source's lists name them: Francisco
       Couzo's at 204 (#678, T-223, which his source credits to Mykhailo Polkovskyi's
-      construction), 227 (#672, T-227, his refinement of Joost de Winter's #668 packing,
-      T-196)
-      and 260 (#678, T-223, his arrangement from a search seeded with Evan Daniel's
-      exact-form certificate of Joost de Winter's #668 packing), and Evan Daniel's own at
-      229 (#674, T-199, from Couzo's #672 packing, which refines de Winter's). Evan Daniel
-      (https://github.com/evand/square-packing) refreshed each packing from his store,
-      solved it to the exact side stated (at 229 after a polish), regularized it for
+      construction), 227 (#672, T-227, the refinement of Joost de Winter's #668 packing,
+      T-196, that #672 reports; who made it the source does not say) and 260 (#678,
+      T-223, his arrangement from a search seeded with Evan Daniel's exact-form
+      certificate of Joost de Winter's #668 packing), and Evan Daniel's own at 229 (#674,
+      T-199, from Couzo's #672 packing, which refines de Winter's).
+
+      Evan Daniel (https://github.com/evand/square-packing) refreshed each packing from his
+      store, solved it to the exact side stated (at 229 after a polish), regularized it for
       display at that side and wrote the certificate. His credits say the repository's work
       was produced by Claude (Anthropic) under human direction.
     scope:
@@ -30921,7 +30922,7 @@ results:
       the least-gap pair by its gap: both maintained routes and the review's checker
       accepted each at exact contact and refused each 1e-30 further, at all four counts,
       as did the kernel's run_sharp. test_upper_bound_reports_regularized_1020.py runs the
-      kernel's two sharp controls on the 204 certificate at contact and 1e-30 past it.
+      kernel's two sharp controls on all four certificates at contact and 1e-30 past it.
 
       In the packet's frozen comparison, read before #704 merged: at n = 204 the
       certificate is below the case's ceiling (Daniil Ostashev, improved by PingYou Ltd
@@ -31141,9 +31142,10 @@ results:
       71427829379429597600111901507/4589408083628500000000000000 and s(229) <=
       231170315041711399213831561/14771101209934000000000000. Complete native feasibility
       outcomes are retained separately; the entry awaits independent review. At 227 it is
-      below the case's house best packing, de Winter's T-196, and Evan Daniel's solved view
-      of this packing (T-225) is smaller still; at 229 Evan Daniel's #674 update (T-199) was
-      already smaller.
+      below de Winter's T-196, the house best packing when it was reported; Evan Daniel's
+      solved view of this packing (T-225), smaller still, is the house since 22 October
+      2026. At 229 Evan Daniel's #674 opening and update (T-198, T-199), reported after it,
+      are smaller.
 
       The issue states that each bound is strictly smaller than the source's previous
       published index and a reviewed comparison envelope including deletion and repeated L
@@ -31260,9 +31262,10 @@ results:
       entry.
     next_rung: >-
       Independently review the retained replay (think-0nse). At 227 the entry is 1.71e-4
-      below the house T-196, and Evan Daniel's solved view of this packing (T-225) lies
-      1.76e-11 below it and is the house the rule selects; at 229 it is superseded on entry
-      by T-199, 1.32e-5 below it. The 44 rows beyond the corpus are think-2vjc's.
+      below T-196, the house when it was reported, and Evan Daniel's solved view of this
+      packing (T-225), 1.76e-11 below it, is the house since 22 October 2026; at 229 it is
+      superseded on entry by #674's opening and update (T-198, T-199), reported after it,
+      T-199 1.32e-5 below it. The 44 rows beyond the corpus are think-2vjc's.
     unfinished_confirmations:
       - what: >-
           Review the retained two-route replay of #672's 227 and 229 certificates and enter

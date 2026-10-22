@@ -41313,7 +41313,7 @@ evidence:
       review's, kept with their receipts out-controls-nNNN.json in the packet's
       review/review-2026-10-21/ (V-evand-regularized-1020-review-controls), and
       test_upper_bound_reports_regularized_1020.py runs the kernel's two sharp controls on
-      the 204 certificate at contact and 1e-30 past it on both routes. The source's own
+      all four certificates at contact and 1e-30 past it on both routes. The source's own
       checkers were not run here, and the source's statements that each side is the exact
       optimum of the store's best packing and that each view is the same packing are not
       decided. Finite feasibility only: no lower bound, optimum, local minimum, rigidity,
@@ -41426,15 +41426,16 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-10-22'
-    limitations: 'This atom records the source author''s report of 2 exact rational certificates at af8cb79.
-      A separate complete repository replay is retained for n = 227 and 229: 2 positives and 4 duplicate-square
-      and outside-container controls passed their required outcomes on both routes, 310542 pair decisions;
-      summed over the 6 jobs, the receipt records 23.85 route CPU seconds and 24.17 job wall seconds, the
-      longest job 4.3 seconds. In every positive squares touch the box, a least wall clearance of exactly
-      0, and every pair clears by at least 1.19e-12. Independent review and confirmation remain pending.
-      The source''s own checkers were not run here. The two maintained routes, the sqpack rational witness
-      verifier and the independent rational corner checker, share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. No two independent methods, human oversight or
+    limitations: 'This atom records the source author''s report of 2 exact rational certificates at
+      af8cb79. A separate complete repository replay is retained for n = 227 and 229: 2 positives and 4
+      duplicate-square and outside-container controls passed their required outcomes on both routes,
+      310542 pair decisions; summed over the 6 jobs, the receipt records 23.85 route CPU seconds and
+      24.17 job wall seconds, the longest job 4.3 seconds. At 229 squares touch the box, a least wall
+      clearance of exactly 0; at 227 every wall clears by at least 1.00e-15; and every pair clears by at
+      least 1.19e-12. Independent review and confirmation remain pending. The source''s own checkers
+      were not run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight or
       optimality is claimed.'
   - id: E-couzo-675-certificate-report
     claim: upper-bound

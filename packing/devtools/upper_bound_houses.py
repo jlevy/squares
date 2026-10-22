@@ -24,7 +24,8 @@ the case corpus through that module, the certificate bound to its pinned digest 
 kernel's three jobs kept in the packet's own receipt (`couzo_678_replay house-jobs`). The
 adoption of 22 October 2026 moved both of its counts, and the last counts of `T-196` and
 `T-199`, to `T-225`, so none of the three is a source here now; `couzo_678_source` stays
-for a pass that houses issue 678 again.
+for a pass that houses issue 678 again, and a test of the house adoption holds it to the
+packet at both counts.
 
 **No geometry runs in a check.** `check_houses` admits the inputs and compares the
 retained witness with the one they rebuild; `build_witness`, which writes a house, also

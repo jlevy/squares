@@ -3056,6 +3056,30 @@ def test_a_write_and_a_dry_run_print_what_the_moves_owe(
     assert len(capsys.readouterr().out.splitlines()) == 1
 
 
+def test_issue_678s_reader_still_builds_t223s_source_at_both_counts() -> None:
+    """`couzo_678_source` houses no count since T-225 took 204 and 260 on 22 October 2026.
+    It stays for a pass that houses issue 678 again, so it is held to its packet here
+    (review A6 of #718): each count's certificate, rebuilt from its pinned bytes, sits just
+    above T-225's side, and its three jobs, origin, receipt and inputs all read."""
+    source = houses.couzo_678_source()
+    assert source.result == "T-223"
+    assert "T-223" not in set(houses.ADOPTED.values())
+    margins = {204: Fraction(1389753, 10**15), 260: Fraction(2514377, 10**17)}
+    for n, margin in margins.items():
+        certificate = source.certificate(n)
+        assert certificate.n == n
+        above = Fraction(certificate.side) - houses.side(n)
+        assert abs(above - margin) < margin / 10**6, n
+        assert set(source.jobs(n, certificate)) == {
+            "positive",
+            "duplicate-square-overlap",
+            "square-translated-outside-container",
+        }
+        assert source.origin(n).path == source.stored(n)
+        assert source.receipt(n).is_file()
+        assert all(path.is_file() for path in source.inputs([n]))
+
+
 def test_an_overtaken_staged_adoption_reads_as_history() -> None:
     """At 204 T-186's section said the case kept that packing until T-193's staged adoption
     moved it; on 20 October 2026 issue 678's smaller certificate (T-223) moved it instead,

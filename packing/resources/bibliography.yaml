@@ -3093,12 +3093,12 @@ sources:
     lineage: builds-on-project
     credit: Daniel after Couzo, de Winter, Polkovskyi, Levy
     short_credit: Daniel after Couzo et al.
-    note: 'Four complete exact certificates at 0075967bace18a3deabcc0baa64c2fb294fc80a0 from the display-regularized
-      record lists of search/regularize: at 204, 227 and 260 Francisco Couzo''s packings (at 227 his #672
-      refinement of Joost de Winter''s #668 packing) and at 229 Evan Daniel''s own #674 packing, each solved
-      to its exact side, regularized for display at that side and scaled by 1 + 1e-20. MIT-licensed certificates
-      and JSON retained; Claude assistance disclosed. The source claims no record; no KKT, same-packing,
-      local or global optimality is admitted.'
+    note: 'Four complete exact certificates at 0075967bace18a3deabcc0baa64c2fb294fc80a0 from the
+      display-regularized record lists of search/regularize: at 204, 227 and 260 Francisco Couzo''s packings
+      (at 227 the refinement of Joost de Winter''s #668 packing that his #672 reports) and at 229 Evan
+      Daniel''s own #674 packing, each solved to its exact side, regularized for display at that side and
+      scaled by 1 + 1e-20. MIT-licensed certificates and JSON retained; Claude assistance disclosed. The
+      source claims no record; no KKT, same-packing, local or global optimality is admitted.'
   - key: '[Couzo issue 670 2026-10-17]'
     authors:
     - Couzo

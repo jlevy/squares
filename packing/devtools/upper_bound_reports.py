@@ -2294,11 +2294,34 @@ def _count_word(n: int) -> str:
     return _WORDS[n] if n < len(_WORDS) else str(n)
 
 
+def _walls(found: Mapping[int, Mapping[str, str]], gap: Fraction) -> str:
+    """The replay's wall and pair margins: every positive clearing every wall, every one
+    touching the box, or, where the positives differ, the counts that touch named."""
+    walls = {n: Fraction(row["exact_verify_containment_clearance"]) for n, row in found.items()}
+    touching = [n for n, wall in walls.items() if not wall]
+    clear = [wall for wall in walls.values() if wall]
+    pairs = f"every pair clears by at least {_floor_sci(gap)}."
+    if not touching:
+        return (
+            f"Every positive clears every wall by at least {_floor_sci(min(clear))} and {pairs}"
+        )
+    if not clear:
+        return (
+            "In every positive squares touch the box, a least wall clearance of exactly 0, "
+            f"and {pairs}"
+        )
+    cleared = [str(n) for n in walls if walls[n]]
+    return (
+        f"At {_and([str(n) for n in touching])} squares touch the box, a least wall "
+        f"clearance of exactly 0; at {_and(cleared)} every wall clears by at least "
+        f"{_floor_sci(min(clear))}; and {pairs}"
+    )
+
+
 def _replay(positives: dict[int, Any], record: Mapping[str, Any]) -> str:
     summary = receipt_summary(record)
-    found = margins(positives).values()
-    wall = min(Fraction(row["exact_verify_containment_clearance"]) for row in found)
-    gap = min(Fraction(row["exact_verify_best_pair_gap"]) for row in found)
+    found = margins(positives)
+    gap = min(Fraction(row["exact_verify_best_pair_gap"]) for row in found.values())
     return (
         f"A separate complete repository replay is retained for n = "
         f"{_and([str(n) for n in positives])}: {_many(len(positives), 'positive')} and "
@@ -2306,14 +2329,7 @@ def _replay(positives: dict[int, Any], record: Mapping[str, Any]) -> str:
         f"required outcomes on both routes, {summary['pair_decisions']} pair decisions; summed "
         f"over the {summary['jobs']} jobs, the receipt records {summary['route_cpu_seconds']} "
         f"route CPU seconds and {summary['job_wall_seconds']} job wall seconds, the longest "
-        f"job {summary['longest_job_seconds']} seconds. "
-        + (
-            f"Every positive clears every wall by at least {_floor_sci(wall)} and every pair "
-            f"by at least {_floor_sci(gap)}."
-            if wall
-            else "In every positive squares touch the box, a least wall clearance of exactly "
-            f"0, and every pair clears by at least {_floor_sci(gap)}."
-        )
+        f"job {summary['longest_job_seconds']} seconds. " + _walls(found, gap)
     )
 
 

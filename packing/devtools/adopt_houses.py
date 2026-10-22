@@ -161,6 +161,9 @@ HAND_MARKED = frozenset({155, 183, 258, 263, 302, 308})
 #: The first pass whose writer also marks the closing sentence of a T-155 view's section as
 #: history (`_regularized_certificate`); earlier passes' records read as they wrote them.
 VIEW_SECTION_FROM = "2026-10-19"
+#: The pass that retained and registered Couzo's #672 (T-227), from which the intake's and
+#: T-199's sentences saying it was not retained are history (`_retained_672`).
+RETAINED_672_FROM = "2026-10-22"
 #: The first pass whose writer marks an earlier section's staged-adoption sentence as history
 #: (`staged_history`): on 20 October 2026 issue 678's certificate (T-223) took 204 off T-193's
 #: staged adoption, the first staged count a smaller packing overtook in a written section.
@@ -832,8 +835,9 @@ RESULTS: dict[str, Prose] = {
         ),
         lineage_at={
             227: (
-                "The source names Francisco Couzo’s #672 packing (T-227), his refinement of "
-                "Joost de Winter’s #668 packing (T-196), as the one it regularizes and calls "
+                "The source names Francisco Couzo’s #672 packing (T-227), the refinement of "
+                "Joost de Winter’s #668 packing (T-196) that #672 reports, as the one it "
+                "regularizes and calls "
                 "the certificate not a new bound: Evan Daniel solved that packing to its "
                 "exact side, $1.76 \\times 10^{-11}$ below #672’s certificate, and "
                 "regularized it for display at that side. Measured by the import and again "
@@ -929,9 +933,14 @@ def _couzo(start: str) -> Credit:
     return Credit((finder,), (COUZO,), f"Francisco Couzo’s refinement of {whose} packing")
 
 
-def _regularized(finder: str, whose: str, *, via: str | None = None) -> Credit:
+def _regularized(
+    finder: str, whose: str, *, via: str | None = None, how: str | None = None
+) -> Credit:
+    """Evan Daniel's regularization of `finder`'s packing, as `via` refined it, or as `how`
+    says where the source says less (review A4 of #718). The clause carries no comma of its
+    own, so each sentence that quotes the credit punctuates it (review A5)."""
     improved = (via, DANIEL) if via else (DANIEL,)
-    refined = f", as {via} refined it," if via else ""
+    refined = how if how is not None else (f" as {via} refined it" if via else "")
     return Credit(
         (finder,),
         improved,
@@ -1227,7 +1236,14 @@ CREDITS: dict[int, Credit] = {
     # credited with the refinement and Daniel with the regularization, as at 258. The house
     # it replaced was de Winter's packing of issue 668 (T-196), from a search the issue says
     # started from this repository's catalogue.
-    227: _regularized(DE_WINTER, "Joost de Winter’s", via=COUZO),
+    # #672 reports the refinement; who made its CT105 submission the source does not say,
+    # and the #672 reply asks (review A4 of #718).
+    227: _regularized(
+        DE_WINTER,
+        "Joost de Winter’s",
+        via=COUZO,
+        how=" as refined in Francisco Couzo’s #672 report",
+    ),
     # T-174's regularization of T-128's packing, 46 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
     228: Credit(
@@ -2689,6 +2705,28 @@ def staged_history(text: str, until: str, house: str) -> str:
     return _STAGED_SENTENCE.sub(past, text)
 
 
+def _retained_672(text: str) -> str:
+    """The intake's and T-199's statements that Couzo's #672 was neither retained nor
+    verified here, in the past tense: the pass of 22 October 2026 retained it and
+    registered it as T-227, and measured it against T-199 (review A2 of #718)."""
+    text = re.sub(
+        r"Couzo’s\s+intervening\s+claim\s+remains\s+Stage\s+1\s+under\s+`think-2vjc`,\s+with"
+        r"\s+no\s+packet\s+or\s+verification\s+adopted\s+here\.",
+        "Couzo’s intervening claim remained Stage 1 under `think-2vjc`, with no packet or "
+        "verification here, until 22 October 2026, when it was retained and registered as "
+        "T-227.",
+        text,
+    )
+    return re.sub(
+        r"and\s+#672\s+is\s+not\s+yet\s+retained,\s+so\s+that\s+step\s+is\s+the\s+source’s"
+        r"\s+\(T-199\)\.",
+        "and #672 was not retained until 22 October 2026, so that step is the source’s "
+        "(T-199); measured since (T-227), #672’s packing pairs with T-199’s under no "
+        "symmetry.",
+        text,
+    )
+
+
 def historical(move: Move, text: str) -> str:
     """The body's own statements of the earlier house, marked as history.
 
@@ -2734,6 +2772,8 @@ def historical(move: Move, text: str) -> str:
     text = _regularized_certificate(move, text)
     text = held_history(text)
     text = pending_history(text, until)
+    if houses.adopted_on(n) >= RETAINED_672_FROM:
+        text = _retained_672(text)
     if houses.adopted_on(n) >= STAGED_HISTORY_FROM:
         text = staged_history(text, until, move.house.result)
     # The records are wrapped, so a sentence may break at any space; whitespace is

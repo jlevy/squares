@@ -1183,14 +1183,16 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
             assert margins[f"exact_verify_{field}"] == margins[f"independent_{field}"]
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
-    # SQUISH's, #567's, #622's and Couzo's #670 and #675 squares touch the box at 204;
-    # every other source's clear it.
+    # Every positive of SQUISH's, #567's, #622's and Couzo's #670 and #675 touches the box.
+    # Couzo's #672 touches at 229 and clears every wall at 227, so its walls mix; every
+    # other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
     }
     touching = {SQUISH_481, SQUISH_500, PINGYOU_261, PINGYOU_622, COUZO_670, COUZO_675}
     assert (walls == {0}) is (name in touching)
+    assert (0 in walls and len(walls) > 1) is (name == COUZO_672)
     # Only #567's and #622's squares touch each other, an exact contact the kernel admits;
     # every other source's pairs clear.
     gaps = {
