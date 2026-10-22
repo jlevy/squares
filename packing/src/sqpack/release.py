@@ -2110,8 +2110,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_optimality_review, "
             "render_n11_threshold_bound_review, render_packing_methods and "
             "render_n11_lower_bounds_explainer write 68 files, byte-identical among the "
-            "three. No PDF was printed; each prints from that HTML. Retain v0.4.15, v0.1.7, "
-            "v0.1.0 and v0.2.3."
+            "three. After review A's repoint of 77 start rows in source-coverage.yaml, "
+            "rendered again at link revision 728dc883 from this tree at cecd6e26 and from "
+            "main's: the same 68 files, byte-identical between the two. No PDF was "
+            "printed; each prints from that HTML. Retain v0.4.15, v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
