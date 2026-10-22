@@ -191,9 +191,10 @@ beyond a tenth from T-196’s (largest 0.080, 58 turned), so #672 refines de Win
 packing, and the view is #672’s packing solved lower and regularized. #672’s
 certificate is `certificates/n227.cert` at
 `franciscouzo/square-packing@af8cb7959aead318c0cf5e9f873de3caa763f77a`, SHA-256
-`65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17`; no packet retains
-it (think-2vjc owns #672’s import), and the program reads a copy fetched at that commit
-and refuses any other bytes.
+`65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17`. When this packet
+was built no packet retained it, so the program reads a copy fetched at that commit and
+refuses any other bytes; #672’s import (T-227) now retains the same bytes in
+[`couzo-issue672-2026-10-17`](../couzo-issue672-2026-10-17/README.md).
 At 260, 207 of the 260 squares lie within $10^{-9}$ of T-223’s and none turns by $10^{-6}$ degrees, the largest by $1.294 \times 10^{-7}$; the 53
 that move slide, as the method log says the regularization does. At 204 and 229 the
 slides are larger, and at 229 large enough that nearest centres pair the squares one to

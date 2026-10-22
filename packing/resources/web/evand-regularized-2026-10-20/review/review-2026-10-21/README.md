@@ -19,8 +19,9 @@ The lane’s `data/` directory is left out: it held copies of this packet, of th
 packet’s receipt decompressed, of `main`’s case records at 204 to 324, and of the
 certificates named below, all of which the repository keeps, and one fetched file,
 #672’s `certificates/n227.cert` at `franciscouzo/square-packing@af8cb79` (SHA-256
-`65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17`), which is
-think-2vjc’s to retain with #672’s import.
+`65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17`), which #672’s
+import now retains in
+[`couzo-issue672-2026-10-17`](../../../couzo-issue672-2026-10-17/README.md) (T-227).
 
 ## What Decides What, and What Is Registered
 
@@ -109,8 +110,9 @@ python $P/sharp_controls_t225.py $CERTS outputs 227 229
 | `diag_pair_t225.py` | at 204, 229 and 260 either move of the least-gap pair closes a second pair at the same exact gap | `outputs/diag-pair.log` |
 
 `outputs/out-check-672-n227.json` is the checker’s run on #672’s fetched certificate
-(feasible at its own side on both routes; it decides nothing for this record, since no
-entry registers #672). `outputs/check-replay.log`, `check-claims.log` and
+(feasible at its own side on both routes). It decides nothing for this record: T-227,
+which registers #672 since this review, rests on its own replay, and its review is
+think-0nse’s. `outputs/check-replay.log`, `check-claims.log` and
 `acquire-check.log` are this lane’s runs of the packet’s own `check --replay` (all 12
 jobs equal to the receipt, 62 s), `check-claims` (equal to the retained `claims.json`)
 and `acquire_source --check`. `outputs/upstream-blobs.txt` is the Git blob of each of
