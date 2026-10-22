@@ -502,7 +502,7 @@ def test_structured_links_reject_decoded_markup_and_unsafe_authorities() -> None
 def test_structured_link_markdown_delimiters_cannot_create_html_links() -> None:
     injection = ")[Injected](https://evil.example/x)"
     target = "https://example.com/audit" + injection
-    artifact_target = "https://jlevy.github.io/squares/result/t-151.html#" + injection
+    artifact_target = "https://squaremath.org/result/t-151.html#" + injection
     for dated in (False, True):
         data = document()
         entry = data["entries"][0]
@@ -641,7 +641,7 @@ def test_publication_artifacts_and_historical_releases() -> None:
             {
                 "kind": "result",
                 "label": "Current result",
-                "target": "https://jlevy.github.io/squares/result/t-151.html",
+                "target": "https://squaremath.org/result/t-151.html",
             }
         ],
         publication={"evidence": "https://github.com/jlevy/squares/actions/runs/123"},
@@ -656,9 +656,7 @@ def test_publication_artifacts_and_historical_releases() -> None:
     data["entries"][0]["artifacts"][0]["target"] = "https://evil.example/result.html"
     with pytest.raises(ValueError, match="registered public"):
         render_changelog.validate(data)
-    data["entries"][0]["artifacts"][0]["target"] = (
-        "https://jlevy.github.io/squares/result/t-151.html"
-    )
+    data["entries"][0]["artifacts"][0]["target"] = "https://squaremath.org/result/t-151.html"
     data["entries"][0].pop("publication")
     with pytest.raises(ValueError, match="publication evidence"):
         render_changelog.validate(data)
@@ -1107,3 +1105,21 @@ def test_news_levels_are_described_by_the_rubric_that_scores_news() -> None:
     rating = render_changelog.news_rating({"score": 4, "rationale": "A private reason."})
     assert html.escape(render_changelog.news_significance_tooltip(4), quote=True) in rating
     assert "A private reason." not in rating
+
+
+def test_prior_domain_artifacts_remain_valid_for_retained_history() -> None:
+    current = render_changelog.load()
+    previous = copy.deepcopy(current)
+    for entry in previous["entries"]:
+        for artifact in entry.get("artifacts", []):
+            artifact["target"] = artifact["target"].replace(
+                "https://squaremath.org/", "https://jlevy.github.io/squares/"
+            )
+    render_changelog.validate(previous)
+    render_changelog.validate_frozen(current, previous)
+    artifact = next(
+        entry["artifacts"][0] for entry in previous["entries"] if entry.get("artifacts")
+    )
+    artifact["target"] = "https://unrelated.example/tutorial.html"
+    with pytest.raises(ValueError, match="not a registered public destination"):
+        render_changelog.validate(previous)

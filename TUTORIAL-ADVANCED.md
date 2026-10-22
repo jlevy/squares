@@ -865,8 +865,7 @@ present.
 
 These strategies explain the retained early search campaign.
 Its negative measurements are scoped to those implementations and seeds.
-The
-[methods survey](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html)
+The [methods survey](https://squaremath.org/papers/square-packing-methods-survey.html)
 connects the wider constructive and computational methods to the published records.
 
 There are two layers: the catalogue of everything anyone has ever used, and the strategy
@@ -1037,18 +1036,18 @@ result stays at `V3/C3`. These labels describe the retained evidence and confirm
 the mathematical claim is the proved lower bound above.
 
 The detailed lesson below starts with the simpler point-only T-018 certificate;
-[the standalone explainer](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html#proof-of-the-new-lower-bound)
+[the standalone explainer](https://squaremath.org/papers/n11-lower-bounds-explainer.html#proof-of-the-new-lower-bound)
 uses it as a visual worked example, then gives the threshold-counting and dilation proof
 of T-025 and T-026. The numerical $3.81$ result is not a premise of T-026. T-018’s short
 standard-library checker exposes the shared geometry and counting mechanism end to end.
 That point-certificate checker does not verify the threshold certificates.
 The explainer is Part I of a series on $n = 11$, read in order:
-[Part II](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html)
-reviews Overbeck’s certified bound $s(11) > 31/8$ (T-037), and
-[Part III](https://jlevy.github.io/squares/papers/n11-optimality-review.html) reviews
-the proof that Trump’s packing is optimal (T-060). The linked T-025 and T-026 claim
-documents each embed the standard-library threshold verifier and the exact certificate
-bytes it checks; T-026 also embeds and re-derives its dilation record.
+[Part II](https://squaremath.org/papers/n11-threshold-bound-review.html) reviews
+Overbeck’s certified bound $s(11) > 31/8$ (T-037), and
+[Part III](https://squaremath.org/papers/n11-optimality-review.html) reviews the proof
+that Trump’s packing is optimal (T-060). The linked T-025 and T-026 claim documents each
+embed the standard-library threshold verifier and the exact certificate bytes it checks;
+T-026 also embeds and re-derives its dilation record.
 
 Two different quantities get called a gap in this subject, and this document keeps them
 apart. The **bound gap** is the distance between the best upper and lower bounds, the
@@ -1999,13 +1998,13 @@ Two more come from the optimality records, which this document follows in
 factor rather than a clearance function $g_j$, and $d$ and $w$ are a wall cell’s depth
 and width rather than an angular error and an atom’s weight.
 
-[Part II](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html) of the
-$n = 11$ series, the review of Overbeck’s $s(11) > 31/8$, defines a few symbols of its
-own, which are local to it: the parent side $A$, the least charge $\Gamma$ of an
-assigned core, the total budget $M$, and a row $(a, b, t, B)$, an interval $[a, b]$ of
-parent half-angle tangents with its core’s direction $t$ and side $B$. Its $B$ is the
-shrunken side above, one for each row; its $a$ and $b$ are a row’s ends, not the
-angle-class angle $a$ of this card.
+[Part II](https://squaremath.org/papers/n11-threshold-bound-review.html) of the $n = 11$
+series, the review of Overbeck’s $s(11) > 31/8$, defines a few symbols of its own, which
+are local to it: the parent side $A$, the least charge $\Gamma$ of an assigned core, the
+total budget $M$, and a row $(a, b, t, B)$, an interval $[a, b]$ of parent half-angle
+tangents with its core’s direction $t$ and side $B$. Its $B$ is the shrunken side above,
+one for each row; its $a$ and $b$ are a row’s ends, not the angle-class angle $a$ of
+this card.
 
 ## 11. Further Reading
 
@@ -2141,7 +2140,7 @@ An optional system is used only to rederive one constant.
 | what has gone wrong and what now stops it recurring | [`defects.md`](defects.md) |
 | the mathematics of $s(11)$ in depth | [Packing 11 Unit Squares](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) |
 | the whole $n = 11$ story before T-060, from what a proof must do to what was left | [`n = 11`, End to End](SYNOPSIS.md#n--11-end-to-end) |
-| how record packings are constructed, searched, refined and certified | [How Record Square Packings Are Found](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) |
+| how record packings are constructed, searched, refined and certified | [How Record Square Packings Are Found](https://squaremath.org/papers/square-packing-methods-survey.html) |
 | implementation methods and solver tooling | [Algorithms and Tooling](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) |
 | why pointing should beat scaling | [A Search Philosophy](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) |
 | what is known for every $n \le 324$ | [`frontier/`](packing/frontier/README.md) |
