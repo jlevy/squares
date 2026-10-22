@@ -5,7 +5,7 @@ title: "Import Evan Daniel: solved views below the record at 204, 227, 229 and 2
 kind: task
 status: in_progress
 priority: 2
-version: 19
+version: 22
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,10 +14,12 @@ child_order_hints:
   - is-01m5gcjg5g0z6fr6y4rh84fzkf
   - is-01m5gkk7zv20d0dtpje8t54xqx
   - is-01m5gmjp98m4b8qs2m9cpsvdae
+  - is-01m5gv0wafpa7w6ytsz1by4mex
+  - is-01m5gvf83zhcjpfmrxsmv05pwj
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:43:33.500Z
-updated_at: 2026-10-22T03:19:42.943Z
+updated_at: 2026-10-22T04:11:31.050Z
 started_at: 2026-10-21T17:43:35.847Z
 ---
 Stage 0 owner for four certificates Evan Daniel published, with no issue, in evand/square-packing at 0075967bace18a3deabcc0baa64c2fb294fc80a0 (committed 2026-10-20T02:36:12Z, "Site up to date: records at 183, 229, 308 (ours) and 204, 227, 260 (Couzo), certified and regularized"): search/regularize/lists/certs/n-NNN.cert.gz, each with n-NNN.json.gz beside it. Found by the read-only triage of the 21 October sweep (c-triage-sweep-1021b). Nothing has been retained, replayed or registered.
@@ -73,3 +75,4 @@ blocked_on: none
 2026-10-22 03:05 c-lane-t225-stage4: pushed 80638859d (ls-remote confirmed). Since 00:58: 2be7f6c3b regularized 204/229/260 (229 grid-slack 0.5 drawn; 204 and 260 settled; 204 solved view 8.91e-12 lower is register candidate think-13e9); 784244a58 PR-A (T-226 #670@204, T-227 #672@227/229, T-228 #675@204, all V0/C0 with validation bead think-0nse; T-225's 227 item of T-227, moved 16, 0.168, 2.542 deg; 227 adopted and regularized: Daniel's same-side view drawn); 92e2fd98e/ab006e474 re-runs and records fixes; ba8b3cc97 DATA_REVISION ab006e47; a903fdde1 explainer v0.4.15 (228 results); 89a145fa4 three papers' no-change record (68 files x4 renders, identical but the explainer's count); 670a15fab site v0.8.18 (PUBLICATION_REVISION 89a145fa); 80638859d #716's S2 coverage omission. stamp_landed no-op; source bytes 230,732,253 < 232,783,872; check_release_impact clean. Note #715's branch also cut v0.8.18: whichever merges second re-cuts. Next: packing-validate --records --jobs 2, then --push --jobs 2, draft PR (S2, intake), hosted CI.
 2026-10-22 02:30 c-lane-t225-stage4: (the note above was written at 02:22Z, not 03:05.) a3ff722bb fixes the packet and review READMEs' stale "no packet retains #672's n227.cert" (now couzo-issue672-2026-10-17). Draft PR https://github.com/jlevy/squares/pull/718 (labels intake, S2), head a3ff722bb pushed and ls-remote confirmed. --records passed at 80638859d (52/52, 105 s). Running: --push --jobs 2 locally; hosted CI. Next: fill the PR's Validation section, address CI.
 2026-10-22 03:25 c-lane-t225-stage4: pushed cc3ba9b1b to PR #718 (ls-remote confirmed). Since a3ff722bb: hosted findings fixed (da2671cfe rigidity blocks, f82fc445f tests and t-180 budget, 369db682b URL doc, f42ddb47a composite figure); 653597be4 merges main de1651e1 (#717 took v0.8.18); 089cf042d re-pin to 653597be; d39f458cb papers' record against de1651e1; dd78ff05b site re-cut v0.8.19 (PUBLICATION_REVISION d39f458c); 68b172003 the four 03:08Z reply records (coordinator's diff, check_requests --github 0 differences); cc3ba9b1b survey record. --records passes at cc3ba9b1b (52/52, 166 s); source bytes 231,635,829 (headroom 1,148,043) at dd78ff05b. Running: --push --jobs 2 locally (log scratchpad/push-tier5.log), hosted CI at cc3ba9b1b. Next: fill the PR body's Validation, report.
+2026-10-22 04:15 c-lane-t225-stage4: PR #718 head c3ede79e2 (pushed, ls-remote confirmed), draft, labels intake and S2, title says v0.8.19. Since cc3ba9b1b: 6ab4ab8f0 #684 reply record; 00e3de373 review A fixes (A1-A7, A9); f6457df8f re-pin DATA_REVISION 00e3de37; c3ede79e2 papers' record. Review A dispositions posted (issuecomment-6332488563); beads think-nnxw and children closed. New bead think-e4ys: put the review's three questions to Evan Daniel. Hosted CI at c3ede79e2: 31 pass, 28 skipped (Packing validation 39720037480). --records 52/52 at c3ede79e2; source bytes 231,655,578. think-cyeo and think-fltj are moot (the coordinator closes them after merge). Next: the coordinator's merge; the stage 7 replies (drafts need the reconciliations listed in the PR); think-0nse; think-13e9; PR-B.

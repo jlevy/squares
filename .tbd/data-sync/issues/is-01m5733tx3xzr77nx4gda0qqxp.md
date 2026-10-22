@@ -5,7 +5,7 @@ title: "Import franciscouzo: 227, 229, 330-996: registration request (#672)"
 kind: task
 status: in_progress
 priority: 2
-version: 12
+version: 13
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.866Z
-updated_at: 2026-10-22T02:28:43.231Z
+updated_at: 2026-10-22T04:02:04.104Z
 started_at: 2026-10-18T12:53:37.251Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/672
@@ -239,3 +239,4 @@ blocked_on: none
 
 2026-10-22 02:00 c-lane-t225-stage4 (PR-A, on the coordinator's word; branch claude/stoic-thompson-ku09fw, pushed 784244a58): #672's in-corpus rows registered as T-227 (227 and 229, V0/C0, S2 draft), packet couzo-issue672-2026-10-17 at af8cb795 (n227.cert 65b03df8...8c17, n229.cert 9ab667ec...609f, with JSON; index, manifest, SHA256SUMS and checker pinned by digest; measure/identity.py/json). Replay on both maintained routes: 2 positives pass, 4 controls refused, 310,542 pair decisions, 23.85 route CPU s. regularizations: of T-196 at 227 (59 beyond 1e-3, at most 0.0796, 5.842 deg) and 229 (57, 0.00941, 0.0308 deg). T-225's 227 item now names T-227 (16, 0.168, 2.542 deg); T-225 adopted at 227 in the pass of 22 October (credit: Daniel's display regularization of de Winter's packing as Couzo refined it). T-198/T-199 notes record #672@229 measured: no symmetry pairs them, 77/79 beyond a tenth, turns to 38.3 deg. Stage 4 of T-227 is think-0nse (validation bead); the T-225 review does not cover it. Beyond-horizon rows (44) wait for PR-B after #715's import. Reply drafts: coordinator scratchpad triage-backlog/replies/672-*.md (not posted).
 2026-10-22 02:30 c-lane-t225-stage4: PR-A is in draft PR https://github.com/jlevy/squares/pull/718 (head a3ff722bb, with T-225 stage 4 and adoption). The reply drafts need reconciling before posting: at 204 the house is T-225 (not T-223); at 227 T-225, which solves #672's packing and credits it, is the house, so T-227 is not pending adoption; the entries' stage 4 is think-0nse.
+2026-10-22 04:05 c-lane-t225-stage4: review A4 of #718: the house credit at 227 now reads "Evan Daniel's display regularization of Joost de Winter's packing as refined in Francisco Couzo's #672 report" (adopt_houses CREDITS[227], improved_by still Couzo and Daniel), and T-225's claim, its 227 lineage, the resources row, the bibliography note and the packet README say "the refinement ... that #672 reports", because the source does not say who made the CT105 submission. 672-after-PR-A.md already asks him; if he confirms it was his, restore "as Francisco Couzo refined it" (via=COUZO without how=) and refresh --n 227. Also A2: n-229's statements that #672 was unretained are past tense since 00e3de373.
