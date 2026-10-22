@@ -5,7 +5,7 @@ title: "Stage 4 for #719's in-corpus entry at 105 and 204: replay, independent r
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5h3rxsgydmfjazs3vmw05wp
 hold: null
 hold_until: null
 created_at: 2026-10-22T06:48:12.852Z
-updated_at: 2026-10-22T15:25:27.253Z
+updated_at: 2026-10-22T20:36:07.262Z
 started_at: 2026-10-22T06:48:15.575Z
 ---
 From the #719 triage (scratchpad triage-719/in-corpus.md): 105 is 5.18e-12 below T-174 (same arrangement re-solved); 204 is 1.006e-8 below T-225 (one to one, 6 squares moved > 0.1, one turned 25.6 deg). Replay ~1 CPU-min, one strong-max review, adoption and regularization 10-50 CPU-min; 105's grid-slack view and SETTLED[204] lapse; think-13e9 then superseded. After #719's records PR.
@@ -28,3 +28,5 @@ blocked_on: think-xyhn
 
 2026-10-22 c-lane-719-import (#722 review A, A3 and A6, data left for stage 4): three sentences in data files are stale, and the stage 4 PR that rewrites T-229 should take them (no re-pin was made for them in #722). (1) T-229's claim (packing/frontier/results.yaml, the "Credit ..." paragraph) says the issue gives Mikhail Polk: the author's 11:35:16Z edit of #719 changed only the two credit lines, to "Mishapolk (Mykhailo Polkovskyi)", the record's name, so say the issue credits Mykhailo Polkovskyi. (2) T-229's notes say the release's "second 105 file, 4.6e-12 above it ... pinned by digest only": certificates/n105.cert is not in upstream-subtree.sha256 and is pinned by the commit alone (4.64e-12 above n-105.cert, measured from the clone at 12fc466); n204.cert is the one pinned by digest. (3) The source register's mishapolk-issue719-2026-10-22 note (packing/frontier/source-coverage.yaml) says "the issue credits Mishapolk (Mikhail Polk)". The packet README, custody record, bibliography note and requests entry were fixed in #722 at 1eaa8624c.
 2026-10-22 c-lane-stage4-1022: stage 4 applied in draft PR #725 (head 7a7ff3cc1, stacked on #722; merges on or after 2026-10-23T00:00Z). Review mapped as docs/project/reviews/review-2026-10-22-mishapolk-719.md; programs and outputs retained at packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/ (data/ NOT retained). T-229 V3/C3, S2 confirmed; E-mishapolk-719-exact-feasibility (shared-components) and E-mishapolk-719-review-exact-feasibility (independent-implementation, clean room); verifiers V-mishapolk-719-review-check and -controls. RF-1..RF-9 applied, plus #722 review A3 (credit name) and A6 (n105.cert unpinned; 170 of 607 .cert files in scope). Adopted at 105 and 204 in the pass dated 2026-10-23 (LATER_PASSES['2026-10-23'] = {105, 204}; prior state house-adoption-prior-state-2026-10-23.json.xz), regularized: grid-slack 1-degree view drawn at 105, half-degree at 204; runs in packing/cases/regularized_drawings/think-4h23-2026-10-23/. At 204 Evan Daniel's regularizer solved T-229 to exactly n204.cert's header side (1.48e-11 below): the author's earlier publication, not registered or drawn (think-h01y). Reply draft: replies/stage4-1022/719-reply.md, not posted. Release held until #722 merges.
+
+2026-10-22 20:45Z coord-intake-1021b: #725 (https://github.com/jlevy/squares/pull/725, retargeted to main after #722 merged): review A approve after A1-A4 (fixed, dispositions posted); main cacdafc1f merged (a666710ef), #722's stage 7 reply records added (3d43e15da). Release (DATA_REVISION re-pin + papers, NO site cut) held for #729 (think-yjkq); merges on or after 2026-10-23T00:00Z (adoption pass dated 23 Oct).
