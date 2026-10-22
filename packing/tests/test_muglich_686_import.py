@@ -121,9 +121,11 @@ def test_derive_refuses_a_copy_off_the_pinned_size_or_digest(
 
 def test_the_on_request_prune_has_no_registered_control_consumer() -> None:
     pruned = {imp.ROOT / "devtools/muglich_686_import.py", Path(__file__).resolve()}
-    assert pruned == controls.ON_REQUEST_IMPORT_TOOLS
+    # Other on-request tools joined the class on 2026-10-22 (think-i903). This pair stays
+    # in it, and the checks below hold for every member, not only this pair.
+    assert pruned <= controls.ON_REQUEST_IMPORT_TOOLS
     specification = safe_load((controls.ROOT / "devtools/controls.yaml").read_text())
-    for path in pruned:
+    for path in sorted(controls.ON_REQUEST_IMPORT_TOOLS):
         assert path in controls.PRUNE
         assert path.exists()
         relative = path.relative_to(controls.ROOT).as_posix()
