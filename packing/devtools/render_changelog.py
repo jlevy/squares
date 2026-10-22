@@ -1339,11 +1339,20 @@ def main(argv: Sequence[str] | None = None) -> int:
             validate_previous_ref(document, options.baseline_ref)
         if options.announcement_base:
             base, base_results = _announcement_base(options.announcement_base)
+            results = load_results()
             failures, notes = check_announcements(
                 document,
-                load_results(),
+                results,
                 base_results,
                 locate=lambda identifier, score: landing(identifier, score, base),
+            )
+            significant = sum(
+                result["significance"]["score"] >= ANNOUNCED_FROM for result in results
+            )
+            print(
+                f"announcements: {significant} registered S4 and S5 results, "
+                f"{len(ANNOUNCEMENT_EXEMPT)} exempt from before the News archive, "
+                f"{len(notes)} owed after this merge, {len(failures)} missing"
             )
             for note in notes:
                 print(f"announcement owed after merge: {note}")
