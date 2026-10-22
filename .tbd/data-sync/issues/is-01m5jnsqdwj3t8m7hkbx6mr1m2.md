@@ -5,7 +5,7 @@ title: Inventory site hierarchy and plan intuitive navigation menus
 kind: task
 status: in_progress
 priority: 2
-version: 14
+version: 15
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
 delegate: navigation-planner
 labels: []
@@ -21,10 +21,11 @@ child_order_hints:
   - is-01m5jqhsjcznm3w2f8kv5sw2b5
   - is-01m5jwa8f3se8mazs5yyrf7dq6
   - is-01m5jxkb9be0mqtaf9g2136t09
+  - is-01m5jzm40218cv1bv0z37gg25h
 hold: null
 hold_until: null
 created_at: 2026-10-22T20:45:47.321Z
-updated_at: 2026-10-22T23:02:06.889Z
+updated_at: 2026-10-22T23:37:29.345Z
 started_at: 2026-10-22T20:46:24.554Z
 ---
 Inventory every current page family, each named page/subpage, top tabs, local tabs, breadcrumbs and cross-links. Model as a tree and propose top-level tabs with menu items. Planning only, in parallel with landing PR733; keep its implementation unchanged.
