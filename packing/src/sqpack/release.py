@@ -86,8 +86,16 @@ class PublicationHistoryEntry(NamedTuple):
 #:
 #: Reproduce with `gh api "repos/jlevy/squares/deployments?environment=github-pages"` and,
 #: for each deployment's commit, what the page it built stated.
-# The leading entry is proposed for PR #578; confirm its date at first deployment.
+# The leading entry is proposed for PR #406; confirm its date at first deployment.
 PUBLICATION_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.9.1",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Document on the development page the storage guard that refuses bulk Git "
+            "blobs on every pull request and before each push."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.9.0",
         first_published="October 22, 2026",
@@ -1018,7 +1026,7 @@ EXPLAINER_REVISED = "October 21, 2026"
 #: is the explainer's, linked from its front (`PaperFront.history`). v0.1.0 is dated by
 #: the commit that published it (620ffff54); the day it first went live is not recorded
 #: (think-2cqu).
-# The leading entry is proposed for PR #578; confirm its date at first deployment.
+# The leading entry is proposed for PR #406; confirm its date at first deployment.
 OPTIMALITY_REVIEW_HISTORY = (
     PublicationHistoryEntry(
         version="v0.1.8",
@@ -1143,7 +1151,7 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 
 #: Every edition of Part II, the review of Overbeck's certified lower bound
 #: `s(11) > 31/8` (T-037), newest first, as `OPTIMALITY_REVIEW_HISTORY` is Part III's.
-# The leading entry is proposed for PR #578; confirm its date at first deployment.
+# The leading entry is proposed for PR #406; confirm its date at first deployment.
 THRESHOLD_REVIEW_HISTORY = (
     PublicationHistoryEntry(
         version="v0.1.1",
@@ -1287,6 +1295,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.9.0",
+        version="v0.9.1",
+        impact="patch",
+        reason=(
+            "Document on the development page the storage guard that refuses bulk Git "
+            "blobs on every pull request and before each push."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.15",
@@ -4006,6 +4024,31 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte identity. The changed development.md is published as "
             "development.html and is covered by this branch's site edition, not by "
             "this paper-only record."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "PR406's site v0.9.1 cut regenerated the five claim documents at "
+            "PUBLICATION_REVISION 404a2871, this branch's commit after integrating main "
+            "76496462b, and each differs from that main only in its source-link "
+            "revision, cadf73fd to 404a2871. The explainer links those documents "
+            "through repo_url rather than inlining them, so its HTML and Markdown are "
+            "unchanged by them, its PDF prints that HTML, and it keeps v0.4.16. "
+            "Source-compared, as the v0.8.6 cut's record was; no render of the claim "
+            "documents or the paper was taken."
         ),
     ),
     ReleaseNoPublicChange(
@@ -6968,7 +7011,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "cadf73fd"
+PUBLICATION_REVISION = "404a2871"
 
 
 def data_pathspec() -> tuple[str, ...]:
