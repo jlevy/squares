@@ -258,12 +258,12 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # identically. Left out, with this note and its release record, the snapshot measures
 # 229,891,287 bytes, 2,892,585 under the cap.
 # 2026-10-22, think-i903: main 7359fa8b6 read 231,655,578 bytes, 1,128,294 under the
-# unchanged 222 MiB cap, and main 0281e7763, with #720 merged, 232,414,111, 369,761
-# under it, with issue 719's records (about 0.5 to 0.8 MB) behind them. Answered by
-# option (b) again, with four on-request tools (below) and 121 entries here: 599 files
-# and 4,782,231 bytes that no worker command reads. They are the regularized drawings'
-# run evidence (each run's per-count reports, receipts and `run.json`, the selections'
-# JSON and the review galleries: 506 files, 2,912,772 bytes), the regularized bounds'
+# then 222 MiB cap, and main 0281e7763, with #720 merged, 232,414,111, 369,761 under it,
+# with issue 719's records (about 0.5 to 0.8 MB) behind them. Answered by option (b)
+# again, with four on-request tools (below) and 121 entries here: 599 files and
+# 4,782,231 bytes that no worker command reads. They are the regularized drawings' run
+# evidence (each run's per-count reports, receipts and `run.json`, the selections' JSON
+# and the review galleries: 506 files, 2,912,772 bytes), the regularized bounds'
 # generated views (60, 448,778), the 14 October ledger's retained lane claim copies and
 # undecided sides with the 14 and 16 October comment drafts (16, 851,114), the 8 October
 # n17 reconciliation and the 18 and 19 October issue and source receipts (5, 97,846),
@@ -280,14 +280,17 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # directory walks of `ledger check`, `check_generated_markdown` and
 # `test_change_scoped_selection`. `--audit-snapshot --prune-candidate` with the 121
 # against main's selector finds no registered mention and no inline or result rescue,
-# and every entry prunes something. With them and the on-request tools below left out,
-# all 174 controls fire at `-j 2`, and each of the 50 distinct commands, run unmutated
-# in a worker with them and in one without them, prints the same output apart from wall
-# times, the progress lines they pace and the runner-preflight lease timestamp, except
-# that `check_no_embedded_js` reads 1,879 Python files rather than 1,887, the eight
-# below fewer, to the same verdict; the four already red are red identically. Left out,
-# with this note and its release record, the snapshot measures 227,473,806 bytes,
-# 5,310,066 under the cap.
+# and every entry prunes something. #578 has since raised the cap to 255 MiB for the
+# contributor profiles (see `SNAPSHOT_MAX_BYTES`): main d660905ec, with it merged, reads
+# 266,509,045 bytes, 877,835 under it, and at that tree the audit finds no contributor
+# rescue either and the entries leave exactly the same 607 files with the tools below.
+# With them left out, all 174 controls fire at `-j 2`, and each of the 50 distinct
+# commands, run unmutated at d660905ec in a worker with them and in one without them,
+# prints the same output apart from wall times and the runner-preflight lease timestamp,
+# except that `check_no_embedded_js` reads 1,902 Python files rather than 1,910, the
+# eight below fewer, to the same verdict; the four already red are red identically. Left
+# out, with this note and its release record, the snapshot measures 261,568,999 bytes,
+# 5,817,881 under the cap.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
