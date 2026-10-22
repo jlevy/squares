@@ -5,12 +5,12 @@ title: "Polkovskyi's unclaimed n204.cert (12fc4667) is 1.48e-11 below T-229 and 
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
 created_at: 2026-10-22T14:11:56.015Z
-updated_at: 2026-10-22T14:11:56.015Z
+updated_at: 2026-10-22T18:40:12.889Z
 ---
 Found by the stage 4 lane c-lane-stage4-1022 (22 October 2026) while regularizing T-229 after adoption.
 
@@ -27,3 +27,7 @@ To do, after #719's reply question 4 ("which 204 file do you claim") is answered
 - Check the earlier-publications receipt and #719's ledger for whether n204.cert should already appear as an earlier/same-commit publication at 204 (#722 review A2: same-commit sides keep the smaller).
 
 blocked_on: think-xyhn
+
+## Notes
+
+2026-10-22 18:40Z coord-intake-1021b (from #725 review A, A2, https://github.com/jlevy/squares/pull/725#issuecomment-6348041004): correction to this bead's dating. The path certificates/n204.cert was first committed at 8bb41af5 (13 October) with a LARGER side and changed at 70a033f0 (14 October); the side equal to the project's regularized view first appears at 1851c2c7 (2026-10-22T05:29:48Z), the same commit that first published n-204.cert, the file T-229 cites. So the report to record is n204.cert's side dated by 1851c2c7 (the first commit holding THAT side), not by the path's first commit; 'earlier publication' is true only against the project's regularizer run. #722 review A2's rule (a commit's least side per count) also applies at this commit: 1851c2c7 published both n-204.cert and n204.cert, and n204.cert is the smaller.

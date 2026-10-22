@@ -5,12 +5,12 @@ title: "Site: continuous deployment identified by its git revision; drop site ed
 kind: feature
 status: open
 priority: 1
-version: 3
+version: 4
 labels:
   - release
 dependencies: []
 created_at: 2026-10-22T17:51:10.847Z
-updated_at: 2026-10-22T18:27:18.830Z
+updated_at: 2026-10-22T18:40:12.015Z
 ---
 Owner decision, 22 October 2026 (in conversation with the coordinator coord-intake-1021b):
 
@@ -34,3 +34,5 @@ Next: an implementation spec (c-design-release-1022), then a writer lane. In-fli
 Reading: versions are assigned when a snapshot of distributed artifacts (paper PDFs, videos, posters) is deliberately released, by one defined release process; not in ordinary PRs, and not per content change. The site (including the papers' web pages) deploys continuously and shows its build commit. Claim documents' link commit moves at snapshot release time.
 
 2026-10-22 18:35Z c-lane-release-pr1-1022 (for coord-intake-1021b): PR 1 of the implementation spec, "Stop cutting site editions", is open as draft https://github.com/jlevy/squares/pull/729 (branch claude/release-stop-site-editions, head 1d35cd517, based on main 78dc902c1). check_release_impact never selects the site and refuses any edit to the frozen PUBLICATION_HISTORY or PUBLICATION_REVISION, or a fresh site release-impact decision, with one message naming this bead; cut_release --component site refuses with the same message; release.py gets a docstring freeze note and freeze comments only; test_release pins the history at v0.9.1. Docs: development.md (Cutting an edition, Merging a Pull Request bullet 1, the changelog's release-impact paragraphs, Publishing the Explainer), result-import.md stage 5, and packages/workbench/README.md step 2. DATA_REVISION, release_pin, the footer, landed and paper/poster rules are untouched (PRs 2 and 3). Local: ruff/basedpyright 0 findings on changed files; 144 tests passed; records tier 52/52 at --jobs 2. If #722 (or another PR) lands a later site edition first, merging main into #729 moves FINAL_SITE_EDITION in test_release to it; open PRs still carrying a site cut must otherwise drop it.
+
+2026-10-22 18:40Z coord-intake-1021b: owner answers on the snapshot release design (spec scratchpad/release-design/spec-site-cd-and-snapshot-releases.md, §7): (1) cadence: ON REQUEST (the owner, or the coordinator when asked, runs snapshot status and releases; check-ins only report that one looks due); (2) DATED RELEASES with each artifact's own version (release/YYYY-MM-DD; explainer, papers, posters, films keep their own series); (3) the site links ONLY the released, versioned PDF for each paper (no per-deploy 'this page, printed' PDF); (4) released posters are REDRAWN with the version on their face at release time (committed posters carry no version). Footer and similar places: git commit + that commit's ISO committer time (UTC). PR 1 (stop cutting site editions) is in progress on claude/release-stop-site-editions.
