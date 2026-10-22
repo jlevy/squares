@@ -711,6 +711,29 @@ The evidence is retained in
 After it the index draws 95 views: 36 by the axis tool, 40 by Evan Daniel’s regularizer
 and 19 by the grid-slack generator’s version 1.
 
+On 23 October 2026 the adoption of Mykhailo Polkovskyi’s #719 re-solves (T-229,
+think-4h23) moved the house best packing at 105 from T-174, by $5.18 \times 10^{-12}$,
+and at 204 from T-225, by $1.006 \times 10^{-8}$. Both generators ran on the two
+witnesses: Evan Daniel’s regularizer
+(`evand-regularize-adopt-2026-10-23-n105-204-evand`, 166 CPU-seconds) and grid-slack at
+0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-23-n105-204-grid-deg05`, `-grid-deg1`
+and `-grid-deg5`, 69 CPU-seconds, retained under those names though they ran as
+`-grid-0.5`, `-grid-1` and `-grid-5`). The selection draws grid-slack’s 1-degree view at
+105 (223 / 241 sides against 215 / 233 for the axis tool’s view of the new witness, and
+one angle class fewer) and its half-degree view at 204 (6 light, 34 uneven and 6
+near-axis squares against 14, 59 and 11, and 505 / 543 sides against 421 / 511). His
+views at both counts are refused at row 7, where a house or stage total of shared sides
+falls. At 105 grid-slack’s view of T-174, which the adoption of 17 October drew, lapses
+with its witness, and at 204 the settlement on T-225’s witness leaves `SETTLED`. At 204
+his regularizer solved the witness $1.48 \times 10^{-11}$ lower, to exactly the side of
+the release’s other 204 file, `certificates/n204.cert`, which the #719 packet pins by
+digest: Polkovskyi’s earlier publication, not drawn, which think-h01y derives, replays
+and records under his credit.
+The evidence is retained in
+[`cases/regularized_drawings/think-4h23-2026-10-23/`](../../cases/regularized_drawings/think-4h23-2026-10-23/README.md).
+After it the index draws 95 views: 35 by the axis tool, 40 by Evan Daniel’s regularizer
+and 20 by the grid-slack generator’s version 1.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

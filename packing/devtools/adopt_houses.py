@@ -891,6 +891,53 @@ RESULTS: dict[str, Prose] = {
             "pair"
         ),
     ),
+    "T-229": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#719](https://github.com/jlevy/squares/issues/719)",
+        producer_route=True,
+        ai=(
+            "The issue says Gemini assisted with solver scripting, precision checks and "
+            "formatting."
+        ),
+        routes=(
+            "One maintained route, `sqpack`’s exact verifier, is this repository’s "
+            "`sqpack/verify.py`, which the issue names as one of its two checkers, so the "
+            "replay shares the producer’s components; as the issue writes its command, that "
+            "file reads no certificate, so the issue’s statement is no evidence of a check. "
+            "The review’s checker shares no code with either maintained route or the source."
+        ),
+        lineage_at={
+            105: (
+                "The issue names the house it improves and no parent packing. Measured by the "
+                "import and again by the 22 October review under the box’s symmetries, the "
+                "nearest centres pair it one to one under the identity with T-174’s packing, "
+                "the house best packing here before this adoption: 63 of the 105 squares lie "
+                "within $10^{-6}$ of T-174’s, 42 move beyond $10^{-3}$ and none beyond a "
+                "tenth, at most 0.049, and squares turn by up to 2.41°. It is T-174’s packing "
+                "re-solved to a smaller side, a refinement that is not padding (T-229)."
+            ),
+            204: (
+                "The issue names the house it improves and no parent packing. Measured by the "
+                "import and again by the 22 October review, the nearest centres pair it one to "
+                "one with T-225’s packing, the house best packing here before this adoption, "
+                "under a half turn, and with Couzo’s #678 packing (T-223) under the identity, "
+                "keeping that certificate’s frame and tilt pattern: 117 of the 204 squares "
+                "lie within $10^{-6}$ of T-225’s, 67 move beyond $10^{-3}$ and 6 beyond a "
+                "tenth, at most 0.273. Every square turns by less than 1° but square 38, which "
+                "T-225 holds within $10^{-20}$ by four neighbours and which this packing "
+                "releases and turns by 25.64°, so that nothing lies within "
+                "$1.25 \\times 10^{-2}$ of it (T-229). The reply on the issue asks how that "
+                "came about."
+            ),
+        },
+        third_route=(
+            ", and the 22 October review’s clean-room checker decided it again on two routes "
+            "of its own, in integers alone and in rationals with exact clipping area on every "
+            "pair, from the source’s certificate and from the packet’s derived fact; its sharp "
+            "controls at $10^{-30}$ found both maintained routes exact at the far wall, the "
+            "near wall and the least-gap pair"
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -995,13 +1042,15 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Ryan "
         "Xu’s packing as Mykhailo Polkovskyi refined it",
     ),
-    # T-174's regularization of T-130's packing, as T-170 padded it, measured one to one,
-    # no square moved beyond 1e-12 (the 14 October review of PR 574).
+    # Mykhailo Polkovskyi's re-solve (T-229, adopted on 23 October 2026) of T-174's packing,
+    # T-174's regularization of T-130's packing as T-170 padded it: one to one with T-174's,
+    # 42 squares moved beyond 1e-3 and none beyond a tenth (the import's measurement and the
+    # 22 October review's), so the packing stays with Xu and Polkovskyi joins the refiners.
     105: Credit(
         (XU,),
-        (COUZO, PINGYOU),
-        "PingYou Ltd’s tighter certificate of Francisco Couzo’s refinement of Ryan Xu’s "
-        "packing",
+        (COUZO, PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s re-solve of PingYou Ltd’s tighter certificate of Francisco "
+        "Couzo’s refinement of Ryan Xu’s packing",
     ),
     # T-174's regularization of T-128's packing, 13 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
@@ -1172,16 +1221,19 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
-    # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of issue
-    # 678's packing (T-223), solved to its exact side 1.39e-9 below #678's certificate:
-    # T-225's item names T-223, and the packing stays with Couzo, whose source's manifest
-    # credits Polkovskyi's construction as its seed, which is that source's account, not
-    # measured here (A11 of #716 asked to keep Polkovskyi in the line).
+    # Mykhailo Polkovskyi's re-solve (T-229, adopted on 23 October 2026) of Evan Daniel's
+    # display regularization (T-225) of Francisco Couzo's packing, which Couzo first reported
+    # in issue 670 and refined in 675 and 678 (T-226, T-228, T-223): one to one with T-225's
+    # under a half turn and with #678's under the identity, one square released and turned
+    # by 25.64 degrees (the import's measurement and the 22 October review's, its RF-3 and
+    # RF-4). T-229's item names T-225, so the packing stays with Couzo, whose source's
+    # manifest credits Polkovskyi's own construction as its seed (A11 of #716).
     204: Credit(
         (COUZO,),
-        (DANIEL,),
-        "Evan Daniel’s display regularization of Francisco Couzo’s packing from a search "
-        "Couzo’s source seeded with Mykhailo Polkovskyi’s n = 204 construction",
+        (DANIEL, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s re-solve of Evan Daniel’s display regularization of "
+        "Francisco Couzo’s packing from a search Couzo’s source seeded with Polkovskyi’s own "
+        "n = 204 construction",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).

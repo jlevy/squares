@@ -3514,7 +3514,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-22'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/106.html
   canonical: cases/106.html
@@ -4394,7 +4394,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-22'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/205.html
   canonical: cases/205.html

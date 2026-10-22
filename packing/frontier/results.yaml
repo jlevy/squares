@@ -22660,8 +22660,9 @@ results:
       code slice rather than compute.
 
       On 22 October 2026 Mykhailo Polkovskyi's issue 719 re-solved this entry's packing at
-      105 to a side 5.18e-12 smaller, measured one to one with it (T-229, V0/C0, pending
-      review and adoption, think-4h23); the case holds this entry until then.
+      105 to a side 5.18e-12 smaller, measured one to one with it (T-229). After the 22
+      October review of that certificate, the case at 105 adopted it on 23 October 2026,
+      and this entry's certificate there stays retained as history.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
@@ -31023,8 +31024,9 @@ results:
 
       On 22 October 2026 Mykhailo Polkovskyi's issue 719 re-solved this entry's packing at
       204 to a side 1.006e-8 smaller, measured one to one with it with one square turned by
-      25.64 degrees (T-229, V0/C0, pending review and adoption, think-4h23); the case holds
-      this entry until then.
+      25.64 degrees (T-229). After the 22 October review of that certificate, the case at
+      204 adopted it on 23 October 2026, and this entry's certificate there stays retained
+      as history.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 21 October, is
@@ -31064,8 +31066,9 @@ results:
       improvement at the exact side it states: s(204) <=
       45044217780850246618141/3041751595240000000000, below T-186, the case's house best
       packing when it was reported. The case's house best packing is unchanged, since
-      Couzo's own later #675 and #678 (T-223) certificates and Evan Daniel's view of #678's
-      packing (T-225) are smaller.
+      Couzo's own later #675 and #678 (T-223) certificates, Evan Daniel's view of #678's
+      packing (T-225) and Polkovskyi's re-solve of that view (T-229), the house since 23
+      October 2026, are smaller.
 
       The certificate and its duplicate-square and outside-container controls were decided
       here on 22 October 2026 by both maintained exact routes, and the frozen comparison
@@ -31194,10 +31197,10 @@ results:
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 22 October, is
       retained. The entry is superseded on entry at 204: Couzo's own #675 and #678 (T-223)
-      and Evan Daniel's view of #678's packing (T-225) are smaller, and the case holds
-      T-225. The 72 rows beyond the corpus are the source's dated beyond-horizon rows since
-      22 October 2026, recorded in report order by the backlog ledger
-      (upper-bounds-backlog-20261022).
+      and Evan Daniel's view of #678's packing (T-225) are smaller, and since 23 October
+      2026 the case has held Polkovskyi's re-solve of T-225's packing (T-229). The 72 rows
+      beyond the corpus are the source's dated beyond-horizon rows since 22 October 2026,
+      recorded in report order by the backlog ledger (upper-bounds-backlog-20261022).
     reviews:
       - path: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
         kind: adversarial
@@ -31443,7 +31446,8 @@ results:
       improvement at the exact side it states: s(204) <=
       101859759444979981360793459/6878398651426000000000000, below his #670 (T-226). The
       case's house best packing is unchanged, since Couzo's own later #678 certificate
-      (T-223) and Evan Daniel's view of its packing (T-225) are smaller.
+      (T-223), Evan Daniel's view of its packing (T-225) and Polkovskyi's re-solve of that
+      view (T-229), the house since 23 October 2026, are smaller.
 
       The certificate and its duplicate-square and outside-container controls were decided
       here on 22 October 2026 by both maintained exact routes, and the frozen comparison
@@ -31560,9 +31564,10 @@ results:
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 22 October, is
       retained. The entry is superseded on entry at 204: Couzo's own #678 (T-223) and Evan
-      Daniel's view of its packing (T-225) are smaller, and the case holds T-225. The 78
-      rows beyond the corpus are the source's dated beyond-horizon rows since 22 October
-      2026, recorded in report order by the backlog ledger (upper-bounds-backlog-20261022).
+      Daniel's view of its packing (T-225) are smaller, and since 23 October 2026 the case
+      has held Polkovskyi's re-solve of T-225's packing (T-229). The 78 rows beyond the
+      corpus are the source's dated beyond-horizon rows since 22 October 2026, recorded in
+      report order by the backlog ledger (upper-bounds-backlog-20261022).
     reviews:
       - path: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
         kind: adversarial
@@ -31597,8 +31602,9 @@ results:
       Two complete rational source certificates of issue 719 report finite upper-bound
       improvements at the exact sides they state: s(105) <=
       674331486483935962030285457609/62500000000000000000000000000 and s(204) <=
-      882663895519250432/59604644775390625, below the case's house best packing at each
-      when it was reported, T-174 at 105 by 5.18e-12 and T-225 at 204 by 1.006e-8.
+      882663895519250432/59604644775390625, below the case's house best packing at each when
+      it was reported, T-174 at 105 by 5.18e-12 and T-225 at 204 by 1.006e-8. Since 23
+      October 2026 each case holds it as its house best packing.
 
       The two certificates and their duplicate-square and outside-container controls were
       decided here on 22 October 2026 by both maintained exact routes from the packet's
@@ -31743,6 +31749,15 @@ results:
       test_upper_bound_reports.py runs the kernel's two sharp controls on the 105
       certificate.
 
+      The cases at 105 and 204 adopted this certificate as their house best packing on 23
+      October 2026, from T-174 and T-225, each of which stays retained as history. Both
+      strong generators decided the new witnesses in the same pull request: grid-slack's
+      1-degree view is drawn at 105 and its half-degree view at 204. At 204 Evan Daniel's
+      regularizer solved the witness 1.48e-11 lower, to exactly the side of the release's
+      other 204 file, certificates/n204.cert, which the packet pins by digest: the author's
+      earlier publication, not drawn, which think-h01y derives, replays and records under
+      his credit.
+
       V3 and C3 rest on the 22 October stage 4 review
       (docs/project/reviews/review-2026-10-22-mishapolk-719.md) and the replay it reproduced
       (E-mishapolk-719-exact-feasibility), with the review's own checker
@@ -31750,8 +31765,7 @@ results:
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 22 October, is
-      retained. By the house rule the cases adopt it at 105 and 204 and the regularization
-      layer decides both, lapsing 105's grid-slack view and SETTLED[204]. The 111 rows
+      retained. The 111 rows
       beyond the corpus are the source's dated beyond-horizon rows since 22 October 2026,
       recorded in report order by the ledger of 22 October for issue 719
       (upper-bounds-issue719-20261022).
@@ -32031,7 +32045,7 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-103-regularized.yaml.gz
     - n: 105
-      of: T-174
+      of: T-229
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
       modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
@@ -32040,9 +32054,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 31
-        max_move: 0.1631154
-        max_turn_deg: 0.327601
+        moved: 14
+        max_move: 0.1220432
+        max_turn_deg: 0.836456
       view: packing/atlas/known-best/regularized/n-105-regularized.yaml.gz
     - n: 106
       of: T-098
@@ -32467,17 +32481,18 @@ regularized_drawings:
         max_turn_deg: 1.61089
       view: packing/atlas/known-best/regularized/n-199-regularized.yaml.gz
     - n: 204
-      of: T-225
+      of: T-229
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 1.575416e-17
-        max_turn_deg: 0.0
+        moved: 45
+        max_move: 0.2730522
+        max_turn_deg: 0.0818614
       view: packing/atlas/known-best/regularized/n-204-regularized.yaml.gz
     - n: 206
       of: T-174
