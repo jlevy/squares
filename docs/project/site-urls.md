@@ -445,7 +445,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/102.html | cases/102.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/103.html | cases/103.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/104.html | cases/104.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/105.html | cases/105.html | record | overview | 2026-10-03 | 2026-10-17 | live |
+| cases/105.html | cases/105.html | record | overview | 2026-10-03 | 2026-10-22 | live |
 | cases/106.html | cases/106.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/107.html | cases/107.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/108.html | cases/108.html | record | overview | 2026-10-03 | 2026-10-18 | live |
@@ -1123,6 +1123,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-226.html | result/t-226.html | result | overview | 2026-10-22 | 2026-10-22 | live |
 | result/t-227.html | result/t-227.html | result | overview | 2026-10-22 | 2026-10-22 | live |
 | result/t-228.html | result/t-228.html | result | overview | 2026-10-22 | 2026-10-22 | live |
+| result/t-229.html | result/t-229.html | result | overview | 2026-10-22 | 2026-10-22 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |

@@ -22658,6 +22658,10 @@ results:
       A second exact route over the number fields of the algebraic certificates is recorded
       beside the rung and is no condition of it; it needs field arithmetic of its own, a
       code slice rather than compute.
+
+      On 22 October 2026 Mykhailo Polkovskyi's issue 719 re-solved this entry's packing at
+      105 to a side 5.18e-12 smaller, measured one to one with it (T-229, V0/C0, pending
+      review and adoption, think-4h23); the case holds this entry until then.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
@@ -31009,6 +31013,11 @@ results:
       V3 and C3 rest on the 21 October review and the replay it reproduced
       (E-evand-regularized-1020-exact-feasibility), with the review's own checker
       (E-evand-regularized-1020-review-exact-feasibility).
+
+      On 22 October 2026 Mykhailo Polkovskyi's issue 719 re-solved this entry's packing at
+      204 to a side 1.006e-8 smaller, measured one to one with it with one square turned by
+      25.64 degrees (T-229, V0/C0, pending review and adoption, think-4h23); the case holds
+      this entry until then.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 21 October, is
