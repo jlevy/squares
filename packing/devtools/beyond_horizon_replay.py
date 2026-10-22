@@ -137,6 +137,10 @@ LIMIT = 1024
 PLACES = 12
 ISSUE = Path("acquisition/issue.json")
 RECORD = Path("acquisition/beyond-horizon-rows.json")
+RECEIPTS = Path("receipts")
+#: A publication no issue reports declares its rows here (`Release`, `declare_rows`).
+DECLARED = Path("acquisition/watched-release.json")
+WATCHED_FORMAT = "beyond-horizon-watched-release-v1"
 FILTERED = Path("receipts/filtered-exact-replay.json")
 FIRST_COMMITS = Path("receipts/first-commits.json")
 EXHAUSTIVE = Path("receipts/exhaustive-sample.json")
@@ -282,9 +286,18 @@ class Release:
     ``derived`` that the packet keeps derived facts and no upstream byte. ``claimed_at``
     dates the counts an edit of the issue first claimed, which the ledger walks at that
     time rather than the issue's opening (#722's review A, A4).
+
+    **A publication no issue reports** (``issue`` None) is a watched repository's commit,
+    ``pin``, reported from the time it reached GitHub, ``published``: its committer time,
+    or the later push `PUSHED_LATER` records. Its rows are not read from an issue body but
+    declared in its packet, ``declared`` (`WATCHED_FORMAT`), from its walk's verdicts
+    (`declare_rows`). Its label is the ledger's, ``owner/name@commit``. ``source`` names the
+    coverage source that records its rows, the packet by default; a second report retained
+    in one packet, as Couzo's ``23aff0c`` beside issue #670, has a source of its own, with
+    its own claims record (``record``) and receipts directory (``receipts``).
     """
 
-    issue: int
+    issue: int | None
     packet: str
     holders: str
     source_url: str
@@ -302,19 +315,72 @@ class Release:
     derived: bool = False
     later_commits: Mapping[int, tuple[str, str]] | None = None
     claimed_at: Mapping[int, str] | None = None
+    published: str | None = None
+    source_id: str | None = None
+    record: Path = RECORD
+    receipts: Path = RECEIPTS
+    declared: Path = DECLARED
 
     @property
     def directory(self) -> Path:
         return WEB / self.packet
 
     @property
+    def label(self) -> str:
+        """How the ledger names the report: ``#N``, or ``owner/name@commit`` (seven hex)."""
+        if self.issue is not None:
+            return f"#{self.issue}"
+        return f"{repository_of(self.source_url)}@{self.pin[:7]}"
+
+    @property
+    def described(self) -> str:
+        """The report in a sentence: ``issue #N``, or the publication's label."""
+        return f"issue #{self.issue}" if self.issue is not None else self.label
+
+    @property
+    def source(self) -> str:
+        """The coverage source whose dated rows record this report."""
+        return self.source_id or self.packet
+
+    @property
     def issue_url(self) -> str:
-        return f"https://github.com/jlevy/squares/issues/{self.issue}"
+        """The report's address: the issue, or the publication's tree at its commit."""
+        if self.issue is not None:
+            return f"https://github.com/jlevy/squares/issues/{self.issue}"
+        return f"{self.source_url}/tree/{self.pin}"
+
+    @property
+    def report_key(self) -> str:
+        """The key under which a receipt or record names the report."""
+        return "issue" if self.issue is not None else "publication"
+
+    @property
+    def reported(self) -> str:
+        """When a publication no issue reports reached GitHub (`published`, else
+        `committed`); an issue's time is its own and is read from GitHub by the ledger."""
+        return self.published or self.committed
+
+    def path(self, kind: Path) -> Path:
+        """A receipt's or the claims record's path in the packet: ``receipts/NAME`` under
+        this release's own receipts directory, and the record at ``record``."""
+        if kind == RECORD:
+            return self.directory / self.record
+        if kind.parent == RECEIPTS:
+            return self.directory / self.receipts / kind.name
+        return self.directory / kind
 
     def first_commit_of(self, n: int) -> tuple[str, str]:
         """The commit that first holds the certificate a row at ``n`` reads, and its time."""
         later = self.later_commits or {}
         return later.get(n, (self.first_commit, self.committed))
+
+
+def repository_of(url: str) -> str:
+    """``owner/name`` of a GitHub repository's address."""
+    match = re.fullmatch(r"https://github\.com/([^/]+/[^/]+?)/?", url)
+    _require(match is not None, f"{url}: not a GitHub repository")
+    assert match is not None
+    return match[1]
 
 
 def _couzo_rows(body: str, release: Release) -> list[Claim]:
@@ -323,9 +389,7 @@ def _couzo_rows(body: str, release: Release) -> list[Claim]:
         match = _COUZO_ROW.match(line.strip())
         if match is None:
             continue
-        _require(
-            match[6] == release.pin, f"#{release.issue} n={match[1]}: links another commit"
-        )
+        _require(match[6] == release.pin, f"{release.label} n={match[1]}: links another commit")
         rows.append(
             Claim(
                 n=int(match[1]),
@@ -339,13 +403,13 @@ def _couzo_rows(body: str, release: Release) -> list[Claim]:
     for row in rows:
         _require(
             row.deleted == row.certificate_n - row.n,
-            f"#{release.issue} n={row.n}: the link and the deletion do not agree",
+            f"{release.label} n={row.n}: the link and the deletion do not agree",
         )
     return rows
 
 
 def _de_winter_rows(body: str, release: Release) -> list[Claim]:
-    _require(_DE_WINTER_LINK in body, f"#{release.issue}: the issue links another folder")
+    _require(_DE_WINTER_LINK in body, f"{release.label}: the issue links another folder")
     rows: list[Claim] = []
     for line in body.splitlines():
         match = _DE_WINTER_ROW.fullmatch(line.strip())
@@ -362,7 +426,7 @@ def _mishapolk_rows(body: str, release: Release) -> list[Claim]:
     reads and its SHA-256, which must be the digest the packet pins for that file."""
     _require(
         f"square-packing-records/tree/{release.pin}/certificates" in body,
-        f"#{release.issue}: the issue links another commit",
+        f"{release.label}: the issue links another commit",
     )
     printed: dict[int, tuple[str, str]] = {}
     files: dict[int, tuple[str, str]] = {}
@@ -371,19 +435,37 @@ def _mishapolk_rows(body: str, release: Release) -> list[Claim]:
             printed[int(match[1])] = (match[2], match[3])
         elif match := _MISHAPOLK_FILE.fullmatch(line.strip()):
             files[int(match[1])] = (match[2], match[3])
-    _require(printed.keys() == files.keys(), f"#{release.issue}: the two tables differ")
+    _require(printed.keys() == files.keys(), f"{release.label}: the two tables differ")
     pinned = manifest(release)
     rows: list[Claim] = []
     for n in printed:
         path, digest = files[n]
-        _require(pinned.get(path) == digest, f"#{release.issue} n={n}: not the pinned digest")
+        _require(pinned.get(path) == digest, f"{release.label} n={n}: not the pinned digest")
         rows.append(Claim(n, printed[n][1], printed[n][0], path, n, 0))
     return rows
 
 
+def read_declared_rows(body: str, release: Release) -> list[Claim]:
+    """The rows a publication no issue reports declares in its packet (`WATCHED_FORMAT`):
+    each count, the certificate the walk records there and its exact header side rounded
+    up at 12 places, all of the publication's commit; `declare_rows` writes them."""
+    declared = json.loads(body)
+    _require(declared.get("format") == WATCHED_FORMAT, f"{release.label}: not {WATCHED_FORMAT}")
+    _require(
+        declared.get("commit") == release.pin
+        and declared.get("publication") == release.issue_url
+        and declared.get("walk") == release.walk,
+        f"{release.label}: the declaration names another commit or walk",
+    )
+    return [
+        Claim(int(row["n"]), "", str(row["printed"]), str(row["certificate"]), int(row["n"]), 0)
+        for row in declared["rows"]
+    ]
+
+
 COUZO_URL = "https://github.com/franciscouzo/square-packing"
-RELEASES: dict[int, Release] = {
-    release.issue: release
+RELEASES: dict[str, Release] = {
+    release.label: release
     for release in (
         Release(
             issue=666,
@@ -473,19 +555,25 @@ RELEASES: dict[int, Release] = {
 }
 
 
-def release(issue: int) -> Release:
-    """The declared release of an issue."""
-    _require(issue in RELEASES, f"#{issue}: no declared release")
-    return RELEASES[issue]
+def release(key: int | str) -> Release:
+    """The declared release of an issue (its number, or ``#N``) or of a publication no
+    issue reports (its label, ``owner/name@commit``)."""
+    label = f"#{key}" if isinstance(key, int) or str(key).isdigit() else str(key)
+    _require(label in RELEASES, f"{label}: no declared release")
+    return RELEASES[label]
 
 
 def claims(chosen: Release) -> list[Claim]:
-    """Every row of the issue's table, read from its retained body, refused unless all are."""
-    body = json.loads((chosen.directory / ISSUE).read_text(encoding="utf-8"))["body"]
+    """Every row of the issue's table, read from its retained body, or every row a
+    publication's packet declares, refused unless all are."""
+    if chosen.issue is None:
+        body = (chosen.directory / chosen.declared).read_text(encoding="utf-8")
+    else:
+        body = json.loads((chosen.directory / ISSUE).read_text(encoding="utf-8"))["body"]
     rows = chosen.read(body, chosen)
-    _require(len(rows) == chosen.rows, f"#{chosen.issue}: {len(rows)} rows, not {chosen.rows}")
+    _require(len(rows) == chosen.rows, f"{chosen.label}: {len(rows)} rows, not {chosen.rows}")
     counts = [row.n for row in rows]
-    _require(counts == sorted(set(counts)), f"#{chosen.issue}: rows out of order")
+    _require(counts == sorted(set(counts)), f"{chosen.label}: rows out of order")
     return rows
 
 
@@ -494,7 +582,7 @@ def decided_claims(chosen: Release) -> list[Claim]:
     rows = [row for row in claims(chosen) if reports.HORIZON < row.n <= LIMIT]
     _require(
         len(rows) == chosen.decided,
-        f"#{chosen.issue}: {len(rows)} rows beyond the corpus to {LIMIT}, not {chosen.decided}",
+        f"{chosen.label}: {len(rows)} rows beyond the corpus to {LIMIT}, not {chosen.decided}",
     )
     return rows
 
@@ -530,14 +618,14 @@ def certificate(chosen: Release, row: Claim) -> legacy.Certificate:
     """
     if chosen.derived:
         facts = reports.read_facts(chosen.directory, {row.certificate_n})
-        _require(row.certificate_n in facts, f"#{chosen.issue} n={row.n}: no derived fact")
+        _require(row.certificate_n in facts, f"{chosen.label} n={row.n}: no derived fact")
         declared = {
             item["n"]: item["path"]
             for item in reports.load_declaration(chosen.directory)["certificates"]
         }
         _require(
             declared[row.certificate_n] == row.path,
-            f"#{chosen.issue} n={row.n}: the fact is not of the issue's file",
+            f"{chosen.label} n={row.n}: the fact is not of the issue's file",
         )
         parsed = facts[row.certificate_n]
     else:
@@ -563,7 +651,7 @@ def decided_sides(chosen: Release) -> dict[int, Fraction]:
     }
     _require(
         all(row.certificate_n in stated for row in rows),
-        f"#{chosen.issue}: the claim record does not state every decided side",
+        f"{chosen.label}: the claim record does not state every decided side",
     )
     return {row.n: stated[row.certificate_n] for row in rows}
 
@@ -630,7 +718,7 @@ def _environment() -> dict[str, str]:
     }
 
 
-def decide_row(job: tuple[int, int]) -> dict[str, Any]:
+def decide_row(job: tuple[str, int]) -> dict[str, Any]:
     """One row: the side against the print, both routes, and the certificate's controls."""
     chosen = release(job[0])
     row = next(row for row in decided_claims(chosen) if row.n == job[1])
@@ -665,19 +753,19 @@ def decide_row(job: tuple[int, int]) -> dict[str, Any]:
     return record
 
 
-def _jobs(chosen: Sequence[Release]) -> list[tuple[int, int]]:
+def _jobs(chosen: Sequence[Release]) -> list[tuple[str, int]]:
     """Every decided row of the chosen releases, the largest certificates first: a
     certificate's work grows with its count, which the issue row names, so no file is read
     to order the jobs."""
     jobs = [
-        (row.certificate_n, item.issue, row.n)
+        (row.certificate_n, item.label, row.n)
         for item in chosen
         for row in decided_claims(item)
     ]
     return [(issue, n) for _, issue, n in sorted(jobs, key=lambda job: -job[0])]
 
 
-def filtered(issues: Sequence[int], workers: int) -> dict[int, dict[str, Any]]:
+def filtered(issues: Sequence[int | str], workers: int) -> dict[str, dict[str, Any]]:
     """Decide every decided row and control of the chosen releases, one receipt a packet."""
     chosen = [release(issue) for issue in issues]
     for item in chosen:
@@ -687,12 +775,12 @@ def filtered(issues: Sequence[int], workers: int) -> dict[int, dict[str, Any]]:
     with ProcessPoolExecutor(max_workers=workers) as pool:
         decided = dict(zip(_jobs(chosen), pool.map(decide_row, _jobs(chosen)), strict=True))
     elapsed = round(time.monotonic() - wall, 1)
-    receipts: dict[int, dict[str, Any]] = {}
+    receipts: dict[str, dict[str, Any]] = {}
     for item in chosen:
-        results = [decided[item.issue, row.n] for row in decided_claims(item)]
+        results = [decided[item.label, row.n] for row in decided_claims(item)]
         receipt: dict[str, Any] = {
             "format": FILTERED_FORMAT,
-            "issue": item.issue_url,
+            item.report_key: item.issue_url,
             "source_commit": item.retained,
             "issue_pin": item.pin,
             "packet": item.directory.relative_to(REPO).as_posix(),
@@ -703,13 +791,13 @@ def filtered(issues: Sequence[int], workers: int) -> dict[int, dict[str, Any]]:
             "environment": _environment(),
             "started_utc": started.strftime("%Y-%m-%dT%H:%M:%SZ"),
             "run_wall_seconds": elapsed,
-            "run_releases": [other.issue for other in chosen],
+            "run_releases": [other.label for other in chosen],
             "workers": workers,
             "rows": results,
             "summary": base.summary(results),
         }
-        _write(item.directory / FILTERED, receipt)
-        receipts[item.issue] = receipt
+        _write(item.path(FILTERED), receipt)
+        receipts[item.label] = receipt
     return receipts
 
 
@@ -722,7 +810,7 @@ def _git(clone: Path, *args: str) -> str:
     ).stdout
 
 
-def first_commits(issue: int, clone: Path) -> dict[str, Any]:
+def first_commits(issue: int | str, clone: Path) -> dict[str, Any]:
     """The first commit of the retained commit's history that holds each certificate.
 
     ``clone`` is a clone of the source holding the retained commit and its history; a
@@ -768,7 +856,7 @@ def first_commits(issue: int, clone: Path) -> dict[str, Any]:
         "history_commits": len(chain),
         "rows": rows,
     }
-    _write(chosen.directory / FIRST_COMMITS, receipt)
+    _write(chosen.path(FIRST_COMMITS), receipt)
     return receipt
 
 
@@ -782,7 +870,7 @@ def _pinned_blob(chosen: Release, row: Claim, clone: Path) -> str:
     ).stdout
     _require(
         hashlib.sha256(raw).hexdigest() == manifest(chosen)[row.path] and git_blob(raw) == blob,
-        f"#{chosen.issue} n={row.n}: the clone's file is not the pinned one",
+        f"{chosen.label} n={row.n}: the clone's file is not the pinned one",
     )
     return blob
 
@@ -794,7 +882,7 @@ def _utc(stamp: str) -> str:
 # --------------------------------------------------------------------------- cross-checks
 
 
-def exhaustive_row(job: tuple[int, int]) -> dict[str, Any]:
+def exhaustive_row(job: tuple[str, int]) -> dict[str, Any]:
     """The maintained all-pairs kernel on one row, beside the filtered decision of it."""
     chosen = release(job[0])
     row = next(row for row in decided_claims(chosen) if row.n == job[1])
@@ -822,16 +910,16 @@ def exhaustive_row(job: tuple[int, int]) -> dict[str, Any]:
     }
 
 
-def exhaustive(issue: int, counts: Sequence[int], workers: int) -> dict[str, Any]:
+def exhaustive(issue: int | str, counts: Sequence[int], workers: int) -> dict[str, Any]:
     """The all-pairs kernel on chosen rows of one release, each against the filtered one."""
     chosen = release(issue)
     custody(chosen)
     decided = {row.n for row in decided_claims(chosen)}
     for n in counts:
-        _require(n in decided, f"#{issue} n={n}: not a decided row")
+        _require(n in decided, f"{chosen.label} n={n}: not a decided row")
     started = datetime.now(UTC)
     with ProcessPoolExecutor(max_workers=workers) as pool:
-        results = list(pool.map(exhaustive_row, [(issue, n) for n in counts]))
+        results = list(pool.map(exhaustive_row, [(chosen.label, n) for n in counts]))
     receipt = {
         "format": EXHAUSTIVE_FORMAT,
         "kernel": "devtools.evand_arrangement_reports.run_case, positive job, every pair",
@@ -844,7 +932,7 @@ def exhaustive(issue: int, counts: Sequence[int], workers: int) -> dict[str, Any
             sum(sum(row["cpu_seconds"].values()) for row in results), 1
         ),
     }
-    _write(chosen.directory / EXHAUSTIVE, receipt)
+    _write(chosen.path(EXHAUSTIVE), receipt)
     return receipt
 
 
@@ -858,7 +946,7 @@ def _goebel_program() -> Any:
     return module
 
 
-def goebel() -> dict[int, dict[str, Any]]:
+def goebel() -> dict[str, dict[str, Any]]:
     """Every decided side against Göbel's classical constructions, exactly.
 
     The families, their deletion to smaller counts and the sign test are those of the 15
@@ -868,14 +956,14 @@ def goebel() -> dict[int, dict[str, Any]]:
     program = _goebel_program()
     _require(program.LIMIT >= LIMIT, "the Göbel program stops below the decided counts")
     forms = program.families(program.LIMIT)
-    tallies: dict[int, dict[str, Any]] = {}
+    tallies: dict[str, dict[str, Any]] = {}
     for chosen in RELEASES.values():
         custody(chosen)
         sides = decided_sides(chosen)
         rows = [(row.n, sides[row.n], row.path) for row in decided_claims(chosen)]
-        result = program.compare(f"issue #{chosen.issue} at {chosen.pin[:8]}", rows, forms)
+        result = program.compare(f"{chosen.described} at {chosen.pin[:8]}", rows, forms)
         _write(
-            chosen.directory / GOEBEL,
+            chosen.path(GOEBEL),
             {
                 "format": GOEBEL_FORMAT,
                 "program": base.GOEBEL_PROGRAM.relative_to(REPO).as_posix(),
@@ -885,7 +973,7 @@ def goebel() -> dict[int, dict[str, Any]]:
                 "comparison": result,
             },
         )
-        tallies[chosen.issue] = {"rows": result["rows"], "tally": result["tally"]}
+        tallies[chosen.label] = {"rows": result["rows"], "tally": result["tally"]}
     return tallies
 
 
@@ -905,14 +993,14 @@ def beyond_horizon_rows(chosen: Release) -> dict[str, Any]:
     custody(chosen)
     results = []
     sides = decided_sides(chosen)
-    unrecorded = {n for n, source in unrecorded_rows() if source == chosen.packet}
+    unrecorded = {n for n, source in unrecorded_rows() if source == chosen.source}
     for row in decided_claims(chosen):
         if row.n in unrecorded:
             continue
         side = sides[row.n]
         _require(
             print_holds(chosen, side, row.printed),
-            f"#{chosen.issue} n={row.n}: the print is not the side's {chosen.rounding} print",
+            f"{chosen.label} n={row.n}: the print is not the side's {chosen.rounding} print",
         )
         result: dict[str, Any] = {
             "n": row.n,
@@ -928,7 +1016,7 @@ def beyond_horizon_rows(chosen: Release) -> dict[str, Any]:
         results.append(result)
     record = {
         "format": reports.BEYOND_FORMAT,
-        "issue": chosen.issue_url,
+        chosen.report_key: chosen.issue_url,
         "source": chosen.source_url,
         "revision": chosen.retained,
         "issue_pin": chosen.pin,
@@ -938,16 +1026,18 @@ def beyond_horizon_rows(chosen: Release) -> dict[str, Any]:
     }
     if chosen.rounding != UP:
         record["issue_rounding"] = chosen.rounding
+    if chosen.issue is None:
+        record["published"] = chosen.reported
     return record
 
 
-def claims_record() -> dict[int, int]:
+def claims_record() -> dict[str, int]:
     """Write each packet's beyond-horizon record and return its row counts."""
-    written: dict[int, int] = {}
+    written: dict[str, int] = {}
     for chosen in RELEASES.values():
         record = beyond_horizon_rows(chosen)
-        _write(chosen.directory / RECORD, record)
-        written[chosen.issue] = len(record["results"])
+        _write(chosen.path(RECORD), record)
+        written[chosen.label] = len(record["results"])
     return written
 
 
@@ -1061,7 +1151,7 @@ def release_sides(chosen: Release, clone: Path | None) -> dict[int, Fraction]:
         if row.n in stated:
             sides[row.n] = stated[row.n]
             continue
-        _require(clone is not None, f"#{chosen.issue} n={row.n}: no clone to read it from")
+        _require(clone is not None, f"{chosen.label} n={row.n}: no clone to read it from")
         assert clone is not None
         blob = _pinned_blob(chosen, row, clone)
         header = _header(_blobs(clone, [blob])[blob])
@@ -1072,7 +1162,7 @@ def release_sides(chosen: Release, clone: Path | None) -> dict[int, Fraction]:
 
 
 def earlier_publications(
-    issue: int, clones: Mapping[str, Path], source: Path | None = None
+    issue: int | str, clones: Mapping[str, Path], source: Path | None = None
 ) -> dict[str, Any]:
     """Every side a watched repository published at a release's claimed counts before the
     release's row, strictly below the record's standing side there (a tie is the start's own).
@@ -1190,11 +1280,11 @@ def earlier_publications(
 
 
 def write_earlier(
-    issue: int, clones: Mapping[str, Path], source: Path | None
+    issue: int | str, clones: Mapping[str, Path], source: Path | None
 ) -> dict[int, int]:
     """Write a release's earlier-publications receipt; return each count's publications."""
     record = earlier_publications(issue, clones, source)
-    _write(release(issue).directory / EARLIER, record)
+    _write(release(issue).path(EARLIER), record)
     return {row["n"]: len(row["publications"]) for row in record["rows"] if row["publications"]}
 
 
@@ -1245,7 +1335,7 @@ def _least_claims(items: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     return found
 
 
-def ledger_sources(issue: int, read_at_main: str, read_on: str) -> dict[str, Any]:
+def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[str, Any]:
     """The ``sources.yaml`` a release's walk reads, transcribed from the packets' receipts
     (`devtools.intake_ledger` gathers it).
 
@@ -1257,7 +1347,7 @@ def ledger_sources(issue: int, read_at_main: str, read_on: str) -> dict[str, Any
     """
     chosen = release(issue)
     walk = walk_of(chosen)
-    earlier = _read(chosen.directory / EARLIER)
+    earlier = _read(chosen.path(EARLIER))
     by_n = {row["n"]: row for row in earlier["rows"]}
     counts = set(by_n)
     groups: dict[tuple[str, str], dict[str, Any]] = {}
@@ -1286,8 +1376,8 @@ def ledger_sources(issue: int, read_at_main: str, read_on: str) -> dict[str, Any
             "A publication in a watched repository with no issue, dated by its first commit, "
             "or by the later push that made it public; transcribed from the "
             f"{chosen.packet} packet's receipts/earlier-publications.json at each count "
-            f"#{issue} claims where it is strictly below the record's standing side. Its rows "
-            f"are its own import's ({group['bead']}); none is recorded by this pass."
+            f"{chosen.label} claims where it is strictly below the record's standing side. "
+            f"Its rows are its own import's ({group['bead']}); none is recorded by this pass."
         )
     couzo = release_715_claims(counts, by_n)
     de_winter = release(666)
@@ -1356,8 +1446,8 @@ def ledger_sources(issue: int, read_at_main: str, read_on: str) -> dict[str, Any
             ),
         },
         {
-            "report": f"#{issue}",
-            "issue": issue,
+            "report": chosen.label,
+            "issue": chosen.issue,
             "holders": chosen.holders,
             "bead": chosen.bead,
             "rounding": chosen.rounding,
@@ -1431,7 +1521,7 @@ def release_715_claims(
     return found
 
 
-def write_ledger_sources(issue: int, read_at_main: str, read_on: str) -> int:
+def write_ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> int:
     """Write the release's walk's ``sources.yaml``; return how many reports it holds."""
     import yaml  # noqa: PLC0415
 
@@ -1456,7 +1546,7 @@ def walk_of(chosen: Release) -> Walk:
 
 def _releases(walk: Walk) -> dict[str, Release]:
     """The releases a walk plans, by the report label the ledger gives each."""
-    return {f"#{issue}": item for issue, item in RELEASES.items() if item.walk == walk.name}
+    return {item.label: item for item in RELEASES.values() if item.walk == walk.name}
 
 
 def _awaits(walk: Walk, report: str, n: int) -> bool:
@@ -1467,7 +1557,7 @@ def _awaits(walk: Walk, report: str, n: int) -> bool:
 
 def _source_of(walk: Walk, report: str) -> str:
     """The coverage source whose rows record a report the walk records."""
-    ours = {label: item.packet for label, item in _releases(walk).items()}
+    ours = {label: item.source for label, item in _releases(walk).items()}
     source = ours.get(report) or walk.later.get(report)
     _require(source is not None, f"{report}: the ledger walks a report no source records")
     assert source is not None
@@ -1503,19 +1593,17 @@ def planned_rows() -> list[dict[str, Any]]:
         walk = walk_of(chosen)
         walked = {count["n"]: count for count in _counts(walk)}
         printed = {
-            row["n"]: row["offered_side"] for row in _read(chosen.directory / RECORD)["results"]
+            row["n"]: row["offered_side"] for row in _read(chosen.path(RECORD))["results"]
         }
         for row in decided_claims(chosen):
-            _require(row.n in walked, f"#{chosen.issue} n={row.n}: the ledger does not walk it")
+            _require(row.n in walked, f"{chosen.label} n={row.n}: the ledger does not walk it")
             steps = walked[row.n]["steps"]
-            (mine,) = [
-                i for i, step in enumerate(steps) if step["report"] == f"#{chosen.issue}"
-            ]
+            (mine,) = [i for i, step in enumerate(steps) if step["report"] == chosen.label]
             if steps[mine]["verdict"] == NOT_RECORDED:
                 continue
             _require(
                 steps[mine]["verdict"] == RECORDED,
-                f"#{chosen.issue} n={row.n}: the ledger does not record it",
+                f"{chosen.label} n={row.n}: the ledger does not record it",
             )
             later = [
                 step["report"]
@@ -1524,7 +1612,7 @@ def planned_rows() -> list[dict[str, Any]]:
             ]
             planned: dict[str, Any] = {
                 "n": row.n,
-                "source_id": chosen.packet,
+                "source_id": chosen.source,
                 "claim": "upper-bound",
                 "value": printed[row.n],
                 "assurance": "reported",
@@ -1545,10 +1633,10 @@ def unrecorded_rows() -> list[tuple[int, str]]:
         for row in decided_claims(chosen):
             steps = walked.get(row.n, {"steps": []})["steps"]
             if any(
-                step["report"] == f"#{chosen.issue}" and step["verdict"] == NOT_RECORDED
+                step["report"] == chosen.label and step["verdict"] == NOT_RECORDED
                 for step in steps
             ):
-                found.append((row.n, chosen.packet))
+                found.append((row.n, chosen.source))
     return found
 
 
@@ -1571,7 +1659,7 @@ def planned_supersessions() -> list[tuple[int, str, str]]:
     """
     flips: list[tuple[int, str, str]] = []
     for walk in WALKS.values():
-        ours = {label: item.packet for label, item in _releases(walk).items()}
+        ours = {label: item.source for label, item in _releases(walk).items()}
         for count in _counts(walk):
             recorded = recorded_reports(walk, count)
             start = _start_source(count)
@@ -1628,7 +1716,7 @@ def _reached(walk: Walk, n: int) -> set[str]:
     reached = {_start_source(count)}
     for step in count["steps"]:
         report = step["report"]
-        source = {label: item.packet for label, item in _releases(walk).items()}.get(report)
+        source = {label: item.source for label, item in _releases(walk).items()}.get(report)
         reached.add(source or walk.later.get(report))
     return {source for source in reached if source is not None}
 
@@ -1676,7 +1764,7 @@ def coverage_problems(coverage: Mapping[str, Any] | None = None) -> list[str]:
         safe_load(COVERAGE.read_text(encoding="utf-8")) if coverage is None else coverage
     )
     rows = {(row["n"], row["source_id"]): row for row in register["beyond_horizon_claims"]}
-    walks = {item.packet: walk_of(item) for item in RELEASES.values()}
+    walks = {item.source: walk_of(item) for item in RELEASES.values()}
     problems = []
     for row in planned_rows():
         held = rows.get((row["n"], row["source_id"]))
@@ -1715,7 +1803,7 @@ def _read(path: Path) -> Any:
 
 def row_problems(chosen: Release, row: Claim, kept: Mapping[str, Any]) -> list[str]:
     """Where one receipt row fails its issue row or its controls."""
-    where = f"#{chosen.issue} n={row.n}"
+    where = f"{chosen.label} n={row.n}"
     problems: list[str] = []
     if (kept["certificate"], kept["printed"], kept["deleted_squares"]) != (
         row.path,
@@ -1743,7 +1831,7 @@ def deletion_problems(chosen: Release, rows: Sequence[Claim]) -> list[str]:
     decided on that row (`decide_row`), so without it the certificate would have none."""
     whole = {row.n: row.path for row in rows if not row.deleted}
     return [
-        f"#{chosen.issue} n={row.n}: deletes from n{row.certificate_n}, which no row of the "
+        f"{chosen.label} n={row.n}: deletes from n{row.certificate_n}, which no row of the "
         "release reads whole, so no control decides its certificate"
         for row in rows
         if row.deleted and whole.get(row.certificate_n) != row.path
@@ -1758,12 +1846,12 @@ def sample_problems(
     problems: list[str] = []
     if [item["n"] for item in sample] != list(chosen.sampled):
         problems.append(
-            f"#{chosen.issue}: the all-pairs sample decides "
+            f"{chosen.label}: the all-pairs sample decides "
             f"{[item['n'] for item in sample]}, not the declared {list(chosen.sampled)}"
         )
     decided = {row.n for row in rows}
     problems.extend(
-        f"#{chosen.issue} n={item['n']}: the all-pairs sample disagrees with the filtered one"
+        f"{chosen.label} n={item['n']}: the all-pairs sample disagrees with the filtered one"
         for item in sample
         if item["n"] not in decided
         or not all(
@@ -1784,31 +1872,29 @@ def release_problems(chosen: Release, *, replay: bool, workers: int) -> list[str
     """Problems with one packet's receipts and record; empty when they hold."""
     custody(chosen)
     rows = decided_claims(chosen)
-    receipt = _read(chosen.directory / FILTERED)
+    receipt = _read(chosen.path(FILTERED))
     stored = receipt["rows"]
     if [row["n"] for row in stored] != [row.n for row in rows]:
-        return [f"#{chosen.issue}: the filtered receipt's rows are not the issue's"]
+        return [f"{chosen.label}: the filtered receipt's rows are not the issue's"]
     problems = deletion_problems(chosen, rows)
     sides = decided_sides(chosen)
     for row, kept in zip(rows, stored, strict=True):
         problems.extend(row_problems(chosen, row, kept))
         if Fraction(kept["exact_side"]) != sides[row.n]:
-            problems.append(
-                f"#{chosen.issue} n={row.n}: the receipt's side is not the header's"
-            )
+            problems.append(f"{chosen.label} n={row.n}: the receipt's side is not the header's")
     if receipt["summary"] != base.summary(stored):
-        problems.append(f"#{chosen.issue}: the summary does not match the rows")
+        problems.append(f"{chosen.label}: the summary does not match the rows")
     if replay:
         with ProcessPoolExecutor(max_workers=workers) as pool:
-            again = list(pool.map(decide_row, [(chosen.issue, row.n) for row in rows]))
+            again = list(pool.map(decide_row, [(chosen.label, row.n) for row in rows]))
         problems.extend(
-            f"#{chosen.issue} n={row.n}: the replay differs from the receipt"
+            f"{chosen.label} n={row.n}: the replay differs from the receipt"
             for row, kept, fresh in zip(rows, stored, again, strict=True)
             if _stable(fresh) != _stable(kept)
         )
-    record = chosen.directory / RECORD
+    record = chosen.path(RECORD)
     if not record.is_file() or _read(record) != beyond_horizon_rows(chosen):
-        problems.append(f"#{chosen.issue}: the beyond-horizon record differs from its rebuild")
+        problems.append(f"{chosen.label}: the beyond-horizon record differs from its rebuild")
     return problems + _cross_check_problems(chosen, rows)
 
 
@@ -1821,7 +1907,7 @@ def _cross_check_problems(chosen: Release, rows: Sequence[Claim]) -> list[str]:
     is held to the receipt as compared.
     """
     problems: list[str] = []
-    commits = _read(chosen.directory / FIRST_COMMITS)
+    commits = _read(chosen.path(FIRST_COMMITS))
     held = [*rows, *held_claims(chosen)]
     if chosen.derived:
         pinned = manifest(chosen)
@@ -1834,31 +1920,31 @@ def _cross_check_problems(chosen: Release, rows: Sequence[Claim]) -> list[str]:
         ]
         found = [(item["n"], item["certificate"], item["blob"]) for item in commits["rows"]]
     if found != expected:
-        problems.append(
-            f"#{chosen.issue}: the first commits are not the retained certificates'"
-        )
+        problems.append(f"{chosen.label}: the first commits are not the retained certificates'")
     problems.extend(
-        f"#{chosen.issue} n={item['n']}: first committed at {item['first_commit'][:8]}, "
+        f"{chosen.label} n={item['n']}: first committed at {item['first_commit'][:8]}, "
         f"not {chosen.first_commit_of(item['n'])[0][:8]} as the record states"
         for item in commits["rows"]
         if (item["first_commit"], item["committed"]) != chosen.first_commit_of(item["n"])
     )
-    problems.extend(sample_problems(chosen, rows, _read(chosen.directory / EXHAUSTIVE)["rows"]))
-    comparison = _read(chosen.directory / GOEBEL)["comparison"]
+    sample = chosen.path(EXHAUSTIVE)
+    if chosen.sampled or sample.is_file():
+        problems.extend(sample_problems(chosen, rows, _read(sample)["rows"]))
+    comparison = _read(chosen.path(GOEBEL))["comparison"]
     compared = [
         (item["n"], Fraction(item["side"]), item["relation"]) for item in comparison["detail"]
     ]
-    unrecorded = {n for n, source in unrecorded_rows() if source == chosen.packet}
+    unrecorded = {n for n, source in unrecorded_rows() if source == chosen.source}
     decided = decided_sides(chosen)
     sides = [(row.n, decided[row.n]) for row in rows]
     if [(n, side) for n, side, _ in compared] != sides or any(
         relation != "below" for n, _, relation in compared if n not in unrecorded
     ):
-        problems.append(f"#{chosen.issue}: a decided side is not below Göbel's construction")
+        problems.append(f"{chosen.label}: a decided side is not below Göbel's construction")
     return problems
 
 
-def check(*, replay: bool, workers: int = 1, issues: Sequence[int] = ()) -> list[str]:
+def check(*, replay: bool, workers: int = 1, issues: Sequence[int | str] = ()) -> list[str]:
     """Problems with every chosen packet's receipts and record; empty when they hold.
 
     With ``replay`` every decided row and its controls are decided again, on ``workers``
@@ -1872,33 +1958,37 @@ def check(*, replay: bool, workers: int = 1, issues: Sequence[int] = ()) -> list
     ] + coverage_problems()
 
 
+#: How a command names a release: an issue's number, or a publication's ledger label.
+KEY_HELP = "an issue's number, or a publication's label owner/name@commit"
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n", 1)[0])
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("filtered")
-    run.add_argument("--issue", type=int, nargs="+", default=sorted(RELEASES))
+    run.add_argument("--issue", nargs="+", default=list(RELEASES), help=KEY_HELP)
     run.add_argument("--workers", type=int, default=2)
     history = commands.add_parser("first-commits")
-    history.add_argument("--issue", type=int, required=True)
+    history.add_argument("--issue", required=True, help=KEY_HELP)
     history.add_argument("--clone", type=Path, required=True)
     sample = commands.add_parser("exhaustive")
-    sample.add_argument("--issue", type=int, required=True)
+    sample.add_argument("--issue", required=True, help=KEY_HELP)
     sample.add_argument("--n", type=int, nargs="+", required=True)
     sample.add_argument("--workers", type=int, default=2)
     commands.add_parser("goebel")
     commands.add_parser("claims-record")
     scan = commands.add_parser("earlier")
-    scan.add_argument("--issue", type=int, required=True)
+    scan.add_argument("--issue", required=True, help=KEY_HELP)
     scan.add_argument("--couzo", type=Path, required=True, help="franciscouzo/square-packing")
     scan.add_argument("--evand", type=Path, required=True, help="evand/square-packing")
     scan.add_argument("--source", type=Path, help="the release's own repository")
     transcribe = commands.add_parser("ledger-sources")
-    transcribe.add_argument("--issue", type=int, required=True)
+    transcribe.add_argument("--issue", required=True, help=KEY_HELP)
     transcribe.add_argument("--read-at-main", required=True)
     transcribe.add_argument("--read-on", required=True)
     commands.add_parser("coverage-plan")
     audit = commands.add_parser("check")
-    audit.add_argument("--issue", type=int, nargs="+", default=[])
+    audit.add_argument("--issue", nargs="+", default=[], help=KEY_HELP)
     audit.add_argument("--replay", action="store_true")
     audit.add_argument("--workers", type=int, default=1)
     args = parser.parse_args(argv)
@@ -1930,7 +2020,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(problem)
         chosen = [release(issue) for issue in args.issue] or list(RELEASES.values())
         decided = sum(item.decided for item in chosen)
-        named = ", ".join(f"#{item.issue}" for item in chosen)
+        named = ", ".join(item.label for item in chosen)
         print(
             "FAILED"
             if problems

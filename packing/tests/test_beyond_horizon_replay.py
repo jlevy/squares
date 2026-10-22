@@ -15,9 +15,11 @@ the retained packets, the ledger and the source register only; none needs the ne
 from __future__ import annotations
 
 import copy
+import dataclasses
 import json
 from collections import Counter
 from fractions import Fraction
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -540,3 +542,79 @@ def test_the_719_ledger_transcribes_the_packets_receipts() -> None:
         1489,
         1568,
     }
+
+
+def _watched(**changed: Any) -> replay.Release:
+    """A publication no issue reports, shaped like #670's release (`Release`)."""
+    return dataclasses.replace(
+        replay.release(670),
+        issue=None,
+        pin="23aff0c6f992271e1ad13a148d44f392c4b386c0",
+        read=replay.read_declared_rows,
+        **changed,
+    )
+
+
+def test_a_release_is_named_by_its_issue_or_by_its_publication() -> None:
+    """An issue's release is ``#N``; a publication no issue reports is the ledger's label,
+    ``owner/name@commit``, and its address is its tree at the commit."""
+    assert replay.release(670) is replay.release("#670") is replay.release("670")
+    with pytest.raises(replay.ReplayError, match="#1: no declared release"):
+        replay.release(1)
+    watched = _watched()
+    assert watched.label == "franciscouzo/square-packing@23aff0c"
+    assert watched.described == watched.label
+    assert watched.issue_url == f"{replay.COUZO_URL}/tree/{watched.pin}"
+    assert watched.report_key == "publication"
+    assert replay.release(670).report_key == "issue"
+    assert watched.reported == watched.committed
+    assert _watched(published="2026-10-21T22:56:37Z").reported == "2026-10-21T22:56:37Z"
+    with pytest.raises(replay.ReplayError, match="not a GitHub repository"):
+        replay.repository_of("https://example.org/a/b")
+
+
+def test_a_second_report_in_one_packet_has_its_own_source_record_and_receipts() -> None:
+    """A packet may retain two reports of one commit, as Couzo's 23aff0c holds #670's
+    certificates and others no issue claims: each has its own coverage source, claims
+    record and receipts, and the first keeps the packet's defaults."""
+    issue = replay.release(670)
+    assert issue.source == issue.packet
+    assert issue.path(replay.FILTERED) == issue.directory / replay.FILTERED
+    assert issue.path(replay.RECORD) == issue.directory / replay.RECORD
+    second = _watched(
+        source_id="couzo-23aff0c-2026-10-17",
+        record=Path("acquisition/beyond-horizon-rows-23aff0c.json"),
+        receipts=Path("receipts/23aff0c"),
+    )
+    assert second.source == "couzo-23aff0c-2026-10-17"
+    assert second.path(replay.FILTERED) == (
+        second.directory / "receipts/23aff0c/filtered-exact-replay.json"
+    )
+    assert second.path(replay.RECORD) == (
+        second.directory / "acquisition/beyond-horizon-rows-23aff0c.json"
+    )
+    assert second.path(replay.ISSUE) == second.directory / replay.ISSUE
+
+
+def test_a_publication_reads_the_rows_its_packet_declares() -> None:
+    """The declaration names the publication's commit, address and walk, and each row's
+    count, certificate and print; one that names another commit or walk is refused."""
+    watched = _watched()
+    declared = {
+        "format": replay.WATCHED_FORMAT,
+        "publication": watched.issue_url,
+        "commit": watched.pin,
+        "walk": watched.walk,
+        "rows": [{"n": 547, "certificate": "certificates/best/n547.cert", "printed": "23.9"}],
+    }
+    (row,) = watched.read(json.dumps(declared), watched)
+    assert (row.n, row.path, row.printed, row.certificate_n, row.deleted) == (
+        547,
+        "certificates/best/n547.cert",
+        "23.9",
+        547,
+        0,
+    )
+    for key, value in (("commit", "0" * 40), ("walk", "elsewhere"), ("format", "v0")):
+        with pytest.raises(replay.ReplayError):
+            watched.read(json.dumps(declared | {key: value}), watched)
