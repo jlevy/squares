@@ -3,9 +3,9 @@ type: is
 id: is-01m5hmvdtrcyqn7954db9bbnkd
 title: REGULARIZATION_TOOLS comment says nothing imports them; select_houses, adopt_houses and default_drawings do, so none imports in a worker
 kind: bug
-status: in_progress
+status: closed
 priority: 3
-version: 4
+version: 5
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 delegate: c-lane-tooling-1022
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m1sx5m1p5868jhwcdzfkvada
 hold: null
 hold_until: null
 created_at: 2026-10-22T11:10:00.024Z
-updated_at: 2026-10-22T19:22:32.463Z
+updated_at: 2026-10-22T19:43:39.993Z
 started_at: 2026-10-22T11:14:09.398Z
+closed_at: 2026-10-22T19:43:39.993Z
+close_reason: "Merged in #723 (4432f51b5, 22 Oct 19:43Z) with review A dispositioned (A1 fail-closed load guard, A2 comment count, A3 held-commit pass only when a packet pins the head)."
+resolution: null
+duplicate_of: null
 ---
 Owner note from review A of #721 (not a finding against that PR).
 

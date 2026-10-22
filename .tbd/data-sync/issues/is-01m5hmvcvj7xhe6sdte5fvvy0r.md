@@ -3,9 +3,9 @@ type: is
 id: is-01m5hmvcvj7xhe6sdte5fvvy0r
 title: On-request prune guard matches path spellings only; a dotted-module run or import of a pruned tool passes (#721 review A1)
 kind: task
-status: in_progress
+status: closed
 priority: 3
-version: 4
+version: 5
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 delegate: c-lane-tooling-1022
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m1sx5m1p5868jhwcdzfkvada
 hold: null
 hold_until: null
 created_at: 2026-10-22T11:09:59.026Z
-updated_at: 2026-10-22T19:22:31.014Z
+updated_at: 2026-10-22T19:43:35.091Z
 started_at: 2026-10-22T11:14:08.734Z
+closed_at: 2026-10-22T19:43:35.091Z
+close_reason: "Merged in #723 (4432f51b5, 22 Oct 19:43Z) with review A dispositioned (A1 fail-closed load guard, A2 comment count, A3 held-commit pass only when a packet pins the head)."
+resolution: null
+duplicate_of: null
 ---
 Review A of #721, finding A1 (Low), deferred.
 

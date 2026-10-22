@@ -3,9 +3,9 @@ type: is
 id: is-01m5frzbx5nq339srgw0c4q12b
 title: "intake_sweep: say a read at a pinned head can be removed only when no commit it covers is left unretained"
 kind: bug
-status: in_progress
+status: closed
 priority: 3
-version: 5
+version: 6
 delegate: coord-intake-1021b
 labels:
   - tooling
@@ -14,8 +14,12 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:43:34.564Z
-updated_at: 2026-10-22T19:22:33.612Z
+updated_at: 2026-10-22T19:43:45.632Z
 started_at: 2026-10-21T17:43:35.876Z
+closed_at: 2026-10-22T19:43:45.632Z
+close_reason: "Merged in #723 (4432f51b5, 22 Oct 19:43Z) with review A dispositioned (A1 fail-closed load guard, A2 comment count, A3 held-commit pass only when a packet pins the head)."
+resolution: null
+duplicate_of: null
 ---
 repositories_section in packing/devtools/intake_sweep.py prints "<url>: a packet now pins <head>, so intake-watch.yaml's read of it can be removed." for every read through the head whenever the head is among the repository's pins. It never asks whether that packet's declared scope retains the paths of the commits the read covers.
 
