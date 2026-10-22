@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 58
+version: 60
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -55,14 +55,15 @@ child_order_hints:
   - is-01m5h59fkqcrhdkqkgd64avrkf
   - is-01m5h59yzyqpx3fngankadwmn3
   - is-01m5h5b9h4kr7fpntg2f2vrcqd
+  - is-01m5h7me41y7pa91sts7g214vg
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-22T06:39:02.691Z
+updated_at: 2026-10-22T07:19:56.082Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Review handoff ready. PR #578 head db3cb6d4fe5f00a44d04a8ef91018aa2b365bad8 has all 31 checks passing, watcher exit 0, MERGEABLE/CLEAN against origin/main 970e89de8. Packing run 39680389693 and Pages run 39680389679 succeeded. Full deferred research run 39676452183 passed on e162a870a; later changes are limited to the tally test fixture, accurate T-196 resource prose and plan docs. Final local selected push gate passed 25/25 in 706.82s; earlier integrated push passed 69/69 in 952.59s. Current Arc preview http://127.0.0.1:8790/profiles/index.html?preview=e3e33171b is served by session25957 from external site-final-e3e33171b. Full build passes 7298 checks, 692-page profile audit, 48 PDF links, 59 assets and live routes. Latest URL wrapping and wider Name column included. Source worktree clean. PR description and contributor plan hold the evidence and limits. All bounded implementation children closed; keep this parent open because think-uwd6 retains unfinished historical coverage children. Complete PDF census, historical result registration and explicit identity/family-scope follow-ups remain tracked. Next action is the requested independent final review. Do not merge or deploy.
+Current continuation supersedes historical handoff: main7359fa8b6 integrated, UI b3646ac72 and testfix14340216b committed. Preview8790 rebuilt with75people/112Records/217Results/714Credits/47Resources,7333publicationchecks,696pages,50PDFprofileannotations. Latest requests each tracked think-vgad/jmuq/beyg/j7kn/gddk/33rl and implemented; independent audit finds no missing coverage. Final validation underway under think-gbwb. User now explicitly authorized final review and merge once all checks pass; new merge task think-18ic. PRremote remains8077 until validatedpush. Prior CI receipts are historical, not current acceptance. Historical coverage remains open under think-uwd6; keep parent open until its children resolved. Deployment separate.
