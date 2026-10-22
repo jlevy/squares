@@ -10653,9 +10653,52 @@ issues:
       - result: n1413
       - result: n1489
       - result: n1568
+    - url: https://github.com/jlevy/squares/issues/666#issuecomment-6336294534
+      date: '2026-10-22'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n464
+      - result: n509
+      - result: n555
+      - result: n603
+      - result: n654
+      - result: n706
+      - result: n760
+      - result: n817
+      - result: n875
+      - result: n935
+      - result: n998
+      - result: n1061
+      - result: n1128
+      - result: n1196
+      - result: n1266
+      - result: n1339
+      - result: n1413
+      - result: n1489
+      - result: n1568
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
+    notes: >-
+      The import reply, posted at 2026-10-22T08:27:06Z (issuecomment-6336294534) after #720
+      merged and its Pages deployment of 0281e7763 (run 39745544894, deployment 7247186557, site
+      v0.8.20) was checked, reported the 11 rows at or below 1024 recorded as dated
+      beyond-horizon rows of de-winter-issue666-2026-10-17 at assurance reported
+      (E-de-winter-666-certificate-report), each below everything reported before it and
+      superseded on entry by Couzo's #675 (6), #672 (2), #678 and #715 and Muglich's #686 (1
+      each), and at 464 the first to beat Couzo's 487b058 row; the dangling pin b3152f5, b9cdc16
+      holding the identical folder and the MIT-licensed 643dc9a retained, each certificate first
+      committed at b9cdc16 three minutes before the issue; both maintained routes accepting all
+      11 (18,530 candidate pairs of 2,972,615) and refusing all 66 controls, the all-pairs
+      kernel agreeing at 464, every side below Göbel's construction by 0.143 or more; check.py
+      read and not run; and the credit line de Winter after Arslanov, Mustafin, Shangitbayev,
+      Levy. It said the 8 rows above 1024 wait on the owner's decision (think-f2io). It folds in
+      the report-order verdict comment that devtools.intake_comments drafts from the backlog
+      ledger (upper-bounds-backlog-20261022, comments.yaml beside it), checked against the
+      committed ledger before posting: the rule, and a table giving each count's side, verdict
+      and best now as the ledger has them, with the row's place in the record. The issue stays
+      open.
   - number: 668
     title: 'Improved upper bounds for n = 227, 229, 260: registration request'
     author: JoostdeWinter
@@ -11911,6 +11954,85 @@ issues:
       - result: n991
       - result: n992
       - result: n993
+    - url: https://github.com/jlevy/squares/issues/670#issuecomment-6336293996
+      date: '2026-10-22'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n204
+        id: T-226
+      - result: n330
+      - result: n339
+      - result: n364
+      - result: n370
+      - result: n378
+      - result: n379
+      - result: n382
+      - result: n403
+      - result: n417
+      - result: n418
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n444
+      - result: n452
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n501
+      - result: n503
+      - result: n505
+      - result: n536
+      - result: n546
+      - result: n548
+      - result: n551
+      - result: n553
+      - result: n598
+      - result: n600
+      - result: n647
+      - result: n650
+      - result: n651
+      - result: n700
+      - result: n701
+      - result: n702
+      - result: n703
+      - result: n749
+      - result: n753
+      - result: n754
+      - result: n756
+      - result: n757
+      - result: n758
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n863
+      - result: n866
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n871
+      - result: n922
+      - result: n925
+      - result: n926
+      - result: n927
+      - result: n928
+      - result: n929
+      - result: n930
+      - result: n931
+      - result: n987
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -11929,6 +12051,25 @@ issues:
       recorded; the credit line Couzo after Polkovskyi, Daniel, Levy and the seed credit to
       Polkovskyi (hop job 105412). It said the 72 rows beyond the corpus are not yet recorded
       and follow in the next records pull request (think-f28n). The issue stays open.
+
+      The import reply of the rows beyond the corpus, posted at 2026-10-22T08:27:04Z
+      (issuecomment-6336293996) after #720 merged and its Pages deployment of 0281e7763 (run
+      39745544894, deployment 7247186557, site v0.8.20) was checked, reported the 72 rows
+      recorded as dated beyond-horizon rows of couzo-issue670-2026-10-17 at assurance reported
+      (E-couzo-670-beyond-horizon-report): 8 current, at 364, 370, 382, 403, 444, 452, 536 and
+      922, each superseding the row that stood there by 2.74e-10 to 5.07e-5, and 64 superseded
+      on entry by the author's #675 (25), #672 (19), #678 (9) and #715 (2) and Muglich's #686
+      (9); at 57 counts the start row now names #670 as its successor. It gave each certificate
+      first committed at the pin five minutes before the issue; both maintained routes accepting
+      all 72 (118,501 candidate pairs of 17,911,878) and refusing all 432 controls, the
+      all-pairs kernel agreeing at 922, every side below Göbel's construction; the source's
+      checker not run; and the per-count seed credits as the source's statements, per-row credit
+      beyond the horizon being the owner's open question from #686. At 204 it named T-226 and
+      stated no rung. It folds in the report-order verdict comment that devtools.intake_comments
+      drafts from the backlog ledger (upper-bounds-backlog-20261022, comments.yaml beside it),
+      checked against the committed ledger before posting: the rule, and a table giving each
+      count's side, verdict and best now as the ledger has them, with the row's place in the
+      record. The issue stays open while T-226's review is queued (think-0nse).
   - number: 672
     title: '227, 229, 330-996: registration request'
     author: franciscouzo
@@ -12554,6 +12695,59 @@ issues:
       - result: n994
       - result: n995
       - result: n996
+    - url: https://github.com/jlevy/squares/issues/672#issuecomment-6336293723
+      date: '2026-10-22'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n227
+        id: T-227
+      - result: n229
+        id: T-227
+      - result: n330
+      - result: n461
+      - result: n507
+      - result: n652
+      - result: n653
+      - result: n704
+      - result: n749
+      - result: n750
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n757
+      - result: n758
+      - result: n759
+      - result: n804
+      - result: n805
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n815
+      - result: n816
+      - result: n817
+      - result: n864
+      - result: n865
+      - result: n868
+      - result: n869
+      - result: n871
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n923
+      - result: n924
+      - result: n929
+      - result: n930
+      - result: n932
+      - result: n933
+      - result: n934
+      - result: n935
+      - result: n990
+      - result: n991
+      - result: n994
+      - result: n995
+      - result: n996
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12581,6 +12775,25 @@ issues:
       at 227 (f0ca7a65, method fq, received 2026-10-17T20:28:22Z), which the source does not
       say; and said the 44 rows beyond the corpus are not yet recorded and follow in the next
       records pull request (think-2vjc). The issue stays open.
+
+      The import reply of the rows beyond the corpus, posted at 2026-10-22T08:27:03Z
+      (issuecomment-6336293723) after #720 merged and its Pages deployment of 0281e7763 (run
+      39745544894, deployment 7247186557, site v0.8.20) was checked, reported the 44 rows
+      recorded as dated beyond-horizon rows of couzo-issue672-2026-10-17 at assurance reported
+      (E-couzo-672-beyond-horizon-report), each superseding the author's #670 row (19 counts),
+      de Winter's #666 row (817, 935), a start row it was first to beat (9) or the grid (14),
+      and each superseded on entry by the author's #675 (32), #678 (7) and #715 (1) and
+      Muglich's #686 (4). It gave each certificate first committed at the pin four minutes
+      before the issue; both maintained routes accepting all 44 (88,101 candidate pairs of
+      15,138,963) and refusing all 264 controls, the all-pairs kernel agreeing at 996, every
+      side below Göbel's construction; the source's checker not run; and the per-count seed
+      credits as the source's statements. At 227 and 229 it named T-227 and stated no rung, and
+      it said the CT105 question of 22 October still stands. It folds in the report-order
+      verdict comment that devtools.intake_comments drafts from the backlog ledger
+      (upper-bounds-backlog-20261022, comments.yaml beside it), checked against the committed
+      ledger before posting: the rule, and a table giving each count's side, verdict and best
+      now as the ledger has them, with the row's place in the record. The issue stays open while
+      T-227's review is queued (think-0nse).
   - number: 673
     title: 'Credit correction request: s(146) and s(308) found_by'
     author: evand
@@ -13857,6 +14070,91 @@ issues:
       - result: n996
       - result: n997
       - result: n998
+    - url: https://github.com/jlevy/squares/issues/675#issuecomment-6336294281
+      date: '2026-10-22'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n204
+        id: T-228
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n464
+      - result: n502
+      - result: n545
+      - result: n546
+      - result: n547
+      - result: n548
+      - result: n549
+      - result: n554
+      - result: n592
+      - result: n593
+      - result: n598
+      - result: n602
+      - result: n603
+      - result: n641
+      - result: n642
+      - result: n650
+      - result: n652
+      - result: n654
+      - result: n693
+      - result: n700
+      - result: n701
+      - result: n705
+      - result: n706
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n758
+      - result: n759
+      - result: n760
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n807
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n816
+      - result: n817
+      - result: n863
+      - result: n864
+      - result: n865
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n919
+      - result: n923
+      - result: n924
+      - result: n927
+      - result: n928
+      - result: n930
+      - result: n931
+      - result: n932
+      - result: n933
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
+      - result: n994
+      - result: n995
+      - result: n996
+      - result: n997
+      - result: n998
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -13876,6 +14174,25 @@ issues:
       seed credit to Polkovskyi (slp job 107960). It said the 78 rows beyond the corpus are not
       yet recorded and follow in the next records pull request (think-pvav). The issue stays
       open.
+
+      The import reply of the rows beyond the corpus, posted at 2026-10-22T08:27:05Z
+      (issuecomment-6336294281) after #720 merged and its Pages deployment of 0281e7763 (run
+      39745544894, deployment 7247186557, site v0.8.20) was checked, reported the 78 rows
+      recorded as dated beyond-horizon rows of couzo-issue675-2026-10-18 at assurance reported
+      (E-couzo-675-beyond-horizon-report), read from 76 certificates, 992 and 995 being the 993
+      and 996 certificates less their last square; each superseding the author's #672 row (32
+      counts), #670 row (25), de Winter's #666 row (6), a start row it was first to beat (10) or
+      the grid (5), and each superseded on entry by the author's #678 (54) and #715 (6) and
+      Muglich's #686 (18). It gave each certificate first committed at the pin sixteen minutes
+      before the issue; both maintained routes accepting all 78 rows (142,270 candidate pairs of
+      23,086,008) and refusing all 456 controls, the all-pairs kernel agreeing at 998, every
+      side below Göbel's construction; the source's checker not run; and the per-count seed
+      credits as the source's statements. At 204 it named T-228 and stated no rung. It folds in
+      the report-order verdict comment that devtools.intake_comments drafts from the backlog
+      ledger (upper-bounds-backlog-20261022, comments.yaml beside it), checked against the
+      committed ledger before posting: the rule, and a table giving each count's side, verdict
+      and best now as the ledger has them, with the row's place in the record. The issue stays
+      open while T-228's review is queued (think-0nse).
   - number: 678
     title: '204-998: registration request'
     author: franciscouzo
@@ -18370,3 +18687,1376 @@ issues:
       below 1024 its outcome and margin. It read the answers to the acknowledgement's first two
       questions from the pin and the manifest, repeated the third, on 335, and said that no site
       page lists beyond-horizon rows. It states no T-NNN, and the issue stays open.
+  - number: 719
+    title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
+    author: Mishapolk
+    opened: '2026-10-22'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Mykhailo Polkovskyi (Mishapolk) reports 122 upper
+      bounds at n = 105 to 1568 from Mishapolk/square-packing-records at
+      12fc46678fa8eefa3f156ff37dfffd84c8f3a580, each an exact certificate certificates/n-N.cert
+      whose header side is authoritative; the table prints each side's binary64 value at 16
+      places. Imported on 22 October 2026: the source states no licence, so the
+      mishapolk-issue719-2026-10-22 packet keeps the 114 certificates at or below 1024 as
+      derived exact facts and pins every claimed file by digest. 105 and 204, re-solves of the
+      case's house packings, are T-229 at V0/C0, pending adoption; 111 of the 112 rows beyond
+      the corpus at or below 1024 are beyond-horizon rows, each current, after the filtered
+      exact replay decided every one on two routes with every control refused; 366 is not
+      recorded, below Couzo's 4e4c8ce certificate; the 8 rows above 1024 wait on the owner.
+    read_through: '2026-10-22T11:35:16Z'
+    results:
+    - key: n105
+      claim: s(105) <= 10.7893037837429748, binary64; the exact header side is authoritative.
+      source: body
+      register:
+      - T-229
+    - key: n204
+      claim: s(204) <= 14.8086428305278961, binary64; the exact header side is authoritative.
+      source: body
+      register:
+      - T-229
+    - key: n330
+      claim: s(330) <= 18.6926724444540682, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        18.6926724444540696, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n339
+      claim: s(339) <= 18.9073514711767388, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        18.9073514711767399, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n342
+      claim: s(342) <= 18.9647067231682804, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        18.9647067231682793, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-certificates-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n344
+      claim: s(344) <= 18.9927278093559089, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        18.9927278093559091, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n366
+      claim: s(366) <= 19.7388031475702945, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: Francisco Couzo's certificate certificates/best/n366.cert at
+        franciscouzo/square-packing@4e4c8ce, published 15 October, is 8.19e-2 below it, so the
+        ledger of 22 October for issue 719 does not record it. Both project exact routes accept
+        the packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n370
+      claim: s(370) <= 19.7674283499617083, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        19.7674283499617075, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue670-2026-10-17's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n372
+      claim: s(372) <= 19.8228756555523127, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        19.8228756555523135, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-extended-range-reports-2026-10-08's. Its certificate,
+        kept as a derived fact, has the SHA-256 the issue states, and both project exact routes
+        accept the packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n377
+      claim: s(377) <= 19.9254716539692609, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        19.9254716539692624, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n378
+      claim: s(378) <= 19.9420180574448551, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        19.9420180574448565, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n379
+      claim: s(379) <= 19.9508896814991914, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        19.9508896814991899, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n380
+      claim: s(380) <= 19.9613500238311268, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        19.9613500238311272, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n381
+      claim: s(381) <= 19.9747398404791632, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        19.9747398404791636, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n409
+      claim: s(409) <= 20.7674283499626853, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        20.7674283499626866, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-certificates-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n410
+      claim: s(410) <= 20.7781745930728796, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        20.7781745930728796, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n412
+      claim: s(412) <= 20.8229954154576440, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        20.8229954154576454, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n413
+      claim: s(413) <= 20.8316633653748795, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        20.8316633653748782, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n417
+      claim: s(417) <= 20.9332107700260792, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        20.9332107700260782, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n418
+      claim: s(418) <= 20.9391841282486943, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        20.9391841282486939, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n419
+      claim: s(419) <= 20.9578048362645823, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        20.9578048362645837, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n420
+      claim: s(420) <= 20.9665881911787615, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        20.9665881911787632, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n421
+      claim: s(421) <= 20.9762739979630339, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        20.9762739979630333, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n422
+      claim: s(422) <= 20.9835752545799785, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        20.9835752545799800, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n447
+      claim: s(447) <= 21.6903559373146493, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        21.6903559373146504, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n450
+      claim: s(450) <= 21.7674283499636907, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        21.7674283499636898, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-certificates-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n452
+      claim: s(452) <= 21.7781745930739135, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        21.7781745930739137, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue670-2026-10-17's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n453
+      claim: s(453) <= 21.8229954154586636, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        21.8229954154586624, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n454
+      claim: s(454) <= 21.8284271247681012, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        21.8284271247681022, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n456
+      claim: s(456) <= 21.8813062181121190, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        21.8813062181121204, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n460
+      claim: s(460) <= 21.9509876879891586, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        21.9509876879891580, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n462
+      claim: s(462) <= 21.9661922111896395, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        21.9661922111896413, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n490
+      claim: s(490) <= 22.6568542495151206, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        22.6568542495151204, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n498
+      claim: s(498) <= 22.8284271247691315, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        22.8284271247691329, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n499
+      claim: s(499) <= 22.8813062181129858, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        22.8813062181129861, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n507
+      claim: s(507) <= 22.9736971636574836, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        22.9736971636574846, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue678-2026-10-18's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n508
+      claim: s(508) <= 22.9833093783497979, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        22.9833093783497975, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n535
+      claim: s(535) <= 23.6568542495161900, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        23.6568542495161889, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n536
+      claim: s(536) <= 23.6776695296874564, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        23.6776695296874571, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue670-2026-10-17's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n544
+      claim: s(544) <= 23.8284271247704780, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        23.8284271247704797, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n551
+      claim: s(551) <= 23.9658016419622690, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        23.9658016419622695, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n552
+      claim: s(552) <= 23.9666288233401836, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        23.9666288233401843, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n553
+      claim: s(553) <= 23.9789210762278451, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        23.9789210762278454, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n555
+      claim: s(555) <= 23.9935807135564332, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        23.9935807135564329, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue678-2026-10-18's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n582
+      claim: s(582) <= 24.6568542495172451, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        24.6568542495172436, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n584
+      claim: s(584) <= 24.6776695296884547, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        24.6776695296884534, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n591
+      claim: s(591) <= 24.8284271247714869, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        24.8284271247714863, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n596
+      claim: s(596) <= 24.9497474683309122, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        24.9497474683309116, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n601
+      claim: s(601) <= 24.9853949028319278, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        24.9853949028319280, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n631
+      claim: s(631) <= 25.6568542495182825, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        25.6568542495182812, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n633
+      claim: s(633) <= 25.6776695296895383, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        25.6776695296895390, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n637
+      claim: s(637) <= 25.7781745930779884, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        25.7781745930779883, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n640
+      claim: s(640) <= 25.8284271247724924, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        25.8284271247724929, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n641
+      claim: s(641) <= 25.8813062181159843, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        25.8813062181159854, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue678-2026-10-18's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n642
+      claim: s(642) <= 25.8813062181159843, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        25.8813062181159854, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue678-2026-10-18's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n644
+      claim: s(644) <= 25.8994949366377156, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        25.8994949366377160, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n649
+      claim: s(649) <= 25.9748973459228907, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        25.9748973459228905, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n650
+      claim: s(650) <= 25.9748809420021658, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        25.9748809420021670, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n652
+      claim: s(652) <= 25.9881250760857050, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        25.9881250760857037, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n682
+      claim: s(682) <= 26.6568542495058907, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.6568542495058909, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n684
+      claim: s(684) <= 26.6776695296907000, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.6776695296907003, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n689
+      claim: s(689) <= 26.7781745930789761, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.7781745930789777, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n691
+      claim: s(691) <= 26.8284271247735191, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.8284271247735201, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n692
+      claim: s(692) <= 26.8284271247731461, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.8284271247731456, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n693
+      claim: s(693) <= 26.8813062181169933, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.8813062181169920, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue678-2026-10-18's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n695
+      claim: s(695) <= 26.8994949366386997, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.8994949366386985, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n699
+      claim: s(699) <= 26.9497474683329123, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.9497474683329111, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n701
+      claim: s(701) <= 26.9700653112172652, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.9700653112172656, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n703
+      claim: s(703) <= 26.9813119207547061, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.9813119207547075, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n704
+      claim: s(704) <= 26.9871091926749678, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.9871091926749665, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n705
+      claim: s(705) <= 26.9903755780257875, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        26.9903755780257891, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n735
+      claim: s(735) <= 27.6568542495066403, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.6568542495066398, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n736
+      claim: s(736) <= 27.6568542495202685, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.6568542495202669, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n737
+      claim: s(737) <= 27.6776695296915705, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.6776695296915695, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n742
+      claim: s(742) <= 27.7781745930799566, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.7781745930799568, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n743
+      claim: s(743) <= 27.7989898732512835, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.7989898732512834, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n744
+      claim: s(744) <= 27.7989898732513581, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.7989898732513590, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n745
+      claim: s(745) <= 27.8284271247741621, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.8284271247741625, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n746
+      claim: s(746) <= 27.8284271247742012, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.8284271247742003, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n753
+      claim: s(753) <= 27.9324498863881487, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.9324498863881494, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue678-2026-10-18's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n754
+      claim: s(754) <= 27.9374233139930546, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.9374233139930546, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue678-2026-10-18's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n755
+      claim: s(755) <= 27.9514629577605831, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.9514629577605835, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n757
+      claim: s(757) <= 27.9769144464501274, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.9769144464501288, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n758
+      claim: s(758) <= 27.9822355374306575, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.9822355374306588, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n759
+      claim: s(759) <= 27.9885691622969013, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        27.9885691622969021, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n790
+      claim: s(790) <= 28.6568542495070275, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        28.6568542495070280, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n791
+      claim: s(791) <= 28.6568542495212277, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        28.6568542495212289, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n792
+      claim: s(792) <= 28.6568542495212135, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        28.6568542495212151, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n797
+      claim: s(797) <= 28.7781745930809798, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        28.7781745930809806, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n798
+      claim: s(798) <= 28.7989898732522818, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        28.7989898732522832, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n799
+      claim: s(799) <= 28.7989898732523031, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        28.7989898732523038, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n800
+      claim: s(800) <= 28.7989898732523351, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        28.7989898732523347, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-verified-bounds-2026-10-14's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n810
+      claim: s(810) <= 28.9514630500047723, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        28.9514630500047711, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n811
+      claim: s(811) <= 28.9743521869765459, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        28.9743521869765470, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n812
+      claim: s(812) <= 28.9769143205190431, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        28.9769143205190418, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n816
+      claim: s(816) <= 28.9959445386864587, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        28.9959445386864603, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n868
+      claim: s(868) <= 29.9742166092550129, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        29.9742166092550134, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n869
+      claim: s(869) <= 29.9749357188757237, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        29.9749357188757236, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n872
+      claim: s(872) <= 29.9922154605662570, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        29.9922154605662572, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n874
+      claim: s(874) <= 29.9926541962530777, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        29.9926541962530775, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n927
+      claim: s(927) <= 30.9691903108826168, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        30.9691903108826162, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n928
+      claim: s(928) <= 30.9744956681247743, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        30.9744956681247752, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n929
+      claim: s(929) <= 30.9753932494690254, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        30.9753932494690260, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n930
+      claim: s(930) <= 30.9772726277994437, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        30.9772726277994441, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n932
+      claim: s(932) <= 30.9906441863849018, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        30.9906441863849021, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n933
+      claim: s(933) <= 30.9906396110631484, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        30.9906396110631485, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n934
+      claim: s(934) <= 30.9940783327694191, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        30.9940783327694195, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n990
+      claim: s(990) <= 31.9753934398895581, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        31.9753934398895586, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n991
+      claim: s(991) <= 31.9756199047897383, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        31.9756199047897388, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n992
+      claim: s(992) <= 31.9776473755027233, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        31.9776473755027223, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n993
+      claim: s(993) <= 31.9838955805472231, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        31.9838955805472241, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n994
+      claim: s(994) <= 31.9906763852541545, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        31.9906763852541559, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n996
+      claim: s(996) <= 31.9934449769752192, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        31.9934449769752198, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding couzo-issue715-2026-10-21's. Its certificate, kept as a derived
+        fact, has the SHA-256 the issue states, and both project exact routes accept the packing
+        with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n997
+      claim: s(997) <= 31.9968759191575884, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a dated row of the mishapolk-issue719-2026-10-22 source at
+        31.9968759191575871, its exact side rounded up at 16 places, recorded in report order by
+        the ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) as the count's
+        current row, superseding muglich-issue686-2026-10-19's. Its certificate, kept as a
+        derived fact, has the SHA-256 the issue states, and both project exact routes accept the
+        packing with every control refused (receipts/filtered-exact-replay.json).
+      queued: false
+    - key: n1061
+      claim: s(1061) <= 32.9956811739297748, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
+        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
+        not derived, replayed or recorded here.
+      queued: true
+      bead: think-9vr8
+      blocked_on:
+      - think-f2io
+    - key: n1128
+      claim: s(1128) <= 33.9972722117471022, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
+        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
+        not derived, replayed or recorded here.
+      queued: true
+      bead: think-9vr8
+      blocked_on:
+      - think-f2io
+    - key: n1196
+      claim: s(1196) <= 34.9966951712759240, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
+        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
+        not derived, replayed or recorded here.
+      queued: true
+      bead: think-9vr8
+      blocked_on:
+      - think-f2io
+    - key: n1266
+      claim: s(1266) <= 35.9951719516850943, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
+        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
+        not derived, replayed or recorded here.
+      queued: true
+      bead: think-9vr8
+      blocked_on:
+      - think-f2io
+    - key: n1339
+      claim: s(1339) <= 36.9972433771151188, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
+        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
+        not derived, replayed or recorded here.
+      queued: true
+      bead: think-9vr8
+      blocked_on:
+      - think-f2io
+    - key: n1413
+      claim: s(1413) <= 37.9987133186672281, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
+        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
+        not derived, replayed or recorded here.
+      queued: true
+      bead: think-9vr8
+      blocked_on:
+      - think-f2io
+    - key: n1489
+      claim: s(1489) <= 38.9972984908123834, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
+        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
+        not derived, replayed or recorded here.
+      queued: true
+      bead: think-9vr8
+      blocked_on:
+      - think-f2io
+    - key: n1568
+      claim: s(1568) <= 39.9986704693230806, binary64; the exact header side is authoritative.
+      source: body
+      not_registered: >-
+        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (think-f2io).
+        Its certificate is pinned by digest in the mishapolk-issue719-2026-10-22 packet; it is
+        not derived, replayed or recorded here.
+      queued: true
+      bead: think-9vr8
+      blocked_on:
+      - think-f2io
+    beads:
+    - think-xyhn
+    - think-4h23
+    - think-9vr8
+    answer_bead: think-xyhn
+    replies: []
+    close_when: >-
+      T-229 is reviewed and adopted at 105 and 204 (think-4h23), the owner has answered whether
+      counts above 1024 are tracked (think-f2io) and the 8 rows above 1024 have their
+      disposition (think-9vr8), and the replies reporting each are posted.
+    notes: >-
+      The issue opened at 2026-10-22T05:30:47Z with 221 counts to 4035 pinned at 1851c2c, was edited
+      at 05:35:31Z (credit name Mykhailo Polkovskyi) and at 06:05:31Z to 122 counts pinned at
+      12fc466, withdrawing 101 and adding 366 and 447 and restoring the credit name Mikhail Polk; an
+      edit at 11:35:16Z changed only the two credit lines, to Mykhailo Polkovskyi, the name the
+      record uses. The watched repository's certificates are reports from their first commit:
+      1851c2c (05:29:48Z) for 121, 12fc466 (06:05:07Z) for 447; the ledger dates #719's claims at
+      366 and 447 by the 06:05:31Z edit that first made them. The stage 1 triage (think-xyhn) and
+      this import found no reply due before the import: the acknowledgement drafted in triage is
+      folded into the import reply, posted after the records pull request merges. 48 certificates
+      the issue does not claim are pinned by digest and not imported: ten withdrawn rows still new
+      by the record's test, 34 in-corpus files below or undecided against the record beyond the
+      twelfth place, three files that failed both exact routes in triage, and a second 204 file,
+      1.48e-11 lower. The reply asks the author about each, and about per-row lineage.

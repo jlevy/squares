@@ -103,12 +103,13 @@ def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
         assert current["superseded_by"] == "couzo-certificates-2026-10-12"
         assert Fraction(CERTIFIED[n]) < Fraction(LATER[n]) < Fraction(FFD900D[n])
     # The last reports stand: evand's composition at 375, which beats Couzo's certificate
-    # of 13 October, and at 378 issue 686's certificate of 19 October, which beats Couzo's
-    # 487b058 of 14 October (T-188's source), which beat that certificate in turn.
+    # of 13 October, and at 378 issue 719's certificate of 22 October, which beats issue
+    # 686's of 19 October, which beat Couzo's 487b058 of 14 October (T-188's source), which
+    # beat that certificate in turn.
     standing = check_source_coverage.current_beyond_horizon(coverage)
     assert {n: standing[n]["source_id"] for n in updates.COUNTS} == {
         375: "evand-compositions-2026-10-13",
-        378: "muglich-issue686-2026-10-19",
+        378: "mishapolk-issue719-2026-10-22",
     }
     source = check_source_coverage.source_by_id(coverage, updates.SOURCE_ID)
     assert check_source_coverage.load_claims(updates.ROOT / source["claims_record"]) == LATER

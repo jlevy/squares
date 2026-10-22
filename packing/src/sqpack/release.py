@@ -1,5 +1,14 @@
 """Independent public editions for the site, the infographic pair and each paper.
 
+Site editions are retired as of 22 October 2026 (the owner; think-wdqo): "We don't have
+any real value in committing a synthetic version for the site." The site deploys
+continuously from `main`. `PUBLICATION_HISTORY` is kept as history, the record of the
+site editions that were published, and is frozen together with `PUBLICATION_REVISION`,
+the commit the claim documents link to: `devtools.check_release_impact` refuses an edit
+to either, and `devtools.cut_release --component site` refuses to cut. The papers and
+the art, the infographic posters and the films, keep their versions. Until the footer
+names the deployed commit, the site's pages print the frozen edition with the data pin.
+
 `PUBLICATION_EDITION` stamps the site's footer and workbench. The infographic family
 has its own `INFOGRAPHIC_HISTORY` and `INFOGRAPHIC_VERSION`; its two SVGs, PDFs and PNG
 exports carry one shared semantic core plus their derivation revision. Every paper
@@ -50,9 +59,13 @@ class PublicationHistoryEntry(NamedTuple):
     result_scope: str
 
 
+#: FROZEN since 22 October 2026, when site editions were retired (the owner; think-wdqo).
+#: It is kept as the record of the site editions that were published: no entry is added,
+#: removed or redated, and `devtools.check_release_impact` refuses an edit to it.
+#:
 #: Every edition this publication, the site and its data, has had, newest first, and NONE
 #: is ever removed. It is the site's record: its pages and workbench are stamped from
-#: it, the claim documents are regenerated at each entry, and `development.md` (Cutting
+#: it, the claim documents were regenerated at each entry, and `development.md` (Cutting
 #: an edition) is where a reader finds it. It is not a paper's history: a paper lists its
 #: own editions (`EXPLAINER_HISTORY`, below), which are the ones in which that paper
 #: changed. Until 2026-10-02 the explainer listed this whole record and called it its
@@ -86,14 +99,15 @@ class PublicationHistoryEntry(NamedTuple):
 #:
 #: Reproduce with `gh api "repos/jlevy/squares/deployments?environment=github-pages"` and,
 #: for each deployment's commit, what the page it built stated.
-# The leading entry is proposed for PR #406; confirm its date at first deployment.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
         version="v0.9.2",
         first_published="October 22, 2026",
         result_scope=(
-            "Document on the development page the storage guard that refuses bulk Git "
-            "blobs on every pull request and before each push."
+            "Record Mykhailo Polkovskyi's #719 re-solves of the house packings at 105 and "
+            "204 as T-229, pending review and adoption, and his 111 rows beyond the "
+            "corpus at or below 1024 as current beyond-horizon rows, superseding the rows "
+            "that stood at those counts; record the replies after #720."
         ),
     ),
     PublicationHistoryEntry(
@@ -666,8 +680,8 @@ PUBLICATION_HISTORY = (
     ),
 )
 
-#: The edition the site's pages and workbench state. Choose at most one
-#: version bump per merge, and keep it fixed while revising that pull request.
+#: The edition the site's pages and workbench state: the last site edition, frozen since
+#: site editions were retired (think-wdqo).
 PUBLICATION_VERSION = PUBLICATION_HISTORY[0].version
 
 #: Where the edition stands, said ahead of the version. Empty once it is final; the
@@ -776,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "6a8c90331b48b20187e81a9b817624e8a7264982"
+DATA_REVISION = "6610be9374c9371dd36f8ee0c9be69846eb7d122"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -873,6 +887,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for PR #578; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.18",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Mykhailo "
+            "Polkovskyi's #719 re-solves at 105 and 204 (T-229)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.17",
         first_published="October 22, 2026",
@@ -1341,8 +1363,20 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.9.2",
         impact="patch",
         reason=(
-            "Document on the development page the storage guard that refuses bulk Git "
-            "blobs on every pull request and before each push."
+            "Record Mykhailo Polkovskyi's #719 re-solves of the house packings at 105 and "
+            "204 as T-229, pending review and adoption, and his 111 rows beyond the "
+            "corpus at or below 1024 as current beyond-horizon rows, superseding the rows "
+            "that stood at those counts; record the replies after #720."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.17",
+        version="v0.4.18",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Mykhailo "
+            "Polkovskyi's #719 re-solves at 105 and 204 (T-229)."
         ),
     ),
     ReleaseImpactDecision(
@@ -2259,6 +2293,38 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/site_urls.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The #719 import (T-229 at 105 and 204, 111 beyond-horizon rows, the replies "
+            "after #720, results.html's ceiling) against main 78dc902c1 (#727): rendered "
+            "at link revision 6610be93 into empty site directories, twice from this tree "
+            "at a9b8d809 and twice from main's (68 files each), "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write their HTML and Markdown byte-identical across "
+            "all four; only the explainer's register count differs (228 to 229), and it "
+            "took v0.4.18. No PDF was printed; each prints from that HTML. Retain v0.1.9, "
+            "v0.1.2 and v0.2.5."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -4114,31 +4180,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte identity. The changed development.md is published as "
             "development.html and is covered by this branch's site edition, not by "
             "this paper-only record."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=("paper:n11-lower-bounds-explainer",),
-        paths=(
-            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
-            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
-            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
-        ),
-        outputs=(
-            "papers/n11-lower-bounds-explainer.html",
-            "papers/n11-lower-bounds-explainer.md",
-            "papers/n11-lower-bounds-explainer.pdf",
-        ),
-        reason=(
-            "PR406's site v0.9.2 cut regenerated the five claim documents at "
-            "PUBLICATION_REVISION 72e9b17d, this branch's commit after integrating main "
-            "78dc902c1, and each differs from that main only in its source-link "
-            "revision, 76496462b to 72e9b17d. The explainer links those documents "
-            "through repo_url rather than inlining them, so its HTML and Markdown are "
-            "unchanged by them, its PDF prints that HTML, and it keeps v0.4.17. "
-            "Source-compared, as the v0.8.6 cut's record was; no render of the claim "
-            "documents or the paper was taken."
         ),
     ),
     ReleaseNoPublicChange(
@@ -6965,6 +7006,69 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and every component keeps its version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+            "site",
+        ),
+        paths=("packing/devtools/run_negative_controls.py",),
+        outputs=(
+            "development.html",
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The runner gains `module_name` and `registered_mentions`, which only "
+            "`--audit-snapshot` calls, and the `REGULARIZATION_TOOLS` comment is corrected "
+            "(think-wtso, think-cmbx). No prune list, cap or import changes. The import "
+            "path is the one recorded for think-b6ir and think-bl1p: the runner enters the "
+            "builders' import closure only through `upper_bound_houses.custody`, and no "
+            "builder calls it or reads which files a worker copies. No render was taken, "
+            "and every component keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+            "site",
+        ),
+        paths=("packing/devtools/run_negative_controls.py",),
+        outputs=(
+            "development.html",
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The owner's reset of 22 October 2026 (think-d2he, think-t1lk): "
+            "`SNAPSHOT_MAX_BYTES` goes from 255 to 512 MiB and its dated log of raises "
+            "gives way to a short rationale, with four comments that cited the log "
+            "repointed to it in Git. Worker selection is unchanged. The import path is "
+            "the one recorded for think-b6ir and think-bl1p: the runner enters the "
+            "builders' import closure only through `upper_bound_houses.custody`, and no "
+            "builder calls it or reads the cap. No render was taken, and every component "
+            "keeps its version."
+        ),
+    ),
 )
 
 
@@ -7099,9 +7203,11 @@ def validate_release_impacts(
 #: (`render_n11_lower_bounds_explainer.edition_file`), at this repository's short length. It is
 #: pinned for the reason `DATA_REVISION` is: those documents are compared byte for byte with a
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
-#: in no version string. It moves when the claim documents are regenerated for an edition. It
-#: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "72e9b17d"
+#: in no version string. It moved when the claim documents were regenerated for a site
+#: edition, and is FROZEN since site editions were retired on 22 October 2026 (think-wdqo):
+#: `devtools.check_release_impact` refuses an edit to it. It must be a commit on `main`; the
+#: site's own links name `main` itself (`devtools.repo_links`).
+PUBLICATION_REVISION = "7ff5b129"
 
 
 def data_pathspec() -> tuple[str, ...]:
