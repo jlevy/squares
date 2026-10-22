@@ -1236,8 +1236,10 @@ CREDITS: dict[int, Credit] = {
     # credited with the refinement and Daniel with the regularization, as at 258. The house
     # it replaced was de Winter's packing of issue 668 (T-196), from a search the issue says
     # started from this repository's catalogue.
-    # #672 reports the refinement; who made its CT105 submission the source does not say,
-    # and the #672 reply asks (review A4 of #718).
+    # #672 reports the refinement; the source's manifest credits it to Couzo, retaining de
+    # Winter's seed credit, and the CT105 web submission it names as provenance names no
+    # submitter (RF-3 of the 22 October review of T-226 to T-228); the #672 reply asks who
+    # made it (review A4 of #718).
     227: _regularized(
         DE_WINTER,
         "Joost de Winter’s",

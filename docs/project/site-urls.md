@@ -1120,9 +1120,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-223.html | result/t-223.html | result | overview | 2026-10-20 | 2026-10-21 | live |
 | result/t-224.html | result/t-224.html | result | overview | 2026-10-21 | 2026-10-21 | live |
 | result/t-225.html | result/t-225.html | result | overview | 2026-10-21 | 2026-10-22 | live |
-| result/t-226.html | result/t-226.html | result | overview | 2026-10-22 | 2026-10-22 | live |
-| result/t-227.html | result/t-227.html | result | overview | 2026-10-22 | 2026-10-22 | live |
-| result/t-228.html | result/t-228.html | result | overview | 2026-10-22 | 2026-10-22 | live |
+| result/t-226.html | result/t-226.html | result | overview | 2026-10-22 | 2026-10-23 | live |
+| result/t-227.html | result/t-227.html | result | overview | 2026-10-22 | 2026-10-23 | live |
+| result/t-228.html | result/t-228.html | result | overview | 2026-10-22 | 2026-10-23 | live |
 | result/t-229.html | result/t-229.html | result | overview | 2026-10-22 | 2026-10-22 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |

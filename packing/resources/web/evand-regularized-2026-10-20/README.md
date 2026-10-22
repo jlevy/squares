@@ -248,7 +248,8 @@ Francisco Couzo, whose #672 refines de Winter’s packing:
   credits Mykhailo Polkovskyi’s construction, and at 260 it says it seeded Joost de
   Winter’s #668 packing from Evan Daniel’s exact-form certificate;
 - Joost de Winter at 227, his #668 packing (T-196) as refined in Francisco Couzo’s #672
-  report (T-227), measured above; who made the refinement the source does not say;
+  report (T-227), measured above, which Couzo’s manifest credits to him, retaining de
+  Winter’s seed credit, from a CT105 web submission that names no submitter;
 - Evan Daniel at 229, his #674 packing (T-199), which started from Couzo’s #672 packing,
   which refines de Winter’s, as the site’s `lineage.yaml` records.
 

@@ -1606,6 +1606,13 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_the_register_plan_states_each_bound_as_check_standing_reads_it",
             "test_the_593_release_is_smallest_only_at_237_and_ties_couzo_at_211_and_241",
         },
+        # 38.3s of call time across its four cases on 2026-10-22 (think-0nse, RF-6 of the 22
+        # October review of T-226 to T-228), locally under `nice` with two workers on a
+        # shared four-core host: each case runs both maintained exact routes on #672's 227
+        # certificate, 8.51s to 10.94s.
+        "test_upper_bound_reports_couzo_670_672_675.py": {
+            "test_both_routes_meet_contact_and_refuse_1e30_past_it_at_672s_227",
+        },
         # Same full run: complete PR574 comparison 13.09s and plan 14.46s. The former
         # retained 209 derived-fact admissions after selective reads (9.96s locally).
         # No custody, malformed-source, adapter or other negative guard moves.

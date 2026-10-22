@@ -27790,8 +27790,9 @@ results:
       score: 2
       rationale: >-
         An arrangement of de Winter's tilted design 1.15e-05 below the smallest earlier
-        report, de Winter's T-196, superseded the next day by the author's update, as
-        T-188 is; the 6.69e-03 drop below the case is de Winter's.
+        report, Couzo's #672 (T-227), which refines de Winter's T-196 by 1.67e-08,
+        superseded the next day by the author's update, as T-188 is; the 6.69e-03 drop
+        below the case is de Winter's.
       scored: '2026-10-19'
       by: >-
         the 19 October review
@@ -30533,14 +30534,16 @@ results:
     significance:
       score: 3
       rationale: >-
-        A new arrangement at each count. At 204 it is 2.04e-05 below the case ceiling and
-        T-193's algebraic side, with 14 of 204 squares beyond a tenth of T-186's packing (87
-        within 1e-04): the scale of T-224 at 270 (3.47e-05, 15 squares, S3), well above
-        T-188's 9.29e-06 at 211 (five squares, S2). At 260 it is 2.56e-05 below T-196, from
-        a search seeded with T-196's exact form, but 24 squares lie beyond a tenth of it, so
-        not a same-arrangement step like T-199's 1.32e-05 at 229 (S2); T-196's own S3, for
-        moving 260 below 11 + 4 sqrt 2, is not inherited. Either count alone carries S3, as
-        T-220, T-221 and T-222 do at single counts; no lower bound or optimum.
+        A new arrangement at 260, and at 204 a refinement of one. At 204 it is 2.04e-05
+        below the case ceiling and T-193's algebraic side, with 14 of 204 squares beyond a
+        tenth of T-186's packing (87 within 1e-04), but that arrangement was first reported
+        in Couzo's #670 (T-226) a day earlier, which this certificate refines one to one
+        and 1.58e-06 lower; the arrangement's S3 is T-226's. At 260 it is 2.56e-05 below
+        T-196, from a search seeded with T-196's exact form, but 24 squares lie beyond a
+        tenth of it, so not a same-arrangement step like T-199's 1.32e-05 at 229 (S2);
+        T-196's own S3, for moving 260 below 11 + 4 sqrt 2, is not inherited. The 260 count
+        alone carries S3, as T-220, T-221 and T-222 do at single counts, at the scale of
+        T-224 at 270 (3.47e-05, 15 squares); no lower bound or optimum.
       scored: '2026-10-21'
       by: >-
         review A of #706, the pull request's reviewer c-review-706-A
@@ -30549,7 +30552,9 @@ results:
         the mathematics, whose 20 October review
         (docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) states no score.
         Its measurements are identity_204.py and identity_260_tenth.py in the packet's
-        review/programs/
+        review/programs/. The 204 sentence names T-226's arrangement, as RF-4 of the 22
+        October stage 4 review of T-226 to T-228 asks
+        (docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)
     novelty: previously-published
     attribution:
       source_keys:
@@ -30811,8 +30816,10 @@ results:
       Couzo's at 204 (#678, T-223, which his source credits to Mykhailo Polkovskyi's
       construction) and 260 (#678, T-223, his arrangement from a search seeded with Evan
       Daniel's exact-form certificate of Joost de Winter's #668 packing); Joost de Winter's
-      at 227 (#668, T-196) as refined in Francisco Couzo's #672 report (T-227; who made the
-      refinement the source does not say); and Evan Daniel's own at 229 (#674, T-199, from
+      at 227 (#668, T-196) as refined in Francisco Couzo's #672 report (T-227, which the
+      source's manifest credits to Couzo, retaining de Winter's seed credit, from a CT105
+      web submission that names no submitter); and Evan Daniel's own at 229 (#674, T-199,
+      from
       Couzo's #672 packing, which refines de Winter's).
 
       Evan Daniel (https://github.com/evand/square-packing) refreshed each packing from his
@@ -31056,17 +31063,26 @@ results:
       One complete rational source certificate of issue #670 reports a finite upper-bound
       improvement at the exact side it states: s(204) <=
       45044217780850246618141/3041751595240000000000, below T-186, the case's house best
-      packing when it was reported. Complete native feasibility outcomes are retained
-      separately; the case's house best packing is unchanged, since Couzo's own later #675
-      and #678 (T-223) certificates and Evan Daniel's view of #678's packing (T-225) are
-      smaller, and the entry awaits independent review.
+      packing when it was reported. The case's house best packing is unchanged, since
+      Couzo's own later #675 and #678 (T-223) certificates and Evan Daniel's view of #678's
+      packing (T-225) are smaller.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 22 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt. The source's manifest names this repository's sqpack/verify.py as its first
+      checker, and the maintained sqpack route decides through that file, so that replay
+      shares the producer's named components. The 22 October stage 4 review reproduced the
+      replay and decided the certificate again on a clean-room checker of its own, which
+      shares no code with either route or the source, and found no blocking defect: the
+      bound is confirmed, independently re-implemented.
 
       The issue states that each bound is strictly smaller than the source's previous
       published index and a reviewed comparison envelope including deletion and repeated L
-      borders, and the manifest records the author's checker receipts with the source's
-      exact checker verify_bound_certificate.py (Evan Daniel's MIT verifier, modified by
-      Francisco Couzo with Codex), pinned here by digest and not run. Those statements are
-      the author's; no source program ran here.
+      borders, and the manifest records the author's checker receipts with this
+      repository's sqpack/verify.py and the source's exact checker
+      verify_bound_certificate.py (Evan Daniel's MIT verifier, modified by Francisco Couzo
+      with Codex), pinned here by digest and not run. Those statements are the author's;
+      no source script ran here.
 
       Credit Francisco Couzo (https://github.com/franciscouzo/square-packing), whose
       per-count JSON credits the 204 seed to Mykhailo Polkovskyi (Mishapolk), search job
@@ -31074,24 +31090,33 @@ results:
       source's manifest.
     scope:
       n_values: [204]
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
-      score: 2
+      score: 3
       rationale: >-
         A finite construction side at 204, 1.88e-5 below T-186, Polkovskyi's refinement
-        that held the case when it was reported, and since superseded by Couzo's own #675
-        (5.05e-8 lower) and #678 (T-223); a step in his 204 sequence that moves no theorem,
-        S2 as T-198 is. No lower bound or optimum.
+        that held the case when it was reported, in an arrangement other than T-186's: no
+        symmetry of the box pairs the two one to one, 15 squares lie beyond a tenth and
+        turns reach 26.5 degrees. It is the first report of the arrangement that Couzo's
+        #675 and #678 (T-228, T-223) refine one to one, and T-223's own S3 at 204 rested on
+        this arrangement's distance from T-186. A substantive case result at the low end of
+        S3, between T-198's 1.15e-5 (S2) and T-223's 2.04e-5; later smaller sides do not
+        lower it. No lower bound or optimum.
       scored: '2026-10-22'
       by: >-
-        the stage 1 triage of 22 October (c-triage-backlog-1022, think-f28n) and the records
-        lane of think-ql4v; a draft for the stage 4 review (think-0nse)
+        the 22 October stage 4 review
+        (docs/project/reviews/review-2026-10-22-couzo-670-672-675.md), changing the draft S2
+        of the stage 1 triage of 22 October (c-triage-backlog-1022, think-f28n) and the
+        records lane of think-ql4v
     novelty: previously-published
     attribution:
       source_keys: ['[Couzo issue 670 2026-10-17]']
       published: '2026-10-17'
-    evidence: [E-couzo-670-certificate-report]
+    evidence:
+      - E-couzo-670-certificate-report
+      - E-couzo-670-exact-feasibility
+      - E-couzo-670-review-exact-feasibility
     artifacts:
       - packing/resources/web/couzo-issue670-2026-10-17/README.md
       - packing/resources/web/couzo-issue670-2026-10-17/acquisition/claims.json
@@ -31100,9 +31125,12 @@ results:
       - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
       - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/README.md
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_couzo_670_672_675.py
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/outputs/out-controls-T-226-n204.json
     notes: >-
       A separate complete repository replay is retained for n = 204: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on
@@ -31126,25 +31154,73 @@ results:
       most 0.143, turns up to 1.10 degrees; T-223's is one to one with it, 7 beyond a
       tenth, at most 0.227. This is Couzo's own sequence at 204, so the credit does not
       change, and no regularization is recorded: the source does not call it a refinement
-      of T-186, which was not measured.
+      of T-186.
 
-      The source's own checkers were not run here. The two maintained routes, the sqpack
-      rational witness verifier and the independent rational corner checker, share
-      certificate parsing, half-angle conversion, Fraction arithmetic and the
-      separating-axis method. No two independent methods, human oversight or optimality is
-      claimed.
+      The 22 October stage 4 review measured it against T-186 (out-identity.json in the
+      #672 packet's review/review-2026-10-22/): no symmetry of the box pairs the two one to
+      one, 15 squares lie beyond a tenth and 34 within 1e-6, and turns reach 26.5 degrees.
+      So #670 first reported an arrangement other than T-186's, from a hop search its
+      per-count JSON seeds with Polkovskyi's construction, and #675 and #678 refine it.
+
+      The source's own scripts were not run here. Its manifest names this repository's
+      sqpack/verify.py as its first checker, byte-identical on main, and the maintained
+      sqpack route decides through that file, so the replay is recorded as sharing the
+      producer's components (E-couzo-670-exact-feasibility); the review's clean-room checker
+      decided the certificate in full on two routes of its own
+      (E-couzo-670-review-exact-feasibility).
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method; the review's checker shares no code with
+      them, and its integer route no arithmetic library. No two independent methods, human
+      oversight or optimality is claimed.
+
+      The receipt's two controls are gross, a duplicated square and a square moved outside,
+      while the certificate's margins are exactly 0 at the walls, where squares touch the
+      closed box, and 5.47e-11 between pairs (RF-6 of the 22 October review). The review's
+      sharp controls, kept with their receipts in the #672 packet's
+      review/review-2026-10-22/, lowered the side by the least far-wall clearance, moved
+      every square by the least near-wall clearance and closed the least-gap pair by its
+      gap: both maintained routes and the review's checker accepted each at exact contact
+      and refused each 1e-30 further, as did the kernel's run_sharp.
+      test_upper_bound_reports_couzo_670_672_675.py runs the kernel's two sharp controls on
+      #672's 227 certificate, whose walls clear by 1e-15.
+
+      V3 and C3 rest on the 22 October stage 4 review
+      (docs/project/reviews/review-2026-10-22-couzo-670-672-675.md) and the replay it
+      reproduced (E-couzo-670-exact-feasibility), with the review's own checker
+      (E-couzo-670-review-exact-feasibility).
     next_rung: >-
-      Independently review the retained replay (think-0nse). The entry is superseded on
-      entry at 204: Couzo's own #675 and #678 (T-223) and Evan Daniel's view of #678's
-      packing (T-225) are smaller, and the case holds T-225. The 72 rows beyond the corpus
-      are the source's dated beyond-horizon rows since 22 October 2026, recorded in report
-      order by the backlog ledger (upper-bounds-backlog-20261022).
-    unfinished_confirmations:
-      - what: >-
-          Review the retained two-route replay of #670's 204 certificate and enter it as
-          confirming evidence, with sharp controls at 1e-30.
-        rung: C3
-        link: think-0nse
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 22 October, is
+      retained. The entry is superseded on entry at 204: Couzo's own #675 and #678 (T-223)
+      and Evan Daniel's view of #678's packing (T-225) are smaller, and the case holds
+      T-225. The 72 rows beyond the corpus are the source's dated beyond-horizon rows since
+      22 October 2026, recorded in report order by the backlog ledger
+      (upper-bounds-backlog-20261022).
+    reviews:
+      - path: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, reasoning setting xhigh), the stage 4
+          mathematical review lane of T-226 to T-228 (c-review-t226-t228-math), prompted
+          separately from the import lanes that built the three packets and from the
+          reviewers of #718
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-22'
+        scope: >-
+          Finite feasibility of the four certificates T-226, T-227 and T-228 cite: each
+          packet's replay reproduced on both maintained routes and its frozen comparison
+          rebuilt, a clean-room checker written for the review deciding each certificate on
+          an integer route and a Fraction route with exact clipping area, eight sharp and
+          format controls a certificate through both maintained routes and that checker,
+          each side's margins in report order and against every bound through 324, the
+          certificates held to their Git blobs at the pins, each route's trust boundary,
+          and the identity, credit and significance the entries state, measured pose by
+          pose against T-186, T-196, T-223, T-225 and #674's packings.
+        verdict: accepted
+        covers: [T-226, T-227, T-228]
 
   - id: T-227
     kind: upper-bound
@@ -31156,41 +31232,57 @@ results:
       Two complete rational source certificates report finite upper-bound improvements at
       the exact sides they state: s(227) <=
       71427829379429597600111901507/4589408083628500000000000000 and s(229) <=
-      231170315041711399213831561/14771101209934000000000000. Complete native feasibility
-      outcomes are retained separately; the entry awaits independent review. At 227 it is
-      below de Winter's T-196, the house best packing when it was reported; Evan Daniel's
-      solved view of this packing (T-225), smaller still, has been the house since 22 October
-      2026. At 229 Evan Daniel's #674 opening and update (T-198, T-199), reported after it,
-      are smaller.
+      231170315041711399213831561/14771101209934000000000000. At 227 it is 1.71e-4 below de
+      Winter's T-196, the smallest report before it, and 7.44e-3 below the case's house
+      best packing then, T-155's exact ceiling of the Kingbird catalogue's bound; Evan
+      Daniel's solved view of this packing (T-225), smaller still, has been the house since
+      22 October 2026. At 229 Evan Daniel's #674 opening and update (T-198, T-199),
+      reported after it, are smaller.
+
+      The two certificates and their duplicate-square and outside-container controls were
+      decided here on 22 October 2026 by both maintained exact routes, and the frozen
+      comparison rebuilt. The source's manifest names this repository's sqpack/verify.py as
+      its first checker, and the maintained sqpack route decides through that file, so that
+      replay shares the producer's named components. The 22 October stage 4 review
+      reproduced the replay and decided both certificates again on a clean-room checker of
+      its own, which shares no code with either route or the source, and found no blocking
+      defect: the bounds are confirmed, independently re-implemented.
 
       The issue states that each bound is strictly smaller than the source's previous
       published index and a reviewed comparison envelope including deletion and repeated L
-      borders, and the manifest records the author's checker receipts with the source's
-      exact checker verify_bound_certificate.py (Evan Daniel's MIT verifier, modified by
-      Francisco Couzo with Codex), pinned here by digest and not run. Those statements are
-      the author's; no source program ran here.
+      borders, and the manifest records the author's checker receipts with this
+      repository's sqpack/verify.py and the source's exact checker
+      verify_bound_certificate.py (Evan Daniel's MIT verifier, modified by Francisco Couzo
+      with Codex), pinned here by digest and not run. Those statements are the author's;
+      no source script ran here.
 
       Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with
       refinements of Joost de Winter's #668 packings (T-196), as the author's comment of 17
       October says: at 227 a CT105 web submission (method fq) seeded from de Winter's #668
-      certificate by way of Evan Daniel's exact form of it, which the source does not say
-      who made, and at 229 an slp refinement (search job 106640) of de Winter's #668
+      certificate by way of Evan Daniel's exact form of it, which the source's manifest
+      credits to Couzo, retaining de Winter's seed credit, and whose provenance names no
+      submitter; and at 229 an slp refinement (search job 106640) of de Winter's #668
       certificate.
     scope:
       n_values: [227, 229]
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
-      score: 2
+      score: 3
       rationale: >-
-        Refinements of de Winter's 227 and 229 packings (T-196), the same arrangement solved
-        lower by 1.71e-4 at 227 and 1.67e-8 at 229: a citable step that moves no theorem, S2
-        as T-199 (a same-arrangement step of 1.32e-5) and T-225, whose rationale already
-        gives the 1.71e-4 at 227 to this report. No lower bound or optimum.
+        At 227 de Winter's packing (T-196) refined to a new optimum 1.71e-4 below it: one to
+        one, no square beyond a tenth, five squares turned by more than 1 degree. It was the
+        smallest side known at 227 from its report until T-225's, and 7.44e-3 below the
+        case's house then. That is T-152's case at twice its scale, and above T-172's and
+        T-189's, each S3; T-225's rationale already gives this 1.71e-4 to this report. At
+        229 alone, 1.67e-8, the entry would be S2, as T-165 and T-190 are; its score is its
+        highest count's. No lower bound or optimum.
       scored: '2026-10-22'
       by: >-
-        the stage 1 triage of 22 October (c-triage-backlog-1022, think-2vjc) and the records
-        lane of think-ql4v; a draft for the stage 4 review (think-0nse)
+        the 22 October stage 4 review
+        (docs/project/reviews/review-2026-10-22-couzo-670-672-675.md), changing the draft S2
+        of the stage 1 triage of 22 October (c-triage-backlog-1022, think-2vjc) and the
+        records lane of think-ql4v
     novelty: previously-published
     attribution:
       source_keys: ['[Couzo issue 672 2026-10-17]']
@@ -31204,7 +31296,7 @@ results:
           certificate by way of Evan Daniel's exact form
         side: solved
         identity:
-          basis: source-claim
+          basis: measured
           measured_in: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
           one_to_one: true
           moved: 59
@@ -31217,13 +31309,16 @@ results:
           slp refinement (search job 106640) of de Winter's #668 certificate
         side: solved
         identity:
-          basis: source-claim
+          basis: measured
           measured_in: packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
           one_to_one: true
           moved: 57
           max_move: 0.00941
           max_turn_deg: 0.0308
-    evidence: [E-couzo-672-certificate-report]
+    evidence:
+      - E-couzo-672-certificate-report
+      - E-couzo-672-exact-feasibility
+      - E-couzo-672-review-exact-feasibility
     artifacts:
       - packing/resources/web/couzo-issue672-2026-10-17/README.md
       - packing/resources/web/couzo-issue672-2026-10-17/acquisition/claims.json
@@ -31234,9 +31329,13 @@ results:
       - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
       - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/README.md
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_couzo_670_672_675.py
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/outputs/out-controls-T-227-n227.json
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/outputs/out-controls-T-227-n229.json
     notes: >-
       A separate complete repository replay is retained for n = 227 and 229: 2 positives
       and 4 duplicate-square and outside-container controls passed their required outcomes
@@ -31256,8 +31355,9 @@ results:
       view of this packing after it.
 
       Each count is listed in regularizations as a refinement of de Winter's packing
-      (T-196), as the author's comment says, measured pose by pose (a measurement, which
-      decides nothing): at 227 nearest centres pair the two one to one, 59 squares moved
+      (T-196), as the author's comment says, its identity measured pose by pose (a
+      measurement, which decides nothing; the 22 October review reproduced it on code of
+      its own): at 227 nearest centres pair the two one to one, 59 squares moved
       beyond 1e-3, at most 0.0796, turns up to 5.84 degrees, no square beyond a tenth
       (evand-regularized-2026-10-20/measure/identity.json); at 229 one to one, 57 beyond
       1e-3, at most 0.00941, turns up to 0.0308 degrees
@@ -31269,27 +31369,68 @@ results:
       beyond a tenth, at most 0.807 and 0.873, with turns up to 38.3 degrees, so they are
       other arrangements and record no regularization of it.
 
-      The source's own checkers were not run here. The two maintained routes, the sqpack
-      rational witness verifier and the independent rational corner checker, share
-      certificate parsing, half-angle conversion, Fraction arithmetic and the
-      separating-axis method. No two independent methods, human oversight or optimality is
-      claimed. The 21 October review of T-225 decided #672's 227 certificate on its own
-      checker, feasible at its own side, for information only; it does not cover this
-      entry.
+      The source's own scripts were not run here. Its manifest names this repository's
+      sqpack/verify.py as its first checker, byte-identical on main, and the maintained
+      sqpack route decides through that file, so the replay is recorded as sharing the
+      producer's components (E-couzo-672-exact-feasibility); the review's clean-room checker
+      decided the certificates in full on two routes of its own
+      (E-couzo-672-review-exact-feasibility).
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method; the review's checker shares no code with
+      them, and its integer route no arithmetic library. No two independent methods, human
+      oversight or optimality is claimed. The 21 October review of T-225 decided #672's 227
+      certificate on its own checker, feasible at its own side, for information.
+
+      The receipt's two controls are gross, a duplicated square and a square moved outside,
+      while the certificates' margins are 1e-15 at 227's walls, exactly 0 at 229's, where
+      squares touch the closed box, and about 1.2e-12 between pairs (RF-6 of the 22 October
+      review). The review's sharp controls, kept with their receipts in the #672 packet's
+      review/review-2026-10-22/, lowered the side by the least far-wall clearance, moved
+      every square by the least near-wall clearance and closed the least-gap pair by its
+      gap: both maintained routes and the review's checker accepted each at exact contact
+      and refused each 1e-30 further, as did the kernel's run_sharp.
+      test_upper_bound_reports_couzo_670_672_675.py runs the kernel's two sharp controls on
+      #672's 227 certificate, whose walls clear by 1e-15.
+
+      V3 and C3 rest on the 22 October stage 4 review
+      (docs/project/reviews/review-2026-10-22-couzo-670-672-675.md) and the replay it
+      reproduced (E-couzo-672-exact-feasibility), with the review's own checker
+      (E-couzo-672-review-exact-feasibility).
     next_rung: >-
-      Independently review the retained replay (think-0nse). At 227 the entry is 1.71e-4
-      below T-196, the house when it was reported, and Evan Daniel's solved view of this
-      packing (T-225), 1.76e-11 below it, has been the house since 22 October 2026; at 229 it is
-      superseded on entry by #674's opening and update (T-198, T-199), reported after it,
-      T-199 1.32e-5 below it. The 44 rows beyond the corpus are the source's dated
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 22 October, is
+      retained. At 227 the entry is 1.71e-4 below T-196, the smallest report before it, and
+      7.44e-3 below the case's house then (T-155), and Evan Daniel's solved view of this
+      packing (T-225), 1.76e-11 below it, has been the house since 22 October 2026; at 229
+      it is superseded on entry by #674's opening and update (T-198, T-199), reported after
+      it, T-199 1.32e-5 below it. The 44 rows beyond the corpus are the source's dated
       beyond-horizon rows since 22 October 2026, recorded in report order by the backlog
       ledger (upper-bounds-backlog-20261022).
-    unfinished_confirmations:
-      - what: >-
-          Review the retained two-route replay of #672's 227 and 229 certificates and enter
-          it as confirming evidence, with sharp controls at 1e-30.
-        rung: C3
-        link: think-0nse
+    reviews:
+      - path: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, reasoning setting xhigh), the stage 4
+          mathematical review lane of T-226 to T-228 (c-review-t226-t228-math), prompted
+          separately from the import lanes that built the three packets and from the
+          reviewers of #718
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-22'
+        scope: >-
+          Finite feasibility of the four certificates T-226, T-227 and T-228 cite: each
+          packet's replay reproduced on both maintained routes and its frozen comparison
+          rebuilt, a clean-room checker written for the review deciding each certificate on
+          an integer route and a Fraction route with exact clipping area, eight sharp and
+          format controls a certificate through both maintained routes and that checker,
+          each side's margins in report order and against every bound through 324, the
+          certificates held to their Git blobs at the pins, each route's trust boundary,
+          and the identity, credit and significance the entries state, measured pose by
+          pose against T-186, T-196, T-223, T-225 and #674's packings.
+        verdict: accepted
+        covers: [T-226, T-227, T-228]
 
   - id: T-228
     kind: upper-bound
@@ -31300,18 +31441,26 @@ results:
     claim: >-
       One complete rational source certificate of issue #675 reports a finite upper-bound
       improvement at the exact side it states: s(204) <=
-      101859759444979981360793459/6878398651426000000000000, below his #670 (T-226).
-      Complete native feasibility outcomes are retained separately; the case's house best
-      packing is unchanged, since Couzo's own later #678 certificate (T-223) and Evan
-      Daniel's view of its packing (T-225) are smaller, and the entry awaits independent
-      review.
+      101859759444979981360793459/6878398651426000000000000, below his #670 (T-226). The
+      case's house best packing is unchanged, since Couzo's own later #678 certificate
+      (T-223) and Evan Daniel's view of its packing (T-225) are smaller.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 22 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt. The source's manifest names this repository's sqpack/verify.py as its first
+      checker, and the maintained sqpack route decides through that file, so that replay
+      shares the producer's named components. The 22 October stage 4 review reproduced the
+      replay and decided the certificate again on a clean-room checker of its own, which
+      shares no code with either route or the source, and found no blocking defect: the
+      bound is confirmed, independently re-implemented.
 
       The issue states that each bound is strictly smaller than the source's previous
       published index and a reviewed comparison envelope including deletion and repeated L
-      borders, and the manifest records the author's checker receipts with the source's
-      exact checker verify_bound_certificate.py (Evan Daniel's MIT verifier, modified by
-      Francisco Couzo with Codex), pinned here by digest and not run. Those statements are
-      the author's; no source program ran here.
+      borders, and the manifest records the author's checker receipts with this
+      repository's sqpack/verify.py and the source's exact checker
+      verify_bound_certificate.py (Evan Daniel's MIT verifier, modified by Francisco Couzo
+      with Codex), pinned here by digest and not run. Those statements are the author's;
+      no source script ran here.
 
       Credit Francisco Couzo (https://github.com/franciscouzo/square-packing), whose
       per-count JSON credits the 204 seed to Mykhailo Polkovskyi (Mishapolk), search job
@@ -31319,23 +31468,29 @@ results:
       source's manifest.
     scope:
       n_values: [204]
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
       rationale: >-
-        A finite construction side at 204, 5.05e-8 below Couzo's own #670 (T-226) and
-        1.89e-5 below T-186, since superseded by his #678 (T-223): a step in his 204
-        sequence that moves no theorem, S2 as T-198 is. No lower bound or optimum.
+        A refinement of Couzo's own #670 packing (T-226) 5.05e-8 below it, one to one, five
+        squares beyond a tenth, at most 0.143, as T-185 refines its author's own packing by
+        1.70e-6 (S2); its 1.89e-5 below T-186 is #670's. A step in his 204 sequence that
+        moves no theorem, since superseded by his #678 (T-223). No lower bound or optimum.
       scored: '2026-10-22'
       by: >-
-        the stage 1 triage of 22 October (c-triage-backlog-1022, think-pvav) and the records
-        lane of think-ql4v; a draft for the stage 4 review (think-0nse)
+        the 22 October stage 4 review
+        (docs/project/reviews/review-2026-10-22-couzo-670-672-675.md), confirming the draft
+        S2 of the stage 1 triage of 22 October (c-triage-backlog-1022, think-pvav) and the
+        records lane of think-ql4v, with T-185 for its comparator
     novelty: previously-published
     attribution:
       source_keys: ['[Couzo issue 675 2026-10-18]']
       published: '2026-10-18'
-    evidence: [E-couzo-675-certificate-report]
+    evidence:
+      - E-couzo-675-certificate-report
+      - E-couzo-675-exact-feasibility
+      - E-couzo-675-review-exact-feasibility
     artifacts:
       - packing/resources/web/couzo-issue675-2026-10-18/README.md
       - packing/resources/web/couzo-issue675-2026-10-18/acquisition/claims.json
@@ -31344,9 +31499,12 @@ results:
       - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
       - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/README.md
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_couzo_670_672_675.py
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/outputs/out-controls-T-228-n204.json
     notes: >-
       A separate complete repository replay is retained for n = 204: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on
@@ -31370,23 +31528,64 @@ results:
       tenth, at most 0.085, turns up to 2.58 degrees. This is Couzo's own sequence at 204,
       so the credit does not change, and no regularization is recorded.
 
-      The source's own checkers were not run here. The two maintained routes, the sqpack
-      rational witness verifier and the independent rational corner checker, share
-      certificate parsing, half-angle conversion, Fraction arithmetic and the
-      separating-axis method. No two independent methods, human oversight or optimality is
-      claimed.
+      The source's own scripts were not run here. Its manifest names this repository's
+      sqpack/verify.py as its first checker, byte-identical on main, and the maintained
+      sqpack route decides through that file, so the replay is recorded as sharing the
+      producer's components (E-couzo-675-exact-feasibility); the review's clean-room checker
+      decided the certificate in full on two routes of its own
+      (E-couzo-675-review-exact-feasibility).
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method; the review's checker shares no code with
+      them, and its integer route no arithmetic library. No two independent methods, human
+      oversight or optimality is claimed.
+
+      The receipt's two controls are gross, a duplicated square and a square moved outside,
+      while the certificate's margins are exactly 0 at the walls, where squares touch the
+      closed box, and 1.20e-12 between pairs (RF-6 of the 22 October review). The review's
+      sharp controls, kept with their receipts in the #672 packet's
+      review/review-2026-10-22/, lowered the side by the least far-wall clearance, moved
+      every square by the least near-wall clearance and closed the least-gap pair by its
+      gap: both maintained routes and the review's checker accepted each at exact contact
+      and refused each 1e-30 further, as did the kernel's run_sharp.
+      test_upper_bound_reports_couzo_670_672_675.py runs the kernel's two sharp controls on
+      #672's 227 certificate, whose walls clear by 1e-15.
+
+      V3 and C3 rest on the 22 October stage 4 review
+      (docs/project/reviews/review-2026-10-22-couzo-670-672-675.md) and the replay it
+      reproduced (E-couzo-675-exact-feasibility), with the review's own checker
+      (E-couzo-675-review-exact-feasibility).
     next_rung: >-
-      Independently review the retained replay (think-0nse). The entry is superseded on
-      entry at 204: Couzo's own #678 (T-223) and Evan Daniel's view of its packing (T-225)
-      are smaller, and the case holds T-225. The 78 rows beyond the corpus are the source's
-      dated beyond-horizon rows since 22 October 2026, recorded in report order by the
-      backlog ledger (upper-bounds-backlog-20261022).
-    unfinished_confirmations:
-      - what: >-
-          Review the retained two-route replay of #675's 204 certificate and enter it as
-          confirming evidence, with sharp controls at 1e-30.
-        rung: C3
-        link: think-0nse
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 22 October, is
+      retained. The entry is superseded on entry at 204: Couzo's own #678 (T-223) and Evan
+      Daniel's view of its packing (T-225) are smaller, and the case holds T-225. The 78
+      rows beyond the corpus are the source's dated beyond-horizon rows since 22 October
+      2026, recorded in report order by the backlog ledger (upper-bounds-backlog-20261022).
+    reviews:
+      - path: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, reasoning setting xhigh), the stage 4
+          mathematical review lane of T-226 to T-228 (c-review-t226-t228-math), prompted
+          separately from the import lanes that built the three packets and from the
+          reviewers of #718
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-22'
+        scope: >-
+          Finite feasibility of the four certificates T-226, T-227 and T-228 cite: each
+          packet's replay reproduced on both maintained routes and its frozen comparison
+          rebuilt, a clean-room checker written for the review deciding each certificate on
+          an integer route and a Fraction route with exact clipping area, eight sharp and
+          format controls a certificate through both maintained routes and that checker,
+          each side's margins in report order and against every bound through 324, the
+          certificates held to their Git blobs at the pins, each route's trust boundary,
+          and the identity, credit and significance the entries state, measured pose by
+          pose against T-186, T-196, T-223, T-225 and #674's packings.
+        verdict: accepted
+        covers: [T-226, T-227, T-228]
 
   - id: T-229
     kind: upper-bound
