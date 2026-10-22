@@ -151,8 +151,8 @@ ownership verification as a shortcut.
 
 ## Open Operational Items
 
-- Obtain the GitHub-generated domain verification TXT value and access to the
-  authoritative DNS settings.
+- Configure the pending Pages domain binding and DNS routing while retaining the
+  existing ownership verification TXT record.
 - Capture live old-host redirect behavior after binding the domain.
 - Confirm TLS issuance and deployment verification before declaring the migration
   complete.
