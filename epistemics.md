@@ -762,18 +762,18 @@ Its three end points are fixed here.
 
 Each fact about the frontier has one home, and reader-facing lists of results are
 generated from these files (`OR-1`): `RESULTS.md`, `STATUS.md`, `INVENTORY.md`, and the
-project site’s [overview](https://jlevy.github.io/squares/), whose recent results,
-results table and frontier survey are rendered from them by `devtools.render_overview`.
-A `T-NNN` named in the README or the synopsis must be a registered result; the register
-gate checks it.
+project site’s [overview](https://squaremath.org/), whose recent results, results table
+and frontier survey are rendered from them by `devtools.render_overview`. A `T-NNN`
+named in the README or the synopsis must be a registered result; the register gate
+checks it.
 
 | Record | Holds | Reader view |
 | --- | --- | --- |
-| [`n-NNN.md`](packing/frontier/README.md) case records | Both lanes’ bounds for each case, with their evidence | [`STATUS.md`](packing/frontier/STATUS.md); the site’s [recent results](https://jlevy.github.io/squares/#recent-results) and [frontier survey](https://jlevy.github.io/squares/atlas.html#the-frontier-survey); the superseded mark in `RESULTS.md` and in the site’s [results table](https://jlevy.github.io/squares/results.html) |
+| [`n-NNN.md`](packing/frontier/README.md) case records | Both lanes’ bounds for each case, with their evidence | [`STATUS.md`](packing/frontier/STATUS.md); the site’s [recent results](https://squaremath.org/#recent-results) and [frontier survey](https://squaremath.org/atlas.html#the-frontier-survey); the superseded mark in `RESULTS.md` and in the site’s [results table](https://squaremath.org/results.html) |
 | [`evidence.yaml`](packing/frontier/evidence.yaml) | Who performed each check, by which method, within which limits, with which programs | [`INVENTORY.md`](packing/frontier/INVENTORY.md); each case record’s Verification Code section |
 | [`verifiers.yaml`](packing/frontier/verifiers.yaml) | Each verification program, external or first-party, with the versions that ran and where its source is retained | [`VERIFIERS.md`](packing/frontier/VERIFIERS.md); the Verification Code section of `RESULTS.md` |
-| [`results.yaml`](packing/frontier/results.yaml) | Each result’s kind, headline, claim, date, `V`/`C`/`S`, novelty, attribution, `activity` and `regularizations` | [`RESULTS.md`](packing/frontier/RESULTS.md), grouped by lineage; the site’s [results table](https://jlevy.github.io/squares/results.html), each with the derived status |
-| [`bibliography.yaml`](packing/resources/bibliography.yaml) | Each source’s date, credit and lineage | The atlas citation line; the holders, credit and relation in `RESULTS.md` and on the site’s [overview](https://jlevy.github.io/squares/#recent-results) |
+| [`results.yaml`](packing/frontier/results.yaml) | Each result’s kind, headline, claim, date, `V`/`C`/`S`, novelty, attribution, `activity` and `regularizations` | [`RESULTS.md`](packing/frontier/RESULTS.md), grouped by lineage; the site’s [results table](https://squaremath.org/results.html), each with the derived status |
+| [`bibliography.yaml`](packing/resources/bibliography.yaml) | Each source’s date, credit and lineage | The atlas citation line; the holders, credit and relation in `RESULTS.md` and on the site’s [overview](https://squaremath.org/#recent-results) |
 | [`source-coverage.yaml`](packing/frontier/source-coverage.yaml) | Which sources were read, and when | None |
 
 ## Enforcement and Register

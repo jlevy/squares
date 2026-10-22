@@ -137,7 +137,7 @@ def test_the_title_helper_does_not_repeat_the_formal_project_name() -> None:
 def test_a_page_is_canonical_at_the_address_it_is_served_at() -> None:
     """A directory's `index.html` is served as the directory: the overview at the root,
     the workbench at `workbench/`. Every other page is served under its own name."""
-    assert canonical_url("index.html") == SITE_URL == "https://jlevy.github.io/squares/"
+    assert canonical_url("index.html") == SITE_URL == "https://squaremath.org/"
     assert canonical_url("workbench/index.html") == SITE_URL + "workbench/"
     assert canonical_url("papers.html") == SITE_URL + "papers.html"
     nested = "papers/n11-optimality-review.html"
@@ -286,20 +286,20 @@ OG_TITLE = '<meta property="og:title" content="Every Result">'
         ),
         (
             (
-                'og:url" content="https://jlevy.github.io/squares/results.html',
-                'og:url" content="https://jlevy.github.io/squares/all-results.html',
+                'og:url" content="https://squaremath.org/results.html',
+                'og:url" content="https://squaremath.org/all-results.html',
             ),
             "og:url is",
         ),
         (
             (
-                'rel="canonical" href="https://jlevy.github.io/squares/',
+                'rel="canonical" href="https://squaremath.org/',
                 'rel="canonical" href="',
             ),
             "the canonical link is 'results.html'",
         ),
         (
-            ('og:image" content="https://jlevy.github.io/squares/', 'og:image" content="'),
+            ('og:image" content="https://squaremath.org/', 'og:image" content="'),
             "og:image is 'social-card.png'",
         ),
         (('og:image:width" content="1200', 'og:image:width" content="2400'), "og:image:width"),

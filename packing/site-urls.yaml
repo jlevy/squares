@@ -6611,7 +6611,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-21'
+  lastmod: '2026-10-22'
   status: live
 - path: papers/n11-lower-bounds-explainer.md
   canonical: papers/n11-lower-bounds-explainer.md
@@ -6619,7 +6619,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-21'
+  lastmod: '2026-10-22'
   status: live
 - path: papers/n11-lower-bounds-explainer.pdf
   canonical: papers/n11-lower-bounds-explainer.pdf
@@ -6627,7 +6627,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-21'
+  lastmod: '2026-10-22'
   status: live
 - path: papers/n11-optimality-review.html
   canonical: papers/n11-optimality-review.html

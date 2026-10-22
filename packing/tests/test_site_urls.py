@@ -248,7 +248,7 @@ def test_sitemap_uses_canonical_paths_and_record_dates() -> None:
     ]
     first = site_urls.render_sitemap(rows)
     assert first == site_urls.render_sitemap(rows)
-    assert "<loc>https://jlevy.github.io/squares/</loc>" in first
+    assert "<loc>https://squaremath.org/</loc>" in first
     assert "2026-10-02" in first
     assert "moved.html" not in first
     assert "example.pdf" not in first
@@ -271,8 +271,8 @@ def test_crawl_writer_emits_safe_404_and_tombstones(tmp_path: Path) -> None:
     site_urls.write_crawl_files(tmp_path, rows)
     text = (tmp_path / "404.html").read_text(encoding="utf-8")
     assert 'content="noindex' in text
-    assert "/squares/assets/" in text
-    assert 'data-site-root="/squares/"' in text
+    assert 'src="/assets/' in text
+    assert 'data-site-root="/"' in text
     assert "result/t-001.html" in text
     tombstone = (tmp_path / "result/t-002.html").read_text(encoding="utf-8")
     assert "Correction &lt;retained&gt;" in tombstone

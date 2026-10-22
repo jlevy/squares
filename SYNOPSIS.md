@@ -93,7 +93,7 @@ The
 [complete native n11 decision](docs/project/reviews/review-2026-09-22-native-n11-parent-core.md)
 adds a distinct interval coverage method for Overbeck’s strict $3.875$ bound (T-037,
 `V3/C3`), with no new bound.
-[Part II of the n = 11 series](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html)
+[Part II of the n = 11 series](https://squaremath.org/papers/n11-threshold-bound-review.html)
 explains that proof and what it inherits.
 The
 [R052 review of 25 September](docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md)
@@ -154,7 +154,7 @@ replay, followed on 28 September.
 Guzhou0806’s continuation of R052, $s(17) > 4.62003$, superseded by `v1.1.0`, is
 retained as a publication record.
 The [results register](packing/frontier/RESULTS.md) and the site’s
-[results table](https://jlevy.github.io/squares/results.html) give the credit for each.
+[results table](https://squaremath.org/results.html) give the credit for each.
 The rungs above are the register’s, under the ladder in force since 2026-09-30. Dated
 sections further down keep the rungs they were written with;
 [`epistemics.md`](epistemics.md#what-changed-on-2026-09-30) says how the two ladders
@@ -696,6 +696,8 @@ case or experiment separately.
 | [Project PDF Credit Coverage, 21 October 2026](packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md) | dated review record | record | retained | — |
 | [Attribution Policy](attribution.md) | artifact and naming conventions | definitive | maintained | — |
 | [Person Profiles](packing/contributors/README.md) | component scope and use | current | maintained | — |
+| [Site Deployment](docs/project/guides/site-deployment.md) | component scope and use | current | maintained | — |
+| [Feature: Square Math Domain and Deployment](docs/project/specs/active/plan-2026-10-22-squaremath-domain.md) | implementation plan | current | transient | — |
 | [Feature: Contributor Profiles and Linked Result Credits](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md) | implementation plan | current | transient | — |
 | [Review: Evan Daniel’s Regularized Views at 204, 227, 229 and 260 (T-225, evand/square-packing@0075967)](docs/project/reviews/review-2026-10-21-evand-regularized-views.md) | dated review record | record | retained | — |
 | [Review: Couzo’s 85 Exact Upper-Bound Certificates at 204–998 (Issue #678)](docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) | dated review record | record | retained | — |
@@ -2206,23 +2208,23 @@ fresh-ensemble replay entry point.
 
 The n = 11 papers form one series, read in order
 ([plan](docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md)):
-[Part I](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html), the
-project’s lower bounds T-018, T-025 and T-026;
-[Part II](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html), a
-review of Overbeck’s $s(11) > 31/8$ (T-037), its k-of-m charges, shrunken parents with
-strict cores and exact sweep
+[Part I](https://squaremath.org/papers/n11-lower-bounds-explainer.html), the project’s
+lower bounds T-018, T-025 and T-026;
+[Part II](https://squaremath.org/papers/n11-threshold-bound-review.html), a review of
+Overbeck’s $s(11) > 31/8$ (T-037), its k-of-m charges, shrunken parents with strict
+cores and exact sweep
 ([source](packing/devtools/templates/n11-threshold-bound-review-article.md)); and
-[Part III](https://jlevy.github.io/squares/papers/n11-optimality-review.html), the
+[Part III](https://squaremath.org/papers/n11-optimality-review.html), the
 [dedicated optimality paper](packing/devtools/templates/n11-optimality-review-article.md),
 which explains that complete argument from first principles.
 Its
 [simplification review](docs/project/reviews/review-2026-09-30-n11-expository-simplification.md)
 consolidates the proof dependencies and geometric invariant without removing required
 cases, branches or checks.
-The [rendered paper](https://jlevy.github.io/squares/papers/n11-optimality-review.html)
-and [PDF](https://jlevy.github.io/squares/papers/n11-optimality-review.pdf) include the
-exact center cover, occupied mask and capture ancestry, with the implementation-sharing
-and fresh-replay limits stated beside the verification record.
+The [rendered paper](https://squaremath.org/papers/n11-optimality-review.html) and
+[PDF](https://squaremath.org/papers/n11-optimality-review.pdf) include the exact center
+cover, occupied mask and capture ancestry, with the implementation-sharing and
+fresh-replay limits stated beside the verification record.
 
 The following paragraphs retain the previous intake handoff as an execution record.
 It placed tooling and efficiency off the proof’s critical path, then assigned

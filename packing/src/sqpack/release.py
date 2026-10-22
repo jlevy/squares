@@ -92,10 +92,8 @@ PUBLICATION_HISTORY = (
         version="v0.9.1",
         first_published="October 22, 2026",
         result_scope=(
-            "Record Mykhailo Polkovskyi's #719 re-solves of the house packings at 105 and "
-            "204 as T-229, pending review and adoption, and his 111 rows beyond the "
-            "corpus at or below 1024 as current beyond-horizon rows, superseding the rows "
-            "that stood at those counts; record the replies after #720."
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
         ),
     ),
     PublicationHistoryEntry(
@@ -770,7 +768,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "6610be9374c9371dd36f8ee0c9be69846eb7d122"
+DATA_REVISION = "6a8c90331b48b20187e81a9b817624e8a7264982"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -871,8 +869,8 @@ EXPLAINER_HISTORY = (
         version="v0.4.17",
         first_published="October 22, 2026",
         result_scope=(
-            "Update the registered result count after the registration of Mykhailo "
-            "Polkovskyi's #719 re-solves at 105 and 204 (T-229)."
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
         ),
     ),
     PublicationHistoryEntry(
@@ -1029,7 +1027,7 @@ EXPLAINER_FIRST_PUBLISHED = EXPLAINER_HISTORY[-1].first_published
 #: `PUBLICATION_DATE`, the day the edition was first published, which stood still while
 #: the article changed under it: merging is the whole publish, so the text a reader sees
 #: moves between editions. Change it in the commit that changes the article.
-EXPLAINER_REVISED = "October 21, 2026"
+EXPLAINER_REVISED = "October 22, 2026"
 
 #: The optimality review's own editions, newest first, each with the day it was first
 #: published and what changed in the paper: the review's history, as `EXPLAINER_HISTORY`
@@ -1038,6 +1036,14 @@ EXPLAINER_REVISED = "October 21, 2026"
 #: (think-2cqu).
 # The leading entry is proposed for PR #578; confirm its date at first deployment.
 OPTIMALITY_REVIEW_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.9",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.1.8",
         first_published="October 21, 2026",
@@ -1164,6 +1170,14 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 # The leading entry is proposed for PR #578; confirm its date at first deployment.
 THRESHOLD_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.2",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.1",
         first_published="October 21, 2026",
         result_scope=(
@@ -1202,6 +1216,14 @@ THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 #: dates belong to the paper, independently of the site and n = 11 series.
 #: The leading entry is proposed for PR #578; confirm its date at first deployment.
 PACKING_METHODS_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.2.5",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.2.4",
         first_published="October 21, 2026",
@@ -1306,15 +1328,33 @@ class ReleaseImpactDecision(NamedTuple):
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
-        component="site",
-        previous_version="v0.9.0",
-        version="v0.9.1",
+        component="paper:square-packing-methods-survey",
+        previous_version="v0.2.4",
+        version="v0.2.5",
         impact="patch",
         reason=(
-            "Record Mykhailo Polkovskyi's #719 re-solves of the house packings at 105 and "
-            "204 as T-229, pending review and adoption, and his 111 rows beyond the "
-            "corpus at or below 1024 as current beyond-horizon rows, superseding the rows "
-            "that stood at those counts; record the replies after #720."
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-threshold-bound-review",
+        previous_version="v0.1.1",
+        version="v0.1.2",
+        impact="patch",
+        reason=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-optimality-review",
+        previous_version="v0.1.8",
+        version="v0.1.9",
+        impact="patch",
+        reason=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
         ),
     ),
     ReleaseImpactDecision(
@@ -1323,8 +1363,18 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.4.17",
         impact="patch",
         reason=(
-            "Update the registered result count after the registration of Mykhailo "
-            "Polkovskyi's #719 re-solves at 105 and 204 (T-229)."
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.9.0",
+        version="v0.9.1",
+        impact="patch",
+        reason=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
         ),
     ),
     ReleaseImpactDecision(
@@ -2191,40 +2241,6 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
-    ReleaseNoPublicChange(
-        components=(
-            "paper:n11-optimality-review",
-            "paper:n11-threshold-bound-review",
-            "paper:square-packing-methods-survey",
-        ),
-        paths=(
-            "packing/campaign/result-requests.yaml",
-            "packing/devtools/site_urls.py",
-            "packing/frontier/results.yaml",
-            "packing/frontier/source-coverage.yaml",
-        ),
-        outputs=(
-            "papers/n11-optimality-review.html",
-            "papers/n11-optimality-review.md",
-            "papers/n11-threshold-bound-review.html",
-            "papers/n11-threshold-bound-review.md",
-            "papers/square-packing-methods-survey.html",
-            "papers/square-packing-methods-survey.md",
-        ),
-        reason=(
-            "The #719 import (T-229 at 105 and 204, 111 beyond-horizon rows, the replies "
-            "after #720) against main 76496462b: rendered at link revision 6610be93 into "
-            "empty site directories, twice from this tree at 26f670d1 and twice from "
-            "main's (68 files each), render_n11_optimality_review, "
-            "render_n11_threshold_bound_review and render_packing_methods write their "
-            "HTML and Markdown byte-identical across all four; only the explainer's "
-            "register count differs (228 to 229), and it took v0.4.17. Rendered again "
-            "from this tree at 81762770, after results.html's ceiling moved in "
-            "site_urls.py, and at 1eaa8624, after review A's fixes: the three write the "
-            "same files as main's each time. No PDF was "
-            "printed; each prints from that HTML. Retain v0.1.8, v0.1.1 and v0.2.4."
-        ),
-    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -6978,7 +6994,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "ed8be61f"
+PUBLICATION_REVISION = "76496462b0704486dc5099f866ef291c486f7840"
 
 
 def data_pathspec() -> tuple[str, ...]:
