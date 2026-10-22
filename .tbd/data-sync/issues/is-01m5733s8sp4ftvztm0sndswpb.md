@@ -3,10 +3,10 @@ type: is
 id: is-01m5733s8sp4ftvztm0sndswpb
 title: "Import JoostdeWinter: Improved upper bounds for n = 227, 229, 260: registration request (#668)"
 kind: task
-status: closed
+status: in_progress
 priority: 2
-version: 18
-delegate: coord-intake-1021b
+version: 20
+delegate: profiles-pr-coordinator
 labels:
   - result-import
 dependencies: []
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:35.192Z
-updated_at: 2026-10-22T00:31:26.886Z
+updated_at: 2026-10-22T01:03:26.827Z
 started_at: 2026-10-18T12:36:48.824Z
 closed_at: 2026-10-22T00:31:26.886Z
 close_reason: "#668: T-196 V3/C3 and adopted (#704, 970e89de8); final reply issuecomment-6326251307 and follow-up issuecomment-6328043878 posted; #668 closed; both recorded in #716 (d7923b8d8); News entry and stale texts fixed there."
