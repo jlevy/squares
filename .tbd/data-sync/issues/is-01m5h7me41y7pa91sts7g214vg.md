@@ -5,7 +5,7 @@ title: "PR #578 final review and merge"
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 11
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -15,14 +15,16 @@ child_order_hints:
   - is-01m5h8ywbnz0bwpa535jvnwws7
   - is-01m5h96c68c0bgddrtjjfrb3vm
   - is-01m5hb27t5efe7vksmnhrjwa4a
+  - is-01m5hc4q0ykkq4gwcfnhtdh2wn
+  - is-01m5hd6y0nvdxsrqv96kq3nxbx
 hold: null
 hold_until: null
 created_at: 2026-10-22T07:18:59.452Z
-updated_at: 2026-10-22T08:18:57.475Z
+updated_at: 2026-10-22T08:56:28.428Z
 started_at: 2026-10-22T07:19:14.287Z
 ---
 User requests final review of the combined profile feature, fresh main integration, and merge only after reviews and required checks pass. Run pinned senior and applicable dedicated review updates, resolve all findings, confirm current-head CI, then merge with a merge commit. Deployment is separate.
 
 ## Notes
 
-Candidate 086c44ec passed 28/28 local gate steps in 576.29s; 7565 normal tests and 13 pool tests passed. Pushed non-force. Senior K1 fixed9939 and verified by correctness L; L1 docs and Linux ink-test portability fixed d8f8. Security M completed zero findings, publishing. Main advanced during qualification to0281e776 (PR720,205 beyond-horizon rows); PR now conflicts. Hosted checkpoint withheld. Integrate new main, preserve reviewed feature and new result evidence, refresh affected attribution and release records, review integration, then rerun final gates before guarded merge. Historical population remains separately tracked.
+Latest origin/main0281 (PR720) integrated by merge6a8c90331b48; data pin d497. Clean candidatea020 fixes only two snapshot-cap test assertions (N1,think-65ft); four focused tests pass. Broad d497 gate66prerequisites passed and19978tests passed, only four now-fixed N1 failures; explicit pool complement and delta gate running. Prior K/L dispositions published6336179885/6336182793; securityM5611201347 zero findings. Integration review N source audit preserves all1560 prior spans and228results, no other issues, final correction verification pending. Dedicatedperformance and hosted fullcheckpoint remain before guardedmerge. Finalpreview must be rebuilt with48resources and latestmain. Historicalcoverage remains separate.
