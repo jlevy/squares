@@ -85,7 +85,8 @@ W1 phase on one branch:
    **A result the pass registers at S4 or S5, or raises to either, also owes a News
    item**: draft it in the description under **News**, and land it in the first change
    after the merge ([Announce a Significant Result](#announce-a-significant-result)).
-   The records tier fails every later pull request until it lands.
+   Until it does, the records tier fails the next change to the register or News, and
+   warns on any other.
 7. **Draft the replies** in each issue’s answer bead: every issue the pass touches gets
    one. Once the pull request merges, render each from `main`, check that `main` and the
    deployed site say what it says, post it, and record it under the issue’s `replies` in
@@ -197,8 +198,8 @@ claude/intake-YYYY-MM-DD, with today's date.
    output to the pull request description under "Announcement", for the owner to
    post. Do not post it. For each result registered at S4 or S5, or raised to
    either, draft its News entry under "News" too, and land it in the first change
-   after the merge (stage 7, "Announce a Significant Result"); the records tier
-   fails every later pull request until it lands.
+   after the merge (stage 7, "Announce a Significant Result"); until it does, the
+   records tier fails the next change to the register or News.
 8. Draft the reply each issue the pass touches is owed in its answer bead; every one
    gets a comment. Once the pull request merges, render each from main with
    `check_requests --draft N`, check that main and the deployed site say what it says
@@ -1226,18 +1227,25 @@ own score, with the result in its `result_ids`. S3 News stays optional, as
    render with `python -m devtools.render_changelog`.
 3. **The gate is the backstop.** The records tier’s “synopsis agrees with the artifacts”
    step, which pull-request CI runs, passes `--announcement-base` to
-   `devtools.render_changelog`. It fails when an S4 or S5 result on `main` has no item,
-   naming the result, its score, the merged pull request the entry must name, the
-   command that drafts it and who scored the result.
-   A result registered or raised on the branch under test is reported as owed after the
-   merge instead; once it is on `main`, every later pull request fails until its item
-   lands.
+   `devtools.render_changelog`. A result registered or raised on the branch under test
+   is reported as owed after the merge.
+   Once it is on `main` without its item, the gate fails any change that edits
+   `packing/frontier/results.yaml` or `packing/site-changelog.yaml`: a pull request
+   against its merge base, and a push to `main` or the scheduled run against `HEAD^1`.
+   That change is the one that can settle the debt, since the pull request that owes it
+   has merged and its item now validates: add the item in it, or land this step’s
+   follow-up first and merge `main`. Any other change gets a warning naming the result
+   and the pull request that owes it, and passes, so an unrelated merge never turns
+   `main` red. The failure names the result, its score, the merged pull request the entry
+   must name, the command that drafts it and who scored the result.
+   Letting the registering pull request carry its own item, which names that pull
+   request and is stamped at merge as `landed` is, is `think-n51k`.
 
 The fifteen S4 and S5 results that landed before the News archive existed, on 13 October
 2026 (6279bd0e6), are exempt, listed with the score each is exempt at in
-`render_changelog.ANNOUNCEMENT_EXEMPT`. Backfilling them as dated News, as T-060’s item
-was on 15 October, is a separate decision.
-The gate exists because T-194, the S5 report of a Lean proof that
+`render_changelog.ANNOUNCEMENT_EXEMPT`, which may only shrink.
+Backfilling them as dated News, as T-060’s item was on 16 October (UTC), is a separate
+decision. The gate exists because T-194, the S5 report of a Lean proof that
 $s(19) = 3 + 4\sqrt{2}/3$, landed on 16 October and had no News item until 22 October:
 completing the item “in the next change” was a step nothing checked, and its pull
 request, #651, was never imported into the changelog.

@@ -1149,28 +1149,87 @@ def _merged_at_42(identifier: str, score: int) -> render_changelog.Landing:
     return {"pull_request": 42, "commit": "b" * 40, "subject": "Merge pull request #42 from x"}
 
 
+#: The fifteen S4 and S5 results that landed before the News archive (6279bd0e6, 13
+#: October 2026), at the scores they are exempt at. The exemption may only shrink.
+FROZEN_EXEMPTIONS = {
+    "T-010": 4,
+    "T-017": 4,
+    "T-018": 5,
+    "T-019": 4,
+    "T-020": 4,
+    "T-022": 5,
+    "T-024": 5,
+    "T-025": 5,
+    "T-026": 5,
+    "T-037": 5,
+    "T-047": 4,
+    "T-051": 4,
+    "T-052": 4,
+    "T-064": 4,
+    "T-081": 4,
+}
+
+
 @pytest.mark.usefixtures("no_exemptions")
 def test_an_s4_or_s5_result_on_main_without_its_news_item_fails() -> None:
     results = [_result("T-901", 5), _result("T-902", 3)]
-    failures, notes = render_changelog.check_announcements(
+    failures, owed, unsettled = render_changelog.check_announcements(
         {"entries": []}, results, results, locate=_merged_at_42
     )
-    assert notes == []
+    assert (owed, unsettled) == ([], [])
     [failure] = failures
     # The message names the result, its score, the merged PR the entry must name, the
     # command that drafts it and who scored it: everything a passing author needs.
-    assert failure.startswith("T-901 (S5) is on main with no News item at S5.")
+    assert failure.startswith("T-901 (S5) is on main with no News item at S5, and this")
+    assert "add the item in this PR, or land the stage 7 follow-up" in failure
     assert "naming PR #42, which registered or raised it (merge bbbbbbbbb)" in failure
     assert "devtools.import_changelog --pr 42 " in failure
     assert "Announce a Significant Result" in failure
     assert "scored by lane-x" in failure
+    # Without a base, nothing is in grace.
+    assert render_changelog.check_announcements({"entries": []}, results).failures == [
+        failure.replace(
+            "PR #42, which registered or raised it (merge bbbbbbbbb)",
+            "the "
+            "merged PR that registered or raised it, which this checkout's history does not "
+            "reach",
+        ).replace("--pr 42 ", "--pr NNN ")
+    ]
+
+
+@pytest.mark.usefixtures("no_exemptions")
+def test_an_owed_item_fails_only_a_change_to_the_register_or_news() -> None:
+    results = [_result("T-901", 5)]
+    empty: dict = {"entries": []}
+    # An unrelated change, on a branch or merged to main, warns and passes.
+    failures, owed, [warning] = render_changelog.check_announcements(
+        empty, results, results, locate=_merged_at_42, records_changed=False
+    )
+    assert (failures, owed) == ([], [])
+    assert warning.startswith("T-901 (S5) is on main with no News item at S5. This change")
+    assert "naming PR #42" in warning
+    # A change to the register or the News record is the one that settles it.
+    assert render_changelog.check_announcements(
+        empty, results, results, locate=_merged_at_42, records_changed=True
+    ).failures
+    # A register change that carries the owed item passes.
+    carried = {"entries": [_news("item", 5, "T-901")]}
+    assert render_changelog.check_announcements(
+        carried, [*results, _result("T-902", 2)], results, records_changed=True
+    ) == ([], [], [])
 
 
 @pytest.mark.usefixtures("no_exemptions")
 def test_a_news_item_at_the_result_score_satisfies_the_gate() -> None:
     results = [_result("T-901", 5), _result("T-903", 4)]
     document = {"entries": [_news("both", 5, "T-901", "T-903")]}
-    assert render_changelog.check_announcements(document, results, results) == ([], [])
+    assert render_changelog.check_announcements(document, results, results) == ([], [], [])
+    # The highest showing score counts, in whatever order the entries come.
+    for order in (
+        [_news("a", 5, "T-901"), _news("b", 3, "T-901")],
+        [_news("b", 3, "T-901"), _news("a", 5, "T-901")],
+    ):
+        assert render_changelog.news_announced_scores({"entries": order}) == {"T-901": 5}
     # Only an item News shows counts, at the result's own score or above.
     low = {"entries": [_news("low", 4, "T-901", "T-903")]}
     hidden = {"entries": [{**_news("hidden", 5, "T-901", "T-903"), "news_exclusion": "x"}]}
@@ -1186,52 +1245,155 @@ def test_a_raise_to_s4_is_owed_after_its_merge_and_fails_once_on_main() -> None:
     before = [_result("T-904", 3)]
     raised = [_result("T-904", 4)]
     empty: dict = {"entries": []}
-    assert render_changelog.check_announcements(empty, before, before) == ([], [])
+    assert render_changelog.check_announcements(empty, before, before) == ([], [], [])
     # The raising branch: its entry can name only merged PRs, so the item is owed.
-    failures, [note] = render_changelog.check_announcements(
+    failures, [note], unsettled = render_changelog.check_announcements(
         empty, raised, before, locate=_merged_at_42
     )
-    assert failures == []
+    assert (failures, unsettled) == ([], [])
     assert note.startswith("T-904 (S4) is registered or raised on this branch")
-    # Every later change, with the raise on main: the same record fails.
-    failures, notes = render_changelog.check_announcements(
+    # The next change to the register or News, with the raise on main, fails.
+    failures, owed, unsettled = render_changelog.check_announcements(
         empty, raised, raised, locate=_merged_at_42
     )
-    assert notes == []
+    assert (owed, unsettled) == ([], [])
     assert [f.split(" is on main")[0] for f in failures] == ["T-904 (S4)"]
     # Exactly as a new registration: owed on its own branch, failed once on main.
-    registered = render_changelog.check_announcements(empty, raised, [], locate=_merged_at_42)
-    assert registered == ([], [note])
-    assert render_changelog.check_announcements(
-        empty, raised, raised, locate=_merged_at_42
-    ) == (failures, [])
+    assert render_changelog.check_announcements(empty, raised, [], locate=_merged_at_42) == (
+        [],
+        [note],
+        [],
+    )
     # An S4 item does not announce a later raise to S5.
     s4_item = {"entries": [_news("item", 4, "T-904")]}
     to_five = [_result("T-904", 5)]
-    assert render_changelog.check_announcements(
-        s4_item, to_five, to_five, locate=_merged_at_42
-    )[0][0].startswith("T-904 (S5) is on main")
-
-
-def test_exemptions_cover_only_results_before_the_archive_and_never_go_stale(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    results = render_changelog.load_results()
-    landed = {result["id"]: result["landed"] for result in results}
-    assert all(
-        landed[identifier] < "2026-10-13" for identifier in render_changelog.ANNOUNCEMENT_EXEMPT
+    assert (
+        render_changelog.check_announcements(s4_item, to_five, to_five, locate=_merged_at_42)
+        .failures[0]
+        .startswith("T-904 (S5) is on main")
     )
-    assert render_changelog.stale_exemptions(render_changelog.load(), results) == []
-    monkeypatch.setattr(render_changelog, "ANNOUNCEMENT_EXEMPT", {"T-905": 4, "T-906": 4})
-    exempt = [_result("T-905", 4), _result("T-906", 5)]
-    # Raised above its exempt score, a result is owed again.
-    assert [r["id"] for r in render_changelog.owed_announcements({"entries": []}, exempt)] == [
-        "T-906"
+
+
+def test_the_exemption_is_frozen_to_results_scored_and_landed_before_the_archive() -> None:
+    exempt = render_changelog.ANNOUNCEMENT_EXEMPT
+    assert exempt.items() <= FROZEN_EXEMPTIONS.items()
+    results = {result["id"]: result for result in render_changelog.load_results()}
+    for identifier, score in exempt.items():
+        result = results[identifier]
+        assert result["landed"] < "2026-10-13", identifier
+        assert result["significance"]["scored"] < "2026-10-13", identifier
+        assert result["significance"]["score"] == score, identifier
+    assert (
+        render_changelog.stale_exemptions(render_changelog.load(), list(results.values())) == []
+    )
+
+
+def test_stale_exemptions_fail_through_the_gate(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        render_changelog,
+        "ANNOUNCEMENT_EXEMPT",
+        {"T-905": 4, "T-906": 4, "T-907": 5, "T-908": 4, "T-909": 4},
+    )
+    register = [
+        _result("T-905", 3),
+        _result("T-907", 4),
+        _result("T-908", 5),
+        _result("T-909", 4),
     ]
-    announced = {"entries": [_news("item", 4, "T-905")]}
-    assert render_changelog.stale_exemptions(announced, exempt) == [
-        "T-905 now has its News item: remove it from render_changelog.ANNOUNCEMENT_EXEMPT"
+    failures, owed, unsettled = render_changelog.check_announcements(
+        {"entries": [_news("item", 4, "T-909")]},
+        register,
+        register,
+        locate=_merged_at_42,
+        records_changed=False,
+    )
+    remove = ": remove it from render_changelog.ANNOUNCEMENT_EXEMPT"
+    assert failures == [
+        f"T-905 is S3 now, below the announcement threshold{remove}",
+        f"T-906 is not in the register{remove}",
+        f"T-907 is S4 now, not the S5 it is exempt at{remove}",
+        f"T-908 is S5 now, not the S4 it is exempt at{remove}",
+        f"T-909 now has its News item{remove}",
     ]
+    # Raised above its exempt score, a result is also owed like any other.
+    assert owed == []
+    assert [w.split(" is on main")[0] for w in unsettled] == ["T-908 (S5)"]
+
+
+@pytest.mark.usefixtures("no_exemptions")
+def test_the_cli_fails_a_missing_item_and_notes_an_owed_one(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    monkeypatch.setattr(
+        render_changelog, "announcement_base", lambda _ref: ("b" * 40, [_result("T-901", 5)])
+    )
+    monkeypatch.setattr(
+        render_changelog, "load_results", lambda: [_result("T-901", 5), _result("T-902", 4)]
+    )
+    monkeypatch.setattr(render_changelog, "landing", lambda *_: None)
+    monkeypatch.setattr(render_changelog, "edits_announcement_records", lambda _base: True)
+    assert render_changelog.main(["--check", "--announcement-base", "origin/main"]) == 1
+    out, err = capsys.readouterr()
+    assert "announcement missing: T-901 (S5)" in err
+    assert "announcement owed after merge: T-902 (S4)" in out
+    # The same debt in a change that edits neither record is a warning, and passes.
+    monkeypatch.setattr(render_changelog, "edits_announcement_records", lambda _base: False)
+    assert render_changelog.main(["--check", "--announcement-base", "origin/main"]) == 0
+    out, err = capsys.readouterr()
+    assert "warning: announcement owed on main: T-901 (S5)" in out
+    assert "announcement missing" not in err
+    assert "1 owed after this merge, 1 owed on main and left to a records change" in out
+
+
+def test_the_base_is_the_fork_point_and_record_changes_are_seen(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    def git(*arguments: str) -> str:
+        return subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.org", *arguments],
+            cwd=tmp_path,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+
+    register = tmp_path / render_changelog.RESULTS_PATH
+
+    def commit(identifiers: list[str], message: str) -> str:
+        register.write_text(
+            yaml.safe_dump({"results": [_result(i, 5) for i in identifiers]}), encoding="utf-8"
+        )
+        git("add", "-A")
+        git("commit", "-q", "--no-gpg-sign", "-m", message)
+        return git("rev-parse", "HEAD").strip()
+
+    git("init", "-q", "-b", "main")
+    register.parent.mkdir(parents=True)
+    fork = commit(["T-901"], "register T-901")
+    git("checkout", "-q", "-b", "feature")
+    (tmp_path / "notes.md").write_text("unrelated\n", encoding="utf-8")
+    git("add", "-A")
+    git("commit", "-q", "--no-gpg-sign", "-m", "unrelated")
+    git("checkout", "-q", "main")
+    commit(["T-901", "T-902"], "main moves on: T-902")
+    git("checkout", "-q", "feature")
+    monkeypatch.setattr(render_changelog, "REPO", tmp_path)
+    # A branch is measured from where it left main, not from where main is now.
+    base, results = render_changelog.announcement_base("main")
+    assert (base, [r["id"] for r in results]) == (fork, ["T-901"])
+    assert not render_changelog.edits_announcement_records(base)
+    register.write_text(register.read_text(encoding="utf-8") + "# edited\n", encoding="utf-8")
+    assert render_changelog.edits_announcement_records(base)
+
+
+def test_a_score_is_read_from_its_own_block_only() -> None:
+    text = (
+        "results:\n  - id: T-907\n    kind: x\n  - id: T-999\n    significance:\n"
+        "      score: 5\n"
+    )
+    assert render_changelog.register_score(text, "T-907") == 0
+    assert render_changelog.register_score(text, "T-999") == 5
+    assert render_changelog.register_score(text, "T-123") == 0
 
 
 def test_the_landing_change_is_the_oldest_first_parent_merge_at_the_score(
@@ -1243,12 +1405,10 @@ def test_the_landing_change_is_the_oldest_first_parent_merge_at_the_score(
             body += f"  - id: T-907\n    kind: x\n    significance:\n      score: {score}\n"
         return body + "  - id: T-999\n    significance:\n      score: 1\n"
 
-    history = {"c3": 5, "c2": 5, "c1": 3, "c0": None}
+    # Newest first, as `git log` lists them: S5 since #11, after a dip to S3 at #10.
+    history = {"c4": 5, "c3": 5, "c2": 3, "c1": 5, "c0": None}
     subjects = {
-        "c3": "Merge pull request #12 from x",
-        "c2": "Merge pull request #11 from x",
-        "c1": "Merge pull request #10 from x",
-        "c0": "Merge pull request #9 from x",
+        commit: f"Merge pull request #{8 + int(commit[1])} from x" for commit in history
     }
 
     def git(*arguments: str) -> str:
@@ -1257,10 +1417,13 @@ def test_the_landing_change_is_the_oldest_first_parent_merge_at_the_score(
         return register(history[arguments[1].split(":")[0]])
 
     monkeypatch.setattr(render_changelog, "_git", git)
-    found = render_changelog.landing("T-907", 5, "origin/main")
-    assert found == {"pull_request": 11, "commit": "c2", "subject": subjects["c2"]}
+    assert render_changelog.landing("T-907", 5, "origin/main") == {
+        "pull_request": 11,
+        "commit": "c3",
+        "subject": subjects["c3"],
+    }
     assert render_changelog.landing("T-907", 3, "origin/main") == {
-        "pull_request": 10,
+        "pull_request": 9,
         "commit": "c1",
         "subject": subjects["c1"],
     }
