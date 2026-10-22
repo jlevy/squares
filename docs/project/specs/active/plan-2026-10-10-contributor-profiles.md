@@ -34,7 +34,7 @@ Preserve the printed name in the evidence record, with its credit order, role an
 relationship; visible linked labels follow the attribution policy.
 Linking a person must not turn an acknowledgment into authorship.
 
-## Current Integration: 2026-10-21
+## Current Integration: 2026-10-22
 
 Continue through `think-zpfo` and [PR #578](https://github.com/jlevy/squares/pull/578).
 The active checkout is `/Volumes/spud-ext2/worktrees/squares-profiles-final-20261021`;
@@ -47,7 +47,8 @@ The proposed profile release remains `v0.9.0`; the profile-link explainer patch 
 `v0.4.16`, after upstream’s `v0.4.15`. The historical registrations add authored
 Results, not current Records.
 Beyond-horizon rows without registered result IDs do not inflate either tally.
-Final validation and a rebuilt preview are pending for this integration.
+The complete preview of `b3646ac72` is built and audited; final integrated gate and
+hosted acceptance remain pending.
 Earlier dated receipts below are historical, including their counts, environments and
 preview ports.
 
@@ -118,6 +119,41 @@ and [attribution policy](../../../../attribution.md) own these rules.
 | `think-4m6m` | Bounded worker evidence, measured test costs and integrated validation fixes |
 | `think-98c5` | Linked-name result assertions and exact terminology anchors |
 | `think-5q5y` | Canonical names and SVG navigation geometry regressions |
+
+### Current Preview and Validation
+
+The current preview is <http://127.0.0.1:8790/profiles/index.html>, served from
+`/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-final-b3646ac72`. The
+normal complete build of `b3646ac72` includes the site, atlas, all 228 registered result
+pages, 324 case pages, 75 profiles and all four paper PDFs.
+The directory summary is 75 people, 112 supported current Records, 217 primary Results,
+714 Credits and 47 unique linked resources.
+The classifier has 114 current registered results overall; the directory counts only
+those with a profiled primary author.
+All 7,333 publication checks pass.
+The profile audit covers 696 HTML pages with zero broken destinations and zero label
+mismatches. The four PDFs contain 50 valid profile annotations and retain every profile
+target from the preceding accepted build; their front pages and explicit credit footnote
+were visually checked.
+Twenty HTTP routes match the completed build bytes, and all 566 shared immutable assets
+referenced by the HTML pages are served whole.
+
+Thirteen focused resource, directory, browser and Results-asset checks pass, together
+with 26 shared-sorter Node tests.
+The source-built T-037 and T-226 through T-228 rendering checks pass at desktop and
+mobile widths in both themes; their maximum measured layout shift is 0.001995.
+Independent Astra review accepted the final UI and assertion corrections without an
+actionable finding. The combined gate passed 68 of 69 steps: the behavioral run had
+19,958 passing tests and three obsolete presentation expectations.
+Those three assertions were corrected and passed in 42.29 seconds at `14340216b`. The
+final narrow push gate, worker-pool check and hosted checks remain pending; these
+focused and output receipts do not establish final acceptance.
+
+### Earlier Integration Receipts
+
+The following build, environment and validation receipts predate `b3646ac72`. Their
+preview paths and gate outcomes are historical, not the current served output or
+acceptance for the latest head.
 
 The reviewed preview is <http://127.0.0.1:8790/profiles/index.html>, served from
 `/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-final-e3e33171b`. It
@@ -192,26 +228,38 @@ these focused receipts do not stand in for that acceptance.
 Visible oversight credit labels and links require proposed paper successors: explainer
 `v0.4.16` and methods survey `v0.2.4`. The site remains the proposed `v0.9.0` batch.
 Confirm all proposed edition dates at first deployment.
-The next reviewer should review PR #578, starting with the final checks and diff;
-merging and deployment remain separate from this handoff.
+The next reviewer should review PR #578, starting with the final checks and diff; the
+owner authorizes merging after final review and successful gates.
+Deployment remains separate.
 
-The current presentation follow-ups are tracked separately: `think-vgad` applies the
-same S5-to-S1 result-count ordering to every resource-card list, with no catalogue
-pinning; `think-jmuq` orders the directory tallies Records, Results, Credits;
-`think-beyg` puts muted significance breakdowns on their own line; `think-j7kn` adds
-Records to the directory totals; `think-gddk` reuses the Results-page sortable-table
-interaction; and `think-33rl` simplifies Results headings while retaining inbound
-anchors. The Overview Profiles invitation precedes Report Your Results (`think-17fv`).
+### Current Presentation
+
+All six latest presentation requests are implemented and covered by retained tests.
+`think-vgad` gives homepage and profile resource cards one descending S5-to-S1 result
+order, with newest date, name and exact URL ties and no catalogue pinning.
+`think-jmuq` sets the directory order to Name, Records, Results, Credits, Years active,
+Resources and Accounts.
+`think-beyg` starts muted significance breakdowns below the normal-foreground totals in
+all three tally columns; shared tallies remain inline elsewhere.
+`think-j7kn` includes distinct supported current Records in the directory summary.
+`think-gddk` makes every column sortable through the existing Results-table interaction,
+including numeric totals, keyboard controls, announced sort state and missing values
+last in either direction; native links and surname order remain without JavaScript.
+`think-33rl` gives Results one plain page title and distinct plain section headings,
+retaining inbound anchors and moving navigation into adjacent prose.
+The Overview Profiles invitation precedes Report Your Results (`think-17fv`). The five
+profile-presentation beads and Results-heading bead await the coordinator’s combined
+validation receipt before closure.
 
 ## Remaining Integration Phases
 
 | Phase | Work and acceptance | Owner beads | State |
 | --- | --- | --- | --- |
-| Attribution correction | Disjoint primary results and non-primary credits, significance tallies, original-work activity years; all-profile regression and independent review | `think-94ky`, `think-gjxb`, `think-sb9n` | Model and renderer implemented; final rebuild/checks pending |
-| Coverage completion | Every existing profile’s evidenced work reconciled; significant-result authors and PDF credits audited; missing joins, profiles and result records explicitly distinguished | `think-uwd6`, `think-m7il` | In progress; no complete-archive claim |
-| Contract and plan reconciliation | Document canonical references, semantic checks and update procedure; reconcile current requirements and historical receipts | `think-noql`, `think-cq58` | In progress |
-| Website acceptance | Rebuild all affected pages, verify table/card/link destinations and responsive presentation, run integrated gates | `think-zpfo`, presentation beads above | Pending corrected model and coverage fixes |
-| Review handoff | Commit, integrate latest main/PR head, push PR #578, wait for hosted checks and publish final receipts | `think-zpfo` | Pending; do not merge or deploy |
+| Attribution correction | Disjoint primary results and non-primary credits, significance tallies, original-work activity years; all-profile regression and independent review | `think-94ky`, `think-gjxb`, `think-sb9n` | Implemented and independently reviewed; complete preview rebuilt and audited |
+| Coverage completion | Every existing profile’s evidenced work reconciled; significant-result authors and PDF credits audited; missing joins, profiles and result records explicitly distinguished | `think-uwd6`, `think-m7il` | Bounded 75-profile evidence batch implemented; full archive inspection remains open |
+| Contract and plan reconciliation | Document canonical references, semantic checks and update procedure; reconcile current requirements and historical receipts | `think-noql`, `think-cq58` | Current contracts and receipts reconciled; final acceptance receipt pending |
+| Website acceptance | Rebuild all affected pages, verify table/card/link destinations and responsive presentation, run integrated gates | `think-zpfo`, presentation beads above | Complete preview audited; focused UI checks pass; final narrow gate, worker-pool and hosted checks pending |
+| Review handoff | Commit, integrate latest main/PR head, push PR #578, wait for hosted checks and publish final receipts | `think-zpfo` | Local integration committed; final review, validation, push and hosted acceptance pending; merge authorized once ready, deployment separate |
 
 The implementation phases below describe the original delivery sequence.
 Dated review and handoff sections preserve their historical evidence; this section and
