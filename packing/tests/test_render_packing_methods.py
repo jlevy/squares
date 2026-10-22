@@ -133,7 +133,7 @@ def test_the_editions_pin_repository_citations_and_link_sibling_papers(
     assert source in markdown
     assert 'href="n11-lower-bounds-explainer.html"' in html
     assert (
-        "(https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html)" in markdown
+        "(https://squaremath.org/papers/n11-lower-bounds-explainer.html)" in markdown
     )
     assert markdown.startswith("# How Record Square Packings Are Found\n")
     assert "[PDF]" not in markdown
@@ -295,7 +295,7 @@ def test_printed_paper_has_its_own_title_dates_and_absolute_links(
     structure = paper_structure.read(paper.SLUG, html, rendered[1], data)
     assert structure.pdf["title"] == paper.TITLE
     assert int(structure.pdf["pages"]) >= 1
-    assert b"https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html" in data
+    assert b"https://squaremath.org/papers/n11-lower-bounds-explainer.html" in data
     # The shared print stylesheet hides the screen-only format chips.
     assert b"file://" not in data
     assert artifact_dates.main(["--pdf", str(pdf), "--revised", "packing-methods"]) == 0

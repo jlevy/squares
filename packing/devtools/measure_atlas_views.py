@@ -51,7 +51,7 @@ browser made of that:
   on the published site, so the picture shows what a reader who clicks it finds.
 
 `PAGE` is a built `atlas.html`, a directory `preview_site` built, or the address of a
-published one, such as `https://jlevy.github.io/squares/atlas.html`. `--render` renders
+published one, such as `https://squaremath.org/atlas.html`. `--render` renders
 the overview alone into `PAGE` first, which takes seconds where a whole site takes a
 minute. Usage, from `packing/`:
 
@@ -62,7 +62,7 @@ minute. Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.measure_atlas_views \
         shots PAGE --out DIR
     uv run --frozen --all-extras --group dev python -m devtools.measure_atlas_views \
-        readme https://jlevy.github.io/squares/atlas.html \
+        readme https://squaremath.org/atlas.html \
         --out ../docs/images/atlas-triangle-1-324.png
 
 Set `SQPACK_CHROMIUM` to use a browser the environment supplies, as the other tools do.

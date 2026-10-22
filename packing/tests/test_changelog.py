@@ -502,7 +502,7 @@ def test_structured_links_reject_decoded_markup_and_unsafe_authorities() -> None
 def test_structured_link_markdown_delimiters_cannot_create_html_links() -> None:
     injection = ")[Injected](https://evil.example/x)"
     target = "https://example.com/audit" + injection
-    artifact_target = "https://jlevy.github.io/squares/result/t-151.html#" + injection
+    artifact_target = "https://squaremath.org/result/t-151.html#" + injection
     for dated in (False, True):
         data = document()
         entry = data["entries"][0]
@@ -641,7 +641,7 @@ def test_publication_artifacts_and_historical_releases() -> None:
             {
                 "kind": "result",
                 "label": "Current result",
-                "target": "https://jlevy.github.io/squares/result/t-151.html",
+                "target": "https://squaremath.org/result/t-151.html",
             }
         ],
         publication={"evidence": "https://github.com/jlevy/squares/actions/runs/123"},
@@ -657,7 +657,7 @@ def test_publication_artifacts_and_historical_releases() -> None:
     with pytest.raises(ValueError, match="registered public"):
         render_changelog.validate(data)
     data["entries"][0]["artifacts"][0]["target"] = (
-        "https://jlevy.github.io/squares/result/t-151.html"
+        "https://squaremath.org/result/t-151.html"
     )
     data["entries"][0].pop("publication")
     with pytest.raises(ValueError, match="publication evidence"):
