@@ -17,7 +17,7 @@ from functools import cache
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, override
-from urllib.parse import unquote, urlsplit
+from urllib.parse import SplitResult, unquote, urlsplit
 
 from sqpack.contributors import PROFILES_DIR, record_metadata
 
@@ -99,23 +99,34 @@ def public_names() -> dict[str, ProfileName]:
     return profile_names(record_metadata())
 
 
+def _profile_site_root(address: SplitResult) -> str | None:
+    """Use the configured site root and the explicit pre-domain Pages alias."""
+    from devtools.render_overview import SITE_URL  # noqa: PLC0415
+
+    canonical = urlsplit(SITE_URL)
+    if address.netloc:
+        if address.scheme != "https":
+            return None
+        if address.netloc == canonical.netloc:
+            return canonical.path
+        return "/squares/" if address.netloc == "jlevy.github.io" else None
+    return None if address.scheme else canonical.path
+
+
 def profile_identifier(
     address: str, people: Mapping[str, ProfileName] | None = None
 ) -> str | None:
-    """Recognize only local or canonical own-site profile destinations."""
+    """Recognize local, canonical and retained legacy profile destinations."""
     people = public_names() if people is None else people
     parsed = urlsplit(address)
-    path = parsed.path
-    if parsed.netloc:
-        if (
-            parsed.scheme != "https"
-            or parsed.netloc != "jlevy.github.io"
-            or not path.startswith("/squares/")
-        ):
-            return None
-        path = path.removeprefix("/squares/")
-    elif parsed.scheme:
+    site_root = _profile_site_root(parsed)
+    if site_root is None:
         return None
+    path = unquote(parsed.path)
+    if parsed.netloc or path.startswith("/"):
+        if not path.startswith(site_root):
+            return None
+        path = path.removeprefix(site_root)
     match = re.fullmatch(r"(?:\.\./)*profiles/([a-z0-9-]+)\.html", path)
     return match[1] if match and match[1] in people else None
 
@@ -510,29 +521,19 @@ class _ProfileTargets(HTMLParser):
         if tag != "a" or not address:
             return
         parsed = urlsplit(address)
-        if parsed.netloc:
-            if parsed.scheme != "https" or parsed.netloc != "jlevy.github.io":
-                return
-            path = unquote(parsed.path)
-            if not path.startswith("/squares/"):
+        site_root = _profile_site_root(parsed)
+        if site_root is None:
+            return
+        path = unquote(parsed.path)
+        if parsed.netloc or path.startswith("/"):
+            if not path.startswith(site_root):
                 if "/profiles/" in path:
                     self.broken[address] = "outside canonical project path"
                 return
-            path = path.removeprefix("/squares/")
+            path = path.removeprefix(site_root)
             target = (self.root / path).resolve()
-        elif parsed.scheme:
-            return
         else:
-            path = unquote(parsed.path)
-            if path.startswith("/"):
-                if not path.startswith("/squares/"):
-                    if "/profiles/" in path:
-                        self.broken[address] = "outside canonical project path"
-                    return
-                path = path.removeprefix("/squares/")
-                target = (self.root / path).resolve()
-            else:
-                target = (self.page.parent / path).resolve()
+            target = (self.page.parent / path).resolve()
         if not re.search(r"(?:^|/)profiles/[^/]+\.html$", path) and not (
             self.page.parent == self.root / PROFILES_DIR
             and "/" not in path

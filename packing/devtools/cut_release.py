@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Prepare one component's patch or minor edition and its release-impact decision.
 
-Site cuts regenerate claim documents and leave infographic and paper editions alone.
+`--component site` is refused: site editions are retired as of 22 October 2026
+(think-wdqo). The site deploys continuously from `main`, and its edition record and the
+claim documents' link commit are frozen as history; `check_release_impact` refuses an
+edit to either. The papers and the infographics keep their versions.
 Infographic cuts redraw both posters and every PDF/PNG export at one shared version.
 Paper cuts change only that paper's history and regenerate its HTML, Markdown and PDF.
 Ordinary cuts run shared release/date contracts and the owning component's quick tests.
@@ -11,8 +14,9 @@ Every cut records the complete delivered change in `release.RELEASE_IMPACTS`; th
 explains the patch or minor choice. Internal work and changelog bookkeeping need no cut.
 
 Usage, from `packing/`:
-    uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.6.0 \
-        --component site --impact minor --scope "Add a substantial capability." --dry-run
+    uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.5.0 \
+        --component paper:n11-lower-bounds-explainer --impact minor \
+        --scope "Add a substantial section." --dry-run
     uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.5.1 \
         --component infographics --impact patch --scope "Refresh the displayed results."
 
@@ -28,7 +32,6 @@ from __future__ import annotations
 import argparse
 import ast
 import json
-import re
 import shlex
 import subprocess
 import sys
@@ -40,12 +43,12 @@ from pathlib import Path
 from strif import atomic_output_file
 
 from devtools import release_pin
+from devtools.check_release_impact import SITE, SITE_EDITIONS_RETIRED
 from sqpack import release
 from sqpack.cli.validate import QUICK_TESTS
 
 PACKING = Path(__file__).resolve().parents[1]
 REPO = PACKING.parent
-REVISION_LINE = re.compile(r'^PUBLICATION_REVISION = "([0-9a-f]{7,40})"$', re.MULTILINE)
 IMPACTS_OPEN = "RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = ("
 SCOPE_WIDTH = 76
 COMMON_TESTS = (
@@ -56,7 +59,6 @@ COMMON_TESTS = (
 #: Generation ownership also determines the tests a cut runs (think-8iml). Scientific
 #: assertions stay in their existing lanes; a cut's quick checks are iteration feedback.
 COMPONENT_TESTS = {
-    "site": ("tests/test_verify_claim.py", "tests/test_verify_threshold_claim.py"),
     "infographics": ("tests/test_known_best_composites.py",),
     "paper:n11-lower-bounds-explainer": (
         "tests/test_n11_lower_bounds_explainer.py",
@@ -74,6 +76,12 @@ PAPER_MODULES = {
     "paper:n11-threshold-bound-review": "devtools.render_n11_threshold_bound_review",
     "paper:square-packing-methods-survey": "devtools.render_packing_methods",
 }
+
+
+def refuse_retired(component: str) -> None:
+    """The site takes no edition; every other component keeps its own."""
+    if component == SITE:
+        raise ValueError(f"--component {SITE}: {SITE_EDITIONS_RETIRED}")
 
 
 def parsed(version: str) -> tuple[int, int, int]:
@@ -118,11 +126,11 @@ def with_edition(
     version: str,
     first_published: str,
     scope: str,
-    revision: str,
-    component: str = "site",
+    component: str,
     impact: release.ReleaseImpact = "patch",
 ) -> str:
     """Add one owning history entry and impact decision; leave other editions intact."""
+    refuse_retired(component)
     release.component_history(component)
     history_name = release.COMPONENT_HISTORY_NAMES[component]
     history_open = f"{history_name} = (\n"
@@ -137,13 +145,7 @@ def with_edition(
     datetime.strptime(first_published, "%B %d, %Y")  # noqa: DTZ007
     if scope.strip() != scope or not scope.endswith(".") or "\n" in scope or scope == ".":
         raise ValueError("the scope is one trimmed sentence ending in a full stop")
-    if re.fullmatch(r"[0-9a-f]{7,40}", revision) is None:
-        raise ValueError(f"{revision!r} is not a commit")
-    if (
-        source.count(history_open) != 1
-        or source.count(IMPACTS_OPEN) != 1
-        or len(REVISION_LINE.findall(source)) != 1
-    ):
+    if source.count(history_open) != 1 or source.count(IMPACTS_OPEN) != 1:
         raise ValueError("release.py is not laid out as cut_release expects")
     literal = _scope_literal(scope)
     entry = (
@@ -167,8 +169,6 @@ def with_edition(
         bumped = bumped.replace(IMPACTS_OPEN + ")", IMPACTS_OPEN + "\n" + decision + ")")
     else:
         bumped = bumped.replace(IMPACTS_OPEN + "\n", IMPACTS_OPEN + "\n" + decision)
-    if component == "site":
-        return REVISION_LINE.sub(f'PUBLICATION_REVISION = "{revision}"', bumped)
     return bumped
 
 
@@ -180,9 +180,10 @@ def _git(*arguments: str) -> str:
 
 
 def steps(
-    version: str, component: str = "site", *, include_deep_tests: bool = False
+    version: str, component: str, *, include_deep_tests: bool = False
 ) -> list[tuple[str, tuple[str, ...]]]:
     """Component-owned generation and checks; deeper tests require an explicit choice."""
+    refuse_retired(component)
     release.component_history(component)
     plan: list[tuple[str, tuple[str, ...]]]
     if component == "infographics":
@@ -196,8 +197,6 @@ def steps(
                 ("devtools.build_known_best_atlas", "--check-composites"),
             ),
         ]
-    elif component == "site":
-        plan = [("regenerate the claim documents", ("devtools.render_verifiable_claim",))]
     else:
         module = PAPER_MODULES[component]
         if component == "paper:n11-lower-bounds-explainer":
@@ -217,12 +216,13 @@ def steps(
     return plan
 
 
-def remaining(version: str, component: str = "site") -> str:
+def remaining(version: str, component: str) -> str:
     history_name = release.COMPONENT_HISTORY_NAMES[component]
-    artifacts = {
-        "site": "the regenerated claim documents and the site's changed public outputs",
-        "infographics": "both infographic SVGs, every PNG export and both PDFs together",
-    }.get(component, "this paper's HTML, Markdown and PDF together")
+    artifacts = (
+        "both infographic SVGs, every PNG export and both PDFs together"
+        if component == "infographics"
+        else "this paper's HTML, Markdown and PDF together"
+    )
     return textwrap.dedent(
         f"""\
         Left to do, none of it done here:
@@ -246,17 +246,15 @@ def prepared(
     first_published: str,
     scope: str,
     *,
-    component: str = "site",
+    component: str,
     impact: release.ReleaseImpact = "patch",
-) -> tuple[str, str]:
+) -> str:
     """Prepare the complete edit, refusing dirty input or a stale data pin before writes."""
-    revision = _git("rev-parse", "--short=8", "HEAD")
     bumped = with_edition(
         release_pin.RELEASE.read_text(encoding="utf-8"),
         version=version,
         first_published=first_published,
         scope=scope,
-        revision=revision,
         component=component,
         impact=impact,
     )
@@ -265,14 +263,17 @@ def prepared(
         raise ValueError(f"the working tree is not clean:\n{dirty}")
     if release_pin.check(REPO, release_pin.RELEASE) != 0:
         raise ValueError("the pinned data revision is stale; re-pin and commit first")
-    return revision, bumped
+    return bumped
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("version", help="the new edition, as vMAJOR.MINOR.PATCH")
     parser.add_argument(
-        "--component", choices=tuple(release.COMPONENT_HISTORY_NAMES), default="site"
+        "--component",
+        choices=tuple(release.COMPONENT_HISTORY_NAMES),
+        required=True,
+        help=f"the component to cut; {SITE} is refused, its editions retired (think-wdqo)",
     )
     parser.add_argument("--impact", choices=("patch", "minor"), required=True)
     parser.add_argument(
@@ -292,7 +293,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     today = datetime.now(UTC)
     first_published = arguments.date or f"{today:%B} {today.day}, {today.year}"
     try:
-        revision, bumped = prepared(
+        bumped = prepared(
             arguments.version,
             first_published,
             arguments.scope,
@@ -309,9 +310,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         f"{arguments.component}: {release.component_version(arguments.component)} -> "
         f"{arguments.version}, first published {first_published}; {arguments.impact} impact"
     )
-    print(
-        f"  1. add the owning history entry and release-impact decision (revision {revision})"
-    )
+    print("  1. add the owning history entry and release-impact decision")
     for number, (what, command) in enumerate(plan, start=2):
         print(f"  {number}. {what}: python -m {shlex.join(command)}")
     if arguments.dry_run:

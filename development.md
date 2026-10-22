@@ -1354,9 +1354,10 @@ A squash or a rebase lands the branch as new commits, and leaves the branch’s 
 commits on no branch once it is deleted.
 The record names those commits:
 
-- A release cut sets `PUBLICATION_REVISION` to the commit it runs on, the branch’s head
-  at the cut ([Cutting an edition](#cutting-an-edition)), and the claim documents link
-  to it, so it has to stay reachable from `main`.
+- The claim documents link to `PUBLICATION_REVISION`. Each site cut used to set it to
+  the branch’s head, which only a merge commit keeps reachable from `main`; site
+  editions are retired, and it is now frozen at a commit on `main`
+  ([Cutting an edition](#cutting-an-edition)).
 - Recorded engine and provenance commits, which `check_provenance` resolves, and the
   claim documents’ verifier pins name branch commits.
 - A stacked or dependent branch loses its ancestry: its base’s commits are no longer in
@@ -1383,6 +1384,10 @@ An intake pass adds `intake` and any case label under the `github-workflows` gra
 ([the runbook’s stage 0](packing/campaign/result-import.md#stage-0-sweep)).
 
 ## The Published Site
+
+[Site Deployment](docs/project/guides/site-deployment.md) is the operator guide for
+packaging, GitHub Pages, domain and DNS configuration, HTTPS, deployment verification,
+and recovery.
 
 Every content page is complete in its first HTML response: navigation, headings,
 records, drawings and server-rendered math.
@@ -1800,14 +1805,18 @@ asks it the same questions; a local address is the one kind that is not https an
 still asked. It is how the links between papers are checked before a new paper is live,
 since only a build that holds every paper can answer them; `--local DIR` asks them of a
 built directory too.
-A preview has the first paper’s PDF only if one is put there: that PDF is drawn from
-`packing/site/` by `render_n11_lower_bounds_explainer_pdf`, which a preview never
-writes.
+The preview also invokes `render_n11_lower_bounds_explainer_pdf --site DIR --update` to
+draw the first paper’s PDF into the selected output directory.
 
-**One version, shared by the site and its data** (the owner, 2026-09-22): every site
-page’s footer and the workbench stage print `PUBLICATION_EDITION` from
-`src/sqpack/release.py`, written like `v0.4.1-3b50e2`. The version comes from the first
-entry in `PUBLICATION_HISTORY`, and the six characters after it name the data.
+**One version, shared by the site and its data** (the owner, 2026-09-22), **frozen since
+site editions were retired** (the owner, 2026-10-22: “We don’t have any real value in
+committing a synthetic version for the site”; `think-wdqo`): every site page’s footer
+and the workbench stage print `PUBLICATION_EDITION` from `src/sqpack/release.py`,
+written like `v0.9.2-3b50e2`. The version is the last site edition, the first entry in
+the frozen `PUBLICATION_HISTORY`, and the six characters after it name the data.
+No edition follows it: the site deploys continuously from `main`, and until its footer
+names the deployed commit it prints this frozen version beside the current data
+revision, which is still true of the data.
 The atlas posters use the independent `INFOGRAPHIC_VERSION` with the data revision they
 were drawn from. Both poster families share that edition; the films retain the stamp of
 their capture. See
@@ -1818,12 +1827,14 @@ atlas data), so artifacts built from the same data carry the same version whatev
 commit built them. Nothing reads git for it at build time, which is why a shallow deploy
 clone stamps correctly.
 The claim documents still link to the pinned `PUBLICATION_REVISION` (`edition_file()`),
-which moves only when an edition is cut.
+which moved only when a site edition was cut and is frozen with the history.
 
-**`PUBLICATION_HISTORY` is the site’s edition record.** It lists every edition ever
-published, newest first, and an edition never comes off it — a new one goes on the
-front. It used to keep “the two retained editions”, and adding v0.4.1 under that rule
-dropped v0.3.0, the proof of s(11) ≥ 381/100 the publication began with.
+**`PUBLICATION_HISTORY` is the site’s edition record, kept as history.** It lists every
+site edition that was published, newest first, and is frozen: an edition never comes off
+it, and since 22 October 2026 none goes on the front
+([Cutting an edition](#cutting-an-edition)). It used to keep “the two retained
+editions”, and adding v0.4.1 under that rule dropped v0.3.0, the proof of s(11) ≥
+381/100 the publication began with.
 Each date is when that edition was first *live on the public page*, read from the
 repository’s GitHub Pages deployments, not when its version label first appeared in Git.
 The two differ in both directions — v0.3.0 went live on September 5 and was named on
@@ -1876,17 +1887,17 @@ and the site-only ones out.
 Each entry’s sentence says what changed in the paper, and the explainer’s Version
 History is written from the list.
 
-**A release is cut only to host generated assets.** The site’s version is complete when
-the merge deploys and `check_published_site` passes; no tag and no GitHub release follow
-a version bump (the owner, 2026-10-01: releases “are only important for the assets that
-are generated, like the PDFs or the videos”). A release exists to give an asset a
-download address, which only the films need: they are linked through
+**A release is cut only to host generated assets.** A paper’s or the posters’ version is
+complete when the merge deploys and `check_published_site` passes; no tag and no GitHub
+release follow a version bump (the owner, 2026-10-01: releases “are only important for
+the assets that are generated, like the PDFs or the videos”). A release exists to give
+an asset a download address, which only the films need: they are linked through
 `render_overview.FILM_RELEASE` (currently `v0.4.2`) and stay on the release that carries
 them until they are cut again.
 The posters are served from the site itself, and the papers’ PDFs are built by Pages
 from the merge. A release tag carries the version alone, without the data revision:
-`v0.4.2` is `PUBLICATION_VERSION`; the stamp in a frame’s corner is
-`PUBLICATION_EDITION`, which appends the data revision.
+`v0.4.2` was `PUBLICATION_VERSION` when the films were cut; the stamp in a frame’s
+corner is `PUBLICATION_EDITION`, which appends the data revision.
 A tag names a release; a stamp names the evidence one artifact was drawn from, and a
 release may carry assets drawn from different revisions.
 
@@ -1973,6 +1984,18 @@ its source and whether it is what the rule gives:
 
 ### Cutting an edition
 
+**Site editions are retired** as of 22 October 2026 (the owner: “Going through the
+needless ceremony of assigning a version number to every deployment of the site is going
+to slow down all work, and that’s not necessary”; `think-wdqo`). The site deploys
+continuously from `main` and takes no cut, no release-impact decision and no no-change
+record. `PUBLICATION_HISTORY` stays in `release.py` as the record of the site editions
+that were published, frozen together with `PUBLICATION_REVISION`, the commit the claim
+documents link to: `check_release_impact` refuses an edit to either, and `cut_release
+--component site` refuses to cut, both with a message naming `think-wdqo`. A pull
+request that still carries a site cut drops it.
+The papers and the art keep their versions: the infographic posters and each paper are
+cut as below.
+
 Bumping a component’s version is editorial.
 Select patch for an ordinary correction or refresh, and minor for substantial new
 capability or coverage.
@@ -1983,38 +2006,36 @@ From `packing/`, on a clean tree whose pin is current:
 
 ```bash
 uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.7.0 \
-    --component site --impact minor \
+    --component infographics --impact minor \
     --scope "One sentence on what the edition adds."
 ```
 
 It does these, and `--dry-run` lists them without doing any:
 
-1. Adds the edition to the front of `PUBLICATION_HISTORY`, dated by `--date` (today in
-   UTC by default; correct it if the deployment lands on another day), and sets
-   `PUBLICATION_REVISION`, the commit the claim documents link to, to `HEAD`.
+1. Adds the edition to the front of the component’s own history (`INFOGRAPHIC_HISTORY`
+   or the paper’s), dated by `--date` (today in UTC by default; correct it if the
+   deployment lands on another day).
    `DATA_REVISION` follows the data, not the edition.
 2. Records the component’s patch or minor release-impact decision.
-3. Regenerates the claim documents (`render_verifiable_claim`) for a site cut.
+3. Regenerates the component’s outputs: an `infographics` cut redraws both posters and
+   their complete exports, and a paper cut that paper’s HTML, Markdown and PDF.
 4. Runs the relevant release and artifact checks.
-   An `infographics` cut redraws both posters and their complete exports; a site cut
-   keeps those editions.
 
 Each cut runs the shared release/date contracts and its component’s quick tests, using
 the same quick predicate as ordinary validation.
-A site cut checks claim documents; it does not start the whole-atlas composite or
-exhaustive proof sweeps.
+A paper cut does not start the whole-atlas composite or exhaustive proof sweeps.
 Add `--include-deep-tests` to run the selected component’s slow and exhaustive tests
 deliberately. Generation stays component-owned: an infographic cut still redraws and
 checks both posters.
 Neither test selection replaces the full matching-source/base checkpoint required for
 final review.
 
-It commits nothing and publishes nothing, and it moves no paper: a site bump adds no
-entry to any paper’s history and changes no paper’s version line.
+It commits nothing and publishes nothing, and it moves no other component: a cut adds an
+entry to its own component’s history alone and changes no other version line.
 Commit the release module and the generated outputs selected by the cut together, with
-README’s edition sentence updated; wait for the “Certificate page” workflow and run
-`check_published_site`, which completes the version; correct the date and record the
-deployment above the history.
+README’s edition sentence updated where it names the component; wait for the
+“Certificate page” workflow and run `check_published_site`, which completes the version;
+correct the date and record the deployment above the history.
 No tag and no GitHub release: a release is cut only when there are generated assets that
 need a download address, the films, and they stay on `render_overview.FILM_RELEASE`
 until they are cut again
@@ -2044,8 +2065,8 @@ remains immutable.
 ### Bumping a paper’s version
 
 A paper’s version moves when the paper changes in a way its author calls a new version,
-and only then; a site bump, a re-pin, a redraw of the posters and a change to the page’s
-chrome are not versions of the paper.
+and only then; a site change, a re-pin, a redraw of the posters and a change to the
+page’s chrome are not versions of the paper.
 Prepare the article revision, then cut the paper’s own patch or minor successor from a
 clean tree. For example, a patch to Part I’s current edition:
 
@@ -2114,24 +2135,35 @@ A moving download URL must be labeled as the current artifact, rather than an ar
 edition.
 
 Release references name entries in the component’s retained history.
-The site, shared infographic family and each paper have distinct histories; changelog
-bookkeeping alone does not cut a release.
-Review the release-impact decision for every externally changed component: an ordinary
-correction or refresh advances patch, while a substantial new capability or coverage
-expansion advances minor and resets patch.
+The shared infographic family and each paper have distinct histories; the site’s frozen
+history still validates the site editions that earlier entries name, and a new entry
+names none, since site editions are retired ([Cutting an edition](#cutting-an-edition)).
+Changelog bookkeeping alone does not cut a release.
+Review the release-impact decision for every externally changed paper and for the
+infographic family: an ordinary correction or refresh advances patch, while a
+substantial new capability or coverage expansion advances minor and resets patch.
 Both infographic families and every advertised export advance together.
 Paper content and typesetting revisions advance the affected paper’s edition; a site
-navigation or footer update keeps the paper’s content edition.
+navigation or footer update keeps the paper’s content edition and needs no release.
 
 The ordinary documentation gate runs `devtools.check_release_impact`. It compares
 producer-owned inputs against the comparison merge base and requires a disposition for
 each candidate component: a valid owning successor, or a fresh `ReleaseNoPublicChange`
 review in `release.py` naming the exact changed paths, outputs examined and reason.
+The site is never a candidate: it deploys continuously from `main`, so a change only the
+site reads needs no disposition.
+The gate refuses any edit to the frozen `PUBLICATION_HISTORY` and
+`PUBLICATION_REVISION`, and a fresh site release-impact decision, with a message naming
+`think-wdqo`; the remedy is to drop the site cut.
+A fresh no-change record names no site and none of the site’s outputs.
+One written under the old rules that names the site beside papers still covers those
+papers: the gate ignores its site part and prints a warning, and holds the rest to every
+rule above. A record that names only the site is refused.
 A prior no-change review cannot excuse another batch.
 Tests and checker changes do not independently select a public component; broad builder
 inputs can select one even when the changed code does not run in that output.
-Changelog-only maintenance can use the explicit bookkeeping exception; its reason should
-acknowledge the updated changelog rather than claim identical output.
+Changelog-only maintenance needs no disposition, since the changelog is read by the site
+alone.
 
 This gate verifies ownership, coverage and successor arithmetic.
 Reviewers decide whether the public output changed and whether patch or minor is

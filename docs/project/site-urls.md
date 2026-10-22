@@ -445,7 +445,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/102.html | cases/102.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/103.html | cases/103.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/104.html | cases/104.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/105.html | cases/105.html | record | overview | 2026-10-03 | 2026-10-17 | live |
+| cases/105.html | cases/105.html | record | overview | 2026-10-03 | 2026-10-22 | live |
 | cases/106.html | cases/106.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/107.html | cases/107.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/108.html | cases/108.html | record | overview | 2026-10-03 | 2026-10-18 | live |
@@ -806,9 +806,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | n11-optimality/t-060-explainer.pdf | papers/n11-optimality-review.pdf | copy | assembly | 2026-09-29 | 2026-10-22 | live → papers/n11-optimality-review.pdf |
 | news.html | news.html | page | overview | 2026-10-14 | 2026-10-22 | live |
 | papers.html | papers.html | page | overview | 2026-09-29 | 2026-10-22 | live |
-| papers/n11-lower-bounds-explainer.html | papers/n11-lower-bounds-explainer.html | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-21 | live |
-| papers/n11-lower-bounds-explainer.md | papers/n11-lower-bounds-explainer.md | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-21 | live |
-| papers/n11-lower-bounds-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-21 | live |
+| papers/n11-lower-bounds-explainer.html | papers/n11-lower-bounds-explainer.html | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-22 | live |
+| papers/n11-lower-bounds-explainer.md | papers/n11-lower-bounds-explainer.md | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-22 | live |
+| papers/n11-lower-bounds-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-22 | live |
 | papers/n11-optimality-review.html | papers/n11-optimality-review.html | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-13 | live |
 | papers/n11-optimality-review.md | papers/n11-optimality-review.md | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-13 | live |
 | papers/n11-optimality-review.pdf | papers/n11-optimality-review.pdf | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-13 | live |
@@ -1123,6 +1123,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-226.html | result/t-226.html | result | overview | 2026-10-22 | 2026-10-22 | live |
 | result/t-227.html | result/t-227.html | result | overview | 2026-10-22 | 2026-10-22 | live |
 | result/t-228.html | result/t-228.html | result | overview | 2026-10-22 | 2026-10-22 | live |
+| result/t-229.html | result/t-229.html | result | overview | 2026-10-22 | 2026-10-22 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |
@@ -1188,7 +1189,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-155.html | 400,000 | Fifty-nine counts' exact regularized sides, their regularizations and prepared math measure 303,829 bytes. |
 | result/t-174.html | 350,000 | The complete 68-case result and its 89-step history with prepared math measure 305,917 bytes. Three-run desktop/mobile, light/dark and no-JS checks pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. |
 | result/t-180.html | 450,000 | The closed form's result, its scope of 264 counts and prepared math measure 341,524 bytes, and 402,418 on 22 October 2026, when its register list on those counts reached 138 results. At about 1.5 KB a listed result the room is about 32 more; think-v4me owns the runway and re-measures the page, its timing included, before it passes 440,000 bytes. |
-| results.html | 1,250,000 | The complete 212-result table with prepared math measured 1,141,207 bytes on 18 October 2026, with no section above it. Each row links its full record; no record body is repeated in the table. Three-run desktop/mobile, light/dark and no-JS checks of that table-only page pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. The seven days' arrivals and the weekly rollup above the table (#514) cost 45,886 bytes at 217 results, 1,157,668 without them and 1,203,554 with them, which halves the headroom from 92,332 to 46,446 bytes: about 9 results at today's 90th-percentile row and seven-day entry, so `test_overview` holds the page through 225. No timing has been measured on the page with the sections. `think-v1qe` owns that measurement and the runway: the intake that passes 225 re-measures the page, its timing included, and either lightens the table or moves the ceiling as a measured choice. |
+| results.html | 1,300,000 | The complete 212-result table with prepared math measured 1,141,207 bytes on 18 October 2026, with no section above it, under a 1,250,000 ceiling; the seven days' arrivals and the weekly rollup above the table (#514) cost 45,886 bytes at 217 results. Each row links its full record; no record body is repeated in the table. On 22 October 2026 the page measured 1,251,615 bytes at 229 results, after #578's profile links and T-229, the first intake past the room count of 225, which moved the ceiling to 1,300,000 as a measured choice. Its timing that day kept CLS at 0 and LCP between 260 and 688 ms everywhere. On the hosted overview job (one run per configuration) the longest tasks were 90 to 267 ms and blocking 71 to 292 ms at desktop and mobile, light and dark; locally, five-run medians at host load 2.3 were 202 to 298 ms and 197 to 346 ms, with main's 228-result page beside it at 142 to 317 ms. Five-run medians under load 7.2 to 7.8 from other lanes, alternating the two pages, put each above 300 ms in some configuration, which the load explains. The room is 48,385 bytes, about 9 results at today's 90th-percentile row and seven-day entry (4,654 + 263 bytes), so `test_overview` holds the page through 238. `think-v1qe` owns the durable lightening: of the table's 803,826 row bytes the rows' data attributes take 185,141, the rung chips 107,858, the significance bars 85,908, the profile links 34,168 and the rows' aria-labels 29,776. |
 | tutorial-advanced.html | 800,000 | The advanced tutorial retains the original technical derivations and reference tables; the complete authored text and prepared formulas measure 771,603 bytes. |
 
 <!-- This document follows common-doc-guidelines.md.

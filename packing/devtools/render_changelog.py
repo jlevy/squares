@@ -75,9 +75,8 @@ NEWS_CHECK = (
 
 def news_rubric_meanings(text: str) -> dict[int, str]:
     """Each level's short meaning in the text of the News rubric's document: all the site
-    reads of it, so `check_release_impact` compares an edit to the document by this too.
-    A document without the section or without a `Short` meaning for S1 to S5 raises
-    `ValueError`."""
+    reads of it. A document without the section or without a `Short` meaning for S1 to S5
+    raises `ValueError`."""
     if NEWS_RUBRIC_SECTION not in text:
         raise ValueError(f"{NEWS_RUBRIC.name} has no {NEWS_RUBRIC_SECTION!r} section")
     section = text.split(NEWS_RUBRIC_SECTION, 1)[1].split("\n#", 1)[0]
@@ -455,8 +454,11 @@ def _public_targets() -> frozenset[str]:
     from devtools.render_overview import SITE_URL  # noqa: PLC0415
 
     registry = load_yaml((ROOT / "site-urls.yaml").read_text(encoding="utf-8"))
+    # Previous main records retain their published host when the freeze check reads
+    # them. Recognize that explicit alias without accepting arbitrary hostnames.
     return frozenset(
-        SITE_URL + row["canonical"]
+        root + row["canonical"]
+        for root in (SITE_URL, "https://jlevy.github.io/squares/")
         for row in registry["urls"]
         if row.get("status") == "live" and not row.get("pattern")
     )

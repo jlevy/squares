@@ -1,0 +1,90 @@
+# The report-order verdict comments of the 22 October backlog ledger for the 17-18 October
+# reports #666, #670, #672 and #675 (starts frozen at 804eff369, the 18 October ledger's,
+# with every later report at these counts), as devtools.intake_comments drafts them from
+# the ledger.json beside this file. Everything here is this pass's own: the tool holds the
+# rules. The records pull request, #720, merged before they were posted, so each went out
+# on 22 October folded into its issue's import reply, under the answer beads think-3m10,
+# think-f28n, think-2vjc and think-pvav: the reply gives the rule, these notes' substance
+# and the table's side, verdict and best now, with each row's place in the record. Each
+# reply is recorded under its issue's `replies` in campaign/result-requests.yaml.
+#
+# From packing/:
+#   python -m devtools.intake_comments \
+#     campaign/issue-intake/upper-bounds-backlog-20261022/comments.yaml --out DIR
+
+ledger: packing/campaign/issue-intake/upper-bounds-backlog-20261022/ledger.json
+records_pr: jlevy/squares#720
+
+names:
+  "[Kingbird]": the Kingbird catalogue
+
+skip:
+  - report: "#668"
+    reason: closed; walked here only as the earlier report at 227 and 229, answered in its own replies
+  - report: "#674"
+    reason: closed; walked here only as a later report at 229, answered in its own replies
+  - report: "#674 update"
+    reason: closed; walked here only as a later report at 229, answered in its own replies
+  - report: "#678"
+    reason: walked here only as a later report at these counts; its own replies cover it
+  - report: "#686"
+    reason: walked here only as a later report at these counts; its own replies cover it
+  - report: "#715"
+    reason: walked here only as a later report at these counts; its acknowledgement and import reply cover it
+  - report: "evand/square-packing@0075967"
+    reason: a publication with no issue, already registered; walked here only as the later report at 204, 227 and 229
+
+comments:
+  - issue: 666
+    author: JoostdeWinter
+    layout: by-count
+    notes:
+      - >-
+        Each of the eleven packings at or below 1024 was below everything reported before
+        it at its count, so each is recorded. At each of them a later report, by Francisco
+        Couzo or Darius Muglich, is now below yours, so your rows enter the record as
+        superseded ones, kept with your credit and the date of your report.
+      - >-
+        The commit your issue pins, b3152f5, is no longer on any branch of
+        JoostdeWinter/joostdewinter.github.io, whose history was rewritten; b9cdc16 holds
+        the identical square-packing-above-324 folder, and 643dc9a adds your MIT licence
+        without changing any certificate. The import retains all nineteen certificates
+        from 643dc9a and records all three commits.
+      - >-
+        The eight counts above 1024 are not walked here: they wait on the owner's decision
+        whether the record tracks counts that high, which Francisco Couzo's #715 also
+        raises. Their certificates are retained meanwhile.
+  - issue: 670
+    author: franciscouzo
+    layout: by-count
+    notes:
+      - >-
+        Every row was below everything reported before it, so all 73 are recorded. At 204,
+        inside the case corpus, the row is already registered; your #675 and #678, and
+        Evan Daniel's regularized view of the #678 packing, have since gone below it. At
+        364, 370, 382, 403, 444, 452, 536 and 922 your row becomes the record's current
+        one; at the other 64 counts later reports are below it, so it enters as a
+        superseded row, kept with your credit and the date of your report.
+  - issue: 672
+    author: franciscouzo
+    layout: by-count
+    notes:
+      - >-
+        All 46 rows are recorded. At 227 and 229, inside the case corpus, your
+        certificates are already registered as refinements of Joost de Winter's #668
+        packings, as your comment of 17 October says; Evan Daniel's #674 is below yours at
+        229, and at 227 his regularized view of your packing, 1.76e-11 below it, is the
+        case's house best packing. At the 44 counts beyond the corpus later reports are
+        below your rows, so they enter as superseded rows, kept with your credit and the
+        date of your report.
+  - issue: 675
+    author: franciscouzo
+    layout: by-count
+    notes:
+      - >-
+        All 79 rows are recorded. At 204, inside the case corpus, the row is already
+        registered; your #678 and Evan Daniel's regularized view of its packing have since
+        gone below it. At 992 and 995 the rows are your 993 and 996 certificates less one
+        square, recorded as such. At every count beyond the corpus a later report (your
+        #678 or #715, or Darius Muglich's #686) is now below yours, so all 78 enter as
+        superseded rows, kept with your credit and the date of your report.

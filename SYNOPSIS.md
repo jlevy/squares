@@ -93,7 +93,7 @@ The
 [complete native n11 decision](docs/project/reviews/review-2026-09-22-native-n11-parent-core.md)
 adds a distinct interval coverage method for Overbeck’s strict $3.875$ bound (T-037,
 `V3/C3`), with no new bound.
-[Part II of the n = 11 series](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html)
+[Part II of the n = 11 series](https://squaremath.org/papers/n11-threshold-bound-review.html)
 explains that proof and what it inherits.
 The
 [R052 review of 25 September](docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md)
@@ -154,7 +154,7 @@ replay, followed on 28 September.
 Guzhou0806’s continuation of R052, $s(17) > 4.62003$, superseded by `v1.1.0`, is
 retained as a publication record.
 The [results register](packing/frontier/RESULTS.md) and the site’s
-[results table](https://jlevy.github.io/squares/results.html) give the credit for each.
+[results table](https://squaremath.org/results.html) give the credit for each.
 The rungs above are the register’s, under the ladder in force since 2026-09-30. Dated
 sections further down keep the rungs they were written with;
 [`epistemics.md`](epistemics.md#what-changed-on-2026-09-30) says how the two ladders
@@ -388,6 +388,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-226](packing/frontier/RESULTS.md) | 204 | `V0` | `C0` | `S2` | `previously-published` | One complete rational source certificate of issue #670 reports a finite upper-bound improvement at the exact side it states: s(204) <= 45044217780850246618141/3041751595240000000000, below T-186, the case’s house best packing when it was reported. |
 | [T-227](packing/frontier/RESULTS.md) | 227, 229 | `V0` | `C0` | `S2` | `previously-published` | Two complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(227) <= 71427829379429597600111901507/4589408083628500000000000000 and s(229) <= 231170315041711399213831561/14771101209934000000000000. |
 | [T-228](packing/frontier/RESULTS.md) | 204 | `V0` | `C0` | `S2` | `previously-published` | One complete rational source certificate of issue #675 reports a finite upper-bound improvement at the exact side it states: s(204) <= 101859759444979981360793459/6878398651426000000000000, below his #670 (T-226). |
+| [T-229](packing/frontier/RESULTS.md) | 105, 204 | `V0` | `C0` | `S2` | `previously-published` | Two complete rational source certificates of issue 719 report finite upper-bound improvements at the exact sides they state: s(105) <= 674331486483935962030285457609/62500000000000000000000000000 and s(204) <= 882663895519250432/59604644775390625, below the case’s house best packing at each, T-174 at 105 by 5.18e-12 and T-225 at 204 by 1.006e-8. |
 | [T-155](packing/frontier/RESULTS.md) | 28, 29, 37, 39, 41, 50, 53, 54, 55, 69, 71, 83, 87, 101, 104, 107, 109, 122, 124, 125, 128, 145, 147, 148, 149, 151, 170, 171, 173, 174, 178, 197, 198, 200, 201, 202, 203, 204, 205, 226, 227, 229, 230, 231, 233, 234, 235, 257, 260, 262, 264, 265, 291, 293, 294, 296, 298, 299, 300 | `V3` | `C3` | `S1` | `apparently-novel` | For each of 59 counts n from 28 to 300, s(n) <= s_n, where s_n is the exact side of a rational packing that this project made from the register’s known-best witness at n with Evan Daniel’s exact solver and regularizer and decided here over Q; at 57 of the counts it is measured here as the witness’s packing, and at n = 204 and 299 that is not decided. |
 | [T-156](packing/frontier/RESULTS.md) | 290 | `V3` | `C3` | `S1` | `apparently-novel` | s(290) <= 17.53553390593273762200422181052425, which is 70142135623730950488016887242097/4000000000000000000000000000000 exactly, by monotonicity from T-155 (a packing of 291 unit squares contains a packing of 290): T-155 certifies n = 291 at exactly this side. |
 | [T-166](packing/frontier/RESULTS.md) | 153 | `V3` | `C3` | `S1` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(153) <= 12.870013850407034002770080892. |
@@ -431,7 +432,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 228 | 228 registered, 196 by others |
+| Frontier results | 229 | 229 registered, 197 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -695,6 +696,8 @@ case or experiment separately.
 | [Project PDF Credit Coverage, 21 October 2026](packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md) | dated review record | record | retained | — |
 | [Attribution Policy](attribution.md) | artifact and naming conventions | definitive | maintained | — |
 | [Person Profiles](packing/contributors/README.md) | component scope and use | current | maintained | — |
+| [Site Deployment](docs/project/guides/site-deployment.md) | component scope and use | current | maintained | — |
+| [Feature: Square Math Domain and Deployment](docs/project/specs/active/plan-2026-10-22-squaremath-domain.md) | implementation plan | current | transient | — |
 | [Feature: Contributor Profiles and Linked Result Credits](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md) | implementation plan | current | transient | — |
 | [Review: Evan Daniel’s Regularized Views at 204, 227, 229 and 260 (T-225, evand/square-packing@0075967)](docs/project/reviews/review-2026-10-21-evand-regularized-views.md) | dated review record | record | retained | — |
 | [Review: Couzo’s 85 Exact Upper-Bound Certificates at 204–998 (Issue #678)](docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) | dated review record | record | retained | — |
@@ -729,6 +732,7 @@ case or experiment separately.
 | [Lane Records for the 22 October Ledger](packing/campaign/issue-intake/upper-bounds-20261022/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-backlog-20261022/README.md) | generated status view | generated | generated | — |
 | [Lane Records for the Backlog Ledger of 22 October](packing/campaign/issue-intake/upper-bounds-backlog-20261022/lane-claims/README.md) | source retention and archive policy | record | retained | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md) | generated status view | generated | generated | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
 | [Mathematical Review of wand125’s n108 Measure Certificate](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |
@@ -2204,23 +2208,23 @@ fresh-ensemble replay entry point.
 
 The n = 11 papers form one series, read in order
 ([plan](docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md)):
-[Part I](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html), the
-project’s lower bounds T-018, T-025 and T-026;
-[Part II](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html), a
-review of Overbeck’s $s(11) > 31/8$ (T-037), its k-of-m charges, shrunken parents with
-strict cores and exact sweep
+[Part I](https://squaremath.org/papers/n11-lower-bounds-explainer.html), the project’s
+lower bounds T-018, T-025 and T-026;
+[Part II](https://squaremath.org/papers/n11-threshold-bound-review.html), a review of
+Overbeck’s $s(11) > 31/8$ (T-037), its k-of-m charges, shrunken parents with strict
+cores and exact sweep
 ([source](packing/devtools/templates/n11-threshold-bound-review-article.md)); and
-[Part III](https://jlevy.github.io/squares/papers/n11-optimality-review.html), the
+[Part III](https://squaremath.org/papers/n11-optimality-review.html), the
 [dedicated optimality paper](packing/devtools/templates/n11-optimality-review-article.md),
 which explains that complete argument from first principles.
 Its
 [simplification review](docs/project/reviews/review-2026-09-30-n11-expository-simplification.md)
 consolidates the proof dependencies and geometric invariant without removing required
 cases, branches or checks.
-The [rendered paper](https://jlevy.github.io/squares/papers/n11-optimality-review.html)
-and [PDF](https://jlevy.github.io/squares/papers/n11-optimality-review.pdf) include the
-exact center cover, occupied mask and capture ancestry, with the implementation-sharing
-and fresh-replay limits stated beside the verification record.
+The [rendered paper](https://squaremath.org/papers/n11-optimality-review.html) and
+[PDF](https://squaremath.org/papers/n11-optimality-review.pdf) include the exact center
+cover, occupied mask and capture ancestry, with the implementation-sharing and
+fresh-replay limits stated beside the verification record.
 
 The following paragraphs retain the previous intake handoff as an execution record.
 It placed tooling and efficiency off the proof’s critical path, then assigned

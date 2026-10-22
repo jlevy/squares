@@ -590,9 +590,9 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
         f"Last revised {release.OPTIMALITY_REVIEW_REVISED}\n"
         "- Part III of 3 in the n = 11 series\n"
         "- Part I: [New Lower Bounds for Square Packing for n = 11]"
-        "(https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html)\n"
+        "(https://squaremath.org/papers/n11-lower-bounds-explainer.html)\n"
         "- Part II: [A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares]"
-        "(https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html)\n\n"
+        "(https://squaremath.org/papers/n11-threshold-bound-review.html)\n\n"
     )
     assert "doc-links" not in markdown
     assert '<div class="hero">' not in markdown

@@ -490,6 +490,35 @@ credit.
   [`devtools.acquire_source`](../devtools/acquire_source.py) writes a packet from a
   declaration kept in its `acquisition/` directory, and its `--check` re-derives the
   packet from its manifest.
+- **Bulk goes to hosted data, decided before the first commit.** Size what the packet
+  and the pass retain as
+  [OR-18](../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)
+  counts it. By OR-18’s threshold, a certificate, dump or evidence file of more than a
+  few megabytes, or a set of them totalling tens of megabytes, goes into no commit.
+  The per-pull-request added-blob check that will enforce it is #406, in review on 22
+  October 2026; once it lands, its limits are in `packing/devtools/added-blobs.yaml`,
+  and until then OR-18’s wording is the rule.
+  Publish such data as a hosted data release by
+  [Publishing Hosted Data](../../development.md#publishing-hosted-data): ignore the
+  directory that will hold it, stage a manifest in `packing/hosted/` with
+  `python -m devtools.hosted_data stage`, publish it under a `data/<subject>-v<N>` tag
+  with `python -m devtools.hosted_data publish`, and commit the manifest and the code
+  that reads through `sqpack.hosted_data.require`, never the bytes.
+  A hosted upstream file is declared pinned-only in the packet’s acquisition
+  declaration, with the manifest as its reason, and fetched outside the packet’s
+  archived directory: the packet `squarepacker-k2-minus-c-upper-2026-10-09` pins Ryu’s
+  two largest certificates that way, and their manifest fetches them to
+  `packing/cases/asymptotic/hosted/`. Inside the packet,
+  `devtools.acquire_source --check` would read such a file as a retained one its record
+  does not list. The packet’s README lists each hosted file with its manifest, the
+  receipts, verdicts and summaries the record cites stay in Git, and the pull request
+  gives the release URL, the manifest path and the total size.
+  This is decided at retention, not at review: once a blob is in a branch’s history,
+  taking it out means rebuilding the branch.
+  An import never raises the mutation workers’ snapshot cap or prunes their inputs to
+  make room. That cap (`SNAPSHOT_MAX_BYTES` in
+  [`devtools/run_negative_controls.py`](../devtools/run_negative_controls.py)) is a
+  coarse bound against accidents, which the owner reset to 512 MiB on 22 October 2026.
 - **The bibliography key** carries the date of the pinned revision as `dated`, and is
   defined in the [resources README](../resources/README.md) as well.
   Credit is read from the source’s own files, now and not after the review, and names
@@ -699,6 +728,15 @@ The pull request that registers or raises a result runs
 [New Result Publication](documentation-pass.md#new-result-publication): the views are
 rendered in the commit that changes the record, and the data pin moves in the next.
 No documentation phase is opened for it.
+
+It cuts no site edition.
+Site editions are retired as of 22 October 2026
+([Cutting an edition](../../development.md#cutting-an-edition); `think-wdqo`): the site
+deploys continuously from `main`, and `check_release_impact` asks it for no disposition
+and refuses an edit to the frozen `PUBLICATION_HISTORY` or `PUBLICATION_REVISION`, so
+the claim documents are not regenerated for an intake either.
+A paper or the posters still take their own cut, or a no-change record, when the import
+changes what they print.
 
 The pull request’s `--fast` surface runs on CI’s runners, not on a machine that is also
 running a replay, where a tier’s wall measures the contention rather than the branch

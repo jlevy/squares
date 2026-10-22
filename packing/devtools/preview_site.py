@@ -12,8 +12,8 @@ and never writes into `packing/site/`.
 
 A file that moved and cannot forward, a paper's Markdown or PDF, is served at its old
 address as a copy, as the workflow's `publish` job leaves it (`copy_moved_files`). The
-lower-bounds explainer's PDF is drawn by its own Pages job from `packing/site/`, which a
-preview never writes, so a preview has that PDF only if one is put there.
+lower-bounds explainer's PDF is drawn into the selected output directory by
+`render_n11_lower_bounds_explainer_pdf --site OUTPUT --update`.
 
 With the pages it draws the card every page's link preview names
 (`devtools.social_card`), at the site's root as the deploy serves it, and after every

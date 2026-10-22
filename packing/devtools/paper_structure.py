@@ -17,7 +17,7 @@ first.
 Usage, from `packing/`, on a site `preview_site` has built, or on the published site:
 
     uv run --frozen --all-extras --group dev python -m devtools.paper_structure SITE --markdown
-    uv run --frozen --all-extras --group dev python -m devtools.paper_structure https://jlevy.github.io/squares/
+    uv run --frozen --all-extras --group dev python -m devtools.paper_structure https://squaremath.org/
 
 The audit this was written for (think-2cqu) found the credits in two orders, a bold
 address on one paper and none on the other, the version before the dates on one and

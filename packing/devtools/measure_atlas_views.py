@@ -51,7 +51,7 @@ browser made of that:
   on the published site, so the picture shows what a reader who clicks it finds.
 
 `PAGE` is a built `atlas.html`, a directory `preview_site` built, or the address of a
-published one, such as `https://jlevy.github.io/squares/atlas.html`. `--render` renders
+published one, such as `https://squaremath.org/atlas.html`. `--render` renders
 the overview alone into `PAGE` first, which takes seconds where a whole site takes a
 minute. Usage, from `packing/`:
 
@@ -62,7 +62,7 @@ minute. Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.measure_atlas_views \
         shots PAGE --out DIR
     uv run --frozen --all-extras --group dev python -m devtools.measure_atlas_views \
-        readme https://jlevy.github.io/squares/atlas.html \
+        readme https://squaremath.org/atlas.html \
         --out ../docs/images/atlas-triangle-1-324.png
 
 Set `SQPACK_CHROMIUM` to use a browser the environment supplies, as the other tools do.
@@ -121,7 +121,7 @@ README_WINDOW, README_PIXELS = (3200, 2000), 2
 README_MARGIN = 8
 #: The colours README's picture is reduced to. The tiles are flat fills, so a palette
 #: loses nothing visible and takes the file from 1.9 MB to about 0.6 MB, which matters:
-#: `docs/` is copied whole into every negative-control worker, against its 216 MiB cap
+#: `docs/` is copied whole into every negative-control worker, against its snapshot cap
 #: (`run_negative_controls.SNAPSHOT_MAX_BYTES`).
 README_COLORS = 256
 #: How far two edges may differ and still be one edge, in CSS pixels.
