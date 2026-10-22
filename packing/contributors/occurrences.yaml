@@ -14908,6 +14908,77 @@ occurrences:
     project credit does not imply sole personal authorship.
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n303 2026-10-22]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n303 2026-10-22]]
+    /authors/0 span 0:6. The specific evand/square-packing certificate, fq solver
+    or regularizer matches the repository whose retained licence names Evan Daniel.
+    Keep finder, improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n303 2026-10-22]'
+    field: /credit
+  expected_text: Daniel after Ostashev, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n303 2026-10-22]]
+    /credit span 0:6. The specific evand/square-packing certificate, fq solver or
+    regularizer matches the repository whose retained licence names Evan Daniel. Keep
+    finder, improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n303 2026-10-22]'
+    field: /credit
+  expected_text: Daniel after Ostashev, Levy
+  start: 13
+  end: 21
+  label: Ostashev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; issue 728
+    names Daniil Ostashev's packing of issue 562 as the search's start, and the original credit
+    role is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n303 2026-10-22]'
+    field: /credit
+  expected_text: Daniel after Ostashev, Levy
+  start: 23
+  end: 27
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n303 2026-10-22]]
+    /credit span 23:27. The specific first-party jlevy/squares method or source is
+    the Joshua Levy identity established by LICENSE and the retained ojoshe receipt;
+    project credit does not imply sole personal authorship.
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[Muglich issue 686 2026-10-19]'
     field: /authors/0
   expected_text: Muglich
