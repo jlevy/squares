@@ -2220,7 +2220,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "HTML and Markdown byte-identical across all four; only the explainer's "
             "register count differs (228 to 229), and it took v0.4.17. Rendered again "
             "from this tree at 81762770, after results.html's ceiling moved in "
-            "site_urls.py: the three write the same files as main's. No PDF was "
+            "site_urls.py, and at 1eaa8624, after review A's fixes: the three write the "
+            "same files as main's each time. No PDF was "
             "printed; each prints from that HTML. Retain v0.1.8, v0.1.1 and v0.2.4."
         ),
     ),
