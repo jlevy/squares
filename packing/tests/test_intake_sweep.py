@@ -294,6 +294,9 @@ def test_the_history_reads_commits_past_the_pins_and_changes_no_packet_retains(
     assert found.unretained == (f"{second[:7]} change certificates/b/cert.txt",)
     read = sweep.read_history(f"file://{repo}", head, packets, (second,))
     assert read.unretained == ()
+    # No packet pins this head, so no note reads what its read holds, and none is computed.
+    unpinned = sweep.read_history(f"file://{repo}", head, packets, (head,))
+    assert (unpinned.unretained, unpinned.held_by_head_read) == ((), ())
 
 
 def _upstream(tmp_path: Path) -> tuple[Path, tuple[str, str, str, str]]:
@@ -329,6 +332,60 @@ def test_a_register_pin_beside_a_scoped_packet_does_not_hide_what_the_packet_lef
     entry = watched["https://github.com/someone/packings"]
     found = sweep.read_history(f"file://{repo}", head, entry.packets, ())
     assert found.unretained == (f"{second[:7]} change certificates/b/cert.txt",)
+
+
+@pytest.mark.parametrize("scope", [["certificates/a", "README.md"], None])
+def test_a_read_through_a_pinned_head_goes_only_when_nothing_it_covers_is_left_unretained(
+    tmp_path: Path, scope: list[str] | None
+) -> None:
+    """think-bspk, franciscouzo's case in small. couzo-issue678-2026-10-18 pins 7b6c87e,
+    the head, but retains 90 of its 543 changed paths, so the read through it is what
+    covers the rest and removing it as the sweep advised left 7b6c87e unretained. A
+    packet at the head that omits one changed path keeps the read; one that retains the
+    whole tree frees it. With no history read, nothing says either way."""
+    repo, (first, second, _pinned, head) = _upstream(tmp_path)
+    packets = tmp_path / "web"
+    _acquisition(packets, "early", first, None)
+    _acquisition(packets, "at-head", head, scope)
+    url = "https://github.com/someone/packings"
+    read = {"url": url, "read_through": head, "read_on": "2026-10-05", "note": "no change"}
+
+    def section(history: sweep.History) -> sweep.Section:
+        return sweep.repositories_section(
+            {"sources": []},
+            {"repositories": [read]},
+            None,
+            offline=False,
+            heads=lambda _url: head,
+            history=history,
+            packets=packets,
+            projects=[],
+        )
+
+    def local(_url: str, at: str, pinned: Any, reads: Any) -> sweep.RepoHistory:
+        return sweep.read_history(f"file://{repo}", at, pinned, reads)
+
+    found = section(local)
+    assert found.items == []
+    (note,) = found.notes[1:]
+    if scope is None:
+        assert note == (
+            f"{url}: a packet now pins {head[:12]}, so intake-watch.yaml's read of it can "
+            "be removed."
+        )
+    else:
+        assert note == (
+            f"{url}: a packet pins {head[:12]}, but intake-watch.yaml's read of it stays: "
+            f"1 commit it covers changes paths no packet retains: {second[:7]} change "
+            "certificates/b/cert.txt"
+        )
+
+    def unreadable(_url: str, _at: str, _pinned: Any, _reads: Any) -> sweep.RepoHistory:
+        raise RuntimeError("no history")
+
+    failed = section(unreadable)
+    assert failed.notes == ["1 of 1 heads are a commit a packet pins."]
+    assert failed.unchecked == [f"{url}: its history could not be read: no history"]
 
 
 def test_github_differences_each_need_an_owner_and_a_failure_is_not_checked() -> None:
