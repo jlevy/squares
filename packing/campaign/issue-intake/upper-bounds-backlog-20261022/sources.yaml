@@ -1,0 +1,2519 @@
+format: intake-ledger-sources-v1
+read_at_main: 804eff369193b698d497a9c06847059eb9de0470
+read_on: '2026-10-22'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one
+  is stronger than the last. If a stronger result is reported first, then the other one should not be
+  recorded since it is weaker after that, unless there is some key reason it should be recorded.
+lanes:
+- name: views
+  branch: claude/stoic-thompson-ku09fw
+  commit: b1244549a5786c2e7cd362087f95128e1081f909
+  note: the packet's frozen claim record at its first commit; it is read in the checkout
+reports:
+- report: '#666'
+  issue: 666
+  holders: Joost de Winter
+  bead: think-3m10
+  claims:
+  - n: 464
+    printed: '21.988813022694'
+    rounding: up
+    exact: 10994406511346890813/500000000000000000
+    exact_from: packing/resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+      (the certificate square-packing-above-324/n0464.cert, its header side)
+  - n: 509
+    printed: '22.994328036438'
+    rounding: up
+    exact: 229943280364379812353527908255755274821759/10000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+      (the certificate square-packing-above-324/n0509.cert, its header side)
+  - n: 555
+    printed: '23.993653790591'
+    rounding: up
+    exact: 599841344764773433515660753617274733361/25000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+      (the certificate square-packing-above-324/n0555.cert, its header side)
+  - n: 603
+    printed: '24.995268064197'
+    rounding: up
+    exact: 3124408508024516567/125000000000000000
+    exact_from: packing/resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+      (the certificate square-packing-above-324/n0603.cert, its header side)
+  - n: 654
+    printed: '25.996103908965'
+    rounding: up
+    exact: 6499025977241137654691967211499090902723/250000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+      (the certificate square-packing-above-324/n0654.cert, its header side)
+  - n: 706
+    printed: '26.998712100405'
+    rounding: up
+    exact: 26998712100404344909005416027219267574873/1000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+      (the certificate square-packing-above-324/n0706.cert, its header side)
+  - n: 760
+    printed: '27.995949340329'
+    rounding: up
+    exact: 279959493403287248613110541910531104379287/10000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+      (the certificate square-packing-above-324/n0760.cert, its header side)
+  - n: 817
+    printed: '28.998488480775'
+    rounding: up
+    exact: 18124055300484316642750416463963715847119/625000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+      (the certificate square-packing-above-324/n0817.cert, its header side)
+  - n: 875
+    printed: '29.998783733108'
+    rounding: up
+    exact: 149993918665539639324087987587084819661007/5000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+      (the certificate square-packing-above-324/n0875.cert, its header side)
+  - n: 935
+    printed: '30.995955854834'
+    rounding: up
+    exact: 154979779274169601234769816827136411957663/5000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+      (the certificate square-packing-above-324/n0935.cert, its header side)
+  - n: 998
+    printed: '31.998349747355'
+    rounding: up
+    exact: 639966994947091183224777254436933414843/20000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-issue666-2026-10-17/acquisition/beyond-horizon-rows.json
+      (the certificate square-packing-above-324/n0998.cert, its header side)
+  note: Issue-table prints at the 11 counts at or below 1024, each with its certificate's exact header
+    side from the de-winter-issue666-2026-10-17 packet, which retains all 19 from 643dc9a (the issue pins
+    b3152f52, whose folder tree b9cdc16b holds unchanged); the 8 rows above 1024 wait on the owner (think-f2io)
+    and are not walked here.
+- report: '#668'
+  issue: 668
+  holders: Joost de Winter
+  bead: think-qdcc
+  claims:
+  - n: 227
+    printed: '15.563796703670'
+    rounding: up
+    exact: 194547458795865848854407472552117653131825098066089500568310019841668910818842825068644658133972443495777187230686109286929082683273291187074040913251499/12500000000000000000000000000001272204783003459957077568639425038233180795950995922365041743732086145591922059343477256613382050000000000000000000000000
+    exact_from: packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/n227/n227_exact.json.gz
+  - n: 229
+    printed: '15.650174756949'
+    rounding: up
+    exact: 156501747569482131747919637148801852719869637315233948984618327625011520667543259632677498716011131748832131668750692746335433269145213277034738380207139541/10000000000000000000000000000001737366297119815888250696550926607660931327350731575578989919015034082413286101971092035771621296900000000000000000000000000
+    exact_from: packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/n229/n229_exact.json.gz
+  note: Triage comparison of issue-table upper bounds against frozen current records. The source inventory,
+    exact-header decisions, classical envelope and other unimported publications remain on the owner bead;
+    a ledger verdict alone is not registration or feasibility verification. Stage 3 retains the exact
+    certificate side and its source path; chronological registration is separate from geometric replay
+    and confirmation. Walked here at the four backlog issues' counts only.
+- report: '#670'
+  issue: 670
+  holders: Francisco Couzo
+  bead: think-f28n
+  claims:
+  - n: 204
+    printed: '14.808644417690'
+    rounding: up
+    exact: 45044217780850246618141/3041751595240000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/claims.json (the certificate
+      certificates/n204.cert, its header side)
+  - n: 330
+    printed: '18.701641583454'
+    rounding: up
+    exact: 6228469266390019356626107059221690699323001031190906760336949630787/333043986464837021702978535526266959184549684935518500000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n330.cert, its header side)
+  - n: 339
+    printed: '18.911307592083'
+    rounding: up
+    exact: 4727826898020554967746265555691/250000000000000000000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n339.cert, its header side)
+  - n: 364
+    printed: '19.583782190152'
+    rounding: up
+    exact: 19583782190151860342362508597077/1000000000000000000000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n364.cert, its header side)
+  - n: 370
+    printed: '19.767428349965'
+    rounding: up
+    exact: 6549046052965175741966931158177593291818431153284625290505670976537/331304909117169496147556853313049091171694961475568500000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n370.cert, its header side)
+  - n: 378
+    printed: '19.942505611659'
+    rounding: up
+    exact: 2492813201457298529160045434227/125000000000000000000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n378.cert, its header side)
+  - n: 379
+    printed: '19.953014213942'
+    rounding: up
+    exact: 6694016474183965274897289/335488984391480000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n379.cert, its header side)
+  - n: 382
+    printed: '19.987621153966'
+    rounding: up
+    exact: 9993810576982755438812785108659/500000000000000000000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n382.cert, its header side)
+  - n: 403
+    printed: '20.583782190152'
+    rounding: up
+    exact: 20583782190151860342362508597077/1000000000000000000000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n403.cert, its header side)
+  - n: 417
+    printed: '20.942505611684'
+    rounding: up
+    exact: 89066259708346813365553197/4252894155065000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n417.cert, its header side)
+  - n: 418
+    printed: '20.945240141353'
+    rounding: up
+    exact: 85842535782846744108875099/4098426907666000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n418.cert, its header side)
+  - n: 419
+    printed: '20.959713620588'
+    rounding: up
+    exact: 289045560390754551756704553689551233907/13790530043637607175123805000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n419.cert, its header side)
+  - n: 421
+    printed: '20.982817421775'
+    rounding: up
+    exact: 176302247454408900027489659/8402219964582000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n421.cert, its header side)
+  - n: 422
+    printed: '20.984021832955'
+    rounding: up
+    exact: 10341766570579309999734780366340518517071577288548173030137562499007625678858854880019581/492840059589432571364357149022525078865497206811572435844957616415295090500000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n422.cert, its header side)
+  - n: 444
+    printed: '21.583782190152'
+    rounding: up
+    exact: 21583782190151860342362508597077/1000000000000000000000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n444.cert, its header side)
+  - n: 452
+    printed: '21.778174593086'
+    rounding: up
+    exact: 108086192612607123141547291/4963051065213000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n452.cert, its header side)
+  - n: 458
+    printed: '21.942505611689'
+    rounding: up
+    exact: 264051335245823017552963881/12033782281690000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n458.cert, its header side)
+  - n: 459
+    printed: '21.943735551416'
+    rounding: up
+    exact: 412430838140282635914314183/18794923825706000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n459.cert, its header side)
+  - n: 460
+    printed: '21.957651945776'
+    rounding: up
+    exact: 2046720370676080820117727/93212169303460000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n460.cert, its header side)
+  - n: 461
+    printed: '21.972483922352'
+    rounding: up
+    exact: 1323328210132703101600577/60226609554440000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n461.cert, its header side)
+  - n: 462
+    printed: '21.980759715480'
+    rounding: up
+    exact: 520928252979505597149150837494839900531/23699283360650123339631948250000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n462.cert, its header side)
+  - n: 463
+    printed: '21.984021832955'
+    rounding: up
+    exact: 10834606630168742571099137515363043595937074495359745465982520115422920769358854880019581/492840059589432571364357149022525078865497206811572435844957616415295090500000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n463.cert, its header side)
+  - n: 501
+    printed: '22.933763683699'
+    rounding: up
+    exact: 2494959127750386934655123/108789780960540000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n501.cert, its header side)
+  - n: 503
+    printed: '22.957558542542'
+    rounding: up
+    exact: 224027907673173269556964279/9758350708680000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n503.cert, its header side)
+  - n: 505
+    printed: '22.972317735354'
+    rounding: up
+    exact: 404133287471780110138871/17592186044416000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n505.cert, its header side)
+  - n: 536
+    printed: '23.677669529701'
+    rounding: up
+    exact: 293465562119402071370969891/12394191149230000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n536.cert, its header side)
+  - n: 546
+    printed: '23.933763683699'
+    rounding: up
+    exact: 2603748908710926934655123/108789780960540000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n546.cert, its header side)
+  - n: 548
+    printed: '23.957558542543'
+    rounding: up
+    exact: 428025623349771159628256843/17865995092518000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n548.cert, its header side)
+  - n: 551
+    printed: '23.966898919633'
+    rounding: up
+    exact: 471924037674405233378517051/19690659156902000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n551.cert, its header side)
+  - n: 553
+    printed: '23.981588093282'
+    rounding: up
+    exact: 339131691989423990356116333/14141335872766000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n553.cert, its header side)
+  - n: 598
+    printed: '24.962916747309'
+    rounding: up
+    exact: 90133506986291922810852469/3610696133736400000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n598.cert, its header side)
+  - n: 600
+    printed: '24.981585347399'
+    rounding: up
+    exact: 923343484233465452689077834625887422912460738779262164373/36960964302036055004306135643020360550039365260000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n600.cert, its header side)
+  - n: 647
+    printed: '25.953248543199'
+    rounding: up
+    exact: 38961483562087660265573973/1501217988077200000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n647.cert, its header side)
+  - n: 650
+    printed: '25.982429027496'
+    rounding: up
+    exact: 271962867800328495683707597/10467184092470000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n650.cert, its header side)
+  - n: 651
+    printed: '25.983790120159'
+    rounding: up
+    exact: 3535528085222936140373781/136066681145180000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n651.cert, its header side)
+  - n: 700
+    printed: '26.972996848621'
+    rounding: up
+    exact: 15536991484352335971267839/576020216498375000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n700.cert, its header side)
+  - n: 701
+    printed: '26.975561031531'
+    rounding: up
+    exact: 129185483427123396501159823/4788982267176000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n701.cert, its header side)
+  - n: 702
+    printed: '26.977494114977'
+    rounding: up
+    exact: 23652225621054025486457629/876739163402250000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n702.cert, its header side)
+  - n: 703
+    printed: '26.987493360751'
+    rounding: up
+    exact: 505697986485927959751714019/18738234771422000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n703.cert, its header side)
+  - n: 749
+    printed: '27.925883089331'
+    rounding: up
+    exact: 1744270550712468686420605878518578470766501430592831160067/62460712348211708519448157123482117085188235500000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n749.cert, its header side)
+  - n: 753
+    printed: '27.937423518013'
+    rounding: up
+    exact: 525175277598861377005908761/18798271689594000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n753.cert, its header side)
+  - n: 754
+    printed: '27.937423518013'
+    rounding: up
+    exact: 525175277598861377005908761/18798271689594000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n754.cert, its header side)
+  - n: 756
+    printed: '27.984237490911'
+    rounding: up
+    exact: 362888334577293501103099389133004800075496734893868624411/12967597730513883777004979977305138837768753040000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n756.cert, its header side)
+  - n: 757
+    printed: '27.989936988207'
+    rounding: up
+    exact: 512227618969848927198386569/18300420582786000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n757.cert, its header side)
+  - n: 758
+    printed: '27.994980212536'
+    rounding: up
+    exact: 259632261511431358018073953/9274243437228000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n758.cert, its header side)
+  - n: 804
+    printed: '28.917335789888'
+    rounding: up
+    exact: 1572738633130395447358348171354085237/54387397392273270258867096000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n804.cert, its header side)
+  - n: 805
+    printed: '28.921843659464'
+    rounding: up
+    exact: 54432461074496350407436529/1882053637914800000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n805.cert, its header side)
+  - n: 806
+    printed: '28.921843662228'
+    rounding: up
+    exact: 762130767283467937771397/26351389495920000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n806.cert, its header side)
+  - n: 809
+    printed: '28.937423518015'
+    rounding: up
+    exact: 351819089471748661162237399/12157927234010000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n809.cert, its header side)
+  - n: 811
+    printed: '28.982472918533'
+    rounding: up
+    exact: 107758975241134040901371211/3718073869819000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n811.cert, its header side)
+  - n: 812
+    printed: '28.982472918533'
+    rounding: up
+    exact: 107758975241134040901371211/3718073869819000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n812.cert, its header side)
+  - n: 813
+    printed: '28.990394020145'
+    rounding: up
+    exact: 303265873100975804964121997/10460908978686000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n813.cert, its header side)
+  - n: 863
+    printed: '29.921843659464'
+    rounding: up
+    exact: 139992298896142313700194357/4678598701650000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n863.cert, its header side)
+  - n: 866
+    printed: '29.935764472087'
+    rounding: up
+    exact: 101186910468415505918011435959055612374597797525817991831726548554359/3380134506428478151978992983801345064284781519789929500000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n866.cert, its header side)
+  - n: 867
+    printed: '29.950265025802'
+    rounding: up
+    exact: 20306771437382023893053819539308205139670004533/678016418882704881637439558463986000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n867.cert, its header side)
+  - n: 868
+    printed: '29.982204111182'
+    rounding: up
+    exact: 583709724086177241184617279/19468539468334000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n868.cert, its header side)
+  - n: 869
+    printed: '29.982472918533'
+    rounding: up
+    exact: 111477049110953040901371211/3718073869819000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n869.cert, its header side)
+  - n: 870
+    printed: '29.985969207342'
+    rounding: up
+    exact: 117640429868274717247360541/3923182507620000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n870.cert, its header side)
+  - n: 871
+    printed: '29.989329079687'
+    rounding: up
+    exact: 2487583616602704456269044029423443795172383342721095643395864867048433035401/82948958611004864181200487028598087521416281974424880388796125720000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n871.cert, its header side)
+  - n: 922
+    printed: '30.899494936660'
+    rounding: up
+    exact: 86978191599829163317383253/2814874216492000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n922.cert, its header side)
+  - n: 925
+    printed: '30.935764472087'
+    rounding: up
+    exact: 104567044974843984069990428942856957438882579045607921331726548554359/3380134506428478151978992983801345064284781519789929500000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n925.cert, its header side)
+  - n: 926
+    printed: '30.949634321517'
+    rounding: up
+    exact: 18938313241520265129560438299/611907496055750000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n926.cert, its header side)
+  - n: 927
+    printed: '30.976993727283'
+    rounding: up
+    exact: 125411410934364362876979061/4048533955182000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n927.cert, its header side)
+  - n: 928
+    printed: '30.976993727283'
+    rounding: up
+    exact: 125411410934364362876979061/4048533955182000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n928.cert, its header side)
+  - n: 929
+    printed: '30.978848462737'
+    rounding: up
+    exact: 3424539331523550347333262499888131264386204514795276611211146140859382380581394394568875451/110544436009065673426823256992027336987823017668416176959848175087845900288000000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n929.cert, its header side)
+  - n: 930
+    printed: '30.982052182975'
+    rounding: up
+    exact: 136260506510174862459998939/4398046511104000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n930.cert, its header side)
+  - n: 931
+    printed: '30.989936243547'
+    rounding: up
+    exact: 299697621622335026816904441/9670804717604000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n931.cert, its header side)
+  - n: 987
+    printed: '31.949634321517'
+    rounding: up
+    exact: 19550220737576015129560438299/611907496055750000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n987.cert, its header side)
+  - n: 989
+    printed: '31.976993727283'
+    rounding: up
+    exact: 129459944889546362876979061/4048533955182000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n989.cert, its header side)
+  - n: 990
+    printed: '31.978848462737'
+    rounding: up
+    exact: 3535083767532616020760085756880158601374027532463692788170994315947228280869394394568875451/110544436009065673426823256992027336987823017668416176959848175087845900288000000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n990.cert, its header side)
+  - n: 991
+    printed: '31.982052182975'
+    rounding: up
+    exact: 140658553021278862459998939/4398046511104000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n991.cert, its header side)
+  - n: 992
+    printed: '31.985130163599'
+    rounding: up
+    exact: 7595195082286674442932672012891587732046580383038386429042150874809707029231355302491737073/237460189889441156475298065086100814173452790698926470572542672960744222786500000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n992.cert, its header side)
+  - n: 993
+    printed: '31.985130163599'
+    rounding: up
+    exact: 7595195082286674442932672012891587732046580383038386429042150874809707029231355302491737073/237460189889441156475298065086100814173452790698926470572542672960744222786500000000000000
+    exact_from: packing/resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n993.cert, its header side)
+  note: 'Issue-table prints with each certificate''s exact header side from the couzo-issue670-2026-10-17
+    packet: its in-corpus claims record at 204 (T-226) and its beyond-horizon record at the 72 other counts.'
+- report: '#672'
+  issue: 672
+  holders: Francisco Couzo
+  bead: think-2vjc
+  claims:
+  - n: 227
+    printed: '15.563625652343'
+    rounding: up
+    exact: 71427829379429597600111901507/4589408083628500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/claims.json (the certificate
+      certificates/n227.cert, its header side)
+    refines:
+      packing_of: Joost de Winter
+      entry: T-196
+      source: '#672: the author''s comment of 17 October names de Winter''s #668 packings as the start
+        at 227 and 229 (issuecomment-6242081759)'
+    measured:
+      against: T-196
+      finding: no square moves beyond 0.1 (largest 0.080) under an optimal assignment; 226 of 227 move
+        beyond 1e-6 and 58 turn
+      source: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+  - n: 229
+    printed: '15.650174740273'
+    rounding: up
+    exact: 231170315041711399213831561/14771101209934000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/claims.json (the certificate
+      certificates/n229.cert, its header side)
+    refines:
+      entry: T-196
+      packing_of: Joost de Winter
+      source: '#672: the author''s comment of 17 October names de Winter''s #668 packings as the start
+        at 227 and 229 (issuecomment-6242081759)'
+  - n: 330
+    printed: '18.692698795114'
+    rounding: up
+    exact: 6748764126299635103858366087797796647482602981114382402710783058757/361037440354186299129428478610374403541862991294284750000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n330.cert, its header side)
+  - n: 461
+    printed: '21.971645445094'
+    rounding: up
+    exact: 65078716698804815480861629969214363552632515770783292814881823799/2961940964386800918512692530927496583231120196837000000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n461.cert, its header side)
+  - n: 507
+    printed: '22.973703609857'
+    rounding: up
+    exact: 8526738512939185417064796374951295387031054780493936200064141545665758236001595105954382717/371152107546167715203195530915493345113629845190305272039722696519526931583500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n507.cert, its header side)
+  - n: 652
+    printed: '25.994469543497'
+    rounding: up
+    exact: 10713831655179218713664869081116735368051274978530315731/412158118374050000000000004121581183740500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n652.cert, its header side)
+  - n: 653
+    printed: '25.994469543497'
+    rounding: up
+    exact: 10713831655179218713664869081116735368051274978530315731/412158118374050000000000004121581183740500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n653.cert, its header side)
+  - n: 704
+    printed: '26.994469543497'
+    rounding: up
+    exact: 11125989773553268713664869085238316551791774978530315731/412158118374050000000000004121581183740500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n704.cert, its header side)
+  - n: 749
+    printed: '27.924010906540'
+    rounding: up
+    exact: 13167606432921746998135840287/471551399868500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n749.cert, its header side)
+  - n: 750
+    printed: '27.927909095101'
+    rounding: up
+    exact: 1923783510361799960254789/68883907628420000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n750.cert, its header side)
+  - n: 753
+    printed: '27.936842811648'
+    rounding: up
+    exact: 3281868946575202742023586262270252927465969887/117474582532528620240471045223126000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n753.cert, its header side)
+  - n: 755
+    printed: '27.951635349895'
+    rounding: up
+    exact: 241491836236895852204486537/8639631750126000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n755.cert, its header side)
+  - n: 756
+    printed: '27.983489205831'
+    rounding: up
+    exact: 246145374140438349281117993/8796093022208000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n756.cert, its header side)
+  - n: 757
+    printed: '27.989936967966'
+    rounding: up
+    exact: 3079801049630369768609999/110032439628400000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n757.cert, its header side)
+  - n: 758
+    printed: '27.994973756311'
+    rounding: up
+    exact: 12437340329292243069852817/444270476463250000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n758.cert, its header side)
+  - n: 759
+    printed: '27.995946347749'
+    rounding: up
+    exact: 211525976842740970383821487/7555593021050000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n759.cert, its header side)
+  - n: 804
+    printed: '28.915928305844'
+    rounding: up
+    exact: 36567476623750802863008791/1264613614924500000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n804.cert, its header side)
+  - n: 805
+    printed: '28.916476090926'
+    rounding: up
+    exact: 53543796681001692125802637/1851670878313000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n805.cert, its header side)
+  - n: 811
+    printed: '28.982462261975'
+    rounding: up
+    exact: 498233759153054042888527107/17190870625466000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n811.cert, its header side)
+  - n: 812
+    printed: '28.982462261975'
+    rounding: up
+    exact: 498233759153054042888527107/17190870625466000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n812.cert, its header side)
+  - n: 813
+    printed: '28.989935237439'
+    rounding: up
+    exact: 62014253298326375088350487/2139164947779500000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n813.cert, its header side)
+  - n: 814
+    printed: '28.995946347758'
+    rounding: up
+    exact: 236853363854447684864678031/8168499176188000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n814.cert, its header side)
+  - n: 815
+    printed: '28.995946384109'
+    rounding: up
+    exact: 579096232447126124605213717/19971627232850000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n815.cert, its header side)
+  - n: 816
+    printed: '28.998352177961'
+    rounding: up
+    exact: 108178366324044447865857563/3730500466377000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n816.cert, its header side)
+  - n: 817
+    printed: '28.998352177961'
+    rounding: up
+    exact: 108178366324044447865857563/3730500466377000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n817.cert, its header side)
+  - n: 864
+    printed: '29.932742598598'
+    rounding: up
+    exact: 64818648238757153171820179/2165476418515500000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n864.cert, its header side)
+  - n: 865
+    printed: '29.932742598598'
+    rounding: up
+    exact: 64818648238757153171820179/2165476418515500000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n865.cert, its header side)
+  - n: 868
+    printed: '29.982119729132'
+    rounding: up
+    exact: 128855961948399558201712757/4297760235518000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n868.cert, its header side)
+  - n: 869
+    printed: '29.982462261984'
+    rounding: up
+    exact: 118233590823104490165837077/3943424985913200000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n869.cert, its header side)
+  - n: 871
+    printed: '29.986798495028'
+    rounding: up
+    exact: 43798576465715337981181619/1460595284054000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n871.cert, its header side)
+  - n: 872
+    printed: '29.995946384118'
+    rounding: up
+    exact: 134342447816052863761059529/4478686756394000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n872.cert, its header side)
+  - n: 873
+    printed: '29.998242686046'
+    rounding: up
+    exact: 6665094484746642911653749/222182830991200000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n873.cert, its header side)
+  - n: 874
+    printed: '29.998242686046'
+    rounding: up
+    exact: 6665094484746642911653749/222182830991200000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n874.cert, its header side)
+  - n: 923
+    printed: '30.932644308698'
+    rounding: up
+    exact: 272086416762174290323739703/8796093022208000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n923.cert, its header side)
+  - n: 924
+    printed: '30.932742598607'
+    rounding: up
+    exact: 4178044910119682976223697/135068686418640000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n924.cert, its header side)
+  - n: 929
+    printed: '30.978235012084'
+    rounding: up
+    exact: 7810483075058933354989897/252128085154375000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n929.cert, its header side)
+  - n: 930
+    printed: '30.982010362324'
+    rounding: up
+    exact: 37944142481455719427169607/1224715311812000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n930.cert, its header side)
+  - n: 932
+    printed: '30.993904118222'
+    rounding: up
+    exact: 16449934164567891867599571/530747404451600000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n932.cert, its header side)
+  - n: 933
+    printed: '30.995336946282'
+    rounding: up
+    exact: 75537268257912999556280611152759623471394522796069124607986174805842801776877920781287882693/2437052656947357018270396672176932134395043833083616478064055649214736503796500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n933.cert, its header side)
+  - n: 934
+    printed: '30.995336946282'
+    rounding: up
+    exact: 75537268257912999556280611152759623471394522796069124607986174805842801776877920781287882693/2437052656947357018270396672176932134395043833083616478064055649214736503796500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n934.cert, its header side)
+  - n: 935
+    printed: '30.995336946282'
+    rounding: up
+    exact: 75537268257912999556280611152759623471394522796069124607986174805842801776877920781287882693/2437052656947357018270396672176932134395043833083616478064055649214736503796500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n935.cert, its header side)
+  - n: 990
+    printed: '31.978235012084'
+    rounding: up
+    exact: 8062611160213308354989897/252128085154375000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n990.cert, its header side)
+  - n: 991
+    printed: '31.982010362324'
+    rounding: up
+    exact: 39168857793267719427169607/1224715311812000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n991.cert, its header side)
+  - n: 994
+    printed: '31.995336946282'
+    rounding: up
+    exact: 77974320914860356574551007824936555605789566629152741086050230455057538280674420781287882693/2437052656947357018270396672176932134395043833083616478064055649214736503796500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n994.cert, its header side)
+  - n: 995
+    printed: '31.995336946282'
+    rounding: up
+    exact: 77974320914860356574551007824936555605789566629152741086050230455057538280674420781287882693/2437052656947357018270396672176932134395043833083616478064055649214736503796500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n995.cert, its header side)
+  - n: 996
+    printed: '31.995336946282'
+    rounding: up
+    exact: 77974320914860356574551007824936555605789566629152741086050230455057538280674420781287882693/2437052656947357018270396672176932134395043833083616478064055649214736503796500000000000000
+    exact_from: packing/resources/web/couzo-issue672-2026-10-17/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/n996.cert, its header side)
+  note: 'Issue-table prints with each certificate''s exact header side from the couzo-issue672-2026-10-17
+    packet: its in-corpus claims record at 227 and 229 (T-227) and its beyond-horizon record at the 44
+    other counts.'
+- report: '#674'
+  issue: 674
+  holders: Evan Daniel
+  bead: think-5ij2
+  claims:
+  - n: 229
+    printed: '15.650163254859'
+    rounding: up
+    exact: 7825081627429265081627421439843/500000000000000000000000000000
+    exact_from: packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
+  note: Triage comparison of issue-table upper bounds against frozen current records. The source inventory,
+    exact-header decisions, classical envelope and other unimported publications remain on the owner bead;
+    a ledger verdict alone is not registration or feasibility verification. Stage 3 retains the exact
+    certificate side and its source path; chronological registration is separate from geometric replay
+    and confirmation. Walked here at the four backlog issues' counts only.
+- report: '#674 update'
+  issue: 674
+  comment: 6244298663
+  holders: Evan Daniel
+  bead: think-5ij2
+  claims:
+  - n: 229
+    printed: '15.650161513896'
+    rounding: up
+    exact: 7825080756947776580756939951343/500000000000000000000000000000
+    exact_from: packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
+  note: Author asks this smaller certificate to replace the opening value. Both reports remain in chronological
+    comparison; final request state follows the update. Stage 3 retains the exact certificate side and
+    its source path; chronological registration is separate from geometric replay and confirmation. Walked
+    here at the four backlog issues' counts only.
+- report: '#675'
+  issue: 675
+  holders: Francisco Couzo
+  bead: think-pvav
+  claims:
+  - n: 204
+    printed: '14.808644367227'
+    rounding: up
+    exact: 101859759444979981360793459/6878398651426000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/claims.json (the certificate
+      certificates/best/n204.cert, its header side)
+  - n: 419
+    printed: '20.959713421191'
+    rounding: up
+    exact: 195247210302704931853437701/9315356864818000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n419.cert, its header side)
+  - n: 421
+    printed: '20.982817268367'
+    rounding: up
+    exact: 19744472745979803489822007/940982923954000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n421.cert, its header side)
+  - n: 422
+    printed: '20.983607310148'
+    rounding: up
+    exact: 2140140392632648552419019680481493307050883533128269051/101991061927550000000000001019910619275500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n422.cert, its header side)
+  - n: 458
+    printed: '21.942423483273'
+    rounding: up
+    exact: 82958098954939177381705547/3780717249313000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n458.cert, its header side)
+  - n: 459
+    printed: '21.942423483273'
+    rounding: up
+    exact: 82958098954939177381705547/3780717249313000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n459.cert, its header side)
+  - n: 460
+    printed: '21.957558542548'
+    rounding: up
+    exact: 55164548430532052222284399/2512326146080400000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n460.cert, its header side)
+  - n: 461
+    printed: '21.971616092121'
+    rounding: up
+    exact: 215549206740970738858433329/9810348307436000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n461.cert, its header side)
+  - n: 462
+    printed: '21.980489088007'
+    rounding: up
+    exact: 35207439096481858883937934481/1601758675865500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n462.cert, its header side)
+  - n: 463
+    printed: '21.983605908182'
+    rounding: up
+    exact: 14277043305401627602837567/649440467821000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n463.cert, its header side)
+  - n: 464
+    printed: '21.988035588879'
+    rounding: up
+    exact: 334495706227034283082758149/15212623468566000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n464.cert, its header side)
+  - n: 502
+    printed: '22.942402035201'
+    rounding: up
+    exact: 10271453783886044413688694540337476645299496430767588371/447706119356050000000000004477061193560500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n502.cert, its header side)
+  - n: 545
+    printed: '23.889722420681'
+    rounding: up
+    exact: 854067499089648591554928451161842961408552289224156849999130261979/35750415348079787590977950357504153480797875909779500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n545.cert, its header side)
+  - n: 546
+    printed: '23.889722420681'
+    rounding: up
+    exact: 854067499089648591554928451161842961408552289224156849999130261979/35750415348079787590977950357504153480797875909779500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n546.cert, its header side)
+  - n: 547
+    printed: '23.906371163646'
+    rounding: up
+    exact: 115657933190781579654714850429/4837954384589500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n547.cert, its header side)
+  - n: 548
+    printed: '23.957455469976'
+    rounding: up
+    exact: 236451044697615581422065973/9869622631416000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n548.cert, its header side)
+  - n: 549
+    printed: '23.957455469976'
+    rounding: up
+    exact: 236451044697615581422065973/9869622631416000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n549.cert, its header side)
+  - n: 554
+    printed: '23.993580713561'
+    rounding: up
+    exact: 413720192835406785697998941/17242953345500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n554.cert, its header side)
+  - n: 592
+    printed: '24.889722420681'
+    rounding: up
+    exact: 889817914437728379145906401519347114889350165133936349999130261979/35750415348079787590977950357504153480797875909779500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n592.cert, its header side)
+  - n: 593
+    printed: '24.889722420681'
+    rounding: up
+    exact: 889817914437728379145906401519347114889350165133936349999130261979/35750415348079787590977950357504153480797875909779500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n593.cert, its header side)
+  - n: 598
+    printed: '24.962908839930'
+    rounding: up
+    exact: 548940170652304993804409/21990232555520000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n598.cert, its header side)
+  - n: 602
+    printed: '24.993580715986'
+    rounding: up
+    exact: 6998500089143810008911580881865128488185841/280011902602960000002800119026029600000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n602.cert, its header side)
+  - n: 603
+    printed: '24.994263342387'
+    rounding: up
+    exact: 219851865381198055772358779/8796093022208000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n603.cert, its header side)
+  - n: 641
+    printed: '25.889564291814'
+    rounding: up
+    exact: 17362209596313937283932514138429515009335973786093208769313755274538085983654997329855676683/670625793490233114544179728747753793685152308926153849866822969715355276716500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n641.cert, its header side)
+  - n: 642
+    printed: '25.889722420681'
+    rounding: up
+    exact: 925568329785808166736884351876851268370148041043715849999130261979/35750415348079787590977950357504153480797875909779500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n642.cert, its header side)
+  - n: 650
+    printed: '25.982428402604'
+    rounding: up
+    exact: 478317157931686907902625293/18409255305934000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n650.cert, its header side)
+  - n: 652
+    printed: '25.994256215430'
+    rounding: up
+    exact: 6784137045855523151042263/260986003586000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n652.cert, its header side)
+  - n: 654
+    printed: '25.995905846673'
+    rounding: up
+    exact: 11433120301194393315650073/439804651110400000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n654.cert, its header side)
+  - n: 693
+    printed: '26.889722420681'
+    rounding: up
+    exact: 961318745133887954327862302234355421850945916953495349999130261979/35750415348079787590977950357504153480797875909779500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n693.cert, its header side)
+  - n: 700
+    printed: '26.972954520906'
+    rounding: up
+    exact: 125188720386448547452026593/4641268359735000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n700.cert, its header side)
+  - n: 701
+    printed: '26.975560060840'
+    rounding: up
+    exact: 118013347663397638522918321/4374824744963000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n701.cert, its header side)
+  - n: 705
+    printed: '26.995905846673'
+    rounding: up
+    exact: 11872924952304793315650073/439804651110400000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n705.cert, its header side)
+  - n: 706
+    printed: '26.998639495676'
+    rounding: up
+    exact: 509358036126445491973033849/18866063092106000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n706.cert, its header side)
+  - n: 753
+    printed: '27.935538484638'
+    rounding: up
+    exact: 4932889048438156307915009/176581133424400000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n753.cert, its header side)
+  - n: 755
+    printed: '27.951593396552'
+    rounding: up
+    exact: 269144327293496515383301561/9628943991676000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n755.cert, its header side)
+  - n: 756
+    printed: '27.982602664098'
+    rounding: up
+    exact: 156372064965635783876231123/5588188734362000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n756.cert, its header side)
+  - n: 758
+    printed: '27.993798579000'
+    rounding: up
+    exact: 84210616360195291938304712784230719530822279501296809650532690001591/3008188264359686175261079580081882643596861752610795500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n758.cert, its header side)
+  - n: 759
+    printed: '27.993798579000'
+    rounding: up
+    exact: 84210616360195291938304712784230719530822279501296809650532690001591/3008188264359686175261079580081882643596861752610795500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n759.cert, its header side)
+  - n: 760
+    printed: '27.995946706541'
+    rounding: up
+    exact: 127675473644557114975120027/4560498524407000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n760.cert, its header side)
+  - n: 804
+    printed: '28.911312576594'
+    rounding: up
+    exact: 16952926398574984483227075993452933469868597801824294998120485853362663899085303202217601481/586376919195984432022367609795509705755860822584085716823808994995895728740500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n804.cert, its header side)
+  - n: 805
+    printed: '28.911312576594'
+    rounding: up
+    exact: 16952926398574984483227075993452933469868597801824294998120485853362663899085303202217601481/586376919195984432022367609795509705755860822584085716823808994995895728740500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n805.cert, its header side)
+  - n: 806
+    printed: '28.921462680479'
+    rounding: up
+    exact: 9947021632772418320443/343932177382109375000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n806.cert, its header side)
+  - n: 807
+    printed: '28.924702911083'
+    rounding: up
+    exact: 6155115135387874658142887613182558110516931377009391867353199379651/212797868808170240655067552127978688081702406550675500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n807.cert, its header side)
+  - n: 809
+    printed: '28.937423314202'
+    rounding: up
+    exact: 1272681336473627008713503/43980465111040000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n809.cert, its header side)
+  - n: 811
+    printed: '28.981360068210'
+    rounding: up
+    exact: 5647677113503250437060871/194872742349260000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n811.cert, its header side)
+  - n: 812
+    printed: '28.981360068210'
+    rounding: up
+    exact: 5647677113503250437060871/194872742349260000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n812.cert, its header side)
+  - n: 813
+    printed: '28.989934397793'
+    rounding: up
+    exact: 127499079835344101033324117/4398046511104000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n813.cert, its header side)
+  - n: 814
+    printed: '28.993798579000'
+    rounding: up
+    exact: 87218804624554978113565792364312602174419141253907605150532690001591/3008188264359686175261079580081882643596861752610795500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n814.cert, its header side)
+  - n: 816
+    printed: '28.998219025338'
+    rounding: up
+    exact: 69108627316428725424842581/2383202473781000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n816.cert, its header side)
+  - n: 817
+    printed: '28.998234675372'
+    rounding: up
+    exact: 529515402065310255138707629/18260263357170000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n817.cert, its header side)
+  - n: 863
+    printed: '29.921462677966'
+    rounding: up
+    exact: 16215789574449638444912943/541945082998600000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n863.cert, its header side)
+  - n: 864
+    printed: '29.924702911083'
+    rounding: up
+    exact: 6367913004196044898797955165310536798598633783560067367353199379651/212797868808170240655067552127978688081702406550675500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n864.cert, its header side)
+  - n: 865
+    printed: '29.932623425046'
+    rounding: up
+    exact: 40939252732937571539246793/1367713486105000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n865.cert, its header side)
+  - n: 867
+    printed: '29.950105216770'
+    rounding: up
+    exact: 263443911511619647818489157/8796093022208000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n867.cert, its header side)
+  - n: 868
+    printed: '29.981359990606'
+    rounding: up
+    exact: 266839004794696938841330263/8900163464176000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n868.cert, its header side)
+  - n: 869
+    printed: '29.981360065447'
+    rounding: up
+    exact: 74609124086058421976953/2488516996000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n869.cert, its header side)
+  - n: 870
+    printed: '29.985524292952'
+    rounding: up
+    exact: 263755461000479959367978017/8796093022208000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n870.cert, its header side)
+  - n: 872
+    printed: '29.995946381399'
+    rounding: up
+    exact: 296148110642425275172916591/9872937725548000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n872.cert, its header side)
+  - n: 873
+    printed: '29.998171180951'
+    rounding: up
+    exact: 514026055922225890809482151/17135246439578000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n873.cert, its header side)
+  - n: 874
+    printed: '29.998171180951'
+    rounding: up
+    exact: 514026055922225890809482151/17135246439578000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n874.cert, its header side)
+  - n: 919
+    printed: '30.849232404954'
+    rounding: up
+    exact: 4332648751682942202834101/140445917577750000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n919.cert, its header side)
+  - n: 923
+    printed: '30.924702911083'
+    rounding: up
+    exact: 6580710873004215139453022717438515486680336190110742867353199379651/212797868808170240655067552127978688081702406550675500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n923.cert, its header side)
+  - n: 924
+    printed: '30.932577553094'
+    rounding: up
+    exact: 506066872866280706552682397/16360320183394000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n924.cert, its header side)
+  - n: 927
+    printed: '30.976949083864'
+    rounding: up
+    exact: 36534329362678276419126769923822461710875939/1179403732232281068860973570620780000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n927.cert, its header side)
+  - n: 928
+    printed: '30.976949083864'
+    rounding: up
+    exact: 36534329362678276419126769923822461710875939/1179403732232281068860973570620780000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n928.cert, its header side)
+  - n: 930
+    printed: '30.981543197185'
+    rounding: up
+    exact: 16852205581486059350079944853/543943388301500000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n930.cert, its header side)
+  - n: 931
+    printed: '30.989934734721'
+    rounding: up
+    exact: 4401087808502412355794737/142016685294000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n931.cert, its header side)
+  - n: 932
+    printed: '30.993891653207'
+    rounding: up
+    exact: 2284166491158076917932751/73697311609520000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n932.cert, its header side)
+  - n: 933
+    printed: '30.995293256848'
+    rounding: up
+    exact: 51030873933151884466734749/1646407198353500000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n933.cert, its header side)
+  - n: 989
+    printed: '31.976125363479'
+    rounding: up
+    exact: 203878919171040502945945397/6375973225446000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n989.cert, its header side)
+  - n: 990
+    printed: '31.978044872634'
+    rounding: up
+    exact: 210002504203134435420285213/6567083917718000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n990.cert, its header side)
+  - n: 991
+    printed: '31.981535631408'
+    rounding: up
+    exact: 150142953295413448277122559/4694676172709000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n991.cert, its header side)
+  - n: 992
+    printed: '31.984841090107'
+    rounding: up
+    exact: 401824400137812261436356993/12562963780430000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n993.cert, its header side)
+  - n: 993
+    printed: '31.984841090107'
+    rounding: up
+    exact: 401824400137812261436356993/12562963780430000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n993.cert, its header side)
+  - n: 994
+    printed: '31.993865896560'
+    rounding: up
+    exact: 426209302656693887708322083/13321594334198000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n994.cert, its header side)
+  - n: 995
+    printed: '31.994784549711'
+    rounding: up
+    exact: 48316274805450161450921103/1510129712871800000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n996.cert, its header side)
+  - n: 996
+    printed: '31.994784549711'
+    rounding: up
+    exact: 48316274805450161450921103/1510129712871800000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n996.cert, its header side)
+  - n: 997
+    printed: '31.998300669675'
+    rounding: up
+    exact: 139719450020154352985329831/4366464690188000000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n997.cert, its header side)
+  - n: 998
+    printed: '31.998301912120'
+    rounding: up
+    exact: 12066429174008439333251621/377095922375750000000000
+    exact_from: packing/resources/web/couzo-issue675-2026-10-18/acquisition/beyond-horizon-rows.json (the
+      certificate certificates/best/n998.cert, its header side)
+  note: 'Issue-table prints with each certificate''s exact header side from the couzo-issue675-2026-10-18
+    packet: its in-corpus claims record at 204 (T-228) and its beyond-horizon record at the 78 other counts,
+    where 992 and 995 read the 993 and 996 certificates less one square.'
+- report: '#678'
+  issue: 678
+  holders: Francisco Couzo
+  bead: think-xu4d
+  claims:
+  - n: 204
+    printed: '14.808642841982'
+    rounding: up
+    exact: 141654921219558922887849/9565692327860000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert
+  - n: 330
+    printed: '18.692697855726'
+    rounding: up
+    exact: 113221739722648438210032020640199355331561848333508472147968359837/6057003681144415878549723310562973222604706398543500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n330.cert
+  - n: 418
+    printed: '20.942828529884'
+    rounding: up
+    exact: 13813114520996435515348391/659562986025800000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n418.cert
+  - n: 421
+    printed: '20.981525640927'
+    rounding: up
+    exact: 9454944225312236312351/450631874303232000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n421.cert
+  - n: 422
+    printed: '20.983607201006'
+    rounding: up
+    exact: 1455846724442536653097027/69380193333620000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n422.cert
+  - n: 458
+    printed: '21.903778442820'
+    rounding: up
+    exact: 103271142430408315808123966273/4714763834011500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 459
+    printed: '21.942365250364'
+    rounding: up
+    exact: 288953132032662784399822541/13168732209846000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 461
+    printed: '21.971318847922'
+    rounding: up
+    exact: 387404913591862772612304831/17632301286662000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 462
+    printed: '21.974888792980'
+    rounding: up
+    exact: 6773935020274494888788160981941387073272792360721409179670848147887/308257988656512000559144353082579886565120005591443500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n462.cert
+  - n: 463
+    printed: '21.983603993953'
+    rounding: up
+    exact: 53187317556573267909093233/2419408463289500000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 464
+    printed: '21.987753655547'
+    rounding: up
+    exact: 47104680556102362366188977/2142314367080400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n464.cert
+  - n: 501
+    printed: '22.903778442820'
+    rounding: up
+    exact: 107985906264419815808123966273/4714763834011500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 502
+    printed: '22.942219237446'
+    rounding: up
+    exact: 73375074239719933215451563617/3198255298683500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 505
+    printed: '22.971592368271'
+    rounding: up
+    exact: 390014776214344036642092409/16978134121562000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 507
+    printed: '22.973697163680'
+    rounding: up
+    exact: 371501636248864330898312771/16170737935738000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n507.cert
+  - n: 545
+    printed: '23.889010439304'
+    rounding: up
+    exact: 69133786818820995616987673399/2893957746574500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 546
+    printed: '23.889010439304'
+    rounding: up
+    exact: 69133786818820995616987673399/2893957746574500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 548
+    printed: '23.956345132949'
+    rounding: up
+    exact: 114614263684737829966954527/4784296730101000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 549
+    printed: '23.956345132949'
+    rounding: up
+    exact: 114614263684737829966954527/4784296730101000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 553
+    printed: '23.980727660940'
+    rounding: up
+    exact: 330867999963168070753914221/13797246048630000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 554
+    printed: '23.993524047733'
+    rounding: up
+    exact: 29957208392643458654477273/1248553915341750000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 555
+    printed: '23.993580713561'
+    rounding: up
+    exact: 59969683811616225277280141453/2499405342101500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n555.cert
+  - n: 592
+    printed: '24.888988759404'
+    rounding: up
+    exact: 62018407569647026606549901/2491801019686500000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 593
+    printed: '24.888988761769'
+    rounding: up
+    exact: 729473716291826462201657/29309094205240000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 598
+    printed: '24.961502766154'
+    rounding: up
+    exact: 864076787732322991281275702394604108327695296435857391/34616376899550000000000000346163768995500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 600
+    printed: '24.980727660940'
+    rounding: up
+    exact: 344665246011798070753914221/13797246048630000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 602
+    printed: '24.993580713561'
+    rounding: up
+    exact: 62469089153717725277280141453/2499405342101500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 641
+    printed: '25.881306220594'
+    rounding: up
+    exact: 211634000271625690136501/8177098886270000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n642.cert
+    note: The issue links n642.cert and deletes 1 square; the exact side is that certificate's header
+      side, decided for the 641-square packing by devtools.couzo_678_replay.
+  - n: 642
+    printed: '25.881306220594'
+    rounding: up
+    exact: 211634000271625690136501/8177098886270000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n642.cert
+  - n: 650
+    printed: '25.982275449119'
+    rounding: up
+    exact: 2280457272851981914225568100133372934628063337158435778851/87769728918387538506346452289183875385054687550000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n650.cert
+  - n: 652
+    printed: '25.994256214773'
+    rounding: up
+    exact: 85276484423977395894907527/3280589516368400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 653
+    printed: '25.994414202392'
+    rounding: up
+    exact: 11432464269102226596178819/439804651110400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 654
+    printed: '25.995888235804'
+    rounding: up
+    exact: 37190567371787759934687289/1430632684463000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 693
+    printed: '26.881306218365'
+    rounding: up
+    exact: 25643542933732395884371741/953954496311400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n693.cert
+  - n: 700
+    printed: '26.972679052192'
+    rounding: up
+    exact: 88178769692360709581284193/3269188408082800000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 701
+    printed: '26.975549413717'
+    rounding: up
+    exact: 45227148295358750937455487195191517129617901047118246817/1676597855403158989706327058554031589896895610800000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n701.cert
+  - n: 703
+    printed: '26.987459573204'
+    rounding: up
+    exact: 437011695505241818556083163/16193139421658000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n703.cert
+  - n: 704
+    printed: '26.994256369878'
+    rounding: up
+    exact: 19314801785150565220404030516166606494258682818400213266350370122441/715515238519535387040157057155152385195353870401570500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n704.cert
+  - n: 705
+    printed: '26.994256369878'
+    rounding: up
+    exact: 19314801785150565220404030516166606494258682818400213266350370122441/715515238519535387040157057155152385195353870401570500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 706
+    printed: '26.998542133963'
+    rounding: up
+    exact: 480169432109887384418765839/17785013343586000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n706.cert
+  - n: 749
+    printed: '27.911194713730'
+    rounding: up
+    exact: 381054512896696402122993103/13652389903226000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 753
+    printed: '27.932449886404'
+    rounding: up
+    exact: 421440969626533353106895129/15087862730998000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n753.cert
+  - n: 754
+    printed: '27.937423317053'
+    rounding: up
+    exact: 4316336754917293658081177/154500173689340000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n754.cert
+  - n: 755
+    printed: '27.951504031492'
+    rounding: up
+    exact: 3933597709824004547166323/140729375614000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n755.cert
+  - n: 760
+    printed: '27.995022162160'
+    rounding: up
+    exact: 408551784921914958055273607/14593729647914000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n760.cert
+  - n: 804
+    printed: '28.909246527138'
+    rounding: up
+    exact: 63572105413660373082158047/2199023255552000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 805
+    printed: '28.909665866810'
+    rounding: up
+    exact: 93831992673017586296472033/3245696200894000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 806
+    printed: '28.919759255285'
+    rounding: up
+    exact: 285582814168308707807545489/9875006622544000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 815
+    printed: '28.995022162160'
+    rounding: up
+    exact: 423145514569828958055273607/14593729647914000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 863
+    printed: '29.916419307447'
+    rounding: up
+    exact: 1809921773859061641086563003892727007491319546955850769433/60499278180946296693698842389219105854172288800000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 865
+    printed: '29.932449886402'
+    rounding: up
+    exact: 53303799351630122996258149/1780803093429600000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 867
+    printed: '29.949688481977'
+    rounding: up
+    exact: 5366107054571286936341061/179170713505100000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 868
+    printed: '29.977390686090'
+    rounding: up
+    exact: 30247929636250191793737254293704089479425184258098756259148135079/1009024766464609415396446688288085879705867359570750000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 870
+    printed: '29.985424855417'
+    rounding: up
+    exact: 569844129880617840092664377/19004037215690000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 872
+    printed: '29.995022162160'
+    rounding: up
+    exact: 437739244217742958055273607/14593729647914000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 873
+    printed: '29.996375057644'
+    rounding: up
+    exact: 7994231915393978258329036847/266506599548500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 874
+    printed: '29.996375057644'
+    rounding: up
+    exact: 7994231915393978258329036847/266506599548500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n874.cert
+  - n: 919
+    printed: '30.844931419278'
+    rounding: up
+    exact: 864661025727630835135511065428595720536154663263906724077/28032515747051716344709415879606303792312035250000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 924
+    printed: '30.932449886402'
+    rounding: up
+    exact: 55084602445059722996258149/1780803093429600000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 926
+    printed: '30.945612117331'
+    rounding: up
+    exact: 13632288045967101442390912029221694158771714423909119017092957760307/440524103846455947589615354405241038464559475896153500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 927
+    printed: '30.975475685281'
+    rounding: up
+    exact: 5359120778692586109044077/173011734610400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 928
+    printed: '30.975475685281'
+    rounding: up
+    exact: 5359120778692586109044077/173011734610400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 930
+    printed: '30.981535303483'
+    rounding: up
+    exact: 1736814282936541035718218174281693331700158943/56059658306904912963727545840450000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n930.cert
+  - n: 933
+    printed: '30.994238714880'
+    rounding: up
+    exact: 2582001843628252193177508571086959793551938625910812411/83305864273050000000000000833058642730500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n933.cert
+  - n: 934
+    printed: '30.995302140806'
+    rounding: up
+    exact: 477270092108137375032834445242897935059/15398142916626460185708337200000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n934.cert
+  - n: 987
+    printed: '31.944662519483'
+    rounding: up
+    exact: 26994297027873650953999340393/845033094696500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 989
+    printed: '31.975475685281'
+    rounding: up
+    exact: 5532132513302986109044077/173011734610400000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 990
+    printed: '31.977918827720'
+    rounding: up
+    exact: 26483250524894255077476223/828173048645600000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n990.cert
+  - n: 991
+    printed: '31.981485095638'
+    rounding: up
+    exact: 21764275997591341977925564563748088250864091082220368664289053577/680527371774864816966350006805273717748648169663500000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n991.cert
+  - n: 992
+    printed: '31.984796372085'
+    rounding: up
+    exact: 509869336469208928345926277/15940990542438000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n992.cert
+  - n: 994
+    printed: '31.993645614627'
+    rounding: up
+    exact: 568303250996569540247122001/17763003874018000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
+  - n: 998
+    printed: '31.998301106112'
+    rounding: up
+    exact: 483967895313445843095602251/15124799710726000000000000
+    exact_from: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n998.cert
+  note: 'Each exact side is the linked certificate''s header, retained in the couzo-issue678-2026-10-18
+    packet and decided over Q with every control refused (receipts/filtered-exact-replay.json). A ledger
+    verdict is report order only: it registers nothing, and the claims stay unregistered pending Stage
+    3, an independent mathematical review and the all-pairs replay.'
+- report: '#686'
+  issue: 686
+  holders: Darius Muglich
+  bead: think-9vjn
+  claims:
+  - n: 330
+    printed: '18.692672444467133'
+    rounding: up
+  - n: 339
+    printed: '18.907351471178022'
+    rounding: up
+  - n: 378
+    printed: '19.942018855984576'
+    rounding: up
+  - n: 379
+    printed: '19.950889681503441'
+    rounding: up
+  - n: 417
+    printed: '20.934672165248002'
+    rounding: up
+    exact: 20934672165248001672165227067/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 418
+    printed: '20.939184128264923'
+    rounding: up
+  - n: 419
+    printed: '20.957804836274712'
+    rounding: up
+  - n: 421
+    printed: '20.976371064794590'
+    rounding: up
+  - n: 422
+    printed: '20.983575254585011'
+    rounding: up
+  - n: 459
+    printed: '21.937227864889785'
+    rounding: up
+    exact: 21937227864889784227864867847/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 460
+    printed: '21.950987687999201'
+    rounding: up
+  - n: 461
+    printed: '21.966193114436095'
+    rounding: up
+    exact: 10983096557218047193114403145096557196081/500000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 462
+    printed: '21.966193114414129'
+    rounding: up
+  - n: 463
+    printed: '21.973675720477602'
+    rounding: up
+    exact: 5493418930119400418930113907/250000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 464
+    printed: '21.986268532628047'
+    rounding: up
+  - n: 502
+    printed: '22.934445598628207'
+    rounding: up
+    exact: 2866805699828525805699825659/125000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 503
+    printed: '22.944667600407142'
+    rounding: up
+    exact: 22944667600407141667600384197/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 505
+    printed: '22.964253709989815'
+    rounding: up
+    exact: 459285074199796285074199337/20000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 548
+    printed: '23.944667600431087'
+    rounding: up
+    exact: 23944667600431086335200791338667600384197/1000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 551
+    printed: '23.965801641974269'
+    rounding: up
+  - n: 553
+    printed: '23.979786600215760'
+    rounding: up
+    exact: 1198989330010787989330009589/50000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 554
+    printed: '23.986315054037724'
+    rounding: up
+    exact: 23986315054037723315054013737/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 598
+    printed: '24.958220677835095'
+    rounding: up
+    exact: 3119777584729386777584726267/125000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 600
+    printed: '24.979786600240740'
+    rounding: up
+    exact: 1248989330012036978660020376989330009589/50000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 602
+    printed: '24.990355569404721'
+    rounding: up
+    exact: 1249517778470236035556936723517778467737/50000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 603
+    printed: '24.990355569379731'
+    rounding: up
+  - n: 647
+    printed: '25.949897942498915'
+    rounding: up
+    exact: 5189979588499782979588494593/200000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 650
+    printed: '25.974939166865611'
+    rounding: up
+  - n: 651
+    printed: '25.982878838106428'
+    rounding: up
+    exact: 5196575767621285575767616089/200000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 652
+    printed: '25.990355569405721'
+    rounding: up
+    exact: 1299517778470286035556936723517778467737/50000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 654
+    printed: '25.994867334132237'
+    rounding: up
+    exact: 12997433667066118433667053121/500000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 700
+    printed: '26.963730153903490'
+    rounding: up
+    exact: 13481865076951744865076938263/500000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 701
+    printed: '26.971171145178352'
+    rounding: up
+  - n: 702
+    printed: '26.976692903975214'
+    rounding: up
+    exact: 26976692903975213692903948237/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 703
+    printed: '26.981389201596016'
+    rounding: up
+  - n: 704
+    printed: '26.987139500916770'
+    rounding: up
+  - n: 705
+    printed: '26.990473400222588'
+    rounding: up
+    exact: 26990473400222587473400195597/1000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 706
+    printed: '26.997919093469508'
+    rounding: up
+  - n: 755
+    printed: '27.951463061397879'
+    rounding: up
+  - n: 756
+    printed: '27.976914446491419'
+    rounding: up
+    exact: 5595382889298283765778579781382889287093/200000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 757
+    printed: '27.976914446463442'
+    rounding: up
+  - n: 758
+    printed: '27.984283608420539'
+    rounding: up
+    exact: 5596856721676964378543766282263882218249404077456684018084985724232546340250450939128810812013270475344965159699/199999999999744740000000162894168999960700693683004740610073640500000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 759
+    printed: '27.988569233273449'
+    rounding: up
+  - n: 760
+    printed: '27.992923233306379'
+    rounding: up
+  - n: 811
+    printed: '28.974848874209278'
+    rounding: up
+  - n: 812
+    printed: '28.976914446492419'
+    rounding: up
+  - n: 813
+    printed: '28.981594177184268'
+    rounding: up
+    exact: 905674818037008349636071299674818035197/31250000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 814
+    printed: '28.981594177155286'
+    rounding: up
+    exact: 905674818036102674818035197/31250000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 815
+    printed: '28.992923233335372'
+    rounding: up
+    exact: 14496461616667685923233292382461616639193/500000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 816
+    printed: '28.995944538692246'
+    rounding: up
+  - n: 817
+    printed: '28.997492020606608'
+    rounding: up
+  - n: 868
+    printed: '29.974562439897217'
+    rounding: up
+    exact: 14987281219948608281219933621/500000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 869
+    printed: '29.974936836673075'
+    rounding: up
+    exact: 299749368366730749368366431/10000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 870
+    printed: '29.981594177185268'
+    rounding: up
+    exact: 936924818037039599636071299674818035197/31250000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 871
+    printed: '29.981594177185268'
+    rounding: up
+    exact: 936924818037039599636071299674818035197/31250000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 872
+    printed: '29.992623086320206'
+    rounding: up
+    exact: 1499631154316010262308627521631154313011/50000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 873
+    printed: '29.992623086290213'
+    rounding: up
+    exact: 1499631154314510631154313011/50000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 874
+    printed: '29.992883399225609'
+    rounding: up
+  - n: 875
+    printed: '29.996974281851590'
+    rounding: up
+  - n: 927
+    printed: '30.969979227501660'
+    rounding: up
+    exact: 3096997922750165997922747069/100000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 928
+    printed: '30.974936836704050'
+    rounding: up
+    exact: 309749368367040498736733161749368366431/10000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 929
+    printed: '30.975405698329704'
+    rounding: up
+  - n: 930
+    printed: '30.977403109932478'
+    rounding: up
+  - n: 932
+    printed: '30.992623086321206'
+    rounding: up
+    exact: 1549631154316060262308627521631154313011/50000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 933
+    printed: '30.992883399256602'
+    rounding: up
+  - n: 934
+    printed: '30.994174058187146'
+    rounding: up
+  - n: 935
+    printed: '30.994174058156152'
+    rounding: up
+  - n: 989
+    printed: '31.974936836705050'
+    rounding: up
+    exact: 319749368367050498736733161749368366431/10000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 990
+    printed: '31.975405698332123'
+    rounding: up
+  - n: 991
+    printed: '31.977403109964455'
+    rounding: up
+  - n: 992
+    printed: '31.977815424176502'
+    rounding: up
+  - n: 993
+    printed: '31.983895593654374'
+    rounding: up
+  - n: 994
+    printed: '31.992883399257602'
+    rounding: up
+    exact: 999777606226800055212450663277606224863/31250000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 995
+    printed: '31.994174058188146'
+    rounding: up
+    exact: 31994174058188145348116281308174058125157/1000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 996
+    printed: '31.994174058188146'
+    rounding: up
+    exact: 31994174058188145348116281308174058125157/1000000000000000000000000000000000000000
+    exact_from: packing/resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
+  - n: 997
+    printed: '31.996875920326034'
+    rounding: up
+  - n: 998
+    printed: '31.996875920294037'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds, each rounding its certificate's exact header side
+    up by less than 1e-15 as triage read the attachment, against frozen current records and the earlier
+    reports at each count. Custody of the attached archive, the two-route replay, the rows and the publications
+    of watched repositories remain on the owner bead; a ledger verdict alone is not registration or feasibility
+    verification.
+- report: evand/square-packing@0075967
+  url: https://github.com/evand/square-packing/tree/0075967bace18a3deabcc0baa64c2fb294fc80a0
+  reported_at: '2026-10-20T02:36:12Z'
+  holders: Evan Daniel (evand)
+  bead: think-ql4v
+  lanes:
+  - lane: views
+    packet: evand-regularized-2026-10-20
+    record: claims.json
+    counts:
+    - 204
+    - 227
+    - 229
+    not_ours:
+    - 260
+  claims:
+  - n: 204
+    printed: 14808642840591493923068442871459/1000000000000000000000000000000
+    rounding: exact
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-223
+      source: the view's JSON names Francisco Couzo under "by" and calls itself "regularized display view
+        of a certified packing at the same side; not a new bound"
+    measured:
+      against: T-223
+      finding: nearest centres one to one under a half turn; 58 squares move beyond 1e-3 and 4 beyond
+        0.1 (largest 0.442), largest turn 0.159 degrees
+      source: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+  - n: 227
+    printed: 7781812826162574542396221861851/500000000000000000000000000000
+    rounding: exact
+    refines:
+      packing_of: Francisco Couzo
+      entry: '#672'
+      source: the view's JSON names Francisco Couzo under "by" and calls itself "regularized display view
+        of a certified packing at the same side; not a new bound"
+    measured:
+      against: '#672'
+      finding: 'nearest centres one to one under a half turn; 194 of 227 squares within 1e-6, 16 beyond
+        1e-3 and 3 beyond 0.1 (largest 0.168); the side is 1.76e-11 below the exact side of #672''s certificate'
+      source: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+  - n: 229
+    printed: 15650161513876431064009548865321/1000000000000000000000000000000
+    rounding: exact
+    refines:
+      packing_of: Evan Daniel
+      entry: T-199
+      source: 'the commit: "229 after the slp2 polish, 2e-11 below the posted float: the exact optimum
+        of the same packing"; the view''s JSON names Evan Daniel under "by"'
+    measured:
+      against: T-199
+      finding: nearest centres one to one under no symmetry; an optimal assignment moves 112 squares beyond
+        1e-3 and 13 beyond 0.1 (largest 0.650), largest turn 0.055 degrees
+      source: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+  note: A publication in a watched repository with no issue, dated by its first commit (the owner, 2026-10-14).
+    Each certificate is a display-regularized view of a packing solved to its exact side; by the house
+    rule a view below the house best packing is a smaller packing, registered as a result.
+- report: '#715'
+  issue: 715
+  holders: Francisco Couzo
+  bead: think-cyal
+  claims:
+  - n: 417
+    printed: '20.933672777441'
+    rounding: up
+    exact: 301106674304339722830747043/14383843557010000000000000
+    exact_from: certificates/n417.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 458
+    printed: '21.903616797192'
+    rounding: up
+    exact: 2262032907223546078860969/103272118397980000000000
+    exact_from: certificates/n458.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 459
+    printed: '21.937022304151'
+    rounding: up
+    exact: 64336776808635659847968151313/2932794429281500000000000000
+    exact_from: certificates/n459.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 461
+    printed: '21.964134608334'
+    rounding: up
+    exact: 11250226318076613017368399/512208949666875000000000
+    exact_from: certificates/n461.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 463
+    printed: '21.971254044975'
+    rounding: up
+    exact: 3722082268875297535796061/169406910559420000000000
+    exact_from: certificates/n463.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 501
+    printed: '22.887841512273'
+    rounding: up
+    exact: 56286555050722332239648733349/2459233869674500000000000000
+    exact_from: certificates/n501.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 502
+    printed: '22.933269925480'
+    rounding: up
+    exact: 12593467482321294332207521/549135274788250000000000
+    exact_from: certificates/n502.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 503
+    printed: '22.943933771540'
+    rounding: up
+    exact: 56403591377461322238057315017249881278547553828962194129564722238713633888647589618571989111/2458322619786554571054946382228357602770753290102513576451314049052075795530500000000000000
+    exact_from: certificates/n503.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 505
+    printed: '22.964182800913'
+    rounding: up
+    exact: 21097041348205130185414401299/918693320424500000000000000
+    exact_from: certificates/n505.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 509
+    printed: '22.993588501431'
+    rounding: up
+    exact: 153591402585753911653464403/6679749121204000000000000
+    exact_from: certificates/n509.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 545
+    printed: '23.883414761903'
+    rounding: up
+    exact: 3243474506627957003535009/135804470967100000000000
+    exact_from: certificates/n545.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 546
+    printed: '23.887841512273'
+    rounding: up
+    exact: 58745788920396832239648733349/2459233869674500000000000000
+    exact_from: certificates/n546.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 547
+    printed: '23.898819144794'
+    rounding: up
+    exact: 75465979533245983149930599784731059706918355705302863/3157728382981011356523969339333246556500000000000000
+    exact_from: certificates/n547.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 548
+    printed: '23.943933771540'
+    rounding: up
+    exact: 58861913997247876809112261399478238881318307119064707706016036287765709684178089618571989111/2458322619786554571054946382228357602770753290102513576451314049052075795530500000000000000
+    exact_from: certificates/n548.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 549
+    printed: '23.955501804754'
+    rounding: up
+    exact: 47740514523994251617197427413/1992883092706500000000000000
+    exact_from: certificates/n549.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 553
+    printed: '23.979452392567'
+    rounding: up
+    exact: 41615909060866080427016467/1735482044359200000000000
+    exact_from: certificates/n553.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 554
+    printed: '23.986307325908'
+    rounding: up
+    exact: 134709039456034092958680081/5616080775824000000000000
+    exact_from: certificates/n554.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 592
+    printed: '24.883414761903'
+    rounding: up
+    exact: 3379278977595057003535009/135804470967100000000000
+    exact_from: certificates/n592.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 593
+    printed: '24.887841512273'
+    rounding: up
+    exact: 61205022790071332239648733349/2459233869674500000000000000
+    exact_from: certificates/n593.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 598
+    printed: '24.954250129268'
+    rounding: up
+    exact: 13718744089780168988275879/549755813888000000000000
+    exact_from: certificates/n598.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 600
+    printed: '24.978172747238'
+    rounding: up
+    exact: 11463524048413976394438297171345823890532805002723609963/458941659360650000000000004589416593606500000000000000
+    exact_from: certificates/n600.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 602
+    printed: '24.988237878425'
+    rounding: up
+    exact: 5405585620612592604180029/216325202557800000000000
+    exact_from: certificates/n602.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 647
+    printed: '25.946937290069'
+    rounding: up
+    exact: 111073610791541051373866870963/4280798521606500000000000000
+    exact_from: certificates/n647.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 651
+    printed: '25.981928099991'
+    rounding: up
+    exact: 5840693353164324627837472752063893645831591691/224798303293218815976851554093016000000000000
+    exact_from: certificates/n651.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 652
+    printed: '25.990044325432'
+    rounding: up
+    exact: 406462989946813823809618089/15639180328334000000000000
+    exact_from: certificates/n652.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 653
+    printed: '25.992652721826'
+    rounding: up
+    exact: 117568785317328226040021437558543680685674821150491509611/4523154545846307016869467045458463070168242355000000000
+    exact_from: certificates/n653.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 654
+    printed: '25.994801642508'
+    rounding: up
+    exact: 81788192611736041863828829/3146328782828400000000000
+    exact_from: certificates/n654.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 700
+    printed: '26.963723854128'
+    rounding: up
+    exact: 179857318073440169367885550226726643969433473646857118793600265487/6670344164866154968783350066703441648661549687833500000000000000
+    exact_from: certificates/n700.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 702
+    printed: '26.976012028499'
+    rounding: up
+    exact: 345428272301659623256054421/12805016246906000000000000
+    exact_from: certificates/n702.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 705
+    printed: '26.990419622637'
+    rounding: up
+    exact: 1678333552383585098611707/62182566104900000000000
+    exact_from: certificates/n705.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 749
+    printed: '27.884019388658'
+    rounding: up
+    exact: 114542132955217192542896156831/4107805670290500000000000000
+    exact_from: certificates/n749.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 750
+    printed: '27.911200800711'
+    rounding: up
+    exact: 80481256564020403131137/2883475244890625000000
+    exact_from: certificates/n750.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 756
+    printed: '27.976782251658'
+    rounding: up
+    exact: 26267093138502328204137511/938889000966000000000000
+    exact_from: certificates/n756.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 758
+    printed: '27.983731022945'
+    rounding: up
+    exact: 932745307356629738341517417995147386069863074489321712553/33331699285982946611751058050315010881932623420000000000
+    exact_from: certificates/n758.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 804
+    printed: '28.884019388658'
+    rounding: up
+    exact: 118649938625507692542896156831/4107805670290500000000000000
+    exact_from: certificates/n804.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 805
+    printed: '28.902673974184'
+    rounding: up
+    exact: 72291652226586790442397587/2501209828930000000000000
+    exact_from: certificates/n805.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 806
+    printed: '28.902673974184'
+    rounding: up
+    exact: 72291652226586790442397587/2501209828930000000000000
+    exact_from: certificates/n806.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 807
+    printed: '28.924694876402'
+    rounding: up
+    exact: 235311548823335590940409947/8135316546253906250000000
+    exact_from: certificates/n807.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 809
+    printed: '28.933954694456'
+    rounding: up
+    exact: 139341281307276285073506888673/4815839479211500000000000000
+    exact_from: certificates/n809.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 813
+    printed: '28.979120019579'
+    rounding: up
+    exact: 32467351670904099221895169723/1120370516736500000000000000
+    exact_from: certificates/n813.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 814
+    printed: '28.981388189193'
+    rounding: up
+    exact: 1736238420543802968138791/59908738988260000000000
+    exact_from: certificates/n814.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 815
+    printed: '28.992261716554'
+    rounding: up
+    exact: 2693806663943726077815226267/92914678071000000000000000
+    exact_from: certificates/n815.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 863
+    printed: '29.902673974184'
+    rounding: up
+    exact: 74792862055516790442397587/2501209828930000000000000
+    exact_from: certificates/n863.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 864
+    printed: '29.924694876402'
+    rounding: up
+    exact: 243446865369589497190409947/8135316546253906250000000
+    exact_from: certificates/n864.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 865
+    printed: '29.931498747933'
+    rounding: up
+    exact: 12532252887474018835852168943325823671699560487218222890985379033031/418697807049830917349641554186978070498309173496415500000000000000
+    exact_from: certificates/n865.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 866
+    printed: '29.933954694456'
+    rounding: up
+    exact: 144157120786487785073506888673/4815839479211500000000000000
+    exact_from: certificates/n866.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 867
+    printed: '29.942070418091'
+    rounding: up
+    exact: 9472289485124763203720875967459356273967815683351030809/316353857727950000000000003163538577279500000000000000
+    exact_from: certificates/n867.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 868
+    printed: '29.974553547719'
+    rounding: up
+    exact: 102870408427167638483802623/3431924624445200000000000
+    exact_from: certificates/n868.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 869
+    printed: '29.974935743865'
+    rounding: up
+    exact: 79633031749659976377789417/2656653960166000000000000
+    exact_from: certificates/n869.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 870
+    printed: '29.979120019579'
+    rounding: up
+    exact: 33587722187640599221895169723/1120370516736500000000000000
+    exact_from: certificates/n870.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 871
+    printed: '29.981295638373'
+    rounding: up
+    exact: 208951391346767060697725766410549021429/6969391645614418149003386750000000000
+    exact_from: certificates/n871.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 872
+    printed: '29.992261716554'
+    rounding: up
+    exact: 2786721342014726077815226267/92914678071000000000000000
+    exact_from: certificates/n872.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 873
+    printed: '29.992265777039'
+    rounding: up
+    exact: 145930153476937824291827241701/4865592835225500000000000000
+    exact_from: certificates/n873.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 919
+    printed: '30.827585222385'
+    rounding: up
+    exact: 10676771236755927263359236461737420237451890321598564720001170484223/346338227912949481776898653463382279129494817768986500000000000000
+    exact_from: certificates/n919.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 923
+    printed: '30.924694876402'
+    rounding: up
+    exact: 251582181915843403440409947/8135316546253906250000000
+    exact_from: certificates/n923.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 924
+    printed: '30.931498747933'
+    rounding: up
+    exact: 12950950694523849753201810497512801742197869660714638390985379033031/418697807049830917349641554186978070498309173496415500000000000000
+    exact_from: certificates/n924.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 925
+    printed: '30.933954694456'
+    rounding: up
+    exact: 148972960265699285073506888673/4815839479211500000000000000
+    exact_from: certificates/n925.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 926
+    printed: '30.942070418091'
+    rounding: up
+    exact: 9788643342852713203720875970622894851247315683351030809/316353857727950000000000003163538577279500000000000000
+    exact_from: certificates/n926.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 927
+    printed: '30.969443226806'
+    rounding: up
+    exact: 2100518311089619279992361/67825510962740000000000
+    exact_from: certificates/n927.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 928
+    printed: '30.974935654060'
+    rounding: up
+    exact: 440547585823965324873926921/14222711896618000000000000
+    exact_from: certificates/n928.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 931
+    printed: '30.989934444611'
+    rounding: up
+    exact: 97707112181770354246132333/3152866049342800000000000
+    exact_from: certificates/n931.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 932
+    printed: '30.992265777039'
+    rounding: up
+    exact: 150795746312163324291827241701/4865592835225500000000000000
+    exact_from: certificates/n932.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 987
+    printed: '31.941797078452'
+    rounding: up
+    exact: 8251690186164048093520156538108110916605750307379661596183383970659/258335189028255697872192327583351890282556978721923250000000000000
+    exact_from: certificates/n987.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 989
+    printed: '31.974181306003'
+    rounding: up
+    exact: 17577992067284028236253379/549755813888000000000000
+    exact_from: certificates/n989.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 994
+    printed: '31.992271544010'
+    rounding: up
+    exact: 4611240261212280419168811/144136069077460000000000
+    exact_from: certificates/n994.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 995
+    printed: '31.993696413074'
+    rounding: up
+    exact: 386736709089352929754857685915166817464624679766371404851380373153/12087903319959022098778275120879033199590220987782750000000000000
+    exact_from: certificates/n995.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  - n: 996
+    printed: '31.994135336337'
+    rounding: up
+    exact: 364144082419956597581812320221003025625991073/11381588487762324508318941042596000000000000
+    exact_from: certificates/n996.cert (its header) at franciscouzo/square-packing@6b7391de820fd01f3ff6984e4a081e8c86845588,
+      retained in the couzo-issue715-2026-10-21 packet
+  note: 'Issue 715''s rows at the backlog issues'' counts at or below 1024, as the 22 October ledger (upper-bounds-20261022)
+    transcribes them, recorded on main since by #717 as rows of the couzo-issue715-2026-10-21 source;
+    walked here as a report.'
