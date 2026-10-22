@@ -5,7 +5,7 @@ title: "Couzo's watched publications no issue claims: 5a299b4 (20 certificates b
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4yr8jtj1znqhx7fva8g60bw
 hold: null
 hold_until: null
 created_at: 2026-10-22T06:48:14.501Z
-updated_at: 2026-10-22T13:13:37.450Z
+updated_at: 2026-10-22T20:34:42.108Z
 started_at: 2026-10-22T06:48:16.556Z
 ---
 Found by the #719 triage: 13 certificates in franciscouzo/square-packing 5a299b4 that no issue claims and no packet retains, each below main by 1.1e-12 to 6.2e-10; they are the nearest earlier report at those counts for #719's ledger. This is the sweep's open 'needs an owner' item for franciscouzo. Retain, replay and record them as a watched-repository publication dated by their first commit (before #719's rows at those counts).
@@ -70,3 +70,7 @@ sweep's franciscouzo item (draft in intake-watch-drafts.yaml). After the PR the 
 without its bead (`think-bspk`). The one Couzo history records PR closes this bead.
 
 blocked_on: think-xyhn
+
+2026-10-22 (c-lane-couzo-residue-1022): The records change is PR #730 (branch claude/intake-couzo-history-2026-10-22, lane c-lane-couzo-residue-1022), records commit a91c70907, 22 October 2026. The history walk (packing/campaign/issue-intake/upper-bounds-couzo-history-20261022) walks every count from 325 to 1024 from starts frozen at main a97b712b9. It covers every row source since then and every publication in a watched repository below the start. It reproduces the c-triage-1022b walk's recorded chain at every count. The one difference is that #715's 30 re-certifications are attributed to #715 rather than to 5a299b4, and they are held either way. 319 rows are recorded at assurance reported, 107 current and 212 superseded on entry; 236 existing rows are repointed. 340 publications are held back, each with its decision's bead (beyond_horizon_replay.HISTORY_HELD). The filtered two-route replay with six controls covers all 319 rows.
+
+For this bead (5a299b4 and 23aff0c): 5a299b4 gives 20 rows of the new source couzo-reconcile-2026-10-20, dated by the push of 2026-10-21T22:56:37Z (PUSHED_LATER), retained in the new couzo-reconcile-2026-10-20 packet: 9 current (487, 532, 579, 628, 679, 732, 787, 844, 903) and 11 superseded by #719 (409, 450, 453, 649, 810, 812, 933, 934, 990, 991, 997). Held: 31 sub-print re-certifications (think-fwa9) and 331 above Göbel (think-8krd); #715's 30 stay #715's (think-fwa9). 23aff0c gives 21 rows of the source couzo-23aff0c-2026-10-17, retained in the couzo-issue670-2026-10-17 packet beside #670's own (21 certificates and 13 JSON added): all superseded on entry, by #672 (16) and #675 (5). Held: 10 sub-print (think-fwa9), 15 index deletion bounds, 447 among them (D6, think-f2io), and 46 L-border, tiling or composite bounds (D2, think-f2io). A read through 6b7391d, without a bead line, covers d09edd7, 5a299b4 and 6b7391d (think-bspk on why it stays). Filtered replay: 5a299b4 20 verified, 120 controls refused, 26.3 positive CPU s, all-pairs at 903 agreed exactly; 23aff0c 21 verified, 126 controls refused, 138.9 positive CPU s. The bead stays open until the PR merges; the coordinator closes it.
