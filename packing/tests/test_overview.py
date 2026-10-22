@@ -590,10 +590,8 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
     assert 'id="reading-and-research"' not in about
     assert "PAGE_CARDS" not in render_overview.ABOUT_ARTICLE.read_text(encoding="utf-8")
     assert re.findall(r'<a class="site-card site-card-link" href="([^"]+)"', about) == []
-    assert (
-        f'<a class="site-action" href="{overview_sections.PROFILES_DIRECTORY}">'
-        "View All Profiles" in about
-    )
+    assert f'href="{overview_sections.PROFILES_DIRECTORY}"' in about
+    assert 'class="site-action" href="profiles/index.html"' not in about
     for page in (about, papers):
         assert (
             re.search(
@@ -1555,23 +1553,23 @@ def test_the_big_tables_have_no_outer_border(
         assert all("site-table" in classes.split() for classes in tables), (name, tables)
 
 
-def test_about_has_one_profiles_invitation_that_opens_the_directory(
+def test_overview_profiles_preview_and_about_context_link_are_distinct(
     about: str, page: str
 ) -> None:
-    """Home and About put the shared native Profiles invitation before reporting."""
-    for name, source in (("About", about), ("Overview", page)):
-        begin = source.index('id="profiles"')
-        end = source.index('id="report-your-results"')
-        assert begin < end, name
-        section = source[begin:end]
-        assert re.findall(r'<a [^>]*href="([^"]+)"', section) == ["profiles/index.html"]
-        assert 'class="site-action" href="profiles/index.html"' in section
-        assert 'target="_blank"' not in section
-        assert (
-            "We track contributors and the authors cited in the square-packing record"
-            in section
-        )
-        assert not re.search(r"profiles/(?!index\.html)[a-z0-9-]+\.html", section)
+    section = page.split('id="profiles"', 1)[1].split('id="report-your-results"', 1)[0]
+    assert 'class="site-action" href="profiles/index.html"' in section
+    assert "We track contributors and the authors cited" in section
+    assert not re.search(r"profiles/(?!index\.html)[a-z0-9-]+\.html", section)
+    assert re.search(r'<h[1-6][^>]*id="profiles"', about) is None
+    links = [
+        attrs
+        for tag, attrs in _Tags(about).tags
+        if tag == "a" and attrs.get("id") == "profiles"
+    ]
+    assert len(links) == 1
+    assert links[0].get("href") == "profiles/index.html"
+    assert "site-action" not in (links[0].get("class") or "").split()
+    assert "We track contributors and the authors cited" not in about
 
 
 def test_every_card_grid_sits_in_a_frame_it_can_measure(
@@ -4219,7 +4217,10 @@ SITE_STATEMENT = (
         "AI-powered research efforts."
     ),
     "Contributions include:",
-    "Other new results are tabulated on the Results page.",
+    (
+        "Other new results are tabulated on the Results page. "
+        "See the Contributor Profiles for credited contributors and authors."
+    ),
     (
         "This project now independently tabulates all known new results and does "
         "AI-assisted verification of the proofs and certificates behind them, to "
@@ -4254,7 +4255,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(
     """About keeps the credited highlights and qualifies the two unverified reports.
     Every named result keeps its source, attribution, and verification claims; the
     contribution invitation retains the owner's two paragraphs."""
-    narrative = about.split("</h1>", 1)[1].split('<h1 id="profiles"', 1)[0]
+    narrative = about.split("</h1>", 1)[1].split("</div>", 1)[0]
     contribution = report.split("</h1>", 1)[1].split('<p class="site-action-row', 1)[0]
     assert len(re.findall(r"<p>", narrative)) == 4
     assert len(re.findall(r"<p>", contribution)) == 2
@@ -4381,7 +4382,6 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert about.count(heading) == 1
     assert re.findall(r'<h1\b[^>]*\bid="([^"]+)"', about) == [
         "the-squares-project",
-        "profiles",
     ]
     assert all('class="site-title"' in tag for tag in re.findall(r"<h1\b[^>]*>", about))
     assert re.search(r"<h2\b", about) is None
@@ -4395,21 +4395,15 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert "Work on the square packing problem has exploded" not in page
     assert page.count('id="the-squares-project"') == 0
     assert 'href="about.html"' in page
-    preview = about.split('<h1 id="profiles" class="site-title">Profiles</h1>', 1)[1]
-    preview = preview.split('<h1 id="report-your-results"', 1)[0]
-    assert "site-contributor-list" not in preview
-    assert "profiles/manasseh-ahmed.html" not in preview
+    assert re.search(r'<h[1-6][^>]*id="profiles"', about) is None
+    assert 'id="profiles" href="profiles/index.html"' in about
+    assert 'class="site-action" href="profiles/index.html"' not in about
     home_preview = page.split('<h1 id="profiles" class="site-title">Profiles</h1>', 1)[1]
     home_preview = home_preview.split('<h1 id="squares-project-documentation"', 1)[0]
     assert "site-contributor-list" not in home_preview
     assert "profiles/manasseh-ahmed.html" not in home_preview
-    for invitation in (preview, home_preview):
-        assert "We track contributors and the authors cited" in invitation
-        assert 'href="profiles/index.html">View All Profiles' in invitation
-    assert "data-person" not in preview
-    assert re.search(
-        r'<a class="site-action" href="profiles/index.html">View All Profiles<span\b', preview
-    )
+    assert "We track contributors and the authors cited" in home_preview
+    assert 'href="profiles/index.html">View All Profiles' in home_preview
 
 
 def test_the_project_is_named_the_squares_project_wherever_it_is_named(

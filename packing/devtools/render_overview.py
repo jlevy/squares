@@ -1502,15 +1502,11 @@ def news_page() -> Page:
 
 def about_page() -> Page:
     """The project narrative, approach, attribution, and supporting resources."""
-    from devtools import (  # noqa: PLC0415
-        render_changelog,
-        render_contributors,
-    )
+    from devtools import render_changelog  # noqa: PLC0415
 
     markdown = _template_markdown(
         ABOUT_ARTICLE,
         {
-            "PROFILES": render_contributors.profile_preview(),
             "NEWS_LEGACY_ANCHORS": render_changelog.legacy_news_anchors(
                 render_changelog.load()
             ),

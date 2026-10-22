@@ -70,9 +70,9 @@ The retained `site-squaremath-domain` build from the domain work was also read f
 headings, current navigation, and visible breadcrumbs on the main pages, workbench, and
 sample records. This is an inspection of source and an existing rendered artifact, not a
 new build or a production crawl.
-The current tree below records that baseline; the proposed homepage and About page
-incorporate the owner’s subsequent instruction to replace profile previews with a short
-statement and a View All Profiles button.
+The current tree below records that baseline.
+The homepage retains a short Profiles statement and View All Profiles button; About uses
+an inline Contributor Profiles link in its project narrative.
 
 All reader-facing addresses in this proposal use `https://squaremath.org/`. Paths in the
 trees are relative to that root.
@@ -345,11 +345,13 @@ Without JavaScript, inline compatibility links at those fragments reach the same
 destinations. `#papers` and `#explanations` remain on the Papers catalogue.
 
 **About.** Keep the project narrative at `about.html`, titled The Squares Project, with
-its full-name attributions and the approved short Profiles statement and View All
-Profiles action. The complete documentation catalogue lives at `documentation.html`; the
-complete contribution instructions and submission link live at `report.html`. Legacy
-About documentation and contribution fragments forward to those pages, with inline
-no-script compatibility links.
+its full-name attributions and a contextual Contributor Profiles link.
+Keep `#profiles` on that inline link, without a separate Profiles heading, summary, or
+View All button; the homepage retains its Profiles preview.
+The complete documentation catalogue lives at `documentation.html`; the complete
+contribution instructions and submission link live at `report.html`. Legacy About
+documentation and contribution fragments forward to those pages, with inline no-script
+compatibility links.
 About may cross-link Resources under Learn; profile Resources fields continue to link a
 person’s own sources.
 
@@ -757,7 +759,8 @@ scientific records or invalidating published URLs.
 
 - **Homepage selection?** Recommend retaining the Atlas preview and recent news/results,
   with a smaller selection of learning content.
-  The people section remains the approved short statement and View All Profiles button.
+  The homepage people section retains its short statement and View All Profiles button.
+  About links the directory contextually in the project narrative.
   Choose learning cards during visual review rather than inventing a new ranking policy
   in this plan.
 - **Frontier as its own page?** Recommend the direct Results menu anchor and Atlas local

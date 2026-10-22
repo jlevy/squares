@@ -162,7 +162,7 @@ HEAD_PROGRAMS = (
         "Set persisted reader attributes before body paint.",
     ),
     (
-        "A site page shown inside another page",
+        "Head bootstrap: preserve layout queries and navigation geometry before first paint.",
         "pre-paint",
         "Set embed and allowlisted atlas attributes before body paint.",
     ),
