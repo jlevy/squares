@@ -1346,6 +1346,10 @@ An intake pass adds `intake` and any case label under the `github-workflows` gra
 
 ## The Published Site
 
+[Site Deployment](docs/project/guides/site-deployment.md) is the operator guide for
+packaging, GitHub Pages, domain and DNS configuration, HTTPS, deployment verification,
+and recovery.
+
 Every content page is complete in its first HTML response: navigation, headings,
 records, drawings and server-rendered math.
 Each case has `cases/N.html`, each result has `result/t-nnn.html`, and directory indexes
@@ -1762,9 +1766,8 @@ asks it the same questions; a local address is the one kind that is not https an
 still asked. It is how the links between papers are checked before a new paper is live,
 since only a build that holds every paper can answer them; `--local DIR` asks them of a
 built directory too.
-A preview has the first paper’s PDF only if one is put there: that PDF is drawn from
-`packing/site/` by `render_n11_lower_bounds_explainer_pdf`, which a preview never
-writes.
+The preview also invokes `render_n11_lower_bounds_explainer_pdf --site DIR --update` to
+draw the first paper’s PDF into the selected output directory.
 
 **One version, shared by the site and its data** (the owner, 2026-09-22): every site
 page’s footer and the workbench stage print `PUBLICATION_EDITION` from

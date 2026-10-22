@@ -287,13 +287,13 @@ entries:
     artifacts:
       - kind: paper
         label: Current basic tutorial
-        target: https://jlevy.github.io/squares/tutorial.html
+        target: https://squaremath.org/tutorial.html
       - kind: paper
         label: Current advanced tutorial
-        target: https://jlevy.github.io/squares/tutorial-advanced.html
+        target: https://squaremath.org/tutorial-advanced.html
       - kind: page
         label: Current Explanations index
-        target: https://jlevy.github.io/squares/papers.html
+        target: https://squaremath.org/papers.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38636016372/job/116103959611
@@ -364,10 +364,10 @@ entries:
     artifacts:
       - kind: result
         label: Current Fang theorem record
-        target: https://jlevy.github.io/squares/result/t-163.html
+        target: https://squaremath.org/result/t-163.html
       - kind: result
         label: Current closed-form lower-bound record
-        target: https://jlevy.github.io/squares/result/t-180.html
+        target: https://squaremath.org/result/t-180.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38644709027/job/116130903550
@@ -494,22 +494,22 @@ entries:
     artifacts:
       - kind: result
         label: Current 40-square lower-bound record
-        target: https://jlevy.github.io/squares/result/t-157.html
+        target: https://squaremath.org/result/t-157.html
       - kind: result
         label: Current Ostashev certificate record
-        target: https://jlevy.github.io/squares/result/t-158.html
+        target: https://squaremath.org/result/t-158.html
       - kind: result
         label: Current Calle layout record
-        target: https://jlevy.github.io/squares/result/t-159.html
+        target: https://squaremath.org/result/t-159.html
       - kind: result
         label: Current Daniel 154-square certificate record
-        target: https://jlevy.github.io/squares/result/t-160.html
+        target: https://squaremath.org/result/t-160.html
       - kind: paper
         label: Current methods survey
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+        target: https://squaremath.org/papers/square-packing-methods-survey.html
       - kind: pdf
         label: Current methods survey PDF
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf
+        target: https://squaremath.org/papers/square-packing-methods-survey.pdf
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38558844519/job/115838577096
@@ -553,16 +553,16 @@ entries:
     artifacts:
       - kind: page
         label: Current About changelog
-        target: https://jlevy.github.io/squares/about.html#changelog
+        target: https://squaremath.org/about.html#changelog
       - kind: pdf
         label: Current 1–100 packing infographic
-        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+        target: https://squaremath.org/square-packings-100-20261008.pdf
       - kind: pdf
         label: Current 1–324 packing poster
-        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+        target: https://squaremath.org/square-packings-324-20261008.pdf
       - kind: paper
         label: Current lower-bounds explainer
-        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+        target: https://squaremath.org/papers/n11-lower-bounds-explainer.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38552030866/job/115817992138
@@ -613,7 +613,7 @@ entries:
     artifacts:
       - kind: page
         label: Current results, including the corrected significance scores
-        target: https://jlevy.github.io/squares/results.html
+        target: https://squaremath.org/results.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38551948126/job/115813924621
@@ -663,13 +663,13 @@ entries:
     artifacts:
       - kind: result
         label: Current Overbeck proof report
-        target: https://jlevy.github.io/squares/result/t-153.html
+        target: https://squaremath.org/result/t-153.html
       - kind: result
         label: Current Fitzharding formalization report
-        target: https://jlevy.github.io/squares/result/t-154.html
+        target: https://squaremath.org/result/t-154.html
       - kind: paper
         label: Current explainer, including the 17-square reports
-        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+        target: https://squaremath.org/papers/n11-lower-bounds-explainer.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38536230832/job/115761676874
@@ -728,19 +728,19 @@ entries:
     artifacts:
       - kind: page
         label: Current atlas with Regularized / Original comparison
-        target: https://jlevy.github.io/squares/atlas.html
+        target: https://squaremath.org/atlas.html
       - kind: pdf
         label: Current 1–100 packing infographic
-        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+        target: https://squaremath.org/square-packings-100-20261008.pdf
       - kind: pdf
         label: Current 1–324 packing poster
-        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+        target: https://squaremath.org/square-packings-324-20261008.pdf
       - kind: result
         label: Current exact-side batch record
-        target: https://jlevy.github.io/squares/result/t-155.html
+        target: https://squaremath.org/result/t-155.html
       - kind: result
         label: Current 290-square exact certificate record
-        target: https://jlevy.github.io/squares/result/t-156.html
+        target: https://squaremath.org/result/t-156.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38527537367/job/115733950233
@@ -772,7 +772,7 @@ entries:
     artifacts:
       - kind: result
         label: Current 17-square Lean proof report
-        target: https://jlevy.github.io/squares/result/t-154.html
+        target: https://squaremath.org/result/t-154.html
     publication:
       date: '2026-10-13'
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
@@ -869,7 +869,7 @@ entries:
     artifacts:
       - kind: result
         label: Current 17-square candidate-proof record
-        target: https://jlevy.github.io/squares/result/t-153.html
+        target: https://squaremath.org/result/t-153.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -916,10 +916,10 @@ entries:
     artifacts:
       - kind: result
         label: Current 207-square PingYou record
-        target: https://jlevy.github.io/squares/result/t-147.html
+        target: https://squaremath.org/result/t-147.html
       - kind: result
         label: Current 153-square PingYou record
-        target: https://jlevy.github.io/squares/result/t-148.html
+        target: https://squaremath.org/result/t-148.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: replayed-upper-bound-admissions
@@ -958,10 +958,10 @@ entries:
     artifacts:
       - kind: result
         label: Current SQUISH admission record
-        target: https://jlevy.github.io/squares/result/t-151.html
+        target: https://squaremath.org/result/t-151.html
       - kind: result
         label: Current Couzo refinement record
-        target: https://jlevy.github.io/squares/result/t-152.html
+        target: https://squaremath.org/result/t-152.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -997,19 +997,19 @@ entries:
     artifacts:
       - kind: result
         label: Current PingYou 207-square admission
-        target: https://jlevy.github.io/squares/result/t-147.html
+        target: https://squaremath.org/result/t-147.html
       - kind: result
         label: Current PingYou 153-square admission
-        target: https://jlevy.github.io/squares/result/t-148.html
+        target: https://squaremath.org/result/t-148.html
       - kind: result
         label: Current Ostashev admission
-        target: https://jlevy.github.io/squares/result/t-149.html
+        target: https://squaremath.org/result/t-149.html
       - kind: result
         label: Current Barnett refinement admission
-        target: https://jlevy.github.io/squares/result/t-150.html
+        target: https://squaremath.org/result/t-150.html
       - kind: page
         label: Current atlas of adopted packings
-        target: https://jlevy.github.io/squares/atlas.html
+        target: https://squaremath.org/atlas.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -1054,10 +1054,10 @@ entries:
     artifacts:
       - kind: page
         label: Current project overview
-        target: https://jlevy.github.io/squares/
+        target: https://squaremath.org/
       - kind: page
         label: Current About page
-        target: https://jlevy.github.io/squares/about.html
+        target: https://squaremath.org/about.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -1090,7 +1090,7 @@ entries:
     artifacts:
       - kind: page
         label: Current contributor and result overview
-        target: https://jlevy.github.io/squares/about.html
+        target: https://squaremath.org/about.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: website-front-door-and-result-reports
@@ -1114,10 +1114,10 @@ entries:
     artifacts:
       - kind: page
         label: Project homepage
-        target: https://jlevy.github.io/squares/
+        target: https://squaremath.org/
       - kind: page
         label: Reporting results on About
-        target: https://jlevy.github.io/squares/about.html
+        target: https://squaremath.org/about.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: bounded-publication-audits
@@ -1165,13 +1165,13 @@ entries:
     artifacts:
       - kind: result
         label: Current 40-square continuous-pose admission
-        target: https://jlevy.github.io/squares/result/t-145.html
+        target: https://squaremath.org/result/t-145.html
       - kind: result
         label: Current Daniel regularized-certificate admission
-        target: https://jlevy.github.io/squares/result/t-146.html
+        target: https://squaremath.org/result/t-146.html
       - kind: page
         label: Current result register
-        target: https://jlevy.github.io/squares/results.html
+        target: https://squaremath.org/results.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -1207,16 +1207,16 @@ entries:
     artifacts:
       - kind: page
         label: Overview
-        target: https://jlevy.github.io/squares/
+        target: https://squaremath.org/
       - kind: page
         label: Atlas
-        target: https://jlevy.github.io/squares/atlas.html
+        target: https://squaremath.org/atlas.html
       - kind: page
         label: Results
-        target: https://jlevy.github.io/squares/results.html
+        target: https://squaremath.org/results.html
       - kind: page
         label: Papers and downloads
-        target: https://jlevy.github.io/squares/papers.html
+        target: https://squaremath.org/papers.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: paper-typography-and-title-case
@@ -1240,28 +1240,28 @@ entries:
     artifacts:
       - kind: paper
         label: Current Part I paper
-        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+        target: https://squaremath.org/papers/n11-lower-bounds-explainer.html
       - kind: pdf
         label: Current Part I PDF
-        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.pdf
+        target: https://squaremath.org/papers/n11-lower-bounds-explainer.pdf
       - kind: paper
         label: Current Part II paper
-        target: https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html
+        target: https://squaremath.org/papers/n11-threshold-bound-review.html
       - kind: pdf
         label: Current Part II PDF
-        target: https://jlevy.github.io/squares/papers/n11-threshold-bound-review.pdf
+        target: https://squaremath.org/papers/n11-threshold-bound-review.pdf
       - kind: paper
         label: Current Part III paper
-        target: https://jlevy.github.io/squares/papers/n11-optimality-review.html
+        target: https://squaremath.org/papers/n11-optimality-review.html
       - kind: pdf
         label: Current Part III PDF
-        target: https://jlevy.github.io/squares/papers/n11-optimality-review.pdf
+        target: https://squaremath.org/papers/n11-optimality-review.pdf
       - kind: paper
         label: Current methods tutorial
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+        target: https://squaremath.org/papers/square-packing-methods-survey.html
       - kind: pdf
         label: Current methods tutorial PDF
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf
+        target: https://squaremath.org/papers/square-packing-methods-survey.pdf
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     releases:
@@ -1293,10 +1293,10 @@ entries:
     artifacts:
       - kind: paper
         label: Current methods tutorial
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+        target: https://squaremath.org/papers/square-packing-methods-survey.html
       - kind: pdf
         label: Current methods tutorial PDF
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf
+        target: https://squaremath.org/papers/square-packing-methods-survey.pdf
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     releases:
@@ -1336,19 +1336,19 @@ entries:
     artifacts:
       - kind: page
         label: Current interactive atlas
-        target: https://jlevy.github.io/squares/atlas.html
+        target: https://squaremath.org/atlas.html
       - kind: pdf
         label: Current 100-packing infographic PDF
-        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+        target: https://squaremath.org/square-packings-100-20261008.pdf
       - kind: pdf
         label: Current 324-packing infographic PDF
-        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+        target: https://squaremath.org/square-packings-324-20261008.pdf
       - kind: graphic
         label: Current 100-packing SVG
-        target: https://jlevy.github.io/squares/known-best-1-100.svg
+        target: https://squaremath.org/known-best-1-100.svg
       - kind: graphic
         label: Current 324-packing SVG
-        target: https://jlevy.github.io/squares/known-best-1-324.svg
+        target: https://squaremath.org/known-best-1-324.svg
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: daniel-record-hunt-source-intake
@@ -1369,7 +1369,7 @@ entries:
     artifacts:
       - kind: result
         label: Current 132-square record-hunt record
-        target: https://jlevy.github.io/squares/result/t-131.html
+        target: https://squaremath.org/result/t-131.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -1570,7 +1570,7 @@ entries:
       - engineering
     references:
       - label: Frontier table
-        target: https://jlevy.github.io/squares/frontier.html
+        target: https://squaremath.org/frontier.html
       - label: Static rendering and deployment work
         target: https://github.com/jlevy/squares/pull/456
   - id: packing-methods-survey-first-publication
@@ -1593,7 +1593,7 @@ entries:
       - verification
     references:
       - label: Methods survey
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+        target: https://squaremath.org/papers/square-packing-methods-survey.html
       - label: Initial publication
         target: https://github.com/jlevy/squares/pull/458
   - id: couzo-twenty-beyond-corpus-reports
@@ -1679,7 +1679,7 @@ entries:
       - label: Second adversarial review and its dated corrections
         target: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md
       - label: Candidate proof record
-        target: https://jlevy.github.io/squares/result/t-153.html
+        target: https://squaremath.org/result/t-153.html
     result_ids:
       - T-153
   - id: atlas-posters-october-results-update
@@ -1724,13 +1724,13 @@ entries:
     artifacts:
       - kind: pdf
         label: Current 1–100 packing infographic
-        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+        target: https://squaremath.org/square-packings-100-20261008.pdf
       - kind: pdf
         label: Current 1–324 packing poster
-        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+        target: https://squaremath.org/square-packings-324-20261008.pdf
       - kind: paper
         label: Lower-bounds paper
-        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+        target: https://squaremath.org/papers/n11-lower-bounds-explainer.html
   - id: ahmed-eleven-square-optimality
     date: '2026-09-30'
     title: Ahmed Proves Trump’s Eleven-Square Packing Optimal
@@ -1761,9 +1761,9 @@ entries:
         needed for V4/C4.
     references:
       - label: Current eleven-square result
-        target: https://jlevy.github.io/squares/result/t-060.html
+        target: https://squaremath.org/result/t-060.html
       - label: Current eleven-square optimality explainer
-        target: https://jlevy.github.io/squares/papers/n11-optimality-review.html
+        target: https://squaremath.org/papers/n11-optimality-review.html
       - label: Ahmed’s original proof
         target: https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c
       - label: Retained verification and reproduction limits
