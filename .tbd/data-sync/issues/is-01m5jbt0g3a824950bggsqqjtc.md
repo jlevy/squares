@@ -5,7 +5,7 @@ title: "Site: continuous deployment identified by its git revision; drop site ed
 kind: feature
 status: open
 priority: 1
-version: 10
+version: 11
 labels:
   - release
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
   - is-01m5jn6dwrnhbr41q8anmm6j6k
   - is-01m5jn6g57b24wax2k1p1q23ce
 created_at: 2026-10-22T17:51:10.847Z
-updated_at: 2026-10-22T20:35:17.287Z
+updated_at: 2026-10-22T20:37:32.364Z
 ---
 Owner decision, 22 October 2026 (in conversation with the coordinator coord-intake-1021b):
 
@@ -44,3 +44,5 @@ Reading: versions are assigned when a snapshot of distributed artifacts (paper P
 2026-10-22 18:40Z coord-intake-1021b: owner answers on the snapshot release design (spec scratchpad/release-design/spec-site-cd-and-snapshot-releases.md, §7): (1) cadence: ON REQUEST (the owner, or the coordinator when asked, runs snapshot status and releases; check-ins only report that one looks due); (2) DATED RELEASES with each artifact's own version (release/YYYY-MM-DD; explainer, papers, posters, films keep their own series); (3) the site links ONLY the released, versioned PDF for each paper (no per-deploy 'this page, printed' PDF); (4) released posters are REDRAWN with the version on their face at release time (committed posters carry no version). Footer and similar places: git commit + that commit's ISO committer time (UTC). PR 1 (stop cutting site editions) is in progress on claude/release-stop-site-editions.
 
 2026-10-22 19:31Z c-lane-release-pr1-1022: #729 now at a058446b5. It merges main cacdafc1f (#722, site v0.9.2; PUBLICATION_REVISION 7ff5b129 kept), so the freeze sits at v0.9.2. Review A fixed (dispositions: https://github.com/jlevy/squares/pull/729#issuecomment-6349476747). A1: an old-rule no-change record naming site beside papers keeps its paper coverage, with its site part ignored and a warning; one naming only the site is refused, so #723 and #726 pass unedited. A2: FINAL_SITE_EDITION = v0.9.2, with the date read from the history. A3: G7 and C4 mutants killed. A4: dead changelog branch removed. A5: edition_file docstring fixed. Local: 150 tests passed; ruff and basedpyright 0 findings; records tier 52/52. #406 still carries a v0.9.2 cut and must drop it.
+
+2026-10-22 20:37Z c-lane-release-pr1-1022: #729 is green at f3a248e22 (hosted CI: 31 pass, 28 skipped, 0 failed), with review A's dispositions at https://github.com/jlevy/squares/pull/729#issuecomment-6350769469. It merges main e44a51f44 (#722 v0.9.2, then #723 and #726). The old-rule site-naming no-change records of #723 and #726 are accepted with a warning: each main delivery passes the new gate, and #729's merge into main, simulated as a --base delivery, passes with no candidates. The freeze sits at v0.9.2 with PUBLICATION_REVISION 7ff5b129. Local: 150 tests passed, records tier 52/52. Draft, not merged.
