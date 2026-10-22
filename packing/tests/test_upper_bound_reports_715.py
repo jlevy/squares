@@ -50,6 +50,26 @@ SUPERSEDED = {
     "couzo-issue675-2026-10-18": 6,
 }
 GRID_COUNTS = [860]
+#: The rows of this import that issue 719's rows, reported on 22 October, supersede.
+LATER = "mishapolk-issue719-2026-10-22"
+SUPERSEDED_BY_LATER = (
+    417,
+    456,
+    499,
+    553,
+    601,
+    652,
+    705,
+    758,
+    868,
+    869,
+    872,
+    927,
+    928,
+    932,
+    994,
+    996,
+)
 #: Issue 702's exact side at 343, which this import's row supersedes in report order.
 SIDE_702 = Fraction(18977682482404124568634475670459, 10**30)
 #: The certificates the issue restates that earlier packets already retain, byte for byte.
@@ -136,11 +156,16 @@ def test_the_recorded_rows_are_the_claims_record_and_supersede_the_rows_before_t
     for n in recorded:
         rows = _rows_at(coverage, n)
         assert rows[SOURCE]["value"] == claims[n]
-        assert rows[SOURCE]["disposition"] == "tracked-outside-case-corpus"
-        assert current[n]["source_id"] == SOURCE
         before.update(
             source for source, row in rows.items() if row.get("superseded_by") == SOURCE
         )
+        if n in SUPERSEDED_BY_LATER:
+            assert rows[SOURCE]["disposition"] == "superseded"
+            assert rows[SOURCE]["superseded_by"] == LATER
+            assert current[n]["source_id"] == LATER
+            continue
+        assert rows[SOURCE]["disposition"] == "tracked-outside-case-corpus"
+        assert current[n]["source_id"] == SOURCE
     assert dict(before) == SUPERSEDED
     assert [n for n in recorded if len(_rows_at(coverage, n)) == 1] == GRID_COUNTS
     for n in replay.counts_in(replay.HELD) + replay.counts_in(replay.RESTATED):

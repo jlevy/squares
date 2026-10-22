@@ -6161,19 +6161,24 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: 19 October, when #514 merged main, the page measured 1,157,668 bytes without #514's two
 #: sections and 1,203,554 with them: they cost 45,886 bytes and halve the headroom, from
 #: 92,332 to 46,446 bytes (#514's review D, finding D1). No timing has been measured on
-#: the page with the sections; `think-v1qe` owns that measurement and the runway. The
-#: ceiling holds the page through `RESULTS_ROOM_THROUGH` results
+#: the page with the sections; `think-v1qe` owns that measurement and the runway. On 22
+#: October, at 229 results, the page measured 1,251,615 bytes: #578's profile links and
+#: T-229, the first intake past the count of 225, took it over 1,250,000, and the ceiling
+#: moved to 1,300,000 on that page's timing (`site_urls.PAGE_BUDGET_EXCEPTIONS` gives
+#: the medians); `think-v1qe` keeps the durable lightening. The ceiling holds the page
+#: through `RESULTS_ROOM_THROUGH` results
 #: (`test_the_results_page_has_room_through_its_room_count`).
-PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_250_000}
+PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_300_000}
 #: How many results the results page's ceiling was set to hold, each result past the
 #: register's count at what the table's 90th-percentile row costs now and an average
 #: entry of the seven days: 160 on 14 October and 40 more, then, at 1,250,000 bytes, 217
 #: on 19 October and 8 more (4,603 + 291 bytes each, about 9 results in the 46,446 bytes
-#: left). A fixed count, so the room does not slide up with every registration (#514's
-#: review B, finding B1). The intake that passes the count re-measures the page, its
-#: timing included, and either lightens the table or moves the ceiling as a measured
-#: choice (`think-v1qe`).
-RESULTS_ROOM_THROUGH = 225
+#: left), then, at 1,300,000 bytes, 229 on 22 October and 9 more (4,654 + 263 bytes
+#: each, in the 48,385 bytes left). A fixed count, so the room does not slide up with
+#: every registration (#514's review B, finding B1). The intake that passes the count
+#: re-measures the page, its timing included, and either lightens the table or moves
+#: the ceiling as a measured choice (`think-v1qe`).
+RESULTS_ROOM_THROUGH = 238
 
 
 def test_no_page_carries_a_result_overview(

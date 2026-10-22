@@ -25271,6 +25271,144 @@ occurrences:
   evidence: []
   note: The bibliography marks this source credits-project; comparison with the project
     register does not establish a personal contribution by Joshua Levy.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 719 2026-10-22]'
+    field: /authors/0
+  expected_text: Polkovskyi
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed author byline: issue 719 and its packet mishapolk-issue719-2026-10-22 name
+    Mishapolk, whom the record credits as Mykhailo Polkovskyi since issue 593 (the issue
+    gives Mikhail Polk); the name form is asked of the author.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 719 2026-10-22]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Xu, PingYou Ltd, Levy
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed source credit matches the evidenced person and printed name; the original
+    credit role is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 719 2026-10-22]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Xu, PingYou Ltd, Levy
+  start: 17
+  end: 22
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 719 2026-10-22]]
+    /credit span 17:22: the packings issue 719 re-solves include Francisco Couzo's (T-223
+    at 204 and many beyond-horizon rows). Keep packing finder and refinement roles
+    distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 719 2026-10-22]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Xu, PingYou Ltd, Levy
+  start: 24
+  end: 31
+  label: Muglich
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - issue-byline
+  - source-intake
+  - bibliography
+  contributor_id: darius-muglich
+  note: >-
+    Reviewed /credit span 24:31: issue 719 re-solves Darius Muglich's #686 packings at 42
+    counts beyond the corpus, as the packet README records.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 719 2026-10-22]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Xu, PingYou Ltd, Levy
+  start: 33
+  end: 39
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: >-
+    Reviewed /credit span 33:39: at 204 issue 719 re-solves the packing Evan Daniel
+    regularized (T-225).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 719 2026-10-22]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Xu, PingYou Ltd, Levy
+  start: 41
+  end: 43
+  label: Xu
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - packet
+  - owner-confirmation
+  contributor_id: ryan-xu
+  note: >-
+    Reviewed /credit span 41:43: at 105 issue 719 re-solves Ryan Xu's packing as Couzo and
+    PingYou Ltd refined it (T-174).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 719 2026-10-22]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Xu, PingYou Ltd, Levy
+  start: 45
+  end: 56
+  label: PingYou Ltd
+  role: prerequisite
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd. No individual identity
+    is inferred from the company label.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 719 2026-10-22]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Xu, PingYou Ltd, Levy
+  start: 58
+  end: 62
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: >-
+    Reviewed /credit span 58:62. The first-party jlevy/squares record is the Joshua Levy
+    identity established by LICENSE and the retained ojoshe receipt; project credit does
+    not imply sole personal authorship.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

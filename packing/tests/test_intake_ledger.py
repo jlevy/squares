@@ -766,6 +766,53 @@ def test_render_reads_the_frozen_starts_and_never_the_tree(
         ledger.rendered(tmp_path)
 
 
+def test_a_report_transcribing_two_claims_at_one_count_is_refused(tmp_path: Path) -> None:
+    """#722's review A, A2: keyed by count, the second of two transcribed claims replaced
+    the first unseen, so a commit stating two sides kept the last, not the least."""
+    claims = [
+        {"n": 450, "printed": "21.767428349991", "rounding": "up"},
+        {"n": 451, "printed": "21.8", "rounding": "up"},
+        {"n": 450, "printed": "21.767428349966", "rounding": "up"},
+    ]
+    sources = {
+        "format": ledger.SOURCES_FORMAT,
+        "read_at_main": "a" * 40,
+        "read_on": "2026-10-22",
+        "rule": "In order.",
+        "lanes": [],
+        "reports": [
+            {
+                "report": "owner/repo@abc1234",
+                "url": "https://github.com/owner/repo/tree/abc1234",
+                "reported_at": "2026-10-15T00:00:00Z",
+                "holders": "Someone",
+                "claims": claims,
+            }
+        ],
+    }
+    (tmp_path / ledger.SOURCES).write_text(yaml.safe_dump(sources), encoding="utf-8")
+    snapshot = {"format": ledger.SNAPSHOT_FORMAT, "items": []}
+    (tmp_path / ledger.SNAPSHOT).write_text(json.dumps(snapshot), encoding="utf-8")
+    with pytest.raises(ledger.LedgerError, match=r"owner/repo@abc1234 .* n = \[450\]"):
+        ledger.gather(tmp_path, snapshot=True)
+
+
+def test_the_readme_links_lane_claims_only_where_a_copy_is_retained(
+    tmp_path: Path,
+) -> None:
+    data = _minimal()
+    (tmp_path / ledger.LEDGER).write_text(yaml.safe_dump(data), encoding="utf-8")
+    member = ledger.lane_member(
+        100, "reported", {"value": "10.5", "exact_form": "21/2"}, ["T-1"]
+    )
+    starts = ledger.starts_document(data["read_at_main"], {100: [member]})
+    (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(starts), encoding="utf-8")
+    link = "[lane-claims/](lane-claims/README.md)"
+    assert link not in ledger.rendered(tmp_path)[ledger.README]
+    (tmp_path / ledger.LANE_CLAIMS).mkdir()
+    assert link in ledger.rendered(tmp_path)[ledger.README]
+
+
 def test_a_record_relation_that_reads_no_member_of_its_start_is_refused(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
