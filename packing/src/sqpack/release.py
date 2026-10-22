@@ -2170,6 +2170,36 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The #719 import (T-229 at 105 and 204, 111 beyond-horizon rows, the replies "
+            "after #720) against main 76496462b: rendered at link revision 6610be93 into "
+            "empty site directories, twice from this tree at 26f670d1 and twice from "
+            "main's (68 files each), render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write their "
+            "HTML and Markdown byte-identical across all four; only the explainer's "
+            "register count differs (228 to 229), and it took v0.4.17. No PDF was "
+            "printed; each prints from that HTML. Retain v0.1.8, v0.1.1 and v0.2.4."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
