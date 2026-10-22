@@ -1221,3 +1221,67 @@ repositories:
       the 48 is an import until he answers. The triage of #719 (think-xyhn) read every certificate
       at the pin, and the rest are at or above an earlier report. dc440a8 adds only
       ISSUE_SUBMISSION_122.md, issue 719's body. Nothing else to import.
+  # The intake sweep of 18:45Z on 22 October 2026 listed three watched repositories past
+  # their reads; the read-only triage c-triage-1022c read each at its head.
+  - url: https://github.com/evand/square-packing
+    read_through: 7982d7a9346e29e36cab3ce075274f3023114353
+    read_on: '2026-10-22'
+    bead: think-7l2j
+    note: >-
+      The ten commits of 22 October past the 7051f4e read, 3ee3aeb to 7982d7a, the head,
+      authored 16:11Z to 17:12Z and all committed at 17:14Z. f06521f adds search/packer/candidates/s303_r303w0.cert, its
+      binary64 input and the pipeline's report, issue 728's certificate, which the
+      evand-n303-2026-10-22 packet pins and T-230 registers; the head holds the same
+      certificate blob. 3ee3aeb, d350394, 8875444, 4f4e609, b4a9652, 267403b, 059e17b
+      and 7982d7a are unit squares in a strip [0, L] x [0, H] with H < 2:
+      search/rectfront/chainn/ (a min-plus chain relaxation to n = 30, slope-walk kernels,
+      failed charge LPs, a closed-form E5 certificate checked numerically for
+      1.87 <= H < 2) and lean/Sqpack/Strip{Low,Kernel,Walk,Pot,Odd}.lean (strip_low for
+      every n, the step cost kap with kap_ge_zigzag, kap_wall, kap_mirror and kap_B, the
+      slope walk strip_walk, and strip_odd_of for odd n, which assumes the per-square
+      inequalities KapS and KapC). Strips are rectangles, outside this record, which is
+      squares in a square, and at L = H < 2 they bound nothing the record holds.
+      593391f edits CLAUDE.md. No other certificate changes. think-7l2j still holds
+      e96ab69's rect5_pts_lower (s(5) >= 2 + 1/sqrt 2 in Lean) and the chelokot
+      s5_eq_goebel pointer, as the 7051f4e read says.
+  - url: https://github.com/wand125/square-packing
+    read_through: e48de243d7f5e348f1baa111b19265eb02f0d4a1
+    read_on: '2026-10-22'
+    note: >-
+      The four commits of 22 October (14:08Z to 14:15Z) past the 2ed00b2 read, all under
+      site/. 92be9a5 adds the results rows for s3(25) = s3(26) = 3 (unit cubes in a cube,
+      the closed counting measure 2ed00b2 added) and 7b25776 links the 4-cube survey to its
+      paper. ff06e5f revises nine papers after a further review, each with a dated
+      revision note. In closed-form (v5) the abstract and section 1 say the bound is one
+      square root on each interval except where the cap applies, where it is constant, and
+      r and W are defined at first use; no constant, interval or claim changes, so T-180
+      stands. valid7 (v5) states in its abstract what check_record.py re-checks (the record
+      structure in full, a random sample of the other leaves) and that Valid7 and
+      ValidTilt9 are also verified in the Lean 4 kernel, the evidence think-0ayk (T-064,
+      #537) and think-jh0n (#643) already hold. triangle (v4) narrows the scope its lead
+      gives the Lean check, and domino, hexagon-n3, right-isosceles and the three cube
+      papers change wording only: other containers and cubes, outside this record.
+      e48de24 fills the commit field of eight of those revision notes. Nothing to import.
+  - url: https://github.com/Esummins/packing
+    read_through: 0b0a0727d8bf8fcf8ea91747bb702bb5372bd348
+    read_on: '2026-10-22'
+    note: >-
+      The sixteen commits past the eb3ae15 read. Eight are dated 12 October (04:33Z to
+      05:50Z), and the 18 October head read still found eb3ae15: the A243 n = 17
+      four-corner descent, with level k = 13 done (91 classes: 13 DEAD, 77 ALIVE, 1
+      REDUCES) and k = 12 begun (64 classes: 63 ALIVE at the wall, 1 REDUCES), with
+      logs, rows and two spine certificates. That is the author's own run of part of
+      #523's queued ask (think-j891, whose n = 17 part the owner suspended on 13
+      October): class verdicts by an unreviewed engine with no verifier clause, which
+      bound nothing, a ledger note at most, as for the k = 14 to 16 levels #523 reports.
+      The eight of 22 October (17:00Z to 17:10Z) answer the record's replies. 429bcda
+      restates the frozen verifiers' digests in the outreach notes as the committed LF
+      files' (1574ddbd... and 87fa3d31..., which the esummins-packing-2026-10-12 manifest
+      records; #522). 9dc9be3 to e5ebaa6 append section 15 to docs/proofs/k0_knowledge.md,
+      a status compilation of the k = 0 programme on 22 October that states no new
+      mathematics (the STRIP2-IN-JAM drop tree complete, pair3 never run, the A263
+      indices, the slab jobs, nest279 without a witness, thirteen source contradictions),
+      with LOG.md, the registry and the ledger. 0b0a072 corrects the compilation's path in
+      outreach note 03 (#526). n = 11 is settled by T-060 and T-112, so these are
+      structural statements at a settled count, as #526's entry records; the packet keeps
+      the compilation as it stood at the pin, 1,277 lines. Nothing to import.

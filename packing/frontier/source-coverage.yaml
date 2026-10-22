@@ -6539,6 +6539,29 @@ sources:
     3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
     stage; current cases and earlier source ownership remain unchanged.
 
+- id: evand-n303-2026-10-22
+  title: Evan Daniel's n303 dilation certificate at f06521f, issue728
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/f06521f4bde9e379a91c1ea88053f3e43df8ede5
+  local: resources/web/evand-n303-2026-10-22/
+  source_key: '[Daniel n303 2026-10-22]'
+  scope:
+    n_values:
+    - 303
+  reviewed: '2026-10-22'
+  source_date: '2026-10-22'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n303-2026-10-22/acquisition/claims.json
+  evidence:
+  - E-evand-728-n303-report
+  notes: The 1 complete certificate is retained as the source wrote them, admitted only where its exact
+    side equals, or rounds up to, the side its source prints. T-230 records the in-horizon report. All
+    3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
+    stage; current cases and earlier source ownership remain unchanged.
+
 - id: evand-n343-sweep-2026-10-20
   title: Evan Daniel's n343 certificate at 88385ab, issue702
   role: source-repository
