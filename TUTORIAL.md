@@ -366,8 +366,8 @@ possible packing.
 | --- | --- |
 | Linear programs, exact arithmetic, search and proofs | [Advanced Tutorial: Square Packing, Search, and Proof](TUTORIAL-ADVANCED.md) |
 | Current bounds, sources and witnesses for each size | [The frontier](packing/frontier/README.md) |
-| How historical record packings were found | [How Record Square Packings Are Found](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) |
-| The complete eleven-square argument | [Eleven-Square Optimality](https://jlevy.github.io/squares/papers/n11-optimality-review.html) |
+| How historical record packings were found | [How Record Square Packings Are Found](https://squaremath.org/papers/square-packing-methods-survey.html) |
+| The complete eleven-square argument | [Eleven-Square Optimality](https://squaremath.org/papers/n11-optimality-review.html) |
 | Evidence grades, confirmation and credit | [Epistemics](epistemics.md) |
 | The program, tools and retained research | [Synopsis](SYNOPSIS.md) and [development guide](development.md) |
 

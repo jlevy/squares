@@ -293,8 +293,8 @@ def test_inline_runtime_url_constructors_are_not_css_fetches() -> None:
         # Metadata for a crawler, read off the markup and never requested to display
         # the page. Both forms are outward addresses on purpose: a preview consumer
         # resolves them on its own machine and drops a relative one.
-        '<link rel="canonical" href="https://jlevy.github.io/squares/">',
-        '<meta property="og:image" content="https://jlevy.github.io/squares/a.png">',
+        '<link rel="canonical" href="https://squaremath.org/">',
+        '<meta property="og:image" content="https://squaremath.org/a.png">',
     ],
 )
 def test_a_data_uri_or_fragment_is_not_a_fetch(fragment: str) -> None:
@@ -739,8 +739,8 @@ def test_pages_installs_the_locked_package_before_building_the_workbench() -> No
 def test_workbench_navigation_resolves_to_the_pages_project_root() -> None:
     href = re.search(r'<a href="([^"]+)">the overview</a>', WORKBENCH_NOTE)
     assert href is not None
-    workbench = "https://jlevy.github.io/squares/workbench/"
-    assert urljoin(workbench, href.group(1)) == "https://jlevy.github.io/squares/"
+    workbench = "https://squaremath.org/workbench/"
+    assert urljoin(workbench, href.group(1)) == "https://squaremath.org/"
     assert href.group(1) == "../"
 
 
@@ -1352,7 +1352,7 @@ def test_authored_trump_footnote_links_evidenced_independent_contributors(page: 
         ("martin-gardner", "Gardner"),
     ):
         assert re.search(
-            rf'href="https://jlevy.github.io/squares/profiles/{identifier}\.html"[^>]*>{label}</a>',
+            rf'href="https://squaremath.org/profiles/{identifier}\.html"[^>]*>{label}</a>',
             footnotes,
         )
     assert "November 1980" in " ".join(footnotes.split())

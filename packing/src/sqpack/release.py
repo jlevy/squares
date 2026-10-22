@@ -89,6 +89,14 @@ class PublicationHistoryEntry(NamedTuple):
 # The leading entry is proposed for PR #578; confirm its date at first deployment.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.9.1",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.9.0",
         first_published="October 22, 2026",
         result_scope=(
@@ -858,6 +866,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for PR #578; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.17",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.16",
         first_published="October 22, 2026",
         result_scope=(
@@ -1011,7 +1027,7 @@ EXPLAINER_FIRST_PUBLISHED = EXPLAINER_HISTORY[-1].first_published
 #: `PUBLICATION_DATE`, the day the edition was first published, which stood still while
 #: the article changed under it: merging is the whole publish, so the text a reader sees
 #: moves between editions. Change it in the commit that changes the article.
-EXPLAINER_REVISED = "October 21, 2026"
+EXPLAINER_REVISED = "October 22, 2026"
 
 #: The optimality review's own editions, newest first, each with the day it was first
 #: published and what changed in the paper: the review's history, as `EXPLAINER_HISTORY`
@@ -1020,6 +1036,14 @@ EXPLAINER_REVISED = "October 21, 2026"
 #: (think-2cqu).
 # The leading entry is proposed for PR #578; confirm its date at first deployment.
 OPTIMALITY_REVIEW_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.9",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.1.8",
         first_published="October 21, 2026",
@@ -1146,6 +1170,14 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 # The leading entry is proposed for PR #578; confirm its date at first deployment.
 THRESHOLD_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.2",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.1",
         first_published="October 21, 2026",
         result_scope=(
@@ -1184,6 +1216,14 @@ THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 #: dates belong to the paper, independently of the site and n = 11 series.
 #: The leading entry is proposed for PR #578; confirm its date at first deployment.
 PACKING_METHODS_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.2.5",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.2.4",
         first_published="October 21, 2026",
@@ -1287,6 +1327,56 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:square-packing-methods-survey",
+        previous_version="v0.2.4",
+        version="v0.2.5",
+        impact="patch",
+        reason=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-threshold-bound-review",
+        previous_version="v0.1.1",
+        version="v0.1.2",
+        impact="patch",
+        reason=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-optimality-review",
+        previous_version="v0.1.8",
+        version="v0.1.9",
+        impact="patch",
+        reason=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.16",
+        version="v0.4.17",
+        impact="patch",
+        reason=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.9.0",
+        version="v0.9.1",
+        impact="patch",
+        reason=(
+            "Publish canonical website addresses at squaremath.org while retaining GitHub "
+            "repository citations."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.15",
@@ -6904,7 +6994,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "cadf73fd"
+PUBLICATION_REVISION = "76496462b0704486dc5099f866ef291c486f7840"
 
 
 def data_pathspec() -> tuple[str, ...]:

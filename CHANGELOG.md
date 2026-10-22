@@ -169,7 +169,7 @@ exports share infographic edition v0.6.1. The lower-bounds paper is published as
 - The lower-bounds paper includes the refreshed Atlas. The tutorial clarifies the scope
   of its counting-certificate limitations.
 
-Published artifacts: [Current 1–100 packing infographic](https://jlevy.github.io/squares/square-packings-100-20261008.pdf) · [Current 1–324 packing poster](https://jlevy.github.io/squares/square-packings-324-20261008.pdf) · [Lower-bounds paper](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html).
+Published artifacts: [Current 1–100 packing infographic](https://squaremath.org/square-packings-100-20261008.pdf) · [Current 1–324 packing poster](https://squaremath.org/square-packings-324-20261008.pdf) · [Lower-bounds paper](https://squaremath.org/papers/n11-lower-bounds-explainer.html).
 
 Component editions: Site v0.7.7; Infographics v0.6.1; New Lower Bounds for Square Packing for n = 11 v0.4.7.
 
@@ -220,7 +220,7 @@ linear programs, exact certificates, regularization and global proofs.
 - The Explanations index links the tutorials, research papers, downloadable PDFs, film
   and interactive Workbench. Both web Atlas views use the available screen width.
 
-Published artifacts: [Current basic tutorial](https://jlevy.github.io/squares/tutorial.html) · [Current advanced tutorial](https://jlevy.github.io/squares/tutorial-advanced.html) · [Current Explanations index](https://jlevy.github.io/squares/papers.html).
+Published artifacts: [Current basic tutorial](https://squaremath.org/tutorial.html) · [Current advanced tutorial](https://squaremath.org/tutorial-advanced.html) · [Current Explanations index](https://squaremath.org/papers.html).
 
 Component editions: Site v0.7.0.
 
@@ -247,7 +247,7 @@ proof.
   replay coverage. An independent evaluator in the Fitzharding review agrees on ten
   native facts, covering only a sample of the full trust boundary.
 
-Published artifacts: [Current Overbeck proof report](https://jlevy.github.io/squares/result/t-153.html) · [Current Fitzharding formalization report](https://jlevy.github.io/squares/result/t-154.html) · [Current explainer, including the 17-square reports](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html).
+Published artifacts: [Current Overbeck proof report](https://squaremath.org/result/t-153.html) · [Current Fitzharding formalization report](https://squaremath.org/result/t-154.html) · [Current explainer, including the 17-square reports](https://squaremath.org/papers/n11-lower-bounds-explainer.html).
 
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38536230832/job/115761676874)).
 
@@ -294,7 +294,7 @@ review; Hosono’s complete formula replay remains unfinished.
 - Independently verified lower bounds are unchanged. Each case record distinguishes
   reported bounds from independently verified ones.
 
-Published artifacts: [Current Fang theorem record](https://jlevy.github.io/squares/result/t-163.html) · [Current closed-form lower-bound record](https://jlevy.github.io/squares/result/t-180.html).
+Published artifacts: [Current Fang theorem record](https://squaremath.org/result/t-163.html) · [Current closed-form lower-bound record](https://squaremath.org/result/t-180.html).
 
 Component editions: Site v0.7.1.
 
@@ -323,7 +323,7 @@ remain in the history.
 - The regularized drawings and methods paper include the adopted packings and their
   sources. The earlier solved 264-square drawing remains available as history.
 
-Published artifacts: [Current 40-square lower-bound record](https://jlevy.github.io/squares/result/t-157.html) · [Current Ostashev certificate record](https://jlevy.github.io/squares/result/t-158.html) · [Current Calle layout record](https://jlevy.github.io/squares/result/t-159.html) · [Current Daniel 154-square certificate record](https://jlevy.github.io/squares/result/t-160.html) · [Current methods survey](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) · [Current methods survey PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf).
+Published artifacts: [Current 40-square lower-bound record](https://squaremath.org/result/t-157.html) · [Current Ostashev certificate record](https://squaremath.org/result/t-158.html) · [Current Calle layout record](https://squaremath.org/result/t-159.html) · [Current Daniel 154-square certificate record](https://squaremath.org/result/t-160.html) · [Current methods survey](https://squaremath.org/papers/square-packing-methods-survey.html) · [Current methods survey PDF](https://squaremath.org/papers/square-packing-methods-survey.pdf).
 
 Component editions: Site v0.6.1; How Record Square Packings Are Found v0.2.2.
 
@@ -349,7 +349,7 @@ identify which component changed.
   release dates. The audit also accounts for internal work omitted from the public
   changelog.
 
-Published artifacts: [Current About changelog](https://jlevy.github.io/squares/about.html#changelog) · [Current 1–100 packing infographic](https://jlevy.github.io/squares/square-packings-100-20261008.pdf) · [Current 1–324 packing poster](https://jlevy.github.io/squares/square-packings-324-20261008.pdf) · [Current lower-bounds explainer](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html).
+Published artifacts: [Current About changelog](https://squaremath.org/about.html#changelog) · [Current 1–100 packing infographic](https://squaremath.org/square-packings-100-20261008.pdf) · [Current 1–324 packing poster](https://squaremath.org/square-packings-324-20261008.pdf) · [Current lower-bounds explainer](https://squaremath.org/papers/n11-lower-bounds-explainer.html).
 
 Component editions: Site v0.6.0; Infographics v0.6.0; New Lower Bounds for Square Packing for n = 11 v0.4.6.
 
@@ -379,7 +379,7 @@ source packing and modification.
 - Both posters use the selected drawings and compact attribution. The records retain
   generator, modification and construction credits.
 
-Published artifacts: [Current atlas with Regularized / Original comparison](https://jlevy.github.io/squares/atlas.html) · [Current 1–100 packing infographic](https://jlevy.github.io/squares/square-packings-100-20261008.pdf) · [Current 1–324 packing poster](https://jlevy.github.io/squares/square-packings-324-20261008.pdf) · [Current exact-side batch record](https://jlevy.github.io/squares/result/t-155.html) · [Current 290-square exact certificate record](https://jlevy.github.io/squares/result/t-156.html).
+Published artifacts: [Current atlas with Regularized / Original comparison](https://squaremath.org/atlas.html) · [Current 1–100 packing infographic](https://squaremath.org/square-packings-100-20261008.pdf) · [Current 1–324 packing poster](https://squaremath.org/square-packings-324-20261008.pdf) · [Current exact-side batch record](https://squaremath.org/result/t-155.html) · [Current 290-square exact certificate record](https://squaremath.org/result/t-156.html).
 
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38527537367/job/115733950233)).
 
@@ -433,7 +433,7 @@ scores and corrected three. Numerical bounds and verification ratings are unchan
   announcement tool includes source credit and verification limits in result
   descriptions.
 
-Published artifacts: [Current results, including the corrected significance scores](https://jlevy.github.io/squares/results.html).
+Published artifacts: [Current results, including the corrected significance scores](https://squaremath.org/results.html).
 
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38551948126/job/115813924621)).
 
@@ -480,7 +480,7 @@ sub-pattern ledger, including eleven from [Hiroaki Hosono](packing/contributors/
 distinguishes those mathematical sources from Fitzharding’s formalization and reported
 build.
 
-Published artifacts: [Current 17-square Lean proof report](https://jlevy.github.io/squares/result/t-154.html).
+Published artifacts: [Current 17-square Lean proof report](https://squaremath.org/result/t-154.html).
 
 First public: 2026-10-13 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702)).
 
@@ -502,7 +502,7 @@ producer tree replays and an independently isolated root. The full capture compu
 and ten remaining trees have not been replayed. These samples do not confirm the whole
 proof.
 
-Published artifacts: [Current 17-square candidate-proof record](https://jlevy.github.io/squares/result/t-153.html).
+Published artifacts: [Current 17-square candidate-proof record](https://squaremath.org/result/t-153.html).
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
@@ -527,7 +527,7 @@ V0/C1.
 - A separately prompted project AI agent conducted the review, blind to the first review
   until its findings were written. It is not a human oversight record.
 
-PRs and supporting records: [\#577](https://github.com/jlevy/squares/pull/577) · [Second adversarial review and its dated corrections](docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md) · [Candidate proof record](https://jlevy.github.io/squares/result/t-153.html).
+PRs and supporting records: [\#577](https://github.com/jlevy/squares/pull/577) · [Second adversarial review and its dated corrections](docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md) · [Candidate proof record](https://squaremath.org/result/t-153.html).
 
 <a id="changelog-entry-regularization-foundations"></a>
 
@@ -586,7 +586,7 @@ history.
   audits and an independent near-axis check. The complete 43-slab kernel replay and
   result registration remain unfinished at this date.
 
-Published artifacts: [Current PingYou 207-square admission](https://jlevy.github.io/squares/result/t-147.html) · [Current PingYou 153-square admission](https://jlevy.github.io/squares/result/t-148.html) · [Current Ostashev admission](https://jlevy.github.io/squares/result/t-149.html) · [Current Barnett refinement admission](https://jlevy.github.io/squares/result/t-150.html) · [Current atlas of adopted packings](https://jlevy.github.io/squares/atlas.html).
+Published artifacts: [Current PingYou 207-square admission](https://squaremath.org/result/t-147.html) · [Current PingYou 153-square admission](https://squaremath.org/result/t-148.html) · [Current Ostashev admission](https://squaremath.org/result/t-149.html) · [Current Barnett refinement admission](https://squaremath.org/result/t-150.html) · [Current atlas of adopted packings](https://squaremath.org/atlas.html).
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
@@ -603,7 +603,7 @@ PingYou Ltd identifies its unreleased AI agent, PY, as assisting with its 153- a
 statement alongside the earlier disclosure history. Bounds and verification ratings are
 unchanged.
 
-Published artifacts: [Current 207-square PingYou record](https://jlevy.github.io/squares/result/t-147.html) · [Current 153-square PingYou record](https://jlevy.github.io/squares/result/t-148.html).
+Published artifacts: [Current 207-square PingYou record](https://squaremath.org/result/t-147.html) · [Current 153-square PingYou record](https://squaremath.org/result/t-148.html).
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
@@ -642,7 +642,7 @@ and preserve earlier bounds.
 The certificates establish that the packings fit in the stated containers. They give
 upper bounds, without a lower-bound or optimality claim.
 
-Published artifacts: [Current SQUISH admission record](https://jlevy.github.io/squares/result/t-151.html) · [Current Couzo refinement record](https://jlevy.github.io/squares/result/t-152.html).
+Published artifacts: [Current SQUISH admission record](https://squaremath.org/result/t-151.html) · [Current Couzo refinement record](https://squaremath.org/result/t-152.html).
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
@@ -675,7 +675,7 @@ The 46-square citation and the README and About accounts of $s(60) = 8$ now expl
 credit [Evan Daniel](packing/contributors/people/evan-daniel.md). The attribution audit covers the result register, Atlas and reader
 pages. His unreplayed family of results remains reported.
 
-Published artifacts: [Current contributor and result overview](https://jlevy.github.io/squares/about.html).
+Published artifacts: [Current contributor and result overview](https://squaremath.org/about.html).
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
@@ -702,7 +702,7 @@ the standing 40-square lower bound. The upper bounds are adopted in a later rele
 - Imports driven by source declarations, a third exact feasibility checker and typed
   records make unfinished confirmations and regularizations explicit beside each claim.
 
-Published artifacts: [Current 40-square continuous-pose admission](https://jlevy.github.io/squares/result/t-145.html) · [Current Daniel regularized-certificate admission](https://jlevy.github.io/squares/result/t-146.html) · [Current result register](https://jlevy.github.io/squares/results.html).
+Published artifacts: [Current 40-square continuous-pose admission](https://squaremath.org/result/t-145.html) · [Current Daniel regularized-certificate admission](https://squaremath.org/result/t-146.html) · [Current result register](https://squaremath.org/results.html).
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
@@ -718,7 +718,7 @@ Reader pages use narrower text columns and responsive, text-only navigation acro
 screen sizes. Editorial corrections clarify public explanations and links. Two retained
 reviews identify 16 substantive follow-ups still requiring evidence or author decisions.
 
-Published artifacts: [Current project overview](https://jlevy.github.io/squares/) · [Current About page](https://jlevy.github.io/squares/about.html).
+Published artifacts: [Current project overview](https://squaremath.org/) · [Current About page](https://squaremath.org/about.html).
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
@@ -739,7 +739,7 @@ record alongside the drawings.
 - Red indicators replace stars for recent results. Proof and bound status remain
   distinct.
 
-Published artifacts: [Overview](https://jlevy.github.io/squares/) · [Atlas](https://jlevy.github.io/squares/atlas.html) · [Results](https://jlevy.github.io/squares/results.html) · [Papers and downloads](https://jlevy.github.io/squares/papers.html).
+Published artifacts: [Overview](https://squaremath.org/) · [Atlas](https://squaremath.org/atlas.html) · [Results](https://squaremath.org/results.html) · [Papers and downloads](https://squaremath.org/papers.html).
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
@@ -755,7 +755,7 @@ The homepage and About invite contributions through a shared result-report form 
 asks contributors how they want to be credited. README opens with the website and
 packing Atlas, giving readers a direct route to the work and its reporting form.
 
-Published artifacts: [Project homepage](https://jlevy.github.io/squares/) · [Reporting results on About](https://jlevy.github.io/squares/about.html).
+Published artifacts: [Project homepage](https://squaremath.org/) · [Reporting results on About](https://squaremath.org/about.html).
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
@@ -776,7 +776,7 @@ The project retains [Evan Daniel](packing/contributors/people/evan-daniel.md)’
 certificate matches T-128’s exact side; comparing the poses establishes neither a
 connecting motion nor local-minimum equivalence.
 
-Published artifacts: [Current 132-square record-hunt record](https://jlevy.github.io/squares/result/t-131.html).
+Published artifacts: [Current 132-square record-hunt record](https://squaremath.org/result/t-131.html).
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
@@ -810,7 +810,7 @@ explains exact arithmetic for Xu’s 51-square witness, records later refinement
 distinguishes local rigidity from optimality. It follows the survey’s 9 October
 publication.
 
-Published artifacts: [Current methods tutorial](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) · [Current methods tutorial PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf).
+Published artifacts: [Current methods tutorial](https://squaremath.org/papers/square-packing-methods-survey.html) · [Current methods tutorial PDF](https://squaremath.org/papers/square-packing-methods-survey.pdf).
 
 Component editions: How Record Square Packings Are Found v0.2.0.
 
@@ -828,7 +828,7 @@ Paper fronts, references and version histories use consistent title case and
 typographic punctuation. Part I’s print spacing keeps its colophon with the final
 source notes in the 22-page PDF.
 
-Published artifacts: [Current Part I paper](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html) · [Current Part I PDF](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.pdf) · [Current Part II paper](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html) · [Current Part II PDF](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.pdf) · [Current Part III paper](https://jlevy.github.io/squares/papers/n11-optimality-review.html) · [Current Part III PDF](https://jlevy.github.io/squares/papers/n11-optimality-review.pdf) · [Current methods tutorial](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) · [Current methods tutorial PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf).
+Published artifacts: [Current Part I paper](https://squaremath.org/papers/n11-lower-bounds-explainer.html) · [Current Part I PDF](https://squaremath.org/papers/n11-lower-bounds-explainer.pdf) · [Current Part II paper](https://squaremath.org/papers/n11-threshold-bound-review.html) · [Current Part II PDF](https://squaremath.org/papers/n11-threshold-bound-review.pdf) · [Current Part III paper](https://squaremath.org/papers/n11-optimality-review.html) · [Current Part III PDF](https://squaremath.org/papers/n11-optimality-review.pdf) · [Current methods tutorial](https://squaremath.org/papers/square-packing-methods-survey.html) · [Current methods tutorial PDF](https://squaremath.org/papers/square-packing-methods-survey.pdf).
 
 Component editions: New Lower Bounds for Square Packing for n = 11 v0.4.5; How Record Square Packings Are Found v0.2.1.
 
@@ -854,7 +854,7 @@ different views of the same packings on screen and in print.
 The published v0.5.0 edition remains available. The redesign establishes no mathematical
 result or proof.
 
-Published artifacts: [Current interactive atlas](https://jlevy.github.io/squares/atlas.html) · [Current 100-packing infographic PDF](https://jlevy.github.io/squares/square-packings-100-20261008.pdf) · [Current 324-packing infographic PDF](https://jlevy.github.io/squares/square-packings-324-20261008.pdf) · [Current 100-packing SVG](https://jlevy.github.io/squares/known-best-1-100.svg) · [Current 324-packing SVG](https://jlevy.github.io/squares/known-best-1-324.svg).
+Published artifacts: [Current interactive atlas](https://squaremath.org/atlas.html) · [Current 100-packing infographic PDF](https://squaremath.org/square-packings-100-20261008.pdf) · [Current 324-packing infographic PDF](https://squaremath.org/square-packings-324-20261008.pdf) · [Current 100-packing SVG](https://squaremath.org/known-best-1-100.svg) · [Current 324-packing SVG](https://squaremath.org/known-best-1-324.svg).
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
@@ -974,7 +974,7 @@ The first edition of the square-packing methods survey explains how geometric se
 - The survey distinguishes a reported search method from a certificate that proves a packing fits, and both from a proof of optimality.
 - Version 0.1.0 has an 8 October evidence cutoff, covering retained releases through 7 October. The later illustrated edition is recorded separately.
 
-PRs and supporting records: [\#458](https://github.com/jlevy/squares/pull/458) · [Methods survey](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) · [Initial publication](https://github.com/jlevy/squares/pull/458).
+PRs and supporting records: [\#458](https://github.com/jlevy/squares/pull/458) · [Methods survey](https://squaremath.org/papers/square-packing-methods-survey.html) · [Initial publication](https://github.com/jlevy/squares/pull/458).
 
 <a id="changelog-entry-ryu-polynomial-deficiency-reports"></a>
 
@@ -1034,7 +1034,7 @@ and repository sources.
 Formulas preserve the reader’s text font while using a mathematical font for operators
 and structures.
 
-PRs and supporting records: [\#456](https://github.com/jlevy/squares/pull/456) · [Frontier table](https://jlevy.github.io/squares/frontier.html) · [Static rendering and deployment work](https://github.com/jlevy/squares/pull/456).
+PRs and supporting records: [\#456](https://github.com/jlevy/squares/pull/456) · [Frontier table](https://squaremath.org/frontier.html) · [Static rendering and deployment work](https://github.com/jlevy/squares/pull/456).
 
 <a id="changelog-date-2026-09-30"></a>
 
@@ -1062,7 +1062,7 @@ unit square to rotate independently and permitting boundary contact.
   V3/C3. A second adversarial AI review and documented human oversight are still
   needed for V4/C4.
 
-PRs and supporting records: [\#246](https://github.com/jlevy/squares/pull/246) · [Current eleven-square result](https://jlevy.github.io/squares/result/t-060.html) · [Current eleven-square optimality explainer](https://jlevy.github.io/squares/papers/n11-optimality-review.html) · [Ahmed’s original proof](https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c) · [Retained verification and reproduction limits](packing/resources/web/n11-optimality-2026-09-29/README.md) · [Mathematical audit and final acceptance](docs/project/reviews/review-2026-09-29-n11-optimality-census-contract.md) · [Revised verification and confirmation ladder](https://github.com/jlevy/squares/pull/262).
+PRs and supporting records: [\#246](https://github.com/jlevy/squares/pull/246) · [Current eleven-square result](https://squaremath.org/result/t-060.html) · [Current eleven-square optimality explainer](https://squaremath.org/papers/n11-optimality-review.html) · [Ahmed’s original proof](https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c) · [Retained verification and reproduction limits](packing/resources/web/n11-optimality-2026-09-29/README.md) · [Mathematical audit and final acceptance](docs/project/reviews/review-2026-09-29-n11-optimality-census-contract.md) · [Revised verification and confirmation ladder](https://github.com/jlevy/squares/pull/262).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

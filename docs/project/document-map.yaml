@@ -13,6 +13,8 @@ documents:
   - {path: packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md, role: review, authority: record, lifecycle: retained}
   - {path: attribution.md, role: conventions, authority: definitive, lifecycle: maintained}
   - {path: packing/contributors/README.md, role: component-guide, authority: current, lifecycle: maintained}
+  - {path: docs/project/guides/site-deployment.md, role: component-guide, authority: current, lifecycle: maintained}
+  - {path: docs/project/specs/active/plan-2026-10-22-squaremath-domain.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-21-evand-regularized-views.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md, role: review, authority: record, lifecycle: retained}

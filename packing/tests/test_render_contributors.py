@@ -63,7 +63,7 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     )
     assert "Credits count distinct results that credit a person" in index
     assert "<title>Profiles" in index
-    assert 'rel="canonical" href="https://jlevy.github.io/squares/profiles/"' in index
+    assert 'rel="canonical" href="https://squaremath.org/profiles/"' in index
     # The directory names cited authors as well as contributors, and calls none of them
     # contributors in its own voice; the colophon links it by the same name.
     assert "Contributors<" not in index
