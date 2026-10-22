@@ -80,10 +80,14 @@ class Rows(HTMLParser):
         super().__init__()
         self.rows: list[tuple[dict[str, str | None], list[dict[str, str | None]]]] = []
         self.head: list[dict[str, str | None]] = []
+        self.popovers: list[dict[str, str | None]] = []
         self._body = False
         self._cell: dict[str, str | None] | None = None
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        if "popover" in attributes:
+            self.popovers.append(attributes)
         if tag == "tbody":
             self._body = True
         elif tag == "tr" and self._body:
@@ -627,7 +631,11 @@ def test_a_row_opens_its_case_record(cases: dict[int, dict[str, Any]]) -> None:
     assert ">n-011.md</a>" in row
     assert '<a class="site-cell-quiet" href="cases/11.html" data-case="11">Record</a>' in row
     table = frontier.table_html([cases[11], cases[12]])
-    assert table.count('<div class="site-popover') == 1
+    parser = Rows()
+    parser.feed(table)
+    assert [(item["id"], item["role"], item["aria-label"]) for item in parser.popovers] == [
+        ("pop-case", "dialog", "Case record")
+    ]
     assert table.index("</table>") < table.index('id="pop-case"')
     assert "<details" not in table
 

@@ -131,10 +131,13 @@ def profile_identifier(
     return match[1] if match and match[1] in people else None
 
 
-def person_label(name: str, address: str) -> str:
+def person_label(name: str, address: str, *, full_names: bool = False) -> str:
     """Paper-front identities already have a reviewed profile destination."""
     identifier = profile_identifier(address)
-    return public_names()[identifier].label if identifier is not None else name
+    if identifier is None:
+        return name
+    person = public_names()[identifier]
+    return person.full_name if full_names else person.label
 
 
 @dataclass(frozen=True)

@@ -4,6 +4,7 @@ import re
 import shutil
 import subprocess
 from dataclasses import replace
+from html.parser import HTMLParser
 from pathlib import Path
 
 import pytest
@@ -789,17 +790,49 @@ def test_credit_thread_references_stay_with_the_result_they_document(
         results=REGISTER,
     )
     section = article.split('<section id="credited-work">', 1)[1].split("</section>", 1)[0]
-    lines = re.findall(r"<li>.*?</li>", section)
-    first = next(line for line in lines if ">T-030</a>" in line)
-    second = next(line for line in lines if ">T-201</a>" in line)
-    assert "Source:" in first
-    assert "Registered in:" in first
-    assert "#8" in first
-    assert "Source:" in second
-    assert "Registered in:" not in second
-    assert "#8" not in second
-    assert "https://github.com/example/work/issues/7#issuecomment-1" in first
-    assert '<span class="site-contributor-references">' in first
+
+    class CreditItems(HTMLParser):
+        def __init__(self) -> None:
+            super().__init__()
+            self.items: list[tuple[list[str], list[str], list[str]]] = []
+            self.current: tuple[list[str], list[str], list[str]] | None = None
+
+        def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+            attributes = dict(attrs)
+            if tag == "li":
+                self.current = ([], [], [])
+                self.items.append(self.current)
+            if self.current is not None:
+                if tag == "a" and (href := attributes.get("href")):
+                    self.current[1].append(href)
+                self.current[2].extend((attributes.get("class") or "").split())
+
+        def handle_data(self, data: str) -> None:
+            if self.current is not None:
+                self.current[0].append(data)
+
+        def handle_endtag(self, tag: str) -> None:
+            if tag == "li":
+                self.current = None
+
+    parser = CreditItems()
+    parser.feed(section)
+    first = next(item for item in parser.items if "result/t-030.html" in item[1])
+    second = next(item for item in parser.items if "result/t-201.html" in item[1])
+    first_words, second_words = "".join(first[0]), "".join(second[0])
+    assert "Source:" in first_words
+    assert "Registered in:" in first_words
+    assert "#8" in first_words
+    assert "Source:" in second_words
+    assert "Registered in:" not in second_words
+    assert "#8" not in second_words
+    evidence = "https://github.com/example/work/issues/7#issuecomment-1"
+    registration = "https://github.com/jlevy/squares/pull/8"
+    assert evidence in first[1]
+    assert evidence in second[1]
+    assert registration in first[1]
+    assert registration not in second[1]
+    assert "site-contributor-references" in first[2]
 
 
 def test_directory_unknown_years_and_zero_work_cells_are_blank() -> None:
