@@ -5,7 +5,7 @@ title: REGULARIZATION_TOOLS comment says nothing imports them; select_houses, ad
 kind: bug
 status: in_progress
 priority: 3
-version: 3
+version: 4
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 delegate: c-lane-tooling-1022
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m1sx5m1p5868jhwcdzfkvada
 hold: null
 hold_until: null
 created_at: 2026-10-22T11:10:00.024Z
-updated_at: 2026-10-22T14:11:04.598Z
+updated_at: 2026-10-22T19:22:32.463Z
 started_at: 2026-10-22T11:14:09.398Z
 ---
 Owner note from review A of #721 (not a finding against that PR).
@@ -33,3 +33,5 @@ Review: https://github.com/jlevy/squares/pull/721#issuecomment-6339260683
 - What fails at load: `algebraic_witness_reports` imports `regularize_evand` at module level, so it, `select_houses` and `adopt_houses` fail, and so do `tests/test_exact_sides.py` and `tests/test_improvement_rule.py`.
 - What loads but fails when called: `default_drawings`, `register_regularized_bounds`, `regularize_axis_components` and `select_houses` import the tools inside functions. `check_results` (via `upper_bound_houses`) and `validate_schemas` (via `overview_sections` -> `default_drawings`) reach such calls and never make them.
 - Decision taken: guard, not rescue. `test_no_control_loads_a_pruned_tool` (think-wtso's optional check) fails any control whose program loads a pruned file, so a future control on `select_houses` or `adopt_houses` fails at review rather than in a worker. Rescuing the tools those modules need stays open with think-d2he (stub copy-back), if the owner wants it.
+
+2026-10-22 c-lane-tooling-1022, #723 review A2 (`7d64847c7`): the note now gives the count. On 22 October, 15 unpruned modules import a pruned tool at load: `algebraic_witness_reports`, `select_houses`, `adopt_houses` and 12 tests. The list is left to `test_no_control_loads_a_pruned_tool`. Head `09e3ba373`, hosted CI green. The scope is done; it closes at merge.
