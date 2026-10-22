@@ -257,6 +257,40 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # operating-rules append script and `test_change_scoped_selection`) are red
 # identically. Left out, with this note and its release record, the snapshot measures
 # 229,891,287 bytes, 2,892,585 under the cap.
+# 2026-10-22, think-i903: main 7359fa8b6 read 231,655,578 bytes, 1,128,294 under the
+# then 222 MiB cap, and main 0281e7763, with #720 merged, 232,414,111, 369,761 under it,
+# with issue 719's records (about 0.5 to 0.8 MB) behind them. Answered by option (b)
+# again, with four on-request tools (below) and 121 entries here: 599 files and
+# 4,782,231 bytes that no worker command reads. They are the regularized drawings' run
+# evidence (each run's per-count reports, receipts and `run.json`, the selections' JSON
+# and the review galleries: 506 files, 2,912,772 bytes), the regularized bounds'
+# generated views (60, 448,778), the 14 October ledger's retained lane claim copies and
+# undecided sides with the 14 and 16 October comment drafts (16, 851,114), the 8 October
+# n17 reconciliation and the 18 and 19 October issue and source receipts (5, 97,846),
+# the house adoption's prior-state receipts (9, 191,528), the ds7 lower-bound audit
+# (230,276) and the 2 October author-checker profile's timings and attribution (49,917).
+# Every README and `selection-*.md` stays in workers, as do each ledger's README, data
+# files and `lane-claims/README.md`, the 11 October custody receipt
+# (`upper_bound_houses` names it) and the n5 motion lab (`test_motion_lab` reads it).
+# Each of the 50 distinct commands and the five commands the worker tests run, unmutated
+# under `strace -f -e trace=%file` in a worker built at 0b09ac278 that held them, opened
+# none of the 599 except in sweeps that look for nothing here: `check_readme`'s
+# retired-identifier sweep (113 files, none holding the identifier), `validate_schemas`'
+# defect-citation sweep (the two comment drafts, neither citing a defect) and the
+# directory walks of `ledger check`, `check_generated_markdown` and
+# `test_change_scoped_selection`. `--audit-snapshot --prune-candidate` with the 121
+# against main's selector finds no registered mention and no inline or result rescue,
+# and every entry prunes something. #578 has since raised the cap to 255 MiB for the
+# contributor profiles (see `SNAPSHOT_MAX_BYTES`): main d660905ec, with it merged, reads
+# 266,509,045 bytes, 877,835 under it, and at that tree the audit finds no contributor
+# rescue either and the entries leave exactly the same 607 files with the tools below.
+# With them left out, all 174 controls fire at `-j 2`, and each of the 50 distinct
+# commands, run unmutated at d660905ec in a worker with them and in one without them,
+# prints the same output apart from wall times and the runner-preflight lease timestamp,
+# except that `check_no_embedded_js` reads 1,902 Python files rather than 1,910, the
+# eight below fewer, to the same verdict; the four already red are red identically. Left
+# out, with this note and its release record, the snapshot measures 261,568,999 bytes,
+# 5,817,881 under the cap.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
@@ -507,6 +541,169 @@ UNREAD_WORKER_OUTPUTS = frozenset(
                 ),
                 "exp-315-shared-centre-endpoint/execution-manifest.json",
             )
+        ),
+        # 2026-10-22 (think-i903): 121 entries, 599 files, by the note above. The
+        # regularized drawings' run evidence first; each run's README and
+        # `selection-*.md` stay.
+        *(
+            ROOT / "cases/regularized_drawings" / run / name
+            for run, names in (
+                (
+                    "think-0ut1-2026-10-16",
+                    (
+                        "grid-slack-timing.tsv",
+                        "leftovers-1016",
+                        "leftovers-audit-deg1-1016",
+                        "leftovers-audit-deg5-1016",
+                        "leftovers-deg05-1016",
+                        "leftovers-deg1-1016",
+                        "leftovers-deg5-1016",
+                        "selection-leftovers-tree.txt",
+                        "selection-leftovers.json",
+                    ),
+                ),
+                (
+                    "think-30n2-2026-10-16",
+                    (
+                        *(
+                            f"adopt-2026-10-16-n29-{variant}"
+                            for variant in ("evand", "grid-0.5", "grid-1", "grid-5")
+                        ),
+                        "selection-n29.json",
+                    ),
+                ),
+                (
+                    "think-3mry-2026-10-17",
+                    (
+                        *(
+                            f"adopt174{part}-1017"
+                            for part in ("", "-b", "-c", "-deg05", "-deg1", "-deg5")
+                        ),
+                        *(f"adopt174-c-{degree}-1017" for degree in ("deg05", "deg1", "deg5")),
+                        "selection-adopt174-c.json.gz",
+                        "selection-adopt174.json.gz",
+                    ),
+                ),
+                (
+                    "think-3zi3-2026-10-16",
+                    (
+                        *(f"3c{part}-1016" for part in ("", "-deg05", "-deg1", "-deg5")),
+                        "selection-3c.json",
+                    ),
+                ),
+                (
+                    "think-kpm3-2026-10-16",
+                    (
+                        *(f"3b{part}-1016" for part in ("", "-deg05", "-deg1", "-deg5")),
+                        "selection-3b.json",
+                    ),
+                ),
+                (
+                    "think-la7h-2026-10-16",
+                    (
+                        *(
+                            f"3a-rerun{part}-1016"
+                            for part in ("", "-303", "-deg05", "-deg1", "-deg5", "-deg5b", "-s")
+                        ),
+                        "evand-addr644-1016",
+                        "selection-3a-d1.json",
+                        "selection-3a.json",
+                    ),
+                ),
+                (
+                    "think-z7wn-2026-10-16",
+                    (
+                        "review-211",
+                        "selection-r3cl.json",
+                        "selection-z7wn-a.json",
+                        *(
+                            f"z7wn-{side}{part}-1016"
+                            for side in ("a", "b")
+                            for part in ("", "-deg05", "-deg1", "-deg5")
+                        ),
+                    ),
+                ),
+                (
+                    "think-jh4w-2026-10-19",
+                    (
+                        *(
+                            f"adopt-2026-10-19-n183-{variant}"
+                            for variant in ("evand", "grid-0.5", "grid-1", "grid-5")
+                        ),
+                        "selection-n183.json",
+                    ),
+                ),
+                *(
+                    (
+                        run,
+                        (
+                            *(
+                                f"adopt-{adoption}-{variant}"
+                                for variant in ("evand", "grid-deg05", "grid-deg1", "grid-deg5")
+                            ),
+                            f"selection-adopt-{adoption}{suffix}",
+                        ),
+                    )
+                    for run, adoption, suffix in (
+                        ("think-ip1p-2026-10-19", "2026-10-19-n155-271", ".json.gz"),
+                        ("think-h8jm-2026-10-20", "2026-10-20-n154-308", ".json"),
+                        ("think-xu4d-2026-10-20", "2026-10-20-n204-260", ".json.gz"),
+                        ("think-a9jp-2026-10-21", "2026-10-21-n270", ".json"),
+                    )
+                ),
+                (
+                    "think-qdcc-2026-10-20",
+                    (
+                        *(
+                            f"adopt-2026-10-20-n227-260-{variant}"
+                            for variant in ("evand", "grid-deg05", "grid-deg1", "grid-deg5")
+                        ),
+                        "selection-n227-n260.json",
+                    ),
+                ),
+                (
+                    "think-ql4v-2026-10-22",
+                    (
+                        *(
+                            f"adopt-2026-10-22-{counts}-{variant}"
+                            for counts in ("n204-260", "n227")
+                            for variant in ("evand", "grid-deg05", "grid-deg1", "grid-deg5")
+                        ),
+                        "selection-adopt-2026-10-22-n204-260.json.gz",
+                        "selection-adopt-2026-10-22-n227.json.gz",
+                    ),
+                ),
+            )
+            for name in names
+        ),
+        ROOT / "cases/regularized_bounds/views",
+        ROOT / "cases/regularized_bounds/grid-slack-2026-10-13/views",
+        # The 14 October ledger's lane claim copies, undecided sides and comment drafts;
+        # its README, data files and `lane-claims/README.md` stay.
+        *(
+            ROOT / "campaign/issue-intake" / relative
+            for relative in (
+                *(
+                    f"upper-bounds-20261014/lane-claims/{lane}"
+                    for lane in ("couzo", "mishapolk", "pingyou", "pr574")
+                ),
+                "upper-bounds-20261014/undecided-sides.json",
+                "upper-bounds-20261014/comments.yaml",
+                "upper-bounds-20261016/comments.yaml",
+                "n17-20261008",
+                "intake-20261019/issue-678.json",
+                "intake-20261018/manual-source-receipt.json",
+                "intake-20261019/manual-source-receipt.json",
+            )
+        ),
+        *(
+            ROOT / f"devtools/house-adoption-prior-state-2026-10-{day}.json.xz"
+            for day in (11, 12, 15, 16, 17, 19, 20, 21, 22)
+        ),
+        ROOT / "frontier/ds7-lower-bound-audit.json",
+        *(
+            ROOT / "benchmarks/results/author-checker-profile-2026-10-02" / name
+            for name in ("timings.json", "attribution/attribution.json")
         ),
     }
 )
@@ -1241,9 +1438,33 @@ PRUNE |= REGULARIZATION_TOOLS
 # 2026-10-21, issue 686's import (think-9vjn), with main d640ad8fb: 8,969 bytes over the
 # cap. Its tool runs on request and only its test imports it; `--audit-snapshot` finds no
 # registered mention or rescue for either (27,204 bytes), the regularization tools' grounds.
+# 2026-10-22 (think-i903, with the note at `UNREAD_WORKER_OUTPUTS`): four more join on
+# the same grounds, with their tests (170,410 bytes): issue 715's replay, the 22 October
+# backlog's beyond-horizon replay (#720), the 14 October ledger's exact decision of its
+# undecided comparisons, whose input `undecided-sides.json` leaves with the note's
+# entries, and the Couzo follow-up report's registration. Each runs on request and only
+# its own test imports it; no control, validation step or worker test runs one, and
+# `--audit-snapshot` finds no registered mention or rescue for any of the eight files.
+# In a worker they are read only where every module or text file is: by the
+# embedded-JavaScript and probe scans, `check_readme`'s retired-identifier sweep, and
+# the whole suite's unmutated collection, which stops on the worker's missing `HEAD`
+# either way. Not `intake_comments.py`: `ledger check` stats it as a declared campaign
+# path. Not `couzo_678_replay.py`: `upper_bound_houses` imports it and `check_results`
+# opens it in workers.
 ON_REQUEST_IMPORT_TOOLS = frozenset(
     ROOT / relative
-    for relative in ("devtools/muglich_686_import.py", "tests/test_muglich_686_import.py")
+    for relative in (
+        "devtools/muglich_686_import.py",
+        "tests/test_muglich_686_import.py",
+        "devtools/couzo_715_replay.py",
+        "tests/test_upper_bound_reports_715.py",
+        "devtools/beyond_horizon_replay.py",
+        "tests/test_beyond_horizon_replay.py",
+        "devtools/decide_undecided_comparisons.py",
+        "tests/test_decide_undecided_comparisons.py",
+        "devtools/register_couzo_followup_report.py",
+        "tests/test_register_couzo_followup_report.py",
+    )
 )
 PRUNE |= ON_REQUEST_IMPORT_TOOLS
 # Build caches: excluded from the counted surface and from every worker tree, by
