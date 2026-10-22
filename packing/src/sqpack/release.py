@@ -1975,6 +1975,26 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the #715 import (Francisco Couzo's 109 new beyond-horizon rows at or "
+            "below 1024, and the #715 and #678 replies) against main d7923b8d: the survey "
+            "cites neither the #715 request nor the couzo-issue715-2026-10-21 source. "
+            "Rendered at link revision 56dc2454 into empty site directories, from this tree "
+            "and with main's copies of the two inputs: render_packing_methods writes 42 "
+            "byte-identical files. No PDF printed; it prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
