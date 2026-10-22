@@ -5,11 +5,11 @@
   "command": "python -m devtools.upper_bound_houses custody",
   "runtime": "CPython 3.14.7",
   "host": "vm",
-  "setup_seconds": 11.76,
-  "call_seconds": 30.88,
+  "setup_seconds": 13.09,
+  "call_seconds": 30.37,
   "child_timeout_seconds": 120,
   "snapshot_cap_bytes": 267386880,
-  "snapshot_source_bytes": 262864922,
+  "snapshot_source_bytes": 262876939,
   "fresh_geometric_deciders": false,
   "houses": {"29":"T-195","68":"T-174","70":"T-146","84":"T-174","86":"T-174","102":"T-146","103":"T-174","105":"T-229","108":"T-174","110":"T-174","123":"T-146","126":"T-139","127":"T-174","129":"T-186","130":"T-174","131":"T-174","132":"T-174","146":"T-187","153":"T-173","154":"T-222","155":"T-197","156":"T-186","172":"T-174","175":"T-186","176":"T-186","179":"T-174","180":"T-174","181":"T-174","182":"T-174","183":"T-220","204":"T-229","206":"T-174","207":"T-173","208":"T-174","209":"T-174","210":"T-174","211":"T-188","227":"T-225","228":"T-174","229":"T-225","232":"T-186","236":"T-218","237":"T-190","238":"T-174","239":"T-174","240":"T-174","241":"T-182","258":"T-146","259":"T-136","260":"T-225","261":"T-174","263":"T-174","264":"T-186","267":"T-134","268":"T-174","269":"T-174","270":"T-224","271":"T-219","272":"T-174","273":"T-174","292":"T-146","295":"T-146","297":"T-174","302":"T-186","303":"T-186","304":"T-186","305":"T-174","306":"T-174","307":"T-174","308":"T-221"},
   "inputs": [
@@ -197,7 +197,7 @@
     {"path":"packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-260.cert.gz","bytes":3939,"sha256":"098be6c5f9ce5b8d2990584187823d808ce153e433b8fa1884ce679da720f037"},
     {"path":"packing/resources/web/evand-regularized-2026-10-20/receipts/exact-certification.json.xz","bytes":14816,"sha256":"70251bbd29733e143438366e0ebb41669a1fbf935dd4b807a1aca15b9da84a37"},
     {"path":"packing/resources/web/mishapolk-issue719-2026-10-22/acquisition/report.json","bytes":83298,"sha256":"b16aea4cca11526603e2f2afc0f12b32ad81a05b0509465f8a54264162eb3c6e"},
-    {"path":"packing/resources/web/mishapolk-issue719-2026-10-22/acquisition/sources.json","bytes":103179,"sha256":"0ed5bd8d089cce3dc0e8e1db6dc24eaad8774997b3c0bf190929d2f7d18f4d6b"},
+    {"path":"packing/resources/web/mishapolk-issue719-2026-10-22/acquisition/sources.json","bytes":103383,"sha256":"6bf6d2fdaf67e785382d0e2fb02afc06d610f02440d23262c24717cddcc6a38d"},
     {"path":"packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-105.yaml.gz","bytes":5561,"sha256":"3052dd68092089a74125e7ff536e297e9b73b5634bf7dc7f37f5987d35e6ed0b"},
     {"path":"packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-204.yaml.gz","bytes":7338,"sha256":"7e4107e75536ee828a9e54b47dba68c5f4be0e7564396ae3971fc7c5b2883777"},
     {"path":"packing/resources/web/mishapolk-issue719-2026-10-22/receipts/exact-certification.json.xz","bytes":7104,"sha256":"381dd6d503c8cfe32015ca4419cf6d29e5f926c325c28b74a7a889afae1af2b1"}
