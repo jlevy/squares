@@ -766,6 +766,22 @@ def test_render_reads_the_frozen_starts_and_never_the_tree(
         ledger.rendered(tmp_path)
 
 
+def test_the_readme_links_lane_claims_only_where_a_copy_is_retained(
+    tmp_path: Path,
+) -> None:
+    data = _minimal()
+    (tmp_path / ledger.LEDGER).write_text(yaml.safe_dump(data), encoding="utf-8")
+    member = ledger.lane_member(
+        100, "reported", {"value": "10.5", "exact_form": "21/2"}, ["T-1"]
+    )
+    starts = ledger.starts_document(data["read_at_main"], {100: [member]})
+    (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(starts), encoding="utf-8")
+    link = "[lane-claims/](lane-claims/README.md)"
+    assert link not in ledger.rendered(tmp_path)[ledger.README]
+    (tmp_path / ledger.LANE_CLAIMS).mkdir()
+    assert link in ledger.rendered(tmp_path)[ledger.README]
+
+
 def test_a_record_relation_that_reads_no_member_of_its_start_is_refused(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:

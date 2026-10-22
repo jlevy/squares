@@ -31457,28 +31457,33 @@ results:
       seconds and 23.02 job wall seconds, the longest job 5.91 seconds. Every positive clears
       every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
 
-      In the packet's frozen comparison, read from main 0281e7763 on 22 October 2026: at
-      105 the certificate is below the case's ceiling (Ryan Xu, improved by Francisco Couzo
-      and PingYou Ltd, T-174) by 5.18e-12, and below Polkovskyi's own #593 certificate,
-      the same packing at this scale, by 5.18e-12; at 204 it is below the case's ceiling
-      (Francisco Couzo, improved by Evan Daniel, T-225) by 1.006e-8, below T-223 by
-      1.145e-8, T-228 by 1.537e-6, T-226 by 1.587e-6 and Polkovskyi's own T-186 by
-      2.040e-5. No earlier certificate states either exact side, so first_certified_in does
-      not apply. The ledger of 22 October for issue 719 (upper-bounds-issue719-20261022)
-      records both in report order, from starts frozen at main 0281e7763; Couzo's copies of
-      the house sides, at 4e4c8ce (105) and 5a299b4 (204), equal them and are not below.
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 22
+      October 2026): at 105 the certificate is below the case's ceiling (Ryan Xu,
+      improved by Francisco Couzo and PingYou Ltd, T-174) by 5.18e-12, and below
+      Polkovskyi's own #593 certificate, the same packing at this scale, by 5.18e-12; at
+      204 it is below the case's ceiling (Francisco Couzo, improved by Evan Daniel,
+      T-225) by 1.006e-8, below T-223 by 1.145e-8, T-228 by 1.537e-6, T-226 by 1.587e-6
+      and Polkovskyi's own T-186 by 2.040e-5. No earlier certificate states either exact
+      side, so first_certified_in does not apply.
+
+      The ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) records
+      both in report order, from starts frozen at the same reading of main. Couzo's own
+      published copies of the two house sides, listed in the packet's
+      receipts/earlier-publications.json, equal them and are not below.
 
       Measured pose by pose (measure/identity.json in the packet, the measures of the
-      evand-regularized-2026-10-20 packet's identity program; a measurement, which decides
-      nothing): at 105 nearest centres pair the squares one to one with T-174's packing, 42
-      squares move beyond 1e-3 and none beyond a tenth, at most 0.049, turning up to 2.41
-      degrees; at 204 they pair one to one with T-225's (and with T-223's), 67 move beyond
-      1e-3 and 6 beyond a tenth, at most 0.273, and every square turns less than 1 degree
-      but one, re-oriented by 25.64 degrees. T-225 itself moves 4 squares beyond a tenth of
-      T-223's, at most 0.442, which the record registers as the same packing regularized,
-      so 204 is listed as a regularization of T-225 with the re-oriented square named here;
-      it does not pair with Polkovskyi's own 204 of 13 and 14 October (T-183, T-186). The
-      author is asked how each was made.
+      evand-regularized-2026-10-20 packet's identity program; a measurement, which
+      decides nothing): at 105 nearest centres pair the squares one to one with T-174's
+      packing, 42 squares move beyond 1e-3 and none beyond a tenth, at most 0.049,
+      turning up to 2.41 degrees; at 204 they pair one to one with T-225's (and with
+      T-223's), 67 move beyond 1e-3 and 6 beyond a tenth, at most 0.273, and every
+      square turns less than 1 degree but one, re-oriented by 25.64 degrees.
+
+      T-225 itself moves 4 squares beyond a tenth of T-223's, at most 0.442, which the
+      record registers as the same packing regularized, so 204 is listed as a
+      regularization of T-225 with the re-oriented square named here; it does not pair
+      with Polkovskyi's own 204 of 13 and 14 October (T-183, T-186). The author is asked
+      how each was made.
 
       The release holds a second 204 file, certificates/n204.cert, 1.48e-11 below the one
       the issue names and the same packing, and a second 105 file, 4.6e-12 above it; the

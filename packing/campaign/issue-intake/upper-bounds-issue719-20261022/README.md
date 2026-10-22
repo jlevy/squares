@@ -18,7 +18,7 @@ A refinement is the same configuration with a tighter certificate (a padding red
 
 ## Lane Records Read
 
-Exact sides marked as a lane's come from its `acquisition/claims.json` (and `algebraic-claims.json`) records, read by path from the checkout or, for a packet the tree does not hold, from the copy in [lane-claims/](lane-claims/README.md). Each commit is where the lane froze them, given as provenance; nothing reads it.
+Exact sides marked as a lane's come from its `acquisition/claims.json` (and `algebraic-claims.json`) records, read by path from the checkout. Each commit is where the lane froze them, given as provenance; nothing reads it.
 
 | Lane | Branch | Commit | Note |
 | --- | --- | --- | --- |
