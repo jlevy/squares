@@ -5,7 +5,7 @@ title: "Import Mishapolk: 122 upper bounds at 105–1568, incl. 105 and 204 in t
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T06:11:32.271Z
-updated_at: 2026-10-22T14:29:26.930Z
+updated_at: 2026-10-22T19:08:46.466Z
 started_at: 2026-10-22T06:11:33.610Z
 ---
 Issue #719 (https://github.com/jlevy/squares/issues/719), opened 2026-10-22T05:30:47Z by Mishapolk (Mikhail Polk; repository Mishapolk/square-packing-records): 122 claimed strict improvements at N in [105, 1568], two in the case corpus (105: 5.18e-12 below the catalogue witness; 204: 1.006e-8 below T-225, the house since #718), 112 beyond the horizon at or below 1024, 8 above 1024 (1061-1568; owner decision D1, think-f2io). Many margins are ~1e-12 (likely re-solves of existing arrangements); several are 1e-4 to 2e-3 (447, 553, 601, 652, 701). Stage 0 owner; stage 1 triage (read-only, priced) first.
@@ -196,3 +196,5 @@ blocked_on: jlevy/squares#722
   follow-up.
 
 2026-10-22 c-lane-719-import: #722 head e0c612d87 (pushed, ls-remote confirmed). Since f9cee4736: results.html's ceiling moved to 1,300,000 as think-v1qe's measured choice (81762770a, reason with hosted and local timing at e0c612d87; RESULTS_ROOM_THROUGH 238; the lightening stays with think-v1qe), the three papers' record extended to site_urls.py (5a3adc744), and review A round 1 (comment 6342695333) addressed: A1 test_profile_records (81762770a, 00b9e5e7f); A2 least side per commit and count in ledger_sources, gather refuses two transcribed claims at a count, ledger re-gathered: 8 steps changed, no verdict (00b9e5e7f); A3 the issue's 11:35:16Z credit edit (Mykhailo Polkovskyi) in the requests entry (read through 11:35:16Z, name ask dropped), packet README, custody record and bibliography (1eaa8624c), T-229's claim and the source-coverage note left for stage 4 (think-4h23 note); A4 366 and 447 dated 06:05:31Z (00b9e5e7f); A5 B1 needs the successor's own later smaller row, mutant killed (00b9e5e7f); A6 custody claims only what is pinned, n105.cert named (1eaa8624c); A7 docstrings, A8 #715's 19 ties noted (00b9e5e7f). No DATA_REVISION re-pin (6610be93 stays). The reply draft (scratchpad triage-719/acknowledgement.md) now confirms the credit name instead of asking.
+
+2026-10-22 c-lane-719-import: #727 (squaremath.org; site v0.9.1, explainer v0.4.17) merged into #722 at 5d2ee4a10 with main's release accounting; re-taken on top: DATA_REVISION 6610be93 (a9b8d8092), explainer v0.4.18 (f39b60022), three papers kept at v0.1.9/v0.1.2/v0.2.5 (7ff5b1292, 68 files byte-identical twice), site v0.9.2 (a287ece85, PUBLICATION_REVISION 7ff5b129). The branch adds no site URL, so the domain change needs nothing. Records tier 52/52; 657 site/overview/profile/release tests pass; --source-bytes 262,349,326 (5,037,554 under). Last pushed SHA a287ece85.
