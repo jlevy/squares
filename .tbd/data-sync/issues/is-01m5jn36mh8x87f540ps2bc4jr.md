@@ -5,13 +5,13 @@ title: "Gate: every registered result at S4 or S5 has a News item (records tier 
 kind: task
 status: open
 priority: 0
-version: 4
+version: 5
 labels:
   - process
 dependencies: []
 parent_id: is-01m5jn336nm6erpp0ygedhgpva
 created_at: 2026-10-22T20:33:29.233Z
-updated_at: 2026-10-22T21:06:51.231Z
+updated_at: 2026-10-22T21:54:53.724Z
 ---
 c-lane-announce-1022, branch claude/news-gate-s4-s5. Includes T-194's News item and the decision on the 13 September S4/S5 results. Epic think-s38d.
 
@@ -34,3 +34,5 @@ OTHER PRs: #725 at 3d43e15da (T-226/T-227 S2->S3) and #731 at ef005f489 (T-230 S
 2026-10-22 20:55Z coord-intake-1021b: PR #735 (https://github.com/jlevy/squares/pull/735, branch claude/news-gate-s4-s5, head 2260fb10f on main 59b1ec594): gate (records-tier synopsis step, render_changelog --announcement-base), T-194's News item with #651's delivery imported, 15-result pre-archive exemption (6279bd0e6), stage 7 'Announce a Significant Result'. Senior review A launched (c-review-735-A). Merge as soon as reviewed and green.
 
 2026-10-22T21:07Z, c-lane-announce-1022: PR #735 (draft), head 652a06b43, merges main ffd0f4af7 (#724). Added since the first push: the gate prints a summary line ("announcements: 21 registered S4 and S5 results, 15 exempt from before the News archive, 0 owed after this merge, 0 missing"); tests for the postmortem's two rules (S2/hidden entries don't count; a raise to S4 is owed on its branch and fails once on main, exactly as a registration) in 13d7bec6d; the home box's tests now pin T-194/T-154/T-153, since T-194's item moved Ahmed's 30 Sept item off the S5 box. think-jlra's postmortem is committed as e593ac0c7 and mapped; one row is corrected to say what this PR delivers. Records tier at 652a06b43: 52/52 selected steps, 144 s. Hosted CI pending at the time of writing.
+
+2026-10-22T22:05Z, c-lane-announce-1022: jlevy merged #735 at 21:31:58Z (bfc04b659) at head 652a06b43, before Review A's fixes; this lane did not merge it. The fixes are on follow-up draft PR #738 (claude/news-gate-review-a, cherry-picked onto bfc04b659), head 7907ec361, labelled S2. A1 option (b): an owed S4/S5 item fails only a change that edits results.yaml or site-changelog.yaml, and warns elsewhere; option (a) is think-n51k. A2: 10 gate tests, 26 of 26 mutants killed. A3: the exemption is frozen and may only shrink, and any score mismatch is stale. A5: a fresh release record (#735's record kept as history). A6: the C toolchain. A7 and the nit. Dispositions are posted on #735: https://github.com/jlevy/squares/pull/735#issuecomment-6352159306. Hosted CI on #738 was 29 pass and 1 pending at posting.
