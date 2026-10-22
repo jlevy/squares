@@ -727,8 +727,8 @@ falls. At 105 grid-slack’s view of T-174, which the adoption of 17 October dre
 with its witness, and at 204 the settlement on T-225’s witness leaves `SETTLED`. At 204
 his regularizer solved the witness $1.48 \times 10^{-11}$ lower, to exactly the side of
 the release’s other 204 file, `certificates/n204.cert`, which the #719 packet pins by
-digest: Polkovskyi’s earlier publication, not drawn, which think-h01y derives, replays
-and records under his credit.
+digest: Polkovskyi’s own publication, in the same commit as T-229’s certificate
+(`1851c2c7`), not drawn, which think-h01y derives, replays and records under his credit.
 The evidence is retained in
 [`cases/regularized_drawings/think-4h23-2026-10-23/`](../../cases/regularized_drawings/think-4h23-2026-10-23/README.md).
 After it the index draws 95 views: 35 by the axis tool, 40 by Evan Daniel’s regularizer

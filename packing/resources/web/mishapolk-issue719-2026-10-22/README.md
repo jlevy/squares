@@ -10,7 +10,8 @@ revision the issue pins. The source was read at 08:41Z on 22 October; `main` sto
 `ISSUE_SUBMISSION_122.md`, the issue’s body.
 
 Two of the counts are in the n ≤ 324 case corpus, 105 and 204, and one register entry
-records them, pending adoption at both ([Against the Record](#against-the-record)).
+records them, T-229, the house best packing at 105 and 204 since 23 October 2026
+([Against the Record](#against-the-record)).
 111 of the 112 beyond the corpus at or below 1024 are dated beyond-horizon rows, each the
 current row at its count ([Beyond the Corpus](#beyond-the-corpus)); 366 is not recorded,
 below an earlier certificate; the 8 above 1024 wait on the owner.
@@ -95,7 +96,8 @@ it.
 
 No earlier certificate states either side. Couzo’s copies of the house sides, at
 `4e4c8ce` (105) and `5a299b4` (204), equal them. One register entry records both, at
-V3/C3 since its 22 October review, pending adoption at both counts; it lists each as a
+V3/C3 since its 22 October review and the house best packing at 105 and 204 since 23
+October 2026; it lists each as a
 regularization of the house packing it re-solves.
 
 **Pose by pose.** [measure/identity.py](measure/identity.py) measures each against the

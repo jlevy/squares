@@ -69,16 +69,19 @@ Then `render_regularized_atlas --update`, `default_drawings --update` and
 `SETTLED`’s entry at 204, decided on T-225’s witness by the runs of 22 October, leaves
 the list: 204 is regularized now.
 
-**At 204, the author’s earlier publication.** Evan Daniel’s regularizer solved T-229’s
-204 witness to the exact side $14808642830513087197802415708703/10^{30}$,
+**At 204, the author’s own publication.** Evan Daniel’s regularizer solved T-229’s 204
+witness to the exact side $14808642830513087197802415708703/10^{30}$,
 $1.48 \times 10^{-11}$ below T-229’s. That is, byte for byte, the header side of the
 release’s other 204 file, `certificates/n204.cert` at
 `Mishapolk/square-packing-records@12fc4667`, which the
 [#719 packet](../../../resources/web/mishapolk-issue719-2026-10-22/README.md) pins by
-digest only. The repository is watched, so that file is already Polkovskyi’s report,
-dated by its first commit: the view reproduces his earlier publication, and the credit
-is his. The run is corroborating evidence, not a result of this project, and is not
-registered or drawn.
+digest only. That side was first published at `1851c2c7` (22 October 2026, 05:29:48Z),
+the commit that also first published `n-204.cert`, the certificate T-229 cites; the path
+held his larger 204 sides from 13 October (`8bb41af5`, then `70a033f0` on 14 October).
+The repository is watched, so the side is already Polkovskyi’s report: the view
+reproduces his own publication, in the same commit as T-229’s certificate, and the
+credit is his. The run is corroborating evidence, not a result of this project, and is
+not registered or drawn.
 think-h01y derives and replays `n204.cert`, records it under his credit (T-229 stating
 the smaller side, or an entry of its own), then takes it through stage 4 and adoption at
 204\. The project’s solved view of T-225 at 204, $8.91 \times

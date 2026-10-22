@@ -47,8 +47,9 @@ The lane was prompted separately from the import lane that built the packet
 (`c-lane-719-import`) and from any reviewer of the records pull request.
 Its relation to the result is `project`. It is read-only: it moves no rung, writes no
 register row, adopts no house best packing and edits no bead.
-Its programs and receipts are proposed for retention in the #719 packet (RF-8), and the
-proposed record changes are listed at the end.
+Its programs and receipts are retained with the #719 packet, in
+[`mishapolk-issue719-2026-10-22/review/review-2026-10-22/`](../../../packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/README.md)
+(RF-8), and the proposed record changes are listed at the end.
 
 **For the author.** Both of your bounds hold exactly at the sides your certificates
 state. Three exact decision programs that are not your code decided them: the two

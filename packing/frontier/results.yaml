@@ -27794,11 +27794,13 @@ results:
         report, Couzo's #672 (T-227), which refines de Winter's T-196 by 1.67e-08,
         superseded the next day by the author's update, as T-188 is; the 6.69e-03 drop
         below the case is de Winter's.
-      scored: '2026-10-19'
+      scored: '2026-10-22'
       by: >-
         the 19 October review
         (docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md),
-        confirming the draft S2 of think-1ayi's October 18 intake registration
+        confirming the draft S2 of think-1ayi's October 18 intake registration; the
+        smallest earlier report is named as RF-8 of the 22 October stage 4 review of T-226
+        to T-228 asks (docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)
     novelty: previously-published
     attribution:
       source_keys: ['[Daniel n229 dilation 2026-10-17]']
@@ -30545,7 +30547,7 @@ results:
         T-196's own S3, for moving 260 below 11 + 4 sqrt 2, is not inherited. The 260 count
         alone carries S3, as T-220, T-221 and T-222 do at single counts, at the scale of
         T-224 at 270 (3.47e-05, 15 squares); no lower bound or optimum.
-      scored: '2026-10-21'
+      scored: '2026-10-22'
       by: >-
         review A of #706, the pull request's reviewer c-review-706-A
         (https://github.com/jlevy/squares/pull/706#issuecomment-6325257697), confirming the
@@ -31756,8 +31758,9 @@ results:
       1-degree view is drawn at 105 and its half-degree view at 204. At 204 Evan Daniel's
       regularizer solved the witness 1.48e-11 lower, to exactly the side of the release's
       other 204 file, certificates/n204.cert, which the packet pins by digest: the author's
-      earlier publication, not drawn, which think-h01y derives, replays and records under
-      his credit.
+      own publication, in the same commit as T-229's certificate (22 October 2026,
+      05:29:48Z), not drawn, which think-h01y derives, replays and records under his
+      credit.
 
       V3 and C3 rest on the 22 October stage 4 review
       (docs/project/reviews/review-2026-10-22-mishapolk-719.md) and the replay it reproduced
