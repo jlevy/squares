@@ -5,7 +5,7 @@ title: "PR #718 review B follow-ups (B1-B7): stale 229 prose, a test for adopt_h
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: coord-intake-1021b
 labels:
   - records
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T04:28:19.181Z
-updated_at: 2026-10-22T05:48:14.259Z
+updated_at: 2026-10-22T06:29:15.480Z
 started_at: 2026-10-22T04:28:20.142Z
 ---
 Review B of #718 (https://github.com/jlevy/squares/pull/718#issuecomment-6332701148, follow-up round 2 at c3ede79e2) found 7 Low items, deferred to the next records change (PR-B on claude/intake-2026-10-22, think-2vjc/think-f28n/think-pvav):
@@ -37,3 +37,4 @@ Branch claude/intake-2026-10-22 (from main 7359fa8b6). Commits: 9f5d9867a (packe
 Replay: all 205 rows (666: 11, 670: 72, 672: 44, 675: 78) verified on both maintained routes, all 1,218 controls refused by both; 282.8 positive CPU s, 1,305.5 s wall on 2 workers (2,604 row-s); all-pairs kernel at 464/922/996/998 agrees exactly (1,525,010 pairs, 649.2 CPU s); every side below Goebel; every certificate first committed at its issue's pin (de Winter at b9cdc16b).
 Ledger: 432 claims at 124 counts, all recorded, none undecided; starts frozen at 804eff369; recomputed against main 7359fa8b6, no verdict changed from the triage.
 2026-10-22 05:55Z c-lane-pr-b: draft PR https://github.com/jlevy/squares/pull/720 (label intake), last pushed head 5ab83974e9445e3da671a72c9c2defe9fdd5957a (ls-remote confirmed), after the release commits cfeb44cc8 (DATA_REVISION b8045210), cadf73fd9 (papers' record), 5ab83974e (site v0.8.20). Next: local --push tier running; hosted CI; then report to the coordinator. Verdict comment drafts: scratchpad replies/verdicts-prb/ (intake_comments --check passes).
+2026-10-22 06:31Z c-lane-pr-b: PR https://github.com/jlevy/squares/pull/720 (draft, label intake) last pushed head 0b09ac278b400b6a67b9497f1494b0d43b1b87a0 (ls-remote confirmed). Hosted CI at 5286f1b69 (run 39730271004) failed suite-a, suite-b and suite-d on three stale statements, fixed in 9efff7252: the overview's other-projects card for joostdewinter.github.io and T-196's card (T-225 the house at 227 since 22 October); the house writer's historical() makes review B4's comma repair at 103; #715's test and packet README count the ten backlog rows #715's rows also supersede (#666 at 509, #670 at 866 and 925, #672 at 750, #675 at 547, 807, 809, 864, 923, 931). 0b09ac278 extends the papers' no-public-change record (re-rendered at link revision b8045210 from 9efff7252: the same 68 files; DATA_REVISION stays b8045210). Hosted at 0b09ac278: Packing validation 39732884021, Certificate page 39732883974 and Branch mergeability all pass. Local packing-validate --push (started at 5ab83974e): 66/67 steps; 18,867 passed, 8 failed = those four tests plus four known host-only (two fixed_core_packet reaping, two test_site_column_measurement). --source-bytes 232,400,158 (383,714 under the cap). Next: the coordinator's review and merge of #720 (S2 proposed, not applied); then the verdict comments drafted in scratchpad replies/verdicts-prb/. Review B4 is now also in the writer (adopt_houses historical()), so n-103's body stays the writer's output; think-v4me (t-180 runway) stays an open child, so this bead stays open.
