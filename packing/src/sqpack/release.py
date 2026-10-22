@@ -888,6 +888,13 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.20",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Set a shared 33em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.19",
         first_published="October 22, 2026",
         result_scope="Use full public names in explanatory narrative profile links.",
@@ -1072,6 +1079,13 @@ EXPLAINER_REVISED = "October 22, 2026"
 # The leading entry is proposed for the next publication; confirm its date at first deployment.
 OPTIMALITY_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.11",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Set a shared 33em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.10",
         first_published="October 22, 2026",
         result_scope="Use full public names in explanatory narrative profile links.",
@@ -1210,6 +1224,13 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 # The leading entry is proposed for the next publication; confirm its date at first deployment.
 THRESHOLD_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.4",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Set a shared 33em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.3",
         first_published="October 22, 2026",
         result_scope="Use full public names in explanatory narrative profile links.",
@@ -1261,6 +1282,13 @@ THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 #: dates belong to the paper, independently of the site and n = 11 series.
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 PACKING_METHODS_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.2.7",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Set a shared 33em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.2.6",
         first_published="October 22, 2026",
@@ -1377,6 +1405,34 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:square-packing-methods-survey",
+        previous_version="v0.2.6",
+        version="v0.2.7",
+        impact="patch",
+        reason=("Set a shared 33em reading measure for paper prose in HTML and PDF layouts."),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-threshold-bound-review",
+        previous_version="v0.1.3",
+        version="v0.1.4",
+        impact="patch",
+        reason=("Set a shared 33em reading measure for paper prose in HTML and PDF layouts."),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-optimality-review",
+        previous_version="v0.1.10",
+        version="v0.1.11",
+        impact="patch",
+        reason=("Set a shared 33em reading measure for paper prose in HTML and PDF layouts."),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.19",
+        version="v0.4.20",
+        impact="patch",
+        reason=("Set a shared 33em reading measure for paper prose in HTML and PDF layouts."),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.18",
@@ -7078,79 +7134,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "No existing function changes. The papers reach `render_changelog` only "
             "through `site_documents`, which calls `entry_anchor`, and no builder calls "
             "`validate._synopsis`. No render was taken, and every paper keeps its version."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=(
-            "paper:n11-lower-bounds-explainer",
-            "paper:n11-optimality-review",
-            "paper:n11-threshold-bound-review",
-            "paper:square-packing-methods-survey",
-        ),
-        paths=(
-            "packing/devtools/overview/embed.js",
-            "packing/devtools/overview/headroom.js",
-            "packing/devtools/overview/navigation.js",
-            "packing/devtools/overview_sections.py",
-            "packing/devtools/prepare_n11_lower_bounds_explainer_math.py",
-            "packing/devtools/probes/measure_site_pages/glyphs.js",
-            "packing/devtools/probes/prepare_n11_lower_bounds_explainer_math/measure_math.js",
-            "packing/devtools/probes/preview_site/baselines.js",
-            "packing/devtools/probes/preview_site/header.js",
-            "packing/devtools/record_presentation.py",
-            "packing/devtools/render_contributors.py",
-            "packing/devtools/render_n11_lower_bounds_explainer.py",
-            "packing/devtools/render_n11_optimality_review.py",
-            "packing/devtools/render_n11_threshold_bound_review.py",
-            "packing/devtools/render_overview.py",
-            "packing/devtools/render_packing_methods.py",
-            "packing/devtools/site_icons.py",
-            "packing/devtools/site_navigation.py",
-            "packing/devtools/site_popovers.py",
-            "packing/devtools/site_tallies.py",
-            "packing/devtools/templates/n11-lower-bounds-explainer-shell.html",
-            "packing/devtools/templates/n11-optimality-review-shell.html",
-            "packing/devtools/templates/n11-threshold-bound-review-shell.html",
-            "packing/devtools/templates/packing-methods-shell.html",
-            "packing/devtools/templates/site-nav.css",
-            "packing/devtools/templates/site-nav.html",
-            "packing/src/sqpack/cli/validate.py",
-        ),
-        outputs=(
-            "papers/n11-lower-bounds-explainer.html",
-            "papers/n11-lower-bounds-explainer.md",
-            "papers/n11-optimality-review.html",
-            "papers/n11-optimality-review.md",
-            "papers/n11-threshold-bound-review.html",
-            "papers/n11-threshold-bound-review.md",
-            "papers/square-packing-methods-survey.html",
-            "papers/square-packing-methods-survey.md",
-        ),
-        reason=(
-            "Source review of the Results, Learn and About navigation slice (think-7kbb): "
-            "the four paper renderers add the shared navigation program and collection "
-            "breadcrumbs to their outer shells and declare those inputs for freshness. "
-            "Navigation and breadcrumbs are hidden in print; the breadcrumb-to-title "
-            "spacing adjustments are screen-only. Paper manuscripts, mathematical "
-            "figures, paper-owned typography, scientific claims and credit text are "
-            "unchanged. The shared colophon keeps the same paper attribution and "
-            "typesetting text with no site edition. Profile totals, resource cards and "
-            "popover expand glyphs affect site chrome; preview probes inspect that "
-            "chrome, and the validation selector adds its browser tests without changing "
-            "any paper builder. The examined HTML shell and Markdown generation paths "
-            "justify retaining each paper edition under the existing chrome exception. "
-            "The glyph-audit probe recognizes active navigation ancestors and "
-            "breadcrumbs; it only reads their rendered typography and does not generate "
-            "paper content. Their shared navigation weights use the existing bold and "
-            "regular tokens. The math publication probe also removes absent, empty or "
-            "whitespace-only style attributes from cloned math hosts after font "
-            "readiness; meaningful styles and MathML stay intact. This removes scheduling "
-            "residue from serialization without changing mathematical content or layout. "
-            "The prepared measurement program is exported unchanged for regression reuse. "
-            "The existing prepaint bootstrap now reserves the collapsed navigation "
-            "geometry before first paint, without modifying paper content or print layout. "
-            "No byte-identical HTML, Markdown or PDF rebuild against the baseline is "
-            "claimed."
         ),
     ),
 )

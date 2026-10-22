@@ -401,7 +401,7 @@ def test_pdf_and_video_sources_remain_reachable_in_their_separate_groups(
     for source in ("known-best-1-100.svg", "known-best-1-324.svg", "README.md"):
         assert source in pdfs, source
     video = page.split('id="video"', 1)[1].split("<h2", 1)[0]
-    assert 'href="visualize.html">Watch Film' in video
+    assert 'href="visualize.html">View Videos' in video
     assert "A shorter film" not in page
     assert "Both films are on" not in page
     assert 'id="pdfs-and-videos"' in page
@@ -531,7 +531,7 @@ def test_every_lazy_homepage_media_card_reserves_its_source_image_dimensions(
 def test_home_and_learn_link_to_the_full_film_and_workbench(page: str) -> None:
     for destination in (page,):
         section = destination.split('id="visuals"', 1)[1].split("</article>", 1)[0]
-        assert 'href="visualize.html">Watch Film' in section
+        assert 'href="visualize.html">View Videos' in section
         assert 'href="workbench/">Open Workbench' in section
         assert "<video" not in section
         assert _asset_tag(render_overview.FILM_SCRIPT) not in destination
@@ -3035,53 +3035,18 @@ def test_every_site_page_carries_the_same_bar(
     assert _the_bar(page, root=root) == _the_bar(partial, root="")
 
 
-def test_the_learn_section_and_its_shared_tabs_are_marked_current(
+def test_videos_and_workbench_use_learn_without_a_second_page_switcher(
     rendered: Callable[[str], str],
 ) -> None:
-    """Learn keeps its tutorials, paper sections and Film/Workbench sibling navigation."""
-    nav = render_overview.nav_html("overview")
-    assert any(
-        tag == "button" and attrs.get("data-page") == "learn" for tag, attrs in _Tags(nav).tags
-    )
-    page = rendered("papers.html")
-    article = papers_article(page)
-    assert [
-        article.index(f'id="{section}"')
-        for section in ("tutorial", "papers", "pdfs", "visuals")
-    ] == sorted(
-        article.index(f'id="{section}"')
-        for section in ("tutorial", "papers", "pdfs", "visuals")
-    )
-    tabs = render_overview.visualize_tabs("film")
-    assert any(
-        tag == "a" and attrs.get("href") == "visualize.html"
-        for tag, attrs in _Tags(article).tags
-    )
-    assert "data-autoplay" not in article
-    header = page.split('class="kpress-site-header"', 1)[1].split("</header>", 1)[0]
-    assert 'class="site-tabs"' not in header
-    for page, root, tab in (
-        (rendered("visualize.html"), "", "film"),
-        (_workbench_page(), "../", "workbench"),
-    ):
+    """Videos and Workbench are distinct destinations of the shared Learn menu."""
+    for page in (rendered("visualize.html"), _workbench_page()):
         assert any(
             tag == "button"
             and attrs.get("data-page") == "learn"
             and attrs.get("aria-current") == "true"
             for tag, attrs in _Tags(page).tags
         )
-        tabs = render_overview.visualize_tabs(tab, root=root)
-        assert page.count('class="site-tabs"') == 1
-        assert tabs in page
-        assert 'aria-label="Visuals"' in tabs
-        assert re.findall(r'data-tab="(\w+)"', tabs) == ["film", "workbench"]
-        assert re.findall(r'<a data-tab="(\w+)" aria-current="page"', tabs) == [tab]
-        assert f'href="{root}visualize.html"' in tabs
-        header = page.split('class="kpress-site-header"', 1)[1].split("</header>", 1)[0]
-        assert header.index('class="site-nav"') < header.index(tabs)
-        assert re.search(r'</nav>\s*<nav class="site-tabs"', header)
-    with pytest.raises(SystemExit):
-        render_overview.visualize_tabs("papers")
+        assert 'class="site-tabs"' not in page
 
 
 def test_the_bars_type_is_set_from_the_papers_scale() -> None:
@@ -3229,9 +3194,9 @@ def test_the_film_page_shows_no_title_and_keeps_one_for_a_screen_reader(
     no subtitle. It keeps its document title and one `h1`, for a screen reader alone, and
     the film, the first block a reader sees, brings no margin of its own."""
     page = rendered("visualize.html")
-    assert "<title>Visualize · The Squares Project</title>" in page
+    assert "<title>Videos · The Squares Project</title>" in page
     assert re.findall(r"<h1\b[^>]*>.*?</h1>", page, re.DOTALL) == [
-        '<h1 class="site-visually-hidden" id="visualize">Visualize</h1>'
+        '<h1 class="site-visually-hidden" id="visualize">Videos</h1>'
     ]
     article = page.split('class="kpress-prose kpress-long-text site-page">', 1)[1]
     assert article.lstrip().startswith('<h1 class="site-visually-hidden"')

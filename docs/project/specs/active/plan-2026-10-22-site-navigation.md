@@ -33,7 +33,7 @@ homepage previews with buttons into the hierarchy.
 Keep all existing public page addresses.
 The confirmed label **Learn** replaces **Explanations** in navigation.
 Learn is a menu container without a landing page; `papers.html` is the complete Papers
-catalogue, alongside separate Tutorials, Downloads, Film, Workbench, and Resources
+catalogue, alongside separate Tutorials, Downloads, Videos, Workbench, and Resources
 pages.
 
 ## Goals
@@ -87,7 +87,7 @@ that host.
 | Check a new theorem, certificate, or improvement | Results → All Results | One result record, its affected cases, evidence, and authors |
 | Learn the problem and its methods | Learn → Tutorials | Advanced tutorial, paper, or interactive workbench |
 | Read a particular proof | Learn → Papers | The paper’s HTML, PDF, and source; linked result records |
-| See or manipulate packings | Learn → Film or Workbench | Atlas and individual cases when evidence is needed |
+| See or manipulate packings | Learn → Videos or Workbench | Atlas and individual cases when evidence is needed |
 | Follow recent work | News | Announcement, then the linked result, paper, or profile |
 | Identify a contributor or submit a result | About → People and Profiles or Report a Result | Person’s credited work or the existing submission route |
 | Reproduce or extend the project | About → Documentation | Synopsis, conventions, development guide, and repository |
@@ -215,7 +215,7 @@ current even though the reader is still on the site.
 Profiles mark About as current and visibly show `About → Profiles` ancestry.
 Case and result pages declare structured breadcrumbs in their metadata, but the
 inspected sample pages have no equivalent visible breadcrumb navigation.
-About itself has no breadcrumb; retain that choice.
+At that baseline, About itself had no breadcrumb.
 
 ### Compatibility, fragments, downloads, and external material
 
@@ -280,7 +280,7 @@ Site name → / [Home; selected previews and actions]
 │   ├── Tutorials → tutorials.html [menu; complete tutorial catalogue]
 │   │   ├── tutorial.html
 │   │   └── tutorial-advanced.html
-│   ├── Film → visualize.html [menu; page]
+│   ├── Videos → visualize.html [menu; page]
 │   ├── Workbench → workbench/ [menu; page]
 │   ├── Downloads → downloads.html [menu; complete download catalogue]
 │   └── Resources → resources.html [menu; complete directory]
@@ -337,7 +337,7 @@ destination.
 `papers.html` contains the four research papers and their series narrative;
 `tutorials.html` contains both complete tutorial cards and reading guidance;
 `downloads.html` contains both Atlas poster PDFs and all paper PDF and Markdown
-editions. Film, Workbench, and Resources retain their substantive pages.
+editions. Videos, Workbench, and Resources retain their substantive pages.
 No Learn page or visible single-button subsection duplicates these destinations.
 Legacy `papers.html#tutorial`, `#pdfs`, `#visuals`, and `#resources` links forward to
 the corresponding page, preserving queries.
@@ -384,7 +384,7 @@ catalogue content on the page.
 | Profiles section | Short statement and View All Profiles button; no names or table | `profiles/` |
 | Report Your Results | One invitation and Report a Result button | `report.html` |
 | All tutorial/paper cards | Selected starting points with View All Tutorials and View All Papers actions | `tutorials.html`, `papers.html` |
-| Poster and inline film | One media preview with Watch Film, Workbench, and Downloads actions | `visualize.html`, `workbench/`, `downloads.html` |
+| Poster and inline film | One media preview with View Videos, Workbench, and Downloads actions | `visualize.html`, `workbench/`, `downloads.html` |
 | Complete documentation cards | One short project/developer introduction and Documentation button | `documentation.html` |
 | Full external resource cards | Short summary and View All Resources button | `resources.html` |
 
@@ -423,7 +423,7 @@ the reader-facing parent for every named page or family.
 | `papers/n11-threshold-bound-review.html` | Part II: Certified Lower Bound Review | Learn; keep full title on the paper |
 | `papers/n11-optimality-review.html` | Part III: Optimality Review | Learn; keep full title on the paper |
 | `papers/square-packing-methods-survey.html` | How Record Square Packings Are Found | Learn; retain paper and editions |
-| `visualize.html` | Film | Learn; full player and release links |
+| `visualize.html` | Videos | Learn; full player and release links |
 | `workbench/` (`workbench/index.html`) | Workbench | Learn; retain application states and shareable URLs |
 | `resources.html` | Resources | Learn; complete resource directory |
 | `news.html` | News | Top-level page; preserve `#changelog` and entry anchors |
@@ -448,27 +448,34 @@ remain chapters, rather than competing with their parent in a dropdown.
 
 ### Breadcrumbs and active navigation
 
-Overview (Home), News, the Results register, and the About project page need no visible
-breadcrumb. Learn is a menu container with no page or URL. Its content pages show Learn
-as plain ancestor text, followed by the current page title.
-Nested pages show their parent trail above the heading, consistently across kpress
-articles, static records, profiles, and the workbench shell.
+Every page shows a breadcrumb above its heading, consistently across kpress articles,
+static records, profiles, and the workbench shell.
+The homepage’s current label is Overview.
+Top-level content pages show their own plain current-page label; nested pages add their
+collection ancestry.
+Learn is a menu container with no page or URL, so its content pages show Learn as plain
+ancestor text before the current page title.
+The final breadcrumb item is always plain text, never a link.
 
 | Page | Visible trail, ending with the current page |
 | --- | --- |
+| Overview | Overview |
+| News | News |
+| Results register | Results |
+| The Squares Project | The Squares Project |
 | Atlas | Results → Atlas |
 | Case 11 | Results → Atlas → n = 11 |
 | Result T-060 | Results → T-060 |
 | Epistemics | Results → Verification and Ratings |
 | Papers, Tutorials, Downloads, Tutorial, Advanced Tutorial, or a paper | Learn → Current title |
-| Film, Workbench, or Resources | Learn → Film / Workbench / Resources, as appropriate |
+| Videos, Workbench, or Resources | Learn → Videos / Workbench / Resources, as appropriate |
 | Profile directory | About → Profiles |
 | Person profile | About → Profiles → Person’s name |
 | Documentation, Report a Result, Project Guide, Conventions, or Development | About → Current title |
 | Research Synopsis | About → Research Synopsis |
 | Synopsis chapter | About → Research Synopsis → Chapter title |
 
-Keep Home available through the site name instead of repeating it in every visible
+Keep Overview available through the site name without repeating it in every nested
 trail. Generate visible ancestry and structured `BreadcrumbList` data from the same
 parent definitions; if the structured form includes Home, its remaining ancestors must
 match the visible trail.
@@ -479,14 +486,16 @@ A result opened from a profile still belongs to Results.
 Browser Back and contextual related links handle the path the reader actually took.
 
 Mark the active top-level group by its descendant relationship.
-Use `aria-current="page"` only when a link names the current page, and an appropriate
-ancestor indication such as `aria-current="true"` with a visible style for a group whose
-child is open. A fragment link may identify the selected location after explicit
-navigation; avoid marking both Atlas and Best Known Bounds as the current page.
+Use `aria-current="page"` for the current page label, and an appropriate ancestor
+indication such as `aria-current="true"` with a visible style for a group whose child is
+open.
+A fragment link may identify the selected location after explicit navigation; avoid
+marking both Atlas and Best Known Bounds as the current page.
 Use the same rules after a hard reload, a direct deep link, and browser Back.
 
-Retain the Film/Workbench sibling links where they help, but make Film lead directly to
-`visualize.html`. These are page links, not ARIA tab panels.
+Videos and Workbench are separate destinations in the Learn menu, with Videos linking
+directly to `visualize.html`. Remove the Film/Workbench switcher and its persistent
+local navigation row; neither content page needs a second category chooser.
 Workbench’s Animate, Pack, and Search controls retain their separate application
 semantics. Popovers retain a clear full-page action; their navigation must not create a
 second global header inside the overlay.
@@ -546,6 +555,17 @@ Collection navigation styled as a button remains an actual anchor with its desti
 in `href`. Individual detail links name the case, result, person, or paper; contribution
 actions retain purpose-specific wording such as Report a Result.
 Document this vocabulary and its examples in the same Design System entry.
+
+The reading measure is 33em of the shared prose font base, or 594px at an 18px base.
+Headings and breadcrumbs resolve the same calculated width instead of interpreting em
+against their own font size.
+Column padding sits outside that text measure.
+
+News article prose remains serif; publication, artifact, and supporting-record metadata
+remains muted sans. Metadata group labels occupy their own lines, and each artifact,
+publication-evidence, PR, or reference link occupies a separate line.
+Display the first publication date without parenthesizing the evidence link, and omit
+terminal periods and middle-dot separators around metadata links.
 
 Use the same component and tokens in every page producer and the workbench shell.
 Do not introduce per-page dropdown markup or styling.
@@ -611,11 +631,11 @@ Visible breadcrumbs and metadata must use that lookup.
 - [x] Update the shared Design System document with the navigation disclosure component,
   its tokens, states, and accessibility/interaction contract; use that component
   consistently across pages and the workbench.
-- [x] Add shared dropdowns, active-parent rules, and nested-page breadcrumbs across all
-  page producers and the workbench.
+- [x] Add shared dropdowns, active-parent rules, and breadcrumbs on every page across
+  all page producers and the workbench.
 - [x] Reorganize Results and Learn with the specified entry points; add the full
-  Resources directory at `resources.html` under Learn; keep the About root
-  breadcrumb-free.
+  Resources directory at `resources.html` under Learn; include the About project page
+  and Overview in the breadcrumb system.
 - [x] Reduce homepage catalogues to previews and direct actions while preserving old
   anchors and ordinary links.
 - [ ] Audit collection buttons across Overview and all landing pages for the shared View
@@ -715,8 +735,11 @@ JavaScript. Check every dropdown item at least once.
 Include representative direct loads of a paper, advanced tutorial, profile, result, case
 11, a late Atlas case such as 291, a Synopsis chapter, the Resources directory, and the
 workbench. Verify menu focus and dismissal, sticky header interaction, current-parent
-indication, visible/structured breadcrumb agreement, and the absence of a breadcrumb on
-About itself.
+indication, visible/structured breadcrumb agreement, and a plain current-page label on
+every page, including Overview and About.
+Confirm the shared 33em reading measure and the absence of a Film/Workbench switcher.
+Expand a News entry and check that metadata links each occupy their own line, with serif
+article prose and muted sans metadata.
 
 For the profile/popover follow-ups, check Accounts immediately after Name while Records,
 Results, and Credits retain their relative order.

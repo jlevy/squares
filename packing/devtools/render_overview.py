@@ -30,9 +30,8 @@ adds the front door and the pages around it, as the plan in
 - `tutorial.html` and `tutorial-advanced.html`, the two tutorials as reader pages;
 - a forwarder at each address a page used to have (`MOVED_PAGES`), so an old link still
   arrives, query and fragment kept (`forwarder_pages`);
-- `visualize.html`, the Visualize section's first tab: the n = 1 to 324 film at full
-  size. Its second tab is the workbench at `workbench/`, which
-  `workbench_tools.build_site` builds and gives the same tab bar (`visualize_tabs`).
+- `visualize.html`, the Videos page with the n = 1 to 324 film at full size;
+  `workbench_tools.build_site` builds the separate Workbench at `workbench/`.
 
 Every page is a complete kpress document with shared assets linked relative to its
 served path and its mathematical notation prepared during the build. The explainer's paper
@@ -216,12 +215,6 @@ def film_release_date() -> str:
     return f"{day.day} {day:%B}"
 
 
-#: The Explanations section reuses the existing papers, film and workbench addresses.
-#: Each tab names its key, its address from the site root, and its label.
-VISUALIZE_TABS: tuple[tuple[str, str, str], ...] = (
-    ("film", "visualize.html", "Film"),
-    ("workbench", "workbench/", "Workbench"),
-)
 FRONTIER_DESCRIPTION = (
     "Every tracked case of packing n unit squares in the smallest square, n = 1 to 324: "
     "the best known packing, the reported and verified bounds, and their records."
@@ -968,7 +961,7 @@ def nav_shell(current: str, *, root: str, tabs: str = "") -> NavShell:
     on all of them. kpress's tokens come whole but for their faces, of which only the
     bar's own is kept and inlined; the page's own stylesheet, placed after them, keeps
     any of its own custom properties the tokens also name. `tabs`, a section's tab bar
-    (`visualize_tabs`), follows the bar in the header, as on a kpress page.
+    (when supplied), follows the bar in the header, as on a kpress page.
     """
     from devtools.render_n11_lower_bounds_explainer import (  # noqa: PLC0415
         FONT_FACE_BLOCK,
@@ -1002,25 +995,6 @@ def nav_shell(current: str, *, root: str, tabs: str = "") -> NavShell:
         for path in (THEME_SCRIPT, NAVIGATION_SCRIPT, HEADROOM_SCRIPT, TOOLTIP_SCRIPT)
     )
     return NavShell(head, header, scripts)
-
-
-def visualize_tabs(current: str, *, root: str = "") -> str:
-    """The Explanations section's tab bar, with the current tab marked.
-
-    Each tab is a real link to its own page, so the bar needs no script and a tab can be
-    opened, bookmarked and shared. Its look is `.site-tabs` in `site-nav.css`, the one
-    stylesheet both the film's page and the workbench carry, which also draws the rule
-    under the navigation bar over the tabs: they follow the bar in the header slot, and
-    the bar, not the slot, carries the rule on a page that has them.
-    """
-    if current not in {key for key, _, _ in VISUALIZE_TABS}:
-        raise SystemExit(f"the Explanations section has no tab {current!r}")
-    links = "".join(
-        f'<a data-tab="{key}"{' aria-current="page"' if key == current else ""} '
-        f'href="{root}{href}">{html.escape(label)}</a>'
-        for key, href, label in VISUALIZE_TABS
-    )
-    return f'<nav class="site-tabs" aria-label="Visuals">{links}</nav>'
 
 
 #: The icon's size in a tab, in CSS pixels: whole pixels, so its one-pixel frame
@@ -1180,7 +1154,7 @@ def kpress_page(
     site's one set (`head_tags`), in place of the tags kpress's shell writes. `kind` is
     `article` for a paper.
 
-    `tabs`, a section's tab bar (`visualize_tabs`), follows the navigation bar in the
+    `tabs`, a section's tab bar (when supplied), follows the navigation bar in the
     header slot, where the workbench's shell also puts it, so it sits in one place on
     every page of its section.
 
@@ -1814,7 +1788,7 @@ def film_markdown(*, inline: bool = False) -> str:
         VISUALIZE_ARTICLE.read_text(encoding="utf-8"), values, where=VISUALIZE_ARTICLE.name
     )
     if inline:
-        heading = '<h1 class="site-visually-hidden" id="visualize">Visualize</h1>'
+        heading = '<h1 class="site-visually-hidden" id="visualize">Videos</h1>'
         if not markdown.startswith(heading):
             raise ValueError("the film template no longer starts with its page heading")
         markdown = markdown.removeprefix(heading).replace(" data-autoplay", "", 1)
@@ -1822,7 +1796,7 @@ def film_markdown(*, inline: bool = False) -> str:
 
 
 def visualize_page() -> Page:
-    """The Visualize section's first tab: the film of the ascent at full size.
+    """The Videos page: the film of the ascent at full size.
 
     The film starts when the page is visited: its markup mutes it and marks it
     `data-autoplay`, and `overview/film.js` starts it unless the reader asks for reduced
@@ -1833,11 +1807,10 @@ def visualize_page() -> Page:
         markdown,
         name="visualize.html",
         current="explanations",
-        title="Visualize",
+        title="Videos",
         description=VISUALIZE_DESCRIPTION,
         toc=False,
         page_scripts=(FILM_SCRIPT,),
-        tabs=visualize_tabs("film"),
     )
 
 

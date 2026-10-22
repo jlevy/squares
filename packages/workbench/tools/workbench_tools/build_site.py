@@ -63,7 +63,6 @@ from devtools.render_overview import (
     favicon_html,
     head_tags,
     nav_shell,
-    visualize_tabs,
 )
 from devtools.site_navigation import breadcrumbs_html
 from workbench_tools.self_contained import assert_self_contained_html
@@ -155,9 +154,6 @@ the window's floor so their last row is never under it.
 
 #: The page's entry in the site's navigation bar, which marks it as the current page.
 NAV_PAGE = "workbench/index.html"
-#: The page's tab in the visual learning section, alongside Papers and Film
-#: (`papers.html` and `visualize.html`): the bar under the navigation marks it current.
-SECTION_TAB = "workbench"
 #: Where the site's root is from the page: it is served at `workbench/index.html`.
 NAV_ROOT = "../"
 
@@ -204,7 +200,7 @@ def with_nav(page: str) -> str:
     `assets/workbench.css` then lays out below it, and the gear's program closes the body.
     Like the note, it is a property of the published page: `body.capture` hides it.
     """
-    shell = nav_shell(NAV_PAGE, root=NAV_ROOT, tabs=visualize_tabs(SECTION_TAB, root=NAV_ROOT))
+    shell = nav_shell(NAV_PAGE, root=NAV_ROOT)
     shell = shell._replace(head=shell.head.replace(favicon_html(), favicon_html(inline=True)))
     shell = shell._replace(
         header=shell.header.replace(

@@ -20,6 +20,7 @@
   --site-header-duration: 180ms;
   --site-header-layer: 5;
   --site-icon-size: 0.85em;
+  --site-reading-gutter: 2rem;
 }
 /* JS measures the entire header, including wrapped links and section tabs. Its sticky
    box keeps its original space while a transform hides it. Without JS the bar retains
@@ -571,6 +572,7 @@ nav.site-tabs a[aria-current="page"],
 }
 .site-nav-disclosure svg {
   margin-inline-start: 0.3rem;
+  transition: transform var(--site-hover-duration) var(--site-hover-easing);
 }
 .site-nav :is(.site-nav-mobile-toggle, .site-nav-disclosure):is(:hover, [aria-expanded="true"]) {
   background: var(--site-wash);
@@ -599,7 +601,14 @@ nav.site-tabs a[aria-current="page"],
   inset-inline-end: 0;
   max-inline-size: calc(100vw - 2rem);
   padding: 0.3rem;
+  pointer-events: none;
   position: absolute;
+  opacity: 0;
+  transform: translateY(-0.25rem);
+  transition:
+    opacity var(--site-hover-duration) var(--site-hover-easing),
+    transform var(--site-hover-duration) var(--site-hover-easing),
+    display var(--site-hover-duration) var(--site-hover-easing) allow-discrete;
   z-index: 1;
 }
 :root[data-site-nav-enhanced] .site-nav-submenu,
@@ -608,6 +617,15 @@ nav.site-tabs a[aria-current="page"],
 }
 :root[data-site-nav-enhanced] .site-nav-disclosure[aria-expanded="true"] + .site-nav-submenu {
   display: block;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+@starting-style {
+  :root[data-site-nav-enhanced] .site-nav-disclosure[aria-expanded="true"] + .site-nav-submenu {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
 }
 .site-nav-submenu a {
   display: block;
@@ -639,8 +657,28 @@ nav.site-tabs a[aria-current="page"],
     order: 1;
     width: 100%;
   }
+  :root[data-site-nav-enhanced] .site-nav .site-nav-links {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.25rem);
+    transition:
+      opacity var(--site-hover-duration) var(--site-hover-easing),
+      transform var(--site-hover-duration) var(--site-hover-easing),
+      display var(--site-hover-duration) var(--site-hover-easing) allow-discrete;
+  }
   :root[data-site-nav-enhanced] .site-nav:not(.site-nav-mobile-open) .site-nav-links {
     display: none;
+  }
+  :root[data-site-nav-enhanced] .site-nav.site-nav-mobile-open .site-nav-links {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  @starting-style {
+    :root[data-site-nav-enhanced] .site-nav.site-nav-mobile-open .site-nav-links {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
   }
   .site-nav.site-nav-mobile-open .site-nav-links {
     max-block-size: calc(100dvh - 6rem);
@@ -676,7 +714,14 @@ nav.site-tabs a[aria-current="page"],
   }
 }
 
-/* One visible ancestry trail above a nested page's heading, from site_navigation.py. */
+@media (width < 48rem) {
+  :root {
+    --site-reading-gutter: 0.5rem;
+  }
+}
+
+/* Every page carries the same text-width trail, independent of its smaller type.
+   The document gutter also applies here because this nav is outside the article. */
 .site-breadcrumbs {
   color: var(--site-support-color, var(--kpress-doc-muted));
   font-family: var(--kpress-font-sans);
@@ -685,7 +730,7 @@ nav.site-tabs a[aria-current="page"],
   line-height: var(--paper-support-leading, 1.4);
   margin-block: 1rem 2.5rem;
   margin-inline: auto;
-  max-inline-size: min(100%, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset, 0px)));
+  inline-size: min(var(--kpress-measure), calc(100% - 2 * var(--site-reading-gutter)));
 }
 .site-breadcrumbs ol {
   display: flex;
@@ -731,5 +776,15 @@ nav.site-tabs a[aria-current="page"],
   }
   .kpress-page-main:has(> .site-breadcrumbs) > .cert-page .hero {
     padding-block-start: 0.5rem;
+  }
+}
+
+/* KPress also supplies a tiny reduced-motion duration on classed elements. These
+   controls use zero so closing lists and their chevrons settle in the same frame. */
+@media (prefers-reduced-motion: reduce) {
+  .site-nav .site-nav-links,
+  .site-nav .site-nav-submenu,
+  .site-nav .site-nav-disclosure svg {
+    transition-duration: 0ms;
   }
 }

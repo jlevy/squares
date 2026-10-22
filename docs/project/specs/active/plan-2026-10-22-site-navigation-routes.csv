@@ -1144,7 +1144,7 @@ existing,t-018-explainer.md,https://squaremath.org/papers/n11-lower-bounds-expla
 existing,t-018-explainer.pdf,https://squaremath.org/papers/n11-lower-bounds-explainer.pdf,copy,live,no,compatibility-copy,,,,retain published copy and canonical edition; exclude from navigation,papers/n11-lower-bounds-explainer.pdf,
 existing,tutorial-advanced.html,https://squaremath.org/tutorial-advanced.html,page,live,yes,tutorial,explanations,Learn,Learn,retain content address; use proposed navigation parent,,
 existing,tutorial.html,https://squaremath.org/tutorial.html,page,live,yes,tutorial,explanations,Learn,Learn,retain content address; use proposed navigation parent,,
-existing,visualize.html,https://squaremath.org/visualize.html,page,live,yes,film,explanations,Learn,Learn,retain content address; use proposed navigation parent,,
+existing,visualize.html,https://squaremath.org/visualize.html,page,live,yes,film,explanations,Learn,Learn,retain content address; Videos menu label and Learn parent; no Film/Workbench switcher,,
 existing,"workbench/assets/{css,js,fonts}/*.{hash}.{ext}",,asset-file,live,no,asset-pattern,,,,retain asset address or pattern; exclude from page navigation,,workbench/assets/(?:css/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.css|js/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.js|fonts/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.woff2)
 existing,workbench/data/corpus.{hash}.json,,asset-file,live,no,asset-pattern,,,,retain asset address or pattern; exclude from page navigation,,workbench/data/corpus\.[0-9a-f]{16}\.json
 existing,workbench/index.html,https://squaremath.org/workbench/,page,live,yes,workbench,explanations,Learn,Learn,retain content address; use proposed navigation parent,,

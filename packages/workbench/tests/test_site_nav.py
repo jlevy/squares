@@ -119,38 +119,15 @@ def test_the_bar_has_the_shared_five_destinations_and_direct_learning_links(page
     assert icon.attrs.get("aria-hidden") == "true"
 
 
-def test_the_page_is_the_workbench_tab_of_the_explanations_section(page: str) -> None:
-    """The workbench carries the Explanations section's tabs under the bar with its own tab
-    current, so an existing `workbench/` link lands on the Workbench tab beside the Film."""
+def test_workbench_uses_shared_navigation_without_a_sibling_toggle(page: str) -> None:
+    """Videos and Workbench are destinations in Learn, without a redundant switcher."""
     root = paper_structure.parse(page)
-    tabs = root.find_all("nav", "site-tabs")
-    assert len(tabs) == 1
-    current = [
-        link for link in tabs[0].find_all("a") if link.attrs.get("aria-current") == "page"
-    ]
-    assert [(link.attrs.get("data-tab"), link.attrs.get("href")) for link in current] == [
-        ("workbench", "../workbench/")
-    ]
-    film = next(link for link in tabs[0].find_all("a") if link.attrs.get("data-tab") == "film")
-    assert film.attrs.get("href") == "../visualize.html"
-    assert film.text() == "Film"
-    header = root.find("header", "kpress-site-header")
-    assert header is not None
-    assert header.find("nav", "site-tabs") is tabs[0]
-    nav = header.find("nav", "site-nav")
+    assert not root.find_all("nav", "site-tabs")
+    nav = root.find("nav", "site-nav")
     assert nav is not None
-    elements = list(root.walk())
-    viewport = next(node for node in elements if node.attrs.get("id") == "viewport")
-    assert elements.index(nav) < elements.index(tabs[0]) < elements.index(viewport)
-    # The bar's stylesheet, which the page carries, draws the rule under the bar and over
-    # the tabs, and keeps the tabs' own space between them and the application.
-    head = page.split("</head>", 1)[0]
-    for rule in (
-        ".kpress-site-header:has(> .site-tabs) {\n  border-block-end: 0;\n}",
-        ".kpress-site-header > .site-nav:has(+ .site-tabs) {\n  border-block-end: 1px solid",
-        ".site-app-shell .site-tabs {\n  margin-block-end: var(--site-tabs-space);\n}",
-    ):
-        assert rule in head, rule
+    video = next(link for link in nav.find_all("a") if link.attrs.get("data-page") == "film")
+    assert video.attrs.get("href") == "../visualize.html"
+    assert video.text() == "Videos"
 
 
 def test_every_site_link_reaches_the_site_root(page: str) -> None:

@@ -173,11 +173,11 @@ body {
 /* Capped at 100% as kpress caps its column: beside a TOC the column is a grid item with
    auto margins, sized to its min-content, so a wide code block or table would otherwise
    push it past a phone's viewport instead of scrolling inside it. The text fills the
-   column, as the explainer's does: its lines run the measure plus both insets, 710px at
-   a desktop, and on a phone the page margin alone keeps them off the screen's edge. */
-.site-page {
+   column at the shared 33em text measure. Insets belong outside that text width; on
+   a phone the page and document gutters keep it off the screen’s edge. */
+.kpress .site-page {
   margin-inline: auto;
-  max-width: min(100%, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
+  max-width: min(100%, var(--kpress-measure));
   padding-block-end: calc(var(--kpress-font-size-base) * 5);
   padding-inline: 0;
 }
@@ -238,6 +238,7 @@ body {
      width too; the layout and text wrappers retain the reading-column cap. */
   .kpress-page-main > .kpress-doc:has(.site-page) {
     max-width: none;
+    padding-inline: var(--site-reading-gutter);
   }
   .kpress-page-main > .kpress-doc > .kpress-doc-layout > .kpress-long-text {
     padding-block-start: var(--site-page-top);

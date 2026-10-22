@@ -58,6 +58,7 @@
     }
     button.setAttribute("aria-expanded", String(open));
     panel.hidden = !open;
+    panel.inert = !open;
     nav.classList.toggle(
       "site-nav-disclosed",
       disclosures.some((control) => control.getAttribute("aria-expanded") === "true"),
@@ -82,6 +83,10 @@
         mobile.focus();
       }
     }
+    const list = panelFor(mobile);
+    if (list instanceof HTMLElement) {
+      list.inert = narrow.matches && !open;
+    }
     mobile.setAttribute("aria-expanded", String(open));
     nav.classList.toggle("site-nav-mobile-open", open);
     nav.dispatchEvent(new CustomEvent("squares:navigationchange", { bubbles: true }));
@@ -93,6 +98,7 @@
       continue;
     }
     panel.hidden = true;
+    panel.inert = true;
     button.addEventListener("click", () => {
       const open = button.getAttribute("aria-expanded") !== "true";
       closeDisclosures();
@@ -117,6 +123,7 @@
       link?.focus();
     });
   }
+  setMobileOpen(false);
   nav.dataset.siteNavReady = "true";
   mobile.addEventListener("click", () =>
     setMobileOpen(mobile.getAttribute("aria-expanded") !== "true"),

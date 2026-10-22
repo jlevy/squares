@@ -63,7 +63,7 @@ The tutorial and paper catalogues contain the complete reading collections.
 Watch the Atlas grow one square at a time in the film, or try a packing yourself in the
 Workbench.
 
-<p class="site-action-row site-more"><a class="site-action" href="visualize.html">Watch Film{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a><a class="site-action" href="downloads.html">View All Downloads{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="visualize.html">View Videos{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a><a class="site-action" href="downloads.html">View All Downloads{{ARROW_RIGHT}}</a></p>
 
 <h1 id="squares-project-documentation" class="site-title">Squares Project Documentation</h1>
 

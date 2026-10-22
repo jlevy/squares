@@ -1264,3 +1264,48 @@ def test_the_landing_change_is_the_oldest_first_parent_merge_at_the_score(
         "commit": "c1",
         "subject": subjects["c1"],
     }
+
+
+@pytest.mark.parametrize("limit", [None, 1], ids=["archive", "preview"])
+def test_news_metadata_puts_each_link_on_its_own_line(limit: int | None) -> None:
+    data = document()
+    entry = data["entries"][-1]
+    entry.update(
+        artifacts=[
+            {
+                "kind": "result",
+                "label": "Current result",
+                "target": "https://squaremath.org/result/t-151.html",
+            },
+            {"kind": "page", "label": "Atlas", "target": "https://squaremath.org/atlas.html"},
+        ],
+        publication={
+            "date": entry["date"],
+            "evidence": "https://github.com/jlevy/squares/actions/runs/123",
+        },
+        releases=[{"component": "site", "version": "v0.4.1"}],
+        references=[
+            {"label": "Source", "target": "packing/frontier/results.yaml"},
+            {"label": "Registration", "target": "packing/site-changelog.yaml"},
+        ],
+    )
+    markup = render_changelog.render_news(data, limit=limit)
+    article = markup.split('data-news-entry="later-delivery">', 1)[1].split("</article>", 1)[0]
+    assert 'class="site-news-prose kpress-prose"' in article
+    metadata = article.split('<div class="site-news-records sans-text">', 1)[1].split(
+        "</div>", 1
+    )[0]
+    paragraphs = re.findall(r"<p>(.*?)</p>", metadata, re.DOTALL)
+    assert paragraphs
+    rows = [row for paragraph in paragraphs for row in re.split(r"<br\s*/?>", paragraph)]
+    linked_rows = [row.strip() for row in rows if "<a " in row]
+    assert len(linked_rows) == 6
+    assert all(len(re.findall(r"<a\b", row)) == 1 for row in linked_rows)
+    assert all(row.startswith("<a ") and row.endswith("</a>") for row in linked_rows)
+    visible = html.unescape(re.sub(r"<[^>]+>", "", metadata))
+    assert "First public: 2026-10-14" in visible
+    assert "Publication evidence" in visible
+    assert " · " not in visible
+    assert "(" not in visible
+    assert ")" not in visible
+    assert not re.search(r"[.](?:\s|$)", visible)

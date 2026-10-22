@@ -56,7 +56,9 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
         "profiles/person.html": ["About", "Profiles", "Current <title>"],
         "synopsis/problem.html": ["About", "Research Synopsis", "Current <title>"],
         "epistemics.html": ["Results", "Current <title>"],
-        "papers/proof.html": ["Learn", "Current <title>"],
+        "papers/proof.html": ["Learn", "Papers", "Current <title>"],
+        "tutorial.html": ["Learn", "Tutorials", "Current <title>"],
+        "tutorial-advanced.html": ["Learn", "Tutorials", "Current <title>"],
         "papers.html": ["Learn", "Current <title>"],
         "tutorials.html": ["Learn", "Current <title>"],
         "downloads.html": ["Learn", "Current <title>"],
@@ -84,9 +86,20 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
         if expected[0] == "Learn":
             assert "item" not in items[0]
             assert "<li><span>Learn</span></li>" in trail
+            if len(expected) > 2:
+                catalogue = "papers.html" if expected[1] == "Papers" else "tutorials.html"
+                assert f'href="../{catalogue}"' in trail
     for path in ("index.html", "./", "news.html", "results.html", "about.html"):
-        assert not breadcrumbs_html(path, "Root page")
-        assert breadcrumb_data(path, "Root page", "https://squaremath.org/") is None
+        trail = breadcrumbs_html(path, "Root page")
+        tags = Tags(trail).tags
+        assert any(tag == "span" and attrs.get("aria-current") == "page" for tag, attrs in tags)
+        assert not any(tag == "a" for tag, _ in tags)
+        data = breadcrumb_data(path, "Root page", "https://squaremath.org/")
+        assert data
+        assert len(data["itemListElement"]) == 1
+        if path in {"index.html", "./"}:
+            assert data["itemListElement"][0]["name"] == "Overview"
+            assert ">Overview</span>" in trail
 
 
 def test_legacy_navigation_keys_keep_the_correct_group() -> None:
@@ -186,7 +199,7 @@ def test_disclosures_work_with_keyboard_outside_click_and_mobile_menu() -> None:
         page.set_viewport_size({"width": 390, "height": 800})
         menu = page.get_by_role("button", name="Menu", exact=True)
         assert menu.is_visible()
-        assert not results.is_visible()
+        site_browser.api().expect(results).to_be_hidden()
         menu.click()
         results.click()
         assert page.get_by_role("link", name="All Results", exact=True).is_visible()
@@ -505,3 +518,119 @@ def test_legacy_catalogue_fragments_keep_queries_and_reach_substantive_pages(
     finally:
         server.shutdown()
         server.server_close()
+
+
+def test_every_shell_aligns_the_trail_with_33em_prose_and_preserves_wide_blocks() -> None:
+    from devtools import render_overview  # noqa: PLC0415
+    from devtools.measure_site_pages import TYPOGRAPHY  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    prose = '<p id="reading">A reading paragraph with the shared body measure.</p>'
+    wide = (
+        '<div class="site-wide"><div class="site-table-wrap"><table>'
+        "<tr><td>Wide data</td></tr></table></div></div>"
+    )
+    ordinary = render_overview.kpress_page(
+        "# Tutorials\n\n" + prose + wide,
+        name="tutorials.html",
+        current="learn",
+        title="Tutorials",
+        description="Reading-width fixture.",
+        toc=False,
+        prepare_math=False,
+    ).html
+    profile = render_overview.static_content_page(
+        '<article class="site-contributor"><h1>Contributor profile</h1>' + prose + "</article>",
+        meta=render_overview.PageMeta(
+            "Contributor profile", "A profile.", "profiles/person.html"
+        ),
+        current="profiles",
+    ).html
+    directory = render_overview.static_content_page(
+        '<section class="site-contributor-directory"><h1>Contributor Profiles</h1>'
+        + prose
+        + wide
+        + "</section>",
+        meta=render_overview.PageMeta("Contributor Profiles", "Profiles.", "profiles/"),
+        current="profiles",
+    ).html
+    css = _browser_document().split("<style>", 1)[1].split("</style>", 1)[0]
+    publication = (render_overview.TEMPLATES / "paper-publication.css").read_text()
+    paper = (
+        '<!doctype html><html><head></head><body>'
+        '<main class="kpress-page-main kpress-viewport">'
+        + navigation_links("papers/example.html")
+        + breadcrumbs_html("papers/example.html", "Paper")
+        + '<div class="kpress kpress-doc kpress-prose cert-page"><h1>Paper</h1>'
+        + prose
+        + "</div></main></body></html>"
+    )
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        for width in (1440, 1256, 768, 390, 320):
+            page = browser.new_page(viewport={"width": width, "height": 900})
+            for name, source in (
+                ("ordinary", ordinary),
+                ("profile", profile),
+                ("directory", directory),
+                ("paper", paper),
+            ):
+                document = source.replace(
+                    "</head>", "<style>" + css + publication + "</style></head>"
+                )
+                page.set_content(document)
+                found = page.evaluate(TYPOGRAPHY)
+                trail = found["breadcrumb"]
+                text = page.locator("#reading").bounding_box()
+                assert trail is not None, (name, width, found)
+                assert text is not None, (name, width, found)
+                assert abs(trail["left"] - text["x"]) < 0.5, (name, width, found)
+                assert abs(trail["width"] - text["width"]) < 0.5, (name, width, found)
+                assert text["width"] <= 33 * 18 + 0.5, (name, width, found)
+                if width >= 768:
+                    assert abs(text["width"] - 33 * 18) < 0.5, (name, width, found)
+                assert text["x"] >= 8, (name, width, found)
+                assert text["x"] + text["width"] <= width - 8, (name, width, found)
+                if name in {"ordinary", "directory"} and width >= 1256:
+                    frame = page.locator(".site-wide").bounding_box()
+                    assert frame is not None
+                    assert frame["width"] > text["width"]
+            page.close()
+        browser.close()
+
+
+def test_disclosure_and_chevron_motion_share_timing_and_respect_reduced_motion() -> None:
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    motion = probe(Path(__file__).with_name("probes"), "site_navigation/motion")
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        for width in (1280, 390):
+            for reduced in ("no-preference", "reduce"):
+                page = browser.new_page(
+                    viewport={"width": width, "height": 900}, reduced_motion=reduced
+                )
+                page.set_content(_browser_document())
+                if width < 768:
+                    page.get_by_role("button", name="Menu", exact=True).click()
+                for label in ("Results", "Learn", "About"):
+                    trigger = page.get_by_role("button", name=label, exact=True)
+                    trigger.click()
+                    state = page.evaluate(motion)
+                    expected = 0 if reduced == "reduce" else 0.14
+                    assert state["chevron"]["duration"] == [expected]
+                    assert state["panel"]["duration"] == [expected] * 3
+                    assert state["panel"]["properties"] == ["opacity", "transform", "display"]
+                    if width < 768:
+                        assert state["mobile"]["duration"] == [expected] * 3
+                    if reduced == "reduce":
+                        assert state["panel"]["opacity"] == 1
+                        assert state["panel"]["animations"] == 0
+                        assert state["chevron"]["animations"] == 0
+                    panel = page.locator("#" + (trigger.get_attribute("aria-controls") or ""))
+                    trigger.click()
+                    site_browser.api().expect(panel).to_be_hidden()
+                    assert panel.get_attribute("inert") is not None
+                page.close()
+        browser.close()

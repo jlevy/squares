@@ -948,9 +948,13 @@ def _entry_lines(
     *,
     include_significance: bool = True,
     include_prose: bool = True,
+    multiline_metadata: bool = False,
 ) -> list[str]:
     """Shared contribution prose and evidence for the complete GitHub and News views."""
     rating = entry_significance(entry)
+    label_separator = "  \n" if multiline_metadata else " "
+    link_separator = "  \n" if multiline_metadata else " · "
+    ending = "" if multiline_metadata else "."
     out: list[str] = []
     if destination == "github" and include_significance:
         out.extend([f"Significance S{rating['score']}: {_text(rating['rationale'])}", ""])
@@ -963,24 +967,39 @@ def _entry_lines(
             _markdown_link(item["label"], item["target"], destination=destination)
             for item in entry["artifacts"]
         ]
-        out.extend(["Published artifacts: " + " · ".join(links) + ".", ""])
+        out.extend(
+            ["Published artifacts:" + label_separator + link_separator.join(links) + ending, ""]
+        )
     if entry.get("releases"):
         versions = [
             f"{_text(_component_label(item['component']))} {_text(item['version'])}"
             for item in entry["releases"]
         ]
-        out.extend(["Component editions: " + "; ".join(versions) + ".", ""])
+        separator = "  \n" if multiline_metadata else "; "
+        out.extend(
+            ["Component editions:" + label_separator + separator.join(versions) + ending, ""]
+        )
     publication = entry.get("publication", {})
     if publication:
         evidence = _markdown_link(
-            "publication evidence" if "date" in publication else "Publication evidence",
+            "publication evidence"
+            if "date" in publication and not multiline_metadata
+            else "Publication evidence",
             publication["evidence"],
             destination=destination,
         )
         if "date" in publication:
-            out.extend([f"First public: {publication['date']} ({evidence}).", ""])
+            first = f"First public: {publication['date']}"
+            out.extend(
+                [
+                    first + "  \n" + evidence
+                    if multiline_metadata
+                    else f"{first} ({evidence}).",
+                    "",
+                ]
+            )
         else:
-            out.extend([evidence + ".", ""])
+            out.extend([evidence + ending, ""])
     links = [
         _markdown_link(
             f"#{number}", f"{document['repository']}/pull/{number}", destination=destination
@@ -991,7 +1010,15 @@ def _entry_lines(
         _markdown_link(item["label"], item["target"], destination=destination)
         for item in entry.get("references", [])
     )
-    out.extend(["PRs and supporting records: " + " · ".join(links) + ".", ""])
+    out.extend(
+        [
+            "PRs and supporting records:"
+            + label_separator
+            + link_separator.join(links)
+            + ending,
+            "",
+        ]
+    )
     return out
 
 
@@ -1238,7 +1265,12 @@ def render_news(
         article.extend(
             _prose(field, destination="site")
             for field in _entry_lines(
-                document, entry, "github", include_significance=False, include_prose=False
+                document,
+                entry,
+                "github",
+                include_significance=False,
+                include_prose=False,
+                multiline_metadata=True,
             )
             if field
         )

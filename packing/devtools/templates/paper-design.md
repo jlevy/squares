@@ -274,7 +274,7 @@ and `tests/test_site_text_tokens.py` pins what they resolve to in Chromium.
 | Token | Value | Resolves to |
 | --- | --- | --- |
 | `--kpress-host-font-size-base` | `18px` | Every KPress size, from `--kpress-font-size-base` |
-| `--kpress-measure` | 35 of the base | 630px at the 18px base, before column insets |
+| `--kpress-measure` | 33em of the shared prose base | 594px at the 18px base; the width of actual prose, excluding padding |
 | `--kpress-font-size-h2` | 1.2 of the base | 21.6px at every width; KPress steps it to 1.4 from a 64rem pane |
 | `--paper-font-scale-sans` | 19/18 | The 19px sans base of captions, cards and notes |
 | `--paper-font-weight-sans-medium`, `-bold` | 550, 680 | The sans medium and bold |
@@ -293,7 +293,7 @@ the tutorial, the readme and the homepage, identical on all four where the role 
 | Table cell | Source Sans 3, 410 | 17.1px | 16.2px |
 | Inline code | Planetaire Mono Text | 14.76 / 22.14px | Same |
 | Inline math | KPress Math Text (serif) | 18px, the text’s own em | Same |
-| Reading column | — | 710px: the 630px measure and both 2.5rem insets | The column less the page margin |
+| Reading column | — | 594px: the shared 33em prose measure | The column less the page and document gutters |
 
 h3 and h4 keep KPress’s own step up at a 64rem pane.
 Every published page H1 uses the shared upright sans-serif, all-caps title treatment,
@@ -673,8 +673,9 @@ one of them changes.
 
 | Space | Token | Screen value | Declared in |
 | --- | --- | --- | --- |
-| From the bar’s rule to a page’s first block, or from the section tabs where a page has them | `--site-page-top` | 4rem, 64px | `site-nav.css` |
-| From the bar’s rule to the section tabs, and from them to an application | `--site-tabs-space` | 0.7rem, 11.2px | `site-nav.css` |
+| From the bar’s rule to the breadcrumb | Shared trail margin | 1rem, 16px | `site-nav.css` |
+| From the breadcrumb to a page’s title | Shared trail margin | 2.5rem, 40px; paper format chips occupy part of this gap | `site-nav.css` |
+| Fallback opening space where the trail is absent | `--site-page-top` | 4rem, 64px | `site-nav.css` |
 | How much nearer the bar an opening picture starts | `--site-hero-lift` | 0.5rem, 8px | `site.css` |
 | Above a section heading (`h2`) | `--paper-section-space` | 2.7 of the prose base, 48.6px | `paper-type.css` |
 | Below a section heading (`h2`) | `--paper-section-space-below` | 1.7rem, 27.2px | `paper-type.css` |
@@ -908,60 +909,42 @@ contributor articles use their component sheets and the same text tokens.
   Without JavaScript, enhancement buttons are hidden and the content links remain
   exposed. Print and embedded articles omit the global header.
 
-  Nested pages carry a sans, muted breadcrumb trail above their title, at the shared
-  note size and support leading, centered on the reading column, 1rem below the
-  navigation and 2.5rem above the title.
+  Every page carries a sans, muted breadcrumb trail above its title, at the shared note
+  size and support leading, centered on the reading column, 1rem below the navigation
+  and 2.5rem above the title.
   The trail replaces the article’s usual top gap.
   Ancestors with a destination are links; Learn is plain container text with no URL.
   Chevrons separate the items, and the current title is plain text with
-  `aria-current="page"`. Overview, News, the Results register, and the About project
-  page have no trail. Learn has no category page; its content pages carry the plain Learn
-  ancestor. `site_navigation.py` supplies the same ancestry for the visible trail and
-  structured BreadcrumbList data.
+  `aria-current="page"`. A root page has one plain current item; the homepage is
+  labelled Overview. Learn has no category page; its content pages carry the plain Learn
+  ancestor. The trail and prose share the 33em reading width and narrow-screen gutters,
+  independent of the trail’s smaller sans type.
+  Contributor profiles and the directory use the same text width.
+  Tables and figures keep their wider tracks.
+  `site_navigation.py` supplies the same ancestry for the visible trail and structured
+  BreadcrumbList data.
   Cases belong to Results → Atlas, profiles to About → Profiles, chapters to About →
   Research Synopsis, and verification guidance to Results.
+  Paper details link their Papers catalogue; the tutorial articles link their Tutorials
+  catalogue after Learn.
   Overlays and print hide the visible trail.
   The workbench is an application rather than a KPress page, so its build
   (`workbench_tools.build_site`) takes the bar, its stylesheet, the theme bootstrap and
   the gear’s script from `render_overview.nav_shell`, in a shell that gives it the page
   margins and header rule KPress gives the others; the application fills the window
-  below it. Only the bar and the section tabs follow the theme there: the workbench
-  itself has no dark mode yet.
+  below it. Only the shared bar and trail follow the theme there: the workbench itself
+  has no dark mode yet.
 
-- **Section tabs.** A section that spans pages carries one small tab bar under the
-  navigation bar where the destination is a dedicated visual page.
-  The shared Visuals switch has **Film** (`visualize.html`) and **Workbench**
-  (`workbench/`). It appears on those two pages as sibling navigation.
-  Each tab is a real link to its own page, so the bar needs no script, and a tab can be
-  opened, bookmarked and shared; every existing `workbench/` address lands on the
-  Workbench tab. The bar is a centred strip with square corners and the cards’ thin
-  border, a hairline between tabs, in the bar’s sans at the links’ own size
-  (`--site-nav-font-size`) and medium weight: a tab is gray, takes the nav items’ wash
-  and accent on hover, and the current tab is filled with a 16% accent tint over the
-  page background in the page’s own text colour.
-  It is `.site-tabs`, rendered by `render_overview.visualize_tabs`, and defined in
-  `site-nav.css` rather than `site.css` because the workbench carries only the bar’s
-  stylesheet. On the legacy Film page it opens the document; on the workbench it sits in
-  the application shell under the bar, above the application.
-  The same strip also switches a view in place: there it is a `tablist` of buttons
-  (`role="tab"`), each stripped of a button’s own chrome and taking the strip’s type,
-  the selected one filled as the current page’s link is.
-  The dedicated Atlas uses it for its Grid and Triangle views (**Atlas views**, below)
-  and for its Small, Medium and Large tiles (**Atlas sizes**, below); `site-nav.css`
-  draws both forms, and the header rules above take only the `nav` strip.
-  From the top, these pages read bar, rule, tabs, content: the tabs stand under the rule
-  that runs under the bar, never over it.
-  They are in the header slot, whose lower border is that rule, so a header that holds
-  tabs gives up its border and the bar draws the rule at its own foot (`:has()`, in
-  `site-nav.css`), where it is on every other page and as long.
-  The tabs start `--site-tabs-space` (0.7rem, 11.2px) under the rule.
-  On the film’s page the first block starts `--site-page-top` under the tabs; on the
-  workbench, where the application starts at the shell’s lower edge, the tabs keep the
-  same 0.7rem below them.
-  `devtools.measure_site_pages header` reports these, `preview_site` fails a built page
-  whose tabs start over the rule (`tabs_problems`), and `tests/test_site_wide_blocks.py`
-  holds both pages to it in a browser.
-  It is hidden in print and in the embed view.
+- **Videos and Workbench.** Videos (`visualize.html`) and Workbench (`workbench/`) are
+  separate destinations in the Learn dropdown.
+  Neither page carries a Film/Workbench switcher below the global navigation.
+
+- **View choosers.** The Atlas’s Grid and Triangle views and Small, Medium and Large
+  tiles use the shared `.site-tabs` strip inside the page.
+  These are in-place tablists of buttons, with the selected view filled by the shared
+  current-item tint. The strip uses the navigation’s sans size, medium weight, square
+  corners and thin border.
+  It does not add a second row of page navigation below the header.
 
 - **Theme control.** A small gray gear, an inline SVG, ends the navigation bar on every
   page, the explainer and the workbench included.
@@ -1619,30 +1602,40 @@ contributor articles use their component sheets and the same text tokens.
     `border-color` and `box-shadow` on that timing (the owner, 2026-10-04,
     `think-g9cu`). Every element whose hover or focus changes one of them carries
     `transition: var(--site-hover-transition)` at rest, not in its hover rule, so the
-    change eases in and out: the cards, the bar’s links and tabs, the theme menu, a
-    popover’s close cross and action, a table’s rows (their wash on hover, on keyboard
-    focus and while their popover is open, which snapped until then), the ladders’
-    names, the atlas tiles, the record index and the contents rail, and on a paper’s
-    page its links, buttons and readouts (`paper-publication.css`). The token names
-    those four properties and never `all`, so a late stylesheet snaps into place rather
-    than animating its layout, and it is used alone, never listed beside another
-    property, so it still reads under reduced motion.
+    change eases in and out: the cards, the bar’s links, the theme menu, a popover’s
+    close cross and action, a table’s rows (their wash on hover, on keyboard focus and
+    while their popover is open, which snapped until then), the ladders’ names, the
+    atlas tiles, the record index and the contents rail, and on a paper’s page its
+    links, buttons and readouts (`paper-publication.css`). The token names those four
+    properties and never `all`, so a late stylesheet snaps into place rather than
+    animating its layout, and it is used alone, never listed beside another property, so
+    it still reads under reduced motion.
+  - **Navigation disclosure.** Results, Learn and About use the same 140ms ease-out
+    timing for their dropdown’s opacity and quarter-rem vertical travel and their
+    chevron’s half-turn.
+    The mobile Menu list uses that timing too.
+    A discrete display transition lets the exit finish; closed lists are inert
+    immediately, with focus restored to their trigger when needed.
+    The head bootstrap still reserves collapsed geometry before paint.
+    Reduced motion sets these transitions to zero, including over KPress’s
+    classed-element fallback.
   - What else a hover moves, an arrow’s nudge or a card icon’s fade, transitions that
     one property (`translate`, `opacity`) on the same timing, never with a literal
     duration.
   - A focus ring (`outline`) is not eased: it shows the moment focus arrives.
   - `tests/test_site_hover_motion.py` holds it: the token declared once, every
     `transition` in `site.css`, `site-nav.css`, `site-result.css`, `paper-type.css` and
-    `paper-publication.css` the token or one property on its timing, and every rule
-    whose hover or focus changes a colour, a border or a shadow styling an element that
-    carries the token at rest, by its own selector, a broader rule’s, or a shared rule
-    the test names with its reason; in Chromium, a row, the bar’s links and the close
-    cross ease the four properties over 140ms.
+    `paper-publication.css` the token or named properties on its timing, including the
+    navigation’s discrete display transition, and every rule whose hover or focus
+    changes a colour, a border or a shadow styling an element that carries the token at
+    rest, by its own selector, a broader rule’s, or a shared rule the test names with
+    its reason; in Chromium, a row, the bar’s links and the close cross ease the four
+    properties over 140ms.
   - The workbench’s own controls keep its own motion tokens (`--duration-fast`,
     `--easing-standard`, in `packages/workbench/assets/workbench.css`), under its own
     design contract; only the bar it shares with the site runs on this one.
   - Under `prefers-reduced-motion: reduce` the duration is 0ms and the token `none`, so
-    colours change at once and no arrow moves.
+    colours and disclosure state change at once, with no animated arrow travel.
 
 - **Rating ladders.** Verification Ladders is a section of the Results page, under its
   table, since 2026-10-02 (the owner, `think-hqb3`); it was the homepage’s section
@@ -2014,8 +2007,8 @@ contributor articles use their component sheets and the same text tokens.
 - **Wide bleed.** A wide block (`.site-wide`) takes the wide track, `--site-wide`, less
   the page gutters (`--site-wide-gutter` on either side; **Spacing**, above).
   The track is forty times the shared type base plus 24rem, 1104px at the 18px base.
-  It is independent of the prose measure, thirty-five times the base, so changes to
-  reading lines preserve the room tables and card grids need.
+  It is independent of the prose measure, thirty-three times the shared base, so changes
+  to reading lines preserve the room tables and card grids need.
   Two kinds bleed past it.
   The atlas grid fills the available page width less its edge gutters, with no fixed
   maximum. Complete Triangle rows still pan horizontally when they exceed that frame.
@@ -2240,15 +2233,14 @@ contributor articles use their component sheets and the same text tokens.
   controls, `playsinline` and `preload="none"`, showing the retained poster until
   clicked. It does not autoplay.
   The full player also appears on `visualize.html`. Below the homepage media, **View All
-  PDFs** links to `papers.html#pdfs` and **View Visualizations** to `visualize.html`, in
-  the shared action row (`think-h3ny`). Retain the poster SVG links and source README on
-  the Papers page. The dedicated Atlas page contains the atlas controls and cases,
-  without media cards.
+  Downloads** links to `downloads.html` and **View Visualizations** to `visualize.html`,
+  in the shared action row (`think-h3ny`). Retain the poster SVG links and source README
+  on the Downloads page.
+  The dedicated Atlas page contains the atlas controls and cases, without media cards.
   A single-card group is centered.
 
-- **The film.** The Visualize section’s Film tab, `visualize.html`, is the n = 1 to 324
-  film at full size directly under the section tabs, with no page title and no subtitle
-  (**Page headings**, above).
+- **The film.** The Videos page, `visualize.html`, shows the n = 1 to 324 film at full
+  size below its breadcrumb and Videos title (**Page headings**, above).
   It is as wide as the window allows less the page gutters, up to 120rem, but never so
   tall that it will not fit the window whole (`.site-film-frame`), and embedded inline,
   with its controls. Its poster, `ascent-n1-324-poster.png`, published beside the
@@ -2805,9 +2797,9 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   companion with their full introductions.
   Downloads (`downloads.html`) contains the two infographic posters and every paper’s
   PDF and source editions.
-  Film, Workbench, and Resources have their own substantive destinations.
+  Videos, Workbench, and Resources have their own substantive destinations.
   Only Overview carries summary previews.
-  Published Papers fragments forward to the corresponding full catalogue or Film page,
+  Published Papers fragments forward to the corresponding full catalogue or Videos page,
   retaining queries; without scripts, ordinary links at the old anchors reach the same
   content. Reading cards come from `overview_sections.PAPERS`, each entry a document’s
   address, label, title, description and card size.
@@ -2818,7 +2810,7 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   independent publication editions.
   The tutorials remain `tutorial.html` and `tutorial-advanced.html`, using the
   reader-document pipeline.
-  Learn is the active navigation ancestor on its papers, tutorials, downloads, Film,
+  Learn is the active navigation ancestor on its papers, tutorials, downloads, Videos,
   Workbench, and Resources.
   The full film is served at `visualize.html`. Shared article overlays remain available
   for marked record and contributor links elsewhere on the page; the reading cards

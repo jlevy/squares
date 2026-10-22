@@ -41,7 +41,7 @@ NAVIGATION = (
         (
             NavigationItem("papers", "Papers", "papers.html"),
             NavigationItem("tutorials", "Tutorials", "tutorials.html"),
-            NavigationItem("film", "Film", "visualize.html"),
+            NavigationItem("film", "Videos", "visualize.html"),
             NavigationItem("workbench", "Workbench", "workbench/"),
             NavigationItem("downloads", "Downloads", "downloads.html"),
             NavigationItem("resources", "Resources", "resources.html"),
@@ -82,8 +82,8 @@ _PARENTS = {
     "papers.html": ("learn",),
     "tutorials.html": ("learn",),
     "downloads.html": ("learn",),
-    "tutorial.html": ("learn",),
-    "tutorial-advanced.html": ("learn",),
+    "tutorial.html": ("learn", "tutorials"),
+    "tutorial-advanced.html": ("learn", "tutorials"),
     "visualize.html": ("learn",),
     "workbench/": ("learn",),
     "resources.html": ("learn",),
@@ -98,12 +98,13 @@ _PARENTS = {
 _COLLECTIONS = {
     "cases/": ("results", "atlas"),
     "result/": ("results",),
-    "papers/": ("learn",),
+    "papers/": ("learn", "papers"),
     "profiles/": ("about", "profiles"),
     "synopsis/": ("about", "synopsis"),
 }
 _ANCESTORS = {
     **{item.key: (item.label, item.path) for item in NAVIGATION},
+    **{child.key: (child.label, child.path) for item in NAVIGATION for child in item.children},
     "atlas": ("Atlas", "atlas.html"),
     "profiles": ("Profiles", "profiles/"),
     "synopsis": ("Research Synopsis", "synopsis.html"),
@@ -196,13 +197,12 @@ def navigation_links(current: str, root: str = "") -> str:
 def _trail(path: str, title: str) -> tuple[tuple[str, str], ...]:
     path = _path(path)
     parents = _parents(path)
-    if not parents:
-        return ()
-    return (*(_ANCESTORS[key] for key in parents), (title, path))
+    current = "Overview" if path == "./" else title
+    return (*(_ANCESTORS[key] for key in parents), (current, path))
 
 
 def breadcrumbs_html(path: str, title: str, root: str = "") -> str:
-    """Show collection ancestry above a nested page, ending in its own plain title."""
+    """Show every page's ancestry, ending in its own plain current-page label."""
     trail = _trail(path, title)
     if not trail:
         return ""
