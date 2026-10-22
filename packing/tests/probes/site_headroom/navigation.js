@@ -8,10 +8,15 @@ async () => {
   if (!context) {
     throw new Error("The navigation ink probe needs a canvas context");
   }
-  return [...inner.children].map((item) => {
+  const items = [
+    ...inner.querySelectorAll(
+      ":scope > a[data-page], .site-nav-links > li > a, :scope > .site-nav-mobile-toggle, :scope > .site-theme",
+    ),
+  ].filter((item) => item.getClientRects().length > 0);
+  return items.map((item) => {
     const box = item.getBoundingClientRect();
     const button = item.querySelector(".site-theme-button");
-    const reference = item.matches("a[data-page]") ? item : button;
+    const reference = item.matches("a[data-page], .site-nav-mobile-toggle") ? item : button;
     let baseline = null;
     let inkCenter = null;
     let capCenter = null;

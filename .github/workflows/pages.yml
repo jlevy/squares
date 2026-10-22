@@ -137,6 +137,7 @@ name: Certificate page
       - packing/devtools/site_icons.py
       - packing/devtools/site_github_links.py
       - packing/devtools/site_popovers.py
+      - packing/devtools/site_navigation.py
       - packing/devtools/site_resources.py
       - packing/devtools/site_tallies.py
       - packing/devtools/profile_records.py

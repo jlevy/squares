@@ -1,8 +1,12 @@
 <div class="site-hero">
 
-# Explanations
+<h1 id="explanations">Learn</h1>
 
 </div>
+
+Learn the problem, read its proofs, explore packings, or download the posters.
+
+<nav aria-label="Learning materials"><a href="#tutorial">Tutorials</a> · <a href="#papers">Papers</a> · <a href="#pdfs">Downloads</a> · <a href="#visuals">Film and Workbench</a> · <a href="resources.html">Resources</a></nav>
 
 ## Tutorial
 
@@ -41,9 +45,17 @@ published record packings.
 
 ## Visuals
 
-{{VISUAL_TABS}}
+Watch *The Ascent to n = 324*, which builds the Atlas one square at a time.
+In the Workbench, move squares by hand and explore the known packings.
 
-{{FILM}}
+<p class="site-action-row site-more"><a class="site-action" href="visualize.html">Watch Film{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a></p>
+
+## Resources
+
+The resource directory brings together external catalogues, research repositories, and
+websites, with linked contributor bylines and their registered results.
+
+<p class="site-action-row site-more"><a class="site-action" href="resources.html">View All Resources{{ARROW_RIGHT}}</a></p>
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

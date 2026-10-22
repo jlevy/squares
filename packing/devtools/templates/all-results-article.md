@@ -4,11 +4,25 @@
 
 </div>
 
+The result register lists individual contributions: bounds, proofs, constructions, and
+methods. For the best-known bounds by number of squares, use the Atlas and its case
+records.
+
+<p class="site-action-row site-more"><a class="site-action" href="atlas.html">Atlas{{ARROW_RIGHT}}</a><a class="site-action" href="atlas.html#best-known-results">Best Known Bounds{{ARROW_RIGHT}}</a></p>
+
+<nav aria-label="On this page"><a href="#all-results">Browse Results</a> · <a href="#recent-arrivals">Recent Arrivals</a> · <a href="#earlier-results-by-week-published">Earlier Publications</a> · <a href="#verification-ladders">Verification and Ratings</a> · <a href="#evidence-and-exactness">Evidence</a> · <a href="#results-and-credits">Credits</a> · <a href="#status-and-supersession">Status</a></nav>
+
+<h2 id="all-results">Browse Results</h2>
+
+{{RESULTS_TABLE}}
+
+<a id="recent-arrivals"></a>
+
 ## Added in the Last {{ADDED_DAYS_TITLE}} Days
 
 Every result that reached this site over {{ADDED_SPAN}} (its newest day and the
 {{ADDED_DAYS}} before it), at any significance, by the day it arrived, newest first.
-Each id leads to its row in the table below; S4 and S5 are marked, and a muted entry
+Each id leads to its row in the register table; S4 and S5 are marked, and a muted entry
 says it has since been superseded.
 [Browse these arrivals]({{ADDED_LINK}}) in the table, or open each day’s link for that
 day; [what arrived in the last day]({{ADDED_LAST_DAY}}) counts whole days on the same
@@ -93,10 +107,6 @@ current. The table names the most recent replacement, with “and others” when
 full record lists every replacement.
 
 The [overview](./#recent-results) highlights recent major results.
-
-<h2 id="all-results">Browse Results</h2>
-
-{{RESULTS_TABLE}}
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

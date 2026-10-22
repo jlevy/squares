@@ -832,7 +832,7 @@ contributor articles use their component sheets and the same text tokens.
   `devtools.measure_site_pages header` reports the four sizes, `preview_site` fails a
   page whose bar is not one step under its body (`type_problems`), and
   `tests/test_site_wide_blocks.py` holds the relation in a browser at 1280, 768 and 390
-  pixels, where the links keep one line, one line and two lines.
+  pixels, where desktop links keep one line and the phone exposes a Menu control.
   The name’s text stands on the links’ baseline.
   The bar aligns its items by their baselines (`align-items: baseline`), and each label
   stays on one line, with no offset in pixels.
@@ -847,14 +847,16 @@ contributor articles use their component sheets and the same text tokens.
   Below 72rem the home link reads “Squares”, also set in capitals, to leave room for the
   destinations. At every width its accessible label is “The Squares Project home”.
   Every item takes the cards’ gentle wash on hover and nothing underlines on hover; the
-  current page alone is underlined in the accent.
+  current page alone is underlined in the accent; a current ancestor uses accent text at
+  weight 650 without an underline.
   The edition appears only in the closing credit (below).
   Every page renders it from the one partial, `site-nav.html`, and it has the same box
   on every page at every width.
   The shared Headroom carrier is sticky and preserves its place in the document.
   Scrolling down hides it; the first meaningful upward scroll shows it again.
   It stays visible at the top, while navigation has focus, and while the theme menu is
-  open. Resize and anchor navigation account for the full carrier height, including tabs;
+  open, or while a navigation disclosure is open.
+  Resize and anchor navigation account for the full carrier height, including tabs;
   reduced motion disables animated travel.
   `overview/headroom.js` handles ordinary, static-content, paper and Workbench shells
   once (`think-byu7`). The bar sits 1rem below the top of the window on every page, the
@@ -868,16 +870,50 @@ contributor articles use their component sheets and the same text tokens.
   (0.5rem) nearer the bar, since a drawing has no line spacing above its edge.
   On the explainer the source chips sit in that space and the title starts the token
   below them. Print keeps KPress’s spacing, so the explainer’s PDF does not move.
-  Its entries are Overview, News, Atlas, Results, Explanations, About and GitHub.
-  Their order comes from `site-nav.html` and is also the keyboard order.
-  Links wrap naturally on narrow screens.
-  Explanations leads to `papers.html` and is current on the papers, tutorial, film and
-  Workbench. The landing page starts with a prominent Tutorial section of its own,
-  followed by Papers, PDFs and Visuals.
-  The existing tutorial card appears only in its top section; the paper cards keep their
-  shared content. Visuals contains the film and the two-choice Film/Workbench switch.
-  The film does not autoplay there.
-  These pages keep their existing addresses.
+  Its five entries are **Overview**, **News**, **Results**, **Learn**, and **About**, in
+  that keyboard order, followed by the GitHub and theme utilities.
+  Overview and News link directly to their pages.
+  Results, Learn, and About each have a normal landing-page link and a separate
+  disclosure button. The hierarchy and destination paths live in `site_navigation.py`;
+  `site-nav.html` supplies the shared shell.
+
+  The disclosure button uses the navigation face, line, and muted text, with a Lucide
+  chevron at `--site-icon-size`, aligned on the capital height.
+  Labels retain Title Case.
+  A button has a minimum 2rem square target; its open or hovered state takes
+  `--site-wash` and accent text.
+  The chevron turns upward while open.
+  The list uses the page background, document border, and shared shadow, with 0.3rem
+  inner padding and links padded 0.45rem by 0.7rem. Links and buttons show a 2px
+  document-link outline with 2px clearance on keyboard focus.
+  The current landing page is underlined; an ancestor is accent and weight 650. A
+  fragment destination does not also claim the current page.
+
+  `overview/navigation.js` enhances ordinary navigation lists, without application-menu
+  roles. Enter or Space toggles the adjacent button; Tab follows ordinary document order.
+  Escape closes the open list and restores its button.
+  Outside activation closes the list without preventing the target action.
+  Opening a group closes its sibling, and opening a theme or article popover dismisses
+  navigation disclosures.
+  Arrow Down or Up on a disclosure opens the list and focuses its first or last link.
+
+  Below 48rem, a labelled Menu button exposes the same groups vertically.
+  Disclosures remain inline, have 2.5rem square targets, and reveal their children
+  beneath the parent. The open navigation scrolls within the available viewport height.
+  Without JavaScript, all links and their children remain exposed; enhancement buttons
+  are hidden. Print and embedded articles omit the global header.
+
+  Nested pages carry a sans, muted breadcrumb trail above their title, at the shared
+  note size and support leading, centered on the reading column, 1rem below the
+  navigation and 2.5rem above the title.
+  The trail replaces the article’s usual top gap.
+  Ancestors are links, separated visually by chevrons; the current title is plain text
+  with `aria-current="page"`. The five landing pages have no trail.
+  `site_navigation.py` supplies the same ancestry for the visible trail and structured
+  BreadcrumbList data.
+  Cases belong to Results → Atlas, profiles to About → Profiles, chapters to About →
+  Research Synopsis, and verification guidance to Results.
+  Overlays and print hide the visible trail.
   The workbench is an application rather than a KPress page, so its build
   (`workbench_tools.build_site`) takes the bar, its stylesheet, the theme bootstrap and
   the gear’s script from `render_overview.nav_shell`, in a shell that gives it the page
@@ -887,9 +923,8 @@ contributor articles use their component sheets and the same text tokens.
 
 - **Section tabs.** A section that spans pages carries one small tab bar under the
   navigation bar where the destination is a dedicated visual page.
-  The shared Visuals switch has **Film** (`papers.html#visuals`) and **Workbench**
-  (`workbench/`). On Explanations, it sits in the Visuals section after Tutorial, Papers
-  and PDFs; it is not a page-wide Papers tab.
+  The shared Visuals switch has **Film** (`visualize.html`) and **Workbench**
+  (`workbench/`). It appears on those two pages as sibling navigation.
   Each tab is a real link to its own page, so the bar needs no script, and a tab can be
   opened, bookmarked and shared; every existing `workbench/` address lands on the
   Workbench tab. The bar is a centred strip with square corners and the cards’ thin
@@ -1295,9 +1330,16 @@ contributor articles use their component sheets and the same text tokens.
   sans, closed by its `×`, by Escape, or by a click outside, and it works without
   scripting. A card, popover or direct, gains a gentle wash on hover.
   Every popover has the same margin on all four sides, `--site-popover-pad` (1.75rem;
-  1.1rem on a phone). Its header groups the Lucide maximize and close icons at the upper
-  right, each in a 2.75rem square tap target (`--site-popover-close`), set 0.6rem in
-  from the corner (0.25rem on a phone) and washed on hover or keyboard focus.
+  1.1rem on a phone). Prose panels use `--site-popover-text-width`, the normal
+  `--kpress-measure` plus their two padding insets, capped inside 1rem viewport gutters.
+  This rule applies to profile and result panels; case visualizations keep their wider
+  stage and responsive gutters.
+  Its header groups the Lucide maximize-2 and close icons at the upper right, each in a
+  2.75rem square tap target (`--site-popover-close`), set 0.6rem in from the corner
+  (0.25rem on a phone) and washed on hover or keyboard focus.
+  The expand glyph has diagonal outward arrows.
+  KPress’s retained sprite has no maximize-2 symbol, so both inline and sprite-backed
+  controls inline the same paths.
   The maximize link sits immediately left of Close, uses the bottom full-page action’s
   destination and accessible label, and leaves that bottom action in place.
   A panel with no full page, including a detail whose action only scrolls within its
@@ -1306,8 +1348,9 @@ contributor articles use their component sheets and the same text tokens.
   either article still puts keyboard focus on Close.
   The controls use the same 1.25rem Lucide icon size, and the case controls stay in
   reach while its panel scrolls.
-  Only the first text block reserves their combined width; the article keeps its full
-  measure and the margins stay even elsewhere.
+  Only the first text block reserves their combined width; a fetched profile reserves
+  this space in its H1, since its ancestry trail is outside the article.
+  The article keeps its full measure and the margins stay even elsewhere.
   A popover’s height has one limit, the window’s: `--site-popover-max-block`, the
   window’s height less `--site-popover-window-margin` above and below, which is 4% of
   that height and never under 1rem nor over 3rem. A card’s or a row’s popover, the case
@@ -1328,6 +1371,14 @@ contributor articles use their component sheets and the same text tokens.
   Its gray corner icon and the popover’s button both show where the button goes: down to
   a row on this page, external off the site, right to another page of the site (Arrows,
   below).
+
+- **Collection actions.** A link to a complete collection uses **View All …**, such as
+  View All Results, View All Profiles, View All Resources, View All News, or View All
+  Learning Materials, followed by the existing decorative right-arrow component.
+  The link remains an anchor with its real destination, styled by `.site-action` inside
+  `.site-action-row`: the shared accent fill, note-sized sans label on the button-label
+  scale, 0.45rem by 0.9rem padding, 0.5rem icon gap, and the shared hover and focus
+  state.
 
 - **Card sizes.** A card is sized by its text, in three sizes it names in
   `data-card-size`; a card that names none is medium.
@@ -2741,14 +2792,13 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   `preview_site.moved_links` hold the pages to that, and `check_published_site` asks the
   deployed site for each one.
 
-- **Explanations page.** The shared navigation entry after Results leads to
-  `papers.html`, headed “Explanations”.
+- **Learn page.** The Learn navigation entry leads to `papers.html`, headed “Learn”.
   Its sections are Tutorial, Papers, PDFs and Visuals, in that order.
   Tutorial presents the basic introduction and advanced companion as two large reading
   cards. Papers presents the three parts of the $n = 11$ series in reading order,
   followed by the methods survey.
   PDFs offers the two infographic posters.
-  Visuals retains the Film | Workbench chooser and a paused inline film.
+  Visuals links to the full Film page, Workbench, and the Resources directory.
   Reading cards come from `overview_sections.PAPERS`, each entry a document’s address,
   label, title, description and card size.
   Each card links directly to its document in the same tab, with no popover or framed
@@ -2758,10 +2808,10 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   independent publication editions.
   The tutorials remain `tutorial.html` and `tutorial-advanced.html`, using the
   reader-document pipeline.
-  Explanations is the current navigation entry on these pages.
-  The legacy `visualize.html` film remains available.
-  Shared article overlays remain available for marked record and contributor links
-  elsewhere on the page; the reading cards themselves navigate directly.
+  Learn is the active navigation ancestor on its papers, tutorials, Film, Workbench, and
+  Resources. The full film is served at `visualize.html`. Shared article overlays remain
+  available for marked record and contributor links elsewhere on the page; the reading
+  cards themselves navigate directly.
   The addresses the papers had before 2026-10-01, `explainer.html` and
   `n11-optimality/t-060-explainer.html` with its directory, each serve a forwarder: a
   page of a few lines that sends a reader on with the query string and the fragment they
@@ -2811,7 +2861,7 @@ variables retain their mathematical case.
 The article has its own IDs and prepared math and may contain a native table for a broad
 result’s cases. The shared loader scopes those IDs and resolves links when the article
 enters a panel, so its content can be read outside the originating table.
-Its popover is the case popover’s size, up to 62rem wide and as tall as the window
+Its popover uses the shared reading-measure width cap and may be as tall as the window
 allows (**Cards**, above), and scrolls as one panel.
 
 Listing pages carry a short native link and an action rather than every full overview.
@@ -3045,8 +3095,8 @@ measured on 2026-10-20. The directory table, project bylines and News containers
 their names plain with `data-contributor-plain` scopes.
 The script leaves alone a link inside one, the panel’s own **Open profile** action, a
 link to the page it is on, and a link that downloads or names a target.
-The panel has the standard 36rem ceiling, shared padding, close target, viewport height
-limit, scrim and scrolling of a compact article popover.
+The panel uses the shared reading-measure width cap, padding, close target, viewport
+height limit, scrim and scrolling of a compact article popover.
 It retains the page opener across case/result/profile replacements.
 
 The profiles were served under `contributors/` until 2026-10-13 (think-0v2c); each

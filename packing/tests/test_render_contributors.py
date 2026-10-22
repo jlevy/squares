@@ -12,6 +12,7 @@ import yaml
 
 from devtools import (
     check_published_site,
+    paper_structure,
     record_presentation,
     render_changelog,
     render_contributors,
@@ -47,12 +48,12 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     assert 'class="kpress-table site-table site-profile-table"' in index
     assert re.findall(r"<th\b[^>]*>([^<]+)</th>", index) == [
         "Name",
+        "Accounts",
         "Records",
         "Results",
         "Credits",
         "Years active",
         "Resources",
-        "Accounts",
     ]
     assert index.count('data-sort="num"') == 4
     assert index.count('data-sort="text"') == 3
@@ -67,21 +68,34 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     assert "<title>Profiles" in index
     assert 'rel="canonical" href="https://squaremath.org/profiles/"' in index
     # The directory names cited authors as well as contributors, and calls none of them
-    # contributors in its own voice; the colophon links it by the same name.
+    # contributors in its own voice.
     assert "Contributors<" not in index
-    assert '<a href="index.html">Profiles</a></span>' in index
     assert "data-person" not in index
-    assert 'data-page="about" aria-current="page"' in index
-    assert '<a href="../about.html#profiles">About</a></nav>' in index
+    directory_tree = paper_structure.parse(index)
+    breadcrumb = directory_tree.find("nav", "site-breadcrumbs")
+    assert breadcrumb is not None
+    assert [(a.text(), a.attrs["href"]) for a in breadcrumb.find_all("a")] == [
+        ("About", "../about.html"),
+    ]
+    for cell in directory_tree.find_all("td"):
+        if cell.classes.intersection(
+            {"site-profile-records", "site-profile-stats", "site-profile-credits"}
+        ):
+            assert all(number.text().isdigit() for number in cell.find_all("strong"))
+            if cell.attrs.get("data-value", "0") != "0":
+                assert cell.find("strong") is not None
     assert 'site-profile-table" data-contributor-plain' in index
     for contributor in registry.by_id.values():
         assert contributor.profile_path == f"profiles/{contributor.id}.html"
         assert f'href="{contributor.id}.html"' in index
         profile = pages[contributor.profile_path]
         assert '<article class="site-contributor"' in profile
-        assert 'data-page="about" aria-current="page"' in profile
-        assert '<a href="../about.html#profiles">About</a>' in profile
-        assert '<a href="index.html">Profiles</a></nav>' in profile
+        trail = paper_structure.parse(profile).find("nav", "site-breadcrumbs")
+        assert trail is not None
+        assert [(a.text(), a.attrs["href"]) for a in trail.find_all("a")] == [
+            ("About", "../about.html"),
+            ("Profiles", "./"),
+        ]
         assert contributor.display_name in profile
         assert "data-contributor-popover" in profile
         assert 'aria-label="Profile"' in profile

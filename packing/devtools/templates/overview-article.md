@@ -22,35 +22,37 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 {{ATLAS_GRID}}
 
-<p class="site-action-row site-more site-homepage-atlas-actions"><a class="site-action" href="{{ATLAS_PDF}}" download>Download PDF{{ARROW_DOWNLOAD}}</a><a class="site-action" href="atlas.html">Explore the atlas{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more site-homepage-atlas-actions"><a class="site-action" href="{{ATLAS_PDF}}" download>Download PDF{{ARROW_DOWNLOAD}}</a><a class="site-action" href="atlas.html">View All Packings{{ARROW_RIGHT}}</a></p>
 
 <h2 id="news" class="site-title">News</h2>
 
 {{NEWS_PREVIEW}}
 
-<p class="site-action-row site-more"><a class="site-action" href="news.html">All news{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="news.html">View All News{{ARROW_RIGHT}}</a></p>
 
 <h2 id="recent-results" class="site-title">Recent Major Results</h2>
 
 {{RECENT}}
 
-<p class="site-action-row site-more"><a class="site-action" href="results.html#verification-ladders">About Result Verification{{ARROW_RIGHT}}</a><a class="site-action" href="results.html#all-results" {{RESULTS_LINK_ATTRIBUTES}}>All Results{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="results.html#verification-ladders">About Result Verification{{ARROW_RIGHT}}</a><a class="site-action" href="results.html#all-results" {{RESULTS_LINK_ATTRIBUTES}}>View All Results{{ARROW_RIGHT}}</a></p>
 
 {{PROFILES}}
 
 <h2 id="report-your-results" class="site-title">Report Your Results!</h2>
 
-{{REPORT_RESULTS}}
+Have a new packing, bound, or proof to share?
+Read the contribution instructions and send the evidence behind your result.
 
-<h2 id="papers" class="site-title">Papers<a id="learn-more"></a></h2>
+<p class="site-action-row site-more"><a class="site-action" href="about.html#report-your-results">Report a Result{{ARROW_RIGHT}}</a></p>
 
-The first-principles tutorial introduces the problem.
-Three papers explain the lower bounds and optimality proof for eleven squares; the
-methods tutorial describes how record packings are found.
+<h2 id="papers" class="site-title">Learn<a id="learn-more"></a></h2>
+
+Start with the tutorials, then follow the lower-bound methods for eleven squares.
+Learn has the complete paper catalogue and further ways to explore the problem.
 
 {{PAPER_CARDS}}
 
-<p class="site-action-row site-more"><a class="site-action" href="papers.html">View All Papers{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="papers.html">View All Learning Materials{{ARROW_RIGHT}}</a></p>
 
 <h1 id="visuals" class="site-title">Visuals<a id="pdfs"></a><a id="video"></a><a id="pdfs-and-videos"></a></h1>
 
@@ -58,19 +60,24 @@ methods tutorial describes how record packings are found.
 {{PDF_CARDS}}
 </div>
 
-{{VIDEO_PLAYER}}
+Watch the Atlas grow one square at a time in the film, or try a packing yourself in the
+Workbench.
 
-<p class="site-action-row site-more"><a class="site-action" href="papers.html#pdfs">View All PDFs{{ARROW_RIGHT}}</a><a class="site-action" href="visualize.html">View Visualizations{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="visualize.html">Watch Film{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a><a class="site-action" href="papers.html#pdfs">View All Downloads{{ARROW_RIGHT}}</a></p>
 
 <h1 id="squares-project-documentation" class="site-title">Squares Project Documentation</h1>
 
-{{DOCUMENTATION_BLOCK}}
+The project documentation explains the research, evidence, record formats, and how to
+build and extend the tools.
 
-<p class="site-action-row site-more"><a class="site-action" href="about.html">About the Project{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="about.html#squares-project-documentation">View All Documentation{{ARROW_RIGHT}}</a></p>
 
 <h1 id="more-resources" class="site-title">More Resources<a id="other-square-packing-projects"></a></h1>
 
-{{OTHER_PROJECTS}}
+Explore the catalogues, research repositories, and websites behind the square packing
+record, with their credited authors and links to related results.
+
+<p class="site-action-row site-more"><a class="site-action" href="resources.html">View All Resources{{ARROW_RIGHT}}</a></p>
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

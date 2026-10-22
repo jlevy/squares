@@ -46,6 +46,9 @@ formalizations of current proofs.
 
 {{DOCUMENTATION_BLOCK}}
 
+The [Resources directory](resources.html) under Learn lists external square packing
+catalogues, research repositories, and websites.
+
 {{NEWS_LEGACY_ANCHORS}}
 
 <a id="news"></a>

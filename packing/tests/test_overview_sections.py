@@ -189,3 +189,16 @@ def test_reading_cards_keep_original_dates_when_a_new_edition_is_added(
         assert 'target="_blank"' not in card
         assert card.index("site-card-label") < card.index("<h3>") < card.index("<time ")
         assert card.index("</header>") < card.index("site-card-note")
+
+
+def test_homepage_learning_preview_uses_the_shared_starting_cards() -> None:
+    preview = overview_sections.homepage_paper_cards()
+    destinations = re.findall(r'<a class="site-card site-card-link" href="([^"]+)"', preview)
+    assert destinations == [
+        "tutorial.html",
+        "tutorial-advanced.html",
+        overview_sections.LOWER_BOUNDS_PAPER,
+    ]
+    complete = overview_sections.paper_cards()
+    for card in re.findall(r'<a class="site-card site-card-link".*?</a>', preview, re.DOTALL):
+        assert card in complete

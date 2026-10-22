@@ -7080,6 +7080,64 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "`validate._synopsis`. No render was taken, and every paper keeps its version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/overview/headroom.js",
+            "packing/devtools/overview/navigation.js",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/probes/preview_site/baselines.js",
+            "packing/devtools/probes/preview_site/header.js",
+            "packing/devtools/record_presentation.py",
+            "packing/devtools/render_contributors.py",
+            "packing/devtools/render_n11_lower_bounds_explainer.py",
+            "packing/devtools/render_n11_optimality_review.py",
+            "packing/devtools/render_n11_threshold_bound_review.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/render_packing_methods.py",
+            "packing/devtools/site_icons.py",
+            "packing/devtools/site_navigation.py",
+            "packing/devtools/site_popovers.py",
+            "packing/devtools/site_tallies.py",
+            "packing/devtools/templates/n11-lower-bounds-explainer-shell.html",
+            "packing/devtools/templates/n11-optimality-review-shell.html",
+            "packing/devtools/templates/n11-threshold-bound-review-shell.html",
+            "packing/devtools/templates/packing-methods-shell.html",
+            "packing/devtools/templates/site-nav.css",
+            "packing/devtools/templates/site-nav.html",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Source review of the Results, Learn and About navigation slice (think-7kbb): "
+            "the four paper renderers add the shared navigation program and collection "
+            "breadcrumbs to their outer shells and declare those inputs for freshness. "
+            "Navigation and breadcrumbs are hidden in print; the breadcrumb-to-title "
+            "spacing adjustments are screen-only. Paper manuscripts, mathematical "
+            "figures, paper-owned typography, scientific claims and credit text are "
+            "unchanged. The shared colophon keeps the same paper attribution and "
+            "typesetting text with no site edition. Profile totals, resource cards and "
+            "popover expand glyphs affect site chrome; preview probes inspect that "
+            "chrome, and the validation selector adds its browser tests without changing "
+            "any paper builder. The examined HTML shell and Markdown generation paths "
+            "justify retaining each paper edition under the existing chrome exception. No "
+            "byte-identical HTML, Markdown or PDF rebuild is claimed."
+        ),
+    ),
 )
 
 

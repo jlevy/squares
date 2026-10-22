@@ -684,7 +684,9 @@ body {
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-light);
   max-block-size: var(--site-popover-max-block);
-  max-width: min(36rem, 100vw - 2rem);
+  box-sizing: border-box;
+  inline-size: min(var(--site-popover-text-width), calc(100vw - 2rem));
+  max-inline-size: calc(100vw - 2rem);
   overflow: auto;
   padding: var(--site-popover-pad);
 }
@@ -700,6 +702,7 @@ body {
    property, and whichever a rule declares later is the one that holds. */
 :root {
   --site-popover-pad: 1.75rem;
+  --site-popover-text-width: calc(var(--kpress-measure) + 2 * var(--site-popover-pad));
   --site-popover-close: 2.75rem;
   --site-popover-close-inset: 0.6rem;
   --site-popover-window-margin: clamp(1rem, 4dvh, 3rem);
@@ -3800,4 +3803,22 @@ html[data-site-atlas-view="triangle"]
 .site-record-pending {
   color: var(--site-support-color);
   font-size: var(--site-font-size-note);
+}
+
+/* Prose panels use the reading measure plus their insets. Case visualizations retain
+   their wider stage, and every panel remains inside the viewport gutters. */
+.site-popover.site-contributor-popover,
+.site-popover.site-row-pop:has(.site-result, [data-row-pop-src]) {
+  inline-size: min(var(--site-popover-text-width), calc(100vw - 2rem));
+  max-inline-size: calc(100vw - 2rem);
+}
+
+/* A nested page's outer trail supplies the gap below the header and above its title. */
+@media screen {
+  .kpress-page-main:has(> .site-breadcrumbs)
+    > .kpress-doc
+    > .kpress-doc-layout
+    > .kpress-long-text {
+    padding-block-start: 0;
+  }
 }

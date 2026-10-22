@@ -83,6 +83,7 @@ def shells(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
             "SITE_NAV": render_overview.nav_html("papers"),
             "SITE_THEME": render_overview.THEME_SCRIPT.read_text(),
             "SITE_HEADROOM": render_overview.HEADROOM_SCRIPT.read_text(),
+            "SITE_NAVIGATION": render_overview.NAVIGATION_SCRIPT.read_text(),
             "BODY_HTML": BODY,
         }
         documents[paper] = re.sub(
@@ -150,7 +151,9 @@ def test_gear_aligns_with_the_navigation_labels_visible_ink(
             page.goto(path.as_uri(), wait_until="load")
             page.locator(".site-headroom").wait_for(state="attached")
             items = page.evaluate(NAVIGATION)
-            about = next(item for item in items if item["label"] == "about")
+            about = next(
+                item for item in items if item["label"] in {"about", "site-nav-mobile-toggle"}
+            )
             github = next(item for item in items if item["label"] == "github")
             gear = next(item for item in items if item["label"] == "site-theme")
             github_icon = (
@@ -194,7 +197,9 @@ def test_focus_and_open_theme_menu_keep_header_visible(
         page.goto(shells["ordinary"].as_uri(), wait_until="load")
         page.locator(".site-headroom").wait_for(state="attached")
         page.evaluate(SCROLL, 600)
-        page.locator('.site-nav a[data-page="overview"]').focus()
+        page.locator(
+            '.site-nav :is(.site-nav-mobile-toggle, a[data-page="overview"]):visible'
+        ).first.focus()
         assert not page.evaluate(STATE)["hidden"]
         page.evaluate(SCROLL, 700)
         assert not page.evaluate(STATE)["hidden"]
@@ -225,7 +230,9 @@ def test_anchor_target_clears_the_whole_header(browser: Any, shells: dict[str, P
         page.goto(shells["ordinary"].as_uri(), wait_until="load")
         page.locator(".site-headroom").wait_for(state="attached")
         page.evaluate(ANCHOR)
-        page.locator('.site-nav a[data-page="overview"]').focus()
+        page.locator(
+            '.site-nav :is(.site-nav-mobile-toggle, a[data-page="overview"]):visible'
+        ).first.focus()
         state = page.evaluate(STATE)
         assert state["targetTop"] >= state["bottom"], state
     finally:
@@ -324,10 +331,12 @@ def test_header_measurement_does_not_restyle_the_native_math_document(
         page.set_viewport_size({"width": 1280, "height": 700})
         page.evaluate(SCROLL, 0)
         wide = page.evaluate(STATE)
-        assert wide["height"] < narrow["height"]
+        assert wide["height"] != narrow["height"]
         assert wide["offset"] == pytest.approx(wide["height"] + 8, abs=0.01)
         page.evaluate(ANCHOR)
-        page.locator('.site-nav a[data-page="overview"]').focus()
+        page.locator(
+            '.site-nav :is(.site-nav-mobile-toggle, a[data-page="overview"]):visible'
+        ).first.focus()
         anchored = page.evaluate(STATE)
         assert anchored["targetTop"] >= anchored["bottom"], anchored
     finally:

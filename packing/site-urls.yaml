@@ -7317,6 +7317,14 @@ urls:
   first_published: '2026-09-29'
   lastmod: '2026-10-22'
   status: live
+- path: resources.html
+  canonical: resources.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: result/t-001.html
   canonical: result/t-001.html
   kind: result

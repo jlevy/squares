@@ -895,6 +895,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/yohei-nakajima.html | profiles/yohei-nakajima.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/zk-shangitbayev.html | profiles/zk-shangitbayev.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | readme.html | readme.html | page | overview | 2026-09-29 | 2026-10-22 | live |
+| resources.html | resources.html | page | overview | 2026-10-08 | 2026-10-22 | live |
 | result/t-001.html | result/t-001.html | result | overview | 2026-08-31 | 2026-08-31 | live |
 | result/t-002.html | result/t-002.html | result | overview | 2026-08-31 | 2026-08-31 | live |
 | result/t-003.html | result/t-003.html | result | overview | 2026-08-31 | 2026-08-31 | live |

@@ -1,12 +1,15 @@
 """Shared popover headers preserve full-page destinations and native close behavior."""
 
 from collections.abc import Iterator
+from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
 import pytest
 
-from devtools import overview_sections, preview_site, render_overview
+from devtools import overview_sections, preview_site, render_contributors, render_overview
+from sqpack.contributor_occurrences import load_occurrences
+from sqpack.contributors import load_contributors
 from sqpack.probes import probe
 from tests import site_browser
 
@@ -42,9 +45,9 @@ def test_full_page_header_and_footer_share_the_escaped_destination() -> None:
     )
     assert 'class="site-popover-expand"' in detail.popover
     assert detail.popover.count('href="result/test.html?x=1&amp;y=2"') == 2
-    assert '<use href="#kpress-icon-maximize">' in detail.popover
+    assert '<path d="M15 3h6v6"/>' in detail.popover
+    assert '<path d="m3 21 7-7"/>' in detail.popover
     assert '<use href="#kpress-icon-x">' in detail.popover
-    assert "<path " not in detail.popover
     assert detail.popover.index('class="site-popover-expand"') < detail.popover.index(
         'class="site-popover-close"'
     )
@@ -117,10 +120,12 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
         '<a href="cases/12.html" data-case-step="12" rel="next">Next case</a></nav>'
         "<h1>Case 11</h1>" + "<p>Retained case detail.</p>" * 100 + "</article>"
     )
-    profile = (
-        '<article class="site-contributor"><nav class="site-contributor-breadcrumb">'
-        '<a href="index.html">Profiles</a></nav><h1>Walter Stromquist</h1>'
-        "<p>Reviewed profile.</p></article>"
+    contributor = replace(
+        load_contributors().by_id["walter-stromquist"],
+        display_name="Walter Stromquist with a Long Contributor Display Name",
+    )
+    profile = render_contributors.contributor_article(
+        contributor, load_occurrences().occurrences
     )
     articles = {
         "result/test.html": '<article class="site-result" data-result-overview="test">'
@@ -219,6 +224,7 @@ def test_case_and_profile_actions_follow_replacement_and_remain_navigable(
         page.locator("#profile-link").click()
         panel = page.locator("#pop-contributor")
         panel.locator("article.site-contributor").wait_for(state="visible")
+        assert not panel.evaluate(LAYOUT)["titleOverlapsControls"]
         expected = served + "profiles/walter-stromquist.html"
         assert panel.locator(".site-popover-expand").get_attribute("href") == expected
         assert panel.locator("[data-contributor-open]").get_attribute("href") == expected

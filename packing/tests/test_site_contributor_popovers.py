@@ -327,8 +327,8 @@ def test_generated_profile_uses_shared_roles_without_overflow(
             assert styles["body"]["weight"] == styles["note"]["weight"]
             assert styles["left"] == pytest.approx(styles["right"], abs=1)
             assert styles["bodyClearance"] == "0px"
-            assert styles["titleClearance"] == "0px"
-            assert styles["panelWidth"] <= min(36 * 16, width - 32) + 1
+            assert float(styles["titleClearance"].removesuffix("px")) > 0
+            assert styles["panelWidth"] <= width - 32 + 1
         else:
             assert styles["body"]["family"] != styles["note"]["family"]
         assert styles["overflow"] == []
@@ -339,7 +339,7 @@ def test_generated_profile_uses_shared_roles_without_overflow(
         shots = Path(os.environ.get("SQPACK_CONTRIBUTOR_DESIGN_SHOTS", str(tmp_path)))
         shots.mkdir(parents=True, exist_ok=True)
         mode = "popover" if overlay else "standalone"
-        article.locator(".site-contributor-breadcrumb").scroll_into_view_if_needed()
+        article.locator("h1").scroll_into_view_if_needed()
         page.screenshot(path=str(shots / f"profile-{mode}-{width}-{theme}.png"))
 
 
@@ -650,7 +650,7 @@ def test_generated_profile_keeps_its_own_anchors_and_breadcrumb_plain(
         assert anchors.count() > 0
         for index in range(anchors.count()):
             assert anchors.nth(index).get_attribute("aria-haspopup") is None
-        breadcrumb = article.locator('.site-contributor-breadcrumb a[href="index.html"]')
+        breadcrumb = page.locator('.site-breadcrumbs a[href="../profiles/"]')
         assert breadcrumb.get_attribute("aria-haspopup") is None
         for disclosure in article.locator("details").all():
             if disclosure.get_attribute("open") is None:
@@ -743,5 +743,5 @@ def test_generated_directory_keeps_native_profile_navigation(
             page.locator("main article.site-contributor h1").text_content()
             == "Walter Stromquist"
         )
-        page.locator('nav[aria-label="Breadcrumb"] a[href="index.html"]').click()
-        page.wait_for_url(f"{generated}profiles/index.html")
+        page.locator('nav[aria-label="Breadcrumb"] a[href="../profiles/"]').click()
+        page.wait_for_url(f"{generated}profiles/")

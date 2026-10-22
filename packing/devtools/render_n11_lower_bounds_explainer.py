@@ -70,6 +70,7 @@ from devtools.migrate_math import plain
 from devtools.profile_links import link_prose
 from devtools.render_overview import (
     N11_LOWER_BOUNDS_EXPLAINER,
+    NAVIGATION_SCRIPT,
     PAPER_TYPE_CSS,
     PAPERS_ROOT,
     SITE_NAV,
@@ -85,6 +86,7 @@ from devtools.render_overview import (
 )
 from devtools.repo_links import repo_url
 from devtools.site_icons import GITHUB_ICON_INPUTS
+from devtools.site_navigation import breadcrumbs_html
 from sqpack.fractional.certificate import (
     Certificate,
     closed_form_conditions,
@@ -138,6 +140,7 @@ INLINE_SCRIPT_ASSETS = {
     "FINISH_MATH": EXPLAINER_SCRIPTS / "finish-math.js",
     "SITE_EMBED": PACKING / "devtools" / "overview" / "embed.js",
     "SITE_THEME": PACKING / "devtools" / "overview" / "theme.js",
+    "SITE_NAVIGATION": NAVIGATION_SCRIPT,
     "SITE_HEADROOM": PACKING / "devtools" / "overview" / "headroom.js",
     "SITE_TOOLTIPS": PACKING / "devtools" / "overview" / "rating-tooltips.js",
 }
@@ -2659,7 +2662,8 @@ def shell_substitutions(static: Path, shared: dict[str, str], body: str) -> dict
         },
         "KPRESS_CLIENT_SCRIPT": kpress_client_js(static),
         "SITE_NAV_CSS": SITE_NAV_CSS.read_text(encoding="utf-8"),
-        "SITE_NAV": nav_html("papers", root=SITE_ROOT),
+        "SITE_NAV": nav_html(SITE_PATH, root=SITE_ROOT)
+        + breadcrumbs_html(SITE_PATH, TITLE, root=SITE_ROOT),
         # A paper's closing credit carries no version: its own is in its credits, and
         # the site's goes on no paper.
         "COLOPHON": colophon_lines(edition=""),
@@ -2960,6 +2964,8 @@ RENDER_INPUTS = (
     MARKDOWN,
     SITE_NAV,
     SITE_NAV_CSS,
+    NAVIGATION_SCRIPT,
+    PACKING / "devtools/site_navigation.py",
     INLINE_SCRIPT_ASSETS["SITE_HEADROOM"],
     INLINE_SCRIPT_ASSETS["SITE_TOOLTIPS"],
     PAPER_TYPE_CSS,

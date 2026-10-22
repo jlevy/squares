@@ -1993,7 +1993,7 @@ PROFILES_DIRECTORY = "profiles/index.html"
 
 
 def documentation_block() -> str:
-    """The shared repository introduction and reader-document cards on Home and About."""
+    """The repository introduction and complete reader-document cards on About."""
     lead = (
         "<p>The code, the certificates, the literature archive and the documents that "
         "record all of this live in the Squares Project\u2019s "
@@ -2143,6 +2143,12 @@ def paper_cards(*, papers: Sequence[Paper] | None = None) -> str:
             for paper in (PAPERS if papers is None else papers)
         ]
     )
+
+
+def homepage_paper_cards() -> str:
+    """Three starting points in the Learn page's existing reading order."""
+    starting_points = (*PAPERS[-2:], PAPERS[0])
+    return paper_cards(papers=starting_points)
 
 
 #: The site's reading and working pages, as the overview's cards under The Squares
@@ -2682,7 +2688,7 @@ def _profile_resource_tallies() -> dict[str, ProjectTally]:
 def resource_card(
     resource: Resource, tally: ProjectTally, *, current_profile: str | None = None
 ) -> str:
-    """One shared external-resource card on Home and the credited person's profile."""
+    """One shared external-resource card in the directory and a credited person's profile."""
     url = resource.url
     return link_card(
         url,
@@ -2707,7 +2713,7 @@ def resource_cards(
     overview: Overview | None = None,
     current_profile: str | None = None,
 ) -> str:
-    """The same card grid and resource projection across homepage and profile contexts."""
+    """The same card grid and resource projection in the directory and profiles."""
     tallies = (
         _profile_resource_tallies() if overview is None else dict(listed_projects(overview))
     )

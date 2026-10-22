@@ -512,3 +512,203 @@ nav.site-tabs a[aria-current="page"],
   outline: 2px solid var(--kpress-doc-link);
   outline-offset: 2px;
 }
+
+/* ---------- Navigation disclosures ----------
+   The same semantic lists are exposed without script. Enhancement adds the separate
+   buttons and collapses each list; on a phone Menu discloses the vertical navigation. */
+.site-nav :is(ul, li) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site-nav li::before {
+  content: none;
+}
+.site-nav-links {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.1rem;
+}
+.site-nav-links > li {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+.site-nav-links a {
+  display: inline-block;
+}
+.site-nav :is(.site-nav-mobile-toggle, .site-nav-disclosure) {
+  align-items: center;
+  background: none;
+  border: 0;
+  color: var(--kpress-doc-muted);
+  cursor: pointer;
+  display: none;
+  font: inherit;
+  justify-content: center;
+  min-block-size: 2rem;
+  min-inline-size: 2rem;
+  padding: 0.25rem;
+  text-transform: none;
+  transition: var(--site-hover-transition);
+}
+.site-nav[data-site-nav-ready] .site-nav-disclosure {
+  display: inline-flex;
+  margin-inline-start: -0.4rem;
+}
+.site-nav :is(.site-nav-mobile-toggle, .site-nav-disclosure):is(:hover, [aria-expanded="true"]) {
+  background: var(--site-wash);
+  color: var(--kpress-doc-accent);
+}
+.site-nav :is(a, button):focus-visible {
+  outline: 2px solid var(--kpress-doc-link);
+  outline-offset: 2px;
+}
+.site-nav a[aria-current="true"] {
+  color: var(--kpress-doc-accent);
+  font-weight: 650;
+}
+.site-nav-disclosure[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+.site-nav-submenu {
+  flex-basis: 100%;
+}
+.site-nav[data-site-nav-ready] .site-nav-submenu {
+  background: var(--kpress-doc-bg);
+  border: 1px solid var(--kpress-doc-border);
+  box-shadow: 0 0.5rem 2rem var(--site-shadow);
+  inline-size: max-content;
+  inset-block-start: 100%;
+  inset-inline-end: 0;
+  max-inline-size: calc(100vw - 2rem);
+  padding: 0.3rem;
+  position: absolute;
+  z-index: 1;
+}
+.site-nav-submenu[hidden] {
+  display: none;
+}
+.site-nav-submenu a {
+  display: block;
+  padding: 0.45rem 0.7rem;
+  white-space: normal;
+}
+.site-nav:not([data-site-nav-ready]) .site-nav-links {
+  align-items: start;
+}
+.site-headroom:has(.site-nav:is(.site-nav-disclosed, .site-nav-mobile-open)),
+.site-headroom.site-nav:is(.site-nav-disclosed, .site-nav-mobile-open) {
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: none;
+}
+@media (width < 48rem) {
+  .site-nav-inner {
+    column-gap: 0.3rem;
+  }
+  .site-nav[data-site-nav-ready] .site-nav-mobile-toggle {
+    display: inline-block;
+    padding-inline: 0.55rem;
+  }
+  .site-nav .site-nav-links {
+    align-items: stretch;
+    flex-basis: 100%;
+    flex-direction: column;
+    gap: 0.2rem;
+    order: 1;
+    width: 100%;
+  }
+  .site-nav[data-site-nav-ready]:not(.site-nav-mobile-open) .site-nav-links {
+    display: none;
+  }
+  .site-nav.site-nav-mobile-open .site-nav-links {
+    max-block-size: calc(100dvh - 6rem);
+    overflow: auto;
+    padding-block: 0.4rem;
+  }
+  .site-nav-links > li {
+    justify-content: space-between;
+  }
+  .site-nav-links > li > a {
+    flex: 1;
+    padding: 0.45rem 0.55rem;
+  }
+  .site-nav[data-site-nav-ready] .site-nav-disclosure {
+    min-block-size: 2.5rem;
+    min-inline-size: 2.5rem;
+    margin: 0;
+  }
+  .site-nav[data-site-nav-ready] .site-nav-submenu {
+    border: 0;
+    border-inline-start: 1px solid var(--kpress-doc-border);
+    box-shadow: none;
+    inline-size: auto;
+    margin-inline-start: 0.55rem;
+    max-inline-size: 100%;
+    position: static;
+  }
+  .site-nav-submenu a {
+    padding: 0.45rem 0.7rem;
+  }
+}
+
+/* One visible ancestry trail above a nested page's heading, from site_navigation.py. */
+.site-breadcrumbs {
+  color: var(--site-support-color, var(--kpress-doc-muted));
+  font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-note, var(--site-nav-font-size));
+  font-weight: var(--site-font-weight-sans-light, 400);
+  line-height: var(--paper-support-leading, 1.4);
+  margin-block: 1rem 2.5rem;
+  margin-inline: auto;
+  max-inline-size: min(100%, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset, 0px)));
+}
+.site-breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.55rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site-breadcrumbs li {
+  margin: 0;
+  padding: 0;
+}
+.site-breadcrumbs li::before {
+  content: none;
+}
+.site-breadcrumbs li + li::before {
+  content: "›";
+  margin-inline-end: 0.55rem;
+}
+.site-breadcrumbs a {
+  color: inherit;
+}
+:root[data-site-view="embed"] .site-breadcrumbs,
+.site-popover .site-breadcrumbs {
+  display: none;
+}
+
+@media print {
+  .site-breadcrumbs {
+    display: none;
+  }
+}
+
+/* Paper format chips occupy part of the breadcrumb-to-title gap; the hero adds only
+   the remaining half rem, so the paper does not repeat its ordinary four-rem opening. */
+@media screen {
+  .kpress-page-main > .site-breadcrumbs:has(+ .cert-page) {
+    margin-block-end: 0.5rem;
+  }
+  .kpress-page-main:has(> .site-breadcrumbs) > .cert-page .doc-links {
+    margin-block-start: 0;
+  }
+  .kpress-page-main:has(> .site-breadcrumbs) > .cert-page .hero {
+    padding-block-start: 0.5rem;
+  }
+}

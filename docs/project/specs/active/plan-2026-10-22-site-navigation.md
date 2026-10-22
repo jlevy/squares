@@ -9,12 +9,13 @@ author: Codex, for the repository owner
 
 **Author:** Codex, for the repository owner
 
-**Status:** Draft for review.
-No site implementation is included.
+**Status:** Implementation in progress in draft PR #737. The landing-page and
+standalone-shell slice is complete; integrated validation, reader checks, and
+publication remain in progress.
 
-**Tracking:** `think-7kbb` (planning; pending plan review)
+**Tracking:** `think-7kbb` (coordination); `think-je3b` (landing pages and Resources)
 
-**Workflow:** `tbd shortcut new-plan-spec`
+**Workflow:** `tbd shortcut implement-beads`, following the reviewed navigation plan
 
 ## Overview
 
@@ -593,10 +594,10 @@ Visible breadcrumbs and metadata must use that lookup.
   consistently across pages and the workbench.
 - [ ] Add shared dropdowns, active-parent rules, and nested-page breadcrumbs across all
   page producers and the workbench.
-- [ ] Reorganize Results and Learn with the specified entry points; add the full
+- [x] Reorganize Results and Learn with the specified entry points; add the full
   Resources directory at `resources.html` under Learn; keep the About root
   breadcrumb-free.
-- [ ] Reduce homepage catalogues to previews and direct actions while preserving old
+- [x] Reduce homepage catalogues to previews and direct actions while preserving old
   anchors and ordinary links.
 - [ ] Audit collection buttons across Overview and all landing pages for the shared View
   All … wording, right-arrow component, spacing, and focus styling; retain distinct
@@ -606,6 +607,25 @@ Visible breadcrumbs and metadata must use that lookup.
   System.
 - [ ] Keep the full record pages, download editions, compatibility forwarders, and
   query/fragment behavior intact.
+
+### Completed landing and standalone-shell slice
+
+The `think-je3b` slice reorganized Results with the register table immediately after its
+introduction and local links; added Atlas section links; kept complete tutorial, paper,
+and download catalogues on Learn; and moved the ranked shared resource directory to
+`resources.html`. Overview now uses selected learning cards and visible summaries at its
+retained collection fragments.
+The four standalone paper shells and Workbench use the shared breadcrumbs and navigation
+program, with both declared as render inputs.
+The Learn heading retains `papers.html#explanations`.
+
+Focused checks passed on 2026-10-22: six section-helper tests, 21 landing/resource
+tests, 11 Workbench navigation/input tests, and four standalone-paper tests.
+These cover the existing resource ranking and linked bylines, shared card text and
+dates, collection links, retained fragments, parent breadcrumbs, navigation scripts, and
+freshness inputs.
+The integrated build, full validation surface, and reader checks remain
+in Phase 3.
 
 ### Phase 3: Verify reader journeys and publish
 
@@ -618,11 +638,9 @@ Visible breadcrumbs and metadata must use that lookup.
 - [ ] Record any remaining Frontier separation need as a distinct decision with reader
   or performance evidence; do not expand this plan merely to create more pages.
 
-Create broader implementation phase beads after plan review, using these three phases as
-the initial scope. The five consistency follow-ups are already tracked above;
-implementation starts only after PR #733 has merged.
-The planning bead remains open while the hierarchy is being reviewed; drafting this
-document does not authorize implementation.
+Implementation began after PR #733 merged and the owner authorized the reviewed
+hierarchy. The coordination bead remains open through integrated validation and reader
+checks; the completed landing slice is tracked separately above.
 
 ## Testing Strategy
 

@@ -97,7 +97,7 @@
 .site-contributor-popover > [data-contributor-body] {
   padding-inline-end: 0;
 }
-.site-contributor-popover .site-contributor-breadcrumb {
+.site-contributor-popover .site-contributor > h1 {
   padding-inline-end: calc(
     var(--site-popover-controls-inline) +
     var(--site-popover-close-inset) -

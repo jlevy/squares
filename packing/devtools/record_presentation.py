@@ -24,6 +24,7 @@ def record_tally(
     total_href: str | None = None,
     pending_href: str | None = None,
     blank_zero: bool = False,
+    emphasize_total: bool = False,
 ) -> str:
     """Supported totals never absorb unresolved comparisons or imply a false zero."""
     index = record_index() if index is None else index
@@ -35,6 +36,7 @@ def record_tally(
             tally_results(current, measures, (5, 4, 3, 2, 1)),
             noun="record",
             total_href=total_href if current else None,
+            emphasize_total=emphasize_total,
         )
         if current or not (blank_zero or pending)
         else ""

@@ -43,17 +43,19 @@ def page(tmp_path_factory: pytest.TempPathFactory) -> str:
         return read_inline_page(out / "index.html")
 
 
-def test_the_page_carries_the_shared_nav_with_explanations_current(page: str) -> None:
-    root = paper_structure.parse(page)
-    navs = root.find_all("nav", "site-nav")
-    assert len(navs) == 1
-    nav = navs[0]
+def test_the_page_carries_the_shared_nav_with_learn_as_its_parent(page: str) -> None:
+    nav = paper_structure.parse(page).find("nav", "site-nav")
+    assert nav is not None
     assert nav.attrs.get("aria-label")
-    current = [link for link in nav.find_all("a") if link.attrs.get("aria-current") == "page"]
-    assert [(link.attrs.get("data-page"), link.attrs.get("href")) for link in current] == [
-        ("explanations", "../papers.html")
+    active = [
+        (link.text(), link.attrs.get("href"), link.attrs.get("aria-current"))
+        for link in nav.find_all("a")
+        if link.attrs.get("aria-current")
     ]
-    assert current[0].text() == "Explanations"
+    assert active == [
+        ("Learn", "../papers.html", "true"),
+        ("Workbench", "../workbench/", "page"),
+    ]
 
 
 def test_the_page_carries_the_sites_head_at_the_address_it_is_served_at(page: str) -> None:
@@ -80,39 +82,39 @@ def test_the_page_carries_the_sites_head_at_the_address_it_is_served_at(page: st
         build_site.with_head("<html><head></head><body></body></html>")
 
 
-def test_the_bar_has_one_explanations_entry_reaching_the_site_root(page: str) -> None:
-    """The bar is the site's partial, so the workbench carries its Explanations entry, which
-    stands for the explainer and the tutorial, and no entry for either of them."""
+def test_the_bar_has_the_shared_five_destinations_and_direct_learning_links(page: str) -> None:
     nav = paper_structure.parse(page).find("nav", "site-nav")
     assert nav is not None
-    links = [link for link in nav.find_all("a") if "data-page" in link.attrs]
+    menu = nav.find("ul", "site-nav-links")
+    assert menu is not None
     entries = [
-        (
-            link.attrs["data-page"],
-            link.attrs.get("href"),
-            link.attrs.get("aria-label") or link.text(),
-        )
-        for link in links
+        child.find("a") for child in menu.children if isinstance(child, paper_structure.Node)
     ]
-    github = next(link for link in links if link.attrs["data-page"] == "github")
+    assert [(link.text(), link.attrs.get("href")) for link in entries if link] == [
+        ("Overview", ".././"),
+        ("News", "../news.html"),
+        ("Results", "../results.html"),
+        ("Learn", "../papers.html"),
+        ("About", "../about.html"),
+    ]
+    links = {
+        link.attrs.get("data-page"): link
+        for link in nav.find_all("a")
+        if "data-page" in link.attrs
+    }
+    for key, href in (
+        ("atlas", "../atlas.html"),
+        ("resources", "../resources.html"),
+        ("film", "../visualize.html"),
+        ("workbench", "../workbench/"),
+    ):
+        assert links[key].attrs.get("href") == href
+    github = links["github"]
     assert github.attrs.get("aria-label") == "GitHub"
     assert github.attrs.get("href") == "https://github.com/jlevy/squares"
     icon = github.find("svg")
     assert icon is not None
     assert icon.attrs.get("aria-hidden") == "true"
-    assert [key for key, _, _ in entries] == [
-        "overview",
-        "news",
-        "atlas",
-        "results",
-        "explanations",
-        "about",
-        "github",
-    ]
-    assert ("news", "../news.html", "News") in entries
-    assert ("explanations", "../papers.html", "Explanations") in entries
-    assert ("atlas", "../atlas.html", "Atlas") in entries
-    assert ("about", "../about.html", "About") in entries
 
 
 def test_the_page_is_the_workbench_tab_of_the_explanations_section(page: str) -> None:
@@ -128,7 +130,7 @@ def test_the_page_is_the_workbench_tab_of_the_explanations_section(page: str) ->
         ("workbench", "../workbench/")
     ]
     film = next(link for link in tabs[0].find_all("a") if link.attrs.get("data-tab") == "film")
-    assert film.attrs.get("href") == "../papers.html#visuals"
+    assert film.attrs.get("href") == "../visualize.html"
     assert film.text() == "Film"
     header = root.find("header", "kpress-site-header")
     assert header is not None
@@ -187,3 +189,26 @@ def test_the_bar_is_set_in_its_own_face_and_fetches_nothing(page: str) -> None:
     assert 'font-family: "Source Sans 3 Variable"' in page
     assert 'url("../fonts/' not in page
     assert 'data-src="data/corpus.' in page
+
+
+def test_breadcrumbs_precede_the_application_and_match_its_learning_parent(page: str) -> None:
+    root = paper_structure.parse(page)
+    trail = root.find("nav", "site-breadcrumbs")
+    assert trail is not None
+    assert [(link.text(), link.attrs.get("href")) for link in trail.find_all("a")] == [
+        ("Learn", "../papers.html")
+    ]
+    current = [node for node in trail.walk() if node.attrs.get("aria-current") == "page"]
+    assert len(current) == 1
+    assert current[0].tag == "span"
+    assert current[0].text() == "Workbench"
+    elements = list(root.walk())
+    viewport = next(node for node in elements if node.attrs.get("id") == "viewport")
+    assert elements.index(trail) < elements.index(viewport)
+    shell = root.find("div", "site-app-shell")
+    assert shell is not None
+    assert trail in shell.walk()
+    header = shell.find("header", "kpress-site-header")
+    assert header is not None
+    assert trail not in header.walk()
+    assert page.count(render_overview.NAVIGATION_SCRIPT.read_text(encoding="utf-8")) == 1

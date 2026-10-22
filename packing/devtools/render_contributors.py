@@ -711,6 +711,7 @@ def profile_table(
             + render_tally(
                 tally_results(stats.results, _profile_measures(records), (5, 4, 3, 2, 1)),
                 total_href=person.profile_path + "#results",
+                emphasize_total=True,
             )
             + "</span>"
             if stats.results
@@ -726,6 +727,7 @@ def profile_table(
                 ),
                 noun="credit",
                 total_href=person.profile_path + "#credited-work",
+                emphasize_total=True,
             )
             + "</span>"
             if stats.credited_results
@@ -737,6 +739,7 @@ def profile_table(
             total_href=person.profile_path + "#records",
             pending_href=person.profile_path + "#records",
             blank_zero=True,
+            emphasize_total=True,
         )
         if record_cell:
             record_cell = '<span class="site-credit-tally">' + record_cell + "</span>"
@@ -744,6 +747,7 @@ def profile_table(
         record_count = len(current_record_ids(stats.results, record_index()))
         rows.append(
             f'<tr><td data-value="{sort_name}"><a href="{target}">{label}</a></td>'
+            f'<td class="site-profile-links">{account_links(person, compact=True)}</td>'
             f'<td class="site-profile-records" data-value="{record_count}">{record_cell}</td>'
             f'<td class="site-profile-stats" data-value="{len(stats.results)}">{tally}</td>'
             f'<td class="site-profile-credits" data-value="{len(stats.credited_results)}">'
@@ -751,20 +755,20 @@ def profile_table(
             f'<td class="site-profile-years" data-value="{years[:4] if years else ""}">'
             f"{html.escape(years) if years else ''}</td>"
             f'<td class="site-profile-resources">{resource_links(person)}</td>'
-            f'<td class="site-profile-links">{account_links(person, compact=True)}</td></tr>'
+            "</tr>"
         )
     return (
         '<div class="site-table-wrap site-wide">'
         '<table class="kpress-table site-table site-profile-table" data-contributor-plain '
         'aria-label="Profiles"><thead><tr>'
         '<th scope="col" data-sort="text" aria-sort="ascending">Name</th>'
+        '<th scope="col" data-sort="text" data-sort-empty="last">Accounts</th>'
         '<th scope="col" data-sort="num">Records</th>'
         '<th scope="col" data-sort="num">Results</th>'
         '<th scope="col" data-sort="num">Credits</th>'
         '<th scope="col" data-sort="num" data-sort-empty="last" '
         'title="Sort by the first recorded activity year">Years active</th>'
         '<th scope="col" data-sort="text" data-sort-empty="last">Resources</th>'
-        '<th scope="col" data-sort="text" data-sort-empty="last">Accounts</th>'
         "</tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>"
     )
 
@@ -778,7 +782,7 @@ def profile_preview() -> str:
         "We track contributors and the authors cited in the square-packing record. "
         "Browse their profiles and credited work.\n\n"
         '<p class="site-action-row site-more">'
-        '<a class="site-action" href="profiles/index.html">All Profiles'
+        '<a class="site-action" href="profiles/index.html">View All Profiles'
         + arrow_icon()
         + "</a></p>"
     )
@@ -862,11 +866,6 @@ def contributor_article(
     name = html.escape(contributor.display_name)
     pieces = [
         f'<article class="site-contributor" data-contributor-id="{contributor.id}">',
-        (
-            '<nav class="site-contributor-breadcrumb" aria-label="Breadcrumb">'
-            '<a href="about.html#profiles">About</a> / '
-            f'<a href="{DIRECTORY_PATH}">Profiles</a></nav>'
-        ),
         f"<h1>{name}</h1>",
     ]
     identity = []
@@ -975,8 +974,7 @@ def contributor_pages() -> list[Page]:
     occurrences = load_occurrences().occurrences
     directory = (
         '<article class="site-contributor-directory">'
-        '<nav class="site-contributor-breadcrumb" aria-label="Breadcrumb">'
-        '<a href="about.html#profiles">About</a></nav><h1>Profiles</h1>'
+        "<h1>Profiles</h1>"
         "<p>People whose work the square-packing record cites or credits, paper authors "
         "and project contributors alike. Each profile records public identity evidence "
         "and links to reviewed credits. Results count distinct registered results by their "

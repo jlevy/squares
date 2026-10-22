@@ -1,6 +1,6 @@
 """The other projects' order, their tallies of results, and the links the tallies carry.
 
-The overview and profile resources rank catalogues, repositories and websites together
+The directory and profile resources rank catalogues, repositories and websites together
 by the significance of the primary results the register attributes to each. A card
 with registered results ends with a tally, `6 results (3 at S4, 3 at
 S3)`, whose total opens the results table on that project's results and whose counts
@@ -50,7 +50,7 @@ from tests import site_renders
 PROBES = Path(__file__).resolve().parent / "probes"
 PRESETS = probe(PROBES, "site_result_filters/presets")
 LEVELS = (5, 4, 3, 2, 1)
-SECTION = 'id="other-square-packing-projects"'
+SECTION = 'id="resources"'
 
 
 def _order(results: list[Cited], projects: str) -> str:
@@ -116,7 +116,7 @@ def test_projects_level_on_every_count_stand_newest_first_then_by_name() -> None
     assert project_order(tallies, renamed) == ["c", "a", "b", "d", "Y", "z"]
 
 
-@pytest.mark.parametrize("on_profile", [False, True], ids=["homepage", "profile"])
+@pytest.mark.parametrize("on_profile", [False, True], ids=["directory", "profile"])
 def test_shared_resource_cards_rank_every_kind_and_ignore_inventory_order(
     monkeypatch: pytest.MonkeyPatch, *, on_profile: bool
 ) -> None:
@@ -319,7 +319,7 @@ def overview() -> overview_data.Overview:
 
 @pytest.fixture(scope="module")
 def page() -> str:
-    return site_renders.html("index.html")
+    return site_renders.html("resources.html")
 
 
 @pytest.fixture(scope="module")
