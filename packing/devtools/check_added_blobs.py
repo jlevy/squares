@@ -22,7 +22,7 @@ guard checks:
             but a version that differs a little from another is a small delta, so
             rewriting a large text register many times costs about its edits. Until
             2026-10-22 the total was the sum of each new version's own stored size,
-            which charged #578's register churn 59.17 MiB against a 2.43 MiB pack.
+            which charged #578's register churn 59.17 MiB against a 2.39 MiB pack.
   LFS       a Git LFS pointer is refused: this repository does not use LFS, and a
             pointer would carry bulk data past the gate.
 
@@ -38,7 +38,7 @@ Sizing a version means compressing its content, so each checked blob is streamed
 zlib once and never held whole, and one check reads at most MAX_CONTENT_BYTES of it. The
 pack is streamed too and only counted. Git reuses the deltas its object store already
 holds, so the total can differ a little between clones packed differently: on #578 the
-pack is 2.43 MiB with this repository's deltas and 1.81 MiB with every delta recomputed,
+pack is 2.39 MiB with this repository's deltas and 1.77 MiB with every delta recomputed,
 which matters only near the ceiling. One deadline, MAX_SECONDS, bounds the whole check,
 parsing and packing included, and each metadata query also has its own,
 MAX_QUERY_SECONDS.

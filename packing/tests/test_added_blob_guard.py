@@ -223,7 +223,7 @@ def test_rewriting_a_register_costs_its_edits_not_its_versions(repo: tuple[Path,
     """#578 on #406: 20 rewrites of one large register pack as one copy and 19 deltas.
 
     Summed as standalone versions, #578's merges of main charged 59.17 MiB of register
-    churn; the thin pack of the same range is 2.43 MiB. The total is the pack.
+    churn; the thin pack of the same range is 2.39 MiB. The total is the pack.
     """
     path, base = repo
     versions = [register(2000 + index) for index in range(20)]

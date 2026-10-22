@@ -828,7 +828,7 @@ rule, not the unit. A dump that is already compressed costs about its own size; 
 format that compresses well costs a fraction of its checkout bytes.
 On 22 October 2026 the set’s unit was corrected from the sum of its blobs to the thin
 pack, in #406: summed version by version, #578’s 48 merges of `main` came to 59.17 MiB
-of rewritten registers, against a 2.43 MiB pack.
+of rewritten registers, against a 2.39 MiB pack.
 Many versions of one text file cost about their edits once packed, while distinct dumps
 cost about their sum either way.
 `python -m devtools.upper_bound_houses sizes`, from `packing/`, measures the witnesses a
