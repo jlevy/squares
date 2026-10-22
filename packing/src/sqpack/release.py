@@ -89,6 +89,16 @@ class PublicationHistoryEntry(NamedTuple):
 # The leading entry is proposed for PR #578; confirm its date at first deployment.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.9.1",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Record Mykhailo Polkovskyi's #719 re-solves of the house packings at 105 and "
+            "204 as T-229, pending review and adoption, and his 111 rows beyond the "
+            "corpus at or below 1024 as current beyond-horizon rows, superseding the rows "
+            "that stood at those counts; record the replies after #720."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.9.0",
         first_published="October 22, 2026",
         result_scope=(
@@ -1295,6 +1305,18 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.9.0",
+        version="v0.9.1",
+        impact="patch",
+        reason=(
+            "Record Mykhailo Polkovskyi's #719 re-solves of the house packings at 105 and "
+            "204 as T-229, pending review and adoption, and his 111 rows beyond the "
+            "corpus at or below 1024 as current beyond-horizon rows, superseding the rows "
+            "that stood at those counts; record the replies after #720."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.16",
@@ -6952,7 +6974,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "cadf73fd"
+PUBLICATION_REVISION = "ed8be61f"
 
 
 def data_pathspec() -> tuple[str, ...]:
