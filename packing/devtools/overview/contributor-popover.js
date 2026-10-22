@@ -18,6 +18,7 @@
     return;
   }
   const action = popover.querySelector("[data-contributor-open]");
+  const expand = popover.querySelector(".site-popover-expand");
   const close = popover.querySelector(".site-popover-close");
   /** @type {HTMLElement | null} */
   let origin = null;
@@ -30,7 +31,7 @@
    * profile links plain (the News and the profile directory), and the panel's own
    * **Open profile** action, which reaches the complete page.
    */
-  const PLAIN = "[data-contributor-plain], [data-contributor-open]";
+  const PLAIN = "[data-contributor-plain], [data-contributor-open], .site-popover-expand";
   const site = new URL(document.baseURI).origin;
 
   /**
@@ -124,6 +125,7 @@
             popover.setAttribute("aria-labelledby", heading.id);
           }
           action?.setAttribute("href", responseUrl);
+          expand?.setAttribute("href", responseUrl);
           if (!popover.matches(":popover-open")) {
             // Auto popovers nested by DOM/event ancestry can coexist; replacement is explicit.
             if (source instanceof HTMLElement && source !== popover) {

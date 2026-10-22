@@ -93,17 +93,25 @@ def test_links_use_accessible_repository_type_labels_and_escape_attributes() -> 
     ET.fromstring("<div>" + rendered.replace("&nbsp;", "&#160;") + "</div>")
 
 
-def test_issue_and_pull_icons_keep_canonical_octicon_geometry() -> None:
+def test_issue_and_pull_icons_share_canonical_lucide_geometry() -> None:
     issue = ET.fromstring(github_reference_icon("issue"))
     pull = ET.fromstring(github_reference_icon("pull-request"))
-    assert issue.attrib["viewBox"] == pull.attrib["viewBox"] == "0 0 16 16"
-    assert [path.attrib["d"] for path in issue] == [
-        "M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z",
-        "M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z",
+    assert issue.attrib["viewBox"] == pull.attrib["viewBox"] == "0 0 24 24"
+    assert [circle.attrib for circle in issue] == [
+        {"cx": "12", "cy": "12", "r": "10"},
+        {"cx": "12", "cy": "12", "r": "1"},
     ]
-    assert len(pull) == 1
-    assert pull[0].attrib["d"].startswith("M1.5 3.25a2.25 2.25")
+    assert [child.tag.rsplit("}", 1)[-1] for child in pull] == [
+        "circle",
+        "circle",
+        "path",
+        "line",
+    ]
+    assert pull[2].attrib["d"] == "M13 6h3a2 2 0 0 1 2 2v7"
+    assert issue.attrib["stroke"] == pull.attrib["stroke"] == "currentColor"
     assert issue.attrib["aria-hidden"] == pull.attrib["aria-hidden"] == "true"
+    assert issue.attrib["class"] == pull.attrib["class"] == "site-account-icon"
+    assert issue.attrib["focusable"] == pull.attrib["focusable"] == "false"
     with pytest.raises(ValueError, match="GitHub reference kind"):
         github_reference_icon("commit")
 

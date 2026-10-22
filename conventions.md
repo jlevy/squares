@@ -687,7 +687,7 @@ documentation correction:
 | Focused | `packing-validate --only TEXT` | Run one named validation surface and its controls |
 | Records | `packing-validate --records` | Check registries, generated views, and declared contracts |
 | Edit | `packing-validate --edit` | Run the normal low-latency editing floor |
-| Pre-push | `packing-validate --push --since origin/main` | Add behavioral tests reachable from the change |
+| Pre-push, optional | `packing-validate --push --since origin/main` | Add behavioral tests reachable from the change before a push straight to a non-draft branch; a draft push needs only the edit or records tier and the directly affected tests, since hosted CI gates the draft ([development.md](development.md#hosted-ci-gates-a-draft-pull-request)) |
 | Full | `packing-validate` | Check a commit, cross-component handoff, or merge checkpoint |
 | Strict/deep | `packing-validate --strict` and, when producer output matters, `--deep` | Refuse skips and rebuild expensive producers before an unattended campaign or dependent handoff |
 | Research round | A preregistered W6 instrument | Run candidate generation or proof search under its declared timebox |
