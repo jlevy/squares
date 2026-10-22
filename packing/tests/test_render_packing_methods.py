@@ -123,7 +123,9 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
     root = paper_structure.parse(html)
     trail = root.find("nav", "site-breadcrumbs")
     assert trail is not None
-    assert trail.find_all("a") == []
+    assert [(link.text(), link.attrs.get("href")) for link in trail.find_all("a")] == [
+        ("Papers", "../papers.html")
+    ]
     assert trail.find_all("span")[0].text() == "Learn"
     assert trail.find_all("span")[0].attrs.get("href") is None
     assert [
