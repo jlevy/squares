@@ -176,7 +176,7 @@ live:
 | When | Command |
 | --- | --- |
 | while editing | `uv run --frozen --all-extras --group dev packing-validate --edit` |
-| before any push | `packing-validate --push` — the edit tier plus the tests reachable from the change |
+| before a push to a draft pull request | `packing-validate --edit` for code or `--records` for records, plus the tests the change directly affects; hosted CI is then the full gate, and must be green on the head before ready-for-review or merge (`--push` stays optional, recommended before a push straight to a non-draft branch) |
 | before touching a registry | `packing-validate --records` |
 | what every pull request runs | `packing-validate --fast` |
 | at a research or merge checkpoint, and to close a session | the full `packing-validate` |

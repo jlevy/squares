@@ -202,21 +202,56 @@ The advisory `Deferred checkpoint` workflow runs those steps.
 checks. The deferred workflow does not pass `--deep`; its filename and label remain
 `deep-gate`.
 
-Run focused/edit checks during ordinary work and the change-reachable push check before
-pushing.
-Obtain a full checkpoint when the PR is ready for final review and repeat checks
-whose evidence later changes invalidate.
+Run focused/edit checks during ordinary work.
+Before a push to a draft pull request, run the edit or records tier and the tests the
+change directly affects, then let hosted CI gate the draft
+([below](#hosted-ci-gates-a-draft-pull-request)). Obtain a full checkpoint when the PR
+is ready for final review and repeat checks whose evidence later changes invalidate.
 Record the checked source and base, selected steps, and failures or skips.
 Expensive final evidence must not delay every editing cycle, but a green fast surface
 alone is not full pre-merge evidence.
+
+### Hosted CI gates a draft pull request
+
+**For a draft pull request, hosted CI is the full test gate.** The owner decided this on
+22 October 2026, in conversation with the coordinator, in place of the rule that the
+local `--push` tier runs before any push:
+
+- **Before a push to a draft:** run `--edit` for a code change or `--records` for a
+  record change, plus the tests the change directly affects.
+  Those take minutes. Then push.
+- **Hosted CI is the gate.** A draft may be red.
+  Marking a pull request ready for review, and merging it, both need green hosted CI on
+  the head: `packing-required` and `pages-required`.
+- **The full local `packing-validate`** stays where it was: at research and merge
+  checkpoints, and to close a session, when the host has room.
+- **`--push` stays available** as a local option, and is recommended before a push
+  straight to a non-draft branch, where no draft stage absorbs a red run.
+
+The reason is what the two routes cost on the same suites.
+On the shared four-core host the `--push` tier took 30 to 65 minutes and often reached
+its 30-minute step ceiling, so a push waited on a local run that could end in a timeout
+rather than a verdict.
+Hosted CI runs those suites as four parallel shards beside the other six jobs, and took
+a median 12.5 minutes over the 32 runs from 21 October to the decision.
+Running the local tier first paid the longer cost and then the shorter one, the
+serialisation
+[OR-3](operating-rules.md#or-3-never-wait-on-a-gate-with-nothing-else-in-flight-run-ci-beside-the-research)
+already warns against, at the iteration-rate price
+[OR-14](operating-rules.md#or-14-a-development-cycle-is-never-artificially-slow) counts.
+
+The decision moves where a draft’s tests run, not what a merge needs.
+The pull-request surface is unchanged, and the full checkpoint before final review still
+stands, as [the deep gate](#the-deep-gate-the-deferred-surface-before-the-merge) and
+`OR-13` say.
 
 ### The tiers
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 51 of 109 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | 67 of 109 | 240 s | 59.4 s |
-| `--push` | contributor, once before a push — affected edit-tier prerequisites and reachable quick tests (`--since`); add `--include-reachable-slow` for selected slow tests | varies with the diff | 1800 s | new quick default not yet measured; large implicit selections run after prerequisites, subject to the load lock, see below |
+| `--records` | contributor, before touching a registry, and before a draft push of a record change; also every pull request | 51 of 109 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop, and before a draft push of a code change | 67 of 109 | 240 s | 59.4 s |
+| `--push` | contributor, optional: not required before a draft push, which hosted CI gates; recommended before a push straight to a non-draft branch — affected edit-tier prerequisites and reachable quick tests (`--since`); add `--include-reachable-slow` for selected slow tests | varies with the diff | 1800 s | 30 to 65 minutes on the shared four-core host by 2026-10-22, often at its ceiling ([above](#hosted-ci-gates-a-draft-pull-request)); large implicit selections run after prerequisites, subject to the load lock, see below |
 | `--fast` | contributor, at a block boundary; the union of the ten tiers below | 96 of 109 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
 | `--checks` | **CI, on every pull request**, in the `validate` job | 70 of 109 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
 | `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 109 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
@@ -787,8 +822,10 @@ uv run --frozen --all-extras --group dev packing-validate --records
 # Edit loop: everything fast except the broad test suite. Seconds, runs during a gate.
 uv run --frozen --all-extras --group dev packing-validate --edit
 
-# Pre-push floor: affected edit prerequisites plus reachable quick tests
+# Change-reachable push tier: affected edit prerequisites plus reachable quick tests
 # (against origin/main, or --since REF). Broad changes may select every quick test.
+# Optional before a draft push, which hosted CI gates; recommended before a push
+# straight to a non-draft branch.
 uv run --frozen --all-extras --group dev packing-validate --push
 
 # Deliberately include reachable slow tests; exhaustive checks retain their checkpoint.
@@ -875,9 +912,11 @@ Checks run concurrently, but their captured output is replayed in declared order
 workers.
 Strict mode cannot be combined with a partial selection and fails on every skip.
 
-`--push` is the pre-push floor (`BC-086`). It scopes edit-tier prerequisites and
-reachable behavioral tests from one changed-path snapshot, including old and new rename
-paths and deleted files.
+`--push` is the change-reachable push tier, built as the pre-push floor `BC-086` asked
+for. Since 22 October 2026 it is optional before a draft push
+([Hosted CI gates a draft pull request](#hosted-ci-gates-a-draft-pull-request)). It
+scopes edit-tier prerequisites and reachable behavioral tests from one changed-path
+snapshot, including old and new rename paths and deleted files.
 Unclaimed inputs and an empty diff retain the complete prerequisite floor; checks
 without declared inputs always run.
 Scoping is only as sound as each check’s declared inputs (`Step.touches`), so a contract
@@ -901,7 +940,7 @@ contracts seed the same import, text and walker closure.
 A scheduling edit does not mark every module in an unchanged library directory as
 changed. Unreadable or unknown first-party entrypoints select the whole suite.
 
-**Ordinary pushes run reachable quick tests.** File selection remains conservative:
+**`--push` runs reachable quick tests by default.** File selection remains conservative:
 unknown workflows, empty or unresolved changes and suite configuration still select all
 test files. Execution uses the same `QUICK_TESTS` predicate as the PR fast lane, so a
 mixed source or record change does not silently start the slow suite.
@@ -2110,8 +2149,10 @@ continues to compare against `origin/main`. The validator uses `HEAD^1` on a mai
 checkout whose head already equals `origin/main`, so it checks the preceding delivery
 rather than comparing a commit with itself.
 
-Validate with the change-reachable push tier, review both reader views, and verify the
-published News page with the normal deployment audit after merging.
+Validate as
+[Hosted CI gates a draft pull request](#hosted-ci-gates-a-draft-pull-request) says,
+review both reader views, and verify the published News page with the normal deployment
+audit after merging.
 The
 [initial backfill review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md)
 records the disposition of the first 36 PRs.
