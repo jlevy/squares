@@ -689,6 +689,28 @@ The evidence is retained in
 After it the index draws 95 views: 36 by the axis tool, 40 by Evan Daniel’s regularizer
 and 19 by the grid-slack generator’s version 1.
 
+On 22 October 2026 the adoption of Evan Daniel’s regularized views of 20 October (T-225,
+think-ql4v) moved the house best packing at 204 and 260 from T-223, by $1.39 \times
+10^{-9}$ and $2.51 \times 10^{-11}$, at 229 from T-199, by $1.91 \times 10^{-11}$, and,
+once Francisco Couzo’s #672 was registered as T-227, at 227 from Joost de Winter’s
+T-196, by $1.71 \times 10^{-4}$. Each new witness is itself Evan Daniel’s display
+regularization of the packing it credits.
+Both generators ran on the four witnesses: Evan Daniel’s regularizer
+(`evand-regularize-adopt-2026-10-22-n204-260-evand`, 2,066 CPU-seconds, most of them
+229’s timeouts, and `evand-regularize-adopt-2026-10-22-n227-evand`, 69 CPU-seconds) and
+grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-22-n204-260-grid-deg05`,
+`-grid-deg1`, `-grid-deg5` and the same for `n227`, 170 CPU-seconds in all).
+The selection draws his same-side view at 227 (650 / 650 sides against the witness’s 648
+/ 648) and grid-slack’s half-degree view at 229 (639 / 657 against 637 / 657), and
+decides 204 and 260 no better, where every strong view draws no change on the witness.
+At 227 his view of T-196, which #704 drew (676 sides), lapses with its witness.
+At 204 his regularizer solved the witness $8.91 \times 10^{-12}$ lower with the same
+measures: a register candidate (think-13e9), not drawn.
+The evidence is retained in
+[`cases/regularized_drawings/think-ql4v-2026-10-22/`](../../cases/regularized_drawings/think-ql4v-2026-10-22/README.md).
+After it the index draws 95 views: 36 by the axis tool, 40 by Evan Daniel’s regularizer
+and 19 by the grid-slack generator’s version 1.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-21'
+last_reviewed: '2026-10-22'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -10815,7 +10815,7 @@ issues:
     opened: '2026-10-17'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: Francisco Couzo reports 73 improved upper bounds at 204 to 993 from 23aff0c6, using exact rational
       certificates, deletion where needed, and retained source/seed credits. Complete per-count report-order
       and classical-envelope comparison remains queued.
@@ -10824,10 +10824,8 @@ issues:
     - key: n204
       claim: s(204) <= 14.808644417690, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-f28n
+      register:
+      - T-226
     - key: n330
       claim: s(330) <= 18.701641583454, rounded upward; exact certificate side is authoritative.
       source: body
@@ -11423,7 +11421,7 @@ issues:
     opened: '2026-10-17'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: 'Francisco Couzo reports 46 improved upper bounds at 227, 229 and 330 to 996 from af8cb795.
       His comment states 227 and 229 are based on de Winter findings; that lineage is retained for the comparison
       with #668 and #674.'
@@ -11432,17 +11430,13 @@ issues:
     - key: n227
       claim: s(227) <= 15.563625652343, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-2vjc
+      register:
+      - T-227
     - key: n229
       claim: s(229) <= 15.650174740273, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-2vjc
+      register:
+      - T-227
     - key: n330
       claim: s(330) <= 18.692698795114, rounded upward; exact certificate side is authoritative.
       source: body
@@ -11996,7 +11990,7 @@ issues:
     opened: '2026-10-18'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: Francisco Couzo reports 79 improved upper bounds at 204 to 998 from c6da0fc. The complete source
       index also adopts Daniel at 229 and retains 542 finite witnesses across 1024 indexed counts; the import
       must distinguish these from Couzo discoveries.
@@ -12005,10 +11999,8 @@ issues:
     - key: n204
       claim: s(204) <= 14.808644367227, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-pvav
+      register:
+      - T-228
     - key: n419
       claim: s(419) <= 20.959713421191, rounded upward; exact certificate side is authoritative.
       source: body
@@ -13667,6 +13659,63 @@ issues:
       - result: n641
       corrects:
       - https://github.com/jlevy/squares/issues/678#issuecomment-6328042744
+      outdated:
+      - 'The rows at 545 and 641 are unchanged at 23.889010439304 and 25.881306220594 and are
+        still the current rows at their counts; since #717 merged on 22 October issue 715''s row
+        at 545, 23.883414761903, is current there and the 545 row is superseded, while 641 is
+        unchanged and current'
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6331709679
+      date: '2026-10-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+        id: T-223
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n260
+        id: T-223
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n343
+      - result: n455
+      - result: n456
+      - result: n458
+      - result: n497
+      - result: n499
+      - result: n501
+      - result: n507
+      - result: n545
+      - result: n546
+      - result: n549
+      - result: n555
+      - result: n592
+      - result: n593
+      - result: n641
+      - result: n642
+      - result: n653
+      - result: n693
+      - result: n749
+      - result: n751
+      - result: n752
+      - result: n753
+      - result: n754
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n808
+      - result: n863
+      - result: n865
+      - result: n867
+      - result: n919
+      - result: n924
+      - result: n926
+      - result: n984
+      - result: n987
+      corrects:
+      - https://github.com/jlevy/squares/issues/678#issuecomment-6329885169
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -13748,6 +13797,16 @@ issues:
       house at 204 and 260; and that #716 registered T-225 at V0/C0, Evan Daniel's solved views
       of his packings, which the case pages list without changing their best known packing. The
       issue stays open.
+
+      The follow-up, posted at 2026-10-22T03:08:27Z (issuecomment-6331709679) after #717 merged
+      and its Pages deployment of de1651e1c (run 39713768090, deployment 7242586997, site
+      v0.8.18) was checked, corrects the 00:44Z follow-up's statement that the 545 row is
+      current: issue 715's rows supersede 26 of the source's rows, by 1.37e-6 (at 497) to
+      3.38e-2 (at 455), listed, 545 among them at 5.60e-3 below. It said that 641 is unchanged
+      and current, that eight of the 83 beyond-horizon rows are now current (507, 555, 641, 642,
+      693, 753, 754, 984), with 48 superseded by issue 686 and 343 by issue 702, that T-223
+      stays V3/C3, confirmed, the house at 204 and 260, and that the source-patch ask is still
+      queued. It links the issue 715 import reply. The issue stays open.
   - number: 680
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand
@@ -13855,7 +13914,12 @@ issues:
     beads:
     - think-xmxb
     answer_bead: think-xmxb
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/684#issuecomment-6331907160
+      date: '2026-10-22'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
     close_when: Its ask is done.
   - number: 686
     title: '100 certified larger-count square packings (328–998): registration request'
@@ -14513,6 +14577,61 @@ issues:
       reported: *r686
       corrects:
       - https://github.com/jlevy/squares/issues/686#issuecomment-6301482971
+    - url: https://github.com/jlevy/squares/issues/686#issuecomment-6331709472
+      date: '2026-10-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n328
+      - result: n365
+      - result: n404
+      - result: n417
+      - result: n459
+      - result: n461
+      - result: n463
+      - result: n496
+      - result: n502
+      - result: n503
+      - result: n504
+      - result: n505
+      - result: n506
+      - result: n548
+      - result: n550
+      - result: n553
+      - result: n554
+      - result: n595
+      - result: n597
+      - result: n598
+      - result: n599
+      - result: n600
+      - result: n601
+      - result: n602
+      - result: n647
+      - result: n648
+      - result: n651
+      - result: n652
+      - result: n654
+      - result: n700
+      - result: n702
+      - result: n705
+      - result: n756
+      - result: n758
+      - result: n813
+      - result: n814
+      - result: n815
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n871
+      - result: n872
+      - result: n873
+      - result: n927
+      - result: n928
+      - result: n932
+      - result: n989
+      - result: n994
+      - result: n995
+      - result: n996
     close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
       corpus take no register entry, and optimality is outside this request.
     notes: >-
@@ -14567,6 +14686,14 @@ issues:
       of those 12 among them, each above #686, so their rows there will enter superseded;
       their beads (think-3m10, think-f28n, think-2vjc, think-pvav) were told on 21 October
       2026.
+      The follow-up, posted at 2026-10-22T03:08:26Z (issuecomment-6331709472) after #717 merged
+      and its Pages deployment of de1651e1c (run 39713768090, deployment 7242586997, site
+      v0.8.18) was checked, said that issue 715's rows supersede 50 of the source's 100 rows, by
+      3.85e-9 (at 496) to 7.45e-3 (at 597), listed the 50 counts, and said that those rows stay
+      listed at the author's prints, marked superseded by couzo-issue715-2026-10-21, while the
+      other 50 are still current. It gave the manifest's credit to Muglich at 28 of the 50
+      counts and the source's credit line, said that the credit request is unchanged and the
+      owner's decision, and that no site page lists beyond-horizon rows. The issue stays open.
   - number: 689
     title: 's(308) ≤ 17.997149121271: registration request'
     author: evand
@@ -14801,6 +14928,18 @@ issues:
       kind: final
       reported:
       - result: n343
+      outdated:
+      - 'The current row at 343 is this source''s, evand-n343-sweep-2026-10-20, at
+        18.977682482405; since #717 merged on 22 October issue 715''s row, 1.0736e-4 below it,
+        is the current row, and this row is kept as superseded history'
+    - url: https://github.com/jlevy/squares/issues/702#issuecomment-6331709272
+      date: '2026-10-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n343
+      corrects:
+      - https://github.com/jlevy/squares/issues/702#issuecomment-6324620374
     close_when: >-
       The certificate is retained at its pin and replayed here, its beyond-horizon row is on main
       with the requested credit, and the author has been told the row's standing; a count beyond
@@ -14850,6 +14989,14 @@ issues:
       entry and that no review was done, that the KKT, local-minimum and MILP statements are not
       recorded, that no site page lists beyond-horizon rows, and that nothing asked for is
       queued; the issue closed at 2026-10-21T19:25Z.
+      The follow-up, posted at 2026-10-22T03:08:25Z (issuecomment-6331709272) after #717 merged
+      and its Pages deployment of de1651e1c (run 39713768090, deployment 7242586997, site
+      v0.8.18) was checked, corrects the final reply's statement that the row at 343 is current:
+      issue 715's row, 18.977575126267, is 1.0736e-4 below it and supersedes it, and the row is
+      kept in source-coverage.yaml as superseded history, as the packet README says. It gave the
+      report order (678, 702, 715, each below the last), the credit Couzo's manifest gives
+      Daniel at 343 in Kevin Fang's two-wedge family, and the credit line of [Couzo issue 715
+      2026-10-21], and said that nothing asked for is queued; the issue stays closed.
   - number: 703
     title: 's(270) ≤ 16.928162252197: registration request'
     author: evand
@@ -16674,6 +16821,197 @@ issues:
       by: jlevy
       kind: acknowledgement
       reported: []
+      outdated:
+      - '64 of the 173 rows at or below 1024 are certificates byte for byte identical to files
+        at 7b6c87e, first committed at 02f9690, f311f08, a7067d7 and 4e4c8ce, and will be
+        recorded from those commits; since #717 merged on 22 October 34 of them restate an
+        earlier publication, 32 byte for byte, and are left to the imports of those commits (338
+        is already main''s row and 335 is not recorded), and 30, first committed at 5a299b4,
+        re-certify the 4e4c8ce certificates 2.37e-23 to 3.18e-23 below at the same print and are
+        held on think-fwa9; none is recorded'
+      - 'At 335 the certificate is 1.84e-11 above main''s row from the 8 October decimal report;
+        that compared two prints, and from the exact certificate the margin is 1.7825e-11'
+    - url: https://github.com/jlevy/squares/issues/715#issuecomment-6331708178
+      date: '2026-10-22'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n328
+      - result: n335
+      - result: n336
+      - result: n337
+      - result: n338
+      - result: n340
+      - result: n341
+      - result: n343
+      - result: n365
+      - result: n373
+      - result: n374
+      - result: n404
+      - result: n410
+      - result: n413
+      - result: n417
+      - result: n454
+      - result: n455
+      - result: n456
+      - result: n458
+      - result: n459
+      - result: n461
+      - result: n463
+      - result: n490
+      - result: n496
+      - result: n497
+      - result: n498
+      - result: n499
+      - result: n500
+      - result: n501
+      - result: n502
+      - result: n503
+      - result: n504
+      - result: n505
+      - result: n506
+      - result: n509
+      - result: n535
+      - result: n544
+      - result: n545
+      - result: n546
+      - result: n547
+      - result: n548
+      - result: n549
+      - result: n550
+      - result: n553
+      - result: n554
+      - result: n582
+      - result: n584
+      - result: n591
+      - result: n592
+      - result: n593
+      - result: n594
+      - result: n595
+      - result: n596
+      - result: n597
+      - result: n598
+      - result: n599
+      - result: n600
+      - result: n601
+      - result: n602
+      - result: n631
+      - result: n633
+      - result: n637
+      - result: n640
+      - result: n643
+      - result: n644
+      - result: n645
+      - result: n646
+      - result: n647
+      - result: n648
+      - result: n651
+      - result: n652
+      - result: n653
+      - result: n654
+      - result: n682
+      - result: n684
+      - result: n689
+      - result: n691
+      - result: n692
+      - result: n694
+      - result: n695
+      - result: n696
+      - result: n697
+      - result: n698
+      - result: n699
+      - result: n700
+      - result: n702
+      - result: n705
+      - result: n735
+      - result: n736
+      - result: n737
+      - result: n742
+      - result: n743
+      - result: n744
+      - result: n745
+      - result: n746
+      - result: n747
+      - result: n748
+      - result: n749
+      - result: n750
+      - result: n751
+      - result: n752
+      - result: n756
+      - result: n758
+      - result: n790
+      - result: n791
+      - result: n792
+      - result: n797
+      - result: n798
+      - result: n799
+      - result: n800
+      - result: n801
+      - result: n802
+      - result: n803
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n807
+      - result: n808
+      - result: n809
+      - result: n813
+      - result: n814
+      - result: n815
+      - result: n850
+      - result: n854
+      - result: n855
+      - result: n856
+      - result: n857
+      - result: n858
+      - result: n859
+      - result: n860
+      - result: n862
+      - result: n863
+      - result: n864
+      - result: n865
+      - result: n866
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n871
+      - result: n872
+      - result: n873
+      - result: n909
+      - result: n913
+      - result: n914
+      - result: n915
+      - result: n916
+      - result: n917
+      - result: n918
+      - result: n919
+      - result: n923
+      - result: n924
+      - result: n925
+      - result: n926
+      - result: n927
+      - result: n928
+      - result: n931
+      - result: n932
+      - result: n970
+      - result: n975
+      - result: n976
+      - result: n977
+      - result: n978
+      - result: n979
+      - result: n980
+      - result: n985
+      - result: n986
+      - result: n987
+      - result: n988
+      - result: n989
+      - result: n994
+      - result: n995
+      - result: n996
+      - result: above-1024
+      corrects:
+      - https://github.com/jlevy/squares/issues/715#issuecomment-6329883508
     close_when: >-
       Every claim has a reviewed disposition on main, pending validation has a priced owner,
       any changed house is regularized in its adoption, and the author has received a reply
@@ -16730,3 +17068,26 @@ issues:
       restated, left to their owning imports think-a4wq, think-om5l and think-yfoo, all open,
       and 30 re-certified, held on think-fwa9), and the exact certificate at 335 is 1.7825e-11
       above that row; the next reply on the issue corrects both.
+
+      The import reply, posted at 2026-10-22T03:08:20Z (issuecomment-6331708178) after #717
+      merged and its Pages deployment of de1651e1c (run 39713768090, deployment 7242586997, site
+      v0.8.18) was checked, corrects the acknowledgement: of the 64 rows it said would be
+      recorded from earlier commits, 34 restate an earlier publication (32 byte for byte; 743
+      and 985 at the side of the next count's 4e4c8ce certificate less one square), left to the
+      imports of 02f9690, f311f08 and 4e4c8ce (think-a4wq, think-om5l, think-yfoo), with 338
+      already main's row and 335 not recorded, and 30, first committed at 5a299b4, re-certify
+      the 4e4c8ce certificates 2.37e-23 to 3.18e-23 below at the same print and are held on
+      think-fwa9; and 335 is 1.7825e-11 above the 8 October decimal row from the exact
+      certificate, where the acknowledgement's 1.84e-11 compared two prints, with the promised
+      exact check of the decimal poses not yet done (think-rx26). It reported the custody (139
+      certificates retained, 4.42 MB as zlib stores them, 220 files pinned by digest), the
+      publications comparison against the 1,567 certificate files reachable from 7b6c87e, the
+      filtered two-route replay (all 139 accepted, 227,018 of 38,193,642 pairs decided, all 834
+      controls refused, check --replay again), the all-pairs kernel at 343 and 996 and the
+      Goebel comparison; the 109 rows at assurance reported with E-couzo-715-certificate-report,
+      superseding 50 of issue 686's rows, 29 of 487b058's, 26 of issue 678's and issue 702's at
+      343 by 1.0736e-4; the credit line and the manifest's earlier credits; and that the rows
+      above 1024 wait on the owner's three decisions. A folded table gives every count at or
+      below 1024 its outcome and margin. It read the answers to the acknowledgement's first two
+      questions from the pin and the manifest, repeated the third, on 335, and said that no site
+      page lists beyond-horizon rows. It states no T-NNN, and the issue stays open.

@@ -485,16 +485,16 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     # states there, and that of 20 October 2026 moved 227 and 260 to Joost de Winter's
     # issue-668 certificates (T-196), below the 17/2 + 5*sqrt(2) and 11 + 4*sqrt(2) PR #574
     # states there, and that of 21 October 2026 moved 260 on to Francisco Couzo's issue-678
-    # certificate (T-223); every other side is at or below its case.
+    # certificate (T-223), and that of 22 October 2026 moved 227, 229 and 260 on to Evan
+    # Daniel's regularized views (T-225); every other side is at or below its case.
     assert {n for n, row in rows.items() if row["case"]["verified_relation"] == "above"} == {
         227,
         229,
         260,
         302,
     }
-    assert rows[227]["case"]["reported_source_key"] == "[de Winter upper bounds 2026-10-17]"
-    assert rows[260]["case"]["reported_source_key"] == "[Couzo issue 678 2026-10-18]"
-    for n in (227, 260):
+    for n in (227, 229, 260):
+        assert rows[n]["case"]["reported_source_key"] == "[Daniel regularized lists 2026-10-20]"
         assert rows[n]["case"]["reported_relation"] == "above"
     assert all(
         row["case"]["verified_relation"] in {"equal", "below"}

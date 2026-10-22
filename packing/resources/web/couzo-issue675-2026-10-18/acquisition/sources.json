@@ -1,0 +1,84 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-22T01:24Z",
+  "git_scope": "Blobless clone of franciscouzo/square-packing with a sparse checkout at the pin of issue #675, c6da0fc7 (committed 2026-10-18T05:46:00Z), the first commit holding this certificate; its parent af8cb795 is the pin of issue #672, and the history is linear to the head 6b7391de on 22 October. Retained: the issue's only in-corpus certificate, certificates/best/n204.cert, which the issue links, and the per-count JSON certificates/n204.json, which describes the same bytes (the root certificates/n204.cert is the same Git blob). Pinned by digest only: the root README.md and upper_bounds.json, the certificate directory's README, manifest.json and SHA256SUMS, and the exact checker verify_bound_certificate.py with its MIT licence, against the issue-678 packet's identical copies. The issue's 78 rows beyond the n <= 324 corpus and the rest of the tree are pinned by the commit and were neither retained nor executed; their import is think-pvav's.",
+  "sources": [
+    {
+      "id": "franciscouzo-square-packing",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_ref": "master",
+      "source_commit": "c6da0fc7524d667bf3d224559724ba9b60762e60",
+      "committed_utc": "2026-10-18T05:46:00Z",
+      "git_tree": "adef1a63695b52eca548550ebb65b4f01d145219",
+      "archived_path": "packing/resources/web/couzo-issue675-2026-10-18/source",
+      "subtree_manifest": "packing/resources/web/couzo-issue675-2026-10-18/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "BOUND_VERIFIER_LICENSE.txt",
+        "README.md",
+        "certificates/best/README.md",
+        "certificates/best/SHA256SUMS",
+        "certificates/best/manifest.json",
+        "certificates/best/n204.cert",
+        "certificates/n204.json",
+        "upper_bounds.json",
+        "verify_bound_certificate.py"
+      ],
+      "subtree_file_count": 9,
+      "subtree_total_bytes": 2286262,
+      "retained_file_count": 2,
+      "retained_total_bytes": 23284,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "BOUND_VERIFIER_LICENSE.txt",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "The checker's MIT licence (Copyright (c) 2026 Evan Daniel); byte-identical to the copy the issue-678 packet retains.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt"
+        },
+        {
+          "path": "README.md",
+          "bytes": 62199,
+          "sha256": "535b87c1842efec0367e56af93c62d2d608389e9c55d2b6cbd10cea6b246f360",
+          "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "certificates/best/README.md",
+          "bytes": 107836,
+          "sha256": "76a5f6b495a38f335363db34c7dbafa630df511d218e6a683a07d63036028ac5",
+          "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "certificates/best/SHA256SUMS",
+          "bytes": 41311,
+          "sha256": "c69435b8650183b4c6bba76c55d914c914fa64a54ce9ae2bc9fa07cb288a1b8a",
+          "reason": "The source's digest list for certificates/best/; pinned for provenance."
+        },
+        {
+          "path": "certificates/best/manifest.json",
+          "bytes": 1108503,
+          "sha256": "08bdea6f609dac417e0f60329ac6d47d23b878c19907762ed983311e38130014",
+          "reason": "The source's provenance manifest: exact sides, digests, seed and construction credits, parent hashes and the author's checker receipts; pinned for credit, as no claim rests on it."
+        },
+        {
+          "path": "upper_bounds.json",
+          "bytes": 938494,
+          "sha256": "587815d7e8b2b2f30e47d29197e1e8a31e0b26b003fa6af972d7032508cbf132",
+          "reason": "The author's index at the pin, which records each exact bound and the relationship the issue states; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "verify_bound_certificate.py",
+          "bytes": 3567,
+          "sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+          "reason": "The source's exact checker, which the issue names; byte-identical to the copy the issue-678 packet retains at 7b6c87e, and never executed here.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/verify_bound_certificate.py"
+        }
+      ],
+      "license": "The repository states no licence for its data or prose: the tree has no LICENSE, and neither README.md nor certificates/best/README.md states reuse terms. The in-corpus certificate and its per-count JSON are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). verify_bound_certificate.py states that it is Evan Daniel's MIT-licensed verifier with modifications by Francisco Couzo with Codex, distributed under the MIT licence in BOUND_VERIFIER_LICENSE.txt; both are pinned by digest against the identical copies the issue-678 packet retains, and were not run. Prose, the index and the manifest are hash-pinned and not copied.",
+      "claims": [
+        "Issue #675 reports 79 improved upper bounds for n = 204 and 419 to 998, each the exact rational side in its linked certificate's header rounded upward at 12 decimal places, with the header authoritative. In the n <= 324 corpus it reports s(204) <= 14.808644367227 (certificates/best/n204.cert), against #670's 14.808644417690.",
+        "The issue states that each bound is strictly smaller than the source's previous index at af8cb795 and the reviewed public comparison envelope, and that the manifest records source credits, parent hashes and verification receipts. The per-count JSON credits the 204 seed to Mykhailo Polkovskyi (Mishapolk), search job 107960 (slp). Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

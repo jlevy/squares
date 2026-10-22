@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-19'
+last_reviewed: '2026-10-22'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -41193,6 +41193,20 @@ evidence:
     certificate: packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-21'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-225
+        (c-review-t225-math, think-ql4v), strong sub-agent tier, reasoning setting xhigh,
+        prompted separately from the import lane and from the senior reviewer of #716
+      note: >-
+        docs/project/reviews/review-2026-10-21-evand-regularized-views.md accepted the four
+        certificates T-225 cites for finite feasibility only, with six non-blocking findings
+        (RF-1 to RF-6); the replay it reproduced is
+        E-evand-regularized-1020-exact-feasibility, and its own checker's run is
+        E-evand-regularized-1020-review-exact-feasibility. The source's exact-optimum and
+        same-packing statements are the source's.
     source_reviewed: '2026-10-21'
     limitations: >-
       This atom records the source author's report of 4 exact rational certificates at
@@ -41204,13 +41218,251 @@ evidence:
       route CPU seconds and 71.44 job wall seconds, the longest job 7.07 seconds. Every
       positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
       The two controls are gross, a duplicated square (gap -1) and a square moved outside,
-      so they show that both routes refuse, not that they refuse at a margin of 1e-20.
-      Independent review and confirmation remain pending. The source's own checkers were
-      not run here, and its same-packing path test is not replayed. The two maintained
-      routes, the sqpack rational witness verifier and the independent rational corner
-      checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
-      the separating-axis method. No two independent methods, human oversight or
-      optimality is claimed.
+      so they show that both routes refuse, not that they refuse at a margin of 1e-20; the
+      21 October review's sharp controls, kept in the packet's review/review-2026-10-21/,
+      show both routes exact at 1e-30 in both directions (RF-3). The review accepted the
+      replay; the confirming entries are E-evand-regularized-1020-exact-feasibility and
+      E-evand-regularized-1020-review-exact-feasibility. The source's own checkers were not
+      run here, and its same-packing path test is not replayed. The two maintained routes,
+      the sqpack rational witness verifier and the independent rational corner checker,
+      share certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality
+      is claimed.
+  - id: E-evand-regularized-1020-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [204, 227, 229, 260]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel regularized lists 2026-10-20]'
+    certificate: packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports evand-regularized-2026-10-20 certify
+      --workers 2 wrote the receipt on 21 October 2026 (b1244549a), and check --replay
+      decides all 12 retained jobs, the four certificates and their duplicate-square and
+      outside-container controls, again through both maintained routes and holds each to
+      its retained row; check-claims rebuilds the frozen comparison. The 21 October review
+      reproduced the replay at #716's head be6416a03, niced, all 12 jobs equal, in 62 s,
+      and check-claims equal (docs/project/reviews/review-2026-10-21-evand-regularized-views.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and
+          every pair decided by both maintained routes; the kernel's controls are retained
+          in the packet's receipt
+        checked: 4
+        of: 4
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026; each
+            lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The packet's CREDITS.md states that the source's work was produced by Claude
+          (Anthropic) under human direction. The project's routes are Claude's too,
+          written from prompts of their own. Both maintained routes take their parse and
+          half-angle map from devtools.evand_exact_certificates (V-evand-exact-certificates),
+          whose author read the source's verify_cert.py and verify_cert2.py before writing
+          it; the import lane did not run them, and they are byte-identical to the n183
+          packet's copies.
+    independence_record: docs/project/reviews/review-2026-10-21-evand-regularized-views.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-21'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-225
+        (c-review-t225-math, think-ql4v), strong sub-agent tier, reasoning setting xhigh,
+        prompted separately from the import lane and from the senior reviewer of #716
+      note: >-
+        Accepted for finite feasibility only. All 12 retained jobs reproduced on both
+        maintained routes and check-claims rebuilt equal; every pose, side, least wall
+        clearance, least pair gap and pair count of the receipt equals the review's own
+        checker's on both of its routes (E-evand-regularized-1020-review-exact-feasibility);
+        the eight retained gzip files equal their Git blobs at the pin and at 88385ab; and
+        the review's sharp controls accepted exact contact and refused 1e-30 past it at the
+        far wall, the near wall and the least-gap pair on both maintained routes at all
+        four counts, as the kernel's run_sharp did. Findings RF-1 to RF-6, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. The receipt's 12 jobs hold 636798 pair decisions, 63.0 route
+      CPU seconds and 71.44 job wall seconds, the longest job 7.07 seconds. Every positive
+      clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21. The
+      receipt's two controls a count are gross (RF-3); the sharp controls are the
+      review's, kept with their receipts out-controls-nNNN.json in the packet's
+      review/review-2026-10-21/ (V-evand-regularized-1020-review-controls), and
+      test_upper_bound_reports_regularized_1020.py runs the kernel's two sharp controls on
+      all four certificates at contact and 1e-30 past it on both routes. The source's own
+      checkers were not run here, and the source's statements that each side is the exact
+      optimum of the store's best packing and that each view is the same packing are not
+      decided. Finite feasibility only: no lower bound, optimum, local minimum, rigidity,
+      novelty or human oversight.
+    source_reviewed: '2026-10-21'
+  - id: E-evand-regularized-1020-review-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [204, 227, 229, 260]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel regularized lists 2026-10-20]'
+    certificate: packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/
+    replay: >-
+      From the review's data directory, with any Python 3: python -I
+      review/review-2026-10-21/programs/review_t225_check.py on the packet's four
+      certificates, 204 and 227 in one process and 229 and 260 in another
+      (review/review-2026-10-21/outputs/out-check-a.json and out-check-b.json, 7.9 s and
+      9.1 s on 21 October 2026): all four passed on both of its routes, every wall cleared
+      by at least exactly 1/(2*10^20) and every one of the 106,133 pairs separated, none
+      touching, the 668 pairs whose bounding boxes overlap clipped to area exactly 0, the
+      two routes equal to every digit; agree_t225.py found every pose, side, least
+      clearance, least gap and pair count equal to the receipt's two routes. Its sharp
+      controls (sharp_controls_t225.py) accepted exact contact and refused 1e-30 past it on
+      both of its routes at all four counts.
+    replay_status: passed
+    verifiers:
+      - V-evand-regularized-1020-review-check
+      - V-evand-regularized-1020-review-controls
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and
+          every pair, on each of the checker's two routes
+        checked: 4
+        of: 4
+      read: [mathematics, certificate-format, specification, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-225 (c-review-t225-math,
+            think-ql4v), strong sub-agent tier, reasoning setting xhigh
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's CREDITS.md says its work was produced by Claude (Anthropic) under
+          human direction; the review's checker is Claude's too, written from a prompt of
+          its own, in a file that imports nothing from this repository or the source, and
+          its author never read the source's checkers.
+    independence_record: docs/project/reviews/review-2026-10-21-evand-regularized-views.md
+    limitations: >-
+      The review's own checker, with a reader of its own and no code of the packet's
+      routes or the source's; route F shares CPython's Fraction with the maintained routes
+      and the source's checkers, and route I uses integers alone. Its author read the two
+      20 October reviews' account of the maintained routes' method before writing it, and
+      the routes themselves only after it had run. The packet's two gross controls were
+      decided by the maintained routes, not by this checker; its own controls are the
+      review's sharp mutants and a self-test of twelve hand-built cases. Finite
+      feasibility only.
+    source_reviewed: '2026-10-21'
+  - id: E-couzo-670-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 204
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 670 2026-10-17]'
+    certificate: packing/resources/web/couzo-issue670-2026-10-17/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: 'This atom records the source author''s report of 1 exact rational certificate at 23aff0c.
+      A separate complete repository replay is retained for n = 204: 1 positive and 2 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 124236 pair decisions; summed
+      over the 3 jobs, the receipt records 10.22 route CPU seconds and 10.41 job wall seconds, the longest
+      job 3.79 seconds. In every positive squares touch the box, a least wall clearance of exactly 0, and
+      every pair clears by at least 5.47e-11. Independent review and confirmation remain pending. The source''s
+      own checkers were not run here. The two maintained routes, the sqpack rational witness verifier and
+      the independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight or optimality
+      is claimed.'
+  - id: E-couzo-672-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 227
+      - 229
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 672 2026-10-17]'
+    certificate: packing/resources/web/couzo-issue672-2026-10-17/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: 'This atom records the source author''s report of 2 exact rational certificates at
+      af8cb79. A separate complete repository replay is retained for n = 227 and 229: 2 positives and 4
+      duplicate-square and outside-container controls passed their required outcomes on both routes,
+      310542 pair decisions; summed over the 6 jobs, the receipt records 23.85 route CPU seconds and
+      24.17 job wall seconds, the longest job 4.3 seconds. At 229 squares touch the box, a least wall
+      clearance of exactly 0; at 227 every wall clears by at least 1.00e-15; and every pair clears by at
+      least 1.19e-12. Independent review and confirmation remain pending. The source''s own checkers
+      were not run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.'
+  - id: E-couzo-675-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 204
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 675 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue675-2026-10-18/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: 'This atom records the source author''s report of 1 exact rational certificate at c6da0fc.
+      A separate complete repository replay is retained for n = 204: 1 positive and 2 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 124236 pair decisions; summed
+      over the 3 jobs, the receipt records 10.07 route CPU seconds and 10.29 job wall seconds, the longest
+      job 3.61 seconds. In every positive squares touch the box, a least wall clearance of exactly 0, and
+      every pair clears by at least 1.20e-12. Independent review and confirmation remain pending. The source''s
+      own checkers were not run here. The two maintained routes, the sqpack rational witness verifier and
+      the independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight or optimality
+      is claimed.'
   - id: E-couzo-715-certificate-report
     claim: upper-bound
     scope:

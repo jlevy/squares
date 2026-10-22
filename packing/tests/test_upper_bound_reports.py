@@ -118,6 +118,11 @@ DANIEL_703 = "evand-n270-sweep-2026-10-20"
 #: Evan Daniel's regularized lists at 0075967, which no issue reports, retained under MIT
 #: by the views lane of 21 October (`test_upper_bound_reports_regularized_1020`).
 DANIEL_REGULARIZED_1020 = "evand-regularized-2026-10-20"
+#: Francisco Couzo's in-corpus rows of issues #670, #672 and #675, retained as factual data
+#: by the think-ql4v stage 4 lane of 22 October (`test_upper_bound_reports_couzo_670_672_675`).
+COUZO_670 = "couzo-issue670-2026-10-17"
+COUZO_672 = "couzo-issue672-2026-10-17"
+COUZO_675 = "couzo-issue675-2026-10-18"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -158,6 +163,9 @@ EVERY = (
     DANIEL_703,
     DANIEL_702,
     DANIEL_REGULARIZED_1020,
+    COUZO_670,
+    COUZO_672,
+    COUZO_675,
 )
 
 
@@ -1175,12 +1183,16 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
             assert margins[f"exact_verify_{field}"] == margins[f"independent_{field}"]
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
-    # SQUISH's, #567's and #622's squares touch the box; every other source's clear it.
+    # Every positive of SQUISH's, #567's, #622's and Couzo's #670 and #675 touches the box.
+    # Couzo's #672 touches at 229 and clears every wall at 227, so its walls mix; every
+    # other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
     }
-    assert (walls == {0}) is (name in {SQUISH_481, SQUISH_500, PINGYOU_261, PINGYOU_622})
+    touching = {SQUISH_481, SQUISH_500, PINGYOU_261, PINGYOU_622, COUZO_670, COUZO_675}
+    assert (walls == {0}) is (name in touching)
+    assert (0 in walls and len(walls) > 1) is (name == COUZO_672)
     # Only #567's and #622's squares touch each other, an exact contact the kernel admits;
     # every other source's pairs clear.
     gaps = {
@@ -1414,6 +1426,9 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         DE_WINTER_668: "2026-10-17",
         DANIEL_703: "2026-10-20",
         DANIEL_REGULARIZED_1020: "2026-10-20",
+        COUZO_670: "2026-10-17",
+        COUZO_672: "2026-10-17",
+        COUZO_675: "2026-10-18",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

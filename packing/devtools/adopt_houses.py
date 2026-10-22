@@ -161,6 +161,9 @@ HAND_MARKED = frozenset({155, 183, 258, 263, 302, 308})
 #: The first pass whose writer also marks the closing sentence of a T-155 view's section as
 #: history (`_regularized_certificate`); earlier passes' records read as they wrote them.
 VIEW_SECTION_FROM = "2026-10-19"
+#: The pass that retained and registered Couzo's #672 (T-227), from which the intake's and
+#: T-199's sentences saying it was not retained are history (`_retained_672`).
+RETAINED_672_FROM = "2026-10-22"
 #: The first pass whose writer marks an earlier section's staged-adoption sentence as history
 #: (`staged_history`): on 20 October 2026 issue 678's certificate (T-223) took 204 off T-193's
 #: staged adoption, the first staged count a smaller packing overtook in a written section.
@@ -820,6 +823,74 @@ RESULTS: dict[str, Prose] = {
             "routes exact at the far wall and at the closest pair"
         ),
     ),
+    "T-225": Prose(
+        author="Evan Daniel",
+        reported="in his regularized record lists, on no issue",
+        producer_route=False,
+        ai=(
+            "The source’s credits say the repository’s work was produced by Claude "
+            "(Anthropic) under human direction, and the commit that publishes the "
+            "certificate names Claude Opus 5.5 as co-author and says Evan Daniel approved "
+            "it."
+        ),
+        lineage_at={
+            227: (
+                "The source names Francisco Couzo’s #672 packing (T-227), the refinement of "
+                "Joost de Winter’s #668 packing (T-196) that #672 reports, as the one it "
+                "regularizes and calls "
+                "the certificate not a new bound: Evan Daniel solved that packing to its "
+                "exact side, $1.76 \\times 10^{-11}$ below #672’s certificate, and "
+                "regularized it for display at that side. Measured by the import and again "
+                "by the 21 October review, nearest centres pair the two one to one under a "
+                "half turn; 194 of the 227 squares lie within $10^{-6}$ of T-227’s, 16 move "
+                "beyond $10^{-3}$ and 3 beyond a tenth, at most 0.168, and one square turns "
+                "by 2.54° (T-225). #672’s packing moves no square beyond a tenth from de "
+                "Winter’s (T-227)."
+            ),
+            204: (
+                "The source names Francisco Couzo’s #678 packing (T-223) as the one it "
+                "regularizes and calls the certificate not a new bound: Evan Daniel solved "
+                "that packing to its exact side, $1.39 \\times 10^{-9}$ below #678’s "
+                "certificate, and regularized it for display at that side. Measured by the "
+                "import and again by the 21 October review, nearest centres pair the two "
+                "one to one under a half turn; 132 of the 204 squares lie within $10^{-6}$ "
+                "of T-223’s, 58 move beyond $10^{-3}$ and 4 beyond a tenth, at most 0.442, "
+                "and three squares T-223 tilts by up to 0.088° are axis-aligned here (T-225)."
+            ),
+            229: (
+                "The source names Evan Daniel’s own #674 packing (T-199) as the one it "
+                "regularizes, polished to its exact side, $1.91 \\times 10^{-11}$ below "
+                "#674’s certificate, and calls the certificate not a new bound. Measured "
+                "by the import and again by the 21 October review, under no symmetry of "
+                "the box do nearest centres pair the two one to one; an optimal assignment "
+                "keeps 95 of "
+                "the 229 squares within $10^{-6}$ of T-199’s, moves 112 beyond $10^{-3}$ "
+                "and 13 beyond a tenth, at most 0.650, and turns six near-axis squares to "
+                "the axis (T-225). Francisco Couzo’s #672 packing (T-227), which #674 names "
+                "as its start, pairs with T-199 under no symmetry either: an optimal "
+                "assignment moves 79 squares beyond a tenth, at most 0.873, with turns up to "
+                "38° (T-227)."
+            ),
+            260: (
+                "The source names Francisco Couzo’s #678 packing (T-223) as the one it "
+                "regularizes and calls the certificate not a new bound: Evan Daniel solved "
+                "that packing to its exact side, $2.51 \\times 10^{-11}$ below #678’s "
+                "certificate, and regularized it for display at that side. Measured by the "
+                "import and again by the 21 October review, 207 of the 260 squares lie "
+                "within $10^{-9}$ of T-223’s and none turns; under no symmetry of the box "
+                "do nearest centres pair the two one to one, and an optimal assignment "
+                "slides 41 squares beyond $10^{-3}$ and 20 beyond a tenth, at most 0.643 "
+                "(T-225)."
+            ),
+        },
+        third_route=(
+            ", and the 21 October review’s clean-room checker decided it again on two "
+            "routes of its own, in integers alone and in rationals with exact intersection "
+            "area on the pairs whose boxes overlap; its sharp controls at $10^{-30}$ found "
+            "both maintained routes exact at the far wall, the near wall and the least-gap "
+            "pair"
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -862,9 +933,14 @@ def _couzo(start: str) -> Credit:
     return Credit((finder,), (COUZO,), f"Francisco Couzo’s refinement of {whose} packing")
 
 
-def _regularized(finder: str, whose: str, *, via: str | None = None) -> Credit:
+def _regularized(
+    finder: str, whose: str, *, via: str | None = None, how: str | None = None
+) -> Credit:
+    """Evan Daniel's regularization of `finder`'s packing, as `via` refined it, or as `how`
+    says where the source says less (review A4 of #718). The clause carries no comma of its
+    own, so each sentence that quotes the credit punctuates it (review A5)."""
     improved = (via, DANIEL) if via else (DANIEL,)
-    refined = f", as {via} refined it," if via else ""
+    refined = how if how is not None else (f" as {via} refined it" if via else "")
     return Credit(
         (finder,),
         improved,
@@ -1096,15 +1172,16 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
-    # Issue 678's packing (T-223), which the source's manifest credits to Couzo with
-    # Polkovskyi's construction as its seed; that seed is the source's account, not
-    # measured here. The house it replaced was Polkovskyi's refinement of Ostashev's
-    # packing as PingYou Ltd refined it (T-186's regularization of T-174).
+    # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of issue
+    # 678's packing (T-223), solved to its exact side 1.39e-9 below #678's certificate:
+    # T-225's item names T-223, and the packing stays with Couzo, whose source's manifest
+    # credits Polkovskyi's construction as its seed, which is that source's account, not
+    # measured here (A11 of #716 asked to keep Polkovskyi in the line).
     204: Credit(
         (COUZO,),
-        (),
-        "Francisco Couzo’s packing from a search the source seeded with Mykhailo "
-        "Polkovskyi’s n = 204 construction",
+        (DANIEL,),
+        "Evan Daniel’s display regularization of Francisco Couzo’s packing from a search "
+        "Couzo’s source seeded with Mykhailo Polkovskyi’s n = 204 construction",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -1152,9 +1229,21 @@ CREDITS: dict[int, Credit] = {
         (COUZO,),
         "Francisco Couzo’s further arrangement of Daniil Ostashev’s n = 211 design",
     ),
-    # Joost de Winter's packing of issue 668 (T-196), from a search the issue says started
-    # from this repository's catalogue; no identity with the catalogue's packing is measured.
-    227: Credit((DE_WINTER,), (), "Joost de Winter’s packing"),
+    # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of Francisco
+    # Couzo's issue-672 packing (T-227), solved to its exact side 1.76e-11 below #672's
+    # certificate: T-225's item names T-227, whose own item names de Winter's T-196, which
+    # #672 refines (no square beyond a tenth). So the packing stays with de Winter, Couzo is
+    # credited with the refinement and Daniel with the regularization, as at 258. The house
+    # it replaced was de Winter's packing of issue 668 (T-196), from a search the issue says
+    # started from this repository's catalogue.
+    # #672 reports the refinement; who made its CT105 submission the source does not say,
+    # and the #672 reply asks (review A4 of #718).
+    227: _regularized(
+        DE_WINTER,
+        "Joost de Winter’s",
+        via=COUZO,
+        how=" as refined in Francisco Couzo’s #672 report",
+    ),
     # T-174's regularization of T-128's packing, 46 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
     228: Credit(
@@ -1162,14 +1251,17 @@ CREDITS: dict[int, Credit] = {
         (PINGYOU,),
         "PingYou Ltd’s refinement of Francisco Couzo’s refinement of his own packing",
     ),
-    # Evan Daniel's dilation of a nearby configuration of his opening packing (T-198); the
-    # issue credits Couzo's issue-672 packing, after de Winter's issue 668, as the start,
-    # which the author's issue 673 reads as "based on".
+    # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of his own
+    # issue-674 packing (T-199), polished to its exact side 1.91e-11 below #674's
+    # certificate: T-225's item names T-199, whose finder he is. #674's packing is his
+    # dilation of a nearby configuration of his opening packing (T-198); the issue credits
+    # Couzo's issue-672 packing, after de Winter's issue 668, as the start, which the
+    # author's issue 673 reads as "based on".
     229: Credit(
         (DANIEL,),
         (),
-        "Evan Daniel’s packing from a search started from Francisco Couzo’s refinement of "
-        "Joost de Winter’s packing",
+        "Evan Daniel’s display regularization of his own packing from a search started from "
+        "Francisco Couzo’s refinement of Joost de Winter’s packing",
     ),
     # PR 574's re-solve of issue 528's composition, re-solved again (T-186's
     # regularization of T-174).
@@ -1227,17 +1319,19 @@ CREDITS: dict[int, Credit] = {
     ),
     258: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH", via="Mishapolk"),
     259: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
-    # Issue 678's packing (T-223), adopted here on 21 October 2026 from Joost de Winter's
-    # T-196, which the pass of 20 October had adopted from the catalogue's packing: the
-    # source seeded its search with Evan Daniel's exact-form certificate of de Winter's
-    # issue-668 packing (T-196), and the 20 October review measured 162 of its squares
-    # within 1e-4 of that seed's, 55 beyond 1e-2, so de Winter is named in the sentence as
-    # the construction's author, as at 229, and not in the structured fields.
+    # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of issue
+    # 678's packing (T-223), solved to its exact side 2.51e-11 below #678's certificate:
+    # T-225's item names T-223, and the packing stays with Couzo. T-223 was adopted here on
+    # 21 October 2026 from Joost de Winter's T-196: its source seeded its search with Evan
+    # Daniel's exact-form certificate of de Winter's issue-668 packing (T-196), and the 20
+    # October review measured 162 of its squares within 1e-4 of that seed's, 55 beyond
+    # 1e-2, so de Winter is named in the sentence as the construction's author, as at 229,
+    # and not in the structured fields.
     260: Credit(
         (COUZO,),
-        (),
-        "Francisco Couzo’s packing from a search seeded with Evan Daniel’s exact "
-        "certificate of Joost de Winter’s n = 260 packing",
+        (DANIEL,),
+        "Evan Daniel’s display regularization of Francisco Couzo’s packing from a search "
+        "seeded with Evan Daniel’s exact certificate of Joost de Winter’s n = 260 packing",
     ),
     # T-174's regularization of T-169's re-solve, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -2359,10 +2453,11 @@ def staged_sentences(
 
 
 #: The results whose regularizations are for display, at the side the source reports as
-#: the packing's exact optimum, with the regularizer credited (T-146, Evan Daniel's
-#: regularized lists). Every other result's regularizations are certificates of the
-#: packing its entry names, by the identity's basis (`_regularization`).
-DISPLAY_REGULARIZERS = frozenset({"T-146"})
+#: the packing's exact optimum, with the regularizer credited (T-146 and T-225, Evan
+#: Daniel's regularized lists of 10 and 20 October). Every other result's regularizations
+#: are certificates of the packing its entry names, by the identity's basis
+#: (`_regularization`).
+DISPLAY_REGULARIZERS = frozenset({"T-146", "T-225"})
 
 
 def _regularization(move: Move, author: str) -> str:
@@ -2610,6 +2705,28 @@ def staged_history(text: str, until: str, house: str) -> str:
     return _STAGED_SENTENCE.sub(past, text)
 
 
+def _retained_672(text: str) -> str:
+    """The intake's and T-199's statements that Couzo's #672 was neither retained nor
+    verified here, in the past tense: the pass of 22 October 2026 retained it and
+    registered it as T-227, and measured it against T-199 (review A2 of #718)."""
+    text = re.sub(
+        r"Couzo’s\s+intervening\s+claim\s+remains\s+Stage\s+1\s+under\s+`think-2vjc`,\s+with"
+        r"\s+no\s+packet\s+or\s+verification\s+adopted\s+here\.",
+        "Couzo’s intervening claim remained Stage 1 under `think-2vjc`, with no packet or "
+        "verification here, until 22 October 2026, when it was retained and registered as "
+        "T-227.",
+        text,
+    )
+    return re.sub(
+        r"and\s+#672\s+is\s+not\s+yet\s+retained,\s+so\s+that\s+step\s+is\s+the\s+source’s"
+        r"\s+\(T-199\)\.",
+        "and #672 was not retained until 22 October 2026, so that step is the source’s "
+        "(T-199); measured since (T-227), #672’s packing pairs with T-199’s under no "
+        "symmetry.",
+        text,
+    )
+
+
 def historical(move: Move, text: str) -> str:
     """The body's own statements of the earlier house, marked as history.
 
@@ -2655,6 +2772,8 @@ def historical(move: Move, text: str) -> str:
     text = _regularized_certificate(move, text)
     text = held_history(text)
     text = pending_history(text, until)
+    if houses.adopted_on(n) >= RETAINED_672_FROM:
+        text = _retained_672(text)
     if houses.adopted_on(n) >= STAGED_HISTORY_FROM:
         text = staged_history(text, until, move.house.result)
     # The records are wrapped, so a sentence may break at any space; whitespace is

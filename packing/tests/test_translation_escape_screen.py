@@ -104,7 +104,9 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: and every pair, between the screen's 1e-10 and 1e-8, so every square moves at the two
 #: tighter tolerances and 26 and 11 at the two looser. The adoption of 21 October 2026
 #: moved it at its two: 270 left, its exact certificate's least margins being 1e-20 and
-#: above every tolerance, and 260 stayed on Couzo's certificate (T-223, think-xu4d).
+#: above every tolerance, and 260 stayed on Couzo's certificate (T-223, think-xu4d). The
+#: adoption of 22 October 2026 (think-ql4v) moved it at its four, to Evan Daniel's
+#: regularized views (T-225), least margins 1e-20: 260 left, and 204, 227 and 229 stayed.
 #: Re-screening the adopted
 #: counts with the screen's own `--update --n` rebuilds the retained screen byte for byte.
 GOLDEN_UNSTABLE = {
@@ -153,7 +155,6 @@ GOLDEN_UNSTABLE = {
         232,
         241,
         259,
-        260,
         261,
         264,
         266,

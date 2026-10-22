@@ -161,8 +161,9 @@ MOVED_AGAIN = {
 }
 #: The counts of the seven that a later pass moved once more: the adoption of 19 October
 #: 2026 took 271 from T-186 to Evan Daniel's issue-664 certificate (T-219), and that of 20
-#: October 2026 took 204 from T-186 to Francisco Couzo's issue-678 certificate (T-223).
-MOVED_LATER = {271: ("T-219", "2026-10-19"), 204: ("T-223", "2026-10-20")}
+#: October 2026 took 204 from T-186 to Francisco Couzo's issue-678 certificate (T-223),
+#: which that of 22 October 2026 moved to Evan Daniel's view of its packing (T-225).
+MOVED_LATER = {271: ("T-219", "2026-10-19"), 204: ("T-225", "2026-10-22")}
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
 #: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
@@ -171,8 +172,9 @@ T193_COUNTS = (88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 2
 T193_BELOW_T186 = (175, 204, 232, 302)
 #: The staged counts a smaller validated packing took off T-193's staged adoption, with
 #: the result that took each: the adoption of 20 October 2026 took 204 to Francisco Couzo's
-#: issue 678 (T-223), 2.04e-5 below T-193's side there.
-OVERTAKEN = {204: "T-223"}
+#: issue 678 (T-223), 2.04e-5 below T-193's side there, and that of 22 October 2026 to Evan
+#: Daniel's view of that packing (T-225), 1.39e-9 lower still.
+OVERTAKEN = {204: "T-225"}
 
 
 def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted(
@@ -1348,18 +1350,19 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # issue-689 certificates (T-222, T-221) and 204 to Francisco Couzo's issue 678
     # certificate (T-223), and first adopted 227 and 260 (T-196), and the adoption of 21
     # October 2026 moved 270 to Daniel's issue-703 certificate (T-224) and 260 to Couzo's
-    # (T-223), after this receipt was retained.
+    # (T-223), and the adoption of 22 October 2026 moved 204, 227, 229 and 260 to Daniel's
+    # regularized views (T-225), after this receipt was retained.
     later = {
         155: "T-197",
         183: "T-220",
-        229: "T-199",
+        229: "T-225",
         236: "T-218",
         271: "T-219",
         154: "T-222",
-        204: "T-223",
-        260: "T-223",
+        204: "T-225",
+        260: "T-225",
         308: "T-221",
-        227: "T-196",
+        227: "T-225",
         270: "T-224",
     }
     before = {
@@ -2344,13 +2347,16 @@ def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
-    """The replaced displays differ at 29, 132, 227 and 229. Their opening, section and
+    """The replaced displays differ at 29 and 132. Their opening, section and
     history note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of
     #665). At 29 the catalogue print orders nothing; at 132 the reported exact side agrees
     with the verified side, but its display differs from the verified display. 308's did
     too when T-174 replaced T-141 on 17 October 2026, and 260's when T-196 replaced the
     catalogue's packing on 20 October; the passes of 20 and 21 October 2026 replay them
-    from T-174's and T-196's records, whose two lanes agree."""
+    from T-174's and T-196's records, whose two lanes agree. 227's and 229's did too, when
+    T-196 and T-199 first replaced the catalogue's packings there on 20 and 19 October; the
+    pass of 22 October 2026 replays them from T-196's and T-199's records, whose two lanes
+    agree, so 29 and 132 remain."""
     differing = {
         29: (
             Fraction(
@@ -2372,26 +2378,6 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
             "T-141",
             "[Daniel record hunt 3 2026-10-10]",
             "lies `1.20e-19` above the new side",
-        ),
-        # The first adoption at 229 (19 October 2026): the catalogue's print of
-        # 10 + 4 sqrt(2) above T-155's exact ceiling, both well above the new side.
-        229: (
-            Fraction("391421356237309504880168872421/25000000000000000000000000000"),
-            "15.65685424949238",
-            "15.65685424949239",
-            "T-155",
-            "[Kingbird]",
-            "lies `6.69e-03` above the new side",
-        ),
-        # The first adoption at 227 (20 October 2026, T-196): the catalogue's print of
-        # 17/2 + 5 sqrt(2) above T-155's exact ceiling.
-        227: (
-            Fraction("19463834764831844055010554526310613/1250000000000000000000000000000000"),
-            "15.57106781186547",
-            "15.57106781186548",
-            "T-155",
-            "[Kingbird]",
-            "lies `7.27e-03` above the new side",
         ),
     }
     for n, (expected, printed, verified_display, result, source, relation) in differing.items():
@@ -3070,6 +3056,30 @@ def test_a_write_and_a_dry_run_print_what_the_moves_owe(
     assert len(capsys.readouterr().out.splitlines()) == 1
 
 
+def test_issue_678s_reader_still_builds_t223s_source_at_both_counts() -> None:
+    """`couzo_678_source` houses no count since T-225 took 204 and 260 on 22 October 2026.
+    It stays for a pass that houses issue 678 again, so it is held to its packet here
+    (review A6 of #718): each count's certificate, rebuilt from its pinned bytes, sits just
+    above T-225's side, and its three jobs, origin, receipt and inputs all read."""
+    source = houses.couzo_678_source()
+    assert source.result == "T-223"
+    assert "T-223" not in set(houses.ADOPTED.values())
+    margins = {204: Fraction(1389753, 10**15), 260: Fraction(2514377, 10**17)}
+    for n, margin in margins.items():
+        certificate = source.certificate(n)
+        assert certificate.n == n
+        above = Fraction(certificate.side) - houses.side(n)
+        assert abs(above - margin) < margin / 10**6, n
+        assert set(source.jobs(n, certificate)) == {
+            "positive",
+            "duplicate-square-overlap",
+            "square-translated-outside-container",
+        }
+        assert source.origin(n).path == source.stored(n)
+        assert source.receipt(n).is_file()
+        assert all(path.is_file() for path in source.inputs([n]))
+
+
 def test_an_overtaken_staged_adoption_reads_as_history() -> None:
     """At 204 T-186's section said the case kept that packing until T-193's staged adoption
     moved it; on 20 October 2026 issue 678's smaller certificate (T-223) moved it instead,
@@ -3098,4 +3108,5 @@ def test_an_overtaken_staged_adoption_reads_as_history() -> None:
     )
     assert 204 not in select.PENDING_ADOPTION
     assert 204 not in select.CORRECTIONS_OWED
-    assert houses.ADOPTED[204] == houses.ADOPTED[260] == "T-223"
+    # On 22 October 2026 Evan Daniel's view of T-223's packing (T-225) moved both again.
+    assert houses.ADOPTED[204] == houses.ADOPTED[260] == "T-225"

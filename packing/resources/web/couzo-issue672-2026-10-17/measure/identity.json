@@ -1,0 +1,186 @@
+[
+ {
+  "n": 229,
+  "view": "#672",
+  "against": "T-196 (#668)",
+  "side_difference": "-1.667614e-08",
+  "side_difference_exact": "-1231624483928586868287831836597319614549486599978829104125429754940658620048595006297738004619556503154786254754586255873764648865372660353327682645805136700147/73855506049670000000000000000012831406706742532903153590379055147534608421525837901407438079676279304135568905731052035938733273970216121702300000000000000000000000000",
+  "nearest_centre": {
+   "one_to_one": true,
+   "symmetry": 3,
+   "largest_displacement": "9.412641e-3",
+   "largest_turn_degrees": "0.03084",
+   "moved_beyond": {
+    "1e-9": 229,
+    "1e-6": 155,
+    "1e-3": 57,
+    "1e-2": 0,
+    "1e-1": 0
+   },
+   "turned_beyond_1e-6": 25
+  },
+  "assignment": {
+   "symmetry": 3,
+   "largest_move": "0.00941264",
+   "moved_beyond": {
+    "1e-9": 229,
+    "1e-6": 155,
+    "1e-3": 57,
+    "1e-2": 0,
+    "1e-1": 0
+   },
+   "largest_turn_degrees": "0.03084",
+   "turned_beyond_1e-6": 25
+  }
+ },
+ {
+  "n": 229,
+  "view": "T-198 (#674 opening)",
+  "against": "#672",
+  "side_difference": "-1.148541e-05",
+  "side_difference_exact": "-42413051484178844279198071265152499819/3692775302483500000000000000000000000000000",
+  "nearest_centre": {
+   "one_to_one": false,
+   "refusal": "no symmetry matches the two packings square for square"
+  },
+  "assignment": {
+   "symmetry": 6,
+   "largest_move": "0.806831",
+   "moved_beyond": {
+    "1e-9": 229,
+    "1e-6": 228,
+    "1e-3": 167,
+    "1e-2": 83,
+    "1e-1": 77
+   },
+   "largest_turn_degrees": "38.26",
+   "turned_beyond_1e-6": 120
+  }
+ },
+ {
+  "n": 229,
+  "view": "T-199 (#674 update)",
+  "against": "#672",
+  "side_difference": "-1.322638e-05",
+  "side_difference_exact": "-48842036568189022917661575014805879319/3692775302483500000000000000000000000000000",
+  "nearest_centre": {
+   "one_to_one": false,
+   "refusal": "no symmetry matches the two packings square for square"
+  },
+  "assignment": {
+   "symmetry": 6,
+   "largest_move": "0.872946",
+   "moved_beyond": {
+    "1e-9": 229,
+    "1e-6": 229,
+    "1e-3": 188,
+    "1e-2": 88,
+    "1e-1": 79
+   },
+   "largest_turn_degrees": "38.26",
+   "turned_beyond_1e-6": 115
+  }
+ },
+ {
+  "n": 204,
+  "view": "#675",
+  "against": "#670",
+  "side_difference": "-5.046313e-08",
+  "side_difference_exact": "-26395221785795540042042788271/523059501766792505020306000000000000",
+  "nearest_centre": {
+   "one_to_one": true,
+   "symmetry": 0,
+   "largest_displacement": "1.427023e-1",
+   "largest_turn_degrees": "1.097",
+   "moved_beyond": {
+    "1e-9": 173,
+    "1e-6": 96,
+    "1e-3": 63,
+    "1e-2": 38,
+    "1e-1": 5
+   },
+   "turned_beyond_1e-6": 33
+  },
+  "assignment": {
+   "symmetry": 0,
+   "largest_move": "0.142702",
+   "moved_beyond": {
+    "1e-9": 173,
+    "1e-6": 96,
+    "1e-3": 63,
+    "1e-2": 38,
+    "1e-1": 5
+   },
+   "largest_turn_degrees": "1.097",
+   "turned_beyond_1e-6": 33
+  }
+ },
+ {
+  "n": 204,
+  "view": "T-223 (#678)",
+  "against": "#675",
+  "side_difference": "-1.525246e-06",
+  "side_difference_exact": "-264094841613283952911359075773/173149066336600680654022000000000000",
+  "nearest_centre": {
+   "one_to_one": true,
+   "symmetry": 0,
+   "largest_displacement": "8.465220e-2",
+   "largest_turn_degrees": "2.584",
+   "moved_beyond": {
+    "1e-9": 172,
+    "1e-6": 169,
+    "1e-3": 70,
+    "1e-2": 32,
+    "1e-1": 0
+   },
+   "turned_beyond_1e-6": 57
+  },
+  "assignment": {
+   "symmetry": 0,
+   "largest_move": "0.0846522",
+   "moved_beyond": {
+    "1e-9": 172,
+    "1e-6": 169,
+    "1e-3": 70,
+    "1e-2": 32,
+    "1e-1": 0
+   },
+   "largest_turn_degrees": "2.584",
+   "turned_beyond_1e-6": 57
+  }
+ },
+ {
+  "n": 204,
+  "view": "T-223 (#678)",
+  "against": "#670",
+  "side_difference": "-1.575709e-06",
+  "side_difference_exact": "-91695088637838898862866939/58192919795686368190772800000000",
+  "nearest_centre": {
+   "one_to_one": true,
+   "symmetry": 0,
+   "largest_displacement": "2.272263e-1",
+   "largest_turn_degrees": "3.389",
+   "moved_beyond": {
+    "1e-9": 170,
+    "1e-6": 170,
+    "1e-3": 57,
+    "1e-2": 21,
+    "1e-1": 7
+   },
+   "turned_beyond_1e-6": 61
+  },
+  "assignment": {
+   "symmetry": 0,
+   "largest_move": "0.227226",
+   "moved_beyond": {
+    "1e-9": 170,
+    "1e-6": 170,
+    "1e-3": 57,
+    "1e-2": 21,
+    "1e-1": 7
+   },
+   "largest_turn_degrees": "3.389",
+   "turned_beyond_1e-6": 61
+  }
+ }
+]

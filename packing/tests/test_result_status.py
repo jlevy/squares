@@ -398,6 +398,12 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-170",
         "T-171",
         "T-198",
+        "T-196",
+        "T-199",
+        "T-223",
+        "T-226",
+        "T-227",
+        "T-228",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -433,6 +439,10 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # PingYou Ltd's own re-solves at 261, 105 and 272 (T-169 to T-171).
     # The adoption of 19 October 2026 took 229 to Evan Daniel's update (T-199), which
     # supersedes his opening certificate of the day before (T-198), its only count.
+    # The adoption of 22 October 2026 took 204, 227, 229 and 260 to Evan Daniel's
+    # regularized views (T-225), the last houses of Joost de Winter's T-196, Daniel's
+    # T-199 and Francisco Couzo's T-223; Couzo's #670, #672 and #675 rows (T-226 to
+    # T-228), registered the same day, are superseded from registration.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records
