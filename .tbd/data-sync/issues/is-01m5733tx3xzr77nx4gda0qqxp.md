@@ -5,8 +5,8 @@ title: "Import franciscouzo: 227, 229, 330-996: registration request (#672)"
 kind: task
 status: in_progress
 priority: 2
-version: 8
-delegate: lane-new
+version: 10
+delegate: coord-intake-1021b
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.866Z
-updated_at: 2026-10-21T08:43:37.862Z
+updated_at: 2026-10-22T01:20:04.881Z
 started_at: 2026-10-18T12:53:37.251Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/672
@@ -158,3 +158,81 @@ Evidence commands: `gh issue view 670|672|675 --repo jlevy/squares --json body,c
 2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).
 
 2026-10-21 c-lane-686-fix (coordinator session_014ZKp7R): issue 686 (think-9vjn, PR #711) reports below #672 at 33 of its counts, 330, 461, 652, 704, 755-759, 811-817, 868-869, 871-874, 929-930, 932-935, 990-991, 994-996, as the 20 October ledger (packing/campaign/issue-intake/upper-bounds-20261020/) records. Once #711 merges, this import's rows at those counts enter already superseded, in a chain that ends at muglich-issue686-2026-10-19; #686's notes in result-requests.yaml name this bead (review A4 of #711).
+
+2026-10-22 coord-intake-1021b: ownership transferred to the 21 October intake coordinator (last activity: the previous coordinator session's lanes on 21 October; the owner's instruction to resume the intake). Re-triage of 22 October follows.
+
+2026-10-22 c-triage-backlog-1022: stage 1 re-triage of #672, read-only, against main
+d7923b8d8. Full plan: the coordinator scratchpad, triage-backlog/plan.md. The rows are
+in rows.tsv, and the combined walk is in ledger-backlog/.
+
+**Claim map.**
+
+- **What is asked.** The body asks for 46 rows at af8cb7959aead318c0cf5e9f873de3caa763f77a.
+  The author's comment of 17 October (issuecomment-6242081759) says 227 and 229 are
+  based on de Winter's #668. Nothing else has been asked since our follow-up of 19
+  October.
+- **Report order.** Every row is recorded, in the 18 October ledger and in a combined
+  walk.
+  - The walk's starts are frozen at 804eff369.
+  - It includes #666, #668, #670, #674, #675, #678, #686, `evand@0075967` (T-225) and
+    #715 at the lane's ≤ 1024 transcription.
+  - Result: 446 claims, none not recorded, none undecided.
+- **Earlier indexes.** All rows are below Couzo's own earlier indexes at 4e4c8ce and
+  58a7833, and below Göbel's families.
+
+**Dispositions.**
+
+- **227:** the register, pending adoption. It is 1.71e-4 below the house T-196, and
+  T-225 is 1.76e-11 below it.
+- **229:** the register, superseded on entry. T-199, the house, is 1.32e-5 below it.
+- **One entry:** both counts go in one entry, `scope [227, 229]`, at V0/C0.
+- **Regularizations:** at 227 and 229, `of: T-196`, `side: solved`, basis
+  `source-claim`, with these measurements:
+  - 227: one to one, 59 squares beyond 1e-3, largest move 0.0796, largest turn 5.842°
+    (`evand-regularized-2026-10-20/measure/identity.json`).
+  - 229: one to one, 57 squares beyond 1e-3, largest move 0.0094, largest turn 0.031°
+    (`triage-backlog/identity-incorpus.json`; the packet retains it).
+- **44 beyond-horizon rows:** all superseded on entry once #715's ≤ 1024 import has
+  merged. Successors: #675 32, #678 7, #686 4, #715 1.
+- **Source id:** `couzo-issue672-2026-10-17`.
+
+**Evidence.**
+
+- **Digests:** `n227.cert` SHA-256 `65b03df8…8c17` and `n229.cert` `9ab667ec…609f` both
+  match `upper_bounds.json` at the pin.
+- **Prints:** each print is the header side rounded up.
+- **Triage replay:** both maintained routes pass, and all 6 controls are refused on both
+  routes. The all-pairs positive passes on both routes. The least pair gaps are about
+  1.2e-12. At 229 a wall is in contact, which the closed contract allows. This is
+  `timing-incorpus.jsonl`.
+- **T-199 against #672@229:** not one to one; 79 squares move beyond a tenth, and the
+  largest turn is 38°. T-198 is the same. T-199's notes, and the `evand-n229`
+  sources' notes, should state this measurement and take no regularization item.
+
+**PR-A, now.**
+
+- Packet `couzo-issue672-2026-10-17`: `n227/229.cert` and `.json` (58 KB), with the
+  index, manifest, SHA256SUMS and checker pinned by digest.
+- The bibliography key `[Couzo issue 672 2026-10-17]`.
+- The register entry, its id taken last in report order after #670's.
+- T-225's 227 item: `of` names this entry, with identity one to one, 16 moved, 0.168,
+  2.542°. Drop its unfinished confirmation that links this bead, reword the text, and
+  rewrite `test_the_227_adoption_waits_for_672s_registration`.
+- The T-196, T-199 and T-223 notes, and n-229.md:191.
+
+**PR-B, after #715's ≤ 1024 import merges.**
+
+- 44 files, 5,498,222 bytes.
+- The filtered replay costs about 405 CPU-s (model) to 600 CPU-s (measured rate).
+
+**Stage 4.** This goes with T-225's review (think-ql4v). The entry and T-225 rise
+together, so 227 is adopted once, to T-225.
+
+**Replies.**
+
+- The verdict comment draft is `replies/672-verdict-comment.md`, made by
+  `intake_comments`, with `records_pr` to fill in.
+- The post-merge draft is `replies/672-after-PR-A.md`. It asks who made the 227 CT105
+  web submission (`f0ca7a65`, `fq`, 2026-10-17T20:28:22Z).
+
+blocked_on: none
