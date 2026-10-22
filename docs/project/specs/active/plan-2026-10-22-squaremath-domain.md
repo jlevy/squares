@@ -7,9 +7,9 @@ author: Codex, for the repository owner
 
 **Date:** 2026-10-22
 
-**Status:** Planned.
-The owner approved GitHub Pages and the bare domain; application changes and production
-cutover remain pending.
+**Status:** Implemented on `codex/squaremath-domain`; validation is in progress.
+The owner verified domain ownership.
+Repository domain binding, DNS routing, and production cutover remain pending.
 
 **Tracking:** `think-igk4` (epic), `think-m1j6` (documentation), `think-v4ab` (site
 migration), `think-juq7` (production cutover).
