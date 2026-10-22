@@ -6533,6 +6533,32 @@ sources:
     family (issue 484) as the construction, as issue 489 did. Its KKT, local-minimum and
     MILP statements are the author's numerical evidence and are not recorded.
   claims_record: resources/web/evand-n343-sweep-2026-10-20/acquisition/beyond-horizon-claims.json
+
+- id: evand-regularized-2026-10-20
+  title: Evan Daniel's regularized record lists at 0075967, no issue
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/0075967bace18a3deabcc0baa64c2fb294fc80a0
+  local: resources/web/evand-regularized-2026-10-20/
+  source_key: '[Daniel regularized lists 2026-10-20]'
+  scope:
+    n_values:
+    - 204
+    - 227
+    - 229
+    - 260
+  reviewed: '2026-10-21'
+  source_date: '2026-10-20'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-regularized-2026-10-20/acquisition/claims.json
+  evidence:
+  - E-evand-regularized-1020-certificate-report
+  notes: All 4 complete certificates are retained as the source wrote them, each admitted only where
+    its exact side equals the side its JSON prints. T-225 records the in-horizon report. All 12 native
+    jobs have full outcomes. No selected override or superseded claim is created at this source-only
+    stage; current cases and earlier source ownership remain unchanged.
 - id: wand125-fine-net-n38-65775-2026-10-16
   title: Wand125 reported n38 fine-net lower bound (#446)
   role: source-repository

@@ -88,6 +88,16 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.17",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Register Evan Daniel's solved and regularized views at 204, 227, 229 and 260 "
+            "(T-225, V0/C0); record the #668 and #702 replies, #678's stage 7 reply and "
+            "#668's follow-up; enter #715 at triage; correct the overview's Couzo and de "
+            "Winter cards; and announce T-196's and T-223's adoptions in the News."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.16",
         first_published="October 21, 2026",
         result_scope=(
@@ -713,7 +723,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "02eef3741c06aab46c5373904d8b3ad60608f8d8"
+DATA_REVISION = "9555c3ed7b0845921dfee067672f6ebf00471571"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -809,6 +819,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            on October 1 and 2, so the substantive
 #:                                            day is the one recorded
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.14",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Evan Daniel's "
+            "regularized views at 204, 227, 229 and 260 (T-225)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.13",
         first_published="October 21, 2026",
@@ -1188,6 +1206,28 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.16",
+        version="v0.8.17",
+        impact="patch",
+        reason=(
+            "Register Evan Daniel's solved and regularized views at 204, 227, 229 and 260 "
+            "(T-225, V0/C0); record the #668 and #702 replies, #678's stage 7 reply and "
+            "#668's follow-up; enter #715 at triage; correct the overview's Couzo and de "
+            "Winter cards; and announce T-196's and T-223's adoptions in the News."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.13",
+        version="v0.4.14",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Evan Daniel's "
+            "regularized views at 204, 227, 229 and 260 (T-225)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.8.15",
@@ -1934,6 +1974,42 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The registration of Evan Daniel's regularized views (T-225), the #668 and "
+            "#702 replies, the texts after #704 and #706 and T-196's and T-223's News, "
+            "against main bb0c24e9, after merging it. Rendered at link revision 818f10bd "
+            "into empty site directories, twice from this tree and twice with main's copies "
+            "of these five inputs: render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write their HTML "
+            "and Markdown byte-identical across all four renders; only the explainer, which "
+            "counts the register, differs, and it takes v0.4.14. Rendered the same way again "
+            "at 1300bc76, after the #678, #668 and #715 records and the overview's Couzo "
+            "card, and at 3b8bd62e and fb58349a, after review A of #716, T-225's 22 October "
+            "stamp and the reading of Couzo's answers on #678: the same three byte-identical. "
+            "No PDF was printed; each prints from that HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -6472,7 +6548,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "96a0d9ff"
+PUBLICATION_REVISION = "18a1fb61"
 
 
 def data_pathspec() -> tuple[str, ...]:
