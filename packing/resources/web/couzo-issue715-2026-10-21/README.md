@@ -210,7 +210,14 @@ order. At ten counts one of them is the row this packet’s row now supersedes: 
 row the table names now names the backlog report that beat it first, so each count is one
 chain in report order and 21 of the 29 still name #715. Only 860 still holds this
 packet’s row alone.
-The table below keeps the rows that stood on `main` when this packet was written.
+
+Since 22 October Mykhailo Polkovskyi’s #719 rows
+([`mishapolk-issue719-2026-10-22`](../mishapolk-issue719-2026-10-22/README.md)),
+recorded by the [ledger of 22 October for issue
+719](../../../campaign/issue-intake/upper-bounds-issue719-20261022/README.md), supersede
+16 of this packet’s rows, at 417, 456, 499, 553, 601, 652, 705, 758, 868, 869, 872, 927,
+928, 932, 994 and 996; 93 remain current. The table below keeps the rows that stood on
+`main` when this packet was written.
 
 ### The 109 Recorded Rows
 

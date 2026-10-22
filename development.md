@@ -1773,7 +1773,7 @@ draw the first paper’s PDF into the selected output directory.
 site editions were retired** (the owner, 2026-10-22: “We don’t have any real value in
 committing a synthetic version for the site”; `think-wdqo`): every site page’s footer
 and the workbench stage print `PUBLICATION_EDITION` from `src/sqpack/release.py`,
-written like `v0.9.1-3b50e2`. The version is the last site edition, the first entry in
+written like `v0.9.2-3b50e2`. The version is the last site edition, the first entry in
 the frozen `PUBLICATION_HISTORY`, and the six characters after it name the data.
 No edition follows it: the site deploys continuously from `main`, and until its footer
 names the deployed commit it prints this frozen version beside the current data

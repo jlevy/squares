@@ -145,7 +145,7 @@ def test_the_history_keeps_every_edition_back_to_the_first() -> None:
 #: The last site edition. Site editions are retired as of 22 October 2026 (the owner:
 #: "We don't have any real value in committing a synthetic version for the site";
 #: think-wdqo), and the history stops here. Its date is its own entry's, read below.
-FINAL_SITE_EDITION = "v0.9.1"
+FINAL_SITE_EDITION = "v0.9.2"
 
 
 def test_the_site_history_is_frozen_since_site_editions_were_retired() -> None:

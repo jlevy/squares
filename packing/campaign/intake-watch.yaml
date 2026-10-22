@@ -1203,3 +1203,21 @@ repositories:
       records-v1 replay unchanged: no change for T-064. 1f70ab3 and a6c0dbb correct the
       wording of eight papers, the closed-form paper now citing cfcheck's replay of
       intervals 1 and 34, which T-180 already records. Nothing to import.
+  # The #719 import (think-xyhn, c-lane-719-import): what the intake sweep of 12:20Z on 22
+  # October listed for the repository whose release #719 reports.
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: dc440a8804565b4beaabc489df38345cada8cad1
+    read_on: '2026-10-22'
+    note: >-
+      The three commits of 22 October past the 70a033f pin, 1851c2c, 12fc466 and dc440a8, the head.
+      1851c2c and 12fc466 are the release issue 719 reports: 1851c2c adds 507 certificates and
+      SIGNIFICANT_VICTORIES.jsonl and updates LEGAL_VICTORIES.jsonl and six certificates, and
+      12fc466 replaces n-447.cert. The mishapolk-issue719-2026-10-22 packet pins 12fc466 and binds
+      173 of its files by blob: the README, the two indexes, the 122 certificates the issue names,
+      and the 48 the #719 reply asks the author about (the ten rows the issue's edit withdrew that
+      are still below every earlier report, at 411, 451, 494, 495, 539, 540, 583, 587, 632 and 683;
+      files below the case only beyond the twelfth decimal place, or undecided against it, at 34
+      in-corpus counts; the second 204 file; and three files that fail both exact routes). None of
+      the 48 is an import until he answers. The triage of #719 (think-xyhn) read every certificate
+      at the pin, and the rest are at or above an earlier report. dc440a8 adds only
+      ISSUE_SUBMISSION_122.md, issue 719's body. Nothing else to import.

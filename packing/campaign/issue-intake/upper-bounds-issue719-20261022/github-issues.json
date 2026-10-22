@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#666","kind":"issue","number":666,"url":"https://github.com/jlevy/squares/issues/666","author":"JoostdeWinter","created_at":"2026-10-17T07:06:07Z","state":"open","closed_at":null,"title":"s(n) < ⌈√n⌉ at 18 counts from n = 509 to 1568, and s(464) ≤ 21.98881: registration request"},{"report":"#715","kind":"issue","number":715,"url":"https://github.com/jlevy/squares/issues/715","author":"franciscouzo","created_at":"2026-10-21T20:55:57Z","state":"open","closed_at":null,"title":"328-9913: registration request"},{"report":"#719","kind":"issue","number":719,"url":"https://github.com/jlevy/squares/issues/719","author":"Mishapolk","created_at":"2026-10-22T05:30:47Z","state":"open","closed_at":null,"title":"New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request"}]
+}

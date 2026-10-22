@@ -22658,6 +22658,10 @@ results:
       A second exact route over the number fields of the algebraic certificates is recorded
       beside the rung and is no condition of it; it needs field arithmetic of its own, a
       code slice rather than compute.
+
+      On 22 October 2026 Mykhailo Polkovskyi's issue 719 re-solved this entry's packing at
+      105 to a side 5.18e-12 smaller, measured one to one with it (T-229, V0/C0, pending
+      review and adoption, think-4h23); the case holds this entry until then.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
@@ -31009,6 +31013,11 @@ results:
       V3 and C3 rest on the 21 October review and the replay it reproduced
       (E-evand-regularized-1020-exact-feasibility), with the review's own checker
       (E-evand-regularized-1020-review-exact-feasibility).
+
+      On 22 October 2026 Mykhailo Polkovskyi's issue 719 re-solved this entry's packing at
+      204 to a side 1.006e-8 smaller, measured one to one with it with one square turned by
+      25.64 degrees (T-229, V0/C0, pending review and adoption, think-4h23); the case holds
+      this entry until then.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 21 October, is
@@ -31378,6 +31387,160 @@ results:
           confirming evidence, with sharp controls at 1e-30.
         rung: C3
         link: think-0nse
+
+  - id: T-229
+    kind: upper-bound
+    registered: '2026-10-22'
+    landed: '2026-10-22'
+    headline: >-
+      Polkovskyi's re-solves of the house packings at 105 and 204, below T-174 and T-225
+    claim: >-
+      Two complete rational source certificates of issue 719 report finite upper-bound
+      improvements at the exact sides they state: s(105) <=
+      674331486483935962030285457609/62500000000000000000000000000 and s(204) <=
+      882663895519250432/59604644775390625, below the case's house best packing at each,
+      T-174 at 105 by 5.18e-12 and T-225 at 204 by 1.006e-8. Complete native feasibility
+      outcomes are retained separately; the case lanes are unchanged until the entry is
+      reviewed and adopted, so it is pending adoption at both counts.
+
+      The issue states that every certificate passes Evan Daniel's exact checker
+      verify_cert.py and this repository's sqpack/verify.py with zero tolerance, 122 of 122
+      on each, run from the author's own copies, which are not in the pinned tree. Those
+      statements are the author's; no source program ran here.
+
+      Credit the packings to their finders, each re-solved to a smaller side by Mykhailo
+      Polkovskyi (https://github.com/Mishapolk/square-packing-records), the name the record
+      gives him since issue 593 (the issue gives Mikhail Polk): at 105 Ryan Xu's packing as
+      Francisco Couzo and PingYou Ltd refined it (T-174); at 204 Francisco Couzo's packing
+      (#678, T-223) as Evan Daniel regularized it (T-225), which Couzo's source credits to
+      Polkovskyi's own construction (hop job 105412). The source states no method and no
+      lineage per count; the issue credits Mishapolk (Mikhail Polk) and names the earlier
+      finders its packings build on, and discloses Gemini assistance.
+    scope:
+      n_values: [105, 204]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        Re-solves of the house packings at 105 and 204 to smaller exact sides. At 105 the
+        side is 5.18e-12 below T-174, a padding-scale re-solve of the packing T-174 refines,
+        S1 as T-174's and T-186's are; at 204 it is 1.006e-8 below T-225, with one square
+        re-oriented, more than T-225's own 1.39e-9 below T-223, S2 as T-225 is. One entry
+        takes the higher: a citable detail of each case that moves no theorem. No lower
+        bound or optimum.
+      scored: '2026-10-22'
+      by: >-
+        the stage 1 triage of 22 October (c-triage-719, think-xyhn) and the records lane of
+        think-xyhn (c-lane-719-import); a draft for the stage 4 review (think-4h23)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Mishapolk issue 719 2026-10-22]']
+      published: '2026-10-22'
+    evidence: [E-mishapolk-719-certificate-report]
+    artifacts:
+      - packing/resources/web/mishapolk-issue719-2026-10-22/README.md
+      - packing/resources/web/mishapolk-issue719-2026-10-22/acquisition/claims.json
+      - packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-105.yaml.gz
+      - packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-204.yaml.gz
+      - packing/resources/web/mishapolk-issue719-2026-10-22/receipts/exact-certification.json.xz
+      - packing/resources/web/mishapolk-issue719-2026-10-22/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md
+      - packing/devtools/upper_bound_reports.py
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_beyond_horizon_replay.py
+    notes: >-
+      A separate complete repository replay is retained for n = 105 and 204: 2 positives and 4
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 156996 pair decisions; summed over the 6 jobs, the receipt records 22.55 route CPU
+      seconds and 23.02 job wall seconds, the longest job 5.91 seconds. Every positive clears
+      every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 22
+      October 2026): at 105 the certificate is below the case's ceiling (Ryan Xu,
+      improved by Francisco Couzo and PingYou Ltd, T-174) by 5.18e-12, and below
+      Polkovskyi's own #593 certificate, the same packing at this scale, by 5.18e-12; at
+      204 it is below the case's ceiling (Francisco Couzo, improved by Evan Daniel,
+      T-225) by 1.006e-8, below T-223 by 1.145e-8, T-228 by 1.537e-6, T-226 by 1.587e-6
+      and Polkovskyi's own T-186 by 2.040e-5. No earlier certificate states either exact
+      side, so first_certified_in does not apply.
+
+      The ledger of 22 October for issue 719 (upper-bounds-issue719-20261022) records
+      both in report order, from starts frozen at the same reading of main. Couzo's own
+      published copies of the two house sides, listed in the packet's
+      receipts/earlier-publications.json, equal them and are not below.
+
+      Measured pose by pose (measure/identity.json in the packet, the measures of the
+      evand-regularized-2026-10-20 packet's identity program; a measurement, which
+      decides nothing): at 105 nearest centres pair the squares one to one with T-174's
+      packing, 42 squares move beyond 1e-3 and none beyond a tenth, at most 0.049,
+      turning up to 2.41 degrees; at 204 they pair one to one with T-225's (and with
+      T-223's), 67 move beyond 1e-3 and 6 beyond a tenth, at most 0.273, and every
+      square turns less than 1 degree but one, re-oriented by 25.64 degrees.
+
+      T-225 itself moves 4 squares beyond a tenth of T-223's, at most 0.442, which the
+      record registers as the same packing regularized, so 204 is listed as a
+      regularization of T-225 with the re-oriented square named here; it does not pair
+      with Polkovskyi's own 204 of 13 and 14 October (T-183, T-186). The author is asked
+      how each was made.
+
+      The release holds a second 204 file, certificates/n204.cert, 1.48e-11 below the one
+      the issue names and the same packing, and a second 105 file, 4.6e-12 above it; the
+      issue names neither, and they are pinned by digest only. Its other files below the
+      record beyond the twelfth decimal place at 34 in-corpus counts, and its ten rows the
+      issue's edit withdrew, are pinned by digest and not imported; the reply asks the
+      author about each.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality is
+      claimed.
+    next_rung: >-
+      Independently review the retained replay at 105 and 204 (think-4h23); after that
+      review the house rule adopts both and the regularization layer decides them, lapsing
+      105's grid-slack view and SETTLED[204]. The 111 rows beyond the corpus are the source's dated
+      beyond-horizon rows since 22 October 2026, recorded in report order by the ledger of 22
+      October for issue 719 (upper-bounds-issue719-20261022).
+    unfinished_confirmations:
+      - what: >-
+          Review the retained two-route replay of #719's 105 and 204 certificates and enter it
+          as confirming evidence, then adopt both and regularize them.
+        rung: C3
+        link: think-4h23
+        estimated_cost:
+          cpu_hours: 0.5
+          cpu_hours_high: 1
+          basis: >-
+            the triage's price: about 1 CPU-minute of replay, measured 22 October, and 10 to
+            50 CPU-minutes of regularization at both counts, from the layer's receipts
+          priced: '2026-10-22'
+    regularizations:
+      - n: 105
+        of: T-174
+        by: '[Mishapolk issue 719 2026-10-22]'
+        method: exact re-solve (the source states no method)
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/resources/web/mishapolk-issue719-2026-10-22/measure/identity.json
+          one_to_one: true
+          moved: 42
+          max_move: 0.049
+          max_turn_deg: 2.411
+      - n: 204
+        of: T-225
+        by: '[Mishapolk issue 719 2026-10-22]'
+        method: exact re-solve (the source states no method)
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/resources/web/mishapolk-issue719-2026-10-22/measure/identity.json
+          one_to_one: true
+          moved: 67
+          max_move: 0.273
+          max_turn_deg: 25.64
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
