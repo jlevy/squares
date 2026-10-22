@@ -13,7 +13,8 @@ author: Codex, for the repository owner
 standalone-shell slice is complete; integrated validation, reader checks, and
 publication remain in progress.
 
-**Tracking:** `think-7kbb` (coordination); `think-je3b` (landing pages and Resources)
+**Tracking:** `think-7kbb` (coordination); `think-je3b` (landing pages and Resources);
+`think-izo6` (substantive collection pages); `think-39yu` (semantic test migration)
 
 **Workflow:** `tbd shortcut implement-beads`, following the reviewed navigation plan
 
@@ -533,15 +534,15 @@ open/closed states. Reuse the existing KPress, `paper-type.css`, and navigation 
 add a shared token only for a role the current system does not express.
 
 Collection links use **View All … →**: View All Results, View All Profiles, View All
-Resources, View All News, and View All Learning Materials where the destination is the
-complete collection.
+Resources, View All News, View All Papers, View All Tutorials, and View All Downloads.
+Each action leads to its complete collection.
 Render the existing shared right-arrow component after the label; keep the decorative
 icon out of the accessible name.
 Use the existing action-link component, with consistent size, padding, alignment, icon
 spacing, and focus treatment.
-Navigation styled as a button remains an actual anchor with its destination in `href`.
-Individual detail links name the case, result, person, or paper; contribution actions
-retain purpose-specific wording such as Report a Result.
+Collection navigation styled as a button remains an actual anchor with its destination
+in `href`. Individual detail links name the case, result, person, or paper; contribution
+actions retain purpose-specific wording such as Report a Result.
 Document this vocabulary and its examples in the same Design System entry.
 
 Use the same component and tokens in every page producer and the workbench shell.
@@ -667,8 +668,14 @@ tests, 11 Workbench navigation/input tests, and four standalone-paper tests.
 These cover the existing resource ranking and linked bylines, shared card text and
 dates, collection links, retained fragments, parent breadcrumbs, navigation scripts, and
 freshness inputs.
-The integrated build, full validation surface, and reader checks remain
-in Phase 3.
+The follow-up collection split passed 30 focused content checks and its
+canonical-route regression.
+All six changed page producers rendered through the published-math pipeline; the URL
+register checked at 1,154 entries with no failures.
+These checks cover the full tutorial, paper, poster, document, and contribution content
+on the new pages, plus preserved profile credits and legacy destination links.
+
+The integrated build, full validation surface, and reader checks remain in Phase 3.
 
 ### Phase 3: Verify reader journeys and publish
 

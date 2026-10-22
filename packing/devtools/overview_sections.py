@@ -2146,7 +2146,7 @@ def paper_cards(*, papers: Sequence[Paper] | None = None) -> str:
 
 
 def homepage_paper_cards() -> str:
-    """Three starting points in the Learn page's existing reading order."""
+    """Three starting points from the learning collections."""
     starting_points = (*PAPERS[-2:], PAPERS[0])
     return paper_cards(papers=starting_points)
 
@@ -2160,7 +2160,7 @@ def paper_downloads() -> str:
         for paper in PAPER_RECORDS
     )
     return (
-        '<div class="site-wide kpress-table-wrap"><table class="kpress-table">'
+        '<div class="kpress-table-wrap"><table class="kpress-table">'
         '<thead><tr><th scope="col">Paper</th><th scope="col">PDF</th>'
         '<th scope="col">Source</th></tr></thead>'
         f"<tbody>{rows}</tbody></table></div>"

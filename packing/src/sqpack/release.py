@@ -7092,6 +7092,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/overview/headroom.js",
             "packing/devtools/overview/navigation.js",
             "packing/devtools/overview_sections.py",
+            "packing/devtools/prepare_n11_lower_bounds_explainer_math.py",
             "packing/devtools/probes/measure_site_pages/glyphs.js",
             "packing/devtools/probes/prepare_n11_lower_bounds_explainer_math/measure_math.js",
             "packing/devtools/probes/preview_site/baselines.js",
@@ -7145,6 +7146,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "whitespace-only style attributes from cloned math hosts after font "
             "readiness; meaningful styles and MathML stay intact. This removes scheduling "
             "residue from serialization without changing mathematical content or layout. "
+            "The prepared measurement program is exported unchanged for regression reuse. "
             "The existing prepaint bootstrap now reserves the collapsed navigation "
             "geometry before first paint, without modifying paper content or print layout. "
             "No byte-identical HTML, Markdown or PDF rebuild against the baseline is "

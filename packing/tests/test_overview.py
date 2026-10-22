@@ -370,8 +370,7 @@ def test_the_homepage_keeps_the_original_packing_graphic_above_its_intro(page: s
 def _media_cards(page: str, section_id: str) -> list[tuple[str, str]]:
     """Direct poster cards under one Visuals or PDFs heading: destination and body."""
     section = page.split(f'id="{section_id}"', 1)[1]
-    section = re.split(r"<h[1-6]\b", section, maxsplit=1)[0]
-    frame = section.split('class="site-cards-frame', 1)[1]
+    frame = section.split('class="site-cards-frame', 1)[1].split("</div></div>", 1)[0]
     return re.findall(
         r'<a class="site-card site-card-link" href="([^"]+)"(.*?)</a>', frame, re.DOTALL
     )
@@ -604,7 +603,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
             )
             is None
         )
-    displayed_entries = (*entries[-2:], *entries[:-2])
+    displayed_entries = entries
     for (href, tag, body), paper in zip(cards, displayed_entries, strict=True):
         assert href in render_overview.SITE_PAGES, href
         assert tag == f' data-go="page" data-card-size="{paper.size}"', href
@@ -684,7 +683,7 @@ def test_every_other_direct_card_opens_in_a_new_tab(papers: str, downloads: str)
     """Reading cards navigate in the same tab; the print PDFs open in a new tab."""
     direct = re.findall(r'<a class="site-card[^"]*"[^>]*>', papers + downloads)
     same_tab = len(_page_cards(papers))
-    assert same_tab == len(overview_sections.PAPERS)
+    assert same_tab == len(render_overview.PAPERS)
     assert len(direct) == same_tab + len(overview_sections.PDF_CARD_SPECS)
     for tag in direct[:same_tab]:
         assert 'target="_blank"' not in tag, tag
@@ -7476,7 +7475,7 @@ def test_learning_collections_have_substantive_pages(
 def test_about_subcategories_keep_their_complete_content_on_dedicated_pages(
     about: str, documentation: str, report: str
 ) -> None:
-    assert len(re.findall(r'popovertarget="pop-doc-', documentation)) == len(
+    assert len(set(re.findall(r'popovertarget="(pop-doc-[^"]+)"', documentation))) == len(
         overview_sections.DOCUMENTS
     )
     assert "what name you wish to be used for credits" in _rendered_text(report)
