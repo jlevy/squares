@@ -321,6 +321,8 @@ class _Prose(HTMLParser):
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributes = dict(attrs)
         classes = (attributes.get("class") or "").split()
+        if attributes.get("data-profile-name") == "full":
+            classes.append("site-profile-full-names")
         if tag == "a" and self.enabled() and sum(name == "href" for name, _ in attrs) == 1:
             address = attributes.get("href") or ""
             identifier = profile_identifier(address, self.index.people)
@@ -406,6 +408,14 @@ class _Prose(HTMLParser):
                     for first, last, replacement in sorted(changes, reverse=True):
                         original = original[:first] + replacement + original[last:]
                     self.parts[start] = original
+                if self.full_names and "data-profile-name=" not in self.parts[start]:
+                    self.parts[start] = re.sub(
+                        r"(<a\b)",
+                        r'\1 data-profile-name="full"',
+                        self.parts[start],
+                        count=1,
+                        flags=re.IGNORECASE,
+                    )
                 for position in self.anchor_data:
                     self.parts[position] = ""
                 if self.anchor_data:
@@ -457,7 +467,8 @@ class _Prose(HTMLParser):
                 self.contexts.setdefault(context, Counter())[name] += 1
                 return name
             label = html.escape(self.label(identifier))
-            return f'<a href="{self.prefix}{PROFILES_DIR}/{identifier}.html">{label}</a>'
+            style = ' data-profile-name="full"' if self.full_names else ""
+            return f'<a href="{self.prefix}{PROFILES_DIR}/{identifier}.html"{style}>{label}</a>'
 
         self.parts.append(self.pattern.sub(replace, data))
 

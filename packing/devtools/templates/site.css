@@ -717,9 +717,15 @@ body {
     max-block-size: min(80vh, 40rem);
   }
 }
-.site-popover > .site-popover-close + * {
+.site-popover {
+  --site-popover-controls-inline: var(--site-popover-close);
+}
+.site-popover:has(> .site-popover-controls > .site-popover-expand) {
+  --site-popover-controls-inline: calc(2 * var(--site-popover-close));
+}
+.site-popover > .site-popover-controls + * {
   padding-inline-end: calc(
-    var(--site-popover-close) +
+    var(--site-popover-controls-inline) +
     var(--site-popover-close-inset) -
     var(--site-popover-pad)
   );
@@ -727,7 +733,15 @@ body {
 .site-popover::backdrop {
   background: var(--site-scrim);
 }
-.site-popover .site-popover-close {
+.site-popover-controls {
+  display: flex;
+  inline-size: max-content;
+  inset-block-start: var(--site-popover-close-inset);
+  inset-inline-end: var(--site-popover-close-inset);
+  position: absolute;
+  z-index: 2;
+}
+.site-popover :is(.site-popover-close, .site-popover-expand) {
   transition: var(--site-hover-transition);
   background: none;
   border: 0;
@@ -735,19 +749,30 @@ body {
   cursor: pointer;
   block-size: var(--site-popover-close);
   display: grid;
-  font-family: var(--kpress-font-sans);
-  font-size: 1.75rem;
-  font-weight: var(--site-font-weight-sans-light);
   inline-size: var(--site-popover-close);
-  inset-block-start: var(--site-popover-close-inset);
-  inset-inline-end: var(--site-popover-close-inset);
   line-height: 1;
+  padding: 0;
   place-items: center;
-  position: absolute;
+  text-decoration: none;
 }
-.site-popover .site-popover-close:is(:hover, :focus-visible) {
+.site-popover-controls svg {
+  block-size: 1.25rem;
+  inline-size: 1.25rem;
+}
+.site-popover :is(.site-popover-close, .site-popover-expand):is(:hover, :focus-visible) {
   background: var(--site-wash);
   color: var(--kpress-doc-text);
+}
+/* Fetched articles keep their full measure; only the title clears the header controls. */
+.site-row-pop > .site-popover-controls + .site-row-pop-body {
+  padding-inline-end: 0;
+}
+.site-row-pop-body > .site-result > h1 {
+  padding-inline-end: calc(
+    var(--site-popover-controls-inline) +
+    var(--site-popover-close-inset) -
+    var(--site-popover-pad)
+  );
 }
 .site-popover .site-popover-value {
   font-size: 1.15em;
@@ -1652,7 +1677,7 @@ body {
    drawn between two links, each link kept whole. They were a Details column of the
    table from 2026-10-02 (`think-e4o3`) to 2026-10-04 (`think-46fw`), one link to a line,
    and before that a line under the summary; the row reads more cleanly without them. */
-.site-row-pop .site-detail .site-records a + a::before {
+.site-row-pop .site-detail .site-records a:has(+ a)::after {
   color: var(--kpress-doc-muted);
   content: "·";
   display: inline-block;
@@ -2931,12 +2956,12 @@ html[data-site-atlas-view="triangle"]
   max-block-size: var(--site-popover-max-block);
   overflow: hidden auto;
 }
-/* The panel scrolls as a whole, so its close cross is held at its corner as the record
+/* The panel scrolls as a whole, so its header controls stay at the corner as the record
    scrolls under it, rather than leaving with the record's head: a record runs to many
    screens, and a phone leaves almost no room outside the panel to press. */
-.site-popover.site-case-pop .site-popover-close {
+.site-popover.site-case-pop > .site-popover-controls {
   background: var(--kpress-doc-bg);
-  display: block;
+  display: flex;
   float: none;
   inset-block-start: var(--site-popover-close-inset);
   /* Held at the top alone: the card's `inset-inline-end`, read by a sticky box as a
@@ -2953,9 +2978,6 @@ html[data-site-atlas-view="triangle"]
   margin-inline-end: calc(var(--site-popover-close-inset) - var(--site-popover-pad));
   position: sticky;
   z-index: 2;
-}
-.site-popover.site-case-pop .site-popover-close:is(:hover, :focus-visible) {
-  background: var(--site-wash);
 }
 .site-popover.site-case-pop > .site-case-pop-body {
   /* Only the steps beside the cross reserve its width; the article stays centred. */
@@ -2976,7 +2998,7 @@ html[data-site-atlas-view="triangle"]
     padding-inline: 0.75rem;
   }
   /* Its cross keeps to that narrower padding, as its steps do (below). */
-  .site-popover.site-case-pop .site-popover-close {
+  .site-popover.site-case-pop > .site-popover-controls {
     margin-inline-end: calc(var(--site-popover-close-inset) - 0.75rem);
   }
   .site-popover.site-case-pop:popover-open {
@@ -3003,14 +3025,18 @@ html[data-site-atlas-view="triangle"]
    ended under the cross (`think-0dxa`). */
 .site-case-pop .site-case-steps {
   padding-inline-end: calc(
-    var(--site-popover-close) +
+    var(--site-popover-controls-inline) +
     var(--site-popover-close-inset) -
     var(--site-popover-pad)
   );
 }
 @media (max-width: 40rem) {
   .site-case-pop .site-case-steps {
-    padding-inline-end: calc(var(--site-popover-close) + var(--site-popover-close-inset) - 0.75rem);
+    padding-inline-end: calc(
+      var(--site-popover-controls-inline) +
+      var(--site-popover-close-inset) -
+      0.75rem
+    );
   }
 }
 .site-case-eyebrow {
@@ -3482,7 +3508,7 @@ html[data-site-atlas-view="triangle"]
   margin-block-start: 2rem;
 }
 
-/* News is operational content: sans text, with one quiet frame for each entry. */
+/* News pairs serif prose with sans headings and metadata, in one quiet frame per entry. */
 .kpress .site-news {
   --site-news-hover-tint: 7%;
   font-family: var(--kpress-font-sans);
@@ -3525,6 +3551,13 @@ html[data-site-atlas-view="triangle"]
   overflow: hidden;
   position: relative;
   transition: max-block-size var(--site-hover-duration) var(--site-hover-easing);
+}
+.kpress .site-news-prose {
+  padding-block: 0.25rem;
+}
+.kpress .site-news-records {
+  color: var(--site-support-color);
+  margin-block-start: 1rem;
 }
 .kpress .site-news-body::before,
 .kpress .site-news-body::after {
@@ -3599,7 +3632,12 @@ html[data-site-atlas-view="triangle"]
   gap: 0.25rem;
   margin-block-end: 0.4rem;
 }
-.kpress .site-news-item > :is(p, ul, ol, blockquote) {
+.kpress .site-news-header > .site-article-date {
+  color: var(--site-support-color);
+}
+.kpress .site-news-item > :is(p, ul, ol, blockquote),
+.kpress .site-news-prose > :is(p, ul, ol, blockquote),
+.kpress .site-news-records > :is(p, ul, ol, blockquote) {
   margin-block: 0 0.5rem;
 }
 .kpress .site-news-metadata > .site-news-significance {
@@ -3625,7 +3663,9 @@ html[data-site-atlas-view="triangle"]
   margin-block-start: 1.25rem;
   padding-block-start: 0.5rem;
 }
-.kpress .site-news-item > :last-child {
+.kpress .site-news-item > :last-child,
+.kpress .site-news-prose > :last-child,
+.kpress .site-news-records > :last-child {
   margin-block-end: 0;
 }
 .site-news-legacy-anchor {

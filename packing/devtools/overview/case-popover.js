@@ -14,6 +14,7 @@
   const action = popover.querySelector("[data-case-open]");
   const frontierAction = popover.querySelector("[data-case-frontier]");
   const atlasAction = popover.querySelector("[data-case-atlas]");
+  const expand = popover.querySelector(".site-popover-expand");
   const close = popover.querySelector(".site-popover-close");
 
   /** What a click on a row leaves alone: the row's own links and controls. */
@@ -81,6 +82,7 @@
     const rel = ["prev", "next"].find((token) => opener.matches(`[rel~="${token}"]`));
     body.replaceChildren(article);
     action?.setAttribute("href", url);
+    expand?.setAttribute("href", url);
     const n = article.getAttribute("data-case");
     if (n !== null && /^\d+$/.test(n)) {
       const atlas = new URL("../atlas.html", url);

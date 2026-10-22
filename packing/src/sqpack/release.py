@@ -86,8 +86,18 @@ class PublicationHistoryEntry(NamedTuple):
 #:
 #: Reproduce with `gh api "repos/jlevy/squares/deployments?environment=github-pages"` and,
 #: for each deployment's commit, what the page it built stated.
-# The leading entry is proposed for PR #578; confirm its date at first deployment.
+# The leading entry is proposed for the next publication; confirm its date at first deployment.
 PUBLICATION_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.9.3",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Use full names in explanatory prose and resource bylines, order contribution "
+            "tallies consistently, distinguish News exposition from metadata, and add "
+            "header links from popovers to their standalone pages with consistent GitHub "
+            "link icons."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.9.2",
         first_published="October 22, 2026",
@@ -873,8 +883,13 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            form, 9b459da65 and 97e4069d5) went live
 #:                                            on October 1 and 2, so the substantive
 #:                                            day is the one recorded
-#: The leading entry is proposed for PR #578; confirm its date at first deployment.
+#: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.19",
+        first_published="October 22, 2026",
+        result_scope="Use full public names in explanatory narrative profile links.",
+    ),
     PublicationHistoryEntry(
         version="v0.4.18",
         first_published="October 22, 2026",
@@ -1052,8 +1067,13 @@ EXPLAINER_REVISED = "October 22, 2026"
 #: is the explainer's, linked from its front (`PaperFront.history`). v0.1.0 is dated by
 #: the commit that published it (620ffff54); the day it first went live is not recorded
 #: (think-2cqu).
-# The leading entry is proposed for PR #578; confirm its date at first deployment.
+# The leading entry is proposed for the next publication; confirm its date at first deployment.
 OPTIMALITY_REVIEW_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.10",
+        first_published="October 22, 2026",
+        result_scope="Use full public names in explanatory narrative profile links.",
+    ),
     PublicationHistoryEntry(
         version="v0.1.9",
         first_published="October 22, 2026",
@@ -1185,8 +1205,13 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 
 #: Every edition of Part II, the review of Overbeck's certified lower bound
 #: `s(11) > 31/8` (T-037), newest first, as `OPTIMALITY_REVIEW_HISTORY` is Part III's.
-# The leading entry is proposed for PR #578; confirm its date at first deployment.
+# The leading entry is proposed for the next publication; confirm its date at first deployment.
 THRESHOLD_REVIEW_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.3",
+        first_published="October 22, 2026",
+        result_scope="Use full public names in explanatory narrative profile links.",
+    ),
     PublicationHistoryEntry(
         version="v0.1.2",
         first_published="October 22, 2026",
@@ -1232,8 +1257,13 @@ THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 
 #: The standalone tutorial on finding and verifying record packings. Its version and
 #: dates belong to the paper, independently of the site and n = 11 series.
-#: The leading entry is proposed for PR #578; confirm its date at first deployment.
+#: The leading entry is proposed for the next publication; confirm its date at first deployment.
 PACKING_METHODS_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.2.6",
+        first_published="October 22, 2026",
+        result_scope="Use full public names in explanatory narrative profile links.",
+    ),
     PublicationHistoryEntry(
         version="v0.2.5",
         first_published="October 22, 2026",
@@ -1346,6 +1376,25 @@ class ReleaseImpactDecision(NamedTuple):
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.18",
+        version="v0.4.19",
+        impact="patch",
+        reason="Use full public names in explanatory narrative profile links.",
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.9.2",
+        version="v0.9.3",
+        impact="patch",
+        reason=(
+            "Use full names in explanatory prose and resource bylines, order contribution "
+            "tallies consistently, distinguish News exposition from metadata, and add "
+            "header links from popovers to their standalone pages with consistent GitHub "
+            "link icons."
+        ),
+    ),
+    ReleaseImpactDecision(
         component="site",
         previous_version="v0.9.1",
         version="v0.9.2",
@@ -1366,6 +1415,27 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
             "Update the registered result count after the registration of Mykhailo "
             "Polkovskyi's #719 re-solves at 105 and 204 (T-229)."
         ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:square-packing-methods-survey",
+        previous_version="v0.2.5",
+        version="v0.2.6",
+        impact="patch",
+        reason="Use full public names in explanatory narrative profile links.",
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-threshold-bound-review",
+        previous_version="v0.1.2",
+        version="v0.1.3",
+        impact="patch",
+        reason="Use full public names in explanatory narrative profile links.",
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-optimality-review",
+        previous_version="v0.1.9",
+        version="v0.1.10",
+        impact="patch",
+        reason="Use full public names in explanatory narrative profile links.",
     ),
     ReleaseImpactDecision(
         component="paper:square-packing-methods-survey",
@@ -7129,7 +7199,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "7ff5b129"
+PUBLICATION_REVISION = "e44a51f443efacb415c85d13754b56b0831b3068"
 
 
 def data_pathspec() -> tuple[str, ...]:
