@@ -144,7 +144,7 @@ def test_news_has_one_card_per_entry_and_home_highlights_three_existing_s5_resul
     for day in {entry["date"] for entry in ordered}:
         assert news.count(f'id="changelog-date-{day}"') == 1
     selected = news_highlights.highlights(document)
-    assert [entry["result_ids"] for entry in selected] == [["T-154"], ["T-153"], ["T-060"]]
+    assert [entry["result_ids"] for entry in selected] == [["T-194"], ["T-154"], ["T-153"]]
     assert re.findall(r'data-news-entry="([^"]+)"', home) == [entry["id"] for entry in selected]
     for entry in selected:
         anchor = render_changelog.entry_anchor(entry["id"])

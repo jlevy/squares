@@ -1174,8 +1174,11 @@ def test_a_news_item_at_the_result_score_satisfies_the_gate() -> None:
     # Only an item News shows counts, at the result's own score or above.
     low = {"entries": [_news("low", 4, "T-901", "T-903")]}
     hidden = {"entries": [{**_news("hidden", 5, "T-901", "T-903"), "news_exclusion": "x"}]}
+    # An S2 entry is history News never shows, which is where T-064 and T-081 sat.
+    unshown = {"entries": [_news("attribution", 2, "T-901", "T-903")]}
     assert [r["id"] for r in render_changelog.owed_announcements(low, results)] == ["T-901"]
     assert len(render_changelog.owed_announcements(hidden, results)) == 2
+    assert len(render_changelog.owed_announcements(unshown, results)) == 2
 
 
 @pytest.mark.usefixtures("no_exemptions")
@@ -1196,6 +1199,12 @@ def test_a_raise_to_s4_is_owed_after_its_merge_and_fails_once_on_main() -> None:
     )
     assert notes == []
     assert [f.split(" is on main")[0] for f in failures] == ["T-904 (S4)"]
+    # Exactly as a new registration: owed on its own branch, failed once on main.
+    registered = render_changelog.check_announcements(empty, raised, [], locate=_merged_at_42)
+    assert registered == ([], [note])
+    assert render_changelog.check_announcements(
+        empty, raised, raised, locate=_merged_at_42
+    ) == (failures, [])
     # An S4 item does not announce a later raise to S5.
     s4_item = {"entries": [_news("item", 4, "T-904")]}
     to_five = [_result("T-904", 5)]
