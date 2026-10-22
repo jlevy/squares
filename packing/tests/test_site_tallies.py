@@ -242,6 +242,53 @@ def test_shared_packet_project_primary_and_credit_totals_respect_specific_roles(
     assert project_credit_associations({"massaccesi"}, {"shared-packet"}, spans, records) == ()
 
 
+@pytest.mark.parametrize("disposition", ["non-person", "unresolved"])
+def test_projects_without_profile_ids_require_exact_reviewed_source_authorship(
+    disposition: str,
+) -> None:
+    spans = [
+        replace(author("own"), disposition=disposition, contributor_id=None),
+        replace(author("unrelated"), disposition=disposition, contributor_id=None),
+        occurrence(BIBLIOGRAPHY, "acknowledgment", disposition=disposition),
+        occurrence(
+            BIBLIOGRAPHY,
+            "prerequisite",
+            "/authors/0",
+            disposition=disposition,
+            role="prerequisite",
+        ),
+        occurrence(BIBLIOGRAPHY, "credit-only", disposition=disposition, role="source-author"),
+        author("resolved-person"),
+    ]
+    keys = {
+        "own",
+        "acknowledgment",
+        "prerequisite",
+        "credit-only",
+        "unreviewed",
+        "resolved-person",
+    }
+    records = [
+        {"id": key, "attribution": {"source_keys": [key]}}
+        for key in sorted(keys | {"unrelated"})
+    ]
+    records.extend(
+        [
+            {
+                "id": "later-credit",
+                "attribution": {"source_keys": ["unrelated"]},
+                "builds_on": {"source_keys": ["own"]},
+            },
+            {"id": "first-party", "builds_on": {"source_keys": ["own"]}},
+            {"id": "own", "attribution": {"source_keys": ["own"]}},
+        ]
+    )
+    assert project_primary_results((), keys, iter(spans), records) == ("own",)
+    assert project_primary_results({"another-person"}, keys, spans, records) == ()
+    assert person_credit_stats("person", spans, records).results == ("resolved-person",)
+    assert project_credit_associations((), keys, spans, records) is None
+
+
 def test_tallies_deduplicate_their_own_units_and_use_the_citing_results_significance() -> None:
     measures = {"T-1": (5, "2026-10-01"), "T-2": (3, "2026-10-03"), "T-3": (3, "")}
     tally = tally_results(["T-2", "T-1", "T-2", "T-3"], measures, [1, 5, 3, 4, 2])

@@ -161,15 +161,34 @@ def project_primary_results(
     occurrences: Iterable[CreditOccurrence],
     raw_records: Iterable[Mapping[str, Any]],
 ) -> tuple[str, ...]:
-    """Primary results for identified project authors through its explicit sources."""
+    """Primary results through the project's explicit, reviewed authored sources.
+
+    Identified bylines keep the per-person role exclusions. Without a resolved byline,
+    reviewed non-person or unresolved source-author spans establish project authorship
+    only; they cannot assign a personal result or turn a later citation into authorship.
+    """
+    occurrences = tuple(occurrences)
     assignments = _assignments(occurrences)
     people = frozenset(identifiers)
+    unidentified_sources = (
+        {
+            item.origin.record_key
+            for item in occurrences
+            if _source_author(item) and item.disposition in {"non-person", "unresolved"}
+        }.intersection(source_keys)
+        if not people
+        else set()
+    )
     return tuple(
         dict.fromkeys(
             str(record["id"])
             for record in raw_records
             if people.intersection(
                 _primary_authors(record, assignments, source_keys=source_keys)
+            )
+            or (
+                not is_first_party(record)
+                and unidentified_sources.intersection(record["attribution"]["source_keys"])
             )
         )
     )

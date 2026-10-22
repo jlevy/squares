@@ -380,6 +380,64 @@ def _attributed(
     return [result for result in overview.results if result.id in ids]
 
 
+@pytest.mark.parametrize(
+    ("url", "expected"),
+    [
+        ("https://github.com/BuddenPing/squares", {"T-174", "T-195"}),
+        (
+            "https://github.com/BuddenPing/square-packing-certificates",
+            {"T-147", "T-148", "T-164", "T-167", "T-168", "T-169", "T-166", "T-170", "T-171"},
+        ),
+    ],
+)
+def test_corporate_project_cards_and_filters_retain_canonical_primary_results(
+    url: str,
+    expected: set[str],
+    *,
+    overview: overview_data.Overview,
+    project_inputs: _ProjectInputs,
+    page: str,
+    results_page: str,
+) -> None:
+    """These reviewed source-authored IDs belong to PingYou Ltd without a human join."""
+    resource = next(record for record in project_inputs.resources if record.url == url)
+    assert resource.profile_ids == ()
+    ranked = overview_sections.ranked_projects(overview)
+    tally = dict(ranked)[url]
+    assert set(tally.results) == expected
+    levels = [
+        overview_sections.significance(result)
+        for result in overview.results
+        if result.id in expected
+    ]
+    counts = tuple((level, levels.count(level)) for level in LEVELS)
+    assert tally.counts == counts
+    position = next(index for index, (project, _) in enumerate(ranked) if project == url)
+    assert all(any(count for _, count in earlier.counts) for _, earlier in ranked[:position])
+    assert all(
+        tuple(count for _, count in later.counts) <= tuple(count for _, count in counts)
+        for _, later in ranked[position + 1 :]
+    )
+    cards = _cards(page)
+    assert cards[position][0] == url
+    foot = dict(cards)[url]
+    assert f">{len(expected)} results</a>" in foot
+    slug = overview_sections.project_slug(url)
+    assert f'href="results.html?project={slug}"' in foot
+    for level, count in counts:
+        if count:
+            assert f'href="results.html?project={slug}&amp;s={level}"' in foot
+    assert overview_sections.resource_byline(resource) == "By PingYou Ltd"
+    memberships = {
+        result.id
+        for result in overview.results
+        if slug in overview_sections.result_projects(result)
+    }
+    assert memberships == expected
+    facets = dict(re.findall(r'<tr id="(t-\d+)"[^>]*\sdata-project="([^"]*)"', results_page))
+    assert {row.upper() for row, listed in facets.items() if slug in listed.split()} == expected
+
+
 def test_project_oracle_reuses_inputs_without_reloading_source_records(
     overview: overview_data.Overview,
     project_inputs: _ProjectInputs,

@@ -2430,7 +2430,7 @@ def project_source_keys() -> dict[str, frozenset[str]]:
     """Each listed project's bibliography keys: those the source-coverage register gives
     the sources at its address, those `PROJECT_EXTRA_KEYS` adds, and every key whose
     venue is the project's in `SOURCE_VENUES`. These keys establish source scope;
-    reviewed person roles separately decide primary Results and received Credits."""
+    reviewed author and credit roles separately decide primary Results and received Credits."""
     coverage = safe_load(SOURCE_COVERAGE.read_text(encoding="utf-8"))["sources"]
     bibliography = safe_load(BIBLIOGRAPHY.read_text(encoding="utf-8"))["sources"]
     keys: dict[str, set[str]] = {
@@ -2460,7 +2460,7 @@ def _project_primary_ids() -> dict[str, frozenset[str]]:
 
 
 def result_projects(result: Result) -> tuple[str, ...]:
-    """Projects whose identified authors primarily authored this registered result."""
+    """Projects with reviewed primary authorship of this registered result."""
     return tuple(
         project_slug(url) for url, ids in _project_primary_ids().items() if result.id in ids
     )

@@ -1388,8 +1388,12 @@ contributor articles use their component sheets and the same text tokens.
   `resource_cards` and the shared `project_order`); inventory insertion order is not a
   presentation rule. A project’s source keys define its scope (`project_source_keys`,
   with `PROJECT_EXTRA_KEYS` and `SOURCE_VENUES` for shared packets and catalogue
-  venues). Reviewed person roles determine which scoped results count as primary Results
-  and which count as received Credits; source-key presence alone establishes neither.
+  venues). Reviewed person roles determine primary Results and received Credits for
+  resolved bylines, including prerequisite exclusions in shared source packets.
+  A resource without resolved byline IDs retains results explicitly attributed to its
+  source keys when a bibliography author span is reviewed as non-person or unresolved.
+  This establishes project authorship while leaving personal identities and credit
+  counts unresolved. Acknowledgments and later citations do not establish authorship.
   A card’s repository or website title opens that source.
   Below the repository heading, its byline begins with “By” and the author: a known
   person links to their profile using the shared surname label, while an organization or
