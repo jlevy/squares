@@ -1,0 +1,6 @@
+T-226@204: accepted=True agree=True n=204 side=45044217780850246618141/3041751595240000000000
+  Z: pairs=20706 overlaps=0 touching=0 wall_contacts=16 least_wall=0 at (4, 'y>=0') least_gap=5.4747204246381434e-11 at (123, 132, 0) cpu=0.065s
+  C: pairs=20706 near=498 positive_area=0 touching=0 corner_wall_contacts=32 cpu=1.765s
+T-228@204: accepted=True agree=True n=204 side=101859759444979981360793459/6878398651426000000000000
+  Z: pairs=20706 overlaps=0 touching=0 wall_contacts=44 least_wall=0 at (0, 'x<=S') least_gap=1.2009999788951037e-12 at (67, 72, 0) cpu=0.069s
+  C: pairs=20706 near=487 positive_area=0 touching=0 corner_wall_contacts=88 cpu=1.85s

@@ -692,6 +692,8 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: Mykhailo Polkovskyi’s Certificates at 105 and 204 from Issue #719 (T-229)](docs/project/reviews/review-2026-10-22-mishapolk-719.md) | dated review record | record | retained | — |
+| [Review: Francisco Couzo’s Certificates at 204, 227 and 229 from Issues #670, #672 and #675 (T-226, T-227, T-228)](docs/project/reviews/review-2026-10-22-couzo-670-672-675.md) | dated review record | record | retained | — |
 | [Profile Coverage and Result-Intake Boundaries, 21 October 2026](docs/project/reviews/review-2026-10-21-profile-coverage.md) | dated review record | record | retained | — |
 | [Project PDF Credit Coverage, 21 October 2026](packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md) | dated review record | record | retained | — |
 | [Attribution Policy](attribution.md) | artifact and naming conventions | definitive | maintained | — |

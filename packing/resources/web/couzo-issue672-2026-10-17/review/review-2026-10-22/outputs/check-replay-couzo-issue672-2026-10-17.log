@@ -1,0 +1,16 @@
+{
+  "227": {
+    "exact_verify_containment_clearance": "1/1000000000000000",
+    "exact_verify_best_pair_gap": "8746396849245434078609221/7273482587599361164347576400000000000",
+    "independent_containment_clearance": "1/1000000000000000",
+    "independent_best_pair_gap": "8746396849245434078609221/7273482587599361164347576400000000000"
+  },
+  "229": {
+    "exact_verify_containment_clearance": "0",
+    "exact_verify_best_pair_gap": "6712226670413738924562179/5598411663425125109555191500000000000",
+    "independent_containment_clearance": "0",
+    "independent_best_pair_gap": "6712226670413738924562179/5598411663425125109555191500000000000"
+  }
+}
+2 certificates and 6 jobs admitted
+exit 0 wall 35.877396773 s

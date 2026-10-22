@@ -1,0 +1,5 @@
+verify.py as a script on triage-719/src/pin/certificates/n-105.cert: exit=0 output=[]
+verify.py as a script on review-t229/data/vacuity/n-105-duplicate-square.cert: exit=0 output=[]
+verify.py as a script on /nonexistent/n-999.cert: exit=0 output=[]
+56bc5b9f690b054ba30e82547dea4aa9d0ccea0a2b1827fab28fcc4e98677337  /tmp/claude-0/-home-user-squares/b4f98ade-a1fc-58c0-8f31-b56020d9544c/scratchpad/wt-t229r/packing/src/sqpack/verify.py
+56bc5b9f690b054ba30e82547dea4aa9d0ccea0a2b1827fab28fcc4e98677337  -
