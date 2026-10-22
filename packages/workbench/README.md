@@ -206,12 +206,13 @@ of each `python -m` and `squares-workbench-*` command below.
 2. **Decide the version first.** Every frame prints `PUBLICATION_EDITION` from
    `packing/src/sqpack/release.py`, and the release tag is `PUBLICATION_VERSION`, so the
    version is fixed before capture, never after.
-   New data does not move it by itself: the stamp’s data revision names the data, and
-   the version names an edition the owner cuts, at most one per merge, by
-   [Cutting an edition](../../development.md#cutting-an-edition).
-   Ask the owner whether this re-cut goes out under the current version or a new one.
-   A new one is cut and merged in its own pull request, and this procedure then starts
-   from that merge.
+   New data does not move it by itself: the stamp’s data revision names the data.
+   Site editions are retired as of 22 October 2026
+   ([Cutting an edition](../../development.md#cutting-an-edition); `think-wdqo`), so no
+   new version can be cut for a film: `PUBLICATION_VERSION` stays at the last site
+   edition until snapshot releases give the films a version of their own.
+   Ask the owner whether this re-cut goes out now, under that frozen version, or waits
+   for the first snapshot release.
 
 3. **Preflight.** On a clean tree (`git status` empty; the receipt records `dirty`):
    - `python -m pytest tests/test_release.py` passes, so the pinned `DATA_REVISION` is

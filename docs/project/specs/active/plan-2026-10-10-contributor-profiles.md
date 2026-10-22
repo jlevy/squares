@@ -160,6 +160,8 @@ Its limit is 255 MiB, the least whole MiB above the measured surface, leaving 88
 bytes at that measurement.
 Three portable workers are bounded at 765 MiB. Source selection and the oversized
 pre-clone refusal are unchanged.
+Later on 22 October the owner reset the limit to 512 MiB, a coarse bound rather than a
+per-branch raise; the measurement above stands.
 The new head needs fresh push, full-checkpoint and website-build evidence; earlier green
 heads do not validate this integration.
 
