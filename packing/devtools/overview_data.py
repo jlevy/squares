@@ -49,7 +49,7 @@ from devtools.render_recent_results import (
 )
 from devtools.render_research_tables import load_cases
 from devtools.repo_links import path_kind, repo_url
-from devtools.result_credit import credit_line, regularization_sentence
+from devtools.result_credit import credit_line, regularization_sentence, result_credit_html
 from devtools.significance import headline as first_sentence
 from sqpack.yamlio import safe_load
 
@@ -159,7 +159,16 @@ def math_html(tex: str, *, display: bool = False) -> str:
         _render_math,  # pyright: ignore[reportPrivateUsage]
     )
 
-    return _render_math(tex, display="display" if display else "inline", math="auto", env={})
+    rendered = _render_math(
+        tex, display="display" if display else "inline", math="auto", env={}
+    )
+    # MathML's padded numeric entities and their UTF-8 characters have identical XML
+    # semantics. Keep XML delimiters escaped; neither attributes nor math state change.
+    return re.sub(
+        r"&#(?:x[0-9a-fA-F]+|[0-9]+);",
+        lambda match: html.escape(html.unescape(match[0]), quote=True),
+        rendered,
+    )
 
 
 #: One inline code span in register prose. Headlines write their mathematics this way
@@ -292,6 +301,7 @@ class Result:
     group: str
     credit: str
     ours: bool
+    credit_html: str = ""
     records: list[Link] = field(default_factory=list)
     standing: str = ""
     """Whether a case bound rests on the result now, and if not, why not:
@@ -514,6 +524,7 @@ def load() -> Overview:
                 group=title,
                 credit=credit_line(r, sources).replace(r"\|", "|"),
                 ours=not r.get("attribution"),
+                credit_html=result_credit_html(r, sources),
                 records=_records(r, evidence, register_lines, evidence_lines),
                 standing=(stands := standing(r, records)),
                 status=result_status.status(r, evidence),

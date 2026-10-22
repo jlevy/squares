@@ -1,0 +1,45 @@
+{
+  "n": 757,
+  "packing": "n757.txt",
+  "packing_sha256": "f2dc6effe816361c73208c7dca9b9af872e46ad36dd32dea348ceeb39661a80e",
+  "certificate": "certificates/n757.cert",
+  "certificate_sha256": "3ce00d0caf79697df985cde9fdbf8d6c0c04407222ae07093b01fc54db6686e5",
+  "rational_side": "3079801049630369768609999/110032439628400000000000",
+  "kind": "rational witness",
+  "origin": {
+    "web_seed": {
+      "id": "448ca0fb69279fce411a09156abb9163",
+      "n": 757,
+      "side": 27.992467660526856,
+      "method": "fq",
+      "received": "20261014T020653Z",
+      "original_packing_sha256": "244eaf1c42e0fff13d15d4b3fc46373da4a43ac3d40e109fbb920dc38e2fbcdc"
+    },
+    "seed_credit": "Kevin Fang (rectangle and gluing); PingYou Ltd (BuddenPing) (square input)",
+    "construction": {
+      "parent_n": 41,
+      "parent_certificate_sha256": "64deb2b43e507a11d80316516e4f167c505afc20f60f31df0c3a1a1f6f81f518",
+      "rectangle": "r22x21_n0443",
+      "rectangle_sha256": "db13813740cd979cfcdb071a6a252239df85936748b93f1ac4234e8c3f096d3c",
+      "source_revision": "078789a4cfd36f915f1bfbe76d742413d79b2965"
+    },
+    "search_job": {
+      "id": 106579,
+      "method": "slp",
+      "source": "n757.txt",
+      "source_origin": "constructed",
+      "source_sha256": "c31cc70b9889e4dca33fcbc5c3415893c00784f28409f15436e03e8f18b9aff8",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n757.txt",
+        "source_sha256": "bf36a0b8112b69e92ae94eedcfa0d50bc770b22a7e93eae94c1df302d75ec86b",
+        "source_n": 757,
+        "source_side": 27.989936988179046,
+        "layers": 0,
+        "deleted": 0,
+        "side": 27.989936988179046
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

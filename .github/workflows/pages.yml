@@ -105,6 +105,7 @@ name: Certificate page
       - packing/frontier/n-011.md
       - packing/atlas/known-best/composite-figure.json
       - packing/atlas/known-best/bound-citations.json
+      - packing/atlas/known-best/credit-attributions.json
       - packing/atlas/known-best/rendering/**
       - packing/atlas/known-best/regularized/index.json
       - packing/atlas/known-best/default-drawings.json
@@ -119,6 +120,7 @@ name: Certificate page
       - packing/devtools/templates/site-math.css
       - packing/devtools/templates/site.css
       - packing/devtools/templates/site-result.css
+      - packing/devtools/templates/site-contributor.css
       - packing/devtools/templates/overview-article.md
       - packing/devtools/templates/atlas-article.md
       - packing/devtools/templates/about-article.md
@@ -129,6 +131,17 @@ name: Certificate page
       - packing/devtools/templates/papers-article.md
       - packing/devtools/templates/site-forwarder.html
       - packing/devtools/render_overview.py
+      - packing/devtools/render_contributors.py
+      - packing/devtools/profile_links.py
+      - packing/devtools/site_icons.py
+      - packing/devtools/site_resources.py
+      - packing/devtools/site_tallies.py
+      - packing/devtools/profile_records.py
+      - packing/devtools/record_presentation.py
+      - packing/devtools/github_references.py
+      - packing/devtools/contributor_credit.py
+      - packing/contributors/**
+      - packing/resources/**
       - packing/devtools/overview_data.py
       - packing/devtools/overview_sections.py
       - packing/devtools/build_known_best_atlas.py
@@ -168,7 +181,9 @@ name: Certificate page
       - README.md
       - SYNOPSIS.md
       - conventions.md
+      - attribution.md
       - development.md
+      - LICENSE
       - packing/devtools/templates/fonts/**
       - packing/atlas/known-best/known-best-1-100.svg
       - packing/atlas/known-best/known-best-1-100.png
@@ -960,7 +975,8 @@ jobs:
       # The same partial checkout as `prepare`, with the exact-optima comparison receipt
       # also retained for pictured-source credit. Reopen only its ancestors and file;
       # the remaining archive stays omitted. Top-level bibliography.yaml is kept too.
-      # The reader
+      # Before rendering, --checkout-evidence restores the exact bylines and reviewed
+      # occurrence inputs declared by contributor records. The reader
       # documents' repository links, which name `main`, are resolved against the checked-out
       # commit's tree with `git ls-tree`, which reads only tree objects: a blobless clone of
       # depth one already holds every tree of that commit, so the render needs no history
@@ -1010,6 +1026,7 @@ jobs:
       # lacks, so those failures stop the build here too.
       - name: Render the site's pages twice and require the renders to agree
         run: |
+          uv run --frozen --group dev python -m devtools.render_contributors --checkout-evidence
           twin="$RUNNER_TEMP/render-twin"
           uv run --frozen --group dev python -m devtools.render_overview --output "$twin" &
           twin_pid=$!

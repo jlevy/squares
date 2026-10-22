@@ -20,10 +20,11 @@ import html
 import re
 from collections import Counter
 from datetime import date, timedelta
+from html.parser import HTMLParser
 
 import pytest
 
-from devtools import overview_data, overview_sections, render_overview
+from devtools import overview_data, overview_sections, profile_links, render_overview
 from devtools.overview_data import EN_DASH
 from devtools.overview_sections import (
     ADDED_DAYS,
@@ -49,11 +50,8 @@ WEEK = re.compile(
 #: One day's disclosure in the seven days: its date, whether it starts open, the rest.
 DAY = re.compile(r'<details data-day="(\d{4}-\d{2}-\d{2})"( open)?>(.*?)</details>', re.DOTALL)
 #: One finder's line: the project its name links to, if any, the name, and the rest.
-LINE = re.compile(
-    r'<li><span class="site-rollup-who">(?:<a href="([^"]+)"[^>]*>)?([^<]+)(?:</a>)?</span>'
-    r"(.*?)</li>",
-    re.DOTALL,
-)
+LINE = re.compile(r'<li><span class="site-rollup-who">()(.*?)</span> (.*?)</li>', re.DOTALL)
+
 #: One result's link in a line, with its attributes, and what it says to a screen
 #: reader past its id when it has been superseded.
 ID_LINK = re.compile(
@@ -67,10 +65,11 @@ ID_LINK = re.compile(
 #: been superseded.
 ENTRY = re.compile(
     r'<li( class="site-rollup-superseded")?><a href="#(t-\d{3})"( title="Superseded")?>'
-    r"(T-\d{3})</a> ([^<]*)<small>([^<]*) · (V\d) (C\d) (<b>S\d</b>|S\d) · "
-    r'(?:<a href="([^"]+)" target="_blank" rel="noopener noreferrer">)?([^<]+)(?:</a>)?'
-    r"( · superseded)?</small></li>"
+    r"(T-\d{3})</a> (.*?)<small>([^<]*) · (V\d) (C\d) (<b>S\d</b>|S\d) · "
+    r"()(.*?)( · superseded)?</small></li>",
+    re.DOTALL,
 )
+
 #: A day's link to its own rows: the day it filters on and how many it says it shows.
 DAY_LINK = re.compile(
     r'<p><a href="results\.html\?added=(\d{4}-\d{2}-\d{2})#all-results">'
@@ -170,10 +169,24 @@ def test_the_overview_sits_above_the_table_and_leaves_it_whole(
         results.index('<div class="site-rollup site-added">'),
         results.index('<h2 id="earlier-results-by-week-published">'),
         results.index('<div class="site-rollup">'),
-        results.index('<h1 id="all-results">'),
+        results.index('<h2 id="all-results">'),
         results.index("data-site-table"),
     ]
     assert order == sorted(order)
+    headings = re.findall(r"<h([1-6])\b[^>]*>(.*?)</h\1>", results, re.DOTALL)
+    assert [(level, re.sub(r"<[^>]+>", "", body)) for level, body in headings] == [
+        ("1", "Results"),
+        ("2", "Added in the Last Seven Days"),
+        ("2", "Earlier Publications"),
+        ("2", "Verification Ladders"),
+        ("2", "Evidence and Exactness"),
+        ("2", "Result Types and Credits"),
+        ("2", "Status and Supersession"),
+        ("2", "Browse Results"),
+    ]
+    assert not any(re.search(r"<a\b[^>]*\bhref=", body) for _, body in headings)
+    for anchor in ("every-result", "results-and-credits"):
+        assert results.count(f'id="{anchor}"') == 1
     rows = re.findall(r'<tr id="(t-\d{3})"', results)
     assert sorted(rows) == sorted(result.id.lower() for result in overview.results)
 
@@ -182,16 +195,19 @@ def test_the_introductions_state_the_window_and_the_floor_from_the_code(
     results: str, overview: overview_data.Overview
 ) -> None:
     """The template types neither the days, the floor nor the weeks: all are filled in.
-    The seven days' heading opens the table on the section's own days, from its first,
+    The introduction opens the table on the section's own days, from its first,
     `?added-since=`, so it lists the same results on any later day (#514's review A,
-    finding A3); the introduction links the last day's arrivals by the reader's day."""
+    finding A3); it also links the last day's arrivals by the reader's day."""
     first, last = _window(overview)
     days = ADDED_DAYS_WORD[ADDED_DAYS]
     assert (
-        '<h2 id="added-in-the-last-seven-days"><a href="results.html?added-since='
-        f'{first.isoformat()}#all-results">Added in the Last {days.capitalize()} Days</a></h2>'
+        f'<h2 id="added-in-the-last-seven-days">Added in the Last {days.capitalize()} Days</h2>'
     ) in results
     prose = " ".join(results.split())
+    assert (
+        '<a href="results.html?added-since='
+        f'{first.isoformat()}#all-results">Browse these arrivals</a>'
+    ) in prose
     assert f"reached this site over {span_label(first, last)} (its newest day and the" in prose
     last_day = '<a href="results.html?added-age=1#all-results">what arrived in the last day</a>'
     assert last_day in prose
@@ -229,6 +245,67 @@ def test_each_day_lists_exactly_the_entries_that_arrived_on_it(
         assert f"· {count} result{'' if count == 1 else 's'}</span>" in body, day
 
 
+class _CreditHTML(HTMLParser):
+    """Keep credit text, element order and exact attributes while ignoring quotes."""
+
+    def __init__(self, markup: str) -> None:
+        super().__init__(convert_charrefs=True)
+        self.events: list[tuple[str, object]] = []
+        self.parts: list[str] = []
+        self.links: list[dict[str, str | None]] = []
+        self.feed(markup)
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.events.append(("start", (tag, sorted(attrs))))
+        if tag == "a":
+            self.links.append(dict(attrs))
+
+    def handle_endtag(self, tag: str) -> None:
+        self.events.append(("end", tag))
+
+    def handle_data(self, data: str) -> None:
+        self.events.append(("text", data))
+        self.parts.append(data)
+
+
+def _assert_finder(
+    markup: str, own: list[overview_data.Result] | tuple[overview_data.Result, ...]
+) -> None:
+    """Retain the reviewed joins; a conflicting grouping must not choose one identity."""
+    finders = {credit_finder(result.credit) for result in own}
+    assert len(finders) == 1
+    finder = next(iter(finders))
+    reviewed = {
+        credit_finder(result.credit_html or html.escape(result.credit)) for result in own
+    }
+    actual = _CreditHTML(markup)
+    if len(reviewed) != 1:
+        assert actual.events == _CreditHTML(html.escape(finder)).events
+        return
+    expected = next(iter(reviewed))
+    if any(
+        (link.get("href") or "").startswith("profiles/") for link in _CreditHTML(expected).links
+    ):
+        assert (
+            actual.events
+            == _CreditHTML(f"<span data-contributor-plain>{expected}</span>").events
+        )
+        assert all(link.get("target") != "_blank" for link in actual.links)
+        return
+    assert "".join(actual.parts) == finder
+    held = Counter(slug for result in own for slug in overview_sections.result_projects(result))
+    links = [link.get("href") for link in actual.links]
+    if not held:
+        assert not links
+    else:
+        addresses = {
+            overview_sections.project_slug(url): url for url in overview_sections.project_urls()
+        }
+        most = max(held.values())
+        assert len(links) == 1
+        assert links[0] in {addresses[slug] for slug, count in held.items() if count == most}
+
+
 def test_a_day_entry_says_what_the_row_says(
     added: str, results: str, overview: overview_data.Overview
 ) -> None:
@@ -239,9 +316,6 @@ def test_a_day_entry_says_what_the_row_says(
     none does; and it is muted and its id titled exactly where it is superseded. The
     entries of a day run from the highest S rung, then by id."""
     by_id = {result.id.lower(): result for result in overview.results}
-    addresses = {
-        overview_sections.project_slug(url): url for url in overview_sections.project_urls()
-    }
     for _, _, body in DAY.findall(added):
         entries = ENTRY.findall(body)
         keys = []
@@ -263,7 +337,10 @@ def test_a_day_entry_says_what_the_row_says(
             record = result.record
             assert label.lower() == anchor
             assert f'<tr id="{anchor}"' in results
-            assert html.unescape(headline) == overview_sections.plain_text(result.summary)
+            expected_headline = profile_links.link_prose(
+                html.escape(overview_sections.plain_text(result.summary), quote=False)
+            )
+            assert _CreditHTML(headline).events == _CreditHTML(expected_headline).events
             if len(result.scope) <= overview_sections.ADDED_CASES:
                 assert html.unescape(cases) == f"n = {result.scope}", anchor
             else:
@@ -272,9 +349,8 @@ def test_a_day_entry_says_what_the_row_says(
             level = overview_sections.significance(result)
             bold = level > ROLLUP_FLOOR
             assert score == (f"<b>S{level}</b>" if bold else f"S{level}"), anchor
-            assert html.unescape(name) == credit_finder(result.credit), anchor
-            projects = overview_sections.result_projects(result)
-            assert href == (addresses[projects[0]] if projects else ""), anchor
+            _assert_finder(name, (result,))
+            assert not href
             superseded = overview_sections.is_superseded(result)
             assert bool(muted) == bool(title) == bool(note) == superseded, anchor
             keys.append((-level, result.id))
@@ -387,25 +463,15 @@ def test_a_line_credits_its_finder_and_links_the_project_holding_most_of_it(
     finder has one line a week. The name links to a listed project the record attributes
     the most of the line's results to, and is plain where no listed project holds any."""
     by_id = {result.id.lower(): result for result in overview.results}
-    addresses = {
-        overview_sections.project_slug(url): url for url in overview_sections.project_urls()
-    }
     for week, _, body in WEEK.findall(rollup):
         lines = LINE.findall(body)
-        names = [html.unescape(name) for _, name, _ in lines]
+        names = [html.unescape(re.sub(r"<[^>]*>", "", name)) for _, name, _ in lines]
         assert len(names) == len(set(names)), week
         for href, name, rest in lines:
             own = [by_id[anchor] for anchor, *_ in ID_LINK.findall(rest)]
             assert own, (week, name)
-            assert {credit_finder(result.credit) for result in own} == {html.unescape(name)}
-            held = Counter(
-                slug for result in own for slug in overview_sections.result_projects(result)
-            )
-            if not held:
-                assert not href, (week, name)
-                continue
-            most = max(held.values())
-            assert href in {addresses[slug] for slug, count in held.items() if count == most}
+            _assert_finder(name, own)
+            assert not href
 
 
 def test_superseded_results_are_muted_and_the_most_significant_carry_their_rung(
@@ -468,7 +534,7 @@ def _entry(
     }
     if not record["landed"]:
         del record["landed"]
-    return dataclasses.replace(base, record=record, credit=credit)
+    return dataclasses.replace(base, record=record, credit=credit, credit_html="")
 
 
 def test_days_group_by_arrival_and_not_by_registration_or_publication(
@@ -616,3 +682,85 @@ def test_a_kind_is_counted_in_words() -> None:
     assert overview_sections.kind_phrase(made) == (
         "1 lower bound, 2 optimality results and 1 case exclusion result"
     )
+
+
+def test_compound_finders_use_reviewed_people_and_conflicting_joins_stay_plain() -> None:
+    base = overview_data.Result(
+        record={},
+        group="",
+        credit="Guzhou0806, Mira after Levy",
+        ours=False,
+        credit_html=(
+            '<a href="profiles/guzhou0806.html">Guzhou0806</a>, '
+            '<a href="profiles/mira.html">Mira-acc</a> after '
+            '<a href="profiles/joshua-levy.html">Levy</a>'
+        ),
+    )
+    shown = overview_sections.credit_link(
+        "Guzhou0806, Mira", ("https://example.org/repo",), results=(base,)
+    )
+    assert "profiles/guzhou0806.html" in shown
+    assert "profiles/mira.html" in shown
+    assert "joshua-levy" not in shown
+    assert "https://example.org/repo" not in shown
+    conflicting = dataclasses.replace(base, credit_html="Guzhou0806, Mira after Levy")
+    assert (
+        overview_sections.credit_link(
+            "Guzhou0806, Mira", ("https://example.org/repo",), results=(base, conflicting)
+        )
+        == "Guzhou0806, Mira"
+    )
+
+
+def test_unresolved_source_credit_does_not_gain_an_alias_identity_in_a_summary() -> None:
+    result = overview_data.Result(
+        record={}, group="", credit="Mira", ours=False, credit_html="Mira"
+    )
+    shown = overview_sections.credit_link(
+        "Mira", ("https://example.org/work",), results=(result,)
+    )
+    assert 'href="https://example.org/work"' in shown
+    assert ">Mira</a>" in shown
+    assert "profiles/" not in shown
+
+
+@pytest.mark.parametrize("quoted", [False, True])
+def test_finder_html_comparison_accepts_equivalent_attribute_serialization(
+    *, quoted: bool
+) -> None:
+    first = '<a href="profiles/francisco-couzo.html">Couzo</a>'
+    second = '<a href="profiles/oscar-fitzharding.html">Fitzharding</a>'
+    result = overview_data.Result(
+        record={},
+        group="",
+        credit="Couzo, Fitzharding",
+        ours=False,
+        credit_html=first + ", " + second,
+    )
+    markup = f"<span data-contributor-plain>{first}, {second}</span>"
+    if not quoted:
+        markup = re.sub(r'href="([^"]+)"', r"href=\1", markup)
+    _assert_finder(markup, (result,))
+
+
+@pytest.mark.parametrize("mutation", ["name", "url", "duplicate", "order", "new-tab"])
+def test_finder_html_comparison_rejects_changed_reviewed_credits(mutation: str) -> None:
+    first = '<a href="profiles/francisco-couzo.html">Couzo</a>'
+    second = '<a href="profiles/oscar-fitzharding.html">Fitzharding</a>'
+    result = overview_data.Result(
+        record={},
+        group="",
+        credit="Couzo, Fitzharding",
+        ours=False,
+        credit_html=first + ", " + second,
+    )
+    original = f"<span data-contributor-plain>{first}, {second}</span>"
+    changed = {
+        "name": original.replace(">Couzo<", ">Other<"),
+        "url": original.replace("profiles/francisco-couzo.html", "profiles/other.html"),
+        "duplicate": original.replace(first, first + first),
+        "order": f"<span data-contributor-plain>{second}, {first}</span>",
+        "new-tab": original.replace("<a href=", "<a target=_blank href=", 1),
+    }[mutation]
+    with pytest.raises(AssertionError):
+        _assert_finder(changed, (result,))

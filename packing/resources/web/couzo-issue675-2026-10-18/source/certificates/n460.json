@@ -1,0 +1,30 @@
+{
+  "n": 460,
+  "packing": "n460.txt",
+  "packing_sha256": "32f0738ed32209f166a49f8171089241911eea8179dedd3528ca88732972549d",
+  "certificate": "certificates/n460.cert",
+  "certificate_sha256": "2e28f1dd79789140976c67170204c0e3baa820d77d9aa0a7f5cb259fae4a1c3a",
+  "rational_side": "55164548430532052222284399/2512326146080400000000000",
+  "kind": "rational witness",
+  "origin": {
+    "seed_credit": "Francisco Couzo",
+    "search_job": {
+      "id": 107369,
+      "method": "fq",
+      "source": "n460.txt",
+      "source_origin": "constructed",
+      "source_sha256": "fc09674368e510009e4aeb2a59f209a93f3c99e4db002aee463385c2bde56b32",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n460.txt",
+        "source_sha256": "436bc8a53865da77703b000f995f8794e5e410f84de407f790d3295c414e664a",
+        "source_n": 460,
+        "source_side": 21.95765194367981,
+        "layers": 0,
+        "deleted": 0,
+        "side": 21.95765194367981
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

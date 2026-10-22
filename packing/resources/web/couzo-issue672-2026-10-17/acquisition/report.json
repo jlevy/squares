@@ -1,0 +1,116 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/672",
+  "author": "Francisco Couzo",
+  "source_key": "[Couzo issue 672 2026-10-17]",
+  "report_evidence": "E-couzo-672-certificate-report",
+  "receipt_format": "couzo-672-exact-replay-v1",
+  "witness_prefix": "W-couzo-672-n",
+  "claim_limitations": "Complete af8cb79 rational centre/half-angle certificate read exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-22",
+  "read_at_main": "d7923b8d8a8def4d6b738608910211d8d4f295bc",
+  "certificates": [
+    {
+      "n": 227,
+      "path": "certificates/n227.cert",
+      "format": "evand-cert",
+      "offered": "15.563625652343",
+      "first_committed": "2026-10-17T20:44:59Z",
+      "same_packing": []
+    },
+    {
+      "n": 229,
+      "path": "certificates/n229.cert",
+      "format": "evand-cert",
+      "offered": "15.650174740273",
+      "first_committed": "2026-10-17T20:44:59Z",
+      "same_packing": []
+    }
+  ],
+  "requested": [
+    227,
+    229
+  ],
+  "replayed": [
+    227,
+    229
+  ],
+  "houses": [
+    {
+      "n": 227,
+      "reader": "[de Winter upper bounds 2026-10-17]",
+      "source_key": "[de Winter upper bounds 2026-10-17]",
+      "holders": "Joost de Winter",
+      "result": "T-196",
+      "reported_value": "15.5637967036692680",
+      "verified_value": "15.5637967036692680",
+      "evidence": [
+        "E-de-winter-668-upper-exact-feasibility"
+      ]
+    },
+    {
+      "n": 229,
+      "reader": "[Daniel n229 dilation update 2026-10-18]",
+      "source_key": "[Daniel n229 dilation update 2026-10-18]",
+      "holders": "Evan Daniel",
+      "result": "T-199",
+      "reported_value": "15.6501615138955532",
+      "verified_value": "15.6501615138955532",
+      "evidence": [
+        "E-evand-674-n229-update-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 227,
+      "report": "T-225 (evand/square-packing@0075967)",
+      "url": "https://github.com/evand/square-packing/tree/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs",
+      "holders": "Evan Daniel, after the packing's finder",
+      "result": "T-225",
+      "reader": "[Daniel regularized lists 2026-10-20]"
+    },
+    {
+      "n": 229,
+      "report": "T-225 (evand/square-packing@0075967)",
+      "url": "https://github.com/evand/square-packing/tree/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs",
+      "holders": "Evan Daniel, after the packing's finder",
+      "result": "T-225",
+      "reader": "[Daniel regularized lists 2026-10-20]"
+    },
+    {
+      "n": 229,
+      "report": "T-198 (#674)",
+      "url": "https://github.com/jlevy/squares/issues/674",
+      "holders": "Evan Daniel",
+      "result": "T-198",
+      "reader": "[Daniel n229 dilation 2026-10-17]"
+    },
+    {
+      "n": 229,
+      "report": "T-196 (#668)",
+      "url": "https://github.com/jlevy/squares/issues/668",
+      "holders": "Joost de Winter",
+      "result": "T-196",
+      "reader": "[de Winter upper bounds 2026-10-17]"
+    }
+  ],
+  "register": {
+    "title": "Francisco Couzo's in-corpus certificates of issue 672 at af8cb795",
+    "headline": "Couzo's refinements of de Winter's 227 and 229, below T-196 at both",
+    "significance": 2,
+    "source_checks": "The issue states that each bound is strictly smaller than the source's previous published index and a reviewed comparison envelope including deletion and repeated L borders, and the manifest records the author's checker receipts with the source's exact checker verify_bound_certificate.py (Evan Daniel's MIT verifier, modified by Francisco Couzo with Codex), pinned here by digest and not run. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with refinements of Joost de Winter's #668 packings (T-196), as the author's comment of 17 October says: at 227 a CT105 web submission (f0ca7a65, method fq) seeded from de Winter's #668 certificate by way of Evan Daniel's exact form of it, which the source does not say who made, and at 229 an slp refinement (search job 106640) of de Winter's #668 certificate.",
+    "next_rung": "Independently review the retained replay. At 227 the entry is 1.71e-4 below the house T-196; Evan Daniel's solved view of this packing (T-225) lies 1.76e-11 below it. At 229 it is superseded on entry by T-199, 1.32e-5 below it. The 44 rows beyond the corpus are think-2vjc's.",
+    "bead": "think-2vjc",
+    "bibliography": {
+      "authors": [
+        "Couzo"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Couzo after de Winter, Daniel, Levy",
+      "short_credit": "Couzo after de Winter et al.",
+      "note": "Issue 672's two in-corpus certificates at af8cb7959aead318c0cf5e9f873de3caa763f77a: refinements of Joost de Winter's #668 packings at 227 (a CT105 web submission seeded from his certificate by way of Evan Daniel's exact form) and 229 (an slp refinement). Retained as factual data with their per-count JSON; the source's checker, Evan Daniel's MIT verifier as Couzo modified it with Codex, is pinned by digest. OpenAI Codex assistance disclosed. No optimizer, local or global claim."
+    }
+  }
+}

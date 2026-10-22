@@ -1,8 +1,10 @@
 """A page that moved or was withdrawn still arrives, in a browser.
 
 `render_overview.forwarder_pages` writes a forwarder at each address a page used to
-have (`MOVED_PAGES`): three repository documents that left the site, and the two papers,
-which moved to `papers/<slug>.html` on 2026-10-01 (think-cmz6). Links to the papers' old
+have (`MOVED_PAGES`): three repository documents that left the site, the two papers,
+which moved to `papers/<slug>.html` on 2026-10-01 (think-cmz6), and the profile
+directory and every profile, which moved from `contributors/` to `profiles/` on
+2026-10-13 (think-0v2c). Links to the papers' old
 addresses are in dated records, in other people's pages and in readers' bookmarks, most
 of them with a fragment: a section, a footnote, the explainer's certificate picker.
 
@@ -33,7 +35,7 @@ from typing import Any
 
 import pytest
 
-from devtools import check_published_site, render_case_pages, render_overview
+from devtools import check_published_site, render_case_pages, render_overview, site_urls
 from devtools.overview_sections import LOWER_BOUNDS_PAPER, OPTIMALITY_PAPER
 from devtools.preview_site import serve
 from devtools.repo_links import REPO_URL
@@ -153,9 +155,23 @@ def _arrives(
         context.close()
 
 
-def _arrivals(root: str) -> dict[str, str]:
-    """Where each old address should arrive, for a site whose root is `root`."""
+#: The profile forwarders a browser visits: the directory's and one profile's. Every
+#: profile forwarder is written by one rule (`render_overview.forwarder_pages`), and
+#: `tests/test_render_contributors.py` holds each one's targets without a browser.
+PROFILE_SAMPLE = ("contributors/index.html", "contributors/walter-stromquist.html")
+
+
+def _arrivals(root: str, *, canonical: bool = False) -> dict[str, str]:
+    """Where each old address should arrive, for a site whose root is `root`. The profile
+    directory's index is reached as its file by file navigation and the no-script
+    refresh, and as the directory's own address by script over HTTP (`canonical`)."""
+    moved = dict(render_overview.MOVED_PAGES)
+    profiles = {
+        old: f"{root}/{site_urls.canonical_path(moved[old]) if canonical else moved[old]}"
+        for old in PROFILE_SAMPLE
+    }
     return {
+        **profiles,
         "all-results.html": f"{root}/results.html",
         "status.html": f"{root}/atlas.html",
         "frontier.html": f"{root}/atlas.html",
@@ -177,7 +193,10 @@ def test_each_old_address_arrives_with_its_query_and_fragment(browser: Any, site
     assert moved["explainer.html"] == LOWER_BOUNDS_PAPER
     root = site.as_uri()
     arrivals = _arrivals(root)
-    assert set(arrivals) == set(moved)
+    unvisited = set(moved) - set(arrivals)
+    assert set(arrivals) <= set(moved)
+    assert unvisited
+    assert all(old.startswith(f"{render_overview.LEGACY_PROFILES_DIR}/") for old in unvisited)
     for old, target in arrivals.items():
         assert (
             _arrives(
@@ -416,7 +435,7 @@ def test_published_forwarders_reach_canonical_content(
 
     Both retired case directories reach Atlas with the same canonical identity.
     """
-    for old, target in _arrivals(served.rstrip("/")).items():
+    for old, target in _arrivals(served.rstrip("/"), canonical=scripts).items():
         suffix = "?view=embed#retained-forwarder-fragment"
         expected = target + suffix if scripts else target
         assert (

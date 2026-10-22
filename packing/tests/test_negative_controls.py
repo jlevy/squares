@@ -39,6 +39,8 @@ from devtools.run_negative_controls import (
     run_control_command,
     snapshot_source_bytes,
 )
+from sqpack.contributor_occurrences import load_occurrences
+from sqpack.contributors import PEOPLE_DIR, ContributorError, load_contributors
 from sqpack.yamlio import safe_load
 
 MOTION_LAB_GOLDEN = ROOT / "tests/golden/motion-lab-pages.json"
@@ -270,7 +272,50 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
         "devtools/regularize_axis_components.py",
     ):
         assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
-    assert SNAPSHOT_MAX_BYTES == 222 * 1024 * 1024
+    assert SNAPSHOT_MAX_BYTES == 255 * 1024 * 1024
+    assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
+@pytest.mark.parametrize(
+    ("identifier", "filename", "receipt_status"),
+    [
+        ("f-gobel", "gobel-1979-geometrical-packing-and-covering-problems.pdf", "inspected"),
+        ("s-el-moumni", "el-moumni-1999-optimal-packings-unit-squares.pdf", "pending"),
+    ],
+)
+def test_profile_evidence_and_pdf_receipts_survive_bounded_workers(
+    control_snapshot: tuple[Path, set[Path]],
+    identifier: str,
+    filename: str,
+    receipt_status: str,
+) -> None:
+    """Keep full private evidence without turning a pending census into an inspection."""
+    tree, copied_targets = control_snapshot
+    source = ROOT / "resources/papers" / filename
+    relative = source.relative_to(controls.REPO)
+    private = tree / relative
+    payload = source.read_bytes()
+    assert relative in copied_targets
+    assert not private.is_symlink()
+    assert private.read_bytes() == payload
+    assert private in (tracked_files(tree, "packing/resources") or [])
+    profiles = load_contributors(tree / HERE / PEOPLE_DIR, repo=tree)
+    assert any(
+        evidence.archive_path == relative.as_posix()
+        for evidence in profiles.by_id[identifier].sources
+    )
+    occurrences = load_occurrences(repo=tree, profiles=profiles)
+    assert any(
+        receipt.path == relative.as_posix() and receipt.status == receipt_status
+        for receipt in occurrences.inspections
+    )
+    try:
+        private.unlink()
+        with pytest.raises(ContributorError, match="archive_path"):
+            load_contributors(tree / HERE / PEOPLE_DIR, repo=tree)
+    finally:
+        private.write_bytes(payload)
+    assert source.read_bytes() == payload
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
@@ -517,7 +562,7 @@ def test_the_snapshot_byte_report_enforces_the_exact_capacity_boundary(
     assert controls.main(["--source-bytes"]) == int(offset > 0)
     report = json.loads(capsys.readouterr().out)
     assert report["source_bytes"] == measured
-    assert report["cap_bytes"] == 222 * 1024 * 1024
+    assert report["cap_bytes"] == 255 * 1024 * 1024
     assert report["headroom_bytes"] == -offset
 
 
@@ -2854,7 +2899,7 @@ packet.original.exact_verify = packet.original.independent.check = forbidden
 
 
 #: The second SQUISH packet's displaced houses, as a worker program admits them: the
-#: ry-xu and Gupta houses from their retained history, and since the house adoption of
+#: Xu and Gupta houses from their retained history, and since the house adoption of
 #: 11 October 2026 (think-fvz4) the earlier houses at 263 and 302 rebuilt from the
 #: packet's private inputs. Both worker programs below run it, so the copies cannot
 #: drift. It expects `packet` and `house` bound, and leaves `house.house_path` as it

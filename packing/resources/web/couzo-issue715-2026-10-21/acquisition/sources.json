@@ -1,0 +1,1720 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-22T00:13Z",
+  "git_scope": "Blobless clone of the source's full history, and a checkout at the pinned commit for issue #715, the head of master when retrieved, made from that history's objects. The pin's parent is 5a299b4 (2026-10-20), whose parent d09edd7 (2026-10-19) is the child of 7b6c87e, the pin of issue #678; the three commits were pushed together at 2026-10-21T22:56:37Z, after the issue. The scope is the explicit certificate certificates/nN.cert and its credit record certificates/nN.json at each of the 173 counts at or below 1024 the issue claims, the four indexes the issue links (upper_bounds.json, certified_bounds.json, certificates/best/manifest.json, public_bounds.json), the provenance review and per-count provenance, the three READMEs, certificates/best/SHA256SUMS, the construction checker certificate_constructions.py, and the source's exact checker verify_bound_certificate.py with its MIT licence. The 139 certificates of the counts whose certificate was first committed after 7b6c87e are retained; the 34 certificates the issue restates from earlier public commits, and everything else in the scope, are pinned by digest only. The 1112 rows above 1024, the 857 witnesses under certificates/best/, certificates/parents/, certificates/extended/, the drawings, the search programs and the Rust and CUDA sources are pinned by the commit and were neither retained nor executed.",
+  "sources": [
+    {
+      "id": "franciscouzo-square-packing",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_ref": "master",
+      "source_commit": "6b7391de820fd01f3ff6984e4a081e8c86845588",
+      "committed_utc": "2026-10-21T20:48:49Z",
+      "git_tree": "1716ce7919230164598ee4c7e9465d3f02f77698",
+      "archived_path": "packing/resources/web/couzo-issue715-2026-10-21/source",
+      "subtree_manifest": "packing/resources/web/couzo-issue715-2026-10-21/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "BOUND_VERIFIER_LICENSE.txt",
+        "README.md",
+        "RECORD_PROVENANCE.md",
+        "certificate_constructions.py",
+        "certificates/README.md",
+        "certificates/best/README.md",
+        "certificates/best/SHA256SUMS",
+        "certificates/best/manifest.json",
+        "certified_bounds.json",
+        "public_bounds.json",
+        "record_provenance.json",
+        "upper_bounds.json",
+        "verify_bound_certificate.py",
+        "certificates/n328.cert",
+        "certificates/n335.cert",
+        "certificates/n336.cert",
+        "certificates/n337.cert",
+        "certificates/n338.cert",
+        "certificates/n340.cert",
+        "certificates/n341.cert",
+        "certificates/n343.cert",
+        "certificates/n365.cert",
+        "certificates/n373.cert",
+        "certificates/n374.cert",
+        "certificates/n404.cert",
+        "certificates/n410.cert",
+        "certificates/n413.cert",
+        "certificates/n417.cert",
+        "certificates/n454.cert",
+        "certificates/n455.cert",
+        "certificates/n456.cert",
+        "certificates/n458.cert",
+        "certificates/n459.cert",
+        "certificates/n461.cert",
+        "certificates/n463.cert",
+        "certificates/n490.cert",
+        "certificates/n496.cert",
+        "certificates/n497.cert",
+        "certificates/n498.cert",
+        "certificates/n499.cert",
+        "certificates/n500.cert",
+        "certificates/n501.cert",
+        "certificates/n502.cert",
+        "certificates/n503.cert",
+        "certificates/n504.cert",
+        "certificates/n505.cert",
+        "certificates/n506.cert",
+        "certificates/n509.cert",
+        "certificates/n535.cert",
+        "certificates/n544.cert",
+        "certificates/n545.cert",
+        "certificates/n546.cert",
+        "certificates/n547.cert",
+        "certificates/n548.cert",
+        "certificates/n549.cert",
+        "certificates/n550.cert",
+        "certificates/n553.cert",
+        "certificates/n554.cert",
+        "certificates/n582.cert",
+        "certificates/n584.cert",
+        "certificates/n591.cert",
+        "certificates/n592.cert",
+        "certificates/n593.cert",
+        "certificates/n594.cert",
+        "certificates/n595.cert",
+        "certificates/n596.cert",
+        "certificates/n597.cert",
+        "certificates/n598.cert",
+        "certificates/n599.cert",
+        "certificates/n600.cert",
+        "certificates/n601.cert",
+        "certificates/n602.cert",
+        "certificates/n631.cert",
+        "certificates/n633.cert",
+        "certificates/n637.cert",
+        "certificates/n640.cert",
+        "certificates/n643.cert",
+        "certificates/n644.cert",
+        "certificates/n645.cert",
+        "certificates/n646.cert",
+        "certificates/n647.cert",
+        "certificates/n648.cert",
+        "certificates/n651.cert",
+        "certificates/n652.cert",
+        "certificates/n653.cert",
+        "certificates/n654.cert",
+        "certificates/n682.cert",
+        "certificates/n684.cert",
+        "certificates/n689.cert",
+        "certificates/n691.cert",
+        "certificates/n692.cert",
+        "certificates/n694.cert",
+        "certificates/n695.cert",
+        "certificates/n696.cert",
+        "certificates/n697.cert",
+        "certificates/n698.cert",
+        "certificates/n699.cert",
+        "certificates/n700.cert",
+        "certificates/n702.cert",
+        "certificates/n705.cert",
+        "certificates/n735.cert",
+        "certificates/n736.cert",
+        "certificates/n737.cert",
+        "certificates/n742.cert",
+        "certificates/n743.cert",
+        "certificates/n744.cert",
+        "certificates/n745.cert",
+        "certificates/n746.cert",
+        "certificates/n747.cert",
+        "certificates/n748.cert",
+        "certificates/n749.cert",
+        "certificates/n750.cert",
+        "certificates/n751.cert",
+        "certificates/n752.cert",
+        "certificates/n756.cert",
+        "certificates/n758.cert",
+        "certificates/n790.cert",
+        "certificates/n791.cert",
+        "certificates/n792.cert",
+        "certificates/n797.cert",
+        "certificates/n798.cert",
+        "certificates/n799.cert",
+        "certificates/n800.cert",
+        "certificates/n801.cert",
+        "certificates/n802.cert",
+        "certificates/n803.cert",
+        "certificates/n804.cert",
+        "certificates/n805.cert",
+        "certificates/n806.cert",
+        "certificates/n807.cert",
+        "certificates/n808.cert",
+        "certificates/n809.cert",
+        "certificates/n813.cert",
+        "certificates/n814.cert",
+        "certificates/n815.cert",
+        "certificates/n850.cert",
+        "certificates/n854.cert",
+        "certificates/n855.cert",
+        "certificates/n856.cert",
+        "certificates/n857.cert",
+        "certificates/n858.cert",
+        "certificates/n859.cert",
+        "certificates/n860.cert",
+        "certificates/n862.cert",
+        "certificates/n863.cert",
+        "certificates/n864.cert",
+        "certificates/n865.cert",
+        "certificates/n866.cert",
+        "certificates/n867.cert",
+        "certificates/n868.cert",
+        "certificates/n869.cert",
+        "certificates/n870.cert",
+        "certificates/n871.cert",
+        "certificates/n872.cert",
+        "certificates/n873.cert",
+        "certificates/n909.cert",
+        "certificates/n913.cert",
+        "certificates/n914.cert",
+        "certificates/n915.cert",
+        "certificates/n916.cert",
+        "certificates/n917.cert",
+        "certificates/n918.cert",
+        "certificates/n919.cert",
+        "certificates/n923.cert",
+        "certificates/n924.cert",
+        "certificates/n925.cert",
+        "certificates/n926.cert",
+        "certificates/n927.cert",
+        "certificates/n928.cert",
+        "certificates/n931.cert",
+        "certificates/n932.cert",
+        "certificates/n970.cert",
+        "certificates/n975.cert",
+        "certificates/n976.cert",
+        "certificates/n977.cert",
+        "certificates/n978.cert",
+        "certificates/n979.cert",
+        "certificates/n980.cert",
+        "certificates/n985.cert",
+        "certificates/n986.cert",
+        "certificates/n987.cert",
+        "certificates/n988.cert",
+        "certificates/n989.cert",
+        "certificates/n994.cert",
+        "certificates/n995.cert",
+        "certificates/n996.cert",
+        "certificates/n328.json",
+        "certificates/n335.json",
+        "certificates/n336.json",
+        "certificates/n337.json",
+        "certificates/n338.json",
+        "certificates/n340.json",
+        "certificates/n341.json",
+        "certificates/n343.json",
+        "certificates/n365.json",
+        "certificates/n373.json",
+        "certificates/n374.json",
+        "certificates/n404.json",
+        "certificates/n410.json",
+        "certificates/n413.json",
+        "certificates/n417.json",
+        "certificates/n454.json",
+        "certificates/n455.json",
+        "certificates/n456.json",
+        "certificates/n458.json",
+        "certificates/n459.json",
+        "certificates/n461.json",
+        "certificates/n463.json",
+        "certificates/n490.json",
+        "certificates/n496.json",
+        "certificates/n497.json",
+        "certificates/n498.json",
+        "certificates/n499.json",
+        "certificates/n500.json",
+        "certificates/n501.json",
+        "certificates/n502.json",
+        "certificates/n503.json",
+        "certificates/n504.json",
+        "certificates/n505.json",
+        "certificates/n506.json",
+        "certificates/n509.json",
+        "certificates/n535.json",
+        "certificates/n544.json",
+        "certificates/n545.json",
+        "certificates/n546.json",
+        "certificates/n547.json",
+        "certificates/n548.json",
+        "certificates/n549.json",
+        "certificates/n550.json",
+        "certificates/n553.json",
+        "certificates/n554.json",
+        "certificates/n582.json",
+        "certificates/n584.json",
+        "certificates/n591.json",
+        "certificates/n592.json",
+        "certificates/n593.json",
+        "certificates/n594.json",
+        "certificates/n595.json",
+        "certificates/n596.json",
+        "certificates/n597.json",
+        "certificates/n598.json",
+        "certificates/n599.json",
+        "certificates/n600.json",
+        "certificates/n601.json",
+        "certificates/n602.json",
+        "certificates/n631.json",
+        "certificates/n633.json",
+        "certificates/n637.json",
+        "certificates/n640.json",
+        "certificates/n643.json",
+        "certificates/n644.json",
+        "certificates/n645.json",
+        "certificates/n646.json",
+        "certificates/n647.json",
+        "certificates/n648.json",
+        "certificates/n651.json",
+        "certificates/n652.json",
+        "certificates/n653.json",
+        "certificates/n654.json",
+        "certificates/n682.json",
+        "certificates/n684.json",
+        "certificates/n689.json",
+        "certificates/n691.json",
+        "certificates/n692.json",
+        "certificates/n694.json",
+        "certificates/n695.json",
+        "certificates/n696.json",
+        "certificates/n697.json",
+        "certificates/n698.json",
+        "certificates/n699.json",
+        "certificates/n700.json",
+        "certificates/n702.json",
+        "certificates/n705.json",
+        "certificates/n735.json",
+        "certificates/n736.json",
+        "certificates/n737.json",
+        "certificates/n742.json",
+        "certificates/n743.json",
+        "certificates/n744.json",
+        "certificates/n745.json",
+        "certificates/n746.json",
+        "certificates/n747.json",
+        "certificates/n748.json",
+        "certificates/n749.json",
+        "certificates/n750.json",
+        "certificates/n751.json",
+        "certificates/n752.json",
+        "certificates/n756.json",
+        "certificates/n758.json",
+        "certificates/n790.json",
+        "certificates/n791.json",
+        "certificates/n792.json",
+        "certificates/n797.json",
+        "certificates/n798.json",
+        "certificates/n799.json",
+        "certificates/n800.json",
+        "certificates/n801.json",
+        "certificates/n802.json",
+        "certificates/n803.json",
+        "certificates/n804.json",
+        "certificates/n805.json",
+        "certificates/n806.json",
+        "certificates/n807.json",
+        "certificates/n808.json",
+        "certificates/n809.json",
+        "certificates/n813.json",
+        "certificates/n814.json",
+        "certificates/n815.json",
+        "certificates/n850.json",
+        "certificates/n854.json",
+        "certificates/n855.json",
+        "certificates/n856.json",
+        "certificates/n857.json",
+        "certificates/n858.json",
+        "certificates/n859.json",
+        "certificates/n860.json",
+        "certificates/n862.json",
+        "certificates/n863.json",
+        "certificates/n864.json",
+        "certificates/n865.json",
+        "certificates/n866.json",
+        "certificates/n867.json",
+        "certificates/n868.json",
+        "certificates/n869.json",
+        "certificates/n870.json",
+        "certificates/n871.json",
+        "certificates/n872.json",
+        "certificates/n873.json",
+        "certificates/n909.json",
+        "certificates/n913.json",
+        "certificates/n914.json",
+        "certificates/n915.json",
+        "certificates/n916.json",
+        "certificates/n917.json",
+        "certificates/n918.json",
+        "certificates/n919.json",
+        "certificates/n923.json",
+        "certificates/n924.json",
+        "certificates/n925.json",
+        "certificates/n926.json",
+        "certificates/n927.json",
+        "certificates/n928.json",
+        "certificates/n931.json",
+        "certificates/n932.json",
+        "certificates/n970.json",
+        "certificates/n975.json",
+        "certificates/n976.json",
+        "certificates/n977.json",
+        "certificates/n978.json",
+        "certificates/n979.json",
+        "certificates/n980.json",
+        "certificates/n985.json",
+        "certificates/n986.json",
+        "certificates/n987.json",
+        "certificates/n988.json",
+        "certificates/n989.json",
+        "certificates/n994.json",
+        "certificates/n995.json",
+        "certificates/n996.json"
+      ],
+      "subtree_file_count": 359,
+      "subtree_total_bytes": 52289925,
+      "retained_file_count": 139,
+      "retained_total_bytes": 13737718,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "BOUND_VERIFIER_LICENSE.txt",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "The checker's MIT licence, byte-identical to the copy the 18 October packet retains.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt"
+        },
+        {
+          "path": "README.md",
+          "bytes": 49976,
+          "sha256": "7e0e10a68501d03a53e3b9547e857e6741ab5825aa93578c23d4f6249fad133d",
+          "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "RECORD_PROVENANCE.md",
+          "bytes": 11599,
+          "sha256": "caa6050ec1a1ca3f902be0bb544d116bb0236affb54fa5d979bebd35e6e800c8",
+          "reason": "The author's publication-order and attribution review; no licence for its prose. Hash-pinned for provenance."
+        },
+        {
+          "path": "certificate_constructions.py",
+          "bytes": 1269,
+          "sha256": "8cab430add817ab202e06c4e21cf1d92860cd18d83657d024ec7b2cc2c5a2985",
+          "reason": "The author's construction checker, which states no licence; pinned for provenance and not run. The replay here decides each explicit certificate in full."
+        },
+        {
+          "path": "certificates/README.md",
+          "bytes": 57830,
+          "sha256": "d3dc83019ae2105849d69bce42099b4da8449bd652dfdaa28a47e24a09072787",
+          "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "certificates/best/README.md",
+          "bytes": 74523,
+          "sha256": "520022c988b45b773c2288af96eeac0e38639e747684fb2eab6e63065723cdbb",
+          "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "certificates/best/SHA256SUMS",
+          "bytes": 65243,
+          "sha256": "2c6b17251c95e63c01379e62af1593d9455ee599a143c929165cf958e9cdb161",
+          "reason": "The source's digest list for certificates/best/; pinned for provenance."
+        },
+        {
+          "path": "certificates/best/manifest.json",
+          "bytes": 3164064,
+          "sha256": "5b56aebd63f3d77ff8b1d3e9b91085f28c953d675453006c4c3756409d6dd057",
+          "reason": "The source's provenance manifest: exact bounds, digests, credits, parent hashes and the author's checker outcomes; each row's credit is read from it at the pin and recorded in the replay receipt. Pinned, not copied."
+        },
+        {
+          "path": "certificates/n328.json",
+          "bytes": 6110,
+          "sha256": "fbbcb499b72aa83070f312bd30885b92ae57e9b3a1bd1a890087388ccb9b8d77",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n335.cert",
+          "bytes": 39822,
+          "sha256": "d500b46c6bad15967033ee4bf5b207d8afb6d8073272d407b22e8e8d450e380a",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n335.cert"
+        },
+        {
+          "path": "certificates/n335.json",
+          "bytes": 996,
+          "sha256": "dab8cf9d7e1b15ffeb50f9fd953deddd5911e596b9d7b752cecc90848fec1951",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n336.cert",
+          "bytes": 44954,
+          "sha256": "08f1dafe436d44ba2e6d4eb72bffe0d5cfa71145d7f5957e330347edf774ddda",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n336.cert"
+        },
+        {
+          "path": "certificates/n336.json",
+          "bytes": 937,
+          "sha256": "01bc563617fab8c35871c17dbee2f45e311ec54bb1287f0f1303739356351247",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n337.cert",
+          "bytes": 45644,
+          "sha256": "2bcf92a216a88380cdb103896fb39cefd82cd0ce9b2f20a1bdd9eab549ab0a47",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n337.cert"
+        },
+        {
+          "path": "certificates/n337.json",
+          "bytes": 933,
+          "sha256": "b69676ed73f0545777c6914533e0f157f5d40dfc41704bb065217e35cef84659",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n338.cert",
+          "bytes": 50076,
+          "sha256": "20cfd3cab9120d956848b342c378fd04837dfacd6e9c2f37fac294478bf7a519",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance.",
+          "identical_to": "packing/resources/web/couzo-certificates-2026-10-12/source/certificates/n338.cert"
+        },
+        {
+          "path": "certificates/n338.json",
+          "bytes": 972,
+          "sha256": "b129b9d964e76f4e95d1928aaaa8bfce19046b36a092a9ddce5a9c832de796a6",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n340.cert",
+          "bytes": 53806,
+          "sha256": "84e8a05ffd137aad5ca8adf61200f1809a2d883a70ebe03225a3cf99d4d5a78b",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance.",
+          "identical_to": "packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n340.cert"
+        },
+        {
+          "path": "certificates/n340.json",
+          "bytes": 973,
+          "sha256": "54d19da20bb1d7717e9b9dc9434dae061c9b19fba2f40e3215c66fceaafe851a",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n341.cert",
+          "bytes": 55261,
+          "sha256": "249ae108d9be02f905af2d5b4989b082f23005c97bcec8b0baf16d5ea0982762",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n341.cert"
+        },
+        {
+          "path": "certificates/n341.json",
+          "bytes": 937,
+          "sha256": "5b66334fd262e5432a20f1506a1c93f432d4cc5b30f6980632323fa7190c91cf",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n343.json",
+          "bytes": 1627,
+          "sha256": "5e2723ad2eb9a47130ecee9d49f7b23cbe93f3210595d4683bda2bdea0bec065",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n365.json",
+          "bytes": 6525,
+          "sha256": "fd16132dcdd812f9ca004b0b0e23ca3a54e9918006ee25766bf411eaef331a2d",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n373.cert",
+          "bytes": 49680,
+          "sha256": "494742aa3408d8a34ebbdfe5811fe017bfebdd8430e8c3c840f7fdb13e2d43da",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n373.cert"
+        },
+        {
+          "path": "certificates/n373.json",
+          "bytes": 937,
+          "sha256": "225833b6bb0a1cfbbcd6bec46ef0f66472baadd2d81f964f7f0bb0ba43af9da1",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n374.cert",
+          "bytes": 51945,
+          "sha256": "e46d218321a2ba492f90a7112e2fc00832f6723aa09d7980f67f589f73364bc9",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n374.cert"
+        },
+        {
+          "path": "certificates/n374.json",
+          "bytes": 935,
+          "sha256": "f7a5fe19cb9830fcb9bcc65f0455d595c241d0395276ec72e6e1c3941c8a873d",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n404.json",
+          "bytes": 6525,
+          "sha256": "0fe72816a49738e9dceb585a0f862f7a3667895951dee8bfffad13d7a2fbc6fb",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n410.cert",
+          "bytes": 54810,
+          "sha256": "38be0d5c7bcda04b3982574fa268ab8a621032e27552d1cf4e9b6505af4bacd8",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n410.json",
+          "bytes": 828,
+          "sha256": "c2efcb21fbf98eae3b77af4f0bdd05f19524085b5477bb28078149be515f85fe",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n413.cert",
+          "bytes": 50713,
+          "sha256": "75f94edea327a851ec59cabde389f5d3998bcb0a14281449a3effaa9d5d7191d",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n413.json",
+          "bytes": 827,
+          "sha256": "51690f8d460e68c8332160199af054864ae58cee5e24b7ecbe2667ff7f5e8702",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n417.json",
+          "bytes": 17954,
+          "sha256": "87a72ebdcf6118b0430d743e985b498453f57e6f19a118c854ace8c14bf239da",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n454.cert",
+          "bytes": 106766,
+          "sha256": "9441a53177cb6ae2960ef4f2d442f895774339fc33310185bde07c848fa0f7ef",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n454.json",
+          "bytes": 903,
+          "sha256": "136982e092fd40501929ea3dc8abfa105cb6149cc1f7ac719411ec3bf734c4de",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n455.json",
+          "bytes": 12370,
+          "sha256": "ee5ba8f2d328eb0e2d638a1b2239190d91d34d5444d8c3fb797a1a8325404aa7",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n456.json",
+          "bytes": 5582,
+          "sha256": "86f9ee90563de4454f4b95737f6055e6aa58a37df4da777d86630456a951c0e2",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n458.json",
+          "bytes": 9156,
+          "sha256": "c6291ef8dd178bd8d4a5b3bf7b72a5d614c91dd43ab8db4ed6b3beb6066cfe0d",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n459.json",
+          "bytes": 16951,
+          "sha256": "776711897526b8974dbad6ded080cfa13fa6341cc343f0c7eaf8d37d420ab9a1",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n461.json",
+          "bytes": 19333,
+          "sha256": "1f550bc9e34d1f6513b4a0e735e003d0d8adc368f3f0ee324a0ec2db11363605",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n463.json",
+          "bytes": 31222,
+          "sha256": "cc65a800adcbf80789746da5cbd3dd10bb9f8955aa8f9c2b83914f83505b05c1",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n490.cert",
+          "bytes": 63204,
+          "sha256": "db894790bf44b55d9d589b63442a4b043dca44de9d0c340e85c842630ec99d47",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n490.json",
+          "bytes": 827,
+          "sha256": "7b53c1632551a83c020006053a7e98fedb54539f765cc83a16e5cc704c513e90",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n496.json",
+          "bytes": 2178,
+          "sha256": "f51b7824af2cd17592b1387b5ca6c9eb534557a8cc312b5bb3dbdff56e5cd263",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n497.json",
+          "bytes": 1621,
+          "sha256": "232b296a4d822f1fe18bdd7555a6e1ca31a2c5e71c99c55618d6855bf1f7ca51",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n498.cert",
+          "bytes": 64670,
+          "sha256": "207ce1d2bd399eb3570392cdbcde3557a480df823fae335d3d4b9e140dd9f585",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n498.json",
+          "bytes": 831,
+          "sha256": "36e28e98072dcd556a3a8cb604b539df6a8b06ba2ca6342c69e136a2039e93ff",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n499.json",
+          "bytes": 9205,
+          "sha256": "7b7c5fe64f03c3333cbac2ba404e3d088411e93ea2e05e337a360625ca1bcb87",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n500.json",
+          "bytes": 14230,
+          "sha256": "7651f51e86072feabe8fab08fb995e893a456a88611c2049c58fc4e265bb35c2",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n501.json",
+          "bytes": 14230,
+          "sha256": "f88de3095c3b107d7b9c471f36e5bfccbdccdb1433a10b82d08b8c6ca0096cb2",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n502.json",
+          "bytes": 10843,
+          "sha256": "bf599c3f3abe04f94fe1ef7db390a1bfe00bc8db29e76b072f82b7bf8be87c16",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n503.json",
+          "bytes": 9485,
+          "sha256": "f2bc8a15fa640a115f8835fac61005f1fca8fc00128312b78e4ac18d681eca70",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n504.json",
+          "bytes": 12088,
+          "sha256": "cfa42f343798a390e2ebb30c0f0cad5f94b8795aaf60c36089fce294ab9bd7bb",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n505.json",
+          "bytes": 2018,
+          "sha256": "d168375cf5d662ab288b173791d432ecb60d5365d1ce4ea107c9ad7033060bee",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n506.json",
+          "bytes": 31577,
+          "sha256": "ae6780fe08969ab407beee5421489fd6130c8350942cd137e394afa3b7b41560",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n509.json",
+          "bytes": 7108,
+          "sha256": "a9f88c090d8d334be0d12773edbbdf993511eff248fbef65621de4535b1ee18e",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n535.json",
+          "bytes": 1189,
+          "sha256": "93400f7dc2fe31b8854ed72dbc7ea2f4e0f77fe006c66ccea642694d69e1b331",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n544.cert",
+          "bytes": 67616,
+          "sha256": "4b7c03ace26b350ac37c962afeecdb92c67528bb8f08ec01a4814e8c8c9a25be",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n544.json",
+          "bytes": 829,
+          "sha256": "575dcef57e73614db41fe2dd0ee3ce3eb914156103c2c062dabfdc7bb6a5d89b",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n545.json",
+          "bytes": 8441,
+          "sha256": "a1174496c3726a0e479d780e335dd7732e0cc03ef0a0fe72da4654c046802bdc",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n546.json",
+          "bytes": 14593,
+          "sha256": "0eec4388e5738fdb7763f96cd47be3812d2a1676cd3a714b28d4713b2f9b0808",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n547.json",
+          "bytes": 2608,
+          "sha256": "72b9595f87cadb1d5669e7f7751755ac013d3407b628993af8281e4ac25e99ed",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n548.json",
+          "bytes": 9974,
+          "sha256": "4231a0c74184090654f23ed3c953aa0ee6fb7b5c77d4166e11fdbf679113e02f",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n549.json",
+          "bytes": 2478,
+          "sha256": "ecfc5cf9cbc47759b3505876843502a450b1dc7e401da23a3db95c4289e4ffa5",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n550.json",
+          "bytes": 2022,
+          "sha256": "e0ca07cc949e0933bc58320afb877397f8a6136762abfa1604e5c3a6c0a647bf",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n553.json",
+          "bytes": 15428,
+          "sha256": "fc6e2861aeaefcd8a027ddcf552dd3de183daf64b1c4d0a0ecbac6e8c1d3733b",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n554.json",
+          "bytes": 17356,
+          "sha256": "aaa866723511c1cbe9d40d8ce9765bdbed9185d77ee25187c004b1cce6a2d4db",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n582.json",
+          "bytes": 1189,
+          "sha256": "cb596934fcce099e6e7acc62681806ab990de5fa59d3cf9bb213cad62228482d",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n584.cert",
+          "bytes": 82203,
+          "sha256": "07bd8f9ce641fbf81ad7251421ee192c4dfd207cb0fbdc16e56e243f3d0f59ad",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n584.json",
+          "bytes": 829,
+          "sha256": "fdc9875e114f1b12a48ac319e26e82880f472938a7452ed55f6fd92c92d36061",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n591.json",
+          "bytes": 1193,
+          "sha256": "fc8034dde7c902d389d7c495ff704fc153cc6be7a532984365cbc39fb217bc83",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n592.json",
+          "bytes": 8796,
+          "sha256": "dbf7280b61b35dd67eb316d671ca09ba84ce0579add9c6bf016ff0dc514b2591",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n593.json",
+          "bytes": 14593,
+          "sha256": "9cf8c1d1cf37da2507c59ce8e2aaa05b9b1fc88196458eb01645022ba6e034a9",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n594.json",
+          "bytes": 3019,
+          "sha256": "bab47652cd42fdf43b6293ebbfcd6fa873617ad1c983c224c4db78dec6e59721",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n595.json",
+          "bytes": 9974,
+          "sha256": "36cb2e440ea3a9a7ae0edc3d29761d4c772458d5120c85ed2b46dc0115b7ebde",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n596.cert",
+          "bytes": 75552,
+          "sha256": "83dde11063c3c493fcdc3a7c819cbcf437769b51eef85f94a9d8f5de5437b76a",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n596.json",
+          "bytes": 827,
+          "sha256": "b62b8104944d3e336d55584aaa39690f2d9313aaba939251419f1b0250a3d51e",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n597.json",
+          "bytes": 11719,
+          "sha256": "c853e073e9e0edc781b2399ebf03c340f6a103b9f36af2addcd7ef5d389cd396",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n598.json",
+          "bytes": 7105,
+          "sha256": "f1063542e474f7d18fad6dca91747e18c8508962dd29f851c288629a498c1867",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n599.json",
+          "bytes": 12096,
+          "sha256": "ece99df14f71ef6c5180c331740864503c61f5e79c23be31baa0cf4d1dfd99c2",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n600.json",
+          "bytes": 15426,
+          "sha256": "58b89973350cb4f5719c12a84db7db5ab80e735e27b790d3e918f07a61472b18",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n601.json",
+          "bytes": 13937,
+          "sha256": "38fe583916cb52b59de6302add02a07b91273a4fe9d88526ceb2aaf3689d7a3a",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n602.json",
+          "bytes": 15980,
+          "sha256": "8f13871f3f04b23b08780b470f82947d433c9d31a932a2ce67adf742a6bed380",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n631.json",
+          "bytes": 1189,
+          "sha256": "ca1d19891551d17d23190ca57a68b1878eccb372493ad1ccabf06f557133faa8",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n633.json",
+          "bytes": 1193,
+          "sha256": "3bcdbb701875dcf17f4aef01f01999f806cbda832583f9b80968768b037437b6",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n637.cert",
+          "bytes": 83716,
+          "sha256": "c6332d5bc44e3409a6a1422c8995954b610bb109aa672e45f2197e92e74be789",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n637.json",
+          "bytes": 827,
+          "sha256": "4f901357dc3022fd1e45a1036440fd80280c4b51c31918deb3cb9096cdccacc5",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n640.json",
+          "bytes": 1193,
+          "sha256": "2e10a1c95abbf374fec5943848bf1081cd3bb7b44515e3c34a6a9410b10b6d0a",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n643.json",
+          "bytes": 3019,
+          "sha256": "7f17929b8e6f20b43d9bed6289f7483a8d3d8626efd30297b08a6296af9e0ab9",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n644.cert",
+          "bytes": 86018,
+          "sha256": "534c3f97e3790a948018702a229df4853c8332f5044b716e9d8c6c56a874a113",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n644.json",
+          "bytes": 828,
+          "sha256": "1bdb721ff429cfa03137fc860986472f4fba6be3f0699ecc75485bed9f54a9d4",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n645.json",
+          "bytes": 14664,
+          "sha256": "f7d266b6fe1d8248e00b7a531e895b07cf4583905bd615be6d9abc4a3d1c1141",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n646.json",
+          "bytes": 14664,
+          "sha256": "f8be5bea6c9a80172b24dcf8fae29698b8bbb4ff071ddfd8539fb00949b52873",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n647.json",
+          "bytes": 14664,
+          "sha256": "75571883df7a7ed3ba649cb551e7574b7e3dbebf979c17befb0f67371750e353",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n648.json",
+          "bytes": 14527,
+          "sha256": "6d9c2e8f2690c1869ebcfa678782df75dd8286d0de79335b0bb340e77d2f2c08",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n651.json",
+          "bytes": 15352,
+          "sha256": "9460f8a799eb7f3188ef044b7af52625b3ac74e88c568d99c7fd0cc8873fc75c",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n652.json",
+          "bytes": 20548,
+          "sha256": "3e7fbe1a0318435cda92924819686689d9a8d4d893a50c8e3631a7cf905752f6",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n653.json",
+          "bytes": 7649,
+          "sha256": "214f7d286585313c41ade1a26051583b73b8ab97ff350f95aaffbc15c93e1b92",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n654.json",
+          "bytes": 15749,
+          "sha256": "1fb4e7be3e4af555ddfb0b52a46321c6694a226a71407e0f7fd53e1edcb5f9bd",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n682.json",
+          "bytes": 1189,
+          "sha256": "b02c9bc93eb912c5a38b411d4c5423682a7b3bb6fba852f8843c166b235ff979",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n684.json",
+          "bytes": 1193,
+          "sha256": "78b5c9751e7cf8687576ef704d849cfc6e30a28ccac6ca4e6143ad60e3ad5ad1",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n689.cert",
+          "bytes": 89927,
+          "sha256": "11214083f842af2a60e14db48a936b7a26f6774ae1fb0b2305722b58c94f4858",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n689.json",
+          "bytes": 828,
+          "sha256": "767107714ed37fe517e6692833bacad511fbab681494a392f4c1c899ed032046",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n691.json",
+          "bytes": 1193,
+          "sha256": "8f9bb80c74fb4570e2d4ce4de11895b5837d573fa77b31bc644f92aa3a00bbb9",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n692.cert",
+          "bytes": 91568,
+          "sha256": "5b3df740a8925a8d3e34d08a31e73b1e756feb8e1e1912c54637fe30400f4f8c",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n692.json",
+          "bytes": 884,
+          "sha256": "d71bea8870438fa6eb2de90ba6f76a2a78dfbd29483ca262e30bbe07622cbf16",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n694.json",
+          "bytes": 3019,
+          "sha256": "417ab89ee143403f5b6fb5be29695a058664c0bb229f4fe673372d3e2a399d02",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n695.json",
+          "bytes": 1191,
+          "sha256": "2282342a55cb45abf74526141a363a4ab7e77b87c711dd8ab0eeeccad77c4c40",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n696.json",
+          "bytes": 15028,
+          "sha256": "b1edc17de49e843ac84da9b289e0abd1c1cc5d019a9e28e851b3122becffbd7a",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n697.json",
+          "bytes": 15028,
+          "sha256": "6251dd7f7477cc71ef3038b432cdd67ab2f6471a802c4aacfb40f0cd13c00e9a",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n698.json",
+          "bytes": 15028,
+          "sha256": "ccaf0469e6a0d0a6e07e783fad336644e4685726b31c20f937cde662976e26dd",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n699.cert",
+          "bytes": 202540,
+          "sha256": "753693c62a28828d9388b1611dabc57099044287a9109ef6b9069ecc208aad13",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n699.json",
+          "bytes": 956,
+          "sha256": "4b6c5d5ff57a263abfe3d074fda2250dd157b7f43ce1e132dfd341dd22371685",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n700.json",
+          "bytes": 6768,
+          "sha256": "343649c2b42e9c98b562f5779d1f877ff8e27693141f9c51329ff1408429fab4",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n702.json",
+          "bytes": 6410,
+          "sha256": "9a56424b4ec1b07c8ea82c6d22486dca443ca5737d9d37572aae211d83ae82a0",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n705.json",
+          "bytes": 15958,
+          "sha256": "f116a53befddfa77d046aac81ad490a0f6eeb798880d83bb7cd934566055a1d7",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n735.json",
+          "bytes": 1189,
+          "sha256": "1f0df2cfdd7d73a11067c8b8e8d539eea50ade61919f34139bfc1fa16bec0821",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n736.cert",
+          "bytes": 93695,
+          "sha256": "05f6312deb795b37614737f6413f7077e7cc735fc5ed7895a1393fde5966e0db",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n736.json",
+          "bytes": 829,
+          "sha256": "fd8cdcab06cfc9a6e89772d4dfa06097b648d75e9961cbcb1df1e9717255d70c",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n737.json",
+          "bytes": 1193,
+          "sha256": "041cc312380eb89fa004c97d6ecced8112775aa9d544c9a5939c0d35acc26ba1",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n742.json",
+          "bytes": 1191,
+          "sha256": "952bab8fae5e6af0e605c277e691b7c695ac2a16667d8c41f3f6f40d79cfa17a",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n743.cert",
+          "bytes": 104457,
+          "sha256": "3e432c4dafb434cd722590d89b0437bb1b215097c336ddedf43927e912f94b84",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n743.json",
+          "bytes": 829,
+          "sha256": "31ea74b4521eac74eb09285b0b7827c561c52a31b42535794b9d324b360f3e92",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n744.cert",
+          "bytes": 104675,
+          "sha256": "84a2b0b0eb6bebfaa3b2cf1ec6cad46a4b1cae9ebab1dac9702241e2f10e4be5",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n744.json",
+          "bytes": 829,
+          "sha256": "832f9aeb41f2a44ea5232b40ab346a3aa520c6290eb76c9562bc271c52c77e53",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n745.json",
+          "bytes": 1298,
+          "sha256": "6bb0ac5fc883899a09e1b6b685a1bc354fbcda350925e553257c5d233bfb7450",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n746.cert",
+          "bytes": 177610,
+          "sha256": "da7c19ced14c4a8fa9cacaf1936ecf9092950c6b631fbc5d43386ce6a4026850",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n746.json",
+          "bytes": 961,
+          "sha256": "deb93ccfac59185dc432cf298f29f9ce1330dfbde97f17d933c3fbe7d650124a",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n747.json",
+          "bytes": 14035,
+          "sha256": "79bdd12907e01e07a20c1762e6afe66ad7f81a570899854dcbf6f0de2b509b3d",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n748.json",
+          "bytes": 14035,
+          "sha256": "0950fbd258f5cb1e3ff863d4604a353fe09e3511652ef3b54573363b630876d8",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n749.json",
+          "bytes": 14035,
+          "sha256": "fab22065c02752113b468e7b11452b20b2c7296fbea3aeb98bf5f89b6b6614d0",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n750.json",
+          "bytes": 9032,
+          "sha256": "19c7003c228c6fd1dc094ee1d1c3479461e1ca53a4c12b7241ad5a1c21f5bd2b",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n751.json",
+          "bytes": 1956,
+          "sha256": "a7c309ff9b01f78db57a0d18d052818c7dff2ec87a3fc4e04088f9c8c08231bd",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n752.json",
+          "bytes": 8817,
+          "sha256": "9ed09bd144e7857ef180d5f8c9a65b8fd2a79e624f3bd1274c0898b2a60d3c1b",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n756.json",
+          "bytes": 15268,
+          "sha256": "1ad3091f1449e2dcec24e982ab45fff9d6d56a5da4fa7c6cb221ba1e4ee8ca8f",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n758.json",
+          "bytes": 49393,
+          "sha256": "fcc74be52d70b7c31c4b214357c31825d7afb35e09f7068a2ee6d96db7683513",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n790.json",
+          "bytes": 1189,
+          "sha256": "b25a3a77dbd59db785e812ffdecdbefe5637c1397cb9c0bbd6a3ff9e6e01e32e",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n791.json",
+          "bytes": 1193,
+          "sha256": "12d628018b8fe3c0836cc0e2078b014ea7fdec3a4aab0bb3dece6b2aedcdfed9",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n792.cert",
+          "bytes": 100465,
+          "sha256": "efff4db14534b3e203e183ac860246ae8a5788fc9e30df15d2f45487f60c2d85",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n792.json",
+          "bytes": 828,
+          "sha256": "140d256726a1af00b4ada7844cb4e4e3393884fa67ebaabda116814e95d982e9",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n797.json",
+          "bytes": 1191,
+          "sha256": "8c2a51e01240231c3691348c8123ea467c48adf2606305fac8000e1135f698aa",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n798.json",
+          "bytes": 1193,
+          "sha256": "f4c5a7f68af5b7f4e6ada5e26fdd33d34dbdf7503b4a9247420e82606dc172db",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n799.json",
+          "bytes": 1193,
+          "sha256": "3fdc9e3a67d5dc770515e43e17a75b1d42d6a23e11a6d8f7745119802b92195c",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n800.cert",
+          "bytes": 112336,
+          "sha256": "d4d5df2570ab47e041af3fa952cee9dd809f4e7b167c7a40da993fdd355b4422",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n800.json",
+          "bytes": 828,
+          "sha256": "e10b5850acf55abe63627e8ba1880a65116ce0d85b22a01c58d36c7da4eb6730",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n801.json",
+          "bytes": 6831,
+          "sha256": "1bd71e0cfd0e2b840f2e6d8ac8bed493a621ade71bf034ea2c3bace0e1c287d1",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n802.json",
+          "bytes": 6126,
+          "sha256": "82b91e6a9cb39fa2a2295dd7c68b4dc08abab14b252d613514e0b424dedbbca6",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n803.json",
+          "bytes": 2181,
+          "sha256": "90c596f787309788e570b19756b362a59d2983fadd271bef1ce01ecc3e9c693d",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n804.json",
+          "bytes": 14399,
+          "sha256": "63620fe80cf5131adfb20127aca2c72eba56c3e63394d2586c52965bc28bf4e1",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n805.json",
+          "bytes": 16707,
+          "sha256": "937d28d47ff367258bc2e35c153e4e39c6a84d94de1132272706e7eda9af313f",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n806.json",
+          "bytes": 16707,
+          "sha256": "cff9cea39febe6b69010a3260ba05cd72cf7c6241445e7154bb8b1fad3a8f6de",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n807.json",
+          "bytes": 2742,
+          "sha256": "4a2f52d8042ba9b65d8fc92ee7296f0e1c01bb445eaf8372ea8f71d19bc26ed0",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n808.json",
+          "bytes": 2186,
+          "sha256": "96fbe07fda04d3da57dc44c93906c6fd783400d985d9aca709fb61394d032ecf",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n809.json",
+          "bytes": 1958,
+          "sha256": "0e34d5c6b57d70145aece4a9ae99f164f8065c53a85591825479a85190a1f703",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n813.json",
+          "bytes": 6742,
+          "sha256": "9d8cad4e11e14df4bbb64eb3931ac5d767a2538b2ca7f26217f13570f24596fc",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n814.json",
+          "bytes": 11832,
+          "sha256": "52bc24ac0c511a5eb5df3921a8ddb6ff486e9102184710a275d8d6e25731aaf2",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n815.json",
+          "bytes": 1946,
+          "sha256": "39c5df0ff935b7cc9d34ba75666c3c0e0f08b69725077b4a804e5c47341c9181",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n850.cert",
+          "bytes": 108219,
+          "sha256": "f46882941956609ab78251ebea13d3e10222ba1deccb6e29cfeda3e16f9b2d9d",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n850.json",
+          "bytes": 828,
+          "sha256": "5691f379cbbfff64180da5eecfd3af725eaf774b7a478274456071188201089f",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n854.json",
+          "bytes": 1191,
+          "sha256": "695b52eede0b6156a9452b5a12e42622816ca99ab7af8f1feb27d62e42e3f438",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n855.json",
+          "bytes": 1193,
+          "sha256": "baeedf8a6f4b05adb83dcfb874771f50362791ec0908b40d608b7c20a1d9438b",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n856.json",
+          "bytes": 1193,
+          "sha256": "a9985988841788c00334eb71312fd97c4aa2e7a1bb8c112f9123e613a4d7db98",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n857.json",
+          "bytes": 1191,
+          "sha256": "15f3ba26dfd5d31c97ff308fbeb5ac2aa41b1df0d6ad97ffb5ecfe9fe8071489",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n858.json",
+          "bytes": 6133,
+          "sha256": "e0ddf8f65ca938e3efaf1456c3d8190d41c7b759dc648db90253a0d3920725b1",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n859.json",
+          "bytes": 6133,
+          "sha256": "95bcd5eb8a48abd98c2040b3716718ed71badc54569b837d58c1aad4bb8acff9",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n860.json",
+          "bytes": 2621,
+          "sha256": "45eeeee2057d55e2e82b55f07ab8fd1fa3db43cf77103a067c510ce33a49534f",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n862.cert",
+          "bytes": 114125,
+          "sha256": "3235d779621f54133b6a0065b156cad6c740867abf5ddd61b07eae68c485f732",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n862.json",
+          "bytes": 828,
+          "sha256": "20fc329b0447f5b75d80bdefabeb71c8616ed55eab5bcf963f7cc4a0ff8e0341",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n863.json",
+          "bytes": 17064,
+          "sha256": "4f2acea351f923b7eb7aba4e188170b061067f62bf501945fcd7ae6c7f8b9e58",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n864.json",
+          "bytes": 3100,
+          "sha256": "eb76081762f228eeae9509ba71ad33db563c46d920514461a3e494106dd72a0f",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n865.json",
+          "bytes": 2626,
+          "sha256": "e9e54e3d59b954a760e1698fdd1a5564ae8782fa6be3e81a26639a0ba62971e9",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n866.json",
+          "bytes": 2322,
+          "sha256": "5c6542774702c5a25b5eade0cfcd8a52f5fc065116192d6931a0b0da10eff336",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n867.json",
+          "bytes": 3705,
+          "sha256": "67f925671ed0bdab7113d92731a131e88ca55e09e00de8eb1161ea2a482019c1",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n868.json",
+          "bytes": 17284,
+          "sha256": "c6bc6afa6402d9f42a3bd31d4ed5b6e7627605c832cd69eb00af33a22a8c94a9",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n869.json",
+          "bytes": 12946,
+          "sha256": "54ffab6a93af43bd3520e1e45cf75678afedb4a1f9520e17dab96c4057c1b11a",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n870.json",
+          "bytes": 7105,
+          "sha256": "71e0bd237e1889e8f6203bfd82bf283b47f4ad5e00d3cd5c6635295ba469a9ab",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n871.json",
+          "bytes": 9033,
+          "sha256": "621f72ba165013b851a7a3f2564f37e0b0b6ede39e731014265a0721057e5c3b",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n872.json",
+          "bytes": 2306,
+          "sha256": "b54fc5a46fc5ec5b9f0c465730d6ec2b3b15e778bdd5511dfc0e515c8c0e0aa9",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n873.json",
+          "bytes": 1959,
+          "sha256": "ad456982c68cf10a37ed78a2d02d159666d0670ec8d27527800adbf4550db91e",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n909.json",
+          "bytes": 1191,
+          "sha256": "de1bdfbf309fedd067b184a57800076ec9343f83fa384ba508b93d446fe64908",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n913.json",
+          "bytes": 1191,
+          "sha256": "655a963936db4dbe82580ea98916adb4880b0c391d08d7c22bb36254d367d697",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n914.cert",
+          "bytes": 118765,
+          "sha256": "c970501fa9851a92d71ea68c3bce37da956b78ae68c77bed20ae70d5915c784e",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n914.json",
+          "bytes": 829,
+          "sha256": "4ca77a1e3438ad856c0cc51ed003faf5e32bdda58077973e42a8a6ba3da11f13",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n915.json",
+          "bytes": 1193,
+          "sha256": "8472004f161bc5e83f03720a06e97ff41f71e3f86874988850c64d8de4a2e77a",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n916.json",
+          "bytes": 1191,
+          "sha256": "5b1ca0fe2c03a94095bac6db26746f2f66fc96daaf7db691c48180ea7deaa8b6",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n917.json",
+          "bytes": 5327,
+          "sha256": "65713cd788e825beb41a91338f33a12432c5ecba01a03ff6a8cd6648cbf10846",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n918.json",
+          "bytes": 5327,
+          "sha256": "479f7f8c913ccee162aa4cd41bc3168beff8c84f10eb6a6a24910b869668a2dd",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n919.json",
+          "bytes": 2621,
+          "sha256": "0f5e7cdb9f1a150b3d6377f307649b3b98088cefcd3dac6008f10c29391abe8a",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n923.json",
+          "bytes": 3100,
+          "sha256": "dd370f33c1d0a4df7c0d377053b9c86414592bb93111725c9c514aff8252c005",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n924.json",
+          "bytes": 2626,
+          "sha256": "7c8d15a3de24d9f21b204a183cde931b339691a5ef1e5c2c410feeec1dca4cdb",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n925.json",
+          "bytes": 2322,
+          "sha256": "c4a43a20c55e1159caa96486580aa8347d24016791315ba66ceb67c91f644f2d",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n926.json",
+          "bytes": 4120,
+          "sha256": "56cb77e3b597dbad8722f4b2327820f89e620b95fc84534bd555db4ab37400ee",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n927.json",
+          "bytes": 14220,
+          "sha256": "7058648273e04f034d53994e9327955ecfdf298e5e86d3d534eb644d60d8ea4d",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n928.json",
+          "bytes": 15774,
+          "sha256": "7df5d09173818f6698e482682c955c962e74f6ab8b37a4a18f586d056ff09916",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n931.json",
+          "bytes": 6789,
+          "sha256": "6a815e4e4d8113bc5669ad129857baa07c6943f972a2c30b07bf670aa79e74d8",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n932.json",
+          "bytes": 2323,
+          "sha256": "86c05e12089e0958cbb41f2fee3a5b13213e96d714935c7ba708536b80ce0479",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n970.json",
+          "bytes": 1191,
+          "sha256": "cd65be5bac3f32f0430db2165bf09bafbd2fd3c6e10fb3fdfb908af71f4d5be8",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n975.json",
+          "bytes": 1193,
+          "sha256": "effc3c78463d1892373de72deba14dca49a57056f7e0a995cca917db17cf6691",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n976.cert",
+          "bytes": 125925,
+          "sha256": "6ce2b46de494b8663525d54187837d9a1f3de5c8e3b8d299ad95cfbf9965981b",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n976.json",
+          "bytes": 828,
+          "sha256": "429b3aabcf8238bd9539a47bef6d232b2fa814bc43ee3d419ccbf9552073c999",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n977.json",
+          "bytes": 1191,
+          "sha256": "0f8b9e8cc3296ea76f96d49ed5f4a3722a6824a92d89f49e6dbc66ae1d869949",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n978.json",
+          "bytes": 6191,
+          "sha256": "3ee66aac51db674d9242cdc8507885ec0e31a3b672dd40af6a7188850eef67e4",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n979.json",
+          "bytes": 6191,
+          "sha256": "096bfd4d4a4497d7fd57431708a67cc86bbcea3a08334c58c3e3eae55d51c6df",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n980.json",
+          "bytes": 2621,
+          "sha256": "0b505c4085ba96e08a97aa895f8d439801c58f40901cc9e4457ed734aaf65373",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n985.cert",
+          "bytes": 138563,
+          "sha256": "d732921777517a6544725727bae9732e3fd38e40742e5df8003f3ab745bf8533",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n985.json",
+          "bytes": 829,
+          "sha256": "3efc83e8b8598e7b08eaad399ac6839a5defb402033a08e089d956f5ed06cba7",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n986.cert",
+          "bytes": 138775,
+          "sha256": "d480175fe1d2838326360de3fbbb2123e7c666d854d636d47498caca24092017",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n986.json",
+          "bytes": 829,
+          "sha256": "b0be9cc5b055b73537772bb126c681bda3d1ef9fb8ec315243cb2e9fc9e27a26",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n987.json",
+          "bytes": 2712,
+          "sha256": "be4540bacb8e646248ed52b73635db1f645c807c67c1d41177d9eaeb7aa57431",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n988.cert",
+          "bytes": 210971,
+          "sha256": "c1558b48b707de7bce49f9081b42519aaf399a9c753fda3cdeb21ea6b1f903e1",
+          "reason": "A certificate the issue restates from an earlier public commit of the source, at the same exact side; a report from that commit, owned by its own import, and not this issue's. Pinned for provenance."
+        },
+        {
+          "path": "certificates/n988.json",
+          "bytes": 960,
+          "sha256": "890fe12e4325ce45663039012ae937ef13f9a71157237d3bb86a684658331080",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n989.json",
+          "bytes": 29460,
+          "sha256": "b1b0c3465cab765a983f9aec4355409ca8b9993e0195f83efe3c2d5e5889d7d7",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n994.json",
+          "bytes": 7146,
+          "sha256": "e0494df7ef53030bfdd4d998117a7626e775ccef8690cf93bee4b90e3acebd2e",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n995.json",
+          "bytes": 2215,
+          "sha256": "210b48111ff017db28414f1254181cb851368e07b13e5d6babb97bd71ec1aff0",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certificates/n996.json",
+          "bytes": 16046,
+          "sha256": "1dc2088c6cad116f6d39e521b33ff172e03170a1c2b5de3c916c11404e9f79ef",
+          "reason": "Each explicit certificate's credit and provenance record; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "certified_bounds.json",
+          "bytes": 7502955,
+          "sha256": "e63df89f3ddf059860dd99dc1930a87d69584318543c8e2513a44c1a7dc147cf",
+          "reason": "The author's finite certificate and construction index through n = 10000, which the issue links; each row's bound, kind and recipe is read from it at the pin and recorded in the replay receipt. Pinned, not copied: 7.5 MB, most of it above the counts this packet decides."
+        },
+        {
+          "path": "public_bounds.json",
+          "bytes": 8197118,
+          "sha256": "faa94ec17a5ece63686a7af93624bd9cb94cf1c4093f6122fba3837e91f2d185",
+          "reason": "The author's public comparisons, which the issue links; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "record_provenance.json",
+          "bytes": 719985,
+          "sha256": "a40ae6802ec45786e903c7fe65d04db5733582ae208eba8cb8dfe5dc57e85a43",
+          "reason": "The author's per-count attribution record through n = 1024; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "upper_bounds.json",
+          "bytes": 14398454,
+          "sha256": "51bc6a7c160cc1c987e936cf02ddc044eaeece29f3cd7832aea49e70e5f0898e",
+          "reason": "The author's complete bound index through n = 10000, which the issue links; pinned for provenance."
+        },
+        {
+          "path": "verify_bound_certificate.py",
+          "bytes": 3567,
+          "sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+          "reason": "The source's exact checker, byte-identical to the copy the 18 October packet retains under its MIT licence.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/verify_bound_certificate.py"
+        }
+      ],
+      "license": "The repository states no licence for its data or prose: the tree has no LICENSE, and neither README.md nor the certificate READMEs state reuse terms. The 139 certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). verify_bound_certificate.py states that it is Evan Daniel's MIT-licensed verifier with modifications by Francisco Couzo with Codex, under the MIT licence in BOUND_VERIFIER_LICENSE.txt (Copyright (c) 2026 Evan Daniel); both are byte-identical to the copies the couzo-issue678-2026-10-18 packet retains under that licence, and are pinned against them. Prose, indexes, manifests, credit records and the construction checker are hash-pinned and not copied.",
+      "claims": [
+        "Issue #715 reports 1285 improved upper bounds for n = 328 to 9913, 173 at or below 1024 and 1112 above, each the exact side of the source's certificate or construction rounded up at 12 decimal places, with the exact certificate headers authoritative. At each of the 173 counts at or below 1024 the pin holds an explicit certificate certificates/nN.cert of n squares whose header side rounds up to the issue's print and equals the bound certified_bounds.json states; 29 of them are the index's L-border constructions and 9 its deletions, written out in full.",
+        "The issue says the rows include native and browser refinements and their square-tiling, repeated L-border and deletion consequences, not all independent discoveries; that both maintained exact geometry routes accept the finite source witnesses; and that the compared Goebel, strip, Friedman, tiling, L-border and deletion constructions do not match or beat any listed bound. Those runs and comparisons are the author's; no optimality claim is made."
+      ]
+    }
+  ]
+}

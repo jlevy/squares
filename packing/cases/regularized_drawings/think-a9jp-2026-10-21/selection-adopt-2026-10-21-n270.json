@@ -1,0 +1,405 @@
+{
+ "format": "regularized-view-selection-v1",
+ "generated_by": "python -m devtools.regularize_select",
+ "policy": "docs/project/policies/regularization-policy.md",
+ "rule": "adoptable: both exact routes accept the view, its side is at most U and at most today's drawn side, row 10 admits it, it is the view its run draws, and it improves on today's drawing under the policy's improvement rule (docs/project/policies/regularization-policy.md#11-the-improvement-rule): A view improves on a drawing when it is worse than the drawing on none of the goals and better on at least one. Ties on the other goals are fine, and a tie on every goal is no improvement. The goals: light squares: fewer is better; uneven squares: fewer is better; near-axis squares: fewer is better; angle classes: fewer is better; hues: fewer is better; house total of full shared sides: more is better; stage total of full shared sides: more is better; exact side: smaller is better; exactness: exactly verified is better than numerically checked. Chosen: the first adoptable view (Evan Daniel's, then grid-slack by rising threshold) that no other adoptable view dominates",
+ "tree": "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/wt-703",
+ "runs": {
+  "evand": [
+   "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/c708s5-runs/adopt-2026-10-21-n270-evand"
+  ],
+  "grid": [
+   "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/c708s5-runs/adopt-2026-10-21-n270-grid-deg05",
+   "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/c708s5-runs/adopt-2026-10-21-n270-grid-deg1",
+   "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/c708s5-runs/adopt-2026-10-21-n270-grid-deg5"
+  ]
+ },
+ "chosen": [
+  {
+   "n": 270,
+   "source": "evand:adopt-2026-10-21-n270-evand:solved",
+   "run": "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/c708s5-runs/adopt-2026-10-21-n270-evand",
+   "output": "solved",
+   "gains": [
+    "near_axis",
+    "classes",
+    "house_total",
+    "stage_total"
+   ],
+   "minus_drawn": 0.0
+  }
+ ],
+ "register_candidates": [],
+ "commands": [
+  "python -m devtools.regularize_evand layer --run-dir /tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/c708s5-runs/adopt-2026-10-21-n270-evand --repo-root .."
+ ],
+ "counts": {
+  "270": {
+   "today": {
+    "n": 270,
+    "drawing": {
+     "kind": "regularized-view",
+     "path": "packing/atlas/known-best/regularized/n-270-regularized.yaml.gz",
+     "generator": "regularize_axis_components/2"
+    },
+    "verified": true,
+    "side": "16928162252196750114897964982713/1000000000000000000000000000000",
+    "printed_side": null,
+    "light_axis": 5,
+    "uneven_axis": 10,
+    "near_axis": 1,
+    "classes": 22,
+    "hues": 19,
+    "house_total": 735,
+    "stage_total": 746,
+    "house": [
+     69,
+     4,
+     20,
+     17,
+     160
+    ],
+    "stage": [
+     59,
+     13,
+     21,
+     17,
+     160
+    ]
+   },
+   "chosen": "evand:adopt-2026-10-21-n270-evand:solved",
+   "candidates": [
+    {
+     "n": 270,
+     "source": "evand:adopt-2026-10-21-n270-evand:solved",
+     "kind": "evand",
+     "run": "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/c708s5-runs/adopt-2026-10-21-n270-evand",
+     "rank": 0,
+     "output": "solved",
+     "threshold": null,
+     "view": true,
+     "why": null,
+     "governing_output": "solved",
+     "governing_decision": "admit",
+     "stored_decision": "admit",
+     "stored_layer_output": "solved",
+     "layer_output": "solved",
+     "stale": false,
+     "governing": true,
+     "routes": {
+      "exact_verify": true,
+      "independent": true
+     },
+     "side": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "upper": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "s_W": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "row": 10,
+     "decision": "admit",
+     "reason": "every admission condition holds",
+     "measured": true,
+     "measures": {
+      "light_axis": 5,
+      "uneven_axis": 10,
+      "near_axis": 0,
+      "classes": 21,
+      "hues": 19,
+      "house_total": 743,
+      "stage_total": 753
+     },
+     "measured_against": {
+      "house": [
+       69,
+       4,
+       20,
+       17,
+       160
+      ],
+      "stage": [
+       59,
+       13,
+       21,
+       17,
+       160
+      ]
+     },
+     "pose": {
+      "one_to_one": true,
+      "unnamed_turns": 0,
+      "max_move": 0.13034,
+      "max_turn_deg": 0.217543
+     },
+     "minus_U": 0.0,
+     "minus_s_W": 0.0,
+     "minus_drawn": 0.0,
+     "at_most_U": true,
+     "below_U": false,
+     "above_drawn": false,
+     "smaller": false,
+     "replaces_unverified": false,
+     "now": {
+      "light_axis": 5,
+      "uneven_axis": 10,
+      "near_axis": 1,
+      "classes": 22,
+      "hues": 19,
+      "house_total": 735,
+      "stage_total": 746
+     },
+     "gains": [
+      "near_axis",
+      "classes",
+      "house_total",
+      "stage_total"
+     ],
+     "worse": [],
+     "notes": [],
+     "refusals": [],
+     "adoptable": true
+    },
+    {
+     "n": 270,
+     "source": "grid:adopt-2026-10-21-n270-grid-deg05",
+     "kind": "grid",
+     "run": "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/c708s5-runs/adopt-2026-10-21-n270-grid-deg05",
+     "rank": 0,
+     "output": "grid",
+     "threshold": 0.5,
+     "view": true,
+     "why": null,
+     "governing": true,
+     "routes": {
+      "exact_verify": true,
+      "independent": true
+     },
+     "side": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "upper": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "s_W": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "row": 10,
+     "decision": "admit",
+     "reason": "every admission condition holds",
+     "measured": true,
+     "measures": {
+      "light_axis": 5,
+      "uneven_axis": 10,
+      "near_axis": 0,
+      "classes": 21,
+      "hues": 19,
+      "house_total": 743,
+      "stage_total": 749
+     },
+     "measured_against": {
+      "house": [
+       69,
+       4,
+       20,
+       17,
+       160
+      ],
+      "stage": [
+       59,
+       13,
+       21,
+       17,
+       160
+      ]
+     },
+     "pose": {
+      "one_to_one": true,
+      "unnamed_turns": 0,
+      "max_move": 0.13034,
+      "max_turn_deg": 0.217543
+     },
+     "minus_U": 0.0,
+     "minus_s_W": 0.0,
+     "minus_drawn": 0.0,
+     "at_most_U": true,
+     "below_U": false,
+     "above_drawn": false,
+     "smaller": false,
+     "replaces_unverified": false,
+     "now": {
+      "light_axis": 5,
+      "uneven_axis": 10,
+      "near_axis": 1,
+      "classes": 22,
+      "hues": 19,
+      "house_total": 735,
+      "stage_total": 746
+     },
+     "gains": [
+      "near_axis",
+      "classes",
+      "house_total",
+      "stage_total"
+     ],
+     "worse": [],
+     "notes": [],
+     "refusals": [],
+     "adoptable": true
+    },
+    {
+     "n": 270,
+     "source": "grid:adopt-2026-10-21-n270-grid-deg1",
+     "kind": "grid",
+     "run": "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/c708s5-runs/adopt-2026-10-21-n270-grid-deg1",
+     "rank": 1,
+     "output": "grid",
+     "threshold": 1.0,
+     "view": true,
+     "why": null,
+     "governing": true,
+     "routes": {
+      "exact_verify": true,
+      "independent": true
+     },
+     "side": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "upper": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "s_W": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "row": 10,
+     "decision": "admit",
+     "reason": "every admission condition holds",
+     "measured": true,
+     "measures": {
+      "light_axis": 5,
+      "uneven_axis": 10,
+      "near_axis": 0,
+      "classes": 21,
+      "hues": 19,
+      "house_total": 743,
+      "stage_total": 749
+     },
+     "measured_against": {
+      "house": [
+       69,
+       4,
+       20,
+       17,
+       160
+      ],
+      "stage": [
+       59,
+       13,
+       21,
+       17,
+       160
+      ]
+     },
+     "pose": {
+      "one_to_one": true,
+      "unnamed_turns": 0,
+      "max_move": 0.13034,
+      "max_turn_deg": 0.217543
+     },
+     "minus_U": 0.0,
+     "minus_s_W": 0.0,
+     "minus_drawn": 0.0,
+     "at_most_U": true,
+     "below_U": false,
+     "above_drawn": false,
+     "smaller": false,
+     "replaces_unverified": false,
+     "now": {
+      "light_axis": 5,
+      "uneven_axis": 10,
+      "near_axis": 1,
+      "classes": 22,
+      "hues": 19,
+      "house_total": 735,
+      "stage_total": 746
+     },
+     "gains": [
+      "near_axis",
+      "classes",
+      "house_total",
+      "stage_total"
+     ],
+     "worse": [],
+     "notes": [],
+     "refusals": [],
+     "adoptable": true
+    },
+    {
+     "n": 270,
+     "source": "grid:adopt-2026-10-21-n270-grid-deg5",
+     "kind": "grid",
+     "run": "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/c708s5-runs/adopt-2026-10-21-n270-grid-deg5",
+     "rank": 2,
+     "output": "grid",
+     "threshold": 5.0,
+     "view": true,
+     "why": null,
+     "governing": true,
+     "routes": {
+      "exact_verify": true,
+      "independent": true
+     },
+     "side": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "upper": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "s_W": "16928162252196750114897964982713/1000000000000000000000000000000",
+     "row": 10,
+     "decision": "admit",
+     "reason": "every admission condition holds",
+     "measured": true,
+     "measures": {
+      "light_axis": 5,
+      "uneven_axis": 10,
+      "near_axis": 0,
+      "classes": 21,
+      "hues": 19,
+      "house_total": 743,
+      "stage_total": 749
+     },
+     "measured_against": {
+      "house": [
+       69,
+       4,
+       20,
+       17,
+       160
+      ],
+      "stage": [
+       59,
+       13,
+       21,
+       17,
+       160
+      ]
+     },
+     "pose": {
+      "one_to_one": true,
+      "unnamed_turns": 0,
+      "max_move": 0.13034,
+      "max_turn_deg": 0.217543
+     },
+     "minus_U": 0.0,
+     "minus_s_W": 0.0,
+     "minus_drawn": 0.0,
+     "at_most_U": true,
+     "below_U": false,
+     "above_drawn": false,
+     "smaller": false,
+     "replaces_unverified": false,
+     "now": {
+      "light_axis": 5,
+      "uneven_axis": 10,
+      "near_axis": 1,
+      "classes": 22,
+      "hues": 19,
+      "house_total": 735,
+      "stage_total": 746
+     },
+     "gains": [
+      "near_axis",
+      "classes",
+      "house_total",
+      "stage_total"
+     ],
+     "worse": [],
+     "notes": [],
+     "refusals": [],
+     "adoptable": true
+    }
+   ]
+  }
+ }
+}

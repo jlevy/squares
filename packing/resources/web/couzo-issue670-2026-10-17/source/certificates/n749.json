@@ -1,0 +1,34 @@
+{
+  "n": 749,
+  "packing": "n749.txt",
+  "packing_sha256": "5dbc964af75c04ea7c16f53c93e6c6c1096e78ba34ea6d21ac67fcdd2ae7a05b",
+  "certificate": "certificates/n749.cert",
+  "certificate_sha256": "818c5a8e32f15c67c6396593c7b39cff74d619a40fd0de709fab885ca629ebd9",
+  "rational_side": "1744270550712468686420605878518578470766501430592831160067/62460712348211708519448157123482117085188235500000000000",
+  "kind": "rational witness",
+  "origin": {
+    "construction": {
+      "label": "parametric construction",
+      "kind": "construction"
+    },
+    "seed_credit": "franciscouzo",
+    "search_job": {
+      "id": 105191,
+      "method": "hop",
+      "source": "n749.txt",
+      "source_origin": "constructed",
+      "source_sha256": "0a88cadf8df1a97fc380637e61e3232db8b5402ce6c406ba878091bf51f3ec76",
+      "constructed_seed": {
+        "construction": "L-border and deletion",
+        "source": "n749.txt",
+        "source_sha256": "071c60b412b7b01e93cbe15b7a2c20a6e83db17936a0747e7321565f41637658",
+        "source_n": 749,
+        "source_side": 27.925990619512284,
+        "layers": 0,
+        "deleted": 0,
+        "side": 27.925990619512284
+      }
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

@@ -1328,7 +1328,7 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
                     "n": n,
                     "path": _relative(plan.path),
                     # True where the row's `path` holds the upstream file named by `url`
-                    # byte for byte, as ry-xu's complete certificate texts are; ry-xu's
+                    # byte for byte, as Xu's complete certificate texts are; Xu's
                     # n = 51 record is a canonical extraction, so it stays derived.
                     "raw_asset_retained": plan.path
                     in (

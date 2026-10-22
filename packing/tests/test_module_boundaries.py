@@ -1497,6 +1497,13 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_evand_arrangement_adoption.py": {
             "test_production_clone_copies_every_scientific_input_and_admits_exact_links",
         },
+        # 2026-10-21, both cases on a four-cpu host at a load average of about four: 6.55s
+        # and 6.50s of call, each running both routes over de Winter's n = 260 certificate
+        # (T-196) 1e-30 past contact. The same two sharp controls on a small packing stay
+        # on the pull-request surface.
+        "test_evand_arrangement_reports.py": {
+            "test_both_routes_refuse_a_retained_certificate_1e30_past_contact",  # 6.55s
+        },
         # Hosted run37739373988/job113186283659: actual complete clone, independent
         # custody bytes and subprocess admission; no clone or assertion is removed.
         "test_refinement_custody.py": {
@@ -1605,6 +1612,13 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_upper_bound_reports_574.py": {
             "test_each_574_side_is_below_its_case_and_smallest_but_at_211_237_241_and_304",
             "test_the_574_register_plan_states_each_bound_as_check_standing_reads_it",
+        },
+        # 101.9s of call time across its sixteen cases on 2026-10-22 (think-ql4v, RF-3 of the
+        # 21 October review, A9 of #718's review A), locally under `nice` on a shared
+        # four-core host: each case runs both maintained exact routes on one of the four
+        # certificates, 5.47s at 227 to 7.51s at 260.
+        "test_upper_bound_reports_regularized_1020.py": {
+            "test_both_routes_meet_contact_and_refuse_1e30_past_it",
         },
         # 4s of call time across 2.
         "test_validation_cli.py": {

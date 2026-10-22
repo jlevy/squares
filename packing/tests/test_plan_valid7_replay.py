@@ -2,7 +2,7 @@
 
 ``devtools.plan_valid7_replay`` prices a full replay of either Valid7 checker from its run
 record, splits it into shards, and compares a sharded replay with the published record.
-Daniel's record is retained, so the tests over it use the real file; wand125's release
+Daniel's record is retained, so the tests over it use the real file; Hosono's release
 records are pinned by digest and not retained, so its paths are tested on small
 synthetic records, and its committed plan is read only as a receipt.
 """

@@ -9,6 +9,7 @@ from typing import Any
 import pytest
 
 from devtools import (
+    check_site_rendering,
     overview_sections,
     preview_site,
     render_overview,
@@ -75,12 +76,16 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     # publication renders it: since the house adoption of 11 October 2026 (think-fvz4)
     # T-115's page links the results that took its counts, and a one-result register
     # would hold those links to rows it does not carry.
-    [canonical] = render_overview.iter_result_fragments(result_ids=frozenset({RESULT}))
+    canonical = list(
+        render_overview.iter_result_fragments(
+            result_ids=frozenset({RESULT, "T-037", "T-057", "T-186"})
+        )
+    )
     reader = site_documents.render_document(
         document, tree=repo_links.repository_tree(), report=site_documents.LinkReport()
     )
     root = tmp_path_factory.mktemp("result-popover")
-    render_overview.write_site(root, [start, canonical, reader])
+    render_overview.write_site(root, [start, *canonical, reader])
     server = preview_site.serve(root, 0)
     try:
         yield f"http://127.0.0.1:{server.server_port}"
@@ -128,6 +133,82 @@ def test_successful_article_fetch_replaces_outer_titles_and_names_the_dialog(
         assert page.locator("#t-115").evaluate(FOCUSED)
         page.locator("#t-115").press("Enter")
         assert page.evaluate(TITLE, POPOVER)["titleCount"] == 1
+    finally:
+        page.close()
+
+
+@pytest.mark.parametrize("width", [320, 390, 640, 641, 1280])
+def test_result_title_keeps_its_lines_when_the_sans_fonts_arrive(
+    browser: Any, served: str, width: int
+) -> None:
+    """The mobile ID has its own line before and after the real math fonts load."""
+    context = browser.new_context(viewport={"width": width, "height": 900})
+    held: list[Any] = []
+
+    def hold_font(route: Any) -> None:
+        held.append(route)
+
+    try:
+        context.route("**/assets/fonts/source-sans-3-*.woff2", hold_font)
+        page = context.new_page()
+        page.goto(f"{served}/result/t-037.html", wait_until="domcontentloaded")
+        page.wait_for_timeout(check_site_rendering.SETTLE_MS)
+        assert held
+        title = page.locator("article.site-result > h1")
+        label = title.locator(":scope > .site-result-id")
+        site_browser.api().expect(label).to_have_text("T-037:")
+        site_browser.api().expect(label).to_have_css(
+            "display", "block" if width <= 640 else "inline"
+        )
+        before_title = title.bounding_box()
+        header = page.locator("article.site-result > header")
+        before_header = header.bounding_box()
+        assert before_title
+        assert before_header
+        for request in held:
+            request.continue_()
+        page.wait_for_load_state("load")
+        check_site_rendering.wait_for_fonts(page)
+        after_title = title.bounding_box()
+        after_header = header.bounding_box()
+        assert after_title
+        assert after_header
+        assert after_title["height"] == pytest.approx(before_title["height"], abs=0.05)
+        assert after_header["y"] == pytest.approx(before_header["y"], abs=0.05)
+        math = title.locator(".kpress-math")
+        site_browser.api().expect(math).to_have_css("text-transform", "none")
+        site_browser.api().expect(math).to_have_css("letter-spacing", "normal")
+        site_browser.api().expect(math).to_have_css("font-variant-caps", "normal")
+        assert title.locator(".kpress-math-semantic mi").all_text_contents() == ["s"]
+    finally:
+        context.close()
+
+
+@pytest.mark.parametrize("width", [320, 390, 641, 1280])
+def test_long_result_titles_keep_their_text_and_fit_the_page(
+    browser: Any, served: str, width: int
+) -> None:
+    """Plain and mixed prose titles retain natural wrapping beside the new ID span."""
+    page = browser.new_page(viewport={"width": width, "height": 900})
+    try:
+        for identifier in ("T-037", "T-057", "T-186"):
+            page.goto(f"{served}/result/{identifier.lower()}.html", wait_until="load")
+            check_site_rendering.wait_for_fonts(page)
+            title = page.locator("article.site-result > h1")
+            site_browser.api().expect(title.locator(":scope > .site-result-id")).to_have_text(
+                identifier + ":"
+            )
+            headline = title.locator(":scope > .site-result-title")
+            site_browser.api().expect(headline).not_to_be_empty()
+            assert title.get_attribute("id") == identifier.lower()
+            boxes = [
+                title.bounding_box(),
+                *(node.bounding_box() for node in headline.locator(".kpress-math").all()),
+            ]
+            for bounds in boxes:
+                assert bounds
+                assert bounds["x"] >= -1
+                assert bounds["x"] + bounds["width"] <= width + 1
     finally:
         page.close()
 

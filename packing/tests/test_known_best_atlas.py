@@ -86,13 +86,15 @@ from sqpack.yamlio import safe_load
 
 #: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
 #: The first SQUISH update moved n = 179 and 258 onto packet-derived facts;
-#: the second also moved n = 88. Complete evand and ry-xu packets now supersede
+#: the second also moved n = 88. Complete evand and Xu packets now supersede
 #: earlier catalogue sources. These inventory counts follow the current corpus; the house
 #: adoption of 12 October 2026 moved n = 176 onto SQUISH's issue 500 packet (think-fvz4),
 #: and its pass for issue 528 moved n = 264 onto Daniil Ostashev's packet (think-cq95), and
 #: that of 15 October n = 204 onto his issue 562 packet (T-162), and that of 19 October
-#: n = 229 onto Evan Daniel's issue 674 packet (T-199).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 45}
+#: n = 229 onto Evan Daniel's issue 674 packet (T-199), and that of 20 October n = 227 and
+#: 260 onto Joost de Winter's issue 668 packet (T-196), and that of 21 October n = 260 onto
+#: Francisco Couzo's issue 678 packet (T-223).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 43}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -123,11 +125,13 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # Kingbird) on 15 October, to Daniil Ostashev's issue 562 packet (T-162), and 29 (from
     # Kingbird) on 17 October, to PR #622's packet (T-195), and on 19 October 183 (from the
     # grid), to Evan Daniel's issue 680 packet (T-220, think-jh4w), and 229 (from
-    # Kingbird), to his issue 674 packet (T-199).
+    # Kingbird), to his issue 674 packet (T-199), and on 20 October 227 and 260 (both from
+    # Kingbird), to Joost de Winter's issue 668 packet (T-196), and on 21 October 260 again,
+    # to Francisco Couzo's issue 678 packet (T-223, think-xu4d).
     "n=1..324": {
         "exact-grid": 174,
-        "kingbird-derived-facts": 74,
-        "packet-derived-facts": 76,
+        "kingbird-derived-facts": 72,
+        "packet-derived-facts": 78,
     },
 }
 
@@ -704,7 +708,7 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
 
 @pytest.mark.parametrize("n", [51, 70, 261, 308])
 def test_a_linked_house_manifest_refuses_a_noncanonical_house_path(n: int) -> None:
-    """An ry-xu house (51) or one adopted on 11 October 2026 (70, 261, 308) is read only
+    """A Xu house (51) or one adopted on 11 October 2026 (70, 261, 308) is read only
     from its canonical leaf."""
     document = json.loads((ATLAS / "manifest.json").read_text(encoding="utf-8"))
     entry = next(row for row in document["atlas"]["entries"] if row["n"] == n)
@@ -2158,12 +2162,26 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # construction credit. T-195 adds one source at n = 29.
     # On 19 October 2026 the #673 correction made Evan Daniel 308's finder, as his
     # source asks; Kevin Fang's two-wedge construction, which no other count credits,
-    # is named in that case's credit sentence and leaves this list.
-    assert len(expected_names) == 25
+    # is named in that case's credit sentence and leaves this list. On 20 October 2026 the
+    # adoption at 227 and 260 (T-196) drew the poster's first de Winter packings, and his
+    # name joined it.
+    assert len(expected_names) == 26
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
-    # re-housed still holds another count.
-    assert len(expected_sources) == 22
+    # re-housed still holds another count. The adoption of 20 October draws from three
+    # more, his packets at 154 and 308 (T-222, T-221) and Francisco Couzo's issue 678
+    # packet at 204 (T-223), with no new name: Mishapolk's KKT refinements and PingYou Ltd's
+    # PR 574 certificates still hold other counts. The same day's adoption at 227 and 260
+    # draws from one more, Joost de Winter's issue 668 packet (T-196), and the catalogue that
+    # held both counts still holds others; at 260 Couzo's packet replaces de Winter's on 21
+    # October, and de Winter's still holds 227. The adoption of 21 October draws from one
+    # more, Evan Daniel's packet at 270 (T-224), with no new name:
+    # PingYou Ltd's PR 574 certificates still hold other counts. The adoption of 22 October
+    # draws 204, 227, 229 and 260 from one packet, Evan Daniel's regularized lists of 20
+    # October (T-225), and no longer from Couzo's issue 678 packet, de Winter's issue 668
+    # packet or Daniel's n229 update, which held nothing else: two sources fewer, and no new
+    # name, since the credit at 227 keeps de Winter as the packing's finder.
+    assert len(expected_sources) == 25
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2191,6 +2209,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Chaoweeraprasit",
         "Couzo",
         "Daniel",
+        "de Winter",
         "Gupta",
         "Ostashev",
         "PingYou Ltd",
@@ -4355,10 +4374,10 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
-    # 25 since the #673 correction of 19 October 2026 (see the credits test above).
+    # 26 since the adoption at 227 and 260 of 20 October 2026 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 25
+        == 26
     )
 
 

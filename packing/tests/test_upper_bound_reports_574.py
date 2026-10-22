@@ -482,15 +482,24 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     # October 2026 moved 302 to issue 583's certificate (T-181), smaller than the algebraic
     # side there, as the pending row for #583 already said, and that of 19 October 2026
     # moved 229 to Evan Daniel's certificate (T-199), below the 10 + 4*sqrt(2) PR #574
-    # states there; every other side is at or below its case.
+    # states there, and that of 20 October 2026 moved 227 and 260 to Joost de Winter's
+    # issue-668 certificates (T-196), below the 17/2 + 5*sqrt(2) and 11 + 4*sqrt(2) PR #574
+    # states there, and that of 21 October 2026 moved 260 on to Francisco Couzo's issue-678
+    # certificate (T-223), and that of 22 October 2026 moved 227, 229 and 260 on to Evan
+    # Daniel's regularized views (T-225); every other side is at or below its case.
     assert {n for n, row in rows.items() if row["case"]["verified_relation"] == "above"} == {
+        227,
         229,
+        260,
         302,
     }
+    for n in (227, 229, 260):
+        assert rows[n]["case"]["reported_source_key"] == "[Daniel regularized lists 2026-10-20]"
+        assert rows[n]["case"]["reported_relation"] == "above"
     assert all(
         row["case"]["verified_relation"] in {"equal", "below"}
         for n, row in rows.items()
-        if n not in {229, 302}
+        if n not in {227, 229, 260, 302}
     )
     assert sorted(n for n, row in rows.items() if row["below_every_other"]) == [207]
     assert rows[302]["pending"]

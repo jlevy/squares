@@ -1,0 +1,23 @@
+{
+  "n": 994,
+  "packing": "n994.txt",
+  "packing_sha256": "c2c565bf8e38fae641db9562d72526f8fc423ea7ae7a2f66b7acbe947f983847",
+  "certificate": "certificates/n994.cert",
+  "certificate_sha256": "dcc468b40c8c6149308fb27f41a9724b8da77fd0c802bb8e08581d7b3aca14f6",
+  "rational_side": "77974320914860356574551007824936555605789566629152741086050230455057538280674420781287882693/2437052656947357018270396672176932134395043833083616478064055649214736503796500000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Francisco Couzo",
+    "construction": {
+      "kind": "L-border",
+      "source_n": 935,
+      "layers": 1,
+      "parent_certificate_sha256": "2c8f92df1563e819011ac9b46a462fdd3ebbb973573e7e8201c3e61bc0c727ec",
+      "capacity": 996
+    },
+    "source_n": 996,
+    "deleted_squares": 2,
+    "source_certificate_sha256": "af6452069cf4227c62c06ddc3e29f6783aaef580d0dc77818960bce8ed39afb8"
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

@@ -4,9 +4,10 @@ This document defines the project’s record formats and naming conventions.
 Where another document restates an id or naming convention, this one takes precedence.
 This page governs the *shape of what is produced*; how a session is conducted is
 [`operating-rules.md`](operating-rules.md), and a rule about agent conduct belongs there
-rather than here.
-Changing program status remains owned by `SYNOPSIS.md`, and schemas and
-source artifacts remain authoritative for their own fields and evidence.
+rather than here. Person names, credit text and attribution exceptions are owned by
+[Attribution Policy](attribution.md).
+Changing program status remains owned by `SYNOPSIS.md`, and schemas and source artifacts
+remain authoritative for their own fields and evidence.
 Read this before adding an artifact, workflow phase, round, series, or tool.
 
 Each rule is marked **[checked]** when something fails on a violation, or
@@ -399,6 +400,23 @@ Mathematical terminology is defined in [`SYNOPSIS.md`](SYNOPSIS.md#terminology);
 [`README.md`](README.md)’s Essential Terms are short forms that may abbreviate but must
 not contradict it, and a term either appears in the synopsis or is marked local where it
 is used. Both restatements have drifted from it before.
+
+**Project terms are plain descriptive phrases, each defined in the synopsis.**
+[convention] A term this project introduces is a phrase a reader can parse without a
+glossary, such as *house best packing*, and it enters
+[the synopsis’s terminology](SYNOPSIS.md#terminology) before other documents use it.
+*House* is only a modifier meaning the project’s own, as in *house best packing* (short
+form *house best*: “the house best at 204”), *house drawing* and *house renderer*. It is
+never a bare noun (“the house”, “houses”) and never part of a coined compound
+(“re-house”, “house candidate”, “algebraic house”). *Algebraic* keeps its mathematical
+sense.
+An *algebraic side* here is an irrational one, held as the one root of its minimal
+polynomial in an isolating interval; a rational side is called rational.
+So write “a house best packing with an algebraic side”.
+Code identifiers such as `select_houses` and `PENDING_ADOPTION` keep their names, and
+the synopsis maps them to the term.
+Much existing prose, generated case pages included, still writes the bare noun; read it
+as the house best packing.
 
 **Mathematical notation follows four rules.** [convention]
 

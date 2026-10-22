@@ -109,6 +109,8 @@ from devtools import upper_bound_houses as adopted_houses
 from devtools import wand125_fn1_bindings as fn1
 from devtools.check_checkout_imports import environment_for
 from devtools.repo_scope import tracked_files
+from sqpack.contributor_occurrences import MANIFEST as OCCURRENCES_MANIFEST
+from sqpack.contributors import PEOPLE_DIR, load_contributors
 from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
 
@@ -233,6 +235,62 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # with this note, the snapshot measured 229,442,770 bytes, 195,374 under that cap. At
 # #692's head, after #688 raised the cap to 221 MiB, it read 231,475,393 bytes, 259,903
 # under it.
+# 2026-10-21, think-bl1p: main 51ac9d7ee read 232,783,862 bytes, 10 under the unchanged
+# 222 MiB cap, with #712, #704 and #706 waiting behind it. Answered by option (b), as
+# #464 and #692 were: 220 historical files join this list, 2,906,231 bytes. They are the
+# 18 and 19 October intake passes' raw API dumps, inventories and sweep and records
+# transcripts with the 14 October review's printed outputs (23 files, 1,812,785 bytes),
+# the series' launch and execution manifests, exit and timing stamps, producer logs and
+# superseded run files (148, 985,912), Session 105--185 receipts and logs (26, 69,221),
+# X-048's route-review receipts (15, 28,444) and three benchmark outputs (8, 9,869).
+# `--audit-snapshot --prune-candidate` finds no registered mention and no inline or
+# result rescue for any of them, and no ledger-checked `pipeline_changes` or
+# `closeout.changes` path names one. Kept on those grounds: session-186's validation
+# disposition (a closeout path), the series' top-level `results/*.jsonl` (the
+# basin-events step globs them), and each experiment's descriptor, README and
+# mechanical summary. Kept because `tests/test_negative_controls.py` pins them in
+# workers: exp-140's canonical cover, whose stdout twin left on 2026-10-07, and Session
+# 105's four source identities. With the 220 left out, all 174 controls fire at `-j 2`,
+# and each of the 50 distinct commands, run unmutated in a worker with them and in one
+# without them, prints the same output apart from wall times and the runner-preflight
+# lease timestamp; the four already red (the full suite, `validate_schemas`, the
+# operating-rules append script and `test_change_scoped_selection`) are red
+# identically. Left out, with this note and its release record, the snapshot measures
+# 229,891,287 bytes, 2,892,585 under the cap.
+# 2026-10-22, think-i903: main 7359fa8b6 read 231,655,578 bytes, 1,128,294 under the
+# then 222 MiB cap, and main 0281e7763, with #720 merged, 232,414,111, 369,761 under it,
+# with issue 719's records (about 0.5 to 0.8 MB) behind them. Answered by option (b)
+# again, with four on-request tools (below) and 121 entries here: 599 files and
+# 4,782,231 bytes that no worker command reads. They are the regularized drawings' run
+# evidence (each run's per-count reports, receipts and `run.json`, the selections' JSON
+# and the review galleries: 506 files, 2,912,772 bytes), the regularized bounds'
+# generated views (60, 448,778), the 14 October ledger's retained lane claim copies and
+# undecided sides with the 14 and 16 October comment drafts (16, 851,114), the 8 October
+# n17 reconciliation and the 18 and 19 October issue and source receipts (5, 97,846),
+# the house adoption's prior-state receipts (9, 191,528), the ds7 lower-bound audit
+# (230,276) and the 2 October author-checker profile's timings and attribution (49,917).
+# Every README and `selection-*.md` stays in workers, as do each ledger's README, data
+# files and `lane-claims/README.md`, the 11 October custody receipt
+# (`upper_bound_houses` names it) and the n5 motion lab (`test_motion_lab` reads it).
+# Each of the 50 distinct commands and the five commands the worker tests run, unmutated
+# under `strace -f -e trace=%file` in a worker built at 0b09ac278 that held them, opened
+# none of the 599 except in sweeps that look for nothing here: `check_readme`'s
+# retired-identifier sweep (113 files, none holding the identifier), `validate_schemas`'
+# defect-citation sweep (the two comment drafts, neither citing a defect) and the
+# directory walks of `ledger check`, `check_generated_markdown` and
+# `test_change_scoped_selection`. `--audit-snapshot --prune-candidate` with the 121
+# against main's selector finds no registered mention and no inline or result rescue,
+# and every entry prunes something. #578 has since raised the cap to 255 MiB for the
+# contributor profiles (see `SNAPSHOT_MAX_BYTES`): main d660905ec, with it merged, reads
+# 266,509,045 bytes, 877,835 under it, and at that tree the audit finds no contributor
+# rescue either and the entries leave exactly the same 607 files with the tools below.
+# With them left out, all 174 controls fire at `-j 2`, and each of the 50 distinct
+# commands, run unmutated at d660905ec in a worker with them and in one without them,
+# prints the same output apart from wall times and the runner-preflight lease timestamp,
+# except that `check_no_embedded_js` reads 1,902 Python files rather than 1,910, the
+# eight below fewer, to the same verdict; the four already red are red identically. Left
+# out, with this note and its release record, the snapshot measures 261,568,999 bytes,
+# 5,817,881 under the cap.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
@@ -258,6 +316,395 @@ UNREAD_WORKER_OUTPUTS = frozenset(
         ROOT / "atlas/rendering/free-quench-n1-trace.json",
         ROOT / "cases/regularized_drawings/think-ip1p-2026-10-19/review-229"
         "/grid-slack-adopt-2026-10-19-n155-271-grid-deg05.svg",
+        # 2026-10-21 (think-bl1p): 220 historical files, by the note above.
+        *(
+            ROOT / "benchmarks" / relative
+            for relative in (
+                "n17-bb-native/results-2026-10-05.jsonl",
+                "results/author-checker-profile-2026-10-02/attribution/raw",
+                "validation-efficiency/local-admissions",
+            )
+        ),
+        ROOT / "campaign/explorations/X048-route-review/receipts",
+        *(
+            ROOT / "campaign/agent-sessions" / relative
+            for relative in (
+                "session-105-validation/pivot-control-48a4544f.jsonl",
+                "session-105-validation/reducible-control-48a4544f.jsonl",
+                *(
+                    f"session-153-{name}"
+                    for name in (
+                        "hosted-full.json",
+                        "integrated-push.json",
+                        "native-pilot.json",
+                        "native-pilot-batch256.json",
+                        "native-pilot-batch512.json",
+                        "native-pilot-batch512.rows.jsonl",
+                        "native-pilot-two-workers.json",
+                        "native-pilot-two-workers.rows.jsonl",
+                        "snapshot-readme-controls.jsonl",
+                        "snapshot-synopsis-control.jsonl",
+                    )
+                ),
+                "session-163-push-interrupted.log",
+                "session-164-pool-phase-initial.log",
+                "session-164-pool-phase-passed.log",
+                "session-164-publication-initial.log",
+                "session-164-validation",
+                *(
+                    f"session-165-validation/restamp-{part}.txt"
+                    for part in (
+                        "command",
+                        "ended",
+                        "exit",
+                        "host-load",
+                        "provenance",
+                        "started",
+                    )
+                ),
+                "session-185-frozen-full-checkpoint.json",
+            )
+        ),
+        *(
+            ROOT / "campaign/issue-intake" / relative
+            for relative in (
+                *(
+                    f"intake-20261018/{name}"
+                    for name in (
+                        "432-final-reply.json",
+                        "bounded-four-head-refresh-20261018.json",
+                        "claim-inventory.json",
+                        "open-issues.json",
+                        "pr-667.json",
+                        "records-before-doc-map-fix.txt",
+                        "records-bootstrap-attempt.txt",
+                        "release-impact-pending.txt",
+                        "source-commit-files.json",
+                        "source-commits.json",
+                        "sweep-closing.txt",
+                        "sweep-initial.txt",
+                    )
+                ),
+                *(
+                    f"intake-20261019/{name}"
+                    for name in (
+                        "603-comment.json",
+                        "couzo-source-inventory.json",
+                        "evand-source-inventory.json",
+                        "fang-source-inventory.json",
+                        "sweep-closing-offline.txt",
+                        "sweep-closing-raw.txt",
+                        "sweep-initial.txt",
+                    )
+                ),
+                *(
+                    f"upper-bounds-20261014/review/{name}-output.txt"
+                    for name in ("bug_demos", "compare_geometry", "recompute")
+                ),
+                "upper-bounds-20261014/review/recompute-rerun.txt",
+            )
+        ),
+        *(
+            SESSION184_RESULTS / relative
+            for relative in (
+                "bc-047-n29-refinement.json",
+                "bc-063-n5-rigidity-evidence.json",
+                "bc-066-n29-elimination-wall.json",
+                "bc-070-n29-solution-count.json",
+                "bc-198-class-program-register.txt",
+                "bc-200-run-191-50.log",
+                "bc-200-run-77-20.log",
+                "bc-202-n26-138-25.json",
+                "bc-211-run-a-n13-399-100.json",
+                "bc-211-run-a-n13-399-100.log",
+                "bc-211-run-c-control-n12-99-25.json",
+                "bc-211-run-c-control-n12-99-25.log",
+                "exp-046-h-044-chunk-expressibility-verdict.json",
+                "exp-056-h-052-n17-sequential-larger-prefix.progress.json",
+                "exp-211-h213-animate-kinetics.json",
+                *(
+                    f"agenda-030/{name}"
+                    for name in (
+                        "bc-293-measure-four-bound-96-25.json",
+                        "bc-293-measure-priced-96-25.json",
+                        "pr127-rounded-counterexample.json",
+                        "pr127-segment-replay.json",
+                        "pr127-unit-control.json",
+                    )
+                ),
+                *(
+                    f"agenda-032/exp-{number}-{part}"
+                    for number in (136, 137, 139, 140, 141, 142, 143, 144)
+                    for part in (
+                        "exit.txt",
+                        "launch-head.txt",
+                        "launch-status.txt",
+                        "launched-at.txt",
+                        "process.log",
+                    )
+                ),
+                *(
+                    f"agenda-032/{name}"
+                    for name in (
+                        "exp-137-stdout.json",
+                        "exp-139-exact-full-net-residual.json",
+                        "exp-139-stdout.jsonl",
+                        "exp-141-corner-dual-salvage-audit.json",
+                        "exp-141-stdout.jsonl",
+                        "four-owner-five-dot.png",
+                        "unrun-independent-audit/test_check_five_dot_cover.py.txt",
+                    )
+                ),
+                "agenda-036",
+                *(
+                    f"agenda-038/{name}"
+                    for name in (
+                        "n12-3969-1000-t017-grid4-windows7-run.json",
+                        "n12-397-100-t017-grid4-windows7-run.json",
+                        "n17-23-5-t019-grid4-windows8-run.json",
+                        "n17-461-100-t019-auto-windows5-run.json",
+                        "n18-4675-1000-t027-auto-windows5-certificate.json",
+                        "n18-4675-1000-t027-auto-windows5-run.json",
+                        "n19-241-50-t020-auto-windows6-run.json",
+                        "n19-481-100-t020-auto-windows6-run.json",
+                        "n20-971-200-t021-auto-windows6-run.json",
+                        "n20-973-200-t021-grid4-windows7-2400-run.json",
+                        "n20-973-200-t021-grid4-windows7-run.json",
+                        "n21-97-20-t021-auto-windows6-run.json",
+                    )
+                ),
+                *(
+                    f"{experiment}/producer.log"
+                    for experiment in (
+                        "exp-121-h-110-fixed-p12-escape",
+                        "exp-122-diamond-conditional-cover-screen",
+                        "exp-123-near45-localization",
+                        "exp-124-full-square-compatibility-screen",
+                        "exp-125-h124-complete-residual-cover/axis",
+                        "exp-125-h124-complete-residual-cover/diagonal",
+                        "exp-126-h099-complete-graph-candidate",
+                        "exp-127-h124-collision-augmented-axis-cover",
+                    )
+                ),
+                "exp-128-h099-seven-row-support-ceiling/verification.log",
+                "exp-206-projection-search",
+                *(
+                    f"exp-237-n17-polynomial-root/run-001/{name}"
+                    for name in (
+                        "checker-exit.txt",
+                        "checker-timing.log",
+                        "producer-exit.txt",
+                        "producer-timing.log",
+                    )
+                ),
+                "exp-240-n17-mixed-capacity-census/run-001/started-at.txt",
+                "exp-241-n17-closed-cell-symmetry/run-001/host-load.txt",
+                "exp-241-n17-closed-cell-symmetry/run-001/started-at.txt",
+                "exp-245-n17-catalogue-polynomial/audit/primes_and_digits.out.txt",
+                "exp-245-n17-catalogue-polynomial/audit/recheck.out.txt",
+                *(
+                    f"{experiment}/{name}"
+                    for experiment in (
+                        "exp-294-stages-exact-replay",
+                        "exp-295-two-center-children",
+                        "exp-300-one-round-direct-regional-propagation",
+                        "exp-301-one-round-fixed-core-regional-propagation",
+                        "exp-303-normalized-contact-rank-filter",
+                        "exp-304-n11-envelope-windows",
+                        "exp-305-case-preserving-owned-propagation",
+                        "exp-306-n11-envelope-representation",
+                        "exp-307-owned-core-guarded-clause",
+                        "exp-308-n11-corner-cardinality",
+                        "exp-309-subpattern-relevance",
+                        "exp-310-bb-header-preflight",
+                        "exp-311-c2-full-replay",
+                        "exp-312-saved-pose-incircles",
+                        "exp-313-incircle-projection-redundancy",
+                        "exp-314-incircle-disk-projection",
+                    )
+                    for name in ("execution-manifest.json", "launch.json")
+                ),
+                "exp-298-coverage-y-prefilter/phase-execution-reconciled.json",
+                "exp-302-two-child-collective-propagation/launch.json",
+                "exp-306-n11-envelope-representation/phase-reconciliation.json",
+                "exp-309-subpattern-relevance/inputs",
+                *(
+                    f"exp-311-c2-full-replay/acquisition-{name}"
+                    for name in (
+                        "execution-manifest.json",
+                        "launch.json",
+                        "mechanical-summary.json",
+                        "phase-execution.json",
+                        "receipt.json",
+                        "supervision.json",
+                    )
+                ),
+                "exp-315-shared-centre-endpoint/execution-manifest.json",
+            )
+        ),
+        # 2026-10-22 (think-i903): 121 entries, 599 files, by the note above. The
+        # regularized drawings' run evidence first; each run's README and
+        # `selection-*.md` stay.
+        *(
+            ROOT / "cases/regularized_drawings" / run / name
+            for run, names in (
+                (
+                    "think-0ut1-2026-10-16",
+                    (
+                        "grid-slack-timing.tsv",
+                        "leftovers-1016",
+                        "leftovers-audit-deg1-1016",
+                        "leftovers-audit-deg5-1016",
+                        "leftovers-deg05-1016",
+                        "leftovers-deg1-1016",
+                        "leftovers-deg5-1016",
+                        "selection-leftovers-tree.txt",
+                        "selection-leftovers.json",
+                    ),
+                ),
+                (
+                    "think-30n2-2026-10-16",
+                    (
+                        *(
+                            f"adopt-2026-10-16-n29-{variant}"
+                            for variant in ("evand", "grid-0.5", "grid-1", "grid-5")
+                        ),
+                        "selection-n29.json",
+                    ),
+                ),
+                (
+                    "think-3mry-2026-10-17",
+                    (
+                        *(
+                            f"adopt174{part}-1017"
+                            for part in ("", "-b", "-c", "-deg05", "-deg1", "-deg5")
+                        ),
+                        *(f"adopt174-c-{degree}-1017" for degree in ("deg05", "deg1", "deg5")),
+                        "selection-adopt174-c.json.gz",
+                        "selection-adopt174.json.gz",
+                    ),
+                ),
+                (
+                    "think-3zi3-2026-10-16",
+                    (
+                        *(f"3c{part}-1016" for part in ("", "-deg05", "-deg1", "-deg5")),
+                        "selection-3c.json",
+                    ),
+                ),
+                (
+                    "think-kpm3-2026-10-16",
+                    (
+                        *(f"3b{part}-1016" for part in ("", "-deg05", "-deg1", "-deg5")),
+                        "selection-3b.json",
+                    ),
+                ),
+                (
+                    "think-la7h-2026-10-16",
+                    (
+                        *(
+                            f"3a-rerun{part}-1016"
+                            for part in ("", "-303", "-deg05", "-deg1", "-deg5", "-deg5b", "-s")
+                        ),
+                        "evand-addr644-1016",
+                        "selection-3a-d1.json",
+                        "selection-3a.json",
+                    ),
+                ),
+                (
+                    "think-z7wn-2026-10-16",
+                    (
+                        "review-211",
+                        "selection-r3cl.json",
+                        "selection-z7wn-a.json",
+                        *(
+                            f"z7wn-{side}{part}-1016"
+                            for side in ("a", "b")
+                            for part in ("", "-deg05", "-deg1", "-deg5")
+                        ),
+                    ),
+                ),
+                (
+                    "think-jh4w-2026-10-19",
+                    (
+                        *(
+                            f"adopt-2026-10-19-n183-{variant}"
+                            for variant in ("evand", "grid-0.5", "grid-1", "grid-5")
+                        ),
+                        "selection-n183.json",
+                    ),
+                ),
+                *(
+                    (
+                        run,
+                        (
+                            *(
+                                f"adopt-{adoption}-{variant}"
+                                for variant in ("evand", "grid-deg05", "grid-deg1", "grid-deg5")
+                            ),
+                            f"selection-adopt-{adoption}{suffix}",
+                        ),
+                    )
+                    for run, adoption, suffix in (
+                        ("think-ip1p-2026-10-19", "2026-10-19-n155-271", ".json.gz"),
+                        ("think-h8jm-2026-10-20", "2026-10-20-n154-308", ".json"),
+                        ("think-xu4d-2026-10-20", "2026-10-20-n204-260", ".json.gz"),
+                        ("think-a9jp-2026-10-21", "2026-10-21-n270", ".json"),
+                    )
+                ),
+                (
+                    "think-qdcc-2026-10-20",
+                    (
+                        *(
+                            f"adopt-2026-10-20-n227-260-{variant}"
+                            for variant in ("evand", "grid-deg05", "grid-deg1", "grid-deg5")
+                        ),
+                        "selection-n227-n260.json",
+                    ),
+                ),
+                (
+                    "think-ql4v-2026-10-22",
+                    (
+                        *(
+                            f"adopt-2026-10-22-{counts}-{variant}"
+                            for counts in ("n204-260", "n227")
+                            for variant in ("evand", "grid-deg05", "grid-deg1", "grid-deg5")
+                        ),
+                        "selection-adopt-2026-10-22-n204-260.json.gz",
+                        "selection-adopt-2026-10-22-n227.json.gz",
+                    ),
+                ),
+            )
+            for name in names
+        ),
+        ROOT / "cases/regularized_bounds/views",
+        ROOT / "cases/regularized_bounds/grid-slack-2026-10-13/views",
+        # The 14 October ledger's lane claim copies, undecided sides and comment drafts;
+        # its README, data files and `lane-claims/README.md` stay.
+        *(
+            ROOT / "campaign/issue-intake" / relative
+            for relative in (
+                *(
+                    f"upper-bounds-20261014/lane-claims/{lane}"
+                    for lane in ("couzo", "mishapolk", "pingyou", "pr574")
+                ),
+                "upper-bounds-20261014/undecided-sides.json",
+                "upper-bounds-20261014/comments.yaml",
+                "upper-bounds-20261016/comments.yaml",
+                "n17-20261008",
+                "intake-20261019/issue-678.json",
+                "intake-20261018/manual-source-receipt.json",
+                "intake-20261019/manual-source-receipt.json",
+            )
+        ),
+        *(
+            ROOT / f"devtools/house-adoption-prior-state-2026-10-{day}.json.xz"
+            for day in (11, 12, 15, 16, 17, 19, 20, 21, 22)
+        ),
+        ROOT / "frontier/ds7-lower-bound-audit.json",
+        *(
+            ROOT / "benchmarks/results/author-checker-profile-2026-10-02" / name
+            for name in ("timings.json", "attribution/attribution.json")
+        ),
     }
 )
 PRUNE = frozenset(
@@ -988,6 +1435,38 @@ REGULARIZATION_TOOLS = frozenset(
     )
 )
 PRUNE |= REGULARIZATION_TOOLS
+# 2026-10-21, issue 686's import (think-9vjn), with main d640ad8fb: 8,969 bytes over the
+# cap. Its tool runs on request and only its test imports it; `--audit-snapshot` finds no
+# registered mention or rescue for either (27,204 bytes), the regularization tools' grounds.
+# 2026-10-22 (think-i903, with the note at `UNREAD_WORKER_OUTPUTS`): four more join on
+# the same grounds, with their tests (170,410 bytes): issue 715's replay, the 22 October
+# backlog's beyond-horizon replay (#720), the 14 October ledger's exact decision of its
+# undecided comparisons, whose input `undecided-sides.json` leaves with the note's
+# entries, and the Couzo follow-up report's registration. Each runs on request and only
+# its own test imports it; no control, validation step or worker test runs one, and
+# `--audit-snapshot` finds no registered mention or rescue for any of the eight files.
+# In a worker they are read only where every module or text file is: by the
+# embedded-JavaScript and probe scans, `check_readme`'s retired-identifier sweep, and
+# the whole suite's unmutated collection, which stops on the worker's missing `HEAD`
+# either way. Not `intake_comments.py`: `ledger check` stats it as a declared campaign
+# path. Not `couzo_678_replay.py`: `upper_bound_houses` imports it and `check_results`
+# opens it in workers.
+ON_REQUEST_IMPORT_TOOLS = frozenset(
+    ROOT / relative
+    for relative in (
+        "devtools/muglich_686_import.py",
+        "tests/test_muglich_686_import.py",
+        "devtools/couzo_715_replay.py",
+        "tests/test_upper_bound_reports_715.py",
+        "devtools/beyond_horizon_replay.py",
+        "tests/test_beyond_horizon_replay.py",
+        "devtools/decide_undecided_comparisons.py",
+        "tests/test_decide_undecided_comparisons.py",
+        "devtools/register_couzo_followup_report.py",
+        "tests/test_register_couzo_followup_report.py",
+    )
+)
+PRUNE |= ON_REQUEST_IMPORT_TOOLS
 # Build caches: excluded from the counted surface and from every worker tree, by
 # NAME at any depth. Not a prune, and the distinction is the point. Every entry in
 # `PRUNE` is a committed path that a worker does not need; these are generated
@@ -1582,7 +2061,50 @@ def root_files() -> tuple[Path, ...]:
 # Raise to 222 MiB, the least whole MiB above this surface, with unchanged selection and
 # the oversized pre-clone refusal: 972,603 bytes of headroom. It is measured
 # for this change alone. Three portable workers are bounded at 666 MiB.
-SNAPSHOT_MAX_BYTES = 222 * 1024 * 1024
+#
+# 2026-10-20, contributor profiles (#578, think-wrh8, think-iyao) merged with main
+# 4851d8193: `--source-bytes` read 238,732,991 bytes, 5,949,119 over 222 MiB. Priced
+# against main's blobs of the same paths, the profile work adds 54 files (992,050 bytes;
+# the occurrence manifest is 716,713 of them) and grows shared files by 125,705 bytes.
+# Nearly all of the rest is Gobel's retained 1979 PDF (4,982,398 bytes), which main
+# tracks but does not copy: his profile and an inspected-byline receipt declare it, and
+# validate_schemas consumes both, so keep the complete private PDF and every other
+# profile and occurrence dependency. No unrelated prune is justified. The custody
+# regression checks the PDF's bytes, private index and both loaders. After the second
+# merge, of main e7de85ff6 (#701, T-223), the surface read 239,280,102 bytes, 204,774
+# over 228 MiB, the growth being T-223's records. Raise to 229 MiB, the least whole MiB
+# above it, with unchanged selection and the oversized pre-clone refusal: 843,802 bytes
+# of headroom. Three portable workers are bounded at 687 MiB.
+#
+# 2026-10-21, the completed profile identity review (think-4m6m):
+# `--audit-snapshot` reads 263,907,248 bytes. The newly declared primary-byline
+# dependency `resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf`
+# contributes 25,831,878 bytes: it is a complete volume scan, with the byline on
+# PDF pages 287 and 296. Without this one dependency the same selection reads
+# 238,075,370 bytes, below the former 229 MiB cap. The profile loader requires the
+# named archive, so retain the complete private file rather than omitting or
+# excerpting it. Its full PDF credit census remains pending; copied custody does
+# not certify inspection. Raise to 252 MiB, the least whole MiB above this measured
+# surface, with 333,904 bytes of headroom and unchanged source selection and
+# pre-clone oversized refusal. Three portable workers remain bounded at 756 MiB.
+# 2026-10-21, the profile branch merged with main d7923b8d8 (#706 and #716):
+# `--source-bytes` reads 264,512,602 bytes, 271,450 over 252 MiB. The merged
+# adoption records and their complete deciding evidence remain in the same private
+# source roster. Raise to 253 MiB, the least whole MiB above this measured surface,
+# leaving 777,126 bytes before this comment, with no source exclusions and the same
+# oversized pre-clone refusal. Three portable workers remain bounded at 759 MiB.
+# 2026-10-21, merge of main 7359fa8b6 (#717 and #718): the unchanged
+# source roster measures 265,715,597 bytes, 425,869 above 253 MiB. Retain all
+# deciding evidence and raise only to the next whole MiB: 254 MiB, leaving
+# 622,707 bytes before this comment. Three workers remain bounded at 762 MiB;
+# source selection and oversized pre-clone refusal are unchanged.
+# 2026-10-22, merge of main 0281e7763 (PR #720): the unchanged source roster
+# measures 266,502,917 bytes, 164,613 above 254 MiB. Its 205 beyond-horizon rows
+# and complete deciding evidence remain in the private snapshot. Raise to 255 MiB,
+# the least whole MiB above that measurement, leaving 883,963 bytes before this
+# comment. Three workers remain bounded at 765 MiB; source selection and oversized
+# pre-clone refusal are unchanged.
+SNAPSHOT_MAX_BYTES = 255 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something
@@ -1884,10 +2406,41 @@ def defect_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
     return _declared_pruned_targets(_defect_paths(log), roots)
 
 
+def contributor_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
+    """Pruned archive files explicitly supporting contributor identity and bio claims."""
+    directory = ROOT / PEOPLE_DIR
+    if not directory.is_dir():
+        return []
+    registry = load_contributors(directory, repo=REPO)
+    selected_roots = frozenset(LINKED_PRUNE_ROOTS if roots is None else roots)
+    targets: set[Path] = set()
+    for contributor in registry.by_id.values():
+        for source in contributor.sources:
+            if source.archive_path is not None:
+                path = (REPO / source.archive_path).resolve()
+                if in_pruned_roots(path, selected_roots):
+                    targets.add(path)
+    manifest = ROOT / OCCURRENCES_MANIFEST
+    if manifest.is_file():
+        from sqpack.contributor_occurrences import dependency_paths  # noqa: PLC0415
+
+        targets.update(
+            path.resolve()
+            for path in dependency_paths(manifest, repo=REPO)
+            if in_pruned_roots(path.resolve(), selected_roots)
+        )
+    return sorted(targets)
+
+
 def snapshot_pruned_targets() -> list[Path]:
     """All pruned source files needed by checks that run inside a worker."""
     return sorted(
-        {*linked_pruned_targets(), *result_pruned_targets(), *defect_pruned_targets()}
+        {
+            *linked_pruned_targets(),
+            *result_pruned_targets(),
+            *defect_pruned_targets(),
+            *contributor_pruned_targets(),
+        }
     )
 
 
@@ -1991,6 +2544,7 @@ def snapshot_audit(
     roots = (*LINKED_PRUNE_ROOTS, *proposed)
     linked = set(linked_pruned_targets(roots=roots))
     registered = {*result_pruned_targets(roots=roots), *defect_pruned_targets(roots=roots)}
+    contributors = set(contributor_pruned_targets(roots=roots))
     records = safe_load(spec_path.read_text(encoding="utf-8"))["controls"]
 
     def rows(selected: Sequence[Path] | set[Path]) -> list[dict[str, object]]:
@@ -2005,7 +2559,8 @@ def snapshot_audit(
         copied = [path for path in paths if in_pruned_roots(path, below)]
         linked_here = {path for path in linked if in_pruned_roots(path, below)}
         registered_here = {path for path in registered if in_pruned_roots(path, below)}
-        rescued = linked_here | registered_here
+        contributors_here = {path for path in contributors if in_pruned_roots(path, below)}
+        rescued = linked_here | registered_here | contributors_here
         mentions = []
         for record in records:
             target = (ROOT / record["file"]).resolve()
@@ -2022,6 +2577,7 @@ def snapshot_audit(
                 "currently_copied_bytes": sum(sizes[path] for path in copied),
                 "inline_rescue": rows(linked_here),
                 "result_rescue": rows(registered_here),
+                "contributor_rescue": rows(contributors_here),
                 "net_saved_bytes": sum(sizes[path] for path in copied if path not in rescued),
                 "registered_mentions": mentions,
             }
@@ -2030,7 +2586,8 @@ def snapshot_audit(
     saved = sum(
         sizes[path]
         for path in paths
-        if in_pruned_roots(path, frozenset(proposed)) and path not in linked | registered
+        if in_pruned_roots(path, frozenset(proposed))
+        and path not in linked | registered | contributors
     )
     return {
         "source_bytes": total,
@@ -2087,9 +2644,15 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
         and BUILD_CACHES.isdisjoint(path.relative_to(REPO).parts)
     ]
     register = ROOT / "frontier/results.yaml"
+    contributor_documents = sorted(
+        path for path in inventory if path.parent == ROOT / PEOPLE_DIR and path.suffix == ".md"
+    )
+    occurrence_manifest = ROOT / OCCURRENCES_MANIFEST
     defect_log = ROOT / "defects.yaml"
     logs = [defect_log] if defect_log in inventory else []
-    readers = [*documents, register, *logs]
+    readers = [*documents, register, *logs, *contributor_documents]
+    if occurrence_manifest in inventory:
+        readers.append(occurrence_manifest)
     queries = "".join(inventory[path][0] + "\n" for path in readers)
     contents = subprocess.run(
         ["git", "cat-file", "--batch"],
@@ -2114,6 +2677,23 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
     for document in documents:
         for raw in INLINE_LINK.findall(texts[document]):
             path = (document.parent / raw).resolve()
+            if path in inventory and in_pruned_roots(path, roots):
+                rescued.add(path)
+    for document in contributor_documents:
+        contributor = safe_load(texts[document].split("---\n")[1])["contributor"]
+        for source in contributor["sources"]:
+            if "archive_path" in source:
+                path = (REPO / source["archive_path"]).resolve()
+                if path in inventory and in_pruned_roots(path, roots):
+                    rescued.add(path)
+    if occurrence_manifest in texts:
+        manifest = safe_load(texts[occurrence_manifest])
+        dependencies = [row["origin"]["path"] for row in manifest["occurrences"]]
+        dependencies.extend(
+            row["path"] for row in manifest["inspections"] if row["status"] == "inspected"
+        )
+        for raw in dependencies:
+            path = (REPO / raw).resolve()
             if path in inventory and in_pruned_roots(path, roots):
                 rescued.add(path)
     declared = result_paths(safe_load(texts[register]))

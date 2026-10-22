@@ -250,18 +250,18 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     derived = [
         entry for entry in marked if records.results[entry]["kind"] in check_results.BOUND_KINDS
     ]
-    # Thirty since 2026-10-02, when wand125's replayed rectangle certificates (T-045,
+    # Thirty since 2026-10-02, when Hosono's replayed rectangle certificates (T-045,
     # T-070) superseded T-030 at n = 18, T-020 at n = 19, T-021 at n = 20 and T-047 at
     # n = 26 and 29, the last counts each of them held; thirty-one later that day, when
-    # the 1 October replays (T-074) beat wand125's point certificates (T-044) at the last
+    # the 1 October replays (T-074) beat Hosono's point certificates (T-044) at the last
     # of their counts; thirty-two since 3 October, when squarepacker's rescaling (T-078)
     # superseded Daniel's s(12) >= 15680/3951 (T-049); thirty-three since the merge of the
     # same day, when the replays recorded in parallel (T-063, T-069) beat Bašić and
     # Slivková's piercing bound (T-087) at both of its counts; thirty-four since 5 October,
     # when R071's replay (T-093) superseded R068 (T-043) at n = 17; thirty-five later that
-    # day, when wand125's n = 84 certificate of 5 October (T-094), decided here by
+    # day, when Hosono's n = 84 certificate of 5 October (T-094), decided here by
     # sqverify-fast, superseded T-071 at the last count it held; thirty-seven with
-    # wand125's mixed certificate on a declared net (T-096), which took n = 18 from both
+    # Hosono's mixed certificate on a declared net (T-096), which took n = 18 from both
     # of its rectangle entries, the replay T-045 and the report T-046; thirty-eight when
     # squarepacker's v1.1 (T-095) took n = 12's reported lower bound from T-078, and
     # thirty-nine when its replays took the verified one from T-079 the same day; forty
@@ -269,13 +269,13 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # way as T-094, superseded T-072 at n = 76, its one count; forty-two when Evan
     # Daniel's exact optima (T-098) took the last counts of Couzo's first certificates
     # (T-057) and his second (T-092), the first upper bounds here to be superseded;
-    # forty-three when wand125's certificate on a finer declared net (T-099) took n = 18,
+    # forty-three when Hosono's certificate on a finer declared net (T-099) took n = 18,
     # the one count T-096 held; forty-five when Evan Daniel's exact certificates of the
     # catalogue's packings (T-101) took the verified ceilings at n = 69, 83 and 87 from the
-    # certificates of their pictures (T-088, T-089); forty-six when wand125's check2
+    # certificates of their pictures (T-088, T-089); forty-six when Hosono's check2
     # certificate at n = 20 (T-104) took both of that count's lanes, the last T-077 held;
     # forty-eight when the check2 certificates of n = 18 and 19 (T-102, T-103) took both
-    # lanes there from T-099 and T-100, the one count each held; forty-nine when wand125's
+    # lanes there from T-099 and T-100, the one count each held; forty-nine when Hosono's
     # mixed certificate of 3 October for n = 52 (T-082), decided here by sqverify-fast,
     # took the last count T-070 held; fifty when T-117's exact rational refinements
     # took n = 105 and 292, the last verified ceilings T-056 held; fifty-four when
@@ -398,6 +398,12 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-170",
         "T-171",
         "T-198",
+        "T-196",
+        "T-199",
+        "T-223",
+        "T-226",
+        "T-227",
+        "T-228",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -433,6 +439,10 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # PingYou Ltd's own re-solves at 261, 105 and 272 (T-169 to T-171).
     # The adoption of 19 October 2026 took 229 to Evan Daniel's update (T-199), which
     # supersedes his opening certificate of the day before (T-198), its only count.
+    # The adoption of 22 October 2026 took 204, 227, 229 and 260 to Evan Daniel's
+    # regularized views (T-225), the last houses of Joost de Winter's T-196, Daniel's
+    # T-199 and Francisco Couzo's T-223; Couzo's #670, #672 and #675 rows (T-226 to
+    # T-228), registered the same day, are superseded from registration.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records
@@ -473,7 +483,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         assert by, entry
         assert entry not in by, entry
     assert view.superseding(records.results["T-037"], records) == ("T-060",)
-    # T-019's counts are held now by R071's replay at n = 17 (T-093) and by wand125's
+    # T-019's counts are held now by R071's replay at n = 17 (T-093) and by Hosono's
     # check2 certificates of 6 October at n = 18 and 19 (T-102, T-103), which took both
     # lanes there from T-099 and T-100 the same day. Since 12 October Overbeck's candidate
     # equality (T-153), a report at C1, holds n = 17's reported lower bound, and the mark

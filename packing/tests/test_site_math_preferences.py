@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from collections.abc import Iterator
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
@@ -13,6 +14,8 @@ from kpress.format.markdown import parse_markdown
 
 from devtools import (
     check_site_rendering,
+    overview_data,
+    overview_sections,
     preview_site,
     render_overview,
     site_assets,
@@ -219,14 +222,12 @@ def amended_result_pages(tmp_path_factory: pytest.TempPathFactory) -> Iterator[s
         target = root / name
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(records[name].html)
+    overview = overview_data.load()
+    result = next(result for result in overview.results if result.id == "T-116")
+    row, popover = overview_sections.result_table_row(result, overview, here=True, shown=True)
     body = (
         "<main><h1>Result address compatibility</h1><table><tbody>"
-        '<tr data-row-popover="notice"><td>Open the current result</td></tr>'
-        '</tbody></table><div popover id="notice" class="site-popover">'
-        '<button class="site-popover-close" popovertarget="notice">Close</button>'
-        '<div data-row-pop-src="result/t-116.html">'
-        '<a href="result/t-116.html">Read the complete result record</a>'
-        "</div></div></main>"
+        f"{row}</tbody></table>{popover}</main>"
     )
     page = render_overview.static_content_page(
         body,
@@ -234,12 +235,9 @@ def amended_result_pages(tmp_path_factory: pytest.TempPathFactory) -> Iterator[s
             "Result address compatibility", "A former result keeps its own page.", "index.html"
         ),
         current="results",
+        page_scripts=(render_overview.ROW_POPOVER_SCRIPT,),
     )
-    program = site_assets.script_tag(
-        site_assets.shared().assets.script_file(render_overview.ROW_POPOVER_SCRIPT),
-        "index.html",
-    )
-    (root / "index.html").write_text(page.html.replace("</body>", program + "</body>"))
+    (root / "index.html").write_text(page.html)
     site_assets.write_assets(root, site_assets.shared().assets.files())
     server = preview_site.serve(root, 0)
     try:
@@ -247,6 +245,37 @@ def amended_result_pages(tmp_path_factory: pytest.TempPathFactory) -> Iterator[s
     finally:
         server.shutdown()
         server.server_close()
+
+
+def test_a_generated_result_overlay_keeps_one_visible_headline(
+    browser: Browser, amended_result_pages: str
+) -> None:
+    """The canonical title replaces the short shell title and names the dialog."""
+    context = browser.new_context()
+    try:
+        page = context.new_page()
+        page.goto(f"{amended_result_pages}/index.html", wait_until="load")
+        row = page.locator('tr[data-row-popover="pop-result-t-116"]')
+        row.focus()
+        page.keyboard.press("Enter")
+        popover = page.locator("#pop-result-t-116")
+        article = popover.locator("article.site-result")
+        article.wait_for()
+        canonical_title = article.locator(":scope > h1")
+        site_browser.api().expect(canonical_title).to_be_visible()
+        assert (
+            popover.locator(":scope > .site-card-label, :scope > .site-popover-value").count()
+            == 0
+        )
+        assert (canonical_title.get_attribute("id") or "").endswith("-t-116")
+        assert popover.get_attribute("aria-labelledby") == canonical_title.get_attribute("id")
+        site_browser.api().expect(popover).to_have_accessible_name(re.compile(r"\S"))
+        page.keyboard.press("Escape")
+        site_browser.api().expect(row).to_be_focused()
+        page.goto(f"{amended_result_pages}/result/t-116.html", wait_until="load")
+        site_browser.api().expect(page.locator("main article.site-result > h1")).to_be_visible()
+    finally:
+        context.close()
 
 
 @pytest.mark.parametrize("javascript", [False, True], ids=["complete-nojs", "fetched-article"])
@@ -267,7 +296,8 @@ def test_former_result_notice_survives_complete_page_and_article_fetch(
         page.goto(f"{amended_result_pages}/{start}", wait_until="load")
         if javascript:
             assert page.locator(".site-result-compatibility").count() == 0
-            page.locator("tr[data-row-popover] td").click()
+            page.locator("tr[data-row-popover]").focus()
+            page.keyboard.press("Enter")
         notice = page.locator("article.site-result .site-result-compatibility")
         notice.wait_for(state="visible")
         assert amendment["historical_title"] in notice.inner_text()

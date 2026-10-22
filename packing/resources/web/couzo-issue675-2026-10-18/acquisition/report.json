@@ -1,0 +1,87 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/675",
+  "author": "Francisco Couzo",
+  "source_key": "[Couzo issue 675 2026-10-18]",
+  "report_evidence": "E-couzo-675-certificate-report",
+  "receipt_format": "couzo-675-exact-replay-v1",
+  "witness_prefix": "W-couzo-675-n",
+  "claim_limitations": "Complete c6da0fc rational centre/half-angle certificate read exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-22",
+  "read_at_main": "d7923b8d8a8def4d6b738608910211d8d4f295bc",
+  "certificates": [
+    {
+      "n": 204,
+      "path": "certificates/best/n204.cert",
+      "format": "evand-cert",
+      "offered": "14.808644367227",
+      "first_committed": "2026-10-18T05:46:00Z",
+      "same_packing": []
+    }
+  ],
+  "requested": [
+    204
+  ],
+  "replayed": [
+    204
+  ],
+  "houses": [
+    {
+      "n": 204,
+      "reader": "[Couzo issue 678 2026-10-18]",
+      "source_key": "[Couzo issue 678 2026-10-18]",
+      "holders": "Francisco Couzo",
+      "result": "T-223",
+      "reported_value": "14.8086428419812473",
+      "verified_value": "14.8086428419812473",
+      "evidence": [
+        "E-couzo-678-filtered-exact-feasibility",
+        "E-couzo-678-source-checker-replay",
+        "E-couzo-678-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 204,
+      "report": "T-225 (evand/square-packing@0075967)",
+      "url": "https://github.com/evand/square-packing/tree/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs",
+      "holders": "Evan Daniel, after the packing's finder",
+      "result": "T-225",
+      "reader": "[Daniel regularized lists 2026-10-20]"
+    },
+    {
+      "n": 204,
+      "report": "#670",
+      "url": "https://github.com/jlevy/squares/issues/670",
+      "holders": "Francisco Couzo",
+      "reader": "[Couzo issue 670 2026-10-17]"
+    },
+    {
+      "n": 204,
+      "report": "T-186",
+      "url": "https://github.com/Mishapolk",
+      "holders": "Daniil Ostashev, improved by PingYou Ltd and Mishapolk",
+      "result": "T-186",
+      "reader": "[Mishapolk KKT refinements 2026-10-14]"
+    }
+  ],
+  "register": {
+    "title": "Francisco Couzo's in-corpus certificate of issue 675 at c6da0fc7",
+    "headline": "Couzo's 204 of #675, below his #670 and since superseded by his #678",
+    "significance": 2,
+    "source_checks": "The issue states that each bound is strictly smaller than the source's previous published index and a reviewed comparison envelope including deletion and repeated L borders, and the manifest records the author's checker receipts with the source's exact checker verify_bound_certificate.py (Evan Daniel's MIT verifier, modified by Francisco Couzo with Codex), pinned here by digest and not run. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Francisco Couzo (https://github.com/franciscouzo/square-packing), whose per-count JSON credits the 204 seed to Mykhailo Polkovskyi (Mishapolk), search job 107960 (slp). The issue keeps every seed, construction and certificate credit in the source's manifest.",
+    "next_rung": "Independently review the retained replay. The entry is superseded on entry at 204: Couzo's own #678 (T-223) and Evan Daniel's view of its packing (T-225) are smaller, and the case holds T-223 at V3/C3; the 78 rows beyond the corpus are think-pvav's.",
+    "bead": "think-pvav",
+    "bibliography": {
+      "authors": [
+        "Couzo"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Couzo after Polkovskyi, Daniel, Levy",
+      "short_credit": "Couzo after Polkovskyi et al.",
+      "note": "Issue 675's in-corpus certificate at c6da0fc7524d667bf3d224559724ba9b60762e60: s(204), an slp refinement (job 107960) from a search the source seeds with Mykhailo Polkovskyi's construction, one to one with #670's packing. Retained as factual data with its per-count JSON; the source's checker, Evan Daniel's MIT verifier as Couzo modified it with Codex, is pinned by digest. OpenAI Codex assistance disclosed. No optimizer, local or global claim."
+    }
+  }
+}

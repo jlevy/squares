@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-18'
+last_reviewed: '2026-10-22'
 verifiers:
   - id: V-evand-verify-exact
     program: verify_exact.py
@@ -72,13 +72,13 @@ verifiers:
         path: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/src/run_verify.py
         note: run_verify.py
     note: >-
-      wand125's density and rectangle certificates ship byte-identical copies of both
-      files, so a replay of a wand125 rectangle certificate runs the code its producer
+      Hiroaki Hosono's density and rectangle certificates ship byte-identical copies of both
+      files, so a replay of one of Hosono's rectangle certificates runs the code its producer
       verified it with.
 
   - id: V-wand125-mixed-rotated-verify-cpp
     program: mixed_rotated_verify.cpp, with the source's per-angle replay functions
-    author: wand125
+    author: Hosono
     provenance: external
     language: [C++, Python]
     methods: [interval-certified]
@@ -97,7 +97,7 @@ verifiers:
 
   - id: V-wand125-verify-mixed-full-proof-py
     program: verify_mixed_full_proof.py
-    author: wand125
+    author: Hosono
     provenance: external
     language: [Python]
     methods: [interval-certified]
@@ -121,7 +121,7 @@ verifiers:
 
   - id: V-wand125-sqverify-proof-net
     program: sqverify-proof-net, the source's adaptation of sqverify-fast, run by fine_net_check.sh
-    author: wand125, adapting this repository's sqverify_fast
+    author: Hosono, adapting this repository's sqverify_fast
     provenance: external
     language: [Rust, Bash, Python]
     methods: [interval-certified]
@@ -155,7 +155,7 @@ verifiers:
 
   - id: V-wand125-unified-linear-verify-cpp
     program: unified_linear_verify.cpp
-    author: wand125
+    author: Hosono
     provenance: external
     language: [C++]
     methods: [interval-certified]
@@ -171,7 +171,7 @@ verifiers:
 
   - id: V-wand125-verify-portable-py
     program: verify_portable.py
-    author: wand125
+    author: Hosono
     provenance: external
     language: [Python]
     methods: [exact-algebraic]
@@ -185,13 +185,13 @@ verifiers:
 
   - id: V-wand125-check-with-sqpack
     program: check_with_sqpack.py
-    author: wand125
+    author: Hosono
     provenance: external
     language: [Python]
     methods: [exact-algebraic]
     role: decides
     summary: >-
-      wand125's adapter that expands its point certificates' direction rule and hands
+      Hiroaki Hosono's adapter that expands its point certificates' direction rule and hands
       them to this repository's exact verifier, sqpack.fractional.certificate, unmodified.
     source:
       - packing/resources/web/external-square-certificates-2026-09-22/wand125-points/src/check_with_sqpack.py
@@ -205,7 +205,7 @@ verifiers:
 
   - id: V-wand125-valid7-checker
     program: valid7-independent-check (Tier A, Tier B and the record checker)
-    author: wand125
+    author: Hosono
     provenance: external
     language: [Python]
     methods: [exact-algebraic]
@@ -262,7 +262,7 @@ verifiers:
       - packing/resources/web/evand-square-packing-2026-10-04/square-packing/s12/verify2/src/bin/zmx2.rs
     versions:
       - sha256: 6b7f0f79466bf25c9a85f8fe2f3866de734935f0521ea188136818c2fb5b3fed
-        note: the 2026-09-28 packet's post-audit parser, which made the shipped records and which wand125's verify.sh pins
+        note: the 2026-09-28 packet's post-audit parser, which made the shipped records and which Hiroaki Hosono's verify.sh pins
       - sha256: 92a4cfe87b4e33d57ce132c9c517eded3fe62b4a5a2151b5ba250b8ee329fe64
         revision: e4af291cf52711a3ef7cedfea262f001fa2cafe1
         path: packing/resources/web/evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs
@@ -275,8 +275,8 @@ verifiers:
           source checked its s(20) point cover at side 2443/500; unchanged at 7ff3b211 and
           not run here
     note: >-
-      wand125 verified its own covers with zmx2 as well, so a zmx2 replay of a wand125
-      cover is a replay of the producer's code.
+      Hosono verified his own covers with zmx2 as well, so a zmx2 replay of one of
+      Hosono's covers is a replay of the producer's code.
 
   - id: V-evand-zm-mixed-py
     program: zm_mixed.py
@@ -413,6 +413,33 @@ verifiers:
       - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py
     versions:
       - {sha256: 55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3}
+
+  - id: V-couzo-verify-bound-certificate
+    program: verify_bound_certificate.py
+    author: Evan Daniel, modified by Francisco Couzo with Codex
+    provenance: external
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The source's standard-library checker of issue 678's rational certificates, in
+      Fraction arithmetic: every rotation on the unit circle, every square in the closed
+      box by its half-extent, and every pair whose centres lie in neighbouring exact cells
+      of side 2 and within sqrt 2 of each other separated along a unit edge normal; contact
+      is accepted, and --strict asks for an open box and disjoint closed squares.
+    source:
+      - packing/resources/web/couzo-issue678-2026-10-18/source/verify_bound_certificate.py
+    versions:
+      - sha256: 1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b
+        revision: 7b6c87e129cf80b5ff9847b90b47fd30b4563c54
+        note: The retained copy at the pin, which couzo_678_replay source-checker ran unchanged.
+    note: >-
+      Its header names Evan Daniel's MIT verifier at 622cd2e (search/exact/verify_cert.py)
+      with modifications by Couzo with Codex, under the MIT licence retained beside it.
+      Run here unchanged from the retained copy in a python -I child process on the 85
+      packings of issue 678 and 332 controls (receipts/source-checker-replay.json in the
+      couzo-issue678-2026-10-18 packet): the producer's own code, so its replay is
+      same-implementation.
 
   - id: V-evand-lean
     program: The source's Lean development (lean/), with gen_zmtree.py emitting a cover's box tree
@@ -751,7 +778,7 @@ verifiers:
       The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake
       at its pinned toolchain, with scripts/run_verification.sh and the finalizer
       scripts/finalize_verification.py driving the build and the axiom audit
-    author: Ahmed, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis
+    author: Ahmed, Hosono, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis
     provenance: external
     language: [Lean 4, Python, Bash]
     methods: [proof-assistant-checked]
@@ -775,8 +802,8 @@ verifiers:
       in the run's final audit.
 
   - id: V-wand125-tools
-    program: The wand125 tools repository's transfer/l_cap.py and general_pose_tree
-    author: wand125
+    program: Hiroaki Hosono's square-packing-tools repository's transfer/l_cap.py and general_pose_tree
+    author: Hosono
     provenance: external
     language: [Python, Rust]
     methods: [exact-algebraic]
@@ -2260,7 +2287,179 @@ verifiers:
         every row and box itself; its authors had read the producer's rigidity code.
     note: Retained as run in the Overbeck packet's review-2/.
 
+  - id: V-couzo-678-replay
+    program: devtools.couzo_678_replay, its filtered two-route decision
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides each of issue 678's 85 rows from the retained certificates on two exact routes
+      over Q, sqpack.verify's unit-shape and separating-axis predicates on sqpack.witness's
+      corners and the independent rational corner checker's on the kernel's corners, over
+      every wall and every pair whose centres are closer than sqrt 2, an exactly justified
+      filter whose lemma both routes' unit-shape and centre checks secure; holds each print
+      to its header side rounded up at 12 places; and refuses six controls per certificate,
+      the near-contact pair 10^-30 past exact contact among them.
+    source:
+      - packing/devtools/couzo_678_replay.py
+      - packing/tests/test_couzo_678_replay.py
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    independence:
+      read: [mathematics, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares:
+        - >-
+          sqpack.verify's check_unit_squares and separated, the jlevy/squares corner
+          verifier the source reports running
+        - >-
+          devtools.check_rational_witness_independent's square_failures and pair_gap
+        - the certificate parser and half-angle map of devtools.evand_exact_certificates
+        - CPython's fractions.Fraction arithmetic
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the import lane of issue 678 (think-xu4d), 19 October 2026; its tier and
+            reasoning setting are not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: >-
+          The source's author disclosed OpenAI Codex and Claude Code assistance in his
+          issues of 13 and 14 October 2026, and the checker's header names Codex. The
+          program imports the sqpack.verify predicates the source reports running; it runs
+          the source's checker only as a separate process.
+      note: >-
+        RF-1 of the 20 October review: the two routes read each certificate once,
+        together, through the shared parser, half-angle map and filter, so a misread
+        literal or a wrong map would reach both alike. The source's checker and the
+        review's checker read the text with readers of their own and found the same
+        inputs at all 85 rows.
+    note: >-
+      Written by the import lane of issue 678 on 19 October 2026; its near-contact control
+      was added on 20 October 2026 by the stage 4 records lane (RF-2), and the receipt
+      rewritten with it. The 20 October review (docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md)
+      read it in full and reproduced check --replay.
+
+  - id: V-couzo-678-review-check
+    program: review_678_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 20 October review's standard-library exact checker of issue 678's certificates,
+      with readers of its own: every rotation on the unit circle, containment in the closed
+      box by half-extents with no corner formed, every pair whose centres are closer than
+      sqrt 2 by separating axes along unit normals and again by the exact area of one
+      square clipped by the other's four closed half-planes, every pair at seven counts by
+      separating axes, and each print against its header side rounded up at 12 places.
+    source:
+      - packing/resources/web/couzo-issue678-2026-10-18/review/programs/review_678_check.py
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    independence:
+      read: [mathematics, certificate-format, producer-code, producer-output, earlier-review]
+      clean_room: false
+      shares:
+        - CPython's fractions.Fraction arithmetic
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 678 (c-review-678-fable,
+            think-xu4d), strong tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: >-
+          The source's author disclosed OpenAI Codex and Claude Code assistance. Written
+          in a file of its own that imports nothing from this repository or the source;
+          it shares Python's Fraction with every route, and its author read the source's
+          checker, both maintained routes and the summary of the 19 October review before
+          writing it, so it is not clean-room.
+    note: >-
+      Written and run on 20 October 2026 by the review; kept in the couzo-issue678-2026-10-18
+      packet's review/ with its README and receipts (RF-5).
+
+  - id: V-evand-regularized-1020-review-check
+    program: review_t225_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 21 October review's standard-library exact checker of the four regularized
+      certificates T-225 cites, with a reader of its own that admits only integer and p/q
+      literals, deciding each certificate on two routes that share only that reader: route
+      I in integers alone (a Pythagorean triple per row, containment by half-extents and
+      every pair by four separating-axis inequalities cleared of denominators), and route F
+      in Fraction (unit edges and right angles on the corners, corner containment, every
+      pair by corner projections on the four unit edge normals, and every pair whose
+      bounding boxes overlap again by the exact area one square's closed half-planes clip
+      from the other).
+    source:
+      - packing/resources/web/evand-regularized-2026-10-20/review/review-2026-10-21/programs/review_t225_check.py
+    independence_record: docs/project/reviews/review-2026-10-21-evand-regularized-views.md
+    independence:
+      read: [mathematics, certificate-format, specification, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-225 (c-review-t225-math,
+            think-ql4v), strong sub-agent tier, reasoning setting xhigh
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's CREDITS.md says the repository's work was produced by Claude
+          (Anthropic) under human direction. Written in a file of its own that imports
+          nothing from this repository or the source, from the certificates' format line,
+          the mathematics, the source's method log and JSON files and the two 20 October
+          reviews' account of the maintained routes' method, before its author read either
+          maintained route; its author never read the source's checkers verify_cert.py and
+          verify_cert2.py. Route F uses CPython's Fraction, as those checkers and the
+          maintained routes do; route I uses integers only.
+    note: >-
+      Written and run on 21 October 2026 by the review; kept in the
+      evand-regularized-2026-10-20 packet's review/review-2026-10-21/ with its README and
+      receipts (RF-6).
+
   # --- First-party programs: premise checks and replay drivers ------------------------
+  - id: V-evand-regularized-1020-review-controls
+    program: sharp_controls_t225.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      The 21 October review's sharp controls of T-225's four certificates: eight mutants a
+      count at the scale of the margins (the side lowered by the least far-wall clearance,
+      every square moved by the least near-wall clearance, the least-gap pair closed along
+      its best separating axis, each at exact contact and 1e-30 past it; a row dropped; a
+      decimal literal), each decided by the review's checker and by both maintained routes
+      through the packet's evand-cert adapter, and the kernel's run_sharp at contact and
+      past it. It adds the mutants and the expectations; the routes decide.
+    source:
+      - packing/resources/web/evand-regularized-2026-10-20/review/review-2026-10-21/programs/sharp_controls_t225.py
+    independence_record: docs/project/reviews/review-2026-10-21-evand-regularized-views.md
+    note: >-
+      Written and run on 21 October 2026 by the review (c-review-t225-math); it imports
+      devtools.evand_arrangement_reports, devtools.evand_exact_certificates and
+      devtools.upper_bound_reports to reach the maintained routes, and the review's
+      checker. Kept with its receipts out-controls-nNNN.json in the packet's
+      review/review-2026-10-21/ (RF-3, RF-6).
+
   - id: V-overbeck-review3-seed-packing
     program: seed_packing_check.py
     author: Squares Project (Levy)
@@ -2496,7 +2695,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      The exact preflight and replay driver for wand125's rectangle certificates: input
+      The exact preflight and replay driver for Hiroaki Hosono's rectangle certificates: input
       regeneration against the published digest, orbit normalization, exact mass, net
       and smoothing premises, then Tokoharu's retained verify.cpp.
     source: [packing/devtools/audit_wand125_rectangles.py]
@@ -2509,7 +2708,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Fetches, pins and binds wand125's point and mixed bundles, checks their exact
+      Fetches, pins and binds Hiroaki Hosono's point and mixed bundles, checks their exact
       premises, drives the source's checker and compares its records with the shipped ones.
     source: [packing/devtools/audit_wand125_point_and_mixed.py]
 
@@ -2521,7 +2720,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Checks the exact premises of wand125's mixed certificates on a declared net, lemma
+      Checks the exact premises of Hiroaki Hosono's mixed certificates on a declared net, lemma
       N0's among them; binds each bundle's files to the packet and every shipped record and
       input to the declared net and the expanded candidate; runs the bundle's own driver
       with its assertions on and compares the replay with the shipped records, requiring
@@ -2535,7 +2734,7 @@ verifiers:
     language: [Python]
     methods: [exact-algebraic]
     role: premises
-    summary: The audit, replay driver and controls for wand125's linear certificates.
+    summary: The audit, replay driver and controls for Hiroaki Hosono's linear certificates.
     source: [packing/devtools/audit_wand125_linear.py]
 
   - id: V-sqverify-fast
@@ -2659,7 +2858,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Decides everything squarepacker's v1.1 s(12) certificate rests on but coverage, in
+      Decides everything Ryu's v1.1 s(12) certificate rests on but coverage, in
       integers and Fraction: its bytes, the header and side, a one-to-one match of its
       points to Daniel's dilated within the stated rounding, positivity, containment, D4
       invariance and orbits, the total below 12, the corner points, and the source's two
@@ -2733,7 +2932,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Checks what wand125's verify_tilt9.sh leaves out of the ValidTilt9 run: the records
+      Checks what Hiroaki Hosono's verify_tilt9.sh leaves out of the ValidTilt9 run: the records
       are the release's and name the retained code, their roots are the grid over
       ValidTilt9's region once, each root's Tier B leaves fit the options its place in the
       run gives it, and which lines of the checker also occur in Daniel's. It stages the
@@ -2840,8 +3039,13 @@ verifiers:
     versions:
     - sha256: 8e2141bfa0b233173e442517035783f6598610398fe9896e9a9977d7383dcc17
       path: packing/devtools/evand_arrangement_reports.py
-      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
-        provenance identifies the historical run
+      note: The source the n183 primary batch ran; the retained seven-file provenance
+        identifies the historical run
+    - sha256: be329074444bd56e74b44ff5a10e9e15c3f83774e854f883c03ebeedf8d0bc89
+      path: packing/devtools/evand_arrangement_reports.py
+      note: The kernel with SHARP_CONTROLS, sharp_input and run_sharp added for review A
+        of PR 704 (RF-2), outside JOBS, so the full roster every receipt holds is
+        unchanged
 
   - id: V-algebraic-witness-reports
     program: devtools.algebraic_witness_reports
@@ -2881,7 +3085,8 @@ verifiers:
       packet's declaration: admits custody through acquire_source, reads each retained
       file or derived fact by its declared adapter (Evan Daniel's text format, SQUISH's
       JSON, centred JSON, PingYou Ltd's JSON, Daniil Ostashev's sqcert files, Rio Calle's
-      decimal layouts, rational corners witnesses, decimal poses by a declared dilation),
+      decimal layouts, rational corners witnesses, decimal poses by a declared dilation,
+      Joost de Winter's centre-basis JSON),
       holds a derived fact to any file its row names as the same packing, admits each side
       only where it equals or rounds up to its print, rebuilds the frozen claim comparison
       and the register plan, and drives the arrangement kernel's two exact routes and two
@@ -2917,7 +3122,11 @@ verifiers:
       (docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md) read them in
       full. The import lane of issue 552 added a HOUSES reader of its packet, which the
       12 October review of that issue
-      (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) read.
+      (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) read. The import
+      lane of issue 668 added the center-basis-json adapter, which reads each square's
+      rational centre and basis and refuses a basis that is not exactly the rotation its
+      half-angle tangent gives, and a HOUSES reader of its packet; no stage 4 review has
+      read them yet (think-455r).
 
     versions:
     - sha256: bc47273499dccbd59997bbdd4028176eb09621865b25854f511f9cf872ce1156
@@ -2926,8 +3135,21 @@ verifiers:
         records it
     - sha256: e8bb87fa8acb5470bee92d9f77cb158a11bd780d6e5f8c38a12bf77870573a08
       path: packing/devtools/upper_bound_reports.py
-      note: The current driver, which adds only the n183 packet to HOUSES, the reader that
+      note: The driver of pull request 687, which adds only the n183 packet to HOUSES, the reader that
         receipt admission and house selection use; it decided no n183 geometry
+    - sha256: 6824c09ea3db501b62a68aa7ddb44066e36e464fff60aabfb4d11af0bb5832f4
+      path: packing/devtools/upper_bound_reports.py
+      note: The driver that certified issue 668's three certificates on 20 October 2026, at
+        7c801b596, adding the center-basis-json adapter
+    - sha256: 4272f93cb84af86a196aaf68df81544f623ff8c69be0e9ff687e6808bfe5d576
+      path: packing/devtools/upper_bound_reports.py
+      note: The same driver merged with main d588ad987, which adds only the n183 HOUSES
+        reader beside it, with the adapter's square fields typed for the type floor; it
+        ran issue 668's check --replay again
+    - sha256: 044639ffbca7abbda7a77024ff8afd70ec0fb4f9316a3fbc7ada4f64a110442d
+      path: packing/devtools/upper_bound_reports.py
+      note: The same driver with center_basis_json's docstring saying the basis (-1, 0) is
+        refused (RF-3 of review A of PR 704); it decides nothing differently
 
   - id: V-rehwaldt-n68-verify
     program: verify.py
@@ -4019,6 +4241,106 @@ verifiers:
       Written on 16 October 2026 for docs/project/reviews/review-2026-10-16-pingyou-n29.md
       and kept, with everything it printed, in the packet's review/ directory.
 
+  - id: V-de-winter-668-review-check
+    program: review/review-2026-10-20/programs/review_704_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides Joost de Winter's three centre-basis certificates of issue 668 with its own
+      reader: every basis on the unit circle exactly, every square in the closed box by its
+      centre and half-extent, every pair by separating axes on the squares' unit edge normals,
+      and every pair whose centres are within sqrt(2) again by the exact area one square's
+      closed half-planes clip from the other; holds each print to the side rounded up at 12
+      places and each least margin to the replay receipt's two routes. Standard library only.
+    source:
+      - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/review/review-2026-10-20/programs/review_704_check.py
+    versions:
+      - sha256: 66e85c11fc2f9a028a44ce38774966783c08d5e78b3ec56f389cd8c9ceb94abc
+    independence_record: >-
+      packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/review/review-2026-10-20/README.md
+    independence:
+      read:
+        - mathematics
+        - certificate-format
+        - producer-code
+        - producer-output
+        - earlier-review
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane of 20 October 2026 (think-455r), strong sub-agent tier,
+            max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's checkers were written with OpenAI Codex agents, and the issue says
+          Claude replayed them and prepared the repository for publication. The review read
+          the source's verify_exact.py and verify_polygon_exact.py in full and every route of
+          the replay before writing this program, and read the earlier review's summaries in
+          the beads after its findings were written; it imports and copies none of their code.
+    note: >-
+      Written on 20 October 2026 for
+      docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md and kept, with
+      everything it printed, in the packet's review/review-2026-10-20/ directory.
+
+  - id: V-de-winter-668-sharp-controls
+    program: review/review-2026-10-20/programs/sharp_controls_704.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Builds six mutants of a de Winter certificate of issue 668 at the scale of its margins
+      and decides them through devtools.upper_bound_reports' center-basis-json adapter and
+      the two maintained routes (sqpack.verify and the independent rational corner checker):
+      the side lowered by exactly its least wall clearance and by 1e-30 more, the least-gap
+      pair closed by exactly its gap and by 1e-30 more, a basis 1e-30 off the unit circle and
+      a coordinate as a JSON number; it also clips the moved pair exactly with the review's
+      own route. The geometric decisions are the maintained routes'.
+    source:
+      - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/review/review-2026-10-20/programs/sharp_controls_704.py
+    versions:
+      - sha256: 29ee686a077e99c1a80fb115a9af3201bf2c1ba8f3ca58cb12b623159e6997e1
+    independence_record: >-
+      packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/review/review-2026-10-20/README.md
+    independence:
+      read:
+        - mathematics
+        - certificate-format
+        - producer-code
+        - producer-output
+        - earlier-review
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane of 20 October 2026 (think-455r), strong sub-agent tier,
+            max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          It drives this repository's adapter and two maintained routes, which are Claude
+          lanes' work, and the review's own route; none of the source's code is imported or
+          copied. The source's audit controls (a shrunken box, an invalid unit basis) are the
+          same ideas as two of its mutants, read before it was written.
+    note: >-
+      Written on 20 October 2026 for
+      docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md (RF-2) and kept,
+      with everything it printed, in the packet's review/review-2026-10-20/ directory.
+
   - id: V-audit-fine-net-receipt
     program: devtools.audit_fine_net_receipt
     author: Squares Project (Levy)
@@ -4500,3 +4822,37 @@ verifiers:
     note: The upper-bound driver calls this custody premise before parsing. Historical command/environment
       and actual source hash are retained in the n183 packet; no upstream or archived code is
       executed by this registration.
+
+  - id: V-couzo-678-review-identity
+    program: identity_260.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [numerical-f64]
+    role: premises
+    summary: >-
+      Compares three n = 260 packings, T-196's, the evand 14a9af8 seed and issue 678's,
+      under the box's eight symmetries in binary64: how many squares of one have a square
+      of the other within a tolerance in centre with the same axes. It decides no bound.
+    source:
+      - packing/resources/web/couzo-issue678-2026-10-18/review/programs/identity_260.py
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    independence:
+      read: [certificate-format, producer-output, earlier-review]
+      clean_room: false
+      shares:
+        - CPython's fractions.Fraction, to read the exact poses
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 678 (c-review-678-fable,
+            think-xu4d), strong tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: As for V-couzo-678-review-check, in a file of its own.
+    note: >-
+      Measures the identity statement of issue 678's comment of 19 October; no evidence
+      entry cites it. Its log is the records lane's rerun of 20 October 2026, unchanged.

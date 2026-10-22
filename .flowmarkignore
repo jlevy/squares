@@ -136,7 +136,11 @@ packing/campaign/issue-intake/upper-bounds-20261014/README.md
 packing/campaign/issue-intake/upper-bounds-20261016/README.md
 packing/campaign/issue-intake/upper-bounds-n29-20261016/README.md
 packing/campaign/issue-intake/upper-bounds-20261018/README.md
+packing/campaign/issue-intake/upper-bounds-20261019/README.md
 packing/campaign/issue-intake/upper-bounds-20261020/README.md
+packing/campaign/issue-intake/upper-bounds-20261021/README.md
+packing/campaign/issue-intake/upper-bounds-20261022/README.md
+packing/campaign/issue-intake/upper-bounds-backlog-20261022/README.md
 packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md
 
 # stats-summary.md was written by the v2-transitions spike's `build_candidate.py` beside the
@@ -242,7 +246,7 @@ docs/project/reviews/review-2026-10-06-evand-exact-optima.md
 # parenthesis escaped.
 docs/project/reviews/review-2026-10-06-evand-exact-optima-fix-check.md
 
-# The separately prompted review of T-099 and T-100 (wand125's finer-net certificates of 6
+# The separately prompted review of T-099 and T-100 (Hosono's finer-net certificates of 6
 # October, #366), stored byte-identical to the reviewer's output as the lane brief
 # requires: its first 25,427 bytes are that output, SHA-256 9e5a41b7..., and the
 # common-doc footer the documentation check requires follows them. Measured on a copy in directory mode with the pinned
@@ -274,7 +278,7 @@ docs/project/reviews/review-2026-10-06-evand-exact-ceilings.md
 # curly.
 docs/project/reviews/review-2026-10-06-evand-exact-ceilings-fix-check.md
 
-# The separately prompted review of T-102 to T-111 (wand125's ten certificates of 6
+# The separately prompted review of T-102 to T-111 (Hosono's ten certificates of 6
 # October at 2fad66e, nine of them check2 bundles), stored byte-identical to the
 # reviewer's output as the lane brief requires, SHA-256 1d5e1326..., the common-doc footer
 # included as the reviewer wrote it. Measured on a copy in directory mode with the pinned
@@ -294,6 +298,16 @@ docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md
 # 02423c85... Measured the same way on 2026-10-06: 93 of its 249 lines change, reflow
 # plus 57 straight apostrophes and 14 straight double quotes retyped as curly.
 docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1-recheck.md
+
+# The separately prompted stage 4 review of Evan Daniel's #703 certificate at 270 (T-224,
+# PR #708), stored byte-identical to the reviewer's hand-off with the import's path edits
+# (SHA-256 34aa2b6d...), footer included; its erratum is a separate file beside it.
+# PR #708 committed it through the hook, which reflowed it, and review B4 of #708 asked
+# for the reviewer's text back. Measured on a copy in directory mode with the pinned
+# flowmark-rs 0.4.0 on 2026-10-21: 121 of its 451 lines change, all reflow plus one
+# character-level edit, a "+" that opens a line escaped as "\+". Same rule as the
+# reviews above.
+docs/project/reviews/review-2026-10-21-upper-bound-import-703.md
 # Concurrent registered checkouts belong to other branches/tasks. A Session186
 # list-files audit found 4,393 Markdown paths below this directory, including their
 # source-faithful archives; directory mode uses this checkout's exclusion rules.

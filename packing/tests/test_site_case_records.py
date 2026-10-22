@@ -18,7 +18,7 @@ from typing import Any
 
 import pytest
 
-from devtools import render_case_pages, render_frontier_page, render_overview
+from devtools import render_case_pages, render_frontier_page, render_overview, result_overview
 from devtools.preview_site import serve
 from sqpack.probes import probe
 from tests import site_browser, site_renders
@@ -26,6 +26,7 @@ from tests import site_browser, site_renders
 PROBES = Path(__file__).resolve().parent / "probes"
 FIGURE = probe(PROBES, "case_popover_figure/figure")
 CROSS = probe(PROBES, "case_popover_head/cross")
+TABLE_DOM = probe(PROBES, "case_pages/table_dom")
 LAYOUT = probe(PROBES, "case_layout/read")
 OVERFLOW = probe(PROBES, "case_layout/overflow")
 NAVIGATION = probe(PROBES, "case_navigation/read")
@@ -83,7 +84,10 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     assert drawn.startswith(
         '<div class="site-case-note"><span class="site-card-label">Regularized drawing</span>'
     )
-    assert "Regularized by the Squares Project with Evan Daniel" in drawn
+    assert (
+        "Regularized by the Squares Project with "
+        '<a href="profiles/evan-daniel.html">Daniel</a>' in drawn
+    )
     assert "retry rung force-kkt" in drawn
     assert "a pure regularization, which proves no new bound, so not a result" in drawn
 
@@ -111,8 +115,9 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     # claims no new bound (PR #585, review B1).
     earlier = regularization(cases[28])
     assert "Regularized by the Squares Project" in earlier
-    assert "registered in T-155, and the same side was first certified by Evan Daniel" in (
-        earlier
+    assert (
+        "registered in T-155, and the same side was first certified by "
+        '<a href="profiles/evan-daniel.html">Daniel</a>' in earlier
     )
     assert "(T-101), so it proves no new bound" in earlier
     assert "the upper bound it proves" not in earlier
@@ -144,6 +149,18 @@ def _page(browser: Any, *, scripts: bool = True, width: int = 1280) -> Iterator[
 def _shown_case(popover: Any) -> str | None:
     """The case the popover's record is, by its article."""
     return popover.locator("[data-case-body] article.site-case").get_attribute("data-case")
+
+
+def test_case_table_compaction_preserves_the_browser_dom(browser: Any) -> None:
+    """The native parser restores omitted table ends with every case node intact."""
+    overview = site_renders.overview()
+    result = next(result for result in overview.results if result.id == "T-124")
+    body = result_overview.result_popover_html(result, overview)
+    reference = body + '<table class="other"><tr><td>untouched</td></tr></table>'
+    compact = result_overview.compact_case_tables(reference)
+    assert len(compact) < len(reference)
+    with _page(browser, scripts=False) as page:
+        assert page.evaluate(TABLE_DOM, compact) == page.evaluate(TABLE_DOM, reference)
 
 
 def _case_actions(popover: Any, served: str, n: int) -> None:

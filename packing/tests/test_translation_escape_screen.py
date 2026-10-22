@@ -98,7 +98,15 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: adoption of 17 October 2026 (think-3mry) moved it at its 37: 86, 132 and 181 joined,
 #: and 110, 130, 179, 180, 210, 239 and 268 left (the shorter lists, which had not taken
 #: 176 in, are the same list cut at their corpora). The adoption of 19 October 2026
-#: moved it at its four: 229 joined, the dilation of a binary64 packing.
+#: moved it at its four: 229 joined, the dilation of a binary64 packing. The adoption of
+#: 20 October 2026 moved it at its five: 154 left, 308 stayed off it, 204 stayed, and 227
+#: and 260 joined. De Winter's certificates there (T-196) keep at least 1e-9 from every wall
+#: and every pair, between the screen's 1e-10 and 1e-8, so every square moves at the two
+#: tighter tolerances and 26 and 11 at the two looser. The adoption of 21 October 2026
+#: moved it at its two: 270 left, its exact certificate's least margins being 1e-20 and
+#: above every tolerance, and 260 stayed on Couzo's certificate (T-223, think-xu4d). The
+#: adoption of 22 October 2026 (think-ql4v) moved it at its four, to Evan Daniel's
+#: regularized views (T-225), least margins 1e-20: 260 left, and 204, 227 and 229 stayed.
 #: Re-screening the adopted
 #: counts with the screen's own `--update --n` rebuilds the retained screen byte for byte.
 GOLDEN_UNSTABLE = {
@@ -117,7 +125,6 @@ GOLDEN_UNSTABLE = {
         129,
         132,
         146,
-        154,
         172,
         175,
         176,
@@ -134,7 +141,6 @@ GOLDEN_UNSTABLE = {
         129,
         132,
         146,
-        154,
         172,
         175,
         176,
@@ -144,6 +150,7 @@ GOLDEN_UNSTABLE = {
         204,
         206,
         207,
+        227,
         229,
         232,
         241,
@@ -153,7 +160,6 @@ GOLDEN_UNSTABLE = {
         266,
         267,
         269,
-        270,
         273,
         297,
         301,

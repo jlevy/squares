@@ -1,0 +1,13 @@
+ok   touching pair: passed=True wall=0 gap=0/1
+ok   overlap 1e-30: passed=False wall=0 gap=-1/1000000000000000000000000000000
+ok   wall 1e-30: passed=False wall=-1/1000000000000000000000000000000 gap=0/1
+ok   tilted in box: passed=True wall=0 gap=1/1
+ok   tilted corner contact: passed=True wall=0 gap=0/1
+ok   tilted corner overlap: passed=False wall=0 gap=-1/1000000000000000000000000000000
+ok   duplicate: passed=False wall=0 gap=-1/1
+ok   negative t: passed=True wall=0 gap=1/1
+ok   float literal: refused (not a rational literal: '0.5')
+ok   leading zero: refused (not a rational literal: '01/2')
+ok   zero denominator: refused (not a rational literal: '1/0')
+ok   short row: refused (row 0 has 2 fields)
+selftest passed

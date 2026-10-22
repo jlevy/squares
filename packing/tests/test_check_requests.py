@@ -150,6 +150,29 @@ def test_the_live_record_holds_its_schema_and_every_id_it_names_exists(
     assert "every id resolves" in capsys.readouterr().out
 
 
+def test_a_value_an_unquoted_hash_cuts_short_is_refused(
+    tmp_path: Any, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """#684's summary once read only up to ``#``: YAML took the rest for a comment."""
+    live = check_requests.RECORD.read_text(encoding="utf-8")
+    assert check_requests.comment_cut_scalars(live) == []
+    sample = (
+        "issues: # a comment after a key is not a value's\n"
+        "- summary: the 18 October ledger after #678 records it\n"
+        "  quoted: 'a #1'\n"
+    )
+    assert check_requests.comment_cut_scalars(sample) == [
+        (
+            "line 2: 'the 18 October ledger after' is cut short by '#678 records it'; "
+            "quote the whole value"
+        )
+    ]
+    cut = tmp_path / "result-requests.yaml"
+    cut.write_text(sample, encoding="utf-8")
+    assert check_requests.main(["--record", str(cut)]) == 1
+    assert "cut short by '#678 records it'" in capsys.readouterr().err
+
+
 def test_the_live_record_has_one_entry_an_issue_and_names_its_answer_bead() -> None:
     live = check_requests.load_record()
     numbers = [entry["number"] for entry in live["issues"]]
@@ -1076,7 +1099,7 @@ def test_the_github_comparison_lists_every_issue_reported_for_intake_without_the
 
 
 def test_a_comment_read_and_then_edited_after_read_through_is_listed_as_unread() -> None:
-    """wand125's #485 review was read at its creation, then edited to link a new mode.
+    """Hosono's #485 review was read at its creation, then edited to link a new mode.
 
     `read_through` holds a creation time, so an edit to a comment it already covers
     arrived unseen: the f30cc2c link reached the record on 12 October only because the

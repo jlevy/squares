@@ -62,6 +62,12 @@ Ostashev’s packing as the start.
 Acquisition does not rewrite that field or decide whether it is stale metadata.
 Registration should preserve the issue’s explicit lineage and resolve the conflicting
 field before using it as attribution evidence.
+The author resolved it in
+[his comment on #669 of 20 October 2026](https://github.com/jlevy/squares/issues/669#issuecomment-6302893217):
+the field was a bug in his tooling, which took it from the record holder at that count in
+his 5 October batch instead of from the packing drawn, fixed in
+`search/packer/candidate.py` at `a435c97`. He names `s155_ex2` among the affected views
+and asks that the field be read as no credit at all; the issue’s credit line stands.
 
 ## Exact Replay Dependencies
 

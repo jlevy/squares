@@ -1,0 +1,21 @@
+{
+  "n": 204,
+  "packing": "n204.txt",
+  "packing_sha256": "efd363450f9ec73dcb698c4a023c41ee31f1c5eecd1d5bfcdaf7031122b0ac26",
+  "certificate": "certificates/n204.cert",
+  "certificate_sha256": "761af9ec961d812a313b9b119845af6f8d2befa79ca770d0d919a09673a97543",
+  "rational_side": "101859759444979981360793459/6878398651426000000000000",
+  "kind": "rational witness",
+  "origin": {
+    "seed_credit": "Mykhailo Polkovskyi (Mishapolk)",
+    "search_job": {
+      "id": 107960,
+      "method": "slp",
+      "source": "n204.txt",
+      "source_origin": "own",
+      "source_sha256": "3e51a35e8f73554a7bc844c55e07b87c4d81b9369bfa91f50ee48394a19d1c51",
+      "constructed_seed": null
+    }
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

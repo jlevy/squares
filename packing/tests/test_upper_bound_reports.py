@@ -10,6 +10,7 @@ import gzip
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 from collections.abc import Callable, Collection, Mapping
@@ -18,6 +19,7 @@ from pathlib import Path
 from typing import Any, cast
 
 import pytest
+import yaml
 
 from devtools import check_source_coverage as coverage_check
 from devtools import check_standing
@@ -76,8 +78,11 @@ OSTASHEV_562 = "dostashev-compositions-2026-10-12"
 OSTASHEV_575 = "dostashev-merged-bands-2026-10-13"
 EVAND_584 = "evand-compositions-2026-10-13"
 EVAND_596 = "evand-fresh-compositions-2026-10-14"
+#: Evan Daniel's issue #702, its one count beyond the corpus, retained under MIT by the
+#: #702 lane of 21 October (`test_upper_bound_reports_702`).
+DANIEL_702 = "evand-n343-sweep-2026-10-20"
 #: The packets that request nothing inside the corpus, so plan no register entry.
-BEYOND_ONLY = (EVAND_584, EVAND_596)
+BEYOND_ONLY = (EVAND_584, EVAND_596, DANIEL_702)
 #: Issue #528, Ostashev's three compositions in sqcert, and issue #529, Rio Calle's n = 102
 #: layout, whose exact certificate is derived here (`test_upper_bound_reports_528_529`).
 OSTASHEV_528 = "dostashev-records-2026-10-12"
@@ -102,6 +107,24 @@ DANIEL_674 = "evand-n229-dilation-2026-10-17"
 DANIEL_674_UPDATE = "evand-n229-dilation-update-2026-10-18"
 DANIEL_659 = "evand-n236-2026-10-16"
 DANIEL_664 = "evand-n271-2026-10-17"
+#: Evan Daniel's issues #689 and #694, retained under MIT by the evand lane of 20 October
+#: (`test_upper_bound_reports_689_694`).
+DANIEL_689 = "evand-n308-2026-10-19"
+DANIEL_694 = "evand-n154-sweep-2026-10-20"
+#: Joost de Winter's issue #668, retained under MIT, read by the centre-basis JSON adapter
+#: (`test_upper_bound_reports_668`).
+DE_WINTER_668 = "de-winter-upper-bounds-227-229-260-2026-10-17"
+#: Evan Daniel's issue #703, retained under MIT by the #703 lane of 21 October
+#: (`test_upper_bound_reports_703`).
+DANIEL_703 = "evand-n270-sweep-2026-10-20"
+#: Evan Daniel's regularized lists at 0075967, which no issue reports, retained under MIT
+#: by the views lane of 21 October (`test_upper_bound_reports_regularized_1020`).
+DANIEL_REGULARIZED_1020 = "evand-regularized-2026-10-20"
+#: Francisco Couzo's in-corpus rows of issues #670, #672 and #675, retained as factual data
+#: by the think-ql4v stage 4 lane of 22 October (`test_upper_bound_reports_couzo_670_672_675`).
+COUZO_670 = "couzo-issue670-2026-10-17"
+COUZO_672 = "couzo-issue672-2026-10-17"
+COUZO_675 = "couzo-issue675-2026-10-18"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -136,6 +159,15 @@ EVERY = (
     DANIEL_674_UPDATE,
     DANIEL_659,
     DANIEL_664,
+    DANIEL_689,
+    DANIEL_694,
+    DE_WINTER_668,
+    DANIEL_703,
+    DANIEL_702,
+    DANIEL_REGULARIZED_1020,
+    COUZO_670,
+    COUZO_672,
+    COUZO_675,
 )
 
 
@@ -346,17 +378,29 @@ CENTRED = {
     "dilation": "0",
 }
 
+#: Joost de Winter's centre-basis JSON (#668): the same packing, each tilt as its basis.
+CENTER_BASIS = {
+    "n": 2,
+    "side": "3",
+    "squares": [
+        {"center": ["1", "1"], "basis": ["1", "0"]},
+        {"center": ["2", "2"], "basis": ["4/5", "3/5"]},
+    ],
+}
+
 
 def _bytes(value: Mapping[str, Any]) -> bytes:
     return json.dumps(value).encode()
 
 
-def test_the_three_adapters_read_one_packing_alike() -> None:
+def test_the_adapters_read_one_packing_alike() -> None:
     expected = legacy.parse(EVAND.decode(), expected_n=2)
     assert reports.parse_certificate(EVAND, 2, "evand-cert") == expected
     assert reports.parse_certificate(_bytes(SQUISH), 2, "squish-json") == expected
     # The centred certificate's centres move by S/2 = 3/2, exactly.
     assert reports.parse_certificate(_bytes(CENTRED), 2, "centred-json") == expected
+    # The basis (4/5, 3/5) is the rotation whose half-angle tangent is 1/3.
+    assert reports.parse_certificate(_bytes(CENTER_BASIS), 2, "center-basis-json") == expected
 
 
 @pytest.mark.parametrize(
@@ -371,6 +415,29 @@ def test_the_three_adapters_read_one_packing_alike() -> None:
         ("centred-json", {**CENTRED, "origin": "centre"}, "not a centred"),
         ("centred-json", {**CENTRED, "squares": [{"x": "0", "y": "0"}] * 2}, "x, y and t"),
         ("centred-json", {**CENTRED, "side": "-3"}, "positive"),
+        ("center-basis-json", {**CENTER_BASIS, "extra": "x"}, "exactly n, side and squares"),
+        ("center-basis-json", {**CENTER_BASIS, "n": 3}, "count differs"),
+        ("center-basis-json", {**CENTER_BASIS, "side": 3}, "rational string"),
+        (
+            "center-basis-json",
+            {**CENTER_BASIS, "squares": [{"center": ["1", "1"], "basis": ["1", "1"]}] * 2},
+            "no rotation",
+        ),
+        (
+            "center-basis-json",
+            {**CENTER_BASIS, "squares": [{"center": [1, "1"], "basis": ["1", "0"]}] * 2},
+            "rational string",
+        ),
+        (
+            "center-basis-json",
+            {**CENTER_BASIS, "squares": [{"center": ["1", "1"], "basis": ["-1", "0"]}] * 2},
+            "no finite half-angle",
+        ),
+        (
+            "center-basis-json",
+            {**CENTER_BASIS, "squares": [{"center": ["1", "1", "0"], "basis": ["1", "0"]}] * 2},
+            "a centre and a basis",
+        ),
     ],
 )
 def test_the_json_adapters_refuse_what_their_formats_do_not_state(
@@ -785,6 +852,37 @@ def test_a_tie_reads_as_one_exact_side_and_not_as_undecided() -> None:
     )
 
 
+def test_the_wall_sentence_keeps_the_wording_every_recorded_atom_uses() -> None:
+    """Review B5 of #718: where every positive clears every wall, the replay sentence reads
+    as the 52 atoms written before #718 do, "and every pair by at least"; where a positive
+    touches the box it reads "every pair clears by at least", as those atoms do."""
+    clear = {"exact_verify_containment_clearance": "1/1000"}
+    touch = {"exact_verify_containment_clearance": "0"}
+    gap = Fraction(1, 10**12)
+    walls = reports._walls  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert walls({227: clear}, gap) == (
+        "Every positive clears every wall by at least 1.00e-03 and every pair by at least "
+        "1.00e-12."
+    )
+    assert walls({204: touch}, gap).endswith("and every pair clears by at least 1.00e-12.")
+    assert walls({227: clear, 229: touch}, gap) == (
+        "At 229 squares touch the box, a least wall clearance of exactly 0; at 227 every "
+        "wall clears by at least 1.00e-03; and every pair clears by at least 1.00e-12."
+    )
+    evidence = yaml.safe_load((reports.ROOT / "frontier/evidence.yaml").read_text("utf-8"))
+    stated = [
+        " ".join(str(atom.get("limitations", "")).split())
+        for atom in evidence["evidence"]
+        if "Every positive clears every wall by at least"
+        in " ".join(str(atom.get("limitations")).split())
+    ]
+    assert len(stated) >= 52
+    assert all(
+        re.search(r"clears every wall by at least \S+ and every pair by at least", text)
+        for text in stated
+    )
+
+
 def test_a_comparison_prints_a_distance_whichever_side_is_larger() -> None:
     """A certificate above its case's ceiling is above it by a positive distance."""
     row = {
@@ -1118,12 +1216,16 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
             assert margins[f"exact_verify_{field}"] == margins[f"independent_{field}"]
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
-    # SQUISH's, #567's and #622's squares touch the box; every other source's clear it.
+    # Every positive of SQUISH's, #567's, #622's and Couzo's #670 and #675 touches the box.
+    # Couzo's #672 touches at 229 and clears every wall at 227, so its walls mix; every
+    # other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
     }
-    assert (walls == {0}) is (name in {SQUISH_481, SQUISH_500, PINGYOU_261, PINGYOU_622})
+    touching = {SQUISH_481, SQUISH_500, PINGYOU_261, PINGYOU_622, COUZO_670, COUZO_675}
+    assert (walls == {0}) is (name in touching)
+    assert (0 in walls and len(walls) > 1) is (name == COUZO_672)
     # Only #567's and #622's squares touch each other, an exact contact the kernel admits;
     # every other source's pairs clear.
     gaps = {
@@ -1352,6 +1454,14 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         DANIEL_674_UPDATE: "2026-10-18",
         DANIEL_659: "2026-10-16",
         DANIEL_664: "2026-10-17",
+        DANIEL_689: "2026-10-19",
+        DANIEL_694: "2026-10-20",
+        DE_WINTER_668: "2026-10-17",
+        DANIEL_703: "2026-10-20",
+        DANIEL_REGULARIZED_1020: "2026-10-20",
+        COUZO_670: "2026-10-17",
+        COUZO_672: "2026-10-17",
+        COUZO_675: "2026-10-18",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

@@ -55,7 +55,7 @@ others’, each with its credit and
 The most significant since August 2026:
 
 - **Eleven squares settled:** $s(11) = 3.877083590022814\ldots$, the side of Walter
-  Trump’s 1979 packing ([T-011](packing/frontier/RESULTS.md)), by Mannaseh Ahmed’s
+  Trump’s 1979 packing ([T-011](packing/frontier/RESULTS.md)), by Manasseh Ahmed’s
   Astra-assisted proof
   [11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal), building
   on this project and Marc Leonard Overbeck (Kleddamag)
@@ -112,7 +112,7 @@ paper and its PDF. Three form a series on $n = 11$:
 is a tutorial on geometric construction, physics-inspired search, annealing, surgery,
 local refinement, and upper-bound certification.
 
-The website is at edition `v0.8.6` and the atlas posters at `v0.6.4`; each paper carries
+The website is at edition `v0.9.0` and the atlas posters at `v0.6.4`; each paper carries
 its own version.
 
 ## Repository Guide
@@ -295,7 +295,7 @@ These 42 research reports are the durable topical syntheses:
 | [Publishing GitHub Work from Codex Cloud](docs/project/research/research-2026-10-07-codex-cloud-github-publication.md) | Diagnosis of GitHub access in Codex Cloud, the verified publication repair, and reusable setup and validation evidence |
 | [Cloud Intake State Checkpoint](docs/project/research/research-2026-10-07-cloud-intake-state-checkpoint.md) | Completed SQUISH publication, pending second-update validation, retained preparation archives, and the open intake queue |
 | [s(12) Beyond Rescaling](docs/project/research/research-2026-10-02-s12-beyond-rescaling.md) | Daniel’s s(12) certificate scaled past #309 at a finer angle net, then re-weighted by linear programming to a candidate s(12) ≥ 15680000/3949423, with source-verifier receipts and controls |
-| [Where the Authors’ Measure Checkers Spend Their Time](docs/project/research/research-2026-10-02-author-checker-profile.md) | Function-level profiles of Tokoharu’s and wand125’s outward-rounded checkers on one certificate per family, and what they imply for an independent verifier; withheld from that verifier’s clean-room implementers |
+| [Where the Authors’ Measure Checkers Spend Their Time](docs/project/research/research-2026-10-02-author-checker-profile.md) | Function-level profiles of Tokoharu’s and Hiroaki Hosono’s outward-rounded checkers on one certificate per family, and what they imply for an independent verifier; withheld from that verifier’s clean-room implementers |
 | [Exact Arithmetic for Independent Verifiers](docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md) | Source-level comparison of Python and Rust rational arithmetic, native-library options, sampled profiles, and a controlled experiment measuring redundant normalization |
 | [Fractional Packing, Duality, and the Next N11 Discriminators](docs/project/research/research-2026-09-10-x027-fractional-duality.md) | Exact full-unit transport, interior duality and density equivalence, finite witnesses, and the limits of fractional obstructions |
 | [Seven Corner Marks, Contact Components, and Relational Helpers](docs/project/research/research-2026-09-10-x027-structural-helpers.md) | New ownership and contact-component deductions, shared-owner consistency, and bounded segment-helper comparisons |
@@ -507,9 +507,10 @@ Changing agents changes the driver, not the record or the evidence required for 
 | --- | --- |
 | This README | High-level orientation and the relationship among the layers |
 | [`SYNOPSIS.md`](SYNOPSIS.md) | Current research status and roadmap, technical state, workflow contracts, work-unit vocabulary, and handoff |
-| [`epistemics.md`](epistemics.md) | Whole-result V/C/S/N classifications, their executable boundary, and the policy for results by others: scope, credit, import, and reply |
+| [`epistemics.md`](epistemics.md) | Whole-result V/C/S/N classifications, their executable boundary, and the policy for results by others: scope, import, and reply |
 | [`docs/project/policies/regularization-policy.md`](docs/project/policies/regularization-policy.md) | What a regularized drawing or register regularization must satisfy, how it is reviewed and adjusted, and how it is credited |
 | [`conventions.md`](conventions.md) | IDs, filenames, artifact shape, evidence fields, provenance, corrections, and the boundary between machine checks and review |
+| [`attribution.md`](attribution.md) | Contributor identities, personal and project credits, credit text and lineage, PDF bylines, and exceptions |
 | [`operating-rules.md`](operating-rules.md) | How sessions choose, divide, validate, and hand off work |
 | [Campaign runbook](packing/campaign/README.md) | Hypothesis and experiment mechanics, clocks, budgets, verdicts, and routing |
 | [Result import process](packing/campaign/result-import.md) | Importing, recording, validating, rating and publishing a result by others, and answering its author |
@@ -529,6 +530,7 @@ Changing agents changes the driver, not the record or the evidence required for 
 ├── TUTORIAL-ADVANCED.md    Advanced companion on search, certificates, and proof
 ├── SYNOPSIS.md             Current research status, roadmap, results, and handoff
 ├── conventions.md          Artifact, identifier, evidence, and correction rules
+├── attribution.md          Contributor identities, credit policy, and exceptions
 ├── epistemics.md           Whole-result verification and confirmation rubric
 ├── operating-rules.md      Session conduct and workflow rules
 ├── development.md          Python setup, engineering boundaries, and validation

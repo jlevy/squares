@@ -7,7 +7,7 @@ import re
 
 import pytest
 
-from devtools import render_overview, site_documents
+from devtools import check_published_site, render_overview, site_documents
 from devtools.repo_links import RAW_URL, REPO_URL, RepositoryTree
 from devtools.site_documents import (
     INTRO,
@@ -291,7 +291,10 @@ def test_the_documents_are_the_cards_in_their_order_and_three_views_are_not_page
 def test_a_forwarder_stands_at_each_address_a_page_used_to_have() -> None:
     """Each forwarder names where a visit goes in `data-moved-to`, which `forward.js`
     reads; it carries that script, a refresh for a reader without scripts, a link for
-    anyone neither reaches, and the canonical address of the place it stands for."""
+    anyone neither reaches, and the canonical address of the place it stands for. The
+    script goes to the page's canonical address, a directory's own where the page is its
+    index, as the deployed check requires (`check_published_site.forwarder_expected`);
+    the refresh, the link and file navigation name the file."""
     forwarders = {page.name: page.html for page in render_overview.forwarder_pages()}
     assert list(forwarders) == [old for old, _ in render_overview.MOVED_PAGES]
     script = render_overview.FORWARD_SCRIPT.read_text(encoding="utf-8")
@@ -300,7 +303,8 @@ def test_a_forwarder_stands_at_each_address_a_page_used_to_have() -> None:
         physical = (
             destination if external else posixpath.relpath(destination, posixpath.dirname(old))
         )
-        target = physical
+        target = check_published_site.forwarder_expected(old, destination)["script"]
+        assert target == physical or destination.endswith("/index.html"), old
         canonical = destination if external else render_overview.canonical_url(destination)
         page = forwarders[old]
         opening = re.search(r"<html\b[^>]*>", page)
@@ -392,8 +396,14 @@ def test_the_pages_render_self_contained_with_a_toc(
 
 def test_no_relative_repository_link_survives(pages: dict[str, render_overview.Page]) -> None:
     from devtools.render_case_pages import case_url  # noqa: PLC0415
+    from devtools.render_contributors import page_paths  # noqa: PLC0415
 
-    served = {"./", *render_overview.SITE_PAGES, *(case_url(n) for n in range(1, 325))}
+    served = {
+        "./",
+        *render_overview.SITE_PAGES,
+        *page_paths(),
+        *(case_url(n) for n in range(1, 325)),
+    }
     for name, page in pages.items():
         article = re.search(r"<article\b.*?</article>", page.html, re.DOTALL)
         assert article is not None

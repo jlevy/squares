@@ -1,0 +1,194 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-22T04:44Z",
+  "git_scope": "Blobless clone of JoostdeWinter/joostdewinter.github.io with a sparse checkout of square-packing-above-324/ at 643dc9a (committed 2026-10-17T14:27:33Z), the licensed successor of the folder issue #666 links. The issue pins b3152f52 (committed 2026-10-17T07:03:15Z), which no branch reaches since the site's history was rewritten to drop an unrelated PDF; the reachable b9cdc16b, with the same commit time and message, holds the identical folder tree 83563a8b, and 643dc9a adds only the folder's MIT LICENSE and a licence paragraph in its README, leaving all 41 certificate, pose and checker blobs unchanged. Retained: the 19 exact certificates nNNNN.cert, of which the 11 at or below n = 1024 are recorded here and the 8 above wait on the owner (think-f2io), with the licence, the folder README, records.txt and the source checker check.py, which was read and not run. Pinned by digest only: the 19 decimal-pose files nNNNN.json and the figure before_after.svg. The rest of the site is pinned by the commit alone.",
+  "sources": [
+    {
+      "id": "joostdewinter-github-io-square-packing-above-324",
+      "source_url": "https://github.com/JoostdeWinter/joostdewinter.github.io",
+      "source_ref": "643dc9ad4d3dbd71a9a05558c7f6116b809ba930",
+      "source_commit": "643dc9ad4d3dbd71a9a05558c7f6116b809ba930",
+      "committed_utc": "2026-10-17T14:27:33Z",
+      "git_tree": "307841972bb8a4c7eb74a50a704824edd50f02dc",
+      "archived_path": "packing/resources/web/de-winter-issue666-2026-10-17/source",
+      "subtree_manifest": "packing/resources/web/de-winter-issue666-2026-10-17/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "square-packing-above-324/LICENSE",
+        "square-packing-above-324/README.md",
+        "square-packing-above-324/before_after.svg",
+        "square-packing-above-324/check.py",
+        "square-packing-above-324/n0464.cert",
+        "square-packing-above-324/n0464.json",
+        "square-packing-above-324/n0509.cert",
+        "square-packing-above-324/n0509.json",
+        "square-packing-above-324/n0555.cert",
+        "square-packing-above-324/n0555.json",
+        "square-packing-above-324/n0603.cert",
+        "square-packing-above-324/n0603.json",
+        "square-packing-above-324/n0654.cert",
+        "square-packing-above-324/n0654.json",
+        "square-packing-above-324/n0706.cert",
+        "square-packing-above-324/n0706.json",
+        "square-packing-above-324/n0760.cert",
+        "square-packing-above-324/n0760.json",
+        "square-packing-above-324/n0817.cert",
+        "square-packing-above-324/n0817.json",
+        "square-packing-above-324/n0875.cert",
+        "square-packing-above-324/n0875.json",
+        "square-packing-above-324/n0935.cert",
+        "square-packing-above-324/n0935.json",
+        "square-packing-above-324/n0998.cert",
+        "square-packing-above-324/n0998.json",
+        "square-packing-above-324/n1061.cert",
+        "square-packing-above-324/n1061.json",
+        "square-packing-above-324/n1128.cert",
+        "square-packing-above-324/n1128.json",
+        "square-packing-above-324/n1196.cert",
+        "square-packing-above-324/n1196.json",
+        "square-packing-above-324/n1266.cert",
+        "square-packing-above-324/n1266.json",
+        "square-packing-above-324/n1339.cert",
+        "square-packing-above-324/n1339.json",
+        "square-packing-above-324/n1413.cert",
+        "square-packing-above-324/n1413.json",
+        "square-packing-above-324/n1489.cert",
+        "square-packing-above-324/n1489.json",
+        "square-packing-above-324/n1568.cert",
+        "square-packing-above-324/n1568.json",
+        "square-packing-above-324/records.txt"
+      ],
+      "subtree_file_count": 43,
+      "subtree_total_bytes": 20555569,
+      "retained_file_count": 23,
+      "retained_total_bytes": 6564793,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "square-packing-above-324/before_after.svg",
+          "bytes": 10644101,
+          "sha256": "6f4e38d400789632e33f36e4828e7e3129b7eb5d90eef4db80108d10fd758461",
+          "reason": "A 10.6 MB figure of each packing beside the record it improves; no claim rests on it. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n0464.json",
+          "bytes": 101845,
+          "sha256": "6cf8fa68226e20c920572a6591a983f92eacf9a0872803f22491e644784f63b0",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n0509.json",
+          "bytes": 91620,
+          "sha256": "1f77e92f07797fcc6f2ee371c7d7c43655a3a51d980af575194984fe28e1b93e",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n0555.json",
+          "bytes": 100077,
+          "sha256": "552dfd80eb1ddc87566c3b3202fb5c4d491214dd6da9b22e4597a8c38cdcee9e",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n0603.json",
+          "bytes": 133554,
+          "sha256": "dc88e5e1f9437ddb8e3ccdd4dae518da57fd730a4f2d97a9c353669d83b1150d",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n0654.json",
+          "bytes": 117948,
+          "sha256": "d84f638b0f517bfce36b9189845dc25b200801e25828a2bacd15812d941eb8a4",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n0706.json",
+          "bytes": 127360,
+          "sha256": "19459abe14959a5f8b6e462b312a2aaf1200d2519400ea9b8d228a8019615beb",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n0760.json",
+          "bytes": 136956,
+          "sha256": "d111e06707dfa4fc1eb44f6ec7b08078554ff6f19fd95b5b18a4bc2d8cea1f09",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n0817.json",
+          "bytes": 147599,
+          "sha256": "840aa10156610878fd6be226b98356494c6c3e10d51befddf4a5a302b2c33667",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n0875.json",
+          "bytes": 157528,
+          "sha256": "aa78d20546a865968c70529615df7b6ee3f18142fd544e201566700690995676",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n0935.json",
+          "bytes": 168751,
+          "sha256": "948b38ecfb476af3109ee9b929ffa036a84a42f4b827416d77ca35dda5502dd4",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n0998.json",
+          "bytes": 179849,
+          "sha256": "97f262f7491008ee5ba0327bef286f552fa9f1fc1463a9775b4a888806ce5e86",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n1061.json",
+          "bytes": 191451,
+          "sha256": "8c79f8dbdf884563b8698e8c1452c4c2949dcdceae934249e005e2330c9be9f1",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n1128.json",
+          "bytes": 202852,
+          "sha256": "21d9cc3a972e0fa5cd005a125f1f83da4b9e8d66851d60b186e5e30eb373ff3a",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n1196.json",
+          "bytes": 215083,
+          "sha256": "d0f4bf7410b928bc6b3dca388c6238c5074122aa32b98a777eb94a75f942a3c2",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n1266.json",
+          "bytes": 227765,
+          "sha256": "4442929775c110952d6543987520ba93a40e6173a7b02bfeecc1be46919ec536",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n1339.json",
+          "bytes": 241118,
+          "sha256": "d0c37f16dedc2f68f24fed9f93ff5e9820168f9692cc5bec14c257d6311b06d5",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n1413.json",
+          "bytes": 254632,
+          "sha256": "2b2c87ef87350225fb549aa6504d9a22d880bb3288b9641dc6a43b8b8d7be37b",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n1489.json",
+          "bytes": 268269,
+          "sha256": "c6000bdf86882c966cc12154a745e0c2d18d3d7e7248b435d401588a282abccd",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        },
+        {
+          "path": "square-packing-above-324/n1568.json",
+          "bytes": 282418,
+          "sha256": "a5fca779cf038e307a2efe95e74c771a162913d42ed602c226236bcbecea6fef",
+          "reason": "The decimal poses, in degrees, of the same packings: the certificates are authoritative and the replay reads them alone. Hash-pinned, not copied."
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Joost de Winter: square-packing-above-324/LICENSE, added in 643dc9a at 2026-10-17T14:27:33Z with the README sentence that every file in the folder is released under it; retained. The issue pin b3152f52 and b9cdc16b carry no licence file. The README credits the numerical search and refinement to GPT-6 Astra under de Winter's direction and the certificates and checks to Claude (Anthropic).",
+      "claims": [
+        "Issue #666 reports nineteen upper bounds beyond the n <= 324 corpus, each the exact rational side in its certificate's header rounded upward at 12 decimal places: s(464) <= 21.988813022694, below Francisco Couzo's certificate of 14 October, and, at 509, 555, 603, 654, 706, 760, 817, 875, 935, 998, 1061, 1128, 1196, 1266, 1339, 1413, 1489 and 1568, a side below the integer ceil(sqrt n).",
+        "The issue states that check.py (standard library, exact rational arithmetic) accepts all 19 certificates and that the printed poses pass the same test at 80 digits, with least clearances between 1e-35 and 2e-11, and that no checker outside the author's has run on them. It credits the staircase-rectangle and four-block method of Arslanov, Mustafin and Shangitbayev (Electron. J. Combin. 28(4), P4.22, 2021) and, at 464, a six-square patch from the author's n = 422 construction. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

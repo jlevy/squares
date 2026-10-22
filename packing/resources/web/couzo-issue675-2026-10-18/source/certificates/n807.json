@@ -1,0 +1,62 @@
+{
+  "n": 807,
+  "packing": "n807.txt",
+  "packing_sha256": "261ad0d68a719ca49ed543e9c79b769fb0ca6832ebaf00f3bf68eecde5c88981",
+  "certificate": "certificates/n807.cert",
+  "certificate_sha256": "5d8a442cb6b4a715dde9296bd894e45b34ab30f2e39b5c6b72519b0c92a3ac5c",
+  "rational_side": "6155115135387874658142887613182558110516931377009391867353199379651/212797868808170240655067552127978688081702406550675500000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "construction": {
+      "label": "elimination from n=808",
+      "kind": "derived",
+      "source_n": 808,
+      "source": "2f242ac055139ae7c8745a33fab64e4c2f03b9930d2dd888886fde5d91e1a15e",
+      "tiles": 1,
+      "layers": 0
+    },
+    "web_seed": {
+      "category": "CT105 web submission",
+      "source_certificate_sha256": "5d8a442cb6b4a715dde9296bd894e45b34ab30f2e39b5c6b72519b0c92a3ac5c",
+      "submission_id": "1c6f5d7dc74a2373e19013d046c57f80",
+      "method": "fq",
+      "received": "20261018T051648Z",
+      "previous_source_credit": {
+        "construction": {
+          "label": "elimination from n=808",
+          "kind": "derived",
+          "source_n": 808,
+          "source": "2f242ac055139ae7c8745a33fab64e4c2f03b9930d2dd888886fde5d91e1a15e",
+          "tiles": 1,
+          "layers": 0
+        },
+        "web_seed": {
+          "category": "CT105 web submission",
+          "source_certificate_sha256": "a4bfe8844deb34feba6dc3b3aae4ffaee265b42cbd8617eefa7b8f543c06aaf1",
+          "submission_id": "066267ef9bd4a73f31e92fa7ace9a1a4",
+          "method": "ellsworth",
+          "received": "20261018T032550Z",
+          "previous_source_credit": {
+            "construction": {
+              "label": "elimination from n=808",
+              "kind": "derived",
+              "source_n": 808,
+              "source": "2f242ac055139ae7c8745a33fab64e4c2f03b9930d2dd888886fde5d91e1a15e",
+              "tiles": 1,
+              "layers": 0
+            }
+          }
+        },
+        "seed_credit": "Francisco Couzo",
+        "source_n": 807,
+        "deleted_squares": 0,
+        "source_certificate_sha256": "a4bfe8844deb34feba6dc3b3aae4ffaee265b42cbd8617eefa7b8f543c06aaf1"
+      }
+    },
+    "seed_credit": "Francisco Couzo; retained seed/construction credit: Francisco Couzo",
+    "source_n": 807,
+    "deleted_squares": 0,
+    "source_certificate_sha256": "5d8a442cb6b4a715dde9296bd894e45b34ab30f2e39b5c6b72519b0c92a3ac5c"
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

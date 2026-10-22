@@ -55,6 +55,11 @@ The regularized view’s report, `s236_bm3c_regularized.json`, says `"by": ["Fra
 Couzo"]`, as the n155 and n271 views’ reports do; the issue credits the packing to
 itsnaka’s composition and the author’s search, and the field reads as the regularizer’s
 default rather than a statement of credit. It is retained as the source wrote it.
+[The author’s comment on #669 of 20 October 2026](https://github.com/jlevy/squares/issues/669#issuecomment-6302893217)
+confirms that reading: the field was a bug in his tooling, which took it from the record
+holder at that count in his 5 October batch instead of from the packing drawn, fixed at
+`a435c97`. He names `s236_bm3c` among the affected views and asks that the field be read
+as no credit at all.
 
 ## Exact Replay
 

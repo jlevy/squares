@@ -85,18 +85,18 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # completed zmx2 replay of the s(77) mixed cover (T-067) proved n = 77 and, by its
     # total below 78, n = 78; both were reported-proved and neither Nagamochi-bounded,
     # so formal-open falls by two in every corpus. The replayed s(76) >= 447/50 (T-072)
-    # leaves n = 76 open. 2026-10-02, the merged replay of wand125's n = 50 mixed
+    # leaves n = 76 open. 2026-10-02, the merged replay of Hosono's n = 50 mixed
     # certificate (T-048) took n = 50 and, by its mass, n = 51 off Nagamochi's bound;
     # both stay open in both lanes, so only the Nagamochi-bounded count falls by two. The
     # same day the replayed mixed certificates of T-069 and T-071 took n = 37, 65, 66, 84,
     # 85, 87, 90 and 92 off it, eight more, all open in both lanes; n = 86 moved too, from
-    # a rectangle certificate. Then the merged replays of wand125's rectangle
+    # a rectangle certificate. Then the merged replays of Hosono's rectangle
     # certificates of 1 October (T-074) took n = 57, 58, 88, 89, 93 and 94 off it, six
     # more, all open in both lanes. 2026-10-03: the full replay of Valid7 and the built
     # Lean reduction proved T-064's s(k^2 - 3) = k, closing n = 97, 118, 141, 166, 193,
     # 222, 253, 286 and 321; all were reported-proved and Nagamochi-bounded, so the
     # formal-open and Nagamochi-bounded counts fall together, by one, five and nine. The
-    # same day the replays of wand125's six afternoon mixed certificates (T-075) took
+    # same day the replays of Hosono's six afternoon mixed certificates (T-075) took
     # n = 83, 91 and 96 off Nagamochi's bound, all open in both lanes, so only the
     # Nagamochi-bounded count falls, by three in every corpus. Then the n = 101 linear
     # certificate's replay of 2 October, recorded as T-080, took n = 101 to 105 off it,
@@ -158,11 +158,24 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: the pass of 19 October 2026 the five it moved to Evan Daniel's certificates: 155, 229,
 #: 236 and 271, and 183 (T-220, think-jh4w), whose new witness has one strictly
 #: separating square, index 11, the one the source calls its rattler, and 28 that
-#: translate, against the grid's 14.
+#: translate, against the grid's 14, and the pass of 20 October 2026 the five it moved: to
+#: his issue-694 and issue-689 certificates, 154 (T-222), 9 separating and 61 translating
+#: squares against T-186's 10 and 42, and 308 (T-221), 5 and 43 against T-174's 0 and 20;
+#: to Francisco Couzo's issue-678 certificate (T-223), 204, 39 separating and 76
+#: translating squares against T-186's 15 and 46; and to Joost de Winter's certificates
+#: (T-196, think-qdcc), 227 and 260, whose new witnesses move the n = 1..324 sums by +6
+#: separating and -8 translating squares; and the pass of 21 October 2026 the two it moved:
+#: to Evan Daniel's issue-703 certificate, 270 (T-224), 1 strictly separating square, index
+#: 82, and 24 translating squares against T-174's 1 and 14, and to Couzo's issue-678
+#: certificate (T-223), 260, 17 and 53 against T-196's 1 and 11; and the pass of 22
+#: October 2026 the four it moved to Evan Daniel's regularized views (T-225, think-ql4v),
+#: whose least margins are 1e-20: separating and translating squares 8 and 25 at 204
+#: against T-223's 39 and 76, 2 and 9 at 227 against T-196's 22 and 26, 2 and 25 at 229
+#: against T-199's 90 and 134, and 0 and 16 at 260 against T-223's 17 and 53.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 112, 86, 577),
-    "n=1..200": (67, 434, 182, 2094),
-    "n=1..324": (124, 1292, 302, 5230),
+    "n=1..200": (67, 433, 182, 2113),
+    "n=1..324": (124, 1186, 302, 5132),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -272,6 +285,7 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_homepage.py",
     "tests/test_site_result_popover.py",
     "tests/test_site_case_records.py",
+    "tests/test_site_contributor_popovers.py",
     "tests/test_site_rating_tooltips.py",
     "tests/test_site_math_faces.py",
     "tests/test_site_column_measurement.py",
@@ -312,6 +326,7 @@ _SITE_INPUTS = (
     "packages/workbench/tools/*",
     "packing/tests/probes/*",
     "packing/frontier/*",
+    "packing/contributors/*",
     "packing/atlas/*",
     "packing/witnesses/*",
     "packing/campaign/*",
@@ -320,6 +335,7 @@ _SITE_INPUTS = (
     "packing/pyproject.toml",
     "packing/uv.lock",
     "vendor/kpress/*",
+    "LICENSE",
     "*.md",
 )
 SLOW_TESTS = "slow and not exhaustive_exact"

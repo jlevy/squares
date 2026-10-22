@@ -244,6 +244,84 @@ def job_input(certificate: legacy.Certificate, control: str) -> legacy.Certifica
     return replace(certificate, poses=tuple(poses))
 
 
+#: How far past exact contact a sharp control goes: far below any margin a certificate
+#: keeps (de Winter's #668 certificates keep 1e-9), so a route that rounds or tolerates
+#: accepts it and an exact one refuses it.
+SHARP_EPSILON = Fraction(1, 10**30)
+#: The sharp controls (RF-2 of the 20 October 2026 review of #668, as RD-2 of the 10
+#: October review and RF-2 of the #678 review asked). The `JOBS` controls are gross, a
+#: duplicated square (gap -1) and a square moved the side and 2 further out, so a route
+#: with a tolerance of 1e-8 refuses them as surely as an exact one; these go past contact
+#: by `SHARP_EPSILON` only. They are not in `JOBS`, whose roster every retained receipt
+#: holds job for job, so certify does not write them and no receipt changes; the tests
+#: run them on a retained certificate (`run_sharp`).
+SHARP_CONTROLS = ("side-lowered-past-wall-contact", "tightest-pair-closed-past-contact")
+
+
+def sharp_input(
+    certificate: legacy.Certificate,
+    control: str,
+    *,
+    epsilon: Fraction = SHARP_EPSILON,
+    past: bool = True,
+) -> legacy.Certificate:
+    """The certificate taken to exact contact, and with ``past`` by ``epsilon`` beyond it.
+
+    ``side-lowered-past-wall-contact`` lowers the side by the least exact distance from a
+    corner to the top or right wall (`legacy.top_clearance`): at contact a corner lies on
+    the wall, and past it the wall cuts the square by ``epsilon``.
+    ``tightest-pair-closed-past-contact`` moves the second square of the pair with the
+    least separating gap (`legacy.tightest_pair`) along the face normal that closes it, by
+    the gap: at contact the pair touches, and past it the two overlap by ``epsilon`` on
+    that normal. A move that leaves the pair separated on another face normal is refused
+    rather than returned, so a control past contact always overlaps.
+    """
+    if control not in SHARP_CONTROLS:
+        raise ReportError("unknown sharp control")
+    if epsilon <= 0:
+        raise ReportError("a sharp control goes past contact by a positive amount")
+    excess = epsilon if past else Fraction(0)
+    if control == "side-lowered-past-wall-contact":
+        return replace(
+            certificate, side=certificate.side - legacy.top_clearance(certificate) - excess
+        )
+    left, right, gap, (nx, ny) = legacy.tightest_pair(certificate)
+    step = gap + excess
+    poses = list(certificate.poses)
+    pose = poses[right]
+    poses[right] = replace(pose, x=pose.x + step * nx, y=pose.y + step * ny)
+    moved = replace(certificate, poses=tuple(poses))
+    squares = legacy.corner_squares(moved)
+    if (legacy.independent.pair_gap(squares[left], squares[right]) < 0) is not past:
+        raise ReportError("the tightest pair's move does not reach the control's contact")
+    return moved
+
+
+def run_sharp(
+    certificate: legacy.Certificate,
+    control: str,
+    *,
+    epsilon: Fraction = SHARP_EPSILON,
+    past: bool = True,
+    witness_prefix: str = WITNESS_PREFIX,
+    claim_limitations: str = CLAIM_LIMITATIONS,
+) -> dict[str, dict[str, Any]]:
+    """Each route's verdict on a sharp control, with its least wall clearance and gap."""
+    actual = sharp_input(certificate, control, epsilon=epsilon, past=past)
+    first, _report = legacy.exact_verify(
+        to_witness(actual, witness_prefix=witness_prefix, claim_limitations=claim_limitations)
+    )
+    second = legacy.independent.check_squares(legacy.corner_squares(actual), actual.side)
+    return {
+        route: {
+            "passed": verdict["verification_passed"],
+            "wall": _rational(verdict["minimum_containment_clearance"]),
+            "gap": _rational(verdict["minimum_best_pair_gap"]),
+        }
+        for route, verdict in (("exact_verify", first), ("independent", second))
+    }
+
+
 def _profile(witness_prefix: str, claim_limitations: str) -> None:
     if (
         type(witness_prefix) is not str

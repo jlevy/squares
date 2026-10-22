@@ -1,6 +1,6 @@
-"""Check a reported wand125 certificate kept outside Git, and price its replay.
+"""Check a reported certificate of Hosono's kept outside Git, and price its replay.
 
-wand125's fine-net certificates of jlevy/squares#446 and its follow-ups are retained as
+Hosono's fine-net certificates of jlevy/squares#446 and its follow-ups are retained as
 authored facts and hash references (`resources/web/wand125-fine-net-*`). Until 16
 October the release asset that holds the candidate, its logs and the adapted verifier's
 source stayed outside live Git, since the nested verifier carries no licence of its own;

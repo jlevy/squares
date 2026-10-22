@@ -527,7 +527,7 @@ def register() -> None:
                 "acquisition/claims.json",
                 "evidence": [REPORT],
                 "notes": "All seventeen originals and comparators retained; "
-                "fourteen selected, three withdrawn after smaller ry-xu ceilings. "
+                "fourteen selected, three withdrawn after smaller Xu ceilings. "
                 "Finite feasibility only.",
             }
         ],
@@ -577,7 +577,7 @@ def register() -> None:
                 "value": reported_bound(n)["value"],
                 "superseded_by": selected[n]["source_id"],
                 "reason": "The withdrawn Gupta rational certificate is larger than "
-                "the selected ry-xu construction; its complete source and replay "
+                "the selected Xu construction; its complete source and replay "
                 "remain retained.",
             }
         )

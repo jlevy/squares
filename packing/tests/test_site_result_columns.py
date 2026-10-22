@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import html
 import re
+import xml.etree.ElementTree as ET
 from collections.abc import Iterator
 from pathlib import Path
 from typing import Any, NamedTuple
@@ -435,7 +436,9 @@ def test_a_long_quotient_may_end_a_line_after_its_solidus() -> None:
         spoken = re.findall(r'<span class="kpress-math-semantic">(.*?)</span>', cell)
         assert not any("\\" in semantic for semantic in spoken), result.id
         if result.id in LONG_QUOTIENTS:
-            assert "<mo>&#x0002F;</mo>" in spoken[0]
+            math = ET.fromstring(spoken[0])
+            operators = math.iter("{http://www.w3.org/1998/Math/MathML}mo")
+            assert any(operator.text == "/" for operator in operators), result.id
 
 
 @pytest.mark.parametrize("width", TABLE_WIDTHS)

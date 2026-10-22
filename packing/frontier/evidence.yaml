@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-19'
+last_reviewed: '2026-10-22'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -195,8 +195,8 @@ evidence:
       This elementary deduction is not an independent certificate for s(61). Its
       premise was replayed here on 2 October 2026
       (E-n060-evand-mixed-cover-zmx2-replay, whose cover's total is below 61 too),
-      and wand125's s(59) = 8 (E-n059-wand125-mixed-cover-zmx2-replay) gives the
-      value by the same deduction. A separate wand125 point-only s(61) claim awaits
+      and Hiroaki Hosono's s(59) = 8 (E-n059-wand125-mixed-cover-zmx2-replay) gives the
+      value by the same deduction. Hosono's separate point-only s(61) claim awaits
       primary-source intake; Evan Daniel's replay of that cover is
       E-n061-wand125-point-cover-evand-replay-report.
     source_reviewed: '2026-10-01'
@@ -217,15 +217,15 @@ evidence:
     limitations: >-
       evand/square-packing at 7d6f46d9d0780241245dfbf77bad28aa1594c6b5 (the records were
       committed on 2026-10-01T03:20Z and are unchanged at this pin; Evan Daniel's comment of
-      2 October on jlevy/squares#238 points to them) reports a replay of wand125's
+      2 October on jlevy/squares#238 points to them) reports a replay of Hiroaki Hosono's
       point-only cover for s(61) = 8: a D4-invariant point measure on [0,8]^2 of 15,193
-      points, total 8584985072679551/2^47 = 60.99998780... < 61, byte for byte wand125's
+      points, total 8584985072679551/2^47 = 60.99998780... < 61, byte for byte Hosono's
       point_n61_L8/cover.txt at wand125/square-packing-bounds f8846cec. Daniel reports it
       certified by two of his exact point checkers: zeromargin.py over all 12,800 roots of
       the D4 region, two of them only after a depth-30 rerun, and zmcheck --d4 with the
       opt-in branch order ZM_MIXPAIR=1 over all 6,400, none uncertified; with its default
       order zmcheck stalled at interior tile germs. He also ran zmx2, --d4 reproducing
-      wand125's 800,042 boxes and --full --sym-atoms clean, and calls those a
+      Hosono's 800,042 boxes and --full --sym-atoms clean, and calls those a
       reproduction rather than a third check, since zmx2's author read zeromargin.py. The
       cover was tuned against zmx2, by a linear program iterated on its counterexamples, and
       not against zeromargin.py or zmcheck. The cover and every checker its MANIFEST.txt
@@ -291,11 +291,11 @@ evidence:
         proved by T-062 and T-063.
     limitations: >-
       Replayed here on 2 October 2026: zmx2 6b7f0f79... cert --d4 --pair-points on
-      wand125's retained point-only cover, VERIFIED-D4, 6,400 of 6,400 roots, 800,042
+      Hiroaki Hosono's retained point-only cover, VERIFIED-D4, 6,400 of 6,400 roots, 800,042
       boxes, 392,572 certified and 10,649 empty leaves, maximum depth 30, none uncertified
       or capped, 256 s wall on four cores (receipts/n61_zmx2_d4_pairpoints.log); the box
       total and depth equal the source's own run and Daniel's census. The cover is
-      wand125's and the checker is Evan Daniel's, unmodified; the source's own verify.sh
+      Hosono's and the checker is Evan Daniel's, unmodified; the source's own verify.sh
       pins zmx2 6b7f0f79, so this replay re-runs the checker the source chose, a
       same-implementation replay, as E-n045-wand125-point-cover-source-replay is. It is
       also the checker of T-062's and T-066's replays, so it adds no method. Only the D4 sweep was run; the --full sweep was not. Two mutated
@@ -416,7 +416,7 @@ evidence:
       scope enumerates this corpus's instances, not the theorem's full domain.
       Evidence update, 2026-10-05: the 4 October evand packet retains, at 7ff3b211, what
       earlier commits added on this claim (think-83zc). The bundle README as edited on 3
-      October (02629f2 to ca6d988) records wand125's checker as an independent second
+      October (02629f2 to ca6d988) records Hiroaki Hosono's checker as an independent second
       implementation, which the source reran in a sandbox (RECORD OK over all 156,800
       roots, three mutant covers refused) and read, finding the measure-zero gap this
       record's review names D-1; says the D4 reduction and Lemma Z are kernel-checked,
@@ -450,14 +450,14 @@ evidence:
       valid7-independent-check and the cover into W, refuses any file whose SHA-256 is not
       the one full_b.jsonl's header names, and makes the one line of tier_b2.nonneg_open
       that D-1 names a refusal; then, in W with CPython 3.14 and python-flint 0.9.0, the 33
-      region runs of the fourteen shards of receipts/valid7_replay_plan.json in the wand125
+      region runs of the fourteen shards of receipts/valid7_replay_plan.json in Hiroaki Hosono's
       packet, each that plan's command, src/run_all.py cover/L4_k02_box7.txt --centers X0
       X1 Y0 Y1 --nproc 4 --record runs/R.jsonl --resume under the fork start method,
       resumable from its own record; then .venv/bin/python3 -m devtools.plan_valid7_replay
       compare --checker wand125 --guard-d1 --records DIR on the 33 records, DIR holding the
       release's full.jsonl.gz and full_b.jsonl.gz checked against release/records.sha256,
       which must report ok with all 156,800 roots, the 124,975 the source ran under V2 each
-      with the published leaves (receipts/replay/wand125_replay_compare.json in the wand125
+      with the published leaves (receipts/replay/wand125_replay_compare.json in Hosono's
       packet).
     replay_status: passed
     verifiers: [V-wand125-valid7-checker, V-audit-valid7-independent, V-probe-valid7-fixes]
@@ -511,7 +511,7 @@ evidence:
       devtools.plan_valid7_replay compare found exactly the published roots, and each of
       the 124,975 the source ran under V2 with leaf list equal to the published one; the
       31,825 it ran under V1, whose hand-off rule split differently, were certified afresh
-      and not compared (receipts/replay/ in the wand125 packet). This is wand125's code,
+      and not compared (receipts/replay/ in Hosono's packet). This is Hosono's code,
       not Daniel's, deciding Valid7 here, an independent implementation by its read log;
       it is the same method, exact-algebraic, as the qx2_zm.py replay beside it. No
       mutated cover was run in this replay; the three refused on 2 October are verify.sh's.
@@ -520,7 +520,7 @@ evidence:
       evand/square-packing#1: nonneg_open and the unused rf.nonneg_on now require a
       positive value at an interior point that is not a root, and tier_b2's line and value
       caches are keyed by exact text, not Python's hash. check_record.py gained --seed and
-      --claim; the release records were not regenerated. The wand125 packet of 3 October
+      --claim; the release records were not regenerated. Hosono's packet of 3 October
       retains that revision. Its verify.sh ran here on 5 October on the unchanged records:
       RECORD OK with fresh seed 2431791605250748986, the counts of 2 October, and the three
       lighter covers refused, in 427 s; devtools.probe_valid7_fixes, in the same
@@ -591,12 +591,12 @@ evidence:
       checker's own count against the published 22.6. devtools.plan_valid7_replay compare
       found every root recorded once, exactly the published roots, and each root's leaf
       list equal to run V3's (receipts/valid7/qx2_replay_compare.json). It is the source's
-      code on the source's cover, a same-implementation replay; wand125's independent
+      code on the source's cover, a same-implementation replay; Hiroaki Hosono's independent
       checker was replayed here in full too, on 2 and 3 October
       (E-k2m3-wand125-valid7-independent). Valid7 is the one
       hypothesis of the Lean reduction (E-k2m3-evand-bentz-lean-build), and this replay
       discharges it for this cover; it says nothing about the reduction itself. No
-      mutated-cover control of qx2_zm.py was run here: wand125's three lighter covers are
+      mutated-cover control of qx2_zm.py was run here: Hosono's three lighter covers are
       not D4-invariant, and qx2_zm.py refuses them at load, which is no test of its
       coverage; the source reports a D4-symmetric mutant refused at its tight germ. The
       controls here are the comparison's own: a faithful shard passes and each injected
@@ -1289,13 +1289,13 @@ evidence:
     verifiers: [V-tokoharu-verify-cpp, V-audit-wand125-rectangles]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction, applied to wand125's standing certificates
+      theorem: Rectangle-density covering obstruction, applied to Hiroaki Hosono's standing certificates
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations; monotonic transfer to larger counts below which a certificate's mass lies.
       pinpoints: >-
         The theorem and interval-verifier correspondence audited in the linked review;
         the byte-identical verify.cpp and run_verify.py retained with Tokoharu's packet;
         per-case preflight and replay records in receipts/preflight/audit.json and
-        receipts/replay/audit.json of the wand125 rectangle packet.
+        receipts/replay/audit.json of Hosono's rectangle packet.
       assumptions:
         - Nonnegative exact rational rectangle densities have total mass strictly below the target square count.
         - All angles and legal centres are covered by the certified core net and interval subdivision.
@@ -1414,13 +1414,13 @@ evidence:
     verifiers: [V-tokoharu-verify-cpp, V-audit-wand125-rectangles]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction, applied to wand125's standing certificates
+      theorem: Rectangle-density covering obstruction, applied to Hiroaki Hosono's standing certificates
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations; monotonic transfer to larger counts below which a certificate's mass lies.
       pinpoints: >-
         The theorem and interval-verifier correspondence audited in the linked review;
         the byte-identical verify.cpp and run_verify.py retained with Tokoharu's packet;
         per-case preflight and replay records in receipts/preflight/audit.json.gz and
-        receipts/replay/audit.json of the 2026-09-28 wand125 rectangle packet.
+        receipts/replay/audit.json of Hosono's 2026-09-28 rectangle packet.
       assumptions:
         - Nonnegative exact rational rectangle densities have total mass strictly below the target square count.
         - All angles and legal centres are covered by the certified core net and interval subdivision.
@@ -1528,13 +1528,13 @@ evidence:
     verifiers: [V-tokoharu-verify-cpp, V-audit-wand125-rectangles]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction, applied to wand125's standing certificates of 1 October 2026
+      theorem: Rectangle-density covering obstruction, applied to Hiroaki Hosono's standing certificates of 1 October 2026
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations; monotonic transfer to larger counts below which a certificate's mass lies.
       pinpoints: >-
         The theorem and interval-verifier correspondence audited in the linked review;
         the byte-identical verify.cpp and run_verify.py retained with Tokoharu's packet;
         per-case preflight and replay records in receipts/preflight/audit.json.gz and
-        receipts/replay/audit.json.gz of the 2026-10-01 wand125 rectangle packet.
+        receipts/replay/audit.json.gz of Hosono's 2026-10-01 rectangle packet.
       assumptions:
         - Nonnegative exact rational rectangle densities have total mass strictly below the target square count.
         - All angles and legal centres are covered by the certified core net and interval subdivision.
@@ -1599,7 +1599,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n19_L48175: no 19 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n19_L48175: no 19 unit
         squares pack in a square of side 1927/400, so s(19) >= 1927/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -1700,7 +1700,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n20_L48975: no 20 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n20_L48975: no 20 unit
         squares pack in a square of side 1959/400, so s(20) >= 1959/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -1801,7 +1801,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n26_L55325: no 26 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n26_L55325: no 26 unit
         squares pack in a square of side 2213/400, so s(26) >= 2213/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -1902,7 +1902,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n27_L5635: no 27 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n27_L5635: no 27 unit
         squares pack in a square of side 1127/200, so s(27) >= 1127/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -2003,7 +2003,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n28_L57225: no 28 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n28_L57225: no 28 unit
         squares pack in a square of side 2289/400, so s(28) >= 2289/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -2104,7 +2104,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n29_L57975: no 29 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n29_L57975: no 29 unit
         squares pack in a square of side 2319/400, so s(29) >= 2319/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -2205,7 +2205,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n30_L5875: no 30 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n30_L5875: no 30 unit
         squares pack in a square of side 47/8, so s(30) >= 47/8.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -2306,7 +2306,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n31_L59525: no 31 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n31_L59525: no 31 unit
         squares pack in a square of side 2381/400, so s(31) >= 2381/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -2407,7 +2407,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n38_L6545: no 38 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n38_L6545: no 38 unit
         squares pack in a square of side 1309/200, so s(38) >= 1309/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -2508,7 +2508,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n39_L6635: no 39 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n39_L6635: no 39 unit
         squares pack in a square of side 1327/200, so s(39) >= 1327/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -2608,7 +2608,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n40_L67: no 40 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n40_L67: no 40 unit
         squares pack in a square of side 67/10, so s(40) >= 67/10.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -2709,7 +2709,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n41_L676: no 41 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n41_L676: no 41 unit
         squares pack in a square of side 169/25, so s(41) >= 169/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -2810,7 +2810,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n42_L6815: no 42 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n42_L6815: no 42 unit
         squares pack in a square of side 1363/200, so s(42) >= 1363/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -2911,7 +2911,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n43_L68875: no 43 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n43_L68875: no 43 unit
         squares pack in a square of side 551/80, so s(43) >= 551/80.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -3012,7 +3012,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n44_L69425: no 44 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n44_L69425: no 44 unit
         squares pack in a square of side 2777/400, so s(44) >= 2777/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -3113,7 +3113,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n53_L76075: no 53 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n53_L76075: no 53 unit
         squares pack in a square of side 3043/400, so s(53) >= 3043/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -3214,7 +3214,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n54_L76725: no 54 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n54_L76725: no 54 unit
         squares pack in a square of side 3069/400, so s(54) >= 3069/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -3315,7 +3315,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n55_L77125: no 55 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n55_L77125: no 55 unit
         squares pack in a square of side 617/80, so s(55) >= 617/80.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -3416,7 +3416,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n56_L77825: no 56 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n56_L77825: no 56 unit
         squares pack in a square of side 3113/400, so s(56) >= 3113/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -3517,7 +3517,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n66_L8385: no 66 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n66_L8385: no 66 unit
         squares pack in a square of side 1677/200, so s(66) >= 1677/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -3618,7 +3618,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n68_L851: no 68 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n68_L851: no 68 unit
         squares pack in a square of side 851/100, so s(68) >= 851/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -3719,7 +3719,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n69_L8585: no 69 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n69_L8585: no 69 unit
         squares pack in a square of side 1717/200, so s(69) >= 1717/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -3820,7 +3820,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n70_L8625: no 70 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n70_L8625: no 70 unit
         squares pack in a square of side 69/8, so s(70) >= 69/8.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -3921,7 +3921,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n74_L88475: no 74 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n74_L88475: no 74 unit
         squares pack in a square of side 3539/400, so s(74) >= 3539/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -4021,7 +4021,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n75_L89: no 75 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n75_L89: no 75 unit
         squares pack in a square of side 89/10, so s(75) >= 89/10.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -4122,7 +4122,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n76_L8925: no 76 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n76_L8925: no 76 unit
         squares pack in a square of side 357/40, so s(76) >= 357/40.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -4223,7 +4223,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n86_L9365: no 86 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n86_L9365: no 86 unit
         squares pack in a square of side 1873/200, so s(86) >= 1873/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -4324,7 +4324,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n87_L941: no 87 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n87_L941: no 87 unit
         squares pack in a square of side 941/100, so s(87) >= 941/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -4425,7 +4425,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n88_L94775: no 88 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n88_L94775: no 88 unit
         squares pack in a square of side 3791/400, so s(88) >= 3791/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -4526,7 +4526,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n89_L9565: no 89 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n89_L9565: no 89 unit
         squares pack in a square of side 1913/200, so s(89) >= 1913/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -4627,7 +4627,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n90_L95775: no 90 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n90_L95775: no 90 unit
         squares pack in a square of side 3831/400, so s(90) >= 3831/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -4728,7 +4728,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n93_L97225: no 93 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n93_L97225: no 93 unit
         squares pack in a square of side 3889/400, so s(93) >= 3889/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -4829,7 +4829,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n94_L9805: no 94 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n94_L9805: no 94 unit
         squares pack in a square of side 1961/200, so s(94) >= 1961/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -4930,7 +4930,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n95_L98518: no 95 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n95_L98518: no 95 unit
         squares pack in a square of side 49259/5000, so s(95) >= 49259/5000.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -5073,13 +5073,13 @@ evidence:
     verifiers: [V-tokoharu-verify-cpp, V-audit-wand125-rectangles]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction, applied to wand125's standing certificates of 2 October 2026
+      theorem: Rectangle-density covering obstruction, applied to Hiroaki Hosono's standing certificates of 2 October 2026
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations; monotonic transfer to larger counts below which a certificate's mass lies.
       pinpoints: >-
         The theorem and interval-verifier correspondence audited in the linked review;
         the byte-identical verify.cpp and run_verify.py retained with Tokoharu's packet;
         per-case preflight and replay records in receipts/preflight/audit.json.gz and
-        receipts/replay/audit.json of the 2026-10-02 wand125 rectangle packet.
+        receipts/replay/audit.json of Hosono's 2026-10-02 rectangle packet.
       assumptions:
         - Nonnegative exact rational rectangle densities have total mass strictly below the target square count.
         - All angles and legal centres are covered by the certified core net and interval subdivision.
@@ -5147,7 +5147,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n20_L49: no 20 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n20_L49: no 20 unit
         squares pack in a square of side 49/10, so s(20) >= 49/10.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -5252,7 +5252,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n42_L68275: no 42 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n42_L68275: no 42 unit
         squares pack in a square of side 2731/400, so s(42) >= 2731/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -5357,7 +5357,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; format T,
-        with Tokoharu's centre domain), applied to wand125's rect_n70_L86275: no 70 unit
+        with Tokoharu's centre domain), applied to Hiroaki Hosono's rect_n70_L86275: no 70 unit
         squares pack in a square of side 3451/400, so s(70) >= 3451/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -5466,7 +5466,7 @@ evidence:
       per-root log is now compared with; the cover is unchanged. The replay here is
       unaffected: the D4 invariance it relies on was checked exactly by
       devtools.audit_wand125_point_and_mixed, and zmx2 printed VERIFIED-D4 at every
-      root. the wand125 record-updates packet of 4 October retains the update at
+      root. Hiroaki Hosono's record-updates packet of 4 October retains the update at
       797bdf6e.
     source_reviewed: '2026-09-28'
 
@@ -5589,7 +5589,7 @@ evidence:
       FRESH_ALL_DOMAIN_REPLAY_VERIFIED. The certificate is unchanged, but the 14
       bundle parts were rebuilt, so the replay here
       (E-n021-wand125-point-endpoint-source-replay) is of the archive at 39d8ecc7, not
-      of the rebuilt one. the wand125 record-updates packet of 4 October retains the
+      of the rebuilt one. Hiroaki Hosono's record-updates packet of 4 October retains the
       changed records at 797bdf6e and pins the parts through archive-index.json's
       digests, not its own.
     external_review:
@@ -5655,7 +5655,7 @@ evidence:
       audit_record: docs/project/reviews/review-2026-09-28-wand125-point-only-s21-s45.md
     limitations: >-
       Replays the source's own runner, verify_portable.py (SHA-256 2cea95ce...) with
-      assemble_portable.py (88888adc...) and portable_replay.py, wand125's and unchanged,
+      assemble_portable.py (88888adc...) and portable_replay.py, Hiroaki Hosono's and unchanged,
       on 29 September 2026, on a shared 4-core x86-64 Linux container under CPython
       3.14.7, with two workers, from 00:24:41Z to 04:14:14Z: 13,773 s of wall and 20,765
       CPU-s, against the 8,577 s the source reports on an M1. Every stage exited zero and
@@ -5720,7 +5720,7 @@ evidence:
       date: '2026-09-28'
       reviewed_by: >-
         AI review sub-agent at maximum thinking effort, the correctness lane (W2 factual
-        review) of the 2026-09-28 wand125 intake
+        review) of the 2026-09-28 intake of Hiroaki Hosono's certificates
         (docs/project/reviews/review-2026-09-28-wand125-n50-mixed-verifier.md)
       note: >-
         Sound as stated, given a passing local replay of the shipped checker. The
@@ -5763,7 +5763,7 @@ evidence:
     verifiers: [V-wand125-verify-mixed-full-proof-py, V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n50_L740; no 50 unit squares fit in a square of side below 37/5, and so no 51.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n50_L740; no 50 unit squares fit in a square of side below 37/5, and so no 51.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations; monotonic transfer to n = 51, below which the certificate's mass lies.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22 Tokoharu review;
@@ -5778,7 +5778,7 @@ evidence:
       audit_record: docs/project/reviews/review-2026-09-28-wand125-n50-mixed-verifier.md
     limitations: >-
       Replays the source's driver verify_mixed_full_proof.py and its checker
-      mixed_rotated_verify.cpp (SHA-256 89b674a6...), both wand125's and unchanged, on
+      mixed_rotated_verify.cpp (SHA-256 89b674a6...), both Hosono's and unchanged, on
       29 September 2026, on a shared 4-core x86-64 Linux container (Intel Xeon at 2.10
       GHz, CPython 3.14.7, c++ 13.3.0; receipts/host.json), with three workers, from
       01:29:37Z to 06:54:44Z, 19,507 s of wall; its CPU time was not recorded. The binary
@@ -5847,7 +5847,7 @@ evidence:
       with check_records.py, which checks them in exact rational arithmetic and which
       verify.sh now runs, the zmx2 per-root logs, a toolchain record and the run logs,
       and made SHA256SUMS list exactly the published files: the source's answer to the
-      2 October review's findings F1 and F2. the wand125 record-updates packet of 4
+      2 October review's findings F1 and F2. Hiroaki Hosono's record-updates packet of 4
       October retains them at 797bdf6e. Neither the records nor check_records.py has
       been run here.
     external_review:
@@ -6000,7 +6000,7 @@ evidence:
       (zmx2 D4 and full, and zm_mixed.py with its per-root records), hardened
       verify.sh to judge D4 invariance from its '^D4: measure invariant' line under
       set -euo pipefail, and made SHA256SUMS list exactly the tracked files, answering
-      the 2 October review's finding F2. the wand125 record-updates packet of 4
+      the 2 October review's finding F2. Hiroaki Hosono's record-updates packet of 4
       October retains them at 797bdf6e. The new verify.sh and records have not been
       run here.
     external_review:
@@ -6135,7 +6135,7 @@ evidence:
       research copy of Tokoharu's verify.cpp that the n = 50 certificate uses: it
       accepts a centre box at lower bound 1 instead of 10001/10000, with the axis
       direction decided by exact integer tables. The least oblique lower bound the
-      source records is 1.0000000054. The source compares it with Green's reported 6.3506030; this record already reports wand125's own rectangle certificate 257/40 = 6.425 at this count. The source says the full 201-angle replay was
+      source records is 1.0000000054. The source compares it with Green's reported 6.3506030; this record already reports Hiroaki Hosono's own rectangle certificate 257/40 = 6.425 at this count. The source says the full 201-angle replay was
       run again from the published tarball before publication and that the replay is
       the same outward-rounded algorithm, not an independent implementation. The
       tarball is pinned by digest and not retained. The complete replay here of 2 October 2026 is E-n037-wand125-mixed-644-source-replay.
@@ -6187,7 +6187,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n37_L644; no 37 unit squares fit in a square of side below 161/25.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n37_L644; no 37 unit squares fit in a square of side below 161/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22
@@ -6301,7 +6301,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n65_L835; no 65 unit squares fit in a square of side below 167/20.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n65_L835; no 65 unit squares fit in a square of side below 167/20.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22
@@ -6412,7 +6412,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n66_L842; no 66 unit squares fit in a square of side below 421/50.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n66_L842; no 66 unit squares fit in a square of side below 421/50.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22
@@ -6525,7 +6525,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n90_L960; no 90 unit squares fit in a square of side below 48/5.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n90_L960; no 90 unit squares fit in a square of side below 48/5.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22
@@ -6636,7 +6636,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n92_L969; no 92 unit squares fit in a square of side below 969/100.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n92_L969; no 92 unit squares fit in a square of side below 969/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22
@@ -6759,7 +6759,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n84_L940; no 84 unit squares fit in a square of side below 47/5.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n84_L940; no 84 unit squares fit in a square of side below 47/5.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22
@@ -6882,7 +6882,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n85_L942; no 85 unit squares fit in a square of side below 471/50, and so none of 86 or 87.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n85_L942; no 85 unit squares fit in a square of side below 471/50, and so none of 86 or 87.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations; monotonic transfer to larger counts below which the certificate's mass lies.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22
@@ -7000,7 +7000,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n76_L894; no 76 unit squares fit in a square of side below 447/50.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n76_L894; no 76 unit squares fit in a square of side below 447/50.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22 Tokoharu review;
@@ -7127,7 +7127,7 @@ evidence:
     verifiers: [V-wand125-unified-linear-verify-cpp, V-audit-wand125-linear]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Linear-measure covering obstruction at coverage one, applied to wand125's mixed_n83_L935 of points, segments and rectangles; no 83 unit squares fit in a square of side below 187/20.
+      theorem: Linear-measure covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n83_L935 of points, segments and rectangles; no 83 unit squares fit in a square of side below 187/20.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The measure argument of the 2026-09-22 Tokoharu review, with the point and
@@ -7252,7 +7252,7 @@ evidence:
     verifiers: [V-wand125-unified-linear-verify-cpp, V-audit-wand125-linear]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Linear-measure covering obstruction at coverage one, applied to wand125's mixed_n101_L1028 of points, segments and rectangles; no 101 unit squares fit in a square of side below 257/25, and so none of 102 to 105.
+      theorem: Linear-measure covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n101_L1028 of points, segments and rectangles; no 101 unit squares fit in a square of side below 257/25, and so none of 102 to 105.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations; monotonic transfer to larger counts below which the certificate's mass lies.
       pinpoints: >-
         The measure argument of the 2026-09-22 Tokoharu review, with the point and
@@ -7378,7 +7378,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n83_L937; no 83 unit squares fit in a square of side below 937/100.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n83_L937; no 83 unit squares fit in a square of side below 937/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22 Tokoharu
@@ -7509,7 +7509,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n85_L946; no 85 unit squares fit in a square of side below 473/50, and so none of 86.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n85_L946; no 85 unit squares fit in a square of side below 473/50, and so none of 86.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations; monotonic transfer to larger counts below which the certificate's mass lies.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22 Tokoharu
@@ -7636,7 +7636,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n87_L948; no 87 unit squares fit in a square of side below 237/25, and so none of 88.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n87_L948; no 87 unit squares fit in a square of side below 237/25, and so none of 88.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations; monotonic transfer to larger counts below which the certificate's mass lies.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22 Tokoharu
@@ -7760,7 +7760,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n91_L970; no 91 unit squares fit in a square of side below 97/10.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n91_L970; no 91 unit squares fit in a square of side below 97/10.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22 Tokoharu
@@ -7885,7 +7885,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n92_L975; no 92 unit squares fit in a square of side below 39/4, and so none of 93.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n92_L975; no 92 unit squares fit in a square of side below 39/4, and so none of 93.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations; monotonic transfer to larger counts below which the certificate's mass lies.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22 Tokoharu
@@ -8020,7 +8020,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-audit-wand125-point-and-mixed]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one, applied to wand125's mixed_n96_L996; no 96 unit squares fit in a square of side below 249/25.
+      theorem: Rectangle-density covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n96_L996; no 96 unit squares fit in a square of side below 249/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22 Tokoharu
@@ -8161,7 +8161,7 @@ evidence:
     verifiers: [V-wand125-unified-linear-verify-cpp, V-audit-wand125-linear]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Linear-measure covering obstruction at coverage one, applied to wand125's mixed_n82_L932 of points, segments and rectangles; no 82 unit squares fit in a square of side below 233/25.
+      theorem: Linear-measure covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n82_L932 of points, segments and rectangles; no 82 unit squares fit in a square of side below 233/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The measure argument of the 2026-09-22 Tokoharu review, with the point and
@@ -8565,7 +8565,7 @@ evidence:
       entry, not a local verification receipt. A runner's VERIFIED status
       addresses coverage; exact total-mass, input-binding and theorem premises
       also have to be checked. The supplied post's unspecified later improvement
-      by wand125 is not a new numerical bound without a recovered certificate.
+      by Hiroaki Hosono is not a new numerical bound without a recovered certificate.
     source_reviewed: '2026-09-22'
 
   - id: E-wand125-point-bounds-report
@@ -8714,7 +8714,7 @@ evidence:
     external_review:
       state: defect-found
       date: '2026-10-02'
-      reviewed_by: repository, on wand125's report in jlevy/squares#308
+      reviewed_by: repository, on Hosono's report in jlevy/squares#308
       note: >-
         The only argument the source publishes for this theorem is Figure 34: sixteen
         points it calls unavoidable at side G_4 for n = 17. Reconstructed for every k,
@@ -8866,7 +8866,7 @@ evidence:
     external_review:
       state: defect-found
       date: '2026-10-02'
-      reviewed_by: repository, on wand125's report in jlevy/squares#308
+      reviewed_by: repository, on Hosono's report in jlevy/squares#308
       note: >-
         This is E-green-ds7-theorem9-reported-lower at k = 5 and shares its review: the
         Figure 34 pattern reconstructed at k = 5 has side exactly G_5 but is not
@@ -9257,7 +9257,7 @@ evidence:
       and was read, not formalized. At n = 37 the bound is Theorem 7 evaluated here, not a
       value the authors state; at n = 61 it is their Theorem 10. Weaker than the verified
       lower bound at both cases since the merge of 3 October 2026, so it holds neither:
-      at n = 37 wand125's mixed certificate, 161/25 (T-069), and at n = 61 the replayed
+      at n = 37 Hiroaki Hosono's mixed certificate, 161/25 (T-069), and at n = 61 the replayed
       cover proving s(61) = 8 (T-063), were replayed here on 2 October 2026.
     source_reviewed: '2026-10-03'
 
@@ -11002,7 +11002,7 @@ evidence:
       T-051's composition says what they share and why its rung is C3. The zmcheck sweeps (3,595 of 3,600 roots on this cover; all
       3,600 on s32_shift_v1.txt with ZM_MIXPAIR=1) and the Lean build were not
       run here, and the checker programs are not formalised. The upper bound is the trivial grid
-      (E-basic-grid-upper). The source reports wand125's 119/20 of 2026-09-26
+      (E-basic-grid-upper). The source reports Hiroaki Hosono's 119/20 of 2026-09-26
       as the previous best; before it the case carried Nagamochi's 1 + sqrt(23).
     source_reviewed: '2026-09-27'
 
@@ -11067,7 +11067,7 @@ evidence:
         The point-only review, section 3.3, read what --pair-points does in zmx2's
         code, the partner lines of build_cover and the pair bound, and checked the
         closedness of the atom tests, the theta = 0 case (Lemma H) and the wall
-        grants (Lemma W) for a point cover; it did so for wand125's s(45) cover, and
+        grants (Lemma W) for a point cover; it did so for Hiroaki Hosono's s(45) cover, and
         this entry applies the same program and mode to the point cover of the
         2026-09-27 review. The mixed-covers review re-derived zmx2's lemmas against
         its code, including the outward rounding (Lemma R); its findings F4 (the
@@ -11448,13 +11448,13 @@ evidence:
       four-core Linux host. Daniel's verify, built by cargo 1.97.0 from the retained
       sources (main.rs blob 0e8035a3, the same at 7d6f46d9, which the source names), at
       N = 24000 on two threads: VERIFIED, least 10000056/10^7 at bin 0, 982 CPU-s, every printed line equal to the source's log (a first run was killed by a container restart and rerun whole).
-      squarepacker's indep_check.cpp, built by g++ 13.3.0 -O2, at N = 24000: VERIFIED,
+      Ryu's indep_check.cpp, built by g++ 13.3.0 -O2, at N = 24000: VERIFIED,
       least 10000056/10^7 at bin 0, 67.7 CPU-s, every printed line equal to the source's
       log; at N = 6000 and 12000 it refuses with the source's values, and verify refuses
       at the same values over bin windows. The overflow-checked build of verify and the
       N = 48000 and 96000 runs were not repeated. Both are arrangement sweeps of one
       angle-net method and both are the producer's code (Daniel's verifier, which the
-      source used, and squarepacker's own checker), so this entry supports V3/C3 by
+      source used, and Ryu's own checker), so this entry supports V3/C3 by
       itself; the method-distinct decision is
       E-n012-squarepacker-31360-7901-native-parent-core. Two mutated certificates (side
       31360/7900; every weight lowered by 57/10^7) are refused by both
@@ -11498,7 +11498,7 @@ evidence:
       audit_record: docs/project/reviews/review-2026-09-22-native-n11-parent-core.md
     limitations: >-
       The complete native run of 2026-10-02 accepted all 9,942 rows at the one-unit threshold with 89,403,350 boxes, zero stalls, no exhausted budget and no refutation: 1,810 rows on clean commit 119d1bab, the rest resumed from that journal on clean commit 44cf3444 with the tool unchanged after a container restart (2,856 CPU-s for the resumed part). The coverage decision is this repository's interval branch and bound
-      over centre boxes, which shares no code with Daniel's verify or squarepacker's
+      over centre boxes, which shares no code with Daniel's verify or Ryu's
       indep_check.cpp; with E-n012-squarepacker-31360-7901-source-replay it gives two
       complete methods, shown beside C3. All three rest on the certificate, the counting
       theorem and the shrink lemma on the same net: the native rows are Daniel's bins and
@@ -11522,7 +11522,7 @@ evidence:
     novelty_basis:
       corpus: >-
         T-049 (Evan Daniel's s(12) >= 15680/3951 and its retained evand packet), T-078
-        (squarepacker's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
+        (Ryu's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
         archived literature behind the n = 12 case record.
       searched: '2026-10-02, for the 2 October review of this certificate'
       novel_object: >-
@@ -11572,7 +11572,7 @@ evidence:
     novelty_basis:
       corpus: >-
         T-049 (Evan Daniel's s(12) >= 15680/3951 and its retained evand packet), T-078
-        (squarepacker's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
+        (Ryu's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
         archived literature behind the n = 12 case record.
       searched: '2026-10-02, for the 2 October review of this certificate'
       novel_object: >-
@@ -11630,7 +11630,7 @@ evidence:
     novelty_basis:
       corpus: >-
         T-049 (Evan Daniel's s(12) >= 15680/3951 and its retained evand packet), T-078
-        (squarepacker's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
+        (Ryu's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
         archived literature behind the n = 12 case record.
       searched: '2026-10-02, for the 2 October review of this certificate'
       novel_object: >-
@@ -11693,7 +11693,7 @@ evidence:
     novelty_basis:
       corpus: >-
         T-049 (Evan Daniel's s(12) >= 15680/3951 and its retained evand packet), T-078
-        (squarepacker's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
+        (Ryu's rescaling to 31360/7901, jlevy/squares#309, and its packet), and the
         archived literature behind the n = 12 case record.
       searched: '2026-10-02, for the 2 October review of this certificate'
       novel_object: >-
@@ -11815,7 +11815,7 @@ evidence:
       retained sources with overflow checks (binary 60279b2c, the digest of a second build
       and of the T-079 review's), at N = 96000 on two threads at nice 10, no VERIFY_BINS:
       VERIFIED over all 39,765 bins, least 10000050/10^7 at bin 0, every printed line equal
-      to the source's log, 4,671 s wall and 3,439 CPU-s. squarepacker's indep_check.cpp
+      to the source's log, 4,671 s wall and 3,439 CPU-s. Ryu's indep_check.cpp
       (21527e8d, unchanged since v1.0), built by g++ 13.3.0 -O2 (binary e7748f8b, as for
       T-078), at N = 96000 and 192000 over [0, 90] degrees with no symmetry assumed: VERIFIED
       at both, least 10000050/10^7 at bin 0, every printed line equal to the source's logs,
@@ -11873,7 +11873,7 @@ evidence:
       PASS_COMPLETE, all 39,765 rows certified at the one-unit threshold, 340,090,115
       boxes, no stall, no exhausted budget, no refutation, 16,344 s wall and 12,980 CPU-s.
       The coverage decision is this repository's interval branch and bound over centre
-      boxes, which shares no code with Daniel's verify, with squarepacker's indep_check.cpp
+      boxes, which shares no code with Daniel's verify, with Ryu's indep_check.cpp
       or with the search that made the weights, which matters here because the search
       stopped on indep_check's verdict and took its rows from verify's cells; with
       E-n012-squarepacker-7943-2000-source-replay it gives two complete methods, shown
@@ -12007,7 +12007,7 @@ evidence:
       row time) before it was stopped at the lane's budget; its journal is not
       retained, and the complete run projects to about 2.8 CPU-hours. Advance over the previous verified 122/25
       (T-034, which remains valid): 2878/25025, about 0.115; gap to the grid's
-      5 is 5/1001, about 0.005. wand125's 997/200 of 2026-09-26 lies between.
+      5 is 5/1001, about 0.005. Hiroaki Hosono's 997/200 of 2026-09-26 lies between.
       Since 2026-09-29 this is the previous verified bound for the case,
       superseded by the same author's s(21) = 5 (E-n021-evand-mixed-cover-zmx2-replay);
       it remains valid evidence.
@@ -12306,7 +12306,7 @@ evidence:
       unreduced roots. Nothing about this cover is in Lean: the reduction is the
       m = 7 case of lemmas proved there for every side, and there is no data
       file or top theorem. The source calls this the third exact value of
-      s(k^2 - 4) for k >= 4 and gives wand125's 1389/200 and Nagamochi's
+      s(k^2 - 4) for k >= 4 and gives Hiroaki Hosono's 1389/200 and Nagamochi's
       1 + sqrt(34) as the earlier bounds; its CREDITS.md says the work was
       produced with an AI agent under human direction. The upper bound 7 is the
       grid. This entry preserves the source claim; the local replay is recorded
@@ -12396,9 +12396,9 @@ evidence:
       2,254 boxes, every census equal to the shipped record's; the complete
       re-sweep (16.5 CPU-h at the source) runs separately. One method replayed,
       so this supports V4/C3, not C4. Nothing about this cover is in Lean, and
-      the checker programs are not formalised. It supersedes wand125's reported
+      the checker programs are not formalised. It supersedes Hiroaki Hosono's reported
       1391/200 (E-wand125-rectangle-report) and the verified Nagamochi
-      1 + sqrt(34); wand125's point-only route to the same value is recorded
+      1 + sqrt(34); Hosono's point-only route to the same value is recorded
       separately (E-n045-wand125-point-cover-source-replay).
     source_reviewed: '2026-09-28'
 
@@ -16354,7 +16354,7 @@ evidence:
       leaves and coverage by the source's qx2_records.py, and the Lean data regenerated
       identical. It recomputes no positive-tilt leaf, so it is a diagnostic and not a
       replay. ValidTilt9 has one implementation; no second checker has run on this cover.
-      Evidence update, 2026-10-06: a second, separately written exact checker, wand125's,
+      Evidence update, 2026-10-06: a second, separately written exact checker, Hiroaki Hosono's,
       reports ValidTilt9 on these cover bytes at valid7-independent-check c561dbb3, over
       centres [0, 9/2]^2 and u in [0, 7/16] with no symmetry used
       (E-k2m4-wand125-validtilt9-report, think-dsz4). It is a report, not a replay, and this
@@ -16377,7 +16377,7 @@ evidence:
     verifiers: [V-wand125-valid7-checker, V-audit-validtilt9-independent]
     limitations: >-
       wand125/valid7-independent-check at c561dbb3fcea9178599db017f51f56b42ad9f91f
-      (2026-10-06T02:36:04Z) and its release records-tilt9-v1 report that wand125's
+      (2026-10-06T02:36:04Z) and its release records-tilt9-v1 report that Hiroaki Hosono's
       separately written exact-rational checker, the one whose Valid7 run
       E-k2m3-wand125-valid7-independent replayed here, decides ValidTilt9 for Daniel's box
       cover K4_k008_box9.txt, the bytes the 2026-10-03 evand packet retains: every closed
@@ -16396,7 +16396,7 @@ evidence:
       ValidTilt9, ValidTilt, sq and coord, and the cover, and not Daniel's checker
       programs, lemma documents or run records. The two checkers share the statement, the
       cover and its format, and CPython's Fraction; 10 of the 903 non-trivial lines of
-      wand125's modules also occur in Daniel's checker, all idioms. The commit carries a
+      Hosono's modules also occur in Daniel's checker, all idioms. The commit carries a
       Co-Authored-By: Claude Opus 5.5 trailer and Daniel's CREDITS.md says his work was
       produced by Claude, so the code is independent by its read log but both come from one
       model family. Here on 6 October 2026: the source's verify_tilt9.sh ran on the release
@@ -16501,7 +16501,7 @@ evidence:
         receipts.
       assumptions:
         - ValidTilt9, the theorem's one hypothesis, for the box-9 cover; it is not proved in Lean, and two exact checkers report it (E-k2m4-evand-validtilt9-qx2-report, E-k2m4-wand125-validtilt9-report), neither replayed here in full.
-        - The Lean kernel of leanprover/lean4 v4.33.1 and Mathlib from the official cache are sound; with the definitions read by the 3 October claim-chain review and the 6 October review of wand125's run, that is the trusted base. The finite facts (out9, fit9, sym9, axis9, box9Cover_measure, famCover_total4) are kernel-checked by decide +kernel, not assumed.
+        - The Lean kernel of leanprover/lean4 v4.33.1 and Mathlib from the official cache are sound; with the definitions read by the 3 October claim-chain review and the 6 October review of Hiroaki Hosono's run, that is the trusted base. The finite facts (out9, fit9, sym9, axis9, box9Cover_measure, famCover_total4) are kernel-checked by decide +kernel, not assumed.
       audit_record: docs/project/reviews/review-2026-10-03-evand-k2m4-claim-chain.md
       conditional_on:
         - hypothesis: ValidTilt9
@@ -20001,7 +20001,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n67_L848:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n67_L848:
         no 67 unit squares pack in a square of side 212/25, so s(67) >= 212/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -20086,7 +20086,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n84_L9411:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n84_L9411:
         no 84 unit squares pack in a square of side 9411/1000, so s(84) >= 9411/1000.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -20288,7 +20288,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-wand125-verify-mixed-full-proof-py, V-audit-wand125-declared-net]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one on a declared half-angle net, applied to wand125's mixed_n18_L470; no 18 unit squares fit in a square of side below 47/10.
+      theorem: Rectangle-density covering obstruction at coverage one on a declared half-angle net, applied to Hiroaki Hosono's mixed_n18_L470; no 18 unit squares fit in a square of side below 47/10.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22 Tokoharu
@@ -20363,7 +20363,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n66_L843:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n66_L843:
         no 66 unit squares pack in a square of side 843/100, so s(66) >= 843/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -20464,7 +20464,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n53_L76275: no 53 unit squares pack in a square of side 3051/400, so s(53) >=
         3051/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -20549,7 +20549,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n54_L7685:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n54_L7685:
         no 54 unit squares pack in a square of side 1537/200, so s(54) >= 1537/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -20633,7 +20633,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n58_L7935:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n58_L7935:
         no 58 unit squares pack in a square of side 1587/200, so s(58) >= 1587/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -20717,7 +20717,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n70_L86575: no 70 unit squares pack in a square of side 3463/400, so s(70) >=
         3463/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -20802,7 +20802,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n71_L8721:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n71_L8721:
         no 71 unit squares pack in a square of side 8721/1000, so s(71) >= 8721/1000.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -20886,7 +20886,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n73_L8813:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n73_L8813:
         no 73 unit squares pack in a square of side 8813/1000, so s(73) >= 8813/1000.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -20970,7 +20970,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n76_L8965:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n76_L8965:
         no 76 unit squares pack in a square of side 1793/200, so s(76) >= 1793/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -21054,7 +21054,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n87_L958:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n87_L958:
         no 87 unit squares pack in a square of side 479/50, so s(87) >= 479/50.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -21138,7 +21138,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n88_L962:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n88_L962:
         no 88 unit squares pack in a square of side 481/50, so s(88) >= 481/50.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -21222,7 +21222,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n90_L973:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n90_L973:
         no 90 unit squares pack in a square of side 973/100, so s(90) >= 973/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -21306,7 +21306,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n91_L97625: no 91 unit squares pack in a square of side 781/80, so s(91) >=
         781/80.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -21391,7 +21391,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n94_L995:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n94_L995:
         no 94 unit squares pack in a square of side 199/20, so s(94) >= 199/20.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -21479,7 +21479,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n83_L937:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n83_L937:
         no 83 unit squares pack in a square of side 937/100, so s(83) >= 937/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -21571,7 +21571,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n85_L946:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n85_L946:
         no 85 unit squares pack in a square of side 473/50, so s(85) >= 473/50.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -21663,7 +21663,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n87_L948:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n87_L948:
         no 87 unit squares pack in a square of side 237/25, so s(87) >= 237/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -21755,7 +21755,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n91_L970:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n91_L970:
         no 91 unit squares pack in a square of side 97/10, so s(91) >= 97/10.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -21847,7 +21847,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n92_L975:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n92_L975:
         no 92 unit squares pack in a square of side 39/4, so s(92) >= 39/4.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -21939,7 +21939,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n96_L996:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n96_L996:
         no 96 unit squares pack in a square of side 249/25, so s(96) >= 249/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -22031,7 +22031,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n42_L68475: no 42 unit squares pack in a square of side 2739/400, so s(42) >=
         2739/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -22123,7 +22123,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n43_L69075: no 43 unit squares pack in a square of side 2763/400, so s(43) >=
         2763/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -22215,7 +22215,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n44_L69725: no 44 unit squares pack in a square of side 2789/400, so s(44) >=
         2789/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -22307,7 +22307,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n51_L747:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n51_L747:
         no 51 unit squares pack in a square of side 747/100, so s(51) >= 747/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -22398,7 +22398,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n56_L78025: no 56 unit squares pack in a square of side 3121/400, so s(56) >=
         3121/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -22490,7 +22490,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n57_L78725: no 57 unit squares pack in a square of side 3149/400, so s(57) >=
         3149/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -22582,7 +22582,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n67_L8475:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n67_L8475:
         no 67 unit squares pack in a square of side 339/40, so s(67) >= 339/40.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -22673,7 +22673,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n69_L862:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n69_L862:
         no 69 unit squares pack in a square of side 431/50, so s(69) >= 431/50.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -22764,7 +22764,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n72_L876:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n72_L876:
         no 72 unit squares pack in a square of side 219/25, so s(72) >= 219/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -22855,7 +22855,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n75_L894:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n75_L894:
         no 75 unit squares pack in a square of side 447/50, so s(75) >= 447/50.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -22946,7 +22946,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n84_L94075: no 84 unit squares pack in a square of side 3763/400, so s(84) >=
         3763/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -23038,7 +23038,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n86_L9503:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n86_L9503:
         no 86 unit squares pack in a square of side 9503/1000, so s(86) >= 9503/1000.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -23129,7 +23129,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n88_L96125: no 88 unit squares pack in a square of side 769/80, so s(88) >=
         769/80.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -23221,7 +23221,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n93_L988:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n93_L988:
         no 93 unit squares pack in a square of side 247/25, so s(93) >= 247/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -23312,7 +23312,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n94_L994:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n94_L994:
         no 94 unit squares pack in a square of side 497/50, so s(94) >= 497/50.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -23403,7 +23403,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n95_L9965:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n95_L9965:
         no 95 unit squares pack in a square of side 1993/200, so s(95) >= 1993/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -23494,7 +23494,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n51_L746:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n51_L746:
         no 51 unit squares pack in a square of side 373/50, so s(51) >= 373/50.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -23585,7 +23585,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n52_L755:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n52_L755:
         no 52 unit squares pack in a square of side 151/20, so s(52) >= 151/20.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -23676,7 +23676,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n55_L7728:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n55_L7728:
         no 55 unit squares pack in a square of side 966/125, so s(55) >= 966/125.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -23767,7 +23767,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n58_L7905:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n58_L7905:
         no 58 unit squares pack in a square of side 1581/200, so s(58) >= 1581/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -23858,7 +23858,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n69_L8612:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n69_L8612:
         no 69 unit squares pack in a square of side 2153/250, so s(69) >= 2153/250.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -23949,7 +23949,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n70_L86475: no 70 unit squares pack in a square of side 3459/400, so s(70) >=
         3459/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -24041,7 +24041,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n71_L8705:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n71_L8705:
         no 71 unit squares pack in a square of side 1741/200, so s(71) >= 1741/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -24132,7 +24132,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n73_L8809:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n73_L8809:
         no 73 unit squares pack in a square of side 8809/1000, so s(73) >= 8809/1000.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -24223,7 +24223,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n74_L88675: no 74 unit squares pack in a square of side 3547/400, so s(74) >=
         3547/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -24315,7 +24315,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n75_L892:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n75_L892:
         no 75 unit squares pack in a square of side 223/25, so s(75) >= 223/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -24406,7 +24406,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n76_L896:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n76_L896:
         no 76 unit squares pack in a square of side 224/25, so s(76) >= 224/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -24497,7 +24497,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n86_L950:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n86_L950:
         no 86 unit squares pack in a square of side 19/2, so s(86) >= 19/2.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -24588,7 +24588,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n87_L955:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n87_L955:
         no 87 unit squares pack in a square of side 191/20, so s(87) >= 191/20.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -24679,7 +24679,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n88_L960:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n88_L960:
         no 88 unit squares pack in a square of side 48/5, so s(88) >= 48/5.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -24770,7 +24770,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n89_L965:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n89_L965:
         no 89 unit squares pack in a square of side 193/20, so s(89) >= 193/20.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -24861,7 +24861,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n90_L9725:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n90_L9725:
         no 90 unit squares pack in a square of side 389/40, so s(90) >= 389/40.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -24952,7 +24952,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n91_L975:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n91_L975:
         no 91 unit squares pack in a square of side 39/4, so s(91) >= 39/4.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -25043,7 +25043,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n92_L977:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n92_L977:
         no 92 unit squares pack in a square of side 977/100, so s(92) >= 977/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -25134,7 +25134,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n93_L986:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n93_L986:
         no 93 unit squares pack in a square of side 493/50, so s(93) >= 493/50.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -25225,7 +25225,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n94_L992:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n94_L992:
         no 94 unit squares pack in a square of side 248/25, so s(94) >= 248/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -25316,7 +25316,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n95_L996:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n95_L996:
         no 95 unit squares pack in a square of side 249/25, so s(95) >= 249/25.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -25407,7 +25407,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n96_L997:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n96_L997:
         no 96 unit squares pack in a square of side 997/100, so s(96) >= 997/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -25950,7 +25950,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n18_L4704:
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's mixed_n18_L4704:
         no 18 unit squares pack in a square of side 588/125, so s(18) >= 588/125.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -26041,7 +26041,7 @@ evidence:
     verifiers: [V-wand125-mixed-rotated-verify-cpp, V-wand125-verify-mixed-full-proof-py, V-audit-wand125-declared-net]
     proof:
       source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
-      theorem: Rectangle-density covering obstruction at coverage one on a declared half-angle net, applied to wand125's mixed_n18_L4704; no 18 unit squares fit in a square of side below 588/125.
+      theorem: Rectangle-density covering obstruction at coverage one on a declared half-angle net, applied to Hiroaki Hosono's mixed_n18_L4704; no 18 unit squares fit in a square of side below 588/125.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         The theorem and interval-verifier correspondence of the 2026-09-22 Tokoharu review;
@@ -26129,7 +26129,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n19_L48229: no 19 unit squares pack in a square of side 48229/10000, so s(19)
         >= 48229/10000.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -26854,7 +26854,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats
-        M and L, lemma D for format M's per-bin domain), applied to wand125's
+        M and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n18_L4705: no 18 unit squares pack in a square of side 941/200, so s(18) >=
         941/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -26958,7 +26958,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats
-        M and L, lemma D for format M's per-bin domain), applied to wand125's
+        M and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n19_L4825: no 19 unit squares pack in a square of side 193/40, so s(19) >=
         193/40.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -27062,7 +27062,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats
-        M and L, lemma D for format M's per-bin domain), applied to wand125's
+        M and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n20_L4905: no 20 unit squares pack in a square of side 981/200, so s(20) >=
         981/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -27166,7 +27166,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats
-        M and L, lemma D for format M's per-bin domain), applied to wand125's
+        M and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n26_L5545: no 26 unit squares pack in a square of side 1109/200, so s(26) >=
         1109/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -27270,7 +27270,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats
-        M and L, lemma D for format M's per-bin domain), applied to wand125's
+        M and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n27_L56435: no 27 unit squares pack in a square of side 11287/2000, so s(27)
         >= 11287/2000.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -27374,7 +27374,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats
-        M and L, lemma D for format M's per-bin domain), applied to wand125's
+        M and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n28_L5735: no 28 unit squares pack in a square of side 1147/200, so s(28) >=
         1147/200.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -27477,7 +27477,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats
-        M and L, lemma D for format M's per-bin domain), applied to wand125's
+        M and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n29_L581: no 29 unit squares pack in a square of side 581/100, so s(29) >=
         581/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -27572,7 +27572,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats
-        M and L, lemma D for format M's per-bin domain), applied to wand125's
+        M and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n30_L58835: no 30 unit squares pack in a square of side 11767/2000, so s(30)
         >= 11767/2000.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -27676,7 +27676,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats
-        M and L, lemma D for format M's per-bin domain), applied to wand125's
+        M and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n39_L665: no 39 unit squares pack in a square of side 133/20, so s(39) >=
         133/20.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -27780,7 +27780,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats
-        M and L, lemma D for format M's per-bin domain), applied to wand125's
+        M and L, lemma D for format M's per-bin domain), applied to Hiroaki Hosono's
         mixed_n41_L6775: no 41 unit squares pack in a square of side 271/40, so s(41) >=
         271/40.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -28804,7 +28804,7 @@ evidence:
       into each rational input; no further dilation or rounding is applied. Rational n51 is separate
       from the selected undilated radical witness. Complete source/result/house binding, private-worker
       copied inputs, mutation refusals, producer guards and original-frontier recovery were independently
-      reviewed. Offline admission is not a fresh deciding replay. Issue 432 reports that Ryan Xu''s own
+      reviewed. Offline admission is not a fresh deciding replay. Issue 432 reports that Xu''s own
       checks ran this repository''s sqpack at 84881f2 (packing-witness check, promote and verify, the
       last VERIFIED for all 25), so the sqpack exact_verify route reproduces with the producer''s
       checker; the independent rational-corner checker decides apart
@@ -29500,7 +29500,7 @@ evidence:
       (n40-670854.zip, 203,095 bytes, SHA-256 dbefee86...), reported on jlevy/squares#485,
       claims s(40) > 335427/50000 = 6.70854, unrestricted rotations, strict, and the weaker
       full-core s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908, which needs no
-      density peak. Both rest on wand125's rect_n40_L67 rectangle density, unchanged
+      density peak. Both rest on Hiroaki Hosono's rect_n40_L67 rectangle density, unchanged
       (SHA-256 71011d03..., byte for byte the copy the 2026-10-01 packet retains, pinned
       by digest in the release and not copied into this packet), and on the nodal
       statement that every closed square of side 9977/10000 inside [0, 67/10]^2 at each of
@@ -29523,7 +29523,7 @@ evidence:
       research, which the release does not ship, and not distinct from this repository's
       crate. The repository's only earlier commit, 485dd8f (2026-10-07), claimed a weaker
       s(40) > 33509/5000 on the standard 201-direction net; it is pinned by history and
-      not retained. wand125's review comment on the issue (2026-10-10T07:53:18Z), which
+      not retained. Hosono's review comment on the issue (2026-10-10T07:53:18Z), which
       reports a third run of the release's entry point and an independent exact check of
       the transfer, is a third party's report and is not retained as a replay. No packing,
       optimality or priority claim is made. This is the public-claim entry; the replays
@@ -29600,7 +29600,7 @@ evidence:
       theorem: >-
         The net-and-shrink measure-capture statement of SOUNDNESS.md (The Claim; format T,
         with Tokoharu's centre domain) on the net of 401 half-angle tangents of step
-        83/80000 that the derived input's certificate metadata sets, applied to wand125's
+        83/80000 that the derived input's certificate metadata sets, applied to Hiroaki Hosono's
         rect_n40_L67: every closed square of side 9977/10000 inside [0, 67/10]^2 at each
         net direction captures mass at least 10001/10000. With Guzhou0806's clipped-corner
         transfer no 40 unit squares pack in a square of side 335427/50000, so s(40) >
@@ -29640,7 +29640,7 @@ evidence:
       and the 201 even rows equal the retained 3 October census row of rect_n40_L67. This
       is the producer's own nodal code re-run: the release ran this crate, so the replay
       reproduces the release's nodal verification and is not an independent decision of
-      it (GN-4 of the review); it is independent of wand125's and Tokoharu's checkers,
+      it (GN-4 of the review); it is independent of Hosono's and Tokoharu's checkers,
       which never ran at 401 directions. No second method decided the nodal statement.
       Controls on the same binary: every weight scaled by 99/100 refused at r = 73 and 220
       (exit 1, exact captures 0.999322755117 and 0.999227715635 at the witnesses); every
@@ -29681,7 +29681,7 @@ evidence:
       theorem: >-
         If every closed square of side 9977/10000 inside [0, 67/10]^2 at each of the 401
         directions 2 arctan(83 j/80000), j = 0 to 400, captures at least 10001/10000 of
-        wand125's rect_n40_L67 density, then no 40 unit squares pack in a square of side
+        Hiroaki Hosono's rect_n40_L67 density, then no 40 unit squares pack in a square of side
         335427/50000, so s(40) > 335427/50000; and, by the full-core argument from the same
         hypothesis alone, s(40) > 67000 sqrt(6400006889)/798988091.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations, under the one hypothesis named.
@@ -30622,7 +30622,7 @@ evidence:
       n40-continuous-1340000-199529-20261010 names (n40-continuous-1340000-199529.zip, 129,976
       bytes, SHA-256 78d693ae...), reported in the comment of 2026-10-10T14:50:00Z on
       jlevy/squares#485, claims s(40) > 1340000/199529 = 6.715815746082023..., unrestricted
-      rotations, strict. It rests on wand125's rect_n40_L67 rectangle density, unchanged (SHA-256
+      rotations, strict. It rests on Hiroaki Hosono's rect_n40_L67 rectangle density, unchanged (SHA-256
       71011d03..., byte for byte the copy the 2026-10-01 packet retains, pinned by digest and not
       copied into this packet), and on the statement that every closed square of side
       199529/200000 inside [0, 67/10]^2 captures mass at least 4999/5000, so that 40 squares
@@ -30642,7 +30642,7 @@ evidence:
       30,930,485 leaves, 14,096,668 angle bisections, least leaf bound 2251349454150741/2^51 and
       the axis minimum 249950896232809301864786207/(25 x 10^25) over 4,897,369 vertices. Its label
       REPLAYED_SAME_KERNEL means its two runs are the same kernel on two compilers; it does not
-      claim distinct-code or method-distinct verification. wand125's review on the issue covers
+      claim distinct-code or method-distinct verification. Hosono's review on the issue covers
       6.70854 only. No packing, optimality or priority claim is made. This is the public-claim
       entry; the replays here are E-n040-guzhou-continuous-pose-kernel-replay,
       E-n040-guzhou-continuous-pose-finite-audit and E-n040-guzhou-continuous-pose-crate-axis.
@@ -30705,7 +30705,7 @@ evidence:
       source: packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
       theorem: >-
         Every closed square of side 199529/200000 inside [0, 67/10]^2, at any angle, captures
-        mass at least 4999/5000 of wand125's rect_n40_L67; since 40 x 4999/5000 - 3999/100 =
+        mass at least 4999/5000 of Hiroaki Hosono's rect_n40_L67; since 40 x 4999/5000 - 3999/100 =
         1/500 > 0, no 40 unit squares pack in a square of side 1340000/199529, so s(40) >
         1340000/199529.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -30779,7 +30779,7 @@ evidence:
       source: packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
       theorem: >-
         If every side-199529/200000 square at t in [10^-6, 83/200] captures at least 4999/5000 of
-        wand125's rect_n40_L67 density (the slabs) and every horizontal side-997643/1000000 square
+        Hiroaki Hosono's rect_n40_L67 density (the slabs) and every horizontal side-997643/1000000 square
         captures at least 4999/5000 of the density rounded inward to 10^-9 (the axis), then every
         side-199529/200000 square in [0, 67/10]^2 does, and s(40) > 1340000/199529.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations, under the two hypotheses named.
@@ -30848,7 +30848,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         Every horizontal closed square of side 997643/1000000 inside [0, 67/10]^2 captures at
-        least 4999/5000 of wand125's rect_n40_L67 density, decided as capture at least 1 of the
+        least 4999/5000 of Hiroaki Hosono's rect_n40_L67 density, decided as capture at least 1 of the
         density scaled by 5000/4999 (mass 199950/4999 < 40), the same statement exactly.
       scope: The near-axis lemma of the claim; with the slab cover it gives s(40) > 1340000/199529.
       pinpoints: >-
@@ -32847,7 +32847,7 @@ evidence:
       n40-new-supports-6718-20261011 names (n40-6718.zip, 196,420 bytes, SHA-256 e6e49590...),
       reported in the comment of 2026-10-11T07:39:30Z on jlevy/squares#485, claims s(40) >
       3359/500 = 6.718, unrestricted rotations, strict. It rests on a new rational density
-      (SHA-256 984fcd3a...): 685 positive D4 rectangle orbits, 522 rows of wand125's rect_n40_L67
+      (SHA-256 984fcd3a...): 685 positive D4 rectangle orbits, 522 rows of Hosono's rect_n40_L67
       pool (71011d03..., pinned by digest and not copied) and 163 generated outside it, mass
       3999/100, and on the statement that every closed square of side 3350/3359 inside
       [0, 67/10]^2 captures mass at least 4999/5000, so that 40 squares capture more than the mass
@@ -32867,7 +32867,7 @@ evidence:
       9005397816695287/2^53 and the axis minimum 1001486431423867090847280653/10^27 over
       10,843,849 vertices, and the release's separate dual EXACT_DUAL_CODE_DISTINCT_CHECKED for
       OBSTRUCTION.md, which bears on no bound. Its label REPLAYED_SAME_KERNEL means its two runs
-      are the same kernel on two compilers. wand125's comment of 2026-10-11T17:14:50Z (edited
+      are the same kernel on two compilers. Hosono's comment of 2026-10-11T17:14:50Z (edited
       2026-10-12T02:19Z) reports a third run of the entry point (1,552 s at six workers) and his
       own continuous-angle verifier, now published at wand125/square-packing f30cc2cf (think-xzob),
       with no receipts. No packing, optimality or priority claim. This is the public-claim entry;
@@ -32894,7 +32894,7 @@ evidence:
         first-party decides the continuous cover, so the confirmation is reproduced with the
         producer's code (GN-4); the kernel contract held at the new parameters (GN-5);
         OBSTRUCTION.md is a statement about a family, replayed and registered nowhere (GN-6);
-        wand125's sqverify_continuous is published and unretained, and a replay of it would move
+        Hosono's sqverify_continuous is published and unretained, and a replay of it would move
         the confirmation's mark and not the rung (GN-7); the release's tests were not run here
         (GN-8). The complete 43-slab run is E-n040-guzhou-new-supports-kernel-replay.
     source_reviewed: '2026-10-12'
@@ -38286,19 +38286,137 @@ evidence:
     certificate: packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-20'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-20 intake
+        (think-455r), prompted separately from the replay and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md accepted the
+        three certificates T-196 cites for finite feasibility only, with four non-blocking
+        findings (RF-1 to RF-4); the replay it reproduced is
+        E-de-winter-668-upper-exact-feasibility.
     source_reviewed: '2026-10-18'
     limitations: >-
       Issue 668 reports the three exact rational certificate sides from c95c4938 on 17 October; the retained
       licensed successor 9bf5d9be changes only LICENSE and the root README. The ledger preserves this report
       before Couzo issue 672 and Daniel issue 674 at overlapping counts. At 227 Couzo has a later smaller
       pending claim, owned by think-2vjc; at 229 the final retained Daniel update is the latest registered report. No arrangement
-      identity, local minimum or optimum is established. The separately owned mathematical review (think-455r)
-      and completed source replay with controls (think-8xr0) await their own dependent PRs and are not adopted
-      by this registration.
+      identity, local minimum or optimum is established.
 
-      This atom records the source report only; it incorporates no separate review, source-replay receipt
-      or confirmation rung. Both case upper lanes and the retained house remain unchanged
-      until Stage 4 adoption; the exact claim is registered as pending adoption where better.
+      This atom records the source author's report of 3 exact rational certificates at 9bf5d9b. A
+      separate complete repository replay is retained for n = 227, 229 and 260 and is
+      E-de-winter-668-upper-exact-feasibility: 3 positives and 6 duplicate-square and
+      outside-container controls passed their required outcomes on both maintained routes, 512562
+      pair decisions. The 20 October review accepted it. The source's own checkers were not run
+      here; the review read two of them in full. The cases at 227 and 260 adopted the
+      certificates as their house best packings on 20 October 2026.
+  - id: E-de-winter-668-upper-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+        - 227
+        - 229
+        - 260
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter upper bounds 2026-10-17]'
+    certificate: packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7), niced, on a shared four-core
+      host: python -m devtools.upper_bound_reports de-winter-upper-bounds-227-229-260-2026-10-17
+      certify --workers 2, on main at f76d57a40 with the center-basis-json adapter of 7c801b596,
+      wrote receipts/exact-certification.json.xz on 20 October 2026, and check --replay decided all
+      9 retained jobs, each certificate and its duplicate-square and outside-container controls,
+      again through both maintained routes and held each to its retained row. check --replay
+      decided all 9 again at the merge with main d588ad987, and check-claims rebuilt the frozen
+      comparison equal. The 20 October review lane (think-455r) then ran, at efcd4ddac, its own
+      exact route, review/review-2026-10-20/programs/review_704_check.py, on the three
+      certificates (every wall and every pair by separating axes, every pair within sqrt(2)
+      again by exact clipping area; outputs/out-check.json), and sharp_controls_704.py, which
+      decided six mutants a count at 227 and 260 through the adapter and both maintained routes
+      (outputs/out-controls-n227.json and out-controls-n260.json).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+      - V-de-winter-668-review-check
+      - V-de-winter-668-sharp-controls
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the three certificates at n = 227, 229 and 260 that T-196 cites, every wall and every
+          pair decided by both maintained routes and again by the review's own route; the
+          kernel's controls are retained in the packet's receipt and the review's sharp ones in
+          review/review-2026-10-20/outputs/
+        checked: 3
+        of: 3
+      read: [specification, certificate-format, producer-code, earlier-review]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026, and the 20
+            October import lane (moderate sub-agent tier) that wrote the center-basis-json
+            adapter; each earlier lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane of 20 October 2026 (think-455r), strong sub-agent tier,
+            max reasoning, which wrote the review's own route and the sharp controls
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source states that the search, certificates and checkers were made with OpenAI
+          Codex agents under Joost de Winter's direction, and the issue that Claude replayed
+          the source's checkers and prepared the repository for publication; the project's
+          routes are Claude's too, written from prompts of their own. No route here is the
+          source's code. The import lane's beads carried an earlier static read of the
+          source's three checkers (think-qdcc), and the review read two of them in full, so
+          neither author is clean-room. Both maintained routes take the half-angle pose of
+          devtools.evand_exact_certificates (V-evand-exact-certificates), written for another
+          author's format; the review's route has its own reader.
+    independence_record: docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-20'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-20 intake
+        (think-455r), prompted separately from the replay and records lanes
+      note: >-
+        Accepted for finite feasibility only. The retained receipt admitted, the three
+        certificates decided again on the review's own exact route, equal to both maintained
+        routes at every number they share, and six sharp mutants a count at 227 and 260
+        decided as built on both routes. Findings RF-1 to RF-4, none blocking.
+    limitations: >-
+      A replay of the three retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method, and by the review's own route, which shares Fraction arithmetic and the format's
+      meaning only. The receipt's 9 jobs hold 512562 pair decisions, 425.22 route CPU seconds
+      and 489.54 job wall seconds, the longest job 71.04 seconds. Each positive clears every
+      wall by 1e-9 exactly and every pair by at least 1.003e-9, 1.002e-9 and 1.030e-9 at 227,
+      229 and 260. The kernel's two retained controls are gross, a duplicated square and a
+      square moved outside; the sharp ones, 1e-30 past wall and pair contact, are the
+      review's at 227 and 260 and the kernel's SHARP_CONTROLS, which
+      test_evand_arrangement_reports runs on both routes, on a small packing in the quick
+      lane and at 260 in the deep surface. The source's own checkers
+      were not run here. Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-20'
   - id: E-evand-669-n155-report
     claim: upper-bound
     scope: {n_values: [155]}
@@ -38898,6 +39016,389 @@ evidence:
       of a local minimum are not decided. Finite feasibility only: no lower bound,
       optimum, local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-19'
+  - id: E-evand-689-n308-report
+    claim: upper-bound
+    scope: {n_values: [308]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel n308 2026-10-19]'
+    certificate: packing/resources/web/evand-n308-2026-10-19/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-20'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-20 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md accepted
+        the certificate T-221 cites for finite feasibility only, with six non-blocking
+        findings (RW-1 to RW-6); the replay it reproduced is
+        E-evand-689-n308-exact-feasibility.
+    source_reviewed: '2026-10-20'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      bc0708f. A separate complete repository replay is retained for n = 308: 1 positive
+      and 2 duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 283668 pair decisions; summed over the 3 jobs, the receipt records
+      35.66 route CPU seconds and 36.22 job wall seconds, the longest job 12.41 seconds.
+      Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21. The 20 October review accepted it; the confirming replay is
+      E-evand-689-n308-exact-feasibility. The source's own checkers were not run here. The
+      two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-evand-689-n308-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [308]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n308 2026-10-19]'
+    certificate: packing/resources/web/evand-n308-2026-10-19/source/search/packer/candidates/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports evand-n308-2026-10-19 certify --workers
+      2 wrote the receipt on 20 October 2026 (277bcd50a), and check --replay decided all 3
+      retained jobs, the certificate and its duplicate-square and outside-container
+      controls, again through both maintained routes and held each to its retained row;
+      check-claims rebuilt the frozen comparison. The 20 October review reproduced the
+      replay at 34d72a95a, niced, every job equal
+      (docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 308 that T-221 cites, every wall and every pair
+          decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipt
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026; each
+            lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The packet's CREDITS.md states that the source's work was done with Claude
+          (Anthropic) under human direction, and the pinned commit names Claude as
+          co-author and says Evan Daniel approved the commit and its push; issue 689
+          itself does not say. The project's routes are Claude's too, written from
+          prompts of their own. Both maintained routes take their parse and half-angle
+          map from devtools.evand_exact_certificates (V-evand-exact-certificates),
+          whose author read the source's verify_cert.py and verify_cert2.py before
+          writing it.
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-20'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-20 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, each pinned file matched
+        its upstream bytes fetched at the pin, and the review's own exact route and the
+        clipping-area route decided the certificate again with six controls each, and
+        held it to its KKT point scaled by 1 + 1e-20. Those decisions are kept with
+        their programs, logs and reports in the n308 packet's
+        review/review-2026-10-20/ (README.md there), which T-221 cites; they are the
+        review's record, not a verifier of this entry, which rests on the maintained
+        replay (RW-5). Findings RW-1 to RW-6, none blocking.
+    limitations: >-
+      A replay of the retained certificate by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. The receipt's 3 jobs hold 283668 pair decisions, 35.66 route
+      CPU seconds and 36.22 job wall seconds, the longest job 12.41 seconds. The positive
+      clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21. The
+      source's own checkers were not run here, and the source's numerical statements of a
+      local minimum are not decided. Finite feasibility only: no lower bound, optimum,
+      local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-20'
+  - id: E-evand-694-n154-report
+    claim: upper-bound
+    scope: {n_values: [154]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel n154 sweep 2026-10-20]'
+    certificate: packing/resources/web/evand-n154-sweep-2026-10-20/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-20'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-20 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md accepted
+        the certificate T-222 cites for finite feasibility only, with six non-blocking
+        findings (RW-1 to RW-6); the replay it reproduced is
+        E-evand-694-n154-exact-feasibility.
+    source_reviewed: '2026-10-20'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      1d2bb82. A separate complete repository replay is retained for n = 154: 1 positive
+      and 2 duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 70686 pair decisions; summed over the 3 jobs, the receipt records 8.9
+      route CPU seconds and 9.03 job wall seconds, the longest job 3.14 seconds. Every
+      positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
+      The 20 October review accepted it; the confirming replay is
+      E-evand-694-n154-exact-feasibility. The source's own checkers were not run here. The
+      two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-evand-694-n154-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [154]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n154 sweep 2026-10-20]'
+    certificate: packing/resources/web/evand-n154-sweep-2026-10-20/source/search/packer/candidates/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports evand-n154-sweep-2026-10-20 certify
+      --workers 2 wrote the receipt on 20 October 2026 (277bcd50a), and check --replay
+      decided all 3 retained jobs, the certificate and its duplicate-square and
+      outside-container controls, again through both maintained routes and held each to
+      its retained row; check-claims rebuilt the frozen comparison. The 20 October review
+      reproduced the replay at 34d72a95a, niced, every job equal
+      (docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 154 that T-222 cites, every wall and every pair
+          decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipt
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026; each
+            lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The packet's CREDITS.md states that the source's work was done with Claude
+          (Anthropic) under human direction, and the pinned commit names Claude as
+          co-author and says Evan Daniel approved the commit, its push and its post;
+          issue 694 itself does not say. The project's routes are Claude's too, written
+          from prompts of their own. Both maintained routes take their parse and
+          half-angle map from devtools.evand_exact_certificates
+          (V-evand-exact-certificates), whose author read the source's verify_cert.py
+          and verify_cert2.py before writing it.
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-20'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-20 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, each pinned file matched
+        its upstream bytes fetched at the pin, and the review's own exact route and the
+        clipping-area route decided the certificate again with six controls each, and
+        held it to its KKT point scaled by 1 + 1e-20. Those decisions are kept with
+        their programs, logs and reports in the n308 packet's
+        review/review-2026-10-20/ (README.md there), which T-222 cites; they are the
+        review's record, not a verifier of this entry, which rests on the maintained
+        replay (RW-5). Findings RW-1 to RW-6, none blocking.
+    limitations: >-
+      A replay of the retained certificate by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. The receipt's 3 jobs hold 70686 pair decisions, 8.9 route
+      CPU seconds and 9.03 job wall seconds, the longest job 3.14 seconds. The positive
+      clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21. The
+      source's own checkers were not run here, and the source's numerical statements of a
+      KKT point, whose second-order status the source calls inconclusive, are not
+      decided. Finite feasibility only: no lower bound, optimum, local minimum, rigidity,
+      novelty or human oversight.
+    source_reviewed: '2026-10-20'
+  - id: E-evand-703-n270-report
+    claim: upper-bound
+    scope: {n_values: [270]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel n270 sweep 2026-10-20]'
+    certificate: packing/resources/web/evand-n270-sweep-2026-10-20/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-21'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-21 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-21-upper-bound-import-703.md accepted the
+        certificate T-224 cites for finite feasibility only, with five non-blocking
+        findings (A1 to A5); the replay it reproduced is
+        E-evand-703-n270-exact-feasibility.
+    source_reviewed: '2026-10-21'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      88385ab. A separate complete repository replay is retained for n = 270: 1 positive
+      and 2 duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 217890 pair decisions; summed over the 3 jobs, the receipt records
+      26.65 route CPU seconds and 30.4 job wall seconds, the longest job 10.99 seconds.
+      Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21. The two controls are gross, a duplicated square (gap -1) and a square
+      moved the side and 2 outside, so they show that both routes refuse, not that they
+      refuse at a margin of 1e-20, which a tolerant checker would pass; the 21 October
+      review's sharp controls show both routes exact at 1e-30 in both directions at the
+      far wall and at the closest pair (A2). PR #704 adds such contact-plus-1e-30
+      controls to the kernel, outside the receipt's job roster, so this receipt is
+      unchanged. The 21 October review accepted it; the confirming replay is
+      E-evand-703-n270-exact-feasibility. The source's own checkers were not run here.
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-evand-703-n270-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [270]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n270 sweep 2026-10-20]'
+    certificate: packing/resources/web/evand-n270-sweep-2026-10-20/source/search/packer/candidates/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports evand-n270-sweep-2026-10-20 certify
+      --workers 2 wrote the receipt on 21 October 2026 (95b8db267), and check --replay
+      decided all 3 retained jobs, the certificate and its duplicate-square and
+      outside-container controls, again through both maintained routes and held each to
+      its retained row; check-claims rebuilt the frozen comparison. The 21 October review
+      reproduced the replay at 0a86f70c3, niced, every job equal
+      (docs/project/reviews/review-2026-10-21-upper-bound-import-703.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 270 that T-224 cites, every wall and every pair
+          decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipt
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026; each
+            lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The packet's CREDITS.md states that the source's work was done with Claude
+          (Anthropic) under human direction, and the pinned commit names Claude Opus 5.5
+          as co-author and says Evan Daniel approved the commit and its push; issue 703
+          itself does not say. The project's routes are Claude's too, written from
+          prompts of their own. Both maintained routes take their parse and half-angle
+          map from devtools.evand_exact_certificates (V-evand-exact-certificates), whose
+          author read the source's verify_cert.py and verify_cert2.py before writing it.
+    independence_record: docs/project/reviews/review-2026-10-21-upper-bound-import-703.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-21'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-21 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes, equal on both to every digit of the side, the least wall
+        clearance, the least pair gap, the closest pair and the pair count; the frozen
+        comparison rebuilt equal; the three blobs the claim and its construction rest on
+        matched their upstream bytes fetched at the pin; the review's own exact route,
+        with exact clipped areas on the 590 near pairs, decided the certificate again;
+        four sharp controls at 1e-30 bracketed both maintained routes at the far wall
+        and the closest pair; and the certificate was held to its KKT point scaled by
+        1 + 1e-20. Those decisions are kept with their programs and outputs in the
+        packet's review/review-2026-10-21/ (README.md there), which T-224 cites; they
+        are the review's record, not a verifier of this entry, which rests on the
+        maintained replay (A5). Findings A1 to A5, none blocking.
+    limitations: >-
+      A replay of the retained certificate by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. The receipt's 3 jobs hold 217890 pair decisions, 26.65
+      route CPU seconds and 30.4 job wall seconds, the longest job 10.99 seconds. The
+      positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21; the receipt's two controls are gross, and the review's sharp controls
+      at 1e-30 are its record, not part of this replay (A2). The source's own checkers
+      were not run here, and the source's numerical statements of a KKT local minimum
+      are not decided. Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-21'
   - id: E-wand125-fine-net-n38-65775-report
     claim: lower-bound
     scope: {n_values: [38]}
@@ -39626,7 +40127,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n68_L853:
+        and L, lemma D for format M's per-bin domain), applied to Hosono's mixed_n68_L853:
         no 68 unit squares pack in a square of side 853/100, so s(68) >= 853/100.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -39835,7 +40336,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's
+        and L, lemma D for format M's per-bin domain), applied to Hosono's
         mixed_n84_L94225: no 84 unit squares pack in a square of side 3769/400, so s(84) >=
         3769/400.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
@@ -40042,7 +40543,7 @@ evidence:
       source: packing/sqverify_fast/SOUNDNESS.md
       theorem: >-
         The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
-        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n85_L9475:
+        and L, lemma D for format M's per-bin domain), applied to Hosono's mixed_n85_L9475:
         no 85 unit squares pack in a square of side 379/40, so s(85) >= 379/40.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
@@ -40326,3 +40827,815 @@ evidence:
       text because the inherited #671 version differs. The case lanes and house moved to this
       certificate in the adoption of 2026-10-19, which ran both strong generators on its
       witness.'
+  - id: E-couzo-678-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+        - 204
+        - 260
+        - 330
+        - 343
+        - 418
+        - 420
+        - 421
+        - 422
+        - 455
+        - 456
+        - 458
+        - 459
+        - 461
+        - 462
+        - 463
+        - 464
+        - 497
+        - 499
+        - 501
+        - 502
+        - 505
+        - 507
+        - 545
+        - 546
+        - 548
+        - 549
+        - 553
+        - 554
+        - 555
+        - 592
+        - 593
+        - 597
+        - 598
+        - 600
+        - 601
+        - 602
+        - 641
+        - 642
+        - 650
+        - 652
+        - 653
+        - 654
+        - 693
+        - 700
+        - 701
+        - 703
+        - 704
+        - 705
+        - 706
+        - 749
+        - 751
+        - 752
+        - 753
+        - 754
+        - 755
+        - 760
+        - 804
+        - 805
+        - 806
+        - 808
+        - 815
+        - 863
+        - 865
+        - 867
+        - 868
+        - 870
+        - 872
+        - 873
+        - 874
+        - 919
+        - 924
+        - 926
+        - 927
+        - 928
+        - 930
+        - 933
+        - 934
+        - 984
+        - 987
+        - 989
+        - 990
+        - 991
+        - 992
+        - 994
+        - 998
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 678 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-20'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, maximum reasoning), the stage 4 review lane of the 19
+        October intake (c-review-678-fable), prompted separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md accepted all 85
+        rows with findings, for finite feasibility only, with five non-blocking findings
+        (RF-1 to RF-5); the confirming entries at 204 and 260 are
+        E-couzo-678-filtered-exact-feasibility, E-couzo-678-source-checker-replay and
+        E-couzo-678-review-exact-feasibility.
+    source_reviewed: '2026-10-19'
+    limitations: >-
+      This atom records the source author's report, issue 678, of 85 upper bounds for n =
+      204 to 998 by 83 exact rational certificates at 7b6c87e; 545 and 641 are the 546 and
+      642 certificates less one square. Each printed side is its certificate's header side
+      rounded up at 12 places. The packet's filtered exact replay
+      (receipts/filtered-exact-replay.json, devtools.couzo_678_replay) decided all 85 rows
+      on two routes, the sqpack.verify predicates and the independent rational corner
+      checker's, over the 140,866 of 21,393,271 pairs whose centres are closer than sqrt 2,
+      an exactly justified filter, and every wall; all 498 controls were refused by both,
+      in 80.5 positive CPU seconds. The source's checker, run unchanged from its retained
+      copy, accepts all 85 and refuses all 332 controls it can state. The 20 October review
+      accepted both; its confirming entries are named above, and the full-kernel all-pairs
+      replay of the 83 beyond the corpus is held on think-fpnd. The two routes share
+      certificate parsing, half-angle conversion, the pair filter and Fraction arithmetic. The certificates at 204 and 260 are T-223's; the 83 beyond the
+      case corpus are dated rows of the couzo-issue678-2026-10-18 source. No arrangement
+      identity, local minimum, optimum or credit statement of the source's manifest is
+      established.
+  - id: E-couzo-678-filtered-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+        - 204
+        - 260
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        sqpack.verify's unit-shape and separating-axis predicates (check_unit_squares,
+        separated), the jlevy/squares corner verifier the source reports running
+      - >-
+        the certificate parser and half-angle map of devtools.evand_exact_certificates,
+        through which both routes read each certificate once, together
+      - the sqrt-2 centre filter of devtools.couzo_678_replay, which chooses both routes' pairs
+      - CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo issue 678 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7), niced on a shared four-core
+      host: python -m devtools.couzo_678_replay filtered --pinned CHECKOUT --workers 2 wrote
+      receipts/filtered-exact-replay.json on 20 October 2026 with the near-contact control of
+      RF-2 (1,266.1 s of wall), and check --replay decides every row and control again
+      and holds each to its retained row, as the 20 October review reproduced it on the
+      receipt of 19 October. house-jobs ran the maintained all-pairs kernel's three jobs at 204
+      and 260 in 30.7 CPU seconds (receipts/house-jobs.json.xz), and check holds each
+      positive's least gap and wall clearance to the filtered decision's.
+    replay_status: passed
+    verifiers:
+      - V-couzo-678-replay
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-exact-certificates
+      - V-evand-arrangement-receipts
+      - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose
+          centres are closer than sqrt 2 decided by both routes, the others excluded by the
+          filter's lemma, and every pair decided again by the all-pairs kernel; the receipt
+          decides all 85 rows of the issue
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-20'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, maximum reasoning), the stage 4 review lane of the 19
+        October intake (c-review-678-fable), prompted separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md accepted the replay
+        with findings, for finite feasibility only: check --replay reproduced every row and
+        control of the 19 October receipt, and the review's own checker agreed with it at
+        every number they share. RF-1 to RF-5, none blocking; RF-2's near-contact control and
+        RF-5's retained programs are in this pass.
+    limitations: >-
+      Two exact routes that read each certificate once, together, through a shared parser,
+      half-angle map and pair filter, with Fraction arithmetic (RF-1): two implementations of
+      the unit-shape, pair and wall predicates, not two independent replays. At 204 the least
+      pair gap is 5.56e-11 and at 260 1.24e-12, and each certificate touches a wall. All 498
+      controls were refused by both routes, the near-contact pair 10^-30 of its centre
+      distance past exact contact among them. The all-pairs kernel ran at both counts; its
+      replay of the 83 certificates beyond the corpus is held (think-fpnd). Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-20'
+  - id: E-couzo-678-source-checker-replay
+    claim: upper-bound
+    scope:
+      n_values:
+        - 204
+        - 260
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo issue 678 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/
+    replay: >-
+      From packing/: python -m devtools.couzo_678_replay source-checker --scratch SCRATCH ran
+      the source's verify_bound_certificate.py unchanged from its retained copy (SHA-256
+      1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b, read before it ran)
+      in a python -I child process on 19 October 2026, on the 85 packings and the 332 controls
+      the certificate format states (receipts/source-checker-replay.json); check holds the
+      receipt to the issue's rows, and the 20 October review reproduced it.
+    replay_status: passed
+    verifiers:
+      - V-couzo-verify-bound-certificate
+      - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 204 and 260 that T-223 cites, each with its four controls;
+          the receipt holds all 85 rows
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    limitations: >-
+      The producer's own checker re-run: it establishes reproducibility, not independence.
+      Its default contract is a closed container and disjoint interiors; its --strict verdict,
+      an open container and disjoint closed squares, is false at 62 of the 85 rows, the
+      contacts. The receipt's manifest field at 545 and 641 is the manifest's verdict on the
+      source's own n545.cert and n641.cert (RF-3). Finite feasibility only.
+    source_reviewed: '2026-10-20'
+  - id: E-couzo-678-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+        - 204
+        - 260
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - CPython's fractions.Fraction arithmetic, which every route here and the source's checker use
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo issue 678 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/
+    replay: >-
+      From packing/: .venv/bin/python3 -I
+      resources/web/couzo-issue678-2026-10-18/review/programs/review_678_check.py with the
+      packet's source directory, the issue body and the filtered receipt, --all-pairs 204 260
+      330 459 499 545 998 --workers 2, as the 20 October review ran it
+      (review/outputs/out-all.json): all 85 rows passed, every pair at 204 and 260 decided by
+      separating axes and every near pair again by exact clipping area, with no disagreement
+      with the filtered receipt, in 368.2 CPU seconds.
+    replay_status: passed
+    verifiers:
+      - V-couzo-678-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 204 and 260 that T-223 cites, every wall and every pair; the
+          run decides all 85 rows of the issue
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    limitations: >-
+      The review's own checker, with readers of its own and no code of the packet's routes or
+      the source's; it shares Fraction with them, and its author read every route before
+      writing it, so it is not clean-room. Its least clearances and gaps equal the
+      independent route's to every digit at 204 and 260. Given the packet's duplicate-square
+      and near-contact-overlap mutants of n204.cert (couzo_678_replay.mutant_certificate),
+      with --only 204 --all-pairs 204, it refuses both: exit 1, one overlapping pair by
+      separating axes and by exact area, (1, 2) and (115, 124), about 2 s each
+      (test_couzo_678_replay.py, test_the_review_checker_refuses_the_packet_mutants; review A2
+      of #706). The receipt's other controls were decided by the packet's routes, not by this
+      checker. Finite feasibility only.
+    source_reviewed: '2026-10-20'
+  - id: E-muglich-686-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [328, 330, 339, 344, 365, 377, 378, 379, 380, 381, 404, 412, 417, 418, 419,
+        420, 421, 422, 453, 459, 460, 461, 462, 463, 464, 496, 502, 503, 504, 505, 506, 508,
+        548, 550, 551, 552, 553, 554, 595, 597, 598, 599, 600, 601, 602, 603, 647, 648, 649,
+        650, 651, 652, 654, 700, 701, 702, 703, 704, 705, 706, 755, 756, 757, 758, 759, 760,
+        810, 811, 812, 813, 814, 815, 816, 817, 868, 869, 870, 871, 872, 873, 874, 875, 927,
+        928, 929, 930, 932, 933, 934, 935, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Muglich issue 686 2026-10-19]'
+    certificate: packing/resources/web/muglich-issue686-2026-10-19/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-21'
+    limitations: >-
+      This atom records issue 686's report of 100 upper bounds for n = 328 to 998, one exact
+      rational certificate each, in the issue's attachment, pinned by address and SHA-256 and
+      by no commit or DOI; the packet keeps derived facts, member digests and the per-case
+      provenance, not the archive's bytes. Each print is its exact side rounded up at 15
+      places. A separate complete repository replay is retained (devtools.muglich_686_import):
+      100 positives and 200 duplicate-square and outside-container controls passed their
+      required outcomes on both routes, 145844484 pair decisions, 29169.55 route CPU seconds,
+      the longest job 397.51 seconds. Every positive clears every wall by at least 5.000e-21
+      and every pair by at least 1.000e-12. Review and confirmation remain pending. The
+      source's own checkers were not run here. The two maintained routes share certificate
+      parsing, half-angle conversion, Fraction arithmetic and the separating-axis method. The
+      source says the 100 are not independent structures. No two independent methods, human
+      oversight, novelty, priority or optimality is claimed.
+  - id: E-evand-702-n343-report
+    claim: upper-bound
+    scope: {n_values: [343]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel n343 sweep 2026-10-20]'
+    certificate: >-
+      packing/resources/web/evand-n343-sweep-2026-10-20/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-21'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      88385ab. A separate complete repository replay is retained for n = 343: 1 positive and
+      2 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 351918 pair decisions; summed over the 3 jobs, the receipt records 51.74
+      route CPU seconds and 53.62 job wall seconds, the longest job 18.25 seconds. Every
+      positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
+      Independent review and confirmation remain pending. The source's own checkers were
+      not run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle
+      conversion, Fraction arithmetic and the separating-axis method. No two independent
+      methods, human oversight or optimality is claimed.
+  - id: E-evand-regularized-1020-certificate-report
+    claim: upper-bound
+    scope: {n_values: [204, 227, 229, 260]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel regularized lists 2026-10-20]'
+    certificate: packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-21'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-225
+        (c-review-t225-math, think-ql4v), strong sub-agent tier, reasoning setting xhigh,
+        prompted separately from the import lane and from the senior reviewer of #716
+      note: >-
+        docs/project/reviews/review-2026-10-21-evand-regularized-views.md accepted the four
+        certificates T-225 cites for finite feasibility only, with six non-blocking findings
+        (RF-1 to RF-6); the replay it reproduced is
+        E-evand-regularized-1020-exact-feasibility, and its own checker's run is
+        E-evand-regularized-1020-review-exact-feasibility. The source's exact-optimum and
+        same-packing statements are the source's.
+    source_reviewed: '2026-10-21'
+    limitations: >-
+      This atom records the source author's report of 4 exact rational certificates at
+      0075967, display-regularized views of packings already reported, each solved to its
+      exact side; the source calls each "not a new bound". A separate complete repository
+      replay is retained for n = 204, 227, 229 and 260: 4 positives and 8
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 636798 pair decisions; summed over the 12 jobs, the receipt records 63.0
+      route CPU seconds and 71.44 job wall seconds, the longest job 7.07 seconds. Every
+      positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
+      The two controls are gross, a duplicated square (gap -1) and a square moved outside,
+      so they show that both routes refuse, not that they refuse at a margin of 1e-20; the
+      21 October review's sharp controls, kept in the packet's review/review-2026-10-21/,
+      show both routes exact at 1e-30 in both directions (RF-3). The review accepted the
+      replay; the confirming entries are E-evand-regularized-1020-exact-feasibility and
+      E-evand-regularized-1020-review-exact-feasibility. The source's own checkers were not
+      run here, and its same-packing path test is not replayed. The two maintained routes,
+      the sqpack rational witness verifier and the independent rational corner checker,
+      share certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality
+      is claimed.
+  - id: E-evand-regularized-1020-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [204, 227, 229, 260]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel regularized lists 2026-10-20]'
+    certificate: packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports evand-regularized-2026-10-20 certify
+      --workers 2 wrote the receipt on 21 October 2026 (b1244549a), and check --replay
+      decides all 12 retained jobs, the four certificates and their duplicate-square and
+      outside-container controls, again through both maintained routes and holds each to
+      its retained row; check-claims rebuilds the frozen comparison. The 21 October review
+      reproduced the replay at #716's head be6416a03, niced, all 12 jobs equal, in 62 s,
+      and check-claims equal (docs/project/reviews/review-2026-10-21-evand-regularized-views.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and
+          every pair decided by both maintained routes; the kernel's controls are retained
+          in the packet's receipt
+        checked: 4
+        of: 4
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026; each
+            lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The packet's CREDITS.md states that the source's work was produced by Claude
+          (Anthropic) under human direction. The project's routes are Claude's too,
+          written from prompts of their own. Both maintained routes take their parse and
+          half-angle map from devtools.evand_exact_certificates (V-evand-exact-certificates),
+          whose author read the source's verify_cert.py and verify_cert2.py before writing
+          it; the import lane did not run them, and they are byte-identical to the n183
+          packet's copies.
+    independence_record: docs/project/reviews/review-2026-10-21-evand-regularized-views.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-21'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-225
+        (c-review-t225-math, think-ql4v), strong sub-agent tier, reasoning setting xhigh,
+        prompted separately from the import lane and from the senior reviewer of #716
+      note: >-
+        Accepted for finite feasibility only. All 12 retained jobs reproduced on both
+        maintained routes and check-claims rebuilt equal; every pose, side, least wall
+        clearance, least pair gap and pair count of the receipt equals the review's own
+        checker's on both of its routes (E-evand-regularized-1020-review-exact-feasibility);
+        the eight retained gzip files equal their Git blobs at the pin and at 88385ab; and
+        the review's sharp controls accepted exact contact and refused 1e-30 past it at the
+        far wall, the near wall and the least-gap pair on both maintained routes at all
+        four counts, as the kernel's run_sharp did. Findings RF-1 to RF-6, none blocking.
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. The receipt's 12 jobs hold 636798 pair decisions, 63.0 route
+      CPU seconds and 71.44 job wall seconds, the longest job 7.07 seconds. Every positive
+      clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21. The
+      receipt's two controls a count are gross (RF-3); the sharp controls are the
+      review's, kept with their receipts out-controls-nNNN.json in the packet's
+      review/review-2026-10-21/ (V-evand-regularized-1020-review-controls), and
+      test_upper_bound_reports_regularized_1020.py runs the kernel's two sharp controls on
+      all four certificates at contact and 1e-30 past it on both routes. The source's own
+      checkers were not run here, and the source's statements that each side is the exact
+      optimum of the store's best packing and that each view is the same packing are not
+      decided. Finite feasibility only: no lower bound, optimum, local minimum, rigidity,
+      novelty or human oversight.
+    source_reviewed: '2026-10-21'
+  - id: E-evand-regularized-1020-review-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [204, 227, 229, 260]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel regularized lists 2026-10-20]'
+    certificate: packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/
+    replay: >-
+      From the review's data directory, with any Python 3: python -I
+      review/review-2026-10-21/programs/review_t225_check.py on the packet's four
+      certificates, 204 and 227 in one process and 229 and 260 in another
+      (review/review-2026-10-21/outputs/out-check-a.json and out-check-b.json, 7.9 s and
+      9.1 s on 21 October 2026): all four passed on both of its routes, every wall cleared
+      by at least exactly 1/(2*10^20) and every one of the 106,133 pairs separated, none
+      touching, the 668 pairs whose bounding boxes overlap clipped to area exactly 0, the
+      two routes equal to every digit; agree_t225.py found every pose, side, least
+      clearance, least gap and pair count equal to the receipt's two routes. Its sharp
+      controls (sharp_controls_t225.py) accepted exact contact and refused 1e-30 past it on
+      both of its routes at all four counts.
+    replay_status: passed
+    verifiers:
+      - V-evand-regularized-1020-review-check
+      - V-evand-regularized-1020-review-controls
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and
+          every pair, on each of the checker's two routes
+        checked: 4
+        of: 4
+      read: [mathematics, certificate-format, specification, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-225 (c-review-t225-math,
+            think-ql4v), strong sub-agent tier, reasoning setting xhigh
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's CREDITS.md says its work was produced by Claude (Anthropic) under
+          human direction; the review's checker is Claude's too, written from a prompt of
+          its own, in a file that imports nothing from this repository or the source, and
+          its author never read the source's checkers.
+    independence_record: docs/project/reviews/review-2026-10-21-evand-regularized-views.md
+    limitations: >-
+      The review's own checker, with a reader of its own and no code of the packet's
+      routes or the source's; route F shares CPython's Fraction with the maintained routes
+      and the source's checkers, and route I uses integers alone. Its author read the two
+      20 October reviews' account of the maintained routes' method before writing it, and
+      the routes themselves only after it had run. The packet's two gross controls were
+      decided by the maintained routes, not by this checker; its own controls are the
+      review's sharp mutants and a self-test of twelve hand-built cases. Finite
+      feasibility only.
+    source_reviewed: '2026-10-21'
+  - id: E-couzo-670-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 204
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 670 2026-10-17]'
+    certificate: packing/resources/web/couzo-issue670-2026-10-17/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: 'This atom records the source author''s report of 1 exact rational certificate at 23aff0c.
+      A separate complete repository replay is retained for n = 204: 1 positive and 2 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 124236 pair decisions; summed
+      over the 3 jobs, the receipt records 10.22 route CPU seconds and 10.41 job wall seconds, the longest
+      job 3.79 seconds. In every positive squares touch the box, a least wall clearance of exactly 0, and
+      every pair clears by at least 5.47e-11. Independent review and confirmation remain pending. The source''s
+      own checkers were not run here. The two maintained routes, the sqpack rational witness verifier and
+      the independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight or optimality
+      is claimed.'
+  - id: E-couzo-672-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 227
+      - 229
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 672 2026-10-17]'
+    certificate: packing/resources/web/couzo-issue672-2026-10-17/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: 'This atom records the source author''s report of 2 exact rational certificates at
+      af8cb79. A separate complete repository replay is retained for n = 227 and 229: 2 positives and 4
+      duplicate-square and outside-container controls passed their required outcomes on both routes,
+      310542 pair decisions; summed over the 6 jobs, the receipt records 23.85 route CPU seconds and
+      24.17 job wall seconds, the longest job 4.3 seconds. At 229 squares touch the box, a least wall
+      clearance of exactly 0; at 227 every wall clears by at least 1.00e-15; and every pair clears by at
+      least 1.19e-12. Independent review and confirmation remain pending. The source''s own checkers
+      were not run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.'
+  - id: E-couzo-675-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 204
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 675 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue675-2026-10-18/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: 'This atom records the source author''s report of 1 exact rational certificate at c6da0fc.
+      A separate complete repository replay is retained for n = 204: 1 positive and 2 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 124236 pair decisions; summed
+      over the 3 jobs, the receipt records 10.07 route CPU seconds and 10.29 job wall seconds, the longest
+      job 3.61 seconds. In every positive squares touch the box, a least wall clearance of exactly 0, and
+      every pair clears by at least 1.20e-12. Independent review and confirmation remain pending. The source''s
+      own checkers were not run here. The two maintained routes, the sqpack rational witness verifier and
+      the independent rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human oversight or optimality
+      is claimed.'
+  - id: E-couzo-715-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [328, 343, 365, 404, 417, 455, 456, 458, 459, 461, 463, 496, 497, 499, 500,
+        501, 502, 503, 504, 505, 506, 509, 545, 546, 547, 548, 549, 550, 553, 554, 592, 593,
+        594, 595, 597, 598, 599, 600, 601, 602, 643, 645, 646, 647, 648, 651, 652, 653, 654,
+        694, 696, 697, 698, 700, 702, 705, 747, 748, 749, 750, 751, 752, 756, 758, 801, 802,
+        803, 804, 805, 806, 807, 808, 809, 813, 814, 815, 858, 859, 860, 863, 864, 865, 866,
+        867, 868, 869, 870, 871, 872, 873, 917, 918, 919, 923, 924, 925, 926, 927, 928, 931,
+        932, 978, 979, 980, 987, 989, 994, 995, 996]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 715 2026-10-21]'
+    certificate: packing/resources/web/couzo-issue715-2026-10-21/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records the source author's report, issue 715, of the upper bounds at or
+      below 1024 that reached this repository first through the issue: 109 exact rational
+      certificates at 6b7391de, each the explicit certificates/nN.cert of n squares, whose
+      header side rounds up at 12 places to the issue's print; the source's index calls 29
+      of them L-border constructions and 9 deletions, written out in full. A separate
+      complete repository replay is retained (devtools.couzo_715_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, the sqpack.verify predicates and the independent rational
+      corner checker's, over every wall and the pairs whose centres are closer than sqrt 2,
+      an exactly justified filter, accepted all 109 and the 30 held re-certifications, and
+      refused all 834 controls, in 115.8 positive CPU seconds; the all-pairs kernel at 343
+      and 996 agreed on every least gap and clearance. The two routes share certificate
+      parsing, half-angle conversion, the pair filter and Fraction arithmetic. The source's
+      own checker was not run here. Review and confirmation remain pending; no stage 4
+      review is owed for a beyond-horizon row. No arrangement identity, local minimum,
+      optimum or credit statement of the source's manifest is established.
+  - id: E-de-winter-666-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [464, 509, 555, 603, 654, 706, 760, 817, 875, 935, 998]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter issue 666 2026-10-17]'
+    certificate: packing/resources/web/de-winter-issue666-2026-10-17/source/square-packing-above-324/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records the source author's report, issue 666, of the upper bounds at or
+      below 1024: 11 exact rational certificates square-packing-above-324/nNNNN.cert, first
+      committed at b9cdc16b (the issue's off-branch pin b3152f52 holds the same folder) and
+      retained from the MIT-licensed successor 643dc9a, each of n squares with a header side
+      that rounds up at 12 places to the issue's print. A separate complete repository
+      replay is retained (devtools.beyond_horizon_replay, receipts/filtered-exact-replay.json):
+      the filtered two-route decision of devtools.couzo_678_replay, the sqpack.verify
+      predicates and the independent rational corner checker's, over every wall and the
+      pairs whose centres are closer than sqrt 2, an exactly justified filter, accepted all
+      11 and refused all 66 controls, in 57.1 positive CPU seconds; no square touches the
+      box or another, the least clearances lie between 1e-35 and 2.2e-11, and
+      the all-pairs kernel at 464 (107,416 pairs, 215.7 CPU seconds) agreed
+      exactly on its least gap and clearance. The two routes share certificate parsing, half-angle conversion, the pair
+      filter and Fraction arithmetic. The source's own checker, check.py, was not run here.
+      The 8 certificates above 1024 are retained and not decided. Review and confirmation
+      remain pending; no stage 4 review is owed for a beyond-horizon row. No arrangement
+      identity, local minimum or optimum is established.
+  - id: E-couzo-670-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [330, 339, 364, 370, 378, 379, 382, 403, 417, 418, 419, 421, 422, 444, 452, 458, 459,
+        460, 461, 462, 463, 501, 503, 505, 536, 546, 548, 551, 553, 598, 600, 647, 650, 651,
+        700, 701, 702, 703, 749, 753, 754, 756, 757, 758, 804, 805, 806, 809, 811, 812, 813,
+        863, 866, 867, 868, 869, 870, 871, 922, 925, 926, 927, 928, 929, 930, 931, 987, 989,
+        990, 991, 992, 993]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 670 2026-10-17]'
+    certificate: packing/resources/web/couzo-issue670-2026-10-17/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records the source author's report, issue 670, of the 72 upper bounds beyond
+      the n <= 324 corpus: exact rational certificates certificates/nN.cert at 23aff0c6, each
+      of n squares with a header side that rounds up at 12 places to the issue's print. A
+      separate complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, the sqpack.verify predicates and the independent rational
+      corner checker's, over every wall and the pairs whose centres are closer than sqrt 2,
+      an exactly justified filter, accepted all 72 and refused all 432 controls, in 76.6
+      positive CPU seconds; 60 touch the box and 10 have touching pairs, which the closed
+      contract allows, and the all-pairs kernel at 922 (424,581 pairs, 107.0
+      CPU seconds) agreed exactly on its least gap and clearance. The two routes share certificate parsing, half-angle
+      conversion, the pair filter and Fraction arithmetic. The source's own checker was not
+      run here. Review and confirmation remain pending; no stage 4 review is owed for a
+      beyond-horizon row. No arrangement identity, local minimum, optimum or credit
+      statement of the source's per-count metadata is established.
+  - id: E-couzo-672-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [330, 461, 507, 652, 653, 704, 749, 750, 753, 755, 756, 757, 758, 759, 804, 805, 811,
+        812, 813, 814, 815, 816, 817, 864, 865, 868, 869, 871, 872, 873, 874, 923, 924, 929,
+        930, 932, 933, 934, 935, 990, 991, 994, 995, 996]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 672 2026-10-17]'
+    certificate: packing/resources/web/couzo-issue672-2026-10-17/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records the source author's report, issue 672, of the 44 upper bounds beyond
+      the n <= 324 corpus: exact rational certificates certificates/nN.cert at af8cb795, each
+      of n squares with a header side that rounds up at 12 places to the issue's print. A
+      separate complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, the sqpack.verify predicates and the independent rational
+      corner checker's, over every wall and the pairs whose centres are closer than sqrt 2,
+      an exactly justified filter, accepted all 44 and refused all 264 controls, in 58.8
+      positive CPU seconds; 35 touch the box and 6 have touching pairs, which the closed
+      contract allows, and the all-pairs kernel at 996 (495,510 pairs, 221.5
+      CPU seconds) agreed exactly on its least gap and clearance. The two routes share certificate parsing, half-angle
+      conversion, the pair filter and Fraction arithmetic. The source's own checker was not
+      run here. Review and confirmation remain pending; no stage 4 review is owed for a
+      beyond-horizon row. No arrangement identity, local minimum, optimum or credit
+      statement of the source's per-count metadata is established.
+  - id: E-couzo-675-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [419, 421, 422, 458, 459, 460, 461, 462, 463, 464, 502, 545, 546, 547, 548, 549, 554,
+        592, 593, 598, 602, 603, 641, 642, 650, 652, 654, 693, 700, 701, 705, 706, 753, 755,
+        756, 758, 759, 760, 804, 805, 806, 807, 809, 811, 812, 813, 814, 816, 817, 863, 864,
+        865, 867, 868, 869, 870, 872, 873, 874, 919, 923, 924, 927, 928, 930, 931, 932, 933,
+        989, 990, 991, 992, 993, 994, 995, 996, 997, 998]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 675 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue675-2026-10-18/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records the source author's report, issue 675, of the 78 upper bounds beyond
+      the n <= 324 corpus: 76 exact rational certificates certificates/best/nN.cert at
+      c6da0fc7, each of n squares with a header side that rounds up at 12 places to the
+      issue's print, and at 992 and 995 the 993 and 996 certificates less their last square,
+      at the same side. A separate complete repository replay is retained
+      (devtools.beyond_horizon_replay, receipts/filtered-exact-replay.json): the filtered
+      two-route decision of devtools.couzo_678_replay, the sqpack.verify predicates and the
+      independent rational corner checker's, over every wall and the pairs whose centres are
+      closer than sqrt 2, an exactly justified filter, accepted all 78 rows and refused all
+      456 controls of the 76 certificates, in 90.3 positive CPU seconds; 64 touch the box and
+      8 have touching pairs, which the closed contract allows, and the all-pairs kernel at 998
+      (497,503 pairs, 105.0 CPU seconds) agreed exactly on its least gap and clearance. The two routes
+      share certificate parsing, half-angle conversion, the pair filter and Fraction
+      arithmetic. The source's own checker was not run here. Review and confirmation remain
+      pending; no stage 4 review is owed for a beyond-horizon row. No arrangement identity,
+      local minimum, optimum or credit statement of the source's per-count metadata is
+      established.

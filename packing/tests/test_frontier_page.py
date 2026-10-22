@@ -247,7 +247,7 @@ def test_a_correcting_bound_keeps_its_recency_and_names_what_it_corrects(
         assert star["tags"] == "span", n
         assert star["words"] == f"corrects {corrected[n]['credit']}", n
     assert seen == len(corrected)
-    # n = 38 was the example until the merge of 2026-10-03 put wand125's replayed
+    # n = 38 was the example until the merge of 2026-10-03 put Hosono's replayed
     # certificate (T-074) above its corrected floor, and n = 82 until the third merge that
     # day put T-076's replayed linear certificate above its own; n = 106, the least open
     # case on Karakuş's floor, still stands on it.

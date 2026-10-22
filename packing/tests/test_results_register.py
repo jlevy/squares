@@ -71,7 +71,7 @@ def test_a_dated_records_own_title_is_not_held_to_the_register(tmp_path: Path) -
 
 def test_the_uniqueness_reviews_title_keeps_its_provisional_id() -> None:
     """T-112 was registered as the provisional T-102 and renumbered when it merged with
-    main, whose T-102 is wand125's bound at n = 18. Its adversarial review, stored as its
+    main, whose T-102 is Hosono's bound at n = 18. Its adversarial review, stored as its
     reviewer wrote it, names T-102 in its title, and the synopsis quotes that title; the
     register's note on T-112 says which result the review's "T-102" is (think-d1bd)."""
     review = "docs/project/reviews/review-2026-10-06-n11-uniqueness-adversarial.md"
@@ -1616,9 +1616,15 @@ def test_results_md_lists_each_unfinished_confirmation_under_its_next_action() -
         ),
         "  - Unfinished, C4: a second review. Not priced.",
     ]
+    # A `what` that ends in its own full stop keeps one: no "review.. Not priced.".
+    stopped = _unfinished(what="A second review.", rung="C4", link=None, estimated_cost=None)
+    assert render_results.next_action(
+        {**record, "next_rung": "First.", "unfinished_confirmations": [stopped]}
+    ) == ["- **T-999** — First.", "  - Unfinished, C4: A second review. Not priced."]
     committed = render_results.OUTPUT.read_text(encoding="utf-8")
     assert "  - Unfinished, C3 (think-nd7g): a complete replay of all 201 angles" in committed
     assert "About 11.24 CPU-hours, up to about 23 (priced 2026-10-10)." in committed
+    assert ".. Not priced." not in committed
 
 
 #: The regularizer of T-146's certificates, and the review its measurements come from.
@@ -1878,6 +1884,11 @@ def test_results_md_says_whose_packing_each_regularization_is() -> None:
     )
     still = _regularization(changes={"straightened": 0}, identity={"basis": "source-claim"})
     assert result_credit.regularization_sentence(still, sources).endswith(
+        "(fewest; solved to its side; the regularizer changed no angle, as its source "
+        "reports; identity: the source\u2019s claim)."
+    )
+    own = {**still, "by": "project"}
+    assert result_credit.regularization_sentence(own, sources).endswith(
         "(fewest; solved to its side; no angle changed; identity: the source\u2019s claim)."
     )
     committed = render_results.OUTPUT.read_text(encoding="utf-8")

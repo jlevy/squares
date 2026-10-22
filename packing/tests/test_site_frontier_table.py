@@ -175,8 +175,11 @@ def test_every_cell_is_centred_on_its_row(laid: dict[int, dict[str, Any]], width
             assert cell["above"] == pytest.approx(cell["below"], abs=2), (row["id"], index)
     # A tall row: the status chip of n = 12 sits well clear of the top of its cell.
     tall = table["rows"][ROWS.index("n-12")]
-    assert tall["height"] > table["rows"][ROWS.index("n-1")]["height"] + 20
-    assert tall["cells"][column("Status")]["above"] > 20
+    short = table["rows"][ROWS.index("n-1")]
+    assert tall["height"] > short["height"] + 20
+    # Centred, the Status cell has more than half the row's extra height above it; set to
+    # the top, it would have only its padding.
+    assert tall["cells"][column("Status")]["above"] > (tall["height"] - short["height"]) / 2
 
 
 def test_the_table_fits_its_track_at_1280_and_scrolls_in_its_wrap_below(
@@ -248,7 +251,7 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
         long_name = laid[width]["rows"][ROWS.index("n-88")]["cells"][
             column("Best known packing")
         ]
-        assert "Nate Chaoweeraprasit (itsnaka) 2026" in long_name["notes"], width
+        assert "Chaoweeraprasit 2026" in long_name["notes"], width
         assert long_name["broken"] == [], width
 
 
