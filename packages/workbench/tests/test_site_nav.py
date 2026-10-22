@@ -81,7 +81,9 @@ def test_the_page_carries_the_sites_head_at_the_address_it_is_served_at(page: st
 def test_the_bar_has_one_explanations_entry_reaching_the_site_root(page: str) -> None:
     """The bar is the site's partial, so the workbench carries its Explanations entry, which
     stands for the explainer and the tutorial, and no entry for either of them."""
-    links = re.findall(r'<a data-page="(\w+)"[^>]* href="([^"]+)"([^>]*)>(.*?)</a>', page)
+    links = re.findall(
+        r'<a data-page="(\w+)"[^>]* href="([^"]+)"([^>]*)>(.*?)</a>', page, flags=re.DOTALL
+    )
     entries = [
         (key, href, "GitHub" if key == "github" else label)
         for key, href, _attrs, label in links

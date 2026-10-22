@@ -532,13 +532,13 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     address = "github.com/Queuingtheorydotcom/11SquaresOptimal"
     author_profile = render_overview.canonical_url("profiles/manasseh-ahmed.html")
     oversight_profile = render_overview.canonical_url("profiles/joshua-levy.html")
-    oversight = f'<a href="{oversight_profile}" target="_blank" rel="noopener noreferrer">'
+    oversight = f'<a data-profile-name="full" href="{oversight_profile}" target="_blank" rel="noopener noreferrer">'
     block = html.split('<div class="credits centred">', 1)[1].split("</div>", 1)[0]
     assert [line.strip() for line in block.strip().splitlines()] == [
         (
             '<span class="credits-source">From the original proof by '
-            f'<a href="{author_profile}" target="_blank" rel="noopener noreferrer">'
-            "<strong>Ahmed</strong></a></span>"
+            f'<a data-profile-name="full" href="{author_profile}" target="_blank" rel="noopener noreferrer">'
+            "<strong>Manasseh Ahmed</strong></a></span>"
         ),
         (
             f'<span class="credits-source"><a href="https://{address}" target="_blank" '
@@ -546,7 +546,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
         ),
         (
             f'<span class="credits-own">Human oversight: {oversight}'
-            "<strong>Levy</strong></a></span>"
+            "<strong>Joshua Levy</strong></a></span>"
         ),
         "<span>Agents: <strong>GPT-6 Astra</strong> and <strong>GPT-6 Sol</strong></span>",
         (
