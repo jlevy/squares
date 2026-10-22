@@ -535,6 +535,21 @@ header interaction. Link the shared stylesheet and behavior implementation back 
 entry, and include representative paper, record, profile, and workbench pages in visual
 review.
 
+### Profile, popover, and footer consistency follow-ups
+
+These five follow-ups belong to the navigation and consistency implementation after PR
+#733 has merged. They remain open under `think-7kbb`; this draft does not implement or
+claim them. Document their shared components and states in the existing
+[Design System](../../../../packing/devtools/templates/paper-design.md).
+
+| Bead | Requirement and acceptance |
+| --- | --- |
+| `think-2abe` | Put Accounts second, immediately after Name, in the profile directory. Preserve the relative Records → Results → Credits order and existing sorting and responsive behavior. |
+| `think-aefa` | Set the numeric total in each profile-table tally in bold, never italic; keep its result, record, or credit label in regular weight. Preserve muted significance parentheticals and blank zero cells through the shared tally component. |
+| `think-mpxs` | Give shared profile, result, and case popovers roughly 60% more width on wide screens where space permits. Use one responsive width rule capped by the normal design-system maximum text width and the viewport minus its gutters. Preserve narrow-screen fit, focus, controls, scrolling, and freedom from horizontal overflow. |
+| `think-klec` | Use diagonal outward arrows for the shared expand action. Prefer Lucide `maximize-2` if available in the existing pinned icon set; otherwise use a coherent shared equivalent. Preserve shared icon sizing, the accessible Open full page label, and identical header/footer destinations wherever an overlay opens a full page. |
+| `think-vvy9` | Remove the Profiles footer link. Put “Formatted and typeset with Flowmark and KPress” on its own line and the displayed version on the bottom line. Apply the same layout across shared footer variants, retaining project/repository attribution and the existing version provenance. |
+
 ### Components and interfaces
 
 Use one declared hierarchy for top-level groups, menu entries, page-family parents, and
@@ -586,6 +601,9 @@ Visible breadcrumbs and metadata must use that lookup.
 - [ ] Audit collection buttons across Overview and all landing pages for the shared View
   All … wording, right-arrow component, spacing, and focus styling; retain distinct
   detail-link and contribution-action labels.
+- [ ] Complete the five tracked profile, popover, and footer follow-ups above and
+  document their tally, width, expand-action, and footer conventions in the Design
+  System.
 - [ ] Keep the full record pages, download editions, compatibility forwarders, and
   query/fragment behavior intact.
 
@@ -600,8 +618,9 @@ Visible breadcrumbs and metadata must use that lookup.
 - [ ] Record any remaining Frontier separation need as a distinct decision with reader
   or performance evidence; do not expand this plan merely to create more pages.
 
-Implementation phase beads should be created after plan review, using these three phases
-as the initial scope.
+Create broader implementation phase beads after plan review, using these three phases as
+the initial scope. The five consistency follow-ups are already tracked above;
+implementation starts only after PR #733 has merged.
 The planning bead remains open while the hierarchy is being reviewed; drafting this
 document does not authorize implementation.
 
@@ -628,6 +647,16 @@ Include representative direct loads of a paper, advanced tutorial, profile, resu
 workbench. Verify menu focus and dismissal, sticky header interaction, current-parent
 indication, visible/structured breadcrumb agreement, and the absence of a breadcrumb on
 About itself.
+
+For the profile/popover follow-ups, check Accounts immediately after Name while Records,
+Results, and Credits retain their relative order.
+Compare nonzero and zero tallies, including significance parentheticals.
+Exercise each shared popover at wide and narrow widths and after scrolling; verify its
+text-width cap, viewport gutters, focus, and controls.
+Check that both outward-arrow actions have the Open full page accessible name and the
+same destination.
+Compare shared footer variants: no Profiles link, the formatting credit
+on its own line, and the provenance-backed displayed version on the bottom line.
 
 Retain regression coverage for `frontier.html` and case aliases, old contributor
 addresses, old paper downloads, legacy homepage and About fragments, result filters,
