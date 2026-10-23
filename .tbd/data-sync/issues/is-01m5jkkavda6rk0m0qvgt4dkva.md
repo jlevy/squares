@@ -5,7 +5,7 @@ title: "Import Mishapolk: 5,468 certificates 328–10000 at 814fbe9, '#715 resol
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: c-lane-732-import-1023
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-22T20:07:20.685Z
-updated_at: 2026-10-23T03:09:08.409Z
+updated_at: 2026-10-23T04:09:47.540Z
 started_at: 2026-10-23T02:12:17.764Z
 ---
 Issue #732 (https://github.com/jlevy/squares/issues/732), opened 2026-10-22T19:55:03Z by Mishapolk (Mykhailo Polkovskyi): "328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof". Source Mishapolk/square-packing-records@814fbe9129b7abb301923cc50de621697a53940f (upper_bounds.json, certified_bounds.json, certificates/manifest.json, certificates/census.json with digests in the issue).
@@ -140,3 +140,4 @@ holds decide 369, 376, 985 and 499)
 - Requests: #732's acknowledgement and the author's 01:52:47Z comment (read as edited 01:53:19Z) recorded, n499/n985 split out; the four stage 7 replies after #730 (#715, #686 correction of 6350116497, #607, #624) recorded.
 - Stage 7 reply drafted in the coordinator scratchpad replies/732-rows/ (not posted).
 - Not mine, for the owner/coordinator: Mishapolk's new comment on #719 (issuecomment-6355484781, 01:52:40Z) answers #719's open questions (verify.py called as a module; 204 seeded from Couzo's #678 n204.cert in Couzo's frame) and is unread in #719's requests entry.
+2026-10-23 03:5xZ c-lane-732-import-1023: #742 at head e5c4db328, after merging main 6c70d843f (#731) and 31584003e (#737); hosted packing-required and pages-required green there (and at 0e08ecffe). The first run at daf940b42 failed suite-d (test_upper_bound_reports_715 now expects #732's 30 supersessions) and suite-a (a builds-on-project credit names Levy), fixed in 1f3a9b178, and suite-c on a 45.57 s call of test_upper_bound_packets::test_the_records_are_what_the_apply_tool_writes, which takes 11.9 s on main and 11.6 s on the branch locally (runner). Also recorded: #728's final reply (state closed, closed 2026-10-23) and #526's correction; check_requests --github shows no reply missing (unread: #719 6355484781 and #734 6355791263, not this import's). The survey's no-change record re-measured against 31584003e (v0.2.7, 43 files byte-identical). At merge: if #736's landings.yaml is on main, merge main and run stamp_landed --apply, then release_pin --update. Stage 7 reply draft: coordinator scratchpad replies/732-rows/732.md (DATE to fill).
