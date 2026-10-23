@@ -4509,6 +4509,7 @@ sources:
     - 55
     - 68
     - 69
+    - 70
     - 71
     - 83
     - 84
@@ -4531,6 +4532,7 @@ sources:
     - 132
     - 146
     - 152
+    - 153
     - 155
     - 156
     - 171
@@ -4547,6 +4549,7 @@ sources:
     - 204
     - 205
     - 206
+    - 207
     - 208
     - 209
     - 210
@@ -4593,8 +4596,10 @@ sources:
   represented_by:
   - frontier/results.yaml
   - resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json
+  - resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/algebraic-claims.json
   evidence:
   - E-pingyou-574-certificate-report
+  - E-pingyou-574-algebraic-report
   - E-pingyou-574-exact-feasibility
   - E-pingyou-574-algebraic-feasibility
   notes: >-
@@ -4606,10 +4611,11 @@ sources:
     have full outcomes. The house rule of 16 October 2026 makes T-174 the house at the 41
     counts where it is smallest, which ended the hold of 15 October and RP-3's wait: the
     adoption of 17 October 2026 (think-3mry) moved 37 rational counts to it, the selected
-    overrides below. At 236 Evan Daniel's issue 659 reports a smaller side, whose import
-    adopts it; T-174 stays staged there under think-3mry. The algebraic certificates at
-    70, 153 and 207 wait under think-ot5c. These four counts are staged in
-    devtools.select_houses.PENDING_ADOPTION. It was the smallest at 63 counts until the
+    overrides below. At 236 Evan Daniel's issue 659 reports a smaller side, which the
+    adoption of 19 October 2026 took the count to. The adoption of 23 October 2026
+    (think-ot5c), once the writer took an algebraic side, moved the algebraic certificates
+    at 70, 153 and 207 to it under E-pingyou-574-algebraic-report, and the scope holds
+    those three of the algebraic report's counts. It was the smallest at 63 counts until the
     adoption of 16 October 2026 (PR #657) took ten of them below it and T-193's exact
     sides (PR #658), staged under think-ot5c, twelve more.
 - id: dostashev-merged-bands-2026-10-13
