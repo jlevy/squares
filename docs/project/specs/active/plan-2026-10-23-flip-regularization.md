@@ -1,4 +1,4 @@
-# Feature: Canonical Orientation of Drawn Packings
+# Feature: Flip Regularization
 
 **Date:** 2026-10-23 (last updated 2026-10-23)
 
@@ -10,9 +10,10 @@
 
 Packings arrive in whatever pose their source published, so neighbouring tiles of the
 atlas are rotated or mirrored against one another and the figure reads as chaotic.
-This adds one stage to the regularization process: each count’s drawn picture is turned
-by one of the container’s eight symmetries into a canonical pose, chosen from where its
-squares lie. The stage is drawing only; no certificate, witness or view changes.
+This adds one stage to the regularization process, which the owner named flip
+regularization: each count’s drawn picture is turned by one of the container’s eight
+symmetries into a canonical pose, chosen from where its squares lie.
+The stage is drawing only; no certificate, witness or view changes.
 
 ## Goals
 
@@ -108,18 +109,18 @@ pose. Deciding all 324 takes about 14 CPU-seconds, nearly all of it reading witn
 
 ### Components
 
-- `packing/devtools/canonical_orientation.py`: the eight operations, the rule, and the
-  map applied to exact corners.
+- `packing/devtools/flip_regularization.py`: the eight operations, the rule, and the map
+  applied to exact corners.
 - `devtools.build_known_best_atlas.frame_from_witness`: takes an operation and maps the
   exact corners before the frame is built, so colours, contacts and walls are computed
   on the oriented picture.
-- `devtools.default_drawings`: decides each count’s orientation on its drawn picture and
-  records it in `states[].orientation`; `--check` decides it again.
+- `devtools.default_drawings`: decides each count’s pose on its drawn picture and
+  records it in `states[].flip_regularization`; `--check` decides it again.
 - Every renderer of the default picture reads the recorded operation.
 
 ### API Changes
 
-`default-drawings.json` gains `states[].orientation`:
+`default-drawings.json` gains `states[].flip_regularization`:
 `{rotate, flip, decided_by, quadrants}`. The pose is stated as the owner’s two steps:
 `rotate` is 0, 90, 180 or 270 degrees counter-clockwise about the container’s centre,
 then `flip` says whether to mirror across the upper-left to lower-right diagonal.
