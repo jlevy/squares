@@ -5,7 +5,7 @@ title: "Flip regularization: canonical pose stage for drawn packings (quadrant-w
 kind: feature
 status: in_progress
 priority: 2
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-10-23-flip-regularization.md
 delegate: claude-orientation-coordinator-u2p5tx
 labels: []
@@ -19,11 +19,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:38:14.228Z
-updated_at: 2026-10-23T18:15:29.049Z
+updated_at: 2026-10-23T18:19:04.549Z
 started_at: 2026-10-23T16:38:17.920Z
 ---
 Owner request 2026-10-23: add a display-only stage to the regularization process that rotates/reflects each drawn (default) picture by one of the container's 8 symmetries so the heaviest quadrant (filled area) is upper-left and the heavier of its neighbours upper-right; deterministic tie-breaks; floating point is fine. Run it across n = 1..324, re-render the default-picture surfaces, document it in the regularization policy and process guide, PR with before/after screenshots. Workflow W7 pipeline-improvement.
 
 ## Notes
 
-2026-10-23: design settled and measured (quadrants decide 252/324, grid-4 51, grid-8 18, grid-16 3; 268 poses non-identity). Docs committed in 820112576 (policy section 13, process guide step 5, atlas README, synopsis, plan). Lane A (think-dwl4) implementing devtools.canonical_orientation; lanes B (think-5j9y, record) and C (think-z7uv, renderers) follow. Validation pending.
+2026-10-23 evening: owner moved the heaviest quadrant to the lower right (keeps n=11; measured 252/324 published poses kept vs 56) and asked for a separate fast stage. Docs rewritten (6a73014a2). Lane D (think-1ub3): separate stage from retained SVGs, own record + check, default_drawings back to main. Lane E (think-6kps): posters map exact corners pre-scalar; site reads the new record. Fable review of the first version: nothing blocking; findings routed. Still to do: integrate D/E, regenerate record, re-pin, cut infographics v0.7.0, paper no-change re-verify, screenshots, Fable round 2, PR.
