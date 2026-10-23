@@ -694,6 +694,15 @@ PUBLICATION_STATUS = ""
 #: Both retained 1-100 and 1-324 graphics, their PDFs and PNGs share this history.
 INFOGRAPHIC_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.0",
+        first_published="October 23, 2026",
+        result_scope=(
+            "Draw every atlas tile in its canonical pose by flip regularization "
+            "(regularization policy, section 13): the heaviest quadrant lower right, "
+            "keeping the published pose of 252 counts and turning 72."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.6.4",
         first_published="October 20, 2026",
         result_scope=(
@@ -1413,6 +1422,17 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="infographics",
+        previous_version="v0.6.4",
+        version="v0.7.0",
+        impact="minor",
+        reason=(
+            "Draw every atlas tile in its canonical pose by flip regularization "
+            "(regularization policy, section 13): the heaviest quadrant lower right, "
+            "keeping the published pose of 252 counts and turning 72."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:square-packing-methods-survey",
         previous_version="v0.2.6",
@@ -2529,6 +2549,50 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_threshold_bound_review and render_packing_methods write every file "
             "byte-identical. No PDF was printed; "
             "each prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/build_known_best_atlas.py",
+            "packing/devtools/flip_regularization.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/render_case_pages.py",
+            "packing/devtools/render_frontier_page.py",
+            "packing/devtools/render_regularized_atlas.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Flip regularization (think-l2i6, regularization policy section 13), which "
+            "draws each count's default picture in its canonical pose on the posters and "
+            "the site from its own record and check, against main 7cd0a94bf (#747): "
+            "rendered at link revision 7cd0a94b into empty site directories, once from "
+            "main and once from this branch after merging it (69 files each), "
+            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write all eight papers/ files byte-identical, also "
+            "after review round 2 at 140e9ece1. The seven others that differ are the "
+            "atlas posters and their exports, which the explainer's build copies to the "
+            "site root and the papers link by address: infographics v0.7.0's own outputs. "
+            "Measured before at 6b5b479dd against main 7335d0098, with the same outcome. "
+            "No PDF was printed; each prints from that HTML. Retain v0.4.21, v0.1.11, "
+            "v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
