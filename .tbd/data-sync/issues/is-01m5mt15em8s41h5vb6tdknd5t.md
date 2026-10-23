@@ -5,7 +5,7 @@ title: "Flip regularization: canonical pose stage for drawn packings (quadrant-w
 kind: feature
 status: in_progress
 priority: 2
-version: 12
+version: 13
 spec_path: docs/project/specs/active/plan-2026-10-23-flip-regularization.md
 delegate: claude-orientation-coordinator-u2p5tx
 labels: []
@@ -20,11 +20,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:38:14.228Z
-updated_at: 2026-10-23T19:10:48.662Z
+updated_at: 2026-10-23T19:50:28.153Z
 started_at: 2026-10-23T16:38:17.920Z
 ---
 Owner request 2026-10-23: add a display-only stage to the regularization process that rotates/reflects each drawn (default) picture by one of the container's 8 symmetries so the heaviest quadrant (filled area) is upper-left and the heavier of its neighbours upper-right; deterministic tie-breaks; floating point is fine. Run it across n = 1..324, re-render the default-picture surfaces, document it in the regularization policy and process guide, PR with before/after screenshots. Workflow W7 pipeline-improvement.
 
 ## Notes
 
-2026-10-23 evening: owner moved the heaviest quadrant to the lower right (keeps n=11; measured 252/324 published poses kept vs 56) and asked for a separate fast stage. Docs rewritten (6a73014a2). Lane D (think-1ub3): separate stage from retained SVGs, own record + check, default_drawings back to main. Lane E (think-6kps): posters map exact corners pre-scalar; site reads the new record. Fable review of the first version: nothing blocking; findings routed. Still to do: integrate D/E, regenerate record, re-pin, cut infographics v0.7.0, paper no-change re-verify, screenshots, Fable round 2, PR.
+PR https://github.com/jlevy/squares/pull/761 (draft, S2) opened at eee8416d9. Local: records and edit tiers pass; 1196/1197 affected tests + the fixed one; papers byte-identical; infographics v0.7.0 cut. Waiting on hosted CI before ready-for-review; owner reviews the turned counts. Follow-up: think-rkg1 (registry dates).
