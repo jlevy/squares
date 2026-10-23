@@ -5,7 +5,7 @@ title: "Flip regularization: canonical pose stage for drawn packings (quadrant-w
 kind: feature
 status: closed
 priority: 2
-version: 15
+version: 16
 spec_path: docs/project/specs/active/plan-2026-10-23-flip-regularization.md
 delegate: claude-orientation-coordinator-u2p5tx
 labels: []
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:38:14.228Z
-updated_at: 2026-10-23T20:48:44.140Z
+updated_at: 2026-10-23T22:22:22.474Z
 started_at: 2026-10-23T16:38:17.920Z
 closed_at: 2026-10-23T20:48:44.136Z
 close_reason: "Merged in https://github.com/jlevy/squares/pull/761 (merge 77aba4c02, 2026-10-23 20:22 UTC). Flip regularization: heaviest quadrant lower right, keeps 252/324 published poses, own record + 1.5 s check; posters (infographics v0.7.0) and site canonical; Original/As published unchanged. Deployed site: check_published_site --commit 77aba4c02 passed 5710/5710. Follow-up: think-rkg1 (registry dates)."
@@ -31,4 +31,4 @@ Owner request 2026-10-23: add a display-only stage to the regularization process
 
 ## Notes
 
-PR https://github.com/jlevy/squares/pull/761 ready for review (S2): hosted CI green on eee8416d9 (71 runs, none failed), mergeable/clean. Waiting on the owner's review; follow-up think-rkg1.
+Post-merge: main's integration suites showed one failure from #761 (test_site_drawing_hover pinned atlas/house/n-11.svg); fixed in https://github.com/jlevy/squares/pull/762 (e48d696b1). Other main failures (test_site_ladders, test_site_text_tokens, test_site_wide_blocks) predate #761 (same on 7cd0a94bf). Snapshot pre-release pr-761-snapshots and its tag deleted after merge, as planned; PR comment updated.
