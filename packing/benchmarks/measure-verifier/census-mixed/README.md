@@ -21,7 +21,9 @@ Load is given only where recorded.
 *Control* is the status of the `--control` receipt on the certificate itself, where one
 is kept: the original verified again and a near-threshold mutant refused at its
 least-bound direction, and the 99/100 mutant refused at one direction at least, every
-direction of the net run (v2), or at that direction alone (v1).
+direction of the net run (v2), or at that direction alone (v1). `CONTROL_FAILED (kept)`
+marks a certificate whose only receipt failed closed, kept as
+`CERTIFICATE.control-failed-vN.json`; `-` marks one with no receipt.
 
 | Certificate | n | Format | Status | Directions | Nodes | Least certified bound | Exact leaf | CPU s, all directions | Load | Replayed directions | Authors’ CPU s | Ours, same directions | Ratio | Control |
 | --- | ---: | --- | --- | ---: | ---: | --- | --- | ---: | ---: | --- | ---: | ---: | ---: | --- |
@@ -34,7 +36,7 @@ direction of the net run (v2), or at that direction alone (v1).
 | `mixed_n20_L4905` | 20 | M | VERIFIED | 832 | 139,374,489 | 1.000000000154736 | clears | 1420.5 | 7.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n20_L49125` | 20 | M | VERIFIED | 2073 | 410,012,470 | 1.0000000001231197 | clears | 5987.4 | 1.1 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n26_L5545` | 26 | M | VERIFIED | 832 | 234,384,519 | 1.0000000003495713 | clears | 2235.6 | 5.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
-| `mixed_n26_L5555` | 26 | M | VERIFIED | 2073 | 663,387,112 | 1.0000000000340534 | clears | 6115.2 | 1.0 | none: first complete check here | - | - | - | - |
+| `mixed_n26_L5555` | 26 | M | VERIFIED | 2073 | 663,387,112 | 1.0000000000340534 | clears | 6115.2 | 1.0 | none: first complete check here | - | - | - | CONTROL_FAILED (kept) |
 | `mixed_n27_L56435` | 27 | M | VERIFIED | 832 | 215,026,151 | 1.0000000000168654 | clears | 2824.1 | 5.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n27_L5655` | 27 | M | VERIFIED | 2073 | 648,972,154 | 1.0000000000149065 | clears | 9257.6 | 1.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n28_L5735` | 28 | M | VERIFIED | 416 | 114,964,701 | 1.0000000000381999 | clears | 1540.9 | 5.4 | none: first complete check here | - | - | - | CONTROLS_REFUSED |

@@ -249,6 +249,50 @@ def test_every_entry_the_verifier_decides_has_a_verified_case_and_a_refused_cont
         assert controls()[name]["status"] == "CONTROLS_REFUSED", evidence_id
 
 
+def failed_controls() -> dict[Path, dict[str, Any]]:
+    """Each control receipt kept after it failed closed, `CERT.control-failed-vN.json`,
+    outside the receipts `controls()` reads."""
+    return {
+        path: json.loads(path.read_text(encoding="utf-8"))
+        for folder in (FOLDER, RECTANGLES)
+        for path in sorted(folder.glob("*/*.control-failed-v*.json"))
+    }
+
+
+def test_each_failed_control_receipt_is_kept_as_it_failed_and_decides_nothing() -> None:
+    """A receipt kept after its control failed closed (n96's v1 of 3 October, n26's v2 of
+    23 October) says `CONTROL_FAILED`, names its own certificate and packet and the
+    candidate its census row read, and has the kind of a control receipt. Where no
+    passing receipt was written beside it, no evidence entry the verifier decides rests on
+    its certificate (A6 of PR #745's review A)."""
+    failed = failed_controls()
+    assert {path.name for path in failed} >= {
+        "mixed_n96_L997.control-failed-v1.json",
+        "mixed_n26_L5555.control-failed-v2.json",
+    }
+    for path, receipt in failed.items():
+        name = path.name.split(".control-failed-v", 1)[0]
+        assert receipt["kind"] in KINDS, path.name
+        assert receipt["status"] == "CONTROL_FAILED", path.name
+        assert receipt["certificate"] == name, path.name
+        assert receipt["packet"] == path.parent.name, path.name
+        assert receipt["candidate_sha256"] == row_of(name)["candidate_sha256"], path.name
+        if name not in controls():
+            assert name not in cited().values(), path.name
+
+
+def test_the_census_view_marks_a_failed_control_as_kept() -> None:
+    """The generated view tells n26's failed control from a certificate with none."""
+    view = (FOLDER / "README.md").read_text(encoding="utf-8")
+    rows = {
+        line.split("|")[1].strip().strip("`"): line
+        for line in view.splitlines()
+        if line.startswith("| `")
+    }
+    assert rows["mixed_n26_L5555"].rstrip(" |").endswith("CONTROL_FAILED (kept)")
+    assert rows["mixed_n37_L644"].rstrip(" |").endswith("-")
+
+
 def net_problems(
     raw: dict[str, Any], premises: dict[str, Any], source: census.ReviewedSource | None
 ) -> list[str]:
