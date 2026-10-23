@@ -26128,6 +26128,25 @@ occurrences:
     which the retained couzo-issue715-2026-10-21 index credits after PingYou Ltd's
     (BuddenPing's) squares; the prior reviewed corporate identity is retained. No individual
     is inferred.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel exact and local reports 2026-10-12]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel exact and local reports
+    2026-10-12]] /authors/0 span 0:6. The evand/square-packing reports at ad86d42 and the
+    exact-data-2026-10-12 release are the repository whose LICENSE, retained in
+    evand-exact-and-local-reports-2026-10-12, names Evan Daniel. Keep the source-author
+    role distinct from each configuration's case credit.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
