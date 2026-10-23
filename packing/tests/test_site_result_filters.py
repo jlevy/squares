@@ -63,7 +63,7 @@ def browser() -> Iterator[Any]:
 @pytest.fixture(scope="module")
 def pages(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
     root = tmp_path_factory.mktemp("site")
-    written = site_renders.write(root, "index.html", "recent-results.html", *PAGES)
+    written = site_renders.write(root, "index.html", *PAGES)
     crawl, _ = site_urls.crawl_files()
     for row in RETIRED:
         target = root / row.path
@@ -375,19 +375,18 @@ def test_the_added_filter_shows_what_reached_the_site(
 
         page.goto(pages[name].as_uri(), wait_until="load")
         assert not page.locator(added_since).is_visible()
-        page.goto(pages["recent-results.html"].as_uri(), wait_until="load")
-        recent_rows = page.locator("[data-recent-results] tbody tr[data-added]")
-        assert recent_rows.count() == len(overview.results)
+        all_rows = page.locator(".site-results tbody tr[data-added]")
+        assert all_rows.count() == len(overview.results)
         first = (reference - timedelta(days=overview_sections.ADDED_DAYS)).isoformat()
         listed = sorted(
-            row.get_attribute("data-result")
-            for row in recent_rows.all()
+            row.get_attribute("id")
+            for row in all_rows.all()
             if (row.get_attribute("data-added") or "") >= first
         )
         newest = reference.isoformat()
         newest_listed = sorted(
-            row.get_attribute("data-result")
-            for row in recent_rows.all()
+            row.get_attribute("id")
+            for row in all_rows.all()
             if row.get_attribute("data-added") == newest
         )
         page.goto(pages[name].as_uri() + f"?added-since={first}#all-results", wait_until="load")
