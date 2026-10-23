@@ -5,12 +5,12 @@ title: "Home page 'Recently added' section: every result, house change and beyon
 kind: feature
 status: open
 priority: 1
-version: 3
+version: 4
 labels:
   - site
 dependencies: []
 created_at: 2026-10-22T20:33:34.936Z
-updated_at: 2026-10-23T01:45:52.850Z
+updated_at: 2026-10-23T02:44:14.042Z
 ---
 Owner, 22 Oct: 'It should be clear if you come to the site and see all the things that have recently merged now.' c-lane-home-recent-1022, branch claude/home-recently-added.
 
@@ -24,3 +24,5 @@ Owner, 22 Oct: 'It should be clear if you come to the site and see all the thing
 - Tests: tests/test_home_recent.py (8), test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts (1280/390, light/dark, no-JS).
 
 2026-10-23 (c-lane-home-recent-1022): review A fixes at e07648d0e. Houses and rows now dated by the day main first held them via packing/frontier/landings.yaml (schema Landings/v1), written by stamp_landed at the merge step (branch_additions) and backfilled from main's first-parent history; no render reads Git (OR-18). One window for all kinds (arrival_reference); intro names the days shown (16-23 Oct). Render no longer reads upper_bound_houses (removed from RENDER_INPUTS and pages.yml). Edit tier passed at 52ff7795a.
+
+2026-10-23 02:40Z (c-lane-home-recent-1022): #736 at 2c50762d4 (main fcf2f96a5 #730 merged; release.py conflict resolved, re-pinned; #730's 11 row sources backfilled to 23 Oct). Hosted 31/31 pass, mergeable; edit tier passed. Recently Added 16-23 Oct: 42 results, 58 house counts, 1,195 rows from 22 sources; 27,146 bytes.
