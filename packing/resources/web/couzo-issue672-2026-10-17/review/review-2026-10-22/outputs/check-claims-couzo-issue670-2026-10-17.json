@@ -1,0 +1,68 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/670",
+  "source": "https://github.com/franciscouzo/square-packing",
+  "revision": "23aff0c6f992271e1ad13a148d44f392c4b386c0",
+  "read_on": "2026-10-22",
+  "read_at_main": "d7923b8d8a8def4d6b738608910211d8d4f295bc",
+  "horizon": 324,
+  "results": [
+    {
+      "n": 204,
+      "certificate": "certificates/n204.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "14.808644417690",
+      "printed_in": "https://github.com/jlevy/squares/issues/670",
+      "exact_side": "45044217780850246618141/3041751595240000000000",
+      "ceiling": "14.8086444176899239",
+      "first_committed": "2026-10-17T18:00:09Z",
+      "grid_side": "15",
+      "case": {
+        "source_key": "[Couzo issue 678 2026-10-18]",
+        "holders": "Francisco Couzo",
+        "result": "T-223",
+        "reported_value": "14.8086428419812473",
+        "verified_value": "14.8086428419812473",
+        "evidence": [
+          "E-couzo-678-filtered-exact-feasibility",
+          "E-couzo-678-source-checker-replay",
+          "E-couzo-678-review-exact-feasibility"
+        ],
+        "exact_side": "141654921219558922887849/9565692327860000000000",
+        "relation": "above",
+        "difference": "-91695088637838898862866939/58192919795686368190772800000000"
+      },
+      "pending": [
+        {
+          "report": "T-225 (evand/square-packing@0075967)",
+          "url": "https://github.com/evand/square-packing/tree/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs",
+          "holders": "Evan Daniel, after the packing's finder",
+          "result": "T-225",
+          "exact_side": "14808642840591493923068442871459/1000000000000000000000000000000",
+          "relation": "above",
+          "difference": "-119928541623811819951500919512093621/76043789881000000000000000000000000000000"
+        },
+        {
+          "report": "#675",
+          "url": "https://github.com/jlevy/squares/issues/675",
+          "holders": "Francisco Couzo",
+          "exact_side": "101859759444979981360793459/6878398651426000000000000",
+          "relation": "above",
+          "difference": "-26395221785795540042042788271/523059501766792505020306000000000000"
+        },
+        {
+          "report": "T-186",
+          "url": "https://github.com/Mishapolk",
+          "holders": "Daniil Ostashev, improved by PingYou Ltd and Mishapolk",
+          "result": "T-186",
+          "exact_side": "740433161719347828316145172430104761481126338872178671530915993369069066972891707484286255665843382616078162213/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "relation": "below",
+          "difference": "71544647770676150355532167400640888393660410757414586692395219877413463293726902379135109639936311335859598005966653/3802189494050000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "smallest": "T-225 (evand/square-packing@0075967)"
+    }
+  ]
+}

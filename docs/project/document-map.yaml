@@ -9,6 +9,8 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-22-mishapolk-719.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-21-profile-coverage.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md, role: review, authority: record, lifecycle: retained}
   - {path: attribution.md, role: conventions, authority: definitive, lifecycle: maintained}
@@ -181,6 +183,7 @@ documents:
   - {path: packing/cases/regularized_drawings/think-ip1p-2026-10-19/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-xu4d-2026-10-20/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-4h23-2026-10-23/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md, role: review, authority: record, lifecycle: retained}

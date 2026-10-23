@@ -1,0 +1,2 @@
+T-229@204:cert: n=204 evand-cert accepted=True agree=True pairs=20706/20706 wall=4.999821e-13 gap=9.9808572916e-13 pair=[11, 17] dist=9.9808572916e-13 touch=0 overlap=0 Zcpu=0.121 Ccpu=3.915
+T-229@204:fact: n=204 witness-v2-center-basis accepted=True agree=True pairs=20706/20706 wall=4.999821e-13 gap=9.9808572916e-13 pair=[11, 17] dist=9.9808572916e-13 touch=0 overlap=0 Zcpu=0.066 Ccpu=2.793
