@@ -1,0 +1,38 @@
+{
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/user/wt-sqvc/packing/.venv/bin/python3",
+    "-I",
+    "/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/review/programs/probe_suite.py",
+    "--density",
+    "/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/cand/c6715.json"
+  ],
+  "cwd": "/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/review/programs",
+  "started_utc": "2026-10-23T07:23:47Z",
+  "exit_status": 0,
+  "wall_seconds": 2261.544,
+  "cpu_user_seconds": 622.683,
+  "cpu_system_seconds": 1.028,
+  "max_rss_kib": 25368,
+  "load_average": [
+    26.09228515625,
+    31.04248046875,
+    28.47119140625
+  ],
+  "digests": {},
+  "stdout_lines": 160,
+  "stdout_head": [
+    "{",
+    "  \"clean_runs\": [",
+    "    {"
+  ],
+  "stdout_tail": [
+    "  \"mutations_detected\": 9,",
+    "  \"mutations_total\": 10",
+    "}"
+  ],
+  "stderr_lines": 0,
+  "stderr_tail": []
+}

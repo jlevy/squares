@@ -1,0 +1,48 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-23T06:52:05Z",
+  "git_scope": "A blobless clone of the single public branch with its history (head e48de243 on 2026-10-23), sparsely checked out at this commit, v4 of sqverify_continuous: the directory tools/sqverify_continuous, whose Git tree 2734b434 is unchanged at 8530baf (the n = 28 certificate's pin) and at the head, the tools licence and third-party notices, and the repository's licence index. Every file in that scope is digested; the rest of the tree is pinned by the commit. The same tree is the release asset's check1/src/sqverify_continuous_v4.tgz (SHA-256 72086975...), which the n = 28 packet pins by digest.",
+  "sources": [
+    {
+      "id": "wand125-square-packing",
+      "source_url": "https://github.com/wand125/square-packing",
+      "source_ref": "refs/heads/main",
+      "source_commit": "d4a19815e2b0cca5faa562f00c7a80b93d3402ef",
+      "committed_utc": "2026-10-12T01:29:29Z",
+      "git_tree": "2f506cb2673cc34abaedc2718dc722374430d053",
+      "archived_path": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing",
+      "subtree_manifest": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE.md",
+        "tools/LICENSE",
+        "tools/THIRD_PARTY_NOTICES.md",
+        "tools/sqverify_continuous"
+      ],
+      "subtree_file_count": 31,
+      "subtree_total_bytes": 377985,
+      "retained_file_count": 29,
+      "retained_total_bytes": 376318,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LICENSE.md",
+          "bytes": 603,
+          "sha256": "5dbc1f8b773b0a66c3d8b4ebf034a8cd795df418652ce8bf2020cb21b1597960",
+          "reason": "the repository's licence index, retained byte-identical by the closed-form cfcheck packet",
+          "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/LICENSE.md"
+        },
+        {
+          "path": "tools/LICENSE",
+          "bytes": 1064,
+          "sha256": "c0dd43e7892932c81335f74a2fdbf1a98f5977bab14c0c4c30e3abcc97c34904",
+          "reason": "wand125's MIT licence, retained byte-identical by the closed-form cfcheck packet",
+          "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/LICENSE"
+        }
+      ],
+      "license": "MIT, Copyright (c) 2026 wand125 (tools/LICENSE), for the code; the copies of this repository's sqverify_fast documentation (sqverify_fast/README.md, SOUNDNESS.md, INDEPENDENCE.md, independence-record.yaml) under CC BY 4.0 to Joshua Levy, the squares project, and its code under MIT, as tools/THIRD_PARTY_NOTICES.md and PROVENANCE.md state",
+      "claims": [
+        "sqverify-fast --continuous v4 (source_sha256 619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5): every closed square of side B in [0, L]^2, at every centre and every angle, captures at least tau of a D4-symmetrized rectangle density, which with n tau > M gives s(n) > L/B (lemmas C1 to C6 of sqverify_fast/CONTINUOUS.md); the n = 28 certificate continuous_n28_L5745 (T-192) reports VERIFIED by this version"
+      ]
+    }
+  ]
+}
