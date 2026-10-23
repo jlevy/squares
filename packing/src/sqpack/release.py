@@ -2416,6 +2416,22 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The #545 grade-C review's request entry (think-7scz), against main c1115c095 "
+            "(#749): rendered at link revision c1115c09 into empty site directories, twice "
+            "from this tree and twice from it with main's result-requests.yaml swapped in "
+            "(43 files each), render_packing_methods writes every file byte-identical "
+            "across all four, as it did against main 598d23289 (#742) before the merge. "
+            "No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
