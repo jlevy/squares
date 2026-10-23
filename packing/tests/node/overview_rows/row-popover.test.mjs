@@ -5,7 +5,7 @@
 // which presses open a row's popover, where focus goes, and what the row is told. A
 // fourth row's body names a fuller one beside the page, which a stand-in `fetch` serves
 // or refuses. Each row also names a person, as a results table's credit cell does, and
-// a test can load `popover.js` and `contributor-popover.js` beside the row's scripts.
+// person links retain native navigation alongside the row scripts.
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
@@ -28,11 +28,6 @@ const CASE_SOURCE = readFileSync(
 
 const POPOVER_SOURCE = readFileSync(
   new URL("../../../devtools/overview/popover.js", import.meta.url),
-  "utf8",
-);
-
-const CONTRIBUTOR_SOURCE = readFileSync(
-  new URL("../../../devtools/overview/contributor-popover.js", import.meta.url),
   "utf8",
 );
 
@@ -1132,47 +1127,11 @@ void test("a link out of a panel still closes it and follows, and a modified cli
   assert.deepEqual(scrolled, []);
 });
 
-void test("each name link the profile overlay enhances says it opens a dialog", async () => {
-  const {
-    fire,
-    first,
-    second,
-    fetched,
-    served,
-    markup,
-    element,
-    heldName,
-    downloaded,
-    plainName,
-    directory,
-    elsewhere,
-    settled,
-  } = page("https:", [CONTRIBUTOR_SOURCE]);
-  // A name is known by its address alone: no page marks it.
-  for (const name of [first.name, second.name, fetched.name, heldName]) {
-    assert.equal(name.getAttribute("aria-haspopup"), "dialog");
+void test("person links preserve native navigation within result rows", () => {
+  const { fire, first, second, fetched } = page("https:", [POPOVER_SOURCE]);
+  for (const row of [first, second, fetched]) {
+    assert.equal(row.name.getAttribute("aria-haspopup"), null);
+    assert.ok(!fire(row.name, "click"));
+    assert.ok(!row.popover.open);
   }
-  // A link that downloads is not enhanced, so it is not announced as opening one.
-  assert.equal(downloaded.getAttribute("aria-haspopup"), null);
-  // Nor is any link that was not a name, a name its container keeps plain, the
-  // directory, or a profile address on another site.
-  for (const link of [first.link, plainName, directory, elsewhere]) {
-    assert.equal(link.getAttribute("aria-haspopup"), null);
-  }
-  // A name in an article the loader clones later is announced as it lands.
-  served.set("result/t-004.html", "credited");
-  markup.set("credited", () => [element("a", { href: "../profiles/evan-daniel.html" })]);
-  fire(fetched.text, "click");
-  await settled();
-  const landed = fetched.body.querySelector("a");
-  assert.equal(
-    landed?.getAttribute("href"),
-    "https://example.test/squares/profiles/evan-daniel.html",
-  );
-  assert.equal(landed?.getAttribute("aria-haspopup"), "dialog");
-});
-
-void test("a page read from a file announces no dialog, since it cannot fetch one", () => {
-  const { first } = page("file:", [CONTRIBUTOR_SOURCE]);
-  assert.equal(first.name.getAttribute("aria-haspopup"), null);
 });

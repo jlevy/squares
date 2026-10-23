@@ -125,6 +125,9 @@ body {
   --site-font-size-sans-base: calc(var(--kpress-font-size-base) * var(--site-font-scale-sans));
   --site-font-size-support: calc(var(--site-font-size-sans-base) * var(--paper-support-scale));
   --site-font-size-note: calc(var(--site-font-size-sans-base) * var(--paper-note-scale));
+  --site-tag-font-size: var(--site-font-size-note);
+  --site-tag-leading: 1.45;
+  --site-tag-height: calc(var(--site-tag-font-size) * var(--site-tag-leading));
   /* A table's filter bar, its controls and their labels: a step under the table's own
      text, so the bar reads as the table's tools and not as its content. */
   --site-font-size-control: calc(var(--site-font-size-sans-base) * 0.8);
@@ -1316,9 +1319,9 @@ body {
   color: var(--kpress-doc-text);
   display: inline-block;
   font-family: var(--kpress-font-sans);
-  font-size: var(--site-font-size-note);
+  font-size: var(--site-tag-font-size);
   font-weight: var(--site-font-weight-sans-medium);
-  line-height: 1.45;
+  line-height: var(--site-tag-leading);
   /* A row of chips wraps like words, between chips; this margin keeps a wrapped row of
      them from touching the row above, wherever they sit. */
   margin-block: 0.15rem;
@@ -2803,8 +2806,8 @@ html[data-site-atlas-view="triangle"]
 }
 /* A case's badges where a case is one line, a table's row or a record's head: the
    glyphs alone, in a row after the case's status chip, each named for a screen reader
-   and on hover (`result_overview.case_badges`). In a table they are a step smaller, to
-   sit on the row's line. */
+   and on hover (`result_overview.case_badges`). Table badges share the status tag
+   text size and height. */
 .site-case-badges {
   display: inline-flex;
   gap: 0.25rem;
@@ -2820,9 +2823,10 @@ html[data-site-atlas-view="triangle"]
   margin: 0 0 0.1rem;
 }
 :is(.site-table, .site-result-cases) .site-case-badges .site-atlas-badge {
-  block-size: 1rem;
-  font-size: 0.7rem;
-  inline-size: 1rem;
+  block-size: var(--site-tag-height);
+  box-sizing: border-box;
+  font-size: var(--site-tag-font-size);
+  inline-size: var(--site-tag-height);
 }
 .site-atlas-badge[data-style="solid"] {
   background: var(--kpress-doc-muted);
@@ -3908,6 +3912,7 @@ html[data-site-atlas-view="triangle"]
   font: inherit;
   font-weight: var(--site-font-weight-sans-medium);
   padding: var(--site-chooser-small-padding);
+  padding-inline-end: 0;
   text-decoration: none;
   transition: var(--site-hover-transition);
 }
@@ -3979,7 +3984,8 @@ html[data-site-atlas-view="triangle"]
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-light);
 }
-.kpress .site-navigation-heading {
+.kpress :is(h2, h3, h4).site-navigation-heading {
+  font-family: var(--kpress-font-sans);
   font-style: normal;
   font-weight: var(--site-font-weight-sans-medium);
 }
