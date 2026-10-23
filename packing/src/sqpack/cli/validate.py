@@ -176,11 +176,16 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: think-4h23): separating and translating squares 6 and 23 at 105 against T-174's 8 and
 #: 41, and 21 and 85 at 204 against T-225's 8 and 25; and the same pass the one it moved to
 #: Evan Daniel's issue-728 certificate (T-230, think-icp1), 303, 10 separating and 27
-#: translating squares against T-186's 4 and 24.
+#: translating squares against T-186's 4 and 24; and the same pass the nine it moved to
+#: algebraic houses (T-174 and T-193, think-ot5c): separating and translating squares 3
+#: and 7 at 70 against T-146's 4 and 7, 7 and 22 at 102 against its 6 and 15, 4 and 20 at
+#: 123 against its 4 and 15, 3 and 10 at 153 against T-173's 37 and 105, 5 and 11 at 207
+#: against its 9 and 19, 3 and 17 at 258 against T-146's 3 and 16, and 54 and 190 at 259
+#: against T-136's 37 and 177, with 295 and 302 unchanged.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (28, 112, 86, 577),
-    "n=1..200": (67, 431, 182, 2095),
-    "n=1..324": (124, 1203, 302, 5177),
+    "n=1..100": (28, 111, 86, 577),
+    "n=1..200": (67, 397, 182, 2012),
+    "n=1..324": (124, 1182, 302, 5100),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
