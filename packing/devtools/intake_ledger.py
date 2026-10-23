@@ -11,7 +11,10 @@ intake directory such as ``campaign/issue-intake/upper-bounds-20261014/``:
   is a rational, else its ``value`` as a printed side within one unit of its last place.
   A register entry pending adoption that states a smaller upper bound
   (``check_standing.improvements``) lowers it. Above the horizon the start is the current
-  beyond-horizon row of ``frontier/source-coverage.yaml``, else the grid ``ceil(sqrt n)``;
+  beyond-horizon row of ``frontier/source-coverage.yaml``, at the exact side its source's
+  claims record states where it states one and within one unit of its print otherwise
+  (a ``starts.yaml`` frozen before 23 October 2026 reads every row at its print), else
+  the grid ``ceil(sqrt n)``;
 - **the walk.** The claims at ``n`` are sorted by ``reported_at`` (issue, comment or pull
   request creation; a claim added later by an edit or a commit carries its own time; a
   publication in a watched repository is dated by its first commit). A claim is
@@ -100,6 +103,7 @@ from strif import atomic_output_file
 from devtools import check_source_coverage as coverage_check
 from devtools import check_standing
 from devtools import render_recent_results as view
+from devtools.retained_data import read_retained_text, retained_exists
 from devtools.upper_bound_reports import Span, below, exact_span, grid_side, printed_span
 from sqpack.retained_json import dumps as retained_dumps
 from sqpack.yamlio import safe_load
@@ -1025,9 +1029,20 @@ def pending_member(record: Mapping[str, Any], stated: check_standing.Stated) -> 
     return member
 
 
-def beyond_member(n: int, rows: Mapping[int, Mapping[str, Any]]) -> StartMember:
-    """Above the horizon: the current beyond-horizon row, read within one unit of its
-    print, else the grid."""
+#: How a start member names a beyond-horizon row, before its source's id.
+BEYOND_ROW = "beyond-horizon row "
+
+
+def beyond_member(
+    n: int,
+    rows: Mapping[int, Mapping[str, Any]],
+    exact: Mapping[int, Fraction] | None = None,
+) -> StartMember:
+    """Above the horizon: the current beyond-horizon row, else the grid.
+
+    The row is read at its exact side where ``exact`` gives one (`beyond_exact_sides`),
+    kept as a lane ``[label, print, exact side, ""]`` so that ``check`` recomputes it, and
+    otherwise within one unit of its print."""
     row = rows.get(n)
     if row is None:
         grid = exact_span(grid_side(n))
@@ -1042,17 +1057,87 @@ def beyond_member(n: int, rows: Mapping[int, Mapping[str, Any]]) -> StartMember:
             lanes=[],
         )
     value = str(row["value"])
+    label = f"{BEYOND_ROW}{row['source_id']}"
+    span = printed_side(value, "unstated")
+    side = (exact or {}).get(n)
+    if side is not None:
+        _require(
+            contains(span, side),
+            f"n = {n}: {label}'s exact side {side} lies outside its print {value}",
+        )
+        return _member(
+            label,
+            "record",
+            str(row["source_id"]),
+            model="exact",
+            span=exact_span(side),
+            display=value,
+            decide="",
+            lanes=[[label, value, str(side), ""]],
+        )
     decide = f"the exact side of the beyond-horizon row {row['source_id']} at n = {n}"
     return _member(
-        f"beyond-horizon row {row['source_id']}",
+        label,
         "record",
         str(row["source_id"]),
         model="print",
-        span=printed_side(value, "unstated"),
+        span=span,
         display=value,
         decide=decide,
         lanes=[],
     )
+
+
+def stated_exact_side(
+    source: Mapping[str, Any], n: int, records: dict[str, Any] | None = None
+) -> Fraction | None:
+    """The exact side a beyond-horizon row's source states at ``n``.
+
+    It is read from the one result at ``n`` in the source's claims record, the record
+    `check_source_coverage` reads the source's rows from, through `read_retained_text`, so
+    a record kept as ``.gz`` reads the same. None where the record states no exact side at
+    any count, as the two 8 October report sources' records do: their rows are read within
+    one unit of their prints. Refused where the source declares no record, where the
+    record is missing or is a directory, and where a record that states exact sides states
+    none, or more than one result, at ``n``. ``records`` caches each record read, by path.
+    One reader for the ledger's starts and for `devtools.beyond_horizon_replay`'s rows.
+    """
+    name = str(source.get("id"))
+    path = str(source.get("claims_record") or "")
+    _require(path, f"{name}: declares no claims record")
+    cache: dict[str, Any] = {} if records is None else records
+    if path not in cache:
+        target = ROOT / path
+        _require(not target.is_dir(), f"{name}: its claims record {path} is a directory")
+        _require(retained_exists(target), f"{name}: its claims record {path} does not exist")
+        cache[path] = json.loads(read_retained_text(target))
+    results = cache[path].get("results", []) if isinstance(cache[path], Mapping) else []
+    if not any(isinstance(item, Mapping) and "exact_side" in item for item in results):
+        return None
+    found = [item for item in results if int(item["n"]) == n]
+    _require(
+        len(found) == 1 and "exact_side" in found[0],
+        f"{name} n={n}: its claims record states no one exact side",
+    )
+    return Fraction(str(found[0]["exact_side"]))
+
+
+def beyond_exact_sides(
+    coverage: Mapping[str, Any], rows: Mapping[int, Mapping[str, Any]]
+) -> dict[int, Fraction]:
+    """Each current beyond-horizon row's exact side, where its source states one
+    (`stated_exact_side`). A source whose record states none, as the two 8 October report
+    sources, leaves its rows to their prints; a missing or ambiguous record is refused."""
+    sources = {str(source["id"]): source for source in coverage["sources"]}
+    records: dict[str, Any] = {}
+    found: dict[int, Fraction] = {}
+    for n, row in rows.items():
+        source = str(row["source_id"])
+        _require(source in sources, f"n = {n}: the row names unknown source {source}")
+        side = stated_exact_side(sources[source], n, records)
+        if side is not None:
+            found[n] = side
+    return found
 
 
 def lane_polynomials(
@@ -1132,8 +1217,9 @@ def tree_members(
     if outside:
         coverage = load_yaml(coverage_check.COVERAGE)
         rows = coverage_check.current_beyond_horizon(coverage)
+        exact = beyond_exact_sides(coverage, rows)
         for n in outside:
-            members[n] = [beyond_member(n, rows)]
+            members[n] = [beyond_member(n, rows, exact)]
     return members
 
 
@@ -1212,7 +1298,9 @@ _MEMBER_TYPES: Mapping[str, type] = {
 def recomputed(n: int, member: Mapping[str, Any]) -> list[dict[str, Any]]:
     """The span each of a frozen member's stored inputs gives: every case lane it stands
     for (`lane_member`), a pending entry's stated bound, a beyond-horizon print, or the
-    grid. Each must equal the member's own."""
+    grid. Each must equal the member's own. A beyond-horizon row read at its exact side
+    keeps that side as its one lane, and is recomputed by `beyond_member`, so the side
+    must still lie within the row's print."""
     if member["lanes"]:
         found = []
         for lane in member["lanes"]:
@@ -1223,6 +1311,10 @@ def recomputed(n: int, member: Mapping[str, Any]) -> list[dict[str, Any]]:
                 "a lane is [name, value, exact form, polynomial]",
             )
             name, value, form, text = lane
+            if name.startswith(BEYOND_ROW):
+                row = {"value": value, "source_id": name.removeprefix(BEYOND_ROW)}
+                found.append(beyond_member(n, {n: row}, {n: number(form)}))
+                continue
             bound = {"value": value, "exact_form": form, "minimal_polynomial": text}
             found.append(lane_member(n, name, bound, [], text))
     elif member["kind"] == "register":
@@ -1234,7 +1326,7 @@ def recomputed(n: int, member: Mapping[str, Any]) -> list[dict[str, Any]]:
     elif member["label"] == "the grid":
         found = [beyond_member(n, {})]
     else:
-        source = str(member["label"]).removeprefix("beyond-horizon row ")
+        source = str(member["label"]).removeprefix(BEYOND_ROW)
         found = [beyond_member(n, {n: {"value": member["shown"], "source_id": source}})]
     return [{key: item[key] for key in _SPAN} for item in found]
 

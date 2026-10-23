@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import gzip
 import json
 from fractions import Fraction
 from pathlib import Path
@@ -896,6 +897,110 @@ def test_check_recomputes_every_start_span_and_refuses_one_edited_by_hand() -> N
     moved = copy.deepcopy(starts)
     moved["counts"][1]["members"][0]["lanes"][0][2] = "53/5"
     assert "its stored inputs give" in " ".join(ledger.starts_problems(moved, FROZEN_AT))
+
+
+def test_a_beyond_horizon_start_reads_its_row_at_the_exact_side_its_source_states(
+    tmp_path: Path,
+) -> None:
+    """A row whose source's claims record states the exact side is read at that side, kept
+    as a lane the check recomputes, so a claim equal to it ties and one a fraction of the
+    print's unit below it is recorded; a source that states none leaves the print."""
+    side = Fraction(1999999999999993, 10**14)
+    row = {"n": 400, "source_id": "row-2026-10-11", "value": "19.999999999999930"}
+    record = tmp_path / "claims.json"
+    record.write_text(json.dumps({"results": [{"n": 400, "exact_side": str(side)}]}), "utf-8")
+    printed_only = tmp_path / "sources.json"
+    printed_only.write_text(json.dumps({"sources": []}), "utf-8")
+    coverage = {
+        "sources": [
+            {"id": "row-2026-10-11", "claims_record": str(record)},
+            {"id": "row-2026-10-08", "claims_record": str(printed_only)},
+        ]
+    }
+    rows = {400: row, 401: {"n": 401, "source_id": "row-2026-10-08", "value": "19.99"}}
+    exact = ledger.beyond_exact_sides(coverage, rows)
+    assert exact == {400: side}
+    member = ledger.beyond_member(400, rows, exact)
+    assert (member["model"], member["label"]) == ("exact", "beyond-horizon row row-2026-10-11")
+    assert member["lanes"] == [[member["label"], row["value"], str(side), ""]]
+    assert ledger.beyond_member(401, rows, exact)["model"] == "print"
+    starts = ledger.starts_document(FROZEN_AT, {400: [member]})
+    assert ledger.starts_problems(starts, FROZEN_AT) == []
+    start = ledger.side_of(member)
+    tie = ledger.Side("tie", "B", exact_span(side), "", side, "issue", exact=True)
+    below = side - Fraction(1, 10**16)
+    under = ledger.Side("under", "C", exact_span(below), "", below, "issue", exact=True)
+    assert ledger.compare(tie, start) == ledger.EQUAL
+    assert ledger.compare(under, start) == ledger.BELOW
+    printed = ledger.side_of(ledger.beyond_member(400, rows))
+    assert ledger.compare(tie, printed) == ledger.compare(under, printed) == ledger.UNDECIDED
+    with pytest.raises(ledger.LedgerError, match="lies outside its print"):
+        ledger.beyond_member(400, rows, {400: side + Fraction(1, 10**10)})
+
+
+def test_a_row_s_exact_side_is_read_one_way_and_refused_where_its_record_is_unclear(
+    tmp_path: Path,
+) -> None:
+    """The ledger's starts and the replay's rows read a row's exact side through one
+    reader, `stated_exact_side`. A record kept as ``.gz`` reads the same, and a record
+    that states no exact side at any count leaves the row to its print. A declared record
+    that is missing, or that states exact sides but not exactly one at the count, is
+    refused rather than read as the print (#742's review A, A3)."""
+    side = Fraction(1999999999999993, 10**14)
+    results = [{"n": 400, "exact_side": str(side)}, {"n": 402, "offered_side": "20"}]
+    plain = tmp_path / "plain.json"
+    plain.write_text(json.dumps({"results": results}), "utf-8")
+    packed = gzip.compress(json.dumps({"results": results}).encode(), mtime=0)
+    (tmp_path / "packed.json.gz").write_bytes(packed)
+    printed_only = tmp_path / "sources.json"
+    printed_only.write_text(json.dumps({"sources": []}), "utf-8")
+    twice = tmp_path / "twice.json"
+    twice.write_text(json.dumps({"results": [*results, results[0]]}), "utf-8")
+
+    def source(name: str, path: Path | None) -> dict[str, str]:
+        return {"id": name} if path is None else {"id": name, "claims_record": str(path)}
+
+    assert ledger.stated_exact_side(source("plain", plain), 400) == side
+    assert ledger.stated_exact_side(source("packed", tmp_path / "packed.json"), 400) == side
+    assert ledger.stated_exact_side(source("printed", printed_only), 400) is None
+    refused = {
+        ("absent", tmp_path / "absent.json", 400): "its claims record .* does not exist",
+        ("directory", tmp_path, 400): "is a directory",
+        ("undeclared", None, 400): "declares no claims record",
+        ("twice", twice, 400): "n=400: its claims record states no one exact side",
+        ("plain", plain, 401): "n=401: its claims record states no one exact side",
+        ("plain", plain, 402): "n=402: its claims record states no one exact side",
+    }
+    for (name, path, n), message in refused.items():
+        with pytest.raises(ledger.LedgerError, match=message):
+            ledger.stated_exact_side(source(name, path), n)
+    coverage = {"sources": [source("plain", plain)]}
+    with pytest.raises(ledger.LedgerError, match="unknown source"):
+        ledger.beyond_exact_sides(coverage, {400: {"n": 400, "source_id": "gone"}})
+
+
+def test_check_refuses_an_exact_beyond_horizon_start_moved_outside_its_print() -> None:
+    """A start read at its row's exact side keeps that side as its lane. One whose side is
+    edited to lie outside the row's print, with its span edited to match, is refused by
+    ``check``, not only when ``gather`` freezes it (#742's review A, A3)."""
+    side = Fraction(1999999999999993, 10**14)
+    row = {"n": 400, "source_id": "row-2026-10-11", "value": "19.999999999999930"}
+    member = ledger.beyond_member(400, {400: row}, {400: side})
+    starts = ledger.starts_document(FROZEN_AT, {400: [member]})
+    assert ledger.starts_problems(starts, FROZEN_AT) == []
+    for moved_by in (Fraction(1, 10**10), -Fraction(1, 10**10)):
+        moved = copy.deepcopy(starts)
+        edited = moved["counts"][0]["members"][0]
+        outside = side + moved_by
+        edited["lanes"][0][2] = str(outside)
+        edited["low"] = edited["high"] = str(outside)
+        (problem,) = ledger.starts_problems(moved, FROZEN_AT)
+        assert f"n = 400 {member['label']}" in problem
+        assert "lies outside its print 19.999999999999930" in problem
+    unreadable = copy.deepcopy(starts)
+    unreadable["counts"][0]["members"][0]["lanes"][0][2] = "about 20"
+    (problem,) = ledger.starts_problems(unreadable, FROZEN_AT)
+    assert "not a number: 'about 20'" in problem
 
 
 def test_gather_keeps_the_frozen_starts_and_reads_the_tree_only_to_refresh_them(
