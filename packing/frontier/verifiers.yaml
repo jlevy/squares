@@ -4383,8 +4383,7 @@ verifiers:
           619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5; built here with
           rustc 1.98.0 (cargo build --release --locked) on 15 and on 23 October into
           31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618.
-    independence_record: >-
-      docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+    independence_record: packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/PROVENANCE.md
     independence:
       read:
         - mathematics
@@ -4407,7 +4406,9 @@ verifiers:
           verifier/continuous_pose.cpp this mode's author read while reviewing T-145 before
           writing it (PROVENANCE.md): no file or line in common (Rust against C++), the same
           method, and the same twelve knot expressions in the same order, which only set
-          accuracy (the 23 October review). Guzhou0806's AI assistance is disclosed without
+          accuracy (measured by the 23 October review,
+          docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md,
+          section 10). Guzhou0806's AI assistance is disclosed without
           a system family, so the overlap of authorship is unknown. For T-192 the mode is
           the producer's own checker, and a run of it is reproduced with the producer's code.
           Against this repository's sqverify_fast it keeps interval.rs, exact.rs, axis.rs,
