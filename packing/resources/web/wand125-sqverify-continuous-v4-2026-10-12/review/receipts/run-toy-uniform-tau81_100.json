@@ -1,0 +1,54 @@
+{
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/build-v4/target/release/sqverify-fast",
+    "--candidate",
+    "/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/cand/toy-uniform.json",
+    "--n",
+    "12",
+    "--continuous",
+    "--core",
+    "9/10",
+    "--tau",
+    "81/100",
+    "--threads",
+    "2"
+  ],
+  "cwd": "/home/user/squares",
+  "started_utc": "2026-10-23T07:22:30Z",
+  "exit_status": 1,
+  "wall_seconds": 0.148,
+  "cpu_user_seconds": 0.015,
+  "cpu_system_seconds": 0.02,
+  "max_rss_kib": 18792,
+  "load_average": [
+    14.4189453125,
+    16.57958984375,
+    17.5205078125
+  ],
+  "digests": {
+    "/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/build-v4/target/release/sqverify-fast": "31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618",
+    "/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/cand/toy-uniform.json": "05cbdd95115f342cea71d4a3f2327045b58d738e96d6cfacb6dabb99dd35b991"
+  },
+  "stdout_lines": 89,
+  "stdout_head": [
+    "{\"kind\":\"premises\",\"premises\":{\"A\":\"44999991/50000000\",\"B\":\"9/10\",\"L\":\"3\",\"T\":\"83/200\",\"X\":\"10/3\",\"axis_containment_margin\":\"269999991/5000000000000050000000\",\"counting_margin\":\"18/25\",\"eps\":\"1/10000000\",\"expanded_rectangles\":1,\"input_sha256\":\"05cbdd95115f342cea71d4a3f2327045b58d738e96d6cfacb6dabb99dd35b991\",\"mass\":\"9\",\"n\":12,\"threshold\":\"81/100\"},\"run_key\":\"9852c79e165c57df29e2fa42aa2d416da4b2b5638743758afa4540903a799300\"}",
+    "{\"A\":\"44999991/50000000\",\"argmin\":[\"255000009/100000000\",\"255000009/100000000\"],\"kind\":\"axis-patch\",\"min_certified_lower_bound\":0.8099996760000252,\"non_finite\":false,\"seconds\":0.000026458,\"verified\":false,\"vertices\":4}",
+    "{\"angle_splits\":34,\"index\":0,\"kind\":\"root\",\"leaves\":0,\"max_depth\":34,\"min_certified_lower_bound\":null,\"nodes\":35,\"run_key\":\"9852c79e165c57df29e2fa42aa2d416da4b2b5638743758afa4540903a799300\",\"seconds\":0.000343927,\"t\":[\"1/10000000\",\"1/100000\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.0,\"centre_part\":0.8099999999999945,\"dt\":2.8812757437097006e-16,\"du\":0.5,\"dv\":0.5,\"exact_below_threshold\":false,\"exact_capture\":\"81/100\",\"exact_pose\":[2.0249955000450006,2.0249955000450006,9.999999999711872e-6],\"loss_x\":6.989757979030863e-11,\"loss_y\":6.989757979030863e-11,\"lower\":0.8099999998601988,\"reason\":\"box below resolution\",\"t\":9.999999999711872e-6,\"u\":0.5,\"v\":0.5}}"
+  ],
+  "stdout_tail": [
+    "{\"angle_splits\":43,\"index\":85,\"kind\":\"root\",\"leaves\":0,\"max_depth\":43,\"min_certified_lower_bound\":null,\"nodes\":44,\"run_key\":\"9852c79e165c57df29e2fa42aa2d416da4b2b5638743758afa4540903a799300\",\"seconds\":0.000298203,\"t\":[\"41/100\",\"83/200\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.0,\"centre_part\":0.8099999999999955,\"dt\":2.7755575615628914e-16,\"du\":0.5,\"dv\":0.5,\"exact_below_threshold\":false,\"exact_capture\":\"81/100\",\"exact_pose\":[1.9318022350657937,1.9318022350657937,0.41499999999999976],\"loss_x\":2.0530729044550974e-15,\"loss_y\":2.0530729044550974e-15,\"lower\":0.8099999999999908,\"reason\":\"box below resolution\",\"t\":0.41499999999999976,\"u\":0.5,\"v\":0.5}}",
+    "{\"angle_splits\":43,\"index\":77,\"kind\":\"root\",\"leaves\":0,\"max_depth\":43,\"min_certified_lower_bound\":null,\"nodes\":44,\"run_key\":\"9852c79e165c57df29e2fa42aa2d416da4b2b5638743758afa4540903a799300\",\"seconds\":0.000283104,\"t\":[\"37/100\",\"3/8\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.0,\"centre_part\":0.8099999999999954,\"dt\":2.7755575615628914e-16,\"du\":0.5,\"dv\":0.5,\"exact_below_threshold\":false,\"exact_capture\":\"81/100\",\"exact_pose\":[1.9325342465753423,1.9325342465753423,0.3749999999999997],\"loss_x\":2.1819518224183343e-15,\"loss_y\":2.1819518224183343e-15,\"lower\":0.8099999999999903,\"reason\":\"box below resolution\",\"t\":0.3749999999999997,\"u\":0.5,\"v\":0.5}}",
+    "{\"angle_splits\":3679,\"axis_verified\":false,\"build\":{\"profile\":\"release\",\"rustc\":\"rustc 1.98.0 (88d9e12ae 2026-08-18)\",\"source_sha256\":\"619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5\",\"target\":\"x86_64-unknown-linux-gnu\"},\"claim\":\"\",\"inherited_roots\":0,\"kind\":\"sqverify-fast-continuous-summary/v1\",\"leaves\":0,\"min_certified_lower_bound\":null,\"missing_roots\":[],\"nodes\":3767,\"premises\":{\"A\":\"44999991/50000000\",\"B\":\"9/10\",\"L\":\"3\",\"T\":\"83/200\",\"X\":\"10/3\",\"axis_containment_margin\":\"269999991/5000000000000050000000\",\"counting_margin\":\"18/25\",\"eps\":\"1/10000000\",\"expanded_rectangles\":1,\"input_sha256\":\"05cbdd95115f342cea71d4a3f2327045b58d738e96d6cfacb6dabb99dd35b991\",\"mass\":\"9\",\"n\":12,\"threshold\":\"81/100\"},\"refused_roots\":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85],\"resumed_from\":null,\"roots\":86,\"run_key\":\"9852c79e165c57df29e2fa42aa2d416da4b2b5638743758afa4540903a799300\",\"status\":\"REFUSED\",\"threads\":2,\"wall_seconds\":0.141221664}"
+  ],
+  "stderr_lines": 86,
+  "stderr_tail": [
+    "{\"angle_splits\":43,\"index\":81,\"kind\":\"root\",\"leaves\":0,\"max_depth\":43,\"min_certified_lower_bound\":null,\"nodes\":44,\"run_key\":\"9852c79e165c57df29e2fa42aa2d416da4b2b5638743758afa4540903a799300\",\"seconds\":0.000265337,\"t\":[\"39/100\",\"79/200\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.0,\"centre_part\":0.8099999999999954,\"dt\":2.7755575615628914e-16,\"du\":0.5,\"dv\":0.5,\"exact_below_threshold\":false,\"exact_capture\":\"81/100\",\"exact_pose\":[1.9319754114314138,1.9319754114314138,0.39499999999999974],\"loss_x\":2.254068524862484e-15,\"loss_y\":2.254068524862484e-15,\"lower\":0.8099999999999903,\"reason\":\"box below resolution\",\"t\":0.39499999999999974,\"u\":0.5,\"v\":0.5}}",
+    "{\"angle_splits\":43,\"index\":82,\"kind\":\"root\",\"leaves\":0,\"max_depth\":43,\"min_certified_lower_bound\":null,\"nodes\":44,\"run_key\":\"9852c79e165c57df29e2fa42aa2d416da4b2b5638743758afa4540903a799300\",\"seconds\":0.0002823,\"t\":[\"79/200\",\"2/5\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.0,\"centre_part\":0.8099999999999951,\"dt\":2.7755575615628914e-16,\"du\":0.5,\"dv\":0.5,\"exact_below_threshold\":false,\"exact_capture\":\"81/100\",\"exact_pose\":[1.931896551724138,1.931896551724138,0.39999999999999974],\"loss_x\":2.46793426212386e-15,\"loss_y\":2.46793426212386e-15,\"lower\":0.8099999999999895,\"reason\":\"box below resolution\",\"t\":0.39999999999999974,\"u\":0.5,\"v\":0.5}}",
+    "{\"angle_splits\":43,\"index\":83,\"kind\":\"root\",\"leaves\":0,\"max_depth\":43,\"min_certified_lower_bound\":null,\"nodes\":44,\"run_key\":\"9852c79e165c57df29e2fa42aa2d416da4b2b5638743758afa4540903a799300\",\"seconds\":0.000268869,\"t\":[\"2/5\",\"81/200\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.0,\"centre_part\":0.8099999999999953,\"dt\":2.7755575615628914e-16,\"du\":0.5,\"dv\":0.5,\"exact_below_threshold\":false,\"exact_capture\":\"81/100\",\"exact_pose\":[1.931841562681214,1.931841562681214,0.40499999999999975],\"loss_x\":2.1402521154307978e-15,\"loss_y\":2.1402521154307978e-15,\"lower\":0.8099999999999904,\"reason\":\"box below resolution\",\"t\":0.40499999999999975,\"u\":0.5,\"v\":0.5}}",
+    "{\"angle_splits\":43,\"index\":84,\"kind\":\"root\",\"leaves\":0,\"max_depth\":43,\"min_certified_lower_bound\":null,\"nodes\":44,\"run_key\":\"9852c79e165c57df29e2fa42aa2d416da4b2b5638743758afa4540903a799300\",\"seconds\":0.000263907,\"t\":[\"81/200\",\"41/100\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.0,\"centre_part\":0.8099999999999953,\"dt\":2.7755575615628914e-16,\"du\":0.5,\"dv\":0.5,\"exact_below_threshold\":false,\"exact_capture\":\"81/100\",\"exact_pose\":[1.9318102046057701,1.9318102046057701,0.40999999999999975],\"loss_x\":2.0842908897345633e-15,\"loss_y\":2.0842908897345633e-15,\"lower\":0.8099999999999904,\"reason\":\"box below resolution\",\"t\":0.40999999999999975,\"u\":0.5,\"v\":0.5}}",
+    "{\"angle_splits\":43,\"index\":85,\"kind\":\"root\",\"leaves\":0,\"max_depth\":43,\"min_certified_lower_bound\":null,\"nodes\":44,\"run_key\":\"9852c79e165c57df29e2fa42aa2d416da4b2b5638743758afa4540903a799300\",\"seconds\":0.000298203,\"t\":[\"41/100\",\"83/200\"],\"verdict\":\"refused\",\"witness\":{\"base\":0.0,\"centre_part\":0.8099999999999955,\"dt\":2.7755575615628914e-16,\"du\":0.5,\"dv\":0.5,\"exact_below_threshold\":false,\"exact_capture\":\"81/100\",\"exact_pose\":[1.9318022350657937,1.9318022350657937,0.41499999999999976],\"loss_x\":2.0530729044550974e-15,\"loss_y\":2.0530729044550974e-15,\"lower\":0.8099999999999908,\"reason\":\"box below resolution\",\"t\":0.41499999999999976,\"u\":0.5,\"v\":0.5}}"
+  ]
+}
