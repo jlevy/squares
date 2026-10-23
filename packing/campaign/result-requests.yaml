@@ -18086,8 +18086,8 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
         count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier report.
-        It is an index deletion bound, held with the others from Couzo's index for the owner's
-        decision on proposed D6 (think-f2io), and not recorded; this restatement is not recorded.
+        It is an index deletion bound, an earlier report by the owner's answer of 23 October 2026 on
+        D6 (think-f2io) with no row of its own, and this restatement of it is not recorded.
       queued: false
     - key: n744
       claim: s(744) <= 27.798989873256, rounded upward; exact certificate side is authoritative.
@@ -18817,8 +18817,8 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
         count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier report.
-        It is an index deletion bound, held with the others from Couzo's index for the owner's
-        decision on proposed D6 (think-f2io), and not recorded; this restatement is not recorded.
+        It is an index deletion bound, an earlier report by the owner's answer of 23 October 2026 on
+        D6 (think-f2io) with no row of its own, and this restatement of it is not recorded.
       queued: false
     - key: n986
       claim: s(986) <= 31.920310216821, rounded upward; exact certificate side is authoritative.
@@ -19284,8 +19284,11 @@ issues:
       (think-temp) writes the answer into the walks as a ruling: the history, #719 and #732 walks
       decide the 30 re-certifications, and 44 of Couzo's publications in 5a299b4, 23aff0c and
       4e4c8ce, as restatements and no longer hold them. No row changes: at each of the 30 counts the
-      4e4c8ce certificate's row stands as it did. The follow-up that says so is drafted on
-      think-temp for after that change merges (think-cyal).
+      4e4c8ce certificate's row stands as it did. The owner answered D6 the same day: 743 and 985,
+      deletion bounds of the 4e4c8ce index, are earlier reports, so #715's restatements there stay
+      unrecorded, and the bounds have no row of their own (think-kzme asks whether an issue's claim
+      gives them one). The follow-up that says so is drafted on think-temp for after that change
+      merges (think-cyal).
   - number: 719
     title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
     author: Mishapolk
@@ -21001,8 +21004,8 @@ issues:
       recorded yet. Imported on 23 October (think-0gp6, c-lane-732-import-1023): the ledger of
       23 October for issue 732 records 77 of the 390 rows at or below 1024 as current rows of
       the mishapolk-issue732-2026-10-22 source, retained at 17cc220 and replayed on both exact
-      routes, finds that 499 restates #719's row (think-fwa9, answered 23 October), and leaves 985
-      to the deletion-bound decision (think-f2io).
+      routes, finds that 499 restates #719's row (think-fwa9, answered 23 October), and that 985
+      ties Couzo's 4e4c8ce deletion bound, an earlier report (D6, think-f2io, answered 23 October).
     read_through: '2026-10-23T01:53:19Z'
     results:
     - key: rows-325-1024
@@ -21025,8 +21028,10 @@ issues:
         are not recorded: 131 equal an earlier report, 81 of them #719's rows, 181 lie above one,
         and 499 restates #719's row. Since the owner's answers of 23 October, 43 of them, 331, 369
         and 376 among them, are above Göbel's construction at their count, an earlier report
-        (think-8krd), and 55 rest on deletion bounds and constructions the walk holds for D6 and D2
-        (beyond_horizon_replay.WALKS).
+        (think-8krd), and 54 rest on constructions with no certificate file and deletions from
+        Friedman's constructions that the walk holds for D2 and think-zkxy
+        (beyond_horizon_replay.WALKS); 985 ties a deletion bound, an earlier report by the D6
+        answer.
       queued: false
     - key: n499
       claim: >-
@@ -21046,13 +21051,10 @@ issues:
       source: body
       not_registered: >-
         Beyond the corpus. Equal to the bound Couzo's 4e4c8ce index states at 985 by deleting a
-        square from the 986 certificate, which the walk holds for the deletion-bound decision
-        (D6, think-f2io), so not recorded. An answer that leaves such bounds out reruns the walk,
-        and this claim would then be recorded (beyond_horizon_replay held-dependents).
-      queued: true
-      bead: think-f2io
-      blocked_on:
-      - think-f2io
+        square from the 986 certificate. By the owner's answer of 23 October 2026 on D6
+        (think-f2io) such a bound is an earlier report, so this tie is not recorded. Whether
+        the bound itself gets a row where an issue claims the count is think-kzme.
+      queued: false
     - key: rows-above-1024
       claim: >-
         5,078 upper bounds at n = 1025 to 9913, each the exact side of a certificate at 814fbe9
@@ -21185,12 +21187,14 @@ issues:
       #732's file there, and holds them (think-8m4k). The stage 7 reply is drafted for after the
       merge; per-row credit beyond the corpus stays the owner's question (D5, think-f2io).
 
-      The owner answered two of the import's questions on 23 October 2026, and the owner-answers
+      The owner answered three of the import's questions on 23 October 2026, and the owner-answers
       records change (think-temp, think-8m4k, think-8krd) applies them. 499 restates #719's row, a
       re-certification below the 12-place print (think-fwa9). The nine 1851c2c files #719's edit
       withdrew are not reports: the walk keeps them out of the record as a settled disposition, and
       no verdict rests on them (think-8m4k). Göbel's constructions are earlier reports beyond 324,
       so #732's 331, 369 and 376 are not recorded against Göbel's construction itself (think-8krd).
+      A deletion bound from a published certificate is an earlier report (D6, think-f2io), so 985,
+      equal to Couzo's 4e4c8ce bound, stays unrecorded.
       No row of this source changes: the 77 stay current. The follow-up that says so is drafted on
       think-temp.
   - number: 734

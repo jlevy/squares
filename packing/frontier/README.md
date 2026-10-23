@@ -328,8 +328,10 @@ The process relies on these rules of the records:
   ([several reports at one count](../campaign/result-import.md#several-reports-at-one-count)),
   with the owner’s answers of 23 October 2026. A side below an earlier report by less
   than the 12-place print, at the same print, restates it and is no row; a side at or
-  above Göbel’s classical construction at its count is above an earlier report; and a
-  certificate its author withdrew from an issue is not a report.
+  above Göbel’s classical construction at its count is above an earlier report; a
+  certificate its author withdrew from an issue is not a report; and a side obtained by
+  deleting squares from a published certificate at a larger count is an earlier report,
+  covered by its index with no row of its own.
 
 ## Registering a First-Party Result
 

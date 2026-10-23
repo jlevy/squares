@@ -92,9 +92,12 @@ time it reached GitHub, as the owner ruled on 14 October, and a `Release` with n
 its packet declares the rows its walk records (``declare-rows``, `read_declared_rows`), and
 a second report retained in one packet has its own source, record and receipts. A walk
 holds back a publication that waits on an owner decision rather than an import (`Held`):
-an index deletion bound or a construction with no certificate file (`HELD_CLASSES`); and
-it keeps out of the record, for good, a certificate its author withdrew from an issue, as
-the owner answered on 23 October (`Held.answer`, think-8m4k). A verdict the walk decides
+a construction with no certificate file, or an index bound deleting squares from one
+(`HELD_CLASSES`). Two holds are settled by the owner's answers of 23 October
+(`Held.answer`): a certificate its author withdrew from an issue is kept out of the record
+(think-8m4k), and an index bound deleting squares from a published certificate is an
+earlier report with no row of its own (D6, think-f2io), so a later equal side, as #732's
+985, is not recorded. A verdict the walk decides
 only against held publications rests on them (`Resting`): an answer that leaves a hold
 out reruns the walk, and ``held-dependents`` says what each such answer would reopen
 (`refusal_flips`). ``check`` holds every hold, every resting verdict and every declaration
@@ -259,7 +262,9 @@ CONSEQUENCE, RECIPE, WITHDRAWN = "consequence", "recipe", "withdrawn"
 HELD_CLASSES = {
     CONSEQUENCE: (
         "an index bound that deletes squares from a larger count's certificate or from a "
-        "construction the index states, with no certificate file at its own count"
+        "construction the index states, with no certificate file at its own count; one "
+        "deleting from a published certificate is an earlier report with no row of its own, "
+        "as the owner answered on 23 October 2026 (D6, think-f2io)"
     ),
     RECIPE: (
         "a construction an index or table states with no certificate file of its own: an "
@@ -275,7 +280,17 @@ HELD_CLASSES = {
 #: The owner's answer that settles the withdrawn class (`Held.answer`).
 WITHDRAWN_ANSWER = (
     "the owner's answer of 23 October 2026 (think-8m4k): a watched certificate its author "
-    "withdrew from an issue, claiming a lower file later, is not a report"
+    "withdrew from an issue, claiming a lower file later, is not a report, so the walk "
+    "keeps it out of the record"
+)
+#: The owner's answer that settles an index deletion bound from a published certificate
+#: (`Held.answer`; D6 on think-f2io, which recommended no row of its own): it is a report
+#: the walk records, so a later side equal to or above it is not recorded, and the chain
+#: passes over it.
+DELETION_ANSWER = (
+    "the owner's answer of 23 October 2026 on D6 (think-f2io): a side obtained by deleting "
+    "squares from a published certificate at a larger count is an earlier report in report "
+    "order, which the index's scope covers with no row of its own"
 )
 #: What a hold's class is called where a sentence counts holds (`held_sentence`).
 HELD_NAMES = {
@@ -301,9 +316,11 @@ class Held:
     pending but the decision: the walk records the publication, so it stands at its count,
     and no row may hold it until the owner answers, when the walk's declaration drops it
     and a row is written. The chain passes over it as over a report awaiting its import.
-    ``answer`` states the owner's answer where it keeps the publication out of the record
-    for good, as for the certificates their author withdrew (`WITHDRAWN_ANSWER`): the hold
-    is then the settled disposition, and nothing waits.
+    ``answer`` states the owner's answer where it settles the publication's disposition for
+    good: a certificate its author withdrew is kept out of the record (`WITHDRAWN_ANSWER`),
+    and an index deletion bound from a published certificate is an earlier report with no
+    row of its own (`DELETION_ANSWER`). The hold is then the settled disposition, nothing
+    waits, and a verdict decided against it rests on nothing (`resting_on_holds`).
 
     A later report the walk decides only against held publications rests on them
     (`Resting`, `resting_on_holds`). An answer that leaves a hold out of the record takes
@@ -476,11 +493,12 @@ def _resting(report: str, verdict: str, kinds: str, counts: str) -> Resting:
 _CLASSICAL_23AFF0C = "Göbel's squares and Friedman's off-centre family"
 
 
-#: What the history walk records and holds back from a row, by report and class, each
-#: waiting on its decision's bead: index deletion bounds (D6, proposed on think-f2io) and
-#: constructions with no certificate file (D2, think-f2io); 23aff0c's deletion bounds and
-#: constructions extend Friedman's (`_CLASSICAL_23AFF0C`), so they wait on think-zkxy too.
-#: ``check`` holds each to the walk.
+#: What the history walk records and holds back from a row, by report and class: index
+#: deletion bounds and constructions with no certificate file, waiting on D2 (think-f2io);
+#: 23aff0c's extend Friedman's constructions (`_CLASSICAL_23AFF0C`), so they wait on
+#: think-zkxy too. 4e4c8ce's deletion bounds, each from one of its certificates, are
+#: settled by the owner's D6 answer (`DELETION_ANSWER`): earlier reports with no row of
+#: their own. ``check`` holds each to the walk.
 HISTORY_HELD: dict[str, tuple[Held, ...]] = {
     "TheSnakeFang/squarepack-certs@bef5c42": (
         _held(
@@ -497,6 +515,8 @@ HISTORY_HELD: dict[str, tuple[Held, ...]] = {
             "505 533 549 551 580 583 589 593 595 598 629 632 638 642 680 683 693 700 "
             "733 743 751 752 753 788 798 805 807 845 855 864 869 904 923 927 928 965 "
             "979 985 989",
+            note="each deleting from a 4e4c8ce certificate at a larger count",
+            answer=DELETION_ANSWER,
         ),
     ),
     "franciscouzo/square-packing@23aff0c": (
@@ -505,7 +525,11 @@ HISTORY_HELD: dict[str, tuple[Held, ...]] = {
             "think-f2io",
             "367 406 447 541 542 588 589 638 751 847 848 906 907 967 968",
             also=("think-zkxy",),
-            note="deletions from Friedman's off-centre constructions",
+            note=(
+                "deletions from Friedman's off-centre constructions, which no certificate "
+                "file states, so D6's answer on deletions from certificates does not reach "
+                "them"
+            ),
         ),
         _held(
             RECIPE,
@@ -518,11 +542,11 @@ HISTORY_HELD: dict[str, tuple[Held, ...]] = {
         ),
     ),
 }
-#: The history walk's verdicts decided only against publications it holds (`Resting`), by
-#: report, verdict and the classes they rest on; each would be recorded if D6 or D2 left
-#: those out (`refusal_flips`). ``check`` holds the list to the ledger.
+#: The history walk's verdicts decided only against publications it holds for a decision
+#: still owed (`Resting`), by report, verdict and the classes they rest on: recipes, and
+#: 23aff0c's deletions from Friedman's constructions. ``refusal_flips`` says which would be
+#: recorded if an answer left those out. ``check`` holds the list to the ledger.
 HISTORY_RESTING = (
-    _resting("#715", NOT_RECORDED, CONSEQUENCE, "798 855"),
     _resting("TheSnakeFang/squarepack-certs@5f3bdbf", NOT_RECORDED, RECIPE, "757 813 871"),
     _resting("franciscouzo/square-packing@23aff0c", NOT_RECORDED, RECIPE, "327"),
     _resting("franciscouzo/square-packing@43ac7d2", UNDECIDED, RECIPE, "812 930 931 992 993"),
@@ -532,7 +556,7 @@ HISTORY_RESTING = (
         "franciscouzo/square-packing@5a299b4",
         NOT_RECORDED,
         CONSEQUENCE,
-        "406 447 588 589 632 638 683 906 907 967 968",
+        "406 447 588 589 638 906 907 967 968",
     ),
     _resting(
         "franciscouzo/square-packing@5a299b4",
@@ -558,16 +582,17 @@ _HELD_IN_732 = (
         "533 580 583 589 629 632 638 680 683 733 788 845 855 904 965 985",
     ),
 )
-#: The #732 walk's verdicts decided only against publications it holds (`Resting`): those
-#: on recipes and deletion bounds are reopened by `held-dependents`; none rests on the
-#: withdrawn files, which the owner's answer keeps out (think-8m4k).
+#: The #732 walk's verdicts decided only against publications it holds for a decision
+#: still owed (`Resting`): those on recipes and on 23aff0c's deletions from Friedman's
+#: constructions are reopened by `held-dependents`. None rests on a settled hold: the
+#: withdrawn files (think-8m4k), or 4e4c8ce's deletion bounds, earlier reports by the D6
+#: answer, against which #732's 985 is not recorded.
 _RESTING_732 = (
-    _resting("#715", NOT_RECORDED, CONSEQUENCE, "855"),
     _resting(
         "#732",
         NOT_RECORDED,
         CONSEQUENCE,
-        "367 406 541 542 588 589 638 847 848 906 907 967 968 985",
+        "367 406 541 542 588 589 638 847 848 906 907 967 968",
     ),
     _resting(
         "#732",
@@ -596,7 +621,7 @@ _RESTING_732 = (
         "franciscouzo/square-packing@5a299b4",
         NOT_RECORDED,
         CONSEQUENCE,
-        "406 588 589 632 638 683 906 907 967 968",
+        "406 588 589 638 906 907 967 968",
     ),
     _resting(
         "franciscouzo/square-packing@5a299b4",
@@ -647,7 +672,14 @@ WALKS: dict[str, Walk] = {
         awaiting={},
         held={
             report: tuple(
-                Held(item.kind, item.bead, item.counts & counts)
+                Held(
+                    item.kind,
+                    item.bead,
+                    item.counts & counts,
+                    item.also,
+                    item.note,
+                    item.answer,
+                )
                 for item in HISTORY_HELD[report]
                 if item.counts & counts
             )
@@ -657,10 +689,7 @@ WALKS: dict[str, Walk] = {
             )
         },
         resting=(
-            _resting("#715", NOT_RECORDED, CONSEQUENCE, "798"),
-            _resting(
-                "franciscouzo/square-packing@5a299b4", NOT_RECORDED, CONSEQUENCE, "447 798"
-            ),
+            _resting("franciscouzo/square-packing@5a299b4", NOT_RECORDED, CONSEQUENCE, "447"),
         ),
     ),
     HISTORY: Walk(
@@ -2506,9 +2535,10 @@ def held_sentence(walk: Walk, report: str) -> str:
     for item in walk.held.get(report, ()):
         if item.answer:
             text += (
-                f" The walk keeps its {len(item.counts)} "
+                f" Its {len(item.counts)} "
                 + (HELD_NAMES if len(item.counts) > 1 else HELD_NAME)[item.kind]
-                + f", at {_compress_counts(item.counts)}, out of the record by {item.answer} "
+                + (f", {item.note}" if item.note else "")
+                + f", at {_compress_counts(item.counts)}, have no row by {item.answer} "
                 f"(beyond_horizon_replay.{held_name})."
             )
     resting = [item for item in walk.resting if item.report == report]
@@ -3367,6 +3397,7 @@ def held_plan() -> list[dict[str, Any]]:
             "bead": item.bead,
         }
         | ({"also": list(item.also)} if item.also else {})
+        | ({"settled": True} if item.answer else {})
         for walk in WALKS.values()
         for report, items in walk.held.items()
         for item in items
@@ -3375,9 +3406,10 @@ def held_plan() -> list[dict[str, Any]]:
 
 
 def resting_on_holds(walk: Walk) -> tuple[Resting, ...]:
-    """The verdicts ``walk`` decided only against publications it holds, from its ledger:
-    a step not recorded, or undecided, every report of whose ``decided_against`` the walk
-    holds at that count, grouped by report, verdict and the holds' classes."""
+    """The verdicts ``walk`` decided only against publications it holds for a decision still
+    owed, from its ledger: a step not recorded, or undecided, every report of whose
+    ``decided_against`` the walk holds at that count with no answer settling it
+    (`Held.answer`), grouped by report, verdict and the holds' classes."""
     groups: dict[tuple[str, str, tuple[str, ...]], set[int]] = {}
     for count in _counts(walk):
         n = count["n"]
@@ -3386,7 +3418,7 @@ def resting_on_holds(walk: Walk) -> tuple[Resting, ...]:
             if step["verdict"] == RECORDED or not against:
                 continue
             holds = [walk.holds(report, n) for report in against]
-            if all(holds):
+            if all(item is not None and not item.answer for item in holds):
                 kinds = tuple(sorted({item.kind for item in holds if item is not None}))
                 groups.setdefault((step["report"], step["verdict"], kinds), set()).add(n)
     return tuple(
@@ -3425,7 +3457,7 @@ NEW_RECORD = "record"
 
 def refusal_flips(walk: Walk, kinds: Iterable[str]) -> list[tuple[int, str, str]]:
     """The steps ``walk`` would record if the owner left its holds of ``kinds`` out of the
-    record, each with what it would then be.
+    record, each with what it would then be. A hold an answer has settled stays.
 
     The walk is run again by `devtools.intake_ledger`'s rule from its frozen starts without
     those publications, under the ledger's own exceptions and rulings, and each step that
@@ -3444,7 +3476,7 @@ def refusal_flips(walk: Walk, kinds: Iterable[str]) -> list[tuple[int, str, str]
     for report in ledger["reports"]:
         for claim in report["claims"]:
             held = walk.holds(report["report"], claim["n"])
-            if held is None or held.kind not in refused:
+            if held is None or held.kind not in refused or held.answer:
                 entries.setdefault(claim["n"], []).append(
                     intake_ledger.entry_side(report, claim)
                 )

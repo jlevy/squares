@@ -2748,8 +2748,8 @@ reports:
     which its manifest (certificates/manifest.json, pinned by the SHA-256 the issue states)
     lists as the issue''s claims there, each at its header''s exact side and dated by the
     issue; first_committed is the first commit of the source''s history that published the
-    side. Its verdicts at 55 counts are decided only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
-    14 against index deletion bounds and 41 against constructions with no certificate file.
+    side. Its verdicts at 54 counts are decided only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
+    13 against index deletion bounds and 41 against constructions with no certificate file.
     An answer that leaves a hold out reruns this walk.'
 - report: Mishapolk/square-packing-records@1851c2c
   url: https://github.com/Mishapolk/square-packing-records/tree/1851c2c70a77085f2deb87978f10d40e0f0e86a6
@@ -3170,10 +3170,10 @@ reports:
     so each certificate there is a report from the first commit that holds its side. Transcribed
     from the mishapolk-issue732-2026-10-22 packet''s receipts/source-history.json at each
     count #732 claims where the commit states a side other than the one the issue claims,
-    strictly below the start. The walk keeps its 9 certificates their author withdrew from
-    an issue, at 411, 451, 494, 495, 540, 583, 587, 632 and 683, out of the record by the
-    owner''s answer of 23 October 2026 (think-8m4k): a watched certificate its author withdrew
-    from an issue, claiming a lower file later, is not a report (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held).
+    strictly below the start. Its 9 certificates their author withdrew from an issue, at 411,
+    451, 494, 495, 540, 583, 587, 632 and 683, have no row by the owner''s answer of 23 October
+    2026 (think-8m4k): a watched certificate its author withdrew from an issue, claiming a
+    lower file later, is not a report, so the walk keeps it out of the record (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held).
     Its verdicts at 38 counts are decided only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
     8 against index deletion bounds and 30 against constructions with no certificate file.
     An answer that leaves a hold out reruns this walk.'
@@ -3280,9 +3280,7 @@ reports:
   note: 'Issue 715''s re-certifications of the 4e4c8ce certificates below the 12-place print
     at the counts #732 claims, strictly below the start, at the exact sides its packet''s
     filtered receipt states; each restates the certificate it re-certifies, by the owner''s
-    answer of 23 October 2026 (think-fwa9). Its verdicts at 1 count are decided only against
-    held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
-    1 against index deletion bounds. An answer that leaves a hold out reruns this walk.'
+    answer of 23 October 2026 (think-fwa9).'
 - report: evand/square-packing@49907ec
   url: https://github.com/evand/square-packing/tree/49907ec3bfb26f7589c63c465d0a202e463a6a7b
   kind: publication
@@ -4001,9 +3999,12 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count #732 claims where it states a side strictly below the start, at the least
-    side the commit states there. The walk holds its publications at 16 counts back from a
-    row, each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held):
-    16 index deletion bounds (think-f2io).'
+    side the commit states there. Its 16 index deletion bounds, each deleting from a 4e4c8ce
+    certificate at a larger count, at 533, 580, 583, 589, 629, 632, 638, 680, 683, 733, 788,
+    845, 855, 904, 965 and 985, have no row by the owner''s answer of 23 October 2026 on D6
+    (think-f2io): a side obtained by deleting squares from a published certificate at a larger
+    count is an earlier report in report order, which the index''s scope covers with no row
+    of its own (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held).'
 - report: franciscouzo/square-packing@58a7833
   url: https://github.com/franciscouzo/square-packing/tree/58a783368d4b7e70bb800f0009ea9ca03e578739
   kind: publication
@@ -4916,9 +4917,11 @@ reports:
     at each count #732 claims where it states a side strictly below the start, at the least
     side the commit states there. The walk holds its publications at 54 counts back from a
     row, each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held):
-    13 index deletion bounds, deletions from Friedman''s off-centre constructions (think-f2io,
-    think-zkxy) and 41 constructions with no certificate file, Göbel''s squares and Friedman''s
-    off-centre family, 41 of them as L-border extensions (think-f2io, think-zkxy).'
+    13 index deletion bounds, deletions from Friedman''s off-centre constructions, which no
+    certificate file states, so D6''s answer on deletions from certificates does not reach
+    them (think-f2io, think-zkxy) and 41 constructions with no certificate file, Göbel''s
+    squares and Friedman''s off-centre family, 41 of them as L-border extensions (think-f2io,
+    think-zkxy).'
 - report: franciscouzo/square-packing@5a299b4
   url: https://github.com/franciscouzo/square-packing/tree/5a299b4708ab1ae4870d0fc1ab155738144f6ab8
   kind: publication
@@ -5577,9 +5580,9 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count #732 claims where it states a side strictly below the start, at the least
-    side the commit states there. Its verdicts at 47 counts are decided only against held
+    side the commit states there. Its verdicts at 45 counts are decided only against held
     publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
-    10 against index deletion bounds and 37 against constructions with no certificate file.
+    8 against index deletion bounds and 37 against constructions with no certificate file.
     An answer that leaves a hold out reruns this walk.'
 exceptions: []
 key_reason_candidates: []

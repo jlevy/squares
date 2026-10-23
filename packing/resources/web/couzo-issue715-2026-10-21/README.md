@@ -392,8 +392,9 @@ certificate is 1.78e-11 or more above the 8 October decimal report the record ho
 neither it nor the issue is recorded there.
 The [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md)
 records 30 of these earlier certificates, the ones `02f9690`, `f311f08` and `4e4c8ce`
-first published; the index deletion bounds at 743 and 985 stay held for the owner
-(proposed D6, think-f2io).
+first published. The index deletion bounds at 743 and 985 are earlier reports by the
+owner’s answer of 23 October 2026 on D6 (think-f2io), so this issue’s restatements there
+are not recorded; the bounds have no row of their own (think-kzme).
 
 | n | Printed | First published | Earlier certificate | Here |
 | ---: | --- | --- | --- | --- |

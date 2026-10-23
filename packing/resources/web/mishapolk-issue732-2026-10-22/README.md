@@ -127,16 +127,19 @@ Every side is below Göbel’s classical construction at its count
   exactly, 181 lie above one, and 499 restates #719’s row.
   43 of them, 331, 369 and 376 among them, are above Göbel’s construction at their count,
   which the owner counts as an earlier report since 23 October 2026 (think-8krd).
-  55 are decided only against publications the walk holds for an owner decision
+  985 equals Couzo’s `4e4c8ce` deletion bound, an earlier report by the owner’s answer
+  of 23 October 2026 on D6 (think-f2io).
+  54 are decided only against publications the walk holds for an owner decision
   (`beyond_horizon_replay.WALKS`):
   - 41 against constructions with no certificate file;
-  - 14 against index deletion bounds, 985 among them, equal to Couzo’s `4e4c8ce` bound.
+  - 13 against `23aff0c`’s deletions from Friedman’s constructions, which wait with those
+    constructions (D2, think-zkxy).
 - **What each answer would record.** `beyond_horizon_replay held-dependents` reruns the
   walk without each class of hold. Beside #732’s own claims, each answer also reaches the
   author’s earlier files, which only a release that no walk declares yet could record:
-  - leaving deletion bounds out (D6, think-f2io) records #732’s 985, 8 of the author’s
-    `1851c2c` files (367, 406, 541, 542, 588, 589, 638 and 847), `8a488a1`’s file at 848,
-    and Couzo’s `5a299b4` index at 8 counts;
+  - leaving `23aff0c`’s deletions from Friedman’s constructions out records 8 of the
+    author’s `1851c2c` files (367, 406, 541, 542, 588, 589, 638 and 847), `8a488a1`’s file
+    at 848, and Couzo’s `5a299b4` index at 8 counts, and nothing of #732’s own;
   - leaving constructions with no certificate file out (D2, think-f2io) records 24 of the
     `1851c2c` files, `8a488a1`’s at 849, and `5a299b4` at 37 counts;
   - the withdrawn files are out of the record already, and leaving them out of the walk

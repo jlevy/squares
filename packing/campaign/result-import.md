@@ -473,6 +473,15 @@ The ledger’s `rulings` list names each one it applies, and the module docstrin
   release claims a lower side at that count, stays among the walk’s publications.
   The walk keeps it out of the record (`beyond_horizon_replay.Held.answer`), and no
   verdict rests on it.
+- **A deletion bound is an earlier report** (D6 on think-f2io). A side obtained by
+  deleting squares from a published certificate at a larger count is a report from the
+  publication that states it, so a later side equal to it or above it is not recorded:
+  #732’s 985 ties Couzo’s `4e4c8ce` bound there.
+  On the decision’s recommended terms the index’s scope covers it, with no row of its
+  own; the walk records it, the chain passes over it, and nothing rests on it.
+  Whether an issue that claims the count gives it a row is think-kzme.
+  A deletion from a construction no certificate file states, as 23aff0c’s from
+  Friedman’s, waits with that construction (D2, think-zkxy).
 
 Transcribe each report’s claims into the directory’s `sources.yaml`, then, from
 `packing/`, run `python -m devtools.intake_ledger gather DIR` (`--snapshot` reuses the

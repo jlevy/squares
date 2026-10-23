@@ -1005,7 +1005,7 @@ CLASSICAL_23AFF0C = {"consequence": 15, "recipe": 46}
 #: (review A of #730, A2): new records at deletion bounds and recipes. The rerun applies
 #: the walk's rulings, so a restatement or a side above Göbel's construction is none.
 LEFT_OUT = {
-    "consequence": {"record": 13},
+    "consequence": {"record": 9},
     "recipe": {"record": 48},
 }
 
@@ -1049,18 +1049,19 @@ def test_a_hold_s_further_decision_is_a_bead(monkeypatch: pytest.MonkeyPatch) ->
 
 
 def test_each_verdict_resting_on_a_hold_is_declared(monkeypatch: pytest.MonkeyPatch) -> None:
-    """63 history verdicts and 3 of #719's are decided only against held publications;
-    each is declared (`Resting`), and one the ledger rests or does not rest is named."""
+    """59 history verdicts and 1 of #719's are decided only against publications held for a
+    decision still owed; each is declared (`Resting`), and one the ledger rests or does not
+    rest is named. A verdict against a settled hold rests on nothing."""
     assert replay.resting_problems() == []
     history = replay.WALKS[replay.HISTORY]
-    assert sum(len(item.counts) for item in history.resting) == 63
-    assert sum(len(item.counts) for item in replay.WALKS[replay.ISSUE_719].resting) == 3
+    assert sum(len(item.counts) for item in history.resting) == 59
+    assert sum(len(item.counts) for item in replay.WALKS[replay.ISSUE_719].resting) == 1
     assert replay.resting_on_holds(history) == history.resting
     first, *rest = history.resting
     dropped = dataclasses.replace(
         history,
         resting=(
-            dataclasses.replace(first, counts=first.counts - {798}),
+            dataclasses.replace(first, counts=first.counts - {757}),
             dataclasses.replace(rest[0], counts=rest[0].counts | {376}),
             *rest[1:],
         ),
@@ -1068,8 +1069,8 @@ def test_each_verdict_resting_on_a_hold_is_declared(monkeypatch: pytest.MonkeyPa
     monkeypatch.setattr(replay, "WALKS", {replay.HISTORY: dropped})
     assert replay.resting_problems() == [
         (
-            f"{replay.HISTORY}: {first.report} not recorded on consequence holds: rests at "
-            "n=[798], undeclared"
+            f"{replay.HISTORY}: {first.report} not recorded on recipe holds: rests at "
+            "n=[757], undeclared"
         ),
         (
             f"{replay.HISTORY}: {rest[0].report} not recorded on recipe holds: declared at "
@@ -1079,11 +1080,11 @@ def test_each_verdict_resting_on_a_hold_is_declared(monkeypatch: pytest.MonkeyPa
 
 
 def test_an_answer_leaving_a_hold_out_reopens_the_verdicts_resting_on_it() -> None:
-    """Run again without each class of hold, the history walk records 11 of 5a299b4's
-    certificates and 2 of #715's re-certifications at the deletion bounds' counts and 48
-    publications at the recipes', each a new record with no row and no hold. Each step it
-    would record rests on that class alone; a verdict also resting on another standing
-    hold stays."""
+    """Run again without each class of hold still owed, the history walk records 9 of
+    5a299b4's certificates at the counts of 23aff0c's deletions from Friedman's
+    constructions and 48 publications at the recipes', each a new record with no row and no
+    hold. 4e4c8ce's deletion bounds are settled (D6) and stay. Each step it would record
+    rests on that class alone; a verdict also resting on another standing hold stays."""
     history = replay.WALKS[replay.HISTORY]
     found = {}
     for kind in LEFT_OUT:
@@ -1098,25 +1099,8 @@ def test_an_answer_leaving_a_hold_out_reopens_the_verdicts_resting_on_it() -> No
         assert {(n, report) for n, report, _ in flips} <= resting
     assert found == LEFT_OUT
     deletions = replay.refusal_flips(history, (replay.CONSEQUENCE,))
-    assert [n for n, _, _ in deletions] == [
-        406,
-        447,
-        588,
-        589,
-        632,
-        638,
-        683,
-        798,
-        855,
-        906,
-        907,
-        967,
-        968,
-    ]
-    assert {report for _, report, _ in deletions} == {
-        "franciscouzo/square-packing@5a299b4",
-        "#715",
-    }
+    assert [n for n, _, _ in deletions] == [406, 447, 588, 589, 638, 906, 907, 967, 968]
+    assert {report for _, report, _ in deletions} == {"franciscouzo/square-packing@5a299b4"}
 
 
 def test_the_history_ledger_transcribes_the_scan_and_the_register() -> None:
@@ -1145,7 +1129,7 @@ SUPERSEDED_BY_732 = {
     "couzo-verified-bounds-2026-10-14": 4,
 }
 #: #732's verdicts that rest on held publications, by the class of hold.
-RESTING_732 = {"consequence": 14, "recipe": 41}
+RESTING_732 = {"consequence": 13, "recipe": 41}
 
 
 def test_a_count_named_outside_the_band_is_never_read() -> None:
@@ -1440,7 +1424,8 @@ def test_the_732_walk_keeps_out_the_withdrawn_files_and_names_what_rests_on_hold
     earlier report, and #732's later files below them: not reports, by the owner's answer of
     23 October 2026 (think-8m4k), a settled hold on which nothing rests. 331, 369 and 376
     are above Göbel's construction, an earlier report (think-8krd); 985 equals 4e4c8ce's
-    deletion bound. Only a deletion-bound answer would make one of #732's a new record."""
+    deletion bound, an earlier report by the owner's D6 answer, so no answer still owed
+    would make one of #732's a new record."""
     walk = replay.WALKS[replay.ISSUE_732]
     (withdrawn,) = walk.held["Mishapolk/square-packing-records@1851c2c"]
     assert (withdrawn.kind, withdrawn.bead) == (replay.WITHDRAWN, "think-8m4k")
@@ -1448,18 +1433,14 @@ def test_the_732_walk_keeps_out_the_withdrawn_files_and_names_what_rests_on_hold
     assert "not a report" in replay.HELD_CLASSES[replay.WITHDRAWN]
     assert sorted(withdrawn.counts) == [411, 451, 494, 495, 540, 583, 587, 632, 683]
     settled = replay.held_dependents()[replay.ISSUE_732]
-    assert settled["settled"] == [
-        {
-            "report": "Mishapolk/square-packing-records@1851c2c",
-            "class": replay.WITHDRAWN,
-            "counts": sorted(withdrawn.counts),
-            "answer": replay.WITHDRAWN_ANSWER,
-        }
-    ]
+    assert {(item["report"], item["class"]): item["answer"] for item in settled["settled"]} == {
+        ("Mishapolk/square-packing-records@1851c2c", replay.WITHDRAWN): replay.WITHDRAWN_ANSWER,
+        ("franciscouzo/square-packing@4e4c8ce", replay.CONSEQUENCE): replay.DELETION_ANSWER,
+    }
     assert replay.WITHDRAWN not in settled["recorded_if_left_out"]
     mine = {item.kinds: item.counts for item in walk.resting if item.report == "#732"}
     assert {kinds[0]: len(counts) for kinds, counts in mine.items()} == RESTING_732
-    assert 985 in mine[(replay.CONSEQUENCE,)]
+    assert 985 not in mine[(replay.CONSEQUENCE,)]
     steps = {
         count["n"]: step
         for count in _read(ISSUE_732 / "ledger.json")["counts"]
@@ -1470,9 +1451,7 @@ def test_the_732_walk_keeps_out_the_withdrawn_files_and_names_what_rests_on_hold
         assert (steps[n]["verdict"], steps[n]["reason"]) == ("not recorded", "above")
         assert steps[n]["decided_against"] == ["Göbel's construction"]
     flips = replay.refusal_flips(walk, (replay.CONSEQUENCE,))
-    assert [(n, falls) for n, report, falls in flips if report == "#732"] == [
-        (985, replay.NEW_RECORD)
-    ]
+    assert [n for n, report, _ in flips if report == "#732"] == []
     assert replay.refusal_flips(walk, (replay.WITHDRAWN,)) == []
 
 
@@ -1562,3 +1541,35 @@ def test_the_rulings_hold_goebel_s_construction_as_an_earlier_report() -> None:
     assert "## The Owner's Rulings" in readme
     earlier = replay.ROOT / "campaign/issue-intake/upper-bounds-20261022/README.md"
     assert "## The Owner's Rulings" not in earlier.read_text(encoding="utf-8")
+
+
+def test_a_deletion_bound_from_a_certificate_is_an_earlier_report_with_no_row() -> None:
+    """The owner's answer of 23 October 2026 on D6 (think-f2io): 4e4c8ce's 39 index bounds,
+    each deleting squares from one of its certificates at a larger count, are earlier
+    reports in report order with no row of their own. The walk records each, the chain
+    passes over it, and a later equal side is not recorded: #732's 985 ties it. 23aff0c's
+    deletions from Friedman's constructions, which no certificate file states, stay held."""
+    history = replay.WALKS[replay.HISTORY]
+    (deletions,) = replay.HISTORY_HELD["franciscouzo/square-packing@4e4c8ce"]
+    assert (deletions.kind, deletions.answer) == (replay.CONSEQUENCE, replay.DELETION_ANSWER)
+    assert len(deletions.counts) == 39
+    friedman = replay.HISTORY_HELD["franciscouzo/square-packing@23aff0c"]
+    assert {item.kind: item.answer for item in friedman} == {
+        replay.CONSEQUENCE: "",
+        replay.RECIPE: "",
+    }
+    plan = [item for item in replay.held_plan() if item["walk"] == replay.HISTORY]
+    assert sum(1 for item in plan if item.get("settled")) == 39
+    assert not any(
+        item.kinds == (replay.CONSEQUENCE,) and 985 in item.counts for item in history.resting
+    )
+    walk = replay.WALKS[replay.ISSUE_732]
+    (count,) = [
+        count for count in _read(ISSUE_732 / "ledger.json")["counts"] if count["n"] == 985
+    ]
+    assert [(step["report"], step["verdict"], step["reason"]) for step in count["steps"]] == [
+        ("franciscouzo/square-packing@4e4c8ce", "recorded", "below"),
+        ("#732", "not recorded", "equal"),
+    ]
+    assert replay.recorded_reports(walk, count) == []
+    assert "no row of its own" in replay.HELD_CLASSES[replay.CONSEQUENCE]

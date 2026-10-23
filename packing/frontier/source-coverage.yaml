@@ -8514,9 +8514,12 @@ sources:
     couzo-verified-bounds-2026-10-14's (199), couzo-certificates-2026-10-14's (7),
     fang-composites-2026-10-12's (2), couzo-certificates-2026-10-13's (1),
     couzo-extended-range-reports-2026-10-08's (1), evand-fresh-compositions-2026-10-14's (1) and
-    fang-excess-theorem-2026-10-13's (1), and at 41 counts no row stood before them. The walk holds
-    back the commit's 39 index deletion bounds with no certificate file at their count for the owner
-    (D6 proposed, think-f2io; beyond_horizon_replay.HISTORY_HELD). By the owner's answers of 23
+    fang-excess-theorem-2026-10-13's (1), and at 41 counts no row stood before them. Its 39 index
+    deletion bounds, each deleting squares from one of its certificates at a larger count with no
+    certificate file at their own count, are earlier reports with no row of their own, by the
+    owner's answer of 23 October 2026 on D6 (think-f2io; beyond_horizon_replay.HISTORY_HELD);
+    whether an issue's claim at 743 or 985 gives one a row is think-kzme. By the owner's answers of
+    23
     October 2026 it does not record the commit's publications at 50 more counts: 47 above Göbel's
     construction there, an earlier report (think-8krd), and 3 re-certifications below the 12-place
     print, at 327, 332 and 542, which restate the reports they beat (think-fwa9).
@@ -8575,8 +8578,9 @@ sources:
     21 are superseded on entry, by issue 672's (16) and issue 675's (5). Its rows supersede
     first couzo-index-2026-10-15's (4), and at 17 counts no row stood before them. The walk holds
     back the commit's 61 classical constructions its upper_bounds.json states with no certificate
-    file, each below Göbel's construction at its count, for D2 and D6 (think-f2io) and for whether
-    Friedman's constructions count as earlier reports as Göbel's do (think-zkxy): 46 constructions,
+    file, each below Göbel's construction at its count, for D2 (think-f2io) and for whether
+    Friedman's constructions count as earlier reports as Göbel's do (think-zkxy); D6's answer covers
+    deletions from published certificates, not these: 46 constructions,
     Göbel's
     squares (27) and Friedman's off-centre family (19), 41 of them L-border extensions, and 15
     bounds deleting one or two squares from Friedman's constructions one or two counts above. Each
@@ -8750,8 +8754,10 @@ sources:
     Its 499, 8.66e-13 below issue 719's row at the same 12-place print, restates that row by the
     owner's answer of 23 October 2026 (think-fwa9), and the author's own 1851c2c files at the nine
     other withdrawn counts are not reports, by his answer of the same day (think-8m4k). Of the 313
-    not recorded, 43 are above Göbel's construction there (think-8krd) and 55 rest on held deletion
-    bounds and constructions (beyond_horizon_replay.WALKS). The 5,078 rows above 1024 wait on the
+    not recorded, 43 are above Göbel's construction there (think-8krd), 985 ties Couzo's 4e4c8ce
+    deletion bound, an earlier report by the D6 answer (think-f2io), and 54 rest on held
+    constructions with no certificate file and deletions from Friedman's constructions
+    (beyond_horizon_replay.WALKS). The 5,078 rows above 1024 wait on the
     owner (think-f2io).
   claims_record: resources/web/mishapolk-issue732-2026-10-22/acquisition/beyond-horizon-rows.json
 
