@@ -2272,6 +2272,7 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     assert set(moved) == {
         "downloads.html",
         "all-results.html",
+        "recent-results.html",
         "status.html",
         "defects.html",
         "explainer.html",

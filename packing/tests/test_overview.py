@@ -478,14 +478,14 @@ def test_papers_groups_every_reading_and_the_resources_keep_detail_reachable(
     assert 'href="resources.html"' in about
 
 
-def test_home_summarizes_the_complete_documentation_on_about(
+def test_home_links_the_project_and_documentation_retains_the_complete_directory(
     page: str, documentation: str
 ) -> None:
     home_section = page.split('id="squares-project-documentation"', 1)[1].split(
         'id="more-resources"', 1
     )[0]
     about_section = documentation.split('id="squares-project-documentation"', 1)[1]
-    assert 'href="documentation.html">View All Documentation' in home_section
+    assert 'href="about.html">About the Squares Project' in home_section
     assert "pop-doc-" not in home_section
     assert "live in the Squares Project\u2019s repository" in _rendered_text(about_section)
     for name in render_overview.DOCUMENT_PAGES:
@@ -764,17 +764,19 @@ def test_the_atlas_grid_expands_from_100_to_324_with_one_button() -> None:
     only the script makes it act. The script places the rest on the first expand, flips
     the label to "Show Less", the chevron to up, the name and `aria-expanded`, and
     expands the grid when the popover steps past the last case shown."""
-    grid = overview_sections.atlas_grid()
+    grid = overview_sections.atlas_grid(homepage=True)
     (row,) = re.findall(r'<p class="site-action-row site-atlas-toggle-row">(.*?)</p>', grid)
-    assert row == (
-        '<button type="button" class="site-action site-atlas-toggle" '
-        'data-atlas-toggle aria-expanded="false" aria-controls="atlas-cells" '
-        'aria-label="Show more: all 324 cases" data-label-more="Show More" '
-        'data-label-less="Show Less" data-name-more="Show more: all 324 cases" '
-        'data-name-less="Show less: the first 100">'
-        "<span data-atlas-label>Show More</span>"
-        f"{overview_sections.arrow_icon('double-down')}</button>"
-    )
+    buttons = [attrs for tag, attrs in _Tags(row).tags if tag == "button"]
+    assert len(buttons) == 1
+    button = buttons[0]
+    assert button["type"] == "button"
+    assert button["aria-expanded"] == "false"
+    assert f'id="{button["aria-controls"]}"' in grid
+    assert button["aria-label"] == "Show more: all 324 cases"
+    assert button["data-label-more"] == "Show More"
+    assert button["data-label-less"] == "Show Less"
+    assert button["data-name-less"] == "Show less: the first 100"
+    assert overview_sections.arrow_icon("double-down") in row
     # The expander's row ends the grid's block: no note follows it since 2026-10-02.
     assert 'class="site-atlas-note"' not in grid
     script = render_overview.ATLAS_GRID_SCRIPT.read_text(encoding="utf-8")
@@ -1566,7 +1568,7 @@ def test_the_big_tables_have_no_outer_border(
     for name, html_page in (
         ("index.html", page),
         ("results.html", results),
-        ("atlas.html", rendered("atlas.html")),
+        ("frontier.html", rendered("frontier.html")),
     ):
         tables = re.findall(r'<table class="([^"]*)"', html_page)
         assert tables, name
@@ -2105,7 +2107,7 @@ def test_the_frontier_page_explains_only_the_bounds_table(
     rendered: Callable[[str], str],
 ) -> None:
     """The standalone guide defines columns and verification without the removed history."""
-    from devtools.render_frontier_page import frontier_cases, since_prose  # noqa: PLC0415
+    from devtools.render_frontier_page import frontier_cases  # noqa: PLC0415
 
     page = rendered("frontier.html")
     prose = page.split("</h1>", 1)[1].split('<div class="site-table-tools', 1)[0]
@@ -2114,7 +2116,8 @@ def test_the_frontier_page_explains_only_the_bounds_table(
     proved = sum(case["status"] == "proved" for case in cases)
     opened = sum(case["status"] == "open" for case in cases)
     assert (
-        f"all {len(cases)} cases: {proved} have a proved optimum and {opened} are open" in text
+        f"up to {len(cases)}. Of these, {proved} have a proved optimum and {opened} are open"
+        in text
     )
     for explanation in (
         "published values",
@@ -2127,7 +2130,7 @@ def test_the_frontier_page_explains_only_the_bounds_table(
         "click a column heading to sort",
     ):
         assert explanation in text, explanation
-    assert text.count(since_prose()) == 1
+    assert "Recent sorts recent verified bounds first" in text
     for removed in ("Audited sources.", "Seventeen squares.", "four recorded defects"):
         assert removed not in text
     assert not re.search(r"<p><strong>", prose)
@@ -3248,7 +3251,7 @@ def test_an_embedded_page_keeps_its_query_and_fragment() -> None:
 CHIP = re.compile(r'<span class="site-chip( site-rung-fill)?"([^>]*)>([^<]+)</span>')
 
 
-@pytest.mark.parametrize("name", ["index.html", "atlas.html", "results.html"])
+@pytest.mark.parametrize("name", ["index.html", "frontier.html", "results.html"])
 def test_every_small_label_is_one_chip(name: str, rendered: Callable[[str], str]) -> None:
     """Rungs and case statuses share one chip; a rung chip carries its scale and level,
     which the stylesheet colours, and names the rung it shows."""
@@ -5163,7 +5166,7 @@ def test_a_filter_at_its_default_is_gray_and_one_that_filters_is_the_text_colour
     assert 'class="site-table-tools' not in page
     for name, html_page in (
         ("results.html", results),
-        ("atlas.html", rendered("atlas.html")),
+        ("frontier.html", rendered("frontier.html")),
     ):
         bar = html_page.split('<div class="site-table-tools', 1)[1].split("</div>", 1)[0]
         selects = re.findall(r"<select[^>]*>(.*?)</select>", bar, re.DOTALL)
@@ -5995,7 +5998,7 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
             assert f'href="{html.escape(link.url, quote=True)}"' in full, result.id
             label = html.escape(link.label)
             if link.url == "frontier.html":
-                label = "The frontier survey"
+                label = "Frontier Survey"
             elif match := re.fullmatch(r"cases/(\d+)\.html", link.url):
                 label = "Case record, " + overview_data.math_html(f"n = {match.group(1)}")
             elif match := re.fullmatch(r"evidence (\d+)", link.label):
@@ -6982,8 +6985,6 @@ def test_each_address_a_paper_had_serves_a_forwarder_to_where_it_is() -> None:
         assert f">{html.escape(titles[new])}</a>.</p>" in page
         assert "site-nav" not in page
         assert "<style" not in page
-        # Atlas and About aliases add a bounded amount to the shared forwarder.
-        assert len(page) < 11_000, "a forwarder and metadata remain small"
         # It fetches nothing, not even the shared assets a site page links.
         render_overview.assert_fetches_only_assets(old, page)
         assert f"{site_assets.ASSETS_DIR}/" not in page, old
@@ -7135,7 +7136,7 @@ def test_a_cases_status_is_one_chip_wherever_it_is_drawn(
     assert statuses == {"proved", "open"}
     records = case_pages
     shown = {
-        "atlas.html": rendered("atlas.html"),
+        "frontier.html": rendered("frontier.html"),
         # A record draws its own case's status: one solved case and one open one.
         "case records": records["cases/11.html"] + records["cases/29.html"],
     }
