@@ -204,3 +204,12 @@
 .site-profile-resources .site-contributor-links-compact span {
   overflow-wrap: break-word;
 }
+
+/* Primary names keep their emphasis while account and resource links stay regular. */
+.site-profile-name {
+  font-weight: var(--site-font-weight-sans-bold);
+}
+.site-profile-tally {
+  display: grid;
+  gap: 0.25rem;
+}

@@ -940,3 +940,115 @@ def test_theme_control_uses_the_shared_contrast_icon_size_and_keeps_its_name() -
         button.click()
         site_browser.api().expect(page.get_by_role("menu", name="Color theme")).to_be_visible()
         browser.close()
+
+
+def test_current_category_keeps_the_shared_underline_on_descendant_pages() -> None:
+    from tests import site_browser  # noqa: PLC0415
+
+    destinations = {
+        "result/t-037.html": "Results",
+        "profiles/joshua-levy.html": "About",
+        "papers/proof.html": "Learn",
+        "tutorial.html": "Learn",
+        "results.html": "Results",
+        "about.html": "About",
+        "index.html": "Overview",
+        "news.html": "News",
+    }
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        for path, label in destinations.items():
+            document = _browser_document().replace(
+                navigation_links("cases/11.html"), navigation_links(path)
+            )
+            page.set_content(document)
+            role = "button" if label in {"Results", "Learn", "About"} else "link"
+            active = page.get_by_role(role, name=label, exact=True)
+            site_browser.api().expect(active).to_have_css("text-decoration-line", "underline")
+            site_browser.api().expect(active).to_have_css("text-decoration-thickness", "2px")
+            active.hover()
+            site_browser.api().expect(active).to_have_css("text-decoration-line", "underline")
+            active.focus()
+            site_browser.api().expect(active).not_to_have_css("outline-style", "none")
+            for other in ("Results", "Learn", "About"):
+                if other != label:
+                    site_browser.api().expect(
+                        page.get_by_role("button", name=other, exact=True)
+                    ).to_have_css("text-decoration-line", "none")
+        browser.close()
+
+
+def test_profile_sections_keep_navigation_roles_and_tallies_precede_resources() -> None:
+    from devtools import render_contributors  # noqa: PLC0415
+    from sqpack.contributor_occurrences import load_occurrences  # noqa: PLC0415
+    from sqpack.contributors import load_contributors  # noqa: PLC0415
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    person = load_contributors().by_id["oscar-fitzharding"]
+    article = render_contributors.contributor_article(person, load_occurrences().occurrences)
+    head = _browser_document().split("</head>", 1)[0]
+    document = (
+        head
+        + '</head><body class="kpress"><main class="site-page kpress-prose">'
+        + article
+        + '<section><h2 id="exposition">A Mathematical Argument</h2></section>'
+        + "</main></body></html>"
+    )
+    measure = probe(Path(__file__).with_name("probes"), "site_navigation/presentation")
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        for width in (1280, 390):
+            page = browser.new_page(viewport={"width": width, "height": 900})
+            page.set_content(document)
+            found = page.evaluate(measure)
+            assert found["profileHeadings"]
+            for heading in found["profileHeadings"]:
+                assert "Source Sans" in heading["family"]
+                assert heading["style"] == "normal"
+                assert heading["weight"] == "550"
+            assert "PT Serif" in found["exposition"]["family"]
+            assert found["exposition"]["style"] == "italic"
+            assert len(found["tallies"]) == 3
+            assert all(
+                current["bottom"] <= following["top"]
+                for current, following in zip(
+                    found["tallies"], found["tallies"][1:], strict=False
+                )
+            )
+            assert found["tallies"][-1]["bottom"] < found["resourcesTop"]
+            assert not found["overflow"]
+            page.close()
+        browser.close()
+
+
+def test_case_property_badges_use_the_same_text_and_height_as_tags() -> None:
+    from devtools.overview_sections import case_status_chip  # noqa: PLC0415
+    from devtools.result_overview import case_badges  # noqa: PLC0415
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    head = _browser_document().split("</head>", 1)[0]
+    document = (
+        head + '</head><body class="kpress"><main class="site-page">'
+        '<table class="site-table site-frontier"><tbody><tr><td>'
+        + case_status_chip("proved")
+        + case_badges(11)
+        + "</td></tr></tbody></table></main></body></html>"
+    )
+    measure = probe(Path(__file__).with_name("probes"), "site_navigation/presentation")
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        for width in (1280, 390):
+            page = browser.new_page(viewport={"width": width, "height": 900})
+            page.set_content(document)
+            found = page.evaluate(measure)
+            assert found["badges"]
+            for badge in found["badges"]:
+                assert badge["size"] == found["tag"]["size"]
+                assert abs(badge["height"] - found["tag"]["height"]) < 0.5
+                assert badge["label"]
+                assert badge["width"] == badge["height"]
+            page.close()
+        browser.close()

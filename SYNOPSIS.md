@@ -693,6 +693,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [CI and Release Latency Audit, 22 October 2026](docs/project/reviews/review-2026-10-22-ci-release-latency.md) | dated review record | record | retained | — |
 | [Contributor Credit Link Audit, 22 October 2026](packing/contributors/reviews/2026-10-22-credit-link-audit.md) | dated review record | record | retained | — |
 | [Feature: Site Navigation and Page Hierarchy](docs/project/specs/active/plan-2026-10-22-site-navigation.md) | implementation plan | current | transient | — |
 | [Review: Mykhailo Polkovskyi’s Certificates at 105 and 204 from Issue #719 (T-229)](docs/project/reviews/review-2026-10-22-mishapolk-719.md) | dated review record | record | retained | — |

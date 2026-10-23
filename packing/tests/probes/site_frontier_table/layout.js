@@ -89,6 +89,13 @@ async (/** @type {{rows: string[], drawings: Record<string, string>}} */ { rows,
     const empty = content.height === 0;
     return {
       classes: cell.className,
+      content_height: round(content.height),
+      margins: round(
+        [...cell.children].reduce((total, child) => {
+          const style = getComputedStyle(child);
+          return total + Number.parseFloat(style.marginTop) + Number.parseFloat(style.marginBottom);
+        }, 0),
+      ),
       width: round(box.width),
       vertical_align: style.verticalAlign,
       above: empty ? null : round(content.top - box.top - Number.parseFloat(style.paddingTop)),

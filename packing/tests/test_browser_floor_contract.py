@@ -791,10 +791,14 @@ def _jobs_without_node(document: Mapping[str, Any], step_name: str) -> list[str]
         for step in job.get("steps", []):
             command = str(step.get("run", ""))
             node = node or str(step.get("uses", "")).startswith("actions/setup-node@")
-            npm = npm or "npm ci" in command
+            tokens = shlex.split(command)
+            npm = (
+                npm
+                or "npm ci" in command
+                or ("devtools.browser_setup" in tokens and "--npm" in tokens)
+            )
             if "packing-validate" not in command:
                 continue
-            tokens = shlex.split(command)
             # The CLI's own parser and selector, private by name; `test_validation_cli.py`
             # reads the workflow through them the same way, so neither can drift from it.
             parser = validate._parser()  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
@@ -1268,15 +1272,20 @@ def test_every_job_running_the_liveness_tests_installs_node() -> None:
         assert _jobs_without_node(document, "browser floor liveness tests") == [], workflow.name
 
 
-def test_a_frontend_job_without_node_is_detected() -> None:
-    """The negative control: liveness cannot move to a runner without its toolchain."""
+@pytest.mark.parametrize("missing", ["node", "npm"])
+def test_a_frontend_job_without_its_toolchain_is_detected(missing: str) -> None:
+    """Liveness needs both Node and the installed npm tools, including the helper path."""
     document = safe_load(WORKFLOWS[0].read_text(encoding="utf-8"))
-    document["jobs"]["frontend"]["steps"] = [
-        step
-        for step in document["jobs"]["frontend"]["steps"]
-        if "setup-node" not in str(step.get("uses", ""))
-        and "npm ci" not in str(step.get("run"))
-    ]
+    if missing == "node":
+        document["jobs"]["frontend"]["steps"] = [
+            step
+            for step in document["jobs"]["frontend"]["steps"]
+            if "setup-node" not in str(step.get("uses", ""))
+        ]
+    else:
+        for step in document["jobs"]["frontend"]["steps"]:
+            if "devtools.browser_setup" in str(step.get("run", "")):
+                step["run"] = str(step["run"]).replace("--npm", "")
     assert _jobs_without_node(document, "browser floor liveness tests") == ["frontend"]
 
 
