@@ -1,0 +1,107 @@
+{
+ "certificate_sha256": "929c2acf72ee54a1850183fc149f06dbf35bffa2f7ee68c8f833d888400e8080",
+ "control": "positive",
+ "adapter": "read",
+ "validate_job": "passed",
+ "wall_seconds": 29.34,
+ "cpu_seconds": {
+  "exact_verify": 6.94,
+  "independent": 4.61
+ },
+ "checker_input_sha256": "76f50599ca80249991d15a61cd5d1deba0335aa0171099369539f1697b0a732a",
+ "side": "447744305431858194305431410441/25000000000000000000000000000",
+ "exact_verify": {
+  "keys": [
+   "coordinate_provenance",
+   "failures",
+   "field_certificate",
+   "id",
+   "limitations",
+   "method",
+   "minimum_best_pair_gap",
+   "minimum_containment_clearance",
+   "n",
+   "operation",
+   "pairs_tested",
+   "side",
+   "verification_passed"
+  ],
+  "verification_passed": true,
+  "pairs_tested": 45753,
+  "minimum_containment_clearance": "60480000000010479/100000000000000000000000000000",
+  "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+  "failures": [],
+  "failure_count": 0
+ },
+ "independent": {
+  "keys": [
+   "coordinate_provenance",
+   "failures",
+   "field",
+   "limitations",
+   "method",
+   "minimum_best_pair_gap",
+   "minimum_containment_clearance",
+   "n",
+   "pairs_tested",
+   "side",
+   "verification_passed"
+  ],
+  "verification_passed": true,
+  "pairs_tested": 45753,
+  "minimum_containment_clearance": "60480000000010479/100000000000000000000000000000",
+  "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+  "failures": [],
+  "failure_count": 0
+ },
+ "kernel_run_sharp": {
+  "side-lowered-past-wall-contact at contact": {
+   "exact_verify": {
+    "passed": true,
+    "wall": "0",
+    "gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000"
+   },
+   "independent": {
+    "passed": true,
+    "wall": "0",
+    "gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000"
+   }
+  },
+  "side-lowered-past-wall-contact past": {
+   "exact_verify": {
+    "passed": false,
+    "wall": "-1/1000000000000000000000000000000",
+    "gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000"
+   },
+   "independent": {
+    "passed": false,
+    "wall": "-1/1000000000000000000000000000000",
+    "gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000"
+   }
+  },
+  "tightest-pair-closed-past-contact at contact": {
+   "exact_verify": {
+    "passed": true,
+    "wall": "60480000000010479/100000000000000000000000000000",
+    "gap": "0"
+   },
+   "independent": {
+    "passed": true,
+    "wall": "60480000000010479/100000000000000000000000000000",
+    "gap": "0"
+   }
+  },
+  "tightest-pair-closed-past-contact past": {
+   "exact_verify": {
+    "passed": false,
+    "wall": "60480000000010479/100000000000000000000000000000",
+    "gap": "-1/1000000000000000000000000000000"
+   },
+   "independent": {
+    "passed": false,
+    "wall": "60480000000010479/100000000000000000000000000000",
+    "gap": "-1/1000000000000000000000000000000"
+   }
+  }
+ }
+}

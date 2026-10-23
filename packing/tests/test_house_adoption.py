@@ -161,14 +161,18 @@ MOVED_AGAIN = {
     146: ("T-187", "T-168"),
     156: ("T-186", "T-161"),
     176: ("T-186", "T-165"),
-    303: ("T-186", "T-162"),
 }
 #: The counts of the seven that a later pass moved once more: the adoption of 19 October
 #: 2026 took 271 from T-186 to Evan Daniel's issue-664 certificate (T-219), and that of 20
 #: October 2026 took 204 from T-186 to Francisco Couzo's issue-678 certificate (T-223),
 #: which that of 22 October 2026 moved to Evan Daniel's view of its packing (T-225), and
-#: that of 23 October 2026 to Mykhailo Polkovskyi's re-solve of that view (T-229).
-MOVED_LATER = {271: ("T-219", "2026-10-19"), 204: ("T-229", "2026-10-23")}
+#: that of 23 October 2026 to Mykhailo Polkovskyi's re-solve of that view (T-229); the
+#: same pass took 303 from T-186 to Evan Daniel's issue-728 certificate (T-230).
+MOVED_LATER = {
+    271: ("T-219", "2026-10-19"),
+    204: ("T-229", "2026-10-23"),
+    303: ("T-230", "2026-10-23"),
+}
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
 #: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
@@ -1402,9 +1406,11 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # October 2026 moved 270 to Daniel's issue-703 certificate (T-224) and 260 to Couzo's
     # (T-223), the adoption of 22 October 2026 moved 204, 227, 229 and 260 to Daniel's
     # regularized views (T-225), and the adoption of 23 October 2026 moved 105 and 204 to
-    # Mykhailo Polkovskyi's issue-719 re-solves (T-229), after this receipt was retained.
+    # Mykhailo Polkovskyi's issue-719 re-solves (T-229) and 303 to Evan Daniel's issue-728
+    # certificate (T-230), after this receipt was retained.
     later = {
         105: "T-229",
+        303: "T-230",
         155: "T-197",
         183: "T-220",
         229: "T-225",
@@ -1425,6 +1431,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         204: "T-186",
         236: "T-146",
         271: "T-186",
+        303: "T-186",
         308: "T-174",
         270: "T-174",
     }

@@ -3093,6 +3093,23 @@ sources:
       register''s packing are retained beside it. MIT-licensed; Claude
       assistance disclosed. KKT and local-minimum statements are the author''s numerical evidence; no local
       or global optimality claim.'
+  - key: '[Daniel n303 2026-10-22]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-22'
+    lineage: builds-on-project
+    credit: Daniel after Ostashev, Levy
+    note: 'One complete exact dilation certificate at f06521f4bde9e379a91c1ea88053f3e43df8ede5, s(303) <=
+      447744305431858194305431410441/(25*10^27), found by the author''s basin explorer, near-record sweeps
+      and a final band flip from Daniil Ostashev''s #562 packing, which the issue names as the start; the
+      issue calls it a new packing, not a refinement. Measured pose by pose in the packet (measure/identity.json),
+      it is another arrangement of Ostashev''s two-band design with one tilted band reflected, 64 squares
+      beyond a tenth of T-186''s packing under the identity, not a refinement of it. The binary64 packing
+      it was dilated from and the source''s pipeline report are retained beside it. MIT-licensed; Claude
+      assistance disclosed. The not-jammed verdict and the predicted descent of about 4.8e-7 are the author''s
+      numerical statements; no local or global optimality claim.'
   - key: '[Muglich issue 686 2026-10-19]'
     authors:
     - Muglich

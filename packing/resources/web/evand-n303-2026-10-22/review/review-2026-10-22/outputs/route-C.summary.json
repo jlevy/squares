@@ -1,0 +1,23 @@
+{
+ "route": "C (Fraction, clipping area)",
+ "n": 303,
+ "side": "447744305431858194305431410441/25000000000000000000000000000",
+ "accepted": true,
+ "least_wall_clearance_sci": "6.048000000001e-13",
+ "least_wall_square": 0,
+ "least_wall": "x>=0",
+ "wall_contacts": 0,
+ "wall_violation_count": 0,
+ "pairs_decided": 45753,
+ "overlapping_pair_count": 0,
+ "centre_pairs_within_sqrt2": 695,
+ "pair_sign_digest": "5f5696bb0f4d5ee96b2cd00ca1261919590ff726068f979faa7536011252f1e5",
+ "cpu_seconds": 4.81,
+ "touching_pairs": 0,
+ "least_distance_sci": "1.204500000000e-12",
+ "least_distance_pair": [
+  284,
+  296
+ ],
+ "side_equals_claim": true
+}

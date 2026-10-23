@@ -1,0 +1,88 @@
+{
+ "side": "447744305431858194305431410441/25000000000000000000000000000",
+ "side_sci": "1.790977221727432777221725e+1",
+ "side_equals_claim": true,
+ "ceil_12": "17.909772217275",
+ "ceil_12_equals_issue_print": true,
+ "issue_long_print_is_truncation": true,
+ "side_is_not_a_12_place_decimal": true,
+ "house": {
+  "witness_id": "W-known-best-n303",
+  "witness_side": "223874478638373849767708018731100462502930758319276667065271354307189968584331641646777792095999047220400719209/12500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "witness_side_sci": "1.7909958291069907981e+1",
+  "verified_exact_equals_witness": true,
+  "reported_exact_equals_witness": true,
+  "verified_value_print": "17.90995829106990799",
+  "verified_value_is_ceiling_of_witness_side": true,
+  "evidence": [
+   "E-mishapolk-70a033f-exact-feasibility"
+  ],
+  "margin": "2325922444752614992313510600462502930758319276667065271354307189968584331641646777792095999047220400719209/12500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "margin_sci": "1.860737955802e-4",
+  "issue_best_before_is_ceil12_of_house": true,
+  "issue_improvement_print": "1.86e-4",
+  "improvement_rounds_to_issue": true
+ },
+ "every_earlier_report_above": true,
+ "least_margin_report": {
+  "report": "mishapolk-kkt-refinements-2026-10-14 ((no issue))",
+  "when": "2026-10-14T16:11:31Z",
+  "side": "223874478638373849767708018731100462502930758319276667065271354307189968584331641646777792095999047220400719209/12500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "margin_lower": "2325922444752614992313510600462502930758319276667065271354307189968584331641646777792095999047220400719209/12500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "margin_sci": "1.860737e-4",
+  "below": true,
+  "how": "exact",
+  "source": "resources/web/mishapolk-kkt-refinements-2026-10-14/acquisition/claims.json"
+ },
+ "case_record_mentions_no_lower_report": true,
+ "f64": {
+  "header": [
+   "303",
+   "17.909772217256418"
+  ],
+  "binary64_side_exact": "1260288179436351/70368744177664",
+  "dilated_by_1e-12": "1.79097722172743273202319805790e+1",
+  "certificate_minus_dilated": "4.51985e-16",
+  "certificate_is_dilated_side_rounded_to_29_places": false,
+  "certificate_over_binary64_side_minus_1": "1.000025236e-12"
+ },
+ "later_counts": {
+  "bounds": 42,
+  "all_below": true,
+  "exact": 42,
+  "least": {
+   "n": 304,
+   "lane": "verified_upper_bound",
+   "how": "exact",
+   "margin_lower": "1965554080084719326977544376836311278604266912137/100000000000000000000000000000000000000000000000000",
+   "margin_sci": "1.965554e-2",
+   "below": true
+  },
+  "beyond_324": "every bound at m >= 325 is at least sqrt(m) > 18 > S by area",
+  "printed_count": 0
+ }
+}
+earlier reports at 303:
+       1.860737e-4  exact   2026-10-14T16:11:31Z mishapolk-kkt-refinements-2026-10-14 ((no issue))
+       1.860737e-4  exact   2026-10-13T00:24:05Z pingyou-pr574-certificates-2026-10-13 (https://github.com/jlevy/square
+       1.860737e-4  exact   2026-10-13T00:13:11Z ledger: PR #574
+       1.860737e-4  exact   2026-10-12T14:51:10Z dostashev-compositions-2026-10-12 (https://github.com/jlevy/squares/is
+       1.860737e-4  exact   2026-10-12T19:10:14Z ledger: #562
+       1.860737e-4  exact   2026-10-13T15:51:54Z mishapolk-records-2026-10-14 (https://github.com/jlevy/squares/issues/
+       1.860737e-4  exact   2026-10-14T01:40:32Z ledger: #593
+       3.293245e-3  exact   2026-10-10T18:05:38Z evand-regularized-2026-10-10 ((no issue))
+       3.293245e-3  exact   2026-10-09T21:23:14Z squish-481-third-request-2026-10-09 (https://github.com/jlevy/squares/
+       3.293245e-3  exact   2026-10-12T23:52:23Z mishapolk-exact-certificates-2026-10-12 (https://github.com/jlevy/squa
+       3.293245e-3  exact   2026-10-12T23:58:50Z ledger: #573
+       7.593458e-3  exact   2026-10-10T13:52:27Z couzo-certificates-2026-10-10 (https://github.com/jlevy/squares/issues
+       7.671708e-3  exact   2026-10-09T20:28:52Z couzo-exact-certificates-2026-10-09 (https://github.com/jlevy/squares/
+       1.054015e-2  exact   2026-10-09T07:20:27Z mishapolk-decimal-poses-2026-10-09 (https://github.com/jlevy/squares/i
+       1.054015e-2  exact   2026-10-07           SQUISH #401 (T-113)
+       1.456879e-2  exact   2026-10-05           Daniel exact optima (T-098)
+       1.456879e-2  exact   2026-10-03           Couzo 2026-10-03 packet (T-092)
+       1.457704e-2  exact   2026-09-27           Couzo 2026-09-27 packet (T-056)
+       1.879032e-2  printed franciscouzo/square- Francisco Couzo
+       2.128414e-2  printed griffcass/square-pac Griffin Casson
+       2.148287e-2  printed kingbird-2026-10-21  Kingbird (David Ellsworth's catalogue)
+       2.148287e-2  printed kingbird-2026-10-22  Kingbird (David Ellsworth's catalogue)
+       2.148287e-2  printed retained 2026-09-30  Kingbird (David Ellsworth's catalogue)

@@ -1,0 +1,30 @@
+{
+ "checker_input_sha256_rebuilt": "76f50599ca80249991d15a61cd5d1deba0335aa0171099369539f1697b0a732a",
+ "pairs": 45753,
+ "least_wall_clearance": "60480000000010479/100000000000000000000000000000",
+ "least_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+ "least_gap_pair_numbered_from_0": [
+  284,
+  296
+ ],
+ "source_report_lines": {
+  "verify_cert": "VALID: s(n) <= S",
+  "verify_cert2": "VALID: 303 closed unit squares pairwise disjoint inside the open box of side 17.909772217274326778 (695 close pairs checked)"
+ },
+ "checks": {
+  "same_side_and_poses_as_maintained_reader": true,
+  "side_same_everywhere": true,
+  "least_wall_clearance_equal_Z_C_sqpack_independent": true,
+  "least_pair_gap_equal_Z_sqpack_independent": true,
+  "least_gap_squared_equals_least_squared_distance_C": true,
+  "every_pair_decided_on_all_four_routes": true,
+  "per_pair_decisions_identical_Z_C": true,
+  "all_four_routes_accept": true,
+  "gross_controls_refused_by_both_maintained_routes": true,
+  "source_close_pairs_equal_centre_pairs_within_sqrt2": true,
+  "source_min_pair_separation_1.2e-12_consistent": true,
+  "source_checkers_report_valid": true,
+  "source_report_S_cert_is_float_of_side": true
+ },
+ "all_agree": true
+}

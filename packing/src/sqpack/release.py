@@ -790,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "400a2daea46bace43a572ff66df05111b9cd78bc"
+DATA_REVISION = "868925d6b2e2b6640cc83d9b547cbcf914623f45"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -888,10 +888,18 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
-        version="v0.4.20",
-        first_published="October 22, 2026",
+        version="v0.4.21",
+        first_published="October 23, 2026",
         result_scope=(
             "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.4.20",
+        first_published="October 23, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Evan Daniel's "
+            "#728 certificate at 303 (T-230)."
         ),
     ),
     PublicationHistoryEntry(
@@ -1428,10 +1436,20 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.20",
+        version="v0.4.21",
+        impact="patch",
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.19",
         version="v0.4.20",
         impact="patch",
-        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
+        reason=(
+            "Update the registered result count after the registration of Evan Daniel's "
+            "#728 certificate at 303 (T-230)."
+        ),
     ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
@@ -2397,6 +2415,41 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-230's registration (#728, V3/C3 after the 22 October review), its adoption at "
+            "303 in the 23 October pass and the request entries for #522, #526 and #728, "
+            "against main fcf2f96a5 (#730), after review A's record fixes: rendered at link "
+            "revision 868925d6 into empty site directories, twice from this tree at 5cb3191c "
+            "with this record and twice from main's, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four. The explainer counts the register and took "
+            "v0.4.20. No PDF was printed; each prints from that HTML. Retain v0.1.10, "
+            "v0.1.3 and v0.2.6."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=("packing/campaign/result-requests.yaml",),

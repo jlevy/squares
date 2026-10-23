@@ -1,0 +1,19 @@
+{
+ "control": "duplicate-square-overlap",
+ "validate_job": "passed",
+ "exact_verify": {
+  "passed": false,
+  "pairs": 45753,
+  "wall": "60480000000010479/100000000000000000000000000000",
+  "gap": "-1",
+  "failures": 1
+ },
+ "independent": {
+  "passed": false,
+  "pairs": 45753,
+  "wall": "60480000000010479/100000000000000000000000000000",
+  "gap": "-1",
+  "failures": 1
+ }
+}
+exit 1

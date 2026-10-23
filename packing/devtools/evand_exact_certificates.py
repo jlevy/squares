@@ -28,7 +28,12 @@ into a scratch tree to run the source's ``verify_all.sh``.
 **What its author read.** The format as the source's README states it, and the source's
 ``verify_cert.py`` and ``verify_cert2.py``, read before this module was written to
 confirm that the corners it builds from ``(x, y, t)`` are the squares those checkers
-decide; nothing of theirs, nor of the source's solver, is imported or copied. The two
+decide. Nothing of theirs, nor of the source's solver, is imported, but two expressions
+are theirs, transcribed (RF-1 of the 22 October 2026 review of issue #728): the reader's
+line filter in `parse`, which skips blank lines and lines beginning with ``#``, is the
+filter of both checkers, and `Pose.corners`, from which the independent checker decides,
+is ``verify_cert2.py``'s ``corners`` term for term. The corner construction is the
+format's definition, and a clean-room checker derived it without reading theirs. The two
 deciders predate this import: ``sqpack.witness`` is this repository's own, and
 ``devtools.check_rational_witness_independent`` was written to share no geometry or
 verification code with it.
