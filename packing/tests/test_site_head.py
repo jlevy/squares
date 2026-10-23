@@ -12,6 +12,7 @@ their modules' tests (`test_n11_lower_bounds_explainer`, `test_render_n11_optima
 from __future__ import annotations
 
 import html
+import json
 import re
 from collections.abc import Iterator
 from html.parser import HTMLParser
@@ -205,6 +206,36 @@ def test_every_page_of_the_site_carries_the_set_once_at_its_own_address(
     assert [name for name, kind in kinds.items() if kind != ["website"]] == [
         "tutorial.html",
         "tutorial-advanced.html",
+    ]
+
+
+_SPECULATION_RULES = re.compile(r'<script type="speculationrules">(.*?)</script>', re.DOTALL)
+
+
+def test_every_page_prerenders_a_hovered_site_link(pages: dict[str, str]) -> None:
+    """Each site page's head carries the speculation rules once (think-gr4c): Chromium
+    prerenders another page of the site when a reader rests on or presses its link
+    ("moderate"), and leaves files, downloads and other sites alone. The rules are read
+    back from the rendered head, so a page whose head is not written by `head_tags`, or an
+    escape that breaks the JSON, fails here."""
+    rules = render_overview.SPECULATION_RULES
+    (prerender,) = rules["prerender"]
+    assert prerender["eagerness"] == "moderate"
+    # Pages only, so a hover never fetches a linked file such as the 8 MB poster SVG.
+    assert prerender["where"]["and"] == [
+        {"href_matches": ["/", "/*/", "/*.html"]},
+        {"not": {"selector_matches": "[download]"}},
+    ]
+    assert set(rules) == {"prerender"}, "prefetch-only or immediate rules are a new choice"
+    for name, page in pages.items():
+        head = page[: page.find("<body")]
+        found = _SPECULATION_RULES.findall(head)
+        assert len(found) == 1, (name, len(found))
+        assert json.loads(found[0]) == rules, name
+    # The papers' and forwarders' heads are `head_tags` alone, so they are unchanged.
+    assert _SPECULATION_RULES.findall(head_tags(RESULTS)) == []
+    assert _SPECULATION_RULES.findall(render_overview.speculation_rules_tag()) == [
+        json.dumps(rules, separators=(",", ":"))
     ]
 
 

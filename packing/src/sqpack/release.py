@@ -2364,6 +2364,36 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
         ),
+        paths=("packing/devtools/render_overview.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Speculation rules on the site's own pages (think-gr4c): render_overview gains "
+            "SPECULATION_RULES and speculation_rules_tag, which kpress_page and "
+            "static_content_page add after head_tags; head_tags itself, which writes the "
+            "papers' heads, is unchanged. Rendered at link revision e929137a into empty "
+            "directories, once from this tree and twice from main e929137a8 (#725): the "
+            "four renderers write 68 files each, none carrying the rules, byte-identical "
+            "except one span's style attribute in the explainer's HTML, whose place varies "
+            "between renders (the record below). No PDF was printed; each prints from that "
+            "HTML. Retain v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
         paths=(
             "packing/atlas/known-best/bound-citations.json",
             "packing/atlas/known-best/composite-figure.json",
