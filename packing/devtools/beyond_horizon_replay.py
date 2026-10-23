@@ -1882,14 +1882,22 @@ def _blobs(clone: Path, blobs: Sequence[str]) -> dict[str, bytes]:
     return found
 
 
-def _row_side(source: Mapping[str, Any], n: int, printed: str) -> Fraction:
+def _stated_side(source: Mapping[str, Any], n: int) -> Fraction | None:
+    """The exact side a row's source states at ``n``, read as the ledger's starts read it
+    (`devtools.intake_ledger.stated_exact_side`), or None for a record that states none."""
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    try:
+        return intake_ledger.stated_exact_side(source, n)
+    except intake_ledger.LedgerError as error:
+        raise ReplayError(str(error)) from error
+
+
+def row_side(source: Mapping[str, Any], n: int, printed: str) -> Fraction:
     """A beyond-horizon row's side: the exact side its source's claims record states, or,
-    where that record keeps none, the row's print."""
-    record = json.loads(read_retained_text(ROOT / source["claims_record"]))
-    found = [item for item in record.get("results", []) if int(item["n"]) == n]
-    if found and "exact_side" in found[0]:
-        return Fraction(found[0]["exact_side"])
-    return Fraction(printed)
+    where that record states none at any count, the row's print (`_stated_side`)."""
+    side = _stated_side(source, n)
+    return Fraction(printed) if side is None else side
 
 
 def _standing(chosen: Release) -> dict[int, Fraction]:
@@ -1907,7 +1915,7 @@ def _standing(chosen: Release) -> dict[int, Fraction]:
             standing[n] = Fraction(row["case"]["exact_side"])
             continue
         rows = [
-            _row_side(sources[item["report"]], n, item["printed"])
+            row_side(sources[item["report"]], n, item["printed"])
             for item in row["pending"]
             if "printed" in item
         ]
@@ -2511,16 +2519,15 @@ def _source_times(source: Mapping[str, Any]) -> str:
     raise ReplayError(f"{source['id']}: the acquisition record does not pin {commit[1]}")
 
 
-def _exact_row_side(source: Mapping[str, Any], n: int) -> Fraction:
-    """A row's exact side, from its source's claims record; the history walk compares
-    sides exactly, so a row whose record keeps only a print is refused."""
-    record = json.loads(read_retained_text(ROOT / source["claims_record"]))
-    found = [item for item in record.get("results", []) if int(item["n"]) == n]
+def exact_row_side(source: Mapping[str, Any], n: int) -> Fraction:
+    """A row's exact side, from its source's claims record (`_stated_side`); the history
+    walk compares sides exactly, so a row whose record keeps only a print is refused."""
+    side = _stated_side(source, n)
     _require(
-        len(found) == 1 and "exact_side" in found[0],
-        f"{source['id']} n={n}: its claims record states no one exact side",
+        side is not None, f"{source['id']} n={n}: its claims record states no one exact side"
     )
-    return Fraction(found[0]["exact_side"])
+    assert side is not None
+    return side
 
 
 def _history_rows(coverage: Mapping[str, Any]) -> dict[str, list[tuple[int, Fraction, str]]]:
@@ -2536,7 +2543,7 @@ def _history_rows(coverage: Mapping[str, Any]) -> dict[str, list[tuple[int, Frac
         source = row["source_id"]
         if row["n"] not in HISTORY_COUNTS or source not in HISTORY_SOURCES or source in ours:
             continue
-        side = _exact_row_side(sources[source], row["n"])
+        side = exact_row_side(sources[source], row["n"])
         found.setdefault(source, []).append((row["n"], side, str(row["value"])))
     return {source: sorted(rows) for source, rows in found.items()}
 
@@ -2780,10 +2787,14 @@ def write_history_sources(read_on: str) -> int:
 # --------------------------------------------------------------------------- issue #732
 
 
-#: A certificate path that names its count, under any layout the #732 source has used:
-#: ``certificates/nN.cert``, ``certificates/n-N.cert`` and its suffixed variants
-#: (``n-N_tight.cert``), ``certificates/square-N.cert``, and the thousands folders
-#: ``certificates/NNNN-NNNN/nN.cert``.
+#: A certificate file's path that names its count, under every layout of certificate
+#: files the #732 source has used: ``certificates/nN.cert``, ``certificates/n-N.cert`` and
+#: its suffixed variants (``n-N_tight.cert``), ``certificates/square-N.cert``, and the
+#: thousands folders ``certificates/NNNN-NNNN/nN.cert``. Nothing else names a side to it.
+#: The source's decimal poses, ``certificates/square-N.txt`` (343 to 360 in the band, since
+#: ``2b76e6f`` of 9 October and still at the pin), are not certificates; every one is above
+#: the grid's 19 (``mishapolk-decimal-poses-2026-10-09``). Its indexes, ``upper_bounds.json``
+#: and ``certified_bounds.json``, are not read either (#742's review A, A4).
 _COUNT_NAMED = re.compile(
     r"certificates/(?:[0-9]{4}-[0-9]{4}/)?(?:n-?|square-)([1-9][0-9]*)[^/]*\.cert"
 )
@@ -2801,16 +2812,23 @@ def named_count(path: str) -> int | None:
 
 
 def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
-    """Every side a release's own repository published at `HISTORY_COUNTS`, from a clone.
+    """Every side a release's own repository published in a certificate file at
+    `HISTORY_COUNTS`, from a clone.
 
     The repository is watched, so each certificate there is a publication from the first
-    commit of the retained commit's history that holds its side. Only paths that name a
-    count in `HISTORY_COUNTS` are read (`_COUNT_NAMED`), so a blobless clone fetches no
-    certificate above ``LIMIT``, and each file's header must state the count its path
-    names. At the retained commit each count's certificate is listed with its Git blob,
-    SHA-256 and exact side, the first commit that holds its side and the first that holds
-    its blob, and is held to the source's manifest (`SOURCE_MANIFEST`): the path, digest
-    and exact bound the manifest states for the count must be the file's.
+    commit of the retained commit's history that holds its side. Only certificate files
+    whose paths name a count in `HISTORY_COUNTS` are read (`_COUNT_NAMED`), so a blobless
+    clone fetches no certificate above ``LIMIT``, and each file's header must state the
+    count its path names. At the retained commit each count's certificate is listed with
+    its Git blob, SHA-256 and exact side, the first commit that holds its side and the first
+    that holds its blob, and is held to the source's manifest (`SOURCE_MANIFEST`): the path,
+    digest and exact bound the manifest states for the count must be the file's.
+
+    The source's decimal poses and its own indexes are not read. At #732's source no
+    ``verified`` or certified bound either index states at 325 to 1024, the lanes the history
+    scan reads of an index (`INDEXES`), is below the start and every side walked there, at
+    any commit that holds it; only ``3285fac``'s ``reported`` lane is, where it restates the
+    Kingbird catalogue's 14-place prints (the packet README).
     """
     chosen = release(issue)
     chain = _git(clone, "rev-list", "--reverse", "--topo-order", chosen.retained).split()

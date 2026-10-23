@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import copy
 import dataclasses
+import hashlib
 import json
 import os
 import subprocess
@@ -785,8 +786,12 @@ def test_a_hold_on_a_count_a_row_holds_is_refused(monkeypatch: pytest.MonkeyPatc
     ]
 
 
-def _commit(repo: Path, when: str, files: dict[str, str]) -> None:
+def _commit(repo: Path, when: str, files: dict[str, str | None]) -> None:
+    """Commit ``files`` at ``when``: each path with its text, or removed where it is None."""
     for name, text in files.items():
+        if text is None:
+            (repo / name).unlink()
+            continue
         (repo / name).parent.mkdir(parents=True, exist_ok=True)
         (repo / name).write_text(text, encoding="utf-8")
     env = {"GIT_AUTHOR_DATE": when, "GIT_COMMITTER_DATE": when, "PATH": os.environ["PATH"]}
@@ -794,7 +799,7 @@ def _commit(repo: Path, when: str, files: dict[str, str]) -> None:
         subprocess.run(["git", "-C", str(repo), *args], check=True, env=env)
 
 
-def _repository(path: Path, commits: list[tuple[str, dict[str, str]]]) -> Path:
+def _repository(path: Path, commits: list[tuple[str, dict[str, str | None]]]) -> Path:
     path.mkdir()
     subprocess.run(["git", "init", "-q", str(path)], check=True)
     for key, value in (("user.name", "t"), ("user.email", "t@t"), ("commit.gpgsign", "false")):
@@ -1108,8 +1113,9 @@ RESTING_732 = {"consequence": 14, "goebel": 43, "recipe": 41, "sub-print": 31}
 
 
 def test_a_count_named_outside_the_band_is_never_read() -> None:
-    """The source-history scan reads only certificate paths that name a count from 325 to
-    1024, under any layout the source has used, so a blobless clone fetches nothing above."""
+    """The source-history scan reads only certificate files whose paths name a count from
+    325 to 1024, under every layout of certificate files the source has used, so a blobless
+    clone fetches nothing above. Decimal poses and indexes name no count to it."""
     named = {
         "certificates/0000-0999/n372.cert": 372,
         "certificates/n-411.cert": 411,
@@ -1118,6 +1124,8 @@ def test_a_count_named_outside_the_band_is_never_read() -> None:
         "certificates/1000-1999/n1061.cert": 1061,
         "README.md": None,
         "certificates/manifest.json": None,
+        "certificates/square-343.txt": None,
+        "upper_bounds.json": None,
     }
     assert {path: replay.named_count(path) for path in named} == named
     assert 1061 not in replay.HISTORY_COUNTS
@@ -1142,6 +1150,206 @@ def test_the_732_source_history_holds_each_certificate_to_the_manifest() -> None
     assert found == FIRST_PUBLISHED_732
     sides = {(item["n"], item["side"]) for item in history["publications"]}
     assert all((row["n"], row["side"]) in sides for row in rows)
+
+
+#: A certificate the #732 source-history fixture moves, a lower side it publishes later,
+#: and files outside the band whose headers would be refused if they were read.
+SOURCE_400 = "# N=400, src=cert_n-399, layers=1, del=0\n400 39/2\n0 0 0\n"
+SOURCE_401 = ("401 20\n", "401 199/10\n")
+OUTSIDE_BAND = {
+    "certificates/n-133_tight.cert": "not a certificate\n",
+    "certificates/1000-1999/n1061.cert": "not a certificate\n",
+    "certificates/square-400.txt": "decimal poses, not a certificate\n",
+}
+
+
+def _source_history(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    witnesses: Any = None,
+    early: dict[str, str | None] | None = None,
+) -> tuple[dict[str, Any], list[str], dict[str, str]]:
+    """`source_history` over a three-commit source: an ``n-N.cert`` at 400 (with a tight
+    copy) and 401; the 400 blob moved to ``0000-0999/nN.cert`` beside a lower 401; then
+    files outside the band and the manifest. ``witnesses`` edits the manifest's entries and
+    ``early`` adds files to the first commit. Returns the receipt, the three commits and
+    the blob of each path at the last."""
+    moved = "certificates/0000-0999/n400.cert"
+    lower = "certificates/0000-0999/n401.cert"
+    stated = {
+        "400": {
+            "certificate": moved,
+            "certificate_sha256": hashlib.sha256(SOURCE_400.encode()).hexdigest(),
+            "bound": "19.5",
+        },
+        "401": {
+            "certificate": lower,
+            "certificate_sha256": hashlib.sha256(SOURCE_401[1].encode()).hexdigest(),
+            "bound": "199/10",
+        },
+        "1061": {"certificate": "certificates/1000-1999/n1061.cert", "bound": "33"},
+    }
+    if witnesses is not None:
+        witnesses(stated)
+    first: dict[str, str | None] = {
+        "certificates/n-400.cert": SOURCE_400,
+        "certificates/n-400_tight.cert": SOURCE_400,
+        "certificates/n-401.cert": SOURCE_401[0],
+        **(early or {}),
+    }
+    tmp_path.mkdir(parents=True, exist_ok=True)
+    repo = _repository(
+        tmp_path / "source",
+        [
+            ("2026-10-10T00:00:00Z", first),
+            (
+                "2026-10-11T00:00:00Z",
+                {
+                    "certificates/n-400.cert": None,
+                    "certificates/n-400_tight.cert": None,
+                    "certificates/n-401.cert": None,
+                    moved: SOURCE_400,
+                    lower: SOURCE_401[1],
+                },
+            ),
+            (
+                "2026-10-12T00:00:00Z",
+                {
+                    **OUTSIDE_BAND,
+                    replay.SOURCE_MANIFEST: json.dumps({"witnesses": stated}),
+                },
+            ),
+        ],
+    )
+
+    def git(*args: str) -> str:
+        found = subprocess.run(
+            ["git", "-C", str(repo), *args], capture_output=True, text=True, check=True
+        )
+        return found.stdout.strip()
+
+    commits = git("rev-list", "--reverse", "HEAD").split()
+    blobs = {path: git("rev-parse", f"HEAD:{path}") for path in (moved, lower)}
+    chosen = dataclasses.replace(replay.release(732), retained=commits[-1])
+    monkeypatch.setitem(replay.RELEASES, "#732", chosen)
+    return replay.source_history(732, repo), commits, blobs
+
+
+def test_the_source_history_dates_each_side_by_its_first_commit_across_renames(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`source_history` reads only certificate paths naming a count from 325 to 1024: the
+    files outside the band, whose headers it would refuse, are never opened, and decimal
+    poses are not certificates. A side is first published by the first commit,
+    in topological order and then by path, that holds it under any name, so a moved file
+    keeps its first commit, and each side a count ever had is a publication. At the last
+    commit each count's file is held to the manifest (#742's review A, A2)."""
+    history, (first, second, last), blobs = _source_history(tmp_path, monkeypatch)
+    moved, lower = "certificates/0000-0999/n400.cert", "certificates/0000-0999/n401.cert"
+    assert (history["retained_commit"], history["history_commits"]) == (last, 3)
+    assert history["counts"] == [325, 1024]
+    assert history["at_commit"] == [
+        {
+            "n": 400,
+            "certificate": moved,
+            "blob": blobs[moved],
+            "sha256": hashlib.sha256(SOURCE_400.encode()).hexdigest(),
+            "side": "39/2",
+            "ceiling_12": "19.500000000000",
+            "side_first_commit": first,
+            "side_first_published": "2026-10-10T00:00:00Z",
+            "side_first_path": "certificates/n-400.cert",
+            "blob_first_commit": first,
+            "blob_first_published": "2026-10-10T00:00:00Z",
+        },
+        {
+            "n": 401,
+            "certificate": lower,
+            "blob": blobs[lower],
+            "sha256": hashlib.sha256(SOURCE_401[1].encode()).hexdigest(),
+            "side": "199/10",
+            "ceiling_12": "19.900000000000",
+            "side_first_commit": second,
+            "side_first_published": "2026-10-11T00:00:00Z",
+            "side_first_path": lower,
+            "blob_first_commit": second,
+            "blob_first_published": "2026-10-11T00:00:00Z",
+        },
+    ]
+    assert [
+        (item["n"], item["side"], item["commit"], item["path"])
+        for item in history["publications"]
+    ] == [
+        (400, "39/2", first, "certificates/n-400.cert"),
+        (401, "20", first, "certificates/n-401.cert"),
+        (401, "199/10", second, lower),
+    ]
+    assert {item["path"] for item in history["publications"]}.isdisjoint(OUTSIDE_BAND)
+
+
+def test_the_source_history_refuses_a_header_or_a_manifest_that_disagrees(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A file in the band whose header states another count is refused, in any commit of
+    the history, as is a manifest whose path, digest or exact bound for a count is not the
+    file's, or which states another set of counts in the band than the commit holds."""
+    with pytest.raises(replay.ReplayError, match=r"n-402\.cert .*header does not state"):
+        _source_history(
+            tmp_path / "header", monkeypatch, early={"certificates/n-402.cert": "403 20\n"}
+        )
+    edits = {
+        "path": lambda stated: stated["400"].update(certificate="certificates/n-400.cert"),
+        "digest": lambda stated: stated["400"].update(certificate_sha256="0" * 64),
+        "bound": lambda stated: stated["400"].update(bound="39/2" + "1"),
+        "absent": lambda stated: stated.pop("400"),
+    }
+    for name, edit in edits.items():
+        with pytest.raises(replay.ReplayError, match=r"n=400: .* is not the certificate"):
+            _source_history(tmp_path / name, monkeypatch, edit)
+    with pytest.raises(replay.ReplayError, match="states other counts at or below 1024"):
+        _source_history(
+            tmp_path / "extra",
+            monkeypatch,
+            lambda stated: stated.update({"402": dict(stated["401"])}),
+        )
+    with pytest.raises(replay.ReplayError, match="n=400: the commit holds 2 files"):
+        _source_history(
+            tmp_path / "two",
+            monkeypatch,
+            early={"certificates/0000-0999/n400_tight.cert": SOURCE_400},
+        )
+
+
+def test_the_replay_reads_a_row_s_exact_side_as_the_ledger_s_starts_do(
+    tmp_path: Path,
+) -> None:
+    """One reader for both (`devtools.intake_ledger.stated_exact_side`): at every current
+    beyond-horizon row the replay's side is the ledger's exact side, or its print where the
+    source states none, and an unclear record is refused as a `ReplayError` (#742's review
+    A, A3)."""
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    sources = {source["id"]: source for source in coverage["sources"]}
+    rows = {
+        row["n"]: row
+        for row in coverage["beyond_horizon_claims"]
+        if "superseded_by" not in row and row["n"] in replay.HISTORY_COUNTS
+    }
+    exact = intake_ledger.beyond_exact_sides(coverage, rows)
+    assert len(exact) > 300
+    for n, row in rows.items():
+        side = replay.row_side(sources[row["source_id"]], n, str(row["value"]))
+        assert side == exact.get(n, Fraction(str(row["value"]))), n
+    absent = {"id": "absent", "claims_record": str(tmp_path / "absent.json")}
+    with pytest.raises(replay.ReplayError, match="does not exist"):
+        replay.row_side(absent, 400, "20")
+    printed_only = tmp_path / "sources.json"
+    printed_only.write_text(json.dumps({"sources": []}), encoding="utf-8")
+    printed = {"id": "printed", "claims_record": str(printed_only)}
+    assert replay.row_side(printed, 400, "19.99") == Fraction("19.99")
+    with pytest.raises(replay.ReplayError, match="states no one exact side"):
+        replay.exact_row_side(printed, 400)
 
 
 def test_732_declares_the_77_rows_its_walk_records_and_holds_499() -> None:
