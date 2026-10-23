@@ -5,13 +5,13 @@ title: "Decide: is a watched certificate its author withdrew from an issue a rep
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - decision
   - result-import
 dependencies: []
 created_at: 2026-10-23T02:32:53.909Z
-updated_at: 2026-10-23T02:32:53.909Z
+updated_at: 2026-10-23T05:04:12.354Z
 ---
 Owner decision raised by the #732 import (think-0gp6, lane c-lane-732-import-1023), 23 October 2026.
 
@@ -26,3 +26,7 @@ Owner decision raised by the #732 import (think-0gp6, lane c-lane-732-import-102
 - Reports: nine superseded rows are written for 1851c2c, each superseded on entry by #732's row, from a packet that retains or derives the nine files at 1851c2c (the #719 packet pins them by digest at 12fc466).
 
 blocked_on: owner
+
+## Notes
+
+2026-10-23 coord-intake-1023: OWNER DECISION (in conversation, 23 October): a watched certificate its author withdrew from an issue, claiming a lower file later, is NOT a report. Nothing changes in the rows: #732's rows stand. The #732 walk's 'withdrawn' hold becomes the settled disposition; its text should name this answer rather than an open question (rides the next records PR after #742).
