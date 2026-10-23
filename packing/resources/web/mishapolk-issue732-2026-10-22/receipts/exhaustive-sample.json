@@ -1,0 +1,14 @@
+{
+  "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
+  "format": "beyond-horizon-exhaustive-sample-v1",
+  "kernel": "devtools.evand_arrangement_reports.run_case, positive job, every pair",
+  "rows": [
+    {"cpu_seconds":{"exact_verify":23.050231281,"independent":16.922498903},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"18030528145334961169393478685968811909168627490858063079590409079919382996724770881951159/144549634456024982006623467829648882301709159283370080068130935812927619088129277500006512500000000","least_wall_clearance":"1/1000000000000","n":645,"pairs_tested":207690,"routes_agree_on_least_gap":true,"wall_seconds":40.6},
+    {"cpu_seconds":{"exact_verify":29.789873969,"independent":22.43656999},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"244515868440917607592946927355128908389726411119/2550435786464743324984028943578646474332498377390000000000","least_wall_clearance":"1/1000000000000","n":752,"pairs_tested":282376,"routes_agree_on_least_gap":true,"wall_seconds":53.4},
+    {"cpu_seconds":{"exact_verify":121.53955637500002,"independent":108.72814536700002},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"44939072555600586545134869416318195962367857743835437912388607662245928367522467336948784067986994699425316338690334651860267496965472323/486825821078074143948036063234957428325434189863427834308574768252692378475535999961816447053203533801887718484585281250000000000000000000000000","least_wall_clearance":"288468086265700491723772738659754656170999156174027362804329734323854003762448877/3125000000000000000000000009394612792539429558146083820857800000000000000000000000000000","n":995,"pairs_tested":494515,"routes_agree_on_least_gap":true,"wall_seconds":234.2}
+  ],
+  "sample_cpu_seconds": 322.5,
+  "sample_pairs": 984581,
+  "started_utc": "2026-10-23T02:43:34Z",
+  "workers": 2
+}

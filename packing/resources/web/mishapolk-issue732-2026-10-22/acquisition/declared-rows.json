@@ -1,0 +1,394 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/jlevy/squares/issues/732",
+ "commit": "17cc220131360ef290750eb845a3544c30ccb389",
+ "committed": "2026-10-22T19:08:59Z",
+ "walk": "upper-bounds-issue732-20261023",
+ "rows": [
+  {
+   "n": 372,
+   "certificate": "certificates/0000-0999/n372.cert",
+   "printed": "19.822875655552"
+  },
+  {
+   "n": 409,
+   "certificate": "certificates/0000-0999/n409.cert",
+   "printed": "20.767428349962"
+  },
+  {
+   "n": 411,
+   "certificate": "certificates/0000-0999/n411.cert",
+   "printed": "20.822875655552"
+  },
+  {
+   "n": 450,
+   "certificate": "certificates/0000-0999/n450.cert",
+   "printed": "21.767428349962"
+  },
+  {
+   "n": 451,
+   "certificate": "certificates/0000-0999/n451.cert",
+   "printed": "21.778174593073"
+  },
+  {
+   "n": 453,
+   "certificate": "certificates/0000-0999/n453.cert",
+   "printed": "21.822995415458"
+  },
+  {
+   "n": 461,
+   "certificate": "certificates/0000-0999/n461.cert",
+   "printed": "21.964134536435"
+  },
+  {
+   "n": 494,
+   "certificate": "certificates/0000-0999/n494.cert",
+   "printed": "22.778174593073"
+  },
+  {
+   "n": 495,
+   "certificate": "certificates/0000-0999/n495.cert",
+   "printed": "22.778174593074"
+  },
+  {
+   "n": 506,
+   "certificate": "certificates/0000-0999/n506.cert",
+   "printed": "22.971213308854"
+  },
+  {
+   "n": 535,
+   "certificate": "certificates/0000-0999/n535.cert",
+   "printed": "23.656854249516"
+  },
+  {
+   "n": 539,
+   "certificate": "certificates/0000-0999/n539.cert",
+   "printed": "23.778174593065"
+  },
+  {
+   "n": 540,
+   "certificate": "certificates/0000-0999/n540.cert",
+   "printed": "23.778174593074"
+  },
+  {
+   "n": 582,
+   "certificate": "certificates/0000-0999/n582.cert",
+   "printed": "24.656854249516"
+  },
+  {
+   "n": 583,
+   "certificate": "certificates/0000-0999/n583.cert",
+   "printed": "24.677669529688"
+  },
+  {
+   "n": 587,
+   "certificate": "certificates/0000-0999/n587.cert",
+   "printed": "24.778174593074"
+  },
+  {
+   "n": 591,
+   "certificate": "certificates/0000-0999/n591.cert",
+   "printed": "24.828427124771"
+  },
+  {
+   "n": 599,
+   "certificate": "certificates/0000-0999/n599.cert",
+   "printed": "24.959619792263"
+  },
+  {
+   "n": 631,
+   "certificate": "certificates/0000-0999/n631.cert",
+   "printed": "25.656854249516"
+  },
+  {
+   "n": 632,
+   "certificate": "certificates/0000-0999/n632.cert",
+   "printed": "25.677669529688"
+  },
+  {
+   "n": 633,
+   "certificate": "certificates/0000-0999/n633.cert",
+   "printed": "25.677669529689"
+  },
+  {
+   "n": 640,
+   "certificate": "certificates/0000-0999/n640.cert",
+   "printed": "25.828427124771"
+  },
+  {
+   "n": 645,
+   "certificate": "certificates/0000-0999/n645.cert",
+   "printed": "25.946623458826"
+  },
+  {
+   "n": 646,
+   "certificate": "certificates/0000-0999/n646.cert",
+   "printed": "25.946653181671"
+  },
+  {
+   "n": 647,
+   "certificate": "certificates/0000-0999/n647.cert",
+   "printed": "25.946936912812"
+  },
+  {
+   "n": 648,
+   "certificate": "certificates/0000-0999/n648.cert",
+   "printed": "25.959619775225"
+  },
+  {
+   "n": 649,
+   "certificate": "certificates/0000-0999/n649.cert",
+   "printed": "25.974880942003"
+  },
+  {
+   "n": 651,
+   "certificate": "certificates/0000-0999/n651.cert",
+   "printed": "25.981703321304"
+  },
+  {
+   "n": 653,
+   "certificate": "certificates/0000-0999/n653.cert",
+   "printed": "25.992652674145"
+  },
+  {
+   "n": 683,
+   "certificate": "certificates/0000-0999/n683.cert",
+   "printed": "26.677669529688"
+  },
+  {
+   "n": 684,
+   "certificate": "certificates/0000-0999/n684.cert",
+   "printed": "26.677669529689"
+  },
+  {
+   "n": 691,
+   "certificate": "certificates/0000-0999/n691.cert",
+   "printed": "26.828427124771"
+  },
+  {
+   "n": 693,
+   "certificate": "certificates/0000-0999/n693.cert",
+   "printed": "26.881306218116"
+  },
+  {
+   "n": 695,
+   "certificate": "certificates/0000-0999/n695.cert",
+   "printed": "26.899494936638"
+  },
+  {
+   "n": 696,
+   "certificate": "certificates/0000-0999/n696.cert",
+   "printed": "26.946623458826"
+  },
+  {
+   "n": 697,
+   "certificate": "certificates/0000-0999/n697.cert",
+   "printed": "26.946653181671"
+  },
+  {
+   "n": 698,
+   "certificate": "certificates/0000-0999/n698.cert",
+   "printed": "26.946936912812"
+  },
+  {
+   "n": 702,
+   "certificate": "certificates/0000-0999/n702.cert",
+   "printed": "26.976011322963"
+  },
+  {
+   "n": 735,
+   "certificate": "certificates/0000-0999/n735.cert",
+   "printed": "27.656854249506"
+  },
+  {
+   "n": 737,
+   "certificate": "certificates/0000-0999/n737.cert",
+   "printed": "27.677669529689"
+  },
+  {
+   "n": 742,
+   "certificate": "certificates/0000-0999/n742.cert",
+   "printed": "27.778174593079"
+  },
+  {
+   "n": 745,
+   "certificate": "certificates/0000-0999/n745.cert",
+   "printed": "27.828427124774"
+  },
+  {
+   "n": 750,
+   "certificate": "certificates/0000-0999/n750.cert",
+   "printed": "27.911195756382"
+  },
+  {
+   "n": 751,
+   "certificate": "certificates/0000-0999/n751.cert",
+   "printed": "27.914175273217"
+  },
+  {
+   "n": 752,
+   "certificate": "certificates/0000-0999/n752.cert",
+   "printed": "27.931659253271"
+  },
+  {
+   "n": 756,
+   "certificate": "certificates/0000-0999/n756.cert",
+   "printed": "27.976780205512"
+  },
+  {
+   "n": 790,
+   "certificate": "certificates/0000-0999/n790.cert",
+   "printed": "28.656854249506"
+  },
+  {
+   "n": 791,
+   "certificate": "certificates/0000-0999/n791.cert",
+   "printed": "28.656854249521"
+  },
+  {
+   "n": 797,
+   "certificate": "certificates/0000-0999/n797.cert",
+   "printed": "28.778174593079"
+  },
+  {
+   "n": 798,
+   "certificate": "certificates/0000-0999/n798.cert",
+   "printed": "28.798989873252"
+  },
+  {
+   "n": 799,
+   "certificate": "certificates/0000-0999/n799.cert",
+   "printed": "28.798989873252"
+  },
+  {
+   "n": 807,
+   "certificate": "certificates/0000-0999/n807.cert",
+   "printed": "28.924694845693"
+  },
+  {
+   "n": 809,
+   "certificate": "certificates/0000-0999/n809.cert",
+   "printed": "28.933954128802"
+  },
+  {
+   "n": 810,
+   "certificate": "certificates/0000-0999/n810.cert",
+   "printed": "28.951462957761"
+  },
+  {
+   "n": 813,
+   "certificate": "certificates/0000-0999/n813.cert",
+   "printed": "28.979118512495"
+  },
+  {
+   "n": 814,
+   "certificate": "certificates/0000-0999/n814.cert",
+   "printed": "28.981388113792"
+  },
+  {
+   "n": 854,
+   "certificate": "certificates/0000-0999/n854.cert",
+   "printed": "29.778174593079"
+  },
+  {
+   "n": 855,
+   "certificate": "certificates/0000-0999/n855.cert",
+   "printed": "29.798989873252"
+  },
+  {
+   "n": 856,
+   "certificate": "certificates/0000-0999/n856.cert",
+   "printed": "29.798989873252"
+  },
+  {
+   "n": 857,
+   "certificate": "certificates/0000-0999/n857.cert",
+   "printed": "29.798989873253"
+  },
+  {
+   "n": 864,
+   "certificate": "certificates/0000-0999/n864.cert",
+   "printed": "29.924694842541"
+  },
+  {
+   "n": 866,
+   "certificate": "certificates/0000-0999/n866.cert",
+   "printed": "29.933954024988"
+  },
+  {
+   "n": 869,
+   "certificate": "certificates/0000-0999/n869.cert",
+   "printed": "29.974934501502"
+  },
+  {
+   "n": 870,
+   "certificate": "certificates/0000-0999/n870.cert",
+   "printed": "29.979118512495"
+  },
+  {
+   "n": 871,
+   "certificate": "certificates/0000-0999/n871.cert",
+   "printed": "29.981222446775"
+  },
+  {
+   "n": 913,
+   "certificate": "certificates/0000-0999/n913.cert",
+   "printed": "30.778174593079"
+  },
+  {
+   "n": 915,
+   "certificate": "certificates/0000-0999/n915.cert",
+   "printed": "30.798989873252"
+  },
+  {
+   "n": 916,
+   "certificate": "certificates/0000-0999/n916.cert",
+   "printed": "30.798989873253"
+  },
+  {
+   "n": 923,
+   "certificate": "certificates/0000-0999/n923.cert",
+   "printed": "30.924694841577"
+  },
+  {
+   "n": 925,
+   "certificate": "certificates/0000-0999/n925.cert",
+   "printed": "30.933954024988"
+  },
+  {
+   "n": 931,
+   "certificate": "certificates/0000-0999/n931.cert",
+   "printed": "30.989931303330"
+  },
+  {
+   "n": 932,
+   "certificate": "certificates/0000-0999/n932.cert",
+   "printed": "30.990639611064"
+  },
+  {
+   "n": 977,
+   "certificate": "certificates/0000-0999/n977.cert",
+   "printed": "31.798989873253"
+  },
+  {
+   "n": 989,
+   "certificate": "certificates/0000-0999/n989.cert",
+   "printed": "31.974133837950"
+  },
+  {
+   "n": 990,
+   "certificate": "certificates/0000-0999/n990.cert",
+   "printed": "31.975393249470"
+  },
+  {
+   "n": 994,
+   "certificate": "certificates/0000-0999/n994.cert",
+   "printed": "31.990639611064"
+  },
+  {
+   "n": 995,
+   "certificate": "certificates/0000-0999/n995.cert",
+   "printed": "31.993444976976"
+  }
+ ]
+}

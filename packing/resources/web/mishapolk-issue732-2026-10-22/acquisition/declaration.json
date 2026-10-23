@@ -1,0 +1,1705 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "mishapolk-square-packing-records",
+  "source_url": "https://github.com/Mishapolk/square-packing-records",
+  "source_ref": "main",
+  "source_commit": "17cc220131360ef290750eb845a3544c30ccb389",
+  "retrieved_at_utc": "2026-10-23T02:35Z",
+  "git_scope": "Blobless bare clone of Mishapolk/square-packing-records (history to 7b6366f, fetched 23 October), checked out sparsely at 17cc220 (committed 2026-10-22T20:15:36Z, 'docs: add MIT License covering all certificates, catalogs, and tools'), main's head from then until 7b6366f (2026-10-23T01:50:22Z), which removes only the certificate at 3426 and its index entries. 17cc220 adds only LICENSE to 814fbe9 (tag v1.0.0), the commit issue #732 describes, so it holds the issue's certificates with their licence. Retained: the 77 certificates the report-order walk of issue 732 records as rows, README.md and LICENSE. Pinned by digest only: the other 313 certificates at 325 to 1024, the five indexes whose SHA-256 the issue states, the author's checker, and Evan Daniel's verifier with its licence against the issue-678 packet's identical copies. The 126 certificates in the corpus and the 5,078 above 1024 are pinned by the commit alone; no blob above 1024 was fetched, and no source file was executed.",
+  "archived_dir": "source",
+  "license": "MIT License, Copyright (c) 2026 Mykhailo Polkovskyi (Mishapolk), added at 17cc220 (LICENSE, retained). The author's comment on #719 (issuecomment-6350348588) says it covers every certificate, catalogue, manifest and tool in the repository, so the 77 certificates, README.md and LICENSE are retained under it. verify_bound_certificate.py and BOUND_VERIFIER_LICENSE.txt are Evan Daniel's MIT-licensed verifier as Francisco Couzo modified it, pinned against the copies the couzo-issue678-2026-10-18 packet retains. The indexes are pinned by digest under OR-18 (2.7 to 7.7 MB each). The README credits the author and names no AI assistance; the issue's own text is the author's.",
+  "claims": [
+    "Issue #732 (opened 2026-10-22T19:55:03Z) reports 5,468 exact rational certificates at 328 to 9913 in certificates/NNNN-NNNN/nN.cert, indexed by certificates/manifest.json, whose SHA-256 and four others the issue states; 390 are beyond the corpus at or below 1024, at 328 to 998. Each certificate is n S, then n rows x y t, with S its exact side.",
+    "The report-order walk of 23 October for issue 732 records 77 of the 390 as rows (76 first published at 8a488a1, 539 at 1851c2c) and holds 499, a sub-print re-certification (think-fwa9); the other 312 are equal to or above an earlier report. The 5,078 above 1024 wait on the owner (think-f2io, D1). The issue's saturation theorem and ceiling census are prose and bound no s(n); no optimality is claimed here."
+  ],
+  "scope": [
+    "BOUND_VERIFIER_LICENSE.txt",
+    "LICENSE",
+    "README.md",
+    "certificates/SHA256SUMS",
+    "certificates/census.json",
+    "certificates/manifest.json",
+    "certificates/0000-0999/n328.cert",
+    "certificates/0000-0999/n329.cert",
+    "certificates/0000-0999/n330.cert",
+    "certificates/0000-0999/n331.cert",
+    "certificates/0000-0999/n332.cert",
+    "certificates/0000-0999/n333.cert",
+    "certificates/0000-0999/n334.cert",
+    "certificates/0000-0999/n335.cert",
+    "certificates/0000-0999/n336.cert",
+    "certificates/0000-0999/n337.cert",
+    "certificates/0000-0999/n338.cert",
+    "certificates/0000-0999/n339.cert",
+    "certificates/0000-0999/n340.cert",
+    "certificates/0000-0999/n341.cert",
+    "certificates/0000-0999/n342.cert",
+    "certificates/0000-0999/n343.cert",
+    "certificates/0000-0999/n344.cert",
+    "certificates/0000-0999/n362.cert",
+    "certificates/0000-0999/n363.cert",
+    "certificates/0000-0999/n364.cert",
+    "certificates/0000-0999/n365.cert",
+    "certificates/0000-0999/n366.cert",
+    "certificates/0000-0999/n367.cert",
+    "certificates/0000-0999/n368.cert",
+    "certificates/0000-0999/n369.cert",
+    "certificates/0000-0999/n370.cert",
+    "certificates/0000-0999/n371.cert",
+    "certificates/0000-0999/n372.cert",
+    "certificates/0000-0999/n373.cert",
+    "certificates/0000-0999/n374.cert",
+    "certificates/0000-0999/n375.cert",
+    "certificates/0000-0999/n376.cert",
+    "certificates/0000-0999/n377.cert",
+    "certificates/0000-0999/n378.cert",
+    "certificates/0000-0999/n379.cert",
+    "certificates/0000-0999/n380.cert",
+    "certificates/0000-0999/n381.cert",
+    "certificates/0000-0999/n382.cert",
+    "certificates/0000-0999/n401.cert",
+    "certificates/0000-0999/n402.cert",
+    "certificates/0000-0999/n403.cert",
+    "certificates/0000-0999/n404.cert",
+    "certificates/0000-0999/n405.cert",
+    "certificates/0000-0999/n406.cert",
+    "certificates/0000-0999/n407.cert",
+    "certificates/0000-0999/n408.cert",
+    "certificates/0000-0999/n409.cert",
+    "certificates/0000-0999/n410.cert",
+    "certificates/0000-0999/n411.cert",
+    "certificates/0000-0999/n412.cert",
+    "certificates/0000-0999/n413.cert",
+    "certificates/0000-0999/n414.cert",
+    "certificates/0000-0999/n415.cert",
+    "certificates/0000-0999/n416.cert",
+    "certificates/0000-0999/n417.cert",
+    "certificates/0000-0999/n418.cert",
+    "certificates/0000-0999/n419.cert",
+    "certificates/0000-0999/n420.cert",
+    "certificates/0000-0999/n421.cert",
+    "certificates/0000-0999/n422.cert",
+    "certificates/0000-0999/n442.cert",
+    "certificates/0000-0999/n443.cert",
+    "certificates/0000-0999/n444.cert",
+    "certificates/0000-0999/n445.cert",
+    "certificates/0000-0999/n446.cert",
+    "certificates/0000-0999/n447.cert",
+    "certificates/0000-0999/n448.cert",
+    "certificates/0000-0999/n449.cert",
+    "certificates/0000-0999/n450.cert",
+    "certificates/0000-0999/n451.cert",
+    "certificates/0000-0999/n452.cert",
+    "certificates/0000-0999/n453.cert",
+    "certificates/0000-0999/n454.cert",
+    "certificates/0000-0999/n455.cert",
+    "certificates/0000-0999/n456.cert",
+    "certificates/0000-0999/n457.cert",
+    "certificates/0000-0999/n458.cert",
+    "certificates/0000-0999/n459.cert",
+    "certificates/0000-0999/n460.cert",
+    "certificates/0000-0999/n461.cert",
+    "certificates/0000-0999/n462.cert",
+    "certificates/0000-0999/n463.cert",
+    "certificates/0000-0999/n464.cert",
+    "certificates/0000-0999/n485.cert",
+    "certificates/0000-0999/n486.cert",
+    "certificates/0000-0999/n487.cert",
+    "certificates/0000-0999/n488.cert",
+    "certificates/0000-0999/n489.cert",
+    "certificates/0000-0999/n490.cert",
+    "certificates/0000-0999/n491.cert",
+    "certificates/0000-0999/n492.cert",
+    "certificates/0000-0999/n493.cert",
+    "certificates/0000-0999/n494.cert",
+    "certificates/0000-0999/n495.cert",
+    "certificates/0000-0999/n496.cert",
+    "certificates/0000-0999/n497.cert",
+    "certificates/0000-0999/n498.cert",
+    "certificates/0000-0999/n499.cert",
+    "certificates/0000-0999/n500.cert",
+    "certificates/0000-0999/n501.cert",
+    "certificates/0000-0999/n502.cert",
+    "certificates/0000-0999/n503.cert",
+    "certificates/0000-0999/n504.cert",
+    "certificates/0000-0999/n505.cert",
+    "certificates/0000-0999/n506.cert",
+    "certificates/0000-0999/n507.cert",
+    "certificates/0000-0999/n508.cert",
+    "certificates/0000-0999/n509.cert",
+    "certificates/0000-0999/n530.cert",
+    "certificates/0000-0999/n531.cert",
+    "certificates/0000-0999/n532.cert",
+    "certificates/0000-0999/n533.cert",
+    "certificates/0000-0999/n534.cert",
+    "certificates/0000-0999/n535.cert",
+    "certificates/0000-0999/n536.cert",
+    "certificates/0000-0999/n537.cert",
+    "certificates/0000-0999/n538.cert",
+    "certificates/0000-0999/n539.cert",
+    "certificates/0000-0999/n540.cert",
+    "certificates/0000-0999/n541.cert",
+    "certificates/0000-0999/n542.cert",
+    "certificates/0000-0999/n543.cert",
+    "certificates/0000-0999/n544.cert",
+    "certificates/0000-0999/n545.cert",
+    "certificates/0000-0999/n546.cert",
+    "certificates/0000-0999/n547.cert",
+    "certificates/0000-0999/n548.cert",
+    "certificates/0000-0999/n549.cert",
+    "certificates/0000-0999/n550.cert",
+    "certificates/0000-0999/n551.cert",
+    "certificates/0000-0999/n552.cert",
+    "certificates/0000-0999/n553.cert",
+    "certificates/0000-0999/n554.cert",
+    "certificates/0000-0999/n555.cert",
+    "certificates/0000-0999/n577.cert",
+    "certificates/0000-0999/n578.cert",
+    "certificates/0000-0999/n579.cert",
+    "certificates/0000-0999/n580.cert",
+    "certificates/0000-0999/n581.cert",
+    "certificates/0000-0999/n582.cert",
+    "certificates/0000-0999/n583.cert",
+    "certificates/0000-0999/n584.cert",
+    "certificates/0000-0999/n585.cert",
+    "certificates/0000-0999/n586.cert",
+    "certificates/0000-0999/n587.cert",
+    "certificates/0000-0999/n588.cert",
+    "certificates/0000-0999/n589.cert",
+    "certificates/0000-0999/n590.cert",
+    "certificates/0000-0999/n591.cert",
+    "certificates/0000-0999/n592.cert",
+    "certificates/0000-0999/n593.cert",
+    "certificates/0000-0999/n594.cert",
+    "certificates/0000-0999/n595.cert",
+    "certificates/0000-0999/n596.cert",
+    "certificates/0000-0999/n597.cert",
+    "certificates/0000-0999/n598.cert",
+    "certificates/0000-0999/n599.cert",
+    "certificates/0000-0999/n600.cert",
+    "certificates/0000-0999/n601.cert",
+    "certificates/0000-0999/n602.cert",
+    "certificates/0000-0999/n603.cert",
+    "certificates/0000-0999/n626.cert",
+    "certificates/0000-0999/n627.cert",
+    "certificates/0000-0999/n628.cert",
+    "certificates/0000-0999/n629.cert",
+    "certificates/0000-0999/n630.cert",
+    "certificates/0000-0999/n631.cert",
+    "certificates/0000-0999/n632.cert",
+    "certificates/0000-0999/n633.cert",
+    "certificates/0000-0999/n634.cert",
+    "certificates/0000-0999/n635.cert",
+    "certificates/0000-0999/n636.cert",
+    "certificates/0000-0999/n637.cert",
+    "certificates/0000-0999/n638.cert",
+    "certificates/0000-0999/n639.cert",
+    "certificates/0000-0999/n640.cert",
+    "certificates/0000-0999/n641.cert",
+    "certificates/0000-0999/n642.cert",
+    "certificates/0000-0999/n643.cert",
+    "certificates/0000-0999/n644.cert",
+    "certificates/0000-0999/n645.cert",
+    "certificates/0000-0999/n646.cert",
+    "certificates/0000-0999/n647.cert",
+    "certificates/0000-0999/n648.cert",
+    "certificates/0000-0999/n649.cert",
+    "certificates/0000-0999/n650.cert",
+    "certificates/0000-0999/n651.cert",
+    "certificates/0000-0999/n652.cert",
+    "certificates/0000-0999/n653.cert",
+    "certificates/0000-0999/n654.cert",
+    "certificates/0000-0999/n677.cert",
+    "certificates/0000-0999/n678.cert",
+    "certificates/0000-0999/n679.cert",
+    "certificates/0000-0999/n680.cert",
+    "certificates/0000-0999/n681.cert",
+    "certificates/0000-0999/n682.cert",
+    "certificates/0000-0999/n683.cert",
+    "certificates/0000-0999/n684.cert",
+    "certificates/0000-0999/n685.cert",
+    "certificates/0000-0999/n686.cert",
+    "certificates/0000-0999/n687.cert",
+    "certificates/0000-0999/n688.cert",
+    "certificates/0000-0999/n689.cert",
+    "certificates/0000-0999/n690.cert",
+    "certificates/0000-0999/n691.cert",
+    "certificates/0000-0999/n692.cert",
+    "certificates/0000-0999/n693.cert",
+    "certificates/0000-0999/n694.cert",
+    "certificates/0000-0999/n695.cert",
+    "certificates/0000-0999/n696.cert",
+    "certificates/0000-0999/n697.cert",
+    "certificates/0000-0999/n698.cert",
+    "certificates/0000-0999/n699.cert",
+    "certificates/0000-0999/n700.cert",
+    "certificates/0000-0999/n701.cert",
+    "certificates/0000-0999/n702.cert",
+    "certificates/0000-0999/n703.cert",
+    "certificates/0000-0999/n704.cert",
+    "certificates/0000-0999/n705.cert",
+    "certificates/0000-0999/n706.cert",
+    "certificates/0000-0999/n730.cert",
+    "certificates/0000-0999/n731.cert",
+    "certificates/0000-0999/n732.cert",
+    "certificates/0000-0999/n733.cert",
+    "certificates/0000-0999/n734.cert",
+    "certificates/0000-0999/n735.cert",
+    "certificates/0000-0999/n736.cert",
+    "certificates/0000-0999/n737.cert",
+    "certificates/0000-0999/n738.cert",
+    "certificates/0000-0999/n739.cert",
+    "certificates/0000-0999/n740.cert",
+    "certificates/0000-0999/n741.cert",
+    "certificates/0000-0999/n742.cert",
+    "certificates/0000-0999/n743.cert",
+    "certificates/0000-0999/n744.cert",
+    "certificates/0000-0999/n745.cert",
+    "certificates/0000-0999/n746.cert",
+    "certificates/0000-0999/n747.cert",
+    "certificates/0000-0999/n748.cert",
+    "certificates/0000-0999/n749.cert",
+    "certificates/0000-0999/n750.cert",
+    "certificates/0000-0999/n751.cert",
+    "certificates/0000-0999/n752.cert",
+    "certificates/0000-0999/n753.cert",
+    "certificates/0000-0999/n754.cert",
+    "certificates/0000-0999/n755.cert",
+    "certificates/0000-0999/n756.cert",
+    "certificates/0000-0999/n757.cert",
+    "certificates/0000-0999/n758.cert",
+    "certificates/0000-0999/n759.cert",
+    "certificates/0000-0999/n760.cert",
+    "certificates/0000-0999/n785.cert",
+    "certificates/0000-0999/n786.cert",
+    "certificates/0000-0999/n787.cert",
+    "certificates/0000-0999/n788.cert",
+    "certificates/0000-0999/n789.cert",
+    "certificates/0000-0999/n790.cert",
+    "certificates/0000-0999/n791.cert",
+    "certificates/0000-0999/n792.cert",
+    "certificates/0000-0999/n793.cert",
+    "certificates/0000-0999/n794.cert",
+    "certificates/0000-0999/n795.cert",
+    "certificates/0000-0999/n796.cert",
+    "certificates/0000-0999/n797.cert",
+    "certificates/0000-0999/n798.cert",
+    "certificates/0000-0999/n799.cert",
+    "certificates/0000-0999/n800.cert",
+    "certificates/0000-0999/n801.cert",
+    "certificates/0000-0999/n802.cert",
+    "certificates/0000-0999/n803.cert",
+    "certificates/0000-0999/n804.cert",
+    "certificates/0000-0999/n805.cert",
+    "certificates/0000-0999/n806.cert",
+    "certificates/0000-0999/n807.cert",
+    "certificates/0000-0999/n808.cert",
+    "certificates/0000-0999/n809.cert",
+    "certificates/0000-0999/n810.cert",
+    "certificates/0000-0999/n811.cert",
+    "certificates/0000-0999/n812.cert",
+    "certificates/0000-0999/n813.cert",
+    "certificates/0000-0999/n814.cert",
+    "certificates/0000-0999/n815.cert",
+    "certificates/0000-0999/n816.cert",
+    "certificates/0000-0999/n817.cert",
+    "certificates/0000-0999/n842.cert",
+    "certificates/0000-0999/n843.cert",
+    "certificates/0000-0999/n844.cert",
+    "certificates/0000-0999/n845.cert",
+    "certificates/0000-0999/n846.cert",
+    "certificates/0000-0999/n847.cert",
+    "certificates/0000-0999/n848.cert",
+    "certificates/0000-0999/n849.cert",
+    "certificates/0000-0999/n850.cert",
+    "certificates/0000-0999/n851.cert",
+    "certificates/0000-0999/n852.cert",
+    "certificates/0000-0999/n853.cert",
+    "certificates/0000-0999/n854.cert",
+    "certificates/0000-0999/n855.cert",
+    "certificates/0000-0999/n856.cert",
+    "certificates/0000-0999/n857.cert",
+    "certificates/0000-0999/n858.cert",
+    "certificates/0000-0999/n859.cert",
+    "certificates/0000-0999/n860.cert",
+    "certificates/0000-0999/n861.cert",
+    "certificates/0000-0999/n862.cert",
+    "certificates/0000-0999/n863.cert",
+    "certificates/0000-0999/n864.cert",
+    "certificates/0000-0999/n865.cert",
+    "certificates/0000-0999/n866.cert",
+    "certificates/0000-0999/n867.cert",
+    "certificates/0000-0999/n868.cert",
+    "certificates/0000-0999/n869.cert",
+    "certificates/0000-0999/n870.cert",
+    "certificates/0000-0999/n871.cert",
+    "certificates/0000-0999/n872.cert",
+    "certificates/0000-0999/n873.cert",
+    "certificates/0000-0999/n874.cert",
+    "certificates/0000-0999/n875.cert",
+    "certificates/0000-0999/n901.cert",
+    "certificates/0000-0999/n902.cert",
+    "certificates/0000-0999/n903.cert",
+    "certificates/0000-0999/n904.cert",
+    "certificates/0000-0999/n905.cert",
+    "certificates/0000-0999/n906.cert",
+    "certificates/0000-0999/n907.cert",
+    "certificates/0000-0999/n908.cert",
+    "certificates/0000-0999/n909.cert",
+    "certificates/0000-0999/n910.cert",
+    "certificates/0000-0999/n911.cert",
+    "certificates/0000-0999/n912.cert",
+    "certificates/0000-0999/n913.cert",
+    "certificates/0000-0999/n914.cert",
+    "certificates/0000-0999/n915.cert",
+    "certificates/0000-0999/n916.cert",
+    "certificates/0000-0999/n917.cert",
+    "certificates/0000-0999/n918.cert",
+    "certificates/0000-0999/n919.cert",
+    "certificates/0000-0999/n920.cert",
+    "certificates/0000-0999/n921.cert",
+    "certificates/0000-0999/n922.cert",
+    "certificates/0000-0999/n923.cert",
+    "certificates/0000-0999/n924.cert",
+    "certificates/0000-0999/n925.cert",
+    "certificates/0000-0999/n926.cert",
+    "certificates/0000-0999/n927.cert",
+    "certificates/0000-0999/n928.cert",
+    "certificates/0000-0999/n929.cert",
+    "certificates/0000-0999/n930.cert",
+    "certificates/0000-0999/n931.cert",
+    "certificates/0000-0999/n932.cert",
+    "certificates/0000-0999/n933.cert",
+    "certificates/0000-0999/n934.cert",
+    "certificates/0000-0999/n935.cert",
+    "certificates/0000-0999/n962.cert",
+    "certificates/0000-0999/n963.cert",
+    "certificates/0000-0999/n964.cert",
+    "certificates/0000-0999/n965.cert",
+    "certificates/0000-0999/n966.cert",
+    "certificates/0000-0999/n967.cert",
+    "certificates/0000-0999/n968.cert",
+    "certificates/0000-0999/n969.cert",
+    "certificates/0000-0999/n970.cert",
+    "certificates/0000-0999/n971.cert",
+    "certificates/0000-0999/n972.cert",
+    "certificates/0000-0999/n973.cert",
+    "certificates/0000-0999/n974.cert",
+    "certificates/0000-0999/n975.cert",
+    "certificates/0000-0999/n976.cert",
+    "certificates/0000-0999/n977.cert",
+    "certificates/0000-0999/n978.cert",
+    "certificates/0000-0999/n979.cert",
+    "certificates/0000-0999/n980.cert",
+    "certificates/0000-0999/n981.cert",
+    "certificates/0000-0999/n982.cert",
+    "certificates/0000-0999/n983.cert",
+    "certificates/0000-0999/n984.cert",
+    "certificates/0000-0999/n985.cert",
+    "certificates/0000-0999/n986.cert",
+    "certificates/0000-0999/n987.cert",
+    "certificates/0000-0999/n988.cert",
+    "certificates/0000-0999/n989.cert",
+    "certificates/0000-0999/n990.cert",
+    "certificates/0000-0999/n991.cert",
+    "certificates/0000-0999/n992.cert",
+    "certificates/0000-0999/n993.cert",
+    "certificates/0000-0999/n994.cert",
+    "certificates/0000-0999/n995.cert",
+    "certificates/0000-0999/n996.cert",
+    "certificates/0000-0999/n997.cert",
+    "certificates/0000-0999/n998.cert",
+    "certified_bounds.json",
+    "check_packing.py",
+    "upper_bounds.json",
+    "verify_bound_certificate.py"
+  ],
+  "pinned_only": [
+    {
+      "match": "upper_bounds.json",
+      "reason": "The author's bound index through n = 10000 at the pin (7.7 MB), whose SHA-256 the issue states. At or below 1024 its certificate bounds are the certificates' headers (receipts/source-history.json); above 1024 its bounds wait on the owner (think-f2io, D1). Pinned by digest under OR-18."
+    },
+    {
+      "match": "certified_bounds.json",
+      "reason": "The author's certificate and construction index through n = 10000 at the pin (4.6 MB), whose SHA-256 the issue states. At 325 to 1024 it states 390 certificate bounds, 307 grid sides and three restated constructions at 325 to 327. Pinned by digest under OR-18."
+    },
+    {
+      "match": "certificates/manifest.json",
+      "reason": "The issue's index of its 5,468 certificates (2.7 MB), whose SHA-256 the issue states: each count's certificate path, SHA-256 and exact bound. devtools.beyond_horizon_replay source-history holds each of its 390 entries at or below 1024 to the file at the pin (receipts/source-history.json). Pinned by digest under OR-18."
+    },
+    {
+      "match": "certificates/census.json",
+      "reason": "The author's census of the 5,468 certificates against the baselines he names (3.1 MB), whose SHA-256 the issue states; its comparisons are with 12-place prints and are not the record's. Pinned by digest under OR-18."
+    },
+    {
+      "match": "certificates/SHA256SUMS",
+      "reason": "The author's digest list of every certificate (5,594 lines), whose SHA-256 the issue states; each of the 390 at or below 1024 agrees with the manifest (receipts/source-history.json). Pinned by digest."
+    },
+    {
+      "match": "check_packing.py",
+      "reason": "The author's checker. No code from the source runs here; pinned by digest, never executed."
+    },
+    {
+      "match": "verify_bound_certificate.py",
+      "reason": "Evan Daniel's exact checker as Francisco Couzo modified it, under Daniel's MIT licence, byte-identical to the copy the 18 October packet retains; never executed here.",
+      "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/verify_bound_certificate.py"
+    },
+    {
+      "match": "BOUND_VERIFIER_LICENSE.txt",
+      "reason": "The checker's MIT licence (Copyright (c) 2026 Evan Daniel), byte-identical to the copy the 18 October packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt"
+    },
+    {
+      "match": "certificates/0000-0999/n328.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n329.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n330.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n331.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n332.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n333.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n334.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n335.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-extended-range-reports-2026-10-08's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n336.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-02f9690-2026-10-09's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n337.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-02f9690-2026-10-09's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n338.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-certificates-2026-10-12's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n339.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n340.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-extended-certificates-2026-10-11's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n341.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-02f9690-2026-10-09's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n342.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n343.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n344.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n362.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n363.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n364.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue670-2026-10-17's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n365.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n366.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n367.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n368.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n369.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n370.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n371.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n373.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-02f9690-2026-10-09's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n374.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-02f9690-2026-10-09's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n375.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (evand-compositions-2026-10-13's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n376.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n377.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n378.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n379.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n380.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n381.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n382.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue670-2026-10-17's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n401.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n402.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n403.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue670-2026-10-17's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n404.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n405.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n406.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n407.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n408.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n410.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n412.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n413.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n414.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n415.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n416.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n417.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n418.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n419.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n420.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n421.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n422.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n442.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n443.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n444.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue670-2026-10-17's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n445.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n446.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n447.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n448.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n449.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n452.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n454.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n455.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n456.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n457.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n458.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n459.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n460.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n462.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n463.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n464.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (muglich-issue686-2026-10-19's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n485.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n486.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n487.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-reconcile-2026-10-20's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n488.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n489.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n490.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n491.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n492.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n493.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n496.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n497.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n498.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n499.cert",
+      "reason": "Below Mykhailo Polkovskyi's own #719 row by 8.66e-13, both rounding up to 22.881306218113 at 12 places: a sub-print re-certification that the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023) records and holds for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n500.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n501.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n502.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n503.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n504.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n505.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n507.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n508.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n509.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n530.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n531.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n532.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-reconcile-2026-10-20's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n533.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n534.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n536.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n537.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n538.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n541.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n542.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n543.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n544.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n545.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n546.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n547.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n548.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n549.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n550.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n551.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n552.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n553.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n554.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n555.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n577.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n578.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n579.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-reconcile-2026-10-20's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n580.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n581.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n584.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n585.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n586.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n588.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n589.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n590.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n592.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n593.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n594.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n595.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n596.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n597.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n598.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n600.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n601.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n602.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n603.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (muglich-issue686-2026-10-19's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n626.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n627.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n628.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-reconcile-2026-10-20's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n629.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n630.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n634.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n635.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n636.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n637.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n638.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n639.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n641.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n642.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n643.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n644.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n650.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n652.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n654.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n677.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n678.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n679.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-reconcile-2026-10-20's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n680.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n681.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n682.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n685.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n686.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n687.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n688.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n689.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n690.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n692.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n694.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n699.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n700.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n701.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n703.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n704.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n705.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n706.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (muglich-issue686-2026-10-19's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n730.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n731.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n732.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-reconcile-2026-10-20's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n733.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n734.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n736.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n738.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n739.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n740.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n741.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n743.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n744.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n746.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n747.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n748.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n749.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n753.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n754.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n755.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n757.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n758.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n759.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n760.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (muglich-issue686-2026-10-19's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n785.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n786.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n787.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-reconcile-2026-10-20's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n788.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n789.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n792.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n793.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n794.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n795.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n796.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n800.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n801.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n802.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n803.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n804.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n805.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n806.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n808.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n811.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n812.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n815.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n816.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n817.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (muglich-issue686-2026-10-19's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n842.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n843.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n844.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-reconcile-2026-10-20's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n845.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n846.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n847.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n848.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n849.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n850.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-index-2026-10-15's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n851.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n852.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n853.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n858.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n859.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n860.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n861.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n862.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-index-2026-10-15's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n863.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n865.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n867.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n868.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n872.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n873.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n874.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n875.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (muglich-issue686-2026-10-19's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n901.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n902.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n903.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-reconcile-2026-10-20's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n904.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n905.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n906.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n907.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n908.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n909.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (#715), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n910.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n911.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n912.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n914.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-index-2026-10-15's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n917.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n918.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n919.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n920.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n921.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n922.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue670-2026-10-17's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n924.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n926.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n927.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n928.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n929.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n930.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n933.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n934.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n935.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (muglich-issue686-2026-10-19's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n962.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n963.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@5a299b4), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n964.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n965.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n966.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n967.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n968.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n969.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n970.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (#715), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n971.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n972.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n973.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n974.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@58a7833), one the walk holds for an owner decision (publications above Göbel's construction), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n975.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (#715), one the walk holds for an owner decision (re-certifications below the 12-place print), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n976.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-index-2026-10-15's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n978.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n979.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n980.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n981.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n982.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): above the earlier report holding its count (franciscouzo/square-packing@23aff0c), one the walk holds for an owner decision (constructions with no certificate file), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n983.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-index-2026-10-15's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n984.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue678-2026-10-18's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n985.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (franciscouzo/square-packing@4e4c8ce), one the walk holds for an owner decision (index deletion bounds), so the verdict rests on that hold. Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n986.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-index-2026-10-15's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n987.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-issue715-2026-10-21's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n988.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (couzo-index-2026-10-15's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n991.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n992.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n993.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n996.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n997.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (mishapolk-issue719-2026-10-22's row). Pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/0000-0999/n998.cert",
+      "reason": "Not recorded by the report-order walk of 23 October for issue 732 (campaign/issue-intake/upper-bounds-issue732-20261023): equal to the earlier report holding its count (muglich-issue686-2026-10-19's row). Pinned by digest, not replayed or recorded."
+    }
+  ]
+}

@@ -790,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "868925d6b2e2b6640cc83d9b547cbcf914623f45"
+DATA_REVISION = "a224bea99dabefd3cd05d7524334b5233a1ceb3b"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2496,6 +2496,28 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte-identical across all four. The explainer counts the register and took "
             "v0.4.20. No PDF was printed; each prints from that HTML. Retain v0.1.10, "
             "v0.1.3 and v0.2.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Issue #732's 77 beyond-horizon rows at 325 to 1024 and their supersessions, and "
+            "the request entries for #732, the four stage 7 replies after #730, #728's final "
+            "reply, #526's correction and the final replies closing #582, #584, #624 and "
+            "#675, against main 44df28b07 (#743): rendered at link revision 868925d6 into "
+            "empty site directories, twice from this tree at 24fe305e and twice from main's "
+            "(43 files each), render_packing_methods writes every file byte-identical across "
+            "all four. Measured before against main fcf2f96a5, 6c70d843f and 31584003e with "
+            "the same outcome. No PDF was printed; it prints from that HTML. Retain #737's "
+            "v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
