@@ -2511,8 +2511,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "c1115c095, without the README, with the same outcome, and once more after "
             "merging main 769e441e1 (#751, #748), at link revision b33d7f7d with that "
             "main's six inputs swapped in: the same outcome. Only the explainer's register "
-            "count differs (230 to 232), and it took v0.4.22. No PDF was printed; each "
-            "prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
+            "count differs (230 to 232), and it took v0.4.22. Measured once more after "
+            "review A's record fixes (7e12d05ce, 541fea60a), against main 64b316b6c: at link "
+            "revision 541fea60 into empty site directories, from this tree and with the 16 "
+            "record files those commits change swapped back, all four papers' 69 files are "
+            "byte-identical. No PDF was printed; each prints from that HTML. Retain "
+            "v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
