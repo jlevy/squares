@@ -6976,7 +6976,25 @@ issues:
         docs/proofs/k0_knowledge.md, 1,277 lines at the pin, retained by the packet with
         SHA-256 fe51c45e...a036. The import read only attempts/A275-k0-knowledge/, which the
         note named.
+    - url: https://github.com/jlevy/squares/issues/526#issuecomment-6356603856
+      date: '2026-10-23'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: k0-theorems-and-negatives
+      - result: k0-knowledge-refresh
+      corrects:
+      - https://github.com/jlevy/squares/issues/526#issuecomment-6200840511
     close_when: The owner has answered the asks and the reply states what was retained.
+    notes: >-
+      The correction, posted at 2026-10-23T03:22:45Z (issuecomment-6356603856), withdraws the
+      acknowledgement's question (issuecomment-6200840511): the packet does retain
+      docs/proofs/k0_knowledge.md at 651a9a5 (1,277 lines, sections 0 to 14); the 15 October
+      import read only attempts/A275-k0-knowledge/. It said the refresh at e5ebaa6 (section
+      15) and the path fix at 0b0a072 are past the pin and register nothing, that the two
+      corrections to note 03 are recorded with the refresh, and that the asks wait on the
+      owner (think-tnfo), and asked whether the compute ask is now pair3 alone. The issue
+      stays open.
   - number: 527
     title: 'Geometry-before-LP toolkit for stratum trees (exact-rational leaf rules, 7.2× on closed nodes): registration request'
     author: Esummins
@@ -8785,7 +8803,8 @@ issues:
     title: 's(381) <= 19.985624661051481: registration request'
     author: mstrmg
     opened: '2026-10-13'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: 'Miles Gray (mstrmg) reports an exact certificate at 381, beyond the case corpus. Not imported:
@@ -8816,8 +8835,23 @@ issues:
       kind: other
       reported:
       - result: n381
+    - url: https://github.com/jlevy/squares/issues/582#issuecomment-6356980937
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n381
     close_when: The reply saying why the certificate is not recorded is posted and the author has had the
       chance to answer.
+    notes: >-
+      The final comment, posted at 2026-10-23T03:54:44Z (issuecomment-6356980937), restated the
+      14 October disposition: the owner decided that day that a certificate published in a
+      watched repository is reported from its first commit, so Kevin Fang's smaller certificate
+      at 381 (TheSnakeFang/squarepack-certs@e646c47, 12 October, before this issue) came first
+      and this one is not recorded. It said the row at 381 is now Mykhailo Polkovskyi's #719
+      certificate, 19.974739840480, that counts beyond the corpus take no register entry and no
+      site page, and that nothing asked for is queued. The issue was closed with it at
+      03:54:46Z.
   - number: 583
     title: '154-382: registration request'
     author: franciscouzo
@@ -8935,7 +8969,8 @@ issues:
       (beyond-horizon)'
     author: evand
     opened: '2026-10-13'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: Evan Daniel reports exact rational certificates at 339, 364 and 375, all beyond the case corpus.
@@ -8972,8 +9007,23 @@ issues:
       kind: follow-up
       reported:
       - result: three-beyond-horizon
+    - url: https://github.com/jlevy/squares/issues/584#issuecomment-6356980358
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: three-beyond-horizon
     close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
       corpus take no register entry, and optimality is outside this request.
+    notes: >-
+      The final comment, posted at 2026-10-23T03:54:41Z (issuecomment-6356980358), said the three
+      certificates are settled as rows beyond the corpus, replayed on both maintained exact
+      routes, as the follow-up of 14 October said, and where each count stands now: at 375 the
+      row is still the current row (19.882451030482); at 364 it is superseded by Francisco
+      Couzo's #670 row, 19.583782190152, 1.38e-8 below it, recorded on 22 October by #720; at
+      339 it was superseded by Couzo's #586, and the current row is now Mykhailo Polkovskyi's
+      #719, 18.907351471177. Nothing asked for is queued, and the issue was closed with it at
+      03:54:42Z.
   - number: 586
     title: '154, 339, 379, 380, 382; precision refinements at 211 and 241: registration request'
     author: franciscouzo
@@ -9831,9 +9881,24 @@ issues:
       - result: fang-composites
       corrects:
       - https://github.com/jlevy/squares/issues/607#issuecomment-6206051473
+    - url: https://github.com/jlevy/squares/issues/607#issuecomment-6355894824
+      date: '2026-10-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fifteen-beyond-horizon
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, the composites are with Fang's import, and the review and replay that would
       confirm the V0 entry are owned by its bead; optimality is outside this request.
+    notes: >-
+      The state note, posted at 2026-10-23T02:25:23Z (issuecomment-6355894824) after #730 merged
+      (fcf2f96a5), said that the history walk of Couzo's watched publications puts his later
+      certificates first after eight of #607's rows of 14 October: at 339, 382, 450, 552, 599,
+      648 and 757 4e4c8ce (15 October), and at 409 5a299b4 (public on 21 October), each later
+      issue's row still standing after his. At 542 #607's row stays current: 4e4c8ce's
+      re-certification 7.46e-14 below with the same 12-place print waits on think-fwa9, and
+      23aff0c's deletion from Friedman's off-centre construction at 543, 1.47e-2 lower, waits on
+      think-f2io and #613 (think-8krd). It states no new T-NNN.
   - number: 610
     title: 'Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)'
     author: bengreff
@@ -10017,7 +10082,8 @@ issues:
     title: 'n366 new best known packing: registration request'
     author: mstrmg
     opened: '2026-10-15'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: 'Miles Gray (mstrmg) reports an exact certificate at 366, beyond the case corpus: gist c3350a7e
@@ -10048,8 +10114,32 @@ issues:
       kind: acknowledgement
       reported:
       - result: n366
+    - url: https://github.com/jlevy/squares/issues/624#issuecomment-6355895083
+      date: '2026-10-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n366
+    - url: https://github.com/jlevy/squares/issues/624#issuecomment-6356981893
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n366
     close_when: The reply saying why the certificate is not recorded is posted and the author has had the
       chance to answer.
+    notes: >-
+      The follow-up, posted at 2026-10-23T02:25:24Z (issuecomment-6355895083) after #730 merged
+      (fcf2f96a5), answers the acknowledgement's note that the 4e4c8ce certificates beyond 324
+      were awaiting import: the history walk recorded certificates/best/n366.cert at 4e4c8ce,
+      side 19.656854249493, as the current row at 366. #624 stays not imported, for the reason
+      the acknowledgement gave.
+
+      The final comment, posted at 2026-10-23T03:54:49Z (issuecomment-6356981893), restated the
+      disposition of the acknowledgement and the follow-up: the certificate at 366 is not
+      imported, since franciscouzo/square-packing@4e4c8ce, first committed before this issue,
+      publishes a smaller one, now the current row at 366 (19.656854249493). Nothing asked for
+      is queued, and the issue was closed with it at 03:54:50Z.
   - number: 639
     title: 'Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval,
       exact configuration): registration request'
@@ -13119,7 +13209,8 @@ issues:
     title: '204-998: registration request'
     author: franciscouzo
     opened: '2026-10-18'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: >-
@@ -14267,6 +14358,94 @@ issues:
         verification: V3
         confirmation: C3
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/675#issuecomment-6356979866
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n204
+        id: T-228
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n464
+      - result: n502
+      - result: n545
+      - result: n546
+      - result: n547
+      - result: n548
+      - result: n549
+      - result: n554
+      - result: n592
+      - result: n593
+      - result: n598
+      - result: n602
+      - result: n603
+      - result: n641
+      - result: n642
+      - result: n650
+      - result: n652
+      - result: n654
+      - result: n693
+      - result: n700
+      - result: n701
+      - result: n705
+      - result: n706
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n758
+      - result: n759
+      - result: n760
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n807
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n816
+      - result: n817
+      - result: n863
+      - result: n864
+      - result: n865
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n919
+      - result: n923
+      - result: n924
+      - result: n927
+      - result: n928
+      - result: n930
+      - result: n931
+      - result: n932
+      - result: n933
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
+      - result: n994
+      - result: n995
+      - result: n996
+      - result: n997
+      - result: n998
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -14310,6 +14489,13 @@ issues:
       (e929137a8) and its Pages deployment was checked (Certificate page run 39877818964),
       reported T-228 at V3/C3, confirmed, independently re-implemented, at S2, with #670's T-226
       now S3, and still superseded at 204. It asked how sqpack/verify.py was called.
+
+      The final comment, posted at 2026-10-23T03:54:39Z (issuecomment-6356979866), reported T-228
+      at V3/C3, confirmed, independently re-implemented, at S2, still superseded at 204 by later
+      certificates, and the 78 rows beyond the corpus as #720 recorded them, each superseded on
+      entry by a later report. Nothing asked for is queued; the follow-up's question, how
+      sqpack/verify.py was called, is still welcome but holds nothing open. The issue was closed
+      with it at 03:54:39Z.
   - number: 678
     title: '204-998: registration request'
     author: franciscouzo
@@ -16449,6 +16635,26 @@ issues:
       - result: n998
       corrects:
       - https://github.com/jlevy/squares/issues/686#issuecomment-6331709472
+      outdated:
+      - 'Mykhailo Polkovskyi''s #719 rows supersede 42 of your 50 rows that were still current;
+        since #730 merged on 23 October, Couzo''s 5a299b4 rows supersede yours at nine of the 42
+        (453, 649, 810, 812, 933, 934, 990, 991 and 997), and #719''s rows supersede those'
+    - url: https://github.com/jlevy/squares/issues/686#issuecomment-6355894548
+      date: '2026-10-23'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: n453
+      - result: n649
+      - result: n810
+      - result: n812
+      - result: n933
+      - result: n934
+      - result: n990
+      - result: n991
+      - result: n997
+      corrects:
+      - https://github.com/jlevy/squares/issues/686#issuecomment-6350116497
     close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
       corpus take no register entry, and optimality is outside this request.
     notes: >-
@@ -16523,6 +16729,18 @@ issues:
       unchanged and the owner's decision. No site page lists beyond-horizon rows, which the
       reply said. It corrects the follow-up of 03:08:26Z (issuecomment-6331709472), whose
       statement that the other 50 rows were current is marked outdated. The issue stays open.
+
+      The correction, posted at 2026-10-23T02:25:22Z (issuecomment-6355894548) after #730 merged
+      (fcf2f96a5), corrects the follow-up of 20:04:02Z (issuecomment-6350116497), whose
+      statement that #719's rows supersede 42 of his rows is marked outdated. The history walk of
+      Couzo's watched publications records Couzo's 5a299b4, public at 2026-10-21T22:56:37Z
+      before #719 opened: at nine of the 42, 453, 649, 810, 812, 933, 934, 990, 991 and 997, a
+      certificate there is below Muglich's row by 1.28e-12 to 3.20e-11, and the source's
+      per-count metadata credits each to Muglich with his seed and construction credits, so they
+      are refinements of his packings. His rows there now name couzo-reconcile-2026-10-20 as
+      superseding them, and #719's rows supersede Couzo's in turn. The other 33 stay superseded
+      by #719, 50 by #715, and the eight current rows are unchanged; the credit request is still
+      the owner's decision. The issue stays open.
   - number: 689
     title: 's(308) ≤ 17.997149121271: registration request'
     author: evand
@@ -18892,6 +19110,43 @@ issues:
       - result: n932
       - result: n994
       - result: n996
+    - url: https://github.com/jlevy/squares/issues/715#issuecomment-6355894334
+      date: '2026-10-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n336
+      - result: n337
+      - result: n340
+      - result: n341
+      - result: n373
+      - result: n374
+      - result: n850
+      - result: n862
+      - result: n914
+      - result: n976
+      - result: n986
+      - result: n988
+      - result: n410
+      - result: n413
+      - result: n454
+      - result: n490
+      - result: n498
+      - result: n544
+      - result: n584
+      - result: n596
+      - result: n637
+      - result: n644
+      - result: n689
+      - result: n692
+      - result: n699
+      - result: n736
+      - result: n744
+      - result: n746
+      - result: n792
+      - result: n800
+      - result: n743
+      - result: n985
     close_when: >-
       Every claim has a reviewed disposition on main, pending validation has a priced owner,
       any changed house is regularized in its adoption, and the author has received a reply
@@ -18992,6 +19247,19 @@ issues:
       and 985, deletion bounds of the 4e4c8ce index, for the owner (D6, think-f2io); the 30
       re-certifications stay held on think-fwa9. The reply that says so is owed when that import
       reaches main (think-cyal).
+
+      The follow-up, posted at 2026-10-23T02:25:21Z (issuecomment-6355894334) after #730 merged
+      (fcf2f96a5), keeps the import reply's promise to reply when the 32 restated rows reach
+      main. It said that the history walk of Couzo's watched publications records 30 of them as
+      rows of the commits that first published them: 12 current (336, 337, 341, 373 and 374 from
+      02f9690; 340 from f311f08; 850, 862, 914, 976, 986 and 988 from 4e4c8ce) and 18 from
+      4e4c8ce superseded by #719's rows; that 743 and 985, deletion bounds of the 4e4c8ce index,
+      wait on the owner's deletion-bound question (think-f2io), with #715's restatements
+      following it; that the 30 re-certifications stay held on think-fwa9, which now also covers
+      44 more of his publications in 5a299b4, 23aff0c and 4e4c8ce; and that 335 (think-rx26) and
+      the rows above 1024 are unchanged. It reported the 20 rows of 5a299b4 (9 current) and 21 of
+      23aff0c, all superseded on entry, each replayed on both routes with every control refused.
+      It states no T-NNN, and the issue stays open.
   - number: 719
     title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
     author: Mishapolk
@@ -20646,7 +20914,8 @@ issues:
     title: 's(303) ≤ 17.909772217275: registration request'
     author: evand
     opened: '2026-10-22'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: >-
@@ -20685,10 +20954,38 @@ issues:
     beads:
     - think-icp1
     answer_bead: think-icp1
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/728#issuecomment-6356752215
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n303
+        id: T-230
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n303
+        id: E-evand-728-n303-report
+        status: reviewed
+      - result: n303
+        id: E-evand-728-n303-exact-feasibility
+        status: confirmed
+      - result: n303
+        id: E-evand-728-n303-review-exact-feasibility
+        status: confirmed
     close_when: >-
       The result is registered, reviewed and adopted at 303 with its drawing regularized, and
       the reply on main says so; nothing the author asked for is queued.
+    notes: >-
+      The final reply, posted at 2026-10-23T03:35:16Z (issuecomment-6356752215) after #731 merged
+      (6c70d843f), reported T-230 at V3/C3, confirmed, independently re-implemented, at S3:
+      the packet pinning f06521f, the two maintained routes' replay with its shared adapter
+      components, the stage 4 review's own checker, the adoption at 303 with the drawing
+      regularized, 1.86074e-4 below T-186, and the packing as a new arrangement of Ostashev's
+      two-band design. It asked what the matching distance 0.266 measures, whether the
+      comparison column means #562 alone, and for any lower certificate at 303 in a new issue.
+      The issue was closed with it at 03:35:17Z: nothing the author asked for is queued.
   - number: 732
     title: '328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof'
     author: Mishapolk
@@ -20710,36 +21007,76 @@ issues:
       saturation argument bounds no s(n). The triage read the certificates' only licence as
       Evan Daniel's verifier licence; at 17cc220 (20:15:36Z) the author added an MIT licence
       that his comment on #719 says covers every certificate. Nothing is retained, replayed or
-      recorded yet.
-    read_through: '2026-10-22T19:55:03Z'
+      recorded yet. Imported on 23 October (think-0gp6, c-lane-732-import-1023): the ledger of
+      23 October for issue 732 records 77 of the 390 rows at or below 1024 as current rows of
+      the mishapolk-issue732-2026-10-22 source, retained at 17cc220 and replayed on both exact
+      routes, holds 499 (think-fwa9), and leaves 985 to the deletion-bound decision (think-f2io).
+    read_through: '2026-10-23T01:53:19Z'
     results:
     - key: rows-325-1024
       claim: >-
-        390 upper bounds at n = 328 to 998, each the exact side of certificates/0000-0999/nN.cert
-        at 814fbe9, listed in manifest.json and census.json.
+        388 upper bounds at n = 328 to 998, every one of the 390 but 499 and 985, each the exact
+        side of certificates/0000-0999/nN.cert at 814fbe9 and 17cc220, listed in manifest.json
+        and census.json.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: rows of source-coverage.yaml, not register entries. The
-        stage 1 triage walked all 390 in report order against main, Couzo's, Daniel's and Fang's
-        publications and the author's own files: 77 would be recorded (76 first published at
-        8a488a1, and 539 at 1851c2c, one of #719's withdrawn rows), 499 is held as sub-print
-        (think-fwa9), 369, 376 and 985 wait on #730's index classes, 81 restate #719's rows, and
-        228 tie or lie above an earlier report or, at 335, wait on D3. Not yet retained, replayed
-        or recorded; the walk is redone once #730 lands.
+        ledger of 23 October for issue 732 (upper-bounds-issue732-20261023), every count walked in
+        report order from starts frozen at main fcf2f96a5 with the author's own earlier files and
+        every watched publication below them, records 77 as dated rows of the
+        mishapolk-issue732-2026-10-22 source at their sides rounded up at 12 places, each the
+        count's current row: 76 first published at 8a488a1 and 539 at 1851c2c, one of #719's
+        withdrawn rows. They supersede 30 of #715's rows, 29 of #719's, 14 of
+        couzo-index-2026-10-15's and 4 of couzo-verified-bounds-2026-10-14's. The packet retains
+        the 77 certificates under the author's MIT licence, and both project exact routes accept
+        all 77 with all 462 controls refused (receipts/filtered-exact-replay.json). The other 311
+        are not recorded: 81 restate #719's rows, and the rest equal or lie above an earlier
+        report. 128 of those verdicts rest on publications the walk holds for the owner's
+        decisions (beyond_horizon_replay.WALKS), among them 369 and 376, above Couzo's 58a7833
+        bound, which is above Göbel's construction (think-8krd), so they stay unrecorded whatever
+        that answer is.
+      queued: false
+    - key: n499
+      claim: >-
+        s(499) <= 22.881306218113, rounded up; the exact side of certificates/0000-0999/n499.cert
+        at 17cc220 is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the corpus. The ledger of 23 October for issue 732 records it, 8.66e-13 below
+        #719's row at 499, and holds it: both round up to 22.881306218113 at 12 places, a
+        re-certification below the print, the class the owner's question think-fwa9 covers. The
+        packet pins the certificate by digest; no row until that answer. On 23 October the owner
+        answered that such re-certifications are restatements; think-temp applies the answer
+        after this import merges.
       queued: true
-      bead: think-0gp6
+      bead: think-fwa9
       blocked_on:
-      - jlevy/squares#730
+      - think-fwa9
+    - key: n985
+      claim: >-
+        s(985) <= 31.920310216821, rounded up; the exact side of certificates/0000-0999/n985.cert
+        at 17cc220 is authoritative.
+      source: body
+      not_registered: >-
+        Beyond the corpus. Equal to the bound Couzo's 4e4c8ce index states at 985 by deleting a
+        square from the 986 certificate, which the walk holds for the deletion-bound decision
+        (D6, think-f2io), so not recorded. An answer that leaves such bounds out reruns the walk,
+        and this claim would then be recorded (beyond_horizon_replay held-dependents).
+      queued: true
+      bead: think-f2io
+      blocked_on:
+      - think-f2io
     - key: rows-above-1024
       claim: >-
         5,078 upper bounds at n = 1025 to 9913, each the exact side of a certificate at 814fbe9
-        listed in manifest.json and census.json.
+        listed in manifest.json and census.json; 5,077 since 7b6366f withdrew 3426.
       source: body
       not_registered: >-
         Beyond 1024: whether counts above 1024 are tracked is the owner's decision (D1,
         think-f2io), which the issue's proposal to stop at N = 10,000 joins. Index-level custody
         holds; nine files were read and 3426's certificate states a side above its own grid side.
-        Not derived, replayed or recorded.
+        Not derived, replayed or recorded. On 23 October the owner answered that rows above 1024
+        are tracked; think-llit applies the answer.
       queued: true
       bead: think-0gp6
       blocked_on:
@@ -20773,18 +21110,42 @@ issues:
       not_registered: >-
         At the 85 perfect squares s(k^2) = k follows from area. At the other 4,292 counts no
         proof is given, so no lower bound is registered; the index lists 5,620 sub-ceiling
-        counts, not 5,623.
+        counts, not 5,623. The author's comment of 2026-10-23T01:52:47Z states that no
+        unconditional lower bound is claimed there, only that the block constructions his
+        rectangles generate certify nothing below the grid, and agrees with the 5,620.
       queued: false
     asks:
     - what: Cap the record's tracking of upper bounds at N = 10,000.
       state: queued
       note: A policy proposal; it joins the owner's decision whether counts above 1024 are tracked.
       bead: think-f2io
+    - what: Publish the review checkers and verification scripts, so that authors can test
+        certificates before submitting them.
+      state: queued
+      note: >-
+        From the author's comment of 2026-10-23T01:52:47Z. The checkers are already public in this
+        repository (sqpack.verify, devtools.check_rational_witness_independent and
+        devtools.beyond_horizon_replay); the stage 7 reply drafted for this import points to them.
+      bead: think-0gp6
     beads:
     - think-0gp6
     - think-f2io
+    - think-fwa9
+    - think-8m4k
     answer_bead: think-0gp6
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/732#issuecomment-6355073019
+      date: '2026-10-23'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: rows-325-1024
+      - result: n499
+      - result: n985
+      - result: rows-above-1024
+      - result: issue-715-resolution
+      - result: saturation-argument
+      - result: ceiling-census
     close_when: >-
       The rows at or below 1024 are recorded in report order, the owner has answered whether
       counts above 1024 are tracked and where tracking stops (think-f2io), and the replies
@@ -20799,6 +21160,43 @@ issues:
       posted: the licence (17cc220) and the claim on the ten rows #719's edit withdrew, which
       this issue takes. The significance the issue proposes (S4 to S5) is not scored: no entry
       is registered.
+
+      The acknowledgement, posted at 2026-10-23T01:19:59Z (issuecomment-6355073019) after #739
+      merged, reported the triage: the five digests and custody at or below 1024; the licence
+      read as Daniel's verifier licence until 17cc220 added the author's MIT licence, so the
+      import pins 17cc220 and keeps the files; report order at 325 to 1024 (246 sides from
+      8a488a1, 61 from 3285fac, 83 already published), 78 below every earlier report (77 new at
+      8a488a1, by 7.5e-13 to 7.4e-4, and 539), 499 left to the owner's re-certification
+      question, 369, 376 and 985 not below an index bound in Couzo's history that waits on the
+      owner, and the other 309 not new; #715's exact sides against his at 173 counts (93 below,
+      37 equal, 43 above); nothing new in the corpus; the rows above 1024 on the owner's
+      decision, with 3426 above its grid side; and the saturation argument as no bound on s(N).
+      It gave the plan and asked for per-row parents and whether s(N) = ceil(sqrt N) is claimed
+      as a lower bound. It states no T-NNN.
+
+      The author's comment of 2026-10-23T01:52:47Z (issuecomment-6355486108), read as edited at
+      01:53:19Z, answers both. 7b6366f (01:50:22Z) withdraws 3426's certificate and restores the
+      grid side there, so the index lists 5,467 certificates and 5,620 sub-ceiling counts; the
+      horizon table's sides were from an earlier run, and the files govern. No unconditional
+      lower bound is claimed at the 4,292 counts that are not squares: Theorem 1 is restated as
+      saturation of the block tilings five rectangles generate, and those counts stay at the
+      grid's upper bound. Lineage: counts never below the ceiling before, and the margins above
+      1e-3 (417, 447, 6811, 9913 named), are new arrangements; 645, 752 and 931 refine Couzo's
+      #715 certificates (credit "Francisco Couzo (seed topology), refined via continuous SQP by
+      Mishapolk"), 499 refines his own #719 packing, and he supports joint credit wherever a row
+      pairs with a #715 certificate within 1e-6. It suggests publishing the review checkers.
+
+      The import of 23 October (think-0gp6, c-lane-732-import-1023; PR on branch
+      claude/intake-732-mishapolk-rows) pins 17cc220, which adds only the licence to 814fbe9;
+      7b6366f changes nothing at or below 1024. The walk of 23 October, from starts frozen at
+      main fcf2f96a5 that read each row at its exact side, with the author's own earlier files
+      and every watched publication strictly below the starts, agrees with the triage at every
+      count: 77 rows recorded and current, 499 held (think-fwa9), 369 and 376 above 58a7833's
+      held bound, which #730 holds as above Göbel's construction rather than as a recipe, and
+      985 equal to 4e4c8ce's held deletion bound. It also records the author's 1851c2c files at
+      the nine other counts #719's edit withdrew, each below every earlier report and above
+      #732's file there, and holds them (think-8m4k). The stage 7 reply is drafted for after the
+      merge; per-row credit beyond the corpus stays the owner's question (D5, think-f2io).
   - number: 734
     title: 'Proposal: submit and fetch upper bounds by API (automated intake, reported the same day)'
     author: wand125
