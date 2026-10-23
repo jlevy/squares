@@ -533,7 +533,9 @@ def sweeps() -> dict[str, dict[str, Any]]:
 #: against 14.90 s for mixed_n108_L1062's 201, beside a 12 s per-test ceiling. A sweep on
 #: a declared net finer than the standard one runs whole in the deep surface, and the
 #: pull request reads its refusals at every FINE_NET_STRIDE-th direction: 0, 296, ...,
-#: 2072 on a 2,073-direction net, the directions of the eight-direction pricing sample.
+#: 2072 on a 2,073-direction net, the directions of the eight-direction pricing sample,
+#: and at the receipt's least-bound direction (`index`), where the original's capture is
+#: nearest 1 and none of those eight falls (A5 of PR #745's review A).
 FINE_NET_STRIDE = 296
 
 
@@ -560,18 +562,26 @@ def test_each_scaled_sweep_refuses_its_mutant_somewhere_with_an_exact_witness(
     apart from the crate, is the one the receipt keeps, below 1, with the original's at
     least 1. Where it verifies, the original captures at least 100/99, which is no
     defect. Sampled, the recomputation reads the refusals at every FINE_NET_STRIDE-th
-    direction."""
+    direction and at the receipt's least-bound direction."""
     sweep = sweeps()[name]
     case = cases()[name]
     assert census.sweep_held(sweep)
     assert sweep["net_directions"] == census.net_directions(case)
     raw = read_raw(case.candidate)
+    least = int(controls()[name]["index"])
     refused = [
         item
         for item in sweep["refused"]
-        if reading == "whole" or int(item["r"]) % FINE_NET_STRIDE == 0
+        if reading == "whole"
+        or int(item["r"]) % FINE_NET_STRIDE == 0
+        or int(item["r"]) == least
     ]
     assert refused, name
+    if reading == "sampled":
+        # The least-bound direction is where a re-derivation matters most, so the sample
+        # must read a refusal there, as each fine-net sweep kept has one (on the standard
+        # net the mutant can verify there: mixed_n96_L997's index 139).
+        assert least in {int(item["r"]) for item in refused}, name
     for item in refused:
         index = int(item["r"])
         assert item["verdict"] in {census.CANDIDATE, census.AXIS_REFUSED}, index
