@@ -3,9 +3,9 @@ type: is
 id: is-01m5k73gab2bahv2bxmcmhpyxk
 title: Audit contributor credit links and resolve confirmed person occurrences
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
 delegate: sol-contributor-audit
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m5jnsqdwj3t8m7hkbx6mr1m2
 hold: null
 hold_until: null
 created_at: 2026-10-23T01:48:13.514Z
-updated_at: 2026-10-23T02:09:12.796Z
+updated_at: 2026-10-23T02:17:39.161Z
 started_at: 2026-10-23T01:48:33.061Z
+closed_at: 2026-10-23T02:17:39.161Z
+close_reason: Published in164e5381a; contributor25tests and records checks pass after formatting fix; senior focused review accepted exact evidence joins. One unresolved identity remains separately tracked.
+resolution: null
+duplicate_of: null
 ---
 Systematically inspect unresolved occurrence spans and visibly credited names, especially Levy/T194. Link only evidence-supported persons; preserve collectives and ambiguous names with explicit disposition. Run records gate before registry edits and focused attribution tests. Root alone commits.
 
