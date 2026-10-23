@@ -5,14 +5,14 @@ title: "Explainer PDF: one KaTeX glyph's baseline moves between page loads, past
 kind: bug
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: ci-followups
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-09-27T08:02:16.543Z
-updated_at: 2026-10-23T04:56:30.490Z
+updated_at: 2026-10-23T05:06:48.068Z
 started_at: 2026-10-23T04:52:09.582Z
 ---
 PR 235 pull_request run 36126482461 (attempt 1, head de282a855, records-only) failed the Pages `pdf` job at `render_explainer_pdf --check-artifact`: `849931 then 849931 bytes, normalised; length delta 0 ... first difference at byte 514532, in object 144`, inside a FlateDecode stream. The unchanged rerun (attempt 2) passed, and `pages-required` then refused the partial rerun as unmeasurable, by design. D-509 records it; it recurs D-490 (think-ptit, think-a5qp).
@@ -28,3 +28,5 @@ Open: the cause of per-load placement of one glyph; whether the published artifa
 2026-10-23 PR743 occurrence, unchanged head 739e283b6921d576a96c595ecd4d139c33e96c39: Certificate page run39902176281 attempt1 pdf job120246470385 failed Draw the PDF of the page. All setup and print sans coverage passed. --update drew three distinct normalized PDFs (882563, 882565, 882565 bytes), so no two of three page loads agreed and the existing publication guard refused to write. Inflated stream differences were single text placement coordinates: object175 y15252 vs15252.2188 and object168 y13373 vs13373.2188. This is concrete new evidence beyond the guard's previously assumed two-document shape. Missing math-geometry artifact was a later cascade. Job: https://github.com/jlevy/squares/actions/runs/39902176281/job/120246470385 . Log retained at /Volumes/spud-ext2/agent-scratch/site-navigation-20261022/739e283b6-pages-pdf-failure.log .
 
 Coordinator authorized exactly one targeted retry on unchanged head after the workflow became terminal; gh run rerun39902176281 --job120246470385 succeeded. Attempt2 job120247726122 rendered 882657 bytes with two of two page loads agreeing, then --check-artifact passed: stored artifact and one fresh render agreed, 24 pages and19 embedded fonts. The job was subsequently cancelled at04:55:43UTC when the coordinator pushed disposition-only successor4f00b6f70e41a934ccada5438d9fb02ba8508107. Thus the draw/artifact checks passed in this retry, but the job/workflow has no terminal green verdict; no source or gate contract was changed and no additional retry was attempted. Retry: https://github.com/jlevy/squares/actions/runs/39902176281/job/120247726122 . Log retained at /Volumes/spud-ext2/agent-scratch/site-navigation-20261022/739e283b6-pages-pdf-retry.log . Coordinator has a separate read-only tier-audit lane for the user's request to move nondeterministic publication work out of routine fast checks; that policy decision does not alter frozen PR743 gates.
+
+Follow-on first-attempt outcome: disposition-only head 4f00b6f70e41a934ccada5438d9fb02ba8508107 passed the entire PDF job 120248890432 in Certificate page run 39902903136, including Draw PDF and check-artifact; the workflow's pages-required aggregate also passed. Job: https://github.com/jlevy/squares/actions/runs/39902903136/job/120248890432 . No retry or PDF/gate source change was made on this head. This passing observation does not resolve the concrete three-distinct-load failure above or its underlying cause.

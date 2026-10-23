@@ -3,9 +3,9 @@ type: is
 id: is-01m5kcqwe1tdkhh4aemhnzjt19
 title: Attribute and bound Packing frontend setup before choosing browser provisioning
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md
 delegate: ci-followups
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m5kcfhfdmgfb03gn3drg43rc
 hold: null
 hold_until: null
 created_at: 2026-10-23T03:26:44.149Z
-updated_at: 2026-10-23T04:48:51.474Z
+updated_at: 2026-10-23T05:06:48.420Z
 started_at: 2026-10-23T03:32:14.482Z
+closed_at: 2026-10-23T05:06:48.419Z
+close_reason: Bounded Chromium/npm setup, archive caching and narrow canonical-mirror normalization are implemented in PR743. Ten focused helper tests and hosted cold/warm receipts pass; final head4f00b6f70 frontend120248521275 has15s setup and459s frontend validation, with actual tutorial Chromium tests. Detailed measurements/caveats in notes; browser-runtime follow-ups think-nqnx/think-ht59 remain open. Coordinator owns final CI/merge.
+resolution: null
+duplicate_of: null
 ---
 Packing run39892772106 frontend job120216469741 at bf38442f248d089b9862d04ee0658f85b51d7b0c spent524s in combined concurrent npm/Playwright setup (03:03:58-03:12:42 UTC). Comparison39893731935 job120219204931 spent16s; npm and Playwright browser caches hit, npm took1s while apt still updated/downloaded. Current logs unavailable during audit, so npm versus apt attribution is unknown. Retain final logs; add separate process timings, explicit setup ceilings and useful failure output in project-native tooling. Compare a pinned provisioned environment or minimal verified system-dependency path with current --with-deps, including cold/warm cost and storage. Preserve locked inputs, disabled npm scripts, all browser assertions and least privilege. No speedup accepted from one runner observation. Coordinate Pages-specific existing think-fqhc and think-898i; ordinary browser fixture optimization already belongs to think-nqnx. Deliver measured proposal before workflow implementation.
 
@@ -34,3 +38,9 @@ The same d92602ec frontend step passed in 705s by API timestamps, 04:21:36–04:
 Second completed setup observation, head 020c7f73111c4c083e0cc21466ccea53668cec8d, Packing run 39901015355, frontend job 120242352990 (https://github.com/jlevy/squares/actions/runs/39901015355/job/120242352990): setup passed in 14s by API timestamps (04:35:03–04:35:17 UTC). This time the image/lock-keyed apt cache hit with 17 packages/25,937,806 bytes. Playwright reported 14.06s, npm 1.24s, both exit 0/no timeout; apt needed 0 B/25.9 MB of archives, while still fetching 12.5 MB of metadata in 4s. This verifies archive reuse while retaining dependency installation. It is not a controlled claim about the four-second difference from the cold run.
 
 The same frontend validation passed in 448s by API timestamps (04:35:17–04:42:45 UTC), native site-layout wall 445.51s: parallel phase 508 passed/6 skipped in 341.07s, 74 forwarders in 73.55s, four HTTP cases in 28.99s. The variation from the previous 705s observation is not attributed to this setup fix. Existing think-nqnx/think-ht59 retain the browser/end-to-end runtime work. All non-Pages CI passed at this head; Pages identified only the two new tutorial SVGs missing asset registration. That separate registry repair is committed in 739e283b6921d576a96c595ecd4d139c33e96c39 and tracked by closed think-nr8l; final-head CI remains in progress.
+
+Final receipt at head 4f00b6f70e41a934ccada5438d9fb02ba8508107, Packing run 39902903220, frontend job 120248521275: https://github.com/jlevy/squares/actions/runs/39902903220/job/120248521275 . Job completed SUCCESS. Setup API timestamps 04:57:10–04:57:25 UTC give 15s; separate child receipts report Playwright 14.62s and npm 1.34s, both exit 0, no timeout or error. The exact image/lock apt cache hit with 17 packages / 25,937,806 bytes; apt needed 0 B / 25.9 MB of archives and fetched 12.5 MB metadata in 4s. Before/after diagnostics show the known Azure URL normalized to canonical HTTPS. This directly verifies bounded setup and warm archive reuse while keeping dependency installation and the pinned toolchains.
+
+The frontend validation step separately took 459s by API timestamps, 04:57:25–05:05:04 UTC. Native wall was 456.44s: the parallel layout phase passed 508 tests with 6 skips in 351.29s, 74 forwarders passed in 72.93s, and 4 HTTP cases passed in 30.02s. Required Chromium actually executed both tutorial tests: fixture setup 5.34s, semantics call 0.16s, visual call 2.61s. Other frontend lanes overlapped (workbench 116.35s, browser floor 70.40s, liveness 28.29s) and must not be summed. Retained log: /Volumes/spud-ext2/agent-scratch/site-navigation-20261022/packing-4f00b6f70-frontend-complete.log .
+
+This completes the narrow bounded-setup implementation and hosted evidence, as requested by the coordinator. It does not establish a controlled universal speedup or the overall three-minute goal: original healthy setup could take 13s, the original slow transfer took 524s, and browser validation still takes several minutes. Existing think-nqnx and think-ht59 keep the browser/end-to-end runtime work open. At receipt capture all Pages checks and Packing frontend/validate were green; only Packing suites B and C remained in progress. Coordinator owns the final PR merge gate.
