@@ -12,9 +12,9 @@ zero-margin box tree.
 
 Its proposed Frontier key is **[wand125 n21 zero-margin Lean 2026-09-29]**. No issue
 asked for it: the triage of wand125/square-packing-bounds at `1a25a5ed` found it, and
-bead `think-f2bm` owns its import. It is new evidence for `T-055`, not a new result. The
-claim below is stated as the source states it; nothing here has built the proof, and no
-review has read it yet.
+bead `think-f2bm` owns its import. The record registers it as `T-234`, a formalization of
+`T-055`’s route, at `V0`/`C0`. The claim below is stated as the source states it; nothing
+here has built the proof, and no review has read it yet.
 
 ## Source and Pin
 
@@ -149,8 +149,8 @@ script that fetches), then `lake env lean N21PtsAxiomsZ.lean`, accepted only wit
 It is under the owner’s 40 CPU-hour item cap and above the 2 CPU-hour single run this
 lane may start, and this host had 5.2 GB of free disk on 23 October, short of the
 toolchain and cache. It is held for a lane with the disk, as the import bead records.
-What it would add: a `proof-assistant-checked`, `replayed-here` route to `T-055`’s lower
-half with its own axiom receipt, the road to `T-055`’s rung 5 that the
+What it would add: a `proof-assistant-checked`, `replayed-here` route for `T-234` with its
+own axiom receipt, the road to `T-055`’s rung 5 that the
 [review of 11 October](../../../../docs/project/reviews/review-2026-10-11-lean-backed-rungs.md)
 (LR-9) names.
 

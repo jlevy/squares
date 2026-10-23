@@ -13,9 +13,9 @@ Its proposed Frontier key is **[wand125 n59 Lean kernel 2026-10-11]**. No issue 
 for it: the intake read of 11 October found it (`think-q655`), and bead `think-xk3f`
 owns its import; it is tracked on GitHub by
 [jlevy/squares#536](https://github.com/jlevy/squares/issues/536) and
-[#544](https://github.com/jlevy/squares/issues/544). It is new evidence for `T-066`, not
-a new result. The claim below is stated as the source states it; nothing here has built
-the proof, and no review has read it yet.
+[#544](https://github.com/jlevy/squares/issues/544). The record registers it as `T-235`,
+a formalization of `T-066`, at `V0`/`C0`. The claim below is stated as the source states
+it; nothing here has built the proof, and no review has read it yet.
 
 ## Source and Pin
 
@@ -148,8 +148,8 @@ check the 290 batches with `run_s59.py`, comparing the generated files with
 | Subset under the cap | `lake build Sqpack.S59T.Pts` alone decides the data facts (no duplicate atoms, D4 invariance, total below 59) in Lean, priced at under an hour; it decides no covering and moves no rung |
 
 The complete build is held: it is above the owner’s 40 CPU-hour item cap and this host’s
-memory. What it would add: a `proof-assistant-checked`, `replayed-here` route to
-`T-066`’s lower half, a second machine method beside `zmx2` that shares Daniel’s
+memory. What it would add: a `proof-assistant-checked`, `replayed-here` route for
+`T-235`, a second machine method beside `zmx2` that shares Daniel’s
 authorship and architecture but is checked by Lean’s kernel.
 
 ## Limitations

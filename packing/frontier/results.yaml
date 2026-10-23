@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-22'
+last_reviewed: '2026-10-23'
 results:
   - id: T-001
     kind: lower-bound
@@ -5036,6 +5036,10 @@ results:
       point-only review was recorded as the report entry's external_review and in reviews.
       The review found no blocking defect. The Lean build was not run here.
 
+      On 29 September 2026 the source removed the overlay's one hypothesis: its zero-margin
+      Lean proof, n21pts_eq_5 : minSide 21 = 5, is T-234, a formalization of this route,
+      reported and not built here (think-f2bm).
+
   - id: T-056
     kind: upper-bound
     registered: '2026-09-29'
@@ -6130,8 +6134,9 @@ results:
       The source reports the cover accepted by Daniel's zmx2, with outward-rounded binary64
       enclosures, over 6,400 symmetry-reduced roots and 51,200 unreduced ones, none
       uncertified. Its exact-rational evidence is two zm_mixed.py runs whose joint coverage
-      cannot be checked from what is published, so it is not recorded here. It has no Lean
-      statement.
+      cannot be checked from what is published, so it is not recorded here. Its Lean kernel
+      proof of 11 October 2026, by the same author on Daniel's mixed-measure checker, is
+      T-235, a formalization reported and not built here.
 
       zmx2 was replayed here in full on 2 October 2026, over all 6,400 D4 roots and all
       51,200 unreduced roots, none uncertified, with the box totals the source states; its
@@ -20623,6 +20628,10 @@ results:
 
       The deficiency bound c*(k) <= k - 1 - F(k) is listed in asymptotic-waste-bounds.yaml's
       deficiency_upper_bounds.
+
+      Evan Daniel's Lean proofs of both theorems, unconditional, on the 18 pieces as exact
+      certificates (evand/square-packing, 18 October 2026), are T-236, a formalization
+      reported and not built here (think-57ei).
     next_rung: >-
       C4 needs a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; the note, draft v0.6, is asked of the author, and its own text
@@ -31973,6 +31982,308 @@ results:
           credit measured pose by pose against the house.
         verdict: accepted
         covers: [T-230]
+  - id: T-234
+    kind: formalization
+    proves_kind: optimality
+    registered: '2026-10-23'
+    landed: '2026-10-23'
+    headline: >-
+      Hosono reports a hypothesis-free Lean proof that `s(21) = 5`, by the point-only route
+    claim: >-
+      Hiroaki Hosono (wand125) reports a Lean 4 proof that s(21) = 5 with no hypothesis, a
+      formalization of the point-only route T-055 registers, whose Lean reduction took the
+      capture bound as an assumption. Its theorem, SquarePacking.n21pts_eq_5 : minSide 21 = 5,
+      says that the least side of a square holding 21 closed unit squares, each translated
+      and rotated, with pairwise disjoint interiors, is 5; the 5 x 5 grid attains it.
+
+      The lower half, n21pts_ge_5, applies Evan Daniel's BoxTree.le_minSide to the point-only
+      cover renormalised to capture threshold 1, n21-capture-one.txt (4,604 entries of
+      [0,5]^2, total 20998900000168/999948000000 < 21), through a zero-margin box tree over
+      the D4 roots that Daniel's gen_zmtree.py generates: 59,433 Z leaves, 5,876 E leaves and
+      5,591 clips in 2,076 chunks over 64 files, each chunk one decide +kernel of
+      ZMTree.check, proved sound once. The source reports the axioms propext,
+      Classical.choice and Quot.sound, and an end-to-end run of its build script whose
+      generated data matched its list of digests; it publishes neither the 66 generated files
+      nor a build log. Nothing here has built it.
+
+      Hosono after Daniel, [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/77636c63f45a90d9a829417a1722a3bf9bfef37d/point_n21_L5/lean/zero-margin),
+      29 September 2026. The Lean library and generator are Daniel's, used unchanged from
+      evand/square-packing; the README says only the theorem file, the axiom report and the
+      build script are the author's.
+    scope:
+      n_values: [21]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        A proof-assistant route to a value the record holds three ways (T-052, T-055 and the
+        grid), completing T-055's Lean reduction: a citable detail that changes no theorem,
+        as T-055 itself is.
+      scored: '2026-10-23'
+      by: think-f2bm wand125 import (draft, c-lean-1023)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[wand125 n21 zero-margin Lean 2026-09-29]'
+      published: '2026-09-29'
+    evidence:
+      - E-n021-wand125-zero-margin-lean-report
+    composition: >-
+      One cited entry, the source's report (E-n021-wand125-zero-margin-lean-report), which
+      claims the exact value in Lean, the grid inside the proof as packs_grid. T-055's replay
+      and the grid entry are not cited: a proof assistant's check of this route is what the
+      entry adds, and their evidence is T-055's. No build of the proof is retained here, so
+      the entry stands at V0, as T-194 did; no review has read it, so C0.
+    artifacts:
+      - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/README.md
+      - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/N21PtsLower.lean
+      - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/build_zero_margin.sh
+      - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/data-sha256.txt
+      - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/receipts/evand-library-closure-6aa82ba4.json
+      - packing/devtools/lean_closure.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review of the proof, which starts from the packet.
+      V3 and C3 need a build here of the source's recipe from the retained bytes, with
+      Daniel's library staged from the evand packets in place of the clone the script makes,
+      and its axiom receipt (think-tpbd): about 6 to 12 CPU-hours and 10 GB of disk.
+      That would be reproduction with the producer's code. Rung 5 needs, beside it, a human
+      expert's review of the formalization.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of n21pts_eq_5, its statement and the zero-margin
+          route, read from the retained packet
+        rung: C1
+        link: think-f2bm
+      - what: >-
+          a build here of build_zero_margin.sh from the retained bytes, generation of the 64
+          parts compared with data-sha256.txt, the kernel check and the axiom receipt,
+          accepted only with propext, Classical.choice and Quot.sound
+        rung: C3
+        link: think-tpbd
+        estimated_cost:
+          cpu_hours: 9
+          cpu_hours_high: 12
+          basis: >-
+            The source's run on an Apple M4 under load: generation 1,459 s on 6 workers,
+            about 2.4 CPU-hours, and the kernel check about 3.5 h wall at 2 parts, about 7;
+            an estimate from its README, not a receipt
+          priced: '2026-10-23'
+    notes: >-
+      Registered on 23 October 2026 by the intake lane c-lean-1023 (think-f2bm), which
+      found it at the triage of wand125/square-packing-bounds of 2 October; no issue asked.
+      The bead's triage of 2 October expected an evidence update to T-055 and no new entry;
+      since 13 October a proof in a proof assistant of a result the record holds is a
+      formalization of its own (epistemics.md, Result Kinds), as T-154 is, so this entry
+      takes it, and T-055 names it.
+
+      The proof uses the certificate n21-capture-one.txt, not the n21-original.txt of
+      T-055's replay; both are the same support, and the theorem is the same. The
+      archived repository's zero-margin/ is unchanged from the pin to its head; the moved
+      copy at wand125/square-packing lacks the list of the generated files' digests, so the
+      packet pins the archived repository. The case record is unchanged.
+  - id: T-235
+    kind: formalization
+    proves_kind: optimality
+    registered: '2026-10-23'
+    landed: '2026-10-23'
+    headline: >-
+      Hosono reports a Lean kernel proof that `s(59) = 8`, on Daniel's mixed-measure checker
+    claim: >-
+      Hiroaki Hosono (wand125) reports a Lean 4 kernel proof that s(59) = 8, a formalization
+      of T-066, whose lower half this record holds on a replay of Evan Daniel's zmx2 over the
+      same cover. Its theorem, SquarePacking.s59_eq_8 : minSide 59 = 8, says that the least
+      side of a square holding 59 closed unit squares, each translated and rotated, with
+      pairwise disjoint interiors, is 8; the 8 x 8 grid attains it.
+
+      The lower half, s59_ge_8, applies Daniel's le_minSide_mixed to T-066's mixed cover,
+      26,308 points and 5,240 segments of [0,8]^2 with masses w/10^8 and total below 59,
+      whose D4 invariance and total are checked by decide +kernel, through a box tree over
+      80 x 80 root cells of the D4 region: 43,154 generated Part files and 290 Roots files in
+      290 batches, every chunk one decide +kernel of ZMTreeM.checkM, proved sound once, on
+      Daniel's library used unchanged from evand/square-packing. The source reports
+      the axioms propext, Classical.choice and Quot.sound, no sorry and no native_decide,
+      and a run of about 862 CPU-hours, of which it publishes a per-task receipt; the
+      generated files and the axiom output are not published. Nothing here has built it.
+
+      Hosono after Daniel, [square-packing](https://github.com/wand125/square-packing/tree/f9a77b7d38fd60144b78fe290c94f841ab626156/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean),
+      11 October 2026. The commit names an AI assistant as co-author.
+    scope:
+      n_values: [59]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        A proof-assistant route to a value T-066 holds on a complete replay, by the same
+        cover and the same author's checker family checked in Lean's kernel instead: a
+        citable detail that changes no theorem.
+      scored: '2026-10-23'
+      by: think-xk3f wand125 import (draft, c-lean-1023)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[wand125 n59 Lean kernel 2026-10-11]'
+      published: '2026-10-11'
+    evidence:
+      - E-n059-wand125-lean-kernel-report
+    composition: >-
+      One cited entry, the source's report (E-n059-wand125-lean-kernel-report), which claims
+      the exact value in Lean, the grid inside the proof. T-066's zmx2 replay is not cited:
+      it is T-066's evidence, and a kernel check of the same cover is what this entry adds.
+      No build is retained here, so V0; no review has read it, so C0.
+    artifacts:
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/README.md
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/Sqpack/S59Lower.lean
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/Sqpack/S59T/Pts.lean
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/README.md
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/receipts/kernel_tasks.jsonl.gz
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/receipts/evand-library-closure-1718a580.json
+      - packing/devtools/lean_closure.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review of the proof, which starts from the packet.
+      V3 and C3 need a complete build here or by a third party retained here, from the
+      retained scripts and Daniel's library staged from the 7 October evand packet,
+      with its axiom receipt (think-cs9x): about 862 CPU-hours by the source's receipt, with
+      9.8 GB per Part process and 35 GB for the last two modules, so it is held above the
+      owner's 40 CPU-hour item cap and this host. A build of Pts.lean alone decides the
+      cover's data facts in Lean and moves no rung.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of s59_eq_8, its statement, the batch structure
+          and the generator, read from the retained packet
+        rung: C1
+        link: think-xk3f
+      - what: >-
+          a complete build of the 43,444 generated modules, Cov.lean and S59Lower.lean from
+          the retained scripts on the library at 1718a580, compared with SOURCES.sha256,
+          with its axiom receipt, here or by a third party whose build is retained here
+        rung: C3
+        link: think-cs9x
+        estimated_cost:
+          cpu_hours: 862
+          basis: >-
+            The source's retained receipt, kernel_tasks.jsonl.gz: 94.04 generation hours,
+            767.87 for the Part files and 0.48 for the Roots files, on Arm64 Linux
+          priced: '2026-10-23'
+    notes: >-
+      Registered on 23 October 2026 by the intake lane c-lean-1023 (think-xk3f), from the
+      intake read of 11 October (think-q655); no issue asked, and jlevy/squares#536 and #544
+      track the pass's work on GitHub. The bead expected an evidence update to T-066; a
+      proof in a proof assistant of a result the record holds is a formalization of its own
+      (epistemics.md, Result Kinds), so this entry takes it, and T-066's claim, which said
+      the cover has no Lean statement, names it.
+
+      Daniel's library at the commit the proof names is retained here byte for byte: the 19
+      modules of the closure are the 7 October evand packet's copies. The receipt records task, seconds and
+      peak memory and no exit status, and the README's final_build.log is not in the tree at
+      the pin. The case record is unchanged.
+  - id: T-236
+    kind: formalization
+    proves_kind: upper-bound
+    registered: '2026-10-23'
+    landed: '2026-10-23'
+    headline: >-
+      Daniel reports Lean proofs of Fang's Theorems 1 and 2, `s(n² − n + 1) < n` for `n ≥ 15`
+    claim: >-
+      Evan Daniel reports Lean 4 proofs of Kevin Fang's Theorems 1 and 2 (T-163), with no
+      hypothesis: theorem1, s(n^2 - n + 1) < n for every integer n >= 15, and theorem2, that
+      n^2 - n + 1 + p + 2q unit squares pack in a square of side below n whenever n >= 15 and
+      16p + 21q <= n - 15. Each states that the squares, closed, translated and rotated, fit
+      in [0, s]^2 with pairwise disjoint interiors for some s < n.
+
+      The proof formalizes Fang's: his Lemma 3, the gluing of Arslanov, Mustafin and
+      Shangitbayev's decomposition, on packings in a region; the induction on n; and the 18
+      pieces as exact rational certificates, each checked by decide +kernel in a generated
+      module, the rectangles of 257 squares in 17 x 16 and 443 in 22 x 21, the bases
+      r^2 - r + 1 in a side below r for r = 15 to 26, and m^2 - m for m = 11 to 14. The
+      source reports the axioms propext, Classical.choice and Quot.sound only, and a build
+      of the pieces in about 19 minutes at 8 chunks in parallel; it publishes no build log.
+      Nothing here has built it.
+
+      At the counts this record holds, n = 15 to 18, the theorems give s(211) < 15,
+      s(241) < 16, s(273) < 17 and s(307) < 18, which T-163's construction and the case
+      bounds improve on; the theorems are what is new here, in Lean.
+
+      Daniel after Fang, Ryu, Arslanov, Mustafin and Shangitbayev,
+      [square-packing](https://github.com/evand/square-packing/tree/8475bdf41571c59c8c240aedaddc48e19e0e4707/lean/Sqpack),
+      18 October 2026. The pieces' README credits each
+      packing to its finder; Fang's own repository states its Lean scope as Theorem 1 and
+      the unmixed bounds of Theorem 2. Claude (Anthropic) assistance disclosed.
+    scope:
+      n_values: [211, 241, 273, 307]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        A machine-checked proof, by another author, of a bound family the record holds on a
+        reviewer's reading of its proof: both theorems for every n >= 15, unconditional,
+        where the family's own formalization covers Theorem 1 and part of Theorem 2. A
+        machine audit, S3, below T-163's S4 because it proves no new bound.
+      scored: '2026-10-23'
+      by: think-57ei Evan Daniel import (draft, c-lean-1023)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[Daniel Fang and Ryu Lean 2026-10-18]'
+      published: '2026-10-18'
+    evidence:
+      - E-fang-theorems-daniel-lean-report
+    composition: >-
+      One cited entry, the source's report (E-fang-theorems-daniel-lean-report), which claims
+      the theorems' upper bounds at the four counts in scope. T-163's evidence is not cited.
+      No build is retained here, so V0; no review has read it, so C0.
+    artifacts:
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/README.md
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangFinal.lean
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangTheorem.lean
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangGlue.lean
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/certificates/fang-gluing/README.md
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/search/exact/fang_pieces.py
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/receipts/lean-closure.json
+      - packing/devtools/lean_closure.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review, which reads Packs against the record's s(n),
+      the gluing lemma, the induction and the generated pieces against their certificates.
+      V3 and C3 need a build here from the retained bytes with the generated pieces and the
+      axiom receipt of theorem1 and theorem2 (think-dgrc): about 1.5 to 3 CPU-hours, at most
+      about 8 GB per chunk, and 10 GB of disk. That would be reproduction with the producer's
+      code. Rung 5 needs a human expert's review of the formalization beside it.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of theorem1 and theorem2, their statements, the
+          gluing lemma and the induction, and the 18 pieces, read from the retained packet
+        rung: C1
+        link: think-57ei
+      - what: >-
+          a build here of FangFinal from the retained bytes, the 18 piece modules generated
+          by the retained generator and built one chunk at a time, with the axiom receipt
+          of theorem1 and theorem2
+        rung: C3
+        link: think-dgrc
+        estimated_cost:
+          cpu_hours: 2
+          cpu_hours_high: 3
+          basis: >-
+            The source's task note of 17 October: the 18 pieces in about 19 minutes wall at
+            8 chunks in parallel, at most about 2.5 CPU-hours, a minute of generation, and
+            the theorem modules in minutes; an estimate, not a receipt
+          priced: '2026-10-23'
+    notes: >-
+      Registered on 23 October 2026 by the intake lane c-lean-1023 (think-57ei), from the
+      intake read of 18 October (think-xmxb); no issue asked, and issue 603 holds T-163's
+      intake. Its kind is formalization: a proof in a proof assistant of the result T-163
+      holds, by another author, which the owner asked be reported as its own result where it
+      is one (T-154's notes). The same packet retains Daniel's Lean proof of Sungjoon Ryu's
+      Theorem 1.4, which the asymptotic register's row records (think-ahr2); it settles no
+      count n <= 324 and has no entry here.
+
+      Fang's repository narrowed its own Lean statement on 19 October to Theorem 1 and the
+      unmixed bounds of Theorem 2 (think-494l compares that scope with T-163); this
+      formalization states Theorem 2 in full. The theorems state s < n, not the
+      construction's side n - 1/20000, so its four finite bounds are weaker than T-163's.
+      The case records are unchanged.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

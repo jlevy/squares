@@ -13,7 +13,8 @@ square case needs.
 
 Its proposed Frontier key is **[Daniel small-n rectangles Lean 2026-10-22]**. No issue
 asked for it: the intake reads of 22 October found it, and bead `think-7l2j` owns its
-import with chelokot’s. The claims below are stated as the source states them; nothing
+import with chelokot’s; which kind of register entry the two take waits on the owner
+(`think-4o9c`). The claims below are stated as the source states them; nothing
 here has built the proofs, and no review has read them yet.
 
 ## Source and Pin

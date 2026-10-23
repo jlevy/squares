@@ -43,8 +43,8 @@
       ],
       "subtree_file_count": 46,
       "subtree_total_bytes": 1362382,
-      "retained_file_count": 25,
-      "retained_total_bytes": 354564,
+      "retained_file_count": 24,
+      "retained_total_bytes": 330940,
       "compressed": [],
       "pinned_only": [
         {
@@ -193,6 +193,12 @@
           "sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71",
           "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
           "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lean-toolchain"
+        },
+        {
+          "path": "search/exact/lean_cert.py",
+          "bytes": 23624,
+          "sha256": "448b091d09d0503f3571f3f8964d2e6fd7d4c8f54a663f916f87d8ce79d10968",
+          "reason": "The certificate-to-Lean converter fang_pieces.py runs, 541 lines and 23,624 bytes of Python whose Lean strings (fun i j => ...) this repository's embedded-JavaScript gate reads as arrow functions and admits no exception for; fetched at the pin for a rebuild, as the 26 September evand packet does s32_sweep.py"
         }
       ],
       "license": "MIT, Copyright (c) 2026 Evan Daniel (LICENSE). certificates/fang-gluing/README.md credits each piece: Kevin Fang's R257, R443 and P308 to P651, copied byte for byte from TheSnakeFang/squarepack-certs at 078789a; David Ellsworth's P110; Arslanov, Mustafin and Shangitbayev's P132, P156 and P182; Joost de Winter's P211; David Ellsworth's and Peter Stead's P241 and P273, the last seven certified by Evan Daniel. It credits the theorems to Kevin Fang after Arslanov, Mustafin and Shangitbayev, whose decomposition is the gluing lemma, and the formalization to this repository, 17 October 2026; RyuBound.lean credits the bound to Sungjoon Ryu. CREDITS.md says the work was produced by Claude (Anthropic) under human direction.",

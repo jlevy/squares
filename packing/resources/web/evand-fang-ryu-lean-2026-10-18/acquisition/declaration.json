@@ -45,6 +45,10 @@
   ],
   "pinned_only": [
     {
+      "match": "search/exact/lean_cert.py",
+      "reason": "The certificate-to-Lean converter fang_pieces.py runs, 541 lines and 23,624 bytes of Python whose Lean strings (fun i j => ...) this repository's embedded-JavaScript gate reads as arrow functions and admits no exception for; fetched at the pin for a rebuild, as the 26 September evand packet does s32_sweep.py"
+    },
+    {
       "match": "LICENSE",
       "reason": "Retained byte-identical by the 12 October exact-data packet",
       "identical_to": "packing/resources/web/evand-exact-data-2026-10-12/source/LICENSE"

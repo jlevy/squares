@@ -4451,7 +4451,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/210.html
   canonical: cases/210.html
@@ -4467,7 +4467,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/212.html
   canonical: cases/212.html
@@ -4731,7 +4731,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/242.html
   canonical: cases/242.html
@@ -5011,7 +5011,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/274.html
   canonical: cases/274.html
@@ -5315,7 +5315,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/308.html
   canonical: cases/308.html
@@ -5699,7 +5699,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/6.html
   canonical: cases/6.html
@@ -18708,6 +18708,96 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-10-22-daniel-728.md
     - packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/README.md
+- path: result/t-234.html
+  canonical: result/t-234.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: formalization
+    scope:
+      n_values:
+      - 21
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 n21 zero-margin Lean 2026-09-29]'
+      published: '2026-09-29'
+    builds_on: null
+    evidence:
+    - E-n021-wand125-zero-margin-lean-report
+    artifacts:
+    - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/README.md
+    - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/N21PtsLower.lean
+    - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/build_zero_margin.sh
+    - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/data-sha256.txt
+    - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/receipts/evand-library-closure-6aa82ba4.json
+    - packing/devtools/lean_closure.py
+- path: result/t-235.html
+  canonical: result/t-235.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: formalization
+    scope:
+      n_values:
+      - 59
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 n59 Lean kernel 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-n059-wand125-lean-kernel-report
+    artifacts:
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/README.md
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/Sqpack/S59Lower.lean
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/Sqpack/S59T/Pts.lean
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/README.md
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/receipts/kernel_tasks.jsonl.gz
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/receipts/evand-library-closure-1718a580.json
+    - packing/devtools/lean_closure.py
+- path: result/t-236.html
+  canonical: result/t-236.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: formalization
+    scope:
+      n_values:
+      - 211
+      - 241
+      - 273
+      - 307
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel Fang and Ryu Lean 2026-10-18]'
+      published: '2026-10-18'
+    builds_on: null
+    evidence:
+    - E-fang-theorems-daniel-lean-report
+    artifacts:
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/README.md
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangFinal.lean
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangTheorem.lean
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangGlue.lean
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/certificates/fang-gluing/README.md
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/search/exact/fang_pieces.py
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/receipts/lean-closure.json
+    - packing/devtools/lean_closure.py
 - path: results.html
   canonical: results.html
   kind: page
