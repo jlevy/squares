@@ -1096,8 +1096,11 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
     All 324 tiles start in Regularized mode on their canonical drawing
     (`atlas/regularized/`, the default picture in its flip regularization, section 13)
     and carry both drawings, so Original switches every tile to its house drawing as
-    published; only a view's tile adds its generator's credit."""
+    published; only a view's tile adds its generator's credit. Where the pose turns the
+    default picture, the Regularized title says it is turned to its canonical pose, and
+    the Original credit stays the packing as published."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
+    from devtools.default_drawings import credit_line  # noqa: PLC0415
 
     page = overview_sections.atlas_grid()
     regularized = overview_sections.atlas_regularized()
@@ -1112,6 +1115,7 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         for a, d, reference, n in tile.findall(tiles)
     }
     assert list(drawn) == list(range(1, 325))
+    titles: dict[int, tuple[str, str]] = {}
     for n, (open_tag, drawing, reference, number) in drawn.items():
         assert bool(reference) == (" data-atlas-row-smaller" in open_tag), n
         assert number == f'<span class="site-atlas-n">{n}</span>', n
@@ -1124,14 +1128,35 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         assert f'data-atlas-regularized-src="{canonical}"' in drawing
         for name in ("original-side", "regularized-side", "original-credit"):
             assert f" data-atlas-{name}=" in drawing, (n, name)
-        credit = html.unescape(
-            re.findall(r' data-atlas-regularized-credit="([^"]*)"', drawing)[0]
-        )
+        shown = re.findall(r' data-atlas-regularized-credit="([^"]*)"', drawing)[0]
+        assert f' title="{shown}"' in drawing, n
+        credit = html.unescape(shown)
         assert ("Regularized by the Squares Project" in credit) is is_regularized
+        original = html.unescape(
+            re.findall(r' data-atlas-original-credit="([^"]*)"', drawing)[0]
+        )
+        assert original.startswith("Packing as published, "), n
+        assert "canonical pose" not in original, n
+        drawn_as = (
+            original
+            if frontier.default_pose(n).identity
+            else original.replace(
+                "as published", "as published, turned to its canonical pose", 1
+            )
+        )
+        assert credit == (f"{drawn_as}. {credit_line(n)}" if is_regularized else drawn_as), n
+        titles[n] = (original, credit)
         assert "regularized" not in open_tag
         assert "site-atlas-layer-mark" not in number
         assert 'width="400" height="400"' in drawing
         assert {frontier.drawing_path(n), canonical} <= set(frontier.drawing_paths())
+    # Each tile's Original credit, then its Regularized title: 11's house drawing is its
+    # default picture in its source's pose, and 17's is turned by its pose.
+    assert titles[11] == ("Packing as published, Walter Trump 1979, [Kingbird]",) * 2
+    assert titles[17] == (
+        "Packing as published, John Bidwell 1998, [Kingbird]",
+        "Packing as published, turned to its canonical pose, John Bidwell 1998, [Kingbird]",
+    )
 
     identical_thumbnails: set[int] = set()
     for n in regularized:

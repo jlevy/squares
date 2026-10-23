@@ -60,7 +60,8 @@ draw the integer grids.
 4. *Final key.* Each survivor's image as its squares, each `(cy, -cx, tilt)` rounded to
    nine places and sorted (the lowest square first, then the rightmost), the least kept.
    The tilt is the square's angle modulo 90 degrees in (-45, 45]; it is in the key
-   because two mirror images can share every centre and differ only in its sign.
+   because two mirror images can share every centre and differ only in its sign. The
+   range's two ends are one angle, so a tilt within `TOLERANCE` of either keys as 45.
 5. *Same picture.* After each stage the survivors are matched square for square; once
    they all draw the same picture, the packing having that symmetry, the stage that got
    there is `decided_by` and the first survivor in `POSES` order is the pose, so a
@@ -114,7 +115,8 @@ COUNTS = range(1, 325)
 
 ROTATIONS = (0, 90, 180, 270)
 TOLERANCE = 1e-9
-"""Two weights this close are equal."""
+"""Two weights this close are equal, and so are a tilt this close to -45 or 45 degrees
+and 45 in the final key."""
 LEVELS = (2, 4, 8, 16)
 STAGES = ("quadrants", "grid-4", "grid-8", "grid-16", "squares")
 """What decided a pose: the grid at each of `LEVELS`, then the final key."""
@@ -438,9 +440,15 @@ def _paired(left: Placement, right: Placement) -> bool:
 
 def _key(image: Iterable[Placement]) -> list[tuple[float, float, float]]:
     return sorted(
-        (round(y, KEY_PLACES), round(-x, KEY_PLACES), round(tilt, KEY_PLACES))
+        (round(y, KEY_PLACES), round(-x, KEY_PLACES), round(_key_tilt(tilt), KEY_PLACES))
         for x, y, tilt in image
     )
+
+
+def _key_tilt(tilt: float) -> float:
+    """A tilt as the final key reads it: `(-45, 45]` meets itself at its ends, so a tilt
+    within `TOLERANCE` of either is 45, wherever float noise put it."""
+    return 45.0 if abs(abs(tilt) - 45.0) <= TOLERANCE else tilt
 
 
 @dataclass(frozen=True)

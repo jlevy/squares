@@ -20,8 +20,10 @@ from pathlib import Path
 
 import pytest
 
+from devtools import flip_regularization
 from devtools.flip_regularization import (
     DESCRIPTIONS,
+    GENERATOR,
     IDENTITY,
     POSES,
     RECORD,
@@ -29,6 +31,7 @@ from devtools.flip_regularization import (
     Decision,
     Picture,
     Pose,
+    _key,  # pyright: ignore[reportPrivateUsage]
     check,
     decide,
     decide_counts,
@@ -268,6 +271,16 @@ def test_weights_within_the_tolerance_tie_and_weights_beyond_it_do_not() -> None
     assert strongest([first, second], tied) == [second]
 
 
+def test_weights_exactly_the_tolerance_apart_tie() -> None:
+    """The filter keeps a weight at `best - TOLERANCE` itself, and drops the next float
+    below it."""
+    first, second = POSES[0], POSES[1]
+    edge = 0.5 - TOLERANCE
+    assert strongest([first, second], {first: (0.5,), second: (edge,)}) == [first, second]
+    below = math.nextafter(edge, 0.0)
+    assert strongest([first, second], {first: (0.5,), second: (below,)}) == [first]
+
+
 @pytest.mark.parametrize("empty", [(0, 0), (1, 0), (0, 1), (1, 1)])
 def test_three_squares_leave_the_empty_cell_upper_right(empty: tuple[int, int]) -> None:
     filled = [cell for cell in [(0, 0), (1, 0), (0, 1), (1, 1)] if cell != empty]
@@ -312,6 +325,47 @@ def test_the_tilt_decides_between_mirror_images_that_share_every_centre() -> Non
         assert decision.decided_by == "squares"
         assert decision.pose == expected
         assert invariant([square], side)
+
+
+def test_a_tilt_at_either_end_of_its_range_keys_as_45() -> None:
+    """`(-45, 45]` meets itself at its ends, so one square at 45 degrees can be read just
+    under 45 in one image and just over -45 in another; within `TOLERANCE` of either end
+    it keys as 45."""
+    under = [(62.0, 2.0, 45.0 - 1e-12), (54.0, 10.0, -10.0)]
+    over = [(62.0, 2.0, -45.0 + 1e-12), (54.0, 10.0, -10.0)]
+    assert _key(under) == _key(over) == [(2.0, -62.0, 45.0), (10.0, -54.0, -10.0)]
+    for tilt in (45.0, 45.0 - TOLERANCE, -45.0 + TOLERANCE):
+        assert _key([(0.5, 0.5, tilt)]) == [(0.5, -0.5, 45.0)], tilt
+    assert _key([(0.5, 0.5, -45.0 + 2 * TOLERANCE)]) == [(0.5, -0.5, -44.999999998)]
+
+
+def test_a_45_degree_square_read_at_either_end_does_not_decide_the_pose() -> None:
+    """Two squares on the falling diagonal, each inside one cell of every grid, so the
+    identity and that diagonal's mirror tie until the final key. The lower one is at 45
+    degrees, which the mirror keeps; the upper one, at -10, is what tells the two apart.
+    Read just under 45 or just over -45, the 45-degree square leaves it to that one."""
+    side = 64.0
+    upper = [(x + 53.5, y + 9.5) for x, y in _cells([(0, 0)], tilt=-10.0)[0]]
+    for tilt in (45.0 - 1e-10, -45.0 + 1e-10):
+        lower = [(x + 61.5, y + 1.5) for x, y in _cells([(0, 0)], tilt=tilt)[0]]
+        read = placements([lower])[0][2]
+        assert abs(read - tilt) < 1e-11, tilt
+        decision = decide([lower, upper], side)
+        assert (decision.pose, decision.decided_by) == (IDENTITY, "squares"), tilt
+
+
+def test_distinct_pictures_surviving_the_final_key_raise(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """No real picture reaches this, since a key that ties draws one picture, so the key is
+    made to tie two mirror images that differ in a tilt's sign."""
+    square = [(x + 61.5, y + 1.5) for x, y in _cells([(0, 0)], tilt=10.0)[0]]
+    monkeypatch.setattr(flip_regularization, "_key", lambda _image: [])
+    with pytest.raises(
+        ValueError,
+        match=r"distinct pictures survive the 'squares' stage: poses \(0, False\), \(0, True\)",
+    ):
+        decide([square], 64.0)
 
 
 def test_same_picture_pairs_squares_by_centre_and_tilt_modulo_a_quarter_turn() -> None:
@@ -430,6 +484,40 @@ def test_the_check_names_a_perturbed_row(
     assert len(named) == 1
     assert named[0].startswith("flip regularization: n=11: the record has ")
     assert check(tmp_path / "missing.json") == 1
+
+
+def test_the_check_fails_a_record_whose_rows_are_current_but_not_its_layout_or_header(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The check compares the data first, the header fields with the rows, and then the
+    bytes `--update` writes. Every row here is the record's own, which the rule gives (the
+    check is that), so only the layout or the header differs and no count is named."""
+    record = json.loads(RECORD.read_text(encoding="utf-8"))
+    monkeypatch.setattr(flip_regularization, "decide_counts", lambda _counts: record["entries"])
+    assert check(RECORD) == 0
+    capsys.readouterr()
+
+    def failures(content: str) -> list[str]:
+        written = tmp_path / "flip-regularization.json"
+        written.write_text(content, encoding="utf-8")
+        assert check(written) == 1
+        lines = capsys.readouterr().out.splitlines()
+        assert lines[-1].endswith(f"is stale; run `{GENERATOR} --update`")
+        assert not any("n=" in line for line in lines)
+        return lines[:-1]
+
+    layout = (
+        f"flip regularization: the record is not laid out as `{GENERATOR} --update` writes it"
+    )
+    assert failures(json.dumps(record, indent=2) + "\n") == [layout]
+    assert failures(text({"entries": record["entries"], **record})) == [layout]
+    header = {**record, "rule": "elsewhere", "note": "added"}
+    del header["policy_document"]
+    assert failures(text(header)) == [
+        "flip regularization: the record's policy_document is not the rule's",
+        "flip regularization: the record's rule is not the rule's",
+        "flip regularization: the record has a field 'note'",
+    ]
 
 
 def test_differences_name_missing_extra_and_doubled_rows() -> None:
