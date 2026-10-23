@@ -2,7 +2,7 @@
 
 - Human oversight: [**Joshua Levy**](https://x.com/ojoshe)
 - Agents: **Opus 5**, **Fable 5**, **Fable 5.1**, **Opus 5.5**, and **GPT-6 Astra**
-- First published October 14, 2026 · Last revised October 15, 2026
+- First published October 14, 2026 · Last revised October 22, 2026
 
 A packing certificate answers whether a specified arrangement fits.
 An optimality proof must also exclude every smaller arrangement, including ones no
@@ -61,7 +61,7 @@ constraints, and it is not obvious where to push.
 Fixing the discrete separation choices and the angles separates a tractable subproblem
 from the remaining search.
 
-### The cell decomposition
+### The Cell Decomposition
 
 Two convex polygons have **disjoint interiors** exactly when some line separates them,
 weakly—touching is allowed, and the separating line may run along the shared edge.
@@ -161,7 +161,7 @@ The independent reconstruction checks the geometry, while a drawing only display
 Contact equality is why the exact representation in
 [§3](#3-exact-arithmetic-and-reconstruction) matters.
 
-### Thirty-four dimensions become one
+### Thirty-Four Dimensions Become One
 
 An **angle class** is a set of squares constrained to share one angle.
 Trump’s packing uses only **two**: six squares at $0^{\circ}$, and five sharing a single
@@ -194,23 +194,28 @@ not a theorem that class count equals the local dimension of the full packing pr
 Other records already use more classes—six, numerically, at $n = 29$—and every proposed
 compression must be checked on its own contact structure.
 
-![The high-precision Kingbird packing of twenty-nine unit squares.](packing/atlas/rendering/kingbird29-overview.svg)
+<figure>
+<img src="packing/atlas/rendering/kingbird29-overview.svg" alt="The high-precision Kingbird packing of twenty-nine unit squares.">
+<figcaption>
 
-*The reported `n = 29` record is a useful larger-scale check: six orientation classes
+The reported `n = 29` record is a useful larger-scale check: six orientation classes
 across 29 squares. The retained roughly 100-digit source is evaluated at 160 decimal
 digits of working precision and passes all 406 pair checks at tolerance `1e-80`; that
 numerically checks that source transcription without making it an exact certificate or
 an optimality proof.
 The later T-009 interval certificate and T-155 rational certificate are separate
 evidence objects; the latter is discussed in
-[regularization](#regularization-exact-sides-and-credit).*
+[regularization](#regularization-exact-sides-and-credit).
+
+</figcaption>
+</figure>
 
 ## 2. Refinement, Corners, and Connected Families
 
 The retained experiments distinguish three objects: a separation cell, a numerical
 refiner’s endpoint, and a connected component of mathematical local optima.
 
-### The quench map
+### The Quench Map
 
 Borrowed from Stillinger and Weber’s *inherent structure* decomposition: the **quench
 map** sends a configuration to the pose that a deterministic refinement returns.
@@ -267,7 +272,7 @@ an **exploration failure** (wrong region, and refinement cannot help).
 Which one a number represents **cannot be read off the number**; you establish it by
 running the refiner and seeing whether the gap moves.
 
-### Trap 1—a fixed-angle cell solve is not a basin
+### Trap 1—A Fixed-Angle Cell Solve Is Not a Basin
 
 A cell fixes only the discrete separating axes and orders.
 The **fixed-angle LP subproblem** fixes both a cell and an angle vector; a basin does
@@ -290,7 +295,7 @@ The renderer guide retains the
 the start is close but not settled, while the full quench returns to the proved-side
 geometry.
 
-### Trap 2—a point-basin need not be a terminal component
+### Trap 2—A Point-Basin Need Not Be a Terminal Component
 
 A deterministic quench still returns an individual pose.
 The problem is that its local optimum can lie on a connected terminal family, so
@@ -319,12 +324,17 @@ is the slider parameter above with the reflection $t \leftrightarrow 2 - t$ divi
 Three strata remain: the corner pose at $\lambda = 0$, the generic slide, and the
 centred pose at $\lambda = 1/2$.
 
-![The exact quotient map of optimal configurations for three unit squares.](packing/atlas/n-003-optimal-moduli.svg)
+<figure>
+<img src="packing/atlas/n-003-optimal-moduli.svg" alt="The exact quotient map of optimal configurations for three unit squares.">
+<figcaption>
 
-*Each quotient stage kills one wrong identity—relabellings and container symmetries are
+Each quotient stage kills one wrong identity—relabellings and container symmetries are
 not new basins—and the interval kills the rest: four exact sample poses with four
 distinct geometric keys, two contact signatures, and three strata are one connected
-component.*
+component.
+
+</figcaption>
+</figure>
 
 That is why this object is a permanent known-answer control rather than an illustration.
 A frozen component-assignment policy is accepted only if it recovers this interval, and
@@ -367,7 +377,7 @@ Subtracting contacts from variables is not a rigidity calculation.
 
 <a id="the-generalized-lesson-learned-twice"></a>
 
-### Terminal components and their representation
+### Terminal Components and Their Representation
 
 A mathematical terminal component is independent of the search’s tolerances and the
 representation’s coordinate keys.
@@ -375,7 +385,7 @@ A quench that merges nearby angles depends on its merge tolerance; a coordinate 
 split a continuous family into distinct entries.
 Neither choice establishes the component’s identity.
 
-### The corner
+### The Corner
 
 The figures here are measurements from the retained early search campaign, not a
 benchmark of every current solver.
@@ -414,7 +424,7 @@ The synopsis presents this measurement-to-method chain as a full worked example.
 
 ## 3. Exact Arithmetic and Reconstruction
 
-### Why exactness is not optional
+### Why Exactness Is Not Optional
 
 Floating-point evaluation can certify a strict inequality when a sound error bound stays
 away from zero.
@@ -480,7 +490,7 @@ nothing needs optimising; an *interactive* tier at 10 ms–1 s; and an *inner lo
 ns–1 µs executed $10^9$–`1e12` times, for which the measured search uses `f64`. Screen
 in floating point, refine in floating point, decide in the number field.
 
-### The number field
+### The Number Field
 
 A **real algebraic number field** $\mathbb{Q}(\alpha)$ is what you get by adjoining one
 real algebraic number $\alpha$ to the rationals.
@@ -506,7 +516,7 @@ useful subtlety: $\cos a$, $\sin a$, $\tan(a/2)$ and $s$ are all algebraic, but 
 angle $a$ itself, in radians, is transcendental** by Lindemann–Weierstrass.
 The algebra lives in the trigonometric values, never in the angle.
 
-### How many roots does a packing need?
+### How Many Roots Does a Packing Need?
 
 Step 1 says “a single primitive element” as though one always suffices.
 It does, and the reason is worth stating, because the obvious guess—that a configuration
@@ -553,7 +563,7 @@ family. That is the same distinction [§2](#2-refinement-corners-and-connected-f
 draws between a point-basin and a terminal component, arrived at from the algebraic
 side.
 
-### Assurance, method, and precision
+### Assurance, Method, and Precision
 
 Never extrapolate across an assurance or arithmetic boundary.
 
@@ -590,7 +600,7 @@ when a loose LP tolerance returned a packing violating its own separation constr
 Even a verified feasible witness establishes only an upper bound; optimality needs a
 matching verified lower bound.
 
-### Contact graphs, stationary branches, and rattlers
+### Contact Graphs, Stationary Branches, and Rattlers
 
 An exact reconstruction needs more information than a contact graph.
 A **contact graph** has one vertex per square and an edge for each touching pair, with
@@ -662,7 +672,7 @@ contains no other feasible pose.
 Passing any of them does not exclude a better packing elsewhere, so none by itself
 proves global optimality.
 
-### From a numeric solution to an exact one
+### From a Numeric Solution to an Exact One
 
 Reconstruction starts from a numerical candidate and proposes an exact solution of a
 contact system. The final geometric checks decide whether that proposal is a packing.
@@ -756,7 +766,7 @@ mathematically contingent steps.
 [Section 8](#8-results-and-open-questions) records the claims actually established, with
 their assurance and scope.
 
-### From a certificate to a registered result
+### From a Certificate to a Registered Result
 
 A **witness** gives a concrete packing.
 A **certificate** supplies data from which a checker decides a declared claim: a witness
@@ -800,7 +810,7 @@ what code was shared, who wrote it, and how much of the claim was checked.
 T-060’s complete confirmation reimplements the proof while sharing named components;
 T-154’s independent sample of ten finite facts leaves the full Lean build outstanding.
 
-### Regularization, exact sides, and credit
+### Regularization, Exact Sides, and Credit
 
 A **regularization** adjusts a known arrangement so its geometry reads more clearly:
 near-axis squares can become axis-aligned, intended contacts can close, and sub-blocks
@@ -845,7 +855,7 @@ T-156’s bound for 290 squares was already implied by T-155 at 291, by removing
 square. These examples explain why exact side, certificate provenance, drawing identity,
 and novelty are recorded separately.
 
-### Intake is not adoption
+### Intake Is Not Adoption
 
 The
 [14 October upper-bound ledger](packing/campaign/issue-intake/upper-bounds-20261014/README.md)
@@ -871,7 +881,7 @@ connects the wider constructive and computational methods to the published recor
 There are two layers: the catalogue of everything anyone has ever used, and the strategy
 this project actually adopted.
 
-### The catalogue
+### The Catalogue
 
 The campaign catalogues 28 search strategies in four families, with hypotheses citing
 the strategies they use:
@@ -891,7 +901,7 @@ the strategies they use:
 A parallel catalogue of thirty proof strategies in six families covers the lower-bound
 side.
 
-### The strategy: why pointing should beat scaling
+### The Strategy: Why Pointing Should Beat Scaling
 
 > **A validated map of terminal components is the intended deliverable, and records are
 > corollaries.**
@@ -914,7 +924,7 @@ The premise is registered as a hypothesis with a kill criterion—if record basi
 out to be hit at rates comparable to the modal basin, the cartography program stands
 down and the campaign reverts to throughput.
 
-### Steering: keep the loss, change what you keep
+### Steering: Keep the Loss, Change What You Keep
 
 Reshaping the objective creates two problems.
 First, a naive contact reward favours grid-like arrangements, the opposite of the
@@ -937,7 +947,7 @@ must come from verified canonical data rather than raw floats, must be axes of
 *mechanism*, and must be combined so as to separate the grid funnel from oblique
 structure.
 
-### Relaxation ladders: turn rare-event search into path-following
+### Relaxation Ladders: Turn Rare-Event Search into Path-Following
 
 Embed the hard instance in a one-parameter family whose far end is easy, then track
 solutions along the parameter instead of searching for them cold.
@@ -957,7 +967,7 @@ a certified clearance barrier.
 Boundary-layer reduction is strictly a *reduction*, not a relaxation: the slice may
 exclude the true optimum, and that risk is stated rather than hidden.
 
-### Calibration must match mechanism, not just difficulty
+### Calibration Must Match Mechanism, Not Just Difficulty
 
 The proved cases used as positive controls, $n = 5$ and $n = 10$, are both $45^{\circ}$
 mechanisms (the other proved small cases are plain grids).
@@ -980,7 +990,7 @@ cell whose record needs oblique structure, the failure is not specific to $n = 1
 whether it covers every oblique target is an inference the registry states as such, not
 a theorem.
 
-### Near-misses are the data
+### Near-Misses Are the Data
 
 A campaign produces thousands of non-record endpoints.
 These supply the map, the training set for descriptors, the sample for
@@ -988,7 +998,7 @@ structure-versus-rarity laws, and the denominator for any coverage claim.
 
 ## 6. Lower Bounds by Weighted Covers
 
-### The state of `n = 11`, in one table
+### The State of `n = 11`, in One Table
 
 |  | value | status |
 | --- | --- | --- |
@@ -1077,7 +1087,7 @@ of the certificate below.
 The episode is why this repository treats published proofs as source claims and tests
 them with exact counterexample searches.
 
-### How a weighted atomic lower-bound proof works
+### How a Weighted Atomic Lower-Bound Proof Works
 
 The certificate below turns a lower-bound claim about continuously many packings into a
 finite exact check. The covering LP finds candidate weights; the geometric transfer and
@@ -1190,9 +1200,17 @@ the method-distinct interval branch and bound in
 [`sqpack.fractional`](packing/src/sqpack/fractional/certificate.py) each decide from the
 certificate’s frozen bytes, agreeing on $4001/4000$ to the digit.
 
-![The T-018 certificate’s 1,121 weighted atoms with one exact Condition 5 witness, beside the shrink-and-snap containment step.](packing/cases/n11_fractional_certificate/t-018-proof-visual.svg)
+<figure>
+<img src="packing/cases/n11_fractional_certificate/t-018-proof-visual.svg" alt="The T-018 certificate’s 1,121 weighted atoms with one exact Condition 5 witness, beside the shrink-and-snap containment step.">
+<figcaption>
 
-### How the finite covering LP searches for atoms
+The T-018 certificate’s 1,121 weighted atoms with one exact Condition 5 witness, beside
+the shrink-and-snap containment step.
+
+</figcaption>
+</figure>
+
+### How the Finite Covering LP Searches for Atoms
 
 A **site** and a square **pose** play different roles.
 A site is a point where the search may put an atom.
@@ -1310,7 +1328,7 @@ This extends the point-only obstruction to those selections at that side and abo
 It does not apply below that side or to threshold charges, conditional domains, or
 restrictions that depend on the other packed squares.
 
-### Threshold atoms and dilation
+### Threshold Atoms and Dilation
 
 A point atom charges a core for containing one site.
 A **threshold atom** $(S,k,w)$ charges $w$ whenever the core contains at least $k$ sites
@@ -1335,7 +1353,7 @@ The limit need not itself satisfy the strict shrink test.
 [T-026](packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md)
 retains the finite checks and the endpoint argument separately.
 
-### Why condition on corner squares?
+### Why Condition on Corner Squares?
 
 An unconditional cover treats each square alone.
 Structural information can instead split the possible packings into cases and give each
@@ -1356,13 +1374,18 @@ selected core for every pose allowed by the case.
 It records area that is certainly occupied even though the owner’s exact pose is
 unknown.
 
-![Diagram of four green guaranteed footprints and five red dots: eleven squares minus four owners leaves seven residual cores, but disjoint cores cannot share any of the five dots.](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/four-owner-five-dot.svg)
+<figure>
+<img src="packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/four-owner-five-dot.svg" alt="Diagram of four green guaranteed footprints and five red dots: eleven squares minus four owners leaves seven residual cores, but disjoint cores cannot share any of the five dots.">
+<figcaption>
 
-*The proved five-dot exclusion for one selected four-owner branch at `L = 96/25`. The
+The proved five-dot exclusion for one selected four-owner branch at `L = 96/25`. The
 corner shapes are the regions guaranteed to lie in the four owner cores; the five dots
 pierce every selected remaining net core.
 The drawing explains the logic; the linked records supply the exact check and the
-geometric proof that extends it to every physical angle.*
+geometric proof that extends it to every physical angle.
+
+</figcaption>
+</figure>
 
 Here is the counting argument for that branch.
 
@@ -1418,7 +1441,7 @@ subsume it (item 7 of [§8](#8-results-and-open-questions)), supply the illustra
 the [`n = 17` explainer](docs/project/guides/n17-optimality-explainer.md) gives that
 route’s numbers, records and status, and nothing below is a result about the case.
 
-### Three parts
+### Three Parts
 
 The strict-core counting certificates developed above prove $s(n) \ge L$ below the known
 side.
@@ -1440,7 +1463,7 @@ The first is a theorem about a neighbourhood whose radius is a number such as $1
 The second is a finite case analysis over regions of width about $0.7$. The third
 bridges those two scales, and it is the part with the most engineering in it.
 
-### The cap above the optimum
+### The Cap above the Optimum
 
 The global half does not work at the known side, which is an algebraic number of some
 degree, but at a **cap**: a rational container side $U$ slightly above it.
@@ -1468,7 +1491,7 @@ with the cover’s cells kept in the frame of the first and only the wall bounds
 At $n = 11$ one cap served both purposes; the completed capture proof establishes that
 its surviving states reach the declared local region.
 
-### The centre box and capacity-one covers
+### The Centre Box and Capacity-One Covers
 
 Why a finite list of states exhausts every packing takes four steps, each of which is an
 exact statement a checker proves.
@@ -1521,7 +1544,7 @@ million states. A minimal cover of capacity-one cells is the single largest fact
 whether the global half is affordable
 ([bulk-exclusion design](docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md)).
 
-### Symmetry and orbits
+### Symmetry and Orbits
 
 The container has eight symmetries, the dihedral group $D_4$ of
 [§6](#how-a-weighted-atomic-lower-bound-proof-works)’s Condition 1. When a cover is
@@ -1543,7 +1566,7 @@ The $n = 17$ cover is invariant under all of $D_4$, and some of its states are f
 reflections, so its orbit count exceeds one eighth of its state count; a brute-force
 reduction of every state to its least image is the check on the lemma.
 
-### Sub-pattern exclusion by containment
+### Sub-Pattern Exclusion by Containment
 
 A **sub-pattern** is a set of $k$ cells.
 It is **forbidden** when $k$ unit squares, each centred in its own cell of the set, at
@@ -1562,7 +1585,7 @@ subtracting counts, since two patterns’ exclusions overlap.
 The known packing’s state must survive every certificate; one that excludes it is a
 soundness failure of the prover, not a result.
 
-### Selection versus certification
+### Selection versus Certification
 
 Which sub-patterns to try to certify is a search problem, and a heuristic may propose
 them. A **selector** searches hard for a placement of each candidate pattern, by penalty
@@ -1578,7 +1601,7 @@ exclusion built on them would have been a wrong proof with a plausible count.
 The selector proposes, the prover certifies, and only what the prover certifies enters
 the consumer.
 
-### What makes a certificate admissible
+### What Makes a Certificate Admissible
 
 Two kinds of prover have been used here, and they share no code.
 An **ownership induction** keeps, for each **owner** (a cell with one square in it), a
@@ -1620,7 +1643,7 @@ Admitting one asks for four things.
    separate projection, and refuses to report any count at all if an entry fails a
    check.
 
-### A local minimum modulo sliders
+### A Local Minimum modulo Sliders
 
 The local half for an isolated packing, such as Trump’s at $n = 11$, is **local
 isolation**: within an explicit rectangle around the known pose, no other feasible pose
@@ -1680,7 +1703,7 @@ Soundness has one more control: after every certified update the known packing�
 pose must still lie in some live row of every owner, and losing it is a failure of the
 prover, not a discovery.
 
-### Why exact arithmetic dominates the cost
+### Why Exact Arithmetic Dominates the Cost
 
 The ownership induction uses exact rational arithmetic; the interval route uses rigorous
 outward rounding. Both must decide their inequalities on entire declared regions.
@@ -1735,7 +1758,7 @@ the same distinctions.
 | The exact optimal configuration spaces at [`n = 3`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | verified (`exact-algebraic`) | Only those two moduli spaces are classified here; the optimal side values at $n = 5$ and $n = 6$ are proved, but their optimal configuration spaces are not classified here. The labelled and unlabelled $n = 3$ pieces agree with published computations; the rotation exclusion and full quotients are established here, with no novelty claim |
 | In the retained early campaign, the same floating-point LP refiner takes the tested proved-control starts to the analytic optima (residuals $\approx10^{-15}$) and leaves the tested $n = 11$ starts $6 \times 10^{-2}$ short | numerically checked (`numerical-f64`) | The solver floor is about $10^{-11}$ in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the $n = 11$ starts are far away |
 
-### Result claims and confirmation
+### Result Claims and Confirmation
 
 T-060 establishes the eleven-square value at `V3/C3`. **T-112** reads its equality case
 to conclude uniqueness up to the container’s eight symmetries and relabeling, at
@@ -2105,7 +2128,7 @@ likewise has no retained first-party document:
   combinatorial method evidence, not a completeness theorem for the global $n = 11$
   search
 
-### What does the arithmetic here
+### What Does the Arithmetic Here
 
 The exact algebra does not require a computer algebra system.
 An optional system is used only to rederive one constant.

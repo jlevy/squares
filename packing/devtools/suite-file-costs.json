@@ -698,6 +698,7 @@
     "packing/tests/test_site_scripts.py": 0.017,
     "packing/tests/test_site_tallies.py": 4.288,
     "packing/tests/test_site_text_tokens.py": 3.676,
+    "packing/tests/test_site_tutorial_design.py": 8.89,
     "packing/tests/test_site_urls.py": 9.585,
     "packing/tests/test_site_wide_blocks.py": 82.406,
     "packing/tests/test_snapshot_copy_roster.py": 4.966,
@@ -854,6 +855,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/browser-setup-2026-10-22.json",
           "provenance": {},
           "tests": 10
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_site_tutorial_design.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/site-tutorial-design-2026-10-22.json",
+          "provenance": {},
+          "tests": 2
         }
       ]
     }

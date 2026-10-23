@@ -45,6 +45,7 @@ now, and README keeps its fuller account, so the two are not one text (think-ekw
 
 from __future__ import annotations
 
+import base64
 import html
 import posixpath
 import re
@@ -436,6 +437,28 @@ def element_ids(page: str) -> frozenset[str]:
     )
 
 
+def tutorial_packing_images(page: str) -> str:
+    """Use the papers' container crop for wide atlas canvases in tutorial figures."""
+    from devtools.render_n11_lower_bounds_explainer import crop_to_container  # noqa: PLC0415
+
+    def cropped(match: re.Match[str]) -> str:
+        source = REPO / match["source"]
+        svg = crop_to_container(source.read_text(encoding="utf-8"), name=source.name)
+        data = "data:image/svg+xml;base64," + base64.b64encode(svg.encode()).decode()
+        return (
+            match[0]
+            .replace(match["source"], data, 1)
+            .replace('class="kpress-image"', 'class="kpress-image site-packing-diagram"', 1)
+        )
+
+    return re.sub(
+        r'<img\b[^>]*src="(?P<source>packing/atlas/rendering/'
+        r'(?:trump11|kingbird29)-overview\.svg)"[^>]*>',
+        cropped,
+        page,
+    )
+
+
 def tutorial_front(page: str) -> str:
     """Present the source's credit list with the shared publication component."""
     pattern = re.compile(
@@ -508,7 +531,7 @@ def render_document(
             _reader_profile_links if document in DOCUMENTS else lambda value: value
         )(
             rewrite_article(
-                tutorial_front(page)
+                tutorial_packing_images(tutorial_front(page))
                 if document.source in (TUTORIAL, TUTORIAL_ADVANCED)
                 else page,
                 context=context,
