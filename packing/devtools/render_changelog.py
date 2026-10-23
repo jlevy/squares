@@ -17,7 +17,7 @@ from functools import cache
 from html.parser import HTMLParser
 from ipaddress import IPv6Address
 from pathlib import Path, PurePosixPath
-from typing import Any, Literal, TypedDict, override
+from typing import Any, Literal, NamedTuple, TypedDict, override
 from urllib.parse import SplitResult, quote, unquote, urlsplit
 
 import yaml
@@ -704,21 +704,28 @@ def load(path: Path = SRC) -> Document:
 #: The register whose significant results News must announce.
 RESULTS = ROOT / "frontier" / "results.yaml"
 RESULTS_PATH = "packing/frontier/results.yaml"
+#: The two records a change can settle an owed announcement in: the register, and News.
+ANNOUNCEMENT_RECORDS = (RESULTS_PATH, "packing/site-changelog.yaml")
+#: The `--announcement-base` that means main's own delivery: the records tier passes it
+#: on a push to main and on the scheduled run, and only there (`validate._synopsis`).
+#: The merge under test can no longer act on a failure, so main only reports.
+MAIN_DELIVERY_BASE = "HEAD^1"
 
 #: The lowest significance at which a registered result must have a News item: the
 #: owner's decision of 22 October 2026, "We need a systematic process for the
 #: significant results", then "Let's have it do S4 and S5 then". S3 News stays optional.
 ANNOUNCED_FROM = 4
 
-#: S4 and S5 results that landed before the News archive existed, each mapped to the
-#: score it is exempt at. `packing/site-changelog.yaml` was created on 13 October 2026
-#: (6279bd0e6), and the first S4 or S5 result with a News item, T-060 (30 September), was
-#: backfilled on 15 October. These fifteen landed 1 September to 3 October and have no
-#: item; T-064 and T-081 are named only by an S2 entry, which News does not show. Under
-#: the decision of 22 October they are exempt rather than given invented backdated
-#: News; backfilling them as dated News, as T-060 was, is a separate decision. An
-#: exemption ends when its result is raised above the listed score, and a result that
-#: gains its item must leave the list, which the gate enforces.
+#: S4 and S5 results that landed before the News archive existed, each mapped to its
+#: register score, at which it is exempt. `packing/site-changelog.yaml` was created on
+#: 13 October 2026 (6279bd0e6), and the first S4 or S5 result with a News item, T-060
+#: (30 September), was backfilled on 16 October UTC (#638). These fifteen landed 1
+#: September to 3 October and have no item; T-064 and T-081 are named only by an S2
+#: entry, which News does not show. Under the decision of 22 October they are exempt
+#: rather than given invented backdated News; backfilling them as dated News, as T-060
+#: was, is a separate decision. The list only shrinks: an exemption whose result changes
+#: score, leaves the register or gains its item is stale, and the gate fails until it
+#: is removed (a raised result is then owed like any other).
 ANNOUNCEMENT_EXEMPT: dict[str, int] = {
     "T-010": 4,
     "T-017": 4,
@@ -747,6 +754,18 @@ class Landing(TypedDict):
     pull_request: int | None
     commit: str
     subject: str
+
+
+class AnnouncementFindings(NamedTuple):
+    """What the announcement gate found, by what it does about each."""
+
+    failures: list[str]
+    """Fail the check: an owed item the change can settle, or a stale exemption."""
+    owed: list[str]
+    """Registered or raised by the change under test, so owed after its merge."""
+    unsettled: list[str]
+    """Owed on main by an earlier merge; a warning, since this change edits neither
+    the register nor News."""
 
 
 def load_results(path: Path = RESULTS) -> list[Document]:
@@ -786,16 +805,18 @@ def owed_announcements(document: Document, results: Sequence[Document]) -> list[
 
 
 def stale_exemptions(document: Document, results: Sequence[Document]) -> list[str]:
-    """Exemptions that no longer describe an unannounced S4 or S5 result."""
+    """Exemptions that no longer describe an unannounced result at its exempt score."""
     scores = {result["id"]: result["significance"]["score"] for result in results}
     announced = news_announced_scores(document)
     problems: list[str] = []
-    for identifier in ANNOUNCEMENT_EXEMPT:
+    for identifier, exempt in ANNOUNCEMENT_EXEMPT.items():
         score = scores.get(identifier)
         if score is None:
             reason = "is not in the register"
         elif score < ANNOUNCED_FROM:
             reason = f"is S{score} now, below the announcement threshold"
+        elif score != exempt:
+            reason = f"is S{score} now, not the S{exempt} it is exempt at"
         elif announced.get(identifier, 0) >= score:
             reason = "now has its News item"
         else:
@@ -806,7 +827,7 @@ def stale_exemptions(document: Document, results: Sequence[Document]) -> list[st
     return problems
 
 
-def _score_in(text: str, identifier: str) -> int:
+def register_score(text: str, identifier: str) -> int:
     """A result's significance score in one revision of the register's text, or 0."""
     start = text.find(f"\n  - id: {identifier}\n")
     if start < 0:
@@ -832,7 +853,7 @@ def landing(identifier: str, score: int, ref: str) -> Landing | None:
     log = _git("log", "--first-parent", "--format=%H%x00%s", ref, "--", RESULTS_PATH)
     for line in log.splitlines():
         commit, subject = line.split("\0", 1)
-        if _score_in(_git("show", f"{commit}:{RESULTS_PATH}"), identifier) < score:
+        if register_score(_git("show", f"{commit}:{RESULTS_PATH}"), identifier) < score:
             break
         number = _PULL_REQUEST_MERGE.match(subject)
         found = {
@@ -843,7 +864,12 @@ def landing(identifier: str, score: int, ref: str) -> Landing | None:
     return found
 
 
-def _owed_message(result: Document, change: Landing | None) -> str:
+def _owed_message(
+    result: Document,
+    change: Landing | None,
+    *,
+    context: Literal["settle", "unrelated", "main"],
+) -> str:
     identifier = result["id"]
     score = result["significance"]["score"]
     if change is None:
@@ -862,15 +888,33 @@ def _owed_message(result: Document, change: Landing | None) -> str:
         number = str(change["pull_request"])
         source = f"PR #{number}, which registered or raised it (merge {change['commit'][:9]})"
     scored_by = result["significance"].get("by", "the register")
+    remedy = (
+        f"Its item is an entry in packing/site-changelog.yaml scored {score}, listing "
+        f"{identifier} in result_ids and naming {source}; draft it from packing/ with "
+        f"`uv run --frozen --all-extras --group dev python -m devtools.import_changelog "
+        f'--pr {number} --significance-rationale "..." --output '
+        '"$TMPDIR/changelog-candidate.yaml"`, then bring in its delivery and the edited '
+        "entry (packing/campaign/result-import.md, stage 7, Announce a Significant "
+        f"Result). It was scored by {scored_by}; ask its intake coordinator if the item "
+        "is not yours to write."
+    )
+    owed = f"{identifier} (S{score}) is on main with no News item at S{score}"
+    if context == "settle":
+        return (
+            f"{owed}, and this change edits the register or the News record, so it "
+            "settles the debt: add the item in this PR, or land the stage 7 follow-up "
+            "first and merge main. " + remedy
+        )
+    if context == "main":
+        return (
+            f"{owed}. On main the gate reports and never fails, since the merge under "
+            "test can no longer act on it; pull-request CI enforces it, and the next "
+            "pull request that changes the register or the News record fails until the "
+            "item lands. " + remedy
+        )
     return (
-        f"{identifier} (S{score}) is on main with no News item at S{score}. Add an entry "
-        f"to packing/site-changelog.yaml scored {score}, listing {identifier} in "
-        f"result_ids and naming {source}. Draft it from packing/ with `uv run --frozen "
-        f"--all-extras --group dev python -m devtools.import_changelog --pr {number} "
-        f'--significance-rationale "..." --output "$TMPDIR/changelog-candidate.yaml"`, '
-        "then bring in its delivery and the edited entry: packing/campaign/"
-        "result-import.md, stage 7, Announce a Significant Result. It was scored by "
-        f"{scored_by}; ask its intake coordinator if the item is not yours to write."
+        f"{owed}. This change edits neither the register nor the News record, so it is "
+        "not failed; the next pull request that does fails until the item lands. " + remedy
     )
 
 
@@ -880,41 +924,61 @@ def check_announcements(
     base_results: Sequence[Document] | None = None,
     *,
     locate: Callable[[str, int], Landing | None] | None = None,
-) -> tuple[list[str], list[str]]:
-    """Failures, then notes, for every S4 and S5 result without its News item.
+    records_changed: bool = True,
+    on_main: bool = False,
+) -> AnnouncementFindings:
+    """Every S4 and S5 result without its News item, sorted by what the gate does.
 
-    An entry can name only merged PRs, so a result registered or raised on the branch
+    An entry can name only merged PRs, so a result registered or raised by the change
     under test (absent from `base_results`, or below its score there) is owed after the
-    merge and reported, not failed. Once it is on main, every later check fails until
-    its item lands. `locate(identifier, score)` finds the merged change for the failure
-    message; without `base_results` nothing is in grace.
+    merge and reported, not failed. A result already owed on main fails only a change
+    that edits the register or the News record (`records_changed`), the one change that
+    can settle it, since the PR that owes it has merged and its item now validates.
+    Any other change gets a warning. On main (`on_main`, a push or the scheduled run),
+    an owed result is only ever a warning, records change or not: pull-request CI is
+    where the rule is enforced, and the one way main sees an owed result is a records
+    merge that raced the S4/S5 merge, which must not turn main red (#738's review A).
+    This is option (b) of the decision of 22 October (#735's review A); option (a), an
+    item that names its own PR and is stamped at merge, is think-n51k. A stale
+    exemption always fails. `locate(identifier, score)` finds the PR that owes an item;
+    without `base_results` nothing is in grace.
     """
     base = (
         None
         if base_results is None
         else {result["id"]: result["significance"]["score"] for result in base_results}
     )
-    failures = stale_exemptions(document, results)
-    notes: list[str] = []
+    findings = AnnouncementFindings(stale_exemptions(document, results), [], [])
     for result in owed_announcements(document, results):
         identifier, score = result["id"], result["significance"]["score"]
         if base is not None and base.get(identifier, 0) < score:
-            notes.append(
+            findings.owed.append(
                 f"{identifier} (S{score}) is registered or raised on this branch and owes "
                 "a News item after the merge: draft it in the PR description now, and land "
-                "it in the first change after the merge (result-import.md, stage 7). "
-                "Every later check fails until it does."
+                "it in the first change after the merge (result-import.md, stage 7). The "
+                "next pull request that changes the register or the News record fails "
+                "until it does."
             )
+            continue
+        change = locate(identifier, score) if locate is not None else None
+        if on_main:
+            findings.unsettled.append(_owed_message(result, change, context="main"))
+        elif records_changed:
+            findings.failures.append(_owed_message(result, change, context="settle"))
         else:
-            change = locate(identifier, score) if locate is not None else None
-            failures.append(_owed_message(result, change))
-    return failures, notes
+            findings.unsettled.append(_owed_message(result, change, context="unrelated"))
+    return findings
 
 
-def _announcement_base(ref: str) -> tuple[str, list[Document]]:
+def announcement_base(ref: str) -> tuple[str, list[Document]]:
     """The fork point of HEAD and `ref`, and the register there."""
     base = _git("merge-base", "HEAD", ref).strip()
     return base, load_yaml(_git("show", f"{base}:{RESULTS_PATH}"))["results"]
+
+
+def edits_announcement_records(base: str) -> bool:
+    """Whether the working tree's register or News record differs from `base`'s."""
+    return bool(_git("diff", "--name-only", base, "--", *ANNOUNCEMENT_RECORDS).strip())
 
 
 def _text(value: str) -> str:
@@ -1392,7 +1456,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--announcement-base",
         metavar="REF",
         help="Require a News item for every registered S4 and S5 result; results new or "
-        "raised since HEAD's merge base with REF are owed after the merge, not failed",
+        "raised since HEAD's merge base with REF are owed after the merge, not failed, "
+        f"and with {MAIN_DELIVERY_BASE}, main's own delivery, owed results only warn",
     )
     options = parser.parse_args(argv)
     try:
@@ -1402,13 +1467,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         if options.baseline_ref:
             validate_previous_ref(document, options.baseline_ref)
         if options.announcement_base:
-            base, base_results = _announcement_base(options.announcement_base)
+            base, base_results = announcement_base(options.announcement_base)
             results = load_results()
-            failures, notes = check_announcements(
+            findings = check_announcements(
                 document,
                 results,
                 base_results,
                 locate=lambda identifier, score: landing(identifier, score, base),
+                records_changed=edits_announcement_records(base),
+                on_main=options.announcement_base == MAIN_DELIVERY_BASE,
             )
             significant = sum(
                 result["significance"]["score"] >= ANNOUNCED_FROM for result in results
@@ -1416,12 +1483,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(
                 f"announcements: {significant} registered S4 and S5 results, "
                 f"{len(ANNOUNCEMENT_EXEMPT)} exempt from before the News archive, "
-                f"{len(notes)} owed after this merge, {len(failures)} missing"
+                f"{len(findings.owed)} owed after this merge, {len(findings.unsettled)} "
+                f"owed on main and reported, {len(findings.failures)} failing"
             )
-            for note in notes:
+            for note in findings.owed:
                 print(f"announcement owed after merge: {note}")
-            if failures:
-                for failure in failures:
+            for warning in findings.unsettled:
+                print(f"warning: announcement owed on main: {warning}")
+            if findings.failures:
+                for failure in findings.failures:
                     print(f"changelog: announcement missing: {failure}", file=sys.stderr)
                 return 1
         rendered = render(document)

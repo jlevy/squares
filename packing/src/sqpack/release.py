@@ -7162,6 +7162,37 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "`validate._synopsis`. No render was taken, and every paper keeps its version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/render_changelog.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Review A of #735 and of #738 (think-9wxc): the announcement gate's owed "
+            "items fail only a pull request that changes the register or News, and on main "
+            "only warn. `check_announcements` returns its findings in three lists; two "
+            "helpers are renamed to public names (`register_score`, `announcement_base`) "
+            "and one is new (`edits_announcement_records`); `main` prints warnings. The "
+            "papers reach `render_changelog` only through `site_documents`, which calls "
+            "`entry_anchor`, unchanged. This also corrects #735's record above, whose "
+            "`No existing function changes` was wrong: no function the papers reach "
+            "changed, while `main` gained the flag and `_synopsis` passed it. No render "
+            "was taken, and every paper keeps its version."
+        ),
+    ),
 )
 
 
