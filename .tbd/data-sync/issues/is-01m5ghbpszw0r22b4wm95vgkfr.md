@@ -5,7 +5,7 @@ title: "Decide #715's 30 sub-print re-certifications of Couzo's 4e4c8ce certific
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 7
 delegate: c-lane-715-import
 labels:
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m5g8xj3hqca5wcen9f71dtnd
 hold: null
 hold_until: null
 created_at: 2026-10-22T00:49:44.766Z
-updated_at: 2026-10-22T20:49:13.296Z
+updated_at: 2026-10-23T00:44:58.433Z
 started_at: 2026-10-22T00:49:56.222Z
 ---
 Issue #715 (franciscouzo/square-packing 6b7391de) restates 64 counts at or below 1024 that the triage read as certificates first published at 02f9690, f311f08, a7067d7 and 4e4c8ce (9 to 15 October). At the pin, 30 of them are not byte-identical: the explicit certificates certificates/nN.cert, first committed at 5a299b4 (2026-10-20) and pushed with the pin at 2026-10-21T22:56:37Z after the issue, are exact L-border re-materializations of the same packings whose sides are below the 4e4c8ce certificates' by 2.37e-23 to 3.18e-23. Both round up to the same 12-place print. Counts: 535, 582, 591, 631, 633, 640, 682, 684, 691, 695, 735, 737, 742, 745, 790, 791, 797, 798, 799, 854, 855, 856, 857, 909, 913, 915, 916, 970, 975, 977.
@@ -65,3 +65,7 @@ by under 1e-12, and both round up to one 12-place print:
   - The house rule's exception (T-195) would record them, if asked and validated.
   - The author has not asked: #719's question 4.
   - Adoption would cost 3.5 to 17.5 CPU-h.
+
+2026-10-23 c-lane-sweep-1023a. Mishapolk's answer 4 on #719 (comment 6350348588, 2026-10-22T20:15:57Z): "We leave the recording of these 34 sub-12th-decimal quenches to maintainer discretion under the repository's threshold conventions." Not a claim: by the claim table ("below the standing bound and asking for no work") they stay pinned by digest in the mishapolk-issue719-2026-10-22 packet. Whether the record takes the class anyway (the house rule's T-195 exception, 3.5 to 17.5 CPU-h for the 42 in-corpus files at 814fbe9 per the #732 triage) stays the owner's question here; #719's entry notes it (claude/intake-bookkeeping-2026-10-23).
+
+2026-10-23 (c-lane-couzo-residue-1022, review A of #730, A2): 9 history verdicts rest only on sub-print holds (`HISTORY_RESTING`): 5a299b4 at 325, 333, 362, 401, 442, 485, 530 and 577, and 23aff0c at 327. #719's 366 rests on one in #719's walk. The history walk holds 74 sub-print re-certifications (think-fwa9). A rerun without them records 8 steps, each itself a re-certification below the 12-place print, so this decision holds it again (`refusal_flips`, `held-dependents`). Any answer that leaves held publications out of the record still means rerunning the history walk (`beyond_horizon_replay`; see think-f2io's note of today).
