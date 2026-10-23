@@ -719,12 +719,129 @@ def test_a_polynomial_root_has_no_closed_form() -> None:
 
 
 def test_every_thumbnail_draws_its_cases_squares() -> None:
+    """A thumbnail is the case's default picture in its canonical pose (regularization
+    policy, section 13), at the address every case's Regularized-mode picture has."""
     image = frontier.thumbnail_svg(11)
-    assert 'src="atlas/house/n-11.svg" width="50" height="50"' in image
-    svg = frontier.drawing_files()[frontier.drawing_path(11)].decode()
-    assert svg.count("z") == 11
-    assert 'xmlns="http://www.w3.org/2000/svg"' in svg
-    assert "id=" not in svg
+    assert 'src="atlas/regularized/n-11.svg" width="50" height="50"' in image
+    for path in (frontier.drawing_path(11), frontier.drawing_path(11, regularized=True)):
+        svg = frontier.drawing_files()[path].decode()
+        assert svg.count("z") == 11
+        assert 'xmlns="http://www.w3.org/2000/svg"' in svg
+        assert "id=" not in svg
+
+
+def _drawn_squares(svg: str) -> dict[str, list[tuple[int, int]]]:
+    """Each fill's one square, as `packing_svg` draws it: its corners in whole units, y
+    down, read back from the path's absolute move and relative steps."""
+    found: dict[str, list[tuple[int, int]]] = {}
+    for fill, path in re.findall(r'<path fill="(#[0-9a-f]{6})" d="([^"]+)"/>', svg):
+        tokens = re.findall(r"[Mhvl]|-?\d+", path.removesuffix("z"))
+        corners: list[tuple[int, int]] = []
+        x = y = 0
+        while tokens:
+            match tokens.pop(0):
+                case "M":
+                    x, y = int(tokens.pop(0)), int(tokens.pop(0))
+                case "h":
+                    x += int(tokens.pop(0))
+                case "v":
+                    y += int(tokens.pop(0))
+                case _:
+                    x, y = x + int(tokens.pop(0)), y + int(tokens.pop(0))
+            corners.append((x, y))
+        found[fill] = corners
+    return found
+
+
+def _shoelace(corners: list[tuple[int, int]]) -> int:
+    """Twice a polygon's signed area, whose sign is its winding."""
+    return sum(
+        x * next_y - next_x * y
+        for (x, y), (next_x, next_y) in zip(corners, corners[1:] + corners[:1], strict=True)
+    )
+
+
+def test_a_pose_turns_the_drawing_exactly_and_keeps_each_square_s_winding(
+    tmp_path: Path,
+) -> None:
+    """`packing_svg(pose=)` maps the whole-unit corners after rounding: y up from the
+    frame's lower-left corner, `Pose.point`, then y down again, a mirrored square's
+    corners reversed so its winding is kept (regularization policy, section 13).
+
+    The rendering is an L of three unit squares in a 2 x 2 container, its frame offset in
+    the SVG, its empty cell upper right where an integer grid's rows leave it. Under each
+    of the eight poses every square lands where `Pose.point` puts its centre, with its
+    winding. Under the pose flip regularization decides for it, the drawing's quadrant
+    weights, read row by row from the top, are the decision's, the empty cell lower right
+    as the owner's rule orders them."""
+    from devtools.flip_regularization import IDENTITY, POSES, decide  # noqa: PLC0415
+
+    corners = {"#000001": (0, 0), "#000002": (1, 0), "#000003": (0, 1)}
+    unit = ((0, 0), (1, 0), (1, 1), (0, 1))
+
+    def svg_point(x: int, y: int) -> str:
+        return f"{10 + 100 * x},{20 + 100 * (2 - y)}"
+
+    polygons = "".join(
+        f'<polygon data-feature="square-fill" points="'
+        f'{" ".join(svg_point(left + dx, bottom + dy) for dx, dy in unit)}" fill="{fill}"/>'
+        for fill, (left, bottom) in corners.items()
+    )
+    (tmp_path / "n-003.svg").write_text(
+        '<svg><rect data-feature="container-outline" x="10" y="20" width="200" '
+        f'height="200"/>{polygons}</svg>',
+        encoding="utf-8",
+    )
+    source = frontier.packing_svg(3, units=2, root=tmp_path)
+    assert frontier.packing_svg(3, units=2, root=tmp_path, pose=IDENTITY) == source
+    windings = {fill: _shoelace(drawn) for fill, drawn in _drawn_squares(source).items()}
+    for pose in POSES:
+        drawn = _drawn_squares(frontier.packing_svg(3, units=2, root=tmp_path, pose=pose))
+        assert set(drawn) == set(corners), pose
+        for fill, (left, bottom) in corners.items():
+            xs, ys = zip(*drawn[fill], strict=True)
+            centre = (Fraction(sum(xs), 4), 2 - Fraction(sum(ys), 4))
+            half = Fraction(1, 2)
+            assert centre == pose.point(left + half, bottom + half, Fraction(2)), (pose, fill)
+            assert _shoelace(drawn[fill]) == windings[fill], (pose, fill)
+
+    decision = decide(
+        [
+            [(float(left + dx), float(bottom + dy)) for dx, dy in unit]
+            for left, bottom in corners.values()
+        ],
+        2.0,
+    )
+    drawn = _drawn_squares(frontier.packing_svg(3, units=2, root=tmp_path, pose=decision.pose))
+    cells = {
+        (min(x for x, _ in square), min(y for _, y in square)) for square in drawn.values()
+    }
+    weights = tuple(float((column, row) in cells) for row in (0, 1) for column in (0, 1))
+    assert weights == decision.quadrants == (1.0, 1.0, 1.0, 0.0)
+
+
+def test_both_addresses_of_every_case_are_published() -> None:
+    """Every case has two standalone drawings and no more: `atlas/house/`, its house
+    drawing as published, in its source's pose (Original mode, a case page's *As
+    published*), and `atlas/regularized/`, its Regularized-mode picture, the default
+    picture in its canonical pose: its regularized view where that is the default, else
+    its house drawing, turned by its flip regularization (policy, sections 12 and 13). A
+    view that is not the default has no address of its own."""
+    files = frontier.drawing_files()
+    counts = range(1, 325)
+    expected = [frontier.drawing_path(n) for n in counts] + [
+        frontier.drawing_path(n, regularized=True) for n in counts
+    ]
+    assert list(frontier.drawing_paths()) == expected
+    assert list(files) == expected
+    header = '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" '
+    for n in (11, 53, min(frontier.drawn_regularized())):
+        house = frontier.packing_svg(n, units=1000, ink="#17202a", paper="#ffffff")
+        assert files[frontier.drawing_path(n)].decode() == house.replace("<svg ", header, 1)
+        canonical = frontier.default_svg(n, units=1000, ink="#17202a", paper="#ffffff")
+        assert files[frontier.drawing_path(n, regularized=True)].decode() == (
+            canonical.replace("<svg ", header, 1)
+        ), n
 
 
 def test_a_minimal_polynomial_with_radical_coefficients_renders_as_latex() -> None:

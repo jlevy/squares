@@ -1795,6 +1795,82 @@ def test_composite_tiles_draw_each_case_s_default_picture_and_credit_it() -> Non
             assert printed == " ".join(" ".join(atoms) for atoms in sentences)
 
 
+def test_a_card_draws_its_case_in_its_recorded_flip_regularization(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Regularization policy, section 13 (the owner, 23 October 2026): a composite's card
+    draws its case's default picture in the pose `devtools.default_drawings` records.
+    `tile_frame` applies it, and nothing upstream does, so `frame_from_witness` keeps the
+    source's pose for every measure, overlay and rendering that reads it. Every square
+    keeps its id, and its colour and `data-orientation-radians` are the oriented
+    picture's: a mirror changes a tilted square's orientation. Each of the eight poses is
+    set here rather than read, and moves each square's centre on the card exactly as
+    `Pose.point` moves it in the drawing's own frame, y up."""
+    from devtools.flip_regularization import (  # noqa: PLC0415
+        IDENTITY,
+        POSES,
+        Pose,
+        orient_frame,
+    )
+    from sqpack.render.color import assign_square_colors  # noqa: PLC0415
+
+    canvas = known_best_builder.PRIMARY_COMPOSITE
+    spec = RenderSpec(overlays=frozenset())
+    append = known_best_builder._append_summary_card  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+
+    def card(case: Any, pose: Pose) -> tuple[ET.Element, dict[str, ET.Element]]:
+        monkeypatch.setattr(
+            known_best_builder, "_tile_poses", dict.fromkeys(range(1, 325), pose).copy
+        )
+        root = ET.Element("svg")
+        append(root, case, spec=spec, canvas=canvas)
+        squares = {
+            node.attrib["data-square"]: node for node in root.iter(f"{{{SVG['svg']}}}polygon")
+        }
+        outline = root.find(".//svg:rect[@data-feature='container-outline']", SVG)
+        assert outline is not None
+        return outline, squares
+
+    def centre(outline: ET.Element, square: ET.Element) -> tuple[Decimal, Decimal]:
+        x, y, size = (Decimal(outline.attrib[key]) for key in ("x", "y", "width"))
+        points = [
+            tuple(map(Decimal, pair.split(","))) for pair in square.attrib["points"].split()
+        ]
+        count = Decimal(len(points))
+        return (
+            (sum((px for px, _ in points), Decimal(0)) / count - x) / size,
+            (y + size - sum((py for _, py in points), Decimal(0)) / count) / size,
+        )
+
+    for case in known_best_builder.retained_cases((3, 11)):
+        n = case.frontier.n
+        witness_frame = known_best_builder.frame_from_witness(case.witness)
+        outline, drawn = card(case, IDENTITY)
+        source = known_best_builder.tile_frame(case)
+        turned_any = False
+        for pose in POSES:
+            posed_outline, posed = card(case, pose)
+            frame = known_best_builder.tile_frame(case)
+            assert frame == orient_frame(source, pose), (n, pose)
+            assert known_best_builder.frame_from_witness(case.witness) == witness_frame
+            colors = assign_square_colors(frame, spec)
+            assert list(posed) == list(drawn)
+            for name, square in posed.items():
+                color = colors[name.removeprefix(f"n-{n:03d}-")]
+                assert square.attrib["fill"] == color.fill
+                assert square.attrib["data-orientation-radians"] == str(
+                    color.orientation_radians
+                )
+                turned_any |= (
+                    square.attrib["data-orientation-radians"]
+                    != drawn[name].attrib["data-orientation-radians"]
+                )
+                expected = pose.point(*centre(outline, drawn[name]), Decimal(1))
+                for got, want in zip(centre(posed_outline, square), expected, strict=True):
+                    assert got == pytest.approx(want, abs=Decimal("1e-9")), (pose, name)
+        assert turned_any is (n == 11)
+
+
 def test_a_composite_trailing_the_pin_may_show_defaults_the_record_has_changed(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

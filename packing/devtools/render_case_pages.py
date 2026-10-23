@@ -847,15 +847,19 @@ def _sources(case: dict[str, Any]) -> str:
 
 
 def packing_figure(n: int, *, units: int = 1000, upper: dict[str, Any] | None = None) -> str:
-    """The case's default picture and optional best-known side/source caption.
+    """The case's default picture in its canonical pose and optional best-known
+    side/source caption.
 
     Where the default picture is the case's regularized view (regularization policy,
     section 12), the figure draws the view and its caption carries the regularization's
-    credit line (section 7), and the house drawing follows one click away, in a
-    disclosure named "As published", with its source's credit (`as_published`).
+    credit line (section 7). The figure is drawn in the case's flip regularization
+    (section 13, `render_frontier_page.default_svg`). Wherever it differs from the house
+    drawing as published, because it draws the view or because the pose turns it, the
+    house drawing follows one click away, in a disclosure named "As published", with its
+    source's credit (`as_published`).
     """
     regularized = n in frontier.drawn_regularized()
-    root = frontier.REGULARIZED_RENDERINGS if regularized else frontier.RENDERINGS
+    published = regularized or not frontier.default_pose(n).identity
     caption = []
     if upper is not None:
         caption.append(
@@ -871,16 +875,16 @@ def packing_figure(n: int, *, units: int = 1000, upper: dict[str, Any] | None = 
         )
     figcaption = f"<figcaption>{'. '.join(caption)}</figcaption>" if caption else ""
     return (
-        f'<figure class="site-case-figure">{frontier.packing_svg(n, units=units, root=root)}'
-        f"{figcaption}</figure>{as_published(n, units=units) if regularized else ''}"
+        f'<figure class="site-case-figure">{frontier.default_svg(n, units=units)}'
+        f"{figcaption}</figure>{as_published(n, units=units) if published else ''}"
     )
 
 
 def as_published(n: int, *, units: int = 1000) -> str:
-    """The house drawing of a case drawn by default from its regularized view, as
-    published: a disclosure under the figure, closed until it is pressed, holding the
-    house rendering of the record's witness and its credit. Without scripts it opens as
-    any `details` does.
+    """The house drawing of a case whose figure is its regularized view or is turned by
+    its flip regularization, as published: a disclosure under the figure, closed until
+    it is pressed, holding the house rendering of the record's witness in its source's
+    pose and its credit. Without scripts it opens as any `details` does.
 
     The credit is the finders' and the source whose packing the house drawing pictures
     (`devtools.pictured_source`, the rule the atlas builder reads the witness by), which
@@ -899,7 +903,8 @@ def as_published(n: int, *, units: int = 1000) -> str:
         '<details class="site-case-published"><summary>As published</summary>'
         '<figure class="site-case-figure site-case-published-figure">'
         f"{frontier.packing_svg(n, units=units)}"
-        f"<figcaption>The packing as published{finders}{source}</figcaption></figure>"
+        "<figcaption>The packing as published, in its source\u2019s pose"
+        f"{finders}{source}</figcaption></figure>"
         "</details>"
     )
 

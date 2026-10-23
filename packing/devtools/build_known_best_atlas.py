@@ -78,6 +78,7 @@ from devtools import upper_bound_packets as packets
 from devtools.atlas_legend import AtlasLegendCounts, LegendItem, atlas_legend
 from devtools.atlas_orientation import orient_atlas_witness
 from devtools.build_composite_figure_data import load_record as load_figure_record
+from devtools.flip_regularization import Pose, orient_frame
 from devtools.result_status import RecentContributions, recent_contributions_by_case
 from devtools.rigidity_status import load_context as load_rigidity_context
 from sqpack import release, retained_json
@@ -1933,19 +1934,35 @@ def _regularized_tiles() -> dict[int, dict[str, Any]]:
     return {entry["n"]: entry for entry in regularized_entries() if entry["n"] in drawn}
 
 
-def tile_frame(built: BuiltCase) -> PackingFrame:
-    """The frame a composite's card draws: the case's default picture. That is its
-    regularized view where the view improves on the house drawing, read as the homepage's
-    regularized drawings read it (`render_regularized_atlas.regularized_frame`: the
-    view's squares and certified side under the record's own evidence tier and check,
-    with the view's source id), and its retained witness everywhere else. The card's
-    labels and badges are the record's either way."""
-    entry = _regularized_tiles().get(built.frontier.n)
-    if entry is None:
-        return frame_from_witness(built.witness)
-    from devtools.render_regularized_atlas import regularized_frame  # noqa: PLC0415
+@cache
+def _tile_poses() -> dict[int, Pose]:
+    """Each case's flip regularization (regularization policy, section 13): the pose its
+    default picture is drawn in, as `devtools.default_drawings` records it."""
+    from devtools.default_drawings import flip_regularizations  # noqa: PLC0415
 
-    return regularized_frame(entry)
+    return flip_regularizations()
+
+
+def tile_frame(built: BuiltCase) -> PackingFrame:
+    """The frame a composite's card draws: the case's default picture in its canonical
+    pose. The picture is its regularized view where the view improves on the house
+    drawing, read as the homepage's regularized drawings read it
+    (`render_regularized_atlas.regularized_frame`: the view's squares and certified side
+    under the record's own evidence tier and check, with the view's source id), and its
+    retained witness everywhere else. The pose is the case's recorded flip regularization
+    (`_tile_poses`), applied exactly here and nowhere upstream, so the card's colours and
+    square data are the oriented picture's while `frame_from_witness` and
+    `regularized_frame` keep their source's pose for every other reader. The card's
+    labels and badges are the record's either way."""
+    n = built.frontier.n
+    entry = _regularized_tiles().get(n)
+    if entry is None:
+        frame = frame_from_witness(built.witness)
+    else:
+        from devtools.render_regularized_atlas import regularized_frame  # noqa: PLC0415
+
+        frame = regularized_frame(entry)
+    return orient_frame(frame, _tile_poses()[n])
 
 
 def _append_summary_card(

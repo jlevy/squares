@@ -553,10 +553,14 @@ def test_without_scripts_a_record_file_is_read_where_it_is(browser: Any, served:
         assert page.url == f"{served}cases/29.html"
         _canonical_case(page, 29)
         assert page.locator("article.site-case .site-case-head > figure svg").count() == 1
-        # Where the default picture is the regularized view, the house drawing waits in a
-        # closed disclosure, as published (regularization policy, section 12).
+        # Where the default picture is the regularized view, or its pose turns it, the
+        # house drawing waits in a closed disclosure, as published (regularization
+        # policy, sections 12 and 13).
         published = page.locator("article.site-case details.site-case-published")
-        expected = int(29 in render_frontier_page.drawn_regularized())
+        expected = int(
+            29 in render_frontier_page.drawn_regularized()
+            or not render_frontier_page.default_pose(29).identity
+        )
         assert published.count() == expected
         if expected:
             assert published.get_attribute("open") is None
@@ -760,7 +764,7 @@ def test_case_summaries_keep_math_and_layout_when_fetched(
                 direct_page.set_viewport_size({"width": width, "height": 900})
                 # The article can resize before its drawing leaves the narrow query.
                 site_browser.api().expect(
-                    direct_page.locator(".site-case-figure > svg")
+                    direct_page.locator(".site-case-head > figure.site-case-figure > svg")
                 ).to_have_css("width", f"{desktop_drawing_width:g}px")
             direct = direct_page.evaluate(LAYOUT)
             if n == 291:
