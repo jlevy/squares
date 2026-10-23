@@ -2441,6 +2441,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/frontier/README.md",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
         ),
@@ -2455,14 +2456,17 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "T-232's registration and adoption at 31 (V3/C3 after the 23 October replay "
             "and review) and T-233's at 19, 20, 26 and 27 (V0/C1), with #446's request "
-            "entry and the coverage entries, against main c1115c095 (#749): rendered at "
-            "link revision 26339a13 into empty site directories, twice from this tree at "
-            "2d32050e4 and twice from main's (69 files each), "
-            "render_n11_optimality_review, render_n11_threshold_bound_review and "
-            "render_packing_methods write every file byte-identical across all four. "
-            "Only the explainer's register count differs (230 to 232), and it took "
-            "v0.4.22. No PDF was printed; each prints from that HTML. Retain v0.1.11, "
-            "v0.1.4 and v0.2.7."
+            "entry, the coverage entries and the Smallest Open Gaps table, where n = 31 "
+            "enters second, against main 7335d0098 (#752): rendered at link revision "
+            "1d0fba96 into empty site directories, twice from this tree at 3c7f9d11e and "
+            "twice from the same tree with main's requests record, frontier README, "
+            "register, coverage record, bound citations and composite figure record "
+            "swapped in (69 files each), render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four. Measured before at 2d32050e4 against main "
+            "c1115c095, without the README, with the same outcome. Only the explainer's "
+            "register count differs (230 to 232), and it took v0.4.22. No PDF was printed; "
+            "each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
