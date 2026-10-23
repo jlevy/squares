@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
+from typing import Any
 
 import pytest
 import yaml
@@ -2075,7 +2076,7 @@ def test_a_scope_its_evidence_does_not_cover_is_refused() -> None:
     """T-045 once claimed s(32) >= 119/20 and cited one entry whose scope was 27, 28 and 31
     (think-506q); the scope is covered by the union of the cited scopes."""
     record = {"id": "T-999", "scope": {"n_values": [27, 28, 31, 32]}}
-    cited = [{"scope": {"n_values": [27, 28, 31]}}]
+    cited: list[dict[str, Any]] = [{"scope": {"n_values": [27, 28, 31]}}]
     assert check_results.scope_problems(record, cited) == [
         "T-999: scope holds n = 32, which no evidence it cites covers"
     ]
