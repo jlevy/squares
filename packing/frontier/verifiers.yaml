@@ -4409,7 +4409,7 @@ verifiers:
       cfcheck.
 
   - id: V-wand125-sqverify-continuous
-    program: sqverify-fast --continuous, the source's sqverify_continuous v4
+    program: sqverify-fast --continuous, the source's sqverify_continuous (v3 and v4)
     author: wand125, adapting this repository's sqverify_fast
     provenance: external
     language: [Rust]
@@ -4417,29 +4417,236 @@ verifiers:
     role: decides
     summary: >-
       The source's copy of this repository's sqverify_fast with a continuous-angle mode
-      (src/slab.rs): for a format M candidate, a core side B and a threshold tau, it
-      covers t = tan(theta/2) over [10^-7, 83/200] in 86 root ranges by outward-rounded
-      binary64 branch and bound over (u, v, t), with concave-section bounds and
-      translation derivatives, and the band [0, 10^-7] by the crate's exact axis sweep
-      at a side A with A W(10^-7) <= B, and checks n tau > M exactly.
+      (src/slab.rs): for a candidate, a core side B and a threshold tau, it covers
+      t = tan(theta/2) over [10^-7, 83/200] in 86 root ranges by outward-rounded binary64
+      branch and bound over (u, v, t), with interval-only classification, concave-section
+      bounds at the path centre and translation derivatives, and the band [0, 10^-7] by
+      the crate's exact axis sweep at a side A with A W(10^-7) <= B, and checks n tau > M
+      exactly, concluding s(n) > L/B.
     source:
-      - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/slab.rs
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/main.rs
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/certificate.rs
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/lib.rs
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/interval.rs
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/exact.rs
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/axis.rs
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/oracle.rs
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/Cargo.toml
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/Cargo.lock
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/build.rs
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/CONTINUOUS.md
+      - packing/resources/web/wand125-sqverify-continuous-v3-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/slab.rs
+      - packing/resources/web/wand125-sqverify-continuous-v3-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/main.rs
     versions:
+      - revision: f30cc2cf345a3a3f6af778925f354d9ec979868b
+        note: >-
+          v3, source_sha256 1266a8b90f9a355d74772e211a7b9a52d0236b0d33cc4113d2f897d8a1044f33
+          by build.rs's rule, recomputed here from the v3 packet and the v4 packet's
+          byte-identical files: the version the source's n = 40 examples ran (README.md, no
+          run output published). Not built here; its run_root and every function it calls
+          are v4's text (the review's custody receipt).
       - revision: d4a19815e2b0cca5faa562f00c7a80b93d3402ef
         note: >-
-          tools/sqverify_continuous at d4a1981, byte for byte the asset's
-          check1/src/sqverify_continuous_v4.tgz (113,578 bytes, SHA-256
+          v4, tools/sqverify_continuous at d4a1981, the same tree at 8530baf and at the head
+          e48de243, and byte for byte the n = 28 asset's check1/src/sqverify_continuous_v4.tgz
+          (113,578 bytes, SHA-256
           720869758013ac3cc86343f0603817ee36298be7696e40bb1d164a511f383a08), whose build
           reports source_sha256
-          619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5; built here
-          with rustc 1.98.0 (cargo build --release --locked) into
-          31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618. Neither
-          retained nor yet reviewed (think-xzob, #533).
+          619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5; built here with
+          rustc 1.98.0 (cargo build --release --locked) on 15 and on 23 October into
+          31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618.
+    independence_record: packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/PROVENANCE.md
+    independence:
+      read:
+        - mathematics
+        - certificate-format
+        - producer-code
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: person
+          name: Hiroaki Hosono (wand125)
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: named co-author of the commits that add it; its role, tier and reasoning are not stated
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: null
+        separate_code: true
+        note: >-
+          Recorded against the producer of T-145 and T-157, Guzhou0806, whose kernel
+          verifier/continuous_pose.cpp this mode's author read while reviewing T-145 before
+          writing it (PROVENANCE.md): no file or line in common (Rust against C++), the same
+          method, and the same twelve knot expressions in the same order, which only set
+          accuracy (measured by the 23 October review,
+          docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md,
+          section 10). Guzhou0806's AI assistance is disclosed without
+          a system family, so the overlap of authorship is unknown. For T-192 the mode is
+          the producer's own checker, and a run of it is reproduced with the producer's code.
+          Against this repository's sqverify_fast it keeps interval.rs, exact.rs, axis.rs,
+          oracle.rs and rotated.rs byte for byte and a certificate.rs that adds a proof_net
+          reading to the 3 October source (657ef08f).
     note: >-
-      It keeps this repository's interval.rs, exact.rs, axis.rs, oracle.rs and
-      rotated.rs byte for byte; its certificate.rs is the source's proof_net admission.
-      Its author read Guzhou0806's kernel before writing the mode, so it is independent
-      code, not an independent method (think-xzob).
+      Reviewed for soundness on 23 October 2026
+      (docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md):
+      lemmas C1 to C6 re-derived, slab.rs and the continuous path read line by line, no
+      blocking or major finding; minor SC-1 (--resume counts lines from any file with the
+      public run_key) and SC-2 (the y-derivative enclosure is untested). Its decisions share
+      this repository's interval arithmetic, exact enclosure, admission, D4 expansion and
+      exact axis sweep with V-sqverify-fast. Independent code, not an independent method.
+
+  - id: V-sqverify-continuous-review-premises
+    program: premises.py, candidates.py and custody.py, the 23 October review's exact checks of sqverify_continuous's premises, certificates and custody
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Decides in exact rationals, for T-145's, T-157's and T-192's parameters and a
+      control's, every premise of the continuous mode's argument (the counting margin, L^2 >
+      2 B^2, the ends of t, the default near-axis side and its containment margin, the 86
+      default root ranges and their binary64 enclosures) and recomputes T-192's run_key
+      against the source's two summaries; builds the n = 40 candidates from this
+      repository's copies of the two densities in the source's row order and decides their
+      and T-192's certificate facts; and records the verifier's custody (source digests by
+      build.rs's rule, Git blobs against this repository's crate, the functions v4 changes).
+      It decides no coverage.
+    source:
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/premises.py
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/candidates.py
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/custody.py
+    independence_record: packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares:
+        - >-
+          the default cut, near-axis side and run_key rules of main.rs and slab.rs,
+          re-typed to recompute what the source prints
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake
+            pass (think-xzob), tier tbd-strong-max, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: >-
+          Written after reading the source of wand125's sqverify_continuous, whose commits
+          name Claude as co-author, and this repository's copies of the modules it reuses;
+          for T-192 that source is the producer's code. In files of its own, importing
+          nothing of it; it re-types the definitions its shares name, to test or recompute
+          them, so its code is not separate in the registry's sense.
+    note: >-
+      Kept in the review's packet with its receipts; cited by the review and by no evidence
+      entry, since what it decides is premises that the registered audits and the review
+      already carry.
+
+  - id: V-sqverify-continuous-review-probe
+    program: bounds_probe.py and probe_suite.py, the 23 October review's adversarial probe of sqverify_continuous's box bound
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Holds a transcription of slab.rs's box bound (angles, pose, classify, section_lo,
+      area_lo, chord, gradient and bound, over interval.rs's directed steps) to an exact
+      rational oracle written here, Sutherland-Hodgman clipping of a rationally rotated
+      square, at poses sampled in adversarial boxes: lemmas C2 to C5's enclosures, both
+      gradient components and the whole-box bound; and shows the probe's power by ten
+      deliberate mutations of the transcription. A diagnostic of the bound's implementation;
+      it decides no coverage.
+    source:
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/bounds_probe.py
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/probe_suite.py
+    independence_record: packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares:
+        - >-
+          a transcription of slab.rs's box bound and interval.rs's directed steps,
+          which is what it tests
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake
+            pass (think-xzob), tier tbd-strong-max, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: >-
+          Written after reading the source of wand125's sqverify_continuous, whose commits
+          name Claude as co-author, and this repository's copies of the modules it reuses;
+          for T-192 that source is the producer's code. In files of its own, importing
+          nothing of it; it re-types the definitions its shares name, to test or recompute
+          them, so its code is not separate in the registry's sense.
+    note: >-
+      Kept in the review's packet with its receipt; cited by the review and by no evidence
+      entry. The oracle is its own; the transcription is the thing under test, so a
+      misreading the transcription shares with slab.rs is outside what it can find.
+
+  - id: V-sqverify-continuous-review-judge
+    program: judge_run.py, the 23 October review's exact judge of one sqverify-fast --continuous run
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Holds one run's output to exact arithmetic: the premises line to the review's values,
+      every root line to its default cut and, when verified, to nodes = 2 leaves - 1 and a
+      least bound at least tau, the summary to its lines, no inherited line, and every
+      refusal witness to an exact re-evaluation (the pose's legality decided exactly and its
+      capture computed with the probe's oracle and compared with the run's exact_capture).
+      It judged the review's toy and control runs; it decides no claim.
+    source:
+      - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/judge_run.py
+    independence_record: packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake
+            pass (think-xzob), tier tbd-strong-max, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Written after reading the source of wand125's sqverify_continuous, whose commits
+          name Claude as co-author, and this repository's copies of the modules it reuses;
+          for T-192 that source is the producer's code. In files of its own, importing and
+          copying nothing of it.
+    note: >-
+      Kept in the review's packet with its receipts; cited by the review and by no evidence
+      entry. Written to judge a replay of the mode as well (the review's section 11).
 
   - id: V-wand125-contpose-check3
     program: >-
