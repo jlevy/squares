@@ -5,15 +5,15 @@ title: "PR #748 A8: flag keys whose ai_assistance anchor and marker agree but wh
 kind: bug
 status: open
 priority: 2
-version: 4
+version: 5
 delegate: null
 labels: []
 dependencies: []
-parent_id: is-01m5mn0bde1tg8dr676kbbns6t
+parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:44:04.261Z
-updated_at: 2026-10-23T16:51:03.548Z
+updated_at: 2026-10-23T17:22:38.435Z
 started_at: 2026-10-23T15:44:54.170Z
 ---
 packing/resources/bibliography.yaml ai_assistance copies; state_ai_assistance.load_statements. Severity Suggestion. Review A of PR #748: https://github.com/jlevy/squares/pull/748#issuecomment-6368647934.
