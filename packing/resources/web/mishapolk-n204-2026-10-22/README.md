@@ -162,8 +162,9 @@ It takes the certificate to exact contact, then $10^{-30}$ past it, three ways:
 Both maintained routes accepted each control at exact contact, with the margin exactly
 0, and refused each $10^{-30}$ past it, with the margin exactly $-10^{-30}$. That is six
 controls, about 32 CPU seconds in all.
-`tests/test_upper_bound_reports_n204.py` holds the retained receipt to that, and runs
-the kernel’s two sharp controls on the certificate again in the deep surface.
+`tests/test_upper_bound_reports_n204.py` holds the retained receipt to that, and
+`tests/test_upper_bound_reports.py` runs the kernel’s two sharp controls on the
+certificate again in the deep surface.
 
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
 arithmetic and the separating-axis method. No source script ran here.

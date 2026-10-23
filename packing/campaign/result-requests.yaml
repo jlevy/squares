@@ -19011,7 +19011,7 @@ issues:
       the corpus at or below 1024 are beyond-horizon rows, each current, after the filtered
       exact replay decided every one on two routes with every control refused; 366 is not
       recorded, below Couzo's 4e4c8ce certificate; the 8 rows above 1024 wait on the owner.
-    read_through: '2026-10-22T20:15:57Z'
+    read_through: '2026-10-23T01:52:40Z'
     results:
     - key: n105
       claim: s(105) <= 10.7893037837429748, binary64; the exact header side is authoritative.
@@ -19029,15 +19029,8 @@ issues:
         the header side of certificates/n204.cert at 12fc466 (SHA-256 9c5dabc8...3e7d), 1.48e-11
         below n-204.cert's: the author's answer to the import reply's question 3 claims it.
       source: https://github.com/jlevy/squares/issues/719#issuecomment-6350348588
-      not_registered: >-
-        Claimed after the import registered n-204.cert's side as T-229. The
-        mishapolk-issue719-2026-10-22 packet pins the file by digest only. Its side first
-        appears at 1851c2c (2026-10-22T05:29:48Z), the commit that first published n-204.cert,
-        and is exactly the side Evan Daniel's regularizer reached from T-229's witness in the
-        stage 4 pass. Deriving and replaying it, recording it under the author's credit, its
-        review and its adoption at 204 are think-h01y's.
-      queued: true
-      bead: think-h01y
+      register:
+      - T-231
     - key: n330
       claim: s(330) <= 18.6926724444540682, binary64; the exact header side is authoritative.
       source: body
@@ -20361,6 +20354,7 @@ issues:
     - think-4h23
     - think-9vr8
     - think-h01y
+    - think-tetq
     answer_bead: think-xyhn
     replies:
     - url: https://github.com/jlevy/squares/issues/719#issuecomment-6350110834
@@ -20516,9 +20510,10 @@ issues:
       - result: n204-lower
       - result: n447
     close_when: >-
-      T-229 is reviewed and adopted at 105 and 204 (think-4h23), the owner has answered whether
-      counts above 1024 are tracked (think-f2io) and the 8 rows above 1024 have their
-      disposition (think-9vr8), and the replies reporting each are posted.
+      T-229 is reviewed and adopted at 105 and 204 (think-4h23), T-231 is reviewed and adopted
+      at 204 (think-tetq, think-h01y), the owner has answered whether counts above 1024 are
+      tracked (think-f2io) and the 8 rows above 1024 have their disposition (think-9vr8), and
+      the replies reporting each are posted.
     notes: >-
       The issue opened at 2026-10-22T05:30:47Z with 221 counts to 4035 pinned at 1851c2c, was edited
       at 05:35:31Z (credit name Mykhailo Polkovskyi) and at 06:05:31Z to 122 counts pinned at
@@ -20595,6 +20590,33 @@ issues:
       with #732; the 34 in-corpus files stay pinned; and later packets may keep his files under
       the MIT licence of 17cc220. It asked how sqpack/verify.py was called and which 204 file
       the solve began from.
+
+      The author's comment of 2026-10-23T01:52:40Z (issuecomment-6355484781) answers the stage
+      4 follow-up's two questions and adds a recommendation; read through it on 23 October
+      (c-lane-719-records-1023). (1) His harness imported sqpack/verify.py as a module and
+      called its pair-overlap and containment routines on each certificate; his Evan Daniel
+      verify_cert.py and verify_cert2.py were the copies archived in Couzo's repository at
+      6b7391d. T-229's notes, its report atom and both packets' READMEs record it. (2) The 204
+      solve started from Couzo's #678 certificate in Couzo's unrotated frame, not from
+      Daniel's T-225 view. So T-229's credit and lineage at 204 no longer name Daniel's
+      regularization as an antecedent: its regularization item at 204 names T-223 (measured
+      one to one, 60 squares beyond 1e-3, at most 0.237), the sentence that the source states
+      no method and no lineage is replaced by the author's lineage at 105 and 204, and the case
+      record at 204 and its adoption credit follow (think-xyhn). (3) He recommends publishing
+      the review checkers, acceptance harnesses and stage 4 scripts. #732's entry carries the
+      same ask from his comment there (think-0gp6), so none is queued here.
+
+      The lower 204 file (n204-lower) is registered as T-231 from its own packet,
+      mishapolk-n204-2026-10-22, retained under the author's written grant (answer 5 of his
+      comment of 20:15:57Z): V0/C0, its replay passed on both maintained routes with every
+      control refused, sharp controls included, and its stage 4 review is think-tetq, then
+      adoption at 204 and regularization (think-h01y). The commit 1851c2c first published both
+      204 files, and a report keeps one claim a count, the least side its commit states there
+      (#722's review A, A2), so the ledger of 22 October walks #719's claim at 204 at
+      n204.cert's side. T-229 stands as registered and adopted at 204 on n-204.cert, the file
+      the issue names, registered before the author claimed the lower file on 22 October at
+      20:15:57Z; T-231, by the same author and from the same commit, supersedes it at 204 once
+      the case adopts it. 105 is untouched.
   - number: 728
     title: 's(303) ≤ 17.909772217275: registration request'
     author: evand
@@ -20766,7 +20788,7 @@ issues:
       and regularize it with one maintainer approval (Level 3), with the current best packings
       served as static JSON under squaremath.org/api/v1/. It tracks project work, not the
       intake of a reported item.
-    read_through: '2026-10-22T20:40:07Z'
+    read_through: '2026-10-23T02:17:06Z'
     results: []
     asks:
     - what: How far to automate the intake of upper bounds, Level 1, 2 or 3.
@@ -20788,3 +20810,13 @@ issues:
     close_when: >-
       The owner has answered the three questions (think-lnzm) and the reply that says so is
       posted.
+    notes: >-
+      Mykhailo Polkovskyi's comment of 2026-10-23T02:17:06Z (issuecomment-6355791263),
+      read on 23 October (c-lane-719-records-1023), reports no result. It supports the
+      proposal from his #719 and #732 submissions, argues that schema-driven intake would
+      cut maintainer and model costs, suggests uses of the API (solver loops, a pre-flight
+      command-line check and a reusable action, distributed search over the gaps, an in-browser
+      inspector, sharded bulk manifests), and answers the three questions: Level 2 now with a
+      path to Level 3; the form's structured credit, lineage, method and AI-assistance fields
+      and the issue number in place of a bead; and api/v1/ on squaremath.org with lower bounds
+      from the start. The questions stay the owner's, on think-lnzm.

@@ -917,17 +917,18 @@ RESULTS: dict[str, Prose] = {
                 "re-solved to a smaller side, a refinement that is not padding (T-229)."
             ),
             204: (
-                "The issue names the house it improves and no parent packing. Measured by the "
-                "import and again by the 22 October review, the nearest centres pair it one to "
-                "one with T-225’s packing, the house best packing here before this adoption, "
-                "under a half turn, and with Couzo’s #678 packing (T-223) under the identity, "
-                "keeping that certificate’s frame and tilt pattern: 117 of the 204 squares "
-                "lie within $10^{-6}$ of T-225’s, 67 move beyond $10^{-3}$ and 6 beyond a "
-                "tenth, at most 0.273. Every square turns by less than 1° but square 38, which "
-                "T-225 holds within $10^{-20}$ by four neighbours and which this packing "
-                "releases and turns by 25.64°, so that nothing lies within "
-                "$1.25 \\times 10^{-2}$ of it (T-229). The reply on the issue asks how that "
-                "came about."
+                "The author’s comment of 23 October on the issue says his continuous SQP "
+                "optimization started from Francisco Couzo’s #678 certificate (T-223), in "
+                "Couzo’s own frame, and not from Evan Daniel’s regularized view of it "
+                "(T-225). Measured by the import and again by the 22 October review, the "
+                "nearest centres pair it one to one with #678’s packing under the identity, "
+                "keeping that certificate’s frame and tilt pattern: 60 squares move beyond "
+                "$10^{-3}$ of T-223’s and 7 beyond a tenth, at most 0.237. It pairs with "
+                "T-225’s packing, the house best packing here before this adoption, only under "
+                "a half turn. Every square turns by less than 1° but square 38, which T-223 "
+                "and T-225 hold by four neighbours and which this packing releases and turns "
+                "by 25.64°, so that nothing lies within $1.25 \\times 10^{-2}$ of it (T-229): "
+                "a release the author says his relaxation made."
             ),
         },
         third_route=(
@@ -1260,19 +1261,20 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
-    # Mykhailo Polkovskyi's re-solve (T-229, adopted on 23 October 2026) of Evan Daniel's
-    # display regularization (T-225) of Francisco Couzo's packing, which Couzo first reported
-    # in issue 670 and refined in 675 and 678 (T-226, T-228, T-223): one to one with T-225's
-    # under a half turn and with #678's under the identity, one square released and turned
-    # by 25.64 degrees (the import's measurement and the 22 October review's, its RF-3 and
-    # RF-4). T-229's item names T-225, so the packing stays with Couzo, whose source's
-    # manifest credits Polkovskyi's own construction as its seed (A11 of #716).
+    # Mykhailo Polkovskyi's re-solve (T-229, adopted on 23 October 2026) of Francisco
+    # Couzo's packing, which Couzo first reported in issue 670 and refined in 675 and 678
+    # (T-226, T-228, T-223): one to one with #678's under the identity and with T-225's under
+    # a half turn, one square released and turned by 25.64 degrees (the import's measurement
+    # and the 22 October review's, its RF-3 and RF-4). The author's comment of 23 October on
+    # issue 719 says the solve started from Couzo's #678 certificate, not from Evan Daniel's
+    # view (T-225), so T-229's item names T-223 and Daniel is no antecedent here (think-xyhn).
+    # The packing stays with Couzo, whose source's manifest credits Polkovskyi's own
+    # construction as its seed (A11 of #716).
     204: Credit(
         (COUZO,),
-        (DANIEL, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s re-solve of Evan Daniel’s display regularization of "
-        "Francisco Couzo’s packing from a search Couzo’s source seeded with Polkovskyi’s own "
-        "n = 204 construction",
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s re-solve of Francisco Couzo’s packing from a search Couzo’s "
+        "source seeded with Polkovskyi’s own n = 204 construction",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).

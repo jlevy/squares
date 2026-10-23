@@ -206,12 +206,19 @@ def test_live_current_families_pending_comparison_and_known_scope_gap() -> None:
     assert records.current_record_ids(["T-037", "T-060", "T-163", "T-060"], index) == ("T-060",)
     # T-229 (#719) states a smaller side at 105 and 204 than T-174 and T-225, and since
     # its adoption of 23 October 2026 holds both lanes there; T-174 and T-225 hold
-    # neither lane at those counts.
+    # neither lane at those counts. At 204 the release's lower file (T-231), pending
+    # adoption, is the stronger pending claim on the reported lane, so T-229 holds only
+    # the verified lane there until T-231 is adopted.
     assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-225"]} == {
         (n, "upper", lane) for n in (227, 229, 260) for lane in ("reported", "verified")
     }
     assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-229"]} == {
-        (n, "upper", lane) for n in (105, 204) for lane in ("reported", "verified")
+        (105, "upper", "reported"),
+        (105, "upper", "verified"),
+        (204, "upper", "verified"),
+    }
+    assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-231"]} == {
+        (204, "upper", "reported")
     }
     assert not {facet for facet in index.facets["T-174"] if facet.n == 105}
 

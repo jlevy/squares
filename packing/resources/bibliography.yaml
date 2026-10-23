@@ -3246,11 +3246,31 @@ sources:
     note: >-
       Issue 719's 122 exact certificates at 12fc46678fa8eefa3f156ff37dfffd84c8f3a580 in
       Evan Daniel's format, certificates/n-N.cert: re-solves at 105 and 204 of the case's
-      house packings (T-174's and T-225's) and 120 rows beyond the corpus, many of them
+      house packings (T-174's at 105 and, at 204, Couzo's #678 packing, which the author's
+      comment of 23 October names as his start) and 120 rows beyond the corpus, many of them
       re-solves of Couzo's and Muglich's packings and some new arrangements. No licence:
       derived exact facts only, no upstream byte retained. The issue credits Mishapolk
       (Mykhailo Polkovskyi, since its 11:35:16Z edit) and the finders its packings build
       on, and discloses Gemini assistance. Upper bounds only; no optimality claim.
+  - key: '[Mishapolk n204 2026-10-22]'
+    authors: [Polkovskyi]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-22'
+    lineage: builds-on-project
+    credit: Polkovskyi after Couzo, Daniel, Levy
+    short_credit: Polkovskyi after Couzo et al.
+    note: >-
+      The second 204 file of issue 719's release, certificates/n204.cert at
+      12fc46678fa8eefa3f156ff37dfffd84c8f3a580, first committed at 1851c2c beside the
+      n-204.cert the issue names (T-229), and claimed in the author's comment of 22 October:
+      a re-solve of Francisco Couzo's #678 packing, from which his comment of 23 October says
+      the continuous SQP solve at 204 started, 1.48e-11 below n-204.cert. The author checked
+      it with this repository's sqpack.verify, imported as a module, and with Evan Daniel's
+      verify_cert.py and verify_cert2.py; Couzo's source credits Polkovskyi's own construction
+      as the seed of its search. Retained under the author's written grant on issue 719, the
+      MIT licence of 17cc220 that the comment says covers every certificate. Gemini
+      assistance disclosed. Upper bound only; no optimality claim.
   - key: '[de Winter issue 666 2026-10-17]'
     authors: [de Winter]
     year: 2026

@@ -19,8 +19,6 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
-import pytest
-
 from devtools import evand_arrangement_reports as kernel
 from devtools import upper_bound_reports as reports
 
@@ -121,26 +119,3 @@ def test_the_measured_identity_pairs_it_one_to_one_with_t229s_packing() -> None:
     assert t223["one_to_one"] is True
     assert t223["symmetry"] == 0
     assert t223["moved_beyond"]["1e-1"] == 7
-
-
-@pytest.mark.slow
-@pytest.mark.parametrize("where", ["at-contact", "past-contact"])
-@pytest.mark.parametrize("control", kernel.SHARP_CONTROLS)
-def test_both_routes_meet_contact_and_refuse_1e30_past_it_at_the_lower_204(
-    control: str, where: str
-) -> None:
-    """The receipt's two controls are gross (a duplicated square, gap -1, and a square
-    moved outside), while this certificate clears every wall by exactly 5e-21 and every
-    pair by about 1e-20, below the binary64 spacing of its coordinates. The kernel's two
-    sharp controls: the side lowered by its least far-wall clearance, or its tightest pair
-    closed along its best separating axis, accepted by both maintained routes at exact
-    contact with the margin exactly 0 and refused by both 1e-30 past it at exactly -1e-30,
-    as receipts/sharp-controls.json in the packet records. Each case runs both routes over
-    20,706 pairs, a few seconds, above the quick lane's per-test ceiling."""
-    (certificate,) = reports.read_facts(_packet()).values()
-    margin = "wall" if control == "side-lowered-past-wall-contact" else "gap"
-    past = where == "past-contact"
-    verdicts = kernel.run_sharp(certificate, control, past=past)
-    for route in kernel.ROUTES:
-        assert verdicts[route]["passed"] is not past, route
-        assert verdicts[route][margin] == (-kernel.SHARP_EPSILON if past else 0), route

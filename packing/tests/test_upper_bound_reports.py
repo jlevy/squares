@@ -1934,3 +1934,28 @@ def test_both_routes_meet_contact_and_refuse_1e30_past_it_at_719s_105(
     for route in kernel.ROUTES:
         assert verdicts[route]["passed"] is not past, route
         assert verdicts[route][margin] == (-kernel.SHARP_EPSILON if past else 0), route
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize("where", ["at-contact", "past-contact"])
+@pytest.mark.parametrize("control", kernel.SHARP_CONTROLS)
+def test_both_routes_meet_contact_and_refuse_1e30_past_it_at_the_lower_204(
+    control: str, where: str
+) -> None:
+    """The release's second 204 file (T-231, packet mishapolk-n204-2026-10-22): the
+    receipt's two controls are gross (a duplicated square, gap -1, and a square moved
+    outside), while this certificate clears every wall by exactly 5e-21 and every pair by
+    about 1e-20, below the binary64 spacing of its coordinates. The kernel's two sharp
+    controls, the side lowered by its least far-wall clearance or its tightest pair closed
+    along its best separating axis, are accepted by both maintained routes at exact contact
+    with the margin exactly 0 and refused by both 1e-30 past it at exactly -1e-30, as the
+    packet's receipts/sharp-controls.json records. Each case runs both routes over 20,706
+    pairs, a few seconds, above the quick lane's per-test ceiling, so it runs in the deep
+    surface."""
+    certificate = reports.read_facts(_packet(MISHAPOLK_N204), numbers=[204])[204]
+    margin = "wall" if control == "side-lowered-past-wall-contact" else "gap"
+    past = where == "past-contact"
+    verdicts = kernel.run_sharp(certificate, control, past=past)
+    for route in kernel.ROUTES:
+        assert verdicts[route]["passed"] is not past, route
+        assert verdicts[route][margin] == (-kernel.SHARP_EPSILON if past else 0), route
