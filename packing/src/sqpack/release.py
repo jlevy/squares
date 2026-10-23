@@ -7483,6 +7483,57 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Every paper keeps its version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/overview_sections.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The atlas without its expander (think-rk91): `atlas_grid` writes every row "
+            "in one box with no toggle, rest box or no-script style, `_atlas_rows` loses "
+            "its preview count and writes the widest row, extra separator and largest "
+            "side once, `ATLAS_FIRST` goes, and a comment on `ATLAS_SIZE` is new. Both "
+            "functions are called only by `render_overview`'s overview and atlas pages "
+            "(`overview_page`, `atlas_page`); no paper builder calls them or reads the "
+            "constant. No render was taken, and every paper keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer", "paper:square-packing-methods-survey"),
+        paths=(
+            "packing/devtools/probes/check_site_rendering/report.js",
+            "packing/devtools/probes/measure_atlas_views/expansion.js",
+            "packing/devtools/probes/measure_atlas_views/layout.js",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The atlas without its expander (think-rk91): the site readability probe "
+            "drops its exemption for the atlas's hidden rest box, and the atlas "
+            "measuring tool drops its expansion probe and the expander field of its "
+            "layout probe. The two papers select these probes as broad builder inputs "
+            "and run none of them; `check_site_rendering` and `measure_atlas_views` read "
+            "built pages and write no paper. No render was taken, and both papers keep "
+            "their versions."
+        ),
+    ),
 )
 
 
