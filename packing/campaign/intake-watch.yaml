@@ -1346,3 +1346,23 @@ repositories:
       outreach note 03 (#526). n = 11 is settled by T-060 and T-112, so these are
       structural statements at a settled count, as #526's entry records; the packet keeps
       the compilation as it stood at the pin, 1,277 lines. Nothing to import.
+  # The intake sweep of 00:10Z on 23 October 2026 listed the repository whose release #732
+  # reports; lane c-lane-sweep-1023a read it at its head.
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: 17cc220131360ef290750eb845a3544c30ccb389
+    read_on: '2026-10-23'
+    bead: think-0gp6
+    note: >-
+      The four commits of 22 October past the dc440a8 read. 8a488a1 (19:08:59Z), 3285fac
+      (19:29:30Z) and 814fbe9 (19:37:33Z, tag v1.0.0) are the release issue 732 reports: they
+      shard certificates/ into folders by thousands holding files at 5,594 counts up to 9,913
+      (126 in the corpus, 390 at 328 to 998, 5,078 above 1024), add manifest.json, SHA256SUMS,
+      certified_bounds.json, upper_bounds.json, Couzo's copy of Daniel's verifier with its
+      licence and ISSUE_SUBMISSION_221.md, change README.md, check_packing.py and the two
+      victory indexes, and remove the three files that failed both exact routes and the lower
+      certificates/n204.cert, which #719's packet pins at 12fc466. The triage of #732 read
+      them at 814fbe9, and think-0gp6 holds them until a packet pins that commit or a later
+      one. 17cc220 (20:15:36Z), the head, adds only LICENSE: the MIT licence,
+      copyright Mykhailo Polkovskyi (Mishapolk), which the author's comment on #719
+      (issuecomment-6350348588) says covers every certificate, catalogue, manifest and tool, so
+      a packet pinned at 17cc220 holds the same certificates with their licence.
