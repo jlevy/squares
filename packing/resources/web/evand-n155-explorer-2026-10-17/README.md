@@ -140,7 +140,7 @@ seconds, summed; the longest job took 29.99 seconds.
 deciding input and both routes’ complete outputs.
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
 arithmetic and the separating-axis method, so they are two implementations of one
-method. Neither is the author’s code, and the source’s own checkers were not run.
+method. Neither is the author’s code; the source’s own checkers ran separately, below.
 
 [acquisition/claims.json](acquisition/claims.json) freezes the certificate against the
 record at `main` `14fd9e27f` (19 October 2026), each side rebuilt from its own retained
@@ -156,6 +156,36 @@ From `packing/`:
 ```sh
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n155-explorer-2026-10-17 check-claims
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n155-explorer-2026-10-17 check --replay
+```
+
+## The Source’s Own Checkers
+
+Added on 23 October 2026. The source’s two checkers, as this packet retains them, ran
+unchanged, each in its own `python -I` child process under CPython 3.14.7, on both certificates and
+on three controls of each: square 2 replaced by square 1; square 1 moved $S + 2$ to the
+right, outside the box; and the side lowered by the least right or top wall clearance
+plus $10^{-30}$, so that one square crosses the wall by exactly $10^{-30}$.
+Both checkers accept both certificates and refuse all six controls with an `INVALID` verdict, 16 runs
+in 2.4 CPU seconds.
+`verify_cert.py` prints the least wall clearance as $5.000 \times 10^{-21}$ on each certificate and the least pair separation
+as $1.000 \times 10^{-20}$ on each.
+[receipts/source-checker-replay.json](receipts/source-checker-replay.json) keeps both
+checkers’ digests, each certificate’s and each control’s digest, and every run’s exit
+status and output. `devtools.evand_source_checkers check` holds it to the packet,
+rebuilding each control from its certificate.
+
+These are the author’s programs, so their acceptance is evidence from the same
+implementation and moves no rung: the confirmation rests on the two routes above.
+The two checkers share their author, their parse and their format, so neither is
+independent of the other.
+A run of the same two checkers on the four certificates of #669 and #674 on 18 October
+2026 was not kept; this one replaces it.
+
+From `packing/`:
+
+```sh
+uv run --frozen --all-extras --group dev python -m devtools.evand_source_checkers check
+uv run --frozen --all-extras --group dev python -m devtools.evand_source_checkers run --scratch "$TMPDIR/evand-controls"
 ```
 
 <!-- This document follows common-doc-guidelines.md.
