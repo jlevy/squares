@@ -693,6 +693,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Evan Daniel’s Grade-C Local Minima (Theorem C): Mathematical Review](docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md) | dated review record | record | retained | — |
 | [CI and Release Latency Audit, 22 October 2026](docs/project/reviews/review-2026-10-22-ci-release-latency.md) | dated review record | record | retained | — |
 | [Contributor Credit Link Audit, 22 October 2026](packing/contributors/reviews/2026-10-22-credit-link-audit.md) | dated review record | record | retained | — |
 | [Feature: Site Navigation and Page Hierarchy](docs/project/specs/active/plan-2026-10-22-site-navigation.md) | implementation plan | current | transient | — |
