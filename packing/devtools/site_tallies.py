@@ -270,11 +270,16 @@ def render_tally(
     noun: Literal["result", "credit", "record"] = "result",
     total_href: str | None = None,
     level_hrefs: Mapping[int, str] | None = None,
+    emphasize_total: bool = False,
 ) -> str:
     """Inline result or credit totals and significance histograms with caller-supplied links."""
     total = len(tally.results if isinstance(tally, ResultTally) else tally.associations)
     label = noun if total == 1 else noun + "s"
     rendered = _link(f"{total} {label}", total_href)
+    if emphasize_total:
+        rendered = f"<strong>{total}</strong> {html.escape(label)}"
+        if total_href is not None:
+            rendered = f'<a href="{html.escape(total_href, quote=True)}">{rendered}</a>'
     populated = [(level, count) for level, count in tally.counts if count]
     hrefs = level_hrefs if level_hrefs is not None else {}
     if len(populated) == 1:

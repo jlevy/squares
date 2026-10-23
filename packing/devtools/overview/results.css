@@ -110,3 +110,38 @@
   margin-block: 0;
   padding-block: 0.35rem 0.75rem;
 }
+
+/* Recent Results remains one table. Before enhancement all rows are available;
+   the existing head marker reserves its collapsed geometry before first paint. */
+.kpress [data-recent-results] [data-recent-toggle-row] {
+  display: none;
+}
+:root[data-site-nav-enhanced] .kpress [data-recent-results] [data-recent-toggle-row],
+.kpress [data-recent-results][data-recent-ready] [data-recent-toggle-row] {
+  display: table-row;
+}
+[data-recent-results][data-recent-ready]:not([data-recent-expanded="true"]) > [data-recent-older],
+.kpress [data-recent-results] [data-recent-older][hidden],
+.kpress [data-recent-results][data-recent-ready] [data-recent-toggle-row][hidden],
+:root[data-site-nav-enhanced]
+  [data-recent-results]:not([data-recent-expanded="true"])
+  > [data-recent-older] {
+  display: none;
+}
+
+.kpress [data-recent-results] [data-recent-toggle-row] > td {
+  padding-block: 1rem;
+  text-align: center;
+}
+@media (width < 48rem) {
+  :root[data-site-nav-enhanced] .kpress [data-recent-results] [data-recent-toggle-row],
+  .kpress [data-recent-results][data-recent-ready] [data-recent-toggle-row] {
+    display: block;
+  }
+  .kpress [data-recent-results] [data-recent-toggle-row] > td {
+    display: block;
+  }
+  .kpress [data-recent-results][data-recent-ready] [data-recent-toggle-row][hidden] {
+    display: none;
+  }
+}

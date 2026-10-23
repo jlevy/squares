@@ -2268,10 +2268,12 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
             for old, new in render_overview.LEGACY_PROFILES.items()
         },
     }
+    assert moved["downloads.html"] == "posters.html"
     assert set(moved) == {
+        "downloads.html",
         "all-results.html",
+        "recent-results.html",
         "status.html",
-        "frontier.html",
         "defects.html",
         "explainer.html",
         "n11-optimality/t-060-explainer.html",
@@ -2281,6 +2283,7 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
         *profiles,
     }
     assert {old: moved[old] for old in profiles} == profiles
+    assert "frontier.html" in render_overview.SITE_PAGES
     assert not set(moved) & set(render_overview.SITE_PAGES)
     pages = site_pages()
     requested: list[str] = []
@@ -2525,10 +2528,12 @@ def test_check_fails_a_page_whose_head_is_not_the_sites(
     assert "0 og:image tags, not one" in failure
     assert "0 twitter:card tags, not one" in failure
 
-    old = page(render_overview.canonical_url("papers.html")).replace(
-        b'og:title" content="Page papers.html',
-        b'og:title" content="Papers \xc2\xb7 Square Packing',
+    good = page(render_overview.canonical_url("papers.html"))
+    old = good.replace(
+        b'og:title" content="Papers"',
+        b'og:title" content="Papers \xc2\xb7 Square Packing"',
     )
+    assert old != good
     (failure,) = found(**{"papers.html": old})
     assert failure.startswith("papers.html: head: og:title is 'Papers · Square Packing', not")
 

@@ -2,7 +2,8 @@
 // its address; without scripts no article is filtered out there. A preview, the home
 // page's News box (`data-news-limit`), shows the newest articles that match, up to its
 // limit, says how many in its live count, keeps no address and carries the choice on
-// its "All news" link (`data-news-carry`). Either opens on the levels its markup presses.
+// its "View All News" link (`data-news-carry`). Either opens on the levels its markup
+// presses.
 (() => {
   const controls = document.querySelector("[data-news-filters]");
   const news = document.querySelector("[data-news]");
@@ -52,8 +53,8 @@
     const card = document.getElementById(id)?.closest("[data-news-day]");
     return card instanceof HTMLElement && news.contains(card) ? card : null;
   };
-  // A preview's "All news" link opens the archive on the reader's choice, once they
-  // have made one; the archive reads it as its own address.
+  // A preview's "View All News" link opens the archive on the reader's choice, once
+  // they have made one; the archive reads it as its own address.
   const carry = () => {
     const levels = allScores.filter((value) => scores.has(value)).join(",");
     for (const link of document.querySelectorAll("a[data-news-carry]")) {
@@ -138,6 +139,7 @@
       empty.hidden = shown !== 0;
     }
     document.dispatchEvent(new Event("news:filter"));
+    controls.dispatchEvent(new CustomEvent("squares:filterschange", { bubbles: true }));
   };
   // A bookmarked item widens its facets, so the address never names a hidden card.
   const revealTarget = () => {
@@ -178,7 +180,9 @@
         return;
       }
     }
-    if (button.hasAttribute("data-news-reset")) {
+    if (button.hasAttribute("data-site-filter-all")) {
+      topics = new Set(allTopics);
+    } else if (button.hasAttribute("data-news-reset")) {
       scores = new Set(initial);
       topics = new Set(allTopics);
     } else {

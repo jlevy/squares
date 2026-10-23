@@ -1231,7 +1231,11 @@ def _role_rules(entry: dict[str, Any]) -> dict[str, tuple[float | None, float | 
         "footnote": (note, regular),
         "colophon": (sans * tokens["--paper-colophon-scale"], regular),
         "nav name": (sans, bold),
+        "nav ancestor": (note, bold),
         "nav link": (note, medium),
+        "breadcrumb": (note, regular),
+        "introduction": (base, 400),
+        "navigation heading": (tokens["--kpress-font-size-h2"], medium),
         "section tab": (note * tokens["--paper-button-label-scale"], medium),
         "compact chooser": (tokens.get("--site-chooser-small-size"), medium),
     }
@@ -1316,7 +1320,12 @@ def glyph_problems(entry: dict[str, Any], *, katex: str | None = None) -> list[s
     if not entry["reading"]:
         return problems
     rules = _role_rules(entry)
-    faces = {"prose": entry["prose"], "list item": entry["prose"], "h2": entry["prose"]}
+    faces = {
+        "prose": entry["prose"],
+        "list item": entry["prose"],
+        "h2": entry["prose"],
+        "introduction": entry["prose"],
+    }
     tokens = entry["tokens"]
     weights = {
         regular,

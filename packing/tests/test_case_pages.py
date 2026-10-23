@@ -64,7 +64,7 @@ def result_bodies() -> dict[str, str]:
 
 @pytest.fixture(scope="module")
 def frontier() -> str:
-    return site_renders.html("atlas.html")
+    return site_renders.html("frontier.html")
 
 
 @pytest.fixture(scope="module")
@@ -245,7 +245,7 @@ def test_a_records_links_are_written_from_its_own_directory(
     elsewhere rebases them against the record file's own address
     (`overview/case-popover.js`)."""
     record = _record(records, 11)
-    assert 'href="../atlas.html#n-11"' in record
+    assert 'href="../frontier.html#n-11"' in record
     assert 'href="../results.html#t-018"' in record
     parsed = _HtmlEvents()
     parsed.feed(record)
@@ -424,7 +424,7 @@ def test_the_popover_fetches_the_record_and_opens_its_address() -> None:
     assert "data-case-popover" in markup
     assert "data-case-body" in markup
     assert 'data-case-open href="atlas.html"' in markup
-    assert 'data-case-frontier href="atlas.html">Frontier Survey row</a>' in markup
+    assert 'data-case-frontier href="frontier.html">Frontier Survey row</a>' in markup
     assert 'data-case-atlas href="atlas.html">Atlas diagram</a>' in markup
     assert markup.count('data-go="page"') == 3
     assert "site-card-label" not in markup
@@ -722,7 +722,7 @@ def test_case_11_carries_its_polynomial_results_verification_and_links(
     assert "<msup><mi>s</mi><mn>7</mn></msup>" in record
     for result in ("T-018", "T-026", "T-033"):
         assert f'<a href="../results.html#{result.lower()}">{result}</a>' in record
-    assert '<a href="../atlas.html#n-11">' in record
+    assert '<a href="../frontier.html#n-11">' in record
     branch = f"{REPO_URL}/blob/{DEFAULT_BRANCH}/"
     assert f'class="site-case-github" href="{branch}packing/frontier/n-011.md"' in record
     # What the frontier row's popover said until 2026-10-03 is the record's now.
@@ -952,8 +952,15 @@ def test_each_record_steps_to_its_neighbours_with_the_sites_arrows(
         steps = steps[: steps.index("</nav>")]
         assert "←" not in steps
         assert "→" not in steps
-        assert (f'data-case-step="{n - 1}">{left}n = {n - 1}</a>' in steps) == (n != numbers[0])
-        assert (f"n = {n + 1}{right}</a>" in steps) == (n != numbers[-1])
+        assert 'data-math-face="serif"' in steps
+        for neighbor, direction, arrow in ((n - 1, "prev", left), (n + 1, "next", right)):
+            match = re.search(rf'<a\b[^>]*rel="{direction}"[^>]*>(.*?)</a>', steps, re.DOTALL)
+            expected = numbers[0] <= neighbor <= numbers[-1]
+            assert (match is not None) == expected
+            if match is not None:
+                assert arrow in match[1]
+                assert f"<mi>n</mi><mo>=</mo><mn>{neighbor}</mn>" in match[1]
+                assert 'data-kpress-math-prepared="true"' in match[1]
         assert "data-case-index" not in steps
         assert "All cases" not in steps
 

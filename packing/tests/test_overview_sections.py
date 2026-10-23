@@ -38,9 +38,9 @@ def test_canonical_atlas_targets_keep_every_tile_addressable_without_scripts() -
     fallback = grid.split("<noscript>", 1)[1].split("</noscript>", 1)[0]
     assert "[data-atlas-grid] .site-atlas-rest[hidden]{display:contents}" in fallback
     assert "[data-atlas-grid] .site-atlas-toggle-row{display:none}" in fallback
-    assert 'href="atlas.html#the-frontier-survey"' in fallback
-    assert 'href="atlas.html#the-frontier-survey"' in overview_sections.page_cards()
-    assert 'href="frontier.html"' not in fallback
+    assert 'href="frontier.html"' in fallback
+    assert 'href="frontier.html"' in overview_sections.page_cards()
+    assert 'href="atlas.html#the-frontier-survey"' not in fallback
 
 
 def test_recent_preview_contains_only_the_twelve_newest_eligible_rows() -> None:
@@ -189,3 +189,16 @@ def test_reading_cards_keep_original_dates_when_a_new_edition_is_added(
         assert 'target="_blank"' not in card
         assert card.index("site-card-label") < card.index("<h3>") < card.index("<time ")
         assert card.index("</header>") < card.index("site-card-note")
+
+
+def test_homepage_learning_preview_uses_the_shared_starting_cards() -> None:
+    preview = overview_sections.homepage_paper_cards()
+    destinations = re.findall(r'<a class="site-card site-card-link" href="([^"]+)"', preview)
+    assert destinations == [
+        "tutorial.html",
+        "tutorial-advanced.html",
+        overview_sections.LOWER_BOUNDS_PAPER,
+    ]
+    complete = overview_sections.paper_cards()
+    for card in re.findall(r'<a class="site-card site-card-link".*?</a>', preview, re.DOTALL):
+        assert card in complete

@@ -44,8 +44,8 @@ from tests import site_renders
 
 #: One day's disclosure: its date, whether it starts open, the rest.
 DAY = re.compile(r'<details data-day="(\d{4}-\d{2}-\d{2})"( open)?>(.*?)</details>', re.DOTALL)
-#: One result in a day, as the results page's seven days write it, linked to its row
-#: there: its id, its V, C and S rungs.
+#: One result in a day (`added_entry`), linked to its row in All Results: its id, its V,
+#: C and S rungs.
 ENTRY = re.compile(
     r'<li(?: class="site-rollup-superseded")?><a href="results\.html#(t-\d{3})"'
     r'(?: title="Superseded")?>(T-\d{3})</a> .*?<small>[^<]* · (V\d) (C\d) (?:<b>)?(S\d)'
@@ -62,9 +62,9 @@ ROWS = re.compile(
 )
 #: The most bytes the section may weigh. On 22 October 2026, over 15-22 October, it
 #: measured 23,651 bytes: 45 results, 61 counts' house best packings on seven days and 11
-#: sources' 876 rows. The results page's seven days have held 71 results, about 22,000
-#: bytes alone. Past this the section is becoming a second results table; the remedy is a
-#: shorter entry, not a higher number.
+#: sources' 876 rows. The results page's seven days, retired with #737, had held 71
+#: results, about 22,000 bytes alone. Past this the section is becoming a second results
+#: table; the remedy is a shorter entry, not a higher number.
 RECENT_BYTES = 40_000
 #: The most bytes the News box may weigh: the newest three News articles of each level,
 #: nine cards of 3 to 6 KB, measured at 42,550 bytes on 22 October 2026.
@@ -301,11 +301,31 @@ def test_house_moves_list_each_count_once_under_its_house() -> None:
             assert houses[n] == (move.result, move.day)
 
 
-def test_the_section_links_the_seven_days_and_news(section: str) -> None:
-    assert 'href="results.html#added-in-the-last-seven-days"' in section
+def test_the_section_links_all_results_and_news(
+    section: str, days: dict[str, tuple[bool, str]]
+) -> None:
+    """The introduction links All Results and News, never the results page's seven days,
+    which #737 retired; each day with results opens All Results on that day alone, a day
+    its Added on preset offers."""
+    assert 'href="results.html#all-results"' in section
     assert 'href="news.html"' in section
+    assert "added-in-the-last-seven-days" not in section
     results = site_renders.html("results.html")
-    assert 'id="added-in-the-last-seven-days"' in results
+    assert 'id="all-results"' in results
+    preset = re.search(
+        r'<select data-filter="added" data-preset>(.*?)</select>', results, re.DOTALL
+    )
+    assert preset
+    offered = set(re.findall(r'<option value="(\d{4}-\d{2}-\d{2})"', preset[1]))
+    linked = 0
+    for day, (_, body) in days.items():
+        if ENTRY.search(body):
+            assert f'href="results.html?added={day}#all-results"' in body, day
+            assert day in offered, day
+            linked += 1
+        else:
+            assert "?added=" not in body, day
+    assert linked
 
 
 def test_the_home_page_additions_stay_brief(section: str) -> None:

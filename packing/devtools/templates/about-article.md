@@ -28,23 +28,26 @@ Contributions include:
   also unverified here (V0/C1).
 
 Other new results are tabulated on the [Results page](results.html).
+See the <a id="profiles" href="profiles/index.html">Contributor Profiles</a> for
+credited contributors and authors.
 
 This project now independently tabulates all known new results and does
-[AI-assisted verification](results.html#verification-ladders) of the proofs and
+[AI-assisted verification](verification.html#verification-ladders) of the proofs and
 certificates behind them, to encourage open collaboration on open questions and
 formalizations of current proofs.
 
 </div>
 
-{{PROFILES}}
+<div class="site-navigation-copy">
 
-<h1 id="report-your-results" class="site-title">Report Your Results!<a id="contribute-your-results"></a></h1>
+The [Resources directory](resources.html) under Learn lists external square packing
+catalogues, research repositories, and websites.
 
-{{REPORT_RESULTS}}
+</div>
 
-<h1 id="squares-project-documentation" class="site-title">Squares Project Documentation</h1>
-
-{{DOCUMENTATION_BLOCK}}
+<noscript><p>Project information: <a id="report-your-results" href="report.html">Report
+a Result</a><a id="contribute-your-results"></a> and
+<a id="squares-project-documentation" href="documentation.html">Documentation</a>.</p></noscript>
 
 {{NEWS_LEGACY_ANCHORS}}
 

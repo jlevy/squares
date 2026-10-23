@@ -10,7 +10,7 @@ interface SiteTableFilter {
    * reads), a number the row's list of numbers and ranges must hold, or a name the
    * row's list of names must have.
    */
-  kind: "equals" | "flag" | "min" | "max" | "since" | "covers" | "has";
+  kind: "equals" | "flag" | "min" | "max" | "since" | "covers" | "has" | "one-of";
   value: string;
 }
 

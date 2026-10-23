@@ -117,6 +117,8 @@
     }
     const protectedHeader =
       header.contains(document.activeElement) ||
+      nav.classList.contains("site-nav-disclosed") ||
+      nav.classList.contains("site-nav-mobile-open") ||
       (menu instanceof HTMLElement && menu.matches(":popover-open"));
     if (position <= topRegion || protectedHeader) {
       setHidden(false);
@@ -144,6 +146,7 @@
   // Start from that arrival position rather than treating it as reader motion.
   window.addEventListener("pageshow", reset);
   header.addEventListener("focusin", () => setHidden(false));
+  header.addEventListener("squares:navigationchange", () => setHidden(false));
   menu?.addEventListener("beforetoggle", (event) => {
     if (event instanceof ToggleEvent && event.newState === "open") {
       setHidden(false);

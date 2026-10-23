@@ -327,10 +327,11 @@ def test_generated_profile_uses_shared_roles_without_overflow(
             assert styles["body"]["weight"] == styles["note"]["weight"]
             assert styles["left"] == pytest.approx(styles["right"], abs=1)
             assert styles["bodyClearance"] == "0px"
-            assert styles["titleClearance"] == "0px"
-            assert styles["panelWidth"] <= min(36 * 16, width - 32) + 1
+            assert float(styles["titleClearance"].removesuffix("px")) > 0
+            assert styles["panelWidth"] <= width - 32 + 1
         else:
             assert styles["body"]["family"] != styles["note"]["family"]
+            assert styles["breadcrumbGap"] == pytest.approx(2.5 * 16, abs=1)
         assert styles["overflow"] == []
         for bounds in styles["wideBounds"]:
             assert bounds["left"] >= 0
@@ -339,7 +340,7 @@ def test_generated_profile_uses_shared_roles_without_overflow(
         shots = Path(os.environ.get("SQPACK_CONTRIBUTOR_DESIGN_SHOTS", str(tmp_path)))
         shots.mkdir(parents=True, exist_ok=True)
         mode = "popover" if overlay else "standalone"
-        article.locator(".site-contributor-breadcrumb").scroll_into_view_if_needed()
+        article.locator("h1").scroll_into_view_if_needed()
         page.screenshot(path=str(shots / f"profile-{mode}-{width}-{theme}.png"))
 
 
@@ -650,7 +651,9 @@ def test_generated_profile_keeps_its_own_anchors_and_breadcrumb_plain(
         assert anchors.count() > 0
         for index in range(anchors.count()):
             assert anchors.nth(index).get_attribute("aria-haspopup") is None
-        breadcrumb = article.locator('.site-contributor-breadcrumb a[href="index.html"]')
+        breadcrumb = page.get_by_role("navigation", name="Breadcrumb").get_by_role(
+            "link", name="Contributor Profiles", exact=True
+        )
         assert breadcrumb.get_attribute("aria-haspopup") is None
         for disclosure in article.locator("details").all():
             if disclosure.get_attribute("open") is None:
@@ -676,12 +679,12 @@ def test_generated_directory_keeps_native_profile_navigation(
         directory = page.evaluate(LAYOUT)["directory"]
         assert directory["headers"] == [
             "Name",
+            "Accounts",
             "Records",
             "Results",
             "Credits",
             "Years active",
             "Resources",
-            "Accounts",
         ]
         name_keys = [row["keys"][0] for row in directory["rows"]]
         assert name_keys == sorted(name_keys)
@@ -702,7 +705,7 @@ def test_generated_directory_keeps_native_profile_navigation(
                 )
                 == "ascending"
             )
-            for column, label in ((1, "Records"), (2, "Results"), (3, "Credits")):
+            for column, label in ((2, "Records"), (3, "Results"), (4, "Credits")):
                 heading = page.get_by_role("columnheader", name=label, exact=True)
                 heading.focus()
                 heading.press("Enter")
@@ -715,7 +718,7 @@ def test_generated_directory_keeps_native_profile_navigation(
                 values = [int(row["keys"][column]) for row in rows]
                 assert values == sorted(values, reverse=True), label
                 assert heading.get_attribute("aria-sort") == "descending"
-            for label, column in (("Years active", 4), ("Resources", 5), ("Accounts", 6)):
+            for label, column in (("Years active", 5), ("Resources", 6), ("Accounts", 1)):
                 heading = page.get_by_role("columnheader", name=label, exact=True)
                 for _ in range(2):
                     heading.click()
@@ -743,5 +746,7 @@ def test_generated_directory_keeps_native_profile_navigation(
             page.locator("main article.site-contributor h1").text_content()
             == "Walter Stromquist"
         )
-        page.locator('nav[aria-label="Breadcrumb"] a[href="index.html"]').click()
-        page.wait_for_url(f"{generated}profiles/index.html")
+        page.get_by_role("navigation", name="Breadcrumb").get_by_role(
+            "link", name="Contributor Profiles", exact=True
+        ).click()
+        page.wait_for_url(f"{generated}profiles/")

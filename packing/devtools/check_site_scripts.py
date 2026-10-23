@@ -39,6 +39,14 @@ FAMILIES = {
         "input-response",
         "Click or tap expands the existing News article; hover never changes its height.",
     ),
+    "navigation": (
+        "input-response",
+        "Disclose navigation links while keeping every destination available without scripts.",
+    ),
+    "filter-menu": (
+        "input-response",
+        "Disclose prepared filter choices and summarize their existing selection state.",
+    ),
     "news-filters": (
         "input-response",
         "Filter complete News articles by importance and subject, preserving address state.",
@@ -108,6 +116,10 @@ FAMILIES = {
 # stable source markers give each retained program its own reviewed declaration.
 PAPER_PROGRAMS = (
     (
+        "Ordinary site links keep their browser behavior.",
+        *FAMILIES["navigation"],
+    ),
+    (
         "Every shell keeps its whole header in the document flow.",
         *FAMILIES["headroom"],
     ),
@@ -154,7 +166,7 @@ HEAD_PROGRAMS = (
         "Set persisted reader attributes before body paint.",
     ),
     (
-        "A site page shown inside another page",
+        "Head bootstrap: preserve layout queries and navigation geometry before first paint.",
         "pre-paint",
         "Set embed and allowlisted atlas attributes before body paint.",
     ),

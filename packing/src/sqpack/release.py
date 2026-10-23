@@ -888,6 +888,13 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.21",
+        first_published="October 23, 2026",
+        result_scope=(
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.20",
         first_published="October 23, 2026",
         result_scope=(
@@ -1080,6 +1087,13 @@ EXPLAINER_REVISED = "October 22, 2026"
 # The leading entry is proposed for the next publication; confirm its date at first deployment.
 OPTIMALITY_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.11",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.10",
         first_published="October 22, 2026",
         result_scope="Use full public names in explanatory narrative profile links.",
@@ -1218,6 +1232,13 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 # The leading entry is proposed for the next publication; confirm its date at first deployment.
 THRESHOLD_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.4",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.3",
         first_published="October 22, 2026",
         result_scope="Use full public names in explanatory narrative profile links.",
@@ -1269,6 +1290,13 @@ THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 #: dates belong to the paper, independently of the site and n = 11 series.
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 PACKING_METHODS_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.2.7",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.2.6",
         first_published="October 22, 2026",
@@ -1385,6 +1413,34 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:square-packing-methods-survey",
+        previous_version="v0.2.6",
+        version="v0.2.7",
+        impact="patch",
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-threshold-bound-review",
+        previous_version="v0.1.3",
+        version="v0.1.4",
+        impact="patch",
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-optimality-review",
+        previous_version="v0.1.10",
+        version="v0.1.11",
+        impact="patch",
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.20",
+        version="v0.4.21",
+        impact="patch",
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.19",
@@ -2480,52 +2536,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and main 6c70d843f (#731), both trees at link revision 01e2ca3e: all 68 files "
             "byte-identical. No PDF was printed; each prints from that HTML. Retain "
             "#731's v0.4.20 and v0.1.10, v0.1.3 and v0.2.6."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=("paper:square-packing-methods-survey",),
-        paths=("packing/campaign/result-requests.yaml",),
-        outputs=(
-            "papers/square-packing-methods-survey.html",
-            "papers/square-packing-methods-survey.md",
-        ),
-        reason=(
-            "The 23 October sweep's request entries (#719's answers, #732, #734) and the "
-            "stage 7 follow-ups after #725, against main 690e21857 (#738): rendered at link "
-            "revision 40a71b16 into empty site directories, twice from this tree at "
-            "d40979ad with this record and twice from main's (42 files each), "
-            "render_packing_methods writes every file byte-identical across all four. No "
-            "PDF was printed; it prints from that HTML. Retain v0.2.6."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=(
-            "paper:n11-lower-bounds-explainer",
-            "paper:n11-optimality-review",
-            "paper:n11-threshold-bound-review",
-            "paper:square-packing-methods-survey",
-        ),
-        paths=("packing/devtools/render_overview.py",),
-        outputs=(
-            "papers/n11-lower-bounds-explainer.html",
-            "papers/n11-lower-bounds-explainer.md",
-            "papers/n11-optimality-review.html",
-            "papers/n11-optimality-review.md",
-            "papers/n11-threshold-bound-review.html",
-            "papers/n11-threshold-bound-review.md",
-            "papers/square-packing-methods-survey.html",
-            "papers/square-packing-methods-survey.md",
-        ),
-        reason=(
-            "Speculation rules on the site's own pages (think-gr4c): render_overview gains "
-            "SPECULATION_RULES and speculation_rules_tag, which kpress_page and "
-            "static_content_page add after head_tags; head_tags itself, which writes the "
-            "papers' heads, is unchanged. Rendered at link revision e929137a into empty "
-            "directories, once from this tree and twice from main e929137a8 (#725): the "
-            "four renderers write 68 files each, none carrying the rules, byte-identical "
-            "except one span's style attribute in the explainer's HTML, whose place varies "
-            "between renders (the record below). No PDF was printed; each prints from that "
-            "HTML. Retain v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
         ),
     ),
     ReleaseNoPublicChange(

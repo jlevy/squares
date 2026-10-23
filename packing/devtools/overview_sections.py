@@ -174,7 +174,7 @@ def standing_chip(standing: str, words: str | None = None) -> str:
 def kind_chip(result: Result) -> str:
     """What a result is, as a chip: its `kind` in the rubric's words, `lower bound` or
     `case exclusion` (epistemics.md, Result Kinds). Every result has one; bound kinds
-    use the same semantic hues as the corresponding bounds."""
+    share News topic ink and the neutral topic surface."""
     kind = str(result.record["kind"])
     return topic_chip(kind, attribute="data-kind")
 
@@ -905,8 +905,26 @@ def result_filters(
     age = "" if defaults.max_age is None else f' value="{defaults.max_age}"'
     hide = " checked" if defaults.hide_superseded else ""
     reference = reference_date(overview)
+    default_scores = {
+        level
+        for level in range(1, 6)
+        if defaults.significance is None or level >= defaults.significance
+    }
+    score_buttons = "".join(
+        f'<button type="button" data-site-score="{level}" '
+        f'aria-pressed="{str(level in default_scores).lower()}" '
+        f'title="{_esc(rung_meanings()[f"S{level}"])}">S{level}</button>'
+        for level in range(1, 6)
+    )
+    significance_choices = (
+        '<fieldset class="site-result-significance"><legend class="site-visually-hidden">'
+        'Significance</legend><span class="site-tabs site-chooser-small" '
+        'role="group" aria-label="Significance" data-site-significance '
+        f'data-default-floor="{floor}">{score_buttons}</span></fieldset>'
+    )
     rungs = "".join(
-        f'<label>{label} <select data-filter="{scale.lower()}" data-bound="min">'
+        f"<label{' hidden' if scale == 'S' else ''}>{label} "
+        f'<select data-filter="{scale.lower()}" data-bound="min">'
         f"{_options(rung_options(scale), floor if scale == 'S' else '')}"
         "</select></label>"
         for scale, label in RUNG_FILTERS
@@ -921,7 +939,7 @@ def result_filters(
     shown = sum(shown_by_default(result, defaults, reference) for result in listed)
     return (
         '<div class="site-table-tools site-result-filters">'
-        f"{rungs}"
+        f"{significance_choices}{rungs}"
         f'<label>Kind <select data-filter="kind">{_options(kinds)}</select></label>'
         f'<label>Status <select data-filter="status">{_options(statuses)}</select></label>'
         f'<label><input type="checkbox" data-filter="current"{hide}> Hide superseded</label>'
@@ -1030,13 +1048,15 @@ def credit_cell(credit: str, markup: str = "") -> str:
     return f'{finder} <span class="site-cell-quiet">after {after}</span>'
 
 
-def date_cell(result: Result, *, recent_label: str = "") -> str:
+def date_cell(
+    result: Result, *, recent_label: str = "", arrival_date: date | None = None
+) -> str:
     """What a result's date cell holds, in both tables of results: the date first, then
     what it dates, `published` or `established`, quiet (`.site-date-kind`). The cell
     sorts and filters on the date alone, its `data-value` and the row's `data-date`.
     A result's overview sets its date, and each date of its chain, with this too
     (`result_overview.head`, `step`), so the order has one definition."""
-    kind, dated = result.dated
+    kind, dated = ("added", arrival_date.isoformat()) if arrival_date else result.dated
     shown = _esc(dated)
     if recent_label:
         shown = f'<span title="{_esc(recent_label)}">{shown}</span>'
@@ -1049,6 +1069,7 @@ def result_cells(
     detail: RowDetail,
     *,
     replacement_dates: Mapping[str, str],
+    arrival_date: date | None = None,
 ) -> str:
     """A result's cells, one for each column of `result_head`, the same on both tables:
     its date (`date_cell`), with a tooltip for a recent result; its significance
@@ -1062,9 +1083,12 @@ def result_cells(
         '<span class="site-standing">'
         f"{status_marks(result, replacement_dates=replacement_dates)}</span>"
     )
+    dated = arrival_date.isoformat() if arrival_date else result.dated[1]
+    date_markup = date_cell(
+        result, recent_label=new_result_label(result, overview), arrival_date=arrival_date
+    )
     return (
-        f'<td class="site-col-date" data-value="{_esc(result.dated[1])}">'
-        f"{date_cell(result, recent_label=new_result_label(result, overview))}</td>"
+        f'<td class="site-col-date" data-value="{_esc(dated)}">{date_markup}</td>'
         f"{significance_cell(result)}"
         f'<td class="site-col-result">{result_text(result)}</td>'
         f'<td class="{case_cell_class(result)}" data-value="{result.first_n}">'
@@ -1086,6 +1110,7 @@ def result_table_row(
     here: bool,
     shown: bool,
     replacement_dates: Mapping[str, str] | None = None,
+    arrival_date: date | None = None,
 ) -> tuple[str, str]:
     """One result's row in a table of results, and the popover the row opens: the one
     row both tables write, the same cells and the same popover. On the results page
@@ -1098,10 +1123,17 @@ def result_table_row(
     starred = bool(new_result_label(result, overview))
     detail = result_row(result, trigger=_esc(result.id), starred=starred)
     key = "id" if here else "data-result"
+    cells = result_cells(
+        result,
+        overview,
+        detail,
+        replacement_dates=replacement_dates,
+        arrival_date=arrival_date,
+    )
     row = (
         f'<tr {key}="{_esc(result.id.lower())}" {result_facets(result)} '
         f"{detail.attributes}{'' if shown else ' hidden'}>"
-        f"{result_cells(result, overview, detail, replacement_dates=replacement_dates)}</tr>"
+        f"{cells}</tr>"
     )
     return row, detail.popover
 
@@ -1596,33 +1628,30 @@ def added_day_link(day: date, count: int) -> str:
 
 
 def recent_added(overview: Overview, *, days: int = ADDED_DAYS) -> str:
-    """The results page's top section: every result that reached the site over the
-    `days` to the newest arrival (`added_days`), one disclosure a day, newest first, its
-    summary the date and its count, its body every entry (`added_entry`) and a link that
-    opens the table on that day alone (`?added=`). The `ADDED_OPEN` newest days start open
-    and the others closed."""
+    """Every arrival over `days` to the newest arrival, grouped newest first by day.
+    Each disclosure keeps its date, count and complete entries (`added_entry`). The
+    `ADDED_OPEN` newest days start open and the others closed."""
     blocks = []
     for index, added in enumerate(added_days(overview.results, added_since(overview, days))):
         state = " open" if index < ADDED_OPEN else ""
-        count = len(added.results)
         day = added.day.isoformat()
         blocks.append(
             f'<details data-day="{day}"{state}>'
-            f"{disclosure_summary(day_label(added.day), count)}"
+            f"{disclosure_summary(day_label(added.day), len(added.results))}"
             f"<ul>{''.join(added_entry(result) for result in added.results)}</ul>"
-            f"{added_day_link(added.day, count)}</details>"
+            "</details>"
         )
     return f'<div class="site-rollup site-added">{"".join(blocks)}</div>'
 
 
-# ---------- Recently Added: the home page's view of the same seven days ----------
+# ---------- Recently Added: the home page's last seven days of arrivals ----------
 #
 # The owner, 22 October 2026: "It should be clear if you come to the site and see all
 # the things that have recently merged now." The home page's Recently Added lists what
 # reached `main`, and with it the site, over the newest arrival day and the seven before
 # it (`arrival_reference`, `recent_days`), one disclosure a day, newest first: every
-# result at any significance, by its `landed`, as the results page lists it
-# (`added_entry`), linked to its row there; each count whose house best packing changed,
+# result at any significance, by its `landed` (`added_entry`), linked to its row in All
+# Results; each count whose house best packing changed,
 # by the day `main` first held its current house (`house_moves`); and each source's dated
 # beyond-horizon rows, by the day `main` first held them (`beyond_rows`). All three are
 # merge days stamped into the record (`devtools.stamp_landed`, `frontier/landings.yaml`;
@@ -1883,11 +1912,10 @@ def beyond_entry(found: BeyondRows, sources: Mapping[str, Mapping[str, Any]]) ->
 def recently_added(overview: Overview, *, days: int = ADDED_DAYS) -> str:
     """The home page's Recently Added (`recent_days`): one disclosure a day, newest
     first, the `RECENT_OPEN` newest open, its summary the date and its tally
-    (`recent_tally`), its body the day's results as the results page lists them
-    (`added_entry`, each linked to its row there), then its house moves (`house_entry`)
-    and its sources' rows (`beyond_entry`), and, for a day with results, the link that
-    opens the table on that day (`added_day_link`). It reuses the results page's
-    classes, so it reads as that section does."""
+    (`recent_tally`), its body the day's results (`added_entry`, each linked to its row
+    in All Results), then its house moves (`house_entry`) and its sources' rows
+    (`beyond_entry`), and, for a day with results, the link that opens All Results on
+    that day (`added_day_link`). It draws with `results.css`'s rollup classes."""
     from devtools.render_results import load_sources  # noqa: PLC0415
 
     sources = load_sources()
@@ -2224,6 +2252,65 @@ def recent_table(overview: Overview, defaults: FilterDefaults = RECENT_DEFAULTS)
     return table_of_results(overview, defaults, here=False)
 
 
+RECENT_VISIBLE_DAYS = 7
+
+
+def recent_results_table(overview: Overview) -> str:
+    """Every result once, newest arrival first, with seven calendar dates expanded.
+
+    Arrival means `landed`, falling back to `registered`; the reference is the newest
+    arrival, never the wall clock. The cutoff includes that date and six before it.
+    Older rows share this table and remain visible without JavaScript. The shared
+    Recent Results controller collapses their tbody when enhancement is available.
+    """
+    results = sorted(
+        {result.id: result for result in overview.results}.values(),
+        key=lambda result: (-landed_day(result).toordinal(), result.id),
+    )
+    cutoff = added_reference(overview) - timedelta(days=RECENT_VISIBLE_DAYS - 1)
+    current: list[str] = []
+    older: list[str] = []
+    popovers: list[str] = []
+    replacement_dates = {result.id: first_day(result.dated[1]) for result in overview.results}
+    for result in results:
+        arrival = landed_day(result)
+        row, popover = result_table_row(
+            result,
+            overview,
+            here=False,
+            shown=True,
+            replacement_dates=replacement_dates,
+            arrival_date=arrival,
+        )
+        (current if arrival >= cutoff else older).append(row)
+        popovers.append(popover)
+    heading = result_head()
+    heading = re.sub(r' data-sort="(?:text|num)"', "", heading)
+    heading = re.sub(
+        r'<th title="[^"]*">Date</th>',
+        '<th title="The day this result reached the site">Added</th>',
+        heading,
+        count=1,
+    )
+    toggle = (
+        '<tr id="earlier-results-by-week-published" data-recent-toggle-row>'
+        '<td colspan="8"><button type="button" class="site-action" data-recent-toggle '
+        'data-label-more="Earlier results" data-label-less="Hide earlier results" '
+        'aria-expanded="false" aria-controls="recent-results-older">'
+        "<span data-recent-label>Earlier results</span>"
+        f"{arrow_icon('double-down')}</button></td></tr>"
+    )
+    return (
+        '<div class="site-wide" id="recent-arrivals"><div class="site-table-wrap">'
+        '<table id="added-in-the-last-seven-days" '
+        'class="kpress-table site-table site-results" data-recent-results '
+        f'data-recent-cutoff="{cutoff.isoformat()}">'
+        f"{heading}<tbody>{''.join(current)}{toggle}</tbody>"
+        '<tbody id="recent-results-older" data-recent-older>'
+        f"{''.join(older)}</tbody></table></div>{''.join(popovers)}</div>"
+    )
+
+
 def status_counts(overview: Overview) -> str:
     """One Markdown sentence on the results this project has not confirmed, counted from
     the register, for the results page's prose where the statuses are defined: how many
@@ -2301,11 +2388,12 @@ PROFILES_DIRECTORY = "profiles/index.html"
 
 
 def documentation_block() -> str:
-    """The shared repository introduction and reader-document cards on Home and About."""
+    """The repository introduction and complete reader-document cards on About."""
     lead = (
-        "<p>The code, the certificates, the literature archive and the documents that "
-        "record all of this live in the Squares Project\u2019s "
-        f'<a href="{repo_links.REPO_URL}">repository</a>.</p>'
+        '<p class="site-navigation-copy">Everything for this site, the full archive of '
+        "all historic and current research, and an extensive set of tools and research "
+        f'workflows are in <a href="{repo_links.REPO_URL}">'
+        "the Squares Project repository</a>.</p>"
     )
     return f"{lead}\n\n{document_cards()}"
 
@@ -2453,6 +2541,12 @@ def paper_cards(*, papers: Sequence[Paper] | None = None) -> str:
     )
 
 
+def homepage_paper_cards() -> str:
+    """Three starting points from the learning collections."""
+    starting_points = (*PAPERS[-2:], PAPERS[0])
+    return paper_cards(papers=starting_points)
+
+
 #: The site's reading and working pages, as the overview's cards under The Squares
 #: Project show them: the page, a label, its title, and one line on what a reader finds
 #: there. Both are register prose, so a bound in either is written in ASCII
@@ -2466,7 +2560,7 @@ def paper_cards(*, papers: Sequence[Paper] | None = None) -> str:
 #: The Results page is reached from Recent Results, whose pointer is its own.
 PAGES: tuple[tuple[str, str, str, str], ...] = (
     (
-        "atlas.html#the-frontier-survey",
+        "frontier.html",
         "Frontier Survey",
         "Every Case from n = 1 to 324",
         "Reported and verified bounds side by side, with their sources.",
@@ -2990,7 +3084,7 @@ def _profile_resource_tallies() -> dict[str, ProjectTally]:
 def resource_card(
     resource: Resource, tally: ProjectTally, *, current_profile: str | None = None
 ) -> str:
-    """One shared external-resource card on Home and the credited person's profile."""
+    """One shared external-resource card in the directory and a credited person's profile."""
     url = resource.url
     return link_card(
         url,
@@ -3015,7 +3109,7 @@ def resource_cards(
     overview: Overview | None = None,
     current_profile: str | None = None,
 ) -> str:
-    """The same card grid and resource projection across homepage and profile contexts."""
+    """The same card grid and resource projection in the directory and profiles."""
     tallies = (
         _profile_resource_tallies() if overview is None else dict(listed_projects(overview))
     )
@@ -3125,10 +3219,10 @@ def homepage_video(film_url: str) -> str:
 
 
 def pdf_note() -> str:
-    """Retained SVG/source links, for the Papers page's PDFs."""
+    """Retained SVG/source links for the packing posters."""
     atlas = REPO / "packing" / "atlas" / "known-best"
     return (
-        '<p class="site-wide site-atlas-note">Each poster is also an SVG '
+        '<p class="site-atlas-note site-navigation-copy">Each poster is also an SVG '
         f'(<a href="{branch_file(atlas / "known-best-1-100.svg")}">1 to 100</a>, '
         f'<a href="{branch_file(atlas / "known-best-1-324.svg")}">1 to 324</a>), '
         f'and the <a href="{branch_file(atlas / "README.md")}">atlas README</a> '
@@ -3769,11 +3863,10 @@ def atlas_grid(*, homepage: bool = False) -> str:
     grid side; Global uses the largest currently shown actual enclosing side.
     Slots, number type and the grid separator stay fixed.
 
-    The first `ATLAS_FIRST` cells arrive as static markup with reserved, lazy-loaded
-    SVG images; the rest are already present in a hidden container. The script shows
-    them only when the reader presses the button under the grid, "Show More" with the
-    double chevron down. The button then reads "Show Less" with the chevron up and
-    collapses the grid again; its name for assistive
+    Every case arrives as static markup with reserved, lazy-loaded SVG images.
+    The dedicated Atlas shows them all; the homepage starts with `ATLAS_FIRST`.
+    "Show More" expands the homepage preview and "Show Less" collapses either view;
+    the double chevron follows the action. Its name for assistive
     technology says what each does and how many cases that is (`data-name-more`,
     `data-name-less`), it controls the box of tiles (`ATLAS_PANEL`), and it is the site's
     one action under a table or grid (`.site-action`, with "See all results"). Ordinary
@@ -3798,6 +3891,8 @@ def atlas_grid(*, homepage: bool = False) -> str:
     toggle_hook = " data-homepage-atlas-toggle" if homepage else ""
     label_hook = " data-homepage-atlas-label" if homepage else ""
     hidden = " hidden" if homepage else ""
+    rest_hidden = " hidden" if homepage else ""
+    expanded = "false" if homepage else "true"
     rows, positions = _atlas_rows(ATLAS_FIRST)
     first_rows = math.isqrt(ATLAS_FIRST)
     more, less = "Show More", "Show Less"
@@ -3814,7 +3909,7 @@ def atlas_grid(*, homepage: bool = False) -> str:
         f"{atlas_legend()}</div>"
         f'<div class="site-atlas-cells" id="{panel}" style="{positions}">'
         f"{''.join(rows[:first_rows])}"
-        '<div class="site-atlas-rest" data-atlas-rest hidden>'
+        f'<div class="site-atlas-rest" data-atlas-rest{rest_hidden}>'
         f"{''.join(rows[first_rows:])}</div></div>"
         + (
             '<p class="site-homepage-atlas-status" data-homepage-atlas-status '
@@ -3826,7 +3921,7 @@ def atlas_grid(*, homepage: bool = False) -> str:
             "--site-atlas-global-side:var(--site-atlas-last-side)}"
             "[data-atlas-grid] .site-atlas-toggle-row{display:none}</style>"
             "<p>"
-            '<a href="atlas.html#the-frontier-survey">Every packing and bound in the frontier '
+            '<a href="frontier.html">Every packing and bound in the frontier '
             "survey</a></p></noscript>"
         )
         +
@@ -3837,11 +3932,12 @@ def atlas_grid(*, homepage: bool = False) -> str:
         # page card. The expander's row ends the block.
         '<p class="site-action-row site-atlas-toggle-row">'
         '<button type="button" class="site-action site-atlas-toggle" '
-        f'data-atlas-toggle{toggle_hook} aria-expanded="false" aria-controls="{panel}" '
-        f'aria-label="{name_more}" data-label-more="{more}" data-label-less="{less}" '
+        f'data-atlas-toggle{toggle_hook} aria-expanded="{expanded}" aria-controls="{panel}" '
+        f'aria-label="{name_more if homepage else name_less}" '
+        f'data-label-more="{more}" data-label-less="{less}" '
         f'data-name-more="{name_more}" data-name-less="{name_less}"{hidden}>'
-        f"<span data-atlas-label{label_hook}>{more}</span>"
-        f"{arrow_icon('double-down')}</button></p>"
+        f"<span data-atlas-label{label_hook}>{more if homepage else less}</span>"
+        f"{arrow_icon('double-down' if homepage else 'double-up')}</button></p>"
         f"</div>{case_popover()}"
     )
 

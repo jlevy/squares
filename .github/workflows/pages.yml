@@ -128,8 +128,15 @@ name: Certificate page
       - packing/devtools/templates/news-article.md
       - packing/devtools/templates/report-results.md
       - packing/devtools/templates/all-results-article.md
+      - packing/devtools/templates/verification-article.md
+      - packing/devtools/templates/recent-results-article.md
       - packing/devtools/templates/visualize-article.md
       - packing/devtools/templates/papers-article.md
+      - packing/devtools/templates/resources-article.md
+      - packing/devtools/templates/tutorials-article.md
+      - packing/devtools/templates/posters-article.md
+      - packing/devtools/templates/documentation-article.md
+      - packing/devtools/templates/report-article.md
       - packing/devtools/templates/site-forwarder.html
       - packing/devtools/render_overview.py
       - packing/devtools/render_contributors.py
@@ -137,6 +144,7 @@ name: Certificate page
       - packing/devtools/site_icons.py
       - packing/devtools/site_github_links.py
       - packing/devtools/site_popovers.py
+      - packing/devtools/site_navigation.py
       - packing/devtools/site_resources.py
       - packing/devtools/site_tallies.py
       - packing/devtools/profile_records.py

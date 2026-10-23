@@ -1,17 +1,10 @@
 <div class="site-hero">
 
-# Explanations
+<h1 id="papers">Papers</h1>
 
 </div>
 
-## Tutorial
-
-Start with the basic ideas, definitions and examples in the first-principles tutorial.
-Continue with the advanced tutorial for the methods behind the search and proofs.
-
-{{TUTORIAL_CARDS}}
-
-## Papers
+<a id="explanations"></a>
 
 <div class="site-profile-prose">
 
@@ -33,17 +26,11 @@ published record packings.
 
 {{PAPER_CARDS}}
 
-## PDFs
-
-{{PDF_CARDS}}
-
-{{PDF_NOTE}}
-
-## Visuals
-
-{{VISUAL_TABS}}
-
-{{FILM}}
+<noscript><p>Other learning collections:
+<a id="tutorial" href="tutorials.html#tutorial">Tutorials</a>,
+<a id="pdfs" href="posters.html#pdfs">Posters</a>,
+<a id="visuals" href="visualize.html">Videos</a>, and
+<a id="resources" href="resources.html">Resources</a>.</p></noscript>
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -159,8 +159,10 @@ void test("a case filter finds its number in a row's list of cases and ranges", 
   assert.ok(!table.rowMatches({}, wanted("20")));
 });
 
-/** A value each kind of filter refuses the row below with. */
+/** A value each kind of filter refuses the row below with.
+ * @type {Record<SiteTableFilter["kind"], {value: string}>} */
 const FAILING = {
+  "one-of": { value: "1" },
   equals: { value: "nothing-of-the-kind" },
   flag: { value: "true" },
   min: { value: "6" },
@@ -379,4 +381,13 @@ void test("retired home link targets reject malformed and unsafe alias metadata"
     assert.equal(target.pathname, "/results.html", retired);
     assert.equal(target.hash, "", retired);
   }
+});
+
+void test("noncontiguous significance selections match exactly their occupied levels", () => {
+  /** @type {SiteTableFilter[]} */
+  const selected = [{ key: "s", kind: "one-of", value: "1,3,5" }];
+  for (const level of ["1", "2", "3", "4", "5"]) {
+    assert.equal(table.rowMatches({ s: level }, selected), ["1", "3", "5"].includes(level));
+  }
+  assert.equal(table.rowMatches({ s: "3" }, [{ key: "s", kind: "one-of", value: "" }]), false);
 });

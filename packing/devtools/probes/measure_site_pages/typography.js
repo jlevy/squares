@@ -26,6 +26,8 @@
       transform: style.textTransform,
       line_height: style.lineHeight,
       margin: `${style.marginBlockStart} ${style.marginBlockEnd}`,
+      left: el.getBoundingClientRect().left,
+      right: el.getBoundingClientRect().right,
       box_width: `${Math.round(el.getBoundingClientRect().width)}px`,
       text_width: `${Math.round(
         el.getBoundingClientRect().width -
@@ -46,7 +48,29 @@
     }
     return found;
   };
+  const breadcrumb = document.querySelector(".site-breadcrumbs");
+  const trail = breadcrumb?.getBoundingClientRect();
   return {
+    breadcrumb: trail ? { left: trail.left, right: trail.right, width: trail.width } : null,
+    widths: [
+      ...document.querySelectorAll(
+        ".kpress-page-main, .kpress-doc, .kpress-doc-layout, .kpress-long-text, .site-page, .site-contributor, .site-contributor-directory, .cert-page",
+      ),
+    ]
+      .filter((el) => el.getClientRects().length > 0)
+      .map((el) => {
+        const style = getComputedStyle(el);
+        const rect = el.getBoundingClientRect();
+        return {
+          element: el.className,
+          left: rect.left,
+          width: rect.width,
+          padding: `${style.paddingInlineStart} ${style.paddingInlineEnd}`,
+          measure: style.getPropertyValue("--kpress-measure"),
+          base: style.getPropertyValue("--kpress-font-size-base"),
+          inset: style.getPropertyValue("--kpress-column-inset"),
+        };
+      }),
     column: column.className,
     column_width: `${Math.round(column.getBoundingClientRect().width)}px`,
     roles: {

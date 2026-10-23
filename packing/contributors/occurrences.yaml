@@ -5789,9 +5789,12 @@ occurrences:
   end: 27
   label: hmbelvedere
   role: prerequisite
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Reviewed on 2026-10-22: the catalogue label accompanies the UnitSquare release, whose
+    retained results.html author metadata names UnitSquare Project. Publish as non-person
+    project credit without inferring a human identity or person profile. See the dated credit-link
+    audit and think-2ccx.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ellsworth n69 2026-09-24]'
@@ -13832,11 +13835,14 @@ occurrences:
   end: 22
   label: Levy
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Source credits the Squares Project collectively or its catalogue/checker,
-    without a personal Joshua Levy credit at this occurrence. Keep unresolved pending
-    scoped attribution review; do not substitute person identity for project credit.
+  disposition: resolved
+  evidence:
+  - owner-credit-links-2026-10-22
+  - bibliography
+  note: Owner-confirmed curated personal label, reviewed on 2026-10-22 under think-os86. Upstream
+    collective wording is preserved; this join claims neither a personal upstream byline nor
+    sole authorship or a different source role. See the dated credit-link audit.
+  contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fitzharding n19 Lean 2026]'
@@ -13943,11 +13949,14 @@ occurrences:
   end: 49
   label: Levy
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Source credits the Squares Project collectively or its catalogue/checker,
-    without a personal Joshua Levy credit at this occurrence. Keep unresolved pending
-    scoped attribution review; do not substitute person identity for project credit.
+  disposition: resolved
+  evidence:
+  - owner-credit-links-2026-10-22
+  - bibliography
+  note: Owner-confirmed curated personal label, reviewed on 2026-10-22 under think-os86. Upstream
+    collective wording is preserved; this join claims neither a personal upstream byline nor
+    sole authorship or a different source role. See the dated credit-link audit.
+  contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter upper bounds 2026-10-17]'
@@ -13989,11 +13998,14 @@ occurrences:
   end: 20
   label: Levy
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Source credits the Squares Project collectively or its catalogue/checker,
-    without a personal Joshua Levy credit at this occurrence. Keep unresolved pending
-    scoped attribution review; do not substitute person identity for project credit.
+  disposition: resolved
+  evidence:
+  - owner-credit-links-2026-10-22
+  - bibliography
+  note: Owner-confirmed curated personal label, reviewed on 2026-10-22 under think-os86. Upstream
+    collective wording is preserved; this join claims neither a personal upstream byline nor
+    sole authorship or a different source role. See the dated credit-link audit.
+  contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n155 explorer 2026-10-17]'
@@ -14375,13 +14387,18 @@ occurrences:
     record_key: '[Daniel n183 subgrid 2026-10-19]'
     field: /credit
   expected_text: Daniel after Couzo; register seed data from Levy
-  start: 20
+  start: 44
   end: 48
-  label: register seed data from Levy
+  label: Levy
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - daniel-n183-credit
+  - bibliography
+  note: Reviewed exact name only; the register-seed-data clause stays plain text. Retained
+    source/CREDITS.md identifies Joshua Levy (jlevy); the curated bibliography specifies input
+    data, not an additional mathematical donor or unknown crossover parent.
+  contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n236 2026-10-16]'
@@ -17102,9 +17119,12 @@ occurrences:
   end: 11
   label: hmbelvedere
   role: construction-improver
-  disposition: unresolved
+  disposition: non-person
   evidence: []
-  note: Identity review pending.
+  note: 'Reviewed on 2026-10-22: the catalogue label accompanies the UnitSquare release, whose
+    retained results.html author metadata names UnitSquare Project. Publish as non-person
+    project credit without inferring a human identity or person profile. See the dated credit-link
+    audit and think-2ccx.'
 - origin:
     path: packing/frontier/n-069.md
     record_key: '69'
@@ -25349,10 +25369,14 @@ occurrences:
   end: 54
   label: Levy
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: The bibliography marks this source credits-project; comparison with the project
-    register does not establish a personal contribution by Joshua Levy.
+  disposition: resolved
+  evidence:
+  - owner-credit-links-2026-10-22
+  - bibliography
+  note: Owner-confirmed curated personal label, reviewed on 2026-10-22 under think-os86. Upstream
+    collective wording is preserved; this join claims neither a personal upstream byline nor
+    sole authorship or a different source role. See the dated credit-link audit.
+  contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk issue 719 2026-10-22]'
