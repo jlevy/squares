@@ -8697,6 +8697,7 @@ results:
           replay and axiom receipt E-chelokot-square-minus-two-lean now retains. Mapped on
           2026-10-23 (think-mt6e); it was an artifact of this entry from registration.
         verdict: accepted
+        checked: [statement-fidelity, definitions]
         covers: [T-086]
     next_rung: >-
       Rung 4 needs two adversarial AI reviews by distinct reviewers and a human oversight
