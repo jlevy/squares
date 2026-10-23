@@ -3,21 +3,21 @@ type: is
 id: is-01m5jzwxrmhyeh1tcpxtg8cvjh
 title: Match every menu destination heading and title to its navigation label
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 6
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
-delegate: navigation-landings
+delegate: sol-tracker-audit
 labels: []
 dependencies: []
 parent_id: is-01m5jnsqdwj3t8m7hkbx6mr1m2
 hold: null
 hold_until: null
 created_at: 2026-10-22T23:42:17.875Z
-updated_at: 2026-10-23T00:07:44.466Z
+updated_at: 2026-10-23T01:36:52.427Z
 started_at: 2026-10-22T23:43:19.295Z
-closed_at: 2026-10-22T23:51:56.602Z
-close_reason: "Recent Results now contains compact date/floor metadata, complete chronological lists and one archive action, with redundant intro/TOC/filter navigation removed. Every actual menu destination derives rendered heading/browser/preview/current-breadcrumb labels from navigation_title, preserving old IDs and source-document mathematical headings. Project Documentation, Contributor Profiles, Overview, Verification and Ratings and Workbench aligned; Report a Result placed last under Results via shared model. Shared collection-heading roles applied; plan/current tree/route dispositions include latest 35em/card/sans/footer/chevron requirements and bead references. Evidence: 28 rollup tests passed; combined focused checks32 passed including every actual menu producer and profile directory; final obsolete Atlas wording check passes directly on preview; Workbench shell head/H1 test1passed; Ruff/diff checks pass. No child commits or pushes."
+closed_at: 2026-10-23T01:36:52.427Z
+close_reason: Completed narrow implementation and verified integrated preview receipts recorded in notes; latest follow-up requirements and global CI remain separately tracked.
 resolution: null
 duplicate_of: null
 ---
@@ -26,3 +26,5 @@ Current canonical naming requirements: actual menu destinations share their menu
 ## Notes
 
 Earlier close_reason receipts describe superseded user instructions (including homepage H1 Overview and Verification and Ratings). They are historical evidence, not the current contract. Latest homepage exception actual-render regression passed 1 test in 85.59s; shared title/profile integration and Workbench head/H1 checks passed earlier. Root and components own final integrated preview/interaction verification.
+
+Completed shared canonical-title behavior and explicit homepage exception. Actual homepage/title regression passed1case85.59s; canonical title/contributor2cases and profile breadcrumb3cases passed. Root all-web/Workbench rebuild and7452site-check recheck passed. Latest user All Results naming and Frontier Survey labels are separate active follow-up under think-6ts0/current worker; prior labels are historical, not pending work in this bead.

@@ -3,9 +3,9 @@ type: is
 id: is-01m5gkk7zv20d0dtpje8t54xqx
 title: "Stage 4: review and confirm Couzo's in-corpus #670, #672, #675 entries (T-226 to T-228)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 5
+version: 7
 delegate: coord-intake-1021b
 labels:
   - validation
@@ -15,8 +15,12 @@ parent_id: is-01m5frzavxzvcqht1tf2edbfxp
 hold: null
 hold_until: null
 created_at: 2026-10-22T01:28:48.887Z
-updated_at: 2026-10-23T00:24:32.416Z
+updated_at: 2026-10-23T00:47:23.833Z
 started_at: 2026-10-22T09:06:36.864Z
+closed_at: 2026-10-23T00:47:23.832Z
+close_reason: "stage 4 merged in #725, replies posted"
+resolution: null
+duplicate_of: null
 ---
 Stage 4 for Francisco Couzo's in-corpus rows of issues 670, 672 and 675, registered at V0/C0 in the think-ql4v stage 4 pull request (branch claude/stoic-thompson-ku09fw) as T-226 (#670 at 204), T-227 (#672 at 227 and 229) and T-228 (#675 at 204); the ids are the branch's and may change in merge order. The 21 October review of T-225 measured #672's 227 certificate on its own checker for information only and does not cover these entries, so they stay at V0/C0 until a review covers them.
 
@@ -37,3 +41,5 @@ blocked_on: think-xyhn
 2026-10-22 c-lane-stage4-1022: stage 4 applied in draft PR #725 (branch claude/intake-2026-10-22-stage4, head 7a7ff3cc1, stacked on #722). Review mapped as docs/project/reviews/review-2026-10-22-couzo-670-672-675.md; programs and outputs retained at packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/ (data/ and fetched/ left out). T-226, T-227, T-228 at V3/C3; significance T-226 S3, T-227 S3, T-228 S2 (scored 2026-10-22). Evidence: E-couzo-67N-exact-feasibility (shared-components, per RF-1) and E-couzo-67N-review-exact-feasibility (independent-implementation, clean room) for N in 0, 2, 5; verifiers V-couzo-670-672-675-review-check and -controls. RF-2..RF-8 applied (T-223, T-225, T-198 wording; packet READMEs; adopt_houses comment). RF-1 for earlier Couzo imports' atoms deferred (records audit proposed in the PR). Replies drafted in coordinator scratchpad replies/stage4-1022/ (670, 672, 675), not posted. Release held until #722 merges.
 
 2026-10-23 00:25Z coord-intake-1021b: #725 merged as e929137a8 (head a623e7585, packing-required and pages-required green; review A dispositions plus coordinator delta check https://github.com/jlevy/squares/pull/725#issuecomment-6354340587). Stage 7 replies on #670/#672/#675/#719 follow the verified deploy.
+
+2026-10-23 00:50Z coord-intake-1021b: deploy of e929137a8 verified (Certificate page run 39877818964; t-226..t-229 at V3/C3 live). Stage 7 replies posted: #670 6354654599, #672 6354654824, #675 6354655082, #719 6354655328 (v2 answering the 20:15Z comment); recorded in #739. Done.

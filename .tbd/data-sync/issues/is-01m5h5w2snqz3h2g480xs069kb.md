@@ -3,9 +3,9 @@ type: is
 id: is-01m5h5w2snqz3h2g480xs069kb
 title: "Stage 4 for #719's in-corpus entry at 105 and 204: replay, independent review, adoption and regularization"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 8
+version: 10
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m5h3rxsgydmfjazs3vmw05wp
 hold: null
 hold_until: null
 created_at: 2026-10-22T06:48:12.852Z
-updated_at: 2026-10-23T00:24:34.825Z
+updated_at: 2026-10-23T00:47:27.648Z
 started_at: 2026-10-22T06:48:15.575Z
+closed_at: 2026-10-23T00:47:27.648Z
+close_reason: "stage 4 merged in #725, replies posted"
+resolution: null
+duplicate_of: null
 ---
 From the #719 triage (scratchpad triage-719/in-corpus.md): 105 is 5.18e-12 below T-174 (same arrangement re-solved); 204 is 1.006e-8 below T-225 (one to one, 6 squares moved > 0.1, one turned 25.6 deg). Replay ~1 CPU-min, one strong-max review, adoption and regularization 10-50 CPU-min; 105's grid-slack view and SETTLED[204] lapse; think-13e9 then superseded. After #719's records PR.
 blocked_on: think-xyhn
@@ -32,3 +36,5 @@ blocked_on: think-xyhn
 2026-10-22 20:45Z coord-intake-1021b: #725 (https://github.com/jlevy/squares/pull/725, retargeted to main after #722 merged): review A approve after A1-A4 (fixed, dispositions posted); main cacdafc1f merged (a666710ef), #722's stage 7 reply records added (3d43e15da). Release (DATA_REVISION re-pin + papers, NO site cut) held for #729 (think-yjkq); merges on or after 2026-10-23T00:00Z (adoption pass dated 23 Oct).
 
 2026-10-23 00:25Z coord-intake-1021b: #725 merged as e929137a8 (head a623e7585, packing-required and pages-required green; review A dispositions plus coordinator delta check https://github.com/jlevy/squares/pull/725#issuecomment-6354340587). Stage 7 replies on #670/#672/#675/#719 follow the verified deploy.
+
+2026-10-23 00:50Z coord-intake-1021b: deploy of e929137a8 verified (Certificate page run 39877818964; t-226..t-229 at V3/C3 live). Stage 7 replies posted: #670 6354654599, #672 6354654824, #675 6354655082, #719 6354655328 (v2 answering the 20:15Z comment); recorded in #739. Done.

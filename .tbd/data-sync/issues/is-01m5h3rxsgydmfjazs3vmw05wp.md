@@ -5,7 +5,7 @@ title: "Import Mishapolk: 122 upper bounds at 105–1568, incl. 105 and 204 in t
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T06:11:32.271Z
-updated_at: 2026-10-23T00:36:16.965Z
+updated_at: 2026-10-23T00:57:35.391Z
 started_at: 2026-10-22T06:11:33.610Z
 ---
 Issue #719 (https://github.com/jlevy/squares/issues/719), opened 2026-10-22T05:30:47Z by Mishapolk (Mikhail Polk; repository Mishapolk/square-packing-records): 122 claimed strict improvements at N in [105, 1568], two in the case corpus (105: 5.18e-12 below the catalogue witness; 204: 1.006e-8 below T-225, the house since #718), 112 beyond the horizon at or below 1024, 8 above 1024 (1061-1568; owner decision D1, think-f2io). Many margins are ~1e-12 (likely re-solves of existing arrangements); several are 1e-4 to 2e-3 (447, 553, 601, 652, 701). Stage 0 owner; stage 1 triage (read-only, priced) first.
@@ -225,3 +225,5 @@ Mishapolk's comment of 2026-10-22T20:15:57Z (issuecomment-6350348588) answers th
 
 The stage 4 follow-up is redrafted for those answers: scratchpad replies/stage4-1022/719-reply-v2.md (not posted). It can be posted once #725's Pages deployment is checked; nothing blocks it. The close waits on think-h01y (the lower 204 side) and think-9vr8 (the rows above 1024, on think-f2io).
 blocked_on: think-h01y, think-9vr8
+
+2026-10-23 c-lane-sweep-1023a (later). The stage 4 follow-up (719-reply-v2) was posted by the coordinator at 2026-10-23T00:47:08Z (issuecomment-6354655328) after #725's Pages deployment (Certificate page run 39877818964); #739 records it (b211998a8: follow-up, T-229 for n105 and n204 at V3/C3 confirmed, n204-lower and n447 acknowledged), and check_requests now owes no reply on #719. #739's head is 58c1db9af. The close still waits on think-h01y and think-9vr8.
