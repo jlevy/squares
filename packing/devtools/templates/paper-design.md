@@ -2852,13 +2852,19 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   under Results. Result article trails link All Results; cases link Visual Atlas.
   `site_navigation.py` supplies the same ancestry for visible and structured trails.
 
-- **Document cards and moved pages.** The overview’s documentation section has one card
-  for each repository document the site renders, in the order of
-  `render_overview.DOCUMENT_PAGES`: `README.md` and `epistemics.md` first, then
-  `SYNOPSIS.md`, `conventions.md` and `development.md`. `RESULTS.md`, `STATUS.md` and
-  `defects.md` were cards and pages until 2026-10-01 (`think-bk2e`); the first two are
-  generated views of the record the results table and the frontier atlas show, and the
-  defect log is internal to the repository.
+- **Document cards and moved pages.** Repository-document pages also use the papers’
+  shared upper-right source-action row.
+  GitHub links the actual repository source and MD its raw Markdown; neither invents a
+  PDF edition. `SiteDocument.source` supplies the path for every hosted document, and
+  Synopsis chapters share `SYNOPSIS.md`. The chip markup and styles have one
+  implementation across papers and documents.
+  Source controls before a document’s first heading preserve its normal page-top
+  spacing. The overview’s documentation section has one card for each repository document
+  the site renders, in the order of `render_overview.DOCUMENT_PAGES`: `README.md` and
+  `epistemics.md` first, then `SYNOPSIS.md`, `conventions.md` and `development.md`.
+  `RESULTS.md`, `STATUS.md` and `defects.md` were cards and pages until 2026-10-01
+  (`think-bk2e`); the first two are generated views of the record the results table and
+  the frontier atlas show, and the defect log is internal to the repository.
   A link to either register, in a reader document or a case record, leads to the page
   that shows it, at the result’s row when the link’s text is a result’s id, and a link
   whose text names the file opens the file on `main` (`site_documents.RECORD_PAGES`,

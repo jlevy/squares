@@ -14,7 +14,11 @@ standalone-shell slice is complete; integrated validation, reader checks, and
 publication remain in progress.
 
 **Tracking:** `think-7kbb` (coordination); `think-je3b` (landing pages and Resources);
-`think-izo6` (substantive collection pages); `think-39yu` (semantic test migration)
+`think-izo6` (substantive collection pages); `think-39yu` (semantic test migration);
+`think-j62t` (All Results actions); `think-5enz` (homepage ordering and Resources);
+`think-k2y7` (document source actions).
+Heading audits `think-0pff` and `think-syrd` are queued after stabilization and
+publication.
 
 **Workflow:** `tbd shortcut implement-beads`, following the reviewed navigation plan
 
@@ -311,6 +315,10 @@ but its H1 remains **The Square Packing Problem**. Verification, Contributor Pro
 Project Documentation, and Workbench use their exact menu labels.
 Preserve scientific source-document titles and legacy anchors; the rendered reader page
 supplies its canonical navigation heading.
+Pages that host repository documents share the papers’ upper-right source actions:
+GitHub opens the actual original file, and MD opens its raw Markdown.
+Derive the links from document source metadata, including the shared source behind
+Synopsis chapters; do not invent Markdown or PDF editions for generated collections.
 The next homepage section is **Visual Atlas**; the result-preview section is titled
 **Results**, retaining `#recent-results` and one **View All Results** action.
 Preserve its existing `#the-atlas-of-square-packings` and `#the-atlas` anchors without
@@ -329,8 +337,10 @@ Keep every registered result once, with claims, cases, credits, ratings, status,
 canonical result-record links.
 Preserve existing filters and result-row addresses.
 The homepage retains its bounded recent preview and one **View All Results** action.
-The complete Learn section follows Results immediately; all other homepage sections
-retain their relative order.
+The complete Learn section follows Results immediately, and About the Squares Project is
+the final section. The Resources heading matches its canonical destination while
+retaining the old resource fragments.
+Other homepage sections retain their relative order.
 `recent-results.html` becomes a compatibility forwarder to All Results; there is no
 second complete result-table page.
 Old recent section fragments map to `results.html#all-results`, while `#t-NNN` rows and

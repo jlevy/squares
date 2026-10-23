@@ -954,9 +954,7 @@ def test_each_record_steps_to_its_neighbours_with_the_sites_arrows(
         assert "→" not in steps
         assert 'data-math-face="serif"' in steps
         for neighbor, direction, arrow in ((n - 1, "prev", left), (n + 1, "next", right)):
-            match = re.search(
-                rf'<a\b[^>]*rel="{direction}"[^>]*>(.*?)</a>', steps, re.DOTALL
-            )
+            match = re.search(rf'<a\b[^>]*rel="{direction}"[^>]*>(.*?)</a>', steps, re.DOTALL)
             expected = numbers[0] <= neighbor <= numbers[-1]
             assert (match is not None) == expected
             if match is not None:

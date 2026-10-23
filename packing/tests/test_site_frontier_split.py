@@ -109,7 +109,7 @@ def test_homepage_learn_immediately_follows_results(homepage: str) -> None:
         "papers",
         "report-your-results",
         "visuals",
-        "about-the-squares-project",
         "more-resources",
+        "about-the-squares-project",
     ]
     assert [heading for heading in headings if heading in expected] == expected

@@ -250,6 +250,7 @@ body {
   }
   .kpress-long-text > :first-child,
   .kpress-long-text > .site-title:first-child,
+  .kpress-long-text > .doc-links:first-child + :where(h1),
   .kpress-long-text > :is(article, header):first-child > h1:first-of-type,
   .kpress-long-text > :first-child > .site-hero:first-child,
   .site-hero:first-child > :first-child {
