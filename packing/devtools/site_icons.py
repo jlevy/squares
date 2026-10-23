@@ -81,15 +81,10 @@ def github_link_css() -> str:
     return css
 
 
-# Canonical Lucide maximize and x paths from KPress's retained icons/icons.svg.
+# Lucide maximize-2 and x paths, using the retained KPress stroke conventions.
 # Inline like account_icon's web glyph: lightweight standalone shells have no sprite.
 _POPOVER_PATHS = {
-    "maximize": (
-        "M8 3H5a2 2 0 0 0-2 2v3",
-        "M21 8V5a2 2 0 0 0-2-2h-3",
-        "M3 16v3a2 2 0 0 0 2 2h3",
-        "M16 21h3a2 2 0 0 0 2-2v-3",
-    ),
+    "maximize-2": ("M15 3h6v6", "m21 3-7 7", "M3 15v6h6", "m3 21 7-7"),
     "x": ("M18 6 6 18", "m6 6 12 12"),
 }
 
@@ -97,14 +92,15 @@ _POPOVER_PATHS = {
 def popover_icon(name: str, *, sprite: bool = False) -> str:
     """One retained Lucide glyph; the enclosing header control owns its accessible name."""
     paths = _POPOVER_PATHS[name]
-    if sprite:
+    # The retained KPress sprite has no maximize-2 symbol. Inline its paths in both
+    # modes, so a sprite-backed Close never leaves the full-page glyph missing.
+    if sprite and name != "maximize-2":
         return (
             '<svg aria-hidden="true" focusable="false">'
             f'<use href="#kpress-icon-{name}"></use></svg>'
         )
     return (
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
-        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'
+        '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
         + "".join(f'<path d="{path}"/>' for path in paths)
         + "</svg>"
     )

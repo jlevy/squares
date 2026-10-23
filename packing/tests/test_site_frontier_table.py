@@ -66,14 +66,14 @@ LEVEL = 1.5
 
 @pytest.fixture(scope="module")
 def page(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Any]:
-    """The rendered Atlas, or SQPACK_SITE_PREVIEW_URL's existing local build."""
+    """The rendered survey, or SQPACK_SITE_PREVIEW_URL's existing local build."""
     sync_api = site_browser.api()
     live = os.environ.get("SQPACK_SITE_PREVIEW_URL")
     if live:
-        address = f"{live.rstrip('/')}/atlas.html"
+        address = f"{live.rstrip('/')}/frontier.html"
     else:
         root = Path(tmp_path_factory.mktemp("site"))
-        address = site_renders.write(root, "atlas.html")["atlas.html"].as_uri()
+        address = site_renders.write(root, "frontier.html")["frontier.html"].as_uri()
     with sync_api.sync_playwright() as driver:
         browser = site_browser.launch(driver)
         opened = browser.new_page(viewport={"width": WIDTHS[0], "height": 900})

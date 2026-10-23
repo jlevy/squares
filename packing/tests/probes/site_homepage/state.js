@@ -19,6 +19,8 @@ async () => {
       weight: style.fontWeight,
       style: style.fontStyle,
       transform: style.textTransform,
+      above: style.marginBlockStart,
+      below: style.marginBlockEnd,
     };
   };
   const mainTitle = document.getElementById("the-problem");

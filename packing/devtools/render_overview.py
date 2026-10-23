@@ -7,10 +7,12 @@ adds the front door and the pages around it, as the plan in
 
 - `index.html`, the overview: the problem, the headline and recent results and the
   verification statistics, generated from the register;
+- `recent-results.html`, a compatibility forwarder to the complete results table;
 - `results.html`, every registered result in one table, which the overview's cards
   and recent list point into by row (`#t-018`);
-- `atlas.html`, the graphical Atlas followed by the Frontier Survey: one row for every
-  case from its `SquarePackingCase/v2` record; `frontier.html` forwards here;
+- `atlas.html`, the graphical Atlas with every tracked packing;
+- `frontier.html`, the Frontier Survey: one row for every case from its
+  `SquarePackingCase/v2` record;
 - `cases/N.html`, each complete canonical case record (`case_records`). Atlas tiles
   and survey rows open the same pages in their case popover (`render_case_pages`).
   The old `cases/` and `cases.html` directories forward to Atlas;
@@ -30,9 +32,8 @@ adds the front door and the pages around it, as the plan in
 - `tutorial.html` and `tutorial-advanced.html`, the two tutorials as reader pages;
 - a forwarder at each address a page used to have (`MOVED_PAGES`), so an old link still
   arrives, query and fragment kept (`forwarder_pages`);
-- `visualize.html`, the Visualize section's first tab: the n = 1 to 324 film at full
-  size. Its second tab is the workbench at `workbench/`, which
-  `workbench_tools.build_site` builds and gives the same tab bar (`visualize_tabs`).
+- `visualize.html`, the Videos page with the n = 1 to 324 film at full size;
+  `workbench_tools.build_site` builds the separate Workbench at `workbench/`.
 
 Every page is a complete kpress document with shared assets linked relative to its
 served path and its mathematical notation prepared during the build. The explainer's paper
@@ -62,9 +63,9 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal, NamedTuple
 from urllib.parse import quote
 
-from devtools import repo_links
+from devtools import repo_links, site_navigation
 from devtools.repo_links import repo_url
-from devtools.site_icons import GITHUB_ICON_INPUTS, account_icon
+from devtools.site_icons import GITHUB_ICON_INPUTS
 from devtools.site_popovers import popover_controls
 from sqpack.contributors import PROFILES_DIR
 from sqpack.release import PUBLICATION_EDITION, PUBLICATION_HISTORY
@@ -92,13 +93,20 @@ NEWS_ARTICLE = TEMPLATES / "news-article.md"
 #: The invitation to report results, with its button: About's and the overview's alike.
 REPORT_RESULTS = TEMPLATES / "report-results.md"
 RESULTS_ARTICLE = TEMPLATES / "all-results-article.md"
+VERIFICATION_ARTICLE = TEMPLATES / "verification-article.md"
 VISUALIZE_ARTICLE = TEMPLATES / "visualize-article.md"
 PAPERS_ARTICLE = TEMPLATES / "papers-article.md"
+TUTORIALS_ARTICLE = TEMPLATES / "tutorials-article.md"
+POSTERS_ARTICLE = TEMPLATES / "posters-article.md"
+DOCUMENTATION_ARTICLE = TEMPLATES / "documentation-article.md"
+REPORT_ARTICLE = TEMPLATES / "report-article.md"
+RESOURCES_ARTICLE = TEMPLATES / "resources-article.md"
 BROWSER = PACKING / "devtools" / "overview"
 FORWARD_SCRIPT = BROWSER / "forward.js"
 NEWS_CARDS_SCRIPT = BROWSER / "news-cards.js"
 NEWS_FORWARD_SCRIPT = BROWSER / "news-forward.js"
 NEWS_FILTERS_SCRIPT = BROWSER / "news-filters.js"
+FILTER_MENU_SCRIPT = BROWSER / "filter-menu.js"
 TABLE_SCRIPT = BROWSER / "table.js"
 MATH_SCRIPT = BROWSER / "math.js"
 POPOVER_SCRIPT = BROWSER / "popover.js"
@@ -114,6 +122,7 @@ CONTRIBUTOR_POPOVER_SCRIPT = BROWSER / "contributor-popover.js"
 FILM_SCRIPT = BROWSER / "film.js"
 THEME_SCRIPT = BROWSER / "theme.js"
 HEADROOM_SCRIPT = BROWSER / "headroom.js"
+NAVIGATION_SCRIPT = BROWSER / "navigation.js"
 TOOLTIP_SCRIPT = BROWSER / "rating-tooltips.js"
 HOMEPAGE_CSS = BROWSER / "homepage.css"
 #: The results page's own styles: its overview above the table, the last seven days'
@@ -185,21 +194,19 @@ ATLAS_DESCRIPTION = (
     "squares, with drawings, case records and the complete Frontier Survey."
 )
 PAPERS_DESCRIPTION = (
-    "Tutorials, papers and PDFs on square packing, with films and an interactive "
-    "workbench for exploring the problem and its proofs."
+    "Research papers on square packing: the eleven-square proof series and the "
+    "methods used to discover and verify record packings."
 )
 VISUALIZE_DESCRIPTION = (
     "The best packings known of n unit squares, n = 1 to 324, built one square at a "
     "time in an eight-minute film, and a workbench to move the squares yourself."
 )
-#: The release the films are published on, and the two films on it.
+#: The release containing the displayed film.
 FILM_RELEASE = "v0.4.2"
-FILM_RELEASE_URL = f"https://github.com/jlevy/squares/releases/tag/{FILM_RELEASE}"
 FILM_URL = (
     f"https://github.com/jlevy/squares/releases/download/{FILM_RELEASE}/"
     "ascent-n1-324-1080p60-citations.mp4"
 )
-SHORT_FILM_URL = FILM_URL.replace("n1-324", "n1-100")
 
 
 def film_release_date() -> str:
@@ -210,12 +217,6 @@ def film_release_date() -> str:
     return f"{day.day} {day:%B}"
 
 
-#: The Explanations section reuses the existing papers, film and workbench addresses.
-#: Each tab names its key, its address from the site root, and its label.
-VISUALIZE_TABS: tuple[tuple[str, str, str], ...] = (
-    ("film", "papers.html#visuals", "Film"),
-    ("workbench", "workbench/", "Workbench"),
-)
 FRONTIER_DESCRIPTION = (
     "Every tracked case of packing n unit squares in the smallest square, n = 1 to 324: "
     "the best known packing, the reported and verified bounds, and their records."
@@ -224,6 +225,8 @@ FRONTIER_DESCRIPTION = (
 #: The results table's canonical page; row ids are the results' (`#t-018`).
 #: The legacy `all-results.html` address forwards here with query and fragment kept.
 RESULTS_PAGE = "results.html"
+RECENT_RESULTS_PAGE = "recent-results.html"
+VERIFICATION_PAGE = "verification.html"
 
 #: The repository documents served as pages outside the navigation, reached from the
 #: overview's cards, in the cards' order; `site_documents` renders them. README and
@@ -460,10 +463,17 @@ SITE_PAGES: tuple[str, ...] = (
     "index.html",
     "news.html",
     "atlas.html",
+    "frontier.html",
     "about.html",
     RESULTS_PAGE,
+    VERIFICATION_PAGE,
     f"{PROFILES_DIR}/index.html",
     "papers.html",
+    "tutorials.html",
+    "posters.html",
+    "documentation.html",
+    "report.html",
+    "resources.html",
     *(paper_path(paper.slug) for paper in PAPERS),
     "tutorial.html",
     "tutorial-advanced.html",
@@ -489,9 +499,10 @@ SITE_PAGES: tuple[str, ...] = (
 #: project's contributors; the directory and each profile the reviewed preview served
 #: there keep a forwarder at the earlier address (`LEGACY_PROFILES`).
 MOVED_PAGES: tuple[tuple[str, str], ...] = (
+    ("downloads.html", "posters.html"),
     ("all-results.html", RESULTS_PAGE),
+    (RECENT_RESULTS_PAGE, RESULTS_PAGE),
     ("status.html", "atlas.html"),
-    ("frontier.html", "atlas.html"),
     ("defects.html", repo_url(repo_links.DEFECTS, kind="blob")),
     ("explainer.html", paper_path(N11_LOWER_BOUNDS_EXPLAINER)),
     ("n11-optimality/t-060-explainer.html", paper_path(N11_OPTIMALITY_REVIEW)),
@@ -541,6 +552,9 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "devtools/profile_links.py",
     *GITHUB_ICON_INPUTS,
     PACKING / "devtools/site_popovers.py",
+    PACKING / "devtools/site_navigation.py",
+    NAVIGATION_SCRIPT,
+    RESOURCES_ARTICLE,
     PACKING / "devtools/site_resources.py",
     PACKING / "devtools/site_tallies.py",
     PACKING / "devtools/record_presentation.py",
@@ -573,12 +587,18 @@ RENDER_INPUTS: tuple[Path, ...] = (
     NEWS_ARTICLE,
     REPORT_RESULTS,
     RESULTS_ARTICLE,
+    VERIFICATION_ARTICLE,
     VISUALIZE_ARTICLE,
     PAPERS_ARTICLE,
+    TUTORIALS_ARTICLE,
+    POSTERS_ARTICLE,
+    DOCUMENTATION_ARTICLE,
+    REPORT_ARTICLE,
     FORWARDER,
     BROWSER,
     PACKING / "src" / "sqpack",
     PACKING / "devtools" / "site_documents.py",
+    PACKING / "devtools" / "paper_front.py",
     PACKING / "devtools" / "result_overview.py",
     PACKING / "devtools" / "atlas_legend.py",
     PACKING / "devtools" / "result_status.py",
@@ -686,18 +706,35 @@ class PageMeta(NamedTuple):
 
 #: The records the results page and the frontier atlas write their heads from, named
 #: here because a forwarder to either previews it (`forwarded_metas`).
-RESULTS_META = PageMeta("Results", RESULTS_DESCRIPTION, RESULTS_PAGE)
+RESULTS_META = PageMeta("All Results", RESULTS_DESCRIPTION, RESULTS_PAGE)
+VERIFICATION_META = PageMeta(
+    "Verification",
+    "How to read result ratings, evidence, credits, and supersession "
+    "in the square-packing archive.",
+    VERIFICATION_PAGE,
+)
+POSTERS_META = PageMeta(
+    "Posters",
+    "Printable PDF posters of the first hundred or all 324 best-known square packings, "
+    "with bounds and linked source records.",
+    "posters.html",
+)
 ATLAS_META = PageMeta(
-    "The Atlas of Square Packings",
+    "Visual Atlas",
     ATLAS_DESCRIPTION,
     "atlas.html",
+)
+FRONTIER_META = PageMeta(
+    "Frontier Survey",
+    FRONTIER_DESCRIPTION,
+    "frontier.html",
     structured_data=(
         {
             "@context": "https://schema.org",
             "@type": "Dataset",
             "name": "Square packing frontier register",
             "description": FRONTIER_DESCRIPTION,
-            "url": canonical_url("atlas.html") + "#the-frontier-survey",
+            "url": canonical_url("frontier.html"),
             "license": repo_url("LICENSE"),
             "creator": {"@type": "Organization", "name": PROJECT_NAME},
         },
@@ -770,6 +807,7 @@ def head_tags(page: PageMeta) -> str:
         )
     if not page.name.strip():
         raise SystemExit(f"{page.path}: a page has a name")
+    page = page._replace(name=site_navigation.navigation_title(page.path, page.name))
     for moment in (page.published, page.modified):
         if moment and not _ISO_DATE.fullmatch(moment):
             raise SystemExit(f"{page.path}: {moment!r} is not an ISO date")
@@ -793,6 +831,11 @@ def head_tags(page: PageMeta) -> str:
         if moment
     ]
     title = page.name if page.kind == "article" else page_title(page.name)
+    structured = tuple(
+        data for data in page.structured_data if data.get("@type") != "BreadcrumbList"
+    )
+    if trail := site_navigation.breadcrumb_data(page.path, page.name, SITE_URL):
+        structured += (trail,)
     return "\n".join(
         (
             f"<title>{html.escape(title, quote=False)}</title>",
@@ -810,7 +853,7 @@ def head_tags(page: PageMeta) -> str:
                     "<", "\\u003c"
                 )
                 + "</script>"
-                for data in page.structured_data
+                for data in structured
             ),
             f'<link rel="canonical" href="{attribute(url)}">',
             meta("og:type", page.kind),
@@ -951,18 +994,7 @@ def assert_fetches_only_assets(name: str, page: str) -> None:
 
 def nav_html(current: str, *, root: str = "") -> str:
     """The navigation bar, with the current page marked."""
-    nav = SITE_NAV.read_text(encoding="utf-8")
-    nav = nav.replace("{{ROOT}}", root).replace(
-        "{{GITHUB_ICON}}", account_icon("github", class_name="site-nav-icon")
-    )
-    if not current:
-        return nav
-    # Existing paper renderers and film callers share the Explanations destination.
-    current = {"papers": "explanations", "visualize": "explanations"}.get(current, current)
-    marker = f'data-page="{current}"'
-    if marker not in nav:
-        raise SystemExit(f"site-nav.html has no entry for {current!r}")
-    return nav.replace(marker, f'{marker} aria-current="page"')
+    return site_navigation.navigation_links(current, root=root)
 
 
 class NavShell(NamedTuple):
@@ -995,7 +1027,7 @@ def nav_shell(current: str, *, root: str, tabs: str = "") -> NavShell:
     on all of them. kpress's tokens come whole but for their faces, of which only the
     bar's own is kept and inlined; the page's own stylesheet, placed after them, keeps
     any of its own custom properties the tokens also name. `tabs`, a section's tab bar
-    (`visualize_tabs`), follows the bar in the header, as on a kpress page.
+    (when supplied), follows the bar in the header, as on a kpress page.
     """
     from devtools.render_n11_lower_bounds_explainer import (  # noqa: PLC0415
         FONT_FACE_BLOCK,
@@ -1015,6 +1047,7 @@ def nav_shell(current: str, *, root: str, tabs: str = "") -> NavShell:
     head = (
         f"{favicon_html()}\n"
         f"<script>{theme_bootstrap(static)}</script>\n"
+        f"<script>{_script_text(EMBED_SCRIPT)}</script>\n"
         f"<style>{tokens}</style>\n"
         f"<style>{PAPER_TYPE_CSS.read_text(encoding='utf-8')}</style>\n"
         f"<style>{SITE_NAV_CSS.read_text(encoding='utf-8')}</style>"
@@ -1025,28 +1058,9 @@ def nav_shell(current: str, *, root: str, tabs: str = "") -> NavShell:
     )
     scripts = f"<script>{kpress_client_script()}</script>\n" + "\n".join(
         f"<script>{_script_text(path)}</script>"
-        for path in (THEME_SCRIPT, HEADROOM_SCRIPT, TOOLTIP_SCRIPT)
+        for path in (THEME_SCRIPT, NAVIGATION_SCRIPT, HEADROOM_SCRIPT, TOOLTIP_SCRIPT)
     )
     return NavShell(head, header, scripts)
-
-
-def visualize_tabs(current: str, *, root: str = "") -> str:
-    """The Explanations section's tab bar, with the current tab marked.
-
-    Each tab is a real link to its own page, so the bar needs no script and a tab can be
-    opened, bookmarked and shared. Its look is `.site-tabs` in `site-nav.css`, the one
-    stylesheet both the film's page and the workbench carry, which also draws the rule
-    under the navigation bar over the tabs: they follow the bar in the header slot, and
-    the bar, not the slot, carries the rule on a page that has them.
-    """
-    if current not in {key for key, _, _ in VISUALIZE_TABS}:
-        raise SystemExit(f"the Explanations section has no tab {current!r}")
-    links = "".join(
-        f'<a data-tab="{key}"{' aria-current="page"' if key == current else ""} '
-        f'href="{root}{href}">{html.escape(label)}</a>'
-        for key, href, label in VISUALIZE_TABS
-    )
-    return f'<nav class="site-tabs" aria-label="Visuals">{links}</nav>'
 
 
 #: The icon's size in a tab, in CSS pixels: whole pixels, so its one-pixel frame
@@ -1103,23 +1117,9 @@ def favicon_html(*, inline: bool = False, root: str = "") -> str:
 
 
 def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
-    """The closing credit's two lines, the one definition every page's footer is made of:
-    the site's pages (`colophon_html`), the explainer and the optimality paper, whose
-    shells set it in their own closing paragraph.
+    """Project attribution, typesetting credit, then the optional edition on separate lines.
 
-    The first line is the project's formal name and its repository, shown without its
-    scheme and linked. The second is `edition`, then the credit to the two tools. On the
-    site's pages the edition is `sqpack.release.PUBLICATION_EDITION` taken whole, the
-    stamp the atlas footer and the film carry (`v0.4.2-8ac5de`, with the edition's
-    status ahead of it while it has one), so it follows a re-pin and a new edition with
-    no edit here; a build that prints it names `release.py` among its inputs. A paper
-    passes none: its own version is in its credits, and the site's version and the data
-    hash go nowhere on a paper (the owner, 2026-10-01), so its second line is the credit
-    to the tools alone.
-
-    A line is a block, so there are two at every width, and each part beside a middle
-    dot is an inline block, so a line too long for a phone breaks at its dot before it
-    breaks inside a part (`site-nav.css`, which every page carries).
+    Papers omit the site edition because their own edition appears in their credits.
     """
 
     def part(markup: str) -> str:
@@ -1130,23 +1130,22 @@ def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
         return f'<span class="site-colophon-line">{" · ".join(shown)}</span>'
 
     repository = repo_links.REPO_URL
-    return line(
-        html.escape(PROJECT_NAME),
-        f'<a href="{repository}">{html.escape(repository.removeprefix("https://"))}</a>',
-    ) + line(
-        html.escape(edition),
-        f'Formatted and typeset with <a href="{FLOWMARK_URL}">Flowmark</a> '
-        f'and <a href="{KPRESS_URL}">KPress</a>',
+    return (
+        line(
+            html.escape(PROJECT_NAME),
+            f'<a href="{repository}">{html.escape(repository.removeprefix("https://"))}</a>',
+        )
+        + line(
+            f'Formatted and typeset with <a href="{FLOWMARK_URL}">Flowmark</a> '
+            f'and <a href="{KPRESS_URL}">KPress</a>',
+        )
+        + (line(html.escape(edition)) if edition else "")
     )
 
 
 def colophon_html() -> str:
-    """The shared closing credits and profile directory in each site's footer."""
-    profiles = (
-        f'<span class="site-colophon-line"><a href="{PROFILES_DIR}/index.html">'
-        "Profiles</a></span>"
-    )
-    return f'<p class="site-colophon">{colophon_lines()}{profiles}</p>'
+    """The shared site footer, with the edition on its own bottom line."""
+    return f'<p class="site-colophon">{colophon_lines()}</p>'
 
 
 def article_overlay_shells(page: str) -> str:
@@ -1182,6 +1181,7 @@ def article_page_scripts(page_scripts: Sequence[Path]) -> tuple[Path, ...]:
         dict.fromkeys(
             (
                 THEME_SCRIPT,
+                NAVIGATION_SCRIPT,
                 HEADROOM_SCRIPT,
                 TOOLTIP_SCRIPT,
                 ARTICLE_LOADER_SCRIPT,
@@ -1191,6 +1191,28 @@ def article_page_scripts(page_scripts: Sequence[Path]) -> tuple[Path, ...]:
                 CONTRIBUTOR_POPOVER_SCRIPT,
             )
         )
+    )
+
+
+def _navigation_heading(body: str, path: str) -> str:
+    """Use the menu's page name for its first heading, retaining legacy anchor IDs."""
+    if path in {"index.html", "./", ""}:
+        return body
+    title = site_navigation.navigation_title(path)
+    if not title:
+        return body
+    heading = re.search(r"(<h1\b[^>]*>)(.*?)(</h1>)", body, re.DOTALL)
+    if heading is not None:
+        aliases = "".join(re.findall(r'<a\b[^>]*\bid="[^"]+"[^>]*></a>', heading[2]))
+        return body[: heading.start(2)] + html.escape(title) + aliases + body[heading.end(2) :]
+    markdown_heading = re.search(r"^# ([^\n]+)$", body, re.MULTILINE)
+    if markdown_heading is None:
+        return body
+    anchor = re.sub(r"[^a-z0-9]+", "-", markdown_heading[1].lower()).strip("-")
+    return (
+        body[: markdown_heading.start()]
+        + f'<h1 id="{anchor}">{html.escape(title)}</h1>'
+        + body[markdown_heading.end() :]
     )
 
 
@@ -1220,7 +1242,7 @@ def kpress_page(
     site's one set (`head_tags`), in place of the tags kpress's shell writes. `kind` is
     `article` for a paper.
 
-    `tabs`, a section's tab bar (`visualize_tabs`), follows the navigation bar in the
+    `tabs`, a section's tab bar (when supplied), follows the navigation bar in the
     header slot, where the workbench's shell also puts it, so it sits in one place on
     every page of its section.
 
@@ -1233,6 +1255,8 @@ def kpress_page(
     from kpress.format.model import DocumentInput, RenderOptions  # noqa: PLC0415
     from kpress.format.render import render_page  # noqa: PLC0415
 
+    title = site_navigation.navigation_title(name, title)
+    markdown = _navigation_heading(markdown, name)
     document = DocumentInput(
         title=page_title(title),
         source_text=markdown,
@@ -1250,7 +1274,7 @@ def kpress_page(
         head_extra_html=(
             f"{favicon_html()}{head}<script>{_script_text(EMBED_SCRIPT)}</script>"
         ),
-        header_html=nav_html(current) + tabs,
+        header_html=nav_html(name or current) + tabs,
         footer_html=colophon_html(),
     )
     rendered = render_page(document, options)
@@ -1276,6 +1300,9 @@ def kpress_page(
     prose = 'class="kpress-prose kpress-long-text'
     page = page.replace(prose + '"', prose + ' site-page"', 1)
     page = _document_scrolls(name, page)
+    page = page.replace(
+        "</header>", "</header>" + site_navigation.breadcrumbs_html(name, title), 1
+    )
     page = _KPRESS_CELL_LABELS.sub("", page)
     # Site pages have no model-driven widgets; TOC/history use their static DOM.
     page = re.sub(
@@ -1453,14 +1480,10 @@ def overview_page() -> Page:
         "HERO": overview_sections.hero(),
         "NEWS_PREVIEW": news_highlights.render(render_changelog.load()),
         "ATLAS_GRID": overview_sections.atlas_preview(),
-        "PAPER_CARDS": overview_sections.paper_cards(),
-        "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
+        "PAPER_CARDS": overview_sections.homepage_paper_cards(),
         "PDF_CARDS": overview_sections.homepage_pdf_card(),
-        "VIDEO_PLAYER": overview_sections.homepage_video(FILM_URL),
         "RECENT": overview_sections.recent_table(overview),
-        "REPORT_RESULTS": report_results(),
         "RESULTS_LINK_ATTRIBUTES": overview_sections.all_results_link_attributes(overview),
-        "OTHER_PROJECTS": overview_sections.other_project_cards(overview),
         "PROFILES": render_contributors.profile_preview(),
         "ARROW_RIGHT": overview_sections.arrow_icon("right"),
         "ARROW_DOWNLOAD": overview_sections.arrow_icon("download"),
@@ -1478,7 +1501,6 @@ def overview_page() -> Page:
         page_styles=(HOMEPAGE_CSS,),
         page_scripts=(
             NEWS_CARDS_SCRIPT,
-            FILM_SCRIPT,
             FORWARD_SCRIPT,
             TABLE_SCRIPT,
             POPOVER_SCRIPT,
@@ -1491,15 +1513,13 @@ def overview_page() -> Page:
 
 
 def atlas_page() -> Page:
-    """Atlas graphics followed by the complete Frontier Survey and case records."""
+    """Every tracked packing, with controls and links to its case record."""
     from devtools import overview_sections  # noqa: PLC0415
-    from devtools.render_frontier_page import frontier_markdown  # noqa: PLC0415
 
     markdown = _template_markdown(
         ATLAS_ARTICLE,
         {
             "ATLAS_GRID": overview_sections.atlas_grid(),
-            "FRONTIER_SURVEY": frontier_markdown(fill, embedded=True),
         },
     )
     return kpress_page(
@@ -1512,6 +1532,7 @@ def atlas_page() -> Page:
         toc=False,
         rewrite_body=lambda page: _case_links(_authored_profile_links(page)),
         page_scripts=(
+            FORWARD_SCRIPT,
             POPOVER_SCRIPT,
             ATLAS_VIEW_SCRIPT,
             ATLAS_GRID_SCRIPT,
@@ -1538,25 +1559,23 @@ def news_page() -> Page:
             "with the retained contribution history."
         ),
         toc=False,
-        page_scripts=(NEWS_CARDS_SCRIPT, NEWS_FILTERS_SCRIPT, NEWS_FORWARD_SCRIPT),
+        page_scripts=(
+            NEWS_CARDS_SCRIPT,
+            FILTER_MENU_SCRIPT,
+            NEWS_FILTERS_SCRIPT,
+            NEWS_FORWARD_SCRIPT,
+        ),
         rewrite_body=_case_links,
     )
 
 
 def about_page() -> Page:
     """The project narrative, approach, attribution, and supporting resources."""
-    from devtools import (  # noqa: PLC0415
-        overview_sections,
-        render_changelog,
-        render_contributors,
-    )
+    from devtools import render_changelog  # noqa: PLC0415
 
     markdown = _template_markdown(
         ABOUT_ARTICLE,
         {
-            "PROFILES": render_contributors.profile_preview(),
-            "REPORT_RESULTS": report_results(),
-            "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
             "NEWS_LEGACY_ANCHORS": render_changelog.legacy_news_anchors(
                 render_changelog.load()
             ),
@@ -1585,32 +1604,8 @@ def results_page() -> Page:
 
     overview = overview_data.load()
     values = {
-        "EPISTEMICS_URL": "epistemics.html",
-        # The overview above the table, from the same register (think-2z22): the last
-        # seven days' arrivals, a block a day, then the weekly S3+ rollup before them. The
-        # arrival link names the section's own first day, so it lists the section's
-        # results on any day (#514's review A, finding A3); the last day's counts from
-        # the reader's.
-        "RECENT_ADDED": overview_sections.recent_added(overview),
-        "ADDED_LINK": overview_sections.added_link(
-            f"added-since={overview_sections.added_since(overview).isoformat()}"
-        ),
-        "ADDED_LAST_DAY": overview_sections.added_link("added-age=1"),
-        "ADDED_DAYS": overview_sections.ADDED_DAYS_WORD[overview_sections.ADDED_DAYS],
-        "ADDED_DAYS_TITLE": overview_sections.ADDED_DAYS_WORD[
-            overview_sections.ADDED_DAYS
-        ].capitalize(),
-        "ADDED_SPAN": overview_sections.span_label(
-            overview_sections.added_since(overview), overview_sections.added_reference(overview)
-        ),
-        "ADDED_FIRST": overview_sections.day_label(overview_sections.added_since(overview)),
-        "RECENT_ROLLUP": overview_sections.recent_rollup(overview),
-        "ROLLUP_FLOOR": f"S{overview_sections.ROLLUP_FLOOR}",
-        "ROLLUP_WEEKS": overview_sections.ROLLUP_WEEKS_WORD[overview_sections.ROLLUP_WEEKS],
+        "ARROW_RIGHT": overview_sections.arrow_icon("right"),
         "RESULTS_TABLE": overview_sections.results_table(overview),
-        "STATUS_COUNTS": overview_sections.status_counts(overview),
-        # The rating ladders, the homepage's Verification Ladders until 2026-10-02.
-        "VERIFICATION": overview_sections.verification_block(),
     }
     markdown = fill(
         RESULTS_ARTICLE.read_text(encoding="utf-8"), values, where=RESULTS_ARTICLE.name
@@ -1630,6 +1625,28 @@ def results_page() -> Page:
     return page._replace(html=compact_visual_math_classes(page.html, profile_links=True))
 
 
+def verification_page() -> Page:
+    """The archive's reading guide, with the complete epistemics policy one level deeper."""
+    from devtools import overview_data, overview_sections  # noqa: PLC0415
+
+    values = {
+        "EPISTEMICS_URL": "epistemics.html",
+        "ARROW_RIGHT": overview_sections.arrow_icon("right"),
+        "STATUS_COUNTS": overview_sections.status_counts(overview_data.load()),
+        "VERIFICATION": overview_sections.verification_block(),
+    }
+    return kpress_page(
+        _template_markdown(VERIFICATION_ARTICLE, values),
+        name=VERIFICATION_META.path,
+        current=VERIFICATION_META.path,
+        title=VERIFICATION_META.name,
+        description=VERIFICATION_META.description,
+        toc=False,
+        rewrite_body=_authored_profile_links,
+        page_styles=(RESULTS_CSS,),
+    )
+
+
 def papers_page() -> Page:
     """The Papers section's page: a short introduction and one large card per paper,
     each the link to its paper, which is a full page of the site. Shared article overlays
@@ -1637,20 +1654,8 @@ def papers_page() -> Page:
     series are the cards' own addresses, filled from the one constant each."""
     from devtools import overview_sections  # noqa: PLC0415
 
-    tutorials = tuple(
-        paper
-        for paper in overview_sections.PAPERS
-        if paper.href in {"tutorial.html", "tutorial-advanced.html"}
-    )
     values = {
-        "TUTORIAL_CARDS": overview_sections.paper_cards(papers=tutorials),
-        "PAPER_CARDS": overview_sections.paper_cards(
-            papers=tuple(paper for paper in overview_sections.PAPERS if paper not in tutorials)
-        ),
-        "VISUAL_TABS": visualize_tabs("film"),
-        "FILM": film_markdown(inline=True),
-        "PDF_CARDS": overview_sections.pdf_cards(),
-        "PDF_NOTE": overview_sections.pdf_note(),
+        "PAPER_CARDS": overview_sections.paper_cards(papers=overview_sections.PAPERS[:-2]),
         "LOWER_BOUNDS_PAPER": overview_sections.LOWER_BOUNDS_PAPER,
         "THRESHOLD_BOUND_PAPER": overview_sections.THRESHOLD_BOUND_PAPER,
         "OPTIMALITY_PAPER": overview_sections.OPTIMALITY_PAPER,
@@ -1664,11 +1669,110 @@ def papers_page() -> Page:
         markdown,
         name="papers.html",
         current="explanations",
-        title="Explanations",
+        title="Papers",
         description=PAPERS_DESCRIPTION,
         toc=False,
         rewrite_body=lambda page: _authored_profile_links(page, full_names=True),
-        page_scripts=(FILM_SCRIPT,),
+    )
+
+
+def tutorials_page() -> Page:
+    """The complete catalogue of first-principles and advanced tutorials."""
+    from devtools import overview_sections  # noqa: PLC0415
+
+    markdown = _template_markdown(
+        TUTORIALS_ARTICLE,
+        {
+            "TUTORIAL_CARDS": overview_sections.paper_cards(
+                papers=overview_sections.PAPERS[-2:]
+            ),
+            "ARROW_RIGHT": overview_sections.arrow_icon("right"),
+        },
+    )
+    return kpress_page(
+        markdown,
+        name="tutorials.html",
+        current="tutorials.html",
+        title="Tutorials",
+        description=(
+            "First-principles and advanced tutorials on square packing, search, and proof."
+        ),
+        toc=False,
+    )
+
+
+def posters_page() -> Page:
+    """The two packing-poster PDFs and their retained source links."""
+    from devtools import overview_sections  # noqa: PLC0415
+
+    markdown = _template_markdown(
+        POSTERS_ARTICLE,
+        {
+            "PDF_CARDS": overview_sections.pdf_cards(),
+            "PDF_NOTE": overview_sections.pdf_note(),
+        },
+    )
+    return kpress_page(
+        markdown,
+        name=POSTERS_META.path,
+        current=POSTERS_META.path,
+        title=POSTERS_META.name,
+        description=POSTERS_META.description,
+        toc=False,
+    )
+
+
+def documentation_page() -> Page:
+    """The complete catalogue of reader and developer documentation."""
+    from devtools import overview_sections  # noqa: PLC0415
+
+    return kpress_page(
+        _template_markdown(
+            DOCUMENTATION_ARTICLE,
+            {"DOCUMENTATION_BLOCK": overview_sections.documentation_block()},
+        ),
+        name="documentation.html",
+        current="documentation.html",
+        title="Documentation",
+        description="Project guides, research records, verification policy, and development.",
+        toc=False,
+    )
+
+
+def report_page() -> Page:
+    """The complete contribution instructions and existing result-submission form."""
+    return kpress_page(
+        _template_markdown(REPORT_ARTICLE, {"REPORT_RESULTS": report_results()}),
+        name="report.html",
+        current="report.html",
+        title="Report a Result",
+        description="Submit square-packing results with evidence and contribution credits.",
+        toc=False,
+    )
+
+
+def resources_page() -> Page:
+    """The complete shared resource directory, nested under Learn."""
+    from devtools import overview_data, overview_sections  # noqa: PLC0415
+
+    markdown = _template_markdown(
+        RESOURCES_ARTICLE,
+        {
+            "RESOURCE_CARDS": overview_sections.other_project_cards(overview_data.load()),
+            "ARROW_RIGHT": overview_sections.arrow_icon("right"),
+        },
+    )
+    return kpress_page(
+        markdown,
+        name="resources.html",
+        current="learn",
+        title="Resources",
+        description=(
+            "Square-packing projects, repositories, and references, "
+            "linked to their authors and registered results."
+        ),
+        toc=False,
+        rewrite_body=lambda page: _authored_profile_links(page, full_names=True),
     )
 
 
@@ -1680,8 +1784,20 @@ def tutorial_page() -> Page:
 
 
 def frontier_page() -> Page:
-    """The legacy Frontier address, forwarding its query and fragments to Atlas."""
-    return next(page for page in forwarder_pages() if page.name == "frontier.html")
+    """The reported and verified bounds, with one row per tracked case."""
+    from devtools.render_frontier_page import frontier_markdown  # noqa: PLC0415
+
+    return kpress_page(
+        frontier_markdown(fill),
+        name=FRONTIER_META.path,
+        current="frontier",
+        title=FRONTIER_META.name,
+        description=FRONTIER_META.description,
+        structured_data=FRONTIER_META.structured_data,
+        toc=False,
+        rewrite_body=lambda page: _case_links(_authored_profile_links(page)),
+        page_scripts=(POPOVER_SCRIPT, CASE_POPOVER_SCRIPT, TABLE_SCRIPT),
+    )
 
 
 def static_content_page(
@@ -1695,6 +1811,7 @@ def static_content_page(
         theme_bootstrap,
     )
 
+    body = _navigation_heading(body, meta.path)
     head, _math_scripts = page_assets()
     programs = (
         site_assets.script_tag(kpress_client_asset(), _FROM_ROOT)
@@ -1714,12 +1831,15 @@ def static_content_page(
             + favicon_html()
             + head,
             "BOOTSTRAP": theme_bootstrap(kpress_static()) + "\n" + _script_text(EMBED_SCRIPT),
-            "NAV": nav_html(current),
+            "NAV": nav_html(meta.path or current),
             "RECORD": body,
             "FOOTER": colophon_html(),
             "PROGRAMS": "",
         },
         where="case-record.html",
+    )
+    page = page.replace(
+        "</header>", "</header>" + site_navigation.breadcrumbs_html(meta.path, meta.name), 1
     )
     page = article_overlay_shells(page)
     page = page.replace("</body>", f"{programs}\n</body>", 1)
@@ -1768,19 +1888,13 @@ def case_records() -> list[Page]:
 
 
 def film_markdown(*, inline: bool = False) -> str:
-    """The shared film and its evidence note; inline readers choose when to play."""
-    values = {
-        "FILM_URL": FILM_URL,
-        "SHORT_FILM_URL": SHORT_FILM_URL,
-        "RELEASE_URL": FILM_RELEASE_URL,
-        "RELEASE": FILM_RELEASE,
-        "RELEASE_DATE": film_release_date(),
-    }
+    """The shared film; inline readers choose when to play."""
+    values = {"FILM_URL": FILM_URL}
     markdown = fill(
         VISUALIZE_ARTICLE.read_text(encoding="utf-8"), values, where=VISUALIZE_ARTICLE.name
     )
     if inline:
-        heading = '<h1 class="site-visually-hidden" id="visualize">Visualize</h1>'
+        heading = '<h1 class="site-visually-hidden" id="visualize">Videos</h1>'
         if not markdown.startswith(heading):
             raise ValueError("the film template no longer starts with its page heading")
         markdown = markdown.removeprefix(heading).replace(" data-autoplay", "", 1)
@@ -1788,7 +1902,7 @@ def film_markdown(*, inline: bool = False) -> str:
 
 
 def visualize_page() -> Page:
-    """The Visualize section's first tab: the film of the ascent at full size.
+    """The Videos page: the film of the ascent at full size.
 
     The film starts when the page is visited: its markup mutes it and marks it
     `data-autoplay`, and `overview/film.js` starts it unless the reader asks for reduced
@@ -1799,11 +1913,10 @@ def visualize_page() -> Page:
         markdown,
         name="visualize.html",
         current="explanations",
-        title="Visualize",
+        title="Videos",
         description=VISUALIZE_DESCRIPTION,
         toc=False,
         page_scripts=(FILM_SCRIPT,),
-        tabs=visualize_tabs("film"),
     )
 
 
@@ -1821,9 +1934,16 @@ PAGES: dict[str, Callable[[], Page]] = {
     "index.html": overview_page,
     "news.html": news_page,
     "atlas.html": atlas_page,
+    "frontier.html": frontier_page,
     "about.html": about_page,
     RESULTS_PAGE: results_page,
+    VERIFICATION_PAGE: verification_page,
     "papers.html": papers_page,
+    "tutorials.html": tutorials_page,
+    "posters.html": posters_page,
+    "documentation.html": documentation_page,
+    "report.html": report_page,
+    "resources.html": resources_page,
     "tutorial.html": tutorial_page,
     "tutorial-advanced.html": _document_page("tutorial-advanced.html"),
     "visualize.html": visualize_page,
@@ -1936,7 +2056,9 @@ def forwarded_metas() -> dict[str, PageMeta]:
 
     metas = (
         RESULTS_META,
+        POSTERS_META,
         ATLAS_META,
+        FRONTIER_META,
         explainer.published_page_meta(),
         render_n11_optimality_review.page_meta(),
         *render_contributors.page_metas().values(),

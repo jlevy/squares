@@ -12,6 +12,7 @@ import yaml
 
 from devtools import (
     check_published_site,
+    paper_structure,
     record_presentation,
     render_changelog,
     render_contributors,
@@ -43,16 +44,16 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     pages = {page.name: page.html for page in render_contributors.contributor_pages()}
     assert set(pages) == set(render_contributors.page_paths())
     index = pages["profiles/index.html"]
-    assert "<h1>Profiles</h1>" in index
+    assert "<h1>Contributor Profiles</h1>" in index
     assert 'class="kpress-table site-table site-profile-table"' in index
     assert re.findall(r"<th\b[^>]*>([^<]+)</th>", index) == [
         "Name",
+        "Accounts",
         "Records",
         "Results",
         "Credits",
         "Years active",
         "Resources",
-        "Accounts",
     ]
     assert index.count('data-sort="num"') == 4
     assert index.count('data-sort="text"') == 3
@@ -60,35 +61,53 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     assert re.search(r'src="../assets/js/table\.[a-f0-9]+\.js"', index)
     assert render_overview.TABLE_SCRIPT in render_contributors.inputs()
     assert '<div class="site-table-wrap site-wide">' in index
-    assert (
-        "Results count distinct registered results by their reviewed primary authors" in index
-    )
-    assert "Credits count distinct results that credit a person" in index
-    assert "<title>Profiles" in index
+    assert "People whose work is cited or credited in the square-packing record." in index
+    assert "Results lists authored work" not in index
+    assert "<title>Contributor Profiles" in index
     assert 'rel="canonical" href="https://squaremath.org/profiles/"' in index
     # The directory names cited authors as well as contributors, and calls none of them
-    # contributors in its own voice; the colophon links it by the same name.
+    # contributors in its own voice.
     assert "Contributors<" not in index
-    assert '<a href="index.html">Profiles</a></span>' in index
     assert "data-person" not in index
-    assert 'data-page="about" aria-current="page"' in index
-    assert '<a href="../about.html#profiles">About</a></nav>' in index
+    directory_tree = paper_structure.parse(index)
+    breadcrumb = directory_tree.find("nav", "site-breadcrumbs")
+    assert breadcrumb is not None
+    assert not breadcrumb.find_all("a")
+    assert [
+        (span.text(), span.attrs.get("aria-current")) for span in breadcrumb.find_all("span")
+    ] == [
+        ("About", None),
+        ("Contributor Profiles", "page"),
+    ]
+    for cell in directory_tree.find_all("td"):
+        if cell.classes.intersection(
+            {"site-profile-records", "site-profile-stats", "site-profile-credits"}
+        ):
+            assert all(number.text().isdigit() for number in cell.find_all("strong"))
+            if cell.attrs.get("data-value", "0") != "0":
+                assert cell.find("strong") is not None
     assert 'site-profile-table" data-contributor-plain' in index
     for contributor in registry.by_id.values():
         assert contributor.profile_path == f"profiles/{contributor.id}.html"
         assert f'href="{contributor.id}.html"' in index
         profile = pages[contributor.profile_path]
         assert '<article class="site-contributor"' in profile
-        assert 'data-page="about" aria-current="page"' in profile
-        assert '<a href="../about.html#profiles">About</a>' in profile
-        assert '<a href="index.html">Profiles</a></nav>' in profile
+        trail = paper_structure.parse(profile).find("nav", "site-breadcrumbs")
+        assert trail is not None
+        assert [(a.text(), a.attrs["href"]) for a in trail.find_all("a")] == [
+            ("Contributor Profiles", "./"),
+        ]
+        assert any(
+            span.text() == "About" and "aria-current" not in span.attrs
+            for span in trail.find_all("span")
+        )
         assert contributor.display_name in profile
         assert "data-contributor-popover" in profile
         assert 'aria-label="Profile"' in profile
         assert "data-case-popover" in profile
         assert re.search(r'src="../assets/js/article-loader\.[a-f0-9]+\.js"', profile)
         assert re.search(r'src="../assets/js/contributor-popover\.[a-f0-9]+\.js"', profile)
-        assert "contributors/" not in profile
+        assert not re.search(r'href="(?:\.\./|/)?contributors/[^"]*"', profile)
         sources = profile.split(
             '<details class="site-contributor-sources"><summary>Sources</summary>', 1
         )[1].split("</details>", 1)[0]
@@ -232,7 +251,7 @@ def test_credits_link_cases_and_results_preserving_roles_without_duplicates() ->
     )
     assert ">Full Public Name</a>" in directory
     assert 'class="site-credit-tally"' in directory
-    assert '>1 credit</a> <span class="site-tally-levels">(at S' in directory
+    assert '><strong>1</strong> credit</a> <span class="site-tally-levels">(at S' in directory
     assert "<details open>" not in rendered
     long_credits = tuple(
         replace(
@@ -896,3 +915,50 @@ def test_profile_tally_preserves_known_zero_counts_in_display_order() -> None:
     assert render_contributors.profile_tally("wolfram-bentz", (), results=()) == (
         '<span class="site-credit-tally">0 records · 0 results · 0 credits</span>'
     )
+
+
+def test_profile_directory_intro_is_serif_and_accounts_remain_whole_at_narrow_widths(
+    tmp_path: Path,
+) -> None:
+    from devtools import preview_site, site_assets  # noqa: PLC0415
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    directory = next(
+        page
+        for page in render_contributors.contributor_pages()
+        if page.name == "profiles/index.html"
+    )
+    target = tmp_path / directory.name
+    target.parent.mkdir(parents=True)
+    target.write_text(directory.html)
+    site_assets.write_assets(tmp_path, render_overview.asset_files([directory]))
+    measure = probe(Path(__file__).with_name("probes"), "site_contributor/directory")
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with site_browser.api().sync_playwright() as driver:
+            browser = site_browser.launch(driver)
+            page = browser.new_page()
+            page.goto(f"http://127.0.0.1:{server.server_port}/profiles/", wait_until="load")
+            for width in (1280, 390, 320):
+                page.set_viewport_size({"width": width, "height": 900})
+                found = page.evaluate(measure)
+                assert found["intro"] == (
+                    "People whose work is cited or credited in the square-packing record."
+                )
+                assert "PT Serif" in found["introFont"]
+                assert "Source Sans" in found["tableFont"]
+                assert found["overflow"] == 0
+                assert found["accounts"]
+                for account in found["accounts"]:
+                    assert account["width"] >= 16 * 16
+                    for label in account["links"]:
+                        assert label["nowrap"] == "nowrap"
+                        assert label["lines"] <= 1
+                        assert label["inside"]
+                if width < 768:
+                    assert found["tableWidth"] > found["wrapperWidth"]
+            browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()

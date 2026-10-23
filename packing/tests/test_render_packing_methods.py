@@ -120,7 +120,22 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
     assert release.PUBLICATION_EDITION not in markdown
     canonical = render_overview.SITE_URL + paper.SITE_PATH
     assert check_published_site.head_problems(html, canonical, allow_inline_favicon=True) == []
-    assert '<a data-page="explanations" aria-current="page" href="../papers.html">' in html
+    root = paper_structure.parse(html)
+    trail = root.find("nav", "site-breadcrumbs")
+    assert trail is not None
+    assert [(link.text(), link.attrs.get("href")) for link in trail.find_all("a")] == [
+        ("Papers", "../papers.html")
+    ]
+    assert trail.find_all("span")[0].text() == "Learn"
+    assert trail.find_all("span")[0].attrs.get("href") is None
+    assert [
+        (node.tag, node.text())
+        for node in trail.walk()
+        if node.attrs.get("aria-current") == "page"
+    ] == [("span", paper.TITLE)]
+    assert html.count(render_overview.NAVIGATION_SCRIPT.read_text(encoding="utf-8")) == 1
+    assert render_overview.NAVIGATION_SCRIPT in paper.RENDER_INPUTS
+    assert paper.PACKING / "devtools/site_navigation.py" in paper.RENDER_INPUTS
     assert "{{" not in markdown
 
 

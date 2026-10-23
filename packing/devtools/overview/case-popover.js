@@ -85,9 +85,10 @@
     expand?.setAttribute("href", url);
     const n = article.getAttribute("data-case");
     if (n !== null && /^\d+$/.test(n)) {
+      const frontier = new URL("../frontier.html", url);
+      frontier.hash = `n-${n}`;
+      frontierAction?.setAttribute("href", frontier.href);
       const atlas = new URL("../atlas.html", url);
-      atlas.hash = `n-${n}`;
-      frontierAction?.setAttribute("href", atlas.href);
       atlas.hash = `atlas-n-${n}`;
       atlasAction?.setAttribute("href", atlas.href);
     }

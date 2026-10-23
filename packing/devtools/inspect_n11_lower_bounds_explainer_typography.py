@@ -603,7 +603,7 @@ def self_test(path: Path = PAGE) -> None:
             # punctuation and nested layouts must survive scaling to print size too.
             from devtools.prepare_n11_lower_bounds_explainer_math import (  # noqa: PLC0415
                 _MATH_ATTRIBUTES,  # pyright: ignore[reportPrivateUsage]
-                _MEASURE_MATH,  # pyright: ignore[reportPrivateUsage]
+                MEASURE_MATH,
             )
 
             page.goto(path.resolve().as_uri(), wait_until="load")
@@ -621,7 +621,7 @@ def self_test(path: Path = PAGE) -> None:
                 r"\quad",
             ]
             page.evaluate(_RENDER_BASELINE_FIXTURE, sources)
-            fragments = page.evaluate(_MEASURE_MATH, sorted(_MATH_ATTRIBUTES))
+            fragments = page.evaluate(MEASURE_MATH, sorted(_MATH_ATTRIBUTES))
             page.evaluate(_APPLY_FRAGMENTS, fragments)
             for medium in ("screen", "print"):
                 page.emulate_media(media=medium)

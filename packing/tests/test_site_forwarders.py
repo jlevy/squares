@@ -62,7 +62,7 @@ def browser() -> Iterator[Any]:
 def _stand_ins(root: Path) -> None:
     """A stand-in page at each address of the site a forwarder sends a reader to."""
     for _, new in render_overview.MOVED_PAGES:
-        if not new.startswith("https://") and new != "atlas.html":
+        if not new.startswith("https://") and new not in {"atlas.html", "results.html"}:
             (root / new).parent.mkdir(parents=True, exist_ok=True)
             (root / new).write_text(STAND_IN, encoding="utf-8")
     # A registered individual-case target exercises selector forwarding separately
@@ -76,7 +76,12 @@ def site(tmp_path_factory: pytest.TempPathFactory) -> Path:
     root = tmp_path_factory.mktemp("forwarders")
     render_overview.write_site(
         root,
-        [*render_overview.forwarder_pages(), site_renders.page("atlas.html")],
+        [
+            *render_overview.forwarder_pages(),
+            site_renders.page("atlas.html"),
+            site_renders.page("frontier.html"),
+            site_renders.page("results.html"),
+        ],
     )
     _stand_ins(root)
     return root
@@ -104,6 +109,8 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
         *render_overview.forwarder_pages(),
         site_renders.page("index.html"),
         site_renders.page("atlas.html"),
+        site_renders.page("frontier.html"),
+        site_renders.page("results.html"),
     ]
     render_overview.write_site(root, files)
     _stand_ins(root)
@@ -136,14 +143,22 @@ def _arrives(
         if atlas:
             # Parse every row before the conditional fragment-visibility check.
             page.wait_for_load_state("domcontentloaded")
-            assert page.locator("h1#the-atlas-of-square-packings").text_content() == (
-                "The Atlas of Square Packings"
-            )
-            assert page.locator('tr#n-17 a[data-case="17"]').first.get_attribute("href") == (
-                "cases/17.html"
-            )
+            survey = "frontier.html" in expected
+            if survey:
+                assert (
+                    page.locator("h1#the-frontier-survey").text_content() == "Frontier Survey"
+                )
+                assert page.locator('tr#n-17 a[data-case="17"]').first.get_attribute(
+                    "href"
+                ) == ("cases/17.html")
+            else:
+                assert (
+                    page.locator("h1#the-atlas-of-square-packings").text_content()
+                    == "Visual Atlas"
+                )
+                assert page.locator("a.site-atlas-cell").count() == 324
             assert page.locator('link[rel="canonical"]').get_attribute("href") == (
-                render_overview.canonical_url("atlas.html")
+                render_overview.canonical_url("frontier.html" if survey else "atlas.html")
             )
             fragment = page.url.rsplit("#", 1)[-1]
             if fragment.startswith("n-") and fragment[2:].isdigit():
@@ -172,9 +187,10 @@ def _arrivals(root: str, *, canonical: bool = False) -> dict[str, str]:
     }
     return {
         **profiles,
+        "downloads.html": f"{root}/posters.html",
         "all-results.html": f"{root}/results.html",
+        "recent-results.html": f"{root}/results.html",
         "status.html": f"{root}/atlas.html",
-        "frontier.html": f"{root}/atlas.html",
         "defects.html": DEFECTS,
         "explainer.html": f"{root}/{LOWER_BOUNDS_PAPER}",
         "n11-optimality/t-060-explainer.html": f"{root}/{OPTIMALITY_PAPER}",
@@ -188,7 +204,7 @@ def test_each_old_address_arrives_with_its_query_and_fragment(browser: Any, site
     moved = dict(render_overview.MOVED_PAGES)
     assert moved["all-results.html"] == "results.html"
     assert moved["status.html"] == "atlas.html"
-    assert moved["frontier.html"] == "atlas.html"
+    assert "frontier.html" not in moved
     assert moved["defects.html"] == DEFECTS
     assert moved["explainer.html"] == LOWER_BOUNDS_PAPER
     root = site.as_uri()
@@ -225,18 +241,73 @@ def test_each_old_address_arrives_with_its_query_and_fragment(browser: Any, site
 @pytest.mark.parametrize(
     "suffix",
     [
+        "?recent=true",
+        "?open=true&view=embed",
+        "?status=proved",
+        "?n-min=17&n-max=18",
         "#n-291",
         "?recent=true#n-291",
         "#the-frontier-survey",
         "#the-survey",
+        "#best-known-results",
         "?view=embed#frontier-table",
     ],
 )
-def test_legacy_frontier_row_section_and_query_links_arrive_on_atlas(
+@pytest.mark.parametrize("old", ["atlas.html", "status.html"])
+def test_legacy_atlas_survey_links_arrive_on_the_separate_frontier(
+    browser: Any, served: str, suffix: str, old: str
+) -> None:
+    arrival = f"{served}frontier.html{suffix}"
+    assert (
+        _arrives(browser, f"{served}{old}{suffix}", arrival, scripts=True, atlas=True)
+        == arrival
+    )
+
+
+@pytest.mark.parametrize(
+    "suffix",
+    [
+        "",
+        "?s-min=4&current=true#t-018",
+        "?added-age=7#recent-results",
+        "?search=certificate#recent-arrivals",
+        "#added-in-the-last-seven-days",
+        "#earlier-results-by-week-published",
+        "#recent-results-older",
+    ],
+)
+def test_recent_results_compatibility_reaches_the_one_complete_table(
     browser: Any, served: str, suffix: str
 ) -> None:
-    arrival = f"{served}atlas.html{suffix}"
-    assert _arrives(browser, f"{served}frontier.html{suffix}", arrival, scripts=True) == arrival
+    fragment = suffix.partition("#")[2]
+    current = suffix
+    if fragment and not fragment.startswith("t-"):
+        current = suffix.partition("#")[0] + "#all-results"
+    expected = f"{served}results.html{current}"
+    assert (
+        _arrives(browser, f"{served}recent-results.html{suffix}", expected, scripts=True)
+        == expected
+    )
+
+
+def test_recent_section_alias_keeps_result_and_learn_menus_usable(
+    browser: Any, served: str
+) -> None:
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    try:
+        page.goto(f"{served}recent-results.html?added-age=7#recent-arrivals", wait_until="load")
+        site_browser.api().expect(page).to_have_url(
+            f"{served}results.html?added-age=7#all-results"
+        )
+        for name in ("Results", "Learn"):
+            button = page.get_by_role("button", name=name, exact=True)
+            button.click()
+            site_browser.api().expect(button).to_have_attribute("aria-expanded", "true")
+        site_browser.api().expect(page.locator("#site-nav-learn a").first).to_have_text(
+            "Tutorials"
+        )
+    finally:
+        page.close()
 
 
 def test_without_scripts_the_refresh_still_arrives(browser: Any, site: Path) -> None:
@@ -314,7 +385,7 @@ def test_the_overview_sends_an_old_explainer_fragment_to_the_paper(
     # The Frontier Survey left the overview the same day: both its fragments go to the
     # Frontier page, whose title carries the first.
     for survey in ("the-frontier-survey", "the-survey"):
-        arrival = f"{served}atlas.html#{survey}"
+        arrival = f"{served}frontier.html#{survey}"
         assert _arrives(browser, f"{served}#{survey}", arrival, scripts=True) == arrival
     stays = f"{served}#recent-results"
     assert _arrives(browser, stays, stays, scripts=True) == stays
@@ -455,9 +526,9 @@ def test_published_forwarders_reach_canonical_content(
 @pytest.mark.parametrize(
     ("suffix", "target"),
     [
-        ("#n-17", "atlas.html#n-17"),
-        ("?recent=true#n-291", "atlas.html?recent=true#n-291"),
-        ("?n=17&view=embed", "atlas.html?view=embed#n-17"),
+        ("#n-17", "frontier.html#n-17"),
+        ("?recent=true#n-291", "frontier.html?recent=true#n-291"),
+        ("?n=17&view=embed", "frontier.html?view=embed#n-17"),
         ("?n=17&view=embed#bounds", "cases/17.html?view=embed#bounds"),
         ("#n-999", "atlas.html#n-999"),
         ("?n=999&view=embed#bounds", "atlas.html?n=999&view=embed#bounds"),
@@ -482,14 +553,14 @@ def test_case_selectors_preserve_state_and_only_use_registered_destinations(
             root + old + suffix,
             expected,
             scripts=True,
-            atlas=target.startswith("atlas.html"),
+            atlas=target.startswith(("atlas.html", "frontier.html")),
         )
         == expected
     )
 
 
 def test_case_directory_address_arrives_on_its_atlas_row(browser: Any, served: str) -> None:
-    expected = served + "atlas.html#n-291"
+    expected = served + "frontier.html#n-291"
     assert (
         _arrives(browser, served + "cases/#n-291", expected, scripts=True, atlas=True)
         == expected

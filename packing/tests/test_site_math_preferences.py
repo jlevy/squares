@@ -22,6 +22,7 @@ from devtools import (
     site_math,
     site_urls,
 )
+from devtools.prepare_n11_lower_bounds_explainer_math import MEASURE_MATH
 from sqpack.probes import probe
 from tests import site_browser
 
@@ -38,6 +39,47 @@ def browser() -> Iterator[Browser]:
         driver = site_browser.launch(playwright)
         yield driver
         driver.close()
+
+
+def test_prepared_math_ignores_empty_runtime_style_attribute_order(browser: Browser) -> None:
+    """Font visibility cleanup leaves empty style at timing-dependent attribute positions."""
+    # Exercise the exact production measurement, including its serialized clone cleanup.
+    data = 'data-kpress-math-source="n" data-kpress-math-display="inline"'
+    styled = 'style="color: rgb(1, 2, 3); --publication-note: keep"'
+    attributes = (data, f'style="" {data}', f'{data} style=""', f'style="  " {data}')
+    page = browser.new_page()
+    try:
+        fragments = []
+        for attrs in (*attributes, f"{data} {styled}"):
+            page.set_content(
+                "<style>.base {display:inline-block;font-size:20px;"
+                "text-rendering:geometricPrecision}</style>"
+                '<span class="kpress-math" data-squares-math-key="0">'
+                f'<span class="kpress-math-render" aria-hidden="true" {attrs}>'
+                '<span class="katex"><span class="katex-html"><span class="base">'
+                '<span class="strut" style="display:inline-block;height:1em"></span>n'
+                "</span></span></span></span><math><mi>n</mi></math></span>"
+            )
+            live = page.locator(".kpress-math-render")
+            live_style = live.get_attribute("style")
+            prepared = page.evaluate(
+                MEASURE_MATH,
+                [
+                    "data-kpress-math-source",
+                    "data-kpress-math-display",
+                    "data-kpress-math-prepared",
+                ],
+            )
+            assert len(prepared) == 1
+            fragments.append(prepared[0]["html"])
+            assert live.get_attribute("style") == live_style
+        assert all(fragment == fragments[0] for fragment in fragments[1:-1])
+        assert styled in fragments[-1]
+        assert all("<math><mi>n</mi></math>" in fragment for fragment in fragments)
+        assert all('class="squares-math-box" style="' in fragment for fragment in fragments)
+        assert 'data-kpress-math-source="n"' in fragments[0]
+    finally:
+        page.close()
 
 
 def _native_reference(raw: str, *, prose: str, fonts: str) -> str:

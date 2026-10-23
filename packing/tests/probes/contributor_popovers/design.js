@@ -68,7 +68,11 @@ async (selector) => {
     )
     .filter((node) => node.scrollWidth > node.clientWidth + 1)
     .map((node) => node.className || node.tagName);
+  const breadcrumb = panel ? null : document.querySelector(".site-breadcrumbs");
   return {
+    breadcrumbGap: breadcrumb
+      ? title.getBoundingClientRect().top - breadcrumb.getBoundingClientRect().bottom
+      : null,
     note,
     foreground,
     medium,

@@ -101,7 +101,7 @@ async (options) => {
   const neutralAppearance = appearance(neutral);
   neutral.remove();
   const count = document.querySelector(".site-table-tools .site-count");
-  const countRow = count?.closest(".site-table-tools");
+  const _countRow = count?.closest(".site-table-tools");
   const firstCard = document.querySelector("[data-news-day]:not([hidden])");
 
   const controls = document.querySelector("[data-news-filters]");
@@ -137,42 +137,42 @@ async (options) => {
     };
   });
   specimen.remove();
-  const result = {
-    chooser: group
-      ? {
-          appearance: appearance(option),
-          brightness: brightness(option),
-          check_visible: check ? getComputedStyle(check).visibility === "visible" : null,
-          check_contrast:
-            check && option
-              ? contrast(getComputedStyle(check).color, getComputedStyle(option).backgroundColor)
-              : null,
-          chip_brightness: brightness(referenceChip),
-          neutral: neutralAppearance,
-          role: group.getAttribute("role"),
-          focus_visible: option?.matches(":focus-visible"),
-          selected: option?.getAttribute("aria-selected"),
-          pressed: option?.getAttribute("aria-pressed"),
-          border: getComputedStyle(group).borderTopWidth,
-          gap: getComputedStyle(group).gap,
-          height: option?.getBoundingClientRect().height,
-          label:
-            option?.querySelector("[data-news-topic-label]")?.textContent ?? option?.textContent,
-          chip_label: document.querySelector(
+  const chooserState = group
+    ? {
+        appearance: appearance(option),
+        brightness: brightness(option),
+        check_visible: check ? getComputedStyle(check).visibility === "visible" : null,
+        check_contrast:
+          check && option
+            ? contrast(getComputedStyle(check).color, getComputedStyle(option).backgroundColor)
+            : null,
+        chip_brightness: brightness(referenceChip),
+        neutral: neutralAppearance,
+        role: group.getAttribute("role"),
+        focus_visible: option?.matches(":focus-visible"),
+        selected: option?.getAttribute("aria-selected"),
+        pressed: option?.getAttribute("aria-pressed"),
+        border: getComputedStyle(group).borderTopWidth,
+        gap: getComputedStyle(group).gap,
+        height: option?.getBoundingClientRect().height,
+        label: option?.querySelector("[data-news-topic-label]")?.textContent ?? option?.textContent,
+        chip_label: document.querySelector(
+          `.site-news-topics [data-news-topic="${option?.getAttribute("data-news-topic")}"]`,
+        )?.textContent,
+        chip: appearance(
+          document.querySelector(
             `.site-news-topics [data-news-topic="${option?.getAttribute("data-news-topic")}"]`,
-          )?.textContent,
-          chip: appearance(
-            document.querySelector(
-              `.site-news-topics [data-news-topic="${option?.getAttribute("data-news-topic")}"]`,
-            ),
           ),
-        }
-      : null,
+        ),
+      }
+    : null;
+  if (chooser) {
+    override.remove();
+    return { chooser: chooserState };
+  }
+  const result = {
+    chooser: chooserState,
     count_style: appearance(count),
-    count_right_gap:
-      count && countRow
-        ? countRow.getBoundingClientRect().right - count.getBoundingClientRect().right
-        : null,
     count_card_right_gap:
       count && firstCard
         ? firstCard.getBoundingClientRect().right - count.getBoundingClientRect().right
@@ -215,11 +215,19 @@ async (options) => {
         button.getAttribute("data-site-tooltip") || button.getAttribute("title"),
       ]),
     ),
+    news_topic_palette: [
+      ...document.querySelectorAll(".site-news-topics .site-chip, button[data-news-topic]"),
+    ].map((chip) => ({
+      topic: chip.getAttribute("data-news-topic"),
+      background: getComputedStyle(chip).backgroundColor,
+      color: getComputedStyle(chip).color,
+      contrast: contrast(getComputedStyle(chip).color, getComputedStyle(chip).backgroundColor),
+    })),
     topic_palette: Object.fromEntries(
       [...document.querySelectorAll(".site-news-topics .site-chip, .site-chip[data-kind]")].map(
         (chip) => [
           chip.getAttribute("data-news-topic") || chip.getAttribute("data-kind"),
-          getComputedStyle(chip).backgroundColor,
+          getComputedStyle(chip).color,
         ],
       ),
     ),

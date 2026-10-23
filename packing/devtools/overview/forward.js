@@ -123,9 +123,12 @@
       if (known.split(",").includes(n)) {
         url.searchParams.delete("n");
         // A named record section keeps its canonical record destination. Plain
-        // selectors use the Atlas survey row, whose fragment overrides its filters.
+        // selectors use the survey row, whose fragment overrides its filters.
         const recordSection = query !== null && fragment === undefined && url.hash !== "";
-        const target = recordSection ? moved.replace(/atlas\.html$/, `cases/${n}.html`) : moved;
+        const target = moved.replace(
+          /atlas\.html$/,
+          recordSection ? `cases/${n}.html` : "frontier.html",
+        );
         const hash = recordSection ? url.hash : `#n-${n}`;
         window.location.replace(`${target}${url.search}${hash}`);
         return;
@@ -158,10 +161,34 @@
       return;
     }
   }
+  const query = new URLSearchParams(window.location.search);
+  if (
+    new URL(window.location.href).pathname.endsWith("/atlas.html") &&
+    !fragment &&
+    ["n-min", "n-max", "status", "open", "recent"].some((key) => query.has(key)) &&
+    !["atlas", "size", "scale"].some((key) => query.has(key))
+  ) {
+    forward("frontier.html");
+    return;
+  }
   if (!fragment) {
     return;
   }
   if (document.getElementById(id)) {
+    return;
+  }
+  const surveySection = [
+    "the-frontier-survey",
+    "the-survey",
+    "best-known-results",
+    "frontier-table",
+  ].includes(id);
+  const surveyRow = /^n-\d+$/.test(id) && Number(id.slice(2)) >= 1 && Number(id.slice(2)) <= 324;
+  if (
+    new URL(window.location.href).pathname.endsWith("/atlas.html") &&
+    (surveySection || surveyRow)
+  ) {
+    forward("frontier.html");
     return;
   }
   const all = document.querySelector("[data-all-results]");
@@ -188,7 +215,7 @@
   if (result) {
     forward("results.html");
   } else if (id === "the-frontier-survey" || id === "the-survey") {
-    forward("atlas.html");
+    forward("frontier.html");
   } else if (explainerAnchors.has(id)) {
     forward("papers/n11-lower-bounds-explainer.html");
   }

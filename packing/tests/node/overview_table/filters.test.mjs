@@ -162,7 +162,8 @@ function page({ search = "", hash = "", age = "", hide = false, today = "2026-10
     /** @param {string} selector */
     querySelectorAll: (selector) =>
       selector === "[data-preset]" ? presets : Object.values(controls),
-    querySelector: () => count,
+    /** @param {string} selector */
+    querySelector: (selector) => (selector === ".site-count" ? count : null),
     removeAttribute: () => undefined,
     /** @param {string} type @param {() => void} listener */
     addEventListener: (type, listener) => listeners[type]?.push(listener),

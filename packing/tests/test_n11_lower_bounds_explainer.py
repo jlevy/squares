@@ -26,6 +26,7 @@ from devtools import (
     build_known_best_atlas,
     check_published_site,
     paper_links,
+    paper_structure,
     render_contributors,
     render_n11_lower_bounds_explainer,
     render_overview,
@@ -141,16 +142,24 @@ def test_the_explainer_ends_with_the_sites_closing_credit_without_its_version(
 
 
 def test_the_bar_marks_papers_current_on_the_explainer(page: str) -> None:
-    """The explainer is one of the site's papers: the bar has no entry of its own for it,
-    Papers is the one marked current, and the page is served under `papers/` by its slug,
-    so the bar's links climb one level to the site's root. The bar is the site's one
-    partial, so its entries stand in the order every other page has them."""
-    assert page.count(render_overview.nav_html("papers", root=SITE_ROOT)) == 1
-    assert re.findall(r'<a data-page="(\w+)" aria-current="page"', page) == ["explanations"]
-    assert (
-        '<a data-page="explanations" aria-current="page" href="../papers.html">Explanations</a>'
-        in page
-    )
+    """The paper shares the Learn hierarchy and names itself in the breadcrumb."""
+    assert page.count(render_overview.nav_html(SITE_PATH, root=SITE_ROOT)) == 1
+    root = paper_structure.parse(page)
+    trail = root.find("nav", "site-breadcrumbs")
+    assert trail is not None
+    assert [(link.text(), link.attrs.get("href")) for link in trail.find_all("a")] == [
+        ("Papers", "../papers.html")
+    ]
+    assert trail.find_all("span")[0].text() == "Learn"
+    assert trail.find_all("span")[0].attrs.get("href") is None
+    assert [
+        (node.tag, node.text())
+        for node in trail.walk()
+        if node.attrs.get("aria-current") == "page"
+    ] == [("span", render_n11_lower_bounds_explainer.TITLE)]
+    assert page.count(render_overview.NAVIGATION_SCRIPT.read_text(encoding="utf-8")) == 1
+    assert render_overview.NAVIGATION_SCRIPT in RENDER_INPUTS
+    assert REPO / "packing/devtools/site_navigation.py" in RENDER_INPUTS
     assert 'data-page="explainer"' not in page
     assert SLUG == "n11-lower-bounds-explainer"
     assert f"papers/{SLUG}.html" == SITE_PATH
@@ -1107,11 +1116,18 @@ def test_every_relative_link_in_the_page_names_a_file_the_deploy_serves(page: st
         f"{PAPERS_DIR}/{PDF_OUTPUT.name}",
         *(asset.name for asset in COMPOSITE_ASSETS),
         *SITE_PAGES,
+        "workbench/index.html",
         *render_contributors.page_paths(),
         *(page.removesuffix("index.html") or "./" for page in SITE_PAGES),
         # The series' other papers, which the page links (`devtools.paper_links`).
         *(render_overview.paper_path(slug) for slug in paper_links.PAPER_SLUGS),
     }
+    served = {posixpath.normpath(path) for path in served}
+    served.update(
+        posixpath.dirname(path) or "."
+        for path in tuple(served)
+        if posixpath.basename(path) == "index.html"
+    )
     # Markup only. The page inlines KaTeX and kpress's client, and a minified
     # `'+a(this.src)+'` in one of them reads as an attribute to a regex that does not
     # know where the script ends.
@@ -1127,9 +1143,7 @@ def test_every_relative_link_in_the_page_names_a_file_the_deploy_serves(page: st
         for link in links
     }
     assert all(not path.startswith("..") for path in resolved.values()), resolved
-    missing = sorted(
-        link for link, path in resolved.items() if (path if path != "." else "./") not in served
-    )
+    missing = sorted(link for link, path in resolved.items() if path not in served)
     assert not missing, f"relative links to files the deploy does not serve: {missing}"
     # The atlas's files are at the root, where the overview links them and a link
     # preview names the card: the page reaches each a level up.

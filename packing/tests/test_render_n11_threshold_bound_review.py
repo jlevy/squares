@@ -254,12 +254,26 @@ def test_the_page_carries_the_sites_bar_and_the_shared_layers(
     navs = root.find_all("nav", "site-nav")
     assert len(navs) == 1
     assert navs[0].attrs.get("aria-label")
-    current = [link for link in root.find_all("a") if link.attrs.get("aria-current") == "page"]
-    assert [(link.attrs.get("data-page"), link.attrs.get("href")) for link in current] == [
-        ("explanations", "../papers.html")
+    current = [
+        link for link in navs[0].find_all("button") if link.attrs.get("aria-current") == "true"
     ]
-    assert current[0] in navs[0].find_all("a")
-    assert current[0].text() == "Explanations"
+    assert [(link.attrs.get("data-page"), link.attrs.get("href")) for link in current] == [
+        ("learn", None)
+    ]
+    assert current[0].text() == "Learn"
+    trail = root.find("nav", "site-breadcrumbs")
+    assert trail is not None
+    assert [(link.text(), link.attrs.get("href")) for link in trail.find_all("a")] == [
+        ("Papers", "../papers.html")
+    ]
+    assert trail.find_all("span")[0].text() == "Learn"
+    assert trail.find_all("span")[0].attrs.get("href") is None
+    assert [
+        (node.tag, node.text())
+        for node in trail.walk()
+        if node.attrs.get("aria-current") == "page"
+    ] == [("span", paper.TITLE)]
+    assert html.count(render_overview.NAVIGATION_SCRIPT.read_text(encoding="utf-8")) == 1
     layer = paper.render_n11_lower_bounds_explainer.publication_layer()
     head = html.split("</head>", 1)[0]
     for name, value in layer.items():
@@ -271,6 +285,8 @@ def test_the_page_carries_the_sites_bar_and_the_shared_layers(
         render_overview.PAPER_TYPE_CSS,
         render_overview.SITE_NAV,
         render_overview.SITE_NAV_CSS,
+        render_overview.NAVIGATION_SCRIPT,
+        paper.PACKING / "devtools/site_navigation.py",
         render_overview.THEME_SCRIPT,
         render_overview.EMBED_SCRIPT,
         render_overview.MATH_SCRIPT,

@@ -116,12 +116,12 @@ def _requests(page: Any) -> list[str]:
 
 @pytest.fixture(scope="module")
 def film_payloads() -> dict[str, bytes]:
-    """Only the homepage and local poster assets, without rendering the case records."""
-    html = site_renders.html("index.html")
-    files = site_assets.shared().assets.referenced([html])
+    """Homepage and standalone Videos, without rendering the case records."""
+    documents = {name: site_renders.html(name) for name in ("index.html", "visualize.html")}
+    files = site_assets.shared().assets.referenced(documents.values())
     posters = {hero for _, hero, *_ in overview_sections.ATLAS_CARDS}
     return {
-        "index.html": html.encode("utf-8"),
+        **{name: html.encode("utf-8") for name, html in documents.items()},
         **{f"assets/{name}": data for name, data in files.items()},
         **render_overview.support_files(),
         **{path.name: path.read_bytes() for path in COMPOSITE_ASSETS if path.name in posters},
@@ -129,11 +129,11 @@ def film_payloads() -> dict[str, bytes]:
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
+def test_homepage_links_to_native_videos_and_reduced_motion_waits_for_click(
     browser: Any, request: pytest.FixtureRequest, width: int
 ) -> None:
     requests = []
-    page = browser.new_page(viewport={"width": width, "height": 900})
+    page = browser.new_page(viewport={"width": width, "height": 900}, reduced_motion="reduce")
     live = os.environ.get("SQPACK_SITE_PREVIEW_URL")
     origin = f"{live.rstrip('/')}/" if live else ORIGIN
     if not live:
@@ -146,7 +146,11 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
     page.route(render_overview.FILM_URL, intercept)
     try:
         page.goto(f"{origin}index.html", wait_until="load")
-        film = page.locator(".site-homepage-film video")
+        assert page.locator("video").count() == 0
+        videos = page.locator('a[href="visualize.html"]').filter(has_text="View Videos")
+        assert videos.count() == 1
+        videos.click()
+        film = page.locator(".site-film-frame video")
         film.scroll_into_view_if_needed()
         state = page.evaluate(FILM)
         assert requests == [], "preload=none must wait for the reader"
@@ -154,7 +158,7 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
         assert state["inline"]
         assert state["preload"] == "none"
         assert not state["autoplay"]
-        assert not state["marked_autoplay"]
+        assert state["marked_autoplay"]
         assert state["paused"]
         assert state["play_icon"]["content"] == '""'
         assert state["play_icon"]["width"] > 0
@@ -167,26 +171,11 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
         assert state["label"]
         assert state["codec"] == "probably"
         assert abs(state["center_offset"]) <= 1
-        assert state["width"] <= state["max_width"] + 1
+        assert state["height"] <= 900
         assert state["left"] >= 0
         assert state["right"] <= width
         assert state["overflow"] <= 0
         assert state["width"] / state["height"] == pytest.approx(16 / 9, abs=0.01)
-        assert [heading["id"] for heading in state["headings"]] == [
-            "the-problem",
-            "the-atlas-of-square-packings",
-            "news",
-            "recent-results",
-            "profiles",
-            "report-your-results",
-            "papers",
-            "visuals",
-            "squares-project-documentation",
-            "more-resources",
-        ]
-        for heading in state["headings"]:
-            assert heading["above"] == pytest.approx(state["title_above"], abs=0.01)
-            assert heading["below"] == pytest.approx(state["title_below"], abs=0.01)
         overlay = page.get_by_role("button", name="Play video", exact=True)
         with page.expect_request(render_overview.FILM_URL, timeout=5000):
             overlay.click()
@@ -311,7 +300,7 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
         for href in report["hero_case"]["actions"]
     ] == [
         "cases/53.html",
-        "atlas.html#n-53",
+        "frontier.html#n-53",
         "atlas.html#atlas-n-53",
     ]
     assert report["static_hero"]["drawings"][0]["href"] == "cases/53.html"
@@ -718,15 +707,15 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
         "the-atlas-of-square-packings",
         "news",
         "recent-results",
-        "report-your-results",
         "papers",
+        "report-your-results",
     ]
     assert home["main_titles"] == [
         "the-problem",
         "profiles",
         "visuals",
-        "squares-project-documentation",
         "more-resources",
+        "about-the-squares-project",
     ]
     assert len(home["section_title_styles"]) == 9
     selected = news_highlights.highlights(render_changelog.load())
@@ -736,12 +725,12 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     assert len(home["news_headings"]) == len(selected)
     assert all(heading["title"] for heading in home["news_headings"])
     assert [heading["href"] for heading in home["paper_headings"]] == [
-        paper.href for paper in overview_sections.PAPERS
+        paper.href for paper in (*overview_sections.PAPERS[-2:], overview_sections.PAPERS[0])
     ]
     assert all(heading["title"] for heading in home["paper_headings"])
     assert home["other_lower_headings"] == []
     assert all(style == home["main_title_style"] for style in home["section_title_styles"])
-    assert home["recent_title"] == "Recent Major Results"
+    assert home["recent_title"] == "Results"
     assert home["media"] == {
         "visuals": ["square-packings-324-20261008.pdf"],
     }
@@ -751,7 +740,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     for action in home["actions"]:
         assert action["transform"] == "uppercase", action
     download = seen[width]["download"]
-    assert download["order"] == ["Download PDF", "Explore the atlas"]
+    assert download["order"] == ["Download PDF", "View Visual Atlas"]
     assert download["href"] == overview_sections.PDF_CARD_SPECS[1][0]
     assert download["download"]
     assert download["uppercase"] == "uppercase"
@@ -762,12 +751,12 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     assert home["solo_cards"]
     for card in home["solo_cards"]:
         assert abs(card["center_offset"]) <= 1, card
-    assert "squares-project-documentation" in seen[width]["about"]["main_titles"]
+    assert seen[width]["about"]["main_titles"] == ["the-squares-project"]
 
 
 @pytest.fixture(scope="module")
 def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
-    """Use the two real Results actions without repeating Atlas interactions."""
+    """Follow the one complete Results action by keyboard and pointer."""
     sync_api = site_browser.api()
     readings = {}
     live = os.environ.get("SQPACK_SITE_PREVIEW_URL")
@@ -792,32 +781,33 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
         try:
             page.goto(f"{origin}index.html?s=4", wait_until="load")
             initial = page.evaluate(STATE)
-            verification = page.get_by_role(
-                "link", name=re.compile("^About Result Verification$", re.IGNORECASE)
+            all_results = page.locator("a[data-all-results]")
+            sync_api.expect(all_results).to_have_text(
+                re.compile("^View All Results$", re.IGNORECASE)
             )
-            bounds = verification.bounding_box()
+            bounds = all_results.bounding_box()
             assert bounds is not None
             assert bounds["x"] >= 0
             assert bounds["x"] + bounds["width"] <= width
-            verification.focus()
+            all_results.focus()
             with page.expect_navigation(wait_until="load"):
                 page.keyboard.press("Enter")
-            destination = f"{origin}results.html#verification-ladders"
+            destination = f"{origin}results.html?s=4#all-results"
             sync_api.expect(page).to_have_url(destination)
-            sync_api.expect(page.locator("#verification-ladders")).to_be_in_viewport()
-            sync_api.expect(page.locator("div.site-rung-legend[role=note]")).to_have_count(0)
+            sync_api.expect(
+                page.get_by_role("heading", name="All Results", exact=True)
+            ).to_be_visible()
+            sync_api.expect(page.locator("#all-results")).to_be_in_viewport()
             keyboard_destination = page.url
             page.goto(f"{origin}index.html?s=4", wait_until="load")
-            all_results = page.get_by_role(
-                "link", name=re.compile("^All Results$", re.IGNORECASE)
-            )
+            all_results = page.locator("a[data-all-results]")
             bounds = all_results.bounding_box()
             assert bounds is not None
             assert bounds["x"] >= 0
             assert bounds["x"] + bounds["width"] <= width
             with page.expect_navigation(wait_until="load"):
                 all_results.click()
-            sync_api.expect(page).to_have_url(f"{origin}results.html?s=4#all-results")
+            sync_api.expect(page).to_have_url(destination)
             sync_api.expect(page.locator("#all-results")).to_be_in_viewport()
             readings[width] = {
                 "initial": initial,
@@ -831,7 +821,7 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
 
 
 @pytest.mark.parametrize("width", NAV_WIDTHS)
-def test_results_actions_reach_verification_and_the_complete_table(
+def test_results_action_reaches_complete_archive_by_keyboard_and_pointer(
     results_navigation_seen: dict[int, dict[str, Any]], width: int
 ) -> None:
     reading = results_navigation_seen[width]
@@ -1264,11 +1254,8 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         return seen
 
     def pressed_under_pointer(button: Any, topic: str, scheme: str) -> None:
-        """A press on a topic shows at once, with the pointer still on it: pale turns
-        full and full turns pale, or on a touch screen gray turns full and back. The
-        selected state carries a visible check against its fill, so selection never
-        rests on hue alone, and holding the check's place keeps the button where it was
-        (`think-slt2`)."""
+        """A topic retains its neutral surface and colored ink when pressed. The
+        visible check carries selection without moving the button (`think-slt2`)."""
         choice = {
             "chooser": '[aria-labelledby="news-topics-label"]',
             "choice": f'[data-news-topic="{topic}"]',
@@ -1282,22 +1269,20 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             states.append(page.evaluate(NEWS_FILTERS, choice)["chooser"])
             assert button.bounding_box() == box, (scheme, topic)
         fills = [state["appearance"]["background-color"] for state in states]
-        assert fills[0] != fills[1] != fills[2], (scheme, topic, fills)
-        assert fills[0] == fills[2], (scheme, topic, fills)
+        assert len(set(fills)) == 1, (scheme, topic, fills)
         for state in states:
             pressed = state["pressed"] == "true"
             assert state["check_visible"] is pressed, (scheme, topic, state["pressed"])
+            assert (
+                state["appearance"]["background-color"] == state["chip"]["background-color"]
+            ), (scheme, topic)
             if pressed:
-                assert (
-                    state["appearance"]["background-color"]
-                    == (state["chip"]["background-color"])
-                ), (scheme, topic)
                 assert state["check_contrast"] >= 4.5, (scheme, topic, state["check_contrast"])
-            elif width == 390:
-                assert (
-                    state["appearance"]["background-color"]
-                    == (state["neutral"]["background-color"])
-                ), (scheme, topic)
+
+    def open_topics() -> None:
+        trigger = page.locator("[data-site-filter-trigger]")
+        if trigger.get_attribute("aria-expanded") != "true":
+            trigger.click()
 
     def score_explanations_leave_the_filters_free() -> None:
         """An S button's explanation never lies over a filter control or the shown
@@ -1322,8 +1307,8 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             clear = page.evaluate(TOOLTIP_CLEAR)
             assert clear["covers"] == clear["covers_header"] == [], ("focus", score, clear)
             page.keyboard.press("Escape")
-            topics = page.locator("button[data-news-topic]").all()
-            for topic in topics if width == 1280 else topics[:1]:
+            topics = page.locator("[data-site-filter-trigger]").all()
+            for topic in topics:
                 page.mouse.move(0, 0)
                 button.hover()
                 sync_api.expect(tooltip).to_be_visible()
@@ -1331,11 +1316,11 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 assert clear["covers"] == clear["covers_header"] == [], ("hover", score, clear)
                 box = topic.bounding_box()
                 assert box is not None
-                pressed = topic.get_attribute("aria-pressed")
+                expanded = topic.get_attribute("aria-expanded")
                 page.mouse.click(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
-                assert topic.get_attribute("aria-pressed") != pressed, (score, clear)
+                assert topic.get_attribute("aria-expanded") != expanded, (score, clear)
                 topic.click()
-                assert topic.get_attribute("aria-pressed") == pressed
+                assert topic.get_attribute("aria-expanded") == expanded
         if width != 1280:
             return
         # Scrolled down and then back up, the header shows, and with the filters 120 px
@@ -1374,23 +1359,12 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                     '[data-news-score="4"]',
                     '[data-news-score="3"]',
                 ),
-                (
-                    "topics",
-                    "news.html",
-                    '[aria-labelledby="news-topics-label"]',
-                    '[data-news-topic][aria-pressed="true"]',
-                    '[data-news-topic][aria-pressed="false"]',
-                ),
             ):
                 page.goto(f"{ORIGIN}{surface}", wait_until="load")
-                if name == "topics":
-                    page.locator(group).locator("[data-news-topic]").first.click()
                 samples = {}
                 for selection, choice in (("selected", chosen), ("unselected", other)):
                     control = page.locator(group).locator(choice).first
                     for interaction in ("normal", "hover", "focus"):
-                        # A score's explanation opens above the filters, over the
-                        # heading: dismiss it before the heading takes focus back.
                         page.keyboard.press("Escape")
                         page.locator("h1").first.click()
                         page.mouse.move(0, 0)
@@ -1412,118 +1386,81 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                                 sync_api.expect(
                                     page.locator(".site-rating-tooltip.kpress-tooltip-visible")
                                 ).to_have_text(f"Significance S{score}: {level}")
-                        if name == "topics":
-                            assert sample["label"] == sample["chip_label"]
-                            for property_name in (
-                                "color",
-                                "text-transform",
-                                "font-variant-caps",
-                                "letter-spacing",
-                            ):
-                                assert (
-                                    sample["appearance"][property_name]
-                                    == sample["chip"][property_name]
-                                ), (
-                                    scheme,
-                                    selection,
-                                    interaction,
-                                    property_name,
-                                )
-                            fill = sample["appearance"]["background-color"]
-                            # Only an unselected topic under a hovering pointer turns
-                            # pale; a touch screen has no hover (`think-slt2`).
-                            pale = interaction == "hover" and selection == "unselected"
-                            if pale and width != 390:
-                                assert fill != sample["chip"]["background-color"]
-                                assert fill != sample["neutral"]["background-color"]
-                                if scheme == "light":
-                                    assert sample["brightness"] > sample["chip_brightness"]
-                                else:
-                                    assert sample["brightness"] < sample["chip_brightness"]
-                            elif selection == "selected":
-                                assert fill == sample["chip"]["background-color"]
-                            else:
-                                assert fill == sample["neutral"]["background-color"]
                         samples[selection, interaction] = {
                             key: sample[key]
                             for key in ("appearance", "border", "gap", "height")
                         }
                 appearances[name] = samples
             assert appearances["scores"] == appearances["home"], scheme
-            topic_properties = {
-                "background-color",
-                "color",
-                "text-transform",
-                "font-variant-caps",
-                "letter-spacing",
-                "box-shadow",
-                "outline-color",
-                "text-decoration-line",
-            }
-            for key, topic in appearances["topics"].items():
-                home = appearances["home"][key]
-                assert {
-                    name: value
-                    for name, value in topic["appearance"].items()
-                    if name not in topic_properties
-                } == {
-                    name: value
-                    for name, value in home["appearance"].items()
-                    if name not in topic_properties
-                }, (scheme, key)
-                assert topic["appearance"]["text-transform"] == "none"
-                assert topic["appearance"]["font-variant-caps"] == "normal"
-                if key[1] == "focus":
-                    assert topic["appearance"]["outline-style"] != "none"
-                    assert topic["appearance"]["outline-width"] != "0px"
-                assert topic["appearance"]["box-shadow"] == "none"
-                assert topic["appearance"]["text-decoration-line"] == "none"
-                assert topic["border"] == home["border"] == "0px"
-                assert topic["appearance"]["border-top-width"] == "1px"
-                assert topic["appearance"]["border-right-width"] == "1px"
-                assert topic["gap"] == home["gap"] == "normal"
-                assert topic["height"] == pytest.approx(home["height"], abs=0.1)
-            topic_group = page.locator('[aria-labelledby="news-topics-label"]')
-            group_box = topic_group.bounding_box()
-            assert group_box is not None
-            rows = set()
-            for button in topic_group.locator("button").all():
-                box = button.bounding_box()
-                assert box is not None
-                rows.add(round(box["y"], 1))
-                assert group_box["x"] <= box["x"]
-                assert box["x"] + box["width"] <= group_box["x"] + group_box["width"]
-                assert group_box["y"] <= box["y"]
-                assert box["y"] + box["height"] <= group_box["y"] + group_box["height"]
-                sync_api.expect(button).to_have_css("white-space", "nowrap")
-                sync_api.expect(button).to_have_css("border-right-width", "1px")
-                if topic := button.get_attribute("data-news-topic"):
-                    sample = page.evaluate(
-                        NEWS_FILTERS,
-                        {
-                            "chooser": '[aria-labelledby="news-topics-label"]',
-                            "choice": f'[data-news-topic="{topic}"]',
-                        },
-                    )["chooser"]
-                    assert sample["label"] == sample["chip_label"]
-                    pressed_under_pointer(button, topic, scheme)
-            if width == 390:
-                assert len(rows) > 1
             request.node.user_properties.append(
                 (f"chooser-{scheme}", str(appearances["home"]["selected", "normal"]))
             )
+            page.keyboard.press("Escape")
+            trigger = page.locator("[data-site-filter-trigger]")
+            panel = page.locator("[data-site-filter-options]")
+            assert trigger.get_attribute("aria-controls") == panel.get_attribute("id")
+            sync_api.expect(panel).to_have_css("transition-duration", "0s")
+            sync_api.expect(panel).to_be_hidden()
+            assert page.locator("[data-site-filter-summary]").text_content() == "All"
+            trigger.focus()
+            page.keyboard.press("ArrowDown")
+            all_topics = panel.locator("[data-site-filter-all]")
+            sync_api.expect(all_topics).to_be_focused()
+            page.keyboard.press("End")
+            sync_api.expect(panel.locator("button").last).to_be_focused()
+            page.keyboard.press("Home")
+            sync_api.expect(all_topics).to_be_focused()
+            page.keyboard.press("ArrowDown")
+            first = panel.locator("button[data-news-topic]").first
+            sync_api.expect(first).to_be_focused()
+            page.keyboard.press("Space")
+            assert first.get_attribute("aria-pressed") == "false"
+            assert trigger.get_attribute("aria-expanded") == "true"
+            page.keyboard.press("Space")
+            assert first.get_attribute("aria-pressed") == "true"
+            for button in panel.locator("button[data-news-topic]").all():
+                topic = button.get_attribute("data-news-topic")
+                assert topic
+                pressed_under_pointer(button, topic, scheme)
+            panel_box = panel.bounding_box()
+            assert panel_box is not None
+            assert panel_box["x"] >= 15
+            assert panel_box["x"] + panel_box["width"] <= width - 15
+            page.keyboard.press("Escape")
+            sync_api.expect(panel).to_be_hidden()
+            sync_api.expect(trigger).to_be_focused()
+            open_topics()
+            page.locator("h1").first.click()
+            sync_api.expect(panel).to_be_hidden()
+            open_topics()
+            panel.locator("button").last.focus()
+            page.keyboard.press("Tab")
+            sync_api.expect(panel).to_be_hidden()
+            sync_api.expect(page.locator("[data-news-reset]")).to_be_focused()
+            palette = state()["news_topic_palette"]
+            assert palette
+            assert len({chip["background"] for chip in palette}) == 1
+            assert all(chip["contrast"] >= 4.5 for chip in palette), palette
+            assert len({chip["color"] for chip in palette}) > 1
+            page.goto(f"{ORIGIN}news.html?news-topics=verification", wait_until="load")
+            assert page.locator("[data-site-filter-summary]").text_content() == "Verification"
+            open_topics()
+            panel.locator('button[data-news-topic="optimality"]').click()
+            assert page.locator("[data-site-filter-summary]").text_content().endswith("+1")
+            assert trigger.get_attribute("aria-expanded") == "true"
+            all_topics.click()
+            assert page.locator("[data-site-filter-summary]").text_content() == "All"
+            assert "news-topics" not in parse_qs(urlsplit(page.url).query)
+            page.goto(f"{ORIGIN}news.html?news-topics=none", wait_until="load")
+            assert page.locator("[data-site-filter-summary]").text_content() == "None"
+            open_topics()
+            all_topics.click()
+            assert page.locator("[data-site-filter-summary]").text_content() == "All"
             seen = state()
-            if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
-                page.locator(".site-news-filters").screenshot(
-                    path=str(Path(screenshot_dir) / f"news-chooser-{scheme}-{width}.png")
-                )
-            palette = seen["topic_palette"]
-            assert len(set(palette.values())) == len(palette)
             assert seen["groups"] == [
                 {"name": "Significance", "hidden_legend": True, "tabs": 0},
                 {"name": "Topics", "hidden_legend": True, "tabs": 0},
             ]
-            assert abs(seen["count_right_gap"]) <= 0.5
             assert abs(seen["count_card_right_gap"]) <= 0.5
             assert seen["count_above_cards"]
             news_count = seen["count_style"]
@@ -1539,13 +1476,16 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 broken["appearance"]["font-size"]
                 != appearances["home"]["selected", "normal"]["appearance"]["font-size"]
             ), "the contract must reject a page-specific chooser override"
+            if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
+                page.locator(".site-news-filters").screenshot(
+                    path=str(Path(screenshot_dir) / f"news-chooser-{scheme}-{width}.png")
+                )
             page.goto(f"{ORIGIN}results.html", wait_until="load")
             results_state = state()
-            results_count = results_state["count_style"]
-            for topic in set(palette) & set(results_state["topic_palette"]):
-                assert palette[topic] == results_state["topic_palette"][topic]
+            # Results and News topics share a neutral surface with distinct ink hues.
+            assert len(set(results_state["topic_palette"].values())) > 1
             for key in ("font-family", "font-size", "font-weight", "line-height", "color"):
-                assert news_count[key] == results_count[key], (scheme, key)
+                assert news_count[key] == results_state["count_style"][key], (scheme, key)
         page.emulate_media(color_scheme="light")
 
     try:
@@ -1572,14 +1512,18 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         sync_api.expect(
             page.locator(".site-rating-tooltip.kpress-tooltip-visible")
         ).to_have_count(0)
+        open_topics()
         for topic in used_topics:
             if topic != "optimality":
                 page.locator(f'button[data-news-topic="{topic}"]').click()
         check({3, 4, 5}, {"optimality"})
         page.locator('button[data-news-topic="verification"]').click()
         check({3, 4, 5}, {"optimality", "verification"})
+        page.keyboard.press("Escape")
+        sync_api.expect(page.locator("[data-site-filter-options]")).to_be_hidden()
         page.locator("[data-news-reset]").click()
         check({4, 5})
+        open_topics()
         for topic in used_topics:
             page.locator(f'button[data-news-topic="{topic}"]').click()
         check({4, 5}, set())

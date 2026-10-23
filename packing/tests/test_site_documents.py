@@ -206,8 +206,8 @@ def test_changelog_alias_preserves_and_checks_the_news_landing(url: str, anchor:
         ),
         # Any other text is the page that shows what the register or the table holds.
         ('<a href="packing/frontier/RESULTS.md">results register</a>', "", "results.html"),
-        ('<a href="packing/frontier/STATUS.md">status table</a>', "", "atlas.html"),
-        ('<a href="STATUS.md">the status table</a>', "packing/frontier", "atlas.html"),
+        ('<a href="packing/frontier/STATUS.md">status table</a>', "", "frontier.html"),
+        ('<a href="STATUS.md">the status table</a>', "packing/frontier", "frontier.html"),
         # A code span naming the file is about the file, which is on `main`.
         (
             '<a href="packing/frontier/RESULTS.md"><code>frontier/RESULTS.md</code></a>',
@@ -615,7 +615,7 @@ def test_the_introductions_links_reach_the_sites_own_pages(
     assert re.findall(r'<a href="([^"]+)">([^<]+)</a>', intro) == [
         ("results.html#t-060", "T-060"),
         ("results.html", "results register"),
-        ("atlas.html", "frontier"),
+        ("frontier.html", "frontier"),
         ("cases/11.html", "case record"),
         ("epistemics.html", "the rungs"),
         (f"{REPO_URL}/blob/{BRANCH}/docs/review.md", "review"),
@@ -635,7 +635,7 @@ def test_only_the_shared_block_has_its_links_rewritten(
         _overview('<p><a href="packing/frontier/STATUS.md">frontier</a></p>')
     )
     intro = out.split(OVERVIEW_INTRO_OPEN, 1)[1].split(OVERVIEW_INTRO_CLOSE, 1)[0]
-    assert intro == '<p><a href="atlas.html">frontier</a></p>'
+    assert intro == '<p><a href="frontier.html">frontier</a></p>'
     assert out.count('<a href="packing/frontier/RESULTS.md">outside the block</a>') == 3
     assert "recent-progress" not in out
 

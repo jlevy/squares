@@ -343,10 +343,10 @@ def test_the_added_filter_shows_what_reached_the_site(
     Added within and shows exactly the results that arrived that day or the day before,
     whatever the date their rows show or the day a lane registered them, and leaves Max
     age empty (#514's review A, finding A1); the clock is noon, where the reader's day and
-    the UTC day an age of arrival counts in agree. The seven days' arrival link opens
-    the table from the section's first day, `?added-since=`, with Added since in the
-    bar, on the results the section lists (A3). The newest day's own link opens it on
-    that day alone, with Added on in the bar naming the day; and a day nothing arrived
+    the UTC day an age of arrival counts in agree. The archive URL `?added-since=`
+    opens the table from the Recent Results section's first day, with Added since in
+    the bar, on the table rows arriving since that date (A3). An explicit `?added=` URL opens
+    the newest day alone, with Added on in the bar naming the day; and a day nothing arrived
     on is named there too and shows no row, rather than every row (A5)."""
     name = "results.html"
     reference = overview_sections.added_reference(overview)
@@ -375,29 +375,32 @@ def test_the_added_filter_shows_what_reached_the_site(
 
         page.goto(pages[name].as_uri(), wait_until="load")
         assert not page.locator(added_since).is_visible()
-        arrivals = page.get_by_role("link", name="Browse these arrivals", exact=True)
-        with page.expect_navigation(url=arrival(pages[name]), wait_until="load"):
-            arrivals.click()
+        all_rows = page.locator(".site-results tbody tr[data-added]")
+        assert all_rows.count() == len(overview.results)
         first = (reference - timedelta(days=overview_sections.ADDED_DAYS)).isoformat()
+        listed = sorted(
+            row.get_attribute("id")
+            for row in all_rows.all()
+            if (row.get_attribute("data-added") or "") >= first
+        )
+        newest = reference.isoformat()
+        newest_listed = sorted(
+            row.get_attribute("id")
+            for row in all_rows.all()
+            if row.get_attribute("data-added") == newest
+        )
+        page.goto(pages[name].as_uri() + f"?added-since={first}#all-results", wait_until="load")
         assert urlsplit(page.url).query == f"added-since={first}"
         assert urlsplit(page.url).fragment == "all-results"
         assert page.locator(added_since).is_visible()
         assert page.locator(added_since).input_value() == first
-        listed = sorted(
-            (link.get_attribute("href") or "").removeprefix("#")
-            for link in page.locator(".site-added li > a:first-child").all()
-        )
         found = state(page)
         assert sorted(found["shown"]) == listed == _arrived_since(overview, 7)
 
-        page.goto(pages[name].as_uri(), wait_until="load")
-        newest = reference.isoformat()
-        day = page.locator(f'.site-added details[data-day="{newest}"]')
-        with page.expect_navigation(url=arrival(pages[name]), wait_until="load"):
-            day.locator("p a").click()
+        page.goto(pages[name].as_uri() + f"?added={newest}#all-results", wait_until="load")
         assert urlsplit(page.url).query == f"added={newest}"
         found = state(page)
-        assert sorted(found["shown"]) == _arrived_since(overview, 0)
+        assert sorted(found["shown"]) == newest_listed == _arrived_since(overview, 0)
         assert page.locator(added_on).is_visible()
         assert page.locator(added_on).input_value() == newest
         assert page.locator(added_age).input_value() == ""
@@ -519,7 +522,7 @@ def test_legacy_home_query_and_registered_fragment_reach_the_complete_filtered_t
             "age": ["180"],
         }
         with page.expect_navigation(url=arrival(pages["results.html"]), wait_until="load"):
-            page.get_by_role("link", name="All Results", exact=True).click()
+            page.locator("a[data-all-results]").click()
         landed = urlsplit(page.url)
         assert landed.path.endswith("/results.html")
         assert landed.query == destination.query
@@ -667,7 +670,7 @@ def test_retired_reader_fragment_updates_the_ordinary_home_link_and_reaches_its_
         assert destination.fragment == fragment
         assert parse_qs(destination.query) == parse_qs(supported)
         with page.expect_navigation(url=arrival(pages[row.path]), wait_until="load"):
-            page.get_by_role("link", name="All Results", exact=True).click()
+            page.locator("a[data-all-results]").click()
         assert_tombstone(page, row, fragment, supported)
     finally:
         page.close()
@@ -757,3 +760,96 @@ def test_the_checkbox_and_its_label_sit_in_the_bar_at_every_width(
             beside += 1
     assert [other["filter"] for other in found["labels"]].count("current") == 1
     assert beside >= 1, "no label shares the checkbox's line"
+
+
+@pytest.mark.parametrize("width", [1280, 390])
+def test_significance_segments_preserve_selection_legacy_links_and_history(
+    browser: Any,
+    pages: dict[str, Path],
+    overview: overview_data.Overview,
+    width: int,
+) -> None:
+    page = opened(browser, pages["results.html"], overview, width)
+    base = pages["results.html"].as_uri()
+    buttons = page.locator("[data-site-significance] button[data-site-score]")
+
+    def selected() -> set[int]:
+        return {
+            int(button.get_attribute("data-site-score") or "0")
+            for button in buttons.all()
+            if button.get_attribute("aria-pressed") == "true"
+        }
+
+    def check(levels: set[int], verification: int = 0, confirmation: int = 0) -> None:
+        expected = sorted(
+            result.id.lower()
+            for result in overview.results
+            if overview_sections.significance(result) in levels
+            and int(str(result.record["verification"])[1:]) >= verification
+            and int(str(result.record["confirmation"])[1:]) >= confirmation
+        )
+        assert selected() == levels
+        found = state(page)
+        assert sorted(found["shown"]) == expected
+        assert found["count"] == count(len(expected), overview)
+        assert found["total"] == len(overview.results)
+
+    try:
+        assert buttons.count() == 5
+        check({1, 2, 3, 4, 5})
+        assert page.locator('select[data-filter="s"]:visible').count() == 0
+        page.goto(base + "?reader=kept&v-min=2&c-min=2", wait_until="load")
+        page.locator('[data-site-significance] [data-site-score="2"]').focus()
+        page.keyboard.press("Space")
+        page.locator('[data-site-significance] [data-site-score="4"]').click()
+        check({1, 3, 5}, 2, 2)
+        query = parse_qs(urlsplit(page.url).query)
+        assert query == {"reader": ["kept"], "v-min": ["2"], "c-min": ["2"], "s": ["1,3,5"]}
+        page.reload(wait_until="load")
+        check({1, 3, 5}, 2, 2)
+        page.locator('[data-site-significance] [data-site-score="1"]').click()
+        check({3, 5}, 2, 2)
+        page.go_back(wait_until="load")
+        check({1, 3, 5}, 2, 2)
+        page.go_forward(wait_until="load")
+        check({3, 5}, 2, 2)
+        for query, levels in (
+            ("s-min=3", {3, 4, 5}),
+            ("s=3", {3}),
+            ("s-min=3&s=2", set()),
+            ("s-min=2&s-max=4", {2, 3, 4}),
+        ):
+            page.goto(base + "?reader=kept&" + query, wait_until="load")
+            check(levels)
+        project_result = next(
+            result for result in overview.results if overview_sections.result_projects(result)
+        )
+        project = overview_sections.result_projects(project_result)[0]
+        level = overview_sections.significance(project_result)
+        page.goto(base + f"?project={project}&s={level}", wait_until="load")
+        assert selected() == {level}
+        assert sorted(state(page)["shown"]) == sorted(
+            result.id.lower()
+            for result in overview.results
+            if project in overview_sections.result_projects(result)
+            and overview_sections.significance(result) == level
+        )
+        page.goto(base, wait_until="load")
+        check({1, 2, 3, 4, 5})
+        for button in buttons.all():
+            button.click()
+        check(set())
+        assert parse_qs(urlsplit(page.url).query)["s"] == ["none"]
+        page.goto(base, wait_until="load")
+        check({1, 2, 3, 4, 5})
+    finally:
+        page.close()
+    static = browser.new_page(
+        java_script_enabled=False, viewport={"width": width, "height": 900}
+    )
+    try:
+        static.goto(base + "?s=none", wait_until="load")
+        assert not static.locator(".site-result-filters").is_visible()
+        assert len(state(static)["shown"]) == len(overview.results)
+    finally:
+        static.close()

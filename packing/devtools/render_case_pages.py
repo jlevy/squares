@@ -117,7 +117,7 @@ def case_popover() -> str:
         '<div class="site-case-pop-body" data-case-body data-kpress-prose-font="sans"></div>'
         '<p class="site-popover-actions"><a class="site-popover-action" data-go="page" '
         'data-case-open href="atlas.html">Open the Case Record</a>'
-        '<a class="site-popover-action" data-go="page" data-case-frontier href="atlas.html">'
+        '<a class="site-popover-action" data-go="page" data-case-frontier href="frontier.html">'
         "Frontier Survey row</a>"
         '<a class="site-popover-action" data-go="page" data-case-atlas href="atlas.html">'
         "Atlas diagram</a></p>"
@@ -960,13 +960,13 @@ def record_head(
     correction = corrects_tag(corrects)
     previous = (
         f'<a href="{case_url(n - 1)}" rel="prev" data-case-step="{n - 1}">'
-        f"{arrow_icon('left')}n = {n - 1}</a>"
+        f"{arrow_icon('left')}{_math(f'n = {n - 1}')}</a>"
         if n > first
         else ""
     )
     following = (
         f'<a href="{case_url(n + 1)}" rel="next" data-case-step="{n + 1}">'
-        f"n = {n + 1}{arrow_icon('right')}</a>"
+        f"{_math(f'n = {n + 1}')}{arrow_icon('right')}</a>"
         if n < last
         else ""
     )
@@ -978,7 +978,8 @@ def record_head(
     )
     return (
         f'<header class="site-case-head" data-kpress-prose-font="sans">'
-        f'<nav class="site-case-steps" aria-label="Cases">{previous}{following}</nav>'
+        f'<nav class="site-case-steps" aria-label="Cases" {SERIF_MATH}>'
+        f"{previous}{following}</nav>"
         '<span class="site-card-label site-case-eyebrow">Case record</span>'
         f"{packing_figure(n, upper=upper)}"
         f'<p class="site-case-title" {SERIF_MATH}>{count}</p>'
@@ -999,7 +1000,7 @@ def record_head(
         '<div class="site-case-note"><span class="site-card-label">Evidence and sources</span>'
         f"<details><summary>{len(evidence)} evidence entries</summary>"
         f"<p>{frontier.evidence_links(evidence)}</p></details>{_sources(case)}</div>"
-        f'<p class="site-case-links"><a href="atlas.html#n-{n}">In the frontier survey</a>'
+        f'<p class="site-case-links"><a href="frontier.html#n-{n}">In the frontier survey</a>'
         f' <a class="site-case-github" href="{branch_file(source)}">On GitHub</a></p></div>'
     )
 

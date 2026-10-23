@@ -91,7 +91,9 @@ body {
   --site-new-result: oklch(52% 0.19 25);
   --site-scrim: oklch(0% 0 0 / 0.12);
   --site-chip-tint: 16%;
-  --site-topic-hover-tint: 60%;
+  --site-news-topic-bg: oklch(95% 0.004 265);
+  --site-news-topic-ink-lightness: 43%;
+  --site-news-topic-ink-chroma: 0.08;
   --site-action-hover-accent: 85%;
 }
 :root:where([data-kpress-resolved-theme="dark"]),
@@ -107,6 +109,9 @@ body {
   --site-significance: oklch(80% 0.085 205);
   --site-new-result: oklch(66% 0.17 25);
   --site-hero-filter: brightness(0.88);
+  --site-news-topic-bg: oklch(29% 0.008 265);
+  --site-news-topic-ink-lightness: 80%;
+  --site-news-topic-ink-chroma: 0.09;
 }
 
 /* The paper typography profile, read from paper-type.css, which the explainer carries
@@ -173,15 +178,15 @@ body {
 /* Capped at 100% as kpress caps its column: beside a TOC the column is a grid item with
    auto margins, sized to its min-content, so a wide code block or table would otherwise
    push it past a phone's viewport instead of scrolling inside it. The text fills the
-   column, as the explainer's does: its lines run the measure plus both insets, 710px at
-   a desktop, and on a phone the page margin alone keeps them off the screen's edge. */
-.site-page {
+   column at the shared 35em text measure. Insets belong outside that text width; on
+   a phone the page and document gutters keep it off the screen’s edge. */
+.kpress .site-page {
   margin-inline: auto;
-  max-width: min(100%, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
+  max-width: min(100%, var(--kpress-measure));
   padding-block-end: calc(var(--kpress-font-size-base) * 5);
   padding-inline: 0;
 }
-/* Wide blocks (tables, the atlas figure, card grids) take a wider track than prose, and
+/* Explicit data tables and visualizations take a wider track than prose, and
    stop `--site-wide-gutter` short of the page's content area on either side. That area
    is KPress's page container less its margin, `100cqw`: the width the page is laid out
    in. `100vw` is not, since it counts a scrollbar the layout does not, and a narrow page
@@ -238,12 +243,14 @@ body {
      width too; the layout and text wrappers retain the reading-column cap. */
   .kpress-page-main > .kpress-doc:has(.site-page) {
     max-width: none;
+    padding-inline: var(--site-reading-gutter);
   }
   .kpress-page-main > .kpress-doc > .kpress-doc-layout > .kpress-long-text {
     padding-block-start: var(--site-page-top);
   }
   .kpress-long-text > :first-child,
   .kpress-long-text > .site-title:first-child,
+  .kpress-long-text > .doc-links:first-child + :where(h1),
   .kpress-long-text > :is(article, header):first-child > h1:first-of-type,
   .kpress-long-text > :first-child > .site-hero:first-child,
   .site-hero:first-child > :first-child {
@@ -269,7 +276,7 @@ body {
 @media screen {
   .kpress {
     --site-title-space-above: 6.25rem;
-    --site-title-space-below: 2.5rem;
+    --site-title-space-below: 2rem;
   }
   .kpress :where(.site-page, .kpress-prose) h1,
   .kpress :is(h1, h2).site-title {
@@ -303,11 +310,11 @@ body {
 }
 
 /* ---------- Cards ---------- */
-/* A card section is a frame the width of the wide track holding the cards, so the cards
+/* A card section is a frame the width of the prose holding the cards, so the cards
    can ask how wide their frame is. A card comes in three sizes, which it names in
    `data-card-size`, and is as wide as a column of the grid of its size's columns the
    frame fits, with 1rem gaps: small columns are at least 12rem, medium 16rem and large
-   21rem, so a 69rem frame holds four small or four medium cards to a line, or three large; no size sets
+   18rem. The count is capped to the cards present, so short groups fill the prose track; no size sets
    more than four to a line (the owner, 2026-10-05).
    `--site-cards-small`, `-medium` and `-large` are those counts, each stepped by its own
    container queries: n columns of minimum m and n - 1 gaps need (m + 1)n - 1 rem. A card
@@ -321,14 +328,31 @@ body {
   container-type: inline-size;
   margin-block: 1.5rem;
 }
+/* Catalogue and profile resource cards share prose edges, even when legacy markup
+   also names the generic wide track. Data tables and visual stages keep that track. */
+.site-page :is(.site-cards-frame, .site-atlas-note) {
+  inline-size: 100%;
+  margin-inline: auto;
+  max-inline-size: min(100%, var(--kpress-measure));
+}
 .site-cards {
   --site-card-gap: 1rem;
+  --site-cards-count: 1;
   --site-cards-small: 1;
   --site-cards-medium: 1;
   --site-cards-large: 1;
   display: grid;
   gap: var(--site-card-gap);
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+}
+.site-cards:has(> :nth-child(2 of .site-card)) {
+  --site-cards-count: 2;
+}
+.site-cards:has(> :nth-child(3 of .site-card)) {
+  --site-cards-count: 3;
+}
+.site-cards:has(> :nth-child(4 of .site-card)) {
+  --site-cards-count: 4;
 }
 /* Each line of a section set in lines of its own is a row of its cards, a gap below the
    line before it. */
@@ -350,7 +374,7 @@ body {
     --site-cards-small: 3;
   }
 }
-@container (width >= 43rem) {
+@container (width >= 37rem) {
   .site-cards {
     --site-cards-large: 2;
   }
@@ -365,7 +389,7 @@ body {
     --site-cards-small: 4;
   }
 }
-@container (width >= 65rem) {
+@container (width >= 56rem) {
   .site-cards {
     --site-cards-large: 3;
   }
@@ -375,7 +399,7 @@ body {
     --site-cards-medium: 4;
   }
 }
-@container (width >= 87rem) {
+@container (width >= 75rem) {
   .site-cards {
     --site-cards-large: 4;
   }
@@ -387,23 +411,23 @@ body {
     justify-content: center;
   }
   .site-cards > .site-card {
-    --site-cards-line: var(--site-cards-medium);
+    --site-cards-line: min(var(--site-cards-medium), var(--site-cards-count));
     --site-cards-gaps: calc((var(--site-cards-line) - 1) * var(--site-card-gap));
     flex: 0 0 calc((100% - var(--site-cards-gaps)) / var(--site-cards-line));
     min-inline-size: 0;
   }
   .site-cards > .site-card[data-card-size="small"] {
-    --site-cards-line: var(--site-cards-small);
+    --site-cards-line: min(var(--site-cards-small), var(--site-cards-count));
   }
   .site-cards > .site-card[data-card-size="large"] {
-    --site-cards-line: var(--site-cards-large);
+    --site-cards-line: min(var(--site-cards-large), var(--site-cards-count));
   }
   /* A section set in lines of its own (`SECTION_CARD_LINES`) sets no more cards to a
      line than its longest line holds, so its lines share one column width: the page
      cards stand one, three and three, at the width of three to a line, the three papers
      of the n = 11 series on the line of three. */
   .site-cards[data-cards-most="3"] > .site-card {
-    --site-cards-line: min(var(--site-cards-medium), 3);
+    --site-cards-line: min(var(--site-cards-medium), 3, var(--site-cards-count));
   }
 }
 /* A card is a clean summary with square corners. Most cards are a button that opens a
@@ -684,7 +708,9 @@ body {
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-light);
   max-block-size: var(--site-popover-max-block);
-  max-width: min(36rem, 100vw - 2rem);
+  box-sizing: border-box;
+  inline-size: min(var(--site-popover-text-width), calc(100vw - 2rem));
+  max-inline-size: calc(100vw - 2rem);
   overflow: auto;
   padding: var(--site-popover-pad);
 }
@@ -700,6 +726,7 @@ body {
    property, and whichever a rule declares later is the one that holds. */
 :root {
   --site-popover-pad: 1.75rem;
+  --site-popover-text-width: calc(var(--kpress-measure) + 2 * var(--site-popover-pad));
   --site-popover-close: 2.75rem;
   --site-popover-close-inset: 0.6rem;
   --site-popover-window-margin: clamp(1rem, 4dvh, 3rem);
@@ -756,6 +783,11 @@ body {
   text-decoration: none;
 }
 .site-popover-controls svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   block-size: 1.25rem;
   inline-size: 1.25rem;
 }
@@ -1302,21 +1334,10 @@ body {
    yellow, on the frontier table, a case record and a result's list of cases; a result's
    `confirmed` is the green of the confirmation rungs, at C3's strength, and its
    `reviewed` the verification rungs' blue. Recorded is yellow, and superseded standings
-   keep the plain gray chip. The topics Results and News share take their fills here too:
-   Verification is the reviewed blue, Optimality violet, Project amber and Engineering
-   orange, and the bound topics their bound's ink diluted into the page (below).
-   `devtools.rung_scale` measures every one of these fills, the topics' with `topic_fills`,
-   and holds each topic apart from every status and every other topic. */
-.site-chip:is(
-  [data-case-status],
-  [data-status="confirmed"],
-  [data-status="reviewed"],
-  [data-news-topic="verification"],
-  [data-kind="optimality"],
-  [data-news-topic="optimality"],
-  [data-news-topic="project"],
-  [data-news-topic="engineering"]
-) {
+   keep the plain gray chip. Result kinds and News topics share a neutral surface
+   and colored ink below.
+   `devtools.rung_scale` measures both contracts. */
+.site-chip:is([data-case-status], [data-status="confirmed"], [data-status="reviewed"]) {
   --rung-chroma-boost: 0;
   --site-chip-fill: oklch(
     calc(var(--site-rung-base) + var(--rung-level) * var(--site-rung-step))
@@ -1333,8 +1354,7 @@ body {
   --rung-hue: 158;
   --rung-level: 3;
 }
-.site-chip[data-status="reviewed"],
-.site-chip[data-news-topic="verification"] {
+.site-chip[data-status="reviewed"] {
   --rung-hue: 250;
   --rung-level: 2;
 }
@@ -1348,40 +1368,55 @@ body {
   --rung-chroma-boost: 0.02;
 }
 
-/* Bound chips share the plotted bound hues, diluted into the current page background. */
-.site-chip:is(
-  [data-kind="lower-bound"],
-  [data-status="incomplete"],
-  [data-news-topic="lower-bound"]
-) {
+/* Incomplete status retains the diluted lower-bound hue. */
+.site-chip[data-status="incomplete"] {
   --site-chip-fill: color-mix(
     in oklab,
     var(--site-bound-lower) var(--site-chip-tint),
     var(--kpress-doc-bg)
   );
 }
-.site-chip:is([data-kind="upper-bound"], [data-news-topic="upper-bound"]) {
-  --site-chip-fill: color-mix(
-    in oklab,
-    var(--site-bound-upper) var(--site-chip-tint),
-    var(--kpress-doc-bg)
+/* Result kinds and News tags, filter choices and summaries share topic ink on one
+   neutral surface. Verification, confirmation and status fills remain separate. */
+.site-chip:is([data-news-topic], [data-kind]) {
+  --site-news-topic-hue: 265;
+  --site-news-topic-chroma: 0;
+  --site-chip-fill: var(--site-news-topic-bg);
+  background: var(--site-news-topic-bg);
+  color: oklch(
+    var(--site-news-topic-ink-lightness) var(--site-news-topic-chroma) var(--site-news-topic-hue)
   );
 }
-.site-chip[data-kind="optimality"],
-.site-chip[data-news-topic="optimality"] {
-  --rung-level: 2;
-  --rung-hue: 310;
+.site-chip:is(
+  [data-news-topic="lower-bound"],
+  [data-news-topic="upper-bound"],
+  [data-news-topic="optimality"],
+  [data-news-topic="verification"],
+  [data-news-topic="project"],
+  [data-news-topic="engineering"],
+  [data-kind="lower-bound"],
+  [data-kind="upper-bound"],
+  [data-kind="optimality"]
+) {
+  --site-news-topic-chroma: var(--site-news-topic-ink-chroma);
 }
-/* Project's amber stands between Engineering's orange and the statuses' yellow, with the
-   open case's chroma boost so it reads as neither (`devtools.rung_scale`, DISTINCT). */
+.site-chip:is([data-news-topic="lower-bound"], [data-kind="lower-bound"]) {
+  --site-news-topic-hue: 25;
+}
+.site-chip:is([data-news-topic="upper-bound"], [data-kind="upper-bound"]) {
+  --site-news-topic-hue: 145;
+}
+.site-chip:is([data-news-topic="optimality"], [data-kind="optimality"]) {
+  --site-news-topic-hue: 310;
+}
+.site-chip[data-news-topic="verification"] {
+  --site-news-topic-hue: 250;
+}
 .site-chip[data-news-topic="project"] {
-  --rung-level: 2;
-  --rung-hue: 70;
-  --rung-chroma-boost: 0.02;
+  --site-news-topic-hue: 70;
 }
 .site-chip[data-news-topic="engineering"] {
-  --rung-level: 2;
-  --rung-hue: 45;
+  --site-news-topic-hue: 45;
 }
 .site-chip[data-status="recorded"] {
   --rung-level: 2;
@@ -2920,10 +2955,9 @@ html[data-site-atlas-view="triangle"]
    cases carries (overview/case-popover.js). A record opens with its visual summary,
    the drawing and bound facts together, followed by the detailed record. */
 :root {
-  /* Resolve the canonical shell's measure and foundation insets here, before a
-     fetched record inherits another page's band-specific inset. Both readers use
-     this cap, with enough room for two 17rem bound cards and their gap. */
-  --site-case-max: min(48rem, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
+  /* Canonical and fetched records share the actual reading measure; container
+     queries adapt their bound cards and drawing to the available space. */
+  --site-case-max: var(--kpress-measure);
 }
 .site-case {
   container-type: inline-size;
@@ -2963,7 +2997,9 @@ html[data-site-atlas-view="triangle"]
   background: var(--kpress-doc-bg);
   display: flex;
   float: none;
-  inset-block-start: var(--site-popover-close-inset);
+  /* Sticky offsets start at the scrollport padding edge, so remove that padding
+     to keep the controls at the same corner inset as other popover headers. */
+  inset-block-start: calc(var(--site-popover-close-inset) - var(--site-popover-pad));
   /* Held at the top alone: the card's `inset-inline-end`, read by a sticky box as a
      second limit, set it a padding's width in from the corner, over the steps. */
   inset-inline-end: auto;
@@ -3114,6 +3150,14 @@ html[data-site-atlas-view="triangle"]
   .site-case .site-atlas-gap-values .is-lower + .is-upper {
     inset-block-start: 1.45em;
   }
+}
+/* A fetched packing uses the panel's full content track. Its detailed prose keeps
+   the shared reading measure; canonical case pages retain their compact drawing. */
+.site-case-pop .site-case {
+  max-inline-size: none;
+}
+.site-case-pop .site-case-head > .site-case-figure {
+  inline-size: 100%;
 }
 .kpress .site-case-summary .site-atlas-pop-bound {
   font-family: var(--kpress-font-prose);
@@ -3278,6 +3322,10 @@ html[data-site-atlas-view="triangle"]
   border-block-start: 1px solid var(--kpress-doc-border);
   margin-block-start: 2rem;
   overflow-x: auto;
+}
+.site-case-pop :is(.site-case-data, .site-case-prose) {
+  margin-inline: auto;
+  max-inline-size: var(--kpress-measure);
 }
 .kpress .site-case-heading {
   font-family: var(--kpress-font-sans);
@@ -3652,7 +3700,7 @@ html[data-site-atlas-view="triangle"]
   margin: 0;
   min-inline-size: 0;
 }
-/* News topics keep the Results chip's fill, corners and leading at a smaller scale. */
+/* News topics keep the shared chip geometry at a smaller scale, with neutral fill and colored ink. */
 .kpress .site-news-topics .site-chip {
   font-size: calc(var(--site-font-size-note) * 0.85);
   margin-block: 0;
@@ -3693,7 +3741,15 @@ html[data-site-atlas-view="triangle"]
   display: none;
 }
 .site-news-filters > .site-table-tools {
+  display: contents;
+}
+.site-news-filters [data-news-reset] {
+  align-self: center;
+  margin-inline-start: auto;
+}
+.site-news-filters .site-count {
   flex-basis: 100%;
+  text-align: end;
 }
 .site-news-filters fieldset {
   border: 0;
@@ -3706,47 +3762,144 @@ html[data-site-atlas-view="triangle"]
 .site-news-filters :is(.site-tabs, .site-table-tools) {
   margin: 0;
 }
-/* A selected topic takes the shared topic fill and shows a check, the theme menu's
-   mark for a chosen item, so selection never rests on hue alone: the bound topics'
-   fills are close to the gray in lightness. The check's place is held when it is
-   hidden, so a press never moves a button or rewraps the row. Under a hovering
-   pointer an unselected topic turns pale in its topic hue, so a press shows at once:
-   pale turns full, and full turns pale. Touch screens have no hover, so a tap shows the
-   new state without a sticky pale fill. */
-.site-news-filters [aria-labelledby="news-topics-label"] button {
-  flex: 0 0 auto;
-  white-space: nowrap;
+/* Archive significance uses the same compact segmented control as News and Atlas. */
+.site-result-significance {
+  border: 0;
+  margin: 0;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  padding: 0;
 }
-.site-news-filters .site-tabs button.site-chip {
-  background: var(--site-chip-neutral-fill);
+.site-result-significance .site-tabs {
+  margin: 0;
+}
+
+/* Filter menus share the navigation surface and topic chips. The caller owns each
+   selection; these rules hold the compact summary and the native pressed buttons. */
+.site-filter-menu {
+  display: inline-flex;
+  max-inline-size: 100%;
+  position: relative;
+}
+.site-filter-trigger,
+.site-filter-options button {
+  align-items: center;
+  border: 1px solid var(--kpress-doc-border);
+  border-radius: 0;
   color: var(--kpress-doc-text);
-  font-variant-caps: normal;
-  letter-spacing: normal;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  font-size: var(--site-chooser-small-size);
+  font-weight: var(--site-font-weight-sans-medium);
+  gap: 0.35rem;
+  line-height: var(--site-chooser-small-leading);
+  padding: var(--site-chooser-small-padding);
   text-transform: none;
   transition: var(--site-hover-transition);
 }
-.site-news-filters .site-tabs button.site-chip[aria-pressed="true"] {
+.site-filter-trigger {
+  background: var(--kpress-doc-bg);
+  min-block-size: 1.75rem;
+}
+.site-filter-trigger [data-site-filter-summary] {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.2rem;
+}
+.site-filter-trigger .site-chip {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+.site-filter-chevron {
+  margin-inline-start: 0.1rem;
+  transform: rotate(0deg);
+  transition: transform var(--site-hover-duration) var(--site-hover-easing);
+}
+.site-filter-trigger[aria-expanded="true"] .site-filter-chevron {
+  transform: rotate(-180deg);
+}
+.site-filter-options {
+  background: var(--kpress-doc-bg);
+  border: 1px solid var(--kpress-doc-border);
+  box-shadow: 0 0.5rem 2rem var(--site-shadow);
+  inline-size: max-content;
+  inset-block-start: calc(100% + 0.3rem);
+  inset-inline-start: 0;
+  max-block-size: min(24rem, 65vh);
+  max-inline-size: calc(100vw - 2rem);
+  overflow: auto;
+  padding: 0.3rem;
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+  transform: translateY(-0.25rem);
+  transition:
+    opacity var(--site-hover-duration) var(--site-hover-easing),
+    transform var(--site-hover-duration) var(--site-hover-easing),
+    display var(--site-hover-duration) var(--site-hover-easing) allow-discrete;
+  z-index: 3;
+}
+.site-filter-options[hidden] {
+  display: none;
+}
+.site-filter-options:not([hidden]) {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+/* Match navigation: KPress's tiny motion fallback must not keep a closing list live. */
+@media (prefers-reduced-motion: reduce) {
+  .site-filter-menu .site-filter-options,
+  .site-filter-menu .site-filter-chevron {
+    transition-duration: 0ms;
+  }
+}
+@starting-style {
+  .site-filter-options:not([hidden]) {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+}
+.site-filter-options button {
+  background: none;
+  border: 0;
+  inline-size: 100%;
+  justify-content: start;
+  padding: 0.45rem 0.7rem;
+  white-space: nowrap;
+}
+.site-filter-options button.site-chip {
+  background: var(--site-news-topic-bg);
+  font-variant-caps: normal;
+  letter-spacing: var(--paper-button-letter-spacing);
+  margin: 0;
+}
+.site-filter-options button.site-chip[aria-pressed="true"] {
   background: var(--site-chip-fill);
+}
+.site-filter-trigger:is(:hover, :focus-visible),
+.site-filter-options button:not(.site-chip):is(:hover, :focus-visible) {
+  background: var(--site-wash);
+  color: var(--kpress-doc-accent);
+}
+.site-filter-menu button:focus-visible {
+  outline: 2px solid var(--kpress-doc-link);
+  outline-offset: -2px;
 }
 .site-news-check {
   block-size: 0.85em;
+  flex: 0 0 auto;
   inline-size: 0.85em;
-  margin-inline-end: 0.3em;
   vertical-align: calc((1cap - 0.85em) / 2);
   visibility: hidden;
 }
-.site-news-filters button[aria-pressed="true"] .site-news-check {
+.site-filter-options button[aria-pressed="true"] .site-news-check {
   visibility: visible;
 }
-@media (hover: hover) {
-  .site-news-filters .site-tabs button.site-chip:not([aria-pressed="true"]):hover {
-    background: color-mix(
-      in oklab,
-      var(--site-chip-fill) var(--site-topic-hover-tint),
-      var(--kpress-doc-bg)
-    );
-  }
-}
+
 .site-news-reset {
   background: none;
   border: 0;
@@ -3800,4 +3953,38 @@ html[data-site-atlas-view="triangle"]
 .site-record-pending {
   color: var(--site-support-color);
   font-size: var(--site-font-size-note);
+}
+
+/* Prose panels use the reading measure plus their insets. Case visualizations retain
+   their wider stage, and every panel remains inside the viewport gutters. */
+.site-popover.site-contributor-popover,
+.site-popover.site-row-pop:has(.site-result, [data-row-pop-src]) {
+  inline-size: min(var(--site-popover-text-width), calc(100vw - 2rem));
+  max-inline-size: calc(100vw - 2rem);
+}
+
+/* A nested page's outer trail supplies the gap below the header and above its title. */
+@media screen {
+  .kpress-page-main:has(> .site-breadcrumbs)
+    > .kpress-doc
+    > .kpress-doc-layout
+    > .kpress-long-text {
+    padding-block-start: 0;
+  }
+}
+
+/* Navigation, collection controls and metadata use sans. Standalone narrative
+   introductions and their inline links use the shared prose face. */
+.kpress :is(nav, .site-navigation-heading, .site-rollup summary, .site-rollup-count) {
+  font-family: var(--kpress-font-sans);
+  font-weight: var(--site-font-weight-sans-light);
+}
+.kpress .site-navigation-heading {
+  font-style: normal;
+  font-weight: var(--site-font-weight-sans-medium);
+}
+
+.kpress .site-navigation-copy {
+  font-family: var(--kpress-font-prose);
+  font-weight: 400;
 }

@@ -1012,9 +1012,13 @@ def _entry_lines(
     *,
     include_significance: bool = True,
     include_prose: bool = True,
+    multiline_metadata: bool = False,
 ) -> list[str]:
     """Shared contribution prose and evidence for the complete GitHub and News views."""
     rating = entry_significance(entry)
+    label_separator = "  \n" if multiline_metadata else " "
+    link_separator = "  \n" if multiline_metadata else " · "
+    ending = "" if multiline_metadata else "."
     out: list[str] = []
     if destination == "github" and include_significance:
         out.extend([f"Significance S{rating['score']}: {_text(rating['rationale'])}", ""])
@@ -1027,24 +1031,39 @@ def _entry_lines(
             _markdown_link(item["label"], item["target"], destination=destination)
             for item in entry["artifacts"]
         ]
-        out.extend(["Published artifacts: " + " · ".join(links) + ".", ""])
+        out.extend(
+            ["Published artifacts:" + label_separator + link_separator.join(links) + ending, ""]
+        )
     if entry.get("releases"):
         versions = [
             f"{_text(_component_label(item['component']))} {_text(item['version'])}"
             for item in entry["releases"]
         ]
-        out.extend(["Component editions: " + "; ".join(versions) + ".", ""])
+        separator = "  \n" if multiline_metadata else "; "
+        out.extend(
+            ["Component editions:" + label_separator + separator.join(versions) + ending, ""]
+        )
     publication = entry.get("publication", {})
     if publication:
         evidence = _markdown_link(
-            "publication evidence" if "date" in publication else "Publication evidence",
+            "publication evidence"
+            if "date" in publication and not multiline_metadata
+            else "Publication evidence",
             publication["evidence"],
             destination=destination,
         )
         if "date" in publication:
-            out.extend([f"First public: {publication['date']} ({evidence}).", ""])
+            first = f"First public: {publication['date']}"
+            out.extend(
+                [
+                    first + "  \n" + evidence
+                    if multiline_metadata
+                    else f"{first} ({evidence}).",
+                    "",
+                ]
+            )
         else:
-            out.extend([evidence + ".", ""])
+            out.extend([evidence + ending, ""])
     links = [
         _markdown_link(
             f"#{number}", f"{document['repository']}/pull/{number}", destination=destination
@@ -1055,7 +1074,15 @@ def _entry_lines(
         _markdown_link(item["label"], item["target"], destination=destination)
         for item in entry.get("references", [])
     )
-    out.extend(["PRs and supporting records: " + " · ".join(links) + ".", ""])
+    out.extend(
+        [
+            "PRs and supporting records:"
+            + label_separator
+            + link_separator.join(links)
+            + ending,
+            "",
+        ]
+    )
     return out
 
 
@@ -1207,11 +1234,18 @@ def news_filters(topics_present: set[str] | None = None) -> str:
         for score in range(3, 6)
     )
     topics = "".join(
-        f'<button type="button" class="site-chip" data-news-topic="{topic}" '
-        f'aria-pressed="true">{NEWS_CHECK}<span data-news-topic-label>{label}</span>'
+        f'<button type="button" class="site-filter-option site-chip" '
+        f'data-site-filter-option data-news-topic="{topic}" aria-pressed="true">'
+        f"{NEWS_CHECK}<span data-news-topic-label data-site-filter-label>{label}</span>"
         '<span class="site-cell-quiet" data-news-tally> (0)</span></button>'
         for topic, label in NEWS_TOPICS.items()
         if topics_present is None or topic in topics_present
+    )
+    chevron = (
+        '<svg class="site-nav-icon site-filter-chevron" viewBox="0 0 24 24" '
+        'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+        'stroke-linejoin="round" aria-hidden="true" focusable="false">'
+        '<path d="m6 9 6 6 6-6"/></svg>'
     )
     return (
         '<div class="site-news-filters sans-text" data-news-filters '
@@ -1221,8 +1255,15 @@ def news_filters(topics_present: set[str] | None = None) -> str:
         'aria-labelledby="news-significance-label">'
         f'{scores}</div></fieldset><fieldset><legend class="site-visually-hidden" '
         'id="news-topics-label">Topics</legend>'
-        '<div class="site-tabs site-chooser-small" role="group" '
-        f'aria-labelledby="news-topics-label">{topics}</div></fieldset>'
+        '<div class="site-filter-menu" data-site-filter-menu>'
+        '<button type="button" class="site-filter-trigger" data-site-filter-trigger '
+        'aria-expanded="false" aria-controls="news-topics-options">'
+        "<span>Topics</span> <span data-site-filter-summary>All</span>"
+        f'{chevron}</button><div class="site-filter-options" id="news-topics-options" '
+        'data-site-filter-options role="group" aria-labelledby="news-topics-label" hidden>'
+        '<button type="button" class="site-filter-option" data-site-filter-all '
+        'aria-pressed="true">All topics</button>'
+        f"{topics}</div></div></fieldset>"
         '<div class="site-table-tools">'
         '<button type="button" class="site-news-reset" data-news-reset>'
         "Reset filters</button>"
@@ -1302,7 +1343,12 @@ def render_news(
         article.extend(
             _prose(field, destination="site")
             for field in _entry_lines(
-                document, entry, "github", include_significance=False, include_prose=False
+                document,
+                entry,
+                "github",
+                include_significance=False,
+                include_prose=False,
+                multiline_metadata=True,
             )
             if field
         )

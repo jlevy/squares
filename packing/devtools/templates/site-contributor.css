@@ -97,7 +97,7 @@
 .site-contributor-popover > [data-contributor-body] {
   padding-inline-end: 0;
 }
-.site-contributor-popover .site-contributor-breadcrumb {
+.site-contributor-popover .site-contributor > h1 {
   padding-inline-end: calc(
     var(--site-popover-controls-inline) +
     var(--site-popover-close-inset) -
@@ -183,20 +183,18 @@
   white-space: nowrap;
 }
 
-/* Breadcrumbs belong to these nested pages, above their first page heading. */
-@media screen {
-  .kpress-long-text > :is(.site-contributor, .site-contributor-directory) {
-    margin-block-start: -2rem;
-  }
-  .kpress-long-text
-    > :is(.site-contributor, .site-contributor-directory)
-    > .site-contributor-breadcrumb {
-    margin-block: 0 2rem;
-  }
-}
-
 .kpress .site-profile-table td.site-profile-links {
-  min-inline-size: 12rem;
+  min-inline-size: 16rem;
+}
+/* Public account identifiers stay whole; the table's existing wrapper owns scrolling. */
+.site-profile-links .site-contributor-links-compact > li,
+.site-profile-links .site-contributor-links-compact a {
+  max-inline-size: none;
+}
+.site-profile-links .site-contributor-links-compact span {
+  overflow-wrap: normal;
+  white-space: nowrap;
+  word-break: normal;
 }
 
 .kpress .site-profile-table td.site-profile-resources {

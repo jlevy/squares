@@ -888,6 +888,13 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.21",
+        first_published="October 23, 2026",
+        result_scope=(
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.20",
         first_published="October 23, 2026",
         result_scope=(
@@ -1080,6 +1087,13 @@ EXPLAINER_REVISED = "October 22, 2026"
 # The leading entry is proposed for the next publication; confirm its date at first deployment.
 OPTIMALITY_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.11",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.10",
         first_published="October 22, 2026",
         result_scope="Use full public names in explanatory narrative profile links.",
@@ -1218,6 +1232,13 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 # The leading entry is proposed for the next publication; confirm its date at first deployment.
 THRESHOLD_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.4",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.3",
         first_published="October 22, 2026",
         result_scope="Use full public names in explanatory narrative profile links.",
@@ -1269,6 +1290,13 @@ THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 #: dates belong to the paper, independently of the site and n = 11 series.
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 PACKING_METHODS_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.2.7",
+        first_published="October 22, 2026",
+        result_scope=(
+            "Set a shared 35em reading measure for paper prose in HTML and PDF layouts."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.2.6",
         first_published="October 22, 2026",
@@ -1385,6 +1413,34 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:square-packing-methods-survey",
+        previous_version="v0.2.6",
+        version="v0.2.7",
+        impact="patch",
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-threshold-bound-review",
+        previous_version="v0.1.3",
+        version="v0.1.4",
+        impact="patch",
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-optimality-review",
+        previous_version="v0.1.10",
+        version="v0.1.11",
+        impact="patch",
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.20",
+        version="v0.4.21",
+        impact="patch",
+        reason=("Set a shared 35em reading measure for paper prose in HTML and PDF layouts."),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.19",
