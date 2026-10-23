@@ -350,3 +350,63 @@ def test_rendered_news_topics_share_neutral_surfaces_and_reset_sits_above_count(
     finally:
         server.shutdown()
         server.server_close()
+
+
+def test_rendered_result_topics_match_news_without_recoloring_rungs(tmp_path: Path) -> None:
+    from devtools import preview_site, site_assets  # noqa: PLC0415
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    results = render_overview.results_page()
+    (tmp_path / results.name).write_text(results.html)
+    site_assets.write_assets(tmp_path, render_overview.asset_files([results]))
+    measure = probe(Path(__file__).with_name("probes"), "rung_scale/news_topics")
+    inks = {(ink.theme, ink.rung): ink for ink in rung_scale.topic_inks()}
+    protected = {
+        (fill.theme, fill.rung): fill
+        for fill in rung_scale.fills() + rung_scale.status_fills() + rung_scale.inks()
+    }
+    surfaces = rung_scale.news_topic_backgrounds()
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with site_browser.api().sync_playwright() as driver:
+            browser = site_browser.launch(driver)
+            page = browser.new_page(reduced_motion="reduce")
+            for theme in rung_scale.THEMES:
+                page.emulate_media(color_scheme=theme)
+                page.goto(f"http://127.0.0.1:{server.server_port}/{results.name}")
+                found = page.evaluate(
+                    measure,
+                    {
+                        "topicSelector": ".site-chip[data-kind]",
+                        "topicAttribute": "data-kind",
+                        "protectRungs": True,
+                    },
+                )
+                assert {sample["topic"] for sample in found["samples"]} >= {
+                    "lower-bound",
+                    "upper-bound",
+                    "optimality",
+                }
+                expected_bg = bytes.fromhex(rung_scale.hex_colour(surfaces[theme])[1:])
+                for sample in found["samples"]:
+                    expected_ink = bytes.fromhex(inks[theme, sample["topic"]].hex[1:])
+                    for actual, expected in (
+                        (sample["background"], expected_bg),
+                        (sample["ink"], expected_ink),
+                    ):
+                        assert all(
+                            abs(a - e) <= 1 for a, e in zip(actual, expected, strict=True)
+                        ), (theme, sample)
+                    assert sample["contrast"] >= 4.5, (theme, sample)
+                assert found["protected"]
+                for sample in found["protected"]:
+                    expected = bytes.fromhex(protected[theme, sample["key"]].hex[1:])
+                    assert all(
+                        abs(a - e) <= 1
+                        for a, e in zip(sample["channels"], expected, strict=True)
+                    ), (theme, sample)
+            browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()

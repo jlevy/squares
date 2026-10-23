@@ -77,11 +77,7 @@ Workbench.
 
 <p class="site-action-row site-more"><a class="site-action" href="visualize.html">View Videos{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a><a class="site-action" href="posters.html">View All Posters{{ARROW_RIGHT}}</a></p>
 
-<h1 id="about-the-squares-project" class="site-title">About the Squares Project<a id="squares-project-documentation"></a></h1>
-
-<p class="site-action-row site-more"><a class="site-action" href="about.html">About the Squares Project{{ARROW_RIGHT}}</a></p>
-
-<h1 id="more-resources" class="site-title">More Resources<a id="other-square-packing-projects"></a></h1>
+<h1 id="more-resources" class="site-title">Resources<a id="other-square-packing-projects"></a></h1>
 
 <div class="site-navigation-copy">
 
@@ -91,6 +87,10 @@ record, with their credited authors and links to related results.
 </div>
 
 <p class="site-action-row site-more"><a class="site-action" href="resources.html">View All Resources{{ARROW_RIGHT}}</a></p>
+
+<h1 id="about-the-squares-project" class="site-title">About the Squares Project<a id="squares-project-documentation"></a></h1>
+
+<p class="site-action-row site-more"><a class="site-action" href="about.html">About the Squares Project{{ARROW_RIGHT}}</a></p>
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

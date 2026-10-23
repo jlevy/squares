@@ -246,6 +246,7 @@ def status_fills() -> list[Fill]:
         for selectors, declared in _blocks(SITE_CSS)
         for selector in selectors.split(",")
         if (match := _STATUS_RULE.fullmatch(selector.strip()))
+        and match[2] != "incomplete"  # Incomplete retains a bound tint, not a rung fill.
     ]
     if not rules:
         raise SystemExit("site.css has no status chip rule")

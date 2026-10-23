@@ -995,10 +995,10 @@ contributor articles use their component sheets and the same text tokens.
   Overlays and print hide the visible trail.
   The workbench is an application rather than a KPress page, so its build
   (`workbench_tools.build_site`) takes the bar, its stylesheet, the theme bootstrap and
-  the gear’s script from `render_overview.nav_shell`, in a shell that gives it the page
-  margins and header rule KPress gives the others; the application fills the window
-  below it. Only the shared bar and trail follow the theme there: the workbench itself
-  has no dark mode yet.
+  the theme control’s script from `render_overview.nav_shell`, in a shell that gives it
+  the page margins and header rule KPress gives the others; the application fills the
+  window below it. Only the shared bar and trail follow the theme there: the workbench
+  itself has no dark mode yet.
 
 - **Videos and Workbench.** Videos (`visualize.html`) and Workbench (`workbench/`) are
   separate destinations in the Learn dropdown.
@@ -1011,32 +1011,32 @@ contributor articles use their component sheets and the same text tokens.
   corners and thin border.
   It does not add a second row of page navigation below the header.
 
-- **Theme control.** A small gray gear, an inline SVG, ends the navigation bar on every
-  page, the explainer and the workbench included.
+- **Theme control.** A small gray Lucide Contrast icon, an inline SVG, ends the
+  navigation bar on every page, the explainer and the workbench included.
   It follows GitHub within the centered navigation track at every width.
   Its SVG is centered on the navigation font’s capital height; its wrapper shares the
   text baseline. It takes the nav items’ wash on hover and while its menu is open, and
-  never underlines. Pressing it opens a compact menu, a native popover under the gear
+  never underlines. Pressing it opens a compact menu, a native popover under the icon
   with square corners and the cards’ border and shadow, of three choices, each an icon
   and a word: System, Light and Dark.
   The current choice is in the accent with a check at its end.
   Choosing applies at once, closes the menu and keeps the choice across pages and
   visits; the menu also closes on Escape, an outside click or tabbing away.
-  The gear is a button named “Color theme” with `aria-haspopup="menu"` and
+  The icon is a button named “Color theme” with `aria-haspopup="menu"` and
   `aria-expanded`; the menu is a `role="menu"` of `menuitemradio` items carrying
   `aria-checked`, and the arrow keys, Home and End move between them.
   On a phone the whole bar wraps onto centred lines, so every link stays in view, and
-  the gear ends the last line.
+  the icon ends the last line.
   The choice is KPress’s own reader preference, the `kpress.theme` key its head
   bootstrap applies before first paint, so no page flashes the wrong theme and every
   stylesheet keys only on `data-kpress-resolved-theme`, never on `prefers-color-scheme`.
   System follows the operating system as it changes.
-  The embed view has no navigation bar and so no gear, and a framed page follows the
-  choice its parent makes, live.
+  The embed view has no navigation bar and so no theme icon, and a framed page follows
+  the choice its parent makes, live.
   `overview/theme.js` is the script, and it announces a change as `squares:themechange`
   for anything drawn on a canvas.
-  Adapted from metabrowser’s settings gear, reduced to one chooser with words beside its
-  icons.
+  The Lucide Contrast geometry uses a filled half-disc and the shared icon size.
+  The chooser has words beside its icons.
 
 - **Closing credit.** Every ordinary site page ends with three centered lines: project
   and repository attribution, the linked typesetting tools, and the current edition.
@@ -3066,7 +3066,7 @@ reader-control icon system, so standalone pages need no sprite dependency.
 The table keeps account usernames visible beside the marks and adapts spacing and
 wrapping, not icon shape or link semantics.
 Account marks use a compact shared icon-size token, also used by the navigation GitHub
-mark and settings gear.
+mark and Contrast icon.
 Navigation replaces the GitHub text with the shared mark and retains an accessible
 GitHub label; control hit areas remain independent of glyph size.
 The directory uses the shared wide-table bleed on larger screens.

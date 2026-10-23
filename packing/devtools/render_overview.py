@@ -598,6 +598,7 @@ RENDER_INPUTS: tuple[Path, ...] = (
     BROWSER,
     PACKING / "src" / "sqpack",
     PACKING / "devtools" / "site_documents.py",
+    PACKING / "devtools" / "paper_front.py",
     PACKING / "devtools" / "result_overview.py",
     PACKING / "devtools" / "atlas_legend.py",
     PACKING / "devtools" / "result_status.py",

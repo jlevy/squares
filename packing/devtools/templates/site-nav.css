@@ -214,11 +214,11 @@
 }
 
 /* ---------- Theme control ----------
-   A small gray gear at the end of the bar opens a compact menu of three choices, System,
+   A small gray Lucide Contrast icon at the end of the bar opens a compact menu of three choices, System,
    Light and Dark, the current one checked. The choice is kpress's own reader preference
    (`kpress.theme`), which kpress's head bootstrap applies before first paint, so the
    stylesheets only ever key on `data-kpress-resolved-theme`; overview/theme.js wires the
-   menu. The gear takes the nav items' wash and never underlines. */
+   menu. The icon takes the nav items' wash and never underlines. */
 /* The button takes the links' line box. Its inline SVG is centred on the font's capital
    height, so the taller icon does not sit above the label's visible ink. Its wrapper
    participates in the same baseline-aligned flex row, including wrapped phone rows. */
@@ -250,7 +250,7 @@
 }
 /* The menu is a native popover, so it sits in the top layer above the bar's sideways
    scroll on a phone and closes on Escape or an outside click by itself; the script
-   places it under the gear. The place below is only where it opens without the script. */
+   places it under the icon. The place below is only where it opens without the script. */
 .site-theme-menu {
   background: var(--kpress-doc-bg);
   border: 1px solid var(--kpress-doc-border);
@@ -333,7 +333,7 @@
   }
 }
 /* With eight destinations the tablet row also needs the phone's shorter horizontal
-   padding and smaller gaps; otherwise the gear alone wraps below all the links. */
+   padding and smaller gaps; otherwise the theme icon alone wraps below all the links. */
 @media (40rem <= width < 56rem) {
   :root {
     --site-nav-link-inset: 0.45rem;
@@ -790,6 +790,62 @@ nav.site-tabs a[aria-current="page"],
 
 @media print {
   .site-breadcrumbs {
+    display: none;
+  }
+}
+
+/* Where this page came from and how to take it away, at the top corner and out of
+   the way. Chips rather than prose: they are tools, not part of the argument. */
+.doc-links {
+  display: flex;
+  float: inline-end;
+  gap: 0.4rem;
+  margin-block-start: 0.15rem;
+  margin-inline-start: 1rem;
+}
+.doc-links .chip {
+  align-items: center;
+  border: 1px solid var(--kpress-doc-border);
+  border-radius: var(--kpress-radius-sm);
+  color: var(--kpress-doc-muted);
+  display: inline-flex;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-tiny);
+  font-weight: var(--kpress-font-weight-sans-medium);
+  gap: 0.3rem;
+  letter-spacing: 0.02em;
+  /* `normal`, not `1`, and the padding is what it is because of that.
+
+     `line-height: 1` makes the line box 15.3px while the sans content area at that size
+     is 17.28px. The half-leading is then negative, and negative leading is not shared
+     evenly the way positive leading is -- ascent and descent are not symmetric about the
+     em box -- so the text sat 0.65px above the chip's centre: 2.11px of space over it and
+     3.41px under. Small, and a reader saw it.
+
+     A line box at least as tall as the content area centres exactly, so the height comes
+     back from the padding instead: `normal` gives a 23.98px content area, and 0.11rem
+     either side puts the chip at 27.50px against the 27.52px it had. Measured after:
+     2.75px above, 2.75px below, offset 0. `check_print_layout` holds it there. */
+  line-height: normal;
+  padding: 0.11rem 0.5rem;
+  text-decoration: none;
+}
+.doc-links .chip:hover {
+  background: var(--kpress-doc-surface-hover);
+  border-color: var(--kpress-doc-accent);
+  color: var(--kpress-doc-accent);
+  /* kpress underlines a link on hover, which is right for a link in a sentence and
+     wrong for a bordered chip: the rule lands inside the box and reads as a defect.
+     The chip already answers the hover with its border, its ground and its colour,
+     all three on the site's one hover timing. */
+  text-decoration: none;
+}
+.doc-links .chip svg {
+  display: block;
+}
+
+@media print {
+  .doc-links {
     display: none;
   }
 }

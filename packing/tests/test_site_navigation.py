@@ -917,3 +917,26 @@ def test_breadcrumb_links_underline_only_on_hover_and_keep_keyboard_focus(width:
         site_browser.api().expect(link).not_to_have_css("outline-style", "none")
         site_browser.api().expect(link).not_to_have_css("outline-width", "0px")
         browser.close()
+
+
+def test_theme_control_uses_the_shared_contrast_icon_size_and_keeps_its_name() -> None:
+    from tests import site_browser  # noqa: PLC0415
+
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        page.set_content(_browser_document())
+        button = page.get_by_role("button", name="Color theme", exact=True)
+        icon = button.locator("svg")
+        assert icon.locator('circle[r="10"]').count() == 1
+        assert icon.locator('path[fill="currentColor"]').count() == 1
+        site_browser.api().expect(icon.locator("path")).not_to_have_css("fill", "none")
+        box = icon.bounding_box()
+        reference = page.locator(".site-nav-disclosure .site-nav-icon").first.bounding_box()
+        assert box is not None
+        assert reference is not None
+        assert box["width"] == reference["width"]
+        assert box["height"] == reference["height"]
+        button.click()
+        site_browser.api().expect(page.get_by_role("menu", name="Color theme")).to_be_visible()
+        browser.close()
