@@ -142,7 +142,8 @@ records them where they were first: at 49 of the 111 the row just before #719’
 Couzo’s own, his `4e4c8ce` index at 38 (couzo-index-2026-10-15) and his `5a299b4`
 reconciliation at 11 (couzo-reconcile-2026-10-20).
 The re-certifications below the 12-place print, issue 715’s and `5a299b4`’s, stay held
-(think-fwa9), as does `23aff0c`’s index deletion bound at 447 (think-f2io), and the chain
+(think-fwa9), as does `23aff0c`’s bound at 447, which deletes a square from Friedman’s
+classical construction at 448 (think-f2io, think-8krd), and the chain
 passes over them.
 
 At 631 #719 is $2.73 \times 10^{-13}$ below Couzo’s `4e4c8ce` certificate and issue 715’s

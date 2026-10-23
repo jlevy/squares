@@ -148,7 +148,7 @@ The [history walk of 22 October](../../../campaign/issue-intake/upper-bounds-cou
 
 [acquisition/beyond-horizon-rows-23aff0c.json](acquisition/beyond-horizon-rows-23aff0c.json) is the record the source register reads them from, as the source `couzo-23aff0c-2026-10-17`.
 
-The walk records the pin’s publications at 71 more counts and holds each back from a row for its decision: 10 re-certifications below the side they beat by less than 10⁻¹² with the same 12-place print, at 325, 333, 362, 401, 442, 456, 485, 499, 530 and 577 (think-fwa9); 15 bounds `upper_bounds.json` states by deleting squares from the next count’s certificate, with no certificate file at their own count, 447 among them (D6, proposed on think-f2io); and 46 L-border, tiling or composite bounds of the index with no certificate file of their own (D2, think-f2io).
+The walk records the pin’s publications at 71 more counts and holds each back from a row for its decision: 10 re-certifications below the side they beat by less than 10⁻¹² with the same 12-place print, at 325, 333, 362, 401, 442, 456, 485, 499, 530 and 577 (think-fwa9); and 61 classical constructions `upper_bounds.json` states with no certificate file of their own. Of these, 46 are Göbel’s squares (27) and Friedman’s off-centre family (19), 41 of them L-border extensions and 368, 543, 626, 752 and 849 bare (D2, think-f2io); 15, 447 among them, delete one or two squares from Friedman’s constructions at 368, 407, 448, 543, 590, 639, 752, 849, 908 and 969 (D6, proposed on think-f2io). Being classical, all 61 also wait on #613 (think-8krd): whether a classical construction counts as an earlier report.
 
 ## Credit
 

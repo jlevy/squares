@@ -5,7 +5,9 @@ source, at assurance ``reported``, once its certificates are retained and replay
 Issues #678 and #715 each had a module of their own (`devtools.couzo_678_replay`,
 `devtools.couzo_715_replay`); this one takes the same filtered decision and declares each
 report it decides as a `Release`, so a further report of the same kind is a declaration and
-not a module. `RELEASES` holds five, each decided at or below ``LIMIT = 1024``:
+not a module. `RELEASES` holds 16, each decided at or below ``LIMIT = 1024``: the five
+issues below, and 11 publications in watched repositories that no issue reports
+(**Publications no issue reports**, `WATCHED`):
 
 - **#666**, Joost de Winter: 19 certificates ``square-packing-above-324/nNNNN.cert`` in
   JoostdeWinter/joostdewinter.github.io. The issue pins ``b3152f52``, which no branch
@@ -67,9 +69,11 @@ first report the walk records at a count, the count's start names that release a
 successor (`planned_supersessions`), whether the release's row is current or a later
 report's row supersedes it in turn: the four came before #678, #686 and #715, so a start
 those later reports had superseded on ``main`` names the backlog report that beat it
-first. A report the walk records whose own import has not yet landed (`Awaiting`: Couzo's
-4e4c8ce and 5a299b4 publications, and #715's re-certifications held on think-fwa9) has no
-row, so the chain passes over it until that import writes one. ``check`` holds
+first. A report the walk records whose own import has not yet landed (`Awaiting`: #715's
+re-certifications, which the #719 walk holds for think-fwa9) has no row, so the chain passes
+over it until that import writes one; Couzo's 4e4c8ce and 5a299b4 publications awaited
+theirs that way until the history walk recorded them, and the #719 walk now names their
+sources. ``check`` holds
 ``frontier/source-coverage.yaml`` to that plan, and holds every count a walk reaches beyond
 the corpus to ``LIMIT`` to one chain in report order (`chain_problems`): the start, then
 each recorded report's row, each superseded by the next, the last current or superseded by
@@ -82,7 +86,10 @@ its packet declares the rows its walk records (``declare-rows``, `read_declared_
 a second report retained in one packet has its own source, record and receipts. A walk
 holds back a publication that waits on an owner decision rather than an import (`Held`):
 a re-certification below the 12-place print, one above Göbel's construction, an index
-deletion bound or a recipe with no certificate file; ``check`` holds every hold and every
+deletion bound or a construction with no certificate file (`HELD_CLASSES`). A verdict the
+walk decides only against held publications rests on them (`Resting`): an answer that
+leaves a hold out reruns the walk, and ``held-dependents`` says what each such answer
+would reopen (`refusal_flips`). ``check`` holds every hold, every resting verdict and every
 declaration to the walk.
 
 **The history walk.** ``campaign/issue-intake/upper-bounds-couzo-history-20261022`` walks
@@ -118,6 +125,7 @@ From ``packing/``, with the project interpreter::
     python -m devtools.beyond_horizon_replay history-sources --read-on DATE
     python -m devtools.beyond_horizon_replay declare-rows
     python -m devtools.beyond_horizon_replay coverage-plan
+    python -m devtools.beyond_horizon_replay held-dependents
     python -m devtools.beyond_horizon_replay check [--replay [--workers 2]]
 
 A command's ``--issue`` takes an issue's number or a publication's label,
@@ -139,7 +147,7 @@ import platform
 import re
 import subprocess
 import time
-from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Callable, Iterable, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
@@ -183,7 +191,7 @@ EARLIER = Path("receipts/earlier-publications.json")
 EARLIER_FORMAT = "beyond-horizon-earlier-publications-v1"
 INTAKE = ROOT / "campaign/issue-intake"
 COVERAGE = ROOT / "frontier/source-coverage.yaml"
-RECORDED, NOT_RECORDED = "recorded", "not recorded"
+RECORDED, NOT_RECORDED, UNDECIDED = "recorded", "not recorded", "undecided"
 #: How an issue prints a side: rounded up at 12 places, or as the binary64 value of the
 #: exact side at 16 places, which may lie below it (#719).
 UP, BINARY64 = "up", "binary64"
@@ -214,10 +222,29 @@ HELD_CLASSES = {
         "a re-certification of the same packing"
     ),
     CONSEQUENCE: (
-        "an index bound that deletes squares from the next count's certificate, with no "
-        "certificate file at its own count"
+        "an index bound that deletes squares from a larger count's certificate or from a "
+        "construction the index states, with no certificate file at its own count"
     ),
-    RECIPE: "an L-border, tiling or composite bound with no certificate file of its own",
+    RECIPE: (
+        "a construction an index or table states with no certificate file of its own: an "
+        "L-border, tiling or composite bound, or a classical construction (Göbel's squares, "
+        "Friedman's off-centre family) or an L-border extension of one"
+    ),
+}
+#: How far below the side it beats a re-certification lies, at most (`SUB_PRINT`).
+SUB_PRINT_GAP = Fraction(1, 10**12)
+#: What a hold's class is called where a sentence counts holds (`held_sentence`).
+HELD_NAMES = {
+    GOEBEL_ABOVE: "publications above Göbel's construction",
+    SUB_PRINT: "re-certifications below the 12-place print",
+    CONSEQUENCE: "index deletion bounds",
+    RECIPE: "constructions with no certificate file",
+}
+HELD_NAME = {
+    GOEBEL_ABOVE: "publication above Göbel's construction",
+    SUB_PRINT: "re-certification below the 12-place print",
+    CONSEQUENCE: "index deletion bound",
+    RECIPE: "construction with no certificate file",
 }
 
 
@@ -226,14 +253,37 @@ class Held:
     """A report's publications a walk records that wait on an owner decision.
 
     ``kind`` is the class (`HELD_CLASSES`), ``bead`` the decision's bead and ``counts`` the
-    counts held. Unlike `Awaiting`, nothing is pending but the decision: the walk records
-    the publication, so it stands at its count, and no row may hold it until the owner
-    answers, when the walk's declaration drops it and a row is written, or it stays out.
-    The chain passes over it as over a report awaiting its import.
+    counts held; ``also`` names any further decision the hold waits on, and ``note`` says
+    what the publications are where the class alone does not. Unlike `Awaiting`, nothing is
+    pending but the decision: the walk records the publication, so it stands at its count,
+    and no row may hold it until the owner answers, when the walk's declaration drops it
+    and a row is written. The chain passes over it as over a report awaiting its import.
+
+    A later report the walk decides only against held publications rests on them
+    (`Resting`, `resting_on_holds`). An answer that leaves a hold out of the record takes
+    the publication out of the walk too, so the walk is run again and those verdicts are
+    decided afresh (`refusal_flips` says which would then be recorded).
     """
 
     kind: str
     bead: str
+    counts: frozenset[int]
+    also: tuple[str, ...] = ()
+    note: str = ""
+
+
+@dataclass(frozen=True, slots=True)
+class Resting:
+    """A report's verdicts a walk decided only against publications it holds (`Held`).
+
+    At each of ``counts`` the report's ``verdict`` (not recorded, or undecided) names only
+    held publications, all of the classes ``kinds``. Each stands while its holds stand: an
+    answer that leaves one of them out reruns the walk (`refusal_flips`).
+    """
+
+    report: str
+    verdict: str
+    kinds: tuple[str, ...]
     counts: frozenset[int]
 
 
@@ -243,13 +293,16 @@ class Walk:
 
     ``later`` maps each report the walk records after its releases to the source whose
     dated rows record it; ``awaiting`` names the reports it records that have no rows yet,
-    and ``held`` the publications it records that wait on an owner decision (`Held`).
+    ``held`` the publications it records that wait on an owner decision (`Held`), and
+    ``resting`` the verdicts it decided only against those (`Resting`), which ``check``
+    holds to the ledger (`resting_problems`).
     """
 
     name: str
     later: Mapping[str, str]
     awaiting: Mapping[str, Awaiting]
     held: Mapping[str, tuple[Held, ...]] = field(default_factory=dict)
+    resting: tuple[Resting, ...] = ()
 
     @property
     def directory(self) -> Path:
@@ -334,15 +387,38 @@ HISTORY_SOURCES = (
 )
 
 
-def _held(kind: str, bead: str, counts: str) -> Held:
+def _held(
+    kind: str, bead: str, counts: str, *, also: tuple[str, ...] = (), note: str = ""
+) -> Held:
     """A `Held` whose counts are written out, separated by spaces."""
-    return Held(kind, bead, frozenset(int(n) for n in counts.split()))
+    return Held(kind, bead, frozenset(int(n) for n in counts.split()), also, note)
+
+
+def _resting(report: str, verdict: str, kinds: str, counts: str) -> Resting:
+    """A `Resting` whose classes and counts are written out, separated by spaces."""
+    return Resting(
+        report, verdict, tuple(kinds.split()), frozenset(int(n) for n in counts.split())
+    )
+
+
+#: 23aff0c's index states the constructions it holds back (``upper_bounds.json`` at the
+#: pin, pinned by digest in the couzo-issue670-2026-10-17 packet): Göbel's squares (27,
+#: credited "Frits Göbel; family formulas generalized by David Ellsworth") and Friedman's
+#: off-centre family (19, citing this repository's ``packing/cases/gobel_offcentre``), 41
+#: of the 46 as L-border extensions and 368, 543, 626, 752 and 849 bare; and 15 bounds
+#: that delete one or two squares from Friedman's constructions at 368, 407, 448, 543,
+#: 590, 639, 752, 849, 908 and 969. All 61 are classical constructions, so they wait on
+#: #613's question (think-8krd), whether a classical construction counts as an earlier
+#: report, as well as on D2 and D6 (think-f2io).
+_CLASSICAL_23AFF0C = "Göbel's squares and Friedman's off-centre family"
 
 
 #: What the history walk records and holds back from a row, by report and class, each
 #: waiting on its decision's bead: Göbel's constructions (#613, think-8krd), sub-print
 #: re-certifications (think-fwa9), index deletion bounds (D6, proposed on think-f2io) and
-#: recipes with no certificate file (D2, think-f2io). ``check`` holds each to the walk.
+#: constructions with no certificate file (D2, think-f2io); 23aff0c's deletion bounds and
+#: constructions are classical (`_CLASSICAL_23AFF0C`), so they wait on #613 (think-8krd)
+#: too. ``check`` holds each to the walk.
 HISTORY_HELD: dict[str, tuple[Held, ...]] = {
     "franciscouzo/square-packing@02f9690": (_held(GOEBEL_ABOVE, "think-8krd", "369 375 376"),),
     "evand/square-packing@49907ec": (_held(GOEBEL_ABOVE, "think-8krd", "964"),),
@@ -398,6 +474,8 @@ HISTORY_HELD: dict[str, tuple[Held, ...]] = {
             CONSEQUENCE,
             "think-f2io",
             "367 406 447 541 542 588 589 638 751 847 848 906 907 967 968",
+            also=("think-8krd",),
+            note="deletions from Friedman's off-centre constructions",
         ),
         _held(
             RECIPE,
@@ -405,6 +483,8 @@ HISTORY_HELD: dict[str, tuple[Held, ...]] = {
             "368 407 448 457 491 500 533 534 543 545 580 581 590 592 626 629 630 639 "
             "641 677 680 681 690 730 733 734 741 752 785 788 789 796 842 845 846 849 "
             "901 904 905 908 962 965 966 969 981 982",
+            also=("think-8krd",),
+            note=f"{_CLASSICAL_23AFF0C}, 41 of them as L-border extensions",
         ),
     ),
     "#715": (
@@ -425,6 +505,53 @@ HISTORY_HELD: dict[str, tuple[Held, ...]] = {
         ),
     ),
 }
+#: The history walk's verdicts decided only against publications it holds (`Resting`):
+#: 131 at 129 counts, by report, verdict and the classes they rest on. Those resting on
+#: Göbel and sub-print holds stand whatever those answers are, since a side above a side
+#: above Göbel's construction is above it too and one within 1e-12 of a re-certification
+#: is one itself; the 9 on deletion bounds and the 47 on recipes would be recorded if D6
+#: and D2 left those out (`refusal_flips`). ``check`` holds the list to the ledger.
+HISTORY_RESTING = (
+    _resting("TheSnakeFang/squarepack-certs@5f3bdbf", NOT_RECORDED, RECIPE, "757 813 871"),
+    _resting("evand/square-packing@41fc9ec", NOT_RECORDED, GOEBEL_ABOVE, "375"),
+    _resting(
+        "franciscouzo/square-packing@23aff0c",
+        NOT_RECORDED,
+        GOEBEL_ABOVE,
+        "369 376 416 445 488 489 493 538 585 586 634 635 636 685 686 687 688 738 739 740 "
+        "794 795 851 852 853 860 861 910 911 912 921 964 971 972 973 974",
+    ),
+    _resting("franciscouzo/square-packing@23aff0c", NOT_RECORDED, SUB_PRINT, "327"),
+    _resting("franciscouzo/square-packing@43ac7d2", UNDECIDED, RECIPE, "812 930 931 992 993"),
+    _resting("franciscouzo/square-packing@487b058", NOT_RECORDED, RECIPE, "812 930"),
+    _resting("franciscouzo/square-packing@4e4c8ce", NOT_RECORDED, GOEBEL_ABOVE, "369 376"),
+    _resting(
+        "franciscouzo/square-packing@5a299b4",
+        NOT_RECORDED,
+        CONSEQUENCE,
+        "406 447 588 589 638 906 907 967 968",
+    ),
+    _resting(
+        "franciscouzo/square-packing@5a299b4",
+        NOT_RECORDED,
+        GOEBEL_ABOVE,
+        "408 415 449 488 492 537 538 585 634 635 685 686 687 738 739 793 794 795 851 852 "
+        "910 911 912 920 971 972 973",
+    ),
+    _resting(
+        "franciscouzo/square-packing@5a299b4",
+        NOT_RECORDED,
+        RECIPE,
+        "407 448 457 491 533 534 580 581 590 629 630 639 677 680 681 690 730 733 734 741 "
+        "785 788 789 796 842 845 846 901 904 905 908 962 965 966 969 981 982",
+    ),
+    _resting(
+        "franciscouzo/square-packing@5a299b4",
+        NOT_RECORDED,
+        SUB_PRINT,
+        "325 333 362 401 442 485 530 577",
+    ),
+)
 #: The walk of each ledger these releases' rows are planned from. The backlog ledger's
 #: starts were frozen at the 18 October ledger's ``main``; #719's at ``main`` after #720.
 WALKS: dict[str, Walk] = {
@@ -457,12 +584,17 @@ WALKS: dict[str, Walk] = {
                 ("franciscouzo/square-packing@5a299b4", frozenset({366, 372})),
             )
         },
+        resting=(
+            _resting("#719", NOT_RECORDED, SUB_PRINT, "366"),
+            _resting("franciscouzo/square-packing@5a299b4", NOT_RECORDED, CONSEQUENCE, "447"),
+        ),
     ),
     HISTORY: Walk(
         HISTORY,
         later={history_label(source): source for source in HISTORY_SOURCES},
         awaiting={},
         held=HISTORY_HELD,
+        resting=HISTORY_RESTING,
     ),
 }
 #: A Couzo row: the count, the prior and new prints, the deletion and the link.
@@ -2161,6 +2293,46 @@ def _history_rows(coverage: Mapping[str, Any]) -> dict[str, list[tuple[int, Frac
     return {source: sorted(rows) for source, rows in found.items()}
 
 
+def _listing(parts: Sequence[str]) -> str:
+    return parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
+
+
+def held_sentence(walk: Walk, report: str) -> str:
+    """What ``walk`` holds of a report and what of its verdicts rests on holds, for the
+    report's note in the walk's ``sources.yaml``: the ledger says it beside the verdicts."""
+    text = ""
+    items = walk.held.get(report, ())
+    if items:
+        parts = [
+            f"{len(item.counts)} "
+            + (HELD_NAMES if len(item.counts) > 1 else HELD_NAME)[item.kind]
+            + (f", {item.note}" if item.note else "")
+            + f" ({', '.join((item.bead, *item.also))})"
+            for item in items
+        ]
+        total = sum(len(item.counts) for item in items)
+        text += (
+            f" The walk holds its publications at {total} counts back from a row, each "
+            f"waiting on an owner decision (beyond_horizon_replay.HISTORY_HELD): "
+            f"{_listing(parts)}."
+        )
+    resting = [item for item in walk.resting if item.report == report]
+    if resting:
+        parts = [
+            f"{len(item.counts)} against "
+            + " and ".join(HELD_NAMES[kind] for kind in item.kinds)
+            + ("" if item.verdict == NOT_RECORDED else f", {item.verdict}")
+            for item in resting
+        ]
+        total = sum(len(item.counts) for item in resting)
+        text += (
+            f" Its verdicts at {total} counts are decided only against held publications "
+            f"(beyond_horizon_replay.HISTORY_RESTING): {_listing(parts)}. An answer that "
+            "leaves a hold out reruns this walk."
+        )
+    return text
+
+
 def history_sources(read_on: str) -> dict[str, Any]:
     """The history walk's ``sources.yaml``, transcribed from the register and the scan.
 
@@ -2232,6 +2404,7 @@ def history_sources(read_on: str) -> dict[str, Any]:
                         f"({HISTORY_PUBLICATIONS.relative_to(ROOT).as_posix()}) at each "
                         "count where it states a side strictly below the frozen start "
                         "that no row holds, at the least side the commit states there."
+                        + held_sentence(WALKS[HISTORY], f"{repository}@{commit[:7]}")
                     ),
                 }
             )
@@ -2256,7 +2429,7 @@ def history_sources(read_on: str) -> dict[str, Any]:
             "holders": issue[1] if issue else WATCHED_HOLDERS[_repository(sources[source])],
             "bead": issue[2] if issue else _row_bead(coverage, source),
             "claims": claims,
-            "note": _history_note(source, label),
+            "note": _history_note(source, label) + held_sentence(WALKS[HISTORY], label),
         }
         if issue is not None:
             report["issue"] = issue[0]
@@ -2581,8 +2754,11 @@ def held_problems(register: Mapping[str, Any]) -> list[str]:
                 where = f"{walk.name}: {report}"
                 if item.kind not in HELD_CLASSES:
                     problems.append(f"{where}: no such class of hold, {item.kind!r}")
-                if not _BEAD.fullmatch(item.bead):
-                    problems.append(f"{where}: {item.bead!r} is not a decision's bead")
+                problems.extend(
+                    f"{where}: {bead!r} is not a decision's bead"
+                    for bead in (item.bead, *item.also)
+                    if not _BEAD.fullmatch(bead)
+                )
                 if seen & item.counts:
                     problems.append(f"{where}: holds n={sorted(seen & item.counts)} twice")
                 seen |= item.counts
@@ -2607,12 +2783,149 @@ def held_problems(register: Mapping[str, Any]) -> list[str]:
 def held_plan() -> list[dict[str, Any]]:
     """Every publication a walk holds back from a row, with its class and decision's bead."""
     return [
-        {"walk": walk.name, "report": report, "n": n, "class": item.kind, "bead": item.bead}
+        {
+            "walk": walk.name,
+            "report": report,
+            "n": n,
+            "class": item.kind,
+            "bead": item.bead,
+        }
+        | ({"also": list(item.also)} if item.also else {})
         for walk in WALKS.values()
         for report, items in walk.held.items()
         for item in items
         for n in sorted(item.counts)
     ]
+
+
+def resting_on_holds(walk: Walk) -> tuple[Resting, ...]:
+    """The verdicts ``walk`` decided only against publications it holds, from its ledger:
+    a step not recorded, or undecided, every report of whose ``decided_against`` the walk
+    holds at that count, grouped by report, verdict and the holds' classes."""
+    groups: dict[tuple[str, str, tuple[str, ...]], set[int]] = {}
+    for count in _counts(walk):
+        n = count["n"]
+        for step in count["steps"]:
+            against = step.get("decided_against") or []
+            if step["verdict"] == RECORDED or not against:
+                continue
+            holds = [walk.holds(report, n) for report in against]
+            if all(holds):
+                kinds = tuple(sorted({item.kind for item in holds if item is not None}))
+                groups.setdefault((step["report"], step["verdict"], kinds), set()).add(n)
+    return tuple(
+        Resting(report, verdict, kinds, frozenset(counts))
+        for (report, verdict, kinds), counts in sorted(groups.items())
+    )
+
+
+def resting_problems() -> list[str]:
+    """Where a walk's declared `Resting` verdicts are not the ones its ledger rests on its
+    holds (`resting_on_holds`): each is named, so an answer that leaves a hold out names
+    every verdict it reopens."""
+    problems: list[str] = []
+    for walk in WALKS.values():
+
+        def key(item: Resting) -> tuple[str, str, tuple[str, ...]]:
+            return (item.report, item.verdict, item.kinds)
+
+        declared = {key(item): item.counts for item in walk.resting}
+        found = {key(item): item.counts for item in resting_on_holds(walk)}
+        for group in sorted(declared.keys() | found.keys()):
+            have, want = declared.get(group, frozenset()), found.get(group, frozenset())
+            where = f"{walk.name}: {group[0]} {group[1]} on {'/'.join(group[2])} holds"
+            if want - have:
+                problems.append(f"{where}: rests at n={sorted(want - have)}, undeclared")
+            if have - want:
+                problems.append(
+                    f"{where}: declared at n={sorted(have - want)}, not in the ledger"
+                )
+    return problems
+
+
+#: What a step a rerun walk records would be (`refusal_flips`): a record, which needs a
+#: row, or a publication held again in a class of its own.
+NEW_RECORD = "record"
+
+
+def refusal_flips(walk: Walk, kinds: Iterable[str]) -> list[tuple[int, str, str]]:
+    """The steps ``walk`` would record if the owner left its holds of ``kinds`` out of the
+    record, each with what it would then be.
+
+    The walk is run again by `devtools.intake_ledger`'s rule from its frozen starts without
+    those publications, and each step that was not recorded and now is is named. It is a
+    new record (`NEW_RECORD`) unless it is itself above Göbel's construction at its count
+    (`GOEBEL_ABOVE`, by the 15 October packet's program, as `goebel` compares) or below
+    the side it beats by less than 1e-12 at the same 12-place print (`SUB_PRINT`), when
+    the same decision holds it in turn.
+    """
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    refused = set(kinds)
+    ledger = intake_ledger.load_ledger(walk.directory)
+    starts = intake_ledger.load_starts(walk.directory, ledger["read_at_main"])
+    entries: dict[int, list[Any]] = {}
+    for report in ledger["reports"]:
+        for claim in report["claims"]:
+            held = walk.holds(report["report"], claim["n"])
+            if held is None or held.kind not in refused:
+                entries.setdefault(claim["n"], []).append(
+                    intake_ledger.entry_side(report, claim)
+                )
+    before = {
+        (count["n"], step["report"]): step["verdict"]
+        for count in _counts(walk)
+        for step in count["steps"]
+    }
+    program = _goebel_program()
+    forms = program.families(program.LIMIT)
+    flips: list[tuple[int, str, str]] = []
+    for n, sides in sorted(entries.items()):
+        for step in intake_ledger.walk(n, starts[n], sides).steps:
+            if step.verdict != RECORDED or before.get((n, step.side.label)) == RECORDED:
+                continue
+            side = step.side.value
+            least = min(member.span.high for member in step.holders)
+            construction = program.goebel_at(n, forms)
+            if construction is not None and program.sign(side, construction) >= 0:
+                falls = GOEBEL_ABOVE
+            elif least - side < SUB_PRINT_GAP and ceiling(side) == ceiling(least):
+                falls = SUB_PRINT
+            else:
+                falls = NEW_RECORD
+            flips.append((n, step.side.label, falls))
+    return flips
+
+
+def held_dependents() -> dict[str, Any]:
+    """For each walk, the verdicts resting on its holds and, for each class of hold an
+    answer might leave out, the steps a rerun walk would then record, by what each would
+    be (`refusal_flips`)."""
+    return {
+        walk.name: {
+            "resting": [
+                {
+                    "report": item.report,
+                    "verdict": item.verdict,
+                    "kinds": list(item.kinds),
+                    "counts": sorted(item.counts),
+                }
+                for item in walk.resting
+            ],
+            "recorded_if_left_out": {
+                kind: {
+                    falls: [f"{report} n={n}" for n, report, how in flips if how == falls]
+                    for falls in sorted({how for _, _, how in flips})
+                }
+                for kind in sorted(
+                    {item.kind for items in walk.held.values() for item in items}
+                )
+                for flips in [refusal_flips(walk, (kind,))]
+            },
+        }
+        for walk in WALKS.values()
+        if walk.held
+    }
 
 
 def declaration_problems() -> list[str]:
@@ -2800,7 +3113,11 @@ def coverage_problems(coverage: Mapping[str, Any] | None = None) -> list[str]:
         ) and not bridged(rows, n, earlier, successor, walk):
             problems.append(f"n={n} from {earlier}: not superseded by {successor}")
     return (
-        problems + held_problems(register) + declaration_problems() + chain_problems(register)
+        problems
+        + held_problems(register)
+        + resting_problems()
+        + declaration_problems()
+        + chain_problems(register)
     )
 
 
@@ -3027,6 +3344,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     transcribe_history.add_argument("--read-on", required=True)
     commands.add_parser("declare-rows")
     commands.add_parser("coverage-plan")
+    commands.add_parser("held-dependents")
     audit = commands.add_parser("check")
     audit.add_argument("--issue", nargs="+", default=[], help=KEY_HELP)
     audit.add_argument("--replay", action="store_true")
@@ -3059,6 +3377,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "supersessions": planned_supersessions(),
             "held": held_plan(),
         },
+        "held-dependents": held_dependents,
     }
     if args.command == "check":
         problems = check(replay=args.replay, workers=args.workers, issues=args.issue)

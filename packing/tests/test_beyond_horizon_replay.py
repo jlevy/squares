@@ -904,6 +904,110 @@ def test_the_history_walk_holds_back_what_waits_on_a_decision() -> None:
     assert replay.held_problems(coverage) == []
 
 
+#: 23aff0c's held constructions and deletions from them, all classical (#722's review of
+#: #730, A1): they wait on #613 (think-8krd) as well as on D2 and D6 (think-f2io).
+CLASSICAL_23AFF0C = {"consequence": 15, "recipe": 46}
+#: The steps a rerun history walk would record if an answer left a class of hold out
+#: (review A of #730, A2): new records at deletion bounds and recipes, and at Göbel and
+#: sub-print holds only publications the same decision holds again.
+LEFT_OUT = {
+    "consequence": {"record": 9},
+    "recipe": {"record": 47},
+    "goebel": {"goebel": 66},
+    "sub-print": {"sub-print": 8},
+}
+
+
+def test_23aff0c_s_classical_holds_wait_on_613_too() -> None:
+    """Its 15 deletion bounds and 46 constructions are Göbel's and Friedman's, so each hold
+    names think-8krd beside think-f2io, says what it is, and the class says it too."""
+    held = replay.HISTORY_HELD["franciscouzo/square-packing@23aff0c"]
+    classical = {item.kind: item for item in held if item.also}
+    assert {kind: len(item.counts) for kind, item in classical.items()} == CLASSICAL_23AFF0C
+    assert all(
+        item.bead == "think-f2io" and item.also == ("think-8krd",) for item in held if item.also
+    )
+    assert "Friedman" in classical["consequence"].note
+    assert "Göbel's squares" in classical["recipe"].note
+    assert "classical construction" in replay.HELD_CLASSES[replay.RECIPE]
+    assert "construction the index states" in replay.HELD_CLASSES[replay.CONSEQUENCE]
+    plan = [
+        item
+        for item in replay.held_plan()
+        if item["walk"] == replay.HISTORY and item["report"].endswith("@23aff0c")
+    ]
+    assert sum(1 for item in plan if item.get("also") == ["think-8krd"]) == 61
+
+
+def test_a_hold_s_further_decision_is_a_bead(monkeypatch: pytest.MonkeyPatch) -> None:
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    label = "franciscouzo/square-packing@5a299b4"
+    _holding(
+        monkeypatch,
+        **{
+            label: (
+                replay.Held(replay.SUB_PRINT, "think-fwa9", frozenset({366, 372}), ("613",)),
+            )
+        },
+    )
+    assert replay.held_problems(coverage) == [
+        f"{replay.ISSUE_719}: {label}: '613' is not a decision's bead"
+    ]
+
+
+def test_each_verdict_resting_on_a_hold_is_declared(monkeypatch: pytest.MonkeyPatch) -> None:
+    """131 history verdicts and 2 of #719's are decided only against held publications;
+    each is declared (`Resting`), and one the ledger rests or does not rest is named."""
+    assert replay.resting_problems() == []
+    history = replay.WALKS[replay.HISTORY]
+    assert sum(len(item.counts) for item in history.resting) == 131
+    assert replay.resting_on_holds(history) == history.resting
+    first, *rest = history.resting
+    dropped = dataclasses.replace(
+        history,
+        resting=(
+            dataclasses.replace(first, counts=first.counts - {757}),
+            dataclasses.replace(rest[0], counts=rest[0].counts | {376}),
+            *rest[1:],
+        ),
+    )
+    monkeypatch.setattr(replay, "WALKS", {replay.HISTORY: dropped})
+    assert replay.resting_problems() == [
+        (
+            f"{replay.HISTORY}: {first.report} not recorded on recipe holds: rests at "
+            "n=[757], undeclared"
+        ),
+        (
+            f"{replay.HISTORY}: {rest[0].report} not recorded on goebel holds: declared at "
+            "n=[376], not in the ledger"
+        ),
+    ]
+
+
+def test_an_answer_leaving_a_hold_out_reopens_the_verdicts_resting_on_it() -> None:
+    """Run again without each class of hold, the history walk records 9 of 5a299b4's
+    certificates at the deletion bounds' counts and 47 publications at the recipes', each
+    a new record with no row and no hold; at Göbel and sub-print holds every step it would
+    record is held again by the same decision. Each step it would record rests on that
+    class alone; a verdict also resting on another standing hold stays."""
+    history = replay.WALKS[replay.HISTORY]
+    found = {}
+    for kind in LEFT_OUT:
+        flips = replay.refusal_flips(history, (kind,))
+        found[kind] = dict(Counter(falls for _, _, falls in flips))
+        resting = {
+            (n, item.report)
+            for item in history.resting
+            if item.kinds == (kind,)
+            for n in item.counts
+        }
+        assert {(n, report) for n, report, _ in flips} <= resting
+    assert found == LEFT_OUT
+    deletions = replay.refusal_flips(history, (replay.CONSEQUENCE,))
+    assert [n for n, _, _ in deletions] == [406, 447, 588, 589, 638, 906, 907, 967, 968]
+    assert {report for _, report, _ in deletions} == {"franciscouzo/square-packing@5a299b4"}
+
+
 def test_the_history_ledger_transcribes_the_scan_and_the_register() -> None:
     """sources.yaml is what `history_sources` writes from the scan and the register; the
     starts are frozen at a97b712b9, where the 8 October rows or the grid stood."""

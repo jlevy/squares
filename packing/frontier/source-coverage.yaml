@@ -8500,9 +8500,12 @@ sources:
     21 are superseded on entry, by issue 672's (16) and issue 675's (5). Its rows supersede
     first couzo-index-2026-10-15's (4), and at 17 counts no row stood before them. The walk
     holds back the commit's publications at 71 counts: 10 re-certifications below the 12-place
-    print (think-fwa9), 15 index deletion bounds (D6 proposed, think-f2io) and 46 L-border and
-    tiling recipes (D2, think-f2io), each with its decision's bead
-    (beyond_horizon_replay.HISTORY_HELD).
+    print (think-fwa9), and 61 classical constructions its upper_bounds.json states with no
+    certificate file, which wait on #613 (think-8krd), whether a classical construction counts
+    as an earlier report, as well as on D2 and D6 (think-f2io): 46 constructions, Göbel's
+    squares (27) and Friedman's off-centre family (19), 41 of them L-border extensions, and 15
+    bounds deleting one or two squares from Friedman's constructions one or two counts above.
+    Each hold names its decisions' beads (beyond_horizon_replay.HISTORY_HELD).
   claims_record: resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows-23aff0c.json
 - id: couzo-reconcile-2026-10-20
   title: Francisco Couzo's 20 beyond-horizon certificates of his 5a299b4 reconciliation, no issue
