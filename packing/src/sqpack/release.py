@@ -2488,6 +2488,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/contributors/people/amund-kristiansen.md",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/default_drawings.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/site_resources.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
@@ -2504,18 +2506,21 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "T-238's registration (#755, Amund Kristiansen's s(303)), its stage 4 review "
             "(V3/C3, S2), its adoption at 303 in the pass of 24 October 2026 with its "
-            "regularization, its contributor profile, its house reader and the #755 request "
-            "entry, against main 7cd0a94bf (#747): rendered at link revision 5617791b into "
-            "empty site directories, twice from this tree at 5617791b and twice from the "
-            "same tree with main's register, requests record, coverage record, "
-            "upper_bound_reports.py, adopt_houses.py, default_drawings.py and "
-            "upper_bound_houses.py swapped in and the new profile set aside (69 files each), "
-            "render_n11_optimality_review, render_n11_threshold_bound_review and "
-            "render_packing_methods write every file byte-identical across all four. "
-            "Measured before at 956839d7 against main 7335d0098, at 1c333cfe against "
-            "05e95db36 and at 0f7eb786 against 769e441e1, for the registration alone, with "
-            "the same outcome. The explainer counts the register (230 to 231 results) and "
-            "took v0.4.22. No PDF was printed; each prints from that HTML. Retain v0.1.11, "
+            "regularization, its contributor profile, its house reader, the #755 request "
+            "entry and its gist's card in Other Square Packing Projects (OTHER_PROJECTS, "
+            "and source_repository dropping a gist's revision), against main 64b316b6c "
+            "(#761, #762): rendered at link revision ea8c6f10 into empty site directories, "
+            "twice from this tree at ea8c6f10 and twice from the same tree with main's "
+            "register, requests record, coverage record, upper_bound_reports.py, "
+            "adopt_houses.py, default_drawings.py, upper_bound_houses.py, "
+            "overview_sections.py and site_resources.py swapped in and the new profile set "
+            "aside (51 files each), render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four. Measured before at 956839d7 against main "
+            "7335d0098, at 1c333cfe against 05e95db36, at 0f7eb786 against 769e441e1 and "
+            "at 5617791b against 7cd0a94bf (69 files each), without the card, with the "
+            "same outcome. The explainer counts the register (230 to 231 results) and took "
+            "v0.4.22. No PDF was printed; each prints from that HTML. Retain v0.1.11, "
             "v0.1.4 and v0.2.7."
         ),
     ),
