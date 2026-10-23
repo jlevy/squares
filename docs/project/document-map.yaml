@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-22-ci-release-latency.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/contributors/reviews/2026-10-22-credit-link-audit.md, role: review, authority: record, lifecycle: retained}

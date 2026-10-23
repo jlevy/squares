@@ -1,0 +1,64 @@
+{
+  "c6715": {
+    "orbits": 480,
+    "mass": "3999/100",
+    "expanded_rectangles": 3792,
+    "files": {
+      "c6715.json": {
+        "sha256": "f4a1ae9b05eeac7fbaca2138237e5ce313cc8e463b930e927d8e5623e3e12c34",
+        "total_mass": "3999/100"
+      },
+      "c6715_mass0985.json": {
+        "sha256": "d4aa4dbd83a383df2f41f71b596ef4eaa2ad3c0bcd8b030b538e4994a76f604c",
+        "total_mass": "787803/20000"
+      }
+    },
+    "source_rows": 2526
+  },
+  "c6718": {
+    "orbits": 685,
+    "mass": "3999/100",
+    "expanded_rectangles": 5424,
+    "files": {
+      "c6718.json": {
+        "sha256": "38e0eff1ccb0dd156c43ec24a2292b2e770600ba704881c335d4e3e649a094ba",
+        "total_mass": "3999/100"
+      },
+      "c6718_mass0985.json": {
+        "sha256": "4168c7b34843a1fc28fb564ed9bebdf372c46249136f52b5a92b00232f262d6c",
+        "total_mass": "787803/20000"
+      }
+    },
+    "sites": {
+      "inherited": 522,
+      "generated": 163
+    }
+  },
+  "n28": {
+    "keys": [
+      "B",
+      "L",
+      "n",
+      "points",
+      "proof_net",
+      "rectangles",
+      "total_mass"
+    ],
+    "format": "M (rows of {rectangle, mass})",
+    "points": [],
+    "proof_net": {
+      "step": "83/40000",
+      "last": "200"
+    },
+    "n": 28,
+    "L": "573351/100000",
+    "B_field": "9977/10000",
+    "rows": 884,
+    "all_rows_admissible": true,
+    "mass": "2799999/100000",
+    "total_mass_matches": true,
+    "distinct_images": 7068,
+    "control_is_mass_times_985_1000": true,
+    "control_keys_equal": true
+  }
+}
