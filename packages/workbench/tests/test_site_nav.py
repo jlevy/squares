@@ -9,14 +9,13 @@ site preview, not here.
 
 from __future__ import annotations
 
-import re
 import subprocess
 from collections.abc import Sequence
 from pathlib import Path
 
 import pytest
 
-from devtools import check_published_site, render_overview
+from devtools import check_published_site, paper_structure, render_overview
 from devtools.site_assets import read_inline_page
 from workbench_tools import build_site
 
@@ -45,13 +44,16 @@ def page(tmp_path_factory: pytest.TempPathFactory) -> str:
 
 
 def test_the_page_carries_the_shared_nav_with_explanations_current(page: str) -> None:
-    nav = render_overview.nav_html("explanations", root="../")
-    assert page.count(nav) == 1
-    assert page.count('class="site-nav"') == 1
-    current = re.findall(r'<a data-page="(\w+)"[^>]* aria-current="page"', page)
-    assert current == ["explanations"]
-    explanations = '<a data-page="explanations" aria-current="page" href="../papers.html">'
-    assert f"{explanations}Explanations</a>" in page
+    root = paper_structure.parse(page)
+    navs = root.find_all("nav", "site-nav")
+    assert len(navs) == 1
+    nav = navs[0]
+    assert nav.attrs.get("aria-label")
+    current = [link for link in nav.find_all("a") if link.attrs.get("aria-current") == "page"]
+    assert [(link.attrs.get("data-page"), link.attrs.get("href")) for link in current] == [
+        ("explanations", "../papers.html")
+    ]
+    assert current[0].text() == "Explanations"
 
 
 def test_the_page_carries_the_sites_head_at_the_address_it_is_served_at(page: str) -> None:
@@ -81,13 +83,23 @@ def test_the_page_carries_the_sites_head_at_the_address_it_is_served_at(page: st
 def test_the_bar_has_one_explanations_entry_reaching_the_site_root(page: str) -> None:
     """The bar is the site's partial, so the workbench carries its Explanations entry, which
     stands for the explainer and the tutorial, and no entry for either of them."""
-    links = re.findall(r'<a data-page="(\w+)"[^>]* href="([^"]+)"([^>]*)>(.*?)</a>', page)
+    nav = paper_structure.parse(page).find("nav", "site-nav")
+    assert nav is not None
+    links = [link for link in nav.find_all("a") if "data-page" in link.attrs]
     entries = [
-        (key, href, "GitHub" if key == "github" else label)
-        for key, href, _attrs, label in links
+        (
+            link.attrs["data-page"],
+            link.attrs.get("href"),
+            link.attrs.get("aria-label") or link.text(),
+        )
+        for link in links
     ]
-    assert 'aria-label="GitHub"' in page
-    assert 'class="site-nav-icon"' in page
+    github = next(link for link in links if link.attrs["data-page"] == "github")
+    assert github.attrs.get("aria-label") == "GitHub"
+    assert github.attrs.get("href") == "https://github.com/jlevy/squares"
+    icon = github.find("svg")
+    assert icon is not None
+    assert icon.attrs.get("aria-hidden") == "true"
     assert [key for key, _, _ in entries] == [
         "overview",
         "news",
@@ -106,16 +118,26 @@ def test_the_bar_has_one_explanations_entry_reaching_the_site_root(page: str) ->
 def test_the_page_is_the_workbench_tab_of_the_explanations_section(page: str) -> None:
     """The workbench carries the Explanations section's tabs under the bar with its own tab
     current, so an existing `workbench/` link lands on the Workbench tab beside the Film."""
-    tabs = render_overview.visualize_tabs("workbench", root="../")
-    assert page.count(tabs) == 1
-    assert page.count('class="site-tabs"') == 1
-    current = re.findall(r'<a data-tab="(\w+)" aria-current="page" href="([^"]+)"', page)
-    assert current == [("workbench", "../workbench/")]
-    assert '<a data-tab="film" href="../papers.html#visuals">Film</a>' in page
-    # In the header after the bar, where a kpress page of the section also puts it.
-    body = page.split("<body>", 1)[1]
-    bar_end = body.index("</nav>", body.index('class="site-nav"'))
-    assert bar_end < body.index(tabs) < body.index("</header>") < body.index('id="viewport"')
+    root = paper_structure.parse(page)
+    tabs = root.find_all("nav", "site-tabs")
+    assert len(tabs) == 1
+    current = [
+        link for link in tabs[0].find_all("a") if link.attrs.get("aria-current") == "page"
+    ]
+    assert [(link.attrs.get("data-tab"), link.attrs.get("href")) for link in current] == [
+        ("workbench", "../workbench/")
+    ]
+    film = next(link for link in tabs[0].find_all("a") if link.attrs.get("data-tab") == "film")
+    assert film.attrs.get("href") == "../papers.html#visuals"
+    assert film.text() == "Film"
+    header = root.find("header", "kpress-site-header")
+    assert header is not None
+    assert header.find("nav", "site-tabs") is tabs[0]
+    nav = header.find("nav", "site-nav")
+    assert nav is not None
+    elements = list(root.walk())
+    viewport = next(node for node in elements if node.attrs.get("id") == "viewport")
+    assert elements.index(nav) < elements.index(tabs[0]) < elements.index(viewport)
     # The bar's stylesheet, which the page carries, draws the rule under the bar and over
     # the tabs, and keeps the tabs' own space between them and the application.
     head = page.split("</head>", 1)[0]
@@ -128,15 +150,23 @@ def test_the_page_is_the_workbench_tab_of_the_explanations_section(page: str) ->
 
 
 def test_every_site_link_reaches_the_site_root(page: str) -> None:
-    nav = page.split('<nav class="site-nav"', 1)[1].split("</nav>", 1)[0]
-    for href in re.findall(r'href="([^"]+)"', nav):
-        assert href.startswith(("../", "https://")), href
+    nav = paper_structure.parse(page).find("nav", "site-nav")
+    assert nav is not None
+    for link in nav.find_all("a"):
+        assert link.attrs.get("href", "").startswith(("../", "https://")), link.attrs
 
 
 def test_the_bar_opens_the_body_above_the_workbench(page: str) -> None:
-    body = page.split("<body>", 1)[1]
-    assert body.lstrip().startswith('<div class="site-app-shell">')
-    assert body.index('class="site-nav"') < body.index('id="viewport"')
+    root = paper_structure.parse(page)
+    body = root.find("body")
+    assert body is not None
+    first = next(child for child in body.children if isinstance(child, paper_structure.Node))
+    assert "site-app-shell" in first.classes
+    elements = list(body.walk())
+    nav = first.find("nav", "site-nav")
+    assert nav is not None
+    viewport = next(node for node in elements if node.attrs.get("id") == "viewport")
+    assert elements.index(nav) < elements.index(viewport)
 
 
 def test_the_theme_is_applied_before_paint_and_the_gear_is_wired(page: str) -> None:

@@ -103,6 +103,38 @@ PRs and supporting records: [\#687](https://github.com/jlevy/squares/pull/687) �
 
 ### 2026-10-16
 
+<a id="changelog-entry-fitzharding-n19-reported-proof"></a>
+
+#### Fitzharding Reports a Lean Proof for 19 Squares
+
+Significance S5: This announces the S5 optimality report T-194; significance does not imply independent verification of the complete claim.
+
+[Oscar Fitzharding](packing/contributors/people/oscar-fitzharding.md) reports a Lean 4 proof that [Robert Wainwright](packing/contributors/people/robert-wainwright.md)’s 1979 packing of 19 unit
+squares is optimal: $s(19) = 3 + 4\sqrt{2}/3 = 4.88561808316412\ldots$. It is the first
+optimality claim the project’s records hold at 19; if the proof holds, it closes the
+gap of about $0.0606$ between the verified lower bound, $193/40$, and Wainwright’s
+side. T-194 remains reported at V0/C1; the Lean build has not been replayed here.
+
+- Lean’s kernel checks the geometric arguments, and 4,320 finite certificate facts are
+  decided by `native_decide`, so Lean’s compiler and native evaluator are trusted. The
+  source reports a kernel replay of the theorem’s import closure that takes those
+  facts as axioms, and says a complete rebuild from its published sources has not yet
+  been run.
+- A separately prompted mathematical review of 16 October found no blocking or major
+  defect. It checked the statement and decided the endpoint packing exactly,
+  re-derived the six-step chain to the final theorem, and with programs of its own
+  re-established what each of the 2,328 native facts in the Git tree certifies. The
+  1,992 facts in the release archives were scanned but not re-run.
+- The proof builds on Fitzharding’s 17-square formalization (T-154), whose checker
+  modules it compiles. The source says it was developed with substantial assistance
+  from Claude and Codex.
+
+Published artifacts: [Current 19-square Lean proof report](https://squaremath.org/result/t-194.html).
+
+First public: 2026-10-16 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38942623017/job/117129620456)).
+
+PRs and supporting records: [\#651](https://github.com/jlevy/squares/pull/651) · [Source and premise review](docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md) · [Retained source and verification limits](packing/resources/web/fitzharding-n19-lean-2026-10-16/README.md) · [Fitzharding’s registration request](https://github.com/jlevy/squares/issues/640).
+
 <a id="changelog-entry-greff-ninety-five-optimality-report"></a>
 
 #### Greff Reports an Optimum for 95 Squares

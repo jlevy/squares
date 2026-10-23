@@ -270,7 +270,7 @@ def _shown(address: str) -> str:
 
 def _linked_name(person: Person) -> str:
     """A name in bold, linking its address."""
-    label = escape(person_label(person.name, person.url))
+    label = escape(person_label(person.name, person.url, full_names=True))
     return f'<a href="{escape(person.url, quote=True)}"><strong>{label}</strong></a>'
 
 
@@ -321,7 +321,9 @@ def _credit_lines(front: PaperFront) -> list[tuple[str, str, str]]:
     """Each line of the credits: its class, its HTML and its Markdown, in order."""
     lines: list[tuple[str, str, str]] = []
     if front.source is not None:
-        author = escape(person_label(front.source.author, front.source.author_url))
+        author = escape(
+            person_label(front.source.author, front.source.author_url, full_names=True)
+        )
         address = front.source.address
         author_html = f"<strong>{author}</strong>"
         author_markdown = f"**{author}**"
@@ -349,7 +351,10 @@ def _credit_lines(front: PaperFront) -> list[tuple[str, str, str]]:
             "Human oversight: " + _names(tuple(_linked_name(p) for p in front.oversight)),
             "Human oversight: "
             + _names(
-                tuple(f"[**{person_label(p.name, p.url)}**]({p.url})" for p in front.oversight)
+                tuple(
+                    f"[**{person_label(p.name, p.url, full_names=True)}**]({p.url})"
+                    for p in front.oversight
+                )
             ),
         )
     )

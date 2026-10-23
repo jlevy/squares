@@ -790,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "6610be9374c9371dd36f8ee0c9be69846eb7d122"
+DATA_REVISION = "40a71b16cfc2ab38845445e3f911c44ab80a4578"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -885,8 +885,13 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            form, 9b459da65 and 97e4069d5) went live
 #:                                            on October 1 and 2, so the substantive
 #:                                            day is the one recorded
-#: The leading entry is proposed for PR #578; confirm its date at first deployment.
+#: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.19",
+        first_published="October 22, 2026",
+        result_scope="Use full public names in explanatory narrative profile links.",
+    ),
     PublicationHistoryEntry(
         version="v0.4.18",
         first_published="October 22, 2026",
@@ -1064,8 +1069,13 @@ EXPLAINER_REVISED = "October 22, 2026"
 #: is the explainer's, linked from its front (`PaperFront.history`). v0.1.0 is dated by
 #: the commit that published it (620ffff54); the day it first went live is not recorded
 #: (think-2cqu).
-# The leading entry is proposed for PR #578; confirm its date at first deployment.
+# The leading entry is proposed for the next publication; confirm its date at first deployment.
 OPTIMALITY_REVIEW_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.10",
+        first_published="October 22, 2026",
+        result_scope="Use full public names in explanatory narrative profile links.",
+    ),
     PublicationHistoryEntry(
         version="v0.1.9",
         first_published="October 22, 2026",
@@ -1197,8 +1207,13 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 
 #: Every edition of Part II, the review of Overbeck's certified lower bound
 #: `s(11) > 31/8` (T-037), newest first, as `OPTIMALITY_REVIEW_HISTORY` is Part III's.
-# The leading entry is proposed for PR #578; confirm its date at first deployment.
+# The leading entry is proposed for the next publication; confirm its date at first deployment.
 THRESHOLD_REVIEW_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.3",
+        first_published="October 22, 2026",
+        result_scope="Use full public names in explanatory narrative profile links.",
+    ),
     PublicationHistoryEntry(
         version="v0.1.2",
         first_published="October 22, 2026",
@@ -1244,8 +1259,13 @@ THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 
 #: The standalone tutorial on finding and verifying record packings. Its version and
 #: dates belong to the paper, independently of the site and n = 11 series.
-#: The leading entry is proposed for PR #578; confirm its date at first deployment.
+#: The leading entry is proposed for the next publication; confirm its date at first deployment.
 PACKING_METHODS_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.2.6",
+        first_published="October 22, 2026",
+        result_scope="Use full public names in explanatory narrative profile links.",
+    ),
     PublicationHistoryEntry(
         version="v0.2.5",
         first_published="October 22, 2026",
@@ -1358,6 +1378,13 @@ class ReleaseImpactDecision(NamedTuple):
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.18",
+        version="v0.4.19",
+        impact="patch",
+        reason="Use full public names in explanatory narrative profile links.",
+    ),
+    ReleaseImpactDecision(
         component="site",
         previous_version="v0.9.1",
         version="v0.9.2",
@@ -1378,6 +1405,27 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
             "Update the registered result count after the registration of Mykhailo "
             "Polkovskyi's #719 re-solves at 105 and 204 (T-229)."
         ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:square-packing-methods-survey",
+        previous_version="v0.2.5",
+        version="v0.2.6",
+        impact="patch",
+        reason="Use full public names in explanatory narrative profile links.",
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-threshold-bound-review",
+        previous_version="v0.1.2",
+        version="v0.1.3",
+        impact="patch",
+        reason="Use full public names in explanatory narrative profile links.",
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-optimality-review",
+        previous_version="v0.1.9",
+        version="v0.1.10",
+        impact="patch",
+        reason="Use full public names in explanatory narrative profile links.",
     ),
     ReleaseImpactDecision(
         component="paper:square-packing-methods-survey",
@@ -2315,10 +2363,55 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Speculation rules on the site's own pages (think-gr4c): render_overview gains "
             "SPECULATION_RULES and speculation_rules_tag, which kpress_page and "
             "static_content_page add after head_tags; head_tags itself, which writes the "
-            "papers' heads, is unchanged. Rendered into empty directories at link revision "
-            "ffd0f4af from this tree and from main ffd0f4af7 (#724): the four renderers "
-            "write 68 byte-identical files, none carrying the rules. No PDF was printed; "
-            "each prints from that HTML. Retain v0.4.18, v0.1.9, v0.1.2 and v0.2.5."
+            "papers' heads, is unchanged. Rendered at link revision e929137a into empty "
+            "directories, once from this tree and twice from main e929137a8 (#725): the "
+            "four renderers write 68 files each, none carrying the rules, byte-identical "
+            "except one span's style attribute in the explainer's HTML, whose place varies "
+            "between renders (the record below). No PDF was printed; each prints from that "
+            "HTML. Retain v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/n-105.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Stage 4 of T-226 to T-229 (V3/C3 after the 22 October reviews, T-229 adopted "
+            "at 105 and 204 and regularized, the replies after #722) against main "
+            "bfc04b659 (#733, #735): rendered at link revision 40a71b16 into empty site "
+            "directories, twice from this tree at 720648d3 and twice from main's (68 files "
+            "each), render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every "
+            "file byte-identical across all four, except one span's style attribute in "
+            "the explainer's HTML, whose place varies between two renders of one tree. "
+            "The register stays at 229 results. No PDF was printed; each prints from that "
+            "HTML. Retain #733's v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
         ),
     ),
     ReleaseNoPublicChange(
@@ -7031,6 +7124,33 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "builders' import closure only through `upper_bound_houses.custody`, and no "
             "builder calls it or reads the cap. No render was taken, and every component "
             "keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/render_changelog.py", "packing/src/sqpack/cli/validate.py"),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The S4 and S5 announcement gate (think-9wxc): `render_changelog` gains "
+            "`check_announcements` and its helpers, called only by its own `main` under "
+            "`--announcement-base`, and the records tier's synopsis step passes that flag. "
+            "No existing function changes. The papers reach `render_changelog` only "
+            "through `site_documents`, which calls `entry_anchor`, and no builder calls "
+            "`validate._synopsis`. No render was taken, and every paper keeps its version."
         ),
     ),
 )

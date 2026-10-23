@@ -385,7 +385,8 @@ _README_3MRY = (
 #: Both generators on the three witnesses the adoption of 22 October 2026 moved to Evan
 #: Daniel's regularized views of 20 October (T-225, think-ql4v): his regularizer and
 #: grid-slack at 0.5, 1 and 5 degrees on 204, 229 and 260. The selection drew grid-slack's
-#: 0.5-degree view at 229 and decided 204 and 260 (`SETTLED`). Their receipt, run blocks,
+#: 0.5-degree view at 229 and decided 204 and 260 (`SETTLED`); 204's entry left when the
+#: pass of 23 October 2026 adopted T-229 there and regularized it. Their receipt, run blocks,
 #: reports and the selection's report are in
 #: packing/cases/regularized_drawings/think-ql4v-2026-10-22/.
 _RUNQL4V = (
@@ -812,19 +813,6 @@ SETTLED: dict[int, Settled] = {
         "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
-    ),
-    204: Settled(
-        DECIDED,
-        _T225,
-        _T225_CERTS + "n-204.cert.gz",
-        _T225_REVISION,
-        "14808642840591493923068442871459/1000000000000000000000000000000",
-        _RUNQL4V,
-        "the house is Evan Daniel's own display regularization (T-225): grid-slack at 0.5, 1 "
-        "and 5 degrees draws no change, and his regularizer's solved view, with the same "
-        "light, uneven and near-axis squares and sides, lies 8.91e-12 below the witness's "
-        "side, a register candidate (row 3), not drawn",
-        _README_QL4V,
     ),
     237: Settled(
         DECIDED,

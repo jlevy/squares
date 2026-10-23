@@ -309,9 +309,9 @@ each day something arrived, and the Added since control.
   screenshots are the layout evidence (`think-w5eo`).
 - Contributor-profile links wait for PR #490 (`think-pose`).
 - No copy of the overview on the homepage (`think-d1ip`), and no feed.
-- No timing measured on the results page with the two sections, and about 9 results of
-  room under its 1,250,000-byte ceiling, with the sections at 79% of their own: both
-  wait on `think-v1qe`, which owns the runway.
+- Until 22 October no timing was measured on the results page with the two sections, and
+  it had about 9 results of room under its 1,250,000-byte ceiling, with the sections at
+  79% of their own; both waited on `think-v1qe`, which owns the runway.
   On 22 October the #719 intake (T-229) took the page to 1,251,615 bytes at 229 results,
   past that ceiling; it measured the page’s timing and moved the ceiling to 1,300,000
   (`site_urls.PAGE_BUDGET_EXCEPTIONS`), about 9 results of room, and `think-v1qe` keeps

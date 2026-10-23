@@ -64,7 +64,8 @@ from urllib.parse import quote
 
 from devtools import repo_links
 from devtools.repo_links import repo_url
-from devtools.site_icons import account_icon
+from devtools.site_icons import GITHUB_ICON_INPUTS, account_icon
+from devtools.site_popovers import popover_controls
 from sqpack.contributors import PROFILES_DIR
 from sqpack.release import PUBLICATION_EDITION, PUBLICATION_HISTORY
 
@@ -538,7 +539,8 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "site-changelog.schema.yaml",
     PACKING / "devtools/render_changelog.py",
     PACKING / "devtools/profile_links.py",
-    PACKING / "devtools/site_icons.py",
+    *GITHUB_ICON_INPUTS,
+    PACKING / "devtools/site_popovers.py",
     PACKING / "devtools/site_resources.py",
     PACKING / "devtools/site_tallies.py",
     PACKING / "devtools/record_presentation.py",
@@ -1155,13 +1157,14 @@ def article_overlay_shells(page: str) -> str:
     if "data-case-popover" not in page:
         shells.append(case_popover())
     if "data-contributor-popover" not in page:
+        controls = popover_controls(
+            "pop-contributor", destination=(f"{PROFILES_DIR}/index.html", "Open profile")
+        )
         shells.append(
             '<div id="pop-contributor" class="site-popover site-contributor-popover" '
             'popover="auto" data-contributor-popover role="dialog" '
             'aria-label="Profile">'
-            '<button type="button" class="site-popover-close" '
-            'popovertarget="pop-contributor" popovertargetaction="hide" '
-            'aria-label="Close">\u00d7</button>'
+            f"{controls}"
             "<div data-contributor-body></div>"
             '<p class="site-popover-actions"><a class="site-popover-action" '
             f'data-contributor-open href="{PROFILES_DIR}/index.html">Open profile</a></p></div>'
@@ -1664,7 +1667,7 @@ def papers_page() -> Page:
         title="Explanations",
         description=PAPERS_DESCRIPTION,
         toc=False,
-        rewrite_body=_authored_profile_links,
+        rewrite_body=lambda page: _authored_profile_links(page, full_names=True),
         page_scripts=(FILM_SCRIPT,),
     )
 
@@ -2090,6 +2093,7 @@ def write_site(output: Path, files: Sequence[Page]) -> None:
     from devtools import site_assets  # noqa: PLC0415
     from devtools.overview_sections import RESULT_FRAGMENTS  # noqa: PLC0415
     from devtools.render_case_pages import CASES_DIR  # noqa: PLC0415
+    from devtools.site_github_links import decorate_github_links  # noqa: PLC0415
 
     output.mkdir(parents=True, exist_ok=True)
     kept = {output / file.name for file in files}
@@ -2100,7 +2104,7 @@ def write_site(output: Path, files: Sequence[Page]) -> None:
     for file in files:
         target = output / file.name
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(file.html, encoding="utf-8")
+        target.write_text(decorate_github_links(file.html), encoding="utf-8")
     site_assets.write_assets(output, asset_files(files))
     for name, data in support_files().items():
         target = output / name
@@ -2144,11 +2148,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     contributors = contributor_pages()
     forwarders = forwarder_pages()
     if args.check:
+        from devtools.site_github_links import decorate_github_links  # noqa: PLC0415
+
         stale = [
             p.name
             for p in (*pages, *fragments, *records, *contributors, *forwarders)
             if not (output / p.name).is_file()
-            or (output / p.name).read_text(encoding="utf-8") != p.html
+            or (output / p.name).read_text(encoding="utf-8") != decorate_github_links(p.html)
         ]
         # A file left in a directory this module writes whole, a result withdrawn or a
         # case dropped since, is stale too: `write_site` would remove it.

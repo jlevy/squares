@@ -463,7 +463,7 @@ def _reader_profile_links(page: str) -> str:
 
     return re.sub(
         r"(<article\b[^>]*>)(.*?)(</article>)",
-        lambda match: match[1] + link_prose(match[2]) + match[3],
+        lambda match: match[1] + link_prose(match[2], full_names=True) + match[3],
         page,
         flags=re.DOTALL,
     )

@@ -53,8 +53,10 @@ The positive passes both routes, and both routes refuse both controls. In the po
 [receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
 deciding input and both routes’ complete outputs.
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
-arithmetic and the separating-axis method. No source program ran here, and the entry
-awaits a stage 4 review (think-0nse).
+arithmetic and the separating-axis method. No source script ran here. The source’s
+manifest names this repository’s `sqpack/verify.py` as its first checker, and the `sqpack`
+route decides through that file, so the replay shares the producer’s components (RF-1 of
+the [22 October review](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)).
 
 ## Against the Record
 
@@ -129,6 +131,22 @@ recorded by the [ledger of 22 October for issue
 three of the eight, at 370, 452 and 536, by 2.88e-12 to 1.27e-11; five remain current.
 [acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record
 the source register reads them from.
+
+## Stage 4 Review
+
+The [review of 22 October 2026](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)
+accepted #670’s certificate for finite feasibility, with eight findings, none blocking,
+covering T-226, T-227 and T-228 together.
+It reproduced this packet’s replay and frozen comparison, decided the certificate again on a
+clean-room checker of its own, on an integer route and a `Fraction` route with exact
+clipping area, and ran sharp controls at $10^{-30}$ through both maintained routes and
+that checker: each route accepted exact contact at the far wall, the near wall and the
+least-gap pair, and refused $10^{-30}$ past it, where the certificate keeps exactly 0 at the walls and $5.47 \times 10^{-11}$ between pairs.
+Its programs, receipts and logs are kept with the #672 packet, in
+[`couzo-issue672-2026-10-17/review/review-2026-10-22/`](../couzo-issue672-2026-10-17/review/review-2026-10-22/README.md),
+and `tests/test_upper_bound_reports_couzo_670_672_675.py` runs the kernel’s two sharp
+controls on #672’s 227 certificate (RF-6).
+T-226 rests at `V3`/`C3` on that review, the replay it reproduced and its checker’s run.
 
 ## Credit
 

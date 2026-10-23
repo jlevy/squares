@@ -1,0 +1,250 @@
+{
+ "T-226@204": {
+  "receipt": "/home/user/squares/packing/resources/web/couzo-issue670-2026-10-17/receipts/exact-certification.json.xz",
+  "receipt_format": "couzo-670-exact-replay-v1",
+  "poses_equal": true,
+  "side_equal": true,
+  "routes": {
+   "exact_verify": {
+    "passed": true,
+    "pairs_tested": 20706,
+    "least_wall": "0",
+    "least_gap": "62800029000700643045522760818196896731809961/1147091068213797737645261343852904187262395167500000000",
+    "wall_equal_Z": true,
+    "wall_equal_C": true,
+    "gap_equal_Z": true,
+    "pairs_equal": true,
+    "side_equal": true
+   },
+   "independent": {
+    "passed": true,
+    "pairs_tested": 20706,
+    "least_wall": "0",
+    "least_gap": "62800029000700643045522760818196896731809961/1147091068213797737645261343852904187262395167500000000",
+    "wall_equal_Z": true,
+    "wall_equal_C": true,
+    "gap_equal_Z": true,
+    "pairs_equal": true,
+    "side_equal": true
+   }
+  },
+  "controls_refused_by_both": {
+   "duplicate-square-overlap": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "['overlap', 'squares 0 and 1 overlap']"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "1 overlapping pairs; worst exact gap -1"
+     ]
+    }
+   },
+   "square-translated-outside-container": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "['container', 'square 0 violates x<=s']",
+      "['container', 'square 0 violates x<=s']"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "container penetration -2918351750934778552048373/173622076737100000000000"
+     ]
+    }
+   }
+  },
+  "all_equal": true
+ },
+ "T-228@204": {
+  "receipt": "/home/user/squares/packing/resources/web/couzo-issue675-2026-10-18/receipts/exact-certification.json.xz",
+  "receipt_format": "couzo-675-exact-replay-v1",
+  "poses_equal": true,
+  "side_equal": true,
+  "routes": {
+   "exact_verify": {
+    "passed": true,
+    "pairs_tested": 20706,
+    "least_wall": "0",
+    "least_gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+    "wall_equal_Z": true,
+    "wall_equal_C": true,
+    "gap_equal_Z": true,
+    "pairs_equal": true,
+    "side_equal": true
+   },
+   "independent": {
+    "passed": true,
+    "pairs_tested": 20706,
+    "least_wall": "0",
+    "least_gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+    "wall_equal_Z": true,
+    "wall_equal_C": true,
+    "gap_equal_Z": true,
+    "pairs_equal": true,
+    "side_equal": true
+   }
+  },
+  "controls_refused_by_both": {
+   "duplicate-square-overlap": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "['overlap', 'squares 0 and 1 overlap']"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "1 overlapping pairs; worst exact gap -1"
+     ]
+    }
+   },
+   "square-translated-outside-container": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "['container', 'square 0 violates x<=s']",
+      "['container', 'square 0 violates x<=s']"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "container penetration -115616556747831981360793459/6878398651426000000000000"
+     ]
+    }
+   }
+  },
+  "all_equal": true
+ },
+ "T-227@227": {
+  "receipt": "/home/user/squares/packing/resources/web/couzo-issue672-2026-10-17/receipts/exact-certification.json.xz",
+  "receipt_format": "couzo-672-exact-replay-v1",
+  "poses_equal": true,
+  "side_equal": true,
+  "routes": {
+   "exact_verify": {
+    "passed": true,
+    "pairs_tested": 25651,
+    "least_wall": "1/1000000000000000",
+    "least_gap": "8746396849245434078609221/7273482587599361164347576400000000000",
+    "wall_equal_Z": true,
+    "wall_equal_C": true,
+    "gap_equal_Z": true,
+    "pairs_equal": true,
+    "side_equal": true
+   },
+   "independent": {
+    "passed": true,
+    "pairs_tested": 25651,
+    "least_wall": "1/1000000000000000",
+    "least_gap": "8746396849245434078609221/7273482587599361164347576400000000000",
+    "wall_equal_Z": true,
+    "wall_equal_C": true,
+    "gap_equal_Z": true,
+    "pairs_equal": true,
+    "side_equal": true
+   }
+  },
+  "controls_refused_by_both": {
+   "duplicate-square-overlap": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "['overlap', 'squares 0 and 1 overlap']"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "1 overlapping pairs; worst exact gap -1"
+     ]
+    }
+   },
+   "square-translated-outside-container": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "['container', 'square 0 violates x<=s']",
+      "['container', 'square 0 violates x<=s']"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "container penetration -3271379874603101090459958301/1090459958201000000000000000"
+     ]
+    }
+   }
+  },
+  "all_equal": true
+ },
+ "T-227@229": {
+  "receipt": "/home/user/squares/packing/resources/web/couzo-issue672-2026-10-17/receipts/exact-certification.json.xz",
+  "receipt_format": "couzo-672-exact-replay-v1",
+  "poses_equal": true,
+  "side_equal": true,
+  "routes": {
+   "exact_verify": {
+    "passed": true,
+    "pairs_tested": 26106,
+    "least_wall": "0",
+    "least_gap": "6712226670413738924562179/5598411663425125109555191500000000000",
+    "wall_equal_Z": true,
+    "wall_equal_C": true,
+    "gap_equal_Z": true,
+    "pairs_equal": true,
+    "side_equal": true
+   },
+   "independent": {
+    "passed": true,
+    "pairs_tested": 26106,
+    "least_wall": "0",
+    "least_gap": "6712226670413738924562179/5598411663425125109555191500000000000",
+    "wall_equal_Z": true,
+    "wall_equal_C": true,
+    "gap_equal_Z": true,
+    "pairs_equal": true,
+    "side_equal": true
+   }
+  },
+  "controls_refused_by_both": {
+   "duplicate-square-overlap": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "['overlap', 'squares 0 and 1 overlap']"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "1 overlapping pairs; worst exact gap -1"
+     ]
+    }
+   },
+   "square-translated-outside-container": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "['container', 'square 0 violates x<=s']",
+      "['container', 'square 0 violates x<=s']"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "container penetration -3167438302534796190388784880715493074515654877/180310837291628574742929151705058000000000000"
+     ]
+    }
+   }
+  },
+  "all_equal": true
+ }
+}

@@ -101,6 +101,8 @@ def test_synopsis_selects_release_parent_without_moving_changelog_baseline(
         "devtools.check_release_impact",
         *expected,
     )
+    # The S4 and S5 announcement gate's grace is measured from main, never from a stack
+    # parent: on main from the merge before, elsewhere from origin/main.
     assert tuple(commands[-2]) == (
         sys.executable,
         "-m",
@@ -108,6 +110,8 @@ def test_synopsis_selects_release_parent_without_moving_changelog_baseline(
         "--check",
         "--baseline-ref",
         "origin/main",
+        "--announcement-base",
+        "HEAD^1" if on_main else "origin/main",
     )
 
 

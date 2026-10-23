@@ -2006,7 +2006,7 @@
     "headline": "Polkovskyi's re-solves of the house packings at 105 and 204, below T-174 and T-225",
     "significance": 2,
     "source_checks": "The issue states that every certificate passes Evan Daniel's exact checker verify_cert.py and this repository's sqpack/verify.py with zero tolerance, 122 of 122 on each, run from the author's own copies under tools/, which are not in the pinned tree. Those statements are the author's; no source program ran here.",
-    "credit": "Credit Mykhailo Polkovskyi (https://github.com/Mishapolk/square-packing-records), the name the record gives him since issue 593 (the issue gives Mikhail Polk), for re-solving each count's house packing to a smaller side: at 105, Ryan Xu's packing as Francisco Couzo and PingYou Ltd refined it (T-174); at 204, Francisco Couzo's packing as Evan Daniel regularized it (T-225), which grew from Polkovskyi's own seed (hop job 105412, per issue 670's per-count JSON).",
+    "credit": "Credit Mykhailo Polkovskyi (https://github.com/Mishapolk/square-packing-records), the name the record gives him since issue 593 and the issue's credit since its edit of 22 October, for re-solving each count's house packing to a smaller side: at 105, Ryan Xu's packing as Francisco Couzo and PingYou Ltd refined it (T-174); at 204, Francisco Couzo's packing as Evan Daniel regularized it (T-225), which grew from Polkovskyi's own seed (hop job 105412, per issue 670's per-count JSON).",
     "next_rung": "Independently review the retained replay of 105 and 204 (think-4h23); once at V3/C3, adopt both as the houses and regularize them.",
     "bead": "think-xyhn",
     "bibliography": {

@@ -171,11 +171,14 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: October 2026 the four it moved to Evan Daniel's regularized views (T-225, think-ql4v),
 #: whose least margins are 1e-20: separating and translating squares 8 and 25 at 204
 #: against T-223's 39 and 76, 2 and 9 at 227 against T-196's 22 and 26, 2 and 25 at 229
-#: against T-199's 90 and 134, and 0 and 16 at 260 against T-223's 17 and 53.
+#: against T-199's 90 and 134, and 0 and 16 at 260 against T-223's 17 and 53; and the pass
+#: of 23 October 2026 the two it moved to Mykhailo Polkovskyi's #719 re-solves (T-229,
+#: think-4h23): separating and translating squares 6 and 23 at 105 against T-174's 8 and
+#: 41, and 21 and 85 at 204 against T-225's 8 and 25.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 112, 86, 577),
-    "n=1..200": (67, 433, 182, 2113),
-    "n=1..324": (124, 1186, 302, 5132),
+    "n=1..200": (67, 431, 182, 2095),
+    "n=1..324": (124, 1197, 302, 5174),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -3681,11 +3684,13 @@ def _synopsis(context: Context) -> str:
     release_base = context.environment.get("PACKING_RELEASE_BASE_REF") or (
         f"origin/{pull_request_base}" if pull_request_base else "origin/main"
     )
-    impact_baseline = (
-        ("--base", "HEAD^1")
-        if _git("rev-parse", "HEAD").strip() == _git("rev-parse", "origin/main").strip()
-        else ("--baseline-ref", release_base)
-    )
+    on_main = _git("rev-parse", "HEAD").strip() == _git("rev-parse", "origin/main").strip()
+    impact_baseline = ("--base", "HEAD^1") if on_main else ("--baseline-ref", release_base)
+    # Every registered S4 or S5 result needs its News item. A News entry names only
+    # merged PRs, so a result registered or raised by the change under test -- since
+    # main, or on main since the merge before it -- is owed after the merge rather than
+    # failed; a stack's layers share that grace, measured from main, not the PR base.
+    announcement_base = "HEAD^1" if on_main else "origin/main"
     return _commands(
         context,
         (
@@ -3698,6 +3703,8 @@ def _synopsis(context: Context) -> str:
                 "--check",
                 "--baseline-ref",
                 "origin/main",
+                "--announcement-base",
+                announcement_base,
             ),
             (sys.executable, "-m", "devtools.check_release_impact", *impact_baseline),
         ),

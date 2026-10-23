@@ -271,6 +271,10 @@ def link_inline_assets(
     because they set preferences before first paint. JSON data blocks are untouched.
     Fonts reuse the shared bundle's names wherever their bytes match.
     """
+    from devtools.site_github_links import decorate_github_links  # noqa: PLC0415
+
+    page = decorate_github_links(page)
+
     for tag in _MARKED_INLINE_STYLE.finditer(page):
         if _INLINE_STYLE.fullmatch(tag[0]) is None:
             raise SystemExit(f"unsupported marked inline math stylesheet: {tag[0]}")

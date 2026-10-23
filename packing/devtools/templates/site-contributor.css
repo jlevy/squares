@@ -99,7 +99,7 @@
 }
 .site-contributor-popover .site-contributor-breadcrumb {
   padding-inline-end: calc(
-    var(--site-popover-close) +
+    var(--site-popover-controls-inline) +
     var(--site-popover-close-inset) -
     var(--site-popover-pad)
   );
