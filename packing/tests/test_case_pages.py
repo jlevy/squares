@@ -447,7 +447,9 @@ def test_a_case_count_precedes_its_diagram_and_ordered_status_row() -> None:
     title = markup.index('class="site-case-title" data-math-face="serif"')
     badges = markup.index('class="site-case-badges"')
     correction = markup.index('class="site-corrects"')
-    reported = markup.index('class="site-credit"')
+    # The status row's credit, after the title: an "As published" caption before it
+    # credits its source too (regularization policy, sections 12 and 13).
+    reported = markup.index('class="site-credit"', title)
     status = markup.index('class="site-chip"')
     assert eyebrow < title < figure < badges < correction < reported < status
     assert 'class="is-new-result" title="Recent result"' not in markup
@@ -466,7 +468,9 @@ def test_a_regularized_default_draws_its_view_and_keeps_the_house_as_published()
     default picture is its regularized view draws the view first, its caption carrying
     the regularization's credit line, and keeps the house drawing one click away in a
     disclosure named "As published", with its source's credit. A case whose view ties its
-    house drawing, and a case with no view, draw the house drawing alone."""
+    house drawing, and a case with no view, draw the house drawing; each head drawing is
+    in its canonical pose (section 13), and the house drawing as published follows it
+    exactly where that pose turns it (`test_the_as_published_disclosure_follows_...`)."""
     from devtools import default_drawings  # noqa: PLC0415
 
     cases = {case["n"]: case for case in frontier_page.frontier_cases()}
@@ -476,7 +480,7 @@ def test_a_regularized_default_draws_its_view_and_keeps_the_house_as_published()
     plain = next(n for n in sorted(cases) if n not in record)
     n = drawn[0]
     head = render_case_pages.record_head(cases[n], first=1, last=324).split("</header>")[0]
-    view = frontier_page.packing_svg(n, units=1000, root=frontier_page.REGULARIZED_RENDERINGS)
+    view = frontier_page.default_svg(n, units=1000)
     house = frontier_page.packing_svg(n, units=1000)
     assert view != house
     figure = head.index('<figure class="site-case-figure">')
@@ -496,8 +500,11 @@ def test_a_regularized_default_draws_its_view_and_keeps_the_house_as_published()
     for other in [*kept[:1], plain]:
         head = render_case_pages.record_head(cases[other], first=1, last=324)
         head = head.split("</header>")[0]
-        assert frontier_page.packing_svg(other, units=1000) in head, other
-        assert "site-case-published" not in head, other
+        assert head.index('<p class="site-case-title"') < head.index(
+            frontier_page.default_svg(other, units=1000)
+        ), other
+        turned = not frontier_page.default_pose(other).identity
+        assert ("site-case-published" in head) is turned, other
         assert "Regularized by" not in head, other
     if kept:
         data = render_case_pages.record_head(cases[kept[0]], first=1, last=324)
@@ -531,8 +538,56 @@ def test_as_published_credits_the_source_of_the_drawn_packing() -> None:
     unfound = [n for n in drawn if not uppers[n].get("found_by")]
     if unfound:
         caption = render_case_pages.as_published(unfound[0])
-        assert '<figcaption>The packing as published <span class="site-credit">' in caption
+        assert (
+            "<figcaption>The packing as published, in its source\u2019s pose "
+            '<span class="site-credit">'
+        ) in caption
         assert ",  " not in caption
+
+
+def test_the_as_published_disclosure_follows_a_view_or_a_turning_pose(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Regularization policy, section 13 (the owner, 23 October 2026): the head drawing
+    is the default picture in its canonical pose, and the house drawing as published
+    keeps its source's pose. So the "As published" disclosure follows the head drawing
+    wherever the two differ: where a regularized view is drawn, whatever its pose, and
+    where the pose turns the house drawing. Its caption says the drawing in it is in its
+    source's pose. The poses here are set, not the record's, so the rule is held whatever
+    the record decides."""
+    from devtools import default_drawings, flip_regularization  # noqa: PLC0415
+    from devtools.flip_regularization import IDENTITY, Pose  # noqa: PLC0415
+
+    record = default_drawings.drawn_views()
+    view = min(frontier_page.drawn_regularized())
+    turned = Pose(rotate=270, flip=True)
+    house = next(
+        n
+        for n in range(1, 325)
+        if n not in record
+        and frontier_page.packing_svg(n, units=1000, pose=turned)
+        != frontier_page.packing_svg(n, units=1000)
+    )
+    opening = '<details class="site-case-published">'
+    for pose in (IDENTITY, turned):
+        poses = dict.fromkeys(range(1, 325), pose)
+        monkeypatch.setattr(flip_regularization, "poses", poses.copy)
+        figure = render_case_pages.packing_figure(house)
+        head = figure.split("</figure>")[0]
+        assert frontier_page.packing_svg(house, units=1000, pose=pose) in head, pose
+        assert (opening in figure) is not pose.identity, pose
+        if not pose.identity:
+            published = figure.split(opening)[1]
+            assert frontier_page.packing_svg(house, units=1000) in published
+            assert "The packing as published, in its source\u2019s pose" in published
+        figure = render_case_pages.packing_figure(view)
+        head = figure.split("</figure>")[0]
+        drawn = frontier_page.packing_svg(
+            view, units=1000, root=frontier_page.REGULARIZED_RENDERINGS, pose=pose
+        )
+        assert drawn in head, pose
+        assert opening in figure, pose
+        assert frontier_page.packing_svg(view, units=1000) in figure.split(opening)[1]
 
 
 def test_the_old_case_directory_retains_known_counts_in_its_forwarder(
@@ -577,9 +632,12 @@ def test_every_record_opens_with_its_visual_summary(
             record.index('<div class="site-case-prose"'),
         ]
         assert order == sorted(order), n
-        # The default picture, and for a case drawn from its regularized view the house
-        # drawing as published, in a disclosure after it (`test_a_regularized_default_...`).
-        published = n in frontier_page.drawn_regularized()
+        # The default picture, and for a case drawn from its regularized view or turned
+        # by its pose the house drawing as published, in a disclosure after it
+        # (`test_the_as_published_disclosure_follows_a_view_or_a_turning_pose`).
+        published = (
+            n in frontier_page.drawn_regularized() or not frontier_page.default_pose(n).identity
+        )
         figures = record.count('<figure class="site-case-figure')
         assert figures - record.count("site-case-published-figure") == 1, n
         assert record.count('<details class="site-case-published">') == published, n
