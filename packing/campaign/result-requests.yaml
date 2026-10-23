@@ -6541,6 +6541,14 @@ issues:
         for the author; its programs are in the packet's review-3/ and registered with
         their evidence entries. T-153's rungs did not move. The reply that shares it is
         the owner's to post (think-00y8).
+    held:
+      by: owner
+      since: '2026-10-23'
+      note: >-
+        Reserved by the owner: no pass replies on #557, #565, #570 or #574 or closes them,
+        and each is listed for the owner. The previous coordinator of the 23 October 2026
+        intake pass recorded the reservation in think-5ip2 from the owner's instruction;
+        that bead is the source, and the owner's own words are not retained here.
     beads:
     - think-00y8
     - think-r7m8
@@ -6638,6 +6646,14 @@ issues:
         author; its programs are in the packet's review-2/ and registered with their
         evidence entries. T-154's rungs did not move. The reply that shares it is the
         owner's to post (think-mxhc).
+    held:
+      by: owner
+      since: '2026-10-23'
+      note: >-
+        Reserved by the owner: no pass replies on #557, #565, #570 or #574 or closes them,
+        and each is listed for the owner. The previous coordinator of the 23 October 2026
+        intake pass recorded the reservation in think-5ip2 from the owner's instruction;
+        that bead is the source, and the owner's own words are not retained here.
     beads:
     - think-hcqr
     - think-acbk
@@ -8491,6 +8507,14 @@ issues:
       not_registered: The certificate is in no reachable commit of the source and is not retained; issue
         583's and 586's certificates at 379 are smaller.
       queued: false
+    held:
+      by: owner
+      since: '2026-10-23'
+      note: >-
+        Reserved by the owner: no pass replies on #557, #565, #570 or #574 or closes them,
+        and each is listed for the owner. The previous coordinator of the 23 October 2026
+        intake pass recorded the reservation in think-5ip2 from the owner's instruction;
+        that bead is the source, and the owner's own words are not retained here.
     beads:
     - think-rfce
     answer_bead: think-rfce
@@ -8680,6 +8704,14 @@ issues:
       note: The existing intake owner retains the supplement and per-count decisions. Accepted certificates,
         ties, superseded reports and reasoned non-imports remain distinct; unimported does not by itself
         require a new replay. The algebraic house writer is separately tracked under think-ot5c.
+    held:
+      by: owner
+      since: '2026-10-23'
+      note: >-
+        Reserved by the owner: no pass replies on #557, #565, #570 or #574 or closes them,
+        and each is listed for the owner. The previous coordinator of the 23 October 2026
+        intake pass recorded the reservation in think-5ip2 from the owner's instruction;
+        that bead is the source, and the owner's own words are not retained here.
     beads:
     - think-9v2k
     answer_bead: think-9v2k

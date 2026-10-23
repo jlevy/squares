@@ -20,16 +20,21 @@ register together and stores none of it:
   that named it, or no reply has named it: a new id, a moved rung, a renumbered id, a
   defect, or a statement the record marks out of date;
 - **closeable**, when every result is confirmed or refuted (a reported defect: recorded),
-  nothing the author asked for is queued, and no question put to the author awaits an
-  answer that would change the record (`awaiting_author`: credit, lineage, or which file).
+  nothing the author asked for is queued, no question put to the author awaits an answer
+  that would change the record (`awaiting_author`: credit, lineage, or which file), and
+  the owner does not hold the issue (`held`).
 
 A closeable issue still open is owed its final comment and its close, at stage 7 after
 the verified deploy. The owner's instruction of 23 October 2026 made that the standard
 step, after twelve closeable issues were found open: nothing ran the close, and lanes held
 issues open for questions to the author that the record did not track and whose answers
-would change nothing in it. A question whose answer would change the record is recorded
-under `awaiting_author` and holds its issue open; any other question goes in the closing
-comment.
+would change nothing in it. A question is recorded under `awaiting_author`, and holds
+its issue open, only when the record asserts something its answer could falsify (credit,
+lineage, or which file) and no measurement here can settle it; any other question goes
+in the closing comment. An issue the owner has reserved carries `held`: no pass posts on
+it or closes it, so it is never closeable and ``--draft`` refuses it. Review A1 of #747
+added the hold, when the owner's reservation of #557, #565, #570 and #574 lived only in a
+bead and the closing step listed #570 for closing.
 
 Modes, from ``packing/`` with the project interpreter::
 
@@ -42,9 +47,9 @@ Modes, from ``packing/`` with the project interpreter::
 The default mode reads two files and the register and touches no clock, network or
 history, so its verdict is a function of the tree. Only the ids, the schema and a value
 an unquoted `` #`` cuts short (`comment_cut_scalars`) can fail it: a reply that is due is
-owed after the merge, not a broken record. ``--draft``
-refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until it
-merges and a reply links only to `main`. ``--github`` reads the live issues through
+owed after the merge, not a broken record. ``--draft`` refuses an issue the owner holds,
+and refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until
+it merges and a reply links only to `main`. ``--github`` reads the live issues through
 ``gh api`` and writes nothing anywhere.
 """
 
@@ -702,9 +707,18 @@ def awaited(issue: Mapped) -> list[Mapped]:
     ]
 
 
+def held(issue: Mapped) -> Mapped | None:
+    """The owner's hold on the issue, if any: no pass posts on it or closes it."""
+    hold = issue.get("held")
+    return hold if isinstance(hold, Mapping) else None
+
+
 def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[str]]:
     """Whether the issue can be closed with a final comment, and what stops it."""
     blockers: list[str] = []
+    hold = held(issue)
+    if hold is not None:
+        blockers.append(f"held by the owner since {hold['since']}")
     if issue["triage"] == "pending":
         blockers.append("triage is pending")
     blockers.extend(f"{state.key} is {state.state}" for state in states if not state.settled)
@@ -769,7 +783,8 @@ def _reply_problems(issue: Mapped, repository: str, ids: dict[str, set[str]]) ->
 
 def _question_problems(issue: Mapped, repository: str) -> list[str]:
     """Each question to the author must have been asked in a reply recorded here, and
-    answered, if at all, on this issue; and no closed issue may still await one."""
+    answered, if at all, on this issue; and no closed issue may still await one, or still
+    carry the owner's hold."""
     number = issue["number"]
     recorded = {str(reply["url"]) for reply in issue.get("replies", ())}
     problems: list[str] = []
@@ -790,6 +805,8 @@ def _question_problems(issue: Mapped, repository: str) -> list[str]:
             problems.append(
                 f"#{number}: closed while a question awaits the author: {question['question']}"
             )
+    if held(issue) is not None and issue["state"] == "closed":
+        problems.append(f"#{number}: closed while the owner holds it; remove the hold")
     return problems
 
 
@@ -880,6 +897,7 @@ def summary_lines(record: Mapped, register: Register) -> list[str]:
             "reply due" if state.replies_due else "",
             "closeable" if state.closeable and issue["state"] == "open" else "",
             "awaiting the author" if awaited(issue) else "",
+            "held by the owner" if held(issue) is not None else "",
         ]
         lines.append(
             f"  #{issue['number']:<4} {issue['state']:<7}{progress:<16}"
@@ -983,6 +1001,15 @@ def _issue_section(issue: Mapped, state: IssueState, on_main: set[str] | None) -
             for question in questions
         ]
         lines.append("")
+    hold = held(issue)
+    if hold is not None:
+        lines += [
+            (
+                f"Held by the owner since {hold['since']}: post nothing and close nothing "
+                f"until the owner lifts the hold. {_cell(str(hold['note']))}"
+            ),
+            "",
+        ]
     if issue["state"] == "closed":
         lines.append("Closeable: the issue is closed.")
     elif state.closeable:
@@ -1485,6 +1512,15 @@ def _draft_mode(record: Mapped, register: Register, number: int) -> int:
     issue = next((i for i in record["issues"] if i["number"] == number), None)
     if issue is None:
         print(f"issue #{number} is not in the record", file=sys.stderr)
+        return 2
+    hold = held(issue)
+    if hold is not None:
+        print(
+            f"refusing to draft: the owner holds #{number} since {hold['since']}, so no "
+            "pass posts on it or closes it (campaign/result-import.md, Close a Settled "
+            f"Issue). {hold['note']}",
+            file=sys.stderr,
+        )
         return 2
     if not head_on_main():
         print(

@@ -749,6 +749,69 @@ def test_an_awaited_question_is_marked_in_the_gate_the_report_and_the_draft() ->
     assert "closed with this comment" in settled
 
 
+HOLD = {"by": "owner", "since": "2026-10-23", "note": "Reserved by the owner (think-abcd)."}
+
+
+def test_an_issue_the_owner_holds_is_never_closeable_and_is_marked_so() -> None:
+    """Review A1 of #747: the owner's reservation of #570 lived only in a bead, and the
+    closing step listed #570 for closing. A hold in the record blocks it."""
+    entry = asking(held=HOLD)
+    assert check_requests.issue_state(asking(), REGISTER).closeable
+    state = check_requests.issue_state(entry, REGISTER)
+    assert not state.closeable
+    assert state.blockers == ("held by the owner since 2026-10-23",)
+    (line,) = check_requests.summary_lines(record(entry), REGISTER)
+    assert line.endswith("held by the owner")
+    assert "closeable" not in line
+    section = "\n".join(check_requests.report(record(entry), REGISTER, None))
+    assert (
+        "Held by the owner since 2026-10-23: post nothing and close nothing until the "
+        "owner lifts the hold. Reserved by the owner (think-abcd)." in section
+    )
+    assert "Closeable: no; held by the owner since 2026-10-23." in section
+
+
+@pytest.mark.parametrize(
+    ("hold", "expected"),
+    [
+        ({**HOLD, "by": "author"}, "held/by"),
+        ({key: value for key, value in HOLD.items() if key != "note"}, '"note" is a required'),
+        ({**HOLD, "until": "2026-11-01"}, "Additional properties"),
+    ],
+)
+def test_a_hold_is_the_owners_with_a_date_and_a_note(hold: Record, expected: str) -> None:
+    assert check_requests.problems(record(asking(held=HOLD)), REGISTER) == []
+    found = check_requests.problems(record(asking(held=hold)), REGISTER)
+    assert any(expected in problem for problem in found), found
+
+
+def test_a_closed_issue_cannot_carry_a_hold() -> None:
+    closed = asking(held=HOLD, state="closed", closed="2026-10-24")
+    found = check_requests.problems(record(closed), REGISTER)
+    assert "#7: closed while the owner holds it; remove the hold" in found
+
+
+def test_the_draft_refuses_an_issue_the_owner_holds(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    monkeypatch.setattr(check_requests, "head_on_main", lambda: True)
+    assert check_requests.main(["--draft", "570"]) == 2
+    err = capsys.readouterr().err
+    assert "refusing to draft: the owner holds #570 since 2026-10-23" in err
+    assert "think-5ip2" in err
+
+
+def test_the_issues_the_owner_reserved_are_held_in_the_live_record() -> None:
+    """#557, #565, #570 and #574, reserved by the owner as think-5ip2 records."""
+    live = {issue["number"]: issue for issue in check_requests.load_record()["issues"]}
+    register = check_requests.load_register()
+    for number in (557, 565, 570, 574):
+        hold = check_requests.held(live[number])
+        assert hold is not None, number
+        assert "think-5ip2" in str(hold["note"])
+        assert not check_requests.issue_state(live[number], register).closeable
+
+
 @pytest.mark.parametrize(
     ("relation", "expected"),
     [

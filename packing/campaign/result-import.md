@@ -211,9 +211,11 @@ claude/intake-YYYY-MM-DD, with today's date.
    decided the pass's counts, draft each result issue's verdict comment with
    devtools.intake_comments (stage 7, "Report-Order Verdict Comments"). Once the
    deploy is verified, run `check_requests --report` and close each closeable issue
-   with its final comment (stage 7, "Close a Settled Issue"); a question to the
-   author whose answer would change the record goes under the issue's
-   awaiting_author and holds it open, and any other goes in the closing comment.
+   with its final comment (stage 7, "Close a Settled Issue"). A question to the
+   author goes under the issue's awaiting_author and holds it open only when the
+   record asserts something the answer could falsify and no measurement here can
+   settle it; any other goes in the closing comment. Post nothing on, and close
+   nothing of, an issue the owner holds (held in result-requests.yaml).
 9. Run `make intake` again, and again after the merge: it and
    `check_requests --report` list the replies still due, and its "Regularization
    owed" lists every count still pending where this pass changed the house best
@@ -1226,17 +1228,31 @@ that the record did not track and whose answers would change nothing in it.
    ([Verify the Published Result](#verify-the-published-result)), run
    `check_requests --report` from `main` and take each issue it marks closeable that is
    still open on GitHub.
+   An issue the owner holds (`held` in the record) is never closeable: no pass posts on
+   it or closes it, `check_requests --draft` refuses it, and the sweep lists it for the
+   owner with what would otherwise be owed.
+   The hold is set only on the owner’s instruction, with a note citing where that is
+   recorded, and only the owner lifts it.
+   An issue GitHub already shows closed is not posted on again: record its final comment
+   and its close (step 4).
 2. **Check that `main` and the deployed site say what the final comment will say**,
    render the comment with `check_requests --draft N`, and edit it to the house style:
    what is settled and where, linked into `main` and the site, then that nothing the
    author asked for is queued, so the comment closes the issue.
 3. **Put an informational question in the closing comment**, saying that an answer is
    still welcome and holds nothing open.
-   A question whose answer would change the record (the credit or lineage of a result,
-   or which file or commit a claim names) is recorded instead, under the issue’s
-   `awaiting_author`, naming the reply that asked it and what the answer would change.
+   A question holds the issue open only when the record asserts something the answer
+   could falsify (who is credited with a result, what the record says it was derived
+   from, or which file or commit a claim names) and no measurement here can settle it.
+   Almost any provenance answer would change some sentence, so that is not the test.
+   A question the record already answers is informational, and one a measurement here
+   could settle is measured instead, as review A3 of #747 measured #470’s counts pose by
+   pose against the packings published before it.
+   A question that passes is recorded under the issue’s `awaiting_author`, naming the
+   reply that asked it and what the answer could falsify.
    It holds the issue open: `check_requests` counts it against closeable, and the sweep
-   lists it under the answer bead.
+   lists it under the answer bead, and for a decision (chase, withdraw or keep waiting)
+   once it has waited more than 14 days.
    When the answer comes, read it into the record and mark the question `answered`,
    naming the comment; when the record no longer needs it, mark it `withdrawn`, with a
    note saying why.
@@ -1247,7 +1263,9 @@ that the record did not track and whose answers would change nothing in it.
    `check_bead_tree` checks.
 
 Each six-hourly check-in of a running pass does the same.
-Until an issue is closed, `make intake` lists it under **Needs Action** and exits 1.
+Until an issue is closed, `make intake` lists it under **Needs Action** and exits 1;
+once GitHub shows it closed and the record does not, the item says to record the close
+and post nothing. An issue the owner holds is listed for the owner and fails nothing.
 
 ### Announce a Significant Result
 
@@ -1377,10 +1395,13 @@ Each reason quotes the one reply it holds a field to, by its date, and by its ki
 its address where the issue has another reply that day.
 An issue is **closeable** when triage is done, every result is confirmed or refuted (a
 reported defect: recorded against the entry it names), no `ask` is queued, and no
-question under `awaiting_author` awaits the author’s answer.
-`awaiting_author` holds only the questions whose answers would change the record:
-`changes` says whether the credit, the lineage, or which file or commit a claim names,
-and `asked` is the recorded reply that asked it.
+question under `awaiting_author` awaits the author’s answer, and the owner does not hold
+it (`held`). `awaiting_author` holds only the questions whose answers could falsify what
+the record asserts and that no measurement here can settle: `changes` says whether the
+credit, the lineage, or which file or commit a claim names, and `asked` is the recorded
+reply that asked it.
+`held` is the owner’s reservation of an issue, with the day it was recorded and a note
+citing where: while it stands no pass posts on the issue or closes it.
 
 A confirmation is described from the confirming evidence’s `relationship_to_generator`:
 *reproduced with the author’s own checker* for `same-implementation`, *re-verified by an

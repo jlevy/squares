@@ -127,14 +127,36 @@ $defs:
       awaiting_author:
         type: array
         description: >-
-          Questions a reply put to the issue's author whose answer would change the
-          record: the credit or lineage of a result, or which file or commit a claim
-          means. An issue is closeable only when none is awaited, and the answer bead owns
-          each one. A question whose answer would change nothing in the record is not
-          recorded here: it goes in the closing comment, which says that an answer is
-          still welcome and holds nothing open (campaign/result-import.md, stage 7). The
-          owner's instruction of 23 October 2026 is why.
+          Questions a reply put to the issue's author that hold the issue open. One is
+          recorded here only when the record asserts something the answer could falsify
+          (who is credited with a result, what the record says it was derived from, or
+          which file or commit a claim names) and no measurement here can settle it. A
+          question the record already answers, or that a measurement here could answer,
+          is not: it goes in the closing comment, which says that an answer is still
+          welcome and holds nothing open (campaign/result-import.md, stage 7), and a
+          measurement that would settle it is made instead. An issue is closeable only
+          when none is awaited, and the answer bead owns each one. The owner's
+          instruction of 23 October 2026 is why; review A3 of #747 narrowed the test from
+          "whose answer would change the record", which almost any provenance question
+          meets.
         items: {$ref: '#/$defs/question'}
+      held:
+        type: object
+        additionalProperties: false
+        required: [by, since, note]
+        description: >-
+          The owner holds the issue: no pass posts on it or closes it, whatever the record
+          derives, until the owner lifts the hold by removing this. `check_requests`
+          counts it against closeable and refuses to draft a comment for it, and
+          `intake_sweep` lists the issue for the owner instead of as a reply or a close
+          owed. It is set only on the owner's instruction, which `note` cites with where
+          it is recorded. Review A1 of #747 is why: the owner had reserved #557, #565,
+          #570 and #574, the reservation lived only in a bead, and the closing step listed
+          #570 for closing.
+        properties:
+          by: {const: owner}
+          since: {type: string, format: date}
+          note: {type: string, minLength: 1}
       beads:
         type: array
         uniqueItems: true
@@ -166,15 +188,15 @@ $defs:
     additionalProperties: false
     required: [question, changes, asked, state]
     description: >-
-      One question awaiting the author: what was asked, what in the record its answer
-      would change, the reply that asked it, and whether it is still awaited.
+      One question to the author: what was asked, what in the record its answer could
+      falsify, the reply that asked it, and whether it is still awaited.
     properties:
       question: {type: string, minLength: 1}
       changes:
         enum: [credit, lineage, file]
         description: >-
-          What the answer would change in the record: who is credited with a result, what
-          it was derived from, or which file or commit a claim names.
+          What the record asserts that the answer could falsify: who is credited with a
+          result, what it was derived from, or which file or commit a claim names.
       asked:
         $ref: '#/$defs/comment_url'
         description: The recorded reply on this issue that asked it.
