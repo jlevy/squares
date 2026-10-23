@@ -3,15 +3,19 @@ type: is
 id: is-01m5k9n9wn6vhs8atbge2nwyrw
 title: "Decide: is a watched certificate its author withdrew from an issue a report? (1851c2c at nine counts, #719/#732)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 2
+version: 3
+delegate: c-answers-1023
 labels:
   - decision
   - result-import
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-10-23T02:32:53.909Z
-updated_at: 2026-10-23T05:04:12.354Z
+updated_at: 2026-10-23T07:54:20.662Z
+started_at: 2026-10-23T07:54:20.661Z
 ---
 Owner decision raised by the #732 import (think-0gp6, lane c-lane-732-import-1023), 23 October 2026.
 

@@ -5,7 +5,7 @@ title: "Stage 7 drafts after #742: #732 import reply, #715 and #719 follow-ups, 
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: c-drafts-1023
 labels:
   - result-import
@@ -14,6 +14,10 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:15:07.900Z
-updated_at: 2026-10-23T05:15:09.046Z
+updated_at: 2026-10-23T08:00:42.058Z
 started_at: 2026-10-23T05:15:09.045Z
 ---
+
+## Notes
+
+2026-10-23 coord-intake-1023: after #742's merge (598d23289) and its verified deploy (run 39919775813), posted: #732 verdict https://github.com/jlevy/squares/issues/732#issuecomment-6360316121; #732 import reply https://github.com/jlevy/squares/issues/732#issuecomment-6360316595; #715 follow-up https://github.com/jlevy/squares/issues/715#issuecomment-6360316942; #719 follow-up https://github.com/jlevy/squares/issues/719#issuecomment-6360317345 (bodies in the coordinator scratchpad replies/, edited from c-drafts-1023's drafts to main's credit line and recorded answers). Recording rides the #719 records PR (claude/intake-2026-10-23). #732 stays open on 985 (D6), the rows above 1024 (think-llit) and per-row credit (D5).
