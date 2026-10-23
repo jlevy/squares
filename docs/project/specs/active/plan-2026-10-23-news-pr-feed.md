@@ -501,7 +501,10 @@ Triangle tablist does:
   The Left and Right arrows (wrapping), Home and End move between the tabs and select,
   as `atlas-view.js` does, and a click or Enter selects.
   The style is unchanged, because `site-nav.css` gives
-  `[role="tab"][aria-selected="true"]` the same fill as `a[aria-current="page"]`.
+  `[role="tab"][aria-selected="true"]` the same fill as `a[aria-current="page"]`. This
+  plan has not checked that ARIA in HTML allows `role="tablist"` on a `nav` element; if
+  it does not, Phase 2 puts the role on an inner element with `display: contents`, which
+  keeps the strip’s layout.
 - **Each tab’s `href` becomes its view’s own address**, so opening a tab in a new window
   or copying its link gives that view.
   The view can be bookmarked and shared, as Film and Workbench could.
