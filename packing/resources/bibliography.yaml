@@ -3265,10 +3265,13 @@ sources:
       12fc46678fa8eefa3f156ff37dfffd84c8f3a580, first committed at 1851c2c beside the
       n-204.cert the issue names (T-229), and claimed in the author's comment of 22 October:
       a re-solve of Francisco Couzo's #678 packing, from which his comment of 23 October says
-      the continuous SQP solve at 204 started, 1.48e-11 below n-204.cert. The author checked
-      it with this repository's sqpack.verify, imported as a module, and with Evan Daniel's
-      verify_cert.py and verify_cert2.py; Couzo's source credits Polkovskyi's own construction
-      as the seed of its search. Measured by the 23 October review, its side and the rows
+      the continuous SQP solve at 204 started, 1.48e-11 below n-204.cert. The issue says its
+      packings build on those of Joshua Levy, Evan Daniel and others, and its Checking
+      section runs Daniel's verify_cert.py and this repository's sqpack/verify.py over
+      certificates/n*.cert; the certificate's own first line names verify_cert.py. His
+      comment of 23 October on how those checkers ran was given of the 122 claimed files,
+      and of this one he says only that it passed both of this repository's exact routes.
+      Couzo's source credits Polkovskyi's own construction as the seed of its search. Measured by the 23 October review, its side and the rows
       Daniel's exact solver determines are that solver's output for T-229's arrangement,
       which the source does not say: a method credit, not an antecedent of the packing.
       Retained under the author's written grant on issue 719, the MIT licence of 17cc220

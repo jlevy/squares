@@ -10,7 +10,8 @@ revision the issue pins. The source was read at 08:41Z on 22 October; `main` sto
 `ISSUE_SUBMISSION_122.md`, the issue’s body.
 
 Two of the counts are in the n ≤ 324 case corpus, 105 and 204, and one register entry
-records them, T-229, the house best packing at 105 and 204 since 23 October 2026
+records them, T-229, the house best packing at 105 since 23 October 2026, and at 204 from
+23 to 24 October 2026, when T-231, the release's other 204 file, superseded it
 ([Against the Record](#against-the-record)).
 111 of the 112 beyond the corpus at or below 1024 are dated beyond-horizon rows, each the
 current row at its count ([Beyond the Corpus](#beyond-the-corpus)); 366 is not recorded,

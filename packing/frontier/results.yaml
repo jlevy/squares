@@ -32038,8 +32038,9 @@ results:
     claim: >-
       One complete rational source certificate of issue 719 reports a finite upper-bound
       improvement at the exact side it states: s(204) <= 14.808642830513087197802415708703,
-      below the case's house best packing when it was claimed, T-229, by 1.48e-11. Since 24
-      October 2026 the case holds it as its house best packing.
+      below T-229, the case's house best packing when it was registered here, by 1.48e-11,
+      and below T-225, the house when the author claimed it, by 1.01e-8. Since 24 October
+      2026 the case holds it as its house best packing.
 
       The certificate and its duplicate-square and outside-container controls were decided
       here on 23 October 2026 by both maintained exact routes, with sharp controls at exact

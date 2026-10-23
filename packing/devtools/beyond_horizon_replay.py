@@ -1308,6 +1308,11 @@ RELEASES: dict[str, Release] = {
             claimed_at={366: "2026-10-22T06:05:31Z", 447: "2026-10-22T06:05:31Z"},
             # 1851c2c also published certificates/n204.cert, 1.48e-11 below n-204.cert, the
             # file the issue names; the author claimed it on 22 October (think-h01y, T-231).
+            # Of the 122 claimed counts, the trees of 1851c2c and 12fc466 hold a second file
+            # (nN.cert beside n-N.cert, the same blobs in both) at seven: 105, 204, 753, 754
+            # and 790 to 792. Read from their headers on 23 October 2026, only 204's is
+            # lower; 105's is 4.64e-12 above, and the other five state the same side, so
+            # 204 is the one count this rule moves (#753's review A, A10).
             same_commit_least={
                 204: SameCommitLeast(
                     path="certificates/n204.cert",
@@ -1318,12 +1323,15 @@ RELEASES: dict[str, Release] = {
                     note=(
                         "At 204 the claim is the least side 1851c2c states there, "
                         "certificates/n204.cert, since a report keeps one claim a count "
-                        "(#722's review A, A2). The issue names certificates/n-204.cert, "
-                        "which T-229 registered and the case adopted before the author "
-                        "claimed the lower file on 22 October at 20:15:57Z; T-229 stands as "
-                        "registered, and T-231 registers the lower file, by the same author "
-                        "and from the same commit, and supersedes T-229 at 204. 105 is "
-                        "untouched."
+                        "(#722's review A, A2); this ledger was re-gathered on 23 October "
+                        "2026 to read it (think-h01y). The issue names "
+                        "certificates/n-204.cert, which T-229 registered before the author "
+                        "claimed the lower file on 22 October at 20:15:57Z, and which the "
+                        "case adopted on 23 October; T-229 stands as registered, and T-231 "
+                        "registers the lower file, by the same author and from the same "
+                        "commit, and supersedes T-229 at 204. Of the 122 claimed counts, "
+                        "1851c2c holds a second file only at 105, 204, 753, 754 and 790 to "
+                        "792, and only 204's is lower. 105 is untouched."
                     ),
                 )
             },

@@ -7761,7 +7761,8 @@ sources:
     their own because the release's claims record, which the beyond-horizon rows of
     mishapolk-issue719-2026-10-22 are read against, holds the rows beyond the corpus only.
     On 23 October 2026 the cases at 105 and 204 adopted these certificates, the selected
-    overrides below.
+    overrides below, and on 24 October 2026 the case at 204 moved to T-231
+    (mishapolk-n204-2026-10-22).
 - id: mishapolk-issue719-2026-10-22
   title: Mykhailo Polkovskyi's 122 exact certificates of issue 719 at 12fc4667
   role: source-repository
@@ -7942,16 +7943,19 @@ sources:
   - resources/web/mishapolk-n204-2026-10-22/acquisition/claims.json
   evidence:
   - E-mishapolk-n204-certificate-report
+  - E-mishapolk-n204-exact-feasibility
+  - E-mishapolk-n204-review-exact-feasibility
   notes: >-
     The release's second 204 file, certificates/n204.cert, retained as the source wrote it
     under the author's written grant on issue 719 and admitted at its exact side; T-231
-    records it at V0/C0, pending its stage 4 review (think-tetq) and adoption. All 3 native
-    jobs have full outcomes, and the packet's sharp controls meet the certificate's 5e-21
-    margins on both routes. The same commit first published certificates/n-204.cert, the file
-    the issue names (T-229, mishapolk-issue719-2026-10-22-in-corpus); the ledger of 22 October
-    for issue 719 walks the issue's claim at 204 at this file's side, the least its commit
-    states there. No selected override or superseded claim is created at this source-only
-    stage; current cases and earlier source ownership remain unchanged.
+    records it at V3/C3 on the review of 23 October
+    (docs/project/reviews/review-2026-10-23-mishapolk-n204.md). All 3 native jobs have full
+    outcomes, and the packet's sharp controls meet the certificate's 5e-21 margins on both
+    routes. The same commit first published certificates/n-204.cert, the file the issue
+    names (T-229, mishapolk-issue719-2026-10-22-in-corpus); the ledger of 22 October for
+    issue 719 walks the issue's claim at 204 at this file's side, the least its commit
+    states there. On 24 October 2026 the case at 204 adopted this certificate from T-229, the
+    selected override below.
 
 - id: couzo-02f9690-2026-10-09
   title: Francisco Couzo's 12 beyond-horizon certificates at 02f9690, no issue

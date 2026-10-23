@@ -1,4 +1,4 @@
-# Mishapolk’s Lower n = 204 Certificate at 12fc4667, Issue 719
+# Mykhailo Polkovskyi’s Lower n = 204 Certificate at 12fc4667, Issue 719
 
 This packet retains `certificates/n204.cert` from
 [Mishapolk/square-packing-records](https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates/n204.cert)
@@ -203,7 +203,9 @@ of least-gap pair, gross, and reader controls) were decided as required by all f
 deciders.
 Its programs, receipts and logs are in
 [review/review-2026-10-23/](review/review-2026-10-23/README.md), with its rerun of Evan
-Daniel’s regularizer driver on T-229’s witness.
+Daniel’s regularizer driver on T-229’s witness. Its proposed record changes, which pull
+request 753 folds into the record, are
+[outputs/record-changes.md](review/review-2026-10-23/outputs/record-changes.md).
 T-231 rests at `V3`/`C3` on that review, this packet’s replay and the review checker’s
 run.
 
