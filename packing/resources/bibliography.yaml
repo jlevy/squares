@@ -73,6 +73,10 @@ sources:
     credit: Ahmed after Levy, Overbeck
     short_credit: Ahmed after Levy et al.
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'The repository’s author announced it on X on 29 September 2026: “Astra now claims a proof of the optimal lower bound of s(11)!”'
+      marker: 'Astra now claims a proof'
+      anchor: '11SquaresOptimal'
     note: >-
       11SquaresOptimal at f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c, announced by
       Manasseh Ahmed, who posts on X as @ManassehA06, as an Astra-assisted global
@@ -118,6 +122,10 @@ sources:
     dated: '2026-09-29'
     credit: Hosono after Tokoharu, Daniel
     lineage: independent
+    ai_assistance:
+      sentence: 'The tools’ README says they were developed by wand125 with OpenAI Codex and Anthropic Claude.'
+      marker: 'developed by wand125 with OpenAI Codex'
+      anchor: 'square-packing-tools'
     note: >-
       square-packing-tools by Hiroaki Hosono, who publishes on GitHub as wand125 and on X
       as @wand_125, at 0d33ab61726c2ab03e3eb8f457dabaf22db8571f, MIT,
@@ -255,6 +263,10 @@ sources:
     dated: '2026-09-20'
     credit: Guzhou0806, Mira after Levy, Burns, Massaccesi
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'R012’s `ATTRIBUTION.md` names it as research by “Guzhou0806 / N17 project, with AI assistance”.'
+      marker: 'AI assistance'
+      anchor: '\bR012\b'
     note: >-
       The two repositories the packet retains, by their authors' GitHub names
       (web/n17-weighted-certificates-2026-09-20/README.md): Guzhou0806's R012
@@ -272,6 +284,10 @@ sources:
     dated: '2026-09-21'
     credit: Overbeck after Levy, Mira, Guzhou0806
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'The source’s `AUTHORS.md` names Overbeck as Kleddamag and says he directed the research and OpenAI Codex carried it out.'
+      marker: 'OpenAI Codex'
+      anchor: 'Overbeck'
     note: >-
       The retained v1.0.0 release by Marc Leonard Overbeck, who publishes on GitHub as
       Kleddamag and on X as @kleddamag; its AUTHORS.md names Kleddamag as the project's
@@ -284,6 +300,10 @@ sources:
     dated: '2026-09-27'
     credit: Overbeck after Levy, Mira, Guzhou0806
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'The source’s `AUTHORS.md` names Overbeck as Kleddamag and says he directed the research and OpenAI Codex carried it out.'
+      marker: 'OpenAI Codex'
+      anchor: 'Overbeck'
     note: >-
       Commit 57519bb7 of Kleddamag/17-squares-certified-bound, 2026-09-27, untagged,
       whose bounds/4.66001/ package proves s(17) > 466001/100000. Marc Leonard Overbeck, building
@@ -301,6 +321,10 @@ sources:
     dated: '2026-09-26'
     credit: Overbeck after Levy, Mira, Guzhou0806
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'The source’s `AUTHORS.md` names Overbeck as Kleddamag and says he directed the research and OpenAI Codex carried it out.'
+      marker: 'OpenAI Codex'
+      anchor: 'Overbeck'
     note: >-
       The v1.1.0 release of Kleddamag/17-squares-certified-bound at 13821ddf,
       2026-09-26, whose bounds/4.640020/ package proves s(17) > 232001/50000.
@@ -316,6 +340,10 @@ sources:
     dated: '2026-09-25'
     credit: Guzhou0806 after Overbeck, Mira, Levy
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'The release names itself as made by Guzhou0806 / N17 project with AI assistance.'
+      marker: 'AI assistance'
+      anchor: '\bR0[56]\d\b'
     note: >-
       The R052 release of Guzhou0806/n17-square-packing at 3bf1095c, 2026-09-25,
       which names itself as produced by "Guzhou0806 / N17 project with AI
@@ -329,6 +357,10 @@ sources:
     credit: Guzhou0806 after Overbeck, Mira, Levy
     short_credit: Guzhou0806 after Overbeck et al.
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'The release names itself as made by Guzhou0806 / N17 project with AI assistance.'
+      marker: 'AI assistance'
+      anchor: '\bR0[56]\d\b'
     note: >-
       The R068 release of Guzhou0806/n17-square-packing at 815b1626, 2026-09-28, whose
       certificates/R068-C010/accepted/4.66044/ proves s(17) > 116511/25000. Guzhou0806 /
@@ -347,6 +379,10 @@ sources:
     dated: '2026-09-28'
     credit: Guzhou0806 after Overbeck, Mira, Levy
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'The release names itself as made by Guzhou0806 / N17 project with AI assistance.'
+      marker: 'AI assistance'
+      anchor: '\bR0[56]\d\b'
     note: >-
       The R067 release of Guzhou0806/n17-square-packing at d4e2c287, 2026-09-28, whose
       certificates/R067-4.66018/ proves s(17) > 233009/50000 on Marc Leonard Overbeck's 4.66001
@@ -396,6 +432,10 @@ sources:
     dated: '2026-09-27'
     credit: Daniel after Burns, Massaccesi
     lineage: independent
+    ai_assistance:
+      sentence: 'The source’s `CREDITS.md` says the work was produced by Claude (Anthropic) in a single session under human direction.'
+      marker: 'Claude (Anthropic)'
+      anchor: 'Evan Daniel'
     note: >-
       evand/square-packing (formerly evand/square-packing-12) at 167d842c,
       2026-09-26. Its LICENSE names Evan Daniel. Its CREDITS.md credits the
@@ -409,6 +449,10 @@ sources:
     dated: '2026-09-28'
     credit: Daniel after Burns, Massaccesi
     lineage: independent
+    ai_assistance:
+      sentence: 'The source’s `CREDITS.md` says the work was produced by Claude (Anthropic) in a single session under human direction.'
+      marker: 'Claude (Anthropic)'
+      anchor: 'Evan Daniel'
     note: >-
       evand/square-packing at 6aa82ba4, 2026-09-28, whose s12/certificates/s21/ and
       s12/certificates/s45/ bundles prove s(21) = 5 and s(45) = 7 by mixed covers. Its
@@ -422,6 +466,10 @@ sources:
     dated: '2026-10-01'
     credit: Daniel after Burns, Massaccesi
     lineage: independent
+    ai_assistance:
+      sentence: 'The source’s `CREDITS.md` says the work was produced by Claude (Anthropic) in a single session under human direction.'
+      marker: 'Claude (Anthropic)'
+      anchor: 'Daniel'
     note: >-
       evand/square-packing at 08e8a5faa54c0a7b0bb1cb0134c77d3565ce40c5:
       reported mixed-cover s(60) = 8 and periodic segment-and-area covers for
@@ -654,6 +702,10 @@ sources:
     credit: Overbeck after Levy, Guzhou0806, Mira
     short_credit: Overbeck after Levy et al.
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'The source’s `AUTHORS.md` names Overbeck as Kleddamag and says he directed the research and OpenAI Codex carried it out.'
+      marker: 'OpenAI Codex'
+      anchor: 'Overbeck'
     note: >-
       The v1.0.2 release of Kleddamag/11-squares-certified-bound by Marc Leonard Overbeck,
       who publishes on GitHub as Kleddamag and on X as @kleddamag, pinned in
@@ -674,6 +726,10 @@ sources:
     credit: Wang, Li after Overbeck, Levy
     short_credit: Wang, Li after Overbeck et al.
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'On jlevy/squares#247 the authors wrote that “AI assistance was used for most of the computational exploration, code drafting and checking, organization of verification outputs, and preparation of the written materials.”'
+      marker: 'AI assistance was used for most of'
+      anchor: 'Ke Wang and Can Li'
     note: >-
       Zenodo record 23038546 (DOI 10.5281/zenodo.23038546), version 1.0.0, published
       2026-09-29 by Ke Wang and Can Li of Fudan University under CC-BY-4.0, retained in
@@ -695,6 +751,10 @@ sources:
     credit: Tokoharu after Levy, Hosono, Stromquist, Nagamochi, Burns, Massaccesi
     short_credit: Tokoharu after Levy, Hosono et al.
     lineage: credits-project
+    ai_assistance:
+      sentence: 'Tokoharu’s README says parts of the work were produced with AI assistance under human direction.'
+      marker: 'AI assistance under human direction'
+      anchor: '\[Tokoharu density source\]|Tokoharu’s (?:retained|separately|n\d)'
     note: >-
       The tokoharu/square-packing-density-bounds repository, pinned in
       web/external-square-certificates-2026-09-22/acquisition/sources.json,
@@ -715,6 +775,10 @@ sources:
     credit: Hosono after Levy, Stromquist, Nagamochi, Burns, Massaccesi
     short_credit: Hosono after Levy et al.
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'Hosono’s README says parts of the work were produced with AI assistance under human direction.'
+      marker: 'AI assistance under human direction'
+      anchor: 'Hosono'
     note: >-
       The wand125/square-packing-bounds repository of Hiroaki Hosono, who publishes on
       GitHub as wand125 and on X as @wand_125, and its 2026 certificate claims,
@@ -734,6 +798,10 @@ sources:
     credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
     short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'Hosono’s README says parts of the work were produced with AI assistance under human direction.'
+      marker: 'AI assistance under human direction'
+      anchor: 'Hosono'
     note: >-
       The rectangle-density certificates wand125/square-packing-bounds added on
       2026-09-26 and 2026-09-27, built with and checked by Tokoharu's solver and
@@ -753,6 +821,10 @@ sources:
     credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
     short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'Hosono’s README says parts of the work were produced with AI assistance under human direction.'
+      marker: 'AI assistance under human direction'
+      anchor: 'Hosono'
     note: >-
       The rectangle-density certificates wand125/square-packing-bounds added or raised
       between 2026-09-27 and 2026-09-28, built with and checked by Tokoharu's solver and
@@ -768,6 +840,10 @@ sources:
     credit: Hosono after Daniel, Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
     short_credit: Hosono after Daniel et al.
     lineage: credits-project
+    ai_assistance:
+      sentence: 'Hosono’s README says parts of the work were produced with AI assistance under human direction.'
+      marker: 'AI assistance under human direction'
+      anchor: 'Hosono'
     note: >-
       The point-only s(21) = 5 and s(45) = 7 certificates and the mixed-rectangle
       s(50) >= 37/5 certificate (with the superseded 147/20 and 3659/500 rungs) that
@@ -795,6 +871,10 @@ sources:
     credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
     short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'Hosono’s README says parts of the work were produced with AI assistance under human direction.'
+      marker: 'AI assistance under human direction'
+      anchor: 'Hosono'
     note: >-
       The rectangle-density certificates wand125/square-packing-bounds added or raised
       between 2026-09-29 and 2026-10-01, built with and checked by Tokoharu's solver and
@@ -813,6 +893,10 @@ sources:
     credit: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
     short_credit: Hosono after Daniel, Levy et al.
     lineage: credits-project
+    ai_assistance:
+      sentence: 'Hosono’s README says parts of the work were produced with AI assistance under human direction.'
+      marker: 'AI assistance under human direction'
+      anchor: 'Hosono'
     note: >-
       The mixed covers for s(59) = 8 and s(77) = 9 that wand125/square-packing-bounds added
       on 2026-10-01 (certificates/k2m5_n59_L8 and certificates/k2m4_n77_L9), requested for
@@ -836,6 +920,10 @@ sources:
     credit: Hosono after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi
     short_credit: Hosono after Tokoharu, Levy et al.
     lineage: builds-on-project
+    ai_assistance:
+      sentence: 'Hosono’s README says parts of the work were produced with AI assistance under human direction.'
+      marker: 'AI assistance under human direction'
+      anchor: 'Hosono'
     note: >-
       The mixed rectangle-measure certificates for n = 37, 65, 66, 90 and 92 that
       wand125/square-packing-bounds added between 2026-09-29 and 2026-10-01, requested for
@@ -1279,6 +1367,11 @@ sources:
     dated: '2026-09-27'
     credit: Couzo
     lineage: independent
+    ai_assistance:
+      sentence: 'The repository itself states no AI assistance; its author said on jlevy/squares#227 that he found the 102 and 103 packings “with the help of Claude”.'
+      marker: 'with the help of Claude'
+      anchor: 'Couzo'
+      counts: [102, 103]
     note: >-
       franciscouzo/square-packing at f3c5a529, 2026-09-27: 49 packings for n = 68 to 307,
       each smaller than the Kingbird catalogue fetched 2026-09-25, as its README says. The
@@ -2035,6 +2128,10 @@ sources:
     lineage: builds-on-project
     credit: PingYou Ltd after Xu, Daniel, Levy
     short_credit: PingYou Ltd after Xu et al.
+    ai_assistance:
+      sentence: 'On jlevy/squares#503 the author wrote: “Both solutions were AI assisted by ‘PY’, an unreleased agentic AI offering by PingYou Ltd.”'
+      marker: 'AI assisted by'
+      anchor: 'PingYou'
     note: >-
       One complete exact certificate at 9dc93b6ac2f8fefe038062a74c9a75bf05afdba6, reported
       on jlevy/squares#503, composing two placed patches of Xu's #432 n70 construction,
@@ -2055,6 +2152,10 @@ sources:
     lineage: builds-on-project
     credit: PingYou Ltd after Xu, Daniel, Levy
     short_credit: PingYou Ltd after Xu et al.
+    ai_assistance:
+      sentence: 'On jlevy/squares#503 the author wrote: “Both solutions were AI assisted by ‘PY’, an unreleased agentic AI offering by PingYou Ltd.”'
+      marker: 'AI assisted by'
+      anchor: 'PingYou'
     note: >-
       One complete exact certificate at bc328a7d727aedd0eabebd6ea80285f572b65d2d, reported
       on jlevy/squares#504: by the source's account, Xu's #432 n70 construction, taken from
