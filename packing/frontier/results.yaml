@@ -18016,15 +18016,26 @@ results:
         day by GitHub's times, is a candidate resting on 15 mathematical premises by its own
         statement. n = 17 is, with n = 12, one of the two open cases below n = 18.
 
+        Scored as its claim, by the rubric's anchor, movement on a central open case: the
+        claim settles n = 17 at Bidwell's 1998 side, as T-153's does, and T-153 and T-194,
+        the other proof reports at open cases, are S5 on that anchor. A second route to a
+        value the record holds at V3 or above is S2, as T-054 and T-055 are; the record
+        holds this value only as T-153's candidate, at V0, so that rule, qualified so for
+        this entry by review A of jlevy/squares#563, does not reach it. Which report came
+        first is the credit line's business, not the score's.
+
         Its kind is formalization, a proof-assistant proof of a value the record already
         holds; what it adds is a lower-bound proof checked in one proof-assistant build.
         Its inspected source build supports V3; a complete confirming build here or by
         a third party and retained here would support C3, where T-153 needs its capture
         recomputation and ten trees replayed.
-        Significance is separate from whether the proof is correct. Proposed for the owner's
-        confirmation.
-      scored: '2026-10-13'
-      by: Intake of 13 October (think-hcqr), draft for the owner
+        Significance is separate from whether the proof is correct. Confirmed on 23
+        October; the owner's confirmation, which the registration proposed, is outstanding.
+      scored: '2026-10-23'
+      by: >-
+        the 23 October significance review (think-7j5d, lane c-signif-1023), confirming the
+        draft of the 13 October intake (think-hcqr); the owner's confirmation it proposed
+        is outstanding
     novelty: previously-published
     attribution:
       source_keys: ['[Fitzharding n17 Lean 2026]']
@@ -18376,13 +18387,26 @@ results:
     significance:
       score: 1
       rationale: >-
-        Fifty-nine verified ceilings moved from fourteen-place round-ups to the exact sides
-        of certificates of packings the record already holds, by at most 9.9e-15 at each: a
-        routine consequence of registering the views the regularization policy holds back,
-        S1. No new packing, no reported side moved and no theorem; the method is Evan
-        Daniel's.
-      scored: '2026-10-12'
-      by: the registering lane's draft (repository)
+        Fifty-nine verified ceilings moved onto the exact sides of rational certificates of
+        packings the record already credits, by at most 9.9e-15 at each, with no printed
+        verified value changed: a routine consequence of registering the views the
+        regularization policy holds back, S1. At 33 counts the side is exactly that of Evan
+        Daniel's certificate (T-101), which already proved the bound; at 25 it lies 6.6e-20
+        to 1.8e-19 below that side, and at n = 29 5.4e-20 below T-009's interval endpoint,
+        padding below the precision the record prints. Where the catalogue prints a closed
+        form, the side still lies above it. No new packing, no reported side moved and no
+        theorem; the method is Evan Daniel's.
+
+        T-098, T-117 and T-146 (S2) lower best known sides at the precision the record
+        prints them, by up to 5.0e-11, 4.3e-11 and 7.82e-10, with exact optima or re-solves;
+        T-011, T-065 and T-101 (S2) are first exact certificates of reported packings, where
+        these are second ones. The padding refinements reviewed since, T-166, T-170, T-171, T-174, T-186 and
+        T-195, are S1 beside this entry, and T-193's exact closed forms, which reach the
+        report, are S2. Confirmed on 23 October.
+      scored: '2026-10-23'
+      by: >-
+        the 23 October significance review (think-7j5d, lane c-signif-1023), confirming the
+        registering lane's draft
     novelty: apparently-novel
     builds_on:
       credit: [Daniel]
@@ -19390,8 +19414,16 @@ results:
         that side, 2.4e-15 lower, and a certificate of n = 290's own packing there:
         bookkeeping and a routine consequence, S1. No new packing, no new bound, no reported
         side moved and no theorem; the method is Evan Daniel's, ported here.
-      scored: '2026-10-13'
-      by: the registering lane's draft (repository)
+
+        A derived entry carries at most its premise's score, as T-002, T-016 and T-063 carry
+        theirs, and T-155 is S1. Its own certificate is the padding T-155's are, 1.8e-19
+        below Evan Daniel's certificate of the same packing (T-101), with the printed
+        verified value unchanged, against T-098, T-117 and T-146 (S2), which lower best
+        known sides at the precision the record prints. Confirmed on 23 October.
+      scored: '2026-10-23'
+      by: >-
+        the 23 October significance review (think-7j5d, lane c-signif-1023), confirming the
+        registering lane's draft
     novelty: apparently-novel
     builds_on:
       credit: [Daniel]
