@@ -2069,3 +2069,63 @@ def test_a_significance_by_of_one_word_is_refused() -> None:
     assert check_results.significance_by_problems({"id": "T-003", **quoted}) == []
     live = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))["results"]
     assert [found for r in live for found in check_results.significance_by_problems(r)] == []
+
+
+def test_a_scope_its_evidence_does_not_cover_is_refused() -> None:
+    """T-045 once claimed s(32) >= 119/20 and cited one entry whose scope was 27, 28 and 31
+    (think-506q); the scope is covered by the union of the cited scopes."""
+    record = {"id": "T-999", "scope": {"n_values": [27, 28, 31, 32]}}
+    cited = [{"scope": {"n_values": [27, 28, 31]}}]
+    assert check_results.scope_problems(record, cited) == [
+        "T-999: scope holds n = 32, which no evidence it cites covers"
+    ]
+    cited.append({"scope": {"n_min": 32, "n_max": 40}})
+    assert check_results.scope_problems(record, cited) == []
+    live, evidence = _live_register_and_evidence()
+    assert [
+        problem
+        for record in live
+        for problem in check_results.scope_problems(
+            record, [evidence[ref] for ref in record["evidence"] if ref in evidence]
+        )
+    ] == []
+
+
+def test_a_recent_case_upper_bound_is_covered_as_a_lower_bound_is() -> None:
+    """The coverage gate read lower bounds only, so T-056, T-057 and T-065 were registered
+    by convention (think-506q). Take out the entries that cite the evidence of n = 211's
+    upper bound, Couzo's certificate of 14 October 2026 since T-057's was beaten, and that
+    bound is refused."""
+    live, evidence = _live_register_and_evidence()
+    sources = {
+        source["key"]: source
+        for source in safe_load(check_results.BIBLIOGRAPHY.read_text(encoding="utf-8"))[
+            "sources"
+        ]
+    }
+    upper = check_results.case_bound_evidence(fields=check_results.UPPER_BOUND_FIELDS)
+    assert check_results.coverage_problems(live, evidence, sources, upper, "upper") == []
+    cited = upper[211]
+    assert cited
+    assert all(check_results.recent_evidence(evidence[ref], sources) for ref in cited)
+    without = [record for record in live if not cited & set(record["evidence"])]
+    found = check_results.coverage_problems(without, evidence, sources, upper, "upper")
+    assert {problem for problem in found if problem.startswith("n-211:")} == {
+        f"n-211: its upper bound cites {ref}, and no registered result citing it covers n = 211"
+        for ref in cited
+    }
+    lower = check_results.case_bound_evidence()
+    assert not [
+        problem
+        for problem in check_results.coverage_problems(without, evidence, sources, lower)
+        if problem.startswith("n-211:")
+    ], "the lower-bound gate alone would not have seen it"
+
+
+def _live_register_and_evidence() -> tuple[list[dict], dict[str, dict]]:
+    register = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))["results"]
+    evidence = {
+        entry["id"]: entry
+        for entry in safe_load(check_results.EVIDENCE.read_text(encoding="utf-8"))["evidence"]
+    }
+    return register, evidence

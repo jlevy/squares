@@ -587,11 +587,12 @@ The seven record rules are:
   across branches, so take it in the commit that registers the result, merge that day,
   and quote it to no author until it is on `main`.
 
-The record checks pass without a packet or evidence over the whole scope, and the
-reviewer of the pull request looks for those.
-`devtools.check_source_coverage` refuses a source dated from 22 August 2026 that a
+The record checks pass without a packet, and the reviewer of the pull request looks for
+one. `devtools.check_source_coverage` refuses a source dated from 22 August 2026 that a
 register entry or its evidence cites and no coverage entry holds, by its key or by
-citing its evidence (think-g6d5).
+citing its evidence (think-g6d5), and `devtools.check_results` an entry whose scope its
+evidence does not cover, or a recent case bound, upper or lower, that no entry covers
+(think-506q).
 
 ## Stage 4: Validate
 
