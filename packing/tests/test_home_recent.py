@@ -168,29 +168,36 @@ def test_the_examples_review_a_cited_are_dated_by_their_merges() -> None:
 def test_each_source_of_beyond_horizon_rows_in_the_window_has_one_line_on_its_day(
     overview: overview_data.Overview, days: dict[str, tuple[bool, str]]
 ) -> None:
+    """One line a source, on the day `main` first held its rows: its packet's address,
+    what its rows claim, their span of counts, all beyond the corpus. Two sources may
+    share a packet, so lines are matched day by day as a whole."""
     since, until = _window(overview)
-    expected = {found.source["id"]: found for found in beyond_rows(since, until)}
     landed = source_landings()
     corpus = overview_sections.corpus_end()
-    lines = [(day, line) for day, (_, body) in days.items() for line in ROWS.findall(body)]
-    assert len(lines) == len(expected)
-    by_readme = {
-        overview_sections.source_readme(found.source): found for found in expected.values()
-    }
-    for day, (href, claims, end, span, _credit) in lines:
-        found = by_readme[href.replace("&amp;", "&")]
+    expected: dict[str, list[tuple[str, str, str, str]]] = {}
+    for found in beyond_rows(since, until):
         counts = [int(row["n"]) for row in found.rows]
-        assert day == found.day.isoformat() == landed[found.source["id"]].isoformat()
-        assert int(end) == corpus
-        assert claims == overview_sections.claims_phrase(found.rows)
-        assert span == f"{min(counts)}{EN_DASH}{max(counts)}" or span == str(counts[0])
+        span = (
+            f"{min(counts)}{EN_DASH}{max(counts)}" if len(set(counts)) > 1 else str(counts[0])
+        )
+        assert found.day == landed[found.source["id"]]
+        assert all(count > corpus for count in counts)
+        href = overview_sections.source_readme(found.source)
         # The packet's README where the register names it, else the packet itself.
         assert re.fullmatch(
             rf"https://github\.com/jlevy/squares/(blob/main/packing/.*/README\.md|"
             rf"tree/main/packing/{re.escape(str(found.source['local']).rstrip('/'))})",
             href,
         ), href
-        assert all(int(row["n"]) > corpus for row in found.rows)
+        line = (href, overview_sections.claims_phrase(found.rows), str(corpus), span)
+        expected.setdefault(found.day.isoformat(), []).append(line)
+    shown = {
+        day: [(href.replace("&amp;", "&"), *rest[:3]) for href, *rest in ROWS.findall(body)]
+        for day, (_, body) in days.items()
+    }
+    assert {day: sorted(lines) for day, lines in shown.items() if lines} == {
+        day: sorted(lines) for day, lines in expected.items()
+    }
 
 
 def test_one_window_bounds_every_kind_and_the_introduction_names_what_is_shown(
