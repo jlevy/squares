@@ -708,7 +708,7 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     """In Chromium: the total of the first card that has two levels opens the results
     page on exactly that project's rows, with the count saying how many of the register
     they are and the Project control in the bar, naming the project; a level's count
-    opens the same rows at that level alone, with At significance in the bar beside it.
+    opens the same rows at that level alone, with only its visible S segment selected.
     Setting Project back to All takes it out of the bar and shows the other projects'
     rows at that level again."""
     url, tally = next(
@@ -766,10 +766,15 @@ def test_following_a_cards_links_shows_the_rows_they_count(
         assert found["count"] == overview_sections.count_text(len(at_level), total)
         assert [(preset["value"], preset["out"]) for preset in found["presets"]] == [
             (slug, False),
-            (str(level), False),
+            (str(level), True),
             ("", True),
         ]
-        assert found["presets"][1]["choice"] == f"S{level}"
+        assert {
+            int(button.get_attribute("data-site-score") or "0")
+            for button in opened.locator(
+                '[data-site-significance] button[aria-pressed="true"]'
+            ).all()
+        } == {level}
         opened.select_option('select[data-filter="project"]', "")
         cleared = opened.evaluate(PRESETS)
     finally:
@@ -783,7 +788,7 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     assert len(everyone) > len(at_level)
     assert [(preset["value"], preset["out"]) for preset in cleared["presets"]] == [
         ("", True),
-        (str(level), False),
+        (str(level), True),
         ("", True),
     ]
 

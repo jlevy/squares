@@ -6536,6 +6536,7 @@ def _without_defaults(bar: str) -> str:
     """A bar less what is a table's own: its count, which option each select starts at,
     the value an input starts with and whether its checkbox starts checked."""
     bar = _COUNT.sub(r"\1</span>", bar).replace(" selected>", ">").replace(" checked>", ">")
+    bar = re.sub(r' data-default-floor="[^"]*"| aria-pressed="(?:true|false)"', "", bar)
     return re.sub(r'(<input\b[^>]*?) value="[^"]*"', r"\1", bar)
 
 

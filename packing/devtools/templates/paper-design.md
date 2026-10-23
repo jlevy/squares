@@ -2540,7 +2540,7 @@ contributor articles use their component sheets and the same text tokens.
 
 | Control | Row attribute | Reads as |
 | --- | --- | --- |
-| Significance | `data-s`, the S level | a floor: S4 and up |
+| Significance | `data-s`, the S level | one of the selected S1–S5 segments |
 | Verification | `data-v`, the V level | a floor: V4 and up |
 | Confirmation | `data-c`, the C level | a floor: C3 and up |
 | Kind | `data-kind`, the register’s `kind` | equal to the kind chosen |
@@ -2550,24 +2550,37 @@ contributor articles use their component sheets and the same text tokens.
 | Case n | `data-n`, counts and ranges (`18-21 26`) | the result covers that n |
 | Max age | `data-date`, a whole ISO date | dated at most that many days ago |
 | Project (preset only) | `data-project`, the slugs of the listed projects the result is attributed to | the list has the project chosen |
-| At significance (preset only) | `data-s`, the S level | equal to the level chosen |
 
-```
-A rung select offers All, then each level of the rubric above its lowest as a floor,
-the top level bare (S5). Kind offers the kinds the register holds, in the rubric's
-order and words. Status offers the statuses the register's results have.
-A date the register gives only to the year is the first day of it (`1979-01-01`).
-Max age is a number of days, and empty is no limit. There is no date range.
-```
+Significance uses the same inline segmented buttons as News and the homepage Atlas, with
+S1 through S5 in ascending order and every level selected by default.
+Several selected levels combine with OR; the selection combines with other facets by
+AND. Verification and confirmation retain their floor selects, with All followed by the
+rubric’s levels above its lowest, the top level bare.
+Kind offers the kinds the register holds, in the rubric’s order and words.
+Status offers the statuses the register’s results have.
+A date the register gives only to the year is the first day of it (`1979-01-01`). Max
+age is a number of days, and empty is no limit.
+There is no date range.
 
 - **Composition.** The filters compose: a row shows when it passes every one, and an
-  empty control, or an unchecked one, passes every row.
+  empty text/select control or an unchecked flag passes every row.
+  No selected significance segments shows no rows.
 
-- **Preset-only controls.** Project and At significance follow the bar’s own controls
-  and are out of the bar (`hidden`, on their labels) until a link sets them:
-  `results.html?project=evand-square-packing` opens the table on the results attributed
-  to one listed project, and `&s=4` on those at S4 exactly, where the Significance floor
-  would keep S5 as well.
+- **Significance addresses.** Exact `s=4` links and noncontiguous selections such as
+  `s=1,3,5` set the visible S segments.
+  Legacy `s-min=3` and `s-max=4` bounds select their intersecting levels; exact and
+  threshold parameters compose when both occur.
+  Clicking a segment writes the selected levels to `s`, or `s=none` when none remain;
+  selecting every level removes that constraint.
+  It preserves unrelated parameters, other facet controls and row bookmarks.
+  Back and Forward restore the selection and count; a fresh bare archive address
+  restores all five levels.
+  Hidden legacy S controls adapt published URLs and never reappear as dropdowns.
+
+- **Preset-only controls.** Project follows the bar’s own controls and is out of the bar
+  (`hidden`, on its label) until a link sets it:
+  `results.html?project=evand-square-packing` opens results attributed to one listed
+  project, and `&s=4` selects only S4 through the visible segments.
   The other projects’ cards link this way (**Other projects**, above).
   While a preset control filters, its label is in the bar with the choice it holds, the
   project by its owner and repository, so the reader sees what narrows the table, and

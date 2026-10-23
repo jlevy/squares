@@ -138,7 +138,7 @@
         case "equals":
           return filter.value === "" || actual === filter.value;
         case "one-of":
-          return filter.value.split(",").includes(actual ?? "");
+          return filter.value !== "" && filter.value.split(",").includes(actual ?? "");
         case "flag":
           return filter.value !== "true" || actual === "true";
         case "min":
@@ -465,9 +465,8 @@
         const floor = Number(
           params.get("s-min") ?? significance?.getAttribute("data-default-floor") ?? "",
         );
-        const maximum = params.has("s-max")
-          ? Number(params.get("s-max"))
-          : Number.POSITIVE_INFINITY;
+        const ceiling = params.get("s-max");
+        const maximum = ceiling ? Number(ceiling) : Number.POSITIVE_INFINITY;
         for (const button of scoreButtons) {
           const value = button.getAttribute("data-site-score") ?? "";
           const wanted = !exact || exact.split(",").includes(value);

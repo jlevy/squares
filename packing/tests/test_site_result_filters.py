@@ -758,3 +758,96 @@ def test_the_checkbox_and_its_label_sit_in_the_bar_at_every_width(
             beside += 1
     assert [other["filter"] for other in found["labels"]].count("current") == 1
     assert beside >= 1, "no label shares the checkbox's line"
+
+
+@pytest.mark.parametrize("width", [1280, 390])
+def test_significance_segments_preserve_selection_legacy_links_and_history(
+    browser: Any,
+    pages: dict[str, Path],
+    overview: overview_data.Overview,
+    width: int,
+) -> None:
+    page = opened(browser, pages["results.html"], overview, width)
+    base = pages["results.html"].as_uri()
+    buttons = page.locator("[data-site-significance] button[data-site-score]")
+
+    def selected() -> set[int]:
+        return {
+            int(button.get_attribute("data-site-score") or "0")
+            for button in buttons.all()
+            if button.get_attribute("aria-pressed") == "true"
+        }
+
+    def check(levels: set[int], verification: int = 0, confirmation: int = 0) -> None:
+        expected = sorted(
+            result.id.lower()
+            for result in overview.results
+            if overview_sections.significance(result) in levels
+            and int(str(result.record["verification"])[1:]) >= verification
+            and int(str(result.record["confirmation"])[1:]) >= confirmation
+        )
+        assert selected() == levels
+        found = state(page)
+        assert sorted(found["shown"]) == expected
+        assert found["count"] == count(len(expected), overview)
+        assert found["total"] == len(overview.results)
+
+    try:
+        assert buttons.count() == 5
+        check({1, 2, 3, 4, 5})
+        assert page.locator('select[data-filter="s"]:visible').count() == 0
+        page.goto(base + "?reader=kept&v-min=2&c-min=2", wait_until="load")
+        page.locator('[data-site-significance] [data-site-score="2"]').focus()
+        page.keyboard.press("Space")
+        page.locator('[data-site-significance] [data-site-score="4"]').click()
+        check({1, 3, 5}, 2, 2)
+        query = parse_qs(urlsplit(page.url).query)
+        assert query == {"reader": ["kept"], "v-min": ["2"], "c-min": ["2"], "s": ["1,3,5"]}
+        page.reload(wait_until="load")
+        check({1, 3, 5}, 2, 2)
+        page.locator('[data-site-significance] [data-site-score="1"]').click()
+        check({3, 5}, 2, 2)
+        page.go_back(wait_until="load")
+        check({1, 3, 5}, 2, 2)
+        page.go_forward(wait_until="load")
+        check({3, 5}, 2, 2)
+        for query, levels in (
+            ("s-min=3", {3, 4, 5}),
+            ("s=3", {3}),
+            ("s-min=3&s=2", set()),
+            ("s-min=2&s-max=4", {2, 3, 4}),
+        ):
+            page.goto(base + "?reader=kept&" + query, wait_until="load")
+            check(levels)
+        project_result = next(
+            result for result in overview.results if overview_sections.result_projects(result)
+        )
+        project = overview_sections.result_projects(project_result)[0]
+        level = overview_sections.significance(project_result)
+        page.goto(base + f"?project={project}&s={level}", wait_until="load")
+        assert selected() == {level}
+        assert sorted(state(page)["shown"]) == sorted(
+            result.id.lower()
+            for result in overview.results
+            if project in overview_sections.result_projects(result)
+            and overview_sections.significance(result) == level
+        )
+        page.goto(base, wait_until="load")
+        check({1, 2, 3, 4, 5})
+        for button in buttons.all():
+            button.click()
+        check(set())
+        assert parse_qs(urlsplit(page.url).query)["s"] == ["none"]
+        page.goto(base, wait_until="load")
+        check({1, 2, 3, 4, 5})
+    finally:
+        page.close()
+    static = browser.new_page(
+        java_script_enabled=False, viewport={"width": width, "height": 900}
+    )
+    try:
+        static.goto(base + "?s=none", wait_until="load")
+        assert not static.locator(".site-result-filters").is_visible()
+        assert len(state(static)["shown"]) == len(overview.results)
+    finally:
+        static.close()
