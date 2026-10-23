@@ -938,6 +938,45 @@ RESULTS: dict[str, Prose] = {
             "near wall and the least-gap pair"
         ),
     ),
+    "T-230": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#728](https://github.com/jlevy/squares/issues/728)",
+        producer_route=False,
+        ai=(
+            "The source’s credits say its work was done with Claude (Anthropic) under human "
+            "direction, and the commit that publishes the certificate names Claude Opus 5.5 "
+            "as co-author and says Evan Daniel approved the record claim."
+        ),
+        routes=(
+            "No route here is the source’s code. Both read the certificate through an adapter "
+            "whose author read the source’s two checkers and which carries two of their "
+            "expressions, its line filter and its corner construction (RF-1 of the 22 October "
+            "review), so the replay is independently re-implemented after reading the "
+            "producer’s code; the review’s checker shares no code with either maintained route "
+            "or the source."
+        ),
+        lineage=(
+            "The author’s basin explorer started from Daniil Ostashev’s n = 303 packing of "
+            "#562, the packing this case’s house best packing certified before this adoption "
+            "(T-186), and near-record sweeps, crossovers and a final band flip, which reflects "
+            "one of the packing’s two tilted bands along its wall, reached this packing; the "
+            "issue calls it a new packing, not a refinement of Ostashev’s. Measured by the 22 "
+            "October review, square by square, no symmetry of the box pairs nearest centres "
+            "one to one with T-186’s packing, and the best assignment, the identity, moves 64 "
+            "squares beyond a tenth, at most 0.910, keeps 180 within $10^{-3}$ and reverses 24 "
+            "tilts. So it is another arrangement of Ostashev’s two-band design with one band’s "
+            "tilt reversed, not a refinement in this record’s sense, found from Ostashev’s "
+            "packing by the source’s account (T-230). The source leaves local optimality "
+            "unresolved: it finds the packing not first-order jammed and predicts a further "
+            "descent of about $5 \\times 10^{-7}$."
+        ),
+        third_route=(
+            ", and the 22 October review’s clean-room checker decided it again on two routes "
+            "of its own, in integers alone and in rationals with the exact clipped area of "
+            "every pair; its sharp controls at $10^{-30}$ found both maintained routes exact "
+            "at a wall and at the least-gap pair"
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1484,13 +1523,16 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
         "PingYou Ltd’s n = 302 arrangement",
     ),
-    # PR 574's padding of issue 562's packing, padded again (T-186's regularization of
-    # T-174).
+    # Issue 728's packing (T-230, adopted on 23 October 2026), another arrangement of Daniil
+    # Ostashev's two-band design (64 squares beyond a tenth of T-186's packing and 24 tilts
+    # reversed, the 22 October review), found from Ostashev's packing, which the issue names
+    # as the start. As at 155, Daniel is the finder and the start's author is named in the
+    # sentence, not in the structured fields.
     303: Credit(
-        (OSTASHEV,),
-        (PINGYOU, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
-        "Ostashev’s n = 303 packing",
+        (DANIEL,),
+        (),
+        "Evan Daniel’s arrangement of Daniil Ostashev’s two-band design in a search started "
+        "from Ostashev’s n = 303 packing",
     ),
     # Issue 575's packing padded (T-186's regularization of T-175).
     304: Credit(

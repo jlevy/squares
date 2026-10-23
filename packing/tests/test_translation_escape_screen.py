@@ -109,8 +109,12 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: regularized views (T-225), least margins 1e-20: 260 left, and 204, 227 and 229 stayed.
 #: The adoption of 23 October 2026 (think-4h23) moved it at its two, to Mykhailo
 #: Polkovskyi's #719 re-solves (T-229): 105 joined, its least margins 5e-21 against every
-#: wall and 1e-20 between pairs, and 204 stayed. Re-screening the adopted
-#: counts with the screen's own `--update --n` rebuilds the retained screen byte for byte.
+#: wall and 1e-20 between pairs, and 204 stayed. The same pass (think-icp1) moved it at
+#: 303, to Evan Daniel's dilation certificate of issue 728 (T-230): 303 joined, the
+#: dilation of a binary64 packing, as 229 did, its least margins 6.0e-13 against every wall
+#: and 1.2e-12 between pairs, at the screen's tightest tolerance of 1e-12. Re-screening the
+#: adopted counts with the screen's own
+#: `--update --n` rebuilds the retained screen byte for byte.
 GOLDEN_UNSTABLE = {
     "n=1..100": [
         68,
@@ -167,6 +171,7 @@ GOLDEN_UNSTABLE = {
         273,
         297,
         301,
+        303,
         304,
         307,
     ],

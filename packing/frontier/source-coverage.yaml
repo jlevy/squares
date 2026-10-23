@@ -8288,11 +8288,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 303
-  source_id: mishapolk-kkt-refinements-2026-10-14
-  value: '17.90995829106990799'
-  evidence: E-mishapolk-70a033f-certificate-report
+  source_id: evand-n303-2026-10-22
+  value: '17.9097722172743278'
+  evidence: E-evand-728-n303-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-230).
 - n: 304
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.92942775807517497'
@@ -9458,17 +9458,17 @@ superseded_reports:
 - n: 303
   source_id: casson-square-packing-2026
   value: '17.93105636462953001'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-n303-2026-10-22
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026
   value: '17.924349265547932'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-n303-2026-10-22
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026-10-03
   value: '17.924341009860250'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-n303-2026-10-22
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 304
   source_id: casson-square-packing-2026
@@ -9566,7 +9566,7 @@ superseded_reports:
 - n: 303
   source_id: evand-square-packing-2026-10-05
   value: '17.924341009851128373110514612828'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-n303-2026-10-22
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 88
   source_id: kingbird-current
@@ -10027,9 +10027,9 @@ superseded_reports:
 - n: 303
   source_id: squish-ten-packings-2026-10-07
   value: '17.9203123729203498'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-186's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-230's exact
     side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-n303-2026-10-22
 - n: 305
   source_id: evand-square-packing-2026-10-05
   value: '17.952959459015527962875662582531'
@@ -10238,8 +10238,8 @@ superseded_reports:
   source_id: evand-regularized-2026-10-10
   value: '17.9130654627385324'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-186's exact side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+    and T-230's exact side is smaller.
+  superseded_by: evand-n303-2026-10-22
 - n: 129
   source_id: dostashev-compositions-2026-10-12
   value: '11.8700138504044644'
@@ -10322,8 +10322,8 @@ superseded_reports:
   source_id: dostashev-compositions-2026-10-12
   value: '17.9099582910699080'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-186's exact side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+    and T-230's exact side is smaller.
+  superseded_by: evand-n303-2026-10-22
 - n: 304
   source_id: dostashev-merged-bands-2026-10-13
   value: '17.9294277580751750'
@@ -10636,6 +10636,12 @@ superseded_reports:
   reason: The house from 2026-10-22 until 2026-10-23; its certificate stays retained and verified,
     and T-229's exact side is smaller.
   superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+- n: 303
+  source_id: mishapolk-kkt-refinements-2026-10-14
+  value: '17.90995829106990799'
+  reason: The house from 2026-10-16 until 2026-10-23; its certificate stays retained and verified,
+    and T-230's exact side is smaller.
+  superseded_by: evand-n303-2026-10-22
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

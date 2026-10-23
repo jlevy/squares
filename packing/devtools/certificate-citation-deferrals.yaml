@@ -66,22 +66,3 @@ deferrals:
       rule for zm_mixed.py. Adopting the value puts s(95) in the case''s verified lane as proved. No
       zm_mixed.py refusal of a mutated s(95) cover has run, so two are owed whatever the owner rules
       on the depth limit. The case record at 95 cites the evidence once both are held.'
-  - evidence: E-evand-728-n303-exact-feasibility
-    results:
-    - T-230
-    bead: think-icp1
-    blocked_on: '#725, whose adoption pass of 23 October 2026 the adoption at 303 joins once it merges'
-    recorded: '2026-10-22'
-    reason: 'T-230 is at V3/C3 after the 22 October review, so the house rule adopts it at 303 in the
-      same pull request (#731). The pass is dated 23 October 2026, the day #725 adopts T-229 at 105 and
-      204 and writes that pass''s prior-state archive; the adoption at 303 joins that pass once #725
-      merges, so the two pull requests do not both write it. adopt_houses removes this entry when the
-      case record at 303 cites the evidence.'
-  - evidence: E-evand-728-n303-review-exact-feasibility
-    results:
-    - T-230
-    bead: think-icp1
-    blocked_on: '#725, whose adoption pass of 23 October 2026 the adoption at 303 joins once it merges'
-    recorded: '2026-10-22'
-    reason: 'As for E-evand-728-n303-exact-feasibility: the review''s clean-room checker confirms T-230,
-      and the case record at 303 cites it once the adoption at 303 lands in #731 after #725 merges.'

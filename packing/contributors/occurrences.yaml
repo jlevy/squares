@@ -23872,18 +23872,21 @@ occurrences:
     path: packing/frontier/n-303.md
     record_key: '303'
     field: /reported_upper_bound/found_by/0
-  expected_text: Daniil Ostashev
+  expected_text: Evan Daniel
   start: 0
-  end: 15
-  label: Daniil Ostashev
+  end: 11
+  label: Evan Daniel
   role: construction-finder
   disposition: resolved
   evidence:
-  - source-intake
+  - repository-license
   - bibliography
-  contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the
-    original credit role is retained.
+  note: Reviewed packing/frontier/n-303.md [303] /reported_upper_bound/found_by/0
+    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel; issue 728's
+    packing, the case's house since the adoption of 23 October 2026 (T-230). Keep finder,
+    improver and solver roles distinct.
+  contributor_id: evan-daniel
 - origin:
     path: packing/frontier/n-303.md
     record_key: '303'
@@ -23901,36 +23904,6 @@ occurrences:
   note: Reviewed packing/frontier/n-303.md [303] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-303.md
-    record_key: '303'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
-- origin:
-    path: packing/frontier/n-303.md
-    record_key: '303'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the
-    original credit role is retained.
 - origin:
     path: packing/frontier/n-304.md
     record_key: '304'

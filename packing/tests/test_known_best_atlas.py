@@ -2183,8 +2183,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # name, since the credit at 227 keeps de Winter as the packing's finder. The adoption of
     # 23 October draws 105 and 204 from one more, Mykhailo Polkovskyi's issue 719 packet
     # (T-229), with no new name: PingYou Ltd's PR 574 certificates and Daniel's regularized
-    # lists still hold other counts, and Polkovskyi's name is already on the poster.
-    assert len(expected_sources) == 26
+    # lists still hold other counts, and Polkovskyi's name is already on the poster. The
+    # same pass draws 303 from one more, Evan Daniel's issue 728 packet (T-230), with no new
+    # name: Mishapolk's KKT refinements still hold other counts.
+    assert len(expected_sources) == 27
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
