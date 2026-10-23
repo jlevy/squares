@@ -21,8 +21,9 @@ register together and stores none of it:
   defect, or a statement the record marks out of date;
 - **closeable**, when every result is confirmed or refuted (a reported defect: recorded),
   nothing the author asked for is queued, no question put to the author awaits an answer
-  that would change the record (`awaiting_author`: credit, lineage, or which file), and
-  the owner does not hold the issue (`held`).
+  that could falsify what the record asserts and that no measurement here can settle
+  (`awaiting_author`: credit, lineage, or which file), and the issue is not held for the
+  owner (`held`).
 
 A closeable issue still open is owed its final comment and its close, at stage 7 after
 the verified deploy. The owner's instruction of 23 October 2026 made that the standard
@@ -31,10 +32,11 @@ issues open for questions to the author that the record did not track and whose 
 would change nothing in it. A question is recorded under `awaiting_author`, and holds
 its issue open, only when the record asserts something its answer could falsify (credit,
 lineage, or which file) and no measurement here can settle it; any other question goes
-in the closing comment. An issue the owner has reserved carries `held`: no pass posts on
-it or closes it, so it is never closeable and ``--draft`` refuses it. Review A1 of #747
-added the hold, when the owner's reservation of #557, #565, #570 and #574 lived only in a
-bead and the closing step listed #570 for closing.
+in the closing comment. An issue reserved for the owner carries `held`, on the owner's
+recorded instruction or on a reservation for the owner that beads record, pending the
+owner's confirmation: no pass posts on it or closes it, so it is never closeable and
+``--draft`` refuses it. Review A1 of #747 added the hold, when the reservation of #557,
+#565, #570 and #574 lived only in beads and the closing step listed #570 for closing.
 
 Modes, from ``packing/`` with the project interpreter::
 
@@ -47,8 +49,8 @@ Modes, from ``packing/`` with the project interpreter::
 The default mode reads two files and the register and touches no clock, network or
 history, so its verdict is a function of the tree. Only the ids, the schema and a value
 an unquoted `` #`` cuts short (`comment_cut_scalars`) can fail it: a reply that is due is
-owed after the merge, not a broken record. ``--draft`` refuses an issue the owner holds,
-and refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until
+owed after the merge, not a broken record. ``--draft`` refuses an issue held for the
+owner, and refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until
 it merges and a reply links only to `main`. ``--github`` reads the live issues through
 ``gh api`` and writes nothing anywhere.
 """
@@ -708,9 +710,20 @@ def awaited(issue: Mapped) -> list[Mapped]:
 
 
 def held(issue: Mapped) -> Mapped | None:
-    """The owner's hold on the issue, if any: no pass posts on it or closes it."""
+    """The issue's hold for the owner, if any: no pass posts on it or closes it."""
     hold = issue.get("held")
     return hold if isinstance(hold, Mapping) else None
+
+
+def hold_text(hold: Mapped) -> str:
+    """The hold as every output states it: since when, and whether the owner's
+    confirmation is still awaited."""
+    pending = (
+        ", pending the owner's confirmation"
+        if hold.get("basis") == "recorded-reservation"
+        else ""
+    )
+    return f"held for the owner since {hold['since']}{pending}"
 
 
 def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[str]]:
@@ -718,7 +731,7 @@ def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[
     blockers: list[str] = []
     hold = held(issue)
     if hold is not None:
-        blockers.append(f"held by the owner since {hold['since']}")
+        blockers.append(hold_text(hold))
     if issue["triage"] == "pending":
         blockers.append("triage is pending")
     blockers.extend(f"{state.key} is {state.state}" for state in states if not state.settled)
@@ -806,7 +819,7 @@ def _question_problems(issue: Mapped, repository: str) -> list[str]:
                 f"#{number}: closed while a question awaits the author: {question['question']}"
             )
     if held(issue) is not None and issue["state"] == "closed":
-        problems.append(f"#{number}: closed while the owner holds it; remove the hold")
+        problems.append(f"#{number}: closed while held for the owner; remove the hold")
     return problems
 
 
@@ -897,7 +910,7 @@ def summary_lines(record: Mapped, register: Register) -> list[str]:
             "reply due" if state.replies_due else "",
             "closeable" if state.closeable and issue["state"] == "open" else "",
             "awaiting the author" if awaited(issue) else "",
-            "held by the owner" if held(issue) is not None else "",
+            "held for the owner" if held(issue) is not None else "",
         ]
         lines.append(
             f"  #{issue['number']:<4} {issue['state']:<7}{progress:<16}"
@@ -995,7 +1008,7 @@ def _issue_section(issue: Mapped, state: IssueState, on_main: set[str] | None) -
     if questions:
         lines.append("Questions to the author:")
         lines += [
-            f"- {question['state']}, the answer would change the record's "
+            f"- {question['state']}, the answer could falsify the record's "
             f"{question['changes']}: "
             f"{_cell(str(question['question']))} ([asked]({question['asked']}))"
             for question in questions
@@ -1005,8 +1018,8 @@ def _issue_section(issue: Mapped, state: IssueState, on_main: set[str] | None) -
     if hold is not None:
         lines += [
             (
-                f"Held by the owner since {hold['since']}: post nothing and close nothing "
-                f"until the owner lifts the hold. {_cell(str(hold['note']))}"
+                f"{hold_text(hold).capitalize()}: post nothing and close nothing until the "
+                f"owner lifts the hold. {_cell(str(hold['note']))}"
             ),
             "",
         ]
@@ -1516,9 +1529,9 @@ def _draft_mode(record: Mapped, register: Register, number: int) -> int:
     hold = held(issue)
     if hold is not None:
         print(
-            f"refusing to draft: the owner holds #{number} since {hold['since']}, so no "
-            "pass posts on it or closes it (campaign/result-import.md, Close a Settled "
-            f"Issue). {hold['note']}",
+            f"refusing to draft: #{number} is {hold_text(hold)}, so no pass posts on it "
+            "or closes it (campaign/result-import.md, Close a Settled Issue). "
+            f"{hold['note']}",
             file=sys.stderr,
         )
         return 2

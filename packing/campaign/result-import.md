@@ -215,7 +215,7 @@ claude/intake-YYYY-MM-DD, with today's date.
    author goes under the issue's awaiting_author and holds it open only when the
    record asserts something the answer could falsify and no measurement here can
    settle it; any other goes in the closing comment. Post nothing on, and close
-   nothing of, an issue the owner holds (held in result-requests.yaml).
+   nothing of, an issue held for the owner (held in result-requests.yaml).
 9. Run `make intake` again, and again after the merge: it and
    `check_requests --report` list the replies still due, and its "Regularization
    owed" lists every count still pending where this pass changed the house best
@@ -1228,11 +1228,13 @@ that the record did not track and whose answers would change nothing in it.
    ([Verify the Published Result](#verify-the-published-result)), run
    `check_requests --report` from `main` and take each issue it marks closeable that is
    still open on GitHub.
-   An issue the owner holds (`held` in the record) is never closeable: no pass posts on
-   it or closes it, `check_requests --draft` refuses it, and the sweep lists it for the
-   owner with what would otherwise be owed.
-   The hold is set only on the owner’s instruction, with a note citing where that is
-   recorded, and only the owner lifts it.
+   An issue held for the owner (`held` in the record) is never closeable: no pass posts
+   on it or closes it, `check_requests --draft` and `intake_comments --out` refuse it,
+   and the sweep lists it for the owner with what would otherwise be owed.
+   A hold is set on the owner’s recorded instruction (`basis: owner-instruction`), or on
+   a reservation for the owner that beads record (`basis: recorded-reservation`, pending
+   the owner’s confirmation), with those beads in `beads` and a note saying what each
+   records; only the owner lifts it.
    An issue GitHub already shows closed is not posted on again: record its final comment
    and its close (step 4).
 2. **Check that `main` and the deployed site say what the final comment will say**,
@@ -1265,7 +1267,7 @@ that the record did not track and whose answers would change nothing in it.
 Each six-hourly check-in of a running pass does the same.
 Until an issue is closed, `make intake` lists it under **Needs Action** and exits 1;
 once GitHub shows it closed and the record does not, the item says to record the close
-and post nothing. An issue the owner holds is listed for the owner and fails nothing.
+and post nothing. An issue held for the owner is listed for the owner and fails nothing.
 
 ### Announce a Significant Result
 
@@ -1400,8 +1402,9 @@ it (`held`). `awaiting_author` holds only the questions whose answers could fals
 the record asserts and that no measurement here can settle: `changes` says whether the
 credit, the lineage, or which file or commit a claim names, and `asked` is the recorded
 reply that asked it.
-`held` is the owner’s reservation of an issue, with the day it was recorded and a note
-citing where: while it stands no pass posts on the issue or closes it.
+`held` holds an issue for the owner, on the owner’s recorded instruction or on a
+reservation for the owner that beads record, with its `basis`, the day it was recorded
+here, the beads and a note: while it stands no pass posts on the issue or closes it.
 
 A confirmation is described from the confirming evidence’s `relationship_to_generator`:
 *reproduced with the author’s own checker* for `same-implementation`, *re-verified by an

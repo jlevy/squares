@@ -42,7 +42,7 @@ The sources, one section of the report each:
   the reply, not the import), triage and replies owed, the questions awaiting an author
   that hold an issue open (the answer bead owns them; one awaited longer than
   `AWAITED_DAYS` is listed for a decision), every closeable issue still open, each issue
-  the owner holds (listed for the owner: no pass posts on it or closes it), and the
+  held for the owner (listed for the owner: no pass posts on it or closes it), and the
   validation backlog.
 - **Regularization owed**: from `atlas/known-best/default-drawings.json`, each count
   whose drawing is `pending` regularization, with the bead its
@@ -68,7 +68,7 @@ are owed (`campaign/result-import.md`, stage 7). The owner's instruction of 23 O
 2026 put that last one here, after twelve closeable issues were found open with nothing
 listing them; where GitHub already shows such an issue closed, the step is to record the
 close, not to post it again. The command then exits 1. Items an open bead owns, an issue
-the owner holds, a question awaited for a decision, the backlog and the bead queue are
+held for the owner, a question awaited for a decision, the backlog and the bead queue are
 listed and do not fail it. A source this run could not read is listed under
 **Not Checked**, so a quiet report is not mistaken for a clean one.
 
@@ -1082,7 +1082,7 @@ def _held(
     state: check_requests.IssueState,
     beads: Beads | None,
 ) -> Item:
-    """An issue the owner holds: listed for the owner, never as a reply or close owed.
+    """An issue held for the owner: listed for the owner, never as a reply or close owed.
 
     What a pass would otherwise owe it is named, for the owner to decide; nothing is
     posted on it or closed while the hold stands (review A1 of #747).
@@ -1092,7 +1092,7 @@ def _held(
     would = [*owed, *(["its close"] if settled else [])]
     alias = str(issue["answer_bead"])
     return Item(
-        f"#{issue['number']} is held by the owner"
+        f"#{issue['number']} is {check_requests.hold_text(hold)}"
         + (f" ({' and '.join(would)} otherwise owed)" if would else "")
         + ": listed for the owner, nothing posted or closed",
         LISTED,

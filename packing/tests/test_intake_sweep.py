@@ -890,31 +890,37 @@ def test_a_question_awaiting_the_author_holds_the_issue_open_and_the_answer_bead
     assert close.state == sweep.CLOSEABLE
 
 
-HOLD = {"by": "owner", "since": "2026-10-04", "note": "Reserved by the owner (think-cccc)."}
+HOLD = {
+    "by": "owner",
+    "basis": "recorded-reservation",
+    "since": "2026-10-04",
+    "beads": ["think-cccc"],
+    "note": "Reserved for the owner (think-cccc).",
+}
 
 
-def test_an_issue_the_owner_holds_is_listed_for_the_owner_and_never_as_a_close() -> None:
+def test_an_issue_held_for_the_owner_is_listed_for_the_owner_and_never_as_a_close() -> None:
     """Review A1 of #747: the owner reserved #570, and the sweep told every pass to post
     on it and close it. Held, it is listed for the owner and fails nothing."""
     beads = _beads(**{"think-bbbb": "in_progress"})
     (item,) = _queues([_settled(held=HOLD)], beads).items
     assert (item.what, item.state, item.bead, item.since) == (
         (
-            "#300 is held by the owner (its close otherwise owed): listed for the owner, "
-            "nothing posted or closed"
+            "#300 is held for the owner since 2026-10-04, pending the owner's confirmation "
+            "(its close otherwise owed): listed for the owner, nothing posted or closed"
         ),
         sweep.LISTED,
         "think-bbbb",
         "2026-10-04",
     )
-    assert item.step == "for the owner: Reserved by the owner (think-cccc)."
+    assert item.step == "for the owner: Reserved for the owner (think-cccc)."
     assert sweep.needing_action([sweep.Section("queues", items=[item])]) == []
     unanswered = {**_settled(held=HOLD), "replies": []}
     (owed,) = _queues([unanswered], beads).items
-    assert owed.what.startswith("#300 is held by the owner (a reply and its close otherwise")
+    assert "confirmation (a reply and its close otherwise owed)" in owed.what
     _result, queued_ask, held = _queues([_issue(held=HOLD)], beads).items
     assert queued_ask.what == "#300 queued ask: a correction"
-    assert held.what.startswith("#300 is held by the owner (a reply otherwise owed)")
+    assert "confirmation (a reply otherwise owed)" in held.what
 
 
 def test_a_close_github_already_shows_is_recorded_not_posted_again() -> None:

@@ -15,6 +15,7 @@ from collections.abc import Mapping
 from typing import Any
 
 import pytest
+import yaml
 
 from devtools import check_requests
 from devtools.check_requests import (
@@ -734,7 +735,7 @@ def test_an_awaited_question_is_marked_in_the_gate_the_report_and_the_draft() ->
     assert "closeable" not in line
     section = "\n".join(check_requests.report(record(entry), REGISTER, None))
     assert "Questions to the author:" in section
-    assert "- awaiting, the answer would change the record's file: Which commit?" in section
+    assert "- awaiting, the answer could falsify the record's file: Which commit?" in section
     assert "Closeable: no; awaiting the author (credit): Who made" in section
     text = check_requests.draft(entry, REGISTER, "owner/repo")
     assert "**Waiting on your answer.**" in text
@@ -749,37 +750,59 @@ def test_an_awaited_question_is_marked_in_the_gate_the_report_and_the_draft() ->
     assert "closed with this comment" in settled
 
 
-HOLD = {"by": "owner", "since": "2026-10-23", "note": "Reserved by the owner (think-abcd)."}
+HOLD = {
+    "by": "owner",
+    "basis": "recorded-reservation",
+    "since": "2026-10-23",
+    "beads": ["think-abcd"],
+    "note": "Reserved for the owner (think-abcd).",
+}
 
 
-def test_an_issue_the_owner_holds_is_never_closeable_and_is_marked_so() -> None:
-    """Review A1 of #747: the owner's reservation of #570 lived only in a bead, and the
-    closing step listed #570 for closing. A hold in the record blocks it."""
+def _without(mapping: Record, key: str) -> Record:
+    return {name: value for name, value in mapping.items() if name != key}
+
+
+def test_an_issue_held_for_the_owner_is_never_closeable_and_is_marked_so() -> None:
+    """Review A1 of #747: the reservation of #570 for the owner lived only in beads, and
+    the closing step listed #570 for closing. A hold in the record blocks it; review B1
+    has it say whether the owner's confirmation is still awaited."""
     entry = asking(held=HOLD)
     assert check_requests.issue_state(asking(), REGISTER).closeable
     state = check_requests.issue_state(entry, REGISTER)
     assert not state.closeable
-    assert state.blockers == ("held by the owner since 2026-10-23",)
+    pending = "held for the owner since 2026-10-23, pending the owner's confirmation"
+    assert state.blockers == (pending,)
     (line,) = check_requests.summary_lines(record(entry), REGISTER)
-    assert line.endswith("held by the owner")
+    assert line.endswith("held for the owner")
     assert "closeable" not in line
     section = "\n".join(check_requests.report(record(entry), REGISTER, None))
     assert (
-        "Held by the owner since 2026-10-23: post nothing and close nothing until the "
-        "owner lifts the hold. Reserved by the owner (think-abcd)." in section
+        "Held for the owner since 2026-10-23, pending the owner's confirmation: post "
+        "nothing and close nothing until the owner lifts the hold. Reserved for the owner "
+        "(think-abcd)." in section
     )
-    assert "Closeable: no; held by the owner since 2026-10-23." in section
+    assert f"Closeable: no; {pending}." in section
+    instructed = asking(held={**HOLD, "basis": "owner-instruction"})
+    assert check_requests.issue_state(instructed, REGISTER).blockers == (
+        "held for the owner since 2026-10-23",
+    )
 
 
 @pytest.mark.parametrize(
     ("hold", "expected"),
     [
         ({**HOLD, "by": "author"}, "held/by"),
-        ({key: value for key, value in HOLD.items() if key != "note"}, '"note" is a required'),
+        (_without(HOLD, "note"), '"note" is a required'),
+        (_without(HOLD, "beads"), '"beads" is a required'),
+        ({**HOLD, "beads": []}, "held/beads"),
+        ({**HOLD, "basis": "the coordinator's guess"}, "held/basis"),
         ({**HOLD, "until": "2026-11-01"}, "Additional properties"),
     ],
 )
-def test_a_hold_is_the_owners_with_a_date_and_a_note(hold: Record, expected: str) -> None:
+def test_a_hold_is_for_the_owner_with_its_basis_date_beads_and_note(
+    hold: Record, expected: str
+) -> None:
     assert check_requests.problems(record(asking(held=HOLD)), REGISTER) == []
     found = check_requests.problems(record(asking(held=hold)), REGISTER)
     assert any(expected in problem for problem in found), found
@@ -788,28 +811,39 @@ def test_a_hold_is_the_owners_with_a_date_and_a_note(hold: Record, expected: str
 def test_a_closed_issue_cannot_carry_a_hold() -> None:
     closed = asking(held=HOLD, state="closed", closed="2026-10-24")
     found = check_requests.problems(record(closed), REGISTER)
-    assert "#7: closed while the owner holds it; remove the hold" in found
+    assert "#7: closed while held for the owner; remove the hold" in found
 
 
-def test_the_draft_refuses_an_issue_the_owner_holds(
-    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+def test_the_draft_refuses_an_issue_held_for_the_owner(
+    tmp_path: Any, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    path = tmp_path / "requests.yaml"
+    path.write_text(yaml.safe_dump(record(asking(held=HOLD))), encoding="utf-8")
     monkeypatch.setattr(check_requests, "head_on_main", lambda: True)
-    assert check_requests.main(["--draft", "570"]) == 2
+    assert check_requests.main(["--record", str(path), "--draft", "7"]) == 2
     err = capsys.readouterr().err
-    assert "refusing to draft: the owner holds #570 since 2026-10-23" in err
-    assert "think-5ip2" in err
+    assert "refusing to draft: #7 is held for the owner since 2026-10-23" in err
+    assert "Reserved for the owner (think-abcd)." in err
+    path.write_text(yaml.safe_dump(record(asking())), encoding="utf-8")
+    assert check_requests.main(["--record", str(path), "--draft", "7"]) == 0
 
 
-def test_the_issues_the_owner_reserved_are_held_in_the_live_record() -> None:
-    """#557, #565, #570 and #574, reserved by the owner as think-5ip2 records."""
-    live = {issue["number"]: issue for issue in check_requests.load_record()["issues"]}
+def test_every_hold_in_the_live_record_is_on_an_open_issue_that_cannot_close() -> None:
+    """Review B6 of #747: an invariant over whatever holds the record carries, so the
+    owner lifting one edits the record and fails no test. Each names its beads and says
+    in its note that no instruction in the owner's words is recorded unless one is."""
     register = check_requests.load_register()
-    for number in (557, 565, 570, 574):
-        hold = check_requests.held(live[number])
-        assert hold is not None, number
-        assert "think-5ip2" in str(hold["note"])
-        assert not check_requests.issue_state(live[number], register).closeable
+    for issue in check_requests.load_record()["issues"]:
+        hold = check_requests.held(issue)
+        if hold is None:
+            continue
+        number = issue["number"]
+        assert issue["state"] == "open", number
+        assert not check_requests.issue_state(issue, register).closeable, number
+        assert hold["beads"], number
+        assert all(bead in str(hold["note"]) for bead in hold["beads"]), number
+        if hold["basis"] == "recorded-reservation":
+            assert "No instruction in the owner's own words is" in str(hold["note"]), number
 
 
 @pytest.mark.parametrize(

@@ -143,19 +143,40 @@ $defs:
       held:
         type: object
         additionalProperties: false
-        required: [by, since, note]
+        required: [by, basis, since, beads, note]
         description: >-
-          The owner holds the issue: no pass posts on it or closes it, whatever the record
-          derives, until the owner lifts the hold by removing this. `check_requests`
-          counts it against closeable and refuses to draft a comment for it, and
-          `intake_sweep` lists the issue for the owner instead of as a reply or a close
-          owed. It is set only on the owner's instruction, which `note` cites with where
-          it is recorded. Review A1 of #747 is why: the owner had reserved #557, #565,
-          #570 and #574, the reservation lived only in a bead, and the closing step listed
-          #570 for closing.
+          The issue is held for the owner: no pass posts on it or closes it, whatever the
+          record derives, until the owner lifts the hold, which removes this.
+          `check_requests` counts it against closeable and refuses to draft a comment for
+          it, `intake_comments --out` refuses a draft for it, and `intake_sweep` lists the
+          issue for the owner instead of as a reply or a close owed. Review A1 of #747 is
+          why: the owner's reservation of #557, #565, #570 and #574 lived only in beads, and
+          the closing step listed #570 for closing.
         properties:
-          by: {const: owner}
-          since: {type: string, format: date}
+          by:
+            const: owner
+            description: Whose decision the issue waits on.
+          basis:
+            enum: [owner-instruction, recorded-reservation]
+            description: >-
+              `owner-instruction` when the owner's own words reserving the issue are
+              recorded, which `note` quotes with where; `recorded-reservation` when earlier
+              lanes reserved the issue for the owner's own handling, as the beads in
+              `beads` record, and the hold awaits the owner's confirmation. Review B1 of
+              #747 is why the second exists: the four holds of 23 October rest on such
+              beads, and no instruction in the owner's words is recorded.
+          since:
+            type: string
+            format: date
+            description: >-
+              The day the hold was recorded in this file; `note` gives the days the
+              reservation was first recorded in the beads.
+          beads:
+            type: array
+            minItems: 1
+            uniqueItems: true
+            items: {$ref: '#/$defs/bead'}
+            description: The beads that record the reservation or the instruction.
           note: {type: string, minLength: 1}
       beads:
         type: array

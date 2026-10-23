@@ -6553,12 +6553,18 @@ issues:
         the owner's to post (think-00y8).
     held:
       by: owner
+      basis: recorded-reservation
       since: '2026-10-23'
+      beads: [think-sdsl, think-wnsv, think-l3oo, think-5ip2]
       note: >-
-        Reserved by the owner: no pass replies on #557, #565, #570 or #574 or closes them,
-        and each is listed for the owner. The previous coordinator of the 23 October 2026
-        intake pass recorded the reservation in think-5ip2 from the owner's instruction;
-        that bead is the source, and the owner's own words are not retained here.
+        The reply is the owner's to post: think-sdsl (13 and 14 October 2026) holds the
+        share-back for Overbeck to post only on the owner's word, think-wnsv (15 October)
+        lists #557 as owner-reserved, and think-l3oo item 3 (16 October) reserves the
+        replies to #557 and #565 for the owner.
+        think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
+        recorded this hold on 23 October 2026. No instruction in the owner's own words is
+        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
+        them among the owner's open questions).
     beads:
     - think-00y8
     - think-r7m8
@@ -6658,12 +6664,18 @@ issues:
         owner's to post (think-mxhc).
     held:
       by: owner
+      basis: recorded-reservation
       since: '2026-10-23'
+      beads: [think-mxhc, think-wnsv, think-l3oo, think-5ip2]
       note: >-
-        Reserved by the owner: no pass replies on #557, #565, #570 or #574 or closes them,
-        and each is listed for the owner. The previous coordinator of the 23 October 2026
-        intake pass recorded the reservation in think-5ip2 from the owner's instruction;
-        that bead is the source, and the owner's own words are not retained here.
+        The reply is the owner's to post: think-mxhc (13 October 2026) holds the draft
+        reply to post only on the owner's word, think-wnsv (15 October) lists #565 as
+        owner-reserved, and think-l3oo item 3 (16 October) reserves the replies to #557
+        and #565 for the owner.
+        think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
+        recorded this hold on 23 October 2026. No instruction in the owner's own words is
+        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
+        them among the owner's open questions).
     beads:
     - think-hcqr
     - think-acbk
@@ -8531,12 +8543,18 @@ issues:
       queued: false
     held:
       by: owner
+      basis: recorded-reservation
       since: '2026-10-23'
+      beads: [think-wnsv, think-rfce, think-l3oo, think-5ip2]
       note: >-
-        Reserved by the owner: no pass replies on #557, #565, #570 or #574 or closes them,
-        and each is listed for the owner. The previous coordinator of the 23 October 2026
-        intake pass recorded the reservation in think-5ip2 from the owner's instruction;
-        that bead is the source, and the owner's own words are not retained here.
+        The reply waits on the owner's ruling: think-wnsv (15 October 2026) holds it for the
+        owner's decision on rows without a retained certificate, and think-l3oo item 2 (16
+        October) asks whether the 379 side, which no retained certificate carries, gets a
+        beyond-horizon row (think-rfce).
+        think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
+        recorded this hold on 23 October 2026. No instruction in the owner's own words is
+        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
+        them among the owner's open questions).
     beads:
     - think-rfce
     answer_bead: think-rfce
@@ -8728,12 +8746,17 @@ issues:
         require a new replay. The algebraic house writer is separately tracked under think-ot5c.
     held:
       by: owner
+      basis: recorded-reservation
       since: '2026-10-23'
+      beads: [think-9v2k, think-l3oo, think-5ip2]
       note: >-
-        Reserved by the owner: no pass replies on #557, #565, #570 or #574 or closes them,
-        and each is listed for the owner. The previous coordinator of the 23 October 2026
-        intake pass recorded the reservation in think-5ip2 from the owner's instruction;
-        that bead is the source, and the owner's own words are not retained here.
+        The reply waits on the owner's decision on pull request #574: think-9v2k (16 October
+        2026) holds it until the owner decides the pull request or tells a pass to post,
+        and think-l3oo item 1 (16 October) asks the owner to decide it.
+        think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
+        recorded this hold on 23 October 2026. No instruction in the owner's own words is
+        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
+        them among the owner's open questions).
     beads:
     - think-9v2k
     answer_bead: think-9v2k

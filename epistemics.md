@@ -748,8 +748,9 @@ Its three end points are fixed here.
 3. **Answered.** An author who asked for the registration, on an issue here or
    otherwise, has been told what was registered, at which rung, what was replayed, and
    what remains. The answer goes on their issue, which stays open while work they asked
-   for is still queued, or while a question put to them awaits an answer that would
-   change the record, and closes with a final comment once neither holds.
+   for is still queued, while a question put to them awaits an answer that could falsify
+   what the record asserts and that no measurement here can settle, or while the issue
+   is held for the owner, and closes with a final comment once none of these holds.
    Every issue an intake pass touches is answered, and every later change of its state
    gets a follow-up until the issue closes with a final comment (stage 7 of
    [result-import.md](packing/campaign/result-import.md#stage-7-answer) says what
