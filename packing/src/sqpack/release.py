@@ -2457,6 +2457,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/check_results.py",
             "packing/devtools/check_source_coverage.py",
             "packing/devtools/site_resources.py",
+            "packing/devtools/source_supersession.py",
             "packing/devtools/state_ai_assistance.py",
             "packing/frontier/README.md",
             "packing/frontier/n-011.md",
@@ -2487,8 +2488,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte-identical across all four; measured before against main 44df28b07 and "
             "598d23289 with the same outcome. The explainer reads n-011's front matter, not "
             "the sentence added to its body, the papers print no project card, and the "
-            "register stays at 230 results. No PDF was printed; each prints from that "
-            "HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+            "register stays at 230 results. source_supersession.py, changed after those "
+            "renders, only caches its parse of the coverage register by the file's text, "
+            "a source review with its 378 dependent tests passing; the papers select it as "
+            "a broad builder input. No PDF was printed; each prints from that HTML. "
+            "Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
