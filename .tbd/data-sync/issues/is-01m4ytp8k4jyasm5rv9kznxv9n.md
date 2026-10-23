@@ -5,7 +5,7 @@ title: Beyond-horizon rows above Göbel's classical constructions
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: c-answers-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:46:28.067Z
-updated_at: 2026-10-23T09:40:47.065Z
+updated_at: 2026-10-23T17:01:27.332Z
 started_at: 2026-10-23T07:54:25.898Z
 ---
 **Owner question:** do Frits Göbel's classical constructions count as earlier reports, and so as the baseline beyond n = 324, so that a beyond-horizon row above one is not recorded? The record holds no Göbel construction beyond the corpus; its standing side there is the beyond-horizon row or the grid. Until the owner answers, draft register plans mark the affected rows `undecided-goebel` rather than recorded.
@@ -121,3 +121,8 @@ close_when holds once the PR merges. The coordinator closes #613 (the project's 
 no acknowledgement owed) and then this bead.
 
 **Follow-up drafted** for #732 on think-temp; #613 needs only the closing.
+
+2026-10-23 c-answers-1023 (PR https://github.com/jlevy/squares/pull/754, review A, A2 and A6): correction to "the entry's ask is now `done` and its close_when holds once the PR merges" above.
+- #613's ask is `queued` again, reworded. #754 delivers the walks' ruling and the 369/376 correction. Still owed: the other readers of the record beyond 324 take Göbel's construction (think-v022, review A2, escalated to the coordinator as a design choice), and a defect entry recording the cause.
+- #613 stays open until both land, and this bead stays open while #613's requests entry names it (answer_bead and the ask's bead; check_bead_tree).
+- The #613 closing is no longer part of #754.

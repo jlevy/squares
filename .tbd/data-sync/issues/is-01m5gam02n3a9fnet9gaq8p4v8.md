@@ -5,7 +5,7 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-23T15:42:09.569Z
+updated_at: 2026-10-23T16:54:42.312Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -121,3 +121,13 @@ declares yet. Packet README, Held Back and Not Recorded.
 - `held-dependents` now: leaving 23aff0c's deletions out would record 9 of 5a299b4's certificates (history walk) and, in #732's walk, 8 of the author's 1851c2c files, 8a488a1's 848 and 5a299b4 at 8 counts; nothing of #732's own.
 - The exception is not applied: whether an issue's claim gives a deletion bound a row (743, superseded by #719's; 985, where the current row is couzo-verified-bounds-2026-10-14's of 14 October, 2.2e-10 above the bound, the one count to 1024 where a settled bound is the best side) is think-kzme. Rule text: result-import.md, Several Reports at One Count; frontier README. Rows above 1024 (#715's 158 deletions, #732's) are think-llit's.
 - Still open here: D3, D5; D2's checker (W7).
+
+2026-10-23 c-answers-1023 (PR https://github.com/jlevy/squares/pull/754, review A, A1 and A3): correction to my D6 note above, which stated the answer more broadly than it was given.
+
+**The recorded words**, as coord-intake-1023 relayed them in its calls on review A of #754: the question was "a side obtained by deleting a square from a neighbour's certificate (e.g. Couzo's 985 from his 986)", answered "Yes, an earlier report", whose option read "A published deletion bound counts like any stated bound; a later equal or higher side is not recorded".
+
+**What #754 now applies:**
+- Settled: 36 of 4e4c8ce's 39 index deletion bounds, each deleting one square from the next count's 4e4c8ce certificate (505 ... 989; 16 of them in #732's walk). Recorded in the walk, passed over by the chain; #732's 985 ties and is not recorded. `beyond_horizon_replay.DELETION_ANSWER`.
+- Not settled: 751 (three squares from 754's certificate), 752 (two from 754's) and 927 (two from 929's), per certified_bounds.json at 4e4c8ce. They are beyond the answer's words and stay held on think-kzme. Each count's later steps are recorded below them, so no verdict rests on them.
+- No row of their own is this bead's recommendation, not the owner's word. Whether "counts like any stated bound" gives a deletion bound a row is on think-kzme, along with the issue-claimed counts 743, 798, 855 and 985.
+- No verdict or row changes from the earlier note. Rule text: result-import.md (Several Reports at One Count), the frontier README, and beyond_horizon_replay.HELD_CLASSES and DELETION_ANSWER.

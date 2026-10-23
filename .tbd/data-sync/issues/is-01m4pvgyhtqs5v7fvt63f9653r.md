@@ -3,9 +3,9 @@ type: is
 id: is-01m4pvgyhtqs5v7fvt63f9653r
 title: Evaluate wand125's sqverify_continuous (f30cc2c) as an independent route for T-145 and s(40) > 3359/500 (#533)
 kind: task
-status: open
+status: closed
 priority: 2
-version: 11
+version: 12
 delegate: coord-intake-1023
 labels:
   - result-import
@@ -14,10 +14,10 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T01:27:07.066Z
-updated_at: 2026-10-23T16:41:00.526Z
+updated_at: 2026-10-23T17:06:10.366Z
 started_at: 2026-10-23T06:43:56.790Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-23T17:06:10.366Z
+close_reason: "Soundness review of wand125's sqverify_continuous merged in #752 (7335d0098); the five live records that named this bead now name think-flxm (#751, merge 05e95db36). Deferred work: think-flxm (n = 40 replay), think-0arj (T-192 86-root replay), both on #543's budget. #533 reply drafted in these notes."
 resolution: null
 duplicate_of: null
 ---
