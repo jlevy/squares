@@ -5,12 +5,12 @@ title: "Home page 'Recently added' section: every result, house change and beyon
 kind: feature
 status: open
 priority: 1
-version: 2
+version: 3
 labels:
   - site
 dependencies: []
 created_at: 2026-10-22T20:33:34.936Z
-updated_at: 2026-10-23T00:18:55.197Z
+updated_at: 2026-10-23T01:45:52.850Z
 ---
 Owner, 22 Oct: 'It should be clear if you come to the site and see all the things that have recently merged now.' c-lane-home-recent-1022, branch claude/home-recently-added.
 
@@ -22,3 +22,5 @@ Owner, 22 Oct: 'It should be clear if you come to the site and see all the thing
 - Reuses results.css and the results renderer; results.html is byte-identical apart from the stylesheet hash.
 - No site page lists beyond-horizon rows. Proposed smallest page: a "Beyond n = 324" table on atlas.html under the Frontier Survey, generated from the current rows.
 - Tests: tests/test_home_recent.py (8), test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts (1280/390, light/dark, no-JS).
+
+2026-10-23 (c-lane-home-recent-1022): review A fixes at e07648d0e. Houses and rows now dated by the day main first held them via packing/frontier/landings.yaml (schema Landings/v1), written by stamp_landed at the merge step (branch_additions) and backfilled from main's first-parent history; no render reads Git (OR-18). One window for all kinds (arrival_reference); intro names the days shown (16-23 Oct). Render no longer reads upper_bound_houses (removed from RENDER_INPUTS and pages.yml). Edit tier passed at 52ff7795a.
