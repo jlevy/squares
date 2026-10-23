@@ -3240,7 +3240,7 @@ sources:
     venue: GitHub
     dated: '2026-10-22'
     lineage: builds-on-project
-    credit: Polkovskyi after Couzo
+    credit: Polkovskyi after Couzo, Levy
     note: >-
       Issue 732's exact certificates at 17cc220131360ef290750eb845a3544c30ccb389 in Evan
       Daniel's format, certificates/NNNN-NNNN/nN.cert, 5,468 at 328 to 9913 indexed by

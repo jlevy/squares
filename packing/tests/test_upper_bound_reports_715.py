@@ -73,6 +73,15 @@ SUPERSEDED_BY_LATER = (
     994,
     996,
 )
+#: The rows of this import that issue 732's rows supersede, recorded in report order by
+#: the walk of 23 October for that issue (upper-bounds-issue732-20261023), and the counts
+#: where issue 732's row supersedes issue 719's in turn.
+LATER_732 = "mishapolk-issue732-2026-10-22"
+AFTER_LATER_732 = frozenset({869, 932, 994})
+SUPERSEDED_BY_732 = frozenset(
+    {461, 506, 599, 645, 646, 647, 648, 651, 653, 696, 697, 698, 702, 750, 751, 752}
+    | {756, 807, 809, 813, 814, 864, 866, 870, 871, 923, 925, 931, 989, 995}
+)
 #: Issue 702's exact side at 343, which this import's row supersedes in report order.
 SIDE_702 = Fraction(18977682482404124568634475670459, 10**30)
 #: The certificates the issue restates that earlier packets already retain, byte for byte.
@@ -165,7 +174,12 @@ def test_the_recorded_rows_are_the_claims_record_and_supersede_the_rows_before_t
         if n in SUPERSEDED_BY_LATER:
             assert rows[SOURCE]["disposition"] == "superseded"
             assert rows[SOURCE]["superseded_by"] == LATER
-            assert current[n]["source_id"] == LATER
+            assert current[n]["source_id"] == (LATER_732 if n in AFTER_LATER_732 else LATER)
+            continue
+        if n in SUPERSEDED_BY_732:
+            assert rows[SOURCE]["disposition"] == "superseded"
+            assert rows[SOURCE]["superseded_by"] == LATER_732
+            assert current[n]["source_id"] == LATER_732
             continue
         assert rows[SOURCE]["disposition"] == "tracked-outside-case-corpus"
         assert current[n]["source_id"] == SOURCE
