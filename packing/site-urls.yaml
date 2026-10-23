@@ -3499,7 +3499,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/103.html
   canonical: cases/103.html
@@ -3683,7 +3683,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/124.html
   canonical: cases/124.html
@@ -3947,7 +3947,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/154.html
   canonical: cases/154.html
@@ -4427,7 +4427,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/208.html
   canonical: cases/208.html
@@ -4875,7 +4875,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/259.html
   canonical: cases/259.html
@@ -4883,7 +4883,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/26.html
   canonical: cases/26.html
@@ -5203,7 +5203,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/296.html
   canonical: cases/296.html
@@ -5275,7 +5275,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/303.html
   canonical: cases/303.html
@@ -5803,7 +5803,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/71.html
   canonical: cases/71.html

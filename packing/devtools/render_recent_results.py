@@ -78,6 +78,7 @@ from decimal import Decimal
 from fractions import Fraction
 from typing import Any, NamedTuple
 
+from devtools import exact_sides
 from devtools.build_bound_citations import (
     BIBLIOGRAPHY,
     PROJECT_NAME,
@@ -255,6 +256,21 @@ class Held(NamedTuple):
     """Entries an upper bound, verified or reported, rests on."""
 
 
+#: How narrow the enclosure of an algebraic house's written side is (`span`): the root is
+#: held exactly, so the enclosure narrows past any print a register entry states.
+ROOT_WIDTH = Fraction(1, 10**60)
+
+
+def _root_side(text: object) -> exact_sides.Algebraic | None:
+    """An algebraic house's side as the house writer writes it (`exact_sides.form`), held
+    exactly, or None for any other form."""
+    try:
+        side = exact_sides.read_form(str(text or ""))
+    except exact_sides.ExactSideError:
+        return None
+    return side if isinstance(side, exact_sides.Algebraic) else None
+
+
 def _rational(text: object) -> Fraction | None:
     """An exact form as a number, or None where it is a closed form such as a root."""
     if text is None:
@@ -292,10 +308,15 @@ def span(bound: Mapping[str, Any]) -> tuple[Fraction, Fraction]:
     the printed value is a display that may be cut or rounded either way, so it stands for
     every number within one unit of its last printed place, as
     `bounds_agree_at_declared_precision` reads a display: n = 5's verified ceiling prints
-    `2 + (1/2)sqrt(2)` rounded up in its 32nd place."""
+    `2 + (1/2)sqrt(2)` rounded up in its 32nd place. An algebraic house's side, written as
+    the one root of its minimal polynomial in an interval (`exact_sides.form`), is held
+    exactly, and its span is an enclosure `ROOT_WIDTH` wide."""
     rational = _rational(bound.get("exact_form"))
     if rational is not None:
         return rational, rational
+    rooted = _root_side(bound.get("exact_form"))
+    if rooted is not None:
+        return exact_sides.enclosure(rooted, ROOT_WIDTH)
     value = Fraction(str(bound["value"]))
     exponent = Decimal(str(bound["value"])).as_tuple().exponent
     if not bound.get("exact_form") or not isinstance(exponent, int):
