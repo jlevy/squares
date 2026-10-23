@@ -31609,7 +31609,9 @@ results:
       674331486483935962030285457609/62500000000000000000000000000 and s(204) <=
       882663895519250432/59604644775390625, below the case's house best packing at each when
       it was reported, T-174 at 105 by 5.18e-12 and T-225 at 204 by 1.006e-8. Since 23
-      October 2026 each case holds it as its house best packing.
+      October 2026 the case at 105 holds it as its house best packing; the case at 204 held
+      it from 23 to 24 October 2026, when T-231, the same packing at its solved side, took
+      its place.
 
       The two certificates and their duplicate-square and outside-container controls were
       decided here on 22 October 2026 by both maintained exact routes from the packet's
@@ -31774,8 +31776,8 @@ results:
 
       This entry stands as registered and adopted at 204 on the file the issue names,
       n-204.cert, registered before the author claimed the lower file on 22 October. That
-      file is T-231, by the same author and from the same commit, and it supersedes this
-      entry at 204 once the case adopts it; 105 is untouched. The ledger keeps one claim of
+      file is T-231, by the same author and from the same commit, and it superseded this
+      entry at 204 when the case adopted it on 24 October 2026; 105 is untouched. The ledger keeps one claim of
       a report a count, the least side its commit states there (#722's review A, A2), so
       the ledger of 22 October for issue 719 walks the issue's claim at 204 at the lower
       file's side.
@@ -32004,8 +32006,8 @@ results:
     claim: >-
       One complete rational source certificate of issue 719 reports a finite upper-bound
       improvement at the exact side it states: s(204) <= 14.808642830513087197802415708703,
-      below the case's house best packing, T-229, by 1.48e-11. The case lanes are unchanged
-      until the entry is adopted, so it is pending adoption.
+      below the case's house best packing when it was claimed, T-229, by 1.48e-11. Since 24
+      October 2026 the case holds it as its house best packing.
 
       The certificate and its duplicate-square and outside-container controls were decided
       here on 23 October 2026 by both maintained exact routes, with sharp controls at exact
@@ -32152,6 +32154,13 @@ results:
       route no arithmetic library. Its author is a Claude agent, a system family the
       producer's measured method also used. No two independent methods, human oversight or
       optimality is claimed.
+
+      The case at 204 adopted this certificate as its house best packing on 24 October 2026,
+      from T-229, which stays retained as history. Both strong generators decided the new
+      witness in the same pull request: grid-slack's half-degree view is drawn, with the
+      figures it had on T-229's witness, and Evan Daniel's regularizer solved the witness to
+      its own side, digit for digit, so no view lies below it
+      (cases/regularized_drawings/think-h01y-2026-10-24).
 
       V3 and C3 rest on the 23 October stage 4 review
       (docs/project/reviews/review-2026-10-23-mishapolk-n204.md) and the replay it
@@ -32863,7 +32872,7 @@ regularized_drawings:
         max_turn_deg: 1.61089
       view: packing/atlas/known-best/regularized/n-199-regularized.yaml.gz
     - n: 204
-      of: T-229
+      of: T-231
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
       modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]

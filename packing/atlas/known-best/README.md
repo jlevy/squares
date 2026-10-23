@@ -728,8 +728,9 @@ with its witness, and at 204 the settlement on T-225’s witness leaves `SETTLED
 his regularizer solved the witness $1.48 \times 10^{-11}$ lower, to exactly the side of
 the release’s other 204 file, `certificates/n204.cert`, which the #719 packet pins by
 digest: Polkovskyi’s own publication, in the same commit as T-229’s certificate
-(`1851c2c7`), not drawn, which think-h01y derives, replays and records under his credit.
-The evidence is retained in
+(`1851c2c7`), not drawn.
+think-h01y registered it under his credit as T-231, and the pass of 24 October adopted
+it (below). The evidence is retained in
 [`cases/regularized_drawings/think-4h23-2026-10-23/`](../../cases/regularized_drawings/think-4h23-2026-10-23/README.md).
 After it the index draws 95 views: 35 by the axis tool, 40 by Evan Daniel’s regularizer
 and 20 by the grid-slack generator’s version 1.
@@ -748,6 +749,21 @@ the axis tool’s view is drawn.
 `SETTLED` records 303 decided on the new witness.
 The evidence is retained in
 [`cases/regularized_drawings/think-icp1-2026-10-23/`](../../cases/regularized_drawings/think-icp1-2026-10-23/README.md).
+The index still draws 95 views.
+
+The pass of 24 October 2026 adopted that other 204 file, which the author claimed on
+#719 and the record registers as T-231 (think-h01y), at 204, moving the house best
+packing from T-229 by $1.48 \times 10^{-11}$ to the same packing at its solved side.
+Both generators ran on the new witness: Evan Daniel’s regularizer
+(`evand-regularize-adopt-2026-10-24-n204-evand`, 93 CPU-seconds) solves it to its own
+side, digit for digit, and its same-side view is refused at row 7, and grid-slack at
+0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-24-n204-grid-deg05`, `-grid-deg1` and
+`-grid-deg5`, 95 CPU-seconds) draws views at the witness’s side with the figures it had
+on T-229’s: 6 light, 34 uneven and 6 near-axis squares and 505 / 543 sides, against 14,
+59, 11 and 421 / 511 for the axis tool’s view of the new witness.
+The half-degree view is admitted at row 10 and drawn.
+The evidence is retained in
+[`cases/regularized_drawings/think-h01y-2026-10-24/`](../../cases/regularized_drawings/think-h01y-2026-10-24/README.md).
 The index still draws 95 views.
 
 ### The default picture

@@ -556,7 +556,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/201.html | cases/201.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/202.html | cases/202.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/203.html | cases/203.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/204.html | cases/204.html | record | overview | 2026-10-03 | 2026-10-23 | live |
+| cases/204.html | cases/204.html | record | overview | 2026-10-03 | 2026-10-24 | live |
 | cases/205.html | cases/205.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/206.html | cases/206.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/207.html | cases/207.html | record | overview | 2026-10-03 | 2026-10-15 | live |

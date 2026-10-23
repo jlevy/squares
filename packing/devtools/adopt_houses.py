@@ -978,6 +978,42 @@ RESULTS: dict[str, Prose] = {
             "at a wall and at the least-gap pair"
         ),
     ),
+    "T-231": Prose(
+        author="Mykhailo Polkovskyi",
+        reported=(
+            "on [jlevy/squares#719](https://github.com/jlevy/squares/issues/719), the "
+            "release’s second 204 file, which he claimed after T-229 was registered"
+        ),
+        producer_route=True,
+        ai=(
+            "The issue says Gemini assisted with solver scripting, precision checks and "
+            "formatting."
+        ),
+        routes=(
+            "One maintained route, `sqpack`’s exact verifier, is this repository’s "
+            "`sqpack/verify.py`, which the author says he imported as a module in his batch "
+            "harness, so the replay shares the producer’s components. The review’s checker "
+            "shares no code with either maintained route or the source."
+        ),
+        lineage=(
+            "The release published it in the same commit as T-229’s certificate, and the "
+            "author’s comment of 23 October says his continuous SQP optimization at 204 "
+            "started from Francisco Couzo’s #678 certificate (T-223), in Couzo’s own frame. "
+            "Measured by the 23 October review, it is T-229’s packing at its solved side: "
+            "nearest centres pair the two one to one under the identity, no square moving "
+            "beyond $2.02 \\times 10^{-11}$, and T-229’s certificate is this one dilated by "
+            "$1 + 10^{-12}$. Its side and the rows that Evan Daniel’s exact solver "
+            "determines equal that solver’s output for T-229’s arrangement, row for row, a "
+            "method the source does not name (T-231). The packing is not rigid: its 21 free "
+            "squares keep clearances of $5.774 \\times 10^{-9}$ to $1.25 \\times 10^{-2}$."
+        ),
+        third_route=(
+            ", and the 23 October review’s clean-room checker decided it again on two routes "
+            "of its own, in integers alone and in rationals with exact clipping area and "
+            "Euclidean distance on every pair; its sharp controls at $10^{-30}$ found both "
+            "maintained routes exact at every wall and at three kinds of least-gap pair"
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1269,7 +1305,10 @@ CREDITS: dict[int, Credit] = {
     # issue 719 says the solve started from Couzo's #678 certificate, not from Evan Daniel's
     # view (T-225), so T-229's item names T-223 and Daniel is no antecedent here (think-xyhn).
     # The packing stays with Couzo, whose source's manifest credits Polkovskyi's own
-    # construction as its seed (A11 of #716).
+    # construction as its seed (A11 of #716). The pass of 24 October 2026 adopted the
+    # release's other 204 file (T-231), T-229's packing at its solved side, which T-231's
+    # item names, so the credit is the same; Evan Daniel's exact solver, measured as its
+    # method by the 23 October review, is a method credit and no antecedent of the packing.
     204: Credit(
         (COUZO,),
         (POLKOVSKYI,),

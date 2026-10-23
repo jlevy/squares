@@ -250,7 +250,7 @@ Each is pinned by digest in the manifest, and the reply asks the author about it
   `1851c2c`, first published both files, and the ledger keeps a report’s least side at a
   count, so it walks #719’s claim at 204 at this file’s side. T-229 stands as registered
   and adopted on `n-204.cert`, the file the issue names, before that claim; T-231
-  supersedes it at 204 once the case adopts it.
+  superseded it at 204 when the case adopted it on 24 October.
 
 ## What Is Not Established
 

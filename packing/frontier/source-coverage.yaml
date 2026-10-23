@@ -8856,11 +8856,11 @@ selected_overrides:
   reason: The complete rational precision refinement is strictly smaller than both previous exact
     upper lanes.
 - n: 204
-  source_id: mishapolk-issue719-2026-10-22-in-corpus
-  value: '14.8086428305278967'
-  evidence: E-mishapolk-719-certificate-report
+  source_id: mishapolk-n204-2026-10-22
+  value: '14.8086428305130872'
+  evidence: E-mishapolk-n204-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-23 (T-229).
+    a replay here and an accepted review, adopted on 2026-10-24 (T-231).
 - n: 206
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '14.8601586633919032367'
@@ -9725,7 +9725,7 @@ superseded_reports:
 - n: 204
   source_id: evand-square-packing-2026-10-05
   value: '14.822875655532295295399036633375'
-  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+  superseded_by: mishapolk-n204-2026-10-22
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -11064,8 +11064,8 @@ superseded_reports:
   source_id: dostashev-compositions-2026-10-12
   value: '14.8086632343869566'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-229's exact side is smaller.
-  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+    and T-231's exact side is smaller.
+  superseded_by: mishapolk-n204-2026-10-22
 - n: 211
   source_id: couzo-certificates-2026-10-13-in-corpus
   value: '14.9935589139740062'
@@ -11358,8 +11358,8 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '14.80866323438695657'
   reason: The house from 2026-10-16 until 2026-10-20; its certificate stays retained and verified,
-    and T-229's exact side is smaller.
-  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+    and T-231's exact side is smaller.
+  superseded_by: mishapolk-n204-2026-10-22
 - n: 154
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '12.92120657713263105'
@@ -11388,8 +11388,8 @@ superseded_reports:
   source_id: couzo-issue678-2026-10-18-in-corpus
   value: '14.8086428419812473'
   reason: The house from 2026-10-20 until 2026-10-22; its certificate stays retained and verified,
-    and T-229's exact side is smaller.
-  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+    and T-231's exact side is smaller.
+  superseded_by: mishapolk-n204-2026-10-22
 - n: 229
   source_id: evand-n229-dilation-update-2026-10-18
   value: '15.6501615138955532'
@@ -11418,14 +11418,20 @@ superseded_reports:
   source_id: evand-regularized-2026-10-20
   value: '14.8086428405914940'
   reason: The house from 2026-10-22 until 2026-10-23; its certificate stays retained and verified,
-    and T-229's exact side is smaller.
-  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+    and T-231's exact side is smaller.
+  superseded_by: mishapolk-n204-2026-10-22
 - n: 303
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.90995829106990799'
   reason: The house from 2026-10-16 until 2026-10-23; its certificate stays retained and verified,
     and T-230's exact side is smaller.
   superseded_by: evand-n303-2026-10-22
+- n: 204
+  source_id: mishapolk-issue719-2026-10-22-in-corpus
+  value: '14.8086428305278967'
+  reason: The house from 2026-10-23 until 2026-10-24; its certificate stays retained and verified,
+    and T-231's exact side is smaller.
+  superseded_by: mishapolk-n204-2026-10-22
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

@@ -12,7 +12,9 @@ Its header states
 $s(204) \le 14808642830513087197802415708703/10^{30} = 14.808642830513087197802415708703$,
 exactly $14809457954896291297/10^{30} \approx 1.4809 \times 10^{-11}$ below T-229’s
 $882663895519250432/59604644775390625$.
-The record registers it as T-231.
+The record registers it as T-231, confirmed on 23 October 2026 and the house best packing
+at 204 since the pass of 24 October 2026, regularized in the same pull request
+([think-h01y-2026-10-24](../../../cases/regularized_drawings/think-h01y-2026-10-24/README.md)).
 
 The source was read at 05:09Z on 23 October 2026 from a blobless clone, whose head stood
 at `7b6366fb5e7643772541da21329cda4705be57d5` (2026-10-23T01:50:22Z).
@@ -95,7 +97,8 @@ transcribes #719’s claim at 204 at this file’s side, with `n-204.cert` besid
 same commit. It records it below T-225, the case’s house when it was read.
 T-229 stands as registered and adopted on `n-204.cert`, the issue’s named file, before
 the author claimed this file on 22 October at 20:15:57Z. T-231 registers this file, by
-the same author and from the same commit, and supersedes T-229 at 204. 105 is untouched.
+the same author and from the same commit, and superseded T-229 at 204 on 24 October. 105
+is untouched.
 
 ## Against the Record
 

@@ -20627,15 +20627,21 @@ issues:
 
       The lower 204 file (n204-lower) is registered as T-231 from its own packet,
       mishapolk-n204-2026-10-22, retained under the author's written grant (answer 5 of his
-      comment of 20:15:57Z): V0/C0, its replay passed on both maintained routes with every
-      control refused, sharp controls included, and its stage 4 review is think-tetq, then
-      adoption at 204 and regularization (think-h01y). The commit 1851c2c first published both
-      204 files, and a report keeps one claim a count, the least side its commit states there
+      comment of 20:15:57Z). Its replay passed on both maintained routes with every control
+      refused, sharp controls included; the stage 4 review of 23 October (think-tetq) accepted
+      it, so it is V3/C3, confirmed, independently re-implemented, at S2; and the pass of 24
+      October adopted it at 204 from T-229, regularized in the same pull request (grid-slack's
+      half-degree view). The review measured the two 204 files as one solved packing at two
+      paddings, with the side and determined rows of Evan Daniel's exact solver, which the
+      source does not name; asks 1 and 2 above put its questions 1 and 2 to the author, and
+      question 3 (which file came first) goes in the reply. The commit 1851c2c first
+      published both 204 files, and a report keeps one claim a count, the least side its
+      commit states there
       (#722's review A, A2), so the ledger of 22 October walks #719's claim at 204 at
       n204.cert's side. T-229 stands as registered and adopted at 204 on n-204.cert, the file
       the issue names, registered before the author claimed the lower file on 22 October at
-      20:15:57Z; T-231, by the same author and from the same commit, supersedes it at 204 once
-      the case adopts it. 105 is untouched.
+      20:15:57Z; T-231, by the same author and from the same commit, superseded it at 204 on
+      24 October. 105 is untouched.
   - number: 728
     title: 's(303) ≤ 17.909772217275: registration request'
     author: evand
