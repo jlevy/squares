@@ -792,13 +792,13 @@ def test_an_algebraic_house_is_its_number_field_fact_with_its_jobs_over_the_fiel
 
 def test_a_form_of_another_count_field_or_roster_is_refused() -> None:
     """The form reader refuses a form of another count, of another field degree or with a
-    square too few, and reads the retained one, bound to the digest its manifest pins."""
+    square too few, and reads the retained one, whose custody the acquisition check holds."""
     from devtools import algebraic_witness_reports as fields  # noqa: PLC0415
 
     packet = houses.sources()["T-193"].packet
     declaration = fields.load_declaration(packet)
     row = next(row for row in declaration["witnesses"] if row["n"] == 102)
-    raw = fields._retained_form(packet, fields.reports.acquisition(packet), row)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    raw = fields._retained_form(fields.reports.acquisition(packet), row)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
     geometry = fields.evand_minpoly_geometry(raw, row)
     assert len(geometry["squares"]) == 102
     data = json.loads(gzip.decompress(raw))

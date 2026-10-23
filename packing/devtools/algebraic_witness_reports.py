@@ -45,7 +45,6 @@ from __future__ import annotations
 import argparse
 import copy
 import gzip
-import hashlib
 import json
 import re
 import subprocess
@@ -401,18 +400,15 @@ def derive(
 MAX_FORM_BYTES = 8_000_000
 
 
-def _retained_form(packet: Path, source: acquire_source.Source, row: Witness) -> bytes:
-    """The upstream bytes of a retained exact form, bound to the digest the manifest pins,
-    from the packet's acquisition record `source` once its custody is checked."""
+def _retained_form(source: acquire_source.Source, row: Witness) -> bytes:
+    """The upstream bytes of a retained exact form, from the packet's acquisition record
+    `source`. They are read from Git and compared with nothing (OR-16): their custody
+    against the subtree manifest's pin is `acquire_source`'s, which `reports.acquisition`
+    checks before any fact is written."""
     path = REPO / source["archived_path"] / row["path"]
     reports.ensure_private(path)
     _require(path.is_file(), f"n={row['n']}: the exact form is not retained in the packet")
-    raw = path.read_bytes()
-    _require(
-        hashlib.sha256(raw).hexdigest() == _pinned_digest(packet, row["path"]),
-        f"n={row['n']}: the retained exact form differs from its pinned digest",
-    )
-    return raw
+    return path.read_bytes()
 
 
 def _ratio(value: object, where: str) -> Fraction:
@@ -528,7 +524,7 @@ def derive_forms(packet: Path, *, check: bool = False) -> list[retained_data.Row
     for row in declaration["witnesses"]:
         if "form" not in row:
             continue
-        geometry = FORMS[row["form"]](_retained_form(packet, source, row), row)
+        geometry = FORMS[row["form"]](_retained_form(source, row), row)
         written.append(_write_fact(packet, declaration, row, geometry, check=check))
     return written
 
