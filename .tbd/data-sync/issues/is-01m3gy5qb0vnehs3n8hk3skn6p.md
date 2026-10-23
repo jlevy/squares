@@ -3,13 +3,17 @@ type: is
 id: is-01m3gy5qb0vnehs3n8hk3skn6p
 title: "Explainer PDF: one KaTeX glyph's baseline moves between page loads, past D-490's draw-twice containment"
 kind: bug
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
+delegate: ci-followups
 labels: []
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-09-27T08:02:16.543Z
-updated_at: 2026-09-27T08:02:16.543Z
+updated_at: 2026-10-23T04:52:09.584Z
+started_at: 2026-10-23T04:52:09.582Z
 ---
 PR 235 pull_request run 36126482461 (attempt 1, head de282a855, records-only) failed the Pages `pdf` job at `render_explainer_pdf --check-artifact`: `849931 then 849931 bytes, normalised; length delta 0 ... first difference at byte 514532, in object 144`, inside a FlateDecode stream. The unchanged rerun (attempt 2) passed, and `pages-required` then refused the partial rerun as unmeasurable, by design. D-509 records it; it recurs D-490 (think-ptit, think-a5qp).
 
