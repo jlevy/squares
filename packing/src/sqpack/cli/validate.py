@@ -6461,6 +6461,27 @@ def _push_test_step(
     )
 
 
+def _push_storage_step(base: str) -> Step:
+    """The added-blob guard against the `--push` base, the local half of the PR gate.
+
+    The pull request runs `devtools.check_added_blobs` with its own base and head SHA;
+    this runs it against `--since` (default `origin/main`), which is that base once
+    fetched, so a bulk blob is refused before it is pushed rather than after (`OR-18`,
+    review A3 on #406). It has no `touches`: any path can carry a blob, so every change
+    selects it. It reads Git metadata, streams each new blob's content through zlib to
+    size it as Git stores it, and counts the thin pack of the branch's new objects for the
+    total (`OR-18`), which costs about a second on a routine branch and is bounded by the
+    guard's own 30-second deadline.
+    """
+
+    def action(context: Context) -> str:
+        return _run(
+            context, (sys.executable, "-m", "devtools.check_added_blobs", "--base", base)
+        )
+
+    return Step(name="added Git blob storage", action=action, fast=True)
+
+
 def _select_steps(
     *,
     only: list[str],
@@ -7906,11 +7927,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 and (step.broad or (step.reachable_test_files or 0) >= jobs)
             ):
                 exclusive_step_name = step.name
-            selected = [*selected, step]
+            selected = [*selected, _push_storage_step(base), step]
             scope = "the whole suite" if step.broad else "a reachable subset"
             _announce(
                 namespace,
-                f"== pre-push floor against {base}: tests select {scope} "
+                f"== pre-push floor against {base}: added-blob guard, and tests select {scope} "
                 f"({'quick + slow' if namespace.include_reachable_slow else 'quick'} lane) ==",
                 "",
             )
