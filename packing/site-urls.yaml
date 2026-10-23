@@ -5274,7 +5274,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/304.html
   canonical: cases/304.html
@@ -18618,6 +18618,38 @@ urls:
       - packing/resources/web/mishapolk-issue719-2026-10-22/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md
       - packing/devtools/upper_bound_reports.py
+- path: result/t-230.html
+  canonical: result/t-230.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 303
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n303 2026-10-22]'
+      published: '2026-10-22'
+    builds_on: null
+    evidence:
+    - E-evand-728-n303-report
+    - E-evand-728-n303-exact-feasibility
+    - E-evand-728-n303-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n303-2026-10-22/README.md
+    - packing/resources/web/evand-n303-2026-10-22/acquisition/claims.json
+    - packing/resources/web/evand-n303-2026-10-22/source/search/packer/candidates/s303_r303w0.cert
+    - packing/resources/web/evand-n303-2026-10-22/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-n303-2026-10-22/measure/identity.json
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-22-daniel-728.md
+    - packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/README.md
 - path: results.html
   canonical: results.html
   kind: page

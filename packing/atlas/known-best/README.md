@@ -734,6 +734,22 @@ The evidence is retained in
 After it the index draws 95 views: 35 by the axis tool, 40 by Evan Daniel’s regularizer
 and 20 by the grid-slack generator’s version 1.
 
+The same pass of 23 October 2026 adopted Evan Daniel’s #728 certificate (T-230,
+think-icp1) at 303, moving the house best packing from T-186 by $1.86 \times 10^{-4}$.
+Both generators ran on the new witness: Evan Daniel’s regularizer
+(`evand-regularize-adopt-2026-10-23-n303-evand`, 50 CPU-seconds) finds it not
+first-order jammed and draws no view (row 1), and grid-slack at 0.5, 1 and 5 degrees
+(`grid-slack-adopt-2026-10-23-n303-grid-deg05`, `-grid-deg1` and `-grid-deg5`, 50
+CPU-seconds) draws one view at the witness’s side, straightening its 15 near-upright
+squares. Against the axis tool’s view of the new witness it has 0 near-axis squares
+against 2, 40 angle classes against 42 and 766 / 782 sides against 758 / 776, and 13
+light squares against 12, so the selection sends it to review at row 7 (think-ykgh), and
+the axis tool’s view is drawn.
+`SETTLED` records 303 decided on the new witness.
+The evidence is retained in
+[`cases/regularized_drawings/think-icp1-2026-10-23/`](../../cases/regularized_drawings/think-icp1-2026-10-23/README.md).
+The index still draws 95 views.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

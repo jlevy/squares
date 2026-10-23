@@ -1,0 +1,165 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/728",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n303 2026-10-22]",
+  "report_evidence": "E-evand-728-n303-report",
+  "receipt_format": "evand-728-exact-replay-v1",
+  "witness_prefix": "W-evand-728-n",
+  "claim_limitations": "Complete f06521f rational centre/half-angle dilation certificate read exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-22",
+  "read_at_main": "cacdafc1f86603687c6eaef1fe35c52bed2b11e5",
+  "certificates": [
+    {
+      "n": 303,
+      "path": "search/packer/candidates/s303_r303w0.cert",
+      "format": "evand-cert",
+      "offered": "17.909772217275",
+      "first_committed": "2026-10-22T17:14:52Z",
+      "same_packing": []
+    }
+  ],
+  "requested": [
+    303
+  ],
+  "replayed": [
+    303
+  ],
+  "houses": [
+    {
+      "n": 303,
+      "reader": "[Mishapolk KKT refinements 2026-10-14]",
+      "source_key": "[Mishapolk KKT refinements 2026-10-14]",
+      "holders": "Mykhailo Polkovskyi, after PingYou Ltd, of Daniil Ostashev's packing",
+      "result": "T-186",
+      "reported_value": "17.90995829106990799",
+      "verified_value": "17.90995829106990799",
+      "evidence": [
+        "E-mishapolk-70a033f-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 303,
+      "report": "T-174 (PR #574)",
+      "url": "https://github.com/jlevy/squares/pull/574",
+      "holders": "PingYou Ltd, of Daniil Ostashev's packing",
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "result": "T-174"
+    },
+    {
+      "n": 303,
+      "report": "T-162 (#562)",
+      "url": "https://github.com/jlevy/squares/issues/562",
+      "holders": "Daniil Ostashev",
+      "reader": "[Ostashev compositions 2026-10-12]",
+      "result": "T-162"
+    },
+    {
+      "n": 303,
+      "report": "T-146 (no issue)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Evan Daniel",
+      "reader": "[Daniel regularized lists 2026-10-10]",
+      "result": "T-146"
+    },
+    {
+      "n": 303,
+      "report": "T-138 (#470)",
+      "url": "https://github.com/Mishapolk/square-packing-records/tree/dd3da5c753c5ded6cb3b89476193b7b801005415",
+      "holders": "Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo, Xu, Levy",
+      "result": "T-138",
+      "reader": "[Mishapolk decimal poses 2026-10-09]"
+    },
+    {
+      "n": 303,
+      "report": "T-136 (#481)",
+      "url": "https://github.com/itsnaka/squish-certs/tree/d45669b48cc97ad3aa17a6c847a8d06630f66eac",
+      "holders": "Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba, Levy",
+      "result": "T-136",
+      "reader": "[SQUISH third request 2026-10-09]"
+    },
+    {
+      "n": 303,
+      "report": "T-134 (#476)",
+      "url": "https://github.com/franciscouzo/square-packing/tree/02f969075f79d5e13fa21e09e381a44e8647b452",
+      "holders": "Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth, Levy",
+      "result": "T-134",
+      "reader": "[Couzo exact certificates 2026-10-09]"
+    },
+    {
+      "n": 303,
+      "report": "T-113 (#401)",
+      "url": "https://github.com/itsnaka/squish-certs/tree/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06",
+      "holders": "Chaoweeraprasit after Ellsworth",
+      "result": "T-113",
+      "reader": "[SQUISH ten packings 2026-10-07]"
+    },
+    {
+      "n": 303,
+      "report": "T-098 (#375)",
+      "url": "https://github.com/evand/square-packing/tree/13ee36e5807727d12a5da36b9b90a96bdba272bf/s12/search/exact",
+      "holders": "Daniel after Couzo, de Winter, Ellsworth, Levy",
+      "result": "T-098",
+      "reader": "[evand exact optima 2026-10-05]"
+    },
+    {
+      "n": 303,
+      "report": "T-092 (no issue)",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6042c56b43b64c09fe5a32c64879e698f399beaf",
+      "holders": "Couzo",
+      "result": "T-092",
+      "printed": "17.92434100986025",
+      "rounding": "up"
+    },
+    {
+      "n": 303,
+      "report": "T-056",
+      "url": "https://github.com/franciscouzo/square-packing",
+      "holders": "Francisco Couzo",
+      "result": "T-056",
+      "printed": "17.924349265547932",
+      "rounding": "up"
+    },
+    {
+      "n": 303,
+      "report": "#488 (unnamed)",
+      "url": "https://github.com/franciscouzo/square-packing/blob/3ef76349025bf4bfa99c9c3600bcc273f4c33e02/certificates/n303.cert",
+      "holders": "Francisco Couzo",
+      "reader": "[Couzo certificates 2026-10-10]"
+    },
+    {
+      "n": 303,
+      "report": "#573",
+      "url": "https://github.com/jlevy/squares/issues/573",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk exact certificates 2026-10-12]"
+    },
+    {
+      "n": 303,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk records 2026-10-14]"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's n303 dilation certificate at f06521f, issue728",
+    "headline": "Daniel's new n303 arrangement, found from Ostashev's packing, certified exactly",
+    "significance": 3,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept the certificate, with least pair separation 1.2e-12. The source states the certificate is a dilation of a binary64 packing (search/packer/dilate_cert.py): centres and box scaled by 1 + 10^-12, coordinates rounded to rationals and each angle to a rational half-angle tangent, so every square is exactly unit; it certifies the upper bound only. The source leaves local optimality unresolved: its exact solver finds the packing not first-order jammed, and its corner-corner MILP predicts a further first-order descent of about 4.8e-7 that its descent step did not realise. It calls the packing new, not a refinement of Ostashev's #562 packing (matching distance 0.266, 91 tilted squares against 92). Those are the source's numerical statements. No source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose basin explorer started from Daniil Ostashev's #562 packing and whose near-record sweeps, crossovers and a final band flip, one tilted band reflected along its wall, reached this packing, as the issue says. The search, the checks and the request were done with Claude (Claude Code) under Evan Daniel's direction.",
+    "next_rung": "Independently review the retained replay, then adopt at 303.",
+    "bead": "think-icp1",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Ostashev, Levy",
+      "short_credit": "Daniel after Ostashev, Levy",
+      "note": "One complete exact dilation certificate at f06521f4bde9e379a91c1ea88053f3e43df8ede5, s(303) <= 447744305431858194305431410441/(25*10^27), a new arrangement found by the author's basin explorer, near-record sweeps and a final band flip from Daniil Ostashev's #562 packing, which the issue names as the start. The binary64 packing it was dilated from and the source's pipeline report are retained beside it. MIT-licensed; Claude assistance disclosed. The not-jammed verdict and the predicted descent are the author's numerical statements; no local or global optimality claim."
+    }
+  }
+}

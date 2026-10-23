@@ -1,0 +1,43 @@
+Z prints the least separating-axis gap; C prints the least squared distance (6 digits, truncated).
+case                                             route accepted     least gap / dist^2        least clearance touch
+feasible, apart                                  Z     True                 5.00000e-1             5.00000e-1 0  ok
+feasible, apart                                  C     True                          -             5.00000e-1 0  ok
+feasible, edge contact                           Z     True                          0                      0 1  ok
+feasible, edge contact                           C     True                          0                      0 1  ok
+feasible, tilted vertex on edge                  Z     True                          0             1.00000e-1 1  ok
+feasible, tilted vertex on edge                  C     True                          0             1.00000e-1 1  ok
+overlap by 1e-30, tilted vertex                  Z     False              -1.00000e-30             1.00000e-1 0  ok
+overlap by 1e-30, tilted vertex                  C     False                         -             1.00000e-1 0  ok
+feasible, tilted, four wall contacts             Z     True                          -                      0 0  ok
+feasible, tilted, four wall contacts             C     True                          -                      0 0  ok
+wall crossed by 1e-30, tilted                    Z     False                         -           -1.00000e-30 0  ok
+wall crossed by 1e-30, tilted                    C     False                         -           -1.00000e-30 0  ok
+duplicated square                                Z     False               -1.00000e+0             3.00000e-1 0  ok
+duplicated square                                C     False                         -             3.00000e-1 0  ok
+only u_j separates, gap 1/100                    Z     True                 1.00000e-2             4.11902e-1 0  ok
+only u_j separates, gap 1/100                    C     True                 1.00000e-4             4.11902e-1 0  ok
+only u_i separates (swapped), gap 1/100          Z     True                 1.00000e-2             4.11902e-1 0  ok
+only u_i separates (swapped), gap 1/100          C     True                 1.00000e-4             4.11902e-1 0  ok
+only u_j separates, contact                      Z     True                          0             4.19143e-1 1  ok
+only u_j separates, contact                      C     True                          0             4.19143e-1 1  ok
+only u_j separates, past contact by 1e-30        Z     False              -1.00000e-30             4.19143e-1 0  ok
+only u_j separates, past contact by 1e-30        C     False                         -             4.19143e-1 0  ok
+quarter turn t = 1 equals t = 0                  Z     True                          0                      0 1  ok
+quarter turn t = 1 equals t = 0                  C     True                          0                      0 1  ok
+corner to corner point contact                   Z     True                          0                      0 1  ok
+corner to corner point contact                   C     True                          0                      0 1  ok
+row count below n                                read  refused: 2 square rows for n = 3  ok
+decimal literal                                  read  refused: line 2: not a rational literal: '0.5'  ok
+zero denominator                                 read  refused: line 2: zero denominator  ok
+plus sign                                        read  refused: line 2: not a rational literal: '+1'  ok
+four fields                                      read  refused: line 2: 4 fields, not 3  ok
+blank line                                       read  refused: line 2: 1 fields, not 3  ok
+CRLF                                             read  refused: a byte outside printable ASCII and LF  ok
+tab separator                                    read  refused: a byte outside printable ASCII and LF  ok
+comment after header                             read  refused: line 2: 2 fields, not 3  ok
+non-positive side                                read  refused: side is not positive  ok
+exponent                                         read  refused: line 2: not a rational literal: '1e0'  ok
+underscore digit group                           read  refused: line 2: not a rational literal: '1_0/10'  ok
+Unicode digit                                    read  refused: a byte outside printable ASCII and LF  ok
+random agreement: 3000 pairs, apart 1453, touching 628, overlapping 919, disagreements 0
+self-test: PASS

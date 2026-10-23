@@ -1,0 +1,76 @@
+{
+ "certificate_sha256": "929c2acf72ee54a1850183fc149f06dbf35bffa2f7ee68c8f833d888400e8080",
+ "control": "square-translated-outside-container",
+ "adapter": "read",
+ "validate_job": "passed",
+ "wall_seconds": 30.39,
+ "cpu_seconds": {
+  "exact_verify": 7.1,
+  "independent": 4.32
+ },
+ "checker_input_sha256": "125d52e7e75e2d700fa6b0b251b19620a04a04e6038fa32074d8416f9a72d011",
+ "side": "447744305431858194305431410441/25000000000000000000000000000",
+ "exact_verify": {
+  "keys": [
+   "coordinate_provenance",
+   "failures",
+   "field_certificate",
+   "id",
+   "limitations",
+   "method",
+   "minimum_best_pair_gap",
+   "minimum_containment_clearance",
+   "n",
+   "operation",
+   "pairs_tested",
+   "side",
+   "verification_passed"
+  ],
+  "verification_passed": false,
+  "pairs_tested": 45753,
+  "minimum_containment_clearance": "-300000000000060480000000010479/100000000000000000000000000000",
+  "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+  "failures": [
+   [
+    "container",
+    "square 0 violates x<=s"
+   ],
+   [
+    "container",
+    "square 0 violates x<=s"
+   ],
+   [
+    "container",
+    "square 0 violates x<=s"
+   ],
+   [
+    "container",
+    "square 0 violates x<=s"
+   ]
+  ],
+  "failure_count": 4
+ },
+ "independent": {
+  "keys": [
+   "coordinate_provenance",
+   "failures",
+   "field",
+   "limitations",
+   "method",
+   "minimum_best_pair_gap",
+   "minimum_containment_clearance",
+   "n",
+   "pairs_tested",
+   "side",
+   "verification_passed"
+  ],
+  "verification_passed": false,
+  "pairs_tested": 45753,
+  "minimum_containment_clearance": "-300000000000060480000000010479/100000000000000000000000000000",
+  "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+  "failures": [
+   "container penetration -300000000000060480000000010479/100000000000000000000000000000"
+  ],
+  "failure_count": 1
+ }
+}

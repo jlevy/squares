@@ -1,0 +1,54 @@
+{
+ "#728": {
+  "exactly_tilted": 106,
+  "tilted_beyond_1e-12_deg": 96,
+  "tilted_beyond_1e-09_deg": 93,
+  "tilted_beyond_1e-06_deg": 93,
+  "tilted_beyond_0.001_deg": 93,
+  "tilted_beyond_0.01_deg": 93,
+  "tilted_beyond_0.1_deg": 91,
+  "tilted_beyond_1_deg": 91
+ },
+ "house (T-186, W-known-best-n303)": {
+  "exactly_tilted": 92,
+  "tilted_beyond_1e-12_deg": 92,
+  "tilted_beyond_1e-09_deg": 92,
+  "tilted_beyond_1e-06_deg": 92,
+  "tilted_beyond_0.001_deg": 92,
+  "tilted_beyond_0.01_deg": 92,
+  "tilted_beyond_0.1_deg": 92,
+  "tilted_beyond_1_deg": 92
+ },
+ "T-146 (Daniel's view of Chaoweeraprasit's SQUISH packing)": {
+  "exactly_tilted": 55,
+  "tilted_beyond_1e-12_deg": 55,
+  "tilted_beyond_1e-09_deg": 55,
+  "tilted_beyond_1e-06_deg": 55,
+  "tilted_beyond_0.001_deg": 55,
+  "tilted_beyond_0.01_deg": 55,
+  "tilted_beyond_0.1_deg": 55,
+  "tilted_beyond_1_deg": 55
+ }
+}
+against house (T-186, W-known-best-n303): best symmetry identity
+  identity           1:1 False max 0.910066 rms 0.187773 mean 0.074438 bneck 0.910066 <=1e-6  36 >1e-3 123 >0.1  64 >0.5   8 turn 44.3934 >1deg  52 reversed  24
+    best: within 1e-3 180, within 0.1 239, tilt reversed 24 (residual <= 0.9629 deg), moved beyond 0.1 inside [[1.5000000000018126, 0.5000000000006048], [17.40977221727372, 17.257027615099148]]
+  mirror x           1:1 False max 1.075911 rms 0.593628 mean 0.490181 bneck        - <=1e-6   2 >1e-3 291 >0.1 252 >0.5 135 turn 25.8992 >1deg 164 reversed   0
+  mirror y           1:1 False max 1.075911 rms 0.594125 mean 0.484209 bneck        - <=1e-6   2 >1e-3 289 >0.1 239 >0.5 137 turn 43.6966 >1deg 168 reversed  11
+  half turn          1:1 False max 1.286612 rms 0.530850 mean 0.375126 bneck        - <=1e-6  37 >1e-3 215 >0.1 191 >0.5 108 turn 44.0565 >1deg 145 reversed  10
+  transpose          1:1 False max 0.910066 rms 0.187909 mean 0.074561 bneck        - <=1e-6  36 >1e-3 123 >0.1  64 >0.5   8 turn 44.4049 >1deg  52 reversed  24
+  quarter turn       1:1 False max 1.075911 rms 0.593776 mean 0.490521 bneck        - <=1e-6   2 >1e-3 291 >0.1 254 >0.5 135 turn 25.8992 >1deg 164 reversed   0
+  three-quarter turn 1:1 False max 1.075911 rms 0.594292 mean 0.484196 bneck        - <=1e-6   2 >1e-3 289 >0.1 239 >0.5 135 turn 43.6966 >1deg 168 reversed  11
+  anti-transpose     1:1 False max 1.286612 rms 0.530681 mean 0.373559 bneck        - <=1e-6  37 >1e-3 215 >0.1 191 >0.5 107 turn 44.0565 >1deg 145 reversed  10
+  scaled to the new side, nearest one to one: {'identity': False, 'mirror x': False, 'mirror y': False, 'half turn': False, 'transpose': False, 'quarter turn': False, 'three-quarter turn': False, 'anti-transpose': False}
+against T-146 (Daniel's view of Chaoweeraprasit's SQUISH packing): best symmetry transpose
+  identity           1:1 False max 1.082570 rms 0.337359 mean 0.188242 bneck        - <=1e-6  37 >1e-3 266 >0.1 115 >0.5  51 turn 44.8680 >1deg 103 reversed   0
+  mirror x           1:1 False max 1.127104 rms 0.633152 mean 0.523263 bneck        - <=1e-6   2 >1e-3 301 >0.1 239 >0.5 153 turn 44.8680 >1deg 142 reversed   0
+  mirror y           1:1 False max 1.115094 rms 0.625775 mean 0.513545 bneck        - <=1e-6   1 >1e-3 302 >0.1 233 >0.5 147 turn 44.8680 >1deg 142 reversed   0
+  half turn          1:1 False max 1.286612 rms 0.482614 mean 0.314331 bneck        - <=1e-6  37 >1e-3 266 >0.1 159 >0.5  91 turn 44.8680 >1deg 125 reversed   0
+  transpose          1:1 False max 1.093123 rms 0.326299 mean 0.178859 bneck 1.042257 <=1e-6  37 >1e-3 266 >0.1 114 >0.5  45 turn 44.8680 >1deg 104 reversed   0
+    best: within 1e-3 37, within 0.1 189, tilt reversed 0 (residual <= 0.0000 deg), moved beyond 0.1 inside [[0.5000000000006048, 0.5000000000006048], [17.338461871622485, 17.257027615099148]]
+  quarter turn       1:1 False max 1.128114 rms 0.636137 mean 0.524506 bneck        - <=1e-6   1 >1e-3 302 >0.1 233 >0.5 152 turn 44.8680 >1deg 144 reversed   0
+  three-quarter turn 1:1 False max 1.146768 rms 0.626963 mean 0.513696 bneck        - <=1e-6   1 >1e-3 302 >0.1 230 >0.5 153 turn 44.8680 >1deg 140 reversed   0
+  anti-transpose     1:1 False max 1.286612 rms 0.482877 mean 0.312867 bneck        - <=1e-6  37 >1e-3 266 >0.1 161 >0.5  88 turn 44.8680 >1deg 124 reversed   1
+  scaled to the new side, nearest one to one: {'identity': False, 'mirror x': False, 'mirror y': False, 'half turn': False, 'transpose': False, 'quarter turn': False, 'three-quarter turn': False, 'anti-transpose': False}
