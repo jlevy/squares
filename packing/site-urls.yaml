@@ -6750,6 +6750,14 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-22'
   status: live
+- path: profiles/amund-kristiansen.html
+  canonical: profiles/amund-kristiansen.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
 - path: profiles/anabologyco-maker.html
   canonical: profiles/anabologyco-maker.html
   kind: page
@@ -13852,7 +13860,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: lower-bound
@@ -13870,6 +13878,7 @@ urls:
     - E-n040-guzhou-continuous-pose-kernel-replay
     - E-n040-guzhou-continuous-pose-finite-audit
     - E-n040-guzhou-continuous-pose-crate-axis
+    - E-n040-wand125-sqverify-continuous-6715-report
     artifacts:
     - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/README.md
     - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
@@ -13887,6 +13896,47 @@ urls:
     - packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
     - packing/devtools/audit_continuous_pose.py
     - docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
+    - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+    - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
+  amendments:
+  - date: '2026-10-23'
+    reason: The 23 October soundness review of wand125's sqverify_continuous, a second route for this
+      result's continuous cover, is added to its reviews and artifacts, with the source's reported
+      run of that route as a reported evidence entry; the bound, scope, attribution and rungs are
+      unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 40
+      established: null
+      attribution:
+        source_keys:
+        - '[Guzhou0806 n40 continuous pose 2026-10-10]'
+        published: '2026-10-10'
+      builds_on: null
+      evidence:
+      - E-n040-guzhou-continuous-pose-report
+      - E-n040-guzhou-continuous-pose-kernel-replay
+      - E-n040-guzhou-continuous-pose-finite-audit
+      - E-n040-guzhou-continuous-pose-crate-axis
+      artifacts:
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/README.md
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/certificate/parameters.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/continuous_pose.cpp
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/axis_integer_grid.cpp
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/results/verification.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/release-ci/results/verification.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/builds.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/axis-run.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/slabs.jsonl.gz
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/crate-runs.json.gz
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/replay-check.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/finite-audit.json
+      - packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+      - packing/devtools/audit_continuous_pose.py
+      - docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
 - path: result/t-146.html
   canonical: result/t-146.html
   kind: result
@@ -14454,7 +14504,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-12'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: lower-bound
@@ -14472,6 +14522,7 @@ urls:
     - E-n040-guzhou-new-supports-kernel-replay
     - E-n040-guzhou-new-supports-finite-audit
     - E-n040-guzhou-new-supports-crate-axis
+    - E-n040-wand125-sqverify-continuous-6718-report
     artifacts:
     - packing/resources/web/guzhou-n40-new-supports-2026-10-11/README.md
     - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/PROOF.md
@@ -14493,6 +14544,51 @@ urls:
     - packing/devtools/audit_n40_new_supports.py
     - packing/devtools/audit_continuous_pose.py
     - docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
+    - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+    - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
+  amendments:
+  - date: '2026-10-23'
+    reason: The 23 October soundness review of wand125's sqverify_continuous, a second route for this
+      result's continuous cover, is added to its reviews and artifacts, with the source's reported
+      run of that route as a reported evidence entry; the bound, scope, attribution and rungs are
+      unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 40
+      established: null
+      attribution:
+        source_keys:
+        - '[Guzhou0806 n40 new supports 2026-10-11]'
+        published: '2026-10-11'
+      builds_on: null
+      evidence:
+      - E-n040-guzhou-new-supports-report
+      - E-n040-guzhou-new-supports-kernel-replay
+      - E-n040-guzhou-new-supports-finite-audit
+      - E-n040-guzhou-new-supports-crate-axis
+      artifacts:
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/README.md
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/PROOF.md
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json.gz
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/parameters.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/verifier/continuous_pose.cpp
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/verifier/axis_integer_grid.cpp
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/results/verification.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/release-ci/results/verification.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/finite-audit.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-stage.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-check.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/builds.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-run.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/slabs.jsonl.gz
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/crate-runs.json.gz
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/duals.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/replay-check.json
+      - packing/devtools/audit_n40_new_supports.py
+      - packing/devtools/audit_continuous_pose.py
+      - docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
 - path: result/t-158.html
   canonical: result/t-158.html
   kind: result
@@ -17043,7 +17139,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: lower-bound
@@ -17064,6 +17160,32 @@ urls:
     - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json
     - packing/devtools/continuous_pose_followup.py
     - packing/devtools/audit_continuous_pose.py
+    - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+    - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
+  amendments:
+  - date: '2026-10-23'
+    reason: The 23 October soundness review of the first program, sqverify_continuous, read this certificate
+      and is added to the result's reviews and artifacts; the result rises from V0/C0 to V0/C1 on
+      that read, and the bound, scope and attribution are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 28
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 continuous n28 2026-10-15]'
+        published: '2026-10-15'
+      builds_on: null
+      evidence:
+      - E-wand125-continuous-n28-5745-report
+      artifacts:
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/README.md
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/acquisition/sources.json
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json
+      - packing/devtools/continuous_pose_followup.py
+      - packing/devtools/audit_continuous_pose.py
 - path: result/t-193.html
   canonical: result/t-193.html
   kind: result
@@ -18708,6 +18830,35 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-10-22-daniel-728.md
     - packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/README.md
+- path: result/t-238.html
+  canonical: result/t-238.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 303
+    established: null
+    attribution:
+      source_keys:
+      - '[Kristiansen n303 2026-10-23]'
+      published: '2026-10-23'
+    builds_on: null
+    evidence:
+    - E-amundsk-755-n303-report
+    artifacts:
+    - packing/resources/web/amundsk-n303-2026-10-23/README.md
+    - packing/resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
+    - packing/resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz
+    - packing/resources/web/amundsk-n303-2026-10-23/receipts/exact-certification.json.xz
+    - packing/resources/web/amundsk-n303-2026-10-23/replay/sharp-controls.json
+    - packing/resources/web/amundsk-n303-2026-10-23/measure/identity.json
+    - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page

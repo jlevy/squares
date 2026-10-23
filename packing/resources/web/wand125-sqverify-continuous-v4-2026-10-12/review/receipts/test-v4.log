@@ -1,0 +1,56 @@
+
+running 17 tests
+test certificate::tests::images_preserve_area_and_cover_the_orbit ... ok
+test certificate::tests::net_directions_are_rational_rotations ... ok
+test exact::tests::decimals_are_their_literal_values ... ok
+test exact::tests::enclosures_are_tight_and_contain_the_value ... ok
+test interval::tests::directed_steps_bracket_exact_sums ... ok
+test interval::tests::interval_product_covers_sign_changes ... ok
+test interval::tests::nan_is_never_dropped ... ok
+test interval::tests::steps_reach_the_adjacent_values ... ok
+test rotated::tests::area_lower_bound_is_below_and_close_to_exact ... ok
+test rotated::tests::edge_length_enclosures_contain_exact_lengths_over_the_box ... ok
+test rotated::tests::gradient_enclosures_contain_difference_quotients ... ok
+test rotated::tests::oracle_counts_closed_intersections ... ok
+test slab::tests::angle_enclosures_contain_exact_values ... ok
+test rotated::tests::atom_bounds_hold_at_every_sampled_centre ... ok
+test slab::tests::box_bounds_hold_at_sampled_poses ... ok
+test slab::tests::resume_takes_over_only_matching_verified_roots ... ok
+test slab::tests::classification_near_the_edge ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 36.60s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 19 tests
+test a_fault_injected_run_is_never_verified ... ok
+test a_format_m_candidate_may_declare_a_finer_uniform_net ... ok
+test admission_refuses_each_broken_premise ... ok
+test admission_refuses_the_overflow_densities ... ok
+test a_declared_net_must_pass_every_net_premise ... ok
+test axis_sweep_refuses_an_overflow_inside_the_domain ... ok
+test axis_sweep_refuses_the_overflow_certificate ... ok
+test decimal_masses_are_exact_and_the_mass_premise_is_strict ... ok
+test duplicate_keys_are_refused_before_any_reader_disagrees ... ok
+test fmin_and_fmax_are_exact_on_finite_operands_and_poison_on_failure ... ok
+test format_l_and_m_nets_cannot_be_overridden ... ok
+test gzip_input_must_be_one_member_and_nothing_else ... ok
+test lemma_f3_holds_at_its_extremes ... ok
+test overflow_certificate_has_an_uncovered_centre ... ok
+test overflow_in_the_rotated_search_is_never_verified ... ok
+test per_bin_domain_needs_the_fold_at_pi_over_four ... ok
+test the_per_bin_domain_checks_the_tangent_form_of_the_shrink_premise ... ok
+test the_s1_shape_at_the_density_cap_is_refused_and_finite ... ok
+test box_bounds_never_exceed_exact_capture_on_boundary_configurations ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 8.20s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
