@@ -22,7 +22,9 @@ $t = \tan(\theta/2)$, in Evan Daniel’s certificate format.
 Their per-count JSON names a CT105 web submission at 227 (`f0ca7a65…`, method `fq`,
 received 2026-10-17T20:28:22Z) seeded from de Winter’s #668 certificate by way of Evan
 Daniel’s exact form of it, and at 229 an `slp` refinement (search job 106640) of de
-Winter’s #668 certificate. Who made the 227 submission is not stated.
+Winter’s #668 certificate. The source’s manifest credits the 227 certificate to
+Couzo, retaining de Winter’s seed credit; the CT105 web submission it names as its
+provenance names no submitter (RF-3 of the 22 October review).
 
 ## Retained Here
 
@@ -58,8 +60,10 @@ Both positives pass both routes, and both routes refuse all four controls. At 22
 [receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
 deciding input and both routes’ complete outputs.
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
-arithmetic and the separating-axis method. No source program ran here, and the entry
-awaits a stage 4 review (think-0nse).
+arithmetic and the separating-axis method. No source script ran here. The source’s
+manifest names this repository’s `sqpack/verify.py` as its first checker, and the `sqpack`
+route decides through that file, so the replay shares the producer’s components (RF-1 of
+the [22 October review](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)).
 
 ## Against the Record
 
@@ -151,6 +155,22 @@ start there, eight of `couzo-verified-bounds-2026-10-14`’s rows and
 report order.
 [acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record
 the source register reads them from.
+
+## Stage 4 Review
+
+The [review of 22 October 2026](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)
+accepted #672’s two certificates for finite feasibility, with eight findings, none blocking,
+covering T-226, T-227 and T-228 together.
+It reproduced this packet’s replay and frozen comparison, decided both certificates again on a
+clean-room checker of its own, on an integer route and a `Fraction` route with exact
+clipping area, and ran sharp controls at $10^{-30}$ through both maintained routes and
+that checker: each route accepted exact contact at the far wall, the near wall and the
+least-gap pair, and refused $10^{-30}$ past it, where the certificates keep $10^{-15}$ at 227’s walls, exactly 0 at 229’s and about $1.2 \times 10^{-12}$ between pairs.
+Its programs, receipts and logs are kept with the #672 packet, in
+[`review/review-2026-10-22/`](review/review-2026-10-22/README.md),
+and `tests/test_upper_bound_reports_couzo_670_672_675.py` runs the kernel’s two sharp
+controls on #672’s 227 certificate (RF-6).
+T-227 rests at `V3`/`C3` on that review, the replay it reproduced and its checker’s run.
 
 ## Credit
 

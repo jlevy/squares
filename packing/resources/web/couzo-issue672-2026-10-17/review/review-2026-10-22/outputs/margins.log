@@ -1,0 +1,26 @@
+T-226 (#670) {"n": 204, "side": "45044217780850246618141/3041751595240000000000", "side_approx": "14.80864441768992380783", "equals_register_claim": true, "equals_claims_json_exact_side": true, "issue_print": "14.808644417690", "issue_print_is_ceiling_at_12": true, "ceiling_at_16": "14.8086444176899239", "claims_json_ceiling_equal": true, "below_every_earlier": true, "superseded_by_every_later": true, "house_on_main_now": {"verified": {"form": "14808642840591493923068442871459/1000000000000000000000000000000", "this_minus_house": "1.577098e-06", "house_below_this": true}, "reported": {"form": "14808642840591493923068442871459/1000000000000000000000000000000", "this_minus_house": "1.577098e-06", "house_below_this": true}, "house_is_T-225": true}, "later_counts_compared": 240, "later_counts_decided_by_print": 4, "below_every_later_count": true, "least_later_margin": {"m": 205, "lane": "verified", "belo
+   below house at 804eff369 (verified) True exact 1.881670e-05
+   below house at 804eff369 (reported) True exact 1.881670e-05
+   superseded by T-228 (#675) True 5.046313e-08
+   superseded by T-223 (#678)@204 True 1.575709e-06
+   superseded by T-225@204 True 1.577098e-06
+T-228 (#675) {"n": 204, "side": "101859759444979981360793459/6878398651426000000000000", "side_approx": "14.80864436722678969663", "equals_register_claim": true, "equals_claims_json_exact_side": true, "issue_print": "14.808644367227", "issue_print_is_ceiling_at_12": true, "ceiling_at_16": "14.8086443672267897", "claims_json_ceiling_equal": true, "below_every_earlier": true, "superseded_by_every_later": true, "house_on_main_now": {"verified": {"form": "14808642840591493923068442871459/1000000000000000000000000000000", "this_minus_house": "1.526635e-06", "house_below_this": true}, "reported": {"form": "14808642840591493923068442871459/1000000000000000000000000000000", "this_minus_house": "1.526635e-06", "house_below_this": true}, "house_is_T-225": true}, "later_counts_compared": 240, "later_counts_decided_by_print": 4, "below_every_later_count": true, "least_later_margin": {"m": 205, "lane": "verified"
+   below house at 804eff369 (verified) True exact 1.886716e-05
+   below house at 804eff369 (reported) True exact 1.886716e-05
+   below T-226 (#670) True exact 5.046313e-08
+   superseded by T-223 (#678)@204 True 1.525246e-06
+   superseded by T-225@204 True 1.526635e-06
+T-227@227 (#672) {"n": 227, "side": "71427829379429597600111901507/4589408083628500000000000000", "side_approx": "15.56362565234272693410", "equals_register_claim": true, "equals_claims_json_exact_side": true, "issue_print": "15.563625652343", "issue_print_is_ceiling_at_12": true, "ceiling_at_16": "15.5636256523427270", "claims_json_ceiling_equal": true, "below_every_earlier": true, "superseded_by_every_later": true, "house_on_main_now": {"verified": {"form": "7781812826162574542396221861851/500000000000000000000000000000", "this_minus_house": "1.757785e-11", "house_below_this": true}, "reported": {"form": "7781812826162574542396221861851/500000000000000000000000000000", "this_minus_house": "1.757785e-11", "house_below_this": true}, "house_is_T-225": true}, "later_counts_compared": 194, "later_counts_decided_by_print": 3, "below_every_later_count": true, "least_later_margin": {"m": 228, "lane": "verified
+   below house at 804eff369 (verified) True exact 7.442160e-03
+   below house at 804eff369 (reported) True exact 7.442160e-03
+   below T-196 (#668)@227 True exact 1.710513e-04
+   below held candidate of think-qdcc (Daniel's driver on T-196, 20 October; #672's printed prior) True exact 1.710347e-04
+   superseded by T-225@227 True 1.757785e-11
+T-227@229 (#672) {"n": 229, "side": "231170315041711399213831561/14771101209934000000000000", "side_approx": "15.65017474027207689458", "equals_register_claim": true, "equals_claims_json_exact_side": true, "issue_print": "15.650174740273", "issue_print_is_ceiling_at_12": true, "ceiling_at_16": "15.6501747402720769", "claims_json_ceiling_equal": true, "below_every_earlier": true, "superseded_by_every_later": true, "house_on_main_now": {"verified": {"form": "15650161513876431064009548865321/1000000000000000000000000000000", "this_minus_house": "1.322640e-05", "house_below_this": true}, "reported": {"form": "15650161513876431064009548865321/1000000000000000000000000000000", "this_minus_house": "1.322640e-05", "house_below_this": true}, "house_is_T-225": true}, "later_counts_compared": 190, "later_counts_decided_by_print": 3, "below_every_later_count": true, "least_later_margin": {"m": 230, "lane": "verified
+   below house at 804eff369 (verified) True exact 6.679509e-03
+   below house at 804eff369 (reported) True exact 6.679509e-03
+   below T-196 (#668)@229 True exact 1.667614e-08
+   superseded by T-198 (#674 opening) True 1.148541e-05
+   superseded by T-199 (#674 update) True 1.322638e-05
+   superseded by T-225@229 True 1.322640e-05
+margins all as the entries claim

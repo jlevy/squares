@@ -1,0 +1,127 @@
+{
+ "program": "review_t229_check.py",
+ "python": "3.14.7",
+ "inputs": [
+  {
+   "label": "T-229@105:cert",
+   "path": "triage-719/src/pin/certificates/n-105.cert",
+   "format": "evand-cert",
+   "n": 105,
+   "side": "674331486483935962030285457609/62500000000000000000000000000",
+   "file_sha256": "15b8044a4b2e75d31999a6ddff518cfb72fadacad2a7584d1d5e196f5c219bc9",
+   "content_git_blob": "ef9c91bb051dbb9f8f8dd4d05b1356e280307435",
+   "route_Z": {
+    "route": "Z",
+    "rows_not_unit": [],
+    "wall_failures": [],
+    "overlaps": [],
+    "touching": [],
+    "wall_contacts": [],
+    "rows_on_unit_circle": 105,
+    "pairs_decided": 5460,
+    "near_pairs_centres_within_sqrt2": 232,
+    "least_wall_clearance": "1/200000000000000000000",
+    "least_wall_clearance_float": 5e-21,
+    "least_wall_at": [
+     4,
+     "x>=0"
+    ],
+    "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+    "least_gap_float": 9.999999999999987e-21,
+    "least_gap_pair": [
+     71,
+     86
+    ],
+    "least_gap_axis": "u_i",
+    "accepted": true,
+    "cpu_seconds": 0.027
+   },
+   "route_C": {
+    "route": "C",
+    "not_unit_squares": [],
+    "corners_outside": [],
+    "overlaps": [],
+    "touching": [],
+    "wall_contacts": 0,
+    "unit_squares_checked": 105,
+    "pairs_decided": 5460,
+    "pairs_centres_within_2": 380,
+    "least_wall_clearance": "1/200000000000000000000",
+    "least_wall_clearance_float": 5e-21,
+    "least_distance_squared": "27645515647029869473881985674207168876017611501591969477205698435787223179957614633731569696281736090287602417193281629481748894029362729000618324271558208054174706341489/276455156470299352039106190271698242478924231019907060044578249026503448612525203808961454200348841646521922960348970487641886562331744932402500000000000000000000000000000000000000000000000000000000000000000000",
+    "least_distance_float": 9.999999999999989e-21,
+    "least_distance_pair": [
+     71,
+     86
+    ],
+    "accepted": true,
+    "cpu_seconds": 1.372
+   },
+   "routes_agree": true,
+   "per_pair_classes_equal": true,
+   "least_gap_at_most_least_distance": true,
+   "accepted": true
+  },
+  {
+   "label": "T-229@105:fact",
+   "path": "wt-t229r/packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-105.yaml.gz",
+   "format": "witness-v2-center-basis",
+   "n": 105,
+   "side": "674331486483935962030285457609/62500000000000000000000000000",
+   "file_sha256": "3052dd68092089a74125e7ff536e297e9b73b5634bf7dc7f37f5987d35e6ed0b",
+   "content_git_blob": "a68aa84df684dc678aea2bf177a7b18c8b73f0f8",
+   "content_sha256": "09ef4b6e1462ccf23dd69a1cfbe443bd827d0f52629141346c65dca101166cbc",
+   "route_Z": {
+    "route": "Z",
+    "rows_not_unit": [],
+    "wall_failures": [],
+    "overlaps": [],
+    "touching": [],
+    "wall_contacts": [],
+    "rows_on_unit_circle": 105,
+    "pairs_decided": 5460,
+    "near_pairs_centres_within_sqrt2": 232,
+    "least_wall_clearance": "1/200000000000000000000",
+    "least_wall_clearance_float": 5e-21,
+    "least_wall_at": [
+     4,
+     "x>=0"
+    ],
+    "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+    "least_gap_float": 9.999999999999987e-21,
+    "least_gap_pair": [
+     71,
+     86
+    ],
+    "least_gap_axis": "u_i",
+    "accepted": true,
+    "cpu_seconds": 0.048
+   },
+   "route_C": {
+    "route": "C",
+    "not_unit_squares": [],
+    "corners_outside": [],
+    "overlaps": [],
+    "touching": [],
+    "wall_contacts": 0,
+    "unit_squares_checked": 105,
+    "pairs_decided": 5460,
+    "pairs_centres_within_2": 380,
+    "least_wall_clearance": "1/200000000000000000000",
+    "least_wall_clearance_float": 5e-21,
+    "least_distance_squared": "27645515647029869473881985674207168876017611501591969477205698435787223179957614633731569696281736090287602417193281629481748894029362729000618324271558208054174706341489/276455156470299352039106190271698242478924231019907060044578249026503448612525203808961454200348841646521922960348970487641886562331744932402500000000000000000000000000000000000000000000000000000000000000000000",
+    "least_distance_float": 9.999999999999989e-21,
+    "least_distance_pair": [
+     71,
+     86
+    ],
+    "accepted": true,
+    "cpu_seconds": 1.494
+   },
+   "routes_agree": true,
+   "per_pair_classes_equal": true,
+   "least_gap_at_most_least_distance": true,
+   "accepted": true
+  }
+ ]
+}

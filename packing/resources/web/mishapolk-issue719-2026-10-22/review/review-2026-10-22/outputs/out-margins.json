@@ -1,0 +1,410 @@
+{
+ "main": "76496462b0704486dc5099f866ef291c486f7840",
+ "counts": [
+  {
+   "n": 105,
+   "side": "674331486483935962030285457609/62500000000000000000000000000",
+   "earlier": [
+    {
+     "report": "Kingbird catalogue",
+     "reported": "before 2026-08-22",
+     "kind": "print",
+     "print": "10.80789399144854",
+     "margin_at_least": "1.8590207706e-02",
+     "below": true
+    },
+    {
+     "report": "Griffin Casson, griffcass/square-packing 82661bc",
+     "reported": "2026-09-24T04:45:20Z",
+     "kind": "print",
+     "print": "10.80758853319602153",
+     "margin_at_least": "1.8284749453e-02",
+     "below": true
+    },
+    {
+     "report": "Francisco Couzo, franciscouzo/square-packing 3bfc47e",
+     "reported": "2026-09-26T03:27:13Z",
+     "kind": "print",
+     "print": "10.807588532111675",
+     "margin_at_least": "1.8284748369e-02",
+     "below": true
+    },
+    {
+     "report": "Francisco Couzo, 27 September ceiling",
+     "reported": "2026-09-27",
+     "kind": "print",
+     "print": "10.806077865540567",
+     "margin_at_least": "1.6774081798e-02",
+     "below": true
+    },
+    {
+     "report": "T-117, Rehwaldt and Couzo refinements",
+     "reported": "2026-10-07",
+     "kind": "print",
+     "print": "10.80607786551970463257490535044771520398745274",
+     "margin_at_least": "1.6774081777e-02",
+     "below": true
+    },
+    {
+     "report": "T-125, Ryan Xu",
+     "reported": "2026-10-08",
+     "kind": "print",
+     "print": "10.7906765754107907",
+     "margin_at_least": "1.3727916678e-03",
+     "below": true
+    },
+    {
+     "report": "T-128",
+     "reported": "before 2026-10-13",
+     "kind": "print",
+     "print": "10.7906182681071446",
+     "margin_at_least": "1.3144843642e-03",
+     "below": true
+    },
+    {
+     "report": "T-138",
+     "reported": "before 2026-10-13",
+     "kind": "print",
+     "print": "10.789303783751",
+     "margin_at_least": "7.0246075154e-12",
+     "below": true
+    },
+    {
+     "report": "T-130, Couzo's refinement of Xu's packing",
+     "reported": "2026-10-08",
+     "kind": "repo",
+     "source": "packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-105.yaml",
+     "read_from": "witness side",
+     "side": "10789303783748158831034729697921/1000000000000000000000000000000",
+     "margin": "5.1834385502e-12",
+     "margin_exact": "5183438550162376177/1000000000000000000000000000000",
+     "below": true
+    },
+    {
+     "report": "T-170, PingYou Ltd #568",
+     "reported": "2026-10-12",
+     "kind": "repo",
+     "source": "packing/resources/web/pingyou-n105-refinement-2026-10-12/facts/n-105.yaml.gz",
+     "read_from": "witness side",
+     "side": "107893037837481588309268366600\u2026/100000000000000000000000000000\u2026 (92 and 91 digits)",
+     "margin": "5.1834384423e-12",
+     "margin_exact": "5183438442269338295617659736218711424421332884365754662904597598593330008796151/1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "below": true
+    },
+    {
+     "report": "T-174, PingYou Ltd PR #574, the house when #719 was reported",
+     "reported": "2026-10-13",
+     "kind": "repo",
+     "source": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-105.yaml.gz",
+     "read_from": "witness side",
+     "side": "695727438870854044135292443499\u2026/644830707166501945673644119804\u2026 (470 and 469 digits)",
+     "margin": "5.1834384423e-12",
+     "margin_exact": null,
+     "below": true
+    },
+    {
+     "report": "T-183, Polkovskyi #593",
+     "reported": "2026-10-14T01:40Z",
+     "kind": "repo",
+     "source": "packing/resources/web/mishapolk-records-2026-10-14/facts/n-105.yaml.gz",
+     "read_from": "witness side",
+     "side": "10789303783748158831034729697921/1000000000000000000000000000000",
+     "margin": "5.1834385502e-12",
+     "margin_exact": "5183438550162376177/1000000000000000000000000000000",
+     "below": true
+    },
+    {
+     "report": "Couzo 4e4c8ce certificates/best/n105.cert",
+     "reported": "2026-10-15T00:31:53Z",
+     "kind": "data",
+     "source": "couzo/4e4c8ce-certificates-best-n105.cert",
+     "read_from": "certificate header",
+     "side": "695727438870854044135292443499\u2026/644830707166501945673644119804\u2026 (470 and 469 digits)",
+     "margin": "5.1834384423e-12",
+     "margin_exact": null,
+     "below": true
+    },
+    {
+     "report": "Couzo 4e4c8ce certificates/n105.cert",
+     "reported": "2026-10-15T00:31:53Z",
+     "kind": "data",
+     "source": "couzo/4e4c8ce-certificates-n105.cert",
+     "read_from": "certificate header",
+     "side": "10789303783748158831034729697921/1000000000000000000000000000000",
+     "margin": "5.1834385502e-12",
+     "margin_exact": "5183438550162376177/1000000000000000000000000000000",
+     "below": true
+    },
+    {
+     "report": "Couzo 5a299b4 certificates/best/n105.cert",
+     "reported": "2026-10-21T22:56:37Z (pushed)",
+     "kind": "data",
+     "source": "couzo/5a299b4-certificates-best-n105.cert",
+     "read_from": "certificate header",
+     "side": "695727438870854044135292443499\u2026/644830707166501945673644119804\u2026 (470 and 469 digits)",
+     "margin": "5.1834384423e-12",
+     "margin_exact": null,
+     "below": true
+    }
+   ],
+   "later_counts": {
+    "bounds_decided": 438,
+    "all_below": true,
+    "least_margin": "3.3604260390e-02",
+    "at": 106,
+    "lane": "reported_upper_bound",
+    "how": "print"
+   },
+   "prints": {
+    "exact_decimal": "10.789303783742975392484567321744",
+    "ceiling_12": "10.789303783743",
+    "ceiling_16": "10.7893037837429754",
+    "binary64_at_16": "10.7893037837429748",
+    "issue_print": "10.7893037837429748",
+    "issue_print_is_binary64_at_16": true,
+    "issue_print_below_exact_side": true,
+    "packet_ceiling": "10.7893037837429754",
+    "packet_ceiling_is_ceiling_16": true,
+    "offered_side": "10.789303783742975392484567321744",
+    "offered_side_is_exact": true,
+    "issue_baseline": "10.7893037837481582",
+    "issue_baseline_minus_house": "-6.3092683666e-16"
+   },
+   "house": {
+    "result": "T-174",
+    "case_record_exact_form_equals_file": true,
+    "reported_lane_equals_verified": true,
+    "margin": "5.1834384423e-12",
+    "margin_exact": null
+   },
+   "printed_margins": {
+    "T-174": {
+     "printed": "5.18e-12",
+     "exact": "5.1834384423e-12",
+     "printed_at_most_exact": true,
+     "within_one_unit": true
+    },
+    "T-183": {
+     "printed": "5.18e-12",
+     "exact": "5.1834385502e-12",
+     "printed_at_most_exact": true,
+     "within_one_unit": true
+    }
+   },
+   "source_other_file": {
+    "file": "n105.cert",
+    "side_minus_claimed": "4.6381854855e-12"
+   }
+  },
+  {
+   "n": 204,
+   "side": "882663895519250432/59604644775390625",
+   "earlier": [
+    {
+     "report": "Kingbird catalogue",
+     "reported": "before 2026-08-22",
+     "kind": "print",
+     "print": "14.82287565553229",
+     "margin_at_least": "1.4232825004e-02",
+     "below": true
+    },
+    {
+     "report": "T-162, Daniil Ostashev #562",
+     "reported": "2026-10-12",
+     "kind": "repo",
+     "source": "packing/resources/web/dostashev-compositions-2026-10-12/source/records/n0204.sqcert",
+     "read_from": "sqcert s line",
+     "side": "740433161719347828323549504047\u2026/500000000000000000000000000000\u2026 (119 and 118 digits)",
+     "margin": "2.0403859060e-05",
+     "margin_exact": "102019295299553568390404729823976428779059647971914573074043316171934782832354950404729823976428779059647971914573/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "below": true
+    },
+    {
+     "report": "PingYou Ltd PR #574",
+     "reported": "2026-10-13",
+     "kind": "repo",
+     "source": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-204.yaml.gz",
+     "read_from": "witness side",
+     "side": "210011961958261867316211719829\u2026/141816961216726502864511365102\u2026 (675 and 674 digits)",
+     "margin": "2.0403859060e-05",
+     "margin_exact": null,
+     "below": true
+    },
+    {
+     "report": "T-183, Polkovskyi #593",
+     "reported": "2026-10-14T01:40Z",
+     "kind": "repo",
+     "source": "packing/resources/web/mishapolk-records-2026-10-14/facts/n-204.yaml.gz",
+     "read_from": "witness side",
+     "side": "7404331617193478283235495040473/500000000000000000000000000000",
+     "margin": "2.0403859060e-05",
+     "margin_exact": "10201929529955356839040473/500000000000000000000000000000",
+     "below": true
+    },
+    {
+     "report": "T-186, Polkovskyi 70a033f KKT refinement",
+     "reported": "2026-10-14T16:11:31Z",
+     "kind": "repo",
+     "source": "packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-204.yaml.gz",
+     "read_from": "witness side",
+     "side": "740433161719347828316145172430\u2026/500000000000000000000000000000\u2026 (111 and 110 digits)",
+     "margin": "2.0403859060e-05",
+     "margin_exact": "1020192952995528279572430104761481126338872178671530915993369069066972891707484286255665843382616078162213/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "below": true
+    },
+    {
+     "report": "Couzo 4e4c8ce certificates/best/n204.cert",
+     "reported": "2026-10-15T00:31:53Z",
+     "kind": "data",
+     "source": "couzo/4e4c8ce-certificates-best-n204.cert",
+     "read_from": "certificate header",
+     "side": "740433161719347828316145172430\u2026/500000000000000000000000000000\u2026 (111 and 110 digits)",
+     "margin": "2.0403859060e-05",
+     "margin_exact": "1020192952995528279572430104761481126338872178671530915993369069066972891707484286255665843382616078162213/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "below": true
+    },
+    {
+     "report": "Couzo 4e4c8ce certificates/n204.cert",
+     "reported": "2026-10-15T00:31:53Z",
+     "kind": "data",
+     "source": "couzo/4e4c8ce-certificates-n204.cert",
+     "read_from": "certificate header",
+     "side": "65158532408191517304495519347/4400027968548500000000000000",
+     "margin": "2.0403875655e-05",
+     "margin_exact": "175346920990668760013692998239/8593804626071289062500000000000000",
+     "below": true
+    },
+    {
+     "report": "Evan Daniel #639 (the ledger's print, rounded up at 12)",
+     "reported": "2026-10-16T03:37:13Z",
+     "kind": "print",
+     "print": "14.808663234387",
+     "margin_at_least": "2.0403858103e-05",
+     "below": true
+    },
+    {
+     "report": "T-226, Couzo #670",
+     "reported": "2026-10-17T18:05:06Z",
+     "kind": "repo",
+     "source": "packing/resources/web/couzo-issue670-2026-10-17/source/certificates/n204.cert",
+     "read_from": "certificate header",
+     "side": "45044217780850246618141/3041751595240000000000",
+     "margin": "1.5871620272e-06",
+     "margin_exact": "29466263598597224945640293/18565378388916015625000000000000",
+     "below": true
+    },
+    {
+     "report": "T-228, Couzo #675",
+     "reported": "2026-10-18T06:02:11Z",
+     "kind": "repo",
+     "source": "packing/resources/web/couzo-issue675-2026-10-18/source/certificates/best/n204.cert",
+     "read_from": "certificate header",
+     "side": "101859759444979981360793459/6878398651426000000000000",
+     "margin": "1.5366988930e-06",
+     "margin_exact": "2580573142954140641792104803/1679296545758300781250000000000000",
+     "below": true
+    },
+    {
+     "report": "T-223, Couzo #678",
+     "reported": "2026-10-18T23:23:19Z",
+     "kind": "repo",
+     "source": "packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert",
+     "read_from": "certificate header",
+     "side": "141654921219558922887849/9565692327860000000000",
+     "margin": "1.1453350568e-08",
+     "margin_exact": "668696457850148493063377/58384352587036132812500000000000",
+     "below": true
+    },
+    {
+     "report": "T-225, Evan Daniel evand/square-packing@0075967, the house when #719 was reported",
+     "reported": "2026-10-20T02:36:12Z",
+     "kind": "repo",
+     "source": "packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-204.cert.gz",
+     "read_from": "certificate header",
+     "side": "14808642840591493923068442871459/1000000000000000000000000000000",
+     "margin": "1.0063597267e-08",
+     "margin_exact": "10063597267311130871459/1000000000000000000000000000000",
+     "below": true
+    },
+    {
+     "report": "Couzo 5a299b4 certificates/best/n204.cert",
+     "reported": "2026-10-21T22:56:37Z (pushed)",
+     "kind": "data",
+     "source": "couzo/5a299b4-certificates-best-n204.cert",
+     "read_from": "certificate header",
+     "side": "14808642840591493923068442871459/1000000000000000000000000000000",
+     "margin": "1.0063597267e-08",
+     "margin_exact": "10063597267311130871459/1000000000000000000000000000000",
+     "below": true
+    }
+   ],
+   "later_counts": {
+    "bounds_decided": 240,
+    "all_below": true,
+    "least_margin": "1.5808315596e-02",
+    "at": 205,
+    "lane": "reported_upper_bound",
+    "how": "print"
+   },
+   "prints": {
+    "exact_decimal": "14.808642830527896655757312",
+    "ceiling_12": "14.808642830528",
+    "ceiling_16": "14.8086428305278967",
+    "binary64_at_16": "14.8086428305278961",
+    "issue_print": "14.8086428305278961",
+    "issue_print_is_binary64_at_16": true,
+    "issue_print_below_exact_side": true,
+    "packet_ceiling": "14.8086428305278967",
+    "packet_ceiling_is_ceiling_16": true,
+    "offered_side": "14.808642830527896655757312",
+    "offered_side_is_exact": true,
+    "issue_baseline": "14.8086428405914940",
+    "issue_baseline_minus_house": "7.6931557129e-17"
+   },
+   "house": {
+    "result": "T-225",
+    "case_record_exact_form_equals_file": true,
+    "reported_lane_equals_verified": true,
+    "margin": "1.0063597267e-08",
+    "margin_exact": "10063597267311130871459/1000000000000000000000000000000"
+   },
+   "printed_margins": {
+    "T-225": {
+     "printed": "1.006e-8",
+     "exact": "1.0063597267e-08",
+     "printed_at_most_exact": true,
+     "within_one_unit": true
+    },
+    "T-223": {
+     "printed": "1.145e-8",
+     "exact": "1.1453350568e-08",
+     "printed_at_most_exact": true,
+     "within_one_unit": true
+    },
+    "T-228": {
+     "printed": "1.537e-6",
+     "exact": "1.5366988930e-06",
+     "printed_at_most_exact": false,
+     "within_one_unit": true
+    },
+    "T-226": {
+     "printed": "1.587e-6",
+     "exact": "1.5871620272e-06",
+     "printed_at_most_exact": true,
+     "within_one_unit": true
+    },
+    "T-186": {
+     "printed": "2.040e-5",
+     "exact": "2.0403859060e-05",
+     "printed_at_most_exact": true,
+     "within_one_unit": true
+    }
+   },
+   "source_other_file": {
+    "file": "n204.cert",
+    "side_minus_claimed": "-1.4809457955e-11"
+   }
+  }
+ ],
+ "all_as_claimed": true
+}

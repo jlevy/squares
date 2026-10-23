@@ -6,8 +6,10 @@ read by the `evand-cert` adapter: s(204) of #670 (``23aff0c6``), s(227) and s(22
 on the packets through ``test_upper_bound_reports``; these hold what is particular to
 them: each certificate's digest and exact side, each frozen comparison's order at its
 count, the report order the 18 October ledger recorded, and the pose-by-pose measurement
-behind T-227's regularization items and the notes of T-226 and T-228. Every test reads
-the retained packets and the records only; none needs the network.
+behind T-227's regularization items and the notes of T-226 and T-228, and, after the
+22 October stage 4 review, that both maintained routes meet the kernel's sharp controls on
+#672's 227 certificate (its RF-6). Every test reads the retained packets and the records
+only; none needs the network.
 """
 
 from __future__ import annotations
@@ -18,8 +20,10 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
+import pytest
 import yaml
 
+from devtools import evand_arrangement_reports as kernel
 from devtools import upper_bound_reports as reports
 
 PACKETS = {
@@ -155,7 +159,10 @@ def test_the_measurement_behind_the_regularization_items_and_notes() -> None:
 def test_each_atom_says_which_positives_touch_the_box() -> None:
     """#670's and #675's positives touch the box at 204; #672's touches at 229 and clears
     every wall at 227 by exactly 1e-15, so its atom names the count that touches rather
-    than saying every positive does (review A1 of #718)."""
+    than saying every positive does (review A1 of #718). Stage 4 (think-0nse) replaced the
+    plan's closing sentences, which said review was pending and the source's checkers had
+    not run, with the review's outcome and the source's first checker (RF-1 of the 22
+    October review); every sentence before them is still the plan's."""
     evidence = {
         row["id"]: row for row in _yaml(reports.ROOT / "frontier/evidence.yaml")["evidence"]
     }
@@ -170,5 +177,35 @@ def test_each_atom_says_which_positives_touch_the_box() -> None:
     for name, sentence in expected.items():
         planned = reports.register_plan(_packet(name))["evidence.yaml"]
         assert sentence in planned["limitations"], name
-        recorded = evidence[planned["id"]]["limitations"]
-        assert " ".join(recorded.split()) == " ".join(planned["limitations"].split()), name
+        recorded = " ".join(evidence[planned["id"]]["limitations"].split())
+        replay = " ".join(planned["limitations"].split()).split(" Independent review")[0]
+        assert recorded.startswith(replay), name
+        assert "names this repository's sqpack/verify.py as its first checker" in recorded
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize("where", ["at-contact", "past-contact"])
+@pytest.mark.parametrize("control", kernel.SHARP_CONTROLS)
+def test_both_routes_meet_contact_and_refuse_1e30_past_it_at_672s_227(
+    control: str, where: str
+) -> None:
+    """RF-6 of the 22 October stage 4 review: the receipts' two controls are gross (a
+    duplicated square, gap -1, and a square moved outside), while these certificates keep
+    margins of exactly 0 at the walls at 204 and 229, 1e-15 at 227's walls and about 1e-12
+    between pairs, so a route rounding at binary64 or tolerating 1e-9 would pass the
+    packets as retained. The kernel's two sharp controls on #672's 227 certificate, whose
+    walls clear by exactly 1e-15: the side lowered by its least far-wall clearance, or its
+    tightest pair closed along its best separating axis, is accepted by both maintained
+    routes at exact contact with the margin exactly 0, and refused by both 1e-30 past it at
+    exactly -1e-30, as the review's controls found at all four certificates
+    (review/review-2026-10-22/outputs/out-controls-T-NNN-nNNN.json in the #672 packet).
+    Each case runs both routes over 25,651 pairs, a few seconds a route, above the quick
+    lane's per-test ceiling, so it runs in the deep surface."""
+    name = "couzo-issue672-2026-10-17"
+    certificate = reports.read_facts(_packet(name), numbers=[227])[227]
+    margin = "wall" if control == "side-lowered-past-wall-contact" else "gap"
+    past = where == "past-contact"
+    verdicts = kernel.run_sharp(certificate, control, past=past)
+    for route in kernel.ROUTES:
+        assert verdicts[route]["passed"] is not past, route
+        assert verdicts[route][margin] == (-kernel.SHARP_EPSILON if past else 0), route

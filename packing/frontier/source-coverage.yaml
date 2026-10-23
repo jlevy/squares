@@ -7647,6 +7647,34 @@ sources:
     source. At 509 issue 666's row, and at 931 issue 675's, stand before this source's and
     name it as their successor; only 860 held no row.
   claims_record: resources/web/couzo-issue715-2026-10-21/acquisition/beyond-horizon-claims.json
+- id: mishapolk-issue719-2026-10-22-in-corpus
+  title: Mykhailo Polkovskyi's exact certificates of issue 719 at 12fc4667, n105 and n204
+  role: source-repository
+  url: https://github.com/Mishapolk/square-packing-records/tree/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates
+  local: resources/web/mishapolk-issue719-2026-10-22/
+  source_key: '[Mishapolk issue 719 2026-10-22]'
+  scope:
+    n_values: [105, 204]
+  reviewed: '2026-10-22'
+  source_date: '2026-10-22'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/mishapolk-issue719-2026-10-22/acquisition/claims.json
+  evidence:
+  - E-mishapolk-719-certificate-report
+  - E-mishapolk-719-exact-feasibility
+  - E-mishapolk-719-review-exact-feasibility
+  notes: >-
+    The release's two in-corpus certificates, certificates/n-105.cert and n-204.cert, kept as
+    derived exact facts with no upstream byte, each admitted at its exact side; T-229 records
+    them at V3/C3 on the review of 22 October
+    (docs/project/reviews/review-2026-10-22-mishapolk-719.md). They are a source entry of
+    their own because the release's claims record, which the beyond-horizon rows of
+    mishapolk-issue719-2026-10-22 are read against, holds the rows beyond the corpus only.
+    On 23 October 2026 the cases at 105 and 204 adopted these certificates, the selected
+    overrides below.
 - id: mishapolk-issue719-2026-10-22
   title: Mykhailo Polkovskyi's 122 exact certificates of issue 719 at 12fc4667
   role: source-repository
@@ -7655,8 +7683,6 @@ sources:
   source_key: '[Mishapolk issue 719 2026-10-22]'
   scope:
     n_values:
-    - 105
-    - 204
     - 330
     - 339
     - 342
@@ -7773,12 +7799,10 @@ sources:
   disposition: current-report
   replay_disposition: case-specific
   represented_by:
-  - frontier/results.yaml
   - resources/web/mishapolk-issue719-2026-10-22/README.md
   - resources/web/mishapolk-issue719-2026-10-22/acquisition/claims.json
   - resources/web/mishapolk-issue719-2026-10-22/acquisition/beyond-horizon-rows.json
   evidence:
-  - E-mishapolk-719-certificate-report
   - E-mishapolk-719-beyond-horizon-report
   notes: >-
     Issue 719's 122 certificates at 12fc4667, certificates/n-N.cert, kept as derived exact
@@ -7786,8 +7810,9 @@ sources:
     from a checkout at the pin whose bytes have the digests the packet and the issue state.
     The issue prints each side as the binary64 value of the exact header side at 16 places,
     below that side at 76 rows, so each row records the exact side rounded up at 16 places.
-    The two in the corpus, at 105 and 204, are recorded by the register entry for this
-    issue, pending adoption at both. Of the 112 beyond the corpus at or below 1024, the
+    The two in the corpus, at 105 and 204, are a source entry of their own,
+    mishapolk-issue719-2026-10-22-in-corpus, since this entry's claims record holds the rows
+    beyond the corpus only. Of the 112 beyond the corpus at or below 1024, the
     packet's filtered exact replay decided every one on two routes with all six controls
     refused (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay). The
     ledger of 22 October for this issue
@@ -7803,7 +7828,7 @@ sources:
     below this source's row when it lands. Its 366 is not recorded: Couzo's 4e4c8ce
     certificate, published 15 October, is 8.19e-2 below it. The 8 rows above 1024 are pinned
     by digest and wait on the owner (think-9vr8, think-f2io). Per-row lineage is not stated
-    by the source; the issue credits Mishapolk (Mikhail Polk) and names the earlier finders
+    by the source; the issue credits Mishapolk (Mykhailo Polkovskyi) and names the earlier finders
     its packings build on, and discloses Gemini assistance.
   claims_record: resources/web/mishapolk-issue719-2026-10-22/acquisition/beyond-horizon-rows.json
 
@@ -7862,11 +7887,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 105
-  source_id: pingyou-pr574-certificates-2026-10-13
-  value: '10.789303783748158831'
-  evidence: E-pingyou-574-certificate-report
+  source_id: mishapolk-issue719-2026-10-22-in-corpus
+  value: '10.7893037837429754'
+  evidence: E-mishapolk-719-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-229).
 - n: 106
   source_id: evand-square-packing-2026-10-05
   value: '10.822908044132847555194436943331'
@@ -8024,11 +8049,11 @@ selected_overrides:
   reason: The complete rational precision refinement is strictly smaller than both previous exact
     upper lanes.
 - n: 204
-  source_id: evand-regularized-2026-10-20
-  value: '14.8086428405914940'
-  evidence: E-evand-regularized-1020-certificate-report
+  source_id: mishapolk-issue719-2026-10-22-in-corpus
+  value: '14.8086428305278967'
+  evidence: E-mishapolk-719-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-22 (T-225).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-229).
 - n: 206
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '14.8601586633919032367'
@@ -8501,13 +8526,13 @@ superseded_reports:
 - n: 105
   source_id: casson-square-packing-2026
   value: '10.80758853319602153'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values.
 - n: 105
   source_id: unitsquare-release1
   value: '10.807847913867976'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
   reason: Superseded on 2026-09-29 by Francisco Couzo's smaller certified side.
 - n: 106
   source_id: casson-square-packing-2026
@@ -8893,7 +8918,7 @@ superseded_reports:
 - n: 204
   source_id: evand-square-packing-2026-10-05
   value: '14.822875655532295295399036633375'
-  superseded_by: evand-regularized-2026-10-20
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -9577,7 +9602,7 @@ superseded_reports:
 - n: 105
   source_id: franciscouzo-square-packing-2026
   value: '10.806077865540567'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
   reason: Retained historical ceiling; the selected exact rational report is smaller.
 - n: 292
   source_id: franciscouzo-square-packing-2026
@@ -9602,7 +9627,7 @@ superseded_reports:
 - n: 105
   source_id: rehwaldt-couzo-refinements-2026-10-07
   value: '10.80607786551970463257490535044771520398745274'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
   reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 108
   source_id: squish-second-update-2026-10-07
@@ -9767,12 +9792,12 @@ superseded_reports:
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '11.8793752067078730'
   superseded_by: mishapolk-kkt-refinements-2026-10-14
-  reason: The withdrawn Gupta rational certificate is larger than the selected refinement by Mykhailo Polkovskyi; its
-    complete source and replay remain retained.
+  reason: The withdrawn Gupta rational certificate is larger than the selected refinement by Mykhailo
+    Polkovskyi; its complete source and replay remain retained.
 - n: 105
   source_id: evand-batch-105-130-2026-10-07
   value: '10.806077865519704632682966129102'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
   reason: The complete dated source certificate has a strictly larger exact rational side than the
     current verified selected bound; original custody remains historical and does not inherit another
     packet's geometry verification.
@@ -9823,9 +9848,9 @@ superseded_reports:
 - n: 105
   source_id: ry-xu-new-packings-2026-10-08
   value: '10.7906765754107907'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-229's exact
     side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
 - n: 108
   source_id: ry-xu-new-packings-2026-10-08
   value: '10.9048247851109049'
@@ -10142,8 +10167,8 @@ superseded_reports:
   source_id: couzo-followup-refinements-2026-10-08
   value: '10.7893037837481589'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-174's exact side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+    and T-229's exact side is smaller.
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
 - n: 129
   source_id: evand-regularized-2026-10-10
   value: '11.8720298490811800'
@@ -10232,8 +10257,8 @@ superseded_reports:
   source_id: dostashev-compositions-2026-10-12
   value: '14.8086632343869566'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-225's exact side is smaller.
-  superseded_by: evand-regularized-2026-10-20
+    and T-229's exact side is smaller.
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
 - n: 211
   source_id: couzo-certificates-2026-10-13-in-corpus
   value: '14.9935589139740062'
@@ -10310,8 +10335,8 @@ superseded_reports:
   source_id: pingyou-n105-refinement-2026-10-12
   value: '10.78930378374815884'
   reason: The house from 2026-10-15 until 2026-10-17; its certificate stays retained and verified,
-    and T-174's exact side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+    and T-229's exact side is smaller.
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
 - n: 108
   source_id: couzo-451-exact-refinements
   value: '10.9048210123203565'
@@ -10526,8 +10551,8 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '14.80866323438695657'
   reason: The house from 2026-10-16 until 2026-10-20; its certificate stays retained and verified,
-    and T-225's exact side is smaller.
-  superseded_by: evand-regularized-2026-10-20
+    and T-229's exact side is smaller.
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
 - n: 154
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '12.92120657713263105'
@@ -10556,8 +10581,8 @@ superseded_reports:
   source_id: couzo-issue678-2026-10-18-in-corpus
   value: '14.8086428419812473'
   reason: The house from 2026-10-20 until 2026-10-22; its certificate stays retained and verified,
-    and T-225's exact side is smaller.
-  superseded_by: evand-regularized-2026-10-20
+    and T-229's exact side is smaller.
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
 - n: 229
   source_id: evand-n229-dilation-update-2026-10-18
   value: '15.6501615138955532'
@@ -10576,6 +10601,18 @@ superseded_reports:
   reason: The house from 2026-10-20 until 2026-10-22; its certificate stays retained and verified,
     and T-225's exact side is smaller.
   superseded_by: evand-regularized-2026-10-20
+- n: 105
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '10.789303783748158831'
+  reason: The house from 2026-10-17 until 2026-10-23; its certificate stays retained and verified,
+    and T-229's exact side is smaller.
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+- n: 204
+  source_id: evand-regularized-2026-10-20
+  value: '14.8086428405914940'
+  reason: The house from 2026-10-22 until 2026-10-23; its certificate stays retained and verified,
+    and T-229's exact side is smaller.
+  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
