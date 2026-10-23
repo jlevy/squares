@@ -949,10 +949,10 @@ HISTORY_ROWS = {
     "franciscouzo/square-packing@23aff0c": (21, 0),
     "franciscouzo/square-packing@5a299b4": (20, 9),
 }
-#: What the history walk holds back, by class: (publications, decision's bead).
+#: What the history walk holds back, by class: (publications, decisions' beads).
 HISTORY_HOLDS = {
-    "consequence": (54, "think-f2io"),
-    "recipe": (64, "think-f2io"),
+    "consequence": (54, {"think-f2io", "think-kzme"}),
+    "recipe": (64, {"think-f2io"}),
 }
 
 
@@ -990,7 +990,9 @@ def test_the_history_walk_holds_back_what_waits_on_a_decision() -> None:
     construction itself, so it holds neither."""
     held = [item for item in replay.held_plan() if item["walk"] == replay.HISTORY]
     by_class = Counter(item["class"] for item in held)
-    beads = {item["class"]: item["bead"] for item in held}
+    beads: dict[str, set[str]] = {}
+    for item in held:
+        beads.setdefault(item["class"], set()).add(item["bead"])
     assert {kind: (by_class[kind], beads[kind]) for kind in by_class} == HISTORY_HOLDS
     assert sum(by_class.values()) == 118
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
@@ -1544,22 +1546,27 @@ def test_the_rulings_hold_goebel_s_construction_as_an_earlier_report() -> None:
 
 
 def test_a_deletion_bound_from_a_certificate_is_an_earlier_report_with_no_row() -> None:
-    """The owner's answer of 23 October 2026 on D6 (think-f2io): 4e4c8ce's 39 index bounds,
-    each deleting squares from one of its certificates at a larger count, are earlier
-    reports in report order with no row of their own. The walk records each, the chain
-    passes over it, and a later equal side is not recorded: #732's 985 ties it. 23aff0c's
-    deletions from Friedman's constructions, which no certificate file states, stay held."""
+    """The owner's answer of 23 October 2026 on D6 (think-f2io): 4e4c8ce's 36 index bounds
+    that delete one square from the next count's certificate are earlier reports. The walk
+    records each, the chain passes over it, and a later equal side is not recorded: #732's
+    985 ties it. That such a bound has no row of its own is the decision's recommendation,
+    which the owner has not confirmed (think-kzme). 23aff0c's deletions from Friedman's
+    constructions, which no certificate file states, stay held."""
     history = replay.WALKS[replay.HISTORY]
-    (deletions,) = replay.HISTORY_HELD["franciscouzo/square-packing@4e4c8ce"]
-    assert (deletions.kind, deletions.answer) == (replay.CONSEQUENCE, replay.DELETION_ANSWER)
-    assert len(deletions.counts) == 39
+    deletions, beyond = replay.HISTORY_HELD["franciscouzo/square-packing@4e4c8ce"]
+    assert (deletions.kind, deletions.bead) == (replay.CONSEQUENCE, "think-f2io")
+    assert deletions.answer == replay.DELETION_ANSWER
+    assert len(deletions.counts) == 36
+    assert "not confirmed (think-kzme)" in replay.DELETION_ANSWER
+    assert not {751, 752, 927} & deletions.counts
+    assert (beyond.kind, beyond.bead, beyond.answer) == (replay.CONSEQUENCE, "think-kzme", "")
     friedman = replay.HISTORY_HELD["franciscouzo/square-packing@23aff0c"]
     assert {item.kind: item.answer for item in friedman} == {
         replay.CONSEQUENCE: "",
         replay.RECIPE: "",
     }
     plan = [item for item in replay.held_plan() if item["walk"] == replay.HISTORY]
-    assert sum(1 for item in plan if item.get("settled")) == 39
+    assert sum(1 for item in plan if item.get("settled")) == 36
     assert not any(
         item.kinds == (replay.CONSEQUENCE,) and 985 in item.counts for item in history.resting
     )
@@ -1572,4 +1579,29 @@ def test_a_deletion_bound_from_a_certificate_is_an_earlier_report_with_no_row() 
         ("#732", "not recorded", "equal"),
     ]
     assert replay.recorded_reports(walk, count) == []
-    assert "no row of its own" in replay.HELD_CLASSES[replay.CONSEQUENCE]
+    assert "earlier report" in replay.HELD_CLASSES[replay.CONSEQUENCE]
+
+
+def test_deletions_of_two_or_three_squares_stay_held_for_the_owner() -> None:
+    """Review A of #754, A1: D6 asked about deleting a square from a neighbour's certificate,
+    so 4e4c8ce's 751 and 752, deleting three and two squares from 754's certificate, and its
+    927, two from 929's, are beyond the answer's words. Each stays held, unsettled, on
+    think-kzme; no later step at those counts rests on it, since each is recorded below."""
+    _, beyond = replay.HISTORY_HELD["franciscouzo/square-packing@4e4c8ce"]
+    assert sorted(beyond.counts) == [751, 752, 927]
+    assert beyond.bead == "think-kzme"
+    assert not beyond.answer
+    history = replay.WALKS[replay.HISTORY]
+    assert not any(item.counts & beyond.counts for item in history.resting)
+    plan = [
+        item
+        for item in replay.held_plan()
+        if item["walk"] == replay.HISTORY
+        and item["report"] == "franciscouzo/square-packing@4e4c8ce"
+        and item["n"] in {751, 752, 927}
+    ]
+    assert [(item["n"], item["bead"], item.get("settled")) for item in plan] == [
+        (751, "think-kzme", None),
+        (752, "think-kzme", None),
+        (927, "think-kzme", None),
+    ]

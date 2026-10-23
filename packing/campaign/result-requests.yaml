@@ -9985,18 +9985,24 @@ issues:
     results: []
     asks:
     - what: The owner decides whether Göbel's constructions are earlier reports and the baseline beyond
-        324; if so, a records PR adds them as the baseline, corrects 369 and 376 and records a defect. Until
-        then the 42 rows of 487b058 above them are not recorded, and 369 and 376 stay.
-      state: done
+        324; if so, a records PR adds them as the baseline, corrects 369 and 376 and records a defect.
+        The owner answered yes on 23 October 2026; the record still owes the baseline in every reader of
+        the record, not only the report-order walks, and the defect.
+      state: queued
       note: >-
-        Answered by the owner on 23 October 2026: yes, Göbel's classical constructions count as
-        earlier reports beyond n = 324, and a rational row above Göbel's exact side at its count is
-        not recorded. The owner-answers records change (think-8krd) makes it a ruling of the
-        report-order walks (devtools.intake_ledger, classical-constructions): Göbel's construction
-        joins the start, so the publications the walks held above it are not recorded. Nine rows of
-        8 to 13 October above it, at 369 (1), 375 (4) and 376 (4), stay listed as printed and are
-        marked above-classical-construction; 369 and 376 have no current row, and their standing
-        side is Göbel's construction.
+        Answered by the owner on 23 October 2026 (think-8krd): yes, Göbel's classical constructions
+        count as earlier reports beyond n = 324, and a rational row above Göbel's exact side at its
+        count is not recorded. The owner-answers records change (PR #754) delivers two parts. It
+        makes the answer a ruling of the report-order walks (devtools.intake_ledger,
+        classical-constructions), so Göbel's construction joins each walk's start and the
+        publications the walks held above it are not recorded. And it corrects 369 and 376: nine
+        rows of 8 to 13 October above Göbel's construction, at 369 (1), 375 (4) and 376 (4), stay
+        listed as printed and are marked above-classical-construction, so 369 and 376 have no
+        current row. Still owed: the record's other readers beyond 324 (the claims importer, the
+        Fang inventory and fresh ledger starts) still take the grid or earlier reports, not Göbel's
+        construction (think-v022); and no defect entry records the cause, that beyond 324 the record
+        compared reports only with the grid and earlier reports, so two current rows stood above
+        Göbel's sides.
       bead: think-8krd
     beads:
     - think-8krd
@@ -10023,8 +10029,9 @@ issues:
       beyond 324. The owner-answers records change applies it: the walks hold no publication above
       Göbel's construction, the nine rows above it at 369, 375 and 376 are marked
       above-classical-construction, and 369 and 376 keep no current row. Whether Friedman's
-      off-centre constructions count the same way was not asked; think-zkxy asks it. The issue's
-      close_when holds once that change is on main.
+      off-centre constructions count the same way was not asked; think-zkxy asks it. The ask stays
+      queued, and the issue open, until every reader of the record takes Göbel's construction beyond
+      324 (think-v022) and the defect is recorded.
   - number: 622
     title: 'data: submit a tighter exact N29 packing certificate'
     author: BuddenPing
@@ -18098,8 +18105,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
         count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier report.
-        It is an index deletion bound, an earlier report by the owner's answer of 23 October 2026 on
-        D6 (think-f2io) with no row of its own, and this restatement of it is not recorded.
+        It is an index deletion bound, one square below the next count's certificate, an earlier
+        report by the owner's answer of 23 October 2026 on D6 (think-f2io), and this claim of its
+        side is not recorded; on the decision's recommendation the bound has no row of its own
+        (think-kzme).
       queued: false
     - key: n744
       claim: s(744) <= 27.798989873256, rounded upward; exact certificate side is authoritative.
@@ -18253,10 +18262,11 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
-        refused, is 2.88e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
-        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
-        is recorded.
+        refused, is 2.88e-23 below the bound Couzo's 4e4c8ce index states at 798 by deleting one
+        square from its 799 certificate, published on 2026-10-15, and both round up to the same
+        12-place print. By the owner's answer of 23 October 2026 (think-fwa9) it restates that
+        bound, so no row is recorded. The bound is an earlier report by the owner's answer on D6
+        (think-f2io) and, on that decision's recommendation, has no row of its own (think-kzme).
       queued: false
     - key: n799
       claim: s(799) <= 28.798989873256, rounded upward; exact certificate side is authoritative.
@@ -18421,10 +18431,11 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
-        refused, is 2.98e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
-        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
-        is recorded.
+        refused, is 2.98e-23 below the bound Couzo's 4e4c8ce index states at 855 by deleting one
+        square from its 856 certificate, published on 2026-10-15, and both round up to the same
+        12-place print. By the owner's answer of 23 October 2026 (think-fwa9) it restates that
+        bound, so no row is recorded. The bound is an earlier report by the owner's answer on D6
+        (think-f2io) and, on that decision's recommendation, has no row of its own (think-kzme).
       queued: false
     - key: n856
       claim: s(856) <= 29.798989873256, rounded upward; exact certificate side is authoritative.
@@ -18829,8 +18840,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
         count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier report.
-        It is an index deletion bound, an earlier report by the owner's answer of 23 October 2026 on
-        D6 (think-f2io) with no row of its own, and this restatement of it is not recorded.
+        It is an index deletion bound, one square below the next count's certificate, an earlier
+        report by the owner's answer of 23 October 2026 on D6 (think-f2io), and this claim of its
+        side is not recorded; on the decision's recommendation the bound has no row of its own
+        (think-kzme).
       queued: false
     - key: n986
       claim: s(986) <= 31.920310216821, rounded upward; exact certificate side is authoritative.
@@ -19290,16 +19303,20 @@ issues:
       23aff0c, all superseded on entry, each replayed on both routes with every control refused.
       It states no T-NNN, and the issue stays open.
 
-      The owner answered think-fwa9 on 23 October 2026: a side below an earlier report at its count
-      by less than the 12-place print, with both rounding up to the same 12-place print, restates
-      that report, and the earlier report stays the row. The owner-answers records change
+      The owner answered think-fwa9 on 23 October 2026 that sub-print re-certifications are
+      restatements, not new rows, and the earlier certificate stays the row. The record reads a
+      sub-print re-certification as a side below an earlier report at its count by less than one
+      unit in the 12th place, with both rounding up to the same 12-place print. The owner-answers
+      records change
       (think-temp) writes the answer into the walks as a ruling: the history, #719 and #732 walks
       decide the 30 re-certifications, and 44 of Couzo's publications in 5a299b4, 23aff0c and
-      4e4c8ce, as restatements and no longer hold them. No row changes: at each of the 30 counts the
-      4e4c8ce certificate's row stands as it did. The owner answered D6 the same day: 743 and 985,
-      deletion bounds of the 4e4c8ce index, are earlier reports, so #715's restatements there stay
-      unrecorded, and the bounds have no row of their own (think-kzme asks whether an issue's claim
-      gives them one). The follow-up that says so is drafted on think-temp for after that change
+      4e4c8ce, as restatements and no longer hold them. No row changes: at 28 of the 30 counts the
+      4e4c8ce certificate's row stands as it did, and at 798 and 855 the 4e4c8ce side is an index
+      deletion bound, one square below the next count's certificate, which has no row. The owner
+      answered D6 the same day: such a bound is an earlier report, so #715's restatements at 743 and
+      985 stay unrecorded too; that the bounds have no row of their own is the decision's
+      recommendation (think-kzme asks the owner, and whether an issue's claim gives one a row). The
+      follow-up that says so is drafted on think-temp for after that change
       merges (think-cyal).
   - number: 719
     title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
@@ -20905,9 +20922,10 @@ issues:
       the MIT licence of 17cc220. It asked how sqpack/verify.py was called and which 204 file
       the solve began from.
 
-      The owner answered think-fwa9 on 23 October 2026: a side below an earlier report at its count
-      by less than the 12-place print, with both rounding up to the same print, restates that
-      report, and the earlier report stays the row. The owner-answers records change (think-temp)
+      The owner answered think-fwa9 on 23 October 2026 that sub-print re-certifications are
+      restatements, not new rows, and the earlier certificate stays the row; the record reads them
+      as sides below an earlier report by less than one unit in the 12th place, at the same 12-place
+      print. The owner-answers records change (think-temp)
       applies it beyond the corpus: in this issue's walk #715's re-certifications at 19 counts and
       5a299b4's at 21 restate the 4e4c8ce certificates and are no longer held, and no row of this
       source changes. #719's own 631, 2.73e-13 below the 4e4c8ce certificate at the same print,

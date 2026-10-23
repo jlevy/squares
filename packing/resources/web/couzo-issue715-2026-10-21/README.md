@@ -54,8 +54,11 @@ Each count falls in one of three sets:
   against a `c6da0fc` certificate), so the print alone decides it. These are the issue’s
   own reports.
 - **30 re-certified.** The certificate was first committed at `5a299b4`, and its side is
-  below the `4e4c8ce` certificate of the same count, published on 15 October, by 2.37e-23
-  to 3.18e-23: both round up to the issue’s print. Each is one of the index’s L-border
+  below the `4e4c8ce` side of the same count, published on 15 October, by 2.37e-23 to
+  3.18e-23: both round up to the issue’s print. At 28 counts that side is a certificate;
+  at 798 and 855 it is an index deletion bound, the next count’s certificate less one
+  square, an earlier report by D6 (think-f2io) with no row on that decision’s
+  recommendation (think-kzme). Each is one of the index’s L-border
   constructions, written out in full. By the owner’s answer of 23 October 2026
   (think-fwa9) such a re-certification of the author’s own earlier publication restates
   it, so nothing is recorded for these counts.
@@ -394,7 +397,8 @@ The [history walk of Couzo’s watched publications](../../../campaign/issue-int
 records 30 of these earlier certificates, the ones `02f9690`, `f311f08` and `4e4c8ce`
 first published. The index deletion bounds at 743 and 985 are earlier reports by the
 owner’s answer of 23 October 2026 on D6 (think-f2io), so this issue’s restatements there
-are not recorded; the bounds have no row of their own (think-kzme).
+are not recorded; that the bounds have no row of their own is the decision’s
+recommendation (think-kzme).
 
 | n | Printed | First published | Earlier certificate | Here |
 | ---: | --- | --- | --- | --- |

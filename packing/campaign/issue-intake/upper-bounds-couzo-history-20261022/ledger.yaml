@@ -8636,16 +8636,20 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds,
-    at the least side the commit states there. Its 39 index deletion bounds, each deleting
-    from a 4e4c8ce certificate at a larger count, at 505, 533, 549, 551, 580, 583, 589, 593,
-    595, 598, 629, 632, 638, 642, 680, 683, 693, 700, 733, 743, 751, 752, 753, 788, 798, 805,
-    807, 845, 855, 864, 869, 904, 923, 927, 928, 965, 979, 985 and 989, have no row by the
-    owner''s answer of 23 October 2026 on D6 (think-f2io): a side obtained by deleting squares
-    from a published certificate at a larger count is an earlier report in report order, which
-    the index''s scope covers with no row of its own (beyond_horizon_replay.HISTORY_HELD).
-    Its verdicts at 1 count are decided only against held publications (beyond_horizon_replay.HISTORY_RESTING):
-    1 against constructions with no certificate file. An answer that leaves a hold out reruns
-    this walk.'
+    at the least side the commit states there. The walk holds its publications at 3 counts
+    back from a row, each waiting on an owner decision (beyond_horizon_replay.HISTORY_HELD):
+    3 index deletion bounds, deleting three squares from 754''s certificate, two from 754''s
+    and two from 929''s (certified_bounds.json at 4e4c8ce), beyond the D6 answer''s words
+    (think-kzme). Its 36 index deletion bounds, each deleting one square from the next count''s
+    4e4c8ce certificate, at 505, 533, 549, 551, 580, 583, 589, 593, 595, 598, 629, 632, 638,
+    642, 680, 683, 693, 700, 733, 743, 753, 788, 798, 805, 807, 845, 855, 864, 869, 904, 923,
+    928, 965, 979, 985 and 989, have no row by the owner''s answer of 23 October 2026 on D6
+    (think-f2io), that a side obtained by deleting a square from the next count''s published
+    certificate is an earlier report: a later equal or higher side is not recorded, and on
+    the decision''s recommendation, which the owner has not confirmed (think-kzme), it has
+    no row of its own (beyond_horizon_replay.HISTORY_HELD). Its verdicts at 1 count are decided
+    only against held publications (beyond_horizon_replay.HISTORY_RESTING): 1 against constructions
+    with no certificate file. An answer that leaves a hold out reruns this walk.'
 - report: franciscouzo/square-packing@58a7833
   url: https://github.com/franciscouzo/square-packing/tree/58a783368d4b7e70bb800f0009ea9ca03e578739
   kind: publication

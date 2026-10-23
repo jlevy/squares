@@ -937,7 +937,8 @@ def house_reason_errors(coverage: Mapping, results: Sequence[Mapping]) -> list[s
 
 
 def current_beyond_horizon(coverage: Mapping) -> dict[int, Mapping]:
-    """Each count's current beyond-horizon row: the one no later report supersedes.
+    """Each count's current beyond-horizon row: the one whose disposition is not in
+    `NOT_CURRENT`, neither superseded by a later report nor above a classical construction.
 
     Refuses a count with more than one current row rather than choosing between them;
     `beyond_horizon_errors` reports the same register as a failure.

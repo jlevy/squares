@@ -836,9 +836,11 @@ repositories:
       (think-8krd), the sub-print re-certifications (think-fwa9) and the index deletion bounds
       (think-f2io). The owner answered all three on 23 October 2026: Göbel's constructions are
       earlier reports, so neither those rows nor 58a7833's bounds, rational enclosures of Göbel's
-      sides, are recorded; the re-certifications restate the reports they beat; and the deletion
-      bounds are earlier reports with no row of their own (D6). Only whether an issue's claim at 743
-      or 985 gives a deletion bound a row waits, so this read now names think-kzme.
+      sides, are recorded; the re-certifications restate the reports they beat; and a bound one
+      square below the next count's certificate is an earlier report (D6). Whether such a bound has
+      a row of its own, whether an issue's claim at 743, 798, 855 or 985 gives it one, and the three
+      bounds at 751, 752 and 927 that delete two or three squares wait, so this read now names
+      think-kzme.
   - url: https://github.com/wand125/square-packing
     read_through: b57e66712b5f722b39fcb703692006062c7d9eb7
     read_on: '2026-10-15'

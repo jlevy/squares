@@ -209,8 +209,9 @@ comparison. Göbel’s classical constructions are earlier reports beyond $n = 3
 owner, 23 October 2026, [#613](https://github.com/jlevy/squares/issues/613)), so a row
 above Göbel’s construction at its count also stays listed as its source printed it.
 It is marked `above-classical-construction`, states the construction $p + q\sqrt 2$ it
-is above, and holds no count; the standing side there is the construction, which has no
-row, as the grid has none.
+is above, and holds no count.
+The walks’ standing side there is the construction, which has no row; the readers that
+fall back on the grid beyond the horizon do not compute it yet (think-v022).
 `devtools.beyond_horizon_replay` holds every row from $n = 325$ to $1024$ to Göbel’s
 construction exactly.
 Nine rows of 8 to 13 October at $n = 369, 375$ and $376$ are so marked, and 369 and 376
@@ -329,9 +330,9 @@ The process relies on these rules of the records:
   with the owner’s answers of 23 October 2026. A side below an earlier report by less
   than the 12-place print, at the same print, restates it and is no row; a side at or
   above Göbel’s classical construction at its count is above an earlier report; a
-  certificate its author withdrew from an issue is not a report; and a side obtained by
-  deleting squares from a published certificate at a larger count is an earlier report,
-  covered by its index with no row of its own.
+  certificate its author withdrew from an issue is not a report; and a side one square
+  below the next count’s published certificate is an earlier report, which on the D6
+  decision’s recommendation, not yet confirmed, has no row of its own.
 
 ## Registering a First-Party Result
 

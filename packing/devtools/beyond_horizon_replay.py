@@ -95,9 +95,10 @@ holds back a publication that waits on an owner decision rather than an import (
 a construction with no certificate file, or an index bound deleting squares from one
 (`HELD_CLASSES`). Two holds are settled by the owner's answers of 23 October
 (`Held.answer`): a certificate its author withdrew from an issue is kept out of the record
-(think-8m4k), and an index bound deleting squares from a published certificate is an
-earlier report with no row of its own (D6, think-f2io), so a later equal side, as #732's
-985, is not recorded. A verdict the walk decides
+(think-8m4k), and an index bound deleting a square from the next count's published
+certificate is an earlier report (D6, think-f2io), so a later equal side, as #732's 985,
+is not recorded; that it has no row of its own is D6's recommendation, which the owner has
+not confirmed (think-kzme). A verdict the walk decides
 only against held publications rests on them (`Resting`): an answer that leaves a hold
 out reruns the walk, and ``held-dependents`` says what each such answer would reopen
 (`refusal_flips`). ``check`` holds every hold, every resting verdict and every declaration
@@ -263,7 +264,7 @@ HELD_CLASSES = {
     CONSEQUENCE: (
         "an index bound that deletes squares from a larger count's certificate or from a "
         "construction the index states, with no certificate file at its own count; one "
-        "deleting from a published certificate is an earlier report with no row of its own, "
+        "deleting a square from the next count's published certificate is an earlier report, "
         "as the owner answered on 23 October 2026 (D6, think-f2io)"
     ),
     RECIPE: (
@@ -283,14 +284,19 @@ WITHDRAWN_ANSWER = (
     "withdrew from an issue, claiming a lower file later, is not a report, so the walk "
     "keeps it out of the record"
 )
-#: The owner's answer that settles an index deletion bound from a published certificate
-#: (`Held.answer`; D6 on think-f2io, which recommended no row of its own): it is a report
-#: the walk records, so a later side equal to or above it is not recorded, and the chain
-#: passes over it.
+#: The owner's answer that settles an index bound deleting one square from the next
+#: count's published certificate (`Held.answer`; D6 on think-f2io). The question was a
+#: side obtained by deleting a square from a neighbour's certificate, Couzo's 985 from his
+#: 986, and the answer "Yes, an earlier report", whose option read "A published deletion
+#: bound counts like any stated bound; a later equal or higher side is not recorded". The
+#: walk records it and the chain passes over it; that it has no row of its own is the
+#: decision's recommendation, which the owner has not confirmed (think-kzme). A bound
+#: deleting more squares, or from a farther count, is outside those words and stays held.
 DELETION_ANSWER = (
-    "the owner's answer of 23 October 2026 on D6 (think-f2io): a side obtained by deleting "
-    "squares from a published certificate at a larger count is an earlier report in report "
-    "order, which the index's scope covers with no row of its own"
+    "the owner's answer of 23 October 2026 on D6 (think-f2io), that a side obtained by "
+    "deleting a square from the next count's published certificate is an earlier report: "
+    "a later equal or higher side is not recorded, and on the decision's recommendation, "
+    "which the owner has not confirmed (think-kzme), it has no row of its own"
 )
 #: What a hold's class is called where a sentence counts holds (`held_sentence`).
 HELD_NAMES = {
@@ -496,9 +502,10 @@ _CLASSICAL_23AFF0C = "Göbel's squares and Friedman's off-centre family"
 #: What the history walk records and holds back from a row, by report and class: index
 #: deletion bounds and constructions with no certificate file, waiting on D2 (think-f2io);
 #: 23aff0c's extend Friedman's constructions (`_CLASSICAL_23AFF0C`), so they wait on
-#: think-zkxy too. 4e4c8ce's deletion bounds, each from one of its certificates, are
-#: settled by the owner's D6 answer (`DELETION_ANSWER`): earlier reports with no row of
-#: their own. ``check`` holds each to the walk.
+#: think-zkxy too. 36 of 4e4c8ce's 39 deletion bounds each delete one square from the next
+#: count's certificate and are settled by the owner's D6 answer (`DELETION_ANSWER`); the
+#: other three delete two or three squares and wait on think-kzme. ``check`` holds each to
+#: the walk.
 HISTORY_HELD: dict[str, tuple[Held, ...]] = {
     "TheSnakeFang/squarepack-certs@bef5c42": (
         _held(
@@ -513,10 +520,18 @@ HISTORY_HELD: dict[str, tuple[Held, ...]] = {
             CONSEQUENCE,
             "think-f2io",
             "505 533 549 551 580 583 589 593 595 598 629 632 638 642 680 683 693 700 "
-            "733 743 751 752 753 788 798 805 807 845 855 864 869 904 923 927 928 965 "
-            "979 985 989",
-            note="each deleting from a 4e4c8ce certificate at a larger count",
+            "733 743 753 788 798 805 807 845 855 864 869 904 923 928 965 979 985 989",
+            note="each deleting one square from the next count's 4e4c8ce certificate",
             answer=DELETION_ANSWER,
+        ),
+        _held(
+            CONSEQUENCE,
+            "think-kzme",
+            "751 752 927",
+            note=(
+                "deleting three squares from 754's certificate, two from 754's and two from "
+                "929's (certified_bounds.json at 4e4c8ce), beyond the D6 answer's words"
+            ),
         ),
     ),
     "franciscouzo/square-packing@23aff0c": (
@@ -3717,10 +3732,6 @@ def construction_problems(register: Mapping[str, Any]) -> list[str]:
         where = f"n={n} from {row['source_id']}"
         marked = row.get("disposition") == coverage_check.ABOVE_CONSTRUCTION
         form = intake_ledger.goebel_form(n)
-        if form is None:
-            if marked:
-                problems.append(f"{where}: marked above a construction, and Göbel has none")
-            continue
         exact = _stated_side(sources[str(row["source_id"])], n)
         low = exact if exact is not None else Fraction(value) - intake_ledger.unit(value)
         above = coverage_check.construction_sign(low, form.text()) == 1

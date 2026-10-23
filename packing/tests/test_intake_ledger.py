@@ -384,8 +384,10 @@ def test_a_claim_in_the_ruling_s_words_may_wait_on_the_owner() -> None:
 def test_goebel_s_construction_is_an_earlier_report_beyond_the_horizon() -> None:
     """The owner's answer on #613 (think-8krd): at 369 Göbel's strip 19 + sqrt(2)/2 joins
     the start below the grid, so a side above it is not recorded and one below is. A side
-    just below the construction at its 12-place print is a new side, not a restatement:
-    the ruling restates reports, never a construction."""
+    just below the construction at its 12-place print is recorded: the restatement ruling
+    as written restates reports, and whether it also reaches a construction is an open
+    question (think-oqjd); no case of it exists to 1024. Above the retained program's
+    reach, 1073, the construction is refused rather than read as absent."""
     construction = ledger.construction_side(369)
     assert construction is not None
     assert construction.kind == ledger.CONSTRUCTION
@@ -402,8 +404,11 @@ def test_goebel_s_construction_is_an_earlier_report_beyond_the_horizon() -> None
     plain = ledger.walk(369, grid, [above, under])
     assert [step.verdict for step in plain.steps] == ["recorded", "recorded"]
     assert ledger.construction_side(324) is None
-    with pytest.raises(ledger.LedgerError, match="stops at 1100"):
-        ledger.construction_side(1101)
+    assert ledger.goebel_reach() == 1073
+    assert ledger.construction_side(1073) is not None
+    for n in (1074, 1100, 1101):
+        with pytest.raises(ledger.LedgerError, match="gives no side above 1073"):
+            ledger.construction_side(n)
 
 
 def test_a_ruling_names_a_known_answer_its_day_and_its_bead() -> None:

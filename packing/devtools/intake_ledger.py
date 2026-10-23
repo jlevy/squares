@@ -1675,14 +1675,28 @@ def _goebel() -> tuple[Any, tuple[Any, ...]]:
     return program, tuple(program.families(program.LIMIT))
 
 
+def goebel_reach() -> int:
+    """The last count at which the retained program gives Göbel's side: the largest count
+    of any member it builds to its ``LIMIT`` of 1100, 1073. Above it the program states no
+    form. Builds of the same families to 3000 here, and to 5000 in review A of #754, give
+    the same least side at every count from 325 to 1073."""
+    _, forms = _goebel()
+    return max(form.count for form in forms)
+
+
 def goebel_form(n: int) -> Any:
     """Göbel's construction at ``n`` beyond the horizon, as the retained program states it
-    (a ``Form``: ``p + q sqrt 2``, its family and the count it packs), or None."""
+    (a ``Form``: ``p + q sqrt 2``, its family and the count it packs); None in the corpus.
+    A count above `goebel_reach` is refused, so a walk or check reaching past it fails
+    rather than reading no construction there."""
     if n <= HORIZON:
         return None
     program, forms = _goebel()
-    _require(n <= program.LIMIT, f"n = {n}: the Göbel program stops at {program.LIMIT}")
-    return program.goebel_at(n, list(forms))
+    reach = goebel_reach()
+    _require(n <= reach, f"n = {n}: the retained Göbel program gives no side above {reach}")
+    form = program.goebel_at(n, list(forms))
+    _require(form is not None, f"n = {n}: the Göbel program states no construction")
+    return form
 
 
 def construction_side(n: int) -> Side | None:

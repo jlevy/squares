@@ -450,36 +450,51 @@ the inputs and the comparison:
 
 Beyond the corpus the owner’s answers of 23 October 2026 are rules of the walk.
 The ledger’s `rulings` list names each one it applies, and the module docstring of
-`devtools.intake_ledger` owns them:
+`devtools.intake_ledger` owns them.
+The answers are quoted as the decision beads record them; the rest of each item is the
+record’s statement of the rule:
 
-- **A restatement is not recorded** (think-fwa9): “A side below an earlier report at its
-  count by less than the 12-place print, with both rounding up to the same 12-place
-  print, restates that report: the earlier report stays the row.”
-  The walk measures the distance to the member of the standing side the claim is closest
-  below, a report and not a construction.
-  A claim in the ruling’s words that an earlier ledger recorded and the answer did not
-  name waits on the owner (`awaiting_owner`). #719’s 631 is the one such claim to 1024:
-  another holder’s re-certification of Couzo’s `4e4c8ce` certificate, which #722
-  recorded (think-oqjd).
+- **A restatement is not recorded** (think-fwa9): “sub-print re-certifications are
+  RESTATEMENTS, not new rows.
+  The earlier certificate stays the row”.
+  The record reads a sub-print re-certification as a side below an earlier report at its
+  count by less than one unit in the 12th place, with both rounding up to the same
+  12-place print. The walk measures the distance to the member of the standing side the
+  claim is closest below, a report and not a construction; whether the answer also
+  reaches a side within the print below a construction is open (think-oqjd), and no such
+  side exists to 1024. A claim in the ruling’s words that an earlier ledger recorded and
+  the answer did not name waits on the owner (`awaiting_owner`). #719’s 631 is the one
+  such claim to 1024: another holder’s re-certification of Couzo’s `4e4c8ce`
+  certificate, which #722 recorded (think-oqjd).
 - **Göbel’s classical constructions are earlier reports** (think-8krd,
-  [#613](https://github.com/jlevy/squares/issues/613)). At each count the least side of
-  the three families the Kingbird catalogue states, at that count or by deleting squares
-  from a larger one, joins the start, so a rational side at or above it is not recorded.
-  The 15 October packet’s retained program computes it exactly.
+  [#613](https://github.com/jlevy/squares/issues/613)): “Goebel’s classical
+  constructions count as earlier reports beyond n = 324 (the baseline): a rational row
+  above Goebel’s exact side is not recorded.”
+  At each count the least side of the three families the Kingbird catalogue states, at
+  that count or by deleting squares from a larger one, joins the start, so a rational
+  side at or above it is not recorded.
+  The 15 October packet’s retained program computes it exactly to 1073, where its reach
+  ends, and a count beyond that is refused.
   A register row above it stays listed and is marked
   ([frontier README](../frontier/README.md#source-coverage-and-freshness)).
-- **A certificate its author withdrew from an issue is not a report** (think-8m4k). A
-  file in the author’s watched repository that his issue withdrew, where his later
-  release claims a lower side at that count, stays among the walk’s publications.
-  The walk keeps it out of the record (`beyond_horizon_replay.Held.answer`), and no
-  verdict rests on it.
-- **A deletion bound is an earlier report** (D6 on think-f2io). A side obtained by
-  deleting squares from a published certificate at a larger count is a report from the
-  publication that states it, so a later side equal to it or above it is not recorded:
-  #732’s 985 ties Couzo’s `4e4c8ce` bound there.
-  On the decision’s recommended terms the index’s scope covers it, with no row of its
-  own; the walk records it, the chain passes over it, and nothing rests on it.
-  Whether an issue that claims the count gives it a row is think-kzme.
+- **A certificate its author withdrew from an issue is not a report** (think-8m4k): “a
+  watched certificate its author withdrew from an issue, claiming a lower file later, is
+  NOT a report.” A file in the author’s watched repository that his issue withdrew, where
+  his later release claims a lower side at that count, stays among the walk’s
+  publications. The walk keeps it out of the record
+  (`beyond_horizon_replay.Held.answer`), and no verdict rests on it.
+- **A deletion bound is an earlier report** (D6 on think-f2io). The question was a side
+  obtained by deleting a square from a neighbour’s certificate, as Couzo’s 985 from his
+  986, and the answer “Yes, an earlier report”, whose option read “A published deletion
+  bound counts like any stated bound; a later equal or higher side is not recorded”.
+  So a bound one square below the next count’s published certificate is a report from
+  the publication that states it, and #732’s 985, which ties Couzo’s `4e4c8ce` bound
+  there, is not recorded.
+  The walk records the bound and the chain passes over it.
+  That it has no row of its own is the decision’s recommendation, not yet the owner’s
+  word; think-kzme asks that, whether an issue claiming the count (743, 798, 855, 985)
+  gives it a row, and about the three bounds that delete two or three squares (751, 752
+  and 927), which stay held.
   A deletion from a construction no certificate file states, as 23aff0c’s from
   Friedman’s, waits with that construction (D2, think-zkxy).
 
