@@ -28956,7 +28956,10 @@ evidence:
       review do not decide full native capture. Author positive results and 32 sampled 197/200 controls
       remain attributed; maintained whole-net v2 controls, private-worker/input/result controls, independent
       result review and explicit hosted research budget remain pending. No bound, theorem, optimality
-      or rating promotion; earlier FN1/T-102–T-111 results unchanged.
+      or rating promotion; earlier FN1/T-102–T-111 results unchanged. The n19, n20 and n26 candidates,
+      receipts and logs are retained since 23 October in
+      packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/, at the
+      stored digests this packet records, with exact premises receipts (EXACT_PREMISES_HOLD).
     source_reviewed: '2026-10-08'
   - id: E-gupta-438-exact-feasibility
     claim: upper-bound
@@ -29141,6 +29144,9 @@ evidence:
       sampled. Fresh full native capture, whole-net controls, restored positives, private-worker binding
       and independent result review remain pending. The copied project kernel establishes no independent
       implementation. No standing bound or rating changes; the original seven-case report is preserved.
+      The candidate, receipts and logs are retained since 23 October in
+      packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n27_L5655/,
+      at the stored digest recorded here, with an exact premises receipt (EXACT_PREMISES_HOLD).
     source_reviewed: '2026-10-08'
   - id: E-daniel-375-dated-105-130-report
     claim: upper-bound

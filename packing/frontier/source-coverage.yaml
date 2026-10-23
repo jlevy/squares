@@ -2972,6 +2972,7 @@ sources:
   replay_disposition: case-specific
   represented_by:
   - resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+  - resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
   evidence:
   - E-wand125-fine-net-lower-bounds-446-report
   notes: All seven original archives and sealed source/log/member identities retained outside live Git.
@@ -3024,6 +3025,7 @@ sources:
   replay_disposition: case-specific
   represented_by:
   - resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+  - resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
   evidence:
   - E-wand125-fine-net-n27-5655-followup-report
   notes: The later reported 1131/200 supersedes the original reported n27 value only. Original seven-case

@@ -951,6 +951,10 @@ n28, n29 and n31. The
 [authored factual packet](web/wand125-fine-net-lower-bounds-2026-10-08/README.md)
 records the reported bounds and complete source references.
 Independent whole-net replay and controls remain pending.
+The [release packet](web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md)
+retains, at revision `bf85d6b` and under OR-18, the candidates, receipts and logs of the
+four certificates T-233 registers (n19, n20, n26 and the n27 follow-up), with their
+maintained premise checks.
 
 **[wand125 fine-net n29 2026-10-10]**: Hosono’s later n29 certificate, `mixed_n29_L582`,
 reports $s(29) \ge 291/50 = 5.82$ on the same 2,073-direction net, superseding the

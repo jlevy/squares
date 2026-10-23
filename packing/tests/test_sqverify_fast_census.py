@@ -1201,3 +1201,23 @@ def test_the_n31_fine_net_packet_is_read_from_its_retained_release_members() -> 
     assert census.net_directions(case) == 2073
     assert packet in census.SHARED_CRATE_PACKETS
     assert packet not in census.INDEPENDENT_MIXED_PACKETS
+
+
+def test_the_446_release_packet_is_read_from_its_retained_release_members() -> None:
+    """The release members of #446's four T-233 certificates are read like the n31
+    packet's, and the packet shares the producer's crate."""
+    packet = "wand125-fine-net-lower-bounds-446-release-2026-10-08"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    expected = {
+        "mixed_n19_L48275": (19, "1931/400"),
+        "mixed_n20_L49125": (20, "393/80"),
+        "mixed_n26_L5555": (26, "1111/200"),
+        "mixed_n27_L5655": (27, "1131/200"),
+    }
+    assert {name: (case.n, case.side) for name, case in found.items()} == expected
+    root = census.WEB / packet / "release/certificates"
+    for name, case in found.items():
+        assert case.candidate == root / name / "candidate.json.gz"
+        assert census.net_directions(case) == 2073
+    assert packet in census.SHARED_CRATE_PACKETS
+    assert packet not in census.INDEPENDENT_MIXED_PACKETS

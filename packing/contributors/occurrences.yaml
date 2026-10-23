@@ -8548,6 +8548,76 @@ occurrences:
     project credit does not imply sole personal authorship.
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n31 2026-10-11]'
+    field: /authors/0
+  expected_text: Hosono
+  start: 0
+  end: 6
+  label: Hosono
+  role: source-author
+  disposition: resolved
+  evidence:
+  - commit-author
+  - owner-confirmation
+  contributor_id: hiroaki-hosono
+  note: Reviewed packing/resources/bibliography.yaml [[wand125 fine-net n31 2026-10-11]]
+    /authors/0 span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
+    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n31 2026-10-11]'
+    field: /credit
+  expected_text: Hosono after Tokoharu and Levy
+  start: 0
+  end: 6
+  label: Hosono
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - commit-author
+  - owner-confirmation
+  contributor_id: hiroaki-hosono
+  note: Reviewed packing/resources/bibliography.yaml [[wand125 fine-net n31 2026-10-11]]
+    /credit span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
+    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n31 2026-10-11]'
+    field: /credit
+  expected_text: Hosono after Tokoharu and Levy
+  start: 13
+  end: 21
+  label: Tokoharu
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: tokoharu
+  note: Reviewed packing/resources/bibliography.yaml [[wand125 fine-net n31 2026-10-11]]
+    /credit span 13:21. The source-specific rectangle-density method/checker lineage
+    identifies tokoharu/square-packing-density-bounds; the retained source licence
+    names tokoharu.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net n31 2026-10-11]'
+    field: /credit
+  expected_text: Hosono after Tokoharu and Levy
+  start: 26
+  end: 30
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed packing/resources/bibliography.yaml [[wand125 fine-net n31 2026-10-11]]
+    /credit span 26:30. The specific first-party jlevy/squares method or source is
+    the Joshua Levy identity established by LICENSE and the retained ojoshe receipt;
+    project credit does not imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[wand125 linear n122 2026-10-10]'
     field: /authors/0
   expected_text: Hosono
