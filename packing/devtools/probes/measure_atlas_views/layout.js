@@ -91,7 +91,6 @@
         animation.effect.target?.matches(".site-atlas-cell") === true &&
         animation.playState !== "finished",
     );
-  const toggle = block.querySelector("[data-atlas-toggle]");
   /**
    * @param {Element} tab
    * @param {string | null} key
@@ -200,7 +199,6 @@
               })),
             })),
           },
-    expanded: toggle?.getAttribute("aria-expanded") ?? null,
     search: location.search,
     hash: location.hash,
     // A tile by its case, else an element by its id, else a link, as the key's is, by its

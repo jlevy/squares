@@ -10,8 +10,6 @@ interface SiteAtlasParts {
   sizes: HTMLElement | null;
   /** Keep view/size state local; geometry and FLIP remain shared with the dedicated Atlas. */
   scoped?: boolean;
-  /** Complete the visible preview with freshly measured capacity, before layout writes. */
-  beforeArrange?: (capacity: number) => void;
   scales?: HTMLElement | null;
   drawings?: HTMLElement | null;
   /** Restart preparation for the sources selected by the drawing chooser. */
@@ -25,8 +23,30 @@ interface SiteAtlasViews {
   fontsReady: Promise<FontFaceSet>;
   arrange(): void;
   change(mutate: () => void): void;
+  /** End scroll following: the reader has taken the atlas over. */
+  hold(): void;
 }
 
 interface SiteAtlasViewApi {
   mount(parts: SiteAtlasParts): SiteAtlasViews;
+}
+
+/** The last reading of a triangle that follows the scroll (`atlas-view.js`): the scroll
+ * since its stage was pinned, the point of the laid-out triangle at the focus line, the
+ * focus line on the stage, the zoom, the pan as a right-to-left scroller reads it, the
+ * reader's own share of the pan, the scroll at which the triangle's bottom reaches the
+ * stage's, and how many times the triangle has been laid out. */
+interface AtlasFollowReading {
+  scrolled: number;
+  point: number;
+  line: number;
+  zoom: number;
+  pan: number;
+  nudge: number;
+  end: number;
+  lays: number;
+}
+
+interface HTMLElement {
+  atlasFollow?: AtlasFollowReading;
 }
