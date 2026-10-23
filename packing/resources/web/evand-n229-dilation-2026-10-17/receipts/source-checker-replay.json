@@ -1,0 +1,35 @@
+{
+  "checkers": {"search/exact/verify_cert.py":"3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52","search/exact/verify_cert2.py":"55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3"},
+  "controls": {"duplicate-square":"square 2 replaced by square 1","sharp-far-wall":"the side lowered by the least right or top clearance plus 10^-30","sharp-near-wall":"every square moved left and down by the least left or bottom clearance plus 10^-30","square-outside":"square 1 moved S + 2 to the right"},
+  "cpu_seconds": 2.561,
+  "environment": {"implementation":"CPython","invocation":"python -I CHECKER CERTIFICATE, one child process each, with an empty environment, no standard input and a scratch working directory","machine":"x86_64","python":"3.14.7"},
+  "format": "evand-source-checker-replay-v1",
+  "invocations": 10,
+  "packet": "evand-n229-dilation-2026-10-17",
+  "rows": [
+    {
+      "certificate": "search/packer/candidates/s229.cert",
+      "controls": {"duplicate-square":{"sha256":"37d912fcc7590e35deee13e63df0c291779588d1e9fc0a184760b49885ad62a4"},"sharp-far-wall":{"sha256":"822c22242c719999da412655d5d3f18f482e606b131c5a773a65f4ff9b2142d8"},"sharp-near-wall":{"sha256":"579141ca51fe9b0b534182b2fb69d5a8999bac66ef1947e7ebead5fd506e2b53"},"square-outside":{"sha256":"62c8e5a26e1a39ed7952263488bab9da7c3d391e70b2ca6f99b39983c481593f"}},
+      "n": 229,
+      "runs": {
+        "search/exact/verify_cert.py": {
+          "controls": {
+            "duplicate-square": {"cpu_seconds":0.35,"exit_status":1,"stderr":"","stdout":["n = 229, S = 7825081627429265081627421439843/500000000000000000000000000000 (~15.650163254858529882)","min wall clearance  = 5.010e-13  (square #8)","min pair separation = -1.000e+00  (squares #0, #1; 539 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","INVALID"],"wall_seconds":1.632},
+            "sharp-far-wall": {"cpu_seconds":0.299,"exit_status":1,"stderr":"","stdout":["n = 229, S = 7825081627429014581627421438854325081627429014081627421438847/500000000000000000000000000000500000000000000000000000000000 (~15.650163254858028949)","min wall clearance  = -1.000e-30  (square #13)","min pair separation = 9.997e-13  (squares #193, #199; 536 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","INVALID"],"wall_seconds":0.472},
+            "sharp-near-wall": {"cpu_seconds":0.291,"exit_status":1,"stderr":"","stdout":["n = 229, S = 7825081627429265081627421439843/500000000000000000000000000000 (~15.650163254858529882)","min wall clearance  = -1.000e-30  (square #8)","min pair separation = 9.997e-13  (squares #193, #199; 536 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","INVALID"],"wall_seconds":0.57},
+            "square-outside": {"cpu_seconds":0.372,"exit_status":1,"stderr":"","stdout":["n = 229, S = 7825081627429265081627421439843/500000000000000000000000000000 (~15.650163254858529882)","min wall clearance  = -1.450e+01  (square #0)","min pair separation = 9.997e-13  (squares #193, #199; 530 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","INVALID"],"wall_seconds":0.667}
+          },
+          "positive": {"cpu_seconds":0.321,"exit_status":0,"stderr":"","stdout":["n = 229, S = 7825081627429265081627421439843/500000000000000000000000000000 (~15.650163254858529882)","min wall clearance  = 5.010e-13  (square #8)","min pair separation = 9.997e-13  (squares #193, #199; 536 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","VALID: s(n) <= S"],"wall_seconds":0.955}
+        },
+        "search/exact/verify_cert2.py": {"controls":{"duplicate-square":{"cpu_seconds":0.035,"exit_status":1,"stderr":"","stdout":["INVALID: vertex containment between #0 and #1"],"wall_seconds":0.051},"sharp-far-wall":{"cpu_seconds":0.039,"exit_status":1,"stderr":"","stdout":["INVALID: corner outside the open box"],"wall_seconds":0.168},"sharp-near-wall":{"cpu_seconds":0.037,"exit_status":1,"stderr":"","stdout":["INVALID: corner outside the open box"],"wall_seconds":0.132},"square-outside":{"cpu_seconds":0.041,"exit_status":1,"stderr":"","stdout":["INVALID: corner outside the open box"],"wall_seconds":0.172}},"positive":{"cpu_seconds":0.776,"exit_status":0,"stderr":"","stdout":["VALID: 229 closed unit squares pairwise disjoint inside the open box of side 15.650163254858529882 (536 close pairs checked)"],"wall_seconds":2.191}}
+      },
+      "sha256": "0366e8178e37d7c5b4baf002d35f4c1088b4e20ab8f90283d418f634c8af204d",
+      "side": "7825081627429265081627421439843/500000000000000000000000000000"
+    }
+  ],
+  "source": {"commit":"e0338c7becf95dbc7584b48d8868c0a1cd21079c","url":"https://github.com/evand/square-packing"},
+  "started_utc": "2026-10-23T08:57:04Z",
+  "tool": "python -m devtools.evand_source_checkers run",
+  "wall_seconds": 6.607,
+  "workers": 2
+}

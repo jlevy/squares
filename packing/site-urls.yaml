@@ -17433,7 +17433,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: upper-bound
@@ -17449,6 +17449,7 @@ urls:
     evidence:
     - E-evand-669-n155-report
     - E-evand-669-n155-exact-feasibility
+    - E-evand-669-n155-source-checker-replay
     artifacts:
     - packing/resources/web/evand-n155-explorer-2026-10-17/README.md
     - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
@@ -17478,13 +17479,36 @@ urls:
       - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
       - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2_regularized.cert
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+  - date: '2026-10-23'
+    reason: 'The source''s own checkers, verify_cert.py and verify_cert2.py, ran here unchanged on
+      23 October 2026 (review A2 of #747): the result cites that replay as same-implementation evidence
+      (E-evand-669-n155-source-checker-replay); the bound, scope, attribution and rungs are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 155
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n155 explorer 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-evand-669-n155-report
+      - E-evand-669-n155-exact-feasibility
+      artifacts:
+      - packing/resources/web/evand-n155-explorer-2026-10-17/README.md
+      - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
+      - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2_regularized.cert
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
 - path: result/t-198.html
   canonical: result/t-198.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: upper-bound
@@ -17500,6 +17524,7 @@ urls:
     evidence:
     - E-evand-674-n229-opening-report
     - E-evand-674-n229-opening-exact-feasibility
+    - E-evand-674-n229-opening-source-checker-replay
     artifacts:
     - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
     - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
@@ -17527,13 +17552,36 @@ urls:
       - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
       - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+  - date: '2026-10-23'
+    reason: 'The source''s own checkers, verify_cert.py and verify_cert2.py, ran here unchanged on
+      23 October 2026 (review A2 of #747): the result cites that replay as same-implementation evidence
+      (E-evand-674-n229-opening-source-checker-replay); the bound, scope, attribution and rungs are
+      unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 229
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n229 dilation 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-evand-674-n229-opening-report
+      - E-evand-674-n229-opening-exact-feasibility
+      artifacts:
+      - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
+      - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
 - path: result/t-199.html
   canonical: result/t-199.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: upper-bound
@@ -17549,6 +17597,7 @@ urls:
     evidence:
     - E-evand-674-n229-update-report
     - E-evand-674-n229-update-exact-feasibility
+    - E-evand-674-n229-update-source-checker-replay
     artifacts:
     - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
     - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
@@ -17576,6 +17625,29 @@ urls:
       - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
       - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+  - date: '2026-10-23'
+    reason: 'The source''s own checkers, verify_cert.py and verify_cert2.py, ran here unchanged on
+      23 October 2026 (review A2 of #747): the result cites that replay as same-implementation evidence
+      (E-evand-674-n229-update-source-checker-replay); the bound, scope, attribution and rungs are
+      unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 229
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n229 dilation update 2026-10-18]'
+        published: '2026-10-18'
+      builds_on: null
+      evidence:
+      - E-evand-674-n229-update-report
+      - E-evand-674-n229-update-exact-feasibility
+      artifacts:
+      - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
+      - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
 - path: result/t-200.html
   canonical: result/t-200.html
   kind: result
