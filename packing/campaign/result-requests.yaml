@@ -4410,7 +4410,8 @@ issues:
     title: 'New packings below register for 28 counts (n = 84–306): registration request'
     author: Mishapolk
     opened: '2026-10-09'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: >-
@@ -4535,8 +4536,53 @@ issues:
         id: E-mishapolk-470-exact-feasibility
         status: confirmed
       - result: n105-closed-form-withdrawn
+    - url: https://github.com/jlevy/squares/issues/470#issuecomment-6376106671
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: fourteen-below-case
+        id: T-138
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fourteen-below-case
+        id: E-mishapolk-470-pose-report
+        status: reviewed
+      - result: fourteen-below-case
+        id: E-mishapolk-470-exact-feasibility
+        status: confirmed
+      - result: fourteen-not-below-case
+        id: E-mishapolk-470-pose-report
+        status: reviewed
+      - result: fourteen-not-below-case
+        id: E-mishapolk-470-exact-feasibility
+        status: confirmed
+      - result: readme-132-267
+        id: T-138
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: readme-132-267
+        id: E-mishapolk-470-pose-report
+        status: reviewed
+      - result: readme-132-267
+        id: E-mishapolk-470-exact-feasibility
+        status: confirmed
+      - result: n105-closed-form-withdrawn
     close_when: The import of the corrected certificates and its disposition are on main and the owner
       has posted the resulting state; optimality is outside this request.
+    notes: >-
+      The final reply, posted at 2026-10-23T22:36:26Z (issuecomment-6376106671) after #747
+      merged (7cd0a94bf) and its deploy was verified (squaremath.org at 77aba4c02, data
+      revision 79926ea52), reported T-138 at V3/C3, confirmed, independently re-implemented, at
+      S3, unchanged, and selected at none of its sixteen counts. It gave #747's measurement of
+      where each pose started (measure/identity.json): 103 Ryan Xu's and 258, 302 and 303
+      SQUISH's, each refined; ten Francisco Couzo's T-128 and T-130 packings at a slightly
+      larger side; 267 Ryan Xu's arrangement with every square moved; 132 pairing with none. It
+      named Siddharth Gupta and Evan Daniel in the credit at 180 and 270, and said that neither
+      question of 12 October holds anything open, with answers still welcome. The issue was
+      closed with it at 22:36:27Z: nothing the author asked for is queued.
   - number: 471
     title: 'Preprint: c*(k) = O(k^{3/8}) (explicit: c*(k) < 43.06 k^{3/8} for k >= 4e26; < 20.668 k^{2/5}
       + 0.623 for k >= 1.6e7)'
@@ -6565,9 +6611,10 @@ issues:
         lists #557 as owner-reserved, and think-l3oo item 3 (16 October) reserves the
         replies to #557 and #565 for the owner.
         think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
-        recorded this hold on 23 October 2026. No instruction in the owner's own words is
-        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
-        them among the owner's open questions).
+        recorded this hold on 23 October 2026. Asked in conversation on 23 October which of
+        the four should stay reserved, the owner stated no preference. As on think-qh3s's
+        question, no preference keeps the status quo, so the four holds stand (think-5ip2).
+        No instruction in the owner's own words is recorded.
     beads:
     - think-00y8
     - think-r7m8
@@ -6676,9 +6723,10 @@ issues:
         owner-reserved, and think-l3oo item 3 (16 October) reserves the replies to #557
         and #565 for the owner.
         think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
-        recorded this hold on 23 October 2026. No instruction in the owner's own words is
-        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
-        them among the owner's open questions).
+        recorded this hold on 23 October 2026. Asked in conversation on 23 October which of
+        the four should stay reserved, the owner stated no preference. As on think-qh3s's
+        question, no preference keeps the status quo, so the four holds stand (think-5ip2).
+        No instruction in the owner's own words is recorded.
     beads:
     - think-hcqr
     - think-acbk
@@ -7370,6 +7418,11 @@ issues:
     replies:
     - url: https://github.com/jlevy/squares/issues/533#issuecomment-6206055919
       date: '2026-10-16'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/533#issuecomment-6370778184
+      date: '2026-10-23'
       by: jlevy
       kind: follow-up
       reported: []
@@ -8567,9 +8620,10 @@ issues:
         October) asks whether the 379 side, which no retained certificate carries, gets a
         beyond-horizon row (think-rfce).
         think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
-        recorded this hold on 23 October 2026. No instruction in the owner's own words is
-        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
-        them among the owner's open questions).
+        recorded this hold on 23 October 2026. Asked in conversation on 23 October which of
+        the four should stay reserved, the owner stated no preference. As on think-qh3s's
+        question, no preference keeps the status quo, so the four holds stand (think-5ip2).
+        No instruction in the owner's own words is recorded.
     beads:
     - think-rfce
     answer_bead: think-rfce
@@ -8769,9 +8823,10 @@ issues:
         2026) holds it until the owner decides the pull request or tells a pass to post,
         and think-l3oo item 1 (16 October) asks the owner to decide it.
         think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
-        recorded this hold on 23 October 2026. No instruction in the owner's own words is
-        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
-        them among the owner's open questions).
+        recorded this hold on 23 October 2026. Asked in conversation on 23 October which of
+        the four should stay reserved, the owner stated no preference. As on think-qh3s's
+        question, no preference keeps the status quo, so the four holds stand (think-5ip2).
+        No instruction in the owner's own words is recorded.
     beads:
     - think-9v2k
     answer_bead: think-9v2k
