@@ -2449,6 +2449,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/campaign/result-requests.yaml",
             "packing/devtools/check_source_coverage.py",
+            "packing/devtools/intake_ledger.py",
+            "packing/devtools/upper_bound_reports.py",
             "packing/frontier/README.md",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
@@ -2475,8 +2477,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write every "
             "file byte-identical. Measured again at f590f81f4, after the D6 answer's "
-            "records and notes, and after review A of #754 against main 769e441e1 "
-            "(#748), with the same outcome. No PDF was printed; each prints "
+            "records and notes, and after review A of #754, A2 included, against main "
+            "cc91ee1b8 (#746), with main's seven candidate inputs swapped in, "
+            "intake_ledger.py and upper_bound_reports.py among them, with the same "
+            "outcome. No PDF was printed; each prints "
             "from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
