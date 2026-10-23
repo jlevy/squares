@@ -6976,7 +6976,25 @@ issues:
         docs/proofs/k0_knowledge.md, 1,277 lines at the pin, retained by the packet with
         SHA-256 fe51c45e...a036. The import read only attempts/A275-k0-knowledge/, which the
         note named.
+    - url: https://github.com/jlevy/squares/issues/526#issuecomment-6356603856
+      date: '2026-10-23'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: k0-theorems-and-negatives
+      - result: k0-knowledge-refresh
+      corrects:
+      - https://github.com/jlevy/squares/issues/526#issuecomment-6200840511
     close_when: The owner has answered the asks and the reply states what was retained.
+    notes: >-
+      The correction, posted at 2026-10-23T03:22:45Z (issuecomment-6356603856), withdraws the
+      acknowledgement's question (issuecomment-6200840511): the packet does retain
+      docs/proofs/k0_knowledge.md at 651a9a5 (1,277 lines, sections 0 to 14); the 15 October
+      import read only attempts/A275-k0-knowledge/. It said the refresh at e5ebaa6 (section
+      15) and the path fix at 0b0a072 are past the pin and register nothing, that the two
+      corrections to note 03 are recorded with the refresh, and that the asks wait on the
+      owner (think-tnfo), and asked whether the compute ask is now pair3 alone. The issue
+      stays open.
   - number: 527
     title: 'Geometry-before-LP toolkit for stratum trees (exact-rational leaf rules, 7.2× on closed nodes): registration request'
     author: Esummins
@@ -20708,7 +20726,8 @@ issues:
     title: 's(303) ≤ 17.909772217275: registration request'
     author: evand
     opened: '2026-10-22'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: >-
@@ -20747,10 +20766,38 @@ issues:
     beads:
     - think-icp1
     answer_bead: think-icp1
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/728#issuecomment-6356752215
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n303
+        id: T-230
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n303
+        id: E-evand-728-n303-report
+        status: reviewed
+      - result: n303
+        id: E-evand-728-n303-exact-feasibility
+        status: confirmed
+      - result: n303
+        id: E-evand-728-n303-review-exact-feasibility
+        status: confirmed
     close_when: >-
       The result is registered, reviewed and adopted at 303 with its drawing regularized, and
       the reply on main says so; nothing the author asked for is queued.
+    notes: >-
+      The final reply, posted at 2026-10-23T03:35:16Z (issuecomment-6356752215) after #731 merged
+      (6c70d843f), reported T-230 at V3/C3, confirmed, independently re-implemented, at S3:
+      the packet pinning f06521f, the two maintained routes' replay with its shared adapter
+      components, the stage 4 review's own checker, the adoption at 303 with the drawing
+      regularized, 1.86074e-4 below T-186, and the packing as a new arrangement of Ostashev's
+      two-band design. It asked what the matching distance 0.266 measures, whether the
+      comparison column means #562 alone, and for any lower certificate at 303 in a new issue.
+      The issue was closed with it at 03:35:17Z: nothing the author asked for is queued.
   - number: 732
     title: '328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof'
     author: Mishapolk
