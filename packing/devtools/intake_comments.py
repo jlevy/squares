@@ -25,10 +25,13 @@ From ``packing/``, with the project interpreter::
     python -m devtools.intake_comments COMMENTS.yaml --check DIR
 
 ``--out`` writes ``<issue>.md`` for each comment and an ``INDEX.md`` to a directory,
-normally a scratch one: the drafts are not part of the record. ``--check`` compares a
-directory of drafts with what would be written and exits 1 on a difference. The ledger
-is the one the YAML's ``ledger`` names, as a repository-relative path, or else the
-``ledger.json`` beside the YAML.
+normally a scratch one: the drafts are not part of the record. It refuses, writing
+nothing, a comment on an issue held for the owner (``held`` in
+``campaign/result-requests.yaml``): no pass posts on such an issue, so it takes a stated
+skip instead, as ``check_requests --draft`` refuses it (review B5 of #747). ``--check``
+compares a directory of drafts with what would be written and exits 1 on a difference.
+The ledger is the one the YAML's ``ledger`` names, as a repository-relative path, or else
+the ``ledger.json`` beside the YAML.
 """
 
 from __future__ import annotations
@@ -45,6 +48,7 @@ from typing import Any
 
 from strif import atomic_write_text
 
+from devtools import check_requests
 from devtools.check_requests import FOOTER
 from sqpack.yamlio import safe_load
 
@@ -578,6 +582,16 @@ def check(expected: Mapping[str, str], directory: Path) -> list[str]:
     return problems
 
 
+def held_issues() -> dict[str, str]:
+    """The issues held for the owner in the requests record, by number: the day each hold
+    was recorded."""
+    return {
+        str(issue["number"]): str(hold["since"])
+        for issue in check_requests.load_record()["issues"]
+        if (hold := check_requests.held(issue)) is not None
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="python -m devtools.intake_comments",
@@ -606,6 +620,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         verdict = "differ" if problems else "match"
         print(f"{len(expected)} drafts {verdict} in {arguments.check}")
         return 1 if problems else 0
+    held = held_issues()
+    issues = (name.removesuffix(".md") for name in sorted(expected) if name != INDEX)
+    if refused := [f"#{issue}" for issue in issues if issue in held]:
+        print(
+            "intake_comments: refused: "
+            + ", ".join(refused)
+            + " held for the owner (result-requests.yaml); give each a stated skip instead",
+            file=sys.stderr,
+        )
+        return 2
     arguments.out.mkdir(parents=True, exist_ok=True)
     for name, text in expected.items():
         atomic_write_text(arguments.out / name, text, encoding="utf-8")
