@@ -8803,7 +8803,8 @@ issues:
     title: 's(381) <= 19.985624661051481: registration request'
     author: mstrmg
     opened: '2026-10-13'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: 'Miles Gray (mstrmg) reports an exact certificate at 381, beyond the case corpus. Not imported:
@@ -8834,8 +8835,23 @@ issues:
       kind: other
       reported:
       - result: n381
+    - url: https://github.com/jlevy/squares/issues/582#issuecomment-6356980937
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n381
     close_when: The reply saying why the certificate is not recorded is posted and the author has had the
       chance to answer.
+    notes: >-
+      The final comment, posted at 2026-10-23T03:54:44Z (issuecomment-6356980937), restated the
+      14 October disposition: the owner decided that day that a certificate published in a
+      watched repository is reported from its first commit, so Kevin Fang's smaller certificate
+      at 381 (TheSnakeFang/squarepack-certs@e646c47, 12 October, before this issue) came first
+      and this one is not recorded. It said the row at 381 is now Mykhailo Polkovskyi's #719
+      certificate, 19.974739840480, that counts beyond the corpus take no register entry and no
+      site page, and that nothing asked for is queued. The issue was closed with it at
+      03:54:46Z.
   - number: 583
     title: '154-382: registration request'
     author: franciscouzo
@@ -8953,7 +8969,8 @@ issues:
       (beyond-horizon)'
     author: evand
     opened: '2026-10-13'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: Evan Daniel reports exact rational certificates at 339, 364 and 375, all beyond the case corpus.
@@ -8990,8 +9007,23 @@ issues:
       kind: follow-up
       reported:
       - result: three-beyond-horizon
+    - url: https://github.com/jlevy/squares/issues/584#issuecomment-6356980358
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: three-beyond-horizon
     close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
       corpus take no register entry, and optimality is outside this request.
+    notes: >-
+      The final comment, posted at 2026-10-23T03:54:41Z (issuecomment-6356980358), said the three
+      certificates are settled as rows beyond the corpus, replayed on both maintained exact
+      routes, as the follow-up of 14 October said, and where each count stands now: at 375 the
+      row is still the current row (19.882451030482); at 364 it is superseded by Francisco
+      Couzo's #670 row, 19.583782190152, 1.38e-8 below it, recorded on 22 October by #720; at
+      339 it was superseded by Couzo's #586, and the current row is now Mykhailo Polkovskyi's
+      #719, 18.907351471177. Nothing asked for is queued, and the issue was closed with it at
+      03:54:42Z.
   - number: 586
     title: '154, 339, 379, 380, 382; precision refinements at 211 and 241: registration request'
     author: franciscouzo
@@ -10050,7 +10082,8 @@ issues:
     title: 'n366 new best known packing: registration request'
     author: mstrmg
     opened: '2026-10-15'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: 'Miles Gray (mstrmg) reports an exact certificate at 366, beyond the case corpus: gist c3350a7e
@@ -10087,6 +10120,12 @@ issues:
       kind: follow-up
       reported:
       - result: n366
+    - url: https://github.com/jlevy/squares/issues/624#issuecomment-6356981893
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n366
     close_when: The reply saying why the certificate is not recorded is posted and the author has had the
       chance to answer.
     notes: >-
@@ -10095,6 +10134,12 @@ issues:
       were awaiting import: the history walk recorded certificates/best/n366.cert at 4e4c8ce,
       side 19.656854249493, as the current row at 366. #624 stays not imported, for the reason
       the acknowledgement gave.
+
+      The final comment, posted at 2026-10-23T03:54:49Z (issuecomment-6356981893), restated the
+      disposition of the acknowledgement and the follow-up: the certificate at 366 is not
+      imported, since franciscouzo/square-packing@4e4c8ce, first committed before this issue,
+      publishes a smaller one, now the current row at 366 (19.656854249493). Nothing asked for
+      is queued, and the issue was closed with it at 03:54:50Z.
   - number: 639
     title: 'Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval,
       exact configuration): registration request'
@@ -13164,7 +13209,8 @@ issues:
     title: '204-998: registration request'
     author: franciscouzo
     opened: '2026-10-18'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: >-
@@ -14312,6 +14358,94 @@ issues:
         verification: V3
         confirmation: C3
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/675#issuecomment-6356979866
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n204
+        id: T-228
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n464
+      - result: n502
+      - result: n545
+      - result: n546
+      - result: n547
+      - result: n548
+      - result: n549
+      - result: n554
+      - result: n592
+      - result: n593
+      - result: n598
+      - result: n602
+      - result: n603
+      - result: n641
+      - result: n642
+      - result: n650
+      - result: n652
+      - result: n654
+      - result: n693
+      - result: n700
+      - result: n701
+      - result: n705
+      - result: n706
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n758
+      - result: n759
+      - result: n760
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n807
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n816
+      - result: n817
+      - result: n863
+      - result: n864
+      - result: n865
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n919
+      - result: n923
+      - result: n924
+      - result: n927
+      - result: n928
+      - result: n930
+      - result: n931
+      - result: n932
+      - result: n933
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
+      - result: n994
+      - result: n995
+      - result: n996
+      - result: n997
+      - result: n998
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -14355,6 +14489,13 @@ issues:
       (e929137a8) and its Pages deployment was checked (Certificate page run 39877818964),
       reported T-228 at V3/C3, confirmed, independently re-implemented, at S2, with #670's T-226
       now S3, and still superseded at 204. It asked how sqpack/verify.py was called.
+
+      The final comment, posted at 2026-10-23T03:54:39Z (issuecomment-6356979866), reported T-228
+      at V3/C3, confirmed, independently re-implemented, at S2, still superseded at 204 by later
+      certificates, and the 78 rows beyond the corpus as #720 recorded them, each superseded on
+      entry by a later report. Nothing asked for is queued; the follow-up's question, how
+      sqpack/verify.py was called, is still welcome but holds nothing open. The issue was closed
+      with it at 03:54:39Z.
   - number: 678
     title: '204-998: registration request'
     author: franciscouzo
@@ -20857,14 +20998,16 @@ issues:
         Beyond the corpus. The ledger of 23 October for issue 732 records it, 8.66e-13 below
         #719's row at 499, and holds it: both round up to 22.881306218113 at 12 places, a
         re-certification below the print, the class the owner's question think-fwa9 covers. The
-        packet pins the certificate by digest; no row until that answer.
+        packet pins the certificate by digest; no row until that answer. On 23 October the owner
+        answered that such re-certifications are restatements; think-temp applies the answer
+        after this import merges.
       queued: true
       bead: think-fwa9
       blocked_on:
       - think-fwa9
     - key: n985
       claim: >-
-        s(985) <= 31.920310217041, rounded up; the exact side of certificates/0000-0999/n985.cert
+        s(985) <= 31.920310216821, rounded up; the exact side of certificates/0000-0999/n985.cert
         at 17cc220 is authoritative.
       source: body
       not_registered: >-
@@ -20885,7 +21028,8 @@ issues:
         Beyond 1024: whether counts above 1024 are tracked is the owner's decision (D1,
         think-f2io), which the issue's proposal to stop at N = 10,000 joins. Index-level custody
         holds; nine files were read and 3426's certificate states a side above its own grid side.
-        Not derived, replayed or recorded.
+        Not derived, replayed or recorded. On 23 October the owner answered that rows above 1024
+        are tracked; think-llit applies the answer.
       queued: true
       bead: think-0gp6
       blocked_on:
