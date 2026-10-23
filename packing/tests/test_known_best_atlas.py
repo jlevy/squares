@@ -1853,7 +1853,7 @@ def test_a_pose_maps_each_kind_of_witness_exactly_as_its_frame_is_built() -> Non
     For a witness of each kind, under each of the eight poses, every corner is exactly
     the identity frame's corner under the reference map (`_mapped_corners`), read back
     from the scalars' sources: rational corners (n = 3 and 62), rational centres and bases
-    (n = 70), decimal centres and angles (n = 5 and 11), the same decimals given as
+    (n = 68), decimal centres and angles (n = 5 and 11), the same decimals given as
     corners, the number field (n = 51), and a regularized view, which `regularized_frame`
     turns while its source frame gives only the tier and check. The side, square ids,
     labels and order and every other field are the identity frame's, and `IDENTITY` is
@@ -1863,7 +1863,7 @@ def test_a_pose_maps_each_kind_of_witness_exactly_as_its_frame_is_built() -> Non
 
     witnesses = {
         case.frontier.n: case.witness
-        for case in known_best_builder.retained_cases((3, 5, 11, 51, 62, 70))
+        for case in known_best_builder.retained_cases((3, 5, 11, 51, 62, 68))
     }
     kinds = {
         n: (witness["scalar"]["kind"], witness["representation"])
@@ -1875,7 +1875,9 @@ def test_a_pose_maps_each_kind_of_witness_exactly_as_its_frame_is_built() -> Non
         11: ("decimal", "center-angle"),
         51: ("algebraic-number-field", "center-basis"),
         62: ("rational", "corners"),
-        70: ("rational", "center-basis"),
+        # 68, not 70: the adoption of 23 October 2026 took 70 to PR #574's algebraic
+        # certificate (T-174, think-ot5c), a kind n = 51 already covers.
+        68: ("rational", "center-basis"),
     }
     # The decimal corners branch, which no retained witness takes: n = 11's projection
     # given as corners, one coordinate spelled with a trailing zero.
