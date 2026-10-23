@@ -378,15 +378,17 @@ def test_the_hero_draws_case_53_and_keeps_its_ordinary_record_link() -> None:
 
 
 def test_the_hero_is_turned_by_its_cases_recorded_pose(monkeypatch: pytest.MonkeyPatch) -> None:
-    """The hero applies the pose the drawings record states for its case, set here
-    rather than read, and never draws the house drawing as published beside it."""
-    from devtools import default_drawings  # noqa: PLC0415
+    """The hero applies the pose the flip regularization record states for its case
+    (`flip_regularization.poses`), set here rather than read, since the record leaves the
+    hero's case in its source's pose, and never draws the house drawing as published
+    beside it."""
+    from devtools import flip_regularization  # noqa: PLC0415
     from devtools.flip_regularization import Pose  # noqa: PLC0415
     from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
 
     turned = Pose(rotate=90, flip=True)
     poses = dict.fromkeys(range(1, 325), turned)
-    monkeypatch.setattr(default_drawings, "flip_regularizations", poses.copy)
+    monkeypatch.setattr(flip_regularization, "poses", poses.copy)
     hero = overview_sections.hero()
     n = overview_sections.HERO_CASE
     assert packing_svg(n, units=1000, pose=turned) in hero

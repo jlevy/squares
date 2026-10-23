@@ -159,6 +159,7 @@ name: Certificate page
       - packing/devtools/atlas_print_font.py
       - packing/devtools/default_drawings.py
       - packing/devtools/flip_regularization.py
+      - packing/atlas/known-best/flip-regularization.json
       - packing/devtools/improvement_rule.py
       - packing/devtools/pictured_source.py
       - packing/devtools/evand_exact_certificates.py

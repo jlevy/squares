@@ -97,13 +97,22 @@ def test_original_round_trip_preserves_tiles_and_uses_current_house_drawings(
         ]
         assert len({tile["number_color"] for tile in after["tiles"]}) == 1
         # A case drawn from its house drawing switches too: its canonical picture is
-        # the house drawing turned by its pose.
-        assert after["tiles"][69]["src"] == "atlas/regularized/n-70.svg"
-        assert after["tiles"][69]["alt"].startswith("Regularized packing")
-        assert original["tiles"][69]["src"] == "atlas/house/n-70.svg"
+        # the house drawing turned by its pose, here the first such case the flip
+        # regularization record turns.
+        turned = next(
+            n
+            for n in range(1, 325)
+            if n not in render_frontier_page.drawn_regularized()
+            and not render_frontier_page.default_pose(n).identity
+        )
+        canonical = render_frontier_page.drawing_path(turned, regularized=True)
+        house = render_frontier_page.drawing_path(turned)
+        assert after["tiles"][turned - 1]["src"] == canonical
+        assert after["tiles"][turned - 1]["alt"].startswith("Regularized packing")
+        assert original["tiles"][turned - 1]["src"] == house
+        files = render_frontier_page.drawing_files()
         assert (
-            page.request.get(f"{site}/atlas/regularized/n-70.svg").body()
-            == (render_frontier_page.drawing_files()["atlas/regularized/n-70.svg"])
+            page.request.get(f"{site}/{canonical}").body() == files[canonical] != files[house]
         )
         # Repeated changes can overtake pending decodes, including a return to the
         # same URL. Only the active generation may mark an image prepared.

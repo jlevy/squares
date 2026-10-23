@@ -20,11 +20,12 @@ import html
 import re
 import xml.etree.ElementTree as ET
 from collections.abc import Callable, Iterable, Mapping
-from decimal import Decimal
+from decimal import MAX_EMAX, MAX_PREC, MIN_EMIN, Decimal, localcontext
 from functools import cache
 from pathlib import Path
 from typing import Any, cast
 
+from devtools import flip_regularization as flip
 from devtools import render_research_tables as tables
 from devtools.build_bound_citations import RECENT_SINCE, corrects_tag
 from devtools.build_bound_citations import RECORD as BOUND_CITATIONS
@@ -63,7 +64,8 @@ FRONTIER_INPUTS: tuple[Path, ...] = (
     RENDERINGS,
     REGULARIZED_RENDERINGS,
     DEFAULT_DRAWINGS,
-    # The poses the record states are applied by `Pose.point` (`default_svg`).
+    # Each count's pose, from its own record, applied by `Pose.point` (`default_svg`).
+    flip.RECORD,
     PACKING / "devtools" / "flip_regularization.py",
     BOUND_CITATIONS,
     PACKING / "resources" / "bibliography.yaml",
@@ -383,11 +385,9 @@ def default_root(n: int) -> Path:
 
 def default_pose(n: int) -> Pose:
     """The pose case `n`'s default picture is drawn in, its flip regularization
-    (regularization policy, section 13), from the same record as `drawn_regularized`:
+    (regularization policy, section 13), from its own record (`flip_regularization.poses`):
     metadata applied when the picture is drawn, never a turned copy of the packing."""
-    from devtools.default_drawings import flip_regularizations  # noqa: PLC0415
-
-    return flip_regularizations()[n]
+    return flip.poses()[n]
 
 
 def default_svg(
@@ -431,8 +431,8 @@ def packing_svg(
 
     `pose` turns the drawing by one of the container's symmetries, its flip
     regularization where the caller draws the default picture (`default_svg`). It maps
-    the corners after they are rounded, so the map is integer arithmetic on the
-    `units`-wide frame and exact, and each square keeps its winding (`_posed`). The
+    each corner exactly before it is rounded, so a turned drawing is the rounding of the
+    turned picture whatever `units` is, and each square keeps its winding (`_posed`). The
     default, `IDENTITY`, draws the rendering in its source's pose.
 
     A table cell needs 100 units; a drawing shown large needs more, or the rounding shows
@@ -460,13 +460,15 @@ def packing_svg(
     if len(squares) != n:
         raise SystemExit(f"n-{n:03d}.svg draws {len(squares)} squares, not {n}")
     for points, fill in squares:
-        corners = [
-            (round((Decimal(x) - x0) * scale), round((Decimal(y) - y0) * scale))
+        exact = [
+            ((Decimal(x) - x0) * scale, (Decimal(y) - y0) * scale)
             for x, y in (pair.split(",") for pair in points.split())
         ]
         if not pose.identity:
-            corners = _posed(pose, corners, units)
-        paths.setdefault(fill, []).append(_square_path(corners))
+            exact = _posed(pose, exact, units)
+        paths.setdefault(fill, []).append(
+            _square_path([(round(x), round(y)) for x, y in exact])
+        )
     body = "".join(
         f'<path fill="{fill}" d="{"".join(parts)}"/>' for fill, parts in sorted(paths.items())
     )
@@ -495,12 +497,23 @@ def packing_svg(
     )
 
 
-def _posed(pose: Pose, corners: list[tuple[int, int]], units: int) -> list[tuple[int, int]]:
-    """One square's whole-unit SVG corners, y down, turned by `pose`: read y up from the
-    frame's lower-left corner, mapped by `orient_polygon`, which reverses a mirrored
-    square's corners to keep its winding, and read back."""
-    turned = orient_polygon(pose, [(x, units - y) for x, y in corners], units)
-    return [(x, units - y) for x, y in turned]
+def _posed(
+    pose: Pose, corners: list[tuple[Decimal, Decimal]], units: int
+) -> list[tuple[Decimal, Decimal]]:
+    """One square's corners in the `units`-wide frame, y down and not yet rounded, turned
+    by `pose`: read y up from the frame's lower-left corner, mapped by `orient_polygon`,
+    which reverses a mirrored square's corners to keep its winding, and read back.
+
+    The map is exact, so the drawing rounds the turned picture. Mapping the rounded
+    corners instead is wrong at a half when `units` is odd: `units - round(v)` is not
+    `round(units - v)` when rounding takes halves to even, 201 - round(2.5) being 199
+    and round(201 - 2.5) 198."""
+    side = Decimal(units)
+    # Only subtractions, whose results are decimals, so this precision never rounds them;
+    # it is the decimal module's documented setting for unrounded arithmetic.
+    with localcontext(prec=MAX_PREC, Emax=MAX_EMAX, Emin=MIN_EMIN):
+        turned = orient_polygon(pose, [(x, side - y) for x, y in corners], side)
+        return [(x, side - y) for x, y in turned]
 
 
 def drawing_path(n: int, *, regularized: bool = False) -> str:

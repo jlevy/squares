@@ -761,37 +761,50 @@ def _shoelace(corners: list[tuple[int, int]]) -> int:
     )
 
 
+#: A unit square's corners from its lower-left one, y up, in the order a rendering lists
+#: them.
+UNIT_SQUARE = ((0, 0), (1, 0), (1, 1), (0, 1))
+
+
+def _grid_rendering(root: Path, n: int, squares: dict[str, tuple[int, int]], side: int) -> None:
+    """A house rendering of unit squares, each named by its fill and placed by its
+    lower-left corner, y up, in a `side`-wide container: 100 SVG units a square's side,
+    the frame offset in the SVG, as `packing_svg` reads a rendering."""
+
+    def svg_point(x: int, y: int) -> str:
+        return f"{10 + 100 * x},{20 + 100 * (side - y)}"
+
+    polygons = "".join(
+        f'<polygon data-feature="square-fill" points="'
+        f'{" ".join(svg_point(left + dx, bottom + dy) for dx, dy in UNIT_SQUARE)}" '
+        f'fill="{fill}"/>'
+        for fill, (left, bottom) in squares.items()
+    )
+    width = 100 * side
+    (root / f"n-{n:03d}.svg").write_text(
+        f'<svg><rect data-feature="container-outline" x="10" y="20" width="{width}" '
+        f'height="{width}"/>{polygons}</svg>',
+        encoding="utf-8",
+    )
+
+
 def test_a_pose_turns_the_drawing_exactly_and_keeps_each_square_s_winding(
     tmp_path: Path,
 ) -> None:
-    """`packing_svg(pose=)` maps the whole-unit corners after rounding: y up from the
+    """`packing_svg(pose=)` maps each corner exactly and then rounds it: y up from the
     frame's lower-left corner, `Pose.point`, then y down again, a mirrored square's
     corners reversed so its winding is kept (regularization policy, section 13).
 
     The rendering is an L of three unit squares in a 2 x 2 container, its frame offset in
-    the SVG, its empty cell upper right where an integer grid's rows leave it. Under each
-    of the eight poses every square lands where `Pose.point` puts its centre, with its
-    winding. Under the pose flip regularization decides for it, the drawing's quadrant
-    weights, read row by row from the top, are the decision's, the empty cell lower right
+    the SVG, its empty cell lower left. Under each of the eight poses every square lands
+    where `Pose.point` puts its centre, with its winding. Under the pose flip
+    regularization decides for it, the drawing's quadrant weights, read lower right,
+    lower left, upper left, upper right, are the decision's, the empty cell upper right
     as the owner's rule orders them."""
     from devtools.flip_regularization import IDENTITY, POSES, decide  # noqa: PLC0415
 
-    corners = {"#000001": (0, 0), "#000002": (1, 0), "#000003": (0, 1)}
-    unit = ((0, 0), (1, 0), (1, 1), (0, 1))
-
-    def svg_point(x: int, y: int) -> str:
-        return f"{10 + 100 * x},{20 + 100 * (2 - y)}"
-
-    polygons = "".join(
-        f'<polygon data-feature="square-fill" points="'
-        f'{" ".join(svg_point(left + dx, bottom + dy) for dx, dy in unit)}" fill="{fill}"/>'
-        for fill, (left, bottom) in corners.items()
-    )
-    (tmp_path / "n-003.svg").write_text(
-        '<svg><rect data-feature="container-outline" x="10" y="20" width="200" '
-        f'height="200"/>{polygons}</svg>',
-        encoding="utf-8",
-    )
+    corners = {"#000001": (1, 0), "#000002": (0, 1), "#000003": (1, 1)}
+    _grid_rendering(tmp_path, 3, corners, 2)
     source = frontier.packing_svg(3, units=2, root=tmp_path)
     assert frontier.packing_svg(3, units=2, root=tmp_path, pose=IDENTITY) == source
     windings = {fill: _shoelace(drawn) for fill, drawn in _drawn_squares(source).items()}
@@ -807,17 +820,59 @@ def test_a_pose_turns_the_drawing_exactly_and_keeps_each_square_s_winding(
 
     decision = decide(
         [
-            [(float(left + dx), float(bottom + dy)) for dx, dy in unit]
+            [(float(left + dx), float(bottom + dy)) for dx, dy in UNIT_SQUARE]
             for left, bottom in corners.values()
         ],
         2.0,
     )
+    assert not decision.pose.identity
     drawn = _drawn_squares(frontier.packing_svg(3, units=2, root=tmp_path, pose=decision.pose))
     cells = {
         (min(x for x, _ in square), min(y for _, y in square)) for square in drawn.values()
     }
-    weights = tuple(float((column, row) in cells) for row in (0, 1) for column in (0, 1))
+    # Each cell by its upper-left corner, y down: lower right, lower left, upper left,
+    # upper right.
+    weights = tuple(float(cell in cells) for cell in ((1, 1), (0, 1), (0, 0), (1, 0)))
     assert weights == decision.quadrants == (1.0, 1.0, 1.0, 0.0)
+
+
+def test_a_turned_drawing_is_the_rounding_of_the_exactly_turned_picture(
+    tmp_path: Path,
+) -> None:
+    """`packing_svg(pose=)` rounds each corner after mapping it, so a turned drawing is
+    the rounding of the turned picture at any `units`. Mapping the rounded corners
+    instead is wrong at an exact half when `units` is odd: rounding takes halves to even,
+    so `units - round(v)` and `round(units - v)` differ there.
+
+    The rendering is a 2 x 2 grid of unit squares drawn 101 units wide, so its seams fall
+    at 50.5. Under each of the eight poses each square's drawn corners, in order, are its
+    exact corners mapped by `orient_polygon` and then rounded, y down. The grid has all
+    eight symmetries, so every pose draws the same four squares as the source's pose;
+    the rounded corners mapped would draw a half turn's seams at 51 rather than 50."""
+    from devtools.flip_regularization import POSES, orient_polygon  # noqa: PLC0415
+
+    units = 101
+    grid = {"#000001": (0, 0), "#000002": (1, 0), "#000003": (0, 1), "#000004": (1, 1)}
+    _grid_rendering(tmp_path, 4, grid, 2)
+
+    def shapes(drawn: dict[str, list[tuple[int, int]]]) -> set[frozenset[tuple[int, int]]]:
+        return {frozenset(corners) for corners in drawn.values()}
+
+    source = _drawn_squares(frontier.packing_svg(4, units=units, root=tmp_path))
+    assert {x for corners in source.values() for x, _y in corners} == {0, 50, 101}
+    for pose in POSES:
+        drawn = _drawn_squares(frontier.packing_svg(4, units=units, root=tmp_path, pose=pose))
+        for fill, (left, bottom) in grid.items():
+            exact = [
+                (Fraction((left + dx) * units, 2), Fraction((bottom + dy) * units, 2))
+                for dx, dy in UNIT_SQUARE
+            ]
+            turned = orient_polygon(pose, exact, Fraction(units))
+            assert drawn[fill] == [(round(x), round(units - y)) for x, y in turned], (
+                pose,
+                fill,
+            )
+        assert shapes(drawn) == shapes(source), pose
 
 
 def test_both_addresses_of_every_case_are_published() -> None:

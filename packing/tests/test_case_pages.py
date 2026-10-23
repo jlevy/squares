@@ -554,7 +554,7 @@ def test_the_as_published_disclosure_follows_a_view_or_a_turning_pose(
     where the pose turns the house drawing. Its caption says the drawing in it is in its
     source's pose. The poses here are set, not the record's, so the rule is held whatever
     the record decides."""
-    from devtools import default_drawings  # noqa: PLC0415
+    from devtools import default_drawings, flip_regularization  # noqa: PLC0415
     from devtools.flip_regularization import IDENTITY, Pose  # noqa: PLC0415
 
     record = default_drawings.drawn_views()
@@ -570,7 +570,7 @@ def test_the_as_published_disclosure_follows_a_view_or_a_turning_pose(
     opening = '<details class="site-case-published">'
     for pose in (IDENTITY, turned):
         poses = dict.fromkeys(range(1, 325), pose)
-        monkeypatch.setattr(default_drawings, "flip_regularizations", poses.copy)
+        monkeypatch.setattr(flip_regularization, "poses", poses.copy)
         figure = render_case_pages.packing_figure(house)
         head = figure.split("</figure>")[0]
         assert frontier_page.packing_svg(house, units=1000, pose=pose) in head, pose

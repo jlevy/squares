@@ -23,6 +23,7 @@ import pytest
 
 from devtools import (
     check_published_site,
+    flip_regularization,
     overview_sections,
     pytest_tmp,
     render_overview,
@@ -40,7 +41,8 @@ from devtools.check_published_site import (
     read_head,
     shared_descriptions,
 )
-from devtools.render_frontier_page import default_pose, default_svg, packing_svg
+from devtools.flip_regularization import Pose
+from devtools.render_frontier_page import default_svg, packing_svg
 from devtools.render_overview import (
     DESCRIPTION_LIMIT,
     PROJECT_NAME,
@@ -694,18 +696,24 @@ def test_result_overviews_are_complete_canonical_documents(
         ), path
 
 
-def test_the_card_is_the_heros_drawing_on_the_pages_background() -> None:
+def test_the_card_is_the_heros_drawing_on_the_pages_background(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """The card is the homepage's hero and no second drawing: the same case at the same
     resolution through the same function, so its squares, colours and line weights are
     the page's, in the light theme's ink on its background, with the project's name.
     Both draw the case's default picture in its canonical pose (regularization policy,
-    section 13), so the card turns with the hero."""
-    hero = overview_sections.hero()
+    section 13), so the card turns with the hero. The record leaves the hero's case in
+    its source's pose, so a turning pose is set here, where the drawing as published
+    would be told from the canonical one."""
     case = overview_sections.HERO_CASE
     assert case == 53
+    assert default_svg(case, units=social_card.HERO_UNITS) in overview_sections.hero()
+    turned = Pose(rotate=90, flip=True)
+    monkeypatch.setattr(flip_regularization, "poses", dict.fromkeys(range(1, 325), turned).copy)
+    hero = overview_sections.hero()
     assert f"The best packing known for {case} squares" in hero
     assert default_svg(case, units=social_card.HERO_UNITS) in hero
-    assert not default_pose(case).identity, "the test would not tell the two poses apart"
     assert packing_svg(case, units=social_card.HERO_UNITS) not in hero
     light = rung_scale.page_colours()["light"]
     ink, paper = rung_scale.hex_colour(light["text"]), rung_scale.hex_colour(light["bg"])
@@ -714,6 +722,8 @@ def test_the_card_is_the_heros_drawing_on_the_pages_background() -> None:
     svg = social_card.card_svg()
     body = drawing.split(">", 1)[1]
     assert svg.count(body) == 1, "the hero's drawing, in the page's ink, is in the card whole"
+    published = packing_svg(case, units=social_card.HERO_UNITS, ink=ink).split(">", 1)[1]
+    assert published not in svg, "the card is turned with the hero"
     assert svg.startswith(
         '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" '
         'viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#ffffff"/>'
