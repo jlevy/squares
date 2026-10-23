@@ -6,10 +6,13 @@ One commit of 11 October to wand125/square-packing,
 reporting $s(31) \ge 2391/400 = 5.9775$ on the 2,073-direction net of T-132, T-142 and
 T-143 (core $4999/5000$, half-angle step $1/5002$). No issue reports it; the watched
 repository read of the 11 October intake pass found it (think-q655), and its import is
-think-wop1. The bound is unconfirmed here; no standing bound or rating changes in the
-change that adds this packet.
+think-wop1. At intake the bound was unconfirmed here, and the change that adds this
+packet moved no standing bound or rating; the complete replay and the review of 23
+October then confirmed it (T-232 at V3/C3, see
+[its section below](#the-complete-replay-and-the-review-23-october)). The table gives the
+record as it stood at intake.
 
-| Item | n = 31 |
+| Item | n = 31, at intake |
 | --- | --- |
 | Source | [`mixed_n31_L59775`](https://github.com/wand125/square-packing/tree/23e31862345c532d17ad2c896677a3a8d8821aa4/problems/square-lower-bounds/certificates/mixed_n31_L59775) |
 | Pinned revision | `23e31862345c532d17ad2c896677a3a8d8821aa4`, committed 2026-10-11T00:51:18Z |

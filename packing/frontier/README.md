@@ -627,8 +627,8 @@ later that day, when another proved $s(77) = 9$ and with it $s(78) = 9$. $n = 97
 $0.0557$, left it on 2026-10-03, when Evan Daniel’s family $s(m^2 - 3) = m$ was proved
 here for every $m \ge 6$ (T-064): his exact checker of the finite premise `Valid7` was
 replayed in full and his Lean reduction from it was built.
-$n = 31$ entered it second on 2026-10-23, at $0.0225$, when T-232 raised its verified
-floor to $2391/400$, and moved $n = 95$ to seventh.
+$n = 31$ entered it second, at $0.0225$, when T-232 landed and raised its verified floor
+to $2391/400$, and moved $n = 95$ to seventh.
 With Bentz’s $s(6)$, $s(13)$ and $s(22)$ the family is now **proved exactly for every
 $m \ge 3$**.
 
