@@ -2385,9 +2385,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "T-230's registration (#728, V3/C3 after the 22 October review), its adoption at "
             "303 in the 23 October pass and the request entries for #522, #526 and #728, "
-            "against main 4ad09803c (#738, #406, #739): rendered at link revision 290d18ad "
-            "into empty site directories, twice from this tree at 5f8c45a4 with this record "
-            "and twice from main's, render_n11_optimality_review, "
+            "against main 7ce902c6a (#741, #740): rendered at link revision 290d18ad into "
+            "empty site directories, twice from this tree at c767283b with this record and "
+            "twice from main's, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write every file "
             "byte-identical across all four. The explainer counts the register and took "
             "v0.4.20. No PDF was printed; each prints from that HTML. Retain v0.1.10, "
