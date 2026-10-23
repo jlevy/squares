@@ -2463,7 +2463,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "The 23 October closing pass (#747) after its reviews A and B, against main "
-            "769e441e1 (#748): the request entries' questions to the authors, holds for the "
+            "cc91ee1b8 (#746): the request entries' questions to the authors, holds for the "
             "owner and source-checker notes, T-197 to T-199 citing the source checkers' "
             "replay, T-138's measured lineage, and the identity route's readers of five "
             "earlier entries. Rendered at link revision 26339a13 into empty site "
