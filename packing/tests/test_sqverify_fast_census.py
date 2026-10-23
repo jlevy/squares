@@ -528,22 +528,51 @@ def sweeps() -> dict[str, dict[str, Any]]:
     }
 
 
-@pytest.mark.parametrize("name", sorted(sweeps()))
+#: A sweep re-derives an exact capture at each direction it refused, so its cost grows
+#: with the net: on 23 October, 415.68 s locally for mixed_n31_L59775's 2,073 refusals
+#: against 14.90 s for mixed_n108_L1062's 201, beside a 12 s per-test ceiling. A sweep on
+#: a declared net finer than the standard one runs whole in the deep surface, and the
+#: pull request reads its refusals at every FINE_NET_STRIDE-th direction: 0, 296, ...,
+#: 2072 on a 2,073-direction net, the directions of the eight-direction pricing sample.
+FINE_NET_STRIDE = 296
+
+
+def sweep_cases() -> list[Any]:
+    """Each sweep: whole on the standard net; whole in the deep surface and sampled in
+    the pull request on a finer declared net."""
+    params: list[Any] = []
+    for name, sweep in sorted(sweeps().items()):
+        if sweep["net_directions"] > census.STANDARD_DIRECTIONS:
+            params.append(pytest.param(name, "whole", marks=pytest.mark.slow, id=name))
+            params.append(pytest.param(name, "sampled", id=f"{name}-sampled"))
+        else:
+            params.append(pytest.param(name, "whole", id=name))
+    return params
+
+
+@pytest.mark.parametrize(("name", "reading"), sweep_cases())
 def test_each_scaled_sweep_refuses_its_mutant_somewhere_with_an_exact_witness(
-    name: str,
+    name: str, reading: str
 ) -> None:
     """At every direction of the net, the 99/100 mutant is refused at one at least, and
     every direction that does not verify it is a coverage refusal at a pose in the per-bin
     domain where its capture, recomputed here from the candidate by the evaluator written
     apart from the crate, is the one the receipt keeps, below 1, with the original's at
     least 1. Where it verifies, the original captures at least 100/99, which is no
-    defect."""
+    defect. Sampled, the recomputation reads the refusals at every FINE_NET_STRIDE-th
+    direction."""
     sweep = sweeps()[name]
     case = cases()[name]
     assert census.sweep_held(sweep)
     assert sweep["net_directions"] == census.net_directions(case)
     raw = read_raw(case.candidate)
-    for item in sweep["refused"]:
+    refused = [
+        item
+        for item in sweep["refused"]
+        if reading == "whole" or int(item["r"]) % FINE_NET_STRIDE == 0
+    ]
+    assert refused, name
+    for item in refused:
         index = int(item["r"])
         assert item["verdict"] in {census.CANDIDATE, census.AXIS_REFUSED}, index
         assert census.in_domain(raw, index, item["pose"]), index
