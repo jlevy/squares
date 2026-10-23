@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import base64
 from pathlib import Path
 from typing import Any
 from urllib.parse import unquote, urlsplit
@@ -36,7 +35,8 @@ def test_tutorial_figures_have_attached_captions_and_preserve_their_links(
             assert image is not None
             assert image.attrs.get("alt")
             if "site-packing-diagram" in image.classes:
-                svg = ET.fromstring(base64.b64decode(image.attrs["src"].split(",", 1)[1]))
+                assert image.attrs["src"].startswith("assets/images/")
+                svg = ET.parse(path.parent / image.attrs["src"]).getroot()
                 x, y, width, height = (float(value) for value in svg.attrib["viewBox"].split())
                 outline = svg.find('.//*[@data-feature="container-outline"]')
                 assert outline is not None

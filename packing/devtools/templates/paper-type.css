@@ -349,9 +349,11 @@ ul.credits > .publication-date {
   margin-block-start: 0;
   padding-block: var(--paper-caption-space-above) var(--paper-caption-space-below);
   padding-inline: var(--paper-note-inset);
+}
+.site-page .kpress-figcaption {
   text-align: start;
 }
-.kpress .kpress-figcaption p {
+.site-page .kpress-figcaption p {
   font: inherit;
   margin-block: 0;
 }

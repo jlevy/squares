@@ -62,6 +62,7 @@ _MEDIA_TYPES = {
     ".css": "text/css",
     ".js": "text/javascript",
     ".png": "image/png",
+    ".svg": "image/svg+xml",
 }
 
 
@@ -123,9 +124,13 @@ class SiteAssets:
             raise SystemExit(f"{name} contains a closing script tag")
         return self._add("js", name, js.encode("utf-8"), "classic")
 
+    def image(self, name: str, data: bytes) -> AssetRef:
+        """An original or generated image published under a content-identified name."""
+        return self._add("images", name, data, "resource")
+
     def image_file(self, path: Path) -> AssetRef:
         """An image published unchanged under a content-identified name."""
-        return self._add("images", path.name, path.read_bytes(), "resource")
+        return self.image(path.name, path.read_bytes())
 
     def stylesheet_file(self, path: Path) -> AssetRef:
         """A stylesheet of the repository's, by its own name."""
@@ -202,7 +207,15 @@ def inline_assets(page: str, read: Callable[[str], bytes]) -> str:
     page = _PRELOAD_TAG.sub("", page)
     page = _FONT_PRELOAD_BOOTSTRAP_TAG.sub("", page)
     page = _STYLESHEET_TAG.sub(style, page)
-    return _SCRIPT_TAG.sub(script, page)
+    page = _SCRIPT_TAG.sub(script, page)
+
+    def image(match: re.Match[str]) -> str:
+        output = match["output"]
+        media_type = _MEDIA_TYPES[PurePosixPath(output).suffix]
+        data = base64.b64encode(checked_read(output)).decode()
+        return match[0].replace(match["url"], f"data:{media_type};base64,{data}", 1)
+
+    return _IMAGE_TAG.sub(image, page)
 
 
 def inlined_from(site: Path, page: str) -> str:
@@ -399,6 +412,10 @@ _STYLESHEET_TAG = re.compile(
 # instead of silently leaving an external stylesheet in a self-contained export.
 _MARKED_STYLESHEET_TAG = re.compile(r"<link\b[^>]*\bdata-site-math-styles(?=\s|=|>)[^>]*>")
 _SCRIPT_TAG = re.compile(rf'<script src="(?:\.\./)*{ASSETS_DIR}/([^"]+)"></script>')
+_IMAGE_TAG = re.compile(
+    rf'<img\b[^>]*\bsrc="(?P<url>(?:\.\./)*{ASSETS_DIR}/'
+    r'(?P<output>images/[^"#?]+\.(?:svg|png)))"[^>]*>'
+)
 _PRELOAD_TAG = re.compile(
     rf'<link (?:rel="preload"|data-site-font-preload) '
     rf'href="(?:\.\./)*{ASSETS_DIR}/[^"]+"[^>]*>\n?'

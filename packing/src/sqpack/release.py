@@ -2417,6 +2417,52 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "TUTORIAL.md",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/render_contributors.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/site_assets.py",
+            "packing/devtools/site_documents.py",
+            "packing/devtools/templates/paper-publication.css",
+            "packing/devtools/templates/paper-type.css",
+            "packing/devtools/templates/site-nav.css",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "PR743 tutorial and site follow-ups against main 31584003e: source review "
+            "finds no paper manuscript or mathematical figure changes. Tutorial changes "
+            "preserve the cited anchors; reader rendering and removed daily/weekly views "
+            "do not generate paper bodies. The new generated-image asset helper is used "
+            "only by tutorials; existing image_file output is unchanged. Shared CSS replaces "
+            "24rem and "
+            "0.85rem/1rem literals with equal-valued tokens. New caption presentation is "
+            "scoped to site reader documents, preserving paper caption alignment. "
+            "Independent Chromium review of the four retained paper HTML outputs found "
+            "no caption paragraph descendants; the broader "
+            "alignment rule discovered in that review was corrected. Navigation changes "
+            "are site chrome; validation changes affect CI ownership only. CSS bytes "
+            "change, but these inputs do not revise paper content or typesetting. "
+            "This is a source and DOM review, not a claim of PDF byte equality."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",

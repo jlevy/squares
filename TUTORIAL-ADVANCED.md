@@ -198,7 +198,7 @@ compression must be checked on its own contact structure.
 <img src="packing/atlas/rendering/kingbird29-overview.svg" alt="The high-precision Kingbird packing of twenty-nine unit squares.">
 <figcaption>
 
-The reported `n = 29` record is a useful larger-scale check: six orientation classes
+The reported $n = 29$ record is a useful larger-scale check: six orientation classes
 across 29 squares. The retained roughly 100-digit source is evaluated at 160 decimal
 digits of working precision and passes all 406 pair checks at tolerance `1e-80`; that
 numerically checks that source transcription without making it an exact certificate or
@@ -1378,7 +1378,7 @@ unknown.
 <img src="packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/four-owner-five-dot.svg" alt="Diagram of four green guaranteed footprints and five red dots: eleven squares minus four owners leaves seven residual cores, but disjoint cores cannot share any of the five dots.">
 <figcaption>
 
-The proved five-dot exclusion for one selected four-owner branch at `L = 96/25`. The
+The proved five-dot exclusion for one selected four-owner branch at $L = 96/25$. The
 corner shapes are the regions guaranteed to lie in the four owner cores; the five dots
 pierce every selected remaining net core.
 The drawing explains the logic; the linked records supply the exact check and the
