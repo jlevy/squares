@@ -127,7 +127,7 @@ seconds, summed; the longest job took 63.42 seconds.
 deciding input and both routes’ complete outputs.
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
 arithmetic and the separating-axis method, so they are two implementations of one
-method. Neither is the author’s code, and the source’s own checkers were not run.
+method. Neither is the author’s code; the source’s own checkers ran separately, below.
 The clearances are the binary64 input’s own, about $1.0 \times 10^{-13}$ at the walls and $2.0 \times 10^{-13}$ between squares, plus the dilation’s $5 \times 10^{-13}$ and $10^{-12}$, as the [review of 19 October 2026](../../../../docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) measured them (RV-5); the source describes the dilation’s share alone.
 
 [acquisition/claims.json](acquisition/claims.json) freezes the certificate against the
@@ -146,6 +146,47 @@ From `packing/`:
 ```sh
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n229-dilation-update-2026-10-18 check-claims
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n229-dilation-update-2026-10-18 check --replay
+```
+
+## The Source’s Own Checkers
+
+Added on 23 October 2026, and re-run the same day with a fourth control and a bare
+child environment (review A6 and A8 of #747). The source’s two checkers, as this
+packet retains them, ran unchanged on the certificate and on four controls of it: square 2 replaced by square 1;
+square 1 moved $S + 2$ to the right, outside the box; the side lowered by the least right
+or top wall clearance plus $10^{-30}$; and every square moved left and down by the least
+left or bottom wall clearance plus $10^{-30}$.
+In each sharp control one square crosses a wall by exactly $10^{-30}$, at the right or
+top wall in the first and at the left or bottom wall in the second, where a checker
+with a floating-point tolerance would accept it.
+Each run is its own `python -I` child process under CPython 3.14.7, given an empty
+environment, no standard input and a scratch working directory.
+Both checkers accept the certificate and refuse all four controls with an `INVALID`
+verdict, 10 runs in 2.6 CPU seconds.
+`verify_cert.py` prints the least wall clearance as $6.005 \times 10^{-13}$ and the least pair separation
+as $1.202 \times 10^{-12}$.
+[receipts/source-checker-replay.json](receipts/source-checker-replay.json) keeps both
+checkers’ digests, each certificate’s and each control’s digest, and every run’s exit
+status and output. `devtools.evand_source_checkers check` holds the packet to its
+acquisition manifest and reads the receipt back: it covers the packet’s certificates,
+records every control, and records each certificate accepted and each control refused
+by both checkers. It rebuilds no control;
+[tests/test_evand_source_checkers.py](../../../tests/test_evand_source_checkers.py)
+rebuilds each from its certificate and holds its digest to the receipt’s.
+
+These are the author’s programs, so their acceptance is evidence from the same
+implementation and moves no rung: the confirmation rests on the two routes above.
+The register enters the run as `E-evand-674-n229-update-source-checker-replay`, listed in T-199’s evidence.
+The two checkers share their author, their parse and their format, so neither is
+independent of the other.
+A run of the same two checkers on the four certificates of #669 and #674 on 18 October
+2026 was not kept; this one replaces it.
+
+From `packing/`:
+
+```sh
+uv run --frozen --all-extras --group dev python -m devtools.evand_source_checkers check
+uv run --frozen --all-extras --group dev python -m devtools.evand_source_checkers run --scratch "$TMPDIR/evand-controls"
 ```
 
 <!-- This document follows common-doc-guidelines.md.

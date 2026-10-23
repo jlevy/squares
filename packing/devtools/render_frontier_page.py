@@ -20,15 +20,17 @@ import html
 import re
 import xml.etree.ElementTree as ET
 from collections.abc import Callable, Iterable, Mapping
-from decimal import Decimal
+from decimal import MAX_EMAX, MAX_PREC, MIN_EMIN, Decimal, localcontext
 from functools import cache
 from pathlib import Path
 from typing import Any, cast
 
+from devtools import flip_regularization as flip
 from devtools import render_research_tables as tables
 from devtools.build_bound_citations import RECENT_SINCE, corrects_tag
 from devtools.build_bound_citations import RECORD as BOUND_CITATIONS
 from devtools.contributor_credit import case_credit
+from devtools.flip_regularization import IDENTITY, Pose, orient_polygon
 from devtools.render_recent_results import RecentCounts
 from devtools.repo_links import repo_url
 from devtools.validate_schemas import check as check_record
@@ -62,6 +64,9 @@ FRONTIER_INPUTS: tuple[Path, ...] = (
     RENDERINGS,
     REGULARIZED_RENDERINGS,
     DEFAULT_DRAWINGS,
+    # Each count's pose, from its own record, applied by `Pose.point` (`default_svg`).
+    flip.RECORD,
+    PACKING / "devtools" / "flip_regularization.py",
     BOUND_CITATIONS,
     PACKING / "resources" / "bibliography.yaml",
     PACKING / "devtools" / "render_research_tables.py",
@@ -378,15 +383,33 @@ def default_root(n: int) -> Path:
     return REGULARIZED_RENDERINGS if n in drawn_regularized() else RENDERINGS
 
 
+def default_pose(n: int) -> Pose:
+    """The pose case `n`'s default picture is drawn in, its flip regularization
+    (regularization policy, section 13), from its own record (`flip_regularization.poses`):
+    metadata applied when the picture is drawn, never a turned copy of the packing."""
+    return flip.poses()[n]
+
+
+def default_svg(
+    n: int, *, units: int = 100, ink: str = "currentColor", paper: str = "none"
+) -> str:
+    """Case `n`'s default picture in its canonical pose: `packing_svg` from
+    `default_root(n)`, turned by `default_pose(n)`. What Regularized mode, the frontier
+    survey's thumbnail, the hero and a case page's head draw."""
+    return packing_svg(
+        n, units=units, ink=ink, paper=paper, root=default_root(n), pose=default_pose(n)
+    )
+
+
 def thumbnail_svg(n: int) -> str:
-    """The case's cached 1000-unit SVG of its default picture, in a reserved 50-pixel
-    square image.
+    """The case's cached 1000-unit SVG of its default picture in its canonical pose, in
+    a reserved 50-pixel square image.
 
     The drawing lives at its declared atlas address and can be cached across pages.
     The table cell sizes the image without embedding another copy of its geometry.
     """
 
-    return drawing_img(n, regularized=n in drawn_regularized(), size=50)
+    return drawing_img(n, regularized=True, size=50)
 
 
 def packing_svg(
@@ -397,6 +420,7 @@ def packing_svg(
     paper: str = "none",
     frame_px: int | None = None,
     root: Path = RENDERINGS,
+    pose: Pose = IDENTITY,
 ) -> str:
     """Case `n`'s atlas drawing as a bare `<svg>`: the frame and each square's outline at
     whole units of a `units`-wide frame, drawn in `ink` on `paper`.
@@ -404,6 +428,12 @@ def packing_svg(
     The drawing is read from `root`: the house renderings, or another set the house
     renderer drew, as the regularized views are (`REGULARIZED_RENDERINGS`), so one code
     reduces both and a tile of either is the same kind of picture.
+
+    `pose` turns the drawing by one of the container's symmetries, its flip
+    regularization where the caller draws the default picture (`default_svg`). It maps
+    each corner exactly before it is rounded, so a turned drawing is the rounding of the
+    turned picture whatever `units` is, and each square keeps its winding (`_posed`). The
+    default, `IDENTITY`, draws the rendering in its source's pose.
 
     A table cell needs 100 units; a drawing shown large needs more, or the rounding shows
     as uneven gaps. A drawing used outside the page, where `currentColor` means nothing,
@@ -430,11 +460,15 @@ def packing_svg(
     if len(squares) != n:
         raise SystemExit(f"n-{n:03d}.svg draws {len(squares)} squares, not {n}")
     for points, fill in squares:
-        corners = [
-            (round((Decimal(x) - x0) * scale), round((Decimal(y) - y0) * scale))
+        exact = [
+            ((Decimal(x) - x0) * scale, (Decimal(y) - y0) * scale)
             for x, y in (pair.split(",") for pair in points.split())
         ]
-        paths.setdefault(fill, []).append(_square_path(corners))
+        if not pose.identity:
+            exact = _posed(pose, exact, units)
+        paths.setdefault(fill, []).append(
+            _square_path([(round(x), round(y)) for x, y in exact])
+        )
     body = "".join(
         f'<path fill="{fill}" d="{"".join(parts)}"/>' for fill, parts in sorted(paths.items())
     )
@@ -463,8 +497,30 @@ def packing_svg(
     )
 
 
+def _posed(
+    pose: Pose, corners: list[tuple[Decimal, Decimal]], units: int
+) -> list[tuple[Decimal, Decimal]]:
+    """One square's corners in the `units`-wide frame, y down and not yet rounded, turned
+    by `pose`: read y up from the frame's lower-left corner, mapped by `orient_polygon`,
+    which reverses a mirrored square's corners to keep its winding, and read back.
+
+    The map is exact, so the drawing rounds the turned picture. Mapping the rounded
+    corners instead is wrong at a half when `units` is odd: `units - round(v)` is not
+    `round(units - v)` when rounding takes halves to even, 201 - round(2.5) being 199
+    and round(201 - 2.5) 198."""
+    side = Decimal(units)
+    # Only subtractions, whose results are decimals, so this precision never rounds them;
+    # it is the decimal module's documented setting for unrounded arithmetic.
+    with localcontext(prec=MAX_PREC, Emax=MAX_EMAX, Emin=MIN_EMIN):
+        turned = orient_polygon(pose, [(x, side - y) for x, y in corners], side)
+        return [(x, side - y) for x, y in turned]
+
+
 def drawing_path(n: int, *, regularized: bool = False) -> str:
-    """Stable address of a compact standalone atlas drawing."""
+    """Stable address of a compact standalone atlas drawing: `atlas/house/` holds each
+    case's house drawing as published, in its source's pose, and `atlas/regularized/`
+    each case's Regularized-mode picture, its default picture in its canonical pose
+    (`default_svg`)."""
     return f"atlas/{'regularized' if regularized else 'house'}/n-{n}.svg"
 
 
@@ -476,23 +532,31 @@ def drawing_img(n: int, *, regularized: bool = False, size: int = 100) -> str:
     )
 
 
+def _drawn_counts() -> list[int]:
+    """Every case the house renderer has drawn, in order."""
+    return [int(path.stem.split("-")[1]) for path in sorted(RENDERINGS.glob("n-*.svg"))]
+
+
 def drawing_paths() -> tuple[str, ...]:
-    """Published drawing declarations without rendering their contents."""
+    """Published drawing declarations without rendering their contents: both addresses
+    of every case (`drawing_path`)."""
+    counts = _drawn_counts()
     return tuple(
-        drawing_path(int(path.stem.split("-")[1]), regularized=regularized)
-        for regularized, root in ((False, RENDERINGS), (True, REGULARIZED_RENDERINGS))
-        for path in sorted(root.glob("n-*.svg"))
+        drawing_path(n, regularized=regularized)
+        for regularized in (False, True)
+        for n in counts
     )
 
 
 @cache
 def drawing_files() -> dict[str, bytes]:
-    """Compact standalone SVG files, usable by images and directly by a browser."""
+    """Compact standalone SVG files, usable by images and directly by a browser: each
+    case's house drawing as published and its default picture in its canonical pose."""
     files = {}
-    for regularized, root in ((False, RENDERINGS), (True, REGULARIZED_RENDERINGS)):
-        for path in sorted(root.glob("n-*.svg")):
-            n = int(path.stem.split("-")[1])
-            svg = packing_svg(n, units=1000, root=root, ink="#17202a", paper="#ffffff")
+    for regularized in (False, True):
+        draw = default_svg if regularized else packing_svg
+        for n in _drawn_counts():
+            svg = draw(n, units=1000, ink="#17202a", paper="#ffffff")
             svg = svg.replace(
                 "<svg ",
                 '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" ',

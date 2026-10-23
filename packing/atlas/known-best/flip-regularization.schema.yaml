@@ -1,0 +1,114 @@
+# Each count's flip regularization, `flip-regularization.json`.
+#
+# One row per count, n = 1..324: the default picture drawn (the regularized view where
+# `default-drawings.json` makes it the default, else the house drawing), the retained
+# rendering it was read from, the pose that draws it in its canonical pose, the stage of
+# the rule that decided it, and the oriented picture's quadrant weights, under the
+# regularization policy's section 13 (docs/project/policies/regularization-policy.md).
+# The pose is metadata the renderers apply as they draw; no witness or view changes.
+# `devtools.flip_regularization --update` writes it; that every row is what the rule
+# decides from its rendering, and that the rows are n = 1..324 in order, is what a JSON
+# Schema cannot say and `devtools.flip_regularization --check` holds.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:FlipRegularization/v1
+title: Flip regularization of the known-best atlas's default pictures
+type: object
+additionalProperties: false
+required: [contract, generated_by, policy_document, rule, totals, entries]
+properties:
+  softschema: {type: object}
+  contract: {const: packing.squares:FlipRegularization/v1}
+  generated_by: {const: python -m devtools.flip_regularization --update}
+  policy_document: {const: docs/project/policies/regularization-policy.md}
+  rule:
+    description: Where the policy states the rule.
+    const: docs/project/policies/regularization-policy.md#13-flip-regularization
+  totals:
+    type: object
+    additionalProperties: false
+    required: [counts, identity, turned, decided_by, poses]
+    properties:
+      counts: {type: integer, minimum: 0}
+      identity:
+        description: The counts drawn in their source's pose.
+        type: integer
+        minimum: 0
+      turned: {type: integer, minimum: 0}
+      decided_by:
+        type: object
+        additionalProperties: false
+        required: [quadrants, grid-4, grid-8, grid-16, squares]
+        properties:
+          quadrants: {type: integer, minimum: 0}
+          grid-4: {type: integer, minimum: 0}
+          grid-8: {type: integer, minimum: 0}
+          grid-16: {type: integer, minimum: 0}
+          squares: {type: integer, minimum: 0}
+      poses:
+        description: How many counts each of the eight poses draws, in `POSES` order.
+        type: array
+        minItems: 8
+        maxItems: 8
+        items:
+          type: object
+          additionalProperties: false
+          required: [rotate, flip, reads_as, counts]
+          properties:
+            rotate: {$ref: "#/$defs/rotate"}
+            flip: {type: boolean}
+            reads_as: {type: string, minLength: 1}
+            counts: {type: integer, minimum: 0}
+  entries:
+    description: Every count's decision, n = 1..324 in order.
+    type: array
+    minItems: 324
+    maxItems: 324
+    items: {$ref: "#/$defs/entry"}
+$defs:
+  rotate:
+    description: Degrees counter-clockwise about the container's centre.
+    enum: [0, 90, 180, 270]
+  entry:
+    type: object
+    additionalProperties: false
+    required: [n, drawn, rendering, rotate, flip, decided_by, quadrants]
+    properties:
+      n: {type: integer, minimum: 1, maximum: 324}
+      drawn:
+        description: >-
+          The default picture: the count's regularized view, or its house drawing
+          (policy section 12).
+        enum: [view, house]
+      rendering:
+        description: The retained rendering the picture is read from, repository-relative.
+        type: string
+        pattern: ^packing/atlas/known-best/(regularized/)?rendering/n-[0-9]{3}\.svg$
+      rotate: {$ref: "#/$defs/rotate"}
+      flip:
+        description: >-
+          After the rotation, mirror across the diagonal from the upper-left to the
+          lower-right corner.
+        type: boolean
+      decided_by:
+        description: >-
+          The stage after which every surviving pose drew the same picture: the
+          quadrants, the 4 x 4, 8 x 8 or 16 x 16 grid in quadtree order, or the squares
+          themselves.
+        enum: [quadrants, grid-4, grid-8, grid-16, squares]
+      quadrants:
+        description: >-
+          The turned picture's quadrant weights, the filled fraction of each, in the
+          rule's order: lower right, lower left, upper left, upper right; rounded to six
+          places.
+        type: array
+        minItems: 4
+        maxItems: 4
+        items: {type: number, minimum: 0, maximum: 1}
+    if:
+      properties: {drawn: {const: view}}
+    then:
+      properties:
+        rendering: {pattern: ^packing/atlas/known-best/regularized/rendering/}
+    else:
+      properties:
+        rendering: {pattern: ^packing/atlas/known-best/rendering/}

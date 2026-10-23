@@ -152,16 +152,32 @@ So an admission never makes the drawn picture worse.
 ```bash
 python -m devtools.render_regularized_atlas --update
 python -m devtools.default_drawings --update
+python -m devtools.flip_regularization --update
 python -m devtools.regularized_drawings
 python -m devtools.render_results --update
 ```
 
-These redraw the views, decide each count’s default picture and regularization state,
-regenerate `results.yaml`’s `regularized_drawings` and each case record’s
-`regularization` note, and regenerate `frontier/RESULTS.md`. Run `default_drawings`
-before `regularized_drawings`: where a view is not its count’s default picture, the note
-opens by saying that the house drawing is drawn and why, read from the default record.
+These redraw the views, decide each count’s default picture and its regularization
+state, flip-regularize each default picture, regenerate `results.yaml`’s
+`regularized_drawings` and each case record’s `regularization` note, and regenerate
+`frontier/RESULTS.md`. Run `default_drawings` before `regularized_drawings`: where a
+view is not its count’s default picture, the note opens by saying that the house drawing
+is drawn and why, read from the default record.
 Update the layer’s counts in the atlas README’s regularized-views section by hand.
+
+Flip regularization is the last stage, separate from the others and fast, and it changes
+no file but its own record.
+After `default_drawings` has decided which picture each count draws,
+`flip_regularization --update` decides, from that picture’s retained rendering, the
+rotation and flip that put its heaviest quadrant lower right and the heavier of that
+quadrant’s neighbours lower left, by the rule of
+[policy section 13](../policies/regularization-policy.md#13-flip-regularization), and
+writes them to `atlas/known-best/flip-regularization.json` in a few seconds.
+The composites and the site apply the pose when they draw, and the house drawing as
+published keeps its source’s pose.
+`python -m devtools.flip_regularization --n N` prints a count’s quadrant weights and
+which stage decided its pose, and `--check` is the records-tier step
+`flip regularization record is current`.
 
 A drawn view is the count’s default picture, on the site, the atlas and the posters,
 where it improves on the house drawing under the same rule

@@ -8003,7 +8003,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 0
   end: 9
   label: Mishapolk
@@ -8020,7 +8020,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 16
   end: 24
   label: Stenlund
@@ -8037,7 +8037,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 26
   end: 34
   label: Friedman
@@ -8055,7 +8055,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 36
   end: 45
   label: Ellsworth
@@ -8072,7 +8072,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 47
   end: 62
   label: Chaoweeraprasit
@@ -8090,7 +8090,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 64
   end: 69
   label: Couzo
@@ -8109,7 +8109,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 71
   end: 73
   label: Xu
@@ -8124,9 +8124,46 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 75
-  end: 79
+  end: 80
+  label: Gupta
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: 'Reviewed 2026-10-23 (review A3 of #747): measured pose by pose, this source''s
+    180 is Francisco Couzo''s T-128 packing, whose credit runs to SQUISH''s packing
+    through Siddharth Gupta''s (measure/identity.json in the packet). The identity
+    join is the one the [Couzo exact refinements 2026-10-08] credit makes.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Gupta, Daniel, Levy
+  start: 82
+  end: 88
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  contributor_id: evan-daniel
+  note: 'Reviewed 2026-10-23 (review A3 of #747): measured pose by pose, this source''s
+    270 is Francisco Couzo''s T-130 packing, which refines Evan Daniel''s (measure/identity.json
+    in the packet). The identity join is the one the [Couzo exact refinements 2026-10-08]
+    credit makes.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Gupta, Daniel, Levy
+  start: 90
+  end: 94
   label: Levy
   role: prerequisite
   disposition: resolved

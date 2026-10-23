@@ -14989,10 +14989,26 @@ results:
       ([square-packing-records](https://github.com/Mishapolk/square-packing-records/tree/dd3da5c753c5ded6cb3b89476193b7b801005415))
       and, as the issue asks, the discoverers of the packings each started from where it started
       from the literature: Stenlund, Friedman, Ellsworth, SQUISH (Nate Chaoweeraprasit),
-      Francisco Couzo and Ryan Xu. The issue does not say which count started from which packing
-      and does not name Siddharth Gupta; the review measured 103 as Ryan Xu's packing and 258 as
-      SQUISH's. It discloses Gemini 3.8 assistance with solver scripting, precision checks and
-      formatting.
+      Francisco Couzo and Ryan Xu. The issue does not say which count started from which packing.
+      It discloses Gemini 3.8 assistance with solver scripting, precision checks and formatting.
+
+      Measured pose by pose against the register's upper-bound entries published before 9
+      October 2026 at these counts (T-056, T-092, T-098, T-101, T-113, T-115, T-116, T-117,
+      T-119, T-125, T-127, T-128 and T-130; T-129, recorded, has no packing the measurement
+      reads), fourteen of the sixteen pair one to one by nearest centres under the identity
+      with an earlier packing, no square moving beyond 1e-3 but seven at 270, by up to 2.6e-3.
+      Four are those packings refined to a smaller side: 103 Ryan Xu's (T-125), and 258, 302
+      and 303 SQUISH's (T-115, T-116, T-113). Ten are Francisco Couzo's packings at a side 8.2e-13
+      to 8.5e-12 above his, and 1.3e-7 at 270: 108, 127, 131, 180 and 306 his T-128 packings,
+      and 84, 86, 105, 175 and 270 his T-130 packings.
+
+      At 267 the witness keeps Ryan Xu's arrangement (T-125) with every square moved, by up to
+      0.084, at a side 3.4e-6 below his; at 132 none of those entries pairs with it, and the
+      credit there is the issue's. The measurement is
+      packing/resources/web/mishapolk-decimal-poses-2026-10-09/measure/identity.json.
+
+      So the credit at 180 runs through T-128 to SQUISH's packing by way of Siddharth Gupta's,
+      and at 270 through T-130 to Evan Daniel's.
     scope:
       n_values: [84, 86, 103, 105, 108, 127, 131, 132, 175, 180, 258, 267, 270, 302, 303, 306]
     verification: V3
@@ -27816,7 +27832,10 @@ results:
     attribution:
       source_keys: ['[Daniel n155 explorer 2026-10-17]']
       published: '2026-10-17'
-    evidence: [E-evand-669-n155-report, E-evand-669-n155-exact-feasibility]
+    evidence:
+      - E-evand-669-n155-report
+      - E-evand-669-n155-exact-feasibility
+      - E-evand-669-n155-source-checker-replay
     artifacts:
       - packing/resources/web/evand-n155-explorer-2026-10-17/README.md
       - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
@@ -27851,9 +27870,12 @@ results:
       This entry follows the issue and the prior-record file, which credit Ostashev's
       packing as the start.
 
-      The source's own checkers were not run here. The two maintained routes share
-      certificate parsing, half-angle conversion, Fraction arithmetic and the
-      separating-axis method. No optimality, local minimum or human oversight is claimed.
+      The source's own checkers, verify_cert.py and verify_cert2.py, ran here unchanged on
+      23 October 2026 and accepted both certificates and refused all eight of their
+      controls (E-evand-669-n155-source-checker-replay); they are the author's code, so
+      that replay moves no rung. The two maintained routes share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No
+      optimality, local minimum or human oversight is claimed.
 
       V3 and C3 rest on the 19 October review and the replay it reproduced
       (E-evand-669-n155-exact-feasibility). The case at 155 adopted this certificate as
@@ -27926,7 +27948,10 @@ results:
     attribution:
       source_keys: ['[Daniel n229 dilation 2026-10-17]']
       published: '2026-10-17'
-    evidence: [E-evand-674-n229-opening-report, E-evand-674-n229-opening-exact-feasibility]
+    evidence:
+      - E-evand-674-n229-opening-report
+      - E-evand-674-n229-opening-exact-feasibility
+      - E-evand-674-n229-opening-source-checker-replay
     artifacts:
       - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
       - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
@@ -27959,8 +27984,11 @@ results:
       packing under any symmetry of the box: an optimal assignment moves 77 squares beyond
       a tenth, at most 0.807, with turns up to 38.3 degrees
       (couzo-issue672-2026-10-17/measure/identity.json), so no regularizations.of is
-      assigned; the step from #672 is the source's account. The source's own checkers were not run
-      here. No optimality, local minimum or human oversight is claimed.
+      assigned; the step from #672 is the source's account. The source's own checkers,
+      verify_cert.py and verify_cert2.py, ran here unchanged on 23 October 2026 and
+      accepted the certificate and refused its four controls
+      (E-evand-674-n229-opening-source-checker-replay); they are the author's code, so that
+      replay moves no rung. No optimality, local minimum or human oversight is claimed.
 
       V3 and C3 rest on the 19 October review and the replay it reproduced
       (E-evand-674-n229-opening-exact-feasibility).
@@ -28028,7 +28056,10 @@ results:
     attribution:
       source_keys: ['[Daniel n229 dilation update 2026-10-18]']
       published: '2026-10-18'
-    evidence: [E-evand-674-n229-update-report, E-evand-674-n229-update-exact-feasibility]
+    evidence:
+      - E-evand-674-n229-update-report
+      - E-evand-674-n229-update-exact-feasibility
+      - E-evand-674-n229-update-source-checker-replay
     artifacts:
       - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
       - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
@@ -28060,8 +28091,11 @@ results:
       centres pair the two one to one, and an optimal assignment moves 79 squares beyond a
       tenth, at most 0.873, with turns up to 38.3 degrees
       (couzo-issue672-2026-10-17/measure/identity.json), so no regularizations.of is
-      assigned; the step from #672 is the source's account. The source's own checkers were not run here. No
-      optimality, local minimum or human oversight is claimed.
+      assigned; the step from #672 is the source's account. The source's own checkers,
+      verify_cert.py and verify_cert2.py, ran here unchanged on 23 October 2026 and
+      accepted the certificate and refused its four controls
+      (E-evand-674-n229-update-source-checker-replay); they are the author's code, so that
+      replay moves no rung. No optimality, local minimum or human oversight is claimed.
 
       V3 and C3 rest on the 19 October review and the replay it reproduced
       (E-evand-674-n229-update-exact-feasibility). The case at 229 adopted this
