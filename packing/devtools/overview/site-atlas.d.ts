@@ -10,8 +10,6 @@ interface SiteAtlasParts {
   sizes: HTMLElement | null;
   /** Keep view/size state local; geometry and FLIP remain shared with the dedicated Atlas. */
   scoped?: boolean;
-  /** Complete the visible preview with freshly measured capacity, before layout writes. */
-  beforeArrange?: (capacity: number) => void;
   scales?: HTMLElement | null;
   drawings?: HTMLElement | null;
   /** Restart preparation for the sources selected by the drawing chooser. */

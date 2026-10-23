@@ -3,8 +3,8 @@
 // until `atlas-grid.js` calls `mount`.
 //
 // They are the whole of the triangle's arithmetic: which row a case is in, how many
-// tiles a line holds at a width, where each case then stands, and how a tile's first
-// frame is worked out from where it was. The browser tests
+// tiles a line holds at a width, where each case then stands, which size an untouched
+// atlas takes, and how a tile's first frame is worked out from where it was. The browser tests
 // (`tests/test_site_atlas_views.py`) hold the page to the same shapes as laid out.
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -137,6 +137,52 @@ void test("each size fits as many scaled cells as the shared grid minimum allows
         const per = atlas.perLineAt(width, 108, most, scale, 8);
         assert.ok(per * 108 * scale + (per - 1) * 8 <= width);
       }
+    }
+  }
+});
+
+void test("a complete row's width is its tiles at Grid's width and the gaps between", () => {
+  // 1280 pixels leave a 1200-pixel block: ten 112.8-pixel Medium tiles to a Grid line.
+  assert.equal(atlas.rowWidth(1200, 102.4, 8, 1, 35), 35 * 112.8 + 34 * 8);
+  // A 390-pixel phone leaves 358: four 85.3-pixel Medium tiles, or six of 55 at Small.
+  assert.ok(Math.abs(atlas.rowWidth(358, 73.6, 5.6, 1, 35) - (35 * 85.3 + 34 * 5.6)) < 1e-9);
+  assert.ok(Math.abs(atlas.rowWidth(358, 73.6, 5.6, 0.667, 35) - (35 * 55 + 34 * 5.6)) < 1e-9);
+  assert.ok(Math.abs(atlas.rowWidth(358, 73.6, 5.6, 1, 1) - 85.3) < 1e-9);
+});
+
+// The owner's rule of 2026-10-23 for a size nobody chose: "on a wide screen, we should
+// never go all the way to small, but on a narrow screen, if less than half of the screen
+// is fitting in, we should go to smaller."
+void test("an untouched size is Medium on a wide screen and Small once less than half fits", () => {
+  // A wide screen keeps Medium, however little of the row fits.
+  assert.equal(atlas.automaticSize(true, 1200, atlas.rowWidth(1200, 102.4, 8, 1, 35)), "medium");
+  assert.equal(atlas.automaticSize(true, 1, 1e6), "medium");
+  assert.equal(atlas.automaticSize(true, Number.NaN, Number.NaN), "medium");
+  // A narrow one goes to Small when less than half of the row fits at Medium...
+  assert.equal(atlas.automaticSize(false, 358, atlas.rowWidth(358, 73.6, 5.6, 1, 35)), "small");
+  assert.equal(atlas.automaticSize(false, 1119, atlas.rowWidth(1119, 102.4, 8, 1, 35)), "small");
+  // ...and keeps Medium while half or more does: exactly half is enough.
+  assert.equal(atlas.automaticSize(false, 500, 1000), "medium");
+  assert.equal(atlas.automaticSize(false, 499.99, 1000), "small");
+  assert.equal(atlas.automaticSize(false, 500, 1000.01), "small");
+  assert.equal(atlas.automaticSize(false, 2400, atlas.rowWidth(2400, 102.4, 8, 1, 35)), "medium");
+  // A row or block that cannot be measured leaves a narrow screen at the stylesheet's Small.
+  assert.equal(atlas.automaticSize(false, 0, 1000), "small");
+  assert.equal(atlas.automaticSize(false, 500, Number.NaN), "small");
+  assert.equal(atlas.automaticSize(false, Number.NaN, 1000), "small");
+});
+
+void test("no narrow block holds half the 35-tile row at Medium, so Small paints first", () => {
+  // site.css paints Small below 75rem before any script runs. Half the widest row is
+  // at least 17.5 Medium cells, so with either cell minimum, 6.4rem or the phone's
+  // 4.6rem with its narrower gap, the script's rule agrees at every narrow width.
+  for (const [least, gap] of /** @type {[number, number][]} */ ([
+    [102.4, 8],
+    [73.6, 5.6],
+  ])) {
+    for (let width = 1; width < 1200; width += 1) {
+      const medium = atlas.rowWidth(width, least, gap, 1, atlas.widest(324));
+      assert.equal(atlas.automaticSize(false, width, medium), "small", `${width}px`);
     }
   }
 });
@@ -414,8 +460,8 @@ void test("Row ratios use the actual enclosing side and the logical square-bound
   assert.equal(atlas.rowRatio(18, 4 + Math.SQRT1_2), (4 + Math.SQRT1_2) / 5);
 });
 
-void test("Global reference is the largest actual side among this instance's shown cases", () => {
-  // A subset can end between perfect squares; neither its count nor last n is a side.
+void test("Global reference is the largest actual side among the drawings shown", () => {
+  // Neither the count of cases nor the last n is a side.
   assert.equal(atlas.largestSide([2, 2.7071067811865475, 3.8]), 3.8);
   assert.equal(atlas.largestSide([6.1, 5.95, 6]), 6.1);
   assert.equal(atlas.largestSide([1, 10]), 10);

@@ -90,6 +90,8 @@ interface SiteAtlasViewApi {
   widest(last: number): number;
   perLine(width: number, least: number, most: number, gap?: number): number;
   perLineAt(width: number, least: number, most: number, scale: number, gap?: number): number;
+  rowWidth(width: number, least: number, gap: number, scale: number, count: number): number;
+  automaticSize(wide: boolean, width: number, row: number): AtlasSize;
   place(n: number, per: number, starts?: AtlasGridStarts): AtlasTrianglePlace;
   viewOf(search: string): AtlasView;
   searchFor(search: string, view: AtlasView): string;
