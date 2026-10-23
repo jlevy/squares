@@ -12056,6 +12056,16 @@ issues:
         status: recorded
       corrects:
       - https://github.com/jlevy/squares/issues/670#issuecomment-6336293996
+    - url: https://github.com/jlevy/squares/issues/670#issuecomment-6354654599
+      date: '2026-10-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+        id: T-226
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12106,6 +12116,13 @@ issues:
       beyond-horizon rows, which the reply said. It corrects the import reply of 08:27:04Z
       (issuecomment-6336293996), whose statement that eight rows were current is marked
       outdated. The issue stays open while T-226's review is queued (think-0nse).
+
+      The follow-up posted at 2026-10-23T00:47:05Z (issuecomment-6354654599), after #725 merged
+      (e929137a8) and its Pages deployment was checked (Certificate page run 39877818964),
+      reported T-226 at V3/C3, confirmed, independently re-implemented, and raised by the review
+      to S3 as the first report of the 204 arrangement, still superseded at 204, where T-229 is
+      the house since 23 October. It asked how sqpack/verify.py was called and whether the hop
+      job's seed was T-186's packing.
   - number: 672
     title: '227, 229, 330-996: registration request'
     author: franciscouzo
@@ -12784,6 +12801,21 @@ issues:
       - result: n994
       - result: n995
       - result: n996
+    - url: https://github.com/jlevy/squares/issues/672#issuecomment-6354654824
+      date: '2026-10-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n227
+        id: T-227
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n229
+        id: T-227
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12830,6 +12862,12 @@ issues:
       ledger before posting: the rule, and a table giving each count's side, verdict and best
       now as the ledger has them, with the row's place in the record. The issue stays open while
       T-227's review is queued (think-0nse).
+
+      The follow-up posted at 2026-10-23T00:47:06Z (issuecomment-6354654824), after #725 merged
+      (e929137a8) and its Pages deployment was checked (Certificate page run 39877818964),
+      reported T-227 at V3/C3, confirmed, independently re-implemented, raised by the review to
+      S3 for 227. It asked who made the CT105 web submission behind the 227 certificate and how
+      sqpack/verify.py was called.
   - number: 673
     title: 'Credit correction request: s(146) and s(308) found_by'
     author: evand
@@ -14191,6 +14229,16 @@ issues:
       - result: n996
       - result: n997
       - result: n998
+    - url: https://github.com/jlevy/squares/issues/675#issuecomment-6354655082
+      date: '2026-10-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+        id: T-228
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -14229,6 +14277,11 @@ issues:
       committed ledger before posting: the rule, and a table giving each count's side, verdict
       and best now as the ledger has them, with the row's place in the record. The issue stays
       open while T-228's review is queued (think-0nse).
+
+      The follow-up posted at 2026-10-23T00:47:07Z (issuecomment-6354655082), after #725 merged
+      (e929137a8) and its Pages deployment was checked (Certificate page run 39877818964),
+      reported T-228 at V3/C3, confirmed, independently re-implemented, at S2, with #670's T-226
+      now S3, and still superseded at 204. It asked how sqpack/verify.py was called.
   - number: 678
     title: '204-998: registration request'
     author: franciscouzo
@@ -20379,6 +20432,23 @@ issues:
       - result: n1413
       - result: n1489
       - result: n1568
+    - url: https://github.com/jlevy/squares/issues/719#issuecomment-6354655328
+      date: '2026-10-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n105
+        id: T-229
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n204
+        id: T-229
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n204-lower
+      - result: n447
     close_when: >-
       T-229 is reviewed and adopted at 105 and 204 (think-4h23), the owner has answered whether
       counts above 1024 are tracked (think-f2io) and the 8 rows above 1024 have their
@@ -20448,6 +20518,17 @@ issues:
       think-fwa9. The author added an MIT licence at 17cc220 (20:15:36Z) that the comment says
       covers every certificate, catalogue, manifest and tool. This packet stays derived-only
       at 12fc466; later packets from the repository may retain the files.
+
+      The stage 4 follow-up posted at 2026-10-23T00:47:08Z (issuecomment-6354655328), after #725
+      merged (e929137a8) and its Pages deployment was checked (Certificate page run
+      39877818964), reported T-229 at V3/C3, confirmed, independently re-implemented, at S2, and
+      the house best packing at 105 and 204 since 23 October. It answered the author's comment
+      of 20:15:57Z point by point: the lower 204 side is to be recorded under his credit,
+      reviewed and adopted (think-h01y); the 69 rows stay recorded as refinements, with per-row
+      credit the owner's open question; 447 stays a new arrangement; the ten withdrawn rows go
+      with #732; the 34 in-corpus files stay pinned; and later packets may keep his files under
+      the MIT licence of 17cc220. It asked how sqpack/verify.py was called and which 204 file
+      the solve began from.
   - number: 732
     title: '328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof'
     author: Mishapolk
