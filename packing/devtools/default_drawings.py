@@ -42,7 +42,10 @@ lists, failing nothing, each count that keeps the house picture and why: "no gai
 "above U, not in the exceptions", a goal it is worse on, or an exact route's refusal.
 It costs about 35 cpu-seconds: the views and their house drawings (about 20 for the 90
 views of 13 October 2026) and the other 232 house drawings (14 on a loaded host,
-15 October 2026), a few seconds of wall at four workers.
+15 October 2026), a few seconds of wall at four workers. Deciding every count's pose
+(`drawn_pose`) adds about 8 cpu-seconds, nearly all of it building the frames, against
+53 for the measuring on 23 October 2026; reusing the witness the measuring read saves
+about 5 more.
 
 **The regularization state.** The owner, 15 October 2026: "The records should make it
 evident which things are regularized, and if not, we should fix the record-keeping
@@ -114,8 +117,19 @@ obligation every re-housed count carries, that its runs are owed in this pull re
 the owner's rule is to adopt the smallest packing and then regularize it, so a re-housed
 count's runs are never deferred (review E1 of #641, and the import runbook's "The House
 Rule"). A count its runs have since regularized or decided is listed with the goals and
-not marked (review E2).
+not marked (review E2). It does not list poses: a count's pose follows from its drawn
+picture, so it changes only where the drawing or the witness the table lists does.
 
+**Flip regularization.** The owner, 23 October 2026 (policy section 13): each count's
+drawn picture is drawn in a canonical pose, one of the container's eight symmetries,
+which `devtools.flip_regularization` decides in binary64 from where its squares lie. Each
+state records it as `flip_regularization`: the rotation and the flip, the stage that
+decided it and the oriented picture's quadrant weights. The worker that measures a count
+decides it on the witness body measuring read (`drawn_pose`), the view's where the view
+is drawn and the house's elsewhere, so no witness is read twice. The pose is metadata:
+the renderers apply it as they draw (`flip_regularizations`), and no witness or view
+changes. `--check` decides every pose again, so a recorded pose the data does not give
+fails it as any other drift does; `--check-state` reads no pose.
 
 The site's drawings (`render_frontier_page`), the atlas tiles (`overview_sections`) and
 the posters (`build_known_best_atlas`) read the record through `regularized_defaults`,
@@ -139,6 +153,7 @@ from typing import Any, NamedTuple
 
 from strif import atomic_output_file
 
+from devtools import flip_regularization as flip
 from devtools import improvement_rule
 from devtools.improvement_rule import MEASURES
 from devtools.regularize_axis_components import ABOVE_U, ALGORITHM, EVAND_GENERATOR, LAPSED
@@ -171,6 +186,8 @@ GENERATOR = "python -m devtools.default_drawings"
 REGULARIZED = "regularized"
 HOUSE = "house"
 VIEW = "view"
+#: A state's field for the pose its drawn picture is drawn in (`flip_regularizations`).
+FLIP = "flip_regularization"
 #: How a refused count's reason reads, beside the improvement rule's own words.
 ROUTE_REFUSED = "an exact route refused it"
 UNKNOWN_U = "U is unknown"
@@ -1272,10 +1289,35 @@ def measure_house(unit: tuple[Path, int, Mapping[int, Mapping[str, Any]]]) -> di
     from devtools import regularize_select as select  # noqa: PLC0415
 
     tree, n, _entries = unit
-    house = select.today((tree, n, {}))
+    return _house_measures(n, select.today((tree, n, {})))
+
+
+def _house_measures(n: int, house: Mapping[str, Any]) -> dict[str, Any]:
     if house["drawing"]["kind"] != "witness":
         raise ValueError(f"n={n}: the house drawing was not measured")
     return {"n": n, "measures": {key: house[key] for key in MEASURES}}
+
+
+def _today(
+    tree: Path, n: int, entries: Mapping[int, Mapping[str, Any]]
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """`regularize_select.today` and the witness body it measured, kept so that the drawn
+    picture's pose is decided on the body already read rather than on a second reading
+    of its file."""
+    from devtools import census_drawing_regularity as census  # noqa: PLC0415
+    from devtools import regularize_select as select  # noqa: PLC0415
+
+    drawing, body = census.drawing_for(tree, n, entries)
+    return select.measured(n, drawing, body), body
+
+
+def drawn_pose(witness: dict[str, Any]) -> dict[str, Any]:
+    """A state's `flip_regularization`: the pose `flip_regularization.decide_frame` decides
+    for the drawn picture whose witness body is `witness` (the view's where a view is
+    drawn, else the house's), on the frame the house atlas builds of it."""
+    from devtools.build_known_best_atlas import frame_from_witness  # noqa: PLC0415
+
+    return flip.decide_frame(frame_from_witness(witness)).record()
 
 
 def _text(value: object) -> str | None:
@@ -1302,9 +1344,19 @@ def witness_identity(tree: Path, entry: Mapping[str, Any]) -> dict[str, str | No
 
 
 def _measure(unit: tuple[Path, int, Mapping[int, Mapping[str, Any]]]) -> dict[str, Any]:
-    """One count measured: `decide` where the layer draws a view, else `measure_house`."""
-    _tree, n, entries = unit
-    return {"n": n, "measured": decide(unit) if n in entries else measure_house(unit)}
+    """One count measured, as `decide` measures it where the layer draws a view and as
+    `measure_house` does elsewhere, with its drawn picture's pose (`drawn_pose`) decided
+    in the same worker on the witness body measuring read."""
+    tree, n, entries = unit
+    house, drawn = _today(tree, n, {})
+    if n in entries:
+        view, body = _today(tree, n, entries)
+        measured = judged(n, entries[n], view, house)
+        if measured["default"] == REGULARIZED:
+            drawn = body
+    else:
+        measured = _house_measures(n, house)
+    return {"n": n, "measured": measured, FLIP: drawn_pose(drawn)}
 
 
 def _axis_record(entry: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -1462,7 +1514,7 @@ def _identify(unit: tuple[Path, Mapping[str, Any]]) -> dict[str, str | None]:
 
 def document(*, workers: int = 1, tree: Path = REPO, index: Path = INDEX) -> dict[str, Any]:
     """The record the data gives: every drawn view's count decided, and every count's
-    regularization state."""
+    regularization state and the pose its drawn picture is drawn in (`FLIP`)."""
     every = index_entries(index)
     entries = {n: entry for n, entry in every.items() if entry["status"] == REGULARIZED}
     units = [(tree, n, entries) for n in sorted(every, reverse=True)]
@@ -1475,9 +1527,13 @@ def document(*, workers: int = 1, tree: Path = REPO, index: Path = INDEX) -> dic
         measured = [_measure(unit) for unit in units]
         identities = [_identify(unit) for unit in named]
     by_n = {int(row["n"]): row["measured"] for row in measured}
+    poses = {int(row["n"]): row[FLIP] for row in measured}
     witnesses = dict(zip(sorted(every), identities, strict=True))
     rows = [by_n[n] for n in sorted(entries)]
-    states = [count_state(n, every[n], by_n[n], witnesses[n]) for n in sorted(every)]
+    states = [
+        {**count_state(n, every[n], by_n[n], witnesses[n]), FLIP: poses[n]}
+        for n in sorted(every)
+    ]
     drawn = sum(1 for row in rows if row["default"] == REGULARIZED)
     return {
         "softschema": {"contract": CONTRACT, "schema": SCHEMA, "status": "enforced"},
@@ -1535,6 +1591,24 @@ def regularized_defaults(
     """The counts whose default picture is their regularized view (`decisions`)."""
     rows = decisions(record, index)
     return {n: row for n, row in rows.items() if row["default"] == REGULARIZED}
+
+
+@cache
+def flip_regularizations(record: Path = RECORD) -> dict[int, flip.Pose]:
+    """Every count's flip regularization (policy section 13): the pose its default
+    picture is drawn in, from the record's `states`, for each of `flip.COUNTS`. A count
+    whose row has no `flip_regularization`, or a record that is missing, draws in
+    `flip.IDENTITY`, its source's pose, so a renderer keeps drawing on a record written
+    before the stage. Nothing is measured or decided here, and the record's contract is
+    not held: `--check` holds the pose to the data."""
+    poses = dict.fromkeys(flip.COUNTS, flip.IDENTITY)
+    if not record.is_file():
+        return poses
+    for row in json.loads(record.read_text(encoding="utf-8")).get("states") or []:
+        held = row.get(FLIP)
+        if held is not None:
+            poses[int(row["n"])] = flip.Pose.from_record(held)
+    return poses
 
 
 def held_reasons(record: Path = RECORD) -> dict[str, str]:
@@ -2196,6 +2270,7 @@ def update(*, workers: int = 1) -> int:
             temporary.write_text(content, encoding="utf-8")
     decisions.cache_clear()
     regularized_defaults.cache_clear()
+    flip_regularizations.cache_clear()
     print(f"default drawings updated: {_summary(expected)}")
     print(f"regularization states: {_states_summary(expected['states'])}")
     return 0
