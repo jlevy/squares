@@ -109,6 +109,10 @@
   /** How wide the bends of the pan are, as a share of the stage's width: where it leaves
    * the right edge, and where a row's left end comes to rest at the left. */
   const PAN_BEND = 0.25;
+  /** How far the pan takes to come up to speed from rest at the page's top, as a share
+   * of the stage's height or width, whichever is less: on a narrow stage a row's left end
+   * soon reaches the edge, and the pan must be up to speed by then. */
+  const LAUNCH = 0.6;
 
   /**
    * The triangle's row for case `n`: the k with (k - 1)^2 < n <= k^2.
@@ -279,6 +283,24 @@
   }
 
   /**
+   * How far a traveller has come who starts from rest at 0 and by 1 runs at one unit a
+   * unit, on the line `t`, with no lag: their speed and its rate of change are nothing at
+   * the start, then rise smoothly, run up to two fifths over the line's to make up the
+   * slow start, and meet it at 1 with no corner. A straight line from 1 on.
+   * @param {number} t
+   * @returns {number}
+   */
+  function launch(t) {
+    if (!(t > 0)) {
+      return 0;
+    }
+    if (!(t < 1)) {
+      return t;
+    }
+    return t ** 3 * (15 + t * (-40 + t * (45 + t * (-24 + 5 * t))));
+  }
+
+  /**
    * How far a following triangle is zoomed after `scrolled` pixels of the page's scroll:
    * the laid-out size, XL, until `from`, then the tiles shrink by one width a pixel along
    * a ramp `length` long, rounded at both ends, to `least`.
@@ -367,17 +389,18 @@
 
   /**
    * Where the left end of a row `width` wide stands from the left edge of a block `room`
-   * wide when the middle of the block is `across` of the way along it: never left of
-   * the edge, so a row too long for that keeps its left end in view, coming to rest
-   * there on a `bend` of pixels.
+   * wide when the middle of the block is `across` of the way along it, less `behind`:
+   * never left of the edge, so a row too long for that keeps its left end in view, coming
+   * to rest there on a `bend` of pixels.
    * @param {number} room
    * @param {number} width
    * @param {number} across
    * @param {number} [bend]
+   * @param {number} [behind]
    * @returns {number}
    */
-  function followLeft(room, width, across, bend = PAN_BEND) {
-    return smoothMax(0, room / 2 - across * width, bend);
+  function followLeft(room, width, across, bend = PAN_BEND, behind = 0) {
+    return smoothMax(0, room / 2 - across * width - behind, bend);
   }
 
   /**
@@ -1316,6 +1339,7 @@
       zoomFrom: Number.POSITIVE_INFINITY,
       zoomLength: 0,
       settled: 0,
+      launchFrom: 0,
       /** @type {number[]} */
       ys: [],
       /** @type {number[]} */
@@ -1335,6 +1359,14 @@
     /** Where the middle of the window stands along the row at `point`. */
     const shareAt = (/** @type {number} */ point) =>
       frameAt(point, laid.tops[0] ?? 0, laid.settled, laid.across);
+    /** The point the framing follows: held where the pan sets off, then brought up to
+     * the point at the focus line from rest, over `LAUNCH` of the stage (`launch`). */
+    const framingAt = (/** @type {number} */ point) => {
+      const length = Math.min(laid.stage, cells.clientWidth) * LAUNCH;
+      return length > 0
+        ? laid.launchFrom + length * launch((point - laid.launchFrom) / length)
+        : Math.max(point, laid.launchFrom);
+    };
 
     const lay = () => {
       for (const line of laid.rows) {
@@ -1419,6 +1451,9 @@
       // Never before the page's own top, so a page opened there shows XL as painted.
       const top = -(block.getBoundingClientRect().top + window.scrollY + laid.offset);
       laid.zoomFrom = Math.max(from - laid.focus, top);
+      // The pan sets off from rest where it would first move: at the page's top, or where
+      // the triangle's first row reaches the focus line if that is later.
+      laid.launchFrom = Math.max(tops[0] ?? 0, laid.focus + Math.min(top, 0));
       const rate = laid.least < 1 ? (1 - laid.least) / Math.log(1 / laid.least) : 1;
       let length = Math.max((to - from) * rate, laid.stage * 1.5);
       // While pinned, the point at the focus line moves at the page's own speed on the
@@ -1512,11 +1547,16 @@
       const line = laid.focus + Math.min(0, scrolled);
       const zoom = zoomOf(carried);
       const room = cells.clientWidth;
+      const framing = framingAt(point);
       const width = spanAt(point) * zoom;
+      const framedWidth = spanAt(framing) * zoom;
       // How far right the rows move: to put the middle of the window the framing's share
-      // along the reader's row, its left end in view, and at the end to the left edge.
+      // along the row at the framing's point, the reader's own row's left end in view,
+      // and at the end to the left edge.
       const range = Math.max(0, (laid.spans.at(-1) ?? 0) * zoom - room);
-      const framed = followLeft(room, width, shareAt(point), room * PAN_BEND) - (room - width);
+      const framed =
+        followLeft(room, framedWidth, shareAt(framing), room * PAN_BEND, width - framedWidth) -
+        (room - width);
       // The reader's own pan holds while they pause and eases back onto the path as they
       // scroll on, by a factor of e a window of scroll, so drift cannot build up.
       nudge *= Math.exp(-Math.abs(scrolled - reading.scrolled) / laid.stage);
@@ -1630,6 +1670,7 @@
     zoomAlong,
     frameAt,
     settle,
+    launch,
     sideways,
     journey,
     followLeft,

@@ -622,3 +622,21 @@ void test("A swipe up or down pans nothing; a diagonal pans with the hand", () =
   assert.equal(tilt(-40, 0, 0), -24);
   assert.equal(tilt(-40, 0, 16), -40);
 });
+
+void test("The pan sets off from rest and meets its path with no lag and no corner", () => {
+  assert.equal(atlas.launch(-1), 0);
+  assert.equal(atlas.launch(0), 0);
+  assert.equal(atlas.launch(1), 1);
+  assert.equal(atlas.launch(3), 3);
+  const step = 1e-4;
+  /** @param {number} t */
+  const speed = (t) => (atlas.launch(t + step) - atlas.launch(t - step)) / (2 * step);
+  // No speed and no acceleration at the start; the line's speed, and no bend, at the end.
+  assert.ok(speed(step) < 1e-6);
+  assert.ok(Math.abs(speed(1) - 1) < 1e-3);
+  assert.ok(kink(atlas.launch, 0.5, 1.5) < 1e-3);
+  // It never goes back, and makes up the slow start at less than one and a half times
+  // the line's speed.
+  const speeds = Array.from({ length: 101 }, (_, at) => speed(at / 100));
+  assert.ok(speeds.every((value) => value >= 0 && value < 1.4));
+});

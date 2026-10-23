@@ -1,6 +1,6 @@
 // The case record's title line as the browser lays it out: the count, the arrow step on
-// either side of it, and, in the case popover, the corner's icons and the drawing above
-// it. Read from the record the open case popover shows, or else from the page's own.
+// either side of it, the drawing's frame below it and, in the case popover, the corner's
+// icons above it. Read from the record the open case popover shows, or else from the page's own.
 // Null until a record with a title line is shown.
 () => {
   const popover = document.querySelector("[data-case-popover]:popover-open");
@@ -10,7 +10,8 @@
   const title = line?.querySelector(":scope > .site-case-title");
   const count = title?.querySelector(".katex");
   const figure = article?.querySelector(".site-case-head > .site-case-figure");
-  if (!(article && line && title && count && figure)) {
+  const frame = figure?.querySelector(":scope > svg > rect");
+  if (!(article && line && title && count && figure && frame)) {
     return null;
   }
   /** @param {Element} node */
@@ -54,6 +55,7 @@
     tag: title.tagName.toLowerCase(),
     titleHit: titleHit !== null && title.contains(titleHit),
     figure: box(figure),
+    frame: box(frame),
     prev: step("prev"),
     next: step("next"),
     ink: ink ? getComputedStyle(ink).color : null,

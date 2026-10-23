@@ -15,11 +15,16 @@
   --site-tab-current-tint: 16%;
   --site-action-row-gap: 0.7rem;
   /* The compact chooser strip and the filter menus that match it: an eighth under the
-     control size since 2026-10-22 (the owner), and still over the 24px a tap target
-     needs. */
+     control size since 2026-10-22 (the owner), in a control 24px tall, the floor a tap
+     target needs. Its label's line is trimmed to the capitals (`text-box`) and the
+     button centers it, so the capitals stand in the middle at any pixel density; set
+     by leading and padding, they sat up to 0.86px high on a 2x screen (2026-10-23,
+     the owner). */
   --site-chooser-small-size: calc(var(--site-font-size-control, 0.8rem) * 0.875);
   --site-chooser-small-leading: 1.35;
-  --site-chooser-small-padding: 0.14rem 0.57rem;
+  --site-chooser-small-block-size: 1.5rem;
+  --site-chooser-small-padding: 0 0.57rem;
+  --site-chooser-small-trim: trim-both cap alphabetic;
   --site-header-duration: 180ms;
   --site-header-layer: 5;
   --site-icon-size: 0.85em;
@@ -528,7 +533,9 @@ nav.site-tabs a[aria-current="page"],
   font-weight: var(--site-font-weight-sans-medium, 500);
   margin-block-end: -1px;
   margin-inline-end: -1px;
+  min-block-size: var(--site-chooser-small-block-size);
   padding: var(--site-chooser-small-padding);
+  text-box: var(--site-chooser-small-trim);
 }
 .site-tabs.site-chooser-small :is([role="tab"], button):focus-visible,
 .site-news-reset:focus-visible {

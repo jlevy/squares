@@ -192,11 +192,57 @@ def test_scrolling_down_zooms_out_then_slides_to_the_left_edge(
             assert reading["across"] == pytest.approx(ACROSS, abs=0.01)
     # Past the bottom the triangle slides all the way to its left edge.
     assert abs(down[-1]["lastLeft"]) < 0.005
+    # Its pan and its zoom change speed a little at a time all the way down, from rest
+    # at the top: no turn of the wheel starts, stops or turns them with a jolt.
+    for key in ("pan", "scale"):
+        values = [reading[key] for reading in [start, *down]]
+        speeds = [0, *(other - one for one, other in pairwise(values))]
+        typical = max(abs(speed) for speed in speeds)
+        jolts = [
+            (index, one, other)
+            for index, (one, other) in enumerate(pairwise(speeds))
+            if abs(other - one) >= 0.3 * typical
+        ]
+        assert not jolts, (key, typical, jolts[:5])
     # Nothing scrolls the page but the reader, so a header hidden on the way down stays
     # hidden.
     hidden = [reading["headerHidden"] for reading in down]
     if True in hidden:
         assert all(hidden[hidden.index(True) :])
+
+
+@pytest.mark.parametrize(
+    ("name", "window"),
+    [("atlas.html", DESKTOP), ("index.html", DESKTOP), ("atlas.html", PHONE)],
+    ids=["atlas-desktop", "home-desktop", "atlas-phone"],
+)
+def test_the_pan_sets_off_from_rest_and_gathers_speed_smoothly(
+    browser: Any, site: str, name: str, window: dict[str, int]
+) -> None:
+    """From the page's top the pan starts at no speed, only to the right, and its speed
+    changes a little at a time (the owner, 2026-10-23): it once set off at most of its
+    speed with the first pixel of scroll."""
+    step = 8
+    page = _open(browser, site + name, window)
+    try:
+        readings = [_read(page)]
+        for _ in range(2 * window["height"] // step):
+            page.evaluate(STEP, {"by": step})
+            readings.append(_read(page))
+    finally:
+        page.close()
+    speeds = [one["pan"] - other["pan"] for one, other in pairwise(readings)]
+    moving = [index for index, speed in enumerate(speeds) if abs(speed) > 0.01]
+    assert moving, speeds
+    typical = max(abs(speed) for speed in speeds)
+    assert typical > 1, speeds
+    first = moving[0]
+    assert speeds[first] < 0.05 * typical, speeds[first : first + 8]
+    # Over the stretch it takes to come up to speed it moves only one way, to the right.
+    launched = first + int(0.6 * window["height"] / step)
+    assert all(speed >= -0.01 for speed in speeds[first:launched]), speeds
+    for one, other in pairwise(speeds):
+        assert abs(other - one) < 0.1 * typical, (one, other, typical)
 
 
 def test_scrolling_back_up_retraces_the_zoom_and_the_pan(browser: Any, site: str) -> None:

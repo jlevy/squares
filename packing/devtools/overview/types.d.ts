@@ -99,13 +99,14 @@ interface SiteAtlasViewApi {
   zoomAlong(scrolled: number, from: number, length: number, least: number): number;
   frameAt(point: number, start: number, settled: number, across: number): number;
   settle(distance: number, bend: number): number;
+  launch(t: number): number;
   sideways(
     slack?: number,
     share?: number,
     recent?: number,
   ): (x: number, y: number, time: number) => number;
   journey(ys: readonly number[], us: readonly number[], scrolled: number): number;
-  followLeft(room: number, width: number, across: number, bend?: number): number;
+  followLeft(room: number, width: number, across: number, bend?: number, behind?: number): number;
   nearestSize(tile: number, tiles: Readonly<Record<AtlasSize, number>>): AtlasSize;
   between(from: number, to: number, through: number): number;
   along(tops: readonly number[], at: number): { index: number; through: number };

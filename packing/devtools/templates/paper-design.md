@@ -1956,6 +1956,14 @@ contributor articles use their component sheets and the same text tokens.
     slides right, keeping that row’s left end in view.
     Rows are read between rows on a monotone spline, and the pan meets each limit on a
     bend a quarter of the stage wide.
+    From the page’s top the pan sets off from rest (the owner, 2026-10-23): it once ran
+    at most of its speed from the first pixel of scroll, since the rows at the focus
+    line were already widening.
+    The framing follows a point that starts where the pan would first move and comes up
+    to the point at the focus line over 0.6 of the stage’s height or width, whichever is
+    less, with no speed or acceleration at the start and no lag at the end (`launch`),
+    running up to two fifths faster than the path to make up the slow start.
+    The reader’s own row still keeps its left end in view throughout.
   - The zoom is a straight line in the scroll with rounded ends: the tiles shrink by one
     width a pixel, from where the reader’s row first needs it, over at least one and a
     half windows, from XL down to Small, or to where the case numbers, drawn at
@@ -2202,10 +2210,19 @@ contributor articles use their component sheets and the same text tokens.
 
 - **Small choosers.** Inline single-select and multi-select choices share the homepage
   Atlas’s `site-tabs site-chooser-small` component in `site-nav.css`. The text uses the
-  Results widget control size scaled by seven eighths, 1.35 leading, and 0.14rem by
-  0.57rem padding (`think-ticj`; a little smaller, the owner, 2026-10-22), which keeps
-  every chooser at least 24 pixels tall.
-  Borders, hover, keyboard focus and motion use the same rules on every page.
+  Results widget control size scaled by seven eighths (`think-ticj`; a little smaller,
+  the owner, 2026-10-22), with 0.57rem inline padding.
+  Every chooser button, the filter-menu trigger and Reset filters is 24 pixels tall, the
+  floor a tap target needs, with its label’s capitals in the middle (the owner,
+  2026-10-23). The label’s line is trimmed to its capitals (`text-box: trim-both cap
+  alphabetic`) and the button centers it; the trigger trims its label and summary the
+  same way, and a summary chip centers its own capitals on their baseline.
+  Leading and padding alone left the capitals 0.35px high at 1x and 0.86px high on a 2x
+  screen, where the browser rounds the font’s ascent and the half leading in device
+  pixels. A browser without `text-box` centers the untrimmed 1.35-leading line in the
+  same 24 pixels. `test_every_compact_chooser_centers_its_capitals` holds every label to
+  a quarter pixel on the Atlas, the homepage, News and Results, at 1x and 2x. Borders,
+  hover, keyboard focus and motion use the same rules on every page.
   Topic choices inside the shared multiselect disclosure always use the common neutral
   News surface with topic-colored ink and a check when selected.
   They have no label underline or inset selection mark.
@@ -2343,11 +2360,13 @@ contributor articles use their component sheets and the same text tokens.
     Fetch failures use the link’s canonical case page as the fallback.
   - **The record.** Its header shows the mathematical case count between its previous
     and next steps, then ordered status marks, and the verified interval as display-size
-    math. The steps share the count’s line (the owner, 2026-10-23): a left arrow before
-    the count and a right arrow after it, each alone, in the link ink, a 2.75rem target
-    on the count’s middle at the same gap from it, and washed on hover or keyboard
-    focus. Each names the case it loads in its accessible name and tooltip (“Previous
-    case, n = 16”) rather than in visible text.
+    math. The steps share the count’s line (the owner, 2026-10-23): a left arrow at the
+    line’s left end and a right arrow at its right end, each alone, in the link ink, its
+    ink meeting the left or right edge of the drawing’s frame below, on a 2.75rem target
+    that ends at the line’s end.
+    The line is as wide as the frame, which is drawn 1000 units in a view of 1020. Each
+    names the case it loads in its accessible name and tooltip (“Previous case, n = 16”)
+    rather than in visible text.
     The count stays centred whether the case has two neighbours or, at 1 and 324, one.
     The line comes straight after the label, above the diagram, so the steps stand at
     one height for every case and, in the popover, just below its icons.

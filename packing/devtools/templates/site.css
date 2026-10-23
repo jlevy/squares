@@ -3097,9 +3097,10 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   font-weight: var(--site-font-weight-sans-light);
   text-align: center;
 }
-/* The count's line: the title centred between the record's two steps, each an arrow
-   alone at the same gap from it, so the line reads as the count with an arrow either
-   side (the owner, 2026-10-23). The steps' nav lies across the whole line on a subgrid of
+/* The count's line: the title centred, as wide as the frame of the drawing below it,
+   with the record's two steps at its ends, each an arrow alone meeting the frame's left
+   or right edge (the owner, 2026-10-23). The frame, 1000 units, is drawn in a view of
+   1020, so the line is that much narrower than the drawing's box. The steps' nav lies across the whole line on a subgrid of
    it, so a first or last case's one arrow leaves the count where it is, and in the case
    popover the line stands below the corner's icons rather than beside them, as the steps
    did when they were the record's first line (`think-0dxa`). */
@@ -3109,7 +3110,9 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   column-gap: 0.5rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  inline-size: calc(min(20rem, 100%) * 1000 / 1020);
   margin-block: 0.25rem 0.75rem;
+  margin-inline: auto;
 }
 .site-case-steps {
   display: grid;
@@ -3130,21 +3133,23 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   text-decoration: none;
   transition: var(--site-hover-transition);
 }
-.kpress .site-case-steps > a:is(:hover, :focus-visible) {
-  background: var(--site-wash);
-}
-.site-case-steps > [rel~="prev"] {
+/* Each target ends at its end of the line, its arrow at the target's outer side and out
+   past it by the arrow's own margin in its 16-unit icon, 1.7 units, so the arrow's ink
+   meets the frame and nothing stands outside the drawing's box. */
+.kpress .site-case-steps > [rel~="prev"] {
   grid-column: 1;
-  justify-self: end;
-}
-.site-case-steps > [rel~="next"] {
-  grid-column: 3;
+  justify-items: start;
   justify-self: start;
+}
+.kpress .site-case-steps > [rel~="next"] {
+  grid-column: 3;
+  justify-items: end;
+  justify-self: end;
 }
 .site-case-steps .site-icon-arrow {
   block-size: 0.75em;
   inline-size: 0.75em;
-  margin: 0;
+  margin: 0 calc(-0.75em * 1.7 / 16);
 }
 .site-case-eyebrow {
   display: block;
@@ -3218,10 +3223,16 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   .site-case .site-case-figure {
     inline-size: min(18rem, 100%);
   }
+  .site-case .site-case-title-line {
+    inline-size: calc(min(18rem, 100%) * 1000 / 1020);
+  }
 }
 @container (max-width: 20rem) {
   .site-case .site-case-figure {
     inline-size: min(14rem, 100%);
+  }
+  .site-case .site-case-title-line {
+    inline-size: calc(min(14rem, 100%) * 1000 / 1020);
   }
   .site-case .site-atlas-gap-values {
     line-height: 1.4;
@@ -3241,6 +3252,9 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
 }
 .site-case-pop .site-case-head > .site-case-figure {
   inline-size: 100%;
+}
+.site-case-pop .site-case-head > .site-case-title-line {
+  inline-size: calc(100% * 1000 / 1020);
 }
 .kpress .site-case-summary .site-atlas-pop-bound {
   font-family: var(--kpress-font-prose);
@@ -3886,17 +3900,28 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
 }
 .site-filter-trigger {
   background: var(--kpress-doc-bg);
-  min-block-size: 1.55rem;
+  min-block-size: var(--site-chooser-small-block-size);
+}
+/* The label and the summary are each a line trimmed to its capitals, as a chooser
+   tab's is, so the trigger's centering stands both in its middle on one baseline
+   (site-nav.css, the compact chooser). A chip in the summary sits on that baseline
+   and keeps its height, its own capitals centered in it. */
+.site-filter-trigger > span {
+  text-box: var(--site-chooser-small-trim);
 }
 .site-filter-trigger [data-site-filter-summary] {
-  align-items: center;
-  display: inline-flex;
-  gap: 0.2rem;
+  display: block;
 }
 .site-filter-trigger .site-chip {
   font-size: inherit;
   line-height: inherit;
   margin: 0;
+}
+@supports (text-box: trim-both cap alphabetic) {
+  .site-filter-trigger .site-chip {
+    padding-block: calc((1lh - 1cap) / 2);
+    text-box: var(--site-chooser-small-trim);
+  }
 }
 .site-filter-chevron {
   margin-inline-start: 0.1rem;
@@ -3994,8 +4019,10 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   font: inherit;
   font-size: var(--site-chooser-small-size);
   font-weight: var(--site-font-weight-sans-medium);
+  min-block-size: var(--site-chooser-small-block-size);
   padding: var(--site-chooser-small-padding);
   padding-inline-end: 0;
+  text-box: var(--site-chooser-small-trim);
   text-decoration: none;
   transition: var(--site-hover-transition);
 }

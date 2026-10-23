@@ -23,13 +23,16 @@ from urllib.parse import parse_qs, urlsplit
 import pytest
 
 from devtools import (
+    check_site_rendering,
     news_highlights,
     overview_sections,
+    preview_site,
     render_changelog,
     render_overview,
     site_assets,
 )
 from devtools.render_n11_lower_bounds_explainer import COMPOSITE_ASSETS
+from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
 from sqpack.probes import probe
 from tests import site_browser, site_renders
 
@@ -49,6 +52,7 @@ NEWS_FILTERS = probe(PROBES, "site_homepage/news-filters")
 TOOLTIP_WATCH = probe(PROBES, "site_homepage/tooltip-watch")
 TOOLTIP_CLEAR = probe(PROBES, "site_homepage/tooltip-clear")
 SCROLL_FILTERS = probe(PROBES, "site_homepage/scroll-filters")
+CHOOSER_LABELS = probe(PROBES, "site_homepage/chooser-labels")
 ORIGIN = "http://homepage.test/"
 CELLS = "#homepage-atlas-cells"
 TILES = f"{CELLS} .site-atlas-cell:visible"
@@ -1610,5 +1614,65 @@ def test_significance_meter_spacing_rejects_oversized_boxes(
             or item["side_space"] < 2 * (item["border"] + item["padding"]) - 0.5
             for item in crowded
         ), ("the spacing probe must reject a meter its label and bars overflow", crowded)
+    finally:
+        page.close()
+
+
+#: Every page that sets a compact chooser, and the kinds of control each must show. The
+#: atlases are opened at a named size, which keeps the scroll from resizing their tiles.
+CHOOSER_SURFACES = {
+    "atlas.html?size=medium": {"tab"},
+    "index.html?size=medium": {"tab"},
+    "news.html": {"tab", "trigger", "reset"},
+    "results.html": {"tab"},
+}
+
+
+@pytest.fixture(scope="module")
+def doubled(browser: Any) -> Iterator[Any]:
+    """The same Chromium laid out for a 2x screen. `--force-device-scale-factor` lays a
+    page out in device pixels, as a Retina display does, so a font's ascent and the
+    leading round there as they do for a reader on one; a context's
+    `device_scale_factor` draws the 1x layout larger and rounds nothing differently."""
+    launched = browser.browser_type.launch(
+        executable_path=os.environ.get(BROWSER_OVERRIDE),
+        args=[preview_site.FONT_RENDER_HINTING, "--force-device-scale-factor=2"],
+    )
+    yield launched
+    launched.close()
+
+
+@pytest.mark.parametrize("scale", [1, 2])
+def test_every_compact_chooser_centers_its_capitals(
+    browser: Any, payloads: dict[str, bytes], scale: int, request: pytest.FixtureRequest
+) -> None:
+    """Every compact chooser's words stand in the middle of their control, on the Atlas,
+    the homepage, News and Results, at both widths and at 1x and 2x. The labels are set
+    in capitals, so the middle of the capitals is what reads as the text's middle, and
+    it is held to a quarter pixel.
+
+    Set by the leading and the padding, the capitals sat 0.35px high at 1x and 0.86px
+    high on a 2x screen, where the browser rounds the font's ascent and the half leading
+    in device pixels (the owner, 2026-10-23). Each line is now trimmed to its capitals
+    (`text-box`) and centered in a control 24px tall, the floor a tap target needs."""
+    chromium = browser if scale == 1 else request.getfixturevalue("doubled")
+    page = chromium.new_page(viewport={"width": WIDTHS[0], "height": 900})
+    _serve(page, payloads)
+    try:
+        for path, kinds in CHOOSER_SURFACES.items():
+            page.goto(f"{ORIGIN}{path}", wait_until="load")
+            check_site_rendering.wait_for_fonts(page)
+            for width in WIDTHS:
+                page.set_viewport_size({"width": width, "height": 900})
+                controls = page.evaluate(CHOOSER_LABELS)
+                where = (path, width, scale)
+                assert {control["kind"] for control in controls} == kinds, where
+                for control in controls:
+                    assert control["fontSize"] == pytest.approx(15.2 * 0.875, abs=0.01), where
+                    assert control["height"] >= 24 - 0.01, (where, control)
+                    assert control["words"], (where, control)
+                    for word in control["words"]:
+                        assert word["transform"] == "uppercase", (where, control)
+                        assert abs(word["offset"]) <= 0.25, (where, control)
     finally:
         page.close()
