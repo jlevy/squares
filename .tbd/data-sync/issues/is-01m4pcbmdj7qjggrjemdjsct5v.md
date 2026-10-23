@@ -5,7 +5,7 @@ title: "Import wand125: s(31) >= 2391/400 = 5.9775 by the mixed_n31_L59775 fine-
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: c-lower-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:02:04.210Z
-updated_at: 2026-10-23T06:18:58.211Z
+updated_at: 2026-10-23T06:46:32.073Z
 started_at: 2026-10-23T06:18:58.210Z
 ---
 Found in the 2026-10-11 intake read of wand125/square-packing (think-q655); nothing on GitHub asked. Commit 23e3186 (2026-10-11T00:51:18Z, before the head 04fbef0) adds problems/square-lower-bounds/certificates/mixed_n31_L59775/: a fine-net measure certificate reporting s(31) >= 2391/400 = 5.9775 (31 unit squares do not fit in the closed square of side 2391/400), mass 3099999/100000 < 31, core B = 4999/5000, declared net proof_net {step 1/5002, last 2072}, 2,073 directions; candidate digest 2d8d9d59...; the candidate and check2 receipts sit in the repository's data release, not the commit. The author's pre-publication check ran sqverify_fast (jlevy/squares crate with proof_net support, wand125 branch fe12e036c, source digest ab6e33e164db) from the bundle's check2/src on a fresh Ubuntu 24.04 machine: 2073/2073 directions VERIFIED in 7,277 s, mass x 0.985 control refused in 32 directions.
@@ -24,3 +24,11 @@ Against the record: n = 31's reported and verified lower bound is 2381/400 = 5.9
 ## Notes
 
 2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): https://github.com/jlevy/squares/issues/534. Tracker https://github.com/jlevy/squares/issues/544.
+2026-10-23 c-lower-1023 (records lane of coord-intake-1023), stages 1 to 3, branch claude/intake-2026-10-23-lower-bounds from origin/main 44df28b07:
+- Pin: wand125/square-packing 23e31862345c532d17ad2c896677a3a8d8821aa4 (committed 2026-10-11T00:51:18Z), the only commit touching certificates/mixed_n31_L59775; the directory tree 61226b50 and the licence are unchanged through head e48de24 (read 2026-10-23T06:24Z, 130 later commits). Release square-lower-bounds-v1 asset certificates__mixed_n31_L59775.tar.gz (id 629390758), 631,670 B, SHA-256 50b1cf3f...0a58 = ASSET.json = SHA256SUMS line 441 = API digest.
+- Claim map: one claim, s(31) >= 2391/400 (536 positive rectangles, mass 3099999/100000, core 4999/5000, 2,073 directions, step 1/5002). Above T-068/T-074's 2381/400 by 1/40 and #446's unadopted 597/100 (same release) by 3/400; upper bound 6 (gap 9/400). New entry: T-232 at V0/C0, pending adoption.
+- Packet packing/resources/web/wand125-fine-net-n31-2026-10-11/ (acquire_source --check PACKET_MATCHES_ITS_CONTRACT; fine_net_followup check-retained 0 problems; check_added_blobs PASS, 245 KB thin pack). premises: EXACT_PREMISES_HOLD. Sample (sqverify-fast d97758bb, binary 567a0fd5, directions 0, 296, ..., 2072): 8/8 verified, nodes and least bounds equal to the source's; 53.24 CPU-s vs 77.24 (ratio 0.689).
+- Price: the source's check2 receipt states 21,625 direction CPU-s (12 threads, 2,161.9 s wall); the tracker's "about 2 CPU-hours" read the pre-publication run's 7,277 s wall as CPU. Capture about 14,907 CPU-s, whole-net controls about 14,926: 8.29 CPU-h, 12.0 at the source's CPU. Above the lane's 2 CPU-h stop line per run; the coordinator approved both runs (nice -n 19, --threads 2, stop if the pair exceeds 16 CPU-h).
+- Commits: 7fbf15c70 (packet; census MIXED_PACKETS/MIXED_ROOTS/SHARED_CRATE_PACKETS; test), 7b90d47d2 (T-232 and T-233, evidence E-wand125-fine-net-n31-59775-report, coverage wand125-fine-net-n31-59775-2026-10-11, bibliography [wand125 fine-net n31 2026-10-11], resources README, n-031 open item and corrected verified-interval sentence, views). Pushed.
+- Stage 4: capture started 2026-10-23T06:39:21Z (114 directions in: ratio 0.681, projecting about 14,700 CPU-s). The stage 4 mathematical review lane was handed to the coordinator at 7b90d47d2.
+- No issue asked, so no reply is owed; the S3 draft significance does not need an issue of the project's own (S4+ rule).
