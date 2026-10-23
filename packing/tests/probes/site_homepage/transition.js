@@ -1,5 +1,8 @@
-// Capture the synchronous input response, shared animation, and persistent nodes.
-/** @param {{install: boolean, settle: boolean, rapid?: boolean, position?: boolean}} options */
+// Capture the synchronous input response, shared animation, and persistent nodes of a
+// press of one of the homepage atlas's tabs, by pointer or keyboard. `position` scrolls
+// a control to the window's middle first, as a reader has it; `rapid` presses each of a
+// list of controls at once, one after another.
+/** @param {{install: boolean, settle: boolean, rapid?: string[], position?: string}} options */
 async (options) => {
   const atlas =
     /** @type {typeof globalThis & {SiteAtlasView: {milliseconds(value: string): number}}} */ (
@@ -7,13 +10,15 @@ async (options) => {
     ).SiteAtlasView;
   const grid = document.querySelector("[data-atlas-preview]");
   const cells = grid?.querySelector(".site-atlas-cells");
-  const toggle = document.querySelector("[data-homepage-atlas-toggle]");
-  if (!(grid instanceof HTMLElement) || !(cells instanceof HTMLElement) || !toggle) {
+  if (!(grid instanceof HTMLElement) || !(cells instanceof HTMLElement)) {
     throw new Error("Missing homepage Atlas controls");
   }
   if (options.position) {
-    toggle.scrollIntoView({ block: "center", behavior: "instant" });
+    grid.querySelector(options.position)?.scrollIntoView({ block: "center", behavior: "instant" });
   }
+  /** @param {Event} event */
+  const pressed = (event) =>
+    event.target instanceof Element && event.target.closest('[role="tab"]') !== null;
   if (options.install) {
     const links = [...cells.querySelectorAll(".site-atlas-cell")];
     const drawings = links.map((link) => link.firstElementChild);
@@ -27,9 +32,12 @@ async (options) => {
       link.offsetWidth,
       link.offsetHeight,
     ];
-    toggle.addEventListener(
+    grid.addEventListener(
       "click",
-      () => {
+      (event) => {
+        if (!pressed(event)) {
+          return;
+        }
         beforeScroll = window.scrollY;
         beforeLayout = new Map(
           links.flatMap((link) => {
@@ -47,7 +55,10 @@ async (options) => {
       },
       true,
     );
-    toggle.addEventListener("click", () => {
+    grid.addEventListener("click", (event) => {
+      if (!pressed(event)) {
+        return;
+      }
       const current = [...cells.querySelectorAll(".site-atlas-cell")];
       const count = current.filter((link) => link.getClientRects().length > 0).length;
       const history = JSON.parse(grid.dataset.testCounts ?? "[]");
@@ -84,11 +95,11 @@ async (options) => {
       });
     });
   }
-  if (options.rapid && toggle instanceof HTMLButtonElement) {
-    toggle.click();
-    toggle.click();
-    toggle.click();
-    toggle.click();
+  for (const selector of options.rapid ?? []) {
+    const control = grid.querySelector(selector);
+    if (control instanceof HTMLElement) {
+      control.click();
+    }
   }
   if (options.settle) {
     await Promise.allSettled(document.getAnimations().map((animation) => animation.finished));
@@ -149,8 +160,5 @@ async (options) => {
     root_size: document.documentElement.dataset.siteAtlasSize ?? null,
     panel_id: cells.id,
     panel_role: cells.getAttribute("role"),
-    toggle_in_view:
-      toggle.getBoundingClientRect().top >= 0 &&
-      toggle.getBoundingClientRect().bottom <= window.innerHeight,
   };
 };

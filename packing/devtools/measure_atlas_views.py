@@ -12,10 +12,13 @@ a common right edge. Its scroll frame pans wide rows at the same drawing scale a
 This opens a built overview in Chromium and reports what the
 browser made of that:
 
-- `layout` reports each view at each width, with the first hundred cases and with all of
-  them: the block's width, how many tiles a line holds, a tile's and a drawing's width,
-  the size of a tile's number, how many lines the tiles take and how tall they stand, and
-  the rows that wrap. With them it reports what a layout may not do (`layout_problems`):
+- `layout` reports each view at each width with all 324 cases: the block's width, how
+  many tiles a line holds, a tile's and a drawing's width, the size of a tile's number,
+  how many lines the tiles take and how tall they stand, the rows that wrap, and in the
+  triangle how much of its widest row the block shows (`share`). Each width is also read
+  with no size in the address, at the size the page then chooses (`automatic`), which
+  is the owner's rule of 2026-10-23 (`overview/atlas-view.js`, `automaticSize`). With
+  them it reports what a layout may not do (`layout_problems`):
   run past the window, set a tile outside the block or over another, break the order of
   the cases, cut a row into lines other than `row_lines` gives, or start any Triangle
   row away from the canvas's right edge. Each layout is read at each size (`SIZES`), and
@@ -24,9 +27,8 @@ browser made of that:
   gaps and the deepest count's clearance above the next drawing. Stars and obsolete
   layer badges are also reported for geometry and presence checks.
   `--markdown` prints one line a layout.
-- `move` times each change of layout (`CHANGES`: to the triangle and back, with a hundred
-  cases and with all, the expander's change in the triangle, and changes of size in each
-  view), `--runs` times each:
+- `move` times each change of layout (`CHANGES`: to the triangle and back, and changes
+  of size in each view), `--runs` times each:
   how long the script's handler ran, how many tiles moved, how long the move lasted, the
   animation frames the page was given and the ones the main thread missed, every long
   task, and Chromium's own counters over the change, the time in script, in layout and
@@ -40,11 +42,10 @@ browser made of that:
   work the compositor otherwise does alone; `--unwatched` asks for no frame, and the
   counters then show what a reader's browser does.
 - `shots` writes pictures to `--out`: the atlas block in each view at each width, in the
-  light theme and the dark, with a hundred cases and with all, at each size (the
-  pictures at Medium and Large end `-medium` and `-large`); the two actions under a
-  table and under the grid, "See all results" and the expander collapsed and expanded,
-  at each width in both themes; and the window at five points of the move from the grid
-  to the triangle (0, 25, 50, 75 and 100 percent).
+  light theme and the dark, at each size (the pictures at Medium and Large end `-medium`
+  and `-large`) and at the size the page chooses itself (`-automatic`); and the window at
+  five points of the move from the grid to the triangle (0, 25, 50, 75 and 100 percent).
+  The expander under the tiles, and its pictures, went on 2026-10-23 (think-rk91).
 - `readme` writes the one picture README opens with to `--out`: the tiles alone, every
   case in the triangle at the page's own size, in the light theme, at twice the pixels
   of a window wide enough that no row pans (`README_WINDOW`), cut to the tiles. Run it
@@ -87,7 +88,6 @@ from sqpack.probes import probe
 
 PROBES = Path(__file__).resolve().parent / "probes"
 LAYOUT = probe(PROBES, "measure_atlas_views/layout")
-EXPANSION = probe(PROBES, "measure_atlas_views/expansion")
 MOVE = probe(PROBES, "measure_atlas_views/move")
 HOLD = probe(PROBES, "measure_atlas_views/hold")
 SETTLED = probe(PROBES, "measure_atlas_views/settled")
@@ -110,8 +110,8 @@ WIDTHS = (1280, 1024, 768, 390)
 SCHEMES = ("light", "dark")
 #: The points of a move a picture is taken at, as shares of its duration.
 FRACTIONS = (0.0, 0.25, 0.5, 0.75, 1.0)
-#: The windows the move is pictured in, each with the hundred and with every case: a
-#: desktop tall enough to hold the whole triangle under its heading, and a phone.
+#: The windows the move is pictured in: a desktop tall enough to hold most of the
+#: triangle under its heading, and a phone.
 FRAME_WINDOWS = ((1280, 1200), (390, 844))
 #: The window README's picture is taken in, wide enough that the triangle's last row of
 #: 35 tiles stands whole at Small once the block may fill it and tall enough to hold
@@ -126,7 +126,6 @@ README_MARGIN = 8
 README_COLORS = 256
 #: How far two edges may differ and still be one edge, in CSS pixels.
 EDGE = 0.75
-EXPANDER = "[data-atlas-toggle]"
 BLOCK = "[data-atlas-grid]"
 #: How long the page must go without a long task before a change is timed, and the
 #: longest that is waited for, in milliseconds (the `quiet` probe).
@@ -156,9 +155,8 @@ def size_tab(size: str) -> str:
     return f'[data-atlas-size-tab="{size}"]'
 
 
-#: The presses `move` makes on one page, in order: what the change is called, how many
-#: nominal cases for the state, and the control pressed. Preview Grid counts finish
-#: complete rows near 100; the report reads the actual count after its timed window.
+#: The presses `move` makes on one page, in order: what the change is called and the
+#: control pressed. Every case shows throughout; the report reads the count shown.
 #: A change with no name is made
 #: and not timed: it only sets the page up for the next. The first two are such a pair,
 #: to the triangle and back. A first change of view brings the sections under the atlas
@@ -166,23 +164,18 @@ def size_tab(size: str) -> str:
 #: cards frame, once, on the same thread; that is the page's work and not the move's,
 #: so it is done before anything is timed. A change of size is timed in each view, from
 #: Medium to Large and on to Small, and the page is put back at Medium after.
-CHANGES: tuple[tuple[str | None, int, str], ...] = (
-    (None, 100, tab("triangle")),
-    (None, 100, tab("grid")),
-    ("grid to triangle", 100, tab("triangle")),
-    ("triangle to grid", 100, tab("grid")),
-    ("grid, medium to large", 100, size_tab("large")),
-    ("grid, large to small", 100, size_tab("small")),
-    (None, 100, size_tab("medium")),
-    (None, 324, EXPANDER),
-    ("grid to triangle", 324, tab("triangle")),
-    ("triangle to grid", 324, tab("grid")),
-    (None, 100, EXPANDER),
-    (None, 100, tab("triangle")),
-    ("triangle, 100 to 324", 324, EXPANDER),
-    ("triangle, medium to large", 324, size_tab("large")),
-    ("triangle, large to small", 324, size_tab("small")),
-    (None, 324, size_tab("medium")),
+CHANGES: tuple[tuple[str | None, str], ...] = (
+    (None, tab("triangle")),
+    (None, tab("grid")),
+    ("grid to triangle", tab("triangle")),
+    ("triangle to grid", tab("grid")),
+    ("grid, medium to large", size_tab("large")),
+    ("grid, large to small", size_tab("small")),
+    (None, size_tab("medium")),
+    (None, tab("triangle")),
+    ("triangle, medium to large", size_tab("large")),
+    ("triangle, large to small", size_tab("small")),
+    (None, size_tab("medium")),
 )
 
 
@@ -360,8 +353,19 @@ def ink_clearances(report: dict[str, Any]) -> dict[str, tuple[float, float]]:
     }
 
 
+def share(report: dict[str, Any]) -> float | None:
+    """How much of the triangle's widest row its scroll frame shows, as a share of the
+    row: the frame's width over the width it pans; none in the grid, which does not
+    pan."""
+    pan = report.get("pan")
+    if report["view"] != "triangle" or not pan or not pan["width"]:
+        return None
+    return round(min(1.0, pan["viewport"] / pan["width"]), 3)
+
+
 def summary(report: dict[str, Any]) -> dict[str, Any]:
-    """One layout in a line: its sizes, its lines and the rows that wrap."""
+    """One layout in a line: its sizes, its lines, the rows that wrap and the share of
+    the widest row shown."""
     tiles: list[dict[str, Any]] = report["tiles"]
     lines = _lines(tiles)
     rows: dict[int, int] = {}
@@ -386,17 +390,13 @@ def summary(report: dict[str, Any]) -> dict[str, Any]:
         "lines": len(lines),
         "height": report["cells"]["height"],
         "wrapped": wrapped if report["view"] == "triangle" else [],
+        "share": share(report),
         "problems": layout_problems(report),
     }
 
 
 def launch(driver: Any) -> Any:
     return driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
-
-
-def expansion(page: Any, *, interrupt: bool = False) -> dict[str, Any]:
-    """Read real viewport heights through one expansion and optional interruption."""
-    return page.evaluate(EXPANSION, {"interrupt": interrupt})
 
 
 def settle(page: Any) -> None:
@@ -456,12 +456,6 @@ def open_atlas(
     return page
 
 
-def expand(page: Any) -> None:
-    """Show every case, as the reader does: press the expander and let the move end."""
-    page.locator(EXPANDER).click()
-    settle(page)
-
-
 def top(page: Any) -> int | None:
     """Scroll the page so The Atlas, its heading, starts at the window's top edge, as a
     reader who has just reached the section has it; returns where the heading then
@@ -477,10 +471,18 @@ def layout(page: Any) -> dict[str, Any]:
     return report
 
 
+def automatic_query(view: str) -> str:
+    """The address of `view` with no size named, so the page chooses one itself."""
+    if view not in VIEWS:
+        raise ValueError(f"the atlas has no view {view!r}")
+    return "?atlas=grid" if view == "grid" else ""
+
+
 def measure_layout(
     address: str, widths: Sequence[int], sizes: Sequence[str] = SIZES
 ) -> list[dict[str, Any]]:
-    """Each view at each width at each size, with its preview and with all cases."""
+    """Each view at each width at each size, and at the size the page chooses when the
+    address names none (`automatic`)."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     rows: list[dict[str, Any]] = []
@@ -488,11 +490,17 @@ def measure_layout(
         browser = launch(driver)
         for width in widths:
             for view in VIEWS:
-                for size in sizes:
-                    page = open_atlas(browser, address, width=width, view=view, size=size)
-                    rows.append({"width": width, **summary(layout(page))})
-                    expand(page)
-                    rows.append({"width": width, **summary(layout(page))})
+                for size in (*sizes, None):
+                    page = open_atlas(
+                        browser,
+                        address,
+                        width=width,
+                        view=view,
+                        size=size or DEFAULT_SIZE,
+                        query=automatic_query(view) if size is None else None,
+                    )
+                    found = summary(layout(page))
+                    rows.append({"width": width, "automatic": size is None, **found})
                     page.close()
         browser.close()
     return rows
@@ -538,7 +546,7 @@ def measure_move(
                 top(page)
                 client = page.context.new_cdp_session(page)
                 client.send("Performance.enable", {"timeDomain": "threadTicks"})
-                for change, _, press in CHANGES:
+                for change, press in CHANGES:
                     if change is None:
                         page.locator(press).click()
                         settle(page)
@@ -547,11 +555,8 @@ def measure_move(
                     # thread: let it finish, so a move is timed alone.
                     page.evaluate(QUIET, {"calm": CALM_MS, "most": CALM_MOST_MS})
                     # The control is in the window when a reader presses it: the tabs
-                    # with the section's heading at the top, the expander wherever it is.
-                    if press == EXPANDER:
-                        page.locator(press).scroll_into_view_if_needed()
-                    else:
-                        top(page)
+                    # with the section's heading at the top.
+                    top(page)
                     report = timed(page, client, press, frames=frames)
                     shown = len(layout(page)["tiles"])
                     rows.append(
@@ -585,16 +590,10 @@ def medians(rows: Sequence[dict[str, Any]], *, best: bool = False) -> list[dict[
     return lines
 
 
-#: The two actions under a table and under the grid, as `shots` pictures them: the row
-#: of "See all results", and the expander's row, collapsed and expanded.
-ACTIONS = (("see-all", ".site-more"), ("expander", ".site-atlas-toggle-row"))
-
-
 def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
-    """The atlas block in each view at each width, light and dark, with its preview
-    and with all, at each size; the two actions (`ACTIONS`) at each width in both
-    themes, the expander collapsed and expanded; then the window at each of `FRACTIONS`
-    of the move to the triangle."""
+    """The atlas block in each view at each width, light and dark, at each size and at
+    the size the page chooses itself; then the window at each of `FRACTIONS` of the move
+    to the triangle."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     out.mkdir(parents=True, exist_ok=True)
@@ -604,53 +603,33 @@ def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
         for scheme in SCHEMES:
             for width in widths:
                 for view in VIEWS:
-                    for size in (size for size in SIZES if size != DEFAULT_SIZE):
+                    for size in (*SIZES, None):
                         page = open_atlas(
-                            browser, address, width=width, view=view, size=size, scheme=scheme
+                            browser,
+                            address,
+                            width=width,
+                            view=view,
+                            size=size or DEFAULT_SIZE,
+                            query=automatic_query(view) if size is None else None,
+                            scheme=scheme,
                         )
-                        for all_cases in (False, True):
-                            if all_cases:
-                                expand(page)
-                            shown = len(layout(page)["tiles"])
-                            target = out / f"atlas-{view}-{shown}-{width}-{scheme}-{size}.png"
-                            page.locator(BLOCK).screenshot(path=str(target))
-                            written.append(target)
-                        page.close()
-                    page = open_atlas(browser, address, width=width, view=view, scheme=scheme)
-                    for all_cases in (False, True):
-                        if all_cases:
-                            expand(page)
                         shown = len(layout(page)["tiles"])
-                        target = out / f"atlas-{view}-{shown}-{width}-{scheme}.png"
+                        suffix = {DEFAULT_SIZE: "", None: "-automatic"}.get(size, f"-{size}")
+                        target = out / f"atlas-{view}-{shown}-{width}-{scheme}{suffix}.png"
                         page.locator(BLOCK).screenshot(path=str(target))
                         written.append(target)
-                        if view != "grid":
-                            continue
-                        for name, selector in ACTIONS:
-                            if name == "see-all" and shown == 324:
-                                continue
-                            state = (
-                                ""
-                                if name == "see-all"
-                                else ("-less" if shown == 324 else "-more")
-                            )
-                            target = out / f"action-{name}{state}-{width}-{scheme}.png"
-                            page.locator(selector).screenshot(path=str(target))
-                            written.append(target)
-                    page.close()
+                        page.close()
         for width, height in FRAME_WINDOWS:
-            for shown in (100, 324):
-                page = open_atlas(browser, address, width=width, height=height, view="grid")
-                if shown == 324:
-                    expand(page)
-                top(page)
-                page.locator(tab("triangle")).click()
-                for fraction in FRACTIONS:
-                    page.evaluate(HOLD, {"fraction": fraction})
-                    target = out / f"move-{shown}-{width}-{round(fraction * 100):03d}.png"
-                    page.screenshot(path=str(target))
-                    written.append(target)
-                page.close()
+            page = open_atlas(browser, address, width=width, height=height, view="grid")
+            shown = len(layout(page)["tiles"])
+            top(page)
+            page.locator(tab("triangle")).click()
+            for fraction in FRACTIONS:
+                page.evaluate(HOLD, {"fraction": fraction})
+                target = out / f"move-{shown}-{width}-{round(fraction * 100):03d}.png"
+                page.screenshot(path=str(target))
+                written.append(target)
+            page.close()
         browser.close()
     return written
 
@@ -669,7 +648,6 @@ def readme(address: str, target: Path) -> Path:
     with sync_playwright() as driver:
         browser = launch(driver)
         page = open_atlas(browser, address, width=width, height=height, pixels=README_PIXELS)
-        expand(page)
         page.wait_for_function(WHOLE)
         settle(page)
         page.mouse.move(0, 0)

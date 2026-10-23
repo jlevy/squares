@@ -1,10 +1,9 @@
 // Input response: the atlas arrives as laid-out static tiles with reserved image
-// sizes. Controls change that existing grid only after the reader uses them.
+// sizes, every case at once. Controls change that existing grid only after the reader
+// uses them.
 (() => {
   const grid = document.querySelector("[data-atlas-grid]");
   const cells = grid?.querySelector(".site-atlas-cells");
-  const rest = grid?.querySelector("[data-atlas-rest]");
-  const toggle = grid?.querySelector("[data-atlas-toggle]");
   const tabs = grid?.querySelector("[data-atlas-views]");
   const sizes = grid?.querySelector("[data-atlas-sizes]");
   const scales = grid?.querySelector("[data-atlas-scales]");
@@ -12,8 +11,6 @@
   if (
     !(grid instanceof HTMLElement) ||
     !(cells instanceof HTMLElement) ||
-    !(rest instanceof HTMLElement) ||
-    !(toggle instanceof HTMLButtonElement) ||
     !(tabs instanceof HTMLElement)
   ) {
     return;
@@ -23,81 +20,11 @@
     const status = grid.querySelector("[data-homepage-atlas-status]");
     if (status instanceof HTMLElement) {
       status.textContent =
-        "Use Explore the atlas to open the complete page; the preview is still available.";
+        "The atlas controls did not load; View Visual Atlas opens the dedicated page.";
       status.hidden = false;
     }
     return;
   }
-  const tiles = [...cells.querySelectorAll("a.site-atlas-cell")];
-  const first = Number(grid.dataset.atlasFirst) || 100;
-  let expanded = toggle.getAttribute("aria-expanded") === "true";
-
-  // The button reads Show More with the double chevron down, and once the rest show,
-  // Show Less with the chevron up; its name for assistive technology says what each
-  // does and how many cases that is, from the names the page ships.
-  const toggleLabel = toggle.querySelector("[data-atlas-label]");
-  const toggleChevron = toggle.querySelector(".site-icon-arrow");
-  /** @param {boolean} open */
-  const relabel = (open) => {
-    toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute(
-      "aria-label",
-      (open ? toggle.dataset.nameLess : toggle.dataset.nameMore) ?? "",
-    );
-    if (toggleLabel !== null) {
-      toggleLabel.textContent = (open ? toggle.dataset.labelLess : toggle.dataset.labelMore) ?? "";
-    }
-    if (toggleChevron instanceof HTMLElement) {
-      toggleChevron.dataset.arrow = open ? "double-up" : "double-down";
-    }
-  };
-
-  // Complete physical grid rows near the nominal limit, or mathematical square
-  // rows in Triangle. Only boundary anchors move; stable links retain their focus.
-  /** @param {number} columns freshly measured capacity for this arrangement */
-  const completePreview = (columns) => {
-    const triangle = grid.dataset.atlasView === "triangle";
-    // Triangle's square-number prefix needs no width measurement. Grid receives
-    // the same fresh capacity that places its cells, before any visibility writes.
-    let count = triangle
-      ? Math.round(Math.sqrt(first)) ** 2
-      : Math.max(columns, Math.round(first / columns) * columns);
-    const direct = Number(grid.dataset.atlasPreviewCount) || first;
-    // A stepped popover still returns to its original opener. Retain the visible
-    // prefix while it is open, rounding up so that origin cannot become hidden.
-    if (!expanded && count < direct && document.querySelector("#pop-case:popover-open")) {
-      count = triangle ? Math.ceil(Math.sqrt(direct)) ** 2 : Math.ceil(direct / columns) * columns;
-    }
-    count = Math.min(tiles.length, count);
-    grid.dataset.atlasPreviewCount = String(count);
-    toggle.dataset.nameLess = `Show less: the first ${count}`;
-    const shown = expanded ? tiles.length : count;
-    grid.dataset.atlasCount = String(shown);
-    const focused = document.activeElement;
-    // Keep the server's row/segment structure and all link identities intact.
-    rest.hidden = false;
-    for (const tile of tiles) {
-      tile.toggleAttribute("hidden", Number(tile.getAttribute("data-atlas-n")) > shown);
-    }
-    for (const row of cells.querySelectorAll(".site-atlas-row")) {
-      row.toggleAttribute(
-        "hidden",
-        [...row.querySelectorAll(".site-atlas-cell")].every((tile) => tile.hasAttribute("hidden")),
-      );
-    }
-    cells.style.setProperty("--site-atlas-widest", String(SiteAtlasView.widest(shown)));
-    cells.style.setProperty(
-      "--site-atlas-extra",
-      expanded ? "var(--site-atlas-last-extra)" : "var(--site-atlas-first-extra)",
-    );
-    if (focused instanceof HTMLElement && focused.closest("[hidden]") !== null) {
-      const last = tiles[shown - 1];
-      if (last instanceof HTMLElement) {
-        last.focus({ preventScroll: true });
-      }
-    }
-    relabel(expanded);
-  };
   const views = SiteAtlasView.mount({
     block: grid,
     cells,
@@ -117,12 +44,11 @@
       pendingRows.splice(0, pendingRows.length, ...rows);
       prepare();
     },
-    beforeArrange: completePreview,
     scoped,
   });
 
-  // Prepare immutable drawings a row per frame after first paint and fonts. Layout
-  // never waits for network/decode; repeated expansion reuses the same image nodes.
+  // Prepare immutable drawings a row per frame after first paint and fonts, top row
+  // first. Layout never waits for network/decode; a change of drawing reuses the nodes.
   const rows = [...cells.querySelectorAll(".site-atlas-row")];
   const images = [...cells.querySelectorAll("img")];
   const pendingRows = [...rows];
@@ -185,51 +111,10 @@
     }
   };
   void views.fontsReady.then(prepare);
-  /** Prioritize newly requested rows without delaying the synchronous FLIP. */
-  const prepareRequested = () => {
-    pendingRows.sort(
-      (a, b) =>
-        Number(Number(b.getAttribute("data-atlas-row")) > Math.sqrt(first)) -
-        Number(Number(a.getAttribute("data-atlas-row")) > Math.sqrt(first)),
-    );
-    for (const image of images) {
-      if (image.closest("[hidden]") === null && image.dataset.atlasImageState !== "ready") {
-        image.fetchPriority = "high";
-      }
-    }
-    prepare();
-  };
 
-  // Showing or hiding the rest changes where the triangle's tiles stand, since its
-  // longest row sets how many a line holds, so it is a change of layout like a change
-  // of view: the tiles that stay move, and the ones that arrive fade in. Collapsing
-  // takes away everything above the button but the first hundred, so the page would
-  // land far below it: `settle` brings the button back to where the reader is, as part
-  // of the same change.
-  /**
-   * @param {boolean} open
-   * @param {() => void} [settle]
-   */
-  const expandGrid = (open, settle) => {
-    views.change(() => {
-      expanded = open;
-      // Settle scrolling against the final completed rows and triangle positions.
-      views.arrange();
-      settle?.();
-    });
-    if (open) {
-      prepareRequested();
-    }
-  };
-  toggle.addEventListener("click", () => {
-    const open = !expanded;
-    expandGrid(open, open ? undefined : () => toggle.scrollIntoView({ block: "nearest" }));
-  });
-
-  // Diagram fragments name tiles separately from the survey's #n-N rows. Even a
-  // tile among the first hundred opens the complete atlas before we place it in the
-  // viewport. `change` arranges after its mutation; finish the tile moves only then,
-  // so a fragment lands on the final layout rather than a tile still in transit.
+  // Diagram fragments name tiles separately from the survey's #n-N rows. A fragment
+  // lands with its tile focused and centred in the window, panned into the triangle's
+  // scroll frame where a narrow screen pans it.
   /** @param {string} hash */
   const reveal = (hash) => {
     if (!/^#atlas-n-\d+$/.test(hash)) {
@@ -239,18 +124,15 @@
     if (!(tile instanceof HTMLAnchorElement) || !cells.contains(tile)) {
       return false;
     }
-    expandGrid(true);
-    for (const animation of cells.getAnimations({ subtree: true })) {
-      animation.finish();
-    }
     tile.focus({ preventScroll: true });
     tile.scrollIntoView({ block: "center", behavior: "instant" });
     return true;
   };
 
   // A same-fragment anchor does not emit hashchange. Handling ordinary links on this
-  // page also lets a reader collapse the atlas, open the same case, and return to its
-  // diagram. Keep native navigation for other pages, queries, targets and modifiers.
+  // page lets a reader open a case, and from its popover return to its diagram, with
+  // the tile focused again. Keep native navigation for other pages, queries, targets
+  // and modifiers.
   document.addEventListener("click", (event) => {
     if (
       event.defaultPrevented ||
@@ -286,5 +168,4 @@
   window.addEventListener("hashchange", () => reveal(location.hash));
   reveal(location.hash);
   grid.dataset.atlasReady = "true";
-  toggle.hidden = false;
 })();

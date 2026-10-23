@@ -447,11 +447,11 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     assert 'href="news.html">View All News' in page
     assert 'href="papers.html">View All Papers' in page
     assert '<a class="site-action" href="results.html#all-results" data-all-results' in page
-    assert 'data-homepage-atlas-toggle aria-expanded="false"' in page
     assert 'aria-controls="homepage-atlas-cells"' in page
     assert len(re.findall(r'data-atlas-n="\d+"', page)) == 324
     assert len(re.findall(r'data-atlas-n="\d+"', atlas_page)) == 324
-    assert page.count("data-atlas-toggle data-homepage-atlas-toggle") == 1
+    # Every case shows at once, with no expander, since 2026-10-23 (think-rk91).
+    assert "data-atlas-toggle" not in page
 
 
 def test_papers_groups_every_reading_and_the_resources_keep_detail_reachable(
@@ -745,8 +745,7 @@ def test_the_atlas_grid_arrives_with_static_sized_drawing_images(
     atlas_page: str, served: Callable[[str], str]
 ) -> None:
     """All tiles exist in static HTML; each external drawing reserves its box."""
-    first, rest = _atlas_template(atlas_page, "first"), _atlas_template(atlas_page, "rest")
-    for content, expected in ((first, range(1, 101)), (rest, range(101, 325))):
+    for content, expected in ((_atlas_tiles(atlas_page), range(1, 325)),):
         found = re.findall(r'data-atlas-n="(\d+)"', content)
         assert [int(n) for n in found] == list(expected)
         drawings = re.findall(r"<img\b[^>]*>", content)
@@ -762,67 +761,72 @@ def test_the_atlas_grid_arrives_with_static_sized_drawing_images(
     assert script in served("atlas.html")
 
 
-def test_the_atlas_grid_expands_from_100_to_324_with_one_button() -> None:
-    """Under the grid one centred button, the site's action under a table or grid, reads
-    "Show More" with the double chevron down, names what it does and how many cases that
-    is, controls the box of tiles, and says it is collapsed; its row ships hidden, since
-    only the script makes it act. The script places the rest on the first expand, flips
-    the label to "Show Less", the chevron to up, the name and `aria-expanded`, and
-    expands the grid when the popover steps past the last case shown."""
-    grid = overview_sections.atlas_grid(homepage=True)
-    (row,) = re.findall(r'<p class="site-action-row site-atlas-toggle-row">(.*?)</p>', grid)
-    buttons = [attrs for tag, attrs in _Tags(row).tags if tag == "button"]
-    assert len(buttons) == 1
-    button = buttons[0]
-    assert button["type"] == "button"
-    assert button["aria-expanded"] == "false"
-    assert f'id="{button["aria-controls"]}"' in grid
-    assert button["aria-label"] == "Show more: all 324 cases"
-    assert button["data-label-more"] == "Show More"
-    assert button["data-label-less"] == "Show Less"
-    assert button["data-name-less"] == "Show less: the first 100"
-    assert overview_sections.arrow_icon("double-down") in row
-    # The expander's row ends the grid's block: no note follows it since 2026-10-02.
-    assert 'class="site-atlas-note"' not in grid
-    script = render_overview.ATLAS_GRID_SCRIPT.read_text(encoding="utf-8")
-    assert 'toggle.setAttribute("aria-expanded", String(open))' in script
-    assert "toggle.dataset.nameLess : toggle.dataset.nameMore" in script
-    assert "toggle.dataset.labelLess : toggle.dataset.labelMore" in script
-    assert 'toggleChevron.dataset.arrow = open ? "double-up" : "double-down"' in script
-    assert "toggle.textContent" not in script
-    assert "rest.hidden = false;" in script
-    assert (
-        'tile.toggleAttribute("hidden", Number(tile.getAttribute("data-atlas-n")) > shown)'
-        in script
-    )
-    assert 'row.toggleAttribute(\n        "hidden",' in script
+def test_the_atlas_shows_every_case_with_no_expander(
+    page: str, atlas_page: str, served: Callable[[str], str]
+) -> None:
+    """Both atlases show all 324 cases at once, in one box of tiles that stands visible
+    in the static markup, with no expander under it: the owner asked on 2026-10-23 for
+    every case on the homepage and for the expand and contract to go entirely
+    (think-rk91). Nothing of it is left in the markup, the scripts or the stylesheets."""
+    for markup in (page, atlas_page):
+        block = markup.split("data-atlas-grid", 1)[1].split('id="pop-case"', 1)[0]
+        assert re.findall(r'data-atlas-n="(\d+)"', _atlas_tiles(markup)) == [
+            str(n) for n in range(1, 325)
+        ]
+        for gone in (
+            "data-atlas-toggle",
+            "site-atlas-toggle",
+            "data-atlas-rest",
+            "site-atlas-rest",
+            "data-atlas-first",
+            "data-atlas-count",
+            "data-label-more",
+            "data-name-less",
+            "Show More",
+            "Show Less",
+            "<style>",
+        ):
+            assert gone not in block, gone
+        assert not re.search(
+            r"<(?:div|a)\b[^>]*\bhidden\b", block.split("data-atlas-legend")[1]
+        )
+    assert not hasattr(overview_sections, "ATLAS_FIRST")
+    scripts = render_overview.ATLAS_GRID_SCRIPT.read_text(
+        encoding="utf-8"
+    ) + render_overview.ATLAS_VIEW_SCRIPT.read_text(encoding="utf-8")
+    for gone in (
+        "data-atlas-toggle",
+        "aria-expanded",
+        "data-atlas-rest",
+        "atlasFirst",
+        "atlasCount",
+        "expandGrid",
+        "beforeArrange",
+        "[hidden]",
+    ):
+        assert gone not in scripts, gone
+    css = render_overview.SITE_CSS.read_text(encoding="utf-8") + served("index.html")
+    for gone in ("atlas-toggle", "atlas-rest", "first-extra", "last-extra", "first-side"):
+        assert gone not in css, gone
 
 
-def test_the_atlas_expander_reuses_the_action_button_and_tokens() -> None:
-    """The expander takes the site's one action button's rule, shared with the popover's
-    action and widened to a <button>, not a style of its own; its row is the action row,
-    whose space under the tiles is the grid's token, and the placed rest is one box the
-    grid lays out as its cells, hidden when collapsed."""
+def test_the_action_button_serves_links_and_buttons() -> None:
+    """The site's one action button's rule is shared with the popover's action and
+    widened to a <button>, as Recently Added's toggle uses it, not a style of its own;
+    its row is centred, a table's space clear of what follows."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     assert (
         ".kpress :is(.site-popover a, button).site-popover-action,\n"
         ".kpress :is(a, button).site-action {"
     ) in css
     assert ".kpress button:is(.site-popover-action, .site-action) {" in css
-    assert ".site-atlas-toggle {" not in css
-    row = css[css.index(".site-atlas-grid .site-atlas-toggle-row {") :]
-    row = row[: row.index("}")]
-    assert "--site-action-space: var(--site-atlas-toggle-space);" in row
     action_row = _rule(css, ".kpress .site-action-row")
     # A table's own space below it since 2026-10-02 (think-0o9u), so text that follows
     # a button stands as clear of it as of a table.
     assert "margin-block: var(--site-action-space) var(--site-table-space);" in action_row
     assert "text-align: center;" in action_row
     grid = css[css.index(".site-page .site-atlas-grid {") :]
-    assert "--site-atlas-toggle-space:" in grid[: grid.index("}")]
-    rest = css[css.index(".site-atlas-rest {") :]
-    assert "display: contents;" in rest[: rest.index("}")]
-    assert ".site-atlas-rest[hidden] {\n  display: none;" in css
+    assert "--site-atlas-controls-space:" in grid[: grid.index("}")]
 
 
 def test_the_atlas_is_rendered_as_small_triangle_under_its_view_tabs(
@@ -837,8 +841,7 @@ def test_the_atlas_is_rendered_as_small_triangle_under_its_view_tabs(
     assert block == [
         (
             'data-atlas-view="triangle" data-atlas-size="small" '
-            'data-atlas-scale="row" data-atlas-drawing="regularized" '
-            'data-atlas-first="100" data-atlas-grid'
+            'data-atlas-scale="row" data-atlas-drawing="regularized" data-atlas-grid'
         )
     ]
     tabs = overview_sections.atlas_view_tabs()
@@ -857,21 +860,18 @@ def test_the_atlas_is_rendered_as_small_triangle_under_its_view_tabs(
     atlas = atlas_page.split('id="the-atlas-of-square-packings"', 1)[1].split("<h2", 1)[0]
     order = [
         atlas.index(mark)
-        for mark in (
-            "data-atlas-views",
-            '<div class="site-atlas-cells" id="atlas-cells"',
-            "data-atlas-toggle",
-        )
+        for mark in ("data-atlas-views", '<div class="site-atlas-cells" id="atlas-cells"')
     ]
     assert order == sorted(order)
-    # The triangle's key and the line under the expander are gone since 2026-10-02
-    # (the owner, think-l38m): the expander's row ends the block.
+    # The triangle's key and the line under the expander went on 2026-10-02 (the
+    # owner, think-l38m), and the expander on 2026-10-23 (think-rk91): the tiles end
+    # the block, with only the no-script link to the survey after them.
     assert "site-atlas-key" not in atlas
     assert 'class="site-atlas-note"' not in atlas
-    toggle_end = atlas.index("</button></p>", atlas.index("data-atlas-toggle")) + len(
-        "</button></p>"
-    )
-    assert atlas[toggle_end:].startswith("</div>")
+    tiles = atlas.index('<div class="site-atlas-cells" id="atlas-cells"')
+    tiles_end = atlas.index("</div><noscript>", tiles) + len("</div>")
+    noscript_end = atlas.index("</noscript>", tiles_end) + len("</noscript>")
+    assert atlas[noscript_end:].startswith("</div>")
     assert not hasattr(overview_sections, "ATLAS_TRIANGLE_KEY")
     for gone in ("Each row ends at a perfect square", "is also in the frontier survey"):
         assert gone not in _seen(atlas_page), gone
@@ -896,7 +896,7 @@ def test_the_atlas_marks_each_perfect_square_and_nothing_else_on_a_tile(
     """A perfect square ends its left aligned row of the triangle, and its tile says so;
     first-grid markers identify the retained grid suffixes. Where a tile stands is the
     script's to write, since it follows from the window's width."""
-    grid = atlas_page.split("data-atlas-grid>", 1)[1].split('<p class="site-action-row', 1)[0]
+    grid = _atlas_tiles(atlas_page)
     squares = re.findall(
         r'data-atlas-n="(\d+)" data-atlas-side="[^"]+" data-atlas-square(?: |>)', grid
     )
@@ -930,7 +930,7 @@ def test_the_atlas_marks_each_perfect_square_and_nothing_else_on_a_tile(
         309,
     ]
     first = re.search(
-        r'<a\b[^>]* data-atlas-n="1"[^>]* style="([^"]+)"', _atlas_template(atlas_page, "first")
+        r'<a\b[^>]* data-atlas-n="1"[^>]* style="([^"]+)"', _atlas_tiles(atlas_page)
     )
     assert first is not None
     positions = {
@@ -971,19 +971,18 @@ def _regularized_index() -> dict:
     return json.loads(render_frontier_page.REGULARIZED_INDEX.read_text(encoding="utf-8"))
 
 
-def _atlas_template(page: str, which: str) -> str:
-    """The static first or remaining tile run in the atlas block."""
-    grid = page.split("data-atlas-grid>", 1)[1].split('<p class="site-action-row', 1)[0]
-    grid = grid.replace("data-atlas-rest hidden>", "data-atlas-rest>")
-    if which == "first":
-        return (
-            grid.split('<div class="site-atlas-cells" id="atlas-cells"', 1)[1]
-            .split(">", 1)[1]
-            .split('<div class="site-atlas-rest" data-atlas-rest>', 1)[0]
-        )
-    return grid.split('<div class="site-atlas-rest" data-atlas-rest>', 1)[1].rsplit(
-        "</div></div>", 1
-    )[0]
+def _atlas_tiles(page: str) -> str:
+    """The atlas block's one box of tiles, every case's row in order, as the page ships
+    it: what follows the box is the dedicated Atlas's no-script link or the homepage's
+    status line."""
+    found = re.search(
+        r'<div class="site-atlas-cells" id="[^"]+" style="[^"]*">(.*?)</div>'
+        r'(?:<noscript>|<p class="site-homepage-atlas-status")',
+        page,
+        re.DOTALL,
+    )
+    assert found is not None
+    return found[1]
 
 
 def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
@@ -1064,7 +1063,7 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
 
     page = overview_sections.atlas_grid()
     regularized = overview_sections.atlas_regularized()
-    tiles = _atlas_template(page, "first") + _atlas_template(page, "rest")
+    tiles = _atlas_tiles(page)
     tile = re.compile(
         r'(<a class="site-atlas-cell" [^>]*>)(<img [^>]*>)'
         r'(<svg\b[^>]*class="site-atlas-reference"[^>]*>.*?</svg>)?'
@@ -1122,7 +1121,7 @@ def test_overview_tiles_omit_stars_and_frontier_keeps_lower_recency(
         n: flags.any for n, flags in overview_sections.recent_contributions_by_case().items()
     }
     page = overview_sections.atlas_grid()
-    tiles = _atlas_template(page, "first") + _atlas_template(page, "rest")
+    tiles = _atlas_tiles(page)
     found = re.findall(
         r'<a class="site-atlas-cell" [^>]*data-atlas-n="(\d+)"[^>]*aria-label="([^"]+)"[^>]*>'
         r"<img [^>]*>(?:<svg\b.*?</svg>)?"
@@ -1163,7 +1162,7 @@ def test_upper_only_recent_contributions_use_ink_without_recency_glyphs(
     monkeypatch.setattr(overview_sections, "recent_contributions_by_case", lambda: flags)
     monkeypatch.setattr(result_status, "recent_contributions_by_case", lambda: flags)
     page = overview_sections.atlas_grid()
-    first = _atlas_template(page, "first")
+    first = _atlas_tiles(page)
     tile = re.search(r'<a class="site-atlas-cell" [^>]*data-atlas-n="1"[^>]*>.*?</a>', first)
     assert tile is not None
     assert ', new result"' in tile.group()
@@ -1366,7 +1365,7 @@ def test_the_view_tabs_are_the_section_tabs_strip() -> None:
         "display: flex;",
         "flex-wrap: wrap;",
         "justify-content: center;",
-        "margin-block-end: var(--site-atlas-toggle-space);",
+        "margin-block-end: var(--site-atlas-controls-space);",
     ):
         assert declaration in row, declaration
 
@@ -7211,8 +7210,8 @@ def test_atlas_scales_use_selected_witness_sides_and_accessible_reference_descri
         for n, side in re.findall(r'data-atlas-n="(\d+)" data-atlas-side="([^"]+)"', atlas_page)
     }
     assert rendered == sides
-    assert f"--site-atlas-first-side:{max(sides[n] for n in sides if n <= 100)};" in atlas_page
-    assert f"--site-atlas-last-side:{max(sides.values())}" in atlas_page
+    # Global scales by the largest side of every case, all of which show.
+    assert f"--site-atlas-global-side:{max(sides.values())};" in atlas_page
     tabs = overview_sections.atlas_scale_tabs()
     assert atlas_page.count(tabs) == 1
     assert 'role="tablist" aria-label="Atlas drawing scale"' in tabs

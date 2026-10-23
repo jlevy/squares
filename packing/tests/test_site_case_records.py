@@ -183,8 +183,8 @@ def _revealed_diagram(page: Any, n: int, *, scripts: bool = True) -> None:
     assert 0 <= state["top"] < state["bottom"] <= state["viewportHeight"], state
     assert state["outlineWidth"] == "2px", state
     assert state["targeted"], state
+    assert state["toggles"] == 0, state
     if scripts:
-        assert state["expanded"] == "true", state
         assert state["focused"], state
 
 
@@ -328,8 +328,6 @@ def test_atlas_diagram_fragments_survive_same_fragment_clicks_and_history(
     with _page(browser, width=390) as page:
         page.goto(f"{served}atlas.html#atlas-n-53", wait_until="load")
         _revealed_diagram(page, 53)
-        page.locator("[data-atlas-toggle]").click()
-        assert page.locator("[data-atlas-toggle]").get_attribute("aria-expanded") == "false"
         page.locator("#atlas-n-53").click()
         popover = page.locator("#pop-case")
         popover.locator('[data-case-body] article.site-case[data-case="53"]').wait_for()
@@ -353,7 +351,6 @@ def test_atlas_diagram_fragments_survive_same_fragment_clicks_and_history(
             f"{served}atlas.html?atlas=triangle&size=large#atlas-n-324", wait_until="load"
         )
         _revealed_diagram(page, 324)
-        page.locator("[data-atlas-toggle]").click()
         page.go_back(wait_until="load")
         page.wait_for_url(f"{served}atlas.html?atlas=triangle&size=large#atlas-n-291")
         _revealed_diagram(page, 291)

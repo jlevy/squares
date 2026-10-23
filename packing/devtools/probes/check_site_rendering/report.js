@@ -24,7 +24,7 @@
     // Only known optional controls/content may be absent initially. A generic
     // hidden ancestor is primary content and must remain in the readability sample.
     const held = element.closest(
-      ".site-atlas-rest[data-atlas-rest][hidden], .site-table tbody tr[hidden], " +
+      ".site-table tbody tr[hidden], " +
         ".site-table-tools[hidden], .site-table-tools label[hidden], " +
         ".cert-figure[data-cert][hidden]",
     );

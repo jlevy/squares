@@ -417,8 +417,8 @@ def test_main_actions_center_their_visible_capital_ink(
             + "</a>"
         )
     body += (
-        '<button class="site-action" data-atlas-toggle>'
-        "<span data-atlas-label>Show More</span>"
+        '<button class="site-action" data-recent-toggle>'
+        "<span data-recent-label>Earlier results</span>"
         + overview_sections.arrow_icon("double-down")
         + "</button></p>"
         + '<div class="site-popover"><a class="site-popover-action" data-go="page" '

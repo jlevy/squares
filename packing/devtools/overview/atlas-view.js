@@ -24,8 +24,8 @@
 // again, and each tile is then animated from where it was to where it is with a
 // transform alone, which the compositor runs without laying anything out. One read, one
 // write, one read; a tile that neither starts nor ends in the window is not animated.
-// The viewport height reveals added rows with the same timing. Page flow moves what
-// follows it; changes without a height reveal move following elements with FLIP.
+// A change of the tiles' height is animated with the same timing, and page flow moves
+// what follows them; changes of the same height move following elements with FLIP.
 // The tokens `--site-atlas-move-duration` and `--site-atlas-move-easing` time it, and the
 // duration is 0ms for a reader who asks for reduced motion, which switches at once.
 //
@@ -40,12 +40,15 @@
 // fits more tiles to a Grid line and Large fewer (`perLineAt`); Triangle keeps its
 // complete rows at the same drawing size. A change of size is a change of layout like a
 // change of view, moved the same way. Every explicit choice is preserved in the
-// address, including `?size=small`; otherwise size follows the viewport.
+// address, including `?size=small`; otherwise size follows the viewport
+// (`automaticSize`): a wide window keeps Medium, and a narrow one goes to Small when
+// less than half of the triangle's widest row fits at Medium (the owner, 2026-10-23).
 //
 // Scale, Row by default, changes only a drawing within its reserved tile. Row uses
 // its actual enclosing side relative to the logical row's grid side k. Global uses
-// the largest actual side among currently shown cases, updated by the expander. The
-// address names the other choices as `?scale=fixed` or `?scale=global`.
+// the largest actual side among the drawings shown, updated when the Drawing choice
+// changes them. The address names the other choices as `?scale=fixed` or
+// `?scale=global`.
 //
 // The pure functions are published on `globalThis.SiteAtlasView` for the Node tests and
 // for `atlas-grid.js`, which places the tiles and calls `mount`.
@@ -111,6 +114,40 @@
    */
   function perLineAt(width, least, most, scale, gap = 0) {
     return perLine(width, least * (scale > 0 ? scale : 1), most, gap);
+  }
+
+  /**
+   * About how wide a complete Triangle row of `count` tiles stands at `scale` in a block
+   * `width` wide: each tile the width Grid gives it there (`perLineAt`), and a reference
+   * gap after every tile but the last. The drawn gaps are narrower and a mixed row adds
+   * half a drawing before its grid suffix, so this runs about 2 percent wider than the
+   * row as drawn (`devtools.measure_atlas_views` reports both).
+   * @param {number} width
+   * @param {number} least
+   * @param {number} gap
+   * @param {number} scale
+   * @param {number} count
+   * @returns {number}
+   */
+  function rowWidth(width, least, gap, scale, count) {
+    const per = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
+    const tile = (width - (per - 1) * gap) / per;
+    return count * tile + (count - 1) * gap;
+  }
+
+  /**
+   * The size an untouched atlas takes, the owner's rule of 2026-10-23 (think-rk91): on
+   * a wide screen Medium, never all the way to Small; on a narrow one Medium while at
+   * least half of the triangle's widest row (`row`, its width at Medium) fits the block
+   * (`width`), and Small once less than half does. A row that cannot be measured counts
+   * as not fitting, so a narrow screen then keeps the stylesheet's Small.
+   * @param {boolean} wide whether the window is at least 75rem wide
+   * @param {number} width
+   * @param {number} row
+   * @returns {AtlasSize}
+   */
+  function automaticSize(wide, width, row) {
+    return wide || (width > 0 && row > 0 && 2 * width >= row) ? "medium" : "small";
   }
 
   /**
@@ -378,7 +415,6 @@
     scales = null,
     drawings = null,
     scoped = false,
-    beforeArrange,
     onDrawingChange,
   }) {
     const buttons = tabs === null ? [] : tabsOf(tabs);
@@ -391,7 +427,7 @@
       const n = Number(tile.getAttribute("data-atlas-n"));
       starts[row(n)] = n;
     }
-    /** The tiles a line holds and the last case shown, as last arranged. */
+    /** The tiles a line holds and the cases shown, as last arranged. */
     let arranged = "";
     /** The border-box width consumed by the latest arrangement. */
     let priorWidth = 0;
@@ -400,10 +436,9 @@
     const sizeQuery = new URLSearchParams(location.search).get(SIZE_PARAM);
     const namedSize = sizeQuery === "small" || sizeQuery === "medium" || sizeQuery === "large";
     let explicitSize = namedSize || block.hasAttribute("data-atlas-size-explicit");
-    // Keep this media query in step with site.css's first-paint default (think-mp47).
+    // Keep this media query in step with site.css's first-paint default (think-mp47):
+    // Small below it and Medium from it, which `arrange` then holds to `automaticSize`.
     const wideScreen = window.matchMedia("(min-width: 75rem)");
-    /** @returns {AtlasSize} */
-    const automaticSize = () => (wideScreen.matches ? "medium" : "small");
 
     /** @returns {AtlasView} */
     const view = () => (block.dataset.atlasView === "triangle" ? "triangle" : "grid");
@@ -412,36 +447,40 @@
     /** @returns {AtlasScale} */
     const drawingScale = () => asScale(block.dataset.atlasScale);
 
-    // Dedicated and homepage row containers share the same placement and FLIP.
-    // Visibility is controlled by persistent wrappers or boundary cells, never clones.
+    // Dedicated and homepage row containers share the same placement and FLIP, and
+    // every case the block holds shows, without clones.
     const shown = () =>
-      [...cells.querySelectorAll(".site-atlas-cell")]
-        .filter((tile) => tile instanceof HTMLElement)
-        .filter((tile) => tile.closest("[hidden]") === null);
+      [...cells.querySelectorAll(".site-atlas-cell")].filter((tile) => tile instanceof HTMLElement);
 
     // Write each tile's line and column for the tiles a line now holds. Only the
     // triangle reads them, but they are kept current in the grid too, so a change of
     // view writes nothing: a tile's properties are inherited by every line of its
     // drawing, and writing them restyles all of those. Nothing is written while
-    // neither the tiles a line holds nor the last case shown has changed. The size's
-    // scale is the stylesheet's (`--site-atlas-scale`), read as the tiles are arranged.
+    // neither the tiles a line holds nor the cases shown have changed. An untouched
+    // size is held to the owner's rule here, from the width just read and before
+    // anything is placed. The size's scale is the stylesheet's (`--site-atlas-scale`),
+    // read after that.
     const arrange = () => {
-      // Visibility changes only the rows' height and scroll canvas, not this track's
-      // available width. Snapshot its geometry before completing the shown prefix.
       const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
       const style = getComputedStyle(cells);
       const least = lengthPx(style.getPropertyValue("--site-atlas-cell-min"), root);
       const gap = lengthPx(style.getPropertyValue("--site-atlas-reference-gap"), root);
-      const scale = Number.parseFloat(style.getPropertyValue("--site-atlas-scale"));
       const width = cells.getBoundingClientRect().width;
       priorWidth = width;
-      const capacity = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
-      beforeArrange?.(capacity);
       const tiles = shown();
       const last = Number(tiles.at(-1)?.dataset.atlasN);
       if (!(last >= 1)) {
         return;
       }
+      if (!explicitSize) {
+        const medium = rowWidth(width, least, gap, 1, widest(last));
+        const wanted = automaticSize(wideScreen.matches, width, medium);
+        if (wanted !== size()) {
+          markSize(wanted);
+        }
+      }
+      const scale = Number.parseFloat(style.getPropertyValue("--site-atlas-scale"));
+      const capacity = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
       const per = Number.isFinite(capacity) ? capacity : widest(last) + 1;
       const largest = largestSide(tiles.map((tile) => Number(tile.dataset.atlasSide)));
       const key = `${per}:${tiles.map((tile) => tile.dataset.atlasN).join(":")}:${largest}`;
@@ -484,7 +523,7 @@
     };
 
     /**
-     * Every shown tile's box and its drawing's, and the box of each element after the
+     * Every tile's box and its drawing's, and the box of each element after the
      * tiles, as laid out and transformed now.
      */
     const measure = () => {
@@ -537,11 +576,10 @@
 
     // Change the layout with `mutate` and move every tile from where it was to where it
     // is: one read of every box, the change, one read more, then one animation a tile,
-    // on `transform` alone. A tile the change shows for the first time fades in, and
-    // what follows the tiles moves with them. A move already under way is read where it
-    // has got to and stopped, so a second change starts from what the reader sees. A
-    // change that scrolls the page, as collapsing a long grid does, is not moved: the
-    // window has jumped, and nothing is where the reader last saw it.
+    // on `transform` alone, and what follows the tiles moves with them. A move already
+    // under way is read where it has got to and stopped, so a second change starts from
+    // what the reader sees. A change that scrolls the page is not moved: the window has
+    // jumped, and nothing is where the reader last saw it.
     /** @param {() => void} mutate */
     const change = (mutate) => {
       const style = getComputedStyle(block);
@@ -574,13 +612,7 @@
       const moves = [];
       for (const [tile, last] of now.tiles) {
         const first = before.tiles.get(tile);
-        if (first === undefined || first.tile.width === 0) {
-          if (inView(last.tile)) {
-            moves.push([tile, arrive, timing]);
-          }
-          continue;
-        }
-        if (!inView(first.tile) && !inView(last.tile)) {
+        if (first === undefined || (!inView(first.tile) && !inView(last.tile))) {
           continue;
         }
         const move = moveFrom(first.drawing, last.drawing, last.tile);
@@ -595,8 +627,9 @@
           ]);
         }
       }
-      // The viewport reveals complete, already prepared rows as its height grows.
-      // Flow carries following content with this animation, so it needs no second FLIP.
+      // The tiles' box grows or shrinks to its new height over the same timing, as a
+      // change of view or size makes it. Flow carries following content with this
+      // animation, so it needs no second FLIP.
       const changesHeight = Math.abs(now.height - before.height) >= 0.5;
       if (changesHeight) {
         moves.push([
@@ -735,7 +768,7 @@
       }
     };
 
-    /** Switch the existing images, including the hidden suffix, without persisting a mode.
+    /** Switch every existing image without persisting a mode.
      * @param {"regularized" | "original"} next */
     const selectDrawing = (next) => {
       if (next === block.dataset.atlasDrawing) {
@@ -788,7 +821,15 @@
       wire(tabs, (tab) => select(tab.dataset.atlasTab === "triangle" ? "triangle" : "grid"));
     }
     mark(scoped ? view() : viewOf(location.search));
-    markSize(namedSize ? asSize(sizeQuery) : explicitSize ? size() : automaticSize());
+    markSize(
+      namedSize
+        ? asSize(sizeQuery)
+        : explicitSize
+          ? size()
+          : wideScreen.matches
+            ? "medium"
+            : "small",
+    );
     markScale(scoped ? drawingScale() : scaleOf(location.search));
     if (sizes !== null) {
       wire(sizes, (tab) => selectSize(asSize(tab.dataset.atlasSizeTab)));
@@ -802,7 +843,6 @@
     wideScreen.addEventListener("change", () => {
       if (!explicitSize) {
         stop();
-        markSize(automaticSize());
         arrange();
       }
     });
@@ -847,6 +887,8 @@
     widest,
     perLine,
     perLineAt,
+    rowWidth,
+    automaticSize,
     place,
     viewOf,
     searchFor,

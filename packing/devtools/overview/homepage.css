@@ -1,4 +1,4 @@
-/* The front door shares the Atlas overview, controls and centered visible rows. */
+/* The front door shares the Atlas overview, controls and every case's tile. */
 .site-page:has([data-atlas-preview]) {
   overflow-anchor: none;
 }
@@ -65,10 +65,6 @@
 }
 
 .site-homepage-atlas-status[hidden] {
-  display: none;
-}
-
-.site-homepage-atlas [data-homepage-atlas-toggle][hidden] {
   display: none;
 }
 
