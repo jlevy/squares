@@ -790,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "21830f07d0e9f252eaa40c7a41a572b48c800080"
+DATA_REVISION = "777577956e09c16627cf79d063f5ed1981b75425"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2493,6 +2493,42 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte-identical. Measured once more after merging main 7335d0098 (#752), at "
             "link revision 7335d009 with that main's two files swapped in: the same "
             "outcome. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/check_half_angle_area.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The 23 October closing pass (#747) after its reviews A and B, against main "
+            "cc91ee1b8 (#746): the request entries' questions to the authors, holds for the "
+            "owner and source-checker notes, T-197 to T-199 citing the source checkers' "
+            "replay, T-138's measured lineage, and the identity route's readers of five "
+            "earlier entries. Rendered at link revision 26339a13 into empty site "
+            "directories from this tree and from the same tree with main's version of "
+            "every file this branch modifies swapped in, release.py and tests aside (69 "
+            "files each), render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical. No PDF was printed; "
+            "each prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(

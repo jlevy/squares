@@ -9,6 +9,7 @@ from typing import Any
 import pytest
 import yaml
 
+from devtools import check_requests
 from devtools import intake_comments as comments
 from devtools.check_requests import FOOTER
 
@@ -377,6 +378,34 @@ def test_check_reports_a_changed_or_missing_draft(tmp_path: Path) -> None:
     assert problems[0].startswith("--- 1.md (found)")
     assert problems[1] == "2.md: missing"
     assert comments.main([str(tmp_path / "comments.yaml"), "--check", str(out)]) == 1
+
+
+def test_out_refuses_a_comment_on_an_issue_the_owner_holds(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review B5 of #747: a held issue gets no draft for posting; it takes a stated skip,
+    as `check_requests --draft` refuses it."""
+    _ = basic(tmp_path)
+    out = tmp_path / "out"
+    monkeypatch.setattr(comments, "held_issues", lambda: {"2": "2026-10-23"})
+    assert comments.main([str(tmp_path / "comments.yaml"), "--out", str(out)]) == 2
+    assert "refused: #2 held for the owner" in capsys.readouterr().err
+    assert not out.exists()
+    skip = [
+        {"report": "#1 comment 99", "reason": "covered elsewhere"},
+        {"report": "#2", "reason": "held for the owner"},
+    ]
+    _ = basic(tmp_path, comments=[{"issue": 1}], skip=skip)
+    assert comments.main([str(tmp_path / "comments.yaml"), "--out", str(out)]) == 0
+    assert sorted(path.name for path in out.iterdir()) == ["1.md", comments.INDEX]
+
+
+def test_the_held_issues_are_read_from_the_requests_record() -> None:
+    held = comments.held_issues()
+    live = check_requests.load_record()["issues"]
+    assert set(held) == {
+        str(issue["number"]) for issue in live if check_requests.held(issue) is not None
+    }
 
 
 def test_the_2026_10_14_pass_drafts_one_comment_per_result_issue() -> None:
