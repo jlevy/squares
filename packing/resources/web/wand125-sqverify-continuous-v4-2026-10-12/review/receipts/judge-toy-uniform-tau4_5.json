@@ -1,0 +1,42 @@
+{
+  "run": "run-toy-uniform-tau4_5.stdout",
+  "candidate": "toy-uniform.json",
+  "core": "9/10",
+  "tau": "4/5",
+  "status": "VERIFIED",
+  "nodes": 2132,
+  "leaves": 1109,
+  "roots": 86,
+  "refused_roots": 0,
+  "min_certified_lower_bound": 0.800008982279843,
+  "build": {
+    "profile": "release",
+    "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+    "source_sha256": "619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5",
+    "target": "x86_64-unknown-linux-gnu"
+  },
+  "run_key": "f85503316d825ce9c777cd776884a9f21bf897e0a5a7007c1a799bbb39599357",
+  "legal_refutations": 0,
+  "least_refuting_capture": null,
+  "witnesses": [],
+  "notes": {
+    "axis_patch": {
+      "verified": true,
+      "min_certified_lower_bound": 0.8099996760000252,
+      "vertices": 4
+    }
+  },
+  "checks": {
+    "premises equal this review's": true,
+    "one line per root, in the default cuts": true,
+    "no inherited line": true,
+    "verified roots are complete binary covers at or above tau": true,
+    "every witness capture equals the run's exact_capture": true,
+    "every witness flag agrees": true,
+    "summary status follows from the lines": true,
+    "summary totals are the sums": true,
+    "summary claim": true,
+    "status is the expected one": true
+  },
+  "all_hold": true
+}

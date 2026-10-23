@@ -1,0 +1,202 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-23T06:52:05Z",
+  "git_scope": "A blobless clone of the single public branch with its history (head e48de243 on 2026-10-23), sparsely checked out at this commit, v3 of sqverify_continuous, the first published version and the one the source's n = 40 examples ran: the directory tools/sqverify_continuous, the tools licence and third-party notices, and the repository's licence index. Every file in that scope is digested; the seven files its child d4a1981 (v4) changes are retained here, and every other file is pinned by digest to the byte-identical copy the v4 packet retains.",
+  "sources": [
+    {
+      "id": "wand125-square-packing",
+      "source_url": "https://github.com/wand125/square-packing",
+      "source_ref": "refs/heads/main",
+      "source_commit": "f30cc2cf345a3a3f6af778925f354d9ec979868b",
+      "committed_utc": "2026-10-12T01:00:19Z",
+      "git_tree": "43aa53233a2260dfc0377ef164b3de536c7b8b27",
+      "archived_path": "packing/resources/web/wand125-sqverify-continuous-v3-2026-10-12/square-packing",
+      "subtree_manifest": "packing/resources/web/wand125-sqverify-continuous-v3-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE.md",
+        "tools/LICENSE",
+        "tools/THIRD_PARTY_NOTICES.md",
+        "tools/sqverify_continuous"
+      ],
+      "subtree_file_count": 31,
+      "subtree_total_bytes": 360120,
+      "retained_file_count": 7,
+      "retained_total_bytes": 125275,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LICENSE.md",
+          "bytes": 603,
+          "sha256": "5dbc1f8b773b0a66c3d8b4ebf034a8cd795df418652ce8bf2020cb21b1597960",
+          "reason": "the repository's licence index, retained byte-identical by the closed-form cfcheck packet",
+          "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/LICENSE.md"
+        },
+        {
+          "path": "tools/LICENSE",
+          "bytes": 1064,
+          "sha256": "c0dd43e7892932c81335f74a2fdbf1a98f5977bab14c0c4c30e3abcc97c34904",
+          "reason": "wand125's MIT licence, retained byte-identical by the closed-form cfcheck packet",
+          "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/LICENSE"
+        },
+        {
+          "path": "tools/THIRD_PARTY_NOTICES.md",
+          "bytes": 5277,
+          "sha256": "b4865301755b38e12a64143966c606c9a1b9d64c5a8fa36fd6351abbce1010fa",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/THIRD_PARTY_NOTICES.md"
+        },
+        {
+          "path": "tools/sqverify_continuous/examples/n40/prepare.py",
+          "bytes": 4131,
+          "sha256": "fc9e156dbd4c1f7d48e32ece50d4fd7fbd925c9135a16436cdedcf765dc5a0eb",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/examples/n40/prepare.py"
+        },
+        {
+          "path": "tools/sqverify_continuous/examples/n40/run.sh",
+          "bytes": 1131,
+          "sha256": "dcc8f5f7dfffe2872443c466a30d360ca75932aef3fe3e977630ce2cfcd87648",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/examples/n40/run.sh"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/.gitignore",
+          "bytes": 8,
+          "sha256": "b53ee26e6ff1da219b0563333a76d2c9ec19eec713d6ee54e11a1edacb0e9f3d",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/.gitignore"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/Cargo.lock",
+          "bytes": 6976,
+          "sha256": "5c3206fa1eeabb23d52e93d76eec0d2c16820e6065ce02e8e13a7fa47693785c",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/Cargo.lock"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/Cargo.toml",
+          "bytes": 1508,
+          "sha256": "df5e6c24699f934dcabe1119273621ac332dfcd9c75dd0650acacfc827466665",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/Cargo.toml"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/INDEPENDENCE.md",
+          "bytes": 12283,
+          "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/INDEPENDENCE.md"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/README.md",
+          "bytes": 5096,
+          "sha256": "bb10f6e771ded24cc998749e6f63165d991d45dc0b488f07e92c788e4b67513e",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/README.md"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/SOUNDNESS.md",
+          "bytes": 34095,
+          "sha256": "8e7a6180c6623496e5097b343183daa86bfa514fb8a876ea9ca5e8ef5cf05b59",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/SOUNDNESS.md"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/build.rs",
+          "bytes": 1712,
+          "sha256": "1e238378117bc7716e50cdd4e3d0d3862e756e1ff863794b9b559ffe4b2743e6",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/build.rs"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/clippy.toml",
+          "bytes": 58,
+          "sha256": "741d8b6cbd57d7b01ff8918083bbf313e281cce0dbdcb1ed669dc8cb84f44578",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/clippy.toml"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/independence-record.yaml",
+          "bytes": 8144,
+          "sha256": "2c3dd9edb7066cbb87fef26d3bac48039cf5ad64f738fd2a5271b2d735b04882",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/independence-record.yaml"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/rust-toolchain.toml",
+          "bytes": 86,
+          "sha256": "495c69d1db93f25f53e3d0d2d40d812313366cc368de317871c2ace6c6ffafa4",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/rust-toolchain.toml"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/src/axis.rs",
+          "bytes": 7198,
+          "sha256": "bf18bd9a0a82806bac6a3aa82df73349944eaa56a22ae5a9b67a67ab3d237e97",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/axis.rs"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/src/certificate.rs",
+          "bytes": 31964,
+          "sha256": "934df119402c84c05eefe7b2fd933044d1da3127c72873af143961f3ec301d25",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/certificate.rs"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/src/exact.rs",
+          "bytes": 8350,
+          "sha256": "b9d627b740c8a0c7ed069c1faac2563b9db72c03c10c9f88fb3c0234054f481a",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/exact.rs"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/src/interval.rs",
+          "bytes": 8484,
+          "sha256": "287da6570dfc1278e3ba6b4c09bfaca6409d16fba0713329bf0c4a5dcbfe5e56",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/interval.rs"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/src/lib.rs",
+          "bytes": 7791,
+          "sha256": "197a93497798c2ed1a724b780e7008d838f9d9439f733d5dde61c9fd1e09533c",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/lib.rs"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/src/oracle.rs",
+          "bytes": 5788,
+          "sha256": "3c993d66c6edb3a235a3e089a586bb4b42de02fb331fc519836b22cadb99c151",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/oracle.rs"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/src/rotated.rs",
+          "bytes": 42225,
+          "sha256": "4bf878c4d0e8acaedcccedbfb52d8885e1ba2657876bad2048fe30e5f3c7ded3",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/rotated.rs"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/src/rotated_tests.rs",
+          "bytes": 13209,
+          "sha256": "0e9861a4a8fa2242ebde3e39bc109fe2bb0745e874595c10e777b1f652c7b7b6",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/rotated_tests.rs"
+        },
+        {
+          "path": "tools/sqverify_continuous/sqverify_fast/tests/adversarial.rs",
+          "bytes": 27664,
+          "sha256": "6261babe3bb834ab170a933ea65af4faebfeb8aede76aba675891db97c3e485b",
+          "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+          "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/tests/adversarial.rs"
+        }
+      ],
+      "license": "MIT, Copyright (c) 2026 wand125 (tools/LICENSE), for the code; the copies of this repository's sqverify_fast documentation under CC BY 4.0 to Joshua Levy, the squares project, and its code under MIT, as tools/THIRD_PARTY_NOTICES.md and PROVENANCE.md state",
+      "claims": [
+        "sqverify-fast --continuous v3 (source_sha256 1266a8b90f9a355d74772e211a7b9a52d0236b0d33cc4113d2f897d8a1044f33): the same statement as v4; README.md reports s(40) > 1340000/199529 (T-145's density, B = 199529/200000, tau = 4999/5000) and s(40) > 3359/500 (T-157's density, B = 3350/3359) VERIFIED at all 86 root ranges, and their controls REFUSED, with no receipt published"
+      ]
+    }
+  ]
+}

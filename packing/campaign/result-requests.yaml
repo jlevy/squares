@@ -7279,10 +7279,22 @@ issues:
     - what: Retain sqverify_continuous at f30cc2c, review its soundness, build it and replay both
         n = 40 examples with their controls and this repository's own mass controls.
       state: queued
-      bead: think-xzob
+      note: >-
+        Retained (v3 and v4), reviewed for soundness with no blocking or major finding, built
+        to the recorded digest and run here on the source's controls on 23 October 2026
+        (think-xzob,
+        docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md). The
+        replay of both examples is think-flxm's, about 0.7 CPU-hours each, and the same mode's
+        86-root run for T-192 is think-0arj's; both wait for the owner's continuous-angle
+        budget on jlevy/squares#543.
+      bead: think-flxm
+      blocked_on:
+      - jlevy/squares#543
     beads:
     - think-xzob
     - think-tln9
+    - think-flxm
+    - think-0arj
     answer_bead: think-xzob
     replies:
     - url: https://github.com/jlevy/squares/issues/533#issuecomment-6206055919

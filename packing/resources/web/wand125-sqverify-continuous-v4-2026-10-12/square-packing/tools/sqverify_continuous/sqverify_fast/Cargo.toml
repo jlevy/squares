@@ -1,0 +1,54 @@
+[package]
+name = "sqverify-fast"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.98"
+publish = false
+description = "Clean-room interval verifier for measure-capture lower-bound certificates"
+
+[build-dependencies]
+sha2 = "=0.10.9"
+
+[dependencies]
+flate2 = { version = "=1.1.2", default-features = false, features = ["rust_backend"] }
+num-bigint = "=0.4.6"
+num-integer = "=0.1.47"
+num-rational = { version = "=0.4.2", features = ["num-bigint"] }
+num-traits = "=0.2.19"
+serde = "=1.0.229"
+serde_json = { version = "=1.0.151", features = ["arbitrary_precision"] }
+sha2 = "=0.10.9"
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "deny"
+warnings = "deny"
+
+[lints.clippy]
+pedantic = { level = "deny", priority = -1 }
+unwrap_used = "deny"
+# Interval code compares floats against exact bounds on purpose.
+float_cmp = "allow"
+# `c`, `s`, `h`, `x`, `y` are the mathematics' own names.
+many_single_char_names = "allow"
+similar_names = "allow"
+cast_precision_loss = "allow"
+cast_possible_truncation = "allow"
+cast_sign_loss = "allow"
+too_many_lines = "allow"
+too_many_arguments = "allow"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+debug = false
+
+# The gate's test build. Release's optimisation without its fat LTO and single codegen
+# unit, which the shipped binary keeps: the gate otherwise paid three fat-LTO links,
+# the library's tests, the binary's tests and the binary, and LTO changes no result.
+[profile.gate-test]
+inherits = "release"
+lto = false
+codegen-units = 16
