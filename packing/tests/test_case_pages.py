@@ -500,8 +500,8 @@ def test_a_regularized_default_draws_its_view_and_keeps_the_house_as_published()
     for other in [*kept[:1], plain]:
         head = render_case_pages.record_head(cases[other], first=1, last=324)
         head = head.split("</header>")[0]
-        assert head.index(frontier_page.default_svg(other, units=1000)) < head.index(
-            '<p class="site-case-title"'
+        assert head.index('<p class="site-case-title"') < head.index(
+            frontier_page.default_svg(other, units=1000)
         ), other
         turned = not frontier_page.default_pose(other).identity
         assert ("site-case-published" in head) is turned, other
