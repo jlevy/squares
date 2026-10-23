@@ -251,7 +251,7 @@ News, so 15 S4/S5 results predate News without an article.
 
 | Bead | Change | Guards against |
 | --- | --- | --- |
-| `think-9wxc` | A records-tier and CI gate: every registered S4 or S5 result has a News article that News shows, at its own score. The result’s own PR drafts the article, and a named stage 7 step lands it right after the verified deploy; until it does, the gate fails the next change to the register or News, and warns on any other. T-194 gets its article | An S4/S5 result landing unannounced; an article left to “the next change” |
+| `think-9wxc` | A records-tier and CI gate: every registered S4 or S5 result has a News article that News shows, at its own score. The result’s own PR drafts the article, and a named stage 7 step lands it right after the verified deploy; until it does, the gate fails the next pull request that changes the register or News, and warns on any other change and on `main`. T-194 gets its article | An S4/S5 result landing unannounced; an article left to “the next change” |
 | `think-gq0l` | The owner decides whether the 15 S4/S5 results from before News get articles dated to their merges; until then the gate exempts them | A gap the archive inherited when it was created |
 | `think-aqv8` | A discreet significance filter at the top right of the home box, S5 by default when there are enough S5 articles, otherwise S4+S5 | A box that stays the same for a week without anyone noticing |
 | `think-2252` | An audit of the 26 S3+ results without articles; S3 articles stay optional, by the owner’s decision | The S3 backlog this incident left |
@@ -268,9 +268,11 @@ News, so 15 S4/S5 results predate News without an article.
    validator requires a merged delivery, a PR cannot carry its own article.
    A gate on that rule alone would turn `main` red at the next merge after every S4/S5
    merge, and the next PR, whatever it is, would inherit the duty.
-   #735 handles it narrowly: an article owed on `main` fails only a change that edits
-   `results.yaml` or `site-changelog.yaml`, the change that can settle it, and every
-   other change, `main`’s pushes and scheduled runs included, gets a warning and passes.
+   #738 handles it narrowly: an article owed on `main` fails only a pull request that
+   edits `results.yaml` or `site-changelog.yaml`, the change that can settle it.
+   Every other pull request gets a warning and passes, and on `main` itself, in pushes
+   and scheduled runs, an owed article is only ever a warning, even after a records
+   merge that raced the S4/S5 merge: pull-request CI is where the rule is enforced.
    The real fix is still open as `think-n51k`: let a branch’s article name its own PR as
    pending, accepted only for that PR, with its date set at merge by the same stamp that
    sets `landed` in `devtools.stamp_landed`, and its delivery row added by the importer

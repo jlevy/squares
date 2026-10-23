@@ -157,9 +157,9 @@ entries:
     details: |-
       - Lean’s kernel checks the geometric arguments, and 4,320 finite certificate facts are
         decided by `native_decide`, so Lean’s compiler, its native evaluator and the C
-        toolchain are trusted. The source reports a kernel replay of the theorem’s import closure that takes those
-        facts as axioms, and says a complete rebuild from its published sources has not yet
-        been run.
+        toolchain are trusted. The source reports a kernel replay of the theorem’s import
+        closure that takes those facts as axioms, and says a complete rebuild from its
+        published sources has not yet been run.
       - A separately prompted mathematical review of 16 October found no blocking or major
         defect. It checked the statement and decided the endpoint packing exactly,
         re-derived the six-step chain to the final theorem, and with programs of its own

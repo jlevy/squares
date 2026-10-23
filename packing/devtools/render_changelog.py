@@ -700,6 +700,10 @@ RESULTS = ROOT / "frontier" / "results.yaml"
 RESULTS_PATH = "packing/frontier/results.yaml"
 #: The two records a change can settle an owed announcement in: the register, and News.
 ANNOUNCEMENT_RECORDS = (RESULTS_PATH, "packing/site-changelog.yaml")
+#: The `--announcement-base` that means main's own delivery: the records tier passes it
+#: on a push to main and on the scheduled run, and only there (`validate._synopsis`).
+#: The merge under test can no longer act on a failure, so main only reports.
+MAIN_DELIVERY_BASE = "HEAD^1"
 
 #: The lowest significance at which a registered result must have a News item: the
 #: owner's decision of 22 October 2026, "We need a systematic process for the
@@ -854,7 +858,12 @@ def landing(identifier: str, score: int, ref: str) -> Landing | None:
     return found
 
 
-def _owed_message(result: Document, change: Landing | None, *, settle_here: bool) -> str:
+def _owed_message(
+    result: Document,
+    change: Landing | None,
+    *,
+    context: Literal["settle", "unrelated", "main"],
+) -> str:
     identifier = result["id"]
     score = result["significance"]["score"]
     if change is None:
@@ -883,16 +892,23 @@ def _owed_message(result: Document, change: Landing | None, *, settle_here: bool
         f"Result). It was scored by {scored_by}; ask its intake coordinator if the item "
         "is not yours to write."
     )
-    if settle_here:
+    owed = f"{identifier} (S{score}) is on main with no News item at S{score}"
+    if context == "settle":
         return (
-            f"{identifier} (S{score}) is on main with no News item at S{score}, and this "
-            "change edits the register or the News record, so it settles the debt: add "
-            "the item in this PR, or land the stage 7 follow-up first and merge main. " + remedy
+            f"{owed}, and this change edits the register or the News record, so it "
+            "settles the debt: add the item in this PR, or land the stage 7 follow-up "
+            "first and merge main. " + remedy
+        )
+    if context == "main":
+        return (
+            f"{owed}. On main the gate reports and never fails, since the merge under "
+            "test can no longer act on it; pull-request CI enforces it, and the next "
+            "pull request that changes the register or the News record fails until the "
+            "item lands. " + remedy
         )
     return (
-        f"{identifier} (S{score}) is on main with no News item at S{score}. This change "
-        "edits neither the register nor the News record, so it is not failed; the next "
-        "change that does fails until the item lands. " + remedy
+        f"{owed}. This change edits neither the register nor the News record, so it is "
+        "not failed; the next pull request that does fails until the item lands. " + remedy
     )
 
 
@@ -903,6 +919,7 @@ def check_announcements(
     *,
     locate: Callable[[str, int], Landing | None] | None = None,
     records_changed: bool = True,
+    on_main: bool = False,
 ) -> AnnouncementFindings:
     """Every S4 and S5 result without its News item, sorted by what the gate does.
 
@@ -911,11 +928,14 @@ def check_announcements(
     merge and reported, not failed. A result already owed on main fails only a change
     that edits the register or the News record (`records_changed`), the one change that
     can settle it, since the PR that owes it has merged and its item now validates.
-    Any other change gets a warning, so an unrelated merge never turns main red. This is
-    option (b) of the decision of 22 October (#735's review A); option (a), an item
-    that names its own PR and is stamped at merge, is think-n51k. A stale exemption
-    always fails. `locate(identifier, score)` finds the PR that owes an item; without
-    `base_results` nothing is in grace.
+    Any other change gets a warning. On main (`on_main`, a push or the scheduled run),
+    an owed result is only ever a warning, records change or not: pull-request CI is
+    where the rule is enforced, and the one way main sees an owed result is a records
+    merge that raced the S4/S5 merge, which must not turn main red (#738's review A).
+    This is option (b) of the decision of 22 October (#735's review A); option (a), an
+    item that names its own PR and is stamped at merge, is think-n51k. A stale
+    exemption always fails. `locate(identifier, score)` finds the PR that owes an item;
+    without `base_results` nothing is in grace.
     """
     base = (
         None
@@ -930,12 +950,17 @@ def check_announcements(
                 f"{identifier} (S{score}) is registered or raised on this branch and owes "
                 "a News item after the merge: draft it in the PR description now, and land "
                 "it in the first change after the merge (result-import.md, stage 7). The "
-                "next change to the register or the News record fails until it does."
+                "next pull request that changes the register or the News record fails "
+                "until it does."
             )
             continue
         change = locate(identifier, score) if locate is not None else None
-        message = _owed_message(result, change, settle_here=records_changed)
-        (findings.failures if records_changed else findings.unsettled).append(message)
+        if on_main:
+            findings.unsettled.append(_owed_message(result, change, context="main"))
+        elif records_changed:
+            findings.failures.append(_owed_message(result, change, context="settle"))
+        else:
+            findings.unsettled.append(_owed_message(result, change, context="unrelated"))
     return findings
 
 
@@ -1371,7 +1396,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--announcement-base",
         metavar="REF",
         help="Require a News item for every registered S4 and S5 result; results new or "
-        "raised since HEAD's merge base with REF are owed after the merge, not failed",
+        "raised since HEAD's merge base with REF are owed after the merge, not failed, "
+        f"and with {MAIN_DELIVERY_BASE}, main's own delivery, owed results only warn",
     )
     options = parser.parse_args(argv)
     try:
@@ -1389,6 +1415,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 base_results,
                 locate=lambda identifier, score: landing(identifier, score, base),
                 records_changed=edits_announcement_records(base),
+                on_main=options.announcement_base == MAIN_DELIVERY_BASE,
             )
             significant = sum(
                 result["significance"]["score"] >= ANNOUNCED_FROM for result in results
@@ -1397,7 +1424,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 f"announcements: {significant} registered S4 and S5 results, "
                 f"{len(ANNOUNCEMENT_EXEMPT)} exempt from before the News archive, "
                 f"{len(findings.owed)} owed after this merge, {len(findings.unsettled)} "
-                f"owed on main and left to a records change, {len(findings.failures)} failing"
+                f"owed on main and reported, {len(findings.failures)} failing"
             )
             for note in findings.owed:
                 print(f"announcement owed after merge: {note}")

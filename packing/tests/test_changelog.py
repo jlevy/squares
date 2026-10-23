@@ -1220,6 +1220,29 @@ def test_an_owed_item_fails_only_a_change_to_the_register_or_news() -> None:
 
 
 @pytest.mark.usefixtures("no_exemptions")
+def test_a_records_merge_on_main_warns_where_the_same_pr_fails() -> None:
+    # A records PR that went green before an S4/S5 merge, then merged after it: its PR
+    # CI enforced the rule, and main's run of the merge can no longer act on a failure.
+    results = [_result("T-901", 5)]
+    empty: dict = {"entries": []}
+    failures, owed, [warning] = render_changelog.check_announcements(
+        empty, results, results, locate=_merged_at_42, records_changed=True, on_main=True
+    )
+    assert (failures, owed) == ([], [])
+    assert warning.startswith("T-901 (S5) is on main with no News item at S5. On main")
+    assert "naming PR #42" in warning
+    # The same change in pull-request mode fails.
+    [failure] = render_changelog.check_announcements(
+        empty, results, results, locate=_merged_at_42, records_changed=True
+    ).failures
+    assert "settles the debt" in failure
+    # On main, a result the merge itself registered is still owed after it.
+    assert render_changelog.check_announcements(
+        empty, results, [], locate=_merged_at_42, on_main=True
+    ).owed
+
+
+@pytest.mark.usefixtures("no_exemptions")
 def test_a_news_item_at_the_result_score_satisfies_the_gate() -> None:
     results = [_result("T-901", 5), _result("T-903", 4)]
     document = {"entries": [_news("both", 5, "T-901", "T-903")]}
@@ -1342,7 +1365,47 @@ def test_the_cli_fails_a_missing_item_and_notes_an_owed_one(
     out, err = capsys.readouterr()
     assert "warning: announcement owed on main: T-901 (S5)" in out
     assert "announcement missing" not in err
-    assert "1 owed after this merge, 1 owed on main and left to a records change" in out
+    assert "1 owed after this merge, 1 owed on main and reported, 0 failing" in out
+    # Main's own delivery (HEAD^1) only warns, even for a records merge.
+    monkeypatch.setattr(render_changelog, "edits_announcement_records", lambda _base: True)
+    base = render_changelog.MAIN_DELIVERY_BASE
+    assert render_changelog.main(["--check", "--announcement-base", base]) == 0
+    out, err = capsys.readouterr()
+    assert "warning: announcement owed on main: T-901 (S5) is on main with no News item " in out
+    assert "On main the gate reports and never fails" in out
+    assert "announcement missing" not in err
+
+
+def test_committed_changes_to_either_record_are_seen_against_the_fork(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    # #738's review A: committed, as in CI, where the working tree is clean and only a
+    # diff against the base sees the change; and each record on its own.
+    def git(*arguments: str) -> str:
+        return subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.org", *arguments],
+            cwd=tmp_path,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+
+    register = tmp_path / render_changelog.RESULTS_PATH
+    news = tmp_path / "packing/site-changelog.yaml"
+    register.parent.mkdir(parents=True)
+    register.write_text("results: []\n", encoding="utf-8")
+    news.write_text("entries: []\n", encoding="utf-8")
+    (tmp_path / "notes.md").write_text("a\n", encoding="utf-8")
+    git("init", "-q", "-b", "main")
+    git("add", "-A")
+    git("commit", "-q", "--no-gpg-sign", "-m", "root")
+    monkeypatch.setattr(render_changelog, "REPO", tmp_path)
+    for path, expected in ((register, True), (news, True), (tmp_path / "notes.md", False)):
+        git("checkout", "-q", "-B", "feature", "main")
+        path.write_text(path.read_text(encoding="utf-8") + "# edited\n", encoding="utf-8")
+        git("commit", "-q", "--no-gpg-sign", "-am", f"edit {path.name}")
+        base, _ = render_changelog.announcement_base("main")
+        assert render_changelog.edits_announcement_records(base) is expected, path.name
 
 
 def test_the_base_is_the_fork_point_and_record_changes_are_seen(

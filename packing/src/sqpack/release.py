@@ -7099,9 +7099,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "Review A of #735 (think-9wxc): the announcement gate's owed items fail only "
-            "a change to the register or News, `check_announcements` returns its findings "
-            "in three lists, three helpers become public and `main` prints warnings. The "
+            "Review A of #735 and of #738 (think-9wxc): the announcement gate's owed "
+            "items fail only a pull request that changes the register or News, and on main "
+            "only warn. `check_announcements` returns its findings in three lists; two "
+            "helpers are renamed to public names (`register_score`, `announcement_base`) "
+            "and one is new (`edits_announcement_records`); `main` prints warnings. The "
             "papers reach `render_changelog` only through `site_documents`, which calls "
             "`entry_anchor`, unchanged. This also corrects #735's record above, whose "
             "`No existing function changes` was wrong: no function the papers reach "

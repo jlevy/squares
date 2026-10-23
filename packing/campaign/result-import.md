@@ -85,8 +85,8 @@ W1 phase on one branch:
    **A result the pass registers at S4 or S5, or raises to either, also owes a News
    item**: draft it in the description under **News**, and land it in the first change
    after the merge ([Announce a Significant Result](#announce-a-significant-result)).
-   Until it does, the records tier fails the next change to the register or News, and
-   warns on any other.
+   Until it does, the records tier fails the next pull request that changes the register
+   or News, and warns on any other change.
 7. **Draft the replies** in each issue’s answer bead: every issue the pass touches gets
    one. Once the pull request merges, render each from `main`, check that `main` and the
    deployed site say what it says, post it, and record it under the issue’s `replies` in
@@ -199,7 +199,7 @@ claude/intake-YYYY-MM-DD, with today's date.
    post. Do not post it. For each result registered at S4 or S5, or raised to
    either, draft its News entry under "News" too, and land it in the first change
    after the merge (stage 7, "Announce a Significant Result"); until it does, the
-   records tier fails the next change to the register or News.
+   records tier fails the next pull request that changes the register or News.
 8. Draft the reply each issue the pass touches is owed in its answer bead; every one
    gets a comment. Once the pull request merges, render each from main with
    `check_requests --draft N`, check that main and the deployed site say what it says
@@ -1229,15 +1229,20 @@ own score, with the result in its `result_ids`. S3 News stays optional, as
    step, which pull-request CI runs, passes `--announcement-base` to
    `devtools.render_changelog`. A result registered or raised on the branch under test
    is reported as owed after the merge.
-   Once it is on `main` without its item, the gate fails any change that edits
-   `packing/frontier/results.yaml` or `packing/site-changelog.yaml`: a pull request
-   against its merge base, and a push to `main` or the scheduled run against `HEAD^1`.
-   That change is the one that can settle the debt, since the pull request that owes it
-   has merged and its item now validates: add the item in it, or land this step’s
-   follow-up first and merge `main`. Any other change gets a warning naming the result
-   and the pull request that owes it, and passes, so an unrelated merge never turns
-   `main` red. The failure names the result, its score, the merged pull request the entry
-   must name, the command that drafts it and who scored the result.
+   Once it is on `main` without its item, the gate fails any pull request that edits
+   `packing/frontier/results.yaml` or `packing/site-changelog.yaml`, measured against
+   its merge base. That pull request is the one that can settle the debt, since the pull
+   request that owes it has merged and its item now validates: add the item in it, or
+   land this step’s follow-up first and merge `main`. The failure names the result, its
+   score, the merged pull request the entry must name, the command that drafts it and
+   who scored the result.
+   Any other pull request gets a warning naming the result and the pull request that
+   owes it, and passes.
+   On `main` itself, a push or the scheduled run (`--announcement-base HEAD^1`), an owed
+   item is only ever a warning, records change or not: pull-request CI enforces the
+   rule, and a merged change can no longer act on a failure.
+   The one way `main` sees an owed item is a records pull request that went green before
+   an S4 or S5 merge and merged after it, and that must not turn `main` red.
    Letting the registering pull request carry its own item, which names that pull
    request and is stamped at merge as `landed` is, is `think-n51k`.
 
