@@ -423,12 +423,15 @@ def test_a_source_the_walk_reaches_is_never_a_later_successor() -> None:
     """#722's review B, B2: at 631 #719's walk reaches Couzo's verified bounds of 14
     October. Dated a day after #719 and smaller there, that source's row would pass the
     row, date and strictness checks, so only the reach check refuses it as #719's
-    successor: the walk already ordered the two."""
+    successor: the walk already ordered the two. Both walks record Couzo's 4e4c8ce
+    index between them (#715's re-certification is held), so the 14 October row names
+    the index's, which names #719's."""
     reached = "couzo-verified-bounds-2026-10-14"
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
     sources = {source["id"]: source for source in coverage["sources"]}
-    assert rows[631, reached]["superseded_by"] == MISHAPOLK
+    assert rows[631, reached]["superseded_by"] == "couzo-index-2026-10-15"
+    assert rows[631, "couzo-index-2026-10-15"]["superseded_by"] == MISHAPOLK
     sources[reached]["source_date"] = "2026-10-23"
     rows[631, reached]["value"] = "25.6568542495100000"
     assert Fraction(rows[631, reached]["value"]) < Fraction(rows[631, MISHAPOLK]["value"])
