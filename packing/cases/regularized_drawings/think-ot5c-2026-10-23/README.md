@@ -6,11 +6,12 @@ algebraic certificates (T-174) at 70, 153 and 207, and Evan Daniel’s exact for
 issue 639 (T-193) at 102, 123, 258, 259, 295 and 302. Each new house best packing’s side
 is irrational, the one root of an integer polynomial, and its witness states its squares
 in a real number field.
-The house rule regularizes each re-housed count in the pull request that adopts it, and
-where the house has an algebraic side the runs settle the count: no rational view is
-`same` or `bound` at an irrational side, and no number-field view is decided on two
-exact routes yet
+The house rule regularizes each re-housed count in the pull request that adopts it
 ([result-import.md, “The House Rule”](../../../campaign/result-import.md#the-house-rule)).
+Where the house has an algebraic side these runs cannot regularize it yet: no rational
+view is `same` or `bound` at an irrational side, and no number-field view is decided on
+two exact routes. So each count draws its exact house, and its regularization is still
+owed, under think-mbdw.
 
 ## How They Were Run
 
@@ -52,15 +53,18 @@ item cap. No `layer` command followed, since the selection chose no view.
 
 | n | House best packing | Outcome | Drawn now |
 | --- | --- | --- | --- |
-| 102 | T-193 | Evan Daniel’s regularizer solves the witness to a rational side $1.06 \times 10^{-19}$ above $U$, held at row 4; grid-slack draws no view | the house drawing |
-| 123 | T-193 | His regularizer’s side is $1.16 \times 10^{-19}$ above $U$, held at row 4; grid-slack draws no view | the house drawing |
-| 153 | T-174 | His regularizer’s side is $1.29 \times 10^{-19}$ above $U$, held at row 4; grid-slack draws no view | the house drawing (think-r8cn) |
-| 207 | T-174 | His regularizer’s side is $1.49 \times 10^{-19}$ above $U$, held at row 4; grid-slack draws no view | the house drawing (think-r8cn) |
-| 258 | T-193 | His regularizer timed out in its first run and in its second solves to a side $1.66 \times 10^{-19}$ above $U$, held at row 4; grid-slack draws no view | the house drawing |
-| 259 | T-193 | As at 258, $1.66 \times 10^{-19}$ above $U$, held at row 4; grid-slack draws no view | the house drawing (think-r8cn) |
-| 302 | T-193 | As at 258, $1.79 \times 10^{-19}$ above $U$, held at row 4; grid-slack draws no view | the house drawing (think-r8cn) |
+| 102 | T-193 | Evan Daniel’s regularizer solves the witness to a rational side $1.06 \times 10^{-19}$ above $U$, not drawn; grid-slack draws no view | the exact house, regularization owed (think-mbdw) |
+| 123 | T-193 | His regularizer’s side is $1.16 \times 10^{-19}$ above $U$, not drawn; grid-slack draws no view | the exact house, regularization owed (think-mbdw) |
+| 153 | T-174 | His regularizer’s side is $1.29 \times 10^{-19}$ above $U$, not drawn; grid-slack draws no view | the exact house, regularization owed (think-mbdw) |
+| 207 | T-174 | His regularizer’s side is $1.49 \times 10^{-19}$ above $U$, not drawn; grid-slack draws no view | the exact house, regularization owed (think-mbdw) |
+| 258 | T-193 | His regularizer timed out in its first run and in its second solves to a side $1.66 \times 10^{-19}$ above $U$, not drawn; grid-slack draws no view | the exact house, regularization owed (think-mbdw) |
+| 259 | T-193 | As at 258, $1.66 \times 10^{-19}$ above $U$, not drawn; grid-slack draws no view | the exact house, regularization owed (think-mbdw) |
+| 302 | T-193 | As at 258, $1.79 \times 10^{-19}$ above $U$, not drawn; grid-slack draws no view | the exact house, regularization owed (think-mbdw) |
 
-Each is settled in `default_drawings.SETTLED` on its new witness.
+Each is recorded in `default_drawings.SETTLED` on its new witness as decided, with the
+regularization of the exact house still owed (`owed`, naming think-mbdw).
+`PENDING_ALLOWED` cannot hold these counts: since the house rule it defers only a
+corrected witness, and an adoption moved these houses.
 At 70 and 295 the new house drawings have no uneven and no near-axis square, so they
 read regular as published and no run was owed.
 No view lies below a witness’s side, so there is no register candidate.
@@ -69,9 +73,11 @@ At 153, 207, 259 and 302 the strong view drawn before the adoption was a view of
 earlier rational house, which lies just above the new algebraic $U$: by
 $1.57 \times 10^{-14}$, $2.42 \times 10^{-12}$, $1.56 \times 10^{-31}$ and
 $1.79 \times 10^{-39}$. Each lapsed with its witness.
-Keeping a rational view just above an algebraic $U$ is the owner’s question 13, put to
-the owner as think-r8cn with these counts and the row-4 sides above; until it is
-answered the house drawing is the default at all four.
+Whether to keep a rational view just above an algebraic $U$ was the owner’s question 13
+(think-r8cn). The owner answered it on 23 October 2026: the best record is always the
+record, and a regularized drawing may change the side only as a strict improvement.
+So none of these views is kept, nor any of the seven row-4 sides above, and no count
+gains an `ABOVE_U` exception.
 At 153 and 207 the new house drawings have no uneven and no near-axis square; at 259 and
 302 they have 163 and 204 uneven squares, where the lapsed views had 20 and none.
 

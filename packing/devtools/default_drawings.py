@@ -420,11 +420,16 @@ _README_ICP1 = (
 #: regularizer, whose solves are rational sides above the algebraic `U`, held at row 4:
 #: no rational view is `same` or `bound` at an irrational side (result-import.md, "The
 #: House Rule"). Its first run timed out at 258, 259 and 302 on a host at a load of about
-#: 25, and a second ran them at 2,400 seconds. Each count is settled on its house drawing.
-#: At 153, 207, 259 and 302 a strong view of the earlier rational house lapsed just above
-#: the new `U`; keeping such a view is the owner's question 13 (think-r8cn), and until it
-#: is answered the house drawing is drawn. The runs' receipts, blocks, reports and the
-#: selection's report are in packing/cases/regularized_drawings/think-ot5c-2026-10-23/.
+#: 25, and a second ran them at 2,400 seconds. Each count draws its exact house. At 153,
+#: 207, 259 and 302 a strong view of the earlier rational house lapsed just above the new
+#: `U`. The owner answered question 13 (think-r8cn) on 23 October 2026: the best record is
+#: always the record, and a regularized drawing may change the side only as a strict
+#: improvement. So no view above `U` is kept or drawn and `ABOVE_U` gains no entry, and
+#: each entry's `owed` names think-mbdw for the regularization of the exact house, which no
+#: regularizer yet does on a number-field witness. `PENDING_ALLOWED` cannot hold them:
+#: since the house rule it defers only a corrected witness (`deferral_problems`), and an
+#: adoption moved these. The runs' receipts, blocks, reports and the selection's report
+#: are in packing/cases/regularized_drawings/think-ot5c-2026-10-23/.
 _RUNOT5C = (
     ("evand-regularize", "evand-regularize-adopt-2026-10-23-n70-302-evand"),
     ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n70-302-grid-deg05"),
@@ -439,9 +444,10 @@ _README_OT5C = (
     "packing/cases/regularized_drawings/think-ot5c-2026-10-23/README.md, the selection of 23 "
     "October 2026 (think-ot5c), beside the runs' receipts, blocks and reports"
 )
-_OWED_R8CN = (
-    "think-r8cn: the owner's question 13, whether a rational strong view just above the "
-    "algebraic U is drawn; until it is answered, the house drawing is drawn"
+_OWED_MBDW = (
+    "think-mbdw: the regularization of the exact house, since no regularizer yet draws an "
+    "exact view at or below the record's side on a number-field witness; until one does, "
+    "the exact house is drawn"
 )
 _DANIEL_639 = "[Daniel exact current records 2026-10-16]"
 _DANIEL_639_REVISION = "7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1"
@@ -451,6 +457,12 @@ _NO_FRAME = (
     "grid-slack has no exact frame on the number-field witness and draws no view at 0.5, 1 "
     "and 5 degrees"
 )
+#: Why a rational view above an algebraic `U` is not drawn: the owner's answer to question
+#: 13 (think-r8cn), and row 4 of the policy's obligation 2.
+_NOT_DRAWN = (
+    "which is not drawn: a regularized drawing changes the side only as a strict "
+    "improvement, and no rational view is same or bound at an irrational side"
+)
 
 
 def _held_again(margin: str) -> str:
@@ -458,17 +470,16 @@ def _held_again(margin: str) -> str:
     return (
         f"{_NO_FRAME}; Evan Daniel's regularizer timed out at 600 seconds in its first run, "
         f"on a host at a load of about 25, and in its second solves it to a rational side "
-        f"{margin} above U, held at row 4: no rational view is same or bound at an "
-        "irrational side"
+        f"{margin} above U, {_NOT_DRAWN}"
     )
 
 
 def _held(margin: str) -> str:
     """An algebraic house's outcome where Evan Daniel's regularizer solved it to a rational
-    side `margin` above `U`, held at row 4."""
+    side `margin` above `U`, which is not drawn."""
     return (
         f"{_NO_FRAME}, and Evan Daniel's regularizer solves it to a rational side {margin} "
-        "above U, held at row 4: no rational view is same or bound at an irrational side"
+        f"above U, {_NOT_DRAWN}"
     )
 
 
@@ -590,6 +601,7 @@ SETTLED: dict[int, Settled] = {
         _RUNOT5C,
         _held("1.06e-19"),
         _README_OT5C,
+        _OWED_MBDW,
     ),
     108: Settled(
         DECIDED,
@@ -647,6 +659,7 @@ SETTLED: dict[int, Settled] = {
         _RUNOT5C,
         _held("1.16e-19"),
         _README_OT5C,
+        _OWED_MBDW,
     ),
     127: Settled(
         DECIDED,
@@ -726,7 +739,7 @@ SETTLED: dict[int, Settled] = {
         _RUNOT5C,
         _held("1.29e-19"),
         _README_OT5C,
-        _OWED_R8CN,
+        _OWED_MBDW,
     ),
     176: Settled(
         DECIDED,
@@ -812,7 +825,7 @@ SETTLED: dict[int, Settled] = {
         _RUNOT5C,
         _held("1.49e-19"),
         _README_OT5C,
-        _OWED_R8CN,
+        _OWED_MBDW,
     ),
     208: Settled(
         DECIDED,
@@ -960,6 +973,7 @@ SETTLED: dict[int, Settled] = {
         _RUNOT5C_B,
         _held_again("1.66e-19"),
         _README_OT5C,
+        _OWED_MBDW,
     ),
     259: Settled(
         DECIDED,
@@ -970,7 +984,7 @@ SETTLED: dict[int, Settled] = {
         _RUNOT5C_B,
         _held_again("1.66e-19"),
         _README_OT5C,
-        _OWED_R8CN,
+        _OWED_MBDW,
     ),
     260: Settled(
         DECIDED,
@@ -1151,7 +1165,7 @@ SETTLED: dict[int, Settled] = {
         _RUNOT5C_B,
         _held_again("1.79e-19"),
         _README_OT5C,
-        _OWED_R8CN,
+        _OWED_MBDW,
     ),
     303: Settled(
         DECIDED,

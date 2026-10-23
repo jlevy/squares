@@ -760,12 +760,14 @@ and the strong views at 153, 207 and 259 (Evan Daniel’s regularizer) and 302
 At the other seven both generators ran on the new witness: grid-slack at 0.5, 1 and 5
 degrees has no exact frame on a number-field witness and draws no view, and Evan
 Daniel’s regularizer solves each to a rational side $1.06 \times 10^{-19}$ to
-$1.79 \times 10^{-19}$ above the algebraic $U$, held at row 4, since no rational view is
-`same` or `bound` at an irrational side.
-`SETTLED` records the seven decided on their new witnesses, and the house drawing is
-drawn at each. At 153, 207, 259 and 302 whether to keep a rational view just above the
-algebraic $U$ is the owner’s question 13 (think-r8cn); until it is answered the house
-drawings are the default there.
+$1.79 \times 10^{-19}$ above the algebraic $U$, which is not drawn.
+The owner answered question 13 (think-r8cn) the same day: the best record is always the
+record, and a regularized drawing may change the side only as a strict improvement.
+So no view above $U$ is kept, the lapsed views at 153, 207, 259 and 302 among them, and
+each of the seven draws its exact house.
+`SETTLED` records the seven on their new witnesses as decided with the regularization of
+the exact house still owed, under think-mbdw, since no regularizer yet draws an exact
+view at or below the record’s side on a number-field witness.
 The evidence is retained in
 [`cases/regularized_drawings/think-ot5c-2026-10-23/`](../../cases/regularized_drawings/think-ot5c-2026-10-23/README.md).
 After it the index draws 86 views: 30 by the axis tool, 37 by Evan Daniel’s regularizer

@@ -833,12 +833,15 @@ No adoption waits for the owner’s word, and each case that once did is decided
     [section 5](../../docs/project/policies/regularization-policy.md#5-manual-review-and-adjustment),
     and a view the owner admits is drawn on its review record, as at n = 211 on 16
     October 2026: “Admit it.”
-  - Where the house best packing has an algebraic side, the runs settle the count: no
-    rational view is `same` or `bound` at an irrational side, and no number-field view
-    is decided on two exact routes yet (the policy’s obligation 1; think-mbdw is that
-    second route). Keeping a rational view just above an algebraic U is a question 13
-    decision, put to the owner once with the counts it concerns, and it holds no
-    adoption.
+  - Where the house best packing has an algebraic side, the count draws its exact house
+    and its regularization stays owed under think-mbdw, as the `owed` of its `SETTLED`
+    entry: no rational view is `same` or `bound` at an irrational side, and no
+    number-field view is decided on two exact routes yet (the policy’s obligation 1;
+    think-mbdw is that second route).
+    A rational view just above an algebraic U is not drawn.
+    The owner answered question 13 so on 23 October 2026 (think-r8cn): the best record
+    is always the record, and a regularized drawing may change the side only as a strict
+    improvement.
 - **A conjectured optimum** that the new house best packing is below, wherever its print
   rounds, is withdrawn, and any other stays; the adoption goes ahead either way.
 
