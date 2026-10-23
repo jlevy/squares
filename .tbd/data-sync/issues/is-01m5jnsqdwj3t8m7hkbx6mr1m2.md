@@ -5,7 +5,7 @@ title: Inventory site hierarchy and plan intuitive navigation menus
 kind: task
 status: in_progress
 priority: 2
-version: 47
+version: 48
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
 delegate: navigation-planner
 labels: []
@@ -54,11 +54,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T20:45:47.321Z
-updated_at: 2026-10-23T01:45:01.124Z
+updated_at: 2026-10-23T01:45:57.682Z
 started_at: 2026-10-22T20:46:24.554Z
 ---
 Implement and validate the site navigation redesign in PR #737: category menus, dedicated destination pages, canonical labels and breadcrumbs, shared typography and layout, and associated design-system refinements.
 
 ## Notes
 
-PR #737 implementation and live review. Shared design rules: 35em/630px prose with card-group edges aligned; sans navigation/metadata; text-only footer; canonical destination labels except Overview H1 The Square Packing Problem; homepage sections Visual Atlas and Results; no breadcrumb on standalone Overview/News; plain category breadcrumbs; Report a Result last in Results. Menu keeps original down-closed/up-open endpoints and reverses its animation (-180deg opening). Button text uses the shared subtle caps-spacing token. Recent Results is one arrival-ordered table: every registered result once, newest seven calendar dates initially visible, earlier rows collapsed in the same table, all rows accessible without JavaScript; tracked by think-vasz and think-oala. Verification material moves off Results Archive into verification.html; detailed Project Epistemics remains epistemics.html, linked by a button and real-parent breadcrumb; tracked by think-7r1w and think-6rnk. think-kmpp tracks final rebuild, browser review, registry/link checks, CI fixes and current-head PR validation. Plan: docs/project/specs/active/plan-2026-10-22-site-navigation.md. Keep implementation and validation states distinct; PR remains draft while live review and current-head checks are incomplete.
+PR737 implementation now targets ready-to-merge review, with NO merge requested. Current hierarchy: Overview/News/Results/Learn/About; Visual Atlas all324 packings, separate Frontier Survey (think-mdrd), one canonical sortable/filterable All Results at results.html and Recent compatibility route (think-6ts0), Learn Tutorials-first plus Read Papers (think-dq6a). Standalone introductions are serif; nav/controls/metadata sans. 35em/630px prose/cards and header-logo breadcrumbs complete; standalone Overview/News have none. Latest case popover controls/math pager/responsive visual refinements completed think-5fdy. Nine historical completed/superseded beads reconciled; obsolete renderer/Atlas script cleanup stays deferred think-31fw. Test migrations think-mcog/0rue/2uiv completed with receipts. Remaining acceptance: alias-controller initialization fix/regression, latest requested All Results topic-neutral styling, final source review, refreshed full web/Workbench preview, current-head Packing and Pages CI, final accurate PR body and ready status. think-kmpp owns assembled acceptance; think-z3lz monitors current CI. Keep parent open until these are actually done; draft remains while gates unfinished. Plan docs/project/specs/active/plan-2026-10-22-site-navigation.md.
