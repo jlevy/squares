@@ -2423,6 +2423,44 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
         ),
         paths=(
+            "packing/devtools/build_known_best_atlas.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/flip_regularization.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/render_case_pages.py",
+            "packing/devtools/render_frontier_page.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Flip regularization (think-l2i6, regularization policy section 13), which "
+            "draws each count's default picture in its canonical pose on the posters and "
+            "the site, against main 7335d009 (#752): rendered at link revision 7335d009 "
+            "into empty site directories, once from main and once from this branch "
+            "(69 files each), render_n11_lower_bounds_explainer, with its pinned Chromium "
+            "math pass, render_n11_optimality_review, render_n11_threshold_bound_review "
+            "and render_packing_methods write every file byte-identical. The papers link "
+            "the atlas poster by address and draw no default picture themselves. No PDF "
+            "was printed; each prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and "
+            "v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
             "packing/campaign/result-requests.yaml",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
