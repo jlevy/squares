@@ -404,6 +404,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-226",
         "T-227",
         "T-228",
+        "T-230",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -445,6 +446,8 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # T-228), registered the same day, are superseded from registration.
     # The adoption of 23 October 2026 took 105 and 204 to Mykhailo Polkovskyi's re-solves
     # (T-229); T-174 and T-225 keep their other houses, so it supersedes no more entries.
+    # The adoption of 24 October 2026 took 303 to Amund Kristiansen's certificate (T-238),
+    # the only house of Evan Daniel's #728 certificate (T-230), which it supersedes.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records
