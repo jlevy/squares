@@ -8680,6 +8680,25 @@ results:
       - packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/README.md
       - docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md
     controls: [packing/tests/test_replay_chelokot_lean.py]
+    reviews:
+      - path: docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md
+        kind: adversarial
+        reviewer: >-
+          AI agent at extra-high reasoning, lane A of think-589i, the W2 factual review of
+          T-007
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-02'
+        scope: >-
+          chelokot's s(k^2 - 2) = k as the Nagamochi 2005 gap leaves it: the final
+          statement Records.NearSquare.squareMinusTwo_isMinimumSide and the definitions it
+          is written in (Geometry.lean) read against this record's s(n), and the archive's
+          axiom audit read; nothing was built or replayed in the review, whose recommended
+          replay and axiom receipt E-chelokot-square-minus-two-lean now retains. Mapped on
+          2026-10-23 (think-mt6e); it was an artifact of this entry from registration.
+        verdict: accepted
+        checked: [statement-fidelity, definitions]
+        covers: [T-086]
     next_rung: >-
       Rung 4 needs two adversarial AI reviews by distinct reviewers and a human oversight
       record; rung 5 needs a named human expert's review of the formalization, and C5 two,
@@ -12370,7 +12389,10 @@ results:
       rationale: Twelve confirmed case-bound improvements, adding seven counts and tightening five
         submitted bounds; no exact optimum or general theorem is established.
       scored: '2026-10-07'
-      by: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+      by: >-
+        the repository's import triage of 7 October, kept when
+        docs/project/reviews/review-2026-10-07-squish-update-mathematics.md accepted the
+        certificates; that review does not assess significance
     novelty: previously-published
     attribution:
       source_keys:

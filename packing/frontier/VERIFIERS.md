@@ -25,14 +25,15 @@ second implementation agrees.
 
 ## The Short Version
 
-- **191** programs: **51** external and **140** first-party; **129** decide claims and **62** check premises.
-- **581** of **718** evidence entries name the programs that verified them: 277 reproduced with the producer’s code, 254 independently re-implemented, 31 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
+- **195** programs: **52** external and **143** first-party; **131** decide claims and **64** check premises.
+- **582** of **719** evidence entries name the programs that verified them: 278 reproduced with the producer’s code, 254 independently re-implemented, 31 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
 
 ## Programs
 
 | id | program | author | provenance | role | evidence | results |
 | --- | --- | --- | --- | --- | ---: | ---: |
-| [`V-evand-verify-exact`](#v-evand-verify-exact) | verify_exact.py | Evan Daniel | external | decides | 1 | 1 |
+| [`V-evand-verify-exact`](#v-evand-verify-exact) | verify_exact.py | Evan Daniel | external | decides | 2 | 1 |
+| [`V-evand-gradec-py`](#v-evand-gradec-py) | gradec.py | Evan Daniel | external | decides | 1 | 0 |
 | [`V-evand-639-replay-driver`](#v-evand-639-replay-driver) | replay_verify_exact.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | Hosono | external | decides | 89 | 14 |
@@ -140,6 +141,7 @@ second implementation agrees.
 | [`V-evand-regularized-1020-review-check`](#v-evand-regularized-1020-review-check) | review_t225_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-couzo-670-672-675-review-check`](#v-couzo-670-672-675-review-check) | review_0nse_check.py | Squares Project (Levy) | first-party | decides | 3 | 3 |
 | [`V-mishapolk-719-review-check`](#v-mishapolk-719-review-check) | review_t229_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-evand-gradec-review-check`](#v-evand-gradec-review-check) | check_theorem_c.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-evand-regularized-1020-review-controls`](#v-evand-regularized-1020-review-controls) | sharp_controls_t225.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-couzo-670-672-675-review-controls`](#v-couzo-670-672-675-review-controls) | sharp_controls_0nse.py | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-mishapolk-719-review-controls`](#v-mishapolk-719-review-controls) | sharp_controls_t229.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -223,6 +225,8 @@ second implementation agrees.
 | [`V-sq19-review-native-count`](#v-sq19-review-native-count) | count_native.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-acquire-source`](#v-acquire-source) | devtools.acquire_source | Squares Project (Levy) | first-party | premises | 3 | 2 |
 | [`V-couzo-678-review-identity`](#v-couzo-678-review-identity) | identity_260.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-evand-gradec-review-compare`](#v-evand-gradec-review-compare) | compare_certificates.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-evand-gradec-review-derivatives`](#v-evand-gradec-review-derivatives) | test_derivatives.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 
 ## By Program
 
@@ -239,6 +243,21 @@ The source's standard-library checker of an exact configuration over a number fi
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-evand-639-verify-exact-replay` | replayed here | reproduced with the producer’s code | full: the source's exact forms, one exact configuration a count: all 23 files of search/exact/cur/data at 7d1407a, the 16 in scope among them, each decided whole | T-193 |
+| `E-evand-gradec-local-minima-233-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
+
+### `V-evand-gradec-py`
+
+**gradec.py** · Evan Daniel · external · decides · Python · exact-algebraic
+
+The source's grade-C certificate builder and checker in one program: rows from a contacts file, each tight and classed exactly in Q[t]/f; the flat family and null L0 by exact sparse elimination; affine null vectors for hypothesis 2 of Theorem C; exact multipliers from a linear program's candidate; and the reduced Hessian's leading minors as sums over all permutations, with signs by interval arithmetic at t*. It does not decide that the record is a packing.
+
+- Source: [`packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/gradec.py`](../../packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/gradec.py)
+- Versions run: SHA-256 `61dcf21c2c05…`, revision `ad86d42d0f74` (Git blob 93374b5a4296bfb6d99dd29aa574febcd356e273, byte-identical at 31523f8, the release's tag commit; it imports localmin.py, verify_exact.py and geom.py from its directory, retained beside it.)
+- Note: Run here once, at n = 10, from a copy outside the repository on 12 October 2026 (receipts/gradec-n10-recompute.json in the evand-exact-data-2026-10-12 packet), with output byte-identical to the published certificate. The source ran it on all 250 configurations of field degree at most 4 (gradec_runs/run.sh).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-evand-gradec-local-minima-233-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
 
 ### `V-evand-639-replay-driver`
 
@@ -2334,6 +2353,20 @@ The 22 October review's standard-library exact checker of the two certificates T
 | --- | --- | --- | --- | --- |
 | `E-mishapolk-719-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair, on each of the checker's two routes, from the derived facts and from the source's files | T-229 |
 
+### `V-evand-gradec-review-check`
+
+**check_theorem_c.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+For Evan Daniel's grade-C configurations, decides exactly in Q[t]/f, with signs by interval arithmetic at t*, the hypotheses of Theorem C as the 23 October review repairs it: the record is a packing in [0, S]^2; every kept row is tight and is a wall row, an interior incidence or one of a complete side-end pair; exact multipliers are positive and balance e_S; the flat family F and a complement W of it span null L0; affine null vectors exist, found one linear system per null vector and flat direction from each row's tangential slip; the F x W block of the Lagrangian Hessian vanishes; and the Hessian is positive definite on W by an exact LDL^T.
+
+- Source: [`packing/resources/web/evand-exact-data-2026-10-12/review/check_theorem_c.py`](../../packing/resources/web/evand-exact-data-2026-10-12/review/check_theorem_c.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md`](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
+- Independence: its authors read mathematics, proof-text, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023, think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's CREDITS.md says its work was produced by Claude (Anthropic) under human direction, and its commits credit Claude as co-author. Written by a Claude agent prompted separately from the source and from the import and records lanes, in a file of its own that imports none of the source and does its arithmetic with CPython's int and fractions.Fraction, not python-flint.
+- Note: Written and run on 23 October 2026 by the review, on all 233 configurations; kept in the evand-exact-data-2026-10-12 packet's review/ with its README, the receipts in its receipts/. It is the review lane's own checker, so its run is a second route beside the rung, and the claim's C3 waits on gradec.py's replay (think-mtah). No evidence entry cites it yet: the run's entry is drafted in think-7scz for the registration, since devtools.check_certificate_citations needs a case record to cite a verified certificate, or a deferral naming the register entry that cites it, which lapses after 30 days, and no case record has a block for local minimality (think-8xy2).
+
+No evidence entry names it yet.
+
 ### `V-evand-regularized-1020-review-controls`
 
 **sharp_controls_t225.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
@@ -3868,6 +3901,34 @@ Compares three n = 260 packings, T-196's, the evand 14a9af8 seed and issue 678's
 - What its authors read and used: [`docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md`](../../docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md)
 - Independence: its authors read certificate-format, producer-output, earlier-review; it shares CPython's fractions.Fraction, to read the exact poses; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 678 (c-review-678-fable, think-xu4d), strong tier, maximum reasoning), with its own prompt; authorship in common with the producer’s: system-family, As for V-couzo-678-review-check, in a file of its own.
 - Note: Measures the identity statement of issue 678's comment of 19 October; no evidence entry cites it. Its log is the records lane's rerun of 20 October 2026, unchanged.
+
+No evidence entry names it yet.
+
+### `V-evand-gradec-review-compare`
+
+**compare_certificates.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Compares check_theorem_c.py's receipts with the source's 233 published n-N.gradec.json, read in memory from gradec-233.tar.zst: the row set, the rank of L0, dim F, dim W, the moving squares and the number of load-bearing squares exactly, and the interior margin and least multiplier numerically. It decides nothing about a packing.
+
+- Source: [`packing/resources/web/evand-exact-data-2026-10-12/review/compare_certificates.py`](../../packing/resources/web/evand-exact-data-2026-10-12/review/compare_certificates.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md`](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
+- Independence: its authors read certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023, think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's CREDITS.md says its work was produced by Claude (Anthropic) under human direction, and its commits credit Claude as co-author. Written by a Claude agent prompted separately from the source and from the import and records lanes, in a file of its own that imports none of the source.
+- Note: Written and run on 23 October 2026 by the grade-C review (think-7scz); its output is receipts/review-compare-233.json in the evand-exact-data-2026-10-12 packet. No evidence entry cites it until the grade-C claim is registered, as for V-evand-gradec-review-check.
+
+No evidence entry names it yet.
+
+### `V-evand-gradec-review-derivatives`
+
+**test_derivatives.py** · Squares Project (Levy) · first-party · checks premises · Python · numerical-f64
+
+Tests the closed-form gradients and Hessians of the rows that check_theorem_c.py uses against central differences of the row functions written from their definitions, in binary64, on every row of fifteen grade-C configurations. It decides nothing about a packing.
+
+- Source: [`packing/resources/web/evand-exact-data-2026-10-12/review/test_derivatives.py`](../../packing/resources/web/evand-exact-data-2026-10-12/review/test_derivatives.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md`](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
+- Independence: its authors read mathematics, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023, think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's CREDITS.md says its work was produced by Claude (Anthropic) under human direction, and its commits credit Claude as co-author. Written by a Claude agent prompted separately from the source and from the import and records lanes, in a file of its own that imports none of the source.
+- Note: Written and run on 23 October 2026 by the grade-C review (think-7scz); its output is receipts/review-derivatives.json in the evand-exact-data-2026-10-12 packet. No evidence entry cites it until the grade-C claim is registered, as for V-evand-gradec-review-check.
 
 No evidence entry names it yet.
 

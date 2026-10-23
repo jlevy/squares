@@ -1,0 +1,42 @@
+{
+ "format": "evand-gradec-review-derivatives-v1",
+ "ran_on": "2026-10-23",
+ "bead": "think-7scz",
+ "program": {
+  "path": "review/test_derivatives.py",
+  "sha256": "f62834e90aa1211b82b1fdf5ed4c367502222430cbe54feccf47fd63d85f2fb7",
+  "tests": {
+   "path": "review/check_theorem_c.py",
+   "sha256": "01b1a3e1d5ccff3f8f820401a0d76155c3cfc7be66a8562b23c00ff9e8f65cfd"
+  }
+ },
+ "command": "python3 -I test_derivatives.py --minpoly-dir DATA --archive gradec-233.tar.zst 5 10 19 53 54 66 70 107 127 150 153 175 178 230 267",
+ "counts": [
+  5,
+  10,
+  19,
+  53,
+  54,
+  66,
+  70,
+  107,
+  127,
+  150,
+  153,
+  175,
+  178,
+  230,
+  267
+ ],
+ "why_these": "every field type (degree 1, 2 and 4, n = 53 with the large quartic), interior and side-end rows, rows dropped beyond a side end (66, 127, 150, 175), the drop-zero count 230's full row list, and n = 5 with no flat family",
+ "step": 1e-05,
+ "rows_tested": 5646,
+ "max_gradient_error": 1.2717565889275306e-10,
+ "max_hessian_error": 2.6603982405559723e-05,
+ "thresholds": {
+  "gradient": 1e-06,
+  "hessian": 0.001
+ },
+ "verdict": "PASS",
+ "decides": "nothing about a packing: it tests the closed-form row derivatives check_theorem_c.py uses against central differences of the row functions in binary64; the Hessian error is at the level of a second difference's rounding for this step"
+}

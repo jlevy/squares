@@ -117,7 +117,8 @@ Every list in the records that holds work back for later was checked for the sam
   2026-10-05. The answer bead owns the reply, not the import, so a queued item now names
   its own `bead`. The schema leaves it optional until the three queued items open on
   2026-10-05, which other lanes are importing, carry one; the sweep reports each until
-  then.
+  then. *Note, 2026-10-23:* the schema now requires it, and `check_bead_tree` fails a
+  queued item that names none (`think-du1e`).
 - **A register entry’s `activity`** expires: `check_results` refuses one more than 30
   days older than `last_reviewed`. It may link a branch or a file rather than a bead, so
   it is left to that rule.
