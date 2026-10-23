@@ -124,6 +124,17 @@ $defs:
                 The open bead that does what a queued ask asks. The answer bead owns the
                 reply, not the work, so a queued ask without one is reported as unowned.
             blocked_on: {$ref: '#/$defs/blocked_on'}
+      awaiting_author:
+        type: array
+        description: >-
+          Questions a reply put to the issue's author whose answer would change the
+          record: the credit or lineage of a result, or which file or commit a claim
+          means. An issue is closeable only when none is awaited, and the answer bead owns
+          each one. A question whose answer would change nothing in the record is not
+          recorded here: it goes in the closing comment, which says that an answer is
+          still welcome and holds nothing open (campaign/result-import.md, stage 7). The
+          owner's instruction of 23 October 2026 is why.
+        items: {$ref: '#/$defs/question'}
       beads:
         type: array
         uniqueItems: true
@@ -150,6 +161,47 @@ $defs:
           required: [kind]
         then:
           not: {required: [intake]}
+  question:
+    type: object
+    additionalProperties: false
+    required: [question, changes, asked, state]
+    description: >-
+      One question awaiting the author: what was asked, what in the record its answer
+      would change, the reply that asked it, and whether it is still awaited.
+    properties:
+      question: {type: string, minLength: 1}
+      changes:
+        enum: [credit, lineage, file]
+        description: >-
+          What the answer would change in the record: who is credited with a result, what
+          it was derived from, or which file or commit a claim names.
+      asked:
+        $ref: '#/$defs/comment_url'
+        description: The recorded reply on this issue that asked it.
+      state:
+        enum: [awaiting, answered, withdrawn]
+        description: >-
+          `answered` once the author's answer is read into the record, naming the comment
+          in `answer`; `withdrawn` when the record no longer needs it, saying why in
+          `note`.
+      answer:
+        $ref: '#/$defs/comment_url'
+        description: The author's comment that answered it.
+      note: {type: string, minLength: 1}
+    allOf:
+      - if:
+          properties: {state: {const: answered}}
+          required: [state]
+        then:
+          required: [answer]
+      - if:
+          properties: {state: {const: withdrawn}}
+          required: [state]
+        then:
+          required: [note]
+  comment_url:
+    type: string
+    pattern: "^https://github\\.com/[\\w.-]+/[\\w.-]+/issues/[0-9]+#issuecomment-[0-9]+$"
   result:
     type: object
     additionalProperties: false

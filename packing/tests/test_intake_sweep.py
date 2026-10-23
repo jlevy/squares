@@ -811,6 +811,7 @@ def test_the_report_leads_with_what_needs_action() -> None:
             items=[
                 sweep.Item("orphan", sweep.NEEDS_OWNER, step="open a bead"),
                 sweep.Item("stalled", sweep.RESOLVED, step="resume it"),
+                sweep.Item("settled", sweep.CLOSEABLE, step="close it"),
                 sweep.Item("held", sweep.OWNED, bead="think-aaaa", bead_state="open"),
             ],
             unchecked=["a source: skipped"],
@@ -819,13 +820,74 @@ def test_the_report_leads_with_what_needs_action() -> None:
     report = sweep.markdown(sections, TODAY)
     assert (
         "1 item without an open bead to own it, 1 item whose blocker has resolved, "
-        "1 item owned by an open bead, and 1 source not checked." in report
+        "1 closeable issue still open, 1 item owned by an open bead, and 1 source not "
+        "checked." in report
     )
     assert report.index("## Needs Action") < report.index("## Not Checked")
     assert report.index("## Not Checked") < report.index("## Source")
     assert "| Source | orphan | needs an owner |  | open a bead |" in report
+    assert "| Source | settled | closeable, still open |  | close it |" in report
     assert "| held | owned | think-aaaa (open) |  |" in report
-    assert sweep.needing_action(sections) == sections[0].items[:2]
+    assert sweep.needing_action(sections) == sections[0].items[:3]
+
+
+def _settled(**extra: Any) -> dict[str, Any]:
+    """An open issue with every result settled and nothing queued: closeable."""
+    return _issue(
+        results=[
+            {"key": "beyond", "claim": "a bound", "not_registered": "a row", "queued": False}
+        ],
+        asks=[],
+        replies=[
+            {
+                "url": "https://github.com/jlevy/squares/issues/300#issuecomment-1",
+                "date": "2026-10-03",
+                "kind": "import",
+                "reported": [{"result": "beyond"}],
+            }
+        ],
+        **extra,
+    )
+
+
+def test_every_closeable_issue_still_open_needs_action() -> None:
+    """The owner's instruction of 23 October 2026: twelve closeable issues were open and
+    nothing listed them, so a settled issue's close is owed until it is done."""
+    beads = _beads(**{"think-bbbb": "in_progress"})
+    (item,) = _queues([_settled()], beads).items
+    assert (item.what, item.state, item.bead, item.since) == (
+        "#300 is closeable and still open",
+        sweep.CLOSEABLE,
+        "think-bbbb",
+        "2026-10-03",
+    )
+    assert "check_requests --draft N" in item.step
+    assert sweep.needing_action([sweep.Section("queues", items=[item])]) == [item]
+    assert _queues([_settled(state="closed")], beads).items == []
+
+
+def test_a_question_awaiting_the_author_holds_the_issue_open_and_the_answer_bead_owns_it() -> (
+    None
+):
+    asked = {
+        "question": "Was the seed T-186's packing?",
+        "changes": "lineage",
+        "asked": "https://github.com/jlevy/squares/issues/300#issuecomment-1",
+        "state": "awaiting",
+    }
+    beads = _beads(**{"think-bbbb": "in_progress"})
+    (item,) = _queues([_settled(awaiting_author=[asked])], beads).items
+    assert (item.what, item.state, item.bead, item.since) == (
+        "#300 awaits the author (lineage): Was the seed T-186's packing?",
+        sweep.OWNED,
+        "think-bbbb",
+        "2026-10-03",
+    )
+    orphaned = _queues([_settled(awaiting_author=[asked])], _beads(**{"think-bbbb": "closed"}))
+    assert [i.state for i in orphaned.items] == [sweep.NEEDS_OWNER]
+    withdrawn = {**asked, "state": "withdrawn", "note": "The manifest settles it."}
+    (close,) = _queues([_settled(awaiting_author=[withdrawn])], beads).items
+    assert close.state == sweep.CLOSEABLE
 
 
 def test_a_capture_holds_the_page_its_transcription_under_the_archive_header_and_a_receipt(

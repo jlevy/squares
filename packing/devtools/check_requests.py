@@ -19,8 +19,17 @@ register together and stores none of it:
   the last reply that stated that rung or status of the entry, or past the last reply
   that named it, or no reply has named it: a new id, a moved rung, a renumbered id, a
   defect, or a statement the record marks out of date;
-- **closeable**, when every result is confirmed or refuted (a reported defect: recorded)
-  and nothing the author asked for is queued.
+- **closeable**, when every result is confirmed or refuted (a reported defect: recorded),
+  nothing the author asked for is queued, and no question put to the author awaits an
+  answer that would change the record (`awaiting_author`: credit, lineage, or which file).
+
+A closeable issue still open is owed its final comment and its close, at stage 7 after
+the verified deploy. The owner's instruction of 23 October 2026 made that the standard
+step, after twelve closeable issues were found open: nothing ran the close, and lanes held
+issues open for questions to the author that the record did not track and whose answers
+would change nothing in it. A question whose answer would change the record is recorded
+under `awaiting_author` and holds its issue open; any other question goes in the closing
+comment.
 
 Modes, from ``packing/`` with the project interpreter::
 
@@ -108,6 +117,14 @@ DEFECT = "defect recorded"
 OPEN = "open"
 QUEUED = "queued"
 NOT_REGISTERED = "not registered"
+#: The state of a question to the author (`awaiting_author`) whose answer has not come.
+AWAITING = "awaiting"
+#: What an awaited answer would change in the record, as a reply to the author says it.
+CHANGES = {
+    "credit": "the credit the record gives",
+    "lineage": "the lineage the record states",
+    "file": "which file or commit the record names",
+}
 
 BEAD = re.compile(r"\bthink-[a-z0-9]{4}\b")
 _ID_ON_MAIN = re.compile(r"\bid: (T-\d{3}|E-[A-Za-z0-9.-]+)")
@@ -675,6 +692,16 @@ def replies_due(issue: Mapped, states: Sequence[ResultState]) -> list[str]:
     return due
 
 
+def awaited(issue: Mapped) -> list[Mapped]:
+    """The questions put to the author that still await an answer: each would change the
+    record, so each holds the issue open."""
+    return [
+        question
+        for question in issue.get("awaiting_author", ())
+        if question["state"] == AWAITING
+    ]
+
+
 def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[str]]:
     """Whether the issue can be closed with a final comment, and what stops it."""
     blockers: list[str] = []
@@ -683,6 +710,10 @@ def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[
     blockers.extend(f"{state.key} is {state.state}" for state in states if not state.settled)
     blockers.extend(
         f"asked: {ask['what']}" for ask in issue.get("asks", ()) if ask["state"] == "queued"
+    )
+    blockers.extend(
+        f"awaiting the author ({question['changes']}): " + str(question["question"]).rstrip(".")
+        for question in awaited(issue)
     )
     return not blockers, blockers
 
@@ -736,6 +767,32 @@ def _reply_problems(issue: Mapped, repository: str, ids: dict[str, set[str]]) ->
     return problems
 
 
+def _question_problems(issue: Mapped, repository: str) -> list[str]:
+    """Each question to the author must have been asked in a reply recorded here, and
+    answered, if at all, on this issue; and no closed issue may still await one."""
+    number = issue["number"]
+    recorded = {str(reply["url"]) for reply in issue.get("replies", ())}
+    problems: list[str] = []
+    for question in issue.get("awaiting_author", ()):
+        asked = str(question["asked"])
+        if asked not in recorded:
+            problems.append(
+                f"#{number}: the question {question['question']!r} was asked in {asked}, "
+                "which is not a reply recorded here"
+            )
+        answer = question.get("answer")
+        match = _REPLY_URL.match(str(answer)) if answer else None
+        if answer and (
+            not match or match.group(1) != repository or int(match.group(2)) != number
+        ):
+            problems.append(f"#{number}: the answer {answer} is not a comment on this issue")
+        if question["state"] == AWAITING and issue["state"] == "closed":
+            problems.append(
+                f"#{number}: closed while a question awaits the author: {question['question']}"
+            )
+    return problems
+
+
 def problems(record: Mapped, register: Register) -> list[str]:
     """What is wrong with the record: its schema, and every id it names.
 
@@ -772,6 +829,7 @@ def problems(record: Mapped, register: Register) -> list[str]:
                 if ident not in register.evidence
             )
         found.extend(_reply_problems(issue, repository, ids))
+        found.extend(_question_problems(issue, repository))
     return found
 
 
@@ -821,6 +879,7 @@ def summary_lines(record: Mapped, register: Register) -> list[str]:
         marks = [
             "reply due" if state.replies_due else "",
             "closeable" if state.closeable and issue["state"] == "open" else "",
+            "awaiting the author" if awaited(issue) else "",
         ]
         lines.append(
             f"  #{issue['number']:<4} {issue['state']:<7}{progress:<16}"
@@ -914,6 +973,16 @@ def _issue_section(issue: Mapped, state: IssueState, on_main: set[str] | None) -
     else:
         lines.append("Reply due: no.")
     lines.append("")
+    questions = issue.get("awaiting_author", ())
+    if questions:
+        lines.append("Questions to the author:")
+        lines += [
+            f"- {question['state']}, the answer would change the record's "
+            f"{question['changes']}: "
+            f"{_cell(str(question['question']))} ([asked]({question['asked']}))"
+            for question in questions
+        ]
+        lines.append("")
     if issue["state"] == "closed":
         lines.append("Closeable: the issue is closed.")
     elif state.closeable:
@@ -1202,6 +1271,15 @@ def draft(issue: Mapped, register: Register, repository: str) -> str:
         lines += ["**What is still queued, and how it will be completed.**", ""]
         lines += [f"- {line}" for line in queued]
         lines.append("")
+    questions = awaited(issue) if issue["state"] == "open" else []
+    if questions:
+        lines += ["**Waiting on your answer.**", ""]
+        lines += [
+            f"- {question['question']} ([asked]({question['asked']})) The answer would "
+            f"change {CHANGES[str(question['changes'])]}."
+            for question in questions
+        ]
+        lines.append("")
     links = _links(state.results, register, base)
     if links:
         lines += ["**On `main`.** " + ", ".join(links) + ".", ""]
@@ -1210,6 +1288,14 @@ def draft(issue: Mapped, register: Register, repository: str) -> str:
     elif state.closeable:
         lines += [
             "Nothing you asked for is queued, so this issue is closed with this comment.",
+            "",
+        ]
+    elif questions:
+        lines += [
+            (
+                "This issue stays open while anything above is queued or waits on your "
+                "answer, and a reply follows each change in the record."
+            ),
             "",
         ]
     else:

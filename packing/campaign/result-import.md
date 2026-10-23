@@ -93,10 +93,13 @@ W1 phase on one branch:
    the next change ([stage 7](#stage-7-answer)). Where a ledger decided the pass’s
    counts, each result issue also gets a
    [report-order verdict comment](#report-order-verdict-comments).
+   Once the deploy is verified, run `check_requests --report` and close each closeable
+   issue with its final comment ([Close a Settled Issue](#close-a-settled-issue)).
 8. **Sweep again** with `make intake`, after the branch’s changes to the records and
    again after the merge.
    The sweep, like `check_requests --report`, is what finds the replies due: it lists
-   `#N owes a reply` until a recorded reply covers the issue’s state.
+   `#N owes a reply` until a recorded reply covers the issue’s state, and lists each
+   closeable issue still open under **Needs Action** until it is closed.
    Each new item it finds is triaged read-only, with a proposed disposition, before any
    of it is worked ([stage 1](#stage-1-triage)). The pass is done when nothing needs
    action, every count it re-housed is regularized or owned by an open bead under
@@ -206,7 +209,11 @@ claude/intake-YYYY-MM-DD, with today's date.
    (runbook stage 5, "Verify the Published Result"), post it, and record it under the
    issue's replies in result-requests.yaml in the next change. Where the ledger
    decided the pass's counts, draft each result issue's verdict comment with
-   devtools.intake_comments (stage 7, "Report-Order Verdict Comments").
+   devtools.intake_comments (stage 7, "Report-Order Verdict Comments"). Once the
+   deploy is verified, run `check_requests --report` and close each closeable issue
+   with its final comment (stage 7, "Close a Settled Issue"); a question to the
+   author whose answer would change the record goes under the issue's
+   awaiting_author and holds it open, and any other goes in the closing comment.
 9. Run `make intake` again, and again after the merge: it and
    `check_requests --report` list the replies still due, and its "Regularization
    owed" lists every count still pending where this pass changed the house best
@@ -1198,10 +1205,49 @@ What lets an agent post is the `github-workflows` grant, which covers issues.
   ([After the Merge](#after-the-merge)).
 - The reply that reports a confirmation names the programs that ran, and says whether
   they were the author’s own code re-run or a re-implementation.
-- The issue is closed with a final comment when nothing the author asked for is queued.
+- **A settled issue is closed with its final comment**, after the verified deploy, once
+  nothing the author asked for is queued and no question to the author would change the
+  record: [Close a Settled Issue](#close-a-settled-issue).
 - **Every S4 or S5 result gets a News item** in the first change after the merge that
   registered or raised it:
   [Announce a Significant Result](#announce-a-significant-result).
+
+### Close a Settled Issue
+
+The owner’s instruction of 23 October 2026: “if we have actually imported something,
+it’s already on the website, and we validated that, we should close the issues.
+That should be our standard process.”
+What is unresolved, or needs the reporter’s answer, stays open.
+That morning twelve issues were closeable and open: nothing ran the closing step, the
+sweep did not list them, and lanes had kept issues open for questions to their authors
+that the record did not track and whose answers would change nothing in it.
+
+1. **After the verified deploy**
+   ([Verify the Published Result](#verify-the-published-result)), run
+   `check_requests --report` from `main` and take each issue it marks closeable that is
+   still open on GitHub.
+2. **Check that `main` and the deployed site say what the final comment will say**,
+   render the comment with `check_requests --draft N`, and edit it to the house style:
+   what is settled and where, linked into `main` and the site, then that nothing the
+   author asked for is queued, so the comment closes the issue.
+3. **Put an informational question in the closing comment**, saying that an answer is
+   still welcome and holds nothing open.
+   A question whose answer would change the record (the credit or lineage of a result,
+   or which file or commit a claim names) is recorded instead, under the issue’s
+   `awaiting_author`, naming the reply that asked it and what the answer would change.
+   It holds the issue open: `check_requests` counts it against closeable, and the sweep
+   lists it under the answer bead.
+   When the answer comes, read it into the record and mark the question `answered`,
+   naming the comment; when the record no longer needs it, mark it `withdrawn`, with a
+   note saying why.
+4. **Post the comment and close the issue** under the `github-workflows` grant, then
+   record the comment under the issue’s `replies` as `final` and set the entry’s `state`
+   and `closed` in the next change.
+   Close the answer bead once the record no longer names it on an open issue, which
+   `check_bead_tree` checks.
+
+Each six-hourly check-in of a running pass does the same.
+Until an issue is closed, `make intake` lists it under **Needs Action** and exits 1.
 
 ### Announce a Significant Result
 
@@ -1330,7 +1376,11 @@ stating a field, leaves the earlier statement standing.
 Each reason quotes the one reply it holds a field to, by its date, and by its kind or
 its address where the issue has another reply that day.
 An issue is **closeable** when triage is done, every result is confirmed or refuted (a
-reported defect: recorded against the entry it names), and no `ask` is queued.
+reported defect: recorded against the entry it names), no `ask` is queued, and no
+question under `awaiting_author` awaits the author’s answer.
+`awaiting_author` holds only the questions whose answers would change the record:
+`changes` says whether the credit, the lineage, or which file or commit a claim names,
+and `asked` is the recorded reply that asked it.
 
 A confirmation is described from the confirming evidence’s `relationship_to_generator`:
 *reproduced with the author’s own checker* for `same-implementation`, *re-verified by an
@@ -1368,7 +1418,8 @@ broken record.
    kind, and in `reported` the id, rungs and status it stated for each result.
    Name in `corrects` any earlier reply whose `outdated` statements it corrects.
 4. When `--report` says an issue is closeable, close it with the final comment and set
-   the entry’s `state` and `closed`.
+   the entry’s `state` and `closed`, as [Close a Settled Issue](#close-a-settled-issue)
+   says.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

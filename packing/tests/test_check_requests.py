@@ -666,6 +666,89 @@ def test_closeable_needs_every_result_settled_triage_done_and_no_ask_queued() ->
     assert check_requests.issue_state(open_result, REGISTER).blockers == ("b is open",)
 
 
+def question(state: str = "awaiting", **over: Any) -> Record:
+    return {
+        "question": "Who made the submission behind the certificate?",
+        "changes": "credit",
+        "asked": URL.format(1),
+        "state": state,
+        **over,
+    }
+
+
+def asking(*questions: Record, **over: Any) -> Record:
+    """A settled issue whose reply of 2 October asked the author `questions`."""
+    return issue(replies=[reply(1)], awaiting_author=list(questions), **over)
+
+
+def test_a_question_whose_answer_would_change_the_record_holds_the_issue_open() -> None:
+    """The owner's instruction of 23 October 2026: a settled issue closes, and only a
+    question to the author whose answer would change the record keeps it open."""
+    assert check_requests.issue_state(asking(), REGISTER).closeable
+    state = check_requests.issue_state(asking(question()), REGISTER)
+    assert not state.closeable
+    assert state.blockers == (
+        "awaiting the author (credit): Who made the submission behind the certificate?",
+    )
+    answered = question("answered", answer=URL.format(2))
+    withdrawn = question("withdrawn", note="The source's manifest settles it.")
+    assert check_requests.issue_state(asking(answered, withdrawn), REGISTER).closeable
+    assert check_requests.awaited(asking(answered, question(changes="lineage"))) == [
+        question(changes="lineage")
+    ]
+
+
+@pytest.mark.parametrize(
+    ("entry", "expected"),
+    [
+        (asking(question(asked=URL.format(9))), "which is not a reply recorded here"),
+        (
+            asking(
+                question(
+                    "answered", answer="https://github.com/owner/repo/issues/8#issuecomment-3"
+                )
+            ),
+            "is not a comment on this issue",
+        ),
+        (
+            asking(question(), state="closed", closed="2026-10-03"),
+            "closed while a question awaits the author",
+        ),
+        (asking(question("answered")), '"answer" is a required property'),
+        (asking(question("withdrawn")), '"note" is a required property'),
+        (asking(question(changes="wording")), "awaiting_author/0/changes"),
+    ],
+)
+def test_a_question_must_be_asked_in_a_recorded_reply_and_answered_on_its_issue(
+    entry: Record, expected: str
+) -> None:
+    assert check_requests.problems(record(asking()), REGISTER) == []
+    found = check_requests.problems(record(entry), REGISTER)
+    assert any(expected in problem for problem in found), found
+
+
+def test_an_awaited_question_is_marked_in_the_gate_the_report_and_the_draft() -> None:
+    entry = asking(question(), question(changes="file", question="Which commit?"))
+    (line,) = check_requests.summary_lines(record(entry), REGISTER)
+    assert line.endswith("awaiting the author")
+    assert "closeable" not in line
+    section = "\n".join(check_requests.report(record(entry), REGISTER, None))
+    assert "Questions to the author:" in section
+    assert "- awaiting, the answer would change the record's file: Which commit?" in section
+    assert "Closeable: no; awaiting the author (credit): Who made" in section
+    text = check_requests.draft(entry, REGISTER, "owner/repo")
+    assert "**Waiting on your answer.**" in text
+    assert (
+        f"- Which commit? ([asked]({URL.format(1)})) The answer would change which file "
+        "or commit the record names." in text
+    )
+    assert "stays open while anything above is queued or waits on your answer" in text
+    assert "closed with this comment" not in text
+    settled = check_requests.draft(asking(question("withdrawn", note="n")), REGISTER, "o/r")
+    assert "Waiting on your answer" not in settled
+    assert "closed with this comment" in settled
+
+
 @pytest.mark.parametrize(
     ("relation", "expected"),
     [
