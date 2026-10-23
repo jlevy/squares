@@ -20,6 +20,8 @@ if TYPE_CHECKING:
 
 from devtools import prepare_n11_lower_bounds_explainer_math, render_n11_lower_bounds_explainer
 from devtools.prepare_n11_lower_bounds_explainer_math import (
+    _MATH_ATTRIBUTES,
+    _MEASURE_MATH,
     GeometryBox,
     GeometryReport,
     MathCoverage,
@@ -33,6 +35,8 @@ from devtools.prepare_n11_lower_bounds_explainer_math import (
     math_slots,
     prepared_html,
 )
+from sqpack.probes import probe
+from tests import site_browser
 
 TESTS = Path(__file__).resolve().parent
 FIXTURES = TESTS / "fixtures" / "prepare_n11_lower_bounds_explainer_math"
@@ -608,3 +612,39 @@ def test_host_fault_control_is_independent_of_rendered_source_formatting(
     assert len(report["findings"]) == 2
     assert print_rejected is True
     assert fallback_rejected is True
+
+
+_GATE = probe(TESTS / "probes", "prepare_math_attribute_order/gate")
+
+
+def test_extraction_serializes_a_lazily_written_style_in_one_place() -> None:
+    """A gate's `style=""` extracts to the same bytes however early Chromium wrote it.
+
+    Two concurrent renders of the explainer once disagreed only on where one formula's
+    `style=""` sat among its attributes (think-qa8b). The fixture's two formulas reach both
+    live orders, which the first assertion pins so the test cannot pass vacuously.
+    """
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        try:
+            page = browser.new_page()
+            page.set_content(
+                (FIXTURES / "attribute-order.html").read_text(encoding="utf-8"),
+                wait_until="load",
+            )
+            early = page.evaluate(_GATE, {"key": "0", "readEarly": True})
+            late = page.evaluate(_GATE, {"key": "1", "readEarly": False})
+            fragments = cast(
+                "list[PreparedFragment]",
+                page.evaluate(_MEASURE_MATH, sorted(_MATH_ATTRIBUTES)),
+            )
+        finally:
+            browser.close()
+    assert early.index("style") < early.index("data-kpress-math-source")
+    assert late.index("style") > late.index("data-kpress-math-display")
+    html = {fragment["key"]: fragment["html"] for fragment in fragments}
+    assert html[0] == html[1]
+    assert (
+        '<span class="kpress-math-render" aria-hidden="true" data-kpress-math-source="n" '
+        'data-kpress-math-display="inline" data-kpress-math-prepared="true" style="">'
+    ) in html[0]

@@ -180,6 +180,16 @@
         delete copy.dataset.done;
       }
       clone.removeAttribute("data-squares-math-key");
+      // Chromium adds a `style` written through CSSOM (the runtime's visibility gate, KaTeX's
+      // nodes, the boxes above) to its element's attribute list only when something first
+      // reads that list, so where it serializes depends on timing: one render put a gate's
+      // `style=""` before its `data-kpress-math-*` and the concurrent twin after them
+      // (think-qa8b). Serialize it last, where it lands when nothing reads the list early.
+      for (const element of clone.querySelectorAll("[style]")) {
+        const style = /** @type {string} */ (element.getAttribute("style"));
+        element.removeAttribute("style");
+        element.setAttribute("style", style);
+      }
       /** @type {Record<string, string>} */
       const attributes = {};
       for (const name of attributeNames) {
