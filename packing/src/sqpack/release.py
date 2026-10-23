@@ -888,6 +888,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.22",
+        first_published="October 23, 2026",
+        result_scope=(
+            "Update the registered result count after the registrations of Hosono's "
+            "fine-net lower bounds at 31 (T-232) and at 19, 20, 26 and 27 (T-233)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.21",
         first_published="October 23, 2026",
         result_scope=(
@@ -1413,6 +1421,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.21",
+        version="v0.4.22",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registrations of Hosono's "
+            "fine-net lower bounds at 31 (T-232) and at 19, 20, 26 and 27 (T-233)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:square-packing-methods-survey",
         previous_version="v0.2.6",
@@ -2415,6 +2433,38 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-232's registration and adoption at 31 (V3/C3 after the 23 October replay "
+            "and review) and T-233's at 19, 20, 26 and 27 (V0/C1), with #446's request "
+            "entry and the coverage entries, against main c1115c095 (#749): rendered at "
+            "link revision 26339a13 into empty site directories, twice from this tree at "
+            "2d32050e4 and twice from main's (69 files each), "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all four. "
+            "Only the explainer's register count differs (230 to 232), and it took "
+            "v0.4.22. No PDF was printed; each prints from that HTML. Retain v0.1.11, "
+            "v0.1.4 and v0.2.7."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
