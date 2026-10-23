@@ -5,15 +5,15 @@ title: "PR #748 A9: retain the cross-branch gate run as a tool (OR-1)"
 kind: bug
 status: open
 priority: 2
-version: 4
+version: 5
 delegate: null
 labels: []
 dependencies: []
-parent_id: is-01m5mn0bde1tg8dr676kbbns6t
+parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:44:05.937Z
-updated_at: 2026-10-23T16:51:04.726Z
+updated_at: 2026-10-23T17:22:43.500Z
 started_at: 2026-10-23T15:44:55.187Z
 ---
 scratchpad gates_on_ref.py; git merge-tree over open intake heads. Severity Suggestion. Review A of PR #748: https://github.com/jlevy/squares/pull/748#issuecomment-6368647934.

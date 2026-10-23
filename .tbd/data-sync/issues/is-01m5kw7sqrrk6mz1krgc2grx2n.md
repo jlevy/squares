@@ -5,14 +5,14 @@ title: Replay sqverify_continuous v4 on T-145's and T-157's densities (the secon
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T07:57:34.328Z
-updated_at: 2026-10-23T07:57:34.328Z
+updated_at: 2026-10-23T17:27:40.025Z
 ---
 The second route for the continuous cover of T-145 and T-157: a complete run here of wand125's sqverify_continuous, reviewed on 23 October 2026 (think-xzob; docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md) with no blocking or major finding. A replay moves the cover's mark to independently re-implemented after reading the producer's code, and no rung.
 
@@ -25,3 +25,7 @@ The second route for the continuous cover of T-145 and T-157: a complete run her
 - Depends on: think-xzob's review (done); the owner's budget; the design of the counted oblique control.
 - Done when: both runs VERIFIED with every root a complete binary cover (nodes = 2 leaves - 1) at or above tau, inherited_roots 0, totals equal to the README's, the controls refused at legal poses with exact captures below tau, receipts retained in the v4 packet, and replayed-here evidence registered for T-145 and T-157 with relationship_to_generator independent-implementation (clean_room false, the author having read the producer's kernel), noting what it shares with V-sqverify-fast.
 - Machine note: CPU-bound, tens of MB resident; at --threads 2 it shares a four-core host with a gate; node counts do not depend on the thread count.
+
+## Notes
+
+2026-10-23 coord-intake-1023: #533 status reply posted at 17:27Z after verifying the deploy (data revision c32b44, which includes #752): https://github.com/jlevy/squares/issues/533#issuecomment-6370778184. It is in the third person, since #533 is the owner's tracking issue. It names this bead and think-0arj as the queued replays, waiting on #543. To be recorded under #533's replies in result-requests.yaml in the next records change (#753 on merge day).
