@@ -7,6 +7,7 @@ from collections.abc import Collection, Mapping
 from copy import deepcopy
 from decimal import Decimal, localcontext
 from fractions import Fraction
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -30,9 +31,21 @@ def superseded_counts(coverage: Mapping[str, Any], source_ids: Collection[str]) 
     }
 
 
+@lru_cache(maxsize=2)
+def _parsed_coverage(text: str) -> Mapping[str, Any]:
+    """The coverage register parsed once per text, for callers that only read it.
+
+    An apply run asks `preserve_selected_case` once per count it writes, and each ask
+    parsed the whole register again: 190 parses, 88 of the 108 seconds
+    `test_the_records_are_what_the_apply_tool_writes` took under profile on 23 October,
+    which put it over the 45-second per-test backstop once the register grew by its seven
+    coverage sources (#748). Keyed by the text, so a write between asks is read anew."""
+    return safe_load(text)
+
+
 def preserve_selected_case(n: int, text: str, source_ids: Collection[str]) -> bool:
     """Preserve an adopted later report, while still admitting earlier drafting inputs."""
-    coverage = safe_load(COVERAGE.read_text())
+    coverage = _parsed_coverage(COVERAGE.read_text())
     if n not in superseded_counts(coverage, source_ids):
         return False
     selected = next(row for row in coverage["selected_overrides"] if row["n"] == n)
