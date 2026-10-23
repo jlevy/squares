@@ -11,7 +11,7 @@ are turned and mirrored against one another. Flip regularization picks, for each
 picture, the symmetry that draws it in its canonical pose, decided in binary64 from where
 its squares lie. It is display only: the renderers apply the pose exactly to the stored
 coordinates, and no witness, view or certificate changes. The plan is
-`docs/project/specs/active/plan-2026-10-23-canonical-orientation.md`.
+`docs/project/specs/active/plan-2026-10-23-flip-regularization.md`.
 
 **Poses.** A `Pose` is the owner's two steps: `rotate` 0, 90, 180 or 270 degrees
 counter-clockwise about the container's centre, then, if `flip`, mirror across the
