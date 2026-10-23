@@ -1,0 +1,33 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "thesnakefang-squarepack-certs",
+  "source_url": "https://github.com/TheSnakeFang/squarepack-certs",
+  "source_ref": "main",
+  "source_commit": "bef5c42d58257fe38ed010a5d1ff9b8fc608df57",
+  "retrieved_at_utc": "2026-10-22T19:10Z",
+  "git_scope": "Bare clone of TheSnakeFang/squarepack-certs (history to 9ffba0f3, fetched 22 October), checked out sparsely at bef5c42 (committed 2026-10-12T19:13:41Z, 'Composites: best j per n for 27 <= n <= 64'), a commit no issue reports. Retained: composites/n027_j1_703.cert and composites/n032_j2_994.cert, which the report-order walk of Couzo's history records as reports, each superseded on entry, and the repository's LICENSE and ATTRIBUTION.md. Pinned by digest only: composites/table.csv, whose recipe bounds with no certificate file of their own are held for the owner's D2 (think-f2io), and README.md. The rest of the tree is pinned by the commit alone; no source file was executed.",
+  "archived_dir": "source",
+  "license": "MIT License, Copyright (c) 2026 Kevin Fang (LICENSE, retained), for verify.py and the tools; ATTRIBUTION.md (retained) releases the certificates, text files and drawings in the nNNNN folders under CC0 1.0 and does not name composites/. The two composite certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data); the copies the couzo-certificates-2026-10-14 packet retains under submissions/2026-10-14/certificates/ are byte-identical. The source discloses that the search, the verifier and the bundle were written and run with Claude (Anthropic), directed and reviewed by Kevin Fang.",
+  "claims": [
+    "TheSnakeFang/squarepack-certs@bef5c42 publishes composite certificates at 703 and 994, each the exact rational side in its header; each is a report by the order it reached the repository and is superseded on entry.",
+    "composites/table.csv states each composite's side rounded up at 15 places; its rows with no certificate file are held for the owner's D2 (think-f2io). No source program ran here."
+  ],
+  "scope": [
+    "ATTRIBUTION.md",
+    "LICENSE",
+    "README.md",
+    "composites/n027_j1_703.cert",
+    "composites/n032_j2_994.cert",
+    "composites/table.csv"
+  ],
+  "pinned_only": [
+    {
+      "match": "**/README.md",
+      "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+    },
+    {
+      "match": "composites/table.csv",
+      "reason": "The source's table of composite constructions, each side rounded up at 15 places; its rows with no certificate file are held for the owner's D2 (think-f2io) and transcribed into the history ledger. Pinned for provenance."
+    }
+  ]
+}

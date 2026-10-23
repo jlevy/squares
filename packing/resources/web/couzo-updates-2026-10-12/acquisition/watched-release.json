@@ -1,0 +1,15 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/franciscouzo/square-packing/tree/a7067d7b92b1e0208499b26d93e898648f0e8667",
+ "commit": "a7067d7b92b1e0208499b26d93e898648f0e8667",
+ "committed": "2026-10-12T17:55:52Z",
+ "published": "2026-10-12T17:55:52Z",
+ "walk": "upper-bounds-couzo-history-20261022",
+ "rows": [
+  {
+   "n": 344,
+   "certificate": "certificates/n344.cert",
+   "printed": "18.993744819396"
+  }
+ ]
+}

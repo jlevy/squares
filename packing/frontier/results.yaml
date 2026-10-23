@@ -26084,8 +26084,9 @@ results:
       Kevin Fang's earlier composites are smaller there.
 
       Couzo's index of 15 October, published in the commit that holds T-190's certificate,
-      is a report before T-191 that is not yet recorded (think-yfoo). It is smaller at all
-      238 of these rows still current, by 3.79e-12 (381) to 2.38e-02 (749), each side exact
+      is a report before T-191, recorded by the history walk of his watched publications
+      (couzo-index-2026-10-15). It was smaller at all 238 of these rows still current before
+      that walk, by 3.79e-12 (381) to 2.38e-02 (749), each side exact
       (review/goebel-beyond-horizon.json holds the index's), so none of the 238 is the best
       known side at its count.
 
@@ -26356,8 +26357,9 @@ results:
 
       Beyond the corpus each of the 15 rows is below every earlier report, the author's own
       index of 14 October included, and supersedes the row it beats. His index of 15
-      October, a report before T-191 that is not yet recorded (think-yfoo), is smaller in
-      turn at 7 of the 15, at 339, 382, 450, 552, 599, 648 and 757, by 2.88e-11 to 1.13e-03,
+      October, a report before T-191 that the history walk of his watched publications
+      records (couzo-index-2026-10-15), is smaller in turn at 7 of the 15, at 339, 382,
+      450, 552, 599, 648 and 757, by 2.88e-11 to 1.13e-03,
       each side exact (couzo-verified-bounds-2026-10-14's review/goebel-beyond-horizon.json
       holds the index's), so those 7 rows are not the best known sides at their counts.
 
@@ -26522,8 +26524,9 @@ results:
       report, so both are recorded, this one second, as Mykhailo Polkovskyi's certificates
       with no issue were (T-186). The same commit's index holds 341 rows beyond the case
       corpus, smaller than the rows T-188 and T-189 record at 245 of those still current
-      (238 of T-188's and 7 of T-189's); they are an import of their own (think-yfoo) and
-      are not recorded here.
+      (238 of T-188's and 7 of T-189's); they are an import of their own, not recorded here:
+      the history walk of Couzo's watched publications records 253 of them
+      (couzo-index-2026-10-15).
 
       V3 and C3 rest on the 16 October review
       (docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) and the replay

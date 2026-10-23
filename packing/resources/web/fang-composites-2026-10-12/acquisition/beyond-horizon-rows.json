@@ -1,0 +1,11 @@
+{
+  "format": "upper-bound-beyond-horizon-claims-v1",
+  "horizon": 324,
+  "issue_pin": "bef5c42d58257fe38ed010a5d1ff9b8fc608df57",
+  "limit": 1024,
+  "publication": "https://github.com/TheSnakeFang/squarepack-certs/tree/bef5c42d58257fe38ed010a5d1ff9b8fc608df57",
+  "published": "2026-10-12T19:13:41Z",
+  "results": [{"ceiling":"26.9992563084462490","certificate":"composites/n027_j1_703.cert","deleted":0,"exact_side":"84738539313948868700545951204479818784523271832856247966865/3138550867693340381917894711603833208051177722232017256448","first_committed":"2026-10-12T19:13:41Z","n":703,"offered_side":"26.999256308447"},{"ceiling":"31.9992563084462490","certificate":"composites/n032_j2_994.cert","deleted":0,"exact_side":"100431293652415570610986130679801330983437596962595754777745/3138550867693340381917894711603833208051177722232017256448","first_committed":"2026-10-12T19:13:41Z","n":994,"offered_side":"31.999256308447"}],
+  "revision": "bef5c42d58257fe38ed010a5d1ff9b8fc608df57",
+  "source": "https://github.com/TheSnakeFang/squarepack-certs"
+}

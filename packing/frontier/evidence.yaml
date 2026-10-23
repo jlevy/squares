@@ -37498,7 +37498,8 @@ evidence:
       separating-axis method. The receipt's 3 jobs hold 167796 pair decisions, 50.9 route
       CPU seconds and 65.48 job wall seconds, the longest job 22.07 seconds. The positive
       clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21. The
-      commit's index rows beyond the case corpus are not decided here (think-yfoo). The
+      commit's index rows beyond the case corpus are not decided here; the history walk of
+      22 October 2026 records 253 of them (E-couzo-4e4c8ce-beyond-horizon-report). The
       author reports runs of this repository's sqpack verifier; those runs are his and
       decide nothing here, and every route here ran from this repository on the packet's own
       bytes. Since one maintained route is the producer's checker, the independently
@@ -42590,3 +42591,383 @@ evidence:
       source's own checkers were not run here. Review and confirmation remain pending; no stage
       4 review is owed for a beyond-horizon row. No arrangement identity, local minimum or
       optimum is established.
+  - id: E-couzo-02f9690-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [332, 336, 337, 338, 339, 340, 341, 373, 374, 377, 378, 379]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo exact certificates 2026-10-09]'
+    certificate: packing/resources/web/couzo-exact-certificates-2026-10-09/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records franciscouzo/square-packing@02f9690, a watched repository's publication
+      that no issue reports, of the 12 upper bounds beyond the n <= 324 corpus at or below 1024
+      that the history walk of 22 October
+      (campaign/issue-intake/upper-bounds-couzo-history-20261022) records in report order: exact
+      rational certificates certificates/nN.cert at 02f969075f79, each of n squares with its
+      exact side in its header, recorded at that side rounded up at 12 places. A separate
+      complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, the sqpack.verify predicates and the independent rational
+      corner checker's, over every wall and the pairs whose centres are closer than sqrt 2, an
+      exactly justified filter, accepted all 12 and refused all 72 controls, in 5.6 positive CPU
+      seconds; no square touches the box and no pair touches, every wall clearing by at least
+      5.00e-21 and every pair by at least 1.00e-20. The two routes share certificate parsing,
+      half-angle conversion, the pair filter and Fraction arithmetic. The source's own checker
+      was not run here. Review and confirmation remain pending; no stage 4 review is owed for a
+      beyond-horizon row. No arrangement identity, local minimum, optimum or credit statement of
+      the source is established.
+  - id: E-evand-f7a2325-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [343]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel Hunt 3 first hour 2026-10-10]'
+    certificate: packing/resources/web/evand-hunt3-first-hour-2026-10-10/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records evand/square-packing@f7a2325, a watched repository's publication that no
+      issue reports, of the upper bound beyond the n <= 324 corpus at or below 1024 that the
+      history walk of 22 October (campaign/issue-intake/upper-bounds-couzo-history-20261022)
+      records in report order: exact rational certificates
+      search/packer/candidates/hunt3_n343.dil.cert at f7a2325df1e3, each of n squares with its
+      exact side in its header, recorded at that side rounded up at 12 places. A separate
+      complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, the sqpack.verify predicates and the independent rational
+      corner checker's, over every wall and the pairs whose centres are closer than sqrt 2, an
+      exactly justified filter, accepted it and refused all 6 controls, in 0.6 positive CPU
+      seconds; no square touches the box and no pair touches, every wall clearing by at least
+      6.02e-13 and every pair by at least 1.21e-12. The two routes share certificate parsing,
+      half-angle conversion, the pair filter and Fraction arithmetic. The source's own checker
+      was not run here. Review and confirmation remain pending; no stage 4 review is owed for a
+      beyond-horizon row. No arrangement identity, local minimum, optimum or credit statement of
+      the source is established.
+  - id: E-couzo-3ef7634-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [338, 340]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo certificates 2026-10-10]'
+    certificate: packing/resources/web/couzo-certificates-2026-10-10/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records franciscouzo/square-packing@3ef7634, a watched repository's publication
+      that no issue reports, of the 2 upper bounds beyond the n <= 324 corpus at or below 1024
+      that the history walk of 22 October
+      (campaign/issue-intake/upper-bounds-couzo-history-20261022) records in report order: exact
+      rational certificates certificates/nN.cert at 3ef763490254, each of n squares with its
+      exact side in its header, recorded at that side rounded up at 12 places. A separate
+      complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, the sqpack.verify predicates and the independent rational
+      corner checker's, over every wall and the pairs whose centres are closer than sqrt 2, an
+      exactly justified filter, accepted both and refused all 12 controls, in 0.9 positive CPU
+      seconds; no square touches the box and no pair touches, every wall clearing by at least
+      5.00e-21 and every pair by at least 1.00e-20. The two routes share certificate parsing,
+      half-angle conversion, the pair filter and Fraction arithmetic. The source's own checker
+      was not run here. Review and confirmation remain pending; no stage 4 review is owed for a
+      beyond-horizon row. No arrangement identity, local minimum, optimum or credit statement of
+      the source is established.
+  - id: E-couzo-f311f08-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [340, 378, 379, 380]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo extended certificates 2026-10-11]'
+    certificate: packing/resources/web/couzo-extended-certificates-2026-10-11/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records franciscouzo/square-packing@f311f08, a watched repository's publication
+      that no issue reports, of the 4 upper bounds beyond the n <= 324 corpus at or below 1024
+      that the history walk of 22 October
+      (campaign/issue-intake/upper-bounds-couzo-history-20261022) records in report order: exact
+      rational certificates certificates/nN.cert at f311f08901c2, each of n squares with its
+      exact side in its header, recorded at that side rounded up at 12 places. A separate
+      complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, the sqpack.verify predicates and the independent rational
+      corner checker's, over every wall and the pairs whose centres are closer than sqrt 2, an
+      exactly justified filter, accepted all 4 and refused all 24 controls, in 2.1 positive CPU
+      seconds; no square touches the box and no pair touches, every wall clearing by at least
+      5.00e-21 and every pair by at least 1.00e-20. The two routes share certificate parsing,
+      half-angle conversion, the pair filter and Fraction arithmetic. The source's own checker
+      was not run here. Review and confirmation remain pending; no stage 4 review is owed for a
+      beyond-horizon row. No arrangement identity, local minimum, optimum or credit statement of
+      the source is established.
+  - id: E-couzo-a7067d7-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [344]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo updates 2026-10-12]'
+    certificate: packing/resources/web/couzo-updates-2026-10-12/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records franciscouzo/square-packing@a7067d7, a watched repository's publication
+      that no issue reports, of the upper bound beyond the n <= 324 corpus at or below 1024 that
+      the history walk of 22 October (campaign/issue-intake/upper-bounds-couzo-history-20261022)
+      records in report order: exact rational certificates certificates/n344.cert at
+      a7067d7b92b1, each of n squares with its exact side in its header, recorded at that side
+      rounded up at 12 places. A separate complete repository replay is retained
+      (devtools.beyond_horizon_replay, receipts/filtered-exact-replay.json): the filtered
+      two-route decision of devtools.couzo_678_replay, the sqpack.verify predicates and the
+      independent rational corner checker's, over every wall and the pairs whose centres are
+      closer than sqrt 2, an exactly justified filter, accepted it and refused all 6 controls,
+      in 0.5 positive CPU seconds; no square touches the box and no pair touches, every wall
+      clearing by at least 1.00e-15 and every pair by at least 1.20e-12. The two routes share
+      certificate parsing, half-angle conversion, the pair filter and Fraction arithmetic. The
+      source's own checker was not run here. Review and confirmation remain pending; no stage 4
+      review is owed for a beyond-horizon row. No arrangement identity, local minimum, optimum
+      or credit statement of the source is established.
+  - id: E-fang-bef5c42-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [703, 994]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Fang composites 2026-10-12]'
+    certificate: packing/resources/web/fang-composites-2026-10-12/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records TheSnakeFang/squarepack-certs@bef5c42, a watched repository's
+      publication that no issue reports, of the 2 upper bounds beyond the n <= 324 corpus at or
+      below 1024 that the history walk of 22 October
+      (campaign/issue-intake/upper-bounds-couzo-history-20261022) records in report order: exact
+      rational certificates composites/n027_j1_703.cert and n032_j2_994.cert at bef5c42d5825,
+      each of n squares with its exact side in its header, recorded at that side rounded up at
+      12 places. A separate complete repository replay is retained
+      (devtools.beyond_horizon_replay, receipts/filtered-exact-replay.json): the filtered
+      two-route decision of devtools.couzo_678_replay, the sqpack.verify predicates and the
+      independent rational corner checker's, over every wall and the pairs whose centres are
+      closer than sqrt 2, an exactly justified filter, accepted both and refused all 12
+      controls, in 3.0 positive CPU seconds; no square touches the box and no pair touches,
+      every wall clearing by at least 2.71e-20 and every pair by at least 5.42e-20. The two
+      routes share certificate parsing, half-angle conversion, the pair filter and Fraction
+      arithmetic. The source's own checker was not run here. Review and confirmation remain
+      pending; no stage 4 review is owed for a beyond-horizon row. No arrangement identity,
+      local minimum, optimum or credit statement of the source is established.
+  - id: E-couzo-93570ef-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [344, 378]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo retained certificates 2026-10-12]'
+    certificate: packing/resources/web/couzo-retained-certificates-2026-10-12/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records franciscouzo/square-packing@93570ef, a watched repository's publication
+      that no issue reports, of the 2 upper bounds beyond the n <= 324 corpus at or below 1024
+      that the history walk of 22 October
+      (campaign/issue-intake/upper-bounds-couzo-history-20261022) records in report order: exact
+      rational certificates certificates/nN.cert at 93570ef79474, each of n squares with its
+      exact side in its header, recorded at that side rounded up at 12 places. A separate
+      complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, the sqpack.verify predicates and the independent rational
+      corner checker's, over every wall and the pairs whose centres are closer than sqrt 2, an
+      exactly justified filter, accepted both and refused all 12 controls, in 1.0 positive CPU
+      seconds; no square touches the box and no pair touches, every wall clearing by at least
+      5.00e-21 and every pair by at least 1.00e-20. The two routes share certificate parsing,
+      half-angle conversion, the pair filter and Fraction arithmetic. The source's own checker
+      was not run here. Review and confirmation remain pending; no stage 4 review is owed for a
+      beyond-horizon row. No arrangement identity, local minimum, optimum or credit statement of
+      the source is established.
+  - id: E-couzo-4596670-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [378]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue-583 certificates 2026-10-13]'
+    certificate: packing/resources/web/couzo-issue583-2026-10-13/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records franciscouzo/square-packing@4596670, a watched repository's publication
+      that no issue reports, of the upper bound beyond the n <= 324 corpus at or below 1024 that
+      the history walk of 22 October (campaign/issue-intake/upper-bounds-couzo-history-20261022)
+      records in report order: exact rational certificates certificates/n378.cert at
+      45966700cf15, each of n squares with its exact side in its header, recorded at that side
+      rounded up at 12 places. A separate complete repository replay is retained
+      (devtools.beyond_horizon_replay, receipts/filtered-exact-replay.json): the filtered
+      two-route decision of devtools.couzo_678_replay, the sqpack.verify predicates and the
+      independent rational corner checker's, over every wall and the pairs whose centres are
+      closer than sqrt 2, an exactly justified filter, accepted it and refused all 6 controls,
+      in 0.5 positive CPU seconds; no square touches the box and no pair touches, every wall
+      clearing by at least 1.00e-15 and every pair by at least 5.32e-12. The two routes share
+      certificate parsing, half-angle conversion, the pair filter and Fraction arithmetic. The
+      source's own checker was not run here. Review and confirmation remain pending; no stage 4
+      review is owed for a beyond-horizon row. No arrangement identity, local minimum, optimum
+      or credit statement of the source is established.
+  - id: E-couzo-4e4c8ce-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [325, 326, 328, 329, 330, 333, 334, 339, 344, 362, 363, 366, 367, 370, 371, 372,
+        378, 379, 380, 381, 382, 401, 402, 403, 404, 405, 406, 410, 411, 412, 413, 414, 417,
+        418, 420, 421, 422, 442, 443, 444, 446, 447, 450, 451, 452, 453, 454, 455, 456, 457,
+        458, 459, 460, 462, 463, 464, 485, 486, 487, 490, 494, 495, 496, 497, 498, 499, 500,
+        501, 502, 503, 504, 506, 507, 508, 530, 531, 532, 534, 535, 536, 539, 540, 541, 543,
+        544, 545, 546, 547, 548, 550, 552, 553, 577, 578, 579, 581, 582, 584, 587, 588, 590,
+        591, 592, 594, 596, 597, 599, 600, 601, 626, 627, 628, 630, 631, 633, 637, 639, 640,
+        641, 643, 644, 645, 646, 647, 648, 650, 677, 678, 679, 681, 682, 684, 689, 690, 691,
+        692, 694, 695, 696, 697, 698, 699, 701, 702, 703, 730, 731, 732, 734, 735, 736, 737,
+        741, 742, 744, 745, 746, 747, 748, 749, 750, 754, 755, 756, 757, 758, 785, 786, 787,
+        789, 790, 791, 792, 796, 797, 799, 800, 801, 802, 803, 806, 808, 809, 810, 811, 813,
+        814, 842, 843, 844, 846, 847, 848, 849, 850, 854, 856, 857, 858, 859, 862, 863, 865,
+        866, 867, 868, 870, 871, 901, 902, 903, 905, 906, 907, 908, 909, 913, 914, 915, 916,
+        917, 918, 922, 924, 925, 926, 929, 931, 932, 962, 963, 966, 967, 968, 969, 970, 975,
+        976, 977, 978, 980, 981, 982, 983, 984, 986, 987, 988, 990, 991, 992, 993, 994]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo index 2026-10-15]'
+    certificate: packing/resources/web/couzo-index-2026-10-15/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records franciscouzo/square-packing@4e4c8ce, a watched repository's publication
+      that no issue reports, of the 253 upper bounds beyond the n <= 324 corpus at or below 1024
+      that the history walk of 22 October
+      (campaign/issue-intake/upper-bounds-couzo-history-20261022) records in report order: exact
+      rational certificates certificates/best/nN.cert at 4e4c8ce23cb5, each of n squares with
+      its exact side in its header, recorded at that side rounded up at 12 places. A separate
+      complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, the sqpack.verify predicates and the independent rational
+      corner checker's, over every wall and the pairs whose centres are closer than sqrt 2, an
+      exactly justified filter, accepted all 253 and refused all 1518 controls, in 333.2
+      positive CPU seconds; no square touches the box and no pair touches, every wall clearing
+      by at least 5.00e-25 and every pair by at least 1.00e-24. The all-pairs kernel at 366 and
+      703 (313,548 pairs, 117.7 CPU seconds) agreed exactly with it on each least gap and
+      clearance. The two routes share certificate parsing, half-angle conversion, the pair
+      filter and Fraction arithmetic. The source's own checker was not run here. Review and
+      confirmation remain pending; no stage 4 review is owed for a beyond-horizon row. No
+      arrangement identity, local minimum, optimum or credit statement of the source is
+      established.
+  - id: E-couzo-23aff0c-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [547, 554, 602, 652, 653, 704, 705, 759, 814, 815, 816, 872, 873, 874, 932, 933,
+        934, 994, 995, 996, 997]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 670 2026-10-17]'
+    certificate: packing/resources/web/couzo-issue670-2026-10-17/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records franciscouzo/square-packing@23aff0c, a watched repository's publication
+      that no issue reports, of the 21 upper bounds beyond the n <= 324 corpus at or below 1024
+      that the history walk of 22 October
+      (campaign/issue-intake/upper-bounds-couzo-history-20261022) records in report order: exact
+      rational certificates certificates/nN.cert and certificates/best/nN.cert at 23aff0c6f992,
+      each of n squares with its exact side in its header, recorded at that side rounded up at
+      12 places. A separate complete repository replay is retained
+      (devtools.beyond_horizon_replay, receipts/filtered-exact-replay.json): the filtered
+      two-route decision of devtools.couzo_678_replay, the sqpack.verify predicates and the
+      independent rational corner checker's, over every wall and the pairs whose centres are
+      closer than sqrt 2, an exactly justified filter, accepted all 21 and refused all 126
+      controls, in 138.9 positive CPU seconds; 13 touch the box and 12 have touching pairs,
+      which the closed contract allows. The two routes share certificate parsing, half-angle
+      conversion, the pair filter and Fraction arithmetic. The source's own checker was not run
+      here. Review and confirmation remain pending; no stage 4 review is owed for a
+      beyond-horizon row. No arrangement identity, local minimum, optimum or credit statement of
+      the source is established.
+  - id: E-couzo-5a299b4-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [409, 450, 453, 487, 532, 579, 628, 649, 679, 732, 787, 810, 812, 844, 903, 933,
+        934, 990, 991, 997]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo reconcile 2026-10-20]'
+    certificate: packing/resources/web/couzo-reconcile-2026-10-20/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-22'
+    limitations: >-
+      This atom records franciscouzo/square-packing@5a299b4, a watched repository's publication
+      that no issue reports, of the 20 upper bounds beyond the n <= 324 corpus at or below 1024
+      that the history walk of 22 October
+      (campaign/issue-intake/upper-bounds-couzo-history-20261022) records in report order: exact
+      rational certificates certificates/nN.cert at 5a299b4708ab, each of n squares with its
+      exact side in its header, recorded at that side rounded up at 12 places. A separate
+      complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, the sqpack.verify predicates and the independent rational
+      corner checker's, over every wall and the pairs whose centres are closer than sqrt 2, an
+      exactly justified filter, accepted all 20 and refused all 120 controls, in 26.3 positive
+      CPU seconds; 17 touch the box and 17 have touching pairs, which the closed contract
+      allows. The all-pairs kernel at 903 (407,253 pairs, 76.1 CPU seconds) agreed exactly with
+      it on the least gap and clearance. The two routes share certificate parsing, half-angle
+      conversion, the pair filter and Fraction arithmetic. The source's own checker was not run
+      here. Review and confirmation remain pending; no stage 4 review is owed for a
+      beyond-horizon row. No arrangement identity, local minimum, optimum or credit statement of
+      the source is established.

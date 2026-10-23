@@ -142,6 +142,9 @@ The `4e4c8ce` index’s exact sides, in
 all 238 of the 252 recorded rows that are still current, by $3.79 \times 10^{-12}$ (381)
 to $2.38 \times 10^{-2}$ (749); T-188’s notes and the source register say so until that
 index is recorded (think-yfoo).
+It now is: the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md)
+records the index’s certificates (couzo-index-2026-10-15), and 199 of the 252 rows name it
+as the report that beat them first, 64 of them current before that walk.
 
 ## Credit and Licence
 
