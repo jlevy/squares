@@ -166,10 +166,10 @@ $F$ is the set of position directions $\varphi$ with $L_r \varphi = 0$ for every
 (grade-C.md lines 35 to 37). Because each $h_r$ is affine in the centres at fixed
 angles, $h_r(z^\ast + \varphi) = 0$ exactly, and $S$ does not change: $M = z^\ast + F$
 is an exact family of points with every row tight.
-Only the lever arms change along $M$, so $L(z^\ast
-+ \varphi) = L_0 + \sum_k \varphi_k A_k$ with $A_k$ supported on the angle columns.
+Only the lever arms change along $M$, so the Jacobian at $z^\ast + \varphi$ is
+$L_0 + \sum_k \varphi_k A_k$, with $A_k$ supported on the angle columns.
 Hypothesis 3 needs all of $F$: a flat direction left out of it would lie in $W$, where
-  the Hessian vanishes on it, since rows are affine in the centres.
+the Hessian vanishes on it, since rows are affine in the centres.
 
 ### Theorem C
 
