@@ -69,11 +69,11 @@ first report the walk records at a count, the count's start names that release a
 successor (`planned_supersessions`), whether the release's row is current or a later
 report's row supersedes it in turn: the four came before #678, #686 and #715, so a start
 those later reports had superseded on ``main`` names the backlog report that beat it
-first. A report the walk records whose own import has not yet landed (`Awaiting`: #715's
-re-certifications, which the #719 walk holds for think-fwa9) has no row, so the chain passes
-over it until that import writes one; Couzo's 4e4c8ce and 5a299b4 publications awaited
-theirs that way until the history walk recorded them, and the #719 walk now names their
-sources. ``check`` holds
+first. A report the walk records whose own import has not yet landed (`Awaiting`) has no
+row, so the chain passes over it until that import writes one: Couzo's 4e4c8ce and 5a299b4
+publications awaited theirs that way until the history walk recorded them, and the #719
+walk now names their sources. #715's re-certifications wait on a decision, not an import,
+so both walks hold them (`Held`, think-fwa9). ``check`` holds
 ``frontier/source-coverage.yaml`` to that plan, and holds every count a walk reaches beyond
 the corpus to ``LIMIT`` to one chain in report order (`chain_problems`): the start, then
 each recorded report's row, each superseded by the next, the last current or superseded by
@@ -506,7 +506,7 @@ HISTORY_HELD: dict[str, tuple[Held, ...]] = {
     ),
 }
 #: The history walk's verdicts decided only against publications it holds (`Resting`):
-#: 131 at 129 counts, by report, verdict and the classes they rest on. Those resting on
+#: 131 at 107 counts, by report, verdict and the classes they rest on. Those resting on
 #: Göbel and sub-print holds stand whatever those answers are, since a side above a side
 #: above Göbel's construction is above it too and one within 1e-12 of a re-certification
 #: is one itself; the 9 on deletion bounds and the 47 on recipes would be recorded if D6
@@ -571,7 +571,7 @@ WALKS: dict[str, Walk] = {
             "franciscouzo/square-packing@23aff0c": "couzo-23aff0c-2026-10-17",
             "franciscouzo/square-packing@5a299b4": "couzo-reconcile-2026-10-20",
         },
-        awaiting={"#715": Awaiting("think-fwa9", _held_715())},
+        awaiting={},
         held={
             report: tuple(
                 Held(item.kind, item.bead, item.counts & counts)
@@ -582,11 +582,27 @@ WALKS: dict[str, Walk] = {
                 ("franciscouzo/square-packing@4e4c8ce", frozenset({743, 798})),
                 ("franciscouzo/square-packing@23aff0c", frozenset({447})),
                 ("franciscouzo/square-packing@5a299b4", frozenset({366, 372})),
+                # #715's re-certifications wait on a decision, not an import (review A of
+                # #730, A6): held here as in the history walk, at the 19 counts this walk
+                # records them.
+                (
+                    "#715",
+                    frozenset(
+                        {535, 582, 591, 631, 633, 640, 682, 684, 691, 695}
+                        | {735, 737, 742, 745, 790, 791, 797, 798, 799}
+                    ),
+                ),
             )
         },
         resting=(
             _resting("#719", NOT_RECORDED, SUB_PRINT, "366"),
             _resting("franciscouzo/square-packing@5a299b4", NOT_RECORDED, CONSEQUENCE, "447"),
+            _resting(
+                "franciscouzo/square-packing@5a299b4",
+                NOT_RECORDED,
+                SUB_PRINT,
+                "535 582 591 631 633 640 682 684 691 695 735 737 742 745 790 791 797 798 799",
+            ),
         ),
     ),
     HISTORY: Walk(
@@ -2017,7 +2033,7 @@ def release_715_claims(
     exact sides its packet's filtered receipt states, and its rows above ``LIMIT``, at the
     side of the publication the earlier-publications receipt found its print to round up."""
     packet = WEB / "couzo-issue715-2026-10-21"
-    held = WALKS[ISSUE_719].awaiting["#715"].counts or frozenset()
+    held = _held_715()
     replayed = {
         row["n"]: row for row in _read(packet / "receipts/filtered-exact-replay.json")["rows"]
     }
@@ -2293,6 +2309,10 @@ def _history_rows(coverage: Mapping[str, Any]) -> dict[str, list[tuple[int, Frac
     return {source: sorted(rows) for source, rows in found.items()}
 
 
+def _counted(total: int) -> str:
+    return "1 count" if total == 1 else f"{total} counts"
+
+
 def _listing(parts: Sequence[str]) -> str:
     return parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
 
@@ -2312,7 +2332,7 @@ def held_sentence(walk: Walk, report: str) -> str:
         ]
         total = sum(len(item.counts) for item in items)
         text += (
-            f" The walk holds its publications at {total} counts back from a row, each "
+            f" The walk holds its publications at {_counted(total)} back from a row, each "
             f"waiting on an owner decision (beyond_horizon_replay.HISTORY_HELD): "
             f"{_listing(parts)}."
         )
@@ -2326,7 +2346,7 @@ def held_sentence(walk: Walk, report: str) -> str:
         ]
         total = sum(len(item.counts) for item in resting)
         text += (
-            f" Its verdicts at {total} counts are decided only against held publications "
+            f" Its verdicts at {_counted(total)} are decided only against held publications "
             f"(beyond_horizon_replay.HISTORY_RESTING): {_listing(parts)}. An answer that "
             "leaves a hold out reruns this walk."
         )

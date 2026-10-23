@@ -539,10 +539,11 @@ def test_719_leaves_366_unrecorded_and_supersedes_the_row_at_each_other_count() 
     assert dict(Counter(earlier for _, earlier, _ in flips)) == SUPERSEDED_BY_719
 
 
-def test_a_report_awaiting_its_own_import_is_passed_over_in_the_chain() -> None:
+def test_a_re_certification_held_for_a_decision_is_passed_over_in_the_chain() -> None:
     """At 631 the #719 walk records Couzo's 4e4c8ce certificate, #715's re-certification of
-    it and #719. 4e4c8ce's row is the history walk's; #715's waits on think-fwa9, so the
-    chain passes over it and 4e4c8ce's row names #719."""
+    it and #719. 4e4c8ce's row is the history walk's; #715's is held for a decision
+    (think-fwa9), not awaiting an import, so the chain passes over it and 4e4c8ce's row
+    names #719."""
     walk = replay.WALKS[replay.ISSUE_719]
     (count,) = [item for item in _read(walk.ledger)["counts"] if item["n"] == 631]
     assert [step["report"] for step in count["steps"] if step["verdict"] == "recorded"] == [
@@ -559,10 +560,44 @@ def test_a_report_awaiting_its_own_import_is_passed_over_in_the_chain() -> None:
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
     assert rows[631, "couzo-index-2026-10-15"]["superseded_by"] == MISHAPOLK
     assert (631, "couzo-issue715-2026-10-21") not in rows
-    held = walk.awaiting["#715"].counts
+    assert walk.awaiting == {}
+    held = walk.holds("#715", 631)
     assert held is not None
-    assert 631 in held
-    assert 417 not in held
+    assert (held.kind, held.bead) == (replay.SUB_PRINT, "think-fwa9")
+    assert walk.holds("#715", 417) is None
+
+
+#: The 19 counts at which the #719 walk records #715's held re-certifications, below 1024.
+HELD_715_IN_719 = {535, 582, 591, 631, 633, 640, 682, 684, 691, 695}
+HELD_715_IN_719 |= {735, 737, 742, 745, 790, 791, 797, 798, 799}
+
+
+def test_the_719_walk_holds_715_s_re_certifications_and_names_what_rests_on_them() -> None:
+    """Review A of #730, A6: #715's re-certifications wait on think-fwa9's decision, so the
+    #719 walk holds them as the history walk does, and 5a299b4's verdicts at those 19 counts
+    rest on them; left out, the walk records each again as a re-certification."""
+    walk = replay.WALKS[replay.ISSUE_719]
+    (held,) = walk.held["#715"]
+    assert held.counts == HELD_715_IN_719
+    assert held.counts <= replay.HISTORY_HELD["#715"][0].counts
+    resting = {(item.report, item.kinds): item.counts for item in walk.resting}
+    assert resting[("franciscouzo/square-packing@5a299b4", (replay.SUB_PRINT,))] == (
+        HELD_715_IN_719
+    )
+    assert replay.resting_problems() == []
+    flips = replay.refusal_flips(walk, (replay.SUB_PRINT,))
+    assert {n for n, _, _ in flips} == HELD_715_IN_719
+    assert {falls for _, _, falls in flips} == {replay.SUB_PRINT}
+
+
+def test_a_single_hold_or_resting_verdict_is_counted_in_the_singular() -> None:
+    """Review A of #730, A7: "at 1 count", not "at 1 counts"."""
+    walk = replay.WALKS[replay.HISTORY]
+    text = replay.held_sentence(walk, "evand/square-packing@41fc9ec")
+    assert "verdicts at 1 count are decided" in text
+    assert "1 counts" not in text
+    sources = (HISTORY_LEDGER / "sources.yaml").read_text(encoding="utf-8")
+    assert "at 1 counts" not in sources
 
 
 def test_the_719_ledger_transcribes_the_packets_receipts() -> None:

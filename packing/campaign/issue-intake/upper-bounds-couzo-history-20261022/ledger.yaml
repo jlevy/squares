@@ -5544,7 +5544,7 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds,
-    at the least side the commit states there. The walk holds its publications at 1 counts
+    at the least side the commit states there. The walk holds its publications at 1 count
     back from a row, each waiting on an owner decision (beyond_horizon_replay.HISTORY_HELD):
     1 publication above Göbel''s construction (think-8krd).'
 - report: franciscouzo/square-packing@02f9690
@@ -5666,7 +5666,7 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds,
-    at the least side the commit states there. Its verdicts at 1 counts are decided only against
+    at the least side the commit states there. Its verdicts at 1 count are decided only against
     held publications (beyond_horizon_replay.HISTORY_RESTING): 1 against publications above
     Göbel''s construction. An answer that leaves a hold out reruns this walk.'
 - report: evand/square-packing@f7a2325
@@ -5755,7 +5755,7 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds,
-    at the least side the commit states there. The walk holds its publications at 1 counts
+    at the least side the commit states there. The walk holds its publications at 1 count
     back from a row, each waiting on an owner decision (beyond_horizon_replay.HISTORY_HELD):
     1 publication above Göbel''s construction (think-8krd).'
 - report: franciscouzo/square-packing@a7067d7
@@ -5780,7 +5780,7 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds,
-    at the least side the commit states there. The walk holds its publications at 1 counts
+    at the least side the commit states there. The walk holds its publications at 1 count
     back from a row, each waiting on an owner decision (beyond_horizon_replay.HISTORY_HELD):
     1 publication above Göbel''s construction (think-8krd).'
 - report: TheSnakeFang/squarepack-certs@bef5c42
@@ -5958,7 +5958,7 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds,
-    at the least side the commit states there. The walk holds its publications at 1 counts
+    at the least side the commit states there. The walk holds its publications at 1 count
     back from a row, each waiting on an owner decision (beyond_horizon_replay.HISTORY_HELD):
     1 publication above Göbel''s construction (think-8krd).'
 - report: TheSnakeFang/squarepack-certs@5f3bdbf
