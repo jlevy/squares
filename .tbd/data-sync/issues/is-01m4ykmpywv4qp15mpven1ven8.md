@@ -3,10 +3,10 @@ type: is
 id: is-01m4ykmpywv4qp15mpven1ven8
 title: "Import Benjamin Greff (bengreff): s(95) = 10 by a mixed cover (#610)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 12
-delegate: user-eb-intake-residue
+version: 13
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T01:43:17.212Z
-updated_at: 2026-10-16T05:47:10.366Z
+updated_at: 2026-10-23T06:16:42.298Z
 started_at: 2026-10-15T01:43:21.841Z
 ---
 Stage 1 triage and stage 2 retention of jlevy/squares#610 (bengreff, Benjamin Greff, opened 2026-10-15T01:16:36Z, labelled intake, no comments when read at 01:27Z): "Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)". The author's own certificate in his own repository, the case k = 10 after wand125's s(59) = 8 (#280, T-066) and his s(76) = 9 (#594, T-184). Followed the #594 import (think-osvq) step for step. Intake lane: Claude Opus 5.5 (tbd-moderate sub-agent), worktree agent-a33e48ec, branch claude/wizardly-meitner-wqn4x3-intake-610.

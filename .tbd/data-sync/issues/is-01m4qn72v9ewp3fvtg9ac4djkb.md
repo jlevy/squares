@@ -3,10 +3,10 @@ type: is
 id: is-01m4qn72v9ewp3fvtg9ac4djkb
 title: "Import Evan Daniel: grade-C local minima at 233 configurations of field degree <= 4, 53 current-record counts beyond T-124 (#545)"
 kind: task
-status: in_progress
+status: open
 priority: 3
-version: 4
-delegate: claude-code@vm
+version: 5
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:56:06.761Z
-updated_at: 2026-10-12T15:10:40.954Z
+updated_at: 2026-10-23T06:16:05.250Z
 started_at: 2026-10-12T14:33:44.161Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.

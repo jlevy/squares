@@ -3,10 +3,10 @@ type: is
 id: is-01m5733tf3n1g18tzwbhygcpgw
 title: "Import franciscouzo: 204-993: registration request (#670)"
 kind: task
-status: in_progress
+status: open
 priority: 2
-version: 16
-delegate: coord-intake-1021b
+version: 17
+delegate: coord-intake-1023
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.418Z
-updated_at: 2026-10-22T20:08:08.153Z
+updated_at: 2026-10-23T06:17:04.281Z
 started_at: 2026-10-18T13:04:20.664Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/670

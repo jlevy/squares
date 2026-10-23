@@ -3,10 +3,10 @@ type: is
 id: is-01m57xsn5sv2ag6y1h7bz6m4ty
 title: "W2 #674: replay opening and updated n229 dilation certificates with source controls"
 kind: task
-status: in_progress
+status: open
 priority: 2
-version: 8
-delegate: coord-intake-1021b
+version: 9
+delegate: coord-intake-1023
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m5733vshn9cet23pbx19nqqm
 hold: null
 hold_until: null
 created_at: 2026-10-18T16:33:54.872Z
-updated_at: 2026-10-21T17:43:11.167Z
+updated_at: 2026-10-23T06:17:09.116Z
 started_at: 2026-10-18T16:34:05.831Z
 ---
 Owned follow-up source replay lane: Codex de_winter_668_replay, after #668 lane think-8xr0. Retain chronological distinction: evand-n229-dilation-2026-10-17 at e0338c7becf95dbc7584b48d8868c0a1cd21079c/s229.cert and evand-n229-dilation-update-2026-10-18 at00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db/s229_v2.cert (229 squares each;67275 total certificate bytes). Run both retained standalone verify_cert.py and verify_cert2.py for both complete certificates after reading code;4 positive source invocations and at least8 mutant invocations (duplicate square and wall violation per certificate/checker). Checker digests identical to #669; imports only sys/Fraction, no compiled engine/numerical producer/network. No source timing receipt retained. Conservative static price: expected120-300wall seconds (0.0333-0.083333CPUh); total one-worker wall ceiling900seconds (0.25CPUh), counting mutants as full passes because first checker computes complete pair margins before returning failure. At most313272pair-loop iterations across12invocations, exact rational predicates and circumscribed-disc pruning. Estimate only, not run evidence. ProjectPython3.14.7 without optimization, external scratch, explicit TMPDIR/CARGO_TARGET_DIR/UV_CACHE_DIR. Execution/checkout held until root releases #665 slot. Retain complete commands,digests,stdout/stderr,timings and refusal receipts;durable controls test. Own only later replay-specific files/branch, disjoint from #676 and independent mathematical review. No provisional T IDs,rung changes,author messaging,merge,house adoption or strong-regularization claim. blocked_on: jlevy/squares#665

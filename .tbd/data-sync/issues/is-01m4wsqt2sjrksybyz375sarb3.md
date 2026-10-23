@@ -3,10 +3,10 @@ type: is
 id: is-01m4wsqt2sjrksybyz375sarb3
 title: "Intake 2026-10-14: evaluate every open upper-bound report per count, in report order, and record only the strongest"
 kind: epic
-status: in_progress
+status: open
 priority: 1
-version: 29
-delegate: user-eb-intake-residue
+version: 30
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -35,7 +35,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T08:51:21.304Z
-updated_at: 2026-10-16T05:47:12.230Z
+updated_at: 2026-10-23T06:16:24.320Z
 started_at: 2026-10-14T08:51:46.973Z
 ---
 Owner's request in session 0132qkwt8gAB9vM3aQcCJLsQ (branch claude/serene-hopper-xxh80m, off origin/main f73e9de13): review every outstanding GitHub issue for intake; build one per-n ledger across all open reports; at each count, walk the reports in the order they reached the record, and record a report only where it is stronger than the record and every earlier report; a report an earlier, stronger (or equal) report already beats is not recorded unless there is a key reason, which the ledger names; track every item as beads; comment progress on the issues; finish with a summary table of every intake item, recorded or not, and why.

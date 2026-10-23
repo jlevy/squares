@@ -3,10 +3,10 @@ type: is
 id: is-01m4z41fnn0pf6c5wgngeg94gx
 title: "Import wand125: s(28) > 1149/200 by a continuous-pose certificate (no issue)"
 kind: task
-status: in_progress
+status: open
 priority: 2
-version: 7
-delegate: claude-code@vm
+version: 8
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T06:29:52.948Z
-updated_at: 2026-10-15T09:15:50.790Z
+updated_at: 2026-10-23T06:16:45.176Z
 started_at: 2026-10-15T06:30:32.385Z
 ---
 Found by the 05:30Z intake sweep of 2026-10-15 (epic think-mq0k): wand125/square-packing moved from afdcaac4e to b57e66712b5f722b39fcb703692006062c7d9eb7, three commits, all authored by Hiroaki Hosono and co-authored by Claude Opus 5.5. No issue reports any of them.
