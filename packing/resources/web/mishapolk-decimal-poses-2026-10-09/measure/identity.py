@@ -1,4 +1,4 @@
-"""Measure #470's sixteen witnesses pose by pose against every packing published before it.
+"""Measure #470's sixteen witnesses pose by pose against the register's earlier packings.
 
 Written for review A3 of #747 (23 October 2026). Issue 470 credits the discoverers of the
 packings its poses started from, Stenlund, Friedman, Ellsworth, SQUISH (Nate
@@ -9,17 +9,20 @@ measures the rest, so that the question is settled here rather than held open. A
 measurement for credit; it decides nothing.
 
 Each witness is T-138's at its count, read by the third route's import reader
-(`check_half_angle_area.import_packing("#470")`). It is measured against every register
-entry the third route can read a packing of (`CREDITED_READERS`) whose source was
-published before #470's, on 9 October 2026, at every count of T-138 the entry's scope
-holds. For each pair it records `arrangement_gap`: under each of the box's eight
+(`check_half_angle_area.import_packing("#470")`). It is measured against every upper-bound
+entry of the register whose source was published before #470's, on 9 October 2026, at
+every count of T-138 the entry's scope holds, when the third route can read that entry's
+packing (`CREDITED_READERS`). An earlier entry it cannot read is listed under
+`not_compared` with the reason, so the scope is exact. Review B2 of #747 added readers for
+T-056, T-092, T-113, T-116 and T-117, which the first run of 23 October did not compare. For each pair it records `arrangement_gap`: under each of the box's eight
 symmetries, every square matched to the nearest centre of the other packing, kept only
 where one to one, and for the best such symmetry the largest move, the squares moved
 beyond each of 1e-9 to 1e-1 and the squares turned by a sine above 1e-6; and `unmoved`,
 the symmetry that keeps most squares where they were. Both are exact over the rationals.
 A packing an entry's reader cannot produce at a count is recorded with the reason.
 
-Usage, from packing/ with the project interpreter, about a minute of CPU:
+Usage, from packing/ with the project interpreter, about a minute of CPU, most of it
+promoting T-056's and T-092's decimal facts to the certificates their receipts decided:
     python resources/web/mishapolk-decimal-poses-2026-10-09/measure/identity.py \
         --out resources/web/mishapolk-decimal-poses-2026-10-09/measure/identity.json
 """
@@ -51,12 +54,26 @@ def main(argv: list[str] | None = None) -> int:
     }
     published = str(register[WITNESS]["attribution"]["published"])
     counts = [int(n) for n in register[WITNESS]["scope"]["n_values"]]
-    earlier = sorted(
-        key
-        for key in area.CREDITED_READERS
-        if key in register
-        and str((register[key].get("attribution") or {}).get("published", "9999")) < published
-    )
+    shares = {
+        key: sorted({int(m) for m in entry["scope"]["n_values"]} & set(counts))
+        for key, entry in register.items()
+        if entry.get("kind") == "upper-bound"
+        and key != WITNESS
+        and str((entry.get("attribution") or {}).get("published", "9999")) < published
+    }
+    shares = {key: shared for key, shared in shares.items() if shared}
+    earlier = sorted(key for key in shares if key in area.CREDITED_READERS)
+    not_compared = [
+        {
+            "against": key,
+            "published": str(register[key]["attribution"]["published"]),
+            "rungs": f"{register[key]['verification']}/{register[key]['confirmation']}",
+            "counts": shares[key],
+            "reason": "the third route has no reader of its packing",
+        }
+        for key in sorted(shares)
+        if key not in area.CREDITED_READERS
+    ]
     rows: list[dict[str, object]] = []
     for n in counts:
         mine = area.import_packing(ISSUE)(n)
@@ -94,6 +111,7 @@ def main(argv: list[str] | None = None) -> int:
         "witness": f"{WITNESS} ({ISSUE}), published {published}",
         "counts": counts,
         "against": earlier,
+        "not_compared": not_compared,
         "rows": rows,
     }
     args.out.write_text(json.dumps(document, indent=1) + "\n", encoding="utf-8")

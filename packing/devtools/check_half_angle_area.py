@@ -217,6 +217,9 @@ from devtools import gupta_refinement_reports as t127
 from devtools import refinement_packets as t118
 from devtools import ryxu_arrangement_reports as ryxu
 from devtools import squish_followup_packets as squish_update
+from devtools import squish_second_update_packets as squish_second
+from devtools import squish_upper_bound_packets as squish_ten
+from devtools import upper_bound_packets as couzo_releases
 from devtools import upper_bound_reports as upper
 from sqpack.yamlio import load_yaml
 
@@ -2309,6 +2312,71 @@ def couzo_583_586_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
     return import_packing("#583" if n in (211, 241) else "#586")(n)
 
 
+def _xyt_packing(
+    fact: dict[str, Any], n: int, shift: Fraction = Fraction(0)
+) -> tuple[Fraction, tuple[Placed, ...]]:
+    """A packet's normalized ``side`` and ``{x, y, t}`` rationals, centres moved by
+    ``shift`` into ``[0, S]^2``."""
+    side = _scalar(fact.get("side"), f"n={n} side")
+    squares = fact.get("squares")
+    if type(squares) is not list or len(squares) != n:
+        raise AreaRouteError(f"n={n}: not {n} squares")
+    poses = [
+        tuple(_scalar(square.get(key), f"n={n} square {index}") for key in ("x", "y", "t"))
+        for index, square in enumerate(squares, start=1)
+    ]
+    return side, tuple(placed([(x + shift, y + shift, t) for x, y, t in poses]))
+
+
+def squish_ten_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """SQUISH's packing at ``n`` from the ten of 7 October 2026 (T-113), read here.
+
+    `devtools.squish_upper_bound_packets.read_fact` re-admits the retained derived facts
+    through the packet's strict source parser; this route reads their rationals itself.
+    """
+    return _xyt_packing(squish_ten.read_fact(n), n)
+
+
+def squish_second_update_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """SQUISH's second update of 7 October 2026 at ``n`` (T-116), read here.
+
+    `devtools.squish_second_update_packets.read_fact` re-admits the retained facts; this
+    route reads their rationals itself.
+    """
+    return _xyt_packing(squish_second.read_fact(n), n)
+
+
+def rehwaldt_couzo_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """Seth Rehwaldt's refinement of Francisco Couzo's packing at ``n`` (T-117), read here.
+
+    `devtools.refinement_packets.read_fact` admits the normalized fact against its pinned
+    conversion; its centres are about the box's centre, as T-118's are, so this route
+    moves each by ``S/2`` into ``[0, S]^2``.
+    """
+    fact = t118.read_fact(t118.COUZO, n)
+    return _xyt_packing(fact, n, _scalar(fact.get("side"), f"n={n} side") / 2)
+
+
+def _couzo_release_packing(
+    source: couzo_releases.Source, n: int
+) -> tuple[Fraction, tuple[Placed, ...]]:
+    """Francisco Couzo's certificate at ``n`` from a release `upper_bound_packets` holds:
+    the retained decimal fact promoted to the rational corners certificate its `certify`
+    writes and its receipt decided, read here as a corners witness."""
+    text, _result = couzo_releases.certificate_text(source, n)
+    return read_witness_corners(text.encode("utf-8"), n)
+
+
+def couzo_release_0927_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """Francisco Couzo's certificate of 27 September 2026 at ``n`` (T-056)."""
+    return _couzo_release_packing(couzo_releases.FRANCISCOUZO, n)
+
+
+def couzo_release_1003_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """Francisco Couzo's certificate of 3 October 2026 at ``n`` (T-092)."""
+    return _couzo_release_packing(couzo_releases.FRANCISCOUZO_2026_10_03, n)
+
+
 #: How each credited certificate is read, by its register entry.
 CREDITED_READERS: dict[str, Callable[[int], tuple[Fraction, tuple[Placed, ...]]]] = {
     "T-125": ryxu_packing,
@@ -2325,6 +2393,14 @@ CREDITED_READERS: dict[str, Callable[[int], tuple[Fraction, tuple[Placed, ...]]]
     "T-119": evand_arrangement_packing,
     "T-127": gupta_refinement_packing,
     "T-130": couzo_followup_packing,
+    # The earlier packings at #470's counts, read for its pose-by-pose lineage (review B2
+    # of #747): Couzo's releases of 27 September and 3 October, SQUISH's ten and second
+    # update of 7 October, and Rehwaldt's refinement of Couzo's 105.
+    "T-056": couzo_release_0927_packing,
+    "T-092": couzo_release_1003_packing,
+    "T-113": squish_ten_packing,
+    "T-116": squish_second_update_packing,
+    "T-117": rehwaldt_couzo_packing,
     "T-134": import_packing("#476"),
     "T-139": import_packing("trio126"),
     "T-141": import_packing("#489"),

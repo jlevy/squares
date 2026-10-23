@@ -14970,14 +14970,19 @@ results:
       Francisco Couzo and Ryan Xu. The issue does not say which count started from which packing.
       It discloses Gemini 3.8 assistance with solver scripting, precision checks and formatting.
 
-      Measured pose by pose against every packing the register held from before 9 October 2026
-      (the 10 October review at 103 and 258, the rest on 23 October), twelve of the sixteen are
-      earlier packings refined, each pairing one to one by nearest centres under the identity:
-      103 is Ryan Xu's (T-125), 258 SQUISH's (T-115), 108, 127, 131, 180 and 306 Francisco
-      Couzo's T-128 packings and 84, 86, 105, 175 and 270 his T-130 packings. No square moves
-      beyond 1e-3 but seven at 270, by up to 2.6e-3. At 267 the witness keeps Ryan Xu's
-      arrangement (T-125) with every square moved, by up to 0.084; no packing the register held
-      pairs with 132, 302 or 303, where the credit is the issue's. The measurement is
+      Measured pose by pose against the register's upper-bound entries published before 9
+      October 2026 at these counts (T-056, T-092, T-098, T-101, T-113, T-115, T-116, T-117,
+      T-119, T-125, T-127, T-128 and T-130; T-129, recorded, has no packing the measurement
+      reads), fourteen of the sixteen pair one to one by nearest centres under the identity
+      with an earlier packing, no square moving beyond 1e-3 but seven at 270, by up to 2.6e-3.
+      Four are those packings refined to a smaller side: 103 Ryan Xu's (T-125), and 258, 302
+      and 303 SQUISH's (T-115, T-116, T-113). Ten are Francisco Couzo's packings at a side 8.2e-13
+      to 8.5e-12 above his, and 1.3e-7 at 270: 108, 127, 131, 180 and 306 his T-128 packings,
+      and 84, 86, 105, 175 and 270 his T-130 packings.
+
+      At 267 the witness keeps Ryan Xu's arrangement (T-125) with every square moved, by up to
+      0.084, at a side 3.4e-6 below his; at 132 none of those entries pairs with it, and the
+      credit there is the issue's. The measurement is
       packing/resources/web/mishapolk-decimal-poses-2026-10-09/measure/identity.json.
 
       So the credit at 180 runs through T-128 to SQUISH's packing by way of Siddharth Gupta's,

@@ -2422,7 +2422,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
         ),
-        paths=("packing/campaign/result-requests.yaml", "packing/frontier/results.yaml"),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/check_half_angle_area.py",
+            "packing/frontier/results.yaml",
+        ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
@@ -2434,16 +2438,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "The 23 October closing pass (#747) and its review A, against main c1115c095 "
-            "(#749): the request entries' questions to the authors, owner holds and "
-            "source-checker notes, T-197 to T-199 citing the source checkers' replay, and "
-            "T-138's measured lineage at 180 and 270. Rendered at link revision 26339a13 "
-            "into empty site directories from this tree and from the same tree with main's "
-            "results.yaml, result-requests.yaml, evidence.yaml, verifiers.yaml, "
-            "bibliography.yaml, contributor occurrences, n-155 and n-229 case records and "
-            "URL registry swapped in (69 files each), render_n11_lower_bounds_explainer, "
-            "render_n11_optimality_review, render_n11_threshold_bound_review and "
-            "render_packing_methods write every file byte-identical. No PDF was printed; "
+            "The 23 October closing pass (#747) after its reviews A and B, against main "
+            "7335d0098 (#752): the request entries' questions to the authors, holds for the "
+            "owner and source-checker notes, T-197 to T-199 citing the source checkers' "
+            "replay, T-138's measured lineage, and the identity route's readers of five "
+            "earlier entries. Rendered at link revision 26339a13 into empty site "
+            "directories from this tree and from the same tree with main's version of "
+            "every file this branch modifies swapped in, release.py and tests aside (69 "
+            "files each), render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical. No PDF was printed; "
             "each prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),

@@ -4480,15 +4480,18 @@ issues:
       state: withdrawn
       note: >-
         Withdrawn on 23 October 2026 (review A3 of #747): a measurement here settles it.
-        Measured pose by pose against every packing the register held from before 9
-        October (the packet's measure/identity.json), twelve of T-138's sixteen witnesses
-        are earlier packings refined: 103 Ryan Xu's, 258 SQUISH's, 108, 127, 131, 180 and
-        306 Francisco Couzo's T-128 packings and 84, 86, 105, 175 and 270 his T-130
-        packings. So the credit at 180 runs through T-128 to Siddharth Gupta's packing and
-        at 270 through T-130 to Evan Daniel's; T-138 and the source's credit now name both.
-        At 267 the witness keeps Ryan Xu's arrangement with every square moved, and none
-        pairs at 132, 302 or 303, where the credit is the issue's. An answer is still
-        welcome in the closing comment and would change nothing the record now asserts.
+        Measured pose by pose against the register's thirteen upper-bound entries published
+        before 9 October at these counts whose packings the third route reads (the packet's
+        measure/identity.json; T-129, recorded, is the one it cannot read), fourteen of
+        T-138's sixteen witnesses pair one to one with an earlier packing. 103 is Ryan Xu's
+        and 258, 302 and 303 SQUISH's, each refined to a smaller side; 108, 127, 131, 180
+        and 306 are Francisco Couzo's T-128 packings and 84, 86, 105, 175 and 270 his T-130
+        packings, at sides 8.2e-13 to 1.3e-7 above his. So the credit at 180 runs through
+        T-128 to Siddharth Gupta's packing and at 270 through T-130 to Evan Daniel's; T-138
+        and the source's credit now name both. At 267 the witness keeps Ryan Xu's
+        arrangement with every square moved, and at 132 none of the thirteen pairs, where the
+        credit is the issue's. An answer is still welcome in the closing comment and would
+        change nothing the record now asserts.
         Question 2 of the confirmation of 12 October; its question 1, whether the errata's
         39-digit pin meant a commit other than dd3da5c753c5, would change nothing in the
         record, whose pinned files carry exactly the digests the issue lists, so it is not
