@@ -2436,13 +2436,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "The 23 October significance review of T-154, T-155 and T-156 (think-7j5d), "
             "which keeps their scores at S5, S1 and S1 and rewrites only their "
-            "significance rationale, scored date and by, against main 44df28b07 (#743): "
-            "rendered at link revision 44df28b0 into empty site directories from this "
-            "tree and from the same tree with the register edit stashed (69 files each), "
-            "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "significance rationale, scored date and by, against main 598d23289 (#742): "
+            "rendered at link revision 26339a13 into empty site directories from this "
+            "tree and from the same tree with main's register swapped in (69 files "
+            "each), render_n11_lower_bounds_explainer, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write every "
-            "file byte-identical. No PDF was printed; each prints from that HTML. "
-            "Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+            "file byte-identical. Measured before against main 44df28b07 (#743), with "
+            "the register edit stashed, with the same outcome. No PDF was printed; each "
+            "prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
