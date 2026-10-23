@@ -3234,6 +3234,22 @@ sources:
       derived exact facts only, no upstream byte retained. The issue credits Mishapolk
       (Mykhailo Polkovskyi, since its 11:35:16Z edit) and the finders its packings build
       on, and discloses Gemini assistance. Upper bounds only; no optimality claim.
+  - key: '[Mishapolk issue 732 2026-10-22]'
+    authors: [Polkovskyi]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-22'
+    lineage: builds-on-project
+    credit: Polkovskyi after Couzo
+    short_credit: Polkovskyi after Couzo
+    note: >-
+      Issue 732's exact certificates at 17cc220131360ef290750eb845a3544c30ccb389 in Evan
+      Daniel's format, certificates/NNNN-NNNN/nN.cert, 5,468 at 328 to 9913 indexed by
+      certificates/manifest.json, retained under the MIT licence 17cc220 adds. 77 of the 390
+      at or below 1024 are rows in report order; the author states that the rows at 645, 752
+      and 931 refine Francisco Couzo's #715 packings and that 499 refines his own #719 packing.
+      The issue credits Mishapolk (Mykhailo Polkovskyi). Upper bounds only; no optimality
+      claim, and its saturation argument bounds no s(n).
   - key: '[de Winter issue 666 2026-10-17]'
     authors: [de Winter]
     year: 2026

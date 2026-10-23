@@ -1286,3 +1286,18 @@ repositories:
       copyright Mykhailo Polkovskyi (Mishapolk), which the author's comment on #719
       (issuecomment-6350348588) says covers every certificate, catalogue, manifest and tool, so
       a packet pinned at 17cc220 holds the same certificates with their licence.
+  # The #732 import (think-0gp6, c-lane-732-import-1023): the head past the 17cc220 read.
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: 7b6366fb5e7643772541da21329cda4705be57d5
+    read_on: '2026-10-23'
+    bead: think-0gp6
+    note: >-
+      The mishapolk-issue732-2026-10-22 packet pins 17cc220 and retains the 77 certificates
+      the walk of issue 732 records as rows, pinning the other 313 at 325 to 1024 by digest.
+      7b6366f (2026-10-23T01:50:22Z), the head, removes certificates/3000-3999/n3426.cert,
+      whose side was above its grid side, and sets 3426 to the grid in upper_bounds.json,
+      certified_bounds.json, manifest.json and census.json, with its SHA256SUMS line and the
+      README's counts (5,467), as the author's comment on #732 (issuecomment-6355486108)
+      says. It changes nothing at or below 1024, so the packet stays at 17cc220, whose
+      indexes have the SHA-256 the issue states. 3426 is among the rows above 1024 that wait
+      on the owner (think-f2io). Nothing else to import.
