@@ -4128,7 +4128,12 @@ def _case_prose(context: Context) -> str:
     # record against itself, not the mathematics -- n-017, n-018, and n-019 all stated a
     # verified lower bound in prose that the front matter above it had already moved past,
     # and stayed that way for six hours; check_rung_figures never reads a case body.
-    return _module(context, "devtools.check_case_prose")
+    # About a second more: the AI-assistance sentence each record's citations owe, read
+    # from the bibliography's `ai_assistance` and the Kingbird capture's credit lines,
+    # which ran in no tier until think-j5so.
+    prose = _module(context, "devtools.check_case_prose")
+    assistance = _module(context, "devtools.state_ai_assistance", "--check")
+    return f"{prose}\n{assistance}"
 
 
 def _prose_ceremony(context: Context) -> str:
@@ -6099,7 +6104,11 @@ STEPS: tuple[Step, ...] = (
             *_CORE,
             "packing/devtools/check_case_prose.py",
             "packing/devtools/check_rung_figures.py",
+            "packing/devtools/state_ai_assistance.py",
             "packing/frontier/n-*.md",
+            "packing/frontier/source-coverage.yaml",
+            "packing/resources/bibliography.yaml",
+            "packing/resources/web/kingbird-squares-in-squares*",
             # The checker imports `migrate_math`, which enters the renderer hub.
             *_RENDERER_HUB,
         ),

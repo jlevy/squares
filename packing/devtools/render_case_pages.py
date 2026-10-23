@@ -82,6 +82,18 @@ def case_link(n: int, content: str, *, classes: str = "", label: str = "") -> st
     return f'<a{attributes} href="{case_url(n)}" data-case="{n}">{content}</a>'
 
 
+def case_step(n: int, *, rel: str, arrow: str) -> str:
+    """A record's step to its neighbouring case `n`: the arrow alone beside the record's
+    count, which names the case it loads in its accessible name and its tooltip, so the
+    title line reads as the count between two arrows (the owner, 2026-10-23). `rel` is
+    `prev` or `next`; `case-popover.js` follows it on a press and on the arrow keys."""
+    label = f"{'Previous' if rel == 'prev' else 'Next'} case, n = {n}"
+    return (
+        f'<a href="{case_url(n)}" rel="{rel}" data-case-step="{n}" '
+        f'aria-label="{label}" title="n = {n}">{arrow}</a>'
+    )
+
+
 #: A link to a case's record file, from the site's root, as a page's prose writes one.
 _CASE_LINK = re.compile(r'<a\b[^>]*?\shref="cases/(\d+)\.html(?:#[^"]*)?"[^>]*>')
 
@@ -963,17 +975,10 @@ def record_head(
         reported = f' <span class="site-credit">reported {_esc(case["reported_status"])}</span>'
     count = _math(f"n = {n}")
     correction = corrects_tag(corrects)
-    previous = (
-        f'<a href="{case_url(n - 1)}" rel="prev" data-case-step="{n - 1}">'
-        f"{arrow_icon('left')}{_math(f'n = {n - 1}')}</a>"
-        if n > first
-        else ""
-    )
-    following = (
-        f'<a href="{case_url(n + 1)}" rel="next" data-case-step="{n + 1}">'
-        f"{_math(f'n = {n + 1}')}{arrow_icon('right')}</a>"
-        if n < last
-        else ""
+    steps = "".join(
+        case_step(neighbour, rel=rel, arrow=arrow_icon(direction))
+        for neighbour, rel, direction in ((n - 1, "prev", "left"), (n + 1, "next", "right"))
+        if first <= neighbour <= last
     )
     upper, lower = case["reported_upper_bound"], case["reported_lower_bound"]
     evidence = list(dict.fromkeys(case["evidence"]))
@@ -983,11 +988,10 @@ def record_head(
     )
     return (
         f'<header class="site-case-head" data-kpress-prose-font="sans">'
-        f'<nav class="site-case-steps" aria-label="Cases" {SERIF_MATH}>'
-        f"{previous}{following}</nav>"
         '<span class="site-card-label site-case-eyebrow">Case record</span>'
+        f'<div class="site-case-title-line"><p class="site-case-title" {SERIF_MATH}>{count}</p>'
+        f'<nav class="site-case-steps" aria-label="Cases">{steps}</nav></div>'
         f"{packing_figure(n, upper=upper)}"
-        f'<p class="site-case-title" {SERIF_MATH}>{count}</p>'
         f'<p class="site-case-status">{case_badges(n)}{correction}{reported}{chip}</p>'
         f'<p class="site-case-interval" {SERIF_MATH}>{_math(interval_tex(case))}</p></header>'
         f"{visual_summary(n, drawing=False)}"

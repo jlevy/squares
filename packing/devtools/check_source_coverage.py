@@ -37,7 +37,9 @@ from collections.abc import Callable, Mapping, Sequence
 from datetime import date
 from decimal import Decimal
 from fractions import Fraction
+from typing import Any
 
+from devtools.build_bound_citations import RECENT_SINCE
 from devtools.retained_data import read_retained_text, retained_exists
 from sqpack.kingbird_catalogue import (
     INTAKE_CAPTURE_DATE,
@@ -62,6 +64,7 @@ FRONTIER = ROOT / "frontier"
 COVERAGE = FRONTIER / "source-coverage.yaml"
 EVIDENCE = FRONTIER / "evidence.yaml"
 RESULTS = FRONTIER / "results.yaml"
+BIBLIOGRAPHY = ROOT / "resources" / "bibliography.yaml"
 #: The acquisition record `devtools.upper_bound_packets` writes into a packet.
 ACQUISITION_FORMAT = "external-source-acquisition-v1"
 #: The disposition of the source whose values every case reports unless overridden.
@@ -886,6 +889,68 @@ def house_reason_errors(coverage: Mapping, results: Sequence[Mapping]) -> list[s
     return errors
 
 
+def register_source_keys(
+    record: Mapping[str, Any], evidence: Mapping[str, Mapping[str, Any]]
+) -> list[str]:
+    """The source keys a register entry cites: its `attribution`, `builds_on` and
+    `corrects`, and the `source_key` of each evidence entry it cites, in that order."""
+    keys = [
+        *(record.get("attribution") or {}).get("source_keys", ()),
+        *(record.get("builds_on") or {}).get("source_keys", ()),
+    ]
+    if corrects := record.get("corrects"):
+        keys.append(corrects["source_key"])
+    keys.extend(
+        str(evidence[ref]["source_key"])
+        for ref in record.get("evidence") or ()
+        if (evidence.get(ref) or {}).get("source_key")
+    )
+    return [str(key) for key in dict.fromkeys(keys)]
+
+
+def register_source_errors(
+    coverage: Mapping[str, Any],
+    results: Sequence[Mapping[str, Any]],
+    evidence: Mapping[str, Mapping[str, Any]],
+    bibliography: Mapping[str, Mapping[str, Any]],
+) -> list[str]:
+    """Each recent source a register entry or its evidence cites that no coverage source
+    holds.
+
+    Stage 3 of the result import process records a reported claim with "a coverage entry
+    that cites it". A key is held when a coverage source carries it as `source_key`, or
+    cites an evidence entry that carries it, as the Kingbird catalogue's entry cites each
+    finder's own evidence at n = 69, 83 and 87. The rule is the register's for results by
+    others (`check_results.recent_evidence`): a source the bibliography dates on or after
+    `RECENT_SINCE`. An earlier work's availability is `source-availability.yaml`'s.
+    Until this check, [wand125 rectangle bounds 2026-09-28] (T-046, T-070) and
+    [wand125 tools 2026] (T-058, T-059) had no entry and the gate passed (think-g6d5,
+    think-0qrn; the import review of 2026-10-01, W7).
+    """
+    sources = coverage["sources"]
+    held = {str(source["source_key"]) for source in sources}
+    held.update(
+        str(evidence[ref]["source_key"])
+        for source in sources
+        for ref in source["evidence"]
+        if (evidence.get(ref) or {}).get("source_key")
+    )
+    citing: dict[str, list[str]] = {}
+    for record in results:
+        for key in register_source_keys(record, evidence):
+            citing.setdefault(key, []).append(str(record["id"]))
+    errors: list[str] = []
+    for key, ids in sorted(citing.items()):
+        dated = str((bibliography.get(key) or {}).get("dated") or "")
+        if key in held or not dated or dated < RECENT_SINCE.isoformat():
+            continue
+        errors.append(
+            f"{key}, dated {dated} and cited by {', '.join(ids)}, has no coverage source: "
+            "none carries the key or cites evidence that does"
+        )
+    return errors
+
+
 def current_beyond_horizon(coverage: Mapping) -> dict[int, Mapping]:
     """Each count's current beyond-horizon row: the one no later report supersedes.
 
@@ -947,6 +1012,18 @@ def main() -> int:
             for evidence_id in source["evidence"]
             if evidence_id not in evidence_id_set
         )
+    results = safe_load(RESULTS.read_text(encoding="utf-8"))["results"]
+    errors.extend(
+        register_source_errors(
+            coverage,
+            results,
+            {str(entry["id"]): entry for entry in evidence},
+            {
+                str(source["key"]): source
+                for source in safe_load(BIBLIOGRAPHY.read_text(encoding="utf-8"))["sources"]
+            },
+        )
+    )
 
     if errors:
         for error in errors:
@@ -968,7 +1045,6 @@ def main() -> int:
         if source.get("claims_record")
     }
     errors.extend(selection_errors(coverage, baseline, claims, adopted_house_sources()))
-    results = safe_load(RESULTS.read_text(encoding="utf-8"))["results"]
     errors.extend(house_reason_errors(coverage, results))
 
     cases = {

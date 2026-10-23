@@ -1,4 +1,4 @@
-// The addressed diagram's final placement and expansion, with or without scripts.
+// The addressed diagram's final placement and focus, with or without scripts.
 /** @param {number} n */
 (n) => {
   const tile = document.getElementById(`atlas-n-${n}`);
@@ -10,7 +10,6 @@
     top: box.top,
     bottom: box.bottom,
     viewportHeight: innerHeight,
-    expanded: document.querySelector("[data-atlas-toggle]")?.getAttribute("aria-expanded"),
     focused: document.activeElement === tile,
     targeted: tile.matches(":target"),
     outlineWidth: getComputedStyle(tile).outlineWidth,

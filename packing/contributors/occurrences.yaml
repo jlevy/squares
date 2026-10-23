@@ -8003,7 +8003,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 0
   end: 9
   label: Mishapolk
@@ -8020,7 +8020,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 16
   end: 24
   label: Stenlund
@@ -8037,7 +8037,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 26
   end: 34
   label: Friedman
@@ -8055,7 +8055,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 36
   end: 45
   label: Ellsworth
@@ -8072,7 +8072,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 47
   end: 62
   label: Chaoweeraprasit
@@ -8090,7 +8090,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 64
   end: 69
   label: Couzo
@@ -8109,7 +8109,7 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 71
   end: 73
   label: Xu
@@ -8124,9 +8124,46 @@ occurrences:
     record_key: '[Mishapolk decimal poses 2026-10-09]'
     field: /credit
   expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
-    Xu, Levy
+    Xu, Gupta, Daniel, Levy
   start: 75
-  end: 79
+  end: 80
+  label: Gupta
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: siddharth-gupta
+  note: 'Reviewed 2026-10-23 (review A3 of #747): measured pose by pose, this source''s
+    180 is Francisco Couzo''s T-128 packing, whose credit runs to SQUISH''s packing
+    through Siddharth Gupta''s (measure/identity.json in the packet). The identity
+    join is the one the [Couzo exact refinements 2026-10-08] credit makes.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Gupta, Daniel, Levy
+  start: 82
+  end: 88
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  contributor_id: evan-daniel
+  note: 'Reviewed 2026-10-23 (review A3 of #747): measured pose by pose, this source''s
+    270 is Francisco Couzo''s T-130 packing, which refines Evan Daniel''s (measure/identity.json
+    in the packet). The identity join is the one the [Couzo exact refinements 2026-10-08]
+    credit makes.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk decimal poses 2026-10-09]'
+    field: /credit
+  expected_text: Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo,
+    Xu, Gupta, Daniel, Levy
+  start: 90
+  end: 94
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -26196,6 +26233,96 @@ occurrences:
     which the retained couzo-issue715-2026-10-21 index credits after PingYou Ltd's
     (BuddenPing's) squares; the prior reviewed corporate identity is retained. No individual
     is inferred.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel exact and local reports 2026-10-12]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel exact and local reports
+    2026-10-12]] /authors/0 span 0:6. The evand/square-packing reports at ad86d42 and the
+    exact-data-2026-10-12 release are the repository whose LICENSE, retained in
+    evand-exact-and-local-reports-2026-10-12, names Evan Daniel. Keep the source-author
+    role distinct from each configuration's case credit.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel exact and local reports 2026-10-12]'
+    field: /credit
+  expected_text: Daniel after Schadt, Ellsworth, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel exact and local reports 2026-10-12]]
+    /credit span 0:6. The evand/square-packing reports at ad86d42 and the
+    exact-data-2026-10-12 release are the repository whose retained licence names Evan
+    Daniel.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel exact and local reports 2026-10-12]'
+    field: /credit
+  expected_text: Daniel after Schadt, Ellsworth, Levy
+  start: 13
+  end: 19
+  label: Schadt
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: thomas-schadt
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel exact and local reports 2026-10-12]]
+    /credit span 13:19. The s(29) record packing whose side the source's polynomial gives
+    is Thomas Schadt's, as n-029's case record credits it; the finder's role is kept.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel exact and local reports 2026-10-12]'
+    field: /credit
+  expected_text: Daniel after Schadt, Ellsworth, Levy
+  start: 21
+  end: 30
+  label: Ellsworth
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - catalogue-byline
+  - catalogue-credits
+  contributor_id: david-ellsworth
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel exact and local reports 2026-10-12]]
+    /credit span 21:30. The s(29) record packing was improved by David Ellsworth with the
+    analytic construction the Kingbird catalogue retains; the retained catalogue header
+    binds that name to Davidebyzero, and the source's CREDITS.md names his record tables.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel exact and local reports 2026-10-12]'
+    field: /credit
+  expected_text: Daniel after Schadt, Ellsworth, Levy
+  start: 32
+  end: 36
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel exact and local reports 2026-10-12]]
+    /credit span 32:36. The specific first-party jlevy/squares method or source is the
+    Joshua Levy identity established by LICENSE and the retained ojoshe receipt; project
+    credit does not imply sole personal authorship.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

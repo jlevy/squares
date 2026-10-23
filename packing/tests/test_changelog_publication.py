@@ -149,7 +149,7 @@ def test_news_has_one_card_per_entry_and_home_highlights_three_existing_s5_resul
     for entry in selected:
         anchor = render_changelog.entry_anchor(entry["id"])
         assert f'href="news.html#{anchor}"' in home
-    assert '<a class="site-action" href="news.html">View All News' in home
+    assert '<a class="site-action" href="news.html">All News' in home
     assert 'id="news" class="site-title">News' in news
     assert re.search(
         r'<a(?=[^>]*data-page="news")(?=[^>]*aria-current="page")(?=[^>]*href="news.html")[^>]*>',
