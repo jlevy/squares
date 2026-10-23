@@ -93,7 +93,7 @@ def tutorials() -> str:
 
 @pytest.fixture(scope="module")
 def downloads() -> str:
-    return site_renders.html("downloads.html")
+    return site_renders.html("posters.html")
 
 
 @pytest.fixture(scope="module")
@@ -114,6 +114,11 @@ def resources() -> str:
 @pytest.fixture(scope="module")
 def results() -> str:
     return site_renders.html(render_overview.RESULTS_PAGE)
+
+
+@pytest.fixture(scope="module")
+def verification() -> str:
+    return site_renders.html("verification.html")
 
 
 @pytest.fixture(scope="module")
@@ -263,7 +268,7 @@ def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
 
 
 def test_every_link_to_a_result_goes_to_its_row(
-    page: str, results: str, case_pages: dict[str, str]
+    page: str, results: str, verification: str, case_pages: dict[str, str]
 ) -> None:
     """The overview's recent table and replay table, and the case records, link a
     result at its row on the results page, never at a fragment of their own page."""
@@ -272,7 +277,8 @@ def test_every_link_to_a_result_goes_to_its_row(
     assert linked
     # The archive action is the only non-row destination on results.html.
     assert set(linked) - rows == {"all-results"}
-    assert 'id="verification-ladders"' in results
+    assert 'id="verification-ladders"' in verification
+    assert 'class="site-ladders"' not in results
     assert not re.search(r'href="#t-\d+"', page)
     for record in case_pages.values():
         assert set(re.findall(r'href="\.\./results\.html#([^"]+)"', record)) <= rows | {
@@ -282,7 +288,9 @@ def test_every_link_to_a_result_goes_to_its_row(
         assert 'href="../index.html#t-' not in record
 
 
-def test_every_moved_fragment_is_one_the_forwarder_sends_on(page: str, results: str) -> None:
+def test_every_moved_fragment_is_one_the_forwarder_sends_on(
+    page: str, results: str, verification: str
+) -> None:
     """`forward.js` sends `#every-result` and a row's id from the overview to the results
     page (`tests/node/overview_forward` runs it): every row id is of the form it
     recognises, the section's lands on the page's title, and no id the overview keeps is."""
@@ -301,8 +309,12 @@ def test_every_moved_fragment_is_one_the_forwarder_sends_on(page: str, results: 
     assert '"explainer.html"' not in forward
     moved = re.compile(r"every-result|verification-ladders|verification-at-a-glance|t-\d+")
     assert all(moved.fullmatch(row_id) for row_id, _, _ in ROW.findall(results))
-    for landing in ("every-result", "verification-ladders", "verification-at-a-glance"):
-        assert f'id="{landing}"' in results, landing
+    assert 'id="every-result"' in results
+    navigation = render_overview.NAVIGATION_SCRIPT.read_text(encoding="utf-8")
+    for landing in ("verification-ladders", "verification-at-a-glance"):
+        assert f'id="{landing}"' in verification, landing
+        assert f'id="{landing}" href="verification.html#{landing}"' in results
+        assert f'["#{landing}", "verification.html#{landing}"]' in navigation
     assert not [i for i in ID.findall(page) if moved.fullmatch(i)]
 
 
@@ -429,7 +441,7 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     ]
     positions = [page.index(f'id="{identifier}"') for identifier in landings]
     assert positions == sorted(positions)
-    assert 'href="atlas.html">View All Packings' in page
+    assert 'href="atlas.html">View Visual Atlas' in page
     assert 'href="news.html">View All News' in page
     assert 'href="papers.html">View All Papers' in page
     assert '<a class="site-action" href="results.html#all-results" data-all-results' in page
@@ -541,7 +553,7 @@ def test_home_and_learn_link_to_the_full_film_and_workbench(page: str) -> None:
         assert "<video" not in section
         assert _asset_tag(render_overview.FILM_SCRIPT) not in destination
     assert len(_media_cards(page, "visuals")) == 1
-    assert 'href="downloads.html">View All Downloads' in page
+    assert 'href="posters.html">View All Posters' in page
 
 
 def _page_cards(page: str) -> list[tuple[str, str, str]]:
@@ -1992,43 +2004,47 @@ def _seen(page: str) -> str:
     return re.sub(r"<[^>]+>", "", bare)
 
 
-def _ladders(results: str) -> str:
-    """The Verification Ladders section's diagram on the results page, the one block
+def _ladders(verification: str) -> str:
+    """The Verification Ladders section's diagram on its guide page, the one block
     between the section's lead and the prose under it."""
-    section = results.split('id="verification-ladders"', 1)[1].split("<h2", 1)[0]
+    section = verification.split('id="verification-ladders"', 1)[1].split("<h2", 1)[0]
     assert section.count('class="site-ladders"') == 1
     return section.split('<div class="site-ladders-frame site-wide">', 1)[1].split("<p", 1)[0]
 
 
 def test_a_table_of_results_uses_the_ladder_documentation_without_a_bottom_legend(
-    page: str, results: str
+    page: str, results: str, verification: str
 ) -> None:
-    """Results retains its complete ladder account and table without a second legend."""
+    """The archive links its separate ladder guide without a second table legend."""
     assert not hasattr(overview_sections, "rung_key")
     assert not hasattr(overview_sections, "rung_legend")
     assert "site-rung-legend" not in page
     assert "site-rung-legend" not in results
-    assert 'id="verification-ladders"' in results
+    assert 'id="verification-ladders"' in verification
+    assert 'href="verification.html">Verification' in results
+    assert 'class="site-ladders"' not in results
     assert results.index('<div class="site-table-tools') < results.index(
         '<table class="kpress-table site-table site-results"'
     )
     assert "site-ladders-key" not in page
 
 
-def test_the_ladders_are_the_results_pages_and_the_overview_points_to_them(
-    page: str, results: str
+def test_the_ladders_are_on_the_verification_page_and_the_archive_points_to_them(
+    page: str, results: str, verification: str
 ) -> None:
-    """Ratings and evidence follow the complete table, retaining the old section
-    anchor. The homepage links the archive without repeating its diagram."""
+    """The guide retains all ratings/evidence prose and old section anchors; the
+    archive links it after the table without repeating the diagram."""
     heading = (
         '<h2 id="verification-ladders" class="site-navigation-heading">Verification Ladders'
         '<a id="verification-at-a-glance"></a></h2>'
     )
-    assert results.count(heading) == 1
-    assert "Verification at a Glance" not in results
-    assert 'href="#verification-at-a-glance"' not in results
-    assert results.index('<div class="site-table-tools') < results.index(heading)
-    section = results.split(heading, 1)[1].split("<h2", 1)[0]
+    assert verification.count(heading) == 1
+    assert "Verification at a Glance" not in verification
+    assert 'href="#verification-at-a-glance"' not in verification
+    assert results.index('<div class="site-table-tools') < results.index(
+        'class="site-action" href="verification.html">Verification'
+    )
+    section = verification.split(heading, 1)[1].split("<h2", 1)[0]
     lead = _rendered_text(section.split('<div class="site-ladders-frame', 1)[0])
     assert lead.startswith("Each result has an identifier, a claim, and three ratings")
     assert "S, its significance" in lead
@@ -2036,14 +2052,14 @@ def test_the_ladders_are_the_results_pages_and_the_overview_points_to_them(
     assert "C, what this repository has confirmed independently" in lead
     assert "under its review policy" in lead
     assert 'href="epistemics.html#results-by-others"' in section
-    evidence = results.split(
+    evidence = verification.split(
         '<h2 id="evidence-and-exactness" class="site-navigation-heading">', 1
     )[1].split("<h2", 1)[0]
     after = _rendered_text(evidence.split("</h2>", 1)[1])
     assert after.startswith("The ladders grade a result. Its evidence carries")
     assert "Finite precision is not enough where squares touch exactly." in after
     assert "T-004 and T-008 check Bentz" in after
-    assert results.count("Each result has an identifier, a claim, and three ratings") == 1
+    assert verification.count("Each result has an identifier, a claim, and three ratings") == 1
     # The overview keeps the destination without repeating the ratings diagram.
     for gone in (
         'id="verification-ladders"',
@@ -2058,7 +2074,7 @@ def test_the_ladders_are_the_results_pages_and_the_overview_points_to_them(
     assert 'id="all-results"' in results
     assert results.index('id="all-results"') < results.index('<div class="site-table-tools')
     for scale, _, _, question in overview_sections.DIMENSIONS:
-        assert question in results, scale
+        assert question in verification, scale
 
 
 def test_the_frontier_survey_is_an_atlas_section_without_duplicate_cards(
@@ -2194,30 +2210,32 @@ def test_the_frontier_page_opens_with_the_surveys_account(
         assert "certificate is replayed here in full" not in served
         assert "certificate counts once" not in served
         assert "assumptions are discharged" not in served
-    # The ratings retain their review-policy link in the explanation below the table.
+    # The separate Verification guide retains the complete review-policy explanation.
+    verification_page = rendered("verification.html")
     ladders_lead = _rendered_text(
-        results_page.split('id="verification-ladders"', 1)[1].split(
+        verification_page.split('id="verification-ladders"', 1)[1].split(
             '<div class="site-ladders-frame', 1
         )[0]
     )
     assert "C, what this repository has confirmed independently" in ladders_lead
     assert "under its review policy" in ladders_lead
     assert "review policy" in ladders_lead
-    assert 'href="epistemics.html#results-by-others"' in results_page
+    assert 'href="epistemics.html#results-by-others"' in verification_page
 
 
-def test_verification_ladders_is_one_ladder_diagram_significance_first(results: str) -> None:
+def test_verification_ladders_is_one_ladder_diagram_significance_first(
+    verification: str,
+) -> None:
     """The section is one diagram, not three cards: a column a dimension in the order
     Significance, Verification, Confirmation, each headed by its name and question with
     no caps label, and a row a level, the highest first, so the rungs line up. It is a
     grid with table roles, never a `<table>`, which kpress would wrap and restyle and
-    `overview/table.js` would look for; on the results page, which has a table, that
-    is what keeps the diagram out of the script's hands."""
+    `overview/table.js` would look for."""
     assert [scale for scale, *_ in overview_sections.DIMENSIONS] == ["S", "V", "C"]
-    diagram = _ladders(results)
+    diagram = _ladders(verification)
     for foreign in ("<table", "site-table", "site-card", "popovertarget"):
         assert foreign not in diagram, foreign
-    assert "pop-dimension-" not in results
+    assert "pop-dimension-" not in verification
     assert diagram.startswith(
         '<div class="site-ladders" role="table" aria-label="Verification ladders by level: '
         'significance, verification, confirmation">'
@@ -2248,7 +2266,7 @@ def test_verification_ladders_is_one_ladder_diagram_significance_first(results: 
         assert [bool(cell["empty"]) for cell in cells] == [not cell["label"] for cell in cells]
 
 
-def test_the_ladder_diagram_says_what_the_rubric_says(results: str) -> None:
+def test_the_ladder_diagram_says_what_the_rubric_says(verification: str) -> None:
     """Every rung of `epistemics.md` is a cell: its chip, titled with the rubric's own
     meaning, and its description, which is that meaning unless the rung has a short
     form."""
@@ -2273,7 +2291,7 @@ def test_the_ladder_diagram_says_what_the_rubric_says(results: str) -> None:
     }
     cells = {
         cell["label"]: cell
-        for cell in _LADDER_CELL.finditer(_ladders(results))
+        for cell in _LADDER_CELL.finditer(_ladders(verification))
         if cell["label"]
     }
     assert set(cells) == set(meanings)
@@ -2332,14 +2350,14 @@ def test_every_v_and_c_rung_has_a_short_form_in_the_rubric() -> None:
 
 
 def test_the_diagram_carries_no_tally_and_keeps_the_rungs_no_result_stands_at(
-    results: str, register: list[dict]
+    verification: str, register: list[dict]
 ) -> None:
     """The diagram says what each rung means and counts nothing: a cell is a chip and a
     description, with no "7 results" and no "no result yet", and the helpers that counted
     are gone. A rung is a cell whether or not a result stands at it, so V5 and C5, which
     the 2026-09-30 ladder reserves for formal, expert-reviewed work and no result has
     reached, are drawn like the rest."""
-    diagram = _ladders(results)
+    diagram = _ladders(verification)
     assert "site-ladders-count" not in diagram
     assert not re.search(r"\d+ results?\b|no result yet", diagram)
     for retired in ("rung_counts", "count_label"):
@@ -2352,7 +2370,7 @@ def test_the_diagram_carries_no_tally_and_keeps_the_rungs_no_result_stands_at(
 
 
 def test_every_rung_chip_in_the_diagram_is_titled_with_the_rubrics_meaning(
-    results: str,
+    results: str, verification: str
 ) -> None:
     """The diagram's wording is `epistemics.md`'s, not a second hand-written copy: every
     `S`, `V` and `C` chip in the ladder diagram carries its rung's full meaning as its
@@ -2361,7 +2379,7 @@ def test_every_rung_chip_in_the_diagram_is_titled_with_the_rubrics_meaning(
     meanings = overview_sections.rung_meanings()
     titled = {
         cell["label"]: html.unescape(cell["title"] or "")
-        for cell in _LADDER_CELL.finditer(_ladders(results))
+        for cell in _LADDER_CELL.finditer(_ladders(verification))
         if cell["label"]
     }
     assert set(titled) == set(meanings)
@@ -2719,7 +2737,7 @@ NAV_ENTRIES = [
 PAPERS_SECTION = {
     "papers.html",
     "tutorials.html",
-    "downloads.html",
+    "posters.html",
     "tutorial.html",
     "tutorial-advanced.html",
     "visualize.html",
@@ -3011,8 +3029,13 @@ def _the_bar(page: str, *, root: str) -> list[tuple[str, str]]:
     bars = SITE_NAV_BLOCK.findall(page)
     assert len(bars) == 1, "a page carries exactly one navigation bar"
     links = [attrs for tag, attrs in _Tags(bars[0]).tags if tag == "a" and "data-page" in attrs]
-    assert sum(attrs.get("aria-current") == "page" for attrs in links) <= 1
-    assert any(attrs.get("aria-current") in {"page", "true"} for attrs in links)
+    items = [
+        attrs
+        for tag, attrs in _Tags(bars[0]).tags
+        if tag in {"a", "button"} and "data-page" in attrs
+    ]
+    assert sum(attrs.get("aria-current") == "page" for attrs in items) <= 1
+    assert any(attrs.get("aria-current") in {"page", "true"} for attrs in items)
     destinations = []
     for attrs in links:
         href = attrs["href"] or ""
@@ -4162,7 +4185,7 @@ def test_recent_major_results_opens_with_preview_then_recent_and_archive_actions
     section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
         0
     ]
-    assert '<h2 id="recent-results" class="site-title">Recent Major Results</h2>' in page
+    assert '<h2 id="recent-results" class="site-title">Results</h2>' in page
     assert _recent_prose(page) == ""
     assert "Recent progress, with each result linked to its complete record." not in page
     assert _asset_tag(render_overview.HOMEPAGE_CSS) in page
@@ -4289,7 +4312,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(
         ("papers/n11-optimality-review.html", "proof of optimality"),
         ("cases/11.html", "eleven squares"),
         ("results.html#t-064", "an infinite family"),
-        ("results.html#verification-ladders", "AI-assisted verification"),
+        ("verification.html#verification-ladders", "AI-assisted verification"),
         ("results.html", "Results page"),
         (
             "news.html#changelog-entry-overbeck-n17-candidate-proof",
@@ -4702,29 +4725,6 @@ def test_the_papers_page_introduces_the_papers_within_t060s_rungs(
     assert render_overview.PAPERS_ARTICLE in render_overview.RENDER_INPUTS
 
 
-def test_the_film_note_says_the_films_predate_t060(
-    register: list[dict], rendered: Callable[[str], str]
-) -> None:
-    """The films were cut before T-060, so the film page says what they show at n = 11,
-    dated from the release; a film cut after T-060 fails here until the note goes."""
-    from datetime import datetime  # noqa: PLC0415
-
-    from sqpack.release import PUBLICATION_HISTORY  # noqa: PLC0415
-
-    page = rendered("visualize.html")
-    assert render_overview.film_release_date() == "28 September"
-    text = re.sub(r"<[^>]+>", "", page)
-    assert (
-        "Both predate T-060, so at n = 11 they show the lower bound of 28 September, "
-        "not the proved value." in text
-    )
-    assert '<a href="results.html#t-060">T-060</a>' in page
-    release = next(e for e in PUBLICATION_HISTORY if e.version == render_overview.FILM_RELEASE)
-    released = datetime.strptime(release.first_published, "%B %d, %Y").date()  # noqa: DTZ007
-    t060 = next(r for r in register if r["id"] == "T-060")
-    assert released.isoformat() < str(t060["registered"])
-
-
 def test_the_status_filter_offers_each_status_a_result_has(
     results: str, overview: overview_data.Overview
 ) -> None:
@@ -4753,11 +4753,11 @@ def test_the_survey_counts_are_the_frontier_pages(page: str) -> None:
 
 
 def test_a_reported_bound_is_a_row_of_the_results_table_and_no_block_of_its_own(
-    page: str, results: str, overview: overview_data.Overview
+    page: str, results: str, verification: str, overview: overview_data.Overview
 ) -> None:
     """Every recent case whose reported lower bound says more than its verified one is
     carried by register entries, and each of those is a row of both tables with its
-    status. The overview lists no case of them on its own; the results page, where the
+    status. The overview lists no case of them on its own; the Verification guide, where the
     statuses are defined, says how many results are not yet confirmed, each count the
     link to those rows (think-d04u; on the results page since 2026-10-02)."""
     waiting = [row for row in overview.recent if row.shows_reported]
@@ -4790,11 +4790,11 @@ def test_a_reported_bound_is_a_row_of_the_results_table_and_no_block_of_its_own(
         assert (link in sentence) is (status != "confirmed"), status
         if status != "confirmed":
             linked = f'<a href="results.html?status={status}">{count} {status}</a>'
-            assert linked in results
+            assert linked in verification
             assert linked not in page
     # It stands where the statuses are defined, between their definitions and the rule
     # that the status is never set by hand.
-    prose = results.split('id="verification-ladders"', 1)[1].split('id="all-results"', 1)[0]
+    prose = verification.split('id="status-and-supersession"', 1)[1]
     text = _rendered_text(prose)
     assert text.index("a known defect remains open") < text.index(opening)
     assert text.index(opening) < text.index("Status follows the confirmation rung")
@@ -7390,23 +7390,26 @@ def test_significance_is_one_box_with_five_filled_or_empty_segments() -> None:
 
 
 def test_results_and_atlas_expose_their_collections_before_details(
-    results: str, atlas_page: str
+    results: str, verification: str, atlas_page: str
 ) -> None:
     article = results.split("<article", 1)[1].split("</article>", 1)[0]
+    article = re.sub(r"<noscript>.*?</noscript>", "", article, flags=re.DOTALL)
     table = article.index('id="all-results"')
-    assert table < article.index('id="verification-ladders"')
     assert article.count('id="all-results"') == 1
     assert 'href="atlas.html">Visual Atlas' in article[:table]
     assert 'href="atlas.html#best-known-results">Best Known Bounds' in article[:table]
+    assert table < article.index('href="verification.html">Verification')
     for fragment in (
-        "all-results",
         "verification-ladders",
         "evidence-and-exactness",
         "results-and-credits",
         "status-and-supersession",
     ):
-        assert f'href="#{fragment}"' in article
-        assert f'id="{fragment}"' in article
+        assert f'id="{fragment}"' not in article
+        assert f'id="{fragment}"' in verification
+        assert f'href="verification.html#{fragment}"' in results
+    assert 'href="epistemics.html">Project Epistemics' in verification
+    assert 'class="site-ladders"' not in article
     for fragment in ("packings", "the-frontier-survey", "best-known-results"):
         assert f'href="#{fragment}"' in atlas_page
         assert f'id="{fragment}"' in atlas_page
@@ -7423,13 +7426,16 @@ def test_learning_collections_have_substantive_pages(
     assert len(_media_cards(downloads, "pdfs")) == 2
     for record in render_overview.PAPERS:
         for suffix in (".pdf", ".md"):
-            assert f'href="{render_overview.paper_path(record.slug, suffix)}"' in downloads
+            assert f'href="{render_overview.paper_path(record.slug, suffix)}"' not in downloads
+    assert 'id="paper-editions"' in downloads
+    assert 'href="papers.html"' in downloads
+    assert "<table" not in downloads
     visible = re.sub(r"<noscript>.*?</noscript>", "", papers, flags=re.DOTALL)
     for fragment in ("tutorial", "pdfs", "visuals", "resources"):
         assert re.search(rf'<h[1-6][^>]*id="{fragment}"', visible) is None
     for target in (
         "tutorials.html#tutorial",
-        "downloads.html#pdfs",
+        "posters.html#pdfs",
         "visualize.html",
         "resources.html",
     ):
@@ -7455,7 +7461,7 @@ def test_about_subcategories_keep_their_complete_content_on_dedicated_pages(
 def test_recent_results_and_archive_have_separate_substantive_content(
     page: str, results: str, recent_results: str, overview: overview_data.Overview
 ) -> None:
-    """Daily and weekly result lists have their own page; archive filters and row
+    """The arrival-ordered table has its own page; archive filters and row
     addresses stay canonical, with a useful no-script path from old fragments."""
     assert "recent-results.html" in render_overview.SITE_PAGES
     assert render_overview.PAGES["recent-results.html"] is render_overview.recent_results_page
@@ -7469,9 +7475,10 @@ def test_recent_results_and_archive_have_separate_substantive_content(
     )
     assert "data-site-table" not in recent_results
     assert _asset_tag(render_overview.RESULTS_CSS, "recent-results.html") in recent_results
-    assert 'class="site-rollup site-added"' in recent_results
-    assert 'class="site-rollup"' in recent_results
-    row_links = re.findall(r'href="results\.html#(t-\d+)"', recent_results)
+    assert "data-recent-results" in recent_results
+    assert "data-recent-older" in recent_results
+    assert 'class="site-rollup' not in recent_results
+    row_links = re.findall(r'href="result/(t-\d+)\.html"', recent_results)
     assert row_links
     assert set(row_links) <= {result.id.lower() for result in overview.results}
     assert not re.search(r'href="#t-\d+', recent_results)
@@ -7483,7 +7490,7 @@ def test_recent_results_and_archive_have_separate_substantive_content(
         assert f'id="{fragment}"' in recent_results
         assert f'id="{fragment}" href="recent-results.html#{fragment}"' in results
     assert 'href="results.html?added-since=' not in recent_results
-    assert 'href="results.html#all-results">View Results Archive' in recent_results
+    assert "<h2" not in recent_results.split("<article", 1)[1].split("<table", 1)[0]
     assert 'href="recent-results.html">View Recent Results' in page
     assert 'href="results.html#all-results" data-all-results' in page
     assert "View Results Archive" in page
@@ -7532,3 +7539,79 @@ def test_contributor_directory_uses_its_menu_label(
     assert label == "Contributor Profiles"
     assert f"<h1>{label}</h1>" in page
     assert f"<title>{render_overview.page_title(label)}</title>" in page
+
+
+def test_overview_keeps_its_problem_heading_and_visual_atlas_section(page: str) -> None:
+    """Overview is the intentional menu/title exception; the original problem and
+    Atlas anchor addresses survive the concise visible labels."""
+    assert '<h1 id="the-problem" class="site-title">The Square Packing Problem</h1>' in page
+    assert '<p class="site-navigation-copy">The Square Packing Problem</p>' not in page
+    assert (
+        '<h2 id="the-atlas-of-square-packings" class="site-title">'
+        'Visual Atlas<a id="the-atlas"></a></h2>'
+    ) in page
+    assert "<title>Overview · The Squares Project</title>" in page
+    assert '<h2 id="recent-results" class="site-title">Results</h2>' in page
+    assert 'aria-label="Breadcrumb"' not in page
+
+
+def test_posters_replaces_the_download_catalogue(downloads: str) -> None:
+    """The dedicated page offers packing posters; the old address remains usable."""
+    from devtools.paper_structure import parse  # noqa: PLC0415
+
+    tree = parse(downloads)
+    assert [heading.text() for heading in tree.find_all("h1")] == ["Posters"]
+    assert "<title>Posters · The Squares Project</title>" in downloads
+    assert 'href="https://squaremath.org/posters.html"' in downloads
+    assert 'id="pdfs"' in downloads
+    assert "Paper Editions" not in tree.text()
+    assert ("downloads.html", "posters.html") in render_overview.MOVED_PAGES
+    forwarder = next(
+        page for page in render_overview.forwarder_pages() if page.name == "downloads.html"
+    )
+    assert 'data-moved-to="posters.html"' in forwarder.html
+    assert "<title>Posters · The Squares Project</title>" in forwarder.html
+
+
+def test_site_guidance_uses_sans_roles_without_reclassifying_the_problem(
+    *,
+    page: str,
+    tutorials: str,
+    resources: str,
+    documentation: str,
+    report: str,
+    downloads: str,
+    contributor_documents: dict[str, str],
+) -> None:
+    """Typography follows guidance versus exposition, rather than all paragraphs."""
+    from devtools.paper_structure import parse  # noqa: PLC0415
+
+    guidance = parse(page).find_all(cls="site-navigation-copy")
+    guidance_text = " ".join(node.text() for node in guidance)
+    for invitation in (
+        "We track contributors",
+        "Have a new packing",
+        "Start with the tutorials",
+        "Watch the Atlas grow",
+        "The project documentation explains",
+        "Explore the catalogues",
+    ):
+        assert invitation in guidance_text
+    assert "The square packing problem is a simple" in parse(page).text()
+    assert "The square packing problem is a simple" not in guidance_text
+    assert "The value of s(n) remains unknown" not in guidance_text
+    for source, expected in (
+        (tutorials, "Start with Square Packing from First Principles"),
+        (resources, "Catalogues, research repositories"),
+        (documentation, "The code, the certificates"),
+        (report, "If you have new results"),
+        (downloads, "Download the first hundred packings"),
+        (
+            contributor_documents[render_contributors.DIRECTORY_PATH],
+            "People whose work the square-packing record cites or credits",
+        ),
+    ):
+        descriptions = " ".join(
+            node.text() for node in parse(source).find_all(cls="site-navigation-copy")
+        )
+        assert expected in descriptions

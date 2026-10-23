@@ -905,8 +905,26 @@ def result_filters(
     age = "" if defaults.max_age is None else f' value="{defaults.max_age}"'
     hide = " checked" if defaults.hide_superseded else ""
     reference = reference_date(overview)
+    default_scores = {
+        level
+        for level in range(1, 6)
+        if defaults.significance is None or level >= defaults.significance
+    }
+    score_buttons = "".join(
+        f'<button type="button" data-site-score="{level}" '
+        f'aria-pressed="{str(level in default_scores).lower()}" '
+        f'title="{_esc(rung_meanings()[f"S{level}"])}">S{level}</button>'
+        for level in range(1, 6)
+    )
+    significance_choices = (
+        '<fieldset class="site-result-significance"><legend class="site-visually-hidden">'
+        'Significance</legend><span class="site-tabs site-chooser-small" '
+        'role="group" aria-label="Significance" data-site-significance '
+        f'data-default-floor="{floor}">{score_buttons}</span></fieldset>'
+    )
     rungs = "".join(
-        f'<label>{label} <select data-filter="{scale.lower()}" data-bound="min">'
+        f"<label{' hidden' if scale == 'S' else ''}>{label} "
+        f'<select data-filter="{scale.lower()}" data-bound="min">'
         f"{_options(rung_options(scale), floor if scale == 'S' else '')}"
         "</select></label>"
         for scale, label in RUNG_FILTERS
@@ -921,7 +939,7 @@ def result_filters(
     shown = sum(shown_by_default(result, defaults, reference) for result in listed)
     return (
         '<div class="site-table-tools site-result-filters">'
-        f"{rungs}"
+        f"{significance_choices}{rungs}"
         f'<label>Kind <select data-filter="kind">{_options(kinds)}</select></label>'
         f'<label>Status <select data-filter="status">{_options(statuses)}</select></label>'
         f'<label><input type="checkbox" data-filter="current"{hide}> Hide superseded</label>'
@@ -1030,13 +1048,15 @@ def credit_cell(credit: str, markup: str = "") -> str:
     return f'{finder} <span class="site-cell-quiet">after {after}</span>'
 
 
-def date_cell(result: Result, *, recent_label: str = "") -> str:
+def date_cell(
+    result: Result, *, recent_label: str = "", arrival_date: date | None = None
+) -> str:
     """What a result's date cell holds, in both tables of results: the date first, then
     what it dates, `published` or `established`, quiet (`.site-date-kind`). The cell
     sorts and filters on the date alone, its `data-value` and the row's `data-date`.
     A result's overview sets its date, and each date of its chain, with this too
     (`result_overview.head`, `step`), so the order has one definition."""
-    kind, dated = result.dated
+    kind, dated = ("added", arrival_date.isoformat()) if arrival_date else result.dated
     shown = _esc(dated)
     if recent_label:
         shown = f'<span title="{_esc(recent_label)}">{shown}</span>'
@@ -1049,6 +1069,7 @@ def result_cells(
     detail: RowDetail,
     *,
     replacement_dates: Mapping[str, str],
+    arrival_date: date | None = None,
 ) -> str:
     """A result's cells, one for each column of `result_head`, the same on both tables:
     its date (`date_cell`), with a tooltip for a recent result; its significance
@@ -1062,9 +1083,12 @@ def result_cells(
         '<span class="site-standing">'
         f"{status_marks(result, replacement_dates=replacement_dates)}</span>"
     )
+    dated = arrival_date.isoformat() if arrival_date else result.dated[1]
+    date_markup = date_cell(
+        result, recent_label=new_result_label(result, overview), arrival_date=arrival_date
+    )
     return (
-        f'<td class="site-col-date" data-value="{_esc(result.dated[1])}">'
-        f"{date_cell(result, recent_label=new_result_label(result, overview))}</td>"
+        f'<td class="site-col-date" data-value="{_esc(dated)}">{date_markup}</td>'
         f"{significance_cell(result)}"
         f'<td class="site-col-result">{result_text(result)}</td>'
         f'<td class="{case_cell_class(result)}" data-value="{result.first_n}">'
@@ -1086,6 +1110,7 @@ def result_table_row(
     here: bool,
     shown: bool,
     replacement_dates: Mapping[str, str] | None = None,
+    arrival_date: date | None = None,
 ) -> tuple[str, str]:
     """One result's row in a table of results, and the popover the row opens: the one
     row both tables write, the same cells and the same popover. On the results page
@@ -1098,10 +1123,17 @@ def result_table_row(
     starred = bool(new_result_label(result, overview))
     detail = result_row(result, trigger=_esc(result.id), starred=starred)
     key = "id" if here else "data-result"
+    cells = result_cells(
+        result,
+        overview,
+        detail,
+        replacement_dates=replacement_dates,
+        arrival_date=arrival_date,
+    )
     row = (
         f'<tr {key}="{_esc(result.id.lower())}" {result_facets(result)} '
         f"{detail.attributes}{'' if shown else ' hidden'}>"
-        f"{result_cells(result, overview, detail, replacement_dates=replacement_dates)}</tr>"
+        f"{cells}</tr>"
     )
     return row, detail.popover
 
@@ -1912,6 +1944,65 @@ def recent_table(overview: Overview, defaults: FilterDefaults = RECENT_DEFAULTS)
     return table_of_results(overview, defaults, here=False)
 
 
+RECENT_VISIBLE_DAYS = 7
+
+
+def recent_results_table(overview: Overview) -> str:
+    """Every result once, newest arrival first, with seven calendar dates expanded.
+
+    Arrival means `landed`, falling back to `registered`; the reference is the newest
+    arrival, never the wall clock. The cutoff includes that date and six before it.
+    Older rows share this table and remain visible without JavaScript. The shared
+    Recent Results controller collapses their tbody when enhancement is available.
+    """
+    results = sorted(
+        {result.id: result for result in overview.results}.values(),
+        key=lambda result: (-landed_day(result).toordinal(), result.id),
+    )
+    cutoff = added_reference(overview) - timedelta(days=RECENT_VISIBLE_DAYS - 1)
+    current: list[str] = []
+    older: list[str] = []
+    popovers: list[str] = []
+    replacement_dates = {result.id: first_day(result.dated[1]) for result in overview.results}
+    for result in results:
+        arrival = landed_day(result)
+        row, popover = result_table_row(
+            result,
+            overview,
+            here=False,
+            shown=True,
+            replacement_dates=replacement_dates,
+            arrival_date=arrival,
+        )
+        (current if arrival >= cutoff else older).append(row)
+        popovers.append(popover)
+    heading = result_head()
+    heading = re.sub(r' data-sort="(?:text|num)"', "", heading)
+    heading = re.sub(
+        r'<th title="[^"]*">Date</th>',
+        '<th title="The day this result reached the site">Added</th>',
+        heading,
+        count=1,
+    )
+    toggle = (
+        '<tr id="earlier-results-by-week-published" data-recent-toggle-row>'
+        '<td colspan="8"><button type="button" class="site-action" data-recent-toggle '
+        'data-label-more="Earlier results" data-label-less="Hide earlier results" '
+        'aria-expanded="false" aria-controls="recent-results-older">'
+        "<span data-recent-label>Earlier results</span>"
+        f"{arrow_icon('double-down')}</button></td></tr>"
+    )
+    return (
+        '<div class="site-wide" id="recent-arrivals"><div class="site-table-wrap">'
+        '<table id="added-in-the-last-seven-days" '
+        'class="kpress-table site-table site-results" data-recent-results '
+        f'data-recent-cutoff="{cutoff.isoformat()}">'
+        f"{heading}<tbody>{''.join(current)}{toggle}</tbody>"
+        '<tbody id="recent-results-older" data-recent-older>'
+        f"{''.join(older)}</tbody></table></div>{''.join(popovers)}</div>"
+    )
+
+
 def status_counts(overview: Overview) -> str:
     """One Markdown sentence on the results this project has not confirmed, counted from
     the register, for the results page's prose where the statuses are defined: how many
@@ -1991,7 +2082,8 @@ PROFILES_DIRECTORY = "profiles/index.html"
 def documentation_block() -> str:
     """The repository introduction and complete reader-document cards on About."""
     lead = (
-        "<p>The code, the certificates, the literature archive and the documents that "
+        '<p class="site-navigation-copy">The code, the certificates, the literature '
+        "archive and the documents that "
         "record all of this live in the Squares Project\u2019s "
         f'<a href="{repo_links.REPO_URL}">repository</a>.</p>'
     )
@@ -2145,22 +2237,6 @@ def homepage_paper_cards() -> str:
     """Three starting points from the learning collections."""
     starting_points = (*PAPERS[-2:], PAPERS[0])
     return paper_cards(papers=starting_points)
-
-
-def paper_downloads() -> str:
-    """Every registered paper's PDF and Markdown editions, with its shared title."""
-    rows = "".join(
-        f"<tr><td>{tex_bounds(paper.title)}</td>"
-        f'<td><a href="{paper_path(paper.slug, ".pdf")}">PDF</a></td>'
-        f'<td><a href="{paper_path(paper.slug, ".md")}">Markdown</a></td></tr>'
-        for paper in PAPER_RECORDS
-    )
-    return (
-        '<div class="kpress-table-wrap"><table class="kpress-table">'
-        '<thead><tr><th scope="col">Paper</th><th scope="col">PDF</th>'
-        '<th scope="col">Source</th></tr></thead>'
-        f"<tbody>{rows}</tbody></table></div>"
-    )
 
 
 #: The site's reading and working pages, as the overview's cards under The Squares
@@ -2835,10 +2911,10 @@ def homepage_video(film_url: str) -> str:
 
 
 def pdf_note() -> str:
-    """Retained SVG/source links, for the Papers page's PDFs."""
+    """Retained SVG/source links for the packing posters."""
     atlas = REPO / "packing" / "atlas" / "known-best"
     return (
-        '<p class="site-atlas-note">Each poster is also an SVG '
+        '<p class="site-atlas-note site-navigation-copy">Each poster is also an SVG '
         f'(<a href="{branch_file(atlas / "known-best-1-100.svg")}">1 to 100</a>, '
         f'<a href="{branch_file(atlas / "known-best-1-324.svg")}">1 to 324</a>), '
         f'and the <a href="{branch_file(atlas / "README.md")}">atlas README</a> '

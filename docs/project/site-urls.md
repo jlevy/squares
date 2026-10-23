@@ -788,7 +788,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | defects.html | https://github.com/jlevy/squares/blob/main/defects.md | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → https://github.com/jlevy/squares/blob/main/defects.md |
 | development.html | development.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | documentation.html | documentation.html | page | overview | 2026-10-22 | 2026-10-22 | live |
-| downloads.html | downloads.html | page | overview | 2026-10-22 | 2026-10-22 | live |
+| downloads.html | posters.html | forwarder | overview | 2026-10-22 | 2026-10-22 | forwarded → posters.html |
 | epistemics.html | epistemics.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | explainer.html | papers/n11-lower-bounds-explainer.html | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → papers/n11-lower-bounds-explainer.html |
 | favicon-48.png | favicon-48.png | asset-file | overview | 2026-10-07 | 2026-10-22 | live |
@@ -820,6 +820,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | papers/square-packing-methods-survey.html | papers/square-packing-methods-survey.html | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-17 | live |
 | papers/square-packing-methods-survey.md | papers/square-packing-methods-survey.md | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-17 | live |
 | papers/square-packing-methods-survey.pdf | papers/square-packing-methods-survey.pdf | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-17 | live |
+| posters.html | posters.html | page | overview | 2026-10-08 | 2026-10-22 | live |
 | profiles/ahyangyi.html | profiles/ahyangyi.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/allen-chang.html | profiles/allen-chang.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/anabologyco-maker.html | profiles/anabologyco-maker.html | page | overview | 2026-10-13 | 2026-10-22 | live |
@@ -1159,6 +1160,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | tutorial-advanced.html | tutorial-advanced.html | page | overview | 2026-10-14 | 2026-10-22 | live |
 | tutorial.html | tutorial.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | tutorials.html | tutorials.html | page | overview | 2026-10-22 | 2026-10-22 | live |
+| verification.html | verification.html | page | overview | 2026-10-08 | 2026-10-22 | live |
 | visualize.html | visualize.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | workbench/assets/{css,js,fonts}/*.{hash}.{ext} | — | asset-file | workbench | 2026-10-07 | 2026-10-22 | live |
 | workbench/data/corpus.{hash}.json | — | asset-file | workbench | 2026-10-07 | 2026-10-22 | live |
@@ -1186,6 +1188,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | index.html | 1,300,000 | The shared 100-case Atlas preview includes all 324 canonical case links and per-case SVG references, with common controls, reading and documentation cards. Retained desktop/mobile expansion checks cover the prepared shared row layout. The page-specific ceiling remains below the global two-megabyte limit. |
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |
 | papers/n11-threshold-bound-review.html | 900,000 | The 401-formula review measures 823,322 bytes after sharing font geometry. Its 842,245-byte edition passed three-run desktop/mobile, light/dark and no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves headroom above the measured edition. |
+| recent-results.html | 1,400,000 | The requested complete arrival-ordered table measured 1,295,301 bytes on 22 October 2026 at 229 unique results. It reuses the Results Archive's eight metadata cells and fetched record popovers, with the newest seven calendar dates expanded and every older row retained in the same table. The 1,400,000-byte ceiling matches Results Archive and leaves 104,699 bytes above this measurement. All rows remain available without scripts. Timing has not been re-measured for this view; think-vasz tracks the renderer, budget and final preview checks. |
 | result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 711,115 bytes. |
 | result/t-046.html | 400,000 | Complete broad scope history and prepared exact bounds measure 355,078 bytes. |
 | result/t-058.html | 600,000 | Complete broad scope history and prepared exact bounds measure 509,332 bytes. |

@@ -22,7 +22,7 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 {{ATLAS_GRID}}
 
-<p class="site-action-row site-more site-homepage-atlas-actions"><a class="site-action" href="{{ATLAS_PDF}}" download>Download PDF{{ARROW_DOWNLOAD}}</a><a class="site-action" href="atlas.html">View All Packings{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more site-homepage-atlas-actions"><a class="site-action" href="{{ATLAS_PDF}}" download>Download PDF{{ARROW_DOWNLOAD}}</a><a class="site-action" href="atlas.html">View Visual Atlas{{ARROW_RIGHT}}</a></p>
 
 <h2 id="news" class="site-title">News</h2>
 
@@ -30,7 +30,7 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 <p class="site-action-row site-more"><a class="site-action" href="news.html">View All News{{ARROW_RIGHT}}</a></p>
 
-<h2 id="recent-results" class="site-title">Recent Major Results</h2>
+<h2 id="recent-results" class="site-title">Results</h2>
 
 {{RECENT}}
 
@@ -40,15 +40,23 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 <h2 id="report-your-results" class="site-title">Report Your Results!</h2>
 
+<div class="site-navigation-copy">
+
 Have a new packing, bound, or proof to share?
 Read the contribution instructions and send the evidence behind your result.
+
+</div>
 
 <p class="site-action-row site-more"><a class="site-action" href="report.html">Report a Result{{ARROW_RIGHT}}</a></p>
 
 <h2 id="papers" class="site-title">Learn<a id="learn-more"></a></h2>
 
+<div class="site-navigation-copy">
+
 Start with the tutorials, then follow the lower-bound methods for eleven squares.
 The tutorial and paper catalogues contain the complete reading collections.
+
+</div>
 
 {{PAPER_CARDS}}
 
@@ -60,22 +68,34 @@ The tutorial and paper catalogues contain the complete reading collections.
 {{PDF_CARDS}}
 </div>
 
+<div class="site-navigation-copy">
+
 Watch the Atlas grow one square at a time in the film, or try a packing yourself in the
 Workbench.
 
-<p class="site-action-row site-more"><a class="site-action" href="visualize.html">View Videos{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a><a class="site-action" href="downloads.html">View All Downloads{{ARROW_RIGHT}}</a></p>
+</div>
+
+<p class="site-action-row site-more"><a class="site-action" href="visualize.html">View Videos{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a><a class="site-action" href="posters.html">View All Posters{{ARROW_RIGHT}}</a></p>
 
 <h1 id="squares-project-documentation" class="site-title">Squares Project Documentation</h1>
 
+<div class="site-navigation-copy">
+
 The project documentation explains the research, evidence, record formats, and how to
 build and extend the tools.
+
+</div>
 
 <p class="site-action-row site-more"><a class="site-action" href="documentation.html">View All Documentation{{ARROW_RIGHT}}</a></p>
 
 <h1 id="more-resources" class="site-title">More Resources<a id="other-square-packing-projects"></a></h1>
 
+<div class="site-navigation-copy">
+
 Explore the catalogues, research repositories, and websites behind the square packing
 record, with their credited authors and links to related results.
+
+</div>
 
 <p class="site-action-row site-more"><a class="site-action" href="resources.html">View All Resources{{ARROW_RIGHT}}</a></p>
 

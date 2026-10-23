@@ -1,10 +1,14 @@
 # Resources
 
+<div class="site-navigation-copy">
+
 Catalogues, research repositories, and websites cited by the square packing record.
 Resources are ordered by their counts of attributed results at S5, then S4 and each
 lower significance level, then by the most recent result and name.
 Contributor bylines link to their profiles; the result tallies open the register with
 the corresponding filters.
+
+</div>
 
 {{RESOURCE_CARDS}}
 

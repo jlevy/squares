@@ -92,11 +92,12 @@ NEWS_ARTICLE = TEMPLATES / "news-article.md"
 #: The invitation to report results, with its button: About's and the overview's alike.
 REPORT_RESULTS = TEMPLATES / "report-results.md"
 RESULTS_ARTICLE = TEMPLATES / "all-results-article.md"
+VERIFICATION_ARTICLE = TEMPLATES / "verification-article.md"
 RECENT_RESULTS_ARTICLE = TEMPLATES / "recent-results-article.md"
 VISUALIZE_ARTICLE = TEMPLATES / "visualize-article.md"
 PAPERS_ARTICLE = TEMPLATES / "papers-article.md"
 TUTORIALS_ARTICLE = TEMPLATES / "tutorials-article.md"
-DOWNLOADS_ARTICLE = TEMPLATES / "downloads-article.md"
+POSTERS_ARTICLE = TEMPLATES / "posters-article.md"
 DOCUMENTATION_ARTICLE = TEMPLATES / "documentation-article.md"
 REPORT_ARTICLE = TEMPLATES / "report-article.md"
 RESOURCES_ARTICLE = TEMPLATES / "resources-article.md"
@@ -105,6 +106,7 @@ FORWARD_SCRIPT = BROWSER / "forward.js"
 NEWS_CARDS_SCRIPT = BROWSER / "news-cards.js"
 NEWS_FORWARD_SCRIPT = BROWSER / "news-forward.js"
 NEWS_FILTERS_SCRIPT = BROWSER / "news-filters.js"
+FILTER_MENU_SCRIPT = BROWSER / "filter-menu.js"
 TABLE_SCRIPT = BROWSER / "table.js"
 MATH_SCRIPT = BROWSER / "math.js"
 POPOVER_SCRIPT = BROWSER / "popover.js"
@@ -199,14 +201,12 @@ VISUALIZE_DESCRIPTION = (
     "The best packings known of n unit squares, n = 1 to 324, built one square at a "
     "time in an eight-minute film, and a workbench to move the squares yourself."
 )
-#: The release the films are published on, and the two films on it.
+#: The release containing the displayed film.
 FILM_RELEASE = "v0.4.2"
-FILM_RELEASE_URL = f"https://github.com/jlevy/squares/releases/tag/{FILM_RELEASE}"
 FILM_URL = (
     f"https://github.com/jlevy/squares/releases/download/{FILM_RELEASE}/"
     "ascent-n1-324-1080p60-citations.mp4"
 )
-SHORT_FILM_URL = FILM_URL.replace("n1-324", "n1-100")
 
 
 def film_release_date() -> str:
@@ -226,6 +226,7 @@ FRONTIER_DESCRIPTION = (
 #: The legacy `all-results.html` address forwards here with query and fragment kept.
 RESULTS_PAGE = "results.html"
 RECENT_RESULTS_PAGE = "recent-results.html"
+VERIFICATION_PAGE = "verification.html"
 
 #: The repository documents served as pages outside the navigation, reached from the
 #: overview's cards, in the cards' order; `site_documents` renders them. README and
@@ -465,10 +466,11 @@ SITE_PAGES: tuple[str, ...] = (
     "about.html",
     RESULTS_PAGE,
     RECENT_RESULTS_PAGE,
+    VERIFICATION_PAGE,
     f"{PROFILES_DIR}/index.html",
     "papers.html",
     "tutorials.html",
-    "downloads.html",
+    "posters.html",
     "documentation.html",
     "report.html",
     "resources.html",
@@ -497,6 +499,7 @@ SITE_PAGES: tuple[str, ...] = (
 #: project's contributors; the directory and each profile the reviewed preview served
 #: there keep a forwarder at the earlier address (`LEGACY_PROFILES`).
 MOVED_PAGES: tuple[tuple[str, str], ...] = (
+    ("downloads.html", "posters.html"),
     ("all-results.html", RESULTS_PAGE),
     ("status.html", "atlas.html"),
     ("frontier.html", "atlas.html"),
@@ -584,11 +587,12 @@ RENDER_INPUTS: tuple[Path, ...] = (
     NEWS_ARTICLE,
     REPORT_RESULTS,
     RESULTS_ARTICLE,
+    VERIFICATION_ARTICLE,
     RECENT_RESULTS_ARTICLE,
     VISUALIZE_ARTICLE,
     PAPERS_ARTICLE,
     TUTORIALS_ARTICLE,
-    DOWNLOADS_ARTICLE,
+    POSTERS_ARTICLE,
     DOCUMENTATION_ARTICLE,
     REPORT_ARTICLE,
     FORWARDER,
@@ -679,11 +683,23 @@ class PageMeta(NamedTuple):
 #: The records the results page and the frontier atlas write their heads from, named
 #: here because a forwarder to either previews it (`forwarded_metas`).
 RESULTS_META = PageMeta("Results Archive", RESULTS_DESCRIPTION, RESULTS_PAGE)
+VERIFICATION_META = PageMeta(
+    "Verification",
+    "How to read result ratings, evidence, credits, and supersession "
+    "in the square-packing archive.",
+    VERIFICATION_PAGE,
+)
 RECENT_RESULTS_META = PageMeta(
     "Recent Results",
-    "Recent square-packing results: every arrival by day, followed by significant "
-    "earlier publications by week, with authors and links to the full result register.",
+    "All square-packing results by arrival date, with the newest seven days expanded, "
+    "earlier results available, full ratings, credits, and record links.",
     RECENT_RESULTS_PAGE,
+)
+POSTERS_META = PageMeta(
+    "Posters",
+    "Printable PDF posters of the first hundred or all 324 best-known square packings, "
+    "with bounds and linked source records.",
+    "posters.html",
 )
 ATLAS_META = PageMeta(
     "Visual Atlas",
@@ -1505,7 +1521,12 @@ def news_page() -> Page:
             "with the retained contribution history."
         ),
         toc=False,
-        page_scripts=(NEWS_CARDS_SCRIPT, NEWS_FILTERS_SCRIPT, NEWS_FORWARD_SCRIPT),
+        page_scripts=(
+            NEWS_CARDS_SCRIPT,
+            FILTER_MENU_SCRIPT,
+            NEWS_FILTERS_SCRIPT,
+            NEWS_FORWARD_SCRIPT,
+        ),
         rewrite_body=_case_links,
     )
 
@@ -1545,12 +1566,8 @@ def results_page() -> Page:
 
     overview = overview_data.load()
     values = {
-        "EPISTEMICS_URL": "epistemics.html",
         "ARROW_RIGHT": overview_sections.arrow_icon("right"),
         "RESULTS_TABLE": overview_sections.results_table(overview),
-        "STATUS_COUNTS": overview_sections.status_counts(overview),
-        # The rating ladders, the homepage's Verification Ladders until 2026-10-02.
-        "VERIFICATION": overview_sections.verification_block(),
     }
     markdown = fill(
         RESULTS_ARTICLE.read_text(encoding="utf-8"), values, where=RESULTS_ARTICLE.name
@@ -1570,27 +1587,36 @@ def results_page() -> Page:
     return page._replace(html=compact_visual_math_classes(page.html, profile_links=True))
 
 
+def verification_page() -> Page:
+    """The archive's reading guide, with the complete epistemics policy one level deeper."""
+    from devtools import overview_data, overview_sections  # noqa: PLC0415
+
+    values = {
+        "EPISTEMICS_URL": "epistemics.html",
+        "ARROW_RIGHT": overview_sections.arrow_icon("right"),
+        "STATUS_COUNTS": overview_sections.status_counts(overview_data.load()),
+        "VERIFICATION": overview_sections.verification_block(),
+    }
+    return kpress_page(
+        _template_markdown(VERIFICATION_ARTICLE, values),
+        name=VERIFICATION_META.path,
+        current=VERIFICATION_META.path,
+        title=VERIFICATION_META.name,
+        description=VERIFICATION_META.description,
+        toc=False,
+        rewrite_body=_authored_profile_links,
+        page_styles=(RESULTS_CSS,),
+    )
+
+
 def recent_results_page() -> Page:
-    """Daily arrivals and weekly publications, linked to canonical archive rows."""
+    """One complete arrival-ordered table, with older results collapsed on enhancement."""
     from devtools import overview_data, overview_sections  # noqa: PLC0415
 
     overview = overview_data.load()
     values = {
-        "RECENT_ADDED": overview_sections.recent_added(overview),
-        "ADDED_DAYS_TITLE": overview_sections.ADDED_DAYS_WORD[
-            overview_sections.ADDED_DAYS
-        ].capitalize(),
-        "ADDED_SPAN": overview_sections.span_label(
-            overview_sections.added_since(overview), overview_sections.added_reference(overview)
-        ),
-        "RECENT_ROLLUP": overview_sections.recent_rollup(overview),
-        "ROLLUP_FLOOR": f"S{overview_sections.ROLLUP_FLOOR}",
-        "ARROW_RIGHT": overview_sections.arrow_icon("right"),
+        "RECENT_TABLE": overview_sections.recent_results_table(overview),
     }
-    # These shared rollup components formerly sat above the archive table. On their
-    # own page their result links must keep the archive's canonical row addresses.
-    for key in ("RECENT_ADDED", "RECENT_ROLLUP"):
-        values[key] = values[key].replace('href="#t-', f'href="{RESULTS_PAGE}#t-')
     return kpress_page(
         _template_markdown(RECENT_RESULTS_ARTICLE, values),
         name=RECENT_RESULTS_META.path,
@@ -1600,7 +1626,7 @@ def recent_results_page() -> Page:
         toc=False,
         rewrite_body=_authored_profile_links,
         page_styles=(RESULTS_CSS,),
-        page_scripts=(POPOVER_SCRIPT,),
+        page_scripts=(TABLE_SCRIPT, POPOVER_SCRIPT, ROW_POPOVER_SCRIPT, CASE_POPOVER_SCRIPT),
     )
 
 
@@ -1653,26 +1679,23 @@ def tutorials_page() -> Page:
     )
 
 
-def downloads_page() -> Page:
-    """Complete poster downloads and the PDF and source editions of every paper."""
+def posters_page() -> Page:
+    """The two packing-poster PDFs and their retained source links."""
     from devtools import overview_sections  # noqa: PLC0415
 
     markdown = _template_markdown(
-        DOWNLOADS_ARTICLE,
+        POSTERS_ARTICLE,
         {
             "PDF_CARDS": overview_sections.pdf_cards(),
             "PDF_NOTE": overview_sections.pdf_note(),
-            "PAPER_DOWNLOADS": overview_sections.paper_downloads(),
         },
     )
     return kpress_page(
         markdown,
-        name="downloads.html",
-        current="downloads.html",
-        title="Downloads",
-        description=(
-            "Square-packing poster PDFs and the PDF and Markdown editions of every paper."
-        ),
+        name=POSTERS_META.path,
+        current=POSTERS_META.path,
+        title=POSTERS_META.name,
+        description=POSTERS_META.description,
         toc=False,
     )
 
@@ -1826,14 +1849,8 @@ def case_records() -> list[Page]:
 
 
 def film_markdown(*, inline: bool = False) -> str:
-    """The shared film and its evidence note; inline readers choose when to play."""
-    values = {
-        "FILM_URL": FILM_URL,
-        "SHORT_FILM_URL": SHORT_FILM_URL,
-        "RELEASE_URL": FILM_RELEASE_URL,
-        "RELEASE": FILM_RELEASE,
-        "RELEASE_DATE": film_release_date(),
-    }
+    """The shared film; inline readers choose when to play."""
+    values = {"FILM_URL": FILM_URL}
     markdown = fill(
         VISUALIZE_ARTICLE.read_text(encoding="utf-8"), values, where=VISUALIZE_ARTICLE.name
     )
@@ -1880,10 +1897,11 @@ PAGES: dict[str, Callable[[], Page]] = {
     "atlas.html": atlas_page,
     "about.html": about_page,
     RESULTS_PAGE: results_page,
+    VERIFICATION_PAGE: verification_page,
     RECENT_RESULTS_PAGE: recent_results_page,
     "papers.html": papers_page,
     "tutorials.html": tutorials_page,
-    "downloads.html": downloads_page,
+    "posters.html": posters_page,
     "documentation.html": documentation_page,
     "report.html": report_page,
     "resources.html": resources_page,
@@ -1999,6 +2017,7 @@ def forwarded_metas() -> dict[str, PageMeta]:
 
     metas = (
         RESULTS_META,
+        POSTERS_META,
         ATLAS_META,
         explainer.published_page_meta(),
         render_n11_optimality_review.page_meta(),

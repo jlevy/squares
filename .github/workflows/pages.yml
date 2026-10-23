@@ -128,12 +128,13 @@ name: Certificate page
       - packing/devtools/templates/news-article.md
       - packing/devtools/templates/report-results.md
       - packing/devtools/templates/all-results-article.md
+      - packing/devtools/templates/verification-article.md
       - packing/devtools/templates/recent-results-article.md
       - packing/devtools/templates/visualize-article.md
       - packing/devtools/templates/papers-article.md
       - packing/devtools/templates/resources-article.md
       - packing/devtools/templates/tutorials-article.md
-      - packing/devtools/templates/downloads-article.md
+      - packing/devtools/templates/posters-article.md
       - packing/devtools/templates/documentation-article.md
       - packing/devtools/templates/report-article.md
       - packing/devtools/templates/site-forwarder.html

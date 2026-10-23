@@ -162,7 +162,7 @@ DOCUMENTS: tuple[SiteDocument, ...] = (
     _document(
         repo_links.EPISTEMICS,
         "epistemics.html",
-        "Epistemics",
+        "Project Epistemics",
         "How square packing claims are verified and independently confirmed, "
         "with the evidence and significance levels used in the result register.",
     ),

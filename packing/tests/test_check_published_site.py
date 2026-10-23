@@ -2525,10 +2525,12 @@ def test_check_fails_a_page_whose_head_is_not_the_sites(
     assert "0 og:image tags, not one" in failure
     assert "0 twitter:card tags, not one" in failure
 
-    old = page(render_overview.canonical_url("papers.html")).replace(
-        b'og:title" content="Page papers.html',
-        b'og:title" content="Papers \xc2\xb7 Square Packing',
+    good = page(render_overview.canonical_url("papers.html"))
+    old = good.replace(
+        b'og:title" content="Papers"',
+        b'og:title" content="Papers \xc2\xb7 Square Packing"',
     )
+    assert old != good
     (failure,) = found(**{"papers.html": old})
     assert failure.startswith("papers.html: head: og:title is 'Papers · Square Packing', not")
 

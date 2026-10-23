@@ -29,10 +29,10 @@ NAVIGATION = (
         "Results",
         "",
         (
+            NavigationItem("atlas", "Visual Atlas", "atlas.html"),
             NavigationItem("recent-results", "Recent Results", "recent-results.html"),
             NavigationItem("all-results", "Results Archive", "results.html"),
-            NavigationItem("atlas", "Visual Atlas", "atlas.html"),
-            NavigationItem("verification", "Verification and Ratings", "epistemics.html"),
+            NavigationItem("verification", "Verification", "verification.html"),
             NavigationItem("report", "Report a Result", "report.html"),
         ),
     ),
@@ -45,7 +45,7 @@ NAVIGATION = (
             NavigationItem("tutorials", "Tutorials", "tutorials.html"),
             NavigationItem("film", "Videos", "visualize.html"),
             NavigationItem("workbench", "Workbench", "workbench/"),
-            NavigationItem("downloads", "Downloads", "downloads.html"),
+            NavigationItem("posters", "Posters", "posters.html"),
             NavigationItem("resources", "Resources", "resources.html"),
         ),
     ),
@@ -71,6 +71,8 @@ _LEGACY_PATHS = {
     "news": "news.html",
     "results": "results.html",
     "recent-results": "recent-results.html",
+    "verification": "verification.html",
+    "epistemics": "epistemics.html",
     "atlas": "atlas.html",
     "papers": "papers.html",
     "explanations": "papers.html",
@@ -89,10 +91,11 @@ _PARENTS = {
     "recent-results.html": ("results",),
     "results.html": ("results",),
     "atlas.html": ("results",),
-    "epistemics.html": ("results",),
+    "verification.html": ("results",),
+    "epistemics.html": ("results", "verification"),
     "papers.html": ("learn",),
     "tutorials.html": ("learn",),
-    "downloads.html": ("learn",),
+    "posters.html": ("learn",),
     "tutorial.html": ("learn", "tutorials"),
     "tutorial-advanced.html": ("learn", "tutorials"),
     "visualize.html": ("learn",),
@@ -139,7 +142,9 @@ def _path(value: str) -> str:
 
 def navigation_title(path: str, fallback: str = "") -> str:
     """Return a menu destination's canonical title, leaving detail titles to the caller."""
-    return _PAGE_TITLES.get(_path(path), fallback)
+    return _PAGE_TITLES.get(
+        _path(path), {"epistemics.html": "Project Epistemics"}.get(_path(path), fallback)
+    )
 
 
 def _parents(path: str) -> tuple[str, ...]:

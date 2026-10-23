@@ -137,37 +137,41 @@ async (options) => {
     };
   });
   specimen.remove();
-  const result = {
-    chooser: group
-      ? {
-          appearance: appearance(option),
-          brightness: brightness(option),
-          check_visible: check ? getComputedStyle(check).visibility === "visible" : null,
-          check_contrast:
-            check && option
-              ? contrast(getComputedStyle(check).color, getComputedStyle(option).backgroundColor)
-              : null,
-          chip_brightness: brightness(referenceChip),
-          neutral: neutralAppearance,
-          role: group.getAttribute("role"),
-          focus_visible: option?.matches(":focus-visible"),
-          selected: option?.getAttribute("aria-selected"),
-          pressed: option?.getAttribute("aria-pressed"),
-          border: getComputedStyle(group).borderTopWidth,
-          gap: getComputedStyle(group).gap,
-          height: option?.getBoundingClientRect().height,
-          label:
-            option?.querySelector("[data-news-topic-label]")?.textContent ?? option?.textContent,
-          chip_label: document.querySelector(
+  const chooserState = group
+    ? {
+        appearance: appearance(option),
+        brightness: brightness(option),
+        check_visible: check ? getComputedStyle(check).visibility === "visible" : null,
+        check_contrast:
+          check && option
+            ? contrast(getComputedStyle(check).color, getComputedStyle(option).backgroundColor)
+            : null,
+        chip_brightness: brightness(referenceChip),
+        neutral: neutralAppearance,
+        role: group.getAttribute("role"),
+        focus_visible: option?.matches(":focus-visible"),
+        selected: option?.getAttribute("aria-selected"),
+        pressed: option?.getAttribute("aria-pressed"),
+        border: getComputedStyle(group).borderTopWidth,
+        gap: getComputedStyle(group).gap,
+        height: option?.getBoundingClientRect().height,
+        label: option?.querySelector("[data-news-topic-label]")?.textContent ?? option?.textContent,
+        chip_label: document.querySelector(
+          `.site-news-topics [data-news-topic="${option?.getAttribute("data-news-topic")}"]`,
+        )?.textContent,
+        chip: appearance(
+          document.querySelector(
             `.site-news-topics [data-news-topic="${option?.getAttribute("data-news-topic")}"]`,
-          )?.textContent,
-          chip: appearance(
-            document.querySelector(
-              `.site-news-topics [data-news-topic="${option?.getAttribute("data-news-topic")}"]`,
-            ),
           ),
-        }
-      : null,
+        ),
+      }
+    : null;
+  if (chooser) {
+    override.remove();
+    return { chooser: chooserState };
+  }
+  const result = {
+    chooser: chooserState,
     count_style: appearance(count),
     count_right_gap:
       count && countRow

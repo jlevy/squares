@@ -3731,40 +3731,138 @@ html[data-site-atlas-view="triangle"]
 .site-news-filters :is(.site-tabs, .site-table-tools) {
   margin: 0;
 }
-/* A selected topic takes the shared topic fill and shows a check, the theme menu's
-   mark for a chosen item, so selection never rests on hue alone: the bound topics'
-   fills are close to the gray in lightness. The check's place is held when it is
-   hidden, so a press never moves a button or rewraps the row. Under a hovering
-   pointer an unselected topic turns pale in its topic hue, so a press shows at once:
-   pale turns full, and full turns pale. Touch screens have no hover, so a tap shows the
-   new state without a sticky pale fill. */
-.site-news-filters [aria-labelledby="news-topics-label"] button {
-  flex: 0 0 auto;
-  white-space: nowrap;
+/* Archive significance uses the same compact segmented control as News and Atlas. */
+.site-result-significance {
+  border: 0;
+  margin: 0;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  padding: 0;
 }
-.site-news-filters .site-tabs button.site-chip {
-  background: var(--site-chip-neutral-fill);
+.site-result-significance .site-tabs {
+  margin: 0;
+}
+
+/* Filter menus share the navigation surface and topic chips. The caller owns each
+   selection; these rules hold the compact summary and the native pressed buttons. */
+.site-filter-menu {
+  display: inline-flex;
+  max-inline-size: 100%;
+  position: relative;
+}
+.site-filter-trigger,
+.site-filter-options button {
+  align-items: center;
+  border: 1px solid var(--kpress-doc-border);
+  border-radius: 0;
   color: var(--kpress-doc-text);
-  font-variant-caps: normal;
-  letter-spacing: var(--paper-button-letter-spacing);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  font-size: var(--site-chooser-small-size);
+  font-weight: var(--site-font-weight-sans-medium);
+  gap: 0.35rem;
+  line-height: var(--site-chooser-small-leading);
+  padding: var(--site-chooser-small-padding);
   text-transform: none;
   transition: var(--site-hover-transition);
 }
-.site-news-filters .site-tabs button.site-chip[aria-pressed="true"] {
+.site-filter-trigger {
+  background: var(--kpress-doc-bg);
+  min-block-size: 1.75rem;
+}
+.site-filter-trigger [data-site-filter-summary] {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.2rem;
+}
+.site-filter-trigger .site-chip {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+.site-filter-chevron {
+  margin-inline-start: 0.1rem;
+  transform: rotate(0deg);
+  transition: transform var(--site-hover-duration) var(--site-hover-easing);
+}
+.site-filter-trigger[aria-expanded="true"] .site-filter-chevron {
+  transform: rotate(-180deg);
+}
+.site-filter-options {
+  background: var(--kpress-doc-bg);
+  border: 1px solid var(--kpress-doc-border);
+  box-shadow: 0 0.5rem 2rem var(--site-shadow);
+  inline-size: max-content;
+  inset-block-start: calc(100% + 0.3rem);
+  inset-inline-start: 0;
+  max-block-size: min(24rem, 65vh);
+  max-inline-size: calc(100vw - 2rem);
+  overflow: auto;
+  padding: 0.3rem;
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+  transform: translateY(-0.25rem);
+  transition:
+    opacity var(--site-hover-duration) var(--site-hover-easing),
+    transform var(--site-hover-duration) var(--site-hover-easing),
+    display var(--site-hover-duration) var(--site-hover-easing) allow-discrete;
+  z-index: 3;
+}
+.site-filter-options[hidden] {
+  display: none;
+}
+.site-filter-options:not([hidden]) {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+@starting-style {
+  .site-filter-options:not([hidden]) {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+}
+.site-filter-options button {
+  background: none;
+  border: 0;
+  inline-size: 100%;
+  justify-content: start;
+  padding: 0.45rem 0.7rem;
+  white-space: nowrap;
+}
+.site-filter-options button.site-chip {
+  background: var(--site-chip-neutral-fill);
+  font-variant-caps: normal;
+  letter-spacing: var(--paper-button-letter-spacing);
+  margin: 0;
+}
+.site-filter-options button.site-chip[aria-pressed="true"] {
   background: var(--site-chip-fill);
+}
+.site-filter-trigger:is(:hover, :focus-visible),
+.site-filter-options button:not(.site-chip):is(:hover, :focus-visible) {
+  background: var(--site-wash);
+  color: var(--kpress-doc-accent);
+}
+.site-filter-menu button:focus-visible {
+  outline: 2px solid var(--kpress-doc-link);
+  outline-offset: -2px;
 }
 .site-news-check {
   block-size: 0.85em;
+  flex: 0 0 auto;
   inline-size: 0.85em;
-  margin-inline-end: 0.3em;
   vertical-align: calc((1cap - 0.85em) / 2);
   visibility: hidden;
 }
-.site-news-filters button[aria-pressed="true"] .site-news-check {
+.site-filter-options button[aria-pressed="true"] .site-news-check {
   visibility: visible;
 }
 @media (hover: hover) {
-  .site-news-filters .site-tabs button.site-chip:not([aria-pressed="true"]):hover {
+  .site-filter-options button.site-chip:not([aria-pressed="true"]):hover {
     background: color-mix(
       in oklab,
       var(--site-chip-fill) var(--site-topic-hover-tint),

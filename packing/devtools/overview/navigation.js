@@ -4,7 +4,7 @@
   const aliases = location.pathname.endsWith("/papers.html")
     ? new Map([
         ["#tutorial", "tutorials.html#tutorial"],
-        ["#pdfs", "downloads.html#pdfs"],
+        ["#pdfs", "posters.html#pdfs"],
         ["#visuals", "visualize.html"],
         ["#resources", "resources.html"],
       ])
@@ -14,16 +14,23 @@
           ["#report-your-results", "report.html"],
           ["#contribute-your-results", "report.html"],
         ])
-      : location.pathname.endsWith("/results.html")
-        ? new Map([
-            ["#recent-arrivals", "recent-results.html#recent-arrivals"],
-            ["#added-in-the-last-seven-days", "recent-results.html#added-in-the-last-seven-days"],
-            [
-              "#earlier-results-by-week-published",
-              "recent-results.html#earlier-results-by-week-published",
-            ],
-          ])
-        : null;
+      : location.pathname.endsWith("/posters.html")
+        ? new Map([["#paper-editions", "papers.html"]])
+        : location.pathname.endsWith("/results.html")
+          ? new Map([
+              ["#verification-ladders", "verification.html#verification-ladders"],
+              ["#verification-at-a-glance", "verification.html#verification-at-a-glance"],
+              ["#evidence-and-exactness", "verification.html#evidence-and-exactness"],
+              ["#results-and-credits", "verification.html#results-and-credits"],
+              ["#status-and-supersession", "verification.html#status-and-supersession"],
+              ["#recent-arrivals", "recent-results.html#recent-arrivals"],
+              ["#added-in-the-last-seven-days", "recent-results.html#added-in-the-last-seven-days"],
+              [
+                "#earlier-results-by-week-published",
+                "recent-results.html#earlier-results-by-week-published",
+              ],
+            ])
+          : null;
   const forwardLegacyFragment = () => {
     const moved = aliases?.get(location.hash);
     if (!moved) {

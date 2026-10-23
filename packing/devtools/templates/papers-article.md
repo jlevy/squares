@@ -28,8 +28,8 @@ published record packings.
 
 <noscript><p>Other learning collections:
 <a id="tutorial" href="tutorials.html#tutorial">Tutorials</a>,
-<a id="pdfs" href="downloads.html#pdfs">Downloads</a>,
-<a id="visuals" href="visualize.html">Film</a>, and
+<a id="pdfs" href="posters.html#pdfs">Posters</a>,
+<a id="visuals" href="visualize.html">Videos</a>, and
 <a id="resources" href="resources.html">Resources</a>.</p></noscript>
 
 <!-- This document follows common-doc-guidelines.md.

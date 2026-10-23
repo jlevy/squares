@@ -380,3 +380,12 @@ void test("retired home link targets reject malformed and unsafe alias metadata"
     assert.equal(target.hash, "", retired);
   }
 });
+
+void test("noncontiguous significance selections match exactly their occupied levels", () => {
+  /** @type {SiteTableFilter[]} */
+  const selected = [{ key: "s", kind: "one-of", value: "1,3,5" }];
+  for (const level of ["1", "2", "3", "4", "5"]) {
+    assert.equal(table.rowMatches({ s: level }, selected), ["1", "3", "5"].includes(level));
+  }
+  assert.equal(table.rowMatches({ s: "3" }, [{ key: "s", kind: "one-of", value: "" }]), false);
+});

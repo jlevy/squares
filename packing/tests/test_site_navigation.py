@@ -6,7 +6,9 @@ import html
 import re
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import override
+from typing import TYPE_CHECKING, override
+
+import pytest
 
 from devtools.site_navigation import (
     NAVIGATION,
@@ -15,6 +17,9 @@ from devtools.site_navigation import (
     navigation_links,
     navigation_title,
 )
+
+if TYPE_CHECKING:
+    from playwright.sync_api import FloatRect
 
 
 class Tags(HTMLParser):
@@ -64,13 +69,17 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
         "profiles/person.html": ["About", navigation_title("profiles/"), "Current <title>"],
         "about.html": ["About", "Current <title>"],
         "synopsis/problem.html": ["About", "Research Synopsis", "Current <title>"],
-        "epistemics.html": ["Results", "Current <title>"],
+        "epistemics.html": [
+            "Results",
+            navigation_title("verification.html"),
+            "Current <title>",
+        ],
         "papers/proof.html": ["Learn", "Papers", "Current <title>"],
         "tutorial.html": ["Learn", "Tutorials", "Current <title>"],
         "tutorial-advanced.html": ["Learn", "Tutorials", "Current <title>"],
         "papers.html": ["Learn", "Current <title>"],
         "tutorials.html": ["Learn", "Current <title>"],
-        "downloads.html": ["Learn", "Current <title>"],
+        "posters.html": ["Learn", "Current <title>"],
         "resources.html": ["Learn", "Current <title>"],
         "workbench/index.html": ["Learn", "Current <title>"],
     }
@@ -186,7 +195,7 @@ def test_disclosures_work_with_keyboard_outside_click_and_mobile_menu() -> None:
         assert results.get_attribute("aria-expanded") == "true"
         page.keyboard.press("Tab")
         site_browser.api().expect(
-            page.get_by_role("link", name="Recent Results", exact=True)
+            page.get_by_role("link", name="Visual Atlas", exact=True)
         ).to_be_focused()
         page.keyboard.press("Escape")
         assert results.get_attribute("aria-expanded") == "false"
@@ -472,24 +481,29 @@ def test_legacy_catalogue_fragments_keep_queries_and_reach_substantive_pages(
     from devtools import preview_site  # noqa: PLC0415
     from tests import site_browser  # noqa: PLC0415
 
-    for source in ("papers.html", "about.html", "results.html"):
+    for source in ("papers.html", "about.html", "results.html", "posters.html"):
         (tmp_path / source).write_text(_browser_document())
     for destination in (
         "tutorials.html",
-        "downloads.html",
+        "posters.html",
+        "papers.html",
         "visualize.html",
         "resources.html",
         "documentation.html",
         "report.html",
         "recent-results.html",
     ):
-        (tmp_path / destination).write_text(
+        body = (
             '<h1>Complete destination</h1><section id="tutorial"></section>'
             '<section id="pdfs"></section>'
         )
+        if destination in {"papers.html", "posters.html"}:
+            body = _browser_document().replace("<main>", "<main>" + body, 1)
+        (tmp_path / destination).write_text(body)
     variants = {
         "papers.html#tutorial": "tutorials.html#tutorial",
-        "papers.html#pdfs": "downloads.html#pdfs",
+        "papers.html#pdfs": "posters.html#pdfs",
+        "posters.html#paper-editions": "papers.html",
         "papers.html#visuals": "visualize.html",
         "papers.html#resources": "resources.html",
         "about.html#squares-project-documentation": "documentation.html",
@@ -531,7 +545,7 @@ def test_legacy_catalogue_fragments_keep_queries_and_reach_substantive_pages(
         server.server_close()
 
 
-def test_every_shell_aligns_the_trail_with_35em_prose_and_preserves_wide_blocks() -> None:
+def test_every_shell_aligns_the_trail_with_header_text_and_preserves_35em_prose() -> None:
     from devtools import render_overview  # noqa: PLC0415
     from devtools.measure_site_pages import TYPOGRAPHY  # noqa: PLC0415
     from tests import site_browser  # noqa: PLC0415
@@ -593,10 +607,13 @@ def test_every_shell_aligns_the_trail_with_35em_prose_and_preserves_wide_blocks(
                 found = page.evaluate(TYPOGRAPHY)
                 trail = found["breadcrumb"]
                 text = page.locator("#reading").bounding_box()
+                brand = page.locator(".site-name-text:visible").bounding_box()
                 assert trail is not None, (name, width, found)
                 assert text is not None, (name, width, found)
-                assert abs(trail["left"] - text["x"]) < 0.5, (name, width, found)
-                assert abs(trail["width"] - text["width"]) < 0.5, (name, width, found)
+                assert brand is not None, (name, width, found)
+                first = page.locator(".site-breadcrumbs li").first.bounding_box()
+                assert first is not None
+                assert abs(first["x"] - brand["x"]) < 0.5, (name, width, found)
                 assert text["width"] <= 35 * 18 + 0.5, (name, width, found)
                 if width >= 768:
                     assert abs(text["width"] - 35 * 18) < 0.5, (name, width, found)
@@ -705,13 +722,13 @@ def test_short_card_groups_align_their_outer_edges_with_prose_for_every_size() -
     for size in ("small", "medium", "large"):
         for count in (1, 2):
             most = ' data-cards-most="3"' if count == 1 else ""
-            cards = "".join(
+            card_markup = "".join(
                 f'<a class="site-card" data-card-size="{size}" href="#reading">Card {n}</a>'
                 for n in range(count)
             )
             groups.append(
                 f'<div class="site-cards-frame site-wide" id="{size}-{count}">'
-                f'<div class="site-cards"{most}>{cards}</div></div>'
+                f'<div class="site-cards"{most}>{card_markup}</div></div>'
             )
     head = _browser_document().split("</head>", 1)[0]
     document = (
@@ -733,9 +750,12 @@ def test_short_card_groups_align_their_outer_edges_with_prose_for_every_size() -
                 for count in (1, 2):
                     frame = page.locator(f"#{size}-{count}")
                     box = frame.bounding_box()
-                    cards = [card.bounding_box() for card in frame.locator(".site-card").all()]
+                    cards: list[FloatRect] = []
+                    for card in frame.locator(".site-card").all():
+                        card_box = card.bounding_box()
+                        assert card_box is not None
+                        cards.append(card_box)
                     assert box is not None
-                    assert all(card is not None for card in cards)
                     assert abs(box["x"] - prose["x"]) < 0.5
                     assert abs(box["width"] - prose["width"]) < 0.5
                     assert abs(min(card["x"] for card in cards) - prose["x"]) < 0.5
@@ -793,4 +813,161 @@ def test_text_buttons_and_actions_share_the_same_small_tracking() -> None:
             assert {"Browse", "Open", "Topic"} <= {item["label"] for item in labels}
             assert all(item["tracking"] == pytest.approx(0.021, abs=0.00001) for item in labels)
             page.close()
+        browser.close()
+
+
+def test_recent_table_disclosure_preserves_native_rows_keyboard_and_no_script_access(
+    tmp_path: Path,
+) -> None:
+    from devtools import preview_site, render_overview, site_assets  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    recent = render_overview.recent_results_page()
+    (tmp_path / recent.name).write_text(recent.html)
+    empty = re.sub(
+        r"(<tbody\b[^>]*\bdata-recent-older\b[^>]*>).*?(</tbody>)",
+        r"\1\2",
+        recent.html,
+        flags=re.DOTALL,
+    )
+    (tmp_path / "empty.html").write_text(empty)
+    site_assets.write_assets(tmp_path, render_overview.asset_files([recent]))
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with site_browser.api().sync_playwright() as driver:
+            browser = site_browser.launch(driver)
+            base = f"http://127.0.0.1:{server.server_port}/"
+            for width in (1280, 390, 320):
+                page = browser.new_page(viewport={"width": width, "height": 900})
+                page.goto(base + recent.name)
+                table = page.locator("table[data-recent-results]")
+                site_browser.api().expect(table).to_have_attribute("data-recent-ready", "true")
+                assert page.locator("table").count() == 1
+                assert table.locator(":scope > tbody").count() == 2
+                older = table.locator("#recent-results-older")
+                assert older.locator("tr[data-result]").count() > 0
+                button = table.locator("button[data-recent-toggle]")
+                site_browser.api().expect(button).to_have_accessible_name("Earlier results")
+                assert button.get_attribute("aria-controls") == older.get_attribute("id")
+                site_browser.api().expect(older).to_be_hidden()
+                button.focus()
+                page.keyboard.press("Enter")
+                site_browser.api().expect(older).to_be_visible()
+                assert button.get_attribute("aria-expanded") == "true"
+                assert (
+                    button.locator("[data-recent-label]").text_content()
+                    == "Hide earlier results"
+                )
+                assert (
+                    button.locator(".site-icon-arrow").get_attribute("data-arrow")
+                    == "double-up"
+                )
+                page.keyboard.press("Space")
+                site_browser.api().expect(older).to_be_hidden()
+                assert button.get_attribute("aria-expanded") == "false"
+                site_browser.api().expect(button).to_be_focused()
+                page.goto(base + recent.name + "#earlier-results-by-week-published")
+                site_browser.api().expect(older).to_be_visible()
+                page.reload()
+                site_browser.api().expect(older).to_be_visible()
+                page.close()
+            page = browser.new_page()
+            page.goto(base + "empty.html")
+            button = page.locator("[data-recent-toggle]")
+            site_browser.api().expect(button).to_be_disabled()
+            site_browser.api().expect(button).to_be_hidden()
+            page.close()
+            for width in (1280, 320):
+                page = browser.new_page(
+                    java_script_enabled=False, viewport={"width": width, "height": 900}
+                )
+                page.goto(base + recent.name)
+                rows = page.locator("[data-recent-older] tr[data-result]")
+                assert rows.count() > 0
+                for row in rows.all():
+                    assert row.is_visible()
+                assert not page.locator("[data-recent-toggle]").is_visible()
+                page.close()
+            browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+@pytest.fixture(scope="module")
+def reading_width_pages() -> dict[str, str]:
+    """Actual page producers, rendered in setup without building the publication tree."""
+    from devtools import render_contributors, site_assets  # noqa: PLC0415
+    from tests import site_renders  # noqa: PLC0415
+
+    names = (
+        "index.html",
+        "news.html",
+        "recent-results.html",
+        "results.html",
+        "verification.html",
+        "about.html",
+        "tutorials.html",
+        "papers.html",
+        "resources.html",
+        "posters.html",
+        "documentation.html",
+        "report.html",
+        "epistemics.html",
+        "tutorial.html",
+        "tutorial-advanced.html",
+    )
+    assets = site_assets.shared().assets
+    documents = {name: assets.inlined(site_renders.html(name)) for name in names}
+    documents.update(
+        {
+            page.name: assets.inlined(page.html)
+            for page in render_contributors.contributor_pages()
+            if page.name in {"profiles/index.html", "profiles/joshua-levy.html"}
+        }
+    )
+    return documents
+
+
+def test_actual_page_families_share_the_prose_measure_and_card_outer_edges(
+    reading_width_pages: dict[str, str],
+) -> None:
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    measure = probe(Path(__file__).with_name("probes"), "site_navigation/reading-widths")
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        page = browser.new_page(viewport={"width": 1440, "height": 900})
+        # Layout uses the real inlined styles; missing pictures cannot change its tracks.
+        page.route("**/*", lambda route: route.abort())
+        for name, document in reading_width_pages.items():
+            page.set_content(document, wait_until="load")
+            for width in (1440, 1256, 768, 390, 320):
+                page.set_viewport_size({"width": width, "height": 900})
+                found = page.evaluate(measure)
+                column = found["root"]
+                assert column["width"] <= 630.5, (name, width, found)
+                if width >= 768:
+                    assert abs(column["width"] - 630) < 0.5, (name, width, found)
+                assert column["left"] >= 8, (name, width, found)
+                assert column["right"] <= width - 8, (name, width, found)
+                for paragraph in found["paragraphs"]:
+                    # Bordered callouts/News cards disclose their inset separately.
+                    if paragraph["card"] is None:
+                        assert abs(paragraph["width"] - column["width"]) < 0.5, (
+                            name,
+                            width,
+                            paragraph,
+                        )
+                for frame in (*found["cards"], *found["news"]):
+                    assert abs(frame["left"] - column["left"]) < 0.5, (name, width, frame)
+                    assert abs(frame["width"] - column["width"]) < 0.5, (name, width, frame)
+                trail, brand = found["firstTrail"], found["brand"]
+                if name in {"index.html", "news.html"}:
+                    assert trail is None, name
+                else:
+                    assert trail is not None, (name, width, found)
+                    assert brand is not None, (name, width, found)
+                    assert abs(trail["left"] - brand["left"]) < 0.5, (name, width, found)
         browser.close()

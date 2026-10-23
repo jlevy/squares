@@ -652,7 +652,7 @@ def test_generated_profile_keeps_its_own_anchors_and_breadcrumb_plain(
         for index in range(anchors.count()):
             assert anchors.nth(index).get_attribute("aria-haspopup") is None
         breadcrumb = page.get_by_role("navigation", name="Breadcrumb").get_by_role(
-            "link", name="Profiles", exact=True
+            "link", name="Contributor Profiles", exact=True
         )
         assert breadcrumb.get_attribute("aria-haspopup") is None
         for disclosure in article.locator("details").all():
@@ -747,6 +747,6 @@ def test_generated_directory_keeps_native_profile_navigation(
             == "Walter Stromquist"
         )
         page.get_by_role("navigation", name="Breadcrumb").get_by_role(
-            "link", name="Profiles", exact=True
+            "link", name="Contributor Profiles", exact=True
         ).click()
         page.wait_for_url(f"{generated}profiles/")

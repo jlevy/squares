@@ -32,14 +32,18 @@ See the <a id="profiles" href="profiles/index.html">Contributor Profiles</a> for
 credited contributors and authors.
 
 This project now independently tabulates all known new results and does
-[AI-assisted verification](results.html#verification-ladders) of the proofs and
+[AI-assisted verification](verification.html#verification-ladders) of the proofs and
 certificates behind them, to encourage open collaboration on open questions and
 formalizations of current proofs.
 
 </div>
 
+<div class="site-navigation-copy">
+
 The [Resources directory](resources.html) under Learn lists external square packing
 catalogues, research repositories, and websites.
+
+</div>
 
 <noscript><p>Project information: <a id="report-your-results" href="report.html">Report
 a Result</a><a id="contribute-your-results"></a> and

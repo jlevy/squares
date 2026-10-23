@@ -132,6 +132,19 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "work remains under think-v1qe."
         ),
     ),
+    "recent-results.html": (
+        1_400_000,
+        (
+            "The requested complete arrival-ordered table measured 1,295,301 bytes "
+            "on 22 October 2026 at 229 unique results. It reuses the Results Archive's "
+            "eight metadata cells and fetched record popovers, with the newest seven "
+            "calendar dates expanded and every older row retained in the same table. "
+            "The 1,400,000-byte ceiling matches Results Archive and leaves 104,699 "
+            "bytes above this measurement. All rows remain available without scripts. "
+            "Timing has not been re-measured for this view; think-vasz tracks the "
+            "renderer, budget and final preview checks."
+        ),
+    ),
     "result/t-174.html": (
         350_000,
         (

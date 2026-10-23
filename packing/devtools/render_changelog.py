@@ -1170,11 +1170,18 @@ def news_filters(topics_present: set[str] | None = None) -> str:
         for score in range(3, 6)
     )
     topics = "".join(
-        f'<button type="button" class="site-chip" data-news-topic="{topic}" '
-        f'aria-pressed="true">{NEWS_CHECK}<span data-news-topic-label>{label}</span>'
+        f'<button type="button" class="site-filter-option site-chip" '
+        f'data-site-filter-option data-news-topic="{topic}" aria-pressed="true">'
+        f"{NEWS_CHECK}<span data-news-topic-label data-site-filter-label>{label}</span>"
         '<span class="site-cell-quiet" data-news-tally> (0)</span></button>'
         for topic, label in NEWS_TOPICS.items()
         if topics_present is None or topic in topics_present
+    )
+    chevron = (
+        '<svg class="site-nav-icon site-filter-chevron" viewBox="0 0 24 24" '
+        'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+        'stroke-linejoin="round" aria-hidden="true" focusable="false">'
+        '<path d="m6 9 6 6 6-6"/></svg>'
     )
     return (
         '<div class="site-news-filters sans-text" data-news-filters '
@@ -1184,8 +1191,15 @@ def news_filters(topics_present: set[str] | None = None) -> str:
         'aria-labelledby="news-significance-label">'
         f'{scores}</div></fieldset><fieldset><legend class="site-visually-hidden" '
         'id="news-topics-label">Topics</legend>'
-        '<div class="site-tabs site-chooser-small" role="group" '
-        f'aria-labelledby="news-topics-label">{topics}</div></fieldset>'
+        '<div class="site-filter-menu" data-site-filter-menu>'
+        '<button type="button" class="site-filter-trigger" data-site-filter-trigger '
+        'aria-expanded="false" aria-controls="news-topics-options">'
+        "<span>Topics</span> <span data-site-filter-summary>All</span>"
+        f'{chevron}</button><div class="site-filter-options" id="news-topics-options" '
+        'data-site-filter-options role="group" aria-labelledby="news-topics-label" hidden>'
+        '<button type="button" class="site-filter-option" data-site-filter-all '
+        'aria-pressed="true">All topics</button>'
+        f"{topics}</div></div></fieldset>"
         '<div class="site-table-tools">'
         '<button type="button" class="site-news-reset" data-news-reset>'
         "Reset filters</button>"

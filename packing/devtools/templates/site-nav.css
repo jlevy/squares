@@ -21,6 +21,10 @@
   --site-header-layer: 5;
   --site-icon-size: 0.85em;
   --site-reading-gutter: 2rem;
+  --site-nav-track: 70rem;
+  --site-nav-gutter: 1rem;
+  --site-nav-link-inset: 0.55rem;
+  --site-nav-name-outset: 0.55rem;
 }
 /* JS measures the entire header, including wrapped links and section tabs. Its sticky
    box keeps its original space while a transform hides it. Without JS the bar retains
@@ -162,12 +166,13 @@
 }
 .site-nav-inner {
   align-items: baseline;
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem 0.4rem;
   margin-inline: auto;
-  max-width: 70rem;
-  padding: 0.55rem 1rem;
+  max-width: calc(var(--site-nav-track) + 2 * var(--site-nav-gutter));
+  padding: 0.55rem var(--site-nav-gutter);
 }
 /* Every item, the site name included, is a padded box that takes a gentle wash on
    hover, the cards' own hover; nothing underlines on hover. */
@@ -175,7 +180,7 @@
   color: var(--kpress-doc-muted);
   font-weight: 550;
   line-height: var(--site-nav-line);
-  padding: 0.25rem 0.55rem;
+  padding: 0.25rem var(--site-nav-link-inset);
   text-decoration: none;
   transition: var(--site-hover-transition);
 }
@@ -191,7 +196,7 @@
   font-weight: 680;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-inline: -0.55rem auto;
+  margin-inline: calc(-1 * var(--site-nav-name-outset)) auto;
   white-space: nowrap;
 }
 .site-nav .site-name-short {
@@ -309,6 +314,10 @@
    line and less padding above and below each link, with no gap between rows. A link
    stays 26px tall, above the 24px a tap target needs. */
 @media (width < 40rem) {
+  :root {
+    --site-nav-gutter: 0.5rem;
+    --site-nav-link-inset: 0.45rem;
+  }
   .site-nav {
     --site-nav-line: calc(var(--site-nav-font-size) * 1.3);
   }
@@ -316,21 +325,24 @@
     gap: 0 0.1rem;
     justify-content: center;
     padding-block: 0.4rem;
-    padding-inline: 0.5rem;
+    padding-inline: var(--site-nav-gutter);
   }
   .site-nav a {
     padding-block: 0.15rem;
-    padding-inline: 0.45rem;
+    padding-inline: var(--site-nav-link-inset);
   }
 }
 /* With eight destinations the tablet row also needs the phone's shorter horizontal
    padding and smaller gaps; otherwise the gear alone wraps below all the links. */
 @media (40rem <= width < 56rem) {
+  :root {
+    --site-nav-link-inset: 0.45rem;
+  }
   .site-nav-inner {
     column-gap: 0.2rem;
   }
   .site-nav a {
-    padding-inline: 0.45rem;
+    padding-inline: var(--site-nav-link-inset);
   }
 }
 /* Use the compact name below the width that fits the full bar on one row. */
@@ -727,9 +739,10 @@ nav.site-tabs a[aria-current="page"],
   }
 }
 
-/* Every page carries the same text-width trail, independent of its smaller type.
-   The document gutter also applies here because this nav is outside the article. */
+/* Trails share the header track, with their first label under the logo's text.
+   Its hit-area outset and responsive link padding are separate from prose width. */
 .site-breadcrumbs {
+  box-sizing: border-box;
   color: var(--site-support-color, var(--kpress-doc-muted));
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note, var(--site-nav-font-size));
@@ -737,7 +750,12 @@ nav.site-tabs a[aria-current="page"],
   line-height: var(--paper-support-leading, 1.4);
   margin-block: 1rem 2.5rem;
   margin-inline: auto;
-  inline-size: min(var(--kpress-measure), calc(100% - 2 * var(--site-reading-gutter)));
+  inline-size: min(calc(var(--site-nav-track) + 2 * var(--site-nav-gutter)), 100%);
+  padding-inline: calc(
+    var(--site-nav-gutter) +
+    var(--site-nav-link-inset) -
+    var(--site-nav-name-outset)
+  );
 }
 .site-breadcrumbs ol {
   display: flex;

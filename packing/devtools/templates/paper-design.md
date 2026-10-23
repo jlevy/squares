@@ -53,7 +53,8 @@ physical sizes.
 | Main title | 28.5px | 19pt | Sans, 1.5 of the sans base |
 | Subtitle | 23.75px | About 15.8333pt | Sans caps, 1.25 of the sans base |
 | Title credits and date | 19px | 12⅔pt | Sans base size |
-| Section headings | 21.6px | 14.4pt | Serif italic, 1.2 of the prose base |
+| Substantive section headings | 21.6px | 14.4pt | Serif italic, 1.2 of the prose base |
+| Collection/navigation headings | 21.6px | Shared role | Sans upright at medium weight |
 | Heading leading | 1.15 | KPress’s 1.2 | `--paper-heading-leading`: every heading, a card’s and a popover’s headline, and a page’s subtitle; the explainer’s hero title keeps KPress’s 1.05 |
 | Space above a section heading | 48.6px | 37.8pt | `--paper-section-space`: 2.7 of the prose base on screen, 2.8 in print |
 | Space below a section heading | 27.2px | 15.6pt | `--paper-section-space-below`: 1.7rem on screen, 1.3rem in print |
@@ -78,6 +79,11 @@ Links have no persistent underline on the web or in print.
 Links within supporting text inherit its gray or black; links in the main prose retain
 the accent color. Caption leads use bold weight to distinguish the figure number without
 changing its size or color.
+
+Text button labels share a small letter spacing through `--paper-button-letter-spacing`,
+an alias of KPress’s existing caps spacing (0.021em). Native buttons, menu controls,
+action links, chooser tabs and filter buttons use that one token; formulas keep normal
+tracking.
 
 Every button label uses uppercase sans text, including popover actions, Atlas controls,
 paper controls and Workbench controls (`think-rfy8`). The shared rule lives in
@@ -109,8 +115,12 @@ Navigation and chrome always use the shared sans face: menus, contents links, co
 headings, disclosure labels, counts and browsing controls.
 Substantive exposition remains serif, and an inline citation or link in that exposition
 inherits its surrounding prose.
-The shared `site-navigation-copy` and `site-navigation-heading` roles cover metadata and
-collection structure without restyling every prose link.
+The shared `site-navigation-copy` and `site-navigation-heading` roles cover metadata,
+collection structure and general site descriptions or browsing instructions.
+Their use follows the text’s purpose, including introductions and guidance on About,
+Papers, Tutorials, Posters, Resources and project documentation.
+Mathematical explanations and research exposition retain the serif face; an inline link
+inherits that prose.
 
 Secondary metadata such as dates, breadcrumbs, captions and provenance may use KPress’s
 gray (`--kpress-doc-muted`, carried as `--site-support-color`) on the web and black in
@@ -883,24 +893,27 @@ contributor articles use their component sheets and the same text tokens.
   Overview and News link directly to their pages.
   Results, Learn, and About each use one button containing the label and chevron.
   The whole button opens its list.
-  Its first entry leads to substantive content: Recent Results, Papers, or The Squares
-  Project. Results, Learn and About have no category page or URL. Results contains Recent
-  Results (`recent-results.html`), Results Archive (`results.html`), Visual Atlas
-  (`atlas.html`), and Verification and Ratings (`epistemics.html`). The hierarchy and
-  destination paths live in `site_navigation.py`; `site-nav.html` supplies the shared
-  shell.
+  Its first entry leads to substantive content: Visual Atlas, Papers, or The Squares
+  Project. Results, Learn and About have no category page or URL. Results contains Visual
+  Atlas (`atlas.html`), Recent Results (`recent-results.html`), Results Archive
+  (`results.html`), Verification (`verification.html`), and Report a Result
+  (`report.html`), in that order.
+  About contains The Squares Project, Contributor Profiles, and Project Documentation.
+  The hierarchy and destination paths live in `site_navigation.py`; `site-nav.html`
+  supplies the shared shell.
 
   Each unified trigger uses the navigation face, line, medium weight, and muted text,
   with a Lucide chevron at `--site-icon-size`, aligned on the capital height.
   Labels retain Title Case.
   A button has a minimum 2rem square target; its open or hovered state takes
   `--site-wash` and accent text.
-  The closed chevron points right and expands clockwise by a positive 90-degree turn to
-  point down. Collapse reverses the same turn counterclockwise.
-  Native disclosures follow the same convention; the Atlas’s double chevron uses a
-  positive half-turn. The list uses the page background, document border, and shared
-  shadow, with 0.3rem inner padding and links padded 0.45rem by 0.7rem. Links and
-  buttons show a 2px document-link outline with 2px clearance on keyboard focus.
+  The menu chevron retains its down-pointing closed state and up-pointing open state.
+  Expansion uses a negative 180-degree turn; collapse reverses the same path to zero.
+  This changes its travel direction while preserving both resting states.
+  Native disclosures retain their existing glyphs and states.
+  The list uses the page background, document border, and shared shadow, with 0.3rem
+  inner padding and links padded 0.45rem by 0.7rem. Links and buttons show a 2px
+  document-link outline with 2px clearance on keyboard focus.
   The current content link is underlined; an ancestor uses the accent and shared sans
   bold weight (680). A fragment destination does not also claim the current page.
 
@@ -921,17 +934,21 @@ contributor articles use their component sheets and the same text tokens.
   Without JavaScript, enhancement buttons are hidden and the content links remain
   exposed. Print and embedded articles omit the global header.
 
-  Every page carries a sans, muted breadcrumb trail above its title, at the shared note
-  size and support leading, centered on the reading column, 1rem below the navigation
-  and 2.5rem above the title.
+  Category and nested pages carry a sans, muted breadcrumb trail above their title, at
+  the shared note size and support leading, 1rem below the navigation and 2.5rem above
+  the title. Its first label aligns with the header logo text, independently of the
+  35em/630px prose column.
   The trail replaces the article’s usual top gap.
   Ancestors with a destination are links; Results, Learn and About are plain container
   text with no URL. Chevrons separate the items, and the current title is plain text
-  with `aria-current="page"`. A root page has one plain current item; the homepage is
-  labelled Overview. Learn has no category page; its content pages carry the plain Learn
-  ancestor. The trail and prose share the 35em reading width and narrow-screen gutters,
-  independent of the trail’s smaller sans type.
-  Contributor profiles and the directory use the same text width.
+  with `aria-current="page"`. Standalone pages with no parent, including Overview and
+  News, omit both the visible trail and BreadcrumbList data.
+  Learn has no category page; its content pages carry the plain Learn ancestor.
+  The trail shares the header’s 70rem content track, responsive gutters and link
+  hit-area inset through `--site-nav-track`, `--site-nav-gutter`,
+  `--site-nav-link-inset` and `--site-nav-name-outset`. Its smaller sans type does not
+  change that geometry.
+  Contributor profiles and the directory retain the same 35em text width as other prose.
   Tables and figures keep their wider tracks.
   `site_navigation.py` supplies the same ancestry for the visible trail and structured
   BreadcrumbList data.
@@ -986,35 +1003,24 @@ contributor articles use their component sheets and the same text tokens.
   Adapted from metabrowser’s settings gear, reduced to one chooser with words beside its
   icons.
 
-- **Closing credit.** Every page with a footer ends on the same two centred lines:
+- **Closing credit.** Every ordinary site page ends with three centered lines: project
+  and repository attribution, the linked typesetting tools, and the current edition.
+  Papers omit the site edition because their own edition is in their title credits.
   Footer links keep their text and destinations without decorative brand or
   external-link icons; body links retain their usual icon treatment.
 
   > The Squares Project · github.com/jlevy/squares\
-  > v0.4.2-8ac5de · Formatted and typeset with Flowmark and KPress
+  > Formatted and typeset with Flowmark and KPress\
+  > v0.4.2-8ac5de
 
-  The first is the project’s formal name and its repository, shown without its scheme
-  and linked. The second is the version and the credit to the two tools, each linked to
-  its project. The version is never typed: it is `sqpack.release.PUBLICATION_EDITION`,
-  the stamp the atlas footer and the film print (the edition’s semver core and the first
-  six characters of the pinned data revision, with the edition’s status ahead of it
-  while it has one), so it follows a re-pin and a new edition with no edit.
-  One function writes the lines, `render_overview.colophon_lines`: the site’s pages set
-  them in KPress’s footer slot as `.site-colophon` (`colophon_html`), and the explainer
-  and the optimality paper in their own closing paragraph, `.colophon`, which keeps each
-  paper’s type and print rules, so both lines print at the end of each PDF. The
-  workbench is an application that fills the window and has no footer; its stage prints
-  the same version. A middle dot with a space either side parts a line.
-  There are two lines at every width: a line is a block (`.site-colophon-line`), and
-  each part beside a dot an inline block (`.site-colophon-part`), so on a phone a line
-  breaks at its dot, and a part wider than the page breaks into balanced rows.
-  Both rules are in `site-nav.css`, the stylesheet every page carries.
-  The type is quiet: the sans face at the colophon scale (0.85 of the sans base,
-  16.15px) in the support colour on a site page, KPress’s tiny size in its muted colour
-  on a paper; the links take the page’s link colour, and all of it follows the theme.
-  A build that prints the version names `release.py` among its declared inputs, as the
-  workbench’s does, so a re-pin puts every such page in the Pages workflow’s scope
-  (`devtools.pages_scope`); nothing compares a page’s bytes with an earlier build’s.
+  The version is `sqpack.release.PUBLICATION_EDITION`, never a typed page-specific
+  value. `render_overview.colophon_lines` writes the same attribution and tool links for
+  ordinary pages and papers; `colophon_html` adds the ordinary site wrapper.
+  Each line is a block (`.site-colophon-line`) and each part beside a middle dot is an
+  inline block (`.site-colophon-part`), so a narrow line wraps at a dot before breaking
+  within its text. The shared footer-specific rule suppresses generated link icons
+  without removing or rewriting the anchors.
+  The Workbench application has no footer; its stage carries the publication version.
 
 - **Homepage.** Its browser title and sharing title are **The Squares Project**, from
   the shared project-name constant.
@@ -1101,10 +1107,22 @@ contributor articles use their component sheets and the same text tokens.
   Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
   One unboxed Reset filters action restores the defaults.
-  The compact chooser groups share the homepage’s small controls, wrap inline, and keep
-  their group names accessible without visible headings.
-  Multi-select topic buttons wrap between labels on narrow screens, with a border around
-  each button rather than empty space at the end of a wrapped strip.
+  Significance remains an inline S3/S4/S5 segmented group using the homepage
+  Grid/Triangle chooser’s shared type, sizing, borders and states; it is never a
+  dropdown. Topics uses one compact multiselect disclosure.
+  Its summary reads All, None, one selected topic, or the first topic and +N, using the
+  selected topic’s shared chip.
+  Opening exposes ordinary pressed buttons in a labelled group; choosing a topic or All
+  topics leaves it open.
+  Up/Down, Home and End move focus among choices; Enter or Space activates the focused
+  button. Escape closes the list and restores its trigger.
+  Outside activation and focus leaving the group dismiss it.
+  The panel fits within the viewport gutters and scrolls internally on short screens.
+  It shares the navigation surface, shadow, focus outline, motion timing and down/up
+  chevron with negative 180-degree expansion, including reduced-motion support.
+  `overview/filter-menu.js` owns disclosure, focus and the summary; the News controller
+  retains selection and URL state.
+  Group names remain accessible without separate visible headings.
   They use the cards’ sentence-case labels in both color themes: inactive buttons have a
   neutral gray fill, and selected buttons have the shared topic fill and a leading
   check, the theme menu’s mark for a chosen item, so selection never rests on hue alone.
@@ -2080,17 +2098,19 @@ contributor articles use their component sheets and the same text tokens.
   no styling class. Popover detail and mathematical record headings retain their
   dedicated compact rules.
 
-- **Small choosers.** Single-select and multi-select choices share the homepage Atlas’s
-  `site-tabs site-chooser-small` component in `site-nav.css`. The text uses the Results
-  widget control size, 1.35 leading, and 0.15rem by 0.65rem padding (`think-ticj`).
-  Borders, hover, keyboard focus and motion use the same rules on every page.
-  Topic filters use neutral gray when inactive, and their shared chip fills and a check
-  when selected; an inactive filter under a hovering pointer takes a paler topic fill.
+- **Small choosers.** Inline single-select and multi-select choices share the homepage
+  Atlas’s `site-tabs site-chooser-small` component in `site-nav.css`. The text uses the
+  Results widget control size, 1.35 leading, and 0.15rem by 0.65rem padding
+  (`think-ticj`). Borders, hover, keyboard focus and motion use the same rules on every
+  page. Topic choices inside the shared multiselect disclosure use neutral gray when
+  inactive, and their shared chip fills and a check when selected; an inactive choice
+  under a hovering pointer takes a paler topic fill.
   They have no label underline or inset selection mark.
   Single-select tabs keep `aria-selected` and arrow-key navigation; multi-select groups
   use native buttons with `aria-pressed`. Group names remain accessible when visually
   hidden. Each compact choice owns its border, so wrapped rows fit their buttons.
-  News has one unboxed Reset filters action.
+  News keeps significance inline and puts only Topics in the shared filter disclosure.
+  It has one unboxed Reset filters action.
   Chooser strips wrap at narrow widths; pages only place the groups.
   All action groups use a shared 0.7rem gap and wrap together at narrow widths; no
   section owns separate button spacing.
@@ -2251,14 +2271,14 @@ contributor articles use their component sheets and the same text tokens.
   cropping and links directly to its PDF. Its high-resolution PNG comes from the
   canonical builder and is published through `SiteAssets.image_file`, so the immutable
   fingerprint changes with its bytes rather than reusing a cached Grid picture
-  (`think-t2yf`). Papers retains both the 100- and 324-case PDF cards.
+  (`think-t2yf`). Posters retains both the 100- and 324-case PDF cards.
   Their eyebrow label is “PDF”. The homepage video is a native inline player with
   controls, `playsinline` and `preload="none"`, showing the retained poster until
   clicked. It does not autoplay.
   The full player also appears on `visualize.html`. Below the homepage media, **View All
-  Downloads** links to `downloads.html` and **View Visualizations** to `visualize.html`,
-  in the shared action row (`think-h3ny`). Retain the poster SVG links and source README
-  on the Downloads page.
+  Posters** links to `posters.html`, **View Videos** to `visualize.html`, and **Open
+  Workbench** to `workbench/`, in the shared action row.
+  Retain the poster SVG links and source README on the Posters page.
   The dedicated Atlas page contains the atlas controls and cases, without media cards.
   A single-card group is centered.
 
@@ -2754,14 +2774,26 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   row cards. Filtering and older results remain on `results.html`, whose defaults are
   unchanged. A result’s ordinary link opens its canonical article without scripts.
   **About Result Verification** and **All Results** follow the table, linking to
-  `results.html#verification-ladders` and `results.html#all-results` respectively.
-  The homepage omits the verification legend; the full explanation remains on Results.
+  `verification.html` and `results.html#all-results` respectively.
+  The homepage omits the verification legend; the full explanation is on Verification.
 
 - **Recent Results and Results Archive.** Results is a menu container with no landing
-  page. Recent Results (`recent-results.html`) presents recent arrivals and the
-  publication rollup. Results Archive (`results.html`) holds every registered result, the
-  complete filterable table, and verification, evidence, credit and status guidance.
+  page. Recent Results (`recent-results.html`) opens directly on one complete table,
+  ordered by arrival date, below its title and breadcrumb.
+  Its first row group contains the newest seven calendar dates; an Earlier results
+  button reveals the older row group within the same table.
+  The native button updates its label, chevron and `aria-expanded`, with `aria-controls`
+  naming the older `tbody`. A bookmark to an older row or the legacy earlier-results
+  boundary opens that group.
+  Without scripts, all rows remain visible and the inactive button is omitted.
+  The head bootstrap reserves the collapsed geometry before paint.
+  Narrow screens retain the shared row cards, and the table is never nested or sorted
+  out of its arrival order.
+  Results Archive (`results.html`) holds the complete filterable table.
   Visual Atlas (`atlas.html`) provides the graphical case directory and frontier survey.
+  Verification (`verification.html`) contains verification, evidence, credit and status
+  guidance and links to Project Epistemics (`epistemics.html`). The detailed article’s
+  trail links its actual Verification parent under the plain Results category.
   Each destination has its own page and a plain current breadcrumb item under Results.
 
   Existing archive filters, query URLs, row IDs, `#every-result`, `#all-results`, and
@@ -2777,10 +2809,10 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   maximum age and Hide superseded clear, so every result shows, newest first, in one
   flat list. Each row keeps the result’s own ID (`#t-018`). Its trigger opens the shared
   result popover; the ordinary article link remains usable without scripts.
-  Recent Results links to these canonical archive rows rather than duplicating their
-  IDs. Result article trails link the actual Results Archive parent; cases link Visual
-  Atlas. `site_navigation.py` supplies the same ancestry for visible and structured
-  trails.
+  Recent Results keeps those row IDs on its own page; its ordinary record links reach
+  the canonical result articles.
+  Result article trails link the actual Results Archive parent; cases link Visual Atlas.
+  `site_navigation.py` supplies the same ancestry for visible and structured trails.
 
 - **Document cards and moved pages.** The overview’s documentation section has one card
   for each repository document the site renders, in the order of
@@ -2812,10 +2844,12 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   in reading order followed by the methods survey.
   Tutorials (`tutorials.html`) presents both the basic introduction and advanced
   companion with their full introductions.
-  Downloads (`downloads.html`) contains the two infographic posters and every paper’s
-  PDF and source editions.
-  Videos, Workbench, and Resources have their own substantive destinations.
-  Only Overview carries summary previews.
+  Posters (`posters.html`) contains the two infographic posters; each paper’s PDF and
+  source editions remain with that paper on Papers.
+  The old `downloads.html` page forwards to Posters, preserving query and fragment.
+  `papers.html#pdfs` forwards to `posters.html#pdfs`, and `posters.html#paper-editions`
+  reaches Papers. Videos, Workbench, and Resources have their own substantive
+  destinations. Only Overview carries summary previews.
   Published Papers fragments forward to the corresponding full catalogue or Videos page,
   retaining queries; without scripts, ordinary links at the old anchors reach the same
   content. Reading cards come from `overview_sections.PAPERS`, each entry a document’s

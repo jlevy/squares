@@ -323,7 +323,7 @@ def _record_rows() -> list[Row]:
     film_day = written_date(film.first_published)
     return [
         Row(
-            f"films, caption date and release {render_overview.FILM_RELEASE}",
+            f"films, source release {render_overview.FILM_RELEASE}",
             render_overview.film_release_date(),
             "release.PUBLICATION_HISTORY at render_overview.FILM_RELEASE",
             "the day the release the films were cut for was first published",

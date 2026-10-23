@@ -43,6 +43,10 @@ FAMILIES = {
         "input-response",
         "Disclose navigation links while keeping every destination available without scripts.",
     ),
+    "filter-menu": (
+        "input-response",
+        "Disclose prepared filter choices and summarize their existing selection state.",
+    ),
     "news-filters": (
         "input-response",
         "Filter complete News articles by importance and subject, preserving address state.",

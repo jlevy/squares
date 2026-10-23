@@ -23,17 +23,17 @@ publication remain in progress.
 Use the confirmed top-level order **Overview**, **News**, **Results**, **Learn**, and
 **About**. Overview and the site name link home; News links directly to its page.
 Results, Learn, and About have dropdowns.
-Results groups Recent Results, the Results Archive, Visual Atlas, Verification and
-Ratings, and Report a Result.
-Learn groups Papers, Tutorials, Videos, Workbench, Downloads, and Resources.
-About groups The Squares Project, Contributor Profiles, and Project Documentation.
+Results groups Visual Atlas, Recent Results, the Results Archive, Verification, and
+Report a Result. Learn groups Papers, Tutorials, Videos, Workbench, Posters, and
+Resources. About groups The Squares Project, Contributor Profiles, and Project
+Documentation.
 
 Use a small dropdown for each group, a consistent parent for each nested page, and short
 homepage previews with buttons into the hierarchy.
 Keep all existing public page addresses.
 The confirmed label **Learn** replaces **Explanations** in navigation.
 Learn is a menu container without a landing page; `papers.html` is the complete Papers
-catalogue, alongside separate Tutorials, Downloads, Videos, Workbench, and Resources
+catalogue, alongside separate Tutorials, Posters, Videos, Workbench, and Resources
 pages.
 
 ## Goals
@@ -106,9 +106,10 @@ asset.
 The [complete route disposition index](plan-2026-10-22-site-navigation-routes.csv)
 lists all 1,149 baseline entries with their current kind, canonical address, proposed
 parent, and disposition.
-Its `inventory_status` column separates those `existing` rows from five `added` rows for
-Resources, Tutorials, Downloads, Documentation, and Report a Result.
-Those pages are excluded from all baseline counts below.
+Its `inventory_status` column separates those `existing` rows from eight `added` rows:
+the seven substantive pages listed in the current route disposition and the retained
+Downloads compatibility forwarder.
+Those routes are excluded from all baseline counts below.
 Counts describe this baseline; implementation must reconcile later registrations before
 changing navigation.
 
@@ -269,12 +270,13 @@ Site name → / [Home; selected previews and actions]
 ├── Overview → / [direct link; same homepage]
 ├── News → news.html [direct link; announcements and changelog]
 ├── Results [menu container]
-│   ├── Recent Results → recent-results.html [menu; daily arrivals and weekly publications]
+│   ├── Visual Atlas → atlas.html [menu; page; first Results item]
+│   │   └── cases/N.html [324 case pages]
+│   ├── Recent Results → recent-results.html [menu; one complete arrival-ordered table]
 │   ├── Results Archive → results.html [menu; complete result register]
 │   │   └── result/t-NNN.html [229 record pages]
-│   ├── Visual Atlas → atlas.html [menu; page]
-│   │   └── cases/N.html [324 case pages]
-│   ├── Verification and Ratings → epistemics.html [menu; page]
+│   ├── Verification → verification.html [menu; result ratings and evidence guide]
+│   │   └── Project Epistemics → epistemics.html [page; full policy, reached by button]
 │   └── Report a Result → report.html [menu; contribution instructions]
 ├── Learn [menu container; no category page]
 │   ├── Papers → papers.html [menu; complete paper catalogue]
@@ -284,7 +286,7 @@ Site name → / [Home; selected previews and actions]
 │   │   └── tutorial-advanced.html
 │   ├── Videos → visualize.html [menu; page]
 │   ├── Workbench → workbench/ [menu; page]
-│   ├── Downloads → downloads.html [menu; complete download catalogue]
+│   ├── Posters → posters.html [menu; packing poster PDFs]
 │   └── Resources → resources.html [menu; complete directory]
 └── About [menu container]
     ├── The Squares Project → about.html [menu; project page]
@@ -305,36 +307,54 @@ Only Overview carries summary previews.
 Actual menu destinations use their menu label for browser and preview titles, page
 headings, and current breadcrumb items, from the shared `navigation_title` lookup.
 The homepage is the explicit heading exception: its menu/browser label remains Overview,
-but its H1 remains **The Square Packing Problem**. This includes Overview, Verification
-and Ratings, Contributor Profiles, Project Documentation, and Workbench.
+but its H1 remains **The Square Packing Problem**. Verification, Contributor Profiles,
+Project Documentation, and Workbench use their exact menu labels.
 Preserve scientific source-document titles and legacy anchors; the rendered reader page
 supplies its canonical navigation heading.
-The next homepage section is **Visual Atlas**. Preserve its existing
-`#the-atlas-of-square-packings` and `#the-atlas` anchors without adding a duplicate
-problem subtitle. Epistemics remains cross-linked from Documentation, tutorials, and
-result explanations; its single navigation parent becomes Results because readers use it
-to interpret evidence labels.
+The next homepage section is **Visual Atlas**; the result-preview section is titled
+**Results**, retaining `#recent-results` and both collection actions.
+Preserve its existing `#the-atlas-of-square-packings` and `#the-atlas` anchors without
+adding a duplicate problem subtitle.
+Project Epistemics remains cross-linked from Project Documentation, tutorials, and
+result explanations; its canonical parent is Verification under Results.
 
 ### Landing pages and content ownership
 
 **Results.** Results is a menu container with no landing page.
-`recent-results.html` is the substantive Recent Results page: every arrival by day and
-significant earlier publications by week, with the existing windows, order, and credits.
-Its result identifiers link to their canonical rows in the Results Archive.
-Keep the page concise: the date span, chronological disclosures, significance-floor
-note, result links and one View Results Archive action are sufficient.
-Omit a local contents bar, repeated how-to prose, and repeated per-day filter links; the
-archive retains all explicit query/filter URLs.
-Keep `results.html` as the **Results Archive**, with its complete sortable, filterable
-register after a compact introduction and direct actions for Recent Results and Visual
-Atlas. Preserve archive query parameters, result-row anchors, and the existing
-verification, evidence, credit, and status anchors.
-The archive retains its visual rating guide and unique exactness examples, linked to the
-full Verification and Ratings policy in `epistemics.html`. Do not copy the recent lists,
-Atlas tiles, or the 324-case table onto this page.
-Legacy `results.html#recent-arrivals`, `#added-in-the-last-seven-days`, and
-`#earlier-results-by-week-published` links forward to the same fragments on Recent
-Results with the query preserved; no-script links retain access to those destinations.
+`recent-results.html` is one long semantic table containing every registered result
+exactly once, ordered by arrival date newest first, with result ID as the stable tie
+breaker. Arrival is `landed`, falling back to `registered`; publication date does not
+control this view. The newest arrival date and six preceding calendar dates start
+expanded. All older rows remain in the same table, behind an **Earlier results** control
+row; expansion changes the button to **Hide earlier results**. Without JavaScript every
+row remains visible.
+Keep one table with separate current/older `tbody` elements, never nested or duplicated
+tables. Only the H1 and ancestry breadcrumb precede the table; omit introductory prose,
+extra section headings, local contents links, filter bars, and repeated archive actions.
+The table reuses the shared result-row renderer, retaining claims, cases, credits,
+ratings, status, and links to full result records.
+At 229 unique results it measured 1,295,301 bytes; its explicit 1,400,000-byte ceiling
+matches the Results Archive.
+The renderer/budget work is tracked in `think-vasz`, and the shared interaction in
+`think-oala`; integrated timing and browser checks remain part of the final validation.
+Legacy `#recent-arrivals`, `#added-in-the-last-seven-days`, and
+`#earlier-results-by-week-published` anchors land on the table or its older-row
+boundary; the older fragment expands its target on enhancement.
+
+Keep `results.html` as the **Results Archive**, with the complete sortable, filterable
+register. Preserve archive query parameters and canonical result-row addresses.
+Move all of its former rating, evidence, credit, and status prose to the substantive
+**Verification** page at `verification.html`, including the visual rating guide and
+unique exactness examples.
+The archive links to that page after the table.
+Verification links by one action to **Project Epistemics** at `epistemics.html`, the
+separate detailed policy document.
+Its scientific source content stays unchanged.
+Legacy archive verification/evidence/credit/status fragments forward to the matching
+Verification anchors with queries preserved and useful no-script links.
+Legacy recent fragments still forward to Recent Results.
+Do not copy Atlas graphics or the 324-case bounds table onto either result register
+page.
 
 **Visual Atlas and Frontier.** Keep the visual Atlas and Frontier Survey on `atlas.html`
 initially. Give the page clear local links for **Packings**, **About the Bounds**, and
@@ -356,13 +376,19 @@ destination.
 **Learn.** Use the menu as a container for complete content pages, with Papers first.
 `papers.html` contains the four research papers and their series narrative;
 `tutorials.html` contains both complete tutorial cards and reading guidance;
-`downloads.html` contains both Atlas poster PDFs and all paper PDF and Markdown
-editions. Videos, Workbench, and Resources retain their substantive pages.
+`posters.html` contains the two Atlas packing poster PDFs and their source links.
+There is no generic Downloads catalogue or paper-editions table; each paper keeps its
+own PDF and Markdown editions on its detail page.
+Videos, Workbench, and Resources retain their substantive pages.
 No Learn page or visible single-button subsection duplicates these destinations.
 Legacy `papers.html#tutorial`, `#pdfs`, `#visuals`, and `#resources` links forward to
 the corresponding page, preserving queries.
 Without JavaScript, inline compatibility links at those fragments reach the same
 destinations. `#papers` and `#explanations` remain on the Papers catalogue.
+Keep `downloads.html` as a compatibility forwarder to Posters, preserving queries and
+fragments. The old `#pdfs` target remains on Posters; `#paper-editions` continues to the
+Papers catalogue, with a useful no-script link.
+Keep every published PDF artifact.
 
 **About.** Keep the project narrative at `about.html`, titled The Squares Project, with
 its full-name attributions and a contextual Contributor Profiles link.
@@ -384,9 +410,13 @@ links. The directory has the breadcrumb Learn → Resources, with no competing f
 directory on About.
 
 **News.** Keep dated announcements and the full changelog together.
-Recent-result rollups have the dedicated Recent Results page because they describe the
-register; News entries can cover papers, downloads, and site changes as well as
-mathematical results.
+The arrival-ordered Recent Results table is separate from News; News entries can cover
+papers, downloads, and site changes as well as mathematical results.
+Topics/Tags uses the shared dropdown multiselect.
+Significance remains the inline segmented S-buttons, using the same component as the
+Atlas Grid/Triangle controls; the default selection remains S4/S5. Preserve
+`news-topics` and `news-s` query state, history and fragments, plus complete no-script
+news access. This request does not change the Results Archive filter controls.
 
 ### Homepage composition
 
@@ -399,13 +429,13 @@ catalogue content on the page.
 | Current homepage content | Proposed homepage treatment | Complete destination |
 | --- | --- | --- |
 | Problem and n = 53 hero | Retain concise introduction and case link | Tutorial; case 53 |
-| Atlas preview and controls | Retain a bounded preview and existing expand behavior | Atlas; Best Known Bounds; complete PDF |
+| Atlas preview and controls | Retain a bounded preview, existing expand behavior, and View Visual Atlas action | Visual Atlas; Best Known Bounds; complete PDF |
 | News cards | Selected recent entries and View All News button | `news.html` |
-| Recent Major Results | Bounded selected rows with View Recent Results and View Results Archive actions | `recent-results.html`, `results.html#all-results` |
+| Results (`#recent-results`) | Bounded selected rows with View Recent Results and View Results Archive actions | `recent-results.html`, `results.html#all-results` |
 | Profiles section | Short statement and View All Profiles button; no names or table | `profiles/` |
 | Report Your Results | One invitation and Report a Result button | `report.html` |
 | All tutorial/paper cards | Selected starting points with View All Tutorials and View All Papers actions | `tutorials.html`, `papers.html` |
-| Poster and inline film | One media preview with View Videos, Workbench, and Downloads actions | `visualize.html`, `workbench/`, `downloads.html` |
+| Poster and inline film | One media preview with View Videos, Workbench, and Posters actions | `visualize.html`, `workbench/`, `posters.html` |
 | Complete documentation cards | One short project/developer introduction and Project Documentation button | `documentation.html` |
 | Full external resource cards | Short summary and View All Resources button | `resources.html` |
 
@@ -419,9 +449,10 @@ result significance or contributor status.
 ### Route disposition and page parents
 
 All 666 content pages keep their addresses.
-Six new pages are registered: `resources.html`, `tutorials.html`, and `downloads.html`
-under Learn, `documentation.html` under About, and `recent-results.html` and
-`report.html` under Results.
+Seven new substantive pages are registered: `resources.html`, `tutorials.html`, and
+`posters.html` under Learn, `documentation.html` under About, and `recent-results.html`,
+`report.html`, and `verification.html` under Results.
+The superseded `downloads.html` is retained as a compatibility forwarder.
 The route CSV marks them as `added`, separately from the 1,149 baseline registrations.
 The CSV expands the generated families and technical registrations; this table specifies
 the reader-facing parent for every named page or family.
@@ -429,17 +460,19 @@ the reader-facing parent for every named page or family.
 | Path or page family | Proposed label or role | Parent and disposition |
 | --- | --- | --- |
 | `/` (`index.html`) | Overview / Home | Overview and site-name destination; selected previews |
-| `recent-results.html` | Recent Results | Results; complete daily arrivals and weekly publication lists |
+| `recent-results.html` | Recent Results | Results; all results once by arrival, newest seven calendar dates expanded |
 | `results.html` | Results Archive | Results; complete table remains at `#all-results` with query filters |
 | `result/t-NNN.html` (229) | Result identifier and title | Results → Results Archive; retain record contents and evidence links |
 | `atlas.html` | Visual Atlas | Results; retain graphical collection and survey |
 | `atlas.html#the-frontier-survey` | About the Bounds / Frontier Survey | Section of Atlas; contextual explanation |
 | `atlas.html#best-known-results` | Best Known Bounds | Section of Visual Atlas; local bounds-table destination |
 | `cases/N.html` (324) | Case n | Results → Visual Atlas; reached from either Atlas or bounds table |
-| `epistemics.html` | Verification and Ratings | Results; cross-link from documentation without changing parent |
+| `verification.html` | Verification | Results; full ratings, evidence, credit and status guide extracted from the archive |
+| `epistemics.html` | Project Epistemics | Results → Verification; separate detailed policy reached by its action |
 | `papers.html` | Papers | Learn; complete paper catalogue with retained address and legacy fragments |
 | `tutorials.html` | Tutorials | Learn; complete tutorial catalogue |
-| `downloads.html` | Downloads | Learn; complete poster and paper-edition downloads |
+| `posters.html` | Posters | Learn; the two packing poster PDFs and their source links |
+| `downloads.html` | Compatibility forwarder | Forward to Posters; retain queries and poster fragments; paper-editions reaches Papers |
 | `tutorial.html` | Tutorial | Learn; retain first-principles text |
 | `tutorial-advanced.html` | Advanced Tutorial | Learn; retain advanced text and links |
 | `papers/n11-lower-bounds-explainer.html` | Part I: New Lower Bounds | Learn; keep full title on the paper |
@@ -490,8 +523,9 @@ The final breadcrumb item is always plain text, never a link.
 | Visual Atlas | Results → Visual Atlas |
 | Case 11 | Results → Visual Atlas → n = 11 |
 | Result T-060 | Results → Results Archive → T-060 |
-| Epistemics | Results → Verification and Ratings |
-| Papers, Tutorials, Downloads, Tutorial, Advanced Tutorial, or a paper | Learn → Current title |
+| Verification | Results → Verification |
+| Project Epistemics | Results → Verification → Project Epistemics |
+| Papers, Tutorials, Posters, Tutorial, Advanced Tutorial, or a paper | Learn → Current title |
 | Videos, Workbench, or Resources | Learn → Videos / Workbench / Resources, as appropriate |
 | Profile directory | About → Contributor Profiles |
 | Person profile | About → Contributor Profiles → Person’s name |
@@ -575,11 +609,13 @@ open/closed states. Reuse the existing KPress, `paper-type.css`, and navigation 
 add a shared token only for a role the current system does not express.
 
 Collection links use **View All … →**: View All Profiles, View All Resources, View All
-News, View All Papers, View All Tutorials, and View All Downloads.
-The homepage’s result actions name the two distinct collections explicitly: **View
-Recent Results →** and **View Results Archive →**. Each action leads to its complete
-collection. Render the existing shared right-arrow component after the label; keep the
-decorative icon out of the accessible name.
+News, View All Papers, View All Tutorials, and View All Posters.
+The homepage’s Atlas action is **View Visual Atlas →**, matching the first Results menu
+destination. The homepage’s result actions name the two distinct collections explicitly:
+**View Recent Results →** and **View Results Archive →**. Each action leads to its
+complete collection.
+Render the existing shared right-arrow component after the label; keep the decorative
+icon out of the accessible name.
 Use the existing action-link component, with consistent size, padding, alignment, icon
 spacing, and focus treatment.
 Buttons and action links share `--paper-button-letter-spacing`, resolving to
@@ -592,12 +628,18 @@ in `href`. Individual detail links name the case, result, person, or paper; cont
 actions retain purpose-specific wording such as Report a Result.
 Document this vocabulary and its examples in the same Design System entry.
 
-Navigation and collection chrome use the shared sans face: menus, breadcrumbs, page
-headers, local navigation, collection-section headings, rollup dates/counts, and compact
-navigation metadata.
+Navigation and general site descriptions use the shared sans face: menus, breadcrumbs,
+page headers, local navigation, collection-section headings, compact navigation
+metadata, collection introductions, contributor-directory guidance, contribution
+prompts, and reading suggestions.
 Mark these with the shared `site-navigation-heading` and `site-navigation-copy` roles
 where native navigation elements do not express the role.
-Substantive mathematical exposition and News article bodies retain the serif face.
+Choose the role by the paragraph’s purpose, not whether it contains a mathematical term
+or link.
+Text explaining where to read, browse, download, or contribute is site guidance.
+Substantive mathematical exposition and News article bodies retain the serif face,
+including the homepage’s opening explanation of the square packing problem and its upper
+and lower bounds. Do not apply a blanket paragraph override.
 Remove GitHub icons from the site footer; retained footer links keep their text.
 
 The reading measure is 35em of the shared prose font base, or 630px at an 18px base.
@@ -607,9 +649,11 @@ Large cards use an 18rem minimum and fit two columns from 37rem; two Tutorials c
 therefore fill the reading measure without an empty third slot.
 Wide tables, Atlas drawings, paper figures, and the Workbench application remain
 visual/data surfaces rather than alternate prose measures.
-Headings and breadcrumbs resolve the same calculated width instead of interpreting em
-against their own font size.
-Column padding sits outside that text measure.
+Headings resolve the same calculated reading width instead of interpreting em against
+their own font size.
+Displayed breadcrumbs align their left edge with the header logo text through shared
+responsive header geometry; this latest rule supersedes their earlier alignment to the
+prose column. Column padding sits outside that text measure.
 
 News article prose remains serif; publication, artifact, and supporting-record metadata
 remains muted sans. Metadata group labels occupy their own lines, and each artifact,
@@ -636,9 +680,23 @@ Document their shared components and states in the existing
 | Bead | Requirement and acceptance |
 | --- | --- |
 | `think-2abe` | Put Accounts second, immediately after Name, in the profile directory. Preserve the relative Records → Results → Credits order and existing sorting and responsive behavior. |
-| `think-7kbb` | Apply the shared 35em reading measure and prose-aligned card groups, cap columns to actual cards, use sans navigation chrome, remove footer GitHub icons, and reverse chevron rotation while preserving down-closed/up-open states. |
-| `think-j4jk` | Remove repeated Recent Results introductions, contents links and per-day filter navigation; preserve dates, result lists, credits, ratings and one archive action. |
-| `think-0xj7` | Use each menu destination’s canonical label for its H1, browser metadata and current breadcrumb; rename Project Documentation and Contributor Profiles consistently; put Report a Result last under Results, outside About; preserve the explicit homepage H1/Visual Atlas exception and no-trail Overview/News rule. |
+| `think-7kbb` | Active coordination parent: reconcile all current requests, child/spec links, integration evidence, and final publication. |
+| `think-5yys` | In progress: apply the shared 35em reading measure and prose-aligned card groups, cap columns to actual cards, use sans navigation chrome, remove footer GitHub icons, and preserve corrected chevron endpoints/motion. |
+| `think-j4jk` | Remove repeated Recent Results introductions, contents links and per-day filter navigation; this first cleanup is superseded by the single-table view under `think-vasz`. |
+| `think-0xj7` | Use each menu destination’s canonical label for its H1, browser metadata and current breadcrumb; rename Project Documentation and Contributor Profiles consistently; put Report a Result last under Results, outside About; preserve the explicit homepage Problem/Visual Atlas/Results preview labels and no-trail Overview/News rule. |
+| `think-vasz` | Consolidate Recent Results into one complete arrival-ordered table; expand seven calendar dates, collapse all older rows in the same table, retain shared metadata and no-script access. |
+| `think-oala` | In progress: shared JavaScript/CSS disclosure for older rows in the same Recent Results table, including keyboard, legacy-fragment and no-script behavior. |
+| `think-6rnk` | Closed: migrate Verification guide assertions to its dedicated page without restoring duplicated archive prose. |
+| `think-z3lz` | In progress: current-head CI integration repairs and final artifact validation. |
+| `think-7r1w` | Extract archive explanation into Verification and keep Project Epistemics as the separate detailed policy reached by its action; preserve legacy fragments. |
+| `think-7xta` | Replace Downloads with canonical Posters, containing only packing poster PDFs; retain old Downloads and paper-edition compatibility routes without deleting artifacts. |
+| `think-p3xu` | Use shared sans semantic roles for general site descriptions, contributor and collection introductions, contribution prompts, and reading guidance; preserve serif mathematical exposition. |
+| `think-9lhb` | Only News Topics/Tags becomes a dropdown multiselect; retain shared inline significance S-buttons, S4/S5 defaults, and existing URL/history/no-script behavior. |
+| `think-kmpp` | In progress: complete preview rebuild, integrated browser and registry/link checks, current-head CI, and publication readiness. |
+| `think-ximb` | Audit every page family for the shared 35em prose measure and card-edge alignment; retain only deliberate wide data/visual surfaces. |
+| `think-1k0j` | Align every displayed breadcrumb below the header logo text using shared responsive geometry, superseding prose-column alignment. |
+| `think-dows` | Remove the obsolete secondary-film paragraph from Videos, preserving the primary video and other content. |
+| `think-3qn4` | Put Visual Atlas first in Results, then Recent Results, Results Archive, Verification, and Report a Result; use View Visual Atlas for the homepage action. |
 | `think-aefa` | Set the numeric total in each profile-table tally in bold, never italic; keep its result, record, or credit label in regular weight. Preserve muted significance parentheticals and blank zero cells through the shared tally component. |
 | `think-mpxs` | Give shared profile, result, and case popovers roughly 60% more width on wide screens where space permits. Base the shared responsive rule on `--kpress-measure`, panel padding, and viewport gutters. Audit the current 36rem general and 46rem framed-page ceilings rather than multiplying every variant. Cap prose measure while preserving room for case visualizations, narrow-screen fit, focus, controls, scrolling, and freedom from horizontal overflow. |
 | `think-klec` | Use diagonal outward arrows for the shared expand action. Prefer Lucide `maximize-2` if available in the existing pinned icon set; otherwise use a coherent shared equivalent. Preserve shared icon sizing, the accessible Open full page label, and identical header/footer destinations wherever an overlay opens a full page. |
@@ -779,11 +837,11 @@ checks; the completed landing slice is tracked separately above.
 
 ## Testing Strategy
 
-For this planning change, check the CSV’s existing rows against all URL-register entries
-and audit the one proposed Resources row separately.
+Check the CSV’s existing rows against all baseline URL-register entries and audit added
+substantive pages and compatibility routes separately.
 Verify counts and named-page coverage, check relative documentation links, run the
 document-map renderer/check, and format the new Markdown with the project’s pinned
-Flowmark. No site build is needed to review the proposed hierarchy.
+Flowmark. A complete site build verifies the implemented hierarchy.
 
 For implementation, extend existing navigation, document, profile, record, and workbench
 checks rather than copying template markup into new tests.

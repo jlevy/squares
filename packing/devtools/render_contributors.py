@@ -774,13 +774,13 @@ def profile_table(
 
 
 def profile_preview() -> str:
-    """The same metadata-free Profiles invitation on Home and About."""
+    """The homepage's brief invitation to the complete profile directory."""
     from devtools.overview_sections import arrow_icon  # noqa: PLC0415
 
     return (
         '<h1 id="profiles" class="site-title">Profiles</h1>\n\n'
-        "We track contributors and the authors cited in the square-packing record. "
-        "Browse their profiles and credited work.\n\n"
+        '<p class="site-navigation-copy">We track contributors and the authors cited '
+        "in the square-packing record. Browse their profiles and credited work.</p>\n\n"
         '<p class="site-action-row site-more">'
         '<a class="site-action" href="profiles/index.html">View All Profiles'
         + arrow_icon()
@@ -975,7 +975,8 @@ def contributor_pages() -> list[Page]:
     directory = (
         '<article class="site-contributor-directory">'
         "<h1>Contributor Profiles</h1>"
-        "<p>People whose work the square-packing record cites or credits, paper authors "
+        '<p class="site-navigation-copy">People whose work the square-packing record '
+        "cites or credits, paper authors "
         "and project contributors alike. Each profile records public identity evidence "
         "and links to reviewed credits. Results count distinct registered results by their "
         "reviewed primary authors. Records are current registered contributions "

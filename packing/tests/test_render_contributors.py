@@ -44,7 +44,7 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     pages = {page.name: page.html for page in render_contributors.contributor_pages()}
     assert set(pages) == set(render_contributors.page_paths())
     index = pages["profiles/index.html"]
-    assert "<h1>Profiles</h1>" in index
+    assert "<h1>Contributor Profiles</h1>" in index
     assert 'class="kpress-table site-table site-profile-table"' in index
     assert re.findall(r"<th\b[^>]*>([^<]+)</th>", index) == [
         "Name",
@@ -65,7 +65,7 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
         "Results count distinct registered results by their reviewed primary authors" in index
     )
     assert "Credits count distinct results that credit a person" in index
-    assert "<title>Profiles" in index
+    assert "<title>Contributor Profiles" in index
     assert 'rel="canonical" href="https://squaremath.org/profiles/"' in index
     # The directory names cited authors as well as contributors, and calls none of them
     # contributors in its own voice.
@@ -74,8 +74,12 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     directory_tree = paper_structure.parse(index)
     breadcrumb = directory_tree.find("nav", "site-breadcrumbs")
     assert breadcrumb is not None
-    assert [(a.text(), a.attrs["href"]) for a in breadcrumb.find_all("a")] == [
-        ("About", "../about.html"),
+    assert not breadcrumb.find_all("a")
+    assert [
+        (span.text(), span.attrs.get("aria-current")) for span in breadcrumb.find_all("span")
+    ] == [
+        ("About", None),
+        ("Contributor Profiles", "page"),
     ]
     for cell in directory_tree.find_all("td"):
         if cell.classes.intersection(
@@ -93,9 +97,12 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
         trail = paper_structure.parse(profile).find("nav", "site-breadcrumbs")
         assert trail is not None
         assert [(a.text(), a.attrs["href"]) for a in trail.find_all("a")] == [
-            ("About", "../about.html"),
-            ("Profiles", "./"),
+            ("Contributor Profiles", "./"),
         ]
+        assert any(
+            span.text() == "About" and "aria-current" not in span.attrs
+            for span in trail.find_all("span")
+        )
         assert contributor.display_name in profile
         assert "data-contributor-popover" in profile
         assert 'aria-label="Profile"' in profile
