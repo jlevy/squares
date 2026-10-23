@@ -24044,21 +24044,21 @@ occurrences:
     path: packing/frontier/n-303.md
     record_key: '303'
     field: /reported_upper_bound/found_by/0
-  expected_text: Evan Daniel
+  expected_text: Amund Kristiansen
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 17
+  label: Amund Kristiansen
   role: construction-finder
   disposition: resolved
   evidence:
-  - repository-license
+  - source-intake
   - bibliography
   note: Reviewed packing/frontier/n-303.md [303] /reported_upper_bound/found_by/0
-    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
-    matches the repository whose retained licence names Evan Daniel; issue 728's
-    packing, the case's house since the adoption of 23 October 2026 (T-230). Keep finder,
-    improver and solver roles distinct.
-  contributor_id: evan-daniel
+    span 0:17. Issue 755's packing, credited to Amund Kristiansen (GitHub amundsk) by the
+    issue and the gist's README, the case's house since the adoption of 24 October 2026
+    (T-238), found from Evan Daniel's packing of issue 728 (T-230). Keep finder, improver
+    and solver roles distinct.
+  contributor_id: amund-kristiansen
 - origin:
     path: packing/frontier/n-303.md
     record_key: '303'

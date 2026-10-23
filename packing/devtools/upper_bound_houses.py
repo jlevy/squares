@@ -396,7 +396,8 @@ def _sources() -> dict[str, Source]:
         packet_source("T-224", "evand-n270-sweep-2026-10-20"),
         packet_source("T-225", "evand-regularized-2026-10-20"),
         packet_source("T-229", "mishapolk-issue719-2026-10-22"),
-        packet_source("T-230", "evand-n303-2026-10-22"),
+        # The adoption of 24 October 2026 moved 303, T-230's only count, to T-238, so
+        # T-230 is no source here now, as T-196 and T-199 left on 22 October.
         packet_source("T-238", "amundsk-n303-2026-10-23"),
     ]
     found = {source.result: source for source in sources}

@@ -709,6 +709,7 @@ case or experiment separately.
 | [Feature: Square Math Domain and Deployment](docs/project/specs/active/plan-2026-10-22-squaremath-domain.md) | implementation plan | current | transient | — |
 | [Feature: Contributor Profiles and Linked Result Credits](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md) | implementation plan | current | transient | — |
 | [Review: Evan Daniel’s Certificate at 303 from Issue #728](docs/project/reviews/review-2026-10-22-daniel-728.md) | dated review record | record | retained | — |
+| [Review: Amund Kristiansen’s Certificate at 303, from Issue #755](docs/project/reviews/review-2026-10-23-amundsk-n303.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Regularized Views at 204, 227, 229 and 260 (T-225, evand/square-packing@0075967)](docs/project/reviews/review-2026-10-21-evand-regularized-views.md) | dated review record | record | retained | — |
 | [Review: Couzo’s 85 Exact Upper-Bound Certificates at 204–998 (Issue #678)](docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) | dated review record | record | retained | — |
 | [Erratum: the 21 October Review of Evan Daniel’s Import at 270](docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md) | dated review record | record | retained | — |
@@ -878,6 +879,7 @@ case or experiment separately.
 | [Regularization Runs After the 22 October Adoption of T-225 (think-ql4v)](packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 23 October Adoption of T-229 (think-4h23)](packing/cases/regularized_drawings/think-4h23-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 23 October Adoption of T-230 (think-icp1)](packing/cases/regularized_drawings/think-icp1-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the Adoption of T-238 (think-tqb5)](packing/cases/regularized_drawings/think-tqb5-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |
