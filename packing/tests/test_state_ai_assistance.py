@@ -295,3 +295,29 @@ def test_a_statement_of_some_counts_is_owed_only_at_them() -> None:
         _, lines = assistance.split_record(_record(front.format(n=n), body))
         found = [s for s, _, _ in assistance.owed(front.format(n=n), lines) if s is couzo]
         assert bool(found) is owes, n
+
+
+def test_a_bad_anchor_is_reported_by_check_and_breaks_no_import(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review A4 of #748: a bibliography whose Hosono anchor is no pattern is a problem
+    `--check` names, not an import that fails before it can say so. Hosono's statement,
+    which `devtools.apply_wand125_rectangles` writes, is resolved only when asked for."""
+    import importlib  # noqa: PLC0415
+
+    from devtools import apply_wand125_rectangles  # noqa: PLC0415
+
+    text = assistance.BIBLIOGRAPHY.read_text(encoding="utf-8")
+    bad = tmp_path / "bibliography.yaml"
+    bad.write_text(
+        text.replace("      anchor: 'Hosono'\n", "      anchor: 'Hosono('\n"), "utf-8"
+    )
+    assert bad.read_text(encoding="utf-8") != text
+    monkeypatch.setattr(assistance, "BIBLIOGRAPHY", bad)
+    monkeypatch.setattr(assistance, "STATEMENTS", assistance.load_statements(bad))
+    importlib.reload(apply_wand125_rectangles)
+    with pytest.raises(LookupError, match="wand125 rectangle bounds 2026"):
+        assistance.wand125()
+    assert assistance.main(["--check", "--below", "2"]) == 1
+    err = capsys.readouterr().err
+    assert "[wand125 point bounds 2026]: ai_assistance.anchor is not a pattern" in err

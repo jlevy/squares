@@ -142,15 +142,21 @@ def statement_problems(path: Path = BIBLIOGRAPHY) -> list[str]:
 STATEMENTS: tuple[Statement, ...] = load_statements()
 
 
-def statement_of(key: str, statements: Iterable[Statement] = STATEMENTS) -> Statement:
-    """The one statement a bibliography key makes."""
-    (found,) = [statement for statement in statements if key in statement.keys]
-    return found
+def statement_of(key: str, statements: Iterable[Statement] | None = None) -> Statement:
+    """The one statement a bibliography key makes, read from `STATEMENTS` unless given."""
+    found = [s for s in (STATEMENTS if statements is None else statements) if key in s.keys]
+    if len(found) != 1:
+        raise LookupError(f"{key} makes {len(found)} AI-assistance statements, not one")
+    return found[0]
 
 
-#: Hosono's statement, which `devtools.apply_wand125_rectangles` also writes into the
-#: intake paragraph it owns, so that regenerating a record keeps the sentence this tool added.
-WAND125 = statement_of("[wand125 rectangle bounds 2026]")
+def wand125() -> Statement:
+    """Hosono's statement, which `devtools.apply_wand125_rectangles` also writes into the
+    intake paragraph it owns, so that regenerating a record keeps the sentence this tool
+    added. Resolved when asked for, not at import: a bad anchor in Hosono's field leaves
+    it out of `STATEMENTS`, and `--check` must still be able to say so (review A4 of
+    #748)."""
+    return statement_of("[wand125 rectangle bounds 2026]")
 
 
 #: How a case record names the Kingbird catalogue as the source of its reported side.
@@ -335,7 +341,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         changed = apply(paths)
         print(f"stated AI assistance in {len(changed)} records: {', '.join(changed)}")
     missing, unanchored = report(paths)
-    missing = [*statement_problems(), *missing]
+    missing = [*statement_problems(BIBLIOGRAPHY), *missing]
     for label in unanchored:
         print(f"no paragraph describes the source, so nothing is owed: {label}")
     for label in missing:
