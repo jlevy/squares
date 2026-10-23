@@ -2129,3 +2129,130 @@ def _live_register_and_evidence() -> tuple[list[dict], dict[str, dict]]:
         for entry in safe_load(check_results.EVIDENCE.read_text(encoding="utf-8"))["evidence"]
     }
     return register, evidence
+
+
+#: A source by others dated after the project began, which the register's rule holds.
+SEEDED_SOURCES = {"[others 2026]": {"dated": "2026-09-30"}}
+MAPPED_REVIEW = "docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md"
+
+
+def _seeded_lane(**entry: object) -> tuple[dict[str, dict], dict[str, dict]]:
+    """One verified lower bound at n = 40 resting on one evidence entry by others."""
+    evidence = {
+        "E-seed": {
+            "id": "E-seed",
+            "claim": "lower-bound",
+            "scope": {"n_values": [40]},
+            "assurance": "verified",
+            "novelty": "previously-published",
+            "source_key": "[others 2026]",
+            **entry,
+        }
+    }
+    case = {"n": 40, "verified_lower_bound": {"value": "6.5", "evidence": ["E-seed"]}}
+    return evidence, case
+
+
+#: The producer's own exact run, a published proof nobody here read, and a replay here
+#: with no review: T-056 and T-057 reached the verified lane in the last shape.
+PRODUCER_RUN = {
+    "method": "exact-algebraic",
+    "origin": "external",
+    "performed_by": "source-author",
+    "certificate": "c.json",
+    "replay": "run",
+    "replay_status": "passed",
+}
+UNREAD_PROOF = {
+    "method": "published-proof",
+    "origin": "external",
+    "performed_by": "source-author",
+}
+UNREVIEWED_REPLAY = {**PRODUCER_RUN, "origin": "replayed-here", "performed_by": "repository"}
+
+
+def _lane_review_problems(
+    evidence: dict[str, dict], results: list[dict] | None = None
+) -> list[str]:
+    document_map = safe_load(check_results.DOCUMENT_MAP.read_text(encoding="utf-8"))
+    register = (
+        [{"id": "T-999", "scope": {"n_values": [40]}, "evidence": ["E-seed"]}]
+        if results is None
+        else results
+    )
+    return check_results.verified_lane_review_problems(
+        register, evidence, SEEDED_SOURCES, document_map, {"lower": {40: {"E-seed"}}}
+    )
+
+
+@pytest.mark.parametrize(
+    ("entry", "lane_gate"),
+    [(PRODUCER_RUN, "refused"), (UNREAD_PROOF, "passed"), (UNREVIEWED_REPLAY, "passed")],
+    ids=["producer-run", "unread-proof", "unreviewed-replay"],
+)
+def test_a_verified_bound_by_others_with_no_mapped_review_is_refused(
+    entry: dict, lane_gate: str
+) -> None:
+    """think-mt6e's negative control, written before the gate.
+
+    The verified lane takes a result by others only after a complete replay here and a
+    review of its mathematics. The case-lane check (`sqpack.assurance`) already refused
+    the producer's own machine run, the replay half; it passed a published proof nobody
+    here read and a replay with no review, so the review half needed a gate of its own.
+    `verified_lane_review_problems` refuses all three.
+    """
+    from sqpack.assurance import check_case_semantics  # noqa: PLC0415
+
+    evidence, case = _seeded_lane(**entry)
+    lane = [
+        error
+        for error in check_case_semantics(case, evidence)
+        if error.startswith("n=40 verified_lower_bound")
+    ]
+    assert ("refused" if lane else "passed") == lane_gate, lane
+    assert _lane_review_problems(evidence) == [
+        (
+            "n-040: its verified lower bound rests on E-seed, a result by others, and no "
+            "register entry covering it lists a review nor does the evidence record a read "
+            "in a mapped review document"
+        )
+    ]
+
+
+def test_a_mapped_review_on_the_entry_or_a_read_naming_one_lets_the_value_stand() -> None:
+    evidence, _ = _seeded_lane(**UNREVIEWED_REPLAY)
+    reviewed = [
+        {
+            "id": "T-999",
+            "scope": {"n_values": [40]},
+            "evidence": ["E-seed"],
+            "reviews": [{"path": MAPPED_REVIEW, "kind": "adversarial"}],
+        }
+    ]
+    assert _lane_review_problems(evidence, reviewed) == []
+    elsewhere = [{**reviewed[0], "scope": {"n_values": [41]}}]
+    assert _lane_review_problems(evidence, elsewhere), "a review of another count"
+    read = {
+        "state": "informally-verified",
+        "date": "2026-10-02",
+        "reviewed_by": f"a review lane ({MAPPED_REVIEW})",
+        "note": "Read and re-derived.",
+    }
+    evidence["E-seed"]["external_review"] = read
+    assert _lane_review_problems(evidence) == []
+    evidence["E-seed"]["external_review"] = {**read, "reviewed_by": "a review lane"}
+    assert _lane_review_problems(evidence), "a read that names no mapped document"
+    evidence["E-seed"]["external_review"] = {**read, "state": "not-reviewed"}
+    assert _lane_review_problems(evidence), "a read that was not made"
+    SEEDED = {"[others 2026]": {"dated": "2026-08-21"}}  # noqa: N806
+    document_map = safe_load(check_results.DOCUMENT_MAP.read_text(encoding="utf-8"))
+    assert (
+        check_results.verified_lane_review_problems(
+            [{"id": "T-999", "scope": {"n_values": [40]}, "evidence": ["E-seed"]}],
+            evidence,
+            SEEDED,
+            document_map,
+            {"lower": {40: {"E-seed"}}},
+        )
+        == []
+    ), "a source from before the project began is not the register's to hold"
