@@ -25,6 +25,7 @@ from devtools.profile_records import RecordIndex
 from devtools.repo_links import RepositoryTree, repo_url
 from devtools.result_credit import PROJECT_AUTHOR_ORIGIN
 from devtools.site_resources import Resource
+from devtools.site_tallies import TALLY_SEPARATOR
 from sqpack.contributor_occurrences import SCHEMA_PATH as OCCURRENCES_SCHEMA
 from sqpack.contributor_occurrences import CreditOccurrence, CreditOrigin, load_occurrences
 from sqpack.contributors import (
@@ -61,7 +62,27 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     assert re.search(r'src="../assets/js/table\.[a-f0-9]+\.js"', index)
     assert render_overview.TABLE_SCRIPT in render_contributors.inputs()
     assert '<div class="site-table-wrap site-wide">' in index
-    assert "People whose work is cited or credited in the square-packing record." in index
+    # The owner's three-paragraph introduction (2026-10-23) comes before the summary
+    # line, in order, as written.
+    intro = [
+        (
+            "<p>Below are people whose work is cited or credited in the square-packing "
+            "record.</p>"
+        ),
+        (
+            "<p>This list includes people with notable historic results on square packing "
+            "and all known current work, including everyone who has built on results in "
+            "the Squares Project.</p>"
+        ),
+        (
+            "<p>All original sources and all known repositories or publications of each "
+            "person are listed on their profile page.</p>"
+        ),
+    ]
+    positions = [index.index(paragraph) for paragraph in intro]
+    assert positions == sorted(positions)
+    assert positions[-1] < index.index('<p class="site-profile-summary">')
+    assert "People whose work is cited" not in index
     assert "Results lists authored work" not in index
     assert "<title>Contributor Profiles" in index
     assert 'rel="canonical" href="https://squaremath.org/profiles/"' in index
@@ -780,7 +801,11 @@ def test_directory_summary_unions_work_and_years_exclude_import_dates(
     summary = render_contributors.profile_summary(
         people, (first, first, second, case), results=records, resources=(resource, resource)
     )
-    assert "2 people · 1 record · 1 result · 0 credits · 1 resource" in summary
+    assert re.sub(r"<[^>]+>", "", summary) == (
+        "2 people · 1 record · 1 result · 0 credits · 1 resource"
+    )
+    # Each dot is the shared separator, which the tally spacing tokens style.
+    assert summary.count(TALLY_SEPARATOR) == 4
     assert render_contributors.profile_years(people[0].id, (first,), records) is None
 
 
@@ -947,7 +972,8 @@ def test_profile_directory_intro_is_serif_and_accounts_remain_whole_at_narrow_wi
                 page.set_viewport_size({"width": width, "height": 900})
                 found = page.evaluate(measure)
                 assert found["intro"] == (
-                    "People whose work is cited or credited in the square-packing record."
+                    "Below are people whose work is cited or credited in the "
+                    "square-packing record."
                 )
                 assert "PT Serif" in found["introFont"]
                 assert "Source Sans" in found["tableFont"]

@@ -314,15 +314,25 @@ const EMBED_SOURCE = readFileSync(
   new URL("../../../devtools/overview/embed.js", import.meta.url),
   "utf8",
 );
-/** @param {string} search @param {string} [pathname] @returns {Record<string, string>} */
-function bootstrapped(search, pathname = "/atlas.html") {
+/**
+ * The root attributes the head bootstrap sets for an address, for a reader who asks for
+ * reduced motion when `reduced` is true.
+ * @param {string} search @param {string} [pathname] @param {string} [hash]
+ * @param {boolean} [reduced]
+ * @returns {Record<string, string>}
+ */
+function bootstrapped(search, pathname = "/atlas.html", hash = "", reduced = false) {
   /** @type {Record<string, string>} */
   const attributes = {};
   vm.runInContext(
     EMBED_SOURCE,
     vm.createContext({
       URLSearchParams,
-      location: { search, pathname },
+      location: { search, pathname, hash },
+      /** @param {string} query */
+      matchMedia: (query) => ({
+        matches: reduced && query === "(prefers-reduced-motion: reduce)",
+      }),
       document: {
         documentElement: {
           dataset: {},
@@ -353,6 +363,7 @@ void test("layout queries establish only whitelisted root attributes before pain
   assert.deepEqual(bootstrapped("?atlas=unknown&size=invalid&view=unknown"), {
     "data-site-atlas-view": "triangle",
     "data-site-atlas-scale": "row",
+    "data-site-atlas-follow": "",
   });
   assert.deepEqual(bootstrapped("?size=medium"), {
     "data-site-atlas-view": "triangle",
@@ -370,8 +381,9 @@ void test("layout queries establish only whitelisted root attributes before pain
   assert.deepEqual(bootstrapped(""), {
     "data-site-atlas-view": "triangle",
     "data-site-atlas-scale": "row",
+    "data-site-atlas-follow": "",
   });
-  assert.deepEqual(bootstrapped("", "/index.html"), {});
+  assert.deepEqual(bootstrapped("", "/index.html"), { "data-site-atlas-follow": "" });
   assert.deepEqual(bootstrapped("?atlas=triangle&size=large&scale=row", "/index.html"), {
     "data-site-atlas-size": "large",
   });
@@ -384,6 +396,45 @@ void test("layout queries establish only whitelisted root attributes before pain
       );
     }
   }
+});
+
+void test("only a plain Atlas address from the top follows the scroll", () => {
+  // Either Atlas page, the root's index included, with nothing in the address.
+  for (const pathname of ["/atlas.html", "/index.html", "/"]) {
+    assert.equal(bootstrapped("", pathname)["data-site-atlas-follow"], "", pathname);
+  }
+  // A fragment, a size, Grid or an embedding opens where it always did.
+  /** @type {[string, string][]} */
+  const addresses = [
+    ["", "#the-atlas"],
+    ["", "#atlas-n-53"],
+    ["?size=small", ""],
+    ["?atlas=grid", ""],
+    ["?view=embed", ""],
+  ];
+  for (const [search, hash] of addresses) {
+    const attributes = bootstrapped(search, "/atlas.html", hash);
+    assert.equal(attributes["data-site-atlas-follow"], undefined, `${search}${hash}`);
+  }
+  // A bare "#" names no fragment; other pages never follow.
+  assert.equal(bootstrapped("", "/atlas.html", "#")["data-site-atlas-follow"], "");
+  for (const pathname of ["/papers/n11-lower-bounds-explainer.html", "/cases/11.html"]) {
+    assert.equal(bootstrapped("", pathname)["data-site-atlas-follow"], undefined, pathname);
+  }
+});
+
+void test("a reader who asks for reduced motion is never followed", () => {
+  for (const pathname of ["/atlas.html", "/index.html", "/"]) {
+    const attributes = bootstrapped("", pathname, "", true);
+    assert.equal(attributes["data-site-atlas-follow"], undefined, pathname);
+    assert.equal(attributes["data-site-atlas-size"], undefined, pathname);
+  }
+  // The rest of the address keeps its meaning.
+  assert.deepEqual(bootstrapped("?size=large", "/atlas.html", "", true), {
+    "data-site-atlas-view": "triangle",
+    "data-site-atlas-size": "large",
+    "data-site-atlas-scale": "row",
+  });
 });
 
 void test("case directory migration uses the same Atlas destination for HTTP and files", () => {

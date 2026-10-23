@@ -85,15 +85,6 @@ KNOWN: dict[str, dict[str, str]] = {
             "does not carry"
         ),
     },
-    "index.html": {
-        (
-            r"caption `Best known packing for 53 identical squa`: 16.15px, "
-            r"not the role's 17.48\d*px"
-        ): (
-            "the homepage's hero caption is set at 0.85 of the sans base, written as a "
-            "number in site.css, where every other caption is the note size, 0.92"
-        ),
-    },
 }
 #: The site's sheets whose every rule that sets the sans face must set its weight. The
 #: bar's own sheet, `site-nav.css`, is not among them: it is inlined in the explainer,

@@ -15,8 +15,7 @@
   );
   /** @type {Record<string, boolean>} */
   const faces = { "KPress Math Text": false, "KPress Math Text Sans": true };
-  const headlines =
-    "h1, h2, h3, h4, h5, h6, .site-card-value, .site-popover-value, .site-case-steps > a";
+  const headlines = "h1, h2, h3, h4, h5, h6, .site-card-value, .site-popover-value";
   /**
    * Whether `block` holds formulas and nothing else.
    * @param {Element} block

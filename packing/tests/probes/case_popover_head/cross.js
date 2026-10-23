@@ -1,14 +1,14 @@
-// The case popover's head as the browser lays it out now: the close cross's left and
-// right edges, the right edge of the last of the record's steps (the next case's link),
-// and the panel's right edge inside its border. Null until the popover shows a record.
+// The case popover's head as the browser lays it out now: the close cross's and the
+// expand link's edges, the controls' top, and the panel's right edge inside its border.
+// Null until the popover shows a record. The record's own head, its title line and the
+// drawing above it, is `case_title_line/read.js`.
 () => {
   const popover = document.querySelector("[data-case-popover]");
   const cross = popover?.querySelector(".site-popover-close");
   const expand = popover?.querySelector(".site-popover-expand");
   const controls = popover?.querySelector(".site-popover-controls");
-  const steps = [...(popover?.querySelectorAll("[data-case-body] .site-case-steps a") ?? [])];
-  const next = steps[steps.length - 1];
-  if (!popover || !cross || !expand || !controls || !next) {
+  const article = popover?.querySelector("[data-case-body] article.site-case");
+  if (!popover || !cross || !expand || !controls || !article) {
     return null;
   }
   const panel = popover.getBoundingClientRect();
@@ -18,19 +18,8 @@
     controls_top: controls.getBoundingClientRect().top,
     expand_left: expand.getBoundingClientRect().left,
     expand_right: expand.getBoundingClientRect().right,
-    next_top: next.getBoundingClientRect().top,
-    next_bottom: next.getBoundingClientRect().bottom,
-    pager_math: steps.map((step) => {
-      const math = step.querySelector(".katex");
-      return {
-        text: step.querySelector(".kpress-math-semantic math")?.textContent,
-        family: math ? getComputedStyle(math).fontFamily : null,
-        prepared: step.querySelectorAll('[data-kpress-math-prepared="true"]').length,
-      };
-    }),
     cross_left: box.left,
     cross_right: box.right,
-    next_right: next.getBoundingClientRect().right,
     panel_right: panel.left + popover.clientLeft + popover.clientWidth,
     cross_width: box.width,
     cross_height: box.height,
