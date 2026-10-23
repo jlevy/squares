@@ -5,7 +5,7 @@ source, at assurance ``reported``, once its certificates are retained and replay
 Issues #678 and #715 each had a module of their own (`devtools.couzo_678_replay`,
 `devtools.couzo_715_replay`); this one takes the same filtered decision and declares each
 report it decides as a `Release`, so a further report of the same kind is a declaration and
-not a module. `RELEASES` holds 16, each decided at or below ``LIMIT = 1024``: the five
+not a module. `RELEASES` holds 17, each decided at or below ``LIMIT = 1024``: the six
 issues below, and 11 publications in watched repositories that no issue reports
 (**Publications no issue reports**, `WATCHED`):
 
@@ -27,6 +27,12 @@ issues below, and 11 publications in watched repositories that no issue reports
   checkout at the pin (``derived``), held there to the digest the packet pins. Its 112 rows
   beyond the corpus at or below 1024 are decided; 105 and 204 are in the corpus, and the 8
   above 1024 wait on the owner.
+- **#732**, Mykhailo Polkovskyi: 5,468 certificates ``certificates/NNNN-NNNN/nN.cert`` in the
+  same repository, indexed by ``certificates/manifest.json``, whose SHA-256 the issue states;
+  the packet pins ``17cc2201``, which adds only an MIT licence to the commit the issue
+  describes. The issue has no table of rows, so its packet declares the rows its own walk
+  records (``declare-rows``, `declares_rows`), 77 of the 390 at or below 1024, and retains
+  those certificates; the 5,078 above 1024 wait on the owner (**Issue #732**).
 
 Each certificate is ``n S``, then ``n`` rows ``x y t`` (centre and ``t = tan(theta/2)``),
 and lines that begin with ``#`` are comments; the header is authoritative. The Couzo and
@@ -104,6 +110,21 @@ register. Where an earlier walk's starts were frozen later and it lacks a public
 history walk inserts between two of its reports, the register may lead from one to the
 other through that publication's row (`bridged`).
 
+**Issue #732.** ``campaign/issue-intake/upper-bounds-issue732-20261023`` walks the 390 counts
+#732 claims from starts frozen at ``main`` fcf2f96a5 (#730's merge), which read each row at
+the exact side its source's claims record states (`devtools.intake_ledger.beyond_member`).
+``source-history`` reads a clone of the author's repository, only the certificates whose
+paths name a count from 325 to 1024, and writes the packet's
+``receipts/source-history.json``: every certificate at the pin, held to the manifest's path,
+digest and exact bound, and every side the repository published there with the first commit
+that held it. The repository is watched, so ``release-sources`` transcribes the walk's
+``sources.yaml`` from that receipt, the history scan and #715's held re-certifications: the
+issue's claims, dated by the issue with the first commit of each side, the author's own
+earlier sides, and every watched publication, each where it is strictly below the start
+(`release_walk_sources`). The walk holds what #730's walk holds, 499 below #719's row at the
+same print (`SUB_PRINT`), and the author's own files at the nine counts #719's edit withdrew
+(`WITHDRAWN`, think-8m4k).
+
 **Earlier publications.** ``earlier`` reads clones of the watched repositories and writes
 ``receipts/earlier-publications.json`` for a release: at each of its counts, every
 certificate and index bound published before the release's row, strictly below the record's
@@ -123,6 +144,8 @@ From ``packing/``, with the project interpreter::
         --start-coverage CHECKOUT/packing/frontier/source-coverage.yaml \
         --clone franciscouzo/square-packing=CLONE evand/square-packing=CLONE ...
     python -m devtools.beyond_horizon_replay history-sources --read-on DATE
+    python -m devtools.beyond_horizon_replay source-history --issue 732 --clone CLONE
+    python -m devtools.beyond_horizon_replay release-sources --issue 732 --read-on DATE
     python -m devtools.beyond_horizon_replay declare-rows
     python -m devtools.beyond_horizon_replay coverage-plan
     python -m devtools.beyond_horizon_replay held-dependents
@@ -215,6 +238,7 @@ class Awaiting:
 #: Why a walk holds a report's publication back from a row: each class waits on an owner
 #: decision, which its `Held` names by bead (`HELD_CLASSES`).
 GOEBEL_ABOVE, SUB_PRINT, CONSEQUENCE, RECIPE = "goebel", "sub-print", "consequence", "recipe"
+WITHDRAWN = "withdrawn"
 HELD_CLASSES = {
     GOEBEL_ABOVE: "above Göbel's classical construction at its count (#613)",
     SUB_PRINT: (
@@ -230,6 +254,10 @@ HELD_CLASSES = {
         "L-border, tiling or composite bound, or a classical construction (Göbel's squares, "
         "Friedman's off-centre family) or an L-border extension of one"
     ),
+    WITHDRAWN: (
+        "a certificate in the reporter's own watched repository that his issue withdrew, at a "
+        "count where his later release claims a lower side"
+    ),
 }
 #: How far below the side it beats a re-certification lies, at most (`SUB_PRINT`).
 SUB_PRINT_GAP = Fraction(1, 10**12)
@@ -239,12 +267,14 @@ HELD_NAMES = {
     SUB_PRINT: "re-certifications below the 12-place print",
     CONSEQUENCE: "index deletion bounds",
     RECIPE: "constructions with no certificate file",
+    WITHDRAWN: "certificates their author withdrew from an issue",
 }
 HELD_NAME = {
     GOEBEL_ABOVE: "publication above Göbel's construction",
     SUB_PRINT: "re-certification below the 12-place print",
     CONSEQUENCE: "index deletion bound",
     RECIPE: "construction with no certificate file",
+    WITHDRAWN: "certificate its author withdrew from an issue",
 }
 
 
@@ -353,6 +383,14 @@ HISTORY_ISSUES: dict[str, tuple[int, str, str]] = {
     "couzo-issue715-2026-10-21": (715, "Francisco Couzo", "think-cyal"),
     "mishapolk-issue719-2026-10-22": (719, "Mykhailo Polkovskyi", "think-xyhn"),
 }
+
+
+#: The walk of issue #732's claims at 325 to 1024, from starts frozen at ``main`` at #730's
+#: merge, the first ``main`` that holds Couzo's history (`ISSUE_732_READ_AT_MAIN`).
+ISSUE_732 = "upper-bounds-issue732-20261023"
+ISSUE_732_READ_AT_MAIN = "fcf2f96a5213bb6cc076bcba90e353a661db773a"
+MISHAPOLK_REPOSITORY = "Mishapolk/square-packing-records"
+MISHAPOLK_URL = f"https://github.com/{MISHAPOLK_REPOSITORY}"
 
 
 def history_label(source: str) -> str:
@@ -552,6 +590,158 @@ HISTORY_RESTING = (
         "325 333 362 401 442 485 530 577",
     ),
 )
+#: The publications the #732 walk records that the history walk holds, at the counts the
+#: walk records them: the history walk's holds there (`HISTORY_HELD`).
+_HELD_IN_732 = (
+    ("#715", "854 855 856 857 909 913 915 916 970 975 977"),
+    ("evand/square-packing@49907ec", "964"),
+    ("franciscouzo/square-packing@02f9690", "369"),
+    (
+        "franciscouzo/square-packing@23aff0c",
+        (
+            "333 362 367 368 401 406 407 442 448 457 485 491 530 533 534 541 542 543 577 "
+            "580 581 588 589 590 626 629 630 638 639 677 680 681 690 730 733 734 741 785 "
+            "788 789 796 842 845 846 847 848 849 901 904 905 906 907 908 962 965 966 967 "
+            "968 969 981 982"
+        ),
+    ),
+    (
+        "franciscouzo/square-packing@487b058",
+        (
+            "369 376 408 415 416 445 449 488 489 492 493 537 538 585 586 634 635 636 685 "
+            "686 687 688 738 739 740 793 794 795 851 852 853 861 910 911 912 920 921 964 "
+            "971 972 973 974"
+        ),
+    ),
+    (
+        "franciscouzo/square-packing@4e4c8ce",
+        (
+            "331 332 368 407 408 415 416 445 448 449 488 489 491 492 493 533 537 538 542 "
+            "580 583 585 586 589 629 632 634 635 636 638 680 683 685 686 687 688 733 738 "
+            "739 740 788 793 794 795 845 851 852 853 855 861 904 910 911 912 920 921 964 "
+            "965 971 972 973 974 985"
+        ),
+    ),
+    (
+        "franciscouzo/square-packing@58a7833",
+        (
+            "331 368 369 376 407 408 415 416 445 448 449 488 489 491 492 493 537 538 585 "
+            "586 634 635 636 685 686 687 688 738 739 740 793 794 795 851 852 853 861 910 "
+            "911 912 920 921 964 971 972 973 974"
+        ),
+    ),
+    (
+        "franciscouzo/square-packing@5a299b4",
+        (
+            "329 331 332 334 363 366 371 402 405 414 443 446 451 486 494 531 539 540 578 "
+            "587 627 632 678 683 731 786 843 902 963"
+        ),
+    ),
+)
+#: The #732 walk's verdicts decided only against publications it holds (`Resting`): those
+#: on Göbel and sub-print holds stand whatever those answers are (`HISTORY_RESTING`); those
+#: on recipes, deletion bounds and the withdrawn files are reopened by `held-dependents`.
+_RESTING_732 = (
+    _resting(
+        "#732",
+        NOT_RECORDED,
+        CONSEQUENCE,
+        "367 406 541 542 588 589 638 847 848 906 907 967 968 985",
+    ),
+    _resting(
+        "#732",
+        NOT_RECORDED,
+        GOEBEL_ABOVE,
+        "331 369 376 408 415 416 445 449 488 489 492 493 537 538 585 586 634 635 636 "
+        "685 686 687 688 738 739 740 793 794 795 851 852 853 861 910 911 912 920 921 "
+        "964 971 972 973 974",
+    ),
+    _resting(
+        "#732",
+        NOT_RECORDED,
+        RECIPE,
+        "368 407 448 457 491 533 534 543 580 581 590 626 629 630 639 677 680 681 690 "
+        "730 733 734 741 785 788 789 796 842 845 846 849 901 904 905 908 962 965 966 "
+        "969 981 982",
+    ),
+    _resting(
+        "#732",
+        NOT_RECORDED,
+        SUB_PRINT,
+        "329 332 333 334 362 363 366 371 401 402 405 414 442 443 446 485 486 530 531 "
+        "577 578 627 678 731 786 843 902 909 963 970 975",
+    ),
+    _resting(
+        f"{MISHAPOLK_REPOSITORY}@1851c2c",
+        NOT_RECORDED,
+        CONSEQUENCE,
+        "367 406 541 542 588 589 638 847",
+    ),
+    _resting(
+        f"{MISHAPOLK_REPOSITORY}@1851c2c",
+        NOT_RECORDED,
+        GOEBEL_ABOVE,
+        "416 445 488 489 493 538 585 586 634 635 636 685 686 687 688 738 739 740 793 794 795",
+    ),
+    _resting(
+        f"{MISHAPOLK_REPOSITORY}@1851c2c",
+        NOT_RECORDED,
+        RECIPE,
+        "368 407 448 457 491 533 534 543 580 581 590 626 629 630 639 677 680 681 690 "
+        "730 733 734 741 785 788 789 796 842 845 846",
+    ),
+    _resting(f"{MISHAPOLK_REPOSITORY}@8a488a1", NOT_RECORDED, CONSEQUENCE, "848"),
+    _resting(f"{MISHAPOLK_REPOSITORY}@8a488a1", NOT_RECORDED, RECIPE, "849"),
+    _resting(
+        "franciscouzo/square-packing@23aff0c",
+        NOT_RECORDED,
+        GOEBEL_ABOVE,
+        "369 376 416 445 488 489 493 538 585 586 634 635 636 685 686 687 688 738 739 "
+        "740 794 795 851 852 853 861 910 911 912 921 964 971 972 973 974",
+    ),
+    _resting("franciscouzo/square-packing@4e4c8ce", NOT_RECORDED, GOEBEL_ABOVE, "369 376"),
+    _resting(
+        "franciscouzo/square-packing@5a299b4",
+        NOT_RECORDED,
+        CONSEQUENCE,
+        "406 588 589 638 906 907 967 968",
+    ),
+    _resting(
+        "franciscouzo/square-packing@5a299b4",
+        NOT_RECORDED,
+        GOEBEL_ABOVE,
+        "408 415 449 488 492 537 538 585 634 635 685 686 687 738 739 793 794 795 851 "
+        "852 910 911 912 920 971 972 973",
+    ),
+    _resting(
+        "franciscouzo/square-packing@5a299b4",
+        NOT_RECORDED,
+        RECIPE,
+        "407 448 457 491 533 534 580 581 590 629 630 639 677 680 681 690 730 733 734 "
+        "741 785 788 789 796 842 845 846 901 904 905 908 962 965 966 969 981 982",
+    ),
+    _resting(
+        "franciscouzo/square-packing@5a299b4",
+        NOT_RECORDED,
+        SUB_PRINT,
+        "333 362 401 442 485 530 577",
+    ),
+)
+#: Mykhailo Polkovskyi's 1851c2c files at the nine counts #719's 06:05Z edit withdrew where
+#: #732 claims a lower side; at 539 the 1851c2c file is #732's own claim.
+_WITHDRAWN_1851C2C = "411 451 494 495 540 583 587 632 683"
+
+
+def _held_from_history(report: str, counts: str) -> tuple[Held, ...]:
+    """The history walk's holds of a report (`HISTORY_HELD`), at ``counts`` only."""
+    wanted = frozenset(int(n) for n in counts.split())
+    return tuple(
+        Held(item.kind, item.bead, item.counts & wanted, item.also, item.note)
+        for item in HISTORY_HELD[report]
+        if item.counts & wanted
+    )
+
+
 #: The walk of each ledger these releases' rows are planned from. The backlog ledger's
 #: starts were frozen at the 18 October ledger's ``main``; #719's at ``main`` after #720.
 WALKS: dict[str, Walk] = {
@@ -611,6 +801,23 @@ WALKS: dict[str, Walk] = {
         awaiting={},
         held=HISTORY_HELD,
         resting=HISTORY_RESTING,
+    ),
+    # #732's walk records the history walk's held publications where they stand below the
+    # starts frozen after #730, #732's 499 below #719's row by 8.66e-13 at the same 12-place
+    # print, and the 1851c2c files #719 withdrew (think-8m4k). Its verdicts resting on those
+    # holds are declared so that an answer names what it reopens (`held-dependents`).
+    ISSUE_732: Walk(
+        ISSUE_732,
+        later={},
+        awaiting={},
+        held={
+            **{report: _held_from_history(report, counts) for report, counts in _HELD_IN_732},
+            "#732": (_held(SUB_PRINT, "think-fwa9", "499"),),
+            f"{MISHAPOLK_REPOSITORY}@1851c2c": (
+                _held(WITHDRAWN, "think-8m4k", _WITHDRAWN_1851C2C),
+            ),
+        },
+        resting=_RESTING_732,
     ),
 }
 #: A Couzo row: the count, the prior and new prints, the deletion and the link.
@@ -1076,6 +1283,23 @@ RELEASES: dict[str, Release] = {
             # The issue's 06:05:31Z edit added 366 and 447 to the table it opened with.
             claimed_at={366: "2026-10-22T06:05:31Z", 447: "2026-10-22T06:05:31Z"},
         ),
+        Release(
+            issue=732,
+            packet="mishapolk-issue732-2026-10-22",
+            holders="Mykhailo Polkovskyi",
+            source_url=MISHAPOLK_URL,
+            pin="17cc220131360ef290750eb845a3544c30ccb389",
+            retained="17cc220131360ef290750eb845a3544c30ccb389",
+            first_commit="8a488a10e994f13c706b651ddaaa9727600c96e5",
+            committed="2026-10-22T19:08:59Z",
+            rows=77,
+            decided=77,
+            sampled=(645, 752, 995),
+            bead="think-0gp6",
+            read=read_declared_rows,
+            walk=ISSUE_732,
+            declared=Path("acquisition/declared-rows.json"),
+        ),
         *(
             Release(
                 issue=None,
@@ -1110,8 +1334,8 @@ def release(key: int | str) -> Release:
 
 def claims(chosen: Release) -> list[Claim]:
     """Every row of the issue's table, read from its retained body, or every row a
-    publication's packet declares, refused unless all are."""
-    if chosen.issue is None:
+    release's packet declares (`declares_rows`), refused unless all are."""
+    if declares_rows(chosen):
         body = (chosen.directory / chosen.declared).read_text(encoding="utf-8")
     else:
         body = json.loads((chosen.directory / ISSUE).read_text(encoding="utf-8"))["body"]
@@ -1120,6 +1344,12 @@ def claims(chosen: Release) -> list[Claim]:
     counts = [row.n for row in rows]
     _require(counts == sorted(set(counts)), f"{chosen.label}: rows out of order")
     return rows
+
+
+def declares_rows(chosen: Release) -> bool:
+    """Whether a release's packet declares its rows from its walk (`declared_rows`): every
+    publication no issue reports, and an issue with no table of rows, as #732."""
+    return chosen.read is read_declared_rows
 
 
 def decided_claims(chosen: Release) -> list[Claim]:
@@ -2295,14 +2525,16 @@ def _exact_row_side(source: Mapping[str, Any], n: int) -> Fraction:
 
 def _history_rows(coverage: Mapping[str, Any]) -> dict[str, list[tuple[int, Fraction, str]]]:
     """Every row source's rows the history walk takes, by source: each count, exact side
-    (from its claims record) and the value the row records. The starts' sources are the
-    walk's starts, and a release of the walk is walked as its publication instead."""
+    (from its claims record) and the value the row records. The walk takes the row sources
+    it declares (`HISTORY_SOURCES`); a later source, as #732's, is walked by its own walk.
+    The starts' sources are the walk's starts, and a release of the walk is walked as its
+    publication instead."""
     ours = {item.source for item in RELEASES.values() if item.walk == HISTORY}
     sources = {source["id"]: source for source in coverage["sources"]}
     found: dict[str, list[tuple[int, Fraction, str]]] = {}
     for row in coverage["beyond_horizon_claims"]:
         source = row["source_id"]
-        if row["n"] not in HISTORY_COUNTS or source in HISTORY_START_SOURCES or source in ours:
+        if row["n"] not in HISTORY_COUNTS or source not in HISTORY_SOURCES or source in ours:
             continue
         side = _exact_row_side(sources[source], row["n"])
         found.setdefault(source, []).append((row["n"], side, str(row["value"])))
@@ -2319,8 +2551,13 @@ def _listing(parts: Sequence[str]) -> str:
 
 def held_sentence(walk: Walk, report: str) -> str:
     """What ``walk`` holds of a report and what of its verdicts rests on holds, for the
-    report's note in the walk's ``sources.yaml``: the ledger says it beside the verdicts."""
+    report's note in the walk's ``sources.yaml``: the ledger says it beside the verdicts.
+    The history walk declares its holds as `HISTORY_HELD` and `HISTORY_RESTING`, every
+    other walk in `WALKS`."""
     text = ""
+    history = walk.name == HISTORY
+    held_name = "HISTORY_HELD" if history else f"WALKS[{walk.name!r}].held"
+    resting_name = "HISTORY_RESTING" if history else f"WALKS[{walk.name!r}].resting"
     items = walk.held.get(report, ())
     if items:
         parts = [
@@ -2333,7 +2570,7 @@ def held_sentence(walk: Walk, report: str) -> str:
         total = sum(len(item.counts) for item in items)
         text += (
             f" The walk holds its publications at {_counted(total)} back from a row, each "
-            f"waiting on an owner decision (beyond_horizon_replay.HISTORY_HELD): "
+            f"waiting on an owner decision (beyond_horizon_replay.{held_name}): "
             f"{_listing(parts)}."
         )
     resting = [item for item in walk.resting if item.report == report]
@@ -2347,7 +2584,7 @@ def held_sentence(walk: Walk, report: str) -> str:
         total = sum(len(item.counts) for item in resting)
         text += (
             f" Its verdicts at {_counted(total)} are decided only against held publications "
-            f"(beyond_horizon_replay.HISTORY_RESTING): {_listing(parts)}. An answer that "
+            f"(beyond_horizon_replay.{resting_name}): {_listing(parts)}. An answer that "
             "leaves a hold out reruns this walk."
         )
     return text
@@ -2540,24 +2777,389 @@ def write_history_sources(read_on: str) -> int:
     return len(document["reports"])
 
 
-def declared_rows(chosen: Release) -> dict[str, Any]:
-    """A publication's rows as its walk records them (`declaration_problems`): at each
-    count the walk records it and does not hold it, the certificate the history scan found
-    at its least side there, with that side rounded up at 12 places."""
-    walk = walk_of(chosen)
-    commit = chosen.pin
-    found = {
-        item["n"]: item
-        for item in sorted(
-            (
-                item
-                for item in _read(HISTORY_PUBLICATIONS)["publications"]
-                if item["commit"] == commit
-            ),
-            key=lambda item: (Fraction(item["side"]), item["path"]),
-            reverse=True,
+# --------------------------------------------------------------------------- issue #732
+
+
+#: A certificate path that names its count, under any layout the #732 source has used:
+#: ``certificates/nN.cert``, ``certificates/n-N.cert`` and its suffixed variants
+#: (``n-N_tight.cert``), ``certificates/square-N.cert``, and the thousands folders
+#: ``certificates/NNNN-NNNN/nN.cert``.
+_COUNT_NAMED = re.compile(
+    r"certificates/(?:[0-9]{4}-[0-9]{4}/)?(?:n-?|square-)([1-9][0-9]*)[^/]*\.cert"
+)
+SOURCE_HISTORY = Path("receipts/source-history.json")
+SOURCE_HISTORY_FORMAT = "beyond-horizon-source-history-v1"
+#: The #732 source's index of its certificates beyond the corpus, which the issue pins by
+#: digest: each count's certificate path, SHA-256 and exact bound.
+SOURCE_MANIFEST = "certificates/manifest.json"
+
+
+def named_count(path: str) -> int | None:
+    """The count a certificate's path names (`_COUNT_NAMED`), or None for any other path."""
+    match = _COUNT_NAMED.fullmatch(path)
+    return None if match is None else int(match[1])
+
+
+def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
+    """Every side a release's own repository published at `HISTORY_COUNTS`, from a clone.
+
+    The repository is watched, so each certificate there is a publication from the first
+    commit of the retained commit's history that holds its side. Only paths that name a
+    count in `HISTORY_COUNTS` are read (`_COUNT_NAMED`), so a blobless clone fetches no
+    certificate above ``LIMIT``, and each file's header must state the count its path
+    names. At the retained commit each count's certificate is listed with its Git blob,
+    SHA-256 and exact side, the first commit that holds its side and the first that holds
+    its blob, and is held to the source's manifest (`SOURCE_MANIFEST`): the path, digest
+    and exact bound the manifest states for the count must be the file's.
+    """
+    chosen = release(issue)
+    chain = _git(clone, "rev-list", "--reverse", "--topo-order", chosen.retained).split()
+    _require(chain and chain[-1] == chosen.retained, "the clone does not hold the commit")
+    times = {
+        commit: _utc(stamp)
+        for commit, stamp in (
+            line.split(" ", 1)
+            for line in _git(clone, "log", "--format=%H %cI", chosen.retained).splitlines()
         )
     }
+    rank = {commit: index for index, commit in enumerate(chain)}
+    first: dict[tuple[str, str], str] = {}
+    at_pin: dict[int, list[tuple[str, str]]] = {}
+    for commit in chain:
+        for line in _git(clone, "ls-tree", "-r", commit).splitlines():
+            meta, _, path = line.partition("\t")
+            n = named_count(path)
+            if n is None or n not in HISTORY_COUNTS:
+                continue
+            blob = meta.split()[2]
+            first.setdefault((blob, path), commit)
+            if commit == chosen.retained:
+                at_pin.setdefault(n, []).append((path, blob))
+    texts = _blobs(clone, sorted({blob for blob, _ in first}))
+    sides: dict[str, Fraction] = {}
+    for (blob, path), _commit in sorted(first.items()):
+        header = _header(texts[blob])
+        _require(
+            header is not None and header[0] == named_count(path),
+            f"{path} ({blob[:8]}): its header does not state the count its name gives",
+        )
+        assert header is not None
+        sides[blob] = header[1]
+    published: dict[tuple[int, Fraction], dict[str, Any]] = {}
+    blob_first: dict[str, str] = {}
+    for (blob, path), commit in first.items():
+        n, side = int(named_count(path) or 0), sides[blob]
+        kept = blob_first.get(blob)
+        if kept is None or rank[commit] < rank[kept]:
+            blob_first[blob] = commit
+        item = {"commit": commit, "published": times[commit], "path": path, "blob": blob}
+        order = (rank[commit], path)
+        held = published.get((n, side))
+        if held is None or order < (rank[held["commit"]], held["path"]):
+            published[n, side] = item
+    (listed,) = _git(clone, "ls-tree", chosen.retained, "--", SOURCE_MANIFEST).splitlines()
+    manifest_blob = listed.split("\t", 1)[0].split()[2]
+    manifest_raw = _blobs(clone, [manifest_blob])[manifest_blob]
+    stated = json.loads(manifest_raw)["witnesses"]
+    pin_rows = []
+    for n in sorted(at_pin):
+        _require(len(at_pin[n]) == 1, f"n={n}: the commit holds {len(at_pin[n])} files")
+        ((path, blob),) = at_pin[n]
+        raw = texts[blob]
+        side = sides[blob]
+        entry = stated.get(str(n))
+        digest = hashlib.sha256(raw).hexdigest()
+        _require(
+            entry is not None
+            and entry["certificate"] == path
+            and entry["certificate_sha256"] == digest
+            and Fraction(entry["bound"]) == side,
+            f"n={n}: {path} is not the certificate, digest and bound {SOURCE_MANIFEST} states",
+        )
+        origin = published[n, side]
+        pin_rows.append(
+            {
+                "n": n,
+                "certificate": path,
+                "blob": blob,
+                "sha256": digest,
+                "side": legacy.literal(side),
+                "ceiling_12": ceiling(side),
+                "side_first_commit": origin["commit"],
+                "side_first_published": origin["published"],
+                "side_first_path": origin["path"],
+                "blob_first_commit": blob_first[blob],
+                "blob_first_published": times[blob_first[blob]],
+            }
+        )
+    in_range = sorted(int(key) for key in stated if int(key) in HISTORY_COUNTS)
+    _require(
+        in_range == sorted(at_pin),
+        f"{SOURCE_MANIFEST} states other counts at or below {LIMIT} than the commit holds",
+    )
+    return {
+        "format": SOURCE_HISTORY_FORMAT,
+        "source": chosen.source_url,
+        "retained_commit": chosen.retained,
+        "history_commits": len(chain),
+        "counts": [HISTORY_COUNTS.start, HISTORY_COUNTS.stop - 1],
+        "manifest": SOURCE_MANIFEST,
+        "manifest_sha256": hashlib.sha256(manifest_raw).hexdigest(),
+        "at_commit": pin_rows,
+        "publications": [
+            {"n": n, "side": legacy.literal(side), **item}
+            for (n, side), item in sorted(
+                published.items(), key=lambda pair: (pair[0][0], pair[1]["published"])
+            )
+        ],
+    }
+
+
+def write_source_history(issue: int | str, clone: Path) -> dict[str, int]:
+    """Write a release's source-history receipt; return its counts at the commit and its
+    publications."""
+    record = source_history(issue, clone)
+    _write(release(issue).path(SOURCE_HISTORY), record)
+    return {"at_commit": len(record["at_commit"]), "publications": len(record["publications"])}
+
+
+def _start_highs(walk: Walk, read_at_main: str, counts: Iterable[int]) -> dict[int, Fraction]:
+    """The high end of each count's start in ``walk``: from its frozen ``starts.yaml``, or,
+    before ``gather`` has frozen one, from the checkout's records, which must then be
+    those of ``read_at_main`` (`devtools.intake_ledger.tree_members`)."""
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    wanted = sorted(set(counts))
+    if (walk.directory / intake_ledger.STARTS).is_file():
+        starts = intake_ledger.load_starts(walk.directory, read_at_main)
+        missing = [n for n in wanted if n not in starts]
+        _require(not missing, f"{walk.name}: the frozen starts have no count {missing[:5]}")
+        return {n: max(member.span.high for member in starts[n]) for n in wanted}
+    members = intake_ledger.tree_members(wanted)
+    return {
+        n: max(intake_ledger.side_of(member).span.high for member in members[n]) for n in wanted
+    }
+
+
+#: Who holds the #732 source's own publications, as the ledgers print it.
+MISHAPOLK_HOLDER = "Mykhailo Polkovskyi"
+
+
+def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
+    """The ``sources.yaml`` of a release whose walk reads its own source's history (#732).
+
+    The reports, at each count the release claims at or below ``LIMIT``:
+
+    - the release's claims, every certificate its source holds at the retained commit, at
+      the exact sides the source-history receipt states (`source_history`), dated by the
+      issue, each with the first commit that published its side (``first_committed``);
+    - the source's own earlier publications of other sides at those counts, one report a
+      commit, dated by the commit: the repository is watched;
+    - every publication of the watched repositories the history scan found
+      (`HISTORY_PUBLICATIONS`), one report a commit, at the least side the commit states
+      at each count (#722's review A, A2), and #715's re-certifications held on
+      think-fwa9, at the exact sides its packet's filtered receipt states; a publication of
+      a side #715 re-certified is #715's report.
+
+    Every earlier publication is walked only where it is strictly below the count's start
+    (`_start_highs`): at or above it, it could never be recorded or change a verdict. The
+    start is frozen at the walk's ``read_at_main``.
+    """
+    chosen = release(issue)
+    walk = walk_of(chosen)
+    history = _read(chosen.path(SOURCE_HISTORY))
+    own = {row["n"]: row for row in history["at_commit"] if row["n"] <= LIMIT}
+    highs = _start_highs(walk, ISSUE_732_READ_AT_MAIN, own)
+    claims = []
+    for n, row in sorted(own.items()):
+        side = Fraction(row["side"])
+        claim = _claim(
+            n,
+            side,
+            f"{row['certificate']} at {chosen.retained[:8]} (its header), pinned by digest "
+            f"in the {chosen.packet} packet (receipts/source-history.json)",
+        )
+        claim["first_committed"] = row["side_first_published"]
+        claims.append(claim)
+    reports_list: list[dict[str, Any]] = [
+        {
+            "report": chosen.label,
+            "issue": chosen.issue,
+            "holders": chosen.holders,
+            "bead": chosen.bead,
+            "claims": claims,
+            "note": (
+                f"The {len(claims)} certificates the source holds at "
+                f"{chosen.retained[:8]} beyond the corpus at or below {LIMIT}, which its "
+                f"manifest ({SOURCE_MANIFEST}, pinned by the SHA-256 the issue states) lists "
+                "as the issue's claims there, each at its header's exact side and dated by "
+                "the issue; first_committed is the first commit of the source's history "
+                "that published the side." + held_sentence(walk, chosen.label)
+            ),
+        }
+    ]
+    repository = repository_of(chosen.source_url)
+    earlier: dict[str, list[dict[str, Any]]] = {}
+    for item in history["publications"]:
+        n, side = item["n"], Fraction(item["side"])
+        mine = own.get(n)
+        if mine is None or side == Fraction(mine["side"]) or side >= highs[n]:
+            continue
+        earlier.setdefault(item["commit"], []).append(
+            {**item, "repository": repository, "kind": "certificate"}
+        )
+    for commit, items in sorted(earlier.items(), key=lambda pair: pair[1][0]["published"]):
+        label = f"{repository}@{commit[:7]}"
+        reports_list.append(
+            {
+                "report": label,
+                "url": f"{chosen.source_url}/tree/{commit}",
+                "reported_at": items[0]["published"],
+                "holders": MISHAPOLK_HOLDER,
+                "bead": chosen.bead,
+                "claims": _least_claims(items),
+                "note": (
+                    f"The {chosen.label} source's own publications, dated by the commit: the "
+                    "repository is watched, so each certificate there is a report from the "
+                    "first commit that holds its side. Transcribed from the "
+                    f"{chosen.packet} packet's receipts/source-history.json at each count "
+                    f"{chosen.label} claims where the commit states a side other than the "
+                    "one the issue claims, strictly below the start."
+                    + held_sentence(walk, label)
+                ),
+            }
+        )
+    held_715 = _held_715()
+    replayed = {
+        row["n"]: row
+        for row in _read(WEB / "couzo-issue715-2026-10-21/receipts/filtered-exact-replay.json")[
+            "rows"
+        ]
+    }
+    couzo = [
+        _claim(
+            n,
+            Fraction(replayed[n]["exact_side"]),
+            f"{replayed[n]['certificate']} (its header) at "
+            "franciscouzo/square-packing@6b7391de, retained and replayed in the "
+            "couzo-issue715-2026-10-21 packet",
+        )
+        | {"printed": replayed[n]["printed"]}
+        for n in sorted(held_715 & set(own))
+        if Fraction(replayed[n]["exact_side"]) < highs[n]
+    ]
+    by_side = {(claim["n"], Fraction(claim["exact"])) for claim in couzo}
+    groups: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for item in _read(HISTORY_PUBLICATIONS)["publications"]:
+        n, side = item["n"], Fraction(item["side"])
+        if n not in own or side >= highs[n] or (n, side) in by_side:
+            continue
+        groups.setdefault((item["repository"], item["commit"]), []).append(item)
+    publications = []
+    for (name, commit), items in sorted(
+        groups.items(), key=lambda pair: (pair[1][0]["published"], pair[0])
+    ):
+        found = []
+        for claim in _least_claims(items):
+            least = next(
+                item
+                for item in items
+                if item["n"] == claim["n"]
+                and Fraction(item["side"]) == Fraction(claim["exact"])
+            )
+            if least["kind"] == "table":
+                places = TABLES[least["path"].split(":", 1)[0]]
+                printed = {key: value for key, value in claim.items() if key != "exact"}
+                found.append(printed | {"printed": ceiling(Fraction(claim["exact"]), places)})
+            else:
+                found.append(claim)
+        label = f"{name}@{commit[:7]}"
+        publications.append(
+            {
+                "report": label,
+                "url": f"https://github.com/{name}/tree/{commit}",
+                "reported_at": items[0]["published"],
+                "holders": WATCHED_HOLDERS[name],
+                "bead": _publication_bead(label),
+                "claims": found,
+                "note": (
+                    "A publication in a watched repository that no issue reports, dated by "
+                    "its commit, or by the later push that made it public; transcribed from "
+                    f"the history scan ({HISTORY_PUBLICATIONS.relative_to(ROOT).as_posix()}) "
+                    f"at each count {chosen.label} claims where it states a side strictly "
+                    "below the start, at the least side the commit states there."
+                    + held_sentence(walk, label)
+                ),
+            }
+        )
+    if couzo:
+        reports_list.append(
+            {
+                "report": "#715",
+                "issue": 715,
+                "holders": "Francisco Couzo",
+                "bead": "think-cyal",
+                "claims": couzo,
+                "note": (
+                    f"Issue 715's re-certifications of the 4e4c8ce certificates below the "
+                    f"12-place print at the counts {chosen.label} claims, strictly below the "
+                    "start, at the exact sides its packet's filtered receipt states; they wait "
+                    "on a decision (think-fwa9)." + held_sentence(walk, "#715")
+                ),
+            }
+        )
+    return {
+        "format": "intake-ledger-sources-v1",
+        "read_at_main": ISSUE_732_READ_AT_MAIN,
+        "read_on": read_on,
+        "rule": RULE,
+        "lanes": [],
+        "reports": reports_list + publications,
+    }
+
+
+def write_release_walk_sources(issue: int | str, read_on: str) -> int:
+    """Write a release walk's ``sources.yaml`` (`release_walk_sources`); return how many
+    reports it holds."""
+    import yaml  # noqa: PLC0415
+
+    document = release_walk_sources(issue, read_on)
+    target = walk_of(release(issue)).directory / "sources.yaml"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with atomic_output_file(target) as temporary:
+        temporary.write_text(
+            yaml.safe_dump(document, sort_keys=False, allow_unicode=True, width=100),
+            encoding="utf-8",
+        )
+    return len(document["reports"])
+
+
+def declared_rows(chosen: Release) -> dict[str, Any]:
+    """A release's rows as its walk records them (`declaration_problems`): at each count
+    the walk records it and does not hold it, the certificate the history scan found at the
+    publication's least side there, or, for an issue with no table of rows (#732), the
+    certificate its source holds at the retained commit (`source_history`), with that side
+    rounded up at 12 places."""
+    walk = walk_of(chosen)
+    commit = chosen.pin
+    if chosen.issue is not None:
+        found = {
+            row["n"]: {"kind": "certificate", "path": row["certificate"], "side": row["side"]}
+            for row in _read(chosen.path(SOURCE_HISTORY))["at_commit"]
+        }
+    else:
+        found = {
+            item["n"]: item
+            for item in sorted(
+                (
+                    item
+                    for item in _read(HISTORY_PUBLICATIONS)["publications"]
+                    if item["commit"] == commit
+                ),
+                key=lambda item: (Fraction(item["side"]), item["path"]),
+                reverse=True,
+            )
+        }
     rows = []
     for n, count in sorted(_walked(walk).items()):
         if walk.holds(chosen.label, n) is not None:
@@ -2572,22 +3174,22 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
         rows.append(
             {"n": n, "certificate": item["path"], "printed": ceiling(Fraction(item["side"]))}
         )
-    return {
+    declared: dict[str, Any] = {
         "format": WATCHED_FORMAT,
         "publication": chosen.issue_url,
         "commit": chosen.pin,
         "committed": chosen.committed,
-        "published": chosen.reported,
-        "walk": chosen.walk,
-        "rows": rows,
     }
+    if chosen.issue is None:
+        declared["published"] = chosen.reported
+    return declared | {"walk": chosen.walk, "rows": rows}
 
 
 def declare_rows() -> dict[str, int]:
-    """Write each publication's declared rows (`declared_rows`); return their counts."""
+    """Write each release's declared rows (`declared_rows`); return their counts."""
     written: dict[str, int] = {}
     for chosen in RELEASES.values():
-        if chosen.issue is None:
+        if declares_rows(chosen):
             document = declared_rows(chosen)
             path = chosen.directory / chosen.declared
             path.write_text(json.dumps(document, indent=1) + "\n", encoding="utf-8")
@@ -2949,11 +3551,12 @@ def held_dependents() -> dict[str, Any]:
 
 
 def declaration_problems() -> list[str]:
-    """Where a publication no issue reports declares other rows than its walk makes: every
-    publication the walk records of it, and does not hold, is a declared row, and no other."""
+    """Where a release that declares its rows (`declares_rows`) declares other rows than its
+    walk makes: every claim the walk records of it, and does not hold, is a declared row, and
+    no other."""
     problems: list[str] = []
     for chosen in RELEASES.values():
-        if chosen.issue is not None:
+        if not declares_rows(chosen):
             continue
         walk = walk_of(chosen)
         recorded = {
@@ -3366,6 +3969,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     transcribe_history = commands.add_parser("history-sources")
     transcribe_history.add_argument("--read-on", required=True)
+    own_history = commands.add_parser("source-history")
+    own_history.add_argument("--issue", required=True, help=KEY_HELP)
+    own_history.add_argument("--clone", type=Path, required=True)
+    transcribe_release = commands.add_parser("release-sources")
+    transcribe_release.add_argument("--issue", required=True, help=KEY_HELP)
+    transcribe_release.add_argument("--read-on", required=True)
     commands.add_parser("declare-rows")
     commands.add_parser("coverage-plan")
     commands.add_parser("held-dependents")
@@ -3395,6 +4004,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             dict(_clone(item) for item in args.clone), args.start_coverage
         ),
         "history-sources": lambda: write_history_sources(args.read_on),
+        "source-history": lambda: write_source_history(args.issue, args.clone),
+        "release-sources": lambda: write_release_walk_sources(args.issue, args.read_on),
         "declare-rows": declare_rows,
         "coverage-plan": lambda: {
             "rows": planned_rows(),

@@ -898,6 +898,43 @@ def test_check_recomputes_every_start_span_and_refuses_one_edited_by_hand() -> N
     assert "its stored inputs give" in " ".join(ledger.starts_problems(moved, FROZEN_AT))
 
 
+def test_a_beyond_horizon_start_reads_its_row_at_the_exact_side_its_source_states(
+    tmp_path: Path,
+) -> None:
+    """A row whose source's claims record states the exact side is read at that side, kept
+    as a lane the check recomputes, so a claim equal to it ties and one a fraction of the
+    print's unit below it is recorded; a source that states none leaves the print."""
+    side = Fraction(1999999999999993, 10**14)
+    row = {"n": 400, "source_id": "row-2026-10-11", "value": "19.999999999999930"}
+    record = tmp_path / "claims.json"
+    record.write_text(json.dumps({"results": [{"n": 400, "exact_side": str(side)}]}), "utf-8")
+    coverage = {
+        "sources": [
+            {"id": "row-2026-10-11", "claims_record": str(record)},
+            {"id": "row-2026-10-08"},
+        ]
+    }
+    rows = {400: row, 401: {"n": 401, "source_id": "row-2026-10-08", "value": "19.99"}}
+    exact = ledger.beyond_exact_sides(coverage, rows)
+    assert exact == {400: side}
+    member = ledger.beyond_member(400, rows, exact)
+    assert (member["model"], member["label"]) == ("exact", "beyond-horizon row row-2026-10-11")
+    assert member["lanes"] == [[member["label"], row["value"], str(side), ""]]
+    assert ledger.beyond_member(401, rows, exact)["model"] == "print"
+    starts = ledger.starts_document(FROZEN_AT, {400: [member]})
+    assert ledger.starts_problems(starts, FROZEN_AT) == []
+    start = ledger.side_of(member)
+    tie = ledger.Side("tie", "B", exact_span(side), "", side, "issue", exact=True)
+    below = side - Fraction(1, 10**16)
+    under = ledger.Side("under", "C", exact_span(below), "", below, "issue", exact=True)
+    assert ledger.compare(tie, start) == ledger.EQUAL
+    assert ledger.compare(under, start) == ledger.BELOW
+    printed = ledger.side_of(ledger.beyond_member(400, rows))
+    assert ledger.compare(tie, printed) == ledger.compare(under, printed) == ledger.UNDECIDED
+    with pytest.raises(ledger.LedgerError, match="lies outside its print"):
+        ledger.beyond_member(400, rows, {400: side + Fraction(1, 10**10)})
+
+
 def test_gather_keeps_the_frozen_starts_and_reads_the_tree_only_to_refresh_them(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

@@ -1,4 +1,5 @@
-"""The beyond-horizon rows of issues #666, #670, #672, #675 and #719, recorded on 22 October.
+"""The beyond-horizon rows of issues #666, #670, #672, #675, #719 and #732, and of the
+publications no issue reports, in report order.
 
 `devtools.beyond_horizon_replay` decides the rows at or below 1024 of five reports from
 their packets: Joost de Winter's #666 (11 of its 19 rows; the 8 above 1024 wait on the
@@ -8,7 +9,10 @@ facts and no upstream byte. These tests hold what is particular to the import:
 each issue table's rows and the certificate each reads, the receipts and records against the
 packets, the first commit of every certificate, each row's place in the backlog ledger's
 report order and the coverage register's rows that follow from it, each walked count as
-one chain in report order, and the forged receipts a check must refuse. Every test reads
+one chain in report order, and the forged receipts a check must refuse. Mykhailo
+Polkovskyi's #732 has no table of rows: its packet declares the 77 its walk records, from
+the history of his own repository, which the walk reads beside every watched publication.
+Every test reads
 the retained packets, the ledger and the source register only; none needs the network.
 """
 
@@ -336,19 +340,19 @@ def test_the_coverage_register_reads_each_source_claims_record() -> None:
         assert set(rows) <= set(source["scope"]["n_values"])
 
 
-def _successor_at_631(
+def _successor_at_682(
     successor: str,
     added: tuple[str, str] | None = None,
     *,
     kind: str = "upper-bound",
     **changed: str,
 ) -> tuple[list[str], list[str]]:
-    """#719's row at 631 held superseded by ``successor``, with ``added`` (a value and a
+    """#719's row at 682 held superseded by ``successor``, with ``added`` (a value and a
     date) as that source's row claiming ``kind``, and what the plan and
     `check_source_coverage` say there."""
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
-    held = rows[631, MISHAPOLK]
+    held = rows[682, MISHAPOLK]
     held.update(disposition="superseded", superseded_by=successor, **changed)
     claims = {
         source["id"]: coverage_check.load_claims(coverage_check.ROOT / source["claims_record"])
@@ -359,11 +363,11 @@ def _successor_at_631(
         value, dated = added
         mine = next(source for source in coverage["sources"] if source["id"] == MISHAPOLK)
         coverage["sources"].append(
-            {**mine, "id": successor, "source_date": dated, "scope": {"n_values": [631]}}
+            {**mine, "id": successor, "source_date": dated, "scope": {"n_values": [682]}}
         )
         coverage["beyond_horizon_claims"].append(
             {
-                "n": 631,
+                "n": 682,
                 "source_id": successor,
                 "claim": kind,
                 "value": value,
@@ -372,12 +376,12 @@ def _successor_at_631(
                 "bead": "think-xyhn",
             }
         )
-        claims[successor] = {631: value}
-    plan = [problem for problem in replay.coverage_problems(coverage) if "n=631 " in problem]
+        claims[successor] = {682: value}
+    plan = [problem for problem in replay.coverage_problems(coverage) if "n=682 " in problem]
     gate = [
         error
         for error in coverage_check.beyond_horizon_errors(coverage, claims)[0]
-        if "631" in error
+        if "682" in error
     ]
     return plan, gate
 
@@ -394,13 +398,13 @@ def test_a_successor_outside_the_walk_holds_the_plan_only_with_a_later_smaller_r
     for n in (370, 452, 536):
         assert rows[n, "couzo-issue670-2026-10-17"]["superseded_by"] == MISHAPOLK
     assert replay.coverage_problems(coverage) == []
-    refused = "n=631 from mishapolk-issue719-2026-10-22: the register's row is not the plan's"
-    smaller, larger = "25.6568542495100000", "25.6568542496000000"
-    equal = rows[631, MISHAPOLK]["value"]
+    refused = "n=682 from mishapolk-issue719-2026-10-22: the register's row is not the plan's"
+    smaller, larger = "26.6568542495000000", "26.6568542496000000"
+    equal = rows[682, MISHAPOLK]["value"]
     assert Fraction(smaller) < Fraction(equal) < Fraction(larger)
-    later = _successor_at_631("x-later-2026-10-23", (smaller, "2026-10-23"))
+    later = _successor_at_682("x-later-2026-10-23", (smaller, "2026-10-23"))
     assert later == ([], [])
-    same_day = _successor_at_631("x-same-2026-10-22", (smaller, "2026-10-22"))
+    same_day = _successor_at_682("x-same-2026-10-22", (smaller, "2026-10-22"))
     assert same_day == ([], [])
     for successor, added, kind in (
         ("couzo-issue715-2026-10-21", None, "upper-bound"),
@@ -410,10 +414,10 @@ def test_a_successor_outside_the_walk_holds_the_plan_only_with_a_later_smaller_r
         ("x-equal-2026-10-23", (equal, "2026-10-23"), "upper-bound"),
         ("x-lower-2026-10-23", (smaller, "2026-10-23"), "lower-bound"),
     ):
-        plan, gate = _successor_at_631(successor, added, kind=kind)
+        plan, gate = _successor_at_682(successor, added, kind=kind)
         assert plan == [refused], successor
         assert gate, successor
-    changed, _ = _successor_at_631(
+    changed, _ = _successor_at_682(
         "x-later-2026-10-23", (smaller, "2026-10-23"), assurance="verified"
     )
     assert changed == [refused]
@@ -954,7 +958,7 @@ def test_each_publication_declares_the_rows_its_walk_records() -> None:
     scan; dropping a row or declaring one the walk holds is refused."""
     assert replay.declaration_problems() == []
     for chosen in replay.RELEASES.values():
-        if chosen.issue is None:
+        if replay.declares_rows(chosen):
             assert replay.declared_rows(chosen) == _read(chosen.directory / chosen.declared)
 
 
@@ -1085,3 +1089,134 @@ def test_the_history_ledger_transcribes_the_scan_and_the_register() -> None:
     assert labels == {"the grid"} | {
         f"beyond-horizon row {source}" for source in replay.HISTORY_START_SOURCES
     }
+
+
+ISSUE_732 = replay.ROOT / "campaign/issue-intake/upper-bounds-issue732-20261023"
+#: The SHA-256 issue #732 states for the manifest that indexes its certificates.
+MANIFEST_732 = "5dff6ae3b8b4b5adbb44dd64cb907361a7fe5f323500b472007375f11ace47d5"
+#: The first commit that published each side the source holds at 325 to 1024 at the pin.
+FIRST_PUBLISHED_732 = {"8a488a1": 246, "1851c2c": 82, "3285fac": 61, "12fc466": 1}
+#: The rows #732 supersedes on entry, by the source that held each count.
+SUPERSEDED_BY_732 = {
+    "couzo-issue715-2026-10-21": 30,
+    "mishapolk-issue719-2026-10-22": 29,
+    "couzo-index-2026-10-15": 14,
+    "couzo-verified-bounds-2026-10-14": 4,
+}
+#: #732's verdicts that rest on held publications, by the class of hold.
+RESTING_732 = {"consequence": 14, "goebel": 43, "recipe": 41, "sub-print": 31}
+
+
+def test_a_count_named_outside_the_band_is_never_read() -> None:
+    """The source-history scan reads only certificate paths that name a count from 325 to
+    1024, under any layout the source has used, so a blobless clone fetches nothing above."""
+    named = {
+        "certificates/0000-0999/n372.cert": 372,
+        "certificates/n-411.cert": 411,
+        "certificates/n-133_breakthrough.cert": 133,
+        "certificates/square-27.cert": 27,
+        "certificates/1000-1999/n1061.cert": 1061,
+        "README.md": None,
+        "certificates/manifest.json": None,
+    }
+    assert {path: replay.named_count(path) for path in named} == named
+    assert 1061 not in replay.HISTORY_COUNTS
+    assert 133 not in replay.HISTORY_COUNTS
+
+
+def test_the_732_source_history_holds_each_certificate_to_the_manifest() -> None:
+    """At 17cc220 the source holds 390 certificates beyond the corpus at or below 1024, each
+    the file, digest and exact bound its manifest states; the manifest has the SHA-256 the
+    issue states and the packet pins, and each side's first publication is dated."""
+    chosen = replay.release(732)
+    history = _read(chosen.path(replay.SOURCE_HISTORY))
+    rows = history["at_commit"]
+    assert history["retained_commit"] == chosen.retained
+    assert len(rows) == 390
+    assert all(325 <= row["n"] <= replay.LIMIT for row in rows)
+    assert history["manifest_sha256"] == MANIFEST_732
+    assert replay.manifest(chosen)[replay.SOURCE_MANIFEST] == MANIFEST_732
+    pinned = replay.manifest(chosen)
+    assert all(pinned[row["certificate"]] == row["sha256"] for row in rows)
+    found = Counter(row["side_first_commit"][:7] for row in rows)
+    assert found == FIRST_PUBLISHED_732
+    sides = {(item["n"], item["side"]) for item in history["publications"]}
+    assert all((row["n"], row["side"]) in sides for row in rows)
+
+
+def test_732_declares_the_77_rows_its_walk_records_and_holds_499() -> None:
+    """The issue has no table: the packet declares the rows the walk records and does not
+    hold, each the certificate the source holds at the pin, printed rounded up at 12 places.
+    499, 8.66e-13 below #719's row at the same print, is recorded and held (think-fwa9)."""
+    chosen = replay.release(732)
+    assert replay.declares_rows(chosen)
+    assert chosen.issue == 732
+    rows = replay.decided_claims(chosen)
+    assert len(rows) == len(replay.claims(chosen)) == chosen.decided == 77
+    walk = replay.WALKS[replay.ISSUE_732]
+    ledger = _read(ISSUE_732 / "ledger.json")
+    recorded = {
+        count["n"]
+        for count in ledger["counts"]
+        for step in count["steps"]
+        if step["report"] == "#732" and step["verdict"] == replay.RECORDED
+    }
+    assert recorded == {row.n for row in rows} | {499}
+    held = walk.holds("#732", 499)
+    assert held is not None
+    assert (held.kind, held.bead) == (replay.SUB_PRINT, "think-fwa9")
+    history = {row["n"]: row for row in _read(chosen.path(replay.SOURCE_HISTORY))["at_commit"]}
+    for row in rows:
+        assert row.path == history[row.n]["certificate"]
+        assert row.printed == history[row.n]["ceiling_12"]
+    first = Counter(history[row.n]["side_first_commit"][:7] for row in rows)
+    assert first == {"8a488a1": 76, "1851c2c": 1}
+    assert history[539]["side_first_commit"].startswith("1851c2c")
+
+
+def test_732_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
+    rows = [row for row in replay.planned_rows() if row["bead"] == "think-0gp6"]
+    assert len(rows) == 77
+    assert all("superseded_by" not in row for row in rows)
+    beaten = Counter(
+        start
+        for _, start, source in replay.planned_supersessions()
+        if source == "mishapolk-issue732-2026-10-22"
+    )
+    assert beaten == SUPERSEDED_BY_732
+
+
+def test_the_732_walk_holds_the_withdrawn_files_and_names_what_rests_on_holds() -> None:
+    """The author's 1851c2c files at the nine counts #719's edit withdrew are below every
+    earlier report, and #732's later files below them: held for think-8m4k. 369 and 376 are
+    above 58a7833's held bound, itself above Göbel's construction; 985 equals 4e4c8ce's
+    deletion bound. Only a deletion-bound answer would make one of #732's a new record."""
+    walk = replay.WALKS[replay.ISSUE_732]
+    (withdrawn,) = walk.held["Mishapolk/square-packing-records@1851c2c"]
+    assert (withdrawn.kind, withdrawn.bead) == (replay.WITHDRAWN, "think-8m4k")
+    assert sorted(withdrawn.counts) == [411, 451, 494, 495, 540, 583, 587, 632, 683]
+    assert withdrawn.kind in replay.HELD_CLASSES
+    mine = {item.kinds: item.counts for item in walk.resting if item.report == "#732"}
+    assert {kinds[0]: len(counts) for kinds, counts in mine.items()} == RESTING_732
+    assert {369, 376} <= mine[(replay.GOEBEL_ABOVE,)]
+    assert 985 in mine[(replay.CONSEQUENCE,)]
+    flips = replay.refusal_flips(walk, (replay.CONSEQUENCE,))
+    assert [(n, falls) for n, report, falls in flips if report == "#732"] == [
+        (985, replay.NEW_RECORD)
+    ]
+    assert replay.refusal_flips(walk, (replay.WITHDRAWN,)) == []
+
+
+def test_the_732_ledger_transcribes_the_source_history_and_the_scan() -> None:
+    """sources.yaml is what `release_walk_sources` writes from the packet's source history,
+    the history scan and #715's held re-certifications, each publication strictly below
+    the starts frozen at main fcf2f96a5, which read each row at its exact side."""
+    sources = safe_load((ISSUE_732 / "sources.yaml").read_text(encoding="utf-8"))
+    assert sources == replay.release_walk_sources(732, str(sources["read_on"]))
+    starts = safe_load((ISSUE_732 / "starts.yaml").read_text(encoding="utf-8"))
+    assert starts["read_at_main"] == replay.ISSUE_732_READ_AT_MAIN
+    models = Counter(
+        member["model"] for count in starts["counts"] for member in count["members"]
+    )
+    assert set(models) == {"exact", "print"}
+    assert models["print"] < 5

@@ -11,7 +11,10 @@ intake directory such as ``campaign/issue-intake/upper-bounds-20261014/``:
   is a rational, else its ``value`` as a printed side within one unit of its last place.
   A register entry pending adoption that states a smaller upper bound
   (``check_standing.improvements``) lowers it. Above the horizon the start is the current
-  beyond-horizon row of ``frontier/source-coverage.yaml``, else the grid ``ceil(sqrt n)``;
+  beyond-horizon row of ``frontier/source-coverage.yaml``, at the exact side its source's
+  claims record states where it states one and within one unit of its print otherwise
+  (a ``starts.yaml`` frozen before 23 October 2026 reads every row at its print), else
+  the grid ``ceil(sqrt n)``;
 - **the walk.** The claims at ``n`` are sorted by ``reported_at`` (issue, comment or pull
   request creation; a claim added later by an edit or a commit carries its own time; a
   publication in a watched repository is dated by its first commit). A claim is
@@ -1025,9 +1028,16 @@ def pending_member(record: Mapping[str, Any], stated: check_standing.Stated) -> 
     return member
 
 
-def beyond_member(n: int, rows: Mapping[int, Mapping[str, Any]]) -> StartMember:
-    """Above the horizon: the current beyond-horizon row, read within one unit of its
-    print, else the grid."""
+def beyond_member(
+    n: int,
+    rows: Mapping[int, Mapping[str, Any]],
+    exact: Mapping[int, Fraction] | None = None,
+) -> StartMember:
+    """Above the horizon: the current beyond-horizon row, else the grid.
+
+    The row is read at its exact side where ``exact`` gives one (`beyond_exact_sides`),
+    kept as a lane ``[label, print, exact side, ""]`` so that ``check`` recomputes it, and
+    otherwise within one unit of its print."""
     row = rows.get(n)
     if row is None:
         grid = exact_span(grid_side(n))
@@ -1042,17 +1052,64 @@ def beyond_member(n: int, rows: Mapping[int, Mapping[str, Any]]) -> StartMember:
             lanes=[],
         )
     value = str(row["value"])
+    label = f"beyond-horizon row {row['source_id']}"
+    span = printed_side(value, "unstated")
+    side = (exact or {}).get(n)
+    if side is not None:
+        _require(
+            contains(span, side),
+            f"n = {n}: {label}'s exact side {side} lies outside its print {value}",
+        )
+        return _member(
+            label,
+            "record",
+            str(row["source_id"]),
+            model="exact",
+            span=exact_span(side),
+            display=value,
+            decide="",
+            lanes=[[label, value, str(side), ""]],
+        )
     decide = f"the exact side of the beyond-horizon row {row['source_id']} at n = {n}"
     return _member(
-        f"beyond-horizon row {row['source_id']}",
+        label,
         "record",
         str(row["source_id"]),
         model="print",
-        span=printed_side(value, "unstated"),
+        span=span,
         display=value,
         decide=decide,
         lanes=[],
     )
+
+
+def beyond_exact_sides(
+    coverage: Mapping[str, Any], rows: Mapping[int, Mapping[str, Any]]
+) -> dict[int, Fraction]:
+    """Each current beyond-horizon row's exact side, where its source's claims record (the
+    record `check_source_coverage` reads the source's rows from) states one at the row's
+    count: one result there, with an ``exact_side``. A source whose record states none, as
+    the two 8 October report sources, leaves its rows to their prints."""
+    sources = {str(source["id"]): source for source in coverage["sources"]}
+    records: dict[str, Mapping[str, Any]] = {}
+    found: dict[int, Fraction] = {}
+    for n, row in rows.items():
+        path = str(sources.get(str(row["source_id"]), {}).get("claims_record") or "")
+        if not path:
+            continue
+        if path not in records:
+            target = ROOT / path
+            records[path] = (
+                json.loads(target.read_text(encoding="utf-8")) if target.is_file() else {}
+            )
+        stated = [
+            item
+            for item in records[path].get("results", [])
+            if int(item["n"]) == n and "exact_side" in item
+        ]
+        if len(stated) == 1:
+            found[n] = Fraction(str(stated[0]["exact_side"]))
+    return found
 
 
 def lane_polynomials(
@@ -1132,8 +1189,9 @@ def tree_members(
     if outside:
         coverage = load_yaml(coverage_check.COVERAGE)
         rows = coverage_check.current_beyond_horizon(coverage)
+        exact = beyond_exact_sides(coverage, rows)
         for n in outside:
-            members[n] = [beyond_member(n, rows)]
+            members[n] = [beyond_member(n, rows, exact)]
     return members
 
 
