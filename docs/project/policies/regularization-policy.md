@@ -730,10 +730,13 @@ squares lie.
    those, on grids of 4×4, 8×8 and 16×16 cells taken quadrant by quadrant in the same
    order; then the squares themselves, each as its centre and its tilt, sorted from the
    bottom row and the right, the least list kept.
-4. Poses still tied draw the same picture, since the packing has that symmetry, which is
-   checked square for square.
-   The first in a fixed order is kept, the identity first and the rotations before the
-   flips, so a symmetric packing keeps its source’s pose.
+4. After each of those stages, the quadrants included, the poses still tied are matched
+   square for square. Once they all draw the same picture, the packing having that
+   symmetry, the comparison stops: that stage decided the pose, and the first of them in
+   a fixed order is kept, the identity first and the rotations before the flips, so a
+   symmetric packing keeps its source’s pose.
+   Poses that draw different pictures after the last stage stop the stage with an error,
+   rather than a symmetry being assumed.
 
 On the 324 default pictures of 23 October 2026 the rule keeps the published pose at 252
 counts, n = 11 among them, and turns 72; no rule that puts the heaviest quadrant lower

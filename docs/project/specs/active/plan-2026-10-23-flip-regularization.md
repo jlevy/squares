@@ -123,10 +123,14 @@ right is heavier than the lower left”.
    right, and keep the pose whose list is least.
    The tilt is in the key because two mirror images can share every centre and differ
    only in the sign of their tilts.
-5. **Symmetric packings.** Poses still tied must draw the same picture, the packing
-   having that symmetry: the stage checks it square for square and fails loudly if not.
-   Keep the first in the fixed order (no rotation and no flip first), so a symmetric
-   packing keeps its published pose.
+5. **Symmetric packings.** After each stage, the quadrants included, the poses still
+   tied are matched square for square; once they all draw the same picture, the
+   comparison stops there, that stage is `decided_by`, and the first in the fixed order
+   (no rotation and no flip first) is kept, so a symmetric packing keeps its published
+   pose. Stopping early matters: carried on to the squares key, two images of a symmetric
+   packing can still be told apart by noise at a 45-degree tilt, and a literal reading
+   that ran every stage first disagreed with the record at 27 counts (review round 2).
+   Distinct pictures surviving the last stage fail loudly.
 
 ### Components
 
