@@ -2432,6 +2432,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/exact_sides.py",
             "packing/devtools/regularize_evand.py",
             "packing/devtools/render_recent_results.py",
+            "packing/devtools/render_research_tables.py",
             "packing/devtools/select_houses.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/frontier/n-070.md",
@@ -2442,6 +2443,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/frontier/n-295.md",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
+            "packing/src/sqpack/cli/validate.py",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
@@ -2457,15 +2459,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "The house writer's algebraic side and the adoption of the nine algebraic "
             "houses of 23 October 2026 (think-ot5c: T-174 at 70, 153 and 207, T-193 at "
             "102, 123, 258, 259, 295 and 302), their regularization runs, settlements and "
-            "re-renders, against main 7335d0098 (#752), after merging it: rendered at link "
-            "revision fb0889e2 into empty site directories, twice from this tree at "
-            "fb0889e2 and twice from main's (69 files each), "
+            "re-renders, against main cc91ee1b8 (#746), after merging it: rendered at link "
+            "revision 52d23673 into empty site directories, twice from this tree at "
+            "52d23673 and twice from main's (69 files each), "
             "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, "
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods write every file byte-identical across all four. "
-            "Measured before at e0c2bf25 and 1a2a7d47 against main c1115c095 (#749), with "
-            "the same outcome. No PDF was printed; each prints from that HTML. Retain "
-            "v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+            "Measured before at 63c12e35 against main 769e441e1 (#748), at fb0889e2 "
+            "against 7335d0098 (#752), and at e0c2bf25 and 1a2a7d47 against c1115c095 "
+            "(#749), with the same outcome. No PDF was printed; each prints from that "
+            "HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
