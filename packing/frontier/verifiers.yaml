@@ -393,6 +393,9 @@ verifiers:
     source:
       - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py
       - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py
+      - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert.py
+      - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/exact/verify_cert.py
+      - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/exact/verify_cert.py
     versions:
       - {sha256: 3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52}
 
@@ -411,6 +414,9 @@ verifiers:
     source:
       - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py
       - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py
+      - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert2.py
+      - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/exact/verify_cert2.py
+      - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/exact/verify_cert2.py
     versions:
       - {sha256: 55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3}
 

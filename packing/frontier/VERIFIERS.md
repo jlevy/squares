@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **188** programs: **51** external and **137** first-party; **129** decide claims and **59** check premises.
-- **579** of **716** evidence entries name the programs that verified them: 277 reproduced with the producer’s code, 252 independently re-implemented, 31 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
+- **582** of **719** evidence entries name the programs that verified them: 280 reproduced with the producer’s code, 252 independently re-implemented, 31 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -49,8 +49,8 @@ second implementation agrees.
 | [`V-evand-xcheck-py`](#v-evand-xcheck-py) | xcheck.py | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-zmcheck`](#v-evand-zmcheck) | zmcheck (verify2/src/main.rs) | Evan Daniel | external | decides | 3 | 2 |
 | [`V-evand-qx2-zm-py`](#v-evand-qx2-zm-py) | qx2_zm.py | Evan Daniel | external | decides | 4 | 2 |
-| [`V-evand-verify-cert-py`](#v-evand-verify-cert-py) | verify_cert.py (s12/search/exact/) | Evan Daniel | external | decides | 5 | 3 |
-| [`V-evand-verify-cert2-py`](#v-evand-verify-cert2-py) | verify_cert2.py (s12/search/exact/) | Evan Daniel | external | decides | 5 | 3 |
+| [`V-evand-verify-cert-py`](#v-evand-verify-cert-py) | verify_cert.py (s12/search/exact/) | Evan Daniel | external | decides | 8 | 6 |
+| [`V-evand-verify-cert2-py`](#v-evand-verify-cert2-py) | verify_cert2.py (s12/search/exact/) | Evan Daniel | external | decides | 8 | 6 |
 | [`V-couzo-verify-bound-certificate`](#v-couzo-verify-bound-certificate) | verify_bound_certificate.py | Evan Daniel, modified by Francisco Couzo with Codex | external | decides | 1 | 1 |
 | [`V-evand-lean`](#v-evand-lean) | The source's Lean development (lean/) | Evan Daniel | external | decides | 8 | 5 |
 | [`V-chelokot-lean`](#v-chelokot-lean) | The source's Lean development (formal/) | chelokot | external | decides | 1 | 1 |
@@ -218,7 +218,7 @@ second implementation agrees.
 | [`V-sq19-review-endgame`](#v-sq19-review-endgame) | check_endgame.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-sq19-review-archive-scan`](#v-sq19-review-archive-scan) | scan_archives.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-sq19-review-native-count`](#v-sq19-review-native-count) | count_native.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-acquire-source`](#v-acquire-source) | devtools.acquire_source | Squares Project (Levy) | first-party | premises | 3 | 2 |
+| [`V-acquire-source`](#v-acquire-source) | devtools.acquire_source | Squares Project (Levy) | first-party | premises | 6 | 5 |
 | [`V-couzo-678-review-identity`](#v-couzo-678-review-identity) | identity_260.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 
 ## By Program
@@ -723,7 +723,7 @@ The source's exact-rational checker of Valid7, the finite statement its k^2 - 3 
 
 The source's exact checker of its rational packing certificates, in Fraction arithmetic: each square strictly inside the open box, and each pair with centre distance squared at most 2 strictly separated along one of its four face normals, the others by disjoint circumscribed discs.
 
-- Source: [`packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py`](../../packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py), [`packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py`](../../packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py)
+- Source: [`packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py`](../../packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py), [`packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py`](../../packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py), [`packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert.py`](../../packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert.py), [`packing/resources/web/evand-n229-dilation-2026-10-17/source/search/exact/verify_cert.py`](../../packing/resources/web/evand-n229-dilation-2026-10-17/source/search/exact/verify_cert.py), [`packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/exact/verify_cert.py`](../../packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/exact/verify_cert.py)
 - Versions run: SHA-256 `3299ca0c0f02…`
 
 | evidence | run | code | coverage | results |
@@ -732,6 +732,9 @@ The source's exact checker of its rational packing certificates, in Fraction ari
 | `E-evand-exact-optima-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-098 |
 | `E-evand-exact-ceilings-2026-10-05-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-101 |
 | `E-evand-exact-ceilings-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-101 |
+| `E-evand-669-n155-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 2 of 2: the certificate at n = 155 that T-197 cites and its same-side display view, each with its four controls | T-197 |
+| `E-evand-674-n229-opening-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-198 cites, with its four controls | T-198 |
+| `E-evand-674-n229-update-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-199 cites, with its four controls | T-199 |
 | `E-evand-680-n183-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-220 |
 
 ### `V-evand-verify-cert2-py`
@@ -740,7 +743,7 @@ The source's exact checker of its rational packing certificates, in Fraction ari
 
 The source's second exact checker of the same certificates, written to share no geometry with the first: each pair disjoint when no vertex of either lies in the other closed square and no two closed edges meet, every corner strictly inside the open box, in Fraction arithmetic.
 
-- Source: [`packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py`](../../packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py), [`packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py`](../../packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py)
+- Source: [`packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py`](../../packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py), [`packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py`](../../packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py), [`packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert2.py`](../../packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert2.py), [`packing/resources/web/evand-n229-dilation-2026-10-17/source/search/exact/verify_cert2.py`](../../packing/resources/web/evand-n229-dilation-2026-10-17/source/search/exact/verify_cert2.py), [`packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/exact/verify_cert2.py`](../../packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/exact/verify_cert2.py)
 - Versions run: SHA-256 `55140a35d95d…`
 
 | evidence | run | code | coverage | results |
@@ -749,6 +752,9 @@ The source's second exact checker of the same certificates, written to share no 
 | `E-evand-exact-optima-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-098 |
 | `E-evand-exact-ceilings-2026-10-05-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-101 |
 | `E-evand-exact-ceilings-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-101 |
+| `E-evand-669-n155-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 2 of 2: the certificate at n = 155 that T-197 cites and its same-side display view, each with its four controls | T-197 |
+| `E-evand-674-n229-opening-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-198 cites, with its four controls | T-198 |
+| `E-evand-674-n229-update-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-199 cites, with its four controls | T-199 |
 | `E-evand-680-n183-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-220 |
 
 ### `V-couzo-verify-bound-certificate`
@@ -3804,6 +3810,9 @@ Admits retained source custody, declared members and manifest bytes; decides no 
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
+| `E-evand-669-n155-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 2 of 2: the certificate at n = 155 that T-197 cites and its same-side display view, each with its four controls | T-197 |
+| `E-evand-674-n229-opening-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-198 cites, with its four controls | T-198 |
+| `E-evand-674-n229-update-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-199 cites, with its four controls | T-199 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-couzo-678-filtered-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose centres are closer than sqrt 2 decided by both routes, the others excluded by the filter's lemma, and every pair decided again by the all-pairs kernel; the receipt decides all 85 rows of the issue | T-223 |
 | `E-couzo-678-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites, each with its four controls; the receipt holds all 85 rows | T-223 |

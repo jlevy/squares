@@ -38454,8 +38454,10 @@ evidence:
       route CPU seconds and 86.75 job wall seconds, the longest job 29.99 seconds. Every
       positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
       The 19 October review accepted it; the confirming replay is
-      E-evand-669-n155-exact-feasibility. The source's own checkers were not run here. The
-      two maintained routes, the sqpack rational witness verifier and the independent
+      E-evand-669-n155-exact-feasibility. The source's own checkers ran here separately on
+      23 October 2026 and accepted both certificates
+      (E-evand-669-n155-source-checker-replay), which moves no rung. The two maintained
+      routes, the sqpack rational witness verifier and the independent
       rational corner checker, share certificate parsing, half-angle conversion, Fraction
       arithmetic and the separating-axis method. No two independent methods, human
       oversight or optimality is claimed.
@@ -38534,11 +38536,59 @@ evidence:
       certificate parsing, half-angle conversion, Fraction arithmetic and the
       separating-axis method. The receipt's 3 jobs hold 71610 pair decisions, 43.29 route
       CPU seconds and 86.75 job wall seconds, the longest job 29.99 seconds. The positive
-      clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21. The
-      source's own checkers were not run here, and the source's numerical statements of a
-      local minimum are not decided. Finite feasibility only: no lower bound, optimum,
+      clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21. This
+      replay runs none of the source's own checkers, which ran separately
+      (E-evand-669-n155-source-checker-replay), and the source's numerical statements of a local minimum are
+      not decided. Finite feasibility only: no lower bound, optimum,
       local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-19'
+  - id: E-evand-669-n155-source-checker-replay
+    claim: upper-bound
+    scope: {n_values: [155]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n155 explorer 2026-10-17]'
+    certificate: packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/
+    replay: >-
+      From packing/: python -m devtools.evand_source_checkers run --scratch SCRATCH
+      --workers 2 ran the source's search/exact/verify_cert.py and verify_cert2.py
+      unchanged from this packet's retained copies (SHA-256
+      3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52 and
+      55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3, the versions
+      V-evand-verify-cert-py and V-evand-verify-cert2-py register, read in full before
+      they ran), each in its own python -I child process with an empty environment, no
+      standard input and a scratch working directory, on 23 October 2026, on s155_ex2.cert
+      and its same-side display view s155_ex2_regularized.cert and on four controls of
+      each: square 2 replaced by square 1, square 1 moved outside the box, and two sharp
+      controls that cross the right or top wall and the left or bottom wall by exactly
+      1e-30. Both checkers accepted both certificates and refused all eight controls, 20
+      runs in 3.0 CPU seconds (receipts/source-checker-replay.json); check holds the
+      packet to its acquisition manifest and reads the receipt back.
+    replay_status: passed
+    verifiers:
+      - V-evand-verify-cert-py
+      - V-evand-verify-cert2-py
+      - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 155 that T-197 cites and its same-side display view, each
+          with its four controls
+        checked: 2
+        of: 2
+    limitations: >-
+      The producer's own checkers re-run: they establish reproducibility, not
+      independence, and move no rung; T-197's rungs rest on the independent routes. The
+      two checkers share their author, their parse and their certificate format, so
+      neither is independent of the other. Both decide squares strictly inside the open
+      box and disjoint closed squares. A run of the same checkers on 18 October 2026 was
+      not kept; this one replaces it. Finite feasibility only.
+    source_reviewed: '2026-10-23'
   - id: E-evand-674-n229-opening-report
     claim: upper-bound
     scope: {n_values: [229]}
@@ -38575,8 +38625,10 @@ evidence:
       records 92.75 route CPU seconds and 140.22 job wall seconds, the longest job 47.78
       seconds. Every positive clears every wall by at least 5.01e-13 and every pair by at
       least 9.99e-13. The 19 October review accepted it; the confirming replay is
-      E-evand-674-n229-opening-exact-feasibility. The source's own checkers were not run
-      here. The two maintained routes, the sqpack rational witness verifier and the
+      E-evand-674-n229-opening-exact-feasibility. The source's own checkers ran here
+      separately on 23 October 2026 and accepted the certificate
+      (E-evand-674-n229-opening-source-checker-replay), which moves no rung. The two
+      maintained routes, the sqpack rational witness verifier and the
       independent rational corner checker, share certificate parsing, half-angle
       conversion, Fraction arithmetic and the separating-axis method. No two independent
       methods, human oversight or optimality is claimed.
@@ -38655,11 +38707,57 @@ evidence:
       certificate parsing, half-angle conversion, Fraction arithmetic and the
       separating-axis method. The receipt's 3 jobs hold 156636 pair decisions, 92.75 route
       CPU seconds and 140.22 job wall seconds, the longest job 47.78 seconds. The positive
-      clears every wall by at least 5.01e-13 and every pair by at least 9.99e-13. The
-      source's own checkers were not run here, and the source's numerical statements of a
-      local minimum are not decided. Finite feasibility only: no lower bound, optimum,
+      clears every wall by at least 5.01e-13 and every pair by at least 9.99e-13. This
+      replay runs none of the source's own checkers, which ran separately
+      (E-evand-674-n229-opening-source-checker-replay), and the source's numerical statements of a local minimum are
+      not decided. Finite feasibility only: no lower bound, optimum,
       local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-19'
+  - id: E-evand-674-n229-opening-source-checker-replay
+    claim: upper-bound
+    scope: {n_values: [229]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n229 dilation 2026-10-17]'
+    certificate: packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/
+    replay: >-
+      From packing/: python -m devtools.evand_source_checkers run --scratch SCRATCH
+      --workers 2 ran the source's search/exact/verify_cert.py and verify_cert2.py
+      unchanged from this packet's retained copies (SHA-256
+      3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52 and
+      55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3, the versions
+      V-evand-verify-cert-py and V-evand-verify-cert2-py register, read in full before
+      they ran), each in its own python -I child process with an empty environment, no
+      standard input and a scratch working directory, on 23 October 2026, on s229.cert and
+      on four controls of each: square 2 replaced by square 1, square 1 moved outside the
+      box, and two sharp controls that cross the right or top wall and the left or bottom
+      wall by exactly 1e-30. Both checkers accepted the certificate and refused all four
+      controls, 10 runs in 2.6 CPU seconds (receipts/source-checker-replay.json); check
+      holds the packet to its acquisition manifest and reads the receipt back.
+    replay_status: passed
+    verifiers:
+      - V-evand-verify-cert-py
+      - V-evand-verify-cert2-py
+      - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 229 that T-198 cites, with its four controls
+        checked: 1
+        of: 1
+    limitations: >-
+      The producer's own checkers re-run: they establish reproducibility, not
+      independence, and move no rung; T-198's rungs rest on the independent routes. The
+      two checkers share their author, their parse and their certificate format, so
+      neither is independent of the other. Both decide squares strictly inside the open
+      box and disjoint closed squares. A run of the same checkers on 18 October 2026 was
+      not kept; this one replaces it. Finite feasibility only.
+    source_reviewed: '2026-10-23'
   - id: E-evand-674-n229-update-report
     claim: upper-bound
     scope: {n_values: [229]}
@@ -38696,8 +38794,10 @@ evidence:
       88.93 route CPU seconds and 157.25 job wall seconds, the longest job 63.42 seconds.
       Every positive clears every wall by at least 6.00e-13 and every pair by at least
       1.20e-12. The 19 October review accepted it; the confirming replay is
-      E-evand-674-n229-update-exact-feasibility. The source's own checkers were not run
-      here. The two maintained routes, the sqpack rational witness verifier and the
+      E-evand-674-n229-update-exact-feasibility. The source's own checkers ran here
+      separately on 23 October 2026 and accepted the certificate
+      (E-evand-674-n229-update-source-checker-replay), which moves no rung. The two
+      maintained routes, the sqpack rational witness verifier and the
       independent rational corner checker, share certificate parsing, half-angle
       conversion, Fraction arithmetic and the separating-axis method. No two independent
       methods, human oversight or optimality is claimed.
@@ -38776,11 +38876,57 @@ evidence:
       certificate parsing, half-angle conversion, Fraction arithmetic and the
       separating-axis method. The receipt's 3 jobs hold 156636 pair decisions, 88.93 route
       CPU seconds and 157.25 job wall seconds, the longest job 63.42 seconds. The positive
-      clears every wall by at least 6.00e-13 and every pair by at least 1.20e-12. The
-      source's own checkers were not run here, and the source's numerical statements of a
-      local minimum are not decided. Finite feasibility only: no lower bound, optimum,
+      clears every wall by at least 6.00e-13 and every pair by at least 1.20e-12. This
+      replay runs none of the source's own checkers, which ran separately
+      (E-evand-674-n229-update-source-checker-replay), and the source's numerical statements of a local minimum are
+      not decided. Finite feasibility only: no lower bound, optimum,
       local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-19'
+  - id: E-evand-674-n229-update-source-checker-replay
+    claim: upper-bound
+    scope: {n_values: [229]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n229 dilation update 2026-10-18]'
+    certificate: packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/
+    replay: >-
+      From packing/: python -m devtools.evand_source_checkers run --scratch SCRATCH
+      --workers 2 ran the source's search/exact/verify_cert.py and verify_cert2.py
+      unchanged from this packet's retained copies (SHA-256
+      3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52 and
+      55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3, the versions
+      V-evand-verify-cert-py and V-evand-verify-cert2-py register, read in full before
+      they ran), each in its own python -I child process with an empty environment, no
+      standard input and a scratch working directory, on 23 October 2026, on s229_v2.cert
+      and on four controls of each: square 2 replaced by square 1, square 1 moved outside
+      the box, and two sharp controls that cross the right or top wall and the left or
+      bottom wall by exactly 1e-30. Both checkers accepted the certificate and refused all
+      four controls, 10 runs in 2.6 CPU seconds (receipts/source-checker-replay.json);
+      check holds the packet to its acquisition manifest and reads the receipt back.
+    replay_status: passed
+    verifiers:
+      - V-evand-verify-cert-py
+      - V-evand-verify-cert2-py
+      - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 229 that T-199 cites, with its four controls
+        checked: 1
+        of: 1
+    limitations: >-
+      The producer's own checkers re-run: they establish reproducibility, not
+      independence, and move no rung; T-199's rungs rest on the independent routes. The
+      two checkers share their author, their parse and their certificate format, so
+      neither is independent of the other. Both decide squares strictly inside the open
+      box and disjoint closed squares. A run of the same checkers on 18 October 2026 was
+      not kept; this one replaces it. Finite feasibility only.
+    source_reviewed: '2026-10-23'
   - id: E-evand-659-n236-report
     claim: upper-bound
     scope: {n_values: [236]}
