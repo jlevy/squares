@@ -2422,6 +2422,58 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
         ),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/algebraic_witness_reports.py",
+            "packing/devtools/build_known_best_atlas.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/exact_sides.py",
+            "packing/devtools/regularize_evand.py",
+            "packing/devtools/render_recent_results.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-207.md",
+            "packing/frontier/n-295.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The house writer's algebraic side and the adoption of the nine algebraic "
+            "houses of 23 October 2026 (think-ot5c: T-174 at 70, 153 and 207, T-193 at "
+            "102, 123, 258, 259, 295 and 302), their regularization runs, settlements and "
+            "re-renders, against main c1115c095 (#749): rendered at link revision e0c2bf25 "
+            "into empty site directories, twice from this tree at e0c2bf25 and twice from "
+            "main's (69 files each), render_n11_lower_bounds_explainer, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all four. "
+            "Measured before at 1a2a7d47, with the lapsed views still settled on row 4, "
+            "with the same outcome. No PDF was printed; each prints from that HTML. "
+            "Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
         paths=("packing/frontier/results.yaml",),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
