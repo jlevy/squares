@@ -5139,12 +5139,12 @@ issues:
       not_registered: >-
         A third party's second decision of s40-new-supports's continuous cover, not a bound of its
         own: code distinct from the release's kernel but the same method in outline, as its author
-        says, built on this repository's sqverify-fast crate. Not retained, reviewed, built or
-        replayed here: think-xzob owns all four, and its replay waits on an owner budget. wand125's
-        runs stay a third party's report until a run directory with receipts is published or the
-        mode is replayed here.
+        says, built on this repository's sqverify-fast crate. Retained (v3 and v4), reviewed for
+        soundness and built here on 23 October 2026 (think-xzob, #752); its replay of the n = 40
+        examples is think-flxm's and waits on an owner budget. wand125's runs stay a third party's
+        report until a run directory with receipts is published or the mode is replayed here.
       queued: true
-      bead: think-xzob
+      bead: think-flxm
     beads:
     - think-3oi5
     - think-xms6
@@ -7295,7 +7295,7 @@ issues:
     - think-tln9
     - think-flxm
     - think-0arj
-    answer_bead: think-xzob
+    answer_bead: think-flxm
     replies:
     - url: https://github.com/jlevy/squares/issues/533#issuecomment-6206055919
       date: '2026-10-16'
