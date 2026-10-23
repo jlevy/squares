@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-22'
+last_reviewed: '2026-10-23'
 verifiers:
   - id: V-evand-verify-exact
     program: verify_exact.py
@@ -5092,3 +5092,155 @@ verifiers:
     note: >-
       Measures the identity statement of issue 678's comment of 19 October; no evidence
       entry cites it. Its log is the records lane's rerun of 20 October 2026, unchanged.
+
+  - id: V-wand125-446-review-premises
+    program: premises.py, custody.py, crate_identity.py and net_cover.py (with t233lib.py)
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes, apart from the crate, the tools and the source, every exact premise of
+      a format M candidate on its declared net, re-derives the release packet's custody
+      records from the bytes, compares the source's archived verifier with this
+      repository's crate by file digest, and checks the net's orientation coverage by
+      direct exact geometry.
+    source:
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/premises.py
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/custody.py
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/crate_identity.py
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/net_cover.py
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane c-review-t233-math of the 23 October
+            intake pass (think-bwis), tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers
+          naming Claude, and the crate the source adapted was written by a Claude agent of
+          this project (lane W2). Written in files of their own that import nothing from
+          the crate, the tools or the source.
+      note: >-
+        Written from this repository's SOUNDNESS.md, the measure verifier specification's
+        section 1 and the source's SPEC.md and README, and compared with the source's
+        receipts and logs. Not read: the source's adapted crate (pinned, unopened) or check
+        script, this repository's sqverify_fast source, the census driver,
+        fine_net_followup.py, audit_wand125_declared_net.py, check_sqverify_fast.py, or any
+        earlier review of these four certificates.
+    note: >-
+      Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the
+      release packet's review/review-2026-10-23/ with its README, which records each
+      program's SHA-256 as it ran, and receipts.
+
+  - id: V-wand125-446-review-axis-decision
+    program: axis_decide.py (with t233lib.py)
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic, interval-certified]
+    role: decides
+    summary: >-
+      Decides net index 0 of a format M rectangle measure completely: the least capture of
+      the axis-parallel core over the per-bin quadrant is a least value over the event
+      grid's vertices, evaluated from exact int64 overlaps by one binary64 matrix product
+      under an a priori error bound and compared with the threshold exactly, the smallest
+      vertices again in fractions.
+    source:
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/axis_decide.py
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane c-review-t233-math of the 23 October
+            intake pass (think-bwis), tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers
+          naming Claude, and the crate the source adapted was written by a Claude agent of
+          this project (lane W2). Written in files of their own that import nothing from
+          the crate, the tools or the source.
+      note: >-
+        Written from this repository's SOUNDNESS.md, the measure verifier specification's
+        section 1 and the source's SPEC.md and README, and compared with the source's
+        receipts and logs. Not read: the source's adapted crate (pinned, unopened) or check
+        script, this repository's sqverify_fast source, the census driver,
+        fine_net_followup.py, audit_wand125_declared_net.py, check_sqverify_fast.py, or any
+        earlier review of these four certificates.
+    note: >-
+      Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the
+      release packet's review/review-2026-10-23/ with its README, which records each
+      program's SHA-256 as it ran, and receipts.
+
+  - id: V-wand125-446-review-exact-capture
+    program: t233lib.exact_capture, driven by receipts_check.py and direction_sample.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The exact mass a closed core at a given centre and net angle captures from a format M
+      measure, by Sutherland-Hodgman clipping of the core against each D4 image in
+      fractions. Decides the capture at the poses it evaluates: every least-bound box
+      centre and axis argmin of the source's runs, the source's control witnesses (equal to
+      its exact values as fractions at 124 of 124 oblique poses), and the end points of an
+      independent search at 32 sampled directions per certificate.
+    source:
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/receipts_check.py
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/direction_sample.py
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane c-review-t233-math of the 23 October
+            intake pass (think-bwis), tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers
+          naming Claude, and the crate the source adapted was written by a Claude agent of
+          this project (lane W2). Written in files of their own that import nothing from
+          the crate, the tools or the source.
+      note: >-
+        Written from this repository's SOUNDNESS.md, the measure verifier specification's
+        section 1 and the source's SPEC.md and README, and compared with the source's
+        receipts and logs. Not read: the source's adapted crate (pinned, unopened) or check
+        script, this repository's sqverify_fast source, the census driver,
+        fine_net_followup.py, audit_wand125_declared_net.py, check_sqverify_fast.py, or any
+        earlier review of these four certificates.
+    note: >-
+      Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the
+      release packet's review/review-2026-10-23/ with its README, which records each
+      program's SHA-256 as it ran, and receipts.

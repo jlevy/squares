@@ -102,16 +102,34 @@ controls the records lane requires.
 | 26 | 709.1, 12 | 8,158 | 663,387,112 | 2,794 |
 | 27 | 1,061.8, 12 | 12,676 | 648,972,154 | 4,380 |
 
+## The Stage 4 Review
+
+The [mathematical review of 23 October](../../../../docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md)
+accepts all four certificates, with no blocking or major finding. Its programs, README
+and receipts are in [`review/review-2026-10-23/`](review/review-2026-10-23/README.md):
+every exact premise recomputed apart from the crate, each axis direction decided
+completely, the source’s logs read exactly and 32 sampled directions per count evaluated
+exactly. It decides no other direction; coverage there rests on the source’s runs until
+the census.
+
+**Control-log filename (F-6).** Each directory’s `README.md` lists
+`check2/control.jsonl.gz`; the asset holds `check2/control-197_200.jsonl.gz`, which
+`release/` retains. This affects discovery only, and the archived README and its digest
+are unchanged; the correction was asked of the author for the 16 October bundles on 19
+October, and the same note goes to the author for these four.
+
 ## The Price of a Complete Replay
 
-The census route of the 6 October soundness review, a capture at every direction and
-the whole-net controls, costs about twice each receipt’s direction CPU: 12.54
-CPU-hours for the four at the ratio of 0.689 to the source that the n31 sample measured
+The census route of the 6 October soundness review is a capture at every direction and
+the whole-net controls. The review prices the four at 10.5 to 19.2 CPU-hours: 1.4 to
+2.7 at n = 19, 2.3 to 4.6 at n = 20, 3.1 to 4.8 at n = 26 and 3.7 to 7.0 at n = 27.
+Each capture is priced by the ratio of 0.689 to the source that the n31 sample measured
 on this host on 23 October
-([`wand125-fine-net-n31-2026-10-11`](../wand125-fine-net-n31-2026-10-11/README.md)),
-and 18.21 at the source’s own CPU; 1.4 to 2.0 at n = 19, 3.1 to 4.6 at n = 20 and
-26, and 4.9 to 7.0 at n = 27. The census reads each candidate from `release/`; the
-replays are owned by think-ndvg.
+([`wand125-fine-net-n31-2026-10-11`](../wand125-fine-net-n31-2026-10-11/README.md)) and
+by node count at that sample’s 18.6 microseconds per node, since the source’s n = 19 run
+used 6 threads and the others 12; the controls at 10 to 40 percent of the capture, as at
+n = 84, 85 and 68. The census reads each candidate from `release/`; the replays are
+owned by think-ndvg.
 
 ## Sources and Notices
 

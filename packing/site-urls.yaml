@@ -18761,7 +18761,7 @@ urls:
       published: '2026-10-08'
     builds_on: null
     evidence:
-    - E-wand125-fine-net-lower-bounds-446-report
+    - E-wand125-fine-net-446-n19-n20-n26-report
     - E-wand125-fine-net-n27-5655-followup-report
     artifacts:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
@@ -18779,6 +18779,8 @@ urls:
     - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n20.json
     - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n26.json
     - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n27.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md
+    - docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md
     - packing/devtools/fine_net_followup.py
 - path: results.html
   canonical: results.html

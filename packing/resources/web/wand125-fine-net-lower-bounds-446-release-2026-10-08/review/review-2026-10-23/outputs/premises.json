@@ -1,0 +1,528 @@
+{
+ "cases": {
+  "19": {
+   "certificate": "mixed_n19_L48275",
+   "claim": {
+    "B": "4999/5000",
+    "B_is_4999_over_5000": true,
+    "below_upper_bound_on_main": true,
+    "file_keys": [
+     "B",
+     "L",
+     "n",
+     "points",
+     "proof_net",
+     "rectangles",
+     "total_mass"
+    ],
+    "gain_over_case_record": "1/400",
+    "n_matches": true,
+    "net_is_step_1_5002_last_2072": true,
+    "net_keys": [
+     "last",
+     "step"
+    ],
+    "side": "1931/400",
+    "side_decimal_text_equivalent": 4.8275,
+    "side_matches_register": true
+   },
+   "custody": {
+    "candidate_digest_reproduced_by": [
+     "sorted_compact",
+     "sorted_compact_ascii_false"
+    ],
+    "decompressed_bytes": 97586,
+    "decompressed_sha256": "20dcda3541e139f79a9aec6e3bd469bb5dc8ccbb2c837aa18d49a0e708e5fe90",
+    "matches_check2_receipt_file_sha256": true,
+    "matches_check2_receipt_input_sha256": true,
+    "matches_prepublication_input_sha256": true,
+    "matches_retention_record": true,
+    "source_candidate_digest": "7a292c496d287d9eeac7738a220baf8791743885285bafc7735dd00ab618e070",
+    "stored_bytes": 19209,
+    "stored_sha256": "b66957a9defece0b6cec850146a883319a72e08bb864f391959505d589407235"
+   },
+   "field_orders": {
+    "x1x2y1y2": {
+     "inside_K": 342,
+     "positive_area": 342,
+     "rows": 347
+    },
+    "x1y1x2y2": {
+     "inside_K": 347,
+     "positive_area": 347,
+     "rows": 347
+    }
+   },
+   "measure": {
+    "all_hold": true,
+    "checks": {
+     "eight_times_densest_row_at_most_2_pow_32": true,
+     "every_expanded_rectangle_inside_K": true,
+     "every_mass_positive": true,
+     "expanded_density_at_most_2_pow_96": true,
+     "expanded_integrates_to_total_mass": true,
+     "listed_total_equals_total_mass": true,
+     "points_empty": true,
+     "rows_at_most_1e6": true,
+     "side_at_most_1000": true,
+     "total_mass_below_n": true,
+     "total_mass_is_n_minus_1e-5": true
+    },
+    "facts": {
+     "coincident_images_merged": 0,
+     "expanded_distinct_rectangles": 2776,
+     "listed_rows": 347,
+     "listed_total": "1899999/100000",
+     "mass_gap_n_minus_M": "1/100000",
+     "max_expanded_density_decimal": 41612.803473108805,
+     "max_row_density_decimal": 332902.42778487044,
+     "min_row_mass_decimal": 2.9118511551162332e-05,
+     "total_mass": "1899999/100000"
+    }
+   },
+   "net": {
+    "all_hold": true,
+    "checks": {
+     "a_positive_step_and_count_in_range": true,
+     "b_B_times_1_plus_D_below_1": true,
+     "bins_reach_tan_pi_8": true,
+     "c_last_tangent_past_tan_pi_8": true,
+     "core_inside_K_at_every_domain_corner": true,
+     "d_last_tangent_at_most_half": true,
+     "e_tangent_form_below_1": true,
+     "every_per_bin_domain_nonempty": true,
+     "first_node_is_axis": true,
+     "last_bin_lower_end_below_tan_pi_8": true,
+     "sharp_extent_at_half_step_below_1": true
+    },
+    "facts": {
+     "B_times_1_plus_D": "25009997/25010000",
+     "at_node": 1,
+     "count": 2073,
+     "endpoint_polynomial": "367/6255001",
+     "last": 2072,
+     "last_bin_lower_end": "4143/10004",
+     "last_bin_lower_end_polynomial": "-22423/100080016",
+     "last_tangent": "1036/2501",
+     "least_domain_width_U_r_minus_L_over_2": "32015115503/18759114400",
+     "least_domain_width_decimal": 1.706643225279334,
+     "least_rho_a_r_minus_half_core_extent": 1.0994302209440976e-07,
+     "margin_1_minus_B_times_1_plus_D": "3/25010000",
+     "per_edge_margin": "3/50020000",
+     "sharp_extent_at_half_step": "500400014977/500400085000",
+     "step": "1/5002",
+     "tangent_form": "500400014977/500400075000"
+    }
+   },
+   "source_summary_premises_agree": {
+    "B": true,
+    "D": true,
+    "L": true,
+    "angle_count": true,
+    "centre_domain_per_bin": true,
+    "expanded_points_zero": true,
+    "expanded_rectangles": true,
+    "expanded_segments_zero": true,
+    "format_M": true,
+    "mass_below_n": true,
+    "mass_exact": true,
+    "source_rectangles": true
+   },
+   "verdict": "PREMISES_HOLD"
+  },
+  "20": {
+   "certificate": "mixed_n20_L49125",
+   "claim": {
+    "B": "4999/5000",
+    "B_is_4999_over_5000": true,
+    "below_upper_bound_on_main": true,
+    "file_keys": [
+     "B",
+     "L",
+     "n",
+     "points",
+     "proof_net",
+     "rectangles",
+     "total_mass"
+    ],
+    "gain_over_case_record": "3/400",
+    "n_matches": true,
+    "net_is_step_1_5002_last_2072": true,
+    "net_keys": [
+     "last",
+     "step"
+    ],
+    "side": "393/80",
+    "side_decimal_text_equivalent": 4.9125,
+    "side_matches_register": true
+   },
+   "custody": {
+    "candidate_digest_reproduced_by": [
+     "sorted_compact",
+     "sorted_compact_ascii_false"
+    ],
+    "decompressed_bytes": 134063,
+    "decompressed_sha256": "dc6321dd0478625ef0a164749754657331c73ecfdf7212523edb3d0f2dfd7187",
+    "matches_check2_receipt_file_sha256": true,
+    "matches_check2_receipt_input_sha256": true,
+    "matches_prepublication_input_sha256": true,
+    "matches_retention_record": true,
+    "source_candidate_digest": "9cf12db032a79ff15140c8333a990db40eb039bd0d41fd7a477e33129d4d8f11",
+    "stored_bytes": 26093,
+    "stored_sha256": "88b94e7ca38ae37505bebbd80e5fd3703e02967345ae9a38d8b72692df3bf0e8"
+   },
+   "field_orders": {
+    "x1x2y1y2": {
+     "inside_K": 464,
+     "positive_area": 464,
+     "rows": 471
+    },
+    "x1y1x2y2": {
+     "inside_K": 471,
+     "positive_area": 471,
+     "rows": 471
+    }
+   },
+   "measure": {
+    "all_hold": true,
+    "checks": {
+     "eight_times_densest_row_at_most_2_pow_32": true,
+     "every_expanded_rectangle_inside_K": true,
+     "every_mass_positive": true,
+     "expanded_density_at_most_2_pow_96": true,
+     "expanded_integrates_to_total_mass": true,
+     "listed_total_equals_total_mass": true,
+     "points_empty": true,
+     "rows_at_most_1e6": true,
+     "side_at_most_1000": true,
+     "total_mass_below_n": true,
+     "total_mass_is_n_minus_1e-5": true
+    },
+    "facts": {
+     "coincident_images_merged": 0,
+     "expanded_distinct_rectangles": 3768,
+     "listed_rows": 471,
+     "listed_total": "1999999/100000",
+     "mass_gap_n_minus_M": "1/100000",
+     "max_expanded_density_decimal": 88324.61196081755,
+     "max_row_density_decimal": 706596.8956865404,
+     "min_row_mass_decimal": 1.307424569563879e-05,
+     "total_mass": "1999999/100000"
+    }
+   },
+   "net": {
+    "all_hold": true,
+    "checks": {
+     "a_positive_step_and_count_in_range": true,
+     "b_B_times_1_plus_D_below_1": true,
+     "bins_reach_tan_pi_8": true,
+     "c_last_tangent_past_tan_pi_8": true,
+     "core_inside_K_at_every_domain_corner": true,
+     "d_last_tangent_at_most_half": true,
+     "e_tangent_form_below_1": true,
+     "every_per_bin_domain_nonempty": true,
+     "first_node_is_axis": true,
+     "last_bin_lower_end_below_tan_pi_8": true,
+     "sharp_extent_at_half_step_below_1": true
+    },
+    "facts": {
+     "B_times_1_plus_D": "25009997/25010000",
+     "at_node": 1,
+     "count": 2073,
+     "endpoint_polynomial": "367/6255001",
+     "last": 2072,
+     "last_bin_lower_end": "4143/10004",
+     "last_bin_lower_end_polynomial": "-22423/100080016",
+     "last_tangent": "1036/2501",
+     "least_domain_width_U_r_minus_L_over_2": "6562475573/3751822880",
+     "least_domain_width_decimal": 1.7491432252793342,
+     "least_rho_a_r_minus_half_core_extent": 1.0994302209440976e-07,
+     "margin_1_minus_B_times_1_plus_D": "3/25010000",
+     "per_edge_margin": "3/50020000",
+     "sharp_extent_at_half_step": "500400014977/500400085000",
+     "step": "1/5002",
+     "tangent_form": "500400014977/500400075000"
+    }
+   },
+   "source_summary_premises_agree": {
+    "B": true,
+    "D": true,
+    "L": true,
+    "angle_count": true,
+    "centre_domain_per_bin": true,
+    "expanded_points_zero": true,
+    "expanded_rectangles": true,
+    "expanded_segments_zero": true,
+    "format_M": true,
+    "mass_below_n": true,
+    "mass_exact": true,
+    "source_rectangles": true
+   },
+   "verdict": "PREMISES_HOLD"
+  },
+  "26": {
+   "certificate": "mixed_n26_L5555",
+   "claim": {
+    "B": "4999/5000",
+    "B_is_4999_over_5000": true,
+    "below_upper_bound_on_main": true,
+    "file_keys": [
+     "B",
+     "L",
+     "n",
+     "points",
+     "proof_net",
+     "rectangles",
+     "total_mass"
+    ],
+    "gain_over_case_record": "1/100",
+    "n_matches": true,
+    "net_is_step_1_5002_last_2072": true,
+    "net_keys": [
+     "last",
+     "step"
+    ],
+    "side": "1111/200",
+    "side_decimal_text_equivalent": 5.555,
+    "side_matches_register": true
+   },
+   "custody": {
+    "candidate_digest_reproduced_by": [
+     "sorted_compact",
+     "sorted_compact_ascii_false"
+    ],
+    "decompressed_bytes": 175432,
+    "decompressed_sha256": "a3a3d93b81e201a4fdc8c454a929ad3d20eb10875eab46611302a796256ea9a3",
+    "matches_check2_receipt_file_sha256": true,
+    "matches_check2_receipt_input_sha256": true,
+    "matches_prepublication_input_sha256": true,
+    "matches_retention_record": true,
+    "source_candidate_digest": "5cd188ae7882db6e1c4bfd1c749570cb578dbff9d329c9e1d6ef5c658908511f",
+    "stored_bytes": 33816,
+    "stored_sha256": "874dd62f9e33a95d8193aef5690faf3352ff027a5dea978761dda1e6cf14cefd"
+   },
+   "field_orders": {
+    "x1x2y1y2": {
+     "inside_K": 606,
+     "positive_area": 606,
+     "rows": 615
+    },
+    "x1y1x2y2": {
+     "inside_K": 615,
+     "positive_area": 615,
+     "rows": 615
+    }
+   },
+   "measure": {
+    "all_hold": true,
+    "checks": {
+     "eight_times_densest_row_at_most_2_pow_32": true,
+     "every_expanded_rectangle_inside_K": true,
+     "every_mass_positive": true,
+     "expanded_density_at_most_2_pow_96": true,
+     "expanded_integrates_to_total_mass": true,
+     "listed_total_equals_total_mass": true,
+     "points_empty": true,
+     "rows_at_most_1e6": true,
+     "side_at_most_1000": true,
+     "total_mass_below_n": true,
+     "total_mass_is_n_minus_1e-5": true
+    },
+    "facts": {
+     "coincident_images_merged": 4,
+     "expanded_distinct_rectangles": 4916,
+     "listed_rows": 615,
+     "listed_total": "2599999/100000",
+     "mass_gap_n_minus_M": "1/100000",
+     "max_expanded_density_decimal": 40316.84176479467,
+     "max_row_density_decimal": 322534.73411835736,
+     "min_row_mass_decimal": 8.184266811255647e-07,
+     "total_mass": "2599999/100000"
+    }
+   },
+   "net": {
+    "all_hold": true,
+    "checks": {
+     "a_positive_step_and_count_in_range": true,
+     "b_B_times_1_plus_D_below_1": true,
+     "bins_reach_tan_pi_8": true,
+     "c_last_tangent_past_tan_pi_8": true,
+     "core_inside_K_at_every_domain_corner": true,
+     "d_last_tangent_at_most_half": true,
+     "e_tangent_form_below_1": true,
+     "every_per_bin_domain_nonempty": true,
+     "first_node_is_axis": true,
+     "last_bin_lower_end_below_tan_pi_8": true,
+     "sharp_extent_at_half_step_below_1": true
+    },
+    "facts": {
+     "B_times_1_plus_D": "25009997/25010000",
+     "at_node": 1,
+     "count": 2073,
+     "endpoint_polynomial": "367/6255001",
+     "last": 2072,
+     "last_bin_lower_end": "4143/10004",
+     "last_bin_lower_end_polynomial": "-22423/100080016",
+     "last_tangent": "1036/2501",
+     "least_domain_width_U_r_minus_L_over_2": "19419371683/9379557200",
+     "least_domain_width_decimal": 2.070393225279334,
+     "least_rho_a_r_minus_half_core_extent": 1.0994302209440976e-07,
+     "margin_1_minus_B_times_1_plus_D": "3/25010000",
+     "per_edge_margin": "3/50020000",
+     "sharp_extent_at_half_step": "500400014977/500400085000",
+     "step": "1/5002",
+     "tangent_form": "500400014977/500400075000"
+    }
+   },
+   "source_summary_premises_agree": {
+    "B": true,
+    "D": true,
+    "L": true,
+    "angle_count": true,
+    "centre_domain_per_bin": true,
+    "expanded_points_zero": true,
+    "expanded_rectangles": true,
+    "expanded_segments_zero": true,
+    "format_M": true,
+    "mass_below_n": true,
+    "mass_exact": true,
+    "source_rectangles": true
+   },
+   "verdict": "PREMISES_HOLD"
+  },
+  "27": {
+   "certificate": "mixed_n27_L5655",
+   "claim": {
+    "B": "4999/5000",
+    "B_is_4999_over_5000": true,
+    "below_upper_bound_on_main": true,
+    "file_keys": [
+     "B",
+     "L",
+     "n",
+     "points",
+     "proof_net",
+     "rectangles",
+     "total_mass"
+    ],
+    "gain_over_case_record": "23/2000",
+    "n_matches": true,
+    "net_is_step_1_5002_last_2072": true,
+    "net_keys": [
+     "last",
+     "step"
+    ],
+    "side": "1131/200",
+    "side_decimal_text_equivalent": 5.655,
+    "side_matches_register": true
+   },
+   "custody": {
+    "candidate_digest_reproduced_by": [
+     "sorted_compact",
+     "sorted_compact_ascii_false"
+    ],
+    "decompressed_bytes": 202813,
+    "decompressed_sha256": "971988936fe73cf62ffbd8645f9aad5006b7bb297d3a5bfa5d9226d75bec6ec8",
+    "matches_check2_receipt_file_sha256": true,
+    "matches_check2_receipt_input_sha256": true,
+    "matches_prepublication_input_sha256": true,
+    "matches_retention_record": true,
+    "source_candidate_digest": "3bd905d30d38a83168ae16009a10c05ec8e50256f33c2050da7692ee5826e566",
+    "stored_bytes": 39758,
+    "stored_sha256": "db29fb636ef00f50030be8b7b1a080bd7b98714888d5cfb3328ad413535dc9a2"
+   },
+   "field_orders": {
+    "x1x2y1y2": {
+     "inside_K": 695,
+     "positive_area": 695,
+     "rows": 714
+    },
+    "x1y1x2y2": {
+     "inside_K": 714,
+     "positive_area": 714,
+     "rows": 714
+    }
+   },
+   "measure": {
+    "all_hold": true,
+    "checks": {
+     "eight_times_densest_row_at_most_2_pow_32": true,
+     "every_expanded_rectangle_inside_K": true,
+     "every_mass_positive": true,
+     "expanded_density_at_most_2_pow_96": true,
+     "expanded_integrates_to_total_mass": true,
+     "listed_total_equals_total_mass": true,
+     "points_empty": true,
+     "rows_at_most_1e6": true,
+     "side_at_most_1000": true,
+     "total_mass_below_n": true,
+     "total_mass_is_n_minus_1e-5": true
+    },
+    "facts": {
+     "coincident_images_merged": 16,
+     "expanded_distinct_rectangles": 5696,
+     "listed_rows": 714,
+     "listed_total": "2699999/100000",
+     "mass_gap_n_minus_M": "1/100000",
+     "max_expanded_density_decimal": 83031.12164582175,
+     "max_row_density_decimal": 664248.973166574,
+     "min_row_mass_decimal": 2.911915722821683e-06,
+     "total_mass": "2699999/100000"
+    }
+   },
+   "net": {
+    "all_hold": true,
+    "checks": {
+     "a_positive_step_and_count_in_range": true,
+     "b_B_times_1_plus_D_below_1": true,
+     "bins_reach_tan_pi_8": true,
+     "c_last_tangent_past_tan_pi_8": true,
+     "core_inside_K_at_every_domain_corner": true,
+     "d_last_tangent_at_most_half": true,
+     "e_tangent_form_below_1": true,
+     "every_per_bin_domain_nonempty": true,
+     "first_node_is_axis": true,
+     "last_bin_lower_end_below_tan_pi_8": true,
+     "sharp_extent_at_half_step_below_1": true
+    },
+    "facts": {
+     "B_times_1_plus_D": "25009997/25010000",
+     "at_node": 1,
+     "count": 2073,
+     "endpoint_polynomial": "367/6255001",
+     "last": 2072,
+     "last_bin_lower_end": "4143/10004",
+     "last_bin_lower_end_polynomial": "-22423/100080016",
+     "last_tangent": "1036/2501",
+     "least_domain_width_U_r_minus_L_over_2": "19888349543/9379557200",
+     "least_domain_width_decimal": 2.1203932252793343,
+     "least_rho_a_r_minus_half_core_extent": 1.0994302209440976e-07,
+     "margin_1_minus_B_times_1_plus_D": "3/25010000",
+     "per_edge_margin": "3/50020000",
+     "sharp_extent_at_half_step": "500400014977/500400085000",
+     "step": "1/5002",
+     "tangent_form": "500400014977/500400075000"
+    }
+   },
+   "source_summary_premises_agree": {
+    "B": true,
+    "D": true,
+    "L": true,
+    "angle_count": true,
+    "centre_domain_per_bin": true,
+    "expanded_points_zero": true,
+    "expanded_rectangles": true,
+    "expanded_segments_zero": true,
+    "format_M": true,
+    "mass_below_n": true,
+    "mass_exact": true,
+    "source_rectangles": true
+   },
+   "verdict": "PREMISES_HOLD"
+  }
+ },
+ "cpu_seconds": 1.091,
+ "kind": "t233-review-premises/v1",
+ "verdict": "ALL_PREMISES_HOLD",
+ "wall_seconds": 3.232
+}

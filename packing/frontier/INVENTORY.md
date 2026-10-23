@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **717** evidence records. **404** are formal; **396** of those were established here. **10** are samples, counted separately.
-- **296** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **721** evidence records. **406** are formal; **398** of those were established here. **11** are samples, counted separately.
+- **297** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -488,7 +488,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-gupta-438-exact-feasibility` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | not recorded | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-gupta-complete-custody` |
 | `E-couzo-451-rational-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-couzo-451-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | not recorded | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-check-half-angle-area`, `V-evand-exact-certificates`, `V-evand-arrangement-receipts` |
-| `E-wand125-fine-net-n27-5655-followup-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-wand125-fine-net-n27-5655-followup-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-daniel-375-dated-105-130-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-daniel-375-dated-292-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-couzo-extended-range-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | no code | not recorded | - |
@@ -740,13 +740,17 @@ results, it is a statement about what this repository has itself examined.
 | `E-couzo-5a299b4-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-mishapolk-732-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-wand125-fine-net-n31-59775-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
+| `E-wand125-fine-net-446-n19-n20-n26-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
+| `E-wand125-fine-net-446-review-premises` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full: the exact premises of each of the four candidates: custody, the claim, the field order, the measure and its D4 expansion, lemma N0 (a) to (e), the sharp extent, the last bin, the per-bin domains, F3's caps and the semantic digest; the net's coverage at 10,363 exact orientations; the archived verifier's files against this repository's crate by digest | `V-wand125-446-review-premises` |
+| `E-wand125-fine-net-446-review-axis-direction` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | sample, 4 of 8,292: net directions (index 0 of each of the four certificates, decided over its whole per-bin quadrant) | `V-wand125-446-review-axis-decision` |
+| `E-wand125-fine-net-446-review-captures` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full, 10,596 of 10,596: exact captures at the listed poses only: every rotated direction's least-bound box centre (8,288), the axis argmins (4), the 197/200 control witnesses (128, 124 equal to the source's fractions) and the end points of the searches at 128 sampled directions; no direction's domain | `V-wand125-446-review-exact-capture` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 299, verified 413
-- **method**: exact-algebraic 223, interval-certified 173, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 299
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 656
-- **relationship to the producer's code**: generator 5, independent-implementation 252, not-applicable 31, same-implementation 392, shared-components 31, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 300, verified 416
+- **method**: exact-algebraic 225, interval-certified 174, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 300
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 660
+- **relationship to the producer's code**: generator 5, independent-implementation 253, not-applicable 33, same-implementation 393, shared-components 31, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

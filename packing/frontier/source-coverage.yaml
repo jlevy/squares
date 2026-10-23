@@ -2975,6 +2975,7 @@ sources:
   - resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
   evidence:
   - E-wand125-fine-net-lower-bounds-446-report
+  - E-wand125-fine-net-446-n19-n20-n26-report
   notes: All seven original archives and sealed source/log/member identities retained outside live Git.
     Conditional maintained input/kernel review accepted; no native replay, numeric claims_record or
     standing-bound selection. Whole-net controls/custody adapter and explicit reviewed hosted budget

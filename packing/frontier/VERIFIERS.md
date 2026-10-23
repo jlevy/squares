@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **188** programs: **51** external and **137** first-party; **129** decide claims and **59** check premises.
-- **580** of **717** evidence entries name the programs that verified them: 278 reproduced with the producer’s code, 252 independently re-implemented, 31 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
+- **191** programs: **51** external and **140** first-party; **131** decide claims and **60** check premises.
+- **584** of **721** evidence entries name the programs that verified them: 279 reproduced with the producer’s code, 253 independently re-implemented, 31 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -37,7 +37,7 @@ second implementation agrees.
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | Hosono | external | decides | 89 | 14 |
 | [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | Hosono | external | decides | 66 | 11 |
-| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | Hosono, adapting this repository's sqverify_fast | external | decides | 34 | 34 |
+| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | Hosono, adapting this repository's sqverify_fast | external | decides | 35 | 35 |
 | [`V-wand125-unified-linear-verify-cpp`](#v-wand125-unified-linear-verify-cpp) | unified_linear_verify.cpp | Hosono | external | decides | 8 | 5 |
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | Hosono | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | Hosono | external | decides | 5 | 1 |
@@ -220,6 +220,9 @@ second implementation agrees.
 | [`V-sq19-review-native-count`](#v-sq19-review-native-count) | count_native.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-acquire-source`](#v-acquire-source) | devtools.acquire_source | Squares Project (Levy) | first-party | premises | 3 | 2 |
 | [`V-couzo-678-review-identity`](#v-couzo-678-review-identity) | identity_260.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-wand125-446-review-premises`](#v-wand125-446-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-wand125-446-review-axis-decision`](#v-wand125-446-review-axis-decision) | axis_decide.py (with t233lib.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-wand125-446-review-exact-capture`](#v-wand125-446-review-exact-capture) | t233lib.exact_capture | Squares Project (Levy) | first-party | decides | 1 | 0 |
 
 ## By Program
 
@@ -503,6 +506,7 @@ The source's copy of this repository's sqverify_fast with one change, reading a 
 | `E-wand125-fine-net-n108-1062-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-216 |
 | `E-wand125-fine-net-n110-1073-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-217 |
 | `E-wand125-fine-net-n31-59775-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-232 |
+| `E-wand125-fine-net-446-n19-n20-n26-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-233 |
 
 ### `V-wand125-unified-linear-verify-cpp`
 
@@ -3822,6 +3826,54 @@ Compares three n = 260 packings, T-196's, the evand 14a9af8 seed and issue 678's
 - Note: Measures the identity statement of issue 678's comment of 19 October; no evidence entry cites it. Its log is the records lane's rerun of 20 October 2026, unchanged.
 
 No evidence entry names it yet.
+
+### `V-wand125-446-review-premises`
+
+**premises.py, custody.py, crate_identity.py and net_cover.py (with t233lib.py)** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes, apart from the crate, the tools and the source, every exact premise of a format M candidate on its declared net, re-derives the release packet's custody records from the bytes, compares the source's archived verifier with this repository's crate by file digest, and checks the net's orientation coverage by direct exact geometry.
+
+- Source: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/premises.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/premises.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/custody.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/custody.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/crate_identity.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/crate_identity.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/net_cover.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/net_cover.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-t233-math of the 23 October intake pass (think-bwis), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers naming Claude, and the crate the source adapted was written by a Claude agent of this project (lane W2). Written in files of their own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the release packet's review/review-2026-10-23/ with its README, which records each program's SHA-256 as it ran, and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-446-review-premises` | audited here | not applicable | full: the exact premises of each of the four candidates: custody, the claim, the field order, the measure and its D4 expansion, lemma N0 (a) to (e), the sharp extent, the last bin, the per-bin domains, F3's caps and the semantic digest; the net's coverage at 10,363 exact orientations; the archived verifier's files against this repository's crate by digest | - |
+
+### `V-wand125-446-review-axis-decision`
+
+**axis_decide.py (with t233lib.py)** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic, interval-certified
+
+Decides net index 0 of a format M rectangle measure completely: the least capture of the axis-parallel core over the per-bin quadrant is a least value over the event grid's vertices, evaluated from exact int64 overlaps by one binary64 matrix product under an a priori error bound and compared with the threshold exactly, the smallest vertices again in fractions.
+
+- Source: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/axis_decide.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/axis_decide.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-t233-math of the 23 October intake pass (think-bwis), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers naming Claude, and the crate the source adapted was written by a Claude agent of this project (lane W2). Written in files of their own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the release packet's review/review-2026-10-23/ with its README, which records each program's SHA-256 as it ran, and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-446-review-axis-direction` | replayed here | independently re-implemented, clean-room | sample, 4 of 8,292: net directions (index 0 of each of the four certificates, decided over its whole per-bin quadrant) | - |
+
+### `V-wand125-446-review-exact-capture`
+
+**t233lib.exact_capture, driven by receipts_check.py and direction_sample.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The exact mass a closed core at a given centre and net angle captures from a format M measure, by Sutherland-Hodgman clipping of the core against each D4 image in fractions. Decides the capture at the poses it evaluates: every least-bound box centre and axis argmin of the source's runs, the source's control witnesses (equal to its exact values as fractions at 124 of 124 oblique poses), and the end points of an independent search at 32 sampled directions per certificate.
+
+- Source: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/receipts_check.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/receipts_check.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/direction_sample.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/direction_sample.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-t233-math of the 23 October intake pass (think-bwis), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers naming Claude, and the crate the source adapted was written by a Claude agent of this project (lane W2). Written in files of their own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the release packet's review/review-2026-10-23/ with its README, which records each program's SHA-256 as it ran, and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-446-review-captures` | audited here | not applicable | full, 10,596 of 10,596: exact captures at the listed poses only: every rotated direction's least-bound box centre (8,288), the axis argmins (4), the 197/200 control witnesses (128, 124 equal to the source's fractions) and the end points of the searches at 128 sampled directions; no direction's domain | - |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
