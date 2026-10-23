@@ -1415,3 +1415,179 @@ def test_older_frozen_starts_recompute_their_grid_members_exactly() -> None:
     for n, member in grids:
         assert ledger.recomputed(n, member) == [{key: member[key] for key in SPAN_KEYS}]
     assert not any(member["kind"] == ledger.CONSTRUCTION for _, member in members)
+
+
+#: The owner's two rulings of 23 October 2026 as a ledger lists them (`Ruling`).
+RESTATEMENT_RULING = {"ruling": "restatement", "decided": "2026-10-23", "bead": "think-fwa9"}
+CLASSICAL_RULING = {
+    "ruling": "classical-constructions",
+    "decided": "2026-10-23",
+    "bead": "think-8krd",
+}
+#: What a ledger that applies neither answer says instead (`NotApplied`).
+NOT_APPLIED = [
+    {"ruling": "restatement", "reason": "a test that walks the rule before the answer"},
+    {"ruling": "classical-constructions", "reason": "a test that walks the grid alone"},
+]
+
+
+def _read_from_23_october() -> dict[str, Any]:
+    """`_minimal`, read on the day of the owner's answers, with its claim at 369."""
+    data = _minimal()
+    data["read_on"] = ledger.GOEBEL_FROM
+    data["reports"][0]["claims"] = [{"n": 369, "printed": "19.71", "rounding": "up"}]
+    return data
+
+
+def test_a_ledger_read_from_23_october_applies_both_answers_or_says_why() -> None:
+    """Review B of #754, B1: from `GOEBEL_FROM` a ledger with claims beyond the horizon
+    applies the restatement answer through its ruling, and Göbel's baseline through its
+    ruling or a start member `gather` froze, at every such count. An answer it does not
+    apply there is named under ``rulings_not_applied`` with the reason, or the check fails.
+    A ledger read earlier, or with no claim beyond the horizon, is checked as before."""
+    bare = _read_from_23_october()
+    (restates,) = ledger.problems(bare)
+    assert restates.startswith("read on 2026-10-23: the restatement answer is not applied")
+    assert "at n = 369" in restates
+    both = ledger.answer_problems(bare, [369], set())
+    assert both[0] == restates
+    assert both[1].startswith("read on 2026-10-23: Göbel's baseline is not applied")
+    assert "no frozen start member" in both[1]
+    # A start that holds Göbel's construction applies the baseline without the ruling.
+    assert ledger.answer_problems(bare, [369], {369}) == [restates]
+    ruled = {**bare, "rulings": [RESTATEMENT_RULING, CLASSICAL_RULING]}
+    assert ledger.problems(ruled) == []
+    assert ledger.answer_problems(ruled, [369], set()) == []
+    short = {**bare, "rulings": [{**RESTATEMENT_RULING, "through": 368}, CLASSICAL_RULING]}
+    (stops,) = ledger.answer_problems(short, [369], set())
+    assert "restatement answer is not applied at n = 369" in stops
+    said = {**bare, "rulings_not_applied": NOT_APPLIED}
+    assert ledger.problems(said) == []
+    assert ledger.answer_problems(said, [369], set()) == []
+    malformed = {
+        **bare,
+        "rulings_not_applied": [
+            {"ruling": "other", "reason": "why"},
+            {"ruling": "restatement", "reason": " "},
+            {"ruling": "restatement", "reason": "why"},
+        ],
+    }
+    assert ledger.problems(malformed) == [
+        "rulings_not_applied other: no such ruling",
+        "rulings_not_applied restatement: states no reason",
+        "rulings_not_applied restatement: listed twice",
+    ]
+    earlier = {**bare, "read_on": "2026-10-22"}
+    assert ledger.answer_problems(earlier, [369], set()) == []
+    inside = {**_minimal(), "read_on": ledger.GOEBEL_FROM}
+    assert ledger.answer_problems(inside, [100], set()) == []
+
+
+def test_check_refuses_a_ledger_read_from_23_october_that_applies_neither_answer(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review B of #754, B1, the negative control: a ledger read on 23 October 2026 that
+    lists neither ruling, over a start frozen without Göbel's construction, passed `check`
+    and would have recorded a restatement and a side above Göbel's. It now fails until it
+    applies both answers, its start holds the construction, or it says why not; the reasons
+    then render in its README."""
+    data = _read_from_23_october()
+    grid = ledger.beyond_member(369, {})
+    starts = ledger.starts_document(data["read_at_main"], {369: [grid]})
+
+    def write(ledger_data: dict[str, Any], start: dict[str, Any]) -> None:
+        (tmp_path / ledger.LEDGER).write_text(yaml.safe_dump(ledger_data), encoding="utf-8")
+        (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(start), encoding="utf-8")
+
+    write(data, starts)
+    assert ledger.main(["check", str(tmp_path)]) == 1
+    assert "the restatement answer is not applied" in capsys.readouterr().err
+    data["rulings"] = [RESTATEMENT_RULING]
+    write(data, starts)
+    assert ledger.main(["check", str(tmp_path)]) == 1
+    assert "Göbel's baseline is not applied at n = 369" in capsys.readouterr().err
+    with pytest.raises(ledger.LedgerError, match="Göbel's baseline is not applied"):
+        ledger.rendered(tmp_path)
+    held = ledger.starts_document(
+        data["read_at_main"], {369: [grid, ledger.construction_member(369)]}
+    )
+    write(data, held)
+    assert ledger.main(["check", str(tmp_path)]) == 0
+    data["rulings"] = [RESTATEMENT_RULING, CLASSICAL_RULING]
+    write(data, starts)
+    assert ledger.main(["check", str(tmp_path)]) == 0
+    data.pop("rulings")
+    data["rulings_not_applied"] = NOT_APPLIED
+    write(data, starts)
+    assert ledger.main(["check", str(tmp_path)]) == 0
+    readme = ledger.rendered(tmp_path)[ledger.README]
+    for item in NOT_APPLIED:
+        assert f"- **{item['ruling']}** is not applied here: {item['reason']}." in readme
+
+
+def test_the_issue_732_walk_applies_goebel_s_baseline_through_its_ruling() -> None:
+    """Review B of #754, B1: #732's walk, read on 23 October 2026, froze its starts before
+    the rule, so none holds Göbel's construction. Its ``classical-constructions`` ruling
+    through 1024 applies the baseline at every count it walks; without that ruling the
+    check would fail. Every other walk was read earlier."""
+    directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-issue732-20261023"
+    data, starts = ledger.load_walk(directory)
+    assert str(data["read_on"]) == ledger.GOEBEL_FROM
+    counts = ledger.counts_of(data)
+    held = ledger.construction_counts(starts)
+    assert not held
+    assert ledger.answer_problems(data, counts, held) == []
+    without = {
+        **data,
+        "rulings": [item for item in data["rulings"] if item["ruling"] != ledger.CLASSICAL],
+    }
+    (found,) = ledger.answer_problems(without, counts, held)
+    assert found.startswith("read on 2026-10-23: Göbel's baseline is not applied")
+    others = [
+        path
+        for path in (ledger.ROOT / "campaign/issue-intake").glob("upper-bounds-*")
+        if path != directory and (path / ledger.LEDGER).is_file()
+    ]
+    assert others
+    for path in others:
+        read_on = str(ledger.load_yaml(path / ledger.LEDGER)["read_on"])
+        assert read_on < ledger.GOEBEL_FROM, path.name
+
+
+def test_tree_drift_reports_goebel_s_member_only_from_23_october(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review B of #754, B2 and B3: `tree_drift` compares a frozen start with the one the
+    tree gives on the ledger's day. At 369, where the tree's start is the grid, a start
+    frozen as the grid has no drift for a ledger read on 22 October, and for one read on
+    23 October the tree adds Göbel's construction. `check --tree` reports drift without
+    failing, but fails where the tree gives no start, as above 1073 from 23 October."""
+    grid = ledger.beyond_member(369, {})
+    starts = ledger.starts_document(FROZEN_AT, {369: [grid]})
+    (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(starts), encoding="utf-8")
+
+    def read_on(day: str) -> None:
+        sources = {"format": ledger.SOURCES_FORMAT, "read_at_main": FROZEN_AT, "read_on": day}
+        (tmp_path / ledger.SOURCES).write_text(yaml.safe_dump(sources), encoding="utf-8")
+
+    read_on("2026-10-22")
+    assert ledger.tree_drift(tmp_path) == []
+    read_on(ledger.GOEBEL_FROM)
+    (drift,) = ledger.tree_drift(tmp_path)
+    assert drift == (
+        "n = 369: frozen the grid 20; on the tree the grid 20; "
+        f"{ledger.GOEBEL_LABEL} 19.707106781187"
+    )
+    data = _read_from_23_october()
+    data["read_at_main"] = FROZEN_AT
+    data["rulings"] = [RESTATEMENT_RULING, CLASSICAL_RULING]
+    (tmp_path / ledger.LEDGER).write_text(yaml.safe_dump(data), encoding="utf-8")
+    assert ledger.main(["check", "--tree", str(tmp_path)]) == 0
+    assert "1 counts where today's records give another start" in capsys.readouterr().out
+    data["reports"][0]["claims"][0]["n"] = 1074
+    (tmp_path / ledger.LEDGER).write_text(yaml.safe_dump(data), encoding="utf-8")
+    beyond = ledger.starts_document(FROZEN_AT, {1074: [ledger.beyond_member(1074, {})]})
+    (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(beyond), encoding="utf-8")
+    assert ledger.main(["check", str(tmp_path)]) == 0
+    assert ledger.main(["check", "--tree", str(tmp_path)]) == 1
+    assert "gives no side above 1073" in capsys.readouterr().err

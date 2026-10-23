@@ -489,8 +489,17 @@ record’s statement of the rule:
   of the answer (`intake_ledger.GOEBEL_FROM`) every reading takes it beyond 324: a start
   `gather` freezes holds it as a member, the claims importer compares each certificate
   with it (`upper_bound_reports.goebel_construction`), and so does the replay’s standing
-  side. A reading from before keeps what it froze, so the earlier ledgers and claim
-  records stand as written.
+  side. `intake_ledger check`, `render` and `gather` hold a ledger read from that day
+  with claims beyond 324 to both of that day’s answers (`answer_problems`). It lists the
+  `restatement` ruling through every such count, and takes Göbel’s construction at each
+  one through its `classical-constructions` ruling or a member of its frozen start.
+  Otherwise it names the answer it leaves out under `rulings_not_applied` with the
+  reason, which its README shows, or the check fails.
+  A reading from before keeps what it froze, so the earlier ledgers and claim records
+  stand as written. #732’s walk, read on the day of the answer, is the one frozen before
+  the rule: its `starts.yaml` holds no Göbel member, its `classical-constructions`
+  ruling seeds the construction at each count it walks instead, and `check --tree`
+  reports those counts as drift.
   The Fang inventory stays on recorded rows, since it measures the excess over what the
   record holds (think-a75a).
 - **A certificate its author withdrew from an issue is not a report** (think-8m4k): “a

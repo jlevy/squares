@@ -38,7 +38,10 @@ intake directory such as ``campaign/issue-intake/upper-bounds-20261014/``:
   three families the Kingbird catalogue states at that count or by deletion from a larger
   one, as the 15 October packet's retained program computes it (`GOEBEL_PROGRAM`), joins
   the start as an earlier report (`construction_side`). A ledger read before the rulings
-  names none and renders as it did;
+  names none and renders as it did. One read from the day of the answers (`GOEBEL_FROM`)
+  with claims beyond the horizon applies both at every such count, Göbel's through its
+  ruling or a start member ``gather`` froze, or names each it does not apply under
+  ``rulings_not_applied`` with the reason, which the render shows (`answer_problems`);
 - **owner decisions** the render lists without deciding, none of them a house: the
   earlier report holds a count, an exception moves nothing, and the house is the
   smallest validated side by the house rule (result-import.md, "The House Rule"). They
@@ -102,7 +105,7 @@ import re
 import subprocess
 import sys
 from collections import Counter
-from collections.abc import Callable, Iterable, Iterator, Mapping, Sequence
+from collections.abc import Callable, Collection, Iterable, Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from dataclasses import dataclass, field, replace
 from decimal import Decimal
@@ -188,7 +191,9 @@ GOEBEL_LABEL = "Göbel's construction"
 #: claims importer declaration read on or after it (`devtools.upper_bound_reports`) and
 #: a claim record so read (`devtools.beyond_horizon_replay.standing_sides`) take Göbel's
 #: construction into the standing side beyond the horizon (`goebel_baseline`); readings
-#: from before it stay as they were frozen (review A of #754, A2).
+#: from before it stay as they were frozen (review A of #754, A2). A ledger read on or after
+#: it applies both answers of that day beyond the horizon, or says why not
+#: (`answer_problems`; review B of #754, B1).
 GOEBEL_FROM = "2026-10-23"
 #: The exact comparison with Göbel's families every Göbel reading in the record uses: the
 #: 15 October packet's retained program, read from its path unchanged.
@@ -370,6 +375,14 @@ class Ruling(TypedDict):
     awaiting_owner: NotRequired[list[AwaitingOwner]]
 
 
+class NotApplied(TypedDict):
+    """An owner's answer a ledger read from `GOEBEL_FROM` does not apply at some count it
+    walks beyond the horizon, and why (`answer_problems`)."""
+
+    ruling: str
+    reason: str
+
+
 class Ledger(TypedDict):
     format: str
     read_at_main: str
@@ -382,6 +395,7 @@ class Ledger(TypedDict):
     cross_check: NotRequired[list[str]]
     other_items: list[OtherItem]
     rulings: NotRequired[list[Ruling]]
+    rulings_not_applied: NotRequired[list[NotApplied]]
 
 
 def _is_count(value: object) -> TypeIs[int]:
@@ -652,7 +666,11 @@ def problems(ledger: Mapping[str, Any]) -> list[str]:
             found.append(f"other item {item.get('issue')}: missing {sorted(absent)}")
     if not isinstance(ledger.get("cross_check", []), list):
         found.append("cross_check is not a list")
-    found.extend(_ruling_problems(ledger.get("rulings"), claimed))
+    ruled = _ruling_problems(ledger.get("rulings"), claimed)
+    ruled += _not_applied_problems(ledger.get("rulings_not_applied"))
+    found.extend(ruled)
+    if not ruled:
+        found.extend(answer_problems(ledger, [n for _, n in claimed], None))
     return found
 
 
@@ -687,6 +705,67 @@ def _ruling_problems(rulings: Any, claimed: set[tuple[str, int]]) -> list[str]:
                 found.append(f"{where} awaiting {key}: bead is not a think-xxxx id")
             if not str(item.get("reason") or "").strip():
                 found.append(f"{where} awaiting {key}: states no reason")
+    return found
+
+
+def _not_applied_problems(items: Any) -> list[str]:
+    """Every way a ledger's ``rulings_not_applied`` breaks its contract (`NotApplied`)."""
+    found: list[str] = []
+    seen: set[str] = set()
+    for item in _mappings(found, items, "rulings_not_applied"):
+        name = str(item.get("ruling"))
+        where = f"rulings_not_applied {name}"
+        if name not in RULINGS:
+            found.append(f"{where}: no such ruling")
+        if not str(item.get("reason") or "").strip():
+            found.append(f"{where}: states no reason")
+        if name in seen:
+            found.append(f"{where}: listed twice")
+        seen.add(name)
+    return found
+
+
+def answer_problems(
+    ledger: Mapping[str, Any], counts: Iterable[int], held: Collection[int] | None
+) -> list[str]:
+    """Where a ledger read from `GOEBEL_FROM` leaves an answer of that day unapplied at a
+    count it walks beyond the horizon, unsaid (review B of #754, B1).
+
+    The restatement answer is applied at a count its ``rulings`` entry reaches (`Ruling`,
+    ``through``). Göbel's baseline is applied where the ``classical-constructions`` entry
+    reaches, or where the start ``gather`` froze holds Göbel's construction: ``held`` are
+    those counts (`construction_counts`), None where the starts are not read, as in
+    `problems`, which leaves that half to `load_walk` and `gather`. An answer named under
+    ``rulings_not_applied`` with a reason (`NotApplied`) is not required. A ledger read
+    earlier, or with no claim beyond the horizon, has nothing to apply.
+    """
+    read_on = str(ledger.get("read_on"))
+    beyond = sorted({n for n in counts if n > HORIZON})
+    if not beyond or not _DATE.fullmatch(read_on) or not goebel_baseline(read_on):
+        return []
+    rulings = rulings_of(ledger)
+    said = {str(item.get("ruling")) for item in ledger.get("rulings_not_applied") or []}
+    asked = (
+        f"from {GOEBEL_FROM} a ledger beyond the horizon applies it at every count it walks "
+        "there, or says why under rulings_not_applied"
+    )
+    found: list[str] = []
+    unapplied = [n for n in beyond if not rulings.applies(rulings.restatement, n)]
+    if unapplied and RESTATEMENT not in said:
+        found.append(
+            f"read on {read_on}: the restatement answer is not applied at n = "
+            f"{_compress(unapplied)}, which no {RESTATEMENT} ruling reaches; {asked}"
+        )
+    if held is not None:
+        unapplied = [
+            n for n in beyond if not rulings.applies(rulings.classical, n) and n not in held
+        ]
+        if unapplied and CLASSICAL not in said:
+            found.append(
+                f"read on {read_on}: Göbel's baseline is not applied at n = "
+                f"{_compress(unapplied)}, which no {CLASSICAL} ruling reaches and no frozen "
+                f"start member holds; {asked}"
+            )
     return found
 
 
@@ -1518,6 +1597,11 @@ def load_starts(directory: Path, read_at_main: str) -> dict[int, list[Side]]:
     }
 
 
+def construction_counts(starts: Mapping[int, Sequence[Side]]) -> set[int]:
+    """The counts whose frozen start holds Göbel's construction (`construction_member`)."""
+    return {n for n, members in starts.items() if any(m.kind == CONSTRUCTION for m in members)}
+
+
 def starts_document(
     read_at_main: str, members: Mapping[int, list[StartMember]]
 ) -> dict[str, Any]:
@@ -2044,6 +2128,11 @@ def evaluate(ledger: Ledger, starts: Mapping[int, Sequence[Side]]) -> dict[str, 
     }
     if ledger.get("rulings"):
         verdicts["rulings"] = ruling_summaries(ledger, walks)
+    if ledger.get("rulings_not_applied"):
+        verdicts["rulings_not_applied"] = [
+            {"ruling": item["ruling"], "reason": item["reason"]}
+            for item in ledger["rulings_not_applied"]
+        ]
     return verdicts
 
 
@@ -2446,7 +2535,9 @@ def readme(ledger: Ledger, verdicts: Mapping[str, Any], *, retained: bool = True
             "otherwise."
         ),
         "",
-        *_ruling_lines(verdicts.get("rulings") or []),
+        *_ruling_lines(
+            verdicts.get("rulings") or [], verdicts.get("rulings_not_applied") or []
+        ),
         "## Counts",
         "",
         *_count_lines(verdicts["summary"]),
@@ -2578,21 +2669,24 @@ def readme(ledger: Ledger, verdicts: Mapping[str, Any], *, retained: bool = True
     return "\n".join(lines) + "\n"
 
 
-def _ruling_lines(rulings: Sequence[Mapping[str, Any]]) -> list[str]:
-    """The owner's rulings the walk applies (`ruling_summaries`); nothing for a ledger
-    that applies none, so a ledger read before them renders as it did."""
-    if not rulings:
+def _ruling_lines(
+    rulings: Sequence[Mapping[str, Any]], not_applied: Sequence[Mapping[str, Any]] = ()
+) -> list[str]:
+    """The owner's rulings the walk applies (`ruling_summaries`), and those it says why it
+    does not (`NotApplied`); nothing for a ledger that names none, so a ledger read before
+    them renders as it did."""
+    if not rulings and not not_applied:
         return []
-    lines = [
-        "## The Owner's Rulings",
-        "",
-        (
-            "Beyond the corpus the walk applies these answers of the owner as part of the "
-            "rule, each from its day and with the bead that asked it (`rulings` in "
-            "`ledger.yaml`)."
-        ),
-        "",
-    ]
+    lines = ["## The Owner's Rulings", ""]
+    if rulings:
+        lines += [
+            (
+                "Beyond the corpus the walk applies these answers of the owner as part of the "
+                "rule, each from its day and with the bead that asked it (`rulings` in "
+                "`ledger.yaml`)."
+            ),
+            "",
+        ]
     for ruling in rulings:
         lines.append(f"- **{ruling['ruling']}** ({ruling['decided']}, {ruling['bead']}): ")
         lines[-1] += ruling["text"]
@@ -2616,6 +2710,21 @@ def _ruling_lines(rulings: Sequence[Mapping[str, Any]]) -> list[str]:
                 f"record on `main`, and holds {len(ruling['not_recorded'])} claims out of "
                 "the record."
             )
+    if not_applied:
+        if rulings:
+            lines.append("")
+        lines += [
+            (
+                "The walk does not apply these answers of the owner beyond the corpus, for "
+                "the reason its input gives (`rulings_not_applied` in `ledger.yaml`)."
+            ),
+            "",
+            *(
+                f"- **{item['ruling']}** is not applied here: "
+                f"{str(item['reason']).strip().rstrip('.')}."
+                for item in not_applied
+            ),
+        ]
     return [*lines, ""]
 
 
@@ -2891,12 +3000,16 @@ def inert_relations(ledger: Ledger, starts: Mapping[int, Sequence[Side]]) -> lis
 
 
 def load_walk(directory: Path) -> tuple[Ledger, dict[int, list[Side]]]:
-    """The ledger and the starts ``gather`` froze, refused when a count has no start or a
-    record relation reads no member of its start (`inert_relations`)."""
+    """The ledger and the starts ``gather`` froze, refused when a count has no start, when
+    a ledger read from `GOEBEL_FROM` leaves an answer unapplied and unsaid
+    (`answer_problems`), or when a record relation reads no member of its start
+    (`inert_relations`)."""
     ledger = load_ledger(directory)
     starts = load_starts(directory, ledger["read_at_main"])
     missing = sorted(set(counts_of(ledger)) - set(starts))
     _require(not missing, f"{STARTS} has no start at n = {missing}")
+    unapplied = answer_problems(ledger, counts_of(ledger), construction_counts(starts))
+    _require(not unapplied, "; ".join(unapplied))
     inert = inert_relations(ledger, starts)
     _require(not inert, "; ".join(inert))
     return ledger, starts
@@ -3205,6 +3318,8 @@ def gather(
     }
     if sources.get("rulings"):
         ledger["rulings"] = sources["rulings"]
+    if sources.get("rulings_not_applied"):
+        ledger["rulings_not_applied"] = sources["rulings_not_applied"]
     warnings = cross_check(directory, ledger, sources)
     ledger["cross_check"] = warnings
     found = problems(ledger)
@@ -3214,20 +3329,27 @@ def gather(
         (LEDGER, yaml.safe_dump(ledger, sort_keys=False, allow_unicode=True, width=88)),
     ]
     if keep:
-        missing = sorted(set(counts_of(ledger)) - set(load_starts(directory, read_at_main)))
+        frozen = load_starts(directory, read_at_main)
+        missing = sorted(set(counts_of(ledger)) - set(frozen))
         _require(
             not missing,
             f"{STARTS} has no start at n = {missing}: gather --refresh-starts from a checkout "
             f"of read_at_main {read_at_main[:12]}",
         )
+        held = construction_counts(frozen)
     else:
         members = tree_members(
             counts_of(ledger), names=display_names(sources), read_on=str(sources["read_on"])
         )
+        held = {
+            n for n, items in members.items() if any(m["kind"] == CONSTRUCTION for m in items)
+        }
         starts = starts_document(read_at_main, members)
         texts.append(
             (STARTS, yaml.safe_dump(starts, sort_keys=False, allow_unicode=True, width=88))
         )
+    unapplied = answer_problems(ledger, counts_of(ledger), held)
+    _require(not unapplied, "; ".join(unapplied))
     for name, text in texts:
         with atomic_output_file(directory / name) as temporary:
             Path(temporary).write_text(text, encoding="utf-8")
@@ -3339,7 +3461,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             command.add_argument(
                 "--tree",
                 action="store_true",
-                help="also report where today's records give other starts (never fails)",
+                help=(
+                    "also report where today's records give other starts; drift is not a "
+                    "gate, but a start the records cannot give fails, as above 1073 for a "
+                    "ledger read from 23 October 2026"
+                ),
             )
         if name == "render":
             mode = command.add_mutually_exclusive_group()
