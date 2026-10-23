@@ -3,9 +3,9 @@ type: is
 id: is-01m4wbvxjwayhffdbd9pajj97j
 title: "Import BuddenPing: s(207) <= 14.880960371559, refining T-147 (#503 comment)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:48:55.899Z
-updated_at: 2026-10-14T17:59:44.662Z
+updated_at: 2026-10-23T06:12:38.960Z
 started_at: 2026-10-14T04:49:01.109Z
+closed_at: 2026-10-23T06:12:38.960Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-b-1023, think-ioqe), checked by coord-intake-1023: STALE-CLAIM + DONE. #503 is closed. n207-refinement maps to T-167, V3/C3 confirmed. check_requests: #503 closed, 2 of 2."
+resolution: null
+duplicate_of: null
 ---
 https://github.com/jlevy/squares/issues/503#issuecomment-6133755143 (BuddenPing, 2026-10-12T22:25Z) and the issue body's dated update. BuddenPing/square-packing-certificates 10418630bfb00853a539ad7ad9908b2d746147c0, n207.cert.json and pingyou-n207-rational.yaml; a coordinate refinement of T-147; credit PingYou Ltd. Intake lane pingyou of 2026-10-14.
 

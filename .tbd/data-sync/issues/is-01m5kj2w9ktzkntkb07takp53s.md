@@ -5,7 +5,7 @@ title: "Home page atlas: show all 324 with no expander, and a viewport-aware def
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: c-atlas-1023
 labels: []
 dependencies: []
@@ -13,6 +13,27 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:00:07.347Z
-updated_at: 2026-10-23T05:00:08.212Z
+updated_at: 2026-10-23T05:52:12.105Z
 started_at: 2026-10-23T05:00:08.212Z
 ---
+
+## Notes
+
+c-atlas-1023, branch claude/awesome-hamilton-gr597e (worktree /home/user/wt-atlas).
+
+Done on the branch:
+- Expander removed from both atlases: markup (toggle row, data-atlas-rest split,
+  data-atlas-first/count, no-script override), atlas-grid.js state and handlers,
+  atlas-view.js beforeArrange and hidden filter, CSS rest/hidden/toggle rules,
+  --site-atlas-toggle-space renamed --site-atlas-controls-space, tests and probes that
+  pinned it, design doc and the 2026-10-08 plan (supersession note).
+- Size rule: automaticSize(wide, width, row) in atlas-view.js. Wide (>= 75rem) keeps
+  Medium; narrow takes Small when less than half of the 35-tile row fits at Medium.
+  Half the row is >= 17.5 Medium cells (> 80rem even at the phone's 4.6rem), so every
+  window under 75rem takes Small: the switch stays the 75rem breakpoint.
+- Measured default (share of row 18 shown): 390 Small 0.176 (319-324), 768 Small 0.264
+  (316-324), 1280 Medium 0.289 (315-324), 1920 Medium 0.465 (309-324). The triangle
+  opens at its right edge.
+
+Open for the owner: "ideally half the bottom row" on a phone is not reached; it needs
+tiles of about 17 px at 390 px (a fourth, fitted size). Not implemented.

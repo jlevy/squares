@@ -3,15 +3,19 @@ type: is
 id: is-01m4qn8dm8p4ztkgraedxg24q9
 title: "Read evand/square-packing 2b89650..ad86d42 (26 commits, 11-12 Oct): no new bound; s(29) minimal polynomial and grade-C local minima retained (#545)"
 kind: task
-status: open
+status: closed
 priority: 3
-version: 2
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-12T08:56:50.568Z
-updated_at: 2026-10-12T09:08:36.788Z
+updated_at: 2026-10-23T06:12:27.029Z
+closed_at: 2026-10-23T06:12:27.029Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-b-1023, think-ioqe), checked by coord-intake-1023: DONE. intake-watch.yaml on main: evand read_through ad86d42 (read_on 2026-10-12, note names this bead), then 622cd2e via 60e5ffafd / #602 (9b32da04d). No record deferral names it (check_bead_tree.deferrals)."
+resolution: null
+duplicate_of: null
 ---
 Watched-repository read for lane W of the 2026-10-12 intake (think-mq0k); nothing on GitHub asked. Not an issue: neither result below was reported on jlevy/squares.
 

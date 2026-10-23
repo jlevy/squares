@@ -3,9 +3,9 @@ type: is
 id: is-01m4wbvs6w07j0mjwk6a7wtnhk
 title: "Import BuddenPing: s(302) <= 17.870275382734 (#564)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:48:51.420Z
-updated_at: 2026-10-14T17:59:41.902Z
+updated_at: 2026-10-23T06:12:33.296Z
 started_at: 2026-10-14T04:49:01.033Z
+closed_at: 2026-10-23T06:12:33.296Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-b-1023, think-ioqe), checked by coord-intake-1023: STALE-CLAIM + DONE. #564 closed 2026-10-15. T-164 (the bead's T-163, renumbered) is V3/C3 confirmed. check_requests: closed, 1 of 1."
+resolution: null
+duplicate_of: null
 ---
 https://github.com/jlevy/squares/issues/564 (BuddenPing, opened 2026-10-12T21:27Z; title and body updated 2026-10-12T22:17Z with a refined certificate). BuddenPing/square-packing-certificates 5a86ac3ec09beae5f11e2a8f7115954e76fa616a, n302.cert.json and pingyou-n302-rational.yaml; credit PingYou Ltd. Intake lane pingyou of 2026-10-14, stages 1, 2 and the stage 4 replay through devtools.upper_bound_reports.
 

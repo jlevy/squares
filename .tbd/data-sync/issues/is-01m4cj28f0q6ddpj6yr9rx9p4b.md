@@ -3,9 +3,9 @@ type: is
 id: is-01m4cj28f0q6ddpj6yr9rx9p4b
 title: Import and verify issue432 newly reported ry-xu packings
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: codex@spud10
 labels:
   - result-import
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T01:29:24.191Z
-updated_at: 2026-10-17T17:39:01.508Z
+updated_at: 2026-10-23T06:12:11.895Z
 started_at: 2026-10-08T01:29:38.835Z
+closed_at: 2026-10-23T06:12:11.895Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-a-1023, think-s4ld), checked by coord-intake-1023: DONE; STALE-CLAIM. result-requests.yaml line 296 records issuecomment-6237819138; check_requests --report: #432 closed, 3 of 3"
+resolution: null
+duplicate_of: null
 ---
 Resume issue432 at immutable ry-xu/square_packing8dc415296f697f5140caea27c7a0193d52deb4e6: retain all25 reported rational source geometries, compare against current stack bounds (author18 survivors is provisional), exact independent feasibility/control replay, separate n51 Q(sqrt2) identity obligation, scoped reviews and stacked PR with full custody. Do not run producer code or claim global optimality. Temporary work on spud-ext1 only.
 

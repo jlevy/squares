@@ -3,9 +3,9 @@ type: is
 id: is-01m4wk78802nqyame797x5tfk1
 title: "Import dostashev: s(129) <= 11.870013850405, s(204) <= 14.808663234387, s(303) <= 17.909958291070 (#562)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T06:57:27.296Z
-updated_at: 2026-10-14T14:50:14.193Z
+updated_at: 2026-10-23T06:12:40.875Z
 started_at: 2026-10-14T06:57:53.843Z
+closed_at: 2026-10-23T06:12:40.875Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-b-1023, think-ioqe), checked by coord-intake-1023: STALE-CLAIM + DONE. #562 closed 2026-10-15. T-162 is V3/C3 confirmed. check_requests: closed, 1 of 1."
+resolution: null
+duplicate_of: null
 ---
 https://github.com/jlevy/squares/issues/562 (2026-10-12T19:10:14Z, unedited). dostashev/square-packing at fe43a64ecf2581cdbd11830e8a5be0989746c5d3, records/n0129, n0204, n0303 (.sqcert, .sqpk). Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports, intake lane ostashev of 2026-10-14.
 
