@@ -31,6 +31,12 @@ Modes, from `packing/`:
 - `--backfill` dates each entry that has no `landed` the same way. It ran once, when the
   field was introduced.
 
+The same modes write the landing record, `frontier/landings.yaml`: the day each count's
+house best packing and each source's dated beyond-horizon rows reached `main`, which the
+home page's Recently Added places them by (#736's review A, finding A2). Those records
+carry no date field of their own; the merge step stamps what a branch adds, and
+`--audit` and `--backfill` read the same first-parent history.
+
 History is read only here, by a tool, and its answer is written into the record; nothing
 that renders a page or gates a change reads Git (OR-18).
 
@@ -49,12 +55,13 @@ Usage, from `packing/`:
 from __future__ import annotations
 
 import argparse
+import ast
 import re
 import subprocess
 from collections.abc import Iterable, Mapping, Sequence
 from datetime import UTC, date, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, NamedTuple
 
 from strif import atomic_output_file
 
@@ -189,6 +196,208 @@ def problems(register: Mapping[str, Any]) -> list[str]:
     return found
 
 
+# ------------------------------------------------------------------- house and row landings
+#
+# The home page's Recently Added places three kinds of arrival by the day each reached
+# `main` (#736's review A, finding A2): a register entry by its `landed`; a count's house
+# best packing, by the day `main` first held its current house (`upper_bound_houses.ADOPTED`);
+# and a source's dated beyond-horizon rows (`source-coverage.yaml`), by the day `main` first
+# held any of them. The last two have no field of their own in their records, so the
+# landing record `frontier/landings.yaml` holds them, written here as `landed` is: the
+# merge step stamps what a branch adds, and `--audit` and `--backfill` read `main`'s
+# first-parent history. Every source's rows have so far reached `main` in one merge, so a
+# source carries one day.
+
+LANDINGS = ROOT / "frontier" / "landings.yaml"
+LANDINGS_PATH = "packing/frontier/landings.yaml"
+COVERAGE = ROOT / "frontier" / "source-coverage.yaml"
+COVERAGE_PATH = "packing/frontier/source-coverage.yaml"
+HOUSES_PATH = "packing/devtools/upper_bound_houses.py"
+#: What opens the landing record, above its two lists.
+LANDINGS_HEADER = """\
+# The day each count's house best packing and each source's dated beyond-horizon rows
+# reached `main`, in UTC, as `landed` is for a register entry. The home page's Recently
+# Added places them by it. Written by `devtools.stamp_landed`: the merge step stamps what
+# a branch adds, and `--audit` compares every entry with `main`'s first-parent history.
+# `houses` follows `upper_bound_houses.ADOPTED`, one entry a count with the result that
+# houses it now; `sources` names every source with rows in `source-coverage.yaml`.
+"""
+
+
+class Landings(NamedTuple):
+    """The landing record: each adopted count's house result and the day `main` first
+    held it, and each row source's day."""
+
+    houses: dict[int, tuple[str, str]]
+    sources: dict[str, str]
+
+
+def adopted_houses(text: str) -> dict[int, str]:
+    """`ADOPTED` as a text of `upper_bound_houses` assigns it, read without running it:
+    each adopted count and the result that houses it."""
+    for node in ast.parse(text).body:
+        if isinstance(node, ast.Assign):
+            targets, value = node.targets, node.value
+        elif isinstance(node, ast.AnnAssign) and node.value is not None:
+            targets, value = [node.target], node.value
+        else:
+            continue
+        if any(isinstance(target, ast.Name) and target.id == "ADOPTED" for target in targets):
+            return {int(n): str(result) for n, result in ast.literal_eval(value).items()}
+    raise ValueError("no ADOPTED assignment in upper_bound_houses")
+
+
+def row_sources(text: str) -> set[str]:
+    """The sources a coverage register's text holds beyond-horizon rows from."""
+    return {str(row["source_id"]) for row in safe_load(text)["beyond_horizon_claims"]}
+
+
+def read_landings(text: str) -> Landings:
+    """The landing record's text, parsed."""
+    record = safe_load(text) or {}
+    return Landings(
+        houses={
+            int(entry["n"]): (str(entry["result"]), str(entry["landed"]))
+            for entry in record.get("houses") or []
+        },
+        sources={
+            str(entry["id"]): str(entry["landed"]) for entry in record.get("sources") or []
+        },
+    )
+
+
+def write_landings(landings: Landings) -> str:
+    """The landing record's text: its header, then the houses by count and the sources by
+    id, every date quoted, so the same record is always the same bytes."""
+    lines = [LANDINGS_HEADER, "houses:\n"]
+    for n, (result, day) in sorted(landings.houses.items()):
+        lines.append(f"  - n: {n}\n    result: {result}\n    landed: '{day}'\n")
+    lines.append("sources:\n")
+    for source, day in sorted(landings.sources.items()):
+        lines.append(f"  - id: {source}\n    landed: '{day}'\n")
+    return "".join(lines)
+
+
+def landings_problems(
+    landings: Landings, adopted: Mapping[int, str], sources: set[str]
+) -> list[str]:
+    """What keeps the landing record whole, read from the tree alone: one house entry for
+    every adopted count, naming the result that houses it now, and one entry for every
+    source with rows, each with a date."""
+    found: list[str] = []
+    for n in sorted(set(adopted) | set(landings.houses)):
+        if n not in landings.houses:
+            found.append(f"n={n}: its house, {adopted[n]}, has no landing")
+        elif n not in adopted:
+            found.append(f"n={n}: a landing for a count no adoption houses")
+        elif landings.houses[n][0] != adopted[n]:
+            found.append(
+                f"n={n}: the landing names {landings.houses[n][0]}, the house is {adopted[n]}"
+            )
+    for source in sorted(sources | set(landings.sources)):
+        if source not in landings.sources:
+            found.append(f"{source}: its rows have no landing")
+        elif source not in sources:
+            found.append(f"{source}: a landing for a source with no rows")
+    days = [day for _, day in landings.houses.values()] + list(landings.sources.values())
+    for day in days:
+        try:
+            date.fromisoformat(day)
+        except ValueError:
+            found.append(f"landing {day!r} is not a date")
+    return found
+
+
+def current_landings() -> tuple[dict[int, str], set[str]]:
+    """What the tree says the record must cover: the adopted counts and the row sources."""
+    return (
+        adopted_houses((REPO / HOUSES_PATH).read_text(encoding="utf-8")),
+        row_sources(COVERAGE.read_text(encoding="utf-8")),
+    )
+
+
+def _first_parent(ref: str, path: str) -> list[tuple[str, str]]:
+    """Each commit on `ref`'s first-parent history that changed `path`, oldest first,
+    with its UTC day."""
+    log = _git("log", "--first-parent", "--reverse", "--format=%H %cI", ref, "--", path)
+    return [
+        (commit, datetime.fromisoformat(when).astimezone(UTC).date().isoformat())
+        for commit, when in (line.split() for line in log.splitlines())
+    ]
+
+
+def main_landings(ref: str = MAIN) -> Landings:
+    """`ref`'s landing record, or an empty one where `ref` holds none yet."""
+    listed = _git("ls-tree", "--name-only", ref, "--", LANDINGS_PATH).strip()
+    return read_landings(_git("show", f"{ref}:{LANDINGS_PATH}") if listed else "")
+
+
+def landing_history(ref: str = MAIN) -> Landings:
+    """`ref`'s first-parent history read as a landing record: for each count, the day its
+    house last changed to the result that houses it at `ref`, and for each source, the day
+    `ref` first held a row of it."""
+    houses: dict[int, tuple[str, str]] = {}
+    for commit, day in _first_parent(ref, HOUSES_PATH):
+        for n, result in adopted_houses(_git("show", f"{commit}:{HOUSES_PATH}")).items():
+            if houses.get(n, ("", ""))[0] != result:
+                houses[n] = (result, day)
+    sources: dict[str, str] = {}
+    for commit, day in _first_parent(ref, COVERAGE_PATH):
+        for source in row_sources(_git("show", f"{commit}:{COVERAGE_PATH}")):
+            sources.setdefault(source, day)
+    return Landings(houses, sources)
+
+
+def stamp_landings(
+    adopted: Mapping[int, str],
+    sources: set[str],
+    known: Sequence[Landings],
+    day: str | None,
+) -> Landings:
+    """The record the tree needs: every adopted count and row source, each taking its day
+    from the first record in `known` that names the same house or source, else `day`.
+
+    The merge step passes `main`'s record and its own day, so what the branch adds is
+    dated the day it merges, whatever a lane wrote, and what `main` holds keeps its day.
+    `--backfill` passes the branch's record and then the history, with no day, so an
+    entry nothing dates is left out for `landings_problems` to name."""
+    houses: dict[int, tuple[str, str]] = {}
+    for n, result in adopted.items():
+        found = next(
+            (
+                record.houses[n][1]
+                for record in known
+                if record.houses.get(n, ("",))[0] == result
+            ),
+            day,
+        )
+        if found is not None:
+            houses[n] = (result, found)
+    rows: dict[str, str] = {}
+    for source in sources:
+        found = next(
+            (record.sources[source] for record in known if source in record.sources), day
+        )
+        if found is not None:
+            rows[source] = found
+    return Landings(houses, rows)
+
+
+def landings_audit(landings: Landings, history: Landings, on_main: Landings) -> list[str]:
+    """The entries `main`'s record holds whose recorded day differs from the day `main`'s
+    history gives, each as a line naming both."""
+    found: list[str] = []
+    for n, (result, day) in sorted(landings.houses.items()):
+        held = history.houses.get(n, ("", ""))
+        if on_main.houses.get(n, ("",))[0] == result == held[0] and held[1] != day:
+            found.append(f"n={n} ({result}) records {day}; history gives {held[1]}")
+    for source, day in sorted(landings.sources.items()):
+        held_day = history.sources.get(source)
+        if source in on_main.sources and held_day is not None and held_day != day:
+            found.append(f"{source} records {day}; history gives {held_day}")
+    return found
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n", 1)[0])
     mode = parser.add_mutually_exclusive_group()
@@ -227,6 +436,46 @@ def main(argv: Sequence[str] | None = None) -> int:
         with atomic_output_file(RESULTS) as temporary:
             temporary.write_text(set_landed(text, dates), encoding="utf-8")
         print(f"wrote {RESULTS.relative_to(REPO)}")
+    return _landings(options)
+
+
+def _landings(options: argparse.Namespace) -> int:
+    """The landing record's half of each mode: the merge step dates the houses and row
+    sources the branch adds, `--audit` compares `main`'s with its history, and
+    `--backfill` dates from history whatever the record lacks."""
+    text = LANDINGS.read_text(encoding="utf-8") if LANDINGS.is_file() else ""
+    landings = read_landings(text)
+    adopted, sources = current_landings()
+    if options.audit:
+        on_main = main_landings()
+        found = landings_audit(landings, landing_history(), on_main)
+        for line in found:
+            print(line)
+        print(f"landings audit: {len(found)} differ from {MAIN}'s history")
+        if not found:
+            return 0
+        history = landing_history()
+        stamped = Landings(
+            {n: history.houses.get(n, entry) for n, entry in landings.houses.items()},
+            {s: history.sources.get(s, day) for s, day in landings.sources.items()},
+        )
+    elif options.backfill:
+        stamped = stamp_landings(adopted, sources, (landings, landing_history()), None)
+    else:
+        day = options.date or datetime.now(UTC).date().isoformat()
+        date.fromisoformat(day)
+        on_main = main_landings()
+        stamped = stamp_landings(adopted, sources, (on_main,), day)
+    for n, entry in sorted(stamped.houses.items()):
+        if landings.houses.get(n) != entry:
+            print(f"n={n} {entry[0]} -> {entry[1]}")
+    for source, day in sorted(stamped.sources.items()):
+        if landings.sources.get(source) != day:
+            print(f"{source} -> {day}")
+    if options.apply and stamped != landings:
+        with atomic_output_file(LANDINGS) as temporary:
+            temporary.write_text(write_landings(stamped), encoding="utf-8")
+        print(f"wrote {LANDINGS.relative_to(REPO)}")
     return 0
 
 

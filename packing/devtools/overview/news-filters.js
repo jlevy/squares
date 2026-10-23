@@ -1,8 +1,8 @@
 // Facets enhance a News list. The archive filters every article and keeps the choice in
 // its address; without scripts no article is filtered out there. A preview, the home
 // page's News box (`data-news-limit`), shows the newest articles that match, up to its
-// limit, keeps no address and carries the choice on its "All news" link
-// (`data-news-carry`). Either opens on the levels its markup presses.
+// limit, says how many in its live count, keeps no address and carries the choice on
+// its "All news" link (`data-news-carry`). Either opens on the levels its markup presses.
 (() => {
   const controls = document.querySelector("[data-news-filters]");
   const news = document.querySelector("[data-news]");
@@ -100,6 +100,14 @@
       }
     }
   };
+  // A preview's live count says what it shows, not what it carries for its filter.
+  /** @param {number} shown */
+  const previewCount = (shown) => {
+    const levels = allScores.filter((value) => scores.has(value)).map((value) => `S${value}`);
+    return shown
+      ? `Showing ${shown} news item${shown === 1 ? "" : "s"} at ${levels.join(", ")}`
+      : "No news matches these filters";
+  };
   const apply = () => {
     const scored = cards.filter((card) => scores.has(card.dataset.newsScore || ""));
     for (const button of scoreButtons) {
@@ -123,7 +131,7 @@
     }
     const count = controls.querySelector("[data-news-count]");
     if (count) {
-      count.textContent = `${shown} of ${cards.length} news items`;
+      count.textContent = preview ? previewCount(shown) : `${shown} of ${cards.length} news items`;
     }
     const empty = controls.querySelector("[data-news-empty]");
     if (empty instanceof HTMLElement) {

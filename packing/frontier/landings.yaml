@@ -1,0 +1,264 @@
+# The day each count's house best packing and each source's dated beyond-horizon rows
+# reached `main`, in UTC, as `landed` is for a register entry. The home page's Recently
+# Added places them by it. Written by `devtools.stamp_landed`: the merge step stamps what
+# a branch adds, and `--audit` compares every entry with `main`'s first-parent history.
+# `houses` follows `upper_bound_houses.ADOPTED`, one entry a count with the result that
+# houses it now; `sources` names every source with rows in `source-coverage.yaml`.
+houses:
+  - n: 29
+    result: T-195
+    landed: '2026-10-19'
+  - n: 68
+    result: T-174
+    landed: '2026-10-19'
+  - n: 70
+    result: T-146
+    landed: '2026-10-12'
+  - n: 84
+    result: T-174
+    landed: '2026-10-19'
+  - n: 86
+    result: T-174
+    landed: '2026-10-19'
+  - n: 102
+    result: T-146
+    landed: '2026-10-12'
+  - n: 103
+    result: T-174
+    landed: '2026-10-19'
+  - n: 105
+    result: T-229
+    landed: '2026-10-23'
+  - n: 108
+    result: T-174
+    landed: '2026-10-19'
+  - n: 110
+    result: T-174
+    landed: '2026-10-19'
+  - n: 123
+    result: T-146
+    landed: '2026-10-12'
+  - n: 126
+    result: T-139
+    landed: '2026-10-12'
+  - n: 127
+    result: T-174
+    landed: '2026-10-19'
+  - n: 129
+    result: T-186
+    landed: '2026-10-17'
+  - n: 130
+    result: T-174
+    landed: '2026-10-19'
+  - n: 131
+    result: T-174
+    landed: '2026-10-19'
+  - n: 132
+    result: T-174
+    landed: '2026-10-19'
+  - n: 146
+    result: T-187
+    landed: '2026-10-17'
+  - n: 153
+    result: T-173
+    landed: '2026-10-15'
+  - n: 154
+    result: T-222
+    landed: '2026-10-20'
+  - n: 155
+    result: T-197
+    landed: '2026-10-20'
+  - n: 156
+    result: T-186
+    landed: '2026-10-17'
+  - n: 172
+    result: T-174
+    landed: '2026-10-19'
+  - n: 175
+    result: T-186
+    landed: '2026-10-17'
+  - n: 176
+    result: T-186
+    landed: '2026-10-17'
+  - n: 179
+    result: T-174
+    landed: '2026-10-19'
+  - n: 180
+    result: T-174
+    landed: '2026-10-19'
+  - n: 181
+    result: T-174
+    landed: '2026-10-19'
+  - n: 182
+    result: T-174
+    landed: '2026-10-19'
+  - n: 183
+    result: T-220
+    landed: '2026-10-20'
+  - n: 204
+    result: T-229
+    landed: '2026-10-23'
+  - n: 206
+    result: T-174
+    landed: '2026-10-19'
+  - n: 207
+    result: T-173
+    landed: '2026-10-15'
+  - n: 208
+    result: T-174
+    landed: '2026-10-19'
+  - n: 209
+    result: T-174
+    landed: '2026-10-19'
+  - n: 210
+    result: T-174
+    landed: '2026-10-19'
+  - n: 211
+    result: T-188
+    landed: '2026-10-17'
+  - n: 227
+    result: T-225
+    landed: '2026-10-22'
+  - n: 228
+    result: T-174
+    landed: '2026-10-19'
+  - n: 229
+    result: T-225
+    landed: '2026-10-22'
+  - n: 232
+    result: T-186
+    landed: '2026-10-17'
+  - n: 236
+    result: T-218
+    landed: '2026-10-20'
+  - n: 237
+    result: T-190
+    landed: '2026-10-17'
+  - n: 238
+    result: T-174
+    landed: '2026-10-19'
+  - n: 239
+    result: T-174
+    landed: '2026-10-19'
+  - n: 240
+    result: T-174
+    landed: '2026-10-19'
+  - n: 241
+    result: T-182
+    landed: '2026-10-15'
+  - n: 258
+    result: T-146
+    landed: '2026-10-12'
+  - n: 259
+    result: T-136
+    landed: '2026-10-12'
+  - n: 260
+    result: T-225
+    landed: '2026-10-22'
+  - n: 261
+    result: T-174
+    landed: '2026-10-19'
+  - n: 263
+    result: T-174
+    landed: '2026-10-19'
+  - n: 264
+    result: T-186
+    landed: '2026-10-17'
+  - n: 267
+    result: T-134
+    landed: '2026-10-12'
+  - n: 268
+    result: T-174
+    landed: '2026-10-19'
+  - n: 269
+    result: T-174
+    landed: '2026-10-19'
+  - n: 270
+    result: T-224
+    landed: '2026-10-21'
+  - n: 271
+    result: T-219
+    landed: '2026-10-20'
+  - n: 272
+    result: T-174
+    landed: '2026-10-19'
+  - n: 273
+    result: T-174
+    landed: '2026-10-19'
+  - n: 292
+    result: T-146
+    landed: '2026-10-12'
+  - n: 295
+    result: T-146
+    landed: '2026-10-12'
+  - n: 297
+    result: T-174
+    landed: '2026-10-19'
+  - n: 302
+    result: T-186
+    landed: '2026-10-17'
+  - n: 303
+    result: T-186
+    landed: '2026-10-17'
+  - n: 304
+    result: T-186
+    landed: '2026-10-17'
+  - n: 305
+    result: T-174
+    landed: '2026-10-19'
+  - n: 306
+    result: T-174
+    landed: '2026-10-19'
+  - n: 307
+    result: T-174
+    landed: '2026-10-19'
+  - n: 308
+    result: T-221
+    landed: '2026-10-20'
+sources:
+  - id: couzo-certificates-2026-10-11
+    landed: '2026-10-12'
+  - id: couzo-certificates-2026-10-12
+    landed: '2026-10-14'
+  - id: couzo-certificates-2026-10-13
+    landed: '2026-10-14'
+  - id: couzo-certificates-2026-10-14
+    landed: '2026-10-16'
+  - id: couzo-extended-range-reports-2026-10-08
+    landed: '2026-10-09'
+  - id: couzo-extended-range-updates-2026-10-08
+    landed: '2026-10-10'
+  - id: couzo-issue583-2026-10-13
+    landed: '2026-10-14'
+  - id: couzo-issue670-2026-10-17
+    landed: '2026-10-22'
+  - id: couzo-issue672-2026-10-17
+    landed: '2026-10-22'
+  - id: couzo-issue675-2026-10-18
+    landed: '2026-10-22'
+  - id: couzo-issue678-2026-10-18
+    landed: '2026-10-21'
+  - id: couzo-issue715-2026-10-21
+    landed: '2026-10-22'
+  - id: couzo-verified-bounds-2026-10-14
+    landed: '2026-10-16'
+  - id: de-winter-issue666-2026-10-17
+    landed: '2026-10-22'
+  - id: evand-compositions-2026-10-13
+    landed: '2026-10-14'
+  - id: evand-fresh-compositions-2026-10-14
+    landed: '2026-10-14'
+  - id: evand-n343-sweep-2026-10-20
+    landed: '2026-10-21'
+  - id: evand-record-hunt3-2026-10-10
+    landed: '2026-10-11'
+  - id: fang-direct-certificates-2026-10-13
+    landed: '2026-10-14'
+  - id: fang-excess-theorem-2026-10-13
+    landed: '2026-10-14'
+  - id: fang-two-wedge-certificates-2026-10-10
+    landed: '2026-10-11'
+  - id: mishapolk-issue719-2026-10-22
+    landed: '2026-10-22'
+  - id: muglich-issue686-2026-10-19
+    landed: '2026-10-21'

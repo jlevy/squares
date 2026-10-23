@@ -3763,18 +3763,19 @@ html[data-site-atlas-view="triangle"]
   color: var(--kpress-doc-accent);
 }
 /* The compact filter, the home page's News box's: the same significance choices,
-   alone at the right above the cards, at the topic chips' smaller scale and in the
-   muted ink until pressed, so they never compete with the section's heading. */
+   alone at the right above the cards, at the topic chips' smaller scale
+   (`--site-chooser-compact-scale`) and lighter weight, keeping the shared chooser's
+   padding token, so they never compete with the section's heading. */
 .kpress .site-news-filters-compact {
+  --site-chooser-compact-scale: 0.85;
   justify-content: flex-end;
   margin-block: 0 0.5rem;
 }
 .site-news-filters-compact .site-tabs.site-chooser-small {
-  font-size: calc(var(--site-chooser-small-size) * 0.85);
+  font-size: calc(var(--site-chooser-small-size) * var(--site-chooser-compact-scale));
 }
 .site-news-filters-compact .site-tabs.site-chooser-small button {
   font-weight: var(--site-font-weight-sans-light);
-  padding-inline: calc(0.65rem * 0.85);
 }
 .site-news-filters-compact [data-news-empty] {
   flex-basis: 100%;

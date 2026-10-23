@@ -153,3 +153,128 @@ def test_every_entry_carries_the_day_it_landed() -> None:
     text = stamp_landed.RESULTS.read_text(encoding="utf-8")
     assert stamp_landed.problems(safe_load(text)) == []
     assert all(day for day in stamp_landed.recorded(text).values())
+
+
+# The landing record: house best packings and row sources (#736's review A, finding A2).
+
+HOUSES = """\
+from __future__ import annotations
+
+from devtools import kernel
+
+ADOPTED_ON = "2026-10-11"
+ADOPTED: dict[int, str] = {
+    29: "T-195",
+    105: "T-229",
+}
+"""
+
+
+def test_the_adopted_houses_are_read_without_running_the_module() -> None:
+    assert stamp_landed.adopted_houses(HOUSES) == {29: "T-195", 105: "T-229"}
+    with pytest.raises(ValueError, match="ADOPTED"):
+        stamp_landed.adopted_houses("ADOPTED_ON = '2026-10-11'\n")
+
+
+def test_the_landing_record_round_trips_and_names_what_it_lacks() -> None:
+    """The record is written in one form, so the same record is the same bytes; it must
+    hold one house per adopted count, under the result that houses it now, and one day
+    per row source, and nothing else."""
+    landings = stamp_landed.Landings(
+        {29: ("T-195", "2026-10-19"), 105: ("T-229", "2026-10-23")},
+        {"src-b": "2026-10-22", "src-a": "2026-10-16"},
+    )
+    text = stamp_landed.write_landings(landings)
+    assert text.startswith(stamp_landed.LANDINGS_HEADER)
+    assert stamp_landed.read_landings(text) == landings
+    assert text.index("id: src-a") < text.index("id: src-b")
+    adopted = {29: "T-195", 105: "T-229"}
+    assert stamp_landed.landings_problems(landings, adopted, {"src-a", "src-b"}) == []
+    assert stamp_landed.landings_problems(
+        landings, {29: "T-195", 105: "T-174", 204: "T-225"}, {"src-a", "src-c"}
+    ) == [
+        "n=105: the landing names T-229, the house is T-174",
+        "n=204: its house, T-225, has no landing",
+        "src-b: a landing for a source with no rows",
+        "src-c: its rows have no landing",
+    ]
+
+
+def test_the_merge_step_dates_what_a_branch_adds_and_keeps_what_main_holds() -> None:
+    """A count whose house the branch changes, a new count and a new row source take the
+    merge day, whatever a lane wrote; the rest keep `main`'s day. Without a day, an
+    entry nothing dates is left out for the problems to name."""
+    on_main = stamp_landed.Landings(
+        {29: ("T-195", "2026-10-19"), 105: ("T-174", "2026-10-19")}, {"src-a": "2026-10-16"}
+    )
+    adopted = {29: "T-195", 105: "T-229", 204: "T-225"}
+    stamped = stamp_landed.stamp_landings(adopted, {"src-a", "src-b"}, (on_main,), "2026-10-24")
+    assert stamped == stamp_landed.Landings(
+        {
+            29: ("T-195", "2026-10-19"),
+            105: ("T-229", "2026-10-24"),
+            204: ("T-225", "2026-10-24"),
+        },
+        {"src-a": "2026-10-16", "src-b": "2026-10-24"},
+    )
+    lanes = stamp_landed.stamp_landings(adopted, {"src-a", "src-b"}, (on_main,), None)
+    assert lanes.houses == {29: ("T-195", "2026-10-19")}
+    assert lanes.sources == {"src-a": "2026-10-16"}
+
+
+def test_history_dates_a_house_and_a_source_s_rows_by_the_merge_that_brought_them(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """On `main`'s first-parent history a count's house lands with the merge that moved
+    it to the result that holds it now, not the day its pass ran on a branch, as the pass
+    of 17 October 2026 reached `main` on the 19th; a source's rows land with the first
+    merge that holds any of them, as #631's rows did with #631's results. A house moved
+    back and forth is dated by its last move. `landings_audit` lists a recorded day that
+    differs from history."""
+    houses = tmp_path / stamp_landed.HOUSES_PATH
+    coverage = tmp_path / stamp_landed.COVERAGE_PATH
+    houses.parent.mkdir(parents=True)
+    coverage.parent.mkdir(parents=True)
+
+    def write(adopted: dict[int, str], sources: list[str]) -> None:
+        houses.write_text(f"ADOPTED = {adopted!r}\n", encoding="utf-8")
+        rows = "".join(f"  - n: 400\n    source_id: {source}\n" for source in sources)
+        coverage.write_text(f"beyond_horizon_claims:\n{rows}", encoding="utf-8")
+
+    _git(tmp_path, "init", "-q", "-b", "main")
+    write({29: "T-155"}, ["src-a"])
+    _git(tmp_path, "add", ".")
+    _git(tmp_path, "commit", "-q", "-m", "one", when="2026-10-15T12:00:00+00:00")
+    _git(tmp_path, "checkout", "-q", "-b", "pass")
+    write({29: "T-195", 68: "T-174"}, ["src-a", "src-b"])
+    _git(tmp_path, "commit", "-q", "-am", "pass", when="2026-10-17T12:00:00+00:00")
+    _git(tmp_path, "checkout", "-q", "main")
+    _git(tmp_path, "merge", "-q", "--no-ff", "pass", "-m", "merge", when="2026-10-19T06:22:00Z")
+    write({29: "T-155", 68: "T-174"}, ["src-a", "src-b"])
+    _git(tmp_path, "commit", "-q", "-am", "back", when="2026-10-20T12:00:00+00:00")
+    write({29: "T-195", 68: "T-174"}, ["src-a", "src-b"])
+    _git(tmp_path, "commit", "-q", "-am", "again", when="2026-10-21T12:00:00+00:00")
+    monkeypatch.setattr(stamp_landed, "REPO", tmp_path)
+    history = stamp_landed.landing_history("main")
+    assert history == stamp_landed.Landings(
+        {29: ("T-195", "2026-10-21"), 68: ("T-174", "2026-10-19")},
+        {"src-a": "2026-10-15", "src-b": "2026-10-19"},
+    )
+    recorded = stamp_landed.Landings(
+        {29: ("T-195", "2026-10-21"), 68: ("T-174", "2026-10-17")},
+        {"src-a": "2026-10-15", "src-b": "2026-10-19"},
+    )
+    assert stamp_landed.landings_audit(recorded, history, recorded) == [
+        "n=68 (T-174) records 2026-10-17; history gives 2026-10-19"
+    ]
+
+
+def test_every_house_and_row_source_carries_the_day_it_landed() -> None:
+    """The live landing record, read from the tree alone: one house per adopted count
+    under the result that houses it now, and one day per source with rows."""
+    landings = stamp_landed.read_landings(stamp_landed.LANDINGS.read_text(encoding="utf-8"))
+    adopted, sources = stamp_landed.current_landings()
+    assert stamp_landed.landings_problems(landings, adopted, sources) == []
+    assert stamp_landed.LANDINGS.read_text(encoding="utf-8") == stamp_landed.write_landings(
+        landings
+    )

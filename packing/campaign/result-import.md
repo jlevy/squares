@@ -130,6 +130,9 @@ A lane writes it with each new entry, as the day it registers it
 ([stage 3](#stage-3-record)). When the owner gives the word to merge, the branch’s last
 two commits re-date the branch’s new entries to the merge day and re-pin
 ([stage 5](#stage-5-publish), Before merge).
+The same stamp dates a branch’s new house best packings and new sources of dated
+beyond-horizon rows in `packing/frontier/landings.yaml`, which the home page’s Recently
+Added places them by; a test fails until every adopted count and row source has its day.
 A forgotten re-date leaves that pull request’s entries a day or two early and turns
 nothing red. The sweep after a merge runs `python -m devtools.stamp_landed --audit` from
 `packing/`, which compares every entry on `main` with `main`’s first-parent history and

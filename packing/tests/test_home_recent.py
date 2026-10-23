@@ -1,36 +1,44 @@
 """The home page's Recently Added, read from the record at render time.
 
 The owner, 22 October 2026: "It should be clear if you come to the site and see all the
-things that have recently merged now." The section covers the days the results page's
-"Added in the Last Seven Days" covers, one disclosure a day: every result that reached
-the site, at any significance; each count whose house best packing an adoption pass
-moved (`upper_bound_houses`); and the dated beyond-horizon rows the coverage register
-recorded (`source-coverage.yaml`). Every check reads the rendered page against those
-records, never against a list kept beside them.
+things that have recently merged now." The section covers the newest day anything reached
+`main` and the seven before it, one disclosure a day: every result that reached the site,
+at any significance, by its `landed`; each count whose house best packing changed, and
+each source's dated beyond-horizon rows, by the day `main` first held them
+(`frontier/landings.yaml`, which `devtools.stamp_landed` writes from the merge; #736's
+review A, findings A2 and A3). Every check reads the rendered page against those records,
+never against a list kept beside them.
 """
 
 from __future__ import annotations
 
 import re
 from collections import Counter
-from datetime import date
+from datetime import date, timedelta
 
 import pytest
 
-from devtools import news_highlights, overview_data, overview_sections, render_changelog
+from devtools import (
+    news_highlights,
+    overview_data,
+    overview_sections,
+    render_changelog,
+    stamp_landed,
+)
 from devtools import render_recent_results as standing
-from devtools import upper_bound_houses as houses
 from devtools.overview_data import EN_DASH
 from devtools.overview_sections import (
     RECENT_OPEN,
     BeyondRows,
     HouseMove,
     RecentDay,
-    added_since,
+    arrival_reference,
     beyond_rows,
+    house_landings,
     house_moves,
     landed_day,
     recent_tally,
+    source_landings,
 )
 from tests import site_renders
 
@@ -86,12 +94,17 @@ def days(section: str) -> dict[str, tuple[bool, str]]:
     return {day: (bool(state), body) for day, state, body in DAY.findall(section)}
 
 
+def _window(overview: overview_data.Overview) -> tuple[date, date]:
+    """The section's window: the newest arrival of any kind and the seven days before."""
+    until = arrival_reference(overview)
+    return until - timedelta(days=overview_sections.ADDED_DAYS), until
+
+
 def test_every_result_of_the_seven_days_is_listed_on_its_day_with_its_rungs(
     overview: overview_data.Overview, days: dict[str, tuple[bool, str]]
 ) -> None:
-    since = added_since(overview)
-    expected = {r.id: r for r in overview.results if landed_day(r) >= since}
-    assert expected, "the newest arrival is always inside its own seven days"
+    since, until = _window(overview)
+    expected = {r.id: r for r in overview.results if since <= landed_day(r) <= until}
     seen: Counter[str] = Counter()
     for day, (_, body) in days.items():
         for anchor, result_id, verification, confirmation, score in ENTRY.findall(body):
@@ -105,18 +118,20 @@ def test_every_result_of_the_seven_days_is_listed_on_its_day_with_its_rungs(
     assert seen == Counter(set(expected))
 
 
-def test_house_moves_follow_the_adoption_record_and_the_case_records(
+def test_house_moves_are_listed_on_the_day_main_took_them_in(
     overview: overview_data.Overview, days: dict[str, tuple[bool, str]]
 ) -> None:
-    """Each count an adoption pass moved inside the seven days is listed once, on the
-    pass's day, under the result that holds it now; and that result is the one the
-    case record's verified upper bound rests on, as the case page says."""
-    since = added_since(overview)
+    """Each count whose house best packing reached `main` inside the window is listed
+    once, on that day (`landings.yaml`), under the result that holds it now; that result
+    is the one the adoption record names and the one the case record's verified upper
+    bound rests on, as the case page says."""
+    since, until = _window(overview)
     expected = {
-        n: (houses.adopted_on(n), houses.ADOPTED[n])
-        for n in houses.NUMBERS
-        if date.fromisoformat(houses.adopted_on(n)) >= since
+        n: (day.isoformat(), result)
+        for n, (result, day) in house_landings().items()
+        if since <= day <= until
     }
+    adopted, _ = stamp_landed.current_landings()
     records = standing.load_records()
     seen: dict[int, tuple[str, str]] = {}
     for day, (_, body) in days.items():
@@ -125,16 +140,37 @@ def test_house_moves_follow_the_adoption_record_and_the_case_records(
             for n in map(int, re.findall(r'href="cases/(\d+)\.html" data-case="\1"', counts)):
                 assert n not in seen
                 seen[n] = (day, result_id)
+                assert adopted[n] == result_id
                 held = standing.lane_holders(n, records, "upper", ["verified"])
                 assert result_id in held, (n, result_id, held)
     assert seen == expected
 
 
-def test_each_recent_source_of_beyond_horizon_rows_has_one_line_on_its_day(
+def test_the_examples_review_a_cited_are_dated_by_their_merges() -> None:
+    """The pass of 17 October 2026 reached `main` on the 19th (d167d4b86, f3d5da7bd), so
+    its houses land on the 19th, not the day it ran; #631's rows reached `main` with
+    #631's results on 16 October; #701's couzo-issue678 rows with T-223 on the 21st. Each
+    holds while its house or source is the record's (#736's review A, finding A2)."""
+    houses = house_landings()
+    for n, result in ((29, "T-195"), (68, "T-174"), (172, "T-174")):
+        if houses[n][0] == result:
+            assert houses[n][1] == date(2026, 10, 19), n
+    rows = source_landings()
+    register = {r.id: r for r in site_renders.overview().results}
+    for source, result in (
+        ("couzo-verified-bounds-2026-10-14", "T-188"),
+        ("couzo-certificates-2026-10-14", "T-188"),
+        ("couzo-issue678-2026-10-18", "T-223"),
+    ):
+        assert rows[source] == landed_day(register[result]), source
+
+
+def test_each_source_of_beyond_horizon_rows_in_the_window_has_one_line_on_its_day(
     overview: overview_data.Overview, days: dict[str, tuple[bool, str]]
 ) -> None:
-    since = added_since(overview)
-    expected = {found.source["id"]: found for found in beyond_rows(since)}
+    since, until = _window(overview)
+    expected = {found.source["id"]: found for found in beyond_rows(since, until)}
+    landed = source_landings()
     corpus = overview_sections.corpus_end()
     lines = [(day, line) for day, (_, body) in days.items() for line in ROWS.findall(body)]
     assert len(lines) == len(expected)
@@ -144,7 +180,7 @@ def test_each_recent_source_of_beyond_horizon_rows_has_one_line_on_its_day(
     for day, (href, claims, end, span, _credit) in lines:
         found = by_readme[href.replace("&amp;", "&")]
         counts = [int(row["n"]) for row in found.rows]
-        assert day == found.day.isoformat()
+        assert day == found.day.isoformat() == landed[found.source["id"]].isoformat()
         assert int(end) == corpus
         assert claims == overview_sections.claims_phrase(found.rows)
         assert span == f"{min(counts)}{EN_DASH}{max(counts)}" or span == str(counts[0])
@@ -155,6 +191,29 @@ def test_each_recent_source_of_beyond_horizon_rows_has_one_line_on_its_day(
             href,
         ), href
         assert all(int(row["n"]) > corpus for row in found.rows)
+
+
+def test_one_window_bounds_every_kind_and_the_introduction_names_what_is_shown(
+    overview: overview_data.Overview, section: str, days: dict[str, tuple[bool, str]]
+) -> None:
+    """Results, houses and rows share one window, from seven days before the newest
+    arrival of any kind to it, read from the record and never the clock; the
+    introduction's span runs from the oldest day shown to the newest, so no block sits
+    outside it (#736's review A, finding A3)."""
+    since, until = _window(overview)
+    shown = sorted(date.fromisoformat(day) for day in days)
+    assert shown
+    assert since <= shown[0]
+    assert shown[-1] == until
+    assert f"over {overview_sections.span_label(shown[0], shown[-1])}," in section
+    assert overview_sections.recent_span(overview) == overview_sections.span_label(
+        shown[0], shown[-1]
+    )
+    # Bounded at both ends: a move or a source outside the window is left out.
+    early = until - timedelta(days=1)
+    assert all(move.day <= early for move in house_moves(since, early))
+    assert all(found.day <= early for found in beyond_rows(since, early))
+    assert overview_sections.record_reference() == until
 
 
 def test_the_newest_day_starts_open_and_each_day_tallies_what_it_holds(
@@ -187,31 +246,21 @@ def test_a_tally_counts_results_house_best_packings_and_rows_where_a_day_has_the
     )
 
 
-def test_house_moves_list_each_count_on_its_last_pass_alone() -> None:
-    moves = house_moves(date(2026, 10, 1))
+def test_house_moves_list_each_count_once_under_its_house() -> None:
+    moves = house_moves(date(2026, 10, 1), date(2027, 1, 1))
     counts = [n for move in moves for n in move.counts]
     assert len(counts) == len(set(counts))
+    houses = house_landings()
     for move in moves:
         for n in move.counts:
-            assert houses.adopted_on(n) == move.day.isoformat()
-            assert houses.ADOPTED[n] == move.result
+            assert houses[n] == (move.result, move.day)
 
 
-def test_the_section_links_the_seven_days_and_news(
-    section: str, overview: overview_data.Overview
-) -> None:
+def test_the_section_links_the_seven_days_and_news(section: str) -> None:
     assert 'href="results.html#added-in-the-last-seven-days"' in section
     assert 'href="news.html"' in section
     results = site_renders.html("results.html")
     assert 'id="added-in-the-last-seven-days"' in results
-    span = overview_sections.span_label(
-        overview_sections.added_since(overview), overview_sections.recent_reference(overview)
-    )
-    assert span in section
-    # The section's span ends on its own newest day, which may follow the results'.
-    days = overview_sections.recent_days(overview)
-    assert overview_sections.recent_reference(overview) == days[0].day
-    assert days[0].day >= overview_sections.added_reference(overview)
 
 
 def test_the_home_page_additions_stay_brief(section: str) -> None:

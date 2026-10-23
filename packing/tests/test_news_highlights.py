@@ -6,10 +6,17 @@ from __future__ import annotations
 import copy
 import html
 import re
+from datetime import date, timedelta
 
 import pytest
 
-from devtools import check_results, news_highlights, render_changelog, site_topics
+from devtools import (
+    check_results,
+    news_highlights,
+    overview_sections,
+    render_changelog,
+    site_topics,
+)
 from devtools.profile_links import public_names
 
 
@@ -27,11 +34,13 @@ def _entry(identifier: str, day: str, score: int) -> render_changelog.Document:
     }
 
 
-def test_the_box_opens_on_s5_alone_once_s5_fills_it_and_otherwise_on_s4_and_s5() -> None:
-    """The opening levels follow the archive (`default_levels`, the owner, 22 October
-    2026): S5 alone where News holds `LIMIT` S5 articles, of any age, and S4 and S5 while
-    it holds fewer. An article outside News, below S3 or excluded, never counts."""
-    limit = news_highlights.LIMIT
+def test_the_box_opens_on_s5_alone_only_while_the_newest_s5_articles_are_recent() -> None:
+    """The opening levels (`default_levels`; the owner, 22 October 2026, and #736's review
+    A, finding A4): S5 alone where the `LIMIT` newest S5 articles all fall within
+    `FRESH_DAYS` of the reference day, and S4 and S5 where there are fewer of them or one
+    is older. An article outside News, below S3 or excluded, never counts."""
+    limit, fresh = news_highlights.LIMIT, news_highlights.FRESH_DAYS
+    assert (limit, fresh) == (3, 30)
     fives = [_entry(f"five-{index}", f"2026-10-0{index + 1}", 5) for index in range(limit)]
     others = [
         _entry("four", "2026-10-20", 4),
@@ -40,18 +49,46 @@ def test_the_box_opens_on_s5_alone_once_s5_fills_it_and_otherwise_on_s4_and_s5()
         {**_entry("excluded", "2026-10-22", 5), "news_exclusion": "Retained history only."},
     ]
     full = {"entries": [*fives, *others]}
-    assert news_highlights.default_levels(full) == (5,)
-    assert [entry["id"] for entry in news_highlights.highlights(full)] == [
+    reference = date(2026, 10, 22)
+    assert news_highlights.default_levels(full, reference) == (5,)
+    assert [entry["id"] for entry in news_highlights.highlights(full, reference)] == [
         f"five-{index}" for index in reversed(range(limit))
     ]
-    short = {"entries": [*fives[1:], *others]}
-    assert news_highlights.default_levels(short) == render_changelog.NEWS_LEVELS == (4, 5)
-    assert [entry["id"] for entry in news_highlights.highlights(short)] == [
+    # The oldest of the three, 1 October, is 30 days old on the 31st and 31 on 1 November.
+    assert news_highlights.default_levels(full, date(2026, 10, 31)) == (5,)
+    assert news_highlights.default_levels(full, date(2026, 11, 1)) == (4, 5)
+    assert [entry["id"] for entry in news_highlights.highlights(full, date(2026, 11, 1))] == [
         "four",
         *(f"five-{index}" for index in reversed(range(1, limit))),
-    ][:limit]
-    assert news_highlights.default_levels({"entries": others}) == (4, 5)
-    assert not news_highlights.highlights({"entries": []})
+    ]
+    short = {"entries": [*fives[1:], *others]}
+    assert news_highlights.default_levels(short, reference) == render_changelog.NEWS_LEVELS
+    assert render_changelog.NEWS_LEVELS == (4, 5)
+    assert news_highlights.default_levels({"entries": others}, reference) == (4, 5)
+    assert not news_highlights.highlights({"entries": []}, reference)
+
+
+def test_the_box_switches_to_s4_and_s5_as_the_record_s_s5_articles_age(
+    document: render_changelog.Document,
+) -> None:
+    """On the record: the box opens on S5 while the third newest S5 article is at most
+    `FRESH_DAYS` old on the reference day, and on S4 and S5 the day after. With no day
+    given it measures from the build's own (`record_reference`), never the clock."""
+    fives = [
+        entry
+        for entry in render_changelog.news_entries(document)
+        if render_changelog.entry_significance(entry)["score"] == 5
+    ]
+    third = date.fromisoformat(fives[news_highlights.LIMIT - 1]["date"])
+    last = third + timedelta(days=news_highlights.FRESH_DAYS)
+    assert news_highlights.default_levels(document, last) == (5,)
+    assert news_highlights.default_levels(document, last + timedelta(days=1)) == (4, 5)
+    shown = news_highlights.highlights(document, last + timedelta(days=1))
+    assert all(entry["significance"]["score"] in (4, 5) for entry in shown)
+    reference = overview_sections.record_reference()
+    assert news_highlights.default_levels(document) == news_highlights.default_levels(
+        document, reference
+    )
 
 
 def test_the_box_carries_the_newest_of_each_level_in_frozen_date_and_id_order() -> None:
@@ -107,9 +144,10 @@ def test_the_box_follows_new_s5_articles_with_and_without_t194(
             for entry in render_changelog.news_entries(data)
             if render_changelog.entry_significance(entry)["score"] == 5
         ]
-        levels = news_highlights.default_levels(data)
+        reference = date(2026, 10, 23)
+        levels = news_highlights.default_levels(data, reference)
         assert levels == ((5,) if len(fives) >= news_highlights.LIMIT else (4, 5))
-        shown = news_highlights.highlights(data)
+        shown = news_highlights.highlights(data, reference)
         assert len(shown) == news_highlights.LIMIT
         if levels == (5,):
             assert list(shown) == fives[: news_highlights.LIMIT]
@@ -181,8 +219,9 @@ def test_homepage_draws_the_archives_significance_filter_compact_and_preselected
 ) -> None:
     """The box's filter is the archive's own significance widget, drawn by the one
     function both call, in its compact form: the same buttons, titles and legend, pressed
-    at the box's opening levels, with no topics, reset or count, hidden until the script
-    shows it."""
+    at the box's opening levels, with no topics or reset, and the archive's live count
+    kept for screen readers out of sight (#736's review A, finding A5), all hidden until
+    the script shows it."""
     rendered = news_highlights.render(document)
     archive = render_changelog.render_news(document)
     levels = news_highlights.default_levels(document)
@@ -190,20 +229,56 @@ def test_homepage_draws_the_archives_significance_filter_compact_and_preselected
     assert rendered.startswith(
         '<div class="site-news-filters site-news-filters-compact sans-text" '
         f"data-news-filters data-site-tooltip-outside hidden>{widget}"
-        f"{render_changelog.NEWS_EMPTY}</div>"
+        f"{render_changelog.NEWS_EMPTY}"
+        '<span class="site-visually-hidden" data-news-count role="status" '
+        'aria-live="polite"></span></div>'
     )
     assert render_changelog.news_significance_filter() in archive
     assert re.findall(r'data-news-score="(\d)"[^>]*aria-pressed="true"', widget) == [
         str(level) for level in levels
     ]
-    for absent in ('aria-labelledby="news-topics-label"', "data-news-reset", "data-news-count"):
+    for absent in ('aria-labelledby="news-topics-label"', "data-news-reset"):
         assert absent not in rendered
         assert absent in archive
+    for rendered_list in (rendered, archive):
+        assert rendered_list.count('role="status" aria-live="polite"') == 1
     # The archive itself still opens on S4 and S5 under its full filters.
     assert re.findall(
         r'data-news-score="(\d)"[^>]*aria-pressed="true"',
         archive.split('aria-labelledby="news-topics-label"', 1)[0],
     ) == ["4", "5"]
+
+
+def test_an_archive_given_levels_presses_the_levels_it_shows(
+    document: render_changelog.Document,
+) -> None:
+    """`render_news(selected=...)` without a limit opens the archive on those levels: its
+    filter presses them, which is what `news-filters.js` starts from, and its cards at
+    any other level start hidden (#736's review A, finding A7)."""
+    archive = render_changelog.render_news(document, selected=(5,))
+    controls = archive.split('aria-labelledby="news-topics-label"', 1)[0]
+    assert re.findall(r'data-news-score="(\d)"[^>]*aria-pressed="true"', controls) == ["5"]
+    for card in _cards(archive).values():
+        five = 'data-news-score="5"' in card.split(">", 1)[0]
+        assert card.startswith("<section hidden ") is not five
+
+
+def test_a_box_with_no_news_says_so_and_draws_no_filter() -> None:
+    """With no News article, the box says "No news yet." and draws no filter, rather than
+    an empty list under a filter that says nothing matches (#736's review A, finding
+    A8)."""
+    # Below S3 nothing is News; the archive's frozen entries keep their dates.
+    empty = copy.deepcopy(render_changelog.load())
+    for entry in empty["entries"]:
+        entry["significance"]["score"] = 2
+    assert not render_changelog.news_entries(empty)
+    rendered = news_highlights.render(empty, date(2026, 10, 23))
+    assert rendered == (
+        '<div class="site-news" data-news data-news-limit="3" data-contributor-plain>'
+        "<p>No news yet.</p></div>"
+    )
+    assert "data-news-filters" not in rendered
+    assert "No news matches" not in rendered
 
 
 def test_news_keeps_both_reported_proofs_and_their_complete_qualification_text(

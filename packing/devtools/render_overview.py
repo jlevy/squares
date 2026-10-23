@@ -549,8 +549,6 @@ RENDER_INPUTS: tuple[Path, ...] = (
     # buttons quote (`render_changelog.news_significance_meanings`).
     PACKING / "campaign" / "result-import.md",
     PACKING / "devtools/news_highlights.py",
-    # The house adoption record Recently Added reads (`overview_sections.house_moves`).
-    PACKING / "devtools/upper_bound_houses.py",
     PACKING / "devtools/build_known_best_atlas.py",
     PACKING / "devtools/atlas_print_font.py",
     PACKING / "devtools/default_drawings.py",
@@ -1413,14 +1411,14 @@ def overview_page() -> Page:
     overview = overview_data.load()
     values = {
         "HERO": overview_sections.hero(),
-        "NEWS_PREVIEW": news_highlights.render(render_changelog.load()),
+        # The box's age rule ends on the same day as Recently Added's window.
+        "NEWS_PREVIEW": news_highlights.render(
+            render_changelog.load(), overview_sections.arrival_reference(overview)
+        ),
         # What reached the site over the results page's seven days, from the same records
         # (the owner, 22 October 2026): results, house best packings, dated rows.
         "RECENTLY_ADDED": overview_sections.recently_added(overview),
-        "RECENT_SPAN": overview_sections.span_label(
-            overview_sections.added_since(overview),
-            overview_sections.recent_reference(overview),
-        ),
+        "RECENT_SPAN": overview_sections.recent_span(overview),
         "ADDED_DAYS": overview_sections.ADDED_DAYS_WORD[overview_sections.ADDED_DAYS],
         "CORPUS_END": str(overview_sections.corpus_end()),
         "ATLAS_GRID": overview_sections.atlas_preview(),

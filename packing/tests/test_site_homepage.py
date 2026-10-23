@@ -1220,6 +1220,11 @@ def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
             if entry["significance"]["score"] in chosen
         ][:limit]
 
+    def spoken(chosen: set[int]) -> str:
+        shown = len(newest(chosen))
+        named = ", ".join(f"S{score}" for score in sorted(chosen))
+        return f"Showing {shown} news item{'' if shown == 1 else 's'} at {named}"
+
     def look(page: Any, score: int) -> dict[str, Any]:
         choice = {"chooser": significance, "choice": f'[data-news-score="{score}"]'}
         return page.evaluate(NEWS_FILTERS, choice)["chooser"]
@@ -1244,7 +1249,8 @@ def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
         assert [group["name"] for group in seen["groups"]] == ["Significance"]
         assert seen["groups"][0]["hidden_legend"]
         assert seen["resets"] == []
-        assert seen["count"] is None
+        # The archive's live count, out of sight, says what the box shows.
+        assert seen["count"] == spoken(levels)
         assert not seen["empty"]
         assert seen["overflow"] == 0
         assert visible() == newest(levels)
@@ -1276,6 +1282,7 @@ def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
         page.locator('[data-news-filters] button[data-news-score="3"]').focus()
         page.keyboard.press("Enter")
         assert visible() == newest(widened)
+        assert page.evaluate(NEWS_FILTERS)["count"] == spoken(widened)
         carry = page.locator("a[data-news-carry]").get_attribute("href")
         query = parse_qs(urlsplit(carry).query)
         assert query["news-s"] == [",".join(str(score) for score in sorted(widened))]
@@ -1284,6 +1291,7 @@ def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
             page.keyboard.press(" ")
         seen = page.evaluate(NEWS_FILTERS)
         assert seen["scores"] == []
+        assert seen["count"] == "No news matches these filters"
         assert seen["empty"]
         assert not visible()
         page.locator('[data-news-filters] button[data-news-score="3"]').focus()

@@ -1618,13 +1618,16 @@ def recent_added(overview: Overview, *, days: int = ADDED_DAYS) -> str:
 # ---------- Recently Added: the home page's view of the same seven days ----------
 #
 # The owner, 22 October 2026: "It should be clear if you come to the site and see all
-# the things that have recently merged now." The home page's Recently Added covers the
-# days "Added in the Last Seven Days" covers (`added_since` to `added_reference`), one
-# disclosure a day, newest first, each with what the record holds of that day: every
-# result that reached the site at any significance, as that section lists it
-# (`added_entry`), linked to its row on the results page; each count whose house best
-# packing an adoption pass moved that day (`house_moves`); and the dated beyond-horizon
-# rows the coverage register recorded that day, one line a source (`beyond_rows`).
+# the things that have recently merged now." The home page's Recently Added lists what
+# reached `main`, and with it the site, over the newest arrival day and the seven before
+# it (`arrival_reference`, `recent_days`), one disclosure a day, newest first: every
+# result at any significance, by its `landed`, as the results page lists it
+# (`added_entry`), linked to its row there; each count whose house best packing changed,
+# by the day `main` first held its current house (`house_moves`); and each source's dated
+# beyond-horizon rows, by the day `main` first held them (`beyond_rows`). All three are
+# merge days stamped into the record (`devtools.stamp_landed`, `frontier/landings.yaml`;
+# #736's review A, finding A2), so nothing here reads Git (OR-18) and one window bounds
+# them all (finding A3).
 
 #: How many of the newest days start open on the home page: the newest alone, so the
 #: section stays a few lines long.
@@ -1632,6 +1635,9 @@ RECENT_OPEN = 1
 #: The register of named sources, whose `beyond_horizon_claims` are the dated rows
 #: beyond the case corpus.
 SOURCE_COVERAGE = FRONTIER / "source-coverage.yaml"
+#: The day each house best packing and each source's rows reached `main`, as `landed` is
+#: for a register entry (`devtools.stamp_landed`).
+LANDINGS = FRONTIER / "landings.yaml"
 #: A beyond-horizon row's claim as a line counts it.
 _CLAIM_NOUNS = {
     "upper-bound": "upper bound",
@@ -1641,8 +1647,8 @@ _CLAIM_NOUNS = {
 
 
 class HouseMove(NamedTuple):
-    """One adoption pass's move of the house best packing to one result: the day the
-    pass ran, the result, and the counts it moved there that the result still holds."""
+    """The counts whose house best packing became one result on one day: the day `main`
+    first held it, the result, and those counts."""
 
     day: date
     result: str
@@ -1650,9 +1656,8 @@ class HouseMove(NamedTuple):
 
 
 class BeyondRows(NamedTuple):
-    """One source's dated rows beyond the case corpus: the day the coverage register
-    reviewed the source, which is the day its rows were recorded, the source's entry,
-    and its rows."""
+    """One source's dated rows beyond the case corpus: the day `main` first held them,
+    the source's entry, and its rows."""
 
     day: date
     source: Mapping[str, Any]
@@ -1660,8 +1665,8 @@ class BeyondRows(NamedTuple):
 
 
 class RecentDay(NamedTuple):
-    """One day of Recently Added: the results that reached the site, the house moves of
-    the passes that ran, and the beyond-horizon rows recorded."""
+    """One day of Recently Added: the results, house best packings and rows that
+    reached `main` that day."""
 
     day: date
     results: tuple[Result, ...]
@@ -1669,44 +1674,89 @@ class RecentDay(NamedTuple):
     rows: tuple[BeyondRows, ...]
 
 
-def house_moves(since: date) -> list[HouseMove]:
-    """The house best packings adopted from `since` on, newest first and then by result:
-    each count's house as the adoption record holds it now (`upper_bound_houses.ADOPTED`),
-    on the day the pass that set it ran (`adopted_on`). A count a later pass moved again
-    is listed on the later day alone, under the result it moved to."""
-    from devtools import upper_bound_houses as houses  # noqa: PLC0415
+@cache
+def _coverage() -> Mapping[str, Any]:
+    return safe_load(SOURCE_COVERAGE.read_text(encoding="utf-8"))
 
+
+@cache
+def _landings() -> Mapping[str, Any]:
+    return safe_load(LANDINGS.read_text(encoding="utf-8"))
+
+
+def house_landings() -> dict[int, tuple[str, date]]:
+    """Each adopted count's house result and the day `main` first held it."""
+    return {
+        int(entry["n"]): (str(entry["result"]), date.fromisoformat(str(entry["landed"])))
+        for entry in _landings()["houses"]
+    }
+
+
+def source_landings() -> dict[str, date]:
+    """Each row source and the day `main` first held its rows."""
+    return {
+        str(entry["id"]): date.fromisoformat(str(entry["landed"]))
+        for entry in _landings()["sources"]
+    }
+
+
+def arrival_reference(overview: Overview) -> date:
+    """The newest day anything reached `main` by the record: a result's `landed`, a house
+    best packing's or a source's rows' landing. It is the newest merge the build's
+    records were stamped by, never the clock's or Git's, so two renders of one tree are
+    the same bytes. Recently Added's window and the News box's age rule end on it."""
+    return max(
+        added_reference(overview),
+        *(day for _, day in house_landings().values()),
+        *source_landings().values(),
+    )
+
+
+@cache
+def record_reference() -> date:
+    """`arrival_reference` read from the records alone, without loading the overview:
+    the newest `landed` in the register and the newest landing. The News box's age rule
+    takes it where no overview is at hand (`news_highlights.default_levels`)."""
+    register = safe_load((FRONTIER / "results.yaml").read_text(encoding="utf-8"))
+    return max(
+        *(
+            date.fromisoformat(str(entry.get("landed") or entry["registered"]))
+            for entry in register["results"]
+        ),
+        *(day for _, day in house_landings().values()),
+        *source_landings().values(),
+    )
+
+
+def house_moves(since: date, until: date) -> list[HouseMove]:
+    """The counts whose house best packing reached `main` from `since` to `until`, newest
+    first and then by result: each under the result that houses it now, on the day `main`
+    first held that house (`landings.yaml`). A count whose house changed again is listed
+    on the later day alone."""
     moved: dict[tuple[date, str], list[int]] = {}
-    for n in houses.NUMBERS:
-        day = date.fromisoformat(houses.adopted_on(n))
-        if day >= since:
-            moved.setdefault((day, houses.ADOPTED[n]), []).append(n)
+    for n, (result, day) in house_landings().items():
+        if since <= day <= until:
+            moved.setdefault((day, result), []).append(n)
     ordered = sorted(moved, key=lambda key: (-key[0].toordinal(), int(key[1].split("-")[1])))
     return [
         HouseMove(day, result, tuple(sorted(moved[day, result]))) for day, result in ordered
     ]
 
 
-@cache
-def _coverage() -> Mapping[str, Any]:
-    return safe_load(SOURCE_COVERAGE.read_text(encoding="utf-8"))
-
-
-def beyond_rows(since: date) -> list[BeyondRows]:
-    """The dated beyond-horizon rows recorded from `since` on, one entry a source,
-    newest first, then the source with more rows first, then by id. A row carries no
-    date of its own; its source's `reviewed` is the day the register recorded it, as each
-    intake's records lane writes the source and its rows together."""
+def beyond_rows(since: date, until: date) -> list[BeyondRows]:
+    """The dated beyond-horizon rows that reached `main` from `since` to `until`, one
+    entry a source, newest first, then the source with more rows first, then by id. A row
+    carries no date of its own; its source's landing is the day `main` first held its
+    rows, which so far have always come in one merge."""
     coverage = _coverage()
+    landed = source_landings()
     held: dict[str, list[Mapping[str, Any]]] = {}
     for row in coverage["beyond_horizon_claims"]:
         held.setdefault(str(row["source_id"]), []).append(row)
     found = [
-        BeyondRows(
-            date.fromisoformat(str(source["reviewed"])), source, tuple(held[source["id"]])
-        )
+        BeyondRows(landed[source["id"]], source, tuple(held[source["id"]]))
         for source in coverage["sources"]
-        if source["id"] in held and date.fromisoformat(str(source["reviewed"])) >= since
+        if source["id"] in held and since <= landed[source["id"]] <= until
     ]
     return sorted(
         found, key=lambda found: (-found.day.toordinal(), -len(found.rows), found.source["id"])
@@ -1714,15 +1764,16 @@ def beyond_rows(since: date) -> list[BeyondRows]:
 
 
 def recent_days(overview: Overview, *, days: int = ADDED_DAYS) -> list[RecentDay]:
-    """Every day of the seven to the newest arrival (`added_since`) on which a result
-    arrived, a house moved or rows were recorded, newest first."""
-    since = added_since(overview, days)
+    """Every day from `days` before the newest arrival (`arrival_reference`) to it on
+    which a result, a house best packing or rows reached `main`, newest first."""
+    until = arrival_reference(overview)
+    since = until - timedelta(days=days)
     results = {added.day: added.results for added in added_days(overview.results, since)}
     houses: dict[date, list[HouseMove]] = {}
-    for move in house_moves(since):
+    for move in house_moves(since, until):
         houses.setdefault(move.day, []).append(move)
     rows: dict[date, list[BeyondRows]] = {}
-    for found in beyond_rows(since):
+    for found in beyond_rows(since, until):
         rows.setdefault(found.day, []).append(found)
     return [
         RecentDay(
@@ -1732,11 +1783,13 @@ def recent_days(overview: Overview, *, days: int = ADDED_DAYS) -> list[RecentDay
     ]
 
 
-def recent_reference(overview: Overview, *, days: int = ADDED_DAYS) -> date:
-    """The last day Recently Added covers: its newest day, which an adoption pass or a
-    source's rows may hold after the newest result arrived (`added_reference`)."""
-    found = recent_days(overview, days=days)
-    return found[0].day if found else added_reference(overview)
+def recent_span(overview: Overview, *, days: int = ADDED_DAYS) -> str:
+    """The days Recently Added shows, as its introduction names them: its oldest shown day
+    to its newest (`span_label`), so no block can sit outside the span."""
+    shown = [recent.day for recent in recent_days(overview, days=days)]
+    if not shown:
+        return day_label(arrival_reference(overview))
+    return span_label(min(shown), max(shown))
 
 
 def corpus_end() -> int:

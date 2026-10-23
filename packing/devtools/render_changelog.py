@@ -1223,6 +1223,9 @@ def news_significance_filter(selected: Sequence[int] = NEWS_LEVELS) -> str:
 
 #: What a filtered list says when nothing matches its choices.
 NEWS_EMPTY = "<p data-news-empty hidden>No news matches these filters.</p>"
+#: What a preview says when News holds no article for it to show (#736's review A,
+#: finding A8).
+NEWS_NONE = "<p>No news yet.</p>"
 
 
 def news_filters(
@@ -1235,12 +1238,16 @@ def news_filters(
     are the significance choices (`news_significance_filter`), the topics, a reset and a
     count; without the enhancement every article stays visible. The `compact` form, the
     home page's News box's, is the significance choices alone, at the right above the
-    cards and quieter than the archive's (`.site-news-filters-compact`)."""
+    cards and quieter than the archive's (`.site-news-filters-compact`), with the
+    archive's live count kept for screen readers and hidden from sight (#736's review A,
+    finding A5)."""
     if compact:
         return (
             '<div class="site-news-filters site-news-filters-compact sans-text" '
             "data-news-filters data-site-tooltip-outside hidden>"
-            f"{news_significance_filter(selected)}{NEWS_EMPTY}</div>"
+            f"{news_significance_filter(selected)}{NEWS_EMPTY}"
+            '<span class="site-visually-hidden" data-news-count role="status" '
+            'aria-live="polite"></span></div>'
         )
     topics = "".join(
         f'<button type="button" class="site-chip" data-news-topic="{topic}" '
@@ -1292,12 +1299,14 @@ def render_news(
 ) -> str:
     """Complete canonical cards, optionally selected by ID and limited for a preview.
 
-    The archive (no `limit`) opens on `NEWS_LEVELS` under its full filters. A preview
-    shows `limit` cards. Given `selected` levels, it carries every card `entry_ids` names
-    under the compact significance filter preselected to those levels, and shows the
-    newest `limit` of them at those levels; the rest are hidden, with or without scripts,
-    until a reader widens the choice (`news-filters.js`, `data-news-limit`). Without
-    `selected` a preview carries its newest `limit` cards alone, unfiltered.
+    The archive (no `limit`) opens on `selected`, by default `NEWS_LEVELS`, under its full
+    filters pressed at those levels, and hides the cards at any other until a reader
+    chooses them. A preview shows `limit` cards. Given `selected` levels, it carries every
+    card `entry_ids` names under the compact significance filter preselected to those
+    levels, and shows the newest `limit` of them at those levels; the rest are hidden, with
+    or without scripts, until a reader widens the choice (`news-filters.js`,
+    `data-news-limit`). With no card to carry it says "No news yet." and draws no filter.
+    Without `selected` a preview carries its newest `limit` cards alone, unfiltered.
 
     Their names are plain profile links (`data-contributor-plain`): News navigates to a
     profile rather than opening it in the profile popover (`paper-design.md`).
@@ -1320,9 +1329,14 @@ def render_news(
     filters, limited = "", ""
     if limit is None:
         filters = news_filters(
-            {topic for entry in entries for topic in entry.get("topics", [])}
+            {topic for entry in entries for topic in entry.get("topics", [])}, selected=levels
         )
     elif filtered:
+        if not entries:
+            return (
+                f'<div class="site-news" data-news data-news-limit="{limit}" '
+                f"data-contributor-plain>{NEWS_NONE}</div>"
+            )
         filters = news_filters(selected=levels, compact=True)
         limited = f' data-news-limit="{limit}"'
     out = [

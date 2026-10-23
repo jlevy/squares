@@ -1106,11 +1106,16 @@ contributor articles use their component sheets and the same text tokens.
   Full result records retain the result’s real kind, status, claim and credit.
   The homepage’s News box shows the three newest News articles at the levels it opens
   on, ordered by the announcement’s frozen date and stable ID, followed by “All news →”.
-  It opens on S5 alone where News holds at least three S5 articles, and otherwise on S4
-  and S5, decided at render time (`news_highlights.default_levels`, the owner, 22
-  October 2026). Above the cards, at the right, sits the archive’s own significance
-  filter in its compact form (`render_changelog.news_filters(compact=True)`): the same
-  buttons, smaller and lighter, with no topics, reset or count.
+  It opens on S5 alone where the three newest S5 articles all fall within 30 days of the
+  build’s reference day, the newest day its records say anything reached `main`, and
+  otherwise on S4 and S5, decided at render time and never from the clock
+  (`news_highlights.default_levels`; the owner, 22 October 2026, and #736’s review A).
+  Above the cards, at the right, sits the archive’s own significance filter in its
+  compact form (`render_changelog.news_filters(compact=True)`): the same buttons,
+  smaller and lighter through the `--site-chooser-compact-scale` token, with no topics
+  or reset, and the archive’s live count kept out of sight for screen readers.
+  With no article to show, the box says “No news yet.”
+  and draws no filter.
   A press shows the newest three at the chosen levels; the box carries the newest three
   of each level for that, hidden until chosen, and keeps its opening levels without
   scripts. “All news →” carries a changed choice to the archive as `news-s`. Each preview
@@ -2682,18 +2687,21 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   this applies, the cards to their pages, and the three pages to saying each thing once.
 
 - **Recently Added.** Directly below the Atlas preview, the homepage lists what reached
-  the site from the first day the Results page’s “Added in the Last Seven Days” covers
-  to its own newest day, which an adoption pass may hold after the newest result
-  (`recent_reference`), one native disclosure a day, newest first, the newest open
+  `main`, and with it the site, on the newest arrival day and the seven before it, one
+  native disclosure a day, newest first, the newest open
   (`overview_sections.recently_added`, the owner, 22 October 2026, `think-rqen`). Each
-  day holds every result that arrived, at any significance, as the Results page lists it
-  (`added_entry`, its id linking to its row there); each count whose house best packing
-  an adoption pass moved that day, under the result that holds it now
-  (`upper_bound_houses.ADOPTED` and `adopted_on`, which the case records agree with);
-  and the dated beyond-horizon rows the coverage register recorded that day, one line a
-  source with its count, its span of counts, its credit and how many are since
-  superseded, linking to the source’s packet on GitHub, since no page of the site lists
-  those rows. The summary tallies the three and wraps between them.
+  day holds every result that arrived, at any significance, by its `landed`, as the
+  Results page lists it (`added_entry`, its id linking to its row there); each count
+  whose house best packing changed, under the result that holds it now; and each
+  source’s dated beyond-horizon rows, one line a source with its count, its span of
+  counts, its credit and how many are since superseded, linking to the source’s packet
+  on GitHub, since no page of the site lists those rows.
+  Houses and rows are placed by the day `main` first held them, which
+  `devtools.stamp_landed` writes into `packing/frontier/landings.yaml` at the merge step
+  as it writes `landed`; nothing that renders reads Git (OR-18). One window bounds all
+  three, ending on the newest of those days (`arrival_reference`), and the introduction
+  names the days shown.
+  The summary tallies the three and wraps between them.
   The section reuses the Results page’s classes and `results.css`, and its introduction
   links that page’s seven days and News.
   `tests/test_home_recent.py` holds it to the records and to 40,000 bytes.
