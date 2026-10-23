@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-22'
+last_reviewed: '2026-10-23'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -42979,3 +42979,31 @@ evidence:
       here. Review and confirmation remain pending; no stage 4 review is owed for a
       beyond-horizon row. No arrangement identity, local minimum, optimum or credit statement of
       the source is established.
+  - id: E-wand125-fine-net-n31-59775-report
+    claim: lower-bound
+    scope: {n_values: [31]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net n31 2026-10-11]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-n31-2026-10-11/release/certificates/mixed_n31_L59775/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 2391/400 at all 2,073 directions of the net its candidate
+      declares (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this
+      repository's sqverify_fast, at 23e3186, on no issue, in a check2 run (2,161.9 s at
+      12 threads, 21,625 direction CPU-s) and a pre-publication run on a fresh machine
+      (7,277 s). Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n31.json). Eight sampled directions run
+      here by sqverify-fast verified and matched the source's log; that is a diagnostic,
+      not a replay. The 32-direction 197/200 control remains sampled. A complete capture,
+      whole-net controls and a review that reads this certificate remain pending under
+      think-wop1, priced at about 8.3 to 12.0 CPU-hours. The shared crate establishes no
+      independent implementation. No standing bound or rating changes; T-068, T-074 and
+      the jlevy/squares#446 597/100 report stand.
+    source_reviewed: '2026-10-23'

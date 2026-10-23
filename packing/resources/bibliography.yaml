@@ -1889,6 +1889,23 @@ sources:
       Native capture, controls and adoption pending. The enclosing MIT notice does not settle
       redistribution of the nested verifier, which adapts this project's sqverify_fast, so a maintained
       replay is not another independent implementation.
+  - key: '[wand125 fine-net n31 2026-10-11]'
+    authors: [Hosono]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-11'
+    credit: Hosono after Tokoharu and Levy
+    lineage: builds-on-project
+    note: >-
+      The n31 finer-net measure lower-bound report, s(31) >= 2391/400 = 5.9775 by
+      mixed_n31_L59775 on the 2,073-direction net, that wand125/square-packing added at
+      23e31862345c532d17ad2c896677a3a8d8821aa4, the packet's pin, on 2026-10-11, reported on
+      no issue. Its data are in release square-lower-bounds-v1; the asset's candidate,
+      receipts and logs are retained under OR-18, the nested verifier archive is pinned by
+      digest, and the directory's MIT documents are retained. Maintained measure,
+      declared-net and full check2 premises accepted. Native capture, controls and adoption
+      pending under think-wop1. The nested verifier adapts this project's sqverify_fast, so a
+      maintained replay is not another independent implementation.
   - key: '[wand125 linear n122 2026-10-10]'
     authors: [Hosono]
     year: 2026

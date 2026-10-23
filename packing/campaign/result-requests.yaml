@@ -3479,22 +3479,32 @@ issues:
       their lower lanes are 853/100, 3769/400 and 379/40. The other fourteen remain
       V0/C0 under think-f40c; the n86 capture has no check or control run. No upper-bound house
       changed. The post-deployment follow-up of 19 October records the n108 state and requests
-      the upstream control filename correction.
+      the upstream control filename correction. On 23 October the original n19, n20 and n26
+      values and the n27 follow-up's 1131/200 are registered together as one reported entry,
+      T-233 at V0/C0, pending their replays under think-ndvg; the issue's n27 2261/400 is
+      superseded in the same release and stays unregistered, and its n31 597/100 is passed by
+      the source's later 2391/400 (T-232, not reported here).
     read_through: '2026-10-16T09:00:31Z'
     results:
     - key: fine-net-n19
       claim: Author reports lower bound 1931/400 for n=19 using all 2073 declared net directions.
       source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n19_L48275/README.md
+      register:
+      - T-233
       evidence:
       - E-wand125-fine-net-lower-bounds-446-report
     - key: fine-net-n20
       claim: Author reports lower bound 393/80 for n=20 using all 2073 declared net directions.
       source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n20_L49125/README.md
+      register:
+      - T-233
       evidence:
       - E-wand125-fine-net-lower-bounds-446-report
     - key: fine-net-n26
       claim: Author reports lower bound 1111/200 for n=26 using all 2073 declared net directions.
       source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n26_L5555/README.md
+      register:
+      - T-233
       evidence:
       - E-wand125-fine-net-lower-bounds-446-report
     - key: fine-net-n27
@@ -3522,6 +3532,8 @@ issues:
         original reported 2261/400 by 1/400. Complete source custody and conditional maintained input
         premises are accepted; project native capture remains pending.
       source: https://github.com/jlevy/squares/issues/446#issuecomment-6064831911
+      register:
+      - T-233
       evidence:
       - E-wand125-fine-net-n27-5655-followup-report
     - key: fine-net-n29-582-followup

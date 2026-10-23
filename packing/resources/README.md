@@ -969,6 +969,16 @@ maintained premise checks and diagnostic eight-direction samples.
 T-142 and T-143 record them at V0/C0; a complete replay and whole-net controls remain
 pending.
 
+**[wand125 fine-net n31 2026-10-11]**: Hosono’s n31 certificate, `mixed_n31_L59775`,
+reports $s(31) \ge 2391/400 = 5.9775$ on the same 2,073-direction net, above both lower
+lanes’ $2381/400$ and #446’s unadopted $597/100$; no issue reports it.
+The [packet](web/wand125-fine-net-n31-2026-10-11/README.md) retains the directory’s MIT
+documents at revision `23e3186` and, under OR-18, the release asset’s candidate,
+receipts and logs, with the maintained premise check and a diagnostic eight-direction
+sample; the nested verifier archive is pinned by digest.
+T-232 records the bound; a complete replay, whole-net controls and a review remain
+pending under think-wop1.
+
 **[wand125 fine-net n37 n39 n44 2026-10-13]**: Hosono’s n37, n39 and n44 certificates,
 `mixed_n37_L64975`, `mixed_n39_L66625` and `mixed_n44_L69975`, report
 $s(37) \ge 2599/400 = 6.4975$, $s(39) \ge 533/80 = 6.6625$ and

@@ -2977,7 +2977,8 @@ sources:
   notes: All seven original archives and sealed source/log/member identities retained outside live Git.
     Conditional maintained input/kernel review accepted; no native replay, numeric claims_record or
     standing-bound selection. Whole-net controls/custody adapter and explicit reviewed hosted budget
-    remain pending under think-ndvg.
+    remain pending under think-ndvg. T-233 registers the n19, n20 and n26 values with the n27
+    follow-up's, as reported.
 - id: couzo-451-exact-refinements
   title: Francisco Couzo's eight rational refinements, issue451
   role: source-repository
@@ -3029,6 +3030,7 @@ sources:
     catalogue and all standing claims remain unchanged. Complete archive/candidate/source custody and
     exact conditional mass/net premises accepted; author full positives and sampled controls over 32 directions
     do not supply maintained capture or whole-net controls. Source-only work remains under think-ndvg.
+    T-233 registers it with the n19, n20 and n26 values, as reported.
 - id: evand-batch-105-130-2026-10-07
   title: "Evan Daniel's dated certificate reports at 105 and 130, issue #375"
   role: source-repository
@@ -3539,6 +3541,29 @@ sources:
     release-asset and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
     maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
     supply a maintained capture or whole-net controls. Replay and adoption remain under think-i85v.
+- id: wand125-fine-net-n31-59775-2026-10-11
+  title: Hosono reported n31 fine-net lower bound, no issue
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/23e31862345c532d17ad2c896677a3a8d8821aa4/problems/square-lower-bounds/certificates/mixed_n31_L59775
+  local: resources/web/wand125-fine-net-n31-2026-10-11/
+  source_key: '[wand125 fine-net n31 2026-10-11]'
+  scope:
+    n_values:
+    - 31
+  reviewed: '2026-10-23'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-n31-2026-10-11/README.md
+  evidence:
+  - E-wand125-fine-net-n31-59775-report
+  notes: The reported 2391/400 at n31 is above both lower lanes' 2381/400 (T-068, T-074) and the
+    issue-446 report of 597/100, which are unchanged. Complete release-asset and document custody and
+    the exact mass, declared-net and check2 premises are accepted, and the asset's data members are
+    retained for the census. An eight-direction maintained sample is diagnostic, and the author's full
+    positives and 32-direction controls do not supply a maintained capture or whole-net controls. T-232
+    registers it; replay and adoption remain under think-wop1.
 - id: wand125-linear-n122-1126-2026-10-10
   title: Linear point, segment and rectangle certificate for n = 122, no issue
   role: source-repository
