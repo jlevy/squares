@@ -3982,6 +3982,18 @@ def _regularization_state(context: Context) -> str:
     return output
 
 
+def _flip_regularization(context: Context) -> str:
+    # About 1.4 s of wall and 1.3 cpu-seconds, serial (2026-10-23, 324 counts on a
+    # four-core host): every count's default picture read from its retained rendering,
+    # the view's where `default-drawings.json` makes the view the default, and its
+    # canonical pose decided again in binary64 (regularization policy, section 13), then
+    # compared with the record the renderers read each pose from. A row the rule no longer
+    # gives fails it, naming the count; no frame is built, which is what keeps it fast.
+    output = _module(context, "devtools.flip_regularization", "--check")
+    _require_text(output, "flip regularization check passed")
+    return output
+
+
 def _vendored_evand(context: Context) -> str:
     # About 0.2s: `vendor/evand-regularize`, Evan Daniel's regularizer copied at a pin, is
     # held to its manifest -- each file's size, SHA-256 and mode at the upstream commit,
@@ -4118,7 +4130,12 @@ def _case_prose(context: Context) -> str:
     # record against itself, not the mathematics -- n-017, n-018, and n-019 all stated a
     # verified lower bound in prose that the front matter above it had already moved past,
     # and stayed that way for six hours; check_rung_figures never reads a case body.
-    return _module(context, "devtools.check_case_prose")
+    # About a second more: the AI-assistance sentence each record's citations owe, read
+    # from the bibliography's `ai_assistance` and the Kingbird capture's credit lines,
+    # which ran in no tier until think-j5so.
+    prose = _module(context, "devtools.check_case_prose")
+    assistance = _module(context, "devtools.state_ai_assistance", "--check")
+    return f"{prose}\n{assistance}"
 
 
 def _prose_ceremony(context: Context) -> str:
@@ -5844,6 +5861,24 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step(
+        "flip regularization record is current",
+        _flip_regularization,
+        fast=True,
+        records=True,
+        # It reads `default-drawings.json` through `default_drawings.regularized_defaults`,
+        # which holds it to the layer's index, so it claims what that module imports.
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/flip-regularization.json",
+            "packing/atlas/known-best/flip-regularization.schema.yaml",
+            "packing/atlas/known-best/default-drawings.json",
+            "packing/atlas/known-best/rendering/*",
+            "packing/atlas/known-best/regularized/*",
+            "packing/devtools/flip_regularization.py",
+            *_RENDERER_HUB,
+        ),
+    ),
+    Step(
         "the Lean replay receipt for s(k^2-2) = k holds",
         _chelokot_lean_replay,
         fast=True,
@@ -6071,7 +6106,11 @@ STEPS: tuple[Step, ...] = (
             *_CORE,
             "packing/devtools/check_case_prose.py",
             "packing/devtools/check_rung_figures.py",
+            "packing/devtools/state_ai_assistance.py",
             "packing/frontier/n-*.md",
+            "packing/frontier/source-coverage.yaml",
+            "packing/resources/bibliography.yaml",
+            "packing/resources/web/kingbird-squares-in-squares*",
             # The checker imports `migrate_math`, which enters the renderer hub.
             *_RENDERER_HUB,
         ),

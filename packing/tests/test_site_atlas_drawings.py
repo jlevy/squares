@@ -1,4 +1,8 @@
-"""Both atlas surfaces compare policy-selected drawings with the current originals."""
+"""Both atlas surfaces compare policy-selected drawings with the current originals.
+
+Regularized mode draws every case's default picture in its canonical pose
+(`atlas/regularized/`, regularization policy, sections 12 and 13), and Original every
+case's house drawing as published, in its source's pose (`atlas/house/`)."""
 
 from __future__ import annotations
 
@@ -47,11 +51,9 @@ def test_original_round_trip_preserves_tiles_and_uses_current_house_drawings(
         assert [tab["label"] for tab in before["tabs"]] == ["Regularized", "Original"]
         assert [tab["selected"] for tab in before["tabs"]] == ["true", "false"]
         assert len(before["tiles"]) == 324
-        regularized = render_frontier_page.drawn_regularized()
         for tile in before["tiles"]:
-            assert tile["src"] == render_frontier_page.drawing_path(
-                tile["n"], regularized=tile["n"] in regularized
-            )
+            assert tile["src"] == render_frontier_page.drawing_path(tile["n"], regularized=True)
+            assert tile["alt"].startswith("Regularized packing")
         image = page.locator('[data-atlas-n="88"] img')
         image.scroll_into_view_if_needed()
         regularized_pixels = image.screenshot()
@@ -75,8 +77,7 @@ def test_original_round_trip_preserves_tiles_and_uses_current_house_drawings(
             page.request.get(f"{site}/{image.get_attribute('src')}").body()
             == (render_frontier_page.drawing_files()["atlas/house/n-88.svg"])
         )
-        # The hidden suffix must already have the chosen source when it is expanded.
-        page.locator("[data-atlas-toggle]").click()
+        # A tile far down the triangle takes the chosen source too.
         later = page.locator('[data-atlas-n="180"] img')
         later.scroll_into_view_if_needed()
         assert later.get_attribute("src") == "atlas/house/n-180.svg"
@@ -90,8 +91,24 @@ def test_original_round_trip_preserves_tiles_and_uses_current_house_drawings(
             tile["side"] for tile in before["tiles"]
         ]
         assert len({tile["number_color"] for tile in after["tiles"]}) == 1
-        assert after["tiles"][69]["src"] == "atlas/house/n-70.svg"
-        assert after["tiles"][69]["alt"].startswith("Original packing")
+        # A case drawn from its house drawing switches too: its canonical picture is
+        # the house drawing turned by its pose, here the first such case the flip
+        # regularization record turns.
+        turned = next(
+            n
+            for n in range(1, 325)
+            if n not in render_frontier_page.drawn_regularized()
+            and not render_frontier_page.default_pose(n).identity
+        )
+        canonical = render_frontier_page.drawing_path(turned, regularized=True)
+        house = render_frontier_page.drawing_path(turned)
+        assert after["tiles"][turned - 1]["src"] == canonical
+        assert after["tiles"][turned - 1]["alt"].startswith("Regularized packing")
+        assert original["tiles"][turned - 1]["src"] == house
+        files = render_frontier_page.drawing_files()
+        assert (
+            page.request.get(f"{site}/{canonical}").body() == files[canonical] != files[house]
+        )
         # Repeated changes can overtake pending decodes, including a return to the
         # same URL. Only the active generation may mark an image prepared.
         for label in ("Original", "Regularized", "Original", "Regularized"):
@@ -113,9 +130,10 @@ def test_drawing_chooser_keyboard_and_unscripted_default(
     try:
         page = context.new_page()
         page.goto(f"{site}/{name}", wait_until="load")
-        assert page.locator('[data-atlas-n="88"] img').get_attribute("src") == (
-            "atlas/regularized/n-88.svg"
-        )
+        for n in (88, 70):
+            assert page.locator(f'[data-atlas-n="{n}"] img').get_attribute("src") == (
+                f"atlas/regularized/n-{n}.svg"
+            )
         assert not page.locator("[data-atlas-drawings]").is_visible()
     finally:
         context.close()

@@ -49,6 +49,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Canonical certificate and checker repository; historical source pins remain valid.",
     ),
     (
+        "https://github.com/wand125/square-packing-tools",
+        "Hiroaki Hosono",
+        (
+            "Tools for Tokoharu's rectangle-density solver, and an exact point and "
+            "threshold-charge row checker."
+        ),
+    ),
+    (
         "https://github.com/lollipoll/couzo-five-exact-certificates",
         "Seth Rehwaldt",
         (
@@ -241,6 +249,19 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "A certified lower bound for eleven squares.",
     ),
     (
+        "https://github.com/Esummins/packing",
+        "E. Summins",
+        (
+            "The n = 11 lab's simple-square stratification series, with a replay of "
+            "Overbeck's eleven-square certificate."
+        ),
+    ),
+    (
+        "https://github.com/chelokot/square-packing-archive",
+        "chelokot",
+        "A counterexample to Nagamochi's scoring lemma, and a Lean proof that s(k^2 - 2) = k.",
+    ),
+    (
         "https://github.com/Kleddamag/17-squares-certified-bound",
         "Marc Leonard Overbeck",
         "Certified lower bounds for seventeen squares.",
@@ -395,6 +416,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         (
             "An exact lower bound for eleven squares, a reweighting of Overbeck\u2019s"
             " certificate."
+        ),
+    ),
+    (
+        "https://arxiv.org/abs/2609.37410",
+        "arXiv 2609.37410",
+        "Hakan Karaku\u015f",
+        (
+            "A counterexample to Nagamochi\u2019s scoring lemma, and a strip-measure lower"
+            " bound for every nonsquare count from eight."
         ),
     ),
     (

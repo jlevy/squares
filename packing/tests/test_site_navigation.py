@@ -1023,6 +1023,60 @@ def test_profile_sections_keep_navigation_roles_and_tallies_precede_resources() 
         browser.close()
 
 
+def test_tallies_widen_their_dots_and_stand_one_shared_space_clear() -> None:
+    """The two tally tokens, measured in Chromium (the owner, 2026-10-23): every dot in a
+    tally, the directory's summary and a profile's resource cards alike, is the shared
+    separator, each word space beside it 0.15em wider; and a tally set as a line of its
+    own, the directory's summary and a profile's stacked counts, has 1.25rem (20px)
+    above and below, or a neighbour's larger margin where one meets it."""
+    from devtools import render_contributors  # noqa: PLC0415
+    from sqpack.contributor_occurrences import load_occurrences  # noqa: PLC0415
+    from sqpack.contributors import load_contributors  # noqa: PLC0415
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    occurrences = load_occurrences().occurrences
+    person = load_contributors().by_id["oscar-fitzharding"]
+    directory = (
+        '<article class="site-contributor-directory"><h1>Contributor Profiles</h1>'
+        "<p>People whose work the record cites.</p>"
+        + render_contributors.profile_summary([person], occurrences)
+        + '<div class="site-table-wrap site-wide"><table class="site-table"><tbody>'
+        "<tr><td>Row</td></tr></tbody></table></div></article>"
+    )
+    head = _browser_document().split("</head>", 1)[0]
+    document = (
+        head
+        + '</head><body class="kpress"><main class="site-page kpress-prose">'
+        + directory
+        + render_contributors.contributor_article(person, occurrences)
+        + "</main></body></html>"
+    )
+    measure = probe(Path(__file__).with_name("probes"), "site_tallies/spacing")
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        for width in (1280, 390):
+            page = browser.new_page(viewport={"width": width, "height": 900})
+            page.set_content(document)
+            found = page.evaluate(measure)
+            assert sorted(line["kind"] for line in found["lines"]) == ["profile", "summary"]
+            for line in found["lines"]:
+                assert line["marginTop"] == line["marginBottom"] == 20, line
+                assert line["above"] >= 19.5, line
+                assert line["below"] >= 19.5, line
+            # The summary's four dots, and at least one on a resource card's tally.
+            assert len(found["dots"]) > 4
+            for dot in found["dots"]:
+                assert dot["shared"], dot
+                assert abs(dot["wordSpacing"] - 0.15 * dot["fontSize"]) < 0.01, dot
+                if dot["before"] is not None:
+                    assert dot["before"] > dot["wordSpacing"], dot
+                    assert abs(dot["before"] - dot["after"]) < 0.5, dot
+            assert not found["overflow"]
+            page.close()
+        browser.close()
+
+
 def test_case_property_badges_use_the_same_text_and_height_as_tags() -> None:
     from devtools.overview_sections import case_status_chip  # noqa: PLC0415
     from devtools.result_overview import case_badges  # noqa: PLC0415

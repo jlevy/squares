@@ -19,8 +19,24 @@ register together and stores none of it:
   the last reply that stated that rung or status of the entry, or past the last reply
   that named it, or no reply has named it: a new id, a moved rung, a renumbered id, a
   defect, or a statement the record marks out of date;
-- **closeable**, when every result is confirmed or refuted (a reported defect: recorded)
-  and nothing the author asked for is queued.
+- **closeable**, when every result is confirmed or refuted (a reported defect: recorded),
+  nothing the author asked for is queued, no question put to the author awaits an answer
+  that could falsify what the record asserts and that no measurement here can settle
+  (`awaiting_author`: credit, lineage, or which file), and the issue is not held for the
+  owner (`held`).
+
+A closeable issue still open is owed its final comment and its close, at stage 7 after
+the verified deploy. The owner's instruction of 23 October 2026 made that the standard
+step, after twelve closeable issues were found open: nothing ran the close, and lanes held
+issues open for questions to the author that the record did not track and whose answers
+would change nothing in it. A question is recorded under `awaiting_author`, and holds
+its issue open, only when the record asserts something its answer could falsify (credit,
+lineage, or which file) and no measurement here can settle it; any other question goes
+in the closing comment. An issue reserved for the owner carries `held`, on the owner's
+recorded instruction or on a reservation for the owner that beads record, pending the
+owner's confirmation: no pass posts on it or closes it, so it is never closeable and
+``--draft`` refuses it. Review A1 of #747 added the hold, when the reservation of #557,
+#565, #570 and #574 lived only in beads and the closing step listed #570 for closing.
 
 Modes, from ``packing/`` with the project interpreter::
 
@@ -33,9 +49,9 @@ Modes, from ``packing/`` with the project interpreter::
 The default mode reads two files and the register and touches no clock, network or
 history, so its verdict is a function of the tree. Only the ids, the schema and a value
 an unquoted `` #`` cuts short (`comment_cut_scalars`) can fail it: a reply that is due is
-owed after the merge, not a broken record. ``--draft``
-refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until it
-merges and a reply links only to `main`. ``--github`` reads the live issues through
+owed after the merge, not a broken record. ``--draft`` refuses an issue held for the
+owner, and refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until
+it merges and a reply links only to `main`. ``--github`` reads the live issues through
 ``gh api`` and writes nothing anywhere.
 """
 
@@ -108,6 +124,14 @@ DEFECT = "defect recorded"
 OPEN = "open"
 QUEUED = "queued"
 NOT_REGISTERED = "not registered"
+#: The state of a question to the author (`awaiting_author`) whose answer has not come.
+AWAITING = "awaiting"
+#: What an awaited answer would change in the record, as a reply to the author says it.
+CHANGES = {
+    "credit": "the credit the record gives",
+    "lineage": "the lineage the record states",
+    "file": "which file or commit the record names",
+}
 
 BEAD = re.compile(r"\bthink-[a-z0-9]{4}\b")
 _ID_ON_MAIN = re.compile(r"\bid: (T-\d{3}|E-[A-Za-z0-9.-]+)")
@@ -675,14 +699,48 @@ def replies_due(issue: Mapped, states: Sequence[ResultState]) -> list[str]:
     return due
 
 
+def awaited(issue: Mapped) -> list[Mapped]:
+    """The questions put to the author that still await an answer: each would change the
+    record, so each holds the issue open."""
+    return [
+        question
+        for question in issue.get("awaiting_author", ())
+        if question["state"] == AWAITING
+    ]
+
+
+def held(issue: Mapped) -> Mapped | None:
+    """The issue's hold for the owner, if any: no pass posts on it or closes it."""
+    hold = issue.get("held")
+    return hold if isinstance(hold, Mapping) else None
+
+
+def hold_text(hold: Mapped) -> str:
+    """The hold as every output states it: since when, and whether the owner's
+    confirmation is still awaited."""
+    pending = (
+        ", pending the owner's confirmation"
+        if hold.get("basis") == "recorded-reservation"
+        else ""
+    )
+    return f"held for the owner since {hold['since']}{pending}"
+
+
 def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[str]]:
     """Whether the issue can be closed with a final comment, and what stops it."""
     blockers: list[str] = []
+    hold = held(issue)
+    if hold is not None:
+        blockers.append(hold_text(hold))
     if issue["triage"] == "pending":
         blockers.append("triage is pending")
     blockers.extend(f"{state.key} is {state.state}" for state in states if not state.settled)
     blockers.extend(
         f"asked: {ask['what']}" for ask in issue.get("asks", ()) if ask["state"] == "queued"
+    )
+    blockers.extend(
+        f"awaiting the author ({question['changes']}): " + str(question["question"]).rstrip(".")
+        for question in awaited(issue)
     )
     return not blockers, blockers
 
@@ -736,6 +794,35 @@ def _reply_problems(issue: Mapped, repository: str, ids: dict[str, set[str]]) ->
     return problems
 
 
+def _question_problems(issue: Mapped, repository: str) -> list[str]:
+    """Each question to the author must have been asked in a reply recorded here, and
+    answered, if at all, on this issue; and no closed issue may still await one, or still
+    carry the owner's hold."""
+    number = issue["number"]
+    recorded = {str(reply["url"]) for reply in issue.get("replies", ())}
+    problems: list[str] = []
+    for question in issue.get("awaiting_author", ()):
+        asked = str(question["asked"])
+        if asked not in recorded:
+            problems.append(
+                f"#{number}: the question {question['question']!r} was asked in {asked}, "
+                "which is not a reply recorded here"
+            )
+        answer = question.get("answer")
+        match = _REPLY_URL.match(str(answer)) if answer else None
+        if answer and (
+            not match or match.group(1) != repository or int(match.group(2)) != number
+        ):
+            problems.append(f"#{number}: the answer {answer} is not a comment on this issue")
+        if question["state"] == AWAITING and issue["state"] == "closed":
+            problems.append(
+                f"#{number}: closed while a question awaits the author: {question['question']}"
+            )
+    if held(issue) is not None and issue["state"] == "closed":
+        problems.append(f"#{number}: closed while held for the owner; remove the hold")
+    return problems
+
+
 def problems(record: Mapped, register: Register) -> list[str]:
     """What is wrong with the record: its schema, and every id it names.
 
@@ -772,6 +859,7 @@ def problems(record: Mapped, register: Register) -> list[str]:
                 if ident not in register.evidence
             )
         found.extend(_reply_problems(issue, repository, ids))
+        found.extend(_question_problems(issue, repository))
     return found
 
 
@@ -821,6 +909,8 @@ def summary_lines(record: Mapped, register: Register) -> list[str]:
         marks = [
             "reply due" if state.replies_due else "",
             "closeable" if state.closeable and issue["state"] == "open" else "",
+            "awaiting the author" if awaited(issue) else "",
+            "held for the owner" if held(issue) is not None else "",
         ]
         lines.append(
             f"  #{issue['number']:<4} {issue['state']:<7}{progress:<16}"
@@ -914,6 +1004,25 @@ def _issue_section(issue: Mapped, state: IssueState, on_main: set[str] | None) -
     else:
         lines.append("Reply due: no.")
     lines.append("")
+    questions = issue.get("awaiting_author", ())
+    if questions:
+        lines.append("Questions to the author:")
+        lines += [
+            f"- {question['state']}, the answer could falsify the record's "
+            f"{question['changes']}: "
+            f"{_cell(str(question['question']))} ([asked]({question['asked']}))"
+            for question in questions
+        ]
+        lines.append("")
+    hold = held(issue)
+    if hold is not None:
+        lines += [
+            (
+                f"{hold_text(hold).capitalize()}: post nothing and close nothing until the "
+                f"owner lifts the hold. {_cell(str(hold['note']))}"
+            ),
+            "",
+        ]
     if issue["state"] == "closed":
         lines.append("Closeable: the issue is closed.")
     elif state.closeable:
@@ -1202,6 +1311,15 @@ def draft(issue: Mapped, register: Register, repository: str) -> str:
         lines += ["**What is still queued, and how it will be completed.**", ""]
         lines += [f"- {line}" for line in queued]
         lines.append("")
+    questions = awaited(issue) if issue["state"] == "open" else []
+    if questions:
+        lines += ["**Waiting on your answer.**", ""]
+        lines += [
+            f"- {question['question']} ([asked]({question['asked']})) The answer would "
+            f"change {CHANGES[str(question['changes'])]}."
+            for question in questions
+        ]
+        lines.append("")
     links = _links(state.results, register, base)
     if links:
         lines += ["**On `main`.** " + ", ".join(links) + ".", ""]
@@ -1210,6 +1328,14 @@ def draft(issue: Mapped, register: Register, repository: str) -> str:
     elif state.closeable:
         lines += [
             "Nothing you asked for is queued, so this issue is closed with this comment.",
+            "",
+        ]
+    elif questions:
+        lines += [
+            (
+                "This issue stays open while anything above is queued or waits on your "
+                "answer, and a reply follows each change in the record."
+            ),
             "",
         ]
     else:
@@ -1399,6 +1525,15 @@ def _draft_mode(record: Mapped, register: Register, number: int) -> int:
     issue = next((i for i in record["issues"] if i["number"] == number), None)
     if issue is None:
         print(f"issue #{number} is not in the record", file=sys.stderr)
+        return 2
+    hold = held(issue)
+    if hold is not None:
+        print(
+            f"refusing to draft: #{number} is {hold_text(hold)}, so no pass posts on it "
+            "or closes it (campaign/result-import.md, Close a Settled Issue). "
+            f"{hold['note']}",
+            file=sys.stderr,
+        )
         return 2
     if not head_on_main():
         print(
