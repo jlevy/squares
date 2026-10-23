@@ -42979,3 +42979,40 @@ evidence:
       here. Review and confirmation remain pending; no stage 4 review is owed for a
       beyond-horizon row. No arrangement identity, local minimum, optimum or credit statement of
       the source is established.
+  - id: E-mishapolk-732-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [372, 409, 411, 450, 451, 453, 461, 494, 495, 506, 535, 539, 540, 582, 583,
+        587, 591, 599, 631, 632, 633, 640, 645, 646, 647, 648, 649, 651, 653, 683, 684, 691,
+        693, 695, 696, 697, 698, 702, 735, 737, 742, 745, 750, 751, 752, 756, 790, 791, 797,
+        798, 799, 807, 809, 810, 813, 814, 854, 855, 856, 857, 864, 866, 869, 870, 871, 913,
+        915, 916, 923, 925, 931, 932, 977, 989, 990, 994, 995]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk issue 732 2026-10-22]'
+    certificate: packing/resources/web/mishapolk-issue732-2026-10-22/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-23'
+    limitations: >-
+      This atom records the source author's report, issue 732, of the 77 upper bounds beyond the
+      n <= 324 corpus at or below 1024 that the ledger of 23 October for issue 732
+      (campaign/issue-intake/upper-bounds-issue732-20261023) records in report order: exact
+      rational certificates certificates/0000-0999/nN.cert at 17cc2201, retained under the
+      author's MIT licence, each of n squares with its exact side in its header, recorded at
+      that side rounded up at 12 places. A separate complete repository replay is retained
+      (devtools.beyond_horizon_replay, receipts/filtered-exact-replay.json): the filtered
+      two-route decision of devtools.couzo_678_replay, the sqpack.verify predicates and the
+      independent rational corner checker's, over every wall and the pairs whose centres are
+      closer than sqrt 2, an exactly justified filter, accepted all 77 and refused all 462
+      controls, in 82.0 positive CPU seconds; no square touches the box and no pair touches,
+      every wall clearing by at least 2.71e-20 and every pair by at least 5.42e-20. The
+      all-pairs kernel at 645, 752 and 995 (984,581 pairs, 322.5 CPU seconds) agreed exactly
+      with it on each least gap and clearance. The two routes share certificate parsing,
+      half-angle conversion, the pair filter and Fraction arithmetic. The source's own checker
+      was not run here. Review and confirmation remain pending; no stage 4 review is owed for a
+      beyond-horizon row. No arrangement identity, local minimum or optimum is established.

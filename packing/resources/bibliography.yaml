@@ -3352,6 +3352,30 @@ sources:
       derived exact facts only, no upstream byte retained. The issue credits Mishapolk
       (Mykhailo Polkovskyi, since its 11:35:16Z edit) and the finders its packings build
       on, and discloses Gemini assistance. Upper bounds only; no optimality claim.
+  - key: '[Mishapolk issue 732 2026-10-22]'
+    authors: [Polkovskyi]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-22'
+    lineage: independent
+    credit: Polkovskyi after Couzo, Fang, PingYou Ltd
+    note: >-
+      Issue 732's exact certificates at 17cc220131360ef290750eb845a3544c30ccb389 in Evan
+      Daniel's format, certificates/NNNN-NNNN/nN.cert, 5,468 at 328 to 9913 indexed by
+      certificates/manifest.json, retained under the MIT licence 17cc220 adds. 77 of the 390
+      at or below 1024 are rows in report order. The issue and the manifest credit Mishapolk
+      (Mykhailo Polkovskyi). The source names this project only as its baseline comparison
+      (the register tree 7359fa8) and as the audience of its ingestion runbook, and says
+      nothing of building on it. The author's comment of 23 October on issue 732 says the
+      rows at 645, 752 and 931 refine Francisco Couzo's #715 certificates, whose index
+      credits the one at 931 after Kevin Fang's rectangle and gluing and PingYou Ltd's
+      squares; that 499 refines his own #719 packing; and that the rest are de novo. Each
+      certificate's header names a source file in his repository (src=cert_n-M, layers=k,
+      del=d): 26 the same count, 44 another count that is one of his #719 rows, and 7 another
+      of his own files. Every file named is at 335 or above, so none is one of #719's
+      re-solves of this project's house packings at 105 and 204, and #719 states no lineage
+      for its rows beyond the corpus. Upper bounds only; no optimality claim, and its
+      saturation argument bounds no s(n).
   - key: '[de Winter issue 666 2026-10-17]'
     authors: [de Winter]
     year: 2026

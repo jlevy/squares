@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#732","kind":"issue","number":732,"url":"https://github.com/jlevy/squares/issues/732","author":"Mishapolk","created_at":"2026-10-22T19:55:03Z","state":"open","closed_at":null,"title":"328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof"},{"report":"#715","kind":"issue","number":715,"url":"https://github.com/jlevy/squares/issues/715","author":"franciscouzo","created_at":"2026-10-21T20:55:57Z","state":"open","closed_at":null,"title":"328-9913: registration request"}]
+}
