@@ -2342,6 +2342,22 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The 23 October sweep's request entries (#719's answers, #732, #734) and the "
+            "stage 7 follow-ups after #725, against main 690e21857 (#738): rendered at link "
+            "revision 40a71b16 into empty site directories, twice from this tree at "
+            "d40979ad with this record and twice from main's (42 files each), "
+            "render_packing_methods writes every file byte-identical across all four. No "
+            "PDF was printed; it prints from that HTML. Retain v0.2.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
