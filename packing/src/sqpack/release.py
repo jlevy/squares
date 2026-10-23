@@ -790,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "cbf7a43012d9be2db1e41a7446e9073fb15feba9"
+DATA_REVISION = "26339a13cd25874d6ce846879842e99a1b861ff4"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2415,6 +2415,37 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/frontier/results.yaml",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The 23 October significance review of T-154, T-155 and T-156 (think-7j5d), "
+            "which keeps their scores at S5, S1 and S1 and rewrites only their "
+            "significance rationale, scored date and by, against main 598d23289 (#742): "
+            "rendered at link revision 26339a13 into empty site directories from this "
+            "tree and from the same tree with main's register swapped in (69 files "
+            "each), render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every "
+            "file byte-identical. Measured before against main 44df28b07 (#743), with "
+            "the register edit stashed, with the same outcome. No PDF was printed; each "
+            "prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
