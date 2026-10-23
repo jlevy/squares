@@ -2466,6 +2466,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/campaign/result-requests.yaml",
             "packing/contributors/people/amund-kristiansen.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
@@ -2479,16 +2482,21 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "T-238's registration (#755, Amund Kristiansen's s(303) at V0/C0), its "
-            "contributor profile, its house reader and the #755 request entry, against main "
-            "7335d0098 (#752): rendered at link revision 956839d7 into empty site "
-            "directories, twice from this tree at 956839d7 and twice from the same tree with "
-            "main's register, requests record, coverage record and upper_bound_reports.py "
-            "swapped in and the new profile set aside (69 files each), "
+            "T-238's registration (#755, Amund Kristiansen's s(303)), its stage 4 review "
+            "(V3/C3, S2), its adoption at 303 in the pass of 24 October 2026 with its "
+            "regularization, its contributor profile, its house reader and the #755 request "
+            "entry, against main 7cd0a94bf (#747): rendered at link revision 5617791b into "
+            "empty site directories, twice from this tree at 5617791b and twice from the "
+            "same tree with main's register, requests record, coverage record, "
+            "upper_bound_reports.py, adopt_houses.py, default_drawings.py and "
+            "upper_bound_houses.py swapped in and the new profile set aside (69 files each), "
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
-            "render_packing_methods write every file byte-identical across all four. The "
-            "explainer counts the register (230 to 231 results) and took v0.4.22. No PDF "
-            "was printed; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
+            "render_packing_methods write every file byte-identical across all four. "
+            "Measured before at 956839d7 against main 7335d0098, at 1c333cfe against "
+            "05e95db36 and at 0f7eb786 against 769e441e1, for the registration alone, with "
+            "the same outcome. The explainer counts the register (230 to 231 results) and "
+            "took v0.4.22. No PDF was printed; each prints from that HTML. Retain v0.1.11, "
+            "v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
