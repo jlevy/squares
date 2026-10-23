@@ -778,6 +778,10 @@ nav.site-tabs a[aria-current="page"],
 }
 .site-breadcrumbs a {
   color: inherit;
+  text-decoration: none;
+}
+.site-breadcrumbs a:hover {
+  text-decoration: underline;
 }
 :root[data-site-view="embed"] .site-breadcrumbs,
 .site-popover .site-breadcrumbs {

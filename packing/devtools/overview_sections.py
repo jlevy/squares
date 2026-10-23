@@ -174,7 +174,7 @@ def standing_chip(standing: str, words: str | None = None) -> str:
 def kind_chip(result: Result) -> str:
     """What a result is, as a chip: its `kind` in the rubric's words, `lower bound` or
     `case exclusion` (epistemics.md, Result Kinds). Every result has one; bound kinds
-    use the same semantic hues as the corresponding bounds."""
+    share News topic ink and the neutral topic surface."""
     kind = str(result.record["kind"])
     return topic_chip(kind, attribute="data-kind")
 

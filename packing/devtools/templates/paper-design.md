@@ -195,8 +195,7 @@ result’s `confirmed` is the confirmation rungs’ green at C3’s strength and
 its `open` a yellow, each a hue and a level of the scale, and the yellow a chroma boost
 of 0.02, the most that keeps its dark fill in sRGB. Recorded results use yellow at level
 2 without the chroma boost.
-Incomplete results and lower-bound kinds use the shared lower-bound red diluted into the
-page background, and upper-bound kinds the upper-bound green.
+Incomplete results retain the shared lower-bound red diluted into the page background.
 Superseded standings keep the neutral gray fill.
 `devtools.rung_scale` computes these too, and `tests/test_rung_scale.py` holds this
 table to its output and every ratio to 4.5:1.
@@ -209,18 +208,33 @@ table to its output and every ratio to 4.5:1.
 | `open` | `oklch(84.0% 0.083 95)` `#dbcb8c` | 10.9:1 | `oklch(34.2% 0.070 95)` `#443800` | 9.9:1 |
 | `recorded` | `oklch(84.0% 0.063 95)` `#d7cb9c` | 10.9:1 | `oklch(34.2% 0.050 95)` `#413818` | 9.9:1 |
 
-Result-kind tags retain the lower-bound, upper-bound and optimality fills below.
-Their text and status palettes remain independent of News.
-`devtools.rung_scale` keeps those result fills distinct and checks their text contrast.
+Result-kind tags in All Results and News topic tags share the same neutral background
+and corresponding colored topic ink.
+Verification, confirmation, status and significance keep their separate palettes.
+Topic backgrounds intentionally match; the shared label and colored ink identify each
+topic. `devtools.rung_scale` checks gamut and at least 4.5:1 text contrast in both
+themes.
 
 | Topic | Light fill | Text contrast | Dark fill | Text contrast |
 | --- | --- | --- | --- | --- |
-| `lower-bound` | `oklch(91.4% 0.028 11.6)` `#f5dbde` | 13.6:1 | `oklch(27.5% 0.022 353)` `#302328` | 12.7:1 |
-| `upper-bound` | `oklch(92.2% 0.018 156.5)` `#dce9e0` | 14.2:1 | `oklch(28.1% 0.021 176.9)` `#1e2d29` | 12.2:1 |
-| `optimality` | `oklch(84.0% 0.063 310)` `#d7c0ea` | 10.6:1 | `oklch(34.2% 0.050 310)` `#40314c` | 10.1:1 |
+| `lower-bound` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.3:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.3:1 |
+| `upper-bound` | `oklch(95.0% 0.004 265)` `#edeef1` | 6.8:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.8:1 |
+| `optimality` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.3:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.3:1 |
+| `uniqueness` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
+| `simplification` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
+| `formalization` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
+| `rigidity` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
+| `case-exclusion` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
+| `restricted-optimality` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
+| `method-limit` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
+| `correction` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
+| `audit` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
+| `project` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.1:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.5:1 |
+| `engineering` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.2:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.4:1 |
+| `verification` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
 
-News topic tags, dropdown options and selected summary chips share one neutral surface:
-`--site-news-topic-bg` is `oklch(95% 0.004 265)` in light mode and
+Result-kind tags, News tags, dropdown options and selected summary chips share one
+neutral surface: `--site-news-topic-bg` is `oklch(95% 0.004 265)` in light mode and
 `oklch(29% 0.008 265)` in dark mode.
 Their text uses the corresponding topic hue; uncoded subjects retain neutral ink.
 All options retain that surface when unchecked, selected or hovered; a visible check
@@ -2820,6 +2834,8 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
 - **All Results.** Results is a menu container with no landing page.
   All Results (`results.html`) is the one complete sortable, filterable result table.
   Its menu label, H1, browser title, breadcrumbs, and result-record ancestry agree.
+  Visual Atlas, Frontier Survey, and Verification share one action row below the table,
+  with no collection actions above it.
   Filters start with significance at All, no maximum age and Hide superseded clear, so
   every registered result shows once, newest first.
   Each row keeps its own ID (`#t-018`), shared result popover, and ordinary canonical

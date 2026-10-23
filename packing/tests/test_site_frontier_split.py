@@ -98,7 +98,7 @@ def test_all_results_collection_actions_share_one_row_after_the_table(
 
 
 def test_homepage_learn_immediately_follows_results(homepage: str) -> None:
-    article = homepage.split('<h1 id="the-problem"', 1)[1].split("</article>", 1)[0]
+    article = homepage.split('<h1 id="the-problem"', 1)[1].split("</main>", 1)[0]
     headings = re.findall(r'<h[12]\b[^>]*\bid="([^"]+)"', article)
     result = headings.index("recent-results")
     assert headings[result + 1] == "papers"

@@ -893,3 +893,27 @@ def test_actual_page_families_share_the_prose_measure_and_card_outer_edges(
                     assert brand is not None, (name, width, found)
                     assert abs(trail["left"] - brand["left"]) < 0.5, (name, width, found)
         browser.close()
+
+
+@pytest.mark.parametrize("width", [1280, 390])
+def test_breadcrumb_links_underline_only_on_hover_and_keep_keyboard_focus(width: int) -> None:
+    from tests import site_browser  # noqa: PLC0415
+
+    document = _browser_document().replace(
+        "<main>", "<main>" + breadcrumbs_html("tutorial.html", "Tutorial")
+    )
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        page = browser.new_page(viewport={"width": width, "height": 900})
+        page.set_content(document)
+        link = page.locator('.site-breadcrumbs a[href="tutorials.html"]')
+        site_browser.api().expect(link).to_have_css("text-decoration-line", "none")
+        link.hover()
+        site_browser.api().expect(link).to_have_css("text-decoration-line", "underline")
+        page.mouse.move(0, 0)
+        site_browser.api().expect(link).to_have_css("text-decoration-line", "none")
+        link.focus()
+        site_browser.api().expect(link).to_be_focused()
+        site_browser.api().expect(link).not_to_have_css("outline-style", "none")
+        site_browser.api().expect(link).not_to_have_css("outline-width", "0px")
+        browser.close()

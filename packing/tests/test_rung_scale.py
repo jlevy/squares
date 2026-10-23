@@ -9,7 +9,6 @@ it (`templates/paper-design.md`, Color, The Rung Scale).
 
 from __future__ import annotations
 
-import dataclasses
 import re
 from itertools import pairwise
 from pathlib import Path
@@ -244,32 +243,23 @@ def test_the_design_document_carries_the_inks() -> None:
         assert line in design, line
 
 
-def test_result_kind_chips_keep_their_fills_from_the_scale_or_their_bound() -> None:
-    """Result kinds retain their existing gamut and text contrast independently of News."""
+def test_result_and_news_topics_share_neutral_surfaces_and_readable_ink() -> None:
+    from devtools.site_topics import TOPICS  # noqa: PLC0415
+
+    surfaces = rung_scale.news_topic_backgrounds()
     topics = rung_scale.topic_fills()
-    assert {fill.rung for fill in topics} == {
-        "lower-bound",
-        "upper-bound",
-        "optimality",
-    }
+    assert {fill.rung for fill in topics} == set(TOPICS)
     assert {fill.theme for fill in topics} == set(rung_scale.THEMES)
     for fill in topics:
+        assert (fill.lightness, fill.chroma, fill.hue) == surfaces[fill.theme], fill
         assert fill.in_gamut, fill
         assert fill.contrast >= rung_scale.MINIMUM_CONTRAST, fill
-
-
-def test_every_topic_fill_keeps_one_meaning() -> None:
-    """Result-kind fills remain distinct from statuses; News uses a separate ink contract."""
-    report = rung_scale.status_fills() + rung_scale.topic_fills()
-    assert rung_scale.crowded(report) == []
-    recorded = next(
-        fill for fill in report if fill.rung == "recorded" and fill.theme == "light"
-    )
-    near = dataclasses.replace(recorded, rung="optimality", hue=85.0)
-    others = [fill for fill in report if fill.rung != "optimality"]
-    assert [
-        (first.rung, second.rung) for first, second, _ in rung_scale.crowded([*others, near])
-    ] == [("optimality", "recorded")]
+    inks = {(ink.theme, ink.rung): ink for ink in rung_scale.topic_inks()}
+    for ink in rung_scale.news_topic_inks():
+        assert ink == inks[ink.theme, ink.rung]
+    # V/C and status retain their existing scale rather than the neutral topic surface.
+    for fill in rung_scale.fills() + rung_scale.status_fills():
+        assert fill.hex != rung_scale.hex_colour(surfaces[fill.theme]), fill
 
 
 def test_the_design_document_carries_the_topic_fills() -> None:

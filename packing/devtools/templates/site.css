@@ -1333,15 +1333,10 @@ body {
    yellow, on the frontier table, a case record and a result's list of cases; a result's
    `confirmed` is the green of the confirmation rungs, at C3's strength, and its
    `reviewed` the verification rungs' blue. Recorded is yellow, and superseded standings
-   keep the plain gray chip. Result kinds retain their bound or optimality fills;
-   News topics use a separate neutral surface and colored ink below.
+   keep the plain gray chip. Result kinds and News topics share a neutral surface
+   and colored ink below.
    `devtools.rung_scale` measures both contracts. */
-.site-chip:is(
-  [data-case-status],
-  [data-status="confirmed"],
-  [data-status="reviewed"],
-  [data-kind="optimality"]
-) {
+.site-chip:is([data-case-status], [data-status="confirmed"], [data-status="reviewed"]) {
   --rung-chroma-boost: 0;
   --site-chip-fill: oklch(
     calc(var(--site-rung-base) + var(--rung-level) * var(--site-rung-step))
@@ -1372,28 +1367,17 @@ body {
   --rung-chroma-boost: 0.02;
 }
 
-/* Bound chips share the plotted bound hues, diluted into the current page background. */
-.site-chip:is([data-kind="lower-bound"], [data-status="incomplete"]) {
+/* Incomplete status retains the diluted lower-bound hue. */
+.site-chip[data-status="incomplete"] {
   --site-chip-fill: color-mix(
     in oklab,
     var(--site-bound-lower) var(--site-chip-tint),
     var(--kpress-doc-bg)
   );
 }
-.site-chip[data-kind="upper-bound"] {
-  --site-chip-fill: color-mix(
-    in oklab,
-    var(--site-bound-upper) var(--site-chip-tint),
-    var(--kpress-doc-bg)
-  );
-}
-.site-chip[data-kind="optimality"] {
-  --rung-level: 2;
-  --rung-hue: 310;
-}
-/* News topics use colored ink on one neutral surface, distinct from status and
-   result-kind fills. The same attribute reaches tags, filter choices and summaries. */
-.site-chip[data-news-topic] {
+/* Result kinds and News tags, filter choices and summaries share topic ink on one
+   neutral surface. Verification, confirmation and status fills remain separate. */
+.site-chip:is([data-news-topic], [data-kind]) {
   --site-news-topic-hue: 265;
   --site-news-topic-chroma: 0;
   --site-chip-fill: var(--site-news-topic-bg);
@@ -1408,17 +1392,20 @@ body {
   [data-news-topic="optimality"],
   [data-news-topic="verification"],
   [data-news-topic="project"],
-  [data-news-topic="engineering"]
+  [data-news-topic="engineering"],
+  [data-kind="lower-bound"],
+  [data-kind="upper-bound"],
+  [data-kind="optimality"]
 ) {
   --site-news-topic-chroma: var(--site-news-topic-ink-chroma);
 }
-.site-chip[data-news-topic="lower-bound"] {
+.site-chip:is([data-news-topic="lower-bound"], [data-kind="lower-bound"]) {
   --site-news-topic-hue: 25;
 }
-.site-chip[data-news-topic="upper-bound"] {
+.site-chip:is([data-news-topic="upper-bound"], [data-kind="upper-bound"]) {
   --site-news-topic-hue: 145;
 }
-.site-chip[data-news-topic="optimality"] {
+.site-chip:is([data-news-topic="optimality"], [data-kind="optimality"]) {
   --site-news-topic-hue: 310;
 }
 .site-chip[data-news-topic="verification"] {
