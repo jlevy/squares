@@ -3,9 +3,9 @@ type: is
 id: is-01m5733w70a3bhxm6f3xrg31qy
 title: "Import franciscouzo: 204-998: registration request (#675)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 13
+version: 14
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:38.207Z
-updated_at: 2026-10-22T08:30:20.779Z
+updated_at: 2026-10-23T07:48:06.558Z
 started_at: 2026-10-18T13:04:20.685Z
+closed_at: 2026-10-23T07:48:06.558Z
+close_reason: "Issue #675 closed on GitHub 2026-10-23 with its final comment; #742 (merge 598d23289) records the closing reply and the closed state in result-requests.yaml. Closed by coord-intake-1023."
+resolution: null
+duplicate_of: null
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/675
 Source pins in author report: af8cb7959aead318c0cf5e9f873de3caa763f77a, c6da0fc7524d667bf3d224559724ba9b60762e60

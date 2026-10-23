@@ -3,9 +3,9 @@ type: is
 id: is-01m50qjc49k5cwy2cw5dqgjj76
 title: "Import mstrmg: n = 366 registration request (#624)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 11
+version: 12
 delegate: user-eb-intake-residue
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T21:30:23.753Z
-updated_at: 2026-10-23T02:26:20.084Z
+updated_at: 2026-10-23T07:47:48.700Z
 started_at: 2026-10-15T21:30:24.918Z
+closed_at: 2026-10-23T07:47:48.700Z
+close_reason: "Issue #624 closed on GitHub 2026-10-23 with its final comment; #742 (merge 598d23289) records the closing reply and the closed state in result-requests.yaml. Closed by coord-intake-1023."
+resolution: null
+duplicate_of: null
 ---
 Opened 2026-10-15T20:02Z during this pass; labelled intake by lane D. Needs stage 0/1: an entry in result-requests.yaml (triage pending -> done), source pin, comparison against the beyond-horizon rows (n > 324) and #627's rows, and the report-order rule.
 
