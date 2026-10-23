@@ -15,6 +15,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | ascent-n1-100-poster.png | ascent-n1-100-poster.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-22 | live |
 | ascent-n1-324-poster.png | ascent-n1-324-poster.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-22 | live |
 | assets/images/*.{hash}.png | — | asset-file | overview | 2026-10-02 | 2026-10-22 | live |
+| assets/images/tutorial-{trump11,kingbird29}-overview.{hash}.svg | — | asset-file | overview | 2026-10-22 | 2026-10-22 | live |
 | assets/{css,js,fonts}/*.{hash}.{ext} | — | asset-file | shared | 2026-09-29 | 2026-10-22 | live |
 | atlas.html | atlas.html | page | overview | 2026-10-08 | 2026-10-22 | live |
 | atlas/house/n-1.svg | atlas/house/n-1.svg | asset-file | overview | 2026-10-07 | 2026-10-22 | live |

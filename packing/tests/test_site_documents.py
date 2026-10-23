@@ -7,7 +7,7 @@ import re
 
 import pytest
 
-from devtools import check_published_site, render_overview, site_documents
+from devtools import check_published_site, render_overview, site_assets, site_documents
 from devtools.repo_links import RAW_URL, REPO_URL, RepositoryTree
 from devtools.site_documents import (
     INTRO,
@@ -410,7 +410,12 @@ def test_no_relative_repository_link_survives(pages: dict[str, render_overview.P
         for url in re.findall(r'\s(?:href|src)="([^"]*)"', article.group(0)):
             if url.startswith(("#", "https://", "http://", "data:", "mailto:")):
                 continue
-            assert url.split("#")[0] in served, f"{name}: {url}"
+            if url.startswith("assets/"):
+                assert url.removeprefix("assets/") in site_assets.shared().assets.referenced(
+                    [page.html]
+                ), f"{name}: {url}"
+            else:
+                assert url.split("#")[0] in served, f"{name}: {url}"
 
 
 def test_the_tutorial_math_is_kpress_math(pages: dict[str, render_overview.Page]) -> None:

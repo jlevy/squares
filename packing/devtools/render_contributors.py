@@ -352,7 +352,7 @@ def _credited_work(
     current_ids = current_record_ids(primary_ids, record_index())
     pending = sorted(primary_ids.intersection(record_index().unresolved))
     if current_ids or pending:
-        pieces.append('<section id="records"><h2>Records</h2>')
+        pieces.append('<section id="records"><h2 class="site-navigation-heading">Records</h2>')
         pieces.append(
             "<p>Current registered contributions in their recorded family "
             "and scope. A result counts once when any of its facets remains current.</p>"
@@ -380,7 +380,7 @@ def _credited_work(
             pieces.append("</ul>")
         pieces.append("</section>")
     if primary_lines or authored:
-        pieces.append('<section id="results"><h2>Results</h2>')
+        pieces.append('<section id="results"><h2 class="site-navigation-heading">Results</h2>')
         first_party_ids = tuple(
             str(record["id"]) for record in results if is_first_party(record)
         )
@@ -395,11 +395,16 @@ def _credited_work(
         pieces.extend(_work_listing(primary_lines, "Results"))
         pieces.append("</section>")
     if credit_lines:
-        pieces.append('<section id="credited-work"><h2>Credited work</h2>')
+        pieces.append(
+            '<section id="credited-work"><h2 class="site-navigation-heading">Credited Work</h2>'
+        )
         pieces.extend(_work_listing(credit_lines, "Credits"))
         pieces.append("</section>")
     if other_lines:
-        pieces.append('<section id="other-reviewed-records"><h2>Other reviewed records</h2>')
+        pieces.append(
+            '<section id="other-reviewed-records">'
+            '<h2 class="site-navigation-heading">Other Reviewed Records</h2>'
+        )
         pieces.extend(_work_listing(other_lines, "Reviewed records"))
         pieces.append("</section>")
     return CreditedWork(
@@ -555,7 +560,7 @@ def resource_list(identifier: str, records: Sequence[Resource] | None = None) ->
     if not linked:
         return ""
     return (
-        '<section id="resources"><h2>Resources</h2>'
+        '<section id="resources"><h2 class="site-navigation-heading">Resources</h2>'
         + resource_cards(linked, current_profile=identifier)
         + "</section>"
     )
@@ -746,7 +751,8 @@ def profile_table(
         sort_name = html.escape(" | ".join(names[person.id].sort_key), quote=True)
         record_count = len(current_record_ids(stats.results, record_index()))
         rows.append(
-            f'<tr><td data-value="{sort_name}"><a href="{target}">{label}</a></td>'
+            f'<tr><td data-value="{sort_name}">'
+            f'<a class="site-profile-name" href="{target}">{label}</a></td>'
             f'<td class="site-profile-links">{account_links(person, compact=True)}</td>'
             f'<td class="site-profile-records" data-value="{record_count}">{record_cell}</td>'
             f'<td class="site-profile-stats" data-value="{len(stats.results)}">{tally}</td>'
@@ -823,6 +829,7 @@ def profile_tally(
     occurrences: Sequence[CreditOccurrence],
     *,
     target: str = "",
+    stacked: bool = False,
     results: Sequence[Mapping[str, Any]] | None = None,
 ) -> str:
     """Current Records, primary Results and nonprimary Credits with shared formatting."""
@@ -835,24 +842,27 @@ def profile_tally(
         measures,
         (5, 4, 3, 2, 1),
     )
-    return (
-        '<span class="site-credit-tally">'
-        + record_tally(
+    parts = (
+        record_tally(
             stats.results,
             measures,
             total_href=target + "#records",
             pending_href=target + "#records",
-        )
-        + " · "
-        + render_tally(authored, total_href=target + "#results" if authored.results else None)
-        + " · "
-        + render_tally(
+        ),
+        render_tally(authored, total_href=target + "#results" if authored.results else None),
+        render_tally(
             credited,
             noun="credit",
             total_href=target + "#credited-work" if credited.associations else None,
-        )
-        + "</span>"
+        ),
     )
+    if stacked:
+        return (
+            '<span class="site-credit-tally site-profile-tally">'
+            + "".join(f"<span>{part}</span>" for part in parts)
+            + "</span>"
+        )
+    return '<span class="site-credit-tally">' + " · ".join(parts) + "</span>"
 
 
 def contributor_article(
@@ -885,12 +895,19 @@ def contributor_article(
     pieces.append(account_links(contributor))
     if identity:
         pieces.append('<dl class="site-contributor-identity">' + "".join(identity) + "</dl>")
+    pieces.append(
+        "<p>"
+        + profile_tally(contributor.id, occurrences, results=records, stacked=True)
+        + "</p>"
+    )
     pieces.append(resource_list(contributor.id))
-    pieces.append("<p>" + profile_tally(contributor.id, occurrences, results=results) + "</p>")
     work = credited_work(contributor.id, occurrences, results=records).parts
     pieces.extend(work)
     if news := _related_news().get(contributor.id):
-        pieces.append('<section><h2>Related News</h2><ul class="site-contributor-news">')
+        pieces.append(
+            '<section><h2 class="site-navigation-heading">Related News</h2>'
+            '<ul class="site-contributor-news">'
+        )
         for anchor, title, day in news:
             pieces.append(
                 f'<li><a href="news.html#{anchor}">{title}</a> '

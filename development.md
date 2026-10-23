@@ -205,7 +205,7 @@ checks. The deferred workflow does not pass `--deep`; its filename and label rem
 Run focused/edit checks during ordinary work.
 Before a push to a draft pull request, run the edit or records tier and the tests the
 change directly affects, then let hosted CI gate the draft
-([below](#hosted-ci-gates-a-draft-pull-request)). Obtain a full checkpoint when the PR
+([below](#hosted-ci-gates-a-draft-pull-request)). Use the hosted checkpoint when the PR
 is ready for final review and repeat checks whose evidence later changes invalidate.
 Record the checked source and base, selected steps, and failures or skips.
 Expensive final evidence must not delay every editing cycle, but a green fast surface
@@ -223,10 +223,22 @@ local `--push` tier runs before any push:
 - **Hosted CI is the gate.** A draft may be red.
   Marking a pull request ready for review, and merging it, both need green hosted CI on
   the head: `packing-required` and `pages-required`.
-- **The full local `packing-validate`** stays where it was: at research and merge
-  checkpoints, and to close a session, when the host has room.
+- **Full local validation is selected work**, for a research checkpoint, reproduction,
+  or evidence absent from hosted CI. Do not repeat the hosted gate locally merely
+  because a PR is ready to merge or a session is ending.
+  Record the missing evidence that justifies a local full run.
 - **`--push` stays available** as a local option, and is recommended before a push
   straight to a non-draft branch, where no draft stage absorbs a red run.
+
+During hosted validation, review changes and monitor the PR’s base and mergeability as
+well as its check statuses.
+Resolve conflicts as soon as they appear.
+A green check on an older head is not evidence for the current branch.
+After merge, distinguish artifact publication from the live deployment audit; report a
+failed audit even if pages load.
+The
+[release latency audit](docs/project/reviews/review-2026-10-22-ci-release-latency.md)
+records measured setup, rendering, deployment, and verification costs.
 
 The reason is what the two routes cost on the same suites.
 On the shared four-core host the `--push` tier took 30 to 65 minutes and often reached
