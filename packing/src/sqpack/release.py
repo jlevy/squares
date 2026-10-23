@@ -790,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "26339a13cd25874d6ce846879842e99a1b861ff4"
+DATA_REVISION = "d3a093938c5e11090ca7ec75fa5e2ab3cf89034f"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2415,6 +2415,45 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/check_source_coverage.py",
+            "packing/frontier/README.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The owner's answers of 23 October as rules of the report-order walks "
+            "(think-temp, think-8m4k, think-8krd): restatements below the 12-place print "
+            "and Göbel's construction as an earlier report beyond 324, the "
+            "above-classical-construction disposition with nine rows at 369, 375 and 376 "
+            "marked, the T-188 sentence on #613, the requests entries and the frontier "
+            "README's rule text, against main c1115c095 (#749): rendered at link revision "
+            "d3a09393 into empty site directories from this tree and from the same tree "
+            "with main's five candidate inputs swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every "
+            "file byte-identical. No PDF was printed; each prints from that HTML. Retain "
+            "v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
