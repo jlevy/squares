@@ -184,7 +184,10 @@ verification.
 [`source-coverage.yaml`](source-coverage.yaml) is a dated claim about a named source
 set, not a claim that a web search exhausted every publication.
 It records each source’s scope, review date, retained first-party material, evidence,
-replay disposition, in-horizon overrides, and relevant claims beyond $n = 324$.
+replay disposition, in-horizon overrides, and relevant claims beyond $n = 324$. Every
+source dated from 22 August 2026 that a registered result or the evidence it cites names
+has an entry here, which carries its key or cites that evidence, papers and tools
+included; `devtools.check_source_coverage` refuses one without.
 
 The current baseline reparses the retained Kingbird catalogue through $n = 324$, applies
 Francisco Couzo’s certified packings at 49 counts from $n = 68$ to $307$ (T-056), seven
