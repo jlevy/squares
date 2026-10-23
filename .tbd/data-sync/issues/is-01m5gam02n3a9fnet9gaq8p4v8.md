@@ -5,7 +5,7 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-23T07:49:45.293Z
+updated_at: 2026-10-23T15:10:29.488Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -112,3 +112,5 @@ out (D2) records 24 of the 1851c2c files (368, 407, 448, 457, 533, 534, 543, 581
 630, 639, 677, 690, 730, 733, 734, 741, 785, 788, 789, 796, 845, 846), 8a488a1's at 849, and
 5a299b4 at 37 counts. The author's files would need rows under a release that no walk
 declares yet. Packet README, Held Back and Not Recorded.
+
+2026-10-23 coord-intake-1023: OWNER DECISION on D6 (in conversation, 23 October): YES, a deletion bound (a side obtained by deleting a square from a published certificate at the next count) is an earlier report in report order; #732's 985 stays unrecorded. Applied by c-answers-1023 (PR #754) with the sub-print, withdrawn and Goebel answers. Still open: D3, D5.

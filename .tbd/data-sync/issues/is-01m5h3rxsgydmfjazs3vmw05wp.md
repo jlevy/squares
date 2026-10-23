@@ -5,7 +5,7 @@ title: "Import Mishapolk: 122 upper bounds at 105–1568, incl. 105 and 204 in t
 kind: task
 status: in_progress
 priority: 1
-version: 20
+version: 21
 delegate: coord-intake-1023
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T06:11:32.271Z
-updated_at: 2026-10-23T04:56:51.776Z
+updated_at: 2026-10-23T08:45:11.019Z
 started_at: 2026-10-22T06:11:33.610Z
 ---
 Issue #719 (https://github.com/jlevy/squares/issues/719), opened 2026-10-22T05:30:47Z by Mishapolk (Mikhail Polk; repository Mishapolk/square-packing-records): 122 claimed strict improvements at N in [105, 1568], two in the case corpus (105: 5.18e-12 below the catalogue witness; 204: 1.006e-8 below T-225, the house since #718), 112 beyond the horizon at or below 1024, 8 above 1024 (1061-1568; owner decision D1, think-f2io). Many margins are ~1e-12 (likely re-solves of existing arrangements); several are 1e-4 to 2e-3 (447, 553, 601, 652, 701). Stage 0 owner; stage 1 triage (read-only, priced) first.
@@ -231,3 +231,36 @@ blocked_on: think-h01y, think-9vr8
 2026-10-23 04:05Z coord-intake-1021b: Mishapolk answered on #719 (issuecomment-6355484781, 01:52:40Z): (1) sqpack.verify was imported as a module in a batch harness (not the CLI); Daniel verify_cert.py and verify_cert2.py were the copies in Couzo 6b7391d; (2) the 204 SQP solve started from Couzo #678 n204.cert in Couzo frame, not from T-225 (consistent with the review: pairs with Couzo frame without the half turn). Record changes owed in the next #719 records PR (with n204-lower): T-229 204 lineage/credit drops Evan Daniel regularization as an antecedent at 204 and the stale sentence that the source states no lineage; read_through to 01:52:40Z; a follow-up reply on #719 saying what changed. #742 (rows PR) left this comment unread.
 
 2026-10-23 coord-intake-1023: ownership transferred from coord-intake-1021b (interrupted session; the owner asked this session to resume the pass, epic think-ezt8). The next #719 records PR (claude/awesome-hamilton-gr597e) carries T-229's 204 lineage correction from issuecomment-6355484781 with think-h01y's lower 204 side.
+
+2026-10-23 c-lane-719-records-1023 (branch claude/intake-2026-10-23). T-229's lineage at 204 corrected from issuecomment-6355484781 (answer 2: started from Couzo #678 in Couzo's frame; Daniel's regularization dropped as an antecedent; the regularization item at 204 now names T-223, 60 beyond 1e-3, at most 0.237; the stale "source states no lineage" sentence replaced by the author's lineage) in 991b2ebc5; answer 1 recorded in T-229's notes, its report atom and both packet READMEs; answer 3 (publish the checkers) covered by #732's ask, marked done in 6ed6f8073 by #732's import reply (issuecomment-6360316595). #719 read_through 2026-10-23T01:52:40Z. Asks 1 and 2 (the review's questions: which program wrote n204.cert; whether the licence covers the removed blob) queued on this bead. The four replies posted after #742 (#732 6360316121 and 6360316595, #715 6360316942, #719 6360317345) recorded in 6ed6f8073; check_requests --github: 0 differences; a reply is due on #719 for T-231 (V3/C3, confirmed).
+
+The #719 follow-up reply, drafted for the coordinator to post after the records PR merges and its deployment is checked (file: /tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/lane-719/719-reply-v3.md):
+
+@Mishapolk, thank you for the answers of 23 October on the verifier runs and the 204 seed. As [our follow-up this morning](https://github.com/jlevy/squares/issues/719#issuecomment-6360317345) said, this reply takes them up with the import of the lower 204 file you claimed on 22 October.
+
+**T-229's lineage at 204 is corrected.** You wrote that the continuous SQP optimization at 204 started from Francisco Couzo's #678 certificate, in Couzo's own frame, and not from Evan Daniel's regularized view (T-225). The measurements agree: the packing pairs one to one with #678's under the identity, and with T-225's only under a half turn of the box. T-229 now credits Couzo's packing (#670, #675, #678) re-solved by you, at 204 as at 105, and no longer names Daniel's regularization as an antecedent. Its regularization item at 204 names T-223, #678's entry, measured one to one: 60 squares move beyond 1e-3 and 7 beyond a tenth, at most 0.237. The record no longer says that the source states no lineage. It gives yours: at 105, from PingYou Ltd's certificate of Couzo's refinement of Xu's packing (T-174), unchanged; at 204, from Couzo's #678 certificate. [The case record at 204](https://squaremath.org/cases/204.html) follows. Your account of how `sqpack/verify.py` ran (imported as a module in a batch harness) and which copies of Daniel's `verify_cert.py` and `verify_cert2.py` you used (Couzo's, at `6b7391d`) is recorded with T-229's evidence and in both packets.
+
+**The lower 204 file is registered, confirmed and adopted.** `certificates/n204.cert` at `Mishapolk/square-packing-records@12fc4667` is [T-231](https://squaremath.org/result/t-231.html): s(204) <= 14808642830513087197802415708703/10^30 = 14.808642830513087197802415708703, 1.4809e-11 below T-229. It is credited as T-229 is at 204: Couzo's packing, re-solved by you, dated 22 October 2026, the commit that first published both 204 files.
+
+- **Custody.** The packet `mishapolk-n204-2026-10-22` retains the file under the grant in your comment of 22 October. Your tree no longer holds it: `3285fac` dropped the path, and `certificates/0000-0999/n204.cert` now holds `n-204.cert`'s bytes. So the packet cites `12fc4667` and the file's digest.
+- **Replay.** Both of this repository's maintained exact routes accepted it. One is `sqpack`'s exact verifier, the module you imported, so that replay shares your named checker's components. The other is the independent rational corner checker. Every wall clears by exactly 5e-21 and every pair by about 1e-20. The duplicate-square and outside-container controls were refused, and sharp controls were accepted at exact contact and refused 1e-30 past it at every wall and at the least-gap pairs.
+- **Review.** The stage 4 review of 23 October decided the certificate again on a clean-room checker of its own, in integers and in rationals. It found no blocking defect, so T-231 is at V3/C3: confirmed, independently re-implemented. It scores S2.
+- **Adoption.** By the house rule T-231 replaced T-229 as the house best packing at 204, in the adoption pass of 24 October. T-229 stays registered and retained as history. 105 is unchanged.
+- **Regularization.** Both strong generators ran on the new witness at 204. Evan Daniel's regularizer solved it to its own side, digit for digit, so no view lies below it. Grid-slack's half-degree view is drawn, with the figures it had on T-229's witness: 6 light, 34 uneven and 6 near-axis squares.
+
+**Report order.** Both 204 files first appear in `1851c2c`, a minute before #719 opened. This record keeps one claim of a report a count, the least side its commit states there. So the report-order ledger for #719 now walks your 204 claim at `n204.cert`'s side, with `n-204.cert` beside it. T-229 stands as registered and adopted on `n-204.cert`, the file the issue named, before you claimed the lower one. T-231, yours and from the same commit, supersedes it at 204.
+
+**What the review measured, and three questions.** The two 204 files are one solved packing at two paddings: `n-204.cert` is `n204.cert` dilated by 1 + 1e-12, to within 2.9e-15. The side of `n204.cert`, and the 119 rows that Evan Daniel's exact solver (`exactsolve.py`, MIT) determines, equal that solver's output for T-229's arrangement, row for row. The other 85 rows are the solver's free squares and frozen flat variables. Your comments do not mention the solver, so the record states it as a measured method (a method credit to Daniel, not an antecedent of the packing) until you say otherwise:
+
+1. Which program wrote `certificates/n204.cert`, and from which input? Was it Daniel's solver, at which revision, run on the optimization result that `n-204.cert` also comes from?
+2. Do you confirm that the MIT licence of `17cc220` and your grant on this issue cover `certificates/n204.cert` at `12fc4667` (blob `4117e9d`), which your tree no longer holds?
+3. Which of the two 204 files did you write first, and why does `n-204.cert` carry the larger padding?
+
+**Publishing the review checkers.** Your third point of 23 October asks for the review checkers, acceptance harnesses and stage 4 scripts to be published. You made the same suggestion on #732, and [our import reply there](https://github.com/jlevy/squares/issues/732#issuecomment-6360316595) answers it: the checkers are public in this repository, with the command for each. For this result the maintained routes are `sqpack.verify` and `devtools.check_rational_witness_independent`, driven by `devtools.upper_bound_reports`, and the review's own checker and controls are kept with [the packet](https://github.com/jlevy/squares/blob/main/packing/resources/web/mishapolk-n204-2026-10-22/README.md), under `review/review-2026-10-23/`.
+
+**On `main`.** [The packet](https://github.com/jlevy/squares/blob/main/packing/resources/web/mishapolk-n204-2026-10-22/README.md), [the review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-23-mishapolk-n204.md), [the ledger of 22 October for issue 719](https://github.com/jlevy/squares/blob/main/packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md), [the requests record](https://github.com/jlevy/squares/blob/main/packing/campaign/result-requests.yaml).
+
+This issue stays open while the three questions above, the eight rows above 1024 and per-row credit beyond the corpus, a question the owner has open, are pending. We will reply here when each reaches `main`.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_

@@ -3,9 +3,9 @@ type: is
 id: is-01m3wx2fn7k34fxz8yfh3fsc4d
 title: Hold a register entry scope to the scopes of its cited evidence, and extend the register coverage gate to upper bounds by others
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: c-gates-1023
 labels:
   - packing
@@ -15,8 +15,12 @@ parent_id: is-01m3nrt5zy2g6dpegq1fbczpzg
 hold: null
 hold_until: null
 created_at: 2026-10-01T23:33:54.982Z
-updated_at: 2026-10-23T07:51:30.229Z
+updated_at: 2026-10-23T09:08:21.606Z
 started_at: 2026-10-23T06:19:04.544Z
+closed_at: 2026-10-23T09:08:21.606Z
+close_reason: "Delivered: check_results.scope_problems holds a scope to its evidence, and the register coverage gate reads upper bounds (7bb6f63f5); T-045's n = 32 evidence was already on main. PR #748 head 417ba331b, CI green (Packing validation run 39927824318, Certificate page 39927824335)."
+resolution: null
+duplicate_of: null
 ---
 W7. check_results does not compare a result scope with its evidence scopes: T-045 claims s(32) >= 119/20 and cites one entry whose scope is 27, 28, 31. The coverage gate reads lower bounds only, so T-056, T-057 and T-065 are registered by convention. Add both checks with negative controls, and add the n = 32 evidence entry for T-045 from the retained replay receipt.
 

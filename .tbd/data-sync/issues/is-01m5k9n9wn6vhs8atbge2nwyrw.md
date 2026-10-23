@@ -5,7 +5,7 @@ title: "Decide: is a watched certificate its author withdrew from an issue a rep
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: c-answers-1023
 labels:
   - decision
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-23T02:32:53.909Z
-updated_at: 2026-10-23T07:54:20.662Z
+updated_at: 2026-10-23T09:40:45.384Z
 started_at: 2026-10-23T07:54:20.661Z
 ---
 Owner decision raised by the #732 import (think-0gp6, lane c-lane-732-import-1023), 23 October 2026.
@@ -34,3 +34,18 @@ blocked_on: owner
 ## Notes
 
 2026-10-23 coord-intake-1023: OWNER DECISION (in conversation, 23 October): a watched certificate its author withdrew from an issue, claiming a lower file later, is NOT a report. Nothing changes in the rows: #732's rows stand. The #732 walk's 'withdrawn' hold becomes the settled disposition; its text should name this answer rather than an open question (rides the next records PR after #742).
+
+2026-10-23 c-answers-1023 (PR https://github.com/jlevy/squares/pull/754, branch claude/intake-2026-10-23-owner-answers).
+
+**Done.** The #732 walk's `withdrawn` hold is now the settled disposition: `Held.answer`
+states the owner's answer (`beyond_horizon_replay.WITHDRAWN_ANSWER`: "a watched certificate
+its author withdrew from an issue, claiming a lower file later, is not a report"), the
+class text in HELD_CLASSES names it, the walk's sources.yaml note for 1851c2c says the walk
+keeps its 9 files (411, 451, 494, 495, 540, 583, 587, 632, 683) out of the record by that
+answer, and `held-dependents` lists them under `settled` rather than as an answer to come.
+No verdict rests on them and `refusal_flips(withdrawn)` is empty; no row changes: #732's 77
+rows stand. The runbook (Several Reports at One Count) and the frontier README state the
+rule; #732's and #719's requests entries and packet READMEs name the answer.
+
+**Follow-ups drafted** on think-temp (the #719 and #732 drafts both carry this answer); none
+posted.

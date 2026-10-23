@@ -5,7 +5,7 @@ title: "Import chelokot and Evan Daniel: Lean proofs that s(5) = 2 + 1/√2, and
 kind: task
 status: in_progress
 priority: 3
-version: 3
+version: 4
 delegate: c-lean-1023
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-22T13:12:44.171Z
-updated_at: 2026-10-23T08:28:01.960Z
+updated_at: 2026-10-23T09:06:20.208Z
 started_at: 2026-10-23T06:19:01.857Z
 ---
 Stage 1 triage, read-only, by c-triage-1022b from the 12:20Z sweep of 22 October 2026, at
@@ -91,6 +91,6 @@ Stage 1. Pins: chelokot/square-packing-archive 753079eb37d8d16225a5dc1f56e493a3c
 Finding against the triage: the retained build.log of the 2 October chelokot build (packing/campaign/series/series-000-smoke-and-calibration/results/chelokot-lean-replay/build.log, lines 330 and 338-343) prints Audit.lean's axioms for s2_eq_two, s3_eq_two, s4_eq_two, s5_le_goebel, unavoidable_points, s5_ge_goebel and s5_eq_goebel, all standard; the receipt names only T-086's theorem, and those modules were compiled before the receipted run, so it is not yet a receipt for them.
 Daniel's route proves RectPacks statements only; at w = h the square values are read, not proved in Lean: Fried4 at w = h < 2 and "five squares in a side below 2" (rect2_iff on two of the five) are steps for the review.
 Claim map: the triage proposed a formalization entry, but check_results requires a formalization to name a registered target and none holds s(2)-s(5); as optimality, check_standing refuses it (superseded yet equal) unless the case records cite it. Register entry held (T-237 allocated, unused); decision bead think-4o9c with three options.
-Stage 2. Packets packing/resources/web/chelokot-small-n-lean-2026-09-05/ (18 retained, NOTICE identical) and evand-rect-small-n-lean-2026-10-22/ (14 retained, 6 identical); keys [chelokot small-n Lean 2026-09-05], [Daniel small-n rectangles Lean 2026-10-22]; evidence E-small-n-chelokot-lean-report, E-small-n-daniel-rect-lean-report; coverage entries for both. chelokot is now watched: read through e1e9ef5 added, owned by think-fddm (Bend proofs, deferral bead). The two evand reads (7051f4e, 7982d7a) no longer name this bead. Packet pushed at 918d780b0; records at 1e22df80f (merged with main at 9ba8e7a85).
+Stage 2. Packets packing/resources/web/chelokot-small-n-lean-2026-09-05/ (18 retained, NOTICE identical) and evand-rect-small-n-lean-2026-10-22/ (14 retained, 6 identical); keys [chelokot small-n Lean 2026-09-05], [Daniel small-n rectangles Lean 2026-10-22]; evidence E-small-n-chelokot-lean-report, E-small-n-daniel-rect-lean-report; a coverage entry for Daniel's source only (chelokot's would need a home-page Other Projects card, so it waits with the register entry on think-4o9c). PR https://github.com/jlevy/squares/pull/750. chelokot is now watched: read through e1e9ef5 added, owned by think-fddm (Bend proofs, deferral bead). The two evand reads (7051f4e, 7982d7a) no longer name this bead. Packet pushed at 918d780b0; records at 1e22df80f (merged with main at 9ba8e7a85).
 Price: under 1 CPU-hour for both receipt-bound builds; two toolchains (v4.33.0/db584cd6 and v4.33.1/0df444a3), about 20 GB disk this host lacked. Validation bead think-tq3g.
 Stage 4 review: owed for both routes, from the two packets.

@@ -5,14 +5,14 @@ title: "Decision: register kind for chelokot's and Daniel's Lean proofs of s(2) 
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T07:19:57.434Z
-updated_at: 2026-10-23T07:19:57.434Z
+updated_at: 2026-10-23T09:04:30.628Z
 ---
 Owner decision for think-7l2j, raised by the intake lane c-lean-1023 on 23 October 2026. The lane retained both sources (packing/resources/web/chelokot-small-n-lean-2026-09-05/ and evand-rect-small-n-lean-2026-10-22/) and their reported evidence entries (E-small-n-chelokot-lean-report, E-small-n-daniel-rect-lean-report), and held back the register entry (id T-237, allocated to the lane) because the record's rules give it no kind the checks accept:
 
@@ -22,7 +22,7 @@ Owner decision for think-7l2j, raised by the intake lane c-lean-1023 on 23 Octob
 Options:
 1. Register the published proofs first (Goebel 1979 for s(5), Friedman DS7 for the lower bounds at 2 to 4, or one entry for the four classical values), then the Lean proofs as a formalization naming it. Two ids.
 2. Register the Lean proofs as optimality and cite their evidence in the reported lanes of n-002 to n-005, beside the published proofs, so the entry holds the reported lane. One id; changes four case pages.
-3. Keep the Lean proofs as evidence on the record (the source-coverage entry cites them) with no register entry, until a build here makes them a verified route.
+3. Keep the Lean proofs as evidence on the record with no register entry, until a build here makes them a verified route. Daniel's route has a source-coverage entry; chelokot's would need one too, and with it a card for chelokot/square-packing-archive in the home page's Other Projects list (devtools/site_resources.OTHER_PROJECTS, which tests/test_overview.py holds to every source repository the coverage register reviews), a site change the intake lane did not make.
 
 The lane's draft entry (headline, claim, significance S2, unfinished confirmations think-7l2j and think-tq3g) is in the lane's report to the coordinator and can be registered as written under option 2, or with kind formalization under option 1. Stage 4's review and the builds (think-tq3g) do not wait on this decision.
 

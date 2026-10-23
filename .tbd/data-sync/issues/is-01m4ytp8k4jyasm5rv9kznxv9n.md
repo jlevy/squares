@@ -5,7 +5,7 @@ title: Beyond-horizon rows above Göbel's classical constructions
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 delegate: c-answers-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:46:28.067Z
-updated_at: 2026-10-23T07:54:25.898Z
+updated_at: 2026-10-23T09:40:47.065Z
 started_at: 2026-10-23T07:54:25.898Z
 ---
 **Owner question:** do Frits Göbel's classical constructions count as earlier reports, and so as the baseline beyond n = 324, so that a beyond-horizon row above one is not recorded? The record holds no Göbel construction beyond the corpus; its standing side there is the beyond-horizon row or the grid. Until the owner answers, draft register plans mark the affected rows `undecided-goebel` rather than recorded.
@@ -82,3 +82,42 @@ publications above Göbel's construction out decides 17 of the author's 1851c2c 
 331, 369 and 376 again, and each is itself above Göbel's construction, so the same answer
 holds it in turn (refusal_flips marks them goebel, not new records). Packet README, Held Back
 and Not Recorded.
+
+2026-10-23 c-answers-1023 (PR https://github.com/jlevy/squares/pull/754, branch claude/intake-2026-10-23-owner-answers).
+
+**Done.** Göbel's construction is an earlier report in the history, #719 and #732 walks,
+through 1024 (`devtools.intake_ledger` ruling `classical-constructions`): at each count
+beyond 324 the least side of the three Kingbird families at that count or by deletion, as
+the 15 October packet's retained program computes it, joins the start as a rigorous
+90-digit enclosure, so a side at or above it is not recorded. The GOEBEL_ABOVE hold class
+is gone. Rerun: every Göbel hold became `not recorded` against Göbel's construction
+(history: 02f9690 at 369, 375, 376; 49907ec 964; f311f08 376; a7067d7 and 93570ef 375;
+487b058's 44; 4e4c8ce's 47; 58a7833's 49; 5a299b4 331; #732 walk likewise, #732's own 331,
+369 and 376 among them). The rerun also takes out of the record four steps that were
+recorded and never held, all rows of 11 to 13 October: couzo-certificates-2026-10-11 and
+-12 at 375 and 376, and couzo-certificates-2026-10-13 at 376.
+
+**Rows on main above Göbel (today's main c1115c095), marked by a new register
+disposition.** `above-classical-construction` with `construction: p + q*sqrt(2)`
+(check_source_coverage holds it above exactly and not current; the schema admits it;
+beyond_horizon_replay.construction_problems holds every row from 325 to 1024 to Göbel's
+construction). Nine rows: 369 couzo-extended-range-reports-2026-10-08 (was current,
+19.740417287556077, 3.33e-2 above 19 + sqrt(2)/2); 375 the 8 October report and update and
+the 11 and 12 October certificates (superseded rows, above 10 + 7 sqrt(2) less one square);
+376 the 8 October report and the 11, 12 and 13 October certificates (the 13 October row,
+19.904068025747, was current, 4.57e-3 above 10 + 7 sqrt(2)). **Current rows change at 369
+and 376: neither count has a current row now; the standing side there is Göbel's
+construction.** At 375 the 13 October row (below Göbel) still leads to Evan Daniel's
+current row.
+
+**Not done here.** 23aff0c's 61 holds (D2/D6) named think-8krd as a further decision; all
+61 are below Göbel's construction, so they now name think-zkxy instead (whether Friedman's
+off-centre constructions count as Göbel's do; opened under think-ezt8). The counts above
+1024 are think-llit's: the retained Göbel program stops at 1100.
+
+**Do not close this bead before #613 is closed**: #613's requests entry names think-8krd as
+its answer_bead, a live deferral (check_bead_tree); the entry's ask is now `done` and its
+close_when holds once the PR merges. The coordinator closes #613 (the project's own issue;
+no acknowledgement owed) and then this bead.
+
+**Follow-up drafted** for #732 on think-temp; #613 needs only the closing.

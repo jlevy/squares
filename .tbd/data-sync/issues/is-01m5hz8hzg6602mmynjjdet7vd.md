@@ -5,7 +5,7 @@ title: "Polkovskyi's unclaimed n204.cert (12fc4667) is 1.48e-11 below T-229 and 
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: c-lane-719-records-1023
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-22T14:11:56.015Z
-updated_at: 2026-10-23T06:08:47.303Z
+updated_at: 2026-10-23T09:16:41.732Z
 started_at: 2026-10-23T04:56:11.671Z
 ---
 Found by the stage 4 lane c-lane-stage4-1022 (22 October 2026) while regularizing T-229 after adoption.
@@ -52,3 +52,14 @@ blocked_on: none
 - 991b2ebc5: T-231 registered at V0/C0 (draft S2), regularization of T-229, credit as T-229 at 204; T-229's 204 lineage corrected from issuecomment-6355484781 (answer 2: of T-223, Daniel no antecedent; answer 1 recorded); case n-204 refreshed; #719 read_through 01:52:40Z and n204-lower -> T-231; #734 read_through 02:17:06Z.
 - Waiting: the stage 4 review c-review-t231-math (think-tetq); then V3/C3, adoption at 204 and regularization (priced 3 to 5 CPU-minutes from think-4h23's receipts, far under the 2 CPU-hour stop).
 blocked_on: think-tetq
+
+2026-10-23 c-lane-719-records-1023 (phases 1 and 2, branch claude/intake-2026-10-23, draft PR https://github.com/jlevy/squares/pull/753 at 9663d281c, labelled intake; S2 proposed).
+- 46d41c1ff: the review c-review-t231-math (think-tetq) accepted T-231 with seven findings, none blocking; T-231 at V3/C3, confirmed, independently re-implemented, S2 (S1 named as the alternative); RF-1 as a method credit to Daniel's exact solver (measured, not an antecedent); the review's questions 1 and 2 as asks on #719 (think-xyhn).
+- 79edb6be8: adopted at 204 from T-229 in the pass of 24 October (204 already moved on 23 October; one archive a day holds one prior state a count); regularized in about 7 CPU-minutes (grid-slack half-degree view admitted at row 10 and drawn; Daniel's driver same-side view refused at row 7; no view below U). adopt_houses --check 70, upper_bound_houses check 70, select_houses --check pass.
+- 68c766a20 and 2c859ded6: merges of main 598d23289 (#742) and c1115c095 (#749), never rebased; conflicts kept both sides (resources README rows, bibliography keys, generated views, the pin).
+- 6ed6f8073: the four replies after #742 recorded (#732 6360316121 other and 6360316595 import, #715 6360316942, #719 6360317345); #732's checker ask done; check_requests --github 0 differences; a reply is due on #719 for T-231.
+- 8386d394f and 9663d281c: explainer v0.4.22 (231 results, October 24, 2026); the three papers' no-change record against c1115c095 (byte-identical, two renders from each tree); pins 8ee5dfe06 and 5b0fcb2ad (2c859ded6).
+- Validation at 9663d281c: records tier 52 of 52; 358 release/requests/adoption tests and, after the #742 merge, 899 affected tests passed.
+- Merge day: if the merge is not on 24 October (UTC), the pass day moves with it; the PR body lists the re-dating edits, then stamp_landed --apply and release_pin --update.
+- Stage 7: the #719 reply draft is in think-xyhn's notes and lane-719/719-reply-v3.md in the coordinator's scratchpad.
+blocked_on: the merge of #753

@@ -5,7 +5,7 @@ title: Evaluate wand125's sqverify_continuous (f30cc2c) as an independent route 
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: c-review-sqvc-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T01:27:07.066Z
-updated_at: 2026-10-23T08:14:03.495Z
+updated_at: 2026-10-23T09:20:09.400Z
 started_at: 2026-10-23T06:43:56.790Z
 ---
 Found in the 2026-10-12 read of wand125/square-packing for the 2026-10-11 intake pass (think-58lu); nothing on GitHub asked. Commit f30cc2cf345a3a3f6af778925f354d9ec979868b (2026-10-12T01:00:19Z; its author name is Hiroaki Hosono), "tools: sqverify_continuous, sqverify_fast with a continuous-angle mode (v3)", the head and the only commit past the 04fbef0 read, adds tools/sqverify_continuous/ (31 files changed, all under it apart from INDEX.json and two lines each of tools/README.md and tools/THIRD_PARTY_NOTICES.md).
@@ -55,3 +55,4 @@ Draft reply for #533 (not posted; for the coordinator to post at stage 7 on the 
 > Questions: (1) Would you publish the n = 40 run outputs (`c6715.jsonl`, `c6718.jsonl`), as the n = 28 release does? (2) Would you add the `gy` assertion to `box_bounds_hold_at_sampled_poses`? (3) Would you mark a summary with inherited roots in its status? (4) Could `--continuous` skip the net premises, so a candidate need not carry a net-legal `B`? (5) Would you assert round-to-nearest and subnormals at startup, as the T-145 kernel does?
 >
 > For the record: s(28) > 1149/200 (T-192) now stands as reported and read, and a complete replay of your 86 roots here is owed (about 13 CPU-hours, waiting for a budget). For T-145 and T-157 your mode is a second route beside Guzhou0806's kernel; its runs there have no receipt, and a replay here (under an hour each by our measurement) would make the continuous cover independently re-implemented after reading the producer's code, with no change of rung.
+2026-10-23, c-review-sqvc-1023, handoff: draft PR https://github.com/jlevy/squares/pull/752 (labels intake, S2; not ready, not merged), head ad0d4ea1fc6fbf3a782794f93ea27827fee8c345 (git ls-remote agrees). Commits: e4a4c289d the review and both packets; 58bca5978 the registry and register records; 725dd4eaa merge of main c1115c095 (#749); 8625f55ea re-pin; 7e241b0a4 two corrections on reread (the n = 28 evidence limitations' garbled sentence, and the n = 28 packet README's control sentence, which held for check2 only and had turned "1." into a list); ad0d4ea1f re-pin to 7e241b0a and the four papers' no-change record (69 files byte-identical across two renders from the tree and two with main's register, at link revision 8625f55e). Local: packing-validate --records (52 steps) passed; 858 directly affected tests passed. Hosted at the head: Packing validation 39929215258 success, Certificate page 39929215394 success, Branch mergeability 39928536785 success. Open: think-flxm (n = 40 replay) and think-0arj (T-192 replay), both on the owner's budget (#543); T-157's V4/C4 now wait only on a human oversight record, for the owner to weigh.
