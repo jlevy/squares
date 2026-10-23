@@ -1731,6 +1731,12 @@ issues:
           build is held by the record and a human Lean expert who is not an author reviews
           the formalization. Answered on 6 October,
           https://github.com/jlevy/squares/issues/317#issuecomment-6026940690.
+      - what: >-
+          The umbrella's remaining work on T-060: the integration of the unified adversarial
+          review, the upstream items it raised and the formalization recommendations, each
+          owned by a bead in this entry's beads. Closing the umbrella is the owner's call.
+        state: queued
+        bead: think-1gbu
     beads: [think-1gbu, think-nnrx, think-if2i, think-wbpu]
     answer_bead: think-1gbu
     replies:
@@ -4463,6 +4469,20 @@ issues:
       not_registered: Withdrawn by the author in the errata of 9 October; the n = 105 pose file stands
         under twenty-eight-packings.
       queued: false
+    awaiting_author:
+    - question: >-
+        Which of the poses started from a published packing, and from which? T-138 credits
+        every discoverer the issue names, as the author asked, but the issue does not say
+        which count started from which packing; the review measured 103 as Ryan Xu's
+        packing and 258 as SQUISH's.
+      changes: lineage
+      asked: https://github.com/jlevy/squares/issues/470#issuecomment-6116243429
+      state: awaiting
+      note: >-
+        Question 2 of the confirmation of 12 October. Its question 1, whether the errata's
+        39-digit pin meant a commit other than dd3da5c753c5, would change nothing in the
+        record, whose pinned files carry exactly the digests the issue lists, so it is not
+        recorded here.
     beads:
     - think-jpre
     - think-fvz4
@@ -7162,6 +7182,16 @@ issues:
       not_registered: Not public and not replayable; the record's certificate is derived from the
         layout instead.
       queued: false
+    asks:
+    - what: >-
+        Credit for T-159 as an independent arrangement of Ryan Xu's design. The per-count
+        rule would not record it, since T-146 is smaller and came first, and the owner
+        decides whether it stays registered.
+      state: queued
+      bead: think-xnj5
+      note: >-
+        The confirmation of 14 October put the decision to the owner on jlevy/squares#543
+        and kept the issue open for it.
     beads:
     - think-s2i8
     answer_bead: think-s2i8
@@ -8523,6 +8553,14 @@ issues:
       source: body
       not_registered: Above the case's ceiling at each count; retained in the packet.
       queued: false
+    asks:
+    - what: >-
+        Credit for the packings at 153 and 207 (T-173) as new arrangements, as the issue
+        says. Measured, they are PingYou Ltd's packings (T-148, T-147), and the owner
+        decides which credit the record gives (RQ-5 of the review of 14 October, decision
+        1 of #602).
+      state: queued
+      bead: think-g0o4
     beads:
     - think-2zz8
     answer_bead: think-2zz8
@@ -10949,8 +10987,9 @@ issues:
       - 'Separate mathematical review and source-checker replay with geometric controls await
         reviewed integration; since #692 merged on 20 October the mathematical review is
         integrated, and T-197''s rungs rest on this repository''s two exact routes, an independent
-        re-implementation. The source-checker half still holds: that replay ran on 18 October and
-        its receipt (think-8kx2, think-0lu6) has not been integrated'
+        re-implementation. The source-checker half held until 23 October: that replay ran on 18
+        October and its receipt was never committed; the run of 23 October replaces it, with its
+        receipt in the packet (receipts/source-checker-replay.json), and no rung rests on it'
     - url: https://github.com/jlevy/squares/issues/669#issuecomment-6294848994
       date: '2026-10-20'
       by: jlevy
@@ -10967,8 +11006,9 @@ issues:
       - 'Our earlier reply spoke of a source-checker replay, but your verify_cert.py and
         verify_cert2.py did not run here; they did. On 18 October a separate replay ran both on the
         four certificates of #669 and #674, two from each, with eight accepted decisions and all 16
-        geometric mutants refused in 41.4 seconds (receipt SHA-256 cab73c96...). That receipt is
-        not yet integrated (think-8kx2, think-0lu6), so no rung rests on it'
+        geometric mutants refused in 41.4 seconds (receipt SHA-256 cab73c96...). That receipt was
+        never committed; the run of 23 October replaces it, with its receipts in the packets, and
+        no rung rests on either'
     - url: https://github.com/jlevy/squares/issues/669#issuecomment-6296071238
       date: '2026-10-20'
       by: jlevy
@@ -11818,6 +11858,20 @@ issues:
         project exact routes accept the packing with every control refused
         (receipts/filtered-exact-replay.json).
       queued: false
+    awaiting_author:
+    - question: >-
+        Was the seed of the hop job 105412, which the per-count JSON gives as Mykhailo
+        Polkovskyi's construction, T-186's packing, his refinement of Daniil Ostashev's
+        composition? Measured, the 204 packing pairs with T-186's under no symmetry, while
+        34 squares sit within 1e-6 of T-186's.
+      changes: lineage
+      asked: https://github.com/jlevy/squares/issues/670#issuecomment-6354654599
+      state: awaiting
+      note: >-
+        Question 2 of the follow-up of 23 October, question 3 of the review of 22 October
+        (RF-5: T-226's lineage is unmeasured). Its question 1, how sqpack/verify.py was
+        called and whether the strict false at 204 reflects only squares touching the
+        walls, would change nothing in the record, so it is not recorded here.
     beads:
     - think-f28n
     answer_bead: think-f28n
@@ -12662,6 +12716,20 @@ issues:
         project exact routes accept the packing with every control refused
         (receipts/filtered-exact-replay.json).
       queued: false
+    awaiting_author:
+    - question: >-
+        Who made the CT105 web submission behind the 227 certificate (f0ca7a65..., method
+        fq, received 2026-10-17T20:28:22Z): the author's own CT105 client, a participant in
+        a web or browser computation, or another person whose credit should be kept?
+      changes: credit
+      asked: https://github.com/jlevy/squares/issues/672#issuecomment-6354654824
+      state: awaiting
+      note: >-
+        Question 1 of the follow-up of 23 October, from RF-3 of the review of 22 October:
+        the answer bears on the credit of T-227, of T-225's view and of the house at 227,
+        which reach the packing through T-227. Its question 2, how sqpack/verify.py was
+        called and whether the strict false at 229 reflects only squares touching the
+        walls, would change nothing in the record, so it is not recorded here.
     beads:
     - think-2vjc
     answer_bead: think-2vjc
@@ -13003,8 +13071,10 @@ issues:
       - 'Separate mathematical review and source-checker replay with geometric controls await
         reviewed integration; since #692 merged on 20 October the mathematical review is
         integrated, and T-198''s and T-199''s rungs rest on this repository''s two exact routes, an
-        independent re-implementation. The source-checker half still holds: that replay ran on 18
-        October and its receipt (think-8kx2, think-0lu6) has not been integrated'
+        independent re-implementation. The source-checker half held until 23 October: that replay
+        ran on 18 October and its receipt was never committed; the run of 23 October replaces it,
+        with its receipts in the packets (receipts/source-checker-replay.json), and no rung rests
+        on it'
     - url: https://github.com/jlevy/squares/issues/674#issuecomment-6294849771
       date: '2026-10-20'
       by: jlevy
@@ -13027,8 +13097,8 @@ issues:
         and dilate_cert.py did not run here; the two checkers did. On 18 October a separate replay
         ran verify_cert.py and verify_cert2.py on the four certificates of #669 and #674, two from
         each, with eight accepted decisions and all 16 geometric mutants refused in 41.4 seconds
-        (receipt SHA-256 cab73c96...). That receipt is not yet integrated (think-8kx2, think-0lu6),
-        so no rung rests on it'
+        (receipt SHA-256 cab73c96...). That receipt was never committed; the run of 23 October
+        replaces it, with its receipts in the packets, and no rung rests on either'
       - 'T-199 is now the house at n = 229; since #718 merged on 22 October T-225, Evan
         Daniel''s solved, regularized view of the same packing by his claim, at V3/C3,
         confirmed, is the house, from T-199 in the pass of 22 October, and T-199 is retained as
@@ -13085,7 +13155,10 @@ issues:
       grid-slack''s half-degree view waits on the owner''s review (think-cyeo). The separately completed
       source replay of 18 October, the source''s verify_cert.py and verify_cert2.py run on these two
       certificates and #669''s two (eight accepted decisions and 16 geometric mutant refusals in 41.386
-      s, receipt SHA-256 cab73c96...), awaits integration under think-8kx2 and think-0lu6; no rung
+      s, receipt SHA-256 cab73c96...), was never committed. On 23 October devtools.evand_source_checkers
+      ran both checkers again, unchanged, on the four certificates and on three controls of each: every
+      certificate accepted by both and all 24 controls refused, with the receipts in the three packets
+      (receipts/source-checker-replay.json). It is evidence from the author''s own code, and no rung
       rests on it. The final reply of 20 October reported both at V3/C3, confirmed, corrected the
       earlier reply''s V0/C0 statement and the review it called pending, and closed the issue; it also said
       the source''s checkers did not run here, which the correction of 20 October
