@@ -41,10 +41,12 @@ Subcommands, from ``packing/``, with the project interpreter::
     python -m devtools.evand_source_checkers check
 
 ``run`` holds each packet to ``acquire_source --check`` before reading it, and writes the
-three receipts; it takes about a CPU-minute. ``check`` reads them back, offline and in
-about a second: each checker's and certificate's digest against the retained file, each
-control's digest against the control rebuilt now from the retained certificate, every
-certificate accepted by both checkers and every control refused by both.
+three receipts; it takes a few CPU-seconds. ``check`` holds each packet to its manifest
+again and reads the receipts back, offline and in about a second: each covers its
+packet's certificates and every control, every certificate is accepted by both checkers
+and every control refused by both. The receipts record each checker's, certificate's
+and control's digest for a reader; whether the files changed since is Git's to say, not
+a digest compared here (OR-16).
 """
 
 from __future__ import annotations
@@ -305,38 +307,33 @@ def run(scratch: Path, workers: int, names: Sequence[str] = tuple(PACKETS)) -> l
 
 
 def receipt_problems(name: str, receipt: Mapping[str, Any]) -> list[str]:
-    """What a packet's receipt gets wrong against the packet as retained now."""
-    source = packet_dir(name) / "source"
+    """What a packet's receipt gets wrong: its rows, and an outcome other than the one owed.
+
+    The receipt is committed with the files it ran on, so Git, not a digest compared here,
+    says whether they have changed since (OR-16); the digests it records are for a reader.
+    """
     where = f"{name}: {RECEIPT}"
     problems: list[str] = []
     if receipt.get("format") != FORMAT or receipt.get("packet") != name:
         problems.append(f"{where} is not this packet's {FORMAT} receipt")
-    checkers = {checker: sha256(source / checker) for checker in CHECKERS}
-    if receipt.get("checkers") != checkers:
-        problems.append(f"{where} names checkers other than the retained ones")
+    if sorted(receipt.get("checkers") or ()) != sorted(CHECKERS):
+        problems.append(f"{where} does not name the source's two checkers")
     rows = receipt.get("rows") or []
     if [row.get("certificate") for row in rows] != list(PACKETS[name]):
         problems.append(f"{where} does not cover exactly {', '.join(PACKETS[name])}")
         return problems
     for row in rows:
-        problems.extend(_row_problems(where, source, row))
+        problems.extend(_row_problems(where, row))
     return problems
 
 
-def _row_problems(where: str, source: Path, row: Mapping[str, Any]) -> list[str]:
+def _row_problems(where: str, row: Mapping[str, Any]) -> list[str]:
     path = str(row["certificate"])
-    retained = source / path
-    problems: list[str] = []
-    if row.get("sha256") != sha256(retained):
-        problems.append(f"{where}: {path} is not the retained certificate")
-        return problems
-    certificate = legacy.parse(retained.read_text(encoding="utf-8"))
-    problems.extend(
-        f"{where}: {path}'s {kind} control is not the one rebuilt now"
+    problems = [
+        f"{where}: {path} records no {kind} control"
         for kind in CONTROLS
-        if row["controls"].get(kind, {}).get("sha256")
-        != text_sha256(control_text(certificate, kind))
-    )
+        if kind not in (row.get("controls") or {})
+    ]
     for checker in CHECKERS:
         runs = row["runs"].get(checker)
         if runs is None:
@@ -353,8 +350,13 @@ def _row_problems(where: str, source: Path, row: Mapping[str, Any]) -> list[str]
 
 
 def check(names: Sequence[str] = tuple(PACKETS)) -> list[str]:
+    """Each packet held to its acquisition manifest, and each receipt read back."""
     problems: list[str] = []
     for name in names:
+        problems.extend(
+            f"{name}: packet custody: {problem}"
+            for problem in acquire_source.check(packet_dir(name), REPO)
+        )
         path = packet_dir(name) / RECEIPT
         if not path.is_file():
             problems.append(f"{name}: {RECEIPT} is missing")

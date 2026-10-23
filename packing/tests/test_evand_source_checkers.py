@@ -104,13 +104,35 @@ def test_the_retained_checkers_accept_a_packing_and_refuse_each_of_its_controls(
             assert checkers.refused(checkers.run_checker(source / checker, mutant)), kind
 
 
-def test_a_receipt_that_misstates_a_digest_or_an_outcome_is_refused() -> None:
+def test_each_receipt_names_the_retained_files_and_the_controls_the_tool_builds() -> None:
+    """What ran: the digests a receipt records, for its reader, are the retained
+    checkers' and certificates', and each control's is the control rebuilt now."""
+    for name, paths in checkers.PACKETS.items():
+        receipt = _receipt(name)
+        source = checkers.packet_dir(name) / "source"
+        assert receipt["checkers"] == {
+            c: checkers.sha256(source / c) for c in checkers.CHECKERS
+        }
+        for row, path in zip(receipt["rows"], paths, strict=True):
+            certificate = legacy.parse((source / path).read_text(encoding="utf-8"))
+            assert row["sha256"] == checkers.sha256(source / path)
+            assert row["n"] == certificate.n
+            assert {kind: entry["sha256"] for kind, entry in row["controls"].items()} == {
+                kind: checkers.text_sha256(checkers.control_text(certificate, kind))
+                for kind in checkers.CONTROLS
+            }
+
+
+def test_a_receipt_that_misses_a_run_or_misstates_an_outcome_is_refused() -> None:
     receipt = _receipt(N229)
     assert checkers.receipt_problems(N229, receipt) == []
 
-    renamed = copy.deepcopy(receipt)
-    renamed["checkers"][FIRST] = "0" * 64
-    assert any("checkers other" in p for p in checkers.receipt_problems(N229, renamed))
+    one_checker = copy.deepcopy(receipt)
+    del one_checker["checkers"][FIRST]
+    del one_checker["rows"][0]["runs"][FIRST]
+    found = checkers.receipt_problems(N229, one_checker)
+    assert any("two checkers" in p for p in found)
+    assert any("did not run" in p for p in found)
 
     unaccepted = copy.deepcopy(receipt)
     unaccepted["rows"][0]["runs"][FIRST]["positive"]["exit_status"] = 1
@@ -120,9 +142,10 @@ def test_a_receipt_that_misstates_a_digest_or_an_outcome_is_refused() -> None:
     unrefused["rows"][0]["runs"][SECOND]["controls"]["sharp-wall"]["exit_status"] = 0
     assert any("did not refuse" in p for p in checkers.receipt_problems(N229, unrefused))
 
-    swapped = copy.deepcopy(receipt)
-    swapped["rows"][0]["controls"]["duplicate-square"]["sha256"] = "0" * 64
-    assert any("rebuilt now" in p for p in checkers.receipt_problems(N229, swapped))
+    uncontrolled = copy.deepcopy(receipt)
+    del uncontrolled["rows"][0]["controls"]["duplicate-square"]
+    found = checkers.receipt_problems(N229, uncontrolled)
+    assert any("records no duplicate-square control" in p for p in found)
 
     short = copy.deepcopy(receipt)
     short["rows"] = []
