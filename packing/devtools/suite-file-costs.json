@@ -83,6 +83,7 @@
     "packing/tests/test_bound_citations.py": 32.027,
     "packing/tests/test_bounded_diagnostics.py": 0.131,
     "packing/tests/test_browser_diagnostic.py": 3.237,
+    "packing/tests/test_browser_setup.py": 0.809,
     "packing/tests/test_bui_integer_count.py": 2.253,
     "packing/tests/test_bui_local_inequalities.py": 0.012,
     "packing/tests/test_build_n17_bb_native.py": 0.004,
@@ -839,6 +840,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-728-2026-10-22.json",
           "provenance": {},
           "tests": 6
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_browser_setup.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/browser-setup-2026-10-22.json",
+          "provenance": {},
+          "tests": 8
         }
       ]
     }

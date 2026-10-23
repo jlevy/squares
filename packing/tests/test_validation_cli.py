@@ -4545,15 +4545,17 @@ def test_contributor_inputs_select_site_layout_and_url_checks(path: str) -> None
 
 
 def _installs_chromium(job: Mapping[str, Any], *, pull_request: bool) -> bool:
-    """Whether a workflow job installs the pinned Chromium on this event: a `playwright
-    install` step whose own condition does not exclude the event."""
+    """Whether a browser install step is active on this event."""
     excluded = (
         "github.event_name != 'pull_request'"
         if pull_request
         else "github.event_name == 'pull_request'"
     )
     return any(
-        "playwright install" in str(step.get("run", ""))
+        any(
+            installer in str(step.get("run", ""))
+            for installer in ("playwright install", "-m devtools.browser_setup")
+        )
         and excluded not in str(step.get("if", ""))
         for step in job.get("steps", [])
     )
@@ -4606,7 +4608,10 @@ def test_a_frontend_job_without_chromium_is_detected() -> None:
     document["jobs"]["frontend"]["steps"] = [
         step
         for step in document["jobs"]["frontend"]["steps"]
-        if "playwright install" not in str(step.get("run", ""))
+        if not any(
+            installer in str(step.get("run", ""))
+            for installer in ("playwright install", "-m devtools.browser_setup")
+        )
     ]
     assert not _installs_chromium(document["jobs"]["frontend"], pull_request=True)
     # The validate job installs Chromium only after a merge, so on a pull request it
