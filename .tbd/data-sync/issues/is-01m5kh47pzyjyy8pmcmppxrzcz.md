@@ -3,9 +3,9 @@ type: is
 id: is-01m5kh47pzyjyy8pmcmppxrzcz
 title: "PR743 merge: site design, tutorials, and bounded CI setup"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: followups-coordinator
 labels: []
 dependencies: []
@@ -14,8 +14,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T04:43:23.229Z
-updated_at: 2026-10-23T05:08:24.313Z
+updated_at: 2026-10-23T05:19:16.061Z
 started_at: 2026-10-23T04:43:40.058Z
+closed_at: 2026-10-23T05:19:16.059Z
+close_reason: PR743 merged44df28b07b87bf131c4d1a5f3aebdc055cb20d61 after clean reviews and final PR CI. Pages39904006872 completed success including deploy and verify-deployment. Live workbench revision matches merge commit; tutorial.html and tutorial-advanced.html reference their cropped SVG assets, both HTTP200 and valid SVG. Post-merge deep validation39904006963 still running with no failures at verification; deployment completion does not claim that deep run complete.
+resolution: null
+duplicate_of: null
 ---
 Verify final PR title/body, current-head hosted CI and published senior review, then merge using a merge commit as authorized by user. Monitor deployment afterward.
 
