@@ -2,7 +2,7 @@
 
 A **regularization** redraws a packing the record already holds so that it reads
 cleanly: near-axis squares straightened, contacts closed, sub-blocks aligned, symmetric
-where the packing allows it.
+where the packing allows it, and drawn in a canonical pose.
 This policy governs every regularized drawing and every regularization the register
 records, whichever generator made it: this project’s `regularize_axis_components/2`,
 Evan Daniel’s regularizer as vendored here, or a reviewed adjustment of either.
@@ -208,7 +208,7 @@ where there is one.
 | Admit a view row 7 sent to review (a square’s count falls while no total does) | A review record naming that very view: its count, generator and version, run, output and row, and the source witness as it identifies itself; `layer` then draws it, and the entry names the record |
 | Admit a row 8 alternate | Only once question 2 is answered yes, and then labelled an alternate, never the credited packing |
 | Choose symmetry or contact, attached or separate sub-blocks, or a placement style | A per-count generator parameter in the review record, which the driver reads on every later run |
-| Choose an orientation | A recorded isometry of the witness’s frame, as `devtools/atlas_orientation.py` records them |
+| Choose an orientation | None: the rule of [section 13](#13-the-canonical-pose) draws every default picture in its canonical pose, and the witness’s frame is never changed; the one isometry `devtools/atlas_orientation.py` records, at n = 211, is history |
 | Choose between the two generators | A per-count choice in the review record |
 | Reject a view | The review record; the previous view or the witness stands |
 | Change how the generator works | A reviewed patch ([section 6](#6-forking-the-vendored-generator)) |
@@ -371,8 +371,11 @@ policy applies until there is one.
    are a follow-up, $\mathbb{Q}(\sqrt{2})$ first; $n = 11$, whose proved optimum lies in
    a field of degree 8, stays drawn from its witness.
 
-5. **Orientation:** the source’s; any isometry is recorded as `atlas_orientation`
-   records one.
+5. **Orientation:** every witness and view keeps its source’s frame; any isometry of a
+   frame is recorded as `atlas_orientation` records one.
+   *Answered by the owner on 23 October 2026:* the default picture is drawn in the
+   canonical pose of [section 13](#13-the-canonical-pose), and the house drawing as
+   published keeps its source’s pose.
 
 6. **Tie-breaks of taste:** the generator’s defaults, flagged in the gallery for the
    reviewer.
@@ -691,6 +694,63 @@ reviewed change drops its entry, which the gate accepts where the count then rea
 regular as published; and a count joins it with its bead, whatever its house reads.
 The gate cannot tell a dropped entry from a decided one, so the pull request that drops
 one shows its bead’s runs or what the count draws before and after.
+
+## 13. The Canonical Pose
+
+**Owner decision, 23 October 2026.** Packings arrive in their sources’ poses, rotated or
+mirrored against one another, “so they look a little chaotic”.
+The owner asked that each drawing be rotated and flipped so that the heaviest quadrant
+is upper left, the second upper right, the third lower left and the fourth lower right:
+“first rotate to put the heaviest quadrant, and then flip if necessary”, with ties
+broken in “some other arbitrary way to make it deterministic”, in floating point, “since
+this is only for the purposes of regularization”.
+The original source is not adjusted, the regularized picture is “fully canonical pose”,
+and the pose is kept as “a separate piece of metadata” rather than as a second copy of
+the packing.
+
+So every count’s default picture ([section 12](#12-the-default-picture)) is drawn in a
+canonical pose: one of the container’s eight symmetries, chosen from where its squares
+lie.
+
+1. Split the container down the middle into four quadrants, and weigh each by the area
+   of the squares inside it over its own area, in binary64.
+2. Rotate the heaviest quadrant to the upper left.
+   Then, if the lower left is heavier than the upper right, mirror across the diagonal
+   through the upper-left corner, the one flip that keeps that quadrant in place.
+   The quadrant opposite the heaviest ends lower right whatever its weight, so a packing
+   heavy at two opposite corners lies along that diagonal.
+   Equivalently, of the eight poses keep those whose weights, read upper left, upper
+   right, lower left, lower right, are lexicographically greatest, weights within
+   $10^{-9}$ counting as equal.
+3. Where poses tie, compare the same weights on finer grids, 4×4, 8×8 and 16×16 cells
+   read row by row from the top; then the squares themselves, each as its centre and its
+   tilt, sorted from the top row and the left, the least list kept.
+4. Poses still tied draw the same picture, since the packing has that symmetry, which is
+   checked square for square.
+   The first of them without a rotation or a flip is kept, so a symmetric packing keeps
+   its source’s pose where it can.
+
+The pose is kept as metadata: each state of `default-drawings.json` records it as
+`orientation`: `rotate`, 0, 90, 180 or 270 degrees counter-clockwise, and `flip`,
+whether the mirror follows; the stage that decided it; and the oriented picture’s four
+quadrant weights. It maps the stored coordinates of the picture drawn, the view where a
+view is drawn and the house witness elsewhere; the index’s `measured.symmetry` relates a
+view to its house.
+Every surface that draws the default picture applies it when it draws:
+both composites, the homepage and atlas tiles in Regularized mode, the frontier survey’s
+thumbnails and the drawing that heads a case page.
+No witness, view, certificate, side, tier or credit changes, and no turned copy of a
+packing is stored. The house drawing as published, in Original mode and under a case
+page’s *As published*, keeps its source’s pose; the recorded pose, or its inverse, can
+be applied to it later with nothing new stored.
+`devtools.canonical_orientation` decides the pose, `devtools.default_drawings --update`
+records it, and that tool’s check in the records tier decides every count’s pose again.
+
+No packing catalogue states an orientation convention, as the
+[plan](../specs/active/plan-2026-10-23-canonical-orientation.md#prior-practice) records.
+The habit this changes most is the integer grids’: their rows were filled from the
+bottom, leaving the empty cells at the top right, and the rule puts them at the bottom
+right.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

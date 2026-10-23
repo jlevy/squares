@@ -11,9 +11,9 @@ Two composites are drawn from it: the published figure of the first hundred, wit
 10-by-10 layout, and a poster of the whole corpus beside it.
 Each tile of both, like every drawing of a count on the site, shows the count’s default
 picture: its [regularized view](#the-regularized-views) where that view improves on the
-packing as published, and the house rendering of its witness everywhere else
-([the default picture](#the-default-picture)). The calibration annotations further down
-stay pinned to the first hundred by design.
+packing as published, and the house rendering of its witness everywhere else, turned
+into its canonical pose ([the default picture](#the-default-picture)). The calibration
+annotations further down stay pinned to the first hundred by design.
 
 The geometry records, drawings and exports in this directory are generated.
 [`credit-attributions.json`](credit-attributions.json) is the curated input for
@@ -764,6 +764,16 @@ policy’s
 worse on none of its goals and better on at least one, exactness included.
 The case page keeps the house drawing one click away, under *As published*, with its
 source’s credit; everywhere else the house drawing is the picture.
+
+Every default picture is drawn in its canonical pose
+([the policy’s section 13](../../../docs/project/policies/regularization-policy.md#13-the-canonical-pose)):
+turned by one of the container’s eight symmetries so that its heaviest quadrant is upper
+left and the heavier of that quadrant’s neighbours upper right.
+The pose is a state’s `orientation` in [`default-drawings.json`](default-drawings.json),
+`rotate` and `flip`, applied to the picture’s stored coordinates when the composites and
+the site draw it; the witnesses, the views and their renderings under `rendering/` and
+`regularized/rendering/` keep their sources’ frames, and the house drawing as published
+keeps its source’s pose.
 
 [`default-drawings.json`](default-drawings.json)
 ([schema](default-drawings.schema.yaml)), written by

@@ -156,11 +156,22 @@ python -m devtools.regularized_drawings
 python -m devtools.render_results --update
 ```
 
-These redraw the views, decide each count’s default picture and regularization state,
-regenerate `results.yaml`’s `regularized_drawings` and each case record’s
-`regularization` note, and regenerate `frontier/RESULTS.md`. Run `default_drawings`
-before `regularized_drawings`: where a view is not its count’s default picture, the note
-opens by saying that the house drawing is drawn and why, read from the default record.
+These redraw the views, decide each count’s default picture, its regularization state
+and its canonical pose, regenerate `results.yaml`’s `regularized_drawings` and each case
+record’s `regularization` note, and regenerate `frontier/RESULTS.md`. Run
+`default_drawings` before `regularized_drawings`: where a view is not its count’s
+default picture, the note opens by saying that the house drawing is drawn and why, read
+from the default record.
+
+The canonical pose is the last stage, and it changes no file but the record.
+`default_drawings --update` decides, on each count’s default picture, the rotation and
+flip that put its heaviest quadrant upper left and the heavier of that quadrant’s
+neighbours upper right, by the rule of
+[policy section 13](../policies/regularization-policy.md#13-the-canonical-pose), and
+records them as the state’s `orientation`. The composites and the site apply it when
+they draw, and the house drawing as published keeps its source’s pose.
+`python -m devtools.canonical_orientation --n N` prints a count’s quadrant weights and
+which stage decided its pose.
 Update the layer’s counts in the atlas README’s regularized-views section by hand.
 
 A drawn view is the count’s default picture, on the site, the atlas and the posters,

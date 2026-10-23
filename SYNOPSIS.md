@@ -4738,7 +4738,9 @@ Elsewhere *house* has the same modifier sense of “the project’s own”: the 
 A **house drawing** is that renderer’s picture of the house best packing as published;
 the count’s **default picture** is its regularized view where the
 [regularization policy](docs/project/policies/regularization-policy.md#12-the-default-picture)
-draws one, and the house drawing everywhere else.
+draws one, and the house drawing everywhere else, drawn in the canonical pose of the
+policy’s
+[section 13](docs/project/policies/regularization-policy.md#13-the-canonical-pose).
 The regularization policy’s contact-shading *house rule* (gap $2 \times 10^{-6}$, beside
 the workbench’s stage rule) belongs to that renderer and is unrelated to the adoption
 rule.
