@@ -2343,6 +2343,25 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Issue #732's 77 beyond-horizon rows at 325 to 1024 and their supersessions, and "
+            "the request entries for #732 and the four stage 7 replies after #730, against "
+            "main fcf2f96a5 (#730): rendered at link revision 400a2dae into empty site "
+            "directories, twice from this tree at 32d36189 and twice from main's (42 files "
+            "each), render_packing_methods writes every file byte-identical across all four. "
+            "No PDF was printed; it prints from that HTML. Retain v0.2.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
         paths=("packing/campaign/result-requests.yaml",),
         outputs=(
             "papers/square-packing-methods-survey.html",
