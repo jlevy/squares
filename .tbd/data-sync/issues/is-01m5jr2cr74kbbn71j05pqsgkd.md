@@ -5,7 +5,7 @@ title: "Site navigation performance: faster page-to-page transitions"
 kind: epic
 status: open
 priority: 1
-version: 8
+version: 9
 labels: []
 dependencies: []
 child_order_hints:
@@ -16,7 +16,8 @@ child_order_hints:
   - is-01m5jr2fjt4wp8zryw7wceq0hw
   - is-01m5jr2g54r568rrq3yg3dwj6w
   - is-01m5jr2gpy49zr55rdh1cqaghc
+  - is-01m5k1wqbd2k8scqht90p33qm3
 created_at: 2026-10-22T21:25:28.455Z
-updated_at: 2026-10-22T21:25:32.510Z
+updated_at: 2026-10-23T00:17:08.410Z
 ---
 Measured 2026-10-22 against squaremath.org and a local mirror in headless Chromium 141. A nav click is a full document load; on heavy pages (results 22,560 elements, atlas 13,726) the new page is busy 1.0-1.5 s after the click, mostly style recalc and layout, not script. Two quick fixes land first (headroom scroll-padding guard, prerender on hover); the rest are follow-up PRs. Warm-cache click-to-settled: index->results ~1,240 ms as deployed, ~800 ms with the headroom fix, ~110 ms with fix + prerender.
