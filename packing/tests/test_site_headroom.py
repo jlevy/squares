@@ -416,9 +416,10 @@ def test_main_actions_center_their_visible_capital_ink(
             + overview_sections.arrow_icon()
             + "</a>"
         )
+    # The button form, as the recent table's Earlier results is drawn: the double chevron
+    # after the label. The atlas's expander was this form's other button until 2026-10-22.
     body += (
-        '<button class="site-action" data-atlas-toggle>'
-        "<span data-atlas-label>Show More</span>"
+        '<button type="button" class="site-action">Earlier Results'
         + overview_sections.arrow_icon("double-down")
         + "</button></p>"
         + '<div class="site-popover"><a class="site-popover-action" data-go="page" '

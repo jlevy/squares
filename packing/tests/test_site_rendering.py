@@ -245,13 +245,12 @@ def test_generic_hidden_math_wrapper_remains_in_the_readability_sample(
 @pytest.mark.parametrize(
     ("opening", "closing"),
     [
-        ('<div class="site-atlas-rest" data-atlas-rest hidden>', "</div>"),
         ('<table class="site-table"><tbody><tr hidden><td>', "</td></tr></tbody></table>"),
         ('<div class="site-table-tools" hidden>', "</div>"),
         ('<div class="site-table-tools"><label hidden>', "</label></div>"),
         ('<div class="cert-figure" data-cert="alternate" hidden>', "</div>"),
     ],
-    ids=["atlas-rest", "filtered-row", "filter-tools", "preset-control", "certificate"],
+    ids=["filtered-row", "filter-tools", "preset-control", "certificate"],
 )
 @pytest.mark.parametrize("override", [False, True], ids=["collapsed", "visible-override"])
 def test_optional_hidden_math_is_exempt_only_while_its_wrapper_is_collapsed(

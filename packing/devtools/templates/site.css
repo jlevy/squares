@@ -147,6 +147,12 @@ body {
   /* The space above and below every table, on screen: a site table with its filter bar,
      and a document's own table (paper-design.md, Tables). */
   --site-table-space: 2rem;
+  /* A tally, counts set in a line with a dot between each two ("75 people · 114
+     records"): what each word space beside a dot gains, and the space above and below a
+     tally that stands as a line of its own, on screen (paper-design.md, Tallies; the
+     owner, 2026-10-23). */
+  --site-tally-gap: 0.15em;
+  --site-tally-space: 1.25rem;
   /* The measure a long list of cases wraps in, in the n column of a table of results: a
      result about five values or more sets them in the line, this many digits to a line
      (paper-design.md, Tables). */
@@ -2237,22 +2243,44 @@ body {
    like a card and opens the case popover (Case records, below). The wash is the cell's
    background,
    behind the drawing, and it is all that changes: every line keeps the page's ink. */
-/* Expansion moves following sections. Keep the viewport fixed through that input
-   response instead of scroll-anchoring a result row below the changing atlas. */
+/* A change of view, size or zoom moves the sections after the atlas. Keep the viewport
+   fixed through it instead of scroll-anchoring a result row below the changing atlas;
+   a triangle that follows the scroll keeps the reader's row in place itself. */
 body:has([data-atlas-grid]),
 body:has([data-atlas-preview]) {
   overflow-anchor: none;
 }
 .site-page .site-atlas-grid {
   --site-wide: var(--site-wide-room);
-  --site-atlas-toggle-space: 1.2rem;
+  /* The space between the controls and the tiles. */
+  --site-atlas-controls-space: 1.2rem;
   /* Both views share the grid's readable cell minimum and gap. The script reads
      these tokens in rem or px; complete Triangle rows pan at that cell width. The size's
      scale makes Small two thirds as wide and Large half as wide again. */
   --site-atlas-cell-min: 6.4rem;
   --site-atlas-reference-gap: 0.5rem;
+  /* The Row reference square's ink: the muted gray 69% of the way from the page, one shade
+     in every tile and lighter than both the black container and the muted text. 69% is
+     the lightest mix that keeps a graphic's 3:1 against the page in both themes (WCAG
+     1.4.11): 3.05:1 in light, where the half mix it replaced read 2.14:1, and 4.77:1 in
+     dark. */
+  --site-atlas-reference-ink: color-mix(in srgb, var(--kpress-doc-muted) 69%, var(--kpress-doc-bg));
   --site-atlas-cell-padding: 0.3rem;
-  --site-atlas-scale: 0.667;
+  /* Each size's scale, which a following triangle also reads to tell whether a row
+     would fit at the next size (overview/atlas-view.js). */
+  --site-atlas-scale-small: 0.667;
+  --site-atlas-scale-medium: 1;
+  --site-atlas-scale-large: 1.5;
+  --site-atlas-scale-xlarge: 2.25;
+  --site-atlas-scale: var(--site-atlas-scale-small);
+  /* A triangle that follows the scroll keeps the middle of the window this share of
+     the way along the reader's row, from its left end, where the grid first breaks.
+     It draws its case numbers at the follow size, so they still read when the zoom has
+     shrunk Large toward Small, and zooms out no further than keeps them at the least
+     size, the least the regular numbers take (overview/atlas-view.js). */
+  --site-atlas-follow-across: 0.333;
+  --site-atlas-follow-number: 2.4rem;
+  --site-atlas-follow-number-least: 0.65rem;
   /* The move between the views: one duration and one easing for every tile, read by
      the script. Reduced motion makes the switch instant, as it does every hover. */
   --site-atlas-move-duration: 360ms;
@@ -2273,25 +2301,43 @@ body:has([data-atlas-preview]) {
 html[data-site-atlas-size="small"]
   .site-page
   .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
-  --site-atlas-scale: 0.667;
+  --site-atlas-scale: var(--site-atlas-scale-small);
 }
 .site-page .site-atlas-grid[data-atlas-size="medium"],
 html[data-site-atlas-size="medium"]
   .site-page
   .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
-  --site-atlas-scale: 1;
+  --site-atlas-scale: var(--site-atlas-scale-medium);
 }
 .site-page .site-atlas-grid[data-atlas-size="large"],
 html[data-site-atlas-size="large"]
   .site-page
   .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
-  --site-atlas-scale: 1.5;
+  --site-atlas-scale: var(--site-atlas-scale-large);
 }
-/* Untouched wide-screen defaults match the first CSS paint, before JS placement. */
+.site-page .site-atlas-grid[data-atlas-size="xlarge"],
+html[data-site-atlas-size="xlarge"]
+  .site-page
+  .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
+  --site-atlas-scale: var(--site-atlas-scale-xlarge);
+}
+/* Untouched wide-screen defaults match the first CSS paint, before JS placement. A
+   block whose size follows, or once followed, the scroll keeps its own size. */
 @media (min-width: 75rem) {
-  html:not([data-site-atlas-size]) .site-page .site-atlas-grid:not([data-atlas-size-explicit]) {
-    --site-atlas-scale: 1;
+  html:not([data-site-atlas-size])
+    .site-page
+    .site-atlas-grid:not([data-atlas-size-explicit]):not([data-atlas-follow]) {
+    --site-atlas-scale: var(--site-atlas-scale-medium);
   }
+}
+/* A Triangle reached from the top of the page opens at XL, as the script that follows
+   the scroll mounts it (embed.js marks the root). */
+html[data-site-atlas-follow]
+  .site-page
+  .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]):not(
+    [data-atlas-follow]
+  ) {
+  --site-atlas-scale: var(--site-atlas-scale-xlarge);
 }
 /* Layout, Size, Scale and Drawings use the shared small chooser strip. Each line is
    centered over the tiles, with the compact two-column key centered beneath it;
@@ -2301,7 +2347,7 @@ html[data-site-atlas-size="large"]
   flex-wrap: wrap;
   gap: 0.6rem 1.6rem;
   justify-content: center;
-  margin-block-end: var(--site-atlas-toggle-space);
+  margin-block-end: var(--site-atlas-controls-space);
 }
 .site-atlas-grid .site-atlas-views,
 .site-atlas-grid .site-atlas-sizes,
@@ -2380,9 +2426,10 @@ html[data-site-atlas-size="large"]
 /* The triangle's column count and tile width live in the shared rule so changing
    view does not restyle every drawing's inherited properties. The count uses the same
    scaled cell minimum and gaps as Grid, and the tile fills one column after the gaps
-   are reserved. Container arithmetic also places the static Triangle before scripts. */
+   are reserved. Container arithmetic also places the static Triangle before scripts.
+   The box's own style names the largest enclosing side, Global's reference before the
+   script counts the tiles shown (`overview_sections._atlas_rows`). */
 .site-atlas-cells {
-  --site-atlas-global-side: var(--site-atlas-first-side);
   --site-atlas-cell: calc(var(--site-atlas-cell-min) * var(--site-atlas-scale));
   --site-atlas-per-line: max(
     1,
@@ -2485,9 +2532,6 @@ html[data-site-atlas-size="large"]
 /* Scale changes only the drawn enclosing square. Its layout box and the count stay
    fixed, so every row keeps its pitch and all captions retain their alignment. The
    head bootstrap selects the same ratio before the atlas programs mount. */
-.site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
-  --site-atlas-global-side: var(--site-atlas-last-side);
-}
 html:not([data-site-atlas-scale])
   .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-scale="row"])
   .site-atlas-cell,
@@ -2505,7 +2549,7 @@ html[data-site-atlas-scale="global"] .site-atlas-grid:where([data-atlas-grid]) .
 .site-atlas-cell .site-atlas-reference {
   aspect-ratio: 1;
   height: auto;
-  color: var(--kpress-doc-muted);
+  color: var(--site-atlas-reference-ink);
   display: none;
   inset-block-start: var(--site-atlas-cell-padding);
   inset-inline-start: var(--site-atlas-cell-padding);
@@ -2585,29 +2629,21 @@ html[data-site-atlas-scale="row"]
 .site-atlas-segment {
   display: contents;
 }
-/* Triangle keeps complete rows at Grid's readable drawing scale. The visible rows
-   share their actual widest canvas, centered when it fits. Wide rows retain the
-   right-origin scroll frame and left-to-right reading order within it. */
+/* Triangle keeps complete rows at Grid's readable drawing scale. Every row shares the
+   canvas of the widest, the last: row 18, of 35 tiles. The canvas is centered when it
+   fits. Wide rows retain the right-origin scroll frame and left-to-right reading order
+   within it. Whether that row keeps the extra gap before its grid suffix is the box's
+   own style (`--site-atlas-extra`, `overview_sections._atlas_rows`). */
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
   .site-atlas-cells,
 html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-cells {
-  --site-atlas-widest: 19;
-  --site-atlas-extra: var(--site-atlas-first-extra);
+  --site-atlas-widest: 35;
   --site-atlas-number-ink-size: var(--site-atlas-number-size);
   --site-atlas-number-leading: 1.15;
   direction: rtl;
   display: block;
   overflow-x: auto;
-}
-html:not([data-site-atlas-view="grid"])
-  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
-  .site-atlas-cells:has(.site-atlas-rest:not([hidden])),
-html[data-site-atlas-view="triangle"]
-  .site-atlas-grid:where([data-atlas-grid])
-  .site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
-  --site-atlas-widest: 35;
-  --site-atlas-extra: var(--site-atlas-last-extra);
 }
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
@@ -2638,6 +2674,77 @@ html[data-site-atlas-view="triangle"]
   .site-atlas-grid:where([data-atlas-grid])
   .site-atlas-row:where(:not([data-atlas-row="1"])) {
   margin-block-start: var(--site-atlas-row-gap);
+}
+/* That triangle is laid out once, at XL, and zoomed as one picture, one compositor
+   layer (below). Its case numbers are drawn at the follow size from the first
+   paint, so mounting moves nothing. */
+html[data-site-atlas-follow]
+  .site-page
+  .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]):not([data-atlas-follow])
+  .site-atlas-cells,
+.site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-cells {
+  --site-atlas-number-size: var(--site-atlas-follow-number);
+}
+/* Its tiles' box is a stage the height of the window (overview/atlas-view.js sets it),
+   pinned to the window's top while the empty runway after it scrolls past. The script pans the
+   rows itself, so a sideways wheel or swipe moves the triangle while the page scrolls up
+   and down, and a finger's up and down stays the page's. */
+.site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-cells {
+  overflow: hidden;
+  overscroll-behavior-x: none;
+  position: sticky;
+  top: 0;
+  touch-action: pan-y;
+}
+/* That sideways pan is the triangle's, so no sideways swipe left over goes back a page. */
+html:has(.site-atlas-grid[data-atlas-zoom]) {
+  overscroll-behavior-x: none;
+}
+/* kpress clips a narrow document with `overflow-x: hidden`, which makes it the scroller a
+   sticky stage would pin to. Clipping it instead pins the stage to the window. */
+@container kpress-doc (max-width: 47.99rem) {
+  .kpress-doc:has(.site-atlas-grid[data-atlas-zoom]) {
+    overflow-x: clip;
+  }
+}
+/* The script wraps that triangle's rows in one picture, one compositor layer, which it
+   zooms and pans about the picture's top left corner (overview/atlas-view.js). */
+.site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-picture {
+  transform-origin: 0 0;
+  will-change: transform;
+}
+/* Until the script frames it, that triangle is out of sight: the browser paints the page
+   before the script runs, and the triangle would stand at its right end and then jump to
+   its framing. It then fades in where it stands. A script that never runs leaves it
+   shown after two seconds. */
+@keyframes site-atlas-unveil {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+html[data-site-atlas-follow]
+  .site-page
+  .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]):not([data-atlas-follow])
+  .site-atlas-cells {
+  animation: site-atlas-unveil 0s 2s both;
+}
+.site-page .site-atlas-grid[data-atlas-follow] .site-atlas-cells {
+  animation: site-atlas-unveil 0.25s ease-out both;
+}
+/* On paper that triangle prints as the reader sees it: the stage, framed and zoomed as
+   it stands, in its place, without the empty runway it is pinned for. Laid out unzoomed
+   it is several pages wide, and only the right end of each row would print. Here rather
+   than in the print block above, which these rules outrank. */
+@media print {
+  .site-atlas-runway {
+    display: none;
+  }
+  .site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-cells {
+    position: static;
+  }
 }
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
@@ -2688,39 +2795,6 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   font-size: var(--site-atlas-number-size);
   line-height: 1.15;
   margin-block-start: calc(var(--site-atlas-tile) * 0.04);
-}
-/* Perfect-square endpoints use bold weight while keeping the same gray number ink. */
-html:not([data-site-atlas-view="grid"])
-  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
-  [data-atlas-square]
-  .site-atlas-n,
-html[data-site-atlas-view="triangle"]
-  .site-atlas-grid:where([data-atlas-grid])
-  [data-atlas-square]
-  .site-atlas-n {
-  font-weight: var(--site-font-weight-sans-bold);
-}
-/* The grid shows n = 1 to 100 until its button, centred under it, places the rest. The
-   rest sit in one box the grid lays out as its own cells, so hiding them again is the
-   box's `hidden`. */
-.site-atlas-rest {
-  display: contents;
-}
-.site-atlas-rest[hidden] {
-  display: none;
-}
-
-.site-page [data-atlas-grid] .site-atlas-cell[hidden],
-.site-page [data-atlas-grid] .site-atlas-row[hidden] {
-  display: none;
-}
-
-/* The expander's row is the action row, set the grid's own space under the tiles. */
-.site-atlas-grid .site-atlas-toggle-row {
-  --site-action-space: var(--site-atlas-toggle-space);
-}
-.site-atlas-grid .site-atlas-toggle-row[hidden] {
-  display: none;
 }
 /* The film's panel for a case, which opens every case record as its visual summary
    (`.site-case-summary`, below) and a result's overview as its case (site-result.css):
@@ -3009,7 +3083,7 @@ html[data-site-atlas-view="triangle"]
   inset-inline-end: auto;
   margin-block-start: calc(var(--site-popover-close-inset) - var(--site-popover-pad));
   /* A float narrows the record's inline-size container and moves its centre. Keep
-     the sticky cross in a block that occupies no height beside the first steps. */
+     the sticky cross in a block that occupies no height beside the record's label. */
   margin-block-end: calc(
     -1 *
     (var(--site-popover-close) + var(--site-popover-close-inset) - var(--site-popover-pad))
@@ -3020,7 +3094,7 @@ html[data-site-atlas-view="triangle"]
   z-index: 2;
 }
 .site-popover.site-case-pop > .site-case-pop-body {
-  /* Only the steps beside the cross reserve its width; the article stays centred. */
+  /* Nothing beside the cross reserves its width; the article stays centred. */
   padding-inline-end: 0;
 }
 
@@ -3037,7 +3111,7 @@ html[data-site-atlas-view="triangle"]
     inline-size: calc(100vw - 1rem);
     padding-inline: 0.75rem;
   }
-  /* Its cross keeps to that narrower padding, as its steps do (below). */
+  /* Its cross keeps to that narrower padding. */
   .site-popover.site-case-pop > .site-popover-controls {
     margin-inline-end: calc(var(--site-popover-close-inset) - 0.75rem);
   }
@@ -3050,38 +3124,75 @@ html[data-site-atlas-view="triangle"]
   font-weight: var(--site-font-weight-sans-light);
   text-align: center;
 }
+/* The count's line: the title centred, as wide as the frame of the drawing below it,
+   with the record's two steps at its ends, each an arrow alone meeting the frame's left
+   or right edge (the owner, 2026-10-23). The frame, 1000 units, is drawn in a view of
+   1020, so the line is that much narrower than the drawing's box. The steps' nav lies across the whole line on a subgrid of
+   it, so a first or last case's one arrow leaves the count where it is, and in the case
+   popover the line stands below the corner's icons rather than beside them, as the steps
+   did when they were the record's first line (`think-0dxa`). */
+.site-case-title-line {
+  --site-case-step: 2.75rem;
+  align-items: center;
+  column-gap: 0.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  inline-size: calc(min(20rem, 100%) * 1000 / 1020);
+  margin-block: 0.25rem 0.75rem;
+  margin-inline: auto;
+}
 .site-case-steps {
-  display: flex;
-  font-size: var(--site-font-size-note);
-  gap: 1rem;
-  justify-content: space-between;
-  margin-block-end: 1rem;
+  display: grid;
+  font-size: calc(var(--site-font-size-sans-base) * var(--paper-title-scale));
+  grid-column: 1 / -1;
+  grid-row: 1;
+  grid-template-columns: subgrid;
+  /* It lies over the count too; only its arrows take a press. */
+  pointer-events: none;
 }
-.site-case-steps [rel~="next"] {
-  margin-inline-start: auto;
+.kpress .site-case-steps > a {
+  block-size: var(--site-case-step);
+  color: var(--kpress-doc-link);
+  display: grid;
+  inline-size: var(--site-case-step);
+  place-items: center;
+  pointer-events: auto;
+  text-decoration: none;
+  transition: var(--site-hover-transition);
 }
-/* The record's steps are the first line the cross stands beside once it is held at the
-   corner, so they keep clear of it as the label above them does: the next case's link
-   ended under the cross (`think-0dxa`). */
-.site-case-pop .site-case-steps {
-  padding-inline-end: calc(
-    var(--site-popover-controls-inline) +
-    var(--site-popover-close-inset) -
-    var(--site-popover-pad)
-  );
+/* Each target ends at its end of the line, its arrow at the target's outer side and out
+   past it by the arrow's own margin in its 16-unit icon, 1.7 units, so the arrow's ink
+   meets the frame and nothing stands outside the drawing's box. */
+.kpress .site-case-steps > [rel~="prev"] {
+  grid-column: 1;
+  justify-items: start;
+  justify-self: start;
 }
-@media (max-width: 40rem) {
-  .site-case-pop .site-case-steps {
-    padding-inline-end: calc(
-      var(--site-popover-controls-inline) +
-      var(--site-popover-close-inset) -
-      0.75rem
-    );
-  }
+.kpress .site-case-steps > [rel~="next"] {
+  grid-column: 3;
+  justify-items: end;
+  justify-self: end;
+}
+/* A step hovered or focused takes the text's ink, as the contents rail's links do, so it
+   answers the pointer under reduced motion too, where its arrow keeps still. Focus keeps
+   its ring as well. */
+.kpress .site-case-steps > a:is(:hover, :focus-visible) {
+  color: var(--kpress-doc-text);
+}
+.site-case-steps .site-icon-arrow {
+  block-size: 0.75em;
+  inline-size: 0.75em;
+  margin: 0 calc(-0.75em * 1.7 / 16);
 }
 .site-case-eyebrow {
   display: block;
   text-align: center;
+}
+/* In the case popover the record's label shares the corner icons' line, so the count's
+   line, steps and all, starts just below them. */
+.site-case-pop .site-case-head > .site-case-eyebrow {
+  line-height: var(--site-popover-close);
+  margin-block-start: calc(var(--site-popover-close-inset) - var(--site-popover-pad));
 }
 .kpress .site-case-title,
 .kpress .site-popover .site-case-title {
@@ -3089,7 +3200,13 @@ html[data-site-atlas-view="triangle"]
   font-size: calc(var(--site-font-size-sans-base) * var(--paper-title-scale));
   font-weight: var(--site-font-weight-sans-medium);
   line-height: var(--paper-heading-leading);
-  margin-block: 0.5rem 0.6rem;
+  margin-block: 0;
+}
+/* The count is as wide as it is set; a fetched record's `h1` would otherwise scroll in the
+   popover (`.kpress .site-popover h1`) over a fraction of a pixel's overhang. */
+.kpress .site-case-title-line > .site-case-title {
+  grid-area: 1 / 2;
+  overflow: visible;
 }
 .site-case-status {
   align-items: center;
@@ -3139,10 +3256,16 @@ html[data-site-atlas-view="triangle"]
   .site-case .site-case-figure {
     inline-size: min(18rem, 100%);
   }
+  .site-case .site-case-title-line {
+    inline-size: calc(min(18rem, 100%) * 1000 / 1020);
+  }
 }
 @container (max-width: 20rem) {
   .site-case .site-case-figure {
     inline-size: min(14rem, 100%);
+  }
+  .site-case .site-case-title-line {
+    inline-size: calc(min(14rem, 100%) * 1000 / 1020);
   }
   .site-case .site-atlas-gap-values {
     line-height: 1.4;
@@ -3162,6 +3285,9 @@ html[data-site-atlas-view="triangle"]
 }
 .site-case-pop .site-case-head > .site-case-figure {
   inline-size: 100%;
+}
+.site-case-pop .site-case-head > .site-case-title-line {
+  inline-size: calc(100% * 1000 / 1020);
 }
 .kpress .site-case-summary .site-atlas-pop-bound {
   font-family: var(--kpress-font-prose);
@@ -3727,9 +3853,9 @@ html[data-site-atlas-view="triangle"]
   overflow: hidden;
 }
 
-/* Disclosure controls sit at the horizontal center of their content, across cards
-   and Atlas previews. Navigation actions keep their own layout roles. */
-.kpress :is(.site-news-footer, .site-atlas-toggle-row) {
+/* Disclosure controls sit at the horizontal center of their content, across cards.
+   Navigation actions keep their own layout roles. */
+.kpress .site-news-footer {
   justify-content: center;
 }
 .kpress .site-news-filters {
@@ -3784,6 +3910,9 @@ html[data-site-atlas-view="triangle"]
   display: inline-flex;
   max-inline-size: 100%;
   position: relative;
+  /* Top-aligned, so the trigger stands level with the chooser strip beside it rather
+     than on the baseline of the fieldset's larger text, a few pixels lower. */
+  vertical-align: top;
 }
 .site-filter-trigger,
 .site-filter-options button {
@@ -3804,17 +3933,28 @@ html[data-site-atlas-view="triangle"]
 }
 .site-filter-trigger {
   background: var(--kpress-doc-bg);
-  min-block-size: 1.75rem;
+  min-block-size: var(--site-chooser-small-block-size);
+}
+/* The label and the summary are each a line trimmed to its capitals, as a chooser
+   tab's is, so the trigger's centering stands both in its middle on one baseline
+   (site-nav.css, the compact chooser). A chip in the summary sits on that baseline
+   and keeps its height, its own capitals centered in it. */
+.site-filter-trigger > span {
+  text-box: var(--site-chooser-small-trim);
 }
 .site-filter-trigger [data-site-filter-summary] {
-  align-items: center;
-  display: inline-flex;
-  gap: 0.2rem;
+  display: block;
 }
 .site-filter-trigger .site-chip {
   font-size: inherit;
   line-height: inherit;
   margin: 0;
+}
+@supports (text-box: trim-both cap alphabetic) {
+  .site-filter-trigger .site-chip {
+    padding-block: calc((1lh - 1cap) / 2);
+    text-box: var(--site-chooser-small-trim);
+  }
 }
 .site-filter-chevron {
   margin-inline-start: 0.1rem;
@@ -3910,9 +4050,12 @@ html[data-site-atlas-view="triangle"]
   color: var(--kpress-doc-muted);
   cursor: pointer;
   font: inherit;
+  font-size: var(--site-chooser-small-size);
   font-weight: var(--site-font-weight-sans-medium);
+  min-block-size: var(--site-chooser-small-block-size);
   padding: var(--site-chooser-small-padding);
   padding-inline-end: 0;
+  text-box: var(--site-chooser-small-trim);
   text-decoration: none;
   transition: var(--site-hover-transition);
 }
@@ -3941,6 +4084,21 @@ html[data-site-atlas-view="triangle"]
 }
 .site-credit-tally a {
   color: inherit;
+}
+
+/* Tallies (paper-design.md, Tallies). Every dot between two counts is
+   `site_tallies.TALLY_SEPARATOR`, whose two word spaces each gain `--site-tally-gap`:
+   0.35em a side in the site's sans, as the dot between a result's record links has. A
+   tally that is a line of its own, the profile directory's summary and a profile's
+   stacked counts, stands `--site-tally-space` clear of the blocks either side; where a
+   larger margin meets it, a table's or a heading's, the larger one stands. */
+.site-tally-sep {
+  word-spacing: var(--site-tally-gap);
+}
+@media screen {
+  .kpress :is(.site-profile-summary, p:has(> .site-profile-tally)) {
+    margin-block: var(--site-tally-space);
+  }
 }
 
 /* Credited people remain primary content, including historical result rows. */
