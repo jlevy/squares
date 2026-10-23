@@ -107,7 +107,9 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: above every tolerance, and 260 stayed on Couzo's certificate (T-223, think-xu4d). The
 #: adoption of 22 October 2026 (think-ql4v) moved it at its four, to Evan Daniel's
 #: regularized views (T-225), least margins 1e-20: 260 left, and 204, 227 and 229 stayed.
-#: Re-screening the adopted
+#: The adoption of 23 October 2026 (think-4h23) moved it at its two, to Mykhailo
+#: Polkovskyi's #719 re-solves (T-229): 105 joined, its least margins 5e-21 against every
+#: wall and 1e-20 between pairs, and 204 stayed. Re-screening the adopted
 #: counts with the screen's own `--update --n` rebuilds the retained screen byte for byte.
 GOLDEN_UNSTABLE = {
     "n=1..100": [
@@ -121,6 +123,7 @@ GOLDEN_UNSTABLE = {
         84,
         86,
         88,
+        105,
         106,
         129,
         132,
@@ -137,6 +140,7 @@ GOLDEN_UNSTABLE = {
         84,
         86,
         88,
+        105,
         106,
         129,
         132,

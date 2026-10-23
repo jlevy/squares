@@ -1279,17 +1279,26 @@ def _sides(loader: Callable[[], Mapping[int, legacy.Certificate]]) -> dict[int, 
 
 
 @functools.cache
-def _import_sides(packet: Path) -> dict[int, Fraction]:
-    """Every exact side of one packet this module imports, read once after its custody check.
+def _import_sides(packet: Path, *, in_corpus: bool) -> dict[int, Fraction]:
+    """The exact sides of one packet this module imports, inside the case corpus or beyond
+    it, read once after its custody check.
 
-    Keyed on the packet's path, so a private copy is read as itself.
+    Keyed on the packet's path, so a private copy is read as itself. A house is read
+    inside the corpus, so a release whose packet also derives its rows beyond it, as issue
+    719's derives 112, admits its two in-corpus facts for a house and not the other 112
+    (21.6 s of admission on 22 October 2026).
     """
-    return {n: certificate.side for n, certificate in read_facts(packet).items()}
+    numbers = [
+        row["n"]
+        for row in load_declaration(packet)["certificates"]
+        if (row["n"] <= HORIZON) is in_corpus
+    ]
+    return {n: certificate.side for n, certificate in read_facts(packet, numbers).items()}
 
 
 def import_side(name: str, n: int) -> Fraction:
     """One exact side of the import packet named ``name``, its directory name."""
-    return _import_sides(packet_path(name))[n]
+    return _import_sides(packet_path(name), in_corpus=n <= HORIZON)[n]
 
 
 def _import(name: str) -> Callable[[int], Fraction]:
@@ -1395,6 +1404,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Couzo issue 670 2026-10-17]": _import("couzo-issue670-2026-10-17"),
     "[Couzo issue 672 2026-10-17]": _import("couzo-issue672-2026-10-17"),
     "[Couzo issue 675 2026-10-18]": _import("couzo-issue675-2026-10-18"),
+    # Mykhailo Polkovskyi's issue-719 release (think-4h23), derived facts only: T-229 at
+    # 105 and 204, beside the 112 rows beyond the corpus its packet also derives.
+    "[Mishapolk issue 719 2026-10-22]": _import("mishapolk-issue719-2026-10-22"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

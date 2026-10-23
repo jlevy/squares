@@ -2434,6 +2434,102 @@ verifiers:
       evand-regularized-2026-10-20 packet's review/review-2026-10-21/ with its README and
       receipts (RF-6).
 
+  - id: V-couzo-670-672-675-review-check
+    program: review_0nse_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 22 October review's standard-library exact checker of the four certificates
+      T-226, T-227 and T-228 cite, with a reader of its own that admits only integer and
+      p/q literals, deciding each certificate on two routes that share only that reader:
+      route Z in integers alone (a Pythagorean triple per row, containment by half-extents
+      and every one of the n(n-1)/2 pairs by four separating-axis inequalities cleared of
+      denominators, giving each pair's exact gap), and route C in Fraction (unit edges,
+      right angles, orientation and corner mean on the corners, corner containment, and
+      every pair, with no distance filter, by the exact area one square's four closed
+      half-planes clip from the other).
+    source:
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/programs/review_0nse_check.py
+    independence_record: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+    independence:
+      read: [mathematics, certificate-format, producer-output, earlier-review]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-226 to T-228 (c-review-t226-t228-math,
+            think-0nse), strong sub-agent tier, reasoning setting xhigh
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's manifests name this repository's sqpack/verify.py, which Claude
+          agents wrote, as their first checker. Written in a file of its own that imports
+          nothing from this repository or the source, from the certificates' format line,
+          the mathematics, the per-count JSON and manifests and the 21 October review of
+          T-225's account of its checker, before its author read either maintained route;
+          its author never read sqpack/verify.py, check_rational_witness_independent or the
+          source's verify_bound_certificate.py. Route C uses CPython's Fraction, as the
+          maintained routes do; route Z uses integers only.
+    note: >-
+      Written and run on 22 October 2026 by the review; kept in the
+      couzo-issue672-2026-10-17 packet's review/review-2026-10-22/ with its README and
+      receipts, which the #670 and #675 packets point to (RF-7).
+
+  - id: V-mishapolk-719-review-check
+    program: review_t229_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 22 October review's standard-library exact checker of the two certificates T-229
+      cites, with readers of its own for the source's certificate text and for the packet's
+      Witness/v2 center-basis fact, deciding each on two routes that share only the reader:
+      route Z in integers alone (a Pythagorean triple per row, containment by half-extents
+      and every pair by four separating-axis inequalities cleared of denominators), and
+      route C in Fraction (unit edges, right angles, orientation and corner mean, corner
+      containment, every pair by the exact area one square's closed half-planes clip from
+      the other, and the exact squared distance of every pair whose centres are closer than
+      2). Its same command decides that each fact states exactly its certificate's squares.
+    source:
+      - packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/programs/review_t229_check.py
+    independence_record: docs/project/reviews/review-2026-10-22-mishapolk-719.md
+    independence:
+      read: [mathematics, certificate-format, producer-output, earlier-review]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-229 (c-review-t229-math, think-4h23),
+            strong sub-agent tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue names this repository's sqpack/verify.py, whose first revisions are
+          Claude-authored commits, as one of its checkers, and discloses Gemini assistance
+          with the author's scripting. Written in a file of its own that imports nothing from
+          this repository or the source, from the certificates' format line, the packet
+          README and receipts and the 22 October review of T-226 to T-228's account of its
+          checker, and frozen and run on both certificates before its author read any
+          maintained or source code; its author never read sqpack/verify.py's deciding code,
+          check_rational_witness_independent or the source's named checkers.
+    note: >-
+      Written and run on 22 October 2026 by the review; kept in the
+      mishapolk-issue719-2026-10-22 packet's review/review-2026-10-22/ with its README and
+      receipts (RF-8).
+
   # --- First-party programs: premise checks and replay drivers ------------------------
   - id: V-evand-regularized-1020-review-controls
     program: sharp_controls_t225.py
@@ -2459,6 +2555,59 @@ verifiers:
       devtools.upper_bound_reports to reach the maintained routes, and the review's
       checker. Kept with its receipts out-controls-nNNN.json in the packet's
       review/review-2026-10-21/ (RF-3, RF-6).
+
+  - id: V-couzo-670-672-675-review-controls
+    program: sharp_controls_0nse.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      The 22 October review's sharp controls of the four certificates T-226, T-227 and T-228
+      cite: eight mutants a certificate at the scale of the margins (the side lowered by the
+      least far-wall clearance, every square moved by the least near-wall clearance, the
+      least-gap pair closed along its best separating axis, each at exact contact and 1e-30
+      past it; a row dropped; a decimal literal), each decided by the review's checker and by
+      both maintained routes through the packets' evand-cert adapter, and the kernel's
+      run_sharp at contact and past it. It adds the mutants and the expectations; the routes
+      decide.
+    source:
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/programs/sharp_controls_0nse.py
+    independence_record: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+    note: >-
+      Written and run on 22 October 2026 by the review (c-review-t226-t228-math); it imports
+      devtools.evand_arrangement_reports, devtools.evand_exact_certificates and
+      devtools.upper_bound_reports to reach the maintained routes, and the review's checker.
+      Kept with its receipts out-controls-T-NNN-nNNN.json in the couzo-issue672-2026-10-17
+      packet's review/review-2026-10-22/ (RF-6, RF-7).
+
+  - id: V-mishapolk-719-review-controls
+    program: sharp_controls_t229.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      The 22 October review's sharp controls of the two certificates T-229 cites, built from
+      the packet's derived facts written back in the source's certificate format with the
+      round trip checked exactly: eight mutants a certificate (the side lowered by the least
+      far-wall clearance, every square moved by the least near-wall clearance, the least-gap
+      pair closed along the first square's edge normal, each at exact contact and 1e-30 past
+      it; a row dropped; a decimal literal), each decided by the review's checker and by both
+      maintained routes through the evand-cert adapter, and the kernel's run_sharp at contact
+      and past it. It also checks that the adapter's certificate equals the packet's fact as
+      read_facts admits it. It adds the mutants and the expectations; the routes decide.
+    source:
+      - packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/programs/sharp_controls_t229.py
+    independence_record: docs/project/reviews/review-2026-10-22-mishapolk-719.md
+    note: >-
+      Written and run on 22 October 2026 by the review (c-review-t229-math); it imports
+      devtools.evand_arrangement_reports, devtools.evand_exact_certificates and
+      devtools.upper_bound_reports to reach the maintained routes, and the review's checker.
+      Kept with its receipts out-controls-T-229-n105.json and -n204.json in the
+      mishapolk-issue719-2026-10-22 packet's review/review-2026-10-22/ (RF-7, RF-8).
 
   - id: V-overbeck-review3-seed-packing
     program: seed_packing_check.py
