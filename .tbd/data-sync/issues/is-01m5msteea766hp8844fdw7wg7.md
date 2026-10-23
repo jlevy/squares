@@ -5,13 +5,13 @@ title: "PR #754 A2: the Göbel answer is opt-in per walk; readers of the record 
 kind: bug
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5mstad6tr1k9t825pe62ptr
 created_at: 2026-10-23T16:34:34.058Z
-updated_at: 2026-10-23T17:58:00.130Z
+updated_at: 2026-10-23T19:03:52.818Z
 ---
 Review A of PR #754 (https://github.com/jlevy/squares/pull/754#issuecomment-6369572454); see the review for file:line references and the suggested fix.
 
@@ -28,3 +28,5 @@ A2 escalation (think-v022, open): Göbel's construction as the standing side bey
 2. beyond_horizon_replay._standing (packing/devtools/beyond_horizon_replay.py:1860). It reads those frozen records, so it follows 1.
 3. intake_ledger.beyond_member and tree_members (packing/devtools/intake_ledger.py:1141, 1278): fresh starts. Göbel is feasible to n = 1073, the retained program's reach, but past 1073 a start must either refuse or fall back to the grid. `recomputed()` must still reproduce the frozen grid members of older ledgers. Recommend: a Göbel member at 325 to 1073 for starts frozen on or after 23 October, and refusal beyond 1073 until think-llit.
 4. cases/asymptotic/fang_excess_inventory.read_record (:393). TABLE = range(15, 73) reaches n = 5184 against a Göbel reach of 1073, and adding a construction changes what the research artifact measures: recorded rows, not best known sides. It already lost 369 and 376 through current_beyond_horizon's NOT_CURRENT. This needs a coordinator or owner call: a separate Göbel column, or leave it on recorded rows.
+
+2026-10-23 c-answers-1023: fixed in c3f5dc604, on coord-intake-1023's decisions. PR #754 head 2cc420a4f, CI green. Rules 1 to 3 are dated at intake_ledger.GOEBEL_FROM (2026-10-23): claim_row, standing_sides, and tree_members with construction_member. Rule 4, the Fang inventory, stays on recorded rows and is deferred to think-a75a. No recorded verdict or row changes. Reply: https://github.com/jlevy/squares/pull/754#issuecomment-6372591445
