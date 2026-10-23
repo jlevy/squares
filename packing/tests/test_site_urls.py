@@ -157,6 +157,7 @@ def test_closed_world_and_constrained_asset_names(tmp_path: Path) -> None:
     image = tmp_path / "assets/images/known-best-1-324.0123456789abcdef.png"
     image.parent.mkdir(parents=True)
     image.write_bytes(b"poster fixture")
+    (image.parent / "tutorial-trump11-overview.0123456789abcdef.svg").write_bytes(b"<svg/>")
     assert not failures(site_urls.check_site(tmp_path, rows))
     (folder / "unregistered.html").write_text("", encoding="utf-8")
     assert "unregistered.html" in failures(site_urls.check_site(tmp_path, rows))
@@ -826,3 +827,30 @@ def test_substantive_collection_pages_are_registered_canonical_crawl_destination
         "forwarded",
     )
     assert not failures(site_urls.check_history(rows, retained))
+
+
+def test_only_named_tutorial_svg_assets_enter_the_registered_namespace(tmp_path: Path) -> None:
+    rows = [
+        entry
+        for entry in site_urls.hashed_asset_rows("2026-10-22")
+        if entry.pattern == site_urls.TUTORIAL_IMAGE_ASSET_PATTERN
+    ]
+    assert len(rows) == 1
+    images = tmp_path / "assets/images"
+    images.mkdir(parents=True)
+    for name in ("trump11", "kingbird29"):
+        (images / f"tutorial-{name}-overview.0123456789abcdef.svg").write_bytes(b"<svg/>")
+    assert not failures(site_urls.check_site(tmp_path, rows))
+    for name in (
+        "tutorial-other-overview.0123456789abcdef.svg",
+        "other-trump11-overview.0123456789abcdef.svg",
+        "tutorial-trump11-overview.01234567.svg",
+        "tutorial-trump11-overview.ABCDEF0123456789.svg",
+        "tutorial-trump11-overview.0123456789abcdef.svg.html",
+    ):
+        image = images / name
+        image.write_bytes(b"<svg/>")
+        assert f"assets/images/{name}: unregistered file" in failures(
+            site_urls.check_site(tmp_path, rows)
+        )
+        image.unlink()

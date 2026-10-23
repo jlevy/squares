@@ -59,6 +59,15 @@ urls:
   lastmod: '2026-10-22'
   status: live
   pattern: assets/images/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.png
+- path: assets/images/tutorial-{trump11,kingbird29}-overview.{hash}.svg
+  canonical: ''
+  kind: asset-file
+  generator: devtools.site_documents:tutorial_packing_images
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+  pattern: assets/images/tutorial-(?:trump11|kingbird29)-overview\.[0-9a-f]{16}\.svg
 - path: assets/{css,js,fonts}/*.{hash}.{ext}
   canonical: ''
   kind: asset-file
