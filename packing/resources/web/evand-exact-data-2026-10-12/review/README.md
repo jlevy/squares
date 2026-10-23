@@ -65,8 +65,8 @@ OPENBLAS_NUM_THREADS=1 .venv/bin/python3 -I $P/review/check_theorem_c.py \
 ```
 
 `counts.txt` lists the 233 counts. The review ran the 233 as two processes of alternate
-counts under `nice`, which is how the receipts were written; one process gives the same
-lines.
+counts under `nice`, with the second's last seven counts split into two more (What They
+Printed), which is how the receipts were written; one process gives the same lines.
 
 ## What They Printed
 
@@ -77,7 +77,7 @@ lines.
 $\dim W = 11$ and $\dim F = 88$), on four shared cores at load averages of 17 to 38.
 It ran as two processes of alternate counts; the second was stopped after n = 291 so that
 its last seven counts could run in two processes, n = 294 alone and 313 to 323 together,
-and every count was run once.
+so three ran at once near the end, and every count was run once.
 
 | Quantity | Value |
 | --- | --- |

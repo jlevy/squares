@@ -43040,7 +43040,7 @@ evidence:
       second-order sufficient condition that allows exact flat motions, checked by gradec.py
       exactly in each configuration's number field with signs by interval arithmetic: 231
       with every load-bearing incidence as a row, and 230 and 261 with GRADEC_DROPZERO=1
-      after the 24 rows that carry no force in any multiplier vector are dropped; 17 runs
+      after the 24 rows at each that carry no force in any multiplier vector are dropped; 17 runs
       timed out at 30 minutes and are outside the claim. That each record is a packing is
       verify_exact.py's decision (the roster's VALID), not gradec.py's. The certificates are
       summaries (rows, ranks, dimensions, least multiplier, margin, float minors), not the
@@ -43051,8 +43051,12 @@ evidence:
       entry. The 23 October review's checker decided all 233 again (receipts
       review-theorem-c-233.jsonl and review-compare-233.json in the evand-exact-data-2026-10-12
       packet), and gradec.py recomputed n = 10 byte-identical on 12 October
-      (receipts/gradec-n10-recompute.json there); the evidence entries for those runs are
-      added with the claim's register entry, which is the record that cites them.
+      (receipts/gradec-n10-recompute.json there). The review's checker is that lane's own,
+      so its run is a second route beside the rung; C3 waits on gradec.py's replay of all
+      233 (think-mtah). The evidence entries for both runs are drafted in think-7scz for the
+      registration: check_certificate_citations needs a case record to cite each, or a
+      deferral naming the register entry that cites it, which lapses after 30 days, and no
+      case record has a block for local minimality (think-8xy2).
     external_review:
       state: defect-found
       date: '2026-10-23'

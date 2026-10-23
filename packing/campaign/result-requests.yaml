@@ -7744,8 +7744,10 @@ issues:
       CPU-hours) waits for an owner budget. The grade-C review of 23 October
       (docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md) found Theorem C true
       under its hypotheses, repaired a gap in its proof at side-end rows, and decided all 233
-      configurations again with a checker written here, retaining the 233 exact forms they read;
-      a re-run with gradec.py would add only a reproduction with the producer's code.
+      configurations again with a checker written here, retaining the 233 exact forms they read.
+      That checker is the review lane's own, so its run is a second route beside the rung, as at
+      T-225 and T-229; C3 waits on a separate replay lane, gradec.py over all 233 (about 10.6
+      CPU-hours by the source's logs, think-mtah).
     read_through: '2026-10-12T14:15:44Z'
     results:
     - key: s29-minimal-polynomial
@@ -7767,7 +7769,9 @@ issues:
         retained (gradec-233.tar.zst) with the 233 exact forms they read; n = 10 recomputed
         byte-identical here with gradec.py. The review of 23 October repaired Theorem C's proof
         (C-1) and its checker decided all 233 again (receipts/review-theorem-c-233.jsonl in the
-        exact-data packet), independently re-implemented after reading the producer's code.
+        exact-data packet), independently re-implemented after reading the producer's code. That
+        run is a second route beside the rung; C3 waits on the gradec.py replay of all 233 (about
+        10.6 CPU-hours, think-mtah).
         Registering it waits for a T-NNN, with the run's evidence entries drafted in think-7scz,
         and the reply sharing the review is drafted there too.
       queued: true
@@ -7777,6 +7781,7 @@ issues:
     - think-7scz
     - think-01y3
     - think-3ppi
+    - think-mtah
     answer_bead: think-6gti
     replies:
     - url: https://github.com/jlevy/squares/issues/545#issuecomment-6200841270

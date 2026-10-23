@@ -2360,7 +2360,7 @@ For Evan Daniel's grade-C configurations, decides exactly in Q[t]/f, with signs 
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md`](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
 - Independence: its authors read mathematics, proof-text, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023, think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's CREDITS.md says its work was produced by Claude (Anthropic) under human direction, and its commits credit Claude as co-author. Written by a Claude agent prompted separately from the source and from the import and records lanes, in a file of its own that imports none of the source and does its arithmetic with CPython's int and fractions.Fraction, not python-flint.
-- Note: Written and run on 23 October 2026 by the review, on all 233 configurations; kept in the evand-exact-data-2026-10-12 packet's review/ with its README, the receipts in its receipts/. No evidence entry cites it yet: a verified certificate needs a record to cite it (devtools.check_certificate_citations), and the grade-C claim has no register entry, so the run's entry is drafted in think-7scz and added with that entry.
+- Note: Written and run on 23 October 2026 by the review, on all 233 configurations; kept in the evand-exact-data-2026-10-12 packet's review/ with its README, the receipts in its receipts/. It is the review lane's own checker, so its run is a second route beside the rung, and the claim's C3 waits on gradec.py's replay (think-mtah). No evidence entry cites it yet: the run's entry is drafted in think-7scz for the registration, since devtools.check_certificate_citations needs a case record to cite a verified certificate, or a deferral naming the register entry that cites it, which lapses after 30 days, and no case record has a block for local minimality (think-8xy2).
 
 No evidence entry names it yet.
 
@@ -3863,6 +3863,8 @@ Compares check_theorem_c.py's receipts with the source's 233 published n-N.grade
 
 - Source: [`packing/resources/web/evand-exact-data-2026-10-12/review/compare_certificates.py`](../../packing/resources/web/evand-exact-data-2026-10-12/review/compare_certificates.py)
 - Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md`](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
+- Independence: its authors read certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023, think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's CREDITS.md says its work was produced by Claude (Anthropic) under human direction, and its commits credit Claude as co-author. Written by a Claude agent prompted separately from the source and from the import and records lanes, in a file of its own that imports none of the source.
 - Note: Written and run on 23 October 2026 by the grade-C review (think-7scz); its output is receipts/review-compare-233.json in the evand-exact-data-2026-10-12 packet. No evidence entry cites it until the grade-C claim is registered, as for V-evand-gradec-review-check.
 
 No evidence entry names it yet.
@@ -3875,6 +3877,8 @@ Tests the closed-form gradients and Hessians of the rows that check_theorem_c.py
 
 - Source: [`packing/resources/web/evand-exact-data-2026-10-12/review/test_derivatives.py`](../../packing/resources/web/evand-exact-data-2026-10-12/review/test_derivatives.py)
 - Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md`](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
+- Independence: its authors read mathematics, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023, think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's CREDITS.md says its work was produced by Claude (Anthropic) under human direction, and its commits credit Claude as co-author. Written by a Claude agent prompted separately from the source and from the import and records lanes, in a file of its own that imports none of the source.
 - Note: Written and run on 23 October 2026 by the grade-C review (think-7scz); its output is receipts/review-derivatives.json in the evand-exact-data-2026-10-12 packet. No evidence entry cites it until the grade-C claim is registered, as for V-evand-gradec-review-check.
 
 No evidence entry names it yet.

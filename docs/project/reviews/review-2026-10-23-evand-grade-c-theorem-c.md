@@ -20,8 +20,8 @@ certificates, retained in
 [evand-exact-data-2026-10-12](../../../packing/resources/web/evand-exact-data-2026-10-12/README.md).
 The claim is the source’s: 233 of the 250 roster configurations of field degree at most
 4 are local minima of the side in the sense of `IsLocalMinPacking` (squares matched by
-index, angles modulo 90 degrees), 231 with every load-bearing incidence as a row and 230
-and 261 after 24 rows that carry no force are dropped.
+index, angles modulo 90 degrees), 231 with every load-bearing incidence as a row, and
+230 and 261 after the 24 rows that carry no force at each are dropped.
 No `T-NNN` on `main` holds this claim; the nearest is `T-124`, the same author’s
 reported non-strict local minima for 178 configurations by a different route, Lean
 proofs.
@@ -70,8 +70,10 @@ It is not a human oversight record.
   null vectors come from one linear system per null vector and flat direction (The Slip
   Form). With that and an $LDL^\mathsf{T}$ for the Hessian, our checker took a median of
   about one CPU-second per configuration and 24 CPU-minutes for all 233, the longest
-  being n = 294 ($\dim W = 11$) at 369 seconds; both walls your 17 timeouts hit are
-  algorithmic.
+  being n = 294 ($\dim W = 11$) at 369 seconds.
+  The walls your 17 timeouts hit, the permutation sums and the coupled null-vector
+  system, are the ones these two changes avoid, so they should finish, but none was run
+  here (question 4).
 - **Independent check.** The checker written here decided all 233 VALID, with the same
   rows, ranks, flat families, dimensions of $W$ and moving squares as your certificates,
   margins equal to the last float digit and least multipliers within
@@ -372,17 +374,19 @@ rows a linear program finds forced to zero, a side-end pair as a whole.
 It ran on 23 October 2026 on all 233 configurations, 175 of field degree 1, 51 of degree
 2 and 7 of degree 4, and every one is valid.
 The checks took 1,463 CPU-seconds in all, a median of 0.94 per configuration and at most
-369, at n = 294 ($\dim W = 11$, $\dim F = 88$), as two processes under `nice` on the
-shared four-core host (57 minutes of wall time at load averages of 17 to 38). Across the
-233 it classified 202,010 rows, 184,412 of them side-end rows, present at 231 counts
-(all but 1 and 5); at 206 counts, 58,988 side-end rows slip along the flat family, the
-case the second step of C-1 concerns.
+369, at n = 294 ($\dim W = 11$, $\dim F = 88$), in processes under `nice` on the shared
+four-core host, two for most of the run and three at once near its end, when the second
+process’s last counts were split in two (57 minutes of wall time at load averages of 17
+to 38; the run receipt lists the four processes).
+Across the 233 it classified 202,010 rows, 184,412 of them side-end rows, present at 231
+counts (all but 1 and 5); at 206 counts, 58,988 side-end rows slip along the flat
+family, the case the second step of C-1 concerns.
 A flat family exists at 214 counts and $\dim W > 0$ at 47 (at most 11), where it solved
 1,066 lifts; the $F \times W'$ block vanished at each of them.
 The numerical SVD found the same nullity of $L_0$ at every count, with a ratio of at
 least $2.1 \times 10^{13}$ between the last nonzero and the first zero singular value.
-It dropped the 24 rows forced to zero at 230 and at 261, the same 24 as the source, the
-lone side-end incidences there (36 and 40), and the corners beyond a side end at 66,
+It dropped the 24 rows forced to zero at each of 230 and 261, the same 24 as the source,
+the lone side-end incidences there (36 and 40), and the corners beyond a side end at 66,
 127, 150 and 175 (12, 6, 16 and 8). The least interior margin is $7.2 \times 10^{-17}$,
 at n = 175, decided exactly, and the least multiplier is 0.0015.
 
@@ -454,9 +458,12 @@ The pair form and step (ii) of The Proof, Repaired turn this into the argument.
    products and signs?
 3. Is `verify_exact.py`’s VALID in `minpoly/results.json` the intended premise that the
    record is a packing, and could `gradec.json` record it?
-4. With the slip form and an $LDL^\mathsf{T}$, both walls of the 17 timeouts go away in
-   our checker. Would you publish `n-N.contacts.json` for those 17 so that they can be
-   run?
+4. With the slip form and an $LDL^\mathsf{T}$, both walls of the 17 timeouts should go
+   away in our checker, but none of the 17 was run, and most are larger than anything
+   that was: the seven stop at $\dim F$ 210 to 274 and the ten at $\dim W$ 12 to 16,
+   against at most $\dim F = 212$ here (n = 242 and 276) and $\dim W = 11$ (n = 149, 176
+   and 294, the last the longest run, at 369 CPU-seconds).
+   Would you publish `n-N.contacts.json` for those 17 so that they can be run?
 5. At 230 and 261, where $\dim W = 0$, which mutations does “still rejected” (line 134)
    refer to?
 
@@ -474,17 +481,26 @@ No result here reaches S4 or S5, and no News item is owed.
 
 - No `T-NNN` holds the claim, so the review covers no register entry.
   Registering it needs an id.
-  On this review and the full run here, an entry of kind `restricted-optimality` can
-  derive V3 and C3 from the replay evidence; its composition note should say that the
-  theorem is the source’s paper proof as repaired here (C-1); C4 needs a second
-  adversarial review and a human oversight record.
+  Its `C3` waits on a separate replay lane: the source’s own checker, `gradec.py`, over
+  all 233 configurations, about 10.6 CPU-hours by the source’s logs, which
+  `result-import.md` (Stage 4) accepts as the replay and which waits for a budget in
+  `think-mtah`. The run here is not that replay: it is the review lane’s own checker,
+  whose soundness no one else has reviewed, so it is recorded beside the rung as a
+  second route, as the review lanes’ checkers are at `T-225` and `T-229`, and the entry
+  does not take `C3` from it.
+  With that replay, an entry of kind `restricted-optimality` can derive V3 and C3; its
+  composition note should say that the theorem is the source’s paper proof as repaired
+  here (C-1); C4 needs a second adversarial review and a human oversight record.
 - The report’s evidence entry, `E-evand-gradec-local-minima-233-report`, carries this
   review as its `external_review` (`defect-found`, for C-1, with the repair).
-  The run here and the n = 10 recomputation of 12 October are verified certificates,
-  which a record must cite (`devtools.check_certificate_citations`), and no case record
-  has a block for local minimality; their evidence entries are drafted in `think-7scz`
-  and enter the register with the claim’s entry, which cites them.
-  Until then their receipts in the exact-data packet are the record of both runs.
+  The run here and the n = 10 recomputation of 12 October are verified certificates.
+  `devtools.check_certificate_citations` needs a case record to cite each, or a deferral
+  naming the register entry that cites it, which lapses after 30 days, and no case
+  record has a block for local minimality.
+  Their evidence entries are drafted in `think-7scz` for the registration, to enter
+  under such a deferral; a citation that outlasts it, a rule for such evidence or a
+  case-record block, is `think-8xy2`. Until then their receipts in the exact-data packet
+  are the record of both runs.
 - The wording “confirmed” must say which confirmation: independently re-implemented
   after reading the producer’s code, by a Claude agent, a system family the producer
   also used.
@@ -504,7 +520,8 @@ READMEs, which record the read at `ad86d42`, the price of a re-run, and that
 used the producer’s own code and decided nothing about the theorem.
 Those notes observe that the ten Hessian-step timeouts all have $\dim W \ge 12$ against
 $\dim W \le 11$ for every finished run; the permutation sum explains it, and the
-$LDL^\mathsf{T}$ used here removes it.
+$LDL^\mathsf{T}$ used here should remove it, though no count with $\dim W \ge 12$ was
+run here.
 
 ## Verdict
 

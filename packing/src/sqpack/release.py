@@ -2427,7 +2427,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "(#749): rendered at link revision c1115c09 into empty site directories, twice "
             "from this tree and twice from it with main's result-requests.yaml swapped in "
             "(43 files each), render_packing_methods writes every file byte-identical "
-            "across all four, as it did against main 598d23289 (#742) before the merge. "
+            "across all four, as it did against main 598d23289 (#742) before the merge, "
+            "and once more each way after review A of #751 reworded the entry. "
             "No PDF was printed; it prints from that HTML. Retain v0.2.7."
         ),
     ),

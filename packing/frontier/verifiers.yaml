@@ -2656,10 +2656,13 @@ verifiers:
     note: >-
       Written and run on 23 October 2026 by the review, on all 233 configurations;
       kept in the evand-exact-data-2026-10-12 packet's review/ with its README, the receipts
-      in its receipts/. No evidence entry cites it yet: a verified certificate needs a
-      record to cite it (devtools.check_certificate_citations), and the grade-C claim has no
-      register entry, so the run's entry is drafted in think-7scz and added with that
-      entry.
+      in its receipts/. It is the review lane's own checker, so its run is a second route
+      beside the rung, and the claim's C3 waits on gradec.py's replay (think-mtah). No
+      evidence entry cites it yet: the run's entry is drafted in think-7scz for the
+      registration, since devtools.check_certificate_citations needs a case record to cite
+      a verified certificate, or a deferral naming the register entry that cites it, which
+      lapses after 30 days, and no case record has a block for local minimality
+      (think-8xy2).
 
   # --- First-party programs: premise checks and replay drivers ------------------------
   - id: V-evand-regularized-1020-review-controls
@@ -5190,6 +5193,33 @@ verifiers:
       and least multiplier numerically. It decides nothing about a packing.
     source:
       - packing/resources/web/evand-exact-data-2026-10-12/review/compare_certificates.py
+    independence_record: docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md
+    independence:
+      read: [certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023,
+            think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's CREDITS.md says its work was produced by Claude (Anthropic) under
+          human direction, and its commits credit Claude as co-author. Written by a Claude
+          agent prompted separately from the source and from the import and records lanes,
+          in a file of its own that imports none of the source.
+      note: >-
+        Written by the lane that wrote check_theorem_c.py, after reading the same
+        material: grade-C.md, gradec.py and the modules it imports, the published
+        certificates and the run logs. It reads check_theorem_c.py's receipts and the
+        source's published n-N.gradec.json, in memory from gradec-233.tar.zst, and takes
+        the certificate's field names from those files and from gradec.py's writer; it
+        shares no code with gradec.py.
     note: >-
       Written and run on 23 October 2026 by the grade-C review (think-7scz); its output is
       receipts/review-compare-233.json in the evand-exact-data-2026-10-12 packet. No
@@ -5210,6 +5240,35 @@ verifiers:
       packing.
     source:
       - packing/resources/web/evand-exact-data-2026-10-12/review/test_derivatives.py
+    independence_record: docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md
+    independence:
+      read: [mathematics, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023,
+            think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's CREDITS.md says its work was produced by Claude (Anthropic) under
+          human direction, and its commits credit Claude as co-author. Written by a Claude
+          agent prompted separately from the source and from the import and records lanes,
+          in a file of its own that imports none of the source.
+      note: >-
+        Written by the lane that wrote check_theorem_c.py, after reading the same
+        material: grade-C.md, gradec.py and the modules it imports, the published
+        certificates and the run logs. It reads the same inputs as check_theorem_c.py, an
+        exact form and the archive's contacts file, with the numbering of corners, sides
+        and walls that geom.py's docstring states. It imports from check_theorem_c.py the
+        formulas it tests (row_grad, row_hess), the record loader and the corner and side
+        tables, and writes the row functions it differences from their definitions; it
+        shares no code with the source.
     note: >-
       Written and run on 23 October 2026 by the grade-C review (think-7scz); its output is
       receipts/review-derivatives.json in the evand-exact-data-2026-10-12 packet. No
