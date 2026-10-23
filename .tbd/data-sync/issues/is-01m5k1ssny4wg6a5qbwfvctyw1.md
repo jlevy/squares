@@ -5,16 +5,16 @@ title: Use sans-serif for general site descriptions and serif for mathematical e
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
-delegate: navigation-landings
+delegate: sol-tracker-audit
 labels: []
 dependencies: []
 parent_id: is-01m5jnsqdwj3t8m7hkbx6mr1m2
 hold: null
 hold_until: null
 created_at: 2026-10-23T00:15:32.540Z
-updated_at: 2026-10-23T00:24:35.140Z
+updated_at: 2026-10-23T01:35:55.673Z
 started_at: 2026-10-23T00:15:39.803Z
 ---
 Apply typography by content purpose: general site descriptions, collection introductions, contributor-directory summaries, contribution prompts and reading/navigation guidance use shared sans-serif. Substantive mathematical exposition, including the homepage square-packing problem explanation, remains serif. Audit analogous page introductions, use semantic shared classes rather than blanket paragraph overrides, document the rule and verify rendered examples.
