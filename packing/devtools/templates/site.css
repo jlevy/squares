@@ -3009,7 +3009,9 @@ html[data-site-atlas-view="triangle"]
   background: var(--kpress-doc-bg);
   display: flex;
   float: none;
-  inset-block-start: var(--site-popover-close-inset);
+  /* Sticky offsets start at the scrollport padding edge, so remove that padding
+     to keep the controls at the same corner inset as other popover headers. */
+  inset-block-start: calc(var(--site-popover-close-inset) - var(--site-popover-pad));
   /* Held at the top alone: the card's `inset-inline-end`, read by a sticky box as a
      second limit, set it a padding's width in from the corner, over the steps. */
   inset-inline-end: auto;
@@ -3160,6 +3162,14 @@ html[data-site-atlas-view="triangle"]
   .site-case .site-atlas-gap-values .is-lower + .is-upper {
     inset-block-start: 1.45em;
   }
+}
+/* A fetched packing uses the panel's full content track. Its detailed prose keeps
+   the shared reading measure; canonical case pages retain their compact drawing. */
+.site-case-pop .site-case {
+  max-inline-size: none;
+}
+.site-case-pop .site-case-head > .site-case-figure {
+  inline-size: 100%;
 }
 .kpress .site-case-summary .site-atlas-pop-bound {
   font-family: var(--kpress-font-prose);
@@ -3316,6 +3326,10 @@ html[data-site-atlas-view="triangle"]
   border-block-start: 1px solid var(--kpress-doc-border);
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-light);
+}
+.site-case-pop .site-case-data {
+  margin-inline: auto;
+  max-inline-size: var(--kpress-measure);
 }
 /* A long formula in a case file's prose scrolls in the prose, not the case popover's
    panel or the page, so the drawing, the head and the foot never pan sideways on a
@@ -3739,10 +3753,15 @@ html[data-site-atlas-view="triangle"]
   display: none;
 }
 .site-news-filters > .site-table-tools {
-  align-items: flex-end;
+  display: contents;
+}
+.site-news-filters [data-news-reset] {
+  align-self: center;
+  margin-inline-start: auto;
+}
+.site-news-filters .site-count {
   flex-basis: 100%;
-  flex-direction: column;
-  gap: 0.25rem;
+  text-align: end;
 }
 .site-news-filters fieldset {
   border: 0;

@@ -1641,7 +1641,10 @@ def tutorials_page() -> Page:
 
     markdown = _template_markdown(
         TUTORIALS_ARTICLE,
-        {"TUTORIAL_CARDS": overview_sections.paper_cards(papers=overview_sections.PAPERS[-2:])},
+        {
+            "TUTORIAL_CARDS": overview_sections.paper_cards(papers=overview_sections.PAPERS[-2:]),
+            "ARROW_RIGHT": overview_sections.arrow_icon("right"),
+        },
     )
     return kpress_page(
         markdown,

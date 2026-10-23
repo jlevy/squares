@@ -41,8 +41,8 @@ NAVIGATION = (
         "Learn",
         "",
         (
-            NavigationItem("papers", "Papers", "papers.html"),
             NavigationItem("tutorials", "Tutorials", "tutorials.html"),
+            NavigationItem("papers", "Papers", "papers.html"),
             NavigationItem("film", "Videos", "visualize.html"),
             NavigationItem("workbench", "Workbench", "workbench/"),
             NavigationItem("posters", "Posters", "posters.html"),
