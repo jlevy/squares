@@ -4,13 +4,11 @@
 
 </div>
 
-<p class="site-action-row site-more"><a class="site-action" href="atlas.html">Visual Atlas{{ARROW_RIGHT}}</a><a class="site-action" href="frontier.html">Frontier Survey{{ARROW_RIGHT}}</a></p>
-
 <a id="all-results"></a>
 
 {{RESULTS_TABLE}}
 
-<p class="site-action-row site-more"><a class="site-action" href="verification.html">Verification{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="atlas.html">Visual Atlas{{ARROW_RIGHT}}</a><a class="site-action" href="frontier.html">Frontier Survey{{ARROW_RIGHT}}</a><a class="site-action" href="verification.html">Verification{{ARROW_RIGHT}}</a></p>
 
 <noscript><p><a id="verification-ladders" href="verification.html#verification-ladders">Verification
 Ladders</a> ·

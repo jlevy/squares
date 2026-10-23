@@ -323,10 +323,14 @@ result explanations; its canonical parent is Verification under Results.
 **Results.** Results is a menu container with no landing page.
 `results.html` is **All Results**, the one complete sortable, filterable result
 register. The menu, H1, browser title, breadcrumb, and result-record parent use that
-exact label. Keep every registered result once, with claims, cases, credits, ratings,
-status, and canonical result-record links.
+exact label. Visual Atlas, Frontier Survey, and Verification share one action row after
+the table, with no collection actions above it.
+Keep every registered result once, with claims, cases, credits, ratings, status, and
+canonical result-record links.
 Preserve existing filters and result-row addresses.
 The homepage retains its bounded recent preview and one **View All Results** action.
+The complete Learn section follows Results immediately; all other homepage sections
+retain their relative order.
 `recent-results.html` becomes a compatibility forwarder to All Results; there is no
 second complete result-table page.
 Old recent section fragments map to `results.html#all-results`, while `#t-NNN` rows and

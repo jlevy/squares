@@ -1,6 +1,21 @@
-"""The survey and graphic Atlas retain distinct canonical reader destinations."""
+"""Canonical site collections, shared actions and retained destination routes."""
+
+import re
+
+import pytest
 
 from devtools import overview_sections, render_overview, site_navigation, site_urls
+from tests import site_renders
+
+
+@pytest.fixture(scope="module")
+def results_page() -> str:
+    return site_renders.html("results.html")
+
+
+@pytest.fixture(scope="module")
+def homepage() -> str:
+    return site_renders.html("index.html")
 
 
 def test_frontier_is_a_results_destination_and_not_an_atlas_forwarder() -> None:
@@ -65,3 +80,36 @@ def test_tutorials_leads_learn_and_ends_with_the_shared_read_papers_action() -> 
         + "</a>"
     ) in article
     assert article.index("Read Papers") > article.index("Square Packing, Search, and Proof")
+
+
+def test_all_results_collection_actions_share_one_row_after_the_table(
+    results_page: str,
+) -> None:
+    article = results_page.split('<h1 id="every-result"', 1)[1].split("</article>", 1)[0]
+    end = article.index("</table>") + len("</table>")
+    action = r'<a class="site-action" href="([^"]+)">([^<]+)'
+    assert re.findall(action, article[:end]) == []
+    assert re.findall(action, article[end:]) == [
+        ("atlas.html", "Visual Atlas"),
+        ("frontier.html", "Frontier Survey"),
+        ("verification.html", "Verification"),
+    ]
+    assert article[end:].count('class="site-action-row site-more"') == 1
+
+
+def test_homepage_learn_immediately_follows_results(homepage: str) -> None:
+    article = homepage.split('<h1 id="the-problem"', 1)[1].split("</article>", 1)[0]
+    headings = re.findall(r'<h[12]\b[^>]*\bid="([^"]+)"', article)
+    result = headings.index("recent-results")
+    assert headings[result + 1] == "papers"
+    expected = [
+        "the-atlas-of-square-packings",
+        "news",
+        "recent-results",
+        "papers",
+        "report-your-results",
+        "visuals",
+        "about-the-squares-project",
+        "more-resources",
+    ]
+    assert [heading for heading in headings if heading in expected] == expected

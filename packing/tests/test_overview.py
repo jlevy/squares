@@ -7304,16 +7304,22 @@ def test_significance_is_one_box_with_five_filled_or_empty_segments() -> None:
         overview_sections.significance_mark(6)
 
 
-def test_results_and_atlas_expose_their_collections_before_details(
+def test_all_results_places_collection_actions_after_the_table(
     results: str, verification: str, atlas_page: str
 ) -> None:
     article = results.split("<article", 1)[1].split("</article>", 1)[0]
     article = re.sub(r"<noscript>.*?</noscript>", "", article, flags=re.DOTALL)
     table = article.index('id="all-results"')
     assert article.count('id="all-results"') == 1
-    assert 'href="atlas.html">Visual Atlas' in article[:table]
-    assert 'href="frontier.html">Frontier Survey' in article[:table]
-    assert table < article.index('href="verification.html">Verification')
+    table_end = article.index("</table>", table)
+    for destination, label in (
+        ("atlas.html", "Visual Atlas"),
+        ("frontier.html", "Frontier Survey"),
+        ("verification.html", "Verification"),
+    ):
+        action = f'class="site-action" href="{destination}">{label}'
+        assert action not in article[:table]
+        assert article.index(action) > table_end
     for fragment in (
         "verification-ladders",
         "evidence-and-exactness",

@@ -36,19 +36,6 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 <p class="site-action-row site-more"><a class="site-action" href="results.html#all-results" {{RESULTS_LINK_ATTRIBUTES}}>View All Results{{ARROW_RIGHT}}</a></p>
 
-{{PROFILES}}
-
-<h2 id="report-your-results" class="site-title">Report a Result</h2>
-
-<div class="site-navigation-copy">
-
-Have a new packing, bound, or proof to share?
-Read the contribution instructions and send the evidence behind your result.
-
-</div>
-
-<p class="site-action-row site-more"><a class="site-action" href="report.html">Report a Result{{ARROW_RIGHT}}</a></p>
-
 <h2 id="papers" class="site-title">Learn<a id="learn-more"></a></h2>
 
 <div class="site-navigation-copy">
@@ -61,6 +48,19 @@ The tutorial and paper catalogues contain the complete reading collections.
 {{PAPER_CARDS}}
 
 <p class="site-action-row site-more"><a class="site-action" href="tutorials.html">View All Tutorials{{ARROW_RIGHT}}</a><a class="site-action" href="papers.html">View All Papers{{ARROW_RIGHT}}</a></p>
+
+{{PROFILES}}
+
+<h2 id="report-your-results" class="site-title">Report a Result</h2>
+
+<div class="site-navigation-copy">
+
+Have a new packing, bound, or proof to share?
+Read the contribution instructions and send the evidence behind your result.
+
+</div>
+
+<p class="site-action-row site-more"><a class="site-action" href="report.html">Report a Result{{ARROW_RIGHT}}</a></p>
 
 <h1 id="visuals" class="site-title">Visuals<a id="pdfs"></a><a id="video"></a><a id="pdfs-and-videos"></a></h1>
 
