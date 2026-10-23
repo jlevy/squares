@@ -77,14 +77,15 @@ from devtools.site_resources import (
     resources,
 )
 from devtools.site_tallies import (
-    ResultTally as ProjectTally,
-)
-from devtools.site_tallies import (
+    TALLY_SEPARATOR,
     project_credit_associations,
     project_primary_results,
     render_tally,
     tally_credits,
     tally_results,
+)
+from devtools.site_tallies import (
+    ResultTally as ProjectTally,
 )
 from devtools.site_topics import topic_chip, topic_label
 from sqpack import release
@@ -2279,7 +2280,7 @@ def project_tally(url: str, tally: ProjectTally) -> str:
         authors, project_source_keys().get(url, ()), occurrence_registry().occurrences, records
     )
     credit_markup = (
-        " · "
+        TALLY_SEPARATOR
         + render_tally(
             tally_credits(associations, measures, significance_levels()), noun="credit"
         )
@@ -2289,7 +2290,7 @@ def project_tally(url: str, tally: ProjectTally) -> str:
     records_markup = record_tally(tally.results, measures, blank_zero=True)
     return (
         '<span class="site-credit-tally">'
-        + (records_markup + " · " if records_markup else "")
+        + (records_markup + TALLY_SEPARATOR if records_markup else "")
         + render_tally(
             tally,
             total_href=results_filter_url(slug) if tally.results else None,
@@ -2628,10 +2629,12 @@ ATLAS_VIEW = ATLAS_DEFAULT
 
 #: The atlas's four sizes of tile, in tab order: the key the block's `data-atlas-size`
 #: and the address's `?size=` take, and the tab's short label, S, M, L and XL, each
-#: named in full by its tab's title (`ATLAS_SIZE_NAMES`). Medium is the size the atlas had
-#: before it offered a choice; Small is the rendered default, and a Triangle that follows
-#: the scroll opens at XL. site.css scales a tile by each (`--site-atlas-scale`), and
-#: `overview/atlas-view.js` rearranges the tiles for it (think-ht8t, think-apqd).
+#: named in full (`ATLAS_SIZE_NAMES`) by its tab's title and in its accessible name,
+#: "Small (S)", which keeps the letter it shows (WCAG 2.5.3). Medium is the size the
+#: atlas had before it offered a choice; Small is the rendered default, and a Triangle
+#: that follows the scroll opens at XL. site.css scales a tile by each
+#: (`--site-atlas-scale`), and `overview/atlas-view.js` rearranges the tiles for it
+#: (think-ht8t, think-apqd).
 ATLAS_SIZES: tuple[tuple[str, str], ...] = (
     ("small", "S"),
     ("medium", "M"),
@@ -2900,22 +2903,28 @@ def _atlas_tablist(
     name: str,
     extra: str = "",
     descriptions: Mapping[str, str] | None = None,
+    names: Mapping[str, str] | None = None,
     panel: str = ATLAS_PANEL,
 ) -> str:
     """One strip of the atlas's tabs: a tablist of buttons, `default` selected and the
-    strip's one stop in the tab order, each controlling the static box of tiles."""
+    strip's one stop in the tab order, each controlling the static box of tiles. A tab
+    with a description carries it as its `aria-description` and title; a tab whose label
+    abbreviates a name (`names`) is named in full, its accessible name the name with the
+    label it shows, "Small (S)", and its title the name."""
 
-    def description(key: str) -> str:
-        return (
-            f' aria-description="{_esc(descriptions[key])}" title="{_esc(descriptions[key])}"'
-            if descriptions is not None
-            else ""
-        )
+    def described(key: str, label: str) -> str:
+        if names is not None:
+            full = f"{names[key]} ({label})"
+            return f' aria-label="{_esc(full)}" title="{_esc(names[key])}"'
+        if descriptions is not None:
+            text = _esc(descriptions[key])
+            return f' aria-description="{text}" title="{text}"'
+        return ""
 
     tabs = "".join(
         f'<button type="button" role="tab" id="{ids}-{key}" {data}="{key}" '
         f'aria-selected="{"true" if key == default else "false"}" '
-        f'aria-controls="{panel}"{description(key)}'
+        f'aria-controls="{panel}"{described(key, label)}'
         f"{'' if key == default else ' tabindex="-1"'}>"
         f"{_esc(label)}</button>"
         for key, label in choices
@@ -2969,7 +2978,8 @@ def atlas_drawing_tabs(panel: str = ATLAS_PANEL) -> str:
 def atlas_size_tabs(panel: str = ATLAS_PANEL) -> str:
     """The tabs beside the view tabs that choose the size of the tiles, S, M, L and XL
     (think-ht8t, think-apqd): the view tabs' strip, a tablist of four buttons that resize
-    the one set of tiles in place, in either view, each named in full by its title. Small
+    the one set of tiles in place, in either view, each named in full by its title and
+    its accessible name, "Small (S)", which keeps the letter it shows (WCAG 2.5.3). Small
     is selected and is the strip's one stop in the tab order; the arrow keys move between
     the four (`overview/atlas-view.js`). The strip is present in the first response."""
     return _atlas_tablist(
@@ -2980,7 +2990,7 @@ def atlas_size_tabs(panel: str = ATLAS_PANEL) -> str:
         classes="site-atlas-sizes",
         name="Atlas tile size",
         extra="data-atlas-sizes ",
-        descriptions=ATLAS_SIZE_NAMES,
+        names=ATLAS_SIZE_NAMES,
         panel=panel,
     )
 

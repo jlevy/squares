@@ -1,5 +1,5 @@
-// Two of the homepage's actions as drawn: "View all results", the link under the recent
-// table, and "View Visual Atlas", the link to the Atlas page under the atlas. For each,
+// Two of the homepage's actions as drawn: "All Results", the link under the recent
+// table, and "Visual Atlas", the link to the Atlas page under the atlas. For each,
 // its box, its computed colours, type, padding and corners, its icon's direction, width
 // and side, and its visible label. `null` for an action the page does not have.
 () => {

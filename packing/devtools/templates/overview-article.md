@@ -22,19 +22,19 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 {{ATLAS_GRID}}
 
-<p class="site-action-row site-more site-homepage-atlas-actions"><a class="site-action" href="{{ATLAS_PDF}}" download>Download PDF{{ARROW_DOWNLOAD}}</a><a class="site-action" href="atlas.html">View Visual Atlas{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more site-homepage-atlas-actions"><a class="site-action" href="{{ATLAS_PDF}}" download>Download PDF{{ARROW_DOWNLOAD}}</a><a class="site-action" href="atlas.html">Visual Atlas{{ARROW_RIGHT}}</a></p>
 
 <h2 id="news" class="site-title">News</h2>
 
 {{NEWS_PREVIEW}}
 
-<p class="site-action-row site-more"><a class="site-action" href="news.html">View All News{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="news.html">All News{{ARROW_RIGHT}}</a></p>
 
 <h2 id="recent-results" class="site-title">Results</h2>
 
 {{RECENT}}
 
-<p class="site-action-row site-more"><a class="site-action" href="results.html#all-results" {{RESULTS_LINK_ATTRIBUTES}}>View All Results{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="results.html#all-results" {{RESULTS_LINK_ATTRIBUTES}}>All Results{{ARROW_RIGHT}}</a></p>
 
 <h2 id="papers" class="site-title">Learn<a id="learn-more"></a></h2>
 
@@ -47,7 +47,7 @@ The tutorial and paper catalogues contain the complete reading collections.
 
 {{PAPER_CARDS}}
 
-<p class="site-action-row site-more"><a class="site-action" href="tutorials.html">View All Tutorials{{ARROW_RIGHT}}</a><a class="site-action" href="papers.html">View All Papers{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="tutorials.html">All Tutorials{{ARROW_RIGHT}}</a><a class="site-action" href="papers.html">All Papers{{ARROW_RIGHT}}</a></p>
 
 {{PROFILES}}
 
@@ -57,6 +57,9 @@ The tutorial and paper catalogues contain the complete reading collections.
 
 Have a new packing, bound, or proof to share?
 Read the contribution instructions and send the evidence behind your result.
+
+We also have a group chat.
+Contact [ojoshe on X](https://x.com/ojoshe) if you wish to join.
 
 </div>
 
@@ -75,7 +78,7 @@ Workbench.
 
 </div>
 
-<p class="site-action-row site-more"><a class="site-action" href="visualize.html">View Videos{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a><a class="site-action" href="posters.html">View All Posters{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="visualize.html">Videos{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a><a class="site-action" href="posters.html">All Posters{{ARROW_RIGHT}}</a></p>
 
 <h1 id="more-resources" class="site-title">Resources<a id="other-square-packing-projects"></a></h1>
 
@@ -86,7 +89,7 @@ record, with their credited authors and links to related results.
 
 </div>
 
-<p class="site-action-row site-more"><a class="site-action" href="resources.html">View All Resources{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="resources.html">All Resources{{ARROW_RIGHT}}</a></p>
 
 <h1 id="about-the-squares-project" class="site-title">About the Squares Project<a id="squares-project-documentation"></a></h1>
 

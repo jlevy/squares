@@ -32,7 +32,6 @@ from devtools import (
     site_assets,
 )
 from devtools.render_n11_lower_bounds_explainer import COMPOSITE_ASSETS
-from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
 from sqpack.probes import probe
 from tests import site_browser, site_renders
 
@@ -89,11 +88,17 @@ def payloads() -> dict[str, bytes]:
 
 
 @pytest.fixture(scope="module")
-def browser() -> Iterator[Any]:
-    with site_browser.api().sync_playwright() as driver:
-        launched = site_browser.launch(driver)
-        yield launched
-        launched.close()
+def driver() -> Iterator[Any]:
+    """The module's one Playwright session, which every Chromium it launches shares."""
+    with site_browser.api().sync_playwright() as started:
+        yield started
+
+
+@pytest.fixture(scope="module")
+def browser(driver: Any) -> Iterator[Any]:
+    launched = site_browser.launch(driver)
+    yield launched
+    launched.close()
 
 
 def _serve(page: Any, payloads: dict[str, bytes]) -> None:
@@ -150,7 +155,9 @@ def test_homepage_links_to_native_videos_and_reduced_motion_waits_for_click(
     try:
         page.goto(f"{origin}index.html", wait_until="load")
         assert page.locator("video").count() == 0
-        videos = page.locator('a[href="visualize.html"]').filter(has_text="View Videos")
+        videos = page.locator('a.site-action[href="visualize.html"]').filter(
+            has_text=re.compile("^Videos$")
+        )
         assert videos.count() == 1
         videos.click()
         film = page.locator(".site-film-frame video")
@@ -715,7 +722,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     for action in home["actions"]:
         assert action["transform"] == "uppercase", action
     download = seen[width]["download"]
-    assert download["order"] == ["Download PDF", "View Visual Atlas"]
+    assert download["order"] == ["Download PDF", "Visual Atlas"]
     assert download["href"] == overview_sections.PDF_CARD_SPECS[1][0]
     assert download["download"]
     assert download["uppercase"] == "uppercase"
@@ -758,7 +765,7 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
             initial = page.evaluate(STATE)
             all_results = page.locator("a[data-all-results]")
             sync_api.expect(all_results).to_have_text(
-                re.compile("^View All Results$", re.IGNORECASE)
+                re.compile("^All Results$", re.IGNORECASE)
             )
             bounds = all_results.bounding_box()
             assert bounds is not None
@@ -837,7 +844,7 @@ def test_missing_shared_engine_keeps_every_case_and_the_atlas_link_usable(
     browser: Any, payloads: dict[str, bytes], width: int
 ) -> None:
     """Without the views' script the homepage keeps its static atlas, every case shown
-    and each a link, with no error; View Visual Atlas still opens the Atlas page. The
+    and each a link, with no error; Visual Atlas still opens the Atlas page. The
     status line that pointed a reader there, because the cases after the first hundred
     could not be shown, went with the expander on 2026-10-22."""
     sync_api = site_browser.api()
@@ -1629,15 +1636,21 @@ CHOOSER_SURFACES = {
 
 
 @pytest.fixture(scope="module")
-def doubled(browser: Any) -> Iterator[Any]:
+def doubled(driver: Any) -> Iterator[Any]:
     """The same Chromium laid out for a 2x screen. `--force-device-scale-factor` lays a
     page out in device pixels, as a Retina display does, so a font's ascent and the
     leading round there as they do for a reader on one; a context's
-    `device_scale_factor` draws the 1x layout larger and rounds nothing differently."""
-    launched = browser.browser_type.launch(
-        executable_path=os.environ.get(BROWSER_OVERRIDE),
-        args=[preview_site.FONT_RENDER_HINTING, "--force-device-scale-factor=2"],
-    )
+    `device_scale_factor` draws the 1x layout larger and rounds nothing differently.
+    It is launched as `site_browser.launch` launches the 1x one, with that one switch
+    more: where none can be launched the test skips, or fails where the run requires a
+    Chromium."""
+    sync_api = site_browser.api()
+    try:
+        launched = preview_site.launch_chromium(driver, args=["--force-device-scale-factor=2"])
+    except sync_api.Error as error:
+        site_browser.unavailable(
+            f"no Chromium to launch at 2x: {error.message.splitlines()[0]}"
+        )
     yield launched
     launched.close()
 

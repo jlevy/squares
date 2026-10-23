@@ -9,12 +9,18 @@ left edge. The page's own scroll is never touched, so scrolling back up retraces
 A sideways wheel pans the triangle while the page scrolls, and fades back at the top; the
 small sideways wobble of a swipe down pans nothing. Until the programs frame it the
 triangle is out of sight, so the first paint never shows it anywhere else.
-A size or view tab ends the following; an address that names a size, a view, a fragment
-or an embedding never starts it.
+A size or view tab ends the following, and so does a fragment or a tile reached from the
+keyboard off the stage; the block then takes the size its tabs show, or the one pressed,
+with the reader's row where it stood, and the following's listeners go. An address that
+names a size, a view, a fragment or an embedding never starts it, and nor does a reader
+who asks for reduced motion. A new width lays the triangle out again as a page opened
+at that width lays it out; a phone's toolbar showing or hiding moves nothing. The rows
+are drawn into one compositor layer.
 
 This reads all of that in Chromium a frame at a time, with the page scrolled as a wheel
-scrolls it. `tests/node/overview_atlas_view` holds the arithmetic; the browser is what
-says the page draws it.
+scrolls it, and the layers and listeners over the DevTools protocol.
+`tests/node/overview_atlas_view` holds the arithmetic; the browser is what says the page
+draws it.
 """
 
 from __future__ import annotations
@@ -41,9 +47,20 @@ PREPAINT = probe(PROBES, "site_atlas_follow/prepaint")
 QUIET = probe(PROBES, "site_atlas_follow/quiet")
 FRAMES = probe(PROBES, "site_atlas_follow/frames")
 UNVEIL = probe(PROBES, "site_atlas_follow/unveil")
+ROWS = probe(PROBES, "site_atlas_follow/rows")
+SEEK = probe(PROBES, "site_atlas_follow/seek")
+FOCUS = probe(PROBES, "site_atlas_follow/focus")
+FOCUSED = probe(PROBES, "site_atlas_follow/focused")
+JUMP = probe(PROBES, "site_atlas_follow/jump")
+PRESS = probe(PROBES, "site_atlas_follow/press")
+MIDDLE = probe(PROBES, "site_atlas_follow/middle")
+WHOLE = probe(PROBES, "site_atlas_follow/whole")
 
 DESKTOP = {"width": 1280, "height": 900}
 PHONE = {"width": 390, "height": 844}
+#: The cases at the triangle's top whose records the site serves, so a pressed tile
+#: opens its case in the popover rather than going to a page that is not there.
+PRESSED = tuple(range(1, 10))
 #: One turn of a reader's wheel, in pixels.
 TURN = 24
 #: Where the middle of the window stands along the reader's row (site.css).
@@ -64,20 +81,42 @@ def browser() -> Iterator[Any]:
 
 
 @pytest.fixture(scope="module")
-def site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
-    """Both Atlas pages served with their real assets."""
+def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[tuple[str, Path | None]]:
+    """Both Atlas pages served with their real assets, and where they are written, if
+    here."""
     address = os.environ.get("SQPACK_SITE_PREVIEW_URL")
     if address:
-        yield address.rstrip("/") + "/"
+        yield address.rstrip("/") + "/", None
         return
     root = Path(tmp_path_factory.mktemp("site"))
     site_renders.write(root, "atlas.html", "index.html")
     server = preview_site.serve(root, 0)
     try:
-        yield f"http://127.0.0.1:{server.server_port}/"
+        yield f"http://127.0.0.1:{server.server_port}/", root
     finally:
         server.shutdown()
         server.server_close()
+
+
+@pytest.fixture(scope="module")
+def site(served: tuple[str, Path | None]) -> str:
+    return served[0]
+
+
+@pytest.fixture(scope="module")
+def cases(served: tuple[str, Path | None]) -> str:
+    """The same site with the records of the cases `PRESSED`, written only for the test
+    that opens one, since rendering them takes tens of seconds."""
+    address, root = served
+    if root is not None:
+        from devtools import site_assets  # noqa: PLC0415
+
+        records = site_renders.case_records(PRESSED)
+        for name, record in records.items():
+            (root / name).parent.mkdir(exist_ok=True)
+            (root / name).write_text(record, encoding="utf-8")
+        site_assets.write_assets(root, site_assets.shared().assets.referenced(records.values()))
+    return address
 
 
 def _open(browser: Any, address: str, window: dict[str, int]) -> Any:
@@ -92,6 +131,37 @@ def _read(page: Any) -> dict[str, Any]:
     reading = page.evaluate(STATE)
     assert reading is not None
     return reading
+
+
+def _layers(page: Any) -> list[dict[str, Any]]:
+    """The compositor's layers that draw content, as it reports them over the DevTools
+    protocol (`LayerTree`) after a small scroll and five frames."""
+    session = page.context.new_cdp_session(page)
+    trees: list[dict[str, Any]] = []
+
+    # A function of its own: Playwright marks the handler, which a bound method refuses.
+    def changed(event: dict[str, Any]) -> None:
+        trees.append(event)
+
+    session.on("LayerTree.layerTreeDidChange", changed)
+    session.send("LayerTree.enable")
+    page.evaluate(STEP, {"by": 2})
+    page.evaluate(FRAMES, {"count": 5})
+    session.detach()
+    layers = trees[-1].get("layers", []) if trees else []
+    return [layer for layer in layers if layer.get("drawsContent")]
+
+
+def _listeners(page: Any, selector: str) -> list[str]:
+    """The kinds of event the element `selector` names is listened to for, one a listener,
+    as the DevTools protocol lists them (`DOMDebugger.getEventListeners`)."""
+    session = page.context.new_cdp_session(page)
+    root = session.send("DOM.getDocument", {"depth": 0})["root"]["nodeId"]
+    node = session.send("DOM.querySelector", {"nodeId": root, "selector": selector})["nodeId"]
+    remote = session.send("DOM.resolveNode", {"nodeId": node})["object"]["objectId"]
+    found = session.send("DOMDebugger.getEventListeners", {"objectId": remote})["listeners"]
+    session.detach()
+    return sorted(listener["type"] for listener in found)
 
 
 def _scroll(page: Any, by: int, *, limit: int = 400) -> list[dict[str, Any]]:
@@ -204,11 +274,11 @@ def test_scrolling_down_zooms_out_then_slides_to_the_left_edge(
             if abs(other - one) >= 0.3 * typical
         ]
         assert not jolts, (key, typical, jolts[:5])
-    # Nothing scrolls the page but the reader, so a header hidden on the way down stays
-    # hidden.
+    # Nothing scrolls the page but the reader, so the header, which hides once the page
+    # has scrolled down past it, stays hidden from then on.
     hidden = [reading["headerHidden"] for reading in down]
-    if True in hidden:
-        assert all(hidden[hidden.index(True) :])
+    assert True in hidden
+    assert all(hidden[hidden.index(True) :])
 
 
 @pytest.mark.parametrize(
@@ -324,16 +394,28 @@ def test_a_pressed_tab_keeps_the_readers_atlas(browser: Any, site: str) -> None:
     # A chosen size stays chosen as the page scrolls on.
     assert (later["zoomed"], later["size"]) == (False, "medium")
 
-    page = _open(browser, site + "atlas.html", DESKTOP)
-    try:
-        for _ in range(10):
-            page.evaluate(STEP, {"by": TURN})
-        page.locator('[data-atlas-tab="grid"]').click()
-        page.wait_for_function(QUIET)
-        grid = _read(page)
-    finally:
-        page.close()
-    assert (grid["follow"], grid["zoomed"], grid["view"]) == ("held", False, "grid")
+    # Grid, or a tile's fragment, deep in the journey, where the zoom has passed XL: the
+    # block takes the size the tabs show, the one the reader was looking at, so the tabs
+    # and the tiles agree. They once showed it while Grid opened at XL.
+    for act in ("grid", "fragment"):
+        page = _open(browser, site + "atlas.html", DESKTOP)
+        try:
+            page.evaluate(STEP, {"by": 1500})
+            deep = _read(page)
+            if act == "grid":
+                assert page.evaluate(PRESS, {"selector": '[data-atlas-tab="grid"]'})
+            else:
+                assert page.evaluate(JUMP, {"hash": "#atlas-n-53"}) == "#atlas-n-53"
+            page.wait_for_function(QUIET)
+            ended = _read(page)
+        finally:
+            page.close()
+        assert (deep["follow"], deep["size"]) == ("scroll", "xlarge")
+        assert deep["shown"] != "xlarge", act
+        assert (ended["follow"], ended["zoomed"]) == ("held", False), act
+        assert ended["view"] == ("grid" if act == "grid" else "triangle")
+        assert ended["size"] == ended["shown"] == deep["shown"], act
+        assert not ended["explicit"]
 
 
 @pytest.mark.parametrize(
@@ -360,3 +442,242 @@ def test_an_address_naming_a_size_view_fragment_or_embedding_does_not_follow(
     assert (start["armed"], start["follow"], start["zoomed"]) == (False, None, False)
     assert start["size"] == size == later["size"]
     assert later["follow"] is None
+
+
+@pytest.mark.parametrize("name", ["atlas.html", "index.html"])
+def test_a_reader_who_asks_for_reduced_motion_is_not_followed(
+    browser: Any, site: str, name: str
+) -> None:
+    """With reduced motion the bootstrap leaves the root unmarked and the programs do not
+    follow: the triangle opens at its static default size and stays there."""
+    programs = re.compile(r"/assets/js/atlas-(view|grid)\.")
+    page = browser.new_page(viewport=DESKTOP, reduced_motion="reduce")
+    try:
+        page.route(programs, lambda route: route.abort())
+        page.goto(site + name, wait_until="load")
+        check_site_rendering.wait_for_fonts(page)
+        painted = page.evaluate(PREPAINT)
+        page.unroute(programs)
+        page.reload(wait_until="load")
+        check_site_rendering.wait_for_fonts(page)
+        page.wait_for_selector("[data-atlas-grid][data-atlas-ready]")
+        start = page.evaluate(PREPAINT)
+        for _ in range(20):
+            page.evaluate(STEP, {"by": TURN})
+        later = page.evaluate(PREPAINT)
+    finally:
+        page.close()
+    # Medium's scale, the wide screen's static default, from the first paint.
+    assert (painted["armed"], painted["scale"]) == (False, 1)
+    for reading in (start, later):
+        assert (reading["armed"], reading["follow"], reading["zoomed"]) == (False, None, False)
+        assert (reading["size"], reading["scale"]) == ("medium", 1)
+
+
+@pytest.mark.parametrize(
+    ("window", "turned", "scroll"),
+    [
+        (PHONE, {"width": 844, "height": 390}, 1500),
+        (DESKTOP, {"width": 1000, "height": 900}, 1200),
+    ],
+    ids=["phone-turned", "desktop-narrowed"],
+)
+def test_a_new_width_lays_the_triangle_out_as_a_page_opened_at_it(
+    browser: Any, site: str, window: dict[str, int], turned: dict[str, int], scroll: int
+) -> None:
+    """A window narrowed or a phone turned mid-journey draws the triangle as a page opened
+    at the new size draws it at the same place in the journey, after one new layout. The
+    triangle was once laid out a frame before the tiles were, against the tiles the old
+    width held: its rows overlapped on a turned phone and stood far apart on a desktop."""
+    page = _open(browser, site + "atlas.html", window)
+    try:
+        page.evaluate(STEP, {"by": scroll})
+        before = page.evaluate(ROWS)
+        page.set_viewport_size(turned)
+        page.evaluate(FRAMES, {"count": 5})
+        resized = page.evaluate(ROWS)
+    finally:
+        page.close()
+    page = _open(browser, site + "atlas.html", turned)
+    try:
+        page.evaluate(SEEK, {"to": resized["reading"]["scrolled"]})
+        fresh = page.evaluate(ROWS)
+    finally:
+        page.close()
+    assert resized["follow"] == fresh["follow"] == "scroll"
+    assert 0 < resized["reading"]["scrolled"] < resized["reading"]["end"]
+    assert fresh["reading"]["scrolled"] == pytest.approx(
+        resized["reading"]["scrolled"], abs=0.5
+    )
+    assert resized["stage"] == fresh["stage"] == turned["height"]
+    assert resized["reading"]["end"] == pytest.approx(fresh["reading"]["end"], abs=2)
+    assert resized["reading"]["zoom"] == pytest.approx(fresh["reading"]["zoom"], abs=1e-3)
+    assert resized["reading"]["point"] == pytest.approx(fresh["reading"]["point"], abs=1)
+    assert resized["reading"]["pan"] == pytest.approx(fresh["reading"]["pan"], abs=1)
+    assert len(resized["rows"]) == len(fresh["rows"])
+    for one, other in zip(resized["rows"], fresh["rows"], strict=True):
+        for key in ("top", "left", "right"):
+            assert one[key] == pytest.approx(other[key], abs=1), (key, one, other)
+    # The ResizeObserver and the window's resize both ask; the triangle is laid out once.
+    assert resized["reading"]["lays"] == before["reading"]["lays"] + 1
+
+
+def test_a_phone_toolbar_leaves_the_rows_where_they_stand(browser: Any, site: str) -> None:
+    """A phone's toolbar showing or hiding as the page scrolls changes the window's height
+    alone, by a little: the rows stay where they stand and the journey keeps its length,
+    where they once jumped some 60 pixels and the page changed its height. A change of
+    height past a toolbar's lays the triangle out for it."""
+    page = _open(browser, site + "atlas.html", PHONE)
+    try:
+        # Most of the way through the journey, where the rows have zoomed out.
+        end = _read(page)["end"]
+        page.evaluate(SEEK, {"to": 0.7 * end})
+        before = page.evaluate(ROWS)
+        page.set_viewport_size({"width": PHONE["width"], "height": PHONE["height"] - 64})
+        page.evaluate(FRAMES, {"count": 5})
+        shown = page.evaluate(ROWS)
+        page.set_viewport_size(PHONE)
+        page.evaluate(FRAMES, {"count": 5})
+        hidden = page.evaluate(ROWS)
+        page.set_viewport_size({"width": PHONE["width"], "height": 600})
+        page.evaluate(FRAMES, {"count": 5})
+        shorter = page.evaluate(ROWS)
+    finally:
+        page.close()
+    assert before["follow"] == "scroll"
+    assert 0 < before["reading"]["scrolled"] < before["reading"]["end"]
+    for after in (shown, hidden):
+        for one, other in zip(before["rows"], after["rows"], strict=True):
+            assert other["top"] == pytest.approx(one["top"], abs=1)
+            assert other["left"] == pytest.approx(one["left"], abs=1)
+        assert after["reading"]["end"] == before["reading"]["end"]
+        assert (after["stage"], after["page"]) == (before["stage"], before["page"])
+        assert after["reading"]["lays"] == before["reading"]["lays"]
+    assert shorter["stage"] == 600
+    assert shorter["reading"]["lays"] == before["reading"]["lays"] + 1
+
+
+@pytest.mark.parametrize("scroll", [0, 1200], ids=["top", "journey"])
+@pytest.mark.parametrize("name", ["atlas.html", "index.html"])
+def test_a_tile_reached_from_the_keyboard_is_drawn_in_view(
+    browser: Any, site: str, name: str, scroll: int
+) -> None:
+    """Tabbing from the size tabs through the tiles: every tile the focus reaches is drawn
+    where the window shows it. The stage clips, and once 35 of 43 tiles were focused off
+    it; a tile off the stage now ends the following and is brought into view."""
+    page = _open(browser, site + name, DESKTOP)
+    try:
+        if scroll:
+            page.evaluate(STEP, {"by": scroll})
+        assert page.evaluate(FOCUS)
+        focused = []
+        for _ in range(45):
+            page.keyboard.press("Tab")
+            focused.append(page.evaluate(FOCUSED))
+        state = _read(page)
+    finally:
+        page.close()
+    tiles = [reading for reading in focused if reading["n"] is not None]
+    assert len(tiles) >= 30
+    assert all(reading["visible"] for reading in tiles)
+    assert [reading["n"] for reading in tiles if not reading["seen"]] == []
+    assert (state["follow"], state["zoomed"]) == ("held", False)
+    assert state["size"] == state["shown"]
+
+
+def test_a_pressed_tile_opens_its_case_and_keeps_the_following(
+    browser: Any, cases: str
+) -> None:
+    """A pointer on a tile in view opens its case in the popover, and the triangle keeps
+    following, as it did before keyboard focus ended it; Escape puts the focus back on
+    the tile, which is in view, so the following holds then too."""
+    page = _open(browser, cases + "atlas.html", DESKTOP)
+    try:
+        target = page.evaluate(WHOLE, {"cases": list(PRESSED)})
+        assert target is not None
+        page.mouse.click(target["x"], target["y"])
+        article = page.locator(f'#pop-case article.site-case[data-case="{target["n"]}"]')
+        site_browser.api().expect(article).to_be_visible()
+        opened = _read(page)
+        page.keyboard.press("Escape")
+        back = page.evaluate(FOCUSED)
+        closed = _read(page)
+    finally:
+        page.close()
+    assert (opened["follow"], opened["zoomed"]) == ("scroll", True)
+    assert (back["n"], back["visible"], back["seen"]) == (str(target["n"]), True, True)
+    assert (closed["follow"], closed["zoomed"]) == ("scroll", True)
+
+
+@pytest.mark.parametrize("step", [-1, 1], ids=["smaller", "larger"])
+def test_a_pressed_size_keeps_the_readers_row_in_place(
+    browser: Any, site: str, step: int
+) -> None:
+    """Pressing a size next to the one the tabs show, mid-journey, lays the triangle out at
+    that size with the tile at the middle of the stage on the focus line moved across by
+    less than a tile. The scroller once took the zoomed pan's pixels as the new layout's,
+    and that tile moved three tiles or more."""
+    page = _open(browser, site + "atlas.html", DESKTOP)
+    try:
+        page.evaluate(STEP, {"by": 1500})
+        deep = _read(page)
+        looked = page.evaluate(MIDDLE, {"n": None})
+        pressed = SIZES[SIZES.index(deep["shown"]) + step]
+        assert page.evaluate(PRESS, {"selector": f'[data-atlas-size-tab="{pressed}"]'})
+        page.wait_for_function(QUIET)
+        settled = _read(page)
+        kept = page.evaluate(MIDDLE, {"n": looked["n"]})
+    finally:
+        page.close()
+    assert deep["follow"] == "scroll"
+    assert deep["shown"] in {"medium", "large"}
+    assert abs(looked["offset"]) < looked["width"]
+    assert (settled["follow"], settled["zoomed"], settled["size"]) == ("held", False, pressed)
+    assert abs(kept["offset"] - looked["offset"]) < kept["width"], (looked, kept)
+
+
+def test_the_following_triangle_is_drawn_into_one_layer(browser: Any, site: str) -> None:
+    """The script wraps a following triangle's rows in one picture and zooms and pans that
+    one layer, so following composites no more layers than the same triangle at XL that
+    stands still. Each of its 18 rows was once a layer of its own, 22 layers against 5."""
+    counts = {}
+    for query in ("", "?size=xlarge"):
+        page = _open(browser, site + "atlas.html" + query, DESKTOP)
+        try:
+            page.evaluate(STEP, {"by": 1200})
+            counts[query] = len(_layers(page))
+            followed = _read(page)["follow"]
+        finally:
+            page.close()
+        assert followed == ("scroll" if query == "" else None)
+    assert counts[""] <= counts["?size=xlarge"] + 1, counts
+
+
+def test_the_following_takes_its_listeners_with_it_when_it_ends(
+    browser: Any, site: str
+) -> None:
+    """The stage's wheel, pointer, scroll and focus listeners are the following's: when a
+    tab ends it they go, rather than staying on as handlers that do nothing."""
+    stage = "[data-atlas-grid] .site-atlas-cells"
+    page = _open(browser, site + "atlas.html", DESKTOP)
+    try:
+        page.evaluate(STEP, {"by": 600})
+        following = _listeners(page, stage)
+        assert page.evaluate(PRESS, {"selector": '[data-atlas-size-tab="large"]'})
+        page.wait_for_function(QUIET)
+        held = _listeners(page, stage)
+        state = _read(page)
+    finally:
+        page.close()
+    added = {
+        "focusin",
+        "pointercancel",
+        "pointerdown",
+        "pointermove",
+        "pointerup",
+        "scroll",
+        "wheel",
+    }
+    assert state["follow"] == "held"
+    assert not added & set(held), held
+    assert added <= set(following), following

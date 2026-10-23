@@ -475,7 +475,7 @@ def test_no_javascript_triangle_remains_a_usable_static_full_atlas(
 
 
 def _homepage_actions(browser: Any, address: str, viewport: Window) -> dict[str, Any]:
-    """Read the homepage's Results action and its View Visual Atlas action."""
+    """Read the homepage's Results action and its Visual Atlas action."""
     page = browser.new_page(viewport=viewport)
     try:
         homepage = address.rsplit("/", 1)[0] + "/index.html"
@@ -510,6 +510,10 @@ def _desktop(browser: Any, address: str) -> Readings:
     atlas.top(page)
     seen["default"] = atlas.layout(page)
     seen["default, first placed"] = page.evaluate(SEEN)
+    # The size tabs as the browser's accessibility tree has them, names and all.
+    seen["size tabs, accessible"] = (
+        page.locator(atlas.BLOCK).locator("[data-atlas-sizes]").aria_snapshot()
+    )
     _save_artifact(page, address, "desktop-small-default")
     page.locator(MEDIUM).click()
     atlas.settle(page)
@@ -1297,8 +1301,8 @@ def test_view_all_results_and_view_visual_atlas_are_one_button(
         assert action["icon"]["arrow"] == "right"
         assert action["icon"]["after_text"]
     assert see_all["icon"]["width"] == pytest.approx(atlas_action["icon"]["width"], abs=0.5)
-    assert see_all["label"] == "View All Results"
-    assert atlas_action["label"] == "View Visual Atlas"
+    assert see_all["label"] == "All Results"
+    assert atlas_action["label"] == "Visual Atlas"
 
 
 def test_a_triangle_tile_is_the_link_to_its_case_record(seen: Readings) -> None:
@@ -1326,13 +1330,22 @@ def test_the_size_tabs_stand_beside_the_view_tabs_and_honor_explicit_small(
 ) -> None:
     """An explicit Small address opens under a second strip on the view tabs' line, in
     their type and at their height: Small, Medium and Large, Small selected and the
-    strip's one stop in the tab order, each controlling the box of tiles. The color
-    key stands under both strips and over the tiles."""
+    strip's one stop in the tab order, each controlling the box of tiles. Each tab shows
+    a letter and is named by its size in full with that letter, so a reader who says the
+    letter names the tab (WCAG 2.5.3). The color key stands under both strips and over
+    the tiles."""
     small = seen["default"]
     assert (small["size"], small["search"]) == ("small", "?size=small")
     sizes = _size_tabs(small)
     assert list(sizes) == ["small", "medium", "large", "xlarge"]
     assert [tab["label"] for tab in sizes.values()] == ["S", "M", "L", "XL"]
+    assert re.findall(r'- tab "([^"]*)"', seen["size tabs, accessible"]) == [
+        "Small (S)",
+        "Medium (M)",
+        "Large (L)",
+        "Extra large (XL)",
+    ]
+    assert all(tab["description"] is None for tab in sizes.values())
     assert (sizes["small"]["selected"], sizes["small"]["tabindex"]) == ("true", 0)
     for key in ("medium", "large", "xlarge"):
         assert (sizes[key]["selected"], sizes[key]["tabindex"]) == ("false", -1), key

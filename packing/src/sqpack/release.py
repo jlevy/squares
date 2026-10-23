@@ -7553,7 +7553,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/probes/measure_atlas_views/move.js",
             "packing/devtools/probes/measure_site_pages/math_faces.js",
             "packing/devtools/probes/preview_site/math_face.js",
+            "packing/devtools/record_presentation.py",
             "packing/devtools/render_case_pages.py",
+            "packing/devtools/render_contributors.py",
+            "packing/devtools/site_tallies.py",
             "packing/devtools/templates/site-nav.css",
         ),
         outputs=(
@@ -7569,11 +7572,15 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "The Atlas that follows the scroll, the end of its Show More expander and the "
             "smaller choosers (think-apqd) change only site chrome the papers share: the "
-            "head bootstrap gains a root attribute set only on the two Atlas pages, "
+            "head bootstrap gains a root attribute set only at an address ending in `/`, "
+            "`/index.html` or `/atlas.html`, where the two Atlas pages are served and no "
+            "paper is, "
             "`site-nav.css` the small chooser's size, which no paper uses, and the Atlas's "
             "markup, measuring tool and probes, which no paper runs. The case record's "
             "steps on its count's line change only the case pages, and the math-face "
-            "probes lose the steps' surface. Rendered again on 23 October, after those, "
+            "probes lose the steps' surface. The profiles directory's introduction, the "
+            "All Profiles label and the tallies' shared separator change only site pages. "
+            "Rendered again on 23 October, after all of these, "
             "from this tree and from main 44df28b07 into empty site directories "
             "with source links pinned to 44df28b07 (69 files each): every paper's Markdown "
             "is byte-identical, and each paper's HTML differs only in the inlined head "

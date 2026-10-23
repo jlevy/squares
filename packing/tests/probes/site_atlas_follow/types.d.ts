@@ -16,5 +16,6 @@ interface HTMLElement {
     pan: number;
     nudge: number;
     end: number;
+    lays: number;
   };
 }

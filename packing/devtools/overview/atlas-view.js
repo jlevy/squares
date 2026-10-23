@@ -49,11 +49,14 @@
 //
 // An untouched Triangle reached from the top of the page follows the scroll
 // (think-apqd). The head bootstrap marks the root `data-site-atlas-follow` when the
-// address names no fragment, size, Grid or embedding, and the stylesheet then paints
-// XL. The triangle is laid out once, at XL, on a stage the height of the window
-// that the browser pins (`position: sticky`) while an empty runway after it scrolls past.
-// Each row takes one transform, its pan, its place and its zoom, so a frame lays out and
-// draws no tile, and the page's own scroll is never touched. Laying the tiles out again
+// address names no fragment, size, Grid or embedding and the reader has not asked for
+// reduced motion, and the stylesheet then paints XL. The triangle is laid out once, at
+// XL, on a stage the height of the window that the browser pins (`position: sticky`)
+// while an empty runway after it scrolls past. Its rows are wrapped in one picture
+// (`.site-atlas-picture`), one compositor layer, which takes one transform, its pan, its
+// place and its zoom, so a frame lays out and draws no tile, and the page's own scroll is
+// never touched. Every row shares the right edge and the same vertical mapping, so the one
+// transform draws each row where a transform of its own would. Laying the tiles out again
 // restyles all of them (about 300 inherited custom properties each) and redraws every
 // drawing, tens of milliseconds a frame; moving the page back under the reader fought
 // the browser's own scrolling. The four sizes are points on the zoom, and the tabs show
@@ -76,9 +79,27 @@
 // top, a swipe's small sideways wobble pans nothing (`sideways`), and the last of the
 // motion slides to the left edge whatever the pan. Until the first frame the stylesheet
 // keeps the triangle out of sight, so the first paint never shows it elsewhere.
-// Nothing is written to the address. Pressing a size
-// or view tab, or opening a tile by its fragment, ends the following for the page view
-// and returns the triangle to its size's own layout.
+// Nothing is written to the address.
+//
+// Pressing a size or view tab, opening a tile by its fragment, or reaching from the
+// keyboard a tile that does not stand whole on the stage ends the following for the page
+// view. The stage clips what it does not show, so a tile focused off it would be focused
+// out of sight; the triangle instead returns to a size's own layout, and the focused tile
+// is brought into view, as a fragment's is. That layout is the size pressed, or else the
+// size the tabs show, the one the reader was looking at, so the tabs and the tiles agree,
+// and the point at the middle of the stage keeps its place across. The listeners the
+// following added go with it. A pressed tile opens its case and keeps the following, as
+// does focus that comes back to a tile in view.
+//
+// A new width (a window resized, a phone turned, the browser's zoom), a change of height
+// of a fifth of the stage or more, or the fonts arriving lays the tiles out for the width
+// (`arrange`) and then the triangle (`lay`) before it is drawn, in one frame however many
+// events ask, so the triangle is never measured against tiles a line no longer holds. A
+// smaller change of the height alone, a phone's toolbar showing or hiding as the page
+// scrolls, is left alone: the stage keeps its height, the rows stay where they stand and
+// the journey keeps its length. A reader who asks for reduced motion is never followed:
+// the bootstrap leaves the root unmarked, `mount` checks again, and the triangle stands
+// at its size's own layout from the first paint.
 //
 // The pure functions are published on `globalThis.SiteAtlasView` for the Node tests and
 // for `atlas-grid.js`, which places the tiles and calls `mount`.
@@ -113,6 +134,10 @@
    * of the stage's height or width, whichever is less: on a narrow stage a row's left end
    * soon reaches the edge, and the pan must be up to speed by then. */
   const LAUNCH = 0.6;
+  /** The share of the stage's height a change of the window's height alone must reach to
+   * lay a following triangle out again: less is a phone's toolbar showing or hiding as the
+   * page scrolls, 56 to 110 pixels of a window 640 to 900 tall. */
+  const TOOLBAR = 0.2;
 
   /**
    * The triangle's row for case `n`: the k with (k - 1)^2 < n <= k^2.
@@ -785,6 +810,8 @@
     let explicitSize = namedSize || block.hasAttribute("data-atlas-size-explicit");
     // Keep this media query in step with site.css's first-paint default (think-mp47).
     const wideScreen = window.matchMedia("(min-width: 75rem)");
+    // A reader who asks for reduced motion is not followed (embed.js asks the same).
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     /** @returns {AtlasSize} */
     const automaticSize = () => (wideScreen.matches ? "medium" : "small");
 
@@ -1046,8 +1073,15 @@
       labelPanel();
     };
 
+    /** The size the tabs show: the block's own, or the nearest to a following zoom. */
+    /** @type {AtlasSize | null} */
+    let showing = null;
     /** @param {AtlasSize} current */
     const showSize = (current) => {
+      if (current === showing) {
+        return;
+      }
+      showing = current;
       for (const tab of sizeButtons) {
         const on = tab.dataset.atlasSizeTab === current;
         tab.setAttribute("aria-selected", String(on));
@@ -1091,29 +1125,51 @@
     const runway = document.createElement("div");
     runway.className = "site-atlas-runway";
     runway.setAttribute("aria-hidden", "true");
+    /** The rows of a following triangle, wrapped as one picture that takes the zoom and
+     * the pan, and unwrapped when the following ends. */
+    const picture = document.createElement("div");
+    picture.className = "site-atlas-picture";
     // A size's own layout, which a chosen size and Grid always take: the stage, its
-    // runway and the rows' transforms all go, and the scroller keeps the pan.
-    const unzoom = () => {
+    // runway and the picture all go, and the block takes `next`, the size pressed or else
+    // the one the tabs show. The scroller then keeps the point at the middle of the stage
+    // where it stood, the same share of the rows' width from their right end, so the
+    // reader's row keeps its place across though its tiles change size.
+    /** @param {AtlasSize} [next] */
+    const unzoom = (next = showing ?? size()) => {
       if (!block.hasAttribute("data-atlas-zoom")) {
         return;
       }
+      const room = cells.clientWidth;
+      const share =
+        laid.canvas > 0 && reading.zoom > 0
+          ? (laid.right - panned - room / 2) / (reading.zoom * laid.canvas)
+          : Number.NaN;
       delete block.dataset.atlasZoom;
       cells.style.removeProperty("height");
       runway.remove();
-      for (const line of cells.querySelectorAll(".site-atlas-row")) {
-        if (line instanceof HTMLElement) {
-          line.style.removeProperty("transform");
-        }
+      if (picture.isConnected) {
+        picture.replaceWith(...picture.childNodes);
       }
-      cells.scrollLeft = panned;
+      markSize(next);
+      arrange();
+      cells.scrollLeft = 0;
+      const rows = laid.rows.at(-1)?.getBoundingClientRect();
+      const left = cells.getBoundingClientRect().left;
+      cells.scrollLeft =
+        rows === undefined || !Number.isFinite(share)
+          ? panned
+          : rows.right - left - share * rows.width - room / 2;
     };
 
+    /** What the following listens to, which it stops listening to when it ends. */
+    const listening = new AbortController();
     // The reader has chosen how the atlas stands: following ends for the page view. The
     // attribute stays to keep the stylesheet's first-paint defaults off the block.
     const quit = () => {
       if (following) {
         following = false;
         block.dataset.atlasFollow = "held";
+        listening.abort();
       }
     };
     // A jump to a tile ends it at once, so the tile is found where its layout puts it.
@@ -1145,7 +1201,7 @@
         markSize(next);
       } else {
         change(() => {
-          unzoom();
+          unzoom(next);
           markSize(next);
         });
       }
@@ -1219,12 +1275,15 @@
     following =
       document.documentElement.hasAttribute("data-site-atlas-follow") &&
       !explicitSize &&
-      view() === "triangle";
+      view() === "triangle" &&
+      !reduced.matches;
     if (following) {
-      // Both at once, so the triangle goes from its first paint to its zoomed drawing
-      // in one restyle.
+      // All at once, before anything reads a style, so the triangle goes from its first
+      // paint to its zoomed drawing, its rows moved into the picture, in one restyle.
       block.dataset.atlasFollow = "scroll";
       block.dataset.atlasZoom = "";
+      picture.append(...cells.childNodes);
+      cells.append(picture);
     } else {
       // The stylesheet keeps a triangle that will follow out of sight until it is framed;
       // one that will not is shown at once, at its own size.
@@ -1268,28 +1327,6 @@
       drawings.hidden = false;
     }
 
-    // The tiles a line holds follow the block's width. A resize is settled on the next
-    // frame, at most once a frame, and placed without a move: the window is already
-    // moving everything.
-    if ("ResizeObserver" in window) {
-      let waiting = false;
-      new ResizeObserver((entries) => {
-        const width =
-          entries[0]?.borderBoxSize[0]?.inlineSize ?? cells.getBoundingClientRect().width;
-        if (width === priorWidth) {
-          return;
-        }
-        priorWidth = width;
-        if (!waiting) {
-          waiting = true;
-          requestAnimationFrame(() => {
-            waiting = false;
-            arrange();
-          });
-        }
-      }).observe(cells);
-    }
-
     // The tiles of the four sizes at the block's width now, as `arrange` works them
     // out: Small's share of Large's bounds the zoom, and the nearest names the size the
     // tabs show.
@@ -1320,7 +1357,9 @@
     // point of the triangle then at the focus line, up to `end`, where the triangle's
     // bottom reaches the stage's. The rows slow to a stop over `stop` either side of
     // `end`, while the triangle pans to its left edge, and the stage stays pinned for
-    // the `runway` past `end` that this takes.
+    // the `runway` past `end` that this takes. `right` and `canvas` are where the rows'
+    // shared right end stands from the box's left and how wide each row is, and `originX`
+    // and `originY` where the picture's top left corner, its transform's origin, stands.
     let laid = {
       /** @type {HTMLElement[]} */
       rows: [],
@@ -1328,6 +1367,10 @@
       tops: [],
       /** @type {number[]} */
       spans: [],
+      right: 0,
+      canvas: 0,
+      originX: 0,
+      originY: 0,
       height: 0,
       offset: 0,
       stage: 0,
@@ -1368,11 +1411,40 @@
         : Math.max(point, laid.launchFrom);
     };
 
-    const lay = () => {
-      for (const line of laid.rows) {
-        line.style.removeProperty("transform");
+    /** The last reading, which the browser tests read from the block; `lays` counts the
+     * times the triangle has been laid out. */
+    const reading = {
+      scrolled: 0,
+      point: 0,
+      line: 0,
+      zoom: 1,
+      pan: 0,
+      nudge: 0,
+      end: 0,
+      lays: 0,
+    };
+    block.atlasFollow = reading;
+    /** How far the reader has panned the triangle themselves, on top of the framing. */
+    let nudge = 0;
+    /** The pan last drawn, as a right-to-left scroller would read it: 0 at the right. */
+    let panned = 0;
+    // A focused tile the browser scrolled into view moves the pan, not the box.
+    const unscroll = () => {
+      if (cells.scrollTop !== 0) {
+        cells.scrollTop = 0;
       }
+      if (cells.scrollLeft !== 0) {
+        nudge += cells.scrollLeft;
+        cells.scrollLeft = 0;
+      }
+    };
+
+    const lay = () => {
+      unscroll();
+      picture.style.removeProperty("transform");
+      reading.lays += 1;
       const box = cells.getBoundingClientRect();
+      const origin = picture.getBoundingClientRect();
       /** @type {HTMLElement[]} */
       const rows = [];
       /** @type {number[]} */
@@ -1380,6 +1452,8 @@
       /** @type {number[]} */
       const spans = [];
       let height = 0;
+      let end = 0;
+      let canvas = 0;
       for (const line of cells.querySelectorAll(".site-atlas-row")) {
         if (!(line instanceof HTMLElement) || line.closest("[hidden]") !== null) {
           continue;
@@ -1399,6 +1473,8 @@
           tops.push(drawn.top - box.top);
           spans.push(right - left);
           height = Math.max(height, drawn.bottom - box.top);
+          end = drawn.right - box.left;
+          canvas = drawn.width;
         }
       }
       const style = getComputedStyle(block);
@@ -1419,6 +1495,10 @@
         rows,
         tops,
         spans,
+        right: end,
+        canvas,
+        originX: origin.left - box.left,
+        originY: origin.top - box.top,
         height,
         offset: above,
         stage: window.innerHeight,
@@ -1494,47 +1574,46 @@
       }
     };
 
-    // One reading a frame, however many scrolls ask for it.
+    // One frame's work, however many events ask for it: the reading, and before it, when
+    // a new width, a new height or the fonts asked, the tiles laid out for the width and
+    // then the triangle, in that order, so the triangle is measured against the tiles
+    // the line now holds.
     let waiting = false;
-    const schedule = () => {
+    let anew = false;
+    /** @param {boolean} [relay] whether to lay the tiles and the triangle out anew */
+    const schedule = (relay = false) => {
+      anew = anew || relay;
       if (waiting) {
         return;
       }
       waiting = true;
       requestAnimationFrame(() => {
         waiting = false;
+        if (anew) {
+          anew = false;
+          arrange();
+          if (following) {
+            lay();
+          }
+        }
         follow();
       });
     };
-    /** The last reading, which the browser tests read from the block. */
-    const reading = { scrolled: 0, point: 0, line: 0, zoom: 1, pan: 0, nudge: 0, end: 0 };
-    block.atlasFollow = reading;
-    /** How far the reader has panned the triangle themselves, on top of the framing. */
-    let nudge = 0;
-    /** The pan last drawn, as a right-to-left scroller would read it: 0 at the right. */
-    let panned = 0;
     // Draw the triangle for the page's scroll. Before the stage is pinned, the focus line
     // rises with the page; while pinned, the point at it comes from the journey; after,
-    // everything holds its last reading and the page carries the stage away. Each row
+    // everything holds its last reading and the page carries the stage away. The picture
     // takes one transform, its zoom about the focus line and the pan, so nothing is laid
     // out again and the page's own scroll is never touched.
     const follow = () => {
       if (!following || view() !== "triangle") {
         return;
       }
+      unscroll();
       if (laid.rows.length === 0) {
         lay();
       }
       if (laid.rows.length === 0) {
         return;
-      }
-      // A focused tile the browser scrolled into view moves the pan, not the box.
-      if (cells.scrollTop !== 0) {
-        cells.scrollTop = 0;
-      }
-      if (cells.scrollLeft !== 0) {
-        nudge += cells.scrollLeft;
-        cells.scrollLeft = 0;
       }
       const scrolled = -(block.getBoundingClientRect().top + laid.offset);
       // The rows come to rest smoothly: from `stop` before the end of the journey, the
@@ -1578,30 +1657,96 @@
       const reach = smootherstep((scrolled - slowing) / (laid.runway + laid.stop));
       const shift = between(held, range, reach);
       panned = -shift;
-      laid.rows.forEach((row, index) => {
-        const top = laid.tops[index] ?? 0;
-        const moved = line + (top - point) * zoom - top;
-        row.style.transform = `translate(${shift}px, ${moved}px) scale(${zoom})`;
-      });
+      // The picture is scaled about its top left corner (site.css). Each row's right end
+      // moves `shift` from where it is laid out, and each point at height y comes to
+      // `line + (y - point) * zoom`, as each row once did with a transform of its own.
+      const x = shift + (laid.right - laid.originX) * (1 - zoom);
+      const y = line - point * zoom - laid.originY * (1 - zoom);
+      picture.style.transform = `translate(${x}px, ${y}px) scale(${zoom})`;
       showSize(nearestSize(laid.tiles.xlarge * zoom, laid.tiles));
       Object.assign(reading, { scrolled, point, line, zoom, pan: panned, nudge, end: laid.end });
       if (above && nudge !== 0) {
         schedule();
       }
     };
-    if (following) {
-      window.addEventListener("scroll", () => schedule(), { passive: true });
-      // A new width or height, or the page's fonts, lay the triangle out anew.
-      const relay = () => {
-        if (following) {
-          requestAnimationFrame(() => {
-            lay();
-            follow();
-          });
+
+    // The tiles a line holds follow the block's width. A new width is settled on the next
+    // frame, at most once a frame, and placed without a move: the window is already
+    // moving everything. A following triangle is laid out again in the same frame.
+    if ("ResizeObserver" in window) {
+      new ResizeObserver((entries) => {
+        const width =
+          entries[0]?.borderBoxSize[0]?.inlineSize ?? cells.getBoundingClientRect().width;
+        if (width !== priorWidth) {
+          priorWidth = width;
+          schedule(true);
         }
-      };
-      window.addEventListener("resize", relay);
-      void fontsReady.then(relay);
+      }).observe(cells);
+    }
+
+    /** Whether `element` stands whole on the stage, where the window shows it. */
+    const whole = (/** @type {Element} */ element) => {
+      const drawn = element.getBoundingClientRect();
+      const stage = cells.getBoundingClientRect();
+      return (
+        cells.scrollTop === 0 &&
+        cells.scrollLeft === 0 &&
+        drawn.left >= Math.max(stage.left, 0) - 0.5 &&
+        drawn.right <= Math.min(stage.right, window.innerWidth) + 0.5 &&
+        drawn.top >= Math.max(stage.top, 0) - 0.5 &&
+        drawn.bottom <= Math.min(stage.bottom, window.innerHeight) + 0.5
+      );
+    };
+
+    if (following) {
+      const { signal } = listening;
+      window.addEventListener("scroll", () => schedule(), { passive: true, signal });
+      // A new width lays the tiles and the triangle out anew, and so does a new height,
+      // unless it is a change of the height alone too small to be more than a phone's
+      // toolbar showing or hiding as the page scrolls: the stage then keeps its height
+      // and the rows stay where they stand (`TOOLBAR`).
+      let width = window.innerWidth;
+      window.addEventListener(
+        "resize",
+        () => {
+          const taller = Math.abs(window.innerHeight - laid.stage);
+          if (window.innerWidth !== width || !(taller < laid.stage * TOOLBAR)) {
+            width = window.innerWidth;
+            schedule(true);
+          }
+        },
+        { passive: true, signal },
+      );
+      void fontsReady.then(() => {
+        if (following) {
+          schedule(true);
+        }
+      });
+      // A reader who comes to ask for reduced motion is no longer followed.
+      reduced.addEventListener(
+        "change",
+        () => {
+          if (reduced.matches) {
+            hold();
+          }
+        },
+        { signal },
+      );
+      // A tile reached from the keyboard that the stage does not show whole would be
+      // focused out of sight, since the stage clips: the following ends, as a fragment
+      // ends it, and the tile is brought into view. A pressed tile opens its case and
+      // does not match `:focus-visible`; focus back on a tile in view keeps the following.
+      cells.addEventListener(
+        "focusin",
+        (event) => {
+          const tile = event.target;
+          if (tile instanceof HTMLElement && tile.matches(":focus-visible") && !whole(tile)) {
+            hold();
+            tile.scrollIntoView({ block: "center", inline: "center", behavior: "instant" });
+          }
+        },
+        { signal },
+      );
       // A sideways turn of the wheel, a horizontal swipe on a trackpad, pans the triangle
       // while the page scrolls up and down, so a diagonal gesture moves both ways at
       // once; the small sideways wobble of a swipe up or down pans nothing (`sideways`).
@@ -1622,34 +1767,46 @@
           const scale = unit(event);
           nudged(swipe(event.deltaX * scale, event.deltaY * scale, event.timeStamp));
         },
-        { passive: true },
+        { passive: true, signal },
       );
       /** @type {{ x: number, y: number, swipe: (x: number, y: number, time: number) => number } | null} */
       let touched = null;
-      cells.addEventListener("pointerdown", (event) => {
-        touched =
-          event.pointerType === "touch"
-            ? { x: event.clientX, y: event.clientY, swipe: sideways() }
-            : null;
-      });
-      cells.addEventListener("pointermove", (event) => {
-        if (touched !== null && event.pointerType === "touch") {
-          const pan = touched.swipe(
-            touched.x - event.clientX,
-            event.clientY - touched.y,
-            event.timeStamp,
-          );
-          touched.x = event.clientX;
-          touched.y = event.clientY;
-          nudged(pan);
-        }
-      });
+      cells.addEventListener(
+        "pointerdown",
+        (event) => {
+          touched =
+            event.pointerType === "touch"
+              ? { x: event.clientX, y: event.clientY, swipe: sideways() }
+              : null;
+        },
+        { signal },
+      );
+      cells.addEventListener(
+        "pointermove",
+        (event) => {
+          if (touched !== null && event.pointerType === "touch") {
+            const pan = touched.swipe(
+              touched.x - event.clientX,
+              event.clientY - touched.y,
+              event.timeStamp,
+            );
+            touched.x = event.clientX;
+            touched.y = event.clientY;
+            nudged(pan);
+          }
+        },
+        { signal },
+      );
       for (const kind of ["pointerup", "pointercancel"]) {
-        cells.addEventListener(kind, () => {
-          touched = null;
-        });
+        cells.addEventListener(
+          kind,
+          () => {
+            touched = null;
+          },
+          { signal },
+        );
       }
-      cells.addEventListener("scroll", () => schedule(), { passive: true });
+      cells.addEventListener("scroll", () => schedule(), { passive: true, signal });
       schedule();
     }
 

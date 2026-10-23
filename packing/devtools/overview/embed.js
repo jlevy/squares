@@ -18,7 +18,8 @@
     );
   }
   // Either Atlas page honors an explicit size; else the stylesheet's default holds, or
-  // a Triangle reached from the top follows the scroll (atlas-view.js).
+  // a Triangle reached from the top follows the scroll (atlas-view.js), unless the
+  // reader asks for reduced motion.
   const size = query.get("size") ?? "";
   const named = ["small", "medium", "large", "xlarge"].includes(size);
   if (named) {
@@ -27,7 +28,8 @@
     /\/(atlas\.html|index\.html)?$/.test(location.pathname) &&
     location.hash.length < 2 &&
     query.get("atlas") !== "grid" &&
-    query.get("view") !== "embed"
+    query.get("view") !== "embed" &&
+    !matchMedia("(prefers-reduced-motion: reduce)").matches
   ) {
     document.documentElement.setAttribute("data-site-atlas-follow", "");
   }

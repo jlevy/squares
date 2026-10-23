@@ -14,6 +14,7 @@
     pan: 0,
     nudge: 0,
     end: 0,
+    lays: 0,
   };
   const box = cells.getBoundingClientRect();
   /** @param {Element} row */

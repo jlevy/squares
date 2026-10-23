@@ -32,6 +32,7 @@ from devtools import (
     result_status,
     site_assets,
     site_math,
+    site_tallies,
     site_topics,
     site_urls,
 )
@@ -265,7 +266,7 @@ def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
     assert (
         '<p class="site-action-row site-more">'
         f'<a class="site-action" href="results.html#all-results" {attributes}>'
-        f"View All Results{overview_sections.arrow_icon('right')}</a></p>"
+        f"All Results{overview_sections.arrow_icon('right')}</a></p>"
     ) in recent
 
 
@@ -420,7 +421,7 @@ def test_pdf_and_video_sources_remain_reachable_in_their_separate_groups(
     for source in ("known-best-1-100.svg", "known-best-1-324.svg", "README.md"):
         assert source in pdfs, source
     video = page.split('id="video"', 1)[1].split("<h2", 1)[0]
-    assert 'href="visualize.html">View Videos' in video
+    assert 'href="visualize.html">Videos' in video
     assert "A shorter film" not in page
     assert "Both films are on" not in page
     assert 'id="pdfs-and-videos"' in page
@@ -443,9 +444,11 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     ]
     positions = [page.index(f'id="{identifier}"') for identifier in landings]
     assert positions == sorted(positions)
-    assert 'href="atlas.html">View Visual Atlas' in page
-    assert 'href="news.html">View All News' in page
-    assert 'href="papers.html">View All Papers' in page
+    # The owner dropped "View" from these action labels on 2026-10-23.
+    assert 'href="atlas.html">Visual Atlas' in page
+    assert 'href="news.html">All News' in page
+    assert 'href="papers.html">All Papers' in page
+    assert ">View " not in page
     assert '<a class="site-action" href="results.html#all-results" data-all-results' in page
     assert 'aria-controls="homepage-atlas-cells"' in page
     assert len(re.findall(r'data-atlas-n="\d+"', page)) == 324
@@ -459,7 +462,8 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
 def test_papers_groups_every_reading_and_the_resources_keep_detail_reachable(
     page: str, about: str, papers: str, tutorials: str, resources: str
 ) -> None:
-    section = page.split('id="papers"', 1)[1].split('id="visuals"', 1)[0]
+    # Learn runs to the profiles; the report section's group-chat link is external.
+    section = page.split('id="papers"', 1)[1].split('id="report-your-results"', 1)[0]
     assert 'id="learn-more"' in section
     selected = {href: card_text(body) for href, _, body in _page_cards(section)}
     complete = {href: card_text(body) for href, _, body in _page_cards(tutorials + papers)}
@@ -471,7 +475,7 @@ def test_papers_groups_every_reading_and_the_resources_keep_detail_reachable(
     assert len(_media_cards(page, "visuals")) == 1
     summary = page.split('id="more-resources"', 1)[1].split("</article>", 1)[0]
     assert 'id="other-square-packing-projects"' in summary
-    assert 'href="resources.html">View All Resources' in summary
+    assert 'href="resources.html">All Resources' in summary
     assert 'class="site-card' not in summary
     for url in overview_sections.project_urls():
         assert f'href="{html.escape(url, quote=True)}"' in resources
@@ -557,12 +561,12 @@ def test_every_lazy_homepage_media_card_reserves_its_source_image_dimensions(
 def test_home_and_learn_link_to_the_full_film_and_workbench(page: str) -> None:
     for destination in (page,):
         section = destination.split('id="visuals"', 1)[1].split("</article>", 1)[0]
-        assert 'href="visualize.html">View Videos' in section
+        assert 'href="visualize.html">Videos' in section
         assert 'href="workbench/">Open Workbench' in section
         assert "<video" not in section
         assert _asset_tag(render_overview.FILM_SCRIPT) not in destination
     assert len(_media_cards(page, "visuals")) == 1
-    assert 'href="posters.html">View All Posters' in page
+    assert 'href="posters.html">All Posters' in page
 
 
 def _page_cards(page: str) -> list[tuple[str, str, str]]:
@@ -997,24 +1001,27 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
     ]
     assert overview_sections.ATLAS_SIZE == "small"
     tabs = overview_sections.atlas_size_tabs()
+    # Each tab's accessible name is its size in full with the letter it shows, so a
+    # reader who says the letter names it (WCAG 2.5.3); its title is the name alone.
     assert tabs == (
         '<div class="site-tabs site-chooser-small site-atlas-sizes" role="tablist" '
         'aria-label="Atlas tile size" '
         "data-atlas-sizes>"
         '<button type="button" role="tab" id="atlas-size-small" data-atlas-size-tab="small" '
-        'aria-selected="true" aria-controls="atlas-cells" aria-description="Small" '
+        'aria-selected="true" aria-controls="atlas-cells" aria-label="Small (S)" '
         'title="Small">S</button>'
         '<button type="button" role="tab" id="atlas-size-medium" data-atlas-size-tab="medium" '
-        'aria-selected="false" aria-controls="atlas-cells" aria-description="Medium" '
+        'aria-selected="false" aria-controls="atlas-cells" aria-label="Medium (M)" '
         'title="Medium" tabindex="-1">M</button>'
         '<button type="button" role="tab" id="atlas-size-large" data-atlas-size-tab="large" '
-        'aria-selected="false" aria-controls="atlas-cells" aria-description="Large" '
+        'aria-selected="false" aria-controls="atlas-cells" aria-label="Large (L)" '
         'title="Large" tabindex="-1">L</button>'
         '<button type="button" role="tab" id="atlas-size-xlarge" data-atlas-size-tab="xlarge" '
-        'aria-selected="false" aria-controls="atlas-cells" aria-description="Extra large" '
+        'aria-selected="false" aria-controls="atlas-cells" aria-label="Extra large (XL)" '
         'title="Extra large" tabindex="-1">XL</button>'
         "</div>"
     )
+    assert "aria-description" not in tabs
     assert atlas_page.count(tabs) == 1
     # The new-result key closes the controls box.
     controls = (
@@ -1047,7 +1054,7 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
     assert "priorWidth" in mount
     select_size = view.split("selectSize", 1)[1].split("};", 1)[0]
     changed = select_size[select_size.index("change(") :]
-    assert changed.index("unzoom();") < changed.index("markSize(next);")
+    assert changed.index("unzoom(next);") < changed.index("markSize(next);")
     assert "readdress(searchForSize(location.search, next));" in select_size
     assert "history.replaceState(history.state" in view
     assert '"--site-atlas-scale"' in view
@@ -1470,6 +1477,109 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     assert script.count("style.height") == 1
     assert "cells.style.height = `${laid.stage}px`;" in script
     assert script.count("style.blockSize") == 1
+
+
+def test_a_following_triangle_keeps_its_sideways_swipe_and_prints_as_seen() -> None:
+    """While a triangle follows the scroll, its stage pans sideways under the script, so
+    neither the stage nor the page passes a sideways swipe on to the browser, where it
+    would go back a page. On paper the stage prints as the reader sees it, framed and
+    zoomed, in its place rather than pinned, and the empty runway is hidden, in a print
+    block after the stage's own rules, which the site's first print block could not
+    outrank. Unzoomed, the triangle is several pages wide."""
+    css = render_overview.SITE_CSS.read_text(encoding="utf-8")
+    script = render_overview.ATLAS_VIEW_SCRIPT.read_text(encoding="utf-8")
+    assert 'runway.className = "site-atlas-runway";' in script
+    assert 'picture.className = "site-atlas-picture";' in script
+    assert "picture.style.transform = `translate(" in script
+    stage = ".site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-cells"
+    picture = ".site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-picture"
+    plain = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
+    start = plain.index("@media print {\n  .site-atlas-runway {")
+    # The stage's and the picture's own rules, each its selector alone, before the print.
+    own = {
+        " ".join(selector.split()): body
+        for selector, body in reversed(re.findall(r"([^{}]+)\{([^{}]*)\}", plain[:start]))
+    }
+    assert "overscroll-behavior-x: none;" in own[stage]
+    assert picture in own
+    assert "overscroll-behavior-x: none;" in _rule(
+        css, "html:has(.site-atlas-grid[data-atlas-zoom])"
+    )
+    printed = plain[start : plain.index("\n}\n", start)]
+    assert "display: none;" in _rule(printed, ".site-atlas-runway")
+    paper = " ".join(_rule(printed, stage).split())
+    assert paper == "position: static;"
+    assert picture not in printed
+
+
+def test_the_row_reference_ink_is_the_lightest_mix_a_graphic_can_take() -> None:
+    """The Row reference square is the muted gray mixed toward the page, as light as it can
+    be while keeping a graphic's 3:1 against the page in both themes (WCAG 1.4.11): the
+    lightest whole percentage of the muted gray that does, in kpress's neutral palette,
+    which the site's pages name."""
+    from devtools.render_n11_lower_bounds_explainer import kpress_static  # noqa: PLC0415
+    from sqpack.render.color import (  # noqa: PLC0415
+        _linear_to_srgb,  # pyright: ignore[reportPrivateUsage]
+        _oklch_linear_rgb,  # pyright: ignore[reportPrivateUsage]
+        _srgb_to_linear,  # pyright: ignore[reportPrivateUsage]
+    )
+
+    css = render_overview.SITE_CSS.read_text(encoding="utf-8")
+    found = re.search(
+        r"--site-atlas-reference-ink: color-mix\(in srgb, var\(--kpress-doc-muted\) (\d+)%, "
+        r"var\(--kpress-doc-bg\)\);",
+        _rule(css, ".site-page .site-atlas-grid"),
+    )
+    assert found
+    share = int(found[1])
+    tokens = re.sub(
+        r"/\*.*?\*/",
+        "",
+        (kpress_static() / "css" / "style-tokens.css").read_text(encoding="utf-8"),
+        flags=re.DOTALL,
+    )
+    themes: dict[str, dict[str, str]] = {}
+    for selector, body in re.findall(r"([^{}]+)\{([^{}]*)\}", tokens):
+        declared = dict(re.findall(r"--kpress-doc-(muted|bg)\s*:\s*([^;]+);", body))
+        if len(declared) == 2 and "data-kpress-palette" not in selector:
+            dark = 'data-kpress-resolved-theme="dark"' in selector
+            themes.setdefault("dark" if dark else "light", declared)
+    assert set(themes) == {"light", "dark"}
+
+    def encoded(value: str) -> list[float]:
+        match = re.fullmatch(r"oklch\(([\d.]+)%\s+([\d.]+)\s+([\d.]+)\)", value.strip())
+        assert match, value
+        lightness, chroma, hue = (float(part) for part in match.groups())
+        linear = _oklch_linear_rgb(lightness / 100, chroma, hue)
+        return [_linear_to_srgb(min(1.0, max(0.0, channel))) for channel in linear]
+
+    def luminance(colour: list[float]) -> float:
+        red, green, blue = (_srgb_to_linear(channel) for channel in colour)
+        return 0.2126 * red + 0.7152 * green + 0.0722 * blue
+
+    def contrast(theme: str, percent: int) -> float:
+        muted, page = encoded(themes[theme]["muted"]), encoded(themes[theme]["bg"])
+        weight = percent / 100
+        ink = [weight * a + (1 - weight) * b for a, b in zip(muted, page, strict=True)]
+        lighter, darker = sorted((luminance(ink), luminance(page)), reverse=True)
+        return (lighter + 0.05) / (darker + 0.05)
+
+    assert all(contrast(theme, share) >= 3 for theme in themes), share
+    assert min(contrast(theme, share - 1) for theme in themes) < 3, share
+
+
+def test_a_case_records_step_answers_a_hover_without_moving() -> None:
+    """A record's step arrows have no wash, since each meets the edge of the drawing's
+    frame, and under reduced motion the arrow keeps still; so a step hovered or focused
+    takes the text's ink, eased on the hover token, and changes nothing of its outline,
+    which a keyboard's focus still rings."""
+    css = render_overview.SITE_CSS.read_text(encoding="utf-8")
+    hovered = _rule(css, ".kpress .site-case-steps > a:is(:hover, :focus-visible)")
+    assert hovered.split() == ["color:", "var(--kpress-doc-text);"]
+    rest = _rule(css, ".kpress .site-case-steps > a")
+    assert "color: var(--kpress-doc-link);" in rest
+    assert "transition: var(--site-hover-transition);" in rest
+    assert "outline" not in rest
 
 
 def test_a_cases_visual_summary_carries_what_the_film_shows() -> None:
@@ -4154,6 +4264,10 @@ SITE_STATEMENT = (
     "We also have a group chat. Contact ojoshe if you wish to join.",
 )
 
+#: About's closing paragraph: the group-chat invitation of `SITE_STATEMENT`, its link
+#: text naming the platform so that it stays the X account rather than the profile.
+ABOUT_GROUP_CHAT = "We also have a group chat. Contact ojoshe on X if you wish to join."
+
 
 def test_home_invitation_leads_to_the_complete_contribution_instructions(
     page: str, report: str
@@ -4164,6 +4278,11 @@ def test_home_invitation_leads_to_the_complete_contribution_instructions(
     assert f'href="{render_overview.NEW_ISSUE_URL}"' in about_section
     assert "what name you wish to be used for credits" in _rendered_text(about_section)
     assert "what name you wish to be used for credits" not in _rendered_text(home_section)
+    # The group-chat invitation is on Home, About and the report page alike (the owner,
+    # 2026-10-23).
+    for section in (home_section, about_section):
+        assert "We also have a group chat." in _rendered_text(section)
+        assert 'href="https://x.com/ojoshe"' in section
     assert page.index('id="recent-results"') < page.index('id="report-your-results"')
     assert page.index('id="papers"') < page.index('id="report-your-results"')
 
@@ -4176,13 +4295,14 @@ def test_the_sites_own_statement_follows_readmes_introduction(
     contribution invitation retains the owner's two paragraphs."""
     narrative = about.split("</h1>", 1)[1].split("</div>", 1)[0]
     contribution = report.split("</h1>", 1)[1].split('<p class="site-action-row', 1)[0]
-    assert len(re.findall(r"<p>", narrative)) == 4
+    assert len(re.findall(r"<p>", narrative)) == 5
     assert len(re.findall(r"<p>", contribution)) == 2
     items = re.findall(r"<li>(.*?)</li>", narrative, re.DOTALL)
     assert len(items) == 6
     narrative_paragraphs = re.findall(r"<p>(.*?)</p>", narrative, re.DOTALL)
     assert [_rendered_text(paragraph) for paragraph in narrative_paragraphs] == [
-        _markdown_text(text) for text in SITE_STATEMENT[:4]
+        *(_markdown_text(text) for text in SITE_STATEMENT[:4]),
+        ABOUT_GROUP_CHAT,
     ]
     assert [_rendered_text(item) for item in items] == [
         _markdown_text(
@@ -4282,6 +4402,10 @@ def test_the_sites_own_statement_follows_readmes_introduction(
         paragraphs[0],
     )
     assert f"{founder}ojoshe</a>" in paragraphs[1]
+    # About carries the group-chat invitation too, restored at the owner's request of
+    # 2026-10-23. Its link stays the X account: an anchor reading only a personal label
+    # ("ojoshe") would be rewritten to the profile by `profile_links`.
+    assert f"{founder}ojoshe on X</a>" in narrative_paragraphs[-1]
     # Formal proofs are invited, not claimed.
     assert "formally" not in " ".join(SITE_STATEMENT).lower()
 
@@ -4322,7 +4446,7 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert "site-contributor-list" not in home_preview
     assert "profiles/manasseh-ahmed.html" not in home_preview
     assert "We track contributors and the authors cited" in home_preview
-    assert 'href="profiles/index.html">View All Profiles' in home_preview
+    assert 'href="profiles/index.html">All Profiles' in home_preview
 
 
 def test_the_project_is_named_the_squares_project_wherever_it_is_named(
@@ -5219,6 +5343,38 @@ def test_every_table_stands_one_shared_space_from_the_text_around_it() -> None:
     assert "@media print {\n  .site-nav,\n  .site-table-tools {\n    display: none;" in css
     design = (render_overview.TEMPLATES / "paper-design.md").read_text(encoding="utf-8")
     assert "| Above and below a table | `--site-table-space` | 2rem, 32px |" in design
+
+
+def test_every_tally_is_spaced_by_the_two_tally_tokens(resources: str) -> None:
+    """A tally, counts in a line with a dot between each two ("75 people · 114
+    records"), is spaced by two tokens (the owner, 2026-10-23): every dot is the one
+    separator `site_tallies` emits, whose word spaces gain `--site-tally-gap`, and a
+    tally set as a line of its own, the profile directory's summary and a profile's
+    stacked counts, stands `--site-tally-space` clear on screen. A card's tally keeps
+    the card's own padding. `test_site_navigation` measures both in Chromium."""
+    css = render_overview.SITE_CSS.read_text(encoding="utf-8")
+    assert css.count("--site-tally-gap: 0.15em;") == 1
+    assert css.count("--site-tally-space: 1.25rem;") == 1
+    assert ".site-tally-sep {\n  word-spacing: var(--site-tally-gap);\n}" in css
+    assert (
+        "@media screen {\n"
+        "  .kpress :is(.site-profile-summary, p:has(> .site-profile-tally)) {\n"
+        "    margin-block: var(--site-tally-space);\n  }\n}"
+    ) in css
+    assert css.count("var(--site-tally-gap)") == 1
+    assert css.count("var(--site-tally-space)") == 1
+    assert site_tallies.TALLY_SEPARATOR == '<span class="site-tally-sep"> · </span>'
+    # Every resource card's tally separates its counts with the shared dot alone.
+    feet = [
+        foot.split("</p>", 1)[0]
+        for foot in resources.split('<p class="site-card-foot">')[1:]
+        if 'class="site-project-tally"' in foot.split("</p>", 1)[0]
+    ]
+    assert sum(site_tallies.TALLY_SEPARATOR in foot for foot in feet) >= 9
+    assert not [foot for foot in feet if "·" in foot.replace(site_tallies.TALLY_SEPARATOR, "")]
+    design = (render_overview.TEMPLATES / "paper-design.md").read_text(encoding="utf-8")
+    assert "| Above and below a tally set as its own line | `--site-tally-space` |" in design
+    assert "### Tallies" in design
 
 
 def test_the_icon_frame_is_one_pixel_at_icon_size() -> None:
@@ -7408,7 +7564,7 @@ def test_all_results_is_one_canonical_collection_with_a_recent_compatibility_rou
     assert "data-recent-results" not in results
     assert "data-recent-toggle" not in results
     assert 'href="recent-results.html"' not in page
-    assert page.count("View All Results") == 1
+    assert page.count(f"All Results{overview_sections.arrow_icon('right')}") == 1
     assert 'href="results.html#all-results" data-all-results' in page
 
 

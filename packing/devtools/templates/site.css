@@ -147,6 +147,12 @@ body {
   /* The space above and below every table, on screen: a site table with its filter bar,
      and a document's own table (paper-design.md, Tables). */
   --site-table-space: 2rem;
+  /* A tally, counts set in a line with a dot between each two ("75 people · 114
+     records"): what each word space beside a dot gains, and the space above and below a
+     tally that stands as a line of its own, on screen (paper-design.md, Tallies; the
+     owner, 2026-10-23). */
+  --site-tally-gap: 0.15em;
+  --site-tally-space: 1.25rem;
   /* The measure a long list of cases wraps in, in the n column of a table of results: a
      result about five values or more sets them in the line, this many digits to a line
      (paper-design.md, Tables). */
@@ -2253,9 +2259,12 @@ body:has([data-atlas-preview]) {
      scale makes Small two thirds as wide and Large half as wide again. */
   --site-atlas-cell-min: 6.4rem;
   --site-atlas-reference-gap: 0.5rem;
-  /* The Row reference square's ink: the muted gray halfway to the page, one shade in
-     every tile and lighter than both the black container and the muted text. */
-  --site-atlas-reference-ink: color-mix(in srgb, var(--kpress-doc-muted) 50%, var(--kpress-doc-bg));
+  /* The Row reference square's ink: the muted gray 69% of the way from the page, one shade
+     in every tile and lighter than both the black container and the muted text. 69% is
+     the lightest mix that keeps a graphic's 3:1 against the page in both themes (WCAG
+     1.4.11): 3.05:1 in light, where the half mix it replaced read 2.14:1, and 4.77:1 in
+     dark. */
+  --site-atlas-reference-ink: color-mix(in srgb, var(--kpress-doc-muted) 69%, var(--kpress-doc-bg));
   --site-atlas-cell-padding: 0.3rem;
   /* Each size's scale, which a following triangle also reads to tell whether a row
      would fit at the next size (overview/atlas-view.js). */
@@ -2666,9 +2675,8 @@ html[data-site-atlas-view="triangle"]
   .site-atlas-row:where(:not([data-atlas-row="1"])) {
   margin-block-start: var(--site-atlas-row-gap);
 }
-/* That triangle is laid out once, at Large, and zoomed as one picture: each row is
-   its own compositor layer, scaled about its right end, and the box takes the
-   picture's height. Its case numbers are drawn at the follow size from the first
+/* That triangle is laid out once, at XL, and zoomed as one picture, one compositor
+   layer (below). Its case numbers are drawn at the follow size from the first
    paint, so mounting moves nothing. */
 html[data-site-atlas-follow]
   .site-page
@@ -2683,9 +2691,14 @@ html[data-site-atlas-follow]
    and down, and a finger's up and down stays the page's. */
 .site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-cells {
   overflow: hidden;
+  overscroll-behavior-x: none;
   position: sticky;
   top: 0;
   touch-action: pan-y;
+}
+/* That sideways pan is the triangle's, so no sideways swipe left over goes back a page. */
+html:has(.site-atlas-grid[data-atlas-zoom]) {
+  overscroll-behavior-x: none;
 }
 /* kpress clips a narrow document with `overflow-x: hidden`, which makes it the scroller a
    sticky stage would pin to. Clipping it instead pins the stage to the window. */
@@ -2694,8 +2707,10 @@ html[data-site-atlas-follow]
     overflow-x: clip;
   }
 }
-.site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-row {
-  transform-origin: 100% 0;
+/* The script wraps that triangle's rows in one picture, one compositor layer, which it
+   zooms and pans about the picture's top left corner (overview/atlas-view.js). */
+.site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-picture {
+  transform-origin: 0 0;
   will-change: transform;
 }
 /* Until the script frames it, that triangle is out of sight: the browser paints the page
@@ -2718,6 +2733,18 @@ html[data-site-atlas-follow]
 }
 .site-page .site-atlas-grid[data-atlas-follow] .site-atlas-cells {
   animation: site-atlas-unveil 0.25s ease-out both;
+}
+/* On paper that triangle prints as the reader sees it: the stage, framed and zoomed as
+   it stands, in its place, without the empty runway it is pinned for. Laid out unzoomed
+   it is several pages wide, and only the right end of each row would print. Here rather
+   than in the print block above, which these rules outrank. */
+@media print {
+  .site-atlas-runway {
+    display: none;
+  }
+  .site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-cells {
+    position: static;
+  }
 }
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
@@ -3145,6 +3172,12 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   grid-column: 3;
   justify-items: end;
   justify-self: end;
+}
+/* A step hovered or focused takes the text's ink, as the contents rail's links do, so it
+   answers the pointer under reduced motion too, where its arrow keeps still. Focus keeps
+   its ring as well. */
+.kpress .site-case-steps > a:is(:hover, :focus-visible) {
+  color: var(--kpress-doc-text);
 }
 .site-case-steps .site-icon-arrow {
   block-size: 0.75em;
@@ -4051,6 +4084,21 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
 }
 .site-credit-tally a {
   color: inherit;
+}
+
+/* Tallies (paper-design.md, Tallies). Every dot between two counts is
+   `site_tallies.TALLY_SEPARATOR`, whose two word spaces each gain `--site-tally-gap`:
+   0.35em a side in the site's sans, as the dot between a result's record links has. A
+   tally that is a line of its own, the profile directory's summary and a profile's
+   stacked counts, stands `--site-tally-space` clear of the blocks either side; where a
+   larger margin meets it, a table's or a heading's, the larger one stands. */
+.site-tally-sep {
+  word-spacing: var(--site-tally-gap);
+}
+@media screen {
+  .kpress :is(.site-profile-summary, p:has(> .site-profile-tally)) {
+    margin-block: var(--site-tally-space);
+  }
 }
 
 /* Credited people remain primary content, including historical result rows. */

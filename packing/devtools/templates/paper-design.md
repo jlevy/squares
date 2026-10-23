@@ -750,6 +750,7 @@ one of them changes.
 | Below a visible site-title H1 or H2 | `--site-title-space-below` | 2rem, 32px | `site.css` |
 | Below a page’s title, and below its subtitle | `--site-subtitle-space` | 2rem, 32px | `site.css` |
 | Above and below a table | `--site-table-space` | 2rem, 32px | `site.css` |
+| Above and below a tally set as its own line | `--site-tally-space` | 1.25rem, 20px | `site.css` |
 | Between a wide block and the edge of the page’s content area | `--site-wide-gutter` | 0.5rem, 8px | `site.css` |
 
 A page’s title, or the picture that opens the homepage, starts `--site-page-top` under
@@ -797,6 +798,30 @@ for, with each heading’s size and line height, and each table’s distance fro
 window’s edges or its popover’s. `tests/test_overview.py` pins each token’s value and
 the rule that reads it.
 
+### Tallies
+
+A tally is a line of counts with a dot between each two, such as the profile directory’s
+“75 people · 114 records · 219 results · 725 credits · 48 resources”.
+Every tally is spaced by the same two tokens (the owner, 2026-10-23: “a little more gap
+around the tallies, as a vertical gap as well”).
+
+- **Between counts.** Every dot is `site_tallies.TALLY_SEPARATOR`, a span holding a
+  space, the dot and a space, and no renderer joins counts with a bare dot.
+  `--site-tally-gap` (0.15em) widens each of its two word spaces, so the dot stands
+  0.35em from the counts in the site’s sans, the space the dot between a result’s record
+  links has. It was one word space, 0.2em. The spaces stay in the text, so a long tally
+  still wraps beside a dot.
+- **Above and below.** A tally set as a line of its own, the directory’s summary and a
+  profile’s stacked Records, Results and Credits, stands `--site-tally-space` (1.25rem)
+  clear of the blocks either side, on screen; it took a paragraph’s 0.75rem. Where a
+  larger margin meets it, a table’s below the directory’s summary or a section heading’s
+  below a profile’s counts, the larger one stands.
+  A card’s tally keeps the card’s own padding, and a table cell’s keeps the cell’s.
+
+`tests/test_overview.py` pins both tokens and the rules that read them;
+`tests/test_site_navigation.py` measures them in Chromium on the directory’s summary and
+a profile’s counts and resource cards.
+
 ## Article Pages and Overlays
 
 Case records, result records and person profiles are complete HTML pages.
@@ -812,7 +837,7 @@ come from its complete page.
 | Case record | `cases/N.html` | Case link, index entry or neighboring-record link | `a[data-case]`, atlas tiles and frontier rows load `article.site-case` in the shared case panel |
 | Result record | `result/t-nnn.html` | Result ID link or **Open Result Record** | Pressing the rest of a result row loads `article.site-result[data-result-overview]` in that row’s panel |
 | Person profile | `profiles/ID.html` | Public-name link | Native navigation reaches the complete profile from every page and open article panel |
-| Profile directory | `profiles/index.html` | Home/About **View All Profiles** button or About navigation menu | Full public names, reviewed-result/significance and credit tallies, resource counts, and public account links in a surname-sorted native table; name links navigate directly to profiles |
+| Profile directory | `profiles/index.html` | Home/About **All Profiles** button or About navigation menu | Full public names, reviewed-result/significance and credit tallies, resource counts, and public account links in a surname-sorted native table; name links navigate directly to profiles |
 | News article | `news.html#ID` | Linked announcement title or bookmarked article | Homepage and archive reuse the authored article; its profile links navigate directly |
 | Card preview | The card’s ordinary target | Native `popovertarget` button and action link | The card’s preview remains authored in the page; it is not an article fetch |
 | Framed card preview | Target page with `?view=embed` | Native card button and **Expand** | The frame loads on first opening and uses its own document |
@@ -1452,13 +1477,15 @@ contributor articles use their component sheets and the same text tokens.
   a row on this page, external off the site, right to another page of the site (Arrows,
   below).
 
-- **Collection actions.** A link to a complete collection uses **View All …**, such as
-  View All Results, View All Profiles, View All Resources, View All News, or View All
-  Learning Materials, followed by the existing decorative right-arrow component.
-  The link remains an anchor with its real destination, styled by `.site-action` inside
-  `.site-action-row`: the shared accent fill, note-sized sans label on the button-label
-  scale, 0.45rem by 0.9rem padding, 0.5rem icon gap, and the shared hover and focus
-  state.
+- **Collection actions.** A link to a complete collection uses **All …**, such as All
+  Results, All Profiles, All Resources, All News, All Papers, All Tutorials, or All
+  Posters, followed by the existing decorative right-arrow component.
+  These read **View All …** until the owner dropped the leading “View” on 2026-10-23,
+  which also made **View Visual Atlas** and **View Videos** plain **Visual Atlas** and
+  **Videos**. The link remains an anchor with its real destination, styled by
+  `.site-action` inside `.site-action-row`: the shared accent fill, note-sized sans
+  label on the button-label scale, 0.45rem by 0.9rem padding, 0.5rem icon gap, and the
+  shared hover and focus state.
 
 - **Card sizes.** A card is sized by its text, in three sizes it names in
   `data-card-size`; a card that names none is medium.
@@ -1991,6 +2018,20 @@ contributor articles use their component sheets and the same text tokens.
     view; a pressed size returns the tiles to that size’s own layout with the usual
     move. `tests/test_site_atlas_follow.py` reads all of it a frame at a time in
     Chromium, and `tests/node/overview_atlas_view` holds its arithmetic.
+  - When the following ends, by a tab, a fragment or the keyboard, the block takes the
+    size the tabs show, so Grid or the static triangle opens at the size the reader was
+    looking at, and the row at the middle of the stage keeps its place.
+  - A reader who asks for reduced motion is never followed: the bootstrap does not mark
+    the root, and the script ends the following if the setting changes.
+  - Keyboard focus moving onto a tile the stage does not show ends the following and
+    brings the tile into view; a pressed tile still opens its case and keeps it.
+  - A new width, a turned phone or the browser’s zoom lays the triangle out again in one
+    frame, after the tiles take their new size; a change of height under a fifth of the
+    stage, a phone’s toolbar coming and going, leaves it where it stands.
+  - The rows are wrapped in one picture, one compositor layer, which takes the one
+    transform; the stylesheet stops a sideways swipe over it from going back in history,
+    and prints the stage as the reader sees it, without its runway.
+  - These came from the senior engineering review of 23 October (PR 746, review A).
 
 - **Atlas scale.** A third strip chooses **Fixed**, **Row** or **Global** on the website
   only. Row is selected by default.
@@ -2074,19 +2115,18 @@ contributor articles use their component sheets and the same text tokens.
   follows, its larger space takes over (the owner, 2026-10-02, `think-0o9u`; nothing
   below until then). The rule is scoped to the page, `.kpress .site-action-row`, since
   the row is a paragraph and KPress’s `.kpress-prose p` margin outranked it, which had
-  set both of its margins to 0.75rem. Homepage actions are **Download PDF** and **View
-  Visual Atlas** beside each other under the preview, then **View all results** under
-  Recent Major Results.
-  The atlas’s **Show More** stood before **Download PDF**, and **Show Less** under the
-  dedicated Atlas, until 2026-10-22. All use uppercase labels through `paper-type.css`.
-  The Frontier, Results and Papers pages end their tables with no action, so none
-  carries one. `tests/test_site_atlas_views.py` reads **View all results** and **View
-  Visual Atlas** in Chromium at 1280 and 390 pixels and holds their colours, type,
-  height and padding to each other.
-  `tests/test_site_headroom.py` allows 0.25px of visible capital-ink centring error
-  across font rasterizers, holds arrow geometry within 0.1px and preserves the hit area.
-  Controlled label shifts of one pixel in either direction must exceed the ink limit at
-  both widths.
+  set both of its margins to 0.75rem. Homepage actions are **Download PDF** and **Visual
+  Atlas** beside each other under the preview, then **All Results** under Recent Major
+  Results. The atlas’s **Show More** stood before **Download PDF**, and **Show Less**
+  under the dedicated Atlas, until 2026-10-22. All use uppercase labels through
+  `paper-type.css`. The Frontier, Results and Papers pages end their tables with no
+  action, so none carries one.
+  `tests/test_site_atlas_views.py` reads **All Results** and **Visual Atlas** in
+  Chromium at 1280 and 390 pixels and holds their colours, type, height and padding to
+  each other. `tests/test_site_headroom.py` allows 0.25px of visible capital-ink centring
+  error across font rasterizers, holds arrow geometry within 0.1px and preserves the hit
+  area. Controlled label shifts of one pixel in either direction must exceed the ink
+  limit at both widths.
 
 - **Homepage Atlas preview.** Reuse the dedicated Atlas’s per-case SVG drawings,
   overview, view/size/scale controls, color legend, complete row and segment placement,
@@ -2112,9 +2152,13 @@ contributor articles use their component sheets and the same text tokens.
 
 - **About and Learn.** About separates the project narrative into paragraphs for its
   origins, subsequent work, independent results, and current role.
-  **Report a Result** is an H1 over the reporting invitation, which asks for the name to
-  credit and ends in a **Report a Result** button opening the repository’s result form;
-  the old `#contribute-your-results` anchor stays on the heading.
+  The narrative closes with the owner’s group-chat invitation, linked as **ojoshe on X**
+  to his X account; link text naming only the handle would become his profile link.
+  The invitation left About when the reporting invitation moved to `report.html` on
+  2026-10-22 and was restored at the owner’s request on 2026-10-23; `report.html` keeps
+  it too. **Report a Result** is an H1 over the reporting invitation, which asks for the
+  name to credit and ends in a **Report a Result** button opening the repository’s
+  result form; the old `#contribute-your-results` anchor stays on the heading.
   The overview carries a short reporting summary after Profiles, with a **Report a
   Result** link to the full invitation on `report.html`. The homepage’s **About the
   Squares Project** section links to `about.html`; Project Documentation has its own
@@ -2122,12 +2166,14 @@ contributor articles use their component sheets and the same text tokens.
   Between the narrative and reporting invitation, **Profiles** briefly introduces the
   contributors and cited authors tracked here.
   Home carries the same invitation.
-  The centered **View All Profiles** action uses the shared button and right arrow and
+  The centered **All Profiles** action uses the shared button and right arrow and
   navigates to `profiles/index.html`, whose full-name table links directly to profiles.
-  Neither invitation lists names.
-  The directory and individual profiles keep **About** active in the shared navigation;
-  their breadcrumbs return to About, with **Profiles** as the additional parent on each
-  person’s page. Learn holds Tutorial, Papers, PDFs, Visuals, and Resources sections.
+  The directory opens with the owner’s three-paragraph introduction, kept as written,
+  before its summary line and table (the owner, 2026-10-23). Neither invitation lists
+  names. The directory and individual profiles keep **About** active in the shared
+  navigation; their breadcrumbs return to About, with **Profiles** as the additional
+  parent on each person’s page.
+  Learn holds Tutorial, Papers, PDFs, Visuals, and Resources sections.
   About no longer carries Reading and Research; omit redundant Frontier Survey and
   Workbench cards from both pages (`think-h21i`).
 
@@ -2192,11 +2238,13 @@ contributor articles use their component sheets and the same text tokens.
   baseline and left edge.
   Smaller packings leave the gray reference square visible above and to the right.
   The reference used the muted-text gray until 2026-10-23, when the owner asked for a
-  lighter one: it now takes `--site-atlas-reference-ink`, the muted gray mixed halfway
-  to the page background, the same shade in every tile and in both themes lighter than
-  the container and the muted text.
-  Scaling anchors at the shared renderer’s frame inset, preserving its margins and
-  original geometry (`think-m05q`). Fixed and Global scales retain their positioning.
+  lighter one: it now takes `--site-atlas-reference-ink`, 69% muted gray mixed with the
+  page background, the lightest mix that keeps a graphic’s 3:1 contrast in both themes
+  (3.05:1 light, 4.77:1 dark), the same shade in every tile and lighter than the
+  container and the muted text.
+  A halfway mix, first chosen, read 2.14:1 in the light theme (review A, A14). Scaling
+  anchors at the shared renderer’s frame inset, preserving its margins and original
+  geometry (`think-m05q`). Fixed and Global scales retain their positioning.
   Gray reference frames use the same centered SVG stroke and displayed line width as the
   black container (`think-y6lt`). Web count labels use medium weight, up to 1rem, every
   count at the same weight: the perfect-square endpoints were bold (`think-ju2n`) until
@@ -2416,8 +2464,8 @@ contributor articles use their component sheets and the same text tokens.
   Their eyebrow label is “PDF”. The homepage video is a native inline player with
   controls, `playsinline` and `preload="none"`, showing the retained poster until
   clicked. It does not autoplay.
-  The full player also appears on `visualize.html`. Below the homepage media, **View All
-  Posters** links to `posters.html`, **View Videos** to `visualize.html`, and **Open
+  The full player also appears on `visualize.html`. Below the homepage media, **All
+  Posters** links to `posters.html`, **Videos** to `visualize.html`, and **Open
   Workbench** to `workbench/`, in the shared action row.
   Retain the poster SVG links and source README on the Posters page.
   The dedicated Atlas page contains the atlas controls and cases, without media cards.
@@ -2931,9 +2979,8 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   The table shares the full Results page’s columns, sorting, result popovers and mobile
   row cards. Filtering and older results remain on `results.html`, whose defaults are
   unchanged. A result’s ordinary link opens its canonical article without scripts.
-  One **View All Results** action follows the table and links to
-  `results.html#all-results`. The homepage omits the verification legend; the full
-  explanation is on Verification.
+  One **All Results** action follows the table and links to `results.html#all-results`.
+  The homepage omits the verification legend; the full explanation is on Verification.
 
 - **All Results.** Results is a menu container with no landing page.
   All Results (`results.html`) is the one complete sortable, filterable result table.
@@ -2943,9 +2990,9 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   Filters start with significance at All, no maximum age and Hide superseded clear, so
   every registered result shows once, newest first.
   Each row keeps its own ID (`#t-018`), shared result popover, and ordinary canonical
-  article link. The homepage retains its bounded recent preview with one **View All
-  Results** action. `recent-results.html` and `all-results.html` are compatibility
-  forwarders to `results.html`, preserving queries and result-row fragments.
+  article link. The homepage retains its bounded recent preview with one **All Results**
+  action. `recent-results.html` and `all-results.html` are compatibility forwarders to
+  `results.html`, preserving queries and result-row fragments.
   Old recent section fragments map to `#all-results` on the complete table.
   Visual Atlas (`atlas.html`) provides the graphical case directory; Frontier Survey
   (`frontier.html`) provides the complete bounds table and its reading key.
@@ -3265,7 +3312,7 @@ The Accounts column has a 16rem minimum and keeps account identifiers on one lin
 Narrow screens scroll the table inside its wrapper; resource URLs keep their own
 wrapping rules.
 
-Home and About share a short Profiles invitation and the **View All Profiles** action
+Home and About share a short Profiles invitation and the **All Profiles** action
 (`render_contributors.profile_preview`), with no name list or metadata reads.
 Breadcrumbs appear only on lower-level pages, including the Profiles directory and
 individual profiles.

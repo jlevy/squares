@@ -314,8 +314,14 @@ const EMBED_SOURCE = readFileSync(
   new URL("../../../devtools/overview/embed.js", import.meta.url),
   "utf8",
 );
-/** @param {string} search @param {string} [pathname] @returns {Record<string, string>} */
-function bootstrapped(search, pathname = "/atlas.html", hash = "") {
+/**
+ * The root attributes the head bootstrap sets for an address, for a reader who asks for
+ * reduced motion when `reduced` is true.
+ * @param {string} search @param {string} [pathname] @param {string} [hash]
+ * @param {boolean} [reduced]
+ * @returns {Record<string, string>}
+ */
+function bootstrapped(search, pathname = "/atlas.html", hash = "", reduced = false) {
   /** @type {Record<string, string>} */
   const attributes = {};
   vm.runInContext(
@@ -323,6 +329,10 @@ function bootstrapped(search, pathname = "/atlas.html", hash = "") {
     vm.createContext({
       URLSearchParams,
       location: { search, pathname, hash },
+      /** @param {string} query */
+      matchMedia: (query) => ({
+        matches: reduced && query === "(prefers-reduced-motion: reduce)",
+      }),
       document: {
         documentElement: {
           dataset: {},
@@ -411,6 +421,20 @@ void test("only a plain Atlas address from the top follows the scroll", () => {
   for (const pathname of ["/papers/n11-lower-bounds-explainer.html", "/cases/11.html"]) {
     assert.equal(bootstrapped("", pathname)["data-site-atlas-follow"], undefined, pathname);
   }
+});
+
+void test("a reader who asks for reduced motion is never followed", () => {
+  for (const pathname of ["/atlas.html", "/index.html", "/"]) {
+    const attributes = bootstrapped("", pathname, "", true);
+    assert.equal(attributes["data-site-atlas-follow"], undefined, pathname);
+    assert.equal(attributes["data-site-atlas-size"], undefined, pathname);
+  }
+  // The rest of the address keeps its meaning.
+  assert.deepEqual(bootstrapped("?size=large", "/atlas.html", "", true), {
+    "data-site-atlas-view": "triangle",
+    "data-site-atlas-size": "large",
+    "data-site-atlas-scale": "row",
+  });
 });
 
 void test("case directory migration uses the same Atlas destination for HTTP and files", () => {
