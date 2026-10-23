@@ -138,6 +138,14 @@
   };
 
   window.addEventListener("scroll", schedule, { passive: true });
+  // A layout change that keeps the reader's place scrolls the page itself, by `detail`
+  // pixels (atlas-view.js). That is not the reader's motion, so it moves no header.
+  document.addEventListener("squares:scrollshift", (event) => {
+    if (event instanceof CustomEvent && typeof event.detail === "number") {
+      lastScroll += event.detail;
+      directionStart += event.detail;
+    }
+  });
   window.addEventListener("resize", reset);
   // In-page navigation and restored history positions start with reachable navigation.
   window.addEventListener("hashchange", reset);

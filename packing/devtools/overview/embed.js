@@ -20,8 +20,22 @@
   // Both the dedicated Atlas and the homepage preview honor an explicit size.
   // An absent or invalid choice leaves the CSS viewport default in control.
   const size = query.get("size");
-  if (size === "small" || size === "medium" || size === "large") {
+  const named = size === "small" || size === "medium" || size === "large";
+  if (named) {
     document.documentElement.setAttribute("data-site-atlas-size", size);
+  }
+  // A Triangle reached from the top of either Atlas page follows the scroll, so it
+  // opens at Large (atlas-view.js). A fragment, a size, Grid or an embedding each
+  // open where they always did.
+  const grid = location.pathname.endsWith("/atlas.html") && query.get("atlas") === "grid";
+  if (
+    /\/(atlas\.html|index\.html)?$/.test(location.pathname) &&
+    location.hash.length < 2 &&
+    !named &&
+    !grid &&
+    query.get("view") !== "embed"
+  ) {
+    document.documentElement.setAttribute("data-site-atlas-follow", "");
   }
   if (query.get("view") !== "embed") {
     return;

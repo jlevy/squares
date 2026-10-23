@@ -44,8 +44,32 @@
 //
 // Scale, Row by default, changes only a drawing within its reserved tile. Row uses
 // its actual enclosing side relative to the logical row's grid side k. Global uses
-// the largest actual side among currently shown cases, updated by the expander. The
-// address names the other choices as `?scale=fixed` or `?scale=global`.
+// the largest actual side among the shown cases. The address names the other choices
+// as `?scale=fixed` or `?scale=global`.
+//
+// An untouched Triangle reached from the top of the page follows the scroll
+// (think-apqd). The head bootstrap marks the root `data-site-atlas-follow` when the
+// address names no fragment, size, Grid or embedding, and the stylesheet then paints
+// Large. The triangle is laid out once, at Large, and zoomed as one picture: each row
+// is scaled about its right end on its own compositor layer and the box takes the
+// picture's height, so a frame of zoom lays out and draws no tile. Laying the tiles out
+// again restyles all of them (about 300 inherited custom properties each) and redraws
+// every drawing, tens of milliseconds a frame, which is why it is a transform. The
+// three sizes are points on that zoom, and the tabs show the nearest.
+//
+// The focus line starts where the tiles do and moves down with the scroll to the middle
+// of the window. The row at it, taken between it and the next by how far the line has
+// gone, sets the zoom: the middle of the window stands a third of the way along that
+// row (`--site-atlas-follow-across`), which shrinks the zoom once the row is too long to
+// keep its left end in view, down to Small, or to where the case numbers would pass
+// their least size. The page scrolls to keep the reader's row under the line, so the
+// triangle zooms about that row, and the reading is a function of the scroll alone, the
+// same going up as coming down. The scroller pans to that framing, so going down, the
+// top of the triangle slides off to the right and the left side, where each row's grid
+// first breaks, stays in view. Nothing is written to the address. Pressing a size or
+// view tab, panning the triangle by hand or opening a tile by its fragment ends the
+// following for the page view; a pressed tab returns the triangle to its size's own
+// layout, and otherwise the atlas stays as the reader left it.
 //
 // The pure functions are published on `globalThis.SiteAtlasView` for the Node tests and
 // for `atlas-grid.js`, which places the tiles and calls `mount`.
@@ -57,6 +81,14 @@
   const SIZE_PARAM = "size";
   /** The query parameter that names drawing scale within each tile. */
   const SCALE_PARAM = "scale";
+  /** The sizes from the smallest. */
+  /** @type {readonly AtlasSize[]} */
+  const SIZES = ["small", "medium", "large"];
+  /** How far down the window the focus line of a following triangle stands. */
+  const FOCUS = 0.5;
+  /** How far, in pixels, the scroller may stray from where the atlas set it before the
+   * difference is taken for the reader's own pan rather than rounding. */
+  const STRAY = 2;
 
   /**
    * The triangle's row for case `n`: the k with (k - 1)^2 < n <= k^2.
@@ -111,6 +143,133 @@
    */
   function perLineAt(width, least, most, scale, gap = 0) {
     return perLine(width, least * (scale > 0 ? scale : 1), most, gap);
+  }
+
+  /**
+   * The width of one tile at `scale`, as the stylesheet works it out: as many cells of
+   * the scaled least width as fit in `width`, sharing out what the gaps leave. Not a
+   * number when the tokens are unreadable.
+   * @param {number} width
+   * @param {number} least
+   * @param {number} scale
+   * @param {number} gap
+   * @returns {number}
+   */
+  function tileAt(width, least, scale, gap = 0) {
+    const per = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
+    return Number.isFinite(per) ? (width - (per - 1) * gap) / per : Number.NaN;
+  }
+
+  /**
+   * How far a following triangle is zoomed: as far as keeps the middle of a block
+   * `room` wide `across` of the way along the row at the focus line, `span` wide when
+   * not zoomed, with that row's left end still in the block. Never more than the
+   * laid-out size, Large, and never less than `least`, Small's share of it.
+   * @param {number} room
+   * @param {number} span
+   * @param {number} across
+   * @param {number} least
+   * @returns {number}
+   */
+  function followScale(room, span, across, least) {
+    if (!(span > 0) || !(across > 0)) {
+      return 1;
+    }
+    return Math.min(1, Math.max(least, room / (2 * across * span)));
+  }
+
+  /**
+   * Where the left end of a row `width` wide stands from the left edge of a block `room`
+   * wide when the middle of the block is `across` of the way along it: never left of
+   * the edge, so a row too long for that keeps its left end in view.
+   * @param {number} room
+   * @param {number} width
+   * @param {number} across
+   * @returns {number}
+   */
+  function followLeft(room, width, across) {
+    return Math.max(0, room / 2 - across * width);
+  }
+
+  /**
+   * The size whose tile in `tiles` is nearest to `tile`, by ratio: the one the size tabs
+   * show while the zoom stands between sizes.
+   * @param {number} tile
+   * @param {Readonly<Record<AtlasSize, number>>} tiles
+   * @returns {AtlasSize}
+   */
+  function nearestSize(tile, tiles) {
+    /** @type {AtlasSize} */
+    let best = "small";
+    let distance = Number.POSITIVE_INFINITY;
+    for (const each of SIZES) {
+      const apart = Math.abs(Math.log(tile / tiles[each]));
+      if (apart < distance) {
+        best = each;
+        distance = apart;
+      }
+    }
+    return best;
+  }
+
+  /**
+   * The value `through` of the way from `from` to `to`.
+   * @param {number} from
+   * @param {number} to
+   * @param {number} through
+   * @returns {number}
+   */
+  function between(from, to, through) {
+    return from + (to - from) * through;
+  }
+
+  /**
+   * The focus line of a following triangle, from the window's top: with the page at its
+   * top, `start`, where the tiles begin, so the first reading from the top is always
+   * the first row; then lower by as far as the page has `scrolled`, until it stands
+   * `FOCUS` of the way down a window `height` high.
+   * @param {number} height
+   * @param {number} start
+   * @param {number} scrolled
+   * @returns {number}
+   */
+  function focusLine(height, start, scrolled) {
+    return Math.min(height * FOCUS, start + Math.max(0, scrolled));
+  }
+
+  /**
+   * Which of the lines whose tops are `tops`, from the top down, `at` falls on, and how
+   * far it has gone toward the next, from 0 to 1: the first line above it and the last
+   * below it, each with nothing gone.
+   * @param {readonly number[]} tops
+   * @param {number} at
+   * @returns {{ index: number, through: number }}
+   */
+  function along(tops, at) {
+    let index = 0;
+    while (index + 1 < tops.length && (tops[index + 1] ?? at) <= at) {
+      index += 1;
+    }
+    const top = tops[index];
+    const next = tops[index + 1];
+    if (top === undefined || next === undefined || !(next > top)) {
+      return { index, through: 0 };
+    }
+    return { index, through: Math.min(1, Math.max(0, (at - top) / (next - top))) };
+  }
+
+  /**
+   * The position of a right-to-left scroller, 0 at its start and negative down to
+   * `-range`, that brings `left`, read with the scroller at `scrolled`, to `edge`: 0
+   * while it already stands inside.
+   * @param {number} left
+   * @param {number} edge
+   * @param {number} scrolled
+   * @param {number} range
+   * @returns {number}
+   */
+  function panTo(left, edge, scrolled, range) {
+    return Math.min(0, Math.max(Math.min(0, -range), left + scrolled - edge));
   }
 
   /**
@@ -378,7 +537,6 @@
     scales = null,
     drawings = null,
     scoped = false,
-    beforeArrange,
     onDrawingChange,
   }) {
     const buttons = tabs === null ? [] : tabsOf(tabs);
@@ -397,6 +555,8 @@
     let priorWidth = 0;
     /** @type {Animation[]} */
     let running = [];
+    /** Whether the size and the pan follow the page's scroll, until the reader takes over. */
+    let following = false;
     const sizeQuery = new URLSearchParams(location.search).get(SIZE_PARAM);
     const namedSize = sizeQuery === "small" || sizeQuery === "medium" || sizeQuery === "large";
     let explicitSize = namedSize || block.hasAttribute("data-atlas-size-explicit");
@@ -426,8 +586,6 @@
     // neither the tiles a line holds nor the last case shown has changed. The size's
     // scale is the stylesheet's (`--site-atlas-scale`), read as the tiles are arranged.
     const arrange = () => {
-      // Visibility changes only the rows' height and scroll canvas, not this track's
-      // available width. Snapshot its geometry before completing the shown prefix.
       const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
       const style = getComputedStyle(cells);
       const least = lengthPx(style.getPropertyValue("--site-atlas-cell-min"), root);
@@ -436,7 +594,6 @@
       const width = cells.getBoundingClientRect().width;
       priorWidth = width;
       const capacity = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
-      beforeArrange?.(capacity);
       const tiles = shown();
       const last = Number(tiles.at(-1)?.dataset.atlasN);
       if (!(last >= 1)) {
@@ -667,6 +824,15 @@
     };
 
     /** @param {AtlasSize} current */
+    const showSize = (current) => {
+      for (const tab of sizeButtons) {
+        const on = tab.dataset.atlasSizeTab === current;
+        tab.setAttribute("aria-selected", String(on));
+        tab.tabIndex = on ? 0 : -1;
+      }
+    };
+
+    /** @param {AtlasSize} current */
     const markSize = (current) => {
       block.dataset.atlasSize = current;
       block.toggleAttribute("data-atlas-size-explicit", explicitSize);
@@ -677,11 +843,7 @@
           delete document.documentElement.dataset.siteAtlasSize;
         }
       }
-      for (const tab of sizeButtons) {
-        const on = tab.dataset.atlasSizeTab === current;
-        tab.setAttribute("aria-selected", String(on));
-        tab.tabIndex = on ? 0 : -1;
-      }
+      showSize(current);
     };
 
     /** @param {AtlasScale} current */
@@ -702,12 +864,40 @@
       history.replaceState(history.state, "", `${location.pathname}${search}${location.hash}`);
     };
 
+    /** How far the whole triangle is zoomed from its laid-out size: 1 for not at all. */
+    let scale = 1;
+    // A size's own layout, which a chosen size and Grid always take: the rows'
+    // transforms, the box's height and the zoom's attribute all go.
+    const unzoom = () => {
+      scale = 1;
+      delete block.dataset.atlasZoom;
+      cells.style.removeProperty("height");
+      for (const line of cells.querySelectorAll(".site-atlas-row")) {
+        if (line instanceof HTMLElement) {
+          line.style.removeProperty("transform");
+        }
+      }
+    };
+
+    // The reader has taken the atlas over: it stays as it stands, zoom and pan, and the
+    // attribute stays to keep the stylesheet's first-paint defaults off the block.
+    const hold = () => {
+      if (following) {
+        following = false;
+        block.dataset.atlasFollow = "held";
+      }
+    };
+
     /** @param {AtlasView} next */
     const select = (next) => {
       if (next === view()) {
         return;
       }
-      change(() => mark(next));
+      hold();
+      change(() => {
+        unzoom();
+        mark(next);
+      });
       if (!scoped) {
         readdress(searchFor(location.search, next));
       }
@@ -716,10 +906,14 @@
     /** @param {AtlasSize} next */
     const selectSize = (next) => {
       explicitSize = true;
-      if (next === size()) {
+      hold();
+      if (next === size() && !block.hasAttribute("data-atlas-zoom")) {
         markSize(next);
       } else {
-        change(() => markSize(next));
+        change(() => {
+          unzoom();
+          markSize(next);
+        });
       }
       readdress(searchForSize(location.search, next));
     };
@@ -735,7 +929,7 @@
       }
     };
 
-    /** Switch the existing images, including the hidden suffix, without persisting a mode.
+    /** Switch the existing images without persisting a mode.
      * @param {"regularized" | "original"} next */
     const selectDrawing = (next) => {
       if (next === block.dataset.atlasDrawing) {
@@ -788,7 +982,19 @@
       wire(tabs, (tab) => select(tab.dataset.atlasTab === "triangle" ? "triangle" : "grid"));
     }
     mark(scoped ? view() : viewOf(location.search));
-    markSize(namedSize ? asSize(sizeQuery) : explicitSize ? size() : automaticSize());
+    following =
+      document.documentElement.hasAttribute("data-site-atlas-follow") &&
+      !explicitSize &&
+      view() === "triangle";
+    if (following) {
+      // Both at once, so the triangle goes from its first paint to its zoomed drawing
+      // in one restyle.
+      block.dataset.atlasFollow = "scroll";
+      block.dataset.atlasZoom = "";
+    }
+    markSize(
+      namedSize ? asSize(sizeQuery) : explicitSize ? size() : following ? "large" : automaticSize(),
+    );
     markScale(scoped ? drawingScale() : scaleOf(location.search));
     if (sizes !== null) {
       wire(sizes, (tab) => selectSize(asSize(tab.dataset.atlasSizeTab)));
@@ -798,9 +1004,10 @@
     const fontsReady = document.fonts.ready;
     arrange();
     // An untouched default follows the viewport without a transition. Explicit
-    // query choices and even a click on the current automatic size stay fixed.
+    // query choices and even a click on the current automatic size stay fixed, and so
+    // does a size that follows, or once followed, the scroll.
     wideScreen.addEventListener("change", () => {
-      if (!explicitSize) {
+      if (!explicitSize && !block.hasAttribute("data-atlas-follow")) {
         stop();
         markSize(automaticSize());
         arrange();
@@ -839,7 +1046,218 @@
       }).observe(cells);
     }
 
-    return { arrange, change, fontsReady };
+    // The tiles of the three sizes at the block's width now, as `arrange` works them
+    // out: Small's share of Large's bounds the zoom, and the nearest names the size the
+    // tabs show.
+    const presets = () => {
+      const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+      const style = getComputedStyle(cells);
+      const least = lengthPx(style.getPropertyValue("--site-atlas-cell-min"), root);
+      const gap = lengthPx(style.getPropertyValue("--site-atlas-reference-gap"), root);
+      const width = cells.getBoundingClientRect().width;
+      /** @type {Record<AtlasSize, number>} */
+      const tiles = { small: Number.NaN, medium: Number.NaN, large: Number.NaN };
+      for (const each of SIZES) {
+        const scale = Number.parseFloat(style.getPropertyValue(`--site-atlas-scale-${each}`));
+        tiles[each] = tileAt(width, least, scale, gap);
+      }
+      return tiles;
+    };
+
+    // The triangle as laid out, before any zoom: each shown row's top below the box's,
+    // the span of its tiles and the box's height, read from the rows as drawn and
+    // divided by the zoom they are drawn at; and the least zoom, Small's share of
+    // Large, or as far as keeps the case numbers at their least size if that is more.
+    let laid = {
+      /** @type {HTMLElement[]} */
+      rows: [],
+      /** @type {number[]} */
+      tops: [],
+      /** @type {number[]} */
+      spans: [],
+      height: 0,
+      extra: 0,
+      /** @type {Record<AtlasSize, number>} */
+      tiles: { small: Number.NaN, medium: Number.NaN, large: Number.NaN },
+      least: 1,
+      across: 1 / 3,
+    };
+    const lay = () => {
+      const box = cells.getBoundingClientRect();
+      /** @type {HTMLElement[]} */
+      const rows = [];
+      /** @type {number[]} */
+      const tops = [];
+      /** @type {number[]} */
+      const spans = [];
+      let height = 0;
+      for (const line of cells.querySelectorAll(".site-atlas-row")) {
+        if (!(line instanceof HTMLElement) || line.closest("[hidden]") !== null) {
+          continue;
+        }
+        let left = Number.POSITIVE_INFINITY;
+        let right = Number.NEGATIVE_INFINITY;
+        for (const segment of line.querySelectorAll(".site-atlas-segment")) {
+          const drawn = segment.getBoundingClientRect();
+          if (drawn.width > 0) {
+            left = Math.min(left, drawn.left);
+            right = Math.max(right, drawn.right);
+          }
+        }
+        if (left < right) {
+          const drawn = line.getBoundingClientRect();
+          rows.push(line);
+          tops.push((drawn.top - box.top) / scale);
+          spans.push((right - left) / scale);
+          height = Math.max(height, (drawn.bottom - box.top) / scale);
+        }
+      }
+      const style = getComputedStyle(block);
+      const across = Number.parseFloat(style.getPropertyValue("--site-atlas-follow-across"));
+      const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+      const number = lengthPx(style.getPropertyValue("--site-atlas-follow-number"), root);
+      const legible = lengthPx(style.getPropertyValue("--site-atlas-follow-number-least"), root);
+      const tiles = presets();
+      laid = {
+        rows,
+        tops,
+        spans,
+        height,
+        // A horizontal scrollbar and the box's borders stand below the last row.
+        extra: cells.offsetHeight - cells.clientHeight,
+        tiles,
+        least: Math.min(1, Math.max(tiles.small / tiles.large, legible / number || 0)),
+        across: across > 0 ? across : 1 / 3,
+      };
+    };
+
+    // Draw the triangle zoomed to `next`: each row scaled about its right end and moved
+    // up or down by what the rows above it gained or lost, so the rows zoom as one
+    // picture about the box's top right corner, and the box's height set to the
+    // picture's, so what follows moves up or down with it. The rows are their own
+    // compositor layers (site.css), so no tile is laid out or drawn again.
+    /** @param {number} next */
+    const draw = (next) => {
+      scale = next;
+      laid.rows.forEach((line, index) => {
+        const top = laid.tops[index] ?? 0;
+        line.style.transform = `translateY(${top * (next - 1)}px) scale(${next})`;
+      });
+      cells.style.height = `${laid.height * next + laid.extra}px`;
+      showSize(nearestSize(laid.tiles.large * next, laid.tiles));
+    };
+
+    /** Where the atlas last set the scroller, and its range and width then. */
+    // Nothing is read until the first frame: the first scroll event takes its place.
+    let panned = { left: 0, range: -1, width: 0 };
+
+    // One reading a frame, all of it arithmetic on the laid-out rows but the box's
+    // place. The row at the focus line, taken between it and the next by how far the
+    // line has gone, sets the zoom (`followScale`), and the page scrolls by what the
+    // rows above that point gained or lost, so it stays under the line: the triangle
+    // zooms about the reader's row, and comes back the same way going up. The header's
+    // script hears that the scroll is the layout's (`squares:scrollshift`). Then the
+    // scroller pans to put the middle of the window `--site-atlas-follow-across` of
+    // the way along that row, never past its left end and never past the scroller's
+    // start, so the top of the triangle slides off to the right and the left side,
+    // where each row's grid first breaks, stays in view.
+    const follow = () => {
+      if (!following || view() !== "triangle") {
+        return;
+      }
+      // The first reading is taken in the first frame, when the browser lays the tiles
+      // out anyway, rather than by flushing their placement while the page starts.
+      if (laid.rows.length === 0) {
+        lay();
+      }
+      if (laid.rows.length === 0) {
+        return;
+      }
+      let box = cells.getBoundingClientRect();
+      const line = focusLine(window.innerHeight, box.top + window.scrollY, window.scrollY);
+      const point = (line - box.top) / scale;
+      const at = along(laid.tops, point);
+      const here = laid.spans[at.index] ?? 0;
+      const span = between(here, laid.spans[at.index + 1] ?? here, at.through);
+      const room = cells.clientWidth;
+      const next = followScale(room, span, laid.across, laid.least);
+      if (Math.abs(next - scale) >= 1e-4) {
+        const from = window.scrollY;
+        const shift = point * (next - scale);
+        draw(next);
+        if (Math.abs(shift) >= 0.5) {
+          window.scrollBy({ top: shift, behavior: "instant" });
+        }
+        const moved = window.scrollY - from;
+        if (moved !== 0) {
+          document.dispatchEvent(new CustomEvent("squares:scrollshift", { detail: moved }));
+        }
+        box = cells.getBoundingClientRect();
+      }
+      const edge = box.left + cells.clientLeft;
+      const width = span * scale;
+      const range = cells.scrollWidth - cells.clientWidth;
+      const left = edge + room - width - cells.scrollLeft;
+      const target = panTo(
+        left,
+        edge + followLeft(room, width, laid.across),
+        cells.scrollLeft,
+        range,
+      );
+      if (Math.abs(target - cells.scrollLeft) >= 0.5) {
+        cells.scrollLeft = target;
+      }
+      panned = { left: cells.scrollLeft, range, width: cells.clientWidth };
+    };
+
+    if (following) {
+      let waiting = false;
+      const schedule = () => {
+        if (waiting) {
+          return;
+        }
+        waiting = true;
+        requestAnimationFrame(() => {
+          waiting = false;
+          follow();
+        });
+      };
+      window.addEventListener("scroll", () => schedule(), { passive: true });
+      // A new width or the page's fonts lay the triangle out anew: read it again in the
+      // next frame, and draw it at the zoom it had, whether or not the reader has since
+      // taken over. A triangle not yet drawn zoomed has nothing to redraw.
+      const relay = () => {
+        if (block.hasAttribute("data-atlas-zoom")) {
+          requestAnimationFrame(() => {
+            lay();
+            if (cells.style.height !== "") {
+              draw(scale);
+            }
+            schedule();
+          });
+        }
+      };
+      window.addEventListener("resize", relay);
+      void fontsReady.then(relay);
+      // A scroller that strays from where the atlas set it, with its range and width
+      // unchanged, was panned by the reader: by a swipe, a wheel, its bar, or a tile the
+      // keyboard focused. A changed range or width is the layout's clamp, and is taken.
+      cells.addEventListener(
+        "scroll",
+        () => {
+          const range = cells.scrollWidth - cells.clientWidth;
+          if (range !== panned.range || cells.clientWidth !== panned.width) {
+            panned = { left: cells.scrollLeft, range, width: cells.clientWidth };
+          } else if (Math.abs(cells.scrollLeft - panned.left) > STRAY) {
+            hold();
+          }
+        },
+        { passive: true },
+      );
+      schedule();
+    }
+
+    return { arrange, change, fontsReady, hold };
   }
 
   globalThis.SiteAtlasView = {
@@ -847,6 +1265,14 @@
     widest,
     perLine,
     perLineAt,
+    tileAt,
+    followScale,
+    followLeft,
+    nearestSize,
+    between,
+    focusLine,
+    along,
+    panTo,
     place,
     viewOf,
     searchFor,

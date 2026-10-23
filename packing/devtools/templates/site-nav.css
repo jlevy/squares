@@ -14,9 +14,12 @@
   --site-shadow: oklch(0% 0 0 / 0.15);
   --site-tab-current-tint: 16%;
   --site-action-row-gap: 0.7rem;
-  --site-chooser-small-size: var(--site-font-size-control, 0.8rem);
+  /* The compact chooser strip and the filter menus that match it: an eighth under the
+     control size since 2026-10-22 (the owner), and still over the 24px a tap target
+     needs. */
+  --site-chooser-small-size: calc(var(--site-font-size-control, 0.8rem) * 0.875);
   --site-chooser-small-leading: 1.35;
-  --site-chooser-small-padding: 0.15rem 0.65rem;
+  --site-chooser-small-padding: 0.14rem 0.57rem;
   --site-header-duration: 180ms;
   --site-header-layer: 5;
   --site-icon-size: 0.85em;

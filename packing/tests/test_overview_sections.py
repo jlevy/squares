@@ -28,17 +28,21 @@ def test_canonical_atlas_targets_keep_every_tile_addressable_without_scripts() -
     grid = overview_sections.atlas_grid()
     assert overview_sections.ATLAS_DEFAULT == "triangle"
     assert 'data-atlas-view="triangle" data-atlas-size="small"' in grid
-    assert 'data-atlas-first="100" data-atlas-grid' in grid
+    assert 'data-atlas-drawing="regularized" data-atlas-grid>' in grid
     tabs = overview_sections.atlas_view_tabs()
     selected = re.findall(r'<button[^>]*aria-selected="true"[^>]*>', tabs)
     assert len(selected) == 1
     assert 'data-atlas-tab="triangle"' in selected[0]
     assert re.findall(r'id="atlas-n-(\d+)"', grid) == [str(n) for n in range(1, 325)]
     assert 'id="atlas-n-324" href="cases/324.html" data-case="324"' in grid
+    # Every tile ships shown, so the fallback is the survey's link alone: no style
+    # reveals hidden tiles or hides a button that needs the script.
     fallback = grid.split("<noscript>", 1)[1].split("</noscript>", 1)[0]
-    assert "[data-atlas-grid] .site-atlas-rest[hidden]{display:contents}" in fallback
-    assert "[data-atlas-grid] .site-atlas-toggle-row{display:none}" in fallback
-    assert 'href="frontier.html"' in fallback
+    assert fallback == (
+        '<p><a href="frontier.html">Every packing and bound in the frontier survey</a></p>'
+    )
+    tiles = grid.split('<div class="site-atlas-cells"', 1)[1].split("<noscript>", 1)[0]
+    assert " hidden" not in tiles
     assert 'href="frontier.html"' in overview_sections.page_cards()
     assert 'href="atlas.html#the-frontier-survey"' not in fallback
 
@@ -118,12 +122,17 @@ def test_atlas_preview_reuses_canonical_split_rows_and_keeps_every_case() -> Non
     assert tiles == re.findall(r'<a class="site-atlas-cell"[^>]*>.*?</a>', complete)
     assert [int(n) for n in re.findall(r'data-atlas-n="(\d+)"', preview)] == list(range(1, 325))
     assert 'data-atlas-view="triangle" data-atlas-size="small"' in preview
-    assert 'data-atlas-count="100"' in preview
+    assert "data-atlas-grid data-atlas-preview>" in preview
     assert 'id="homepage-atlas-cells"' in preview
-    assert 'data-atlas-first="100"' in preview
-    visible, rest = preview.split('<div class="site-atlas-rest" data-atlas-rest hidden>', 1)
-    assert re.findall(r'data-atlas-row="(\d+)"', visible) == list(map(str, range(1, 11)))
-    assert re.findall(r'data-atlas-row="(\d+)"', rest) == list(map(str, range(11, 19)))
+    # The homepage shows every case as the Atlas page does: no hidden box of the rest,
+    # no count to show first and no button to show more (all gone on 2026-10-22).
+    for gone in ("data-atlas-rest", "data-atlas-first", "data-atlas-count"):
+        assert gone not in preview, gone
+    assert "data-atlas-toggle" not in preview
+    assert "data-homepage-atlas-" not in preview
+    box = preview.split('<div class="site-atlas-cells"', 1)[1].split('id="pop-case"', 1)[0]
+    assert " hidden" not in box
+    assert re.findall(r'data-atlas-row="(\d+)"', preview) == list(map(str, range(1, 19)))
     assert preview.count('data-atlas-segment="non-grid"') == 18
     assert preview.count('data-atlas-segment="grid"') == 18
     for n, tile in enumerate(tiles, 1):
@@ -145,10 +154,9 @@ def test_atlas_preview_reuses_canonical_split_rows_and_keeps_every_case() -> Non
     selected = re.findall(r'<button[^>]*aria-selected="true"[^>]*>', drawing_tabs)
     assert len(selected) == 1
     assert 'data-atlas-drawing-tab="regularized"' in selected[0]
-    assert "data-atlas-toggle data-homepage-atlas-toggle" in preview
     assert preview.count("data-atlas-legend") == complete.count("data-atlas-legend")
     assert 'aria-controls="atlas-cells"' not in preview
-    assert preview.count('aria-controls="homepage-atlas-cells"') == 11
+    assert preview.count('aria-controls="homepage-atlas-cells"') == 10
     assert len(preview.encode("utf-8")) < 400_000
     for absent in (
         "data-homepage-atlas-gzip",

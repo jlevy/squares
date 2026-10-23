@@ -2234,22 +2234,37 @@ body {
    like a card and opens the case popover (Case records, below). The wash is the cell's
    background,
    behind the drawing, and it is all that changes: every line keeps the page's ink. */
-/* Expansion moves following sections. Keep the viewport fixed through that input
-   response instead of scroll-anchoring a result row below the changing atlas. */
+/* A change of view, size or zoom moves the sections after the atlas. Keep the viewport
+   fixed through it instead of scroll-anchoring a result row below the changing atlas;
+   a triangle that follows the scroll keeps the reader's row in place itself. */
 body:has([data-atlas-grid]),
 body:has([data-atlas-preview]) {
   overflow-anchor: none;
 }
 .site-page .site-atlas-grid {
   --site-wide: var(--site-wide-room);
-  --site-atlas-toggle-space: 1.2rem;
+  /* The space between the controls and the tiles. */
+  --site-atlas-controls-space: 1.2rem;
   /* Both views share the grid's readable cell minimum and gap. The script reads
      these tokens in rem or px; complete Triangle rows pan at that cell width. The size's
      scale makes Small two thirds as wide and Large half as wide again. */
   --site-atlas-cell-min: 6.4rem;
   --site-atlas-reference-gap: 0.5rem;
   --site-atlas-cell-padding: 0.3rem;
-  --site-atlas-scale: 0.667;
+  /* Each size's scale, which a following triangle also reads to tell whether a row
+     would fit at the next size (overview/atlas-view.js). */
+  --site-atlas-scale-small: 0.667;
+  --site-atlas-scale-medium: 1;
+  --site-atlas-scale-large: 1.5;
+  --site-atlas-scale: var(--site-atlas-scale-small);
+  /* A triangle that follows the scroll keeps the middle of the window this share of
+     the way along the reader's row, from its left end, where the grid first breaks.
+     It draws its case numbers at the follow size, so they still read when the zoom has
+     shrunk Large toward Small, and zooms out no further than keeps them at the least
+     size, the least the regular numbers take (overview/atlas-view.js). */
+  --site-atlas-follow-across: 0.333;
+  --site-atlas-follow-number: 1.45rem;
+  --site-atlas-follow-number-least: 0.65rem;
   /* The move between the views: one duration and one easing for every tile, read by
      the script. Reduced motion makes the switch instant, as it does every hover. */
   --site-atlas-move-duration: 360ms;
@@ -2270,25 +2285,37 @@ body:has([data-atlas-preview]) {
 html[data-site-atlas-size="small"]
   .site-page
   .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
-  --site-atlas-scale: 0.667;
+  --site-atlas-scale: var(--site-atlas-scale-small);
 }
 .site-page .site-atlas-grid[data-atlas-size="medium"],
 html[data-site-atlas-size="medium"]
   .site-page
   .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
-  --site-atlas-scale: 1;
+  --site-atlas-scale: var(--site-atlas-scale-medium);
 }
 .site-page .site-atlas-grid[data-atlas-size="large"],
 html[data-site-atlas-size="large"]
   .site-page
   .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
-  --site-atlas-scale: 1.5;
+  --site-atlas-scale: var(--site-atlas-scale-large);
 }
-/* Untouched wide-screen defaults match the first CSS paint, before JS placement. */
+/* Untouched wide-screen defaults match the first CSS paint, before JS placement. A
+   block whose size follows, or once followed, the scroll keeps its own size. */
 @media (min-width: 75rem) {
-  html:not([data-site-atlas-size]) .site-page .site-atlas-grid:not([data-atlas-size-explicit]) {
-    --site-atlas-scale: 1;
+  html:not([data-site-atlas-size])
+    .site-page
+    .site-atlas-grid:not([data-atlas-size-explicit]):not([data-atlas-follow]) {
+    --site-atlas-scale: var(--site-atlas-scale-medium);
   }
+}
+/* A Triangle reached from the top of the page opens at Large, as the script that
+   follows the scroll mounts it (embed.js marks the root). */
+html[data-site-atlas-follow]
+  .site-page
+  .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]):not(
+    [data-atlas-follow]
+  ) {
+  --site-atlas-scale: var(--site-atlas-scale-large);
 }
 /* Layout, Size, Scale and Drawings use the shared small chooser strip. Each line is
    centered over the tiles, with the compact two-column key centered beneath it;
@@ -2298,7 +2325,7 @@ html[data-site-atlas-size="large"]
   flex-wrap: wrap;
   gap: 0.6rem 1.6rem;
   justify-content: center;
-  margin-block-end: var(--site-atlas-toggle-space);
+  margin-block-end: var(--site-atlas-controls-space);
 }
 .site-atlas-grid .site-atlas-views,
 .site-atlas-grid .site-atlas-sizes,
@@ -2377,9 +2404,10 @@ html[data-site-atlas-size="large"]
 /* The triangle's column count and tile width live in the shared rule so changing
    view does not restyle every drawing's inherited properties. The count uses the same
    scaled cell minimum and gaps as Grid, and the tile fills one column after the gaps
-   are reserved. Container arithmetic also places the static Triangle before scripts. */
+   are reserved. Container arithmetic also places the static Triangle before scripts.
+   The box's own style names the largest enclosing side, Global's reference before the
+   script counts the tiles shown (`overview_sections._atlas_rows`). */
 .site-atlas-cells {
-  --site-atlas-global-side: var(--site-atlas-first-side);
   --site-atlas-cell: calc(var(--site-atlas-cell-min) * var(--site-atlas-scale));
   --site-atlas-per-line: max(
     1,
@@ -2482,9 +2510,6 @@ html[data-site-atlas-size="large"]
 /* Scale changes only the drawn enclosing square. Its layout box and the count stay
    fixed, so every row keeps its pitch and all captions retain their alignment. The
    head bootstrap selects the same ratio before the atlas programs mount. */
-.site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
-  --site-atlas-global-side: var(--site-atlas-last-side);
-}
 html:not([data-site-atlas-scale])
   .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-scale="row"])
   .site-atlas-cell,
@@ -2582,29 +2607,21 @@ html[data-site-atlas-scale="row"]
 .site-atlas-segment {
   display: contents;
 }
-/* Triangle keeps complete rows at Grid's readable drawing scale. The visible rows
-   share their actual widest canvas, centered when it fits. Wide rows retain the
-   right-origin scroll frame and left-to-right reading order within it. */
+/* Triangle keeps complete rows at Grid's readable drawing scale. Every row shares the
+   canvas of the widest, the last: row 18, of 35 tiles. The canvas is centered when it
+   fits. Wide rows retain the right-origin scroll frame and left-to-right reading order
+   within it. Whether that row keeps the extra gap before its grid suffix is the box's
+   own style (`--site-atlas-extra`, `overview_sections._atlas_rows`). */
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
   .site-atlas-cells,
 html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-cells {
-  --site-atlas-widest: 19;
-  --site-atlas-extra: var(--site-atlas-first-extra);
+  --site-atlas-widest: 35;
   --site-atlas-number-ink-size: var(--site-atlas-number-size);
   --site-atlas-number-leading: 1.15;
   direction: rtl;
   display: block;
   overflow-x: auto;
-}
-html:not([data-site-atlas-view="grid"])
-  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
-  .site-atlas-cells:has(.site-atlas-rest:not([hidden])),
-html[data-site-atlas-view="triangle"]
-  .site-atlas-grid:where([data-atlas-grid])
-  .site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
-  --site-atlas-widest: 35;
-  --site-atlas-extra: var(--site-atlas-last-extra);
 }
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
@@ -2635,6 +2652,24 @@ html[data-site-atlas-view="triangle"]
   .site-atlas-grid:where([data-atlas-grid])
   .site-atlas-row:where(:not([data-atlas-row="1"])) {
   margin-block-start: var(--site-atlas-row-gap);
+}
+/* That triangle is laid out once, at Large, and zoomed as one picture: each row is
+   its own compositor layer, scaled about its right end, and the box takes the
+   picture's height. Its case numbers are drawn at the follow size from the first
+   paint, so mounting moves nothing. */
+html[data-site-atlas-follow]
+  .site-page
+  .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]):not([data-atlas-follow])
+  .site-atlas-cells,
+.site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-cells {
+  --site-atlas-number-size: var(--site-atlas-follow-number);
+}
+.site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-cells {
+  overflow-y: hidden;
+}
+.site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-row {
+  transform-origin: 100% 0;
+  will-change: transform;
 }
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
@@ -2696,28 +2731,6 @@ html[data-site-atlas-view="triangle"]
   [data-atlas-square]
   .site-atlas-n {
   font-weight: var(--site-font-weight-sans-bold);
-}
-/* The grid shows n = 1 to 100 until its button, centred under it, places the rest. The
-   rest sit in one box the grid lays out as its own cells, so hiding them again is the
-   box's `hidden`. */
-.site-atlas-rest {
-  display: contents;
-}
-.site-atlas-rest[hidden] {
-  display: none;
-}
-
-.site-page [data-atlas-grid] .site-atlas-cell[hidden],
-.site-page [data-atlas-grid] .site-atlas-row[hidden] {
-  display: none;
-}
-
-/* The expander's row is the action row, set the grid's own space under the tiles. */
-.site-atlas-grid .site-atlas-toggle-row {
-  --site-action-space: var(--site-atlas-toggle-space);
-}
-.site-atlas-grid .site-atlas-toggle-row[hidden] {
-  display: none;
 }
 /* The film's panel for a case, which opens every case record as its visual summary
    (`.site-case-summary`, below) and a result's overview as its case (site-result.css):
@@ -3723,9 +3736,9 @@ html[data-site-atlas-view="triangle"]
   overflow: hidden;
 }
 
-/* Disclosure controls sit at the horizontal center of their content, across cards
-   and Atlas previews. Navigation actions keep their own layout roles. */
-.kpress :is(.site-news-footer, .site-atlas-toggle-row) {
+/* Disclosure controls sit at the horizontal center of their content, across cards.
+   Navigation actions keep their own layout roles. */
+.kpress .site-news-footer {
   justify-content: center;
 }
 .kpress .site-news-filters {
@@ -3780,6 +3793,9 @@ html[data-site-atlas-view="triangle"]
   display: inline-flex;
   max-inline-size: 100%;
   position: relative;
+  /* Top-aligned, so the trigger stands level with the chooser strip beside it rather
+     than on the baseline of the fieldset's larger text, a few pixels lower. */
+  vertical-align: top;
 }
 .site-filter-trigger,
 .site-filter-options button {
@@ -3800,7 +3816,7 @@ html[data-site-atlas-view="triangle"]
 }
 .site-filter-trigger {
   background: var(--kpress-doc-bg);
-  min-block-size: 1.75rem;
+  min-block-size: 1.55rem;
 }
 .site-filter-trigger [data-site-filter-summary] {
   align-items: center;
@@ -3906,6 +3922,7 @@ html[data-site-atlas-view="triangle"]
   color: var(--kpress-doc-muted);
   cursor: pointer;
   font: inherit;
+  font-size: var(--site-chooser-small-size);
   font-weight: var(--site-font-weight-sans-medium);
   padding: var(--site-chooser-small-padding);
   text-decoration: none;

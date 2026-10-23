@@ -47,7 +47,7 @@ declare function enhanceMath(): Promise<void> | undefined;
 /** The atlas's two views (`atlas-view.js`): the grid, and the triangle of rows by k. */
 type AtlasView = "grid" | "triangle";
 
-/** The atlas's three sizes of tile (`atlas-view.js`), Small the default. */
+/** The atlas's three sizes of tile (`atlas-view.js`), Small the rendered default. */
 type AtlasSize = "small" | "medium" | "large";
 
 /** Drawing scale within a reserved tile, Fixed the default. */
@@ -90,6 +90,14 @@ interface SiteAtlasViewApi {
   widest(last: number): number;
   perLine(width: number, least: number, most: number, gap?: number): number;
   perLineAt(width: number, least: number, most: number, scale: number, gap?: number): number;
+  tileAt(width: number, least: number, scale: number, gap?: number): number;
+  followScale(room: number, span: number, across: number, least: number): number;
+  followLeft(room: number, width: number, across: number): number;
+  nearestSize(tile: number, tiles: Readonly<Record<AtlasSize, number>>): AtlasSize;
+  between(from: number, to: number, through: number): number;
+  focusLine(height: number, start: number, scrolled: number): number;
+  along(tops: readonly number[], at: number): { index: number; through: number };
+  panTo(left: number, edge: number, scrolled: number, range: number): number;
   place(n: number, per: number, starts?: AtlasGridStarts): AtlasTrianglePlace;
   viewOf(search: string): AtlasView;
   searchFor(search: string, view: AtlasView): string;

@@ -421,3 +421,65 @@ void test("Global reference is the largest actual side among this instance's sho
   assert.equal(atlas.largestSide([1, 10]), 10);
   assert.equal(atlas.largestSide([1, 10, 18]), 18);
 });
+
+// A triangle that follows the scroll (think-apqd) is drawn once at Large and zoomed as
+// one picture; these are the arithmetic it reads each frame. The browser tests hold the
+// page to the same behaviour as drawn.
+void test("A size's tile is the stylesheet's: whole cells of the scaled least width", () => {
+  // 1349px at 6.4rem cells and 0.5rem gaps, the dedicated Atlas on a 1440px window.
+  assert.equal(atlas.tileAt(1349, 102.4, 1.5, 8), (1349 - 7 * 8) / 8);
+  assert.equal(atlas.tileAt(1349, 102.4, 0.667, 8), (1349 - 16 * 8) / 17);
+  assert.equal(atlas.tileAt(1349, 102.4, 1, 8), (1349 - 11 * 8) / 12);
+  assert.ok(Number.isNaN(atlas.tileAt(1349, Number.NaN, 1, 8)));
+});
+
+void test("The zoom keeps the middle a third along the row with its left end in view", () => {
+  // Short rows stay at the laid-out size; a long one zooms out just enough.
+  assert.equal(atlas.followScale(930, 400, 1 / 3, 0.45), 1);
+  assert.equal(atlas.followScale(930, 2000, 1 / 3, 0.45), 930 / ((2 / 3) * 2000));
+  // Never past the least zoom, and a nonsense row or share leaves it alone.
+  assert.equal(atlas.followScale(930, 9000, 1 / 3, 0.45), 0.45);
+  assert.equal(atlas.followScale(930, 0, 1 / 3, 0.45), 1);
+  assert.equal(atlas.followScale(930, 2000, 0, 0.45), 1);
+  // At that zoom the left end is exactly at the edge.
+  const width = 2000 * atlas.followScale(930, 2000, 1 / 3, 0.45);
+  assert.ok(Math.abs(atlas.followLeft(930, width, 1 / 3)) < 1e-9);
+  assert.equal(atlas.followLeft(930, 600, 1 / 3), 465 - 200);
+  assert.equal(atlas.followLeft(930, 1500, 1 / 3), 0);
+});
+
+void test("The focus line starts at the tiles and moves down with the page to the middle", () => {
+  assert.equal(atlas.focusLine(1000, 300, 0), 300);
+  assert.equal(atlas.focusLine(1000, 300, 150), 450);
+  assert.equal(atlas.focusLine(1000, 300, 900), 500);
+  assert.equal(atlas.focusLine(1000, 300, -40), 300);
+  // Tiles that begin below the middle are below the line at the top: the first row.
+  assert.equal(atlas.focusLine(1000, 800, 0), 500);
+});
+
+void test("A line falls on a row and a share of the way to the next", () => {
+  const tops = [0, 100, 200];
+  assert.deepEqual({ ...atlas.along(tops, -10) }, { index: 0, through: 0 });
+  assert.deepEqual({ ...atlas.along(tops, 50) }, { index: 0, through: 0.5 });
+  assert.deepEqual({ ...atlas.along(tops, 100) }, { index: 1, through: 0 });
+  assert.deepEqual({ ...atlas.along(tops, 250) }, { index: 2, through: 0 });
+  assert.deepEqual({ ...atlas.along([], 50) }, { index: 0, through: 0 });
+  assert.equal(atlas.between(10, 20, 0.25), 12.5);
+});
+
+void test("A right-to-left scroller pans by what brings a row's left end to its place", () => {
+  // Read 383px left of the edge with the scroller already 466px along.
+  assert.equal(atlas.panTo(-343, 40, -466, 5584), -849);
+  // Already inside: the start. Past the scroller's range: its end.
+  assert.equal(atlas.panTo(200, 40, 0, 5584), 0);
+  assert.equal(atlas.panTo(-9000, 40, 0, 5584), -5584);
+  assert.equal(atlas.panTo(-9000, 40, 0, -3), 0);
+});
+
+void test("The tabs show the size whose tile is nearest the zoom, by ratio", () => {
+  const tiles = { small: 72, medium: 105, large: 161 };
+  assert.equal(atlas.nearestSize(72, tiles), "small");
+  assert.equal(atlas.nearestSize(80, tiles), "small");
+  assert.equal(atlas.nearestSize(95, tiles), "medium");
+  assert.equal(atlas.nearestSize(140, tiles), "large");
+});

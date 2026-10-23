@@ -1073,8 +1073,8 @@ contributor articles use their component sheets and the same text tokens.
   `--site-title-space-below`); compact Legend and introduction-card headings keep their
   own spacing. The hero graphic opens the case popover, with the case-record link as its
   no-script fallback. Case popovers offer separate record, Frontier-row and Atlas-tile
-  actions. Atlas case targets fully expand the grid before scrolling to and highlighting
-  the requested tile. Every row containing one card is centered.
+  actions. An Atlas case target scrolls to and highlights the requested tile.
+  Every row containing one card is centered.
   The full project narrative and attribution live on About.
   The homepage keeps a concise destination action instead of repeating that material.
 
@@ -1171,8 +1171,8 @@ contributor articles use their component sheets and the same text tokens.
   Clicking or tapping the card or its small shared arrow in the footer expands or
   contracts it inline; Enter and Space activate the button.
   A short fade marks the clipped edge.
-  News and Atlas disclosure footers center their expand/contract control on the content
-  through one shared rule; ordinary navigation actions keep their own roles.
+  News disclosure footers center their expand/contract control on the content through
+  one rule; ordinary navigation actions keep their own roles.
   Height, fade and arrow rotation share the existing motion timing and honor reduced
   motion. Hover adds a subtle green wash without changing height.
   Article links retain their ordinary actions; body-link focus reveals the article.
@@ -1278,7 +1278,7 @@ contributor articles use their component sheets and the same text tokens.
   distinction, verification requirements, gap, decimals, and table controls.
   Audits and case histories belong in the case records.
   A **Frontier Row** action reaches `#n-N` in the survey table; an **Atlas Tile** action
-  reaches `#atlas-n-N` in the fully expanded graphical grid.
+  reaches `#atlas-n-N` in the graphical grid.
   The homepage preview, posters and film also draw from the Atlas.
   Legacy Atlas survey fragments (`#the-frontier-survey`, `#the-survey`,
   `#best-known-results`, `#frontier-table`, and `#n-N`) reach the corresponding Frontier
@@ -1646,15 +1646,15 @@ contributor articles use their component sheets and the same text tokens.
   Use it for explicit file-download actions; the homepage **Download PDF** action sits
   immediately before **Explore the Atlas** and downloads the complete 1–324 poster.
   PDF cards continue to open their documents in the browser.
-  Every in-place expand/collapse action uses this pair, including both the homepage SVG
-  preview and the dedicated Atlas grid (**Action under a table or grid**, below).
+  Every in-place expand/collapse action uses this pair, such as the recent table’s
+  **Earlier results** (**Action under a table or grid**, below).
   - Inline markup carries `<span class="site-icon-arrow" data-arrow="right">`, written
     only by `overview_sections.arrow_icon(direction)`: a case record’s steps to its
     neighbours (left before the previous case, right after the next), which the left and
     right arrow keys follow in the case popover, the overview’s “All Results” button
-    (right) and the atlas’s expander (double-down, then double-up).
+    (right) and the recent table’s **Earlier results** (double-down, then double-up).
     The atlas popover’s stepper, two buttons left and right, went with that popover on
-    2026-10-03.
+    2026-10-03, and the atlas’s expander on 2026-10-22.
   - The icons CSS draws are pseudo-elements painted from the same token: a card’s corner
     icon and its popover’s button, chosen by `data-go` (down to a row on this page,
     external off the site, right to another page of the site, such as the case popover’s
@@ -1801,12 +1801,14 @@ contributor articles use their component sheets and the same text tokens.
   pressed, in both themes.
   `tests/test_site_drawing_hover.py` checks the loaded SVG, its geometry and exact
   painted colours, and contrast against its own canvas.
-  All 324 cells arrive as visible static markup with reserved image dimensions on the
-  dedicated Atlas. The homepage preview initially hides cases beyond its first hundred.
-  Images use native lazy loading, and `overview/atlas-grid.js` changes visibility after
-  reader input. Each drawing has a 1000-unit frame, fine enough to show large.
-  Triangle at Small is the atlas’s default; Grid remains available under the view tabs
-  (**Atlas views**, below).
+  All 324 cells arrive as visible static markup with reserved image dimensions, on the
+  dedicated Atlas and the homepage alike; the homepage’s preview showed only its first
+  hundred until 2026-10-22. Images use native lazy loading, and `overview/atlas-grid.js`
+  prepares them row by row after first paint.
+  Each drawing has a 1000-unit frame, fine enough to show large.
+  Triangle is the atlas’s default view, following the scroll from Large when reached
+  from the top of the page (**Atlas follows the scroll**, below); Grid remains available
+  under the view tabs (**Atlas views**, below).
 
 - **Atlas views.** The atlas is one set of tiles under two views, **Grid** and
   **Triangle**, chosen by a strip over the tiles (`atlas_view_tabs`): the section tabs’
@@ -1822,11 +1824,11 @@ contributor articles use their component sheets and the same text tokens.
   ending at $k^2$. The perfect squares $1, 4, 9, 16, \ldots$ are the cases whose best
   packing is the $k \times k$ grid itself, and their tiles are numbered in the text’s
   colour at the medium weight.
-  Ten rows show the first hundred cases, the last 19 tiles wide; eighteen show all 324,
-  the last 35 wide. A one-line key under the triangle said what the rows are until
-  2026-10-02, when the owner dropped it as obvious (`think-l38m`), with the line under
-  the expander that said every case is in the frontier survey and has a case record:
-  each tile opens its case record, and the Frontier page is a page card.
+  Eighteen rows show all 324 cases, the last 35 tiles wide.
+  A one-line key under the triangle said what the rows are until 2026-10-02, when the
+  owner dropped it as obvious (`think-l38m`), with the line under the expander that said
+  every case is in the frontier survey and has a case record: each tile opens its case
+  record, and the Frontier page is a page card.
   The address names Grid as `?atlas=grid`; Triangle has no parameter and is selected
   when the parameter is absent or invalid.
   Existing `?atlas=triangle` links also open Triangle.
@@ -1858,23 +1860,22 @@ contributor articles use their component sheets and the same text tokens.
   tested against an independent layout in Node (`tests/node/overview_atlas_view`). The
   script writes custom properties; the stylesheet places the tiles within the two
   segment containers, whose static metadata matches placement before atlas scripts run.
-  Resize and the expander repeat the placement.
+  Resize repeats the placement.
   Grid flattens the segment containers into its ordinary layout.
   A tile shares the block’s width after reserving the gaps, and uses Grid’s drawing
   inset, so switching layouts preserves the drawing size.
   At Medium, Grid holds ten tiles at 1280 pixels and four on a 390-pixel phone.
-  Triangle keeps that drawing width across ten complete rows, or eighteen when all 324
-  cases show. The controls and legend are centered above the scroll frame.
-  **The move.** A change of view, and the expander’s change in either view, moves every
-  tile from where it was to where it is: one read of every tile’s box and of each
-  element after the tiles, the change of layout, one read more, then one Web Animation a
-  tile on `transform` alone, a translation and a scale about the tile’s corner, all
-  started in one batch for `--site-atlas-move-duration` (360ms) with
-  `--site-atlas-move-easing` (an ease-out).
-  A tile outside the window before and after is not animated; a tile the expander shows
-  for the first time fades in.
-  The tile viewport grows or shrinks over the same 360ms, revealing prepared rows
-  smoothly and moving following content through normal page flow.
+  Triangle keeps that drawing width across all eighteen complete rows.
+  The controls and legend are centered above the scroll frame.
+  **The move.** A change of view moves every tile from where it was to where it is: one
+  read of every tile’s box and of each element after the tiles, the change of layout,
+  one read more, then one Web Animation a tile on `transform` alone, a translation and a
+  scale about the tile’s corner, all started in one batch for
+  `--site-atlas-move-duration` (360ms) with `--site-atlas-move-easing` (an ease-out).
+  A tile outside the window before and after is not animated; a tile that had no box
+  before the change fades in.
+  The tile viewport grows or shrinks over the same 360ms, moving following content
+  through normal page flow.
   Changes without a height reveal move following content with FLIP. Under
   `prefers-reduced-motion: reduce` the duration is 0ms and the view switches at once.
   A second press mid-move reads the tiles where they have got to, cancels the first move
@@ -1910,6 +1911,36 @@ contributor articles use their component sheets and the same text tokens.
   `devtools.measure_atlas_views` measures every layout at every size (`layout`), times
   the changes of size in each view (`move`) and pictures them (`shots`).
 
+- **Atlas follows the scroll.** A Triangle reached from the top of either Atlas page,
+  with no size, Grid, fragment or embedding in the address, follows the page’s scroll
+  (think-apqd, the owner, 2026-10-22). The head bootstrap marks the root
+  `data-site-atlas-follow`, so the first paint is already Large, and `atlas-view.js`
+  then keeps it there until the reader scrolls.
+  - The triangle is laid out once, at Large, and zoomed as one picture: each row is its
+    own compositor layer scaled about its right end, and the box takes the picture’s
+    height, so the page below moves with it.
+    Laying the tiles out again per frame cost about 60 milliseconds, since every tile
+    carries some 300 inherited custom properties and every drawing is redrawn; the
+    transform costs a normal frame.
+  - The focus line starts where the tiles begin and moves down with the scroll to the
+    middle of the window.
+    The middle of the window stands a third of the way along the row at that line
+    (`--site-atlas-follow-across`), where each row’s grid first breaks.
+    The zoom shrinks once that row is too long to keep its left end in view, down to
+    Small or to where the case numbers, drawn at `--site-atlas-follow-number`, would
+    pass `--site-atlas-follow-number-least`. Going down, the top of the triangle slides
+    off to the right, the triangle zooms out, and the scroller pans along the left side.
+  - The page scrolls to keep the reader’s row under the focus line, so the zoom turns
+    about that row and is a function of the scroll alone: going back up retraces it to
+    Large at the top. That scroll is announced as `squares:scrollshift`, so the header
+    does not take it for the reader’s.
+  - The size tabs show the size nearest the zoom, and nothing is written to the address.
+    A pan by hand, a size or view tab, or a jump to a tile’s fragment ends the following
+    for the page view and leaves the atlas as the reader has it; a pressed size returns
+    the tiles to that size’s own layout with the usual move.
+    `tests/test_site_atlas_follow.py` reads all of it a frame at a time in Chromium, and
+    `tests/node/overview_atlas_view` holds its arithmetic.
+
 - **Atlas scale.** A third strip chooses **Fixed**, **Row** or **Global** on the website
   only. Row is selected by default.
   Fixed retains equal displayed enclosing-container sizes.
@@ -1922,7 +1953,7 @@ contributor articles use their component sheets and the same text tokens.
   line width and bottom-left edges at each Row scale.
   It sits inside the image margin, appears in both layouts, and disappears in Fixed and
   Global. Global scales each drawing against the largest enclosing side among the cases
-  currently shown, recalculating when the atlas expands or collapses.
+  shown, every case on either page; the box of tiles names that side before scripts run.
   Row uses those logical groups in either view, independent of responsive wrapping.
   Size still controls tile slots; scale changes only drawing size, preserving count
   positions, complete rows and the regular-grid separator.
@@ -1992,14 +2023,15 @@ contributor articles use their component sheets and the same text tokens.
   follows, its larger space takes over (the owner, 2026-10-02, `think-0o9u`; nothing
   below until then). The rule is scoped to the page, `.kpress .site-action-row`, since
   the row is a paragraph and KPress’s `.kpress-prose p` margin outranked it, which had
-  set both of its margins to 0.75rem. Homepage actions are **Show More**, **Download
-  PDF** and **Explore the Atlas** beside each other under the preview, then **View all
-  results** under Recent Major Results.
-  All use uppercase labels through `paper-type.css`. The dedicated Atlas’s expander uses
-  the same style. The Frontier, Results and Papers pages end their tables with no action,
-  so none carries one.
-  `tests/test_site_atlas_views.py` reads both in Chromium at 1280 and 390 pixels and
-  holds their colours, type, height, padding and centring to each other.
+  set both of its margins to 0.75rem. Homepage actions are **Download PDF** and **View
+  Visual Atlas** beside each other under the preview, then **View all results** under
+  Recent Major Results.
+  The atlas’s **Show More** stood before **Download PDF**, and **Show Less** under the
+  dedicated Atlas, until 2026-10-22. All use uppercase labels through `paper-type.css`.
+  The Frontier, Results and Papers pages end their tables with no action, so none
+  carries one. `tests/test_site_atlas_views.py` reads **View all results** and **View
+  Visual Atlas** in Chromium at 1280 and 390 pixels and holds their colours, type,
+  height and padding to each other.
   `tests/test_site_headroom.py` allows 0.25px of visible capital-ink centring error
   across font rasterizers, holds arrow geometry within 0.1px and preserves the hit area.
   Controlled label shifts of one pixel in either direction must exceed the ink limit at
@@ -2009,24 +2041,23 @@ contributor articles use their component sheets and the same text tokens.
   overview, view/size/scale controls, color legend, complete row and segment placement,
   with responsive Small/Medium sizing and Row drawing scale by default.
   Preserve drawing geometry and colors with case-number labels (`think-hyd6`,
-  `think-ngcg`). Initially show 100 cases in Triangle; Grid completes the preview’s
-  rectangular rows for the chosen size and width, as on the dedicated page.
+  `think-ngcg`). Show all 324 cases, as the dedicated page does, in Triangle by default;
+  Grid sets them in rectangular rows for the chosen size and width.
   Both pages use the same tile markup, `SiteAtlasView` layout and animation.
   Center the complete canvas when it fits; when it is wider than the viewport, preserve
   the complete rows and horizontal panning to either endpoint.
   All 324 case links and image references ship in the page.
-  Prepare hidden SVG drawings during startup so expansion can reveal the existing rows
-  smoothly, with reserved tile and image dimensions.
-  **Show More** updates the layout and animates to all 324 cases; **Show Less** restores
-  the complete preview.
-  The DOM and animation need no click-time preparation.
+  Prepare the SVG drawings row by row during startup, with reserved tile and image
+  dimensions, so a change of view or size needs no click-time preparation.
   Immutable image loading is distinct from layout readiness; cached or prepared drawings
   do not imply that every browser performs zero later requests.
   Persistent case links retain case popovers and ordinary page destinations.
   The homepage instance keeps its state local; dedicated Atlas controls and URL state
   retain their existing behavior.
-  Without scripting, the homepage shows its first 100 cases and Explore link; the
-  dedicated Atlas exposes all 324 cases.
+  Without scripting, both pages show all 324 cases, and the homepage keeps its **View
+  Visual Atlas** link.
+  Until 2026-10-22 the homepage opened on its first 100 cases with a **Show More**
+  button (**Atlas expander**, below).
 
 - **About and Learn.** About separates the project narrative into paragraphs for its
   origins, subsequent work, independent results, and current role.
@@ -2049,38 +2080,25 @@ contributor articles use their component sheets and the same text tokens.
   About no longer carries Reading and Research; omit redundant Frontier Survey and
   Workbench cards from both pages (`think-h21i`).
 
-- **Atlas expander.** The dedicated Atlas initially targets 100 cases (`ATLAS_FIRST`),
-  finishing whole rectangular Grid rows or square-number Triangle groups for the current
-  width and tile size (`think-b2o9`). One button, centred under it, reads **Show More**
-  with the double chevron down and expands the grid in place; it then reads **Show
-  Less** with the chevron up and collapses it.
-  It carries `aria-expanded` and `aria-controls` (the box of tiles, `ATLAS_PANEL`), and
-  its name for assistive technology says what it does and how many cases that is, “Show
-  more: all 324 cases” and “Show less: the first N”, with N updated for the completed
-  preview rows; the visible label stays short.
-  The expander’s row ends the block: the sentence that followed it is gone since
-  2026-10-02 (`think-l38m`), and the next section’s heading brings its own space.
-  It is the action under a table or grid (above), set `--site-atlas-toggle-space` below
-  the grid. All 324 links ship in the page.
-  The dedicated Atlas retains each row, segment and link in place; changing its
-  collapsed cutoff hides out-of-prefix cells and empty rows without cloning drawings or
-  losing case state. The homepage uses the same complete-row cutoff and persistent
-  row/segment geometry, with its own panel and local control state.
-  The remaining box uses `display: contents`, and expansion reveals it; the expanded
-  case count is strictly 324. Grid hides cells beyond its complete-row cutoff and their
-  empty row containers; Triangle keeps the first ten logical rows.
-  Collapsing keeps the button in view.
-  The case popover steps through all 324 cases from any cell, the grid expanded or not,
-  since a step loads the neighbouring record in place and closing returns focus to the
-  cell pressed. Without scripting the button’s row stays `hidden`, since it would do
-  nothing. In the dedicated triangle, expansion retains the readable drawing size and
-  widens its complete-row scroll canvas from 19 to 35 tiles.
-  The dedicated Atlas starts expanded to 324 cases; the homepage starts with its
-  complete preview around 100. Either can collapse to its complete preview or expand to
-  324\. Reloading the dedicated Atlas restores all 324 cases.
-  Their fitting canvases are centered; complete rows pan horizontally when they exceed
-  the viewport. Shared FLIP animates the actual centered positions, with instant geometry
-  under reduced motion.
+- **Atlas expander.** Retired on 2026-10-22 (the owner): both surfaces now show all 324
+  cases, with scripts or without, and the tiles end the block.
+  Until then one button, centred under the tiles, read **Show More** with the double
+  chevron down and **Show Less** with it up; the homepage opened on its first hundred
+  cases (`ATLAS_FIRST`, finishing whole Grid rows or Triangle’s first ten rows,
+  `think-b2o9`), the dedicated Atlas opened on all 324 and could collapse to them, and
+  the cases past the cutoff waited in a hidden box.
+  With the button went the hidden box, the cutoff, the stylesheet’s switch from the
+  hundred cases’ 19-tile triangle to all 324 cases’ 35, the homepage’s status line for a
+  missing script, and the no-script style that revealed the rest.
+  The triangle’s static canvas is now the widest row’s 35 tiles, and the box of tiles
+  names its last row’s extra gap and Global’s reference side itself.
+  The case popover steps through all 324 cases from any cell, since a step loads the
+  neighbouring record in place and closing returns focus to the cell pressed.
+  A diagram fragment, `#atlas-n-N`, finishes any move, focuses its tile and centres it
+  in the window. Fitting canvases are centered; complete rows pan horizontally when they
+  exceed the viewport.
+  Shared FLIP animates the actual centered positions, with instant geometry under
+  reduced motion.
 
 - **Wide bleed.** A wide block (`.site-wide`) takes the wide track, `--site-wide`, less
   the page gutters (`--site-wide-gutter` on either side; **Spacing**, above).
@@ -2137,10 +2155,12 @@ contributor articles use their component sheets and the same text tokens.
 
 - **Small choosers.** Inline single-select and multi-select choices share the homepage
   Atlas’s `site-tabs site-chooser-small` component in `site-nav.css`. The text uses the
-  Results widget control size, 1.35 leading, and 0.15rem by 0.65rem padding
-  (`think-ticj`). Borders, hover, keyboard focus and motion use the same rules on every
-  page. Topic choices inside the shared multiselect disclosure always use the common
-  neutral News surface with topic-colored ink and a check when selected.
+  Results widget control size scaled by seven eighths, 1.35 leading, and 0.14rem by
+  0.57rem padding (`think-ticj`; a little smaller, the owner, 2026-10-22), which keeps
+  every chooser at least 24 pixels tall.
+  Borders, hover, keyboard focus and motion use the same rules on every page.
+  Topic choices inside the shared multiselect disclosure always use the common neutral
+  News surface with topic-colored ink and a check when selected.
   They have no label underline or inset selection mark.
   Single-select tabs keep `aria-selected` and arrow-key navigation; multi-select groups
   use native buttons with `aria-pressed`. Group names remain accessible when visually
@@ -2201,8 +2221,6 @@ contributor articles use their component sheets and the same text tokens.
   Gray Row reference frames paint behind the black packing container.
   Bounds, algebraic degrees, and evidence icons belong in the case popover.
   The PDF graphics retain their full labels.
-  Homepage and dedicated Atlas expansion controls share **Show More**/**Show Less**
-  labels and double chevrons.
 
 - **Case badges.** A case’s properties have one mark on the site, the film’s badges:
   optimal (O), exact (=), numerical (≈) and known rigid (one dark R), each its glyph in
