@@ -5,15 +5,17 @@ title: Separate Verification guide from Results Archive and link detailed Projec
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
 delegate: navigation-verification
 labels: []
 dependencies: []
 parent_id: is-01m5jnsqdwj3t8m7hkbx6mr1m2
+child_order_hints:
+  - is-01m5k10pmfkyxsjv9wysmgvpv7
 hold: null
 hold_until: null
 created_at: 2026-10-22T23:58:50.023Z
-updated_at: 2026-10-22T23:59:01.058Z
+updated_at: 2026-10-23T00:01:50.217Z
 started_at: 2026-10-22T23:59:01.056Z
 ---
