@@ -476,7 +476,14 @@ record’s statement of the rule:
   The 15 October packet’s retained program computes it exactly to 1073, where its reach
   ends, and a count beyond that is refused.
   A register row above it stays listed and is marked
-  ([frontier README](../frontier/README.md#source-coverage-and-freshness)).
+  ([frontier README](../frontier/README.md#source-coverage-and-freshness)). From the day
+  of the answer (`intake_ledger.GOEBEL_FROM`) every reading takes it beyond 324: a start
+  `gather` freezes holds it as a member, the claims importer compares each certificate
+  with it (`upper_bound_reports.goebel_construction`), and so does the replay’s standing
+  side. A reading from before keeps what it froze, so the earlier ledgers and claim
+  records stand as written.
+  The Fang inventory stays on recorded rows, since it measures the excess over what the
+  record holds (think-a75a).
 - **A certificate its author withdrew from an issue is not a report** (think-8m4k): “a
   watched certificate its author withdrew from an issue, claiming a lower file later, is
   NOT a report.” A file in the author’s watched repository that his issue withdrew, where

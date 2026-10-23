@@ -1929,3 +1929,55 @@ def test_both_routes_meet_contact_and_refuse_1e30_past_it_at_719s_105(
     for route in kernel.ROUTES:
         assert verdicts[route]["passed"] is not past, route
         assert verdicts[route][margin] == (-kernel.SHARP_EPSILON if past else 0), route
+
+
+def _beyond_row(n: int, side: Fraction, read_on: str) -> tuple[Any, legacy.Certificate, Any]:
+    """One certificate beyond the horizon, in a declaration read on ``read_on``."""
+    row = {
+        "n": n,
+        "path": f"certificates/n{n}.cert",
+        "format": "rational",
+        "offered": str(side),
+        "first_committed": f"{read_on}T00:00:00Z",
+    }
+    declaration = {
+        "issue": "#999",
+        "read_on": read_on,
+        "houses": [],
+        "pending": [],
+        "requested": [n],
+        "replayed": [n],
+    }
+    return row, legacy.Certificate(n, side, ()), declaration
+
+
+def _unread(reader: str, n: int) -> Fraction:
+    raise AssertionError(f"n = {n}: no case is read beyond the horizon ({reader})")
+
+
+def test_a_declaration_read_from_23_october_stands_beyond_324_on_goebel_s_construction() -> (
+    None
+):
+    """Review A of #754, A2 (think-v022), on the owner's answer on #613 (think-8krd):
+    Göbel's constructions are the baseline beyond n = 324. A declaration read on or after
+    23 October 2026 compares each certificate beyond the horizon with Göbel's construction
+    at its count as well as the grid, so a side above it is not the smallest. One read
+    before keeps the grid alone, as the 15 frozen claim records do; beyond 1073, where the
+    retained program gives no construction, the newer reading refuses."""
+    above = Fraction("19.71")  # 369: Göbel's 19 + 1/2*sqrt(2) is 19.7071..., the grid 20
+    row, certificate, declaration = _beyond_row(369, above, "2026-10-23")
+    later = cast("dict[str, Any]", reports.claim_row(row, certificate, declaration, _unread))
+    assert later["smallest"] == "Göbel's construction"
+    assert later["construction"]["form"] == "19 + 1/2*sqrt(2)"
+    assert later["construction"]["relation"] == "above"
+    assert "above Göbel's construction 19 + 1/2*sqrt(2)" in reports.comparison(later)
+    row, certificate, declaration = _beyond_row(369, above, "2026-10-22")
+    earlier = cast("dict[str, Any]", reports.claim_row(row, certificate, declaration, _unread))
+    assert earlier["smallest"] == reports.THIS
+    assert "construction" not in earlier
+    row, certificate, declaration = _beyond_row(369, Fraction("19.7"), "2026-10-23")
+    below = cast("dict[str, Any]", reports.claim_row(row, certificate, declaration, _unread))
+    assert (below["smallest"], below["construction"]["relation"]) == (reports.THIS, "below")
+    row, certificate, declaration = _beyond_row(1074, Fraction("32.9"), "2026-10-23")
+    with pytest.raises(reports.ReportError, match="no side above 1073"):
+        reports.claim_row(row, certificate, declaration, _unread)

@@ -1605,3 +1605,21 @@ def test_deletions_of_two_or_three_squares_stay_held_for_the_owner() -> None:
         (752, "think-kzme", None),
         (927, "think-kzme", None),
     ]
+
+
+def test_a_claim_record_read_from_23_october_stands_on_goebel_s_construction() -> None:
+    """Review A of #754, A2 (think-v022): the replay's standing side follows the claims
+    importer's. A frozen claim record read on or after 23 October 2026 takes Göbel's
+    construction beyond 324 into the standing side, so a publication above it is not below
+    the standing side; one read before stands at the rows and the grid, as every frozen
+    record does; beyond 1073 the newer reading refuses."""
+    result = {"n": 369, "case": None, "pending": [], "grid_side": "20"}
+    above, under = Fraction("19.71"), Fraction("19.7")
+    later = replay.standing_sides({"read_on": "2026-10-23", "results": [result]}, [369], {})
+    assert later[369].covers(above)
+    assert later[369].form == "19 + 1/2*sqrt(2)"
+    assert not later[369].covers(under)
+    earlier = replay.standing_sides({"read_on": "2026-10-22", "results": [result]}, [369], {})
+    assert not earlier[369].covers(above)
+    with pytest.raises(replay.ReplayError, match="no side above 1073"):
+        replay.standing_sides({"read_on": "2026-10-23", "results": []}, [1074], {})

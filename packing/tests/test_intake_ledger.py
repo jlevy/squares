@@ -1344,3 +1344,74 @@ def test_refinements_render_with_their_packing_and_form_a_chain() -> None:
     both = copy.deepcopy(data)
     both["reports"][0]["claims"][0]["new_packing"] = {"source": "x"}
     assert "not both" in " ".join(ledger.problems(both))
+
+
+#: The span a frozen start member stores, which `recomputed` gives again.
+SPAN_KEYS = ("model", "low", "high", "open_low", "open_high")
+
+
+def test_a_start_frozen_from_23_october_holds_goebel_s_construction_beyond_324() -> None:
+    """Review A of #754, A2 (think-v022): a start `gather` freezes for a ledger read on or
+    after 23 October 2026 holds Göbel's construction beside the beyond-horizon row or the
+    grid, from 325 to 1073, and refuses beyond 1073 (think-llit). The member recomputes
+    from the retained program, reads as the walk's construction, and a classical ruling
+    does not seed it twice. A start frozen earlier stays the grid alone."""
+    (grid,) = ledger.tree_members([369], read_on="2026-10-22")[369]
+    assert grid["label"] == "the grid"
+    members = ledger.tree_members([369], read_on="2026-10-23")[369]
+    assert [member["label"] for member in members] == ["the grid", ledger.GOEBEL_LABEL]
+    goebel = members[1]
+    assert goebel["kind"] == ledger.CONSTRUCTION
+    assert ledger.recomputed(369, goebel) == [{key: goebel[key] for key in SPAN_KEYS}]
+    assert (
+        ledger.starts_problems(
+            {
+                "format": ledger.STARTS_FORMAT,
+                "read_at_main": "x",
+                "counts": [{"n": 369, "members": members}],
+            },
+            "x",
+        )
+        == []
+    )
+    edited = {**goebel, "high": str(Fraction(goebel["high"]) + 1)}
+    assert (
+        ledger.starts_problems(
+            {
+                "format": ledger.STARTS_FORMAT,
+                "read_at_main": "x",
+                "counts": [{"n": 369, "members": [grid, edited]}],
+            },
+            "x",
+        )
+        != []
+    )
+    side, expected = ledger.side_of(goebel), ledger.construction_side(369)
+    assert expected is not None
+    fields = ("label", "holders", "span", "shown", "value", "kind")
+    assert [getattr(side, key) for key in fields] == [getattr(expected, key) for key in fields]
+    start = [ledger.side_of(member) for member in members]
+    assert [member.label for member in ledger.walk(369, start, [], rulings=RULED).start] == [
+        ledger.GOEBEL_LABEL
+    ]
+    with pytest.raises(ledger.LedgerError, match="gives no side above 1073"):
+        ledger.tree_members([1074], read_on="2026-10-23")
+
+
+def test_older_frozen_starts_recompute_their_grid_members_exactly() -> None:
+    """Review A of #754, A2: every ledger read before 23 October 2026 keeps its frozen
+    starts. Each grid member recomputes to its frozen span exactly, and none holds Göbel's
+    construction; the history walk is the one read here."""
+    directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-couzo-history-20261022"
+    assert str(yaml.safe_load((directory / "sources.yaml").read_text())["read_on"]) < (
+        ledger.GOEBEL_FROM
+    )
+    starts = yaml.safe_load((directory / "starts.yaml").read_text(encoding="utf-8"))
+    members = [
+        (count["n"], member) for count in starts["counts"] for member in count["members"]
+    ]
+    grids = [(n, member) for n, member in members if member["label"] == "the grid"]
+    assert len(grids) > 100
+    for n, member in grids:
+        assert ledger.recomputed(n, member) == [{key: member[key] for key in SPAN_KEYS}]
+    assert not any(member["kind"] == ledger.CONSTRUCTION for _, member in members)

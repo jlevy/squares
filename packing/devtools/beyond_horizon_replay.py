@@ -193,7 +193,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, NamedTuple
 
 from strif import atomic_output_file
 
@@ -1857,27 +1857,78 @@ def row_side(source: Mapping[str, Any], n: int, printed: str) -> Fraction:
     return Fraction(printed) if side is None else side
 
 
-def _standing(chosen: Release) -> dict[int, Fraction]:
-    """Each claimed count's standing side as the packet's frozen claim record read the
-    record: the case's exact side in the corpus, else the exact side of the row that stood
-    there, read from its source's claims record, or the grid; a count above ``LIMIT``, which
-    no record holds yet, stands at the grid."""
-    record = _read(chosen.directory / reports.CLAIMS)
-    coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
-    sources = {source["id"]: source for source in coverage["sources"]}
-    standing = {row.n: reports.grid_side(row.n) for row in claims(chosen)}
+class Standing(NamedTuple):
+    """A claimed count's standing side as a packet's frozen claim record read the record
+    (`standing_sides`): the least of the case, or of the rows that stood there and the
+    grid (``side``), and, for a record read from `devtools.intake_ledger.GOEBEL_FROM`, an
+    enclosure of Göbel's construction there (``construction``, of the closed form
+    ``form``), as the importer reads it (`reports.goebel_construction`)."""
+
+    side: Fraction
+    construction: reports.Span | None = None
+    form: str = ""
+
+    def covers(self, value: Fraction) -> bool:
+        """``value`` is at or above the standing side: no publication strictly below it. A
+        rational side the construction's enclosure cannot separate from it is refused."""
+        if value >= self.side:
+            return True
+        if self.construction is None:
+            return False
+        own = reports.exact_span(value)
+        if reports.below(own, self.construction):
+            return False
+        _require(
+            reports.below(self.construction, own),
+            f"{value} does not separate from the enclosure of Göbel's construction",
+        )
+        return True
+
+
+def standing_sides(
+    record: Mapping[str, Any], counts: Iterable[int], sources: Mapping[str, Mapping[str, Any]]
+) -> dict[int, Standing]:
+    """Each claimed count's standing side as the frozen claim ``record`` read the record:
+    the case's exact side in the corpus, else the exact side of the row that stood there,
+    read from its source's claims record (``sources``, by id), or the grid; a count of
+    ``counts`` the record has no result for, one above ``LIMIT`` that no record holds yet,
+    stands at the grid. Beyond the horizon a record read from
+    `devtools.intake_ledger.GOEBEL_FROM` takes Göbel's construction too, and refuses a
+    count above the retained program's reach of 1073."""
+    read_on = str(record.get("read_on", ""))
+
+    def beyond(n: int, side: Fraction) -> Standing:
+        try:
+            construction = reports.goebel_construction(n, read_on)
+        except reports.ReportError as error:
+            raise ReplayError(str(error)) from error
+        if construction is None:
+            return Standing(side)
+        _, form, span = construction
+        return Standing(side, span, form)
+
+    standing = {n: beyond(n, reports.grid_side(n)) for n in counts}
     for row in record["results"]:
         n = row["n"]
         if row["case"] is not None:
-            standing[n] = Fraction(row["case"]["exact_side"])
+            standing[n] = Standing(Fraction(row["case"]["exact_side"]))
             continue
         rows = [
             row_side(sources[item["report"]], n, item["printed"])
             for item in row["pending"]
             if "printed" in item
         ]
-        standing[n] = min([*rows, Fraction(row["grid_side"])])
+        standing[n] = beyond(n, min([*rows, Fraction(row["grid_side"])]))
     return standing
+
+
+def _standing(chosen: Release) -> dict[int, Standing]:
+    """Each claimed count's standing side as the packet's frozen claim record read the
+    record (`standing_sides`)."""
+    record = _read(chosen.directory / reports.CLAIMS)
+    coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
+    sources = {source["id"]: source for source in coverage["sources"]}
+    return standing_sides(record, [row.n for row in claims(chosen)], sources)
 
 
 def release_sides(chosen: Release, clone: Path | None) -> dict[int, Fraction]:
@@ -1939,7 +1990,7 @@ def earlier_publications(
             if header is None or header[0] not in claimed:
                 continue
             n, side = header
-            if when >= chosen.first_commit_of(n)[1] or side >= standing[n]:
+            if when >= chosen.first_commit_of(n)[1] or standing[n].covers(side):
                 continue
             item = {
                 "repository": name,
@@ -1966,7 +2017,7 @@ def earlier_publications(
                 if entry is None:
                     continue
                 side = Fraction(str(entry))
-                if when >= chosen.first_commit_of(n)[1] or side >= standing[n]:
+                if when >= chosen.first_commit_of(n)[1] or standing[n].covers(side):
                     continue
                 item = {
                     "repository": name,
@@ -1990,7 +2041,12 @@ def earlier_publications(
         result.append(
             {
                 "n": n,
-                "standing": legacy.literal(standing[n]),
+                "standing": legacy.literal(standing[n].side),
+                **(
+                    {"standing_construction": standing[n].form}
+                    if standing[n].construction is not None
+                    else {}
+                ),
                 "release_side": legacy.literal(own),
                 "publications": [
                     {

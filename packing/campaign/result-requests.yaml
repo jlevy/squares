@@ -9998,21 +9998,22 @@ issues:
     asks:
     - what: The owner decides whether Göbel's constructions are earlier reports and the baseline beyond
         324; if so, a records PR adds them as the baseline, corrects 369 and 376 and records a defect.
-        The owner answered yes on 23 October 2026; the record still owes the baseline in every reader of
-        the record, not only the report-order walks, and the defect.
+        The owner answered yes on 23 October 2026; the record still owes the defect.
       state: queued
       note: >-
         Answered by the owner on 23 October 2026 (think-8krd): yes, Göbel's classical constructions
         count as earlier reports beyond n = 324, and a rational row above Göbel's exact side at its
-        count is not recorded. The owner-answers records change (PR #754) delivers two parts. It
-        makes the answer a ruling of the report-order walks (devtools.intake_ledger,
-        classical-constructions), so Göbel's construction joins each walk's start and the
-        publications the walks held above it are not recorded. And it corrects 369 and 376: nine
-        rows of 8 to 13 October above Göbel's construction, at 369 (1), 375 (4) and 376 (4), stay
-        listed as printed and are marked above-classical-construction, so 369 and 376 have no
-        current row. Still owed: the record's other readers beyond 324 (the claims importer, the
-        Fang inventory and fresh ledger starts) still take the grid or earlier reports, not Göbel's
-        construction (think-v022); and no defect entry records the cause, that beyond 324 the record
+        count is not recorded. The owner-answers records change (PR #754) delivers the baseline and
+        the correction. It makes the answer a ruling of the report-order walks
+        (devtools.intake_ledger, classical-constructions), so Göbel's construction joins each
+        walk's start and the publications the walks held above it are not recorded; and from the
+        day of the answer every reading beyond 324 takes it (intake_ledger.GOEBEL_FROM): a start
+        gather freezes, the claims importer and the replay's standing side, while earlier
+        readings keep what they froze. The Fang inventory stays on recorded rows, since it
+        measures the excess over what the record holds (think-a75a). And it corrects 369 and 376:
+        nine rows of 8 to 13 October above Göbel's construction, at 369 (1), 375 (4) and 376 (4),
+        stay listed as printed and are marked above-classical-construction, so 369 and 376 have
+        no current row. Still owed: a defect entry recording the cause, that beyond 324 the record
         compared reports only with the grid and earlier reports, so two current rows stood above
         Göbel's sides.
       bead: think-8krd
@@ -10042,8 +10043,7 @@ issues:
       Göbel's construction, the nine rows above it at 369, 375 and 376 are marked
       above-classical-construction, and 369 and 376 keep no current row. Whether Friedman's
       off-centre constructions count the same way was not asked; think-zkxy asks it. The ask stays
-      queued, and the issue open, until every reader of the record takes Göbel's construction beyond
-      324 (think-v022) and the defect is recorded.
+      queued, and the issue open, until the defect is recorded.
   - number: 622
     title: 'data: submit a tighter exact N29 packing certificate'
     author: BuddenPing

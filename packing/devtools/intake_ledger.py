@@ -183,6 +183,13 @@ RESTATEMENT_GAP = Fraction(1, 10**SHOWN_PLACES)
 #: The kind of a start member that is a classical construction (`CLASSICAL`), and its label.
 CONSTRUCTION = "construction"
 GOEBEL_LABEL = "Göbel's construction"
+#: The day of the owner's answer on #613 (think-8krd), that Göbel's constructions are the
+#: baseline beyond n = 324. A start `gather` freezes for a ledger read on or after it, a
+#: claims importer declaration read on or after it (`devtools.upper_bound_reports`) and
+#: a claim record so read (`devtools.beyond_horizon_replay.standing_sides`) take Göbel's
+#: construction into the standing side beyond the horizon (`goebel_baseline`); readings
+#: from before it stay as they were frozen (review A of #754, A2).
+GOEBEL_FROM = "2026-10-23"
 #: The exact comparison with Göbel's families every Göbel reading in the record uses: the
 #: 15 October packet's retained program, read from its path unchanged.
 GOEBEL_PROGRAM = ROOT / (
@@ -1276,11 +1283,13 @@ def display_names(sources: Mapping[str, Any]) -> dict[str, str]:
 
 
 def tree_members(
-    counts: Iterable[int], *, names: Mapping[str, str] | None = None
+    counts: Iterable[int], *, names: Mapping[str, str] | None = None, read_on: str = ""
 ) -> dict[int, list[StartMember]]:
     """Each count's start members, read from the records on the tree: both case lanes and
     any register entry pending adoption that states a smaller bound, or above the horizon
-    the beyond-horizon row or the grid. A lane's holders are credited by ``names``."""
+    the beyond-horizon row or the grid, and beside it Göbel's construction for a ledger
+    read on ``read_on`` from `GOEBEL_FROM` (`construction_member`, refused above 1073). A
+    lane's holders are credited by ``names``."""
     wanted = sorted(set(counts))
     members: dict[int, list[StartMember]] = {}
     inside = [n for n in wanted if n <= HORIZON]
@@ -1323,8 +1332,11 @@ def tree_members(
         coverage = load_yaml(coverage_check.COVERAGE)
         rows = coverage_check.current_beyond_horizon(coverage)
         exact = beyond_exact_sides(coverage, rows)
+        goebel = goebel_baseline(read_on)
         for n in outside:
             members[n] = [beyond_member(n, rows, exact)]
+            if goebel:
+                members[n].append(construction_member(n))
     return members
 
 
@@ -1340,6 +1352,9 @@ def side_of(member: StartMember) -> Side:
     value = (
         span.low if exact else (number(member["shown"]) if "." in member["shown"] else span.low)
     )
+    if member["kind"] == CONSTRUCTION:
+        # As `construction_side` reads it: the enclosure's upper end, not its print.
+        value = span.high
     prints = tuple((lane[0], lane[1], lane[2]) for lane in member["lanes"])
     stated = member.get("stated")
     if member["kind"] == "register" and stated:
@@ -1402,10 +1417,10 @@ _MEMBER_TYPES: Mapping[str, type] = {
 
 def recomputed(n: int, member: Mapping[str, Any]) -> list[dict[str, Any]]:
     """The span each of a frozen member's stored inputs gives: every case lane it stands
-    for (`lane_member`), a pending entry's stated bound, a beyond-horizon print, or the
-    grid. Each must equal the member's own. A beyond-horizon row read at its exact side
-    keeps that side as its one lane, and is recomputed by `beyond_member`, so the side
-    must still lie within the row's print."""
+    for (`lane_member`), a pending entry's stated bound, a beyond-horizon print, the grid,
+    or Göbel's construction from the retained program. Each must equal the member's own.
+    A beyond-horizon row read at its exact side keeps that side as its one lane, and is
+    recomputed by `beyond_member`, so the side must still lie within the row's print."""
     if member["lanes"]:
         found = []
         for lane in member["lanes"]:
@@ -1428,6 +1443,8 @@ def recomputed(n: int, member: Mapping[str, Any]) -> list[dict[str, Any]]:
         _require(len(stated) == 2, "a pending entry states [value, slack]")
         value, slack = (number(str(item)) for item in stated)
         found = [pending_member({"id": "-"}, check_standing.Stated(value, slack))]
+    elif member["kind"] == CONSTRUCTION:
+        found = [construction_member(n)]
     elif member["label"] == "the grid":
         found = [beyond_member(n, {})]
     else:
@@ -1515,7 +1532,10 @@ def tree_drift(directory: Path) -> list[str]:
     """Where the records on the tree now give a start other than the frozen one."""
     frozen = load_yaml(directory / STARTS)
     counts = [int(count["n"]) for count in frozen["counts"]]
-    now = tree_members(counts, names=display_names(load_yaml(directory / SOURCES)))
+    sources = load_yaml(directory / SOURCES)
+    now = tree_members(
+        counts, names=display_names(sources), read_on=str(sources.get("read_on", ""))
+    )
     drift = []
     for count in frozen["counts"]:
         n = int(count["n"])
@@ -1699,6 +1719,31 @@ def goebel_form(n: int) -> Any:
     return form
 
 
+def goebel_baseline(read_on: str) -> bool:
+    """Whether a reading on ``read_on`` takes Göbel's construction into the standing side
+    beyond the horizon (`GOEBEL_FROM`)."""
+    return str(read_on) >= GOEBEL_FROM
+
+
+def construction_member(n: int) -> StartMember:
+    """Göbel's construction at ``n`` as a frozen start member (`construction_side`), which
+    `recomputed` reads again from the retained program; refused within the horizon and
+    above the program's reach (`goebel_reach`)."""
+    side = construction_side(n)
+    _require(side is not None, f"n = {n}: Göbel's construction is no start within the horizon")
+    assert side is not None
+    return _member(
+        side.label,
+        CONSTRUCTION,
+        side.holders,
+        model="closed form",
+        span=side.span,
+        display=side.shown,
+        decide="",
+        lanes=[],
+    )
+
+
 def construction_side(n: int) -> Side | None:
     """Göbel's construction at ``n`` as a member of the start (`CLASSICAL`): a rigorous
     `INTERVAL_DIGITS`-digit enclosure of ``p + q sqrt 2``, which no rational side equals."""
@@ -1789,7 +1834,10 @@ def walk(
     exceptions = exceptions or {}
     rulings = rulings or Rulings()
     members = [start] if isinstance(start, Side) else list(start)
-    construction = construction_side(n) if rulings.applies(rulings.classical, n) else None
+    # A start frozen from `GOEBEL_FROM` already holds the construction (`tree_members`).
+    held = any(member.kind == CONSTRUCTION for member in members)
+    classical = rulings.applies(rulings.classical, n) and not held
+    construction = construction_side(n) if classical else None
     seeds = minimal([*members, construction] if construction is not None else members)
     standing = list(seeds)
     steps: list[Step] = []
@@ -3173,7 +3221,9 @@ def gather(
             f"of read_at_main {read_at_main[:12]}",
         )
     else:
-        members = tree_members(counts_of(ledger), names=display_names(sources))
+        members = tree_members(
+            counts_of(ledger), names=display_names(sources), read_on=str(sources["read_on"])
+        )
         starts = starts_document(read_at_main, members)
         texts.append(
             (STARTS, yaml.safe_dump(starts, sort_keys=False, allow_unicode=True, width=88))

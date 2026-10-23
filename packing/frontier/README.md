@@ -213,8 +213,9 @@ owner, 23 October 2026, [#613](https://github.com/jlevy/squares/issues/613)), so
 above Göbel’s construction at its count also stays listed as its source printed it.
 It is marked `above-classical-construction`, states the construction $p + q\sqrt 2$ it
 is above, and holds no count.
-The walks’ standing side there is the construction, which has no row; the readers that
-fall back on the grid beyond the horizon do not compute it yet (think-v022).
+The standing side there is the construction, which has no row: in the walks, and from 23
+October 2026 in every start, claim record and replay reading beyond the horizon
+([several reports at one count](../campaign/result-import.md#several-reports-at-one-count)).
 `devtools.beyond_horizon_replay` holds every row from $n = 325$ to $1024$ to Göbel’s
 construction exactly.
 Nine rows of 8 to 13 October at $n = 369, 375$ and $376$ are so marked, and 369 and 376
