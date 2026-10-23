@@ -2813,9 +2813,15 @@ verifiers:
     versions:
     - sha256: 52073811e61dba8bca0574a1e8cf99b91058fb70c17b38621baf07b5fb94cf3e
       path: packing/devtools/evand_exact_certificates.py
-      note: The source the n183 primary batch ran; the retained seven-file provenance
-        identifies the historical run. Its module statement was corrected on 22 October
-        2026 (RF-1 of the review of #728), with no code changed
+      note: >-
+        The source the n183 primary batch ran, and the source T-230's replay ran at
+        52d89bf04; the retained seven-file provenance identifies the historical run
+    - sha256: 56340bd7f7435bf14d3a8b91718076cf43921f66fd0fa8e2ad2b96b013595ad6
+      path: packing/devtools/evand_exact_certificates.py
+      note: >-
+        The source after its module statement was corrected on 22 October 2026 (RF-1 of
+        the review of #728, 3213910d5): docstring only, no code changed from 52073811...,
+        so a replay at this digest decides as one at 52073811... does
 
   - id: V-check-n11-final-composition
     program: devtools.check_n11_final_composition

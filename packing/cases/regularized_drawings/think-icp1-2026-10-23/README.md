@@ -51,7 +51,7 @@ Then `render_regularized_atlas --update`, `regularized_drawings` and `default_dr
 | --- | --- | --- |
 | 303 | No view is drawn. Evan Daniel’s regularizer finds the witness not first-order jammed and yields no view (row 1). Grid-slack’s views at 0.5, 1 and 5 degrees are one view at the witness’s side that straightens the witness’s 15 near-upright squares: 0 near-axis squares against 2, 40 angle classes against 42, and house and stage sides 766 / 782 against 758 / 776 for the axis tool’s view of the new witness, but 13 light squares against 12. A square’s contact count falls while no total does, so each goes to review at row 7 (think-ykgh, the owner’s). Settled in `default_drawings.SETTLED` | the axis tool’s view |
 
-`default_drawings --compare` against `main`’s record (`e929137a8`):
+`default_drawings --compare` against `main`’s record (`fcf2f96a5`):
 
 - 303: the axis tool’s view of T-186 (15 uneven, 0 near-axis, 808 full shared sides),
   decided no better, gives way to the axis tool’s view of T-230 (45 uneven, 2 near-axis,

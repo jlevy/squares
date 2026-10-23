@@ -948,12 +948,12 @@ RESULTS: dict[str, Prose] = {
             "as co-author and says Evan Daniel approved the record claim."
         ),
         routes=(
-            "No route here is the source’s code. Both read the certificate through an adapter "
-            "whose author read the source’s two checkers and which carries two of their "
-            "expressions, its line filter and its corner construction (RF-1 of the 22 October "
-            "review), so the replay is independently re-implemented after reading the "
-            "producer’s code; the review’s checker shares no code with either maintained route "
-            "or the source."
+            "No route here is the source’s code, but both read the certificate through an "
+            "adapter whose author read the source’s two checkers and which carries two of "
+            "their expressions transcribed, its line filter and its corner construction (RF-1 "
+            "of the 22 October review), so the replay shares those components with the "
+            "producer. The review’s checker shares no code with either maintained route or the "
+            "source, and the independent re-implementation rests on it."
         ),
         lineage=(
             "The author’s basin explorer started from Daniil Ostashev’s n = 303 packing of "

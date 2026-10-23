@@ -39313,7 +39313,10 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
-    relationship_to_generator: independent-implementation
+    relationship_to_generator: shared-components
+    shared_components:
+      - "devtools.evand_exact_certificates' line filter, which skips blank lines and lines beginning with #, transcribed from the source's verify_cert.py and verify_cert2.py"
+      - "devtools.evand_exact_certificates' Pose.corners, the corner construction the independent route decides on, transcribed term for term from verify_cert2.py's corners"
     origin: replayed-here
     novelty: previously-published
     source_key: '[Daniel n303 2026-10-22]'
@@ -39346,7 +39349,9 @@ evidence:
         of: 1
       read: [specification, certificate-format, producer-code]
       clean_room: false
-      shares: []
+      shares:
+        - "devtools.evand_exact_certificates' line filter, which skips blank lines and lines beginning with #, transcribed from the source's verify_cert.py and verify_cert2.py"
+        - "devtools.evand_exact_certificates' Pose.corners, the corner construction the independent route decides on, transcribed term for term from verify_cert2.py's corners"
       written_by:
         - kind: ai
           system: Claude (Anthropic)
@@ -39357,7 +39362,7 @@ evidence:
       overlaps_producer:
         extent: system-family
         separate_prompt: true
-        separate_code: true
+        separate_code: false
         note: >-
           The packet's CREDITS.md states that the source's work was done with Claude
           (Anthropic) under human direction, and the pinned commit names Claude Opus 5.5
@@ -39372,7 +39377,10 @@ evidence:
           the independent route decides on, is verify_cert2.py's corners term for term.
           The corner construction is the format's definition, which the review's
           clean-room checker derived without reading it and which gives the same squares;
-          the sqpack route builds its own corners from (c, s).
+          the sqpack route builds its own corners from (c, s). A transcription shares the
+          producer's definitions (epistemics.md), so this replay is shared-components, and
+          T-230's independent re-implementation rests on the review's clean-room entry
+          (review A2 of #731).
     independence_record: docs/project/reviews/review-2026-10-22-daniel-728.md
     external_review:
       state: informally-verified

@@ -106,7 +106,7 @@ side from its own retained packet:
 | `T-146`, `T-136` (#481) | Evan Daniel’s regularization of Nate Chaoweeraprasit’s packing; Chaoweeraprasit | $3.29 \times 10^{-3}$ |
 | #573 | Mykhailo Polkovskyi (Mishapolk) | $3.29 \times 10^{-3}$ |
 | `T-134` (#476), #488 | Francisco Couzo | $7.67 \times 10^{-3}$, $7.59 \times 10^{-3}$ |
-| `T-138` (#470), `T-113` (#401) | Mishapolk; Nate Chaoweeraprasit | $1.05 \times 10^{-2}$ |
+| `T-138` (#470), `T-113` (#401) | Mykhailo Polkovskyi; Nate Chaoweeraprasit | $1.05 \times 10^{-2}$ |
 | `T-098` (#375), `T-092`, `T-056` | Evan Daniel; Francisco Couzo | $1.46 \times 10^{-2}$ |
 
 The margin below the case ceiling is exactly the difference `claims.json` records,

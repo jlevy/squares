@@ -20615,8 +20615,10 @@ issues:
       on this repository's two exact routes with both controls refused, registered as T-230,
       and raised to V3/C3 by the 22 October stage 4 review, whose clean-room checker decided it
       again; measured pose by pose, it is another arrangement of Ostashev's two-band design,
-      with one tilted band's tilt reversed, not a refinement. The adoption at 303 and the
-      regularization follow in the same pull request. Claude assistance disclosed.
+      with one tilted band's tilt reversed, not a refinement. The same pull request (#731)
+      adopted it at 303 in the pass of 23 October 2026 and regularized the case, drawing the
+      axis tool's view while grid-slack's waits for the owner's review (think-ykgh). Claude
+      assistance disclosed.
     read_through: '2026-10-22T17:17:20Z'
     results:
     - key: n303

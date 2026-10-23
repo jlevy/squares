@@ -31840,10 +31840,11 @@ results:
 
       The certificate and its duplicate-square and outside-container controls were decided
       here on 22 October 2026 by both maintained exact routes, and the frozen comparison
-      rebuilt; no route here is the source's code, and the replay is independently
-      re-implemented after its adapter's author read the source's checkers. The 22 October
-      review decided the certificate again on a clean-room checker of its own and found no
-      blocking defect, so the bound is confirmed, independently re-implemented.
+      rebuilt. No route here is the source's code, but both read it through an adapter that
+      carries two of the source checkers' expressions transcribed, so the replay shares
+      those components with the producer (RF-1). The 22 October review decided the
+      certificate again on a clean-room checker of its own and found no blocking defect, so
+      the bound is confirmed, independently re-implemented.
 
       Issue 728 reports a packing found by Evan Daniel's search from Daniil Ostashev's
       packing (#562, T-162, the house's packing through T-186): a basin explorer, near-record
@@ -31926,14 +31927,16 @@ results:
       triage's measurement, finds the same 64 against T-186 and 62 against T-162.
 
       The packing has 91 squares tilted beyond 0.1 degree, all one way, at 22.83 to 26.12
-      degrees, and 13 more whose rational half-angle tangents leave them within 1e-10
-      degree of an axis; the house's packing has 92, 46 each way. The record keeps the word
-      refinement for a pairing in which no square moves beyond a tenth, so this is not a
-      refinement of Ostashev's packing, as the issue says, but another arrangement of his
-      two-band design with one band's tilt reversed; that it was found from his packing is
-      the source's account, which the measurement does not contradict. It lists no
-      regularization. The issue's matching distance of 0.266 is not defined there, and no
-      definition the review tried reproduced it (RF-3).
+      degrees; 13 more whose rational half-angle tangents leave them within 1e-10 degree of
+      an axis; and squares 57 and 167, at 0.080 and 0.062 degree, the two near-axis squares
+      the axis tool leaves untouched. The house's packing has 92, 46 each way.
+
+      The record keeps the word refinement for a pairing in which no square moves beyond a
+      tenth, so this is not a refinement of Ostashev's packing, as the issue says, but
+      another arrangement of his two-band design with one band's tilt reversed; that it
+      was found from his packing is the source's account, which the measurement does not
+      contradict. It lists no regularization. The issue's matching distance of 0.266 is
+      not defined there, and no definition the review tried reproduced it (RF-3).
 
       The source's own checkers were not run here; at the packet's pin they are
       byte-identical to V-evand-verify-cert-py and V-evand-verify-cert2-py. The two maintained routes share
