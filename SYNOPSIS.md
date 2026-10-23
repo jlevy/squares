@@ -869,6 +869,7 @@ case or experiment separately.
 | [Regularization Runs for 204 and 260 After the 20 October Adoption (think-xu4d)](packing/cases/regularized_drawings/think-xu4d-2026-10-20/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 22 October Adoption of T-225 (think-ql4v)](packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 23 October Adoption of T-229 (think-4h23)](packing/cases/regularized_drawings/think-4h23-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the 23 October Adoption of T-230 (think-icp1)](packing/cases/regularized_drawings/think-icp1-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |
