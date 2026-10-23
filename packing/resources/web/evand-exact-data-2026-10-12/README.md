@@ -347,6 +347,13 @@ tag commit, from the declaration in
 [acquisition/sources.json](acquisition/sources.json) is the acquisition record and
 [acquisition/upstream-subtree.sha256](acquisition/upstream-subtree.sha256) the manifest:
 242 files, 2,116,155 bytes.
+The record’s `retrieved_at_utc`, 12 October 2026 at 14:41Z, is when the release,
+`LICENSE`, `CREDITS.md` and n = 10’s exact form were retrieved.
+The other 232 exact forms were fetched on 23 October 2026 at about 07:07Z, through the
+GitHub API by Git blob id from the tree at `31523f8`, each blob’s SHA-1 checked against
+the tree, and the tree part of the packet was then rewritten from a shallow blobless
+sparse checkout of the tag cloned at 07:30Z, the files retained before unchanged; the
+record’s `git_scope` says the same.
 Retained, 235 files and 2,046,118 bytes: `LICENSE`, `CREDITS.md`, and the exact forms of
 the 233 configurations the grade-C archive certifies,
 `search/exact/minpoly/data/n-N.minpoly.json.gz`, as their upstream gzip files, each bound
