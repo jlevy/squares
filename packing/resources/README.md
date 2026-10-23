@@ -1756,6 +1756,24 @@ T-174 adoption. It is an unregistered integration diagnostic cited by no evidenc
 it adds no result, rung or geometric replay.
 Its historical custody observation leaves the fresh 66-house custody gate open.
 
+## wand125’s Continuous-Angle Verifier, 12 October 2026
+
+**[wand125 sqverify continuous 2026-10-12]**: Hiroaki Hosono’s (wand125’s)
+`sqverify_continuous`, this repository’s `sqverify_fast` crate with a continuous-angle
+mode that checks a rectangle-density certificate at every angle and every centre and
+concludes $s(n) > L/B$, pinned at `f30cc2cf` (v3, the version the source’s n = 40
+examples ran) and its child `d4a19815` (v4, the first program of
+**[wand125 continuous n28 2026-10-15]**), both of 12 October 2026, in
+[wand125/square-packing](https://github.com/wand125/square-packing/tree/d4a19815e2b0cca5faa562f00c7a80b93d3402ef/tools/sqverify_continuous);
+packets [v4](web/wand125-sqverify-continuous-v4-2026-10-12/README.md) and
+[v3](web/wand125-sqverify-continuous-v3-2026-10-12/README.md).
+It is independent code with the same method as Guzhou0806’s T-145 kernel, whose author
+read that kernel before writing it, and it keeps this repository’s interval, exact, axis
+and oracle modules byte for byte.
+The
+[soundness review of 23 October 2026](../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+found no blocking defect; no complete run of it has been replayed here.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

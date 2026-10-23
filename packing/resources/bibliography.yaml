@@ -3420,6 +3420,27 @@ sources:
       Daniel's seeds at 9 more. Its re-certifications below the 12-place print are held
       (think-fwa9); its bounds above 1024 wait on the owner (D1). Retained as factual data.
       OpenAI Codex assistance disclosed. No optimality claim.
+  - key: '[wand125 sqverify continuous 2026-10-12]'
+    authors: [Hosono]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    credit: Hosono after Levy, Guzhou0806
+    lineage: builds-on-project
+    note: >-
+      wand125's (Hiroaki Hosono's) sqverify_continuous, this project's sqverify_fast crate
+      with a continuous-angle mode (src/slab.rs) that checks a rectangle-density certificate
+      at every angle and every centre and concludes s(n) > L/B, pinned at f30cc2cf (v3, the
+      version the source's n = 40 examples ran) and its child d4a19815 (v4, which adds
+      --resume and is the first program of the n = 28 certificate continuous_n28_L5745), both
+      committed on 12 October 2026 in wand125/square-packing tools/sqverify_continuous. Its
+      PROVENANCE.md gives the crate's code as MIT and the copied documentation as this
+      project's CC BY 4.0, and says the mode's author read Guzhou0806's continuous_pose.cpp
+      while reviewing T-145 before writing it: independent code, not an independent method.
+      Its README reports s(40) > 1340000/199529 and s(40) > 3359/500 verified with no run
+      output published. The commits name Claude as co-author. Retained in
+      web/wand125-sqverify-continuous-v4-2026-10-12/ and
+      web/wand125-sqverify-continuous-v3-2026-10-12/. Dated by the pins.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono

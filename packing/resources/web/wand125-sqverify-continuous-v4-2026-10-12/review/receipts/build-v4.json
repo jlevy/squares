@@ -1,0 +1,37 @@
+{
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "cargo",
+    "build",
+    "--release",
+    "--locked",
+    "-j",
+    "2"
+  ],
+  "cwd": "/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/build-v4/tools/sqverify_continuous/sqverify_fast",
+  "started_utc": "2026-10-23T07:09:32Z",
+  "exit_status": 0,
+  "wall_seconds": 126.466,
+  "cpu_user_seconds": 31.933,
+  "cpu_system_seconds": 2.389,
+  "max_rss_kib": 318184,
+  "load_average": [
+    24.35888671875,
+    22.66162109375,
+    18.66748046875
+  ],
+  "digests": {},
+  "stdout_lines": 0,
+  "stdout_head": [],
+  "stdout_tail": [],
+  "stderr_lines": 26,
+  "stderr_tail": [
+    "   Compiling memchr v2.8.3",
+    "   Compiling itoa v1.0.18",
+    "   Compiling num-rational v0.4.2",
+    "   Compiling flate2 v1.1.2",
+    "    Finished `release` profile [optimized] target(s) in 2m 06s"
+  ]
+}

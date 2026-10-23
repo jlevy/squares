@@ -30904,6 +30904,63 @@ evidence:
       continuous cover between net directions is the kernel's (GC-4).
     source_reviewed: '2026-10-10'
 
+  - id: E-n040-wand125-sqverify-continuous-6715-report
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: independent-external
+    relationship_to_generator: independent-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 sqverify continuous 2026-10-12]'
+    certificate: packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-continuous]
+    independence:
+      coverage: {extent: full, unit: root ranges of t and the near-axis patch}
+    limitations: >-
+      wand125/square-packing at f30cc2cf345a3a3f6af778925f354d9ec979868b (committed
+      2026-10-12T01:00:19Z), tools/sqverify_continuous/README.md, reports Hiroaki Hosono's
+      continuous-angle mode of this repository's sqverify_fast, v3 (source 1266a8b9...), run on
+      Ubuntu 24.04 at six threads, on T-145's certificate, Hosono's rect_n40_L67 density (480
+      positive orbits, mass 3999/100; examples/n40/prepare.py fetches it from
+      Guzhou0806/n40-square-packing at 71c97d0 with SHA-256 71011d03..., byte for byte this
+      record's copy), at core 199529/200000 and tau 4999/5000: VERIFIED at all 86 root ranges of
+      t in [10^-7, 83/200] and the near-axis patch at side 77941/78125 (least 0.99988),
+      110,877,174 nodes, least certified bound 0.9998000000016, 1,167 s; and its control, every
+      weight times 985/1000, REFUSED at every root and at the patch. No run output, receipt or
+      binary digest is published, so this is a third party's report. The mode shares no code
+      with the producer's kernel and has the same method, its author having read that kernel; it
+      shares this repository's interval, exact, axis and oracle modules, and its near-axis
+      decision is the axis sweep that E-n040-guzhou-continuous-pose-crate-axis also runs. Not a
+      second method and no rung rests on it; a complete replay here is think-flxm.
+    external_review:
+      state: informally-verified
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude, Anthropic; tier tbd-strong-max, maximum reasoning), the stage 4
+        validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob),
+        prompted separately from the imports of T-145, T-157 and T-192 and from every review of
+        them (docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+      note: >-
+        No blocking or major defect in the reported program, sqverify_continuous v3, whose
+        search is v4's text. Re-derived: the counting and the strict endpoint; the D4 reduction
+        to the north-east quadrant and t in [0, tan(pi/8)]; the angle enclosures, W unimodal at
+        sqrt 2 - 1; interval-only inside and outside classification; the concave-section
+        trapezoid bound at the path centre for every angle of a box; the translation-derivative
+        extension along an L-shaped path, both gradient components; the closed cover of the 86
+        root ranges by outward ends and midpoint splits, with acceptance against the upward
+        enclosure of tau; and the near-axis patch, the side-A axis square inside every side-B
+        square at t <= 10^-7. At this claim's parameters: X = 1340000/199529, 40 tau - M =
+        1/500, A = 77941/78125 with margin 235529976449/500000000000005000000; the density's
+        facts decided again (480 positive orbits, mass 3999/100, 3,792 distinct images). Run
+        here on candidates this repository builds from its copy in the source's row order, v4
+        reproduced the source's control row (7,714 nodes, patch minimum 0.98488, least refuting
+        capture 0.98711), every witness a legal pose computed exactly here. Unchecked: the
+        claim's own run, which no receipt shows and a replay here would decide (think-flxm).
+    source_reviewed: '2026-10-23'
+
   - id: E-evand-regularized-certificate-report
     claim: upper-bound
     scope:
@@ -33200,6 +33257,64 @@ evidence:
       check-replay, a necessary condition of the claim and not the
       claim. This decides the near-axis lemma a second way; nothing it decides covers the slabs.
     source_reviewed: '2026-10-12'
+
+  - id: E-n040-wand125-sqverify-continuous-6718-report
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: independent-external
+    relationship_to_generator: independent-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 sqverify continuous 2026-10-12]'
+    certificate: packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-continuous]
+    independence:
+      coverage: {extent: full, unit: root ranges of t and the near-axis patch}
+    limitations: >-
+      wand125/square-packing at f30cc2cf345a3a3f6af778925f354d9ec979868b (committed
+      2026-10-12T01:00:19Z), tools/sqverify_continuous/README.md, reports Hiroaki Hosono's
+      continuous-angle mode of this repository's sqverify_fast, v3 (source 1266a8b9...), run on
+      Ubuntu 24.04 at six threads, on T-157's certificate, Guzhou0806's density at 6a65957e (685
+      positive orbits, mass 3999/100, SHA-256 984fcd3a..., which prepare.py fetches and this
+      record retains), at core 3350/3359 and tau 4999/5000: VERIFIED at all 86 root ranges and
+      the near-axis patch at side 997320431/10^9 (least 1.00150), 118,717,888 nodes, least
+      certified bound 0.9998000000076, 1,355 s; its control, every weight times 985/1000, and
+      the same density at core 3348/3359, both REFUSED. No run output, receipt or binary digest
+      is published, so this is a third party's report. The mode shares no code with the
+      producer's kernel and has the same method, its author having read that kernel; it shares
+      this repository's interval, exact, axis and oracle modules, and its near-axis decision is
+      the axis sweep that E-n040-guzhou-continuous-pose-crate-axis also runs. Not a second
+      method and no rung rests on it; a complete replay here is think-flxm.
+    external_review:
+      state: informally-verified
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude, Anthropic; tier tbd-strong-max, maximum reasoning), the stage 4
+        validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob),
+        prompted separately from the imports of T-145, T-157 and T-192 and from every review of
+        them (docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+      note: >-
+        No blocking or major defect in the reported program, sqverify_continuous v3, whose
+        search is v4's text. Re-derived: the counting and the strict endpoint; the D4 reduction
+        to the north-east quadrant and t in [0, tan(pi/8)]; the angle enclosures, W unimodal at
+        sqrt 2 - 1; interval-only inside and outside classification; the concave-section
+        trapezoid bound at the path centre for every angle of a box; the translation-derivative
+        extension along an L-shaped path, both gradient components; the closed cover of the 86
+        root ranges by outward ends and midpoint splits, with acceptance against the upward
+        enclosure of tau; and the near-axis patch, the side-A axis square inside every side-B
+        square at t <= 10^-7. At this claim's parameters: X = 3359/500, 40 tau - M = 1/500, A =
+        997320431/10^9 with margin 227120145419327729/335900000000003359000000000; the density's
+        facts decided again (685 orbits, 522 inherited rows equal to their pool rows with no
+        index twice, 163 generated in no pool orbit, mass 3999/100, 5,424 distinct images). Run
+        here on candidates this repository builds, v4 reproduced both of the source's control
+        rows node for node (5,979 nodes, patch minimum 0.98648; and at core 3348/3359 12,364,148
+        nodes, patch 0.98421, least refuting capture 0.99856, with 84 of its 86 refusals
+        stopping above tau, SC-9). Unchecked: the claim's own run, which no receipt shows and a
+        replay here would decide (think-flxm).
+    source_reviewed: '2026-10-23'
 
   - id: E-ostashev-528-certificate-report
     claim: upper-bound
@@ -37715,13 +37830,44 @@ evidence:
       regenerated here. A diagnostic sample matched the source's logs at three roots,
       two slabs on the reviewed T-145 kernel and the axis patch
       (receipts/sample-diagnostic-n28.json); that is not a replay. The source's 985/1000
-      control is refused at the axis patch alone; no control here yet refuses at an
-      oblique root by an exact capture below 1. The least certified bounds of 1 +
-      4.7e-12 and 1 + 2.4e-12 are search stops, not slack. A complete replay and a
-      review that reads this certificate remain pending, priced at about 13 CPU-hours a
-      route. The two programs share no code with each other, but each shares code with
-      routes this record already counts. No standing bound or rating changes; T-107 and
-      T-142 stand.
+      control fails everywhere: run here on 23 October, the first program refused it at
+      the axis patch and at all 86 roots, each at a legal pose whose exact capture,
+      computed apart from the crate, is below 1 (least 0.98599). No control yet keeps
+      the axis patch and fails only at an oblique root. The least certified bounds of 1 +
+      4.7e-12 and 1 + 2.4e-12 are search stops, not slack. A complete replay remains
+      pending, priced at about 13 CPU-hours a route; the 23 October review of the first
+      program read this certificate (external_review). The two programs share no code
+      with each other, but each shares code with routes this record already counts. No
+      standing bound or rating changes; T-107 and T-142 stand.
+    external_review:
+      state: informally-verified
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude, Anthropic; tier tbd-strong-max, maximum reasoning), the stage 4
+        validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob),
+        prompted separately from the imports of T-145, T-157 and T-192 and from every review of
+        them (docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+      note: >-
+        No blocking or major defect in the first program, sqverify_continuous v4 (source
+        619b3c00...), against this certificate. Re-derived: the counting and the strict
+        endpoint; the D4 reduction to the north-east quadrant and t in [0, tan(pi/8)]; the angle
+        enclosures, W unimodal at sqrt 2 - 1; interval-only inside and outside classification;
+        the concave-section trapezoid bound at the path centre for every angle of a box; the
+        translation-derivative extension along an L-shaped path, both gradient components; the
+        closed cover of the 86 root ranges by outward ends and midpoint splits, with acceptance
+        against the upward enclosure of tau; and the near-axis patch, the side-A axis square
+        inside every side-B square at t <= 10^-7. Here the margin B - A W(10^-7) is
+        200029979999/500000000000005000000. This certificate's facts were decided again with the
+        review's own code: format M with the standard net declared as proof_net, which sends
+        admission through the source's proof_net branch, inert for this mode (SC-8); 884
+        positive rows inside K; mass 2799999/100000; 7,068 distinct images; the control is it
+        with every mass times 985/1000. The source's run_key was recomputed from the parameters,
+        and the published control, run here on the binary 31936c4d..., equals the source's
+        control log at every root, every witness a legal pose whose capture the review computed
+        exactly. Minor findings SC-1 (--resume trusts any file carrying the public key; the
+        source's summary inherited nothing) and SC-2 (the y-derivative enclosure is untested).
+        Unchecked: the 86-root search itself, which a complete replay decides (think-0arj), and
+        the second program, contpose_check3.
     source_reviewed: '2026-10-15'
   - id: E-evand-639-exact-sides-report
     claim: upper-bound
