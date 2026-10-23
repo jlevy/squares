@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 14 campaign upper bounds (237, and 13 beyond 324
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T23:35:08.750Z
-updated_at: 2026-10-22T13:13:29.350Z
+updated_at: 2026-10-23T02:26:19.617Z
 started_at: 2026-10-14T23:35:12.236Z
 ---
 Francisco Couzo (@franciscouzo) reports, in jlevy/squares#607 (filed 2026-10-14T23:18:36Z), 21 finite upper bounds plus two precision refinements, certificates at franciscouzo/square-packing 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2 submissions/2026-10-14/certificates/ (first committed 2026-10-14T19:15:09Z), comparison index upper_bounds.json at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d. Stages 1, 2 and the stage 4 replay in the 14 October evening intake lane (branch claude/wizardly-meitner-wqn4x3-intake-607); no register, case, request, coverage, bibliography, resources README or intake-watch record edited. Registration waits for a records PR.
@@ -93,3 +93,5 @@ Registered as T-189 (V0/C0, draft S2) at 237, with 15 beyond-horizon rows (339, 
   #607's row stays current at 542 until those are decided.
 - `think-yfoo`'s triage planned "the ask on #607". A state note there, after the merge,
   covers it.
+
+2026-10-23 (c-lane-couzo-residue-1022): #730 merged at 02:10Z on 23 October 2026 as fcf2f96a5. State note posted: https://github.com/jlevy/squares/issues/607#issuecomment-6355894824 (eight #607 rows now superseded first by 4e4c8ce or 5a299b4; at 542 #607's row stays current while 4e4c8ce's sub-print re-certification waits on think-fwa9 and 23aff0c's deletion bound on think-f2io and think-8krd). To be recorded under #607's replies by the next records PR. This bead stays open: it is #607's answer_bead in result-requests.yaml on main, #607 is open, and 542 waits on those owner decisions.

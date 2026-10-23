@@ -5,7 +5,7 @@ title: "Import mstrmg: n = 366 registration request (#624)"
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: user-eb-intake-residue
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T21:30:23.753Z
-updated_at: 2026-10-22T13:13:24.393Z
+updated_at: 2026-10-23T02:26:20.084Z
 started_at: 2026-10-15T21:30:24.918Z
 ---
 Opened 2026-10-15T20:02Z during this pass; labelled intake by lane D. Needs stage 0/1: an entry in result-requests.yaml (triage pending -> done), source pin, comparison against the beyond-horizon rows (n > 324) and #627's rows, and the report-order rule.
@@ -82,3 +82,5 @@ Correction (user-eb-intake-residue, 2026-10-16T05:47Z by date -u): the '~06:xxZ'
 - The Couzo history records PR (after #719's) records that certificate as the current
   row at 366, 0.343 below the grid, where `main` holds no row today.
 - A one-line note linking the row is optional. The close condition is already met.
+
+2026-10-23 (c-lane-couzo-residue-1022): #730 merged at 02:10Z on 23 October 2026 as fcf2f96a5 and recorded 4e4c8ce's certificates/best/n366.cert as the current row at 366 (couzo-index-2026-10-15, 19.656854249493). Our 16 October reply said those certificates were awaiting import, so a short follow-up is posted: https://github.com/jlevy/squares/issues/624#issuecomment-6355895083 (to be recorded under #624's replies by the next records PR). The bead's work is done, but it stays open: it is #624's answer_bead and #624 is open in result-requests.yaml on main, so closing it would leave a dead deferral. Close it with the change that closes #624 in the record.
