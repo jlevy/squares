@@ -1,0 +1,328 @@
+{
+ "main": "0281e776342f2f1b63d3df66dc3c1737e8202945",
+ "start": "804eff369193b698d497a9c06847059eb9de0470",
+ "rows": {
+  "T-226 (#670)": {
+   "n": 204,
+   "side": "45044217780850246618141/3041751595240000000000",
+   "side_approx": "14.80864441768992380783",
+   "equals_register_claim": true,
+   "equals_claims_json_exact_side": true,
+   "issue_print": "14.808644417690",
+   "issue_print_is_ceiling_at_12": true,
+   "ceiling_at_16": "14.8086444176899239",
+   "claims_json_ceiling_equal": true,
+   "earlier_in_report_order": [
+    {
+     "against": "house at 804eff369 (verified)",
+     "reported": "2026-10-17T06:37:10Z (freeze)",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "1.881670e-05",
+     "form": "74043316171934782831614517243010476148112633887217867153091599336906906697289170"
+    },
+    {
+     "against": "house at 804eff369 (reported)",
+     "reported": "2026-10-17T06:37:10Z (freeze)",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "1.881670e-05",
+     "form": "74043316171934782831614517243010476148112633887217867153091599336906906697289170"
+    }
+   ],
+   "below_every_earlier": true,
+   "later_in_report_order": [
+    {
+     "by": "T-228 (#675)",
+     "reported": "2026-10-18T06:02:11Z",
+     "below_this": true,
+     "side_minus_other": "5.046313e-08",
+     "exact_difference": "26395221785795540042042788271/523059501766792505020306000000000000"
+    },
+    {
+     "by": "T-223 (#678)@204",
+     "reported": "2026-10-18T23:23:19Z",
+     "below_this": true,
+     "side_minus_other": "1.575709e-06",
+     "exact_difference": "91695088637838898862866939/58192919795686368190772800000000"
+    },
+    {
+     "by": "T-225@204",
+     "reported": "2026-10-20T02:36:12Z",
+     "below_this": true,
+     "side_minus_other": "1.577098e-06",
+     "exact_difference": "119928541623811819951500919512093621/76043789881000000000000000000000000000000"
+    }
+   ],
+   "superseded_by_every_later": true,
+   "house_on_main_now": {
+    "verified": {
+     "form": "14808642840591493923068442871459/1000000000000000000000000000000",
+     "this_minus_house": "1.577098e-06",
+     "house_below_this": true
+    },
+    "reported": {
+     "form": "14808642840591493923068442871459/1000000000000000000000000000000",
+     "this_minus_house": "1.577098e-06",
+     "house_below_this": true
+    },
+    "house_is_T-225": true
+   },
+   "later_counts_compared": 240,
+   "later_counts_decided_by_print": 4,
+   "below_every_later_count": true,
+   "least_later_margin": {
+    "m": 205,
+    "lane": "verified",
+    "below": true,
+    "how": "exact",
+    "bound_minus_side": "1.580673e-02",
+    "form": "3706112786531022055915931516421/250000000000000000000000000000"
+   }
+  },
+  "T-228 (#675)": {
+   "n": 204,
+   "side": "101859759444979981360793459/6878398651426000000000000",
+   "side_approx": "14.80864436722678969663",
+   "equals_register_claim": true,
+   "equals_claims_json_exact_side": true,
+   "issue_print": "14.808644367227",
+   "issue_print_is_ceiling_at_12": true,
+   "ceiling_at_16": "14.8086443672267897",
+   "claims_json_ceiling_equal": true,
+   "earlier_in_report_order": [
+    {
+     "against": "house at 804eff369 (verified)",
+     "reported": "2026-10-17T06:37:10Z (freeze)",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "1.886716e-05",
+     "form": "74043316171934782831614517243010476148112633887217867153091599336906906697289170"
+    },
+    {
+     "against": "house at 804eff369 (reported)",
+     "reported": "2026-10-17T06:37:10Z (freeze)",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "1.886716e-05",
+     "form": "74043316171934782831614517243010476148112633887217867153091599336906906697289170"
+    },
+    {
+     "against": "T-226 (#670)",
+     "reported": "2026-10-17T18:05:06Z",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "5.046313e-08",
+     "exact_difference": "26395221785795540042042788271/523059501766792505020306000000000000"
+    }
+   ],
+   "below_every_earlier": true,
+   "later_in_report_order": [
+    {
+     "by": "T-223 (#678)@204",
+     "reported": "2026-10-18T23:23:19Z",
+     "below_this": true,
+     "side_minus_other": "1.525246e-06",
+     "exact_difference": "264094841613283952911359075773/173149066336600680654022000000000000"
+    },
+    {
+     "by": "T-225@204",
+     "reported": "2026-10-20T02:36:12Z",
+     "below_this": true,
+     "side_minus_other": "1.526635e-06",
+     "exact_difference": "5250403079834096403680529345667474733/3439199325713000000000000000000000000000000"
+    }
+   ],
+   "superseded_by_every_later": true,
+   "house_on_main_now": {
+    "verified": {
+     "form": "14808642840591493923068442871459/1000000000000000000000000000000",
+     "this_minus_house": "1.526635e-06",
+     "house_below_this": true
+    },
+    "reported": {
+     "form": "14808642840591493923068442871459/1000000000000000000000000000000",
+     "this_minus_house": "1.526635e-06",
+     "house_below_this": true
+    },
+    "house_is_T-225": true
+   },
+   "later_counts_compared": 240,
+   "later_counts_decided_by_print": 4,
+   "below_every_later_count": true,
+   "least_later_margin": {
+    "m": 205,
+    "lane": "verified",
+    "below": true,
+    "how": "exact",
+    "bound_minus_side": "1.580678e-02",
+    "form": "3706112786531022055915931516421/250000000000000000000000000000"
+   }
+  },
+  "T-227@227 (#672)": {
+   "n": 227,
+   "side": "71427829379429597600111901507/4589408083628500000000000000",
+   "side_approx": "15.56362565234272693410",
+   "equals_register_claim": true,
+   "equals_claims_json_exact_side": true,
+   "issue_print": "15.563625652343",
+   "issue_print_is_ceiling_at_12": true,
+   "ceiling_at_16": "15.5636256523427270",
+   "claims_json_ceiling_equal": true,
+   "earlier_in_report_order": [
+    {
+     "against": "house at 804eff369 (verified)",
+     "reported": "2026-10-17T06:37:10Z (freeze)",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "7.442160e-03",
+     "form": "19463834764831844055010554526310613/1250000000000000000000000000000000"
+    },
+    {
+     "against": "house at 804eff369 (reported)",
+     "reported": "2026-10-17T06:37:10Z (freeze)",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "7.442160e-03",
+     "form": "(17/2) + 5 sqrt(2)"
+    },
+    {
+     "against": "T-196 (#668)@227",
+     "reported": "2026-10-17T14:06:25Z",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "1.710513e-04",
+     "exact_difference": "19625608518563135753723747387243446036498414056943678211299386383188171187278853444289021263441244084191877555805979531385350241362792418377660126833372889968243/114735202090712500000000000000011677333830293841700192602309575669659645240534856976514727985045758957934996122322966418250992484037241536850000000000000000000000000"
+    },
+    {
+     "against": "held candidate of think-qdcc (Daniel's driver on T-196, 20 October; #672's printed prior)",
+     "reported": "not a report",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "1.710347e-04"
+    }
+   ],
+   "below_every_earlier": true,
+   "later_in_report_order": [
+    {
+     "by": "T-225@227",
+     "reported": "2026-10-20T02:36:12Z",
+     "below_this": true,
+     "side_minus_other": "1.757785e-11",
+     "exact_difference": "80671923699051704327371636387293/4589408083628500000000000000000000000000000"
+    }
+   ],
+   "superseded_by_every_later": true,
+   "house_on_main_now": {
+    "verified": {
+     "form": "7781812826162574542396221861851/500000000000000000000000000000",
+     "this_minus_house": "1.757785e-11",
+     "house_below_this": true
+    },
+    "reported": {
+     "form": "7781812826162574542396221861851/500000000000000000000000000000",
+     "this_minus_house": "1.757785e-11",
+     "house_below_this": true
+    },
+    "house_is_T-225": true
+   },
+   "later_counts_compared": 194,
+   "later_counts_decided_by_print": 3,
+   "below_every_later_count": true,
+   "least_later_margin": {
+    "m": 228,
+    "lane": "verified",
+    "below": true,
+    "how": "exact",
+    "bound_minus_side": "4.097582e-02",
+    "form": "81948695622242743406583885455629643551588893415142761463009212036964483311755603"
+   }
+  },
+  "T-227@229 (#672)": {
+   "n": 229,
+   "side": "231170315041711399213831561/14771101209934000000000000",
+   "side_approx": "15.65017474027207689458",
+   "equals_register_claim": true,
+   "equals_claims_json_exact_side": true,
+   "issue_print": "15.650174740273",
+   "issue_print_is_ceiling_at_12": true,
+   "ceiling_at_16": "15.6501747402720769",
+   "claims_json_ceiling_equal": true,
+   "earlier_in_report_order": [
+    {
+     "against": "house at 804eff369 (verified)",
+     "reported": "2026-10-17T06:37:10Z (freeze)",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "6.679509e-03",
+     "form": "391421356237309504880168872421/25000000000000000000000000000"
+    },
+    {
+     "against": "house at 804eff369 (reported)",
+     "reported": "2026-10-17T06:37:10Z (freeze)",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "6.679509e-03",
+     "form": "10 + 4 sqrt(2)"
+    },
+    {
+     "against": "T-196 (#668)@229",
+     "reported": "2026-10-17T14:06:25Z",
+     "below": true,
+     "how": "exact",
+     "bound_minus_side": "1.667614e-08",
+     "exact_difference": "1231624483928586868287831836597319614549486599978829104125429754940658620048595006297738004619556503154786254754586255873764648865372660353327682645805136700147/73855506049670000000000000000012831406706742532903153590379055147534608421525837901407438079676279304135568905731052035938733273970216121702300000000000000000000000000"
+    }
+   ],
+   "below_every_earlier": true,
+   "later_in_report_order": [
+    {
+     "by": "T-198 (#674 opening)",
+     "reported": "2026-10-17T23:10:59Z",
+     "below_this": true,
+     "side_minus_other": "1.148541e-05",
+     "exact_difference": "42413051484178844279198071265152499819/3692775302483500000000000000000000000000000"
+    },
+    {
+     "by": "T-199 (#674 update)",
+     "reported": "2026-10-18T01:36:21Z",
+     "below_this": true,
+     "side_minus_other": "1.322638e-05",
+     "exact_difference": "48842036568189022917661575014805879319/3692775302483500000000000000000000000000000"
+    },
+    {
+     "by": "T-225@229",
+     "reported": "2026-10-20T02:36:12Z",
+     "below_this": true,
+     "side_minus_other": "1.322640e-05",
+     "exact_difference": "97684214363596837185377063740043350593/7385550604967000000000000000000000000000000"
+    }
+   ],
+   "superseded_by_every_later": true,
+   "house_on_main_now": {
+    "verified": {
+     "form": "15650161513876431064009548865321/1000000000000000000000000000000",
+     "this_minus_house": "1.322640e-05",
+     "house_below_this": true
+    },
+    "reported": {
+     "form": "15650161513876431064009548865321/1000000000000000000000000000000",
+     "this_minus_house": "1.322640e-05",
+     "house_below_this": true
+    },
+    "house_is_T-225": true
+   },
+   "later_counts_compared": 190,
+   "later_counts_decided_by_print": 3,
+   "below_every_later_count": true,
+   "least_later_margin": {
+    "m": 230,
+    "lane": "verified",
+    "below": true,
+    "how": "exact",
+    "bound_minus_side": "3.275209e-02",
+    "form": "7841463414634146341541829268293/500000000000000000000000000000"
+   }
+  }
+ }
+}

@@ -1,0 +1,245 @@
+{
+ "python": "3.13.16",
+ "all_as_expected": true,
+ "cases": [
+  {
+   "case": "separated",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": "1/2",
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "edge contact",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": "0",
+   "touching": 1,
+   "wall_contacts": 0
+  },
+  {
+   "case": "edge overlap 1e-30",
+   "expected_accepted": false,
+   "ok": true,
+   "route_Z": false,
+   "route_C": false,
+   "least_gap": "-1/1000000000000000000000000000000",
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "partial edge contact",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": "0",
+   "touching": 1,
+   "wall_contacts": 0
+  },
+  {
+   "case": "corner contact",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": "0",
+   "touching": 1,
+   "wall_contacts": 0
+  },
+  {
+   "case": "tilted vertex on edge",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": "0",
+   "touching": 1,
+   "wall_contacts": 0
+  },
+  {
+   "case": "tilted vertex 1e-30 in",
+   "expected_accepted": false,
+   "ok": true,
+   "route_Z": false,
+   "route_C": false,
+   "least_gap": "-1/1000000000000000000000000000000",
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "tilted vertex 1e-30 out",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": "1/1000000000000000000000000000000",
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "separated only on B's axis, contact",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": "0",
+   "touching": 1,
+   "wall_contacts": 0
+  },
+  {
+   "case": "separated only on B's axis, 1e-30 in",
+   "expected_accepted": false,
+   "ok": true,
+   "route_Z": false,
+   "route_C": false,
+   "least_gap": "-1/1000000000000000000000000000000",
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "separated only on B's axis, 1e-30 out",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": "1/1000000000000000000000000000000",
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "wall contact",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": null,
+   "touching": 0,
+   "wall_contacts": 1
+  },
+  {
+   "case": "wall crossed by 1e-30",
+   "expected_accepted": false,
+   "ok": true,
+   "route_Z": false,
+   "route_C": false,
+   "least_gap": null,
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "tilted wall contact",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": null,
+   "touching": 0,
+   "wall_contacts": 1
+  },
+  {
+   "case": "tilted wall crossed by 1e-30",
+   "expected_accepted": false,
+   "ok": true,
+   "route_Z": false,
+   "route_C": false,
+   "least_gap": null,
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "far wall contact, side lowered",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": null,
+   "touching": 0,
+   "wall_contacts": 2
+  },
+  {
+   "case": "duplicate square",
+   "expected_accepted": false,
+   "ok": true,
+   "route_Z": false,
+   "route_C": false,
+   "least_gap": "-1",
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "tilted pair, same centre",
+   "expected_accepted": false,
+   "ok": true,
+   "route_Z": false,
+   "route_C": false,
+   "least_gap": "-72/65",
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "fact: separated",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": "1/2",
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "fact: tilted vertex on edge",
+   "expected_accepted": true,
+   "ok": true,
+   "route_Z": true,
+   "route_C": true,
+   "least_gap": "0",
+   "touching": 1,
+   "wall_contacts": 0
+  },
+  {
+   "case": "fact: basis not unit",
+   "expected_accepted": false,
+   "ok": true,
+   "route_Z": false,
+   "route_C": false,
+   "least_gap": "1999999/2000000",
+   "touching": 0,
+   "wall_contacts": 0
+  },
+  {
+   "case": "reader: row count",
+   "ok": true,
+   "refusal": "1 rows for n = 2"
+  },
+  {
+   "case": "reader: decimal literal",
+   "ok": true,
+   "refusal": "not a rational literal: '1.0'"
+  },
+  {
+   "case": "reader: fact count",
+   "ok": true,
+   "refusal": "1 squares for n = 2"
+  },
+  {
+   "case": "reader: fact unknown key",
+   "ok": true,
+   "refusal": "square 1: unexpected key 'size: 2'"
+  },
+  {
+   "case": "reader: fact origin",
+   "ok": true,
+   "refusal": "coordinates are not lower-left, x right and y up"
+  },
+  {
+   "case": "same(): equal, then one basis mirrored",
+   "ok": true
+  }
+ ]
+}

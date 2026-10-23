@@ -1,0 +1,88 @@
+{
+ "T-226@204": {
+  "accepted": true,
+  "comment_lines": 0,
+  "file": "/home/user/squares/packing/resources/web/couzo-issue670-2026-10-17/source/certificates/n204.cert",
+  "n": 204,
+  "route_C": {
+   "accepted": true,
+   "corner_wall_contacts": 32,
+   "cpu_seconds": 1.765,
+   "failures": [],
+   "largest_area": "0",
+   "least_wall_clearance": "0",
+   "pairs_clipped": 20706,
+   "pairs_with_centres_within_sqrt2": 498,
+   "positive_area_pairs": 0,
+   "touching_pairs": 0
+  },
+  "route_Z": {
+   "accepted": true,
+   "cpu_seconds": 0.065,
+   "failures": [],
+   "least_gap": "62800029000700643045522760818196896731809961/1147091068213797737645261343852904187262395167500000000",
+   "least_gap_approx": "5.4747204246381434e-11",
+   "least_gap_pair": [
+    123,
+    132,
+    0
+   ],
+   "least_wall_at": [
+    4,
+    "y>=0"
+   ],
+   "least_wall_clearance": "0",
+   "least_wall_clearance_approx": "0",
+   "overlapping_pairs": 0,
+   "pairs_decided": 20706,
+   "touching_pairs": 0,
+   "wall_contacts": 16
+  },
+  "routes_agree": true,
+  "sha256": "f317d0c0b04b947b9199ed47c998ff221d05e4d01849b942545364a173bc73dc",
+  "side": "45044217780850246618141/3041751595240000000000"
+ },
+ "T-228@204": {
+  "accepted": true,
+  "comment_lines": 0,
+  "file": "/home/user/squares/packing/resources/web/couzo-issue675-2026-10-18/source/certificates/best/n204.cert",
+  "n": 204,
+  "route_C": {
+   "accepted": true,
+   "corner_wall_contacts": 88,
+   "cpu_seconds": 1.85,
+   "failures": [],
+   "largest_area": "0",
+   "least_wall_clearance": "0",
+   "pairs_clipped": 20706,
+   "pairs_with_centres_within_sqrt2": 487,
+   "positive_area_pairs": 0,
+   "touching_pairs": 0
+  },
+  "route_Z": {
+   "accepted": true,
+   "cpu_seconds": 0.069,
+   "failures": [],
+   "least_gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+   "least_gap_approx": "1.2009999788951037e-12",
+   "least_gap_pair": [
+    67,
+    72,
+    0
+   ],
+   "least_wall_at": [
+    0,
+    "x<=S"
+   ],
+   "least_wall_clearance": "0",
+   "least_wall_clearance_approx": "0",
+   "overlapping_pairs": 0,
+   "pairs_decided": 20706,
+   "touching_pairs": 0,
+   "wall_contacts": 44
+  },
+  "routes_agree": true,
+  "sha256": "761af9ec961d812a313b9b119845af6f8d2befa79ca770d0d919a09673a97543",
+  "side": "101859759444979981360793459/6878398651426000000000000"
+ }
+}

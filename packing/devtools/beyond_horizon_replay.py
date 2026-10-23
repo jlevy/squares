@@ -3053,9 +3053,11 @@ def _superseded_after(
     """Whether a row the plan calls current is held superseded by a report its walk does
     not reach: a later import's row, as `chain_problems` allows (#720's review B, B1). The
     held row must be the plan's but for its disposition and successor, and the successor
-    must hold a row at the count strictly below it, from a source dated no earlier than the
-    row's own, so the plan does not rest on `check_source_coverage` (#722's review A, A5).
-    A successor dated the same day is not ordered by the day, as that gate does not."""
+    must hold a row at the count of the same claim strictly below it, from a source dated
+    no earlier than the row's own, so the plan does not rest on `check_source_coverage`
+    (#722's review A, A5, and review B, B3). A successor dated the same day is not ordered
+    by the day, as that gate does not. A source the walk reaches is never the successor,
+    whatever its row: the walk already ordered it."""
     if "superseded_by" in plan or held.get("disposition") != "superseded":
         return False
     successor = held.get("superseded_by")
@@ -3069,7 +3071,9 @@ def _superseded_after(
     later = [
         row
         for row in register["beyond_horizon_claims"]
-        if row["n"] == plan["n"] and row["source_id"] == successor
+        if row["n"] == plan["n"]
+        and row["source_id"] == successor
+        and row["claim"] == plan["claim"]
     ]
     own = dated.get(str(plan["source_id"]), "")
     return (

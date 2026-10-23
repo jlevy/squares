@@ -1,0 +1,178 @@
+{
+ "couzo-issue670-2026-10-17": {
+  "pin": "23aff0c6f992271e1ad13a148d44f392c4b386c0",
+  "sha256": "fb948deaa94853877cf34b132f0e5150562eb7399e2d7d11bbe551a0d44f121e",
+  "equals_packet_pinned_digest": true,
+  "generated": "2026-10-17T17:48:46.383529+00:00",
+  "first_checker": "https://github.com/jlevy/squares/blob/37e6757ed4c51a1d93f2f999814c2a5efbe2a223/packing/src/sqpack/verify.py",
+  "second_checker": "verify_bound_certificate.py",
+  "second_checker_sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+  "witnesses": {
+   "204": {
+    "certificate": "certificates/best/n204.cert",
+    "certificate_sha256": "f317d0c0b04b947b9199ed47c998ff221d05e4d01849b942545364a173bc73dc",
+    "bound": "45044217780850246618141/3041751595240000000000",
+    "credit": "Francisco Couzo; seed/construction: Mykhailo Polkovskyi (Mishapolk)",
+    "provenance": {
+     "category": "native search",
+     "packing_sha256": "acae38a7af8cc41e3e8d12b4c891cc838b4db0e80d345b91d91b429997b8009c",
+     "source_credit": {
+      "seed_credit": "Mykhailo Polkovskyi (Mishapolk)",
+      "search_job": {
+       "id": 105412,
+       "method": "hop",
+       "source": "n204.txt",
+       "source_origin": "own",
+       "source_sha256": "5d3ac34426490f2a0f5457a4f23b0c52ffe08a3a0db6d29127941a93cf8ca57b",
+       "constructed_seed": null
+      }
+     }
+    },
+    "strict_verification": {
+     "valid": false,
+     "closed_valid": true,
+     "sha256": "f317d0c0b04b947b9199ed47c998ff221d05e4d01849b942545364a173bc73dc",
+     "candidate_pairs": 2608,
+     "near_pairs": 498,
+     "checker": "verify_bound_certificate.py",
+     "checker_sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+     "contract": "exact closed-container feasibility, with separate strict verdict"
+    }
+   }
+  }
+ },
+ "couzo-issue672-2026-10-17": {
+  "pin": "af8cb7959aead318c0cf5e9f873de3caa763f77a",
+  "sha256": "66478c4ba36c2a3ad4cd4c9e1fd72b771641a5afae5a9c80f723141dc242f037",
+  "equals_packet_pinned_digest": true,
+  "generated": "2026-10-17T20:40:32.686326+00:00",
+  "first_checker": "https://github.com/jlevy/squares/blob/37e6757ed4c51a1d93f2f999814c2a5efbe2a223/packing/src/sqpack/verify.py",
+  "second_checker": "verify_bound_certificate.py",
+  "second_checker_sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+  "witnesses": {
+   "227": {
+    "certificate": "certificates/best/n227.cert",
+    "certificate_sha256": "65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17",
+    "bound": "71427829379429597600111901507/4589408083628500000000000000",
+    "credit": "Francisco Couzo; retained seed/construction credit: Joost de Winter (JoostdeWinter)",
+    "provenance": {
+     "category": "CT105 web submission",
+     "source_certificate_sha256": "65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17",
+     "submission_id": "f0ca7a659c465f2c48e9e688c297324c",
+     "method": "fq",
+     "received": "20261017T202822Z",
+     "seed_credit": "Joost de Winter (JoostdeWinter)",
+     "prior_retained_witness": {
+      "certificate": "certificates/parents/cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0.cert",
+      "certificate_sha256": "cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0",
+      "source_credit": {
+       "seed_credit": "Joost de Winter (JoostdeWinter)",
+       "category": "reviewed public submission",
+       "source_url": "https://github.com/JoostdeWinter/square-packing/blob/c95c4938f068ed44a1819ef973e770ec241aa567/n227/n227_record.cert",
+       "request": "https://github.com/jlevy/squares/issues/668",
+       "source_n": 227,
+       "deleted_squares": 0,
+       "source_certificate_sha256": "7d386887c4acdfe2472c0b83fff54e76eae76d414fef9ddc45478d0e03011d1f",
+       "seed_certificate": {
+        "source": "evand",
+        "certificate": "evand/search/regularize/lists/certs/alt/n-227.cert.gz",
+        "sha256": "cbaf36bf537196321f3d2beb62c18e154047c745cb72d478942be6a49490c225",
+        "request": "https://github.com/jlevy/squares/issues/668",
+        "side": "486368646470642329014092781873/31250000000000000000000000000"
+       }
+      }
+     }
+    },
+    "strict_verification": {
+     "valid": true,
+     "closed_valid": true,
+     "sha256": "65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17",
+     "candidate_pairs": 2942,
+     "near_pairs": 459,
+     "checker": "verify_bound_certificate.py",
+     "checker_sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+     "contract": "exact closed-container feasibility, with separate strict verdict"
+    }
+   },
+   "229": {
+    "certificate": "certificates/best/n229.cert",
+    "certificate_sha256": "9ab667ec73e55b4570fdc427b9f9930831a3e3f07b6953a2e05c6aee0a07609f",
+    "bound": "231170315041711399213831561/14771101209934000000000000",
+    "credit": "Francisco Couzo; seed/construction: Joost de Winter",
+    "provenance": {
+     "category": "native search",
+     "packing_sha256": "c2d01489c3e6f706bb76cba0183632c0a504f6bc07ddb6522bef74da3e44f3ea",
+     "source_credit": {
+      "seed_credit": "Joost de Winter",
+      "category": "reviewed public submission",
+      "source_url": "https://github.com/JoostdeWinter/square-packing/blob/c95c4938f068ed44a1819ef973e770ec241aa567/n229/n229_record.cert",
+      "request": "https://github.com/jlevy/squares/issues/668",
+      "source_n": 229,
+      "deleted_squares": 0,
+      "source_certificate_sha256": "34ddede798ec3bc6ff9e94fd4c12ee12207946dd43435001e8ac9e9aacdde419",
+      "search_job": {
+       "id": 106640,
+       "method": "slp",
+       "source": "n229.txt",
+       "source_origin": "own",
+       "source_sha256": "7e5411b6657fbe385b588bf93dfb7b146a5a289a4e4039db254dd9ef51ed40c7",
+       "constructed_seed": null
+      }
+     }
+    },
+    "strict_verification": {
+     "valid": false,
+     "closed_valid": true,
+     "sha256": "9ab667ec73e55b4570fdc427b9f9930831a3e3f07b6953a2e05c6aee0a07609f",
+     "candidate_pairs": 3022,
+     "near_pairs": 563,
+     "checker": "verify_bound_certificate.py",
+     "checker_sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+     "contract": "exact closed-container feasibility, with separate strict verdict"
+    }
+   }
+  }
+ },
+ "couzo-issue675-2026-10-18": {
+  "pin": "c6da0fc7524d667bf3d224559724ba9b60762e60",
+  "sha256": "08bdea6f609dac417e0f60329ac6d47d23b878c19907762ed983311e38130014",
+  "equals_packet_pinned_digest": true,
+  "generated": "2026-10-18T05:43:00.475295+00:00",
+  "first_checker": "https://github.com/jlevy/squares/blob/37e6757ed4c51a1d93f2f999814c2a5efbe2a223/packing/src/sqpack/verify.py",
+  "second_checker": "verify_bound_certificate.py",
+  "second_checker_sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+  "witnesses": {
+   "204": {
+    "certificate": "certificates/best/n204.cert",
+    "certificate_sha256": "761af9ec961d812a313b9b119845af6f8d2befa79ca770d0d919a09673a97543",
+    "bound": "101859759444979981360793459/6878398651426000000000000",
+    "credit": "Francisco Couzo; seed/construction: Mykhailo Polkovskyi (Mishapolk)",
+    "provenance": {
+     "category": "native search",
+     "packing_sha256": "efd363450f9ec73dcb698c4a023c41ee31f1c5eecd1d5bfcdaf7031122b0ac26",
+     "source_credit": {
+      "seed_credit": "Mykhailo Polkovskyi (Mishapolk)",
+      "search_job": {
+       "id": 107960,
+       "method": "slp",
+       "source": "n204.txt",
+       "source_origin": "own",
+       "source_sha256": "3e51a35e8f73554a7bc844c55e07b87c4d81b9369bfa91f50ee48394a19d1c51",
+       "constructed_seed": null
+      }
+     }
+    },
+    "strict_verification": {
+     "valid": false,
+     "closed_valid": true,
+     "sha256": "761af9ec961d812a313b9b119845af6f8d2befa79ca770d0d919a09673a97543",
+     "candidate_pairs": 2622,
+     "near_pairs": 487,
+     "checker": "verify_bound_certificate.py",
+     "checker_sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+     "contract": "exact closed-container feasibility, with separate strict verdict"
+    }
+   }
+  }
+ }
+}

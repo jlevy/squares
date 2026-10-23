@@ -1206,9 +1206,43 @@ repositories:
       the 48 is an import until he answers. The triage of #719 (think-xyhn) read every certificate
       at the pin, and the rest are at or above an earlier report. dc440a8 adds only
       ISSUE_SUBMISSION_122.md, issue 719's body. Nothing else to import.
-  # Couzo's history residue (think-tmwt, think-yfoo, think-a4wq, think-om5l): what the intake
-  # sweep of 12:20Z on 22 October listed for franciscouzo/square-packing, which the read-only
-  # triage c-triage-1022b read at its head.
+  # The intake sweep of 12:20Z on 22 October 2026 listed three watched repositories that
+  # needed an owner; the read-only triage c-triage-1022b read each at its head.
+  - url: https://github.com/evand/square-packing
+    read_through: 7051f4eabf7f9b2509ad1e7cc296f57d19482027
+    read_on: '2026-10-22'
+    bead: think-7l2j
+    note: >-
+      The 75 commits from b64d5ab (20 October, 22:21Z) to 7051f4e (22 October, 01:54Z), the
+      head, past 88385ab, the pin of the evand-n270-sweep-2026-10-20 and
+      evand-n343-sweep-2026-10-20 packets. None adds or changes a certificate. Most are unit
+      squares in rectangles: search/rectfront/, docs/rect.html, two literature notes and
+      lean/Sqpack/Rect*.lean, which prove in Lean, with standard axioms by the source's
+      account, exactly which w x h rectangles hold two to five unit squares (rect2_iff to
+      rect5_iff; boundaries credited to Friedman's Math Magic of June 2010). Rectangles are
+      outside this record, which is squares in a square, but at w = h rect2_iff to
+      rect4_iff give s(2) = s(3) = s(4) = 2 and rect5_pts_lower (e96ab69) gives
+      s(5) >= 2 + 1/sqrt 2: a proof-assistant route to values the record holds by published
+      proofs, which think-7l2j holds until a packet pins this commit or its import declines
+      it. The note literature/s5-proofs-2026-10-21.md points to chelokot's s5_eq_goebel, in
+      the 753079eb tree the chelokot-nagamochi-counterexample-2026-09-05 packet pins, which
+      think-7l2j holds too. The rest is the packer's store hygiene, deduplication and
+      allocator design, and runs at 157, 273, 274 and 308 whose best sides (13.009188 at
+      157, 17.000299455 at 274) are above the register's, with no certificate. Nothing else
+      to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: 2ed00b2ecd6b1178883f2fe3b2460ec7b5ea11c7
+    read_on: '2026-10-22'
+    note: >-
+      The three commits of 22 October (05:44Z to 12:01Z) past the a6c0dbb read. 1cedabe and
+      fbd2152 put the paper cubes-n4-upper, upper bounds for unit 4-cubes in a 4-cube at
+      k = 17 to 30, on the source's site. 2ed00b2 adds problems/cubes-in-cube/closed-measure/:
+      s3(25) = s3(26) = 3 for unit cubes in a cube, by a closed counting measure (sigma =
+      27/20, total 24.9123 < 25) whose main lemma two interval branch-and-bound checkers
+      decide, with their receipts (72,779,027 and 387,289,685 boxes; about 230,000 and 2.7
+      million seconds at the source). Cubes are outside this record, which is squares in a
+      square, as the reads of eb22671 and fbc5fc4 said, and no record entry tracks one.
+      Nothing to import.
   - url: https://github.com/franciscouzo/square-packing
     read_through: 6b7391de820fd01f3ff6984e4a081e8c86845588
     read_on: '2026-10-22'
@@ -1219,7 +1253,7 @@ repositories:
       packet pins 5a299b4 and retains its 20 certificates at 325 to 1024 that no earlier row
       held: 9 current (487, 532, 579, 628, 679, 732, 787, 844, 903) and 11 later superseded
       by #719 (409, 450, 453, 649, 810, 812, 933, 934, 990, 991, 997), which the history walk
-      of Couzo's watched publications records since 22 October 2026. The walk holds the
+      of Couzo's watched publications records. The walk holds the
       commit's 61 re-certifications below an earlier side only past its 12-place print (30 of
       them #715's) for think-fwa9 and its side at 331, above Goebel's construction, for #613
       (think-8krd). d09edd7's other paths hold nothing to import:

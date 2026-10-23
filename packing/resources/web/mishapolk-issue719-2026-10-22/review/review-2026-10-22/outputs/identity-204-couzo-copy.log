@@ -1,0 +1,7 @@
+719@204: n=204 side=14.8086428305278961 tilted=77
+T-225 house@204: n=204 side=14.8086428405914940 tilted=67
+T-223 #678@204: n=204 side=14.8086428419812464 tilted=76
+Couzo 5a299b4 best/n204@204: n=204 side=14.8086428405914940 tilted=67
+Couzo 5a299b4 best/n204@204 against T-225 house@204: one to one under ['identity']; best identity; within 1e-6 204, beyond 1e-3 0, 1e-2 0, 0.1 0; largest move 0; largest turn 0 deg; turned >1 deg 0; turns [{'deg': 0.0, 'square': 204, 'partner': 204}, {'deg': 0.0, 'square': 203, 'partner': 203}, {'deg': 0.0, 'square': 202, 'partner': 202}, {'deg': 0.0, 'square': 201, 'partner': 201}] tilted only in A 0, only in B 0 (Hungarian runs 1)
+Couzo 5a299b4 best/n204@204 against T-223 #678@204: one to one under ['half turn']; best half turn; within 1e-6 132, beyond 1e-3 58, 1e-2 27, 0.1 4; largest move 0.4416; largest turn 0.159 deg; turned >1 deg 0; turns [{'deg': 0.159, 'square': 36, 'partner': 36}, {'deg': 0.0942, 'square': 165, 'partner': 165}, {'deg': 0.088, 'square': 121, 'partner': 121}, {'deg': 0.0593, 'square': 78, 'partner': 78}] tilted only in A 0, only in B 9 (Hungarian runs 1)
+719@204 against Couzo 5a299b4 best/n204@204: one to one under ['half turn']; best half turn; within 1e-6 117, beyond 1e-3 67, 1e-2 39, 0.1 6; largest move 0.2731; largest turn 25.64 deg; turned >1 deg 1; turns [{'deg': 25.6423, 'square': 38, 'partner': 38}, {'deg': 0.7903, 'square': 24, 'partner': 24}, {'deg': 0.5575, 'square': 165, 'partner': 165}, {'deg': 0.4931, 'square': 36, 'partner': 36}] tilted only in A 10, only in B 0 (Hungarian runs 1)
