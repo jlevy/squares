@@ -804,10 +804,10 @@ the axis patch and at every root within a few dozen boxes, at legal poses whose 
 captures are below $\tau$. That is a coarse test of the oblique search.
 A counted control should keep the axis patch and fail only at an oblique root, so that
 its refusal tests the oblique bound where it is tight.
-(The n = 28 packet’s README says the source’s control “is refused at the axis patch
+(The n = 28 packet’s README said the source’s control “is refused at the axis patch
 alone … and never reaches the oblique search”; for this program that is not so, as its
 own table and the run here show, and the sentence fits the second program,
-`contpose_check3`.)
+`contpose_check3`; the change that records this review corrects the README.)
 
 ## What This Review Does Not Establish
 

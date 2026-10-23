@@ -37813,11 +37813,11 @@ evidence:
       the axis patch and at all 86 roots, each at a legal pose whose exact capture,
       computed apart from the crate, is below 1 (least 0.98599). No control yet keeps
       the axis patch and fails only at an oblique root. The least certified bounds of 1 +
-      4.7e-12 and 1 + 2.4e-12 are search stops, not slack. A complete replay and a
-      replay remains pending, priced at about 13 CPU-hours a route; the 23 October
-      review of the first program read this certificate (external_review). The two programs share no code with each other, but each shares code with
-      routes this record already counts. No standing bound or rating changes; T-107 and
-      T-142 stand.
+      4.7e-12 and 1 + 2.4e-12 are search stops, not slack. A complete replay remains
+      pending, priced at about 13 CPU-hours a route; the 23 October review of the first
+      program read this certificate (external_review). The two programs share no code
+      with each other, but each shares code with routes this record already counts. No
+      standing bound or rating changes; T-107 and T-142 stand.
     external_review:
       state: informally-verified
       date: '2026-10-23'

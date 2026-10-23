@@ -145,9 +145,12 @@ $1 + 2.4 \times 10^{-12}$, are where each search stopped splitting, not the
 certificate’s slack: the 9999/10000 mutant passes root 7, and the 999/1000 mutant leaves
 a pose there whose exact capture is $1.0000089$, so the slack at that pose is about
 $10^{-3}$. Neither mutant is a counted control: the first was not refused, and the
-second was stopped by its budget rather than by an exact capture below
-1. The source’s own control, every mass × 985/1000, is refused at the axis patch alone
-   (minimum 0.98599) and never reaches the oblique search.
+second was stopped by its budget rather than by an exact capture below $1$. The source’s
+own control, every mass × 985/1000, fails everywhere: check1 refuses it at the axis
+patch and at all 86 roots, each at a legal pose whose exact capture is below $1$ (least
+0.98599, each re-evaluated by the
+[soundness review of 23 October](../../../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)),
+and check2 refuses it at the axis, as its receipt shows.
 
 ## The Price of a Complete Replay
 
