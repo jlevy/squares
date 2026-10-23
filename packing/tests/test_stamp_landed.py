@@ -290,7 +290,12 @@ def test_every_house_and_row_source_carries_the_day_it_landed() -> None:
     under the result that houses it now, and one day per source with rows."""
     landings = stamp_landed.read_landings(stamp_landed.LANDINGS.read_text(encoding="utf-8"))
     adopted, sources = stamp_landed.current_landings()
-    assert stamp_landed.landings_problems(landings, adopted, sources) == []
+    problems = stamp_landed.landings_problems(landings, adopted, sources)
+    assert not problems, (
+        "the landing record lags the tree; run `python -m devtools.stamp_landed --apply` "
+        "from packing/ after merging main, and again at the merge step (result-import.md, "
+        f"stages 3 and 5): {problems}"
+    )
     assert stamp_landed.LANDINGS.read_text(encoding="utf-8") == stamp_landed.write_landings(
         landings
     )

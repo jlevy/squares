@@ -200,6 +200,44 @@ def test_each_source_of_beyond_horizon_rows_in_the_window_has_one_line_on_its_da
     }
 
 
+def test_an_unstamped_house_or_source_is_left_out_and_the_render_carries_on(
+    overview: overview_data.Overview, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A row source or a house with no landing yet, as `main` would hold after a records
+    pull request merged without its stamp, is left out of Recently Added and never breaks
+    the render: the landing test turns CI red instead (#736's review A, finding A10)."""
+    since, until = _window(overview)
+    found, moves = beyond_rows(since, until), house_moves(since, until)
+    assert found
+    assert moves
+    source, n = found[0].source["id"], moves[0].counts[0]
+    record = dict(
+        stamp_landed.read_landings(stamp_landed.LANDINGS.read_text("utf-8"))._asdict()
+    )
+    trimmed = {
+        "houses": [
+            {"n": count, "result": result, "landed": day}
+            for count, (result, day) in record["houses"].items()
+            if count != n
+        ],
+        "sources": [
+            {"id": key, "landed": day}
+            for key, day in record["sources"].items()
+            if key != source
+        ],
+    }
+    monkeypatch.setattr(overview_sections, "_landings", lambda: trimmed)
+    rendered = overview_sections.recently_added(overview)
+    assert rendered.startswith('<div class="site-rollup site-added">')
+    assert source not in {kept.source["id"] for kept in beyond_rows(since, until)}
+    assert all(n not in move.counts for move in house_moves(since, until))
+    assert all(
+        n not in move.counts
+        for day in overview_sections.recent_days(overview)
+        for move in day.houses
+    )
+
+
 def test_one_window_bounds_every_kind_and_the_introduction_names_what_is_shown(
     overview: overview_data.Overview, section: str, days: dict[str, tuple[bool, str]]
 ) -> None:

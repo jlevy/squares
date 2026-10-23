@@ -28,9 +28,9 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 Everything that reached this site over {{RECENT_SPAN}}, newest first: each result at any
 significance, each count whose house best packing moved, and the dated bounds recorded
-beyond $n = {{CORPUS_END}}$. The Results page lists
-[the last {{ADDED_DAYS}} days](results.html#added-in-the-last-seven-days) in full;
-[News](news.html) announces the most significant.
+beyond $n = {{CORPUS_END}}$. The Results page lists every result of
+[its own last {{ADDED_DAYS}} days](results.html#added-in-the-last-seven-days), counted
+to its newest result; [News](news.html) announces the most significant.
 
 {{RECENTLY_ADDED}}
 

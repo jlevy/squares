@@ -1747,16 +1747,22 @@ def beyond_rows(since: date, until: date) -> list[BeyondRows]:
     """The dated beyond-horizon rows that reached `main` from `since` to `until`, one
     entry a source, newest first, then the source with more rows first, then by id. A row
     carries no date of its own; its source's landing is the day `main` first held its
-    rows, which so far have always come in one merge."""
+    rows, which so far have always come in one merge. A source with no landing yet is
+    left out, as `house_moves` leaves out a count with none."""
     coverage = _coverage()
     landed = source_landings()
     held: dict[str, list[Mapping[str, Any]]] = {}
     for row in coverage["beyond_horizon_claims"]:
         held.setdefault(str(row["source_id"]), []).append(row)
+    # A source the merge step has not stamped yet is left out, as an unstamped house is:
+    # `test_every_house_and_row_source_carries_the_day_it_landed` turns CI red, and a
+    # render never fails on it (#736's review A, finding A10).
     found = [
         BeyondRows(landed[source["id"]], source, tuple(held[source["id"]]))
         for source in coverage["sources"]
-        if source["id"] in held and since <= landed[source["id"]] <= until
+        if source["id"] in held
+        and source["id"] in landed
+        and since <= landed[source["id"]] <= until
     ]
     return sorted(
         found, key=lambda found: (-found.day.toordinal(), -len(found.rows), found.source["id"])
