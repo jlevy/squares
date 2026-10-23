@@ -610,12 +610,12 @@
       const late = { duration: duration * 0.4, delay: duration * 0.6, easing, fill: "backwards" };
       /** @type {[HTMLElement, Keyframe[], KeyframeAnimationOptions][]} */
       const moves = [];
-      for (const [tile, after] of now.tiles) {
+      for (const [tile, last] of now.tiles) {
         const first = before.tiles.get(tile);
-        if (first === undefined || (!inView(first.tile) && !inView(after.tile))) {
+        if (first === undefined || (!inView(first.tile) && !inView(last.tile))) {
           continue;
         }
-        const move = moveFrom(first.drawing, after.drawing, after.tile);
+        const move = moveFrom(first.drawing, last.drawing, last.tile);
         if (!still(move)) {
           moves.push([
             tile,
@@ -641,20 +641,20 @@
           timing,
         ]);
       }
-      for (const [follower, after] of changesHeight ? [] : now.rest) {
+      for (const [follower, last] of changesHeight ? [] : now.rest) {
         const first = before.rest.get(follower);
-        if (after.height === 0 || first === undefined) {
+        if (last.height === 0 || first === undefined) {
           continue;
         }
         if (first.height === 0) {
-          if (inView(after)) {
+          if (inView(last)) {
             moves.push([follower, arrive, late]);
           }
           continue;
         }
-        const x = first.left - after.left;
-        const y = first.top - after.top;
-        if ((inView(first) || inView(after)) && !still({ x, y, scale: 1 })) {
+        const x = first.left - last.left;
+        const y = first.top - last.top;
+        if ((inView(first) || inView(last)) && !still({ x, y, scale: 1 })) {
           moves.push([
             follower,
             [{ transform: `translate(${x}px, ${y}px)` }, { transform: "translate(0px, 0px)" }],
