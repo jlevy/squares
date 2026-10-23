@@ -30,3 +30,22 @@ interface SiteAtlasViews {
 interface SiteAtlasViewApi {
   mount(parts: SiteAtlasParts): SiteAtlasViews;
 }
+
+/** The last reading of a triangle that follows the scroll (`atlas-view.js`): the scroll
+ * since its stage was pinned, the point of the laid-out triangle at the focus line, the
+ * focus line on the stage, the zoom, the pan as a right-to-left scroller reads it, the
+ * reader's own share of the pan, and the scroll at which the triangle's bottom reaches
+ * the stage's. */
+interface AtlasFollowReading {
+  scrolled: number;
+  point: number;
+  line: number;
+  zoom: number;
+  pan: number;
+  nudge: number;
+  end: number;
+}
+
+interface HTMLElement {
+  atlasFollow?: AtlasFollowReading;
+}

@@ -1,24 +1,21 @@
-// One reading of a following triangle: its attributes, its zoom and pan, the focus line
-// and where it falls, and how the reader's row is framed. Lengths are as drawn.
+// One reading of a following triangle: its attributes, the script's own reading of its
+// zoom, pan and journey, and how the drawn rows are framed. Lengths are as drawn.
 () => {
   const block = document.querySelector("[data-atlas-grid]");
   const cells = block?.querySelector(".site-atlas-cells");
   if (!(block instanceof HTMLElement) || !(cells instanceof HTMLElement)) {
     return null;
   }
-  const rows = [...cells.querySelectorAll(".site-atlas-row")].filter(
-    (row) => row instanceof HTMLElement && row.closest("[hidden]") === null,
-  );
-  const first = rows[0];
-  const drawn =
-    first instanceof HTMLElement ? /scale\(([\d.]+)\)/.exec(first.style.transform) : null;
-  const scale = drawn ? Number(drawn[1]) : 1;
+  const follow = block.atlasFollow ?? {
+    scrolled: 0,
+    point: 0,
+    line: 0,
+    zoom: 1,
+    pan: 0,
+    nudge: 0,
+    end: 0,
+  };
   const box = cells.getBoundingClientRect();
-  const line = SiteAtlasView.focusLine(
-    window.innerHeight,
-    box.top + window.scrollY,
-    window.scrollY,
-  );
   /** @param {Element} row */
   const ends = (row) => {
     const boxes = [...row.querySelectorAll(".site-atlas-segment")]
@@ -30,16 +27,28 @@
       right: Math.max(...boxes.map((segment) => segment.right)),
     };
   };
-  const read = rows.map(ends);
+  const read = [...cells.querySelectorAll(".site-atlas-row")]
+    .filter((row) => row instanceof HTMLElement && row.closest("[hidden]") === null)
+    .map(ends);
+  // The row drawn at the focus line, between it and the next.
   const at = SiteAtlasView.along(
     read.map((row) => row.top),
-    line,
+    box.top + follow.line,
   );
-  const here = read[at.index];
-  const next = read[at.index + 1] ?? here;
-  const left = here && next ? SiteAtlasView.between(here.left, next.left, at.through) : box.left;
-  const right =
-    here && next ? SiteAtlasView.between(here.right, next.right, at.through) : box.right;
+  const left = read.length
+    ? SiteAtlasView.curve(
+        read.map((row) => row.left),
+        at.index,
+        at.through,
+      )
+    : box.left;
+  const right = read.length
+    ? SiteAtlasView.curve(
+        read.map((row) => row.right),
+        at.index,
+        at.through,
+      )
+    : box.right;
   const middle = box.left + cells.clientWidth / 2;
   const tab = block.querySelector('[data-atlas-size-tab][aria-selected="true"]');
   const tile = cells.querySelector(".site-atlas-cell");
@@ -53,18 +62,22 @@
     size: block.dataset.atlasSize ?? null,
     explicit: block.hasAttribute("data-atlas-size-explicit"),
     shown: tab instanceof HTMLElement ? (tab.dataset.atlasSizeTab ?? null) : null,
-    scale,
-    pan: cells.scrollLeft,
+    scale: follow.zoom,
+    pan: follow.pan,
+    nudge: follow.nudge,
+    scrolled: follow.scrolled,
+    point: follow.point,
+    end: follow.end,
     scrollY: window.scrollY,
     tile: tile instanceof HTMLElement ? tile.getBoundingClientRect().width : 0,
     number:
       number instanceof HTMLElement
-        ? Number.parseFloat(getComputedStyle(number).fontSize) * scale
+        ? Number.parseFloat(getComputedStyle(number).fontSize) * follow.zoom
         : 0,
-    line,
-    point: (line - box.top) / scale,
+    room: cells.clientWidth,
     leftEnd: (left - box.left) / cells.clientWidth,
     across: right > left ? (middle - left) / (right - left) : 0,
+    lastLeft: read.length ? ((read.at(-1)?.left ?? box.left) - box.left) / cells.clientWidth : 0,
     headerHidden:
       header instanceof HTMLElement && header.classList.contains("site-headroom-hidden"),
     moving: document

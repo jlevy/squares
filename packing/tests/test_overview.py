@@ -1450,14 +1450,15 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
         assert f'"{token}"' in script, token
     for written in ('setProperty("--site-atlas-line",', 'setProperty("--site-atlas-column",'):
         assert written in script, written
-    # The script moves with transforms and opacity alone. The one size it sets is the
-    # box's height under a triangle zoomed to follow the scroll, which carries what
-    # follows with the zoomed picture; no tile is ever sized.
+    # The script moves with transforms and opacity alone. The sizes it sets are those of a
+    # triangle that follows the scroll: its stage, the window's height, and the runway
+    # the stage stays pinned for, each once, as it is laid out; no tile is ever sized.
     assert "transform: `translate(" in script
     for sized in ("style.width", "style.left", "style.top"):
         assert sized not in script
     assert script.count("style.height") == 1
-    assert "cells.style.height = `${laid.height * next + laid.extra}px`;" in script
+    assert "cells.style.height = `${laid.stage}px`;" in script
+    assert script.count("style.blockSize") == 1
 
 
 def test_a_cases_visual_summary_carries_what_the_film_shows() -> None:

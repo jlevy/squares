@@ -1931,31 +1931,38 @@ contributor articles use their component sheets and the same text tokens.
   with no size, Grid, fragment or embedding in the address, follows the page’s scroll
   (think-apqd, the owner, 2026-10-22). The head bootstrap marks the root
   `data-site-atlas-follow`, so the first paint is already Large, and `atlas-view.js`
-  then keeps it there until the reader scrolls.
-  - The triangle is laid out once, at Large, and zoomed as one picture: each row is its
-    own compositor layer scaled about its right end, and the box takes the picture’s
-    height, so the page below moves with it.
-    Laying the tiles out again per frame cost about 60 milliseconds, since every tile
-    carries some 300 inherited custom properties and every drawing is redrawn; the
-    transform costs a normal frame.
-  - The focus line starts where the tiles begin and moves down with the scroll to the
-    middle of the window.
-    The middle of the window stands a third of the way along the row at that line
-    (`--site-atlas-follow-across`), where each row’s grid first breaks.
-    The zoom shrinks once that row is too long to keep its left end in view, down to
-    Small or to where the case numbers, drawn at `--site-atlas-follow-number`, would
-    pass `--site-atlas-follow-number-least`. Going down, the top of the triangle slides
-    off to the right, the triangle zooms out, and the scroller pans along the left side.
-  - The page scrolls to keep the reader’s row under the focus line, so the zoom turns
-    about that row and is a function of the scroll alone: going back up retraces it to
-    Large at the top. That scroll is announced as `squares:scrollshift`, so the header
-    does not take it for the reader’s.
+  keeps it there until the reader scrolls.
+  - The triangle is laid out once, at Large, on a stage the height of the window that
+    the browser pins (`position: sticky`) while an empty runway after it scrolls past.
+    Each row takes one transform, its pan, its place and its zoom, so no frame lays out
+    or redraws a tile and the page’s own scroll is never touched.
+    Two earlier designs were measured and dropped: laying the tiles out again each frame
+    cost about 60 milliseconds, since every tile carries some 300 inherited custom
+    properties and every drawing is redrawn, and scrolling the page back under the
+    reader’s row fought the browser’s own scrolling, so the triangle shook.
+    On a narrow page kpress clips the document with `overflow-x: hidden`, which would
+    pin the stage to the document; while following, the site clips it instead.
+  - The point at the focus line, halfway down the window, passes it at the page’s own
+    speed. The zoom is one smooth curve of that point, on a log scale from Large down to
+    Small, or to where the case numbers, drawn at `--site-atlas-follow-number`, would
+    pass `--site-atlas-follow-number-least`, starting where the row at the line first
+    needs it and finishing by the time the triangle’s bottom reaches the stage’s, so it
+    neither starts nor stops with a jolt.
+  - The pan keeps the middle of the window a third of the way along the reader’s row
+    (`--site-atlas-follow-across`), where each row’s grid first breaks, with that row’s
+    left end in view. Rows are read between rows on a monotone spline, and the pan meets
+    each limit on a bend a quarter of the stage wide.
+    Going down, the top of the triangle slides off to the right, the triangle zooms out,
+    and the pan slides along the left side; at the bottom the rows slow to a stop while
+    it slides on to the left edge.
+  - All of it is a function of the scroll, so going back up retraces it to Large at the
+    top. A sideways wheel or swipe pans the triangle while the page scrolls, so a
+    diagonal gesture moves both ways; that pan eases away back at the top.
   - The size tabs show the size nearest the zoom, and nothing is written to the address.
-    A pan by hand, a size or view tab, or a jump to a tile’s fragment ends the following
-    for the page view and leaves the atlas as the reader has it; a pressed size returns
-    the tiles to that size’s own layout with the usual move.
-    `tests/test_site_atlas_follow.py` reads all of it a frame at a time in Chromium, and
-    `tests/node/overview_atlas_view` holds its arithmetic.
+    A size or view tab, or a jump to a tile’s fragment, ends the following for the page
+    view; a pressed size returns the tiles to that size’s own layout with the usual
+    move. `tests/test_site_atlas_follow.py` reads all of it a frame at a time in
+    Chromium, and `tests/node/overview_atlas_view` holds its arithmetic.
 
 - **Atlas scale.** A third strip chooses **Fixed**, **Row** or **Global** on the website
   only. Row is selected by default.

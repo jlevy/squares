@@ -491,6 +491,14 @@ def atlas_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[s
                         "height": video["y"] + video["height"] - pdfs["y"] + 80,
                     },
                 )
+            # A reader who chooses a view ends the following, and the triangle takes its
+            # own layout, where a tile is clicked where its layout puts it. The homepage
+            # writes no view to its address.
+            page.locator(GRID_TAB).click()
+            page.locator(TRIANGLE_TAB).click()
+            sync_api.expect(page.locator("[data-atlas-preview]")).to_have_attribute(
+                "data-atlas-follow", "held"
+            )
             report["pointer"] = _pointer_cases(page, (18, 36, 306, 324))
             report["hero"] = page.evaluate(HERO)
             hero = page.locator('.site-hero-figure a[data-case="53"]')

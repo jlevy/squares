@@ -2667,8 +2667,22 @@ html[data-site-atlas-follow]
 .site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-cells {
   --site-atlas-number-size: var(--site-atlas-follow-number);
 }
+/* Its tiles' box is a stage the height of the window (overview/atlas-view.js sets it),
+   pinned to the window's top while the empty runway after it scrolls past. The script pans the
+   rows itself, so a sideways wheel or swipe moves the triangle while the page scrolls up
+   and down, and a finger's up and down stays the page's. */
 .site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-cells {
-  overflow-y: hidden;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  touch-action: pan-y;
+}
+/* kpress clips a narrow document with `overflow-x: hidden`, which makes it the scroller a
+   sticky stage would pin to. Clipping it instead pins the stage to the window. */
+@container kpress-doc (max-width: 47.99rem) {
+  .kpress-doc:has(.site-atlas-grid[data-atlas-zoom]) {
+    overflow-x: clip;
+  }
 }
 .site-page .site-atlas-grid[data-atlas-zoom] .site-atlas-row {
   transform-origin: 100% 0;

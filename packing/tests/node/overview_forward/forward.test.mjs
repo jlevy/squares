@@ -394,13 +394,15 @@ void test("only a plain Atlas address from the top follows the scroll", () => {
     assert.equal(bootstrapped("", pathname)["data-site-atlas-follow"], "", pathname);
   }
   // A fragment, a size, Grid or an embedding opens where it always did.
-  for (const [search, hash] of [
+  /** @type {[string, string][]} */
+  const addresses = [
     ["", "#the-atlas"],
     ["", "#atlas-n-53"],
     ["?size=small", ""],
     ["?atlas=grid", ""],
     ["?view=embed", ""],
-  ]) {
+  ];
+  for (const [search, hash] of addresses) {
     const attributes = bootstrapped(search, "/atlas.html", hash);
     assert.equal(attributes["data-site-atlas-follow"], undefined, `${search}${hash}`);
   }

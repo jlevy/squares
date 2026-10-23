@@ -433,28 +433,113 @@ void test("A size's tile is the stylesheet's: whole cells of the scaled least wi
   assert.ok(Number.isNaN(atlas.tileAt(1349, Number.NaN, 1, 8)));
 });
 
-void test("The zoom keeps the middle a third along the row with its left end in view", () => {
-  // Short rows stay at the laid-out size; a long one zooms out just enough.
-  assert.equal(atlas.followScale(930, 400, 1 / 3, 0.45), 1);
-  assert.equal(atlas.followScale(930, 2000, 1 / 3, 0.45), 930 / ((2 / 3) * 2000));
-  // Never past the least zoom, and a nonsense row or share leaves it alone.
-  assert.equal(atlas.followScale(930, 9000, 1 / 3, 0.45), 0.45);
-  assert.equal(atlas.followScale(930, 0, 1 / 3, 0.45), 1);
-  assert.equal(atlas.followScale(930, 2000, 0, 0.45), 1);
-  // At that zoom the left end is exactly at the edge.
-  const width = 2000 * atlas.followScale(930, 2000, 1 / 3, 0.45);
-  assert.ok(Math.abs(atlas.followLeft(930, width, 1 / 3)) < 1e-9);
+void test("The framing keeps the middle a third along the row with its left end in view", () => {
+  // The rule itself, with its bend taken out.
+  assert.equal(atlas.followLeft(930, 600, 1 / 3, 0), 465 - 200);
+  assert.equal(atlas.followLeft(930, 1500, 1 / 3, 0), 0);
+  // Away from the edge the bend changes nothing, and near it the left end stays right of
+  // where the rule puts it, so it never leaves view.
   assert.equal(atlas.followLeft(930, 600, 1 / 3), 465 - 200);
-  assert.equal(atlas.followLeft(930, 1500, 1 / 3), 0);
+  for (let width = 800; width <= 4000; width += 7) {
+    assert.ok(atlas.followLeft(930, width, 1 / 3) >= atlas.followLeft(930, width, 1 / 3, 0));
+  }
 });
 
-void test("The focus line starts at the tiles and moves down with the page to the middle", () => {
-  assert.equal(atlas.focusLine(1000, 300, 0), 300);
-  assert.equal(atlas.focusLine(1000, 300, 150), 450);
-  assert.equal(atlas.focusLine(1000, 300, 900), 500);
-  assert.equal(atlas.focusLine(1000, 300, -40), 300);
-  // Tiles that begin below the middle are below the line at the top: the first row.
-  assert.equal(atlas.focusLine(1000, 800, 0), 500);
+/**
+ * The largest jump in slope between neighbouring steps of `f` over [from, to].
+ * @param {(x: number) => number} f
+ * @param {number} from
+ * @param {number} to
+ */
+function kink(f, from, to) {
+  const steps = 4000;
+  const h = (to - from) / steps;
+  let worst = 0;
+  for (let i = 1; i < steps; i += 1) {
+    const x = from + i * h;
+    worst = Math.max(worst, Math.abs((f(x + h) - f(x)) / h - (f(x) - f(x - h)) / h));
+  }
+  return worst;
+}
+
+void test("The zoom is one smooth curve from Large to the least zoom", () => {
+  assert.equal(atlas.smootherstep(-1), 0);
+  assert.equal(atlas.smootherstep(0.5), 0.5);
+  assert.equal(atlas.smootherstep(2), 1);
+  const zoom = (/** @type {number} */ point) => atlas.zoomAt(point, 1000, 3000, 0.45);
+  assert.equal(zoom(0), 1);
+  assert.equal(zoom(1000), 1);
+  assert.equal(zoom(3000), 0.45);
+  assert.equal(zoom(5000), 0.45);
+  // It only ever shrinks, starts and stops with no slope, and has no corner anywhere.
+  for (let point = 1000; point < 3000; point += 10) {
+    assert.ok(zoom(point + 10) <= zoom(point));
+  }
+  assert.ok(Math.abs(zoom(1001) - zoom(1000)) < 1e-6);
+  assert.ok(Math.abs(zoom(3000) - zoom(2999)) < 1e-6);
+  assert.ok(kink(zoom, 0, 4000) < 1e-5);
+  // A triangle that never needs to zoom stays at Large.
+  assert.equal(atlas.zoomAt(500, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, 0.45), 1);
+});
+
+void test("The pan and the framing bend onto their limits without a corner", () => {
+  /** @param {number} bend */
+  const left = (bend) => (/** @type {number} */ width) => atlas.followLeft(930, width, 1 / 3, bend);
+  assert.ok(kink(left(240), 1000, 2000) < kink(left(0), 1000, 2000) / 50);
+  /** @param {number} bend */
+  const pan = (bend) => (/** @type {number} */ x) => atlas.panTo(x, 0, 0, 5000, bend);
+  assert.ok(kink(pan(240), -600, 600) < kink(pan(0), -600, 600) / 50);
+  assert.equal(pan(240)(300), 0);
+  assert.equal(pan(240)(-300), -300);
+});
+
+void test("The rows slow smoothly to a stop at the end of the triangle", () => {
+  // Carried a pixel a pixel at first, they come to rest a bend past the start of the
+  // slowing, twice the bend's scroll later, and stay there.
+  assert.equal(atlas.settle(0, 100), 0);
+  assert.equal(atlas.settle(200, 100), 100);
+  assert.equal(atlas.settle(400, 100), 100);
+  assert.equal(atlas.settle(50, 0), 50);
+  assert.ok(Math.abs(atlas.settle(1, 100) - 1) < 1e-3);
+  const carried = (/** @type {number} */ x) => atlas.settle(x, 100);
+  for (let x = 0; x < 200; x += 2) {
+    assert.ok(carried(x + 2) >= carried(x));
+  }
+  // Its speed falls from one to none without a corner.
+  const joined = (/** @type {number} */ x) => (x < 0 ? x : carried(x));
+  assert.ok(kink(joined, -100, 300) < 1e-3);
+});
+
+void test("The journey reads the point at the focus line from the pinned scroll", () => {
+  const ys = [0, 10, 30, 60];
+  const us = [500, 520, 540, 560];
+  assert.equal(atlas.journey(ys, us, -5), 500);
+  assert.equal(atlas.journey(ys, us, 5), 510);
+  assert.equal(atlas.journey(ys, us, 20), 530);
+  assert.equal(atlas.journey(ys, us, 45), 550);
+  assert.equal(atlas.journey(ys, us, 99), 560);
+  assert.equal(atlas.journey([], [], 5), 0);
+});
+
+void test("Row by row, the spline passes through every row and never overshoots", () => {
+  // Row spans grow by two tiles a row, with the grid's extra space from the third.
+  const spans = [100, 300, 560, 770, 980, 1190];
+  for (let index = 0; index < spans.length - 1; index += 1) {
+    assert.equal(atlas.curve(spans, index, 0), spans[index]);
+    assert.equal(atlas.curve(spans, index, 1), spans[index + 1]);
+    let prior = atlas.curve(spans, index, 0);
+    for (let step = 1; step <= 20; step += 1) {
+      const value = atlas.curve(spans, index, step / 20);
+      assert.ok(value >= prior - 1e-9, `row ${index} step ${step}`);
+      prior = value;
+    }
+  }
+  // Its slope runs on across each row's start rather than turning there.
+  const at = (/** @type {number} */ x) => atlas.curve(spans, Math.floor(x), x - Math.floor(x));
+  const slope = (/** @type {number} */ x) => (at(x + 1e-6) - at(x - 1e-6)) / 2e-6;
+  for (const row of [2, 3, 4]) {
+    assert.ok(Math.abs(slope(row - 1e-4) - slope(row + 1e-4)) < 0.5, `row ${row}`);
+  }
 });
 
 void test("A line falls on a row and a share of the way to the next", () => {
