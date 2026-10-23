@@ -5,15 +5,15 @@ title: "PR #753 (merge on 24 October UTC): T-231, T-229 lineage, reply records"
 kind: task
 status: in_progress
 priority: 1
-version: 4
-delegate: c-rev-753-1023
+version: 5
+delegate: c-land-753-1023
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:34:21.973Z
-updated_at: 2026-10-23T16:05:11.087Z
+updated_at: 2026-10-23T22:54:00.119Z
 started_at: 2026-10-23T15:34:24.630Z
 ---
 
