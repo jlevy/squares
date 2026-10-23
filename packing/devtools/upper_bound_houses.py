@@ -42,9 +42,10 @@ Usage, from ``packing/`` with the project interpreter::
 each staged count's (`select_houses.PENDING_ADOPTION`) house rebuilt as this module
 builds one, in bytes in a checkout and as Git stores the blob, beside the witness it
 replaces, with the set's totals and its largest. That is OR-18's unit, the sum of the
-blobs a clone downloads (`stored_size`), by which the house rule decides whether a house's
-witnesses go into Git or a hosted data release (packing/campaign/result-import.md, "The
-House Rule"; review C9 of #660).
+blobs a clone downloads (`devtools.git_storage.stored_size`, which the added-blob guard
+shares), by which the house rule decides whether a house's witnesses go into Git or a
+hosted data release (packing/campaign/result-import.md, "The House Rule"; review C9 of
+#660).
 """
 
 from __future__ import annotations
@@ -54,7 +55,6 @@ import copy
 import hashlib
 import json
 import sys
-import zlib
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from fractions import Fraction
@@ -67,6 +67,7 @@ from devtools import evand_arrangement_reports as kernel
 from devtools import retained_data
 from devtools import squish_second_update_house_links as house
 from devtools import upper_bound_reports as reports
+from devtools.git_storage import stored_size
 from devtools.retained_data import read_retained_bytes
 from sqpack.witness import witness_document
 from sqpack.yamlio import safe_load
@@ -731,14 +732,6 @@ def side(n: int) -> Fraction:
 
 #: The schema reference a house witness carries, as the atlas writes the file.
 WITNESS_SCHEMA_REFERENCE = "../witness.schema.yaml"
-
-
-def stored_size(data: bytes) -> int:
-    """The bytes Git keeps for a file: its blob object, the header ``blob <size>`` and a NUL
-    then the content, compressed by zlib at its default level, as Git compresses an object
-    in a pack (`core.compression`) before any delta. A loose object, as `git hash-object -w`
-    first writes it, is compressed at Git's default loose level, a little larger."""
-    return len(zlib.compress(b"blob %d\x00" % len(data) + data, zlib.Z_DEFAULT_COMPRESSION))
 
 
 class Sizes(NamedTuple):

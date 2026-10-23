@@ -655,6 +655,30 @@ def canonical_url(name: str) -> str:
 PageKind = Literal["website", "article"]
 _ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 
+#: Chromium's speculation rules, which every site page's head carries
+#: (`speculation_rules_tag`): another page of the site is prerendered once a reader holds
+#: the pointer on its link for about 200 ms or presses it ("moderate"), so the click swaps
+#: in a page whose layout is already done. On a phone Chrome reads "moderate" from the
+#: viewport instead, prerendering a large link near the last tap once scrolling stops.
+#: Other browsers ignore the element, and Chromium keeps at most two such prerenders
+#: alive. Only pages are matched: the root, a directory index and `.html`, so a linked
+#: file (a PDF, the multi-megabyte poster SVGs News links) is never fetched on a hover.
+#: The site is static, so an unused prerender costs its fetch and its layout. What it
+#: saves is measured in `think-gr4c`, provisionally until `think-15b4` builds the tool.
+SPECULATION_RULES: Mapping[str, Any] = {
+    "prerender": [
+        {
+            "where": {
+                "and": [
+                    {"href_matches": ["/", "/*/", "/*.html"]},
+                    {"not": {"selector_matches": "[download]"}},
+                ]
+            },
+            "eagerness": "moderate",
+        }
+    ]
+}
+
 
 class PageMeta(NamedTuple):
     """What a page says of itself in its `<head>`: to a tab, to a search engine and to
@@ -849,6 +873,21 @@ def head_tags(page: PageMeta) -> str:
             meta("twitter:image", image),
             meta("twitter:image:alt", alt),
         )
+    )
+
+
+def speculation_rules_tag() -> str:
+    """`SPECULATION_RULES` as the element a site page's head carries, after `head_tags`.
+
+    The site's own pages carry it (`kpress_page`, `static_content_page`); the papers and
+    the forwarders do not. A paper is a versioned publication whose bytes this would
+    change, and a reader reaching one from a site page is prerendered by that page's
+    rules, which are what decide; a forwarder leaves at once.
+    """
+    return (
+        '<script type="speculationrules">'
+        + json.dumps(SPECULATION_RULES, separators=(",", ":")).replace("<", "\\u003c")
+        + "</script>"
     )
 
 
@@ -1320,7 +1359,8 @@ def _site_head(name: str, page: str, meta: PageMeta) -> str:
     body = page.find("<body")
     if found is None or body < 0 or found.start() > body:
         raise SystemExit(f"{name}: kpress's shell no longer writes a title in its head")
-    page = page[: found.start()] + head_tags(meta) + page[found.end() :]
+    identity = head_tags(meta) + "\n" + speculation_rules_tag()
+    page = page[: found.start()] + identity + page[found.end() :]
     head = page[: page.find("<body")]
     stray = [
         tag
@@ -1783,7 +1823,12 @@ def static_content_page(
     page = fill(
         (TEMPLATES / "case-record.html").read_text(encoding="utf-8"),
         {
-            "HEAD": head_tags(meta) + "\n" + favicon_html() + head,
+            "HEAD": head_tags(meta)
+            + "\n"
+            + speculation_rules_tag()
+            + "\n"
+            + favicon_html()
+            + head,
             "BOOTSTRAP": theme_bootstrap(kpress_static()) + "\n" + _script_text(EMBED_SCRIPT),
             "NAV": nav_html(meta.path or current),
             "RECORD": body,

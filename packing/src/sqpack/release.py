@@ -2398,6 +2398,52 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The 23 October sweep's request entries (#719's answers, #732, #734) and the "
+            "stage 7 follow-ups after #725, against main 690e21857 (#738): rendered at link "
+            "revision 40a71b16 into empty site directories, twice from this tree at "
+            "d40979ad with this record and twice from main's (42 files each), "
+            "render_packing_methods writes every file byte-identical across all four. No "
+            "PDF was printed; it prints from that HTML. Retain v0.2.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/render_overview.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Speculation rules on the site's own pages (think-gr4c): render_overview gains "
+            "SPECULATION_RULES and speculation_rules_tag, which kpress_page and "
+            "static_content_page add after head_tags; head_tags itself, which writes the "
+            "papers' heads, is unchanged. Rendered at link revision e929137a into empty "
+            "directories, once from this tree and twice from main e929137a8 (#725): the "
+            "four renderers write 68 files each, none carrying the rules, byte-identical "
+            "except one span's style attribute in the explainer's HTML, whose place varies "
+            "between renders (the record below). No PDF was printed; each prints from that "
+            "HTML. Retain v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
@@ -4263,6 +4309,70 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "changed candidate inputs and retain v0.1.7 and v0.1.0. This is a source-reviewed "
             "disposition; no paper render, PDF redraw or artifact byte identity "
             "is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/git_storage.py",
+            "packing/devtools/upper_bound_houses.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "PR406 (review H1) moves stored_size, OR-18's size of a blob as Git stores "
+            "it, from upper_bound_houses into the new devtools.git_storage, so that the "
+            "added-blob guard shares it without importing the house tooling. The "
+            "function body is unchanged and upper_bound_houses imports it under the same "
+            "name; the module's other change is its docstring. Re-measured on main "
+            "e929137a8 with this branch merged: six modules in each paper's producer "
+            "import closure, the explainer's and the survey's PDF producer included, "
+            "import upper_bound_houses: adopt_houses, build_known_best_atlas, "
+            "check_results, check_source_coverage, register_regularized_bounds and "
+            "run_negative_controls (review J1). Every one of them leaves stored_size, "
+            "staged_sizes and print_sizes uncalled; only the module's own sizes command "
+            "runs them, and the rest of git_storage serves only the added-blob guard, "
+            "which no paper producer imports. Manuscripts, scientific inputs, figures and "
+            "paper metadata are unchanged, so the explainer keeps v0.4.19, the "
+            "optimality review v0.1.10, the threshold review v0.1.3 and the methods survey "
+            "v0.2.6. Source-reviewed; no render or byte identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "PR406 adds the Git-storage guard to the validation CLI push schedule "
+            "and its status banner. The explainer declares the whole sqpack package, "
+            "but the import closure of its fourteen Python producers, measured with "
+            "pages_scope.import_closure on main e929137a8 with this branch merged, is "
+            "145 files and holds no sqpack.cli module. The manuscript, certificate "
+            "inputs, figures, rendering helpers and paper release metadata are "
+            "unchanged against that main, so the paper retains v0.4.19. This is a "
+            "source-based producer review; no paper export was rebuilt or compared for "
+            "byte identity. The changed development.md is published as "
+            "development.html, which since #729 deploys from main with no site "
+            "edition, so this record names only the paper."
         ),
     ),
     ReleaseNoPublicChange(
@@ -7177,6 +7287,62 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "No existing function changes. The papers reach `render_changelog` only "
             "through `site_documents`, which calls `entry_anchor`, and no builder calls "
             "`validate._synopsis`. No render was taken, and every paper keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/render_changelog.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Review A of #735 and of #738 (think-9wxc): the announcement gate's owed "
+            "items fail only a pull request that changes the register or News, and on main "
+            "only warn. `check_announcements` returns its findings in three lists; two "
+            "helpers are renamed to public names (`register_score`, `announcement_base`) "
+            "and one is new (`edits_announcement_records`); `main` prints warnings. The "
+            "papers reach `render_changelog` only through `site_documents`, which calls "
+            "`entry_anchor`, unchanged. This also corrects #735's record above, whose "
+            "`No existing function changes` was wrong: no function the papers reach "
+            "changed, while `main` gained the flag and `_synopsis` passed it. No render "
+            "was taken, and every paper keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer", "paper:square-packing-methods-survey"),
+        paths=(
+            "packing/devtools/probes/prepare_n11_lower_bounds_explainer_math/measure_math.js",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The explainer's math extraction (think-qa8b) re-appends each extracted `style` "
+            "attribute last, where Chromium places a style written through CSSOM when "
+            "nothing reads the attribute list early. Every `style` in main's ordinary "
+            "render already sits last, so this removes only the timing-dependent outlier "
+            "that failed the twin-render check. Rendered with --prepare-math in pinned "
+            "Chromium 151.0.7922.34 on 23 October: three fixed renders equal, in every "
+            "written file, four unfixed renders whose concurrent twins agreed (12 of 12 "
+            "comparisons), and six fixed concurrent pairs agree where unfixed pairs "
+            "failed 2 of 6. The survey selects this probe as a broad builder input and "
+            "does not run it; its HTML and Markdown are identical before and after. "
+            "Every paper keeps its version."
         ),
     ),
 )
