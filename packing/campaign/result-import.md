@@ -694,6 +694,13 @@ defect open, rewrites the entry’s `claim`, `notes` and `next_rung` together an
 its `activity`, so that no field says a replay is pending while another says it passed.
 The reviewer also confirms or changes the draft significance score.
 An open defect goes to the author with the review.
+For a result by others, `devtools.check_results` (`verified_lane_review_problems`)
+refuses the verified bound until the review is recorded in one of two forms: a `reviews`
+item on a register entry that cites the evidence and covers the count, of kind
+`adversarial`, `confirming` or `formalization` with verdict `accepted` or
+`defects-resolved`; or, on the evidence entry, an `external_review` in state
+`informally-verified`, or a `proof.audit_record`, that names the review by its full
+path, `docs/project/reviews/review-….md`. A bare file name is not found.
 
 The reviewer of the pull request checks one thing in every sentence the stage writes:
 where the claim, the case record, the review or the reply says the result is
