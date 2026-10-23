@@ -2417,6 +2417,36 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
         ),
+        paths=("packing/devtools/render_overview.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Speculation rules on the site's own pages (think-gr4c): render_overview gains "
+            "SPECULATION_RULES and speculation_rules_tag, which kpress_page and "
+            "static_content_page add after head_tags; head_tags itself, which writes the "
+            "papers' heads, is unchanged. Rendered at link revision e929137a into empty "
+            "directories, once from this tree and twice from main e929137a8 (#725): the "
+            "four renderers write 68 files each, none carrying the rules, byte-identical "
+            "except one span's style attribute in the explainer's HTML, whose place varies "
+            "between renders (the record below). No PDF was printed; each prints from that "
+            "HTML. Retain v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
         paths=(
             "packing/atlas/known-best/bound-citations.json",
             "packing/atlas/known-best/composite-figure.json",
@@ -7285,6 +7315,31 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "`No existing function changes` was wrong: no function the papers reach "
             "changed, while `main` gained the flag and `_synopsis` passed it. No render "
             "was taken, and every paper keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer", "paper:square-packing-methods-survey"),
+        paths=(
+            "packing/devtools/probes/prepare_n11_lower_bounds_explainer_math/measure_math.js",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The explainer's math extraction (think-qa8b) re-appends each extracted `style` "
+            "attribute last, where Chromium places a style written through CSSOM when "
+            "nothing reads the attribute list early. Every `style` in main's ordinary "
+            "render already sits last, so this removes only the timing-dependent outlier "
+            "that failed the twin-render check. Rendered with --prepare-math in pinned "
+            "Chromium 151.0.7922.34 on 23 October: three fixed renders equal, in every "
+            "written file, four unfixed renders whose concurrent twins agreed (12 of 12 "
+            "comparisons), and six fixed concurrent pairs agree where unfixed pairs "
+            "failed 2 of 6. The survey selects this probe as a broad builder input and "
+            "does not run it; its HTML and Markdown are identical before and after. "
+            "Every paper keeps its version."
         ),
     ),
 )
