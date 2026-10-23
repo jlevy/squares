@@ -23,12 +23,11 @@
               ["#evidence-and-exactness", "verification.html#evidence-and-exactness"],
               ["#results-and-credits", "verification.html#results-and-credits"],
               ["#status-and-supersession", "verification.html#status-and-supersession"],
-              ["#recent-arrivals", "recent-results.html#recent-arrivals"],
-              ["#added-in-the-last-seven-days", "recent-results.html#added-in-the-last-seven-days"],
-              [
-                "#earlier-results-by-week-published",
-                "recent-results.html#earlier-results-by-week-published",
-              ],
+              ["#recent-results", "results.html#all-results"],
+              ["#recent-arrivals", "results.html#all-results"],
+              ["#added-in-the-last-seven-days", "results.html#all-results"],
+              ["#recent-results-older", "results.html#all-results"],
+              ["#earlier-results-by-week-published", "results.html#all-results"],
             ])
           : null;
   const forwardLegacyFragment = () => {

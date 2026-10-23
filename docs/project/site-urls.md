@@ -898,7 +898,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/yohei-nakajima.html | profiles/yohei-nakajima.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/zk-shangitbayev.html | profiles/zk-shangitbayev.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | readme.html | readme.html | page | overview | 2026-09-29 | 2026-10-22 | live |
-| recent-results.html | recent-results.html | page | overview | 2026-10-08 | 2026-10-22 | live |
+| recent-results.html | results.html | forwarder | overview | 2026-10-08 | 2026-10-22 | forwarded → results.html |
 | report.html | report.html | page | overview | 2026-10-22 | 2026-10-22 | live |
 | resources.html | resources.html | page | overview | 2026-10-08 | 2026-10-22 | live |
 | result/t-001.html | result/t-001.html | result | overview | 2026-08-31 | 2026-08-31 | live |
@@ -1181,14 +1181,14 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 
 | Physical path | Bytes | Reason |
 | --- | ---: | --- |
-| atlas.html | 1,050,000 | Combined 324-case Atlas measures 862,357 bytes: 688,112 for the complete Frontier Survey and 174,245 for graphics and the shared shell. With the person profiles (#578) it measured 1,005,866 bytes on 21 October 2026: its 344 reviewed credit links to profiles cost 14,692 bytes, recognised by address with no per-link marker, and the page is 991,174 without them. No timing was re-measured for this change. |
+| atlas.html | 400,000 | On 22 October 2026 the standalone 324-case Visual Atlas measures 295,318 bytes with every drawing visible by default and one shared case popover. The 400,000-byte ceiling leaves 104,682 bytes above this measurement. The complete bounds table has its own Frontier Survey budget. |
 | cases/11.html | 500,000 | Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes. |
 | cases/17.html | 550,000 | Complete n=17 proof/certificate record and prepared bounds measure 501,977 bytes on 16 October 2026 with T-154's source-build evidence, 499,855 on main at 26d8bb335. The ceiling leaves room for the open n=17 intakes. |
 | cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 326,548 bytes. |
+| frontier.html | 900,000 | On 22 October 2026 the standalone Frontier Survey measures 731,612 bytes for all 324 rows, exact native MathML, credit links, the concise reading key and the shared shell. The 900,000-byte ceiling leaves 168,388 bytes above that measurement; row details remain fetched on demand. Timing has not been re-measured for the split. |
 | index.html | 1,300,000 | The shared 100-case Atlas preview includes all 324 canonical case links and per-case SVG references, with common controls, reading and documentation cards. Retained desktop/mobile expansion checks cover the prepared shared row layout. The page-specific ceiling remains below the global two-megabyte limit. |
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |
 | papers/n11-threshold-bound-review.html | 900,000 | The 401-formula review measures 823,322 bytes after sharing font geometry. Its 842,245-byte edition passed three-run desktop/mobile, light/dark and no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves headroom above the measured edition. |
-| recent-results.html | 1,400,000 | The requested complete arrival-ordered table measured 1,295,301 bytes on 22 October 2026 at 229 unique results. It reuses the Results Archive's eight metadata cells and fetched record popovers, with the newest seven calendar dates expanded and every older row retained in the same table. The 1,400,000-byte ceiling matches Results Archive and leaves 104,699 bytes above this measurement. All rows remain available without scripts. Timing has not been re-measured for this view; think-vasz tracks the renderer, budget and final preview checks. |
 | result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 711,115 bytes. |
 | result/t-046.html | 400,000 | Complete broad scope history and prepared exact bounds measure 355,078 bytes. |
 | result/t-058.html | 600,000 | Complete broad scope history and prepared exact bounds measure 509,332 bytes. |

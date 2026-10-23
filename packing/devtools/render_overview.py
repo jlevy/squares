@@ -7,7 +7,7 @@ adds the front door and the pages around it, as the plan in
 
 - `index.html`, the overview: the problem, the headline and recent results and the
   verification statistics, generated from the register;
-- `recent-results.html`, recent arrivals by day and earlier publications by week;
+- `recent-results.html`, a compatibility forwarder to the complete results table;
 - `results.html`, every registered result in one table, which the overview's cards
   and recent list point into by row (`#t-018`);
 - `atlas.html`, the graphical Atlas with every tracked packing;
@@ -94,7 +94,6 @@ NEWS_ARTICLE = TEMPLATES / "news-article.md"
 REPORT_RESULTS = TEMPLATES / "report-results.md"
 RESULTS_ARTICLE = TEMPLATES / "all-results-article.md"
 VERIFICATION_ARTICLE = TEMPLATES / "verification-article.md"
-RECENT_RESULTS_ARTICLE = TEMPLATES / "recent-results-article.md"
 VISUALIZE_ARTICLE = TEMPLATES / "visualize-article.md"
 PAPERS_ARTICLE = TEMPLATES / "papers-article.md"
 TUTORIALS_ARTICLE = TEMPLATES / "tutorials-article.md"
@@ -467,7 +466,6 @@ SITE_PAGES: tuple[str, ...] = (
     "frontier.html",
     "about.html",
     RESULTS_PAGE,
-    RECENT_RESULTS_PAGE,
     VERIFICATION_PAGE,
     f"{PROFILES_DIR}/index.html",
     "papers.html",
@@ -503,6 +501,7 @@ SITE_PAGES: tuple[str, ...] = (
 MOVED_PAGES: tuple[tuple[str, str], ...] = (
     ("downloads.html", "posters.html"),
     ("all-results.html", RESULTS_PAGE),
+    (RECENT_RESULTS_PAGE, RESULTS_PAGE),
     ("status.html", "atlas.html"),
     ("defects.html", repo_url(repo_links.DEFECTS, kind="blob")),
     ("explainer.html", paper_path(N11_LOWER_BOUNDS_EXPLAINER)),
@@ -589,7 +588,6 @@ RENDER_INPUTS: tuple[Path, ...] = (
     REPORT_RESULTS,
     RESULTS_ARTICLE,
     VERIFICATION_ARTICLE,
-    RECENT_RESULTS_ARTICLE,
     VISUALIZE_ARTICLE,
     PAPERS_ARTICLE,
     TUTORIALS_ARTICLE,
@@ -683,18 +681,12 @@ class PageMeta(NamedTuple):
 
 #: The records the results page and the frontier atlas write their heads from, named
 #: here because a forwarder to either previews it (`forwarded_metas`).
-RESULTS_META = PageMeta("Results Archive", RESULTS_DESCRIPTION, RESULTS_PAGE)
+RESULTS_META = PageMeta("All Results", RESULTS_DESCRIPTION, RESULTS_PAGE)
 VERIFICATION_META = PageMeta(
     "Verification",
     "How to read result ratings, evidence, credits, and supersession "
     "in the square-packing archive.",
     VERIFICATION_PAGE,
-)
-RECENT_RESULTS_META = PageMeta(
-    "Recent Results",
-    "All square-packing results by arrival date, with the newest seven days expanded, "
-    "earlier results available, full ratings, credits, and record links.",
-    RECENT_RESULTS_PAGE,
 )
 POSTERS_META = PageMeta(
     "Posters",
@@ -1614,27 +1606,6 @@ def verification_page() -> Page:
     )
 
 
-def recent_results_page() -> Page:
-    """One complete arrival-ordered table, with older results collapsed on enhancement."""
-    from devtools import overview_data, overview_sections  # noqa: PLC0415
-
-    overview = overview_data.load()
-    values = {
-        "RECENT_TABLE": overview_sections.recent_results_table(overview),
-    }
-    return kpress_page(
-        _template_markdown(RECENT_RESULTS_ARTICLE, values),
-        name=RECENT_RESULTS_META.path,
-        current="results",
-        title=RECENT_RESULTS_META.name,
-        description=RECENT_RESULTS_META.description,
-        toc=False,
-        rewrite_body=_authored_profile_links,
-        page_styles=(RESULTS_CSS,),
-        page_scripts=(TABLE_SCRIPT, POPOVER_SCRIPT, ROW_POPOVER_SCRIPT, CASE_POPOVER_SCRIPT),
-    )
-
-
 def papers_page() -> Page:
     """The Papers section's page: a short introduction and one large card per paper,
     each the link to its paper, which is a full page of the site. Shared article overlays
@@ -1916,7 +1887,6 @@ PAGES: dict[str, Callable[[], Page]] = {
     "about.html": about_page,
     RESULTS_PAGE: results_page,
     VERIFICATION_PAGE: verification_page,
-    RECENT_RESULTS_PAGE: recent_results_page,
     "papers.html": papers_page,
     "tutorials.html": tutorials_page,
     "posters.html": posters_page,

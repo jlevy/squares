@@ -31,8 +31,7 @@ NAVIGATION = (
         (
             NavigationItem("atlas", "Visual Atlas", "atlas.html"),
             NavigationItem("frontier", "Frontier Survey", "frontier.html"),
-            NavigationItem("recent-results", "Recent Results", "recent-results.html"),
-            NavigationItem("all-results", "Results Archive", "results.html"),
+            NavigationItem("all-results", "All Results", "results.html"),
             NavigationItem("verification", "Verification", "verification.html"),
             NavigationItem("report", "Report a Result", "report.html"),
         ),
@@ -71,7 +70,7 @@ _LEGACY_PATHS = {
     "overview": "./",
     "news": "news.html",
     "results": "results.html",
-    "recent-results": "recent-results.html",
+    "recent-results": "results.html",
     "verification": "verification.html",
     "epistemics": "epistemics.html",
     "atlas": "atlas.html",
@@ -90,7 +89,6 @@ _LEGACY_PATHS = {
 # The same parent declarations drive the group indication and visible/structured trails.
 _PARENTS = {
     "about.html": ("about",),
-    "recent-results.html": ("results",),
     "results.html": ("results",),
     "atlas.html": ("results",),
     "frontier.html": ("results",),

@@ -1,10 +1,10 @@
 <div class="site-hero">
 
-<h1 id="every-result">Results Archive</h1>
+<h1 id="every-result">All Results</h1>
 
 </div>
 
-<p class="site-action-row site-more"><a class="site-action" href="recent-results.html">Recent Results{{ARROW_RIGHT}}</a><a class="site-action" href="atlas.html">Visual Atlas{{ARROW_RIGHT}}</a><a class="site-action" href="frontier.html">Frontier Survey{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="atlas.html">Visual Atlas{{ARROW_RIGHT}}</a><a class="site-action" href="frontier.html">Frontier Survey{{ARROW_RIGHT}}</a></p>
 
 <a id="all-results"></a>
 
@@ -22,13 +22,6 @@ And Exactness</a> ·
 Credits</a> ·
 <a id="status-and-supersession" href="verification.html#status-and-supersession">Status
 And Supersession</a></p></noscript>
-
-<noscript><p>Recent-result sections have moved:
-<a id="recent-arrivals" href="recent-results.html#recent-arrivals">Recent Arrivals</a>,
-<a id="added-in-the-last-seven-days" href="recent-results.html#added-in-the-last-seven-days">Added
-in the Last Seven Days</a>, and
-<a id="earlier-results-by-week-published" href="recent-results.html#earlier-results-by-week-published">Earlier
-Publications</a>.</p></noscript>
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
