@@ -13,10 +13,10 @@ ratio of the page's text on it.
 The status chips take fills from the same scale, a rule each in the stylesheet naming
 a hue, a level and an optional chroma boost (`status_fills`, the owner, 2026-10-02,
 `think-c19o`), and are reported the same way. So are the topic chips that Results and
-News share (`topic_fills`, `think-z9za`): a topic on the scale, as the statuses are, and
-a bound topic as its bound's ink diluted into the page background. One fill keeps one
-meaning, so a topic's fill stands at least `DISTINCT` from every status's fill and
-every other topic's, unless it shares its meaning (`SHARED_FILLS`). The V and C rung
+News once shared. Result kinds keep those fills (`topic_fills`); News now uses one
+neutral surface and colored ink (`news_topic_inks`). News inks must keep4.5:1 contrast
+against that surface in both themes. Result-topic fills retain their distinctness
+contract against statuses and each other. The V and C rung
 fills are not compared: a rung chip names its rung, and the upper-bound topic stands
 0.020 from C1 in the dark theme, a pairing older than the topic palette.
 
@@ -46,7 +46,7 @@ from pathlib import Path
 from devtools.overview_sections import rubric_levels
 from devtools.render_n11_lower_bounds_explainer import kpress_static
 from devtools.render_overview import SITE_CSS
-from devtools.site_topics import TOPICS
+from devtools.site_topics import NEWS_TOPICS, TOPICS
 from sqpack.render.color import (
     _linear_to_srgb,  # pyright: ignore[reportPrivateUsage]
     _maximum_chroma,  # pyright: ignore[reportPrivateUsage]
@@ -72,8 +72,8 @@ _VAR = re.compile(r"var\((--[\w-]+)\)")
 #: A status chip's own rule: its attribute, a result's `status` or a case's
 #: `case-status`, and its word.
 _STATUS_RULE = re.compile(r'\.site-chip\[data-(status|case-status)="([a-z-]+)"\]')
-#: A topic named in a chip rule: a result's `kind` or a News post's `news-topic`.
-_TOPIC = re.compile(r'\[data-(?:kind|news-topic)="([a-z-]+)"\]')
+#: Only result-kind fills; News topic ink is measured separately.
+_TOPIC = re.compile(r'\[data-kind="([a-z-]+)"\]')
 #: A bound topic's fill: its bound's ink mixed into the page background in OkLab.
 _BOUND_MIX = re.compile(
     r"color-mix\(\s*in oklab,\s*var\((--site-bound-[a-z]+)\)\s+var\((--site-chip-tint)\),"
@@ -338,7 +338,7 @@ def distance(first: Fill, second: Fill) -> float:
 
 
 def topic_fills() -> list[Fill]:
-    """Every topic chip with a fill of its own in each theme, its key as the `rung`: a
+    """Every result-kind chip with its own fill in each theme, its key as the `rung`: a
     topic on the scale at its rule's `--rung-level` and `--rung-hue`, as `status_fills`
     reads a status, or a bound topic's ink mixed into the page background at the chip
     tint. A topic with no rule of its own keeps the plain chip and is not reported."""
@@ -392,6 +392,41 @@ def topic_fills() -> list[Fill]:
     if not report:
         raise SystemExit("site.css gives no topic chip a fill of its own")
     return report
+
+
+def news_topic_backgrounds() -> dict[str, Oklch]:
+    """The shared neutral News topic surface in each theme."""
+    return {
+        theme: _parse_colour(value)
+        for theme, value in _theme_values("--site-news-topic-bg").items()
+    }
+
+
+def news_topic_inks() -> list[Fill]:
+    """Every News label's actual ink and contrast on its shared neutral background."""
+    surfaces = news_topic_backgrounds()
+    lightness = _theme_values("--site-news-topic-ink-lightness")
+    chroma = _theme_values("--site-news-topic-ink-chroma")
+    hues = {
+        match[1]: _number(declared["--site-news-topic-hue"])
+        for selector, declared in _blocks(SITE_CSS)
+        if (match := re.fullmatch(r'\.site-chip\[data-news-topic="([a-z-]+)"\]', selector))
+        and "--site-news-topic-hue" in declared
+    }
+    return [
+        Fill(
+            theme=theme,
+            rung=topic,
+            lightness=(value := _number(lightness[theme])),
+            chroma=(saturation := _number(chroma[theme]) if topic in hues else 0),
+            hue=(hue := hues.get(topic, 265)),
+            hex=hex_colour((value, saturation, hue)),
+            in_gamut=saturation <= _maximum_chroma(value, hue),
+            contrast=contrast((value, saturation, hue), surfaces[theme]),
+        )
+        for theme in THEMES
+        for topic in NEWS_TOPICS
+    ]
 
 
 def crowded(report: Sequence[Fill]) -> list[tuple[Fill, Fill, float]]:
@@ -452,14 +487,14 @@ def inks() -> list[Fill]:
     return report
 
 
-def ink_table(report: Sequence[Fill]) -> str:
+def ink_table(report: Sequence[Fill], *, surface: str = "page") -> str:
     """The inks as the design document carries them: one row a token, a theme a pair of
     columns, the ink in OkLCh with its hex and its contrast against the page."""
     by_token: dict[str, dict[str, Fill]] = {}
     for ink in report:
         by_token.setdefault(ink.rung, {})[ink.theme] = ink
     lines = [
-        "| Ink | Light | Against the page | Dark | Against the page |",
+        f"| Ink | Light | Against the {surface} | Dark | Against the {surface} |",
         "| --- | --- | --- | --- | --- |",
     ]
     for token, themed in by_token.items():
@@ -469,6 +504,11 @@ def ink_table(report: Sequence[Fill]) -> str:
             cells += [f"`{ink.oklch}` `{ink.hex}`", f"{ink.contrast:.1f}:1"]
         lines.append("| " + " | ".join(cells) + " |")
     return "\n".join(lines)
+
+
+def news_topic_table(report: Sequence[Fill]) -> str:
+    """News ink and its measured contrast on the common neutral surface."""
+    return ink_table(report, surface="neutral surface").replace("| Ink |", "| News topic |", 1)
 
 
 def markdown_table(report: Sequence[Fill], head: str = "Rung") -> str:
@@ -497,6 +537,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     statuses = status_fills()
     topics = topic_fills()
     drawn = inks()
+    news = news_topic_inks()
     print(markdown_table(report))
     print()
     print(markdown_table(statuses, "Status"))
@@ -504,7 +545,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     print(markdown_table(topics, "Topic"))
     print()
     print(ink_table(drawn))
-    report += statuses + topics
+    print()
+    print(news_topic_table(news))
+    report += statuses + topics + news
     pages = page_colours()
     for theme in THEMES:
         print(f"{theme}: text on the page background {contrast(*pages[theme].values()):.1f}:1")

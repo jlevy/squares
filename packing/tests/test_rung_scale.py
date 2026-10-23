@@ -243,51 +243,53 @@ def test_the_design_document_carries_the_inks() -> None:
         assert line in design, line
 
 
-def test_the_topic_chips_take_fills_from_the_scale_or_their_bound() -> None:
-    """The topics Results and News share (`think-z9za`): Verification is a result's
-    `reviewed` blue, Optimality, Project and Engineering are hues of the scale, and the
-    bound topics are their bound's ink diluted into the page. Each is in gamut with the
-    page's text at WCAG AA or better on it in both themes."""
+def test_result_kind_chips_keep_their_fills_from_the_scale_or_their_bound() -> None:
+    """Result kinds retain their existing gamut and text contrast independently of News."""
     topics = rung_scale.topic_fills()
     assert {fill.rung for fill in topics} == {
         "lower-bound",
         "upper-bound",
         "optimality",
-        "project",
-        "engineering",
-        "verification",
     }
     assert {fill.theme for fill in topics} == set(rung_scale.THEMES)
     for fill in topics:
         assert fill.in_gamut, fill
         assert fill.contrast >= rung_scale.MINIMUM_CONTRAST, fill
-    reviewed = {
-        fill.theme: fill for fill in rung_scale.status_fills() if fill.rung == "reviewed"
-    }
-    for fill in topics:
-        if fill.rung == "verification":
-            assert fill.oklch == reviewed[fill.theme].oklch, fill
 
 
 def test_every_topic_fill_keeps_one_meaning() -> None:
-    """A topic's fill stands a just noticeable difference or more from every status's
-    and every other topic's in its theme, unless the two mean one thing, as Verification
-    and `reviewed` do. Project's amber at the yellow statuses' hue, 0.011 from `recorded`
-    in OkLab, is the case this rejects."""
+    """Result-kind fills remain distinct from statuses; News uses a separate ink contract."""
     report = rung_scale.status_fills() + rung_scale.topic_fills()
     assert rung_scale.crowded(report) == []
     recorded = next(
         fill for fill in report if fill.rung == "recorded" and fill.theme == "light"
     )
-    near = dataclasses.replace(recorded, rung="project", hue=85.0)
-    others = [fill for fill in report if fill.rung != "project"]
+    near = dataclasses.replace(recorded, rung="optimality", hue=85.0)
+    others = [fill for fill in report if fill.rung != "optimality"]
     assert [
         (first.rung, second.rung) for first, second, _ in rung_scale.crowded([*others, near])
-    ] == [("project", "recorded")]
+    ] == [("optimality", "recorded")]
 
 
 def test_the_design_document_carries_the_topic_fills() -> None:
     """The topic table in `paper-design.md` is this tool's output."""
     design = (render_overview.TEMPLATES / "paper-design.md").read_text(encoding="utf-8")
     for line in rung_scale.markdown_table(rung_scale.topic_fills(), "Topic").splitlines():
+        assert line in design, line
+
+
+def test_news_topics_use_readable_inks_on_one_neutral_surface_per_theme() -> None:
+    from devtools.site_topics import NEWS_TOPICS  # noqa: PLC0415
+
+    surfaces = rung_scale.news_topic_backgrounds()
+    report = rung_scale.news_topic_inks()
+    assert {ink.rung for ink in report} == set(NEWS_TOPICS)
+    assert {ink.theme for ink in report} == set(rung_scale.THEMES)
+    for theme, surface in surfaces.items():
+        assert surface[1] <= 0.01, (theme, surface)
+    for ink in report:
+        assert ink.in_gamut, ink
+        assert ink.contrast >= rung_scale.MINIMUM_CONTRAST, ink
+    design = (render_overview.TEMPLATES / "paper-design.md").read_text(encoding="utf-8")
+    for line in rung_scale.news_topic_table(report).splitlines():
         assert line in design, line

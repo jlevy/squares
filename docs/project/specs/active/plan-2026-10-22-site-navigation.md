@@ -416,7 +416,8 @@ Topics/Tags uses the shared dropdown multiselect.
 Significance remains the inline segmented S-buttons, using the same component as the
 Atlas Grid/Triangle controls; the default selection remains S4/S5. Preserve
 `news-topics` and `news-s` query state, history and fragments, plus complete no-script
-news access. This request does not change the Results Archive filter controls.
+news access. Results Archive uses its separately requested S1–S5 multiselect segments
+under think-p39d; Verification and Confirmation retain their floor selects.
 
 ### Homepage composition
 

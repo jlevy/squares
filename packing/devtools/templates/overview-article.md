@@ -38,7 +38,7 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 {{PROFILES}}
 
-<h2 id="report-your-results" class="site-title">Report Your Results!</h2>
+<h2 id="report-your-results" class="site-title">Report a Result</h2>
 
 <div class="site-navigation-copy">
 
@@ -77,16 +77,9 @@ Workbench.
 
 <p class="site-action-row site-more"><a class="site-action" href="visualize.html">View Videos{{ARROW_RIGHT}}</a><a class="site-action" href="workbench/">Open Workbench{{ARROW_RIGHT}}</a><a class="site-action" href="posters.html">View All Posters{{ARROW_RIGHT}}</a></p>
 
-<h1 id="squares-project-documentation" class="site-title">Squares Project Documentation</h1>
+<h1 id="about-the-squares-project" class="site-title">About the Squares Project<a id="squares-project-documentation"></a></h1>
 
-<div class="site-navigation-copy">
-
-The project documentation explains the research, evidence, record formats, and how to
-build and extend the tools.
-
-</div>
-
-<p class="site-action-row site-more"><a class="site-action" href="documentation.html">View All Documentation{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="about.html">About the Squares Project{{ARROW_RIGHT}}</a></p>
 
 <h1 id="more-resources" class="site-title">More Resources<a id="other-square-packing-projects"></a></h1>
 

@@ -159,8 +159,10 @@ void test("a case filter finds its number in a row's list of cases and ranges", 
   assert.ok(!table.rowMatches({}, wanted("20")));
 });
 
-/** A value each kind of filter refuses the row below with. */
+/** A value each kind of filter refuses the row below with.
+ * @type {Record<SiteTableFilter["kind"], {value: string}>} */
 const FAILING = {
+  "one-of": { value: "1" },
   equals: { value: "nothing-of-the-kind" },
   flag: { value: "true" },
   min: { value: "6" },

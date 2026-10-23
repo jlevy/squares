@@ -207,23 +207,41 @@ table to its output and every ratio to 4.5:1.
 | `open` | `oklch(84.0% 0.083 95)` `#dbcb8c` | 10.9:1 | `oklch(34.2% 0.070 95)` `#443800` | 9.9:1 |
 | `recorded` | `oklch(84.0% 0.063 95)` `#d7cb9c` | 10.9:1 | `oklch(34.2% 0.050 95)` `#413818` | 9.9:1 |
 
-The topics that Results and News share take their fills from the same two sources
-(`think-z9za`). Verification is the `reviewed` blue; Optimality is violet, Project amber
-and Engineering orange, each at level 2 of the scale, Project with the open case’s
-chroma boost; the bound topics are the bound kinds’ diluted inks.
-One fill keeps one meaning: `devtools.rung_scale` holds every topic at least 0.02 in
-OkLab, about a just noticeable difference, from each status and each other topic in its
-theme, except Verification, which is the `reviewed` blue by design.
-`tests/test_rung_scale.py` holds this table to its output and every ratio to 4.5:1.
+Result-kind tags retain the lower-bound, upper-bound and optimality fills below.
+Their text and status palettes remain independent of News.
+`devtools.rung_scale` keeps those result fills distinct and checks their text contrast.
 
 | Topic | Light fill | Text contrast | Dark fill | Text contrast |
 | --- | --- | --- | --- | --- |
 | `lower-bound` | `oklch(91.4% 0.028 11.6)` `#f5dbde` | 13.6:1 | `oklch(27.5% 0.022 353)` `#302328` | 12.7:1 |
 | `upper-bound` | `oklch(92.2% 0.018 156.5)` `#dce9e0` | 14.2:1 | `oklch(28.1% 0.021 176.9)` `#1e2d29` | 12.2:1 |
 | `optimality` | `oklch(84.0% 0.063 310)` `#d7c0ea` | 10.6:1 | `oklch(34.2% 0.050 310)` `#40314c` | 10.1:1 |
-| `project` | `oklch(84.0% 0.083 70)` `#eec28f` | 10.7:1 | `oklch(34.2% 0.070 70)` `#4f3105` | 10.0:1 |
-| `engineering` | `oklch(84.0% 0.063 45)` `#efbea9` | 10.7:1 | `oklch(34.2% 0.050 45)` `#4e3022` | 10.1:1 |
-| `verification` | `oklch(84.0% 0.063 250)` `#accef3` | 10.9:1 | `oklch(34.2% 0.050 250)` `#243a51` | 9.9:1 |
+
+News topic tags, dropdown options and selected summary chips share one neutral surface:
+`--site-news-topic-bg` is `oklch(95% 0.004 265)` in light mode and
+`oklch(29% 0.008 265)` in dark mode.
+Their text uses the corresponding topic hue; uncoded subjects retain neutral ink.
+All options retain that surface when unchecked, selected or hovered; a visible check
+identifies selection.
+Status, result-kind and significance palettes are unchanged.
+The shared ink lightness/chroma tokens give every News label at least4.5:1 contrast on
+the neutral surface in both themes, measured below.
+
+| News topic | Light | Against the neutral surface | Dark | Against the neutral surface |
+| --- | --- | --- | --- | --- |
+| `lower-bound` | `oklch(43.0% 0.080 25)` `#763d39` | 7.3:1 | `oklch(80.0% 0.090 25)` `#f2a7a1` | 7.3:1 |
+| `upper-bound` | `oklch(43.0% 0.080 145)` `#315b33` | 6.8:1 | `oklch(80.0% 0.090 145)` `#99ce9a` | 7.8:1 |
+| `optimality` | `oklch(43.0% 0.080 310)` `#5d4371` | 7.3:1 | `oklch(80.0% 0.090 310)` `#d0aeea` | 7.3:1 |
+| `uniqueness` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
+| `simplification` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
+| `formalization` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
+| `rigidity` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
+| `case-exclusion` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
+| `restricted-optimality` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
+| `method-limit` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
+| `project` | `oklch(43.0% 0.080 70)` `#6b4716` | 7.1:1 | `oklch(80.0% 0.090 70)` `#e3b47d` | 7.5:1 |
+| `engineering` | `oklch(43.0% 0.080 45)` `#744029` | 7.2:1 | `oklch(80.0% 0.090 45)` `#efac8d` | 7.4:1 |
+| `verification` | `oklch(43.0% 0.080 250)` `#2a527a` | 7.0:1 | `oklch(80.0% 0.090 250)` `#91c3f6` | 7.6:1 |
 
 ### Significance and the Other Inks
 
@@ -697,7 +715,7 @@ one of them changes.
 | Above a section heading (`h2`) | `--paper-section-space` | 2.7 of the prose base, 48.6px | `paper-type.css` |
 | Below a section heading (`h2`) | `--paper-section-space-below` | 1.7rem, 27.2px | `paper-type.css` |
 | Above a visible site-title H1 or H2 | `--site-title-space-above` | 6.25rem, 100px | `site.css` |
-| Below a visible site-title H1 or H2 | `--site-title-space-below` | 2.5rem, 40px | `site.css` |
+| Below a visible site-title H1 or H2 | `--site-title-space-below` | 2rem, 32px | `site.css` |
 | Below a page’s title, and below its subtitle | `--site-subtitle-space` | 2rem, 32px | `site.css` |
 | Above and below a table | `--site-table-space` | 2rem, 32px | `site.css` |
 | Between a wide block and the edge of the page’s content area | `--site-wide-gutter` | 0.5rem, 8px | `site.css` |
@@ -1037,11 +1055,11 @@ contributor articles use their component sheets and the same text tokens.
   problem and explaining upper/lower bounds (`think-8xzs`). About uses only H1 section
   headings, each with the same `site-title` styling as The Squares Project
   (`think-6m9n`, `think-sq1i`). Every visible `h1.site-title` and `h2.site-title` shares
-  the screen-only 6.25rem margin above it and 2.5rem below it
-  (`--site-title-space-above` and `--site-title-space-below`); compact Legend and
-  introduction-card headings keep their own spacing.
-  The hero graphic opens the case popover, with the case-record link as its no-script
-  fallback. Case popovers offer separate record, Frontier-row and Atlas-tile actions.
+  the screen-only 6.25rem margin above it and 2rem below it (`--site-title-space-above`
+  and `--site-title-space-below`); compact Legend and introduction-card headings keep
+  their own spacing. The hero graphic opens the case popover, with the case-record link
+  as its no-script fallback.
+  Case popovers offer separate record, Frontier-row and Atlas-tile actions.
   Atlas case targets fully expand the grid before scrolling to and highlighting the
   requested tile. Every row containing one card is centered.
   The full project narrative and attribution live on About; documentation cards also
@@ -1106,7 +1124,8 @@ contributor articles use their component sheets and the same text tokens.
   News bookmarks forwarded there.
   Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
-  One unboxed Reset filters action restores the defaults.
+  One unboxed Reset filters action restores the defaults, right aligned above the News
+  item count on desktop and narrow screens.
   Significance remains an inline S3/S4/S5 segmented group using the homepage
   Grid/Triangle chooser’s shared type, sizing, borders and states; it is never a
   dropdown. Topics uses one compact multiselect disclosure.
@@ -1123,12 +1142,10 @@ contributor articles use their component sheets and the same text tokens.
   `overview/filter-menu.js` owns disclosure, focus and the summary; the News controller
   retains selection and URL state.
   Group names remain accessible without separate visible headings.
-  They use the cards’ sentence-case labels in both color themes: inactive buttons have a
-  neutral gray fill, and selected buttons have the shared topic fill and a leading
-  check, the theme menu’s mark for a chosen item, so selection never rests on hue alone.
-  The check’s place is held while it is hidden, so a press never moves a button.
-  Under a hovering pointer an inactive button takes a paler topic fill, so a press shows
-  at once; touch screens have no hover state.
+  They use the cards’ sentence-case labels and corresponding topic-colored ink on the
+  same neutral gray background in both themes.
+  Selected options show a leading check, so selection never rests on hue alone.
+  The check’s place is held while hidden, keeping the option’s position stable.
   Keyboard focus keeps the shared visible outline.
   Each topic’s muted tally counts articles at the selected significance levels,
   independently of topic selection.
@@ -1150,10 +1167,10 @@ contributor articles use their component sheets and the same text tokens.
   Eligible entry and legacy date fragments reveal their corresponding card.
   Bookmarks for excluded entries, and dates with no eligible articles, forward to the
   retained GitHub changelog.
-  Topic labels reuse square-cornered Results chips with distinct subject metadata: lower
-  and upper bounds and optimality reuse bound fills, engineering uses the accent tint,
-  and verification the review-blue palette.
-  These subject labels assert no result kind or verification status.
+  Topic labels reuse the square-cornered chip geometry with distinct News subject
+  metadata and the common neutral background.
+  Their corresponding colored ink keeps News subjects distinct from the result/status
+  fill palettes. These subject labels assert no result kind or verification status.
   Results and News use the shared topic vocabulary and sentence-case labels in
   `devtools/site_topics.py`. News uses the shared vocabulary’s subset without Correction
   and Audit, including Project, Engineering and Verification.
@@ -1199,10 +1216,10 @@ contributor articles use their component sheets and the same text tokens.
   `.site-title`) is the sans face in upright caps (not KPress’s italic `h2`) at 1.5
   times the sans base, centred.
   On screen, `h1.site-title` and `h2.site-title` use `--site-title-space-above`
-  (6.25rem) above and `--site-title-space-below` (2.5rem) below the title on every
-  content page. The first page heading has no top margin, including a heading after
-  breadcrumbs in the initial article or header; the page container supplies its normal
-  top padding. Print keeps its existing heading spacing.
+  (6.25rem) above and `--site-title-space-below` (2rem) below the title on every content
+  page. The first page heading has no top margin, including a heading after breadcrumbs
+  in the initial article or header; the page container supplies its normal top padding.
+  Print keeps its existing heading spacing.
   The homepage’s first section, The Square Packing Problem, takes it through
   `.site-title`, so it reads as the Frontier page’s title does.
   That section opens with README’s two opening paragraphs: the block between README’s
@@ -1995,9 +2012,9 @@ contributor articles use their component sheets and the same text tokens.
 
 - **About and Learn.** About separates the project narrative into paragraphs for its
   origins, subsequent work, independent results, and current role.
-  **Report Your Results!** is an H1 over the reporting invitation, which asks for the
-  name to credit and ends in a **Report a Result** button opening the repository’s
-  result form; the old `#contribute-your-results` anchor stays on the heading.
+  **Report a Result** is an H1 over the reporting invitation, which asks for the name to
+  credit and ends in a **Report a Result** button opening the repository’s result form;
+  the old `#contribute-your-results` anchor stays on the heading.
   The overview carries a short reporting summary after Profiles, with a **Report a
   Result** link to the full invitation on About.
   Project documentation remains on About.
@@ -2102,15 +2119,14 @@ contributor articles use their component sheets and the same text tokens.
   Atlas’s `site-tabs site-chooser-small` component in `site-nav.css`. The text uses the
   Results widget control size, 1.35 leading, and 0.15rem by 0.65rem padding
   (`think-ticj`). Borders, hover, keyboard focus and motion use the same rules on every
-  page. Topic choices inside the shared multiselect disclosure use neutral gray when
-  inactive, and their shared chip fills and a check when selected; an inactive choice
-  under a hovering pointer takes a paler topic fill.
+  page. Topic choices inside the shared multiselect disclosure always use the common
+  neutral News surface with topic-colored ink and a check when selected.
   They have no label underline or inset selection mark.
   Single-select tabs keep `aria-selected` and arrow-key navigation; multi-select groups
   use native buttons with `aria-pressed`. Group names remain accessible when visually
   hidden. Each compact choice owns its border, so wrapped rows fit their buttons.
   News keeps significance inline and puts only Topics in the shared filter disclosure.
-  It has one unboxed Reset filters action.
+  It has one unboxed Reset filters action, right aligned above the item count.
   Chooser strips wrap at narrow widths; pages only place the groups.
   All action groups use a shared 0.7rem gap and wrap together at narrow widths; no
   section owns separate button spacing.
