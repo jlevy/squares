@@ -1,0 +1,34 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:Landings/v1
+title: Landings
+description: >-
+  The day each count's house best packing and each source's dated beyond-horizon rows
+  reached main, in UTC, as `landed` is for a register entry. The home page's Recently
+  Added places them by it. `devtools.stamp_landed` writes the record: the merge step
+  dates what a branch adds, and `--audit` and `--backfill` read main's first-parent
+  history. `houses` follows `upper_bound_houses.ADOPTED`, one entry a count, naming the
+  result that houses it now; `sources` names every source with rows in
+  `source-coverage.yaml`. A test holds the record to both.
+type: object
+additionalProperties: false
+required: [houses, sources]
+properties:
+  houses:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required: [n, result, landed]
+      properties:
+        n: {type: integer, minimum: 1}
+        result: {type: string, pattern: '^T-\d{3,}$'}
+        landed: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
+  sources:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required: [id, landed]
+      properties:
+        id: {type: string, pattern: '^[a-z0-9-]+$'}
+        landed: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}

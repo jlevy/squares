@@ -221,6 +221,10 @@ LANDINGS_HEADER = """\
 # a branch adds, and `--audit` compares every entry with `main`'s first-parent history.
 # `houses` follows `upper_bound_houses.ADOPTED`, one entry a count with the result that
 # houses it now; `sources` names every source with rows in `source-coverage.yaml`.
+softschema:
+  contract: packing.squares:Landings/v1
+  schema: landings.schema.yaml
+  status: enforced
 """
 
 
