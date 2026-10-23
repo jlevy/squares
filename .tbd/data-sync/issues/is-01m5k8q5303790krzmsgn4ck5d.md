@@ -5,7 +5,7 @@ title: Update Project Documentation repository introduction
 kind: task
 status: closed
 priority: 2
-version: 3
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
 delegate: root-navigation-final
 labels: []
@@ -14,10 +14,10 @@ parent_id: is-01m5jnsqdwj3t8m7hkbx6mr1m2
 hold: null
 hold_until: null
 created_at: 2026-10-23T02:16:25.949Z
-updated_at: 2026-10-23T02:17:38.826Z
+updated_at: 2026-10-23T02:55:37.613Z
 started_at: 2026-10-23T02:16:35.577Z
-closed_at: 2026-10-23T02:17:38.826Z
-close_reason: Published in 1fa732a9f. Three focused homepage tests pass; Documentation introduction regenerated and browser verified; Ruff clean.
+closed_at: 2026-10-23T02:55:37.611Z
+close_reason: Copyandpreviewpublished1fa732a9f; semantic project-link/name/prose assertions publishedde99072dd,3focusedtests passed49.93sRuffclean.
 resolution: null
 duplicate_of: null
 ---

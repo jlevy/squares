@@ -5,7 +5,7 @@ title: Resolve current-head CI integration failures and validate final site
 kind: task
 status: in_progress
 priority: 2
-version: 15
+version: 19
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
 delegate: sol-ci-integration
 labels: []
@@ -19,10 +19,14 @@ child_order_hints:
   - is-01m5k8m059qz452fqvzwv05qky
   - is-01m5k8v6rkt1mjd4q4wp34fsa6
   - is-01m5k93xejygzrdyf2k74g3wqe
+  - is-01m5ka3f4za49v87xchkpphzye
+  - is-01m5karnxfykw9p1teb6p4t3pa
+  - is-01m5kb1vs27g9vh059yktetzwz
+  - is-01m5kcj888vyfr4jk1sefzn8ev
 hold: null
 hold_until: null
 created_at: 2026-10-23T00:06:42.157Z
-updated_at: 2026-10-23T02:23:24.112Z
+updated_at: 2026-10-23T03:23:39.654Z
 started_at: 2026-10-23T00:07:03.618Z
 ---
 Track PR737 current-head hosted failures:1783 typecheck Optional bounding boxes, overview current-nav helper, stale Papers negative-fixture mutation, Contributor Profiles heading, and rollup formatting. Mechanical owners coordinate fixes. Keep open until final build and current-head CI pass; earlier Pages successes are not final certification. Sol owns narrow published-site/contributor expectations and rollup formatting only; root owns integration delivery.

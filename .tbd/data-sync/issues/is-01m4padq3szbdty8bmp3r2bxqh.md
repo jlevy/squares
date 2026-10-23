@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 304, 305 and nine beyond-horizon counts 338-381 
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:15.353Z
-updated_at: 2026-10-22T20:34:47.041Z
+updated_at: 2026-10-23T02:26:18.334Z
 started_at: 2026-10-11T20:28:27.023Z
 closed_at: null
 close_reason: null
@@ -78,3 +78,5 @@ blocked_on: think-xyhn
 2026-10-22 (c-lane-couzo-residue-1022): The records change is PR #730 (branch claude/intake-couzo-history-2026-10-22, lane c-lane-couzo-residue-1022), records commit a91c70907, 22 October 2026. The history walk (packing/campaign/issue-intake/upper-bounds-couzo-history-20261022) walks every count from 325 to 1024 from starts frozen at main a97b712b9. It covers every row source since then and every publication in a watched repository below the start. It reproduces the c-triage-1022b walk's recorded chain at every count. The one difference is that #715's 30 re-certifications are attributed to #715 rather than to 5a299b4, and they are held either way. 319 rows are recorded at assurance reported, 107 current and 212 superseded on entry; 236 existing rows are repointed. 340 publications are held back, each with its decision's bead (beyond_horizon_replay.HISTORY_HELD). The filtered two-route replay with six controls covers all 319 rows.
 
 For this bead (f311f08): 4 rows of the new source couzo-extended-certificates-2026-10-11, dated 2026-10-11T03:39:54Z by the commit, retained in the new couzo-extended-certificates-2026-10-11 packet: 340 current, and 378, 379 and 380 superseded on entry by #506 (337078c). Held: 376, above Göbel (think-8krd). #715's restatement at 340 now names the row. The 337078c read in intake-watch.yaml still names this bead; this PR leaves it, since its other items (the in-corpus updates the triage lists) are outside this lane. Filtered replay: 4 verified, 24 controls refused, 2.1 positive CPU s. The bead stays open until the PR merges; the coordinator closes it.
+
+2026-10-23 (c-lane-couzo-residue-1022): #730 (https://github.com/jlevy/squares/pull/730) merged at 02:10Z on 23 October 2026 as fcf2f96a5 and recorded f311f08's four rows (couzo-extended-certificates-2026-10-11: 340 current; 378, 379, 380 superseded by #506). The beyond-horizon remainder of this bead is done. It stays open: packing/campaign/intake-watch.yaml on main still names this bead for the franciscouzo/square-packing read through 337078c, so closing it would leave a dead deferral (check_bead_tree invariant 3) and fail the next change to intake-watch.yaml. Close it in the change where the next intake pass updates that entry, with the in-corpus items the triage lists.
