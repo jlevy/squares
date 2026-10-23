@@ -16,12 +16,9 @@ import shutil
 from pathlib import Path
 
 import pytest
-from jsonschema_rs import Draft202012Validator
 
 from devtools import default_drawings as defaults
-from devtools import flip_regularization as flip
 from devtools import improvement_rule as rule
-from sqpack.yamlio import load_yaml
 
 
 @pytest.fixture(scope="module")
@@ -1694,108 +1691,3 @@ def test_the_base_record_is_read_from_the_merge_base(
     monkeypatch.setattr(defaults, "REPO", shallow)
     with pytest.raises(SystemExit, match="git fetch --unshallow"):
         defaults.base_record("main")
-
-
-def _schema() -> dict:
-    return load_yaml((defaults.RECORD.parent / defaults.SCHEMA).read_text(encoding="utf-8"))
-
-
-def test_every_state_records_its_pose_as_the_schema_says() -> None:
-    """Policy section 13: each count's drawn picture is drawn in the pose its state
-    records. The schema requires the field and holds its shape, with the rotations and
-    stages `devtools.flip_regularization` decides by, so a pose the module cannot state,
-    or a state without one, fails soft-schema validation."""
-    record = _record()
-    schema = _schema()
-    state = schema["$defs"]["state"]
-    assert defaults.FLIP in state["required"]
-    field = state["properties"][defaults.FLIP]["properties"]
-    assert field["rotate"]["enum"] == list(flip.ROTATIONS)
-    assert field["decided_by"]["enum"] == list(flip.STAGES)
-    validator = Draft202012Validator(schema)
-    assert list(validator.iter_errors(record)) == []
-    for row in record["states"]:
-        decided = row[defaults.FLIP]
-        assert decided["decided_by"] in flip.STAGES, row["n"]
-        assert len(decided["quadrants"]) == 4, row["n"]
-        assert flip.Pose.from_record(decided) == defaults.flip_regularizations()[row["n"]]
-    turned = json.loads(json.dumps(record))
-    turned["states"][0][defaults.FLIP]["rotate"] = 45
-    assert list(validator.iter_errors(turned))
-    del turned["states"][0][defaults.FLIP]
-    assert list(validator.iter_errors(turned))
-
-
-def test_a_pose_the_data_does_not_give_fails_the_check(tmp_path: Path) -> None:
-    """`--check` writes the whole record again and compares its text, so a recorded pose
-    that is not the one the rule decides is drift, at any count."""
-    expected = _record()
-    altered = json.loads(json.dumps(expected))
-    row = next(row for row in altered["states"] if not row[defaults.FLIP]["flip"])
-    row[defaults.FLIP] = {**row[defaults.FLIP], "flip": True}
-    found, _kept = defaults.problems(expected, _write(tmp_path, altered))
-    assert found == [f"{defaults.RECORD_PATH} is not what the data gives"]
-    assert defaults.problems(expected, _write(tmp_path, expected))[0] == []
-
-
-def _pose_of(n: int, view: str | None) -> dict:
-    """What `flip_regularization.decide_count` decides on one of count `n`'s pictures, its
-    view's file or, for `None`, its house witness's, read afresh."""
-    found = flip.decide_count((n, view, False))
-    return {key: found[key] for key in ("rotate", "flip", "decided_by", "quadrants")}
-
-
-def _telling(views: dict[int, dict], default: str) -> int:
-    """The first count whose layer holds a view the record decides `default` for, where the
-    view and the house witness are decided differently, so a pose decided on the picture
-    the count does not draw shows (102 among the held views today, by its quadrants)."""
-    for n, row in sorted(views.items()):
-        if row["default"] == default and _pose_of(n, row["view"]) != _pose_of(n, None):
-            return n
-    pytest.skip(f"no count whose {default} default is told apart from its other picture")
-
-
-def test_each_pose_is_decided_on_the_picture_the_count_draws(tmp_path: Path) -> None:
-    """The worker decides a count's pose on the witness body it measured: the view's where
-    the view is drawn, and the house's both where the layer holds a view the rule does not
-    draw and where it holds none. Through the real `document`, on an index of one count of
-    each kind, each pose is the record's and the one `flip_regularization.decide_count`
-    decides on the drawn picture's file, read afresh."""
-    record = _record()
-    document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
-    every = {int(entry["n"]): entry for entry in document["entries"]}
-    rows = {row["n"]: row for row in record["states"]}
-    views = {row["n"]: row for row in record["entries"]}
-    drawn = _telling(views, defaults.REGULARIZED)
-    held = _telling(views, defaults.HOUSE)
-    bare = min(n for n in every if n not in views)
-    alone = tmp_path / "alone.json"
-    for n, view in ((drawn, views[drawn]["view"]), (held, None), (bare, None)):
-        alone.write_text(json.dumps({**document, "entries": [every[n]]}), encoding="utf-8")
-        (state,) = defaults.document(index=alone)["states"]
-        assert state["drawn"] == (defaults.HOUSE if view is None else defaults.VIEW), n
-        assert state[defaults.FLIP] == rows[n][defaults.FLIP] == _pose_of(n, view), n
-
-
-def test_a_record_without_poses_draws_each_count_in_its_sources_pose(tmp_path: Path) -> None:
-    """The renderers read each count's pose through `flip_regularizations`, which gives
-    every count one: the recorded pose, or `IDENTITY` where the record names none or is
-    missing, so a record written before the stage still draws."""
-    record = _record()
-    recorded = defaults.flip_regularizations()
-    assert recorded == {
-        row["n"]: flip.Pose.from_record(row[defaults.FLIP]) for row in record["states"]
-    }
-    assert sorted(recorded) == list(flip.COUNTS)
-    unturned = dict.fromkeys(flip.COUNTS, flip.IDENTITY)
-    assert defaults.flip_regularizations(tmp_path / "missing.json") == unturned
-    older = json.loads(json.dumps(record))
-    turned = next(row for row in older["states"] if row[defaults.FLIP]["rotate"])
-    del turned[defaults.FLIP]
-    partial = defaults.flip_regularizations(_write(tmp_path, older))
-    assert partial == {**recorded, turned["n"]: flip.IDENTITY}
-    for row in older["states"]:
-        row.pop(defaults.FLIP, None)
-    # Another path: the reader is cached by path, as `decisions` is.
-    (tmp_path / "older").mkdir()
-    assert defaults.flip_regularizations(_write(tmp_path / "older", older)) == unturned

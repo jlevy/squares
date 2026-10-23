@@ -1,23 +1,24 @@
 #!/usr/bin/env python3
-"""Flip regularization: each drawn picture turned by one of the container's eight symmetries.
+"""Flip regularization: each default picture turned by one of the container's eight symmetries.
 
 Usage, from `packing/`, after
 `uv run --frozen --all-extras --group dev python -m devtools.flip_regularization`:
 
-    [--n N ...] [--workers K] [--invariance] [--json]
+    [--update | --check | --invariance] [--n N ...] [--json]
 
 Packings arrive in whatever pose their source published, so neighbouring atlas tiles
-are turned and mirrored against one another. Flip regularization picks, for each drawn
-picture, the symmetry that draws it in its canonical pose, decided in binary64 from where
-its squares lie. It is display only: the renderers apply the pose exactly to the stored
-coordinates, and no witness, view or certificate changes. The plan is
+are turned and mirrored against one another. Flip regularization, the last stage of the
+regularization process and separate from the others, picks for each count's default
+picture the symmetry that draws it in its canonical pose, decided in binary64 from where
+its squares lie (regularization policy, section 13). It is display only: the renderers
+apply the pose as they draw, and no witness, view or certificate changes. The plan is
 `docs/project/specs/active/plan-2026-10-23-flip-regularization.md`.
 
 **Poses.** A `Pose` is the owner's two steps: `rotate` 0, 90, 180 or 270 degrees
 counter-clockwise about the container's centre, then, if `flip`, mirror across the
 diagonal from the upper-left to the lower-right corner. That mirror fixes the upper-left
 and lower-right quadrants and swaps the other two, so the rotation decides which quadrant
-is upper left and the flip which of its neighbours is upper right. Each of the eight
+is lower right and the flip which of its neighbours is lower left. Each of the eight
 symmetries is exactly one pair, and with y up and side `s` the composites are:
 
     pose        point map         reads as
@@ -32,19 +33,32 @@ symmetries is exactly one pair, and with y up and side `s` the composites are:
 
 `POSES` lists them in that order, rotations without a flip first.
 
-**The rule** (`decide`). The owner's words, 23 October 2026: rotate so the heaviest
-quadrant by filled area is upper left, then flip if necessary so that the heavier of its
-two neighbours is upper right, ties broken by some further deterministic rule.
+**The picture.** A count's default picture is read from its retained rendering: its
+regularized view's (`VIEW_RENDERINGS`) where `default_drawings.regularized_defaults`
+makes the view the default, as `render_frontier_page.default_root` chooses, else its
+house rendering (`RENDERINGS`). The container outline and the squares' fill polygons are
+read as `render_frontier_page.packing_svg` reads them, but at full precision, as
+binary64, y up from the outline's lower-left corner and scaled to a unit square's side
+(`rendering_squares`). No frame is built: `--check` decides all 324 counts in about
+1.4 seconds of wall, serially, a quarter of it importing `default_drawings`.
+
+**The rule** (`decide`). The owner, 23 October 2026: rotate the heaviest quadrant by
+filled area to the lower right, then flip if the upper right outweighs the lower left,
+ties broken by some further deterministic rule. The upper left is then forced, and the
+upper right takes what is left, so empty space gathers upper right, as the catalogues
+draw the integer grids.
 
 1. *Weights.* On an m x m grid over the container, a cell's weight is the area of the
    squares inside it over the cell's area, each square clipped to the cell as a convex
-   polygon in binary64. Cells are read in reading order, top row first and left to
-   right, so at m = 2 they are upper left, upper right, lower left, lower right.
+   polygon in binary64. Cells are read in quadtree order (`quadtree_cells`): lower
+   right, lower left, upper left, upper right, and within each quadrant its own four in
+   that order, recursively. At m = 2 that is the four quadrants.
 2. *Filter.* Of the candidate poses, keep at each position in turn those whose image's
-   weight there is within `TOLERANCE` of the greatest. At m = 2 this is the owner's rule.
+   weight there is within `TOLERANCE` of the greatest (`strongest`). At m = 2 this is
+   the owner's two steps.
 3. *Levels.* The filter runs at m = 2, then 4, 8 and 16 (`LEVELS`) on the survivors.
-4. *Final key.* Each survivor's image as its squares, each `(-cy, cx, tilt)` rounded to
-   nine places and sorted (the highest square first, then the leftmost), the least kept.
+4. *Final key.* Each survivor's image as its squares, each `(cy, -cx, tilt)` rounded to
+   nine places and sorted (the lowest square first, then the rightmost), the least kept.
    The tilt is the square's angle modulo 90 degrees in (-45, 45]; it is in the key
    because two mirror images can share every centre and differ only in its sign.
 5. *Same picture.* After each stage the survivors are matched square for square; once
@@ -53,64 +67,49 @@ two neighbours is upper right, ties broken by some further deterministic rule.
    symmetric packing keeps its published pose where it can. Distinct pictures surviving
    the final key raise, rather than a symmetry being assumed.
 
-**Exact maps** (`orient_frame`). Each point is mapped in its own scalar kind: rational
-by `Fraction`, decimal by `Decimal` at whatever precision keeps the difference exact,
-number-field elements coefficient by coefficient with the projection recomputed, and
-binary64 by float subtraction, the one kind that rounds, since the difference of two
-doubles need not be one; no witness-built frame is binary64.
-
-The command decides each count's drawn picture -- its regularized view where
-`default-drawings.json` makes that the default, else its house witness -- and prints the
-pose, the stage that decided it and the oriented quadrant weights, then how many counts
-each stage decided. `--invariance` also decides each picture from all eight of its poses
-and fails unless all eight draw the same (`invariant`). It reads and prints; it writes
-nothing.
+The command decides every count and prints how many each stage decided and each pose
+took; `--n` and `--json` print the decisions. `--update` writes the record, `RECORD`:
+for each count the picture drawn, its rendering, the pose, the stage that decided it and
+the oriented quadrant weights. `--check`, a records-tier step, decides every count again
+and fails, naming each count, where the record differs. `--invariance` also decides each
+picture from all eight of its poses and fails unless all eight draw the same
+(`invariant`). The renderers read the record through `poses`.
 """
 
 from __future__ import annotations
 
 import argparse
-import gzip
 import json
 import math
-import os
+import re
 from bisect import bisect_left, bisect_right
 from collections import Counter
-from collections.abc import Callable, Iterable, Mapping, Sequence
-from concurrent.futures import ProcessPoolExecutor
-from dataclasses import dataclass, replace
-from decimal import Decimal, localcontext
-from fractions import Fraction
-from functools import cache, lru_cache
+from collections.abc import Iterable, Mapping, Sequence
+from dataclasses import dataclass
+from functools import cache
 from pathlib import Path
 from typing import Any, Protocol, Self
 
-from sqpack.field import NumberField
-from sqpack.render.model import (
-    ActiveFeature,
-    ContactFeature,
-    ContainerWall,
-    DetectedContactFeature,
-    PackingFrame,
-    Point2,
-    RigidPose,
-    ScalarKind,
-    ScalarSource,
-    SquareGeometry,
-)
-from sqpack.render.numbers import (
-    scalar_from_decimal,
-    scalar_from_exact,
-    scalar_from_float,
-    scalar_from_fraction,
-)
-from sqpack.yamlio import load_yaml
+from strif import atomic_output_file
+
+from sqpack import retained_json
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
+RECORD = ROOT / "atlas/known-best/flip-regularization.json"
+RECORD_PATH = RECORD.relative_to(REPO).as_posix()
+CONTRACT = "packing.squares:FlipRegularization/v1"
+SCHEMA = "flip-regularization.schema.yaml"
 GENERATOR = "python -m devtools.flip_regularization"
-FORMAT = "flip-regularization-v1"
-WITNESS = "packing/witnesses/known-best/n-{n:03d}.yaml"
+POLICY_DOCUMENT = "docs/project/policies/regularization-policy.md"
+RULE = f"{POLICY_DOCUMENT}#13-flip-regularization"
+#: The house renderings and the regularized views' renderings, repository-relative:
+#: `render_frontier_page.RENDERINGS` and `REGULARIZED_RENDERINGS`, which this module
+#: cannot import, since that one imports it.
+RENDERINGS = "packing/atlas/known-best/rendering"
+VIEW_RENDERINGS = "packing/atlas/known-best/regularized/rendering"
+#: What a count's default picture is: its regularized view, or its house drawing.
+VIEW, HOUSE = "view", "house"
 COUNTS = range(1, 325)
 
 ROTATIONS = (0, 90, 180, 270)
@@ -124,6 +123,9 @@ KEY_PLACES = 9
 MATCH_TOLERANCE = 1e-6
 """Two pictures are the same when their squares pair off within this, centres in the
 container's units and tilts in degrees."""
+QUADRANTS = ((1, 0), (0, 0), (0, 1), (1, 1))
+"""The quadrants in the rule's order, lower right, lower left, upper left, upper right,
+each as `(column, row)` of a 2 x 2 grid from the lower left."""
 
 
 class Coordinate(Protocol):
@@ -209,6 +211,23 @@ DESCRIPTIONS = dict(
 )
 
 
+@cache
+def poses(record: Path = RECORD) -> dict[int, Pose]:
+    """Every count's flip regularization (policy section 13): the pose its default
+    picture is drawn in, from the record, for each of `COUNTS`. A count the record has no
+    row for, or a record that is missing, draws in `IDENTITY`, its source's pose. Nothing
+    is decided here, and the record's contract is not held: `--check` holds the record to
+    the data."""
+    found = dict.fromkeys(COUNTS, IDENTITY)
+    if not record.is_file():
+        return found
+    for row in json.loads(record.read_text(encoding="utf-8")).get("entries") or []:
+        n = int(row["n"])
+        if n in found:
+            found[n] = Pose.from_record(row)
+    return found
+
+
 def orient_polygon[T: Coordinate](
     pose: Pose, corners: Iterable[tuple[T, T]], side: T
 ) -> list[tuple[T, T]]:
@@ -266,18 +285,40 @@ def _span(edges: Sequence[float], low: float, high: float) -> range:
     return range(first, min(last, max(0, bisect_left(edges, high) - 1)) + 1)
 
 
+@cache
+def quadtree_cells(cells: int) -> tuple[tuple[int, int], ...]:
+    """The cells of a `cells` x `cells` grid, `cells` a power of two, as `(column, row)`
+    from the lower left, in the rule's order: the quadrants in `QUADRANTS` order, and
+    within each its own cells in this order. A cell's key is its quadrant at each level,
+    coarse to fine, so at m = 4 the lower-right quadrant's four cells come first, its
+    lower right first."""
+    if cells < 1 or cells & (cells - 1):
+        raise ValueError(f"a grid's side must be a power of two, not {cells}")
+    if cells == 1:
+        return ((0, 0),)
+    half = cells // 2
+    return tuple(
+        (column * half + inner_column, row * half + inner_row)
+        for column, row in QUADRANTS
+        for inner_column, inner_row in quadtree_cells(half)
+    )
+
+
 def grid_weights(squares: Iterable[Corners], side: float, cells: int) -> tuple[float, ...]:
-    """Each cell's filled fraction on a `cells` x `cells` grid, in reading order: top row
-    first, left to right. A square is clipped only against the cells its bounding box
-    reaches, which keeps a 16 x 16 grid cheap."""
+    """Each cell's filled fraction on a `cells` x `cells` grid, in `quadtree_cells`
+    order. A square inside one cell adds its whole area there; any other is clipped only
+    against the cells its bounding box reaches, which keeps a 16 x 16 grid cheap."""
     edges = [side * index / cells for index in range(cells + 1)]
-    areas = [0.0] * (cells * cells)
+    areas = [[0.0] * cells for _column in range(cells)]
     for corners in squares:
         polygon = list(corners)
         xs = [x for x, _y in polygon]
         ys = [y for _x, y in polygon]
-        rows = _span(edges, min(ys), max(ys))
-        for column in _span(edges, min(xs), max(xs)):
+        columns, rows = _span(edges, min(xs), max(xs)), _span(edges, min(ys), max(ys))
+        if len(columns) == 1 and len(rows) == 1:
+            areas[columns[0]][rows[0]] += _area(polygon)
+            continue
+        for column in columns:
             strip = _half_plane(polygon, 0, edges[column], below=False)
             strip = _half_plane(strip, 0, edges[column + 1], below=True)
             if len(strip) < 3:
@@ -285,20 +326,21 @@ def grid_weights(squares: Iterable[Corners], side: float, cells: int) -> tuple[f
             for row in rows:
                 piece = _half_plane(strip, 1, edges[row], below=False)
                 piece = _half_plane(piece, 1, edges[row + 1], below=True)
-                areas[(cells - 1 - row) * cells + column] += _area(piece)
+                areas[column][row] += _area(piece)
     cell = side / cells
-    return tuple(area / (cell * cell) for area in areas)
+    return tuple(areas[column][row] / (cell * cell) for column, row in quadtree_cells(cells))
 
 
 @cache
 def _targets(pose: Pose, cells: int) -> tuple[int, ...]:
-    """Where each cell, in reading order, lands under `pose`: its centre mapped in whole
-    half-cells, so the permutation is exact."""
+    """Where each cell, in `quadtree_cells` order, lands under `pose`: its centre mapped
+    in whole half-cells, so the permutation is exact."""
+    order = quadtree_cells(cells)
+    position = {cell: index for index, cell in enumerate(order)}
     targets: list[int] = []
-    for index in range(cells * cells):
-        row, column = divmod(index, cells)
-        x, y = pose.point(2 * column + 1, 2 * (cells - 1 - row) + 1, 2 * cells)
-        targets.append((cells - 1 - (y - 1) // 2) * cells + (x - 1) // 2)
+    for column, row in order:
+        x, y = pose.point(2 * column + 1, 2 * row + 1, 2 * cells)
+        targets.append(position[(x - 1) // 2, (y - 1) // 2])
     return tuple(targets)
 
 
@@ -310,8 +352,9 @@ def image_weights(weights: Sequence[float], pose: Pose, cells: int) -> tuple[flo
     return tuple(image)
 
 
-def _strongest(candidates: list[Pose], weights: Mapping[Pose, Sequence[float]]) -> list[Pose]:
-    """The candidates whose weights are lexicographically greatest, within `TOLERANCE`."""
+def strongest(candidates: list[Pose], weights: Mapping[Pose, Sequence[float]]) -> list[Pose]:
+    """The candidates whose weights are lexicographically greatest, within `TOLERANCE`
+    position by position: weights that close count as equal."""
     for position in range(len(weights[candidates[0]])):
         if len(candidates) == 1:
             break
@@ -395,7 +438,7 @@ def _paired(left: Placement, right: Placement) -> bool:
 
 def _key(image: Iterable[Placement]) -> list[tuple[float, float, float]]:
     return sorted(
-        (round(-y, KEY_PLACES), round(x, KEY_PLACES), round(tilt, KEY_PLACES))
+        (round(y, KEY_PLACES), round(-x, KEY_PLACES), round(tilt, KEY_PLACES))
         for x, y, tilt in image
     )
 
@@ -408,11 +451,11 @@ class Decision:
     decided_by: str
     """The first of `STAGES` after which every surviving pose drew the same picture."""
     quadrants: tuple[float, float, float, float]
-    """The oriented picture's quadrant weights: upper left, upper right, lower left,
-    lower right."""
+    """The oriented picture's quadrant weights: lower right, lower left, upper left,
+    upper right."""
 
     def record(self) -> dict[str, Any]:
-        """The drawings record's `flip_regularization` field for this picture."""
+        """The record's fields for this picture's pose."""
         return {
             **self.pose.record(),
             "decided_by": self.decided_by,
@@ -421,7 +464,8 @@ class Decision:
 
 
 def decide(squares: Sequence[Sequence[tuple[float, float]]], side: float) -> Decision:
-    """The canonical pose of a picture given as each square's corners, in binary64."""
+    """The canonical pose of a picture given as each square's corners, in binary64. A
+    grid finer than the quadrants is weighed only where poses still tie."""
     source = placements(squares)
     images: dict[Pose, list[Placement]] = {}
 
@@ -441,7 +485,7 @@ def decide(squares: Sequence[Sequence[tuple[float, float]]], side: float) -> Dec
         oriented = {pose: image_weights(weights, pose, cells) for pose in candidates}
         if cells == LEVELS[0]:
             quadrants = oriented
-        candidates = _strongest(candidates, oriented)
+        candidates = strongest(candidates, oriented)
         if one_picture(candidates):
             return _decision(candidates[0], stage, quadrants)
     keys = {pose: _key(image(pose)) for pose in candidates}
@@ -454,20 +498,8 @@ def decide(squares: Sequence[Sequence[tuple[float, float]]], side: float) -> Dec
 
 
 def _decision(pose: Pose, stage: str, quadrants: Mapping[Pose, Sequence[float]]) -> Decision:
-    upper_left, upper_right, lower_left, lower_right = quadrants[pose]
-    return Decision(pose, stage, (upper_left, upper_right, lower_left, lower_right))
-
-
-def frame_corners(frame: PackingFrame) -> list[list[tuple[float, float]]]:
-    """Each square's corners as binary64, from each scalar's projection."""
-    return [
-        [(float(point.x.projected), float(point.y.projected)) for point in square.corners]
-        for square in frame.squares
-    ]
-
-
-def decide_frame(frame: PackingFrame) -> Decision:
-    return decide(frame_corners(frame), float(frame.container_side.projected))
+    lower_right, lower_left, upper_left, upper_right = quadrants[pose]
+    return Decision(pose, stage, (lower_right, lower_left, upper_left, upper_right))
 
 
 def invariant(squares: Sequence[Sequence[tuple[float, float]]], side: float) -> bool:
@@ -481,287 +513,102 @@ def invariant(squares: Sequence[Sequence[tuple[float, float]]], side: float) -> 
     return all(same_picture(drawn[0], other) for other in drawn[1:])
 
 
-# --------------------------------------------------------------------------- exact maps
+# --------------------------------------------------------------------------- the pictures
 
-KINDS = frozenset(ScalarKind)
-
-
-def _decimal_text(value: Decimal) -> str:
-    """Fixed point with trailing zeros dropped, as the frame builder spells a projection
-    (`build_known_best_atlas._projection_text`), so a decimal picture mapped there and
-    back is spelled as it was built."""
-    if value.is_zero():
-        return "0.0"
-    text = format(value, "f")
-    if "." not in text:
-        return f"{text}.0"
-    text = text.rstrip("0")
-    return f"{text}0" if text.endswith(".") else text
+OUTLINE = re.compile(
+    r'<rect data-feature="container-outline" x="([\d.]+)" y="([\d.]+)" '
+    r'width="([\d.]+)" height="([\d.]+)"'
+)
+SQUARE = re.compile(r'<polygon data-feature="square-fill"[^>]*? points="([^"]+)"')
 
 
-def _exact_decimal(operation: Callable[[], Decimal], *operands: Decimal) -> Decimal:
-    """`operation` at a precision no difference or negation of `operands` can round at,
-    whatever the caller's context: the result spans both coefficients and exponents."""
-    for operand in operands:
-        if not operand.is_finite():
-            raise ValueError("an exact map requires finite decimal coordinates")
-    precision = (
-        sum(
-            len(operand.as_tuple().digits) + abs(int(operand.as_tuple().exponent))
-            for operand in operands
-        )
-        + 4
-    )
-    with localcontext() as context:
-        context.prec = max(precision, 28)
-        return operation()
-
-
-def _field_value(value: ScalarSource) -> tuple[dict[str, Any], list[Fraction]]:
-    """A number-field scalar's declaration and power-basis coefficients, low first."""
-    document = json.loads(value.exact_source or value.source)
-    return document["field"], [
-        Fraction(coefficient) for coefficient in document["coefficients"]
+def rendering_squares(text: str) -> tuple[list[list[tuple[float, float]]], float]:
+    """A rendering's squares as their corners, and the container's side: binary64, y up
+    from the container outline's lower-left corner, in units of a square's side. The
+    renderer draws the packing y down, scaled so a unit square's side is its first
+    square's first edge."""
+    outline = OUTLINE.search(text)
+    if outline is None:
+        raise ValueError("the rendering has no container outline")
+    left, top, width, height = (float(value) for value in outline.groups())
+    drawn = [
+        [(float(x), float(y)) for x, y in (pair.split(",") for pair in points.split())]
+        for points in SQUARE.findall(text)
     ]
+    if not drawn:
+        raise ValueError("the rendering draws no squares")
+    (x0, y0), (x1, y1) = drawn[0][0], drawn[0][1]
+    unit = math.hypot(x1 - x0, y1 - y0)
+    bottom = top + height
+    squares = [
+        [((x - left) / unit, (bottom - y) / unit) for x, y in corners] for corners in drawn
+    ]
+    return squares, width / unit
 
 
-@lru_cache(maxsize=8)
-def _side_fraction(source: str) -> Fraction:
-    """A rational side, parsed once rather than at every point: a center-basis witness's
-    rationals run to thousands of digits (n = 29's to 8,000 characters), and parsing the
-    side at every point was 15 per cent of mapping its frame."""
-    return Fraction(source)
+@dataclass(frozen=True)
+class Picture:
+    """A count's default picture, as `decide` reads it."""
+
+    n: int
+    drawn: str
+    """`VIEW` where the count's regularized view is its default picture, else `HOUSE`."""
+    rendering: str
+    """The retained rendering it is read from, repository-relative."""
+    squares: list[list[tuple[float, float]]]
+    side: float
 
 
-@cache
-def _number_field(declaration: str) -> NumberField:
-    field = json.loads(declaration)
-    return NumberField(
-        [Fraction(value) for value in field["minimal_polynomial"]],
-        tuple(Fraction(value) for value in field["isolating_interval"]),
-    )
-
-
-def _field_scalar(
-    field: Mapping[str, Any], coefficients: Sequence[Fraction], precision: int
-) -> ScalarSource:
-    """A number-field scalar in the frame builder's encoding
-    (`build_known_best_atlas._exact_frame_geometry`), its projection recomputed."""
-    source = json.dumps(
-        {"field": field, "coefficients": [str(value) for value in coefficients]},
-        sort_keys=True,
-        separators=(",", ":"),
-    )
-    number_field = _number_field(json.dumps(field, sort_keys=True, separators=(",", ":")))
-    projected = number_field.decimal(number_field.element(list(coefficients)), 40)
-    return scalar_from_exact(source, projected, precision=precision)
-
-
-def _difference(side: ScalarSource, value: ScalarSource) -> ScalarSource:
-    """`side - value`, exactly, in their shared kind; `value`'s precision is kept."""
-    if side.kind is not value.kind:
-        raise ValueError(f"mixed scalar kinds: {side.kind} and {value.kind}")
-    match value.kind:
-        case ScalarKind.RATIONAL:
-            difference = _side_fraction(side.source) - Fraction(value.source)
-            return scalar_from_fraction(difference, precision=value.precision)
-        case ScalarKind.DECIMAL:
-            bound, coordinate = Decimal(side.source), Decimal(value.source)
-            result = _exact_decimal(lambda: bound - coordinate, bound, coordinate)
-            return scalar_from_decimal(_decimal_text(result))
-        case ScalarKind.EXACT:
-            field, bound = _field_value(side)
-            value_field, coordinate = _field_value(value)
-            if field != value_field:
-                raise ValueError("number-field scalars declare different fields")
-            difference = [a - b for a, b in zip(bound, coordinate, strict=True)]
-            return _field_scalar(field, difference, value.precision)
-        case ScalarKind.BINARY64:
-            difference = float(side.source) - float(value.source)
-            return scalar_from_float(difference, precision=value.precision)
-        case _:
-            raise ValueError(f"unknown scalar kind {value.kind!r}")
-
-
-def _negated(value: ScalarSource) -> ScalarSource:
-    """`-value`, exactly, in its own kind."""
-    match value.kind:
-        case ScalarKind.RATIONAL:
-            return scalar_from_fraction(-Fraction(value.source), precision=value.precision)
-        case ScalarKind.DECIMAL:
-            number = Decimal(value.source)
-            return scalar_from_decimal(_decimal_text(_exact_decimal(lambda: -number, number)))
-        case ScalarKind.EXACT:
-            field, coefficients = _field_value(value)
-            return _field_scalar(field, [-c for c in coefficients], value.precision)
-        case ScalarKind.BINARY64:
-            return scalar_from_float(-float(value.source), precision=value.precision)
-        case _:
-            raise ValueError(f"unknown scalar kind {value.kind!r}")
-
-
-@dataclass(frozen=True, slots=True)
-class _Exact:
-    """A scalar that `Pose.point` subtracts from the side in its own kind. A coordinate
-    the map only moves comes back as the same object, so its scalar is kept as it was."""
-
-    value: ScalarSource
-
-    def __sub__(self, other: _Exact) -> _Exact:
-        return _Exact(_difference(self.value, other.value))
-
-
-def _wall_images(pose: Pose) -> dict[ContainerWall, ContainerWall]:
-    """Where each wall goes, found by mapping its midpoint on a side-2 container."""
-    midpoints = {
-        ContainerWall.LEFT: (0, 1),
-        ContainerWall.RIGHT: (2, 1),
-        ContainerWall.BOTTOM: (1, 0),
-        ContainerWall.TOP: (1, 2),
-    }
-    walls = {point: wall for wall, point in midpoints.items()}
-    return {wall: walls[pose.point(*point, 2)] for wall, point in midpoints.items()}
-
-
-def _points(frame: PackingFrame) -> Iterable[Point2]:
-    for square in frame.squares:
-        yield from square.corners
-        if square.pose is not None:
-            yield square.pose.centre
-    for feature in frame.features:
-        if isinstance(feature, ActiveFeature):
-            yield feature.point
-        else:
-            yield feature.start
-            if feature.end is not None:
-                yield feature.end
-
-
-def orient_frame(frame: PackingFrame, pose: Pose) -> PackingFrame:
-    """The frame drawn in `pose`, every point mapped exactly in its own scalar kind.
-
-    Square ids, labels and order, and the side, evidence, check and source fields, are
-    kept, so colours stay stable. A flipped pose reverses each square's corners to keep
-    their winding. A square's `RigidPose`, which nothing on the atlas path sets, has its
-    centre mapped and its angle kept, or negated under a flip: every reader of the angle
-    takes it modulo a quarter turn (`color._square_orientation`,
-    `motion.short_quarter_turn`), where a turn by quarter turns keeps it and a mirror
-    negates it. Feature points are mapped, a wall goes where its midpoint does, and
-    feature ids are kept, a wall's name in one included.
-
-    Refused, with `ValueError`: a point whose kind is not the side's, an unknown kind,
-    number-field scalars of different fields, and a detected pair contact, whose
-    `u-normal` or `v-normal` names an axis of its census's lattice frame that a pose
-    swaps or keeps according to how the census reduces the class's angle.
-    """
-    side = frame.container_side
-    if side.kind not in KINDS:
-        raise ValueError(f"unknown scalar kind {side.kind!r}")
-    for point in _points(frame):
-        for value in (point.x, point.y):
-            if value.kind is not side.kind:
-                raise ValueError(f"mixed scalar kinds: side {side.kind}, point {value.kind}")
-    bound = _Exact(side)
-    walls = _wall_images(pose)
-
-    def mapped(point: Point2) -> Point2:
-        x, y = pose.point(_Exact(point.x), _Exact(point.y), bound)
-        return Point2(x.value, y.value)
-
-    def square_image(square: SquareGeometry) -> SquareGeometry:
-        corners = orient_polygon(
-            pose, [(_Exact(point.x), _Exact(point.y)) for point in square.corners], bound
-        )
-        rigid = square.pose
-        if rigid is not None:
-            angle = _negated(rigid.angle) if pose.flip else rigid.angle
-            rigid = RigidPose(mapped(rigid.centre), angle)
-        return replace(
-            square, corners=tuple(Point2(x.value, y.value) for x, y in corners), pose=rigid
-        )
-
-    def feature_image(
-        feature: ContactFeature | DetectedContactFeature | ActiveFeature,
-    ) -> ContactFeature | DetectedContactFeature | ActiveFeature:
-        if isinstance(feature, ActiveFeature):
-            return replace(feature, point=mapped(feature.point))
-        if isinstance(feature, DetectedContactFeature) and feature.normal is not None:
-            raise ValueError(
-                f"{feature.feature_id}: a detected pair contact's normal is not mapped"
-            )
-        return replace(
-            feature,
-            start=mapped(feature.start),
-            end=None if feature.end is None else mapped(feature.end),
-            wall=None if feature.wall is None else walls[feature.wall],
-        )
-
-    return replace(
-        frame,
-        squares=tuple(square_image(square) for square in frame.squares),
-        features=tuple(feature_image(feature) for feature in frame.features),
-    )
-
-
-# --------------------------------------------------------------------------- command line
-
-
-def _drawn_witness(n: int, view: str | None) -> tuple[str, dict[str, Any]]:
-    relative = view or WITNESS.format(n=n)
-    raw = (REPO / relative).read_bytes()
-    text = (gzip.decompress(raw) if relative.endswith(".gz") else raw).decode("utf-8")
-    document = load_yaml(text)
-    if not isinstance(document, dict) or not isinstance(document.get("witness"), dict):
-        raise TypeError(f"{relative} is not a witness document")
-    return relative, document["witness"]
-
-
-def decide_count(unit: tuple[int, str | None, bool]) -> dict[str, Any]:
-    """One count's row: its drawn picture, that picture's decision and, when asked,
-    whether the picture is `invariant`."""
-    # The builder and the drawings record both import this module, so they are read
-    # here, when a count is decided, rather than when it is imported.
-    from devtools.build_known_best_atlas import frame_from_witness  # noqa: PLC0415
-
-    n, view, check = unit
-    relative, witness = _drawn_witness(n, view)
-    frame = frame_from_witness(witness)
-    row = {"n": n, "drawn": relative, **decide_frame(frame).record()}
-    if check:
-        row["invariant"] = invariant(
-            frame_corners(frame), float(frame.container_side.projected)
-        )
-    return row
-
-
-def drawn_views() -> dict[int, str]:
-    """The repository-relative view path of each count whose default picture is its
-    regularized view, from the drawings record."""
+def drawn_views() -> frozenset[int]:
+    """The counts whose default picture is their regularized view (policy section 12),
+    as `render_frontier_page.default_root` reads them."""
+    # Imported here: `poses` is what the renderers import this module for, and the
+    # drawings record's module brings the measuring code with it.
     from devtools.default_drawings import regularized_defaults  # noqa: PLC0415
 
-    return {n: str(row["view"]) for n, row in regularized_defaults().items()}
+    return frozenset(regularized_defaults())
 
 
-def decide_counts(
-    counts: Sequence[int], *, workers: int, invariance: bool = False
-) -> list[dict[str, Any]]:
+def picture(n: int, views: frozenset[int]) -> Picture:
+    """Count `n`'s default picture: its view's rendering where `n` is in `views`, else
+    its house rendering."""
+    drawn = VIEW if n in views else HOUSE
+    rendering = f"{VIEW_RENDERINGS if drawn == VIEW else RENDERINGS}/n-{n:03d}.svg"
+    squares, side = rendering_squares((REPO / rendering).read_text(encoding="utf-8"))
+    if len(squares) != n:
+        raise ValueError(f"{rendering} draws {len(squares)} squares, not {n}")
+    return Picture(n, drawn, rendering, squares, side)
+
+
+def decide_counts(counts: Iterable[int], *, invariance: bool = False) -> list[dict[str, Any]]:
+    """One row a count: its default picture, that picture's decision and, when asked,
+    whether the picture is `invariant`."""
     views = drawn_views()
-    units = [(n, views.get(n), invariance) for n in counts]
-    if workers > 1 and len(units) > 1:
-        with ProcessPoolExecutor(max_workers=workers) as pool:
-            return list(pool.map(decide_count, units, chunksize=4))
-    return [decide_count(unit) for unit in units]
+    rows: list[dict[str, Any]] = []
+    for n in counts:
+        drawn = picture(n, views)
+        row = {
+            "n": n,
+            "drawn": drawn.drawn,
+            "rendering": drawn.rendering,
+            **decide(drawn.squares, drawn.side).record(),
+        }
+        if invariance:
+            row["invariant"] = invariant(drawn.squares, drawn.side)
+        rows.append(row)
+    return rows
 
 
 def totals(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     stages = Counter(row["decided_by"] for row in rows)
-    poses = Counter(Pose.from_record(row) for row in rows)
+    taken = Counter(Pose.from_record(row) for row in rows)
     summary: dict[str, Any] = {
         "counts": len(rows),
+        "identity": taken[IDENTITY],
+        "turned": len(rows) - taken[IDENTITY],
         "decided_by": {stage: stages[stage] for stage in STAGES},
-        "identity": poses[IDENTITY],
         "poses": [
-            {**pose.record(), "reads_as": DESCRIPTIONS[pose], "counts": poses[pose]}
+            {**pose.record(), "reads_as": DESCRIPTIONS[pose], "counts": taken[pose]}
             for pose in POSES
         ],
     }
@@ -770,44 +617,146 @@ def totals(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     return summary
 
 
+# --------------------------------------------------------------------------- the record
+
+
+def document(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """The record of every count's decision."""
+    return {
+        "softschema": {"contract": CONTRACT, "schema": SCHEMA, "status": "enforced"},
+        "contract": CONTRACT,
+        "generated_by": f"{GENERATOR} --update",
+        "policy_document": POLICY_DOCUMENT,
+        "rule": RULE,
+        "totals": totals(rows),
+        "entries": list(rows),
+    }
+
+
+def text(record: Mapping[str, Any]) -> str:
+    return retained_json.dumps(record, ensure_ascii=False) + "\n"
+
+
+def differences(found: Mapping[str, Any], expected: Mapping[str, Any]) -> list[str]:
+    """Where a record differs from the one the rule gives: each count whose row differs,
+    is missing or is extra, then each other field that differs."""
+    rows: dict[Any, Any] = {}
+    problems: list[str] = []
+    for row in found.get("entries") or []:
+        n = row.get("n") if isinstance(row, Mapping) else None
+        if n in rows:
+            problems.append(f"n={n}: the record has two rows")
+        rows[n] = row
+    for row in expected["entries"]:
+        held = rows.pop(row["n"], None)
+        if held is None:
+            problems.append(f"n={row['n']}: the record has no row")
+        elif held != row:
+            problems.append(
+                f"n={row['n']}: the record has {json.dumps(held, separators=(',', ':'))}, "
+                f"the rule gives {json.dumps(row, separators=(',', ':'))}"
+            )
+    problems.extend(f"n={n}: the record has a row for no count" for n in rows)
+    problems.extend(
+        f"the record's {key} is not the rule's"
+        for key in expected
+        if key != "entries" and found.get(key) != expected[key]
+    )
+    problems.extend(f"the record has a field {key!r}" for key in found if key not in expected)
+    return problems
+
+
+def update() -> int:
+    expected = document(decide_counts(COUNTS))
+    content = text(expected)
+    if not RECORD.is_file() or RECORD.read_text(encoding="utf-8") != content:
+        with atomic_output_file(RECORD) as temporary:
+            temporary.write_text(content, encoding="utf-8")
+    poses.cache_clear()
+    print(f"flip regularization updated: {_summary(expected['totals'])}")
+    return 0
+
+
+def check(record: Path = RECORD) -> int:
+    """Decide every count again and compare the record."""
+    if not record.is_file():
+        print(f"{RECORD_PATH} is missing; run `{GENERATOR} --update`")
+        return 1
+    expected = document(decide_counts(COUNTS))
+    content = record.read_text(encoding="utf-8")
+    problems = differences(json.loads(content), expected)
+    if not problems and content != text(expected):
+        problems.append(f"the record is not laid out as `{GENERATOR} --update` writes it")
+    for problem in problems:
+        print(f"flip regularization: {problem}")
+    if problems:
+        print(f"{RECORD_PATH} is stale; run `{GENERATOR} --update`")
+        return 1
+    print(f"flip regularization check passed: {_summary(expected['totals'])}")
+    return 0
+
+
+def _summary(summary: Mapping[str, Any]) -> str:
+    stages = ", ".join(f"{stage} {count}" for stage, count in summary["decided_by"].items())
+    return (
+        f"{summary['counts']} counts, {summary['identity']} in their published pose and "
+        f"{summary['turned']} turned; decided by {stages}"
+    )
+
+
+# --------------------------------------------------------------------------- command line
+
+
 def parser() -> argparse.ArgumentParser:
     command = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    command.add_argument("--n", type=int, nargs="+", help="counts (default 1..324)")
-    command.add_argument(
-        "--workers", type=int, default=os.cpu_count() or 1, help="processes (default: CPUs)"
+    mode = command.add_mutually_exclusive_group()
+    mode.add_argument("--update", action="store_true", help=f"write {RECORD_PATH}")
+    mode.add_argument(
+        "--check",
+        action="store_true",
+        help="decide every count again; exit 1, naming each count, where the record differs",
     )
-    command.add_argument(
+    mode.add_argument(
         "--invariance",
         action="store_true",
         help="also decide each picture from all eight poses; exit 1 unless all draw the same",
     )
+    command.add_argument("--n", type=int, nargs="+", help="counts to print (default 1..324)")
     command.add_argument("--json", action="store_true", help="print the decisions as JSON")
     return command
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    args = parser().parse_args(argv)
-    rows = decide_counts(
-        args.n or list(COUNTS), workers=args.workers, invariance=args.invariance
-    )
+    command = parser()
+    args = command.parse_args(argv)
+    if (args.update or args.check) and (args.n or args.json):
+        command.error("--n and --json print decisions; --update and --check take neither")
+    if args.update:
+        return update()
+    if args.check:
+        return check()
+    unknown = sorted(set(args.n or ()) - set(COUNTS))
+    if unknown:
+        command.error(f"no default picture for n = {', '.join(map(str, unknown))}")
+    rows = decide_counts(args.n or COUNTS, invariance=args.invariance)
     summary = totals(rows)
     failed = 1 if summary.get("not_invariant") else 0
     if args.json:
-        document = {"format": FORMAT, "generated_by": GENERATOR, "totals": summary}
-        print(json.dumps({**document, "counts": rows}, indent=1))
+        decisions = {"generated_by": GENERATOR, "totals": summary, "entries": rows}
+        print(json.dumps(decisions, indent=1))
         return failed
-    print(f"{'n':>4} {'rotate':>6} {'flip':>5}  {'decided by':<10}  quadrants UL UR LL LR")
-    for row in rows:
-        weights = " ".join(f"{weight:.4f}" for weight in row["quadrants"])
-        print(
-            f"{row['n']:>4} {row['rotate']:>6} {'yes' if row['flip'] else 'no':>5}  "
-            f"{row['decided_by']:<10}  {weights}"
-        )
-    stages = ", ".join(f"{stage} {count}" for stage, count in summary["decided_by"].items())
-    print(f"\n{summary['counts']} counts decided by stage: {stages}")
-    print(f"identity: {summary['identity']}")
+    if args.n:
+        print(f"{'n':>4} {'drawn':<5} {'rotate':>6} {'flip':>5}  {'decided by':<10}  quadrants")
+        for row in rows:
+            weights = " ".join(f"{weight:.4f}" for weight in row["quadrants"])
+            print(
+                f"{row['n']:>4} {row['drawn']:<5} {row['rotate']:>6} "
+                f"{'yes' if row['flip'] else 'no':>5}  {row['decided_by']:<10}  {weights}"
+            )
+        print("  quadrants: lower right, lower left, upper left, upper right\n")
+    print(_summary(summary))
     for pose in summary["poses"]:
         flip = "flip" if pose["flip"] else "no flip"
         print(f"  rotate {pose['rotate']:>3}, {flip:<7} ({pose['reads_as']}): {pose['counts']}")

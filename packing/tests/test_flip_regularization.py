@@ -1,12 +1,12 @@
 """Flip regularization: the eight point maps, the rule on fixtures whose answer is known by
-hand, the canonical pose's invariance on real drawings, and the exact maps' round trips in
-every scalar kind.
+hand, the canonical pose's invariance on real renderings, and the record.
 
-Three unit squares in a side-2 box end with the empty cell lower right. One tilted square
-in a corner cell ties at every grid and is decided by its tilt's sign. Real house
-witnesses, each drawn from all eight of its poses, decide one picture; a symmetric one
-keeps its published pose. Every frame the builder makes, decimal, rational or
-number-field, and a binary64 one, is mapped there and back to itself exactly.
+Three unit squares in a side-2 box end with the empty cell upper right, and a 3 x 3 grid
+leaves its empty corner there and two empty cells at the right end of the top row, as the
+catalogues draw the grids. One tilted square in the lower-right cell of every grid ties
+until the final key and is decided by its tilt's sign. Real renderings, each drawn from
+all eight of its poses, decide one picture; a symmetric one keeps its published pose, and
+so does n = 11. The record's check names a count whose row the rule no longer gives.
 """
 
 from __future__ import annotations
@@ -14,54 +14,43 @@ from __future__ import annotations
 import json
 import math
 from collections.abc import Callable
-from decimal import Decimal, localcontext
 from fractions import Fraction
 from functools import cache
 from pathlib import Path
-from typing import Any
 
 import pytest
 
-from devtools.build_known_best_atlas import frame_from_witness
 from devtools.flip_regularization import (
     DESCRIPTIONS,
     IDENTITY,
     POSES,
+    RECORD,
+    TOLERANCE,
     Decision,
+    Picture,
     Pose,
+    check,
     decide,
     decide_counts,
-    decide_frame,
-    frame_corners,
+    differences,
+    drawn_views,
     grid_weights,
     image_weights,
     invariant,
-    orient_frame,
     orient_polygon,
+    picture,
     placements,
+    poses,
+    quadtree_cells,
+    rendering_squares,
     same_picture,
+    strongest,
+    text,
     totals,
 )
-from sqpack.render.model import (
-    ActiveFeature,
-    CheckKind,
-    CheckSummary,
-    ContactFeature,
-    ContainerWall,
-    DetectedContactFeature,
-    EvidenceTier,
-    PackingFrame,
-    Point2,
-    RigidPose,
-    ScalarKind,
-    ScalarSource,
-    SquareGeometry,
-)
-from sqpack.render.numbers import scalar_from_decimal, scalar_from_float, scalar_from_fraction
-from sqpack.yamlio import load_yaml
 
-ROOT = Path(__file__).resolve().parents[1]
 UNIT = ((0, 0), (1, 0), (1, 1), (0, 1))
+type Squares = list[list[tuple[float, float]]]
 
 #: The module docstring's table: each pose's composite map, with side `s`.
 TABLE: dict[Pose, Callable[[Fraction, Fraction, Fraction], tuple[Fraction, Fraction]]] = {
@@ -77,19 +66,11 @@ TABLE: dict[Pose, Callable[[Fraction, Fraction, Fraction], tuple[Fraction, Fract
 
 
 @cache
-def _frame(n: int) -> PackingFrame:
-    path = ROOT / f"witnesses/known-best/n-{n:03d}.yaml"
-    return frame_from_witness(load_yaml(path.read_text(encoding="utf-8"))["witness"])
+def _picture(n: int) -> Picture:
+    return picture(n, drawn_views())
 
 
-def _picture(n: int) -> tuple[list[list[tuple[float, float]]], float]:
-    frame = _frame(n)
-    return frame_corners(frame), float(frame.container_side.projected)
-
-
-def _cells(
-    filled: list[tuple[int, int]], *, tilt: float = 0.0
-) -> list[list[tuple[float, float]]]:
+def _cells(filled: list[tuple[int, int]], *, tilt: float = 0.0) -> Squares:
     """Unit squares centred in the given unit cells, `(column, row)` from the lower left,
     each turned `tilt` degrees about its centre."""
     cosine, sine = math.cos(math.radians(tilt)), math.sin(math.radians(tilt))
@@ -106,6 +87,14 @@ def _cells(
             ]
         )
     return squares
+
+
+def _drawn_cells(squares: Squares, pose: Pose, side: float) -> set[tuple[int, int]]:
+    """The unit cells a grid picture fills once `pose` draws it."""
+    return {
+        (round(min(x for x, _y in image)), round(min(y for _x, y in image)))
+        for image in (orient_polygon(pose, corners, side) for corners in squares)
+    }
 
 
 # --------------------------------------------------------------------------- poses
@@ -203,46 +192,122 @@ def test_orient_polygon_keeps_the_winding() -> None:
 # --------------------------------------------------------------------------- the rule
 
 
+def test_the_cells_are_read_in_quadtree_order() -> None:
+    """Lower right, lower left, upper left, upper right, the quadrants first and then the
+    cells inside each, so a cell's children are the four positions after its own times
+    four."""
+    lower_right, lower_left, upper_left, upper_right = (1, 0), (0, 0), (0, 1), (1, 1)
+    assert quadtree_cells(2) == (lower_right, lower_left, upper_left, upper_right)
+    assert quadtree_cells(4) == (
+        (3, 0), (2, 0), (2, 1), (3, 1),  # the lower-right quadrant
+        (1, 0), (0, 0), (0, 1), (1, 1),  # the lower-left quadrant
+        (1, 2), (0, 2), (0, 3), (1, 3),  # the upper-left quadrant
+        (3, 2), (2, 2), (2, 3), (3, 3),  # the upper-right quadrant
+    )  # fmt: skip
+    for cells in (2, 4, 8):
+        fine = quadtree_cells(2 * cells)
+        for index, (column, row) in enumerate(quadtree_cells(cells)):
+            children = {(2 * column + dx, 2 * row + dy) for dx in (0, 1) for dy in (0, 1)}
+            assert set(fine[4 * index : 4 * index + 4]) == children
+    assert sorted(quadtree_cells(16)) == sorted((c, r) for c in range(16) for r in range(16))
+    with pytest.raises(ValueError, match="power of two"):
+        quadtree_cells(3)
+
+
 def test_weights_clip_each_square_to_its_cells() -> None:
     diamond = _cells([(1, 1)], tilt=45.0)
     # A unit square turned 45 degrees about the centre of a side-3 box puts a quarter of
-    # itself in each quadrant. On the 3 x 3 grid each of its corners pokes a right
-    # triangle of area (sqrt(2)/2 - 1/2)^2 into an edge cell, and the rest is the centre's.
+    # itself in each quadrant.
     assert grid_weights(diamond, 3.0, 2) == pytest.approx((0.25 / 2.25,) * 4, abs=1e-15)
-    tip = (math.sqrt(2) / 2 - 0.5) ** 2
-    expected = (0.0, tip, 0.0, tip, 1 - 4 * tip, tip, 0.0, tip, 0.0)
-    assert grid_weights(diamond, 3.0, 3) == pytest.approx(expected, abs=1e-15)
+    # About the centre of a side-2 box on the 4 x 4 grid, each of its corners pokes a
+    # right triangle of area (sqrt(2)/2 - 1/2)^2 / 2 into each of the two edge cells
+    # beside it, and the rest is the four central cells'.
+    centred = [[(x - 0.5, y - 0.5) for x, y in corners] for corners in diamond]
+    tip = (math.sqrt(2) / 2 - 0.5) ** 2 / 2
+    central = {(1, 1), (2, 1), (1, 2), (2, 2)}
+    edge = {(0, 1), (0, 2), (3, 1), (3, 2), (1, 0), (2, 0), (1, 3), (2, 3)}
+    expected = tuple(
+        (0.25 - 2 * tip) / 0.25 if cell in central else tip / 0.25 if cell in edge else 0.0
+        for cell in quadtree_cells(4)
+    )
+    assert grid_weights(centred, 2.0, 4) == pytest.approx(expected, abs=1e-15)
 
 
 def test_a_poses_weights_are_its_image_weights_permuted() -> None:
-    squares, side = _picture(11)
-    for cells in (2, 4, 8):
-        weights = grid_weights(squares, side, cells)
+    """At every level, the weights the pose's image gives when clipped again are the
+    source's permuted, in quadtree order, and each cell's weight is its four children's
+    mean, the quadtree order's own structure."""
+    eleven = _picture(11)
+    squares, side = eleven.squares, eleven.side
+    weights = {cells: grid_weights(squares, side, cells) for cells in (2, 4, 8, 16)}
+    for cells, found in weights.items():
         for pose in POSES:
             image = [orient_polygon(pose, corners, side) for corners in squares]
             assert grid_weights(image, side, cells) == pytest.approx(
-                image_weights(weights, pose, cells), abs=1e-12
+                image_weights(found, pose, cells), abs=1e-12
             )
+        if cells < 16:
+            finer = weights[2 * cells]
+            for index, weight in enumerate(found):
+                assert weight == pytest.approx(
+                    sum(finer[4 * index : 4 * index + 4]) / 4, abs=1e-12
+                )
+    assert sum(weights[2]) / 4 == pytest.approx(11 / side**2, abs=1e-12)
+
+
+def test_weights_within_the_tolerance_tie_and_weights_beyond_it_do_not() -> None:
+    first, second = POSES[0], POSES[1]
+    assert strongest([first, second], {first: (0.5,), second: (0.5 - 0.5e-9,)}) == [
+        first,
+        second,
+    ]
+    assert strongest([first, second], {first: (0.5,), second: (0.5 - 2e-9,)}) == [first]
+    assert strongest([second, first], {first: (0.5 - 2e-9,), second: (0.5,)}) == [second]
+    # A tie within the tolerance passes the choice to the next position.
+    tied = {first: (0.5 - 0.5e-9, 0.1), second: (0.5, 0.1 + 2 * TOLERANCE)}
+    assert strongest([first, second], tied) == [second]
 
 
 @pytest.mark.parametrize("empty", [(0, 0), (1, 0), (0, 1), (1, 1)])
-def test_three_squares_leave_the_empty_cell_lower_right(empty: tuple[int, int]) -> None:
+def test_three_squares_leave_the_empty_cell_upper_right(empty: tuple[int, int]) -> None:
     filled = [cell for cell in [(0, 0), (1, 0), (0, 1), (1, 1)] if cell != empty]
-    decision = decide(_cells(filled), 2.0)
+    squares = _cells(filled)
+    decision = decide(squares, 2.0)
     assert decision.quadrants == (1.0, 1.0, 1.0, 0.0)
     assert decision.decided_by == "quadrants"
+    assert _drawn_cells(squares, decision.pose, 2.0) == {(0, 0), (1, 0), (0, 1)}
     if empty == (1, 1):
-        # A grid filled from the lower left, empty at the upper right: a clockwise
-        # quarter turn and the top-bottom mirror both draw it, and the turn comes first.
-        assert decision.pose == Pose(rotate=270, flip=False)
+        # Already there: the identity and the rising diagonal's mirror both draw it, and
+        # the identity comes first.
+        assert decision.pose == IDENTITY
+
+
+def test_a_grid_leaves_its_empty_cells_upper_right_along_the_top_row() -> None:
+    grid = {(column, row) for column in range(3) for row in range(3)}
+    for corner in ((0, 0), (2, 0), (0, 2), (2, 2)):
+        squares = _cells(sorted(grid - {corner}))
+        assert _drawn_cells(squares, decide(squares, 3.0).pose, 3.0) == grid - {(2, 2)}
+    # Two empty cells at the end of a row, from each of the eight poses: the top row's
+    # right end, rows filled from the bottom as the catalogues draw a grid.
+    pair = [(1, 2), (2, 2)]
+    for pose in POSES:
+        empty = {
+            (round(x - 0.5), round(y - 0.5))
+            for x, y in (pose.point(c + 0.5, r + 0.5, 3.0) for c, r in pair)
+        }
+        squares = _cells(sorted(grid - empty))
+        decision = decide(squares, 3.0)
+        assert _drawn_cells(squares, decision.pose, 3.0) == grid - set(pair), pose
+        assert decision.pose == pose.inverse(), pose
 
 
 def test_the_tilt_decides_between_mirror_images_that_share_every_centre() -> None:
     side = 64.0
     for tilt, expected in ((10.0, Pose(rotate=0, flip=True)), (-10.0, IDENTITY)):
-        # One square inside the upper-left cell of every grid up to 16 x 16: only the
-        # identity and the falling-diagonal mirror keep it there, and the weights tie.
-        square = [(x + 1.5, y + 61.5) for x, y in _cells([(0, 0)], tilt=tilt)[0]]
+        # One square inside the lower-right cell of every grid up to 16 x 16, centred on
+        # the falling diagonal: only the identity and that diagonal's mirror keep it
+        # there, and the weights tie.
+        square = [(x + 61.5, y + 1.5) for x, y in _cells([(0, 0)], tilt=tilt)[0]]
         decision = decide([square], side)
         assert decision.decided_by == "squares"
         assert decision.pose == expected
@@ -259,263 +324,141 @@ def test_same_picture_pairs_squares_by_centre_and_tilt_modulo_a_quarter_turn() -
     assert not same_picture(placements(_cells([(0, 0)], tilt=10.0)), mirrored)
 
 
-@pytest.mark.parametrize("n", [4, 5, 9])
-def test_a_symmetric_packing_keeps_its_published_pose(n: int) -> None:
-    decision = decide(*_picture(n))
+# --------------------------------------------------------------------------- real pictures
+
+
+def test_a_rendering_is_read_y_up_in_units_of_a_square() -> None:
+    """An L of three unit squares drawn at 100 pixels a unit, its frame offset, read back
+    as the packing: y up from the frame's lower-left corner."""
+
+    def svg_point(x: int, y: int) -> str:
+        return f"{10 + 100 * x},{20 + 100 * (2 - y)}"
+
+    polygons = "".join(
+        '<polygon data-feature="square-fill" data-square="s" points="'
+        f'{" ".join(svg_point(left + dx, bottom + dy) for dx, dy in UNIT)}" fill="#000000"/>'
+        for left, bottom in ((0, 0), (1, 0), (0, 1))
+    )
+    squares, side = rendering_squares(
+        '<svg><rect data-feature="container-outline" x="10" y="20" width="200" '
+        f'height="200"/>{polygons}</svg>'
+    )
+    assert side == 2.0
+    assert squares == _cells([(0, 0), (1, 0), (0, 1)])
+    with pytest.raises(ValueError, match="no container outline"):
+        rendering_squares(polygons)
+
+
+def test_n_11_keeps_its_published_pose() -> None:
+    eleven = _picture(11)
+    assert eleven.rendering == "packing/atlas/known-best/rendering/n-011.svg"
+    assert eleven.side == pytest.approx(3.877084, abs=1e-6)
+    decision = decide(eleven.squares, eleven.side)
     assert decision.pose == IDENTITY
     assert decision.decided_by == "quadrants"
 
 
-def test_the_decisions_the_prototype_measured() -> None:
-    ten = decide_frame(_frame(10))
+@pytest.mark.parametrize("n", [4, 5, 9])
+def test_a_symmetric_packing_keeps_its_published_pose(n: int) -> None:
+    drawn = _picture(n)
+    decision = decide(drawn.squares, drawn.side)
+    assert decision.pose == IDENTITY
+    assert decision.decided_by == "quadrants"
+
+
+def test_the_decisions_the_rule_was_measured_by() -> None:
+    def decided(n: int) -> Decision:
+        drawn = _picture(n)
+        return decide(drawn.squares, drawn.side)
+
+    ten = decided(10)
     assert ten.pose == IDENTITY
-    assert ten.quadrants == pytest.approx((0.8607, 0.5946, 0.5946, 0.8607), abs=5e-5)
-    assert decide_frame(_frame(11)).pose == Pose(rotate=180, flip=False)
-    assert decide_frame(_frame(17)).pose == Pose(rotate=270, flip=True)
-    assert decide_frame(_frame(62)).decided_by == "grid-8"
-    assert decide_frame(_frame(254)).decided_by == "grid-16"
+    assert ten.quadrants == pytest.approx((0.8607, 0.5946, 0.8607, 0.5946), abs=5e-5)
+    assert decided(17).pose == Pose(rotate=90, flip=True)
+    assert _picture(18).drawn == "view"
+    assert decided(18).pose == Pose(rotate=90, flip=False)
+    # 62 and 254 are grids short of a square number, drawn with their empty cells at the
+    # top row's right end, and kept; a finer grid decides them.
+    assert (decided(62).pose, decided(62).decided_by) == (IDENTITY, "grid-8")
+    assert (decided(254).pose, decided(254).decided_by) == (IDENTITY, "grid-16")
 
 
-@pytest.mark.parametrize("n", [10, 17, 37, 62, 254])
+@pytest.mark.parametrize("n", [10, 17, 18, 37, 62, 254])
 def test_every_pose_of_a_picture_draws_the_same_picture(n: int) -> None:
-    squares, side = _picture(n)
-    drawn, stages = [], set()
+    drawn = _picture(n)
+    squares, side = drawn.squares, drawn.side
+    pictures, stages = [], set()
     for pose in POSES:
         image = [orient_polygon(pose, corners, side) for corners in squares]
         decision = decide(image, side)
         stages.add(decision.decided_by)
-        drawn.append(placements(orient_polygon(decision.pose, c, side) for c in image))
+        pictures.append(placements(orient_polygon(decision.pose, c, side) for c in image))
     assert len(stages) == 1
-    assert all(same_picture(drawn[0], other) for other in drawn[1:])
+    assert all(same_picture(pictures[0], other) for other in pictures[1:])
     assert invariant(squares, side)
     # The canonical pose of a picture already in it is the identity.
-    assert decide_frame(orient_frame(_frame(n), decide_frame(_frame(n)).pose)).pose == IDENTITY
+    canonical = [orient_polygon(decide(squares, side).pose, c, side) for c in squares]
+    assert decide(canonical, side).pose == IDENTITY
 
 
 def test_the_command_decides_drawn_pictures() -> None:
-    rows = decide_counts([10, 11], workers=1, invariance=True)
+    rows = decide_counts([10, 17], invariance=True)
     assert [(row["n"], row["rotate"], row["flip"], row["invariant"]) for row in rows] == [
         (10, 0, False, True),
-        (11, 180, False, True),
+        (17, 90, True, True),
     ]
     summary = totals(rows)
-    assert summary["identity"] == 1
+    assert (summary["identity"], summary["turned"]) == (1, 1)
     assert summary["decided_by"]["quadrants"] == 2
     assert summary["not_invariant"] == []
 
 
-# --------------------------------------------------------------------------- exact maps
+# --------------------------------------------------------------------------- the record
 
 
-class _Coefficients(tuple[Fraction, ...]):
-    """A number-field scalar's power-basis coefficients, subtracted one by one."""
-
-    def __sub__(self, other: _Coefficients) -> _Coefficients:
-        return _Coefficients(a - b for a, b in zip(self, other, strict=True))
-
-
-def _exact(value: ScalarSource) -> Any:
-    """A scalar's exact value, whatever its kind."""
-    match value.kind:
-        case ScalarKind.EXACT:
-            coefficients = json.loads(value.source)["coefficients"]
-            return _Coefficients(Fraction(c) for c in coefficients)
-        case ScalarKind.RATIONAL:
-            return Fraction(value.source)
-        case ScalarKind.BINARY64:
-            return Fraction(float(value.source))
-        case _:
-            return Fraction(Decimal(value.source))
+def test_the_check_names_a_perturbed_row(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Every other row is current, so the perturbed one is the only count named."""
+    record = json.loads(RECORD.read_text(encoding="utf-8"))
+    eleven = next(row for row in record["entries"] if row["n"] == 11)
+    eleven["rotate"] = 90
+    stale = tmp_path / "flip-regularization.json"
+    stale.write_text(text(record), encoding="utf-8")
+    assert check(stale) == 1
+    named = [line for line in capsys.readouterr().out.splitlines() if "n=" in line]
+    assert len(named) == 1
+    assert named[0].startswith("flip regularization: n=11: the record has ")
+    assert check(tmp_path / "missing.json") == 1
 
 
-def _synthetic(
-    scalar: Callable[[Any], ScalarSource], side: Any, cells: list[tuple[int, int]], **frame: Any
-) -> PackingFrame:
-    squares = tuple(
-        SquareGeometry(
-            square_id=f"square-{index:03d}",
-            corners=tuple(Point2(scalar(column + x), scalar(row + y)) for x, y in UNIT),
-            label=str(index),
-        )
-        for index, (column, row) in enumerate(cells, start=1)
-    )
-    return PackingFrame(container_side=scalar(side), squares=squares, **frame)
-
-
-def _features_frame() -> PackingFrame:
-    """A rational frame with a pose on one square, a wall contact on each wall and an
-    active feature."""
-    half, side = Fraction(1, 2), Fraction(5, 2)
-    rational = scalar_from_fraction
-    frame = _synthetic(
-        lambda value: rational(Fraction(value)),
-        side,
-        [(0, 0), (1, 0), (0, 1)],
-        evidence=EvidenceTier.CERTIFIED_UPPER_BOUND,
-        check=CheckSummary(passed=True, kind=CheckKind.FORMAL, method="fixture"),
-    )
-    midpoints = {
-        ContainerWall.LEFT: (Fraction(0), half),
-        ContainerWall.RIGHT: (side, half),
-        ContainerWall.BOTTOM: (half, Fraction(0)),
-        ContainerWall.TOP: (half, side),
-    }
-    features: list[ContactFeature | DetectedContactFeature | ActiveFeature] = [
-        ContactFeature(
-            f"contact-{wall.value}",
-            Point2(rational(x), rational(y)),
-            ("square-001",),
-            wall=wall,
-        )
-        for wall, (x, y) in midpoints.items()
+def test_differences_name_missing_extra_and_doubled_rows() -> None:
+    record = json.loads(RECORD.read_text(encoding="utf-8"))
+    assert differences(record, record) == []
+    changed = json.loads(json.dumps(record))
+    entries = changed["entries"]
+    entries.remove(next(row for row in entries if row["n"] == 3))
+    entries.append({**entries[0]})
+    entries.append({**entries[1], "n": 400})
+    changed["totals"]["identity"] += 1
+    changed["extra"] = True
+    assert differences(changed, record) == [
+        "n=1: the record has two rows",
+        "n=3: the record has no row",
+        "n=400: the record has a row for no count",
+        "the record's totals is not the rule's",
+        "the record has a field 'extra'",
     ]
-    features.append(
-        ActiveFeature("active-0", Point2(rational(half), rational(Fraction(3, 2))), "corner")
-    )
-    pose = RigidPose(Point2(rational(half), rational(half)), rational(Fraction(1, 10)))
-    first = frame.squares[0]
-    return PackingFrame(
-        container_side=frame.container_side,
-        squares=(
-            SquareGeometry(first.square_id, first.corners, pose, first.label),
-            *frame.squares[1:],
-        ),
-        evidence=frame.evidence,
-        check=frame.check,
-        features=tuple(sorted(features, key=lambda feature: feature.feature_id)),
-    )
 
 
-def _frames() -> dict[str, PackingFrame]:
-    return {
-        "decimal n=5": _frame(5),
-        "decimal n=10": _frame(10),
-        "decimal n=11": _frame(11),
-        "rational corners n=3": _frame(3),
-        "rational corners n=62": _frame(62),
-        "number field n=51": _frame(51),
-        "binary64": _synthetic(
-            lambda value: scalar_from_float(float(value)), 2.5, [(0, 0), (1, 1)]
-        ),
-        "features": _features_frame(),
-    }
-
-
-def test_frames_of_every_kind_are_mapped_there_and_back_exactly() -> None:
-    kinds = set()
-    for name, frame in _frames().items():
-        kinds.add(frame.container_side.kind)
-        for pose in POSES:
-            assert orient_frame(orient_frame(frame, pose), pose.inverse()) == frame, (
-                name,
-                pose,
-            )
-    assert kinds == set(ScalarKind)
-
-
-def test_every_point_is_mapped_exactly_and_projected_again() -> None:
-    for name, frame in _frames().items():
-        side = _exact(frame.container_side)
-        for pose in (Pose(rotate=90, flip=False), Pose(rotate=0, flip=True)):
-            image = orient_frame(frame, pose)
-            assert image.container_side == frame.container_side
-            for source, oriented in zip(frame.squares, image.squares, strict=True):
-                assert (oriented.square_id, oriented.label) == (source.square_id, source.label)
-                expected = orient_polygon(
-                    pose, [(_exact(p.x), _exact(p.y)) for p in source.corners], side
-                )
-                assert [(_exact(p.x), _exact(p.y)) for p in oriented.corners] == expected, name
-                projected = orient_polygon(
-                    pose,
-                    [(p.x.projected, p.y.projected) for p in source.corners],
-                    frame.container_side.projected,
-                )
-                with localcontext() as context:
-                    context.prec = 60
-                    for point, (x, y) in zip(oriented.corners, projected, strict=True):
-                        assert abs(point.x.projected - x) < Decimal("1e-25"), name
-                        assert abs(point.y.projected - y) < Decimal("1e-25"), name
-
-
-def test_walls_poses_and_features_follow_the_map() -> None:
-    frame = _features_frame()
-    side = _exact(frame.container_side)
-    turned = orient_frame(frame, Pose(rotate=90, flip=False))
-    walls = {
-        feature.feature_id: feature.wall
-        for feature in turned.features
-        if isinstance(feature, ContactFeature)
-    }
-    assert walls == {
-        "contact-left": ContainerWall.BOTTOM,
-        "contact-bottom": ContainerWall.RIGHT,
-        "contact-right": ContainerWall.TOP,
-        "contact-top": ContainerWall.LEFT,
-    }
-    on_wall = {
-        ContainerWall.LEFT: lambda x, _y: x == 0,
-        ContainerWall.RIGHT: lambda x, _y: x == side,
-        ContainerWall.BOTTOM: lambda _x, y: y == 0,
-        ContainerWall.TOP: lambda _x, y: y == side,
-    }
-    for pose in POSES:
-        image = orient_frame(frame, pose)
-        assert [feature.feature_id for feature in image.features] == [
-            feature.feature_id for feature in frame.features
-        ]
-        for before, after in zip(frame.features, image.features, strict=True):
-            point = after.point if isinstance(after, ActiveFeature) else after.start
-            source = before.point if isinstance(before, ActiveFeature) else before.start
-            assert (_exact(point.x), _exact(point.y)) == pose.point(
-                _exact(source.x), _exact(source.y), side
-            )
-            if isinstance(after, ContactFeature) and after.wall is not None:
-                assert on_wall[after.wall](_exact(point.x), _exact(point.y))
-        rigid = image.squares[0].pose
-        assert rigid is not None
-        assert _exact(rigid.angle) == (Fraction(-1, 10) if pose.flip else Fraction(1, 10))
-        assert (_exact(rigid.centre.x), _exact(rigid.centre.y)) == pose.point(
-            Fraction(1, 2), Fraction(1, 2), side
-        )
-
-
-def test_a_map_it_cannot_make_exactly_is_refused() -> None:
-    rational = _synthetic(lambda value: scalar_from_fraction(Fraction(value)), 3, [(0, 0)])
-    first = rational.squares[0]
-    corner = Point2(scalar_from_decimal("0.0"), first.corners[0].y)
-    mixed = PackingFrame(
-        container_side=rational.container_side,
-        squares=(SquareGeometry(first.square_id, (corner, *first.corners[1:])),),
-    )
-    with pytest.raises(ValueError, match="mixed scalar kinds"):
-        orient_frame(mixed, IDENTITY)
-
-    centre = Point2(first.corners[0].x, first.corners[0].y)
-    pair = DetectedContactFeature(
-        "census-pair",
-        centre,
-        Point2(first.corners[2].x, first.corners[2].y),
-        ("square-001", "square-002"),
-        angle_tolerance_radians=Decimal("1e-6"),
-        contact_tolerance=Decimal("2e-6"),
-        residual=Decimal(0),
-        normal="u-normal",
-    )
-    with pytest.raises(ValueError, match="normal is not mapped"):
-        orient_frame(
-            PackingFrame(rational.container_side, rational.squares, features=(pair,)), IDENTITY
-        )
-
-    field = _frame(51)
-    square = field.squares[0]
-    x = square.corners[0].x
-    document = json.loads(x.source)
-    document["field"] = {**document["field"], "minimal_polynomial": ["1", "0", "-3"]}
-    foreign = ScalarSource(
-        x.kind, json.dumps(document), x.projected, x.precision, json.dumps(document)
-    )
-    other = SquareGeometry(
-        square.square_id, (Point2(foreign, square.corners[0].y), *square.corners[1:])
-    )
-    with pytest.raises(ValueError, match="different fields"):
-        orient_frame(PackingFrame(field.container_side, (other,)), Pose(rotate=180, flip=False))
+def test_poses_reads_every_count_and_draws_a_missing_one_unturned(tmp_path: Path) -> None:
+    record = json.loads(RECORD.read_text(encoding="utf-8"))
+    recorded = poses()
+    assert sorted(recorded) == list(range(1, 325))
+    assert recorded == {row["n"]: Pose.from_record(row) for row in record["entries"]}
+    assert poses(tmp_path / "missing.json") == dict.fromkeys(range(1, 325), IDENTITY)
+    turned = next(row for row in record["entries"] if not Pose.from_record(row).identity)
+    record["entries"].remove(turned)
+    partial = tmp_path / "partial.json"
+    partial.write_text(text(record), encoding="utf-8")
+    assert poses(partial) == {**recorded, turned["n"]: IDENTITY}

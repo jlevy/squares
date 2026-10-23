@@ -7,15 +7,11 @@
 # n = 1..324: what is drawn, its measures, the witness as it identifies itself (its id,
 # its source's key, path and revision, and its side; never a digest of its bytes, OR-16),
 # the runs that decided that witness, and whether the drawing is regularized, regular as
-# published, decided no better, exempt or pending (think-gvke); and its flip
-# regularization (policy section 13): the pose, one of the container's eight symmetries,
-# the drawn picture is drawn in, the stage that decided it and the oriented picture's
-# quadrant weights, which the renderers apply as they draw; no witness or view changes.
-# `devtools.default_drawings --update` writes it; what a JSON Schema cannot say -- that
-# each verdict, state and pose is what the data gives, and that the record covers exactly
-# the index's views and counts -- `devtools.default_drawings --check` holds, by measuring
-# every view and house drawing and deciding every pose again, and `--check-state` gates
-# the states, reading only the record and the index.
+# published, decided no better, exempt or pending (think-gvke). `devtools.default_drawings
+# --update` writes it; what a JSON Schema cannot say -- that each verdict and state is
+# what the measures give, and that the record covers exactly the index's views and counts
+# -- `devtools.default_drawings --check` holds, by measuring every view and house drawing
+# again, and `--check-state` gates the states, reading only the record and the index.
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: packing.squares:DefaultDrawings/v2
 title: Default pictures of the known-best atlas
@@ -74,17 +70,7 @@ $defs:
   state:
     type: object
     additionalProperties: false
-    required:
-      - n
-      - state
-      - drawn
-      - generator
-      - witness
-      - measures
-      - decisions
-      - lapsed
-      - why
-      - flip_regularization
+    required: [n, state, drawn, generator, witness, measures, decisions, lapsed, why]
     properties:
       n: {type: integer, minimum: 1}
       state:
@@ -156,29 +142,6 @@ $defs:
         description: Why the count is in its state, with the evidence or the bead.
         type: string
         minLength: 1
-      flip_regularization:
-        description: >-
-          The pose the drawn picture is drawn in (regularization policy, section 13),
-          decided by `devtools.flip_regularization` in binary64: rotate by `rotate`
-          degrees counter-clockwise about the container's centre, then, if `flip`, mirror
-          across the diagonal from the upper-left to the lower-right corner. `decided_by`
-          is the stage after which every surviving pose drew the same picture: the
-          quadrants, the 4x4, 8x8 or 16x16 grid, or the squares themselves; `quadrants`
-          are the oriented picture's weights, upper left, upper right, lower left, lower
-          right, to six places. The renderers apply it as they draw; no witness or view
-          changes.
-        type: object
-        additionalProperties: false
-        required: [rotate, flip, decided_by, quadrants]
-        properties:
-          rotate: {enum: [0, 90, 180, 270]}
-          flip: {type: boolean}
-          decided_by: {enum: [quadrants, grid-4, grid-8, grid-16, squares]}
-          quadrants:
-            type: array
-            items: {type: number, minimum: 0, maximum: 1}
-            minItems: 4
-            maxItems: 4
   entry:
     type: object
     additionalProperties: false
