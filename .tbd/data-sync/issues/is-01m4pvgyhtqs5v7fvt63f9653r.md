@@ -5,7 +5,7 @@ title: Evaluate wand125's sqverify_continuous (f30cc2c) as an independent route 
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: c-review-sqvc-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T01:27:07.066Z
-updated_at: 2026-10-23T06:43:56.790Z
+updated_at: 2026-10-23T08:14:03.495Z
 started_at: 2026-10-23T06:43:56.790Z
 ---
 Found in the 2026-10-12 read of wand125/square-packing for the 2026-10-11 intake pass (think-58lu); nothing on GitHub asked. Commit f30cc2cf345a3a3f6af778925f354d9ec979868b (2026-10-12T01:00:19Z; its author name is Hiroaki Hosono), "tools: sqverify_continuous, sqverify_fast with a continuous-angle mode (v3)", the head and the only commit past the 04fbef0 read, adds tools/sqverify_continuous/ (31 files changed, all under it apart from INDEX.json and two lines each of tools/README.md and tools/THIRD_PARTY_NOTICES.md).
@@ -41,3 +41,17 @@ blocked_on: owner budget for the continuous-angle replay (about 4.4 CPU-hours fo
 ## Notes
 
 2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): https://github.com/jlevy/squares/issues/533 (review and replay of sqverify_continuous; the replay budget line is on https://github.com/jlevy/squares/issues/543). Tracker https://github.com/jlevy/squares/issues/544.
+
+2026-10-23, c-review-sqvc-1023 (stage 4 review lane of the 23 October pass, epic think-ezt8), branch claude/intake-2026-10-23-sqverify-continuous-review. Done: (1) retention: packets wand125-sqverify-continuous-v4-2026-10-12 (d4a1981, the same tree at 8530baf and the head e48de243; 29 files retained, licences pinned to the cfcheck packet's copies) and wand125-sqverify-continuous-v3-2026-10-12 (f30cc2c; the 7 files v4 changes retained, 24 pinned to identical copies); key [wand125 sqverify continuous 2026-10-12] with its occurrences. (2) The soundness review, docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md: C1 to C6 and the counting re-derived; no blocking or major finding; minor SC-1 (--resume trusts any file with the public run_key) and SC-2 (gy untested); notes SC-3 to SC-12, among them SC-8 (T-192's candidate is format M with proof_net, so admission passes the source's proof_net branch, inert for this mode) and SC-12 (the FP environment is assumed, not asserted). Programs and receipts in the v4 packet's review/: source digests recomputed (v3 1266a8b9..., v4 619b3c00...), v3-to-v4 search text identical, binary rebuilt to 31936c4d..., the crate's 36 tests pass, an exact-oracle probe of the box bound (3,386,054 checks, no failure; 9 of 10 mutations caught), and the source's three n = 40 controls and the n = 28 control run on v4: node for node equal to the README's v3 rows (7,714; 5,979; 12,364,148) and to the n = 28 control log root by root, all 516 refusal witnesses legal and exact here. About 18 CPU-minutes in all. (3) Records: V-wand125-sqverify-continuous rewritten (both versions, retained source, independence record); V-sqverify-continuous-review-premises, -probe, -judge registered; external_review on E-wand125-continuous-n28-5745-report; new reported entries E-n040-wand125-sqverify-continuous-6715-report and -6718-report; reviews items on T-145, T-157 and T-192. check_results: T-192 C0 -> C1 (a read); T-145 and T-157 stay V3/C3; for T-157 this review is the second adversarial AI review, so V4/C4 there wait only on a human oversight record. Replays owed: think-0arj (T-192 route A, 13.3 CPU-hours) and think-flxm (new, n = 40 second route, about 0.7 CPU-hours each, high 2.4 and 2.8), both gated on the owner's budget (#543).
+
+Draft reply for #533 (not posted; for the coordinator to post at stage 7 on the owner's word):
+
+> The soundness review of `sqverify_continuous` (v3 at f30cc2c and v4 at d4a1981) is in this repository at `docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md`, with its programs and receipts in the packet `packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/`.
+>
+> In short: lemmas C1 to C6 and the counting step were re-derived from the source, and `slab.rs`, the continuous path of `main.rs` and the admission it reads were read line by line. No step is false and no finding is blocking or major. The box bound was also held to an exact rational oracle on adversarial boxes (3.4 million checks, no failure); the v4 build reproduces the binary recorded here on 15 October; and v4, run here on your own controls, reproduces your README's v3 rows node for node (7,714, 5,979 and 12,364,148 nodes) and your n = 28 control log root by root, every refusal witness re-evaluated in exact arithmetic.
+>
+> Two minor findings: `--resume` counts verified root lines from any file whose `run_key` matches, and the key is a public digest (SC-1), so a replay here will never resume from another party's output; and the y-derivative enclosure has no test, though its code path (`chord` with `s` and `c` exchanged) differs from the x one (SC-2). The notes include a comment slip at `slab.rs:106` (eps < sqrt 2 - 1, not 1/3), a NaN area that is dropped rather than refused (sound), the floating-point environment assumed rather than checked at startup, and that the n = 28 candidate's `proof_net` sends its admission through your `proof_net` branch, which this mode never uses.
+>
+> Questions: (1) Would you publish the n = 40 run outputs (`c6715.jsonl`, `c6718.jsonl`), as the n = 28 release does? (2) Would you add the `gy` assertion to `box_bounds_hold_at_sampled_poses`? (3) Would you mark a summary with inherited roots in its status? (4) Could `--continuous` skip the net premises, so a candidate need not carry a net-legal `B`? (5) Would you assert round-to-nearest and subnormals at startup, as the T-145 kernel does?
+>
+> For the record: s(28) > 1149/200 (T-192) now stands as reported and read, and a complete replay of your 86 roots here is owed (about 13 CPU-hours, waiting for a budget). For T-145 and T-157 your mode is a second route beside Guzhou0806's kernel; its runs there have no receipt, and a replay here (under an hour each by our measurement) would make the continuous cover independently re-implemented after reading the producer's code, with no change of rung.
