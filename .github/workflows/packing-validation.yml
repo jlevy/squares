@@ -111,11 +111,30 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
 
+      - name: Record the runner image for system-package caches
+        if: "github.event_name != 'pull_request'"
+        id: image
+        run: echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Chromium system-package archives
+        if: "github.event_name != 'pull_request'"
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/apt-archives
+          key: apt-chromium-${{ steps.image.outputs.image }}-${{ hashFiles('packing/uv.lock') }}
+          restore-keys: |
+            apt-chromium-${{ steps.image.outputs.image }}-
+            apt-chromium-
+
+      # Cache hits still run the installer. Each install has a 180 s ceiling;
+      # the outer bound leaves one minute for archive setup, cleanup and receipts.
       - name: Install Chromium for the complete post-merge gate
         if: "github.event_name != 'pull_request'"
+        timeout-minutes: 4
         run: >-
           uv run --frozen --all-extras --group dev
-          python -m playwright install --with-deps --only-shell chromium
+          python -m devtools.browser_setup
+          --artifacts "$PACKING_VALIDATION_ARTIFACT_DIR"
 
       # Only this job builds the engine, and `_build_engine` runs it *before* the executor
       # rather than inside it, so `cargo build --locked --release` is a serial prefix on
@@ -543,10 +562,27 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
 
+      - name: Record the runner image for system-package caches
+        id: image
+        run: echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Chromium system-package archives
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/apt-archives
+          key: apt-chromium-${{ steps.image.outputs.image }}-${{ hashFiles('packing/uv.lock') }}
+          restore-keys: |
+            apt-chromium-${{ steps.image.outputs.image }}-
+            apt-chromium-
+
+      # Cache hits still run the installer. Each install has a 180 s ceiling;
+      # the outer bound leaves one minute for archive setup, cleanup and receipts.
       - name: Install Chromium for the complete post-merge gate
+        timeout-minutes: 4
         run: >-
           uv run --frozen --all-extras --group dev
-          python -m playwright install --with-deps --only-shell chromium
+          python -m devtools.browser_setup
+          --artifacts "$PACKING_VALIDATION_ARTIFACT_DIR"
 
       - name: Bind the receipt to the immutable tree
         env:
@@ -1267,27 +1303,27 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
 
-      # npm ci and Chromium apt are independent after uv sync. Serializing them was
-      # 15-20 s of Node plus 13-19 s of apt on the frontend wall; overlapping them
-      # is the same work on the same runner.
+      - name: Record the runner image for system-package caches
+        id: image
+        run: echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Chromium system-package archives
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/apt-archives
+          key: apt-chromium-${{ steps.image.outputs.image }}-${{ hashFiles('packing/uv.lock') }}
+          restore-keys: |
+            apt-chromium-${{ steps.image.outputs.image }}-
+            apt-chromium-
+
+      # Cache hits still run the installer. Each install has a 180 s ceiling;
+      # the outer bound leaves one minute for archive setup, cleanup and receipts.
       - name: Install the npm toolchain and the pinned Chromium shell
-        working-directory: .
-        run: |
-          set -euo pipefail
-          npm ci --ignore-scripts &
-          npm_pid=$!
-          (
-            cd packing
-            uv run --frozen --all-extras --group dev \
-              python -m playwright install --with-deps --only-shell chromium
-          ) &
-          playwright_pid=$!
-          npm_status=0
-          playwright_status=0
-          wait "$npm_pid" || npm_status=$?
-          wait "$playwright_pid" || playwright_status=$?
-          test "$npm_status" -eq 0
-          test "$playwright_status" -eq 0
+        timeout-minutes: 4
+        run: >-
+          uv run --frozen --all-extras --group dev
+          python -m devtools.browser_setup --npm
+          --artifacts "$PACKING_VALIDATION_ARTIFACT_DIR"
 
       - name: Run the frontend source and built-page contracts
         # think-9dhb: shared-runner load timing is advisory until controlled baseline

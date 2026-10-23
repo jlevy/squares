@@ -19,8 +19,11 @@ validation gate; these run in the fast suite, where a regression is cheap to see
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
+from devtools import check_svg_rendering as tool
 from devtools.check_svg_rendering import (
     FOREIGN_DIRECTORY_NAMES,
     REPO,
@@ -109,3 +112,92 @@ def test_a_document_in_a_vendored_tree_is_not_swept() -> None:
     swept = {document.relative_to(REPO).as_posix() for document in repository_documents()}
     for path in sorted(vendored_directories()):
         assert not [seen for seen in swept if seen.startswith(f"{path}/")], path
+
+
+def test_svg_images_are_semantic_in_markdown_and_html(tmp_path: Path) -> None:
+    document = tmp_path / "examples.md"
+    document.write_text(
+        '![Packing](first.svg "Caption")\n\n'
+        '<figure><img alt="Second packing"\n src="second.svg"></figure>\n\n'
+        "![Third packing][third]\n\n[third]: third.svg\n\n"
+        '`<img src="inline-code.svg" alt="not an image">`\n\n'
+        '```html\n<img src="fenced-code.svg" alt="not an image">\n```\n\n'
+        '<!-- <img src="comment.svg" alt="not an image"> -->\n'
+    )
+    assert tool.svg_image_targets(document) == (
+        ((tmp_path / "first.svg").resolve(), "Packing"),
+        ((tmp_path / "second.svg").resolve(), "Second packing"),
+        ((tmp_path / "third.svg").resolve(), "Third packing"),
+    )
+
+
+@pytest.mark.parametrize("damage", ["missing", "unowned", "comparison", "comparison-no-alt"])
+def test_gallery_controls_reject_html_image_boundary_violations(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, damage: str
+) -> None:
+    target = tmp_path / "not-a-retained-artifact.svg"
+    if damage == "unowned":
+        target.write_text('<svg xmlns="http://www.w3.org/2000/svg"/>')
+    elif damage.startswith("comparison"):
+        target = tool.ROOT / "atlas/rendering/gobel10-source-return-comparison.svg"
+    document = tmp_path / "unexpected-embed.md"
+    alt = "" if damage == "comparison-no-alt" else 'alt="Packing" '
+    document.write_text(f'<figure><img {alt}src="{target}"></figure>')
+    gallery = tool.ROOT / "atlas/rendering/README.md"
+    virtual = tool.REPO / "unexpected-image-fixture.md"
+    extract = tool.svg_image_targets
+
+    def images(path: Path) -> tuple[tuple[Path | None, str], ...]:
+        return extract(document if path == virtual else path)
+
+    monkeypatch.setattr(tool, "svg_image_targets", images)
+    monkeypatch.setattr(tool, "repository_documents", lambda: iter((gallery, virtual)))
+    controls = tool.run_gallery_controls()
+    if damage == "missing":
+        assert not controls["all_inline_svg_targets_exist"]
+        assert not controls["all_inline_svg_targets_are_owned_artifacts"]
+    elif damage == "unowned":
+        assert controls["all_inline_svg_targets_exist"]
+        assert not controls["all_inline_svg_targets_are_owned_artifacts"]
+    else:
+        assert controls["all_inline_svg_targets_exist"]
+        assert controls["all_inline_svg_targets_are_owned_artifacts"]
+        assert not controls["comparison_is_embedded_only_in_focused_gallery"]
+
+
+def test_an_html_tutorial_image_with_the_wrong_owned_source_is_rejected(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    document = tmp_path / "wrong-example.md"
+    wrong_source = tool.ROOT / "atlas/rendering/kingbird29-overview.svg"
+    document.write_text(f'<figure><img alt="Packing" src="{wrong_source}"></figure>')
+    extract = tool.svg_image_targets
+
+    def images(path: Path) -> tuple[tuple[Path | None, str], ...]:
+        return extract(document if path == tool.REPO / "TUTORIAL.md" else path)
+
+    monkeypatch.setattr(tool, "svg_image_targets", images)
+    assert not tool.run_gallery_controls()["exposition_surfaces_embed_expected_examples"]
+
+
+def test_only_the_explainer_template_resolves_the_known_composite_placeholder(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(tool, "REPO", tmp_path)
+    document = tmp_path / "packing/devtools/templates/n11-lower-bounds-explainer-article.md"
+    document.parent.mkdir(parents=True)
+    document.write_text(
+        '<img alt="Composite" src="{{SITE_ROOT}}known-best-1-100.svg">\n'
+        '<img alt="Wrong source" src="{{SITE_ROOT}}missing.svg">'
+    )
+    known, unknown = tool.svg_image_targets(document)
+    assert known[0] == (tool.ROOT / "atlas/known-best/known-best-1-100.svg").resolve()
+    assert known[0] is not None
+    assert known[0].is_file()
+    assert unknown[0] is not None
+    assert not unknown[0].is_file()
+    other = tmp_path / "other.md"
+    other.write_text('<img alt="Composite" src="{{SITE_ROOT}}known-best-1-100.svg">')
+    assert tool.svg_image_targets(other)[0][0] != known[0]

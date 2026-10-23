@@ -102,11 +102,11 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
             for span in trail.find_all("span")
         )
         assert contributor.display_name in profile
-        assert "data-contributor-popover" in profile
-        assert 'aria-label="Profile"' in profile
+        assert "data-contributor-popover" not in profile
+        assert 'aria-label="Profile"' not in profile
         assert "data-case-popover" in profile
         assert re.search(r'src="../assets/js/article-loader\.[a-f0-9]+\.js"', profile)
-        assert re.search(r'src="../assets/js/contributor-popover\.[a-f0-9]+\.js"', profile)
+        assert not re.search(r'src="../assets/js/contributor-popover\.[a-f0-9]+\.js"', profile)
         assert not re.search(r'href="(?:\.\./|/)?contributors/[^"]*"', profile)
         sources = profile.split(
             '<details class="site-contributor-sources"><summary>Sources</summary>', 1
@@ -613,7 +613,10 @@ def test_a_source_credit_lists_under_each_result_naming_it_with_its_roles(
     article = render_contributors.contributor_article(
         contributor, (author, credit, credit, again, unnamed, other), results=REGISTER
     )
-    assert '<section id="results"><h2>Results</h2>' in article
+    assert any(
+        section.attrs.get("id") == "results"
+        for section in paper_structure.parse(article).find_all("section")
+    )
     assert '<section id="other-reviewed-records">' in article
     section = "".join(
         render_contributors.credited_work(
@@ -893,7 +896,7 @@ def test_profile_tally_and_sections_order_records_results_then_credits(
     ]
     work = render_contributors.credited_work(identifier, occurrences, results=REGISTER)
     rendered = "".join(work.parts)
-    assert re.findall(r'<section id="([^"]+)"><h2>', rendered) == [
+    assert re.findall(r'<section id="([^"]+)"><h2[^>]*>', rendered) == [
         "records",
         "results",
         "credited-work",
@@ -948,6 +951,9 @@ def test_profile_directory_intro_is_serif_and_accounts_remain_whole_at_narrow_wi
                 )
                 assert "PT Serif" in found["introFont"]
                 assert "Source Sans" in found["tableFont"]
+                assert found["names"]
+                assert all(name["weight"] == "680" for name in found["names"])
+                assert all(name["weight"] == "410" for name in found["otherLinks"])
                 assert found["overflow"] == 0
                 assert found["accounts"]
                 for account in found["accounts"]:

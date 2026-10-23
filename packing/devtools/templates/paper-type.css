@@ -167,6 +167,9 @@
   --paper-note-scale: 0.92;
   --paper-colophon-scale: 0.85;
   --paper-note-inset: 1.4rem;
+  --paper-caption-space-above: 0.85rem;
+  --paper-caption-space-below: 1rem;
+  --paper-packing-diagram-width: 24rem;
   --paper-support-leading: 1.4;
   --paper-button-label-case: uppercase;
   --paper-button-label-scale: 0.9;
@@ -327,4 +330,35 @@ ul.credits > li {
 }
 ul.credits > .publication-date {
   margin-block-start: 1lh;
+}
+
+/* Semantic captions share the paper's note role on papers and reader documents.
+   Markdown paragraphs inside a caption keep that role instead of prose emphasis. */
+.kpress .kpress-figcaption {
+  border-block-start: 0;
+  color: var(--kpress-doc-muted);
+  font-family: var(--kpress-font-sans);
+  font-size: calc(
+    var(--kpress-font-size-base) *
+    var(--paper-font-scale-sans) *
+    var(--paper-note-scale)
+  );
+  font-style: normal;
+  font-weight: var(--kpress-font-weight-sans-regular);
+  line-height: var(--paper-support-leading);
+  margin-block-start: 0;
+  padding-block: var(--paper-caption-space-above) var(--paper-caption-space-below);
+  padding-inline: var(--paper-note-inset);
+}
+.site-page .kpress-figcaption {
+  text-align: start;
+}
+.site-page .kpress-figcaption p {
+  font: inherit;
+  margin-block: 0;
+}
+
+/* A packing's paper view is the cropped container, independent of its atlas canvas. */
+.kpress .kpress-figure .site-packing-diagram {
+  inline-size: min(100%, var(--paper-packing-diagram-width));
 }
