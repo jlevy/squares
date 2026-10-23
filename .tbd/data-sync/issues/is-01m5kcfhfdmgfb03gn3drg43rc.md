@@ -5,7 +5,7 @@ title: Diagnose PR737 release delay and eliminate repeated local and hosted vali
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md
 delegate: release-audit-coordinator
 labels: []
@@ -17,10 +17,11 @@ child_order_hints:
   - is-01m5ke1keaj6bqzqqmqs79n95v
   - is-01m5ke3vh5cmc5svg0fk1xmsdf
   - is-01m5kg2zbcb0t9r96wpx54fpt8
+  - is-01m5kg7j6t8j0twm81mzxpdd1h
 hold: null
 hold_until: null
 created_at: 2026-10-23T03:22:10.785Z
-updated_at: 2026-10-23T04:25:13.323Z
+updated_at: 2026-10-23T04:27:43.705Z
 started_at: 2026-10-23T03:22:19.352Z
 ---
 Owner requests measured explanation of slow final CI/deployment despite prior landed CI improvements. Review tbd ci-and-gates-rules and release-engineering-rules, compare recent landed changes to current run39892772106 and Pages39892772091, separate queue/setup/test/build/deploy time. Document prioritized changes and acceptance evidence. Owner workflow: focused local checks then push; full GitHub gates run in parallel with review, never serial repeated full local gates before hosted CI. Keep navigation PR737 frozen and land it independently. Preserve all substantive validation; no speculative gate weakening.
