@@ -5,7 +5,7 @@ title: Plan the News page toggle (notable stories / all changes by PR), the merg
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-23-news-pr-feed.md
 delegate: c-news-plan-1023
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T17:18:55.109Z
-updated_at: 2026-10-23T18:09:54.007Z
+updated_at: 2026-10-23T18:11:07.538Z
 started_at: 2026-10-23T17:19:23.812Z
 ---
 
@@ -28,3 +28,4 @@ started_at: 2026-10-23T17:19:23.812Z
 - Q3 toggle: "One page, switched in place". This is not the plan's recommended two pages; the spec must be redesigned for one page within the page budget.
 - Q5 recording: "Intake runner (Recommended)". The intake runner records each merge at stage 7, and the sweep is the backstop.
 - Q4 (feed row text) was not asked. The coordinator's default is the GitHub title, as the plan recommends.
+- OWNER, same conversation: "We should use a toggle at the top of the page, much like we had a while back in the history, where there was a Film | Workbench toggle". That toggle was `.site-tabs` (d73244ff4, 30 September; moved under the bar's rule in 12a0a8438, 1 October). The spec takes its look and position (header slot, under the rule, `--site-tabs-space`), with in-place switching per Q3.
