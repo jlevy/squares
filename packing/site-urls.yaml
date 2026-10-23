@@ -18729,6 +18729,8 @@ urls:
     builds_on: null
     evidence:
     - E-mishapolk-n204-certificate-report
+    - E-mishapolk-n204-exact-feasibility
+    - E-mishapolk-n204-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-n204-2026-10-22/README.md
     - packing/resources/web/mishapolk-n204-2026-10-22/acquisition/claims.json
@@ -18738,6 +18740,9 @@ urls:
     - packing/resources/web/mishapolk-n204-2026-10-22/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-23-mishapolk-n204.md
+    - packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/README.md
+    - packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/outputs/lineage.json
 - path: results.html
   canonical: results.html
   kind: page

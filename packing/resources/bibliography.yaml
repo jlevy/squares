@@ -3268,7 +3268,9 @@ sources:
       the continuous SQP solve at 204 started, 1.48e-11 below n-204.cert. The author checked
       it with this repository's sqpack.verify, imported as a module, and with Evan Daniel's
       verify_cert.py and verify_cert2.py; Couzo's source credits Polkovskyi's own construction
-      as the seed of its search. Retained under the author's written grant on issue 719, the
+      as the seed of its search. Measured by the 23 October review, its side and the rows
+      Daniel's exact solver determines are that solver's output for T-229's arrangement,
+      which the source does not say: a method credit, not an antecedent of the packing. Retained under the author's written grant on issue 719, the
       MIT licence of 17cc220 that the comment says covers every certificate. Gemini
       assistance disclosed. Upper bound only; no optimality claim.
   - key: '[de Winter issue 666 2026-10-17]'

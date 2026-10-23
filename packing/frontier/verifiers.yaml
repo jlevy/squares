@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-22'
+last_reviewed: '2026-10-23'
 verifiers:
   - id: V-evand-verify-exact
     program: verify_exact.py
@@ -2656,6 +2656,79 @@ verifiers:
       devtools.upper_bound_reports to reach the maintained routes, and the review's checker.
       Kept with its receipts out-controls-T-229-n105.json and -n204.json in the
       mishapolk-issue719-2026-10-22 packet's review/review-2026-10-22/ (RF-7, RF-8).
+
+  - id: V-mishapolk-n204-review-check
+    program: review_t231_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 23 October review's standard-library exact checker of the certificate T-231
+      cites, with a strict reader of its own, deciding it on two routes that share only the
+      reader: route Z in integers alone (a Pythagorean triple per row, containment by
+      half-extents and every pair by four separating-axis inequalities cleared of
+      denominators, never loading fractions), and route C in Fraction (unit edges, right
+      angles, orientation and corner mean, corner containment, every pair by the exact area
+      one square's closed half-planes clip from the other and again by corner projections,
+      and the exact squared distance of every pair whose centres lie within 2). Its
+      --self-test runs 13 hand-built cases, 12 malformed texts and 1,500 random pairs.
+    source:
+      - packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/review_t231_check.py
+    independence_record: docs/project/reviews/review-2026-10-23-mishapolk-n204.md
+    independence:
+      read: [mathematics, certificate-format, specification]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-231 (c-review-t231-math, think-tetq),
+            strong sub-agent tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          As E-mishapolk-n204-review-exact-feasibility's: written in a file of its own that
+          imports nothing from this repository or the source, from the certificate's format
+          line, the mathematics and the #728 review's account of its checker, and run on the
+          certificate before its author read any maintained or source code.
+    note: >-
+      Written and run on 23 October 2026 by the review; kept in the
+      mishapolk-n204-2026-10-22 packet's review/review-2026-10-23/ with its README and
+      receipts (RF-7), whose outputs/program-digests.sha256 lists the bytes that ran.
+  - id: V-mishapolk-n204-review-controls
+    program: sharp_controls_t231.py, maintained_routes_t231.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      The 23 October review's controls of the certificate T-231 cites.
+      sharp_controls_t231.py builds sixteen mutants (the side lowered by the least
+      top-or-right clearance, every square moved by the least left and by the least bottom
+      clearance, and the least-gap pairs between two tilted, a tilted and an aligned, and
+      two aligned squares closed along their edge normal, each at exact contact and 1e-30
+      past it; a duplicated square; a square moved outside; a row dropped; a decimal
+      literal) and decides each by the review's checker and by both maintained routes
+      through the evand-cert adapter. maintained_routes_t231.py runs the kernel's positive
+      and two gross jobs one per process, as certify's child does, with validate_job, and
+      the kernel's run_sharp at contact and past it. They add the mutants and the
+      expectations; the routes decide.
+    source:
+      - packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/sharp_controls_t231.py
+      - packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/maintained_routes_t231.py
+    independence_record: docs/project/reviews/review-2026-10-23-mishapolk-n204.md
+    note: >-
+      Written and run on 23 October 2026 by the review (c-review-t231-math); they import
+      devtools.upper_bound_reports, devtools.evand_arrangement_reports and
+      devtools.evand_exact_certificates to reach the maintained routes, and the review's
+      checker. Kept with their receipts (outputs/sharp-controls.json,
+      outputs/maintained-*.json).
 
   - id: V-overbeck-review3-seed-packing
     program: seed_packing_check.py

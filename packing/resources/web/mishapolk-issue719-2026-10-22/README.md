@@ -241,8 +241,9 @@ Each is pinned by digest in the manifest, and the reply asks the author about it
   `certificates/n266_fresh.cert` (33 overlapping pairs) and `certificates/n275.cert`.
   Neither the issue nor the indexes claim them.
 - **A second 204 file.** `certificates/n204.cert` is the same packing as `n-204.cert`,
-  $1.48 \times 10^{-11}$ lower, and passed both routes in triage. The issue and the
-  indexes name `n-204.cert`. The author claimed the lower file on 22 October
+  $1.48 \times 10^{-11}$ lower. The stage 1 triage ran it through both routes and kept no
+  receipt; the replay of record is the n204 packet’s, with the 23 October review’s. The
+  issue and the indexes name `n-204.cert`. The author claimed the lower file on 22 October
   ([issuecomment-6350348588](https://github.com/jlevy/squares/issues/719#issuecomment-6350348588),
   answer 3), and the [mishapolk-n204-2026-10-22](../mishapolk-n204-2026-10-22/README.md)
   packet retains it under his written grant; T-231 registers it. The same commit,

@@ -25433,9 +25433,10 @@ occurrences:
   contributor_id: evan-daniel
   note: >-
     Reviewed /credit span 24:30: method credit only. The author's comment of 23 October
-    says he checked the certificate with Evan Daniel's verify_cert.py and verify_cert2.py;
-    the packing did not start from Daniel's regularized view (T-225), so Daniel is no
-    antecedent of the packing.
+    says he checked the certificate with Evan Daniel's verify_cert.py and verify_cert2.py,
+    and the 23 October review measured its side and determined rows as Daniel's exact
+    solver's output (RF-1); the packing did not start from Daniel's regularized view
+    (T-225), so Daniel is no antecedent of the packing.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk n204 2026-10-22]'

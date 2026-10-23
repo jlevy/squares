@@ -20349,6 +20349,25 @@ issues:
       bead: think-9vr8
       blocked_on:
       - think-f2io
+    asks:
+    - what: >-
+        Say which program wrote certificates/n204.cert, and from which input: its side and
+        the rows Evan Daniel's exact solver determines equal that solver's output for T-229's
+        arrangement, row for row (the 23 October review of T-231, RF-1, question 1).
+      state: queued
+      note: >-
+        T-231's method and credit name the solver as measured until he answers; his answer
+        changes them if it names another program.
+      bead: think-xyhn
+    - what: >-
+        Confirm that the MIT licence of 17cc220 and his grant on this issue cover
+        certificates/n204.cert at 12fc4667, which his tree has not held since 3285fac (the
+        23 October review of T-231, RF-3, question 2).
+      state: queued
+      note: >-
+        The mishapolk-n204-2026-10-22 packet retains the file on the grant of his comment of
+        22 October; its custody changes if he says otherwise.
+      bead: think-xyhn
     beads:
     - think-xyhn
     - think-4h23

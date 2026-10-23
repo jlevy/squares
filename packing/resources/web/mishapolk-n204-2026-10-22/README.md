@@ -188,9 +188,41 @@ measurement above is decided, and the source’s checkers were not run.
 
 ## Stage 4 Review
 
-The register entry waits on its stage 4 mathematical review, `c-review-t231-math`
-(think-tetq). That lane is prompted separately from the records lane that built this
-packet. Its programs and receipts will be kept under `review/` here.
+The [review of 23 October 2026](../../../../docs/project/reviews/review-2026-10-23-mishapolk-n204.md)
+accepted the certificate for finite feasibility only, with seven findings, none
+blocking. The lane `c-review-t231-math` (think-tetq) was prompted separately from the
+records lane that built this packet.
+It decided the certificate again on a clean-room checker of its own, on an integer route
+and a `Fraction` route with exact clipping area and Euclidean distance, and its numbers
+equal both maintained routes’ and this packet’s receipt at all 63 points they share.
+Its sixteen mutants (sharp at the top and right, left and bottom walls and at three kinds
+of least-gap pair, gross, and reader controls) were decided as required by all four
+deciders.
+Its programs, receipts and logs are in
+[review/review-2026-10-23/](review/review-2026-10-23/README.md), with its rerun of Evan
+Daniel’s regularizer driver on T-229’s witness.
+T-231 rests at `V3`/`C3` on that review, this packet’s replay and the review checker’s
+run.
+
+**The measured method (RF-1).** The certificate’s side and the 119 rows that Evan
+Daniel’s exact solver (`exactsolve.py`, MIT) determines equal that solver’s output for
+T-229’s witness, row for row, at the solver’s padding of $10^{-20}$
+([outputs/lineage.json](review/review-2026-10-23/outputs/lineage.json)). The other 85
+rows are the solver’s 21 free squares and the 64 squares holding its frozen flat
+variables. `n-204.cert` is this certificate dilated by $1 + 1.000055 \times 10^{-12}$,
+rounded to within $2.9 \times 10^{-15}$: one solved point at two paddings. The source
+does not name the solver, so the record states it as measured, a method credit and not
+an antecedent of the packing, until the author says which program wrote the file.
+
+**Not rigid (RF-5).** The 21 free squares keep clearances of $5.774 \times 10^{-9}$ to
+$1.25 \times 10^{-2}$, so the packing admits feasible motions at its side. No
+local-minimum or KKT statement is claimed.
+
+**The review’s questions for the author** go with the reply on #719: which program wrote
+`n204.cert` and from which input; whether the MIT licence of `17cc220` and his grant on
+#719 cover `certificates/n204.cert` at `12fc4667`, which his tree no longer holds; and
+which of the two 204 files he wrote first, and why `n-204.cert` carries the larger
+padding.
 
 ## Credit
 
@@ -198,7 +230,9 @@ The packing is Francisco Couzo’s. He first reported it in #670 and refined it 
 and #678 (T-226, T-228, T-223), and his source credits Polkovskyi’s own construction as
 the seed of its search.
 Mykhailo Polkovskyi re-solved it to this side, starting from Couzo’s #678 certificate,
-as his comment of 23 October says.
+as his comment of 23 October says. Measured here, the side and the determined rows are
+Evan Daniel’s exact solver’s for T-229’s arrangement: a method credit to Daniel, not an
+antecedent of the packing ([Stage 4 Review](#stage-4-review)).
 The bibliography key is **[Mishapolk n204 2026-10-22]**.
 
 ## Commands
@@ -214,6 +248,16 @@ python -m devtools.upper_bound_reports mishapolk-n204-2026-10-22 check --replay
 python resources/web/mishapolk-n204-2026-10-22/measure/identity.py --out resources/web/mishapolk-n204-2026-10-22/measure/identity.json
 python resources/web/mishapolk-n204-2026-10-22/receipts/sharp_controls.py --out resources/web/mishapolk-n204-2026-10-22/receipts/sharp-controls.json
 ```
+
+## Compressed Files
+
+The review’s rerun of Evan Daniel’s regularizer driver keeps two of the driver’s own gzip
+outputs, as the driver wrote them.
+
+| Stored File | Origin | Git Blob of Original | SHA-256 of Original |
+| --- | --- | --- | --- |
+| `review/review-2026-10-23/outputs/regularizer-rerun/report.json.gz` | receipt | `8e406c8a0d2c191286bb5bd73fd67aea2a29b531` | `6992f59b5e0c9e02b766881f554a4e455cf0b64e1e98d4df45add519a166a396` |
+| `review/review-2026-10-23/outputs/regularizer-rerun/solve/witness.contacts.json.gz` | receipt | `511fe0938a2f41285a5690585bb8489f7eefb824` | `0ccf884063d2eeac7256289dec3f49b96cbb0b765859312fc33ee8fdfe32d059` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
