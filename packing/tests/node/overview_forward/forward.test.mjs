@@ -21,7 +21,7 @@ const EXPLAINER = "papers/n11-lower-bounds-explainer.html";
  * leaves them where they are. `moved` is the page's `data-moved-to`, which only a
  * forwarder page has.
  * @param {string} hash
- * @param {{ search?: string, ids?: readonly string[], results?: readonly string[], retired?: string, moved?: string, fileMoved?: string, caseNumbers?: string, protocol?: string, preview?: boolean }} [options]
+ * @param {{ search?: string, ids?: readonly string[], results?: readonly string[], retired?: string, moved?: string, fileMoved?: string, caseNumbers?: string, protocol?: string, preview?: boolean, pathname?: string }} [options]
  * @returns {string | null}
  */
 function forwarded(
@@ -36,6 +36,7 @@ function forwarded(
     caseNumbers,
     protocol = "https:",
     preview = false,
+    pathname = "/index.html",
   } = {},
 ) {
   /** @type {string | null} */
@@ -66,7 +67,7 @@ function forwarded(
     },
     window: {
       location: {
-        href: `${protocol}//example.test/squares/cases.html${search}${hash}`,
+        href: `${protocol}//example.test/squares${pathname}${search}${hash}`,
         protocol,
         hash,
         search,
@@ -152,11 +153,54 @@ void test("the ladders' two fragments go to the results page where the section i
   assert.equal(forwarded("#verification-at-a-glance"), "results.html#verification-at-a-glance");
 });
 
-void test("the survey's two fragments go to the combined Atlas page", () => {
+void test("the overview's survey fragments go to the separate Frontier Survey", () => {
   // The Frontier Survey left the overview on 2026-10-02, its account the Frontier page's
   // own; it was `#the-survey` until 2026-10-01, and both fragments are sent there.
-  assert.equal(forwarded("#the-frontier-survey"), "atlas.html#the-frontier-survey");
-  assert.equal(forwarded("#the-survey", { search: "?x=1" }), "atlas.html?x=1#the-survey");
+  assert.equal(forwarded("#the-frontier-survey"), "frontier.html#the-frontier-survey");
+  assert.equal(forwarded("#the-survey", { search: "?x=1" }), "frontier.html?x=1#the-survey");
+});
+
+void test("legacy Atlas survey sections and registered rows reach the survey with state", () => {
+  for (const hash of [
+    "#the-frontier-survey",
+    "#the-survey",
+    "#best-known-results",
+    "#frontier-table",
+    "#n-1",
+    "#n-324",
+    "#%6E-291",
+  ]) {
+    assert.equal(
+      forwarded(hash, { pathname: "/atlas.html", search: "?recent=true&view=embed" }),
+      `frontier.html?recent=true&view=embed${hash}`,
+    );
+  }
+  for (const hash of ["#atlas-n-324", "#n-0", "#n-325", "#future-heading"]) {
+    assert.equal(forwarded(hash, { pathname: "/atlas.html" }), null);
+  }
+  assert.equal(forwarded("#n-291", { pathname: "/frontier.html", ids: ["n-291"] }), null);
+});
+
+void test("query-only survey filters forward while explicit Atlas choices keep their page", () => {
+  for (const search of [
+    "?recent=true",
+    "?open=true&view=embed",
+    "?status=proved",
+    "?n-min=17&n-max=18",
+  ]) {
+    assert.equal(forwarded("", { pathname: "/atlas.html", search }), `frontier.html${search}`);
+  }
+  for (const search of [
+    "?recent=true&atlas=grid",
+    "?recent=true&size=large",
+    "?open=true&scale=row",
+    "?view=embed",
+  ]) {
+    assert.equal(forwarded("", { pathname: "/atlas.html", search }), null);
+  }
+  for (const hash of ["#the-atlas", "#the-atlas-of-square-packings", "#atlas-n-291"]) {
+    assert.equal(forwarded(hash, { pathname: "/atlas.html", search: "?recent=true" }), null);
+  }
 });
 
 void test("a renamed section's old fragment stays while an anchor keeps its id", () => {
@@ -239,20 +283,21 @@ void test("unknown and malformed fragments stay where the reader put them", () =
   );
 });
 
-void test("retired case directories select registered Atlas rows and preserve record sections", () => {
+void test("retired case directories select registered survey rows and preserve record sections", () => {
   for (const moved of ["atlas.html", "../atlas.html"]) {
     const options = { moved, caseNumbers: "11,12,291" };
-    assert.equal(forwarded("#n-11", options), `${moved}#n-11`);
-    assert.equal(forwarded("#n-00012", options), `${moved}#n-12`);
+    const survey = moved.replace("atlas.html", "frontier.html");
+    assert.equal(forwarded("#n-11", options), `${survey}#n-11`);
+    assert.equal(forwarded("#n-00012", options), `${survey}#n-12`);
     assert.equal(
       forwarded("#n-291", { ...options, search: "?recent=true" }),
-      `${moved}?recent=true#n-291`,
+      `${survey}?recent=true#n-291`,
     );
     assert.equal(
       forwarded("", { ...options, search: "?n=12&view=embed" }),
-      `${moved}?view=embed#n-12`,
+      `${survey}?view=embed#n-12`,
     );
-    assert.equal(forwarded("#n-11", { ...options, search: "?n=12" }), `${moved}#n-12`);
+    assert.equal(forwarded("#n-11", { ...options, search: "?n=12" }), `${survey}#n-12`);
     assert.equal(
       forwarded("#bounds", { ...options, search: "?n=12&view=embed&raw=1" }),
       `${moved.replace("atlas.html", "cases/12.html")}?view=embed&raw=1#bounds`,
@@ -349,7 +394,10 @@ void test("case directory migration uses the same Atlas destination for HTTP and
         forwarded("#unknown", { ...options, protocol, search: "?view=embed" }),
         `${moved}?view=embed#unknown`,
       );
-      assert.equal(forwarded("#n-11", { ...options, protocol }), `${moved}#n-11`);
+      assert.equal(
+        forwarded("#n-11", { ...options, protocol }),
+        `${moved.replace("atlas.html", "frontier.html")}#n-11`,
+      );
       assert.equal(forwarded("#n-999", { ...options, protocol }), `${moved}#n-999`);
       assert.equal(
         forwarded("#bounds", { ...options, protocol, search: "?n=12&view=embed" }),

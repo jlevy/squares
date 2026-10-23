@@ -119,14 +119,14 @@ def frontier_math_counts() -> tuple[int, int]:
 
 @pytest.fixture(scope="module")
 def page() -> str:
-    return site_renders.html("atlas.html")
+    return site_renders.html("frontier.html")
 
 
 @pytest.fixture(scope="module")
 def served() -> str:
     """The page as a reader's browser assembles it, with every shared asset it links put
     back in it (`tests.site_renders.served`)."""
-    return site_renders.served("atlas.html")
+    return site_renders.served("frontier.html")
 
 
 @pytest.fixture(scope="module")
@@ -154,7 +154,7 @@ def test_every_case_file_is_a_row_and_every_row_a_case_file(rows) -> None:
 
 
 def test_every_row_is_its_cases_anchor(rows) -> None:
-    """`atlas.html#n-11` lands on its survey row; the old Frontier address forwards here."""
+    """`frontier.html#n-11` lands on its canonical survey row."""
     for attributes, _ in rows:
         assert attributes["id"] == f"n-{attributes['data-n']}"
 
@@ -273,28 +273,30 @@ def test_a_correcting_bound_keeps_its_recency_and_names_what_it_corrects(
     assert all("title" not in cell for cell in parsed.head if cell is not recent)
 
 
-def test_the_page_says_once_what_the_tag_means_and_links_the_corrected_result(
+def test_the_survey_key_explains_bounds_without_audits_or_case_history(
     page: str,
 ) -> None:
-    """The rows repeat the tag without a link; the Recent results paragraph says what it
-    means once, with the count from the citation record, the register's record of the
-    corrected work linked to its row, and the register's words for what failed."""
-    sentence = frontier.corrections_prose()
-    assert sentence == (
-        "For 218 recent verified bounds, *corrects Nagamochi 2005* says the bound "
-        "stands in for "
-        "a published result found unsound, the register\u2019s "
-        "[T-007](results.html#t-007): "
-        "Lemma 1, on which Theorem 2\u2019s proof rests, is false."
-    )
-    prose = page[: page.index('id="frontier-table"')]
-    assert (
-        "For 218 recent verified bounds, <em>corrects Nagamochi 2005</em> "
-        "says the bound stands in"
-    ) in prose
-    assert '<a href="results.html#t-007">T-007</a>' in prose
-    table = page[page.index("<tbody>") : page.index("</tbody>")]
-    assert "results.html#t-007" not in table
+    """Keep the reading key beside the actual table; detailed evidence is in each row."""
+    prose = page[
+        page.index('<h1 id="the-frontier-survey"') : page.index('id="best-known-results"')
+    ]
+    for term in (
+        "reported lower",
+        "verified",
+        "certificate",
+        "gap",
+        "Polynomial roots",
+        "Records",
+    ):
+        assert term in prose
+    for removed in (
+        "Audited sources",
+        "Seventeen squares",
+        "n-NNN.md",
+        "nothing on it is typed",
+    ):
+        assert removed not in prose
+    assert len(re.sub(r"<[^>]*>", "", prose).split()) < 250
 
 
 #: The cases whose verified lower bound rests only on a published proof nobody here has
@@ -550,7 +552,7 @@ def test_an_invalid_record_fails_the_render(tmp_path: Path, monkeypatch) -> None
 
 
 def test_the_page_fetches_only_assets_and_the_survey_retains_its_ceiling(page: str) -> None:
-    assert_fetches_only_assets("atlas.html", page)
+    assert_fetches_only_assets("frontier.html", page)
     # Each file it names is one the build writes beside it.
     assert site_assets.shared().assets.referenced([page])
     start = page.index('<h1 id="the-frontier-survey"')
@@ -564,7 +566,7 @@ def test_the_page_fetches_only_assets_and_the_survey_retains_its_ceiling(page: s
 
 def test_the_page_carries_the_table_script_and_its_controls(page: str, served: str) -> None:
     table = site_assets.shared().assets.script_file(frontier.TABLE_SCRIPT)
-    assert page.count(site_assets.script_tag(table, "atlas.html")) == 1
+    assert page.count(site_assets.script_tag(table, "frontier.html")) == 1
     assert frontier.TABLE_SCRIPT.read_text(encoding="utf-8") in served
     assert 'class="site-table-tools" data-table="frontier" hidden' in page
     navigation = paper_structure.parse(page).find("nav", "site-nav")
@@ -573,28 +575,27 @@ def test_the_page_carries_the_table_script_and_its_controls(page: str, served: s
         (link.text(), link.attrs.get("href"))
         for link in navigation.find_all("a")
         if link.attrs.get("aria-current") == "page"
-    ] == [("Visual Atlas", "atlas.html")]
-    assert 'data-page="frontier"' not in page
+    ] == [("The Frontier Survey", "frontier.html")]
 
 
-def test_the_complete_survey_follows_the_graphics_and_shares_one_case_popover(
+def test_the_complete_survey_has_its_own_page_and_one_case_popover(
     page: str,
 ) -> None:
-    graphic = page.index("data-atlas-grid")
     survey = page.index('<h1 id="the-frontier-survey"')
     table = page.index('id="frontier-table"')
-    assert graphic < survey < table
+    assert survey < table
+    assert "data-atlas-grid" not in page
     assert 'id="the-survey"' in page
     assert page.count('id="pop-case"') == 1
     ids = re.findall(r'\bid="([^"]+)"', page)
     assert len(ids) == len(set(ids))
     assert {f"n-{n}" for n in range(1, 325)} <= set(ids)
-    assert {f"atlas-n-{n}" for n in range(1, 325)} <= set(ids)
+    assert not {f"atlas-n-{n}" for n in range(1, 325)} & set(ids)
     total = len(page.encode("utf-8"))
     survey_size = len(page[survey : page.index("</article>", survey)].encode("utf-8"))
     print(
-        f"Prepared Atlas HTML: {total:,} bytes; Frontier Survey: {survey_size:,}; "
-        f"graphics and shared shell: {total - survey_size:,}."
+        f"Prepared Frontier HTML: {total:,} bytes; survey: {survey_size:,}; "
+        f"shared shell: {total - survey_size:,}."
     )
 
 

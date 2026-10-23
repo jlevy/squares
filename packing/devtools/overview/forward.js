@@ -161,6 +161,16 @@
       return;
     }
   }
+  const query = new URLSearchParams(window.location.search);
+  if (
+    new URL(window.location.href).pathname.endsWith("/atlas.html") &&
+    !fragment &&
+    ["n-min", "n-max", "status", "open", "recent"].some((key) => query.has(key)) &&
+    !["atlas", "size", "scale"].some((key) => query.has(key))
+  ) {
+    forward("frontier.html");
+    return;
+  }
   if (!fragment) {
     return;
   }

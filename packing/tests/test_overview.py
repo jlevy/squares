@@ -965,13 +965,14 @@ def _regularized_index() -> dict:
 def _atlas_template(page: str, which: str) -> str:
     """The static first or remaining tile run in the atlas block."""
     grid = page.split("data-atlas-grid>", 1)[1].split('<p class="site-action-row', 1)[0]
+    grid = grid.replace("data-atlas-rest hidden>", "data-atlas-rest>")
     if which == "first":
         return (
             grid.split('<div class="site-atlas-cells" id="atlas-cells"', 1)[1]
             .split(">", 1)[1]
-            .split('<div class="site-atlas-rest" data-atlas-rest hidden>', 1)[0]
+            .split('<div class="site-atlas-rest" data-atlas-rest>', 1)[0]
         )
-    return grid.split('<div class="site-atlas-rest" data-atlas-rest hidden>', 1)[1].rsplit(
+    return grid.split('<div class="site-atlas-rest" data-atlas-rest>', 1)[1].rsplit(
         "</div></div>", 1
     )[0]
 
@@ -1103,7 +1104,7 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
 
 
 def test_overview_tiles_omit_stars_and_frontier_keeps_lower_recency(
-    atlas_page: str,
+    rendered: Callable[[str], str],
 ) -> None:
     """Tiles show only counts; the survey retains recent lower-proof markers."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
@@ -1121,7 +1122,7 @@ def test_overview_tiles_omit_stars_and_frontier_keeps_lower_recency(
     )
     assert [int(n) for n, _, _, _ in found] == list(range(1, 325))
     lower_recent = frontier.recent_lower_bounds()
-    frontier_page = atlas_page
+    frontier_page = rendered("frontier.html")
     rows = dict(re.findall(r'<tr id="n-(\d+)"[^>]*data-recent="(true|false)"', frontier_page))
     assert sorted(int(n) for n in rows) == list(range(1, 325))
     for n, name, ink, number in found:
@@ -1521,7 +1522,7 @@ def test_the_atlas_grid_opens_each_case_in_the_case_popover(atlas_page: str) -> 
     )
     assert actions == [
         ("data-case-open", "atlas.html", "Open the Case Record"),
-        ("data-case-frontier", "atlas.html", "Frontier Survey row"),
+        ("data-case-frontier", "frontier.html", "Frontier Survey row"),
         ("data-case-atlas", "atlas.html", "Atlas diagram"),
     ]
     assert "All cases" not in popover
@@ -1622,7 +1623,7 @@ def test_the_page_cards_keep_the_series_together_at_one_column_width(
     assert [
         re.findall(r'class="site-card site-card-link" href="([^"]+)"', row) for row in rows
     ] == [
-        ["atlas.html#the-frontier-survey"],
+        ["frontier.html"],
         [
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-threshold-bound-review.html",
@@ -2077,150 +2078,57 @@ def test_the_ladders_are_on_the_verification_page_and_the_archive_points_to_them
         assert question in verification, scale
 
 
-def test_the_frontier_survey_is_an_atlas_section_without_duplicate_cards(
-    about: str, papers: str, atlas_page: str
+def test_the_frontier_survey_and_atlas_are_distinct_destinations(
+    about: str, papers: str, atlas_page: str, rendered: Callable[[str], str]
 ) -> None:
-    """The complete survey follows Atlas graphics and keeps its section aliases.
-    Navigation reaches Atlas; About and Papers carry no redundant survey card."""
-    for gone in ('id="the-frontier-survey"', 'id="the-survey"', 'href="#the-survey"'):
-        assert gone not in about, gone
-    assert '"href": "#the-frontier-survey"' not in about
-    assert "The frontier survey is the record the atlas" not in _seen(about)
-    assert "frontier.html?recent=true" not in about
-    assert '<a data-page="atlas" href="atlas.html">Visual Atlas</a>' in about
-    assert 'data-page="frontier"' not in about
+    """Atlas opens the complete visual collection; Frontier owns the bounds table."""
+    frontier = rendered("frontier.html")
+    assert "<title>Visual Atlas · The Squares Project</title>" in atlas_page
+    assert "data-atlas-grid" in atlas_page
+    assert 'id="frontier-table"' not in atlas_page
+    assert 'href="frontier.html"' in atlas_page
+    assert 'id="packings"' in atlas_page
+    assert 'id="the-frontier-survey"' in frontier
+    assert 'id="the-survey"' in frontier
+    assert 'id="best-known-results"' in frontier
+    assert 'id="frontier-table"' in frontier
+    assert "data-atlas-grid" not in frontier
+    assert "frontier.html" in render_overview.PAGES
     for page in (about, papers):
         assert 'href="atlas.html#the-frontier-survey"' not in page
-    assert "<title>Visual Atlas · The Squares Project</title>" in atlas_page
-    survey = (
-        '<h1 id="the-frontier-survey" class="site-title">'
-        'The Frontier Survey<a id="the-survey"></a></h1>'
-    )
-    assert survey in atlas_page
-    assert atlas_page.index("data-atlas-grid") < atlas_page.index(survey)
-    bounds = '<h1 id="best-known-results" class="site-title">'
-    assert atlas_page.index(survey) < atlas_page.index(bounds)
-    assert atlas_page.index(bounds) < atlas_page.index('id="frontier-table"')
-    bound_heading = atlas_page.split(bounds, 1)[1].split("</h1>", 1)[0]
-    assert _seen(bound_heading).strip() == "Best Known Results for n ≤ 324"
-    assert "$" not in bound_heading
-    assert r"\le" not in bound_heading
-    intro = atlas_page.split("</h1>", 1)[1].split("data-atlas-grid", 1)[0]
-    assert _rendered_text(intro).startswith("The Visual Atlas shows the best-known packings")
-    for fragment in ("packings", "the-frontier-survey", "best-known-results"):
-        assert f'href="#{fragment}"' in intro
-    assert "frontier.html" not in render_overview.PAGES
+        assert not re.search(r'<a class="site-card[^>]*href="frontier.html"', page)
 
 
-def test_the_frontier_page_opens_with_the_surveys_account(
-    rendered: Callable[[str], str], overview: overview_data.Overview
+def test_the_frontier_page_explains_only_the_bounds_table(
+    rendered: Callable[[str], str],
 ) -> None:
-    """The Frontier page's prose, before its table, carries what the homepage's survey
-    section carried until 2026-10-02, refined, the survey's account first and the key to
-    the table's columns last, beside the table: what the survey records with the case
-    counts; the audit of its sources, with the $s(7) = 3$ example and the archive and
-    inventory links; the recency key and the survey's four counts, every number from the record
-    and the date written once; the seven authors' seventeen-square bounds before this
-    project, replayed as T-015 and T-016; then the columns, with the external
-    certificate's rule where the verified columns are defined. The run-in heads are the
-    page's own device, so the account groups without a sub-heading. The recent count
-    over every case is not written beside the recent cases' count among the first
-    hundred, since the two were the one number, 27, on 2026-10-02, and read as a
-    stutter."""
-    from devtools.render_frontier_page import (  # noqa: PLC0415
-        ARCHIVE_README,
-        EVIDENCE_INVENTORY,
-        recent_lower_bounds,
-        since_prose,
-        survey_counts,
-    )
+    """The standalone guide defines columns and verification without the removed history."""
+    from devtools.render_frontier_page import frontier_cases, since_prose  # noqa: PLC0415
 
-    page = rendered("atlas.html")
-    prose = page.split('id="the-frontier-survey"', 1)[1].split("</h1>", 1)[1]
-    prose = prose.split('<h1 id="best-known-results"', 1)[0]
+    page = rendered("frontier.html")
+    prose = page.split("</h1>", 1)[1].split('<div class="site-table-tools', 1)[0]
     text = _rendered_text(prose)
-    heads = re.findall(r"<p><strong>([^<]+)</strong>", prose)
-    assert heads == [
-        "Audited sources.",
-        "Recent results.",
-        "Seventeen squares.",
-        "Reported and verified.",
-        "The other columns.",
-        "A row\u2019s details.",
-    ]
-    assert text.endswith("Click a column heading to sort; the filters narrow the rows.")
-    assert "An external certificate counts once it is replayed here in full" in text
-    assert "The survey audits what it records." in text
+    cases = frontier_cases()
+    proved = sum(case["status"] == "proved" for case in cases)
+    opened = sum(case["status"] == "open" for case in cases)
     assert (
-        _markdown_text(
-            "The earliest published proof of $s(7) = 3$ carries four recorded defects"
-        )
-        in text
+        f"all {len(cases)} cases: {proved} have a proved optimum and {opened} are open" in text
     )
-    assert 'href="cases/7.html" data-case="7"' in prose
-    # Each repository document is linked on `main`, in a new tab as every link off the
-    # site opens.
-    for path, words in (
-        (ARCHIVE_README, "literature archive"),
-        (EVIDENCE_INVENTORY, "evidence inventory"),
+    for explanation in (
+        "published values",
+        "external certificates must be replayed in full",
+        "assumptions discharged",
+        "Finite-precision numerical checks do not count",
+        "verified upper bound minus the verified lower bound",
+        "cut rather than rounded",
+        "Records opens the case file",
+        "click a column heading to sort",
     ):
-        assert (
-            f'<a href="{repo_url(path)}" target="_blank" rel="noopener noreferrer">{words}</a>'
-        ) in prose, words
-    # The recency date is written once, and the counts run "since then".
-    assert since_prose() == "22 August 2026"
-    assert text.count("22 August 2026") == 1
-    assert ("Red indicates a recent result, since 22 August 2026.") in text
-    assert "Recent sorts recent verified bounds first." in text
-    counts = render_recent_results.recent_counts(render_recent_results.recent_rows())
-    assert overview.counts == counts
-    sentence = survey_counts(counts)
-    for number in counts:
-        assert f" {number} " in sentence, number
-    assert sentence.startswith(
-        f"Of the first hundred cases, {counts.cases} have a lower bound published or "
-        "proved since then"
-    )
-    assert f"{counts.verified} of those have a recent verified one" in text
-    assert sentence in text
-    starred = sum(recent_lower_bounds().values())
-    assert f"one of the {starred} verified" not in text
-    assert "Before this project\u2019s work began, seven authors had published" in text
-    for author in ("Brandwijk", "Burns", "MacIver", "Mira", "Fort", "Massaccesi"):
-        assert author in text, author
-    assert 'href="results.html#t-015">T-015</a>' in prose
-    assert 'href="results.html#t-016">T-016</a>' in prose
-    assert 'href="cases/17.html" data-case="17">seventeen-square record</a>' in prose
-    # Neither other page says any of this a second time: the Results page points to the
-    # policy for results by others and does not restate when a certificate counts. Each
-    # page's prose is read without its rows' popovers, whose detail may say a result
-    # was replayed here in full, which is that result's own account.
-    overview_page = rendered("index.html")
-    results_page = rendered(render_overview.RESULTS_PAGE)
-    for stated in ("audits what it records", "Brandwijk", "four recorded defects"):
-        assert stated not in overview_page, stated
-        assert stated not in results_page, stated
-    results_prose = results_page.split("</h1>", 1)[1].split('<div class="site-table-tools', 1)[
-        0
-    ]
-    overview_prose = _outside_row_popovers(
-        re.sub(r"<table.*?</table>", "", overview_page, flags=re.DOTALL)
-    )
-    for served in (overview_prose, results_prose):
-        assert "certificate is replayed here in full" not in served
-        assert "certificate counts once" not in served
-        assert "assumptions are discharged" not in served
-    # The separate Verification guide retains the complete review-policy explanation.
-    verification_page = rendered("verification.html")
-    ladders_lead = _rendered_text(
-        verification_page.split('id="verification-ladders"', 1)[1].split(
-            '<div class="site-ladders-frame', 1
-        )[0]
-    )
-    assert "C, what this repository has confirmed independently" in ladders_lead
-    assert "under its review policy" in ladders_lead
-    assert "review policy" in ladders_lead
-    assert 'href="epistemics.html#results-by-others"' in verification_page
+        assert explanation in text, explanation
+    assert text.count(since_prose()) == 1
+    for removed in ("Audited sources.", "Seventeen squares.", "four recorded defects"):
+        assert removed not in text
+    assert not re.search(r"<p><strong>", prose)
 
 
 def test_verification_ladders_is_one_ladder_diagram_significance_first(
@@ -2463,7 +2371,7 @@ def test_every_record_link_is_on_main_or_a_site_page(overview: overview_data.Ove
         for link in result.records:
             assert (
                 link.url.startswith(f"{REPO_URL}/blob/{DEFAULT_BRANCH}/")
-                or link.url == "atlas.html#the-frontier-survey"
+                or link.url == "frontier.html"
                 or re.fullmatch(r"cases/\d+\.html", link.url)
             ), (result.id, link)
 
@@ -2520,9 +2428,7 @@ def test_the_document_cards_lead_with_readme_and_epistemics(
     # are linked from the Frontier page's prose since 2026-10-02. The files are linked
     # where a record is shown, the Records column and a result's popover, and from no
     # prose of either page.
-    frontier = rendered("atlas.html")
-    assert '<a href="cases/17.html" data-case="17">seventeen-square record</a>' in frontier
-    assert '<a href="cases/7.html" data-case="7">record for seven squares</a>' in frontier
+    frontier = rendered("frontier.html")
     frontier_prose = frontier.split('id="the-frontier-survey"', 1)[1].split("</h1>", 1)[1]
     frontier_prose = frontier_prose.split('<div class="site-table-tools', 1)[0]
     overview_prose = re.sub(
@@ -5351,7 +5257,7 @@ def test_the_frontier_results_and_papers_pages_carry_no_subtitle(
         "A survey of all reviewed results",
         "Papers and interactive explanations for specific results",
     )
-    for name in ("atlas.html", render_overview.RESULTS_PAGE, "papers.html"):
+    for name in ("atlas.html", "frontier.html", render_overview.RESULTS_PAGE, "papers.html"):
         page = rendered(name)
         assert 'class="subtitle"' not in page, name
         if name == "atlas.html":
@@ -5359,7 +5265,10 @@ def test_the_frontier_results_and_papers_pages_carry_no_subtitle(
                 '<h1 id="the-atlas-of-square-packings" class="site-title">'
                 'Visual Atlas<a id="the-atlas"></a></h1>'
             ) in page
+            assert 'id="the-frontier-survey"' not in page
+        elif name == "frontier.html":
             assert 'id="the-frontier-survey"' in page
+            assert "data-atlas-grid" not in page
         else:
             hero = page.split('<div class="site-hero">', 1)[1].split("</div>", 1)[0]
             assert re.fullmatch(r"\s*<h1[^>]*>[^<]+</h1>\s*", hero), name
@@ -6084,7 +5993,7 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
         for link in result.records:
             assert f'href="{html.escape(link.url, quote=True)}"' in full, result.id
             label = html.escape(link.label)
-            if link.url == "atlas.html#the-frontier-survey":
+            if link.url == "frontier.html":
                 label = "The frontier survey"
             elif match := re.fullmatch(r"cases/(\d+)\.html", link.url):
                 label = "Case record, " + overview_data.math_html(f"n = {match.group(1)}")
@@ -7402,7 +7311,7 @@ def test_results_and_atlas_expose_their_collections_before_details(
     table = article.index('id="all-results"')
     assert article.count('id="all-results"') == 1
     assert 'href="atlas.html">Visual Atlas' in article[:table]
-    assert 'href="atlas.html#best-known-results">Best Known Bounds' in article[:table]
+    assert 'href="frontier.html">The Frontier Survey' in article[:table]
     assert table < article.index('href="verification.html">Verification')
     for fragment in (
         "verification-ladders",
@@ -7415,9 +7324,10 @@ def test_results_and_atlas_expose_their_collections_before_details(
         assert f'href="verification.html#{fragment}"' in results
     assert 'href="epistemics.html">Project Epistemics' in verification
     assert 'class="site-ladders"' not in article
-    for fragment in ("packings", "the-frontier-survey", "best-known-results"):
-        assert f'href="#{fragment}"' in atlas_page
-        assert f'id="{fragment}"' in atlas_page
+    assert 'id="packings"' in atlas_page
+    assert 'class="site-collection-nav"' not in atlas_page
+    assert 'href="frontier.html"' in atlas_page
+    assert 'id="frontier-table"' not in atlas_page
 
 
 def test_learning_collections_have_substantive_pages(
@@ -7578,7 +7488,7 @@ def test_posters_replaces_the_download_catalogue(downloads: str) -> None:
     assert "<title>Posters · The Squares Project</title>" in forwarder.html
 
 
-def test_site_guidance_uses_sans_roles_without_reclassifying_the_problem(
+def test_site_introductions_use_prose_without_reclassifying_controls(
     *,
     page: str,
     tutorials: str,
@@ -7588,7 +7498,7 @@ def test_site_guidance_uses_sans_roles_without_reclassifying_the_problem(
     downloads: str,
     contributor_documents: dict[str, str],
 ) -> None:
-    """Typography follows guidance versus exposition, rather than all paragraphs."""
+    """Standalone introductions use prose; navigation and controls retain their roles."""
     from devtools.paper_structure import parse  # noqa: PLC0415
 
     guidance = parse(page).find_all(cls="site-navigation-copy")
@@ -7598,7 +7508,6 @@ def test_site_guidance_uses_sans_roles_without_reclassifying_the_problem(
         "Have a new packing",
         "Start with the tutorials",
         "Watch the Atlas grow",
-        "The project documentation explains",
         "Explore the catalogues",
     ):
         assert invitation in guidance_text
@@ -7611,12 +7520,11 @@ def test_site_guidance_uses_sans_roles_without_reclassifying_the_problem(
         (documentation, "The code, the certificates"),
         (report, "If you have new results"),
         (downloads, "Download the first hundred packings"),
-        (
-            contributor_documents[render_contributors.DIRECTORY_PATH],
-            "People whose work the square-packing record cites or credits",
-        ),
     ):
-        descriptions = " ".join(
-            node.text() for node in parse(source).find_all(cls="site-navigation-copy")
-        )
-        assert expected in descriptions
+        assert expected in parse(source).text()
+    directory = parse(contributor_documents[render_contributors.DIRECTORY_PATH]).text()
+    assert "People whose work is cited or credited in the square-packing record." in directory
+    css = render_overview.SITE_CSS.read_text(encoding="utf-8")
+    intro = _rule(css, ".kpress .site-navigation-copy")
+    assert "font-family: var(--kpress-font-prose);" in intro
+    assert "font-weight: 400;" in intro

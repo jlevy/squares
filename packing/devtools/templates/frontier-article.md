@@ -1,8 +1,8 @@
 <h1 id="the-frontier-survey" class="site-title">The Frontier Survey<a id="the-survey"></a></h1>
 
 For $n$ unit squares, $s(n)$ is the side of the smallest square that holds them without
-overlap. The table compares reported and verified bounds for all {{COUNT}} cases:
-{{PROVED}} have a proved optimum and {{OPEN}} are open.
+overlap. The table compares reported and verified bounds for $n$ up to {{COUNT}}. Of
+these, {{PROVED}} have a proved optimum and {{OPEN}} are open.
 
 The *best known packing* and *reported lower* bound are the published values.
 The *verified* columns require an exact proof, algebraic replay, or rigorous

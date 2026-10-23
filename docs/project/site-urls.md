@@ -793,7 +793,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | explainer.html | papers/n11-lower-bounds-explainer.html | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → papers/n11-lower-bounds-explainer.html |
 | favicon-48.png | favicon-48.png | asset-file | overview | 2026-10-07 | 2026-10-22 | live |
 | favicon.svg | favicon.svg | asset-file | overview | 2026-10-07 | 2026-10-22 | live |
-| frontier.html | atlas.html | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → atlas.html |
+| frontier.html | frontier.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | index.html | / | page | overview | 2026-09-29 | 2026-10-22 | live |
 | known-best-1-100-card.png | known-best-1-100-card.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-22 | live |
 | known-best-1-100.pdf | square-packings-100-20261008.pdf | copy | assembly | 2026-09-29 | 2026-10-22 | live → square-packings-100-20261008.pdf |
