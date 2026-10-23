@@ -89,6 +89,18 @@ minor over all $k!$ permutations.
 The other seven, 274, 275 and 308 to 312, stop before the null vectors, with flat
 families of dimension 210 to 274.
 
+## The Review of 23 October 2026
+
+The stage 4 mathematical review of Theorem C,
+[review-2026-10-23-evand-grade-c-theorem-c.md](../../../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md),
+found the theorem true under its hypotheses and repaired a gap in its proof at side-end
+rows. Its own checker, which shares no code with the source, decided all 233
+configurations again from the exact forms retained here and the archive’s contacts files:
+every one valid, in 1,463 CPU-seconds, agreeing with every published certificate on rows,
+ranks, flat families and $\dim W$.
+The programs and how to run them are in [review/](review/README.md), and their receipts
+in `receipts/review-*`.
+
 ## Original Gzip Files
 
 | Stored path | Origin | Git blob | SHA-256 |
