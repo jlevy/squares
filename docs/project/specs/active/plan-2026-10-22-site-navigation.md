@@ -9,16 +9,22 @@ author: Codex, for the repository owner
 
 **Author:** Codex, for the repository owner
 
-**Status:** Implementation in progress in draft PR #737. The landing-page and
-standalone-shell slice is complete; integrated validation, reader checks, and
-publication remain in progress.
+**Status:** PR #737 merged and the reorganized site is deployed.
+The follow-up branch `codex/site-design-ci-followups-20261022` completes shared
+presentation fixes and updates the deployment audit for the new page hierarchy.
 
 **Tracking:** `think-7kbb` (coordination); `think-je3b` (landing pages and Resources);
 `think-izo6` (substantive collection pages); `think-39yu` (semantic test migration);
 `think-j62t` (All Results actions); `think-5enz` (homepage ordering and Resources);
 `think-k2y7` (document source actions).
 Heading audits `think-0pff` and `think-syrd`, and the narrow breadcrumb font-loading
-follow-up `think-b1nf`, are queued after stabilization and publication.
+follow-up `think-b1nf`, are in progress.
+The follow-up also tracks native profile links (`think-s67b`), profile tally placement
+(`think-sdwq`), shared badge/icon sizing (`think-2vzj`, `think-3x5m`), active navigation
+(`think-0ms5`), bold profile names (`think-9sq1`), News reset alignment (`think-lgsq`),
+and tutorial document and figure styles (`think-tmho`). CI and release work is
+coordinated in `think-nnny` and the
+[CI iteration-cost plan](plan-2026-10-14-ci-iteration-cost.md).
 
 **Workflow:** `tbd shortcut implement-beads`, following the reviewed navigation plan
 
