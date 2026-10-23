@@ -30,7 +30,7 @@ NAVIGATION = (
         "",
         (
             NavigationItem("atlas", "Visual Atlas", "atlas.html"),
-            NavigationItem("frontier", "The Frontier Survey", "frontier.html"),
+            NavigationItem("frontier", "Frontier Survey", "frontier.html"),
             NavigationItem("recent-results", "Recent Results", "recent-results.html"),
             NavigationItem("all-results", "Results Archive", "results.html"),
             NavigationItem("verification", "Verification", "verification.html"),

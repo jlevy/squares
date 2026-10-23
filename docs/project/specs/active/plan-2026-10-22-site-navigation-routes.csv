@@ -784,7 +784,7 @@ existing,epistemics.html,https://squaremath.org/epistemics.html,page,live,yes,ve
 existing,explainer.html,https://squaremath.org/papers/n11-lower-bounds-explainer.html,forwarder,forwarded,no,compatibility-forwarder,,,,retain forwarding target and supported query/fragment behavior; exclude from navigation,papers/n11-lower-bounds-explainer.html,
 existing,favicon-48.png,https://squaremath.org/favicon-48.png,asset-file,live,no,asset-file,,,,retain asset address or pattern; exclude from page navigation,,
 existing,favicon.svg,https://squaremath.org/favicon.svg,asset-file,live,no,asset-file,,,,retain asset address or pattern; exclude from page navigation,,
-existing,frontier.html,https://squaremath.org/frontier.html,page,live,yes,frontier,frontier,Results,Results,"The Frontier Survey; substantive bounds key and complete table; retain survey row and filter URLs",,
+existing,frontier.html,https://squaremath.org/frontier.html,page,live,yes,frontier,frontier,Results,Results,"Frontier Survey; substantive bounds key and complete table; retain survey row and filter URLs",,
 existing,index.html,https://squaremath.org/,page,live,yes,home,overview,Overview,,retain address and legacy anchors; resource summary with View All Resources link to resources.html,,
 existing,known-best-1-100-card.png,https://squaremath.org/known-best-1-100-card.png,asset-file,live,no,asset-file,,,,retain asset address or pattern; exclude from page navigation,,
 existing,known-best-1-100.pdf,https://squaremath.org/square-packings-100-20261008.pdf,copy,live,no,compatibility-copy,,,,retain published copy and canonical edition; exclude from navigation,square-packings-100-20261008.pdf,

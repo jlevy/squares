@@ -239,7 +239,7 @@ def test_navigation_remains_reachable_without_script() -> None:
             "Recent Results",
             "Results Archive",
             "Visual Atlas",
-            "The Frontier Survey",
+            "Frontier Survey",
             "Tutorials",
             "Resources",
             "Project Documentation",

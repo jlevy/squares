@@ -915,7 +915,7 @@ contributor articles use their component sheets and the same text tokens.
   The whole button opens its list.
   Its first entry leads to substantive content: Visual Atlas, Papers, or The Squares
   Project. Results, Learn and About have no category page or URL. Results contains Visual
-  Atlas (`atlas.html`), The Frontier Survey (`frontier.html`), Recent Results
+  Atlas (`atlas.html`), Frontier Survey (`frontier.html`), Recent Results
   (`recent-results.html`), Results Archive (`results.html`), Verification
   (`verification.html`), and Report a Result (`report.html`), in that order.
   About contains The Squares Project, Contributor Profiles, and Project Documentation.
@@ -1197,12 +1197,12 @@ contributor articles use their component sheets and the same text tokens.
   margin above and starts `--site-page-top` under the header.
   A page that has a title (the Frontier page, the Results page, the Papers page, the
   canonical case record) sets it in the hero, centred.
-  The Frontier page’s title is “The Frontier Survey”, the Results page’s “Results” and
-  the Explanations page’s “Explanations”; each stood over a subtitle the owner dictated
-  on 1 October (“A survey of everything known for cases $n = 1, \ldots, 324$”, “A survey
-  of all reviewed results”, “Papers and interactive explanations for specific results”)
-  and dropped on 2 October as adding little (`think-wz9d`); the page descriptions in
-  each `<head>` are their own constants and stay.
+  The Frontier page’s title is “Frontier Survey”, the Results page’s “Results” and the
+  Explanations page’s “Explanations”; each stood over a subtitle the owner dictated on 1
+  October (“A survey of everything known for cases $n = 1, \ldots, 324$”, “A survey of
+  all reviewed results”, “Papers and interactive explanations for specific results”) and
+  dropped on 2 October as adding little (`think-wz9d`); the page descriptions in each
+  `<head>` are their own constants and stay.
   Individual case pages use their own case heading; the Atlas replaces the former
   separate case-directory hero and index (**Case records**, below).
   A subtitle, where a page has one, is the sans face at 1.1 times the sans base
@@ -1257,8 +1257,8 @@ contributor articles use their component sheets and the same text tokens.
 
 - **Names.** The page at `atlas.html` and its navigation entry are **Visual Atlas**. It
   opens with all 324 packings visible, with no local section navigation.
-  **The Frontier Survey**, at `frontier.html`, is a separate Results destination with
-  the same title in its menu, heading, and breadcrumb.
+  **Frontier Survey**, at `frontier.html`, is a separate Results destination with the
+  same title in its menu, heading, and breadcrumb.
   Its complete 324-row bounds table follows a concise key to the reported/verified
   distinction, verification requirements, gap, decimals, and table controls.
   Audits and case histories belong in the case records.
@@ -2792,10 +2792,10 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   structured and a little less verbose”, the survey’s account moved into the Frontier
   page, Recent Results slimmed to the essentials and its table, and “cards that point to
   the frontier and the results pages where appropriate”.
-  That left the Frontier page’s card in a section of its own, The Frontier Survey,
-  beside a card to the recent cases (`frontier.html?recent=true`, the query the table
-  script presets a filter from), until the owner dropped the section later the same day
-  and moved the card to every case up to the page cards (`think-ec5k`); the query still
+  That left the Frontier page’s card in a section of its own, Frontier Survey, beside a
+  card to the recent cases (`frontier.html?recent=true`, the query the table script
+  presets a filter from), until the owner dropped the section later the same day and
+  moved the card to every case up to the page cards (`think-ec5k`); the query still
   works, and nothing on the homepage links it.
   `tests/test_overview.py` holds each section’s prose to one paragraph of its own where
   this applies, the cards to their pages, and the three pages to saying each thing once.
@@ -2825,7 +2825,7 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   Narrow screens retain the shared row cards, and the table is never nested or sorted
   out of its arrival order.
   Results Archive (`results.html`) holds the complete filterable table.
-  Visual Atlas (`atlas.html`) provides the graphical case directory; The Frontier Survey
+  Visual Atlas (`atlas.html`) provides the graphical case directory; Frontier Survey
   (`frontier.html`) provides the complete bounds table and its reading key.
   Verification (`verification.html`) contains verification, evidence, credit and status
   guidance and links to Project Epistemics (`epistemics.html`). The detailed article’s

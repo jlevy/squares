@@ -700,10 +700,10 @@ def test_native_frontier_readability_requires_visible_nonempty_math(
 @pytest.fixture(scope="module")
 def frontier_native_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     root = tmp_path_factory.mktemp("frontier-native-layout")
-    site_renders.write(root, "atlas.html")
+    site_renders.write(root, "frontier.html")
     server = preview_site.serve(root, 0, as_pages=True)
     try:
-        yield f"http://127.0.0.1:{server.server_port}/atlas.html"
+        yield f"http://127.0.0.1:{server.server_port}/frontier.html"
     finally:
         server.shutdown()
         server.server_close()
@@ -936,7 +936,7 @@ def test_native_frontier_diagnostic_never_replaces_the_original_verdict(
     arguments = (
         cast("Browser", Mock()),
         (271, 282),
-        "http://127.0.0.1/atlas.html",
+        "http://127.0.0.1/frontier.html",
         390,
         "dark",
     )
@@ -1286,7 +1286,7 @@ def test_frontier_native_radical_paints_hook_and_bar_and_rejects_text_font(
                     )
                     route.fulfill(response=response, body=damaged)
 
-                context.route("**/atlas.html", text_font)
+                context.route("**/frontier.html", text_font)
             page = context.new_page()
             page.emulate_media(media=media)
             page.goto(frontier_native_site, wait_until="load")

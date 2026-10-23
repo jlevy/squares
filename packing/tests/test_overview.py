@@ -613,7 +613,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
         assert (
             re.search(
                 r'<a class="site-card[^"]*" href="'
-                r'(?:atlas.html#the-frontier-survey|workbench/)"',
+                r'(?:frontier.html|atlas.html#the-frontier-survey|workbench/)"',
                 page,
             )
             is None
@@ -7311,7 +7311,7 @@ def test_results_and_atlas_expose_their_collections_before_details(
     table = article.index('id="all-results"')
     assert article.count('id="all-results"') == 1
     assert 'href="atlas.html">Visual Atlas' in article[:table]
-    assert 'href="frontier.html">The Frontier Survey' in article[:table]
+    assert 'href="frontier.html">Frontier Survey' in article[:table]
     assert table < article.index('href="verification.html">Verification')
     for fragment in (
         "verification-ladders",

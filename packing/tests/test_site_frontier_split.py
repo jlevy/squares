@@ -7,7 +7,7 @@ def test_frontier_is_a_results_destination_and_not_an_atlas_forwarder() -> None:
     assert "frontier.html" in render_overview.PAGES
     assert "frontier.html" not in dict(render_overview.MOVED_PAGES)
     links = site_navigation.navigation_links("frontier.html")
-    assert 'href="frontier.html" aria-current="page">The Frontier Survey</a>' in links
+    assert 'href="frontier.html" aria-current="page">Frontier Survey</a>' in links
     assert 'href="atlas.html"' in links
     row = next(row for row in site_urls.load_registry() if row.path == "frontier.html")
     assert (row.kind, row.status, row.canonical, row.target) == (

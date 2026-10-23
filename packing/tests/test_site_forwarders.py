@@ -145,7 +145,7 @@ def _arrives(
             if survey:
                 assert (
                     page.locator("h1#the-frontier-survey").text_content()
-                    == "The Frontier Survey"
+                    == "Frontier Survey"
                 )
                 assert page.locator('tr#n-17 a[data-case="17"]').first.get_attribute(
                     "href"

@@ -111,7 +111,7 @@ def results(browser: Any, root: Path) -> Walk:
 
 @pytest.fixture(scope="module")
 def frontier_atlas(browser: Any, root: Path) -> Walk:
-    path = site_renders.write(root, "atlas.html")["atlas.html"]
+    path = site_renders.write(root, "frontier.html")["frontier.html"]
     return walk(browser, path.as_uri(), presses=(), whole=False)
 
 
@@ -122,7 +122,7 @@ def served(root: Path) -> Iterator[str]:
         yield live.rstrip("/") + "/"
         return
     files = [
-        site_renders.page("atlas.html"),
+        site_renders.page("frontier.html"),
         *(
             render_overview.Page(
                 render_case_pages.case_url(n),
@@ -163,7 +163,7 @@ def case_records(browser: Any, served: str) -> dict[int, Walk]:
 def frontier_popover(browser: Any, served: str) -> Walk:
     """The frontier page with case 11's row pressed: its record in the case popover."""
     return walk(
-        browser, f"{served}atlas.html", presses=("#n-11 td.site-thumb img",), whole=False
+        browser, f"{served}frontier.html", presses=("#n-11 td.site-thumb img",), whole=False
     )
 
 
@@ -298,7 +298,7 @@ def test_frontier_native_math_wrong_face_is_reported(
     frontier_math_counts: tuple[int, int],
     tmp_path: Path,
 ) -> None:
-    path = site_renders.write(tmp_path, "atlas.html")["atlas.html"]
+    path = site_renders.write(tmp_path, "frontier.html")["frontier.html"]
     source = path.read_text()
     source = source.replace(
         "</head>",

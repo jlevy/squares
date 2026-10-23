@@ -2253,7 +2253,7 @@ def homepage_paper_cards() -> str:
 PAGES: tuple[tuple[str, str, str, str], ...] = (
     (
         "frontier.html",
-        "The Frontier Survey",
+        "Frontier Survey",
         "Every Case from n = 1 to 324",
         "Reported and verified bounds side by side, with their sources.",
     ),

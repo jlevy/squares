@@ -23,7 +23,7 @@ publication remain in progress.
 Use the confirmed top-level order **Overview**, **News**, **Results**, **Learn**, and
 **About**. Overview and the site name link home; News links directly to its page.
 Results, Learn, and About have dropdowns.
-Results groups Visual Atlas, The Frontier Survey, Recent Results, the Results Archive,
+Results groups Visual Atlas, Frontier Survey, Recent Results, the Results Archive,
 Verification, and Report a Result.
 Learn groups Papers, Tutorials, Videos, Workbench, Posters, and Resources.
 About groups The Squares Project, Contributor Profiles, and Project Documentation.
@@ -157,7 +157,7 @@ Site name → / [page; home]
 │   └── News/changelog entries, filters, and dated entry anchors [sections]
 ├── Atlas → atlas.html [page]
 │   ├── Graphical Atlas [section #the-atlas-of-square-packings; 324 tiles]
-│   ├── The Frontier Survey [section #the-frontier-survey; explanation]
+│   ├── Frontier Survey [section #the-frontier-survey; explanation]
 │   ├── Best Known Results [section #best-known-results; 324 table rows]
 │   └── cases/1.html … cases/324.html [family; 324 full case records]
 ├── Results → results.html [page]
@@ -273,7 +273,7 @@ Site name → / [Home; selected previews and actions]
 ├── Results [menu container]
 │   ├── Visual Atlas → atlas.html [menu; page; first Results item]
 │   │   └── cases/N.html [324 case pages]
-│   ├── The Frontier Survey → frontier.html [menu; page; 324-row bounds table]
+│   ├── Frontier Survey → frontier.html [menu; page; 324-row bounds table]
 │   ├── Recent Results → recent-results.html [menu; one complete arrival-ordered table]
 │   ├── Results Archive → results.html [menu; complete result register]
 │   │   └── result/t-NNN.html [229 record pages]
@@ -358,10 +358,10 @@ Legacy recent fragments still forward to Recent Results.
 Do not copy Atlas graphics or the 324-case bounds table onto either result register
 page.
 
-**Visual Atlas and The Frontier Survey.** Give each its own substantive Results page.
+**Visual Atlas and Frontier Survey.** Give each its own substantive Results page.
 `atlas.html` opens with all 324 packings visible; the homepage keeps its shorter
 preview. The Atlas has no Packings / About the Bounds / Best Known Bounds local
-navigation. `frontier.html` is headed **The Frontier Survey** and contains the complete
+navigation. `frontier.html` is headed **Frontier Survey** and contains the complete
 324-row bounds table with a concise key to its definitions and columns.
 Preserve the reported/verified distinction, exact verification requirements, gap and
 decimal semantics, row records, sorting, and filters.
@@ -463,7 +463,7 @@ the reader-facing parent for every named page or family.
 | `results.html` | Results Archive | Results; complete table remains at `#all-results` with query filters |
 | `result/t-NNN.html` (229) | Result identifier and title | Results → Results Archive; retain record contents and evidence links |
 | `atlas.html` | Visual Atlas | Results; all 324 packings visible by default |
-| `frontier.html` | The Frontier Survey | Results; concise bounds key and complete table |
+| `frontier.html` | Frontier Survey | Results; concise bounds key and complete table |
 | `atlas.html#the-frontier-survey`, `#the-survey`, `#best-known-results`, `#frontier-table`, `#n-N` | Historical survey links | Forward to the corresponding Frontier Survey fragment with query preserved |
 | `cases/N.html` (324) | Case n | Results → Visual Atlas; reached from either Atlas or bounds table |
 | `verification.html` | Verification | Results; full ratings, evidence, credit and status guide extracted from the archive |
@@ -827,7 +827,7 @@ The integrated build, full validation surface, and reader checks remain in Phase
   browser history, and no-script fallbacks described below.
 - [ ] Run the repository’s applicable validation tiers, review the implementation PR,
   and check the deployed pages at `squaremath.org` after publication.
-- [x] Separate The Frontier Survey from the Atlas at the owner’s request; keep both as
+- [x] Separate Frontier Survey from the Atlas at the owner’s request; keep both as
   substantive Results destinations and preserve historical incoming links.
 
 Implementation began after PR #733 merged and the owner authorized the reviewed

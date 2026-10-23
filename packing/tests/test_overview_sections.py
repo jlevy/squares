@@ -38,9 +38,9 @@ def test_canonical_atlas_targets_keep_every_tile_addressable_without_scripts() -
     fallback = grid.split("<noscript>", 1)[1].split("</noscript>", 1)[0]
     assert "[data-atlas-grid] .site-atlas-rest[hidden]{display:contents}" in fallback
     assert "[data-atlas-grid] .site-atlas-toggle-row{display:none}" in fallback
-    assert 'href="atlas.html#the-frontier-survey"' in fallback
-    assert 'href="atlas.html#the-frontier-survey"' in overview_sections.page_cards()
-    assert 'href="frontier.html"' not in fallback
+    assert 'href="frontier.html"' in fallback
+    assert 'href="frontier.html"' in overview_sections.page_cards()
+    assert 'href="atlas.html#the-frontier-survey"' not in fallback
 
 
 def test_recent_preview_contains_only_the_twelve_newest_eligible_rows() -> None:

@@ -708,7 +708,7 @@ ATLAS_META = PageMeta(
     "atlas.html",
 )
 FRONTIER_META = PageMeta(
-    "The Frontier Survey",
+    "Frontier Survey",
     FRONTIER_DESCRIPTION,
     "frontier.html",
     structured_data=(

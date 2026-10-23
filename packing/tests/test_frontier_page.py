@@ -575,7 +575,7 @@ def test_the_page_carries_the_table_script_and_its_controls(page: str, served: s
         (link.text(), link.attrs.get("href"))
         for link in navigation.find_all("a")
         if link.attrs.get("aria-current") == "page"
-    ] == [("The Frontier Survey", "frontier.html")]
+    ] == [("Frontier Survey", "frontier.html")]
 
 
 def test_the_complete_survey_has_its_own_page_and_one_case_popover(

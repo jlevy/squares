@@ -2273,7 +2273,6 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
         "downloads.html",
         "all-results.html",
         "status.html",
-        "frontier.html",
         "defects.html",
         "explainer.html",
         "n11-optimality/t-060-explainer.html",
@@ -2283,6 +2282,7 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
         *profiles,
     }
     assert {old: moved[old] for old in profiles} == profiles
+    assert "frontier.html" in render_overview.SITE_PAGES
     assert not set(moved) & set(render_overview.SITE_PAGES)
     pages = site_pages()
     requested: list[str] = []
