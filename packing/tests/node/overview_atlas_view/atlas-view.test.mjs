@@ -292,6 +292,7 @@ void test("the address preserves an explicit size, including Small on a wide-scr
   assert.equal(atlas.sizeOf("?size=small"), "small");
   assert.equal(atlas.sizeOf("?size=large"), "large");
   assert.equal(atlas.sizeOf("?size=medium"), "medium");
+  assert.equal(atlas.sizeOf("?size=xlarge"), "xlarge");
   assert.equal(atlas.sizeOf("?size=Large"), "small");
   assert.equal(atlas.sizeOf("?size=huge"), "small");
   assert.equal(atlas.sizeOf("?atlas=triangle&size=large&age=180"), "large");
@@ -420,4 +421,222 @@ void test("Global reference is the largest actual side among this instance's sho
   assert.equal(atlas.largestSide([6.1, 5.95, 6]), 6.1);
   assert.equal(atlas.largestSide([1, 10]), 10);
   assert.equal(atlas.largestSide([1, 10, 18]), 18);
+});
+
+// A triangle that follows the scroll (think-apqd) is drawn once at Large and zoomed as
+// one picture; these are the arithmetic it reads each frame. The browser tests hold the
+// page to the same behaviour as drawn.
+void test("A size's tile is the stylesheet's: whole cells of the scaled least width", () => {
+  // 1349px at 6.4rem cells and 0.5rem gaps, the dedicated Atlas on a 1440px window.
+  assert.equal(atlas.tileAt(1349, 102.4, 1.5, 8), (1349 - 7 * 8) / 8);
+  assert.equal(atlas.tileAt(1349, 102.4, 0.667, 8), (1349 - 16 * 8) / 17);
+  assert.equal(atlas.tileAt(1349, 102.4, 1, 8), (1349 - 11 * 8) / 12);
+  assert.ok(Number.isNaN(atlas.tileAt(1349, Number.NaN, 1, 8)));
+});
+
+void test("The framing keeps the middle a third along the row with its left end in view", () => {
+  // The rule itself, with its bend taken out.
+  assert.equal(atlas.followLeft(930, 600, 1 / 3, 0), 465 - 200);
+  assert.equal(atlas.followLeft(930, 1500, 1 / 3, 0), 0);
+  // Away from the edge the bend changes nothing, and near it the left end stays right of
+  // where the rule puts it, so it never leaves view.
+  assert.equal(atlas.followLeft(930, 600, 1 / 3), 465 - 200);
+  for (let width = 800; width <= 4000; width += 7) {
+    assert.ok(atlas.followLeft(930, width, 1 / 3) >= atlas.followLeft(930, width, 1 / 3, 0));
+  }
+});
+
+/**
+ * The largest jump in slope between neighbouring steps of `f` over [from, to].
+ * @param {(x: number) => number} f
+ * @param {number} from
+ * @param {number} to
+ */
+function kink(f, from, to) {
+  const steps = 4000;
+  const h = (to - from) / steps;
+  let worst = 0;
+  for (let i = 1; i < steps; i += 1) {
+    const x = from + i * h;
+    worst = Math.max(worst, Math.abs((f(x + h) - f(x)) / h - (f(x) - f(x - h)) / h));
+  }
+  return worst;
+}
+
+void test("The ramp is a straight line with rounded ends", () => {
+  assert.equal(atlas.ramp(-1), 0);
+  assert.equal(atlas.ramp(0), 0);
+  assert.equal(atlas.ramp(0.5), 0.5);
+  assert.equal(atlas.ramp(1), 1);
+  assert.equal(atlas.ramp(2), 1);
+  assert.equal(atlas.ramp(0.3, 0), 0.3);
+  // Straight through the middle: equal steps of the share give equal steps of the ramp.
+  const middle = [0.3, 0.4, 0.5, 0.6, 0.7].map((t) => atlas.ramp(t));
+  for (let i = 2; i < middle.length; i += 1) {
+    const step = (middle[i] ?? 0) - (middle[i - 1] ?? 0);
+    assert.ok(Math.abs(step - ((middle[1] ?? 0) - (middle[0] ?? 0))) < 1e-12);
+  }
+  // No slope at either end and no corner anywhere.
+  assert.ok(atlas.ramp(0.001) < 1e-6);
+  assert.ok(1 - atlas.ramp(0.999) < 1e-6);
+  assert.ok(kink((t) => atlas.ramp(t), -0.2, 1.2) < kink((t) => atlas.ramp(t, 0), -0.2, 1.2) / 50);
+  for (let t = 0; t < 1; t += 0.01) {
+    assert.ok(atlas.ramp(t + 0.01) >= atlas.ramp(t));
+  }
+});
+
+void test("The zoom shrinks the tiles by one width a pixel of scroll, from XL to the least", () => {
+  const zoom = (/** @type {number} */ scrolled) => atlas.zoomAlong(scrolled, 500, 2000, 0.3);
+  assert.equal(zoom(0), 1);
+  assert.equal(zoom(500), 1);
+  assert.ok(Math.abs(zoom(2500) - 0.3) < 1e-12);
+  assert.ok(Math.abs(zoom(9000) - 0.3) < 1e-12);
+  // Through the middle the zoom falls by the same amount for every pixel scrolled.
+  const steps = [1200, 1400, 1600, 1800].map((y) => zoom(y) - zoom(y + 100));
+  for (const step of steps) {
+    assert.ok(Math.abs(step - (steps[0] ?? 0)) < 1e-12);
+  }
+  // A zoom that never needs to start, or a least of 1, stays at XL.
+  assert.equal(atlas.zoomAlong(500, Number.POSITIVE_INFINITY, 2000, 0.3), 1);
+  assert.equal(atlas.zoomAlong(5000, 0, 2000, 1), 1);
+});
+
+void test("The first rows stand centred and the framing eases to a third", () => {
+  assert.equal(atlas.frameAt(0, 0, 900, 1 / 3), 0.5);
+  assert.equal(atlas.frameAt(-200, 0, 900, 1 / 3), 0.5);
+  assert.equal(atlas.frameAt(900, 0, 900, 1 / 3), 1 / 3);
+  assert.equal(atlas.frameAt(5000, 0, 900, 1 / 3), 1 / 3);
+  assert.ok(Math.abs(atlas.frameAt(450, 0, 900, 1 / 3) - (0.5 + 1 / 3) / 2) < 1e-12);
+  assert.ok(kink((point) => atlas.frameAt(point, 0, 900, 1 / 3), -300, 1200) < 1e-5);
+  assert.equal(atlas.frameAt(400, 0, 0, 1 / 3), 1 / 3);
+});
+
+void test("The framing bends onto the left edge without a corner", () => {
+  /** @param {number} bend */
+  const left = (bend) => (/** @type {number} */ width) => atlas.followLeft(930, width, 1 / 3, bend);
+  assert.ok(kink(left(240), 1000, 2000) < kink(left(0), 1000, 2000) / 50);
+});
+
+void test("The rows slow smoothly to a stop at the end of the triangle", () => {
+  // Carried a pixel a pixel at first, they come to rest a bend past the start of the
+  // slowing, twice the bend's scroll later, and stay there.
+  assert.equal(atlas.settle(0, 100), 0);
+  assert.equal(atlas.settle(200, 100), 100);
+  assert.equal(atlas.settle(400, 100), 100);
+  assert.equal(atlas.settle(50, 0), 50);
+  assert.ok(Math.abs(atlas.settle(1, 100) - 1) < 1e-3);
+  const carried = (/** @type {number} */ x) => atlas.settle(x, 100);
+  for (let x = 0; x < 200; x += 2) {
+    assert.ok(carried(x + 2) >= carried(x));
+  }
+  // Its speed falls from one to none without a corner.
+  const joined = (/** @type {number} */ x) => (x < 0 ? x : carried(x));
+  assert.ok(kink(joined, -100, 300) < 1e-3);
+});
+
+void test("The journey reads the point at the focus line from the pinned scroll", () => {
+  const ys = [0, 10, 30, 60];
+  const us = [500, 520, 540, 560];
+  assert.equal(atlas.journey(ys, us, -5), 500);
+  assert.equal(atlas.journey(ys, us, 5), 510);
+  assert.equal(atlas.journey(ys, us, 20), 530);
+  assert.equal(atlas.journey(ys, us, 45), 550);
+  assert.equal(atlas.journey(ys, us, 99), 560);
+  assert.equal(atlas.journey([], [], 5), 0);
+});
+
+void test("Row by row, the spline passes through every row and never overshoots", () => {
+  // Row spans grow by two tiles a row, with the grid's extra space from the third.
+  const spans = [100, 300, 560, 770, 980, 1190];
+  for (let index = 0; index < spans.length - 1; index += 1) {
+    assert.equal(atlas.curve(spans, index, 0), spans[index]);
+    assert.equal(atlas.curve(spans, index, 1), spans[index + 1]);
+    let prior = atlas.curve(spans, index, 0);
+    for (let step = 1; step <= 20; step += 1) {
+      const value = atlas.curve(spans, index, step / 20);
+      assert.ok(value >= prior - 1e-9, `row ${index} step ${step}`);
+      prior = value;
+    }
+  }
+  // Its slope runs on across each row's start rather than turning there.
+  const at = (/** @type {number} */ x) => atlas.curve(spans, Math.floor(x), x - Math.floor(x));
+  const slope = (/** @type {number} */ x) => (at(x + 1e-6) - at(x - 1e-6)) / 2e-6;
+  for (const row of [2, 3, 4]) {
+    assert.ok(Math.abs(slope(row - 1e-4) - slope(row + 1e-4)) < 0.5, `row ${row}`);
+  }
+});
+
+void test("A line falls on a row and a share of the way to the next", () => {
+  const tops = [0, 100, 200];
+  assert.deepEqual({ ...atlas.along(tops, -10) }, { index: 0, through: 0 });
+  assert.deepEqual({ ...atlas.along(tops, 50) }, { index: 0, through: 0.5 });
+  assert.deepEqual({ ...atlas.along(tops, 100) }, { index: 1, through: 0 });
+  assert.deepEqual({ ...atlas.along(tops, 250) }, { index: 2, through: 0 });
+  assert.deepEqual({ ...atlas.along([], 50) }, { index: 0, through: 0 });
+  assert.equal(atlas.between(10, 20, 0.25), 12.5);
+});
+
+void test("The tabs show the size whose tile is nearest the zoom, by ratio", () => {
+  const tiles = { small: 72, medium: 105, large: 161, xlarge: 263 };
+  assert.equal(atlas.nearestSize(72, tiles), "small");
+  assert.equal(atlas.nearestSize(80, tiles), "small");
+  assert.equal(atlas.nearestSize(95, tiles), "medium");
+  assert.equal(atlas.nearestSize(140, tiles), "large");
+  assert.equal(atlas.nearestSize(230, tiles), "xlarge");
+});
+
+void test("A swipe up or down pans nothing; a diagonal pans with the hand", () => {
+  // Events 16ms apart, as a trackpad sends them. A swipe down wobbles a little sideways
+  // as it starts and as it goes on; none of it pans.
+  const swipe = atlas.sideways(16, 0.25, 150);
+  let time = 0;
+  /** @param {number} x @param {number} y */
+  const move = (x, y) => {
+    time += 16;
+    return swipe(x, y, time);
+  };
+  const wobble = [
+    [2, 1],
+    [-1, 3],
+    [3, 6],
+    [2, 12],
+    ...Array.from({ length: 60 }, (_, at) => [at % 2 === 0 ? 3 : -1, 20]),
+  ].map(([x, y]) => move(x ?? 0, y ?? 0));
+  assert.ok(wobble.every((pan) => pan === 0));
+  // Turned diagonal in the same swipe, it pans: the recent excess over the wobble at
+  // first, then each movement across one for one, reversals included.
+  const diagonal = Array.from({ length: 10 }, () => move(-20, 20));
+  const first = diagonal.findIndex((pan) => pan !== 0);
+  assert.ok(first > 0 && first < 6);
+  assert.ok((diagonal[first] ?? 0) < 0 && (diagonal[first] ?? 0) > -20);
+  assert.deepEqual(
+    diagonal.slice(first + 1),
+    diagonal.slice(first + 1).map(() => -20),
+  );
+  assert.equal(move(8, 0), 8);
+  // Straightened up again, it stops panning once the recent travel is mostly vertical.
+  const straight = Array.from({ length: 30 }, () => move(2, 20));
+  assert.equal(straight.at(-1), 0);
+  // A sideways turn of the wheel with no vertical passes past the slack.
+  const tilt = atlas.sideways(16, 0.25, 150);
+  assert.equal(tilt(-40, 0, 0), -24);
+  assert.equal(tilt(-40, 0, 16), -40);
+});
+
+void test("The pan sets off from rest and meets its path with no lag and no corner", () => {
+  assert.equal(atlas.launch(-1), 0);
+  assert.equal(atlas.launch(0), 0);
+  assert.equal(atlas.launch(1), 1);
+  assert.equal(atlas.launch(3), 3);
+  const step = 1e-4;
+  /** @param {number} t */
+  const speed = (t) => (atlas.launch(t + step) - atlas.launch(t - step)) / (2 * step);
+  // No speed and no acceleration at the start; the line's speed, and no bend, at the end.
+  assert.ok(speed(step) < 1e-6);
+  assert.ok(Math.abs(speed(1) - 1) < 1e-3);
+  assert.ok(kink(atlas.launch, 0.5, 1.5) < 1e-3);
+  // It never goes back, and makes up the slow start at less than one and a half times
+  // the line's speed.
+  const speeds = Array.from({ length: 101 }, (_, at) => speed(at / 100));
+  assert.ok(speeds.every((value) => value >= 0 && value < 1.4));
 });

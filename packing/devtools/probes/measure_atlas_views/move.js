@@ -1,5 +1,5 @@
 // One change of the atlas's layout, timed. `press` is the selector of the control that
-// makes it, a view tab or the expander. The control is pressed once two frames have
+// makes it, a view or size tab. The control is pressed once two frames have
 // passed, and the report is made once every tile and container move has finished and two frames
 // more have passed. It gives: how long the press's own handler ran, which is the whole
 // of the script's work (both reads of every box, the change and starting the moves);

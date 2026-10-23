@@ -352,7 +352,7 @@ def test_the_hover_contract_reads_selectors_as_written() -> None:
 def frontier(tmp_path_factory: pytest.TempPathFactory) -> str:
     """The frontier page, written with its assets where a browser can open it."""
     root = tmp_path_factory.mktemp("hover-motion")
-    return site_renders.write(root, "atlas.html")["atlas.html"].as_uri()
+    return site_renders.write(root, "frontier.html")["frontier.html"].as_uri()
 
 
 @pytest.fixture(scope="module")
