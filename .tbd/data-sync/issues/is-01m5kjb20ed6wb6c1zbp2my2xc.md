@@ -5,7 +5,7 @@ title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666,
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: c-triage-1024-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-10-23T06:21:28.780Z
+updated_at: 2026-10-23T06:38:15.452Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -29,3 +29,5 @@ Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: t
 - Code: LIMIT = 1024 in beyond_horizon_replay.py:174 (uses at 335, 1126-1137, 1502, 1569, 1668, 1690, 1900, 1953, 2033, 2055, 2998) and couzo_715_replay.py:113; Goebel module only to 1073-1100; hosted reads via sqpack.hosted_data.require; intake_ledger summary README; gate cost re-measure; frontier/README rule text; no site page lists rows (a table above 1024 would be ~1 MB).
 - PR plan: PR-0 #742; PR-1 code (W7); PR-2 records for #666/#719/#715/Fang/Barnett (~3.5 CPU-h); PR-3 #732's 4,319 rows with the hosted manifest (~32 CPU-h under cap, or 157 on the owner's word); PR-4 held rows after D2/D6/Goebel answers.
 - Owner questions: D2, D5, D6, #613/think-8krd (Goebel), N1 (Kingbird beyond 324), N2 (#732 controls compute), N3 (hosting form), N4 (one source-coverage file or split), N5 (site shows rows above 1024?), N6 (pin #732 at 17cc220 or 7b6366f).
+
+2026-10-23 coord-intake-1023: OWNER DECISIONS (in conversation, 23 October): N2 #732's compute stays UNDER the 40 CPU-h cap: all positives on both routes plus six controls on a stratified 10% of #732's files (~36 CPU-h with the rest); N3 hosting as nine tar.xz shards (~128 MB) that the owner publishes as hosted data (agents stage the manifest only). Goebel is the baseline (think-8krd: yes); recipes become rows via a maintained checker (think-f2io D2: yes). Still open: D3, D5, D6, N1, N4, N5, N6.

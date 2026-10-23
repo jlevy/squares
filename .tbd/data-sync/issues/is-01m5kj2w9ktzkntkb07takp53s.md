@@ -5,7 +5,7 @@ title: "Home page atlas: show all 324 with no expander, and a viewport-aware def
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: c-atlas-1023
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:00:07.347Z
-updated_at: 2026-10-23T05:52:12.105Z
+updated_at: 2026-10-23T06:21:50.184Z
 started_at: 2026-10-23T05:00:08.212Z
 ---
 
@@ -37,3 +37,7 @@ Done on the branch:
 
 Open for the owner: "ideally half the bottom row" on a phone is not reached; it needs
 tiles of about 17 px at 390 px (a fourth, fitted size). Not implemented.
+
+Draft PR: https://github.com/jlevy/squares/pull/744 (labels S1, project). Head 721630e50
+after a test fix; main 44df28b07 (#743) merged in at c1de8b9d5. Hosted run 39909088040
+at edeee25fd failed only shard A on two test assertions (aria-hidden matched), fixed.
