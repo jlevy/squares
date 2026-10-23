@@ -694,6 +694,15 @@ PUBLICATION_STATUS = ""
 #: Both retained 1-100 and 1-324 graphics, their PDFs and PNGs share this history.
 INFOGRAPHIC_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.0",
+        first_published="October 23, 2026",
+        result_scope=(
+            "Draw every atlas tile in its canonical pose by flip regularization "
+            "(regularization policy, section 13): the heaviest quadrant lower right, "
+            "keeping the published pose of 252 counts and turning 72."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.6.4",
         first_published="October 20, 2026",
         result_scope=(
@@ -1413,6 +1422,17 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="infographics",
+        previous_version="v0.6.4",
+        version="v0.7.0",
+        impact="minor",
+        reason=(
+            "Draw every atlas tile in its canonical pose by flip regularization "
+            "(regularization policy, section 13): the heaviest quadrant lower right, "
+            "keeping the published pose of 252 counts and turning 72."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:square-packing-methods-survey",
         previous_version="v0.2.6",
