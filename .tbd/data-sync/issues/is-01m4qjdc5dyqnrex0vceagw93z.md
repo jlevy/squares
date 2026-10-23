@@ -3,9 +3,9 @@ type: is
 id: is-01m4qjdc5dyqnrex0vceagw93z
 title: "Import dostashev: s(175) <= 13.764174317487, s(232) <= 15.764174317487, s(264) <= 16.774735132388 (#528)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:07:07.181Z
-updated_at: 2026-10-12T10:59:58.402Z
+updated_at: 2026-10-23T06:12:26.229Z
 started_at: 2026-10-12T08:07:43.405Z
+closed_at: 2026-10-23T06:12:26.229Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-b-1023, think-ioqe), checked by coord-intake-1023: STALE-CLAIM + DONE. #528 closed 2026-10-14T12:03Z with its final reply (issuecomment-6167890395). T-158 (registered as T-154, renumbered) is V3/C3 confirmed on main via c70872704 / #598 (e1f14898d). check_requests: #528 closed, 4 of 4 settled."
+resolution: null
+duplicate_of: null
 ---
 https://github.com/jlevy/squares/issues/528 (2026-10-12T04:14:57Z). dostashev/square-packing at a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f, records/n0175.*, n0232.*, n0264.*: three compositions with a new 38-square (h + 2) x h rectangle. Also restates #501's c3d17ab sides at the same commit. Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports.
 

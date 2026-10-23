@@ -5,7 +5,7 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-23T05:04:13.227Z
+updated_at: 2026-10-23T06:38:14.309Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -101,3 +101,5 @@ The other D2/D6 holds fit as written:
 Either D2 or D6 answered "no rows" therefore means rerunning the history walk and writing those rows (with their replay), not only dropping the holds.
 
 2026-10-23 coord-intake-1023: OWNER DECISION on D1 (in conversation, 23 October): YES, track counts above 1024 with no ceiling; rows recorded as reported, as below 1024. D4 follows as recommended (a hosted-data manifest, not Git blobs; OR-18) unless the owner says otherwise. Still open: D2, D3, D5, D6. Covers #666 (eight counts), #715, #719 (eight rows 1061-1568, think-9vr8) and #732 (5,078 files). Implementation owed: new bead(s) under think-ezt8.
+
+2026-10-23 coord-intake-1023: OWNER DECISION on D2 (in conversation, 23 October): YES, recipe-only (L-border/tiling) rows become rows, decided exactly from the recipe by a checker this project maintains; the rule goes into the frontier README. Needs a recipe-checker PR (W7) before any recipe row is recorded. Still open: D3, D5, D6.

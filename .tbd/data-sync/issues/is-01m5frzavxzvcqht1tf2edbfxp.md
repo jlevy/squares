@@ -3,9 +3,9 @@ type: is
 id: is-01m5frzavxzvcqht1tf2edbfxp
 title: "Import Evan Daniel: solved views below the record at 204, 227, 229 and 260 (no issue)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 23
+version: 24
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -20,8 +20,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:43:33.500Z
-updated_at: 2026-10-22T04:28:19.181Z
+updated_at: 2026-10-23T05:32:48.772Z
 started_at: 2026-10-21T17:43:35.847Z
+closed_at: 2026-10-23T05:32:48.772Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-c-1023, think-lrg9), checked by coord-intake-1023: DONE. #718 merged 2026-10-22T04:28Z: T-225 V3/C3; the three questions to Daniel moved to think-e4ys; no issue, no deferral"
+resolution: null
+duplicate_of: null
 ---
 Stage 0 owner for four certificates Evan Daniel published, with no issue, in evand/square-packing at 0075967bace18a3deabcc0baa64c2fb294fc80a0 (committed 2026-10-20T02:36:12Z, "Site up to date: records at 183, 229, 308 (ours) and 204, 227, 260 (Couzo), certified and regularized"): search/regularize/lists/certs/n-NNN.cert.gz, each with n-NNN.json.gz beside it. Found by the read-only triage of the 21 October sweep (c-triage-sweep-1021b). Nothing has been retained, replayed or registered.
 

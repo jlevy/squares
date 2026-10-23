@@ -3,9 +3,9 @@ type: is
 id: is-01m4pv16sta8jkhsfkk7sgc46n
 title: Codify replies on every intake issue, posted after merge, and read two watched repositories (2026-10-12)
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T01:18:31.226Z
-updated_at: 2026-10-12T01:34:14.615Z
+updated_at: 2026-10-23T06:12:24.133Z
 started_at: 2026-10-12T01:18:35.823Z
+closed_at: 2026-10-23T06:12:24.133Z
+close_reason: 'Tracker audit 2026-10-23 (c-audit-b-1023, think-ioqe), checked by coord-intake-1023: STALE-CLAIM + DONE. Reply rule in packing/campaign/result-import.md ("standing instruction of 2026-10-11", 3 hits) and intake-watch.yaml reads 52cf1cc7ba00 and f30cc2cf345a (cdf608574) on main via #563 merge d22861a18 (2026-10-14). Its gap went to think-qh9a.'
+resolution: null
+duplicate_of: null
 ---
 Owner's rule of 2026-10-11/12: every issue a pass touches gets a comment, and every later change of state a follow-up, until it is closed with a final comment; comments are posted after the PR merges, linking only to main, after validating main and the deployed site; agents post them as part of the pass. Codify in packing/campaign/result-import.md (Running an Intake Pass, The Prompt, Stage 1 step 5, Stage 7, After the Merge) and epistemics.md#import-integration-and-reply. Also record two watched-repository reads in packing/campaign/intake-watch.yaml: RobertBarnettProjects/square-packing-research 52cf1cc7ba00 and wand125/square-packing f30cc2cf345a (the latter naming a new evaluation bead).
 

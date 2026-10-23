@@ -5,13 +5,13 @@ title: Beyond-horizon rows above Göbel's classical constructions
 kind: task
 status: open
 priority: 2
-version: 5
+version: 6
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-15T03:46:28.067Z
-updated_at: 2026-10-23T00:44:57.806Z
+updated_at: 2026-10-23T06:38:13.146Z
 ---
 **Owner question:** do Frits Göbel's classical constructions count as earlier reports, and so as the baseline beyond n = 324, so that a beyond-horizon row above one is not recorded? The record holds no Göbel construction beyond the corpus; its standing side there is the beyond-horizon row or the grid. Until the owner answers, draft register plans mark the affected rows `undecided-goebel` rather than recorded.
 
@@ -69,3 +69,5 @@ those rows be marked?
 Whether a classical construction counts as an earlier report is #613's question, so `HISTORY_HELD` names think-8krd beside think-f2io on both holds. A "yes" to D2 or D6 alone would credit the 23aff0c commit with Göbel's and Friedman's constructions, with no certificate file to replay.
 
 **An answer that leaves a hold out reruns the walk.** 66 history verdicts rest only on Göbel holds (`HISTORY_RESTING`). A rerun without the Göbel holds would record each of those steps, but every one of them is itself above Göbel's construction, so this decision holds it again (`refusal_flips`). If 23aff0c's classical constructions are left out under #613, the D2/D6 consequences recorded on think-f2io apply: 56 new records, which need a rerun of the history walk and new rows.
+
+2026-10-23 coord-intake-1023: OWNER DECISION (in conversation, 23 October): YES, Goebel's classical constructions count as earlier reports beyond n = 324 (the baseline): a rational row above Goebel's exact side is not recorded. Applies below 1024 (331, 369, 376 holds) and above (467 publications per the think-llit triage). Implementation: the walks' Goebel holds become 'not recorded' verdicts; rerun with think-temp's sub-print change after #742.

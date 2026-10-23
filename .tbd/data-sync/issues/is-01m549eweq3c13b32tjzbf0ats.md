@@ -3,10 +3,10 @@ type: is
 id: is-01m549eweq3c13b32tjzbf0ats
 title: Intake pass 2026-10-17
 kind: epic
-status: in_progress
+status: open
 priority: 1
-version: 10
-delegate: user-eb-sweep-1017
+version: 11
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-17T06:40:47.062Z
-updated_at: 2026-10-17T07:44:29.695Z
+updated_at: 2026-10-23T06:17:01.899Z
 started_at: 2026-10-17T06:40:52.444Z
 ---
 Lane W of the 17 October afternoon pass (acting name user-eb-sweep-1017), coordinator brief laneW.md: stage 0 sweep (make intake) and stage 1 triage of every new item since the 16 October pass (epic think-mdnn), plus a regularization audit (owner: 'make sure things are regularized appropriately'; 'We should always be adopting the smallest packing and then regularizing it.'). Branch claude/intake-2026-10-17-sweep from origin/main 804eff369 (#660 merged). Draft PR for stages 0-1 only (recorded reads and watch updates), labels intake + S1; no imports, no replays or regularization runs in this lane.

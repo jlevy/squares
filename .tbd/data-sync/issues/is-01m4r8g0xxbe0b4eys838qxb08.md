@@ -3,9 +3,9 @@ type: is
 id: is-01m4r8g0xxbe0b4eys838qxb08
 title: "Import Evan Daniel: s(154) <= 12922566401934059503377267965457/10^30, 5.04e-4 below T-136 (#552)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T14:33:02.652Z
-updated_at: 2026-10-12T15:56:03.561Z
+updated_at: 2026-10-23T06:12:30.173Z
 started_at: 2026-10-12T14:33:16.971Z
+closed_at: 2026-10-23T06:12:30.173Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-b-1023, think-ioqe), checked by coord-intake-1023: STALE-CLAIM + DONE. #552 closed 2026-10-14 with its final reply 6167890879. T-160 (the bead's T-156, renumbered) is V3/C3 confirmed (34e62125f via #598). check_requests: closed, 3 of 3."
+resolution: null
+duplicate_of: null
 ---
 Evan Daniel reports s(154) <= S' = 12922566401934059503377267965457/10^30 = 12.922566401934059503377267965457 in evand/square-packing 597e660c9a078a552991ab893cda3ab693cb5ac8, search/packer/candidates/tt_n154.cert (format of #375/#399/#465/#489), 5.04e-4 below T-136 (SQUISH, #481), the house at 154 on layer 6. Stages 1, 2 and the stage 4 replay of the 2026-10-12 intake continuation (think-mq0k, #544).
 

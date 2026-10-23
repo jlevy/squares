@@ -3,15 +3,19 @@ type: is
 id: is-01m4qn8khb0w5yrcy125g7mps0
 title: "Read wand125/square-packing d4a1981 (sqverify_continuous v4, --resume), stream-verify and evand PR 7: nothing to import (no issue)"
 kind: task
-status: open
+status: closed
 priority: 3
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-12T08:56:56.618Z
-updated_at: 2026-10-12T08:56:56.618Z
+updated_at: 2026-10-23T06:12:27.974Z
+closed_at: 2026-10-23T06:12:27.973Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-b-1023, think-ioqe), checked by coord-intake-1023: DONE. intake-watch.yaml on main: wand125 read_through d4a19815e2b0 (03169b83d via #598, e1f14898d). No deferral names it. The tool's evaluation stays with think-xzob."
+resolution: null
+duplicate_of: null
 ---
 Watched-repository read for lane W of the 2026-10-12 intake (think-mq0k); nothing on GitHub asked. Not an issue.
 

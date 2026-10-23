@@ -3,17 +3,17 @@ type: is
 id: is-01m4wcj1zq2y6k7xq9f12838nj
 title: "Import Benjamin Greff (bengreff): s(76) = 9 by a mixed cover (#594)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 6
-delegate: claude-code@vm
+version: 7
+delegate: null
 labels:
   - result-import
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-14T05:01:01.303Z
-updated_at: 2026-10-15T03:01:31.276Z
+updated_at: 2026-10-23T06:16:15.118Z
 started_at: 2026-10-14T05:01:05.888Z
 ---
 Stage 1 triage of jlevy/squares#594 (bengreff, Benjamin Greff, opened 2026-10-14T02:06:46Z, labelled intake, no comments when read at 04:44Z): "Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)". "External certificate" is wand125's title template of #279/#280: the author's own certificate in his own repository, not a citation of another's published result.

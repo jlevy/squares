@@ -3,9 +3,9 @@ type: is
 id: is-01m4wbvvrcxwxe5wtg7414fvm6
 title: "Import BuddenPing: s(105) <= 10.7893037837481588309268366600396176597363 (#568)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T04:48:54.028Z
-updated_at: 2026-10-14T17:59:49.862Z
+updated_at: 2026-10-23T06:12:36.736Z
 started_at: 2026-10-14T04:49:01.089Z
+closed_at: 2026-10-23T06:12:36.736Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-b-1023, think-ioqe), checked by coord-intake-1023: STALE-CLAIM + DONE. #568 closed 2026-10-15. T-170 is V3/C3 confirmed."
+resolution: null
+duplicate_of: null
 ---
 https://github.com/jlevy/squares/issues/568 (BuddenPing, 2026-10-12T22:57Z). BuddenPing/square-packing-certificates 260aaf50230483654802790589c2dfce73237604, n105.cert.json and pingyou-n105-rational.yaml; an exact contact refinement of Francisco Couzo's n105 (T-130, the case); credit PingYou Ltd. Intake lane pingyou of 2026-10-14.
 

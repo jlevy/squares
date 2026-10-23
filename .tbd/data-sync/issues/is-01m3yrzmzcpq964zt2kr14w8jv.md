@@ -3,9 +3,9 @@ type: is
 id: is-01m3yrzmzcpq964zt2kr14w8jv
 title: Answer every result report
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 15
+version: 16
 labels:
   - result-import
 dependencies: []
@@ -25,7 +25,11 @@ child_order_hints:
   - is-01m3ys1fz0a6qc5j6vny00wb2p
   - is-01m59f4m860pwsm77qknrnqtvj
 created_at: 2026-10-02T17:00:56.683Z
-updated_at: 2026-10-19T06:56:14.597Z
+updated_at: 2026-10-23T06:12:09.594Z
+closed_at: 2026-10-23T06:12:09.593Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-a-1023, think-s4ld), checked by coord-intake-1023: SUPERSEDED/DUPLICATE. all children closed (tbd list); check_requests --report on main derives reply-due/closeable per issue"
+resolution: null
+duplicate_of: null
 ---
 One bead per open result report on jlevy/squares (and think-75yv for the closed #170), each naming the replies due and the close condition. The record is packing/campaign/result-requests.yaml; `python -m devtools.check_requests --report` from packing/ derives what each issue is owed from it and the register.
 

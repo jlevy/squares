@@ -5,7 +5,7 @@ title: "Polkovskyi's unclaimed n204.cert (12fc4667) is 1.48e-11 below T-229 and 
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: c-lane-719-records-1023
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-22T14:11:56.015Z
-updated_at: 2026-10-23T04:56:11.671Z
+updated_at: 2026-10-23T06:08:47.303Z
 started_at: 2026-10-23T04:56:11.671Z
 ---
 Found by the stage 4 lane c-lane-stage4-1022 (22 October 2026) while regularizing T-229 after adoption.
@@ -45,3 +45,10 @@ blocked_on: think-xyhn
 blocked_on: none
 
 2026-10-23 04:05Z coord-intake-1021b: Mishapolk answered on #719 (issuecomment-6355484781, 01:52:40Z): (1) sqpack.verify was imported as a module in a batch harness (not the CLI); Daniel verify_cert.py and verify_cert2.py were the copies in Couzo 6b7391d; (2) the 204 SQP solve started from Couzo #678 n204.cert in Couzo frame, not from T-225 (consistent with the review: pairs with Couzo frame without the half turn). Record changes owed in the next #719 records PR (with n204-lower): T-229 204 lineage/credit drops Evan Daniel regularization as an antecedent at 204 and the stale sentence that the source states no lineage; read_through to 01:52:40Z; a follow-up reply on #719 saying what changed. #742 (rows PR) left this comment unread.
+
+2026-10-23 c-lane-719-records-1023 (phase 1, branch claude/intake-2026-10-23, pushed at 991b2ebc5).
+- f308d3f5a: packet mishapolk-n204-2026-10-22 (certificates/n204.cert at 12fc466 retained under the author's written grant, issuecomment-6350348588 answer 5; 17cc220's tree does not hold the file, so custody rests on the comment). check-claims at main 31584003e: 14809457954896291297/10^30 below T-229. certify: positive passes both maintained routes, both controls refused, 124,236 pair decisions, 16.11 route CPU s; walls exactly 5e-21, pairs 9.99999999999999e-21. receipts/sharp_controls.py: six sharp controls (far wall, least-gap pair, near wall; contact accepted at margin 0, 1e-30 past refused at -1e-30) on both routes. measure/identity.py: one to one with T-229 under the identity, largest move 2.02e-11. The 719 ledger re-gathered with #719's 204 claim at 1851c2c's least side (n204.cert; #722 review A2; coordinator's option (a)); walk still records #719 at 204.
+- 15ecb0a68: merge of main 44df28b07 (#743).
+- 991b2ebc5: T-231 registered at V0/C0 (draft S2), regularization of T-229, credit as T-229 at 204; T-229's 204 lineage corrected from issuecomment-6355484781 (answer 2: of T-223, Daniel no antecedent; answer 1 recorded); case n-204 refreshed; #719 read_through 01:52:40Z and n204-lower -> T-231; #734 read_through 02:17:06Z.
+- Waiting: the stage 4 review c-review-t231-math (think-tetq); then V3/C3, adoption at 204 and regularization (priced 3 to 5 CPU-minutes from think-4h23's receipts, far under the 2 CPU-hour stop).
+blocked_on: think-tetq

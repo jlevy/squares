@@ -3,9 +3,9 @@ type: is
 id: is-01m4xmr0fhhynbfzj5vj0sh358
 title: "Import Mishapolk 70a033f (no issue): 12 KKT refinements below best now at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303, 304; 207 undecided"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 delegate: claude-code@vm
 labels:
   - result-import
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T16:43:19.409Z
-updated_at: 2026-10-16T12:39:39.268Z
+updated_at: 2026-10-23T06:12:46.638Z
 started_at: 2026-10-14T23:04:32.077Z
+closed_at: 2026-10-23T06:12:46.637Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-b-1023, think-ioqe), checked by coord-intake-1023: STALE-CLAIM + DONE. T-186 (12 KKT refinements of 70a033f) is V3/C3 confirmed on main (#593 rows). #593 follow-up 2026-10-20 says it is merged via #657 and adopted 16 Oct. The pending selections belonged to think-r3cl, now closed. No deferral names it."
+resolution: null
+duplicate_of: null
 ---
 Mishapolk/square-packing-records 70a033f (2026-10-14T16:11:31Z), 7 commits past #593's pin 46f638c. No issue reports it. Commit message: 'Refine 14 contested certificates to ultra-precision KKT endpoints'. census.json credits 14 counts to Mykhailo Polkovskyi and 10 re-cut counts to 'Antigravity'.
 

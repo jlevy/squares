@@ -3,10 +3,10 @@ type: is
 id: is-01m4padgs7fh6ze3tbh57d5ar1
 title: "Intake pass 2026-10-11: six new upper-bound reports, two n17 issues, four unread comments, six watched repositories"
 kind: epic
-status: in_progress
+status: open
 priority: 1
-version: 100
-delegate: claude-code@vm
+version: 101
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -110,7 +110,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:08.870Z
-updated_at: 2026-10-21T04:37:29.660Z
+updated_at: 2026-10-23T06:15:45.582Z
 started_at: 2026-10-11T20:28:23.012Z
 ---
 Intake pass of 2026-10-11 (owner's request in session 01UXZs37jGv5vqVGADH7Gkn8), on branch claude/wizardly-meitner-wqn4x3. Sweep: 18 items needing an owner: issues #494, #495, #500, #501, #503, #504, #505, #506 not in result-requests.yaml; unread comments #419 (evand 6104596297), #413 (wand125 6104576642), #485 (Guzhou0806 6106761997, wand125 6111583905); watched repositories evand 675a5ea, franciscouzo 337078c, Guzhou0806 6a65957, itsnaka 56fa71f, ry-xu 9535d65, wand125 04fbef0. Kingbird: 0 counts moved. Owner priority: quick-to-validate new best results first, merged; longer validation runs recorded with their price and status.
