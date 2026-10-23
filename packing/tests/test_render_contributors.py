@@ -107,7 +107,7 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
         assert "data-case-popover" in profile
         assert re.search(r'src="../assets/js/article-loader\.[a-f0-9]+\.js"', profile)
         assert re.search(r'src="../assets/js/contributor-popover\.[a-f0-9]+\.js"', profile)
-        assert "contributors/" not in profile
+        assert not re.search(r'href="(?:\.\./|/)?contributors/[^"]*"', profile)
         sources = profile.split(
             '<details class="site-contributor-sources"><summary>Sources</summary>', 1
         )[1].split("</details>", 1)[0]

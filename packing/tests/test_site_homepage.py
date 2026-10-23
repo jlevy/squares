@@ -756,17 +756,14 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
 
 @pytest.fixture(scope="module")
 def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
-    """Use the two real Results actions without repeating Atlas interactions."""
+    """Follow the one complete Results action by keyboard and pointer."""
     sync_api = site_browser.api()
     readings = {}
     live = os.environ.get("SQPACK_SITE_PREVIEW_URL")
     origin = f"{live.rstrip('/')}/" if live else ORIGIN
     files = None
     if not live:
-        documents = {
-            name: site_renders.html(name)
-            for name in ("index.html", "recent-results.html", "results.html")
-        }
+        documents = {name: site_renders.html(name) for name in ("index.html", "results.html")}
         files = {
             **{name: html.encode() for name, html in documents.items()},
             **{
@@ -784,22 +781,23 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
         try:
             page.goto(f"{origin}index.html?s=4", wait_until="load")
             initial = page.evaluate(STATE)
-            recent = page.get_by_role(
-                "link", name=re.compile("^View Recent Results$", re.IGNORECASE)
+            all_results = page.locator("a[data-all-results]")
+            sync_api.expect(all_results).to_have_text(
+                re.compile("^View All Results$", re.IGNORECASE)
             )
-            bounds = recent.bounding_box()
+            bounds = all_results.bounding_box()
             assert bounds is not None
             assert bounds["x"] >= 0
             assert bounds["x"] + bounds["width"] <= width
-            recent.focus()
+            all_results.focus()
             with page.expect_navigation(wait_until="load"):
                 page.keyboard.press("Enter")
-            destination = f"{origin}recent-results.html"
+            destination = f"{origin}results.html?s=4#all-results"
             sync_api.expect(page).to_have_url(destination)
             sync_api.expect(
-                page.get_by_role("heading", name="Recent Results", exact=True)
+                page.get_by_role("heading", name="All Results", exact=True)
             ).to_be_visible()
-            sync_api.expect(page.locator("div.site-rung-legend[role=note]")).to_have_count(0)
+            sync_api.expect(page.locator("#all-results")).to_be_in_viewport()
             keyboard_destination = page.url
             page.goto(f"{origin}index.html?s=4", wait_until="load")
             all_results = page.locator("a[data-all-results]")
@@ -809,7 +807,7 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
             assert bounds["x"] + bounds["width"] <= width
             with page.expect_navigation(wait_until="load"):
                 all_results.click()
-            sync_api.expect(page).to_have_url(f"{origin}results.html?s=4#all-results")
+            sync_api.expect(page).to_have_url(destination)
             sync_api.expect(page.locator("#all-results")).to_be_in_viewport()
             readings[width] = {
                 "initial": initial,
@@ -823,7 +821,7 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
 
 
 @pytest.mark.parametrize("width", NAV_WIDTHS)
-def test_results_actions_reach_recent_results_and_the_complete_archive(
+def test_results_action_reaches_complete_archive_by_keyboard_and_pointer(
     results_navigation_seen: dict[int, dict[str, Any]], width: int
 ) -> None:
     reading = results_navigation_seen[width]
