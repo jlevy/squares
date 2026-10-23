@@ -2185,8 +2185,13 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # (T-229), with no new name: PingYou Ltd's PR 574 certificates and Daniel's regularized
     # lists still hold other counts, and Polkovskyi's name is already on the poster. The
     # same pass draws 303 from one more, Evan Daniel's issue 728 packet (T-230), with no new
-    # name: Mishapolk's KKT refinements still hold other counts.
-    assert len(expected_sources) == 27
+    # name: Mishapolk's KKT refinements still hold other counts. The adoption of the nine
+    # algebraic houses the same day (think-ot5c) draws 102, 123, 258, 259, 295 and 302 from
+    # one more, Evan Daniel's issue 639 packet (T-193), and 70, 153 and 207 from PingYou
+    # Ltd's PR 574 certificates, already on the poster. It no longer draws from Mishapolk's
+    # 12 October certificates (153, 207) or SQUISH's third request (259), which held nothing
+    # else: one source fewer, and no new name.
+    assert len(expected_sources) == 26
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2479,6 +2484,9 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
         66,
         67,
         69,
+        # Degree 5 since the adoption of 23 October 2026 took 70 to PR #574's algebraic
+        # certificate (T-174, think-ot5c).
+        70,
         82,
         83,
         85,
