@@ -3,14 +3,18 @@ type: is
 id: is-01m5m1jvcxn347phdnhd2sacqr
 title: "Land #750 after T-231 to T-233: merge main, cut the explainer, re-pin"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 2
+version: 3
+delegate: c-land-750-1023
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-23T09:30:59.357Z
-updated_at: 2026-10-23T09:33:20.553Z
+updated_at: 2026-10-23T22:22:18.509Z
+started_at: 2026-10-23T22:22:18.508Z
 ---
 PR #750 (branch claude/intake-2026-10-23-lean-sources) registers T-234 to T-236 and cannot merge before T-231 (#753, for issue #719) and T-232, T-233 (#745) are on main: `check_results` requires contiguous register ids, and four register tests and one status test in shards A and B fail on that alone.
 

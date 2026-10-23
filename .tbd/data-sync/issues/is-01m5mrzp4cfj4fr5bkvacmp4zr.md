@@ -3,16 +3,20 @@ type: is
 id: is-01m5mrzp4cfj4fr5bkvacmp4zr
 title: "Site URLs: disposition for the nine atlas/regularized SVGs the algebraic adoption removes (70, 102, 123, 153, 207, 258, 259, 295, 302)"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
+delegate: c-fix-756-1023
 labels:
   - decision
   - site
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-23T16:19:57.196Z
-updated_at: 2026-10-23T16:19:57.196Z
+updated_at: 2026-10-23T22:18:45.109Z
+started_at: 2026-10-23T22:18:45.109Z
 ---
 The adoption of the nine algebraic houses on 23 October 2026 (think-ot5c, branch claude/intake-2026-10-23-algebraic-houses) leaves the regularized layer's index with no view at 70, 102, 123, 153, 207, 258, 259, 295 and 302. The axis tool refuses a number-field witness (`unsupported-scalar-kind`), the lapsed strong views are not kept (the owner's answer to question 13, think-r8cn), and no regularizer yet draws an exact view of a number-field witness (think-mbdw). So `render_overview.support_file_paths` no longer declares `atlas/regularized/n-{70,102,123,153,207,258,259,295,302}.svg`. These nine are live rows in packing/site-urls.yaml, first published 2026-10-07.
 
