@@ -7483,6 +7483,47 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Every paper keeps its version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/overview/embed.js",
+            "packing/devtools/overview/headroom.js",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/probes/check_site_rendering/report.js",
+            "packing/devtools/probes/measure_atlas_views/expansion.js",
+            "packing/devtools/probes/measure_atlas_views/hold.js",
+            "packing/devtools/probes/measure_atlas_views/layout.js",
+            "packing/devtools/probes/measure_atlas_views/move.js",
+            "packing/devtools/templates/site-nav.css",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The Atlas that follows the scroll, the end of its Show More expander and the "
+            "smaller choosers (think-apqd) change only site chrome the papers share: the "
+            "head bootstrap gains a root attribute set only on the two Atlas pages, the "
+            "header script a listener for the Atlas's own scroll event, `site-nav.css` the "
+            "small chooser's size, which no paper uses, and the Atlas's markup, measuring "
+            "tool and probes, which no paper runs. Rendered on 23 October from this tree "
+            "and from main 44df28b07 into empty site directories with source links pinned "
+            "to 44df28b07 (69 files each): every paper's Markdown is byte-identical, and "
+            "each paper's HTML differs only in the inlined head bootstrap and the hashed "
+            "names of `site-nav.css` and `headroom.js`. Every paper keeps its version."
+        ),
+    ),
 )
 
 
