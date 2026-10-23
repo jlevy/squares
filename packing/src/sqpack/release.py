@@ -2532,10 +2532,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "68 files. Re-measured once from each tree after merging main bfc04b659 "
             "(#735), after main e929137a8 (#725) at its link revision 40a71b16, and after "
             "review A's fixes and main 0b2c8293c (#406) at f73d8d4a8: the same, the "
-            "explainer's one span aside. Last re-measured after review A's second round "
-            "and main 6c70d843f (#731), both trees at link revision 01e2ca3e: all 68 files "
-            "byte-identical. No PDF was printed; each prints from that HTML. Retain "
-            "#731's v0.4.20 and v0.1.10, v0.1.3 and v0.2.6."
+            "explainer's one span aside. Re-measured after review A's second round and "
+            "main 6c70d843f (#731), both trees at link revision 01e2ca3e: all 68 files "
+            "byte-identical. Last re-measured after main 31584003e (#737), at link "
+            "revision 947d2863, from the merge and from the merge with these five paths "
+            "at main's: all 69 files byte-identical. No PDF was printed; each prints from "
+            "that HTML. Retain #737's v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
