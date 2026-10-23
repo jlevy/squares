@@ -2425,6 +2425,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/devtools/check_results.py",
             "packing/devtools/check_source_coverage.py",
+            "packing/devtools/site_resources.py",
             "packing/devtools/state_ai_assistance.py",
             "packing/frontier/README.md",
             "packing/frontier/n-011.md",
@@ -2446,14 +2447,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "The record-integrity gates of the 1 October import review (think-nr59, "
             "think-du1e, think-g6d5, think-506q, think-j5so, think-mt6e) and their record "
             "repairs: T-115's significance.by, T-086's review mapping, seven coverage "
-            "sources and n-011's AI-assistance sentence, against main 44df28b07 (#743): "
-            "rendered at link revision 868925d6 into empty site directories, twice from "
-            "this tree at d80c7398 and twice with main's versions of the 20 changed paths "
-            "(69 files each), render_n11_lower_bounds_explainer, "
-            "render_n11_optimality_review, render_n11_threshold_bound_review and "
-            "render_packing_methods write every file byte-identical across all four. The "
-            "explainer reads n-011's front matter, not the sentence added to its body, and "
-            "the register stays at 230 results. No PDF was printed; each prints from that "
+            "sources with cards for the four that had none, and n-011's AI-assistance "
+            "sentence, against main 598d23289 (#742): rendered at link revision 868925d6 "
+            "into empty site directories, twice from this tree at 8c26340d and twice with "
+            "main's versions of the 22 changed paths (69 files each), "
+            "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four; measured before against main 44df28b07 with "
+            "the same outcome. The explainer reads n-011's front matter, not the sentence "
+            "added to its body, the papers print no project card, and the register stays "
+            "at 230 results. No PDF was printed; each prints from that "
             "HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
