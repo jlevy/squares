@@ -2682,8 +2682,9 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   this applies, the cards to their pages, and the three pages to saying each thing once.
 
 - **Recently Added.** Directly below the Atlas preview, the homepage lists what reached
-  the site over the days the Results page’s “Added in the Last Seven Days” covers, one
-  native disclosure a day, newest first, the newest open
+  the site from the first day the Results page’s “Added in the Last Seven Days” covers
+  to its own newest day, which an adoption pass may hold after the newest result
+  (`recent_reference`), one native disclosure a day, newest first, the newest open
   (`overview_sections.recently_added`, the owner, 22 October 2026, `think-rqen`). Each
   day holds every result that arrived, at any significance, as the Results page lists it
   (`added_entry`, its id linking to its row there); each count whose house best packing

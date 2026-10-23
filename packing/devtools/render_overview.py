@@ -1418,7 +1418,8 @@ def overview_page() -> Page:
         # (the owner, 22 October 2026): results, house best packings, dated rows.
         "RECENTLY_ADDED": overview_sections.recently_added(overview),
         "RECENT_SPAN": overview_sections.span_label(
-            overview_sections.added_since(overview), overview_sections.added_reference(overview)
+            overview_sections.added_since(overview),
+            overview_sections.recent_reference(overview),
         ),
         "ADDED_DAYS": overview_sections.ADDED_DAYS_WORD[overview_sections.ADDED_DAYS],
         "CORPUS_END": str(overview_sections.corpus_end()),

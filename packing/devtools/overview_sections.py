@@ -1732,6 +1732,13 @@ def recent_days(overview: Overview, *, days: int = ADDED_DAYS) -> list[RecentDay
     ]
 
 
+def recent_reference(overview: Overview, *, days: int = ADDED_DAYS) -> date:
+    """The last day Recently Added covers: its newest day, which an adoption pass or a
+    source's rows may hold after the newest result arrived (`added_reference`)."""
+    found = recent_days(overview, days=days)
+    return found[0].day if found else added_reference(overview)
+
+
 def corpus_end() -> int:
     """The largest count the case corpus holds, past which a row is beyond the horizon."""
     return int(_coverage()["case_corpus"]["n_max"])

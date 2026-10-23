@@ -205,9 +205,13 @@ def test_the_section_links_the_seven_days_and_news(
     results = site_renders.html("results.html")
     assert 'id="added-in-the-last-seven-days"' in results
     span = overview_sections.span_label(
-        overview_sections.added_since(overview), overview_sections.added_reference(overview)
+        overview_sections.added_since(overview), overview_sections.recent_reference(overview)
     )
     assert span in section
+    # The section's span ends on its own newest day, which may follow the results'.
+    days = overview_sections.recent_days(overview)
+    assert overview_sections.recent_reference(overview) == days[0].day
+    assert days[0].day >= overview_sections.added_reference(overview)
 
 
 def test_the_home_page_additions_stay_brief(section: str) -> None:

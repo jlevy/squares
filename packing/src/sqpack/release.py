@@ -2374,9 +2374,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods write every file byte-identical across the two trees; "
             "the explainer's HTML differs between two renders of main's own tree in one "
             "span's attributes, and this tree's second render equals main's second in all "
-            "68 files. Re-measured after merging main bfc04b659 (#735), once from each "
-            "tree: the same, the explainer's one span aside. No PDF was printed; each "
-            "prints from that HTML. Retain v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
+            "68 files. Re-measured once from each tree after merging main bfc04b659 "
+            "(#735), and again after main e929137a8 (#725) at its link revision 40a71b16: "
+            "the same, the explainer's one span aside. No PDF was printed; each prints "
+            "from that HTML. Retain v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
         ),
     ),
     ReleaseNoPublicChange(
