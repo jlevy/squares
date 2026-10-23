@@ -74,7 +74,7 @@ sources:
     short_credit: Ahmed after Levy et al.
     lineage: builds-on-project
     ai_assistance:
-      sentence: 'The repository’s author announced it on X on 29 September 2026: “Astra now claims a proof of the optimal lower bound of s(11)!”'
+      sentence: 'Manasseh Ahmed, the repository’s author, announced the proof on X on 29 September 2026, crediting the AI system Astra: “Astra now claims a proof of the optimal lower bound of s(11)!”'
       marker: 'Astra now claims a proof'
       anchor: '11SquaresOptimal'
     note: >-
