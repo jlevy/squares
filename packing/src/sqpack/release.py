@@ -790,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "b78e851a4cc35b487acb4bfb24fef6931941fef6"
+DATA_REVISION = "8dc6b805454b4363814ca8b6ade05806bce9960c"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2542,6 +2542,55 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "file byte-identical. Measured before against main 44df28b07 (#743), with "
             "the register edit stashed, with the same outcome. No PDF was printed; each "
             "prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/check_results.py",
+            "packing/devtools/check_source_coverage.py",
+            "packing/devtools/site_resources.py",
+            "packing/devtools/source_supersession.py",
+            "packing/devtools/state_ai_assistance.py",
+            "packing/frontier/README.md",
+            "packing/frontier/n-011.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The record-integrity gates of the 1 October import review (think-nr59, "
+            "think-du1e, think-g6d5, think-506q, think-j5so, think-mt6e), their record "
+            "repairs (T-115's significance.by, T-086's review mapping, seven coverage "
+            "sources with cards for the four that had none, n-011's AI-assistance "
+            "sentence) and review A's fixes, against main c1115c095 (#749): rendered at "
+            "link revision 868925d6 into empty site directories, twice from this tree at "
+            "064648b9 and twice with main's versions of the 23 changed paths (69 files "
+            "each), render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four; measured before against main 44df28b07 and "
+            "598d23289 with the same outcome. The explainer reads n-011's front matter, not "
+            "the sentence added to its body, the papers print no project card, and the "
+            "register stays at 230 results. source_supersession.py, changed after those "
+            "renders, only caches its parse of the coverage register by the file's text, "
+            "a source review with its 378 dependent tests passing; the papers select it as "
+            "a broad builder input. No PDF was printed; each prints from that HTML. "
+            "Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(

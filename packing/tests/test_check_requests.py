@@ -235,6 +235,17 @@ def test_the_live_record_has_one_entry_an_issue_and_names_its_answer_bead() -> N
             lambda r: r["issues"][0].update(kind="other", intake=False),
             "issues/0/intake: true was expected",
         ),
+        # A queued result or ask is work the answer bead does not own (think-du1e).
+        (
+            lambda r: r["issues"][0]["results"].append(
+                {"key": "later", "claim": "c", "not_registered": "later", "queued": True}
+            ),
+            'issues/0/results/1: "bead" is a required property',
+        ),
+        (
+            lambda r: r["issues"][0].update(asks=[{"what": "a fix", "state": "queued"}]),
+            'issues/0/asks/0: "bead" is a required property',
+        ),
     ],
 )
 def test_the_check_refuses_an_unknown_id_a_misplaced_reply_and_a_broken_schema(

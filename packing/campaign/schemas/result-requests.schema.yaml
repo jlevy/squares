@@ -114,6 +114,13 @@ $defs:
           type: object
           additionalProperties: false
           required: [what, state]
+          # A queued ask is work, and the answer bead owns only the reply, so the ask
+          # names the bead that does it (think-du1e).
+          if:
+            properties: {state: {const: queued}}
+            required: [state]
+          then:
+            required: [bead]
           properties:
             what: {type: string, minLength: 1}
             state: {enum: [queued, done, declined]}
@@ -121,8 +128,9 @@ $defs:
             bead:
               $ref: '#/$defs/bead'
               description: >-
-                The open bead that does what a queued ask asks. The answer bead owns the
-                reply, not the work, so a queued ask without one is reported as unowned.
+                The open bead that does what a queued ask asks, required while it is
+                queued. The answer bead owns the reply, not the work, and
+                `check_bead_tree` fails a queued ask whose bead has closed.
             blocked_on: {$ref: '#/$defs/blocked_on'}
       awaiting_author:
         type: array
@@ -287,10 +295,16 @@ $defs:
       bead:
         $ref: '#/$defs/bead'
         description: >-
-          The open bead that imports a queued result. The issue's `beads` may name several
-          and its answer bead owns only the reply, so a queued result without one is
-          reported as unowned, and `check_bead_tree` fails one whose bead has closed.
+          The open bead that imports a queued result, required while it is queued. The
+          issue's `beads` may name several and its answer bead owns only the reply, and
+          `check_bead_tree` fails a queued result whose bead has closed.
       blocked_on: {$ref: '#/$defs/blocked_on'}
+    # A queued result is work, so it names the bead that imports it (think-du1e).
+    if:
+      properties: {queued: {const: true}}
+      required: [queued]
+    then:
+      required: [bead]
     oneOf:
       - anyOf:
           - required: [register]

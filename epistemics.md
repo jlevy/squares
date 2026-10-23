@@ -730,8 +730,9 @@ to credit it as carefully as this project’s own.
 - **Upper bounds count too.** A parallel packing that improves a best-known side enters
   its case’s reported upper lane from a retained source, with the same credit.
   It reaches the verified upper lane only after an exact or interval witness replay.
-  The coverage gate below checks lower bounds only, so the register entry for an upper
-  bound by others is kept by hand.
+  The register’s coverage gate holds it as it holds a lower bound: a case bound from a
+  source dated from 22 August 2026 needs a register entry that cites its evidence and
+  covers its count (`devtools.check_results`).
 
 ### Import, Integration, and Reply
 
