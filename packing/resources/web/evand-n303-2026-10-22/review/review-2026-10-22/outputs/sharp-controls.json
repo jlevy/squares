@@ -1,0 +1,673 @@
+{
+ "certificate_sha256": "929c2acf72ee54a1850183fc149f06dbf35bffa2f7ee68c8f833d888400e8080",
+ "construction": {
+  "far_wall": "y<=S",
+  "far_clearance": "43786014365936855375134504637169481557151474219/72115234146316898274669480058100000000000000000000000000000",
+  "near_wall": "x>=0",
+  "near_clearance": "60480000000010479/100000000000000000000000000000",
+  "pair": [
+   284,
+   296
+  ],
+  "axis": "u_i",
+  "gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+  "moved_square": 296,
+  "direction_sign": 1,
+  "r2_decimal": "0.50000000000060480000000010479"
+ },
+ "mutants": {
+  "F0": {
+   "expected": "accept",
+   "sha256": "212c7e841f857b42215dc20171ae0f623b3276326b83ee2cd52f36cd6ee489cd",
+   "this_review": {
+    "Z": {
+     "accepted": true,
+     "least_wall_clearance": "0",
+     "wall_contacts": 1,
+     "wall_violations": 0,
+     "touching_pairs": [],
+     "overlapping_pairs": [],
+     "least_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "least_gap_pair": [
+      284,
+      296
+     ]
+    },
+    "C": {
+     "accepted": true,
+     "least_wall_clearance": "0",
+     "wall_contacts": 1,
+     "wall_violations": 0,
+     "touching_pairs": [],
+     "overlapping_pairs": [],
+     "least_squared_distance": "14508202500004908951795000410321090027499169526439075000835400644962499581067000500000105042001/9999999999999980000000000000019999999999999990000000000000002500000000000000000000000000000000000000000000000000000000"
+    }
+   },
+   "maintained": {
+    "certificate_sha256": "212c7e841f857b42215dc20171ae0f623b3276326b83ee2cd52f36cd6ee489cd",
+    "control": "positive",
+    "adapter": "read",
+    "validate_job": "passed",
+    "wall_seconds": 14.93,
+    "cpu_seconds": {
+     "exact_verify": 6.63,
+     "independent": 4.13
+    },
+    "checker_input_sha256": "12b7316c9390337e85c64b6ba943f568b82ec71f67a2edc61acd4f8ddf9f03ea",
+    "side": "258313483391179104621841937216911825344630164412821414718133/14423046829263379654933896011620000000000000000000000000000",
+    "exact_verify": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field_certificate",
+      "id",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "operation",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": true,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "0",
+     "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "failures": [],
+     "failure_count": 0
+    },
+    "independent": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": true,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "0",
+     "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "failures": [],
+     "failure_count": 0
+    },
+    "exit": 0
+   }
+  },
+  "F1": {
+   "expected": "refuse",
+   "sha256": "7297df43e8ca10d02a4f58d008b60e2f44650d5941c1efd139303e461aba8274",
+   "this_review": {
+    "Z": {
+     "accepted": false,
+     "least_wall_clearance": "-1/1000000000000000000000000000000",
+     "wall_contacts": 0,
+     "wall_violations": 1,
+     "touching_pairs": [],
+     "overlapping_pairs": [],
+     "least_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "least_gap_pair": [
+      284,
+      296
+     ]
+    },
+    "C": {
+     "accepted": false,
+     "least_wall_clearance": "-1/1000000000000000000000000000000",
+     "wall_contacts": 0,
+     "wall_violations": 1,
+     "touching_pairs": [],
+     "overlapping_pairs": [],
+     "least_squared_distance": "14508202500004908951795000410321090027499169526439075000835400644962499581067000500000105042001/9999999999999980000000000000019999999999999990000000000000002500000000000000000000000000000000000000000000000000000000"
+    }
+   },
+   "maintained": {
+    "certificate_sha256": "7297df43e8ca10d02a4f58d008b60e2f44650d5941c1efd139303e461aba8274",
+    "control": "positive",
+    "adapter": "read",
+    "validate_job": "refused: ReportError: incomplete or inconsistent native exact route result",
+    "wall_seconds": 14.83,
+    "cpu_seconds": {
+     "exact_verify": 6.34,
+     "independent": 4.32
+    },
+    "checker_input_sha256": "3b07ac93c4d2dea1f003334383df392c29f51c5d683382b22e9c250d48d72f99",
+    "side": "12915674169558955231092096860844870114890045051658324041106069/721152341463168982746694800581000000000000000000000000000000",
+    "exact_verify": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field_certificate",
+      "id",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "operation",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": false,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "-1/1000000000000000000000000000000",
+     "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "failures": [
+      [
+       "container",
+       "square 6 violates y<=s"
+      ]
+     ],
+     "failure_count": 1
+    },
+    "independent": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": false,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "-1/1000000000000000000000000000000",
+     "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "failures": [
+      "container penetration -1/1000000000000000000000000000000"
+     ],
+     "failure_count": 1
+    },
+    "exit": 1
+   }
+  },
+  "N0": {
+   "expected": "accept",
+   "sha256": "fdebbbcb1fd5a3aa5c88a573581811833deb5004066c6cdbc37b69f2f59cd8d4",
+   "this_review": {
+    "Z": {
+     "accepted": true,
+     "least_wall_clearance": "0",
+     "wall_contacts": 10,
+     "wall_violations": 0,
+     "touching_pairs": [],
+     "overlapping_pairs": [],
+     "least_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "least_gap_pair": [
+      284,
+      296
+     ]
+    },
+    "C": {
+     "accepted": true,
+     "least_wall_clearance": "0",
+     "wall_contacts": 10,
+     "wall_violations": 0,
+     "touching_pairs": [],
+     "overlapping_pairs": [],
+     "least_squared_distance": "14508202500004908951795000410321090027499169526439075000835400644962499581067000500000105042001/9999999999999980000000000000019999999999999990000000000000002500000000000000000000000000000000000000000000000000000000"
+    }
+   },
+   "maintained": {
+    "certificate_sha256": "fdebbbcb1fd5a3aa5c88a573581811833deb5004066c6cdbc37b69f2f59cd8d4",
+    "control": "positive",
+    "adapter": "read",
+    "validate_job": "passed",
+    "wall_seconds": 12.26,
+    "cpu_seconds": {
+     "exact_verify": 6.56,
+     "independent": 4.9
+    },
+    "checker_input_sha256": "3ebb7bac57032e2d400b5f584e15edfb2459e37c205643fdb8dd27f125e39557",
+    "side": "447744305431858194305431410441/25000000000000000000000000000",
+    "exact_verify": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field_certificate",
+      "id",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "operation",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": true,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "0",
+     "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "failures": [],
+     "failure_count": 0
+    },
+    "independent": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": true,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "0",
+     "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "failures": [],
+     "failure_count": 0
+    },
+    "exit": 0
+   }
+  },
+  "N1": {
+   "expected": "refuse",
+   "sha256": "4efebec465fb0d530b2bce8b67854223c24d1a3987aeaddd4b8b344a3ae3fb99",
+   "this_review": {
+    "Z": {
+     "accepted": false,
+     "least_wall_clearance": "-1/1000000000000000000000000000000",
+     "wall_contacts": 0,
+     "wall_violations": 10,
+     "touching_pairs": [],
+     "overlapping_pairs": [],
+     "least_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "least_gap_pair": [
+      284,
+      296
+     ]
+    },
+    "C": {
+     "accepted": false,
+     "least_wall_clearance": "-1/1000000000000000000000000000000",
+     "wall_contacts": 0,
+     "wall_violations": 10,
+     "touching_pairs": [],
+     "overlapping_pairs": [],
+     "least_squared_distance": "14508202500004908951795000410321090027499169526439075000835400644962499581067000500000105042001/9999999999999980000000000000019999999999999990000000000000002500000000000000000000000000000000000000000000000000000000"
+    }
+   },
+   "maintained": {
+    "certificate_sha256": "4efebec465fb0d530b2bce8b67854223c24d1a3987aeaddd4b8b344a3ae3fb99",
+    "control": "positive",
+    "adapter": "read",
+    "validate_job": "refused: ReportError: incomplete or inconsistent native exact route result",
+    "wall_seconds": 11.09,
+    "cpu_seconds": {
+     "exact_verify": 6.53,
+     "independent": 3.93
+    },
+    "checker_input_sha256": "500ea1b194f8a8a27214268673411fb773f95474e24e355ac9d13988f3325e81",
+    "side": "447744305431858194305431410441/25000000000000000000000000000",
+    "exact_verify": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field_certificate",
+      "id",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "operation",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": false,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "-1/1000000000000000000000000000000",
+     "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "failures": [
+      [
+       "container",
+       "square 0 violates x>=0"
+      ],
+      [
+       "container",
+       "square 0 violates x>=0"
+      ],
+      [
+       "container",
+       "square 1 violates x>=0"
+      ],
+      [
+       "container",
+       "square 1 violates x>=0"
+      ],
+      [
+       "container",
+       "square 13 violates x>=0"
+      ]
+     ],
+     "failure_count": 20
+    },
+    "independent": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": false,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "-1/1000000000000000000000000000000",
+     "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "failures": [
+      "container penetration -1/1000000000000000000000000000000"
+     ],
+     "failure_count": 1
+    },
+    "exit": 1
+   }
+  },
+  "P0": {
+   "expected": "accept",
+   "sha256": "63761bb7568771cc1c3afce7cb64736546d534175857da862240e5bcc7b68137",
+   "this_review": {
+    "Z": {
+     "accepted": true,
+     "least_wall_clearance": "60480000000010479/100000000000000000000000000000",
+     "wall_contacts": 0,
+     "wall_violations": 0,
+     "touching_pairs": [
+      [
+       284,
+       296
+      ]
+     ],
+     "overlapping_pairs": [],
+     "least_gap": "0",
+     "least_gap_pair": [
+      284,
+      296
+     ]
+    },
+    "C": {
+     "accepted": true,
+     "least_wall_clearance": "60480000000010479/100000000000000000000000000000",
+     "wall_contacts": 0,
+     "wall_violations": 0,
+     "touching_pairs": [
+      [
+       284,
+       296
+      ]
+     ],
+     "overlapping_pairs": [],
+     "least_squared_distance": "0"
+    }
+   },
+   "maintained": {
+    "certificate_sha256": "63761bb7568771cc1c3afce7cb64736546d534175857da862240e5bcc7b68137",
+    "control": "positive",
+    "adapter": "read",
+    "validate_job": "passed",
+    "wall_seconds": 12.11,
+    "cpu_seconds": {
+     "exact_verify": 6.58,
+     "independent": 4.53
+    },
+    "checker_input_sha256": "dc4b948f0c27602c9d40138ea4ef1a227f7c4cf855a2c52a87bd5e61a3498ce1",
+    "side": "447744305431858194305431410441/25000000000000000000000000000",
+    "exact_verify": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field_certificate",
+      "id",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "operation",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": true,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "60480000000010479/100000000000000000000000000000",
+     "minimum_best_pair_gap": "0",
+     "failures": [],
+     "failure_count": 0
+    },
+    "independent": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": true,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "60480000000010479/100000000000000000000000000000",
+     "minimum_best_pair_gap": "0",
+     "failures": [],
+     "failure_count": 0
+    },
+    "exit": 0
+   }
+  },
+  "P1": {
+   "expected": "refuse",
+   "sha256": "957b360e67e13831827c8eede15bbc22d7dc0d510ba05b750612e5659e5c6095",
+   "this_review": {
+    "Z": {
+     "accepted": false,
+     "least_wall_clearance": "60480000000010479/100000000000000000000000000000",
+     "wall_contacts": 0,
+     "wall_violations": 0,
+     "touching_pairs": [],
+     "overlapping_pairs": [
+      [
+       284,
+       296,
+       "-1/1000000000000000000000000000000"
+      ]
+     ],
+     "least_gap": "-1/1000000000000000000000000000000",
+     "least_gap_pair": [
+      284,
+      296
+     ]
+    },
+    "C": {
+     "accepted": false,
+     "least_wall_clearance": "60480000000010479/100000000000000000000000000000",
+     "wall_contacts": 0,
+     "wall_violations": 0,
+     "touching_pairs": [],
+     "overlapping_pairs": [
+      [
+       284,
+       296,
+       "3999999999999992000000000000007999999999999996000000000000001/7999999999999988000000000000004000000000000000000000000000000000000000000000000000000000000000000000000000"
+      ]
+     ],
+     "least_squared_distance": "5803281000001963585536000164133076605999667464539056000165617073521000000815922000000000001/3999999999999992000000000000007999999999999996000000000000001000000000000000000000000000000000000000000000000000000"
+    }
+   },
+   "maintained": {
+    "certificate_sha256": "957b360e67e13831827c8eede15bbc22d7dc0d510ba05b750612e5659e5c6095",
+    "control": "positive",
+    "adapter": "read",
+    "validate_job": "refused: ReportError: incomplete or inconsistent native exact route result",
+    "wall_seconds": 11.86,
+    "cpu_seconds": {
+     "exact_verify": 6.4,
+     "independent": 4.52
+    },
+    "checker_input_sha256": "ce65a4ec849f0a1ae5621bbb7ae179a88389d8b36ba3457a597c0c86e93bb954",
+    "side": "447744305431858194305431410441/25000000000000000000000000000",
+    "exact_verify": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field_certificate",
+      "id",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "operation",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": false,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "60480000000010479/100000000000000000000000000000",
+     "minimum_best_pair_gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      [
+       "overlap",
+       "squares 284 and 296 overlap"
+      ]
+     ],
+     "failure_count": 1
+    },
+    "independent": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": false,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "60480000000010479/100000000000000000000000000000",
+     "minimum_best_pair_gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "1 overlapping pairs; worst exact gap -1/1000000000000000000000000000000"
+     ],
+     "failure_count": 1
+    },
+    "exit": 1
+   }
+  },
+  "R1": {
+   "expected": "reader-refuse",
+   "sha256": "bb5a0bfdf0cb7d28841c0bbf0acd5b397262c1c02bd18e05784d023339cec28a",
+   "this_review": {
+    "reader": "refused: 302 square rows for n = 303"
+   },
+   "maintained": {
+    "certificate_sha256": "bb5a0bfdf0cb7d28841c0bbf0acd5b397262c1c02bd18e05784d023339cec28a",
+    "control": "positive",
+    "adapter": "refused: ReportError: n=303: 302 square rows for n = 303",
+    "exit": 2
+   }
+  },
+  "R2": {
+   "expected": "reader-difference",
+   "sha256": "95c960ff01645de5c7a94258182a2c4279f72ae834c86d8cd0ea3be52143d0e5",
+   "this_review": {
+    "reader": "refused: line 3: not a rational literal: '0.50000000000060480000000010479'"
+   },
+   "maintained": {
+    "certificate_sha256": "95c960ff01645de5c7a94258182a2c4279f72ae834c86d8cd0ea3be52143d0e5",
+    "control": "positive",
+    "adapter": "read",
+    "validate_job": "passed",
+    "wall_seconds": 11.49,
+    "cpu_seconds": {
+     "exact_verify": 6.8,
+     "independent": 4.48
+    },
+    "checker_input_sha256": "76f50599ca80249991d15a61cd5d1deba0335aa0171099369539f1697b0a732a",
+    "side": "447744305431858194305431410441/25000000000000000000000000000",
+    "exact_verify": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field_certificate",
+      "id",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "operation",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": true,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "60480000000010479/100000000000000000000000000000",
+     "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "failures": [],
+     "failure_count": 0
+    },
+    "independent": {
+     "keys": [
+      "coordinate_provenance",
+      "failures",
+      "field",
+      "limitations",
+      "method",
+      "minimum_best_pair_gap",
+      "minimum_containment_clearance",
+      "n",
+      "pairs_tested",
+      "side",
+      "verification_passed"
+     ],
+     "verification_passed": true,
+     "pairs_tested": 45753,
+     "minimum_containment_clearance": "60480000000010479/100000000000000000000000000000",
+     "minimum_best_pair_gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+     "failures": [],
+     "failure_count": 0
+    },
+    "exit": 0
+   }
+  }
+ }
+}

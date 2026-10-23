@@ -6716,8 +6716,10 @@ issues:
       [191/50, 969271/250000] under a frozen verifier; a census theorem in Lean) and a Lean layer
       whose main theorems rest on three named open axioms. No bound; n = 11 is settled by T-060
       and T-112. Retained in the esummins-packing-2026-10-12 packet; nothing replayed. Claude
-      assistance disclosed.
-    read_through: '2026-10-12T04:12:28Z'
+      assistance disclosed. On 22 October the author confirmed that the frozen verifiers'
+      digests are the committed LF files' (1574ddbd... and 87fa3d31..., as the packet's
+      manifest records) and restated them in the outreach notes at 429bcda; the pin is unchanged.
+    read_through: '2026-10-22T17:00:22Z'
     results:
     - key: stratification-strategy
       claim: The simple-square stratification as a proof strategy for s(n), for
@@ -6922,8 +6924,11 @@ issues:
       K0-FREE and SWAP/CELLS (Lean, standard axioms), the extremal reduction, ten refuted routes
       with witnesses and measured facts about four-crowds at n = 11, where k0_00 is not closed.
       Not a bound; n = 11 is settled by T-060 and T-112. Retained in the
-      esummins-packing-2026-10-12 packet. Claude assistance disclosed.
-    read_through: '2026-10-12T04:12:45Z'
+      esummins-packing-2026-10-12 packet, which also keeps the compilation the status note
+      cites, docs/proofs/k0_knowledge.md, as it stood at the pin (1,277 lines, sections 0 to 14);
+      the author refreshed it to 22 October as section 15 at e5ebaa6. Claude assistance
+      disclosed.
+    read_through: '2026-10-22T17:10:58Z'
     results:
     - key: k0-theorems-and-negatives
       claim: K0-FREE, SWAP/CELLS, the extremal reduction, ten refuted routes with witnesses, and the
@@ -6932,6 +6937,22 @@ issues:
       not_registered: Structural theorems and negatives at a settled count; a ledger of refuted
         routes belongs in the packet, and the extremal reduction's review is shared with issue 524
         (think-tnfo, think-s1ru).
+      queued: false
+    - key: k0-knowledge-refresh
+      claim: >-
+        The compilation brought to 22 October as section 15 of docs/proofs/k0_knowledge.md
+        (e5ebaa6, 1,462 lines): the strip lemma at jammed corners fully certified (A273's 51
+        cells and A280's 29 by certificate, the corner cell by A276's hand proof), the A263
+        pair certificates' pass counts, 488 of 494 slab jobs, the NEST search ended with no
+        witness, thirteen contradictions between the lab's sources recorded both ways, and
+        T-037's replay noted as passing; with two corrections to the retained note 03, that
+        the strip lemma is closed, not open, and that its tag counts are those of the
+        September version.
+      source: https://github.com/jlevy/squares/issues/526#issuecomment-6346657250
+      not_registered: >-
+        Structural statements at a settled count, as k0-theorems-and-negatives; the
+        compilation says it holds no new mathematics. Past the pin and not retained; the
+        packet keeps the version at 651a9a5.
       queued: false
     asks:
     - what: A field certificate conditioned on four doubly-met corners on [31/8, s0], and the chains
@@ -6949,6 +6970,12 @@ issues:
       kind: acknowledgement
       reported:
       - result: k0-theorems-and-negatives
+      outdated:
+      - >-
+        It said the compilation 03-k0-status.md cites is not in the retained tree. It is:
+        docs/proofs/k0_knowledge.md, 1,277 lines at the pin, retained by the packet with
+        SHA-256 fe51c45e...a036. The import read only attempts/A275-k0-knowledge/, which the
+        note named.
     close_when: The owner has answered the asks and the reply states what was retained.
   - number: 527
     title: 'Geometry-before-LP toolkit for stratum trees (exact-rational leaf rules, 7.2× on closed nodes): registration request'
@@ -20677,6 +20704,53 @@ issues:
       with #732; the 34 in-corpus files stay pinned; and later packets may keep his files under
       the MIT licence of 17cc220. It asked how sqpack/verify.py was called and which 204 file
       the solve began from.
+  - number: 728
+    title: 's(303) ≤ 17.909772217275: registration request'
+    author: evand
+    opened: '2026-10-22'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(303) <= 17.909772217275, the exact rational side
+      447744305431858194305431410441/25000000000000000000000000000 =
+      17.90977221727432777221725641764 of evand/square-packing f06521f,
+      search/packer/candidates/s303_r303w0.cert, rounded up at 12 places: a dilation
+      certificate of a binary64 packing, 1.86e-4 below T-186, the house at 303 (Polkovskyi's
+      certificate of Daniil Ostashev's packing). The source calls it a new packing found from
+      Ostashev's by its basin explorer, the last move a band flip, and leaves local optimality
+      unresolved (a first-order descent of about 4.8e-7 is predicted). Triaged read-only on 22
+      October 2026 (think-icp1). Retained on 22 October 2026 in evand-n303-2026-10-22, replayed
+      on this repository's two exact routes with both controls refused, registered as T-230,
+      and raised to V3/C3 by the 22 October stage 4 review, whose clean-room checker decided it
+      again; measured pose by pose, it is another arrangement of Ostashev's two-band design,
+      with one tilted band's tilt reversed, not a refinement. The same pull request (#731)
+      adopted it at 303 in the pass of 23 October 2026 and regularized the case, drawing the
+      axis tool's view while grid-slack's waits for the owner's review (think-ykgh). Claude
+      assistance disclosed.
+    read_through: '2026-10-22T17:17:20Z'
+    results:
+    - key: n303
+      claim: >-
+        s(303) <= 447744305431858194305431410441/25000000000000000000000000000 =
+        17.90977221727432777221725641764, the side of s303_r303w0.cert (SHA-256
+        929c2acf...8080) at f06521f, by a packing the source calls new, not a refinement of
+        Ostashev's #562 packing.
+      source: body
+      bead: think-icp1
+      register:
+      - T-230
+      evidence:
+      - E-evand-728-n303-report
+      - E-evand-728-n303-exact-feasibility
+      - E-evand-728-n303-review-exact-feasibility
+    beads:
+    - think-icp1
+    answer_bead: think-icp1
+    replies: []
+    close_when: >-
+      The result is registered, reviewed and adopted at 303 with its drawing regularized, and
+      the reply on main says so; nothing the author asked for is queued.
   - number: 732
     title: '328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof'
     author: Mishapolk
