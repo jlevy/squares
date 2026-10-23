@@ -1258,7 +1258,7 @@ V0/C0 pending adoption.
 - The 10 October intake (#487) later replayed and confirmed them at V3/C3, as
   announced in Exact Certificates and a Stronger 40-Square Bound.
 
-PRs and supporting records: [\#460](https://github.com/jlevy/squares/pull/460) · [The later replay and confirmation (\#487)](#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-exact-refinements-2026-10-08/README.md) · [Couzo’s report](https://github.com/jlevy/squares/issues/451).
+PRs and supporting records: [\#460](https://github.com/jlevy/squares/pull/460) · [The later replay and confirmation (\#487)](https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-exact-refinements-2026-10-08/README.md) · [Couzo’s report](https://github.com/jlevy/squares/issues/451).
 
 <a id="changelog-entry-couzo-five-follow-up-refinements-reported"></a>
 
@@ -1280,7 +1280,7 @@ adoption.
 - The 10 October intake (#487) later replayed and confirmed them at V3/C3, as
   announced in Exact Certificates and a Stronger 40-Square Bound.
 
-PRs and supporting records: [\#469](https://github.com/jlevy/squares/pull/469) · [The later replay and confirmation (\#487)](#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-followup-refinements-2026-10-08/README.md) · [Couzo’s report, a comment on](https://github.com/jlevy/squares/pull/460#issuecomment-6070798890).
+PRs and supporting records: [\#469](https://github.com/jlevy/squares/pull/469) · [The later replay and confirmation (\#487)](https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-followup-refinements-2026-10-08/README.md) · [Couzo’s report, a comment on](https://github.com/jlevy/squares/pull/460#issuecomment-6070798890).
 
 <a id="changelog-entry-couzo-twenty-beyond-corpus-reports"></a>
 

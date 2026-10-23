@@ -1953,7 +1953,7 @@ entries:
         announced in Exact Certificates and a Stronger 40-Square Bound.
     references:
       - label: The later replay and confirmation (#487)
-        target: '#changelog-entry-october-ten-intake-replays'
+        target: https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays
       - label: Retained certificates and verification limits
         target: packing/resources/web/couzo-exact-refinements-2026-10-08/README.md
       - label: Couzo’s report
@@ -1987,7 +1987,7 @@ entries:
         announced in Exact Certificates and a Stronger 40-Square Bound.
     references:
       - label: The later replay and confirmation (#487)
-        target: '#changelog-entry-october-ten-intake-replays'
+        target: https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays
       - label: Retained certificates and verification limits
         target: packing/resources/web/couzo-followup-refinements-2026-10-08/README.md
       - label: Couzo’s report, a comment on #460
