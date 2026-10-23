@@ -431,8 +431,9 @@ def test_the_popover_fetches_the_record_and_opens_its_address() -> None:
     assert "<iframe" not in markup
 
 
-def test_a_case_diagram_precedes_its_count_and_ordered_status_row() -> None:
-    """The common header leads with one diagram, then the count and status tags."""
+def test_a_case_count_precedes_its_diagram_and_ordered_status_row() -> None:
+    """The common header leads with the count between its steps, then one diagram and
+    the status tags."""
     case = dict(next(case for case in frontier_page.frontier_cases() if case["n"] == 15))
     case["reported_status"] = "open" if case["status"] != "open" else "proved"
     markup = render_case_pages.record_head(
@@ -448,7 +449,7 @@ def test_a_case_diagram_precedes_its_count_and_ordered_status_row() -> None:
     correction = markup.index('class="site-corrects"')
     reported = markup.index('class="site-credit"')
     status = markup.index('class="site-chip"')
-    assert eyebrow < figure < title < badges < correction < reported < status
+    assert eyebrow < title < figure < badges < correction < reported < status
     assert 'class="is-new-result" title="Recent result"' not in markup
     assert "site-star" not in markup
     assert markup.count('<figure class="site-case-figure"') == 1
@@ -481,7 +482,7 @@ def test_a_regularized_default_draws_its_view_and_keeps_the_house_as_published()
     figure = head.index('<figure class="site-case-figure">')
     disclosure = head.index('<details class="site-case-published"><summary>As published')
     assert figure < head.index(view) < disclosure < head.index(house)
-    assert disclosure < head.index('class="site-case-title"')
+    assert head.index('class="site-case-title"') < figure
     assert link_prose(html.escape(default_drawings.credit_line(n))) in head[:disclosure]
     assert 'href="profiles/evan-daniel.html">Daniel</a>' in head[:disclosure]
     published = head[disclosure:]
@@ -558,15 +559,16 @@ def test_the_page_fetches_only_the_shared_assets_and_is_under_its_ceiling(page: 
 def test_every_record_opens_with_its_visual_summary(
     records: dict[str, str], numbers: list[int]
 ) -> None:
-    """The eyebrow and diagram precede the count/icons, followed by the number line,
-    main bound, further data and original prose, without duplicating the drawing."""
+    """The eyebrow and the count between its steps precede the diagram and the status
+    icons, followed by the number line, main bound, further data and original prose,
+    without duplicating the drawing."""
     for n in numbers:
         record = _record(records, n)
         order = [
             record.index('<header class="site-case-head"'),
             record.index('class="site-card-label site-case-eyebrow"'),
-            record.index('<figure class="site-case-figure'),
             record.index('class="site-case-title"'),
+            record.index('<figure class="site-case-figure'),
             record.index('<p class="site-case-status"'),
             record.index('<section class="site-case-summary'),
             record.index('<div class="site-atlas-gap"'),
@@ -943,24 +945,34 @@ def test_a_footnote_in_a_case_file_is_refused() -> None:
 def test_each_record_steps_to_its_neighbours_with_the_sites_arrows(
     records: dict[str, str], numbers: list[int]
 ) -> None:
-    """A record's steps are the site's drawn arrows, left before the previous case and
-    right after the next, never the arrow characters the site's face lacks."""
+    """A record's steps flank its count on the title's line (the owner, 2026-10-23): the
+    count, the record's heading, then the nav of its steps, the site's drawn left arrow to
+    the previous case and right arrow to the next, never the arrow characters the site's
+    face lacks. Each arrow stands alone, with no count of its own beside it; its
+    accessible name and its tooltip name the case it loads."""
     left, right = overview_sections.arrow_icon("left"), overview_sections.arrow_icon("right")
     for n in (numbers[0], 11, numbers[-1]):
         record = _record(records, n)
-        steps = record[record.index('<nav class="site-case-steps"') :]
-        steps = steps[: steps.index("</nav>")]
+        assert record.count('class="site-case-steps"') == 1
+        line = record[record.index('<div class="site-case-title-line">') :]
+        line = line[: line.index("</nav></div>")]
+        steps = line[line.index('<nav class="site-case-steps" aria-label="Cases">') :]
+        assert 'class="site-case-title"' in line[: line.index("<nav")]
         assert "←" not in steps
         assert "→" not in steps
-        assert 'data-math-face="serif"' in steps
-        for neighbor, direction, arrow in ((n - 1, "prev", left), (n + 1, "next", right)):
-            match = re.search(rf'<a\b[^>]*rel="{direction}"[^>]*>(.*?)</a>', steps, re.DOTALL)
+        assert "kpress-math" not in steps
+        for neighbor, direction, arrow, word in (
+            (n - 1, "prev", left, "Previous"),
+            (n + 1, "next", right, "Next"),
+        ):
+            match = re.search(rf'<a\b([^>]*rel="{direction}"[^>]*)>(.*?)</a>', steps, re.DOTALL)
             expected = numbers[0] <= neighbor <= numbers[-1]
             assert (match is not None) == expected
             if match is not None:
-                assert arrow in match[1]
-                assert f"<mi>n</mi><mo>=</mo><mn>{neighbor}</mn>" in match[1]
-                assert 'data-kpress-math-prepared="true"' in match[1]
+                assert match[2] == arrow
+                assert f'data-case-step="{neighbor}"' in match[1]
+                assert f'aria-label="{word} case, n = {neighbor}"' in match[1]
+                assert f'title="n = {neighbor}"' in match[1]
         assert "data-case-index" not in steps
         assert "All cases" not in steps
 
