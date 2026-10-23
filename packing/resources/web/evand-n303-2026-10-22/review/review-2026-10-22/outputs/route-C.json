@@ -1,0 +1,56 @@
+{
+ "route": "C (Fraction, clipping area)",
+ "n": 303,
+ "side": "447744305431858194305431410441/25000000000000000000000000000",
+ "unit_square_rows": 303,
+ "least_wall_clearance": "60480000000010479/100000000000000000000000000000",
+ "least_wall_clearance_sci": "6.048000000001e-13",
+ "least_wall_square": 0,
+ "least_wall": "x>=0",
+ "least_clearance_by_wall": {
+  "x>=0": {
+   "clearance": "60480000000010479/100000000000000000000000000000",
+   "sci": "6.048000000001e-13",
+   "square": 0
+  },
+  "x<=S": {
+   "clearance": "121500000000021476499999999978462800000000010799/199999999999999800000000000000100000000000000000000000000000",
+   "sci": "6.075000000001e-13",
+   "square": 69
+  },
+  "y>=0": {
+   "clearance": "60480000000010479/100000000000000000000000000000",
+   "sci": "6.048000000001e-13",
+   "square": 62
+  },
+  "y<=S": {
+   "clearance": "43786014365936855375134504637169481557151474219/72115234146316898274669480058100000000000000000000000000000",
+   "sci": "6.071673327316e-13",
+   "square": 6
+  }
+ },
+ "wall_contacts": 0,
+ "wall_contact_list": [],
+ "wall_violations": [],
+ "wall_violation_count": 0,
+ "pairs_decided": 45753,
+ "centre_pairs_within_sqrt2": 695,
+ "pairs_within_2_distance_computed": 1164,
+ "touching_pairs": [],
+ "overlapping_pair_count": 0,
+ "overlapping_pairs": [],
+ "least_squared_distance": "14508202500004908951795000410321090027499169526439075000835400644962499581067000500000105042001/9999999999999980000000000000019999999999999990000000000000002500000000000000000000000000000000000000000000000000000000",
+ "least_distance_sci": "1.204500000000e-12",
+ "least_distance_pair": [
+  284,
+  296
+ ],
+ "pair_sign_digest": "5f5696bb0f4d5ee96b2cd00ca1261919590ff726068f979faa7536011252f1e5",
+ "accepted": true,
+ "certificate_sha256": "929c2acf72ee54a1850183fc149f06dbf35bffa2f7ee68c8f833d888400e8080",
+ "certificate_bytes": 42160,
+ "comment_lines": 1,
+ "side_equals_claim": true,
+ "cpu_seconds": 4.81,
+ "python": "3.14.7"
+}

@@ -399,6 +399,21 @@ _README_QL4V = (
     "packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md, the selection of 22 "
     "October 2026 (think-ql4v), beside the runs' receipt, blocks and reports"
 )
+#: Both generators on the witness the adoption of 23 October 2026 moved to Evan Daniel's
+#: certificate of issue 728 (T-230, think-icp1) at 303: his regularizer and grid-slack at
+#: 0.5, 1 and 5 degrees. The selection drew nothing and decided 303 (`SETTLED`). Their
+#: receipt, run blocks, reports and the selection's report are in
+#: packing/cases/regularized_drawings/think-icp1-2026-10-23/.
+_RUNICP1 = (
+    ("evand-regularize", "evand-regularize-adopt-2026-10-23-n303-evand"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n303-grid-deg05"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n303-grid-deg1"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n303-grid-deg5"),
+)
+_README_ICP1 = (
+    "packing/cases/regularized_drawings/think-icp1-2026-10-23/README.md, the selection of 23 "
+    "October 2026 (think-icp1), beside the runs' receipt, blocks and reports"
+)
 _T225 = "[Daniel regularized lists 2026-10-20]"
 _T225_CERTS = "resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/"
 _T225_REVISION = "0075967bace18a3deabcc0baa64c2fb294fc80a0"
@@ -1039,18 +1054,19 @@ SETTLED: dict[int, Settled] = {
     ),
     303: Settled(
         DECIDED,
-        "[Mishapolk KKT refinements 2026-10-14]",
-        "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-303.yaml.gz",
-        "70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
-        "22387447863837384976770801873110046250293075831927666706527135430718996858433164"
-        "1646777792095999047220400719209/125000000000000000000000000000000000000000000000"
-        "00000000000000000000000000000000000000000000000000000000000000",
-        _RUNZ7WN_B,
-        "grid-slack's view ties the axis tool's on every goal at all three "
-        "thresholds, and Evan Daniel's solved view, four angle classes fewer and tied "
-        "on the rest, is held at row 4 (solved above U); his same-side re-solve was "
-        "refused (literal-too-large)",
-        _README_R3CL,
+        "[Daniel n303 2026-10-22]",
+        "resources/web/evand-n303-2026-10-22/source/search/packer/candidates/s303_r303w0.cert",
+        "f06521f4bde9e379a91c1ea88053f3e43df8ede5",
+        "447744305431858194305431410441/25000000000000000000000000000",
+        _RUNICP1,
+        "Evan Daniel's regularizer finds the witness not first-order jammed and yields no "
+        "view (row 1), and grid-slack's views at 0.5, 1 and 5 degrees, one view at the "
+        "witness's side that straightens its 15 near-upright squares, are sent to review at "
+        "row 7: better than the axis tool's view on near-axis squares, angle classes and "
+        "both totals of shared sides, and worse on light squares (13 to 12)",
+        _README_ICP1,
+        "think-ykgh: the owner's row-7 review of grid-slack's view at 303; until a review "
+        "record admits it, the axis tool's view stays drawn",
     ),
     304: Settled(
         DECIDED,

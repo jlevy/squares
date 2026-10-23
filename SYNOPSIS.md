@@ -315,6 +315,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-224](packing/frontier/RESULTS.md) | 270 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(270) <= 16.928162252196750114897964982713. |
 | [T-226](packing/frontier/RESULTS.md) | 204 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate of issue #670 reports a finite upper-bound improvement at the exact side it states: s(204) <= 45044217780850246618141/3041751595240000000000, below T-186, the case’s house best packing when it was reported. |
 | [T-227](packing/frontier/RESULTS.md) | 227, 229 | `V3` | `C3` | `S3` | `previously-published` | Two complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(227) <= 71427829379429597600111901507/4589408083628500000000000000 and s(229) <= 231170315041711399213831561/14771101209934000000000000. |
+| [T-230](packing/frontier/RESULTS.md) | 303 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(303) <= 447744305431858194305431410441/25000000000000000000000000000 = 17.90977221727432777221725641764, 1.86e-4 below T-186, the case’s house best packing when it was reported. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -432,7 +433,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 229 | 229 registered, 197 by others |
+| Frontier results | 230 | 230 registered, 198 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -701,6 +702,7 @@ case or experiment separately.
 | [Site Deployment](docs/project/guides/site-deployment.md) | component scope and use | current | maintained | — |
 | [Feature: Square Math Domain and Deployment](docs/project/specs/active/plan-2026-10-22-squaremath-domain.md) | implementation plan | current | transient | — |
 | [Feature: Contributor Profiles and Linked Result Credits](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md) | implementation plan | current | transient | — |
+| [Review: Evan Daniel’s Certificate at 303 from Issue #728](docs/project/reviews/review-2026-10-22-daniel-728.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Regularized Views at 204, 227, 229 and 260 (T-225, evand/square-packing@0075967)](docs/project/reviews/review-2026-10-21-evand-regularized-views.md) | dated review record | record | retained | — |
 | [Review: Couzo’s 85 Exact Upper-Bound Certificates at 204–998 (Issue #678)](docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) | dated review record | record | retained | — |
 | [Erratum: the 21 October Review of Evan Daniel’s Import at 270](docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md) | dated review record | record | retained | — |
@@ -868,6 +870,7 @@ case or experiment separately.
 | [Regularization Runs for 204 and 260 After the 20 October Adoption (think-xu4d)](packing/cases/regularized_drawings/think-xu4d-2026-10-20/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 22 October Adoption of T-225 (think-ql4v)](packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 23 October Adoption of T-229 (think-4h23)](packing/cases/regularized_drawings/think-4h23-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the 23 October Adoption of T-230 (think-icp1)](packing/cases/regularized_drawings/think-icp1-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |

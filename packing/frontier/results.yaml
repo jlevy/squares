@@ -31825,6 +31825,154 @@ results:
           moved: 67
           max_move: 0.273
           max_turn_deg: 25.64
+  - id: T-230
+    kind: upper-bound
+    registered: '2026-10-22'
+    landed: '2026-10-23'
+    headline: >-
+      Daniel's smaller n303 packing, started from Ostashev's packing, certified exactly
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(303) <=
+      447744305431858194305431410441/25000000000000000000000000000 =
+      17.90977221727432777221725641764, 1.86e-4 below T-186, the case's house best packing
+      when it was reported.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 22 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt. No route here is the source's code, but both read it through an adapter that
+      carries two of the source checkers' expressions transcribed, so the replay shares
+      those components with the producer (RF-1). The 22 October review decided the
+      certificate again on a clean-room checker of its own and found no blocking defect, so
+      the bound is confirmed, independently re-implemented.
+
+      Issue 728 reports a packing found by Evan Daniel's search from Daniil Ostashev's
+      packing (#562, T-162, the house's packing through T-186): a basin explorer, near-record
+      sweeps and crossovers, and a final band flip, which reflects one of the packing's two
+      tilted bands along its wall. Measured here pose by pose, it is another arrangement than
+      the house's, not a refinement of it. The issue states a dilation certificate of a
+      binary64 packing, scaled by 1 + 10^-12, and leaves local optimality unresolved: the
+      author's exact solver finds the packing not first-order jammed, and a further descent
+      of about 4.8e-7 is predicted and not realised. The source's credits say the work was
+      done with Claude (Anthropic) under Evan Daniel's direction.
+    scope: {n_values: [303]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 303, 1.86e-04 below the case and every report there, found
+        from Ostashev's packing, as T-197 at 155 (1.64e-04) is; 64 squares lie beyond a
+        tenth of the house's packing and 24 tilts are reversed, against T-197's 29 and the
+        15 of T-224 and T-221 beyond a tenth, and well above T-188's 9.29e-06 (S2); no lower
+        bound or optimum.
+      scored: '2026-10-22'
+      by: >-
+        the 22 October review (docs/project/reviews/review-2026-10-22-daniel-728.md), the
+        stage 4 mathematical review lane c-review-728-math, confirming the draft S3 of the
+        think-icp1 Evan Daniel import
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel n303 2026-10-22]']
+      published: '2026-10-22'
+    evidence:
+      [E-evand-728-n303-report, E-evand-728-n303-exact-feasibility, E-evand-728-n303-review-exact-feasibility]
+    artifacts:
+      - packing/resources/web/evand-n303-2026-10-22/README.md
+      - packing/resources/web/evand-n303-2026-10-22/acquisition/claims.json
+      - packing/resources/web/evand-n303-2026-10-22/source/search/packer/candidates/s303_r303w0.cert
+      - packing/resources/web/evand-n303-2026-10-22/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-n303-2026-10-22/measure/identity.json
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-22-daniel-728.md
+      - packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/README.md
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_728.py
+      - packing/resources/web/evand-n303-2026-10-22/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/outputs/sharp-controls.json
+    notes: >-
+      A complete repository replay is retained for n = 303: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 274518 pair decisions; summed over the 3 jobs, the receipt records 33.54
+      route CPU seconds and 69.15 job wall seconds, the longest job 29.02 seconds. Every
+      wall is cleared by at least exactly 60480000000010479/10^29, about 6.048e-13 (square
+      0 at the left wall and square 62 at the bottom, numbered from 0), and every pair by at
+      least 1.2045e-12 (squares 284 and 296), as a 1e-12 dilation gives; no square touches a
+      wall or another.
+
+      The 22 October review's clean-room checker found the same on both of
+      its routes, and its sharp controls were accepted at exact contact and refused 1e-30
+      past it by all four deciders; the receipt's own two controls are gross (RF-2).
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 22
+      October 2026), at n = 303 the certificate is below the case's ceiling (Mykhailo
+      Polkovskyi, after PingYou Ltd, of Daniil Ostashev's packing, T-186) by
+      1.8607379558e-4, and below T-174 (PR #574) and T-162 (#562), the same packing at
+      sides at most 1.8e-19 above it, and #593 by as much; below T-146, T-136 (#481) and
+      #573 by 3.29e-03; below #488 and T-134 (#476) by 7.59e-03 and 7.67e-03; below T-138
+      (#470) and T-113 (#401) by 1.05e-02; and below T-098 (#375), T-092 and T-056 by
+      1.46e-02. It is the smallest report at 303, and the review found it below every bound
+      at 304 to 324 as well. The issue's comparison cites #501 beside #562; #501 makes no
+      claim at 303, and the earlier bound is #562's, through T-186 (RF-4).
+
+      Measured pose by pose by the 22 October review (outputs/identity.json in the packet's
+      review/review-2026-10-22/; a measurement, which decides nothing): no symmetry of the
+      box pairs nearest centres one to one with the house's packing. Under the identity the
+      best assignment moves 64 squares beyond a tenth, 8 beyond half a unit, at most 0.910,
+      keeps 180 within 1e-3, turns 52 beyond 1 degree, and reverses 24 tilts. Of the
+      packings compared it is the closest to Ostashev's, which agrees with the issue's
+      account of the search; against T-146, the house before Ostashev's, 114 squares move
+      beyond a tenth. The packet's measure/identity.json, which repeats the stage 1
+      triage's measurement, finds the same 64 against T-186 and 62 against T-162.
+
+      The packing has 91 squares tilted beyond 0.1 degree, all one way, at 22.83 to 26.12
+      degrees; 13 more whose rational half-angle tangents leave them within 1e-10 degree of
+      an axis; and squares 57 and 167, at 0.080 and 0.062 degree, the two near-axis squares
+      the axis tool leaves untouched. The house's packing has 92, 46 each way.
+
+      The record keeps the word refinement for a pairing in which no square moves beyond a
+      tenth, so this is not a refinement of Ostashev's packing, as the issue says, but
+      another arrangement of his two-band design with one band's tilt reversed; that it
+      was found from his packing is the source's account, which the measurement does not
+      contradict. It lists no regularization. The issue's matching distance of 0.266 is
+      not defined there, and no definition the review tried reproduced it (RF-3).
+
+      The source's own checkers were not run here; at the packet's pin they are
+      byte-identical to V-evand-verify-cert-py and V-evand-verify-cert2-py. The two maintained routes share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and their adapter transcribes two expressions of the
+      source's checkers (RF-1). No optimality, local minimum, rigidity or human oversight
+      is claimed: by the source's own account local optimality is unresolved (RF-7), and a
+      certificate of this arrangement up to about 5e-7 lower would be a refinement of it.
+
+      The case at 303 adopted this certificate as its house best packing on 23 October 2026,
+      from T-186, which stays retained as history, and both strong generators decided the
+      new witness in the same pull request: Evan Daniel's regularizer finds it not
+      first-order jammed and draws no view, and grid-slack's view waits on the owner's
+      row-7 review (think-ykgh), so the axis tool's view of the new witness is drawn.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record; one AI review, of 22
+      October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-22-daniel-728.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review lane
+          c-review-728-math of the 22 October intake, prompted separately from the triage
+          and import lanes, with no shared context
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-22'
+        scope: >-
+          Finite feasibility of the certificate issue 728 names: decided on a clean-room
+          checker of two exact routes, held to both maintained routes at every shared
+          number, sharp controls at 1e-30 on all four deciders, the side and its prints,
+          the margins in report order, each route's trust boundary, and the identity and
+          credit measured pose by pose against the house.
+        verdict: accepted
+        covers: [T-230]
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
@@ -33014,7 +33162,7 @@ regularized_drawings:
         max_turn_deg: 2.2217
       view: packing/atlas/known-best/regularized/n-302-regularized.yaml.gz
     - n: 303
-      of: T-186
+      of: T-230
       by: project
       method: regularize_axis_components/2
       side: same
@@ -33022,9 +33170,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 4
-        max_move: 0.02375713
-        max_turn_deg: 0.0
+        moved: 14
+        max_move: 0.3939059
+        max_turn_deg: 1.44906e-11
       view: packing/atlas/known-best/regularized/n-303-regularized.yaml.gz
     - n: 304
       of: T-186
