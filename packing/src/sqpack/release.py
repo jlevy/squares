@@ -888,6 +888,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.20",
+        first_published="October 23, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Evan Daniel's "
+            "#728 certificate at 303 (T-230)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.19",
         first_published="October 22, 2026",
         result_scope="Use full public names in explanatory narrative profile links.",
@@ -1377,6 +1385,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.19",
+        version="v0.4.20",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Evan Daniel's "
+            "#728 certificate at 303 (T-230)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.18",
