@@ -1,0 +1,6 @@
+{
+  "comparison": {"above":[],"detail":[{"goebel":"10 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":349,"margin":-0.2852377190314252,"n":338,"note":"certificates/n338.cert","relation":"below","side":"18907150436393692611224277956647/1000000000000000000000000000000"},{"goebel":"10 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":349,"margin":-0.2526870047412188,"n":340,"note":"certificates/n340.cert","relation":"below","side":"18939701150683898995176390365029/1000000000000000000000000000000"}],"rows":2,"set":"franciscouzo/square-packing@3ef7634 at 3ef76349","tally":{"above":0,"below":2,"equal":0}},
+  "families": "G\u00f6bel squares, G\u00f6bel strips and corner-touching strips, with deletion",
+  "format": "beyond-horizon-goebel-comparison-v1",
+  "program": "packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
+}

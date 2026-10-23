@@ -50,10 +50,15 @@ The seven certificates under `source/certificates/` (303,367 bytes) are retained
 factual data under the owner decision of 2026-10-09
 ([Retained Factual Data](../known-best-packings/README.md)). The other 64 certificates
 of the commit are pinned by digest against byte-identical copies that other packets
-retain, 302, 375, 376 and 381 among them in the b85dee2 packet; 344 and 378,
-intermediate certificates that no report names and that `b85dee2` replaced, are pinned
-by digest only. The two READMEs and the per-certificate metadata files are pinned by
-digest only. No prose or program is copied.
+retain, 302, 375, 376 and 381 among them in the b85dee2 packet; 344, an intermediate
+certificate that no report names and that `b85dee2` replaced, is pinned by digest only.
+The two READMEs and the per-certificate metadata files are pinned by digest only. No
+prose or program is copied.
+The packet also retains the commit’s `certificates/n378.cert` (46,595 bytes), added from
+the same pin on 22 October at 19:10Z: no issue names it, and the history
+walk of Couzo’s watched publications records it as a report from the commit
+([Rows Beyond the Corpus from the Commit](#rows-beyond-the-corpus-from-the-commit)).
+The packet now retains 8 files, 349,962 bytes.
 
 ## Exact Replay
 
@@ -92,6 +97,20 @@ T-098) by 2.78e-03 and 1.02e-03, and below Daniil Ostashev’s #575 by 1.35e-04 
 Mishapolk’s #593 states #586’s sides there.
 Beyond the corpus, each is below the issue-506 row it was reported against, and #586 is
 smaller at every count; at 339 Evan Daniel’s #584 is also smaller.
+
+## Rows Beyond the Corpus from the Commit
+
+The commit’s `certificates/n378.cert`, which neither #570 nor #583 names, is a row of its own, as the source `couzo-4596670-2026-10-13`: a publication in a watched repository is a report from its first commit (the owner, 14 October 2026), and the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) records it in report order.
+
+[`devtools.beyond_horizon_replay`](../../../devtools/beyond_horizon_replay.py) declares this publication a release with no issue, `franciscouzo/square-packing@4596670`, and reads the rows the history walk records from [acquisition/watched-release.json](acquisition/watched-release.json), which `declare-rows` writes from the walk.
+
+Each certificate was first committed at the commit itself ([receipts/first-commits.json](receipts/first-commits.json)).
+
+**It is verified.** The filtered two-route decision of `devtools.couzo_678_replay`, reused unchanged, accepts every packing on both routes (875 candidate pairs of 71,253, and every corner against every wall), and every side is its header side rounded up at 12 places. **All six controls are refused by both routes.** The positive decisions took 0.5 CPU seconds ([receipts/filtered-exact-replay.json](receipts/filtered-exact-replay.json)). No square touches the box and no pair touches: every wall clears by at least $1.00 \times 10^{-15}$ and every pair by at least $5.32 \times 10^{-12}$. Every side is below Göbel’s classical construction at its count ([receipts/goebel-comparison.json](receipts/goebel-comparison.json)).
+
+The [history walk of 22 October](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) walks every count from 325 to 1024 in report order from starts frozen at `main` `a97b712b9` and records it. **It is superseded on entry**, by Couzo’s b85dee2. It supersedes first Couzo’s 93570ef row.
+
+[acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record the source register reads them from, as the source `couzo-4596670-2026-10-13`.
 
 ## What Is Not Established
 

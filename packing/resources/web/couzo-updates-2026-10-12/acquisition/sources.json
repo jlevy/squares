@@ -1,0 +1,46 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-22T19:10Z",
+  "git_scope": "Bare clone of franciscouzo/square-packing (history to 6b7391de, fetched 22 October), checked out sparsely at a7067d7 (committed 2026-10-12T17:55:52Z, 'results: n = 156, 176, 237, 271 improved; n > 324 updates'), an intermediate commit no issue reports. Retained: the certificates at 344, which the report-order walk of Couzo's history records as reports, each superseded on entry. Pinned by digest only: the root README.md and the certificate at 375, held above G\u00f6bel's construction. The rest of the tree is pinned by the commit alone; no source file was executed.",
+  "sources": [
+    {
+      "id": "franciscouzo-square-packing",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_ref": "master",
+      "source_commit": "a7067d7b92b1e0208499b26d93e898648f0e8667",
+      "committed_utc": "2026-10-12T17:55:52Z",
+      "git_tree": "44f6f9574b97645f7830aaa6929b060b00901d56",
+      "archived_path": "packing/resources/web/couzo-updates-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/couzo-updates-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "certificates/n344.cert",
+        "certificates/n375.cert"
+      ],
+      "subtree_file_count": 3,
+      "subtree_total_bytes": 127682,
+      "retained_file_count": 1,
+      "retained_total_bytes": 43282,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 11500,
+          "sha256": "50878b944d0616f867a5de0a483f0fec73a24df1107f86bfca7945db8f592e9a",
+          "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "certificates/n375.cert",
+          "bytes": 72900,
+          "sha256": "18c4ee7b57e7f9513989901931fb611dcd5110ba74a553e0c737913a0c7d07fc",
+          "reason": "Published at a7067d7, above G\u00f6bel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+        }
+      ],
+      "license": "The repository states no licence for its data or prose: the tree has no LICENSE, and no README states reuse terms. The certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). Prose is hash-pinned and not copied.",
+      "claims": [
+        "franciscouzo/square-packing@a7067d7 publishes certificates at 344, each the exact rational side in its header; each is a report by the order it reached the repository and is superseded on entry.",
+        "No source program ran here."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "comparison": {
+    "above": [],
+    "detail": [
+      {"goebel":"10 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":349,"margin":-0.2527385225341113,"n":340,"note":"certificates/n340.cert","relation":"below","side":"4734912408222751641551744529533/250000000000000000000000000000"},
+      {"goebel":"11 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":389,"margin":-0.2496844424985785,"n":378,"note":"certificates/n378.cert","relation":"below","side":"997135185646326965728732159147/50000000000000000000000000000"},
+      {"goebel":"11 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":389,"margin":-0.2388149983375763,"n":379,"note":"certificates/n379.cert","relation":"below","side":"19953573157087541516255078414179/1000000000000000000000000000000"},
+      {"goebel":"11 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":389,"margin":-0.20415370735315302,"n":380,"note":"certificates/n380.cert","relation":"below","side":"86745201862150664068380352613/4339813107931500000000000000"}
+    ],
+    "rows": 4,
+    "set": "franciscouzo/square-packing@f311f08 at f311f089",
+    "tally": {"above":0,"below":4,"equal":0}
+  },
+  "families": "G\u00f6bel squares, G\u00f6bel strips and corner-touching strips, with deletion",
+  "format": "beyond-horizon-goebel-comparison-v1",
+  "program": "packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
+}

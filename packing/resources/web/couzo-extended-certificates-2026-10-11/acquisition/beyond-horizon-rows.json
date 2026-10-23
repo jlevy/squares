@@ -1,0 +1,11 @@
+{
+  "format": "upper-bound-beyond-horizon-claims-v1",
+  "horizon": 324,
+  "issue_pin": "f311f08901c24b2a6c5f720710a45adec23e926a",
+  "limit": 1024,
+  "publication": "https://github.com/franciscouzo/square-packing/tree/f311f08901c24b2a6c5f720710a45adec23e926a",
+  "published": "2026-10-11T03:39:54Z",
+  "results": [{"ceiling":"18.9396496328910066","certificate":"certificates/n340.cert","deleted":0,"exact_side":"4734912408222751641551744529533/250000000000000000000000000000","first_committed":"2026-10-11T03:39:54Z","n":340,"offered_side":"18.939649632892"},{"ceiling":"19.9427037129265394","certificate":"certificates/n378.cert","deleted":0,"exact_side":"997135185646326965728732159147/50000000000000000000000000000","first_committed":"2026-10-11T03:39:54Z","n":378,"offered_side":"19.942703712927"},{"ceiling":"19.9535731570875416","certificate":"certificates/n379.cert","deleted":0,"exact_side":"19953573157087541516255078414179/1000000000000000000000000000000","first_committed":"2026-10-11T03:39:54Z","n":379,"offered_side":"19.953573157088"},{"ceiling":"19.9882344480719648","certificate":"certificates/n380.cert","deleted":0,"exact_side":"86745201862150664068380352613/4339813107931500000000000000","first_committed":"2026-10-11T03:39:54Z","n":380,"offered_side":"19.988234448072"}],
+  "revision": "f311f08901c24b2a6c5f720710a45adec23e926a",
+  "source": "https://github.com/franciscouzo/square-packing"
+}

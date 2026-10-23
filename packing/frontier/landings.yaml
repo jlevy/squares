@@ -220,6 +220,14 @@ houses:
     result: T-221
     landed: '2026-10-20'
 sources:
+  - id: couzo-02f9690-2026-10-09
+    landed: '2026-10-23'
+  - id: couzo-23aff0c-2026-10-17
+    landed: '2026-10-23'
+  - id: couzo-3ef7634-2026-10-10
+    landed: '2026-10-23'
+  - id: couzo-4596670-2026-10-13
+    landed: '2026-10-23'
   - id: couzo-certificates-2026-10-11
     landed: '2026-10-12'
   - id: couzo-certificates-2026-10-12
@@ -228,10 +236,14 @@ sources:
     landed: '2026-10-14'
   - id: couzo-certificates-2026-10-14
     landed: '2026-10-16'
+  - id: couzo-extended-certificates-2026-10-11
+    landed: '2026-10-23'
   - id: couzo-extended-range-reports-2026-10-08
     landed: '2026-10-09'
   - id: couzo-extended-range-updates-2026-10-08
     landed: '2026-10-10'
+  - id: couzo-index-2026-10-15
+    landed: '2026-10-23'
   - id: couzo-issue583-2026-10-13
     landed: '2026-10-14'
   - id: couzo-issue670-2026-10-17
@@ -244,6 +256,12 @@ sources:
     landed: '2026-10-21'
   - id: couzo-issue715-2026-10-21
     landed: '2026-10-22'
+  - id: couzo-reconcile-2026-10-20
+    landed: '2026-10-23'
+  - id: couzo-retained-certificates-2026-10-12
+    landed: '2026-10-23'
+  - id: couzo-updates-2026-10-12
+    landed: '2026-10-23'
   - id: couzo-verified-bounds-2026-10-14
     landed: '2026-10-16'
   - id: de-winter-issue666-2026-10-17
@@ -252,10 +270,14 @@ sources:
     landed: '2026-10-14'
   - id: evand-fresh-compositions-2026-10-14
     landed: '2026-10-14'
+  - id: evand-hunt3-first-hour-2026-10-10
+    landed: '2026-10-23'
   - id: evand-n343-sweep-2026-10-20
     landed: '2026-10-21'
   - id: evand-record-hunt3-2026-10-10
     landed: '2026-10-11'
+  - id: fang-composites-2026-10-12
+    landed: '2026-10-23'
   - id: fang-direct-certificates-2026-10-13
     landed: '2026-10-14'
   - id: fang-excess-theorem-2026-10-13
