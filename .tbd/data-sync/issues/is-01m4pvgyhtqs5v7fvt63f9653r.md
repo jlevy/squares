@@ -3,9 +3,9 @@ type: is
 id: is-01m4pvgyhtqs5v7fvt63f9653r
 title: Evaluate wand125's sqverify_continuous (f30cc2c) as an independent route for T-145 and s(40) > 3359/500 (#533)
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 6
+version: 8
 delegate: c-review-sqvc-1023
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T01:27:07.066Z
-updated_at: 2026-10-23T09:20:09.400Z
+updated_at: 2026-10-23T16:28:47.502Z
 started_at: 2026-10-23T06:43:56.790Z
+closed_at: 2026-10-23T16:28:47.501Z
+close_reason: "Soundness review of wand125's sqverify_continuous v3/v4 recorded and merged in #752 (7335d0098): no blocking or major defect (SC-1, SC-2 minor); T-192 C0 -> C1; T-145 and T-157 cite it without a reviews item. Deferred: think-flxm (n = 40 replay) and think-0arj (T-192 86-root replay), both open on #543's budget; #533 reply drafted in this bead's notes, posted after the deploy."
+resolution: null
+duplicate_of: null
 ---
 Found in the 2026-10-12 read of wand125/square-packing for the 2026-10-11 intake pass (think-58lu); nothing on GitHub asked. Commit f30cc2cf345a3a3f6af778925f354d9ec979868b (2026-10-12T01:00:19Z; its author name is Hiroaki Hosono), "tools: sqverify_continuous, sqverify_fast with a continuous-angle mode (v3)", the head and the only commit past the 04fbef0 read, adds tools/sqverify_continuous/ (31 files changed, all under it apart from INDEX.json and two lines each of tools/README.md and tools/THIRD_PARTY_NOTICES.md).
 
@@ -56,3 +60,5 @@ Draft reply for #533 (not posted; for the coordinator to post at stage 7 on the 
 >
 > For the record: s(28) > 1149/200 (T-192) now stands as reported and read, and a complete replay of your 86 roots here is owed (about 13 CPU-hours, waiting for a budget). For T-145 and T-157 your mode is a second route beside Guzhou0806's kernel; its runs there have no receipt, and a replay here (under an hour each by our measurement) would make the continuous cover independently re-implemented after reading the producer's code, with no change of rung.
 2026-10-23, c-review-sqvc-1023, handoff: draft PR https://github.com/jlevy/squares/pull/752 (labels intake, S2; not ready, not merged), head ad0d4ea1fc6fbf3a782794f93ea27827fee8c345 (git ls-remote agrees). Commits: e4a4c289d the review and both packets; 58bca5978 the registry and register records; 725dd4eaa merge of main c1115c095 (#749); 8625f55ea re-pin; 7e241b0a4 two corrections on reread (the n = 28 evidence limitations' garbled sentence, and the n = 28 packet README's control sentence, which held for check2 only and had turned "1." into a list); ad0d4ea1f re-pin to 7e241b0a and the four papers' no-change record (69 files byte-identical across two renders from the tree and two with main's register, at link revision 8625f55e). Local: packing-validate --records (52 steps) passed; 858 directly affected tests passed. Hosted at the head: Packing validation 39929215258 success, Certificate page 39929215394 success, Branch mergeability 39928536785 success. Open: think-flxm (n = 40 replay) and think-0arj (T-192 replay), both on the owner's budget (#543); T-157's V4/C4 now wait only on a human oversight record, for the owner to weigh.
+
+2026-10-23, c-review-sqvc-1023, review A of #752 addressed (parent think-4nju, children think-1aya, think-wntr, think-vw21, think-vmyr, think-x3wd, think-ev55, all closed as fixed). Reply https://github.com/jlevy/squares/pull/752#issuecomment-6369600734 at head 565dd8033bbe6798dbe4e6753f00f1be7ce4adf5. A1 by fix (a): the 23 October review is an accepted adversarial item on T-192 only and is cited from T-145 and T-157, whose next_rung and notes no longer count it toward rung 4 (with one synthetic oversight record T-157 stays V3/C3); the item can join T-145 and T-157 after think-flxm replays the mode. So the handoff note's last clause above, that T-157's V4/C4 wait only on a human oversight record, no longer holds. #533's ask is now on think-flxm, blocked on jlevy/squares#543. A coverage source for [wand125 sqverify continuous 2026-10-12] settles #748's A1. Hosted CI at the head: 39984179588, 39984179584, 39984171410 success.
