@@ -47,7 +47,7 @@ TURN = 24
 ACROSS = 0.333
 #: The least size a case number is drawn at while zoomed, 0.65rem.
 LEGIBLE = 10.4
-SIZES = ("small", "medium", "large")
+SIZES = ("small", "medium", "large", "xlarge")
 
 
 @pytest.fixture(scope="module")
@@ -125,12 +125,12 @@ def test_the_triangle_opens_at_large_and_mounting_moves_nothing(
     assert before["armed"]
     assert before["follow"] is None
     assert not before["zoomed"]
-    assert before["scale"] == 1.5
-    assert before["number"] == pytest.approx(1.45 * 16, abs=0.01)
+    assert before["scale"] == 2.25
+    assert before["number"] == pytest.approx(2.4 * 16, abs=0.01)
     assert after["tile"] == pytest.approx(before["tile"], abs=0.03)
     assert after["number"] == pytest.approx(before["number"], abs=0.01)
-    assert (after["follow"], after["zoomed"], after["size"]) == ("scroll", True, "large")
-    assert (state["scale"], state["pan"], state["shown"]) == (1, 0, "large")
+    assert (after["follow"], after["zoomed"], after["size"]) == ("scroll", True, "xlarge")
+    assert (state["scale"], state["shown"]) == (1, "xlarge")
     assert not state["explicit"]
 
 
@@ -148,7 +148,7 @@ def test_scrolling_down_zooms_out_then_slides_to_the_left_edge(
         down = _scroll(page, TURN)
     finally:
         page.close()
-    assert (start["scale"], start["shown"], start["follow"]) == (1, "large", "scroll")
+    assert (start["scale"], start["shown"], start["follow"]) == (1, "xlarge", "scroll")
     assert all(reading["follow"] == "scroll" for reading in down)
     # The page's own scroll is never pulled back: each turn moves it on or not at all.
     for one, other in pairwise(down):
@@ -161,7 +161,7 @@ def test_scrolling_down_zooms_out_then_slides_to_the_left_edge(
     # The tabs show each size in turn as the zoom passes it.
     shown = [SIZES.index(reading["shown"]) for reading in down]
     assert shown == sorted(shown, reverse=True)
-    assert set(shown) == {0, 1, 2}
+    assert set(shown) == {0, 1, 2, 3}
     # Pinned, the point at the focus line passes it at the page's own speed: a turn
     # moves it by the turn at the zoom the turn began at, until the rows begin to slow.
     end = down[0]["end"]
@@ -204,7 +204,7 @@ def test_scrolling_back_up_retraces_the_zoom_and_the_pan(browser: Any, site: str
     assert (end["scrollY"], end["scale"], end["shown"], end["follow"]) == (
         0,
         1,
-        "large",
+        "xlarge",
         "scroll",
     )
     assert end["pan"] == pytest.approx(start["pan"], abs=0.5)

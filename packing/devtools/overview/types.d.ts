@@ -47,8 +47,8 @@ declare function enhanceMath(): Promise<void> | undefined;
 /** The atlas's two views (`atlas-view.js`): the grid, and the triangle of rows by k. */
 type AtlasView = "grid" | "triangle";
 
-/** The atlas's three sizes of tile (`atlas-view.js`), Small the rendered default. */
-type AtlasSize = "small" | "medium" | "large";
+/** The atlas's four sizes of tile (`atlas-view.js`), Small the rendered default. */
+type AtlasSize = "small" | "medium" | "large" | "xlarge";
 
 /** Drawing scale within a reserved tile, Fixed the default. */
 type AtlasScale = "fixed" | "row" | "global";
@@ -95,14 +95,15 @@ interface SiteAtlasViewApi {
   smoothMax(a: number, b: number, bend: number): number;
   curve(values: readonly number[], index: number, through: number): number;
   smootherstep(t: number): number;
-  zoomAt(point: number, from: number, to: number, least: number): number;
+  ramp(t: number, ease?: number): number;
+  zoomAlong(scrolled: number, from: number, length: number, least: number): number;
+  frameAt(point: number, start: number, settled: number, across: number): number;
   settle(distance: number, bend: number): number;
   journey(ys: readonly number[], us: readonly number[], scrolled: number): number;
   followLeft(room: number, width: number, across: number, bend?: number): number;
   nearestSize(tile: number, tiles: Readonly<Record<AtlasSize, number>>): AtlasSize;
   between(from: number, to: number, through: number): number;
   along(tops: readonly number[], at: number): { index: number; through: number };
-  panTo(left: number, edge: number, scrolled: number, range: number, bend?: number): number;
   place(n: number, per: number, starts?: AtlasGridStarts): AtlasTrianglePlace;
   viewOf(search: string): AtlasView;
   searchFor(search: string, view: AtlasView): string;

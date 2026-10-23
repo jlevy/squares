@@ -17,22 +17,16 @@
       scale === "fixed" || scale === "global" ? scale : "row",
     );
   }
-  // Both the dedicated Atlas and the homepage preview honor an explicit size.
-  // An absent or invalid choice leaves the CSS viewport default in control.
-  const size = query.get("size");
-  const named = size === "small" || size === "medium" || size === "large";
+  // Either Atlas page honors an explicit size; else the stylesheet's default holds, or
+  // a Triangle reached from the top follows the scroll (atlas-view.js).
+  const size = query.get("size") ?? "";
+  const named = ["small", "medium", "large", "xlarge"].includes(size);
   if (named) {
     document.documentElement.setAttribute("data-site-atlas-size", size);
-  }
-  // A Triangle reached from the top of either Atlas page follows the scroll, so it
-  // opens at Large (atlas-view.js). A fragment, a size, Grid or an embedding each
-  // open where they always did.
-  const grid = location.pathname.endsWith("/atlas.html") && query.get("atlas") === "grid";
-  if (
+  } else if (
     /\/(atlas\.html|index\.html)?$/.test(location.pathname) &&
     location.hash.length < 2 &&
-    !named &&
-    !grid &&
+    query.get("atlas") !== "grid" &&
     query.get("view") !== "embed"
   ) {
     document.documentElement.setAttribute("data-site-atlas-follow", "");

@@ -33,8 +33,8 @@
 // default, has no parameter. A query parameter and not a fragment: `forward.js` sends a
 // fragment the overview does not have to the explainer.
 //
-// The tiles come in three sizes, Small, Medium and Large, chosen by a second strip of
-// tabs beside the view tabs, in either view (think-ht8t). The size is an attribute of the
+// The tiles come in four sizes, S, M, L and XL, chosen by a second strip of tabs beside
+// the view tabs, in either view (think-ht8t, think-apqd). The size is an attribute of the
 // block too, `data-atlas-size`, and the stylesheet scales a tile by it
 // (`--site-atlas-scale`): both views use the same least cell and the same gaps. Small
 // fits more tiles to a Grid line and Large fewer (`perLineAt`); Triangle keeps its
@@ -50,24 +50,26 @@
 // An untouched Triangle reached from the top of the page follows the scroll
 // (think-apqd). The head bootstrap marks the root `data-site-atlas-follow` when the
 // address names no fragment, size, Grid or embedding, and the stylesheet then paints
-// Large. The triangle is laid out once, at Large, on a stage the height of the window
+// XL. The triangle is laid out once, at XL, on a stage the height of the window
 // that the browser pins (`position: sticky`) while an empty runway after it scrolls past.
 // Each row takes one transform, its pan, its place and its zoom, so a frame lays out and
 // draws no tile, and the page's own scroll is never touched. Laying the tiles out again
 // restyles all of them (about 300 inherited custom properties each) and redraws every
 // drawing, tens of milliseconds a frame; moving the page back under the reader fought
-// the browser's own scrolling. The three sizes are points on the zoom, and the tabs
-// show the nearest.
+// the browser's own scrolling. The four sizes are points on the zoom, and the tabs show
+// the nearest.
 //
 // The point of the triangle at the focus line, halfway down the window, passes it at the
-// page's own speed. The zoom is one smooth curve of it, on a log scale from Large to
-// Small or to where the case numbers would pass their least size, beginning where the
-// row there first needs it and ending by the time the triangle's bottom reaches the
-// stage's. The pan keeps the middle of the window a third of the way along that row
-// (`--site-atlas-follow-across`) with its left end in view, rows read between rows on a
-// monotone spline and each limit reached on a bend, so going down the top of the
-// triangle slides off to the right and the left side, where each row's grid first
-// breaks, stays in view. At the bottom the rows slow to a stop while the triangle slides
+// page's own speed. The first rows stand centred, and over the first three rows the
+// middle of the window eases to a third of the way along the row at the line
+// (`--site-atlas-follow-across`), so the triangle slides right, keeping that row's left
+// end in view; rows are read between rows on a monotone spline, and each limit is met
+// on a bend. The zoom is a straight line in the scroll with rounded ends: the tiles
+// shrink by one width a pixel, from where the row at the line first needs it, over at
+// least one and a half windows, to Small or to where the case numbers would pass their
+// least size, finishing by the time the triangle's bottom reaches the stage's. Going
+// down, the top of the triangle slides off to the right and the left side, where each
+// row's grid first breaks, stays in view. At the bottom the rows slow to a stop while the triangle slides
 // to its left edge. All of it is a function of the scroll, the same going up as coming
 // down. A sideways wheel or swipe pans it further while the page scrolls, and that
 // eases away again back at the top. Nothing is written to the address. Pressing a size
@@ -86,7 +88,7 @@
   const SCALE_PARAM = "scale";
   /** The sizes from the smallest. */
   /** @type {readonly AtlasSize[]} */
-  const SIZES = ["small", "medium", "large"];
+  const SIZES = ["small", "medium", "large", "xlarge"];
   /** How far down the window the focus line of a following triangle stands. */
   const FOCUS = 0.5;
   /** The share of the way to nothing the reader's own pan eases each frame once they
@@ -239,20 +241,66 @@
   }
 
   /**
-   * How far a following triangle is zoomed with the point `point` of it at the focus
-   * line: one smooth curve on a log scale, from the laid-out size, Large, at `from` to
-   * `least` at `to`, starting and stopping without a jolt. Large before `from`.
-   * @param {number} point
+   * How far along a ramp from 0 to 1 a share `t` of its length has come: a straight line
+   * through the middle, bent at either end over `ease` of its length, where its speed
+   * rises and falls along a smootherstep, so it starts and stops without a jolt.
+   * @param {number} t
+   * @param {number} [ease]
+   * @returns {number}
+   */
+  function ramp(t, ease = 0.25) {
+    const bend = Math.min(0.5, Math.max(0, ease));
+    const x = Math.min(1, Math.max(0, Number.isFinite(t) ? t : t > 0 ? 1 : 0));
+    if (bend === 0) {
+      return x;
+    }
+    // The smootherstep's integral from 0 to `u`, a half at 1.
+    const area = (/** @type {number} */ u) => u ** 6 - 3 * u ** 5 + 2.5 * u ** 4;
+    const whole = 1 - bend;
+    if (x < bend) {
+      return (bend * area(x / bend)) / whole;
+    }
+    if (x > 1 - bend) {
+      return (whole - bend * area((1 - x) / bend)) / whole;
+    }
+    return (x - bend / 2) / whole;
+  }
+
+  /**
+   * How far a following triangle is zoomed after `scrolled` pixels of the page's scroll:
+   * the laid-out size, XL, until `from`, then the tiles shrink by one width a pixel along
+   * a ramp `length` long, rounded at both ends, to `least`.
+   * @param {number} scrolled
    * @param {number} from
-   * @param {number} to
+   * @param {number} length
    * @param {number} least
    * @returns {number}
    */
-  function zoomAt(point, from, to, least) {
-    if (!(least > 0) || !(to > from)) {
+  function zoomAlong(scrolled, from, length, least) {
+    if (!(least > 0) || !(least < 1)) {
       return 1;
     }
-    return Math.exp(Math.log(least) * smootherstep((point - from) / (to - from)));
+    if (!(length > 0)) {
+      return scrolled < from ? 1 : least;
+    }
+    return 1 - (1 - least) * ramp((scrolled - from) / length);
+  }
+
+  /**
+   * How far along the reader's row the middle of the window stands, with the point
+   * `point` of the triangle at the focus line: half way, the first rows centred, at
+   * `start`, easing to `across` by `settled`.
+   * @param {number} point
+   * @param {number} start
+   * @param {number} settled
+   * @param {number} across
+   * @returns {number}
+   */
+  function frameAt(point, start, settled, across) {
+    if (!(settled > start)) {
+      return across;
+    }
+    return between(0.5, across, smootherstep((point - start) / (settled - start)));
   }
 
   /**
@@ -374,21 +422,6 @@
   }
 
   /**
-   * The position of a right-to-left scroller, 0 at its start and negative down to
-   * `-range`, that brings `left`, read with the scroller at `scrolled`, to `edge`: 0
-   * while it already stands inside, leaving its start on a `bend` of pixels.
-   * @param {number} left
-   * @param {number} edge
-   * @param {number} scrolled
-   * @param {number} range
-   * @param {number} [bend]
-   * @returns {number}
-   */
-  function panTo(left, edge, scrolled, range, bend = 0) {
-    return Math.min(0, Math.max(Math.min(0, -range), smoothMin(0, left + scrolled - edge, bend)));
-  }
-
-  /**
    * Where case `n` stands in a complete Triangle row, right aligned in `per`
    * canvas columns. Viewport capacity controls drawing scale separately. A smaller
    * canvas request still holds the entire row. Segments keep their local columns,
@@ -442,7 +475,7 @@
    * @returns {AtlasSize}
    */
   function asSize(word) {
-    return word === "medium" || word === "large" ? word : "small";
+    return word === "medium" || word === "large" || word === "xlarge" ? word : "small";
   }
 
   /**
@@ -1120,7 +1153,13 @@
       block.dataset.atlasZoom = "";
     }
     markSize(
-      namedSize ? asSize(sizeQuery) : explicitSize ? size() : following ? "large" : automaticSize(),
+      namedSize
+        ? asSize(sizeQuery)
+        : explicitSize
+          ? size()
+          : following
+            ? "xlarge"
+            : automaticSize(),
     );
     markScale(scoped ? drawingScale() : scaleOf(location.search));
     if (sizes !== null) {
@@ -1173,7 +1212,7 @@
       }).observe(cells);
     }
 
-    // The tiles of the three sizes at the block's width now, as `arrange` works them
+    // The tiles of the four sizes at the block's width now, as `arrange` works them
     // out: Small's share of Large's bounds the zoom, and the nearest names the size the
     // tabs show.
     const presets = () => {
@@ -1183,7 +1222,12 @@
       const gap = lengthPx(style.getPropertyValue("--site-atlas-reference-gap"), root);
       const width = cells.getBoundingClientRect().width;
       /** @type {Record<AtlasSize, number>} */
-      const tiles = { small: Number.NaN, medium: Number.NaN, large: Number.NaN };
+      const tiles = {
+        small: Number.NaN,
+        medium: Number.NaN,
+        large: Number.NaN,
+        xlarge: Number.NaN,
+      };
       for (const each of SIZES) {
         const scale = Number.parseFloat(style.getPropertyValue(`--site-atlas-scale-${each}`));
         tiles[each] = tileAt(width, least, scale, gap);
@@ -1211,11 +1255,12 @@
       stage: 0,
       focus: 0,
       /** @type {Record<AtlasSize, number>} */
-      tiles: { small: Number.NaN, medium: Number.NaN, large: Number.NaN },
+      tiles: { small: Number.NaN, medium: Number.NaN, large: Number.NaN, xlarge: Number.NaN },
       least: 1,
       across: 1 / 3,
-      from: Number.POSITIVE_INFINITY,
-      to: Number.POSITIVE_INFINITY,
+      zoomFrom: Number.POSITIVE_INFINITY,
+      zoomLength: 0,
+      settled: 0,
       /** @type {number[]} */
       ys: [],
       /** @type {number[]} */
@@ -1229,8 +1274,12 @@
       const at = along(laid.tops, point);
       return curve(laid.spans, at.index, at.through);
     };
-    /** The zoom at `point`: one smooth curve from Large down to the least zoom. */
-    const zoomOf = (/** @type {number} */ point) => zoomAt(point, laid.from, laid.to, laid.least);
+    /** The zoom after `scrolled` pixels of scroll, along its rounded straight line. */
+    const zoomOf = (/** @type {number} */ scrolled) =>
+      zoomAlong(scrolled, laid.zoomFrom, laid.zoomLength, laid.least);
+    /** Where the middle of the window stands along the row at `point`. */
+    const shareAt = (/** @type {number} */ point) =>
+      frameAt(point, laid.tops[0] ?? 0, laid.settled, laid.across);
 
     const lay = () => {
       for (const line of laid.rows) {
@@ -1288,19 +1337,20 @@
         stage: window.innerHeight,
         focus: window.innerHeight * FOCUS,
         tiles,
-        least: Math.min(1, Math.max(tiles.small / tiles.large, legible / number || 0)),
+        least: Math.min(1, Math.max(tiles.small / tiles.xlarge, legible / number || 0)),
         across: across > 0 ? across : 1 / 3,
       };
-      // The zoom runs from the first point where the row at the focus line would need
-      // it, framed a third along with its left end in view, to the first point where it
-      // would need the least zoom; past that, the triangle pans.
+      // The first rows stand centred and the framing eases to a third along by the fourth
+      // row's top. The zoom starts where the row at the focus line, so framed, would first
+      // run past the left edge, and would need the least zoom at `to`.
+      laid.settled = tops[Math.min(3, tops.length - 1)] ?? 0;
       const room = cells.clientWidth;
-      const fits = (/** @type {number} */ point) => room / (2 * laid.across * spanAt(point));
-      let from = Number.POSITIVE_INFINITY;
+      const fits = (/** @type {number} */ point) => room / (2 * shareAt(point) * spanAt(point));
+      let from = height;
       let to = height;
       for (let point = 0; point <= height; point += 4) {
         const fit = fits(point);
-        if (fit < 1 && !Number.isFinite(from)) {
+        if (fit < 1 && from === height) {
           from = point;
         }
         if (fit <= laid.least) {
@@ -1308,24 +1358,37 @@
           break;
         }
       }
-      // The zoom reaches its least by the time the triangle's bottom reaches the stage's,
-      // however wide the window, so the slide along the left is always at that zoom.
-      const last = height - (laid.stage - laid.focus) / laid.least;
-      laid.from = Math.min(from, last - 1);
-      laid.to = Math.max(Math.min(to, last), laid.from + 1);
+      // The tiles then shrink at one rate a pixel of scroll, over the scroll that reaching
+      // `to` takes at that rate, and never less than one and a half windows; if the
+      // triangle's bottom would reach the stage's first, the zoom finishes there instead.
+      // Never before the page's own top, so a page opened there shows XL as painted.
+      const top = -(block.getBoundingClientRect().top + window.scrollY + laid.offset);
+      laid.zoomFrom = Math.max(from - laid.focus, top);
+      const rate = laid.least < 1 ? (1 - laid.least) / Math.log(1 / laid.least) : 1;
+      let length = Math.max((to - from) * rate, laid.stage * 1.5);
       // While pinned, the point at the focus line moves at the page's own speed on the
       // screen: a pixel of scroll moves it a pixel divided by the zoom.
       /** @type {number[]} */
-      const ys = [0];
+      let ys = [];
       /** @type {number[]} */
-      const us = [laid.focus];
-      let point = laid.focus;
+      let us = [];
       let scrolled = 0;
-      while (point < height && laid.focus + (height - point) * zoomOf(point) > laid.stage) {
-        scrolled += zoomOf(point + 1) * 2;
-        point += 2;
-        ys.push(scrolled);
-        us.push(point);
+      for (let tries = 0; tries < 4; tries += 1) {
+        laid.zoomLength = length;
+        ys = [0];
+        us = [laid.focus];
+        let point = laid.focus;
+        scrolled = 0;
+        while (point < height && laid.focus + (height - point) * zoomOf(scrolled) > laid.stage) {
+          point += 2 / zoomOf(scrolled + 1);
+          scrolled += 2;
+          ys.push(scrolled);
+          us.push(point);
+        }
+        if (laid.zoomFrom + length <= scrolled + 1) {
+          break;
+        }
+        length = Math.max(scrolled - laid.zoomFrom, 1);
       }
       laid.ys = ys;
       laid.us = us;
@@ -1387,40 +1450,37 @@
       // The rows come to rest smoothly: from `stop` before the end of the journey, the
       // scroll carries them less and less, and none past `stop` after it.
       const slowing = laid.end - laid.stop;
-      const pinned =
-        scrolled <= slowing
-          ? Math.max(scrolled, 0)
-          : slowing + settle(scrolled - slowing, laid.stop);
-      const point = scrolled <= 0 ? laid.focus + scrolled : journey(laid.ys, laid.us, pinned);
+      const carried =
+        scrolled <= slowing ? scrolled : slowing + settle(scrolled - slowing, laid.stop);
+      const point =
+        scrolled <= 0 ? laid.focus + scrolled : journey(laid.ys, laid.us, Math.max(carried, 0));
       const line = laid.focus + Math.min(0, scrolled);
-      const zoom = zoomOf(point);
+      const zoom = zoomOf(carried);
       const room = cells.clientWidth;
       const width = spanAt(point) * zoom;
+      // How far right the rows move: to put the middle of the window the framing's share
+      // along the reader's row, its left end in view, and at the end to the left edge.
       const range = Math.max(0, (laid.spans.at(-1) ?? 0) * zoom - room);
-      const bend = room * PAN_BEND;
-      const framed = panTo(
-        room - width,
-        followLeft(room, width, laid.across, bend),
-        0,
-        range,
-        bend,
-      );
-      // The pan to the left edge starts as the rows begin to slow and ends with the runway.
+      const framed = followLeft(room, width, shareAt(point), room * PAN_BEND) - (room - width);
       const reach = smootherstep((scrolled - slowing) / (laid.runway + laid.stop));
-      const auto = between(framed, -range, reach);
+      const auto = between(framed, range, reach);
       // Back above the triangle, or at the page's top, the reader's own pan eases away.
       const above = (scrolled <= -laid.focus || window.scrollY <= 0) && nudge !== 0;
       if (above) {
         nudge = Math.abs(nudge) < 0.5 ? 0 : nudge * (1 - EASE);
       }
-      nudge = Math.min(Math.max(nudge, -range - auto), -auto);
-      panned = auto + nudge;
+      const shift = Math.min(
+        Math.max(auto - nudge, Math.min(auto, 0) - room / 2),
+        Math.max(range, auto),
+      );
+      nudge = auto - shift;
+      panned = -shift;
       laid.rows.forEach((row, index) => {
         const top = laid.tops[index] ?? 0;
         const moved = line + (top - point) * zoom - top;
-        row.style.transform = `translate(${-panned}px, ${moved}px) scale(${zoom})`;
+        row.style.transform = `translate(${shift}px, ${moved}px) scale(${zoom})`;
       });
-      showSize(nearestSize(laid.tiles.large * zoom, laid.tiles));
+      showSize(nearestSize(laid.tiles.xlarge * zoom, laid.tiles));
       Object.assign(reading, { scrolled, point, line, zoom, pan: panned, nudge, end: laid.end });
       if (above && nudge !== 0) {
         schedule();
@@ -1488,14 +1548,15 @@
     smoothMax,
     curve,
     smootherstep,
-    zoomAt,
+    ramp,
+    zoomAlong,
+    frameAt,
     settle,
     journey,
     followLeft,
     nearestSize,
     between,
     along,
-    panTo,
     place,
     viewOf,
     searchFor,

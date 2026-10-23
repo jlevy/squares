@@ -989,7 +989,12 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
     in the same box. The House and Regularized tabs that stood there went on 2026-10-04
     (think-k8x9), with their script: the views' script mounts the sizes, and the page
     links the views' and the grid's alone."""
-    assert [key for key, _ in overview_sections.ATLAS_SIZES] == ["small", "medium", "large"]
+    assert [key for key, _ in overview_sections.ATLAS_SIZES] == [
+        "small",
+        "medium",
+        "large",
+        "xlarge",
+    ]
     assert overview_sections.ATLAS_SIZE == "small"
     tabs = overview_sections.atlas_size_tabs()
     assert tabs == (
@@ -997,11 +1002,17 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
         'aria-label="Atlas tile size" '
         "data-atlas-sizes>"
         '<button type="button" role="tab" id="atlas-size-small" data-atlas-size-tab="small" '
-        'aria-selected="true" aria-controls="atlas-cells">Small</button>'
+        'aria-selected="true" aria-controls="atlas-cells" aria-description="Small" '
+        'title="Small">S</button>'
         '<button type="button" role="tab" id="atlas-size-medium" data-atlas-size-tab="medium" '
-        'aria-selected="false" aria-controls="atlas-cells" tabindex="-1">Medium</button>'
+        'aria-selected="false" aria-controls="atlas-cells" aria-description="Medium" '
+        'title="Medium" tabindex="-1">M</button>'
         '<button type="button" role="tab" id="atlas-size-large" data-atlas-size-tab="large" '
-        'aria-selected="false" aria-controls="atlas-cells" tabindex="-1">Large</button>'
+        'aria-selected="false" aria-controls="atlas-cells" aria-description="Large" '
+        'title="Large" tabindex="-1">L</button>'
+        '<button type="button" role="tab" id="atlas-size-xlarge" data-atlas-size-tab="xlarge" '
+        'aria-selected="false" aria-controls="atlas-cells" aria-description="Extra large" '
+        'title="Extra large" tabindex="-1">XL</button>'
         "</div>"
     )
     assert atlas_page.count(tabs) == 1
@@ -1035,9 +1046,8 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
     assert "dataset.siteAtlasSize" in mount
     assert "priorWidth" in mount
     select_size = view.split("selectSize", 1)[1].split("};", 1)[0]
-    assert re.search(
-        r"\bchange\(\(\) => \{\s*unzoom\(\);\s*markSize\(next\);\s*\}\);", select_size
-    )
+    changed = select_size[select_size.index("change(") :]
+    assert changed.index("unzoom();") < changed.index("markSize(next);")
     assert "readdress(searchForSize(location.search, next));" in select_size
     assert "history.replaceState(history.state" in view
     assert '"--site-atlas-scale"' in view
@@ -1227,7 +1237,8 @@ def test_the_sizes_scale_a_tile_by_one_token_in_either_view() -> None:
     reserving the gaps before sharing the block's width among its columns."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     block = _rule(css, ".site-page .site-atlas-grid")
-    for size, scale in (("small", "0.667"), ("medium", "1"), ("large", "1.5")):
+    scales = (("small", "0.667"), ("medium", "1"), ("large", "1.5"), ("xlarge", "2.25"))
+    for size, scale in scales:
         assert f"--site-atlas-scale-{size}: {scale};" in block
         assert f"--site-atlas-scale: var(--site-atlas-scale-{size});" in _rule(
             css, f'.site-page .site-atlas-grid[data-atlas-size="{size}"]'

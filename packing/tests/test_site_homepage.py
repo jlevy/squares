@@ -312,9 +312,9 @@ def test_the_homepage_atlas_shows_every_case_in_the_shared_triangle(
     assert initial["visible_cases"] == 324
     assert initial["drawings"]["cards"] == 324
     assert initial["drawings"]["rows"] == list(range(1, 19))
-    # Opened from the top, the homepage's triangle follows the scroll from Large
+    # Opened from the top, the homepage's triangle follows the scroll from XL
     # (`tests/test_site_atlas_follow.py`).
-    assert initial["drawings"]["size"] == "large"
+    assert initial["drawings"]["size"] == "xlarge"
     assert initial["drawings"]["scale"] == "row"
     assert initial["view"] == "triangle"
     assert initial["prepared_cases"] == 324

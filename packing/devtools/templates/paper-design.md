@@ -1022,8 +1022,8 @@ contributor articles use their component sheets and the same text tokens.
   separate destinations in the Learn dropdown.
   Neither page carries a Film/Workbench switcher below the global navigation.
 
-- **View choosers.** The Atlas’s Grid and Triangle views and Small, Medium and Large
-  tiles use the shared `.site-tabs` strip inside the page.
+- **View choosers.** The Atlas’s Grid and Triangle views and its S, M, L and XL tiles
+  use the shared `.site-tabs` strip inside the page.
   These are in-place tablists of buttons, with the selected view filled by the shared
   current-item tint. The strip uses the navigation’s sans size, medium weight, square
   corners and thin border.
@@ -1907,12 +1907,15 @@ contributor articles use their component sheets and the same text tokens.
 
 - **Atlas sizes.** Beside the view tabs, in one row over the tiles that wraps under them
   on a phone, a second strip of the same tabs chooses the size of the tiles
-  (`atlas_size_tabs`, think-ht8t): **Small**, **Medium** and **Large**, Small selected
-  on narrower screens and Medium from 75rem upward, with the keys of the view tabs.
+  (`atlas_size_tabs`, think-ht8t): **S**, **M**, **L** and **XL**, each named in full by
+  its title, Small selected on narrower screens and Medium from 75rem upward, with the
+  keys of the view tabs.
+  XL joined on 2026-10-23 for a triangle that follows the scroll, which opens at it
+  (**Atlas follows the scroll**, below).
   CSS and the synchronous bootstrap agree before the first paint, avoiding a size jump.
   An explicit URL or chooser selection overrides this automatic default (`think-mp47`).
-  The size is one token, `--site-atlas-scale` on the block (1, Small 0.667, Large 1.5),
-  set by its `data-atlas-size`, and applies in either view.
+  The size is one token, `--site-atlas-scale` on the block (1, Small 0.667, Large 1.5,
+  XL 2.25), set by its `data-atlas-size`, and applies in either view.
   It scales the shared cell minimum, `--site-atlas-cell-min`, so both views fit more
   tiles at Small and fewer at Large (`perLineAt`, tested in Node).
   At 1280 pixels a line holds 15 tiles at Small, 10 at Medium and 7 at Large, and on a
@@ -1930,10 +1933,10 @@ contributor articles use their component sheets and the same text tokens.
 - **Atlas follows the scroll.** A Triangle reached from the top of either Atlas page,
   with no size, Grid, fragment or embedding in the address, follows the page’s scroll
   (think-apqd, the owner, 2026-10-22). The head bootstrap marks the root
-  `data-site-atlas-follow`, so the first paint is already Large, and `atlas-view.js`
-  keeps it there until the reader scrolls.
-  - The triangle is laid out once, at Large, on a stage the height of the window that
-    the browser pins (`position: sticky`) while an empty runway after it scrolls past.
+  `data-site-atlas-follow`, so the first paint is already XL, and `atlas-view.js` keeps
+  it there until the reader scrolls.
+  - The triangle is laid out once, at XL, on a stage the height of the window that the
+    browser pins (`position: sticky`) while an empty runway after it scrolls past.
     Each row takes one transform, its pan, its place and its zoom, so no frame lays out
     or redraws a tile and the page’s own scroll is never touched.
     Two earlier designs were measured and dropped: laying the tiles out again each frame
@@ -1943,19 +1946,24 @@ contributor articles use their component sheets and the same text tokens.
     On a narrow page kpress clips the document with `overflow-x: hidden`, which would
     pin the stage to the document; while following, the site clips it instead.
   - The point at the focus line, halfway down the window, passes it at the page’s own
-    speed. The zoom is one smooth curve of that point, on a log scale from Large down to
-    Small, or to where the case numbers, drawn at `--site-atlas-follow-number`, would
-    pass `--site-atlas-follow-number-least`, starting where the row at the line first
-    needs it and finishing by the time the triangle’s bottom reaches the stage’s, so it
-    neither starts nor stops with a jolt.
-  - The pan keeps the middle of the window a third of the way along the reader’s row
-    (`--site-atlas-follow-across`), where each row’s grid first breaks, with that row’s
-    left end in view. Rows are read between rows on a monotone spline, and the pan meets
-    each limit on a bend a quarter of the stage wide.
-    Going down, the top of the triangle slides off to the right, the triangle zooms out,
+    speed. The first rows stand centred; over the first three rows the middle of the
+    window eases to a third of the way along the reader’s row
+    (`--site-atlas-follow-across`), where each row’s grid first breaks, so the triangle
+    slides right, keeping that row’s left end in view.
+    Rows are read between rows on a monotone spline, and the pan meets each limit on a
+    bend a quarter of the stage wide.
+  - The zoom is a straight line in the scroll with rounded ends: the tiles shrink by one
+    width a pixel, from where the reader’s row first needs it, over at least one and a
+    half windows, from XL down to Small, or to where the case numbers, drawn at
+    `--site-atlas-follow-number`, would pass `--site-atlas-follow-number-least`. It
+    finishes by the time the triangle’s bottom reaches the stage’s, and neither starts
+    nor stops with a jolt.
+    A zoom timed by the point at the focus line instead shrank the tiles fastest at its
+    end, since that point runs faster as the tiles shrink.
+  - Going down, the top of the triangle slides off to the right, the triangle zooms out,
     and the pan slides along the left side; at the bottom the rows slow to a stop while
     it slides on to the left edge.
-  - All of it is a function of the scroll, so going back up retraces it to Large at the
+  - All of it is a function of the scroll, so going back up retraces it to XL at the
     top. A sideways wheel or swipe pans the triangle while the page scrolls, so a
     diagonal gesture moves both ways; that pan eases away back at the top.
   - The size tabs show the size nearest the zoom, and nothing is written to the address.

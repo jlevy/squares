@@ -2259,6 +2259,7 @@ body:has([data-atlas-preview]) {
   --site-atlas-scale-small: 0.667;
   --site-atlas-scale-medium: 1;
   --site-atlas-scale-large: 1.5;
+  --site-atlas-scale-xlarge: 2.25;
   --site-atlas-scale: var(--site-atlas-scale-small);
   /* A triangle that follows the scroll keeps the middle of the window this share of
      the way along the reader's row, from its left end, where the grid first breaks.
@@ -2266,7 +2267,7 @@ body:has([data-atlas-preview]) {
      shrunk Large toward Small, and zooms out no further than keeps them at the least
      size, the least the regular numbers take (overview/atlas-view.js). */
   --site-atlas-follow-across: 0.333;
-  --site-atlas-follow-number: 1.45rem;
+  --site-atlas-follow-number: 2.4rem;
   --site-atlas-follow-number-least: 0.65rem;
   /* The move between the views: one duration and one easing for every tile, read by
      the script. Reduced motion makes the switch instant, as it does every hover. */
@@ -2302,6 +2303,12 @@ html[data-site-atlas-size="large"]
   .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
   --site-atlas-scale: var(--site-atlas-scale-large);
 }
+.site-page .site-atlas-grid[data-atlas-size="xlarge"],
+html[data-site-atlas-size="xlarge"]
+  .site-page
+  .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
+  --site-atlas-scale: var(--site-atlas-scale-xlarge);
+}
 /* Untouched wide-screen defaults match the first CSS paint, before JS placement. A
    block whose size follows, or once followed, the scroll keeps its own size. */
 @media (min-width: 75rem) {
@@ -2311,14 +2318,14 @@ html[data-site-atlas-size="large"]
     --site-atlas-scale: var(--site-atlas-scale-medium);
   }
 }
-/* A Triangle reached from the top of the page opens at Large, as the script that
-   follows the scroll mounts it (embed.js marks the root). */
+/* A Triangle reached from the top of the page opens at XL, as the script that follows
+   the scroll mounts it (embed.js marks the root). */
 html[data-site-atlas-follow]
   .site-page
   .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]):not(
     [data-atlas-follow]
   ) {
-  --site-atlas-scale: var(--site-atlas-scale-large);
+  --site-atlas-scale: var(--site-atlas-scale-xlarge);
 }
 /* Layout, Size, Scale and Drawings use the shared small chooser strip. Each line is
    centered over the tiles, with the compact two-column key centered beneath it;

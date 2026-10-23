@@ -292,6 +292,7 @@ void test("the address preserves an explicit size, including Small on a wide-scr
   assert.equal(atlas.sizeOf("?size=small"), "small");
   assert.equal(atlas.sizeOf("?size=large"), "large");
   assert.equal(atlas.sizeOf("?size=medium"), "medium");
+  assert.equal(atlas.sizeOf("?size=xlarge"), "xlarge");
   assert.equal(atlas.sizeOf("?size=Large"), "small");
   assert.equal(atlas.sizeOf("?size=huge"), "small");
   assert.equal(atlas.sizeOf("?atlas=triangle&size=large&age=180"), "large");
@@ -462,35 +463,58 @@ function kink(f, from, to) {
   return worst;
 }
 
-void test("The zoom is one smooth curve from Large to the least zoom", () => {
-  assert.equal(atlas.smootherstep(-1), 0);
-  assert.equal(atlas.smootherstep(0.5), 0.5);
-  assert.equal(atlas.smootherstep(2), 1);
-  const zoom = (/** @type {number} */ point) => atlas.zoomAt(point, 1000, 3000, 0.45);
-  assert.equal(zoom(0), 1);
-  assert.equal(zoom(1000), 1);
-  assert.equal(zoom(3000), 0.45);
-  assert.equal(zoom(5000), 0.45);
-  // It only ever shrinks, starts and stops with no slope, and has no corner anywhere.
-  for (let point = 1000; point < 3000; point += 10) {
-    assert.ok(zoom(point + 10) <= zoom(point));
+void test("The ramp is a straight line with rounded ends", () => {
+  assert.equal(atlas.ramp(-1), 0);
+  assert.equal(atlas.ramp(0), 0);
+  assert.equal(atlas.ramp(0.5), 0.5);
+  assert.equal(atlas.ramp(1), 1);
+  assert.equal(atlas.ramp(2), 1);
+  assert.equal(atlas.ramp(0.3, 0), 0.3);
+  // Straight through the middle: equal steps of the share give equal steps of the ramp.
+  const middle = [0.3, 0.4, 0.5, 0.6, 0.7].map((t) => atlas.ramp(t));
+  for (let i = 2; i < middle.length; i += 1) {
+    const step = (middle[i] ?? 0) - (middle[i - 1] ?? 0);
+    assert.ok(Math.abs(step - ((middle[1] ?? 0) - (middle[0] ?? 0))) < 1e-12);
   }
-  assert.ok(Math.abs(zoom(1001) - zoom(1000)) < 1e-6);
-  assert.ok(Math.abs(zoom(3000) - zoom(2999)) < 1e-6);
-  assert.ok(kink(zoom, 0, 4000) < 1e-5);
-  // A triangle that never needs to zoom stays at Large.
-  assert.equal(atlas.zoomAt(500, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, 0.45), 1);
+  // No slope at either end and no corner anywhere.
+  assert.ok(atlas.ramp(0.001) < 1e-6);
+  assert.ok(1 - atlas.ramp(0.999) < 1e-6);
+  assert.ok(kink((t) => atlas.ramp(t), -0.2, 1.2) < kink((t) => atlas.ramp(t, 0), -0.2, 1.2) / 50);
+  for (let t = 0; t < 1; t += 0.01) {
+    assert.ok(atlas.ramp(t + 0.01) >= atlas.ramp(t));
+  }
 });
 
-void test("The pan and the framing bend onto their limits without a corner", () => {
+void test("The zoom shrinks the tiles by one width a pixel of scroll, from XL to the least", () => {
+  const zoom = (/** @type {number} */ scrolled) => atlas.zoomAlong(scrolled, 500, 2000, 0.3);
+  assert.equal(zoom(0), 1);
+  assert.equal(zoom(500), 1);
+  assert.ok(Math.abs(zoom(2500) - 0.3) < 1e-12);
+  assert.ok(Math.abs(zoom(9000) - 0.3) < 1e-12);
+  // Through the middle the zoom falls by the same amount for every pixel scrolled.
+  const steps = [1200, 1400, 1600, 1800].map((y) => zoom(y) - zoom(y + 100));
+  for (const step of steps) {
+    assert.ok(Math.abs(step - (steps[0] ?? 0)) < 1e-12);
+  }
+  // A zoom that never needs to start, or a least of 1, stays at XL.
+  assert.equal(atlas.zoomAlong(500, Number.POSITIVE_INFINITY, 2000, 0.3), 1);
+  assert.equal(atlas.zoomAlong(5000, 0, 2000, 1), 1);
+});
+
+void test("The first rows stand centred and the framing eases to a third", () => {
+  assert.equal(atlas.frameAt(0, 0, 900, 1 / 3), 0.5);
+  assert.equal(atlas.frameAt(-200, 0, 900, 1 / 3), 0.5);
+  assert.equal(atlas.frameAt(900, 0, 900, 1 / 3), 1 / 3);
+  assert.equal(atlas.frameAt(5000, 0, 900, 1 / 3), 1 / 3);
+  assert.ok(Math.abs(atlas.frameAt(450, 0, 900, 1 / 3) - (0.5 + 1 / 3) / 2) < 1e-12);
+  assert.ok(kink((point) => atlas.frameAt(point, 0, 900, 1 / 3), -300, 1200) < 1e-5);
+  assert.equal(atlas.frameAt(400, 0, 0, 1 / 3), 1 / 3);
+});
+
+void test("The framing bends onto the left edge without a corner", () => {
   /** @param {number} bend */
   const left = (bend) => (/** @type {number} */ width) => atlas.followLeft(930, width, 1 / 3, bend);
   assert.ok(kink(left(240), 1000, 2000) < kink(left(0), 1000, 2000) / 50);
-  /** @param {number} bend */
-  const pan = (bend) => (/** @type {number} */ x) => atlas.panTo(x, 0, 0, 5000, bend);
-  assert.ok(kink(pan(240), -600, 600) < kink(pan(0), -600, 600) / 50);
-  assert.equal(pan(240)(300), 0);
-  assert.equal(pan(240)(-300), -300);
 });
 
 void test("The rows slow smoothly to a stop at the end of the triangle", () => {
@@ -552,19 +576,11 @@ void test("A line falls on a row and a share of the way to the next", () => {
   assert.equal(atlas.between(10, 20, 0.25), 12.5);
 });
 
-void test("A right-to-left scroller pans by what brings a row's left end to its place", () => {
-  // Read 383px left of the edge with the scroller already 466px along.
-  assert.equal(atlas.panTo(-343, 40, -466, 5584), -849);
-  // Already inside: the start. Past the scroller's range: its end.
-  assert.equal(atlas.panTo(200, 40, 0, 5584), 0);
-  assert.equal(atlas.panTo(-9000, 40, 0, 5584), -5584);
-  assert.equal(atlas.panTo(-9000, 40, 0, -3), 0);
-});
-
 void test("The tabs show the size whose tile is nearest the zoom, by ratio", () => {
-  const tiles = { small: 72, medium: 105, large: 161 };
+  const tiles = { small: 72, medium: 105, large: 161, xlarge: 263 };
   assert.equal(atlas.nearestSize(72, tiles), "small");
   assert.equal(atlas.nearestSize(80, tiles), "small");
   assert.equal(atlas.nearestSize(95, tiles), "medium");
   assert.equal(atlas.nearestSize(140, tiles), "large");
+  assert.equal(atlas.nearestSize(230, tiles), "xlarge");
 });

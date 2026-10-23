@@ -374,7 +374,8 @@ def test_the_popovers_compact_drawing_keeps_its_own_line_weight(
             row.scroll_into_view_if_needed()
             row.locator("td.site-thumb img").click()
         else:
-            page.goto(f"{served}atlas.html", wait_until="load")
+            # A named size: this reads the popover, not a triangle following the scroll.
+            page.goto(f"{served}atlas.html?size=small", wait_until="load")
             page.locator("[data-atlas-grid]").scroll_into_view_if_needed()
             cell = page.locator('.site-atlas-cell[data-case="10"]')
             cell.wait_for()
@@ -410,7 +411,8 @@ def test_the_popovers_cross_stands_in_its_corner_clear_of_the_steps(
     cross as a second limit, had set a padding's width in from the corner
     (`think-0dxa`)."""
     with _page(browser, width=width) as page:
-        page.goto(f"{served}atlas.html", wait_until="load")
+        # A named size: this reads the popover, not a triangle following the scroll.
+        page.goto(f"{served}atlas.html?size=small", wait_until="load")
         row = page.locator('.site-atlas-cell[data-case="5"]')
         row.click()
         popover = page.locator("#pop-case")

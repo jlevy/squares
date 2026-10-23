@@ -367,7 +367,9 @@ def test_default_triangle_explicit_grid_and_complete_rows_keep_all_case_nodes(
     page = row_browser.new_page(viewport={"width": width, "height": 900})
     address = row_site
     try:
-        page.goto(address + "atlas.html", wait_until="load")
+        # The fragment keeps the static triangle these rules read; a plain address from
+        # the top follows the scroll (`tests/test_site_atlas_follow.py`).
+        page.goto(address + "atlas.html#the-atlas", wait_until="load")
         page.evaluate(ROWS, {"install": True})
         state = _completed(page)
         assert state["selected"] == state["root_view"] == state["view"] == "triangle"
@@ -1329,10 +1331,10 @@ def test_the_size_tabs_stand_beside_the_view_tabs_and_honor_explicit_small(
     small = seen["default"]
     assert (small["size"], small["search"]) == ("small", "?size=small")
     sizes = _size_tabs(small)
-    assert list(sizes) == ["small", "medium", "large"]
-    assert [tab["label"] for tab in sizes.values()] == ["Small", "Medium", "Large"]
+    assert list(sizes) == ["small", "medium", "large", "xlarge"]
+    assert [tab["label"] for tab in sizes.values()] == ["S", "M", "L", "XL"]
     assert (sizes["small"]["selected"], sizes["small"]["tabindex"]) == ("true", 0)
-    for key in ("medium", "large"):
+    for key in ("medium", "large", "xlarge"):
         assert (sizes[key]["selected"], sizes[key]["tabindex"]) == ("false", -1), key
     assert all(tab["shown"] and tab["controls"] == "atlas-cells" for tab in sizes.values())
     views = _tabs(small)
@@ -1465,7 +1467,7 @@ def test_the_arrow_keys_move_between_the_size_tabs_and_select_the_one_focused(
         ("ArrowLeft", "medium"),
         ("ArrowRight", "large"),
         ("Home", "small"),
-        ("End", "large"),
+        ("End", "xlarge"),
         ("ArrowRight", "small"),
     ]
     for key, report in seen["size keys"]:
