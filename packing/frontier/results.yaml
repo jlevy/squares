@@ -16023,27 +16023,6 @@ results:
           steps recomputed independently.
         verdict: accepted
         covers: [T-145]
-      - path: docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
-        kind: adversarial
-        reviewer: AI agent (Claude, Anthropic; tier tbd-strong-max, maximum reasoning), the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob), prompted separately from the imports of T-145, T-157 and T-192 and from every earlier review of them
-        reviewer_kind: ai
-        relation: project
-        date: '2026-10-23'
-        scope: >-
-          wand125's sqverify_continuous, v3 at f30cc2c and v4 at d4a1981, the continuous-
-          angle mode of this repository's sqverify_fast: lemmas C1 to C6 and the counting
-          re-derived from the source; slab.rs, the continuous path of main.rs and the
-          admission it reads, read line by line against this repository's copies of the
-          modules it reuses; the exact premises at the three results' parameters and their
-          certificates' facts decided with the reviewer's own code; the box bound held to an
-          exact oracle on adversarial boxes, with ten deliberate mutations of its
-          transcription; the binary rebuilt to the recorded digest, the crate's tests run,
-          and the source's controls reproduced node for node with every witness re-evaluated
-          exactly. For T-145 and T-157 a second route whose claim runs are reported without
-          receipts and were not replayed, and not a review of the producer's kernels; for
-          T-192 route A's checker, without its 86-root run or the second program.
-        verdict: accepted
-        covers: [T-145, T-157, T-192]
     artifacts:
       - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/README.md
       - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
@@ -16107,7 +16086,9 @@ results:
       (docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md) read
       the second route for this density's cover, its exact premises at this result's parameters
       and its control, which v4 reproduced here node for node; the source's run of the claim
-      publishes no receipt and has not been replayed here, so it moves no rung and no mark.
+      publishes no receipt and has not been replayed here, so it moves no rung and no mark. It is
+      cited here and listed among T-192's reviews only, until a replay here (think-flxm) makes the
+      mode a deciding route for this result.
 
   - id: T-146
     kind: upper-bound
@@ -19630,9 +19611,10 @@ results:
       producer's code. C3 rests on the complete replay of both kernels and its controls, and the
       kernels' lemmas on the 10 October review of T-145, which read the same bytes. No second
       method decides the continuous cover; the 401-direction run of sqverify-fast at the new side
-      is a necessary condition it passed. Hosono's published sqverify_continuous (think-xzob),
-      once reviewed and replayed here, would make the cover independently re-implemented and
-      move the mark, not the rung.
+      is a necessary condition it passed. Hosono's sqverify_continuous, retained and reviewed
+      for soundness on 23 October with no blocking defect, would, once replayed here
+      (think-flxm), make the cover independently re-implemented after reading the producer's
+      code and move the mark, not the rung.
     evidence:
       - E-n040-guzhou-new-supports-report
       - E-n040-guzhou-new-supports-kernel-replay
@@ -19658,27 +19640,6 @@ results:
           sqverify_continuous would change.
         verdict: accepted
         covers: [T-157]
-      - path: docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
-        kind: adversarial
-        reviewer: AI agent (Claude, Anthropic; tier tbd-strong-max, maximum reasoning), the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob), prompted separately from the imports of T-145, T-157 and T-192 and from every earlier review of them
-        reviewer_kind: ai
-        relation: project
-        date: '2026-10-23'
-        scope: >-
-          wand125's sqverify_continuous, v3 at f30cc2c and v4 at d4a1981, the continuous-
-          angle mode of this repository's sqverify_fast: lemmas C1 to C6 and the counting
-          re-derived from the source; slab.rs, the continuous path of main.rs and the
-          admission it reads, read line by line against this repository's copies of the
-          modules it reuses; the exact premises at the three results' parameters and their
-          certificates' facts decided with the reviewer's own code; the box bound held to an
-          exact oracle on adversarial boxes, with ten deliberate mutations of its
-          transcription; the binary rebuilt to the recorded digest, the crate's tests run,
-          and the source's controls reproduced node for node with every witness re-evaluated
-          exactly. For T-145 and T-157 a second route whose claim runs are reported without
-          receipts and were not replayed, and not a review of the producer's kernels; for
-          T-192 route A's checker, without its 86-root run or the second program.
-        verdict: accepted
-        covers: [T-145, T-157, T-192]
     artifacts:
       - packing/resources/web/guzhou-n40-new-supports-2026-10-11/README.md
       - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/PROOF.md
@@ -19707,18 +19668,16 @@ results:
       - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/control-G-release.json
       - packing/tests/test_audit_n40_new_supports.py
     next_rung: >-
-      V4 and C4 need a human oversight record. The two retained adversarial AI reviews by
-      distinct reviewers are the 12 October review, which read the kernel's input and threshold
-      code and replayed the cover, and the 23 October review of Hosono's sqverify_continuous,
-      which decided this density's facts and the argument's premises again through that second
-      checker and did not read the kernel, whose code T-145's two reviews read (the same bytes);
-      an overseer weighs that.
+      V4 and C4 need a second retained adversarial AI review of this result's evidence by a
+      distinct reviewer (the 11 October final review covers T-145's kernel and density, not this
+      density) and a human oversight record.
 
       Beside the rung: a decision of the continuous cover by code other than the producer's, by
-      a replay here of sqverify_continuous (think-flxm, about 0.7 CPU-hours, high 2.8, waiting
-      for the owner's budget) or by a first-party interval kernel with the angle as an interval
-      dimension (GC-4 of the 10 October review); either would make the result independently
-      re-implemented after reading the producer's code and leave the rung where it is.
+      a replay here of Hosono's sqverify_continuous, retained and reviewed for soundness on 23
+      October (think-flxm, about 0.7 CPU-hours, high 2.8, waiting for the owner's budget), or by
+      a first-party interval kernel with the angle as an interval dimension (GC-4 of the 10
+      October review); either would make the result independently re-implemented after reading
+      the producer's code and leave the rung where it is.
     notes: >-
       Registered on 12 October 2026 by the records lane of the 2026-10-11 intake pass after the
       complete replay of both kernels, the finite audit, the crate's two runs and the release's
@@ -19746,6 +19705,10 @@ results:
       no blocking defect in that second route, decided this density's facts again and
       reproduced the source's two controls node for node; the source's run of the claim publishes
       no receipt and has not been replayed here (E-n040-wand125-sqverify-continuous-6718-report).
+      The record does not count that review toward rung 4: it decided no part of this result's
+      continuous cover and read neither of its kernels, so it is cited here and listed among
+      T-192's reviews only, until a replay here (think-flxm) makes the mode a deciding route for
+      this result.
 
       Registered as T-153 on the intake branch of 12 October and renumbered to T-157 when that
       branch merged with main, where T-153 to T-156 had been registered in the meantime, in every
@@ -26873,8 +26836,9 @@ results:
         best known packing falling to about 0.0794. Its technique is T-145's
         continuous-pose cover, carried for the first time to a count other than 40 and
         decided at the source by two programs; a single-count raise on an existing
-        technique and not a bound family, S3 as T-145, T-157 and T-142 are. V0/C1 says
-        how far it stands, and the score gates nothing.
+        technique and not a bound family, S3 as T-145, T-157 and T-142 are. When scored it
+        stood at V0/C0, and the score gates nothing. On 23 October 2026 the soundness review
+        of the first program moved its confirmation to C1; the score stands.
       scored: '2026-10-15'
       by: think-zb5w import, stage 1-2 lane (repository; draft)
     novelty: previously-published
@@ -26900,20 +26864,19 @@ results:
         relation: project
         date: '2026-10-23'
         scope: >-
-          wand125's sqverify_continuous, v3 at f30cc2c and v4 at d4a1981, the continuous-
-          angle mode of this repository's sqverify_fast: lemmas C1 to C6 and the counting
-          re-derived from the source; slab.rs, the continuous path of main.rs and the
-          admission it reads, read line by line against this repository's copies of the
-          modules it reuses; the exact premises at the three results' parameters and their
-          certificates' facts decided with the reviewer's own code; the box bound held to an
-          exact oracle on adversarial boxes, with ten deliberate mutations of its
-          transcription; the binary rebuilt to the recorded digest, the crate's tests run,
-          and the source's controls reproduced node for node with every witness re-evaluated
-          exactly. For T-145 and T-157 a second route whose claim runs are reported without
-          receipts and were not replayed, and not a review of the producer's kernels; for
-          T-192 route A's checker, without its 86-root run or the second program.
+          wand125's sqverify_continuous, v3 at f30cc2c and v4 at d4a1981, route A's checker
+          for this result and the continuous-angle mode of this repository's sqverify_fast:
+          lemmas C1 to C6 and the counting re-derived from the source; slab.rs, the
+          continuous path of main.rs and the admission it reads, read line by line against
+          this repository's copies of the modules it reuses; the exact premises at this
+          result's parameters and this certificate's facts decided with the reviewer's own
+          code, its run_key recomputed; the box bound held to an exact oracle on adversarial
+          boxes, with ten deliberate mutations of its transcription; the binary rebuilt to
+          the recorded digest, the crate's tests run, and the source's control reproduced
+          root by root with every witness re-evaluated exactly. Not the 86-root run of the
+          claim, nor the second program, contpose_check3.
         verdict: accepted
-        covers: [T-145, T-157, T-192]
+        covers: [T-192]
     artifacts:
       - packing/resources/web/wand125-continuous-n28-2026-10-15/README.md
       - packing/resources/web/wand125-continuous-n28-2026-10-15/acquisition/sources.json
@@ -26924,14 +26887,15 @@ results:
       - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
     next_rung: >-
       C3 needs a complete replay with controls whose refusals count and a review that
-      reads this certificate. The nearer route runs the reviewed T-145 pose kernel on
-      the input regenerated here over all 43 slabs, with the near-axis patch decided by
+      reads this certificate, which the 23 October review is for the source's
+      sqverify_continuous. The nearer route runs the reviewed T-145 pose kernel on the
+      input regenerated here over all 43 slabs, with the near-axis patch decided by
       sqverify-fast's exact sweep, priced at about 12.7 CPU-hours after a preparation
       slice; the other runs the source's sqverify_continuous over its 86 roots, about
-      13.3 CPU-hours, its continuous mode reviewed for soundness on 23 October 2026 with no
-      blocking defect (think-xzob, jlevy/squares#533), and would be reproduced with the
-      producer's code. Both wait for an owner budget, in think-8eo1 and think-0arj under
-      think-zb5w.
+      13.3 CPU-hours, its continuous mode reviewed for soundness on 23 October 2026 with
+      no blocking defect (think-xzob, jlevy/squares#533), and would be reproduced with
+      the producer's code. Both wait for an owner budget, in think-8eo1 and think-0arj
+      under think-zb5w.
     unfinished_confirmations:
       - what: >-
           a complete replay of the 43 slabs on the reviewed T-145 pose kernel from the

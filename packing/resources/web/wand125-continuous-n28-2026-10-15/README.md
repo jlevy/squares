@@ -175,8 +175,11 @@ known, and the 999/1000 mutant shows that a budget stop is what a weak mutant ge
 ## Review and Remaining Work
 
 A replay counts toward `C3` only with a review that reads this certificate.
-For route A that is the soundness review of `sqverify_continuous`’s continuous mode,
-open as think-xzob (jlevy/squares#533), whose subject is now three claims.
+For route A that is the
+[soundness review of `sqverify_continuous`’s continuous mode](../../../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+of 23 October (think-xzob, jlevy/squares#533), which read this certificate and found no
+blocking defect; route A’s next step is its 86-root replay with a control whose refusal
+counts, think-0arj.
 Route B rests on the 10 October review of T-145’s kernel and needs a preparation slice:
 a replay command that runs the 43 slabs at two workers and judges them as
 `devtools.audit_continuous_pose` does for T-145, and the near-axis patch decided by

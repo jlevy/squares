@@ -701,6 +701,13 @@ there now wait only on a human oversight record; it decided the density and the 
 again through the second checker, and the kernel’s code was read by T-145’s two reviews,
 which an overseer should weigh.
 
+*Note of 23 October 2026, after review A of jlevy/squares#752:* the record does not
+adopt the last sentence above.
+It does not count this review toward T-157’s rung 4, since the review decided no part of
+T-157’s continuous cover and read neither of its kernels, and it lists the review among
+T-192’s reviews only, citing it from T-145 and T-157, until a replay here (think-flxm)
+makes the mode a deciding route for them.
+
 **What is owed.**
 
 - **T-192, route A** (think-0arj): the complete v4 run over 86 roots at two threads,
