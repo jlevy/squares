@@ -123,7 +123,11 @@ def verification() -> str:
 
 @pytest.fixture(scope="module")
 def recent_results() -> str:
-    return site_renders.html("recent-results.html")
+    return next(
+        page.html
+        for page in render_overview.forwarder_pages()
+        if page.name == "recent-results.html"
+    )
 
 
 @pytest.fixture(scope="module")
@@ -259,11 +263,9 @@ def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
     # The actions lead to the ratings account and complete table.
     attributes = overview_sections.all_results_link_attributes(site_renders.overview())
     assert (
-        '<p class="site-action-row site-more"><a class="site-action" '
-        'href="recent-results.html">View Recent Results'
-        f"{overview_sections.arrow_icon('right')}</a>"
+        '<p class="site-action-row site-more">'
         f'<a class="site-action" href="results.html#all-results" {attributes}>'
-        f"View Results Archive{overview_sections.arrow_icon('right')}</a></p>"
+        f"View All Results{overview_sections.arrow_icon('right')}</a></p>"
     ) in recent
 
 
@@ -1553,7 +1555,7 @@ def test_the_document_is_kpress_viewport_with_its_contents_behaviours(
 def test_the_big_tables_have_no_outer_border(
     page: str, results: str, rendered: Callable[[str], str]
 ) -> None:
-    """The site's tables, Recent Results, the Results page's table and the frontier
+    """The site's tables, the homepage preview, the All Results table and the frontier
     table, have no frame (the owner, 2026-10-02, `think-wadm`): KPress draws a border
     round every `.kpress-table`, and the site's rule takes it off every `.site-table`,
     keeping the rule under the header and the light rule under each row."""
@@ -2071,7 +2073,7 @@ def test_the_ladders_are_on_the_verification_page_and_the_archive_points_to_them
         assert gone not in page, gone
     assert 'class="site-ladders"' not in page
     assert _seen(page).count("Verification Ladders") == 0
-    assert 'href="recent-results.html">View Recent Results' in page
+    assert 'href="results.html#all-results"' in page
     assert 'id="all-results"' in results
     assert results.index('id="all-results"') < results.index('<div class="site-table-tools')
     for scale, _, _, question in overview_sections.DIMENSIONS:
@@ -3330,7 +3332,7 @@ def test_every_page_lists_significance_first(
 def test_each_results_row_shows_its_rungs_significance_first(
     page: str, results: str, overview: overview_data.Overview
 ) -> None:
-    """A row of the results table and of Recent Results shows the result's significance
+    """A row of All Results and of the homepage preview shows the result's significance
     in its own column, the second, and its V and C chips open its Rungs cell, so its
     rungs still read S, V, C across the row (`think-m3m4`)."""
     recent = {result.id for result in _recent_entries(overview)}
@@ -3772,7 +3774,7 @@ def test_recent_results_is_one_table_not_cards_or_a_list(
     assert not re.search(r'class="site-card[ "]', recent)
     assert "site-rung-legend" not in section
     assert not re.search(r'class="site-card[ "]', section)
-    assert 'href="recent-results.html">View Recent Results' in section
+    assert 'href="recent-results.html"' not in section
     assert 'href="results.html#all-results"' in section
     assert "<li>" not in section
     # The recent table and no other: a reported bound is a row of it (think-d04u).
@@ -4098,7 +4100,6 @@ def test_recent_major_results_opens_with_preview_then_recent_and_archive_actions
     assert _asset_tag(render_overview.HOMEPAGE_CSS) in page
     order = [
         section.index(_recent_table(page)),
-        section.index('href="recent-results.html"'),
         section.index('href="results.html#all-results"'),
     ]
     assert order == sorted(order)
@@ -4763,7 +4764,7 @@ def test_both_tables_of_results_end_with_the_same_id_column(
     overview: overview_data.Overview,
 ) -> None:
     """The id is a column of its own, the last since 2026-10-02 (`think-t090`; it was the
-    first), in the results table and in Recent Results alike: one cell, written by one
+    first), in All Results and the homepage preview alike: one cell, written by one
     helper, holding the row's trigger and nothing else. On a phone it still opens each
     card, in both tables, which place their cells by class."""
     table = overview_sections.results_table(overview)
@@ -7373,42 +7374,26 @@ def test_about_subcategories_keep_their_complete_content_on_dedicated_pages(
     assert 'href="report.html"' in about
 
 
-def test_recent_results_and_archive_have_separate_substantive_content(
+def test_all_results_is_one_canonical_collection_with_a_recent_compatibility_route(
     page: str, results: str, recent_results: str, overview: overview_data.Overview
 ) -> None:
-    """The arrival-ordered table has its own page; archive filters and row
-    addresses stay canonical, with a useful no-script path from old fragments."""
-    assert "recent-results.html" in render_overview.SITE_PAGES
-    assert render_overview.PAGES["recent-results.html"] is render_overview.recent_results_page
-    assert '<h1 id="every-result">Results Archive</h1>' in results
-    assert '<h1 id="recent-results">Recent Results</h1>' in recent_results
-    assert 'class="site-rollup site-added"' not in results
-    assert 'class="site-rollup"' not in results
+    """The complete filterable table owns Results; old Recent addresses remain usable."""
+    assert "recent-results.html" not in render_overview.SITE_PAGES
+    assert "recent-results.html" not in render_overview.PAGES
+    assert not hasattr(render_overview, "recent_results_page")
+    assert dict(render_overview.MOVED_PAGES)["recent-results.html"] == "results.html"
+    assert '<h1 id="every-result">All Results</h1>' in results
+    assert 'data-moved-to="results.html"' in recent_results
+    assert 'rel="canonical" href="https://squaremath.org/results.html"' in recent_results
     assert "data-site-table" in results
     assert sorted(row_id for row_id, _, _ in ROW.findall(results)) == sorted(
         result.id.lower() for result in overview.results
     )
-    assert "data-site-table" not in recent_results
-    assert _asset_tag(render_overview.RESULTS_CSS, "recent-results.html") in recent_results
-    assert "data-recent-results" in recent_results
-    assert "data-recent-older" in recent_results
-    assert 'class="site-rollup' not in recent_results
-    row_links = re.findall(r'href="result/(t-\d+)\.html"', recent_results)
-    assert row_links
-    assert set(row_links) <= {result.id.lower() for result in overview.results}
-    assert not re.search(r'href="#t-\d+', recent_results)
-    for fragment in (
-        "recent-arrivals",
-        "added-in-the-last-seven-days",
-        "earlier-results-by-week-published",
-    ):
-        assert f'id="{fragment}"' in recent_results
-        assert f'id="{fragment}" href="recent-results.html#{fragment}"' in results
-    assert 'href="results.html?added-since=' not in recent_results
-    assert "<h2" not in recent_results.split("<article", 1)[1].split("<table", 1)[0]
-    assert 'href="recent-results.html">View Recent Results' in page
+    assert "data-recent-results" not in results
+    assert "data-recent-toggle" not in results
+    assert 'href="recent-results.html"' not in page
+    assert page.count("View All Results") == 1
     assert 'href="results.html#all-results" data-all-results' in page
-    assert "View Results Archive" in page
 
 
 def test_menu_page_headers_and_metadata_use_the_same_labels(

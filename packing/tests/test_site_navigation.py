@@ -63,9 +63,8 @@ def test_navigation_marks_ancestors_without_claiming_the_parent_page() -> None:
 def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None:
     families = {
         "cases/11.html": ["Results", "Visual Atlas", "Current <title>"],
-        "result/t-060.html": ["Results", "Results Archive", "Current <title>"],
+        "result/t-060.html": ["Results", "All Results", "Current <title>"],
         "results.html": ["Results", "Current <title>"],
-        "recent-results.html": ["Results", "Current <title>"],
         "profiles/person.html": ["About", navigation_title("profiles/"), "Current <title>"],
         "about.html": ["About", "Current <title>"],
         "synopsis/problem.html": ["About", "Research Synopsis", "Current <title>"],
@@ -213,7 +212,7 @@ def test_disclosures_work_with_keyboard_outside_click_and_mobile_menu() -> None:
         site_browser.api().expect(results).to_be_hidden()
         menu.click()
         results.click()
-        assert page.get_by_role("link", name="Results Archive", exact=True).is_visible()
+        assert page.get_by_role("link", name="All Results", exact=True).is_visible()
         page.keyboard.press("Escape")
         assert results.get_attribute("aria-expanded") == "false"
         page.keyboard.press("Escape")
@@ -236,8 +235,7 @@ def test_navigation_remains_reachable_without_script() -> None:
         for label in (
             "Overview",
             "News",
-            "Recent Results",
-            "Results Archive",
+            "All Results",
             "Visual Atlas",
             "Frontier Survey",
             "Tutorials",
@@ -320,7 +318,7 @@ def test_open_navigation_protects_the_sticky_header_without_keyboard_focus() -> 
         page.evaluate(blur)
         page.evaluate(scroll, 700)
         assert page.evaluate(layout)["headerTop"] >= 0
-        assert page.get_by_role("link", name="Results Archive", exact=True).is_visible()
+        assert page.get_by_role("link", name="All Results", exact=True).is_visible()
         page.get_by_role("button", name="Results", exact=True).click()
         page.evaluate(blur)
         page.evaluate(scroll, 900)
@@ -460,7 +458,7 @@ def test_group_controls_include_label_and_chevron_and_start_with_substantive_con
     assert all(any(tag == "svg" for tag, _ in Tags(content).tags) for content in controls)
     for group, target in {
         "results": "atlas.html",
-        "learn": "papers.html",
+        "learn": "tutorials.html",
         "about": "about.html",
     }.items():
         menu = re.search(rf'<ul id="site-nav-{group}"[^>]*>(.*?)</ul>', nav)
@@ -483,7 +481,14 @@ def test_legacy_catalogue_fragments_keep_queries_and_reach_substantive_pages(
     from tests import site_browser  # noqa: PLC0415
 
     for source in ("papers.html", "about.html", "results.html", "posters.html"):
-        (tmp_path / source).write_text(_browser_document())
+        document = _browser_document()
+        if source == "results.html":
+            document = document.replace(
+                "<main>",
+                '<main><h1>Complete destination</h1><section id="all-results"></section>',
+                1,
+            )
+        (tmp_path / source).write_text(document)
     for destination in (
         "tutorials.html",
         "posters.html",
@@ -492,7 +497,6 @@ def test_legacy_catalogue_fragments_keep_queries_and_reach_substantive_pages(
         "resources.html",
         "documentation.html",
         "report.html",
-        "recent-results.html",
     ):
         body = (
             '<h1>Complete destination</h1><section id="tutorial"></section>'
@@ -510,13 +514,9 @@ def test_legacy_catalogue_fragments_keep_queries_and_reach_substantive_pages(
         "about.html#squares-project-documentation": "documentation.html",
         "about.html#report-your-results": "report.html",
         "about.html#contribute-your-results": "report.html",
-        "results.html#recent-arrivals": "recent-results.html#recent-arrivals",
-        "results.html#added-in-the-last-seven-days": (
-            "recent-results.html#added-in-the-last-seven-days"
-        ),
-        "results.html#earlier-results-by-week-published": (
-            "recent-results.html#earlier-results-by-week-published"
-        ),
+        "results.html#recent-arrivals": "results.html#all-results",
+        "results.html#added-in-the-last-seven-days": ("results.html#all-results"),
+        "results.html#earlier-results-by-week-published": ("results.html#all-results"),
     }
     server = preview_site.serve(tmp_path, 0)
     try:
@@ -817,84 +817,6 @@ def test_text_buttons_and_actions_share_the_same_small_tracking() -> None:
         browser.close()
 
 
-def test_recent_table_disclosure_preserves_native_rows_keyboard_and_no_script_access(
-    tmp_path: Path,
-) -> None:
-    from devtools import preview_site, render_overview, site_assets  # noqa: PLC0415
-    from tests import site_browser  # noqa: PLC0415
-
-    recent = render_overview.recent_results_page()
-    (tmp_path / recent.name).write_text(recent.html)
-    empty = re.sub(
-        r"(<tbody\b[^>]*\bdata-recent-older\b[^>]*>).*?(</tbody>)",
-        r"\1\2",
-        recent.html,
-        flags=re.DOTALL,
-    )
-    (tmp_path / "empty.html").write_text(empty)
-    site_assets.write_assets(tmp_path, render_overview.asset_files([recent]))
-    server = preview_site.serve(tmp_path, 0)
-    try:
-        with site_browser.api().sync_playwright() as driver:
-            browser = site_browser.launch(driver)
-            base = f"http://127.0.0.1:{server.server_port}/"
-            for width in (1280, 390, 320):
-                page = browser.new_page(viewport={"width": width, "height": 900})
-                page.goto(base + recent.name)
-                table = page.locator("table[data-recent-results]")
-                site_browser.api().expect(table).to_have_attribute("data-recent-ready", "true")
-                assert page.locator("table").count() == 1
-                assert table.locator(":scope > tbody").count() == 2
-                older = table.locator("#recent-results-older")
-                assert older.locator("tr[data-result]").count() > 0
-                button = table.locator("button[data-recent-toggle]")
-                site_browser.api().expect(button).to_have_accessible_name("Earlier results")
-                assert button.get_attribute("aria-controls") == older.get_attribute("id")
-                site_browser.api().expect(older).to_be_hidden()
-                button.focus()
-                page.keyboard.press("Enter")
-                site_browser.api().expect(older).to_be_visible()
-                assert button.get_attribute("aria-expanded") == "true"
-                assert (
-                    button.locator("[data-recent-label]").text_content()
-                    == "Hide earlier results"
-                )
-                assert (
-                    button.locator(".site-icon-arrow").get_attribute("data-arrow")
-                    == "double-up"
-                )
-                page.keyboard.press("Space")
-                site_browser.api().expect(older).to_be_hidden()
-                assert button.get_attribute("aria-expanded") == "false"
-                site_browser.api().expect(button).to_be_focused()
-                page.goto(base + recent.name + "#earlier-results-by-week-published")
-                site_browser.api().expect(older).to_be_visible()
-                page.reload()
-                site_browser.api().expect(older).to_be_visible()
-                page.close()
-            page = browser.new_page()
-            page.goto(base + "empty.html")
-            button = page.locator("[data-recent-toggle]")
-            site_browser.api().expect(button).to_be_disabled()
-            site_browser.api().expect(button).to_be_hidden()
-            page.close()
-            for width in (1280, 320):
-                page = browser.new_page(
-                    java_script_enabled=False, viewport={"width": width, "height": 900}
-                )
-                page.goto(base + recent.name)
-                rows = page.locator("[data-recent-older] tr[data-result]")
-                assert rows.count() > 0
-                for row in rows.all():
-                    assert row.is_visible()
-                assert not page.locator("[data-recent-toggle]").is_visible()
-                page.close()
-            browser.close()
-    finally:
-        server.shutdown()
-        server.server_close()
-
-
 @pytest.fixture(scope="module")
 def reading_width_pages() -> dict[str, str]:
     """Actual page producers, rendered in setup without building the publication tree."""
@@ -904,7 +826,6 @@ def reading_width_pages() -> dict[str, str]:
     names = (
         "index.html",
         "news.html",
-        "recent-results.html",
         "results.html",
         "verification.html",
         "about.html",
