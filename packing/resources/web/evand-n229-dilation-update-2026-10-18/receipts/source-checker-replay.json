@@ -1,34 +1,35 @@
 {
   "checkers": {"search/exact/verify_cert.py":"3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52","search/exact/verify_cert2.py":"55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3"},
-  "controls": {"duplicate-square":"square 2 replaced by square 1","sharp-wall":"the side lowered by the least right or top clearance plus 10^-30","square-outside":"square 1 moved S + 2 to the right"},
-  "cpu_seconds": 2.047,
-  "environment": {"implementation":"CPython","invocation":"python -I CHECKER CERTIFICATE, one child process each","machine":"x86_64","python":"3.14.7"},
+  "controls": {"duplicate-square":"square 2 replaced by square 1","sharp-far-wall":"the side lowered by the least right or top clearance plus 10^-30","sharp-near-wall":"every square moved left and down by the least left or bottom clearance plus 10^-30","square-outside":"square 1 moved S + 2 to the right"},
+  "cpu_seconds": 2.556,
+  "environment": {"implementation":"CPython","invocation":"python -I CHECKER CERTIFICATE, one child process each, with an empty environment, no standard input and a scratch working directory","machine":"x86_64","python":"3.14.7"},
   "format": "evand-source-checker-replay-v1",
-  "invocations": 8,
+  "invocations": 10,
   "packet": "evand-n229-dilation-update-2026-10-18",
   "rows": [
     {
       "certificate": "search/packer/candidates/s229_v2.cert",
-      "controls": {"duplicate-square":{"sha256":"ea4055e4299a3c77b268725dfa3de155b106fce1375001437e6975e52dfe5fbd"},"sharp-wall":{"sha256":"4b7136bc5e0b478378cd3c2fb258e6a55af0c9b3a0f054ee863b4d1b584f7667"},"square-outside":{"sha256":"fba10d740745a2371d21344ea45ad648aaaa61834f6b98326e73eaa0c36c0fab"}},
+      "controls": {"duplicate-square":{"sha256":"ea4055e4299a3c77b268725dfa3de155b106fce1375001437e6975e52dfe5fbd"},"sharp-far-wall":{"sha256":"4b7136bc5e0b478378cd3c2fb258e6a55af0c9b3a0f054ee863b4d1b584f7667"},"sharp-near-wall":{"sha256":"10e3e0e47c94c43be0003a41c85a8e7e9e2e4d377549c80e230b8d11b0fb6d8b"},"square-outside":{"sha256":"fba10d740745a2371d21344ea45ad648aaaa61834f6b98326e73eaa0c36c0fab"}},
       "n": 229,
       "runs": {
         "search/exact/verify_cert.py": {
           "controls": {
-            "duplicate-square": {"cpu_seconds":0.324,"exit_status":1,"stderr":"","stdout":["n = 229, S = 7825080756947776580756939951343/500000000000000000000000000000 (~15.650161513895552545)","min wall clearance  = 6.005e-13  (square #64)","min pair separation = -1.000e+00  (squares #0, #1; 532 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","INVALID"],"wall_seconds":0.329},
-            "sharp-wall": {"cpu_seconds":0.306,"exit_status":1,"stderr":"","stdout":["n = 229, S = 15650161513894937011352365906749163566877145782080756939900847/999999999999999000000000000000500000000000000000000000000000 (~15.650161513894952137)","min wall clearance  = -1.000e-30  (square #64)","min pair separation = 1.202e-12  (squares #13, #86; 529 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","INVALID"],"wall_seconds":0.313},
-            "square-outside": {"cpu_seconds":0.334,"exit_status":1,"stderr":"","stdout":["n = 229, S = 7825080756947776580756939951343/500000000000000000000000000000 (~15.650161513895552545)","min wall clearance  = -1.451e+01  (square #0)","min pair separation = 1.202e-12  (squares #13, #86; 523 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","INVALID"],"wall_seconds":0.336}
+            "duplicate-square": {"cpu_seconds":0.303,"exit_status":1,"stderr":"","stdout":["n = 229, S = 7825080756947776580756939951343/500000000000000000000000000000 (~15.650161513895552545)","min wall clearance  = 6.005e-13  (square #64)","min pair separation = -1.000e+00  (squares #0, #1; 532 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","INVALID"],"wall_seconds":1.519},
+            "sharp-far-wall": {"cpu_seconds":0.316,"exit_status":1,"stderr":"","stdout":["n = 229, S = 15650161513894937011352365906749163566877145782080756939900847/999999999999999000000000000000500000000000000000000000000000 (~15.650161513894952137)","min wall clearance  = -1.000e-30  (square #64)","min pair separation = 1.202e-12  (squares #13, #86; 529 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","INVALID"],"wall_seconds":1.442},
+            "sharp-near-wall": {"cpu_seconds":0.317,"exit_status":1,"stderr":"","stdout":["n = 229, S = 7825080756947776580756939951343/500000000000000000000000000000 (~15.650161513895552545)","min wall clearance  = -1.000e-30  (square #8)","min pair separation = 1.202e-12  (squares #13, #86; 529 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","INVALID"],"wall_seconds":1.546},
+            "square-outside": {"cpu_seconds":0.303,"exit_status":1,"stderr":"","stdout":["n = 229, S = 7825080756947776580756939951343/500000000000000000000000000000 (~15.650161513895552545)","min wall clearance  = -1.451e+01  (square #0)","min pair separation = 1.202e-12  (squares #13, #86; 523 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","INVALID"],"wall_seconds":1.512}
           },
-          "positive": {"cpu_seconds":0.289,"exit_status":0,"stderr":"","stdout":["n = 229, S = 7825080756947776580756939951343/500000000000000000000000000000 (~15.650161513895552545)","min wall clearance  = 6.005e-13  (square #64)","min pair separation = 1.202e-12  (squares #13, #86; 529 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","VALID: s(n) <= S"],"wall_seconds":0.298}
+          "positive": {"cpu_seconds":0.366,"exit_status":0,"stderr":"","stdout":["n = 229, S = 7825080756947776580756939951343/500000000000000000000000000000 (~15.650161513895552545)","min wall clearance  = 6.005e-13  (square #64)","min pair separation = 1.202e-12  (squares #13, #86; 529 pairs with |dc|^2 <= 2 checked by separating axes, the rest by disc separation)","VALID: s(n) <= S"],"wall_seconds":0.434}
         },
-        "search/exact/verify_cert2.py": {"controls":{"duplicate-square":{"cpu_seconds":0.04,"exit_status":1,"stderr":"","stdout":["INVALID: vertex containment between #0 and #1"],"wall_seconds":0.044},"sharp-wall":{"cpu_seconds":0.033,"exit_status":1,"stderr":"","stdout":["INVALID: corner outside the open box"],"wall_seconds":0.034},"square-outside":{"cpu_seconds":0.037,"exit_status":1,"stderr":"","stdout":["INVALID: corner outside the open box"],"wall_seconds":0.038}},"positive":{"cpu_seconds":0.684,"exit_status":0,"stderr":"","stdout":["VALID: 229 closed unit squares pairwise disjoint inside the open box of side 15.650161513895552545 (529 close pairs checked)"],"wall_seconds":0.704}}
+        "search/exact/verify_cert2.py": {"controls":{"duplicate-square":{"cpu_seconds":0.048,"exit_status":1,"stderr":"","stdout":["INVALID: vertex containment between #0 and #1"],"wall_seconds":0.235},"sharp-far-wall":{"cpu_seconds":0.037,"exit_status":1,"stderr":"","stdout":["INVALID: corner outside the open box"],"wall_seconds":0.178},"sharp-near-wall":{"cpu_seconds":0.038,"exit_status":1,"stderr":"","stdout":["INVALID: corner outside the open box"],"wall_seconds":0.175},"square-outside":{"cpu_seconds":0.038,"exit_status":1,"stderr":"","stdout":["INVALID: corner outside the open box"],"wall_seconds":0.121}},"positive":{"cpu_seconds":0.79,"exit_status":0,"stderr":"","stdout":["VALID: 229 closed unit squares pairwise disjoint inside the open box of side 15.650161513895552545 (529 close pairs checked)"],"wall_seconds":2.489}}
       },
       "sha256": "1a35a7806b6cc01b232d5c634efdbe789c7df979cec6ab28d6ab283ac2b47e23",
       "side": "7825080756947776580756939951343/500000000000000000000000000000"
     }
   ],
   "source": {"commit":"00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db","url":"https://github.com/evand/square-packing"},
-  "started_utc": "2026-10-23T06:33:09Z",
+  "started_utc": "2026-10-23T08:57:10Z",
   "tool": "python -m devtools.evand_source_checkers run",
-  "wall_seconds": 1.707,
+  "wall_seconds": 7.931,
   "workers": 2
 }

@@ -10,9 +10,16 @@ separate replay ran the source's two checkers on the four certificates and refus
 control, but its receipt (SHA-256 ``cab73c96…``) stayed on another machine and never
 reached Git, so the record could only say it awaited integration (think-8kx2,
 think-0lu6). This module is that replay, kept: each packet's own retained copies of the
-two checkers, unchanged, each in its own ``python -I`` child process, on each retained
-certificate and on three controls of it, with every exit status and line of output in
-the packet's ``receipts/source-checker-replay.json``.
+two checkers, unchanged, each run in its own child process on each retained certificate
+and on four controls of it, with every exit status and line of output in the packet's
+``receipts/source-checker-replay.json``.
+
+Each child is ``python -I CHECKER CERTIFICATE``. Isolated mode keeps the checker's own
+directory and the working directory off ``sys.path``, ignores the ``PYTHON*`` variables
+and skips the user site. It does not isolate anything else, so `run_checker` also gives
+the child an empty environment (none of the parent's, which in CI holds tokens), no
+standard input and a scratch working directory. The checkers read only their one
+argument and write only to standard output (review A6 of #747).
 
 The certificates, by packet:
 
@@ -26,9 +33,13 @@ of which both checkers must refuse with an ``INVALID`` line rather than a crash:
 
 - ``duplicate-square``: square 2 replaced by square 1, so two squares coincide;
 - ``square-outside``: square 1 moved ``S + 2`` to the right, wholly outside the box;
-- ``sharp-wall``: the side lowered by the least right or top wall clearance plus
+- ``sharp-far-wall``: the side lowered by the least right or top wall clearance plus
   ``10^-30``, so one square crosses the wall by exactly ``10^-30``, where a checker with a
-  floating-point tolerance would accept it.
+  floating-point tolerance would accept it;
+- ``sharp-near-wall``: every square moved left and down by the least left or bottom wall
+  clearance plus ``10^-30``, so one square crosses that wall by exactly ``10^-30``: the
+  checkers' ``x - e > 0`` branches, which the far wall leaves untested (review A8 of
+  #747).
 
 A finite packing proves an upper bound and nothing more. The checkers are the author's,
 so their acceptance is same-implementation evidence: it moves no rung, and the record's
@@ -41,12 +52,13 @@ Subcommands, from ``packing/``, with the project interpreter::
     python -m devtools.evand_source_checkers check
 
 ``run`` holds each packet to ``acquire_source --check`` before reading it, and writes the
-three receipts; it takes a few CPU-seconds. ``check`` holds each packet to its manifest
-again and reads the receipts back, offline and in about a second: each covers its
-packet's certificates and every control, every certificate is accepted by both checkers
-and every control refused by both. The receipts record each checker's, certificate's
-and control's digest for a reader; whether the files changed since is Git's to say, not
-a digest compared here (OR-16).
+three receipts; it takes a few CPU-seconds. ``check`` holds each packet to its acquisition
+manifest again and reads the receipts back, offline and in about a second: each covers its
+packet's certificates and records every control, every certificate is accepted by both
+checkers and every control refused by both. It rebuilds no control; the test suite does
+(`tests/test_evand_source_checkers.py`). The receipts record each checker's,
+certificate's and control's digest for a reader; whether the files changed since is Git's
+to say, not a digest compared here (OR-16).
 """
 
 from __future__ import annotations
@@ -88,9 +100,19 @@ PACKETS: dict[str, tuple[str, ...]] = {
 }
 #: The source's two checkers, by their path under each packet's `source/`.
 CHECKERS = ("search/exact/verify_cert.py", "search/exact/verify_cert2.py")
-CONTROLS = ("duplicate-square", "square-outside", "sharp-wall")
-#: How far past the wall the sharp control puts its square.
+CONTROLS = ("duplicate-square", "square-outside", "sharp-far-wall", "sharp-near-wall")
+#: How far past a wall each sharp control puts its square.
 SHARP = Fraction(1, 10**30)
+#: What each control does, as the receipts state it.
+CONTROL_TEXT = {
+    "duplicate-square": "square 2 replaced by square 1",
+    "square-outside": "square 1 moved S + 2 to the right",
+    "sharp-far-wall": "the side lowered by the least right or top clearance plus 10^-30",
+    "sharp-near-wall": "every square moved left and down by the least left or bottom "
+    "clearance plus 10^-30",
+}
+#: The child's working directory under the scratch directory.
+CHILD_CWD = "cwd"
 RECEIPT = Path("receipts") / "source-checker-replay.json"
 FORMAT = "evand-source-checker-replay-v1"
 TOOL = "python -m devtools.evand_source_checkers run"
@@ -125,6 +147,16 @@ def far_wall_clearance(certificate: legacy.Certificate) -> Fraction:
     )
 
 
+def near_wall_clearance(certificate: legacy.Certificate) -> Fraction:
+    """The least clearance of any square from the left or the bottom wall, exactly."""
+    return min(min(pose.x, pose.y) - half_extent(pose) for pose in certificate.poses)
+
+
+def wall_clearance(certificate: legacy.Certificate) -> Fraction:
+    """The least clearance of any square from any wall, exactly."""
+    return min(far_wall_clearance(certificate), near_wall_clearance(certificate))
+
+
 def control(certificate: legacy.Certificate, name: str) -> legacy.Certificate:
     """The certificate `name` makes of `certificate`: a packing that is not one."""
     poses = list(certificate.poses)
@@ -135,9 +167,13 @@ def control(certificate: legacy.Certificate, name: str) -> legacy.Certificate:
         first = poses[0]
         poses[0] = replace(first, x=first.x + certificate.side + 2)
         return replace(certificate, poses=tuple(poses))
-    if name == "sharp-wall":
+    if name == "sharp-far-wall":
         lowered = certificate.side - far_wall_clearance(certificate) - SHARP
         return replace(certificate, side=lowered)
+    if name == "sharp-near-wall":
+        shift = near_wall_clearance(certificate) + SHARP
+        moved = tuple(replace(pose, x=pose.x - shift, y=pose.y - shift) for pose in poses)
+        return replace(certificate, poses=moved)
     raise ValueError(f"no control named {name!r}")
 
 
@@ -153,8 +189,16 @@ def _children_cpu() -> float:
     return usage.ru_utime + usage.ru_stime
 
 
-def run_checker(script: Path, certificate: Path) -> dict[str, Any]:
-    """One run of one of the source's checkers, unchanged, in an isolated child process."""
+def run_checker(script: Path, certificate: Path, *, cwd: Path) -> dict[str, Any]:
+    """One run of one of the source's checkers, unchanged, in its own child process.
+
+    ``python -I`` keeps the checker's directory and ``cwd`` off ``sys.path``, ignores the
+    ``PYTHON*`` variables and skips the user site; the child also gets an empty
+    environment, no standard input and ``cwd``, a scratch directory, to work in. Both paths
+    must be absolute, since the child does not start where the parent is.
+    """
+    if not (script.is_absolute() and certificate.is_absolute()):
+        raise ValueError("run_checker takes absolute paths: the child starts in cwd")
     before, started = _children_cpu(), time.monotonic()
     completed = subprocess.run(
         (sys.executable, "-I", str(script), str(certificate)),
@@ -162,6 +206,9 @@ def run_checker(script: Path, certificate: Path) -> dict[str, Any]:
         text=True,
         timeout=TIMEOUT_SECONDS,
         check=False,
+        env={},
+        stdin=subprocess.DEVNULL,
+        cwd=cwd,
     )
     lines = [line.strip() for line in completed.stdout.strip().splitlines()]
     return {
@@ -179,24 +226,24 @@ def accepted(checker: str, result: Mapping[str, Any]) -> bool:
     `verify_cert.py` ends ``VALID: s(n) <= S``; `verify_cert2.py` ends ``VALID: ...``. A
     last line that only contains ``VALID``, such as ``INVALID``, is not acceptance.
     """
-    lines = result["stdout"]
+    lines = result.get("stdout") or []
     last = lines[-1] if lines else ""
     word = "VALID: s(n) <= S" if checker.endswith("verify_cert.py") else "VALID:"
-    return result["exit_status"] == 0 and last.startswith(word)
+    return result.get("exit_status") == 0 and last.startswith(word)
 
 
 def refused(result: Mapping[str, Any]) -> bool:
     """Exit 1 with an ``INVALID`` verdict line: refused on the geometry, not a crash."""
-    lines = result["stdout"]
-    return result["exit_status"] == 1 and any(line.startswith("INVALID") for line in lines)
+    lines = result.get("stdout") or []
+    return result.get("exit_status") == 1 and any(line.startswith("INVALID") for line in lines)
 
 
-def _job(job: tuple[str, str]) -> dict[str, Any]:
-    script, certificate = job
-    return run_checker(Path(script), Path(certificate))
+def _job(job: tuple[str, str, str]) -> dict[str, Any]:
+    script, certificate, cwd = job
+    return run_checker(Path(script), Path(certificate), cwd=Path(cwd))
 
 
-def _map(jobs: Sequence[tuple[str, str]], workers: int) -> list[dict[str, Any]]:
+def _map(jobs: Sequence[tuple[str, str, str]], workers: int) -> list[dict[str, Any]]:
     if workers <= 1:
         return [_job(job) for job in jobs]
     with ProcessPoolExecutor(max_workers=workers) as pool:
@@ -208,7 +255,10 @@ def _environment() -> dict[str, str]:
         "python": platform.python_version(),
         "implementation": platform.python_implementation(),
         "machine": platform.machine(),
-        "invocation": "python -I CHECKER CERTIFICATE, one child process each",
+        "invocation": (
+            "python -I CHECKER CERTIFICATE, one child process each, with an empty "
+            "environment, no standard input and a scratch working directory"
+        ),
     }
 
 
@@ -219,13 +269,16 @@ def _source(packet: Path) -> Mapping[str, Any]:
 
 
 def replay(name: str, scratch: Path, workers: int) -> dict[str, Any]:
-    """Both checkers on each of a packet's certificates and its three controls."""
+    """Both checkers on each of a packet's certificates and its four controls."""
     packet = packet_dir(name)
     problems = acquire_source.check(packet, REPO)
     if problems:
         raise ValueError(f"{name}: packet custody: " + "; ".join(problems))
     source = packet / "source"
-    jobs: list[tuple[str, str]] = []
+    scratch = scratch.resolve()
+    cwd = scratch / name / CHILD_CWD
+    cwd.mkdir(parents=True, exist_ok=True)
+    jobs: list[tuple[str, str, str]] = []
     rows: list[dict[str, Any]] = []
     for path in PACKETS[name]:
         retained = source / path
@@ -248,9 +301,13 @@ def replay(name: str, scratch: Path, workers: int) -> dict[str, Any]:
             }
         )
         for checker in CHECKERS:
-            jobs.append((str(source / checker), str(retained)))
+            jobs.append((str(source / checker), str(retained), str(cwd)))
             jobs.extend(
-                (str(source / checker), str(scratch / name / f"{Path(path).stem}-{kind}.cert"))
+                (
+                    str(source / checker),
+                    str(scratch / name / f"{Path(path).stem}-{kind}.cert"),
+                    str(cwd),
+                )
                 for kind in CONTROLS
             )
     started_utc = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -275,11 +332,7 @@ def replay(name: str, scratch: Path, workers: int) -> dict[str, Any]:
         "packet": name,
         "source": _source(packet),
         "checkers": {checker: sha256(source / checker) for checker in CHECKERS},
-        "controls": {
-            "duplicate-square": "square 2 replaced by square 1",
-            "square-outside": "square 1 moved S + 2 to the right",
-            "sharp-wall": "the side lowered by the least right or top clearance plus 10^-30",
-        },
+        "controls": dict(CONTROL_TEXT),
         "environment": _environment(),
         "started_utc": started_utc,
         "workers": workers,
@@ -328,23 +381,32 @@ def receipt_problems(name: str, receipt: Mapping[str, Any]) -> list[str]:
 
 
 def _row_problems(where: str, row: Mapping[str, Any]) -> list[str]:
-    path = str(row["certificate"])
+    """What one row gets wrong, each as a problem line: a malformed row is reported, not
+    raised (review A7 of #747)."""
+    path = str(row.get("certificate"))
     problems = [
         f"{where}: {path} records no {kind} control"
         for kind in CONTROLS
         if kind not in (row.get("controls") or {})
     ]
+    all_runs = row.get("runs")
+    if not isinstance(all_runs, Mapping) or not all_runs:
+        return [*problems, f"{where}: {path} records no runs"]
     for checker in CHECKERS:
-        runs = row["runs"].get(checker)
-        if runs is None:
+        runs = all_runs.get(checker)
+        if not isinstance(runs, Mapping):
             problems.append(f"{where}: {checker} did not run on {path}")
             continue
-        if not accepted(checker, runs["positive"]):
+        positive = runs.get("positive")
+        if not isinstance(positive, Mapping):
+            problems.append(f"{where}: {checker} records no positive run on {path}")
+        elif not accepted(checker, positive):
             problems.append(f"{where}: {checker} did not accept {path}")
+        controls = runs.get("controls") or {}
         problems.extend(
             f"{where}: {checker} did not refuse {path}'s {kind} control"
             for kind in CONTROLS
-            if not refused(runs["controls"].get(kind, {"exit_status": 0, "stdout": []}))
+            if not refused(controls.get(kind, {"exit_status": 0, "stdout": []}))
         )
     return problems
 
