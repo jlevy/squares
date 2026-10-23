@@ -11,8 +11,7 @@ author: Intake lane c-news-plan-1023, for the repository owner
 the repository owner
 
 **Status:** Approved in outline.
-The owner answered the open questions on 23 October 2026 ([Decisions](#decisions)); one
-new question remains ([Open Questions](#open-questions)).
+The owner answered every open question on 23 October 2026 ([Decisions](#decisions)).
 
 **Tracking:** `think-vph5` (this plan); `think-4oj0` (News stories for the 16 merged S3
 pull requests that have none); `think-n51k` (a pull request carrying its own News entry,
@@ -32,11 +31,14 @@ This plan adds:
   (the stories, as now) and **All changes by PR** (one generated row per merged pull
   request, with its significance, the results it carries and the people those results
   credit);
+- a raised byte budget for `news.html`, set on measured load checks, so the page keeps
+  every story, with a check that fails while the page still has room;
 - on each contributor profile, the list of pull requests that carry that person’s
   results.
 
 The plan has two phases, each one pull request that can land on its own: the record, its
-tool, the one-time backfill and the gate; then the page and the profile lists.
+tool, the one-time backfill and the gate; then the page, its budget and the profile
+lists.
 
 ## The Owner’s Words
 
@@ -68,7 +70,7 @@ The owner, in conversation on 23 October 2026:
    top of the page, much like we had a while back in the history, where there was a Film
    | Workbench toggle”.
 
-The owner’s answers to the first draft’s questions are under [Decisions](#decisions).
+The owner’s answers to the plan’s questions are under [Decisions](#decisions).
 
 Point 5 is why this is a plan.
 Two things proceed without it and the plan takes both as given: `think-4oj0` lands News
@@ -87,15 +89,18 @@ lands after the merge.
   without one.
 - Landing a story after the merge is a named runbook step with a tool behind it, run in
   the same follow-up that records the merge.
-- `news.html` carries both views and stays within its 600,000-byte budget as News grows.
+- `news.html` carries both views and every story, under a byte budget raised on measured
+  load checks, and a check fails while the page still has room, so the step after it is
+  chosen on purpose.
 - Rendering and validation stay offline: GitHub is read only by a tool at authoring
   time, as `site-changelog.yaml`’s header already requires.
 - Each contributor profile lists the pull requests that carry the person’s results.
 
 ## Non-Goals
 
-- No change to the home page’s News box beyond the target of its links, which PR #736
-  redesigns, and none to the atlas pages of #744 and #746.
+- No change to the home page’s News box, which PR #736 redesigns: its stories stay on
+  `news.html`, so its links keep their targets.
+  None to the atlas pages of #744 and #746.
 - No story is written automatically.
   The feed row is generated; a story stays edited prose.
 - No same-PR stories. An entry still needs its pull request’s merge facts, so it lands
@@ -106,8 +111,11 @@ lands after the merge.
 - No backfilled stories for the 109 S3 results or the 15 exempt S4 and S5 results that
   already lack one ([Decision 1](#decisions)); the 15 stay the separate decision
   `render_changelog.ANNOUNCEMENT_EXEMPT` names.
-- No second address for the toggle ([Decision 3](#decisions)), and no raised page
-  budget.
+- No second address for the toggle ([Decision 3](#decisions)).
+- No archive pages for stories ([Decision 6](#decisions)). Only feed rows leave
+  `news.html`.
+- Nothing automatic when the raised budget runs out.
+  The step after it is the owner’s decision at that time.
 - No person or topic filters on the feed beyond significance.
 
 ## Background
@@ -165,6 +173,22 @@ lands after the merge.
   `overview/embed.js`, which runs in the head of every page, sets `data-site-atlas-view`
   from `?atlas=` before first paint, and reads `?view=embed` for pages framed in a
   popover.
+- **Page budgets.** `site_urls.PAGE_BUDGETS` gives a `page` 600,000 bytes, and
+  `PAGE_BUDGET_EXCEPTIONS` raises that for named pages, each with a measured reason and
+  under `HARD_HTML_LIMIT`, 2,000,000 bytes for every HTML file.
+  `docs/project/site-urls.md` renders both.
+  `check_published_site` holds every registered page to `page_budget(row)`: in the Pages
+  workflow before a deploy (`--local site`), and on the deployed site after it.
+  `test_overview.py` repeats the two largest page ceilings in `PAGE_CEILINGS` and gives
+  `results.html` a fixed runway, `RESULTS_ROOM_THROUGH`.
+- **Load checks in Chromium**, through Playwright, in three retained tools:
+  - `check_site_rendering`: CLS, LCP, longest task and blocking time at 1280 and 390 px,
+    light and dark, served gzipped from a local server, with a separate no-JS
+    readability context;
+  - `measure_site_pages load`: DOMContentLoaded, load, first contentful paint and the
+    bytes a load moves, optionally over a throttled network (`NETWORKS`);
+  - `measure_atlas_views move`: what an in-place view change costs, with Chromium’s own
+    main-thread counters (`Performance.getMetrics`).
 - **Profiles** (`devtools.render_contributors`) list a person’s Records, Results and
   Credited Work from the reviewed credit manifest (`contributors/occurrences.yaml`)
   through `site_tallies.person_credit_stats`, and Related News from profile links in
@@ -180,6 +204,8 @@ lands after the merge.
 The coordinator’s first figures were taken at 05e95db36. Every figure below was re-taken
 at 769e441e1 and the record counts again at cc91ee1b8, where they are unchanged; GitHub
 and the deployed site were read the same day.
+The pace, budget, bytes-sent and timing rows were re-taken at 64b316b6c, with GitHub and
+the deployed site read at about 23:00Z.
 
 | Fact | Value | How measured |
 | --- | --- | --- |
@@ -190,7 +216,7 @@ and the deployed site were read the same day.
 | Reaching `main` | all 537; 521 merge commits on `main`’s first-parent line; 16 arrived inside a later merge (12 based on another branch, and #55, #122, #123, #336 based on `main`) | `git merge-base --is-ancestor` and `git rev-list --first-parent` |
 | Bases other than `main` | 73 | the same listing |
 | Merge pace | August 61, September 162, October to the 23rd 314; 95 in the last 7 days | the same listing |
-| S3+ merge pace | 56 in October to the 23rd, 1 before; 17 in the last 7 days (2.2 a day) | the same listing |
+| S3+ merge pace | 56 in October to the 23rd, 2.4 a day, and 1 before; 14 in the 7 days to 23 October 23:00Z, 2.0 a day | the same listing, re-read at 23:00Z, when it held 541 merged pull requests |
 | Changelog entries | 48: S5 4, S4 8, S3 24, S2 12; News shows 36, 35 of them dated October | `site-changelog.yaml` |
 | Deliveries, coverage, omissions | 103, 103, 42; 3 formal stacks | `site-changelog.yaml` |
 | S3+ pull requests with a story | 41 of 57; the 16 without are #731, #725, #708, #699, #692, #688, #676, #671, #657, #645, #644, #621, #620, #578, #469, #460, all S3 and all merged in October | labels joined to entries’ `pull_requests` |
@@ -199,7 +225,9 @@ and the deployed site were read the same day.
 | S3+ results named by no entry at all | 121; T-062, T-064 and T-081 are named only by S2 entries, which News does not show | the coordinator’s first figure of 121 counts this way |
 | The 109 unannounced S3 results by `landed` | 81 before 13 October, when the News archive began; 27 on 13–22 October; 1 on 23 October | `landed` |
 | Deployed News page | 223,432 bytes: 36 cards averaging 5,264 bytes (2,867 to 11,846), and 33,910 bytes outside them; one significance meter paragraph averages 628 bytes | `https://squaremath.org/news.html`, fetched twice that day (223,194 bytes at the first fetch) |
-| Page budget | 600,000 bytes for a `page`; News has no exception, and the largest exception is `index.html`’s 1,300,000 | `site_urls.PAGE_BUDGETS`, `PAGE_BUDGET_EXCEPTIONS` |
+| Page budget | 600,000 bytes for a `page`, and 2,000,000 for every HTML file; News has no exception; the largest exceptions are 1,500,000 (`papers/n11-lower-bounds-explainer.html`), 1,400,000 (`results.html`) and 1,300,000 (`index.html`) | `site_urls.PAGE_BUDGETS`, `PAGE_BUDGET_EXCEPTIONS` and `HARD_HTML_LIMIT` at 64b316b6c, unchanged since 769e441e1 |
+| Bytes sent | `news.html` 223,432 bytes, sent as 32,172 gzipped (6.9 to 1); `results.html` 1,303,283 as 86,414 (15 to 1); `index.html` 483,093 as 45,445; a request accepting only brotli got `news.html` uncompressed, and one accepting brotli or gzip got gzip | `curl` with each `Accept-Encoding` against `https://squaremath.org` |
+| Load timings on record | `results.html` at 1,324,108 bytes passed three runs at desktop and phone widths, light and dark, and with scripts off: CLS 0, LCP at most 444 ms, longest task 197 ms, blocking 155 ms; News has none | the reason in `PAGE_BUDGET_EXCEPTIONS["results.html"]`, recorded on 22 October and not re-run |
 | A large profile | 123,797 bytes (`profiles/evan-daniel.html`) | the deployed site |
 
 ## Design
@@ -384,6 +412,12 @@ Once the deploy of a merge is verified, the intake pass’s runner:
 3. renders with `python -m devtools.render_changelog`, runs
    `packing-validate --records`, and lands the change as the first change after the
    merge, the same follow-up that records the replies.
+
+**The page’s room.** Once the budget raise has landed, step 3 also runs
+`python -m devtools.measure_news_page bytes` on the rendered page.
+When fewer than 30 days of room remain before the trip point, the coordinator opens a
+`decision` bead for the owner then, before the check fails
+([The page budget](#the-page-budget)).
 
 **Who runs it.** The intake pass’s runner, its coordinator, which merges under the
 `github-merge: autonomous` grant ([Decision 5](#decisions)). When the owner merges by
@@ -591,67 +625,44 @@ Its text names the level for readers who do not read bars, and the filter button
 the rubric’s meanings (`render_changelog.news_significance_meanings`). The meter’s bars
 cost about 500 bytes, so routine rows get the text alone.
 
-**Staying within the budget.** `news.html` must stay under `site_urls`’ 600,000-byte
-`page` budget, and it has no exception.
-The stories alone will pass it, before any feed is added:
-
-- **Today** the page is 223,432 bytes: 36 stories at 5,264 bytes each on average, and
-  33,910 bytes of shell.
-- **The 16 stories `think-4oj0` is writing** add about 84,000 bytes (16 × 5,264), which
-  brings the page to about 307,700.
-- **Every S3+ pull request now gets a story.** 17 S3+ pull requests merged in the last 7
-  days, 2.2 a day, which adds about 11,600 bytes of stories a day.
-  At that rate the stories alone pass 600,000 bytes about 25 days after `think-4oj0`
-  lands, with no feed on the page.
-
-So `news.html` caps both views, keeping whole cards and rows only, newest first:
-
-- the newest stories, up to 300,000 bytes;
-- the newest feed rows, up to 200,000 bytes;
-- the shell with the strip, the feed’s filter and the archive links, about 38,000 bytes;
-- in all, about 538,000 bytes.
-
-A test fails any News page, `news.html` or an archive page, above 560,000 bytes.
-
-Expected size over time, estimated from the averages above.
+**The feed’s cap.** `news.html` carries the newest feed rows up to 200,000 bytes, whole
+rows only, newest first: about 420 rows, or about a month at October’s 13.7 merges a
+day. Stories have no cap ([Decision 6](#decisions)); the whole page’s budget is under
+[The page budget](#the-page-budget).
 Feed rows are not yet rendered, so they are taken as about 1,600 bytes for an S3+ row
 and 350 for a routine row, about 475 on average.
 
-| When | `news.html` | What it shows |
-| --- | --- | --- |
-| Today | 223,432 bytes | 36 stories |
-| After `think-4oj0` | about 307,700 | 52 stories |
-| After Phase 2 | about 510,000 | 52 stories and about 420 rows, the feed’s cap filled at once |
-| A few days later, and from then on | about 535,000 | the stories’ cap binds: about 57 stories, about 3.5 weeks at 2.2 a day, and about 420 rows, about 4 weeks at October’s 14 a day |
+**Older rows go to half-month archive pages.** `news/YYYY-MM-01.html` holds the rows
+merged on days 1 to 15, and `news/YYYY-MM-16.html` the rows merged from the 16th to the
+month’s end.
 
-**Older items go to half-month archive pages.** Each half month has its own page:
-`news/YYYY-MM-01.html` holds days 1 to 15, and `news/YYYY-MM-16.html` holds the 16th to
-the month’s end.
-
-- **The same layout.** Each archive page has the same header strip, both views, the same
-  filters, and every story and row of that half month.
-- **Stable addresses.** A date alone decides an item’s archive page, so the address
+- **The feed only.** An archive page carries the header strip, the feed’s filter and
+  every row of its half month, including rows still on `news.html`. On it, “All changes
+  by PR” is the current tab and “Notable stories” is a link to `news.html`, as the Film
+  and Workbench tabs linked two pages.
+- **Stable addresses.** A merge date alone decides a row’s archive page, so the address
   never changes.
-- **Sizes**, estimated with the same row figures: 1 to 15 October, the busiest half so
-  far (33 stories, 219 rows), about 333,000 bytes.
-  16 to 31 October, projected at last week’s rate, comes to about the same.
-- **Headroom.** A half month at about 1.7 times October’s pace would pass the
-  560,000-byte test, and the failing test names the follow-up: weekly pages.
-- **Navigation.** Each view ends with links to the archive pages (“Earlier: 1–15 October
-  2026 · 16–30 September 2026 · …”). Each archive page is a row of `site-urls.yaml`,
-  derived from the pages the renderer declares and written by
+- **Sizes**, estimated with the row figures above: 1 to 15 October, the busiest half
+  month so far, holds 219 rows, about 142,000 bytes with the shell, under the
+  600,000-byte `page` budget.
+- **Headroom.** A test fails any archive page above 560,000 bytes, which a half month
+  reaches at about five times October’s pace, and the failing test names the follow-up:
+  weekly pages.
+- **Navigation.** The feed on `news.html` ends with links to the archive pages (“Earlier
+  changes: 1–15 October 2026 · 16–30 September 2026 · …”). Each archive page is a row of
+  `site-urls.yaml`, derived from the pages the renderer declares and written by
   `python -m devtools.site_urls --write`, as every generated page is.
 
-**Links that outlive the cap.** One function, `news_location(item)`, gives each story
-and row its page:
+**Links that outlive the cap.** Stories never move, so every link to a story keeps its
+`news.html` address: the home page’s News box, Related News on profiles, replies posted
+on issues and readers’ bookmarks.
+Rows move, and one function, `row_location(row)`, gives each row its page:
 
-- **Profiles and Related News** link an item’s archive page, which never moves.
-- **The home page’s News box** links `news.html` while its story is within the cap, and
-  its archive page after.
-- **Old links into `news.html`**, such as replies posted on issues and readers’
-  bookmarks, are forwarded by `news-forward.js` when their fragment is not on the page.
-  It reads a static map, `news/anchors.json`, from each anchor to its archive page,
-  about 50 bytes an item and fetched only on such a miss.
+- **Profiles’ Pull Requests lists** link a row’s archive page, which never moves.
+- **Old links to a row** that has left `news.html`, such as `news.html#pr-706`, are
+  forwarded by `news-forward.js` when the fragment is not on the page.
+  It reads a static map, `news/anchors.json`, from each such row anchor to its archive
+  page, about 50 bytes a row and fetched only on such a miss.
   Without scripts such a link opens `news.html` at the top.
 
 **Why not the alternatives.**
@@ -659,13 +670,9 @@ and row its page:
 - **A static data file for older rows** needs a second renderer in the browser that
   matches the Python one, and readers without scripts and search engines would not see
   older rows.
-- **Raising the budget** only delays archiving.
-  Keeping every story on `news.html` at 2.2 a day passes 600,000 bytes about 25 days
-  after `think-4oj0` lands, and passes 1,300,000 bytes, the size of the largest
-  exception (`index.html`’s), in about 86 days.
-  An exception also needs the measured desktop and mobile load checks that
-  `PAGE_BUDGET_EXCEPTIONS` records for the pages it lets past the budget.
-  Raising it stays a fallback ([Open Question 1](#open-questions)).
+- **Archive pages for stories too**, which this plan recommended, would keep `news.html`
+  under today’s budget.
+  The owner chose to keep every story on the page ([Decision 6](#decisions)).
 
 **The header checks cover the strip.** The strip is a `nav.site-tabs` child of the
 header slot, the element `preview_site/header` already finds
@@ -681,8 +688,9 @@ Phase 2 makes two small changes:
 - The probe reads the current tab from `[aria-current="page"]` only, so it also reads
   `[aria-selected="true"]`, for a strip the script has enhanced.
 - `test_site_wide_blocks.py` adds `news.html` and one archive page to the pages it holds
-  to the rule in Chromium at 1280 and 390: “Notable stories” current, the strip
-  `--site-tabs-space` under the rule, and the title `--site-page-top` under the strip.
+  to the rule in Chromium at 1280 and 390: “Notable stories” current on `news.html` and
+  “All changes by PR” on the archive page, the strip `--site-tabs-space` under the rule,
+  and the title `--site-page-top` under the strip.
 
 **How this fits with #736.** #736 (open, the site agent’s) makes these changes:
 
@@ -700,7 +708,7 @@ Phase 2 starts from `main` after #736 merges and builds on it:
 - The feed’s S3+ default is pressed in markup, which #736’s script already honours; the
   script gains per-view instances, the **All** button and “Not scored”.
 - The strip is drawn only on `news.html` and its archive pages, never in the home box.
-- The home box’s only change is the target of its title links (`news_location`).
+- The home box does not change: its stories stay on `news.html`.
 - `news_highlights.py`’s selection, the compact filter, `stamp_landed.py` and
   `landings.yaml` are untouched.
 
@@ -724,6 +732,192 @@ Its edits to `render_changelog.py` (`validate`, the gates, `load`) and to
 
 `workbench_tools.check_frontend` builds and drives the workbench page only, so it is
 unaffected; it runs in the full gate as always.
+
+### The page budget
+
+**Every story stays on `news.html`** ([Decision 6](#decisions)), so the page outgrows
+the 600,000-byte `page` budget and needs a measured exception of its own.
+Only feed rows leave it, for the archive pages above.
+
+**Expected size**, estimated from the averages measured on 23 October: 5,264 bytes a
+story; a shell of about 38,000 bytes (33,910 today, plus the strip, the feed’s filter
+and the archive links); the feed’s 200,000-byte cap; and October’s 2.4 S3+ merges a day,
+one story each, about 12,600 bytes a day.
+
+| When | `news.html` | What it shows |
+| --- | --- | --- |
+| Today | 223,432 bytes | 36 stories |
+| After `think-4oj0` | about 307,700 | 52 stories |
+| Phase 2 lands | about 512,000 | 52 stories, and about 420 rows filling the feed’s cap at once |
+| About 7 days after Phase 2 | 600,000 | today’s `page` budget |
+| About 50 days after | 1,150,000 | the trip point below: about 173 stories |
+| About 62 days after | 1,300,000 | the proposed budget: about 200 stories |
+
+At the last seven days’ pace, 2.0 a day, the trip point comes about 61 days after Phase
+2 and the budget about 75.
+
+**The measurement, before the budget moves.** One retained tool,
+`devtools.measure_news_page`, takes the measurement, as
+[OR-1](../../../../operating-rules.md#or-1-build-the-tool-never-leave-a-measurement-in-one-off-code)
+requires. Its report goes into the pull request that raises the budget, and its figures
+into the exception’s reason.
+It measures two pages, both built by the site’s own renderer:
+
+- **today’s `news.html`**, as `main` renders it when the raise is made;
+- **a projected `news.html` at the proposed budget**, 1,300,000 bytes: the real stories
+  repeated in date order under new ids and anchors until the page reaches that size,
+  with the feed at its full cap.
+  Built from the page’s own cards, the projection carries the markup readers will get.
+
+Its modes, from `packing/`:
+
+- **`bytes PAGE...`** needs no browser.
+  For each page it reports:
+  - the raw bytes;
+  - the gzip bytes at level 6, the level `preview_site.serve` uses; GitHub Pages sent
+    gzip on 23 October;
+  - the brotli bytes at quality 11, through the `brotli` module the environment already
+    has from `fonttools[woff]`, for reference only, since GitHub Pages answered a
+    brotli-only request with the uncompressed page;
+  - the stories’, rows’ and shell’s shares, and the 90th-percentile story;
+  - the days of room left before the trip point, at the last 28 days’ story pace.
+- **`project BYTES --out DIR`** writes the projected page into a built site directory,
+  beside its shared assets.
+- **`load DIR`** measures each page’s load in Chromium:
+  - `check_site_rendering DIR --page news.html --runs 3`, its protocol unchanged: a
+    fresh context at 1280 and 390 px, light and dark, served gzipped from a local
+    server; CLS, LCP, longest task and blocking time, and the separate no-JS readability
+    context;
+  - `measure_site_pages load DIR --page news.html --runs 3`, its protocol unchanged,
+    unthrottled and with `--network slow-4g`: DOMContentLoaded, load, first contentful
+    paint, and the bytes the load moved;
+  - parse and render time: Chromium’s main-thread counters at load, through the DevTools
+    protocol’s `Performance.getMetrics` (`ScriptDuration`, `LayoutDuration`,
+    `RecalcStyleDuration` and `LayoutCount`), read as `measure_atlas_views move` reads
+    them, and the `ParseHTML` total from one `check_site_rendering --trace` navigation,
+    recorded as a diagnostic with no gate credit.
+- **`switch DIR`** times the in-place tab switch on Phase 2’s page, at its launch size
+  and at the projected size: five runs of each switch, to the feed and back, by click
+  and by arrow key, at 1280 and 390 px.
+  For each it reports the handler’s time, the time to the next frame, any long task, and
+  the same counters over the change.
+  Its page code is a probe file under `probes/measure_news_page/`, loaded with
+  `sqpack.probes.probe`.
+
+The budget may move when both pages pass:
+
+- every `check_site_rendering` limit, unchanged (CLS 0.1, LCP 4,000 ms, longest task 300
+  ms, blocking 600 ms), on the median of three runs, with the no-JS page readable;
+- a tab switch that paints its next frame within 200 ms of the press, the median of five
+  runs at 390 px, with no long task above the site’s 300 ms limit; 200 ms is the “good”
+  bound of the web’s Interaction to Next Paint measure.
+
+Transfer size has no limit of its own; the measured gzip and brotli bytes go into the
+exception’s reason. Timings taken on the shared host are advisory, as `results.html`’s
+exception says of its own, and shared CI keeps timing report-only
+(`--timing-mode report-only`, `think-9dhb`). The report names the host, the Chromium
+version and the runs.
+The run is estimated, not measured, at a few CPU-minutes: about 80 navigations.
+
+If the projected page fails a limit, the tool measures a projection at 1,000,000 bytes,
+and the budget is the larger size that passes, with its trip point 150,000 bytes below
+it. If 1,000,000 fails too, the raise stops and the report goes to the owner.
+
+**The budget: 1,300,000 bytes**, if the measurement passes, for four reasons:
+
+- It is the size the owner’s question named ([Decision 6](#decisions)).
+- The site already serves a page that size.
+  `results.html` is 1,303,283 bytes deployed, and its exception records three-run checks
+  passing at 1,324,108. News prose compresses less than that table did on 23 October,
+  6.9 to 1 against 15 to 1. If that ratio holds, News at 1,300,000 bytes sends about
+  187,000 gzipped bytes, about twice what `results.html` sends, so the measurement
+  settles the budget and the precedent only suggests it.
+- It leaves 700,000 bytes under the 2,000,000-byte hard limit every HTML file has, room
+  for one more measured raise if the owner chooses one later.
+- At October’s pace it lasts about 62 days after Phase 2 lands, and the check below
+  trips about 50 days in.
+
+**Where it is set.**
+
+- `site_urls.PAGE_BUDGET_EXCEPTIONS["news.html"] = (1_300_000, reason)`. The reason
+  states the measured raw, gzip and brotli bytes, the timings at both sizes and their
+  date, the trip point, and the bead that owns the runway.
+  `validate_registry` already requires an exception to sit within the hard limit and to
+  give a reason.
+- `docs/project/site-urls.md`, re-rendered by `python -m devtools.site_urls --write`,
+  lists it under Measured exceptions.
+- `test_changelog_publication.py` holds it.
+  `NEWS_CEILING = 1_300_000` and `NEWS_TRIP_BYTES = 1_150_000` sit beside the News page
+  tests, and a test requires the exception to equal `NEWS_CEILING`, as
+  `test_overview.py`’s `PAGE_CEILINGS` does for `index.html` and `results.html`.
+- `check_published_site` needs no change.
+  It reads `page_budget(row)`, so the Pages workflow refuses to deploy a `news.html`
+  above 1,300,000 bytes, and the check of the deployed site reports one.
+- The archive pages are ordinary `page` rows under the 600,000-byte default, with no
+  exception.
+
+**The check that trips first.** `test_news_page_stops_short_of_its_budget` runs in the
+quick lane every pull request runs.
+It renders `news.html` and fails when the page reaches `NEWS_TRIP_BYTES`, 150,000 bytes
+under the budget, about 12 days of stories at October’s pace.
+It prints the page’s bytes, the trip point, the budget and the days of room left at the
+last 28 days’ pace, as the results page’s runway test prints its projection.
+The change that would carry the page past the trip point is the change that fails, so no
+story lands past it until the owner has chosen the next step.
+This is the shape
+[OR-17](../../../../operating-rules.md#or-17-every-routine-gate-has-a-wall-ceiling-and-anything-above-it-is-selected-on-purpose)
+gives a gate’s wall time: a ceiling, and anything above it selected on purpose, with the
+record saying who selected it.
+The coordinator’s 30-day notice ([Process](#process)) gives the owner time to answer
+before the check fails.
+
+**When the page reaches its trip point.** The plan builds nothing for that day.
+The next step is the owner’s decision, made then.
+The coordinator’s `decision` bead puts these options to the owner, and none of them runs
+automatically:
+
+- raise the budget again, after the same measurement at the new size, up to the
+  2,000,000-byte hard limit;
+- shrink the feed’s cap on `news.html`, whose 200,000 bytes are about 16 days of
+  stories;
+- move older stories to dated archive pages, the design this plan drafted and the owner
+  did not take on 23 October;
+- shorten the cards on `news.html`, a card design the site agent owns;
+- another step the owner names.
+
+**What keeps the page cheap to load at that size.**
+
+- **Static stories.** The renderer writes every story as HTML at build time.
+  No script builds, fetches or re-renders a card, so a reader without scripts gets the
+  whole page, which the no-JS check holds.
+  Formulas arrive as prepared MathML (58 `<math>` elements on 23 October), and the page
+  loads no math script.
+- **Small scripts that only switch state.** `news-filters.js` (164 lines) sets `hidden`
+  on cards and rows. `news-views.js` sets one attribute on the root and the tablist’s
+  ARIA states, and `site.css` hides the other view.
+  Neither creates, moves or re-renders markup, so a switch costs a style change and no
+  parsing.
+- **Cached shared files.** Styles, scripts and fonts are content-hashed files under
+  `assets/`, cached across pages, so only the HTML grows.
+- **Lazy images.** News has none today (no `<img>` on 23 October).
+  A story that adds one sets `loading="lazy"`, `decoding="async"` and its `width` and
+  `height`, so the image loads near the viewport and holds its box, and a renderer test
+  holds every `<img>` on a News page to that.
+- **A capped feed.** Rows past 200,000 bytes go to the archive pages, so the feed’s
+  share stays fixed while the stories grow.
+- **One cost to watch, read from the code and not measured.** At load, `news-cards.js`
+  collapses each card and then reads its `scrollHeight`, one card at a time, so each
+  card can force a layout before the next.
+  The `load` mode’s `LayoutCount` and longest task show whether that cost grows with the
+  story count. If it does, Phase 2 reads every card’s height before collapsing any.
+
+**When the raise lands.** In Phase 2, measured on Phase 2’s own page, which launches at
+about 512,000 bytes, about 7 days of stories under today’s budget.
+Before Phase 2, the stories alone pass 600,000 bytes about 23 days after `think-4oj0`
+lands. If Phase 2 has not merged two weeks after `think-4oj0` lands, the raise lands
+ahead of it on its own: the tool, the measurement at both sizes without the switch, the
+exception and the trip check.
+Phase 2 then adds the switch’s measurement.
 
 ### Profiles
 
@@ -762,16 +956,24 @@ reason, and that list may only shrink.
   comment, as Process says.
 - [ ] Tests, as the Testing Strategy says.
 
-### Phase 2: The Toggle, the Feed, the Archives and the Profile Lists
+### Phase 2: The Toggle, the Feed, the Archives, the Budget and the Profile Lists
 
 One pull request, after #736 and Phase 1 merge.
-The intake session builds it, as the owner said (point 4).
+The intake session builds it, as the owner said (point 4). The budget raise lands ahead
+of it on its own if Phase 2 is late ([When the raise lands](#the-page-budget)).
 
 - [ ] `site_tallies.result_people(record)`, public, shared by the feed and the profiles.
-- [ ] The feed view and the two caps in `render_news`, through a feed renderer
-  `devtools.render_pr_feed`; `news_location`; the half-month archive pages in
+- [ ] The feed view and its cap in `render_news`, through a feed renderer
+  `devtools.render_pr_feed`; `row_location`; the half-month archive pages of rows in
   `render_overview`’s page table and `site-urls.yaml`; the archive links; and
   `news/anchors.json`.
+- [ ] The budget raise, as [The page budget](#the-page-budget) says:
+  `devtools.measure_news_page` and its probe; its report at today’s and the projected
+  size; `PAGE_BUDGET_EXCEPTIONS["news.html"]` with its measured reason, and
+  `docs/project/site-urls.md` re-rendered; `NEWS_CEILING`, `NEWS_TRIP_BYTES` and the
+  trip check; the room report in Record the merge.
+- [ ] `news-cards.js`: every card’s height read before any card collapses, if the
+  measurement shows its load work growing with the story count.
 - [ ] `news_view_tabs()`, passed to `kpress_page(tabs=…)` for `news.html` and every
   archive page; `news_significance_filter(levels)`.
 - [ ] `overview/news-views.js` (new): the tablist, the `news-view` address and history.
@@ -825,16 +1027,28 @@ The intake session builds it, as the owner said (point 4).
 
 - Renderer tests:
   - one row per record row, newest first;
-  - each cap keeps whole cards or rows, newest first, within its bytes;
-  - the archive pages partition every story and row by half month, and their names
-    follow from dates alone;
-  - `news_location` points at `news.html` within the caps and at the archive page
-    otherwise, and `news/anchors.json` holds every item that is off `news.html`;
-  - `news.html` and every archive page under 560,000 bytes;
+  - the feed’s cap keeps whole rows, newest first, within 200,000 bytes, and every
+    News-shown story is on `news.html`;
+  - the archive pages partition every row by half month, hold no story, and take their
+    names from dates alone;
+  - `row_location` points at `news.html` within the cap and at the archive page
+    otherwise, and `news/anchors.json` holds every row that is off `news.html` and no
+    story;
+  - every archive page under 560,000 bytes;
+  - every `<img>` on a News page lazy, asynchronous and sized;
   - S1, S2 and unscored rows rendered `hidden`, and S3+ rows visible;
   - each badge’s `aria-label`, “scored from its results” included;
   - every story, result and profile link resolving to a page and anchor that exist;
   - the “recorded through” line.
+- The budget, in `test_changelog_publication.py` and a new
+  `tests/test_measure_news_page.py`:
+  - `PAGE_BUDGET_EXCEPTIONS["news.html"]` equals `NEWS_CEILING`, and `NEWS_TRIP_BYTES`
+    is below it;
+  - `news.html` under `NEWS_TRIP_BYTES`, which is the trip check itself;
+  - `measure_news_page bytes` on a fixture page reports the gzip and brotli sizes the
+    libraries give, and the days of room that follow from a fixture pace;
+  - `measure_news_page project` reaches its target within one story’s bytes, from the
+    page’s own cards only, with every id and anchor unique.
 - Browser tests in `test_site_homepage.py`’s style:
   - the strip’s roles once enhanced: `tablist`, `tab`, `aria-selected`, `aria-controls`
     and `tabpanel`;
@@ -844,14 +1058,17 @@ The intake session builds it, as the owner said (point 4).
     address, and Back restores it;
   - a `#pr-N` fragment selects the feed and reveals its row;
   - `news-s` is kept per view, and **All** selects every level;
-  - a link to an item that left `news.html` forwards to its archive page;
+  - a link to a row that left `news.html` forwards to its archive page, and a link to
+    any story lands on `news.html`;
   - with scripting disabled, both views show, stacked, and the strip’s links jump to
     them.
 - The header: `test_site_wide_blocks.py` holds `news.html` and an archive page to
-  `tabs_problems` at 1280 and 390, with “Notable stories” current.
+  `tabs_problems` at 1280 and 390, with “Notable stories” current on `news.html` and
+  “All changes by PR” on the archive page.
 - `test_render_contributors.py`: Evan Daniel’s profile lists #687 for T-220, and a
   person with no result lists none.
-- The checks named under The page, and `packing-validate --edit` while editing.
+- The checks named under The page, `measure_news_page`’s report for the budget, and
+  `packing-validate --edit` while editing.
 
 ## Rollout Plan
 
@@ -860,15 +1077,17 @@ The intake session builds it, as the owner said (point 4).
 2. Phase 2 merges and deploys.
    `check_published_site` and a look at `news.html` in both views, at its stacked form
    with scripts off, and at one archive page on the deployed site confirm it.
+   `measure_news_page bytes` run against the deployed page agrees with the raw and gzip
+   bytes in the exception’s reason.
 3. The next follow-up records Phase 2 and lands its story, the first story the new step
    carries.
 
-The News address and its bookmarks keep working: a story that later leaves `news.html`
-for its archive page is forwarded there, and the archive pages are new.
+The News address and its bookmarks keep working: stories never leave `news.html`, a row
+that leaves it is forwarded to its archive page, and the archive pages are new.
 
 ## Decisions
 
-The owner answered the first draft’s questions in conversation on 23 October 2026. The
+The owner answered the plan’s questions in conversation on 23 October 2026, and the
 coordinator relayed the answers with the option labels quoted below.
 
 1. **S3 results reach News through each pull request’s story.** The owner chose “Via
@@ -890,38 +1109,37 @@ coordinator relayed the answers with the option labels quoted below.
    On the toggle’s look the owner added: “We should use a toggle at the top of the page,
    much like we had a while back in the history, where there was a Film | Workbench
    toggle”. [The page](#the-page) follows both: the Film | Workbench strip’s element,
-   look and place, switched in place as a tablist, within the page budget.
+   look and place, switched in place as a tablist.
 4. **Routine rows show the GitHub title.** This was not put to the owner, and the first
    draft’s recommendation stands.
    The optional `summary` remains for a title worth replacing.
 5. **The intake runner records each merge.** The owner chose “Intake runner
    (Recommended)”: the intake pass’s runner, its coordinator, records each merge in the
    follow-up it opens for the replies, and the sweep is the backstop.
+   The coordinator confirmed the mapping on 23 October: the intake pass’s coordinator
+   records each merge in the follow-up it opens for replies.
    A GitHub workflow that opens a pull request for every merge was not taken.
+6. **Every story stays on `news.html`, and the page’s budget is raised.** Asked how
+   older material should leave the page, the owner chose “Keep all, raise the limit”.
+   The option’s description was the coordinator’s question text, not the owner’s words.
+   It said that every story stays on `news.html`, that only old feed rows are archived,
+   that raising the size limit needs measured load-time checks, and that even 1.3 MB,
+   the largest exception any page has, would last about 86 days.
+   [The page budget](#the-page-budget) follows the answer: half-month archive pages hold
+   feed rows only, the budget moves to 1,300,000 bytes on a measured load check, and a
+   check trips 150,000 bytes short of it, leaving the next step to the owner.
+   Half-month archive pages for stories, which the plan recommended, and shorter cards
+   on `news.html` were not taken.
+   Two figures in the question text were off, and the plan uses corrected ones:
+   - `index.html`’s 1,300,000 bytes is the third-largest exception, after
+     `results.html`’s 1,400,000 and the lower-bounds explainer’s 1,500,000.
+   - The 86 days counted the stories alone at 2.2 a day.
+     With the feed and the shell on the page, at October’s 2.4 a day, 1,300,000 bytes
+     lasts about 62 days after Phase 2 lands.
 
 ## Open Questions
 
-1. **May stories older than about three and a half weeks leave `news.html` for dated
-   archive pages?** Every S3+ pull request now gets a story: 2.2 a day over the last
-   week, at 5,264 bytes each on average.
-   At that rate `news.html` passes its 600,000-byte budget about 25 days after
-   `think-4oj0`’s 16 stories land, before any feed is added.
-   The plan keeps the newest stories and rows on `news.html`, about 57 stories and 420
-   rows, and moves older ones to half-month archive pages such as
-   `news/2026-10-01.html`, which carry the same toggle.
-   A story then lives at a second address once it leaves the cap, and old links forward
-   to it.
-   - (a) Half-month archive pages, as planned.
-   - (b) Keep every story on `news.html`, archive only the feed’s rows, and raise the
-     budget. Even 1,300,000 bytes, the size of the largest exception, is reached in about
-     86 days, and an exception needs measured load checks on desktop and mobile.
-   - (c) Show shorter cards on `news.html`, the summary without its details, with the
-     full card on the archive page.
-     This is a card design change, which the site agent owns, and its saving is not
-     measured.
-   - **Recommendation: (a)**. It keeps one renderer, works without scripts, gives every
-     item an address that never changes, and holds every News page under its budget at
-     about 1.7 times October’s pace.
+None. The last one, on the page budget, is [Decision 6](#decisions).
 
 ## References
 
@@ -942,6 +1160,17 @@ coordinator relayed the answers with the option labels quoted below.
   [`packing/devtools/probes/preview_site/header.js`](../../../../packing/devtools/probes/preview_site/header.js)
 - [`packing/devtools/templates/site-nav.css`](../../../../packing/devtools/templates/site-nav.css)
   (`.site-tabs`)
+- The budget and the load checks:
+  [`packing/devtools/site_urls.py`](../../../../packing/devtools/site_urls.py)
+  (`PAGE_BUDGETS`, `PAGE_BUDGET_EXCEPTIONS`, `HARD_HTML_LIMIT`),
+  [`packing/devtools/check_site_rendering.py`](../../../../packing/devtools/check_site_rendering.py),
+  [`packing/devtools/measure_site_pages.py`](../../../../packing/devtools/measure_site_pages.py)
+  (`load`),
+  [`packing/devtools/measure_atlas_views.py`](../../../../packing/devtools/measure_atlas_views.py)
+  (`move`),
+  [`packing/devtools/overview/news-cards.js`](../../../../packing/devtools/overview/news-cards.js)
+  and [`packing/tests/test_overview.py`](../../../../packing/tests/test_overview.py)
+  (`PAGE_CEILINGS`, `RESULTS_ROOM_THROUGH`)
 - Commits d73244ff4 (30 September 2026, the Film | Workbench tabs), 12a0a8438 (1
   October, the tabs below the bar’s rule) and dd9bfa063 (22 October, the switcher
   retired)
