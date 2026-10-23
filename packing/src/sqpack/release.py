@@ -2429,6 +2429,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/render_overview.py",
             "packing/devtools/site_assets.py",
             "packing/devtools/site_documents.py",
+            "packing/devtools/site_urls.py",
             "packing/devtools/templates/paper-publication.css",
             "packing/devtools/templates/paper-type.css",
             "packing/devtools/templates/site-nav.css",
@@ -2449,7 +2450,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "finds no paper manuscript or mathematical figure changes. Tutorial changes "
             "preserve the cited anchors; reader rendering and removed daily/weekly views "
             "do not generate paper bodies. The new generated-image asset helper is used "
-            "only by tutorials; existing image_file output is unchanged. Shared CSS replaces "
+            "only by tutorials; its two registered URL patterns do not affect paper output. "
+            "Existing image_file output is unchanged. Shared CSS replaces "
             "24rem and "
             "0.85rem/1rem literals with equal-valued tokens. New caption presentation is "
             "scoped to site reader documents, preserving paper caption alignment. "
