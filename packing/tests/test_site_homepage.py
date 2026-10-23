@@ -1411,6 +1411,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             trigger = page.locator("[data-site-filter-trigger]")
             panel = page.locator("[data-site-filter-options]")
             assert trigger.get_attribute("aria-controls") == panel.get_attribute("id")
+            sync_api.expect(panel).to_have_css("transition-duration", "0s")
             sync_api.expect(panel).to_be_hidden()
             assert page.locator("[data-site-filter-summary]").text_content() == "All"
             trigger.focus()

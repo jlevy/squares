@@ -679,7 +679,7 @@ def browser() -> Iterator[Any]:
 def site(tmp_path_factory: pytest.TempPathFactory) -> Path:
     """The project catalogue and results page, so a tally link between them works."""
     root = tmp_path_factory.mktemp("site")
-    site_renders.write(root, "index.html", render_overview.RESULTS_PAGE)
+    site_renders.write(root, "resources.html", render_overview.RESULTS_PAGE)
     return root
 
 
@@ -689,7 +689,7 @@ def _follow(browser: Any, site: Path, overview: overview_data.Overview, link: st
     opened = browser.new_page(viewport={"width": 1280, "height": 900})
     noon = datetime.combine(overview_sections.reference_date(overview), time(12))
     opened.clock.set_fixed_time(noon)
-    opened.goto((site / "index.html").as_uri(), wait_until="load")
+    opened.goto((site / "resources.html").as_uri(), wait_until="load")
     target = opened.locator(f'.site-card-foot a[href="{link}"]')
     assert target.count() == 1, link
     target.scroll_into_view_if_needed()

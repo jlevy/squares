@@ -3819,6 +3819,13 @@ html[data-site-atlas-view="triangle"]
   pointer-events: auto;
   transform: translateY(0);
 }
+/* Match navigation: KPress's tiny motion fallback must not keep a closing list live. */
+@media (prefers-reduced-motion: reduce) {
+  .site-filter-menu .site-filter-options,
+  .site-filter-menu .site-filter-chevron {
+    transition-duration: 0ms;
+  }
+}
 @starting-style {
   .site-filter-options:not([hidden]) {
     opacity: 0;
