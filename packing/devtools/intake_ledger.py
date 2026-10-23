@@ -2537,10 +2537,10 @@ def _ruling_lines(rulings: Sequence[Mapping[str, Any]]) -> list[str]:
         if "through" in ruling:
             lines[-1] += f" This ledger applies it through n = {ruling['through']}."
         if ruling["ruling"] == RESTATEMENT:
-            counts = _compress(item["n"] for item in ruling["not_recorded"])
+            counts = {item["n"] for item in ruling["not_recorded"]}
             lines[-1] += (
                 f" It takes {len(ruling['not_recorded'])} claims out of the record here, at "
-                f"{counts}."
+                f"{len(counts)} counts: {_compress(counts)}."
             )
             for item in ruling["awaiting_owner"]:
                 lines[-1] += (
