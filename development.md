@@ -251,7 +251,7 @@ stands, as [the deep gate](#the-deep-gate-the-deferred-surface-before-the-merge)
 | --- | --- | ---: | ---: | --- |
 | `--records` | contributor, before touching a registry, and before a draft push of a record change; also every pull request | 51 of 109 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop, and before a draft push of a code change | 67 of 109 | 240 s | 59.4 s |
-| `--push` | contributor, optional: not required before a draft push, which hosted CI gates; recommended before a push straight to a non-draft branch — affected edit-tier prerequisites and reachable quick tests (`--since`); add `--include-reachable-slow` for selected slow tests | varies with the diff | 1800 s | 30 to 65 minutes on the shared four-core host by 2026-10-22, often at its ceiling ([above](#hosted-ci-gates-a-draft-pull-request)); large implicit selections run after prerequisites, subject to the load lock, see below |
+| `--push` | contributor, optional: not required before a draft push, which hosted CI gates; recommended before a push straight to a non-draft branch — affected edit-tier prerequisites and reachable quick tests (`--since`), and the added-blob guard against that base; add `--include-reachable-slow` for selected slow tests | varies with the diff | 1800 s | 30 to 65 minutes on the shared four-core host by 2026-10-22, often at its ceiling ([above](#hosted-ci-gates-a-draft-pull-request)); large implicit selections run after prerequisites, subject to the load lock, see below |
 | `--fast` | contributor, at a block boundary; the union of the ten tiers below | 96 of 109 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
 | `--checks` | **CI, on every pull request**, in the `validate` job | 70 of 109 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
 | `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 109 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
@@ -263,6 +263,7 @@ stands, as [the deep gate](#the-deep-gate-the-deferred-surface-before-the-merge)
 | `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 109 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 109 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
 | `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 109 | 90 s | 72.83 s, the geometric mean of ten hosted readings on 2026-10-11, 59.12–90.06 s (1.52x), the first cohort of the three-step tier (`think-th8p`); the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks` |
+| *(workflow step)* | **CI, on every pull request**, in the `validate` job before `--checks`: the added-blob guard with the pull request’s own base and head SHA (`OR-18`); `--push` runs the same guard locally | 1, outside the registry | 30 s, the guard’s one deadline for the whole check, with `timeout-minutes: 1` on the step | locally on 2026-10-22 at load 2, compressing each new blob and packing the range: 3.5 s for #665 (102 MiB of new content), 7.8 s for #580 (196 MiB), 9.6 s for #474 (the largest pack, 45.4 MiB) and 18.0 s for #461 (446 MiB, the largest merge into `main`); the pack is 0.3 to 2 s of it on every CPU, and pinning it to one thread adds at most 1.5 s, on #474 (review K of #406). With a branch’s objects still loose in a working clone, #474 took 17.8 s, so run `git gc` before `--push` on a large branch. `--census 150` replays the merges back to #426 in 214 s. Hosted, 1.35 s and 232,934 bytes for #406 at `9b9f77c` (run 39854000601) |
 | *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 109 of 109 | 3600 s | integration, serial quick suites and ten deferred workers; new whole-wall measurement pending |
 
 Step counts describe the current 109-step registry, read from the validator’s canonical
@@ -2521,10 +2522,54 @@ The step `integrity ceremony never grows` runs it in the edit tier.
 is the rule; this is how to follow it.
 
 - **Size.** Before committing retained data, check what it adds:
-  `git diff --cached --stat`, or `git rev-list --objects origin/main..HEAD` piped to
-  `git cat-file --batch-check` for the whole branch.
+  `git diff --cached --stat` for the index, or the guard below for the whole branch,
+  which sizes each new blob as Git stores it.
   A binary or dump over a few megabytes, or data totalling tens of megabytes, is hosted
   outside the repository, for example as a release asset on `jlevy/squares`.
+- **The guard.** `devtools.check_added_blobs` enforces that rule.
+  Every pull request runs it with its own base and head SHA, a stacked layer’s lower
+  branch included, and `packing-validate --push` runs it against the `--since` base.
+  To check staged data before committing, run `git fetch origin`, then from `packing/`
+  `uv run --frozen --all-extras --group dev python -m devtools.check_added_blobs --base origin/main --staged`.
+  For a stacked pull request, pass `origin/<lower branch>`; a stale local base charges
+  the branch for everything the base gained since.
+  The two ceilings, 5 MiB per blob and 48 MiB in total, are data in
+  [`added-blobs.yaml`](packing/devtools/added-blobs.yaml), sized by the tool’s own
+  `--census` replay of the merges into `main`; re-measure with it before changing one.
+  Both are in `OR-18`’s units.
+  The per-blob ceiling holds a blob as Git stores it: the guard streams each new blob’s
+  content through zlib once (`devtools.git_storage`), so a text file is charged a
+  fraction of its checkout bytes and a compressed dump about its own size.
+  Every blob version the branch adds is checked, so committing then deleting a dump
+  still fails. The total holds what the branch adds to the repository: the thin pack of
+  its new objects against the base (`git pack-objects --revs --thin`), commits and trees
+  included, which is what a fetch downloads and the merge commit keeps.
+  A version the head deleted or reverted is in it, but a version that differs a little
+  from another packs as a small delta, so rewriting a register many times costs about
+  its edits, and identical copies pack once.
+  A blob in the base’s tree, such as a copy of a base file, is held to the per-blob
+  ceiling but adds nothing to the pack, and so does a mode-only change.
+  The delta search runs on one thread, so a clone gives the same figure on every run.
+  Git reuses the deltas a clone already holds, so clones packed differently give
+  different figures, and CI’s is the reference: the pull request’s check packs in a
+  fresh full clone of GitHub’s packs.
+  On the ranges measured, CI read 12% (#578: about 2.7 MiB against 2.39) to 37% (this
+  PR’s own range) more than a working clone on text-heavy ranges, and 0 to 2.4% more on
+  bulk-dominated ones.
+  So a `--push` of a bulk-dominated range that passes within a few percent of the total
+  can still be refused by CI, and a text-heavy range needs a wider margin; the PASS line
+  prints it. A working clone also packs a branch’s loose objects afresh, so `--push` on a
+  large branch is faster after `git gc`. A path already over 5 MiB at the base is
+  grandfathered from the per-blob ceiling until `think-xeav` moves it to hosted data; a
+  new path, a copy or an edited rename is not.
+  A Git LFS pointer is refused, since the repository does not use LFS. `--help` has the
+  rest. `GUARD_REFUSED` is never a pass, and its message names the remedy: fetch a
+  missing base or a shallow clone’s history; after the base is force-pushed, recheck
+  once the pull request re-synchronizes; check a shorter range when one is too long or
+  too large for the gate, which reads at most 512 MiB of new blob content and gives the
+  whole check one 30-second deadline.
+  Git IDs identify repository storage being sized here, not scientific input identity or
+  research verdicts.
 - **Manifest.** The repository keeps a small committed manifest with the name, size,
   location, and SHA-256 of each hosted object.
   A tool that needs the bytes downloads them on request and checks them against the

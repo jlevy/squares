@@ -817,14 +817,23 @@ it means rewriting that history or rebuilding the branch, and every commit cited
 in the records goes stale.
 
 **Sizes are counted as Git stores them.** A file’s size is its blob’s, compressed as Git
-packs it, and a set’s is the sum of its blobs: that is what a clone downloads and what
-history keeps for good.
+packs it. A set’s is what it adds to the repository: the thin pack of its new objects
+against the base, deltas included.
+That is what a fetch downloads and what history keeps for good.
 The unit is the project’s, written on 16 October 2026 with the house rule the owner set
 that day, under which a house best packing’s witness goes into Git or a hosted data
 release by this rule
 ([The House Rule](packing/campaign/result-import.md#the-house-rule)); the owner set that
 rule, not the unit. A dump that is already compressed costs about its own size; a text
 format that compresses well costs a fraction of its checkout bytes.
+On 22 October 2026 the set’s unit was corrected from the sum of its blobs to the thin
+pack, in #406: summed version by version, #578’s 48 merges of `main` came to 59.17 MiB
+of rewritten registers, against a thin pack of about 2.7 MiB in CI’s fresh clone, the
+reference. A working clone reuses deltas of its own and read #578 at 2.39 MiB; on the
+ranges measured, CI read 12 to 37% more than a working clone on text-heavy ranges and 0
+to 2.4% more on bulk-dominated ones.
+Many versions of one text file cost about their edits once packed, while distinct dumps
+cost about their sum either way.
 `python -m devtools.upper_bound_houses sizes`, from `packing/`, measures the witnesses a
 staged adoption would write, as Git stores them and in a checkout.
 On 17 October 2026 the witnesses of T-174’s 50 staged adoptions at rational sides come
