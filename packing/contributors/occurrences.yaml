@@ -14996,6 +14996,90 @@ occurrences:
   contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen n303 2026-10-23]'
+    field: /authors/0
+  expected_text: Kristiansen
+  start: 0
+  end: 11
+  label: Kristiansen
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen n303 2026-10-23]] /authors/0 span 0:11. Issue 755,
+    filed by the GitHub account amundsk, and the gist's README credit Amund Kristiansen; the
+    certificate is his search's, made with Evan Daniel's tools.
+  contributor_id: amund-kristiansen
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen n303 2026-10-23]'
+    field: /credit
+  expected_text: Kristiansen after Daniel, Ostashev, Levy
+  start: 0
+  end: 11
+  label: Kristiansen
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen n303 2026-10-23]] /credit span 0:11. Issue 755 and
+    the gist's README credit Amund Kristiansen (GitHub @amundsk).
+  contributor_id: amund-kristiansen
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen n303 2026-10-23]'
+    field: /credit
+  expected_text: Kristiansen after Daniel, Ostashev, Levy
+  start: 18
+  end: 24
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue 755 names
+    Evan Daniel's registered packing at 303 (issue 728, T-230) as the search's start and his fq
+    quench, dilate_cert.py and checkers as its tools, and the original credit role is retained.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen n303 2026-10-23]'
+    field: /credit
+  expected_text: Kristiansen after Daniel, Ostashev, Levy
+  start: 26
+  end: 34
+  label: Ostashev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: Reviewed source credit matches the evidenced person and printed name; the start issue 755
+    names, Evan Daniel's packing of issue 728, was itself found from Daniil Ostashev's packing of issue
+    562, and the chain through Daniel retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen n303 2026-10-23]'
+    field: /credit
+  expected_text: Kristiansen after Daniel, Ostashev, Levy
+  start: 36
+  end: 40
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen n303 2026-10-23]] /credit span 36:40. The specific
+    first-party jlevy/squares method or source is the Joshua Levy identity established by LICENSE
+    and the retained ojoshe receipt; project credit does not imply sole personal authorship.
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[Muglich issue 686 2026-10-19]'
     field: /authors/0
   expected_text: Muglich

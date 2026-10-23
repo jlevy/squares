@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-22'
+last_reviewed: '2026-10-23'
 results:
   - id: T-001
     kind: lower-bound
@@ -32005,6 +32005,131 @@ results:
           credit measured pose by pose against the house.
         verdict: accepted
         covers: [T-230]
+  - id: T-238
+    kind: upper-bound
+    registered: '2026-10-23'
+    landed: '2026-10-23'
+    headline: >-
+      Kristiansen's n303 packing, found from Daniel's T-230, certified exactly
+    claim: >-
+      One complete rational source certificate of issue 755 reports a finite upper-bound
+      improvement at the exact side it states: s(303) <=
+      223872029093440709529093216833/12500000000000000000000000000 =
+      17.90976232747525676232745734664, below the case's house best packing, T-230, by
+      9.89e-6. Complete native feasibility outcomes are retained separately; the case lanes
+      are unchanged until the entry is reviewed and adopted, so it is pending adoption.
+
+      The source states the certificate is a dilation of a binary64 packing made with Evan
+      Daniel's search/packer/dilate_cert.py (evand/square-packing 7982d7a): centres and box
+      scaled by 1 + 10^-12, coordinates rounded to rationals and each angle to a rational
+      half-angle tangent, so every square is exactly unit. The author reports that Daniel's
+      two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py
+      (polygon intersection), accept it, with least wall clearance 8.2e-13 and least pair
+      separation 1.2e-12, and that a third, unpublished exact check accepts it too. He
+      states no exact KKT solve and no local-optimality or rigidity analysis: the float
+      packing is a converged polish, not an exact stationary point. Those statements are
+      the author's; no source program ran here.
+
+      Credit Amund Kristiansen
+      (https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768), whose search
+      started from Evan Daniel's registered packing at 303 (T-230, #728, itself found from
+      Daniil Ostashev's packing), perturbed it in float32 batches and polished the best
+      variants with Daniel's fq quench, as the issue says. The issue calls it a new packing,
+      not a refinement of Daniel's. Measured here pose by pose, it is a new arrangement of
+      T-230's one-way design: one to one with T-230's packing, 12 squares moved beyond a
+      tenth and five more squares tilted. The search, the certificate and the request were
+      done by Claude (Anthropic) in Claude Code at Amund Kristiansen's direction.
+    scope: {n_values: [303]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 303 near T-230's, 9.89e-06 below the case and every report
+        there (12 squares moved beyond a tenth of T-230's packing, five more tilted), found
+        from Daniel's packing, as T-230 was found from Ostashev's; no lower bound or optimum.
+      scored: '2026-10-23'
+      by: >-
+        the records lane of think-tqb5 (c-lane-755-1023), from its stage 1 triage; a draft
+        for the stage 4 review
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Kristiansen n303 2026-10-23]']
+      published: '2026-10-23'
+    evidence: [E-amundsk-755-n303-report]
+    artifacts:
+      - packing/resources/web/amundsk-n303-2026-10-23/README.md
+      - packing/resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
+      - packing/resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz
+      - packing/resources/web/amundsk-n303-2026-10-23/receipts/exact-certification.json.xz
+      - packing/resources/web/amundsk-n303-2026-10-23/replay/sharp-controls.json
+      - packing/resources/web/amundsk-n303-2026-10-23/measure/identity.json
+      - packing/devtools/upper_bound_reports.py
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_755.py
+      - packing/resources/web/amundsk-n303-2026-10-23/receipts/exact-certification.json.xz
+      - packing/resources/web/amundsk-n303-2026-10-23/replay/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 303: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 274518 pair decisions; summed over the 3 jobs, the receipt records 28.73
+      route CPU seconds and 67.37 job wall seconds, the longest job 27.16 seconds. Every
+      positive clears every wall by at least 6.02e-13 and every pair by at least 1.20e-12,
+      as a 1e-12 dilation gives. The kernel's two sharp controls (replay/sharp-controls.json
+      in the packet), the side lowered by its least far-wall clearance and the tightest pair
+      closed along its separating normal, are accepted by both routes at exact contact with
+      the margin exactly 0 and refused 1e-30 past it at exactly -1e-30.
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 23
+      October 2026), at n = 303 the certificate is below the case's ceiling (Evan Daniel,
+      found from Daniil Ostashev's packing, T-230) by exactly 9889799071009889799071/10^27;
+      below T-186, T-174 (PR #574), T-162 (#562) and #593 by 1.96e-04; below T-146, T-136
+      (#481) and #573 by 3.30e-03; below #488 and T-134 (#476) by 7.60e-03 and 7.68e-03;
+      below T-138 (#470) and T-113 (#401) by 1.06e-02; and below T-098 (#375), T-092 and
+      T-056 by 1.46e-02. It is the smallest report at 303, and no other open report states a
+      bound below T-230 there.
+
+      Measured pose by pose (measure/identity.json in the packet, with the #728 packet's
+      identity program loaded unchanged; a measurement, which decides nothing): nearest
+      centres pair it one to one with T-230's packing under the identity, with the largest
+      displacement 0.547. The best assignment moves 12 squares beyond a tenth, 31 beyond
+      1e-2 and 72 beyond 1e-3, turning one by up to 17.85 degrees; 37 move by less than
+      1e-6. It has 96 squares tilted by 1.93 to 26.14 degrees, all one way, against T-230's
+      91, all the same way; every one of T-230's tilted squares pairs within a tenth with a
+      square tilted the same way. Against T-186's, T-174's and T-162's packings no symmetry
+      pairs it one to one and 68 to 70 squares move beyond a tenth.
+
+      The record keeps the word refinement for a pairing in which no square moves beyond a
+      tenth, so this is not a refinement of T-230's packing, as the issue says, but a new
+      arrangement near it; that it was found from T-230's packing is the source's account,
+      which the measurement supports. It lists no regularization. With a checkout of the
+      gist, the packet's identity program also finds the certificate to be the binary64
+      input dilated by 1 + 10^-12, as the issue says.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and read the format through an adapter transcribed from
+      Daniel's checkers. No two independent methods, human oversight or optimality is
+      claimed.
+    next_rung: >-
+      Independently review the retained replay (think-tqb5); after that review the house
+      rule adopts it at 303 and both strong generators decide the new witness.
+    unfinished_confirmations:
+      - what: >-
+          Review the retained two-route replay of #755's 303 certificate and enter it as
+          confirming evidence, then adopt it at 303 and regularize it.
+        rung: C3
+        link: think-tqb5
+        estimated_cost:
+          cpu_hours: 0.25
+          cpu_hours_high: 0.6
+          basis: >-
+            the triage's price: about 1 CPU-minute of replay and sharp controls, measured 23
+            October, 5 to 10 CPU-minutes of review and 5 to 25 CPU-minutes of regularization
+            at 303, from T-230's receipts
+          priced: '2026-10-23'
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

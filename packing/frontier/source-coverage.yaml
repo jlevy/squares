@@ -6620,6 +6620,29 @@ sources:
     3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
     stage; current cases and earlier source ownership remain unchanged.
 
+- id: amundsk-n303-2026-10-23
+  title: Amund Kristiansen's n303 dilation certificate at 511f56b, issue755
+  role: source-repository
+  url: https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768/511f56bf6e6afb4eb22f12d31371c2a2fe7b4767
+  local: resources/web/amundsk-n303-2026-10-23/
+  source_key: '[Kristiansen n303 2026-10-23]'
+  scope:
+    n_values:
+    - 303
+  reviewed: '2026-10-23'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
+  evidence:
+  - E-amundsk-755-n303-report
+  notes: The 1 complete certificate is kept as a derived exact fact, no upstream byte retained, admitted
+    only where its exact side equals, or rounds up to, the side its source prints. T-238 records the
+    in-horizon report. All 3 native jobs have full outcomes. No selected override or superseded claim
+    is created at this source-only stage; current cases and earlier source ownership remain unchanged.
+
 - id: evand-n343-sweep-2026-10-20
   title: Evan Daniel's n343 certificate at 88385ab, issue702
   role: source-repository

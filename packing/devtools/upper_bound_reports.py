@@ -1392,6 +1392,7 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Daniel n308 2026-10-19]": _import("evand-n308-2026-10-19"),
     "[Daniel n154 sweep 2026-10-20]": _import("evand-n154-sweep-2026-10-20"),
     "[Daniel n303 2026-10-22]": _import("evand-n303-2026-10-22"),
+    "[Kristiansen n303 2026-10-23]": _import("amundsk-n303-2026-10-23"),
     # T-223: issue 678's packet has no import declaration; its replay module reads its two
     # counts of the case corpus, each certificate held to the digest its manifest pins.
     "[Couzo issue 678 2026-10-18]": lambda n: couzo_678.house_certificate(n).side,
