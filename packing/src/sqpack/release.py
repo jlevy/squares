@@ -2295,6 +2295,34 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/render_overview.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Speculation rules on the site's own pages (think-gr4c): render_overview gains "
+            "SPECULATION_RULES and speculation_rules_tag, which kpress_page and "
+            "static_content_page add after head_tags; head_tags itself, which writes the "
+            "papers' heads, is unchanged. Rendered into empty directories at link revision "
+            "ffd0f4af from this tree and from main ffd0f4af7 (#724): the four renderers "
+            "write 68 byte-identical files, none carrying the rules. No PDF was printed; "
+            "each prints from that HTML. Retain v0.4.18, v0.1.9, v0.1.2 and v0.2.5."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
