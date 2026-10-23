@@ -2540,3 +2540,23 @@ def test_593_restates_earlier_certificates_pose_for_pose_and_moves_couzos_237() 
         236,
         7,
     )
+
+
+@pytest.mark.parametrize(
+    ("key", "n"), [("T-056", 68), ("T-113", 108), ("T-116", 108), ("T-117", 105)]
+)
+def test_the_readers_of_the_earlier_packings_at_470s_counts_read_a_packing_in_its_box(
+    key: str, n: int
+) -> None:
+    """Review B2 of #747: #470's lineage is measured against every earlier entry the route
+    reads, so these five readers were added; each yields n unit squares inside [0, S]^2,
+    which a reader in the wrong frame (T-117's facts are about the box's centre) fails.
+    T-092 shares T-056's reader, from its own release."""
+    side, placements = route.CREDITED_READERS[key](n)
+    assert len(placements) == n
+    for x, y, c, s in placements:
+        assert c * c + s * s == 1
+        half = (abs(c) + abs(s)) / 2
+        assert half <= x <= side - half
+        assert half <= y <= side - half
+    assert route.CREDITED_READERS["T-092"] is route.couzo_release_1003_packing
