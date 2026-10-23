@@ -2511,12 +2511,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "Issue #732's 77 beyond-horizon rows at 325 to 1024 and their supersessions, and "
             "the request entries for #732, the four stage 7 replies after #730, #728's final "
-            "reply and #526's correction, against main 31584003e (#737): rendered at link "
-            "revision 868925d6 into empty site directories, twice from this tree at 04feaaca "
-            "and twice from main's (43 files each), render_packing_methods writes every file "
-            "byte-identical across all four. Measured before against main fcf2f96a5 and "
-            "6c70d843f with the same outcome. No PDF was printed; it prints from that HTML. "
-            "Retain #737's v0.2.7."
+            "reply, #526's correction and the final replies closing #582, #584, #624 and "
+            "#675, against main 44df28b07 (#743): rendered at link revision 868925d6 into "
+            "empty site directories, twice from this tree at 24fe305e and twice from main's "
+            "(43 files each), render_packing_methods writes every file byte-identical across "
+            "all four. Measured before against main fcf2f96a5, 6c70d843f and 31584003e with "
+            "the same outcome. No PDF was printed; it prints from that HTML. Retain #737's "
+            "v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
