@@ -3,9 +3,9 @@ type: is
 id: is-01m5kpejtm3fmbx0sb888yj3t4
 title: "Address PR #742 review A: #732's rows (lineage, source_history test, exact starts, README, closings)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 10
+version: 11
 delegate: c-addr-742-1023
 labels: []
 dependencies: []
@@ -22,7 +22,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T06:16:25.171Z
-updated_at: 2026-10-23T06:16:56.397Z
+updated_at: 2026-10-23T07:42:33.985Z
 started_at: 2026-10-23T06:16:56.397Z
+closed_at: 2026-10-23T07:42:33.984Z
+close_reason: "Review A addressed: A1-A7 fixed (a1c3b0bed, 5d1731b43, 24fe305ef), n985 fixed, main merged (e657357ab), release record (e4f050d99); CI green at e4f050d99; dispositions https://github.com/jlevy/squares/pull/742#issuecomment-6360024272"
+resolution: null
+duplicate_of: null
 ---
 Review A (senior, round 1) at e5c4db328: https://github.com/jlevy/squares/pull/742#issuecomment-6358224906. Findings A1-A7, plus two record defects found outside the review (the #732 n985 claim's side; main's red bead-tree step with the five closings).

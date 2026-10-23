@@ -3,9 +3,9 @@ type: is
 id: is-01m57xskzp84r50zqxn5cp8b7b
 title: "W2 #669: replay original and regularized n155 certificates with source controls"
 kind: task
-status: closed
+status: open
 priority: 2
-version: 12
+version: 13
 delegate: c-close-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5733t1298tmxrt5h2pw772s
 hold: null
 hold_until: null
 created_at: 2026-10-18T16:33:53.653Z
-updated_at: 2026-10-23T07:11:32.157Z
+updated_at: 2026-10-23T07:42:38.858Z
 started_at: 2026-10-18T16:34:04.361Z
 closed_at: 2026-10-23T07:11:32.156Z
 close_reason: "Source checkers re-run on the four certificates of #669 and #674 (8 accepted, 24 controls refused); receipts committed in the three packets and the request notes edited on PR #747 (77872bd02, c4f86cbca, e4ea7beb4); no rung change."

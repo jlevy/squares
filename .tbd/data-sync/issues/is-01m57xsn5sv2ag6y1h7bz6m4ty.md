@@ -3,9 +3,9 @@ type: is
 id: is-01m57xsn5sv2ag6y1h7bz6m4ty
 title: "W2 #674: replay opening and updated n229 dilation certificates with source controls"
 kind: task
-status: closed
+status: open
 priority: 2
-version: 12
+version: 13
 delegate: c-close-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5733vshn9cet23pbx19nqqm
 hold: null
 hold_until: null
 created_at: 2026-10-18T16:33:54.872Z
-updated_at: 2026-10-23T07:11:34.218Z
+updated_at: 2026-10-23T07:42:41.254Z
 started_at: 2026-10-18T16:34:05.831Z
 closed_at: 2026-10-23T07:11:34.217Z
 close_reason: "Source checkers re-run on the four certificates of #669 and #674 (8 accepted, 24 controls refused); receipts committed in the three packets and the request notes edited on PR #747 (77872bd02, c4f86cbca, e4ea7beb4); no rung change."
