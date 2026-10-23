@@ -2365,17 +2365,17 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "Couzo's watched history at 325 to 1024 (#730: 319 beyond-horizon rows, the "
-            "T-188, T-189 and T-191 notes, #715's and #624's request texts) against main "
-            "bfc04b659 (#733's renderers and editions): rendered at link revision "
-            "6610be93 into empty site directories from this tree at 6fdddf00 and from "
+            "T-188, T-189 and T-191 notes, #715's and #624's request texts, review A's "
+            "date-free wording) against main e929137a8 (#725): rendered at link revision "
+            "6610be93 into empty site directories from this tree at 400a2dae and from "
             "main's (68 files each). render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write their "
             "HTML and Markdown byte-identical, and the explainer its Markdown; the "
             "explainer's HTML differs only in the order of attributes on a math span, "
             "which a second render of one tree reorders too, and is identical once they "
-            "are normalized. Measured first against main 59b1ec594 with the same "
-            "outcome. No PDF was printed; each prints from that HTML. Retain v0.4.19, "
-            "v0.1.10, v0.1.3 and v0.2.6."
+            "are normalized. Measured before against main 59b1ec594 and bfc04b659 with "
+            "the same outcome. No PDF was printed; each prints from that HTML. Retain "
+            "#733's v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
         ),
     ),
     ReleaseNoPublicChange(
