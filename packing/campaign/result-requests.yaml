@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-22'
+last_reviewed: '2026-10-23'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -18892,7 +18892,7 @@ issues:
       the corpus at or below 1024 are beyond-horizon rows, each current, after the filtered
       exact replay decided every one on two routes with every control refused; 366 is not
       recorded, below Couzo's 4e4c8ce certificate; the 8 rows above 1024 wait on the owner.
-    read_through: '2026-10-22T11:35:16Z'
+    read_through: '2026-10-22T20:15:57Z'
     results:
     - key: n105
       claim: s(105) <= 10.7893037837429748, binary64; the exact header side is authoritative.
@@ -18904,6 +18904,21 @@ issues:
       source: body
       register:
       - T-229
+    - key: n204-lower
+      claim: >-
+        s(204) <= 14808642830513087197802415708703/10^30 = 14.808642830513087197802415708703,
+        the header side of certificates/n204.cert at 12fc466 (SHA-256 9c5dabc8...3e7d), 1.48e-11
+        below n-204.cert's: the author's answer to the import reply's question 3 claims it.
+      source: https://github.com/jlevy/squares/issues/719#issuecomment-6350348588
+      not_registered: >-
+        Claimed after the import registered n-204.cert's side as T-229. The
+        mishapolk-issue719-2026-10-22 packet pins the file by digest only. Its side first
+        appears at 1851c2c (2026-10-22T05:29:48Z), the commit that first published n-204.cert,
+        and is exactly the side Evan Daniel's regularizer reached from T-229's witness in the
+        stage 4 pass. Deriving and replaying it, recording it under the author's credit, its
+        review and its adoption at 204 are think-h01y's.
+      queued: true
+      bead: think-h01y
     - key: n330
       claim: s(330) <= 18.6926724444540682, binary64; the exact header side is authoritative.
       source: body
@@ -20226,6 +20241,7 @@ issues:
     - think-xyhn
     - think-4h23
     - think-9vr8
+    - think-h01y
     answer_bead: think-xyhn
     replies:
     - url: https://github.com/jlevy/squares/issues/719#issuecomment-6350110834
@@ -20413,3 +20429,168 @@ issues:
       204 file is claimed, the files beyond the twelfth place, and a licence for the
       certificates. No site page lists beyond-horizon rows, which the reply said. The issue
       stays open.
+
+      The author's comment of 2026-10-22T20:15:57Z (issuecomment-6350348588) answers the
+      import reply's five questions. Lineage: 105 was refined from PingYou Ltd's certificate of
+      Couzo's refinement of Xu's packing (T-174), as T-229 records; 204 started from "Couzo
+      #678 / Evan Daniel (T-225)", and the 25.64-degree turn of its one square is a deliberate
+      release in a continuous SQP/Newton relaxation. T-229's text still says the source states
+      no lineage or method, an evidence update for think-xyhn. Which 204 file the solve began
+      from stays open: the packing pairs with T-223's in its frame and with T-225's after a
+      half turn of the box, and the answer decides whether Daniel's regularization is an
+      antecedent at 204. The 69 rows below the preceding report by less than 1e-9 are
+      quenches of the predecessor reports' arrangements, so refinements, recorded as they are;
+      their per-row credit beyond the corpus is the owner's open question (D5, think-f2io).
+      447 is a new arrangement. The ten withdrawn rows are claimed again as part of #732
+      (think-0gp6). The lower 204 file is claimed (n204-lower, think-h01y). The 34 in-corpus
+      files beyond the twelfth place are left to the maintainers, not claimed: they stay
+      pinned by digest, and whether the record takes that class is the owner's question on
+      think-fwa9. The author added an MIT licence at 17cc220 (20:15:36Z) that the comment says
+      covers every certificate, catalogue, manifest and tool. This packet stays derived-only
+      at 12fc466; later packets from the repository may retain the files.
+  - number: 732
+    title: '328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof'
+    author: Mishapolk
+    opened: '2026-10-22'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Mykhailo Polkovskyi (Mishapolk) asks that 5,468 upper bounds at n = 328 to 9913 be
+      registered, 390 at or below 1024 and 5,078 above, each an exact rational certificate in
+      Mishapolk/square-packing-records at 814fbe9129b7abb301923cc50de621697a53940f (tag v1.0.0;
+      manifest.json, census.json, upper_bounds.json and certified_bounds.json, whose SHA-256 the
+      issue states, and a release asset). He says they resolve Couzo's #715 and that an
+      algebraic saturation argument leaves 4,377 counts up to 10,000 at s(N) = ceil(sqrt N), and
+      proposes N = 10,000 as the end of tracking. Triaged read-only on 22 October 2026
+      (think-0gp6): the five digests match and custody holds for all 516 files at or below 1024;
+      report order would record 77 rows at 325 to 1024, after #730's import of Couzo's history;
+      none of the 126 in-corpus files is new; the rows above 1024 wait on the owner; the
+      saturation argument bounds no s(n). The triage read the certificates' only licence as
+      Evan Daniel's verifier licence; at 17cc220 (20:15:36Z) the author added an MIT licence
+      that his comment on #719 says covers every certificate. Nothing is retained, replayed or
+      recorded yet.
+    read_through: '2026-10-22T19:55:03Z'
+    results:
+    - key: rows-325-1024
+      claim: >-
+        390 upper bounds at n = 328 to 998, each the exact side of certificates/0000-0999/nN.cert
+        at 814fbe9, listed in manifest.json and census.json.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: rows of source-coverage.yaml, not register entries. The
+        stage 1 triage walked all 390 in report order against main, Couzo's, Daniel's and Fang's
+        publications and the author's own files: 77 would be recorded (76 first published at
+        8a488a1, and 539 at 1851c2c, one of #719's withdrawn rows), 499 is held as sub-print
+        (think-fwa9), 369, 376 and 985 wait on #730's index classes, 81 restate #719's rows, and
+        228 tie or lie above an earlier report or, at 335, wait on D3. Not yet retained, replayed
+        or recorded; the walk is redone once #730 lands.
+      queued: true
+      bead: think-0gp6
+      blocked_on:
+      - jlevy/squares#730
+    - key: rows-above-1024
+      claim: >-
+        5,078 upper bounds at n = 1025 to 9913, each the exact side of a certificate at 814fbe9
+        listed in manifest.json and census.json.
+      source: body
+      not_registered: >-
+        Beyond 1024: whether counts above 1024 are tracked is the owner's decision (D1,
+        think-f2io), which the issue's proposal to stop at N = 10,000 joins. Index-level custody
+        holds; nine files were read and 3426's certificate states a side above its own grid side.
+        Not derived, replayed or recorded.
+      queued: true
+      bead: think-0gp6
+      blocked_on:
+      - think-f2io
+    - key: issue-715-resolution
+      claim: >-
+        The release strictly improves all 1,285 rows of #715: 0 tied, 0 worse, 0 missing.
+      source: body
+      not_registered: >-
+        A comparison, not a result. Every side is below #715's 12-place print, but at the 173
+        counts at or below 1024 where the record holds #715's exact sides, 93 are below, 37
+        equal and 43 above, by 1.1e-18 to 2.3e-13. The rows themselves are rows-325-1024 and
+        rows-above-1024.
+      queued: false
+    - key: saturation-argument
+      claim: >-
+        Lemma 1 (composite gluing), Lemma 2 (dilation), Theorem 1 (the recurrence's minimum
+        equals the catalogue for k from 20 to 100, so the least waste at k = 100 is 87) and
+        Corollary 1 (s(N) = 100 at the 87 counts from 9914 to 10000).
+      source: body
+      not_registered: >-
+        Prose only. Lemma 1 is the gluing T-163 registers. Theorem 1 holds as a closure of the
+        source's own catalogue and rectangles and bounds no s(n); Corollary 1 does not follow
+        from it, since the argument limits the algebra, not s(N).
+      queued: false
+    - key: ceiling-census
+      claim: >-
+        s(N) = ceil(sqrt N) at 4,377 counts up to 10,000, and sub-ceiling packings at the other
+        5,623.
+      source: body
+      not_registered: >-
+        At the 85 perfect squares s(k^2) = k follows from area. At the other 4,292 counts no
+        proof is given, so no lower bound is registered; the index lists 5,620 sub-ceiling
+        counts, not 5,623.
+      queued: false
+    asks:
+    - what: Cap the record's tracking of upper bounds at N = 10,000.
+      state: queued
+      note: A policy proposal; it joins the owner's decision whether counts above 1024 are tracked.
+      bead: think-f2io
+    beads:
+    - think-0gp6
+    - think-f2io
+    answer_bead: think-0gp6
+    replies: []
+    close_when: >-
+      The rows at or below 1024 are recorded in report order, the owner has answered whether
+      counts above 1024 are tracked and where tracking stops (think-f2io), and the replies
+      reporting each are posted.
+    notes: >-
+      The issue opened at 2026-10-22T19:55:03Z; edits at 19:58:20Z and 20:00:59Z changed only
+      LaTeX braces, and the edit at 20:07:33Z replaced the attached-archive line with a link to
+      release v1.0.0's asset. The stage 1 triage (c-triage-1022d) is in think-0gp6's notes, and
+      its acknowledgement, drafted for the pull request that carries this entry, asks for
+      per-row parents, a licence and whether the census's s(N) = ceil(sqrt N) is claimed as a
+      lower bound. The author's comment on #719 of 20:15:57Z answers two of those before it is
+      posted: the licence (17cc220) and the claim on the ten rows #719's edit withdrew, which
+      this issue takes. The significance the issue proposes (S4 to S5) is not scored: no entry
+      is registered.
+  - number: 734
+    title: 'Proposal: submit and fetch upper bounds by API (automated intake, reported the same day)'
+    author: wand125
+    opened: '2026-10-22'
+    state: open
+    kind: other
+    triage: pending
+    summary: >-
+      A proposal for discussion, not a result: submit an upper bound as a Witness/v2 by issue
+      or API, have a workflow verify it exactly and compare it with the house (Level 1),
+      record a smaller packing as reported in a same-day bot pull request (Level 2), and adopt
+      and regularize it with one maintainer approval (Level 3), with the current best packings
+      served as static JSON under squaremath.org/api/v1/. It tracks project work, not the
+      intake of a reported item.
+    read_through: '2026-10-22T20:40:07Z'
+    results: []
+    asks:
+    - what: How far to automate the intake of upper bounds, Level 1, 2 or 3.
+      state: queued
+      bead: think-lnzm
+    - what: >-
+        Whether Level 3's substitutions are accepted (the form's credit fields, the issue
+        number for an import bead, one approval for the review), and whether the bot or the
+        maintainer merges an approved Level 3 pull request.
+      state: queued
+      bead: think-lnzm
+    - what: Whether api/v1/ on squaremath.org is the place for the API, and whether lower bounds join it from the start.
+      state: queued
+      bead: think-lnzm
+    beads:
+    - think-lnzm
+    answer_bead: think-lnzm
+    replies: []
+    close_when: >-
+      The owner has answered the three questions (think-lnzm) and the reply that says so is
+      posted.
