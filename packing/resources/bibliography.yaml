@@ -2320,17 +2320,28 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-12'
-    lineage: independent
+    lineage: builds-on-project
+    credit: Daniel after Schadt, Ellsworth, Levy
     note: >-
       Two exact reports of evand/square-packing at ad86d42d0f743076d735036702ba04a41ce24a8c,
       on no issue (tracked on 545), and the data release exact-data-2026-10-12 (tag commit
       31523f87316bdfda00f5459dd9077928e264f133) that issue 545 asked for: the minimal
       polynomial, of degree 7213, of the s(29) record side, and Theorem C with gradec.py, a
       certificate of local minimality modulo exact flat motions (grade C), reported VALID at
-      233 of the 250 configurations of field degree at most 4. The author is read from the
-      retained LICENSE and CREDITS.md, which say the work was produced by Claude (Anthropic)
-      under human direction. MIT-licensed. Neither report is a bound, and each configuration
-      keeps the credit its case record gives.
+      233 of the 250 configurations of field degree at most 4. Both work over this
+      project's register: the source's tasks/exact-minpoly/README.md derives "exact forms of
+      S for the register records" (line 4) and grades local optimality "over the register"
+      (line 48), whose frontier minimal_polynomial fields it names (line 161), and the batch
+      the task builds on is "every record in jlevy's register" (line 17 of
+      source/s12/search/exact/README.md in the evand-exact-and-local-reports-2026-10-07
+      packet). Schadt and Ellsworth are named for the s(29) record packing whose side the
+      polynomial gives exactly, Thomas
+      Schadt's as David Ellsworth improved it, and Levy because both reports work over this
+      register. Each of the 233 configurations keeps the credit its case record gives: local
+      minimality is a new property of those packings, which does not make their finders
+      antecedents. The author is read from the retained LICENSE and CREDITS.md, which say
+      the work was produced by Claude (Anthropic) under human direction. MIT-licensed.
+      Neither report is a bound.
   - key: '[Summins stratification series 2026-10-12]'
     authors: [Summins]
     year: 2026
