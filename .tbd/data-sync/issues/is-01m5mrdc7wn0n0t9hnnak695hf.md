@@ -3,9 +3,9 @@ type: is
 id: is-01m5mrdc7wn0n0t9hnnak695hf
 title: "Address PR #753 review A: T-231 records PR (house wording, stale passages, re-dating list, credit notes, handle, ledger date, labels)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 13
+version: 14
 delegate: c-lane-719-records-1023
 labels:
   - result-import
@@ -26,7 +26,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:09:57.244Z
-updated_at: 2026-10-23T16:11:27.670Z
+updated_at: 2026-10-23T16:39:18.199Z
 started_at: 2026-10-23T16:11:27.669Z
+closed_at: 2026-10-23T16:39:18.199Z
+close_reason: "Every finding of #753 review A has a disposition (https://github.com/jlevy/squares/pull/753#issuecomment-6369863615): A1-A6, A8-A10, A12 fixed; A7 deferred to think-ruu7 (site), A11 deferred to think-s41p."
+resolution: null
+duplicate_of: null
 ---
 Review A of #753 (https://github.com/jlevy/squares/pull/753#issuecomment-6369144929), approved at 028d53e5e; findings A1-A9 and suggestions A10-A12. Addressing agent: c-lane-719-records-1023 (sole committer).
