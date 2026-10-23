@@ -5,7 +5,7 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-22T20:49:11.730Z
+updated_at: 2026-10-23T00:36:27.033Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -68,3 +68,8 @@ certificates at `Mishapolk/square-packing-records@814fbe9`.
   or more items, or controls sampled);
 - about 1.6 GB of derived facts, since there is no licence: a data release under OR-18
   (D4).
+
+2026-10-23 c-lane-sweep-1023a.
+- D4 premise for #732: the triage priced "about 1.6 GB of derived facts, since there is no licence". At 17cc220 (2026-10-22T20:15:36Z) Mishapolk added an MIT LICENSE, and his #719 comment 6350348588 says it covers every certificate, catalogue, manifest and tool. If A, the 5,078 certificates above 1024 (5.21 GB at 814fbe9) can be hosted as the files themselves in a data release (OR-18), not as derived facts.
+- D5 evidence: the same comment says the 69 rows of #719 below the preceding report by less than 1e-9 are "precision continuous Newton/SQP quenches of the predecessor reported topologies", i.e. refinements of the reports before them, and that 447 is a new arrangement. No per-row parent list yet.
+- #732's requests entry (claude/intake-bookkeeping-2026-10-23) queues its ask to cap tracking at N = 10,000 on this bead, with D1.

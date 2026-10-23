@@ -5,7 +5,7 @@ title: "Import Mishapolk: 122 upper bounds at 105–1568, incl. 105 and 204 in t
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-22T06:11:32.271Z
-updated_at: 2026-10-22T20:49:15.492Z
+updated_at: 2026-10-23T00:36:16.965Z
 started_at: 2026-10-22T06:11:33.610Z
 ---
 Issue #719 (https://github.com/jlevy/squares/issues/719), opened 2026-10-22T05:30:47Z by Mishapolk (Mikhail Polk; repository Mishapolk/square-packing-records): 122 claimed strict improvements at N in [105, 1568], two in the case corpus (105: 5.18e-12 below the catalogue witness; 204: 1.006e-8 below T-225, the house since #718), 112 beyond the horizon at or below 1024, 8 above 1024 (1061-1568; owner decision D1, think-f2io). Many margins are ~1e-12 (likely re-solves of existing arrangements); several are 1e-4 to 2e-3 (447, 553, 601, 652, 701). Stage 0 owner; stage 1 triage (read-only, priced) first.
@@ -210,3 +210,18 @@ blocked_on: jlevy/squares#722
   recorded there, dated `1851c2c`.
 - 366's new side is 1.24e-18 above Couzo's `4e4c8ce` certificate, so it is still not
   recorded.
+
+2026-10-23 c-lane-sweep-1023a (sweep of 00:10Z, Blocked imports). The last blocked_on line, jlevy/squares#722, resolved when #722 merged on 22 October; #725 (T-229 at V3/C3, adopted at 105 and 204) merged at 2026-10-23T00:23:18Z as e929137a8, with the five reply records of 3d43e15da (check_requests --github: no missing reply left on #670, #678, #686, #715 or #719).
+
+Mishapolk's comment of 2026-10-22T20:15:57Z (issuecomment-6350348588) answers the import reply's five questions; read into #719's entry (read_through) by claude/intake-bookkeeping-2026-10-23:
+- 105: refined from PingYou Ltd's certificate of Couzo's refinement of Xu's packing (T-174), as T-229 records. No change.
+- 204: started from "Couzo #678 / Evan Daniel (T-225)"; the 25.64-degree turn is a deliberate release in a continuous SQP/Newton relaxation. T-229's claim text still says "The source states no method and no lineage per count": an evidence update for the next records PR. Still open: which 204 file the solve began from (#719 pairs with T-223 under the identity and with T-225 under a half turn, triage-719/in-corpus.md); it decides whether Daniel stays an antecedent at 204.
+- The 69 rows below the preceding report by < 1e-9: quenches of the predecessor reports' arrangements, so refinements. The ledger's "210 that no source classifies" changes for them (classification only, no verdict); their per-row credit is the owner's D5 (think-f2io).
+- 447: a new arrangement, as recorded.
+- The ten withdrawn rows: claimed again as part of #732 (think-0gp6).
+- 204: claims the lower n204.cert (1.48e-11 below n-204.cert): requests result n204-lower, queued on think-h01y.
+- The 34 in-corpus files beyond the twelfth place: left to the maintainers, not claimed; the class is the owner's question on think-fwa9.
+- Licence: MIT at 17cc220, which the comment says covers every certificate; this packet stays derived-only at 12fc466.
+
+The stage 4 follow-up is redrafted for those answers: scratchpad replies/stage4-1022/719-reply-v2.md (not posted). It can be posted once #725's Pages deployment is checked; nothing blocks it. The close waits on think-h01y (the lower 204 side) and think-9vr8 (the rows above 1024, on think-f2io).
+blocked_on: think-h01y, think-9vr8
