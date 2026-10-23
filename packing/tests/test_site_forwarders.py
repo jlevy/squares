@@ -290,6 +290,26 @@ def test_recent_results_compatibility_reaches_the_one_complete_table(
     )
 
 
+def test_recent_section_alias_keeps_result_and_learn_menus_usable(
+    browser: Any, served: str
+) -> None:
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    try:
+        page.goto(f"{served}recent-results.html?added-age=7#recent-arrivals", wait_until="load")
+        site_browser.api().expect(page).to_have_url(
+            f"{served}results.html?added-age=7#all-results"
+        )
+        for name in ("Results", "Learn"):
+            button = page.get_by_role("button", name=name, exact=True)
+            button.click()
+            site_browser.api().expect(button).to_have_attribute("aria-expanded", "true")
+        site_browser.api().expect(page.locator("#site-nav-learn a").first).to_have_text(
+            "Tutorials"
+        )
+    finally:
+        page.close()
+
+
 def test_without_scripts_the_refresh_still_arrives(browser: Any, site: Path) -> None:
     """A reader without scripts is sent on by the refresh, which cannot keep a fragment."""
     root = site.as_uri()

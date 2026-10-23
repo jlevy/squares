@@ -37,8 +37,10 @@
     }
     const destination = new URL(moved, location.href);
     destination.search = location.search;
+    const sameDocument =
+      destination.pathname === location.pathname && destination.search === location.search;
     location.replace(destination.href);
-    return true;
+    return !sameDocument;
   };
   if (forwardLegacyFragment()) {
     return;
