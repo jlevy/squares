@@ -790,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "8d1eb181c79a85da5a8a0f6a35ea1286e841cab6"
+DATA_REVISION = "4a8bc3be598180f0846a1c388b9451b9cd512bb6"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2475,8 +2475,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write every "
             "file byte-identical. Measured again at f590f81f4, after the D6 answer's "
-            "records and notes, and after review A of #754 against main 05e95db36 "
-            "(#751), with the same outcome. No PDF was printed; each prints "
+            "records and notes, and after review A of #754 against main 769e441e1 "
+            "(#748), with the same outcome. No PDF was printed; each prints "
             "from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
