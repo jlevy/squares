@@ -8822,30 +8822,6 @@ sources:
     the closure of the five modules and the notes that derive them. A second machine route
     after chelokot's; its register entry waits on the owner's decision of its kind
     (think-4o9c). Not built here (think-tq3g); the case records are unchanged.
-- id: chelokot-small-n-lean-2026-09-05
-  title: chelokot's Lean proofs of s(2) to s(5)
-  role: source-repository
-  url: https://github.com/chelokot/square-packing-archive/tree/753079eb37d8d16225a5dc1f56e493a3c3b243f4/formal/SquarePackingArchive/Records
-  local: resources/web/chelokot-small-n-lean-2026-09-05/
-  source_key: '[chelokot small-n Lean 2026-09-05]'
-  scope:
-    n_values: [2, 3, 4, 5]
-  reviewed: '2026-10-23'
-  source_date: '2026-08-29'
-  disposition: current-report
-  replay_disposition: case-specific
-  represented_by:
-  - resources/web/chelokot-small-n-lean-2026-09-05/README.md
-  evidence:
-  - E-small-n-chelokot-lean-report
-  notes: >-
-    chelokot/square-packing-archive at 753079eb, the pin of the 5 September counterexample
-    packet: s2_eq_two, s3_eq_two and s4_eq_two (16 August 2026) and s5_eq_goebel (29 August)
-    in Lean, IsMinimumSide n s for each. Apache-2.0. The packet retains the closure of the
-    three Records modules, the archive's axiom probe and its formalization notes. This
-    repository built the archive at this commit on 2 October 2026 for T-086, and that
-    build's log prints these theorems' axioms; no receipt names them. Its register entry
-    waits on the owner's decision of its kind (think-4o9c). The case records are unchanged.
 
 selected_overrides:
 - n: 29

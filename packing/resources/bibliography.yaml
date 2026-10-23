@@ -3404,7 +3404,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-09-29'
-    credit: Hosono after Daniel
+    credit: Hosono after Daniel, Levy
     lineage: credits-project
     note: >-
       Hiroaki Hosono's hypothesis-free Lean proof SquarePacking.n21pts_eq_5 : minSide 21 = 5
@@ -3423,7 +3423,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-11'
-    credit: Hosono after Daniel
+    credit: Hosono after Daniel, Levy
     lineage: credits-project
     note: >-
       Hiroaki Hosono's Lean kernel proof SquarePacking.s59_eq_8 : minSide 59 = 8 in
@@ -3440,7 +3440,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-18'
-    credit: Daniel after Fang, Ryu, Arslanov, Mustafin, Shangitbayev
+    credit: Daniel after Fang, Ryu, Arslanov, Mustafin, Shangitbayev, Levy
     short_credit: Daniel after Fang, Ryu et al.
     lineage: credits-project
     note: >-
