@@ -7,7 +7,7 @@ existing,ascent-n1-100-poster.png,https://squaremath.org/ascent-n1-100-poster.pn
 existing,ascent-n1-324-poster.png,https://squaremath.org/ascent-n1-324-poster.png,asset-file,live,no,asset-file,,,,retain asset address or pattern; exclude from page navigation,,
 existing,assets/images/*.{hash}.png,,asset-file,live,no,asset-pattern,,,,retain asset address or pattern; exclude from page navigation,,assets/images/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.png
 existing,"assets/{css,js,fonts}/*.{hash}.{ext}",,asset-file,live,no,asset-pattern,,,,retain asset address or pattern; exclude from page navigation,,assets/(?:css/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.css|js/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.js|fonts/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.woff2)
-existing,atlas.html,https://squaremath.org/atlas.html,page,live,yes,atlas-and-frontier,atlas,Results,Results,"Visual Atlas; retain graphical collection, Frontier Survey, bounds table and all existing anchors",,
+existing,atlas.html,https://squaremath.org/atlas.html,page,live,yes,atlas,atlas,Results,Results,"Visual Atlas; show all 324 packings by default; historical survey fragments forward to frontier.html",,
 existing,atlas/house/n-1.svg,https://squaremath.org/atlas/house/n-1.svg,asset-file,live,no,atlas-drawing,,,,retain asset address or pattern; exclude from page navigation,,
 existing,atlas/house/n-10.svg,https://squaremath.org/atlas/house/n-10.svg,asset-file,live,no,atlas-drawing,,,,retain asset address or pattern; exclude from page navigation,,
 existing,atlas/house/n-100.svg,https://squaremath.org/atlas/house/n-100.svg,asset-file,live,no,atlas-drawing,,,,retain asset address or pattern; exclude from page navigation,,
@@ -784,7 +784,7 @@ existing,epistemics.html,https://squaremath.org/epistemics.html,page,live,yes,ve
 existing,explainer.html,https://squaremath.org/papers/n11-lower-bounds-explainer.html,forwarder,forwarded,no,compatibility-forwarder,,,,retain forwarding target and supported query/fragment behavior; exclude from navigation,papers/n11-lower-bounds-explainer.html,
 existing,favicon-48.png,https://squaremath.org/favicon-48.png,asset-file,live,no,asset-file,,,,retain asset address or pattern; exclude from page navigation,,
 existing,favicon.svg,https://squaremath.org/favicon.svg,asset-file,live,no,asset-file,,,,retain asset address or pattern; exclude from page navigation,,
-existing,frontier.html,https://squaremath.org/atlas.html,forwarder,forwarded,no,compatibility-forwarder,,,,retain forwarding target and supported query/fragment behavior; exclude from navigation,atlas.html,
+existing,frontier.html,https://squaremath.org/frontier.html,page,live,yes,frontier,frontier,Results,Results,"The Frontier Survey; substantive bounds key and complete table; retain survey row and filter URLs",,
 existing,index.html,https://squaremath.org/,page,live,yes,home,overview,Overview,,retain address and legacy anchors; resource summary with View All Resources link to resources.html,,
 existing,known-best-1-100-card.png,https://squaremath.org/known-best-1-100-card.png,asset-file,live,no,asset-file,,,,retain asset address or pattern; exclude from page navigation,,
 existing,known-best-1-100.pdf,https://squaremath.org/square-packings-100-20261008.pdf,copy,live,no,compatibility-copy,,,,retain published copy and canonical edition; exclude from navigation,square-packings-100-20261008.pdf,

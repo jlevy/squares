@@ -104,14 +104,22 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "atlas.html": (
-        1_050_000,
+        400_000,
         (
-            "Combined 324-case Atlas measures 862,357 bytes: 688,112 for the complete "
-            "Frontier Survey and 174,245 for graphics and the shared shell. With the "
-            "person profiles (#578) it measured 1,005,866 bytes on 21 October 2026: its "
-            "344 reviewed credit links to profiles cost 14,692 bytes, recognised by "
-            "address with no per-link marker, and the page is 991,174 without them. No "
-            "timing was re-measured for this change."
+            "On 22 October 2026 the standalone 324-case Visual Atlas measures 295,318 "
+            "bytes with every drawing visible by default and one shared case popover. "
+            "The 400,000-byte ceiling leaves 104,682 bytes above this measurement. "
+            "The complete bounds table has its own Frontier Survey budget."
+        ),
+    ),
+    "frontier.html": (
+        900_000,
+        (
+            "On 22 October 2026 the standalone Frontier Survey measures 731,612 bytes "
+            "for all 324 rows, exact native MathML, credit links, the concise reading "
+            "key and the shared shell. The 900,000-byte ceiling leaves 168,388 bytes "
+            "above that measurement; row details remain fetched on demand. "
+            "Timing has not been re-measured for the split."
         ),
     ),
     "results.html": (

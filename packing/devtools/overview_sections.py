@@ -2252,8 +2252,8 @@ def homepage_paper_cards() -> str:
 #: The Results page is reached from Recent Results, whose pointer is its own.
 PAGES: tuple[tuple[str, str, str, str], ...] = (
     (
-        "atlas.html#the-frontier-survey",
-        "Frontier Survey",
+        "frontier.html",
+        "The Frontier Survey",
         "Every Case from n = 1 to 324",
         "Reported and verified bounds side by side, with their sources.",
     ),

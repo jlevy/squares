@@ -115,12 +115,14 @@ Navigation and chrome always use the shared sans face: menus, contents links, co
 headings, disclosure labels, counts and browsing controls.
 Substantive exposition remains serif, and an inline citation or link in that exposition
 inherits its surrounding prose.
-The shared `site-navigation-copy` and `site-navigation-heading` roles cover metadata,
-collection structure and general site descriptions or browsing instructions.
-Their use follows the text’s purpose, including introductions and guidance on About,
-Papers, Tutorials, Posters, Resources and project documentation.
-Mathematical explanations and research exposition retain the serif face; an inline link
-inherits that prose.
+Standalone introductions use the shared serif prose face, including the homepage’s
+contributor, reporting and learning invitations.
+The retained `site-navigation-copy` class controls those introductions without making
+their narrative into chrome.
+`site-navigation-heading` remains the sans collection-heading role.
+Navigation, buttons, filters, table contents and metadata retain their sans roles.
+Results Archive opens with its title and actions directly above the table, without an
+introductory explanation of the register.
 
 Secondary metadata such as dates, breadcrumbs, captions and provenance may use KPress’s
 gray (`--kpress-doc-muted`, carried as `--site-support-color`) on the web and black in
@@ -224,7 +226,7 @@ Their text uses the corresponding topic hue; uncoded subjects retain neutral ink
 All options retain that surface when unchecked, selected or hovered; a visible check
 identifies selection.
 Status, result-kind and significance palettes are unchanged.
-The shared ink lightness/chroma tokens give every News label at least4.5:1 contrast on
+The shared ink lightness/chroma tokens give every News label at least 4.5:1 contrast on
 the neutral surface in both themes, measured below.
 
 | News topic | Light | Against the neutral surface | Dark | Against the neutral surface |
@@ -913,9 +915,9 @@ contributor articles use their component sheets and the same text tokens.
   The whole button opens its list.
   Its first entry leads to substantive content: Visual Atlas, Papers, or The Squares
   Project. Results, Learn and About have no category page or URL. Results contains Visual
-  Atlas (`atlas.html`), Recent Results (`recent-results.html`), Results Archive
-  (`results.html`), Verification (`verification.html`), and Report a Result
-  (`report.html`), in that order.
+  Atlas (`atlas.html`), The Frontier Survey (`frontier.html`), Recent Results
+  (`recent-results.html`), Results Archive (`results.html`), Verification
+  (`verification.html`), and Report a Result (`report.html`), in that order.
   About contains The Squares Project, Contributor Profiles, and Project Documentation.
   The hierarchy and destination paths live in `site_navigation.py`; `site-nav.html`
   supplies the shared shell.
@@ -1040,31 +1042,26 @@ contributor articles use their component sheets and the same text tokens.
   without removing or rewriting the anchors.
   The Workbench application has no footer; its stage carries the publication version.
 
-- **Homepage.** Its browser title and sharing title are **The Squares Project**, from
-  the shared project-name constant.
-  The opening content section remains The Square Packing Problem.
-  A short problem introduction opens the page.
-  The next sections are Atlas, News, Recent Major Results, Papers, PDFs, Video, Squares
-  Project Documentation, then More Resources (`think-5c8r`, `think-sq1i`). Papers shares
-  all reading cards with the Papers page; Squares Project Documentation shares its
-  introductory text and cards with About.
-  The PDF downloads and inline video player remain separate sections.
-  Their action rows link directly to Papers (`papers.html`), its PDFs section
-  (`papers.html#pdfs`), Video (`visualize.html`), and Docs (`about.html`), using the
-  shared right arrow. The introduction has two readable paragraphs defining the packing
-  problem and explaining upper/lower bounds (`think-8xzs`). About uses only H1 section
-  headings, each with the same `site-title` styling as The Squares Project
-  (`think-6m9n`, `think-sq1i`). Every visible `h1.site-title` and `h2.site-title` shares
-  the screen-only 6.25rem margin above it and 2rem below it (`--site-title-space-above`
-  and `--site-title-space-below`); compact Legend and introduction-card headings keep
-  their own spacing. The hero graphic opens the case popover, with the case-record link
-  as its no-script fallback.
-  Case popovers offer separate record, Frontier-row and Atlas-tile actions.
-  Atlas case targets fully expand the grid before scrolling to and highlighting the
-  requested tile. Every row containing one card is centered.
-  The full project narrative and attribution live on About; documentation cards also
-  appear on the homepage; **About** sits immediately before **GitHub** in the shared
-  navigation.
+- **Homepage.** Its browser and menu title are **Overview**; its opening H1 remains
+  **The Square Packing Problem**. Two readable introductory paragraphs define the
+  problem and explain upper and lower bounds.
+  The sections continue with Visual Atlas, News, Results, Profiles, Report a Result,
+  Learn, Visuals, About the Squares Project, and More Resources.
+  Learning cards preview the Papers and Tutorials catalogues.
+  Visuals previews the poster and inline video, with actions to Posters, Videos and
+  Workbench. About the Squares Project links directly to `about.html` without repeating
+  the documentation catalogue, and retains the old `#squares-project-documentation`
+  anchor. Project Documentation remains its own page under About.
+  About uses the same site-title styling as The Squares Project (`think-6m9n`,
+  `think-sq1i`). Every visible `h1.site-title` and `h2.site-title` shares the
+  screen-only 6.25rem margin above it and 2rem below it (`--site-title-space-above` and
+  `--site-title-space-below`); compact Legend and introduction-card headings keep their
+  own spacing. The hero graphic opens the case popover, with the case-record link as its
+  no-script fallback. Case popovers offer separate record, Frontier-row and Atlas-tile
+  actions. Atlas case targets fully expand the grid before scrolling to and highlighting
+  the requested tile. Every row containing one card is centered.
+  The full project narrative and attribution live on About.
+  The homepage keeps a concise destination action instead of repeating that material.
 
 - **News.** News is the second navigation item and carries eligible public
   announcements. The changelog record retains excluded historical entries and their
@@ -1259,14 +1256,20 @@ contributor articles use their component sheets and the same text tokens.
   the dark theme.
 
 - **Names.** The page at `atlas.html` and its navigation entry are **Visual Atlas**. It
-  contains the graphical grid, followed by **The Frontier Survey**: the complete record
-  of every case with reported and verified bounds.
+  opens with all 324 packings visible, with no local section navigation.
+  **The Frontier Survey**, at `frontier.html`, is a separate Results destination with
+  the same title in its menu, heading, and breadcrumb.
+  Its complete 324-row bounds table follows a concise key to the reported/verified
+  distinction, verification requirements, gap, decimals, and table controls.
+  Audits and case histories belong in the case records.
   A **Frontier Row** action reaches `#n-N` in the survey table; an **Atlas Tile** action
   reaches `#atlas-n-N` in the fully expanded graphical grid.
   The homepage preview, posters and film also draw from the Atlas.
-  Legacy `frontier.html` and `status.html` URLs forward to Atlas while preserving their
-  query and fragment. The homepage’s former survey fragments, `#the-frontier-survey` and
-  `#the-survey`, reach the survey section on Atlas.
+  Legacy Atlas survey fragments (`#the-frontier-survey`, `#the-survey`,
+  `#best-known-results`, `#frontier-table`, and `#n-N`) reach the corresponding Frontier
+  Survey fragment with query state preserved.
+  The homepage’s former survey fragments reach the same page.
+  `status.html` retains its Atlas forwarding destination.
 
 - **Report layout.** Every report page (the tutorial, the synopsis and the other
   documents) has one layout.
@@ -1346,13 +1349,13 @@ contributor articles use their component sheets and the same text tokens.
   - When a popover card leads to a repository document the site renders, the popover
     renders that page itself, narrow, in a frame: the page at the same address with
     `?view=embed` added before any fragment, so a filtered view such as
-    `atlas.html?recent=true` or a case such as `atlas.html#n-11` arrives as it will be
-    seen. The embed view drops the navigation bar and sends every link out of the frame
-    to the full window. The button is **Expand**, which opens the page at full size; a
-    repository document also offers its source “On GitHub”, which opens it on `main`.
-    Every repository link on the site names `main`, never a commit, and is made by
-    `devtools/repo_links.py`; the optimality paper’s citations are the one exception
-    (**Papers page**, below).
+    `frontier.html?recent=true` or a case such as `frontier.html#n-11` arrives as it
+    will be seen. The embed view drops the navigation bar and sends every link out of the
+    frame to the full window.
+    The button is **Expand**, which opens the page at full size; a repository document
+    also offers its source “On GitHub”, which opens it on `main`. Every repository link
+    on the site names `main`, never a commit, and is made by `devtools/repo_links.py`;
+    the optimality paper’s citations are the one exception (**Papers page**, below).
   - When the card leads to another project off the site, it is a direct card.
     It shows the address under the note beside the host’s mark (GitHub’s for a GitHub
     URL, otherwise the site’s favicon where one is saved under
@@ -1783,8 +1786,8 @@ contributor articles use their component sheets and the same text tokens.
   pressed, in both themes.
   `tests/test_site_drawing_hover.py` checks the loaded SVG, its geometry and exact
   painted colours, and contrast against its own canvas.
-  The first hundred cells arrive as static markup with reserved image dimensions; the
-  remaining cells are already present in a hidden container.
+  All 324 cells arrive as visible static markup with reserved image dimensions on the
+  dedicated Atlas. The homepage preview initially hides cases beyond its first hundred.
   Images use native lazy loading, and `overview/atlas-grid.js` changes visibility after
   reader input. Each drawing has a 1000-unit frame, fine enough to show large.
   Triangle at Small is the atlas’s default; Grid remains available under the view tabs
@@ -2016,8 +2019,9 @@ contributor articles use their component sheets and the same text tokens.
   credit and ends in a **Report a Result** button opening the repository’s result form;
   the old `#contribute-your-results` anchor stays on the heading.
   The overview carries a short reporting summary after Profiles, with a **Report a
-  Result** link to the full invitation on About.
-  Project documentation remains on About.
+  Result** link to the full invitation on `report.html`. The homepage’s **About the
+  Squares Project** section links to `about.html`; Project Documentation has its own
+  `documentation.html` destination.
   Between the narrative and reporting invitation, **Profiles** briefly introduces the
   contributors and cited authors tracked here.
   Home carries the same invitation.
@@ -2056,8 +2060,9 @@ contributor articles use their component sheets and the same text tokens.
   cell pressed. Without scripting the button’s row stays `hidden`, since it would do
   nothing. In the dedicated triangle, expansion retains the readable drawing size and
   widens its complete-row scroll canvas from 19 to 35 tiles.
-  Both pages start with the complete preview around 100 cases, expand to 324 and
-  collapse to their complete preview.
+  The dedicated Atlas starts expanded to 324 cases; the homepage starts with its
+  complete preview around 100. Either can collapse to its complete preview or expand to
+  324\. Reloading the dedicated Atlas restores all 324 cases.
   Their fitting canvases are centered; complete rows pan horizontally when they exceed
   the viewport. Shared FLIP animates the actual centered positions, with instant geometry
   under reduced motion.
@@ -2222,8 +2227,9 @@ contributor articles use their component sheets and the same text tokens.
     It is readable without scripts and supplies the article fetched into the case
     popover. `static_content_page` supplies the styled shell, navigation, colophon and
     shared article overlays; the record remains readable and printable on its own.
-  - **The directory.** `atlas.html` is the case directory, with interactive graphics
-    followed by the Frontier Survey.
+  - **The directory.** `atlas.html` is the graphical case directory, with all 324
+    packings visible by default.
+    The separate `frontier.html` provides the complete bounds table.
     Old `cases/`, `cases/index.html`, and `cases.html` directory links forward there
     while preserving case selections.
     Individual case-record addresses remain canonical.
@@ -2461,8 +2467,8 @@ contributor articles use their component sheets and the same text tokens.
   The Results legend defines the red recency text once.
   A superseded result’s metadata reads quieter in the support colour; its substantive
   summary keeps the normal foreground and its chips keep their fills.
-  A row reached by its address (`atlas.html#n-11`, `results.html#t-018`) takes the wash,
-  in every site table.
+  A row reached by its address (`frontier.html#n-11`, `results.html#t-018`) takes the
+  wash, in every site table.
 
 - **Frontier table.** The frontier atlas’s table is a site table of ten columns, in this
   order (`render_frontier_page.HEADERS`): the drawing, n, Recent, Status, Best known
@@ -2819,7 +2825,8 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   Narrow screens retain the shared row cards, and the table is never nested or sorted
   out of its arrival order.
   Results Archive (`results.html`) holds the complete filterable table.
-  Visual Atlas (`atlas.html`) provides the graphical case directory and frontier survey.
+  Visual Atlas (`atlas.html`) provides the graphical case directory; The Frontier Survey
+  (`frontier.html`) provides the complete bounds table and its reading key.
   Verification (`verification.html`) contains verification, evidence, credit and status
   guidance and links to Project Epistemics (`epistemics.html`). The detailed article’s
   trail links its actual Verification parent under the plain Results category.
@@ -2860,8 +2867,8 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   reader without scripts gets a refresh and a link.
   `all-results.html` goes to `results.html`, `status.html` to the frontier atlas,
   `defects.html` to the defect log on GitHub, and `cases.html`, every case record on one
-  page until 2026-10-03, to `atlas.html`, preserving case selections such as `#n-11`
-  (**Case records**, above).
+  page until 2026-10-03, to `atlas.html`; registered case selections such as `#n-11`
+  reach the corresponding row on `frontier.html` (**Case records**, above).
   The profile directory and the profiles served under `contributors/` until 2026-10-13
   forward to their pages under `profiles/` (**Person Profiles**, below).
   No page of the site links a forwarder; `tests/test_site_documents.py` and
@@ -3136,6 +3143,13 @@ surname-or-handle naming policy.
 Resource bylines and descriptions, explanatory papers and reader documents, and About
 introductions use full public names.
 Directory names remain full so people can be identified while browsing.
+The Contributor Profiles directory opens with one serif sentence identifying its
+purpose. Its tallies, table, links and controls retain their shared sans roles; detailed
+column definitions remain in the documentation.
+The Accounts column has a 16rem minimum and keeps account identifiers on one line.
+Narrow screens scroll the table inside its wrapper; resource URLs keep their own
+wrapping rules.
+
 Home and About share a short Profiles invitation and the **View All Profiles** action
 (`render_contributors.profile_preview`), with no name list or metadata reads.
 Breadcrumbs appear only on lower-level pages, including the Profiles directory and

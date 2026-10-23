@@ -23,10 +23,10 @@ publication remain in progress.
 Use the confirmed top-level order **Overview**, **News**, **Results**, **Learn**, and
 **About**. Overview and the site name link home; News links directly to its page.
 Results, Learn, and About have dropdowns.
-Results groups Visual Atlas, Recent Results, the Results Archive, Verification, and
-Report a Result. Learn groups Papers, Tutorials, Videos, Workbench, Posters, and
-Resources. About groups The Squares Project, Contributor Profiles, and Project
-Documentation.
+Results groups Visual Atlas, The Frontier Survey, Recent Results, the Results Archive,
+Verification, and Report a Result.
+Learn groups Papers, Tutorials, Videos, Workbench, Posters, and Resources.
+About groups The Squares Project, Contributor Profiles, and Project Documentation.
 
 Use a small dropdown for each group, a consistent parent for each nested page, and short
 homepage previews with buttons into the hierarchy.
@@ -220,13 +220,14 @@ At that baseline, About itself had no breadcrumb.
 
 ### Compatibility, fragments, downloads, and external material
 
-The 30 forwarders comprise 21 `contributors/` addresses, four Atlas aliases
-(`frontier.html`, `status.html`, `cases.html`, `cases/index.html`), one Results alias
-(`all-results.html`), three paper aliases, and `defects.html`, which leads to the
+The inventory baseline’s 30 forwarders comprise 21 `contributors/` addresses, four Atlas
+aliases (`frontier.html`, `status.html`, `cases.html`, `cases/index.html`), one Results
+alias (`all-results.html`), three paper aliases, and `defects.html`, which leads to the
 repository’s defect log.
-Preserve their current targets and query/fragment behavior.
-In particular, **`frontier.html` is a forwarder today**, while the substantive Frontier
-Survey is part of `atlas.html`.
+Preserve incoming queries and fragments when changing their destinations.
+At that baseline `frontier.html` forwarded to `atlas.html`; the implemented hierarchy
+restores it as the substantive survey page and forwards historical Atlas survey links
+there.
 
 The six copies are the two `known-best-*.pdf` aliases, the old `t-018-explainer`
 Markdown and PDF, and the old `n11-optimality/t-060-explainer` Markdown and PDF. The
@@ -272,6 +273,7 @@ Site name → / [Home; selected previews and actions]
 ├── Results [menu container]
 │   ├── Visual Atlas → atlas.html [menu; page; first Results item]
 │   │   └── cases/N.html [324 case pages]
+│   ├── The Frontier Survey → frontier.html [menu; page; 324-row bounds table]
 │   ├── Recent Results → recent-results.html [menu; one complete arrival-ordered table]
 │   ├── Results Archive → results.html [menu; complete result register]
 │   │   └── result/t-NNN.html [229 record pages]
@@ -356,22 +358,18 @@ Legacy recent fragments still forward to Recent Results.
 Do not copy Atlas graphics or the 324-case bounds table onto either result register
 page.
 
-**Visual Atlas and Frontier.** Keep the visual Atlas and Frontier Survey on `atlas.html`
-initially. Give the page clear local links for **Packings**, **About the Bounds**, and
-**Best Known Bounds**. The Results dropdown links to Visual Atlas; its local navigation
-reaches the bounds table and survey explanation.
-Preserve the survey’s reported/verified distinction and its source and verification
-links.
+**Visual Atlas and The Frontier Survey.** Give each its own substantive Results page.
+`atlas.html` opens with all 324 packings visible; the homepage keeps its shorter
+preview. The Atlas has no Packings / About the Bounds / Best Known Bounds local
+navigation. `frontier.html` is headed **The Frontier Survey** and contains the complete
+324-row bounds table with a concise key to its definitions and columns.
+Preserve the reported/verified distinction, exact verification requirements, gap and
+decimal semantics, row records, sorting, and filters.
+Detailed audits and case histories belong in the records opened from the table.
 
-The Frontier Survey has substantial prose and a separate 324-row table, so a distinct
-page is a reasonable later alternative.
-This proposal first tests direct section links and local navigation.
-Split only if reader checks still confuse the two views, or measured rendering and
-scrolling costs justify it.
-A split would require its own route and fragment disposition: `frontier.html` currently
-forwards to Atlas, and historical Atlas links must continue to reach the corresponding
-rows. The present plan does not silently turn that forwarder into a different
-destination.
+Historical Atlas survey headings, table fragments, and `#n-N` rows forward to the survey
+with their queries and fragments preserved; `#atlas-n-N` continues to select an Atlas
+tile. Both pages and the menu use the same canonical title for each destination.
 
 **Learn.** Use the menu as a container for complete content pages, with Papers first.
 `papers.html` contains the four research papers and their series narrative;
@@ -434,10 +432,10 @@ catalogue content on the page.
 | News cards | Selected recent entries and View All News button | `news.html` |
 | Results (`#recent-results`) | Bounded selected rows with View Recent Results and View Results Archive actions | `recent-results.html`, `results.html#all-results` |
 | Profiles section | Short statement and View All Profiles button; no names or table | `profiles/` |
-| Report Your Results | One invitation and Report a Result button | `report.html` |
+| Report a Result | One invitation and Report a Result button | `report.html` |
 | All tutorial/paper cards | Selected starting points with View All Tutorials and View All Papers actions | `tutorials.html`, `papers.html` |
 | Poster and inline film | One media preview with View Videos, Workbench, and Posters actions | `visualize.html`, `workbench/`, `posters.html` |
-| Complete documentation cards | One short project/developer introduction and Project Documentation button | `documentation.html` |
+| About the Squares Project | One direct About the Squares Project action, retaining the documentation-section anchor | `about.html` |
 | Full external resource cards | Short summary and View All Resources button | `resources.html` |
 
 Use shared records and existing card renderers for previews; do not maintain a second
@@ -464,9 +462,9 @@ the reader-facing parent for every named page or family.
 | `recent-results.html` | Recent Results | Results; all results once by arrival, newest seven calendar dates expanded |
 | `results.html` | Results Archive | Results; complete table remains at `#all-results` with query filters |
 | `result/t-NNN.html` (229) | Result identifier and title | Results → Results Archive; retain record contents and evidence links |
-| `atlas.html` | Visual Atlas | Results; retain graphical collection and survey |
-| `atlas.html#the-frontier-survey` | About the Bounds / Frontier Survey | Section of Atlas; contextual explanation |
-| `atlas.html#best-known-results` | Best Known Bounds | Section of Visual Atlas; local bounds-table destination |
+| `atlas.html` | Visual Atlas | Results; all 324 packings visible by default |
+| `frontier.html` | The Frontier Survey | Results; concise bounds key and complete table |
+| `atlas.html#the-frontier-survey`, `#the-survey`, `#best-known-results`, `#frontier-table`, `#n-N` | Historical survey links | Forward to the corresponding Frontier Survey fragment with query preserved |
 | `cases/N.html` (324) | Case n | Results → Visual Atlas; reached from either Atlas or bounds table |
 | `verification.html` | Verification | Results; full ratings, evidence, credit and status guide extracted from the archive |
 | `epistemics.html` | Project Epistemics | Results → Verification; separate detailed policy reached by its action |
@@ -829,8 +827,8 @@ The integrated build, full validation surface, and reader checks remain in Phase
   browser history, and no-script fallbacks described below.
 - [ ] Run the repository’s applicable validation tiers, review the implementation PR,
   and check the deployed pages at `squaremath.org` after publication.
-- [ ] Record any remaining Frontier separation need as a distinct decision with reader
-  or performance evidence; do not expand this plan merely to create more pages.
+- [x] Separate The Frontier Survey from the Atlas at the owner’s request; keep both as
+  substantive Results destinations and preserve historical incoming links.
 
 Implementation began after PR #733 merged and the owner authorized the reviewed
 hierarchy. The coordination bead remains open through integrated validation and reader
@@ -876,9 +874,10 @@ on its own line, and the provenance-backed displayed version on the bottom line.
 Retain regression coverage for `frontier.html` and case aliases, old contributor
 addresses, old paper downloads, legacy homepage and About fragments, result filters,
 result-row links, news-entry links, synopsis section landings, and Atlas tile/table
-anchors. Confirm that cases beyond the initial Atlas preview still expand and scroll to
-the correct target. A compatibility pass must also work without JavaScript where that
-behavior is currently supported.
+anchors. Confirm the complete Atlas opens all 324 cases and the homepage preview stays
+bounded; optional collapse and tile links still reach the correct target.
+A compatibility pass must also work without JavaScript where that behavior is currently
+supported.
 
 Follow [the validation tiers](../../../../development.md#validation-tiers): edit checks
 while changing code, reachable push checks before publishing a branch, the normal PR
