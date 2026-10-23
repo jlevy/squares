@@ -157,7 +157,8 @@ GOLDEN_UNSTABLE = {
         199,
         204,
         206,
-        207,
+        # 207 left on 23 October 2026: T-174's algebraic witness there is stable across
+        # tolerances (think-ot5c).
         227,
         229,
         232,

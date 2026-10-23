@@ -235,7 +235,9 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # (T-193), below T-174's sides there, once the writer wrote an algebraic side.
     assert len(held_counts) == 40
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
-    assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) == (
+    # T-193's adopted counts below T-174's held sides left the hold with their adoption.
+    t193 = {n for n, house in ALGEBRAIC_ADOPTED.items() if house == "T-193"}
+    assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 == (
         set(select.PENDING_ADOPTION) | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
     )
     assert {n: houses.ADOPTED[n] for n in OVERTAKEN} == OVERTAKEN
@@ -1568,9 +1570,11 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # October 2026 moved 270 to Daniel's issue-703 certificate (T-224) and 260 to Couzo's
     # (T-223), the adoption of 22 October 2026 moved 204, 227, 229 and 260 to Daniel's
     # regularized views (T-225), and the adoption of 23 October 2026 moved 105 and 204 to
-    # Mykhailo Polkovskyi's issue-719 re-solves (T-229) and 303 to Evan Daniel's issue-728
-    # certificate (T-230), after this receipt was retained.
+    # Mykhailo Polkovskyi's issue-719 re-solves (T-229), 303 to Evan Daniel's issue-728
+    # certificate (T-230) and the nine algebraic houses to T-174 and T-193
+    # (`ALGEBRAIC_ADOPTED`, think-ot5c), after this receipt was retained.
     later = {
+        **ALGEBRAIC_ADOPTED,
         105: "T-229",
         303: "T-230",
         155: "T-197",
@@ -1596,6 +1600,15 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         303: "T-186",
         308: "T-174",
         270: "T-174",
+        70: "T-146",
+        102: "T-146",
+        123: "T-146",
+        153: "T-173",
+        207: "T-173",
+        258: "T-146",
+        259: "T-136",
+        295: "T-146",
+        302: "T-186",
     }
     for n in (183, 227, 229, 260):
         del before[n]
@@ -1604,7 +1617,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert {n: houses.ADOPTED[n] for n in later} == later
     assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
-        set(houses.numbers_of("T-174")) | {105, 155, 270, 308}
+        set(houses.numbers_of("T-174")) - {70, 153, 207} | {105, 155, 270, 308}
     )
 
 
@@ -1698,16 +1711,19 @@ def test_the_house_inputs_are_ordinary_private_copies_of_every_worker() -> None:
 
 
 def test_a_late_verdict_in_a_receipt_is_refused(monkeypatch: pytest.MonkeyPatch) -> None:
-    rows = houses.receipt_cases(houses.receipt_of(70), "evand-regularized-exact-replay-v1")
+    # T-146's last house since the adoption of 23 October 2026 moved 70 to T-174.
+    n = 292
+    rows = houses.receipt_cases(houses.receipt_of(n), "evand-regularized-exact-replay-v1")
     forged = [
         {**row, "exact_verify": {**row["exact_verify"], "verification_passed": True}}
-        if row["n"] == 70 and row["control"] == houses.kernel.JOBS[2]
+        if row["n"] == n and row["control"] == houses.kernel.JOBS[2]
         else row
         for row in rows
     ]
+    assert forged != list(rows)
     monkeypatch.setattr(houses, "receipt_cases", lambda _path, _form: tuple(forged))
     with pytest.raises(houses.kernel.ReportError):
-        houses.expected_house(70)
+        houses.expected_house(n)
 
 
 def test_the_adopted_case_records_and_coverage_are_at_their_houses(
@@ -2143,7 +2159,7 @@ def _readopted(
     house = select.Candidate(
         result="T-900",
         n=84,
-        side=first.side - Fraction(1, 10**6),
+        side=adopt.rational(first.side) - Fraction(1, 10**6),
         source_key="[new]",
         published=PUBLISHED,
         report_evidence=("E-new",),
@@ -2315,12 +2331,12 @@ def test_equal_prior_displays_keep_the_exact_margin_separate_from_the_display_ga
     assert Fraction(str(reported["exact_form"])) == prior_exact
     assert Fraction(str(verified["exact_form"])) == prior_exact
     assert Fraction(printed) != prior_exact
-    margin = prior_exact - move.side
+    margin = prior_exact - adopt.rational(move.side)
     assert margin == move.selection.margin > 0
     rounded = Decimal(expected_margin)
     last_place = Fraction(Decimal(1).scaleb(int(rounded.as_tuple().exponent)))
     assert abs(Fraction(rounded) - margin) <= last_place / 2
-    assert abs(Fraction(printed) - move.side - Fraction(rounded)) > last_place
+    assert abs(Fraction(printed) - adopt.rational(move.side) - Fraction(rounded)) > last_place
     assert Fraction(str(adopt.reported_bound(move)["value"])) >= move.side
     opening = _flat(adopt.opening(move))
     assert "upper bound, rounded outward from its exact side." in opening
@@ -2664,7 +2680,7 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
         if n == 132:
             assert Fraction(str(reported["exact_form"])) == expected
         assert Fraction(str(bound["value"])) != verified
-        margin = verified - move.side
+        margin = verified - adopt.rational(move.side)
         assert margin == move.selection.margin > 0
         opening = _flat(adopt.opening(move))
         baseline = re.search(r"The earlier exact ceiling, \$([^$]+)\$ from", opening)
@@ -3341,7 +3357,7 @@ def test_issue_678s_reader_still_builds_t223s_source_at_both_counts() -> None:
     for n, margin in margins.items():
         certificate = source.certificate(n)
         assert certificate.n == n
-        above = Fraction(certificate.side) - houses.side(n)
+        above = Fraction(certificate.side) - adopt.rational(houses.side(n))
         assert abs(above - margin) < margin / 10**6, n
         assert set(source.jobs(n, certificate)) == {
             "positive",
