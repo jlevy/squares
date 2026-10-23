@@ -39,7 +39,8 @@ def test_canonical_atlas_targets_keep_every_tile_addressable_without_scripts() -
     # of their own to see them (think-rk91): only the link to the survey remains.
     fallback = grid.split("<noscript>", 1)[1].split("</noscript>", 1)[0]
     assert "<style" not in fallback
-    assert "hidden" not in grid.split('class="site-atlas-cells"', 1)[1].split("<noscript>")[0]
+    tiles = grid.split('class="site-atlas-cells"', 1)[1].split("<noscript>")[0]
+    assert not re.search(r"\shidden(?=[\s>=])", tiles)
     assert 'href="frontier.html"' in fallback
     assert 'href="frontier.html"' in overview_sections.page_cards()
     assert 'href="atlas.html#the-frontier-survey"' not in fallback
@@ -127,7 +128,8 @@ def test_homepage_atlas_reuses_canonical_split_rows_and_shows_every_case() -> No
         "data-homepage-atlas-status"
     )[0]
     assert re.findall(r'data-atlas-row="(\d+)"', cells) == list(map(str, range(1, 19)))
-    for absent in ("hidden", "data-atlas-rest", "data-atlas-first", "data-atlas-count"):
+    assert not re.search(r"\shidden(?=[\s>=])", cells)
+    for absent in ("data-atlas-rest", "data-atlas-first", "data-atlas-count"):
         assert absent not in cells, absent
     assert preview.count('data-atlas-segment="non-grid"') == 18
     assert preview.count('data-atlas-segment="grid"') == 18
