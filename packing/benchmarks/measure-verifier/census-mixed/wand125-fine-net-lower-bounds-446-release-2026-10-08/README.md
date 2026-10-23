@@ -18,6 +18,7 @@ the 2,073 directions of the net the candidate declares, and a summary), and
 | `mixed_n19_L48275` | VERIFIED, 2,073 directions | 377,472,588 | 1.0000000001405505 | 2,539.7 | `CONTROLS_REFUSED` |
 | `mixed_n20_L49125` | VERIFIED, 2,073 directions | 410,012,470 | 1.0000000001231197 | 5,987.4 | `CONTROLS_REFUSED` |
 | `mixed_n26_L5555` | VERIFIED, 2,073 directions | 663,387,112 | 1.0000000000340534 | 6,115.2 | `CONTROL_FAILED`, on the axis tolerance only |
+| `mixed_n27_L5655` | VERIFIED, 2,073 directions | 648,972,154 | 1.0000000000149065 | 9,257.6 | `CONTROLS_REFUSED` |
 
 **The n26 control fails closed on a tolerance, not on a refusal.** The 99/100 mutant was
 refused at all 2,073 directions, and each of the 2,072 oblique refusals passes every

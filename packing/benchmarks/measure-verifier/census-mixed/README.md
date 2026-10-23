@@ -30,9 +30,13 @@ direction of the net run (v2), or at that direction alone (v1).
 | `mixed_n18_L4705` | 18 | M | VERIFIED | 2073 | 352,045,748 | 1.0000000000680034 | clears | 2884.7 | 6.4 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n19_L48229` | 19 | M | VERIFIED | 416 | 75,232,113 | 1.000000000833015 | clears | 512.1 | 4.4 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n19_L4825` | 19 | M | VERIFIED | 2073 | 355,934,320 | 1.0000000001230112 | clears | 2841.2 | 15.6 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
+| `mixed_n19_L48275` | 19 | M | VERIFIED | 2073 | 377,472,588 | 1.0000000001405505 | clears | 2539.7 | 0.3 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n20_L4905` | 20 | M | VERIFIED | 832 | 139,374,489 | 1.000000000154736 | clears | 1420.5 | 7.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
+| `mixed_n20_L49125` | 20 | M | VERIFIED | 2073 | 410,012,470 | 1.0000000001231197 | clears | 5987.4 | 1.1 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n26_L5545` | 26 | M | VERIFIED | 832 | 234,384,519 | 1.0000000003495713 | clears | 2235.6 | 5.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
+| `mixed_n26_L5555` | 26 | M | VERIFIED | 2073 | 663,387,112 | 1.0000000000340534 | clears | 6115.2 | 1.0 | none: first complete check here | - | - | - | CONTROL_FAILED |
 | `mixed_n27_L56435` | 27 | M | VERIFIED | 832 | 215,026,151 | 1.0000000000168654 | clears | 2824.1 | 5.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
+| `mixed_n27_L5655` | 27 | M | VERIFIED | 2073 | 648,972,154 | 1.0000000000149065 | clears | 9257.6 | 1.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n28_L5735` | 28 | M | VERIFIED | 416 | 114,964,701 | 1.0000000000381999 | clears | 1540.9 | 5.4 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n29_L581` | 29 | M | VERIFIED | 416 | 126,796,081 | 1.0000000000094453 | clears | 1632.3 | 10.6 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n30_L58835` | 30 | M | VERIFIED | 832 | 251,711,359 | 1.0000000000570795 | clears | 3890.8 | 5.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
@@ -117,7 +121,7 @@ direction of the net run (v2), or at that direction alone (v1).
 | `mixed_n101_L1028` | 101 | L | VERIFIED | 201 | 53,145,987 | 1.000000000300333 | clears | 128.4 | 4.0 | all 201 | 27,669 | 128.0 | 216x | - |
 | `mixed_n108_L1062` | 108 | M | VERIFIED | 201 | 136,113,602 | 1.0000000001765084 | clears | 2086.8 | 9.5 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 
-91 of 91 certificates verified; 151604 recorded aggregate process CPU seconds in all.
+95 of 95 certificates verified; 175504 recorded aggregate process CPU seconds in all.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
