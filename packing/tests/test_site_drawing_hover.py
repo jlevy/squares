@@ -246,7 +246,9 @@ def test_the_homepage_picture_keeps_its_ink_under_the_pointer(
 @pytest.mark.parametrize("scheme", SCHEMES)
 def test_cached_svg_loads_the_complete_declared_artwork(painted: Readings, scheme: str) -> None:
     state = painted[scheme]["rest"].state
-    assert state["source_url"].endswith("/atlas/house/n-11.svg")
+    # Every tile starts on its default picture in its canonical pose (regularization
+    # policy, section 13), whose address is the regularized one for every case.
+    assert state["source_url"].endswith("/atlas/regularized/n-11.svg")
     assert state["namespace"] == "http://www.w3.org/2000/svg"
     assert state["square_count"] == CASE
     assert state["path_count"] > 0
