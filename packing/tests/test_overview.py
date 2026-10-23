@@ -3094,7 +3094,8 @@ def test_the_bars_type_is_set_from_the_papers_scale() -> None:
     holds the computed sizes to the body's in a browser."""
     css = render_overview.SITE_NAV_CSS.read_text(encoding="utf-8")
     tokens = dict(re.findall(r"\n  (--site-nav-[a-z-]+): ([^;]+);", css))
-    assert {name: " ".join(value.split()) for name, value in tokens.items()} == {
+    typography = ("--site-nav-name-size", "--site-nav-font-size", "--site-nav-line")
+    assert {name: " ".join(tokens[name].split()) for name in typography} == {
         "--site-nav-name-size": (
             "calc( var(--kpress-host-font-size-base, 18px) "
             "* var(--paper-font-scale-sans, calc(19 / 18)) )"
@@ -5752,9 +5753,8 @@ def test_a_wide_block_keeps_one_gutter_inside_the_pages_content_area() -> None:
     assert "    var(--site-wide-room),\n" in rule[: rule.index("\n}")]
     film = css[css.index(".site-page .site-film-frame {") :]
     assert "min(100cqw - 2 * var(--site-wide-gutter), " in film[: film.index("}")]
-    # No block in the page's flow is sized from the window: only a popover, which is
-    # laid out in the window's own top layer, and a table's growth above 1280 pixels,
-    # which the room still caps.
+    # Flow blocks use their container; popovers and positioned filter menus may
+    # cap their overlay against the viewport. Table growth remains room-capped.
     rules = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
     viewport_rules = [
         (selector.strip(), declarations)
@@ -5765,6 +5765,10 @@ def test_a_wide_block_keeps_one_gutter_inside_the_pages_content_area() -> None:
     for selector, declarations in viewport_rules:
         if "--site-table-grow:" in declarations:
             assert selector == TABLE_BLEED.removesuffix(" {")
+        elif selector == ".site-filter-options":
+            assert "position: absolute;" in declarations
+            assert "max-inline-size: calc(100vw - 2rem);" in declarations
+            assert "overflow: auto;" in declarations
         else:
             assert all(
                 ".site-popover" in part for part in re.split(r",(?![^()]*\))", selector)

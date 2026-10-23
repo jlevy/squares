@@ -536,7 +536,8 @@ def test_a_link_to_a_page_that_moved_is_reported(tmp_path: Path) -> None:
     `render_overview.MOVED_PAGES` is named with the link, from the root or from a
     directory under it. The forwarders themselves and an address off the site are not."""
     moved = [old for old, _ in render_overview.MOVED_PAGES]
-    assert moved[:4] == ["all-results.html", "status.html", "frontier.html", "defects.html"]
+    assert {"all-results.html", "status.html", "frontier.html", "defects.html"} <= set(moved)
+    assert dict(render_overview.MOVED_PAGES)["downloads.html"] == "posters.html"
     (tmp_path / "result").mkdir()
     for old in moved:
         (tmp_path / old).parent.mkdir(exist_ok=True)

@@ -602,7 +602,13 @@ def test_a_tally_link_selects_exactly_its_projects_rows(
     assert not re.search(r"<tr id=\"t-\d+\"[^>]*\shidden", results)
     bar = results.split('<div class="site-table-tools site-result-filters">', 1)[1]
     bar = bar.split("</div>", 1)[0]
-    assert bar.count("<label hidden>") == 4
+    preset_labels = re.findall(r"<label hidden>(.*?)</label>", bar)
+    assert {label.split(" <", 1)[0] for label in preset_labels if "data-preset" in label} == {
+        "Project",
+        "At significance",
+        "Added on",
+        "Added since",
+    }
     assert (
         '<label hidden>Project <select data-filter="project" data-bound="has" data-preset>'
         in bar

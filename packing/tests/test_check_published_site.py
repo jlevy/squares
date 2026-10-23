@@ -2268,7 +2268,9 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
             for old, new in render_overview.LEGACY_PROFILES.items()
         },
     }
+    assert moved["downloads.html"] == "posters.html"
     assert set(moved) == {
+        "downloads.html",
         "all-results.html",
         "status.html",
         "frontier.html",

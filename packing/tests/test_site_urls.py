@@ -802,15 +802,27 @@ def test_substantive_collection_pages_are_registered_canonical_crawl_destination
     retained = site_urls.load_registry()
     rows = site_urls.derive_registry(retained)
     by_path = {entry.path: entry for entry in rows}
-    for path in ("tutorials.html", "downloads.html", "documentation.html", "report.html"):
+    collections = {
+        "tutorials.html": "2026-10-22",
+        "posters.html": "2026-10-08",
+        "documentation.html": "2026-10-22",
+        "report.html": "2026-10-22",
+    }
+    for path, first_published in collections.items():
         entry = by_path[path]
         assert (entry.kind, entry.canonical, entry.status, entry.first_published) == (
             "page",
             path,
             "live",
-            "2026-10-22",
+            first_published,
         )
         assert path in render_overview.SITE_PAGES
         assert path in render_overview.PAGES
         assert render_overview.canonical_url(path) in site_urls.render_sitemap(rows)
+    downloads = by_path["downloads.html"]
+    assert (downloads.kind, downloads.canonical, downloads.status) == (
+        "forwarder",
+        "posters.html",
+        "forwarded",
+    )
     assert not failures(site_urls.check_history(rows, retained))
