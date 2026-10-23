@@ -12033,6 +12033,29 @@ issues:
       - result: n991
       - result: n992
       - result: n993
+      outdated:
+      - '8 are current, at 364, 370, 382, 403, 444, 452, 536 and 922; since #722 merged on 22
+        October issue 719''s rows supersede those at 370, 452 and 536, and five are current'
+    - url: https://github.com/jlevy/squares/issues/670#issuecomment-6350117997
+      date: '2026-10-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n370
+      - result: n452
+      - result: n536
+      - result: n364
+      - result: n382
+      - result: n403
+      - result: n444
+      - result: n922
+      - result: n204
+        id: T-226
+        verification: V0
+        confirmation: C0
+        status: recorded
+      corrects:
+      - https://github.com/jlevy/squares/issues/670#issuecomment-6336293996
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12070,6 +12093,19 @@ issues:
       checked against the committed ledger before posting: the rule, and a table giving each
       count's side, verdict and best now as the ledger has them, with the row's place in the
       record. The issue stays open while T-226's review is queued (think-0nse).
+
+      The follow-up, posted at 2026-10-22T20:04:06Z (issuecomment-6350117997) after #722 merged
+      and its Pages deployment of cacdafc1f (Certificate page run 39839651570, deployment
+      7261630744, site v0.9.2 at squaremath.org) was checked, said that issue 719's rows
+      supersede three of the eight rows that were current, at 370, 452 and 536, by 2.88e-12 to
+      1.27e-11, each staying listed and marked superseded by mishapolk-issue719-2026-10-22, and
+      that five remain current, at 364, 382, 403, 444 and 922; that #719 states no per-row
+      lineage and the reply there asks for it; and that at 204 the row is still T-226, V0/C0,
+      recorded and superseded by T-225, with #719's packing registered there as T-229 at V0/C0,
+      pending adoption. It said T-226's review is still queued. No site page lists
+      beyond-horizon rows, which the reply said. It corrects the import reply of 08:27:04Z
+      (issuecomment-6336293996), whose statement that eight rows were current is marked
+      outdated. The issue stays open while T-226's review is queued (think-0nse).
   - number: 672
     title: '227, 229, 330-996: registration request'
     author: franciscouzo
@@ -15281,6 +15317,10 @@ issues:
         merged on 22 October T-225, Evan Daniel''s solved, regularized views of these packings,
         at V3/C3, confirmed, is the house at both, from T-223 in the pass of 22 October, and
         T-223 is retained as history'
+      - 'Of the 83 #678 rows beyond the corpus, eight are now current: 507, 555, 641, 642, 693,
+        753, 754 and 984, and the row at 641 is unchanged and still current; since #722 merged
+        on 22 October issue 719''s rows supersede those at 507, 555, 641, 642, 693, 753 and 754,
+        and only the row at 984 is current'
     - url: https://github.com/jlevy/squares/issues/678#issuecomment-6332932102
       date: '2026-10-22'
       by: jlevy
@@ -15298,6 +15338,31 @@ issues:
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/678#issuecomment-6329885169
+      - https://github.com/jlevy/squares/issues/678#issuecomment-6331709679
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6350117509
+      date: '2026-10-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n507
+      - result: n555
+      - result: n641
+      - result: n642
+      - result: n693
+      - result: n753
+      - result: n754
+      - result: n984
+      - result: n204
+        id: T-223
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n260
+        id: T-223
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
       - https://github.com/jlevy/squares/issues/678#issuecomment-6331709679
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
@@ -15403,6 +15468,20 @@ issues:
       one to one at 204 (58 squares moved, at most 0.442, turns up to 0.159 degrees) and not one
       to one at 260; that T-225 was confirmed on both maintained exact routes and the review's
       clean-room checker; and that the source-patch ask is still queued. The issue stays open.
+
+      The follow-up, posted at 2026-10-22T20:04:05Z (issuecomment-6350117509) after #722 merged
+      and its Pages deployment of cacdafc1f (Certificate page run 39839651570, deployment
+      7261630744, site v0.9.2 at squaremath.org) was checked, said that issue 719's rows
+      supersede seven of the eight #678 rows that were current, at 507, 555, 641, 642, 693, 753
+      and 754, by 3.90e-12 (at 555) to 3.06e-9 (at 754), four by less than 1e-9, each staying
+      listed and marked superseded by mishapolk-issue719-2026-10-22, and that the row at 984 is
+      unchanged and current; that #719 states no per-row lineage and the reply there asks for
+      it; and that T-223 stays V3/C3, confirmed, superseded by T-225 at 204 and 260, while
+      #719's 204, registered as T-229 at V0/C0 pending adoption, pairs one to one with T-225 and
+      T-223. It said reviewing the source patch is still queued. No site page lists
+      beyond-horizon rows, which the reply said. It corrects the follow-up of 03:08Z
+      (issuecomment-6331709679), whose statement that eight rows were current is marked
+      outdated. The issue stays open.
   - number: 680
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand
@@ -16228,6 +16307,67 @@ issues:
       - result: n994
       - result: n995
       - result: n996
+      outdated:
+      - 'Your other 50 rows are still the current rows at their counts; since #722 merged on 22
+        October issue 719''s rows supersede 42 of those 50, and the rows at 464, 603, 706, 760,
+        817, 875, 935 and 998 are current'
+    - url: https://github.com/jlevy/squares/issues/686#issuecomment-6350116497
+      date: '2026-10-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n330
+      - result: n339
+      - result: n344
+      - result: n377
+      - result: n378
+      - result: n379
+      - result: n380
+      - result: n381
+      - result: n412
+      - result: n418
+      - result: n419
+      - result: n420
+      - result: n421
+      - result: n422
+      - result: n453
+      - result: n460
+      - result: n462
+      - result: n508
+      - result: n551
+      - result: n552
+      - result: n649
+      - result: n650
+      - result: n701
+      - result: n703
+      - result: n704
+      - result: n755
+      - result: n757
+      - result: n759
+      - result: n810
+      - result: n811
+      - result: n812
+      - result: n816
+      - result: n874
+      - result: n929
+      - result: n930
+      - result: n933
+      - result: n934
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
+      - result: n997
+      - result: n464
+      - result: n603
+      - result: n706
+      - result: n760
+      - result: n817
+      - result: n875
+      - result: n935
+      - result: n998
+      corrects:
+      - https://github.com/jlevy/squares/issues/686#issuecomment-6331709472
     close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
       corpus take no register entry, and optimality is outside this request.
     notes: >-
@@ -16290,6 +16430,18 @@ issues:
       other 50 are still current. It gave the manifest's credit to Muglich at 28 of the 50
       counts and the source's credit line, said that the credit request is unchanged and the
       owner's decision, and that no site page lists beyond-horizon rows. The issue stays open.
+
+      The follow-up, posted at 2026-10-22T20:04:02Z (issuecomment-6350116497) after #722 merged
+      and its Pages deployment of cacdafc1f (Certificate page run 39839651570, deployment
+      7261630744, site v0.9.2 at squaremath.org) was checked, said that issue 719's rows
+      supersede 42 of the 50 rows that were still current, by 1.28e-12 (at 339) to 2.24e-3 (at
+      933), 19 of them by less than 1e-9, listed the 42 counts, and said those rows stay listed
+      at the author's prints, marked superseded by mishapolk-issue719-2026-10-22, while the rows
+      at 464, 603, 706, 760, 817, 875, 935 and 998 are current. It said that #719 states no
+      per-row lineage and that the reply there asks for it, and that the credit request is
+      unchanged and the owner's decision. No site page lists beyond-horizon rows, which the
+      reply said. It corrects the follow-up of 03:08:26Z (issuecomment-6331709472), whose
+      statement that the other 50 rows were current is marked outdated. The issue stays open.
   - number: 689
     title: 's(308) ≤ 17.997149121271: registration request'
     author: evand
@@ -18608,6 +18760,27 @@ issues:
       - result: above-1024
       corrects:
       - https://github.com/jlevy/squares/issues/715#issuecomment-6329883508
+    - url: https://github.com/jlevy/squares/issues/715#issuecomment-6350117001
+      date: '2026-10-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n417
+      - result: n456
+      - result: n499
+      - result: n553
+      - result: n601
+      - result: n652
+      - result: n705
+      - result: n758
+      - result: n868
+      - result: n869
+      - result: n872
+      - result: n927
+      - result: n928
+      - result: n932
+      - result: n994
+      - result: n996
     close_when: >-
       Every claim has a reviewed disposition on main, pending validation has a priced owner,
       any changed house is regularized in its adoption, and the author has received a reply
@@ -18687,6 +18860,19 @@ issues:
       below 1024 its outcome and margin. It read the answers to the acknowledgement's first two
       questions from the pin and the manifest, repeated the third, on 335, and said that no site
       page lists beyond-horizon rows. It states no T-NNN, and the issue stays open.
+
+      The follow-up, posted at 2026-10-22T20:04:03Z (issuecomment-6350117001) after #722 merged
+      and its Pages deployment of cacdafc1f (Certificate page run 39839651570, deployment
+      7261630744, site v0.9.2 at squaremath.org) was checked, said that issue 719's rows
+      supersede 16 of the 109 recorded rows, at 417, 456, 499, 553, 601, 652, 705, 758, 868,
+      869, 872, 927, 928, 932, 994 and 996, by 2.09e-10 (at 499) to 1.92e-3 (at 652), each
+      staying listed at the author's print, marked superseded by mishapolk-issue719-2026-10-22,
+      while the other 93 are current; that #719 states no per-row lineage and the reply there
+      asks for it; and that at 19 of #719's counts the report just before #719 in its ledger's
+      walk is one of the 30 held re-certifications, which stay held (think-fwa9). It listed as
+      open the held rows, the rows above 1024 on the owner's decision, and the exact check at
+      335 (think-rx26). No site page lists beyond-horizon rows, which the reply said. The import
+      reply said no row was current, so nothing is marked outdated. The issue stays open.
   - number: 719
     title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
     author: Mishapolk
@@ -20041,7 +20227,142 @@ issues:
     - think-4h23
     - think-9vr8
     answer_bead: think-xyhn
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/719#issuecomment-6350110834
+      date: '2026-10-22'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n105
+        id: T-229
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n204
+        id: T-229
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n330
+      - result: n339
+      - result: n342
+      - result: n344
+      - result: n366
+      - result: n370
+      - result: n372
+      - result: n377
+      - result: n378
+      - result: n379
+      - result: n380
+      - result: n381
+      - result: n409
+      - result: n410
+      - result: n412
+      - result: n413
+      - result: n417
+      - result: n418
+      - result: n419
+      - result: n420
+      - result: n421
+      - result: n422
+      - result: n447
+      - result: n450
+      - result: n452
+      - result: n453
+      - result: n454
+      - result: n456
+      - result: n460
+      - result: n462
+      - result: n490
+      - result: n498
+      - result: n499
+      - result: n507
+      - result: n508
+      - result: n535
+      - result: n536
+      - result: n544
+      - result: n551
+      - result: n552
+      - result: n553
+      - result: n555
+      - result: n582
+      - result: n584
+      - result: n591
+      - result: n596
+      - result: n601
+      - result: n631
+      - result: n633
+      - result: n637
+      - result: n640
+      - result: n641
+      - result: n642
+      - result: n644
+      - result: n649
+      - result: n650
+      - result: n652
+      - result: n682
+      - result: n684
+      - result: n689
+      - result: n691
+      - result: n692
+      - result: n693
+      - result: n695
+      - result: n699
+      - result: n701
+      - result: n703
+      - result: n704
+      - result: n705
+      - result: n735
+      - result: n736
+      - result: n737
+      - result: n742
+      - result: n743
+      - result: n744
+      - result: n745
+      - result: n746
+      - result: n753
+      - result: n754
+      - result: n755
+      - result: n757
+      - result: n758
+      - result: n759
+      - result: n790
+      - result: n791
+      - result: n792
+      - result: n797
+      - result: n798
+      - result: n799
+      - result: n800
+      - result: n810
+      - result: n811
+      - result: n812
+      - result: n816
+      - result: n868
+      - result: n869
+      - result: n872
+      - result: n874
+      - result: n927
+      - result: n928
+      - result: n929
+      - result: n930
+      - result: n932
+      - result: n933
+      - result: n934
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
+      - result: n994
+      - result: n996
+      - result: n997
+      - result: n1061
+      - result: n1128
+      - result: n1196
+      - result: n1266
+      - result: n1339
+      - result: n1413
+      - result: n1489
+      - result: n1568
     close_when: >-
       T-229 is reviewed and adopted at 105 and 204 (think-4h23), the owner has answered whether
       counts above 1024 are tracked (think-f2io) and the 8 rows above 1024 have their
@@ -20060,3 +20381,35 @@ issues:
       by the record's test, 34 in-corpus files below or undecided against the record beyond the
       twelfth place, three files that failed both exact routes in triage, and a second 204 file,
       1.48e-11 lower. The reply asks the author about each, and about per-row lineage.
+
+      The import reply, posted at 2026-10-22T20:03:44Z (issuecomment-6350110834) after #722
+      merged and its Pages deployment of cacdafc1f (Certificate page run 39839651570, deployment
+      7261630744, site v0.9.2 at squaremath.org) was checked, folds in the stage 1
+      acknowledgement drafted in triage and the report-order evaluation of the ledger of 22
+      October for issue 719, as a table of each count's side at 12 places, the ledger's verdict
+      and margin, and its place in the record. It reported T-229 at V0/C0, recorded and pending
+      adoption at 105 and 204, with the measured pose-by-pose pairing with T-174 and T-225; the
+      111 rows, each current, superseding Muglich's #686 (42), Couzo's 487b058 index (39), #715
+      (16), #678 (7), #607 (3), #670 (3) and his 8 October report (1); 366 not recorded, below
+      Couzo's 4e4c8ce certificate and Göbel's strip at 369; 631 recorded at 16 places; the 51
+      counts whose preceding report has no row yet; the 8 rows above 1024 waiting on the owner
+      (think-f2io); the replay on both maintained routes and that the author's runs of
+      verify_cert.py and of a copy of sqpack/verify.py did not run here; and the ten withdrawn
+      rows, the 34 in-corpus files beyond the twelfth place, the three failing files and the
+      second 204 file. It said the review and adoption at 105 and 204 come in #725 and that a
+      reply follows when it lands. It confirmed the credit name Mykhailo Polkovskyi from the
+      11:35:16Z edit. It said the watched repository's head had moved past dc440a88 to
+      814fbe9129b7, read at that head: 8a488a10e994 (2026-10-22T19:08:59Z), 3285facefb2c
+      (19:29:30Z) and 814fbe9 (19:37:33Z, four index files only) shard certificates/ into
+      folders by thousands holding certificate files at 5,594 counts up to 9,913 (126 in the
+      corpus, 390 from 325 to 1024, 5,078 above), state lower sides at 31 of the 122 counts
+      (7.5e-13 to 8.19e-2, the largest at 366) and the same side at the other 91, remove the
+      three failing files and n204.cert, state different sides at 9 of the 10 withdrawn counts,
+      and add ISSUE_SUBMISSION_221.md (the issue's opening body) and BOUND_VERIFIER_LICENSE.txt
+      (an MIT licence naming Evan Daniel as copyright holder, read as his verifier's licence,
+      not terms for the certificates); none of it is part of this import, and the next intake
+      sweep reads them. It asked about per-row lineage (105, 204 and its turned square, the 69
+      rows below the preceding report by less than 1e-9, and 447), the ten withdrawn rows, which
+      204 file is claimed, the files beyond the twelfth place, and a licence for the
+      certificates. No site page lists beyond-horizon rows, which the reply said. The issue
+      stays open.

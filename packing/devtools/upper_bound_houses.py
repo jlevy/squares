@@ -395,6 +395,7 @@ def _sources() -> dict[str, Source]:
         packet_source("T-222", "evand-n154-sweep-2026-10-20"),
         packet_source("T-224", "evand-n270-sweep-2026-10-20"),
         packet_source("T-225", "evand-regularized-2026-10-20"),
+        packet_source("T-229", "mishapolk-issue719-2026-10-22"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -427,7 +428,9 @@ def _sources() -> dict[str, Source]:
 #: (T-224) at 270 and Couzo's of issue 678 (T-223) at 260, which replaced T-196 there. The
 #: pass of 22 October 2026 adopted Evan Daniel's regularized views of 20 October (T-225) at
 #: 204 and 260 from T-223, at 227 from T-196, once Francisco Couzo's #672 was registered
-#: as T-227 and T-225's item there named it, and at 229 from T-199.
+#: as T-227 and T-225's item there named it, and at 229 from T-199. The pass of 23 October
+#: 2026 adopted Mykhailo Polkovskyi's certificates of issue 719 (T-229) at 105 from T-174
+#: and at 204 from T-225.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -436,7 +439,7 @@ ADOPTED: dict[int, str] = {
     86: "T-174",
     102: "T-146",
     103: "T-174",
-    105: "T-174",
+    105: "T-229",
     108: "T-174",
     110: "T-174",
     123: "T-146",
@@ -459,7 +462,7 @@ ADOPTED: dict[int, str] = {
     181: "T-174",
     182: "T-174",
     183: "T-220",
-    204: "T-225",
+    204: "T-229",
     206: "T-174",
     207: "T-173",
     208: "T-174",
@@ -552,7 +555,11 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: October review of them: his solved views of Couzo's issue-678 packings at 204 and 260,
 #: 1.39e-09 and 2.51e-11 below T-223, and of his own issue-674 packing at 229, 1.91e-11
 #: below T-199; and, once Couzo's #672 was registered (T-227) and T-225's item there named
-#: it, his solved view of #672's packing at 227, 1.71e-04 below de Winter's T-196.
+#: it, his solved view of #672's packing at 227, 1.71e-04 below de Winter's T-196. The pass
+#: of 23 October 2026 adopted Mykhailo Polkovskyi's re-solves of issue 719 (T-229) after
+#: the 22 October review of them, at 105 from T-174, 5.18e-12 below it, and at 204 from
+#: T-225, 1.01e-08 below it; it is dated by the day its pull request merges, since the pass
+#: of 22 October had already moved 204 and one day's archive holds one prior state a count.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -628,6 +635,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-20": frozenset({154, 204, 227, 260, 308}),
     "2026-10-21": frozenset({260, 270}),
     "2026-10-22": frozenset({204, 227, 229, 260}),
+    "2026-10-23": frozenset({105, 204}),
 }
 
 

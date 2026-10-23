@@ -324,10 +324,15 @@ def test_the_coverage_register_reads_each_source_claims_record() -> None:
 
 
 def _successor_at_631(
-    successor: str, added: tuple[str, str] | None = None, **changed: str
+    successor: str,
+    added: tuple[str, str] | None = None,
+    *,
+    kind: str = "upper-bound",
+    **changed: str,
 ) -> tuple[list[str], list[str]]:
     """#719's row at 631 held superseded by ``successor``, with ``added`` (a value and a
-    date) as that source's row, and what the plan and `check_source_coverage` say there."""
+    date) as that source's row claiming ``kind``, and what the plan and
+    `check_source_coverage` say there."""
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
     held = rows[631, MISHAPOLK]
@@ -347,7 +352,7 @@ def _successor_at_631(
             {
                 "n": 631,
                 "source_id": successor,
-                "claim": "upper-bound",
+                "claim": kind,
                 "value": value,
                 "assurance": "reported",
                 "disposition": "tracked-outside-case-corpus",
@@ -369,7 +374,8 @@ def test_a_successor_outside_the_walk_holds_the_plan_only_with_a_later_smaller_r
     #719 supersedes #670's at 370, 452 and 536. #722's review A, A5: the plan accepts such
     a successor only where it holds a row at the count strictly below, dated no earlier,
     with the held row otherwise as planned, so it does not rest on the coverage gate; a
-    same-day successor is not ordered by either."""
+    same-day successor is not ordered by either. #722's review B: an equal row is not
+    below (B2), and a smaller row of another claim is not the successor's (B3)."""
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
     for n in (370, 452, 536):
@@ -377,23 +383,45 @@ def test_a_successor_outside_the_walk_holds_the_plan_only_with_a_later_smaller_r
     assert replay.coverage_problems(coverage) == []
     refused = "n=631 from mishapolk-issue719-2026-10-22: the register's row is not the plan's"
     smaller, larger = "25.6568542495100000", "25.6568542496000000"
+    equal = rows[631, MISHAPOLK]["value"]
+    assert Fraction(smaller) < Fraction(equal) < Fraction(larger)
     later = _successor_at_631("x-later-2026-10-23", (smaller, "2026-10-23"))
     assert later == ([], [])
     same_day = _successor_at_631("x-same-2026-10-22", (smaller, "2026-10-22"))
     assert same_day == ([], [])
-    for successor, added in (
-        ("couzo-issue715-2026-10-21", None),
-        ("a-later-import-2026-10-23", None),
-        ("x-early-2026-10-21", (smaller, "2026-10-21")),
-        ("x-big-2026-10-23", (larger, "2026-10-23")),
+    for successor, added, kind in (
+        ("couzo-issue715-2026-10-21", None, "upper-bound"),
+        ("a-later-import-2026-10-23", None, "upper-bound"),
+        ("x-early-2026-10-21", (smaller, "2026-10-21"), "upper-bound"),
+        ("x-big-2026-10-23", (larger, "2026-10-23"), "upper-bound"),
+        ("x-equal-2026-10-23", (equal, "2026-10-23"), "upper-bound"),
+        ("x-lower-2026-10-23", (smaller, "2026-10-23"), "lower-bound"),
     ):
-        plan, gate = _successor_at_631(successor, added)
+        plan, gate = _successor_at_631(successor, added, kind=kind)
         assert plan == [refused], successor
         assert gate, successor
     changed, _ = _successor_at_631(
         "x-later-2026-10-23", (smaller, "2026-10-23"), assurance="verified"
     )
     assert changed == [refused]
+
+
+def test_a_source_the_walk_reaches_is_never_a_later_successor() -> None:
+    """#722's review B, B2: at 631 #719's walk reaches Couzo's verified bounds of 14
+    October. Dated a day after #719 and smaller there, that source's row would pass the
+    row, date and strictness checks, so only the reach check refuses it as #719's
+    successor: the walk already ordered the two."""
+    reached = "couzo-verified-bounds-2026-10-14"
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
+    sources = {source["id"]: source for source in coverage["sources"]}
+    assert rows[631, reached]["superseded_by"] == MISHAPOLK
+    sources[reached]["source_date"] = "2026-10-23"
+    rows[631, reached]["value"] = "25.6568542495100000"
+    assert Fraction(rows[631, reached]["value"]) < Fraction(rows[631, MISHAPOLK]["value"])
+    rows[631, MISHAPOLK].update(disposition="superseded", superseded_by=reached)
+    refused = "n=631 from mishapolk-issue719-2026-10-22: the register's row is not the plan's"
+    assert refused in replay.coverage_problems(coverage)
 
 
 def test_a_commit_stating_two_sides_at_a_count_is_walked_at_its_least() -> None:

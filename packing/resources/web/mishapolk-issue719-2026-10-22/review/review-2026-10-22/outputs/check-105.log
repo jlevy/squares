@@ -1,0 +1,2 @@
+T-229@105:cert: n=105 evand-cert accepted=True agree=True pairs=5460/5460 wall=5.000000e-21 gap=1.0000000000e-20 pair=[71, 86] dist=1.0000000000e-20 touch=0 overlap=0 Zcpu=0.027 Ccpu=1.372
+T-229@105:fact: n=105 witness-v2-center-basis accepted=True agree=True pairs=5460/5460 wall=5.000000e-21 gap=1.0000000000e-20 pair=[71, 86] dist=1.0000000000e-20 touch=0 overlap=0 Zcpu=0.048 Ccpu=1.494
