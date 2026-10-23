@@ -61,10 +61,8 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     assert re.search(r'src="../assets/js/table\.[a-f0-9]+\.js"', index)
     assert render_overview.TABLE_SCRIPT in render_contributors.inputs()
     assert '<div class="site-table-wrap site-wide">' in index
-    assert (
-        "Results count distinct registered results by their reviewed primary authors" in index
-    )
-    assert "Credits count distinct results that credit a person" in index
+    assert "People whose work is cited or credited in the square-packing record." in index
+    assert "Results lists authored work" not in index
     assert "<title>Contributor Profiles" in index
     assert 'rel="canonical" href="https://squaremath.org/profiles/"' in index
     # The directory names cited authors as well as contributors, and calls none of them
@@ -917,3 +915,50 @@ def test_profile_tally_preserves_known_zero_counts_in_display_order() -> None:
     assert render_contributors.profile_tally("wolfram-bentz", (), results=()) == (
         '<span class="site-credit-tally">0 records · 0 results · 0 credits</span>'
     )
+
+
+def test_profile_directory_intro_is_serif_and_accounts_remain_whole_at_narrow_widths(
+    tmp_path: Path,
+) -> None:
+    from devtools import preview_site, site_assets  # noqa: PLC0415
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    directory = next(
+        page
+        for page in render_contributors.contributor_pages()
+        if page.name == "profiles/index.html"
+    )
+    target = tmp_path / directory.name
+    target.parent.mkdir(parents=True)
+    target.write_text(directory.html)
+    site_assets.write_assets(tmp_path, render_overview.asset_files([directory]))
+    measure = probe(Path(__file__).with_name("probes"), "site_contributor/directory")
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with site_browser.api().sync_playwright() as driver:
+            browser = site_browser.launch(driver)
+            page = browser.new_page()
+            page.goto(f"http://127.0.0.1:{server.server_port}/profiles/", wait_until="load")
+            for width in (1280, 390, 320):
+                page.set_viewport_size({"width": width, "height": 900})
+                found = page.evaluate(measure)
+                assert found["intro"] == (
+                    "People whose work is cited or credited in the square-packing record."
+                )
+                assert "PT Serif" in found["introFont"]
+                assert "Source Sans" in found["tableFont"]
+                assert found["overflow"] == 0
+                assert found["accounts"]
+                for account in found["accounts"]:
+                    assert account["width"] >= 16 * 16
+                    for label in account["links"]:
+                        assert label["nowrap"] == "nowrap"
+                        assert label["lines"] <= 1
+                        assert label["inside"]
+                if width < 768:
+                    assert found["tableWidth"] > found["wrapperWidth"]
+            browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()

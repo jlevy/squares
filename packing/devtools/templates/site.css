@@ -3698,7 +3698,7 @@ html[data-site-atlas-view="triangle"]
   margin: 0;
   min-inline-size: 0;
 }
-/* News topics keep the Results chip's fill, corners and leading at a smaller scale. */
+/* News topics keep the shared chip geometry at a smaller scale, with neutral fill and colored ink. */
 .kpress .site-news-topics .site-chip {
   font-size: calc(var(--site-font-size-note) * 0.85);
   margin-block: 0;
@@ -3966,20 +3966,18 @@ html[data-site-atlas-view="triangle"]
   }
 }
 
-/* Navigation, collection controls and metadata use the sans role. Inline links in
-   substantive exposition retain their paragraph's serif face. */
-.kpress
-:is(
-  nav,
-  .site-navigation-copy,
-  .site-navigation-heading,
-  .site-rollup summary,
-  .site-rollup-count
-) {
+/* Navigation, collection controls and metadata use sans. Standalone narrative
+   introductions and their inline links use the shared prose face. */
+.kpress :is(nav, .site-navigation-heading, .site-rollup summary, .site-rollup-count) {
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-light);
 }
 .kpress .site-navigation-heading {
   font-style: normal;
   font-weight: var(--site-font-weight-sans-medium);
+}
+
+.kpress .site-navigation-copy {
+  font-family: var(--kpress-font-prose);
+  font-weight: 400;
 }

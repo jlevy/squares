@@ -184,7 +184,17 @@
 }
 
 .kpress .site-profile-table td.site-profile-links {
-  min-inline-size: 12rem;
+  min-inline-size: 16rem;
+}
+/* Public account identifiers stay whole; the table's existing wrapper owns scrolling. */
+.site-profile-links .site-contributor-links-compact > li,
+.site-profile-links .site-contributor-links-compact a {
+  max-inline-size: none;
+}
+.site-profile-links .site-contributor-links-compact span {
+  overflow-wrap: normal;
+  white-space: nowrap;
+  word-break: normal;
 }
 
 .kpress .site-profile-table td.site-profile-resources {

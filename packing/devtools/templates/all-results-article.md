@@ -4,15 +4,6 @@
 
 </div>
 
-<div class="site-navigation-copy">
-
-The complete result register lists individual contributions: bounds, proofs,
-constructions, and methods.
-For the best-known bounds by number of squares, use the Visual Atlas and its case
-records.
-
-</div>
-
 <p class="site-action-row site-more"><a class="site-action" href="recent-results.html">Recent Results{{ARROW_RIGHT}}</a><a class="site-action" href="atlas.html">Visual Atlas{{ARROW_RIGHT}}</a><a class="site-action" href="frontier.html">The Frontier Survey{{ARROW_RIGHT}}</a></p>
 
 <a id="all-results"></a>

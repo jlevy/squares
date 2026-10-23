@@ -14,7 +14,7 @@ The status chips take fills from the same scale, a rule each in the stylesheet n
 a hue, a level and an optional chroma boost (`status_fills`, the owner, 2026-10-02,
 `think-c19o`), and are reported the same way. So are the topic chips that Results and
 News once shared. Result kinds keep those fills (`topic_fills`); News now uses one
-neutral surface and colored ink (`news_topic_inks`). News inks must keep4.5:1 contrast
+neutral surface and colored ink (`news_topic_inks`). News inks must keep 4.5:1 contrast
 against that surface in both themes. Result-topic fills retain their distinctness
 contract against statuses and each other. The V and C rung
 fills are not compared: a rung chip names its rung, and the upper-bound topic stands

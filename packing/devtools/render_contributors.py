@@ -975,19 +975,7 @@ def contributor_pages() -> list[Page]:
     directory = (
         '<article class="site-contributor-directory">'
         "<h1>Contributor Profiles</h1>"
-        '<p class="site-navigation-copy">People whose work the square-packing record '
-        "cites or credits, paper authors "
-        "and project contributors alike. Each profile records public identity evidence "
-        "and links to reviewed credits. Results count distinct registered results by their "
-        "reviewed primary authors. Records are current registered contributions "
-        "in their recorded family and scope. Review pending marks comparisons that remain "
-        "unclassified, including alongside a supported positive count. "
-        "Credits count distinct results that credit a person\u2019s prior work, excluding "
-        "their authored results. Years active covers dated original work and explicit "
-        "discovery or proof records, excluding later reuse and import dates. "
-        "Accounts open public account profiles; Resources lists personal and publication "
-        "websites and the cited "
-        "external work in the Resources directory.</p>"
+        "<p>People whose work is cited or credited in the square-packing record.</p>"
         + profile_summary(contributors, occurrences)
         + profile_table(contributors, occurrences)
         + "</article>"

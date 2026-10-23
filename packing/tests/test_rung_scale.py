@@ -12,6 +12,7 @@ from __future__ import annotations
 import dataclasses
 import re
 from itertools import pairwise
+from pathlib import Path
 
 import pytest
 
@@ -293,3 +294,66 @@ def test_news_topics_use_readable_inks_on_one_neutral_surface_per_theme() -> Non
     design = (render_overview.TEMPLATES / "paper-design.md").read_text(encoding="utf-8")
     for line in rung_scale.news_topic_table(report).splitlines():
         assert line in design, line
+
+
+def test_rendered_news_topics_share_neutral_surfaces_and_reset_sits_above_count(
+    tmp_path: Path,
+) -> None:
+    from devtools import preview_site, site_assets  # noqa: PLC0415
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    recent = render_overview.news_page()
+    (tmp_path / recent.name).write_text(recent.html)
+    site_assets.write_assets(tmp_path, render_overview.asset_files([recent]))
+    report = probe(Path(__file__).with_name("probes"), "rung_scale/news_topics")
+    inks = {(ink.theme, ink.rung): ink for ink in rung_scale.news_topic_inks()}
+    surfaces = rung_scale.news_topic_backgrounds()
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with site_browser.api().sync_playwright() as driver:
+            browser = site_browser.launch(driver)
+            page = browser.new_page(reduced_motion="reduce")
+            for theme in rung_scale.THEMES:
+                page.emulate_media(color_scheme=theme)
+                for width in (1280, 390, 320):
+                    page.set_viewport_size({"width": width, "height": 900})
+                    page.goto(
+                        f"http://127.0.0.1:{server.server_port}/{recent.name}"
+                        "?news-topics=lower-bound,verification",
+                        wait_until="load",
+                    )
+                    site_browser.api().expect(page.locator("html")).to_have_attribute(
+                        "data-kpress-resolved-theme", theme
+                    )
+                    page.locator("[data-site-filter-trigger]").click()
+                    found = page.evaluate(report)
+                    assert {sample["role"] for sample in found["samples"]} == {
+                        "tag",
+                        "option",
+                        "summary",
+                    }
+                    expected_bg = bytes.fromhex(rung_scale.hex_colour(surfaces[theme])[1:])
+                    for sample in found["samples"]:
+                        assert all(
+                            abs(actual - expected) <= 1
+                            for actual, expected in zip(
+                                sample["background"], expected_bg, strict=True
+                            )
+                        ), (theme, width, sample)
+                        expected_ink = bytes.fromhex(inks[theme, sample["topic"]].hex[1:])
+                        assert all(
+                            abs(actual - expected) <= 1
+                            for actual, expected in zip(
+                                sample["ink"], expected_ink, strict=True
+                            )
+                        ), (theme, width, sample)
+                        assert sample["contrast"] >= 4.5, (theme, width, sample)
+                    assert abs(found["reset"]["right"] - found["count"]["right"]) < 0.5
+                    assert found["reset"]["bottom"] <= found["count"]["top"]
+                    assert found["titleBottom"] == "32px"
+                    assert found["overflow"] == 0
+            browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()
