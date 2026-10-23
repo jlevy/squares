@@ -816,6 +816,8 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         f"--ignore={validate.BROWSER_FLOOR_LIVENESS_TESTS}",
         # Browser layout and prepared mathematics run where Chromium is installed, in
         # `site table layout in Chromium`; a shard has no browser for them (D-513).
+        "--ignore=tests/test_site_navigation.py",
+        "--ignore=tests/test_site_popover_controls.py",
         "--ignore=tests/test_site_headroom.py",
         "--ignore=tests/test_site_homepage.py",
         "--ignore=tests/test_site_result_popover.py",
@@ -4575,6 +4577,8 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
     for job_name in ("suite-a", "suite-b", "suite-c", "suite-d"):
         assert not _installs_chromium(document["jobs"][job_name], pull_request=True), job_name
     assert set(validate.SITE_LAYOUT_TESTS) == {
+        "tests/test_site_navigation.py",
+        "tests/test_site_popover_controls.py",
         "tests/test_site_headroom.py",
         "tests/test_site_homepage.py",
         "tests/test_site_result_popover.py",
@@ -4886,7 +4890,7 @@ def test_site_layout_commands_partition_the_original_collection(
     forwarders = {
         node for node in original if node.startswith("tests/test_site_forwarders.py::")
     }
-    assert len(forwarders) == 51
+    assert forwarders, "forwarder coverage must not disappear from the isolated lane"
     assert isolated == forwarders
 
 

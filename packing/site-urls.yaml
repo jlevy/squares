@@ -6445,6 +6445,23 @@ urls:
   first_published: '2026-09-29'
   lastmod: '2026-10-22'
   status: live
+- path: documentation.html
+  canonical: documentation.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+- path: downloads.html
+  canonical: posters.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: forwarded
+  target: posters.html
 - path: epistemics.html
   canonical: epistemics.html
   kind: page
@@ -6479,14 +6496,13 @@ urls:
   lastmod: '2026-10-22'
   status: live
 - path: frontier.html
-  canonical: atlas.html
-  kind: forwarder
-  generator: devtools.render_overview:forwarder_pages
+  canonical: frontier.html
+  kind: page
+  generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
   lastmod: '2026-10-22'
-  status: forwarded
-  target: atlas.html
+  status: live
 - path: index.html
   canonical: ''
   kind: page
@@ -6700,6 +6716,14 @@ urls:
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
   lastmod: '2026-10-17'
+  status: live
+- path: posters.html
+  canonical: posters.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
   status: live
 - path: profiles/ahyangyi.html
   canonical: profiles/ahyangyi.html
@@ -7315,6 +7339,31 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
+  lastmod: '2026-10-22'
+  status: live
+- path: recent-results.html
+  canonical: results.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: forwarded
+  target: results.html
+- path: report.html
+  canonical: report.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+- path: resources.html
+  canonical: resources.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: result/t-001.html
@@ -18883,6 +18932,22 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
+  lastmod: '2026-10-22'
+  status: live
+- path: tutorials.html
+  canonical: tutorials.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+- path: verification.html
+  canonical: verification.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: visualize.html

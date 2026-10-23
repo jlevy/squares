@@ -137,6 +137,8 @@
       switch (filter.kind) {
         case "equals":
           return filter.value === "" || actual === filter.value;
+        case "one-of":
+          return filter.value !== "" && filter.value.split(",").includes(actual ?? "");
         case "flag":
           return filter.value !== "true" || actual === "true";
         case "min":
@@ -293,6 +295,14 @@
     for (const control of tools.querySelectorAll("[data-preset]")) {
       const label = control.closest("label");
       if (
+        control.getAttribute("data-filter") === "s" &&
+        tools.querySelector("[data-site-significance]") &&
+        label instanceof HTMLElement
+      ) {
+        label.hidden = true;
+        continue;
+      }
+      if (
         label instanceof HTMLElement &&
         (control instanceof HTMLSelectElement || control instanceof HTMLInputElement)
       ) {
@@ -326,8 +336,12 @@
   function readFilters(tools, today, utcToday = today) {
     /** @type {SiteTableFilter[]} */
     const filters = [];
+    const significance = tools.querySelector("[data-site-significance]");
     for (const control of tools.querySelectorAll("[data-filter]")) {
       const key = control.getAttribute("data-filter") ?? "";
+      if (key === "s" && significance) {
+        continue;
+      }
       const bound = control.getAttribute("data-bound");
       const unmatched = control.getAttribute("data-unmatched");
       if (control instanceof HTMLInputElement && unmatched !== null && control.value === "") {
@@ -342,6 +356,12 @@
       } else if (control instanceof HTMLInputElement || control instanceof HTMLSelectElement) {
         filters.push({ key, kind: BOUNDS[bound ?? ""] ?? "min", value: control.value });
       }
+    }
+    if (significance) {
+      const selected = [
+        ...significance.querySelectorAll('button[data-site-score][aria-pressed="true"]'),
+      ].map((button) => button.getAttribute("data-site-score") ?? "");
+      filters.push({ key: "s", kind: "one-of", value: selected.join(",") });
     }
     return filters;
   }
@@ -435,10 +455,60 @@
 
     if (tools) {
       tools.removeAttribute("hidden");
+      const significance = tools.querySelector("[data-site-significance]");
+      const scoreButtons = [
+        ...(significance?.querySelectorAll("button[data-site-score]") ?? []),
+      ].filter((button) => button instanceof HTMLButtonElement);
+      const restoreSignificance = () => {
+        const params = new URLSearchParams(location.search);
+        const exact = params.get("s");
+        const floor = Number(
+          params.get("s-min") ?? significance?.getAttribute("data-default-floor") ?? "",
+        );
+        const ceiling = params.get("s-max");
+        const maximum = ceiling ? Number(ceiling) : Number.POSITIVE_INFINITY;
+        for (const button of scoreButtons) {
+          const value = button.getAttribute("data-site-score") ?? "";
+          const wanted = !exact || exact.split(",").includes(value);
+          const selected =
+            wanted &&
+            (Number.isNaN(floor) || Number(value) >= floor) &&
+            (Number.isNaN(maximum) || Number(value) <= maximum);
+          button.setAttribute("aria-pressed", String(selected));
+        }
+      };
+      significance?.addEventListener("click", (event) => {
+        const button =
+          event.target instanceof Element ? event.target.closest("button[data-site-score]") : null;
+        if (!(button instanceof HTMLButtonElement)) {
+          return;
+        }
+        button.setAttribute("aria-pressed", String(button.getAttribute("aria-pressed") !== "true"));
+        const selected = scoreButtons
+          .filter((score) => score.getAttribute("aria-pressed") === "true")
+          .map((score) => score.getAttribute("data-site-score") ?? "");
+        const url = new URL(location.href);
+        url.searchParams.delete("s-min");
+        url.searchParams.delete("s-max");
+        if (selected.length === scoreButtons.length) {
+          url.searchParams.delete("s");
+        } else {
+          url.searchParams.set("s", selected.join(",") || "none");
+        }
+        if (url.href !== location.href) {
+          history.pushState(null, "", url);
+        }
+        applyFilters();
+      });
       tools.addEventListener("input", applyFilters);
       tools.addEventListener("change", applyFilters);
       window.addEventListener("hashchange", applyFilters);
+      window.addEventListener("popstate", () => {
+        restoreSignificance();
+        applyFilters();
+      });
       presetFilters(tools, new URLSearchParams(location.search));
+      restoreSignificance();
       applyFilters();
     }
   }
@@ -452,6 +522,64 @@
   function toolsBefore(wrap) {
     const before = wrap?.previousElementSibling ?? null;
     return before?.classList.contains("site-table-tools") ? before : null;
+  }
+
+  /**
+   * One chronological table keeps its earlier rows in a second, native row group.
+   * @param {HTMLTableElement} table
+   */
+  function enhanceRecent(table) {
+    if (table.hasAttribute("data-site-table-ready")) {
+      return;
+    }
+    const button = table.querySelector("button[data-recent-toggle]");
+    const row = table.querySelector("[data-recent-toggle-row]");
+    const older = document.getElementById(button?.getAttribute("aria-controls") ?? "");
+    if (
+      !(button instanceof HTMLButtonElement) ||
+      !(row instanceof HTMLTableRowElement) ||
+      !(older instanceof HTMLTableSectionElement) ||
+      older.parentElement !== table
+    ) {
+      return;
+    }
+    const label = button.querySelector("[data-recent-label]");
+    const icon = button.querySelector(".site-icon-arrow");
+    const hasEarlier = older.rows.length > 0;
+    /** @param {boolean} open */
+    const setOpen = (open) => {
+      if (!open && older.contains(document.activeElement)) {
+        button.focus();
+      }
+      button.setAttribute("aria-expanded", String(open));
+      table.dataset.recentExpanded = String(open);
+      older.hidden = !open;
+      if (label) {
+        label.textContent = open
+          ? (button.dataset.labelLess ?? "Hide earlier results")
+          : (button.dataset.labelMore ?? "Earlier results");
+      }
+      if (icon instanceof HTMLElement) {
+        icon.dataset.arrow = open ? "double-up" : "double-down";
+      }
+    };
+    table.dataset.recentReady = "true";
+    table.setAttribute("data-site-table-ready", "");
+    button.disabled = !hasEarlier;
+    row.hidden = !hasEarlier;
+    setOpen(false);
+    button.addEventListener("click", () => {
+      setOpen(button.getAttribute("aria-expanded") !== "true");
+    });
+    const revealFragment = () => {
+      const target = document.getElementById(fragmentTarget());
+      if (hasEarlier && target && (older.contains(target) || row.contains(target))) {
+        setOpen(true);
+        target.scrollIntoView({ block: "start" });
+      }
+    };
+    revealFragment();
+    window.addEventListener("hashchange", revealFragment);
   }
 
   /** Enhance every site table on the page. */
@@ -523,7 +651,11 @@
       if (!(table instanceof HTMLTableElement)) {
         continue;
       }
-      enhance(table, toolsBefore(table.closest(".site-table-wrap")));
+      if (table.hasAttribute("data-recent-results")) {
+        enhanceRecent(table);
+      } else {
+        enhance(table, toolsBefore(table.closest(".site-table-wrap")));
+      }
     }
   }
 

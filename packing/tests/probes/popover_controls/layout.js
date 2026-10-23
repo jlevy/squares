@@ -34,7 +34,25 @@
     }
     return icon.getBBox().width;
   };
+  const title = panel.querySelector("article > h1");
+  const titleRange = document.createRange();
+  if (title) {
+    titleRange.selectNodeContents(title);
+  }
+  const controls = [expand.getBoundingClientRect(), close.getBoundingClientRect()];
+  const titleOverlapsControls =
+    title !== null &&
+    [...titleRange.getClientRects()].some((text) =>
+      controls.some(
+        (control) =>
+          text.left < control.right - 0.5 &&
+          text.right > control.left + 0.5 &&
+          text.top < control.bottom - 0.5 &&
+          text.bottom > control.top + 0.5,
+      ),
+    );
   return {
+    titleOverlapsControls,
     expand: box(expand),
     close: box(close),
     expandIcon: iconSize(expand),

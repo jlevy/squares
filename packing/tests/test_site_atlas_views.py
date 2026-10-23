@@ -34,8 +34,7 @@ import json
 import os
 import re
 from collections.abc import Iterator
-from html.parser import HTMLParser
-from itertools import accumulate, pairwise
+from itertools import pairwise
 from pathlib import Path
 from typing import Any, TypedDict
 from urllib.parse import unquote, urlsplit
@@ -182,60 +181,12 @@ def atlas_files(tmp_path_factory: pytest.TempPathFactory) -> Path:
     return root
 
 
-class _SurveySection(HTMLParser):
-    """Find the final Survey section without reserializing any canonical markup."""
-
-    def __init__(self, source: str) -> None:
-        super().__init__(convert_charrefs=False)
-        self.lines = [0, *accumulate(len(line) for line in source.splitlines(keepends=True))]
-        self.depth = 0
-        self.prose_depth: int | None = None
-        self.start: int | None = None
-        self.end: int | None = None
-
-    def source_offset(self) -> int:
-        line, column = self.getpos()
-        return self.lines[line - 1] + column
-
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        values = dict(attrs)
-        if tag == "div":
-            self.depth += 1
-            if "site-page" in (values.get("class") or "").split():
-                assert self.prose_depth is None
-                self.prose_depth = self.depth
-        if values.get("id") == "the-frontier-survey":
-            assert tag == "h1"
-            assert self.start is None
-            assert self.prose_depth == self.depth
-            self.start = self.source_offset()
-
-    def handle_endtag(self, tag: str) -> None:
-        if tag == "div":
-            if self.depth == self.prose_depth:
-                assert self.start is not None
-                self.end = self.source_offset()
-                self.prose_depth = None
-            self.depth -= 1
-
-
 def _graphics_only(source: str) -> str:
-    """Keep the canonical graphic shell; the full Survey has dedicated browser tests."""
-    # Validate the actual complete producer first, including every native formula and
-    # all 324 row identities. Only the repeated legacy graphic snapshots are bounded.
-    site_renders.count_frontier_math(source)
-    section = _SurveySection(source)
-    section.feed(source)
-    section.close()
-    assert section.depth == 0
-    assert section.start is not None
-    assert section.end is not None
-    assert section.start < section.end
-    removed = source[section.start : section.end]
-    assert 'id="frontier-table"' in removed
-    graphics = source[: section.start] + source[section.end :]
-    assert 'id="the-frontier-survey"' not in graphics
-    assert 'id="frontier-table"' not in graphics
+    """Start the legacy control matrix collapsed; defaults have a separate direct test."""
+    assert 'id="frontier-table"' not in source
+    graphics = source.replace("data-atlas-rest>", "data-atlas-rest hidden>").replace(
+        'data-atlas-toggle aria-expanded="true"', 'data-atlas-toggle aria-expanded="false"'
+    )
     for marker in (
         'id="the-atlas-of-square-packings"',
         "data-atlas-grid>",
@@ -265,19 +216,19 @@ def graphics_files(atlas_files: Path) -> Path:
     return root
 
 
-def test_graphics_fixture_keeps_native_math_without_fixing_prose_formula_count(
+def test_graphics_fixture_keeps_every_case_and_the_canonical_atlas_stays_complete(
     atlas_files: Path, graphics_files: Path
 ) -> None:
     source = (atlas_files / "atlas.html").read_text(encoding="utf-8")
     graphics = (graphics_files / "atlas.html").read_text(encoding="utf-8")
-    assert 'id="frontier-table"' in source
+    assert 'id="frontier-table"' not in source
     assert 'id="frontier-table"' not in graphics
     assert graphics.count('class="site-atlas-cell"') == 324
-    native, total = site_renders.count_frontier_math(source)
+    assert "data-atlas-rest>" in source
+    assert "data-atlas-rest hidden>" in graphics
     extra = '<span class="kpress-math"><math><mi>x</mi></math></span>'
     assert source.count("</body>") == 1
     changed = source.replace("</body>", extra + "</body>")
-    assert site_renders.count_frontier_math(changed) == (native, total + 1)
     assert _graphics_only(changed) == graphics.replace("</body>", extra + "</body>")
 
 
@@ -461,13 +412,18 @@ def test_default_triangle_explicit_grid_and_complete_rows_keep_all_case_nodes(
     try:
         page.goto(address + "atlas.html", wait_until="load")
         page.evaluate(ROWS, {"install": True})
-        state = _completed(page)
+        state = _completed(page, expanded=True)
         assert state["selected"] == state["root_view"] == state["view"] == "triangle"
         assert state["search"] == ""
+        assert page.locator(atlas.EXPANDER).get_attribute("aria-expanded") == "true"
+        page.locator(atlas.EXPANDER).click()
+        _completed(page)
         page.locator(GRID).click()
         assert _completed(page)["search"] == "?atlas=grid"
         page.reload(wait_until="load")
         page.evaluate(ROWS, {"install": True})
+        _completed(page, expanded=True)
+        page.locator(atlas.EXPANDER).click()
         assert _completed(page)["selected"] == "grid"
         for size in atlas.SIZES:
             page.locator(atlas.size_tab(size)).click()
@@ -494,6 +450,8 @@ def test_default_triangle_explicit_grid_and_complete_rows_keep_all_case_nodes(
         _completed(page)
         page.goto(address + "atlas.html?age=180&size=large&atlas=grid#the-atlas")
         page.evaluate(ROWS, {"install": True})
+        _completed(page, expanded=True)
+        page.locator(atlas.EXPANDER).click()
         _completed(page)
         page.locator(TRIANGLE).click()
         state = _completed(page)
@@ -534,6 +492,8 @@ def test_grid_boundary_focus_and_stepped_popover_return_remain_visible(
     try:
         page.goto(address + "atlas.html?atlas=grid", wait_until="load")
         page.evaluate(ROWS, {"install": True})
+        _completed(page, expanded=True)
+        page.locator(atlas.EXPANDER).click()
         _completed(page)
         # Find actual nearby capacities, independent of retained CSS tile sizes.
         widths = {}
@@ -1263,8 +1223,8 @@ def test_reduced_motion_wrappers_commit_geometry_in_the_click_frame(
     assert immediate["line_gap"] == pytest.approx(immediate["row_gap"], abs=atlas.EDGE)
     assert immediate["properties"] == ["none"]
     assert immediate["transitions"] == []
-    assert sum(box["key"].startswith("tile:") for box in immediate["geometry"]) == 100
-    assert len(immediate["geometry"]) > 100
+    assert sum(box["key"].startswith("tile:") for box in immediate["geometry"]) == 324
+    assert len(immediate["geometry"]) > 324
     for first, next_frame in zip(immediate["geometry"], frame["geometry"], strict=True):
         assert first["key"] == next_frame["key"]
         for dimension in ("left", "top", "width", "height"):
@@ -1465,7 +1425,7 @@ def test_see_all_results_and_the_expander_are_one_button(seen: Readings, name: s
     assert see_all["icon"]["width"] == pytest.approx(expander["icon"]["width"], abs=0.5)
     assert see_all["icon"]["after_text"]
     assert expander["icon"]["after_text"]
-    assert see_all["label"] == "All Results"
+    assert see_all["label"] == "View All Results"
 
 
 def test_the_expander_reads_show_more_then_show_less_with_the_chevron_turned(

@@ -91,12 +91,16 @@
       }
     : null;
   probe.remove();
-  const links = [...document.querySelectorAll(".site-nav a[data-page]")];
+  const links = [...document.querySelectorAll(".site-nav a[data-page]")].filter(
+    (link) => link.getClientRects().length > 0,
+  );
   const lines = new Set(links.map((link) => Math.round(link.getBoundingClientRect().top)));
   const nameText = [...document.querySelectorAll(".site-nav .site-name-text")].find(
     (label) => label.getClientRects().length > 0,
   );
+  const breadcrumb = document.querySelector(".site-breadcrumbs");
   return {
+    breadcrumb: breadcrumb && breadcrumb.getClientRects().length > 0 ? box(breadcrumb) : null,
     nav: nav && box(nav),
     type: {
       body: size(document.querySelector(".kpress-long-text > p:not([class])")),

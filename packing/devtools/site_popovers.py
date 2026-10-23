@@ -20,7 +20,7 @@ def popover_controls(
                 f'href="{html.escape(href, quote=True)}" '
                 f'aria-label="{html.escape(label, quote=True)}" '
                 f'title="{html.escape(label, quote=True)}">'
-                + popover_icon("maximize", sprite=sprite)
+                + popover_icon("maximize-2", sprite=sprite)
                 + "</a>"
             )
     return (

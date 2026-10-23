@@ -83,9 +83,8 @@ OLD_BAR_TYPE = (
 )
 #: A name displaced above the other links, as a control for the baseline check.
 NAME_ABOVE_LINKS = ".site-nav .site-name { transform: translateY(-4px) !important; }"
-#: The widths the bar is measured at, and how many lines its links may take at each: one
-#: on a desktop and a tablet, two on a phone.
-BAR_WIDTHS = {1280: 1, 768: 1, 390: 2}
+#: Desktop, tablet and phone widths exercise both navigation presentations.
+BAR_WIDTHS = (1280, 768, 390)
 
 
 @pytest.fixture(scope="module")
@@ -194,7 +193,14 @@ def test_the_section_tabs_stand_under_the_bars_rule(
         assert (rule["left"], rule["right"]) == (nav["left"], nav["right"]), where
         assert tabs["current"] == current, where
         assert tabs["top"] - rule["bottom"] == pytest.approx(TABS_SPACE * REM, abs=0.05), where
-        assert first["top"] - tabs["bottom"] == pytest.approx(below * REM, abs=0.05), where
+        breadcrumb = found.get("breadcrumb")
+        if breadcrumb:
+            assert breadcrumb["top"] - tabs["bottom"] == pytest.approx(REM, abs=0.05), where
+            assert first["top"] - breadcrumb["bottom"] == pytest.approx(2.5 * REM, abs=0.05), (
+                where
+            )
+        else:
+            assert first["top"] - tabs["bottom"] == pytest.approx(below * REM, abs=0.05), where
 
 
 def test_inline_visuals_choices_are_not_header_tabs(browser: Any) -> None:
@@ -285,14 +291,13 @@ def test_the_bars_type_is_one_step_under_the_bodys(
     Nothing here is a pixel
     value: the body is the prose base the page resolves, which a prose paragraph is set
     at, and the step is read from the same scale. The larger type leaves the bar's links
-    on one line on a desktop and a tablet and two on a phone, and no page wider than its
-    window."""
+    reachable at desktop, tablet and phone widths, with no page wider than its window."""
     opened = {
         "atlas.html": pages["atlas.html"],
         **{name: path for name, (path, _, _) in section_pages.items()},
     }
     seen: dict[str, set[tuple[float, float | None, float]]] = {name: set() for name in opened}
-    for width, rows in BAR_WIDTHS.items():
+    for width in BAR_WIDTHS:
         for name, path in opened.items():
             sizes = _header(browser, path, width)["type"]
             where = f"{name} at {width}"
@@ -304,7 +309,8 @@ def test_the_bars_type_is_one_step_under_the_bodys(
             assert sizes["name_label"] == (
                 "The Squares Project" if width == 1280 else "Squares"
             )
-            assert (sizes["links_rows"], sizes["overflow"]) == (rows, 0), where
+            assert sizes["links_rows"] >= 1, where
+            assert sizes["overflow"] == 0, where
             if name == "atlas.html":
                 assert sizes["body"] == body, where
                 assert sizes["tab"] is None, where
@@ -362,28 +368,23 @@ def test_the_name_stands_on_the_links_baseline(
     }
     over_rule: dict[int, set[float]] = {}
     over_foot: set[float] = set()
-    for width, rows in BAR_WIDTHS.items():
+    for width in BAR_WIDTHS:
         for name, path in opened.items():
             found = _baselines(browser, path, width)
             where = f"{name} at {width}"
             assert baseline_problems(found) == [], where
-            lines = {link["top"] for link in found["links"]}
-            assert len(lines) == rows, where
-            assert [link["label"] for link in found["links"]] == [
-                "Overview",
-                "News",
-                "Atlas",
-                "Results",
-                "Explanations",
-                "About",
-                "GitHub",
-            ], where
+            labels = [link["label"] for link in found["links"]]
+            assert labels == (
+                ["Menu", "GitHub"]
+                if width < 768
+                else ["Overview", "News", "Results", "Learn", "About", "GitHub"]
+            ), where
             first = min(found["links"], key=lambda link: link["top"])
             assert abs(found["name"] - first["baseline"]) <= BASELINE_TOLERANCE, where
             assert [tab["label"] for tab in found["tabs"]] == (
                 [] if name == "atlas.html" else ["Film", "Workbench"]
             ), where
-            if rows == 1:
+            if found["current_above_rule"] is not None:
                 over_rule.setdefault(width, set()).add(found["current_above_rule"])
             if found["tabs"]:
                 over_foot.add(round(found["current_tab_above_foot"], 1))

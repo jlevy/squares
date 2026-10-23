@@ -21,7 +21,7 @@ if TYPE_CHECKING:
 from devtools import prepare_n11_lower_bounds_explainer_math, render_n11_lower_bounds_explainer
 from devtools.prepare_n11_lower_bounds_explainer_math import (
     _MATH_ATTRIBUTES,
-    _MEASURE_MATH,
+    MEASURE_MATH,
     GeometryBox,
     GeometryReport,
     MathCoverage,
@@ -636,7 +636,7 @@ def test_extraction_serializes_a_lazily_written_style_in_one_place() -> None:
             late = page.evaluate(_GATE, {"key": "1", "readEarly": False})
             fragments = cast(
                 "list[PreparedFragment]",
-                page.evaluate(_MEASURE_MATH, sorted(_MATH_ATTRIBUTES)),
+                page.evaluate(MEASURE_MATH, sorted(_MATH_ATTRIBUTES)),
             )
         finally:
             browser.close()
@@ -646,5 +646,5 @@ def test_extraction_serializes_a_lazily_written_style_in_one_place() -> None:
     assert html[0] == html[1]
     assert (
         '<span class="kpress-math-render" aria-hidden="true" data-kpress-math-source="n" '
-        'data-kpress-math-display="inline" data-kpress-math-prepared="true" style="">'
+        'data-kpress-math-display="inline" data-kpress-math-prepared="true">'
     ) in html[0]

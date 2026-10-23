@@ -199,3 +199,32 @@ def test_exact_route_classification_is_idempotent_and_preserves_link_markup() ->
         == markup
     )
     assert decorate_github_links(decorated) == decorated
+
+
+@pytest.mark.parametrize("javascript", [False, True])
+def test_footer_links_keep_destinations_without_decorative_marks(
+    browser: Any, github_site: str, *, javascript: bool
+) -> None:
+    context = browser.new_context(
+        java_script_enabled=javascript, viewport={"width": 390, "height": 900}
+    )
+    try:
+        page = context.new_page()
+        page.goto(github_site, wait_until="load")
+        footer = page.locator(".site-colophon")
+        links = footer.evaluate(LAYOUT)
+        assert [link["href"] for link in links] == [
+            "https://github.com/jlevy/squares",
+            render_overview.FLOWMARK_URL,
+            render_overview.KPRESS_URL,
+        ]
+        assert all(link["text"] for link in links)
+        for link in links:
+            assert link["content"] == "none", link
+            assert link["afterContent"] == "none", link
+            assert link["beforeDisplay"] == link["afterDisplay"] == "none", link
+        body = {link["id"]: link for link in page.locator("body").evaluate(LAYOUT)}
+        assert body["repo"]["content"] != "none"
+        assert body["repo"]["width"] > 0
+    finally:
+        context.close()

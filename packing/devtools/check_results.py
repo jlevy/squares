@@ -94,6 +94,7 @@ READER_TIER = (
     ROOT / "devtools" / "templates" / "about-article.md",
     ROOT / "devtools" / "templates" / "atlas-article.md",
     ROOT / "devtools" / "templates" / "all-results-article.md",
+    ROOT / "devtools" / "templates" / "verification-article.md",
     ROOT / "devtools" / "templates" / "frontier-article.md",
     ROOT / "devtools" / "templates" / "papers-article.md",
 )

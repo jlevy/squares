@@ -9,9 +9,9 @@ it (`templates/paper-design.md`, Color, The Rung Scale).
 
 from __future__ import annotations
 
-import dataclasses
 import re
 from itertools import pairwise
+from pathlib import Path
 
 import pytest
 
@@ -243,47 +243,23 @@ def test_the_design_document_carries_the_inks() -> None:
         assert line in design, line
 
 
-def test_the_topic_chips_take_fills_from_the_scale_or_their_bound() -> None:
-    """The topics Results and News share (`think-z9za`): Verification is a result's
-    `reviewed` blue, Optimality, Project and Engineering are hues of the scale, and the
-    bound topics are their bound's ink diluted into the page. Each is in gamut with the
-    page's text at WCAG AA or better on it in both themes."""
+def test_result_and_news_topics_share_neutral_surfaces_and_readable_ink() -> None:
+    from devtools.site_topics import TOPICS  # noqa: PLC0415
+
+    surfaces = rung_scale.news_topic_backgrounds()
     topics = rung_scale.topic_fills()
-    assert {fill.rung for fill in topics} == {
-        "lower-bound",
-        "upper-bound",
-        "optimality",
-        "project",
-        "engineering",
-        "verification",
-    }
+    assert {fill.rung for fill in topics} == set(TOPICS)
     assert {fill.theme for fill in topics} == set(rung_scale.THEMES)
     for fill in topics:
+        assert (fill.lightness, fill.chroma, fill.hue) == surfaces[fill.theme], fill
         assert fill.in_gamut, fill
         assert fill.contrast >= rung_scale.MINIMUM_CONTRAST, fill
-    reviewed = {
-        fill.theme: fill for fill in rung_scale.status_fills() if fill.rung == "reviewed"
-    }
-    for fill in topics:
-        if fill.rung == "verification":
-            assert fill.oklch == reviewed[fill.theme].oklch, fill
-
-
-def test_every_topic_fill_keeps_one_meaning() -> None:
-    """A topic's fill stands a just noticeable difference or more from every status's
-    and every other topic's in its theme, unless the two mean one thing, as Verification
-    and `reviewed` do. Project's amber at the yellow statuses' hue, 0.011 from `recorded`
-    in OkLab, is the case this rejects."""
-    report = rung_scale.status_fills() + rung_scale.topic_fills()
-    assert rung_scale.crowded(report) == []
-    recorded = next(
-        fill for fill in report if fill.rung == "recorded" and fill.theme == "light"
-    )
-    near = dataclasses.replace(recorded, rung="project", hue=85.0)
-    others = [fill for fill in report if fill.rung != "project"]
-    assert [
-        (first.rung, second.rung) for first, second, _ in rung_scale.crowded([*others, near])
-    ] == [("project", "recorded")]
+    inks = {(ink.theme, ink.rung): ink for ink in rung_scale.topic_inks()}
+    for ink in rung_scale.news_topic_inks():
+        assert ink == inks[ink.theme, ink.rung]
+    # V/C and status retain their existing scale rather than the neutral topic surface.
+    for fill in rung_scale.fills() + rung_scale.status_fills():
+        assert fill.hex != rung_scale.hex_colour(surfaces[fill.theme]), fill
 
 
 def test_the_design_document_carries_the_topic_fills() -> None:
@@ -291,3 +267,146 @@ def test_the_design_document_carries_the_topic_fills() -> None:
     design = (render_overview.TEMPLATES / "paper-design.md").read_text(encoding="utf-8")
     for line in rung_scale.markdown_table(rung_scale.topic_fills(), "Topic").splitlines():
         assert line in design, line
+
+
+def test_news_topics_use_readable_inks_on_one_neutral_surface_per_theme() -> None:
+    from devtools.site_topics import NEWS_TOPICS  # noqa: PLC0415
+
+    surfaces = rung_scale.news_topic_backgrounds()
+    report = rung_scale.news_topic_inks()
+    assert {ink.rung for ink in report} == set(NEWS_TOPICS)
+    assert {ink.theme for ink in report} == set(rung_scale.THEMES)
+    for theme, surface in surfaces.items():
+        assert surface[1] <= 0.01, (theme, surface)
+    for ink in report:
+        assert ink.in_gamut, ink
+        assert ink.contrast >= rung_scale.MINIMUM_CONTRAST, ink
+    design = (render_overview.TEMPLATES / "paper-design.md").read_text(encoding="utf-8")
+    for line in rung_scale.news_topic_table(report).splitlines():
+        assert line in design, line
+
+
+def test_rendered_news_topics_share_neutral_surfaces_and_reset_sits_above_count(
+    tmp_path: Path,
+) -> None:
+    from devtools import preview_site, site_assets  # noqa: PLC0415
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    recent = render_overview.news_page()
+    (tmp_path / recent.name).write_text(recent.html)
+    site_assets.write_assets(tmp_path, render_overview.asset_files([recent]))
+    report = probe(Path(__file__).with_name("probes"), "rung_scale/news_topics")
+    inks = {(ink.theme, ink.rung): ink for ink in rung_scale.news_topic_inks()}
+    surfaces = rung_scale.news_topic_backgrounds()
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with site_browser.api().sync_playwright() as driver:
+            browser = site_browser.launch(driver)
+            page = browser.new_page(reduced_motion="reduce")
+            for theme in rung_scale.THEMES:
+                page.emulate_media(color_scheme=theme)
+                for width in (1280, 390, 320):
+                    page.set_viewport_size({"width": width, "height": 900})
+                    page.goto(
+                        f"http://127.0.0.1:{server.server_port}/{recent.name}"
+                        "?news-topics=lower-bound,verification",
+                        wait_until="load",
+                    )
+                    site_browser.api().expect(page.locator("html")).to_have_attribute(
+                        "data-kpress-resolved-theme", theme
+                    )
+                    page.locator("[data-site-filter-trigger]").click()
+                    found = page.evaluate(report)
+                    assert {sample["role"] for sample in found["samples"]} == {
+                        "tag",
+                        "option",
+                        "summary",
+                    }
+                    expected_bg = bytes.fromhex(rung_scale.hex_colour(surfaces[theme])[1:])
+                    for sample in found["samples"]:
+                        assert all(
+                            abs(actual - expected) <= 1
+                            for actual, expected in zip(
+                                sample["background"], expected_bg, strict=True
+                            )
+                        ), (theme, width, sample)
+                        expected_ink = bytes.fromhex(inks[theme, sample["topic"]].hex[1:])
+                        assert all(
+                            abs(actual - expected) <= 1
+                            for actual, expected in zip(
+                                sample["ink"], expected_ink, strict=True
+                            )
+                        ), (theme, width, sample)
+                        assert sample["contrast"] >= 4.5, (theme, width, sample)
+                    assert abs(found["reset"]["right"] - found["count"]["right"]) < 0.5
+                    assert found["reset"]["bottom"] <= found["count"]["top"]
+                    if width == 1280:
+                        assert found["reset"]["top"] < found["topics"]["bottom"]
+                        assert found["reset"]["bottom"] > found["topics"]["top"]
+                    assert found["titleBottom"] == "32px"
+                    assert found["overflow"] == 0
+            browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+def test_rendered_result_topics_match_news_without_recoloring_rungs(tmp_path: Path) -> None:
+    from devtools import preview_site, site_assets  # noqa: PLC0415
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    results = render_overview.results_page()
+    (tmp_path / results.name).write_text(results.html)
+    site_assets.write_assets(tmp_path, render_overview.asset_files([results]))
+    measure = probe(Path(__file__).with_name("probes"), "rung_scale/news_topics")
+    inks = {(ink.theme, ink.rung): ink for ink in rung_scale.topic_inks()}
+    protected = {
+        (fill.theme, fill.rung): fill
+        for fill in rung_scale.fills() + rung_scale.status_fills() + rung_scale.inks()
+    }
+    surfaces = rung_scale.news_topic_backgrounds()
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with site_browser.api().sync_playwright() as driver:
+            browser = site_browser.launch(driver)
+            page = browser.new_page(reduced_motion="reduce")
+            for theme in rung_scale.THEMES:
+                page.emulate_media(color_scheme=theme)
+                page.goto(f"http://127.0.0.1:{server.server_port}/{results.name}")
+                found = page.evaluate(
+                    measure,
+                    {
+                        "topicSelector": ".site-chip[data-kind]",
+                        "topicAttribute": "data-kind",
+                        "protectRungs": True,
+                    },
+                )
+                assert {sample["topic"] for sample in found["samples"]} >= {
+                    "lower-bound",
+                    "upper-bound",
+                    "optimality",
+                }
+                expected_bg = bytes.fromhex(rung_scale.hex_colour(surfaces[theme])[1:])
+                for sample in found["samples"]:
+                    expected_ink = bytes.fromhex(inks[theme, sample["topic"]].hex[1:])
+                    for actual, expected in (
+                        (sample["background"], expected_bg),
+                        (sample["ink"], expected_ink),
+                    ):
+                        assert all(
+                            abs(a - e) <= 1 for a, e in zip(actual, expected, strict=True)
+                        ), (theme, sample)
+                    assert sample["contrast"] >= 4.5, (theme, sample)
+                assert found["protected"]
+                for sample in found["protected"]:
+                    expected = bytes.fromhex(protected[theme, sample["key"]].hex[1:])
+                    assert all(
+                        abs(a - e) <= 1
+                        for a, e in zip(sample["channels"], expected, strict=True)
+                    ), (theme, sample)
+            browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()

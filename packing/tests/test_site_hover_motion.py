@@ -289,6 +289,12 @@ def test_every_transition_is_the_token_or_one_property_on_its_timing() -> None:
                 continue
             for entry in (" ".join(part.split()) for part in value.split(",")):
                 name, _, timing = entry.partition(" ")
+                discrete_overlay = sheet == render_overview.SITE_NAV_CSS or (
+                    sheet == render_overview.SITE_CSS and selectors == [".site-filter-options"]
+                )
+                if discrete_overlay and name == "display":
+                    assert timing == f"{TIMING} allow-discrete", (sheet.name, selectors, entry)
+                    continue
                 assert timing == TIMING, (sheet.name, selectors, entry)
                 assert name not in {*EASED, "background", "all"}, (sheet.name, selectors, entry)
 

@@ -99,6 +99,7 @@
       empty.hidden = shown !== 0;
     }
     document.dispatchEvent(new Event("news:filter"));
+    controls.dispatchEvent(new CustomEvent("squares:filterschange", { bubbles: true }));
   };
   // A bookmarked item widens its facets, so the address never names a hidden card.
   const revealTarget = () => {
@@ -139,7 +140,9 @@
         return;
       }
     }
-    if (button.hasAttribute("data-news-reset")) {
+    if (button.hasAttribute("data-site-filter-all")) {
+      topics = new Set(allTopics);
+    } else if (button.hasAttribute("data-news-reset")) {
       scores = new Set(["4", "5"]);
       topics = new Set(allTopics);
     } else {

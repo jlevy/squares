@@ -57,12 +57,14 @@ from kpress.format.assets import content_hash
 
 from devtools import site_assets
 from devtools.render_overview import (
+    EMBED_SCRIPT,
+    NAVIGATION_SCRIPT,
     PageMeta,
     favicon_html,
     head_tags,
     nav_shell,
-    visualize_tabs,
 )
+from devtools.site_navigation import breadcrumbs_html
 from workbench_tools.self_contained import assert_self_contained_html
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
@@ -99,6 +101,9 @@ RENDER_INPUTS = (
     ROOT / "devtools/render_overview.py",
     ROOT / "devtools/templates/site-nav.html",
     ROOT / "devtools/templates/site-nav.css",
+    ROOT / "devtools/site_navigation.py",
+    NAVIGATION_SCRIPT,
+    EMBED_SCRIPT,
     ROOT / "devtools/templates/paper-type.css",
     ROOT / "devtools/overview/theme.js",
     ROOT / "devtools/overview/headroom.js",
@@ -148,10 +153,7 @@ the window's floor so their last row is never under it.
 """
 
 #: The page's entry in the site's navigation bar, which marks it as the current page.
-NAV_PAGE = "explanations"
-#: The page's tab in the Explanations section, alongside Papers and Film
-#: (`papers.html` and `visualize.html`): the bar under the navigation marks it current.
-SECTION_TAB = "workbench"
+NAV_PAGE = "workbench/index.html"
 #: Where the site's root is from the page: it is served at `workbench/index.html`.
 NAV_ROOT = "../"
 
@@ -189,8 +191,8 @@ def with_nav(page: str) -> str:
     """Give the page the site's navigation bar, as every page of the site has it.
 
     The bar is the site's own, rendered from its one partial by `render_overview.nav_shell`
-    rather than written again here, with Explanations marked current and its links reaching
-    the site's root, and under it the Explanations section's tabs with Workbench current, so
+    rather than written again here, with Learn marked as its parent and its links reaching
+    the site's root, and under it the visual section's tabs with Workbench current, so
     this page and the film's (`visualize.html`) read as one section and every existing
     `workbench/` link lands on its tab. Its stylesheet and kpress's theme bootstrap open
     the head, so the reader's stored theme is on the root before anything is drawn; the
@@ -198,8 +200,13 @@ def with_nav(page: str) -> str:
     `assets/workbench.css` then lays out below it, and the gear's program closes the body.
     Like the note, it is a property of the published page: `body.capture` hides it.
     """
-    shell = nav_shell(NAV_PAGE, root=NAV_ROOT, tabs=visualize_tabs(SECTION_TAB, root=NAV_ROOT))
+    shell = nav_shell(NAV_PAGE, root=NAV_ROOT)
     shell = shell._replace(head=shell.head.replace(favicon_html(), favicon_html(inline=True)))
+    shell = shell._replace(
+        header=shell.header.replace(
+            "</header>", "</header>" + breadcrumbs_html(PAGE.path, PAGE.name, root=NAV_ROOT), 1
+        )
+    )
     head = HEAD.search(page)
     body = BODY.search(page)
     if head is None or body is None or "</body>" not in page:

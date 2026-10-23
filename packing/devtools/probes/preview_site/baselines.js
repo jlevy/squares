@@ -28,7 +28,7 @@
     label: (el.textContent ?? "").trim() || el.getAttribute("aria-label") || "",
     baseline: baseline(el),
     top: Math.round(el.getBoundingClientRect().top + window.scrollY),
-    current: el.getAttribute("aria-current") === "page",
+    current: ["page", "true"].includes(el.getAttribute("aria-current") ?? ""),
   });
   const nav = document.querySelector(".site-nav");
   const header = document.querySelector(".kpress-site-header");
@@ -39,7 +39,16 @@
     el !== null && Number.parseFloat(getComputedStyle(el).borderBottomWidth) > 0;
   const owner = [header, nav].find(ruled) ?? null;
   const rule = owner ? round(owner.getBoundingClientRect().bottom + window.scrollY) : null;
-  const links = [...document.querySelectorAll(".site-nav a[data-page]")].map(labelled);
+  const candidates = [
+    ...document.querySelectorAll(
+      ".site-nav-links > li > a, .site-nav-links > li > .site-nav-disclosure, .site-nav-inner > a[data-page], .site-nav-mobile-toggle",
+    ),
+  ];
+  const links = (
+    candidates.length ? candidates : [...document.querySelectorAll(".site-nav a[data-page]")]
+  )
+    .filter(shown)
+    .map(labelled);
   const strip = tabs ? [...tabs.querySelectorAll("a")].map(labelled) : [];
   const current = links.find((link) => link.current) ?? null;
   const currentTab = strip.find((tab) => tab.current) ?? null;

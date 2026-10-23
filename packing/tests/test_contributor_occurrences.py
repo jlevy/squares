@@ -647,3 +647,70 @@ def test_roles_are_one_published_vocabulary_enforced_by_schema_and_loader(
     write_yaml(path.parent / SCHEMA_PATH, schema)
     with pytest.raises(OccurrenceError, match="unknown credit role 'mastermind'"):
         load_occurrences(path, repo=REPO)
+
+
+@pytest.mark.parametrize(
+    "source_key",
+    [
+        "[Fitzharding n19 Lean 2026]",
+        "[PingYou PR 622 certificate 2026-10-15]",
+        "[de Winter upper bounds 2026-10-17]",
+        "[de Winter issue 666 2026-10-17]",
+    ],
+)
+def test_owner_confirmed_levy_credit_links_preserve_source_wording_and_role(
+    source_key: str,
+) -> None:
+    registry = load_occurrences()
+    origin = CreditOrigin("packing/resources/bibliography.yaml", source_key, "/credit")
+    person = next(item for item in registry.by_origin[origin] if item.label == "Levy")
+    assert person.role == "prerequisite"
+    assert person.contributor_id == "joshua-levy"
+    assert "owner-credit-links-2026-10-22" in person.evidence
+    rendered = render_credit(origin, person.expected_text, registry=registry)
+    assert '<a href="profiles/joshua-levy.html">Levy</a>' in rendered
+    assert text_content(rendered) == person.expected_text
+
+
+def test_t194_links_levy_without_changing_primary_authorship() -> None:
+    bibliography = load_yaml((PACKING / "resources/bibliography.yaml").read_text())
+    sources = {row["key"]: row for row in bibliography["sources"]}
+    records = load_yaml((PACKING / "frontier/results.yaml").read_text())["results"]
+    result = next(record for record in records if record["id"] == "T-194")
+    rendered = result_credit_html(result, sources)
+    assert '<a href="profiles/joshua-levy.html">Levy</a>' in rendered
+    assert sources["[Fitzharding n19 Lean 2026]"]["authors"] == ["Fitzharding"]
+    assert text_content(rendered) == credit_line(result, sources)
+
+
+def test_n183_links_only_the_person_name_inside_the_input_data_clause() -> None:
+    registry = load_occurrences()
+    origin = CreditOrigin(
+        "packing/resources/bibliography.yaml", "[Daniel n183 subgrid 2026-10-19]", "/credit"
+    )
+    person = next(item for item in registry.by_origin[origin] if item.label == "Levy")
+    assert person.role == "credited-contributor"
+    assert "daniel-n183-credit" in person.evidence
+    rendered = render_credit(origin, person.expected_text, registry=registry)
+    assert 'register seed data from <a href="profiles/joshua-levy.html">Levy</a>' in rendered
+    assert text_content(rendered) == person.expected_text
+
+
+def test_reviewed_project_and_ambiguous_operator_labels_do_not_become_person_links() -> None:
+    registry = load_occurrences()
+    project = [item for item in registry.occurrences if item.label == "hmbelvedere"]
+    assert project
+    for item in project:
+        assert item.disposition == "non-person"
+        assert item.contributor_id is None
+        assert ">hmbelvedere</a>" not in render_credit(
+            item.origin, item.expected_text, registry=registry
+        )
+    operator = [item for item in registry.occurrences if item.label == "BuddenPing"]
+    assert operator
+    for item in operator:
+        assert item.disposition == "unresolved"
+        assert item.contributor_id is None
+        assert ">BuddenPing</a>" not in render_credit(
+            item.origin, item.expected_text, registry=registry
+        )

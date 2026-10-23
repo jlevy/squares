@@ -162,7 +162,7 @@ DOCUMENTS: tuple[SiteDocument, ...] = (
     _document(
         repo_links.EPISTEMICS,
         "epistemics.html",
-        "Epistemics",
+        "Project Epistemics",
         "How square packing claims are verified and independently confirmed, "
         "with the evidence and significance levels used in the result register.",
     ),
@@ -198,7 +198,7 @@ _BY_SOURCE = {doc.source.relative_to(REPO).as_posix(): doc for doc in DOCUMENTS}
 #: page that shows what it holds.
 RECORD_PAGES: dict[str, str] = {
     repo_links.RESULTS: render_overview.RESULTS_PAGE,
-    repo_links.STATUS: "atlas.html",
+    repo_links.STATUS: "frontier.html",
     repo_links.CHANGELOG: "news.html#changelog",
 }
 #: Where every case's record is served, one address per case (`render_case_pages`).
@@ -473,6 +473,8 @@ def render_document(
     document: SiteDocument, *, tree: RepositoryTree, report: LinkReport
 ) -> Page:
     """One reader document as a kpress page with its links rewritten."""
+    from devtools.paper_front import source_actions  # noqa: PLC0415
+
     base = posixpath.dirname(document.source.relative_to(REPO).as_posix())
     context = LinkContext(
         document.name,
@@ -482,7 +484,9 @@ def render_document(
         aliases=record_aliases(tree),
     )
     return render_overview.kpress_page(
-        without_alert_markers(
+        source_actions(document.source)
+        + "\n\n"
+        + without_alert_markers(
             without_manual_contents(document.source.read_text(encoding="utf-8"))
         ),
         name=document.name,
@@ -670,6 +674,8 @@ def synopsis_parts(full: Page) -> tuple[Page, list[Page]]:
     Splitting rendered HTML preserves kpress's heading and footnote identifiers. Each
     historic anchor on synopsis.html names its chapter link, so it works without script.
     """
+    from devtools.paper_front import source_actions  # noqa: PLC0415
+
     article = _ARTICLE.search(full.html)
     if article is None:
         raise SystemExit("synopsis.html has no article")
@@ -719,7 +725,10 @@ def synopsis_parts(full: Page) -> tuple[Page, list[Page]]:
         )
         # Footnotes keep their body in the last source section. A cross-chapter target
         # is resolved after every chapter's anchor map has been collected below.
-        body = f"<article><h1>{html.escape(title)}</h1>{nav}{content}{nav}</article>"
+        body = (
+            f"<article>{source_actions(REPO / repo_links.SYNOPSIS)}"
+            f"<h1>{html.escape(title)}</h1>{nav}{content}{nav}</article>"
+        )
         meta = render_overview.PageMeta(
             f"Synopsis: {title}",
             (

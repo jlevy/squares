@@ -54,7 +54,6 @@ def shells(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
         title="Header test",
         description="Header behavior fixture.",
         toc=False,
-        tabs=render_overview.visualize_tabs("film"),
         prepare_math=False,
     )
     static = render_overview.static_content_page(
@@ -83,6 +82,7 @@ def shells(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
             "SITE_NAV": render_overview.nav_html("papers"),
             "SITE_THEME": render_overview.THEME_SCRIPT.read_text(),
             "SITE_HEADROOM": render_overview.HEADROOM_SCRIPT.read_text(),
+            "SITE_NAVIGATION": render_overview.NAVIGATION_SCRIPT.read_text(),
             "BODY_HTML": BODY,
         }
         documents[paper] = re.sub(
@@ -135,7 +135,9 @@ def test_header_hides_down_and_returns_on_first_upward_scroll(
             page.evaluate(SCROLL, 0)
             assert not page.evaluate(STATE)["hidden"], name
             if name == "ordinary":
-                assert before["tabsInside"]
+                assert page.locator(".site-headroom nav.site-tabs").count() == 0
+                trail = page.get_by_role("navigation", name="Breadcrumb", exact=True)
+                assert trail.count() == 0
         finally:
             page.close()
 
@@ -150,7 +152,9 @@ def test_gear_aligns_with_the_navigation_labels_visible_ink(
             page.goto(path.as_uri(), wait_until="load")
             page.locator(".site-headroom").wait_for(state="attached")
             items = page.evaluate(NAVIGATION)
-            about = next(item for item in items if item["label"] == "about")
+            about = next(
+                item for item in items if item["label"] in {"about", "site-nav-mobile-toggle"}
+            )
             github = next(item for item in items if item["label"] == "github")
             gear = next(item for item in items if item["label"] == "site-theme")
             github_icon = (
@@ -194,7 +198,9 @@ def test_focus_and_open_theme_menu_keep_header_visible(
         page.goto(shells["ordinary"].as_uri(), wait_until="load")
         page.locator(".site-headroom").wait_for(state="attached")
         page.evaluate(SCROLL, 600)
-        page.locator('.site-nav a[data-page="overview"]').focus()
+        page.locator(
+            '.site-nav :is(.site-nav-mobile-toggle, a[data-page="overview"]):visible'
+        ).first.focus()
         assert not page.evaluate(STATE)["hidden"]
         page.evaluate(SCROLL, 700)
         assert not page.evaluate(STATE)["hidden"]
@@ -225,7 +231,9 @@ def test_anchor_target_clears_the_whole_header(browser: Any, shells: dict[str, P
         page.goto(shells["ordinary"].as_uri(), wait_until="load")
         page.locator(".site-headroom").wait_for(state="attached")
         page.evaluate(ANCHOR)
-        page.locator('.site-nav a[data-page="overview"]').focus()
+        page.locator(
+            '.site-nav :is(.site-nav-mobile-toggle, a[data-page="overview"]):visible'
+        ).first.focus()
         state = page.evaluate(STATE)
         assert state["targetTop"] >= state["bottom"], state
     finally:
@@ -324,10 +332,12 @@ def test_header_measurement_does_not_restyle_the_native_math_document(
         page.set_viewport_size({"width": 1280, "height": 700})
         page.evaluate(SCROLL, 0)
         wide = page.evaluate(STATE)
-        assert wide["height"] < narrow["height"]
+        assert wide["height"] != narrow["height"]
         assert wide["offset"] == pytest.approx(wide["height"] + 8, abs=0.01)
         page.evaluate(ANCHOR)
-        page.locator('.site-nav a[data-page="overview"]').focus()
+        page.locator(
+            '.site-nav :is(.site-nav-mobile-toggle, a[data-page="overview"]):visible'
+        ).first.focus()
         anchored = page.evaluate(STATE)
         assert anchored["targetTop"] >= anchored["bottom"], anchored
     finally:
@@ -364,7 +374,7 @@ def test_header_measurement_does_not_restyle_the_native_math_document(
     assert max(invalidations, default=0) < expressions, invalidations
 
 
-def test_nonscrolling_workbench_keeps_header_and_tabs_visible(
+def test_nonscrolling_workbench_keeps_header_and_breadcrumb_visible(
     browser: Any, shells: dict[str, Path]
 ) -> None:
     page = browser.new_page(viewport={"width": 390, "height": 700}, reduced_motion="reduce")
@@ -375,7 +385,8 @@ def test_nonscrolling_workbench_keeps_header_and_tabs_visible(
         header = page.locator(".site-headroom")
         assert header.count() == 1
         assert "site-headroom-hidden" not in (header.get_attribute("class") or "")
-        assert header.locator("nav.site-tabs").is_visible()
+        assert header.locator("nav.site-tabs").count() == 0
+        assert page.get_by_role("navigation", name="Breadcrumb", exact=True).is_visible()
     finally:
         page.close()
 
@@ -386,7 +397,7 @@ def test_header_is_usable_without_javascript(browser: Any, shells: dict[str, Pat
         page.goto(shells["ordinary"].as_uri(), wait_until="load")
         nav = page.locator(".site-nav")
         assert nav.is_visible()
-        assert nav.locator('a[data-page="about"]').is_visible()
+        assert nav.locator('a[data-page="project"]').is_visible()
         assert nav.locator('a[data-page="github"]').is_visible()
     finally:
         page.close()

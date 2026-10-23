@@ -198,7 +198,7 @@ def prepared_html(source: str, slots: list[MathSlot], fragments: list[PreparedFr
 _MEASURE_MATH_REFERENCE = probe(PROBES, "prepare_n11_lower_bounds_explainer_math/measure_math")
 
 #: The slot measurement itself, called with the sorted math attribute names.
-_MEASURE_MATH = applied(_MEASURE_MATH_REFERENCE)
+MEASURE_MATH = applied(_MEASURE_MATH_REFERENCE)
 
 
 _COMBINE_MATH_VARIANTS = probe(
@@ -263,7 +263,7 @@ def prepare_math_html(source: str) -> str:
                 contexts.append(
                     {
                         "name": f"{font_set}-{prose_font}",
-                        "fragments": page.evaluate(_MEASURE_MATH, sorted(_MATH_ATTRIBUTES)),
+                        "fragments": page.evaluate(MEASURE_MATH, sorted(_MATH_ATTRIBUTES)),
                     }
                 )
             assert page is not None

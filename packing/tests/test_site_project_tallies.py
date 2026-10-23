@@ -1,6 +1,6 @@
 """The other projects' order, their tallies of results, and the links the tallies carry.
 
-The overview and profile resources rank catalogues, repositories and websites together
+The directory and profile resources rank catalogues, repositories and websites together
 by the significance of the primary results the register attributes to each. A card
 with registered results ends with a tally, `6 results (3 at S4, 3 at
 S3)`, whose total opens the results table on that project's results and whose counts
@@ -50,7 +50,7 @@ from tests import site_renders
 PROBES = Path(__file__).resolve().parent / "probes"
 PRESETS = probe(PROBES, "site_result_filters/presets")
 LEVELS = (5, 4, 3, 2, 1)
-SECTION = 'id="other-square-packing-projects"'
+SECTION = 'id="resources"'
 
 
 def _order(results: list[Cited], projects: str) -> str:
@@ -116,7 +116,7 @@ def test_projects_level_on_every_count_stand_newest_first_then_by_name() -> None
     assert project_order(tallies, renamed) == ["c", "a", "b", "d", "Y", "z"]
 
 
-@pytest.mark.parametrize("on_profile", [False, True], ids=["homepage", "profile"])
+@pytest.mark.parametrize("on_profile", [False, True], ids=["directory", "profile"])
 def test_shared_resource_cards_rank_every_kind_and_ignore_inventory_order(
     monkeypatch: pytest.MonkeyPatch, *, on_profile: bool
 ) -> None:
@@ -319,7 +319,7 @@ def overview() -> overview_data.Overview:
 
 @pytest.fixture(scope="module")
 def page() -> str:
-    return site_renders.html("index.html")
+    return site_renders.html("resources.html")
 
 
 @pytest.fixture(scope="module")
@@ -602,7 +602,13 @@ def test_a_tally_link_selects_exactly_its_projects_rows(
     assert not re.search(r"<tr id=\"t-\d+\"[^>]*\shidden", results)
     bar = results.split('<div class="site-table-tools site-result-filters">', 1)[1]
     bar = bar.split("</div>", 1)[0]
-    assert bar.count("<label hidden>") == 4
+    preset_labels = re.findall(r"<label hidden>(.*?)</label>", bar)
+    assert {label.split(" <", 1)[0] for label in preset_labels if "data-preset" in label} == {
+        "Project",
+        "At significance",
+        "Added on",
+        "Added since",
+    }
     assert (
         '<label hidden>Project <select data-filter="project" data-bound="has" data-preset>'
         in bar
@@ -679,7 +685,7 @@ def browser() -> Iterator[Any]:
 def site(tmp_path_factory: pytest.TempPathFactory) -> Path:
     """The project catalogue and results page, so a tally link between them works."""
     root = tmp_path_factory.mktemp("site")
-    site_renders.write(root, "index.html", render_overview.RESULTS_PAGE)
+    site_renders.write(root, "resources.html", render_overview.RESULTS_PAGE)
     return root
 
 
@@ -689,7 +695,7 @@ def _follow(browser: Any, site: Path, overview: overview_data.Overview, link: st
     opened = browser.new_page(viewport={"width": 1280, "height": 900})
     noon = datetime.combine(overview_sections.reference_date(overview), time(12))
     opened.clock.set_fixed_time(noon)
-    opened.goto((site / "index.html").as_uri(), wait_until="load")
+    opened.goto((site / "resources.html").as_uri(), wait_until="load")
     target = opened.locator(f'.site-card-foot a[href="{link}"]')
     assert target.count() == 1, link
     target.scroll_into_view_if_needed()
@@ -708,7 +714,7 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     """In Chromium: the total of the first card that has two levels opens the results
     page on exactly that project's rows, with the count saying how many of the register
     they are and the Project control in the bar, naming the project; a level's count
-    opens the same rows at that level alone, with At significance in the bar beside it.
+    opens the same rows at that level alone, with only its visible S segment selected.
     Setting Project back to All takes it out of the bar and shows the other projects'
     rows at that level again."""
     url, tally = next(
@@ -766,10 +772,15 @@ def test_following_a_cards_links_shows_the_rows_they_count(
         assert found["count"] == overview_sections.count_text(len(at_level), total)
         assert [(preset["value"], preset["out"]) for preset in found["presets"]] == [
             (slug, False),
-            (str(level), False),
+            (str(level), True),
             ("", True),
         ]
-        assert found["presets"][1]["choice"] == f"S{level}"
+        assert {
+            int(button.get_attribute("data-site-score") or "0")
+            for button in opened.locator(
+                '[data-site-significance] button[aria-pressed="true"]'
+            ).all()
+        } == {level}
         opened.select_option('select[data-filter="project"]', "")
         cleared = opened.evaluate(PRESETS)
     finally:
@@ -783,7 +794,7 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     assert len(everyone) > len(at_level)
     assert [(preset["value"], preset["out"]) for preset in cleared["presets"]] == [
         ("", True),
-        (str(level), False),
+        (str(level), True),
         ("", True),
     ]
 

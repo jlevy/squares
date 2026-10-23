@@ -111,7 +111,7 @@ def results(browser: Any, root: Path) -> Walk:
 
 @pytest.fixture(scope="module")
 def frontier_atlas(browser: Any, root: Path) -> Walk:
-    path = site_renders.write(root, "atlas.html")["atlas.html"]
+    path = site_renders.write(root, "frontier.html")["frontier.html"]
     return walk(browser, path.as_uri(), presses=(), whole=False)
 
 
@@ -122,7 +122,7 @@ def served(root: Path) -> Iterator[str]:
         yield live.rstrip("/") + "/"
         return
     files = [
-        site_renders.page("atlas.html"),
+        site_renders.page("frontier.html"),
         *(
             render_overview.Page(
                 render_case_pages.case_url(n),
@@ -163,7 +163,7 @@ def case_records(browser: Any, served: str) -> dict[int, Walk]:
 def frontier_popover(browser: Any, served: str) -> Walk:
     """The frontier page with case 11's row pressed: its record in the case popover."""
     return walk(
-        browser, f"{served}atlas.html", presses=("#n-11 td.site-thumb img",), whole=False
+        browser, f"{served}frontier.html", presses=("#n-11 td.site-thumb img",), whole=False
     )
 
 
@@ -216,6 +216,8 @@ def test_the_case_popover_sets_its_count_serif_and_its_panels_sans(
     and math; numeric rails and other panels keep their sans faces."""
     wrong, rows = frontier_popover
     assert wrong == []
+    pager = rows[("case navigation", SANS_TEXT, SERIF_MATH)]
+    assert pager["count"] == pager["alone"] == 2
     assert rows[("popover", SANS_TEXT, SANS_MATH)]["count"] > 0
     assert rows[("visual summary", SANS_TEXT, SANS_MATH)]["count"] > 0
     assert rows[("visual summary", SERIF_TEXT, SERIF_MATH)]["count"] > 0
@@ -234,20 +236,23 @@ def test_the_case_popover_sets_its_count_serif_and_its_panels_sans(
 def test_a_case_records_panels_set_sans_math(case_records: dict[int, Walk], n: int) -> None:
     wrong, rows = case_records[n]
     assert wrong == []
+    pager = rows[("case navigation", SANS_TEXT, SERIF_MATH)]
+    assert pager["count"] == pager["alone"] == 2
     for surface in ("case bounds", "visual summary"):
         assert rows[(surface, SANS_TEXT, SANS_MATH)]["count"] > 0, surface
     assert rows[("case head", SERIF_TEXT, SERIF_MATH)]["count"] == 1
     assert rows[("visual summary", SERIF_TEXT, SERIF_MATH)]["count"] > 0
     count = rows[("case head", SANS_TEXT, SERIF_MATH)]
     assert count["count"] == count["alone"] == 1
-    serif_head = {
+    allowed_serif_case = {
+        ("case navigation", SANS_TEXT, SERIF_MATH),
         ("case head", SANS_TEXT, SERIF_MATH),
         ("case head", SERIF_TEXT, SERIF_MATH),
     }
     assert not [
         key
         for key in rows
-        if key[0].startswith("case") and key[2] != SANS_MATH and key not in serif_head
+        if key[0].startswith("case") and key[2] != SANS_MATH and key not in allowed_serif_case
     ]
 
 
@@ -298,7 +303,7 @@ def test_frontier_native_math_wrong_face_is_reported(
     frontier_math_counts: tuple[int, int],
     tmp_path: Path,
 ) -> None:
-    path = site_renders.write(tmp_path, "atlas.html")["atlas.html"]
+    path = site_renders.write(tmp_path, "frontier.html")["frontier.html"]
     source = path.read_text()
     source = source.replace(
         "</head>",

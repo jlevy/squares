@@ -787,11 +787,13 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | conventions.html | conventions.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | defects.html | https://github.com/jlevy/squares/blob/main/defects.md | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → https://github.com/jlevy/squares/blob/main/defects.md |
 | development.html | development.html | page | overview | 2026-09-29 | 2026-10-22 | live |
+| documentation.html | documentation.html | page | overview | 2026-10-22 | 2026-10-22 | live |
+| downloads.html | posters.html | forwarder | overview | 2026-10-22 | 2026-10-22 | forwarded → posters.html |
 | epistemics.html | epistemics.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | explainer.html | papers/n11-lower-bounds-explainer.html | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → papers/n11-lower-bounds-explainer.html |
 | favicon-48.png | favicon-48.png | asset-file | overview | 2026-10-07 | 2026-10-22 | live |
 | favicon.svg | favicon.svg | asset-file | overview | 2026-10-07 | 2026-10-22 | live |
-| frontier.html | atlas.html | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → atlas.html |
+| frontier.html | frontier.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | index.html | / | page | overview | 2026-09-29 | 2026-10-22 | live |
 | known-best-1-100-card.png | known-best-1-100-card.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-22 | live |
 | known-best-1-100.pdf | square-packings-100-20261008.pdf | copy | assembly | 2026-09-29 | 2026-10-22 | live → square-packings-100-20261008.pdf |
@@ -818,6 +820,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | papers/square-packing-methods-survey.html | papers/square-packing-methods-survey.html | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-17 | live |
 | papers/square-packing-methods-survey.md | papers/square-packing-methods-survey.md | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-17 | live |
 | papers/square-packing-methods-survey.pdf | papers/square-packing-methods-survey.pdf | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-17 | live |
+| posters.html | posters.html | page | overview | 2026-10-08 | 2026-10-22 | live |
 | profiles/ahyangyi.html | profiles/ahyangyi.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/allen-chang.html | profiles/allen-chang.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/anabologyco-maker.html | profiles/anabologyco-maker.html | page | overview | 2026-10-13 | 2026-10-22 | live |
@@ -895,6 +898,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/yohei-nakajima.html | profiles/yohei-nakajima.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/zk-shangitbayev.html | profiles/zk-shangitbayev.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | readme.html | readme.html | page | overview | 2026-09-29 | 2026-10-22 | live |
+| recent-results.html | results.html | forwarder | overview | 2026-10-08 | 2026-10-22 | forwarded → results.html |
+| report.html | report.html | page | overview | 2026-10-22 | 2026-10-22 | live |
+| resources.html | resources.html | page | overview | 2026-10-08 | 2026-10-22 | live |
 | result/t-001.html | result/t-001.html | result | overview | 2026-08-31 | 2026-08-31 | live |
 | result/t-002.html | result/t-002.html | result | overview | 2026-08-31 | 2026-08-31 | live |
 | result/t-003.html | result/t-003.html | result | overview | 2026-08-31 | 2026-08-31 | live |
@@ -1154,6 +1160,8 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | t-018-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | copy | assembly | 2026-09-29 | 2026-10-22 | live → papers/n11-lower-bounds-explainer.pdf |
 | tutorial-advanced.html | tutorial-advanced.html | page | overview | 2026-10-14 | 2026-10-22 | live |
 | tutorial.html | tutorial.html | page | overview | 2026-09-29 | 2026-10-22 | live |
+| tutorials.html | tutorials.html | page | overview | 2026-10-22 | 2026-10-22 | live |
+| verification.html | verification.html | page | overview | 2026-10-08 | 2026-10-22 | live |
 | visualize.html | visualize.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | workbench/assets/{css,js,fonts}/*.{hash}.{ext} | — | asset-file | workbench | 2026-10-07 | 2026-10-22 | live |
 | workbench/data/corpus.{hash}.json | — | asset-file | workbench | 2026-10-07 | 2026-10-22 | live |
@@ -1174,10 +1182,11 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 
 | Physical path | Bytes | Reason |
 | --- | ---: | --- |
-| atlas.html | 1,050,000 | Combined 324-case Atlas measures 862,357 bytes: 688,112 for the complete Frontier Survey and 174,245 for graphics and the shared shell. With the person profiles (#578) it measured 1,005,866 bytes on 21 October 2026: its 344 reviewed credit links to profiles cost 14,692 bytes, recognised by address with no per-link marker, and the page is 991,174 without them. No timing was re-measured for this change. |
+| atlas.html | 400,000 | On 22 October 2026 the standalone 324-case Visual Atlas measures 295,318 bytes with every drawing visible by default and one shared case popover. The 400,000-byte ceiling leaves 104,682 bytes above this measurement. The complete bounds table has its own Frontier Survey budget. |
 | cases/11.html | 500,000 | Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes. |
 | cases/17.html | 550,000 | Complete n=17 proof/certificate record and prepared bounds measure 501,977 bytes on 16 October 2026 with T-154's source-build evidence, 499,855 on main at 26d8bb335. The ceiling leaves room for the open n=17 intakes. |
 | cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 326,548 bytes. |
+| frontier.html | 900,000 | On 22 October 2026 the standalone Frontier Survey measures 731,612 bytes for all 324 rows, exact native MathML, credit links, the concise reading key and the shared shell. The 900,000-byte ceiling leaves 168,388 bytes above that measurement; row details remain fetched on demand. Timing has not been re-measured for the split. |
 | index.html | 1,300,000 | The shared 100-case Atlas preview includes all 324 canonical case links and per-case SVG references, with common controls, reading and documentation cards. Retained desktop/mobile expansion checks cover the prepared shared row layout. The page-specific ceiling remains below the global two-megabyte limit. |
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |
 | papers/n11-threshold-bound-review.html | 900,000 | The 401-formula review measures 823,322 bytes after sharing font geometry. Its 842,245-byte edition passed three-run desktop/mobile, light/dark and no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves headroom above the measured edition. |
