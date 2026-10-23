@@ -17,10 +17,12 @@ axiom receipt and an open-review pointer at rung 5), and rejects unknown result 
 in the reader tier. It holds every `headline` to one table cell that states no
 number its claim does not, dates every result of this project by `established`
 and every result by others by `attribution.published`, never both, and requires
-each entry's `registered` date. It requires each entry's `kind`, one of `KINDS`,
-and cross-checks it against the relations the headline and the claim state and
-the claims of the cited evidence (`kind_problems`). It holds a `superseded_by`, the
-later results a result of a kind that is no bound declares imply it in whole or in part,
+each entry's `registered` date and a `significance.by` of more than one word, which a
+YAML comment cut short on three entries (`significance_by_problems`). It requires
+each entry's `kind`, one of `KINDS`, and cross-checks it against the relations the
+headline and the claim state and the claims of the cited evidence (`kind_problems`).
+It holds a `superseded_by`, the later results a result of a kind that is no bound
+declares imply it in whole or in part,
 to registered results dated no earlier, on a case it shares, and refuses one on a bound,
 whose supersession is derived (`superseded_by_problems`). It holds a `builds_on`, which
 puts `after …` in the credit of a result of this project, to the sources the
@@ -1510,6 +1512,26 @@ def _iso_date(value: object) -> date | None:
         return None
 
 
+def significance_by_problems(record: Mapping[str, Any]) -> list[str]:
+    """A `significance.by` of one word, which says nothing of who scored the result.
+
+    YAML reads `` #`` after a space as the start of a comment, so an unquoted
+    `by: issue #227 intake ...` records `issue`: the scorer and the issue were lost from
+    T-056, T-057 and T-061 until they were rescored (the import review of 2026-10-01,
+    W9). A path alone is one word too, and it names a document rather than who scored
+    the result or in which role (think-nr59).
+    """
+    by = str((record.get("significance") or {}).get("by") or "")
+    if len(by.split()) >= 2:
+        return []
+    return [
+        (
+            f"{record['id']}: significance.by is one word, {by!r}: name who scored the "
+            "result, and quote a value that holds ' #', which YAML would read as a comment"
+        )
+    ]
+
+
 def registered_problems(record: dict, last_reviewed: str) -> list[str]:
     """What is wrong with a result's `registered` date.
 
@@ -1710,6 +1732,7 @@ def main() -> int:
         problems.extend(builds_on_problems(record, sources, cited))
         problems.extend(corrects_problems(record, sources, by_id))
         problems.extend(registered_problems(record, str(register["last_reviewed"])))
+        problems.extend(significance_by_problems(record))
         problems.extend(headline_problems(record))
         problems.extend(kind_problems(record, cited, scopes, evidence_of, by_id))
         problems.extend(superseded_by_problems(record, dated, scopes, holding))

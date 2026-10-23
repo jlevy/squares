@@ -2053,3 +2053,19 @@ def test_registration_backfill_preserves_second_proof_dates_and_is_idempotent() 
     )
     assert backfill_result_registration.insert_dates(text, dates) == wanted
     assert backfill_result_registration.insert_dates(wanted, dates) == wanted
+
+
+def test_a_significance_by_of_one_word_is_refused() -> None:
+    """An unquoted ``by: issue #227 intake ...`` reads as ``issue``: YAML takes the rest
+    for a comment, and the scorer of T-056, T-057 and T-061 was lost that way until they
+    were rescored (think-nr59). A bare path is one word as well and names no scorer."""
+    cut = yaml.safe_load("significance:\n  by: issue #227 intake, draft\n")["significance"]
+    assert cut["by"] == "issue"
+    (problem,) = check_results.significance_by_problems({"id": "T-001", "significance": cut})
+    assert problem.startswith("T-001: significance.by is one word, 'issue'")
+    path = {"by": "docs/project/reviews/review-2026-10-07-squish-update-mathematics.md"}
+    assert check_results.significance_by_problems({"id": "T-002", "significance": path})
+    quoted = yaml.safe_load("significance:\n  by: 'issue #227 intake, draft'\n")
+    assert check_results.significance_by_problems({"id": "T-003", **quoted}) == []
+    live = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))["results"]
+    assert [found for r in live for found in check_results.significance_by_problems(r)] == []

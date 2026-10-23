@@ -12370,7 +12370,10 @@ results:
       rationale: Twelve confirmed case-bound improvements, adding seven counts and tightening five
         submitted bounds; no exact optimum or general theorem is established.
       scored: '2026-10-07'
-      by: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+      by: >-
+        the repository's import triage of 7 October, kept when
+        docs/project/reviews/review-2026-10-07-squish-update-mathematics.md accepted the
+        certificates; that review does not assess significance
     novelty: previously-published
     attribution:
       source_keys:
