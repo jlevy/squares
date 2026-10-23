@@ -30,7 +30,9 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
     profile = retained["profile"]
     # Re-derived after the 17 October adoption: T-174's three calibration witnesses
     # add 48 structured squares, and 86 no longer changes under the sensitivity sweep.
-    # T-195 moves n = 29 from the catalogue's stratum to the packets'.
+    # T-195 moves n = 29 from the catalogue's stratum to the packets'. The adoption of
+    # 23 October 2026 (think-ot5c) gives 70 T-174's algebraic witness, whose contact
+    # components have three more internal slide degrees of freedom: 867 to 870.
     assert profile["aggregate"] == {
         "case_count": 36,
         "contact_component_count": 163,
@@ -40,7 +42,7 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
             "at_least_90_percent": 27,
         },
         "fully_structured_cases": 9,
-        "internal_slide_dof": 867,
+        "internal_slide_dof": 870,
         "narrow_partition_status_counts": {
             "established": 3,
             "not-established": 24,
