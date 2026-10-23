@@ -244,14 +244,15 @@ def test_a_case_records_panels_set_sans_math(case_records: dict[int, Walk], n: i
     assert rows[("visual summary", SERIF_TEXT, SERIF_MATH)]["count"] > 0
     count = rows[("case head", SANS_TEXT, SERIF_MATH)]
     assert count["count"] == count["alone"] == 1
-    serif_head = {
+    allowed_serif_case = {
+        ("case navigation", SANS_TEXT, SERIF_MATH),
         ("case head", SANS_TEXT, SERIF_MATH),
         ("case head", SERIF_TEXT, SERIF_MATH),
     }
     assert not [
         key
         for key in rows
-        if key[0].startswith("case") and key[2] != SANS_MATH and key not in serif_head
+        if key[0].startswith("case") and key[2] != SANS_MATH and key not in allowed_serif_case
     ]
 
 

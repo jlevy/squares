@@ -510,10 +510,10 @@ def test_a_record_file_serves_its_complete_page_and_navigates_ordinary_links(
         )
 
 
-def test_the_old_one_page_address_arrives_at_the_atlas_row(browser: Any, served: str) -> None:
+def test_the_old_one_page_address_arrives_at_the_frontier_row(browser: Any, served: str) -> None:
     with _page(browser) as page:
         page.goto(f"{served}cases.html#n-17", wait_until="load")
-        page.wait_for_url(f"{served}atlas.html#n-17", wait_until="load")
+        page.wait_for_url(f"{served}frontier.html#n-17", wait_until="load")
         site_browser.api().expect(page.locator("#n-17")).to_be_in_viewport()
 
 

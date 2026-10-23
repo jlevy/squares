@@ -17,8 +17,8 @@ publication remain in progress.
 `think-izo6` (substantive collection pages); `think-39yu` (semantic test migration);
 `think-j62t` (All Results actions); `think-5enz` (homepage ordering and Resources);
 `think-k2y7` (document source actions).
-Heading audits `think-0pff` and `think-syrd` are queued after stabilization and
-publication.
+Heading audits `think-0pff` and `think-syrd`, and the narrow breadcrumb font-loading
+follow-up `think-b1nf`, are queued after stabilization and publication.
 
 **Workflow:** `tbd shortcut implement-beads`, following the reviewed navigation plan
 
@@ -888,28 +888,30 @@ A menu change must not introduce a new rendering or navigation fetch dependency.
 
 ## Rollout Plan
 
-Land this plan separately from the current presentation and domain work.
-Implement only after its review choices are settled.
-Publish the shared hierarchy and matching landing-page links together, with the site
-build’s existing URL and link checks.
+The shared hierarchy and matching landing pages are implemented together in PR #737.
+Complete current-head CI, integrated reader checks, and the site build’s existing URL
+and link checks before publication.
 
 Keep the route register and compatibility outputs intact throughout.
-Check the live Home, Results, Atlas bounds anchor, Learn, a profile, a result, and
-Workbench after publication.
+Check the live Overview, All Results, Visual Atlas, Frontier Survey, Learn, a profile, a
+result, and Workbench after publication, including the legacy Atlas bounds anchors.
 A revert of the navigation implementation restores the preceding layout without changing
 scientific records or invalidating published URLs.
 
-## Open Questions
+## Resolved Decisions
 
-- **Homepage selection?** Recommend retaining the Atlas preview and recent news/results,
-  with a smaller selection of learning content.
+- **Homepage selection.** Retain the bounded Atlas preview and recent news/results,
+  followed by the selected Learn cards immediately after Results.
   The homepage people section retains its short statement and View All Profiles button.
   About links the directory contextually in the project narrative.
-  Choose learning cards during visual review rather than inventing a new ranking policy
-  in this plan.
-- **Frontier as its own page?** Recommend the direct Results menu anchor and Atlas local
-  navigation first. Revisit only with evidence that the combined page remains difficult
-  to use or exceeds its measured rendering limits.
+  Resources uses the same label as its page and menu; About the Squares Project is the
+  final homepage section.
+- **Frontier as its own page.** Frontier Survey is a substantive page at `frontier.html`
+  with the bound definitions and complete table.
+  Its Results menu entry sits alongside Visual Atlas and All Results.
+  Visual Atlas shows all 324 packings by default and contains no survey section or local
+  section menu. Legacy Atlas survey anchors and filter links forward to the corresponding
+  Frontier Survey destination.
 
 ## References
 

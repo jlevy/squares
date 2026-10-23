@@ -20,13 +20,14 @@
     expand_right: expand.getBoundingClientRect().right,
     next_top: next.getBoundingClientRect().top,
     next_bottom: next.getBoundingClientRect().bottom,
-    pager_math: steps.map((step) => ({
-      text: step.querySelector(".kpress-math-semantic math")?.textContent,
-      family: step.querySelector(".katex")
-        ? getComputedStyle(step.querySelector(".katex")).fontFamily
-        : null,
-      prepared: step.querySelectorAll('[data-kpress-math-prepared="true"]').length,
-    })),
+    pager_math: steps.map((step) => {
+      const math = step.querySelector(".katex");
+      return {
+        text: step.querySelector(".kpress-math-semantic math")?.textContent,
+        family: math ? getComputedStyle(math).fontFamily : null,
+        prepared: step.querySelectorAll('[data-kpress-math-prepared="true"]').length,
+      };
+    }),
     cross_left: box.left,
     cross_right: box.right,
     next_right: next.getBoundingClientRect().right,

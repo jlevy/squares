@@ -45,6 +45,7 @@
     const rect = document.querySelector(selector)?.getBoundingClientRect();
     return rect ? { right: rect.right, top: rect.top, bottom: rect.bottom } : null;
   };
+  const title = document.querySelector("h1");
   return {
     samples,
     protected: config?.protectRungs
@@ -66,9 +67,7 @@
     reset: box("[data-news-reset]"),
     count: box("[data-news-count]"),
     topics: box("[data-site-filter-trigger]"),
-    titleBottom: document.querySelector("h1")
-      ? getComputedStyle(document.querySelector("h1")).marginBottom
-      : null,
+    titleBottom: title ? getComputedStyle(title).marginBottom : null,
     overflow: document.documentElement.scrollWidth - innerWidth,
   };
 };

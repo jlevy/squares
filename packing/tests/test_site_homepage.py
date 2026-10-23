@@ -1484,7 +1484,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 )
             page.goto(f"{ORIGIN}results.html", wait_until="load")
             results_state = state()
-            # Results kind chips retain their own palette; News topics share one surface.
+            # Results kinds and News topics share a neutral surface; kind inks retain their hues.
             assert len(set(results_state["topic_palette"].values())) > 1
             for key in ("font-family", "font-size", "font-weight", "line-height", "color"):
                 assert news_count[key] == results_state["count_style"][key], (scheme, key)

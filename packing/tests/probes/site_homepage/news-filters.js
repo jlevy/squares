@@ -227,7 +227,7 @@ async (options) => {
       [...document.querySelectorAll(".site-news-topics .site-chip, .site-chip[data-kind]")].map(
         (chip) => [
           chip.getAttribute("data-news-topic") || chip.getAttribute("data-kind"),
-          getComputedStyle(chip).backgroundColor,
+          getComputedStyle(chip).color,
         ],
       ),
     ),
