@@ -1,0 +1,29 @@
+T-229@105 F0 expect=accept verdicts={'review_Z': True, 'review_C': True, 'exact_verify': True, 'independent': True} ok=True
+    maintained: exact_verify wall=0 gap=5257900307825346118929446398323967784357 fail=[]; independent wall=0 gap=5257900307825346118929446398323967784357 fail=[]
+    review: Z wall=0 gap=5257900307825346118929446398323967784357 touch=[] overlaps=[] wallfail=[]; C touch=[] overlaps=[] agree=True
+T-229@105 F1 expect=refuse verdicts={'review_Z': False, 'review_C': False, 'exact_verify': False, 'independent': False} ok=True
+    maintained: exact_verify wall=-1/1000000000000000000000000000000 gap=5257900307825346118929446398323967784357 fail=["('container', 'square 0 violates y<=s')"]; independent wall=-1/1000000000000000000000000000000 gap=5257900307825346118929446398323967784357 fail=['container penetration -1/1000000000000000000000000000000']
+    review: Z wall=-1/1000000000000000000000000000000 gap=5257900307825346118929446398323967784357 touch=[] overlaps=[] wallfail=[[1, 'y<=S'], [2, 'y<=S'], [10, 'x<=S'], [11, 'y<=S'], [12, 'y<=S']]; C touch=[] overlaps=[] agree=True
+T-229@105 N0 expect=accept verdicts={'review_Z': True, 'review_C': True, 'exact_verify': True, 'independent': True} ok=True
+    maintained: exact_verify wall=0 gap=5257900307825346118929446398323967784357 fail=[]; independent wall=0 gap=5257900307825346118929446398323967784357 fail=[]
+    review: Z wall=0 gap=5257900307825346118929446398323967784357 touch=[] overlaps=[] wallfail=[]; C touch=[] overlaps=[] agree=True
+T-229@105 N1 expect=refuse verdicts={'review_Z': False, 'review_C': False, 'exact_verify': False, 'independent': False} ok=True
+    maintained: exact_verify wall=-1/1000000000000000000000000000000 gap=5257900307825346118929446398323967784357 fail=["('container', 'square 3 violates x>=0')"]; independent wall=-1/1000000000000000000000000000000 gap=5257900307825346118929446398323967784357 fail=['container penetration -1/1000000000000000000000000000000']
+    review: Z wall=-1/1000000000000000000000000000000 gap=5257900307825346118929446398323967784357 touch=[] overlaps=[] wallfail=[[4, 'x>=0'], [8, 'x>=0'], [9, 'x>=0'], [22, 'x>=0'], [31, 'x>=0']]; C touch=[] overlaps=[] agree=True
+T-229@105 P0 expect=accept verdicts={'review_Z': True, 'review_C': True, 'exact_verify': True, 'independent': True} ok=True
+    maintained: exact_verify wall=1/200000000000000000000 gap=0 fail=[]; independent wall=1/200000000000000000000 gap=0 fail=[]
+    review: Z wall=1/200000000000000000000 gap=0 touch=[[71, 86]] overlaps=[] wallfail=[]; C touch=[[71, 86]] overlaps=[] agree=True
+T-229@105 P1 expect=refuse verdicts={'review_Z': False, 'review_C': False, 'exact_verify': False, 'independent': False} ok=True
+    maintained: exact_verify wall=1/200000000000000000000 gap=-1/1000000000000000000000000000000 fail=["('overlap', 'squares 70 and 85 overlap')"]; independent wall=1/200000000000000000000 gap=-1/1000000000000000000000000000000 fail=['1 overlapping pairs; worst exact gap -1/1000000000000000000000000000000']
+    review: Z wall=1/200000000000000000000 gap=-1/1000000000000000000000000000000 touch=[] overlaps=[[71, 86]] wallfail=[]; C touch=[] overlaps=[[71, 86]] agree=True
+T-229@105 R1 expect=refuse verdicts={'review_Z': None, 'review_C': None, 'exact_verify': None, 'independent': None} ok=True
+    maintained reader: refused: n=105: 104 square rows for n = 105
+    review reader: refused: 104 rows for n = 105
+T-229@105 R2 expect=reader difference verdicts={'review_Z': None, 'review_C': None, 'exact_verify': True, 'independent': True} ok=True
+    maintained: exact_verify wall=1/200000000000000000000 gap=5257900307825346118929446398323967784357 fail=[]; independent wall=1/200000000000000000000 gap=5257900307825346118929446398323967784357 fail=[]
+    review reader: refused: not a rational literal: '0.51699202313363910000516991694661819'
+T-229@105 run_sharp side-lowered-past-wall-contact past=False exact_verify: passed=True wall=0 gap=525790030782534611892944639832; independent: passed=True wall=0 gap=525790030782534611892944639832 ok=True
+T-229@105 run_sharp side-lowered-past-wall-contact past=True exact_verify: passed=False wall=-1/100000000000000000000000000 gap=525790030782534611892944639832; independent: passed=False wall=-1/100000000000000000000000000 gap=525790030782534611892944639832 ok=True
+T-229@105 run_sharp tightest-pair-closed-past-contact past=False exact_verify: passed=True wall=1/200000000000000000000 gap=0; independent: passed=True wall=1/200000000000000000000 gap=0 ok=True
+T-229@105 run_sharp tightest-pair-closed-past-contact past=True exact_verify: passed=False wall=1/200000000000000000000 gap=-1/100000000000000000000000000; independent: passed=False wall=1/200000000000000000000 gap=-1/100000000000000000000000000 ok=True
+all as expected

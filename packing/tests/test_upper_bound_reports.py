@@ -1898,3 +1898,34 @@ def test_the_573_release_is_nowhere_smallest_and_shares_four_files_with_593() ->
         assert early[f"certificates/square-{n}.cert"] == late[f"certificates/n{n}.cert"]
     for n in (209, 270):
         assert early[f"certificates/square-{n}.cert"] != late[f"certificates/n{n}.cert"]
+
+
+#: Mykhailo Polkovskyi's issue-719 release, derived facts only (T-229 at 105 and 204).
+MISHAPOLK_719 = "mishapolk-issue719-2026-10-22"
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize("where", ["at-contact", "past-contact"])
+@pytest.mark.parametrize("control", kernel.SHARP_CONTROLS)
+def test_both_routes_meet_contact_and_refuse_1e30_past_it_at_719s_105(
+    control: str, where: str
+) -> None:
+    """RF-7 of the 22 October stage 4 review of T-229: the receipt's two controls are gross
+    (a duplicated square, gap -1, and a square moved outside), while #719's 105 certificate
+    clears every wall by exactly 5e-21 and every pair by about 1e-20, below the binary64
+    spacing of its coordinates, so a route rounding at binary64 or tolerating 1e-15 would
+    pass it as retained. The kernel's two sharp controls on that certificate's derived
+    fact: the side lowered by its least far-wall clearance, or its tightest pair closed
+    along its best separating axis, is accepted by both maintained routes at exact contact
+    with the margin exactly 0, and refused by both 1e-30 past it at exactly -1e-30, as the
+    review's controls found at both counts
+    (review/review-2026-10-22/outputs/out-controls-T-229-n105.json in the packet). Each
+    case runs both routes over 5,460 pairs after admitting the fact, a few seconds in all,
+    above the quick lane's per-test ceiling, so it runs in the deep surface."""
+    certificate = reports.read_facts(_packet(MISHAPOLK_719), numbers=[105])[105]
+    margin = "wall" if control == "side-lowered-past-wall-contact" else "gap"
+    past = where == "past-contact"
+    verdicts = kernel.run_sharp(certificate, control, past=past)
+    for route in kernel.ROUTES:
+        assert verdicts[route]["passed"] is not past, route
+        assert verdicts[route][margin] == (-kernel.SHARP_EPSILON if past else 0), route

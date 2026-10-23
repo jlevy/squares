@@ -1,0 +1,573 @@
+{
+ "label": "T-229@105",
+ "n": 105,
+ "certificate": "/tmp/claude-0/-home-user-squares/b4f98ade-a1fc-58c0-8f31-b56020d9544c/scratchpad/wt-t229r/packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-105.yaml.gz",
+ "adapter_equals_packet_fact": true,
+ "mutants": [
+  {
+   "mutant": "F0",
+   "expect": "accept",
+   "what": "side lowered by the least top-or-right clearance 5.000000e-21",
+   "review": {
+    "route_Z": {
+     "passed": true,
+     "least_wall": "0",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "touching": [],
+     "overlaps": [],
+     "wall_failures": [],
+     "wall_contacts": 14,
+     "cpu_seconds": 0.027
+    },
+    "route_C": {
+     "passed": true,
+     "least_wall": "0",
+     "touching": [],
+     "overlaps": [],
+     "corners_outside": [],
+     "wall_contacts": 14,
+     "cpu_seconds": 1.034
+    },
+    "routes_agree": true
+   },
+   "maintained": {
+    "exact_verify": {
+     "passed": true,
+     "least_wall": "0",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [],
+     "cpu_seconds": 1.135
+    },
+    "independent": {
+     "passed": true,
+     "least_wall": "0",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [],
+     "cpu_seconds": 0.82
+    }
+   },
+   "verdicts": {
+    "review_Z": true,
+    "review_C": true,
+    "exact_verify": true,
+    "independent": true
+   },
+   "as_expected": true
+  },
+  {
+   "mutant": "F1",
+   "expect": "refuse",
+   "what": "side lowered by that clearance + 1e-30",
+   "review": {
+    "route_Z": {
+     "passed": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "touching": [],
+     "overlaps": [],
+     "wall_failures": [
+      [
+       1,
+       "y<=S"
+      ],
+      [
+       2,
+       "y<=S"
+      ],
+      [
+       10,
+       "x<=S"
+      ],
+      [
+       11,
+       "y<=S"
+      ],
+      [
+       12,
+       "y<=S"
+      ]
+     ],
+     "wall_contacts": 0,
+     "cpu_seconds": 0.035
+    },
+    "route_C": {
+     "passed": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "touching": [],
+     "overlaps": [],
+     "corners_outside": [
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       10,
+       1
+      ]
+     ],
+     "wall_contacts": 0,
+     "cpu_seconds": 1.437
+    },
+    "routes_agree": true
+   },
+   "maintained": {
+    "exact_verify": {
+     "passed": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [
+      "('container', 'square 0 violates y<=s')",
+      "('container', 'square 0 violates y<=s')",
+      "('container', 'square 1 violates y<=s')"
+     ],
+     "cpu_seconds": 1.31
+    },
+    "independent": {
+     "passed": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [
+      "container penetration -1/1000000000000000000000000000000"
+     ],
+     "cpu_seconds": 0.889
+    }
+   },
+   "verdicts": {
+    "review_Z": false,
+    "review_C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true
+  },
+  {
+   "mutant": "N0",
+   "expect": "accept",
+   "what": "every square moved by -x 5.000000e-21, the least near-wall clearance",
+   "review": {
+    "route_Z": {
+     "passed": true,
+     "least_wall": "0",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "touching": [],
+     "overlaps": [],
+     "wall_failures": [],
+     "wall_contacts": 8,
+     "cpu_seconds": 0.03
+    },
+    "route_C": {
+     "passed": true,
+     "least_wall": "0",
+     "touching": [],
+     "overlaps": [],
+     "corners_outside": [],
+     "wall_contacts": 8,
+     "cpu_seconds": 1.273
+    },
+    "routes_agree": true
+   },
+   "maintained": {
+    "exact_verify": {
+     "passed": true,
+     "least_wall": "0",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [],
+     "cpu_seconds": 1.323
+    },
+    "independent": {
+     "passed": true,
+     "least_wall": "0",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [],
+     "cpu_seconds": 0.802
+    }
+   },
+   "verdicts": {
+    "review_Z": true,
+    "review_C": true,
+    "exact_verify": true,
+    "independent": true
+   },
+   "as_expected": true
+  },
+  {
+   "mutant": "N1",
+   "expect": "refuse",
+   "what": "by that clearance + 1e-30",
+   "review": {
+    "route_Z": {
+     "passed": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "touching": [],
+     "overlaps": [],
+     "wall_failures": [
+      [
+       4,
+       "x>=0"
+      ],
+      [
+       8,
+       "x>=0"
+      ],
+      [
+       9,
+       "x>=0"
+      ],
+      [
+       22,
+       "x>=0"
+      ],
+      [
+       31,
+       "x>=0"
+      ]
+     ],
+     "wall_contacts": 0,
+     "cpu_seconds": 0.042
+    },
+    "route_C": {
+     "passed": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "touching": [],
+     "overlaps": [],
+     "corners_outside": [
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       8,
+       0
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       9,
+       0
+      ]
+     ],
+     "wall_contacts": 0,
+     "cpu_seconds": 1.172
+    },
+    "routes_agree": true
+   },
+   "maintained": {
+    "exact_verify": {
+     "passed": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [
+      "('container', 'square 3 violates x>=0')",
+      "('container', 'square 3 violates x>=0')",
+      "('container', 'square 7 violates x>=0')"
+     ],
+     "cpu_seconds": 1.25
+    },
+    "independent": {
+     "passed": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [
+      "container penetration -1/1000000000000000000000000000000"
+     ],
+     "cpu_seconds": 0.737
+    }
+   },
+   "verdicts": {
+    "review_Z": false,
+    "review_C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true
+  },
+  {
+   "mutant": "P0",
+   "expect": "accept",
+   "what": "square 86 moved toward square 71 along u_i by the gap 1.0000000000e-20",
+   "review": {
+    "route_Z": {
+     "passed": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "touching": [
+      [
+       71,
+       86
+      ]
+     ],
+     "overlaps": [],
+     "wall_failures": [],
+     "wall_contacts": 0,
+     "cpu_seconds": 0.032
+    },
+    "route_C": {
+     "passed": true,
+     "least_wall": "1/200000000000000000000",
+     "touching": [
+      [
+       71,
+       86
+      ]
+     ],
+     "overlaps": [],
+     "corners_outside": [],
+     "wall_contacts": 0,
+     "cpu_seconds": 1.282
+    },
+    "routes_agree": true
+   },
+   "maintained": {
+    "exact_verify": {
+     "passed": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "pairs": 5460,
+     "failures": [],
+     "cpu_seconds": 1.524
+    },
+    "independent": {
+     "passed": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "pairs": 5460,
+     "failures": [],
+     "cpu_seconds": 0.77
+    }
+   },
+   "verdicts": {
+    "review_Z": true,
+    "review_C": true,
+    "exact_verify": true,
+    "independent": true
+   },
+   "as_expected": true
+  },
+  {
+   "mutant": "P1",
+   "expect": "refuse",
+   "what": "by the gap + 1e-30",
+   "review": {
+    "route_Z": {
+     "passed": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "touching": [],
+     "overlaps": [
+      [
+       71,
+       86
+      ]
+     ],
+     "wall_failures": [],
+     "wall_contacts": 0,
+     "cpu_seconds": 0.029
+    },
+    "route_C": {
+     "passed": false,
+     "least_wall": "1/200000000000000000000",
+     "touching": [],
+     "overlaps": [
+      [
+       71,
+       86
+      ]
+     ],
+     "corners_outside": [],
+     "wall_contacts": 0,
+     "cpu_seconds": 1.133
+    },
+    "routes_agree": true
+   },
+   "maintained": {
+    "exact_verify": {
+     "passed": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [
+      "('overlap', 'squares 70 and 85 overlap')"
+     ],
+     "cpu_seconds": 1.133
+    },
+    "independent": {
+     "passed": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [
+      "1 overlapping pairs; worst exact gap -1/1000000000000000000000000000000"
+     ],
+     "cpu_seconds": 0.873
+    }
+   },
+   "verdicts": {
+    "review_Z": false,
+    "review_C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true
+  },
+  {
+   "mutant": "R1",
+   "expect": "refuse",
+   "what": "the last row dropped",
+   "review": {
+    "reader": "refused: 104 rows for n = 105"
+   },
+   "maintained": {
+    "reader": "refused: n=105: 104 square rows for n = 105"
+   },
+   "verdicts": {
+    "review_Z": null,
+    "review_C": null,
+    "exact_verify": null,
+    "independent": null
+   },
+   "as_expected": true
+  },
+  {
+   "mutant": "R2",
+   "expect": "reader difference",
+   "what": "square 1's x written as the exact decimal 0.51699202313363910000516991694661819",
+   "review": {
+    "reader": "refused: not a rational literal: '0.51699202313363910000516991694661819'"
+   },
+   "maintained": {
+    "exact_verify": {
+     "passed": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [],
+     "cpu_seconds": 1.442
+    },
+    "independent": {
+     "passed": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+     "pairs": 5460,
+     "failures": [],
+     "cpu_seconds": 1.005
+    }
+   },
+   "verdicts": {
+    "review_Z": null,
+    "review_C": null,
+    "exact_verify": true,
+    "independent": true
+   },
+   "as_expected": true
+  }
+ ],
+ "run_sharp": [
+  {
+   "control": "side-lowered-past-wall-contact",
+   "past": false,
+   "result": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000"
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000"
+    }
+   },
+   "as_expected": true
+  },
+  {
+   "control": "side-lowered-past-wall-contact",
+   "past": true,
+   "result": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000"
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000"
+    }
+   },
+   "as_expected": true
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "past": false,
+   "result": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "1/200000000000000000000",
+     "gap": "0"
+    },
+    "independent": {
+     "passed": true,
+     "wall": "1/200000000000000000000",
+     "gap": "0"
+    }
+   },
+   "as_expected": true
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "past": true,
+   "result": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "1/200000000000000000000",
+     "gap": "-1/1000000000000000000000000000000"
+    },
+    "independent": {
+     "passed": false,
+     "wall": "1/200000000000000000000",
+     "gap": "-1/1000000000000000000000000000000"
+    }
+   },
+   "as_expected": true
+  }
+ ],
+ "construction": {
+  "far_clearance": "100000000007119/20000000000000000000000000000000000",
+  "near_clearance": "1/200000000000000000000",
+  "near_axis": "x",
+  "pair": [
+   71,
+   86
+  ],
+  "gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+  "axis": "u_i",
+  "moved_square": 86
+ }
+}

@@ -119,6 +119,7 @@ name: Certificate page
       - packing/devtools/templates/paper-type.css
       - packing/devtools/templates/site-math.css
       - packing/devtools/templates/site.css
+      - packing/devtools/templates/github-links.css
       - packing/devtools/templates/site-result.css
       - packing/devtools/templates/site-contributor.css
       - packing/devtools/templates/overview-article.md
@@ -134,6 +135,8 @@ name: Certificate page
       - packing/devtools/render_contributors.py
       - packing/devtools/profile_links.py
       - packing/devtools/site_icons.py
+      - packing/devtools/site_github_links.py
+      - packing/devtools/site_popovers.py
       - packing/devtools/site_resources.py
       - packing/devtools/site_tallies.py
       - packing/devtools/profile_records.py

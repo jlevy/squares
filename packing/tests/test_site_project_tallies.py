@@ -198,13 +198,16 @@ def test_project_bylines_link_known_people_and_keep_organizations_plain(
     )
     monkeypatch.setattr(overview_sections, "public_index", lambda: index)
     assert overview_sections.project_author("Nate Chaoweeraprasit") == (
-        'By <a href="profiles/nate-chaoweeraprasit.html">Chaoweeraprasit</a>'
+        'By <a href="profiles/nate-chaoweeraprasit.html" '
+        'data-profile-name="full">Nate Chaoweeraprasit</a>'
     )
     assert overview_sections.project_author("Mishapolk") == (
-        'By <a href="profiles/mykhailo-polkovskyi.html">Polkovskyi</a>'
+        'By <a href="profiles/mykhailo-polkovskyi.html" '
+        'data-profile-name="full">Mykhailo Polkovskyi</a>'
     )
     assert overview_sections.project_author("Ke Wang and Can Li") == (
-        'By <a href="profiles/ke-wang.html">Wang</a> and <a href="profiles/can-li.html">Li</a>'
+        'By <a href="profiles/ke-wang.html" data-profile-name="full">Ke Wang</a> '
+        'and <a href="profiles/can-li.html" data-profile-name="full">Can Li</a>'
     )
     assert overview_sections.project_author("PingYou Ltd") == "By PingYou Ltd"
     assert overview_sections.project_author("Unlisted & Associates") == (
@@ -258,8 +261,11 @@ def test_shared_resources_match_homepage_bylines_and_profile_counts() -> None:
     assert any("/blob/" in record.url for record in xu)
     assert any(record.url == "https://github.com/ry-xu/square_packing" for record in xu)
     gupta = render_contributors.resource_list("siddharth-gupta")
-    assert 'href="profiles/nate-chaoweeraprasit.html">Chaoweeraprasit</a>' in gupta
-    assert 'href="profiles/evan-daniel.html">Daniel</a>' in gupta
+    assert (
+        'href="profiles/nate-chaoweeraprasit.html" data-profile-name="full">Nate '
+        "Chaoweeraprasit</a>" in gupta
+    )
+    assert 'href="profiles/evan-daniel.html" data-profile-name="full">Evan Daniel</a>' in gupta
     assert 'href="profiles/siddharth-gupta.html"' not in gupta
 
 
@@ -547,7 +553,7 @@ def test_each_card_ends_with_its_tally_linked_to_its_results(
             [result.id for result in own], measures, blank_zero=True
         )
         if records:
-            expected += " · " + records
+            expected = records + " · " + expected
         if associations:
             expected += " · " + site_tallies.render_tally(
                 site_tallies.tally_credits(associations, measures, LEVELS), noun="credit"
@@ -816,4 +822,6 @@ def test_formalization_resource_names_mixed_contributors_without_claiming_author
     assert rendered.startswith("Contributors: ")
     assert "profiles/ctjlewis.html" not in rendered
     assert "profiles/julian-jj.html" in rendered
-    assert "profiles/manasseh-ahmed.html" in rendered
+    assert (
+        'profiles/manasseh-ahmed.html" data-profile-name="full">Manasseh Ahmed</a>' in rendered
+    )

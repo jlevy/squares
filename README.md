@@ -112,8 +112,9 @@ PDF. Three form a series on $n = 11$:
 is a tutorial on geometric construction, physics-inspired search, annealing, surgery,
 local refinement, and upper-bound certification.
 
-The website is at edition `v0.9.2` and the atlas posters at `v0.6.4`; each paper carries
-its own version.
+The website deploys continuously from `main`; its last site edition, `v0.9.2`, is
+retained as history.
+The atlas posters are at edition `v0.6.4`, and each paper carries its own version.
 
 ## Repository Guide
 
@@ -246,14 +247,14 @@ uv run --frozen python -m cases.trump11.verify_exact
 uv run --frozen --all-extras --group dev packing-validate --edit
 ```
 
-`packing-validate` has five tiers: run `--edit` while editing and `--push` before
-pushing; every pull request runs `--fast` as seven required parts; `--records` guards
-registry changes; and the complete gate runs on `main` and at the end of a research
-block.
-[**development.md → Validation Loops**](development.md#validation-tiers) tabulates
-what each tier runs and costs, and
-[`gate-budgets.yaml`](packing/devtools/gate-budgets.yaml) holds the ceilings the gate
-reads.
+`packing-validate` has five tiers: run `--edit` while editing and before a push to a
+draft pull request, whose hosted CI is the full test gate; `--push` adds the tests
+reachable from a change, recommended before a push straight to a non-draft branch; every
+pull request runs `--fast` as ten required parts; `--records` guards registry changes;
+and the complete gate runs on `main` and at the end of a research block.
+[**development.md → Validation Loops**](development.md#validation-tiers) tabulates what
+each tier runs and costs, and [`gate-budgets.yaml`](packing/devtools/gate-budgets.yaml)
+holds the ceilings the gate reads.
 
 [`Witness/v2`](packing/witnesses/witness.schema.yaml) is the interchange format for
 supported rational, algebraic, and decimal witnesses.

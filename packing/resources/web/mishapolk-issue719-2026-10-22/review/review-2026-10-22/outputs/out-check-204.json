@@ -1,0 +1,127 @@
+{
+ "program": "review_t229_check.py",
+ "python": "3.14.7",
+ "inputs": [
+  {
+   "label": "T-229@204:cert",
+   "path": "triage-719/src/pin/certificates/n-204.cert",
+   "format": "evand-cert",
+   "n": 204,
+   "side": "882663895519250432/59604644775390625",
+   "file_sha256": "7c77ad00e36fdceedadeef0d6e256a6682a6974877ded0f97aa110cad918f4a3",
+   "content_git_blob": "17e243a8566be38f48af2a4790e7cedb2745121f",
+   "route_Z": {
+    "route": "Z",
+    "rows_not_unit": [],
+    "wall_failures": [],
+    "overlaps": [],
+    "touching": [],
+    "wall_contacts": [],
+    "rows_on_unit_circle": 204,
+    "pairs_decided": 20706,
+    "near_pairs_centres_within_sqrt2": 498,
+    "least_wall_clearance": "37251567/74505805969238281250",
+    "least_wall_clearance_float": 4.999820687179776e-13,
+    "least_wall_at": [
+     1,
+     "x<=S"
+    ],
+    "least_gap": "170100992101461805922690277325306140383727361777883/170427235989963867590529088261895419837072677910327911376953125",
+    "least_gap_float": 9.980857291582123e-13,
+    "least_gap_pair": [
+     11,
+     17
+    ],
+    "least_gap_axis": "u_i",
+    "accepted": true,
+    "cpu_seconds": 0.121
+   },
+   "route_C": {
+    "route": "C",
+    "not_unit_squares": [],
+    "corners_outside": [],
+    "overlaps": [],
+    "touching": [],
+    "wall_contacts": 0,
+    "unit_squares_checked": 204,
+    "pairs_decided": 20706,
+    "pairs_centres_within_2": 763,
+    "least_wall_clearance": "37251567/74505805969238281250",
+    "least_wall_clearance_float": 4.999820687179776e-13,
+    "least_distance_squared": "28934347513901571685416681024673030204036184024404660094364692951615489379122000380254303118627961689/29045442767178835386748428533890193456178095207024955051022209490086306308468069908891584507415473126457072794437408447265625",
+    "least_distance_float": 9.980857291582123e-13,
+    "least_distance_pair": [
+     11,
+     17
+    ],
+    "accepted": true,
+    "cpu_seconds": 3.915
+   },
+   "routes_agree": true,
+   "per_pair_classes_equal": true,
+   "least_gap_at_most_least_distance": true,
+   "accepted": true
+  },
+  {
+   "label": "T-229@204:fact",
+   "path": "wt-t229r/packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-204.yaml.gz",
+   "format": "witness-v2-center-basis",
+   "n": 204,
+   "side": "882663895519250432/59604644775390625",
+   "file_sha256": "7e4107e75536ee828a9e54b47dba68c5f4be0e7564396ae3971fc7c5b2883777",
+   "content_git_blob": "cdd3d59021bab353e2ba86fab7dbc560dd75836b",
+   "content_sha256": "c122e34b6c34e25a671551b58c4fcd1857c8725ea8d2db4cf43fc22040c68621",
+   "route_Z": {
+    "route": "Z",
+    "rows_not_unit": [],
+    "wall_failures": [],
+    "overlaps": [],
+    "touching": [],
+    "wall_contacts": [],
+    "rows_on_unit_circle": 204,
+    "pairs_decided": 20706,
+    "near_pairs_centres_within_sqrt2": 498,
+    "least_wall_clearance": "37251567/74505805969238281250",
+    "least_wall_clearance_float": 4.999820687179776e-13,
+    "least_wall_at": [
+     1,
+     "x<=S"
+    ],
+    "least_gap": "170100992101461805922690277325306140383727361777883/170427235989963867590529088261895419837072677910327911376953125",
+    "least_gap_float": 9.980857291582123e-13,
+    "least_gap_pair": [
+     11,
+     17
+    ],
+    "least_gap_axis": "u_i",
+    "accepted": true,
+    "cpu_seconds": 0.066
+   },
+   "route_C": {
+    "route": "C",
+    "not_unit_squares": [],
+    "corners_outside": [],
+    "overlaps": [],
+    "touching": [],
+    "wall_contacts": 0,
+    "unit_squares_checked": 204,
+    "pairs_decided": 20706,
+    "pairs_centres_within_2": 763,
+    "least_wall_clearance": "37251567/74505805969238281250",
+    "least_wall_clearance_float": 4.999820687179776e-13,
+    "least_distance_squared": "28934347513901571685416681024673030204036184024404660094364692951615489379122000380254303118627961689/29045442767178835386748428533890193456178095207024955051022209490086306308468069908891584507415473126457072794437408447265625",
+    "least_distance_float": 9.980857291582123e-13,
+    "least_distance_pair": [
+     11,
+     17
+    ],
+    "accepted": true,
+    "cpu_seconds": 2.793
+   },
+   "routes_agree": true,
+   "per_pair_classes_equal": true,
+   "least_gap_at_most_least_distance": true,
+   "accepted": true
+  }
+ ]
+}

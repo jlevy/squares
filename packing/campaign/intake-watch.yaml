@@ -1221,6 +1221,67 @@ repositories:
       the 48 is an import until he answers. The triage of #719 (think-xyhn) read every certificate
       at the pin, and the rest are at or above an earlier report. dc440a8 adds only
       ISSUE_SUBMISSION_122.md, issue 719's body. Nothing else to import.
+  # The intake sweep of 12:20Z on 22 October 2026 listed three watched repositories that
+  # needed an owner; the read-only triage c-triage-1022b read each at its head.
+  - url: https://github.com/evand/square-packing
+    read_through: 7051f4eabf7f9b2509ad1e7cc296f57d19482027
+    read_on: '2026-10-22'
+    bead: think-7l2j
+    note: >-
+      The 75 commits from b64d5ab (20 October, 22:21Z) to 7051f4e (22 October, 01:54Z), the
+      head, past 88385ab, the pin of the evand-n270-sweep-2026-10-20 and
+      evand-n343-sweep-2026-10-20 packets. None adds or changes a certificate. Most are unit
+      squares in rectangles: search/rectfront/, docs/rect.html, two literature notes and
+      lean/Sqpack/Rect*.lean, which prove in Lean, with standard axioms by the source's
+      account, exactly which w x h rectangles hold two to five unit squares (rect2_iff to
+      rect5_iff; boundaries credited to Friedman's Math Magic of June 2010). Rectangles are
+      outside this record, which is squares in a square, but at w = h rect2_iff to
+      rect4_iff give s(2) = s(3) = s(4) = 2 and rect5_pts_lower (e96ab69) gives
+      s(5) >= 2 + 1/sqrt 2: a proof-assistant route to values the record holds by published
+      proofs, which think-7l2j holds until a packet pins this commit or its import declines
+      it. The note literature/s5-proofs-2026-10-21.md points to chelokot's s5_eq_goebel, in
+      the 753079eb tree the chelokot-nagamochi-counterexample-2026-09-05 packet pins, which
+      think-7l2j holds too. The rest is the packer's store hygiene, deduplication and
+      allocator design, and runs at 157, 273, 274 and 308 whose best sides (13.009188 at
+      157, 17.000299455 at 274) are above the register's, with no certificate. Nothing else
+      to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: 2ed00b2ecd6b1178883f2fe3b2460ec7b5ea11c7
+    read_on: '2026-10-22'
+    note: >-
+      The three commits of 22 October (05:44Z to 12:01Z) past the a6c0dbb read. 1cedabe and
+      fbd2152 put the paper cubes-n4-upper, upper bounds for unit 4-cubes in a 4-cube at
+      k = 17 to 30, on the source's site. 2ed00b2 adds problems/cubes-in-cube/closed-measure/:
+      s3(25) = s3(26) = 3 for unit cubes in a cube, by a closed counting measure (sigma =
+      27/20, total 24.9123 < 25) whose main lemma two interval branch-and-bound checkers
+      decide, with their receipts (72,779,027 and 387,289,685 boxes; about 230,000 and 2.7
+      million seconds at the source). Cubes are outside this record, which is squares in a
+      square, as the reads of eb22671 and fbc5fc4 said, and no record entry tracks one.
+      Nothing to import.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: 6b7391de820fd01f3ff6984e4a081e8c86845588
+    read_on: '2026-10-22'
+    bead: think-tmwt
+    note: >-
+      The three commits past 7b6c87e, pushed together at 2026-10-21T22:56:37Z after issue
+      715: d09edd7, 5a299b4 and 6b7391d, the head and #715's pin. The
+      couzo-issue715-2026-10-21 packet pins 6b7391d with 359 paths in scope; the sweep
+      lists all three for the rest. d09edd7's five others hold nothing to import:
+      certificates/best/n183.cert is byte for byte the s183_h183b.cert T-220 registers
+      (SHA-256 279e70d1...), lower_bounds.json takes this register's s(108) >= 531/50
+      (T-216) back, and the rest are indexes and code. 6b7391d's 1,788 others hold nothing
+      to import either: it deletes 263 root certificates with their poses, keeps best/ files
+      that equal #715's root files or lie above #715's rows, and adds 463 parent seeds,
+      every one at or below 1024 above #715's row. 5a299b4's 2,339 others: in the corpus,
+      tighter rationalizations of exact sides the register already states (first published
+      at 4e4c8ce); above 1024, the index's 5,078 non-grid bounds, which wait on the owner
+      (D1, think-f2io); and at 325 to 1024, 20 certificates no row holds, which think-tmwt
+      holds until a packet retains them: 9 below the record's rows (487, 532, 579, 628,
+      679, 732, 787, 844, 903) and 11 later superseded by #719 (409, 450, 453, 649, 810,
+      812, 933, 934, 990, 991, 997), with 61 re-certifications below an earlier side only
+      past its 12-place print (30 of them #715's, think-fwa9) and one above Goebel's
+      construction (331). The read stays after a packet pins 5a299b4, since that packet will
+      retain a few of the commit's 2,650 changed paths (think-bspk).
   # The intake sweep of 18:45Z on 22 October 2026 listed three watched repositories past
   # their reads; the read-only triage c-triage-1022c read each at its head.
   - url: https://github.com/evand/square-packing
