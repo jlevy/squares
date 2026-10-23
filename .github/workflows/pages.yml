@@ -263,6 +263,7 @@ name: Certificate page
       - packing/devtools/templates/n11-optimality-review-shell.html
       - packing/devtools/templates/n11-optimality-review.css
       - packing/atlas/rendering/trump11-overview.svg
+      - packing/atlas/rendering/kingbird29-overview.svg
       - packing/cases/trump11/**
       - packing/resources/web/n11-optimality-2026-09-29/**
       - packing/resources/papers/kingbird-square-11-provenance.svg

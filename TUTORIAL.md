@@ -2,7 +2,7 @@
 
 - Human oversight: [**Joshua Levy**](https://x.com/ojoshe)
 - Agents: **Opus 5**, **Fable 5**, **Fable 5.1**, **Opus 5.5**, and **GPT-6 Astra**
-- First published October 1, 2026 · Last revised October 15, 2026
+- First published October 1, 2026 · Last revised October 22, 2026
 
 How small a square can hold eleven unit squares?
 A $4\times4$ grid leaves five spaces empty.
@@ -10,15 +10,19 @@ Rotating some of the squares gives a packing with side about $3.87708$, and a ma
 lower-bound proof establishes that no smaller square works.
 Finding the arrangement and proving that it is best are different problems.
 
-![Walter Trump’s exact packing of eleven unit squares.](packing/atlas/rendering/trump11-overview.svg)
+<figure>
+<img src="packing/atlas/rendering/trump11-overview.svg" alt="Walter Trump’s exact packing of eleven unit squares.">
+<figcaption>
 
-*Walter Trump’s 1979 construction: six squares are axis-aligned and five share an
-oblique tilt of about 40.18°. Ahmed’s 2026 proof establishes its optimality; the
-repository records the complete machine checks at `V3/C3` in
-[T-060](packing/frontier/RESULTS.md).
+Walter Trump’s 1979 construction: six squares are axis-aligned and five share an oblique
+tilt of about 40.18°. Ahmed’s 2026 proof establishes its optimality; the repository
+records the complete machine checks at `V3/C3` in [T-060](packing/frontier/RESULTS.md).
 The drawing shows the construction; the proof excludes every smaller container.
 Segments mark shared edge intervals; dots mark point contacts.
-They are computed in the exact number field and clipped to the participating squares.*
+They are computed in the exact number field and clipped to the participating squares.
+
+</figcaption>
+</figure>
 
 This basic tutorial develops the geometry and the distinctions needed to read a packing
 result. The [advanced tutorial](TUTORIAL-ADVANCED.md) develops linear programming, exact
@@ -142,7 +146,7 @@ $$
 all fit in a side-2 container.
 The top square can slide across the two bottom squares.
 Every value of $t$ gives an optimal packing because $s(3)=2$. Changing coordinates
-therefore need not discover a genuinely different optimal family.
+therefore need not discover a different optimal family.
 The
 [advanced tutorial](TUTORIAL-ADVANCED.md#2-refinement-corners-and-connected-families)
 explains how relabeling squares, rotating or reflecting the container, and continuous
@@ -174,7 +178,7 @@ and explains how
 [fixed-angle linear programs](TUTORIAL-ADVANCED.md#1-configuration-space-and-linear-programs)
 make part of the search tractable.
 
-### Numerical and exact coordinates
+### Numerical and Exact Coordinates
 
 Floating-point numbers have finite precision.
 A program may treat a tiny negative clearance as zero within a **tolerance**, a stated
@@ -214,7 +218,7 @@ There are accordingly two different uses of “exact”:
 A rational construction may sit slightly above a suspected algebraic optimum.
 Its certificate can be completely exact while its bound remains weaker than the optimum.
 
-### What the status labels mean
+### What the Status Labels Mean
 
 The project records the statement being checked separately from the strength of its
 evidence. For an individual evidence entry:

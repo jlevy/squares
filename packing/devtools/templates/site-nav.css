@@ -208,8 +208,9 @@
 .site-nav .site-name:is(:hover, :focus-visible) {
   color: var(--kpress-doc-text);
 }
-/* The current page is the one underline in the bar, and it stays through a hover. */
-.site-nav a[aria-current="page"] {
+/* The current destination and its top-level category keep the same underline. */
+.site-nav a[aria-current="page"],
+.site-nav :is(.site-nav-disclosure, .site-nav-fallback)[aria-current="true"] {
   color: var(--kpress-doc-accent);
   text-decoration: underline;
   text-decoration-thickness: 2px;
@@ -874,5 +875,13 @@ nav.site-tabs a[aria-current="page"],
   .site-nav .site-nav-submenu,
   .site-nav .site-nav-disclosure svg {
     transition-duration: 0ms;
+  }
+}
+
+/* Deeper trails give the current page its own row on narrow screens. The ancestry
+   cannot cross a wrap threshold when the approximate sans fallback is replaced. */
+@media screen and (width <= 40rem) {
+  .site-breadcrumbs li:last-child:nth-child(n + 3) {
+    flex-basis: 100%;
   }
 }

@@ -66,7 +66,6 @@ from urllib.parse import quote
 from devtools import repo_links, site_navigation
 from devtools.repo_links import repo_url
 from devtools.site_icons import GITHUB_ICON_INPUTS
-from devtools.site_popovers import popover_controls
 from sqpack.contributors import PROFILES_DIR
 from sqpack.release import PUBLICATION_EDITION, PUBLICATION_HISTORY
 
@@ -117,7 +116,6 @@ ATLAS_GRID_SCRIPT = BROWSER / "atlas-grid.js"
 EMBED_SCRIPT = BROWSER / "embed.js"
 CASE_POPOVER_SCRIPT = BROWSER / "case-popover.js"
 ARTICLE_LOADER_SCRIPT = BROWSER / "article-loader.js"
-CONTRIBUTOR_POPOVER_SCRIPT = BROWSER / "contributor-popover.js"
 #: What starts the Visualize page's film when the page is visited.
 FILM_SCRIPT = BROWSER / "film.js"
 THEME_SCRIPT = BROWSER / "theme.js"
@@ -550,6 +548,9 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "site-changelog.schema.yaml",
     PACKING / "devtools/render_changelog.py",
     PACKING / "devtools/profile_links.py",
+    PACKING / "devtools/render_n11_lower_bounds_explainer.py",
+    PACKING / "atlas/rendering/trump11-overview.svg",
+    PACKING / "atlas/rendering/kingbird29-overview.svg",
     *GITHUB_ICON_INPUTS,
     PACKING / "devtools/site_popovers.py",
     PACKING / "devtools/site_navigation.py",
@@ -1155,19 +1156,6 @@ def article_overlay_shells(page: str) -> str:
     shells = []
     if "data-case-popover" not in page:
         shells.append(case_popover())
-    if "data-contributor-popover" not in page:
-        controls = popover_controls(
-            "pop-contributor", destination=(f"{PROFILES_DIR}/index.html", "Open profile")
-        )
-        shells.append(
-            '<div id="pop-contributor" class="site-popover site-contributor-popover" '
-            'popover="auto" data-contributor-popover role="dialog" '
-            'aria-label="Profile">'
-            f"{controls}"
-            "<div data-contributor-body></div>"
-            '<p class="site-popover-actions"><a class="site-popover-action" '
-            f'data-contributor-open href="{PROFILES_DIR}/index.html">Open profile</a></p></div>'
-        )
     return page.replace(
         "</body>",
         '<div class="kpress site-overlay-shells">' + "".join(shells) + "</div></body>",
@@ -1188,7 +1176,6 @@ def article_page_scripts(page_scripts: Sequence[Path]) -> tuple[Path, ...]:
                 POPOVER_SCRIPT,
                 *page_scripts,
                 CASE_POPOVER_SCRIPT,
-                CONTRIBUTOR_POPOVER_SCRIPT,
             )
         )
     )
@@ -1537,7 +1524,6 @@ def atlas_page() -> Page:
             ATLAS_VIEW_SCRIPT,
             ATLAS_GRID_SCRIPT,
             CASE_POPOVER_SCRIPT,
-            TABLE_SCRIPT,
         ),
     )
 
