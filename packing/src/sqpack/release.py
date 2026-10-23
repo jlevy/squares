@@ -7154,6 +7154,31 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "was taken, and every paper keeps its version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer", "paper:square-packing-methods-survey"),
+        paths=(
+            "packing/devtools/probes/prepare_n11_lower_bounds_explainer_math/measure_math.js",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The explainer's math extraction (think-qa8b) re-appends each extracted `style` "
+            "attribute last, where Chromium places a style written through CSSOM when "
+            "nothing reads the attribute list early. Every `style` in main's ordinary "
+            "render already sits last, so this removes only the timing-dependent outlier "
+            "that failed the twin-render check. Rendered with --prepare-math in pinned "
+            "Chromium 151.0.7922.34 on 23 October: three fixed renders equal, in every "
+            "written file, four unfixed renders whose concurrent twins agreed (12 of 12 "
+            "comparisons), and six fixed concurrent pairs agree where unfixed pairs "
+            "failed 2 of 6. The survey selects this probe as a broad builder input and "
+            "does not run it; its HTML and Markdown are identical before and after. "
+            "Every paper keeps its version."
+        ),
+    ),
 )
 
 
