@@ -3,9 +3,9 @@ type: is
 id: is-01m5kjb1djc8q6yy990cmn3fys
 title: "Apply the owner's sub-print answer: rerun the history, #719 and #732 walks with SUB_PRINT holds as restatements (think-fwa9, 2026-10-23)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 5
 delegate: c-answers-1023
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:34.738Z
-updated_at: 2026-10-23T09:40:43.741Z
+updated_at: 2026-10-23T15:52:33.471Z
 started_at: 2026-10-23T07:54:15.406Z
+closed_at: 2026-10-23T15:52:33.470Z
+close_reason: "Applied in PR #754 (https://github.com/jlevy/squares/pull/754), head 41c43051c, CI green (runs 39979866593, 39979866417, 39979860680): the restatement ruling in the history, #719 and #732 walks; every SUB_PRINT hold settled, no row changed; #719's 631 left to think-oqjd; follow-ups for #715, #719 and #732 drafted in the notes, not posted."
+resolution: null
+duplicate_of: null
 ---
 Owner decision of 23 October (think-fwa9 note): sub-print re-certifications are restatements. Remove the SUB_PRINT holds from beyond_horizon_replay's walks (HISTORY_RESTING, the #719 walk's resting, #732's 499), rerun the walks, confirm no current row changes, and answer #715, #719 and #732 where their replies named the question. After #742 merges; may ride the #719 records PR (claude/intake-2026-10-23) if small, else its own.
 
@@ -55,9 +59,11 @@ ruling to it would remove that superseded row; no current row would change.
   at 5a299b4 are 2.37e-23 to 3.18e-23 below your 4e4c8ce certificates and round up to the
   same print, so they restate them: the 4e4c8ce certificates stay the rows there, and no
   row changes. The same rule covers 44 more of your publications in 5a299b4, 23aff0c and
-  4e4c8ce. The runbook states it (Several Reports at One Count) since https://github.com/jlevy/squares/pull/754. Still open
-  here: the exact check at 335, and the rows above 1024, which the record will now track
-  (that work is under way)."
+  4e4c8ce. Your 743 and 985 equal the bounds your 4e4c8ce index states there by deleting a
+  square from the next count's certificate; such a bound is an earlier report, so they are
+  not recorded either. The runbook states both rules (Several Reports at One Count) since
+  https://github.com/jlevy/squares/pull/754. Still open here: the exact check at 335, and
+  the rows above 1024, which the record will now track (that work is under way)."
 - #719: "Follow-up on two questions the earlier replies left open, decided on 23 October.
   Re-certifications below the 12-place print restate the report they beat: in this issue's
   walk #715's at 19 counts and Couzo's 5a299b4 files at 21 restate his 4e4c8ce
@@ -73,8 +79,10 @@ ruling to it would remove that superseded row; no current row would change.
   so your 77 rows stand. Göbel's classical constructions now count as earlier reports
   beyond 324: your 331, 369 and 376 (18.707106781187, 19.707106781187, 19.899494936612)
   are rational enclosures just above Göbel's exact sides there (18 + sqrt(2)/2, 19 +
-  sqrt(2)/2, 10 + 7 sqrt(2)), so they are not recorded. 985 still waits on the
-  deletion-bound question. No row changes."
+  sqrt(2)/2, 10 + 7 sqrt(2)), so they are not recorded. 985 equals the bound Couzo's
+  4e4c8ce index states there by deleting a square from his 986 certificate; such a bound is
+  an earlier report, so 985 is not recorded. No row changes."
 
 **Validation.** See the PR's Validation section. Closed by c-answers-1023 at CI green with
-commit 889072f31, or by the coordinator after merge.
+the head commit, or by the coordinator after merge. Addendum (D6, 23 October): the
+owner also answered D6 (think-f2io); the #715 and #732 drafts above carry it.

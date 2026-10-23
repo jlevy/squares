@@ -3,9 +3,9 @@ type: is
 id: is-01m5k9n9wn6vhs8atbge2nwyrw
 title: "Decide: is a watched certificate its author withdrew from an issue a report? (1851c2c at nine counts, #719/#732)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: c-answers-1023
 labels:
   - decision
@@ -14,8 +14,12 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-23T02:32:53.909Z
-updated_at: 2026-10-23T09:40:45.384Z
+updated_at: 2026-10-23T15:52:34.028Z
 started_at: 2026-10-23T07:54:20.661Z
+closed_at: 2026-10-23T15:52:34.028Z
+close_reason: "Applied in PR #754 (https://github.com/jlevy/squares/pull/754), head 41c43051c, CI green: the #732 walk's withdrawn hold is the settled disposition naming the owner's answer (Held.answer, WITHDRAWN_ANSWER); no verdict rests on it and no row changed."
+resolution: null
+duplicate_of: null
 ---
 Owner decision raised by the #732 import (think-0gp6, lane c-lane-732-import-1023), 23 October 2026.
 

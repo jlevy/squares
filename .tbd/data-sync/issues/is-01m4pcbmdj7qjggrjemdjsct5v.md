@@ -5,7 +5,7 @@ title: "Import wand125: s(31) >= 2391/400 = 5.9775 by the mixed_n31_L59775 fine-
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: c-lower-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:02:04.210Z
-updated_at: 2026-10-23T06:46:32.073Z
+updated_at: 2026-10-23T15:48:50.037Z
 started_at: 2026-10-23T06:18:58.210Z
 ---
 Found in the 2026-10-11 intake read of wand125/square-packing (think-q655); nothing on GitHub asked. Commit 23e3186 (2026-10-11T00:51:18Z, before the head 04fbef0) adds problems/square-lower-bounds/certificates/mixed_n31_L59775/: a fine-net measure certificate reporting s(31) >= 2391/400 = 5.9775 (31 unit squares do not fit in the closed square of side 2391/400), mass 3099999/100000 < 31, core B = 4999/5000, declared net proof_net {step 1/5002, last 2072}, 2,073 directions; candidate digest 2d8d9d59...; the candidate and check2 receipts sit in the repository's data release, not the commit. The author's pre-publication check ran sqverify_fast (jlevy/squares crate with proof_net support, wand125 branch fe12e036c, source digest ab6e33e164db) from the bundle's check2/src on a fresh Ubuntu 24.04 machine: 2073/2073 directions VERIFIED in 7,277 s, mass x 0.985 control refused in 32 directions.
@@ -32,3 +32,8 @@ Against the record: n = 31's reported and verified lower bound is 2381/400 = 5.9
 - Commits: 7fbf15c70 (packet; census MIXED_PACKETS/MIXED_ROOTS/SHARED_CRATE_PACKETS; test), 7b90d47d2 (T-232 and T-233, evidence E-wand125-fine-net-n31-59775-report, coverage wand125-fine-net-n31-59775-2026-10-11, bibliography [wand125 fine-net n31 2026-10-11], resources README, n-031 open item and corrected verified-interval sentence, views). Pushed.
 - Stage 4: capture started 2026-10-23T06:39:21Z (114 directions in: ratio 0.681, projecting about 14,700 CPU-s). The stage 4 mathematical review lane was handed to the coordinator at 7b90d47d2.
 - No issue asked, so no reply is owed; the S3 draft significance does not need an issue of the project's own (S4+ rule).
+2026-10-23 c-lower-1023, stage 4 done on claude/intake-2026-10-23-lower-bounds (PR #745):
+- Census (approved by the coordinator; nice -n 19, 2 threads, binary 567a0fd5 from reviewed source d97758bb): capture VERIFIED at all 2,073 directions, 787,004,724 nodes (the source's total), least certified bound 1.000000000022577, 14,607.6 CPU-s, 06:39-11:01Z (a71ab3949); whole-net controls CONTROLS_REFUSED, the 99/100 mutant refused at 2,073 of 2,073 (df6fb4566). Receipts in packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/.
+- Stage 4 review (c-review-t232-math, think-oc25) accepted, no blocking or major finding; mapped in 2d32050e4 with its programs and outputs in the packet's review/review-2026-10-23/: external_review on the report, replay evidence E-wand125-fine-net-n31-59775-sqverify-fast-replay, the review's sample E-wand125-fine-net-n31-59775-review-sample (122 of 2,073, clean room), three verifiers. T-232 at V3/C3 (check_results derives it), S3 confirmed; n-031's lower lanes moved from 2381/400 to 2391/400.
+- Release: explainer v0.4.22 for 232 results and a no-change record for the other three papers (c985abb44). #753 also cuts v0.4.22; after it merges, merge main and take the next patch.
+- For the author (owner's call, no issue asked): the review's M-1 to M-3 and its five questions.
