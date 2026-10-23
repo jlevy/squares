@@ -1,29 +1,25 @@
 // Head bootstrap: preserve layout queries and navigation geometry before first paint.
 // Embedded documents hide site chrome; non-fragment links leave the preview frame.
 (() => {
+  const root = document.documentElement;
   // The navigation controller runs after the article. Reserve its collapsed geometry
   // now so a long paper never paints the fully exposed no-script link lists first.
   // With scripts disabled this marker is absent and every navigation link stays visible.
-  document.documentElement.dataset.siteNavEnhanced = "true";
+  root.dataset.siteNavEnhanced = "true";
   const query = new URLSearchParams(location.search);
   if (location.pathname.endsWith("/atlas.html")) {
-    document.documentElement.setAttribute(
-      "data-site-atlas-view",
-      query.get("atlas") === "grid" ? "grid" : "triangle",
-    );
+    root.setAttribute("data-site-atlas-view", query.get("atlas") === "grid" ? "grid" : "triangle");
     const scale = query.get("scale");
-    document.documentElement.setAttribute(
+    root.setAttribute(
       "data-site-atlas-scale",
       scale === "fixed" || scale === "global" ? scale : "row",
     );
   }
-  // Either Atlas page honors an explicit size; else the stylesheet's default holds, or
-  // a Triangle reached from the top follows the scroll (atlas-view.js), unless the
-  // reader asks for reduced motion.
+  // Either Atlas page honors an explicit size; else a Triangle reached from the top
+  // follows the scroll (atlas-view.js) unless the reader asks for reduced motion.
   const size = query.get("size") ?? "";
-  const named = ["small", "medium", "large", "xlarge"].includes(size);
-  if (named) {
-    document.documentElement.setAttribute("data-site-atlas-size", size);
+  if (["small", "medium", "large", "xlarge"].includes(size)) {
+    root.setAttribute("data-site-atlas-size", size);
   } else if (
     /\/(atlas\.html|index\.html)?$/.test(location.pathname) &&
     location.hash.length < 2 &&
@@ -31,12 +27,12 @@
     query.get("view") !== "embed" &&
     !matchMedia("(prefers-reduced-motion: reduce)").matches
   ) {
-    document.documentElement.setAttribute("data-site-atlas-follow", "");
+    root.setAttribute("data-site-atlas-follow", "");
   }
   if (query.get("view") !== "embed") {
     return;
   }
-  document.documentElement.setAttribute("data-site-view", "embed");
+  root.setAttribute("data-site-view", "embed");
   document.addEventListener(
     "click",
     (event) => {
