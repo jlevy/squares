@@ -5,7 +5,7 @@ title: "Decide #715's 30 sub-print re-certifications of Couzo's 4e4c8ce certific
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: c-lane-715-import
 labels:
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m5g8xj3hqca5wcen9f71dtnd
 hold: null
 hold_until: null
 created_at: 2026-10-22T00:49:44.766Z
-updated_at: 2026-10-23T01:52:17.076Z
+updated_at: 2026-10-23T05:04:11.421Z
 started_at: 2026-10-22T00:49:56.222Z
 ---
 Issue #715 (franciscouzo/square-packing 6b7391de) restates 64 counts at or below 1024 that the triage read as certificates first published at 02f9690, f311f08, a7067d7 and 4e4c8ce (9 to 15 October). At the pin, 30 of them are not byte-identical: the explicit certificates certificates/nN.cert, first committed at 5a299b4 (2026-10-20) and pushed with the pin at 2026-10-21T22:56:37Z after the issue, are exact L-border re-materializations of the same packings whose sides are below the 4e4c8ce certificates' by 2.37e-23 to 3.18e-23. Both round up to the same 12-place print. Counts: 535, 582, 591, 631, 633, 640, 682, 684, 691, 695, 735, 737, 742, 745, 790, 791, 797, 798, 799, 854, 855, 856, 857, 909, 913, 915, 916, 970, 975, 977.
@@ -71,3 +71,5 @@ by under 1e-12, and both round up to one 12-place print:
 2026-10-23 (c-lane-couzo-residue-1022, review A of #730, A2): 9 history verdicts rest only on sub-print holds (`HISTORY_RESTING`): 5a299b4 at 325, 333, 362, 401, 442, 485, 530 and 577, and 23aff0c at 327. #719's 366 rests on one in #719's walk. The history walk holds 74 sub-print re-certifications (think-fwa9). A rerun without them records 8 steps, each itself a re-certification below the 12-place print, so this decision holds it again (`refusal_flips`, `held-dependents`). Any answer that leaves held publications out of the record still means rerunning the history walk (`beyond_horizon_replay`; see think-f2io's note of today).
 
 2026-10-23 (c-lane-couzo-residue-1022, review A of #730, round 2, A6): a correction to this morning's note. The #719 walk now holds #715's re-certifications at the 19 counts it records them, as the history walk does (`Held(SUB_PRINT, "think-fwa9")`, no longer `Awaiting`), since they wait on this decision and not on an import. In that walk 5a299b4's not-recorded verdicts at those 19 counts (535, 582, 591, 631, 633, 640, 682, 684, 691, 695, 735, 737, 742, 745, 790, 791, 797, 798, 799) rest on them alone, beside #719's 366. `HISTORY_RESTING` and the #719 walk's `resting` declare them, and `check` holds them. A rerun without the sub-print holds records each of the 19 again as a re-certification below the 12-place print, so this decision holds it again; no row is at risk. Across both walks, 9 + 19 + 1 verdicts rest on sub-print holds.
+
+2026-10-23 coord-intake-1023: OWNER DECISION (in conversation, 23 October): sub-print re-certifications are RESTATEMENTS, not new rows. The earlier certificate stays the row; the held verdicts (Couzo's 74 across 5a299b4/23aff0c/4e4c8ce, #715's 30, #732's 499) become restatements, and the walks are rerun without the SUB_PRINT holds (HISTORY_RESTING, the #719 walk's resting, #732's 499). Implementation owed after #742 merges (new bead under think-ezt8).
