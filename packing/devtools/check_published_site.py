@@ -152,9 +152,6 @@ def paper_files(page: str) -> tuple[str, str]:
 #: What is served with the optimality paper's page (`paper_files`).
 OPTIMALITY_PAPER_MARKDOWN, _OPTIMALITY_PAPER_PDF = paper_files(OPTIMALITY_PAPER)
 OPTIMALITY_PAPER_FILES = paper_files(OPTIMALITY_PAPER)
-#: The bar's current entry on a paper's page, a level below the root.
-PAPERS_CURRENT = '<a data-page="explanations" aria-current="page" href="../papers.html">'
-
 #: Every file the deploy serves with the lower-bounds explainer, by path under the site's
 #: root: its Markdown and PDF beside it, and the atlas's files at the root.
 SERVED = (
@@ -1073,6 +1070,31 @@ class _RecordMarkup(HTMLParser):
         ]
 
 
+def paper_navigation_current(page: str) -> bool:
+    """A paper identifies both its active category and its Papers destination."""
+    markup = _RecordMarkup(page)
+    bars = [
+        element
+        for element in markup.find(tag="ul")
+        if element.attrs.get("id") == "site-nav-links"
+    ]
+    if len(bars) != 1:
+        return False
+    bar = bars[0]
+    learn = any(
+        element.attrs.get("data-page") == "learn"
+        and element.attrs.get("aria-current") == "true"
+        for element in markup.find(tag="span", within=bar)
+    )
+    papers = any(
+        element.attrs.get("data-page") == "papers"
+        and element.attrs.get("href") == "../papers.html"
+        and element.attrs.get("aria-current") == "true"
+        for element in markup.find(tag="a", within=bar)
+    )
+    return learn and papers
+
+
 def row_records(page: str) -> dict[str, str]:
     """The inline legacy record line, bounded by its own completed result popover.
     Current rows fetch their records from a complete result page instead."""
@@ -1848,7 +1870,7 @@ def check(
             checked_links |= repository_links(text)
         if name in RECORD_LINK_PAGES:
             tables[name] = text
-        if name == "atlas.html":
+        if name == "frontier.html":
             indexed = [int(n) for n, case in CASE_INDEX_LINK.findall(text) if n == case]
 
     overviews = sorted(
@@ -1891,12 +1913,12 @@ def check(
     if bodies:
         links_main("the result overviews", "\n".join(bodies))
 
-    # The Atlas survey names every canonical record in register order. The registry
+    # Frontier Survey names every canonical case record in register order. The registry
     # walk checks all records; this content sample also verifies their identities.
     results.append(
         (
             bool(indexed) and indexed == expected_cases,
-            f"atlas.html indexes {len(indexed)} registered case records in order",
+            f"frontier.html indexes {len(indexed)} registered case records in order",
         )
     )
     sample = (
@@ -1951,8 +1973,8 @@ def check(
     page, text = served_page(
         LOWER_BOUNDS_PAPER, site + LOWER_BOUNDS_PAPER, PAGE_URL, version=EXPLAINER_VERSION
     )
-    current = PAPERS_CURRENT in text
-    marked = f"Papers is {'' if current else 'not '}the bar's current entry"
+    current = paper_navigation_current(text)
+    marked = f"Learn/Papers is {'' if current else 'not '}current in the shared navigation"
     results.append((current, f"{LOWER_BOUNDS_PAPER}: {marked}, linked from a level below"))
     heads[LOWER_BOUNDS_PAPER] = text
 
@@ -2022,8 +2044,8 @@ def check(
         )
 
     # Every review, each as the optimality review has been checked since it was served:
-    # its page with Papers current in its bar, its own version and not the site's, its
-    # citations pinned to the commit, and its Markdown and PDF beside it.
+    # its page with Learn/Papers current in shared navigation, its own version rather
+    # than the site's, citations pinned to the commit, and Markdown and PDF beside it.
     paper_pages = {LOWER_BOUNDS_PAPER: text}
     paper_markdowns = {LOWER_BOUNDS_MARKDOWN: markdown_text}
     for review in REVIEW_PAPERS:
@@ -2033,8 +2055,8 @@ def check(
         version = PAPER_VERSIONS[record.slug]
         status, paper = read(site + review, timeout=timeout)
         paper_text = paper.decode("utf-8", errors="replace")
-        current = PAPERS_CURRENT in paper_text
-        marked = f"Papers is {'' if current else 'not '}the bar's current entry"
+        current = paper_navigation_current(paper_text)
+        marked = f"Learn/Papers is {'' if current else 'not '}current in the shared navigation"
         line = f"{record.label} {review}: HTTP {status}, {len(paper)} bytes, {marked}"
         results.append((status == 200 and current, line))
         if status == 200:

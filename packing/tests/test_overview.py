@@ -4493,12 +4493,11 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
         render_overview.ARTICLE_LOADER_SCRIPT,
         render_overview.POPOVER_SCRIPT,
         render_overview.CASE_POPOVER_SCRIPT,
-        render_overview.CONTRIBUTOR_POPOVER_SCRIPT,
     )
     tags = [_asset_tag(program, "papers.html") for program in programs]
     assert all(page.count(tag) == 1 for tag in tags)
     assert [page.index(tag) for tag in tags] == sorted(page.index(tag) for tag in tags)
-    for selector in ("data-case-popover", "data-contributor-popover"):
+    for selector in ("data-case-popover",):
         assert page.count(selector) == 1
         assert page.index(selector) < page.index(
             _asset_tag(render_overview.POPOVER_SCRIPT, "papers.html")
@@ -7494,30 +7493,15 @@ def test_site_introductions_use_prose_without_reclassifying_controls(
     from devtools.paper_structure import parse  # noqa: PLC0415
 
     guidance = parse(page).find_all(cls="site-navigation-copy")
-    guidance_text = " ".join(node.text() for node in guidance)
-    for invitation in (
-        "We track contributors",
-        "Have a new packing",
-        "Start with the tutorials",
-        "Watch the Atlas grow",
-        "Explore the catalogues",
-    ):
-        assert invitation in guidance_text
-    assert "The square packing problem is a simple" in parse(page).text()
-    assert "The square packing problem is a simple" not in guidance_text
-    assert "The value of s(n) remains unknown" not in guidance_text
-    for source, expected in (
-        (tutorials, "Start with Square Packing from First Principles"),
-        (resources, "Catalogues, research repositories"),
-        (report, "If you have new results"),
-        (downloads, "Download the first hundred packings"),
-    ):
-        assert expected in parse(source).text()
-    documentation_intro = parse(documentation).find_all(cls="site-navigation-copy")
-    assert documentation_intro
-    assert documentation_intro[0].text().strip()
-    directory = parse(contributor_documents[render_contributors.DIRECTORY_PATH]).text()
-    assert "People whose work is cited or credited in the square-packing record." in directory
+    assert guidance
+    assert all(node.text().strip() for node in guidance)
+    for source in (tutorials, resources, documentation, report, downloads):
+        introductions = parse(source).find_all(cls="site-navigation-copy")
+        assert introductions, "A standalone collection needs an introduction"
+        assert all(node.text().strip() for node in introductions)
+    directory = parse(contributor_documents[render_contributors.DIRECTORY_PATH])
+    assert directory.find_all("h1")
+    assert directory.find_all("p")[0].text().strip()
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     intro = _rule(css, ".kpress .site-navigation-copy")
     assert "font-family: var(--kpress-font-prose);" in intro

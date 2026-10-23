@@ -526,7 +526,7 @@ body {
    theme, and its own caption is replaced by the figure's. */
 .trump a {
   display: block;
-  width: min(100%, 24rem);
+  width: min(100%, var(--paper-packing-diagram-width));
 }
 /* biome-ignore lint/style/noDescendingSpecificity: historical selector order preserves the established KPress publication cascade. */
 .trump svg {
@@ -632,7 +632,7 @@ body {
 .cert-page .kpress-figcaption {
   border-block-start: 0;
   margin-block-start: 0;
-  padding-block: 0.85rem 1rem;
+  padding-block: var(--paper-caption-space-above) var(--paper-caption-space-below);
 }
 /* The "Figure N." prefix is the caption label. It uses the title-credit bold so a
    reader scanning for Figure 7 can find it; the condition and caption text stay at the

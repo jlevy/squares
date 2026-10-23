@@ -436,6 +436,31 @@ def element_ids(page: str) -> frozenset[str]:
     )
 
 
+def tutorial_packing_images(page: str, *, page_path: str) -> str:
+    """Publish the papers' container crop as a shared image after source-link rewriting."""
+    from devtools import site_assets  # noqa: PLC0415
+    from devtools.render_n11_lower_bounds_explainer import crop_to_container  # noqa: PLC0415
+
+    def cropped(match: re.Match[str]) -> str:
+        source = REPO / "packing/atlas/rendering" / match["name"]
+        svg = crop_to_container(source.read_text(encoding="utf-8"), name=source.name)
+        ref = site_assets.shared().assets.image("tutorial-" + source.name, svg.encode())
+        return (
+            match[0]
+            .replace(match["url"], site_assets.asset_href(ref, page_path), 1)
+            .replace('class="kpress-image"', 'class="kpress-image site-packing-diagram"', 1)
+        )
+
+    source_root = re.escape(repo_url("packing/atlas/rendering", kind="raw") + "/")
+    return re.sub(
+        r'<img\b[^>]*src="(?P<url>'
+        + source_root
+        + r'(?P<name>(?:trump11|kingbird29)-overview\.svg))"[^>]*>',
+        cropped,
+        page,
+    )
+
+
 def tutorial_front(page: str) -> str:
     """Present the source's credit list with the shared publication component."""
     pattern = re.compile(
@@ -483,6 +508,16 @@ def render_document(
         served=served_pages(),
         aliases=record_aliases(tree),
     )
+
+    def rewrite(page: str) -> str:
+        tutorial = document.source in (TUTORIAL, TUTORIAL_ADVANCED)
+        page = rewrite_article(
+            tutorial_front(page) if tutorial else page, context=context, report=report
+        )
+        if tutorial:
+            page = tutorial_packing_images(page, page_path=document.name)
+        return _reader_profile_links(page) if document in DOCUMENTS else page
+
     return render_overview.kpress_page(
         source_actions(document.source)
         + "\n\n"
@@ -504,17 +539,7 @@ def render_document(
         toc=False if document.name == "synopsis.html" else "auto",
         trust_mode="sanitized",
         strict_anchors=True,
-        rewrite_body=lambda page: (
-            _reader_profile_links if document in DOCUMENTS else lambda value: value
-        )(
-            rewrite_article(
-                tutorial_front(page)
-                if document.source in (TUTORIAL, TUTORIAL_ADVANCED)
-                else page,
-                context=context,
-                report=report,
-            )
-        ),
+        rewrite_body=rewrite,
     )
 
 

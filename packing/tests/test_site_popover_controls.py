@@ -222,15 +222,7 @@ def test_case_and_profile_actions_follow_replacement_and_remain_navigable(
         site_browser.api().expect(page).to_have_url(served + "cases/12.html")
         page.goto(served)
         page.locator("#profile-link").click()
-        panel = page.locator("#pop-contributor")
-        panel.locator("article.site-contributor").wait_for(state="visible")
-        assert not panel.evaluate(LAYOUT)["titleOverlapsControls"]
-        expected = served + "profiles/walter-stromquist.html"
-        assert panel.locator(".site-popover-expand").get_attribute("href") == expected
-        assert panel.locator("[data-contributor-open]").get_attribute("href") == expected
-        site_browser.api().expect(panel.locator(".site-popover-close")).to_be_focused()
-        panel.locator(".site-popover-expand").click()
-        site_browser.api().expect(page).to_have_url(expected)
+        site_browser.api().expect(page).to_have_url(served + "profiles/walter-stromquist.html")
         page.goto(served)
         page.locator("#local-row").press("Enter")
         assert page.locator("#pop-local .site-popover-expand").count() == 0

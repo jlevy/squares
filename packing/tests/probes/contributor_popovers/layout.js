@@ -1,10 +1,4 @@
 () => {
-  const panel = document.querySelector("[data-contributor-popover]");
-  if (!(panel instanceof HTMLElement)) {
-    throw new Error("Missing contributor popover");
-  }
-  const box = panel.getBoundingClientRect();
-  const ids = Array.from(document.querySelectorAll("[id]"), (node) => node.id);
   const table = document.querySelector(".site-profile-table");
   const directory =
     table instanceof HTMLTableElement
@@ -42,12 +36,5 @@
           }),
         }
       : null;
-  return {
-    directory,
-    left: box.left,
-    right: box.right,
-    width: window.innerWidth,
-    pageWidth: document.documentElement.scrollWidth,
-    duplicateIds: ids.filter((id, index) => ids.indexOf(id) !== index),
-  };
+  return { directory };
 };
