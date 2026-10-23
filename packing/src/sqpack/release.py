@@ -2417,6 +2417,37 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The Lean formalization imports of 23 October (#750): T-234 to T-236, their "
+            "notes on T-055, T-066 and T-163, and four coverage entries, against main "
+            "c1115c095 (#749): rendered at link revision c1115c09 into empty site "
+            "directories, twice from this tree at 85512881 and twice from the same tree "
+            "with main's register and coverage register swapped in (69 files each), "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all four. The "
+            "explainer counts the register (233 entries here, 230 on main) and differs "
+            "only there; it takes its successor once T-231 to T-233 are on main. No PDF "
+            "was printed; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
