@@ -1,0 +1,38 @@
+{
+ "program": "review_t229_check.py same",
+ "python": "3.14.7",
+ "pairs": [
+  {
+   "n_equal": true,
+   "side_equal": true,
+   "rows_exactly_equal": 105,
+   "rows_equal_up_to_quarter_turn": 0,
+   "rows_differing": [],
+   "same_packing_exactly": true,
+   "label": "T-229@105",
+   "certificate": "triage-719/src/pin/certificates/n-105.cert",
+   "fact": "wt-t229r/packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-105.yaml.gz",
+   "certificate_sha256": "15b8044a4b2e75d31999a6ddff518cfb72fadacad2a7584d1d5e196f5c219bc9",
+   "certificate_git_blob": "ef9c91bb051dbb9f8f8dd4d05b1356e280307435",
+   "fact_file_sha256": "3052dd68092089a74125e7ff536e297e9b73b5634bf7dc7f37f5987d35e6ed0b",
+   "fact_content_sha256": "09ef4b6e1462ccf23dd69a1cfbe443bd827d0f52629141346c65dca101166cbc",
+   "fact_content_git_blob": "a68aa84df684dc678aea2bf177a7b18c8b73f0f8"
+  },
+  {
+   "n_equal": true,
+   "side_equal": true,
+   "rows_exactly_equal": 204,
+   "rows_equal_up_to_quarter_turn": 0,
+   "rows_differing": [],
+   "same_packing_exactly": true,
+   "label": "T-229@204",
+   "certificate": "triage-719/src/pin/certificates/n-204.cert",
+   "fact": "wt-t229r/packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-204.yaml.gz",
+   "certificate_sha256": "7c77ad00e36fdceedadeef0d6e256a6682a6974877ded0f97aa110cad918f4a3",
+   "certificate_git_blob": "17e243a8566be38f48af2a4790e7cedb2745121f",
+   "fact_file_sha256": "7e4107e75536ee828a9e54b47dba68c5f4be0e7564396ae3971fc7c5b2883777",
+   "fact_content_sha256": "c122e34b6c34e25a671551b58c4fcd1857c8725ea8d2db4cf43fc22040c68621",
+   "fact_content_git_blob": "cdd3d59021bab353e2ba86fab7dbc560dd75836b"
+  }
+ ]
+}

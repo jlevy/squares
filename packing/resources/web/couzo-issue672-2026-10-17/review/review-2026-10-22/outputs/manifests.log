@@ -1,0 +1,7 @@
+couzo-issue670-2026-10-17 23aff0c6 digest equal https://github.com/jlevy/squares/blob/37e6757ed4c51a1d93f2f999814c2a5efbe2a223/packing/src/sqpack/verify.py
+  204: credit='Francisco Couzo; seed/construction: Mykhailo Polkovskyi (Mishapolk)'; category='native search'; strict valid=False closed_valid=True near_pairs=498
+couzo-issue672-2026-10-17 af8cb795 digest equal https://github.com/jlevy/squares/blob/37e6757ed4c51a1d93f2f999814c2a5efbe2a223/packing/src/sqpack/verify.py
+  227: credit='Francisco Couzo; retained seed/construction credit: Joost de Winter (JoostdeWinter)'; category='CT105 web submission'; strict valid=True closed_valid=True near_pairs=459
+  229: credit='Francisco Couzo; seed/construction: Joost de Winter'; category='native search'; strict valid=False closed_valid=True near_pairs=563
+couzo-issue675-2026-10-18 c6da0fc7 digest equal https://github.com/jlevy/squares/blob/37e6757ed4c51a1d93f2f999814c2a5efbe2a223/packing/src/sqpack/verify.py
+  204: credit='Francisco Couzo; seed/construction: Mykhailo Polkovskyi (Mishapolk)'; category='native search'; strict valid=False closed_valid=True near_pairs=487

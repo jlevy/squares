@@ -1,0 +1,28 @@
+PASS separated
+PASS edge contact
+PASS edge overlap 1e-30
+PASS partial edge contact
+PASS corner contact
+PASS tilted vertex on edge
+PASS tilted vertex 1e-30 in
+PASS tilted vertex 1e-30 out
+PASS separated only on B's axis, contact
+PASS separated only on B's axis, 1e-30 in
+PASS separated only on B's axis, 1e-30 out
+PASS wall contact
+PASS wall crossed by 1e-30
+PASS tilted wall contact
+PASS tilted wall crossed by 1e-30
+PASS far wall contact, side lowered
+PASS duplicate square
+PASS tilted pair, same centre
+PASS fact: separated
+PASS fact: tilted vertex on edge
+PASS fact: basis not unit
+PASS reader: row count
+PASS reader: decimal literal
+PASS reader: fact count
+PASS reader: fact unknown key
+PASS reader: fact origin
+PASS same(): equal, then one basis mirrored
+27 of 27 as expected

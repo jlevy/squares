@@ -1,0 +1,36 @@
+n=105: side 10.7893037837429748; below every earlier report: True (15); house T-174 by 5.1834384423e-12; later counts all below: True (least 3.3604260390e-02 at 106, 438 bounds)
+    before 2026-08-22                Kingbird catalogue                                                       1.8590207706e-02 below
+    2026-09-24T04:45:20Z             Griffin Casson, griffcass/square-packing 82661bc                         1.8284749453e-02 below
+    2026-09-26T03:27:13Z             Francisco Couzo, franciscouzo/square-packing 3bfc47e                     1.8284748369e-02 below
+    2026-09-27                       Francisco Couzo, 27 September ceiling                                    1.6774081798e-02 below
+    2026-10-07                       T-117, Rehwaldt and Couzo refinements                                    1.6774081777e-02 below
+    2026-10-08                       T-125, Ryan Xu                                                           1.3727916678e-03 below
+    before 2026-10-13                T-128                                                                    1.3144843642e-03 below
+    before 2026-10-13                T-138                                                                    7.0246075154e-12 below
+    2026-10-08                       T-130, Couzo's refinement of Xu's packing                                5.1834385502e-12 below
+    2026-10-12                       T-170, PingYou Ltd #568                                                  5.1834384423e-12 below
+    2026-10-13                       T-174, PingYou Ltd PR #574, the house when #719 was reported             5.1834384423e-12 below
+    2026-10-14T01:40Z                T-183, Polkovskyi #593                                                   5.1834385502e-12 below
+    2026-10-15T00:31:53Z             Couzo 4e4c8ce certificates/best/n105.cert                                5.1834384423e-12 below
+    2026-10-15T00:31:53Z             Couzo 4e4c8ce certificates/n105.cert                                     5.1834385502e-12 below
+    2026-10-21T22:56:37Z (pushed)    Couzo 5a299b4 certificates/best/n105.cert                                5.1834384423e-12 below
+    prints: {"exact_decimal": "10.789303783742975392484567321744", "ceiling_12": "10.789303783743", "ceiling_16": "10.7893037837429754", "binary64_at_16": "10.7893037837429748", "issue_print": "10.7893037837429748", "issue_print_is_binary64_at_16": true, "issue_print_below_exact_side": true, "packet_ceiling": "10.7893037837429754", "packet_ceiling_is_ceiling_16": true, "offered_side": "10.789303783742975392484567321744", "offered_side_is_exact": true, "issue_baseline": "10.7893037837481582", "issue_baseline_minus_house": "-6.3092683666e-16"}
+    printed margins: {"T-174": {"printed": "5.18e-12", "exact": "5.1834384423e-12", "printed_at_most_exact": true, "within_one_unit": true}, "T-183": {"printed": "5.18e-12", "exact": "5.1834385502e-12", "printed_at_most_exact": true, "within_one_unit": true}}
+    other file n105.cert: side - claimed = 4.6381854855e-12
+n=204: side 14.8086428305278961; below every earlier report: True (13); house T-225 by 1.0063597267e-08; later counts all below: True (least 1.5808315596e-02 at 205, 240 bounds)
+    before 2026-08-22                Kingbird catalogue                                                       1.4232825004e-02 below
+    2026-10-12                       T-162, Daniil Ostashev #562                                              2.0403859060e-05 below
+    2026-10-13                       PingYou Ltd PR #574                                                      2.0403859060e-05 below
+    2026-10-14T01:40Z                T-183, Polkovskyi #593                                                   2.0403859060e-05 below
+    2026-10-14T16:11:31Z             T-186, Polkovskyi 70a033f KKT refinement                                 2.0403859060e-05 below
+    2026-10-15T00:31:53Z             Couzo 4e4c8ce certificates/best/n204.cert                                2.0403859060e-05 below
+    2026-10-15T00:31:53Z             Couzo 4e4c8ce certificates/n204.cert                                     2.0403875655e-05 below
+    2026-10-16T03:37:13Z             Evan Daniel #639 (the ledger's print, rounded up at 12)                  2.0403858103e-05 below
+    2026-10-17T18:05:06Z             T-226, Couzo #670                                                        1.5871620272e-06 below
+    2026-10-18T06:02:11Z             T-228, Couzo #675                                                        1.5366988930e-06 below
+    2026-10-18T23:23:19Z             T-223, Couzo #678                                                        1.1453350568e-08 below
+    2026-10-20T02:36:12Z             T-225, Evan Daniel evand/square-packing@0075967, the house when #719 w   1.0063597267e-08 below
+    2026-10-21T22:56:37Z (pushed)    Couzo 5a299b4 certificates/best/n204.cert                                1.0063597267e-08 below
+    prints: {"exact_decimal": "14.808642830527896655757312", "ceiling_12": "14.808642830528", "ceiling_16": "14.8086428305278967", "binary64_at_16": "14.8086428305278961", "issue_print": "14.8086428305278961", "issue_print_is_binary64_at_16": true, "issue_print_below_exact_side": true, "packet_ceiling": "14.8086428305278967", "packet_ceiling_is_ceiling_16": true, "offered_side": "14.808642830527896655757312", "offered_side_is_exact": true, "issue_baseline": "14.8086428405914940", "issue_baseline_minus_house": "7.6931557129e-17"}
+    printed margins: {"T-225": {"printed": "1.006e-8", "exact": "1.0063597267e-08", "printed_at_most_exact": true, "within_one_unit": true}, "T-223": {"printed": "1.145e-8", "exact": "1.1453350568e-08", "printed_at_most_exact": true, "within_one_unit": true}, "T-228": {"printed": "1.537e-6", "exact": "1.5366988930e-06", "printed_at_most_exact": false, "within_one_unit": true}, "T-226": {"printed": "1.587e-6", "exact": "1.5871620272e-06", "printed_at_most_exact": true, "within_one_unit": true}, "T-186": {"printed": "2.040e-5", "exact": "2.0403859060e-05", "printed_at_most_exact": true, "within_one_unit": true}}
+    other file n204.cert: side - claimed = -1.4809457955e-11
