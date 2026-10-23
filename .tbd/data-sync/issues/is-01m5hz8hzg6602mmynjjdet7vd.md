@@ -3,14 +3,18 @@ type: is
 id: is-01m5hz8hzg6602mmynjjdet7vd
 title: "Polkovskyi's unclaimed n204.cert (12fc4667) is 1.48e-11 below T-229 and equals the project's regularized view: record it under his credit"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 4
+version: 5
+delegate: c-lane-719-records-1023
 labels:
   - result-import
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-10-22T14:11:56.015Z
-updated_at: 2026-10-23T04:10:50.350Z
+updated_at: 2026-10-23T04:56:11.671Z
+started_at: 2026-10-23T04:56:11.671Z
 ---
 Found by the stage 4 lane c-lane-stage4-1022 (22 October 2026) while regularizing T-229 after adoption.
 
