@@ -5,12 +5,12 @@ title: "Polkovskyi's unclaimed n204.cert (12fc4667) is 1.48e-11 below T-229 and 
 kind: task
 status: open
 priority: 2
-version: 3
+version: 4
 labels:
   - result-import
 dependencies: []
 created_at: 2026-10-22T14:11:56.015Z
-updated_at: 2026-10-23T00:36:20.108Z
+updated_at: 2026-10-23T04:10:50.350Z
 ---
 Found by the stage 4 lane c-lane-stage4-1022 (22 October 2026) while regularizing T-229 after adoption.
 
@@ -39,3 +39,5 @@ blocked_on: think-xyhn
 - How to record it: T-229 is now V3/C3 and adopted at n-204.cert's side, so restating T-229 would void its review's stated bound. Recommended: a new entry at 204 (a refinement of T-229's packing, credited as T-229 is), dated by 1851c2c, then stage 4 and adoption by the house rule; the stage 4 regularizer run is corroborating evidence, not credit. The coordinator chooses.
 - The reply draft that announces this step: replies/stage4-1022/719-reply-v2.md.
 blocked_on: none
+
+2026-10-23 04:05Z coord-intake-1021b: Mishapolk answered on #719 (issuecomment-6355484781, 01:52:40Z): (1) sqpack.verify was imported as a module in a batch harness (not the CLI); Daniel verify_cert.py and verify_cert2.py were the copies in Couzo 6b7391d; (2) the 204 SQP solve started from Couzo #678 n204.cert in Couzo frame, not from T-225 (consistent with the review: pairs with Couzo frame without the half turn). Record changes owed in the next #719 records PR (with n204-lower): T-229 204 lineage/credit drops Evan Daniel regularization as an antecedent at 204 and the stale sentence that the source states no lineage; read_through to 01:52:40Z; a follow-up reply on #719 saying what changed. #742 (rows PR) left this comment unread.
