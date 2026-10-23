@@ -1237,6 +1237,51 @@ PRs and supporting records: [\#474](https://github.com/jlevy/squares/pull/474).
 
 ### 2026-10-09
 
+<a id="changelog-entry-couzo-eight-exact-refinements-reported"></a>
+
+#### Couzo Reports Eight Smaller Exact Packings
+
+Significance S3: T-128 is an S3 finite case result as reported: eight complete rational certificates, each 9.79e-07 to 6.60e-04 below its case ceiling, refining earlier packings. It brings no new technique and claims no optimality.
+
+[Francisco Couzo](packing/contributors/people/francisco-couzo.md) reports exact
+rational packings of 105, 108, 127, 131, 155, 180, 228 and 306 unit squares, each
+below the ceiling its case held. They are registered as T-128, a reported result at
+V0/C0 pending adoption.
+
+- Each refines an earlier packing:
+  [Ryan Xu](packing/contributors/people/ryan-xu.md)’s at 105, 108, 127 and 131,
+  Chaoweeraprasit’s at 155 and 180 (180 through Gupta), and Couzo’s own at 228 and
+  306. Both maintained exact routes accepted all eight and refused their 16
+  duplicate-square and outside-container controls.
+- The same change set the rule that a smaller bound not yet adopted reads as
+  pending adoption, not superseded.
+- The 10 October intake (#487) later replayed and confirmed them at V3/C3, as
+  announced in Exact Certificates and a Stronger 40-Square Bound.
+
+PRs and supporting records: [\#460](https://github.com/jlevy/squares/pull/460) · [The later replay and confirmation (\#487)](#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-exact-refinements-2026-10-08/README.md) · [Couzo’s report](https://github.com/jlevy/squares/issues/451).
+
+<a id="changelog-entry-couzo-five-follow-up-refinements-reported"></a>
+
+#### Couzo Reports Five Further Exact Packings
+
+Significance S3: T-130 is an S3 finite case result as reported: five complete rational certificates, 3.03e-05 to 1.74e-03 below the case ceilings then, refining earlier packings. It brings no new technique and claims no optimality.
+
+[Francisco Couzo](packing/contributors/people/francisco-couzo.md) reports exact
+rational packings of 84, 86, 105, 175 and 270 unit squares, each below the ceiling
+its case held. They are registered as T-130, a reported result at V0/C0 pending
+adoption.
+
+- He refines [Ryan Xu](packing/contributors/people/ryan-xu.md)’s packings at 84,
+  86, 105 and 175 and [Evan Daniel](packing/contributors/people/evan-daniel.md)’s
+  at 270; at 105 the new side is also $1.31 \times 10^{-3}$ below his own T-128.
+  Both maintained exact routes accepted all five and refused their ten controls.
+- The source carries no licence, so the record keeps derived exact facts that
+  rebuild each certificate, not the source’s files.
+- The 10 October intake (#487) later replayed and confirmed them at V3/C3, as
+  announced in Exact Certificates and a Stronger 40-Square Bound.
+
+PRs and supporting records: [\#469](https://github.com/jlevy/squares/pull/469) · [The later replay and confirmation (\#487)](#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-followup-refinements-2026-10-08/README.md) · [Couzo’s report, a comment on](https://github.com/jlevy/squares/pull/460#issuecomment-6070798890).
+
 <a id="changelog-entry-couzo-twenty-beyond-corpus-reports"></a>
 
 #### Couzo Reports Packings Beyond 324 Squares
