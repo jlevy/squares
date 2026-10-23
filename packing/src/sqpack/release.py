@@ -2468,10 +2468,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte-identical across all four. The n204 source's card in site_resources "
             "and the 204 page's budget in site_urls (#753's CI), and review A's record "
             "fixes, change none of the 69 files: rendered again at 6f317a6b, ba0cb64e and "
-            "ea8e97a1, every file equals the 8386d394 render. The explainer counts the "
-            "register and takes "
-            "v0.4.22. No PDF was printed; each prints from that HTML. Retain v0.1.11, "
-            "v0.1.4 and v0.2.7."
+            "ea8e97a1, every file equals the 8386d394 render. Re-measured against main "
+            "7335d0098 (#752) after merging it, at c1d1cb7a: the three papers are "
+            "byte-identical to main's, and the explainer differs only in its count and "
+            "v0.4.22. The explainer counts the register and takes v0.4.22. No PDF was "
+            "printed; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
