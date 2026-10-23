@@ -5,12 +5,12 @@ title: "Import Mishapolk: 5,468 certificates 328–10000 at 814fbe9, '#715 resol
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 labels:
   - result-import
 dependencies: []
 created_at: 2026-10-22T20:07:20.685Z
-updated_at: 2026-10-23T00:36:23.773Z
+updated_at: 2026-10-23T01:20:01.559Z
 ---
 Issue #732 (https://github.com/jlevy/squares/issues/732), opened 2026-10-22T19:55:03Z by Mishapolk (Mykhailo Polkovskyi): "328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof". Source Mishapolk/square-packing-records@814fbe9129b7abb301923cc50de621697a53940f (upper_bounds.json, certified_bounds.json, certificates/manifest.json, certificates/census.json with digests in the issue).
 From the stage 7 lane after #722 (repo moved past dc440a88): 8a488a1 (19:08:59Z) and 3285fac (19:29:30Z) reorganize certificates/ into thousands folders holding files at 5,594 counts up to 9,913 (126 in the corpus, 390 at 325–1024, 5,078 above 1024); 814fbe9 (19:37:33Z) changes four index JSONs; at 31 of #719's 122 counts the new file states a lower side (7.5e-13 to 8.19e-2, largest at 366); the three failing files and the lower n204.cert are gone; BOUND_VERIFIER_LICENSE.txt is an MIT licence naming Evan Daniel (verifier licence, not the certificates').
@@ -123,3 +123,5 @@ holds decide 369, 376, 985 and 499)
 - What the licence changes in the plan: the triage's "derived-only, as for #719" rested on there being no certificate licence. The author's comment on #719 (6350348588) says 17cc220 covers every certificate, catalogue, manifest and tool. The import may retain the files; --source-bytes headroom (about 5.0 MB under the cap at #722) and OR-18 still decide what goes in Git.
 - The same comment claims #719's ten withdrawn rows (411, 451, 494, 495, 539, 540, 583, 587, 632, 683) as part of #732. The triage's walk already covers those counts.
 - The drafted acknowledgement (triage-732/acknowledgement.md) needs three edits before posting: its Licence paragraph ("does not cover your certificates ... derived exact facts") and question 2 (a licence) are answered by 17cc220; the "#719's other questions ... stay open" line should say the withdrawn rows are now claimed here; and it should name this PR as the one carrying the triage.
+
+2026-10-23 01:25Z coord-intake-1021b: #739 merged (4ad09803c) with #732 triage entry. Stage 1 acknowledgement posted: https://github.com/jlevy/squares/issues/732#issuecomment-6355073019 (edited for 17cc220 MIT licence, ten re-claimed rows, #719 answers). Record this reply under #732 replies (kind acknowledgement, 2026-10-23) in the next records PR. Import of the 77 rows waits on #730; pin 17cc220.
