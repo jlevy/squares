@@ -210,23 +210,22 @@ def test_the_views_and_their_controls_are_named_one_way() -> None:
         atlas.query_for("grid", "huge")
     # Every change `move` times is one a reader makes, and each is named once; a change
     # of size is timed in both views, and the page is put back at Medium after each.
-    named = [change for change, _, _ in atlas.CHANGES if change is not None]
-    assert len({(change, shown) for change, shown, _ in atlas.CHANGES if change}) == len(named)
-    assert {shown for _, shown, _ in atlas.CHANGES} == {100, 324}
-    sized = [change for change, _, press in atlas.CHANGES if change and "size-tab" in press]
+    # Every case shows on the page, so no press shows more or fewer (the expander that
+    # did went on 2026-10-22).
+    named = [change for change, _ in atlas.CHANGES if change is not None]
+    assert len(set(named)) == len(named)
+    assert all("tab" in press for _, press in atlas.CHANGES)
+    assert not hasattr(atlas, "EXPANDER")
+    sized = [change for change, press in atlas.CHANGES if change and "size-tab" in press]
     assert sized == [
         "grid, medium to large",
         "grid, large to small",
         "triangle, medium to large",
         "triangle, large to small",
     ]
-    for index, (change, _, _) in enumerate(atlas.CHANGES):
+    for index, (change, _) in enumerate(atlas.CHANGES):
         if change is not None and change.endswith("large to small"):
-            assert atlas.CHANGES[index + 1] == (
-                None,
-                atlas.CHANGES[index][1],
-                atlas.size_tab("medium"),
-            )
+            assert atlas.CHANGES[index + 1] == (None, atlas.size_tab("medium"))
 
 
 def test_runs_are_reported_as_their_median_and_their_most_long_tasks() -> None:
