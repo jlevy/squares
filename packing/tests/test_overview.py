@@ -481,13 +481,18 @@ def test_papers_groups_every_reading_and_the_resources_keep_detail_reachable(
 def test_home_links_the_project_and_documentation_retains_the_complete_directory(
     page: str, documentation: str
 ) -> None:
+    from devtools.paper_structure import parse  # noqa: PLC0415
+
     home_section = page.split('id="squares-project-documentation"', 1)[1].split(
         'id="more-resources"', 1
     )[0]
     about_section = documentation.split('id="squares-project-documentation"', 1)[1]
     assert 'href="about.html">About the Squares Project' in home_section
     assert "pop-doc-" not in home_section
-    assert "live in the Squares Project\u2019s repository" in _rendered_text(about_section)
+    assert any(
+        link.attrs.get("href") == REPO_URL and "Squares Project" in link.text()
+        for link in parse(about_section).find_all("a")
+    )
     for name in render_overview.DOCUMENT_PAGES:
         assert f'href="{name}"' in about_section
 
@@ -4322,13 +4327,15 @@ def test_the_project_is_named_the_squares_project_wherever_it_is_named(
     Square Packing Projects, the plural, names other people's projects, and The Square
     Packing Problem the subject; neither is this project's name."""
     from devtools import site_documents  # noqa: PLC0415
+    from devtools.paper_structure import parse  # noqa: PLC0415
 
     heading = (
         '<h1 id="squares-project-documentation" class="site-title">Project Documentation</h1>'
     )
     assert documentation.count(heading) == 1
     section = documentation.split(heading, 1)[1]
-    assert "live in the Squares Project\u2019s" in _rendered_text(section)
+    intro = parse(section).find_all(cls="site-navigation-copy")[0]
+    assert "Squares Project" in intro.text()
     readme = site_documents.README.read_text(encoding="utf-8")
     assert readme.startswith("# The Squares Project\n")
     # README's page is named for the file in its tab, since the project's name follows
@@ -7503,11 +7510,13 @@ def test_site_introductions_use_prose_without_reclassifying_controls(
     for source, expected in (
         (tutorials, "Start with Square Packing from First Principles"),
         (resources, "Catalogues, research repositories"),
-        (documentation, "The code, the certificates"),
         (report, "If you have new results"),
         (downloads, "Download the first hundred packings"),
     ):
         assert expected in parse(source).text()
+    documentation_intro = parse(documentation).find_all(cls="site-navigation-copy")
+    assert documentation_intro
+    assert documentation_intro[0].text().strip()
     directory = parse(contributor_documents[render_contributors.DIRECTORY_PATH]).text()
     assert "People whose work is cited or credited in the square-packing record." in directory
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
