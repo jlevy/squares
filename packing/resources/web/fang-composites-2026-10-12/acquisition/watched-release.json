@@ -1,0 +1,20 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/TheSnakeFang/squarepack-certs/tree/bef5c42d58257fe38ed010a5d1ff9b8fc608df57",
+ "commit": "bef5c42d58257fe38ed010a5d1ff9b8fc608df57",
+ "committed": "2026-10-12T19:13:41Z",
+ "published": "2026-10-12T19:13:41Z",
+ "walk": "upper-bounds-couzo-history-20261022",
+ "rows": [
+  {
+   "n": 703,
+   "certificate": "composites/n027_j1_703.cert",
+   "printed": "26.999256308447"
+  },
+  {
+   "n": 994,
+   "certificate": "composites/n032_j2_994.cert",
+   "printed": "31.999256308447"
+  }
+ ]
+}

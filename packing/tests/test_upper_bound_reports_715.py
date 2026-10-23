@@ -39,9 +39,12 @@ LEDGER = replay.ROOT / "campaign/issue-intake/upper-bounds-20261022"
 #: eight of those counts the 14 October row now names the backlog report that beat it
 #: first, so 21 of its 29 rows remain here. 509 and 931 no longer hold this import's row
 #: alone.
+#: Since the history walk of 22 October, 20 of the rows here beat Couzo's 4e4c8ce index
+#: first, which had beaten 487b058's.
 SUPERSEDED = {
     "muglich-issue686-2026-10-19": 50,
-    "couzo-verified-bounds-2026-10-14": 21,
+    "couzo-verified-bounds-2026-10-14": 1,
+    "couzo-index-2026-10-15": 20,
     "couzo-issue678-2026-10-18": 26,
     "evand-n343-sweep-2026-10-20": 1,
     "de-winter-issue666-2026-10-17": 1,

@@ -1,0 +1,11 @@
+{
+  "format": "upper-bound-beyond-horizon-claims-v1",
+  "horizon": 324,
+  "issue_pin": "a7067d7b92b1e0208499b26d93e898648f0e8667",
+  "limit": 1024,
+  "publication": "https://github.com/franciscouzo/square-packing/tree/a7067d7b92b1e0208499b26d93e898648f0e8667",
+  "published": "2026-10-12T17:55:52Z",
+  "results": [{"ceiling":"18.9937448193950557","certificate":"certificates/n344.cert","deleted":0,"exact_side":"30961089410256584281873048797/1630067672523500000000000000","first_committed":"2026-10-12T17:55:52Z","n":344,"offered_side":"18.993744819396"}],
+  "revision": "a7067d7b92b1e0208499b26d93e898648f0e8667",
+  "source": "https://github.com/franciscouzo/square-packing"
+}

@@ -790,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "40a71b16cfc2ab38845445e3f911c44ab80a4578"
+DATA_REVISION = "400a2daea46bace43a572ff66df05111b9cd78bc"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2441,6 +2441,43 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "except one span's style attribute in the explainer's HTML, whose place varies "
             "between renders (the record below). No PDF was printed; each prints from that "
             "HTML. Retain v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Couzo's watched history at 325 to 1024 (#730: 319 beyond-horizon rows, the "
+            "T-188, T-189 and T-191 notes, #715's and #624's request texts, review A's "
+            "date-free wording) against main e929137a8 (#725): rendered at link revision "
+            "6610be93 into empty site directories from this tree at 400a2dae and from "
+            "main's (68 files each). render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write their "
+            "HTML and Markdown byte-identical, and the explainer its Markdown; the "
+            "explainer's HTML differs only in the order of attributes on a math span, "
+            "which a second render of one tree reorders too, and is identical once they "
+            "are normalized. Measured before against main 59b1ec594 and bfc04b659 with "
+            "the same outcome. No PDF was printed; each prints from that HTML. Retain "
+            "#733's v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
         ),
     ),
     ReleaseNoPublicChange(
