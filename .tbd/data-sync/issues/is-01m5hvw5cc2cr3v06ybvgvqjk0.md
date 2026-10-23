@@ -3,14 +3,18 @@ type: is
 id: is-01m5hvw5cc2cr3v06ybvgvqjk0
 title: "Import chelokot and Evan Daniel: Lean proofs that s(5) = 2 + 1/√2, and s(2) = s(3) = s(4) = 2 (no issue)"
 kind: task
-status: open
+status: in_progress
 priority: 3
-version: 1
+version: 2
+delegate: c-lean-1023
 labels:
   - result-import
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-10-22T13:12:44.171Z
-updated_at: 2026-10-22T13:12:44.171Z
+updated_at: 2026-10-23T06:19:01.857Z
+started_at: 2026-10-23T06:19:01.857Z
 ---
 Stage 1 triage, read-only, by c-triage-1022b from the 12:20Z sweep of 22 October 2026, at
 `main` `76496462b`. No issue reports either.
