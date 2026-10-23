@@ -3,9 +3,9 @@ type: is
 id: is-01m4k11tz4tg1smpwmeknqjs9y
 title: "Couzo 02f9690 beyond-horizon certificates: 15 below the tracked rows (n375 by 4.29e-5, n378 by 4.00e-4), 5 above"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 8
+version: 9
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,8 +14,13 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T13:46:45.604Z
-updated_at: 2026-10-22T20:36:14.855Z
+updated_at: 2026-10-23T02:26:17.102Z
 started_at: 2026-10-22T02:18:23.092Z
+closed_at: 2026-10-23T02:26:17.102Z
+close_reason: |
+  2026-10-23 (c-lane-couzo-residue-1022): Done. #730 (https://github.com/jlevy/squares/pull/730) merged at 02:10Z on 23 October 2026 as fcf2f96a5; main's Certificate page run 39888163829 (deploy and verify-deployment) passed at 02:24Z. It records 02f9690's 12 rows as couzo-02f9690-2026-10-09: 6 current (332, 336, 337, 341, 373, 374) and 6 superseded on entry. Held items moved to think-8krd, think-fwa9 and think-f2io via beyond_horizon_replay.HISTORY_HELD. No record on main names this bead as a deferral (check_bead_tree.deferrals). The #715 reply is https://github.com/jlevy/squares/issues/715#issuecomment-6355894334.
+resolution: null
+duplicate_of: null
 ---
 Found by the importer lane (think-md2i) in packing/resources/web/couzo-exact-certificates-2026-10-09/acquisition/claims.json: franciscouzo/square-packing 02f969075f79 holds 20 certificates beyond the n <= 324 horizon. 15 are below the tracked dated beyond-horizon rows (332, 336-341, 369, 373-379; 375 at 9953490883645300797660281830293/(5*10^29) by 4.29e-5, 378 at 9973230520053043026984980967643/(5*10^29) by 4.00e-4) and 5 above by about 1.8e-11 (327, 335, 342, 364, 372). think-1545 (another session) owns Couzo's extended-range rows; this bead holds the 02f9690 update for it: dated beyond_horizon_claims rows keyed (n, source_id) with dated supersession, as PR #479 did for 2d32a6e.
 

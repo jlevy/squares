@@ -3,9 +3,9 @@ type: is
 id: is-01m4yr8jtj1znqhx7fva8g60bw
 title: "Import Francisco Couzo: 4e4c8ce beyond-horizon index, 341 counts 325-1023 below 487b058 and #607 (no issue)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 11
+version: 12
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -16,8 +16,13 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:04:02.641Z
-updated_at: 2026-10-22T20:49:17.334Z
+updated_at: 2026-10-23T02:26:17.489Z
 started_at: 2026-10-22T02:18:23.107Z
+closed_at: 2026-10-23T02:26:17.488Z
+close_reason: |
+  2026-10-23 (c-lane-couzo-residue-1022): Done. #730 (https://github.com/jlevy/squares/pull/730) merged at 02:10Z on 23 October 2026 as fcf2f96a5, recording 4e4c8ce's 253 rows as couzo-index-2026-10-15 (91 current, 162 superseded on entry). The 89 held publications (47 above Göbel, 39 index deletion bounds, 3 sub-print) are owned by think-8krd, think-f2io and think-fwa9. #732's manifest reader (the N1 proposal in the c-triage-1022d note) is a #732 records-PR matter, not this bead's. No record on main names this bead as a deferral (check_bead_tree.deferrals). Replies: #715 https://github.com/jlevy/squares/issues/715#issuecomment-6355894334, #607 https://github.com/jlevy/squares/issues/607#issuecomment-6355894824, #624 https://github.com/jlevy/squares/issues/624#issuecomment-6355895083.
+resolution: null
+duplicate_of: null
 ---
 Stage 1 triage, read-only, by the 15 October reads lane (think-mq0k), from the 02:30Z sweep at main 6964362b5. No issue reports any of it.
 

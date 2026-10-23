@@ -5,7 +5,7 @@ title: "Import franciscouzo: 1285 upper bounds at 328–9913 (#715)"
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:22:12.593Z
-updated_at: 2026-10-22T20:08:06.228Z
+updated_at: 2026-10-23T02:26:18.718Z
 started_at: 2026-10-21T22:22:13.353Z
 closed_at: null
 close_reason: null
@@ -206,3 +206,5 @@ blocked_on: think-f2io
 - Draft the reply from `main` once the PR is in, linking the new sources' rows.
 
 2026-10-22 coord-intake-1021b: #715 follow-up posted 2026-10-22T20:04:03Z: #719 (#722) superseded 16 of #715's rows; https://github.com/jlevy/squares/issues/715#issuecomment-6350117001. The promised reply for the Couzo history rows (02f9690, f311f08, 4e4c8ce) follows #730.
+
+2026-10-23 (c-lane-couzo-residue-1022): #730 merged at 02:10Z on 23 October 2026 as fcf2f96a5. The promised reply on the 32 restatements is posted: https://github.com/jlevy/squares/issues/715#issuecomment-6355894334 (30 now rows: 12 current, 18 superseded by #719; 743 and 985 wait on think-f2io). The reply is recorded under #715's replies by the next records PR. This bead stays open: it is #715's answer_bead and owns the queued above-1024 result in result-requests.yaml on main, and the 30 held re-certifications (think-fwa9), 743/985 (think-f2io), 335 (think-rx26) and the rows above 1024 still wait on owner decisions.

@@ -3,9 +3,9 @@ type: is
 id: is-01m5h5w4d59h67ckp28qgzbere
 title: "Couzo's watched publications no issue claims: 5a299b4 (20 certificates below main) and 23aff0c (21 superseded the same day), plus the held re-certifications"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 8
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,8 +14,13 @@ parent_id: is-01m4yr8jtj1znqhx7fva8g60bw
 hold: null
 hold_until: null
 created_at: 2026-10-22T06:48:14.501Z
-updated_at: 2026-10-23T00:36:36.721Z
+updated_at: 2026-10-23T02:26:17.886Z
 started_at: 2026-10-22T06:48:16.556Z
+closed_at: 2026-10-23T02:26:17.886Z
+close_reason: |
+  2026-10-23 (c-lane-couzo-residue-1022): Done. #730 (https://github.com/jlevy/squares/pull/730) merged at 02:10Z on 23 October 2026 as fcf2f96a5, recording 5a299b4's 20 rows as couzo-reconcile-2026-10-20 (9 current: 487, 532, 579, 628, 679, 732, 787, 844, 903; 11 superseded on entry by #719) and 23aff0c's 21 as couzo-23aff0c-2026-10-17 (all superseded on entry). Held publications are owned by think-8krd, think-fwa9 and think-f2io. No record on main names this bead as a deferral (check_bead_tree.deferrals). Replies: #715 https://github.com/jlevy/squares/issues/715#issuecomment-6355894334, #686 correction https://github.com/jlevy/squares/issues/686#issuecomment-6355894548.
+resolution: null
+duplicate_of: null
 ---
 Found by the #719 triage: 13 certificates in franciscouzo/square-packing 5a299b4 that no issue claims and no packet retains, each below main by 1.1e-12 to 6.2e-10; they are the nearest earlier report at those counts for #719's ledger. This is the sweep's open 'needs an owner' item for franciscouzo. Retain, replay and record them as a watched-repository publication dated by their first commit (before #719's rows at those counts).
 blocked_on: none
