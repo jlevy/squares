@@ -2530,11 +2530,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "main and once from this branch after merging it (69 files each), "
             "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, "
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
-            "render_packing_methods write every file byte-identical. Measured before at "
-            "6b5b479dd against main 7335d0098, with the same outcome. The papers link the "
-            "atlas poster by address and draw no default picture themselves. No PDF was "
-            "printed; each prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and "
-            "v0.2.7."
+            "render_packing_methods write all eight papers/ files byte-identical, also "
+            "after review round 2 at 140e9ece1. The seven others that differ are the "
+            "atlas posters and their exports, which the explainer's build copies to the "
+            "site root and the papers link by address: infographics v0.7.0's own outputs. "
+            "Measured before at 6b5b479dd against main 7335d0098, with the same outcome. "
+            "No PDF was printed; each prints from that HTML. Retain v0.4.21, v0.1.11, "
+            "v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
