@@ -5,7 +5,7 @@ title: "Import Mishapolk: 5,468 certificates 328–10000 at 814fbe9, '#715 resol
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: c-lane-732-import-1023
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-22T20:07:20.685Z
-updated_at: 2026-10-23T02:12:17.764Z
+updated_at: 2026-10-23T03:09:08.409Z
 started_at: 2026-10-23T02:12:17.764Z
 ---
 Issue #732 (https://github.com/jlevy/squares/issues/732), opened 2026-10-22T19:55:03Z by Mishapolk (Mykhailo Polkovskyi): "328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof". Source Mishapolk/square-packing-records@814fbe9129b7abb301923cc50de621697a53940f (upper_bounds.json, certified_bounds.json, certificates/manifest.json, certificates/census.json with digests in the issue).
@@ -131,3 +131,12 @@ holds decide 369, 376, 985 and 499)
 2026-10-23 01:25Z coord-intake-1021b: #739 merged (4ad09803c) with #732 triage entry. Stage 1 acknowledgement posted: https://github.com/jlevy/squares/issues/732#issuecomment-6355073019 (edited for 17cc220 MIT licence, ten re-claimed rows, #719 answers). Record this reply under #732 replies (kind acknowledgement, 2026-10-23) in the next records PR. Import of the 77 rows waits on #730; pin 17cc220.
 
 2026-10-23 02:12Z coord-intake-1021b: blocker resolved: #730 merged as fcf2f96a5. The 77-row import of #732 at 325-1024 can start (redo the report-order walk against main with #730 rows; pin 17cc220 under the MIT licence; rows above 1024 stay held on think-f2io).
+
+2026-10-23 c-lane-732-import-1023: the import is draft PR #742 (claude/intake-732-mishapolk-rows, head daf940b42), labels intake and S2.
+- Pin 17cc220 (adds only the MIT LICENSE to 814fbe9); the head moved to 7b6366f (01:50:22Z), which only withdraws 3426, so the packet stays at 17cc220, whose indexes carry the issue's five digests. Packet mishapolk-issue732-2026-10-22 retains the 77 recorded certificates, README and LICENSE (9.3 MB; 1.98 MB thin pack, check_added_blobs PASS) and pins the other 313 at 325-1024 and the indexes by digest; receipts/source-history.json holds all 390 to manifest.json.
+- Walk upper-bounds-issue732-20261023 from starts frozen at main fcf2f96a5, each row at its exact side (new: intake_ledger reads a beyond-horizon start at the exact side its source states), with Mishapolk's own earlier files and every watched publication below the starts. Same outcome as the triage: 77 rows (76 at 8a488a1, 539 at 1851c2c), all current, superseding #715 30, #719 29, couzo-index-2026-10-15 14, couzo-verified-bounds-2026-10-14 4; 499 recorded and held SUB_PRINT (think-fwa9); 81 restate #719. What #730 changed: 369 and 376 rest on 58a7833's bound held GOEBEL_ABOVE (think-8krd), not a recipe hold; 985 rests on 4e4c8ce's deletion bound (D6). 129 #732 verdicts rest on holds (Göbel 43, recipe 41, sub-print 31, deletion 14); held-dependents: a D6 answer leaving deletion bounds out would record 985, nothing else of #732's flips.
+- New: the walk also records the author's 1851c2c files at the nine other withdrawn counts (411 451 494 495 540 583 587 632 683), below every earlier report and above #732's files; held in a new class WITHDRAWN on new decision bead think-8m4k. No verdict rests on them.
+- Replay: all 77 verified on both routes, 462 controls refused by both, 82.0 positive CPU s (6.5 min wall); all-pairs at 645, 752, 995 agrees (984,581 pairs, 322.5 CPU s); check --issue 732 --replay OK.
+- Requests: #732's acknowledgement and the author's 01:52:47Z comment (read as edited 01:53:19Z) recorded, n499/n985 split out; the four stage 7 replies after #730 (#715, #686 correction of 6350116497, #607, #624) recorded.
+- Stage 7 reply drafted in the coordinator scratchpad replies/732-rows/ (not posted).
+- Not mine, for the owner/coordinator: Mishapolk's new comment on #719 (issuecomment-6355484781, 01:52:40Z) answers #719's open questions (verify.py called as a module; 204 seeded from Couzo's #678 n204.cert in Couzo's frame) and is unread in #719's requests entry.
