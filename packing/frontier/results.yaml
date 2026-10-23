@@ -32084,8 +32084,8 @@ results:
       are unchanged until the entry is reviewed and adopted, so it is pending adoption.
 
       The source states the certificate is a dilation of a binary64 packing made with Evan
-      Daniel's search/packer/dilate_cert.py (evand/square-packing 7982d7a): centres and box
-      scaled by 1 + 10^-12, coordinates rounded to rationals and each angle to a rational
+      Daniel's search/packer/dilate_cert.py (evand/square-packing): centres and box scaled by
+      1 + 10^-12, coordinates rounded to rationals and each angle to a rational
       half-angle tangent, so every square is exactly unit. The author reports that Daniel's
       two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py
       (polygon intersection), accept it, with least wall clearance 8.2e-13 and least pair
