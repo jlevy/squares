@@ -320,27 +320,26 @@ def test_native_closed_optional_math_is_outside_the_initial_readability_sample(
         server.server_close()
 
 
-#: A prose-first variant of the archive retains the font-metric negative control's
-#: rating-guide prose above the fold. Recent lists now have their own page; removing
-#: the archive table here is a test fixture, never a production alternate page.
-PROSE_FIRST = "results-prose-first.html"
-_ARCHIVE_TABLE = re.compile(
-    r'<h2 id="all-results"[^>]*>.*?(?=<h2 id="verification-ladders"[^>]*>)',
+#: The rating guide now lives on Verification. A test-only variant brings its
+#: mathematical evidence prose above the fold for the font-metric negative control.
+PROSE_FIRST = "verification-prose-first.html"
+_GUIDE_OPENING = re.compile(
+    r'<h2 id="verification-ladders"[^>]*>.*?(?=<h2 id="evidence-and-exactness"[^>]*>)',
     re.DOTALL,
 )
 
 
 @pytest.fixture(scope="module")
 def results_font_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
-    """One actual results page and its asset closure, without other producer trees,
-    and beside it the same page with its table taken out (`PROSE_FIRST`)."""
+    """The actual Verification guide and its asset closure, plus a test-only
+    prose-first variant that retains the evidence/font negative control."""
     from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
 
-    root = tmp_path_factory.mktemp("results-font-layout")
-    rendered = render_overview.results_page()
+    root = tmp_path_factory.mktemp("verification-font-layout")
+    rendered = render_overview.verification_page()
     (root / rendered.name).write_text(rendered.html, encoding="utf-8")
-    prose_first, taken = _ARCHIVE_TABLE.subn("", rendered.html)
-    assert taken == 1, "the archive no longer has one table section to take out"
+    prose_first, taken = _GUIDE_OPENING.subn("", rendered.html)
+    assert taken == 1, "the guide no longer has one introductory ladder section"
     (root / PROSE_FIRST).write_text(prose_first, encoding="utf-8")
     assets = render_overview.asset_files([rendered])
     assert sum(map(len, assets.values())) + len(rendered.html.encode()) < 3 * 1024 * 1024

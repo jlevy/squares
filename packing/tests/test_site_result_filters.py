@@ -345,7 +345,7 @@ def test_the_added_filter_shows_what_reached_the_site(
     age empty (#514's review A, finding A1); the clock is noon, where the reader's day and
     the UTC day an age of arrival counts in agree. The archive URL `?added-since=`
     opens the table from the Recent Results section's first day, with Added since in
-    the bar, on the results that section lists (A3). An explicit `?added=` URL opens
+    the bar, on the table rows arriving since that date (A3). An explicit `?added=` URL opens
     the newest day alone, with Added on in the bar naming the day; and a day nothing arrived
     on is named there too and shows no row, rather than every row (A5)."""
     name = "results.html"
@@ -376,17 +376,20 @@ def test_the_added_filter_shows_what_reached_the_site(
         page.goto(pages[name].as_uri(), wait_until="load")
         assert not page.locator(added_since).is_visible()
         page.goto(pages["recent-results.html"].as_uri(), wait_until="load")
+        recent_rows = page.locator("[data-recent-results] tbody tr[data-added]")
+        assert recent_rows.count() == len(overview.results)
+        first = (reference - timedelta(days=overview_sections.ADDED_DAYS)).isoformat()
         listed = sorted(
-            urlsplit(link.get_attribute("href") or "").fragment
-            for link in page.locator(".site-added li > a:first-child").all()
+            row.get_attribute("data-result")
+            for row in recent_rows.all()
+            if (row.get_attribute("data-added") or "") >= first
         )
         newest = reference.isoformat()
-        day = page.locator(f'.site-added details[data-day="{newest}"]')
         newest_listed = sorted(
-            urlsplit(link.get_attribute("href") or "").fragment
-            for link in day.locator("li > a:first-child").all()
+            row.get_attribute("data-result")
+            for row in recent_rows.all()
+            if row.get_attribute("data-added") == newest
         )
-        first = (reference - timedelta(days=overview_sections.ADDED_DAYS)).isoformat()
         page.goto(pages[name].as_uri() + f"?added-since={first}#all-results", wait_until="load")
         assert urlsplit(page.url).query == f"added-since={first}"
         assert urlsplit(page.url).fragment == "all-results"

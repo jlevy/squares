@@ -458,7 +458,7 @@ def test_group_controls_include_label_and_chevron_and_start_with_substantive_con
     ]
     assert all(any(tag == "svg" for tag, _ in Tags(content).tags) for content in controls)
     for group, target in {
-        "results": "recent-results.html",
+        "results": "atlas.html",
         "learn": "papers.html",
         "about": "about.html",
     }.items():
