@@ -2434,7 +2434,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "After review A of #751 reworded the entry and added the source-coverage entry "
             "evand-exact-and-local-reports-2026-10-12, the same four renders, with main's "
             "result-requests.yaml and source-coverage.yaml both swapped in, are again "
-            "byte-identical. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+            "byte-identical. Measured once more after merging main 7335d0098 (#752), at "
+            "link revision 7335d009 with that main's two files swapped in: the same "
+            "outcome. No PDF was printed; it prints from that HTML. Retain v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
