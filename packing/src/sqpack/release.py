@@ -888,6 +888,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.22",
+        first_published="October 24, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Mykhailo "
+            "Polkovskyi's lower 204 side (T-231)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.21",
         first_published="October 23, 2026",
         result_scope=(
@@ -1413,6 +1421,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.21",
+        version="v0.4.22",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Mykhailo "
+            "Polkovskyi's lower 204 side (T-231)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:square-packing-methods-survey",
         previous_version="v0.2.6",
