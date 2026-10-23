@@ -237,6 +237,15 @@ Explore remains a direct link to the dedicated Atlas page.
 Without JavaScript, retain the first 100 homepage cases and Explore link; the dedicated
 Atlas exposes all 324 cases.
 
+**Superseded on 2026-10-23** (`think-rk91`): the owner asked for every case on the
+homepage and for the expand and contract to go entirely, so both pages now show all 324
+cases at once, with no **Show More** or **Show Less** and no collapsed coverage, with or
+without JavaScript. The automatic tile size keeps Medium on a wide screen and goes to
+Small on a narrow one, where less than half of the triangle’s widest row fits at Medium
+(`templates/paper-design.md`, Atlas sizes).
+The passages here about the preview, the expander and collapsed coverage record the
+earlier design.
+
 Publish the complete interactive atlas at `atlas.html`, reusing its existing drawings,
 view controls, and case-record behavior.
 Omit the introductory paragraph below the Atlas title.

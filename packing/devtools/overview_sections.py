@@ -2637,7 +2637,10 @@ ATLAS_SIZES: tuple[tuple[str, str], ...] = (
     ("large", "Large"),
 )
 
-#: The size the page is rendered in.
+#: The size the page is rendered in. With no size in the address the stylesheet paints
+#: Medium from 75rem up, and `overview/atlas-view.js` keeps an untouched size to the
+#: owner's rule of 2026-10-23 (`automaticSize`): Medium on a wide screen, Small on a
+#: narrow one, where less than half of the triangle's widest row fits at Medium.
 ATLAS_SIZE = "small"
 
 #: Drawing scale within each fixed tile slot, independent of layout and tile size.
