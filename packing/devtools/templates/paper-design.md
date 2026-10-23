@@ -119,7 +119,12 @@ Standalone introductions use the shared serif prose face, including the homepage
 contributor, reporting and learning invitations.
 The retained `site-navigation-copy` class controls those introductions without making
 their narrative into chrome.
-`site-navigation-heading` remains the sans collection-heading role.
+`site-navigation-heading` is the sans collection-heading role, including profile
+Records, Results, Credited Work, Other Reviewed Records, Resources, and Related News.
+Tutorial, repository-document, and mathematical-paper sections retain serif exposition
+headings. H1 and H2 labels use Title Case; mathematical symbols, identifiers, and proper
+names retain their case.
+Display-label corrections preserve existing anchor IDs.
 Navigation, buttons, filters, table contents and metadata retain their sans roles.
 All Results opens with its title and actions directly above the table, without an
 introductory explanation of the register.
@@ -401,7 +406,7 @@ with these exceptions:
 | h3 (a case record’s sections) | 19px | The record’s own heading, at the sans base (`.site-case-heading`) |
 | Table cell (site tables) | 17.48px, and 15.73px as a row card on a phone | The results and atlas tables are set at the note size |
 | Page title | Leading 1.05 on the papers, 1.15 on the site pages | The explainer’s title keeps KPress’s leading, which its prepared math is fitted to; the reviews share its layer |
-| Caption | Leading 1.4 on the papers, 1.35 on the site pages; 16.15px under the homepage’s hero, 17.48px elsewhere | The papers’ `--paper-support-leading`; the hero’s caption is a size of its own in `site.css` |
+| Caption | Shared support leading 1.4; 16.15px under the homepage’s hero, 17.48px elsewhere | The papers’ `--paper-support-leading`; the hero’s caption is a size of its own in `site.css` |
 | Colophon | Line height 1.5 on the papers, the face’s own on the site pages | One line either way |
 | Chip | The papers’ format chips at 16.15px, the site’s at 17.48px | Two components |
 | Table head | 650, and 550 for a group row | KPress’s head; the site’s group rows are medium |
@@ -423,6 +428,17 @@ A reader’s own choice of system fonts still works: KPress’s `data-kpress-fon
 switch sets the family tokens themselves, not the hooks.
 Its system stack (`style-tokens.css`, the block for `[data-kpress-font-set="system"]`)
 applies only under that attribute, which only a saved reader preference stamps.
+
+Tutorial diagrams use the same semantic `figure` and `figcaption` components as the
+papers. Wide atlas canvases use the papers’ existing `crop_to_container` view for the
+packing itself, with the same shared 24rem stage width; source SVGs remain intact.
+The composed quotient-map, certificate, and owner-case diagrams retain their full
+viewports. Images remain centred by KPress; captions use the shared sans note size,
+support leading, note inset, and caption spacing tokens from `paper-type.css`. Caption
+prose is upright, and links, mathematical notation, and evidence qualifications remain
+part of the caption.
+Tutorial H3 labels consistently use Title Case while their case-insensitive anchor
+addresses remain stable.
 
 ## Math
 
@@ -529,9 +545,9 @@ fetched them again on every page, since a page’s own bytes were all it could c
   `render_overview.assert_fetches_only_assets` refuses a script or stylesheet with any
   other source, a CSS import, and a `url()` in the page’s own text that is not a data
   URI or a fragment.
-- **Article programs.** Record and profile shells precede their classic programs.
-  The shared article loader precedes generic popover handling and the row, case and
-  contributor controllers.
+- **Article programs.** Record shells precede their classic programs.
+  The shared article loader precedes generic popover handling and the row and case
+  controllers. Person-name links navigate directly to complete profile pages.
   Input responses can fetch a complete record page and its declared prepared-math asset;
   only the selected article enters the host document, under the loading, ID and focus
   contract in **Article Pages and Overlays**, below.
@@ -795,7 +811,7 @@ come from its complete page.
 | --- | --- | --- | --- |
 | Case record | `cases/N.html` | Case link, index entry or neighboring-record link | `a[data-case]`, atlas tiles and frontier rows load `article.site-case` in the shared case panel |
 | Result record | `result/t-nnn.html` | Result ID link or **Open Result Record** | Pressing the rest of a result row loads `article.site-result[data-result-overview]` in that row’s panel |
-| Person profile | `profiles/ID.html` | Public-name link or **Open profile** | A marked credit in a case or result article loads `article.site-contributor` in the shared contributor panel |
+| Person profile | `profiles/ID.html` | Public-name link | Native navigation reaches the complete profile from every page and open article panel |
 | Profile directory | `profiles/index.html` | Home/About **View All Profiles** button or About navigation menu | Full public names, reviewed-result/significance and credit tallies, resource counts, and public account links in a surname-sorted native table; name links navigate directly to profiles |
 | News article | `news.html#ID` | Linked announcement title or bookmarked article | Homepage and archive reuse the authored article; its profile links navigate directly |
 | Card preview | The card’s ordinary target | Native `popovertarget` button and action link | The card’s preview remains authored in the page; it is not an article fetch |
@@ -826,30 +842,29 @@ Renderers put the overlay shells before their classic programs.
 Program order is the shared article loader, generic popover handling, then the relevant
 row, case and contributor controllers.
 `kpress_page` and `static_content_page` supply these shells and programs, including on
-standalone records, so a profile reached from a case can open another case.
+standalone records, so a profile reached from a case can navigate to another case.
 The generic handler keeps local source-anchor navigation inside a panel and closes it
 for ordinary links leaving the panel.
 Legacy card previews still use their native markup and their own body or frame.
 
-Opening a case or profile moves focus to its close button.
+Opening a case moves focus to its close button.
 Escape and outside clicks close it.
-Replacing a case or result panel with a profile, or a profile with a case, hides the
-source panel and retains the original page opener as the return target.
+Replacing a case or result panel hides the source panel and retains the original page
+opener as the return target.
 Closing restores that target when it remains connected and the reader has not moved
-focus elsewhere. Modified clicks and explicit new-tab links keep native navigation;
-contributor links marked as downloads do too.
-Case and profile requests share a generation counter; a newer request, Escape, or a
-closed source panel prevents a late success or failure from reopening a panel or
-navigating. Result bodies have their own per-panel generations and retry on a later
-opening after failure.
-Browser tests exercise these sequences on generated pages.
+focus elsewhere. Person-name links navigate directly to profiles, including from an open
+panel. Modified clicks and explicit new-tab links keep native navigation.
+Case requests use a generation counter; a newer request, Escape, or a closed source
+panel prevents a late success or failure from reopening a panel or navigating.
+Result bodies have their own per-panel generations and retry on a later opening after
+failure. Browser tests exercise these sequences on generated pages.
 
 | Responsibility | Source owner | Retained checks |
 | --- | --- | --- |
 | Shared text, spacing, themes and overlay frame | `paper-type.css`, `site.css`, `site-nav.css` | `test_site_text_tokens.py`, `test_site_glyphs.py`, `test_site_wide_blocks.py`, `test_overview.py` |
 | Case article, Atlas directory and panel | `render_case_pages.py`, `forward.js`, `case-popover.js` | `test_site_case_records.py`, `test_site_math_faces.py` |
 | Result article and row entry | `result_overview.py`, `render_overview.iter_result_fragments`, `overview_sections.py`, `row-popover.js`, `site-result.css` | `test_result_overview.py`, `test_site_result_popover.py`, `test_site_case_records.py`, `tests/node/overview_rows/` |
-| Contributor article, directory and panel | `render_contributors.py`, `contributor-popover.js`, `site-contributor.css` | `test_render_contributors.py`, `test_site_contributor_popovers.py` |
+| Contributor article and directory | `render_contributors.py`, `site-contributor.css` | `test_render_contributors.py`, `test_site_contributor_popovers.py` |
 | Canonical News articles, homepage selection and direct profile links | `render_changelog.py`, `news_highlights.py`, `site_topics.py`, `site.css` | `test_changelog.py`, `test_news_highlights.py`, `test_site_homepage.py` |
 | Inert fetch, cache, scoped IDs, replacement and focus | `article-loader.js`, `popover.js` and the article controllers | `test_site_contributor_popovers.py`, `test_site_case_records.py` |
 | Identity and reviewed credit spans | `sqpack.contributors`, `sqpack.contributor_occurrences`, `contributor_credit.py` | `test_contributors.py`, `test_contributor_occurrences.py`, schema gate |
@@ -949,8 +964,9 @@ contributor articles use their component sheets and the same text tokens.
   The list uses the page background, document border, and shared shadow, with 0.3rem
   inner padding and links padded 0.45rem by 0.7rem. Links and buttons show a 2px
   document-link outline with 2px clearance on keyboard focus.
-  The current content link is underlined; an ancestor uses the accent and shared sans
-  bold weight (680). A fragment destination does not also claim the current page.
+  The current content link and its top-level category are underlined; an ancestor uses
+  the accent and shared sans bold weight (680). A fragment destination does not also
+  claim the current page.
 
   `overview/navigation.js` enhances ordinary navigation lists, without application-menu
   roles. Enter or Space toggles the unified button; Tab follows ordinary document order.
@@ -979,6 +995,8 @@ contributor articles use their component sheets and the same text tokens.
   with `aria-current="page"`. Standalone pages with no parent, including Overview and
   News, omit both the visible trail and BreadcrumbList data.
   Learn has no category page; its content pages carry the plain Learn ancestor.
+  Below 40rem, trails with at least three items put the current page on its own row, so
+  the arriving sans face cannot move it between the ancestry’s rows.
   The trail shares the header’s 70rem content track, responsive gutters and link
   hit-area inset through `--site-nav-track`, `--site-nav-gutter`,
   `--site-nav-link-inset` and `--site-nav-name-outset`. Its smaller sans type does not
@@ -1372,8 +1390,8 @@ contributor articles use their component sheets and the same text tokens.
   rule decides (`overview_sections.is_site_page`): an entry of
   `render_overview.SITE_PAGES`, the optimality paper among them, or a directory served
   by its `index.html`, as `workbench/` and `profiles/` are.
-  A case record and a person profile are complete pages too; their marked links use the
-  article controllers described above.
+  A case record and a person profile are complete pages too; case links use the article
+  controllers described above.
   - When a popover card leads to a repository document the site renders, the popover
     renders that page itself, narrow, in a frame: the page at the same address with
     `?view=embed` added before any fragment, so a filtered view such as
@@ -1409,11 +1427,10 @@ contributor articles use their component sheets and the same text tokens.
   Every popover has the same margin on all four sides, `--site-popover-pad` (1.75rem;
   1.1rem on a phone). Prose panels use `--site-popover-text-width`, the normal
   `--kpress-measure` plus their two padding insets, capped inside 1rem viewport gutters.
-  This rule applies to profile and result panels; case visualizations keep their wider
-  stage and responsive gutters.
-  Its header groups the Lucide maximize-2 and close icons at the upper right, each in a
-  2.75rem square tap target (`--site-popover-close`), set 0.6rem in from the corner
-  (0.25rem on a phone) and washed on hover or keyboard focus.
+  This rule applies to result panels; case visualizations keep their wider stage and
+  responsive gutters. Its header groups the Lucide maximize-2 and close icons at the
+  upper right, each in a 2.75rem square tap target (`--site-popover-close`), set 0.6rem
+  in from the corner (0.25rem on a phone) and washed on hover or keyboard focus.
   The expand glyph has diagonal outward arrows.
   KPress’s retained sprite has no maximize-2 symbol, so both inline and sprite-backed
   controls inline the same paths.
@@ -1421,12 +1438,11 @@ contributor articles use their component sheets and the same text tokens.
   destination and accessible label, and leaves that bottom action in place.
   A panel with no full page, including a detail whose action only scrolls within its
   host page, has Close alone.
-  Case stepping and profile replacement update both full-page links together; opening
-  either article still puts keyboard focus on Close.
+  Case stepping updates both full-page links together; opening either article still puts
+  keyboard focus on Close.
   The controls use the same 1.25rem Lucide icon size, and the case controls stay in
   reach while its panel scrolls.
-  Only the first text block reserves their combined width; a fetched profile reserves
-  this space in its H1, since its ancestry trail is outside the article.
+  Only the first text block reserves their combined width.
   The article keeps its full measure and the margins stay even elsewhere.
   A popover’s height has one limit, the window’s: `--site-popover-max-block`, the
   window’s height less `--site-popover-window-margin` above and below, which is 4% of
@@ -2564,6 +2580,10 @@ contributor articles use their component sheets and the same text tokens.
     since its rows’ popovers went and the case badges came (measured 2026-10-03), and a
     row’s markup is paid 324 times, so a cell carries a class and no wrapper it can do
     without.
+  - **Property badges.** Rigid, optimal, and exact-value glyphs use the same shared tag
+    font-size and height tokens as the Status chip.
+    Each square retains its accessible property name and the table’s compact centred
+    alignment.
   - **Checks.** `tests/test_site_frontier_table.py` holds the order, the drawing’s
     column and size, the bold number, the centring, the fit at 1280, the decimal under a
     fraction, sorting and filtering, and each row as one control that names its record,
@@ -2794,7 +2814,7 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
     A later opening tries again.
     The page carries neither a second full overview nor a root-relative HTML fragment;
     its source is the complete result page (**Result Overview**, below).
-    Case and contributor panels use the same loader for their complete pages.
+    Case panels use the same loader for their complete pages.
 
   `tests/node/overview_rows/` runs the script against a stand-in document, and
   `tests/test_overview.py` holds every row of the two pages to this markup, the frontier
@@ -3127,7 +3147,8 @@ announced. Tally columns sort their numeric counts, including zero when its disp
 is blank. Years active sorts by the first recorded activity year.
 Missing years, resources and accounts stay last in either direction.
 Native anchors and the complete surname-ordered table remain available without scripts.
-The directory name contains only the full real or public name.
+The directory name contains only the full real or public name, in shared sans bold.
+Account and resource links retain regular weight.
 Additional handles appear on the individual profile, while account usernames remain in
 the Accounts column.
 The Accounts column contains public GitHub, X and Substack account profiles.
@@ -3158,7 +3179,9 @@ Results and Credits occupy separate directory columns.
 A zero result or credit count leaves its cell blank.
 The Records, Results and Credits cells keep each nonzero total on its first line and
 start the muted parenthetical significance breakdown on the next line.
-The shared tally remains inline outside the directory table.
+The shared tally remains inline on cards and other compact surfaces.
+Individual profiles show Records, Results, and Credits above Resources, each metric on
+its own line with its links and significance breakdown intact.
 [Attribution Policy](../../../attribution.md) defines the two disjoint per-person
 buckets: Results are primary-authored results; Credits are results that explicitly
 credit the person in another role.
@@ -3215,38 +3238,30 @@ The scoped directory script extends the pointer hit area to blank row space whil
 preserving account links, controls, modifiers and text selection.
 It adds no popover or replacement table semantics; native links work without JavaScript.
 The table retains shared KPress spacing, numeric alignment and horizontal overflow on
-small screens. It includes cited paper authors as well as the project’s contributors, so
-its visible text says **Profiles** in the title, heading, table label and colophon link.
-The directory and profile pages keep **About** active in the shared navigation.
-The account links precede the Years active and Handles fields on individual profiles.
-Their breadcrumbs link to About’s `#profiles` section; each profile also links to the
-full directory. News articles and their homepage previews also use ordinary profile
-links. The colophon’s **Profiles** link and each profile’s breadcrumb navigate back to
-the directory. Each profile has one complete article at `profiles/ID.html`; the
-directory, credited names in tables and records, and the standalone profile use that
-address. A public-name credit in a result or case can open the same article in
-`#pop-contributor`, whose **Open profile** action reaches the complete page.
-`contributor-popover.js` knows a credit by its address, a same-site link to
-`profiles/ID.html` other than the directory, so a credit’s link carries nothing beyond
-its `href`: a marker on each name cost the results table about 16 KB when it was
-measured on 2026-10-20. The directory table, project bylines and News containers declare
-their names plain with `data-contributor-plain` scopes.
-The script leaves alone a link inside one, the panel’s own **Open profile** action, a
-link to the page it is on, and a link that downloads or names a target.
-The panel uses the shared reading-measure width cap, padding, close target, viewport
-height limit, scrim and scrolling of a compact article popover.
-It retains the page opener across case/result/profile replacements.
+small screens.
+It includes cited paper authors as well as the project’s contributors; the
+page title and heading say **Contributor Profiles**, and its table label is
+**Profiles**. The directory and profile pages keep **About** active in the shared
+navigation. The account links precede the Years active and Handles fields on individual
+profiles. Their breadcrumbs link to About’s `#profiles` section; each profile also links
+to the full directory.
+News articles and their homepage previews also use ordinary profile links.
+Each profile’s breadcrumb navigates back to the directory.
+Each profile has one complete article at `profiles/ID.html`; the directory, credited
+names in tables and records, and the standalone profile use that address.
+Person-name links navigate directly to the complete profile across About, News,
+resources, tables, cases, and results, including links inside an open article panel.
+The native address also preserves keyboard activation and modified clicks.
 
 The profiles were served under `contributors/` until 2026-10-13 (think-0v2c); each
 address served there is a registered forwarder to its profile
 (`render_overview.LEGACY_PROFILES`), and no page links one.
 A profile added since has only its `profiles/` address.
 Module, record, schema, CSS class and `data-contributor*` names keep the contributor
-vocabulary of the records under `packing/contributors/people/`. The `data-person`
-presence marker enables the reviewed credit’s profile popover; its identity is the
-profile URL, while original labels remain in the occurrence record.
+vocabulary of the records under `packing/contributors/people/`. A person’s identity is
+the profile URL, while original labels remain in the occurrence record.
 
-`render_contributors.contributor_article` writes the article once for either context:
+`render_contributors.contributor_article` writes the complete profile article:
 breadcrumb, public name, optional real name when different, selected alternate names,
 optional bio, structured public links, reviewed credited work, source locators and
 identity evidence. Unknown real names, accounts and biography facts are omitted.
@@ -3330,8 +3345,7 @@ The built-site audit reports remaining full-name mentions by page, with ambiguou
 listed separately.
 
 The article adds no padding above the page’s shared top space.
-Only the first breadcrumb reserves the close button’s clearance; the article body and
-headings keep equal left and right insets.
+The breadcrumb, article body, and headings keep equal left and right insets.
 Long source identifiers and URLs wrap only when wider than a whole line.
 Themes and standalone print read the shared KPress and paper tokens; no profile-specific
 face, color palette or print scale is introduced.
@@ -3339,11 +3353,12 @@ face, color palette or print scale is introduced.
 [site-contributor.css](site-contributor.css) implements these roles.
 `tests/test_render_contributors.py` checks safe prose, route and build integration,
 source checkout and distinct work links.
-`tests/test_site_contributor_popovers.py` checks generated page and panel content, focus
-and request races, native and failed-fetch navigation, resolved typography, equal insets
-and overflow at desktop and phone widths in both themes.
-Profile schema checks and the occurrence tests hold the identity and credit evidence
-contract.
+`tests/test_site_contributor_popovers.py` checks direct profile navigation from
+generated pages, including open case and result panels, and preserves their focus and
+request-race checks.
+Profile typography, equal insets, and overflow are checked at desktop and phone widths
+in both themes. Profile schema checks and the occurrence tests hold the identity and
+credit evidence contract.
 
 ## Page Metadata and Social Cards
 

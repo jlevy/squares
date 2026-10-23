@@ -23,6 +23,12 @@
     intro: intro?.textContent,
     introFont: intro ? getComputedStyle(intro).fontFamily : null,
     tableFont: table ? getComputedStyle(table).fontFamily : null,
+    names: [...(table?.querySelectorAll("td:first-child > a") ?? [])].map((element) => ({
+      weight: getComputedStyle(element).fontWeight,
+    })),
+    otherLinks: [...(table?.querySelectorAll("td:not(:first-child) a") ?? [])].map((element) => ({
+      weight: getComputedStyle(element).fontWeight,
+    })),
     accounts,
     tableWidth: table?.getBoundingClientRect().width ?? 0,
     wrapperWidth: wrap?.getBoundingClientRect().width ?? 0,

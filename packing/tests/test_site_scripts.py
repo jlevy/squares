@@ -65,7 +65,7 @@ def test_inventory_classifies_published_contributor_article_programs(tmp_path: P
     assets = site_assets.SiteAssets()
     programs = (
         render_overview.BROWSER / "article-loader.js",
-        render_overview.BROWSER / "contributor-popover.js",
+        render_overview.BROWSER / "case-popover.js",
     )
     directory = tmp_path / "profiles"
     directory.mkdir()

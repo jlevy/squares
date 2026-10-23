@@ -816,23 +816,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         f"--ignore={validate.BROWSER_FLOOR_LIVENESS_TESTS}",
         # Browser layout and prepared mathematics run where Chromium is installed, in
         # `site table layout in Chromium`; a shard has no browser for them (D-513).
-        "--ignore=tests/test_site_navigation.py",
-        "--ignore=tests/test_site_popover_controls.py",
-        "--ignore=tests/test_site_headroom.py",
-        "--ignore=tests/test_site_homepage.py",
-        "--ignore=tests/test_site_result_popover.py",
-        "--ignore=tests/test_site_case_records.py",
-        "--ignore=tests/test_site_contributor_popovers.py",
-        "--ignore=tests/test_site_rating_tooltips.py",
-        "--ignore=tests/test_site_math_faces.py",
-        "--ignore=tests/test_site_column_measurement.py",
-        "--ignore=tests/test_site_result_filters.py",
-        "--ignore=tests/test_site_result_columns.py",
-        "--ignore=tests/test_site_frontier_table.py",
-        "--ignore=tests/test_site_rendering.py",
-        "--ignore=tests/test_site_math_preferences.py",
-        "--ignore=tests/test_site_atlas_views.py",
-        "--ignore=tests/test_site_forwarders.py",
+        *(f"--ignore={path}" for path in validate.SITE_LAYOUT_TESTS),
         "-m",
         "not exhaustive_exact and not slow",
         "-n",
@@ -4545,15 +4529,17 @@ def test_contributor_inputs_select_site_layout_and_url_checks(path: str) -> None
 
 
 def _installs_chromium(job: Mapping[str, Any], *, pull_request: bool) -> bool:
-    """Whether a workflow job installs the pinned Chromium on this event: a `playwright
-    install` step whose own condition does not exclude the event."""
+    """Whether a browser install step is active on this event."""
     excluded = (
         "github.event_name != 'pull_request'"
         if pull_request
         else "github.event_name == 'pull_request'"
     )
     return any(
-        "playwright install" in str(step.get("run", ""))
+        any(
+            installer in str(step.get("run", ""))
+            for installer in ("playwright install", "-m devtools.browser_setup")
+        )
         and excluded not in str(step.get("if", ""))
         for step in job.get("steps", [])
     )
@@ -4578,6 +4564,7 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
         assert not _installs_chromium(document["jobs"][job_name], pull_request=True), job_name
     assert set(validate.SITE_LAYOUT_TESTS) == {
         "tests/test_site_navigation.py",
+        "tests/test_site_tutorial_design.py",
         "tests/test_site_popover_controls.py",
         "tests/test_site_headroom.py",
         "tests/test_site_homepage.py",
@@ -4606,7 +4593,10 @@ def test_a_frontend_job_without_chromium_is_detected() -> None:
     document["jobs"]["frontend"]["steps"] = [
         step
         for step in document["jobs"]["frontend"]["steps"]
-        if "playwright install" not in str(step.get("run", ""))
+        if not any(
+            installer in str(step.get("run", ""))
+            for installer in ("playwright install", "-m devtools.browser_setup")
+        )
     ]
     assert not _installs_chromium(document["jobs"]["frontend"], pull_request=True)
     # The validate job installs Chromium only after a merge, so on a pull request it
