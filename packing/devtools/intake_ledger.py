@@ -2128,10 +2128,10 @@ def evaluate(ledger: Ledger, starts: Mapping[int, Sequence[Side]]) -> dict[str, 
     }
     if ledger.get("rulings"):
         verdicts["rulings"] = ruling_summaries(ledger, walks)
-    if ledger.get("rulings_not_applied"):
+    not_applied = ledger.get("rulings_not_applied") or []
+    if not_applied:
         verdicts["rulings_not_applied"] = [
-            {"ruling": item["ruling"], "reason": item["reason"]}
-            for item in ledger["rulings_not_applied"]
+            {"ruling": item["ruling"], "reason": item["reason"]} for item in not_applied
         ]
     return verdicts
 

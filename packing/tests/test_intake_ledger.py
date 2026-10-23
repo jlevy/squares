@@ -1539,7 +1539,9 @@ def test_the_issue_732_walk_applies_goebel_s_baseline_through_its_ruling() -> No
     assert ledger.answer_problems(data, counts, held) == []
     without = {
         **data,
-        "rulings": [item for item in data["rulings"] if item["ruling"] != ledger.CLASSICAL],
+        "rulings": [
+            item for item in data.get("rulings", []) if item["ruling"] != ledger.CLASSICAL
+        ],
     }
     (found,) = ledger.answer_problems(without, counts, held)
     assert found.startswith("read on 2026-10-23: Göbel's baseline is not applied")
