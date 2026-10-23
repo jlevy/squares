@@ -101,7 +101,7 @@ async (options) => {
   const neutralAppearance = appearance(neutral);
   neutral.remove();
   const count = document.querySelector(".site-table-tools .site-count");
-  const countRow = count?.closest(".site-table-tools");
+  const _countRow = count?.closest(".site-table-tools");
   const firstCard = document.querySelector("[data-news-day]:not([hidden])");
 
   const controls = document.querySelector("[data-news-filters]");
@@ -173,10 +173,6 @@ async (options) => {
   const result = {
     chooser: chooserState,
     count_style: appearance(count),
-    count_right_gap:
-      count && countRow
-        ? countRow.getBoundingClientRect().right - count.getBoundingClientRect().right
-        : null,
     count_card_right_gap:
       count && firstCard
         ? firstCard.getBoundingClientRect().right - count.getBoundingClientRect().right

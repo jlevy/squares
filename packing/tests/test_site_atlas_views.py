@@ -1223,8 +1223,8 @@ def test_reduced_motion_wrappers_commit_geometry_in_the_click_frame(
     assert immediate["line_gap"] == pytest.approx(immediate["row_gap"], abs=atlas.EDGE)
     assert immediate["properties"] == ["none"]
     assert immediate["transitions"] == []
-    assert sum(box["key"].startswith("tile:") for box in immediate["geometry"]) == 100
-    assert len(immediate["geometry"]) > 100
+    assert sum(box["key"].startswith("tile:") for box in immediate["geometry"]) == 324
+    assert len(immediate["geometry"]) > 324
     for first, next_frame in zip(immediate["geometry"], frame["geometry"], strict=True):
         assert first["key"] == next_frame["key"]
         for dimension in ("left", "top", "width", "height"):
@@ -1425,7 +1425,7 @@ def test_see_all_results_and_the_expander_are_one_button(seen: Readings, name: s
     assert see_all["icon"]["width"] == pytest.approx(expander["icon"]["width"], abs=0.5)
     assert see_all["icon"]["after_text"]
     assert expander["icon"]["after_text"]
-    assert see_all["label"] == "View Results Archive"
+    assert see_all["label"] == "View All Results"
 
 
 def test_the_expander_reads_show_more_then_show_less_with_the_chevron_turned(

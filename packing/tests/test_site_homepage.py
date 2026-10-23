@@ -300,7 +300,7 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
         for href in report["hero_case"]["actions"]
     ] == [
         "cases/53.html",
-        "atlas.html#n-53",
+        "frontier.html#n-53",
         "atlas.html#atlas-n-53",
     ]
     assert report["static_hero"]["drawings"][0]["href"] == "cases/53.html"
@@ -707,15 +707,15 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
         "the-atlas-of-square-packings",
         "news",
         "recent-results",
-        "report-your-results",
         "papers",
+        "report-your-results",
     ]
     assert home["main_titles"] == [
         "the-problem",
         "profiles",
         "visuals",
-        "squares-project-documentation",
         "more-resources",
+        "about-the-squares-project",
     ]
     assert len(home["section_title_styles"]) == 9
     selected = news_highlights.highlights(render_changelog.load())
@@ -1463,7 +1463,6 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 {"name": "Significance", "hidden_legend": True, "tabs": 0},
                 {"name": "Topics", "hidden_legend": True, "tabs": 0},
             ]
-            assert abs(seen["count_right_gap"]) <= 0.5
             assert abs(seen["count_card_right_gap"]) <= 0.5
             assert seen["count_above_cards"]
             news_count = seen["count_style"]

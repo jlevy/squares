@@ -216,6 +216,8 @@ def test_the_case_popover_sets_its_count_serif_and_its_panels_sans(
     and math; numeric rails and other panels keep their sans faces."""
     wrong, rows = frontier_popover
     assert wrong == []
+    pager = rows[("case navigation", SANS_TEXT, SERIF_MATH)]
+    assert pager["count"] == pager["alone"] == 2
     assert rows[("popover", SANS_TEXT, SANS_MATH)]["count"] > 0
     assert rows[("visual summary", SANS_TEXT, SANS_MATH)]["count"] > 0
     assert rows[("visual summary", SERIF_TEXT, SERIF_MATH)]["count"] > 0
@@ -234,6 +236,8 @@ def test_the_case_popover_sets_its_count_serif_and_its_panels_sans(
 def test_a_case_records_panels_set_sans_math(case_records: dict[int, Walk], n: int) -> None:
     wrong, rows = case_records[n]
     assert wrong == []
+    pager = rows[("case navigation", SANS_TEXT, SERIF_MATH)]
+    assert pager["count"] == pager["alone"] == 2
     for surface in ("case bounds", "visual summary"):
         assert rows[(surface, SANS_TEXT, SANS_MATH)]["count"] > 0, surface
     assert rows[("case head", SERIF_TEXT, SERIF_MATH)]["count"] == 1

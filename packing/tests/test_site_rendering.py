@@ -700,7 +700,7 @@ def test_native_frontier_readability_requires_visible_nonempty_math(
 @pytest.fixture(scope="module")
 def frontier_native_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     root = tmp_path_factory.mktemp("frontier-native-layout")
-    site_renders.write(root, "frontier.html")
+    site_renders.write(root, "frontier.html", "atlas.html")
     server = preview_site.serve(root, 0, as_pages=True)
     try:
         yield f"http://127.0.0.1:{server.server_port}/frontier.html"
@@ -777,7 +777,9 @@ def test_atlas_startup_does_not_repeat_full_tile_restyles(
     page = browser.new_page(viewport={"width": 1280, "height": 900})
     stop_trace = check_site_rendering.record_native_trace(page, trace)
     try:
-        page.goto(frontier_native_site, wait_until="load")
+        page.goto(
+            frontier_native_site.replace("frontier.html", "atlas.html"), wait_until="load"
+        )
         check_site_rendering.wait_for_fonts(page)
         tiles = page.locator("[data-atlas-grid] .site-atlas-cell").count()
         assert tiles == 324

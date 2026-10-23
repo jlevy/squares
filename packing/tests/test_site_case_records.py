@@ -216,7 +216,7 @@ def test_a_frontier_row_opens_its_record_and_steps_to_the_next(
         _case_actions(popover, served, 12)
         # The record's links were written from its own directory and are rebased here.
         frontier_link = popover.locator('.site-case-links a:has-text("In the frontier")')
-        assert (frontier_link.get_attribute("href") or "").endswith("atlas.html#n-12")
+        assert (frontier_link.get_attribute("href") or "").endswith("frontier.html#n-12")
         page.keyboard.press("ArrowRight")
         popover.locator('[data-case-body] article.site-case[data-case="13"]').wait_for()
         _case_actions(popover, served, 13)
@@ -298,11 +298,11 @@ def test_case_page_survey_links_resolve_from_the_site_root_and_distinguish_rows_
     with _page(browser) as page:
         page.goto(f"{served}cases/13.html", wait_until="load")
         link = page.locator('.site-case-links a:has-text("In the frontier survey")')
-        assert link.get_attribute("href") == "../atlas.html#n-13"
+        assert link.get_attribute("href") == "../frontier.html#n-13"
         link.click()
-        page.wait_for_url(f"{served}atlas.html#n-13", wait_until="load")
+        page.wait_for_url(f"{served}frontier.html#n-13", wait_until="load")
         site_browser.api().expect(page.locator("#n-13")).to_be_in_viewport()
-        assert page.locator("[data-atlas-toggle]").get_attribute("aria-expanded") == "false"
+        assert page.locator("[data-atlas-grid]").count() == 0
         page.locator("#n-13 td.site-col-n a").click()
         popover = page.locator("#pop-case")
         popover.locator('[data-case-body] article.site-case[data-case="13"]').wait_for()
@@ -339,7 +339,7 @@ def test_atlas_diagram_fragments_survive_same_fragment_clicks_and_history(
         _revealed_diagram(page, 53)
 
         # A different same-page action updates the browser's :target, not just the URL.
-        page.locator("#n-12 td.site-col-n a").click()
+        page.locator("#atlas-n-12").click()
         popover.locator('[data-case-body] article.site-case[data-case="12"]').wait_for()
         popover.locator("[data-case-atlas]").click()
         page.wait_for_url(f"{served}atlas.html#atlas-n-12")
@@ -503,10 +503,10 @@ def test_a_record_file_serves_its_complete_page_and_navigates_ordinary_links(
         _canonical_case(page, 11)
         assert page.locator("article.site-case a[data-case-index]").count() == 0
         page.locator('.site-case-links a:has-text("In the frontier survey")').click()
-        page.wait_for_url(f"{served}atlas.html#n-11", wait_until="load")
-        assert page.locator(".site-atlas-cell[data-case]").count() == 324
+        page.wait_for_url(f"{served}frontier.html#n-11", wait_until="load")
+        assert page.locator("tr[data-case-row]").count() == 324
         assert page.locator('link[rel="canonical"]').get_attribute("href") == (
-            render_overview.canonical_url("atlas.html")
+            render_overview.canonical_url("frontier.html")
         )
 
 
