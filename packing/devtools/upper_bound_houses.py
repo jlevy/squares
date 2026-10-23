@@ -397,6 +397,7 @@ def _sources() -> dict[str, Source]:
         packet_source("T-225", "evand-regularized-2026-10-20"),
         packet_source("T-229", "mishapolk-issue719-2026-10-22"),
         packet_source("T-230", "evand-n303-2026-10-22"),
+        packet_source("T-238", "amundsk-n303-2026-10-23"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -432,7 +433,8 @@ def _sources() -> dict[str, Source]:
 #: as T-227 and T-225's item there named it, and at 229 from T-199. The pass of 23 October
 #: 2026 adopted Mykhailo Polkovskyi's certificates of issue 719 (T-229) at 105 from T-174
 #: and at 204 from T-225, and Evan Daniel's certificate of issue 728 (T-230) at 303 from
-#: T-186.
+#: T-186. The pass of 24 October 2026 adopted Amund Kristiansen's certificate of issue 755
+#: (T-238) at 303 from T-230.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -498,7 +500,7 @@ ADOPTED: dict[int, str] = {
     295: "T-146",
     297: "T-174",
     302: "T-186",
-    303: "T-230",
+    303: "T-238",
     304: "T-186",
     305: "T-174",
     306: "T-174",
@@ -566,6 +568,11 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: review of it, at 303 from T-186, 1.86e-04 below it: another arrangement of Daniil
 #: Ostashev's two-band design, found from his packing. Its pull request merged after
 #: T-229's, and 303 joined that day's pass, whose archive takes a row for each count.
+#: The pass of 24 October 2026 adopted Amund Kristiansen's certificate of issue 755 (T-238)
+#: after the 23 October review of it, at 303 from T-230, 9.89e-06 below it: another
+#: arrangement of T-230's packing, found from it. It is dated by the day its pull request
+#: merges, since the pass of 23 October had already moved 303 and one day's archive holds
+#: one prior state a count.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -642,6 +649,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-21": frozenset({260, 270}),
     "2026-10-22": frozenset({204, 227, 229, 260}),
     "2026-10-23": frozenset({105, 204, 303}),
+    "2026-10-24": frozenset({303}),
 }
 
 

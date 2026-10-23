@@ -977,6 +977,43 @@ RESULTS: dict[str, Prose] = {
             "at a wall and at the least-gap pair"
         ),
     ),
+    "T-238": Prose(
+        author="Amund Kristiansen",
+        reported="on [jlevy/squares#755](https://github.com/jlevy/squares/issues/755)",
+        producer_route=False,
+        ai=(
+            "Issue 755 says the search, the certificate and the report were done by Claude "
+            "(Anthropic), working in Claude Code at Amund Kristiansen’s direction, with Evan "
+            "Daniel’s engine and checkers."
+        ),
+        routes=(
+            "No route here is the source’s code. Both read the certificate, kept here as a "
+            "derived exact fact since the source states no licence, through an adapter whose "
+            "author read Evan Daniel’s two checkers and which carries two of their "
+            "expressions, its line filter and its corner construction (RF-7 of the 23 October "
+            "review), so the replay is re-implemented sharing those components; the review’s "
+            "checker shares no code with either maintained route or the source."
+        ),
+        lineage=(
+            "The issue says the search started from Evan Daniel’s n = 303 packing of #728, "
+            "this case’s house best packing before this adoption (T-230), itself found from "
+            "Daniil Ostashev’s packing, and relaxed perturbed variants of it in float32 "
+            "batches, polished in binary64 with Daniel’s quench; it calls the result a new "
+            "packing, not a refinement. Measured by the 23 October review, square by square, "
+            "it pairs one to one with T-230’s packing under the identity and row for row: 12 "
+            "squares lie beyond a tenth, at most 0.547, five are newly tilted and 47 of about "
+            "860 contacts change. So it is another arrangement of T-230’s packing, found from "
+            "it, not a refinement in this record’s sense (T-238). The certificate is a "
+            "dilation by $1 + 10^{-12}$ of a binary64 packing; the issue claims the upper "
+            "bound only, and the packing is not rigid: five squares touch nothing."
+        ),
+        third_route=(
+            ", and the 23 October review’s clean-room checker decided it again on two routes "
+            "of its own, in integers alone and in rationals with exact edge and vertex tests; "
+            "its controls at $10^{-30}$ found both maintained routes exact at three walls and "
+            "five pairs"
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -989,6 +1026,7 @@ OSTASHEV = "Daniil Ostashev"
 BARNETT = "Robert Barnett"
 #: Mykhailo Polkovskyi, by the handle his earlier credits use (T-173, T-183).
 POLKOVSKYI = "Mishapolk"
+KRISTIANSEN = "Amund Kristiansen"
 
 
 @dataclass(frozen=True)
@@ -1523,16 +1561,16 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
         "PingYou Ltd’s n = 302 arrangement",
     ),
-    # Issue 728's packing (T-230, adopted on 23 October 2026), another arrangement of Daniil
-    # Ostashev's two-band design (64 squares beyond a tenth of T-186's packing and 24 tilts
-    # reversed, the 22 October review), found from Ostashev's packing, which the issue names
-    # as the start. As at 155, Daniel is the finder and the start's author is named in the
-    # sentence, not in the structured fields.
+    # Issue 755's packing (T-238, adopted on 24 October 2026), another arrangement of T-230's
+    # packing (one to one with it, 12 squares beyond a tenth and five newly tilted, the 23
+    # October review), found from it, which the issue names as the start. As at 155 and for
+    # T-230, Kristiansen is the finder and the start's author is named in the sentence, not
+    # in the structured fields.
     303: Credit(
-        (DANIEL,),
+        (KRISTIANSEN,),
         (),
-        "Evan Daniel’s arrangement of Daniil Ostashev’s two-band design in a search started "
-        "from Ostashev’s n = 303 packing",
+        "Amund Kristiansen’s arrangement of Evan Daniel’s n = 303 packing in a search "
+        "started from it",
     ),
     # Issue 575's packing padded (T-186's regularization of T-175).
     304: Credit(
