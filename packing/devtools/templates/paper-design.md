@@ -1666,9 +1666,9 @@ contributor articles use their component sheets and the same text tokens.
   **Earlier results** (**Action under a table or grid**, below).
   - Inline markup carries `<span class="site-icon-arrow" data-arrow="right">`, written
     only by `overview_sections.arrow_icon(direction)`: a case record’s steps to its
-    neighbours (left before the previous case, right after the next), which the left and
-    right arrow keys follow in the case popover, the overview’s “All Results” button
-    (right) and the recent table’s **Earlier results** (double-down, then double-up).
+    neighbours (left before the case’s count, right after it), which the left and right
+    arrow keys follow in the case popover, the overview’s “All Results” button (right)
+    and the recent table’s **Earlier results** (double-down, then double-up).
     The atlas popover’s stepper, two buttons left and right, went with that popover on
     2026-10-03, and the atlas’s expander on 2026-10-22.
   - The icons CSS draws are pseudo-elements painted from the same token: a card’s corner
@@ -1935,6 +1935,10 @@ contributor articles use their component sheets and the same text tokens.
   (think-apqd, the owner, 2026-10-22). The head bootstrap marks the root
   `data-site-atlas-follow`, so the first paint is already XL, and `atlas-view.js` keeps
   it there until the reader scrolls.
+  The browser paints the page before its programs run, and the triangle would stand at
+  its right end and then jump left to its framing, so it is kept out of sight until
+  `atlas-view.js` frames it and then fades in where it stands, a quarter of a second; if
+  the program never runs, the stylesheet shows it after two seconds.
   - The triangle is laid out once, at XL, on a stage the height of the window that the
     browser pins (`position: sticky`) while an empty runway after it scrolls past.
     Each row takes one transform, its pan, its place and its zoom, so no frame lays out
@@ -1965,7 +1969,15 @@ contributor articles use their component sheets and the same text tokens.
     it slides on to the left edge.
   - All of it is a function of the scroll, so going back up retraces it to XL at the
     top. A sideways wheel or swipe pans the triangle while the page scrolls, so a
-    diagonal gesture moves both ways; that pan eases away back at the top.
+    diagonal gesture moves both ways.
+    That pan holds while the reader pauses and eases back onto the path as they scroll
+    on, by a factor of e a window, and eases away back at the top.
+    The last of the motion slides to the triangle’s left edge whatever the pan.
+    A swipe down wobbles a little sideways, most as it starts, and the pan once counted
+    the wobble, so the triangle sometimes went left and then right (the owner,
+    2026-10-23). Sideways travel now pans only past 16 pixels and a quarter of the
+    vertical travel, both counted over the last 150 milliseconds or so, then one for one
+    until the gesture is mostly vertical again.
   - The size tabs show the size nearest the zoom, and nothing is written to the address.
     A size or view tab, or a jump to a tile’s fragment, ends the following for the page
     view; a pressed size returns the tiles to that size’s own layout with the usual
@@ -2171,12 +2183,16 @@ contributor articles use their component sheets and the same text tokens.
 - **Row-scale comparison.** Row-scaled Atlas packings share the enclosing frame’s bottom
   baseline and left edge.
   Smaller packings leave the gray reference square visible above and to the right.
-  The reference uses the muted-text gray for contrast; scaling anchors at the shared
-  renderer’s frame inset, preserving its margins and original geometry (`think-m05q`).
-  Fixed and Global scales retain their positioning.
+  The reference used the muted-text gray until 2026-10-23, when the owner asked for a
+  lighter one: it now takes `--site-atlas-reference-ink`, the muted gray mixed halfway
+  to the page background, the same shade in every tile and in both themes lighter than
+  the container and the muted text.
+  Scaling anchors at the shared renderer’s frame inset, preserving its margins and
+  original geometry (`think-m05q`). Fixed and Global scales retain their positioning.
   Gray reference frames use the same centered SVG stroke and displayed line width as the
-  black container (`think-y6lt`). Web count labels use medium weight, up to 1rem, with
-  bold perfect-square endpoints (`think-ju2n`).
+  black container (`think-y6lt`). Web count labels use medium weight, up to 1rem, every
+  count at the same weight: the perfect-square endpoints were bold (`think-ju2n`) until
+  2026-10-23, when the owner made them match the rest.
 
 - **Page headings.** Every ordinary page H1 uses the shared centered sans-serif caps
   style and title spacing automatically.
@@ -2218,9 +2234,12 @@ contributor articles use their component sheets and the same text tokens.
   line is a table row of two cells, the label (“lower” or “upper”) and the source, so
   the label column is as wide as the wider label however it is drawn, and the source
   wraps between words beside it.
-  A case record opens with the centered Case Record eyebrow, its packing diagram, then
-  the large $n = N$ heading, badges and main bound formula.
-  Result case panels use the same diagram-before-count order.
+  A case record opens with the centered Case Record eyebrow, the large $n = N$ heading
+  between its two steps, its packing diagram, then badges and main bound formula.
+  Until 2026-10-23 the diagram came before the heading; the owner then put the steps on
+  the heading’s line, and the diagram, which fills a case popover’s width, would have
+  carried them below the fold of a laptop’s window and to a new height for each case.
+  Result case panels keep the diagram-before-count order, having no steps.
   The number line and supporting facts follow.
   The drawing fits the available width up to 20rem, 18rem in narrower containers and
   14rem in the smallest containers.
@@ -2306,8 +2325,10 @@ contributor articles use their component sheets and the same text tokens.
     The shared article loader supplies prepared, rebased and ID-scoped clones (**Article
     Pages and Overlays**, above).
     The close control, Escape, outside click, and focus return remain shared behavior.
-    Previous and next controls and left/right arrow keys change the case in place.
-    Pager counts use prepared serif math.
+    The record’s previous and next steps (**The record**, below) and the left and right
+    arrow keys change the case in place.
+    In the popover the record’s label shares the line of the icons at the upper right,
+    and the drawing, the count and its steps start below them.
     In the fetched popover, the packing figure uses the panel’s full content width while
     mathematical prose retains the shared reading measure.
     The standalone page keeps its compact drawing width.
@@ -2320,11 +2341,22 @@ contributor articles use their component sheets and the same text tokens.
     The sticky action footer has matching padding above and below its buttons.
     Long formulas scroll within the prose, and the panel fits the phone viewport.
     Fetch failures use the link’s canonical case page as the fallback.
-  - **The record.** Its header shows previous and next steps, the mathematical case
-    count, ordered status marks, and the verified interval as display-size math.
-    The standalone and fetched articles share `--site-case-max`: the reading measure
-    plus the foundation column insets, capped at 48rem. It resolves at the root so a
-    fetched article keeps the same width regardless of the opening page’s layout band.
+  - **The record.** Its header shows the mathematical case count between its previous
+    and next steps, then ordered status marks, and the verified interval as display-size
+    math. The steps share the count’s line (the owner, 2026-10-23): a left arrow before
+    the count and a right arrow after it, each alone, in the link ink, a 2.75rem target
+    on the count’s middle at the same gap from it, and washed on hover or keyboard
+    focus. Each names the case it loads in its accessible name and tooltip (“Previous
+    case, n = 16”) rather than in visible text.
+    The count stays centred whether the case has two neighbours or, at 1 and 324, one.
+    The line comes straight after the label, above the diagram, so the steps stand at
+    one height for every case and, in the popover, just below its icons.
+    Until that day the steps, each an arrow beside its neighbour’s count, ran across the
+    record’s first line above the label, and in the popover they kept clear of the
+    corner’s icons (`think-0dxa`). The standalone and fetched articles share
+    `--site-case-max`: the reading measure plus the foundation column insets, capped at
+    48rem. It resolves at the root so a fetched article keeps the same width regardless
+    of the opening page’s layout band.
     Then the visual summary (above).
     Then, under a rule, the bounds as bordered sans panels, one per bound (best known,
     verified upper, reported lower, verified lower) and the gap, as many abreast as fit

@@ -7498,6 +7498,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/probes/measure_atlas_views/hold.js",
             "packing/devtools/probes/measure_atlas_views/layout.js",
             "packing/devtools/probes/measure_atlas_views/move.js",
+            "packing/devtools/probes/measure_site_pages/math_faces.js",
+            "packing/devtools/probes/preview_site/math_face.js",
+            "packing/devtools/render_case_pages.py",
             "packing/devtools/templates/site-nav.css",
         ),
         outputs=(
@@ -7515,8 +7518,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "smaller choosers (think-apqd) change only site chrome the papers share: the "
             "head bootstrap gains a root attribute set only on the two Atlas pages, "
             "`site-nav.css` the small chooser's size, which no paper uses, and the Atlas's "
-            "markup, measuring tool and probes, which no paper runs. Rendered on 23 "
-            "October from this tree and from main 44df28b07 into empty site directories "
+            "markup, measuring tool and probes, which no paper runs. The case record's "
+            "steps on its count's line change only the case pages, and the math-face "
+            "probes lose the steps' surface. Rendered again on 23 October, after those, "
+            "from this tree and from main 44df28b07 into empty site directories "
             "with source links pinned to 44df28b07 (69 files each): every paper's Markdown "
             "is byte-identical, and each paper's HTML differs only in the inlined head "
             "bootstrap and the hashed name of `site-nav.css`. Every paper keeps its "

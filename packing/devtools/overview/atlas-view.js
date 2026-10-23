@@ -71,8 +71,12 @@
 // down, the top of the triangle slides off to the right and the left side, where each
 // row's grid first breaks, stays in view. At the bottom the rows slow to a stop while the triangle slides
 // to its left edge. All of it is a function of the scroll, the same going up as coming
-// down. A sideways wheel or swipe pans it further while the page scrolls, and that
-// eases away again back at the top. Nothing is written to the address. Pressing a size
+// down. A sideways wheel or swipe pans it further while the page scrolls; that pan holds
+// while the reader pauses, eases back onto the path as they scroll on and away at the
+// top, a swipe's small sideways wobble pans nothing (`sideways`), and the last of the
+// motion slides to the left edge whatever the pan. Until the first frame the stylesheet
+// keeps the triangle out of sight, so the first paint never shows it elsewhere.
+// Nothing is written to the address. Pressing a size
 // or view tab, or opening a tile by its fragment, ends the following for the page view
 // and returns the triangle to its size's own layout.
 //
@@ -92,8 +96,16 @@
   /** How far down the window the focus line of a following triangle stands. */
   const FOCUS = 0.5;
   /** The share of the way to nothing the reader's own pan eases each frame once they
-   * are back above the triangle. */
+   * are back above the triangle or at the page's top. */
   const EASE = 0.2;
+  /** The share of a gesture's vertical travel its sideways travel must pass to pan the
+   * triangle: less is a trackpad's or a finger's wobble in an up-and-down scroll. */
+  const DRIFT = 0.25;
+  /** The pixels of recent sideways travel that must pass, however straight, to pan it. */
+  const SLACK = 16;
+  /** How long, in milliseconds, a gesture's travel counts as recent: it fades by a factor
+   * of e over this time. */
+  const RECENT = 150;
   /** How wide the bends of the pan are, as a share of the stage's width: where it leaves
    * the right edge, and where a row's left end comes to rest at the left. */
   const PAN_BEND = 0.25;
@@ -366,6 +378,45 @@
    */
   function followLeft(room, width, across, bend = PAN_BEND) {
     return smoothMax(0, room / 2 - across * width, bend);
+  }
+
+  /**
+   * A filter for a gesture's sideways travel, given each movement `x` across and `y` down
+   * at `time` milliseconds. Its recent travel fades by e over `recent` milliseconds. It
+   * passes nothing until the recent sideways travel is more than wobble, past `slack`
+   * pixels and `share` of the recent vertical travel, then the excess, and then each
+   * movement across one for one until the recent travel is mostly vertical again: a
+   * diagonal pans with the hand, and a swipe up or down pans nothing.
+   * @param {number} [slack]
+   * @param {number} [share]
+   * @param {number} [recent]
+   * @returns {(x: number, y: number, time: number) => number}
+   */
+  function sideways(slack = SLACK, share = DRIFT, recent = RECENT) {
+    let across = 0;
+    let down = 0;
+    let at = Number.NEGATIVE_INFINITY;
+    let panning = false;
+    return (x, y, time) => {
+      const kept = Math.exp(-Math.max(0, time - at) / recent);
+      at = time;
+      across = across * kept + x;
+      down = down * kept + Math.abs(y);
+      if (panning) {
+        if (Math.abs(across) > share * down) {
+          return x;
+        }
+        panning = false;
+        across = 0;
+        return 0;
+      }
+      const wobble = Math.max(slack, share * down);
+      if (!(Math.abs(across) > wobble)) {
+        return 0;
+      }
+      panning = true;
+      return across - Math.sign(across) * wobble;
+    };
   }
 
   /**
@@ -707,7 +758,7 @@
     /** Whether the size and the pan follow the page's scroll, until the reader takes over. */
     let following = false;
     const sizeQuery = new URLSearchParams(location.search).get(SIZE_PARAM);
-    const namedSize = sizeQuery === "small" || sizeQuery === "medium" || sizeQuery === "large";
+    const namedSize = SIZES.some((name) => name === sizeQuery);
     let explicitSize = namedSize || block.hasAttribute("data-atlas-size-explicit");
     // Keep this media query in step with site.css's first-paint default (think-mp47).
     const wideScreen = window.matchMedia("(min-width: 75rem)");
@@ -1151,6 +1202,10 @@
       // in one restyle.
       block.dataset.atlasFollow = "scroll";
       block.dataset.atlasZoom = "";
+    } else {
+      // The stylesheet keeps a triangle that will follow out of sight until it is framed;
+      // one that will not is shown at once, at its own size.
+      document.documentElement.removeAttribute("data-site-atlas-follow");
     }
     markSize(
       namedSize
@@ -1462,18 +1517,26 @@
       // along the reader's row, its left end in view, and at the end to the left edge.
       const range = Math.max(0, (laid.spans.at(-1) ?? 0) * zoom - room);
       const framed = followLeft(room, width, shareAt(point), room * PAN_BEND) - (room - width);
-      const reach = smootherstep((scrolled - slowing) / (laid.runway + laid.stop));
-      const auto = between(framed, range, reach);
-      // Back above the triangle, or at the page's top, the reader's own pan eases away.
-      const above = (scrolled <= -laid.focus || window.scrollY <= 0) && nudge !== 0;
+      // The reader's own pan holds while they pause and eases back onto the path as they
+      // scroll on, by a factor of e a window of scroll, so drift cannot build up.
+      nudge *= Math.exp(-Math.abs(scrolled - reading.scrolled) / laid.stage);
+      // Back above the triangle, or at the page's top, it eases away a frame at a time.
+      const above = scrolled <= -laid.focus || window.scrollY <= 0;
       if (above) {
-        nudge = Math.abs(nudge) < 0.5 ? 0 : nudge * (1 - EASE);
+        nudge *= 1 - EASE;
       }
-      const shift = Math.min(
-        Math.max(auto - nudge, Math.min(auto, 0) - room / 2),
-        Math.max(range, auto),
+      if (Math.abs(nudge) < 0.5) {
+        nudge = 0;
+      }
+      const held = Math.min(
+        Math.max(framed - nudge, Math.min(framed, 0) - room / 2),
+        Math.max(range, framed),
       );
-      nudge = auto - shift;
+      nudge = framed - held;
+      // The last of the motion slides all the way to the left edge, whatever the reader's
+      // own pan, starting as the rows begin to slow and ending with the runway.
+      const reach = smootherstep((scrolled - slowing) / (laid.runway + laid.stop));
+      const shift = between(held, range, reach);
       panned = -shift;
       laid.rows.forEach((row, index) => {
         const top = laid.tops[index] ?? 0;
@@ -1501,29 +1564,44 @@
       void fontsReady.then(relay);
       // A sideways turn of the wheel, a horizontal swipe on a trackpad, pans the triangle
       // while the page scrolls up and down, so a diagonal gesture moves both ways at
-      // once. A finger dragged sideways does the same; up and down is the page's.
+      // once; the small sideways wobble of a swipe up or down pans nothing (`sideways`).
+      // A finger dragged sideways does the same; up and down is the page's.
       const unit = (/** @type {WheelEvent} */ event) =>
         event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? cells.clientWidth : 1;
+      /** @param {number} pan */
+      const nudged = (pan) => {
+        if (following && pan !== 0) {
+          nudge += pan;
+          schedule();
+        }
+      };
+      const swipe = sideways();
       cells.addEventListener(
         "wheel",
         (event) => {
-          if (following && event.deltaX !== 0) {
-            nudge += event.deltaX * unit(event);
-            schedule();
-          }
+          const scale = unit(event);
+          nudged(swipe(event.deltaX * scale, event.deltaY * scale, event.timeStamp));
         },
         { passive: true },
       );
-      /** @type {number | null} */
+      /** @type {{ x: number, y: number, swipe: (x: number, y: number, time: number) => number } | null} */
       let touched = null;
       cells.addEventListener("pointerdown", (event) => {
-        touched = event.pointerType === "touch" ? event.clientX : null;
+        touched =
+          event.pointerType === "touch"
+            ? { x: event.clientX, y: event.clientY, swipe: sideways() }
+            : null;
       });
       cells.addEventListener("pointermove", (event) => {
-        if (following && touched !== null && event.pointerType === "touch") {
-          nudge += touched - event.clientX;
-          touched = event.clientX;
-          schedule();
+        if (touched !== null && event.pointerType === "touch") {
+          const pan = touched.swipe(
+            touched.x - event.clientX,
+            event.clientY - touched.y,
+            event.timeStamp,
+          );
+          touched.x = event.clientX;
+          touched.y = event.clientY;
+          nudged(pan);
         }
       });
       for (const kind of ["pointerup", "pointercancel"]) {
@@ -1552,6 +1630,7 @@
     zoomAlong,
     frameAt,
     settle,
+    sideways,
     journey,
     followLeft,
     nearestSize,

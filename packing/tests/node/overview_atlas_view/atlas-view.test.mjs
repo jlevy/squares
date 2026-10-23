@@ -584,3 +584,41 @@ void test("The tabs show the size whose tile is nearest the zoom, by ratio", () 
   assert.equal(atlas.nearestSize(140, tiles), "large");
   assert.equal(atlas.nearestSize(230, tiles), "xlarge");
 });
+
+void test("A swipe up or down pans nothing; a diagonal pans with the hand", () => {
+  // Events 16ms apart, as a trackpad sends them. A swipe down wobbles a little sideways
+  // as it starts and as it goes on; none of it pans.
+  const swipe = atlas.sideways(16, 0.25, 150);
+  let time = 0;
+  /** @param {number} x @param {number} y */
+  const move = (x, y) => {
+    time += 16;
+    return swipe(x, y, time);
+  };
+  const wobble = [
+    [2, 1],
+    [-1, 3],
+    [3, 6],
+    [2, 12],
+    ...Array.from({ length: 60 }, (_, at) => [at % 2 === 0 ? 3 : -1, 20]),
+  ].map(([x, y]) => move(x ?? 0, y ?? 0));
+  assert.ok(wobble.every((pan) => pan === 0));
+  // Turned diagonal in the same swipe, it pans: the recent excess over the wobble at
+  // first, then each movement across one for one, reversals included.
+  const diagonal = Array.from({ length: 10 }, () => move(-20, 20));
+  const first = diagonal.findIndex((pan) => pan !== 0);
+  assert.ok(first > 0 && first < 6);
+  assert.ok((diagonal[first] ?? 0) < 0 && (diagonal[first] ?? 0) > -20);
+  assert.deepEqual(
+    diagonal.slice(first + 1),
+    diagonal.slice(first + 1).map(() => -20),
+  );
+  assert.equal(move(8, 0), 8);
+  // Straightened up again, it stops panning once the recent travel is mostly vertical.
+  const straight = Array.from({ length: 30 }, () => move(2, 20));
+  assert.equal(straight.at(-1), 0);
+  // A sideways turn of the wheel with no vertical passes past the slack.
+  const tilt = atlas.sideways(16, 0.25, 150);
+  assert.equal(tilt(-40, 0, 0), -24);
+  assert.equal(tilt(-40, 0, 16), -40);
+});

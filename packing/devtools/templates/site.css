@@ -2253,6 +2253,9 @@ body:has([data-atlas-preview]) {
      scale makes Small two thirds as wide and Large half as wide again. */
   --site-atlas-cell-min: 6.4rem;
   --site-atlas-reference-gap: 0.5rem;
+  /* The Row reference square's ink: the muted gray halfway to the page, one shade in
+     every tile and lighter than both the black container and the muted text. */
+  --site-atlas-reference-ink: color-mix(in srgb, var(--kpress-doc-muted) 50%, var(--kpress-doc-bg));
   --site-atlas-cell-padding: 0.3rem;
   /* Each size's scale, which a following triangle also reads to tell whether a row
      would fit at the next size (overview/atlas-view.js). */
@@ -2537,7 +2540,7 @@ html[data-site-atlas-scale="global"] .site-atlas-grid:where([data-atlas-grid]) .
 .site-atlas-cell .site-atlas-reference {
   aspect-ratio: 1;
   height: auto;
-  color: var(--kpress-doc-muted);
+  color: var(--site-atlas-reference-ink);
   display: none;
   inset-block-start: var(--site-atlas-cell-padding);
   inset-inline-start: var(--site-atlas-cell-padding);
@@ -2695,6 +2698,27 @@ html[data-site-atlas-follow]
   transform-origin: 100% 0;
   will-change: transform;
 }
+/* Until the script frames it, that triangle is out of sight: the browser paints the page
+   before the script runs, and the triangle would stand at its right end and then jump to
+   its framing. It then fades in where it stands. A script that never runs leaves it
+   shown after two seconds. */
+@keyframes site-atlas-unveil {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+html[data-site-atlas-follow]
+  .site-page
+  .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]):not([data-atlas-follow])
+  .site-atlas-cells {
+  animation: site-atlas-unveil 0s 2s both;
+}
+.site-page .site-atlas-grid[data-atlas-follow] .site-atlas-cells {
+  animation: site-atlas-unveil 0.25s ease-out both;
+}
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
   .site-atlas-segment,
@@ -2744,17 +2768,6 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   font-size: var(--site-atlas-number-size);
   line-height: 1.15;
   margin-block-start: calc(var(--site-atlas-tile) * 0.04);
-}
-/* Perfect-square endpoints use bold weight while keeping the same gray number ink. */
-html:not([data-site-atlas-view="grid"])
-  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
-  [data-atlas-square]
-  .site-atlas-n,
-html[data-site-atlas-view="triangle"]
-  .site-atlas-grid:where([data-atlas-grid])
-  [data-atlas-square]
-  .site-atlas-n {
-  font-weight: var(--site-font-weight-sans-bold);
 }
 /* The film's panel for a case, which opens every case record as its visual summary
    (`.site-case-summary`, below) and a result's overview as its case (site-result.css):
@@ -3043,7 +3056,7 @@ html[data-site-atlas-view="triangle"]
   inset-inline-end: auto;
   margin-block-start: calc(var(--site-popover-close-inset) - var(--site-popover-pad));
   /* A float narrows the record's inline-size container and moves its centre. Keep
-     the sticky cross in a block that occupies no height beside the first steps. */
+     the sticky cross in a block that occupies no height beside the record's label. */
   margin-block-end: calc(
     -1 *
     (var(--site-popover-close) + var(--site-popover-close-inset) - var(--site-popover-pad))
@@ -3054,7 +3067,7 @@ html[data-site-atlas-view="triangle"]
   z-index: 2;
 }
 .site-popover.site-case-pop > .site-case-pop-body {
-  /* Only the steps beside the cross reserve its width; the article stays centred. */
+  /* Nothing beside the cross reserves its width; the article stays centred. */
   padding-inline-end: 0;
 }
 
@@ -3071,7 +3084,7 @@ html[data-site-atlas-view="triangle"]
     inline-size: calc(100vw - 1rem);
     padding-inline: 0.75rem;
   }
-  /* Its cross keeps to that narrower padding, as its steps do (below). */
+  /* Its cross keeps to that narrower padding. */
   .site-popover.site-case-pop > .site-popover-controls {
     margin-inline-end: calc(var(--site-popover-close-inset) - 0.75rem);
   }
@@ -3084,38 +3097,64 @@ html[data-site-atlas-view="triangle"]
   font-weight: var(--site-font-weight-sans-light);
   text-align: center;
 }
+/* The count's line: the title centred between the record's two steps, each an arrow
+   alone at the same gap from it, so the line reads as the count with an arrow either
+   side (the owner, 2026-10-23). The steps' nav lies across the whole line on a subgrid of
+   it, so a first or last case's one arrow leaves the count where it is, and in the case
+   popover the line stands below the corner's icons rather than beside them, as the steps
+   did when they were the record's first line (`think-0dxa`). */
+.site-case-title-line {
+  --site-case-step: 2.75rem;
+  align-items: center;
+  column-gap: 0.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  margin-block: 0.25rem 0.75rem;
+}
 .site-case-steps {
-  display: flex;
-  font-size: var(--site-font-size-note);
-  gap: 1rem;
-  justify-content: space-between;
-  margin-block-end: 1rem;
+  display: grid;
+  font-size: calc(var(--site-font-size-sans-base) * var(--paper-title-scale));
+  grid-column: 1 / -1;
+  grid-row: 1;
+  grid-template-columns: subgrid;
+  /* It lies over the count too; only its arrows take a press. */
+  pointer-events: none;
 }
-.site-case-steps [rel~="next"] {
-  margin-inline-start: auto;
+.kpress .site-case-steps > a {
+  block-size: var(--site-case-step);
+  color: var(--kpress-doc-link);
+  display: grid;
+  inline-size: var(--site-case-step);
+  place-items: center;
+  pointer-events: auto;
+  text-decoration: none;
+  transition: var(--site-hover-transition);
 }
-/* The record's steps are the first line the cross stands beside once it is held at the
-   corner, so they keep clear of it as the label above them does: the next case's link
-   ended under the cross (`think-0dxa`). */
-.site-case-pop .site-case-steps {
-  padding-inline-end: calc(
-    var(--site-popover-controls-inline) +
-    var(--site-popover-close-inset) -
-    var(--site-popover-pad)
-  );
+.kpress .site-case-steps > a:is(:hover, :focus-visible) {
+  background: var(--site-wash);
 }
-@media (max-width: 40rem) {
-  .site-case-pop .site-case-steps {
-    padding-inline-end: calc(
-      var(--site-popover-controls-inline) +
-      var(--site-popover-close-inset) -
-      0.75rem
-    );
-  }
+.site-case-steps > [rel~="prev"] {
+  grid-column: 1;
+  justify-self: end;
+}
+.site-case-steps > [rel~="next"] {
+  grid-column: 3;
+  justify-self: start;
+}
+.site-case-steps .site-icon-arrow {
+  block-size: 0.75em;
+  inline-size: 0.75em;
+  margin: 0;
 }
 .site-case-eyebrow {
   display: block;
   text-align: center;
+}
+/* In the case popover the record's label shares the corner icons' line, so the count's
+   line, steps and all, starts just below them. */
+.site-case-pop .site-case-head > .site-case-eyebrow {
+  line-height: var(--site-popover-close);
+  margin-block-start: calc(var(--site-popover-close-inset) - var(--site-popover-pad));
 }
 .kpress .site-case-title,
 .kpress .site-popover .site-case-title {
@@ -3123,7 +3162,13 @@ html[data-site-atlas-view="triangle"]
   font-size: calc(var(--site-font-size-sans-base) * var(--paper-title-scale));
   font-weight: var(--site-font-weight-sans-medium);
   line-height: var(--paper-heading-leading);
-  margin-block: 0.5rem 0.6rem;
+  margin-block: 0;
+}
+/* The count is as wide as it is set; a fetched record's `h1` would otherwise scroll in the
+   popover (`.kpress .site-popover h1`) over a fraction of a pixel's overhang. */
+.kpress .site-case-title-line > .site-case-title {
+  grid-area: 1 / 2;
+  overflow: visible;
 }
 .site-case-status {
   align-items: center;

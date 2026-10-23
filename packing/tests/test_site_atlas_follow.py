@@ -6,7 +6,9 @@ pans it as one picture: one smooth curve of zoom from Large down to the least zo
 middle of the window a third of the way along the reader's row while that row's left end
 stays in view, and at the end a smooth turn from moving up to sliding to the triangle's
 left edge. The page's own scroll is never touched, so scrolling back up retraces it.
-A sideways wheel pans the triangle while the page scrolls, and fades back at the top.
+A sideways wheel pans the triangle while the page scrolls, and fades back at the top; the
+small sideways wobble of a swipe down pans nothing. Until the programs frame it the
+triangle is out of sight, so the first paint never shows it anywhere else.
 A size or view tab ends the following; an address that names a size, a view, a fragment
 or an embedding never starts it.
 
@@ -38,6 +40,7 @@ WHEEL = probe(PROBES, "site_atlas_follow/wheel")
 PREPAINT = probe(PROBES, "site_atlas_follow/prepaint")
 QUIET = probe(PROBES, "site_atlas_follow/quiet")
 FRAMES = probe(PROBES, "site_atlas_follow/frames")
+UNVEIL = probe(PROBES, "site_atlas_follow/unveil")
 
 DESKTOP = {"width": 1280, "height": 900}
 PHONE = {"width": 390, "height": 844}
@@ -114,11 +117,13 @@ def test_the_triangle_opens_at_large_and_mounting_moves_nothing(
         page.goto(site + name, wait_until="load")
         check_site_rendering.wait_for_fonts(page)
         before = page.evaluate(PREPAINT)
+        hidden = page.evaluate(UNVEIL)
         page.unroute(programs)
         page.reload(wait_until="load")
         check_site_rendering.wait_for_fonts(page)
         page.wait_for_selector("[data-atlas-grid][data-atlas-ready]")
         after = page.evaluate(PREPAINT)
+        shown = page.evaluate(UNVEIL)
         state = _read(page)
     finally:
         page.close()
@@ -132,6 +137,11 @@ def test_the_triangle_opens_at_large_and_mounting_moves_nothing(
     assert (after["follow"], after["zoomed"], after["size"]) == ("scroll", True, "xlarge")
     assert (state["scale"], state["shown"]) == (1, "xlarge")
     assert not state["explicit"]
+    # The browser paints before the programs run; until they frame it the stage is out of
+    # sight, so it never stands at its right end first. Without them it shows after 2s;
+    # framed, it fades in where it stands.
+    assert hidden == {"delay": 2000, "length": 0, "start": 0, "end": 1}
+    assert shown == {"delay": 0, "length": 250, "start": 0, "end": 1}
 
 
 @pytest.mark.parametrize(
@@ -223,7 +233,13 @@ def test_a_sideways_wheel_pans_while_the_page_scrolls(browser: Any, site: str) -
         for _ in range(60):
             page.evaluate(STEP, {"by": TURN})
         before = _read(page)
-        # A diagonal gesture: each turn moves the page down and the triangle sideways.
+        # A swipe down that wobbles a little sideways pans nothing.
+        for x in (3, -2, 4, 2, 1, 3):
+            page.evaluate(WHEEL, {"x": x, "y": TURN})
+        straight = _read(page)
+        page.evaluate(FRAMES, {"count": 12})
+        # A diagonal gesture: each turn moves the page down and the triangle sideways,
+        # past the first 16 pixels of slack, easing back a little as the page scrolls.
         for _ in range(8):
             page.evaluate(WHEEL, {"x": -20, "y": TURN})
         diagonal = _read(page)
@@ -234,7 +250,8 @@ def test_a_sideways_wheel_pans_while_the_page_scrolls(browser: Any, site: str) -
         page.close()
     assert before["follow"] == diagonal["follow"] == "scroll"
     assert diagonal["scrollY"] > before["scrollY"]
-    assert diagonal["nudge"] == pytest.approx(-160, abs=1)
+    assert straight["nudge"] == 0
+    assert -144 < diagonal["nudge"] < -100
     # Back at the top the reader's own pan has eased away.
     assert (top["nudge"], top["scale"], top["follow"]) == (0, 1, "scroll")
 

@@ -28,9 +28,10 @@ FIGURE = probe(PROBES, "case_popover_figure/figure")
 CROSS = probe(PROBES, "case_popover_head/cross")
 TABLE_DOM = probe(PROBES, "case_pages/table_dom")
 LAYOUT = probe(PROBES, "case_layout/read")
+LINE = probe(PROBES, "case_title_line/read")
 OVERFLOW = probe(PROBES, "case_layout/overflow")
 NAVIGATION = probe(PROBES, "case_navigation/read")
-EXERCISED_CASES = (5, 10, 11, 12, 13, 14, 15, 16, 17, 29, 32, 53, 291, 324)
+EXERCISED_CASES = (1, 5, 10, 11, 12, 13, 14, 15, 16, 17, 29, 32, 53, 291, 324)
 
 
 def _free_port() -> int:
@@ -402,14 +403,16 @@ def test_the_popovers_compact_drawing_keeps_its_own_line_weight(
 
 
 @pytest.mark.parametrize("width", [1280, 390, 320])
-def test_the_popovers_cross_stands_in_its_corner_clear_of_the_steps(
+def test_the_popovers_cross_stands_in_its_corner_above_the_record(
     browser: Any, served: str, width: int
 ) -> None:
     """On a laptop's window and a phone's, the case popover's close cross stands inside
-    the panel at its corner, and the record's steps end before it: the next case's link
-    once ended under the cross, which the card's horizontal inset, read by the sticky
-    cross as a second limit, had set a padding's width in from the corner
-    (`think-0dxa`)."""
+    the panel at its corner, and the record starts below its icons: the record's label
+    shares their line, and its drawing, its count and the steps beside the count stand
+    under them. The steps were once the record's first line, beside the cross, and the
+    next case's link ended under it, which the card's horizontal inset, read by the
+    sticky cross as a second limit, had set a padding's width in from the corner
+    (`think-0dxa`); since 2026-10-23 they flank the count (the owner)."""
     with _page(browser, width=width) as page:
         # A named size: this reads the popover, not a triangle following the scroll.
         page.goto(f"{served}atlas.html?size=small", wait_until="load")
@@ -424,13 +427,15 @@ def test_the_popovers_cross_stands_in_its_corner_clear_of_the_steps(
         assert head["controls_top"] == pytest.approx(
             head["panel_top"] + head["panel_right"] - head["cross_right"] + 1, abs=0.5
         ), head
-        assert head["next_right"] <= head["expand_left"] + 0.5, head
         assert head["expand_right"] <= head["cross_left"] + 0.5, head
-        assert [item["text"] for item in head["pager_math"]] == ["n=4", "n=6"]
-        assert all(item["prepared"] == 1 for item in head["pager_math"]), head
-        assert all("KPress Math Text" in item["family"] for item in head["pager_math"]), head
         assert head["cross_width"] == head["cross_height"] >= 44, head
         assert head["hit"], head
+        line = page.evaluate(LINE)
+        assert line is not None
+        controls = line["controls"]
+        assert line["figure"]["top"] >= controls["bottom"] - 0.5, line
+        assert line["line"]["top"] >= controls["bottom"], line
+        assert all(line[rel]["top"] >= controls["bottom"] for rel in ("prev", "next")), line
         drawn = page.evaluate(FIGURE)
         assert drawn["width"] == pytest.approx(drawn["body"], abs=1), drawn
         assert drawn["height"] == pytest.approx(drawn["width"], abs=0.5), drawn
@@ -438,7 +443,7 @@ def test_the_popovers_cross_stands_in_its_corner_clear_of_the_steps(
         assert drawn["popover_right"] <= width, drawn
         popover.hover()
         page.mouse.wheel(0, 1200)
-        site_browser.api().expect(popover.locator(".site-case-steps")).not_to_be_in_viewport()
+        site_browser.api().expect(popover.locator(".site-case-eyebrow")).not_to_be_in_viewport()
         scrolled = page.evaluate(CROSS)
         assert scrolled["scroll_top"] > 0, scrolled
         assert scrolled["panel_top"] <= scrolled["cross_top"], scrolled
@@ -447,6 +452,66 @@ def test_the_popovers_cross_stands_in_its_corner_clear_of_the_steps(
         popover.locator(".site-popover-close").click()
         assert not popover.is_visible()
         site_browser.api().expect(row).to_be_focused()
+
+
+def _title_line(line: dict[str, Any] | None, n: int) -> list[float]:
+    """Case `n`'s title line holds its count centred on the record, with an arrow step to
+    each neighbour that exists; returns each arrow's gap from the count."""
+    assert line is not None
+    count, title = line["count"], line["title"]
+    centre = (line["article"]["left"] + line["article"]["right"]) / 2
+    assert (count["left"] + count["right"]) / 2 == pytest.approx(centre, abs=0.5), line
+    assert line["titleHit"], line
+    middle = (title["top"] + title["bottom"]) / 2
+    gaps = []
+    for rel, neighbour, word in (("prev", n - 1, "Previous"), ("next", n + 1, "Next")):
+        step = line[rel]
+        if not 1 <= neighbour <= 324:
+            assert step is None, line
+            continue
+        assert step is not None, line
+        assert step["label"] == f"{word} case, n = {neighbour}", step
+        assert step["tooltip"] == f"n = {neighbour}", step
+        assert step["text"] == "", step
+        assert step["color"] == line["ink"], (step, line["ink"])
+        assert step["width"] == step["height"] >= 2.25 * line["rem"], step
+        assert (step["top"] + step["bottom"]) / 2 == pytest.approx(middle, abs=0.5), step
+        assert step["hit"], step
+        arrow = step["arrow"]
+        before = rel == "prev"
+        gap = count["left"] - arrow["right"] if before else arrow["left"] - count["right"]
+        assert gap > 0, step
+        gaps.append(gap)
+    return gaps
+
+
+@pytest.mark.parametrize("width", [1280, 390, 320])
+def test_a_records_count_stands_between_its_two_steps(
+    browser: Any, served: str, width: int
+) -> None:
+    """A record's steps are on its title's line, an arrow alone on either side of the
+    count, so the line reads as the count with an arrow each way (the owner, 2026-10-23).
+    Each arrow is in the link ink, a target of at least 2.25rem on the count's middle, at
+    the same gap from the count as every other, and names the case it loads in its
+    accessible name and its tooltip; the count, which the steps lie over, still takes a
+    press. The count stays centred on the record with two neighbours or one, on the
+    record's own page and in the case popover."""
+    gaps: list[float] = []
+    with _page(browser, width=width) as page:
+        for n in (17, 1, 324):
+            page.goto(f"{served}cases/{n}.html", wait_until="load")
+            page.locator(".site-case-title-line").scroll_into_view_if_needed()
+            gaps += _title_line(page.evaluate(LINE), n)
+        # A named size: this reads the popover, not a triangle following the scroll.
+        page.goto(f"{served}atlas.html?size=small", wait_until="load")
+        page.locator('.site-atlas-cell[data-case="17"]').click()
+        popover = page.locator("#pop-case")
+        popover.locator('[data-case-body] article.site-case[data-case="17"]').wait_for()
+        # Off the panel, so no arrow is nudged by the pointer the tile's press left there.
+        page.mouse.move(0, 0)
+        popover.locator(".site-case-title-line").scroll_into_view_if_needed()
+        gaps += _title_line(page.evaluate(LINE), 17)
+    assert max(gaps) - min(gaps) <= 0.5, gaps
 
 
 def _canonical_case(page: Any, n: int) -> None:

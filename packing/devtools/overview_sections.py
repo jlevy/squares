@@ -3123,7 +3123,7 @@ def atlas_grid(*, homepage: bool = False) -> str:
     uses positions supplied by the static markup and stylesheet, so a tile's markup is
     the same in both.
     A perfect square's tile is marked `data-atlas-square`: it ends its row of the
-    triangle, and the triangle numbers it in bold gray. The
+    triangle, and is numbered at the same weight as every other tile. The
     block is rendered at the small size (`data-atlas-size`), under tabs beside the view
     tabs that make every tile smaller or larger (`atlas_size_tabs`), in either view.
     Scale changes only the drawing within each tile: Fixed gives every frame the
