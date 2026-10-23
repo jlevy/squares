@@ -1443,9 +1443,24 @@ T-160 records the side at V3/C3 on the
 and the case at 154 holds it as the house since 12 October 2026, its start credited to
 Francisco Couzo’s 5 October packing of 155 squares as the author asks.
 Claude assistance disclosed.
+
+## Evan Daniel’s s(29) polynomial and grade-C local minima, 12 October 2026
+
+**[Daniel exact and local reports 2026-10-12]**: two exact reports that Evan Daniel’s
+evand/square-packing carried at `ad86d42d0f743076d735036702ba04a41ce24a8c` on no issue,
+tracked on #545: the minimal polynomial, of degree 7213, of the s(29) record side, and
+Theorem C with `gradec.py`, a certificate of local minimality modulo exact flat motions,
+reported VALID at 233 configurations of field degree at most 4;
+[packet](web/evand-exact-and-local-reports-2026-10-12/README.md).
 The data release `exact-data-2026-10-12` that #545 asked for is the sibling
 [packet](web/evand-exact-data-2026-10-12/README.md): the s(29) polynomial archive pinned
-by digest and the grade-C certificates retained as published; it registers nothing.
+by digest, the grade-C certificates retained as published, and the 233 exact forms those
+certificates read. The
+[review of 23 October](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
+found Theorem C true under its hypotheses, repaired a gap in its proof, and decided all
+233 configurations again with a checker written here.
+Neither report bounds anything, and neither is registered.
+MIT; Claude assistance disclosed.
 
 ## E. Summins’ stratification series, 12 October 2026
 

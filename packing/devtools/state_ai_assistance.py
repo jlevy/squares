@@ -5,25 +5,29 @@
 
 attribution.md, People, Projects and Assistance requires case records, the register
 and README prose to state declared AI assistance in the source's terms.
-The bibliography notes
-record each source's statement, but a case record is hand-written prose, and on
-2026-09-29 some fifty of them cited Hosono's or Tokoharu's releases in their front
-matter without saying so in their bodies. Writing one sentence into each by hand is the
-one-off edit `OR-1` asks to be a tool, and checking that none is missing afterwards is
-the measurement that should outlive it.
+A case record is hand-written prose, and on 2026-09-29 some fifty of them cited Hosono's
+or Tokoharu's releases in their front matter without saying so in their bodies. Writing
+one sentence into each by hand is the one-off edit `OR-1` asks to be a tool, and
+checking that none is missing afterwards is the measurement that should outlive it.
 
-Each `Statement` names the bibliography keys whose citation calls for it, the paragraph
-that describes that source's result (`anchor`), the sentence to write there in the
-source's own words, and the words that show the paragraph already says so (`marker`).
+**The statements live in the bibliography**, as each source's `ai_assistance`: the
+sentence to write in the source's own words, the paragraph that describes the source's
+result (`anchor`), the words that show the paragraph already says so (`marker`) and,
+where the source speaks of some counts only, those `counts`. Keys that make the same
+statement share one `Statement`. Until 23 October 2026 the statements were a list in
+this module, and four keys records cited were missing from it, their statements carried
+by hand (think-j5so); a new source now states its assistance where its key is defined.
 A record owes the statement when its front matter cites one of the keys and a body
 paragraph matches the anchor; it has it when such a paragraph contains the marker.
 `--apply` appends the sentence to the first anchored paragraph of every record that
-owes one; the Markdown formatter then reflows it.
+owes one; the Markdown formatter then reflows it. `--check` also refuses a field whose
+anchor is no pattern or whose sentence lacks its marker, and runs in `packing-validate`
+with the case prose (`case prose agrees with its own front matter`).
 
 Records whose body never describes the source owe nothing and are listed by `--check`
 as such, since where the sentence belongs is then a question for the record rather than
 this tool. Statements that differ release by release, as `n-017`'s five successive
-external bounds do, are written by hand and are not in `STATEMENTS`.
+external bounds do, are written by hand and carry no `ai_assistance`.
 
 **The Kingbird catalogue states AI assistance entry by entry**, a different sentence at
 each count that carries one ("Found by Joost de Winter in August 2026, working with
@@ -64,127 +68,95 @@ ROOT = Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
 RECORD = re.compile(r"^n-(\d{3})\.md$")
 
-#: What Hosono's and Tokoharu's repository READMEs say, word for word.
-UNDER_HUMAN_DIRECTION = "AI assistance under human direction"
+BIBLIOGRAPHY = ROOT / "resources" / "bibliography.yaml"
 
 
 @dataclass(frozen=True, slots=True)
 class Statement:
-    """What one source says of AI assistance, and where a case record says it."""
+    """What one source says of AI assistance, and where a case record says it.
+
+    `counts`, when given, are the only records that owe it: a source can say something
+    of some of its packings alone, as Couzo did of his n = 102 and 103 ones.
+    """
 
     keys: frozenset[str]
     anchor: re.Pattern[str]
     sentence: str
     marker: str
+    counts: frozenset[int] | None = None
 
 
-#: Hosono's statement, which `devtools.apply_wand125_rectangles` also writes into the
-#: intake paragraph it owns, so that regenerating a record keeps the sentence this tool added.
-WAND125 = Statement(
-    keys=frozenset(
-        {
-            "[wand125 point bounds 2026]",
-            "[wand125 rectangle bounds 2026]",
-            "[wand125 rectangle bounds 2026-09-28]",
-            "[wand125 point and mixed bounds 2026-09-28]",
-            "[wand125 rectangle bounds 2026-10-01]",
-            "[wand125 exact covers 2026-10-01]",
-            "[wand125 mixed bounds 2026-10-01]",
-        }
-    ),
-    # Hosono's releases, published under his handle wand125; the keys keep the handle.
-    anchor=re.compile(r"Hosono"),
-    sentence=(
-        "Hosono’s README says parts of the work were produced with AI assistance under "
-        "human direction."
-    ),
-    marker=UNDER_HUMAN_DIRECTION,
-)
+def load_statements(path: Path = BIBLIOGRAPHY) -> tuple[Statement, ...]:
+    """Each statement the bibliography's `ai_assistance` fields make, with every key that
+    makes it, in the order the bibliography first gives each.
 
-STATEMENTS: tuple[Statement, ...] = (
-    WAND125,
-    Statement(
-        keys=frozenset({"[Tokoharu density 2026]"}),
-        # Tokoharu's own result, not Tokoharu's checker running someone else's certificate.
-        anchor=re.compile(
-            r"\[Tokoharu density source\]|Tokoharu’s (?:retained|separately|n\d)"
-        ),
-        sentence=(
-            "Tokoharu’s README says parts of the work were produced with AI assistance under "
-            "human direction."
-        ),
-        marker=UNDER_HUMAN_DIRECTION,
-    ),
-    Statement(
-        keys=frozenset(
-            {
-                "[Kleddamag n11 2026]",
-                "[Kleddamag n17 certified bound]",
-                "[Kleddamag n17 4.640020]",
-                "[Kleddamag n17 4.66001]",
-            }
-        ),
-        # Overbeck's releases, published under his handle Kleddamag; the keys keep the handle.
-        anchor=re.compile(r"Overbeck"),
-        sentence=(
-            "The source’s `AUTHORS.md` names Overbeck as Kleddamag and says he directed the "
-            "research and OpenAI Codex carried it out."
-        ),
-        marker="OpenAI Codex",
-    ),
-    Statement(
-        keys=frozenset(
-            {"[Guzhou0806 n17 R052]", "[Guzhou0806 n17 R067]", "[Guzhou0806 n17 R068]"}
-        ),
-        anchor=re.compile(r"\bR0[56]\d\b"),
-        sentence=(
-            "The release names itself as made by Guzhou0806 / N17 project with AI assistance."
-        ),
-        marker="AI assistance",
-    ),
-    Statement(
-        keys=frozenset({"[n17 weighted certificates 2026-09-20]"}),
-        anchor=re.compile(r"\bR012\b"),
-        sentence=(
-            "R012’s `ATTRIBUTION.md` names it as research by “Guzhou0806 / N17 project, with "
-            "AI assistance”."
-        ),
-        marker="AI assistance",
-    ),
-    Statement(
-        keys=frozenset({"[evand square-packing 2026]", "[evand square-packing 2026-09-28]"}),
-        anchor=re.compile(r"Evan Daniel"),
-        sentence=(
-            "The source’s `CREDITS.md` says the work was produced by Claude (Anthropic) in a "
-            "single session under human direction."
-        ),
-        marker="Claude (Anthropic)",
-    ),
-    Statement(
-        # The release is silent; the authors gave this wording on the issue that reported it.
-        keys=frozenset({"[Wang Li n11 2026]"}),
-        anchor=re.compile(r"Ke Wang and Can Li"),
-        sentence=(
-            "On jlevy/squares#247 the authors wrote that “AI assistance was used for most of "
-            "the computational exploration, code drafting and checking, organization of "
-            "verification outputs, and preparation of the written materials.”"
-        ),
-        marker="AI assistance was used for most of",
-    ),
-    Statement(
-        # Neither pinned release states it; asked on the n207 issue which of its two
-        # accounts stands, the author answered there for both releases.
-        keys=frozenset(
-            {"[PingYou n207 certificate 2026-10-11]", "[PingYou n153 certificate 2026-10-11]"}
-        ),
-        anchor=re.compile(r"PingYou"),
-        sentence=(
-            "On jlevy/squares#503 the author wrote: “Both solutions were AI assisted by ‘PY’, "
-            "an unreleased agentic AI offering by PingYou Ltd.”"
-        ),
-        marker="AI assisted by",
-    ),
-)
+    Keys whose fields agree in sentence, marker, anchor and counts share one `Statement`,
+    as Hosono's seven releases share his README's sentence. A field whose anchor is no
+    pattern is left out, so that importing this module cannot fail on the record it
+    checks; `statement_problems` reports it.
+    """
+    grouped: dict[tuple[str, str, str, tuple[int, ...] | None], list[str]] = {}
+    for source in safe_load(path.read_text(encoding="utf-8"))["sources"]:
+        stated = source.get("ai_assistance")
+        if not stated:
+            continue
+        try:
+            re.compile(str(stated["anchor"]))
+        except re.error:
+            continue
+        counts = tuple(sorted(stated["counts"])) if stated.get("counts") else None
+        shape = (str(stated["sentence"]), str(stated["marker"]), str(stated["anchor"]), counts)
+        grouped.setdefault(shape, []).append(str(source["key"]))
+    return tuple(
+        Statement(
+            keys=frozenset(keys),
+            anchor=re.compile(anchor),
+            sentence=sentence,
+            marker=marker,
+            counts=frozenset(counts) if counts else None,
+        )
+        for (sentence, marker, anchor, counts), keys in grouped.items()
+    )
+
+
+def statement_problems(path: Path = BIBLIOGRAPHY) -> list[str]:
+    """What is wrong with a bibliography `ai_assistance` field: an anchor that is not a
+    regular expression, or a marker its own sentence lacks, which `--apply` would write
+    into every record that owes it and `--check` would still call missing."""
+    problems: list[str] = []
+    for source in safe_load(path.read_text(encoding="utf-8"))["sources"]:
+        stated = source.get("ai_assistance")
+        if not stated:
+            continue
+        try:
+            re.compile(str(stated["anchor"]))
+        except re.error as error:
+            problems.append(f"{source['key']}: ai_assistance.anchor is not a pattern: {error}")
+        if str(stated["marker"]) not in str(stated["sentence"]):
+            problems.append(f"{source['key']}: ai_assistance.sentence lacks its own marker")
+    return problems
+
+
+#: Every statement, read from the bibliography (think-j5so): until 23 October 2026 these
+#: were a list here, and four keys cited by records were missing from it.
+STATEMENTS: tuple[Statement, ...] = load_statements()
+
+
+def statement_of(key: str, statements: Iterable[Statement] | None = None) -> Statement:
+    """The one statement a bibliography key makes, read from `STATEMENTS` unless given."""
+    found = [s for s in (STATEMENTS if statements is None else statements) if key in s.keys]
+    if len(found) != 1:
+        raise LookupError(f"{key} makes {len(found)} AI-assistance statements, not one")
+    return found[0]
+
+
+def wand125() -> Statement:
+    """Hosono's statement, which `devtools.apply_wand125_rectangles` also writes into the
+    intake paragraph it owns, so that regenerating a record keeps the sentence this tool
+    added. Resolved when asked for, not at import: a bad anchor in Hosono's field leaves
+    it out of `STATEMENTS`, and `--check` must still be able to say so (review A4 of
+    #748)."""
+    return statement_of("[wand125 rectangle bounds 2026]")
 
 
 #: How a case record names the Kingbird catalogue as the source of its reported side.
@@ -269,6 +241,14 @@ def paragraphs(lines: Sequence[str]) -> list[Paragraph]:
     ]
 
 
+def record_count(front: str) -> int | None:
+    """The `n` a record's front matter names, or None for text that names none."""
+    parsed = safe_load(front)
+    packing = parsed.get("packing") if isinstance(parsed, Mapping) else None
+    n = packing.get("n") if isinstance(packing, Mapping) else None
+    return n if isinstance(n, int) else None
+
+
 def owed(front: str, lines: Sequence[str]) -> list[tuple[Statement, Paragraph | None, bool]]:
     """Each statement the record's citations call for: its anchor paragraph, and whether said.
 
@@ -279,6 +259,8 @@ def owed(front: str, lines: Sequence[str]) -> list[tuple[Statement, Paragraph | 
     result: list[tuple[Statement, Paragraph | None, bool]] = []
     for statement in STATEMENTS:
         if not any(key in front for key in statement.keys):
+            continue
+        if statement.counts is not None and record_count(front) not in statement.counts:
             continue
         anchored = [paragraph for paragraph in prose if statement.anchor.search(paragraph.text)]
         said = any(statement.marker in paragraph.text for paragraph in anchored)
@@ -359,6 +341,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         changed = apply(paths)
         print(f"stated AI assistance in {len(changed)} records: {', '.join(changed)}")
     missing, unanchored = report(paths)
+    missing = [*statement_problems(BIBLIOGRAPHY), *missing]
     for label in unanchored:
         print(f"no paragraph describes the source, so nothing is owed: {label}")
     for label in missing:

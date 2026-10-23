@@ -63,6 +63,28 @@ properties:
             `devtools.check_results` for every source a register result by others
             published since the project began cites, and held to `credit` by
             tests/test_results_register.py.
+        ai_assistance:
+          type: object
+          additionalProperties: false
+          required: [sentence, marker, anchor]
+          description: >-
+            What the source says of AI assistance, as a case record that cites this key
+            states it (attribution.md, People, Projects and Assistance).
+            `devtools.state_ai_assistance` reads it: a record owes `sentence` when its
+            front matter cites the key and a body paragraph matches `anchor`, a regular
+            expression for a paragraph that describes the source's result, and has it
+            when such a paragraph contains `marker`, which `sentence` contains. `counts`
+            limits where it is owed, for a statement the source makes of some counts
+            only. Keys that carry the same statement share it.
+          properties:
+            sentence: {type: string, minLength: 1}
+            marker: {type: string, minLength: 1}
+            anchor: {type: string, minLength: 1}
+            counts:
+              type: array
+              minItems: 1
+              uniqueItems: true
+              items: {type: integer, minimum: 1}
         # Where a web source's authors or year were read, since the README's Web Sources
         # table carries neither.
         note: {type: string, minLength: 1}
