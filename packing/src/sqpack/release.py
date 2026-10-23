@@ -2484,11 +2484,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/devtools/build_known_best_atlas.py",
-            "packing/devtools/default_drawings.py",
             "packing/devtools/flip_regularization.py",
             "packing/devtools/overview_sections.py",
             "packing/devtools/render_case_pages.py",
             "packing/devtools/render_frontier_page.py",
+            "packing/devtools/render_regularized_atlas.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/src/sqpack/cli/validate.py",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
@@ -2503,13 +2505,15 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "Flip regularization (think-l2i6, regularization policy section 13), which "
             "draws each count's default picture in its canonical pose on the posters and "
-            "the site, against main 7335d009 (#752): rendered at link revision 7335d009 "
-            "into empty site directories, once from main and once from this branch "
-            "(69 files each), render_n11_lower_bounds_explainer, with its pinned Chromium "
-            "math pass, render_n11_optimality_review, render_n11_threshold_bound_review "
-            "and render_packing_methods write every file byte-identical. The papers link "
-            "the atlas poster by address and draw no default picture themselves. No PDF "
-            "was printed; each prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and "
+            "the site from its own record and check, against main 7cd0a94bf (#747): "
+            "rendered at link revision 7cd0a94b into empty site directories, once from "
+            "main and once from this branch after merging it (69 files each), "
+            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical. Measured before at "
+            "6b5b479dd against main 7335d0098, with the same outcome. The papers link the "
+            "atlas poster by address and draw no default picture themselves. No PDF was "
+            "printed; each prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and "
             "v0.2.7."
         ),
     ),
