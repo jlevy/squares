@@ -124,6 +124,22 @@ import:
   At 327, 335, 342, 364 and 372, the rational witnesses, it is above Couzo’s own earlier
   decimal report by about $1.8 \times 10^{-11}$.
 
+## The History Walk’s Rows
+
+Twelve of the certificates above are rows of their own, as the source `couzo-02f9690-2026-10-09`: a publication in a watched repository is a report from its first commit (the owner, 14 October 2026), and the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) records them in report order (think-a4wq).
+
+[`devtools.beyond_horizon_replay`](../../../devtools/beyond_horizon_replay.py) declares this publication a release with no issue, `franciscouzo/square-packing@02f9690`, and reads the rows the history walk records from [acquisition/watched-release.json](acquisition/watched-release.json), which `declare-rows` writes from the walk.
+
+Each certificate was first committed at the commit itself ([receipts/first-commits.json](receipts/first-commits.json)).
+
+**All 12 are verified.** The filtered two-route decision of `devtools.couzo_678_replay`, reused unchanged, accepts every packing on both routes (9,538 candidate pairs of 750,575, and every corner against every wall), and every side is its header side rounded up at 12 places. **All 72 controls are refused by both routes.** The positive decisions took 5.6 CPU seconds ([receipts/filtered-exact-replay.json](receipts/filtered-exact-replay.json)). No square touches the box and no pair touches: every wall clears by at least $5.00 \times 10^{-21}$ and every pair by at least $1.00 \times 10^{-20}$. Every side is below Göbel’s classical construction at its count ([receipts/goebel-comparison.json](receipts/goebel-comparison.json)).
+
+The [history walk of 22 October](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) walks every count from 325 to 1024 in report order from starts frozen at `main` `a97b712b9` and records all 12. **Six are current**, at 332, 336, 337, 341, 373, 374. **Six are superseded on entry**, by Couzo’s 3ef7634 (2), Couzo’s f311f08 (2), Couzo’s #506 (337078c) (1) and Darius Muglich’s #686 (1). The rows supersede first Couzo’s 8 October decimal row (11) and Couzo’s 2d32a6e decimal row (1).
+
+[acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record the source register reads them from, as the source `couzo-02f9690-2026-10-09`.
+
+The walk records the commit’s certificates at 369, 375 and 376 too and holds each back from a row: each is above Göbel’s classical construction at its count (#613, think-8krd). The packet’s other five, at 327, 335, 342, 364 and 372, are at or above the side that stood at their count before the walk’s first report, so none could be recorded.
+
 ## What Is Not Established
 
 The certificates establish finite upper bounds at their exact sides, nothing more.

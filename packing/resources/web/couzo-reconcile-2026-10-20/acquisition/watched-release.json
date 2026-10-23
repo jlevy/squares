@@ -1,0 +1,110 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/franciscouzo/square-packing/tree/5a299b4708ab1ae4870d0fc1ab155738144f6ab8",
+ "commit": "5a299b4708ab1ae4870d0fc1ab155738144f6ab8",
+ "committed": "2026-10-20T22:35:41Z",
+ "published": "2026-10-21T22:56:37Z",
+ "walk": "upper-bounds-couzo-history-20261022",
+ "rows": [
+  {
+   "n": 409,
+   "certificate": "certificates/n409.cert",
+   "printed": "20.767428349965"
+  },
+  {
+   "n": 450,
+   "certificate": "certificates/n450.cert",
+   "printed": "21.767428349965"
+  },
+  {
+   "n": 453,
+   "certificate": "certificates/n453.cert",
+   "printed": "21.822995415462"
+  },
+  {
+   "n": 487,
+   "certificate": "certificates/n487.cert",
+   "printed": "22.583782190152"
+  },
+  {
+   "n": 532,
+   "certificate": "certificates/n532.cert",
+   "printed": "23.583782190152"
+  },
+  {
+   "n": 579,
+   "certificate": "certificates/n579.cert",
+   "printed": "24.583782190152"
+  },
+  {
+   "n": 628,
+   "certificate": "certificates/n628.cert",
+   "printed": "25.583782190152"
+  },
+  {
+   "n": 649,
+   "certificate": "certificates/n649.cert",
+   "printed": "25.974939166866"
+  },
+  {
+   "n": 679,
+   "certificate": "certificates/n679.cert",
+   "printed": "26.583782190152"
+  },
+  {
+   "n": 732,
+   "certificate": "certificates/n732.cert",
+   "printed": "27.583782190152"
+  },
+  {
+   "n": 787,
+   "certificate": "certificates/n787.cert",
+   "printed": "28.583782190152"
+  },
+  {
+   "n": 810,
+   "certificate": "certificates/n810.cert",
+   "printed": "28.951463061398"
+  },
+  {
+   "n": 812,
+   "certificate": "certificates/n812.cert",
+   "printed": "28.976914446464"
+  },
+  {
+   "n": 844,
+   "certificate": "certificates/n844.cert",
+   "printed": "29.583782190152"
+  },
+  {
+   "n": 903,
+   "certificate": "certificates/n903.cert",
+   "printed": "30.583782190152"
+  },
+  {
+   "n": 933,
+   "certificate": "certificates/n933.cert",
+   "printed": "30.992883399226"
+  },
+  {
+   "n": 934,
+   "certificate": "certificates/n934.cert",
+   "printed": "30.994174058157"
+  },
+  {
+   "n": 990,
+   "certificate": "certificates/n990.cert",
+   "printed": "31.975405698330"
+  },
+  {
+   "n": 991,
+   "certificate": "certificates/n991.cert",
+   "printed": "31.977403109933"
+  },
+  {
+   "n": 997,
+   "certificate": "certificates/n997.cert",
+   "printed": "31.996875920295"
+  }
+ ]
+}

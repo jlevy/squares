@@ -1,0 +1,15 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/evand/square-packing/tree/f7a2325df1e396f46ee373c6d00a880795b749b7",
+ "commit": "f7a2325df1e396f46ee373c6d00a880795b749b7",
+ "committed": "2026-10-10T09:15:50Z",
+ "published": "2026-10-10T09:15:50Z",
+ "walk": "upper-bounds-couzo-history-20261022",
+ "rows": [
+  {
+   "n": 343,
+   "certificate": "search/packer/candidates/hunt3_n343.dil.cert",
+   "printed": "18.989552952453"
+  }
+ ]
+}

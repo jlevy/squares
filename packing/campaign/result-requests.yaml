@@ -10007,7 +10007,8 @@ issues:
       not_registered: 'An earlier report is smaller. franciscouzo/square-packing at 4e4c8ce, first committed
         2026-10-15T00:31:53Z, before this issue at 20:02:39Z, publishes certificates/best/n366.cert (SHA-256
         bfd83f90...) at 14 + 4√2 scaled by 1 + 1e-24, 19.656854249493 rounded up, 8.19e-2 below; its index
-        credits PingYou Ltd (BuddenPing), and its 341 rows beyond 324 are think-yfoo''s import. Göbel''s strip
+        credits PingYou Ltd (BuddenPing), and its 341 rows beyond 324 were think-yfoo''s import, and that certificate
+        is the count''s current row (couzo-index-2026-10-15). Göbel''s strip
         construction for 369, 19 + √2/2, is 3.17e-2 below as well (#613). Not imported.'
       queued: false
     beads:
@@ -16953,17 +16954,19 @@ issues:
       claim: s(336) <= 18.825571499862, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
-        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n337
       claim: s(337) <= 18.858391767637, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
-        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n338
       claim: s(338) <= 18.906332809853, rounded upward; exact certificate side is authoritative.
@@ -16977,17 +16980,19 @@ issues:
       claim: s(340) <= 18.939649632892, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at f311f08 on 2026-10-11, at
-        the same exact side, an earlier report. It is left to its own import (think-om5l, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at f311f08 on 2026-10-11, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-extended-certificates-2026-10-11 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n341
       claim: s(341) <= 18.951882408720, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
-        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n343
       claim: s(343) <= 18.977575126267, rounded upward; exact certificate side is authoritative.
@@ -17013,17 +17018,19 @@ issues:
       claim: s(373) <= 19.823062082838, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
-        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n374
       claim: s(374) <= 19.832356217033, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at
-        the same exact side, an earlier report. It is left to its own import (think-a4wq, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n404
       claim: s(404) <= 20.614368938513, rounded upward; exact certificate side is authoritative.
@@ -17039,17 +17046,19 @@ issues:
       claim: s(410) <= 20.778174593076, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n413
       claim: s(413) <= 20.831663365378, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n417
       claim: s(417) <= 20.933672777441, rounded upward; exact certificate side is authoritative.
@@ -17065,9 +17074,10 @@ issues:
       claim: s(454) <= 21.828427124844, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n455
       claim: s(455) <= 21.848427413955, rounded upward; exact certificate side is authoritative.
@@ -17133,9 +17143,10 @@ issues:
       claim: s(490) <= 22.656854249519, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n496
       claim: s(496) <= 22.822875655559, rounded upward; exact certificate side is authoritative.
@@ -17161,9 +17172,10 @@ issues:
       claim: s(498) <= 22.828427124827, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n499
       claim: s(499) <= 22.881306218323, rounded upward; exact certificate side is authoritative.
@@ -17269,9 +17281,10 @@ issues:
       claim: s(544) <= 23.828427124775, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n545
       claim: s(545) <= 23.883414761903, rounded upward; exact certificate side is authoritative.
@@ -17367,9 +17380,10 @@ issues:
       claim: s(584) <= 24.677669529693, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n591
       claim: s(591) <= 24.828427124775, rounded upward; exact certificate side is authoritative.
@@ -17425,9 +17439,10 @@ issues:
       claim: s(596) <= 24.949747468335, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n597
       claim: s(597) <= 24.950690418637, rounded upward; exact certificate side is authoritative.
@@ -17513,9 +17528,10 @@ issues:
       claim: s(637) <= 25.778174593082, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n640
       claim: s(640) <= 25.828427124775, rounded upward; exact certificate side is authoritative.
@@ -17541,9 +17557,10 @@ issues:
       claim: s(644) <= 25.899494936642, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n645
       claim: s(645) <= 25.946937290069, rounded upward; exact certificate side is authoritative.
@@ -17649,9 +17666,10 @@ issues:
       claim: s(689) <= 26.778174593084, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n691
       claim: s(691) <= 26.828427124775, rounded upward; exact certificate side is authoritative.
@@ -17667,9 +17685,10 @@ issues:
       claim: s(692) <= 26.828427124777, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n694
       claim: s(694) <= 26.898819144794, rounded upward; exact certificate side is authoritative.
@@ -17725,9 +17744,10 @@ issues:
       claim: s(699) <= 26.949747468415, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n700
       claim: s(700) <= 26.963723854128, rounded upward; exact certificate side is authoritative.
@@ -17773,9 +17793,10 @@ issues:
       claim: s(736) <= 27.656854249525, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n737
       claim: s(737) <= 27.677669529693, rounded upward; exact certificate side is authoritative.
@@ -17802,17 +17823,18 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
-        count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier
-        report. It is left to its own import (think-yfoo, open), which has not recorded it yet;
-        this restatement is not recorded.
+        count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier report.
+        It is an index deletion bound, held with the others from Couzo's index for the owner's
+        decision on proposed D6 (think-f2io), and not recorded; this restatement is not recorded.
       queued: false
     - key: n744
       claim: s(744) <= 27.798989873256, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n745
       claim: s(745) <= 27.828427124777, rounded upward; exact certificate side is authoritative.
@@ -17828,9 +17850,10 @@ issues:
       claim: s(746) <= 27.828427124795, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n747
       claim: s(747) <= 27.884019388658, rounded upward; exact certificate side is authoritative.
@@ -17936,9 +17959,10 @@ issues:
       claim: s(792) <= 28.656854249526, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n797
       claim: s(797) <= 28.778174593084, rounded upward; exact certificate side is authoritative.
@@ -17974,9 +17998,10 @@ issues:
       claim: s(800) <= 28.798989873257, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n801
       claim: s(801) <= 28.825777528963, rounded upward; exact certificate side is authoritative.
@@ -18102,9 +18127,10 @@ issues:
       claim: s(850) <= 29.656854249528, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n854
       claim: s(854) <= 29.778174593084, rounded upward; exact certificate side is authoritative.
@@ -18180,9 +18206,10 @@ issues:
       claim: s(862) <= 29.899494936647, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n863
       claim: s(863) <= 29.902673974184, rounded upward; exact certificate side is authoritative.
@@ -18318,9 +18345,10 @@ issues:
       claim: s(914) <= 30.778174593089, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n915
       claim: s(915) <= 30.798989873256, rounded upward; exact certificate side is authoritative.
@@ -18476,9 +18504,10 @@ issues:
       claim: s(976) <= 31.778174593090, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n977
       claim: s(977) <= 31.798989873257, rounded upward; exact certificate side is authoritative.
@@ -18525,17 +18554,18 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
-        count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier
-        report. It is left to its own import (think-yfoo, open), which has not recorded it yet;
-        this restatement is not recorded.
+        count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier report.
+        It is an index deletion bound, held with the others from Couzo's index for the owner's
+        decision on proposed D6 (think-f2io), and not recorded; this restatement is not recorded.
       queued: false
     - key: n986
       claim: s(986) <= 31.920310216821, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n987
       claim: s(987) <= 31.941797078452, rounded upward; exact certificate side is authoritative.
@@ -18551,9 +18581,10 @@ issues:
       claim: s(988) <= 31.949747468406, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at
-        the same exact side, an earlier report. It is left to its own import (think-yfoo, open),
-        which has not recorded it yet; this restatement is not recorded.
+        Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n989
       claim: s(989) <= 31.974181306003, rounded upward; exact certificate side is authoritative.
@@ -18926,6 +18957,14 @@ issues:
       open the held rows, the rows above 1024 on the owner's decision, and the exact check at
       335 (think-rx26). No site page lists beyond-horizon rows, which the reply said. The import
       reply said no row was current, so nothing is marked outdated. The issue stays open.
+
+      The history import (think-a4wq, think-om5l, think-yfoo and think-tmwt; the walk
+      upper-bounds-couzo-history-20261022) records 30 of the 32 restated certificates at their
+      first publications, as rows of couzo-02f9690-2026-10-09 (5),
+      couzo-extended-certificates-2026-10-11 (1) and couzo-index-2026-10-15 (24), and holds 743
+      and 985, deletion bounds of the 4e4c8ce index, for the owner (D6, think-f2io); the 30
+      re-certifications stay held on think-fwa9. The reply that says so is owed when that import
+      reaches main (think-cyal).
   - number: 719
     title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
     author: Mishapolk

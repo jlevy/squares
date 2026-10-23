@@ -1,0 +1,63 @@
+{
+  "controls": ["duplicate-square","square-outside-container","side-below-least-clearance","square-enlarged","one-coordinate-overlap","near-contact-overlap"],
+  "decision": "packing/devtools/couzo_678_replay.py",
+  "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
+  "filter_lemma": "A unit square lies in the closed disc of radius sqrt(2)/2 about its centre and its interior in the open disc, so squares whose centres are at least sqrt(2) apart have disjoint interiors. Pairs are kept for decision when dx^2 + dy^2 < 2, compared exactly over Q from the certificate's centres; both routes check that every square is a unit square whose corner mean is that centre.",
+  "format": "beyond-horizon-filtered-exact-replay-v1",
+  "issue_pin": "93570ef79474fd8c35d1293addf095f9eee6a658",
+  "packet": "packing/resources/web/couzo-retained-certificates-2026-10-12",
+  "program": "packing/devtools/beyond_horizon_replay.py",
+  "publication": "https://github.com/franciscouzo/square-packing/tree/93570ef79474fd8c35d1293addf095f9eee6a658",
+  "rows": [
+    {
+      "certificate": "certificates/n344.cert",
+      "certificate_sha256": "432653f1a9b3834da4e680f7279bf44b9b16aa6d8db5842020db32f737e8d277",
+      "controls": [
+        {"candidate_pairs":795,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":794,"control":"square-outside-container","independent_failures":["container penetration -600000000000000000001/200000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":796,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 19 crosses a wall","square 19 crosses a wall","square 38 crosses a wall"]},
+        {"candidate_pairs":796,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":795,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":796,"closed_distance":"1.000e-20","control":"near-contact-overlap","independent_failures":["2 overlapping pairs; worst -25667747685795449547454355177000826877314311246506715406346467975931157285975126469544446867785049869/25667747685795449547197677700142872641137489818426651292653803019576562500000000000000000000000000000000000000000000000000000000000 at 221, 258"],"pair":[221,258],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 221 and 258 overlap","squares 240 and 258 overlap"]}
+      ],
+      "decision": {"all_pairs":58996,"candidate_pairs":796,"cpu_seconds":{"filter":0.087,"independent":0.242,"sqpack":0.177},"independent":{"failure_count":0,"failures":[],"least_pair":[221,258],"least_pair_gap":"256677476857954236176821428080064113692664956354594785975126469544446867785049869/25667747685795449547197677700142872641137489818426651292653803019576562500000000000000000000000000000","least_wall_clearance":"1/200000000000000000000","pairs_decided":796,"passed":true},"n":344,"passed":true,"side":"9496862386551619440826363967817/500000000000000000000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":796,"passed":true,"strict_pairs":796,"touching_pairs":0}},
+      "deleted_squares": 0,
+      "exact_side": "9496862386551619440826363967817/500000000000000000000000000000",
+      "issue_prior": "",
+      "n": 344,
+      "printed": "18.993724773104",
+      "printed_is_upward_rounding": true,
+      "side_ceiling_16": "18.9937247731032389",
+      "verified": true,
+      "wall_seconds": 4.788
+    },
+    {
+      "certificate": "certificates/n378.cert",
+      "certificate_sha256": "5ae13d3096842829dc748f4a5e69c202650d4cccc8608bf39d8fb924100a3625",
+      "controls": [
+        {"candidate_pairs":841,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":839,"control":"square-outside-container","independent_failures":["container penetration -219833095975690365204189191187497669673952684257068645376264774149138635413613719175382661188588600904183/65858182454290421210666921923247986800260979414523143132045495211192900000000000000000000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":843,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 342 crosses a wall","square 342 crosses a wall","square 343 crosses a wall"]},
+        {"candidate_pairs":843,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":842,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 6, 7"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 6 and 7 overlap"]},
+        {"candidate_pairs":843,"closed_distance":"1.000e-20","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -16078217574354097275242929578676959140052849480768109590058940939469295028617482008160302545242767136403/16078217574354097275082147402933418331145144523748744723717053539439225000000000000000000000000000000000000000000000000000000000000000 at 303, 304"],"pair":[303,304],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 303 and 304 overlap"]}
+      ],
+      "decision": {"all_pairs":71253,"candidate_pairs":843,"cpu_seconds":{"filter":0.099,"independent":0.241,"sqpack":0.189},"independent":{"failure_count":0,"failures":[],"least_pair":[303,304],"least_pair_gap":"160782175743540808907704957019364866341887400030070028617482008160302545242767136403/16078217574354097275082147402933418331145144523748744723717053539439225000000000000000000000000000000000","least_wall_clearance":"1/200000000000000000000","pairs_decided":843,"passed":true},"n":378,"passed":true,"side":"19942536155946027401235663744303/1000000000000000000000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":843,"passed":true,"strict_pairs":843,"touching_pairs":0}},
+      "deleted_squares": 0,
+      "exact_side": "19942536155946027401235663744303/1000000000000000000000000000000",
+      "issue_prior": "",
+      "n": 378,
+      "printed": "19.942536155947",
+      "printed_is_upward_rounding": true,
+      "side_ceiling_16": "19.9425361559460275",
+      "verified": true,
+      "wall_seconds": 5.549
+    }
+  ],
+  "run_releases": ["franciscouzo/square-packing@02f9690","evand/square-packing@f7a2325","franciscouzo/square-packing@3ef7634","franciscouzo/square-packing@f311f08","franciscouzo/square-packing@a7067d7","TheSnakeFang/squarepack-certs@bef5c42","franciscouzo/square-packing@93570ef","franciscouzo/square-packing@4596670","franciscouzo/square-packing@4e4c8ce","franciscouzo/square-packing@23aff0c","franciscouzo/square-packing@5a299b4"],
+  "run_wall_seconds": 2922.0,
+  "source_commit": "93570ef79474fd8c35d1293addf095f9eee6a658",
+  "started_utc": "2026-10-22T19:10:13Z",
+  "summary": {"all_pairs":130249,"candidate_pairs":1639,"controls":12,"controls_refused_by_both":12,"positive_cpu_seconds":1.0,"refused":[],"rows":2,"verified":2},
+  "workers": 2
+}

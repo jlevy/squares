@@ -3257,6 +3257,107 @@ sources:
       search and Claude for the certificates and checks, under the author's direction. The
       11 rows at or below 1024 are beyond-horizon rows; the 8 above wait on the owner. Upper
       bounds only; no optimality claim.
+  - key: '[Daniel Hunt 3 first hour 2026-10-10]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-10'
+    lineage: independent
+    credit: Daniel after Fang, Arslanov, Mustafin, Shangitbayev
+    short_credit: Daniel after Fang et al.
+    note: >-
+      One dilated exact rational certificate at 343,
+      search/packer/candidates/hunt3_n343.dil.cert, at f7a2325df1e396f46ee373c6d00a880795b749b7
+      (10 October, 09:15Z), the first hour of the Hunt 3 record hunt, five hours before the Hunt
+      3 certificates of 76a529bc; no issue reports it. Recorded as a dated beyond-horizon row
+      superseded on entry. MIT-licensed certificate retained; Claude assistance disclosed. No
+      optimality claim.
+  - key: '[Couzo extended certificates 2026-10-11]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-11'
+    lineage: builds-on-project
+    credit: Couzo after Levy
+    note: >-
+      Four exact rational certificates beyond the corpus at
+      f311f08901c24b2a6c5f720710a45adec23e926a (11 October, 03:39Z), the parent of issue 506's
+      pin, at 340, 378, 379 and 380; no issue reports them. 340 is the count's current row; 378
+      to 380 are superseded on entry by issue 506's. Retained as factual data. No optimality
+      claim.
+  - key: '[Couzo updates 2026-10-12]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: Couzo after Levy
+    note: >-
+      An intermediate exact rational certificate at 344 at
+      a7067d7b92b1e0208499b26d93e898648f0e8667 (12 October, 17:55Z), which no issue reports;
+      recorded as a dated beyond-horizon row superseded on entry by the 0fa0e0d certificates.
+      Retained as factual data. No optimality claim.
+  - key: '[Fang composites 2026-10-12]'
+    authors: [Fang]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: independent
+    credit: Fang after Arslanov, Mustafin, Shangitbayev
+    short_credit: Fang after Arslanov et al.
+    note: >-
+      Two composite exact rational certificates at 703 and 994 at
+      bef5c42d58257fe38ed010a5d1ff9b8fc608df57 (12 October), with a table of composite
+      constructions whose rows with no certificate file of their own are held for the owner's
+      D2; no issue reports them. Recorded as dated beyond-horizon rows superseded on entry by
+      Couzo's 4e4c8ce certificates. MIT and CC0 licences for the code and the nNNNN folders; the
+      composites are retained as factual data. Claude assistance disclosed. No optimality claim.
+  - key: '[Couzo retained certificates 2026-10-12]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-12'
+    lineage: builds-on-project
+    credit: Couzo after Levy
+    note: >-
+      Intermediate exact rational certificates at 344 and 378 at
+      93570ef79474fd8c35d1293addf095f9eee6a658 (12 October, 21:31Z), which no issue reports;
+      recorded as dated beyond-horizon rows superseded on entry. Retained as factual data. No
+      optimality claim.
+  - key: '[Couzo index 2026-10-15]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-15'
+    lineage: builds-on-project
+    credit: Couzo after PingYou Ltd, Daniel, Fang, Levy
+    short_credit: Couzo after PingYou Ltd et al.
+    note: >-
+      Francisco Couzo's index for n < 1024 at 4e4c8ce23cb5e87f033021687010992c40575480 (15
+      October), which no issue reports: certificates/best/nN.cert at every non-grid count, with
+      manifest.json naming each count's credit and the author's two checker outcomes. 253
+      certificates beyond the corpus are recorded as dated beyond-horizon rows, 91 current; the
+      manifest credits Couzo at 200 of them, PingYou Ltd's pieces at 40, Kevin Fang's rectangles
+      and gluing at 8 and Evan Daniel at 5. Retained as factual data; the checker, Evan Daniel's
+      MIT verifier as Couzo modified it with Codex, is pinned by digest. OpenAI Codex assistance
+      disclosed. No optimality claim.
+  - key: '[Couzo reconcile 2026-10-20]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-20'
+    lineage: builds-on-project
+    credit: Couzo after Muglich, Daniel, Levy
+    short_credit: Couzo after Muglich et al.
+    note: >-
+      Francisco Couzo's reconciliation of his bounds through n = 10000 at
+      5a299b4708ab1ae4870d0fc1ab155738144f6ab8, committed 20 October and public from the push of
+      21 October at 22:56:37Z, which no issue reports. Its 20 root certificates beyond the
+      corpus at or below 1024 that are reports are recorded as dated beyond-horizon rows, 9
+      current; its per-count JSON credits Darius Muglich's packings at 9 of them and Evan
+      Daniel's seeds at 9 more. Its re-certifications below the 12-place print are held
+      (think-fwa9); its bounds above 1024 wait on the owner (D1). Retained as factual data.
+      OpenAI Codex assistance disclosed. No optimality claim.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono

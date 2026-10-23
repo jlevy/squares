@@ -1,0 +1,23 @@
+{
+  "n": 995,
+  "packing": "n995.txt",
+  "packing_sha256": "0b7c9631c7b5de7a6ebb689d19d7417fc60f2f7d5d8a2177a1c6ff631aa41815",
+  "certificate": "certificates/n995.cert",
+  "certificate_sha256": "7ff4a4a38357609e6ed1bebeb98c551790533e14f7acb1067cd626f8cfae71cc",
+  "rational_side": "159979779274169601234769816827136411957663/5000000000000000000000000000000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Joost de Winter",
+    "construction": {
+      "kind": "L-border",
+      "source_n": 935,
+      "layers": 1,
+      "parent_certificate_sha256": "954cd212be981fc39f6e1450a03964737107f7a2b5c49acfb674e606767450c0",
+      "capacity": 996
+    },
+    "source_n": 996,
+    "deleted_squares": 1,
+    "source_certificate_sha256": "ced35a45f56b25632ee94cfe612b45292eb1531c4858ebbfaf9a1c38478b9773"
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}
