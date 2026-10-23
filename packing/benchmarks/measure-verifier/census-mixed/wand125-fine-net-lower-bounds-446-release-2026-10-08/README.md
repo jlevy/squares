@@ -11,13 +11,16 @@ them beside every other mixed certificate.
 
 For each certificate the folder keeps `CERT.jsonl.gz`, the capture (one row for each of
 the 2,073 directions of the net the candidate declares, and a summary), and
-`CERT.control.json`, the whole-net control receipt (`sqverify-fast-control/v2`).
+`CERT.control.json`, the whole-net control receipt (`sqverify-fast-control/v2`). The n26
+receipt, which failed closed, is kept as `mixed_n26_L5555.control-failed-v2.json`,
+outside the receipts the census’s tests hold to `CONTROLS_REFUSED`, as
+`mixed_n96_L997.control-failed-v1.json` was before it.
 
 | Certificate | Capture | Nodes (equal to the source’s) | Least certified bound | CPU s | Control |
 | --- | --- | ---: | --- | ---: | --- |
 | `mixed_n19_L48275` | VERIFIED, 2,073 directions | 377,472,588 | 1.0000000001405505 | 2,539.7 | `CONTROLS_REFUSED` |
 | `mixed_n20_L49125` | VERIFIED, 2,073 directions | 410,012,470 | 1.0000000001231197 | 5,987.4 | `CONTROLS_REFUSED` |
-| `mixed_n26_L5555` | VERIFIED, 2,073 directions | 663,387,112 | 1.0000000000340534 | 6,115.2 | `CONTROL_FAILED`, on the axis tolerance only |
+| `mixed_n26_L5555` | VERIFIED, 2,073 directions | 663,387,112 | 1.0000000000340534 | 6,115.2 | `CONTROL_FAILED`, on the axis tolerance only (`mixed_n26_L5555.control-failed-v2.json`) |
 | `mixed_n27_L5655` | VERIFIED, 2,073 directions | 648,972,154 | 1.0000000000149065 | 9,257.6 | `CONTROLS_REFUSED` |
 
 **The n26 control fails closed on a tolerance, not on a refusal.** The 99/100 mutant was
