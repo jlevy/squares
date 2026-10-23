@@ -43069,12 +43069,14 @@ evidence:
         |Delta| measured from the family point where the flat family slides an aligned pair,
         which it does at 16 of the 24 side-end rows at n = 19. Repaired in the review by the
         pair form of the relaxation (one row of a side-end pair is at least -C epsilon times
-        the other) and a bootstrap that makes every row O(|Delta|^2), with the hypotheses
-        and gradec.py's checks unchanged, so the theorem holds. Minor: the record's packing
+        the other) and a bootstrap that makes every row O(|Delta|^2), with gradec.py's
+        checks unchanged, so the theorem holds. Minor: the record's packing
         property is outside gradec.py (C-2), the t interval's bracket is not checked (C-3),
-        the certificates are summaries (C-4), and hypothesis 1 should name its row classes
-        exactly (C-5); seven notes. The review's checker, written here and sharing no code
-        with the source, decided all 233 again and agrees with every certificate
+        the certificates are summaries (C-4), hypothesis 1 should name its row classes
+        exactly (C-5), and hypothesis 2 should state that the multipliers tend to lambda*
+        along the family, which the proof uses and the affine null vectors supply (C-6);
+        seven notes. The review's checker, written here and sharing no code with the source,
+        decided all 233 again and agrees with every certificate
         (receipts/review-theorem-c-233.jsonl in the evand-exact-data-2026-10-12 packet).
         Unchecked: T-124's Lean route, the 17 timeouts, and whether each configuration is its
         case's current packing.

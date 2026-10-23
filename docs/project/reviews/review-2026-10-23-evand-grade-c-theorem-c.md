@@ -1,9 +1,10 @@
 # Evan Daniel’s Grade-C Local Minima (Theorem C): Mathematical Review
 
-**Verdict: Theorem C is true under the hypotheses it states, and `gradec.py` checks
-those hypotheses; the paper proof has one gap, at the rows whose corner sits at a side
-end, which this review repairs without changing a hypothesis or a check.** With the
-repair, every one of the 233 VALID verdicts rests on a complete argument.
+**Verdict: Theorem C is true under its hypotheses as `gradec.py` checks them.
+The paper proof has one gap, at the rows whose corner sits at a side end, which this
+review repairs without changing a check, and hypothesis 2 should state a limit that the
+certificate supplies (C-6).** With the repair, every one of the 233 VALID verdicts rests
+on a complete argument.
 A checker written here from the theorem, sharing no code with the source, decided all
 233 configurations again in exact arithmetic, including that each record is a packing,
 which `gradec.py` does not check, and it agrees with every published certificate on
@@ -25,7 +26,7 @@ No `T-NNN` on `main` holds this claim; the nearest is `T-124`, the same author�
 reported non-strict local minima for 178 configurations by a different route, Lean
 proofs.
 
-One finding is major (the gap, C-1), four are minor and seven are notes.
+One finding is major (the gap, C-1), five are minor and seven are notes.
 None is blocking.
 
 Reviewer: Claude (Anthropic), strong sub-agent tier (`tbd-strong-max`), maximum
@@ -57,7 +58,9 @@ It is not a human oversight record.
 - **Every hypothesis `gradec.py` assumes is listed below** (What gradec.py Checks).
   Two premises are outside it: that the record is a packing, which your
   `verify_exact.py` checks (C-2), and that the stated $t$ interval brackets a root of
-  $f$ (C-3).
+  $f$ (C-3). Hypothesis 2 should also say that the multipliers tend to $\lambda^\ast$
+  along the family: the coercivity step uses it, and your affine null vectors supply it
+  (C-6).
 - **The certificate files are summaries (C-4).** They give counts, dimensions and float
   values, not $\lambda^\ast$, the flat basis, the affine null vectors or $W$, so
   checking one means redoing the search.
@@ -179,7 +182,8 @@ Hypotheses (grade-C.md lines 42 to 48), with the record a packing (C-2):
    $z^\ast$;
 2. for every $m \in M$ near $z^\ast$ there are multipliers
    $\lambda(m) \ge \lambda_0 > 0$, $\sum_r \lambda_r(m) \le \Lambda$, with
-   $\sum_r \lambda_r(m) L_r(m) = e_S$;
+   $\sum_r \lambda_r(m) L_r(m) = e_S$ and $\lambda(m) \to \lambda^\ast$ as
+   $m \to z^\ast$, which the source leaves implicit (C-6);
 3. with $W = \operatorname{null} L \cap F^\perp$, the reduced Hessian $Q =
    \nabla^2\mathcal{L}^\ast(z^\ast)|_W$, $\mathcal{L}^\ast = S - \sum_r \lambda^\ast_r
    h_r$, is positive definite, $\zeta^\mathsf{T} Q \zeta \ge \kappa |\zeta|^2$.
@@ -220,9 +224,9 @@ $\eta \perp \operatorname{null} L$: $|\eta| \le \sigma^{-1}
 |L\Delta| \le \tau |\Delta|$, $\tau = O(\varepsilon)$, and since $\Delta \perp F \subset
 \operatorname{null} L$, $\zeta = \zeta_W + \zeta_F$ with $|\zeta_F| \le |\eta|$.
 
-(iv) **Coercivity** (line 61). $H_m = \nabla^2\mathcal{L}^\ast(z^\ast) + o(1)$ by the
-continuity of $\lambda(m)$ and of the rows’ second derivatives, so
-$\Delta^\mathsf{T} H_m \Delta \ge \kappa |\zeta_W|^2 -
+(iv) **Coercivity** (line 61). $H_m = \nabla^2\mathcal{L}^\ast(z^\ast) + o(1)$, since
+$\lambda(m) \to \lambda^\ast$ (hypothesis 2, C-6) and the rows’ second derivatives are
+continuous, so $\Delta^\mathsf{T} H_m \Delta \ge \kappa |\zeta_W|^2 -
 O(\tau + \varepsilon)|\Delta|^2 \ge \frac{\kappa}{2} |\Delta|^2$ for $\varepsilon$
 small.
 
@@ -258,7 +262,8 @@ drop near 0, so $\operatorname{null} L(\varphi) = \operatorname{span}(F, w_j(\va
 then $e_S \perp \operatorname{null} L(\varphi)$, the rank is constant, and
 $\lambda(\varphi) =
 \lambda^\ast + L(\varphi)^{\mathsf{T}+}(e_S - L(\varphi)^\mathsf{T} \lambda^\ast)$ is
-continuous with $\lambda(0) = \lambda^\ast > 0$. The remark that the identities make the
+continuous with $\lambda(0) = \lambda^\ast > 0$, which is the convergence to
+$\lambda^\ast$ that hypothesis 2 needs (C-6). The remark that the identities make the
 $F \times W$ block of $\nabla^2 \mathcal{L}^\ast$ vanish is also correct: for $f \in F$
 and $w \in \operatorname{null} L_0$, $f^\mathsf{T}
 \nabla^2\mathcal{L}^\ast w = -\lambda^{\ast\mathsf{T}} A_f w = \lambda^{\ast\mathsf{T}}
@@ -404,6 +409,7 @@ and the program’s digest against the receipts.
 | C-3 | minor | gradec.py lines 41 to 56 | The $t$ interval is narrowed without checking that $f$ changes sign on it, unlike verify_exact.py lines 207 to 210, and a root exactly at the lower end would be bisected away. No verdict is affected: 169 intervals are the point 0 for $f = t$ and the other 64 change sign |
 | C-4 | minor | gradec.py lines 461 to 465 | `n-N.gradec.json` records summaries, not $\lambda^\ast$, $F$, the affine null vectors or $W$; a check must redo the search |
 | C-5 | minor | grade-C.md lines 20 and 44 | Hypothesis 1 says “edge overlap for side-end corners” and the relaxation speaks of partially overlapping contacts; the rows `gradec.py` keeps are complete pairs where the edge of $j$ is the side of $i$, and the theorem should say so |
+| C-6 | minor | grade-C.md lines 45, 46 and 61 | The coercivity step needs $\nabla^2\mathcal{L}_m(m) \to \nabla^2\mathcal{L}^\ast(z^\ast)$, that is $\lambda(m) \to \lambda^\ast$, and hypothesis 2 asserts only multipliers with uniform bounds. The affine null vectors make the rank of $L(m)$ constant near $z^\ast$, so the multipliers of the lemma at lines 103 to 118 tend to $\lambda^\ast$ and no verdict is affected; the theorem should state it |
 | N-1 | note | grade-C.md lines 25 and 26 | $L_3 = L_1$ holds whenever the two corners coincide, not only in the axis-aligned case: $J$ is antisymmetric. The code does not rely on it |
 | N-2 | note | grade-C.md lines 116 to 118 | The $F \times W$ block remark is right, and is the $S$ condition of the slip form |
 | N-3 | note | grade-C.md line 10; gradec.py lines 243 to 257 | The theorem’s coordinate is $\sin\delta$ and the Hessian is computed in $\delta$; they agree on $M$, since $d^2\delta/dw^2 = 0$ at $w = 0$, which the write-up could say |
@@ -440,8 +446,9 @@ The pair form and step (ii) of The Proof, Repaired turn this into the argument.
 
 ## Questions for the Author
 
-1. Would you adopt the pair form and the bootstrap of step (ii) in grade-C.md, or do you
-   have a route to $h_r \ge -K'|\Delta|^2$ relative to $m$ that we missed?
+1. Would you adopt the pair form and the bootstrap of step (ii) in grade-C.md, and say
+   in hypothesis 2 that the multipliers tend to $\lambda^\ast$, or do you have a route
+   to $h_r \ge -K'|\Delta|^2$ relative to $m$ that we missed?
 2. Could the certificate files carry the exact objects, $\lambda^\ast$ in $K$, the basis
    of $F$, the affine null vectors and the basis of $W$, so that a checker needs only
    products and signs?
