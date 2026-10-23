@@ -5172,12 +5172,12 @@ issues:
       not_registered: >-
         A third party's second decision of s40-new-supports's continuous cover, not a bound of its
         own: code distinct from the release's kernel but the same method in outline, as its author
-        says, built on this repository's sqverify-fast crate. Not retained, reviewed, built or
-        replayed here: think-xzob owns all four, and its replay waits on an owner budget. wand125's
-        runs stay a third party's report until a run directory with receipts is published or the
-        mode is replayed here.
+        says, built on this repository's sqverify-fast crate. Retained (v3 and v4), reviewed for
+        soundness and built here on 23 October 2026 (think-xzob, #752); its replay of the n = 40
+        examples is think-flxm's and waits on an owner budget. wand125's runs stay a third party's
+        report until a run directory with receipts is published or the mode is replayed here.
       queued: true
-      bead: think-xzob
+      bead: think-flxm
     beads:
     - think-3oi5
     - think-xms6
@@ -7366,7 +7366,7 @@ issues:
     - think-tln9
     - think-flxm
     - think-0arj
-    answer_bead: think-xzob
+    answer_bead: think-flxm
     replies:
     - url: https://github.com/jlevy/squares/issues/533#issuecomment-6206055919
       date: '2026-10-16'
@@ -7824,8 +7824,13 @@ issues:
       of its 21 members' size and digest, its README and its Krawczyk box, and reads degree 7213
       from the polynomial; it keeps the grade-C archive as published, and gradec.py recomputed
       the n = 10 certificate byte-identical to the published one. The s(29) replay (about 2.5
-      CPU-hours) and the full grade-C re-run (about 10.6 CPU-hours by the logs' times; 17
-      timeouts out of reach of gradec.py as written) wait for an owner budget.
+      CPU-hours) waits for an owner budget. The grade-C review of 23 October
+      (docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md) found Theorem C true
+      under its hypotheses, repaired a gap in its proof at side-end rows, and decided all 233
+      configurations again with a checker written here, retaining the 233 exact forms they read.
+      That checker is the review lane's own, so its run is a second route beside the rung, as at
+      T-225 and T-229; C3 waits on a separate replay lane, gradec.py over all 233 (about 10.6
+      CPU-hours by the source's logs, think-mtah).
     read_through: '2026-10-12T14:15:44Z'
     results:
     - key: s29-minimal-polynomial
@@ -7844,8 +7849,14 @@ issues:
         configurations of field degree at most 4.
       source: body
       not_registered: Not a bound; local minimality of packings. The certificates are published and
-        retained (gradec-233.tar.zst); n = 10 recomputed byte-identical here. A review of Theorem C
-        and the re-run of the other 232 (about 10.6 CPU-hours) wait in their bead.
+        retained (gradec-233.tar.zst) with the 233 exact forms they read; n = 10 recomputed
+        byte-identical here with gradec.py. The review of 23 October repaired Theorem C's proof
+        (C-1) and its checker decided all 233 again (receipts/review-theorem-c-233.jsonl in the
+        exact-data packet), independently re-implemented after reading the producer's code. That
+        run is a second route beside the rung; C3 waits on the gradec.py replay of all 233 (about
+        10.6 CPU-hours, think-mtah).
+        Registering it waits for a T-NNN, with the run's evidence entries drafted in think-7scz,
+        and the reply sharing the review is drafted there too.
       queued: true
       bead: think-7scz
     beads:
@@ -7853,6 +7864,7 @@ issues:
     - think-7scz
     - think-01y3
     - think-3ppi
+    - think-mtah
     answer_bead: think-6gti
     replies:
     - url: https://github.com/jlevy/squares/issues/545#issuecomment-6200841270

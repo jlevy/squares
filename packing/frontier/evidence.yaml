@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-22'
+last_reviewed: '2026-10-23'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -43308,3 +43308,72 @@ evidence:
       half-angle conversion, the pair filter and Fraction arithmetic. The source's own checker
       was not run here. Review and confirmation remain pending; no stage 4 review is owed for a
       beyond-horizon row. No arrangement identity, local minimum or optimum is established.
+
+  - id: E-evand-gradec-local-minima-233-report
+    claim: derived-structure
+    scope: {n_values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 30, 31, 32, 33, 34, 35, 36, 38, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 53, 54, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 84, 85, 86, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 104, 107, 109, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 124, 125, 127, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 147, 148, 149, 150, 151, 153, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 175, 176, 178, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 200, 202, 203, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 229, 230, 232, 233, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 258, 260, 261, 264, 265, 267, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 293, 294, 298, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026-10-12]'
+    certificate: packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/gradec-233.tar.zst
+    replay_status: not-attempted
+    verifiers: [V-evand-gradec-py, V-evand-verify-exact]
+    limitations: >-
+      evand/square-packing at ad86d42d0f743076d735036702ba04a41ce24a8c
+      (tasks/exact-minpoly/grade-C.md, search/exact/gradec.py) and its release
+      exact-data-2026-10-12 (tag commit 31523f87316bdfda00f5459dd9077928e264f133,
+      gradec-233.tar.zst) report that 233 of the 250 roster configurations of field degree
+      at most 4 are local minima of the side in the sense of IsLocalMinPacking (a pose ball,
+      squares matched by index, angles modulo 90 degrees, non-strict), by Theorem C, a
+      second-order sufficient condition that allows exact flat motions, checked by gradec.py
+      exactly in each configuration's number field with signs by interval arithmetic: 231
+      with every load-bearing incidence as a row, and 230 and 261 with GRADEC_DROPZERO=1
+      after the 24 rows at each that carry no force in any multiplier vector are dropped; 17 runs
+      timed out at 30 minutes and are outside the claim. That each record is a packing is
+      verify_exact.py's decision (the roster's VALID), not gradec.py's. The certificates are
+      summaries (rows, ranks, dimensions, least multiplier, margin, float minors), not the
+      exact multipliers, flat basis or affine null vectors. When read on 12 October, at 11
+      counts (70, 84, 86, 127, 153, 175, 176, 232, 258, 261, 267) the configuration's side
+      was above its case's record, and at 230 the side is the case's ceiling 643/41. No
+      global bound, rigidity or strict minimality is claimed. This is the public-claim
+      entry. The 23 October review's checker decided all 233 again (receipts
+      review-theorem-c-233.jsonl and review-compare-233.json in the evand-exact-data-2026-10-12
+      packet), and gradec.py recomputed n = 10 byte-identical on 12 October
+      (receipts/gradec-n10-recompute.json there). The review's checker is that lane's own,
+      so its run is a second route beside the rung; C3 waits on gradec.py's replay of all
+      233 (think-mtah). The evidence entries for both runs are drafted in think-7scz for the
+      registration: check_certificate_citations needs a case record to cite each, or a
+      deferral naming the register entry that cites it, which lapses after 30 days, and no
+      case record has a block for local minimality (think-8xy2).
+    external_review:
+      state: defect-found
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude, Anthropic), the stage 4 mathematical review lane (W2) of the #545
+        import (c-review-thmc-1023, think-7scz), strong sub-agent tier at maximum reasoning,
+        prompted separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md re-derived Theorem
+        C from grade-C.md and read gradec.py, the three modules it imports and run.sh as
+        data. Defect (C-1, major): the proof's last two steps do not control rows whose
+        corner sits at a side end. The relaxation gives h_r >= -K' delta^2 measured from the
+        record, the same order as the coercive term the last step needs, and first order in
+        |Delta| measured from the family point where the flat family slides an aligned pair,
+        which it does at 16 of the 24 side-end rows at n = 19. Repaired in the review by the
+        pair form of the relaxation (one row of a side-end pair is at least -C epsilon times
+        the other) and a bootstrap that makes every row O(|Delta|^2), with gradec.py's
+        checks unchanged, so the theorem holds. Minor: the record's packing
+        property is outside gradec.py (C-2), the t interval's bracket is not checked (C-3),
+        the certificates are summaries (C-4), hypothesis 1 should name its row classes
+        exactly (C-5), and hypothesis 2 should state that the multipliers tend to lambda*
+        along the family, which the proof uses and the affine null vectors supply (C-6);
+        seven notes. The review's checker, written here and sharing no code with the source,
+        decided all 233 again and agrees with every certificate
+        (receipts/review-theorem-c-233.jsonl in the evand-exact-data-2026-10-12 packet).
+        Unchecked: T-124's Lean route, the 17 timeouts, and whether each configuration is its
+        case's current packing.
+    source_reviewed: '2026-10-23'

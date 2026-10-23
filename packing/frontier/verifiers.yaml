@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-22'
+last_reviewed: '2026-10-23'
 verifiers:
   - id: V-evand-verify-exact
     program: verify_exact.py
@@ -35,6 +35,34 @@ verifiers:
       python -I process (receipts/replay-verify-exact.json in the evand-exact-cur-2026-10-16
       packet). The replay's evidence entry is added at T-193's stage 4 exit, after the
       review lane think-7qxm.
+  - id: V-evand-gradec-py
+    program: gradec.py
+    author: Evan Daniel
+    provenance: external
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The source's grade-C certificate builder and checker in one program: rows from a
+      contacts file, each tight and classed exactly in Q[t]/f; the flat family and null L0
+      by exact sparse elimination; affine null vectors for hypothesis 2 of Theorem C;
+      exact multipliers from a linear program's candidate; and the reduced Hessian's leading
+      minors as sums over all permutations, with signs by interval arithmetic at t*. It does
+      not decide that the record is a packing.
+    source:
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/gradec.py
+    versions:
+      - sha256: 61dcf21c2c051d3957e6092f115caa63b831e3b726204846cd785bd624f60a79
+        revision: ad86d42d0f743076d735036702ba04a41ce24a8c
+        note: >-
+          Git blob 93374b5a4296bfb6d99dd29aa574febcd356e273, byte-identical at 31523f8, the
+          release's tag commit; it imports localmin.py, verify_exact.py and geom.py from its
+          directory, retained beside it.
+    note: >-
+      Run here once, at n = 10, from a copy outside the repository on 12 October 2026
+      (receipts/gradec-n10-recompute.json in the evand-exact-data-2026-10-12 packet), with
+      output byte-identical to the published certificate. The source ran it on all 250
+      configurations of field degree at most 4 (gradec_runs/run.sh).
   - id: V-evand-639-replay-driver
     program: replay_verify_exact.py
     author: Squares Project (Levy)
@@ -2583,6 +2611,64 @@ verifiers:
       Written and run on 22 October 2026 by the review; kept in the
       mishapolk-issue719-2026-10-22 packet's review/review-2026-10-22/ with its README and
       receipts (RF-8).
+
+  - id: V-evand-gradec-review-check
+    program: check_theorem_c.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      For Evan Daniel's grade-C configurations, decides exactly in Q[t]/f, with signs by
+      interval arithmetic at t*, the hypotheses of Theorem C as the 23 October review
+      repairs it: the record is a packing in [0, S]^2; every kept row is tight and is a
+      wall row, an interior incidence or one of a complete side-end pair; exact multipliers
+      are positive and balance e_S; the flat family F and a complement W of it span null L0;
+      affine null vectors exist, found one linear system per null vector and flat direction
+      from each row's tangential slip; the F x W block of the Lagrangian Hessian vanishes;
+      and the Hessian is positive definite on W by an exact LDL^T.
+    source:
+      - packing/resources/web/evand-exact-data-2026-10-12/review/check_theorem_c.py
+    independence_record: docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md
+    independence:
+      read: [mathematics, proof-text, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023,
+            think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's CREDITS.md says its work was produced by Claude (Anthropic) under
+          human direction, and its commits credit Claude as co-author. Written by a Claude
+          agent prompted separately from the source and from the import and records lanes,
+          in a file of its own that imports none of the source and does its arithmetic with
+          CPython's int and fractions.Fraction, not python-flint.
+      note: >-
+        Its authors read grade-C.md, gradec.py and the three modules it imports, and the
+        n = 10 certificate and the run logs, before writing it. It shares no code with them:
+        its field arithmetic, elimination, multiplier solve, hypothesis-2 lifts (the slip
+        form, not gradec.py's coupled system) and Hessian test (LDL^T, not permutation
+        minors) are its own, and it decides the record's packing property, which gradec.py
+        does not. It reads the certificate format's numbering of corners, sides and walls
+        as geom.py's docstring states it, and the contacts files' choice of rows.
+    note: >-
+      Written and run on 23 October 2026 by the review, on all 233 configurations;
+      kept in the evand-exact-data-2026-10-12 packet's review/ with its README, the receipts
+      in its receipts/. It is the review lane's own checker, so its run is a second route
+      beside the rung, and the claim's C3 waits on gradec.py's replay (think-mtah). No
+      evidence entry cites it yet: the run's entry is drafted in think-7scz for the
+      registration, since devtools.check_certificate_citations needs a case record to cite
+      a verified certificate, or a deferral naming the register entry that cites it, which
+      lapses after 30 days, and no case record has a block for local minimality
+      (think-8xy2).
 
   # --- First-party programs: premise checks and replay drivers ------------------------
   - id: V-evand-regularized-1020-review-controls
@@ -5305,3 +5391,99 @@ verifiers:
     note: >-
       Measures the identity statement of issue 678's comment of 19 October; no evidence
       entry cites it. Its log is the records lane's rerun of 20 October 2026, unchanged.
+
+  - id: V-evand-gradec-review-compare
+    program: compare_certificates.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Compares check_theorem_c.py's receipts with the source's 233 published n-N.gradec.json,
+      read in memory from gradec-233.tar.zst: the row set, the rank of L0, dim F, dim W, the
+      moving squares and the number of load-bearing squares exactly, and the interior margin
+      and least multiplier numerically. It decides nothing about a packing.
+    source:
+      - packing/resources/web/evand-exact-data-2026-10-12/review/compare_certificates.py
+    independence_record: docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md
+    independence:
+      read: [certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023,
+            think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's CREDITS.md says its work was produced by Claude (Anthropic) under
+          human direction, and its commits credit Claude as co-author. Written by a Claude
+          agent prompted separately from the source and from the import and records lanes,
+          in a file of its own that imports none of the source.
+      note: >-
+        Written by the lane that wrote check_theorem_c.py, after reading the same
+        material: grade-C.md, gradec.py and the modules it imports, the published
+        certificates and the run logs. It reads check_theorem_c.py's receipts and the
+        source's published n-N.gradec.json, in memory from gradec-233.tar.zst, and takes
+        the certificate's field names from those files and from gradec.py's writer; it
+        shares no code with gradec.py.
+    note: >-
+      Written and run on 23 October 2026 by the grade-C review (think-7scz); its output is
+      receipts/review-compare-233.json in the evand-exact-data-2026-10-12 packet. No
+      evidence entry cites it until the grade-C claim is registered, as for
+      V-evand-gradec-review-check.
+
+  - id: V-evand-gradec-review-derivatives
+    program: test_derivatives.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [numerical-f64]
+    role: premises
+    summary: >-
+      Tests the closed-form gradients and Hessians of the rows that check_theorem_c.py uses
+      against central differences of the row functions written from their definitions, in
+      binary64, on every row of fifteen grade-C configurations. It decides nothing about a
+      packing.
+    source:
+      - packing/resources/web/evand-exact-data-2026-10-12/review/test_derivatives.py
+    independence_record: docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md
+    independence:
+      read: [mathematics, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023,
+            think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's CREDITS.md says its work was produced by Claude (Anthropic) under
+          human direction, and its commits credit Claude as co-author. Written by a Claude
+          agent prompted separately from the source and from the import and records lanes,
+          in a file of its own that imports none of the source.
+      note: >-
+        Written by the lane that wrote check_theorem_c.py, after reading the same
+        material: grade-C.md, gradec.py and the modules it imports, the published
+        certificates and the run logs. It reads the same inputs as check_theorem_c.py, an
+        exact form and the archive's contacts file, with the numbering of corners, sides
+        and walls that geom.py's docstring states. It imports from check_theorem_c.py the
+        formulas it tests (row_grad, row_hess), the record loader and the corner and side
+        tables, and writes the row functions it differences from their definitions; it
+        shares no code with the source.
+    note: >-
+      Written and run on 23 October 2026 by the grade-C review (think-7scz); its output is
+      receipts/review-derivatives.json in the evand-exact-data-2026-10-12 packet. No
+      evidence entry cites it until the grade-C claim is registered, as for
+      V-evand-gradec-review-check.

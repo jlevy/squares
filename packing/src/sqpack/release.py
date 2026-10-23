@@ -790,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "41369ce5e0f52078df3e3853d82913642a1bfd07"
+DATA_REVISION = "c32b44bdd6e35b4b0cadcbd934e6981dcbe6945b"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2415,6 +2415,30 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The #545 grade-C review's request entry (think-7scz), against main c1115c095 "
+            "(#749): rendered at link revision c1115c09 into empty site directories, twice "
+            "from this tree and twice from it with main's result-requests.yaml swapped in "
+            "(43 files each), render_packing_methods writes every file byte-identical "
+            "across all four, as it did against main 598d23289 (#742) before the merge. "
+            "After review A of #751 reworded the entry and added the source-coverage entry "
+            "evand-exact-and-local-reports-2026-10-12, the same four renders, with main's "
+            "result-requests.yaml and source-coverage.yaml both swapped in, are again "
+            "byte-identical. Measured once more after merging main 7335d0098 (#752), at "
+            "link revision 7335d009 with that main's two files swapped in: the same "
+            "outcome. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
