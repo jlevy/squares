@@ -506,9 +506,11 @@ credit.
   [OR-18](../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)
   counts it. By OR-18’s threshold, a certificate, dump or evidence file of more than a
   few megabytes, or a set of them totalling tens of megabytes, goes into no commit.
-  The per-pull-request added-blob check that will enforce it is #406, in review on 22
-  October 2026; once it lands, its limits are in `packing/devtools/added-blobs.yaml`,
-  and until then OR-18’s wording is the rule.
+  The per-pull-request added-blob check enforces it, with its limits in
+  `packing/devtools/added-blobs.yaml`: stage the packet, run `git fetch origin` so the
+  base is current, and run
+  `python -m devtools.check_added_blobs --base origin/main --staged` from `packing/`
+  before the first commit, so the decision is made before the bytes are in history.
   Publish such data as a hosted data release by
   [Publishing Hosted Data](../../development.md#publishing-hosted-data): ignore the
   directory that will hold it, stage a manifest in `packing/hosted/` with

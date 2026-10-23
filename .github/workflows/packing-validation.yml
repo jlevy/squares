@@ -70,6 +70,18 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
+      - name: Refuse added bulk Git blobs
+        if: "github.event_name == 'pull_request'"
+        # OR-17: the guard refuses past its own 30 s deadline, and the largest merge into
+        # main to date took 18 s on a shared host; this bounds the step if uv or Git hangs.
+        timeout-minutes: 1
+        env:
+          PR_STORAGE_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_STORAGE_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: >-
+          uv run --frozen --all-extras --group dev python -m devtools.check_added_blobs
+          --base "$PR_STORAGE_BASE" --head "$PR_STORAGE_HEAD"
+
       # The browser floor's tools. Node is on the runner already, but pinned here for the
       # same reason the Python version is: a floor that moves under you is not a floor. The
       # version is the one the vendored kpress pins, so the repository has one answer to
