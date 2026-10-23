@@ -3,9 +3,9 @@ type: is
 id: is-01m51j1b2jp9x0ddm7mgm7vmd9
 title: "Sweep residue 2026-10-16: wand125 319a779, redundant reads, six resolved blockers, closeable issues, think-tk0u"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 10
 delegate: user-eb-intake-residue
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:12:57.169Z
-updated_at: 2026-10-17T07:03:38.404Z
+updated_at: 2026-10-23T05:32:36.751Z
 started_at: 2026-10-16T05:13:40.345Z
+closed_at: 2026-10-23T05:32:36.751Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-c-1023, think-lrg9), checked by coord-intake-1023: DONE. Lane A's PR #647 merged 2026-10-16; think-tk0u closed; remaining items owned elsewhere (think-jh0n, think-jpre, think-s2i8, think-x333)"
+resolution: null
+duplicate_of: null
 ---
 Lane A of the overnight pass (epic think-hg5s), acting name user-eb-intake-residue, branch claude/intake-2026-10-16-residue from origin/main. The sweep residue of 2026-10-16 05:08Z that no 16 October lane owns:
 1. wand125/square-packing at 319a779 (6 commits of 16 October past the last read; newest "Site: triangle paper v2 version row links 574d27c"): read; an import bead and a packet for a new result, else a read in packing/campaign/intake-watch.yaml.

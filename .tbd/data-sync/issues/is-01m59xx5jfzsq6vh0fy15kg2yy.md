@@ -3,9 +3,9 @@ type: is
 id: is-01m59xx5jfzsq6vh0fy15kg2yy
 title: Admit T-218 exact house source and stage n183 adoption
 kind: bug
-status: in_progress
+status: closed
 priority: 2
-version: 8
+version: 9
 delegate: lane-680
 labels:
   - result-import
@@ -18,8 +18,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T11:14:18.830Z
-updated_at: 2026-10-19T20:39:50.497Z
+updated_at: 2026-10-23T05:32:51.514Z
 started_at: 2026-10-19T11:14:30.522Z
+closed_at: 2026-10-23T05:32:51.513Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-c-1023, think-lrg9), checked by coord-intake-1023: SUPERSEDED. think-jh4w closed; f81b6b576 'houses: adopt T-218 at 183' and d8bfbc963 regularization on main; select_houses comment: '(think-jh4w) took 183 off ... (T-220)'; T-220 V3/C3"
+resolution: null
+duplicate_of: null
 ---
 Bounded registration slice on codex/intake-post671-followup-20261019: add maintained exact-side source wiring for T-218 from retained n183 packet without any geometry/proof/source replay; test real admission and House Rule staging. Stage only genuinely moving n183 under an owned open next-PR adoption plus strong-generator regularization obligation. Preserve all 324 bound lanes, assurance, credits, witnesses and receipts. Release/main ordering remains coordinator-owned.
 

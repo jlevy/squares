@@ -3,9 +3,9 @@ type: is
 id: is-01m53ek3ff79x09e0bq00v9kcd
 title: "Adopt T-174 at its 38 staged rational counts under the house rule, regularizing each in the adoption's PR (#660 A1; 12 more go to T-193 via #658/think-ot5c)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 19
+version: 20
 delegate: user-eb-adopt-174
 labels:
   - regularization
@@ -21,8 +21,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T22:51:13.774Z
-updated_at: 2026-10-19T13:18:02.863Z
+updated_at: 2026-10-23T05:32:40.717Z
 started_at: 2026-10-17T06:39:00.754Z
+closed_at: 2026-10-23T05:32:40.717Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-c-1023, think-lrg9), checked by coord-intake-1023: DONE. #665 merged 2026-10-19 (adopt T-174 at 37 rational counts); 236 adopted to T-218 by #692; the T-193 twelve sit under think-ot5c; select_houses.PENDING_ADOPTION names think-3mry nowhere"
+resolution: null
+duplicate_of: null
 ---
 The house rule (packing/campaign/result-import.md, "The House Rule"; the owner, 16 October 2026) makes T-174 (PR #574's PingYou certificates) the house at 63 counts on main. PR #660 stages them in `select_houses.PENDING_ADOPTION`: the 60 rational ones under this bead, staged as `next pull request`, and the three algebraic ones (70, 153, 207) under think-ot5c (the writer), staged as `no writer`. This bead's pull request adopts the 60, regularizes every count it re-houses in that same pull request, and takes each count off `PENDING_ADOPTION`. Opened by #660's addressing pass for its review A1 (the staged adoption had sat under the policy lane's own bead, think-sa5r).
 

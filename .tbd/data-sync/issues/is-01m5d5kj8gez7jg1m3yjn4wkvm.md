@@ -3,15 +3,19 @@ type: is
 id: is-01m5d5kj8gez7jg1m3yjn4wkvm
 title: "Import Evan Daniel: s(308) <= 17.997149121271 (#689)"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 4
+version: 5
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5c0fwsxga70rszkjy1zbp2f
 created_at: 2026-10-20T17:26:36.048Z
-updated_at: 2026-10-20T23:37:43.907Z
+updated_at: 2026-10-23T05:32:46.277Z
+closed_at: 2026-10-23T05:32:46.277Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-c-1023, think-lrg9), checked by coord-intake-1023: DONE. T-221 V3/C3 (#699 merged 2026-10-20); #689 CLOSED 2026-10-21; ask done; reply recorded"
+resolution: null
+duplicate_of: null
 ---
 Stage 1 to 3 import of jlevy/squares#689 (Evan Daniel, filed 2026-10-19T22:44:19Z), lane c-lane-evand-2 under think-eizi.
 

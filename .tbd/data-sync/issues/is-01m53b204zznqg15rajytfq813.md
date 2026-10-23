@@ -3,9 +3,9 @@ type: is
 id: is-01m53b204zznqg15rajytfq813
 title: "Stage 4 review of #622's s(29) certificate (T-195)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 8
 delegate: user-eb-review-622
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m50j15k23rw2vdmvyvs07rqt
 hold: null
 hold_until: null
 created_at: 2026-10-16T21:49:27.583Z
-updated_at: 2026-10-16T23:32:45.232Z
+updated_at: 2026-10-23T05:32:39.893Z
 started_at: 2026-10-16T21:49:33.508Z
+closed_at: 2026-10-23T05:32:39.893Z
+close_reason: "Tracker audit 2026-10-23 (c-audit-c-1023, think-lrg9), checked by coord-intake-1023: DONE. Its note: 'can close when #662 merges'; #662 merged 2026-10-16T23:42Z; #661 merged 2026-10-19; T-195 V3/C3"
+resolution: null
+duplicate_of: null
 ---
 Stage 4 review (packing/campaign/result-import.md) of the s(29) exact rational certificate from jlevy/squares#622 (PingYou Ltd / BuddenPing), imported by records PR #661 (branch claude/intake-2026-10-16-n29-622) as packet pingyou-pr622-certificate-2026-10-15, replay evidence E-pingyou-622-exact-feasibility, per-count ledger upper-bounds-n29-20261016, register entry T-195. Independent exact-rational re-derivation of the certificate and both margins (T-155, T-174 at 29), the controls, provenance and credit, the rung, and adoption under the owner's house rule. Deliverable: docs/project/reviews/review-2026-10-16-pingyou-n29.md with programs in the packet's review/ directory; draft PR on #661's branch; a correctness review on #661. Worktree .claude/worktrees/review-622, branch claude/intake-2026-10-16-review-622.
 
