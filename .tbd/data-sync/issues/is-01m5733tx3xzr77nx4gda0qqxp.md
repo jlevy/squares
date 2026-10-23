@@ -5,7 +5,7 @@ title: "Import franciscouzo: 227, 229, 330-996: registration request (#672)"
 kind: task
 status: in_progress
 priority: 2
-version: 20
+version: 21
 delegate: c-close-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.866Z
-updated_at: 2026-10-23T06:18:56.817Z
+updated_at: 2026-10-23T07:11:19.742Z
 started_at: 2026-10-18T12:53:37.251Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/672
@@ -252,3 +252,5 @@ Ledger: 432 claims at 124 counts, all recorded, none undecided; starts frozen at
 
 2026-10-22 08:30 coord-intake-1021b: after #720 merged (0281e7763; deploy run 39745544894, check_published_site 4806/4806), the import reply with the report-order verdicts was posted: #672 https://github.com/jlevy/squares/issues/672#issuecomment-6336293723. Its record edit is in the coordinator scratchpad replies/0122d.md (validate0122d/), carried by #719's records PR (think-xyhn).
 blocked_on: none
+
+2026-10-23 c-close-1023 (closing pass, think-5ip2): #672 not closed. Its question to the author whose answer would change the record is now under awaiting_author in result-requests.yaml (c4f86cbca, https://github.com/jlevy/squares/pull/747), so check_requests no longer calls it closeable; this bead stays open as the answer bead and owns the answer. If the coordinator or owner judges the question informational, mark it withdrawn with a note and close the issue with a final comment.

@@ -5,7 +5,7 @@ title: "Import franciscouzo: 204-993: registration request (#670)"
 kind: task
 status: in_progress
 priority: 2
-version: 18
+version: 19
 delegate: c-close-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.418Z
-updated_at: 2026-10-23T06:18:56.108Z
+updated_at: 2026-10-23T07:11:18.043Z
 started_at: 2026-10-18T13:04:20.664Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/670
@@ -121,3 +121,5 @@ Ledger: 432 claims at 124 counts, all recorded, none undecided; starts frozen at
 blocked_on: none
 
 2026-10-22 coord-intake-1021b: #670 follow-up posted 2026-10-22T20:04:06Z: #719 (#722) superseded 3 of #670's rows; https://github.com/jlevy/squares/issues/670#issuecomment-6350117997.
+
+2026-10-23 c-close-1023 (closing pass, think-5ip2): #670 not closed. Its question to the author whose answer would change the record is now under awaiting_author in result-requests.yaml (c4f86cbca, https://github.com/jlevy/squares/pull/747), so check_requests no longer calls it closeable; this bead stays open as the answer bead and owns the answer. If the coordinator or owner judges the question informational, mark it withdrawn with a note and close the issue with a final comment.
