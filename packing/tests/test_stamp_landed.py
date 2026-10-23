@@ -267,6 +267,22 @@ def test_history_dates_a_house_and_a_source_s_rows_by_the_merge_that_brought_the
     assert stamp_landed.landings_audit(recorded, history, recorded) == [
         "n=68 (T-174) records 2026-10-17; history gives 2026-10-19"
     ]
+    # The merge step dates only what a branch adds to `main`'s tree: here a new house at
+    # 204 and a new source. Where `main` holds no record yet, the rest keep the branch's
+    # days, so introducing the record re-dates nothing.
+    adopted = {29: "T-195", 68: "T-174", 204: "T-225"}
+    sources = {"src-a", "src-b", "src-c"}
+    additions = stamp_landed.branch_additions(adopted, sources, "2026-10-24", "main")
+    assert additions == stamp_landed.Landings(
+        {204: ("T-225", "2026-10-24")}, {"src-c": "2026-10-24"}
+    )
+    stamped = stamp_landed.stamp_landings(
+        adopted, sources, (additions, stamp_landed.Landings({}, {}), history), None
+    )
+    assert stamped == stamp_landed.Landings(
+        {**history.houses, 204: ("T-225", "2026-10-24")},
+        {**history.sources, "src-c": "2026-10-24"},
+    )
 
 
 def test_every_house_and_row_source_carries_the_day_it_landed() -> None:

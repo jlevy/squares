@@ -326,6 +326,21 @@ def _first_parent(ref: str, path: str) -> list[tuple[str, str]]:
     ]
 
 
+def branch_additions(
+    adopted: Mapping[int, str], sources: set[str], day: str, ref: str = MAIN
+) -> Landings:
+    """What a branch adds to `ref`'s tree, dated `day`: each count whose house it changes
+    or adds, by `ref`'s `ADOPTED`, and each source whose rows `ref` does not hold. The
+    merge step dates these and nothing else; what `ref` already holds keeps its day from
+    `ref`'s record or, where `ref` has none yet, the branch's."""
+    held = adopted_houses(_git("show", f"{ref}:{HOUSES_PATH}"))
+    rows = row_sources(_git("show", f"{ref}:{COVERAGE_PATH}"))
+    return Landings(
+        {n: (result, day) for n, result in adopted.items() if held.get(n) != result},
+        {source: day for source in sources if source not in rows},
+    )
+
+
 def main_landings(ref: str = MAIN) -> Landings:
     """`ref`'s landing record, or an empty one where `ref` holds none yet."""
     listed = _git("ls-tree", "--name-only", ref, "--", LANDINGS_PATH).strip()
@@ -357,10 +372,11 @@ def stamp_landings(
     """The record the tree needs: every adopted count and row source, each taking its day
     from the first record in `known` that names the same house or source, else `day`.
 
-    The merge step passes `main`'s record and its own day, so what the branch adds is
-    dated the day it merges, whatever a lane wrote, and what `main` holds keeps its day.
-    `--backfill` passes the branch's record and then the history, with no day, so an
-    entry nothing dates is left out for `landings_problems` to name."""
+    The merge step passes the branch's additions dated the day it merges
+    (`branch_additions`), then `main`'s record, then the branch's, with no day: what the
+    branch adds is dated the merge day, whatever a lane wrote, and what `main` holds keeps
+    its day. `--backfill` passes the branch's record and then the history. With no day,
+    an entry nothing dates is left out for `landings_problems` to name."""
     houses: dict[int, tuple[str, str]] = {}
     for n, result in adopted.items():
         found = next(
@@ -464,8 +480,12 @@ def _landings(options: argparse.Namespace) -> int:
     else:
         day = options.date or datetime.now(UTC).date().isoformat()
         date.fromisoformat(day)
-        on_main = main_landings()
-        stamped = stamp_landings(adopted, sources, (on_main,), day)
+        stamped = stamp_landings(
+            adopted,
+            sources,
+            (branch_additions(adopted, sources, day), main_landings(), landings),
+            None,
+        )
     for n, entry in sorted(stamped.houses.items()):
         if landings.houses.get(n) != entry:
             print(f"n={n} {entry[0]} -> {entry[1]}")
